@@ -60,3 +60,20 @@ def test_personal_fields_never_reach_a_record():
     text = json.dumps(list(r.values()))
     for p in ("Pat Example", "Robin Placeholder", "619-555-0123", "448 Example"):
         assert p not in text
+
+
+def test_every_record_says_how_far_behind_the_table_is_and_an_open_one_is_not_read_as_lifted():
+    """Review 2026-11-04 P2-4: the table's lag is stated in the records and the public meta; an open advisory aged out
+    from the table's date reads as not re-confirmed, never as lifted or clean."""
+    from datetime import datetime, timezone
+    from build import status
+    r, stats = recs()
+    for a in r.values():
+        assert a["raw"]["_table_current_to"] == "2026-03-05" and "months behind" in a["raw"]["_currency_note"]
+    a = r["80002"]
+    assert "does not mean it was lifted" in a["raw"]["_currency_note"]
+    ivs = status.event_intervals(a, "CA", datetime(2026, 11, 4, tzinfo=timezone.utc), None, status.load_rules())
+    assert ivs[0]["rule"] == "advisory_active" and ivs[0]["end"] < datetime(2026, 3, 21, tzinfo=timezone.utc)
+    assert ivs[-1]["rule"] == "not_reconfirmed" and ivs[-1]["confirmed"].startswith("2026-03-05")
+    assert "lifted" not in {iv["rule"] for iv in ivs}
+    assert "time_note" in __import__("export.build", fromlist=["PUBLIC_FEED_META"]).PUBLIC_FEED_META

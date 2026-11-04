@@ -26,8 +26,9 @@ Records (category beach: beach_closure or beach_advisory; never a sewage dischar
   - started_at: DateofAdvisory with TimeofAdvisory (Pacific; a date alone is day precision); ended_at: DateOpened with
     TimeOpened. An end -> advisory_lifted; none -> advisory_active, with source_updated_at the date the table is
     current to (its newest advisory start or reopening, not its last_modified: the table is months behind), so the
-    status build stops colouring it 14 days after that. An end before
-    the start is not used.
+    status build stops colouring it 14 days after that and shows it as not re-confirmed (never as lifted). Every
+    record says how far behind the table is (raw._table_current_to, raw._currency_note) and meta.time_note says it on
+    the sources page. An end before the start is not used.
   - Point: the station's upper point, else the beach's. waterbody_text: the water body name; outfall_name: the beach
     and station.
 
@@ -72,7 +73,7 @@ TYPES = {"closure": "beach_closure", "posting": "beach_advisory", "rain": "rain_
 SEWAGE_CAUSE = re.compile(r"sewage|sewer|line break|pump station|blockage|grease|roots|infiltration|lift station|"
                           r"overflow|tijuana", re.I)
 BOUNDS = (-124.6, 32.4, -114.0, 42.1)
-RULES_VERSION = 2          # a run whose table is unchanged still rebuilds the records when this changes
+RULES_VERSION = 3          # a run whose table is unchanged still rebuilds the records when this changes
 
 
 def clean(v) -> str:
@@ -102,6 +103,17 @@ def local(d, t) -> tuple[datetime | None, bool]:
         return None, False
 
 
+def currency_note(confirmed: str | None, status: str) -> str:
+    """What the table's lag means for this record (review 2026-11-04 P2-4: stated in every record)."""
+    when = f"its newest entry is dated {confirmed}" if confirmed else "its newest entry date is not known"
+    note = (f"Beach Watch is compiled from the counties' entries and runs months behind: {when}.")
+    if status == "advisory_active":
+        note += (" This advisory is open in the table as of that date. That does not confirm it is in effect now, and "
+                 "it does not mean it was lifted: after 14 days the site shows it as not re-confirmed. The county's "
+                 "beach page or hotline has the current state.")
+    return note
+
+
 def build_record(row: dict, fetched_at: str, confirmed: str | None) -> dict:
     a = {k: row.get(k) for k in FIELDS}
     if a.get("DescriptionofArea"):
@@ -122,6 +134,8 @@ def build_record(row: dict, fetched_at: str, confirmed: str | None) -> dict:
         start = start.replace(hour=0, minute=0) if start else None
         end = end.replace(hour=0, minute=0) if end else None
     status = "advisory_lifted" if end else "advisory_active"
+    raw["_table_current_to"] = confirmed
+    raw["_currency_note"] = currency_note(confirmed, status)
     lat = fnum(a.get("Station_UpperLat")) or fnum(a.get("Beach_UpperLat"))
     lon = fnum(a.get("Station_UpperLon")) or fnum(a.get("Beach_UpperLon"))
     if lat is not None and lon is not None and lon > 0 and BOUNDS[0] <= -lon <= BOUNDS[2]:
@@ -224,7 +238,10 @@ def main(argv=None) -> int:
             "registry_ids": [SOURCE_ID], "window_days": WINDOW_DAYS, "backfill": state.get("backfill"),
             "time_basis": "Pacific local time as the table gives it",
             "caveat": ("Beach Watch is compiled from the counties' entries and is months behind: an advisory shown "
-                       "as open may have been lifted since the table was last updated.")}
+                       "as open may have been lifted since the table was last updated."),
+            "time_note": (f"Beach Watch runs months behind: its newest entry is dated {stats['current_to']}. An "
+                          "advisory it lists as open is not confirmed in effect now, nor lifted; after 14 days the "
+                          "site shows it as not re-confirmed.")}
     path_notes_to_meta(recs, meta)
     path = write_events(SOURCE_ID, recs, ok=True, error=None, meta=meta)
     print(f"{SOURCE_ID}: {stats['rows_read']} rows, {len(recs)} records {stats['by_type']} {stats['by_status']}; "
