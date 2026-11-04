@@ -19,7 +19,7 @@ The law (MCL 324.3112a, read on legislature.mi.gov 2026-11-03; research/mi/repor
 
 Rows
   - Per operator (every Michigan row of data/dischargers.json except the general permits for petroleum sites EPA's CSO
-    inventory lists, kind cso_closed_or_none): <id>-newspaper-notice (print_only), <id>-health-department-notice
+    inventory lists, kind cso_closed_or_none, and the cities' stormwater (MS4) permits EPA files as plants): <id>-newspaper-notice (print_only), <id>-health-department-notice
     (no_web_page), <id>-ecoli-results (no_web_page). For a CSO operator also <id>-cso-public-notification (permit
     basis): GLWA's is read through the feed (feed_ingested); the others are not_verified (plan not read).
   - Agency and voluntary rows: AGENCY below.
@@ -28,6 +28,7 @@ A rerun replaces every mi- row it makes and keeps rows it does not make (none to
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -158,6 +159,9 @@ AGENCY = [
 ]
 
 
+MS4 = re.compile(r"\bMS4\b")
+
+
 def base(**kw) -> dict:
     r = {"state": "MI", "operator_id": None, "agency": None, "permit": None, "checked": CHECKED}
     r.update(kw)
@@ -171,6 +175,10 @@ def operator_rows(dis: list[dict]) -> tuple[list[dict], list[tuple[str, str]]]:
             continue
         if op.get("kind") == "cso_closed_or_none":
             left.append((op["id"], "not a sewer system (a general permit for a petroleum or remediation site)"))
+            continue
+        if MS4.search(op.get("name") or ""):
+            left.append((op["id"], "a municipal separate storm sewer (MS4) permit: stormwater, not a sewer system "
+                                   "MCL 324.3112a covers; the city's sewer system has its own row"))
             continue
         name = op.get("name")
         priv = op.get("legal_form") in ("investor-owned utility", "member-owned utility", "homeowners' association",

@@ -148044,28 +148044,31 @@
    "MIG580014",
    "MIG580321",
    "MIG580323",
-   "MIG580392"
+   "MIG580392",
+   "MIG580319"
   ],
   "receiving_waters": [
    "Wolf Creek",
    "Posey Lake Drain",
    "Black Creek",
-   "Evans Creek"
+   "Evans Creek",
+   "South Branch Raisin River"
   ],
   "water_slugs": [],
-  "outfall_count": 11,
+  "outfall_count": 13,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 11 rows)",
   "notification_channel": "Notice to EGLE, the local health departments and a daily newspaper immediately and not more than 24 hours after the discharge begins, and a report at its end (MCL 324.3112a(1)); EGLE posts each notice on the MiEnviro CSO/SSO List (MCL 324.3112a(2)): https://mienviro.michigan.gov/ncore/external/overflow/list. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
    "Brooklyn",
+   "Clayton",
    "Hudson",
    "Jasper",
    "Onsted",
    "Weston"
   ],
-  "notes": "Permittee as EPA ICIS-NPDES names it (Lenawee County Drain Commission); plants: FAIRFIELD TWP WWSL-JASPER (MIG580323), FAIRFIELD TWP-WESTON WWSL (MIG580321), LENAWEE CDC-LOCH ERIN WWTP (MI0053848), LENAWEE CDC-POSEY LK WWSL (MIG580014), LENAWEE CDC-WAMPLERS LK WWSL (MIG580392). Added from data/outfalls-plants-us.json (scripts/add_mi_operators.py); no contact or notification channel researched beyond the statute.",
+  "notes": "Permittee as EPA ICIS-NPDES names it (Lenawee County Drain Commission); plants: FAIRFIELD TWP WWSL-JASPER (MIG580323), FAIRFIELD TWP-WESTON WWSL (MIG580321), LENAWEE CDC-LOCH ERIN WWTP (MI0053848), LENAWEE CDC-POSEY LK WWSL (MIG580014), LENAWEE CDC-WAMPLERS LK WWSL (MIG580392). Added from data/outfalls-plants-us.json (scripts/add_mi_operators.py); no contact or notification channel researched beyond the statute. Also permit MIG580319 (Clayton WWSL), which EPA ICIS-NPDES files under the drain commissioner's name and the commission's: the commission is the permittee.",
   "verified": "fetched",
   "checked": "2026-11-04",
   "aliases": [
@@ -153720,39 +153723,6 @@
   ]
  },
  {
-  "id": "mi-tom-gillenwater-lenawee-county-drain-commission",
-  "name": "Tom Gillenwater, Lenawee County Drain Commission",
-  "short_name": "Tom Gillenwater, Lenawee County Drain Commission",
-  "legal_form": "county",
-  "state": "MI",
-  "kind": "plant",
-  "npdes_permit": "MIG580319",
-  "npdes_permits": [
-   "MIG580319"
-  ],
-  "receiving_waters": [
-   "South Branch Raisin River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
-  "notification_channel": "Notice to EGLE, the local health departments and a daily newspaper immediately and not more than 24 hours after the discharge begins, and a report at its end (MCL 324.3112a(1)); EGLE posts each notice on the MiEnviro CSO/SSO List (MCL 324.3112a(2)): https://mienviro.michigan.gov/ncore/external/overflow/list. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": true,
-  "notification_signup_url": null,
-  "towns": [
-   "Clayton"
-  ],
-  "notes": "Permittee as EPA ICIS-NPDES names it (Tom Gillenwater, Lenawee County Drain Commission); plants: CLAYTON WWSL (MIG580319). Added from data/outfalls-plants-us.json (scripts/add_mi_operators.py); no contact or notification channel researched beyond the statute.",
-  "verified": "fetched",
-  "checked": "2026-11-04",
-  "aliases": [
-   "mi-tom-gillenwater-lenawee-county-drain-commission"
-  ],
-  "source_areas": [
-   "mi"
-  ]
- },
- {
   "id": "mi-village-rosebush",
   "name": "Village of Rosebush",
   "short_name": "Village of Rosebush",
@@ -155705,9 +155675,9 @@
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
-   "Lincooln Park"
+   "Lincoln Park"
   ],
-  "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit 3112a-0103 (City of Lincooln Park), site Lincoln Park CM, Wayne County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute.",
+  "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit 3112a-0103 (City of Lincooln Park), site Lincoln Park CM, Wayne County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute. EGLE's list spells the city \"Lincooln Park\" (a filer's typo); the town is Lincoln Park.",
   "verified": "fetched",
   "checked": "2026-11-04",
   "aliases": [
@@ -155928,7 +155898,8 @@
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
-   "Spring Arbor Township/Summit Township"
+   "Spring Arbor Township",
+   "Summit Township"
   ],
   "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit 3112a-0207 (Spring Arbor Township/Summit Township), site Spring Arbor Township CM, Jackson County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute.",
   "verified": "fetched",
@@ -156620,7 +156591,7 @@
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
-   "Zeeland Clean Water Plant"
+   "Zeeland"
   ],
   "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit 3112a-0709 (City of Zeeland Clean Water Plant), site Zeeland CM, Ottawa County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute.",
   "verified": "fetched",
@@ -156684,7 +156655,7 @@
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
-   "Clinton - Department Of Public Services"
+   "Clinton"
   ],
   "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit 3112a-0719 (Charter Township of Clinton - Department of Public Services), site Clinton Township CM, Macomb County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute.",
   "verified": "fetched",
@@ -156921,7 +156892,7 @@
   "id": "mi-veolia",
   "name": "Veolia",
   "short_name": "Veolia",
-  "legal_form": null,
+  "legal_form": "business or industrial",
   "state": "MI",
   "kind": "sso",
   "npdes_permit": "3112a-0845",
@@ -156938,7 +156909,7 @@
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [],
-  "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit 3112a-0845 (Veolia), site Portage CM, Kalamazoo County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute.",
+  "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit 3112a-0845 (Veolia), site Portage CM, Kalamazoo County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute. EGLE's list names Veolia, a contract operator, as the responsible party; the system's owner is not named there.",
   "verified": "fetched",
   "checked": "2026-11-04",
   "aliases": [
@@ -156967,7 +156938,7 @@
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
-   "Waterford Dpw"
+   "Waterford"
   ],
   "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit 3112a-0854 (Charter Township of Waterford DPW), site Waterford Township CM, Oakland County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute.",
   "verified": "fetched",
@@ -157129,7 +157100,7 @@
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
-   "Detroit Water And Sewerage Department (Dwsd)"
+   "Detroit"
   ],
   "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit 3112a-0971 (Detroit Water and Sewerage Department (DWSD)), site Detroit CM, Wayne County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute.",
   "verified": "fetched",
@@ -157329,7 +157300,7 @@
   "id": "mi-gm-flint-complex",
   "name": "GM Flint Complex",
   "short_name": "GM Flint Complex",
-  "legal_form": null,
+  "legal_form": "business or industrial",
   "state": "MI",
   "kind": "sso",
   "npdes_permit": "3112a-1040",
@@ -157563,7 +157534,7 @@
   "id": "mi-ionia-recreation-area",
   "name": "Ionia Recreation Area",
   "short_name": "Ionia Recreation Area",
-  "legal_form": null,
+  "legal_form": "state facility",
   "state": "MI",
   "kind": "plant",
   "npdes_permit": "GW1010320",
@@ -158091,7 +158062,7 @@
   "id": "mi-sun-highland-greens-estates",
   "name": "Sun Highland Greens Estates",
   "short_name": "Sun Highland Greens Estates",
-  "legal_form": null,
+  "legal_form": "mobile-home park",
   "state": "MI",
   "kind": "plant",
   "npdes_permit": "GW1810038",
@@ -158185,7 +158156,7 @@
   "id": "mi-gaylord",
   "name": "Gaylord Wastewater Treatment Plant",
   "short_name": "Gaylord Wastewater Treatment Plant",
-  "legal_form": null,
+  "legal_form": "city",
   "state": "MI",
   "kind": "plant",
   "npdes_permit": "GW1810128",
@@ -158199,7 +158170,9 @@
   "notification_channel": "Notice to EGLE, the local health departments and a daily newspaper immediately and not more than 24 hours after the discharge begins, and a report at its end (MCL 324.3112a(1)); EGLE posts each notice on the MiEnviro CSO/SSO List (MCL 324.3112a(2)): https://mienviro.michigan.gov/ncore/external/overflow/list. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
-  "towns": [],
+  "towns": [
+   "Gaylord"
+  ],
   "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit GW1810128 (Gaylord Wastewater Treatment Plant), site Gaylord WWTP, Otsego County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute.",
   "verified": "fetched",
   "checked": "2026-11-04",
@@ -158350,7 +158323,7 @@
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
-   "Oscoda Township Wastewater Treatment Plant"
+   "Oscoda Township"
   ],
   "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit GW1810213 (Oscoda Township Wastewater Treatment Plant), site Oscoda Twp WWTP Wurtsmith, Iosco County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute.",
   "verified": "fetched",
@@ -158534,9 +158507,9 @@
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
-   "Vermotville"
+   "Vermontville"
   ],
-  "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit MI0024261 (Village of Vermotville), site Vermontville WWTP, Eaton County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute.",
+  "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit MI0024261 (Village of Vermotville), site Vermontville WWTP, Eaton County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute. EGLE's list spells the village \"Vermotville\" (a filer's typo); the town is Vermontville.",
   "verified": "fetched",
   "checked": "2026-11-04",
   "aliases": [
@@ -158581,7 +158554,7 @@
   "id": "mi-yes-communities",
   "name": "Yes Communities",
   "short_name": "Yes Communities",
-  "legal_form": null,
+  "legal_form": "mobile-home park",
   "state": "MI",
   "kind": "plant",
   "npdes_permit": "MI0043036",
@@ -158670,7 +158643,7 @@
   "id": "mi-infrastructure-alternatives",
   "name": "Infrastructure Alternatives",
   "short_name": "Infrastructure Alternatives",
-  "legal_form": null,
+  "legal_form": "business or industrial",
   "state": "MI",
   "kind": "plant",
   "npdes_permit": "MI0057413",
@@ -158687,7 +158660,7 @@
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [],
-  "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit MI0057413 (Infrastructure Alternatives), site Jellystone Park North Port Huron, Sanilac County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute.",
+  "notes": "From EGLE's MiEnviro CSO/SSO List: the responsible party it names for permit MI0057413 (Infrastructure Alternatives), site Jellystone Park North Port Huron, Sanilac County. Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the statute. EGLE's list names Infrastructure Alternatives, a contract operator, as the responsible party; the campground's owner is not named there.",
   "verified": "fetched",
   "checked": "2026-11-04",
   "aliases": [

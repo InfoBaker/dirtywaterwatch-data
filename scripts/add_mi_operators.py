@@ -147,11 +147,38 @@ def form(name: str) -> str | None:
 
 
 def clean_name(name: str | None) -> str | None:
-    """A party name without a care-of line ("Sun Communities, Inc., c/o <officer>") or EPA's "(Unknown Permittee)"."""
+    """A party name without a care-of line ("Sun Communities, Inc., c/o <officer>"), EPA's "(Unknown Permittee)" or
+    a person's name before the body ("<given> <surname>, Sample County Drain Commission": the official who signs for
+    the body is not the permittee; the ingester's party_name() cuts it)."""
     if not name:
         return name
+    from ingest.mi_egle_mienviro import party_name
     s = re.sub(r",?\s*c/o\b.*$", "", name, flags=re.I).strip(" ,")
-    return None if re.fullmatch(r"\(?unknown permittee\)?", s, re.I) else s
+    if re.fullmatch(r"\(?unknown permittee\)?", s, re.I):
+        return None
+    cut = party_name(s)
+    return None if cut in (None, "[name removed]") else cut
+
+
+# filer typos in EGLE's responsible-party names that would otherwise become a town's name
+TOWN_TYPOS = {"Lincooln Park": "Lincoln Park", "Vermotville": "Vermontville"}
+TOWN_WORKS = re.compile(r"(?i)\s*(?:-\s*)?(?:\(.*?\)|department of public services|dpw|clean water plant|"
+                        r"wastewater treatment plant|water and sewerage department|wwtp|wwtf)\s*$")
+
+
+def owner_towns(owner: str) -> list[str]:
+    """The towns a city, village or township owner's name gives: "City of X" -> X; "Charter Township of X - Department
+    of Public Services" -> X; "Spring Arbor Township/Summit Township" -> both; works words and typos dropped."""
+    out = []
+    for part in re.split(r"\s*/\s*", owner):
+        t = part
+        for _ in range(3):
+            t = TOWN_WORKS.sub("", t).strip()
+        t = re.sub(r"(?i)^(city|village|charter township|township) of ", "", t).strip(" ,-")
+        if t:
+            t = title(t)
+            out.append(TOWN_TYPOS.get(t, t))
+    return list(dict.fromkeys(out))
 
 
 def norm_permit(p):
@@ -370,8 +397,7 @@ def main(argv) -> int:
                  + (f", site {sites}" if sites else "") + (f", {cty}" if cty else "") +
                  ". Added by scripts/add_mi_operators.py; no contact or notification channel researched beyond the "
                  "statute.")
-        towns = [title(re.sub(r"(?i)^(city|village|charter township|township) of ", "", owner))] \
-            if form(owner) in ("city", "town") else []
+        towns = owner_towns(owner) if form(owner) in ("city", "town") else []
         row = base_row(rid, owner, kind, [p], towns, [w for w, _ in water[p].most_common(6)], notes,
                        legal_form=form(owner), verified="fetched")
         add(row)
