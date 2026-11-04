@@ -248,9 +248,10 @@ def test_report_rows_merge_among_themselves_and_the_state_builds_rows_stay(tmp_p
     N.write_output([], new, [{"state": "NC", "text": "MS4 system", "reason": "MS4"}], [], partial=True,
                    stats={"NC": {"records": 0}}, final=True, scope_states={"NC"}, rows_from="reports")
     d = json.loads(out.read_text())
-    assert d["targets"][0] == build_row and d["targets"][1] == prev["targets"][2]      # the state build's rows exactly
-    assert d["targets"][2] == old_report                       # a name the budget did not reach keeps its row
-    assert d["targets"][3]["name"] == "Mill Creek" and d["targets"][3]["from"] == "reports"
+    # the state build's rows exactly, and the report rows where they stood in the file (2026-11-04: not moved to the end)
+    assert d["targets"][0] == build_row and d["targets"][-1] == prev["targets"][2]
+    assert d["targets"][1] == old_report                       # a name the budget did not reach keeps its row
+    assert d["targets"][2]["name"] == "Mill Creek" and d["targets"][2]["from"] == "reports"
     nc = d["stats"]["state_builds"]["NC"]
     assert nc["records"] == 5 and nc["existing_duplicates"] == {"dropped": 2} and nc["report_names"]["records"] == 0
     assert d["skipped"] == [{"state": "NC", "text": "MS4 system", "reason": "MS4"}]

@@ -310,3 +310,18 @@ def test_a_provisional_outfall_reads_a_text_placed_report_as_reaching_a_water():
     from build import provisional_outfalls as PO
     assert PO.reached(_ev("ended", "2026-11-09T00:00:00-05:00")) == "yes"
     assert PO.reached(_ev("ended", "2026-11-09T00:00:00-05:00", reached=False)) == "no"
+
+
+def test_the_rule_is_in_rules_json_in_public_words_for_the_florida_feed():
+    """data/rules.json placement.text_over_flag: the rule's reason and source as the site prints them (/methods and the
+    'why' of a text-placed report), for the feeds it applies to; never red, said in the reason."""
+    import json
+    from pathlib import Path
+    rules = json.loads((Path(__file__).resolve().parents[2] / "data" / "rules.json").read_text())
+    r = rules["placement"]["text_over_flag"]
+    assert r["sources"] == ["fl-dep-pnp"]
+    assert "never as an advisory" in r["rationale"] and "err on the side of safety" in r["rationale"]
+    assert "7 days" in r["rationale"] and str(rules["unresolved"]["ongoing_red_days"]) == "7"
+    assert "Waterbodies Impacted" in r["source"]
+    for word in ("owner", "data/", "docs/", "flag", " safe ", "clean"):
+        assert word not in r["rationale"] and word not in r["source"]
