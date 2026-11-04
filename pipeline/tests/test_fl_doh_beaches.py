@@ -70,9 +70,11 @@ def test_no_rows_on_any_page_is_a_failure_that_keeps_the_records(tmp_path, monke
 
 # ---------------------------------------------------------------- 2026-11-04: a pass bounded per run, resumed next run
 
-def _live(tmp_path, monkeypatch, n=6, empty=(), step=100.0):
+def _live(tmp_path, monkeypatch, n=6, empty=(), step=100.0, refuse_after=None, broken=()):
     """main() against fake points and result pages: every page is the fixture page (another location), except the
-    points in `empty`, whose pages carry no sample row; each clock reading moves `step` seconds on."""
+    points in `empty`, whose pages carry no sample row; each request takes `step` seconds. refuse_after: the
+    data page answers every request after that many with "No records found" (how it refused a GitHub runner);
+    broken: points whose request always fails."""
     import common
     monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
     monkeypatch.setattr(B, "EVENTS_DIR", tmp_path)
@@ -83,19 +85,26 @@ def _live(tmp_path, monkeypatch, n=6, empty=(), step=100.0):
 
     class Resp:
         def __init__(self, loc):
-            self.text = "<p>No records found.</p>" if loc in empty else PAGE.replace("8TH STREET", loc)
+            self.text = ("<p>No records found.</p>" if loc in empty or loc == "__refused__"
+                         else PAGE.replace("8TH STREET", loc))
 
         def raise_for_status(self):
             pass
 
     def get(url, params=None, **kw):
         asked.append(params["SPLocation"])
+        clock[0] += step
+        if params["SPLocation"] in broken:
+            raise B.requests.ConnectionError("reset")
+        sent[0] += 1                                       # all requests, across runs (asked is cleared)
+        if refuse_after is not None and sent[0] > refuse_after:
+            return Resp(next(iter(empty)) if empty else "__refused__")
         return Resp(params["SPLocation"])
 
     monkeypatch.setattr(B.requests, "get", get)
     monkeypatch.setattr(B.time, "sleep", lambda s: None)
-    clock = iter(i * step for i in range(10_000))
-    monkeypatch.setattr(B.time, "monotonic", lambda: next(clock))
+    clock, sent = [0.0], [0]
+    monkeypatch.setattr(B.time, "monotonic", lambda: clock[0])
     return pts, asked
 
 
@@ -112,8 +121,8 @@ def test_the_cadence_stamp_lives_in_the_saved_build_state():
 def test_a_pass_stops_at_its_time_budget_and_the_next_run_continues_where_it_stopped(tmp_path, monkeypatch):
     import json
     pts, asked = _live(tmp_path, monkeypatch, n=6, step=100.0)
-    # one clock reading at the start and one before each point: with 100 s a reading, 350 s allow three points
-    assert B.main(["--budget-s", "350"]) == 0
+    # 100 s a request: with 250 s, P0, P1 and P2 are started (P2 at 200 s), P3 is not (300 s)
+    assert B.main(["--budget-s", "250"]) == 0
     assert asked == ["P0", "P1", "P2"]
     st = json.loads((tmp_path / "state.json").read_text())
     assert "full_pass_at" not in st and st["pass"]["done"] == ["Bay|P0", "Bay|P1", "Bay|P2"]
@@ -142,12 +151,14 @@ def test_a_pass_stops_at_its_time_budget_and_the_next_run_continues_where_it_sto
 
 
 def test_a_run_of_answers_without_rows_stops_the_run_and_those_points_wait(tmp_path, monkeypatch):
+    """The data page refuses after a number of requests (every answer "No records found"): five points in a row
+    without a row, and the last point that had rows (the probe) without one too: the run stops; the five are not
+    counted read and are asked again, after the others, on the next run."""
     import json
-    empty = {f"P{i}" for i in range(2, 9)}
-    pts, asked = _live(tmp_path, monkeypatch, n=10, empty=empty, step=0.0)
+    pts, asked = _live(tmp_path, monkeypatch, n=10, step=0.0, refuse_after=2)
     assert B.main([]) == 0
-    # P2..P6 answered without a row (each asked twice): the run stops there, P7.. are not asked
-    assert asked == ["P0", "P1"] + [f"P{i}" for i in range(2, 2 + B.REFUSED_RUN) for _ in range(2)]
+    # P2..P6 answered without a row (each asked twice), then the probe P1 without one: the run stops
+    assert asked == ["P0", "P1"] + [f"P{i}" for i in range(2, 2 + B.REFUSED_RUN) for _ in range(2)] + ["P1", "P1"]
     st = json.loads((tmp_path / "state.json").read_text())
     assert st["pass"]["done"] == ["Bay|P0", "Bay|P1"]     # the refused points are not counted read
     d = _feed(tmp_path)
@@ -155,14 +166,65 @@ def test_a_run_of_answers_without_rows_stops_the_run_and_those_points_wait(tmp_p
     assert d["meta"]["pass"]["this_run_set_aside"] == B.REFUSED_RUN
 
     asked.clear()
-    # the next run starts at P2 again; still refused from the first point, it reads nothing: a failing run that
-    # keeps the records and the pass as they were
+    # the next run, still refused: it starts with the points not asked yet (P7..), the set-aside ones last; nothing
+    # is read: a failing run that keeps the records and the pass as they were
     assert B.main([]) == 1
-    assert asked[0] == "P2"
+    assert asked[0] == "P7"
     d = _feed(tmp_path)
-    assert d["ok"] is False and d["count"] == 2
+    assert d["ok"] is False and d["count"] == 2 and d["meta"]["pass"]["complete"] is False
     st = json.loads((tmp_path / "state.json").read_text())
     assert st["pass"]["done"] == ["Bay|P0", "Bay|P1"] and st["pass"]["runs"] == 2
+
+
+def test_five_points_that_really_have_no_samples_do_not_stop_the_pass(tmp_path, monkeypatch):
+    """Five points in a row with no sample (the page answers "No records found" for them, as it does when it refuses):
+    the last point with rows is asked again; it still has rows, so the page is answering, the five are read (without
+    samples) and the pass goes on. Before 2026-11-04's review the run stopped there, and every later run stopped at the
+    same five points: the pass never completed and the points after them were never read again."""
+    import json
+    empty = {f"P{i}" for i in range(2, 2 + B.REFUSED_RUN)}
+    pts, asked = _live(tmp_path, monkeypatch, n=10, empty=empty, step=0.0)
+    assert B.main([]) == 0
+    assert asked[-3:] == ["P7", "P8", "P9"] and asked.count("P1") == 2          # P1 asked again as the probe
+    st = json.loads((tmp_path / "state.json").read_text())
+    assert "pass" not in st and st["full_pass_at"]
+    d = _feed(tmp_path)
+    assert d["meta"]["pass"]["complete"] is True and d["meta"]["points_without_samples"] == B.REFUSED_RUN
+    assert d["meta"]["points_read"] == 10
+
+
+def test_five_empty_points_first_in_the_order_wait_for_a_probe_and_the_pass_completes(tmp_path, monkeypatch):
+    """No point with rows yet to ask again: the run stops to be safe; the next run asks the others first and the five
+    last, with a probe by then."""
+    import json
+    empty = {f"P{i}" for i in range(B.REFUSED_RUN)}
+    pts, asked = _live(tmp_path, monkeypatch, n=8, empty=empty, step=0.0)
+    assert B.main([]) == 1                    # nothing read: a failing run (the records stay)
+    assert json.loads((tmp_path / "state.json").read_text())["pass"]["done"] == []
+    asked.clear()
+    assert B.main([]) == 0
+    assert asked[:3] == ["P5", "P6", "P7"]
+    st = json.loads((tmp_path / "state.json").read_text())
+    assert "pass" not in st and st["full_pass_at"]
+    assert _feed(tmp_path)["meta"]["pass"]["complete"] is True
+
+
+def test_a_point_that_always_fails_is_given_up_for_the_pass_and_the_pass_completes(tmp_path, monkeypatch):
+    """A point whose request always fails is asked again on the next runs (after the others), and after
+    GIVE_UP_RUNS runs it is left for this pass, keeping its records; before the review such a point held the pass open
+    for ever (every later run asked only it, failed, and no point was read again)."""
+    import json
+    pts, asked = _live(tmp_path, monkeypatch, n=4, step=0.0, broken={"P1"})
+    assert B.main([]) == 0
+    assert json.loads((tmp_path / "state.json").read_text())["pass"]["done"] == ["Bay|P0", "Bay|P2", "Bay|P3"]
+    for _ in range(B.GIVE_UP_RUNS - 1):
+        assert B.main([]) == 1                # only P1 left, failing: a failing run
+    st = json.loads((tmp_path / "state.json").read_text())
+    assert "pass" not in st and st["full_pass_at"], st
+    d = _feed(tmp_path)
+    assert d["meta"]["pass"]["complete"] is True and d["meta"]["pass"]["points_given_up"] == ["Bay|P1"]
+    asked.clear()
+    assert B.main([]) == 0 and asked == []     # the next pass waits 20 hours from the start of this one
 
 
 def test_a_single_point_without_rows_is_read_and_the_pass_goes_on(tmp_path, monkeypatch):
@@ -173,3 +235,14 @@ def test_a_single_point_without_rows_is_read_and_the_pass_goes_on(tmp_path, monk
     st = json.loads((tmp_path / "state.json").read_text())
     assert "pass" not in st and st["full_pass_at"]
     assert _feed(tmp_path)["meta"]["points_without_samples"] == 1
+
+
+def test_an_empty_points_layer_is_a_failing_run_not_a_pass(tmp_path, monkeypatch):
+    import json
+    pts, asked = _live(tmp_path, monkeypatch, n=3, step=0.0)
+    assert B.main([]) == 0
+    monkeypatch.setattr(B, "fetch_points", lambda limit=None: [])
+    assert B.main(["--force"]) == 1
+    d = _feed(tmp_path)
+    assert d["ok"] is False and d["count"] == 3 and "no active point" in d["error"]
+    assert "pass" in json.loads((tmp_path / "state.json").read_text())   # the new pass waits for a good answer
