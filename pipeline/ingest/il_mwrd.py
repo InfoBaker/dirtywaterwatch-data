@@ -10,7 +10,8 @@ scripts/add_il_mwrd_outfalls.py import it).
 - DIVERSIONS: the three structures through which the Chicago Area Waterway System is let back into Lake Michigan in
   severe storms (the Wilmette gate, the Chicago River Controlling Works, O'Brien Lock and Dam), with the reversal
   table's column for each.
-- OWNER_PERMITS: an owner on the layer to its combined sewer permit (EPA's CSO inventory, data/outfalls-us.json):
+- OWNER_PERMITS: an owner on the layer to its combined sewer permit (EPA's CSO inventory, data/outfalls-us.json; Forest
+  View's IL0020800 from EPA's discharge-point records, which type it private):
   the City of Chicago's IL0045012, MWRD's plant permits, the suburbs' general-permit coverages (ILM5800xx) and the
   communities with their own permits.
 """
@@ -66,7 +67,7 @@ OWNER_PERMITS = {
     "lansing": ["ILM580027"], "markham": ["ILM580028"], "franklin park": ["ILM580029"],
     "north riverside": ["ILM580030"], "blue island": ["ILM580031"], "brookfield": ["ILM580032"],
     "summit": ["ILM580033"], "lincolnwood": ["ILM580034"], "niles": ["ILM580035"], "skokie": ["ILM580036"],
-    "posen": ["ILM580037"], "mt prospect": ["IL0052400"], "mount prospect": ["IL0052400"],
+    "posen": ["ILM580037"], "forest view": ["IL0020800"], "mt prospect": ["IL0052400"], "mount prospect": ["IL0052400"],
     "western springs": ["IL0045039"], "golf": ["IL0072389"], "phoenix": ["IL0072834"], "lemont": ["IL0039551"],
 }
 

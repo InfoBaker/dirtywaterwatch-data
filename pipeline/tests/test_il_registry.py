@@ -78,3 +78,51 @@ def test_the_illinois_outfall_file_outranks_epas_rows_for_the_same_outfall():
                           for r in paired)
     assert all(r["coords_from"] == "il-mwrd-cso-points" and r["source_url"].startswith(M.CSO_POINTS_URL)
                for r in doc["outfalls"])
+
+
+def _il_rows():
+    return [r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "IL"]
+
+
+def test_operator_names_read_as_bodies_and_epa_descriptions_are_replaced():
+    S = _script("add_il_operators")
+    assert S.display("OREGON STP, CITY OF") == "City of Oregon (Oregon STP)"
+    assert S.display("ELMHURST, CITY OF") == "City of Elmhurst"
+    assert S.display("AVISTON. VILLAGE OF") == "Village of Aviston"
+    assert S.facility_part("City of Alton (Alton STP)", "Illinois American Water") == "Alton STP"
+    assert S.form("SAMPLE SANITARY DISTRICT") == "special district" and S.form("EJ WATER COOPERATIVE") == "member-owned utility"
+    by = {r["npdes_permit"]: r for r in _il_rows()}
+    assert by["IL0039551"]["name"] == "Village of Lemont" and by["IL0039551"]["legal_form"] == "town"   # 'COMBINED SEWER OVERFLOW'
+    assert by["IL0045012"]["kind"] == "cso" and "40 CFR 122.38" in by["IL0045012"]["notification_channel"]
+    assert by["IL0045012"]["notification_signup_url"].startswith("https://www.smart911.com/")
+    assert "40 CFR 122.38" not in by["IL0034495"]["notification_channel"]                              # Pekin: downstate
+
+
+def test_operator_rows_hold_each_permit_once_and_name_no_individual():
+    from build import redact
+    import string
+    rows = _il_rows()
+    perms = [p for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) for p in r.get("npdes_permits") or []
+             if p.startswith("IL")]
+    assert len(perms) == len(set(perms))
+    assert len({r["id"] for r in rows}) == len(rows) > 800
+    for r in rows:
+        for f in ("name", "short_name", "notes"):
+            v = r.get(f) or ""
+            assert not (redact.person_shaped(v) or redact.person_shaped(string.capwords(v))), (r["id"], v)
+    forms = {r["legal_form"] for r in rows} - {None}
+    from ingest.dischargers_schema import LEGAL_FORMS
+    assert forms <= set(LEGAL_FORMS)
+    research = json.loads((ROOT / "research" / "il" / "dischargers.json").read_text())
+    ids = {a for r in rows for a in r["aliases"]}
+    assert all(r["id"] in ids for r in research)          # EPA's overflow module names the research ids
+    named = [r for r in rows if r["legal_form"] == "facility (permittee not named)"]
+    assert len(named) == 2 and all("not named" in r["notes"] for r in named)
+
+
+def test_a_companys_plants_are_one_row():
+    rows = _il_rows()
+    iaw = [r for r in rows if r["id"] == "il-american-water"][0]
+    assert iaw["legal_form"] == "investor-owned utility" and len(iaw["npdes_permits"]) > 20
+    assert "IL0021202" in iaw["npdes_permits"] and "private permittee" in iaw["notification_channel"]
+    assert sum(1 for r in rows if r["id"].startswith("il-prairie-path")) == 1
