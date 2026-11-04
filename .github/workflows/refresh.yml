@@ -53,7 +53,7 @@ jobs:
         run: |
           wrangler r2 object get dirtywaterwatch-data/state/build.tar.gz --file build.tar.gz --remote && tar -xzf build.tar.gz || echo "no state yet"
           find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
-      - name: Restore the raw caches from R2 (after the build state: the NY workbook entry is named there)
+      - name: Restore the raw caches from R2 (after the build state, which names the NY workbook entry)
         run: |
           # only the listed cache paths are written (scripts/state_paths.py unpack), whatever the tarball holds
           if wrangler r2 object get dirtywaterwatch-data/state/raw-cache.tar.gz --file raw-cache.tar.gz --remote; then
