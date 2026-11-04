@@ -17,8 +17,11 @@ level: "state"
 # Cannot fill: ended_at; start time; coordinates (address only; the map layer has points); stable
 #   id; advice_text
 # Waters: statewide; WATERWAY_IMPACTED free text, RIVER_BASIN
-# History: Rolling 30 days only. Older daily files are at the same URL pattern (not tested); WWALS
-#   has archived daily copies as HTML since Dec 2018.
+# History: Rolling 30 days on each posting. Older dated postings stay at the same URL pattern: on
+#   2026-11-04 EPD served every business day's file from 2025-10-09 (earlier days answer 404; probed
+#   monthly back to 2018-01), all in the same layout. Backfilled from 2025-10-09 by the feed row
+#   ga-epd-spills (--backfill, once). WWALS has archived daily copies as HTML since Dec 2018 (a
+#   cross-check only).
 # Research notes: "A zero in the quantity field indicates the amount of the spill has not been
 #   determined." Quantity blank at first for many rows. No row id: key on permit + begin date +
 #   location.

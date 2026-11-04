@@ -9,9 +9,12 @@ Source
   that began in the last 30 days or so. Headers: FACILITY_NAME, SPILL_BEGIN_DATE (BEGIN_DATE in files before mid
   October 2026), COUNTY, CITY, OVERFLOW_LOCATION (a street address), QUANTITY_GALLONS, OVERFLOW_TYPE, PERMIT_NUMBER,
   SPILL_SOURCE, CAUSE, RIVER_BASIN, WATERWAY_IMPACTED, OVERFLOW_DESTINATION. No licence is stated.
-  Older dated files stay at the same URL pattern (2026-06-01 and 2026-10-01 were fetched on 2026-11-04); a day with
-  no posting answers 404 with an HTML page. Points: the public ArcGIS layer behind EPD's "Spills in Georgia"
-  StoryMap, https://services1.arcgis.com/p0dLjwtOaJHU8zq2/arcgis/rest/services/Spill_Summary_Continuous_Update/
+  Older dated files stay at the same URL pattern: on 2026-11-04 EPD served every business day's posting from
+  2025-10-09 (earlier days answer 404, probed monthly back to 2018-01), all in the same layout (BEGIN_DATE before mid
+  October 2026; the 2025-12-01 file gives its Posting Date as text, "12/1/2025"); a day with no posting answers 404
+  with an HTML page. Only the 13 columns above are read (safe fields); any other column is named in meta
+  (unread_columns), its values never read. Points: the public ArcGIS layer behind EPD's "Spills in Georgia" StoryMap,
+  https://services1.arcgis.com/p0dLjwtOaJHU8zq2/arcgis/rest/services/Spill_Summary_Continuous_Update/
   FeatureServer/0 (registry ga-epd-spills-map-layer): the same rows with LATITUDE / LONGITUDE, but BEGIN_DATE is
   null on every row, so the layer only lends its point to a workbook row of the same permit and address.
 
@@ -40,9 +43,11 @@ Record rules
   - event_type: OVERFLOW_DESTINATION naming a CSO ("CSO Dry-weather") -> cso; every other row -> sso (the rule's
     "spill" is a raw-sewage discharge from the collection system or plant; OVERFLOW_TYPE and SPILL_SOURCE stay in
     raw.row and OVERFLOW_TYPE gives `material`). status unknown: the list has no end date and no time.
-  - Times: started_at = the begin date (time_precision day). published_at = the posting date. source_updated_at =
-    the workbook's HTTP Last-Modified when given. reported_at null (the list does not say when EPD was told).
-    raw._first_seen_posting / _last_seen_posting say which postings showed the row; raw._first_seen_at is our clock.
+  - Times: started_at = the begin date (time_precision day). published_at = the first posting that listed the row.
+    source_updated_at = the workbook's HTTP Last-Modified when given. reported_at null (the list does not say when EPD
+    was told). raw._first_seen_posting / _last_seen_posting say which postings showed the row; raw._first_seen_at is
+    our clock. A row first listed in an older posting read after newer ones were out (a backfill, a rebuild, a
+    catch-up day) has raw._read_from_archive, the time that file was read: never a time EPD received the report.
     Colour (build/status.py, data/rules.json unresolved.day_start_caution, which lists this source): a row with no end
     is a caution for 72 hours from the start of its begin day, then unresolved (end not reported) to day 30.
   - Volume: QUANTITY_GALLONS in gallons; blank, or "0" ("A 'zero' in the quantity field indicates the amount of the
@@ -78,11 +83,23 @@ Record rules
 Privacy: the list names facilities and street addresses, no people. common.strip_personal runs on raw; the export's
   redactor (build/redact.py) runs over CAUSE and every other free text before the file is written.
 
-Run from pipeline/:  python -m ingest.ga_epd_spills [--file posting.xlsx ...] [--layer layer.json]
-                                                    [--backfill-from YYYY-MM-DD]
+Archive: every posting read is saved in data/build/archive/ga-epd-spills/ (sewagespillsreportYYYYMMDD.xlsx and
+  index.json with each file's Last-Modified and read time), so it travels with the pipeline state (R2 state/) and a
+  rebuild never downloads it again; a changed file of the same day replaces the saved one.
+
+Run from pipeline/:  python -m ingest.ga_epd_spills [--file posting.xlsx ...] [--layer layer.json] [--no-layer]
+                                                    [--backfill [YYYY-MM-DD] | --rebuild]
   --file reads saved workbooks (oldest first; no network unless --layer is absent and --no-layer is not given).
-  --backfill-from also reads every dated file from that date to the linked one (a 404 is a day with no posting; about
-    one request a second). Run by hand, once, before the state goes live; the hourly run never backfills.
+  --backfill (the history, once, by hand or a one-off dispatched workflow before the state goes live; never in the
+    hourly run): downloads every weekday's dated file from the date (default 400 days before the linked one: at
+    least 12 months, as far as EPD serves) to the linked one that is not saved yet (a 404 is a day with no posting;
+    about one request a second), then rebuilds as --rebuild does. --backfill-from DATE is the same as --backfill DATE.
+  --rebuild: starts from no records and applies every saved posting (and any --file, which replaces the saved copy of
+    its day) oldest first, so an old posting is never laid on top of today's rows; the previous file's
+    _first_seen_at and _read_from_archive are carried over by event id, and a previous record no saved posting
+    rebuilds is kept as it was. The same rows get the same ids as the daily feed's (one key), EPA's reports are
+    paired by the feed's rules, and running it again on the same postings changes nothing but fetch times.
+    meta.backfill gives the range, the counts by begin year, and stays in meta on every later hourly run.
   Without options: the linked posting, plus any posting since the last one read (up to 14 days) that a missed run
   skipped. Cadence: each business day (about one business day of latency).
 """
@@ -104,7 +121,7 @@ from pathlib import Path
 import requests
 
 from build import redact
-from common import (DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, ROOT, event, now_iso, read_json, write_events,
+from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, event, now_iso, read_json, write_events,
                     write_json, path_notes_to_meta)
 
 SOURCE_ID = "ga-epd-spills"
@@ -114,6 +131,8 @@ LAYER_URL = ("https://services1.arcgis.com/p0dLjwtOaJHU8zq2/arcgis/rest/services
              "FeatureServer/0/query")
 EPA_EVENTS = EVENTS_DIR / "echo-sewer-overflow.json"
 RAW = RAW_DIR / SOURCE_ID
+ARCHIVE = BUILD_DIR / "archive" / SOURCE_ID     # every posting read, kept with the pipeline state (R2 state/)
+BACKFILL_DAYS = 400     # --backfill with no date: about 13 months (on 2026-11-04 EPD served postings from 2025-10-09)
 AUTHORITY = "Georgia Environmental Protection Division (Municipal Sewage Spills Reported to EPD)"
 CATCH_UP_DAYS = 14
 MOVED_DAYS = 7
@@ -183,8 +202,9 @@ def sheet_rows(content: bytes) -> list[list[str]]:
     return out
 
 
-def read_posting(content: bytes) -> tuple[str | None, list[dict]]:
-    """(posting date, rows as {field: text}) of one workbook. ValueError when it is not the spills list."""
+def read_posting(content: bytes, unread: list | None = None) -> tuple[str | None, list[dict]]:
+    """(posting date, rows as {field: text}) of one workbook. ValueError when it is not the spills list. Only the
+    13 known columns (FIELDS) are read; any other column's header (never its values) is added to unread."""
     rows = sheet_rows(content)
     posting = None
     hdr_i = None
@@ -199,11 +219,13 @@ def read_posting(content: bytes) -> tuple[str | None, list[dict]]:
     hdr = [HEADER_ALIASES.get(h.strip().lower(), h.strip().lower()) for h in rows[hdr_i]]
     if "permit_number" not in hdr or "begin_date" not in hdr:
         raise ValueError(f"unexpected headers {hdr}")
+    if unread is not None:
+        unread.extend(h for h in hdr if h and h not in FIELDS and h not in unread)
     out = []
     for r in rows[hdr_i + 1:]:
         if not any(c.strip() for c in r):
             continue
-        out.append({h: " ".join((r[j] if j < len(r) else "").split()) for j, h in enumerate(hdr) if h})
+        out.append({h: " ".join((r[j] if j < len(r) else "").split()) for j, h in enumerate(hdr) if h in FIELDS})
     return posting, out
 
 
@@ -337,7 +359,7 @@ def apply_posting(prev: dict[str, dict], rows: list[dict], posting: str | None, 
         p = prev.get(rec["event_id"])
         if p:
             praw = p.get("raw") or {}
-            for k in ("_first_seen_at", "_first_seen_posting", "_revisions"):
+            for k in ("_first_seen_at", "_first_seen_posting", "_revisions", "_read_from_archive"):
                 if praw.get(k) is not None:
                     rec["raw"][k] = praw[k]
             if rec.get("lat") is None and "_coords" not in rec["raw"] and p.get("lat") is not None:
@@ -358,6 +380,10 @@ def apply_posting(prev: dict[str, dict], rows: list[dict], posting: str | None, 
         else:
             rec["raw"]["_first_seen_at"] = ctx["fetched_at"]
             rec["raw"]["_first_seen_posting"] = posting
+            if ctx.get("archived"):
+                # first listed in a posting read after a newer one was out (a backfill, a rebuild or a catch-up day):
+                # the time we read that archived file, never a time EPD received the report
+                rec["raw"]["_read_from_archive"] = ctx["archived"]
             n["new"] += 1
         rec["raw"]["_last_seen_posting"] = posting
         cur[rec["event_id"]] = rec
@@ -512,9 +538,12 @@ def get(sess: requests.Session, url: str, **kw) -> requests.Response:
 
 
 def fetch_postings(sess: requests.Session, last_read: str | None, backfill_from: str | None,
-                   errors: list | None = None) -> tuple[list, str | None]:
+                   errors: list | None = None, have: set | None = None,
+                   counts: Counter | None = None, keep=None) -> tuple[list, str | None]:
     """[(ymd, url, bytes, last_modified)] oldest first, and the linked file's date. A catch-up or backfill day that
-    answers neither a workbook nor 404 (no posting that day) is named in errors: that posting is not read."""
+    answers neither a workbook nor 404 (no posting that day) is named in errors: that posting is not read. A day in
+    have (already saved) is not requested again, except the linked one. counts gets requested / not_posted (404).
+    keep(ymd, content, last_modified) is called as each file arrives, so a long backfill cut short keeps its downloads."""
     page = get(sess, PAGE_URL)
     page.raise_for_status()
     links = sorted(set(LINK.findall(page.text)))
@@ -533,16 +562,22 @@ def fetch_postings(sess: requests.Session, last_read: str | None, backfill_from:
     d = first
     while d <= newest:
         ymd = d.strftime("%Y%m%d")
-        if d.weekday() < 5 or ymd == linked:
+        if (d.weekday() < 5 or ymd == linked) and (ymd == linked or ymd not in (have or ())):
             url = FILE_URL.format(ymd=ymd)
             r = get(sess, url)
+            if counts is not None:
+                counts["requested"] += 1
             ctype = r.headers.get("content-type") or ""
             if r.status_code == 200 and r.content[:2] == b"PK":
                 lm = r.headers.get("Last-Modified")
                 lm_iso = parsedate_to_datetime(lm).isoformat().replace("+00:00", "Z") if lm else None
                 out.append((ymd, url, r.content, lm_iso))
+                if keep:
+                    keep(ymd, r.content, lm_iso)
             elif ymd == linked:
                 raise ValueError(f"linked file {url} answered {r.status_code} {ctype}")
+            elif r.status_code == 404 and counts is not None:
+                counts["not_posted"] += 1
             elif r.status_code != 404 and errors is not None:
                 errors.append(f"posting {ymd} not read: {url} answered {r.status_code} {ctype}")
             if backfill_from:
@@ -564,36 +599,97 @@ def fetch_layer(sess: requests.Session) -> tuple[dict | None, str | None]:
         return None, f"map layer: {type(e).__name__}: {e}"
 
 
-def keep_raw(ymd: str, content: bytes) -> str:
-    p = RAW / f"sewagespillsreport{ymd}.xlsx"
-    if not p.exists():
-        p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_bytes(content)
-    return str(p.relative_to(ROOT))
+def keep_posting(ymd: str, content: bytes, last_modified: str | None, fetched_at: str, archive: Path | None = None) -> None:
+    """Save a posting read from EPD in the archive (data/build, so it travels with the pipeline state and a rebuild
+    never downloads it again). A changed file of the same day replaces the saved one: the day's last copy is kept.
+    index.json keeps each file's Last-Modified and the time it was read."""
+    a = archive or ARCHIVE
+    p = a / f"sewagespillsreport{ymd}.xlsx"
+    idx_path = a / "index.json"
+    idx = read_json(idx_path, {}) or {}
+    if p.exists() and p.read_bytes() == content and ymd in idx:
+        return
+    a.mkdir(parents=True, exist_ok=True)
+    p.write_bytes(content)
+    idx[ymd] = {"last_modified": last_modified, "fetched_at": fetched_at}
+    write_json(idx_path, dict(sorted(idx.items())))
+
+
+def saved_postings(archive: Path | None = None) -> tuple[list, dict]:
+    """([(ymd, url, bytes, last_modified)] oldest first, {ymd: time read}) from the archive."""
+    a = archive or ARCHIVE
+    idx = read_json(a / "index.json", {}) or {}
+    out, read_at = [], {}
+    for p in sorted(a.glob("sewagespillsreport*.xlsx")):
+        m = re.fullmatch(r"sewagespillsreport(\d{8})\.xlsx", p.name)
+        if not m:
+            continue
+        ymd = m.group(1)
+        info = idx.get(ymd) or {}
+        out.append((ymd, FILE_URL.format(ymd=ymd), p.read_bytes(), info.get("last_modified")))
+        if info.get("fetched_at"):
+            read_at[ymd] = info["fetched_at"]
+    return out, read_at
 
 
 # ---------------------------------------------------------------- main
 
+CARRIED = ("_first_seen_at", "_read_from_archive")     # a rebuild keeps these from the previous file, by event id
+
+
 def build(postings: list[tuple[str, str, bytes, str | None]], prev_records: list[dict], layer: dict | None,
-          epa: list[dict], permits: dict, fetched_at: str) -> tuple[list[dict], dict]:
-    """Apply each posting (oldest first) to the previous records; then EPA pairing and the redactor."""
-    state = {r["event_id"]: r for r in prev_records}
+          epa: list[dict], permits: dict, fetched_at: str, rebuild: bool = False,
+          read_at: dict | None = None) -> tuple[list[dict], dict]:
+    """Apply each posting (oldest first) to the previous records; then EPA pairing and the redactor.
+
+    rebuild (--backfill, --rebuild): start from no records and apply every posting given, so an old posting is never
+    laid on top of today's rows (which would mark them missing); then, by event id, the previous file's
+    _first_seen_at and _read_from_archive (or its absence: a row first read live) and its point when the map layer
+    no longer gives one are carried over. A previous record the postings do not rebuild (its posting was not saved)
+    is kept as it was. Every posting but the newest is an archived one: a row first listed there gets
+    raw._read_from_archive, the time that file was read (read_at[ymd], else this run's clock)."""
+    prev_by_id = {r["event_id"]: r for r in prev_records}
+    state = {} if rebuild else dict(prev_by_id)
     stats: dict = {"postings": [], "history": Counter()}
     pts = layer_points(layer)
     stats["unreadable_postings"] = []
+    unread_cols: list = []
     for i, (ymd, url, content, lm) in enumerate(postings):
         try:
-            posting, rows = read_posting(content)
+            posting, rows = read_posting(content, unread_cols)
         except (ValueError, KeyError, IndexError, zipfile.BadZipFile, ET.ParseError) as e:
             if i == len(postings) - 1:
                 raise                                   # the newest posting must be read
             stats["unreadable_postings"].append(f"{ymd}: {type(e).__name__}: {e}"[:300])
             continue
         posting = posting or f"{ymd[:4]}-{ymd[4:6]}-{ymd[6:]}"
-        ctx = {"file_url": url, "last_modified": lm, "fetched_at": fetched_at, "points": pts, "permits": permits}
+        archived = ((read_at or {}).get(ymd) or fetched_at) if i < len(postings) - 1 else None
+        ctx = {"file_url": url, "last_modified": lm, "fetched_at": fetched_at, "points": pts, "permits": permits,
+               "archived": archived}
         state, n = apply_posting(state, rows, posting, ctx)
         stats["history"].update(n)
         stats["postings"].append({"posting_date": posting, "rows": len(rows), "url": url})
+    if unread_cols:
+        stats["unread_columns"] = unread_cols          # headers only; their values are never read
+    if rebuild:
+        kept = 0
+        for eid, p in prev_by_id.items():
+            r = state.get(eid)
+            if r is None:
+                state[eid] = p
+                kept += 1
+                continue
+            praw = p.get("raw") or {}
+            for k in CARRIED:
+                if praw.get(k) is not None:
+                    r["raw"][k] = praw[k]
+                else:
+                    r["raw"].pop(k, None)
+            if r.get("lat") is None and "_coords" not in r["raw"] and p.get("lat") is not None:
+                r["lat"], r["lon"], r["coord_source"] = p["lat"], p["lon"], p.get("coord_source")
+                r["raw"]["_coords"] = praw.get("_coords") or "a point read earlier from EPD's map layer"
+                r["raw"]["_coords_kept_from_earlier_read"] = True
+        stats["kept_from_previous_file_not_rebuilt"] = kept
     records = list(state.values())
     stats["epa_pairing"] = dict(mark_epa_duplicates(records, epa))
     records = redact.redact_events(records)
@@ -611,32 +707,83 @@ def build(postings: list[tuple[str, str, bytes, str | None]], prev_records: list
     return records, stats
 
 
+def backfill_summary(records: list[dict], postings_applied: list[dict], mode: str, requested_from: str | None,
+                     fetched_at: str, fetch_counts: Counter, kept: int) -> dict:
+    """meta.backfill: what the backfill or rebuild covered (kept in meta by every later run until the next one)."""
+    archived = [r for r in records if (r.get("raw") or {}).get("_read_from_archive")]
+    years = lambda rs: dict(sorted(Counter((r.get("started_at") or "")[:4] or "no date" for r in rs).items()))  # noqa: E731
+    dates = [p["posting_date"] for p in postings_applied]
+    return {"mode": mode, "at": fetched_at, "requested_from": requested_from,
+            "postings_from": min(dates) if dates else None, "postings_to": max(dates) if dates else None,
+            "postings_applied": len(dates), "requests": fetch_counts.get("requested", 0),
+            "days_not_posted": fetch_counts.get("not_posted", 0),
+            "records": len(records), "records_by_begin_year": years(records),
+            "records_first_read_from_archive": len(archived), "first_read_from_archive_by_begin_year": years(archived),
+            "began_from": min((r["started_at"] for r in records if r.get("started_at")), default=None),
+            "kept_from_previous_file_not_rebuilt": kept,
+            "note": ("Rows first listed in an older dated posting read after newer ones were out carry "
+                     "raw._read_from_archive, the time the file was read; published_at stays the first posting that "
+                     "listed the row. The list gives the day a spill began and no end: rows past day 30 set no "
+                     "colour.")}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--file", nargs="*", help="saved workbooks to read (oldest first) instead of downloading")
     ap.add_argument("--layer", help="a saved map-layer query response (JSON)")
     ap.add_argument("--no-layer", action="store_true", help="do not fetch the map layer")
-    ap.add_argument("--backfill-from", help="also read every dated posting from this date (YYYY-MM-DD)")
+    ap.add_argument("--backfill", nargs="?", const="auto", metavar="FROM",
+                    help=f"download every dated posting from FROM (YYYY-MM-DD; default {BACKFILL_DAYS} days before the "
+                         "linked one) that is not saved yet, then rebuild from the saved postings; once, by hand")
+    ap.add_argument("--backfill-from", dest="backfill", metavar="FROM", help="the same as --backfill FROM")
+    ap.add_argument("--rebuild", action="store_true",
+                    help="rebuild from the saved postings (and any --file) without downloading a workbook")
     args = ap.parse_args(argv)
     fetched_at = now_iso()
     prev_doc = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
     prev = prev_doc.get("records", [])
+    prev_meta = prev_doc.get("meta") or {}
+    rebuild = bool(args.backfill or args.rebuild)
     errors = []
+    fetch_counts: Counter = Counter()
     sess = requests.Session()
     sess.headers.update(HEADERS)
     try:
-        if args.file:
-            postings = []
-            for f in args.file:
-                m = re.search(r"(\d{8})", Path(f).name)
-                ymd = m.group(1) if m else "00000000"
-                postings.append((ymd, FILE_URL.format(ymd=ymd) if m else PAGE_URL, Path(f).read_bytes(), None))
+        read_at: dict = {}
+        start = args.backfill if args.backfill != "auto" else None
+        if start:
+            date.fromisoformat(start)                    # a bad date fails before any request
+        given = []
+        for f in args.file or []:
+            m = re.search(r"(\d{8})", Path(f).name)
+            ymd = m.group(1) if m else "00000000"
+            given.append((ymd, FILE_URL.format(ymd=ymd) if m else PAGE_URL, Path(f).read_bytes(), None))
+        if rebuild:
+            saved, read_at = saved_postings()
+            if args.backfill and not args.file:
+                have = {p[0] for p in saved}
+                if not start:
+                    page = get(sess, PAGE_URL)
+                    page.raise_for_status()
+                    links = sorted(set(LINK.findall(page.text)))
+                    if not links:
+                        raise ValueError("the page links no sewagespillsreport file")
+                    start = (datetime.strptime(links[-1], "%Y%m%d").date()
+                             - timedelta(days=BACKFILL_DAYS)).isoformat()
+                got, linked = fetch_postings(sess, None, start, errors, have=have, counts=fetch_counts,
+                                             keep=lambda ymd, content, lm: keep_posting(ymd, content, lm, fetched_at))
+                saved, read_at = saved_postings()
+                saved = [p for p in saved if p[0] <= linked]
+            by_day = {p[0]: p for p in saved}
+            by_day.update({p[0]: p for p in given})      # a saved copy handed in replaces the archive's
+            postings = [by_day[k] for k in sorted(by_day)]      # every saved posting: the archive is the history
             linked = postings[-1][0] if postings else None
+        elif given:
+            postings, linked = given, given[-1][0]
         else:
-            postings, linked = fetch_postings(sess, (prev_doc.get("meta") or {}).get("last_posting_read"),
-                                              args.backfill_from, errors)
-            for ymd, _, content, _ in postings:
-                keep_raw(ymd, content)
+            postings, linked = fetch_postings(sess, prev_meta.get("last_posting_read"), None, errors)
+            for ymd, _, content, lm in postings:
+                keep_posting(ymd, content, lm, fetched_at)
         if not postings:
             raise ValueError("no posting read")
         if args.layer:
@@ -651,7 +798,8 @@ def main(argv=None) -> int:
                 write_json(RAW / "map-layer-latest.json", layer)
         epa_doc = read_json(EPA_EVENTS, {}) or {}
         epa = epa_doc.get("records", [])
-        records, stats = build(postings, prev, layer, epa, load_permits(), fetched_at)
+        records, stats = build(postings, prev, layer, epa, load_permits(), fetched_at, rebuild=rebuild,
+                               read_at=read_at)
     except Exception as e:  # noqa: BLE001 - a failed run keeps the previous records
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
@@ -664,6 +812,14 @@ def main(argv=None) -> int:
             "caveat": ("Reported to EPD by the owner of the sewer system; the list gives the day a spill began, not its "
                        "time or end, and does not say whether the public was notified."),
             "registry_ids": ["ga-epd-sewage-spills-report", "ga-epd-spills-map-layer"]}
+    if rebuild:
+        meta["backfill"] = backfill_summary(records, stats["postings"], "backfill" if args.backfill else "rebuild",
+                                            start, fetched_at,
+                                            fetch_counts, stats.get("kept_from_previous_file_not_rebuilt", 0))
+        meta["postings"] = [stats["postings"][0], stats["postings"][-1]] if stats["postings"] else []
+        meta["postings_note"] = f"{len(stats['postings'])} postings applied; first and last shown"
+    elif prev_meta.get("backfill"):
+        meta["backfill"] = prev_meta["backfill"]         # the backfill's range and counts stay in the feed's meta
     path_notes_to_meta(records, meta)
     path = write_events(SOURCE_ID, records, ok=True, error=None, meta=meta)
     if epa:            # EPA's Georgia records paired here become duplicate_of the EPD record (in EPA's events file)
@@ -672,6 +828,8 @@ def main(argv=None) -> int:
     print(f"{SOURCE_ID}: {len(postings)} posting(s), {stats['in_latest_posting']} in the latest -> "
           f"{stats['records_written']} records; history {stats['history']}; EPA pairing {stats['epa_pairing']}; "
           f"{stats['with_coordinates']} with points -> {path}")
+    if rebuild:
+        print(f"{SOURCE_ID}: {meta['backfill']['mode']} {json.dumps(meta['backfill'])}")
     return 0
 
 
