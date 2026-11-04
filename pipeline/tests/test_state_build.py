@@ -310,3 +310,97 @@ def test_a_state_build_reads_floridas_receiving_water_text(monkeypatch):
     assert OW.text_of(o) == "St Johns River"
     assert OW.text_of({"receiving_water_echo": "BANKS COUNTY"}) == "BANKS COUNTY"
     assert OW.text_of({**o, "receiving_water_override": {"water": "Trout River"}}) == "Trout River"
+
+
+# ---------------------------------------------------------------- review 2026-11-04: the per-permit tie, the merges, the hourly run
+
+def permit_matcher(dist, reaches):
+    """A Matcher whose two Rockfish Creek records are told apart by EPA's point (dist) and the permittee's town
+    (reaches): the builder pooled every NC permit naming 'Rockfish Creek' in one target and built the one at Wallace."""
+    mt = OW.Matcher.__new__(OW.Matcher)
+    mt.waters = {"rockfish-creek-nc": {"state": "NC", "name": "Rockfish Creek", "towns": ["Wallace"]}}
+    mt.targets = {("NC", N.compact("Rockfish Creek")): {
+        "state": "NC", "name": "Rockfish Creek", "define_by": "reach", "permits": ["NC0000001", "NC0000002"],
+        "slugs": ["rockfish-creek-nc"], "how": ["GNIS name in NC, crossing Raeford, Wallace (2 waters of that name)"]}}
+    mt.resolver = SimpleNamespace(canon=lambda s: s)
+    mt.dis_towns = {}
+    mt.dist = lambda slug, lat, lon: dist.get(slug) if lat is not None else None
+    mt.reaches_town = lambda slug, o: reaches.get((slug, o.get("city")))
+    return mt
+
+
+def test_the_builders_record_for_the_permit_must_reach_its_town_or_its_point():
+    mt = permit_matcher({"rockfish-creek-nc": 110_000}, {("rockfish-creek-nc", "RAEFORD"): False,
+                                                        ("rockfish-creek-nc", "WALLACE"): True})
+    far = {"state": "NC", "npdes_permit": "NC0000002", "city": "RAEFORD", "lat": 34.98, "lon": -79.22}
+    assert mt.by_builder_permit(far, "Rockfish Creek") == (None, None)
+    assert "does not reach the permittee's town (raeford)" in mt._builder_far and "110.0 km" in mt._builder_far
+    own = {**far, "npdes_permit": "NC0000001", "city": "WALLACE"}
+    s, how = mt.by_builder_permit(own, "Rockfish Creek")          # the plant's own town: kept, however far EPA's point
+    assert s == "rockfish-creek-nc" and "reaches the permittee's town" in how and mt._builder_far is None
+
+
+def test_the_builders_record_at_the_point_is_kept_and_an_unknown_town_is_said():
+    mt = permit_matcher({"rockfish-creek-nc": 150}, {})
+    o = {"state": "NC", "npdes_permit": "NC0000002", "city": "SOMEWHERE", "lat": 34.7, "lon": -78.0}
+    assert mt.by_builder_permit(o, "Rockfish Creek")[0] == "rockfish-creek-nc"       # EPA's point on it (TIGHT_M)
+    mt = permit_matcher({"rockfish-creek-nc": 5_000}, {})
+    assert mt.by_builder_permit(o, "Rockfish Creek") == (None, None)
+    assert "could not be checked" in mt._builder_far
+    assert mt.by_builder_permit({**o, "lat": None, "lon": None}, "Rockfish Creek")[0] == "rockfish-creek-nc"
+
+
+def test_a_target_the_budget_did_not_reach_keeps_the_files_row():
+    old = [{"state": "NY", "name": "Mill Creek", "slugs": ["mill-creek-ny"], "reason": None}]
+    new = [{"state": "NY", "name": "Mill Creek", "slugs": [], "reason": "not reached this run (--budget-s used); the "
+            "next run resumes"}]
+    assert N.merge_targets(old, new) == old
+    resolved = [{"state": "NY", "name": "Mill Creek", "slugs": [], "reason": "no NHD flowline of that name"}]
+    assert N.merge_targets(old, resolved) == resolved
+
+
+def test_a_state_build_keeps_other_states_rows_exactly(tmp_path, monkeypatch):
+    out = tmp_path / "waters-nhd.json"
+    monkeypatch.setattr(N, "OUT", out)
+    site = {"state": "NJ", "name": None, "texts": ["57th St (Avalon Borough)"], "slugs": []}
+    prev = {"partial": False, "stats": {}, "problems": [], "skipped": [], "waters": [],
+            "targets": [site, {**site, "points": 2}, {"state": "NJ", "name": "Cooper River", "slugs": ["cooper-river-nj"]}]}
+    out.write_text(json.dumps(prev))
+    N.write_output([], [{"state": "NC", "name": "Neuse River", "slugs": []}], [], [], partial=True, stats={},
+                   final=True, scope_states={"NC"})
+    d = json.loads(out.read_text())
+    assert d["targets"][:3] == prev["targets"] and d["targets"][3]["state"] == "NC"
+
+
+def test_a_live_run_keeps_the_state_builds(tmp_path, monkeypatch):
+    out = tmp_path / "waters-nhd.json"
+    monkeypatch.setattr(N, "OUT", out)
+    line = N.shape({"type": "LineString", "coordinates": [[-78, 35], [-77, 35.1]]})
+    nc = {"slug": "neuse-river-nc", "state": "NC", "name": "Neuse River", "gnis_id": "1013910"}
+    prev = {"partial": False, "stats": {"state_builds": {"NC": {"records": 1}}}, "problems": [],
+            "skipped": [{"state": "NC", "text": "BANKS COUNTY", "reason": "a county"}],
+            "targets": [{"state": "NC", "name": "Neuse River", "slugs": ["neuse-river-nc"], "define_by": "reach",
+                         "reach_slugs": {"8791413": "neuse-river-nc"}}],
+            "waters": [nc, {"slug": "mill-creek-ny", "state": "NY", "name": "Mill Creek", "gnis_id": "1"}]}
+    rec = {"slug": "mill-creek-ny", "name": "Mill Creek", "state": "NY", "gnis_id": "1", "kind": "stream",
+           "_geom": line, "_targets_n": 1}
+    for rebuild in (False, True):
+        out.write_text(json.dumps(prev))
+        info = N.write_output([rec], [{"state": "NY", "name": "Mill Creek", "slugs": ["mill-creek-ny"]}], [], [],
+                              partial=False, stats={"records": 1}, final=True, rebuild=rebuild)
+        d = json.loads(out.read_text())
+        assert sorted(w["slug"] for w in d["waters"]) == ["mill-creek-ny", "neuse-river-nc"], rebuild
+        assert info["dropped"] == 0 and [t["state"] for t in d["targets"]] == ["NY", "NC"]
+        assert d["targets"][1]["reach_slugs"] == {"8791413": "neuse-river-nc"}
+        assert d["skipped"] == prev["skipped"] and d["stats"]["state_builds"] == {"NC": {"records": 1}}
+
+
+def test_the_hourly_run_gives_the_nhd_build_a_budget():
+    import subprocess
+    root = Path(__file__).resolve().parents[2]
+    run = lambda *a: subprocess.run(["make", "-n", "--no-print-directory", *a], cwd=root, capture_output=True,
+                                    text=True, check=True).stdout
+    assert "-m ingest.waters_from_nhd --budget-s" in run("waters-nhd")
+    ingest = run("ingest")
+    loop = ingest.split("; do", 1)[0]                       # the feed loop's module list
+    assert "waters_from_nhd" not in loop and "waters-nhd" in ingest
