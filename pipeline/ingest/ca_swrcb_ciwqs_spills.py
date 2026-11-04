@@ -345,7 +345,9 @@ def scrubbed_row(r: dict) -> dict:
     out["closing_entity"] = entity_name(out.get("closing_entity"))
     for k in ("agency_name", "system_name"):          # an enrollee's name: common.scrub_discharger checks it too
         out[k] = scrub_text(out[k]) if out.get(k) else None
-    for k in ("receiving_water", "receiving_water_type", "destinations", "causes", "failure_location",
+    if out.get("receiving_water"):                   # typed text: it can carry the spill's street address
+        out["receiving_water"] = strip_house_numbers(scrub_text(out["receiving_water"]), street_word_only=True)
+    for k in ("receiving_water_type", "destinations", "causes", "failure_location",
               "appearance_points", "public_access_impact", "caloes_control_number"):
         if isinstance(out.get(k), str):
             out[k] = scrub_text(out[k])
@@ -374,7 +376,7 @@ def wdid_index(rows: list[dict] | None = None) -> dict[str, str]:
         if not isinstance(r, dict) or r.get("state") != "CA":
             continue
         for p in [r.get("npdes_permit"), *(r.get("npdes_permits") or [])]:
-            if p and re.match(r"^\d[A-Z]?SSO\d+$", str(p).strip().upper()):
+            if p and re.match(r"^\d[A-Z]?SSO\d+(?:-[A-Z])?$", str(p).strip().upper()):
                 seen.setdefault(str(p).strip().upper(), set()).add(r["id"])
     return {p: next(iter(v)) for p, v in seen.items() if len(v) == 1}
 

@@ -167,3 +167,18 @@ def test_a_changed_layout_with_extra_columns_still_reads_only_the_safe_fields():
     rs = M.read_rows(text2)
     assert leaks(rs) == [] or all("916-555-0123" not in json.dumps(r) for r in rs)
     assert all("CONTACT_PHONE" not in r for r in rs)
+
+
+def test_a_street_address_typed_into_the_receiving_water_loses_its_house_number():
+    row = {k: "" for k in M.KEYS}
+    row["receiving_water"] = "Sewage entered the city drain at 4060 Sample Plaza Dr. and Sample Channel"
+    out = M.scrubbed_row(row)
+    assert "4060" not in out["receiving_water"] and "Sample Channel" in out["receiving_water"]
+
+
+def test_a_combined_system_wdid_joins_its_operator():
+    rows = [{"id": "ca-sample", "state": "CA", "npdes_permit": "CA0099001",
+             "npdes_permits": ["CA0099001", "2SSO99001", "2SSO99001-C"]},
+            {"id": "md-x", "state": "MD", "npdes_permit": "2SSO99003", "npdes_permits": []}]
+    idx = M.wdid_index(rows)
+    assert idx == {"2SSO99001": "ca-sample", "2SSO99001-C": "ca-sample"}
