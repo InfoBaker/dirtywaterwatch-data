@@ -232,6 +232,10 @@
   "unknown_status_yellow_days": 14,
   "unknown_status_rationale": "A discharge record with unclear status shows caution for 14 days after its report time. It then follows the rule for unconfirmed records.",
   "end_assumed_rationale": "A report with no end is shown as unresolved for 30 days after it began; after that this site assumes the discharge ended and the record says the end was never reported.",
+  "implausible_end": {
+   "days_after_fetch": 31,
+   "rationale": "An end time more than 31 days after we read a discharge report, or one before the discharge began, is most likely a typing error in the source. We do not draw a window from such an end: the report keeps the end as published, and the map treats the discharge as having no confirmed end. A planned window of some weeks keeps the end the authority gives, and so does an advisory."
+  },
   "day_start_caution": {
    "sources": ["ga-epd-spills"],
    "hours": 72,

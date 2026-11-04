@@ -331,6 +331,46 @@ def strip_personal(rec):
     return rec
 
 
+# Words that make a discharger name an operator's, never a person's: "Robert T Savely WRF", "Kelly Twp Muni Auth",
+# "Martha Elementary" (operator names of the outfall registry that read like a person's name)
+OPERATOR_WORDS = set("""wwtp wwtf wtp wtf wrf wrp wrrf wpcf wpcp pcf pcp stp awt potw pwa pwd twp township muni municipal
+auth authority authorities district dist county city town village borough boro commission board department dept utility
+utilities water sewer sewerage wastewater sanitary sanitation treatment plant facility facilities station system systems
+works regional reclamation recovery pollution control services service co company corp corporation inc llc lp ltd assn
+association hoa poa coop cooperative club estates apartments apts mhp mobile home homes school schools elementary middle
+high college university academy ctr center centre correctional prison resort hotel motel inn hospital farm farms dairy
+foundation fdation trust partners properties development wwsl wwt wwrf rwrf awtf awwtp wqtc wrc cso csos sso psd msd
+mua mud sd ud wsa subdiv subd subdivision elem sch univ campground nursing ministries foods products mfg manufacturing
+enterprises holdings group labs laboratories sons bros brothers sawmill rtb""".split())   # not surnames such as Park, Mills, Church, Camp, Lodge
+NAME_REMOVED = "[name removed]"
+
+
+def scrub_discharger(rec: dict) -> dict:
+    """A discharger_name that is only a person's name (build.redact.person_shaped, read as given and with capitals, as
+    the Florida feed reads its incident and facility names) becomes "[name removed]": an owner field can hold a private
+    owner's or filer's name (generic-ingesters re-check R8). The permit stays the operator's identity: a discharger_id
+    that carries the name becomes the npdes_permit. A name with an operator word (OPERATOR_WORDS) is left as it is.
+    Changes rec in place and returns it."""
+    v = rec.get("discharger_name")
+    if not isinstance(v, str) or not v.strip() or v == NAME_REMOVED:
+        return rec
+    s = " ".join(v.split())
+    words = {w.lower() for w in re.split(r"[\s\-/.,()&']+", s) if w}
+    if words & OPERATOR_WORDS:
+        return rec
+    import string
+
+    from build import redact            # here, not at the top: build.redact imports this module
+    if not (redact.person_shaped(s) or redact.person_shaped(string.capwords(s))):
+        return rec
+    rec["discharger_name"] = NAME_REMOVED
+    key = re.sub(r"[^a-z0-9]", "", s.lower())
+    did = rec.get("discharger_id")
+    if isinstance(did, str) and key and key in re.sub(r"[^a-z0-9]", "", did.lower()):
+        rec["discharger_id"] = rec.get("npdes_permit")
+    return rec
+
+
 def event(**f) -> dict:
     """An event record with every field present (docs/plan.md §3); validates the enumerations."""
     rec = {
@@ -360,7 +400,7 @@ def event(**f) -> dict:
     if not rec["event_id"]:
         raise ValueError("event needs event_id or source_id + source_record_id")
     rec["raw"] = strip_personal(rec["raw"] or {})
-    return rec
+    return scrub_discharger(rec)
 
 
 def write_events(source_id: str, records: list[dict], ok: bool = True, error: str | None = None, meta: dict | None = None,
@@ -377,6 +417,9 @@ def write_events(source_id: str, records: list[dict], ok: bool = True, error: st
         meta = {**prev_meta, **(meta or {})}
         if prev_meta.get("distribution_discouraged"):
             meta["distribution_discouraged"] = True
+    for r in records:           # a module may set discharger_name after common.event
+        if isinstance(r, dict):
+            scrub_discharger(r)
     out = {"source_id": source_id, "fetched_at": now_iso(), "ok": ok, "error": error,
            "last_ok_at": now_iso() if ok else prev.get("last_ok_at"), "meta": meta or {},
            "count": len(records), "records": records}
