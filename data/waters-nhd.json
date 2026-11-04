@@ -1,8 +1,8 @@
 {
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
- "built": "2026-11-04T13:58:33Z",
+ "built": "2026-11-04T19:32:33Z",
  "partial": false,
- "count": 3203,
+ "count": 3204,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
  "stats": {
   "targets": 1816,
@@ -1916,6 +1916,40 @@
        "why": "Lake Nepessing (lake-nepessing-mi) carries the name 'Lake Nepessing' and reaches the operators' town (lapeer)"
       }
      ]
+    },
+    "report_names": {
+     "built": "2026-11-04T19:32:32Z",
+     "file": "upper-rouge-names.json",
+     "names": 1,
+     "reports": 1,
+     "names_no_water": 0,
+     "waters_named": 1,
+     "already_a_record": 0,
+     "targets": 1,
+     "targets_mapped": 1,
+     "records": 1,
+     "targets_failed": 0,
+     "failed_reasons": {},
+     "network_requests": 2,
+     "requests": {
+      "name2": 1,
+      "gnis2": 1
+     },
+     "cached": {
+      "tiger": 1
+     },
+     "failed": {},
+     "stopped": null,
+     "write": {
+      "mode": "merge",
+      "existing_records": 3203,
+      "run_records": 1,
+      "replaced": 0,
+      "added": 1,
+      "kept": 3203,
+      "dropped": 0,
+      "written": 3204
+     }
     }
    },
    "NC": {
@@ -121726,1875 +121760,6 @@
   },
   {
    "state": "MI",
-   "name": "Holloway Reservoir",
-   "texts": [
-    "Holloway Reservoir"
-   ],
-   "outfalls": 0,
-   "events": 2,
-   "points": 0,
-   "towns": [
-    "Columbiaville"
-   ],
-   "slugs": [
-    "holloway-reservoir-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 2,
-   "notes": [
-    "2026-11-04: the NHD record holloway-reservoir-mi was dropped: openboatlaunch's holloway-reservoir-mi is this water (same name; 100% of the NHD feature lies within 300 m of holloway-reservoir-mi's bounding box, which the feature's own box covers 17% of)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Bear Creek",
-   "texts": [
-    "Bear Creek Drain"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [
-    "bear-creek-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Carp Creek",
-   "texts": [
-    "Carp Creek and Partridge Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Ishpeming"
-   ],
-   "slugs": [
-    "carp-creek-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Detroit",
-   "texts": [
-    "Detroit"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Detroit"
-   ],
-   "slugs": [
-    "detroit-river-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "2026-11-04: the NHD record detroit-river-mi was dropped: openboatlaunch's detroit-river-mi is this water (same name; 100% of the NHD feature lies within 300 m of detroit-river-mi's bounding box, which the feature's own box covers 88% of; both name detroit, ecorse, river rouge)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Galien River",
-   "texts": [
-    "Galien River near New Buffalo Harbor"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "New Buffalo"
-   ],
-   "slugs": [
-    "galien-river-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "2026-11-04: the NHD record galien-river-mi was dropped: openboatlaunch's galien-river-mi is this water (same name; 100% of the NHD feature lies within 300 m of galien-river-mi's bounding box, which the feature's own box covers 100% of; both name new buffalo)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Hammell Creek",
-   "texts": [
-    "Hammell Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Calumet"
-   ],
-   "slugs": [
-    "hammell-creek-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Lake Macatawa",
-   "texts": [
-    "Unnamed tributary to Lake Macatawa"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [
-    "lake-macatawa-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "'Unnamed tributary to Lake Macatawa': a tributary of Lake Macatawa (the tributary has no name of its own)",
-    "2026-11-04: the NHD record lake-macatawa-mi was dropped: openboatlaunch's lake-macatawa-mi is this water (same name; 99% of the NHD feature lies within 300 m of lake-macatawa-mi's bounding box, which the feature's own box covers 100% of; both name holland)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "McCoy Creek",
-   "texts": [
-    "McCoy Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Buchanan"
-   ],
-   "slugs": [
-    "mccoy-creek-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Mud Lake",
-   "texts": [
-    "Mud Lake"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Decatur"
-   ],
-   "slugs": [
-    "mud-lake-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Red Run",
-   "texts": [
-    "Red Run"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Warren"
-   ],
-   "slugs": [
-    "red-run-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Rogue River",
-   "texts": [
-    "Unnamed tributary to Rogue River"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [
-    "rogue-river-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "'Unnamed tributary to Rogue River': a tributary of Rogue River (the tributary has no name of its own)",
-    "2026-11-04: the NHD record rogue-river-mi was dropped: openboatlaunch's rogue-river-mi is this water (same name; 84% of the NHD feature lies within 300 m of rogue-river-mi's bounding box, which the feature's own box covers 100% of; both name rockford)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "St.Mary's River",
-   "texts": [
-    "St.Mary's River"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Sault Ste Marie"
-   ],
-   "slugs": [
-    "saint-marys-river-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "2026-11-04: the NHD record saint-marys-river-mi was dropped: openboatlaunch's saint-marys-river-mi is this water (same name; 14% of the NHD feature lies within 300 m of saint-marys-river-mi's bounding box, which the feature's own box covers 100% of)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Sycamore Creek",
-   "texts": [
-    "Sycamore Creek Drain"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [
-    "sycamore-creek-mi"
-   ],
-   "how": [
-    "already a water record: the status resolver places reports of this name on it"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "2026-11-04: the NHD record sycamore-creek-mi was dropped: openboatlaunch's sycamore-creek-mi is this water (same name; 68% of the NHD feature lies within 300 m of sycamore-creek-mi's bounding box, which the feature's own box covers 100% of; both name lansing)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Bell Branch",
-   "texts": [
-    "Bell Branch"
-   ],
-   "outfalls": 0,
-   "events": 44,
-   "points": 0,
-   "towns": [
-    "Redford Township"
-   ],
-   "slugs": [
-    "bell-branch-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Redford Township"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 44,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "Tarabusi Creek",
-   "texts": [
-    "Tarabusi Creek"
-   ],
-   "outfalls": 0,
-   "events": 28,
-   "points": 0,
-   "towns": [
-    "Redford Township"
-   ],
-   "slugs": [
-    "tarabusi-creek-mi"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Tarabusi Creek' (GNIS 1614600) 970 m from Redford Township"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 28,
-   "places_failed": [
-    {
-     "town": "Redford Township",
-     "reason": "no NHD water of that name within 3 km of Redford Township (the nearest is 5.6 km away)"
-    }
-   ],
-   "defined_by": "name (NHD high resolution)"
-  },
-  {
-   "state": "MI",
-   "name": "Tittabawasee River",
-   "texts": [
-    "Tittabawasee River"
-   ],
-   "outfalls": 0,
-   "events": 12,
-   "points": 0,
-   "towns": [
-    "Midland",
-    "Saginaw"
-   ],
-   "slugs": [
-    "tittabawassee-river-mi"
-   ],
-   "how": [],
-   "reason": null,
-   "from": "reports",
-   "reports": 12,
-   "notes": [
-    "2026-11-04: openboatlaunch's record: Tittabawassee River (tittabawassee-river-mi) carries the name 'Tittabawasee River' and reaches the operators' towns (midland, saginaw)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Davey Creek",
-   "texts": [
-    "Davey Creek"
-   ],
-   "outfalls": 0,
-   "events": 6,
-   "points": 0,
-   "towns": [
-    "Rockland"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 6
-  },
-  {
-   "state": "MI",
-   "name": "Morrison Channel",
-   "texts": [
-    "Morrison Channel"
-   ],
-   "outfalls": 0,
-   "events": 4,
-   "points": 0,
-   "towns": [
-    "St. Joseph"
-   ],
-   "slugs": [
-    "morrison-channel-mi"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Morrison Channel' (GNIS 632719) crossing St. Joseph"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 4,
-   "defined_by": "name (NHD high resolution)"
-  },
-  {
-   "state": "MI",
-   "name": "Lower River Rouge",
-   "texts": [
-    "Lower River Rouge"
-   ],
-   "outfalls": 0,
-   "events": 3,
-   "points": 0,
-   "towns": [
-    "Inkster"
-   ],
-   "slugs": [
-    "lower-river-rouge-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Inkster"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 3,
-   "defined_by": "name",
-   "notes": [
-    "2026-11-04: the NHD record lower-river-rouge-mi was dropped: openboatlaunch's lower-river-rouge-mi is this water (same name; 100% of the NHD feature lies within 300 m of lower-river-rouge-mi's bounding box, which the feature's own box covers 100% of; both name dearborn heights, wayne)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Pere Marquette Lake",
-   "texts": [
-    "Pere Marquette Lake"
-   ],
-   "outfalls": 0,
-   "events": 3,
-   "points": 0,
-   "towns": [
-    "Ludington"
-   ],
-   "slugs": [
-    "pere-marquette-lake-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Ludington"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 3,
-   "defined_by": "name",
-   "notes": [
-    "2026-11-04: the NHD record pere-marquette-lake-mi was dropped: openboatlaunch's pere-marquette-lake-mi is this water (same name; 100% of the NHD feature lies within 300 m of pere-marquette-lake-mi's bounding box, which the feature's own box covers 100% of; both name ludington)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Big Cedar River",
-   "texts": [
-    "Big Cedar River"
-   ],
-   "outfalls": 0,
-   "events": 2,
-   "points": 0,
-   "towns": [
-    "Spalding"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 2,
-   "notes": [
-    "the status resolver gives the name to cedar-river-spalding-mi (another name): the name's own water is built"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Boardman Lake",
-   "texts": [
-    "Boardman Lake"
-   ],
-   "outfalls": 0,
-   "events": 2,
-   "points": 0,
-   "towns": [
-    "Garfield",
-    "Traverse City"
-   ],
-   "slugs": [
-    "boardman-lake-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Garfield"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 2,
-   "defined_by": "name",
-   "notes": [
-    "2026-11-04: the NHD record boardman-lake-mi was dropped: openboatlaunch's boardman-lake-mi is this water (same name; 100% of the NHD feature lies within 300 m of boardman-lake-mi's bounding box, which the feature's own box covers 100% of; both name traverse)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Davis Creek",
-   "texts": [
-    "Davis Creek"
-   ],
-   "outfalls": 0,
-   "events": 2,
-   "points": 0,
-   "towns": [
-    "Kalamazoo"
-   ],
-   "slugs": [
-    "davis-creek-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Kalamazoo (4 waters of that name in MI)"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 2,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "Forester Creek",
-   "texts": [
-    "Forester Creek"
-   ],
-   "outfalls": 0,
-   "events": 2,
-   "points": 0,
-   "towns": [],
-   "slugs": [
-    "forester-creek-mi"
-   ],
-   "how": [
-    "the only NHD water of that name in MI (the reports give no place)"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 2,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "Gunderman Lake",
-   "texts": [
-    "Gunderman Lake Drain"
-   ],
-   "outfalls": 0,
-   "events": 2,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 2
-  },
-  {
-   "state": "MI",
-   "name": "Hammel Creek",
-   "texts": [
-    "Hammel Creek"
-   ],
-   "outfalls": 0,
-   "events": 2,
-   "points": 0,
-   "towns": [
-    "Calumet"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 2
-  },
-  {
-   "state": "MI",
-   "name": "Lake Nepessing",
-   "texts": [
-    "Lake Nepessing"
-   ],
-   "outfalls": 0,
-   "events": 2,
-   "points": 0,
-   "towns": [
-    "Lapeer"
-   ],
-   "slugs": [
-    "lake-nepessing-mi"
-   ],
-   "how": [],
-   "reason": null,
-   "from": "reports",
-   "reports": 2,
-   "notes": [
-    "2026-11-04: openboatlaunch's record: Lake Nepessing (lake-nepessing-mi) carries the name 'Lake Nepessing' and reaches the operators' town (lapeer)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Main Rouge River",
-   "texts": [
-    "Main Rouge River"
-   ],
-   "outfalls": 0,
-   "events": 2,
-   "points": 0,
-   "towns": [
-    "Dearborn Heights",
-    "River Rouge"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 2,
-   "notes": [
-    "the status resolver gives the name to rouge-river-mi (another name): the name's own water is built"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Ottawa Creek",
-   "texts": [
-    "Ottawa Creek"
-   ],
-   "outfalls": 0,
-   "events": 2,
-   "points": 0,
-   "towns": [
-    "Allendale"
-   ],
-   "slugs": [
-    "ottawa-creek-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Allendale"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 2,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "Woodland Creek",
-   "texts": [
-    "Woodland Creek"
-   ],
-   "outfalls": 0,
-   "events": 2,
-   "points": 0,
-   "towns": [
-    "Lake Odessa"
-   ],
-   "slugs": [
-    "woodland-creek-mi"
-   ],
-   "how": [
-    "the only NHD water of that name in MI (the reports give no place)"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 2,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "adjacent celery pond",
-   "texts": [
-    "Black Creek and adjacent celery pond"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Muskegon"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Allen Creek",
-   "texts": [
-    "Allen Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Ann Arbor"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "3 NHD waters of that name in MI, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1,
-   "places_failed": [
-    {
-     "town": "Ann Arbor",
-     "reason": "no NHD water of that name within 3 km of Ann Arbor (the nearest is 240.1 km away)"
-    }
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Beguns Creek",
-   "texts": [
-    "Beguns Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Calumet"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Black Creek",
-   "texts": [
-    "Black Creek and adjacent celery pond"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Muskegon"
-   ],
-   "slugs": [
-    "black-creek-muskegon-mi"
-   ],
-   "how": [
-    "NHD high resolution: flowline named 'Black Creek' (GNIS 1619228) crossing Muskegon"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "places_failed": [
-    {
-     "town": "Muskegon",
-     "reason": "no NHD water of that name within 3 km of Muskegon (the nearest is 12.8 km away)"
-    }
-   ],
-   "defined_by": "name (NHD high resolution)"
-  },
-  {
-   "state": "MI",
-   "name": "Buck Lake creek",
-   "texts": [
-    "Buck Lake creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Alpha"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "the status resolver gives the name to lake-creek-mi (another name): the name's own water is built"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Caro River",
-   "texts": [
-    "Caro River"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Caro"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Christiana Creek",
-   "texts": [
-    "Christiana Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [
-    "christiana-creek-mi"
-   ],
-   "how": [
-    "the only NHD water of that name in MI (the reports give no place)"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name",
-   "notes": [
-    "2026-11-04: the NHD record christiana-creek-mi was dropped: openboatlaunch's christiana-creek-mi is this water (same name; 80% of the NHD feature lies within 300 m of christiana-creek-mi's bounding box, which the feature's own box covers 71% of)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Clinton River Spillway",
-   "texts": [
-    "Clinton River Spillway"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Clinton - Department Of Public Services"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "the status resolver gives the name to clinton-river-mi (another name): the name's own water is built"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "cuttle creek",
-   "texts": [
-    "cuttle creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Decorative pond for community",
-   "texts": [
-    "Decorative pond for community"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "downstream of Lowell",
-   "texts": [
-    "downstream of Lowell"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Drainage ditch along west side of South Main Street",
-   "texts": [
-    "Drainage ditch along west side of South Main Street"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Hermansville"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "East Branch Pine River",
-   "texts": [
-    "East Branch Pine River"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "St. Clair"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "2 NHD waters of that name in MI, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "the status resolver gives the name to pine-river-st-clair-mi (another name): the name's own water is built"
-   ],
-   "places_failed": [
-    {
-     "town": "St. Clair",
-     "reason": "no NHD water of that name within 3 km of St. Clair (the nearest is 198.4 km away)"
-    }
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Ecorse Creek",
-   "texts": [
-    "Ecorse Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Allen Park"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Ecorse River",
-   "texts": [
-    "Ecorse River"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Lincooln Park"
-   ],
-   "slugs": [
-    "ecorse-river-mi"
-   ],
-   "how": [
-    "the only NHD water of that name in MI (the reports give no place)"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "Elm Creek",
-   "texts": [
-    "Elm Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "6 NHD waters of that name in MI and the reports give no place to choose one",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Gallagher Creek",
-   "texts": [
-    "Gallagher Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [
-    "gallagher-creek-mi"
-   ],
-   "how": [
-    "the only NHD water of that name in MI (the reports give no place)"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "Goguac Lake",
-   "texts": [
-    "Goguac Lake"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Battle Creek"
-   ],
-   "slugs": [
-    "goguac-lake-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Battle Creek"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name",
-   "notes": [
-    "2026-11-04: the NHD record goguac-lake-mi was dropped: openboatlaunch's goguac-lake-mi is this water (same name; 100% of the NHD feature lies within 300 m of goguac-lake-mi's bounding box, which the feature's own box covers 89% of; both name battle creek)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Green Lake Stream",
-   "texts": [
-    "Green Lake Stream"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Wayland"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Highland Greens WWTP Discharge Pond",
-   "texts": [
-    "Highland Greens WWTP Discharge Pond"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Indian Mill Creek",
-   "texts": [
-    "Indian Mill Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Grand Rapids"
-   ],
-   "slugs": [
-    "indian-mill-creek-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Grand Rapids"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "Island Lake",
-   "texts": [
-    "Island Lake"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Green Oak Charter Township"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "22 NHD waters of that name in MI and the reports give no place to choose one",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Jordan Lake",
-   "texts": [
-    "Jordan Lake"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Lake Odessa"
-   ],
-   "slugs": [
-    "jordan-lake-mi"
-   ],
-   "how": [
-    "the only NHD water of that name in MI (the reports give no place)"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name",
-   "notes": [
-    "2026-11-04: the NHD record jordan-lake-mi was dropped: openboatlaunch's jordan-lake-mi is this water (same name; 100% of the NHD feature lies within 300 m of jordan-lake-mi's bounding box, which the feature's own box covers 100% of)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Kids Creek",
-   "texts": [
-    "Kids Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Traverse City"
-   ],
-   "slugs": [
-    "kids-creek-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Traverse City"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "Lake Mitchell",
-   "texts": [
-    "Lake Mitchell"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [
-    "lake-mitchell-mi"
-   ],
-   "how": [
-    "the only NHD water of that name in MI (the reports give no place)"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name",
-   "notes": [
-    "2026-11-04: the NHD record lake-mitchell-mi was dropped: openboatlaunch's lake-mitchell-mi is this water (same name; 100% of the NHD feature lies within 300 m of lake-mitchell-mi's bounding box, which the feature's own box covers 100% of)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Lake Orion",
-   "texts": [
-    "Lake Orion"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [
-    "lake-orion-mi"
-   ],
-   "how": [
-    "the only NHD water of that name in MI (the reports give no place)"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name",
-   "notes": [
-    "2026-11-04: the NHD record lake-orion-mi was dropped: openboatlaunch's lake-orion-mi is this water (same name; 100% of the NHD feature lies within 300 m of lake-orion-mi's bounding box, which the feature's own box covers 88% of)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Little Travese Bay",
-   "texts": [
-    "Little Travese Bay"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Lloyds Bayou",
-   "texts": [
-    "Lloyds Bayou"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Loch Erin",
-   "texts": [
-    "Loch Erin"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Brooklyn",
-    "Hudson",
-    "Jasper",
-    "Onsted"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "lower Rough river",
-   "texts": [
-    "lower Rough river"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Dearborn Heights"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Macatawa River",
-   "texts": [
-    "Macatawa River"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Holland"
-   ],
-   "slugs": [
-    "macatawa-river-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Holland"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "Malletts Creek",
-   "texts": [
-    "Malletts Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Ann Arbor"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Middle River Rouge",
-   "texts": [
-    "Middle River Rouge"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Redford Township"
-   ],
-   "slugs": [
-    "middle-river-rouge-mi"
-   ],
-   "how": [
-    "GNIS name in MI, 502 m from Redford Township"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "Monarch Millpond",
-   "texts": [
-    "Monarch Millpond"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Kalamazoo"
-   ],
-   "slugs": [
-    "monarch-millpond-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Kalamazoo"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "No name natural watercourse",
-   "texts": [
-    "No name natural watercourse"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "old maid harris",
-   "texts": [
-    "old maid harris and whaley drain"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Dimondale"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Open ditch",
-   "texts": [
-    "Open ditch along the north side of I696 tributary to the Minnow Pond Chapter 20 Drain"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Novi"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "'Open ditch along the north side of I696 tributary to the Minnow Pond Chapter 20 Drain': a tributary of Open ditch (the tributary has no name of its own)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Painters Creek",
-   "texts": [
-    "Painters Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Partridge Creek",
-   "texts": [
-    "Carp Creek and Partridge Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Ishpeming"
-   ],
-   "slugs": [
-    "partridge-creek-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Ishpeming"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "Pebble Creek",
-   "texts": [
-    "Pebble Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Novi"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "1 NHD water of that name in MI, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1,
-   "places_failed": [
-    {
-     "town": "Novi",
-     "reason": "no NHD water of that name within 3 km of Novi (the nearest is 3.7 km away)"
-    }
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Pine Lake",
-   "texts": [
-    "Pine Lake"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Remus"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "22 NHD waters of that name in MI and the reports give no place to choose one",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Pine Run Creek",
-   "texts": [
-    "Pine Run Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Pond with no outlet",
-   "texts": [
-    "Pond with no outlet"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Hamburg Township"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Potter",
-   "texts": [
-    "Potter and Mulliken IC Drain"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Mulliken"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Rayner Creek",
-   "texts": [
-    "Rayner Creek Drain"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Mason"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Red Run County",
-   "texts": [
-    "Red Run County Drain"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Warren"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "the status resolver gives the name to red-run-mi (another name): the name's own water is built"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Saint Clair Lake",
-   "texts": [
-    "Saint Clair Lake"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "2 NHD waters of that name in MI and the reports give no place to choose one",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Secret Creek",
-   "texts": [
-    "Secret Creek"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "L'Anse"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Shavehead Lake",
-   "texts": [
-    "Shavehead Lake"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [
-    "shavehead-lake-mi"
-   ],
-   "how": [
-    "the only NHD water of that name in MI (the reports give no place)"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "SPS 1B",
-   "texts": [
-    "Wetland directly next to SPS 1B"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "STDBKC190010",
-   "texts": [
-    "STDBKC190010 - Detention Basin"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Kalamazoo"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Stone Lake",
-   "texts": [
-    "Stone Lake"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "3 NHD waters of that name in MI and the reports give no place to choose one",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "surface waters",
-   "texts": [
-    "onsite retention basin for parking lot run off- no direct discharge to surface waters"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Madison Charter Township"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "'onsite retention basin for parking lot run off- no direct discharge to surface waters': a tributary of surface waters (the tributary has no name of its own)"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "tracy mine",
-   "texts": [
-    "Unamed creek leading to unamed pond to tracy mine"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Tracy mine unnamed pond",
-   "texts": [
-    "Tracy mine unnamed pond"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "Upper St Mary's River",
-   "texts": [
-    "Upper St Mary's River"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Sault Ste Marie"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1,
-   "notes": [
-    "the status resolver gives the name to saint-marys-river-mi (another name): the name's own water is built"
-   ]
-  },
-  {
-   "state": "MI",
-   "name": "Upper Straits Lake",
-   "texts": [
-    "Upper Straits Lake"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Orchard Lake Village"
-   ],
-   "slugs": [
-    "upper-straits-lake-mi"
-   ],
-   "how": [
-    "GNIS name in MI, crossing Orchard Lake Village"
-   ],
-   "reason": null,
-   "from": "reports",
-   "reports": 1,
-   "defined_by": "name"
-  },
-  {
-   "state": "MI",
-   "name": "water was discharged",
-   "texts": [
-    "The water was discharged into the Shiawassee river fully treated as the permit allows"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Byron",
-    "Linden"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "West Division",
-   "texts": [
-    "Storm Pond corner of Leeson and West Division"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
-   "name": "West Grand Traverse Bay",
-   "texts": [
-    "West Grand Traverse Bay"
-   ],
-   "outfalls": 0,
-   "events": 1,
-   "points": 0,
-   "towns": [
-    "Traverse City"
-   ],
-   "slugs": [],
-   "how": [],
-   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "from": "reports",
-   "reports": 1
-  },
-  {
-   "state": "MI",
    "name": "LEMON DRAIN",
    "texts": [
     "LEMON DRAIN"
@@ -160781,6 +158946,1906 @@
    "reason_detail": [
     "OSM fallback: Overpass not reachable"
    ]
+  },
+  {
+   "state": "MI",
+   "name": "Holloway Reservoir",
+   "texts": [
+    "Holloway Reservoir"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Columbiaville"
+   ],
+   "slugs": [
+    "holloway-reservoir-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2,
+   "notes": [
+    "2026-11-04: the NHD record holloway-reservoir-mi was dropped: openboatlaunch's holloway-reservoir-mi is this water (same name; 100% of the NHD feature lies within 300 m of holloway-reservoir-mi's bounding box, which the feature's own box covers 17% of)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Bear Creek",
+   "texts": [
+    "Bear Creek Drain"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "bear-creek-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Carp Creek",
+   "texts": [
+    "Carp Creek and Partridge Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Ishpeming"
+   ],
+   "slugs": [
+    "carp-creek-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Detroit",
+   "texts": [
+    "Detroit"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Detroit"
+   ],
+   "slugs": [
+    "detroit-river-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "2026-11-04: the NHD record detroit-river-mi was dropped: openboatlaunch's detroit-river-mi is this water (same name; 100% of the NHD feature lies within 300 m of detroit-river-mi's bounding box, which the feature's own box covers 88% of; both name detroit, ecorse, river rouge)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Galien River",
+   "texts": [
+    "Galien River near New Buffalo Harbor"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "New Buffalo"
+   ],
+   "slugs": [
+    "galien-river-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "2026-11-04: the NHD record galien-river-mi was dropped: openboatlaunch's galien-river-mi is this water (same name; 100% of the NHD feature lies within 300 m of galien-river-mi's bounding box, which the feature's own box covers 100% of; both name new buffalo)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Hammell Creek",
+   "texts": [
+    "Hammell Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Calumet"
+   ],
+   "slugs": [
+    "hammell-creek-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Lake Macatawa",
+   "texts": [
+    "Unnamed tributary to Lake Macatawa"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "lake-macatawa-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "'Unnamed tributary to Lake Macatawa': a tributary of Lake Macatawa (the tributary has no name of its own)",
+    "2026-11-04: the NHD record lake-macatawa-mi was dropped: openboatlaunch's lake-macatawa-mi is this water (same name; 99% of the NHD feature lies within 300 m of lake-macatawa-mi's bounding box, which the feature's own box covers 100% of; both name holland)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "McCoy Creek",
+   "texts": [
+    "McCoy Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Buchanan"
+   ],
+   "slugs": [
+    "mccoy-creek-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Mud Lake",
+   "texts": [
+    "Mud Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Decatur"
+   ],
+   "slugs": [
+    "mud-lake-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Red Run",
+   "texts": [
+    "Red Run"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Warren"
+   ],
+   "slugs": [
+    "red-run-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Rogue River",
+   "texts": [
+    "Unnamed tributary to Rogue River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "rogue-river-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "'Unnamed tributary to Rogue River': a tributary of Rogue River (the tributary has no name of its own)",
+    "2026-11-04: the NHD record rogue-river-mi was dropped: openboatlaunch's rogue-river-mi is this water (same name; 84% of the NHD feature lies within 300 m of rogue-river-mi's bounding box, which the feature's own box covers 100% of; both name rockford)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "St.Mary's River",
+   "texts": [
+    "St.Mary's River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Sault Ste Marie"
+   ],
+   "slugs": [
+    "saint-marys-river-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "2026-11-04: the NHD record saint-marys-river-mi was dropped: openboatlaunch's saint-marys-river-mi is this water (same name; 14% of the NHD feature lies within 300 m of saint-marys-river-mi's bounding box, which the feature's own box covers 100% of)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Sycamore Creek",
+   "texts": [
+    "Sycamore Creek Drain"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "sycamore-creek-mi"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "2026-11-04: the NHD record sycamore-creek-mi was dropped: openboatlaunch's sycamore-creek-mi is this water (same name; 68% of the NHD feature lies within 300 m of sycamore-creek-mi's bounding box, which the feature's own box covers 100% of; both name lansing)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Bell Branch",
+   "texts": [
+    "Bell Branch"
+   ],
+   "outfalls": 0,
+   "events": 44,
+   "points": 0,
+   "towns": [
+    "Redford Township"
+   ],
+   "slugs": [
+    "bell-branch-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Redford Township"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 44,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "Tarabusi Creek",
+   "texts": [
+    "Tarabusi Creek"
+   ],
+   "outfalls": 0,
+   "events": 28,
+   "points": 0,
+   "towns": [
+    "Redford Township"
+   ],
+   "slugs": [
+    "tarabusi-creek-mi"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Tarabusi Creek' (GNIS 1614600) 970 m from Redford Township"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 28,
+   "places_failed": [
+    {
+     "town": "Redford Township",
+     "reason": "no NHD water of that name within 3 km of Redford Township (the nearest is 5.6 km away)"
+    }
+   ],
+   "defined_by": "name (NHD high resolution)"
+  },
+  {
+   "state": "MI",
+   "name": "Tittabawasee River",
+   "texts": [
+    "Tittabawasee River"
+   ],
+   "outfalls": 0,
+   "events": 12,
+   "points": 0,
+   "towns": [
+    "Midland",
+    "Saginaw"
+   ],
+   "slugs": [
+    "tittabawassee-river-mi"
+   ],
+   "how": [],
+   "reason": null,
+   "from": "reports",
+   "reports": 12,
+   "notes": [
+    "2026-11-04: openboatlaunch's record: Tittabawassee River (tittabawassee-river-mi) carries the name 'Tittabawasee River' and reaches the operators' towns (midland, saginaw)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Davey Creek",
+   "texts": [
+    "Davey Creek"
+   ],
+   "outfalls": 0,
+   "events": 6,
+   "points": 0,
+   "towns": [
+    "Rockland"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 6
+  },
+  {
+   "state": "MI",
+   "name": "Morrison Channel",
+   "texts": [
+    "Morrison Channel"
+   ],
+   "outfalls": 0,
+   "events": 4,
+   "points": 0,
+   "towns": [
+    "St. Joseph"
+   ],
+   "slugs": [
+    "morrison-channel-mi"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Morrison Channel' (GNIS 632719) crossing St. Joseph"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 4,
+   "defined_by": "name (NHD high resolution)"
+  },
+  {
+   "state": "MI",
+   "name": "Lower River Rouge",
+   "texts": [
+    "Lower River Rouge"
+   ],
+   "outfalls": 0,
+   "events": 3,
+   "points": 0,
+   "towns": [
+    "Inkster"
+   ],
+   "slugs": [
+    "lower-river-rouge-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Inkster"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 3,
+   "defined_by": "name",
+   "notes": [
+    "2026-11-04: the NHD record lower-river-rouge-mi was dropped: openboatlaunch's lower-river-rouge-mi is this water (same name; 100% of the NHD feature lies within 300 m of lower-river-rouge-mi's bounding box, which the feature's own box covers 100% of; both name dearborn heights, wayne)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Pere Marquette Lake",
+   "texts": [
+    "Pere Marquette Lake"
+   ],
+   "outfalls": 0,
+   "events": 3,
+   "points": 0,
+   "towns": [
+    "Ludington"
+   ],
+   "slugs": [
+    "pere-marquette-lake-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Ludington"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 3,
+   "defined_by": "name",
+   "notes": [
+    "2026-11-04: the NHD record pere-marquette-lake-mi was dropped: openboatlaunch's pere-marquette-lake-mi is this water (same name; 100% of the NHD feature lies within 300 m of pere-marquette-lake-mi's bounding box, which the feature's own box covers 100% of; both name ludington)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Big Cedar River",
+   "texts": [
+    "Big Cedar River"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Spalding"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 2,
+   "notes": [
+    "the status resolver gives the name to cedar-river-spalding-mi (another name): the name's own water is built"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Boardman Lake",
+   "texts": [
+    "Boardman Lake"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Garfield",
+    "Traverse City"
+   ],
+   "slugs": [
+    "boardman-lake-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Garfield"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2,
+   "defined_by": "name",
+   "notes": [
+    "2026-11-04: the NHD record boardman-lake-mi was dropped: openboatlaunch's boardman-lake-mi is this water (same name; 100% of the NHD feature lies within 300 m of boardman-lake-mi's bounding box, which the feature's own box covers 100% of; both name traverse)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Davis Creek",
+   "texts": [
+    "Davis Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Kalamazoo"
+   ],
+   "slugs": [
+    "davis-creek-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Kalamazoo (4 waters of that name in MI)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "Forester Creek",
+   "texts": [
+    "Forester Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "forester-creek-mi"
+   ],
+   "how": [
+    "the only NHD water of that name in MI (the reports give no place)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "Gunderman Lake",
+   "texts": [
+    "Gunderman Lake Drain"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "MI",
+   "name": "Hammel Creek",
+   "texts": [
+    "Hammel Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Calumet"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "MI",
+   "name": "Lake Nepessing",
+   "texts": [
+    "Lake Nepessing"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Lapeer"
+   ],
+   "slugs": [
+    "lake-nepessing-mi"
+   ],
+   "how": [],
+   "reason": null,
+   "from": "reports",
+   "reports": 2,
+   "notes": [
+    "2026-11-04: openboatlaunch's record: Lake Nepessing (lake-nepessing-mi) carries the name 'Lake Nepessing' and reaches the operators' town (lapeer)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Main Rouge River",
+   "texts": [
+    "Main Rouge River"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Dearborn Heights",
+    "River Rouge"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 2,
+   "notes": [
+    "the status resolver gives the name to rouge-river-mi (another name): the name's own water is built"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Ottawa Creek",
+   "texts": [
+    "Ottawa Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Allendale"
+   ],
+   "slugs": [
+    "ottawa-creek-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Allendale"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "Woodland Creek",
+   "texts": [
+    "Woodland Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Lake Odessa"
+   ],
+   "slugs": [
+    "woodland-creek-mi"
+   ],
+   "how": [
+    "the only NHD water of that name in MI (the reports give no place)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "adjacent celery pond",
+   "texts": [
+    "Black Creek and adjacent celery pond"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Muskegon"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Allen Creek",
+   "texts": [
+    "Allen Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Ann Arbor"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "3 NHD waters of that name in MI, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1,
+   "places_failed": [
+    {
+     "town": "Ann Arbor",
+     "reason": "no NHD water of that name within 3 km of Ann Arbor (the nearest is 240.1 km away)"
+    }
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Beguns Creek",
+   "texts": [
+    "Beguns Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Calumet"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Black Creek",
+   "texts": [
+    "Black Creek and adjacent celery pond"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Muskegon"
+   ],
+   "slugs": [
+    "black-creek-muskegon-mi"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Black Creek' (GNIS 1619228) crossing Muskegon"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "places_failed": [
+    {
+     "town": "Muskegon",
+     "reason": "no NHD water of that name within 3 km of Muskegon (the nearest is 12.8 km away)"
+    }
+   ],
+   "defined_by": "name (NHD high resolution)"
+  },
+  {
+   "state": "MI",
+   "name": "Buck Lake creek",
+   "texts": [
+    "Buck Lake creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Alpha"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "the status resolver gives the name to lake-creek-mi (another name): the name's own water is built"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Caro River",
+   "texts": [
+    "Caro River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Caro"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Christiana Creek",
+   "texts": [
+    "Christiana Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "christiana-creek-mi"
+   ],
+   "how": [
+    "the only NHD water of that name in MI (the reports give no place)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name",
+   "notes": [
+    "2026-11-04: the NHD record christiana-creek-mi was dropped: openboatlaunch's christiana-creek-mi is this water (same name; 80% of the NHD feature lies within 300 m of christiana-creek-mi's bounding box, which the feature's own box covers 71% of)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Clinton River Spillway",
+   "texts": [
+    "Clinton River Spillway"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Clinton - Department Of Public Services"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "the status resolver gives the name to clinton-river-mi (another name): the name's own water is built"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "cuttle creek",
+   "texts": [
+    "cuttle creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Decorative pond for community",
+   "texts": [
+    "Decorative pond for community"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "downstream of Lowell",
+   "texts": [
+    "downstream of Lowell"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Drainage ditch along west side of South Main Street",
+   "texts": [
+    "Drainage ditch along west side of South Main Street"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Hermansville"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "East Branch Pine River",
+   "texts": [
+    "East Branch Pine River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "St. Clair"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "2 NHD waters of that name in MI, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "the status resolver gives the name to pine-river-st-clair-mi (another name): the name's own water is built"
+   ],
+   "places_failed": [
+    {
+     "town": "St. Clair",
+     "reason": "no NHD water of that name within 3 km of St. Clair (the nearest is 198.4 km away)"
+    }
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Ecorse Creek",
+   "texts": [
+    "Ecorse Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Allen Park"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Ecorse River",
+   "texts": [
+    "Ecorse River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Lincooln Park"
+   ],
+   "slugs": [
+    "ecorse-river-mi"
+   ],
+   "how": [
+    "the only NHD water of that name in MI (the reports give no place)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "Elm Creek",
+   "texts": [
+    "Elm Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "6 NHD waters of that name in MI and the reports give no place to choose one",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Gallagher Creek",
+   "texts": [
+    "Gallagher Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "gallagher-creek-mi"
+   ],
+   "how": [
+    "the only NHD water of that name in MI (the reports give no place)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "Goguac Lake",
+   "texts": [
+    "Goguac Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Battle Creek"
+   ],
+   "slugs": [
+    "goguac-lake-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Battle Creek"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name",
+   "notes": [
+    "2026-11-04: the NHD record goguac-lake-mi was dropped: openboatlaunch's goguac-lake-mi is this water (same name; 100% of the NHD feature lies within 300 m of goguac-lake-mi's bounding box, which the feature's own box covers 89% of; both name battle creek)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Green Lake Stream",
+   "texts": [
+    "Green Lake Stream"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Wayland"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Highland Greens WWTP Discharge Pond",
+   "texts": [
+    "Highland Greens WWTP Discharge Pond"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Indian Mill Creek",
+   "texts": [
+    "Indian Mill Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Grand Rapids"
+   ],
+   "slugs": [
+    "indian-mill-creek-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Grand Rapids"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "Island Lake",
+   "texts": [
+    "Island Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Green Oak Charter Township"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "22 NHD waters of that name in MI and the reports give no place to choose one",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Jordan Lake",
+   "texts": [
+    "Jordan Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Lake Odessa"
+   ],
+   "slugs": [
+    "jordan-lake-mi"
+   ],
+   "how": [
+    "the only NHD water of that name in MI (the reports give no place)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name",
+   "notes": [
+    "2026-11-04: the NHD record jordan-lake-mi was dropped: openboatlaunch's jordan-lake-mi is this water (same name; 100% of the NHD feature lies within 300 m of jordan-lake-mi's bounding box, which the feature's own box covers 100% of)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Kids Creek",
+   "texts": [
+    "Kids Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Traverse City"
+   ],
+   "slugs": [
+    "kids-creek-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Traverse City"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "Lake Mitchell",
+   "texts": [
+    "Lake Mitchell"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "lake-mitchell-mi"
+   ],
+   "how": [
+    "the only NHD water of that name in MI (the reports give no place)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name",
+   "notes": [
+    "2026-11-04: the NHD record lake-mitchell-mi was dropped: openboatlaunch's lake-mitchell-mi is this water (same name; 100% of the NHD feature lies within 300 m of lake-mitchell-mi's bounding box, which the feature's own box covers 100% of)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Lake Orion",
+   "texts": [
+    "Lake Orion"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "lake-orion-mi"
+   ],
+   "how": [
+    "the only NHD water of that name in MI (the reports give no place)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name",
+   "notes": [
+    "2026-11-04: the NHD record lake-orion-mi was dropped: openboatlaunch's lake-orion-mi is this water (same name; 100% of the NHD feature lies within 300 m of lake-orion-mi's bounding box, which the feature's own box covers 88% of)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Little Travese Bay",
+   "texts": [
+    "Little Travese Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Lloyds Bayou",
+   "texts": [
+    "Lloyds Bayou"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Loch Erin",
+   "texts": [
+    "Loch Erin"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Brooklyn",
+    "Hudson",
+    "Jasper",
+    "Onsted"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "lower Rough river",
+   "texts": [
+    "lower Rough river"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Dearborn Heights"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Macatawa River",
+   "texts": [
+    "Macatawa River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Holland"
+   ],
+   "slugs": [
+    "macatawa-river-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Holland"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "Malletts Creek",
+   "texts": [
+    "Malletts Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Ann Arbor"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Middle River Rouge",
+   "texts": [
+    "Middle River Rouge"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Redford Township"
+   ],
+   "slugs": [
+    "middle-river-rouge-mi"
+   ],
+   "how": [
+    "GNIS name in MI, 502 m from Redford Township"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "Monarch Millpond",
+   "texts": [
+    "Monarch Millpond"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Kalamazoo"
+   ],
+   "slugs": [
+    "monarch-millpond-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Kalamazoo"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "No name natural watercourse",
+   "texts": [
+    "No name natural watercourse"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "old maid harris",
+   "texts": [
+    "old maid harris and whaley drain"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Dimondale"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Open ditch",
+   "texts": [
+    "Open ditch along the north side of I696 tributary to the Minnow Pond Chapter 20 Drain"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Novi"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "'Open ditch along the north side of I696 tributary to the Minnow Pond Chapter 20 Drain': a tributary of Open ditch (the tributary has no name of its own)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Painters Creek",
+   "texts": [
+    "Painters Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Partridge Creek",
+   "texts": [
+    "Carp Creek and Partridge Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Ishpeming"
+   ],
+   "slugs": [
+    "partridge-creek-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Ishpeming"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "Pebble Creek",
+   "texts": [
+    "Pebble Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Novi"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "1 NHD water of that name in MI, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1,
+   "places_failed": [
+    {
+     "town": "Novi",
+     "reason": "no NHD water of that name within 3 km of Novi (the nearest is 3.7 km away)"
+    }
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Pine Lake",
+   "texts": [
+    "Pine Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Remus"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "22 NHD waters of that name in MI and the reports give no place to choose one",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Pine Run Creek",
+   "texts": [
+    "Pine Run Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Pond with no outlet",
+   "texts": [
+    "Pond with no outlet"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Hamburg Township"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Potter",
+   "texts": [
+    "Potter and Mulliken IC Drain"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Mulliken"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Rayner Creek",
+   "texts": [
+    "Rayner Creek Drain"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Mason"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Red Run County",
+   "texts": [
+    "Red Run County Drain"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Warren"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "the status resolver gives the name to red-run-mi (another name): the name's own water is built"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Saint Clair Lake",
+   "texts": [
+    "Saint Clair Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "2 NHD waters of that name in MI and the reports give no place to choose one",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Secret Creek",
+   "texts": [
+    "Secret Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "L'Anse"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Shavehead Lake",
+   "texts": [
+    "Shavehead Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "shavehead-lake-mi"
+   ],
+   "how": [
+    "the only NHD water of that name in MI (the reports give no place)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "SPS 1B",
+   "texts": [
+    "Wetland directly next to SPS 1B"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "STDBKC190010",
+   "texts": [
+    "STDBKC190010 - Detention Basin"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Kalamazoo"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Stone Lake",
+   "texts": [
+    "Stone Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "3 NHD waters of that name in MI and the reports give no place to choose one",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "surface waters",
+   "texts": [
+    "onsite retention basin for parking lot run off- no direct discharge to surface waters"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Madison Charter Township"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "'onsite retention basin for parking lot run off- no direct discharge to surface waters': a tributary of surface waters (the tributary has no name of its own)"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "tracy mine",
+   "texts": [
+    "Unamed creek leading to unamed pond to tracy mine"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Tracy mine unnamed pond",
+   "texts": [
+    "Tracy mine unnamed pond"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Upper St Mary's River",
+   "texts": [
+    "Upper St Mary's River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Sault Ste Marie"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "the status resolver gives the name to saint-marys-river-mi (another name): the name's own water is built"
+   ]
+  },
+  {
+   "state": "MI",
+   "name": "Upper Straits Lake",
+   "texts": [
+    "Upper Straits Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Orchard Lake Village"
+   ],
+   "slugs": [
+    "upper-straits-lake-mi"
+   ],
+   "how": [
+    "GNIS name in MI, crossing Orchard Lake Village"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "MI",
+   "name": "water was discharged",
+   "texts": [
+    "The water was discharged into the Shiawassee river fully treated as the permit allows"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Byron",
+    "Linden"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "West Division",
+   "texts": [
+    "Storm Pond corner of Leeson and West Division"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "West Grand Traverse Bay",
+   "texts": [
+    "West Grand Traverse Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Traverse City"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "MI",
+   "name": "Upper River Rouge",
+   "texts": [
+    "Upper River Rouge"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 3,
+   "towns": [
+    "Livonia",
+    "Redford"
+   ],
+   "slugs": [
+    "upper-river-rouge-mi"
+   ],
+   "how": [
+    "GNIS name in MI, 20 m from the reports' point (42.40692, -83.29583)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1,
+   "places_failed": [
+    {
+     "lon": -83.31397,
+     "lat": 42.39333,
+     "reason": "no NHD water of that name within 2 km of the reports' point (42.39333, -83.31397) (the nearest is 2.0 km away)"
+    }
+   ],
+   "defined_by": "name"
   }
  ],
  "waters": [
@@ -2215367,6 +2215432,773 @@
       [
        -74.065279,
        40.657375
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "upper-river-rouge-mi",
+   "name": "Upper River Rouge",
+   "kind": "river",
+   "state": "MI",
+   "towns": [
+    "Detroit",
+    "Farmington",
+    "Farmington Hills",
+    "Livonia",
+    "Redford"
+   ],
+   "bbox": [
+    -83.39222,
+    42.38891,
+    -83.27065,
+    42.48678
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 18.15,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "1615411",
+   "comids": [
+    10849602,
+    10849606,
+    10849620
+   ],
+   "nhd_fcodes": [
+    46006
+   ],
+   "fetched_at": "2026-11-04T19:32:32Z",
+   "towns_from": "Census 2020 county subdivisions crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 3 network flowlines with GNIS id 1615411 in MI's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -83.392156,
+       42.486781
+      ],
+      [
+       -83.3916,
+       42.485889
+      ],
+      [
+       -83.391569,
+       42.485546
+      ],
+      [
+       -83.392217,
+       42.484083
+      ],
+      [
+       -83.392155,
+       42.48342
+      ],
+      [
+       -83.391382,
+       42.482277
+      ],
+      [
+       -83.390301,
+       42.481614
+      ],
+      [
+       -83.389714,
+       42.481683
+      ],
+      [
+       -83.388972,
+       42.481043
+      ],
+      [
+       -83.388138,
+       42.480997
+      ],
+      [
+       -83.387397,
+       42.480426
+      ],
+      [
+       -83.386408,
+       42.480106
+      ],
+      [
+       -83.386006,
+       42.479763
+      ],
+      [
+       -83.386006,
+       42.479351
+      ],
+      [
+       -83.386686,
+       42.479191
+      ],
+      [
+       -83.386717,
+       42.478962
+      ],
+      [
+       -83.386191,
+       42.478437
+      ],
+      [
+       -83.386315,
+       42.477796
+      ],
+      [
+       -83.386037,
+       42.477248
+      ],
+      [
+       -83.386376,
+       42.477065
+      ],
+      [
+       -83.386654,
+       42.476607
+      ],
+      [
+       -83.386314,
+       42.475762
+      ],
+      [
+       -83.385356,
+       42.47519
+      ],
+      [
+       -83.385541,
+       42.474298
+      ],
+      [
+       -83.38514,
+       42.47391
+      ],
+      [
+       -83.383842,
+       42.473498
+      ],
+      [
+       -83.383348,
+       42.473018
+      ],
+      [
+       -83.380383,
+       42.472379
+      ],
+      [
+       -83.380043,
+       42.472104
+      ],
+      [
+       -83.380043,
+       42.471624
+      ],
+      [
+       -83.380414,
+       42.471533
+      ],
+      [
+       -83.380352,
+       42.471258
+      ],
+      [
+       -83.379425,
+       42.470572
+      ],
+      [
+       -83.379394,
+       42.470138
+      ],
+      [
+       -83.378097,
+       42.469498
+      ],
+      [
+       -83.377387,
+       42.469407
+      ],
+      [
+       -83.377201,
+       42.468721
+      ],
+      [
+       -83.375873,
+       42.467966
+      ],
+      [
+       -83.375101,
+       42.466983
+      ],
+      [
+       -83.372198,
+       42.466503
+      ],
+      [
+       -83.37229,
+       42.465589
+      ],
+      [
+       -83.371951,
+       42.464903
+      ],
+      [
+       -83.370252,
+       42.464331
+      ],
+      [
+       -83.368461,
+       42.464217
+      ],
+      [
+       -83.368368,
+       42.462228
+      ],
+      [
+       -83.36809,
+       42.461953
+      ],
+      [
+       -83.365218,
+       42.46113
+      ],
+      [
+       -83.364879,
+       42.460719
+      ],
+      [
+       -83.364539,
+       42.459782
+      ],
+      [
+       -83.363211,
+       42.459393
+      ],
+      [
+       -83.362964,
+       42.458112
+      ],
+      [
+       -83.362378,
+       42.457564
+      ],
+      [
+       -83.3621,
+       42.457015
+      ],
+      [
+       -83.362439,
+       42.456375
+      ],
+      [
+       -83.362347,
+       42.456146
+      ],
+      [
+       -83.361482,
+       42.455689
+      ],
+      [
+       -83.36,
+       42.455506
+      ],
+      [
+       -83.359167,
+       42.454637
+      ],
+      [
+       -83.358889,
+       42.454545
+      ],
+      [
+       -83.357685,
+       42.45514
+      ],
+      [
+       -83.356882,
+       42.454797
+      ],
+      [
+       -83.356264,
+       42.454911
+      ],
+      [
+       -83.355863,
+       42.453813
+      ],
+      [
+       -83.355431,
+       42.453288
+      ],
+      [
+       -83.354319,
+       42.453173
+      ],
+      [
+       -83.3533,
+       42.452624
+      ],
+      [
+       -83.352158,
+       42.452395
+      ],
+      [
+       -83.351695,
+       42.451321
+      ],
+      [
+       -83.350923,
+       42.450566
+      ],
+      [
+       -83.348763,
+       42.449903
+      ],
+      [
+       -83.34796,
+       42.44908
+      ],
+      [
+       -83.345521,
+       42.448622
+      ],
+      [
+       -83.345151,
+       42.447936
+      ],
+      [
+       -83.344286,
+       42.447501
+      ],
+      [
+       -83.343669,
+       42.44757
+      ],
+      [
+       -83.342959,
+       42.447135
+      ],
+      [
+       -83.341693,
+       42.446861
+      ],
+      [
+       -83.341323,
+       42.446106
+      ],
+      [
+       -83.339625,
+       42.445991
+      ],
+      [
+       -83.337588,
+       42.446197
+      ],
+      [
+       -83.33731,
+       42.446311
+      ],
+      [
+       -83.337309,
+       42.446677
+      ],
+      [
+       -83.337001,
+       42.446814
+      ],
+      [
+       -83.335488,
+       42.446082
+      ],
+      [
+       -83.335211,
+       42.445761
+      ],
+      [
+       -83.334531,
+       42.445738
+      ],
+      [
+       -83.334007,
+       42.445555
+      ],
+      [
+       -83.332865,
+       42.44464
+      ],
+      [
+       -83.332927,
+       42.444137
+      ],
+      [
+       -83.332742,
+       42.444023
+      ],
+      [
+       -83.332001,
+       42.444023
+      ],
+      [
+       -83.331538,
+       42.443634
+      ],
+      [
+       -83.331538,
+       42.443428
+      ],
+      [
+       -83.332186,
+       42.4432
+      ],
+      [
+       -83.332187,
+       42.442834
+      ],
+      [
+       -83.331755,
+       42.442445
+      ],
+      [
+       -83.330428,
+       42.442079
+      ],
+      [
+       -83.329409,
+       42.44201
+      ],
+      [
+       -83.329223,
+       42.442216
+      ],
+      [
+       -83.328853,
+       42.442261
+      ],
+      [
+       -83.32839,
+       42.442101
+      ],
+      [
+       -83.328113,
+       42.441278
+      ],
+      [
+       -83.328329,
+       42.440912
+      ],
+      [
+       -83.329101,
+       42.440547
+      ],
+      [
+       -83.329225,
+       42.440318
+      ],
+      [
+       -83.327188,
+       42.43874
+      ],
+      [
+       -83.326911,
+       42.437893
+      ],
+      [
+       -83.323887,
+       42.43572
+      ],
+      [
+       -83.324135,
+       42.434829
+      ],
+      [
+       -83.323549,
+       42.434028
+      ],
+      [
+       -83.323488,
+       42.433342
+      ],
+      [
+       -83.323056,
+       42.432999
+      ],
+      [
+       -83.323056,
+       42.43245
+      ],
+      [
+       -83.323427,
+       42.43213
+      ],
+      [
+       -83.323798,
+       42.431399
+      ],
+      [
+       -83.323058,
+       42.430232
+      ],
+      [
+       -83.323336,
+       42.429547
+      ],
+      [
+       -83.322472,
+       42.428929
+      ],
+      [
+       -83.319694,
+       42.428653
+      ],
+      [
+       -83.319386,
+       42.428424
+      ],
+      [
+       -83.319541,
+       42.427098
+      ],
+      [
+       -83.319356,
+       42.426961
+      ],
+      [
+       -83.317597,
+       42.426823
+      ],
+      [
+       -83.317258,
+       42.426617
+      ],
+      [
+       -83.317227,
+       42.426229
+      ],
+      [
+       -83.317567,
+       42.425726
+      ],
+      [
+       -83.317475,
+       42.42488
+      ],
+      [
+       -83.317043,
+       42.424399
+      ],
+      [
+       -83.31547,
+       42.423804
+      ],
+      [
+       -83.314885,
+       42.421815
+      ],
+      [
+       -83.314454,
+       42.421426
+      ],
+      [
+       -83.314362,
+       42.420808
+      ],
+      [
+       -83.314794,
+       42.420145
+      ],
+      [
+       -83.314085,
+       42.419482
+      ],
+      [
+       -83.314209,
+       42.419253
+      ],
+      [
+       -83.31498,
+       42.418842
+      ],
+      [
+       -83.315258,
+       42.418522
+      ],
+      [
+       -83.31532,
+       42.418111
+      ],
+      [
+       -83.314828,
+       42.416967
+      ],
+      [
+       -83.314457,
+       42.416807
+      ],
+      [
+       -83.313902,
+       42.41699
+      ],
+      [
+       -83.313409,
+       42.416006
+      ],
+      [
+       -83.313008,
+       42.415732
+      ],
+      [
+       -83.312391,
+       42.415731
+      ],
+      [
+       -83.311712,
+       42.416005
+      ],
+      [
+       -83.311218,
+       42.415434
+      ],
+      [
+       -83.308164,
+       42.414517
+      ],
+      [
+       -83.308074,
+       42.412802
+      ],
+      [
+       -83.308568,
+       42.412277
+      ],
+      [
+       -83.308537,
+       42.411865
+      ],
+      [
+       -83.308167,
+       42.411659
+      ],
+      [
+       -83.307365,
+       42.411636
+      ],
+      [
+       -83.306502,
+       42.410972
+      ],
+      [
+       -83.305082,
+       42.410972
+      ],
+      [
+       -83.301905,
+       42.409964
+      ],
+      [
+       -83.300611,
+       42.408363
+      ],
+      [
+       -83.299439,
+       42.407973
+      ],
+      [
+       -83.298205,
+       42.407858
+      ],
+      [
+       -83.296817,
+       42.40708
+      ],
+      [
+       -83.296015,
+       42.406805
+      ],
+      [
+       -83.294844,
+       42.405478
+      ],
+      [
+       -83.293859,
+       42.403717
+      ],
+      [
+       -83.293274,
+       42.403099
+      ],
+      [
+       -83.292595,
+       42.402733
+      ],
+      [
+       -83.291084,
+       42.402389
+      ],
+      [
+       -83.289294,
+       42.402845
+      ],
+      [
+       -83.287968,
+       42.402364
+      ],
+      [
+       -83.286705,
+       42.401288
+      ],
+      [
+       -83.286337,
+       42.399482
+      ],
+      [
+       -83.285813,
+       42.399092
+      ],
+      [
+       -83.284548,
+       42.399092
+      ],
+      [
+       -83.282853,
+       42.398084
+      ],
+      [
+       -83.28205,
+       42.398312
+      ],
+      [
+       -83.280106,
+       42.398471
+      ],
+      [
+       -83.278287,
+       42.398264
+      ],
+      [
+       -83.278535,
+       42.397235
+      ],
+      [
+       -83.278537,
+       42.395428
+      ],
+      [
+       -83.278263,
+       42.393187
+      ],
+      [
+       -83.275611,
+       42.392271
+      ],
+      [
+       -83.27065,
+       42.388905
       ]
      ]
     ]

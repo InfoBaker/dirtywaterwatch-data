@@ -179,9 +179,40 @@ def outfall(f, permit, oid):
       for p in ("MI0020109", "MI0020991", "MI0022136", "MI0060273", "MIG570204", "MIG580404", "MIG580409", "MIG580415")],
     # Benton Harbor-St Joseph lies at the mouth, on openboatlaunch's polygon (5 m)
     ("outfalls-plants-us.json", "MI0022322", "SLD", "saint-joseph-river-mi"),
+    # the Upper River Rouge (NHD's name; EPA's 'Upper Rouge River'): Redford-Livonia's outfalls; the four whose EPA
+    # point lies on Bell Branch, its tributary, by the point rule (receiving_water_override, the basis on the row)
+    ("outfalls-us.json", "MI0051535", "001", "upper-river-rouge-mi"),
+    ("outfalls-us.json", "MI0051535", "0U3", "upper-river-rouge-mi"),
+    *[("outfalls-us.json", "MI0051535", o, "bell-branch-mi") for o in ("0U5", "0U9", "U10", "U11")],
+    # the point on Ashcroft-Sherwood Drain, which does not reach the Upper River Rouge in NHDPlus: name and point
+    # disagree, no record
+    ("outfalls-us.json", "MI0051535", "0U2", None),
+    # Grosse Pointe Shores: 'COMBINED SEWAGE TO LK.ST.CLAIR ONLY'
+    *[("outfalls-us.json", "MI0026085", o, "lake-saint-clair-mi") for o in ("001", "002", "003", "004")],
+    # Yale: the permit number typed as the water; EPA's discharge points give MIG580325 (Yale WWSL) Mill Creek
+    *[("outfalls-us.json", "MI0021270", o, "mill-creek-kenockee-mi") for o in ("002", "004", "005", "006", "007")],
+    # Capac's Lemon Drain: the unnamed NHDPlus flowline of EPA's reach 04090001000512
+    *[("outfalls-us.json", "MI0021733", o, "unnamed-tributary-to-belle-river-mi") for o in ("002", "003", "004")],
+    # GLWA's Rouge outfalls: Hubbell-Southfield and Baby Creek on the main River Rouge, Oakwood at the Detroit record
+    ("outfalls-us.json", "MI0022802", "101", "river-rouge-mi"), ("outfalls-us.json", "MI0022802", "107", "river-rouge-mi"),
+    ("outfalls-us.json", "MI0022802", "109", "river-rouge-detroit-mi"),
+    # Conner Creek (buried): no record of it, and no source names the water it reaches
+    ("outfalls-us.json", "MI0022802", "104", None),
 ])
 def test_michigan_outfalls_after_the_tidy(f, permit, oid, slug):
-    assert outfall(f, permit, oid)["water_slug"] == slug
+    r = outfall(f, permit, oid)
+    assert r["water_slug"] == slug
+    assert r.get("no_water_reason") if slug is None else r.get("water_match")
+    if r.get("receiving_water_override"):
+        assert "MI go-live audit 2026-11-04" in r["receiving_water_override"]["basis"]
+
+
+@pytest.mark.parametrize("text,slug", [
+    ("Upper Rouge River", "upper-river-rouge-mi"), ("Upper River Rouge", "upper-river-rouge-mi"),
+    ("Lemon Drain", "unnamed-tributary-to-belle-river-mi"),
+])
+def test_michigan_names_the_operators_type_reach_their_records(mi_resolver, text, slug):
+    assert mi_resolver.by_name(text, "MI", None, None, {})[0] == [slug]
 
 
 def test_the_petroleum_general_permits_outfalls_drive_no_sewage_caution():
