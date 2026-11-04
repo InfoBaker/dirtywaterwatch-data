@@ -122,7 +122,8 @@ def fake_nhd(features, towns=None):
     state = box(-85, 34, -75, 37)
     outlines = towns or {}
     return SimpleNamespace(states=SimpleNamespace(shapes={"NC": state}),
-                           towns=SimpleNamespace(outlines=lambda st, keys: [outlines[k] for k in keys if k in outlines]))
+                           towns=SimpleNamespace(outlines=lambda st, keys: [outlines[k] for k in keys if k in outlines],
+                                                 canonical=lambda st, name: name if name in outlines else None))
 
 
 def mill_creeks():
@@ -298,3 +299,27 @@ def test_the_files_reasons_are_counted_by_kind():
                          "run resumes") == "not reached this run"
     assert N.reason_kind("Pew Creek: no NHD flowline or waterbody of that name in GA", multi=True) == \
         "no NHD flowline or waterbody of that name in GA"
+
+
+def test_a_reports_spelling_is_asked_in_gniss_forms_and_scored_without_of():
+    t = N.Target(name="Lake Apopka", words=N.words("Lake Apopka"), report_name=True)
+    assert "APOPKA, LAKE" in N.sql_names(t)
+    t = N.Target(name="South Fork of Middle River", words=N.words("South Fork of Middle River"), report_name=True)
+    assert "SOUTH FORK MIDDLE RIVER" in N.sql_names(t)
+    assert N.report_score(t["words"], "South Fork Middle River") == 1.0
+    t = N.Target(name="Intracoastal Waterway", words=N.words("Intracoastal Waterway"), report_name=True)
+    assert {"ATLANTIC INTRACOASTAL WATERWAY", "GULF INTRACOASTAL WATERWAY"} <= set(N.sql_names(t))
+    assert N.report_score(t["words"], "Atlantic Intracoastal Waterway") == 0.9
+    assert N.report_score(N.words("Bull Creek"), "Atlantic Bull Creek") == 0.0
+    t = N.Target(name="Joe's Creek", words=N.words("Joe's Creek"), report_name=True)
+    assert {"JOES CREEK", "JOE CREEK"} <= set(N.sql_names(t))
+    t = N.Target(name="Wills Branch Creek", words=N.words("Wills Branch Creek"), report_name=True)
+    assert "WILLS BRANCH" in N.sql_names(t)
+    assert N.report_name_parts("Intercoastal Waterway")[0] == ["Intracoastal Waterway"]
+
+
+def test_a_towns_name_with_no_water_of_that_name_says_so():
+    town = Polygon([(-78.02, 35.54), (-77.98, 35.54), (-77.98, 35.58), (-78.02, 35.58)])
+    t = name_target("Coral Springs", points=[(-78.0, 35.55)])
+    _, reason, _ = N.report_name_choices(fake_nhd(None, {"Coral Springs": town}), t)
+    assert reason.startswith("the name of a town (Coral Springs)") and not N.wants_hr(reason)
