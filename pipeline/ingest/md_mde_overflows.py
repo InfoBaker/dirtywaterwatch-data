@@ -25,7 +25,9 @@ Quirks (research/md/report.md 2.2, and what this module found)
   - Event types: CSO -> cso, SSO -> sso, Bypass -> bypass, Unauthorized Discharge -> sso with the
     source's label kept in raw._source_type (docs/decisions.md, Maryland decision 2).
   - Times: start_date + start_time are local (America/New_York). ended_at = start + duration_day/
-    hour/minute when the duration is given (status ended); with no duration, status unknown.
+    hour/minute when the duration is given (status ended), as elapsed time (common.end_after: across a clock
+    change the end is the elapsed one; a start known only to the day gives the day of the latest end it allows);
+    with no duration, status unknown.
   - Coordinates (41% of rows): latitude and longitude are swapped on some rows, the longitude lacks
     its minus sign on others, one longitude is typed as degrees-minutes-seconds text. Each pair is
     tried as given, swapped, with the longitude's sign added, and both, and kept only in Maryland
@@ -83,7 +85,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from build import redact
-from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, ROOT, event, now_iso, parse_volume_gal,
+from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, ROOT, end_after, event, now_iso, parse_volume_gal,
                     path_notes_to_meta, read_json, save_raw, write_events, write_json)
 from ingest import md_waters
 
@@ -458,8 +460,9 @@ def build_record(row: dict, base: dict, raw: dict, ctx: dict) -> dict:
     dur = duration_of(row)
     ended_at = None
     if start is not None and dur is not None:
-        ended_at = (start + dur).isoformat()
-        raw["_ended_at_basis"] = "start + duration_day/hour/minute"
+        end, basis = end_after(start, dur, prec)
+        ended_at = end.isoformat()
+        raw["_ended_at_basis"] = f"start + duration_day/hour/minute ({basis})"
         status = "ended"
     else:
         status = "unknown"

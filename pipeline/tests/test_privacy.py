@@ -168,3 +168,14 @@ def test_export_scrubs_events_written_under_older_rules():
     assert out["outfall_name"] == "Outfall 004 (Inspector [name removed])"
     assert out["advice_text"] == "Avoid contact for 48 hours"
     assert e["raw"]["inspector"] == "Eddy"                       # the input is not changed
+
+
+def test_number_ranges_with_units_are_not_phone_numbers():
+    """common.scrub_text (and so strip_personal on every module's raw) keeps "500-1000 feet" and "10-20 gallons",
+    and still removes phone numbers (review 2026-11-04 P2-1)."""
+    from common import scrub_text, strip_personal
+    for t in ("Hammond Branch, about 500-1000 feet away", "10-20 gallons", "spilled 100-1500 gallons",
+              "from 830-1030 am", "rose 100-1500% overnight"):
+        assert scrub_text(t) == t and strip_personal({"note": t}) == {"note": t}, t
+    for t in ("call 410-555-0199", "or 555-0199 after hours", "(410) 555-0199", "410.555.0199"):
+        assert "[phone removed]" in scrub_text(t), t
