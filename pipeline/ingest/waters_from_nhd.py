@@ -2690,8 +2690,9 @@ HAND: list[dict] = [
          why=("Florida DEP's pollution notices name 'Johns Pass' / 'Intracoastal Waterway of John's Pass' as the water "
               "reached (2 reports, Madeira Beach, St. Petersburg). NHDPlus V2.1 and the NHD high-resolution flowlines "
               "carry no water of that name there; GNIS lists Johns Pass (feature 284857, class Channel, Pinellas "
-              "County) at 27.78364 N 82.78177 W, and this record is the Census TIGER/Line area water polygon that holds "
-              "that point (the Census gives it no name), 204 m from the nearest report point.")),
+              "County) at 27.78364 N 82.78177 W, and this record is the Census TIGER/Line area water polygon of the pass "
+              "between the Gulf and Boca Ciega Bay, 95 m from that point (the Census gives it no name; the point itself "
+              "lies just inside the bay, in the Census's Boca Ciega Bay polygon), 204 m from the nearest report point.")),
     dict(name='Clearwater Bay', state="FL", kind="bay", source="census", service="tiger", gnis_id='297360',
          oids=['11098597690'],
          near=(-82.8218934, 27.9720747),
