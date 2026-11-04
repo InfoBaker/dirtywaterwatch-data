@@ -14,6 +14,7 @@ from pathlib import Path
 import pytest
 
 from common import DATA_DIR, ROOT
+from ingest import dischargers_schema as L
 from ingest import nc_dwr_sso as S
 
 _spec = importlib.util.spec_from_file_location("add_nc_operators", ROOT / "scripts" / "add_nc_operators.py")
@@ -93,7 +94,7 @@ def test_every_researched_permit_is_held_by_exactly_one_north_carolina_row():
                         e["source"]["url"])
     rows = {r["id"]: r for r in REGISTRY}
     aqua = rows["nc-aqua-north-carolina"]
-    assert aqua["legal_form"] == "private utility" and len(aqua["npdes_permits"]) == 10
+    assert aqua["legal_form"] == "investor-owned utility" and len(aqua["npdes_permits"]) == 10
     assert aqua["notification_channel"] == OPS.LAW and "G.S. 143-215.1C" in aqua["notes"]
     assert rows["nc-pcs-phosphate-company"]["notification_channel"] == OPS.LAW_C        # industrial: (c)
     assert "WQCSD0135" in rows["nc-henderson-county"]["npdes_permits"]                    # a public owner's row grew
@@ -108,7 +109,8 @@ def test_a_permittee_who_is_an_individual_is_never_named():
     # every row made from the research names a body: a company, an association, a club, a district, a public body
     org = re.compile(r"\b(Inc|LLC|Ltd|Company|Corporation|Association|Club|Communities|County|Town|District|"
                      r"Utilities|Service)\b")
-    made = [r for r in REGISTRY if r["state"] == "NC" and r.get("legal_form") in OPS.LEGAL_FORMS]
+    forms = {OPS.registry_form(f) for f in OPS.LEGAL_FORMS}
+    made = [r for r in REGISTRY if r["state"] == "NC" and r.get("legal_form") in forms]
     assert len(made) == 23
     assert [r["name"] for r in made if not org.search(r["name"])] == []
     assert [e["operator"] for e in PRIVATE["collection_permits"] + PRIVATE["plant_permits"]
@@ -218,7 +220,7 @@ def test_the_script_makes_one_row_per_private_operator_grows_a_public_row_and_ke
     assert [r["state"] for r in out][-1] == "GA"                      # new rows go in after the last NC row
     rows = {r["id"]: r for r in out}
     aqua = rows["nc-aqua-north-carolina"]
-    assert aqua["npdes_permits"] == ["WQCS00147", "WQCS00380"] and aqua["legal_form"] == "private utility"
+    assert aqua["npdes_permits"] == ["WQCS00147", "WQCS00380"] and aqua["legal_form"] == "investor-owned utility"
     assert aqua["kind"] == "sso" and aqua["towns"] == ["Raleigh", "Wake Forest"]
     assert aqua["receiving_waters"] == ["Mill Creek"]                 # "Private pond" names no water
     assert "WQCS00147" in aqua["permit_note"] and "edocs.deq.nc.gov" in aqua["permit_note"]
@@ -227,7 +229,8 @@ def test_the_script_makes_one_row_per_private_operator_grows_a_public_row_and_ke
     hc = rows["nc-henderson-county"]
     assert hc["npdes_permits"] == ["NC0000001", "WQCSD0135", "NC0000003"] and hc["outfall_count"] == 2
     cat = rows["nc-example-catering"]
-    assert cat["kind"] == "plant" and cat["legal_form"] == "private company" and cat["towns"] == ["Pantego"]
+    assert cat["kind"] == "plant" and cat["legal_form"] == "business or industrial" and cat["towns"] == ["Pantego"]
+    assert {r.get("legal_form") for r in out if r.get("legal_form")} <= set(L.LEGAL_FORMS)   # the controlled values
     assert not any("NC0000004" in r.get("npdes_permits", []) for r in out)   # private, not researched: skipped
     assert not any("WQCSD0998" in r.get("npdes_permits", []) for r in out)   # no owner on record: no row
     assert "No Permit" not in paths["DIS"].read_text()

@@ -28,11 +28,12 @@
   "permittee_name_removed": 42,
   "by_legal_form_proposed": {
    "business or industrial": 404,
-   "campground or resort": 43,
+   "campground or resort": 42,
    "facility (permittee not named)": 1,
-   "homeowners' association": 12,
+   "homeowners' association": 11,
    "institution": 15,
-   "investor-owned utility": 259,
+   "investor-owned utility": 214,
+   "member-owned utility": 47,
    "mobile-home park": 20,
    "not stated by the names": 33,
    "private club": 4
@@ -219,7 +220,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -466,7 +467,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -549,7 +550,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -590,7 +591,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -1089,7 +1090,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -1336,7 +1337,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "homeowners' association",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -1582,7 +1583,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -1624,7 +1625,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -2657,7 +2658,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -2863,7 +2864,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -2987,7 +2988,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -3978,7 +3979,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -4226,7 +4227,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -4267,7 +4268,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -4926,7 +4927,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -5092,7 +5093,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -6253,7 +6254,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -6417,7 +6418,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -7036,7 +7037,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -7200,7 +7201,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -7282,7 +7283,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -7449,7 +7450,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -8027,7 +8028,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -8150,7 +8151,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -8233,7 +8234,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -8399,7 +8400,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -8440,7 +8441,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -8481,7 +8482,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -9471,7 +9472,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -9840,7 +9841,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -10212,7 +10213,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -10378,7 +10379,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -10460,7 +10461,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -11365,7 +11366,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -11407,7 +11408,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -11612,7 +11613,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -11861,7 +11862,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -12727,7 +12728,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -12850,7 +12851,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "campground or resort",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -14040,7 +14041,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -15801,7 +15802,7 @@
     "SIC 4952 (sewerage systems)",
     "permit component POTW"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
     "facility_type": "Mixed Ownership (e.g., Public/Private)",
@@ -16492,7 +16493,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -16533,7 +16534,7 @@
    "sewage_basis": [
     "permit component POTW"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type NON-POTW; the name reads as a private body",
     "facility_type": "NON-POTW",
@@ -16902,7 +16903,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",
@@ -18380,7 +18381,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type blank; the name reads as a private body",
     "facility_type": null,
@@ -21008,7 +21009,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Privately Owned Facility",
     "facility_type": "Privately Owned Facility",
@@ -29333,7 +29334,7 @@
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
    ],
-   "legal_form_proposed": "investor-owned utility",
+   "legal_form_proposed": "member-owned utility",
    "ownership": {
     "basis": "EPA facility type Corporation",
     "facility_type": "Corporation",

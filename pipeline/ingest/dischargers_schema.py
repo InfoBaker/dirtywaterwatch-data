@@ -1,17 +1,19 @@
-"""The operator registry's legal forms (data/dischargers.json `legal_form`): one controlled list, and a check that warns
-and never fails. A helper, not a feed (`make ingest` leaves it out).
+"""The operator registry's legal forms (data/dischargers.json `legal_form`): one controlled list, and a check. A helper,
+not a feed (`make ingest` leaves it out).
 
 Run from pipeline/:  python -m ingest.dischargers_schema [--strict]
 
-The controlled list (LEGAL_FORMS) has a public side and a private side. A value the registry already uses that is not
-on the list maps to one (LEGACY); a row whose name contradicts its value's mapping has its own target (ROW_OVERRIDES).
-Neither renames anything: the mapping is a proposal (docs/legal-forms.md) applied as its own reviewed change once the
-open state branches have merged. The check (check_legal_forms) returns warnings:
+The controlled list (LEGAL_FORMS) has a public side and a private side. Every row of data/dischargers.json carries a
+value on the list (the renaming of 2026-11-04, docs/legal-forms.md, applied the mapping below and the per-row targets
+for the Georgia county departments, the consolidated city-counties, JEA and Lee County's Fiesta Village plant to the
+rows themselves). A value a builder's source still uses that is not on the list maps to one (LEGACY): a research file
+or scripts/add_nc_operators.py, which writes the mapped value. The check (check_legal_forms) returns warnings:
   - a value neither on the list nor mapped (unmapped);
+  - a value not on the list but mapped (legacy): map it before the row goes in;
   - a private form on a row whose name reads as a public body, or a public form on a row whose name reads as a company
     or association (a public district once filed as a privately owned facility).
-A row with no legal_form is not warned about (most rows have none yet). `--strict` exits 1 when a value is unmapped;
-without it the exit is 0 whatever the warnings.
+A row with no legal_form is not warned about (most rows have none yet). `--strict` exits 1 when a value is not on the
+list (unmapped or legacy); the tests run it on the registry. Without it the exit is 0 whatever the warnings.
 """
 from __future__ import annotations
 
@@ -26,15 +28,17 @@ from common import DATA_DIR
 
 PUBLIC_FORMS = ("city", "town", "county", "authority", "special district", "federal facility", "state facility",
                 "tribal")
-PRIVATE_FORMS = ("investor-owned utility", "homeowners' association", "mobile-home park", "campground or resort",
+PRIVATE_FORMS = ("investor-owned utility", "member-owned utility", "homeowners' association", "mobile-home park", "campground or resort",
                  "private club", "business or industrial", "institution", "facility (permittee not named)")
 LEGAL_FORMS = PUBLIC_FORMS + PRIVATE_FORMS
 
-# values in use (data/dischargers.json, scripts/add_nc_operators.py LEGAL_FORMS, research/<st>/dischargers.json) ->
-# the controlled value
+# values the builders' sources use (scripts/add_nc_operators.py LEGAL_FORMS, research/<st>/dischargers.json, and the
+# values data/dischargers.json used before the renaming) -> the controlled value. A row whose name contradicted its
+# value's mapping (a Georgia county department filed "municipal", JEA "municipal utility", Lee County's Fiesta Village
+# plant "village") now carries its own value; a new such row is set by hand.
 LEGACY = {
-    "municipal": "city",                   # Georgia: a city's or a county's department (ROW_OVERRIDES for counties)
-    "municipal utility": "city",           # Florida: JEA (ROW_OVERRIDES)
+    "municipal": "city",                   # Georgia, before the renaming (the four county departments are "county")
+    "municipal utility": "city",           # Florida, before the renaming (its one row, JEA, is an "authority")
     "village": "town",                     # a village, borough or township is a town on the list
     "borough": "town",
     "township": "town",
@@ -47,19 +51,6 @@ LEGACY = {
     "owners' association": "homeowners' association",
 }
 
-# rows whose name contradicts their value's mapping: id -> (controlled value, why)
-ROW_OVERRIDES = {
-    "ga-cobb-county": ("county", "Cobb County Water System is a county department"),
-    "ga-dekalb-dwm": ("county", "DeKalb County Department of Watershed Management"),
-    "ga-fulton-county": ("county", "Fulton County Department of Public Works"),
-    "ga-gwinnett-county": ("county", "Gwinnett County Department of Water Resources"),
-    "ga-augusta-utilities": ("city", "Augusta-Richmond County is a consolidated city-county government"),
-    "ga-columbus-water-works": ("city", "a board of the consolidated city-county government of Columbus"),
-    "fl-jea": ("authority", "JEA is an independent authority of the City of Jacksonville, not a city department"),
-    "fl-fl0039829": ("county", "LEE COUNTY UTILITIES - FIESTA VILLAGE: Lee County's plant; 'village' is the plant's "
-                               "name, not the permittee's form"),
-}
-
 PUBLIC_NAME = re.compile(
     r"^(city|town|village|borough|township|county)\s+of\b|\b(city|town|village|borough|township)\s+of\b|"
     r",\s*(city|town|village|borough)\s+of\b|\bcounty\b|\bauthority\b|\bmunicipal|\b(utility|sanitary|sanitation|"
@@ -70,12 +61,10 @@ PRIVATE_NAME = re.compile(r"\b(inc|llc|l\.l\.c|ltd|lp|corp|corporation|company|a
 
 
 def controlled(row: dict) -> tuple[str | None, str]:
-    """(the controlled value, how): how is "controlled", "mapped", "override", "unmapped" or "absent"."""
+    """(the controlled value, how): how is "controlled", "mapped", "unmapped" or "absent"."""
     v = row.get("legal_form")
     if not v:
         return None, "absent"
-    if row.get("id") in ROW_OVERRIDES:
-        return ROW_OVERRIDES[row["id"]][0], "override"
     if v in LEGAL_FORMS:
         return v, "controlled"
     if v in LEGACY:
@@ -95,6 +84,9 @@ def check_legal_forms(rows: list[dict]) -> list[str]:
             out.append(f"{rid}: legal_form {r.get('legal_form')!r} is not on the controlled list and has no mapping "
                        f"(ingest/dischargers_schema.py LEGAL_FORMS, LEGACY)")
             continue
+        if how == "mapped":
+            out.append(f"{rid}: legal_form {r.get('legal_form')!r} is not on the controlled list; it maps to "
+                       f"{value!r} (ingest/dischargers_schema.py LEGACY): write that")
         if value in PRIVATE_FORMS and PUBLIC_NAME.search(name) and not PRIVATE_NAME.search(name):
             out.append(f"{rid}: legal_form {r.get('legal_form')!r} is private but the name {name!r} reads as a public "
                        f"body: check the permit")
@@ -112,9 +104,9 @@ def summary(rows: list[dict]) -> dict:
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Check data/dischargers.json legal forms (warnings only)")
+    ap = argparse.ArgumentParser(description="Check data/dischargers.json legal forms (--strict fails on a value not on the list)")
     ap.add_argument("--file", default=str(DATA_DIR / "dischargers.json"))
-    ap.add_argument("--strict", action="store_true", help="exit 1 when a value is unmapped")
+    ap.add_argument("--strict", action="store_true", help="exit 1 when a value is not on the controlled list")
     a = ap.parse_args(argv)
     rows = json.loads(Path(a.file).read_text())
     s = summary(rows)
@@ -125,7 +117,7 @@ def main(argv=None) -> int:
     for w in warns:
         print("WARNING " + w)
     print(f"{len(warns)} warning(s)")
-    return 1 if a.strict and s["by_how"].get("unmapped") else 0
+    return 1 if a.strict and (s["by_how"].get("unmapped") or s["by_how"].get("mapped")) else 0
 
 
 if __name__ == "__main__":

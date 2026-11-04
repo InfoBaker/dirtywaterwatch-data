@@ -2,10 +2,10 @@
 
 Every operator row in `data/dischargers.json` may carry `legal_form`: what kind of body holds the permit. The value
 decides how a row is described (a public body is never called privately owned, a company never a public utility) and
-groups operators across states. Until now each state build chose its own words; the registry holds 17 values on 191
-rows (4,476 rows in all; the rest have none yet). This page proposes one short list, the mapping of every value in use,
-and the rows whose name contradicts their value. Nothing is renamed yet: the renaming is its own reviewed change, made
-once the open state branches have merged (so `data/dischargers.json` does not conflict).
+groups operators across states. Each state build chose its own words (17 values on 95 rows of 4,500 on 2026-11-04);
+this page sets one short list, the mapping of every value that was in use, and the rows whose name contradicted their
+value. The renaming was applied on 2026-11-04 (branch `eng/registry-hygiene`): every `legal_form` in
+`data/dischargers.json` is now on the list, and the tests run the check with `--strict`.
 
 The check runs from `pipeline/`:
 
@@ -14,9 +14,10 @@ python -m ingest.dischargers_schema            # counts per value and its contro
 python -m ingest.dischargers_schema --strict   # exit 1 when a value is neither on the list nor mapped
 ```
 
-It warns (never fails) on a value that is neither on the list nor mapped, on a private form whose row name reads as a
-public body (a public water and sewer district once filed as a privately owned facility),
-and on a public form whose row name reads as a company or association. On today's file it gives no warning.
+It warns on a value that is neither on the list nor mapped, on a value that is mapped but not on the list (write the
+controlled value), on a private form whose row name reads as a public body (a public water and sewer district once filed
+as a privately owned facility), and on a public form whose row name reads as a company or association. `--strict` fails
+on any value not on the list; on today's file it gives no warning.
 
 ## The list
 
@@ -31,6 +32,7 @@ and on a public form whose row name reads as a company or association. On today'
 | public | `state facility` | a state installation (a state park, university, prison or hospital) |
 | public | `tribal` | a tribal government or tribal utility |
 | private | `investor-owned utility` | a company whose business is water or sewer service (Aqua, American Water, Corix, a small sewer company) |
+| private | `member-owned utility` | a non-profit water or sewer utility owned by its members (a Texas water supply corporation) |
 | private | `homeowners' association` | a homeowners', property owners' or condominium association |
 | private | `mobile-home park` | a mobile-home or manufactured-housing community |
 | private | `campground or resort` | a campground, RV park, marina or resort |
@@ -39,9 +41,11 @@ and on a public form whose row name reads as a company or association. On today'
 | private | `institution` | a private school, college, hospital, nursing home, church, camp or retreat |
 | private | `facility (permittee not named)` | the permittee is an individual and is never named; the row names the facility |
 
-## Values in use and their mapping
+## Values that were in use and their mapping
 
-Counts are rows of `data/dischargers.json` on main (2026-11-04), plus the values two other sources allow.
+Counts are rows of `data/dischargers.json` on main before the renaming (2026-11-04), plus the values two other sources
+allow. The mapping stays in `LEGACY` for the research files and `scripts/add_nc_operators.py`, which writes the
+controlled value.
 
 | Value in use | Rows | States | Controlled value | Note |
 |---|---|---|---|---|
@@ -66,7 +70,7 @@ Counts are rows of `data/dischargers.json` on main (2026-11-04), plus the values
 | `district` | 0 | (research) | `special district` | used in a `research/<st>/dischargers.json` row |
 | `borough`, `township` | 0 | | `town` | mapped ahead of Pennsylvania and New Jersey rows |
 
-## Rows whose name contradicts their value
+## Rows whose name contradicted their value (set one by one in the renaming)
 
 | Row | Value | Controlled value | Why |
 |---|---|---|---|
@@ -79,19 +83,31 @@ Counts are rows of `data/dischargers.json` on main (2026-11-04), plus the values
 | `fl-jea` | `municipal utility` | `authority` | JEA is an independent authority of the City of Jacksonville |
 | `fl-fl0039829` | `village` | `county` | Lee County's plant; "Fiesta Village" is the plant's name |
 
-## To decide before the renaming
+## The renaming (2026-11-04)
 
-1. **The list itself.** In particular whether `investor-owned utility` should read `private utility`: a Texas water
-   supply corporation (WSC) is a member-owned non-profit, not investor-owned, and 46 of them (all in Texas) are
-   among the private candidates. Either keep `investor-owned utility` and add `member-owned utility (cooperative)`,
-   or use `private utility` for both.
-2. **`municipal` in Georgia** maps to `city`, with the four county departments as overrides; or the eight rows are
-   re-read one by one.
-3. **JEA** as `authority` (its charter) or `city` (Jacksonville's utility).
-4. **The four North Carolina `private company` rows** as `business or industrial`, or one by one from the permit
-   documents (one may be a utility).
-5. **When to rename**: one reviewed change after the open state branches merge; the check then runs with `--strict`
-   in the tests, so every new row uses the list.
+The calls of the private-utilities review (2026-11-04): keep `investor-owned utility` and add `member-owned utility`
+for Texas water supply corporations; Georgia `municipal` to `city` with the four county departments as `county`; JEA
+`authority`; the four North Carolina `private company` rows `business or industrial` by default (a permit document may
+still show one runs a utility service for others: then it is set by hand). 37 rows changed; nothing else in them.
+
+| Controlled value | Rows before | Rows after |
+|---|---:|---:|
+| `city` | 43 | 47 |
+| `town` | 3 | 3 |
+| `county` | 1 | 16 |
+| `authority` | 2 | 5 |
+| `special district` | 2 | 2 |
+| `federal facility` | 3 | 3 |
+| `investor-owned utility` | 0 | 8 |
+| `member-owned utility` | 0 | 0 |
+| `business or industrial` | 0 | 6 |
+| `homeowners' association` | 0 | 1 |
+| `mobile-home park` | 3 | 3 |
+| `private club` | 1 | 1 |
+| values not on the list | 37 | 0 |
+
+No Texas row is in the registry yet; the 47 Texas candidates that name a water supply corporation propose
+`member-owned utility`.
 
 The private candidates of every state (`research/<st>/private-utilities-candidates.json`, from
 `scripts/private_utilities.py`) already propose values from this list (`legal_form_proposed`), as hints from the names
