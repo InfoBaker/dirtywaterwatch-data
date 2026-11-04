@@ -383,7 +383,8 @@ def split_names(text: str, point_mode: bool) -> list[str]:
 
 
 INVERTED = re.compile(r"^\s*([^,]+?),\s*([A-Za-z.' ]{2,20}?)\s*$")
-INVERTED_LEAD = {"lake", "lakes", "bayou", "mount", "point", "lac", "bay", "big", "little", "old", "the"}
+INVERTED_LEAD = {"lake", "lakes", "bayou", "mount", "point", "lac", "bay", "big", "little", "old", "the",
+                 "river"}         # 'Rouge, River' (Michigan, 2026-11-04): River Rouge
 
 
 def gnis_display(name: str | None) -> str | None:
