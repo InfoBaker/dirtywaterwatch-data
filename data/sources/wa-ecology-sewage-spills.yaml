@@ -1,0 +1,39 @@
+id: "wa-ecology-sewage-spills"
+name: "Washington Ecology Sewage Spills list (RCW 90.48.636 public website)"
+url: "https://ecology.wa.gov/water-shorelines/water-quality/wastewater/sewage-spills"
+homepage: "https://ecology.wa.gov/water-shorelines/water-quality/wastewater/sewage-spills"
+kind: "arcgis"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/wa_ecology_spills.py
+#   (data/build/events/wa-ecology-sewage-spills.json), hourly, the whole layer each run; safe fields only (the
+#   operator's narrative is never requested). The research row has the same id.
+# Notes (research/wa, status used, verified fetched, checked 2026-11-04): The statewide dated feed
+#   Washington's law requires, read by pipeline/ingest/wa_ecology_spills.py.
+# Access detail (research, quoted): The page embeds an ArcGIS Experience ('Sewage spill table only',
+#   item 4fb5f533aabb41ce9e5bd8aa59284ab6) whose table reads the public hosted layer
+#   https://gis.ecology.wa.gov/hosting/rest/services/Hosted/survey123_48de962d0dea40eb9485805510a40b84_results/FeatureServer/0
+#   (Query, Extract; 72 reports from 2026-06-15 on 2026-11-04). The portal, item and layer answered
+#   HTTP 200 to the project user agent on 2026-11-04; the firewall refusal of 2026-11-03 was with
+#   another client. Every point on the layer is 0,0.
+# Can fill: started_at, ended_at (once known), volume (estimated, then final), level of treatment,
+#   location, geographic area potentially impacted, waters impacted (final), link to official report
+# Cannot fill: coordinates (all 0,0); Ecology's receipt and posting times; permit number (facility
+#   name only)
+# Waters: statewide; spills reported under individual water quality permits
+# History: Every report since the site began (2026-06-15) stays on the layer.
+# Research notes: Excludes private backups, illegal dumping and other spills. Ecology reports
+#   roughly 300 sewage spills a year (search).
+cadence: "1 hour"
+# Ecology: "After we receive the report from the facility, our goal is to publish the information within five working
+#   days." Final information is added after the spill concludes.
+license: "Page disclaimer: 'This information is provided as it has been reported. It has not been independently verified by Ecology. The information is provided for educational, informational, and research purposes.'"
+attribution: "Washington State Department of Ecology"
+enabled: true
+role: "events"
+event_types: ["sso", "cso", "bypass", "plant_bypass", "unknown"]
+states: ["WA"]
+access: ["html", "arcgis"]
+access_detail: "The page embeds an ArcGIS Experience ('Sewage spill table only', item 4fb5f533aabb41ce9e5bd8aa59284ab6) whose table reads the public hosted layer https://gis.ecology.wa.gov/hosting/rest/services/Hosted/survey123_48de962d0dea40eb9485805510a40b84_results/FeatureServer/0 (Query, Extract; 72 reports from 2026-06-15 on 2026-11-04). The portal, item and layer answered HTTP 200 to the project user agent on 2026-11-04; the firewall refusal of 2026-11-03 was with another client. Every point on the layer is 0,0."
+machine_readable: true
+legal_basis: "RCW 90.48.632, 90.48.636 (2025 c 315)"
+checked: "2026-11-04"

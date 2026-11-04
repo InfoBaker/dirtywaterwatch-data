@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1208 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1222 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -28,7 +28,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | nc | 9 | 1 | 6 | 1 | 0 | 17 |
 | ga | 7 | 0 | 4 | 1 | 0 | 12 |
 | fl | 5 | 0 | 5 | 1 | 0 | 11 |
-| **all** | **423** | **217** | **333** | **174** | **61** | **1208** |
+| wa | 5 | 4 | 4 | 1 | 0 | 14 |
+| **all** | **428** | **221** | **337** | **175** | **61** | **1222** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1327,3 +1328,22 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `fl-sarasota-abnormal-event` | Sarasota County AbnormalEventSpill layer | watch | search_only | events | County spill layer found by ArcGIS search; not opened. The PNP feed covers the same events. |
 | `fl-wwals` | WWALS Watershed Coalition pollution notice tracking | watch | search_only | prior_art | Posts and archives FL PNP and GA spill reports for the Suwannee basin. |
 | `fl-epa-sobe` | EPA SOBE extract, FL rows | rejected | inferred | events | No FL rows on 2026-11-03; FL reports through the State Watch Office and PNP. |
+
+## wa: Washington (14)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `wa-ecology-sewage-spills` | Washington Ecology Sewage Spills list (RCW 90.48.636 public website) | used | fetched | events | The statewide dated feed Washington's law requires, read by pipeline/ingest/wa_ecology_spills.py. |
+| `wa-epa-sobe` | EPA eRule SOBE extract (Washington permits) | used | fetched | events | Read by the national eRule ingester (echo-sewer-overflow) with Washington in its states: 1 of 36 rows kept (a bypass to Puget Sound); the SSOs name no water. |
+| `wa-kc-cso-status-csv` | King County / Seattle CSO overflow status CSV (behind the King County CSO status map) | used | fetched | events | Read every hour as a snapshot (data/sources/wa-kc-cso-status-csv.yaml, generic snapshot block); events open and close at the polls. |
+| `wa-rcw-90-48-636` | RCW 90.48.636 Sewage spills - Website - Notices (2025 c 315, Sewage Spill Right to Know) | used | fetched | law | State duty to publish each permitted facility's reported sewage spill on a public website. |
+| `wa-wac-173-245` | WAC 173-245 Submission of plans and reports for construction and operation of combined sewer overflow reduction facilities | used | search_only | law | CSO annual reporting and reduction plans; the public-notice duty sits in individual permits (not read). |
+| `wa-beach-program` | Washington BEACH program (Ecology and DOH) swimming beach advisories and status map | candidate | search_only | advisories | Advisories are issued by local health departments; a status map exists; no service URL found in the time box. |
+| `wa-doh-shellfish-closures` | Washington DOH Shellfish Safety Map and commercial growing area closures (incl. sewage-spill emergency closures) | candidate | search_only | advisories | DOH closes shellfish beaches after sewage spills (Ecology's page points here); health line 800-525-0127. Service not examined. |
+| `wa-ecology-freshwater-algae` | Washington State Toxic Algae (Ecology freshwater algae program, nwtoxicalgae.org) | candidate | search_only | advisories | Bloom reports and toxin results by lake; not fetched. |
+| `wa-spokane-cso-update` | City of Spokane Real Time Combined Sewer Overflow Monitoring (CSOUpdate) | candidate | fetched | events | Dated CSO starts for Spokane, but bot-walled to scripts; owner should ask the City for a feed or allow-listing. |
+| `wa-ecology-paris` | Ecology PARIS water quality permit database | watch | search_only | permits | Permits, DMRs and documents per facility; context for CSO annual reports. Not queried. |
+| `wa-kc-cso-outfall-locations` | King County GIS Open Data: Combined Sewer Outfall Locations | watch | search_only | outfalls | Outfall points and categories; the status CSV already carries coordinates. |
+| `wa-kc-swimming-beach-bacteria` | King County swimming beach bacteria monitoring | watch | search_only | monitoring | Lake beaches; not fetched. |
+| `wa-spokane-annual-cso` | City of Spokane annual CSO reports | watch | search_only | monitoring | Annual totals per outfall (2015-2017 PDFs seen in search). |
+| `wa-ecology-erts` | Ecology Environmental Report Tracking System (ERTS) | rejected | search_only | events | Intake system for complaints and spill reports; no public list found; the sewage spill website is its public output for permitted facilities. |

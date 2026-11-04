@@ -1,0 +1,25 @@
+id: "wa-epa-sobe"
+name: "EPA eRule SOBE extract (Washington permits)"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+kind: "csv"
+level: "federal"
+# Notes (research/wa, status used, verified fetched, checked 2026-11-04): Read by the national eRule
+#   ingester (echo-sewer-overflow) with Washington in its states: 1 of 36 rows kept (a bypass to
+#   Puget Sound); the SSOs name no water.
+# Access detail (research, quoted): Local copy of the national extract: 36 Washington events,
+#   WA0021954 (American Water Military Services, Joint Base Lewis-McChord; an EPA-issued
+#   federal-facility permit) 33 and WA0037168 (Puyallup) 3; start dates 2023-02-17 to 2026-09-02.
+#   None from King County, contrary to the national brief.
+cadence: "daily extract; events weeks after occurrence"
+license: "none stated"
+attribution: "US EPA"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["WA"]
+access: ["csv"]
+access_detail: "Local copy of the national extract: 36 Washington events, WA0021954 (American Water Military Services, Joint Base Lewis-McChord; an EPA-issued federal-facility permit) 33 and WA0037168 (Puyallup) 3; start dates 2023-02-17 to 2026-09-02. None from King County, contrary to the national brief."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-04"

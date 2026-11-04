@@ -39,6 +39,10 @@
 #                  for every notice since 2017), fl_dep_habs (DEP algal bloom visits), fl_doh_beaches
 #                  (Healthy Beaches result pages: a full pass starts at most every 20 hours and is spread over
 #                  hourly runs, at most 6 minutes of pages a run, resumed where it stopped)
+#                  Washington: wa_ecology_spills (Ecology's sewage spill list, RCW 90.48.636: the whole layer every
+#                  run, every report since mid-2026, so no backfill) and the generic snapshot block
+#                  wa-kc-cso-status-csv (King County / Seattle CSO status file, events dated to the poll); EPA's
+#                  eRule tables carry JBLM and Puyallup (echo_sewer_overflow_events)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

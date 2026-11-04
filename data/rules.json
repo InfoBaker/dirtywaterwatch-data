@@ -94,6 +94,12 @@
     "clock": "end_of_discharge",
     "basis": "Florida sets no post-discharge period for the public: an operator must give the Department of Environmental Protection a notice within 24 hours of discovering a pollution release reportable to the State Watch Office, and the Department must post every notice on its website within 24 hours of receiving it and send it to county e-mail lists (section 403.077, Florida Statutes). Sewer overflows of 1,000 gallons or more go to the State Watch Office within 24 hours (F.A.C. 62-604.550). The Department of Health may issue beach health advisories when sampling fails its standards (section 514.023, Florida Statutes), and county health departments issue sewage-spill advisories at their discretion. This site marks a reported discharge while it runs and applies its own caution after it ends",
     "source": "Fla. Stat. 403.077 and 514.023; F.A.C. 62-604.550 and 62-620.610(20)"
+   },
+   "WA": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Washington law sets no period after a sewage spill during which the water is to be avoided. The Department of Ecology must post on a public website each sewage spill reported to it under an individual water quality permit, with the estimated volume, the level of treatment, when it began, where, when it ended once known and the area potentially affected, and add the final information within a reasonable time after the spill ends (RCW 90.48.636); the law sets no posting deadline, and Ecology aims to post within five working days of the operator's report. Operators report spills to Ecology under their permits. King County and Seattle advise staying out of the water near a combined sewer outfall for 48 hours after it overflows; that window is used for the overflows their status map reports. This site marks a reported discharge while it runs and applies its own caution after it ends",
+    "source": "RCW 90.48.632 and 90.48.636 (2025 c 315); Washington State Department of Ecology, Sewage spills; King County CSO status map"
    }
   },
   "by_discharger": {

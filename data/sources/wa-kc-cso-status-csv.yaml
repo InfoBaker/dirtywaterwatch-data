@@ -59,6 +59,8 @@ fetch:
     lat: {field: Y_COORD, parse: number}
     lon: {field: X_COORD, parse: number}
     advice_text: {const: "Stay out of the water near combined sewer overflow outfalls for 48 hours after a combined sewer overflow occurs."}
+    advice_window_hours: {const: 48, parse: number}
+    advice_window_basis: {const: "King County's CSO status map: stay out of the water near the outfall for 48 hours after an overflow"}
     authority: {const: "King County Wastewater Treatment Division and Seattle Public Utilities (CSO status map)"}
     source_url: {const: "https://kingcounty.gov/en/dept/dnrp/waste-services/wastewater-treatment/sewer-system-services/cso-status"}
   transform: "ingest.wa_transforms.kc_cso_outfall"

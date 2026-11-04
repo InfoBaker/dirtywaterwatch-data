@@ -77,7 +77,7 @@ PER_DISCHARGER_SOURCES = {"nh-permittees"}
 STATE_NAMES = {"MA": "Massachusetts", "CT": "Connecticut", "RI": "Rhode Island", "NH": "New Hampshire", "VT": "Vermont",
                "ME": "Maine", "NY": "New York", "NJ": "New Jersey", "PA": "Pennsylvania",
                "VA": "Virginia", "MD": "Maryland",
-               "NC": "North Carolina", "GA": "Georgia", "FL": "Florida"}
+               "NC": "North Carolina", "GA": "Georgia", "FL": "Florida", "WA": "Washington"}
 COUNT_RULE_LINE = "Verified reports where available, else notices; revisions and duplicates counted once."
 MONTHS_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
