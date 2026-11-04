@@ -1,0 +1,47 @@
+id: "fl-dep-pnp-arcgis"
+name: "Florida DEP Public Notice of Pollution (PNP) ArcGIS feature service"
+url: "https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer"
+homepage: "https://floridadep.gov/sec/sec/content/public-notice-pollution"
+kind: "arcgis"
+level: "state"
+# Notes (research/fl, status used, verified fetched, checked 2026-11-04): Statewide,
+#   machine-readable notices under s. 403.077 with report time, release start and end dates, ongoing
+#   flag, facility, county and coordinates; wastewater notices use a structured text template
+#   (Wastewater Type, Cause, Spill Volume, Waterbodies Impacted). Ingested as fl-dep-pnp: layer 0
+#   every run, layer 1 once for the history; sewage and wastewater notices only, with the reporter
+#   and contact fields never requested and the notice text scrubbed of names, phones and e-mails.
+# Access detail (research, quoted):
+#   https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer/0 "Public
+#   Notice of Pollution (Last 30 Days)" (208 rows on 2026-11-03) and
+#   https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer/1 "(All)"
+#   (16,571 rows). Query /query?where=...&outFields=...&f=json; maxRecordCount 10000. Also MapServer
+#   at the same path; mirror host ca.dep.state.fl.us. HTML list
+#   http://prodenv.dep.state.fl.us/DepPNP/reports/viewIncidentDetails?page=1.
+# Can fill: source_record_id (INCIDENT_NUMBER = State Watch Office number, often null on older
+#   rows), event_type (from Wastewater Type / Cause text), started_at (date only), ended_at (date
+#   only, when given), reported_at, location_text, coordinates, volume (parsed from text; often
+#   blank), material, authority (facility)
+# Cannot fill: waterbody (only Y/N; name sometimes in text); precise start time; published_at
+#   (assumed within 24 h of receipt); advice_text; valid_until
+# Waters: statewide; waterbody only as Y/N in the template text, named in free text sometimes
+# History: July 2017 to date (layer 1); before that a mailing-list archive for Jan to June 2017 at
+#   lists.dep.state.fl.us/pipermail/pollution.notice/. About 1,300 to 2,300 notices a year (2018:
+#   1,332; 2024: 2,279; 2025: 1,585).
+# Research notes: PRIVACY: REPORTER_*/CONTACT_* fields and the "Agencies Notified" text hold
+#   personal names, emails and phones. Never request those fields; strip "Agencies Notified" and run
+#   the name blocklist over INCIDENT_REPORT. The layer mixes all pollution (fuel, stormwater,
+#   citizen complaints); filter on the wastewater template text and facility type. In the last 30
+#   days 81 of 200 notices were "Wastewater Type: Untreated". RELEASE_START_DATE_TIME is a date at
+#   00:00 UTC (no time).
+cadence: "Continuous; notices appear within hours of submission (newest 2026-11-03 05:00 UTC on 2026-11-03). Median 36 hours from release start (date only) to report. Law: operator within 24 hours of discovery; DEP publishes within 24 hours of receipt."
+license: "No terms on the PNP page; floridadep.gov carries a site disclaimer only."
+attribution: "Florida Department of Environmental Protection"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["FL"]
+access: ["arcgis", "html", "email"]
+access_detail: "https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer/0 \"Public Notice of Pollution (Last 30 Days)\" (208 rows on 2026-11-03) and https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer/1 \"(All)\" (16,571 rows). Query /query?where=...&outFields=...&f=json; maxRecordCount 10000. Also MapServer at the same path; mirror host ca.dep.state.fl.us. HTML list http://prodenv.dep.state.fl.us/DepPNP/reports/viewIncidentDetails?page=1."
+machine_readable: true
+legal_basis: "Fla. Stat. 403.077"
+checked: "2026-11-04"

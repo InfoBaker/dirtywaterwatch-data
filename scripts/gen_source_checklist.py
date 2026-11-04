@@ -39,6 +39,7 @@ AREA_TITLES = {
     "pa": "Pennsylvania",
     "md": "Maryland",
     "va": "Virginia",
+    "fl": "Florida",
     "dc": "District of Columbia",
 }
 

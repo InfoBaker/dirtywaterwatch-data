@@ -91,10 +91,10 @@
     "history": "July 2017 to date (layer 1); before that a mailing-list archive for Jan to June 2017 at lists.dep.state.fl.us/pipermail/pollution.notice/. About 1,300 to 2,300 notices a year (2018: 1,332; 2024: 2,279; 2025: 1,585).",
     "license": "No terms on the PNP page; floridadep.gov carries a site disclaimer only.",
     "legal_basis": "Fla. Stat. 403.077",
-    "status": "candidate",
-    "status_reason": "Statewide, machine-readable, event-precision notices under s. 403.077 with report time, release start/end, ongoing flag, facility, county and coordinates; wastewater notices use a structured text template (Wastewater Type, Cause, Spill Volume, Waterbodies Impacted). First feed to build.",
+    "status": "used",
+    "status_reason": "Statewide, machine-readable notices under s. 403.077 with report time, release start and end dates, ongoing flag, facility, county and coordinates; wastewater notices use a structured text template (Wastewater Type, Cause, Spill Volume, Waterbodies Impacted). Ingested as fl-dep-pnp: layer 0 every run, layer 1 once for the history; sewage and wastewater notices only, with the reporter and contact fields never requested and the notice text scrubbed of names, phones and e-mails.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-04",
     "notes": "PRIVACY: REPORTER_*/CONTACT_* fields and the \"Agencies Notified\" text hold personal names, emails and phones. Never request those fields; strip \"Agencies Notified\" and run the name blocklist over INCIDENT_REPORT. The layer mixes all pollution (fuel, stormwater, citizen complaints); filter on the wastewater template text and facility type. In the last 30 days 81 of 200 notices were \"Wastewater Type: Untreated\". RELEASE_START_DATE_TIME is a date at 00:00 UTC (no time)."
   },
   {
@@ -257,7 +257,9 @@
     "operator": "Florida Department of Health",
     "operator_type": "state",
     "role": "advisories",
-    "event_types": [],
+    "event_types": [
+      "beach_advisory"
+    ],
     "waters_covered": null,
     "water_slugs": [],
     "url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/",
@@ -265,22 +267,22 @@
       "arcgis",
       "html"
     ],
-    "access_detail": "https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/FloridaBeachSamplingPoints/FeatureServer/0 (419 points; fields County, EPAbeachID, STORET_Sta, SPLocation, Active, SPLat, SPLong, Link). Beach-detail HTML is a WordPress shell; data comes through admin-ajax (not traced).",
-    "machine_readable": false,
+    "access_detail": "Sampling points: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/FloridaBeachSamplingPoints/FeatureServer/0 (419 points, 352 Active=Yes; fields County, EPAbeachID, STORET_Sta, SPLocation, Active, SPLat, SPLong, Link). Results: the beach-detail page embeds the Caspio data page https://c0cqk120.caspio.com/dp/cb8a100027f4e6ea6cbc4260a71e, which takes the Link's query string (County, SPLocation, SPNo, SPLat, SPLong) and returns that point's samples, newest first, ten to a page: sample period ID, date, enterococcus result and Advisory Yes/No. Plain GET, no key, no cookie needed.",
+    "machine_readable": true,
     "sample_record": null,
     "fields": [],
     "fills_event_fields": [],
     "cannot_fill": [],
     "has_coordinates": true,
     "has_outfall_ids": false,
-    "cadence": null,
+    "cadence": "Weekly or fortnightly samples; results posted within days.",
     "history": null,
-    "license": null,
+    "license": "None stated.",
     "legal_basis": null,
-    "status": "watch",
-    "status_reason": "Weekly enterococci sampling at 419 points (layer FloridaBeachSamplingPoints with EPA beach ids and links). The result and advisory status load by script on each beach-detail page; no public endpoint found yet. County DOH offices issue sewage-spill health advisories separately (search only).",
+    "status": "used",
+    "status_reason": "Weekly or fortnightly enterococcus sampling at about 350 active coastal points; each sample row says whether an advisory followed (Advisory Yes/No). Ingested as fl-doh-beaches (one request per point, at most once a day). County DOH sewage-spill health advisories are issued separately and are not on these pages.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-04",
     "notes": ""
   },
   {
@@ -323,10 +325,10 @@
     "history": null,
     "license": null,
     "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "6,778 sampling visits with date, coordinates, bloom observed, dominant taxa, microcystin; edited daily. HAB source (plum).",
+    "status": "used",
+    "status_reason": "6,778 sampling visits with date, coordinates, bloom observed, dominant taxa, microcystin; edited daily. HAB source (plum). Ingested as fl-dep-habs (bloom episodes per site; the Comments and photo fields are not requested).",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-04",
     "notes": ""
   },
   {
