@@ -395,6 +395,11 @@ def test_threshold_for_names_the_basis_and_a_state_entry_can_apply_the_default()
     md = RL.threshold_for("MD0021598", "MD", {}, rules)
     assert md["trigger_basis"] == "default" and md["kind"] == "state" and md["rule"] == "rain_likely.fallback.by_state.MD"
     assert RL.threshold_for(PERMIT, "MA", rain_input({})["thresholds"], rules)["trigger_basis"] == "operator"
+    # the operator's own history wins over its state's entry, whatever that entry's basis
+    assert RL.threshold_for(PERMIT, "MA", rain_input({})["thresholds"], STATE_RULES)["trigger_basis"] == "operator"
+    md_state = {**rules, "rain_likely": {**rules["rain_likely"], "fallback": {**rules["rain_likely"]["fallback"], "by_state": {
+        "MA": {"inches": 0.1, "basis": "the site's default", "source": "s", "trigger_basis": "default"}}}}}
+    assert RL.threshold_for(PERMIT, "MA", rain_input({})["thresholds"], md_state)["trigger_basis"] == "operator"
     assert RL.label_for("default", rules) == POSSIBLE and RL.label_for("state", rules) == LIKELY
     assert RL.label_for("operator", rules) == LIKELY and RL.label_for(None, rules) == LIKELY
     assert RL.strongest_basis(["default", "state"]) == "state" and RL.strongest_basis(["default"]) == "default"
@@ -482,6 +487,11 @@ def test_rules_json_labels_by_basis_and_states_the_defaults_cost_with_its_source
     for figure in ("July 2022 to October 2026", "2001 to October 2026", "about 3 percent", "1 percent",
                    "96 to 97 percent", "about half", "from 50 to 34 percent", "nine overflows in ten"):
         assert figure in cost, figure
+    # which record each figure rests on (review 2026-11-04, P3-1): the under-0.1-inch shares are the operators' own rain
+    # figures, the 96 to 97 percent and the quiet days are radar, and the 50 to 34 percent cut is Massachusetts only
+    assert "By the operators' own rain figures, overflows that began with less than 0.1 inch" in cost
+    assert "by radar, the 0.1 inch default would have flagged 96 to 97 percent" in cost
+    assert "In Massachusetts, the operators' own amounts cut those quiet days from 50 to 34 percent" in cost
     for src in ("MassDEP Sewage Notification Data System", "Verified Data Reports", "Michigan EGLE", "MiEnviro",
                 "NOAA MRMS"):
         assert src in d["cost_source"], src
