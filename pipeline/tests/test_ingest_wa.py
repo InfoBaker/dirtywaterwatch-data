@@ -204,3 +204,14 @@ def test_kc_status_file_outfalls_replace_epas_closed_rows_and_a_placeholder_poin
     assert doc["not_placed"] == [{"npdes_permit": "WA0031682", "outfall": "026", "why": "the status file gives a "
                                   "placeholder point and EPA lists no point for this outfall"}]
     assert leaks(doc) == []
+
+
+# ---------------------------------------------------------------- EPA's eRule tables (JBLM, Puyallup)
+
+def test_washington_permits_are_read_from_the_epa_tables_under_the_general_rules():
+    from ingest import echo_sewer_overflow_events as S
+    assert "WA" in S.STATES and "WA" not in S.REPEATED_POINT_STATES
+    ok, _ = S.reached_water({}, ["BYP"], ["Puget Sound"], [])            # JBLM's 2023 bypass to Puget Sound
+    assert ok
+    ok, why = S.reached_water({}, ["SSO"], [], [])                       # an SSO naming no water and no water impact
+    assert not ok and why == "no evidence the discharge reached a water"
