@@ -40,6 +40,13 @@ other, note 'No web form'". The parts:
               ga-media-notice, ga-local-health-departments and ga-spill-signs. ga-downstream-water-suppliers stays one
               row: (3)(d) is EPD's duty as well as the owner's, a direct notice to water suppliers, not to the public.
 
+  voluntary   Voluntary channels the NC, GA and FL checklists found missing (basis_kind voluntary, legal_basis null,
+              records false, the note saying why it is voluntary and how its address answered the project user agent
+              on one GET, 2026-11-04): Swim Guide for North Carolina and Florida (a script app: app_only, as every
+              other state's Swim Guide row), the Chattahoochee River BacteriALERT results page (USGS with Chattahoochee
+              Riverkeeper), WWALS's Florida spill pages, and Sarasota County's spill layer (its description only: the
+              rows carry street addresses and free-text notes, and DEP's PNP feed carries the same events).
+
 Idempotent: a part's rows are rebuilt from the inputs and replace rows of the same id; the register stays sorted by
 (state, id) and every row's barrier is what ingest.notification_pages.barrier_for says. `checked` is the date the law
 and the inputs were read (CHECKED), not the run date, so a rerun changes nothing.
@@ -268,9 +275,73 @@ def ga_notice_rows(dis: list[dict], plants, register: dict | None = None) -> tup
     return rows, []
 
 
+SWIM_GUIDE = "https://www.theswimguide.org/"
+VOLUNTARY = [
+    {"id": "fl-sarasota-spill-layer", "state": "FL", "operator_id": None, "agency": "Sarasota County",
+     "name": "Sarasota County", "permit": None, "channel_kind": "feed",
+     "urls": ["https://ags3.scgov.net/server/rest/services/Hosted/AbnormalEventSpill/FeatureServer/0?f=json"],
+     "method": "json", "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
+     "publishes": "notices",
+     "note": ("Sarasota County's AbnormalEventSpill layer: sanitary sewer overflows in the county reported to DEP by the "
+              "North Port, Sarasota and Venice utilities, the Englewood district, Sarasota County Utilities and private "
+              "systems (date, type, gallons, whether surface water was affected, a point). Voluntary: a county "
+              "publication no law requires. The layer's description answered 200 to the project user agent on "
+              "2026-11-04 (last edit 2026-08-17). Only the description is read (its last-edit time shows a change): "
+              "the rows carry street addresses and free-text notes, and the PNP feed (fl-dep-pnp) carries the same "
+              "reportable events. (research/fl/report.md, fl-sarasota-abnormal-event)"),
+     "checked": CHECKED, "records": False, "every_hours": 24, "noun": "Voluntary spill layer",
+     "sources": ["fl-sarasota-abnormal-event"]},
+    {"id": "fl-swim-guide", "state": "FL", "operator_id": None, "agency": "Swim Drink Fish", "name": "Swim Drink Fish",
+     "permit": None, "channel_kind": "swim_guide", "urls": [SWIM_GUIDE], "method": "html", "legal_basis": None,
+     "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "app_only", "publishes": "results",
+     "note": ("Swim Guide listings for Florida. Voluntary republisher of local beach results; affiliates not resolved. "
+              "The site answered 200 to the project user agent on 2026-11-04 but shows its listings in a script app "
+              "with no API: not read. The Department of Health's beach results are read as a feed (fl-doh-beaches)."),
+     "checked": CHECKED, "records": False, "noun": "Swim Guide listing"},
+    {"id": "fl-wwals-spill-posts", "state": "FL", "operator_id": None, "agency": "WWALS Watershed Coalition",
+     "name": "WWALS Watershed Coalition", "permit": None, "channel_kind": "news_page",
+     "urls": ["https://wwals.net/issues/vww/fl-spills/", "https://wwals.net/tag/notice-of-pollution/"],
+     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
+     "publishes": "notices",
+     "note": ("WWALS Watershed Coalition (Suwannee Riverkeeper): its Florida spills page, which links to DEP's map of "
+              "Public Notices of Pollution, and its posts tagged Notice of Pollution (one post, a High Springs sewage "
+              "spill of 2023-03-30, on 2026-11-04). Voluntary: a watershed group's posts. Both answered 200 to the "
+              "project user agent on 2026-11-04. Read for the channel's health; not used for records: the PNP feed "
+              "(fl-dep-pnp) carries the notices. (research/fl/report.md, fl-wwals)"),
+     "checked": CHECKED, "records": False, "every_hours": 24, "sources": ["fl-wwals"]},
+    {"id": "ga-chattahoochee-bacterialert", "state": "GA", "operator_id": None,
+     "agency": "U.S. Geological Survey and Chattahoochee Riverkeeper (BacteriALERT)",
+     "name": "Chattahoochee River BacteriALERT", "permit": None, "channel_kind": "group_results",
+     "urls": ["https://ga.water.usgs.gov/bacteria/"], "method": "html", "legal_basis": None, "basis_kind": "voluntary",
+     "monitored": True, "unmonitored_reason": None, "publishes": "results",
+     "note": ("Chattahoochee River BacteriALERT: weekly E. coli samples (reported within 24 hours) and turbidity-based "
+              "E. coli estimates at three USGS stations in the Chattahoochee River National Recreation Area, a program "
+              "with Chattahoochee Riverkeeper. Voluntary monitoring; results, not overflow notices. Answered 200 to "
+              "the project user agent on 2026-11-04 (the page then said the estimate could not be calculated because "
+              "of gage maintenance). Chattahoochee Riverkeeper's own BacteriALERT addresses answered 301 that day "
+              "(to an image and to a blog post on the program's 20 years). The page offers a weekly e-mail of the "
+              "sampled counts. "
+              "(research/ga/report.md §2.5)"),
+     "checked": CHECKED, "records": False, "every_hours": 24, "noun": "Results page"},
+    {"id": "nc-swim-guide", "state": "NC", "operator_id": None, "agency": "Swim Drink Fish", "name": "Swim Drink Fish",
+     "permit": None, "channel_kind": "swim_guide", "urls": [SWIM_GUIDE], "method": "html", "legal_basis": None,
+     "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "app_only", "publishes": "results",
+     "note": ("Swim Guide listings for North Carolina's beaches and the western river stations of DWR's recreational "
+              "monitoring (nc-wnc-rec-monitoring). Voluntary republisher of local results; affiliates not resolved. "
+              "The site answered 200 to the project user agent on 2026-11-04 but shows its listings in a script app "
+              "with no API: not read. (research/nc/report.md §2.5)"),
+     "checked": CHECKED, "records": False, "noun": "Swim Guide listing", "sources": ["nc-wwals-and-swim-guide"]},
+]
+
+
+def voluntary_rows(dis, plants, register=None) -> tuple[list[dict], list]:
+    return [finish(dict(r)) for r in VOLUNTARY], []
+
+
 PARTS = {"nc-annual": {"build": lambda dis, plants, reg: nc_annual_rows(dis, plants), "replaces": ()},
          "nc-notice": {"build": nc_notice_rows, "replaces": NC_REPLACES},
-         "ga-notice": {"build": ga_notice_rows, "replaces": GA_REPLACES}}
+         "ga-notice": {"build": ga_notice_rows, "replaces": GA_REPLACES},
+         "voluntary": {"build": voluntary_rows, "replaces": ()}}
 
 
 def merge(doc: dict, new: list[dict], replaces=()) -> dict:
@@ -293,7 +364,8 @@ def run(parts: list[str], register: Path = REGISTER, dis_path: Path = DIS, plant
         doc = merge(doc, rows, PARTS[p]["replaces"])
         report[p] = {"rows": len(rows), "new": len({r["id"] for r in rows} - before),
                      "removed": sorted(set(PARTS[p]["replaces"]) & before), "left_out": left_out,
-                     "barriers": dict(Counter(r["barrier"] or "review" for r in rows))}
+                     "barriers": dict(Counter(r["barrier"] or ("review" if r.get("barrier_review") else "none")
+                                                for r in rows))}
     errs = NP.validate_register(doc, dis, ROOT)
     if errs:
         raise SystemExit("the register would not validate:\n" + "\n".join(errs[:20]))

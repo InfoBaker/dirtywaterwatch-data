@@ -182,3 +182,23 @@ def test_every_georgia_operator_has_its_four_duty_rows_and_the_statewide_rows_ar
     for gone in ARR.GA_REPLACES + ARR.NC_REPLACES:
         assert gone not in BY_ID
     assert BY_ID["ga-downstream-water-suppliers"]["operator_id"] is None
+
+
+# ---------------------------------------------------------------- voluntary channels the checklists found missing
+
+def test_the_voluntary_rows_say_why_they_are_voluntary_and_how_their_address_answered():
+    ids = {"nc-swim-guide", "fl-swim-guide", "ga-chattahoochee-bacterialert", "fl-wwals-spill-posts",
+           "fl-sarasota-spill-layer"}
+    assert {r["id"] for r in ARR.VOLUNTARY} == ids
+    for i in ids:
+        r = BY_ID[i]
+        assert r == ARR.finish(dict(next(v for v in ARR.VOLUNTARY if v["id"] == i)))     # the register is the script's
+        assert r["basis_kind"] == "voluntary" and r["legal_basis"] is None and r["records"] is False
+        assert "Voluntary" in r["note"] and "answered 200 to the project user agent on 2026-11-04" in r["note"].lower()
+        if r["channel_kind"] == "swim_guide":
+            assert r["monitored"] is False and r["unmonitored_reason"] == "app_only"
+        else:
+            assert r["monitored"] is True and r["method"] in NP.ENUMS["method"] and r["every_hours"] == 24
+    # the county layer is read for its description only: never its rows (street addresses, free-text notes)
+    sar = BY_ID["fl-sarasota-spill-layer"]
+    assert all("/query" not in u and u.endswith("FeatureServer/0?f=json") for u in sar["urls"])
