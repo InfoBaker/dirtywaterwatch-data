@@ -1,0 +1,25 @@
+id: "fl-dep-pnp"
+name: "Florida DEP Public Notice of Pollution, sewage and wastewater notices (PNP feature service)"
+url: "https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer"
+homepage: "https://floridadep.gov/sec/sec/content/public-notice-pollution"
+kind: "arcgis"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/fl_dep_pnp.py
+#   (data/build/events/fl-dep-pnp.json). It describes the same source as the research row in
+#   registry_ids, whose file holds the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/fl_dep_pnp.py docstring): hourly; layer 0 (last 30 days) each run, layer 1
+#   (every notice since July 2017) once with --backfill. Only sewage and wastewater notices become
+#   records; reporter and contact fields are never requested and the notice text is scrubbed.
+cadence: "1 hour"
+license: "None stated (floridadep.gov site disclaimer only)."
+attribution: "Florida Department of Environmental Protection, Public Notice of Pollution"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass", "plant_bypass"]
+states: ["FL"]
+registry_ids: ["fl-dep-pnp-arcgis"]
+access: ["arcgis"]
+access_detail: "https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer/0/query (last 30 days) and /1/query (all), with a fixed list of safe fields (the module docstring lists them); no key. Report times hold Florida wall-clock time stored as UTC; release start and end are dates."
+machine_readable: true
+legal_basis: "Fla. Stat. 403.077"
+checked: "2026-11-04"

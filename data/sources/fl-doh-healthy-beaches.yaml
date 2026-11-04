@@ -1,0 +1,31 @@
+id: "fl-doh-healthy-beaches"
+name: "Florida Department of Health Healthy Beaches program (beach detail pages; sampling-point layer)"
+url: "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/"
+homepage: "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/"
+kind: "arcgis"
+level: "state"
+# Notes (research/fl, status used, verified fetched, checked 2026-11-04): Weekly or fortnightly
+#   enterococcus sampling at about 350 active coastal points; each sample row says whether an
+#   advisory followed (Advisory Yes/No). Ingested as fl-doh-beaches (one request per point, at most
+#   once a day). County DOH sewage-spill health advisories are issued separately and are not on
+#   these pages.
+# Access detail (research, quoted): Sampling points:
+#   https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/FloridaBeachSamplingPoints/FeatureServer/0
+#   (419 points, 352 Active=Yes; fields County, EPAbeachID, STORET_Sta, SPLocation, Active, SPLat,
+#   SPLong, Link). Results: the beach-detail page embeds the Caspio data page
+#   https://c0cqk120.caspio.com/dp/cb8a100027f4e6ea6cbc4260a71e, which takes the Link's query string
+#   (County, SPLocation, SPNo, SPLat, SPLong) and returns that point's samples, newest first, ten to
+#   a page: sample period ID, date, enterococcus result and Advisory Yes/No. Plain GET, no key, no
+#   cookie needed.
+cadence: "Weekly or fortnightly samples; results posted within days."
+license: "None stated."
+attribution: "Florida Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory"]
+states: ["FL"]
+access: ["arcgis", "html"]
+access_detail: "Sampling points: https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/FloridaBeachSamplingPoints/FeatureServer/0 (419 points, 352 Active=Yes; fields County, EPAbeachID, STORET_Sta, SPLocation, Active, SPLat, SPLong, Link). Results: the beach-detail page embeds the Caspio data page https://c0cqk120.caspio.com/dp/cb8a100027f4e6ea6cbc4260a71e, which takes the Link's query string (County, SPLocation, SPNo, SPLat, SPLong) and returns that point's samples, newest first, ten to a page: sample period ID, date, enterococcus result and Advisory Yes/No. Plain GET, no key, no cookie needed."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-04"

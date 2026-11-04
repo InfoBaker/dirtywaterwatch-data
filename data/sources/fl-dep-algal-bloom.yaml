@@ -1,0 +1,22 @@
+id: "fl-dep-algal-bloom"
+name: "Florida DEP Algal Bloom Site Visits (Algal Bloom Sampling Status dashboard)"
+url: "https://services1.arcgis.com/nRHtyn3uE1kyzoYc/arcgis/rest/services/AlgalBloom_Final_View/FeatureServer/0"
+homepage: "https://floridadep.gov/AlgalBloom"
+kind: "arcgis"
+level: "state"
+# Notes (research/fl, status used, verified fetched, checked 2026-11-04): 6,778 sampling visits with
+#   date, coordinates, bloom observed, dominant taxa, microcystin; edited daily. HAB source (plum).
+#   Ingested as fl-dep-habs (bloom episodes per site; the Comments and photo fields are not
+#   requested).
+cadence: null
+license: "none stated"
+attribution: "Florida DEP"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["FL"]
+access: ["arcgis"]
+access_detail: null
+machine_readable: true
+legal_basis: null
+checked: "2026-11-04"
