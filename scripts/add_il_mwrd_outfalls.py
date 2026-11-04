@@ -22,8 +22,9 @@ its outfall id ("DS-M99"; MWRD's synopsis report uses the same key; "DS-M99#12",
 when several unpaired outfalls share one drop shaft) under its owner's first permit, with
 `epa_row` null. A point whose owner has no combined sewer permit in EPA's inventory (Robbins, Forest View, a
 campground) is listed under `without_permit` with the reason, not as an outfall row.
-receiving_water_echo is EPA's text for a paired row, else the water MWRD's reach label names (il_mwrd.REACH_WATERS);
-reach labels are kept in mwrd_reach. The three reversal structures (Wilmette gate, Chicago River Controlling Works,
+receiving_water_echo is the water MWRD's reach label names (il_mwrd.REACH_WATERS: MWRD's own assignment of the outfall
+to a waterway), else EPA's text for a paired row (kept in epa_row.receiving_water_echo; EPA's inventory gives texts
+such as 'SUBURBAN CHICAGO AREAS' for Cook County outfalls); reach labels are kept in mwrd_reach. The three reversal structures (Wilmette gate, Chicago River Controlling Works,
 O'Brien Lock) are on the layer but are not combined sewer outfalls: they are listed under `diversion_points` and not as
 outfall rows (their discharges are the Lake Michigan reversals, il-mwrd-lake-michigan-reversals).
 Water ties are added afterwards by `python -m ingest.outfall_waters --state IL`; a rerun keeps a row's ties when its
@@ -160,7 +161,7 @@ def build(features: list[dict], epa_rows: list[dict], previous: dict | None = No
                                          else f"MWRD-{p['OBJECTID']}")
         if not o and tarp_count[p["TARP_CONNECTION"]] > 1:
             outfall = f"{outfall}#{p['OBJECTID']}"     # several outfalls at one drop shaft: the layer's id tells them apart
-        water = (o or {}).get("receiving_water_echo") or M.reach_water(p["WATERWAY_REACH"])
+        water = M.reach_water(p["WATERWAY_REACH"]) or (o or {}).get("receiving_water_echo")
         row = {"npdes_permit": permit, "permittee": (o or {}).get("permittee") or p["OWNER"], "state": "IL",
                "city": p["OUTFALL_CITY"], "outfall": outfall, "outfall_name": p["LOCATION"],
                "outfall_status": "CSO", "receiving_water_echo": water, "mwrd_reach": p["WATERWAY_REACH"],
@@ -171,7 +172,8 @@ def build(features: list[dict], epa_rows: list[dict], previous: dict | None = No
                "source_url": f"{M.CSO_POINTS_URL}/query?where=OBJECTID%3D{p['OBJECTID']}&outFields=*&f=json",
                "source_record_id": p["OBJECTID"],
                "epa_row": ({"file": "data/outfalls-us.json", "npdes_permit": o["npdes_permit"], "outfall": o["outfall"],
-                            "outfall_name": o.get("outfall_name"), "paired_by": how} if o else None)}
+                            "outfall_name": o.get("outfall_name"), "receiving_water_echo": o.get("receiving_water_echo"),
+                            "paired_by": how} if o else None)}
         if len(M.owners(p["OWNER"])) > 1:
             row["owner_note"] = (f"MWRD's layer names more than one owner ({p['OWNER']}); filed under the first "
                                  "owner's permit")

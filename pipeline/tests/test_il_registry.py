@@ -33,7 +33,7 @@ def _epa(permit, outfall, name, lat, lon):
 def test_reach_labels_and_reversal_structures():
     assert M.reach_water("NSC Lower (NSWRP)") == "North Shore Channel"
     assert M.reach_water("Little Cal R (South)") == "Little Calumet River"
-    assert M.reach_water("Cal Sag Ch") == "Calumet-Sag Channel"
+    assert M.reach_water("Cal Sag Ch") == "Calumet Sag Channel"
     assert M.reach_water("I & M Canal") == "Illinois and Michigan Canal"
     assert M.reach_water("Nowhere Cr") is None
     assert M.diversion("OBrien Lock and Dam")[0] == "O'Brien Lock"
@@ -62,7 +62,8 @@ def test_points_pair_with_epa_rows_by_distance_then_street_and_side():
     assert by[2]["outfall"] == "002" and "street and side" in by[2]["epa_row"]["paired_by"]
     assert by[3]["epa_row"] is None and by[3]["outfall"] == "DS-X3"                      # sides differ: not paired
     assert {by[4]["outfall"], by[5]["outfall"]} == {"DS-X4#4", "DS-X4#5"}                 # one drop shaft, two outfalls
-    assert by[3]["receiving_water_echo"] == "North Shore Channel" and by[1]["receiving_water_echo"] == "NORTH SHORE CHANNEL"
+    assert by[3]["receiving_water_echo"] == "North Shore Channel" and by[1]["receiving_water_echo"] == "North Shore Channel"
+    assert by[1]["epa_row"]["receiving_water_echo"] == "NORTH SHORE CHANNEL"         # EPA's text kept with its row
     assert 6 not in by and doc["diversion_points"][0]["water"] == "Lake Michigan"
     assert 7 not in by and doc["without_permit"][0]["owner"] == "Sample Campground"
 
@@ -154,3 +155,21 @@ def test_register_script_is_reproducible():
     S = _script("add_il_register_rows")
     rep = S.run(dry_run=True)
     assert rep["rows"] == len(json.loads((ROOT / "data" / "notice-channels" / "il.json").read_text())["channels"])
+
+
+def test_the_lake_cut_downloads_check_the_tiger_files(monkeypatch):
+    from ingest import waters_extra as WX
+    S = _script("cut_lakes_to_state_waters")
+    seen = {}
+    monkeypatch.setattr(WX, "states_zip", lambda **kw: seen.update(members=WX.STATES_ZIP_MEMBERS, **kw) or kw["dest"])
+    before = WX.STATES_ZIP_MEMBERS
+    S.tiger_zip()
+    assert seen["members"] == ("tl_2023_us_state.shp", "tl_2023_us_state.dbf") and seen["url"] == S.TIGER_URL
+    assert WX.STATES_ZIP_MEMBERS == before
+
+
+def test_lake_michigan_holds_illinois_waters_only():
+    w = json.loads((ROOT / "data" / "waters-nhd.json").read_text())
+    lake = next(r for r in w["waters"] if r["slug"] == "lake-michigan-il")
+    assert lake["bbox"][2] < -87.0 and lake["bbox"][3] < 42.6 and lake["area_km2"] < 5000
+    assert not [p for p in w.get("problems", []) if str(p).startswith("lake-michigan-il")]
