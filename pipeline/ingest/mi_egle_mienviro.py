@@ -986,8 +986,11 @@ def main(argv=None) -> int:
     rebuilt = [i for i, r in enumerate(records) if id(r) not in saved]
     if len(rebuilt) == len(records):
         records = redact.redact_events(records)
-    else:                                       # the records kept as saved were redacted when they were built
-        redactor = redact.redactor_for(records)
+    else:
+        # the records kept as saved were redacted when they were built; the rebuilt ones are redacted with a lexicon of
+        # their own (a lexicon over every record took 15 s an hour; a smaller one stops fewer words, so it can remove
+        # more); the export's pass over every record of every feed, with a lexicon of them all, is unchanged
+        redactor = redact.redactor_for([records[i] for i in rebuilt])
         for i in rebuilt:
             records[i] = redactor.event(records[i])
     state["build_stamp"] = stamp

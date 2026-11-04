@@ -8,8 +8,10 @@ level: "state"
 #   (data/build/events/mi-egle-mienviro-cso-sso-list.json); the research row has the same id.
 # Built 2026-11-04: each hourly run reads every open (IN_PROCESS) report and the completed ones that
 #   started in the last 60 days, and asks by submission for open reports that dropped out of both;
-#   `--backfill [--from YEAR]` reads completed reports a year at a time (default from 2025; the list
-#   goes back to 2001, about 2,000 reports a year). Narrative fields are never requested. An open
+#   `--backfill [--from YEAR]` reads completed reports a year at a time (default from 2001, the owner's
+#   call of 2026-11-04; the list also holds 1999 and 2000; 1,400 to 5,000 reports a year, 55,564 for
+#   2001-2024), each year saved to the archive as it arrives, within a 40-minute budget that a later
+#   --backfill resumes (refresh.yml's backfill input "mi_egle_mienviro"). Narrative fields are never requested. An open
 #   report whose end repeats its start is read as having no end (the form's placeholder), and a
 #   completed one's end is then not confirmed (no end used).
 # Notes (research/mi, status used, verified fetched, checked 2026-11-04): Statewide, event-level,

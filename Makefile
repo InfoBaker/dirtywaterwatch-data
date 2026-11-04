@@ -40,8 +40,8 @@
 #                  (Healthy Beaches result pages: a full pass starts at most every 20 hours and is spread over
 #                  hourly runs, at most 6 minutes of pages a run, resumed where it stopped)
 #                  Michigan: mi_egle_mienviro (EGLE MiEnviro CSO/SSO List: every open report and the completed
-#                  reports that started in the last 60 days; `--backfill [--from YEAR]` once, default from 2025,
-#                  the list reaching back to 2001)
+#                  reports that started in the last 60 days; `--backfill [--from YEAR]` once, default from 2001,
+#                  resumable, about 18 minutes for 2001-2026)
 #                  Washington: wa_ecology_spills (Ecology's sewage spill list, RCW 90.48.636: the whole layer every
 #                  run, every report since mid-2026, so no backfill) and the generic snapshot block
 #                  wa-kc-cso-status-csv (King County / Seattle CSO status file, events dated to the poll); EPA's
