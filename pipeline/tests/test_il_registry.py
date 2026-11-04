@@ -126,3 +126,31 @@ def test_a_companys_plants_are_one_row():
     assert iaw["legal_form"] == "investor-owned utility" and len(iaw["npdes_permits"]) > 20
     assert "IL0021202" in iaw["npdes_permits"] and "private permittee" in iaw["notification_channel"]
     assert sum(1 for r in rows if r["id"].startswith("il-prairie-path")) == 1
+
+
+def test_register_rows_cover_every_cso_permittee_with_its_duties():
+    from ingest import notification_pages as NP
+    rows = json.loads((ROOT / "data" / "notice-channels" / "il.json").read_text())["channels"]
+    assert not NP.validate_register({"schema_version": 1, "channels": rows},
+                                    json.loads((ROOT / "data" / "dischargers.json").read_text()), ROOT)
+    ops = _il_rows()
+    named = {r["operator_id"] for r in rows if r["operator_id"]}
+    assert all(o["id"] in named for o in ops if o["kind"] == "cso")                # the checklist's CSO one-liner
+    by = {r["id"]: r for r in rows}
+    chi = next(o for o in ops if o["npdes_permit"] == "IL0045012")["id"]
+    for suffix, bar in (("cso-public-notification", "no_web_page"), ("cso-signs", "signs_only"),
+                        ("health-department-notice", "no_web_page")):
+        assert by[f"{chi}-{suffix}"]["barrier"] == bar and by[f"{chi}-{suffix}"]["basis_kind"] in ("law", "permit")
+    pekin = next(o for o in ops if o["npdes_permit"] == "IL0034495")["id"]
+    assert by[f"{pekin}-cso-public-notification"]["barrier"] == "not_verified" and f"{pekin}-cso-signs" not in by
+    syn = by["il-mwrd-cso-synopsis-report"]
+    assert syn["barrier"] == "bot_wall" and "request to MWRD" in syn["note"] and syn["urls"] == []
+    assert by["il-mwrd-possible-cso-events-map"]["feed_source_id"] == "il-mwrd-possible-cso-events-layer"
+    assert by["il-iepa-sso-report"]["barrier"] == "no_web_page" and "public or private" in by["il-iepa-sso-report"]["note"]
+    assert [r["id"] for r in rows] == sorted(r["id"] for r in rows)
+
+
+def test_register_script_is_reproducible():
+    S = _script("add_il_register_rows")
+    rep = S.run(dry_run=True)
+    assert rep["rows"] == len(json.loads((ROOT / "data" / "notice-channels" / "il.json").read_text())["channels"])
