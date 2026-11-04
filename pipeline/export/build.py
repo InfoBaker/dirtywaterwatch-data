@@ -586,6 +586,24 @@ def redact_status_texts(st: dict, r: Redactor, swaps_of: dict | None = None) -> 
             if new != v:
                 d[k] = new
                 n += 1
+    def deep(o, eid, skip=("event_id", "rule", "status", "water", "slug", "category", "from", "until", "file", "label",
+                           "source_id", "water_slugs", "reach", "rid")):
+        # every other string under a reason (placement notes, a rule's basis, a stretch's text) can quote the record
+        nonlocal n
+        if isinstance(o, dict):
+            for k, v in o.items():
+                if k in skip:
+                    continue
+                if isinstance(v, str) and v:
+                    new = r.note(v, swaps_of.get(eid, ()))
+                    if new != v:
+                        o[k] = new
+                        n += 1
+                else:
+                    deep(v, eid, skip)
+        elif isinstance(o, list):
+            for v in o:
+                deep(v, eid, skip)
     for w in (st.get("waters") or {}).values():
         reasons = w.get("reasons") or []
         fix(w, "reason_short", reasons[0].get("event_id") if reasons else None)
@@ -597,6 +615,14 @@ def redact_status_texts(st: dict, r: Redactor, swaps_of: dict | None = None) -> 
                 rr = x.get(key)
                 if isinstance(rr, dict) and rr.get("rule") == "red.event":
                     fix(rr, "rationale", x.get("event_id"))
+            # the rest of the reason, nested (the Old Tampa Bay water file carried a blocklisted name in a field
+            # none of the lines above reach; the export's self-check stopped run 41915396147 on 2026-11-04)
+            for k, v in x.items():
+                if k not in ("short", "monthly_label", "authority") and not isinstance(v, str):
+                    deep(v, x.get("event_id"))
+                elif isinstance(v, str) and k not in ("short", "monthly_label", "authority", "event_id", "rule", "status",
+                                                        "label", "category", "from", "until", "file", "water", "reach"):
+                    fix(x, k)
     for x in (st.get("advisory_points") or []) + (st.get("reach_events_active") or []):
         fix(x, "short")
     for x in st.get("monthly_outfalls") or []:
