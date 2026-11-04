@@ -275,3 +275,27 @@ def test_every_house_number_of_a_text_can_be_stripped_but_not_a_route_number():
     assert strip_house_numbers("Location: 1234 N. 301 Hwy, Tampa") == "Location: [house number removed] N. 301 Hwy, Tampa"
     for keep in ("4745 US 98 N", "spill of 3000 gallons at 12 pm", "2,500 gallons"):
         assert strip_house_numbers(keep) == keep, keep
+
+
+def test_a_works_building_a_complex_or_a_count_is_not_a_household():
+    from common import scrub_text
+    for keep in ("Pump House 2 Example Rd overflowed",
+                 "300 ft south of the Gate House at 4650 Example Country Club Blvd",
+                 "Example Lakes Apartment Homes at 100 Example Way reported a leak",
+                 "a leak at Example Place Condo located at 120 S. Example Blvd",
+                 "customers 1500 East of the plant lost service"):
+        assert scrub_text(keep) == keep, keep
+    assert scrub_text("Area Around SMH # 3800 & House 119 Example Ave") == \
+        "Area Around SMH # 3800 & House [house number removed] Example Ave"
+    assert scrub_text("BEHIND THE RESIDENTS OF 6328 EXAMPLE AVE") == "BEHIND THE RESIDENTS OF [house number removed] EXAMPLE AVE"
+
+
+def test_export_removes_a_residence_number_from_the_free_text_fields_too():
+    # raw loses it (strip_personal), so the outfall name and the water text quoting the same sentence must too
+    e = {"event_id": "nc-dwr-sso:1", "outfall_name": "MH 12 about 100 feet from back of home at 124 Example Court",
+         "waterbody_text": "Example Branch, a waterway behind the private residence at 205 Example Rd.",
+         "raw": {"location": "MH 12 about 100 feet from back of home at 124 Example Court"}}
+    out = X.public_event(e)
+    assert out["outfall_name"] == "MH 12 about 100 feet from back of home at [house number removed] Example Court"
+    assert out["waterbody_text"] == "Example Branch, a waterway behind the private residence at [house number removed] Example Rd."
+    assert "124" not in json.dumps(out["raw"])

@@ -74,6 +74,28 @@ RESIDENCE_NUMBER_BEFORE_RE = re.compile(
     rf"(?<![\w.,/:-])({_HOUSE_NO})(?=[ ]{{1,2}}(?:[NSEW]\.?[ ]{{1,2}})?(?:[A-Za-z0-9][\w'.-]*[ ]{{1,2}}){{0,3}}[A-Za-z][\w'.-]*"
     rf"(?:[ ]{{1,2}}(?:N|S|E|W|NE|NW|SE|SW))?[ ]{{0,2}},[ ]{{0,2}}(?i:a|the|an)[ ]{{1,2}}(?i:home[ ]?owner|resident|tenant|occupant)s?\b)")
 HOUSE_NUMBER_REMOVED = "[house number removed]"
+# not a household: a building of a works or an institution ("Pump House 2", "the Gate House at 4650 ..."), a complex's
+# name ("Example Apartment Homes at 100 ...", "Example Place Condo located at 120 ..."), or a count ("customers 1500")
+_FACILITY_HOUSE = set("""pump well gate guard control meter valve screen chlorine blower generator power boat pool club court
+state custom opera meeting chemical electrical switch fire bath ware ice pole field funeral nursing care""".split())
+_COMPLEX_WORDS = {"homes", "condo", "condos", "condominium", "condominiums", "townhomes"}
+_NOT_A_COMPLEX = {"the", "a", "an", "private", "new", "single", "our", "my", "his", "her", "their", "two", "three", "four",
+                  "several", "family", "mobile"}
+_HOME_TIE = re.compile(r"(?i)\b(?:at|of|on|in\s+front\s+of|behind|located|living|residing|situated)\b|@|\(")
+
+
+def _is_residence(m: re.Match) -> bool:
+    """A RESIDENCE_NUMBER_RE match that names a household's address (see _FACILITY_HOUSE)."""
+    word = re.match(r"[A-Za-z]+", m.group(1)).group(0)
+    prev = re.search(r"([A-Za-z]+)\W{0,3}$", m.string[max(0, m.start() - 30):m.start()])
+    prev = prev.group(1) if prev else ""
+    if prev.lower() in _FACILITY_HOUSE:
+        return False
+    if word.lower() in _COMPLEX_WORDS and word[0].isupper() and prev[:1].isupper() and prev.lower() not in _NOT_A_COMPLEX:
+        return False
+    if word.lower().endswith("s") and not _HOME_TIE.search(m.group(1)):
+        return False                              # "customers 1500 ...", "residents 2 ...": a count
+    return True
 TITLE_NAME_RE = re.compile(rf"\b((?i:inspector|investigator))(\s+){_NOT_NAME}{_NAME}")
 CONTACT_NAME_RE = re.compile(rf"\b((?i:contact(?:ed)?))(\s+){_NOT_NAME}{_NOT_CONTACT}{_NAME}(?=\s+(?i:at)\b)")
 # A pipeline working note in a string: a path into this repository ("research/ri/dischargers.json",
@@ -288,6 +310,8 @@ def residence_numbers(v: str) -> list[tuple[str, str | None]]:
     resident, so that the same address can be cut from another field of the record."""
     out = []
     for m in RESIDENCE_NUMBER_RE.finditer(v):
+        if not _is_residence(m):
+            continue
         nxt = re.match(r"[ ]{1,2}((?:[NSEW]\.?[ ]{1,2})?[\w']+)", v[m.end():])
         out += [(n, nxt.group(1) if nxt else None) for n in re.findall(r"\d{1,6}[A-Za-z]?", m.group(2))]
     for m in RESIDENCE_NUMBER_BEFORE_RE.finditer(v):
@@ -311,7 +335,7 @@ def scrub_residence_numbers(v: str) -> str:
     pairs = residence_numbers(v)
     if not pairs:
         return v
-    v = RESIDENCE_NUMBER_RE.sub(lambda m: m.group(1) + HOUSE_NUMBER_REMOVED, v)
+    v = RESIDENCE_NUMBER_RE.sub(lambda m: m.group(1) + HOUSE_NUMBER_REMOVED if _is_residence(m) else m.group(0), v)
     return drop_house_numbers(RESIDENCE_NUMBER_BEFORE_RE.sub(HOUSE_NUMBER_REMOVED, v), pairs)
 
 
@@ -320,17 +344,23 @@ def scrub_residence_numbers(v: str) -> str:
 _STREET_WORD = (r"(?i:street|st|road|rd|avenue|ave|av|lane|ln|drive|dr|way|court|ct|place|pl|circle|cir|boulevard|blvd|blv|"
                 r"highway|hwy|parkway|pkwy|terrace|ter|trail|trl|loop|run|cove|cv|path|point|pt|row|square|sq|crossing|xing|"
                 r"pass|pike|bend|glen|grove|ridge|view|walk|lp|cswy|causeway)")
-ADDRESS_NUMBER_RE = re.compile(rf"(?<![\w.,/:-])\d{{1,6}}[A-Za-z]?(?=[ ]{{1,2}}(?:[NSEW]{{1,2}}\.?[ ]{{1,2}})?"
-                               rf"(?:(?!(?i:and|or|to|from|of)\b)(?:[A-Za-z][\w'.-]*|\d{{1,3}}(?i:st|nd|rd|th)?)[ ]{{1,2}}){{1,3}}{_STREET_WORD}\b"
+_ADDRESS_NUMBER = rf"(?<![\w.,/:-])\d{{1,6}}[A-Za-z]?"
+_BEFORE_STREET_WORD = (rf"[ ]{{1,2}}(?:[NSEW]{{1,2}}\.?[ ]{{1,2}})?"
+                       rf"(?:(?!(?i:and|or|to|from|of)\b)(?:[A-Za-z][\w'.-]*|\d{{1,3}}(?i:st|nd|rd|th)?)[ ]{{1,2}}){{1,3}}{_STREET_WORD}\b")
+ADDRESS_NUMBER_RE = re.compile(rf"{_ADDRESS_NUMBER}(?={_BEFORE_STREET_WORD}"
                                rf"|[ ]{{1,2}}(?:[NSEW]{{1,2}}\.?[ ]{{1,2}})?[A-Z][a-z]+[ ]{{0,2}}(?:,|\.|$))")
+# only a number followed by a street word ("12 Sample Lane"): a site's own number ("Site 3 North", "- 41 Bridge") stays
+STREET_NUMBER_RE = re.compile(rf"{_ADDRESS_NUMBER}(?={_BEFORE_STREET_WORD})")
 # a route or a mile marker, not a house number: "1234 N. 301 Hwy", "US 41", "Highway 17 Bridge", "Exit 131"
 ROUTE_BEFORE = re.compile(r"(?i:\b(?:US|SR|CR|S\.?R\.?|C\.?R\.?|N|S|E|W|Hwy|Highway|Route|Rte|Interstate|I|Exit|Mile|Marker|"
                           r"MM|Road|Rd|Lot|Unit|Suite|Ste|Apt|Bldg|Building|Station|LS|PS|No|#))[ .#-]{0,3}$")
 
 
-def strip_house_numbers(v: str) -> str:
-    """Every street address's house number in v becomes "[house number removed]" (ADDRESS_NUMBER_RE)."""
-    v = ADDRESS_NUMBER_RE.sub(lambda m: m.group(0) if ROUTE_BEFORE.search(v[max(0, m.start() - 14):m.start()])
+def strip_house_numbers(v: str, street_word_only: bool = False) -> str:
+    """Every street address's house number in v becomes "[house number removed]" (ADDRESS_NUMBER_RE; with
+    street_word_only, only a number followed by a street word, STREET_NUMBER_RE: for a name that is a site's own, where
+    "Site 3 North" or "- 41 Bridge" is the site and not an address)."""
+    v = (STREET_NUMBER_RE if street_word_only else ADDRESS_NUMBER_RE).sub(lambda m: m.group(0) if ROUTE_BEFORE.search(v[max(0, m.start() - 14):m.start()])
                               else HOUSE_NUMBER_REMOVED, v)
     # the numbers listed before it ("the buildings at 226, 224 and 220 Sample Ave")
     return re.sub(rf"(?<![\w.,/:-])(?:\d{{1,6}}[A-Za-z]?[ ]{{0,2}}(?:,[ ]{{0,2}}(?:(?:and|&)[ ]{{1,2}})?|[ ]{{1,2}}(?:and|&)[ ]{{1,2}}))+"
