@@ -6,6 +6,7 @@ Run from pipeline/: python -m pytest tests/test_ingest_wa.py -q
 from __future__ import annotations
 
 import json
+from collections import Counter
 from pathlib import Path
 
 from ingest import wa_ecology_spills as E
@@ -215,3 +216,32 @@ def test_washington_permits_are_read_from_the_epa_tables_under_the_general_rules
     assert ok
     ok, why = S.reached_water({}, ["SSO"], [], [])                       # an SSO naming no water and no water impact
     assert not ok and why == "no evidence the discharge reached a water"
+
+
+# ---------------------------------------------------------------- operator rows (scripts/add_wa_operators.py)
+
+def test_every_washington_permit_of_the_registry_has_exactly_one_operator_row():
+    root = Path(__file__).resolve().parents[2]
+    dis = [r for r in json.loads((root / "data" / "dischargers.json").read_text()) if r.get("state") == "WA"]
+    held = Counter(p for r in dis for p in r["npdes_permits"])
+    assert all(n == 1 for n in held.values())
+    permits = set()
+    for f in ("outfalls-plants-us.json", "outfalls-us.json", "outfalls-wa.json"):
+        doc = json.loads((root / "data" / f).read_text())
+        permits |= {r["npdes_permit"] for r in doc["outfalls"] if str(r.get("npdes_permit", "")).startswith("WA")}
+    assert permits <= set(held)
+    by_id = {r["id"]: r for r in dis}
+    assert {"WA0029181", "WA0029581", "WA0032247"} <= set(by_id["wa-king-county-west-point"]["npdes_permits"])
+    assert by_id["wa-port-angeles"]["npdes_permits"] == ["WA0023973", "WAG994562"]
+    assert by_id["wa-sound-transit-east-link"]["kind"] == "cso_closed_or_none"
+    assert by_id["wa-wa0020923"]["legal_form"] == "city"              # EPA types Westport private; it is the city's
+    assert by_id["wa-warm-beach-camp"]["legal_form"] == "institution"
+    for r in dis:
+        assert "[name removed]" not in r["name"] and r["notification_signup_url"] is None
+
+
+def test_ecology_facilities_join_the_operator_rows():
+    recs, _ = E.build(E.load_file(str(FIX / "wa_ecology_spills.json"))[0], FETCHED, [],
+                      {"Seattle CSO": {"npdes_permit": "WA0031682", "basis": "name"}}, None)
+    r = next(r for r in recs if r["discharger_name"] == "Seattle CSO")
+    assert r["discharger_id"] == "wa-seattle-spu"
