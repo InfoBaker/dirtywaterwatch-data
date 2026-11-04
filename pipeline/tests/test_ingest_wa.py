@@ -134,3 +134,73 @@ def test_ecology_outage_keeps_the_records(tmp_path, monkeypatch):
     assert E.run(None, str(out)) == 1
     doc = json.loads(out.read_text())
     assert doc["ok"] is False and doc["count"] == n
+
+
+# ---------------------------------------------------------------- King County / Seattle CSO status (generic snapshot)
+
+def kc_polls():
+    """Three polls ten minutes apart: Ballard overflowing, still overflowing, then 'in the last 48 hours'; the
+    placeholder-point outfall 026 starts overflowing at the third poll."""
+    base = (FIX / "wa_kc_cso_status.csv").read_text()
+    p2 = base.replace("2026  2:30", "2026  2:40")
+    p3 = (base.replace("2026  2:30", "2026  2:50")
+          .replace("Ballard,3,11/04/2026  2:50,CurrentlyOverflowing", "Ballard,3,11/04/2026  2:50,OverflowLast48hrs")
+          .replace("Seattle CSO,26,11/04/2026  2:50,NoRecentOverflow", "Seattle CSO,26,11/04/2026  2:50,CurrentlyOverflowing"))
+    return [("2026-11-04T10:31:00Z", base), ("2026-11-04T10:41:00Z", p2), ("2026-11-04T10:51:00Z", p3)]
+
+
+def kc_run():
+    from ingest.generic import csv_json, runner
+    _, block = runner.load_source("wa-kc-cso-status-csv")
+    block = block["fetch"] if "fetch" in block else block
+    state, recs = {}, []
+    for fetched, text in kc_polls():
+        rows = csv_json.read_csv(text, block)
+        recs, stats = runner.build("wa-kc-cso-status-csv", block, rows, fetched, extra={"state": state})
+    return {r["source_record_id"]: r for r in recs}, stats, state
+
+
+def test_kc_cso_status_opens_and_closes_an_overflow_at_the_polls_on_the_permits_outfall():
+    recs, stats, _ = kc_run()
+    r = recs["ball-20261104T0230"]
+    assert r["event_type"] == "cso" and r["status"] == "ended" and r["time_precision"] == "poll"
+    assert r["started_at"] == "2026-11-04T02:30:00-08:00" and r["ended_at"] == "2026-11-04T02:50:00-08:00"
+    assert r["raw"]["ended_after"] == "2026-11-04T02:40:00-08:00"
+    assert r["discharger_id"] == "wa-king-county-west-point" and r["npdes_permit"] == "WA0029181"
+    assert r["outfall_id"] == "003" and r["outfall_name"] == "Ballard"
+    assert r["lat"] == 47.663916 and "48 hours" in r["advice_text"]
+
+
+def test_kc_cso_status_first_seen_recent_has_no_start_and_a_placeholder_point_is_not_used():
+    recs, stats, state = kc_run()
+    r = recs["npdes124-20261104T0230"]
+    assert r["status"] == "ended" and r["started_at"] is None and r["ended_at"] == "2026-11-04T02:30:00-08:00"
+    assert r["raw"]["occurred_after"] == "2026-11-02T02:30:00-08:00"        # the map's own 48 hours
+    assert r["npdes_permit"] == "WA0031682" and r["outfall_id"] == "124" and r["discharger_id"] == "wa-seattle-spu"
+    o = recs["npdes026-20261104T0250"]
+    assert o["status"] == "ongoing" and o["started_at"] == "2026-11-04T02:50:00-08:00" and o["ended_at"] is None
+    assert o["lat"] is None and o["lon"] is None and o["outfall_id"] == "026"   # -120.0, 47.26 rejected
+    assert "CSO_Status1" not in state["units"]                                   # the legend rows are dropped
+    assert state["units"]["MAGN"]["state"] == "no_data"
+
+
+def test_kc_cso_status_keeps_only_its_safe_fields():
+    recs, _, state = kc_run()
+    assert leaks(list(recs.values())) == [] and leaks(state) == []
+    assert all("Contact" not in r["raw"]["row"] for r in recs.values())
+
+
+def test_kc_status_file_outfalls_replace_epas_closed_rows_and_a_placeholder_point_is_never_drawn():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("build_wa_outfalls", Path(__file__).resolve().parents[2] / "scripts" / "build_wa_outfalls.py")
+    B = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(B)
+    doc = B.build((FIX / "wa_kc_cso_status.csv").read_text(), "2026-11-04T10:30:14Z")
+    rows = {(r["npdes_permit"], r["outfall"]): r for r in doc["outfalls"]}
+    assert set(rows) == {("WA0029181", "003"), ("WA0029181", "006"), ("WA0031682", "124"), ("WA0031682", "012")}
+    b = rows[("WA0029181", "003")]
+    assert b["outfall_name"] == "Ballard" and b["coords_from"] == "operator status file" and b["lat"] == 47.663916
+    assert b["supersedes"]["outfall_status"] == "CLS" and b["outfall_kind"] == "cso"
+    assert doc["not_placed"] == [{"npdes_permit": "WA0031682", "outfall": "026", "why": "the status file gives a "
+                                  "placeholder point and EPA lists no point for this outfall"}]
+    assert leaks(doc) == []
