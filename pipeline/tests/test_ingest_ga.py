@@ -290,3 +290,13 @@ def test_the_state_law_sentence_keeps_the_georgia_citation_whole():
     assert "GA" not in rules["live_states"]
     s = C.duty_sentence(rules, "GA")
     assert s.endswith("(Ga. Comp. R. & Regs. 391-3-6-.05(3)).") and "safe" not in s.lower()
+
+
+def test_georgias_own_no_water_wordings_are_read_for_georgia_only():
+    for t in ("Dry land", "Dryland", "N/A dry land", "dry land spill", "Not Appicable", "Non Applicable",
+              "n0t applicable", "Bulding Basement", "DID NOT DISCHARGE TO STATE WATERS"):
+        assert E.no_water(t, "GA"), t
+    assert not E.no_water("Dry land", "MA") and not E.no_water("Private Pond", "GA")
+    assert not E.no_water("MS4 stormwater system", "GA")
+    ok, why = E.reached_water({}, ["SSO"], ["Dry land"], [], "GA")
+    assert not ok and why == "receiving water stated as none"
