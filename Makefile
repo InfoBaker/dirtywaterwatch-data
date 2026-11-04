@@ -67,7 +67,9 @@
 #   make build     research fixtures + per-water status and hourly history (data/build/)
 #   make export    write out/ for the site
 #   make charts    chart series (build/charts.py)
-#   make refresh   ingest, reaches, build, charts, export
+#   make refresh   ingest, provisional outfalls, reaches, build, charts, export (REFRESH_STAGES, in order; stops at
+#                  the first that fails). Every feed, extra and stage prints "timing: NAME SECONDS s"
+#                  (scripts/timed.sh; TIMINGS_FILE collects them, scripts/refresh-data.sh prints the longest at the end)
 #   make tally     docs/source-tally.md: every information source by state, what we collect, what we do not and
 #                  what would unlock it (scripts/gen_source_tally.py; reads out/ and data/, writes only the doc;
 #                  scripts/refresh.sh runs it after the export)
@@ -84,6 +86,7 @@ VENV_PY := $(abspath pipeline/.venv/bin/python)
 OBL_PY := $(abspath ../openboatlaunch/pipeline/.venv/bin/python)
 PYTHON ?= $(if $(wildcard $(VENV_PY)),$(VENV_PY),$(OBL_PY))
 PY = cd pipeline && $(PYTHON)
+TIMED = sh $(abspath scripts/timed.sh)
 
 FIXTURES ?= 0
 FIXTURE_FLAG = $(if $(filter 1 yes true,$(FIXTURES)),--fixtures,) $(if $(filter 1 yes true,$(NHDES)),--include-nhdes,)
@@ -108,20 +111,20 @@ setup:
 ingest:
 	@for m in $(INGEST_PRE) $(filter-out $(INGEST_SKIP) $(INGEST_PRE) $(INGEST_SNAPSHOTS),$(INGEST_MODULES)); do \
 	  echo "== ingest.$$m"; \
-	  (cd pipeline && $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
+	  (cd pipeline && $(TIMED) ingest.$$m $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
 	done
 	@ids=$$(cd pipeline && $(PYTHON) -m ingest.generic --list) || echo "!! ingest.generic --list reported problems (exit $$?)"; \
 	for g in $$ids; do \
 	  echo "== ingest.generic $$g"; \
-	  (cd pipeline && $(PYTHON) -m ingest.generic $$g) || echo "!! ingest.generic $$g failed (exit $$?)"; \
+	  (cd pipeline && $(TIMED) generic.$$g $(PYTHON) -m ingest.generic $$g) || echo "!! ingest.generic $$g failed (exit $$?)"; \
 	done
 	@for m in $(INGEST_SNAPSHOTS); do \
 	  echo "== ingest.$$m"; \
-	  (cd pipeline && $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
+	  (cd pipeline && $(TIMED) ingest.$$m $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
 	done
 	@for t in $(INGEST_EXTRA); do \
 	  echo "== $$t"; \
-	  $(MAKE) --no-print-directory $$t || echo "!! $$t failed (exit $$?)"; \
+	  $(TIMED) $$t $(MAKE) --no-print-directory $$t || echo "!! $$t failed (exit $$?)"; \
 	done
 
 waters-nhd:         ## receiving-water records from NHDPlus for new targets (ingest/waters_from_nhd.py), budgeted
@@ -146,8 +149,8 @@ fixtures:
 	$(PY) -m build.fixtures
 
 build: $(if $(filter 1 yes true,$(FIXTURES)),fixtures,)
-	$(PY) -m build.rain_thresholds || echo "!! rain thresholds failed; the previous file stays"
-	$(PY) -m build.status $(FIXTURE_FLAG)
+	cd pipeline && $(TIMED) rain-thresholds $(PYTHON) -m build.rain_thresholds || echo "!! rain thresholds failed; the previous file stays"
+	cd pipeline && $(TIMED) status $(PYTHON) -m build.status $(FIXTURE_FLAG)
 
 charts:             ## per-water, per-discharger and per-state chart series (after build, before export)
 	$(PY) -m build.charts
@@ -155,7 +158,11 @@ charts:             ## per-water, per-discharger and per-state chart series (aft
 export:
 	$(PY) -m export.build $(FIXTURE_FLAG)
 
-refresh: ingest provisional-outfalls reaches build charts export
+REFRESH_STAGES = ingest provisional-outfalls reaches build charts export
+refresh:
+	@for t in $(REFRESH_STAGES); do \
+	  $(TIMED) stage.$$t $(MAKE) --no-print-directory $$t || exit 1; \
+	done
 
 tally:              ## docs/source-tally.md from the checklist, the registry, out/ and the water files (after export)
 	$(PYTHON) scripts/gen_source_tally.py
