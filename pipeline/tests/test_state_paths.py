@@ -282,3 +282,88 @@ def test_restored_cache_lets_the_next_run_answer_without_requests(tmp_path, monk
     assert again.get("nldi-comid", "https://example.invalid/nldi", {"q": "1"}) == {"features": [{"id": 1}]}
     assert Session.calls == 1 and again.requests == 0
     assert len(again._nldi_recent()) == 1                             # the first runner's NLDI request still counts
+
+
+# ---------------------------------------------------------------- openboatlaunch's water records (state/obl-water.tar.gz)
+
+def obl_tarball(tmp_path: Path, extra=(), records=3, meta=True) -> Path:
+    """The object as the Mac packs it: tar -czf obl-water.tar.gz -C <openboatlaunch>/out water meta.json."""
+    src = tmp_path / "obl-src" / "out"
+    for i, slug in enumerate(["haw-river-nc", "lake-wheeler-nc", "lake-lanier-ga"][:records]):
+        put(src, f"water/{slug}.json", json.dumps({"slug": slug, "state": slug[-2:].upper(), "name": slug}))
+    if meta:
+        put(src, "meta.json", json.dumps({"built": "2026-11-01T04:00:00Z"}))
+    out = tmp_path / "obl-water.tar.gz"
+    with tarfile.open(out, "w:gz") as tf:
+        if (src / "water").is_dir():
+            tf.add(src / "water", arcname="water")
+        if meta:
+            tf.add(src / "meta.json", arcname="meta.json")
+        for name, kind, data in extra:
+            ti = tarfile.TarInfo(name)
+            if kind == "link":
+                ti.type, ti.linkname = tarfile.SYMTYPE, "/etc/passwd"
+                tf.addfile(ti)
+            else:
+                ti.size = len(data)
+                tf.addfile(ti, io.BytesIO(data))
+    return out
+
+
+@pytest.mark.parametrize("name,ok", [
+    ("water/haw-river-nc.json", True), ("./water/haw-river-nc.json", True), ("meta.json", True), ("water", True),
+    ("water/sub/x.json", False), ("water/._haw-river-nc.json", False), ("../water/x.json", False),
+    ("/water/x.json", False), ("water/x.txt", False), ("launch/x.json", False), ("out/water/x.json", False),
+    ("water/..json", False), ("", False), ("meta.json/x", False),
+])
+def test_obl_member_names(name, ok):
+    assert SP.obl_allowed(name) is ok
+
+
+def test_unpack_obl_writes_the_records_and_meta_only(tmp_path):
+    src = obl_tarball(tmp_path, extra=[("../evil.json", "file", b"{}"), ("water/sub/x.json", "file", b"{}"),
+                                       ("water/._haw-river-nc.json", "file", b"apple"), ("water/link.json", "link", b""),
+                                       ("notes.txt", "file", b"x")])
+    dest = tmp_path / "openboatlaunch" / "out"
+    c = SP.unpack_obl(src, dest)
+    assert c["records"] == 3 and c["meta"] == 1 and c["skipped_not_listed"] == 4 and c["skipped_not_regular"] == 1
+    got = sorted(str(p.relative_to(dest)) for p in dest.rglob("*") if p.is_file())
+    assert got == ["meta.json", "water/haw-river-nc.json", "water/lake-lanier-ga.json", "water/lake-wheeler-nc.json"]
+    assert not (tmp_path / "evil.json").exists() and not (tmp_path / "openboatlaunch" / "evil.json").exists()
+
+
+@pytest.mark.parametrize("how", ["corrupt", "no-records", "not-gzip"])
+def test_unpack_obl_refuses_an_unreadable_object_and_writes_nothing(tmp_path, how, capsys):
+    src = obl_tarball(tmp_path, records=0 if how == "no-records" else 3)
+    if how == "corrupt":
+        src.write_bytes(src.read_bytes()[:-30])
+    elif how == "not-gzip":
+        src.write_bytes(b"<html>not an object</html>")
+    dest = tmp_path / "openboatlaunch" / "out"
+    with pytest.raises(SP.Unreadable):
+        SP.unpack_obl(src, dest)
+    assert not dest.exists()
+    assert SP.main(["unpack-obl", str(src), "--to", str(dest)]) == 1
+    assert "could not be read" in capsys.readouterr().out
+
+
+def test_unpack_obl_never_writes_into_a_real_openboatlaunch_checkout(tmp_path):
+    src = obl_tarball(tmp_path)
+    dest = tmp_path / "openboatlaunch" / "out"
+    (tmp_path / "openboatlaunch" / ".git").mkdir(parents=True)
+    with pytest.raises(SP.Unreadable, match="checkout"):
+        SP.unpack_obl(src, dest)
+    assert not dest.exists()
+
+
+def test_unpack_obl_without_meta_warns(tmp_path, capsys):
+    src = obl_tarball(tmp_path, meta=False)
+    dest = tmp_path / "openboatlaunch" / "out"
+    assert SP.main(["unpack-obl", str(src), "--to", str(dest)]) == 0
+    assert "no meta.json" in capsys.readouterr().out
+    assert len(list((dest / "water").glob("*.json"))) == 3
+
+
+def test_obl_default_destination_is_the_sibling_the_pipeline_reads():
+    assert SP.OBL_OUT == ROOT.parent / "openboatlaunch" / "out"
+    assert SP.OBL_KEY == "state/obl-water.tar.gz" and SP.STATE_KEY.fullmatch(SP.OBL_KEY)
