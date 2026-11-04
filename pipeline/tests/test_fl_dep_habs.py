@@ -50,3 +50,13 @@ def test_a_site_named_by_a_street_address_keeps_no_house_number():
     assert r["waterbody_text"] == "Example Lake"
     recs, _ = H.build([v(1, "2026-10-20T14:00", "Yes", loc="Example River - Highway 17 Bridge")], "x", NOW)
     assert recs[0]["outfall_name"] == "Example River - Highway 17 Bridge"
+
+
+def test_a_site_numbered_by_the_department_keeps_its_number():
+    # only a number before a street word is a house number; "Site 3 North" and "- 41 Bridge" name the site itself
+    for loc in ("Example Lake - Site 3 North", "Example River - 41 Bridge"):
+        recs, _ = H.build([v(1, "2026-10-20T14:00", "Yes", loc=loc)], "x", NOW)
+        assert recs[0]["outfall_name"] == loc, recs[0]["outfall_name"]
+    recs, _ = H.build([v(1, "2026-10-20T14:00", "Yes", loc="Example Lake - Site 3 North"),
+                       v(2, "2026-10-20T15:00", "Yes", loc="Example Lake - Site 4 North")], "x", NOW)
+    assert len({r["outfall_name"] for r in recs}) == 2                          # two sites, two names

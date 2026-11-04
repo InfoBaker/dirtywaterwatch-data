@@ -150,7 +150,7 @@ def make(ep: dict, lift: dict | None, key: str, fetched_at: str, now: datetime) 
     start, last_t = utc_time(a.get("SampleDateTime")), utc_time(last.get("SampleDateTime"))
     # a site named by a street address ("Sample Lake - 12 Sample Lane") is often a resident's dock: the house number
     # is not published (common.strip_house_numbers); the visits are grouped by the site as DEP names it
-    site = strip_house_numbers(a["locationString"]) if isinstance(a.get("locationString"), str) else a.get("locationString")
+    site = strip_house_numbers(a["locationString"], street_word_only=True) if isinstance(a.get("locationString"), str) else a.get("locationString")
     if site != a.get("locationString"):
         key = site_key({**a, "locationString": site})
     raw = {"site": site, "site_key": key, "county": a.get("County"),
