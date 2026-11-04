@@ -47,6 +47,12 @@ jobs:
           find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
       - name: Refresh (feeds, status, reaches, charts, export, tally, R2 current/)
         run: sh scripts/refresh-data.sh
+      - name: Full export to R2 for the site build (state/out.tar.gz; the site repository's publish workflow reads it)
+        if: success()
+        run: |
+          [ -f data/build/export-blocked.json ] && { echo "export blocked; out/ not published"; exit 0; }
+          tar -czf out.tar.gz out && wrangler r2 object put dirtywaterwatch-data/state/out.tar.gz --file out.tar.gz --remote
+          ls -la out.tar.gz
       - name: Save pipeline state to R2
         # only after a refresh that ran to the end: a cancelled or failed run must not overwrite the saved history
         # (a seed from the owner's machine, or the last good run) with a partial one
