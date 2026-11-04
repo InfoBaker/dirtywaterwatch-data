@@ -23,7 +23,7 @@ machine_readable: true
 legal_basis: "Md. Code, Environment § 9-331.1; COMAR 26.08.10"
 checked: "2026-11-02"
 # Generic ingester port (docs/generic-ingesters.md): the same feed as a fetch block. live: false, so make ingest
-#   still runs the module; tests/test_generic_parity.py compares the two record by record.
+#   still runs the module; tests/test_generic_parity.py compares the two record by record, over two runs.
 fetch:
   platform: "socrata"
   live: false
@@ -35,6 +35,8 @@ fetch:
   safe_fields: [overflow_type, facility_collection_system, npdes_no, start_date, start_time, duration_day,
                 duration_hour, duration_minute, overflow_address, zip, owner_name, discharge_volume, overflow_cause,
                 receiving_water, county, penalty_id, overflow_latitude, overflow_longitude, id]
+  reviewed_fields:
+    owner_name: "the permittee or system owner that filed the report (a utility, county or company); scrubbed as free text in the record"
   free_text: [overflow_cause, receiving_water]
   record:
     started_at: {field: start_date, time: start_time}
@@ -59,7 +61,14 @@ fetch:
     no_water: ["^\\s*(nope|duplicate\\b.*)\\s*[.!]*\\s*$"]
   dedupe: {repeats: suffix, order: ["-volume_gal"], ignore: [id]}
   post: "ingest.generic.transforms.md_mde_duplicates"         # same start and address; MDE's own marks; City layer
-  history: {keep_missing: true, revisions: true}
+  # a row that leaves the table and a current row with the same permit and start, or the same permit, day and
+  # address, is its corrected form: the old record is duplicate_of the new one
+  history:
+    keep_missing: true
+    revisions: true
+    supersede:
+      - ["{npdes_no|upper|default:-}", "{@started_at}"]
+      - ["{npdes_no|upper|default:-}", "{@started_at|day}", "{overflow_address|address_key|default:-}"]
   meta:
     credit: "Maryland Department of the Environment, Reported Sewer Overflows (New for 2023), opendata.maryland.gov"
     license: "Public Domain (Socrata metadata)"

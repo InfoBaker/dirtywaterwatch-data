@@ -27,7 +27,8 @@
 #                  back to 2025); va_waters is a helper ("not a feed"; `python -m ingest.va_waters`
 #                  re-extracts waters-va.json and the VA rows of waters-mid-atlantic.csv)
 #                  Generic feeds (docs/generic-ingesters.md): every data/sources/<id>.yaml whose fetch block says
-#                  live: true runs as `python -m ingest.generic <id>`, sorted by id, after every module and before
+#                  live: true runs as `python -m ingest.generic <id>`, sorted by id (a block's `after` first; a live
+#                  block whose module is still a feed is refused; --list problems print "!!"), after every module and before
 #                  INGEST_SNAPSHOTS (so a generic feed can dedupe against a module's events file); blocks with
 #                  live: false (ports being compared with their modules) are not run.
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
@@ -92,7 +93,8 @@ ingest:
 	  echo "== ingest.$$m"; \
 	  (cd pipeline && $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
 	done
-	@for g in $$(cd pipeline && $(PYTHON) -m ingest.generic --list); do \
+	@ids=$$(cd pipeline && $(PYTHON) -m ingest.generic --list) || echo "!! ingest.generic --list reported problems (exit $$?)"; \
+	for g in $$ids; do \
 	  echo "== ingest.generic $$g"; \
 	  (cd pipeline && $(PYTHON) -m ingest.generic $$g) || echo "!! ingest.generic $$g failed (exit $$?)"; \
 	done

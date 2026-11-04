@@ -23,7 +23,7 @@ machine_readable: true
 legal_basis: "COMAR 26.08.10; Modified Consent Decree (Civil Action JFM-02-1524)"
 checked: "2026-11-02"
 # Generic ingester port (docs/generic-ingesters.md): the same feed as a fetch block. live: false, so make ingest
-#   still runs the module; tests/test_generic_parity.py compares the two record by record.
+#   still runs the module; tests/test_generic_parity.py compares the two record by record, over two runs.
 fetch:
   platform: "arcgis"
   live: false
@@ -77,8 +77,26 @@ fetch:
     state: "MD"
     county: "Baltimore City"
     aliases: {Middle Branch: Middle Branch Patapsco River, Inner Harbor: Northwest Harbor}
+  # the codes decoded beside each record, and every date field as read (the citation of each time)
+  raw_notes:
+    _status_name: {field: STATUS, upper: true, unmapped: null,
+                   map: {PROG: In Progress, 5DAY: 5 Day Report Submitted, 24HR: 24 Hour Report Submitted,
+                         FORM: Paper Form Submittal}}
+    _watershed_name: {field: WATERSHED, unmapped: null,
+                      map: {"2130904": Jones Falls, "2130901": Back River, "2130903": Baltimore Harbor,
+                            "2130905": Gwynns Falls, "2130906": Patapsco River L N Br}}
+    _responsibility: {field: RESPONSIBILITY, upper: true, map: {DPW: DPW, CO: County, PRI: Private, FAC: Facility, UNK: Unknown}}
+  decoded_times:
+    parse: epoch_ms_wallclock
+    fields: [SSO_DATE, START_DATETIME, END_DATETIME, WAIVER_REQUESTED, WAIVER_GRANTED, WAIVER_CLOSED, WAIVER_DENIED]
   dedupe: {repeats: first}
-  history: {keep_missing: true, track: [STATUS, EST_VOLUME]}
+  # the module's history keys, so a switch over keeps each record's history
+  history:
+    keep_missing: true
+    missing_key: _missing_from_layer_since
+    track:
+      STATUS: {key: _status_seen, label: status}
+      EST_VOLUME: {key: _volume_seen, label: gallons, from: "@volume_gal", skip_null: true}
   meta:
     credit: "Baltimore City Department of Public Works, Sewer Overflow Map (SSO_Points2)"
     time_basis: "The layer stores local wall-clock time as if it were UTC: each epoch value is read as UTC and the wall-clock time labelled America/New_York."

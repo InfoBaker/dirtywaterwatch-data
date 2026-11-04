@@ -3,11 +3,13 @@ response), keep the safe fields, map each row to the event record (fieldmap.py),
 earlier runs, and write data/build/events/<id>.json exactly as a feed module does.
 
   python -m ingest.generic <source-id> [--file saved] [--meta saved-metadata.json] [--out path]
-  python -m ingest.generic --list        the sources make ingest runs (fetch blocks with live: true)
-  python -m ingest.generic --check       every fetch block validated; non-zero exit on a problem
+  python -m ingest.generic --list        the sources make ingest runs (fetch blocks with live: true), in order
+  python -m ingest.generic --check       every fetch block validated; nothing is fetched or written
 
 A block with live: false (a port being compared with its module) runs only with --out, so it never replaces the
-module's events file.
+module's events file; a live block whose module is still a feed is refused, so the two never write one file. Every
+failure (a block that cannot run, a fetch, a short response, too many rows a hook could not read) is written to the
+events file as ok: false, and the previous records stay.
 """
 from __future__ import annotations
 
@@ -15,6 +17,7 @@ import argparse
 import hashlib
 import importlib
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -31,7 +34,29 @@ from ingest.generic.base import session
 PLATFORMS = {"socrata": "socrata", "arcgis": "arcgis", "csv": "csv_json", "json": "csv_json", "rss": "rss",
              "atom": "rss", "snapshot": "snapshot"}
 STATE_DIR = BUILD_DIR / "generic"
+INGEST_DIR = Path(__file__).resolve().parent.parent
 RECORD_INTERNAL = {"_start_dt", "_end_dt"}
+MISSING_KEY = "_missing_from_source_since"
+MAX_ERROR_SHARE = 0.2
+MIN_ROWS_RATIO = 0.5
+# keys every block may carry, and the keys of each platform (every block setting is checked)
+COMMON_KEYS = {"platform", "live", "time_zone", "safe_fields", "reviewed_fields", "free_text", "filter", "bounds",
+               "record", "transform", "waters", "dedupe", "post", "history", "meta", "raw_notes", "decoded_times",
+               "headers", "browser_headers", "max_error_share", "min_rows_ratio", "after", "module"}
+PLATFORM_KEYS = {
+    "socrata": {"domain", "dataset", "format", "metadata", "where", "order", "page_size", "max_rows"},
+    "arcgis": {"url", "where", "out_fields", "order_by", "cursor_field", "page_size", "max_rows", "geometry", "metadata"},
+    "csv": {"url", "params", "csv"}, "json": {"url", "params", "json"}, "rss": {"url", "params"},
+    "atom": {"url", "params"},
+}
+REQUIRED_KEYS = {"socrata": {"domain", "dataset"}, "arcgis": {"url"}, "csv": {"url"}, "json": {"url"}, "rss": {"url"},
+                 "atom": {"url"}}
+# meta keys renamed to the names the export publishes (export/build.py PUBLIC_FEED_META)
+META_ALIASES = {"time_basis": "time_note", "caveat": "disclaimer", "time_zone": "timezone"}
+
+
+class RunFailed(RuntimeError):
+    """A run whose records must not replace the previous ones."""
 
 
 def platform(name: str):
@@ -49,7 +74,10 @@ def load_source(source_id: str, sources_dir: Path = SOURCES_DIR) -> tuple[dict, 
     row = yaml.safe_load(p.read_text()) if p.exists() else None
     if row is None:
         for q in sorted(sources_dir.glob("*.yaml")):
-            d = yaml.safe_load(q.read_text()) or {}
+            try:
+                d = yaml.safe_load(q.read_text()) or {}
+            except yaml.YAMLError:
+                continue
             if isinstance(d, dict) and d.get("id") == source_id:
                 row = d
                 break
@@ -61,26 +89,79 @@ def load_source(source_id: str, sources_dir: Path = SOURCES_DIR) -> tuple[dict, 
     return row, block
 
 
-def blocks(sources_dir: Path = SOURCES_DIR) -> dict[str, tuple[dict, dict]]:
-    """{source id: (row, fetch block)} for every registry row with a fetch block."""
+def blocks(sources_dir: Path = SOURCES_DIR, unreadable: list | None = None) -> dict[str, tuple[dict, dict]]:
+    """{source id: (row, fetch block)} for every registry row with a fetch block; files that cannot be read are
+    named in unreadable."""
     out = {}
     for p in sorted(sources_dir.glob("*.yaml")):
         try:
             d = yaml.safe_load(p.read_text()) or {}
-        except yaml.YAMLError:
+        except (yaml.YAMLError, OSError) as e:
+            if unreadable is not None:
+                unreadable.append(f"{p.name}: {type(e).__name__}")
             continue
-        if isinstance(d, dict) and isinstance(d.get("fetch"), dict):
+        if isinstance(d, dict) and d.get("fetch") is not None:
+            if not isinstance(d["fetch"], dict):
+                if unreadable is not None:
+                    unreadable.append(f"{p.name}: fetch is not a mapping")
+                continue
             out[d.get("id") or p.stem] = (d, d["fetch"])
     return out
 
 
-def live_ids(sources_dir: Path = SOURCES_DIR) -> list[str]:
-    return sorted(sid for sid, (row, b) in blocks(sources_dir).items()
-                  if b.get("live") is True and row.get("enabled", True) is not False)
+def module_feed(source_id: str, block: dict) -> str | None:
+    """The feed module that writes the same events file (ingest/<id with _>.py, or the block's `module`), when it is
+    still a feed (has a __main__ and is not marked "not a feed", the Makefile's rule)."""
+    for name in filter(None, [block.get("module"), source_id.replace("-", "_")]):
+        p = INGEST_DIR / f"{name}.py"
+        if p.exists():
+            text = p.read_text()
+            if re.search(r"__name__ == .__main__.", text) and "not a feed" not in text:
+                return name
+    return None
+
+
+def live_ids(sources_dir: Path = SOURCES_DIR, problems: list | None = None) -> list[str]:
+    """The live blocks in run order: by id, except that a block runs after the ids it names in `after`. A live block
+    whose module is still a feed is left out and named in problems."""
+    problems = problems if problems is not None else []
+    found = blocks(sources_dir, problems)
+    ids = []
+    for sid, (row, b) in sorted(found.items()):
+        if b.get("live") is not True or row.get("enabled", True) is False:
+            continue
+        mod = module_feed(sid, b)
+        if mod:
+            problems.append(f"{sid}: live, but ingest/{mod}.py still writes its events file (mark the module "
+                            f"\"not a feed\" when the block replaces it)")
+            continue
+        ids.append(sid)
+    order, done, visiting = [], set(), set()
+
+    def visit(sid):
+        if sid in done:
+            return
+        if sid in visiting:
+            problems.append(f"{sid}: a cycle in after")
+            return
+        visiting.add(sid)
+        for dep in F.listify(found[sid][1].get("after")):
+            if dep in ids:
+                visit(dep)
+        visiting.discard(sid)
+        done.add(sid)
+        order.append(sid)
+    for sid in ids:
+        visit(sid)
+    return order
 
 
 def check_all(sources_dir: Path = SOURCES_DIR) -> dict[str, list[str]]:
-    return {sid: errs for sid, (_, b) in blocks(sources_dir).items() if (errs := validate_block(b, sid))}
+    unreadable: list = []
+    out = {sid: errs for sid, (_, b) in blocks(sources_dir, unreadable).items() if (errs := validate_block(b, sid))}
+    for u in unreadable:
+        out[u.split(":")[0]] = [u]
+    return out
 
 
 def validate_block(block: dict, source_id: str = "") -> list[str]:
@@ -89,11 +170,26 @@ def validate_block(block: dict, source_id: str = "") -> list[str]:
         mod = platform(block.get("platform", ""))
     except F.SpecError as e:
         return errs + [str(e)]
-    if block.get("platform") == "snapshot":
+    p = block["platform"]
+    inner = block.get("rows_from") if p == "snapshot" else p
+    allowed = COMMON_KEYS | PLATFORM_KEYS.get(inner, set()) | ({"rows_from", "snapshot"} if p == "snapshot" else set())
+    unknown = set(block) - allowed
+    if unknown:
+        errs.append(f"unknown settings {sorted(unknown)} for platform {p}" + (f" (rows from {inner})" if p == "snapshot" else ""))
+    missing = REQUIRED_KEYS.get(inner, set()) - set(block)
+    if missing:
+        errs.append(f"missing settings {sorted(missing)} for {inner}")
+    if inner == "arcgis" and block.get("out_fields") is not None:
+        of = block["out_fields"]
+        if not isinstance(of, list) or set(of) - set(block.get("safe_fields") or []):
+            errs.append("arcgis out_fields is a list of safe fields (never *)")
+    if inner == "socrata" and block.get("format") not in (None, "json", "csv"):
+        errs.append("socrata format is json or csv")
+    if p == "snapshot":
         errs = [e for e in errs if "source_record_id" not in e] + mod.validate(block)
-        if block.get("rows_from") and block["rows_from"] != "snapshot":
+        if inner and inner != "snapshot":
             try:
-                platform(block["rows_from"])
+                platform(inner)
             except F.SpecError as e:
                 errs.append(str(e))
     return errs
@@ -103,7 +199,6 @@ def validate_block(block: dict, source_id: str = "") -> list[str]:
 
 def keep_row(row: dict, block: dict) -> bool:
     """The block's filter: every rule {field, regex, exclude} must hold (exclude: true drops matching rows)."""
-    import re
     for rule in block.get("filter") or []:
         hit = bool(re.search(rule["regex"], F.clean(F.get(row, rule["field"])), re.I))
         if hit == bool(rule.get("exclude")):
@@ -114,7 +209,6 @@ def keep_row(row: dict, block: dict) -> bool:
 def match_water(rec: dict, row: dict, notes: dict, ctx: F.Ctx) -> tuple[list[str], str]:
     """(water_slugs, water_match): text that names no water stays text and is placed on none; otherwise the
     block's matcher (waters.matcher), when it has one; else none (the status build matches by name later)."""
-    import re
     w = ctx.block.get("waters") or {}
     text = F.clean(rec.get("waterbody_text"))
     if not text:
@@ -135,40 +229,54 @@ def match_water(rec: dict, row: dict, notes: dict, ctx: F.Ctx) -> tuple[list[str
     return list(slugs or []), (how if slugs else "none")
 
 
-def to_record(row: dict, ctx: F.Ctx) -> dict:
-    """One safe row -> one event record. Never drops a row: what cannot be read is an unknown record with a
-    parse_error."""
+def to_record(row: dict, ctx: F.Ctx, dropped: list | None = None) -> dict:
+    """One safe row -> one event record. Never drops a row: what cannot be read is a record with a parse_error.
+    A transform or matcher that fails leaves the mapped fields and the record key as the field map made them, adds
+    its error, and counts in raw._hook_errors (the run fails when too many rows have one)."""
     block = ctx.block
     raw = {"row": dict(row)}
+    if dropped:
+        raw["_dropped_objects"] = sorted(dropped)
     try:
         rec, notes = F.build_fields(row, ctx)
-        for fn in F.listify(block.get("transform")):
-            F.resolve(fn)(row, rec, notes, ctx)
-        if rec.get("lat") is not None and not rec.get("coord_source"):
-            rec["coord_source"] = "source"
-        slugs, how = match_water(rec, row, notes, ctx)
-        problems = notes.pop("_problems", [])
-        raw.update(notes)
-        sid = rec.pop("source_record_id", None)
-        if sid is None:
-            sid = "row-" + F.row_sha(row)[:12]
-            problems.append("no source record id: the id is a hash of the row")
-        rec = {k: v for k, v in rec.items() if k not in RECORD_INTERNAL}
-        if rec.get("source_updated_at") is None:          # the record's own edit time, else the dataset's
-            rec["source_updated_at"] = ctx.source_updated_at
-        return event(source_id=ctx.source_id, source_record_id=str(sid), fetched_at=ctx.fetched_at,
-                     water_slugs=slugs, water_match=how, raw=raw, parse_error="; ".join(problems) or None, **rec)
     except F.SpecError:
         raise
     except Exception as e:  # noqa: BLE001 - never drop a record
-        sid = None
-        try:
-            sid = F.value(block["record"]["source_record_id"], row, {}, ctx)
-        except Exception:  # noqa: BLE001
-            pass
-        return event(source_id=ctx.source_id, source_record_id=str(sid or "row-" + F.row_sha(row)[:12]),
+        raw["_hook_errors"] = [f"field map: {type(e).__name__}: {e}"]
+        return event(source_id=ctx.source_id, source_record_id="row-" + F.row_sha(row)[:12],
                      fetched_at=ctx.fetched_at, source_updated_at=ctx.source_updated_at, raw=raw,
-                     parse_error=f"{type(e).__name__}: {e}")
+                     parse_error=f"the field map could not read this row ({type(e).__name__}: {e})")
+    errors = []
+    for fn in F.listify(block.get("transform")):
+        try:
+            F.resolve(fn)(row, rec, notes, ctx)
+        except F.SpecError:
+            raise
+        except Exception as e:  # noqa: BLE001
+            errors.append(f"{fn}: {type(e).__name__}: {e}")
+    if rec.get("lat") is not None and not rec.get("coord_source"):
+        rec["coord_source"] = "source"
+    try:
+        slugs, how = match_water(rec, row, notes, ctx)
+    except F.SpecError:
+        raise
+    except Exception as e:  # noqa: BLE001
+        errors.append(f"{(block.get('waters') or {}).get('matcher')}: {type(e).__name__}: {e}")
+        slugs, how = [], "none"
+        notes["_water"] = {"why_none": "the water matcher failed on this row"}
+    problems = notes.pop("_problems", []) + errors
+    if errors:
+        notes["_hook_errors"] = errors
+    raw.update(notes)
+    sid = rec.pop("source_record_id", None)
+    if sid is None:
+        sid = "row-" + F.row_sha(row)[:12]
+        problems.append("no source record id: the id is a hash of the row")
+    rec = {k: v for k, v in rec.items() if k not in RECORD_INTERNAL}
+    if rec.get("source_updated_at") is None:          # the record's own edit time, else the dataset's
+        rec["source_updated_at"] = ctx.source_updated_at
+    return event(source_id=ctx.source_id, source_record_id=str(sid), fetched_at=ctx.fetched_at,
+                 water_slugs=slugs, water_match=how, raw=raw, parse_error="; ".join(problems) or None, **rec)
 
 
 def _order_key(rec: dict, row: dict, order: list[str], ignore) -> tuple:
@@ -213,49 +321,101 @@ def dedupe(records: list[dict], rows: list[dict], block: dict) -> tuple[list[dic
     return out, n
 
 
+def _track_items(h: dict):
+    t = h.get("track") or []
+    if isinstance(t, dict):
+        for f, o in t.items():
+            o = o or {}
+            yield f, o.get("key") or "_seen", o.get("label") or "value", o.get("from") or f, bool(o.get("skip_null")), bool(o.get("key"))
+    else:
+        for f in t:
+            yield f, "_seen", "value", f, False, False
+
+
+def _supersede_keys(rec: dict, keys: list[str]) -> str | None:
+    parts = [F.render(t, (rec.get("raw") or {}).get("row") or {}, rec, None) for t in keys]
+    return None if any(p is None for p in parts) else "\x1f".join(parts)
+
+
 def carry_history(records: list[dict], prev_records: list[dict], block: dict, fetched_at: str) -> Counter:
     """First sighting, revisions of the safe fields and tracked values across runs; records that left the source
-    are kept (raw._missing_from_source_since): the events file is the history seen so far."""
+    are kept with the missing mark (history.missing_key, raw._missing_from_source_since by default): the events
+    file is the history seen so far. history.supersede names keys (lists of templates over the row and the record)
+    by which a record that left the source is matched to the current row that replaced it (a corrected start or
+    address): it is then duplicate_of that row. A record that comes back keeps the gap in raw._absences."""
     h = block.get("history") or {}
+    mkey = h.get("missing_key") or MISSING_KEY
     prev = {r["event_id"]: r for r in prev_records or [] if isinstance(r, dict) and r.get("event_id")}
     n = Counter()
+    ign = set((block.get("dedupe") or {}).get("ignore") or [])
     for r in records:
         p = prev.get(r["event_id"])
         praw = (p or {}).get("raw") or {}
         r["raw"]["_first_seen_at"] = praw.get("_first_seen_at") or (p or {}).get("fetched_at") or fetched_at
         if not p:
             n["new"] += 1
+        if praw.get(mkey):
+            r["raw"]["_absences"] = list(praw.get("_absences") or []) + [{"missing_since": praw[mkey],
+                                                                           "returned_at": fetched_at}]
+            n["returned"] += 1
+        elif praw.get("_absences"):
+            r["raw"]["_absences"] = praw["_absences"]
         if h.get("revisions") and p:
             old, new = praw.get("row") or {}, r["raw"].get("row") or {}
-            ign = set((block.get("dedupe") or {}).get("ignore") or [])
             changed = {k: old.get(k) for k in set(old) | set(new) if k not in ign and F.clean(old.get(k)) != F.clean(new.get(k))}
             revs = list(praw.get("_revisions") or [])
             if changed:
-                revs.append({"replaced_at": fetched_at, "seen_until": p.get("fetched_at"), "old_values": changed})
+                revs.append({"replaced_at": fetched_at, "seen_until": p.get("fetched_at"),
+                             "source_updated_at_before": p.get("source_updated_at"), "old_values": changed})
                 n["revised"] += 1
             if revs:
                 r["raw"]["_revisions"] = revs
-        for f in h.get("track") or []:
-            seen = list(((praw.get("_seen") or {}).get(f)) or [])
-            v = (r["raw"].get("row") or {}).get(f)
-            if not seen or seen[-1].get("value") != v:
-                seen.append({"value": v, "first_seen_at": fetched_at})
-            r["raw"].setdefault("_seen", {})[f] = seen
+        for f, key, label, src, skip_null, own_key in _track_items(h):
+            old = (praw.get(key) if own_key else (praw.get("_seen") or {}).get(f)) if p else None
+            seen = list(old or [])
+            v = r.get(src[1:]) if str(src).startswith("@") else (r["raw"].get("row") or {}).get(src)
+            if not (skip_null and v is None) and (not seen or seen[-1].get(label) != v):
+                seen.append({label: v, "first_seen_at": fetched_at})
+            if own_key:
+                if seen or not skip_null:
+                    r["raw"][key] = seen
+            else:
+                r["raw"].setdefault("_seen", {})[f] = seen
     if h.get("keep_missing", True):
         now = {r["event_id"] for r in records}
+        index = []
+        for keys in h.get("supersede") or []:
+            idx: dict[str, dict] = {}
+            for r in records:
+                k = _supersede_keys(r, keys)
+                if k is not None:
+                    idx.setdefault(k, r)
+            index.append((keys, idx))
         for eid, p in prev.items():
             if eid in now:
                 continue
             p = {**p, "raw": dict(p.get("raw") or {})}
-            p["raw"]["_missing_from_source_since"] = p["raw"].get("_missing_from_source_since") or fetched_at
+            p["raw"][mkey] = p["raw"].get(mkey) or fetched_at
+            succ = None
+            for keys, idx in index:
+                k = _supersede_keys(p, keys)
+                if k is not None and k in idx:
+                    succ = idx[k]
+                    break
+            if succ is not None and not p.get("duplicate_of"):
+                p["duplicate_of"] = succ["event_id"]
+                p["raw"]["_duplicate_basis"] = f"gone from the source; {succ['event_id']} looks like its corrected row"
+                n["superseded_by_corrected_row"] += 1
+            else:
+                n["kept_missing"] += 1
             records.append(p)
-            n["kept_missing"] += 1
     return n
 
 
 def build(source_id: str, block: dict, rows: list[dict], fetched_at: str, prev_records=(), platform_meta=None,
           extra: dict | None = None) -> tuple[list[dict], dict]:
-    """(records, stats) from the source's rows: the whole pipeline after the fetch, with no network."""
+    """(records, stats) from the source's rows: the whole pipeline after the fetch, with no network. RunFailed when
+    more than max_error_share of the rows had a hook fail."""
     errs = validate_block(block, source_id)
     if errs:
         raise F.SpecError(f"{source_id}: " + "; ".join(errs))
@@ -267,15 +427,26 @@ def build(source_id: str, block: dict, rows: list[dict], fetched_at: str, prev_r
     kept = [r for r in rows if keep_row(r, block)]
     if block["platform"] == "snapshot":
         return mod.build(kept, ctx, extra.get("state") if extra else None)
-    safe = [F.safe_row(r, block) for r in kept]
-    records = [to_record(r, ctx) for r in safe]
+    pairs = [F.safe_row(r, block) for r in kept]
+    safe = [s for s, _ in pairs]
+    records = [to_record(s, ctx, d) for s, d in pairs]
+    hook_errors = sum(1 for r in records if r["raw"].get("_hook_errors"))
+    share = float(block.get("max_error_share", MAX_ERROR_SHARE))
+    if records and hook_errors > share * len(records):
+        first = next(r["raw"]["_hook_errors"][0] for r in records if r["raw"].get("_hook_errors"))
+        raise RunFailed(f"{hook_errors} of {len(records)} rows could not be read by the block's hooks (more than "
+                        f"{share:.0%}); first: {first}")
     records, dups = dedupe(records, safe, block)
     for fn in F.listify(block.get("post")):
         dups.update(F.resolve(fn)(records, ctx) or {})
+    # names of private individuals out before the comparison with the previous run (which was written redacted),
+    # and again over everything kept
+    records = redact.redact_events(records)
     hist = carry_history(records, list(prev_records), block, fetched_at)
-    records = redact.redact_events(records)      # private individuals' names in quoted text (build/redact.py)
+    records = redact.redact_events(records)
     records.sort(key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
-    current = [r for r in records if not r["raw"].get("_missing_from_source_since")]
+    mkey = (block.get("history") or {}).get("missing_key") or MISSING_KEY
+    current = [r for r in records if not r["raw"].get(mkey)]
     stats = {"rows": len(rows), "rows_kept_by_filter": len(kept), "records_written": len(records),
              "duplicates": dict(dups), "history": dict(hist),
              "by_type": dict(Counter(r["event_type"] for r in current)),
@@ -283,7 +454,7 @@ def build(source_id: str, block: dict, rows: list[dict], fetched_at: str, prev_r
              "water_match": dict(Counter(r["water_match"] for r in current)),
              "with_coordinates": sum(1 for r in current if r.get("lat") is not None),
              "parse_errors": sum(1 for r in current if r.get("parse_error")),
-             "source_updated_at": sua}
+             "hook_errors": hook_errors, "source_updated_at": sua}
     return records, stats
 
 
@@ -291,14 +462,14 @@ def build(source_id: str, block: dict, rows: list[dict], fetched_at: str, prev_r
 
 def fetch_rows(source_id: str, block: dict, file: str | None, meta_file: str | None) -> tuple[list[dict], dict | None, str | None]:
     """(rows, platform metadata, path of the saved raw response). A fetched response is kept in data/raw/<source>/
-    when its content changed since the last saved one."""
+    (on the machine that runs the fetch) when its content changed since the last saved one, before it is parsed,
+    so a response that fails to parse is kept too."""
     mod = platform(block["platform"])
     if file:
         content = Path(file).read_bytes()
         pmeta = json.loads(Path(meta_file).read_text()) if meta_file else None
         return mod.parse(block, content), pmeta, None
     got = mod.fetch(block, session(block))
-    rows = mod.parse(block, got.content)
     state_path = STATE_DIR / f"{source_id}-fetch.json"
     state = read_json(state_path, {}) or {}
     sha = hashlib.sha256(got.content + (got.meta_bytes or b"")).hexdigest()
@@ -311,44 +482,73 @@ def fetch_rows(source_id: str, block: dict, file: str | None, meta_file: str | N
         state = {"sha256": sha, "raw_path": raw_path, "saved_at": now_iso(),
                  "versions_saved": int(state.get("versions_saved") or 0) + 1}
     state["fetched_at"] = now_iso()
+    state["bytes"] = len(got.content)
     write_json(state_path, state)
-    return rows, got.meta, raw_path
+    return mod.parse(block, got.content), got.meta, raw_path
+
+
+def public_meta(block_meta: dict) -> dict:
+    return {META_ALIASES.get(k, k): v for k, v in (block_meta or {}).items()}
 
 
 def run(source_id: str, file: str | None = None, meta_file: str | None = None, out: str | None = None,
         sources_dir: Path = SOURCES_DIR) -> int:
     row, block = load_source(source_id, sources_dir)
-    errs = validate_block(block, source_id)
-    if errs:
-        print(f"{source_id}: the fetch block cannot run: " + "; ".join(errs), file=sys.stderr)
+    if out and Path(out).resolve().parent == EVENTS_DIR.resolve():
+        print(f"{source_id}: --out inside the events directory would be read as a feed", file=sys.stderr)
         return 2
-    if block.get("live") is not True and not out:
+    live_write = not out
+    if live_write and block.get("live") is not True:
         print(f"{source_id}: the fetch block is not live (live: true); pass --out to write elsewhere", file=sys.stderr)
         return 2
+    if live_write and module_feed(source_id, block):
+        print(f"{source_id}: ingest/{module_feed(source_id, block)}.py still writes this events file; pass --out",
+              file=sys.stderr)
+        return 2
+    snapshot = block.get("platform") == "snapshot"
+    if snapshot and file and not out:
+        print(f"{source_id}: replaying a saved snapshot needs --out (the live archive takes live polls only)",
+              file=sys.stderr)
+        return 2
     path = Path(out) if out else EVENTS_DIR / f"{source_id}.json"
+
+    def fail(msg: str, code: int = 1) -> int:
+        write_events(source_id, [], ok=False, error=msg, path=path)
+        print(f"{source_id}: FAILED {msg}", file=sys.stderr)
+        return code
+
+    errs = validate_block(block, source_id)
+    if errs:
+        return fail("the fetch block cannot run: " + "; ".join(errs), 2)
     fetched_at = now_iso()
     try:
         rows, pmeta, raw_path = fetch_rows(source_id, block, file, meta_file)
     except Exception as e:  # noqa: BLE001
-        write_events(source_id, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
-        print(f"{source_id}: FAILED {e}", file=sys.stderr)
-        return 1
-    prev = (read_json(path, {}) or {}).get("records", [])
+        return fail(f"{type(e).__name__}: {e}")
+    prev_doc = read_json(path, {}) or {}
+    prev = prev_doc.get("records", [])
     extra = {"events_dir": EVENTS_DIR}
-    if block["platform"] == "snapshot":
+    if snapshot:
         snap = importlib.import_module("ingest.generic.snapshot")
-        extra["state_path"] = snap.state_path(source_id)
+        extra["state_path"] = Path(out).with_suffix(".snapshot.json") if out else snap.state_path(source_id)
         extra["state"] = read_json(extra["state_path"], {}) or {}
-        if snap.too_few(rows, extra["state"], float((block.get("snapshot") or {}).get("min_units_ratio", 0.5))):
-            msg = f"{len(rows)} units in the snapshot (previous {len(extra['state'].get('units') or {})})"
-            write_events(source_id, [], ok=False, error=msg, path=path)
-            print(f"{source_id}: FAILED {msg}", file=sys.stderr)
-            return 1
-    records, stats = build(source_id, block, rows, fetched_at, prev, pmeta, extra)
-    if block["platform"] == "snapshot":
+        ratio = float((block.get("snapshot") or {}).get("min_units_ratio", 0.5))
+        units = snap.unit_count([r for r in rows if keep_row(r, block)], block)
+        if snap.too_few(units, extra["state"], ratio):
+            return fail(f"{units} units in the snapshot (the last one had {extra['state'].get('last_units_n')})")
+    else:
+        prev_rows = (prev_doc.get("meta") or {}).get("rows") if prev_doc.get("ok") else None
+        ratio = float(block.get("min_rows_ratio", MIN_ROWS_RATIO))
+        if isinstance(prev_rows, int) and prev_rows and len(rows) < prev_rows * ratio:
+            return fail(f"{len(rows)} rows in the response (the last good one had {prev_rows})")
+    try:
+        records, stats = build(source_id, block, rows, fetched_at, prev, pmeta, extra)
+    except Exception as e:  # noqa: BLE001 - a run that cannot finish keeps the previous records
+        return fail(f"{type(e).__name__}: {e}")
+    if snapshot:
         write_json(extra["state_path"], extra["state"])
-    meta = {**stats, **(block.get("meta") or {}), "platform": block["platform"], "raw_path": raw_path,
-            "generic": True, "registry_ids": row.get("registry_ids") or [], "time_zone": block.get("time_zone")}
+    meta = {**stats, **public_meta(block.get("meta") or {}), "platform": block["platform"], "raw_path": raw_path,
+            "generic": True, "registry_ids": row.get("registry_ids") or [], "timezone": block.get("time_zone")}
     path_notes_to_meta(records, meta)
     p = write_events(source_id, records, ok=True, error=None, meta=meta, path=path)
     print(f"{source_id}: {stats.get('rows')} rows -> {stats.get('records_written')} records; types {stats.get('by_type')}; "
@@ -362,12 +562,16 @@ def main(argv=None) -> int:
     ap.add_argument("--file", help="read this saved response instead of fetching")
     ap.add_argument("--meta", help="the platform metadata JSON for --file (Socrata view, ArcGIS layer)")
     ap.add_argument("--out", help="write the events file here (required for a block that is not live)")
-    ap.add_argument("--list", action="store_true", help="print the live generic sources, one per line")
-    ap.add_argument("--check", action="store_true", help="validate every fetch block")
+    ap.add_argument("--list", action="store_true", help="print the live generic sources in run order")
+    ap.add_argument("--check", action="store_true", help="validate every fetch block (nothing is written)")
     a = ap.parse_args(argv)
     if a.list:
-        print("\n".join(live_ids()))
-        return 0
+        problems: list = []
+        ids = live_ids(problems=problems)
+        print("\n".join(ids))
+        for p in problems:
+            print(f"!! {p}", file=sys.stderr)
+        return 1 if problems else 0
     if a.check:
         bad = check_all()
         for sid, errs in bad.items():
@@ -376,5 +580,8 @@ def main(argv=None) -> int:
         return 1 if bad else 0
     if not a.source_id:
         ap.error("a source id, --list or --check")
-    return run(a.source_id, a.file, a.meta, a.out)
-
+    try:
+        return run(a.source_id, a.file, a.meta, a.out)
+    except F.SpecError as e:
+        print(f"{a.source_id}: {e}", file=sys.stderr)
+        return 2

@@ -3,8 +3,9 @@
 fetch block keys
   platform: arcgis
   url: the layer (.../FeatureServer/0 or .../MapServer/0)
-  where ("1=1"), out_fields (the safe fields by default: only those are asked for), order_by ("OBJECTID"),
-  page_size (1000; paged by resultOffset while the server says exceededTransferLimit), max_rows (50000)
+  where ("1=1"), out_fields (the safe fields by default: only those are asked for), cursor_field (the object id,
+  "OBJECTID" by default: pages are "id greater than the last one seen", so a server that ignores resultOffset
+  cannot repeat a page), page_size (1000), max_rows (50000; reaching it fails the fetch)
   geometry: true asks for points in WGS 84 (outSR 4326); each row then has _x and _y (map them to lon and lat)
   metadata: true asks the layer's description; its editingInfo.lastEditDate (epoch ms, UTC) becomes every
             record's source_updated_at
@@ -18,25 +19,43 @@ from ingest.generic.base import Fetched, get, get_json, load_pages, pages_doc
 
 
 def fetch(block: dict, sess) -> Fetched:
+    """Every feature, by a cursor on the object id (where <where> AND <id> > the last id seen, ordered by it): it
+    works on servers that ignore resultOffset, and cannot repeat a page. A page whose ids do not move past the
+    last one is an error; reaching max_rows is an error (a short table would mark every later row missing)."""
     layer = block["url"].rstrip("/")
-    fields = block.get("out_fields") or [f for f in block["safe_fields"] if not f.startswith("_")]
+    fields = list(block.get("out_fields") or [f for f in block["safe_fields"] if not f.startswith("_")])
+    oid = block.get("cursor_field") or block.get("order_by") or "OBJECTID"
+    if oid not in fields:
+        fields.append(oid)
     size, cap = int(block.get("page_size", 1000)), int(block.get("max_rows", 50_000))
-    pages, offset = [], 0
-    while True:
-        params = {"where": block.get("where", "1=1"), "outFields": ",".join(fields) if isinstance(fields, list) else fields,
-                  "returnGeometry": "true" if block.get("geometry") else "false",
-                  "orderByFields": block.get("order_by", "OBJECTID"), "resultOffset": offset,
-                  "resultRecordCount": size, "f": "json"}
+    base_where = block.get("where", "1=1")
+    pages, last, n = [], None, 0
+    for _ in range(cap // max(size, 1) + 2):
+        where = base_where if last is None else f"({base_where}) AND {oid} > {last}"
+        params = {"where": where, "outFields": ",".join(fields), "returnGeometry": "true" if block.get("geometry") else "false",
+                  "orderByFields": f"{oid} ASC", "resultRecordCount": size, "f": "json"}
         if block.get("geometry"):
             params["outSR"] = 4326
         d = get_json(sess, f"{layer}/query", params, timeout=(15, 90))
         if "error" in d:
             raise RuntimeError(f"ArcGIS error: {d['error']}")
-        pages.append(d)
         got = d.get("features") or []
-        if not d.get("exceededTransferLimit") or not got or offset + len(got) >= cap:
+        if not got:
             break
-        offset += len(got)
+        ids = [(f.get("attributes") or {}).get(oid) for f in got]
+        if any(i is None for i in ids):
+            raise RuntimeError(f"features without {oid}: the cursor cannot page this layer")
+        if last is not None and min(ids) <= last:
+            raise RuntimeError(f"the layer returned {oid} {min(ids)} again after {last}: paging is not moving")
+        pages.append(d)
+        n += len(got)
+        last = max(ids)
+        if n >= cap:
+            raise RuntimeError(f"reached max_rows ({cap}) before the end of the layer: raise max_rows")
+        if not d.get("exceededTransferLimit") and len(got) < size:
+            break
+    else:
+        raise RuntimeError("the page limit was reached before the end of the layer")
     out = Fetched(pages_doc(pages, layer=layer), "json")
     if block.get("metadata"):
         r = get(sess, layer, {"f": "json"}, timeout=(15, 60))

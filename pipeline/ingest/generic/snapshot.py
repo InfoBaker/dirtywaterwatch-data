@@ -78,6 +78,11 @@ def validate(block: dict) -> list[str]:
         return ["fetch.snapshot is missing"]
     if block.get("rows_from") in (None, "snapshot"):
         errs.append("fetch.rows_from names the platform that reads one snapshot")
+    bad = set(s) - {"unit", "state", "states", "poll_time", "recent_hours", "stale_hours", "min_units_ratio"}
+    if bad:
+        errs.append(f"snapshot: unknown keys {sorted(bad)}")
+    if s.get("poll_time"):
+        errs += F.spec_errors("snapshot.poll_time", s["poll_time"], block.get("safe_fields") or [], "started_at")
     for k in ("unit", "state"):
         if not s.get(k):
             errs.append(f"snapshot.{k} is missing")
@@ -106,9 +111,21 @@ def kind_of(msg, states: dict) -> str:
     return "unrecognised"
 
 
-def too_few(rows: list, state: dict, ratio: float = 0.5) -> bool:
-    prev_n = len((state or {}).get("units") or {})
-    return not rows or bool(prev_n and len(rows) < prev_n * ratio)
+def unit_count(rows: list, block: dict) -> int:
+    """The distinct units of one snapshot (repeated units once, unnamed rows not counted)."""
+    unit = (block.get("snapshot") or {}).get("unit")
+    return len({F.clean(F.get(r, unit)) for r in rows if F.clean(F.get(r, unit))})
+
+
+def too_few(units: int, state: dict, ratio: float = 0.5) -> bool:
+    """A snapshot with no units, or fewer than ratio of the last snapshot's (not of every unit ever seen: a renamed
+    or retired set of outfalls must not fail every later run)."""
+    prev_n = (state or {}).get("last_units_n")
+    return not units or bool(prev_n and units < prev_n * ratio)
+
+
+def _t(s: str | None) -> datetime | None:
+    return datetime.fromisoformat(s.replace("Z", "+00:00")) if s else None
 
 
 def _new_key(evs: dict, name: str, lp: datetime | None, now_dt: datetime, tz) -> str:
@@ -184,14 +201,15 @@ def poll(state: dict, rows: list[dict], now: str, ctx: F.Ctx) -> dict:
                 stats["opened"] += 1
             else:                                                            # continue
                 if ev["state"] != "ongoing":
-                    ev.setdefault("resumed", []).append({"at": at, "after": ev["state"]})
+                    ev.setdefault("resumed", []).append({"at": at, "after": ev["state"],
+                                                         "no_data_since": ev.pop("no_data_since", None)})
                     ev.pop("vanished", None)
                 ev["state"] = "ongoing"
             ev["last_active_at"] = at
         elif kind in ("recent", "clear"):
             if ev is not None:                                               # close
                 ev["state"] = "ended"
-                if ev.get("started_at") and at < ev["started_at"]:
+                if ev.get("started_at") and _t(at) < _t(ev["started_at"]):
                     ev["ended_at"], ev["end_basis"] = F.iso(now_dt.astimezone(ctx.tz)), "fetch"
                 else:
                     ev["ended_at"], ev["end_basis"] = at, ("poll" if lp else "fetch")
@@ -206,7 +224,7 @@ def poll(state: dict, rows: list[dict], now: str, ctx: F.Ctx) -> dict:
                 key = _new_key(evs, name, lp, now_dt, ctx.tz)
                 evs[key] = ev = {"unit": name, "state": "ended", "started_at": None, "ended_at": at,
                                  "end_basis": "poll" if lp else "fetch", "reported_at": at, "first_seen_as_recent": True,
-                                 "occurred_after": max(t for t in (floor, after) if t), "transitions": [trans]}
+                                 "occurred_after": max((t for t in (floor, after) if t), key=_t), "transitions": [trans]}
                 stats["opened_recent"] += 1
         elif kind == "no_data":
             if ev is not None and ev["state"] == "ongoing":
@@ -219,6 +237,7 @@ def poll(state: dict, rows: list[dict], now: str, ctx: F.Ctx) -> dict:
         if name not in seen and evs[key]["state"] == "ongoing":
             evs[key]["state"] = "unknown"
             evs[key]["vanished"] = {"last_seen_at": evs[key].get("last_seen_at"), "missing_at": now}
+    state["last_units_n"] = len(seen)
     state["polls"] = state.get("polls", 0) + 1
     state["last_poll_at"] = now
     return dict(stats)
@@ -259,7 +278,7 @@ def build(rows: list[dict], ctx: F.Ctx, state: dict | None) -> tuple[list[dict],
     """(records, stats): this snapshot polled into the state (changed in place), then every event of the state as a
     record. The state is the history: the runner saves it."""
     state = state if state is not None else {}
-    safe = [F.safe_row(r, ctx.block) for r in rows]
+    safe = [F.safe_row(r, ctx.block)[0] for r in rows]
     stats = poll(state, safe, ctx.fetched_at, ctx)
     units = state.get("units") or {}
     records = [to_record(k, ev, units.get(ev["unit"], {}), ctx) for k, ev in state.get("events", {}).items()]

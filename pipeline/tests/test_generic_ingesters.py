@@ -262,7 +262,7 @@ def test_runner_writes_the_events_file_as_a_module_does(tmp_path, monkeypatch):
 def test_every_fetch_block_in_the_registry_is_valid():
     assert runner.check_all() == {}
     assert {"md-mde-overflows", "md-baltimore-sso"} <= set(runner.blocks())
-    assert "md-mde-overflows" not in runner.live_ids()        # the coordinator switches a port over, not a test
+    assert "md-mde-overflows" not in runner.live_ids()        # the ports stay off until they are switched over
 
 
 def test_the_makefile_runs_the_live_generic_sources_after_the_modules():
@@ -292,7 +292,7 @@ record:
 transform: os.system
 """)
     errs = runner.validate_block(b)
-    assert any("quote it" in e for e in errs) and any("outside the pipeline" in e for e in errs)
+    assert any("quote it" in e for e in errs) and any("is not in ingest.generic.transforms" in e for e in errs)
     tz = ZoneInfo(TZ)
     assert F.parse_datetime("2026-11-01T00:00:00.000", tz)[1] == "day"
     assert F.parse_datetime("2026-11-01T00:05:00", tz)[1] == "minute"
@@ -318,3 +318,279 @@ def test_snapshot_runner_keeps_its_history_between_runs(tmp_path, monkeypatch):
     f.write_text(json.dumps({"features": [{"attributes": polls()[0][1][0]}]}))
     assert runner.run("x-snap", file=str(f), out=str(out), sources_dir=src) == 1
     assert json.loads(out.read_text())["count"] == 4
+
+
+
+# ---------------------------------------------------------------- review 2026-11-04: P1 and P2 fixes
+
+def csv_block(**kw):
+    b = block(**kw)
+    return b
+
+
+def test_phone_rule_leaves_number_ranges_with_units():
+    from common import scrub_text
+    for t in ("Hammond Branch, about 500-1000 feet away", "spilled 100-1500 gallons", "from 830-1030 am",
+              "10-20 gallons", "between 100-2000 ft of pipe"):
+        assert scrub_text(t) == t, t
+    for t in ("call 312-555-0142", "call 555-0142 now", "(312) 555-0142", "312.555.0142"):
+        assert "[phone removed]" in scrub_text(t), t
+    recs, _ = build_csv(text=CSV.replace("Rain.", "Spilled 500-1000 gallons; call 312-555-0142."))
+    a2 = next(r for r in recs if r["source_record_id"] == "A2")
+    assert a2["raw"]["row"]["notes"] == "Spilled 500-1000 gallons; call [phone removed]."
+
+
+def test_a_failing_transform_keeps_the_record_and_its_key_and_too_many_fail_the_run(tmp_path, monkeypatch):
+    from ingest.generic import transforms
+
+    @F.hook
+    def boom(row, rec, notes, ctx):
+        if row.get("report_id") != "A2":
+            raise KeyError("CT")
+    monkeypatch.setattr(transforms, "boom", boom, raising=False)
+    b = block(transform="ingest.generic.transforms.boom", max_error_share=1.0)
+    recs, stats = build_csv(b)
+    a1 = next(r for r in recs if r["source_record_id"] == "A1")
+    assert a1["started_at"] == "2026-10-02T14:30:00-05:00" and a1["event_type"] == "sso" and a1["volume_gal"] == 1200
+    assert "KeyError" in a1["parse_error"] and a1["raw"]["_hook_errors"] and stats["hook_errors"] == 2
+    # over the share (20% by default) the run fails and the previous file stays
+    with pytest.raises(runner.RunFailed):
+        build_csv(block(transform="ingest.generic.transforms.boom"))
+    src = tmp_path / "s"
+    src.mkdir()
+    write_source(src, "x-boom", {**block(transform="ingest.generic.transforms.boom"), "live": False})
+    saved = tmp_path / "saved.csv"
+    saved.write_text(CSV)
+    out = tmp_path / "out.json"
+    out.write_text(json.dumps({"ok": True, "records": [{"event_id": "x-boom:old"}], "meta": {}}))
+    assert runner.run("x-boom", file=str(saved), out=str(out), sources_dir=src) == 1
+    d = json.loads(out.read_text())
+    assert d["ok"] is False and d["records"] == [{"event_id": "x-boom:old"}] and "RunFailed" in d["error"]
+
+
+def test_a_state_without_a_water_matcher_and_unregistered_code_are_refused():
+    b = block(waters={"matcher": "ingest.generic.transforms.state_waters", "state": "CT"})
+    assert any("waters.state 'CT' has no water matcher" in e for e in runner.validate_block(b))
+    assert not any("waters.state" in e for e in runner.validate_block(block(
+        waters={"matcher": "ingest.generic.transforms.state_waters", "state": "NY"})))
+    import sys
+    sys.modules.pop("ingest.generic.__main__", None)
+    for fn in ("ingest.generic.__main__.main", "ingest.generic.runner.write_json", "ingest.md_waters.match_waters"):
+        assert any("hook" in e for e in runner.validate_block(block(transform=fn))), fn
+    assert "ingest.generic.__main__" not in sys.modules          # never imported by a check
+
+
+def test_check_writes_nothing(tmp_path, monkeypatch):
+    src = tmp_path / "s"
+    src.mkdir()
+    write_source(src, "x-a", {**block(), "live": True})
+    write_source(src, "x-b", {**block(transform="ingest.generic.__main__.main"), "live": True})
+    monkeypatch.setattr(runner, "EVENTS_DIR", tmp_path / "events")
+    monkeypatch.setattr(runner, "STATE_DIR", tmp_path / "state")
+    before = sorted(p for p in tmp_path.rglob("*"))
+    bad = runner.check_all(src)
+    assert set(bad) == {"x-b"}
+    assert sorted(p for p in tmp_path.rglob("*")) == before
+
+
+def test_duration_is_elapsed_across_clock_changes_in_the_generic_and_the_module():
+    from common import end_after
+    from datetime import datetime as D, timedelta as T
+    ny = ZoneInfo("America/New_York")
+    end, _ = end_after(D(2026, 2, 20, 21, 30, tzinfo=ny), T(days=31, hours=10, minutes=30), "minute")
+    assert end.isoformat() == "2026-03-24T09:00:00-04:00"          # spring forward: the elapsed end, not 08:00
+    end, _ = end_after(D(2026, 10, 31, 22, 0, tzinfo=ny), T(hours=6), "minute")
+    assert end.isoformat() == "2026-11-01T03:00:00-05:00"          # fall back: 6 elapsed hours, not 04:00
+    b = block(time_zone="America/New_York", safe_fields=["report_id", "start", "hours"], free_text=[],
+              record={"source_record_id": "report_id", "started_at": "start",
+                      "ended_at": {"duration": {"hours": "hours"}}, "event_type": {"const": "sso"}})
+    text = "Report ID,Start,Hours\nD1,03/07/2026 22:00,6\nD2,11/03/2026,5\n"
+    recs, _ = runner.build("x-dst", b, csv_json.parse(b, text.encode()), FETCHED, [])
+    by = {r["source_record_id"]: r for r in recs}
+    assert by["D1"]["ended_at"] == "2026-03-08T05:00:00-04:00"
+    # a start known only to the day: the day of the latest end it allows, at day precision, no clock time invented
+    assert (by["D2"]["ended_at"], by["D2"]["time_precision"]) == ("2026-11-04T00:00:00-05:00", "day")
+    assert "known only to the day" in by["D2"]["raw"]["_basis"]["ended_at"]
+    from ingest import md_mde_overflows as M
+    r = M.build([{"overflow_type": "SSO", "npdes_no": "MD0000001", "start_date": "02/20/2026", "start_time": "21:30",
+                  "duration_day": "31", "duration_hour": "10", "duration_minute": "30", "overflow_address": "1 Example St",
+                  "owner_name": "", "discharge_volume": "", "overflow_cause": "", "receiving_water": "", "county": "",
+                  "overflow_latitude": "", "overflow_longitude": "", "id": "1"}], {}, FETCHED, [], [], {})[0][0]
+    assert r["ended_at"] == "2026-03-24T09:00:00-04:00"
+
+
+def test_date_only_epochs_and_midnight_text_are_day_precision():
+    tz = ZoneInfo("America/New_York")
+    assert F.parse_epoch(1793491200000, "epoch_ms", tz) == (F.datetime(2026, 11, 1, tzinfo=tz), "day")
+    assert F.parse_epoch(1793491200000, "epoch_ms_wallclock", tz)[1] == "day"
+    assert F.parse_epoch(1793491260000, "epoch_ms", tz)[1] == "minute"
+    for t in ("11/01/2026 12:00:00 AM", "11/01/2026 00:00:00", "2026-11-01T00:00:00.000"):
+        dt, prec = F.parse_datetime(t, tz)
+        assert (dt.date().isoformat(), prec) == ("2026-11-01", "day"), t
+    assert F.parse_datetime("11/01/2026 12:00:00 PM", tz)[1] == "minute"
+
+
+def test_time_zone_is_required_and_clock_change_times_are_noted():
+    b = block()
+    b.pop("time_zone")
+    assert any("time_zone is missing" in e for e in runner.validate_block(b))
+    b2 = {**block(time_zone="UTC"), "record": {**block()["record"], "started_at": {"field": "start", "parse": "epoch_ms"}}}
+    assert not any("time_zone" in e for e in runner.validate_block(b2))
+    b3 = block(time_zone="America/New_York")
+    text = "Report ID,Start,End,Kind\nF1,11/01/2026 01:30,,CSO\nS1,03/08/2026 02:30,,CSO\n"
+    recs, _ = runner.build("x-tz", b3, csv_json.parse(b3, text.encode()), FETCHED, [])
+    by = {r["source_record_id"]: r for r in recs}
+    assert "happened twice" in by["F1"]["raw"]["_time_notes"]["started_at"]
+    assert "does not exist" in by["S1"]["raw"]["_time_notes"]["started_at"]
+
+
+def test_a_future_end_is_not_ended_and_impossible_times_are_not_used():
+    text = ("Report ID,Start,End,Kind\nU1,10/02/2026 14:30,11/30/2026 16:00,CSO\n"
+            "U2,01/21/1970 00:00,,CSO\nU3,10/02/2027 14:30,,CSO\n")
+    recs, _ = build_csv(text=text)
+    by = {r["source_record_id"]: r for r in recs}
+    assert by["U1"]["status"] == "unknown" and "after the fetch" in by["U1"]["parse_error"]
+    assert by["U1"]["ended_at"] == "2026-11-30T16:00:00-06:00"        # the source's end is kept, not counted
+    for k in ("U2", "U3"):
+        assert by[k]["started_at"] is None and "outside 1990" in by[k]["parse_error"]
+        assert by[k]["raw"]["_unused_times"]["started_at"]
+    b = {**block(time_zone="UTC"), "record": {**block()["record"], "started_at": {"field": "start", "parse": "epoch_ms"}}}
+    r = runner.build("x-ep", b, csv_json.parse(b, b"Report ID,Start\nE1,1793491260\n"), FETCHED, [])[0][0]
+    assert r["started_at"] is None and "outside 1990" in r["parse_error"]          # seconds read as milliseconds
+
+
+def test_personal_field_rule_covers_names_owners_callers_and_nested_objects():
+    for f in ("Name", "Owner", "OwnerName", "Caller", "ReportedBy", "reported_by", "Complainant", "Resident",
+              "site.owner", "PropertyOwner", "Submitter", "caller.phone"):
+        assert F.personal_field(f), f
+    for f in ("OBJECTID", "STATUS", "receiving_water", "overflow_address", "LOCATION", "site.lat"):
+        assert not F.personal_field(f), f
+    b = {"platform": "json", "url": "https://example.invalid/x.json", "time_zone": TZ, "json": {"records_path": "items"},
+         "safe_fields": ["id", "site", "site.lat"], "record": {"source_record_id": "id", "discharger_name": "site.owner"}}
+    errs = runner.validate_block(b)
+    assert any("'site.owner', which is not a safe field" in e for e in errs)
+    b["record"] = {"source_record_id": "id", "lat": {"field": "site.lat", "parse": "number"}}
+    doc = {"items": [{"id": 1, "site": {"owner": "Pat Example", "caller": "Lee Example", "lat": 39.1}}]}
+    r = runner.build("x-nest", b, csv_json.parse(b, json.dumps(doc).encode()), FETCHED, [])[0][0]
+    assert "Example" not in json.dumps(r) and r["raw"]["_dropped_objects"] == ["site"] and r["lat"] is None
+    # a discharger name read from a field is scrubbed as free text
+    b2 = block(safe_fields=block()["safe_fields"] + ["filer"], reviewed_fields={"filer": "test: the utility"})
+    b2["record"]["discharger_name"] = "filer"
+    text = "Report ID,Start,Kind,Filer\nP1,10/02/2026 14:30,CSO,Mr. Placeholder (312-555-0142)\n"
+    r = runner.build("x-filer", b2, csv_json.parse(b2, text.encode()), FETCHED, [])[0][0]
+    assert r["discharger_name"] == "[name removed] ([phone removed])"
+
+
+def test_snapshot_replays_never_touch_the_live_archive_and_units_compare_with_the_last_snapshot(tmp_path, monkeypatch):
+    from ingest.generic import snapshot
+    from tests.test_generic_parity import CSOCAST_BLOCK, polls
+    src = tmp_path / "sources"
+    src.mkdir()
+    write_source(src, "x-snap", {**CSOCAST_BLOCK, "live": True})
+    live_state = tmp_path / "live" / "x-snap-snapshot.json"
+    monkeypatch.setattr(snapshot, "state_path", lambda sid: live_state)
+    monkeypatch.setattr(runner, "EVENTS_DIR", tmp_path / "events")
+    f = tmp_path / "poll.json"
+    f.write_text(json.dumps({"features": [{"attributes": r} for r in polls()[0][1]]}))
+    assert runner.run("x-snap", file=str(f), sources_dir=src) == 2           # a replay needs --out
+    out = tmp_path / "replay.json"
+    assert runner.run("x-snap", file=str(f), out=str(out), sources_dir=src) == 0
+    assert not live_state.exists() and out.with_suffix(".snapshot.json").exists()
+    # units are compared with the last snapshot, not with every unit ever seen
+    assert not snapshot.too_few(2, {"units": {str(i): {} for i in range(10)}, "last_units_n": 3})
+    assert snapshot.too_few(1, {"last_units_n": 3}) and snapshot.too_few(0, {})
+
+
+class FakeSess:
+    def __init__(self, pages, ignore_cursor=False):
+        self.pages, self.calls, self.ignore = pages, [], ignore_cursor
+
+    def get(self, url, params=None, timeout=None):
+        self.calls.append(params)
+        import re as _re
+        m = _re.search(r"OBJECTID > (\d+)", (params or {}).get("where", ""))
+        last = int(m.group(1)) if m and not self.ignore else -1
+        feats = [f for f in self.pages if f["attributes"]["OBJECTID"] > last][:2]
+        body = {"features": feats, "exceededTransferLimit": len(feats) == 2}
+
+        class R:
+            status_code, headers, content = 200, {}, json.dumps(body).encode()
+
+            def raise_for_status(self):
+                pass
+
+            def json(self):
+                return body
+        return R()
+
+
+def test_arcgis_pages_by_a_cursor_and_fails_loudly():
+    feats = [{"attributes": {"OBJECTID": i, "STATUS": "x"}} for i in range(1, 6)]
+    b = {"platform": "arcgis", "url": "https://example.invalid/FeatureServer/0", "safe_fields": ["OBJECTID", "STATUS"],
+         "page_size": 2, "record": {"source_record_id": "OBJECTID"}}
+    got = arcgis.fetch(b, FakeSess(feats))
+    assert [r["OBJECTID"] for r in arcgis.parse(b, got.content)] == [1, 2, 3, 4, 5]
+    with pytest.raises(RuntimeError, match="not moving"):
+        arcgis.fetch(b, FakeSess(feats, ignore_cursor=True))     # a server that ignores the paging
+    with pytest.raises(RuntimeError, match="max_rows"):
+        arcgis.fetch({**b, "max_rows": 3}, FakeSess(feats))
+
+
+def test_every_failure_is_written_and_every_setting_checked(tmp_path, monkeypatch):
+    for bad in ({"wher": "1=1"}, {"filter": [{"field": "kind", "regex": "("}]},
+                {"record": {**block()["record"], "status": {"field": "kind", "otherwise": "active"}}},
+                {"record": {**block()["record"], "outfall_id": {"template": "{report_id|bogus}"}}},
+                {"record": {**block()["record"], "volume": {"field": "gallons", "unit": "barrels"}}},
+                {"history": {"keep_missing": True, "tracks": []}}):
+        assert runner.validate_block(block(**bad)), bad
+    src = tmp_path / "s"
+    src.mkdir()
+    write_source(src, "x-bad", {**block(wher="1=1"), "live": False})
+    out = tmp_path / "out.json"
+    assert runner.run("x-bad", file=str(tmp_path / "none.csv"), out=str(out), sources_dir=src) == 2
+    d = json.loads(out.read_text())
+    assert d["ok"] is False and "cannot run" in d["error"]
+    (src / "broken.yaml").write_text("id: x\nfetch: [unclosed\n")
+    problems = []
+    runner.live_ids(src, problems)
+    assert any("broken.yaml" in p for p in problems)
+
+
+def test_a_live_block_and_its_module_never_both_write_one_events_file(tmp_path, monkeypatch):
+    src = tmp_path / "s"
+    src.mkdir()
+    write_source(src, "md-mde-overflows", {**block(), "live": True})
+    write_source(src, "x-free", {**block(), "live": True, "after": ["x-alpha"]})
+    write_source(src, "x-alpha", {**block(), "live": True})
+    problems = []
+    assert runner.live_ids(src, problems) == ["x-alpha", "x-free"]       # after: x-alpha runs first
+    assert any("md_mde_overflows.py still writes" in p for p in problems)
+    monkeypatch.setattr(runner, "EVENTS_DIR", tmp_path / "events")
+    saved = tmp_path / "saved.csv"
+    saved.write_text(CSV)
+    assert runner.run("md-mde-overflows", file=str(saved), sources_dir=src) == 2
+    assert not (tmp_path / "events").exists()
+    # --out inside the events directory would be read as a feed
+    assert runner.run("x-free", file=str(saved), out=str(tmp_path / "events" / "x.json"), sources_dir=src) == 2
+
+
+def test_a_short_response_fails_and_the_meta_uses_the_published_names(tmp_path, monkeypatch):
+    src = tmp_path / "s"
+    src.mkdir()
+    write_source(src, "x-m", {**block(meta={"credit": "Example", "caveat": "As filed.", "time_basis": "Local time."}),
+                              "live": False})
+    out = tmp_path / "out.json"
+    saved = tmp_path / "saved.csv"
+    saved.write_text(CSV)
+    assert runner.run("x-m", file=str(saved), out=str(out), sources_dir=src) == 0
+    m = json.loads(out.read_text())["meta"]
+    assert (m["disclaimer"], m["time_note"], m["timezone"]) == ("As filed.", "Local time.", TZ)
+    short = tmp_path / "short.csv"
+    short.write_text(CSV.splitlines()[0] + "\n")
+    assert runner.run("x-m", file=str(short), out=str(out), sources_dir=src) == 1
+    d = json.loads(out.read_text())
+    assert d["ok"] is False and d["count"] == 3 and "rows in the response" in d["error"]
+
+
+def test_honorifics_in_capitals_are_scrubbed():
+    assert F.scrub_people("MR. PLACEHOLDER reported it") == "[name removed] reported it"
