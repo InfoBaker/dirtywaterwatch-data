@@ -1,88 +1,254 @@
 {
- "about": "Receiving-water names in Georgia's spill reports (EPD's daily list, postings of 2026-06-01, 2026-10-01, 2026-10-15, 2026-10-30, 2026-11-02 and 2026-11-03, and EPA's Sewer Overflow and Bypass Event reports for GA permits, extract of 2026-11-03) that data/receiving-waters-national.json does not hold for GA, by name as typed (case and punctuation ignored). Spelling variants of a held water (Polebridge Creek, Sugar Crek, Ocmuglee) are listed as typed so an alias can be added.",
+ "about": "Receiving-water names in Georgia's spill reports (EPD's Municipal Sewage Spills list: the daily list and every dated posting from 2025-10-09 to 2026-11-04, 1,366 records; and EPA's Sewer Overflow and Bypass Event reports for GA permits, 894 records, 629 of them the same spill as an EPD row) as typed (case and punctuation ignored), each counted once per spill, with the number of spills giving it: every name, whether or not a water record holds it, so each has a record or a stated reason. Spelling variants of a held water (Polebridge Creek, Sugar Crek, Ocmuglee) are listed as typed so an alias can be added. Built by scripts/ga_report_water_names.py.",
  "checked": "2026-11-04",
  "state": "GA",
- "waters": 146,
- "reports": 294,
+ "waters": 201,
+ "reports": 476,
  "by_kind": {
-  "named water": 73,
-  "tributary of a named water": 45,
-  "storm system or not a named water": 20
+  "named water": 103,
+  "tributary of a named water": 57,
+  "storm system or not a named water": 33
  },
  "by_reason": {
-  "no NHD flowline or waterbody of that name in GA": 80,
-  "1 NHD water of that name in GA, none within reach of the reports' places": 14,
-  "a water record holds the name, but the reports' points lie too far from it to be placed there": 8,
+  "no NHD flowline or waterbody of that name in GA": 69,
+  "not reached this run (a recheck builds nothing)": 47,
+  "1 NHD water of that name in GA, none within reach of the reports' places": 16,
+  "a water record holds the name, but the reports' points lie too far from it to be placed there": 10,
+  "an unnamed or unknown stream: the report names no water": 7,
   "a storm-sewer system (MS4), not a named water": 7,
-  "an unnamed or unknown stream: the report names no water": 5,
+  "not a water name": 5,
+  "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 5,
   "a storm-sewer system, not a named water": 4,
-  "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 3,
+  "a tributary named by a place, not by the water it joins": 4,
   "private property, not a public water": 3,
+  "24 NHD waters of that name in GA, none within reach of the reports' places": 3,
   "2 NHD waters of that name in GA, none within reach of the reports' places": 3,
-  "3 NHD waters of that name in GA, none within reach of the reports' places": 2,
   "a water record holds the water this text names, but the status resolver reads the text as a watershed or basin label, no": 2,
+  "3 NHD waters of that name in GA, none within reach of the reports' places": 2,
   "a kind of water with no name": 2,
+  "22 NHD waters of that name in GA, none within reach of the reports' places": 2,
   "part of a sewer, drainage or treatment works, not a public water": 2,
-  "not a water name": 1,
-  "a street name, not a water": 1,
+  "dry land, not a water: the report names no receiving water": 1,
+  "a short name with no kind of water (creek, river, lake): not looked up": 1,
+  "a wetland (not a named NHD water)": 1,
   "14 NHD waters of that name in GA, none within reach of the reports' places": 1,
   "4 NHD waters of that name in GA and the reports give no place to choose one": 1,
   "13 NHD waters of that name in GA and the reports give no place to choose one": 1,
-  "not reached this run (a recheck builds nothing)": 1,
-  "a tributary named by a place, not by the water it joins": 1,
-  "a wetland (not a named NHD water)": 1,
-  "2 NHD waters of that name in GA and the reports give no place to choose one": 1,
-  "22 NHD waters of that name in GA, none within reach of the reports' places": 1,
-  "24 NHD waters of that name in GA, none within reach of the reports' places": 1
+  "a street name, not a water": 1,
+  "2 NHD waters of that name in GA and the reports give no place to choose one": 1
  },
- "resolved_names": 156,
- "resolved_reports": 542,
+ "resolved_names": 238,
+ "resolved_reports": 744,
  "build": {
   "date": "2026-11-04",
   "command": "python -m ingest.waters_from_nhd --names research/ga/receiving-waters-missing.json --state GA --recheck",
   "records_built": 0,
-  "names_resolved": 2,
-  "network_requests": 0,
-  "last_build": {
-   "date": "2026-11-04",
-   "command": "python -m ingest.waters_from_nhd --names research/ga/receiving-waters-missing.json --state GA",
-   "records_built": 0,
-   "names_resolved": 0,
-   "network_requests": 0
-  }
+  "names_resolved": 82,
+  "network_requests": 0
  },
  "rows": [
   {
-   "name": "Unnamed Tributary of Little River Basin",
-   "reports": 15,
+   "name": "Nancy Creek",
+   "reports": 38,
    "seen_in": [
     "EPA reports",
     "EPD list"
    ],
-   "kind": "tributary of a named water",
+   "kind": "named water",
    "points": [
     [
-     31.44583,
-     -83.47806
+     33.82332,
+     -84.45692
     ],
     [
-     31.42916,
-     -83.53041
+     33.94719,
+     -84.32118
     ],
     [
-     33.32162,
-     -83.39916
+     33.90943,
+     -84.32601
+    ],
+    [
+     33.95009,
+     -84.29126
+    ],
+    [
+     33.89483,
+     -84.30189
     ]
    ],
    "towns": [
-    "Tifton",
-    "Eatonton"
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Atlanta"
    ],
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Shoal Creek",
+   "reports": 33,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.71802,
+     -84.26911
+    ],
+    [
+     33.7662,
+     -84.29139
+    ],
+    [
+     33.74545,
+     -84.2781
+    ],
+    [
+     33.66478,
+     -84.21842
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Lawrenceville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "shoal-creek-ga"
+   ],
+   "reason": "a water record holds the name (shoal-creek-ga), but the reports' points lie too far from it to be placed there"
+  },
+  {
+   "name": "Utoy Creek",
+   "reports": 21,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.74419,
+     -84.50883
+    ],
+    [
+     33.82332,
+     -84.45692
+    ],
+    [
+     33.72744,
+     -84.42218
+    ],
+    [
+     33.70221,
+     -84.49446
+    ],
+    [
+     33.70256,
+     -84.54261
+    ]
+   ],
+   "towns": [
+    "Atlanta",
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Not Applicable",
+   "reports": 19,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "points": [
+    [
+     33.66478,
+     -84.21842
+    ],
+    [
+     33.77826,
+     -84.23287
+    ],
+    [
+     33.70838,
+     -84.19475
+    ],
+    [
+     33.7786,
+     -84.28026
+    ],
+    [
+     33.76708,
+     -84.26222
+    ]
+   ],
+   "towns": [
+    "Stonecrest",
+    "Decatur",
+    "Tucker",
+    "Atlanta"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Camp Creek",
+   "reports": 15,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.68343,
+     -84.49087
+    ],
+    [
+     33.64544,
+     -84.57682
+    ],
+    [
+     33.54911,
+     -84.41503
+    ],
+    [
+     33.51537,
+     -84.37198
+    ]
+   ],
+   "towns": [
+    "Atlanta",
+    "Jonesboro",
+    "Johns Creek",
+    "Alpharetta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Shoals Creek",
@@ -139,8 +305,160 @@
    ]
   },
   {
+   "name": "unnamed tributary",
+   "reports": 10,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "points": [
+    [
+     31.63162,
+     -82.90452
+    ],
+    [
+     31.61069,
+     -82.88247
+    ]
+   ],
+   "towns": [
+    "Broxton",
+    "Eatonton",
+    "Hartwell"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
+  },
+  {
+   "name": "Dryland",
+   "reports": 8,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "points": [
+    [
+     33.82332,
+     -84.45692
+    ],
+    [
+     33.8491,
+     -84.37306
+    ],
+    [
+     33.83857,
+     -84.42494
+    ],
+    [
+     32.05904,
+     -81.11604
+    ],
+    [
+     33.76158,
+     -84.31503
+    ]
+   ],
+   "towns": [
+    "Atlanta",
+    "Savannah"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "dry land, not a water: the report names no receiving water"
+  },
+  {
+   "name": "Indian Creek",
+   "reports": 7,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.78514,
+     -84.24957
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Clarkston"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Private Pond",
+   "reports": 7,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "points": [
+    [
+     30.87047,
+     -84.21658
+    ],
+    [
+     33.54014,
+     -82.05144
+    ],
+    [
+     33.51039,
+     -82.16297
+    ],
+    [
+     33.97633,
+     -83.37781
+    ]
+   ],
+   "towns": [
+    "Martinez",
+    "Grovetown",
+    "Athens",
+    "Evans"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "private property, not a public water"
+  },
+  {
+   "name": "stormwater system",
+   "reports": 7,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water",
+   "points": [
+    [
+     31.98282,
+     -81.23231
+    ]
+   ],
+   "towns": [
+    "Savannah"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
    "name": "Doolittle Creek",
-   "reports": 9,
+   "reports": 6,
    "points": [
     [
      33.66478,
@@ -156,6 +474,10 @@
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
+   ],
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
    ],
    "records": [
     "doolittle-creek-ga"
@@ -178,8 +500,188 @@
    ]
   },
   {
+   "name": "MS4 stormwater system",
+   "reports": 5,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water",
+   "points": [
+    [
+     31.9937,
+     -80.97988
+    ]
+   ],
+   "towns": [
+    "Savannah"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "a storm-sewer system (MS4), not a named water"
+  },
+  {
+   "name": "Morning Creek",
+   "reports": 5,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Johns Creek",
+     "reason": "no NHD water of that name within 3 km of Johns Creek (the nearest is 47.1 km away)"
+    },
+    {
+     "town": "Alpharetta",
+     "reason": "no NHD water of that name within 3 km of Alpharetta (the nearest is 50.0 km away)"
+    },
+    {
+     "town": "Roswell",
+     "reason": "no NHD water of that name within 3 km of Roswell (the nearest is 43.9 km away)"
+    },
+    {
+     "town": "Atlanta",
+     "reason": "no NHD water of that name within 3 km of Atlanta (the nearest is 5.0 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Utoy",
+   "reports": 5,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "East Point",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "a short name with no kind of water (creek, river, lake): not looked up"
+  },
+  {
+   "name": "Crockett Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.79267,
+     -84.28246
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -84.28246,
+     "lat": 33.79267,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.79267, -84.28246) (the nearest is 103.1 km away)"
+    },
+    {
+     "town": "Decatur",
+     "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 103.2 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 89.4 km away)"
+    },
+    {
+     "town": "Stonecrest",
+     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 92.4 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Lindsey Creek Basin",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     32.4881,
+     -84.93789
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "lindsey-creek-ga"
+   ],
+   "reason": "a water record holds the water this text names (lindsey-creek-ga), but the status resolver reads the text as a watershed or basin label, not a water's name (build/status.py, Watershed labels): its reports are not placed there"
+  },
+  {
+   "name": "Roaring Branch",
+   "reports": 4,
+   "points": [
+    [
+     32.40206,
+     -84.95571
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "records": [
+    "roaring-branch-ga"
+   ],
+   "reason": "a water record holds the name (roaring-branch-ga), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -84.95571,
+     "lat": 32.40206,
+     "reason": "no NHD water of that name within 2 km of the reports' point (32.40206, -84.95571) (the nearest is 13.3 km away)"
+    }
+   ]
+  },
+  {
    "name": "Tributary to Laurel Creek",
-   "reports": 8,
+   "reports": 4,
    "seen_in": [
     "EPA reports",
     "EPD list"
@@ -225,34 +727,91 @@
    ]
   },
   {
-   "name": "stormwater system",
-   "reports": 7,
+   "name": "Tributary to Piney Grove Creek",
+   "reports": 4,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
-   "kind": "storm system or not a named water",
-   "points": [
-    [
-     31.98282,
-     -81.23231
-    ]
-   ],
+   "kind": "tributary of a named water",
    "towns": [
-    "Savannah"
+    "Marietta",
+    "Smyrna",
+    "Mableton"
    ],
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "a storm-sewer system, not a named water"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Piney Grove Creek"
+   ]
   },
   {
-   "name": "Roaring Branch",
-   "reports": 6,
+   "name": "Unnamed",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Fairburn"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
+  },
+  {
+   "name": "Unnamed Tributary of Little River Basin",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
    "points": [
     [
-     32.40206,
-     -84.95571
+     31.44583,
+     -83.47806
+    ],
+    [
+     31.42916,
+     -83.53041
+    ],
+    [
+     33.32162,
+     -83.39916
+    ]
+   ],
+   "towns": [
+    "Tifton",
+    "Eatonton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
+  },
+  {
+   "name": "Weracoba Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     32.48086,
+     -84.96598
+    ],
+    [
+     32.49971,
+     -84.96817
     ]
    ],
    "towns": [
@@ -262,141 +821,11 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "records": [
-    "roaring-branch-ga"
-   ],
-   "reason": "a water record holds the name (roaring-branch-ga), but the reports' points lie too far from it to be placed there",
-   "places_failed": [
-    {
-     "lon": -84.95571,
-     "lat": 32.40206,
-     "reason": "no NHD water of that name within 2 km of the reports' point (32.40206, -84.95571) (the nearest is 13.3 km away)"
-    }
-   ]
-  },
-  {
-   "name": "MS4 stormwater system",
-   "reports": 5,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "storm system or not a named water",
-   "points": [
-    [
-     31.9937,
-     -80.97988
-    ]
-   ],
-   "towns": [
-    "Savannah"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "a storm-sewer system (MS4), not a named water"
-  },
-  {
-   "name": "Morning Creek",
-   "reports": 5,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Johns Creek",
-    "Alpharetta",
-    "Roswell",
-    "Atlanta"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "places_failed": [
-    {
-     "town": "Johns Creek",
-     "reason": "no NHD water of that name within 3 km of Johns Creek (the nearest is 47.1 km away)"
-    },
-    {
-     "town": "Alpharetta",
-     "reason": "no NHD water of that name within 3 km of Alpharetta (the nearest is 50.0 km away)"
-    },
-    {
-     "town": "Roswell",
-     "reason": "no NHD water of that name within 3 km of Roswell (the nearest is 43.9 km away)"
-    },
-    {
-     "town": "Atlanta",
-     "reason": "no NHD water of that name within 3 km of Atlanta (the nearest is 5.0 km away)"
-    }
-   ]
-  },
-  {
-   "name": "Poole Creek",
-   "reports": 5,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.63764,
-     -84.3753
-    ]
-   ],
-   "towns": [
-    "Jonesboro",
-    "Forest Park"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "Private Pond",
-   "reports": 5,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "storm system or not a named water",
-   "points": [
-    [
-     30.87047,
-     -84.21658
-    ],
-    [
-     33.54014,
-     -82.05144
-    ],
-    [
-     33.51039,
-     -82.16297
-    ],
-    [
-     33.97633,
-     -83.37781
-    ]
-   ],
-   "towns": [
-    "Martinez",
-    "Grovetown",
-    "Athens",
-    "Evans"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "private property, not a public water"
-  },
-  {
    "name": "Brooklyn Creek",
-   "reports": 4,
+   "reports": 3,
    "seen_in": [
     "EPA reports",
     "EPD list"
@@ -419,7 +848,7 @@
   },
   {
    "name": "Burnt Fork Creek",
-   "reports": 4,
+   "reports": 3,
    "points": [
     [
      33.66478,
@@ -435,6 +864,10 @@
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
+   ],
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
    ],
    "records": [
     "burnt-fork-creek-ga"
@@ -453,8 +886,88 @@
    ]
   },
   {
+   "name": "Casey Canal",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     31.99626,
+     -81.10136
+    ]
+   ],
+   "towns": [
+    "Savannah"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Clay Branch",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -84.57534,
+     "lat": 33.81802,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.81802, -84.57534) (the nearest is 406.5 km away)"
+    },
+    {
+     "town": "Marietta",
+     "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 408.2 km away)"
+    },
+    {
+     "town": "Smyrna",
+     "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 400.8 km away)"
+    },
+    {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 400.2 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Creek in resident's yard.",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "private property, not a public water"
+  },
+  {
    "name": "Favor Creek",
-   "reports": 4,
+   "reports": 3,
    "seen_in": [
     "EPA reports",
     "EPD list"
@@ -478,8 +991,33 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "Gordon Creek",
-   "reports": 4,
+   "name": "GLENDALE TRIBUTARY",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "points": [
+    [
+     33.78146,
+     -84.28565
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "a tributary named by a place, not by the water it joins"
+  },
+  {
+   "name": "Lower Rocky Creek",
+   "reports": 3,
    "seen_in": [
     "EPA reports",
     "EPD list"
@@ -487,14 +1025,12 @@
    "kind": "named water",
    "points": [
     [
-     33.7979,
-     -84.57972
+     32.77624,
+     -83.69981
     ]
    ],
    "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Macon"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -503,8 +1039,30 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "MS4 system",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water",
+   "points": [
+    [
+     32.04849,
+     -81.11598
+    ]
+   ],
+   "towns": [
+    "Savannah"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "a storm-sewer system (MS4), not a named water"
+  },
+  {
    "name": "Marsh Creek",
-   "reports": 4,
+   "reports": 3,
    "seen_in": [
     "EPA reports",
     "EPD list"
@@ -552,34 +1110,26 @@
    ]
   },
   {
-   "name": "Perimeter Creek",
-   "reports": 4,
+   "name": "No name Wetland",
+   "reports": 3,
    "seen_in": [
     "EPA reports",
     "EPD list"
    ],
-   "kind": "named water",
-   "points": [
-    [
-     33.93648,
-     -84.34167
-    ]
-   ],
+   "kind": "tributary of a named water",
    "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Dunwoody"
+    "Athens",
+    "Bogart"
    ],
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "a wetland (not a named NHD water)"
   },
   {
    "name": "Springfield Canal (MS4)",
-   "reports": 4,
+   "reports": 3,
    "seen_in": [
     "EPA reports",
     "EPD list"
@@ -601,303 +1151,43 @@
    "reason": "a storm-sewer system (MS4), not a named water"
   },
   {
-   "name": "Steam from Beaverdam creek",
-   "reports": 4,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     34.204,
-     -83.45711
-    ]
-   ],
-   "towns": [
-    "Commerce"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
-   "parts": [
-    "Steam"
-   ]
-  },
-  {
-   "name": "unnamed tributary",
-   "reports": 4,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "tributary of a named water",
-   "points": [
-    [
-     31.63162,
-     -82.90452
-    ],
-    [
-     31.61069,
-     -82.88247
-    ]
-   ],
-   "towns": [
-    "Broxton",
-    "Eatonton",
-    "Hartwell"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "an unnamed or unknown stream: the report names no water"
-  },
-  {
-   "name": "Casey Canal",
-   "reports": 3,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     31.99626,
-     -81.10136
-    ]
-   ],
-   "towns": [
-    "Savannah"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "Crockett Creek",
-   "reports": 3,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.79267,
-     -84.28246
-    ]
-   ],
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
-   "places_failed": [
-    {
-     "lon": -84.28246,
-     "lat": 33.79267,
-     "reason": "no NHD water of that name within 2 km of the reports' point (33.79267, -84.28246) (the nearest is 103.1 km away)"
-    },
-    {
-     "town": "Decatur",
-     "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 103.2 km away)"
-    },
-    {
-     "town": "Tucker",
-     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 89.4 km away)"
-    },
-    {
-     "town": "Stonecrest",
-     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 92.4 km away)"
-    }
-   ]
-  },
-  {
-   "name": "Ditch feeding Bowman Creek",
+   "name": "Stream",
    "reports": 3,
    "seen_in": [
     "EPA reports",
     "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Macon"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "parts": [
-    "Bowman Creek"
-   ]
-  },
-  {
-   "name": "Kingsley Lake",
-   "reports": 3,
-   "points": [
-    [
-     33.66478,
-     -84.21842
-    ]
-   ],
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Dunwoody"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "records": [
-    "kingsley-lake-ga"
-   ],
-   "reason": "a water record holds the name (kingsley-lake-ga), but the reports' points lie too far from it to be placed there",
-   "places_failed": [
-    {
-     "lon": -84.21842,
-     "lat": 33.66478,
-     "reason": "no NHD water of that name within 2 km of the reports' point (33.66478, -84.21842) (the nearest is 32.1 km away)"
-    },
-    {
-     "town": "Decatur",
-     "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 17.2 km away)"
-    },
-    {
-     "town": "Tucker",
-     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 9.1 km away)"
-    },
-    {
-     "town": "Stonecrest",
-     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 26.7 km away)"
-    }
-   ]
-  },
-  {
-   "name": "Lower Rocky Creek",
-   "reports": 3,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     32.77624,
-     -83.69981
-    ]
-   ],
-   "towns": [
-    "Macon"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "Lower Snapfinger Creek",
-   "reports": 3,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.67127,
-     -84.2087
-    ]
-   ],
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Lithonia"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "MS4 system",
-   "reports": 3,
-   "seen_in": [
-    "EPA reports"
    ],
    "kind": "storm system or not a named water",
    "points": [
     [
-     32.04849,
-     -81.11598
-    ]
-   ],
-   "towns": [
-    "Savannah"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "a storm-sewer system (MS4), not a named water"
-  },
-  {
-   "name": "Ocmuglee",
-   "reports": 3,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Macon"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "South Fork Peavine Creek",
-   "reports": 3,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
+     33.40206,
+     -84.78406
+    ],
     [
-     33.76858,
-     -84.32732
+     33.37822,
+     -84.85556
+    ],
+    [
+     33.36691,
+     -84.82969
     ]
    ],
    "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Atlanta"
+    "Newnan",
+    "Loganville"
    ],
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "a kind of water with no name"
   },
   {
    "name": "Timber Ridge Branch",
    "reports": 3,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -918,28 +1208,6 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "Tributary to Favor Creek",
-   "reports": 3,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
-   "parts": [
-    "Favor Creek"
-   ]
-  },
-  {
    "name": "Tributary to Proctor Creek",
    "reports": 3,
    "points": [
@@ -958,10 +1226,15 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
    "records": [
+    "proctor-creek-ga",
     "proctor-creek-acworth-ga"
    ],
-   "reason": "a water record holds the name (proctor-creek-acworth-ga), but the reports' points lie too far from it to be placed there",
+   "reason": "a water record holds the name (proctor-creek-ga, proctor-creek-acworth-ga), but the reports' points lie too far from it to be placed there",
    "places_failed": [
     {
      "lon": -84.59693,
@@ -978,7 +1251,8 @@
    "name": "Tributary to Timber Ridge Branch",
    "reports": 3,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "points": [
@@ -1002,25 +1276,49 @@
    ]
   },
   {
-   "name": "Utoy",
+   "name": "Un-named tributary of Gingercake Creek",
    "reports": 3,
    "seen_in": [
     "EPA reports",
     "EPD list"
    ],
-   "kind": "named water",
+   "kind": "tributary of a named water",
    "towns": [
-    "East Point",
-    "Atlanta"
+    "Fayetteville"
    ],
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "not a water name"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Gingercake Creek"
+   ]
   },
   {
-   "name": "Weracoba Creek",
+   "name": "Unamed",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "points": [
+    [
+     33.27334,
+     -82.98821
+    ]
+   ],
+   "towns": [
+    "Sparta"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
+  },
+  {
+   "name": "Wolf Creek",
    "reports": 3,
    "seen_in": [
     "EPA reports",
@@ -1029,22 +1327,18 @@
    "kind": "named water",
    "points": [
     [
-     32.48086,
-     -84.96598
-    ],
-    [
-     32.49971,
-     -84.96817
+     32.8373,
+     -83.71381
     ]
    ],
    "towns": [
-    "Columbus"
+    "Macon"
    ],
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "storm water catch basin",
@@ -1063,7 +1357,7 @@
    "reason": "a storm-sewer system, not a named water"
   },
   {
-   "name": "Big Creek Basin",
+   "name": "Buffalo Creek",
    "reports": 2,
    "seen_in": [
     "EPA reports",
@@ -1071,18 +1365,12 @@
    ],
    "kind": "named water",
    "towns": [
-    "Johns Creek",
-    "Alpharetta",
-    "Roswell"
+    "Sparta"
    ],
    "places_from": [
-    "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "records": [
-    "big-creek-ga"
-   ],
-   "reason": "a water record holds the water this text names (big-creek-ga), but the status resolver reads the text as a watershed or basin label, not a water's name (build/status.py, Watershed labels): its reports are not placed there"
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Catch basin in MS4 system",
@@ -1099,6 +1387,30 @@
     "ga-epd-spills"
    ],
    "reason": "a storm-sewer system (MS4), not a named water"
+  },
+  {
+   "name": "Cedar Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.93451,
+     -83.31951
+    ]
+   ],
+   "towns": [
+    "Athens",
+    "Wrightsville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "City Stormwater system",
@@ -1131,8 +1443,933 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
-   "name": "Concord Creek",
+   "name": "Crooked Creek",
    "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.76579,
+     -84.14722
+    ],
+    [
+     33.77221,
+     -84.08696
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Lithonia"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "24 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Lawrenceville",
+     "reason": "no NHD water of that name within 3 km of Lawrenceville (the nearest is 16.9 km away)"
+    },
+    {
+     "town": "Buford",
+     "reason": "no NHD water of that name within 3 km of Buford (the nearest is 25.9 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Ditch feeding Bowman Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Bowman Creek"
+   ]
+  },
+  {
+   "name": "Gordon Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.7979,
+     -84.57972
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Huey Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.78405,
+     -84.74063
+    ]
+   ],
+   "towns": [
+    "Douglasville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Intermittent Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Sparta"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Kingsley Lake",
+   "reports": 2,
+   "points": [
+    [
+     33.66478,
+     -84.21842
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Dunwoody"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "records": [
+    "kingsley-lake-ga"
+   ],
+   "reason": "a water record holds the name (kingsley-lake-ga), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -84.21842,
+     "lat": 33.66478,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.66478, -84.21842) (the nearest is 32.1 km away)"
+    },
+    {
+     "town": "Decatur",
+     "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 17.2 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 9.1 km away)"
+    },
+    {
+     "town": "Stonecrest",
+     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 26.7 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Lower Snapfinger Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.67127,
+     -84.2087
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Lithonia"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Mill Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     34.74545,
+     -85.45584
+    ]
+   ],
+   "towns": [
+    "Rising Fawn"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Mimms Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "East Point"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Ocmuglee",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Olive Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Thomasville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "SOUTH RIVER CREEK",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.65499,
+     -84.35633
+    ]
+   ],
+   "towns": [
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "South Fork Peavine Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.76858,
+     -84.32732
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Steam from Beaverdam creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     34.204,
+     -83.45711
+    ]
+   ],
+   "towns": [
+    "Commerce"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Steam"
+   ]
+  },
+  {
+   "name": "Trail Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     34.00204,
+     -83.33214
+    ]
+   ],
+   "towns": [
+    "Athens"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -83.33214,
+     "lat": 34.00204,
+     "reason": "no NHD water of that name within 2 km of the reports' point (34.00204, -83.33214) (the nearest is 3.9 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Tributary to Favor Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Favor Creek"
+   ]
+  },
+  {
+   "name": "Tributary to Mill Creek No. 2",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "points": [
+    [
+     33.87461,
+     -84.58052
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Mill Creek No. 2"
+   ]
+  },
+  {
+   "name": "Tributary to Noonday Creek Tributary No. 7",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Kennesaw"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Noonday Creek tributary No. 7"
+   ]
+  },
+  {
+   "name": "Tributary to Sweat Mountain Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Sweat Mountain Creek"
+   ]
+  },
+  {
+   "name": "Tributary to cooper lake creek",
+   "reports": 2,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Smyrna"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "parts": [
+    "cooper lake creek"
+   ]
+  },
+  {
+   "name": "Unnamed Stream",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Athens",
+    "Blue Ridge"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
+  },
+  {
+   "name": "Unnamed Tributary of Crooked Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Peachtree Corners",
+    "Norcross"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "24 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Crooked Creek"
+   ],
+   "places_failed": [
+    {
+     "town": "Lawrenceville",
+     "reason": "no NHD water of that name within 3 km of Lawrenceville (the nearest is 16.9 km away)"
+    },
+    {
+     "town": "Buford",
+     "reason": "no NHD water of that name within 3 km of Buford (the nearest is 25.9 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Unnamed Tributary to Town Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Vienna"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "22 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Town Creek"
+   ],
+   "places_failed": [
+    {
+     "town": "Vienna",
+     "reason": "no NHD water of that name within 3 km of Vienna (the nearest is 28.4 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Unnamed tributary of cedar creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "points": [
+    [
+     33.97723,
+     -83.95845
+    ],
+    [
+     33.99887,
+     -83.72056
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Winder"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "parts": [
+    "cedar creek"
+   ]
+  },
+  {
+   "name": "catch basin",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water",
+   "towns": [
+    "Savannah"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
+  },
+  {
+   "name": "Airport Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     32.97006,
+     -85.07494
+    ]
+   ],
+   "towns": [
+    "Lagrange"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "BOAK TUSK",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Conyers"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Basin",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "towns": [
+    "Augusta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
+  },
+  {
+   "name": "Bell Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     32.86595,
+     -84.32541
+    ]
+   ],
+   "towns": [
+    "Thomaston"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Big Cotton Indian Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Jonesboro",
+    "Ellenwood"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Jonesboro",
+     "reason": "no NHD water of that name within 3 km of Jonesboro (the nearest is 8.3 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Big Creek Basin",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "big-creek-ga"
+   ],
+   "reason": "a water record holds the water this text names (big-creek-ga), but the status resolver reads the text as a watershed or basin label, not a water's name (build/status.py, Watershed labels): its reports are not placed there"
+  },
+  {
+   "name": "Bishop Lake Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Boar Tusk",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Conyers"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Boar Tusk Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Conyers"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Briley's Lake",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Thomasville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Camp Bert Adams Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Campcreek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.68343,
+     -84.49087
+    ],
+    [
+     33.64544,
+     -84.57682
+    ],
+    [
+     33.54911,
+     -84.41503
+    ],
+    [
+     33.51537,
+     -84.37198
+    ]
+   ],
+   "towns": [
+    "Atlanta",
+    "Jonesboro",
+    "Johns Creek",
+    "Alpharetta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Cauley Creek",
+   "reports": 1,
+   "points": [
+    [
+     34.00248,
+     -84.39051
+    ]
+   ],
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "records": [
+    "cauley-creek-ga"
+   ],
+   "reason": "a water record holds the name (cauley-creek-ga), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -84.39051,
+     "lat": 34.00248,
+     "reason": "no NHD water of that name within 2 km of the reports' point (34.00248, -84.39051) (the nearest is 21.9 km away)"
+    },
+    {
+     "town": "Alpharetta",
+     "reason": "no NHD water of that name within 3 km of Alpharetta (the nearest is 4.0 km away)"
+    },
+    {
+     "town": "Roswell",
+     "reason": "no NHD water of that name within 3 km of Roswell (the nearest is 10.4 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Cobb Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "2 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Decatur",
+     "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 44.9 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 34.2 km away)"
+    },
+    {
+     "town": "Stonecrest",
+     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 49.6 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Concord Creek",
+   "reports": 1,
    "seen_in": [
     "EPA reports",
     "EPD list"
@@ -1169,51 +2406,9 @@
    ]
   },
   {
-   "name": "Creek in resident's yard.",
-   "reports": 2,
+   "name": "DOLITTLE CREEK",
+   "reports": 1,
    "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "storm system or not a named water",
-   "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "private property, not a public water"
-  },
-  {
-   "name": "Huey Creek",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.78405,
-     -84.74063
-    ]
-   ],
-   "towns": [
-    "Douglasville"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "INTREACHMENT CREEK",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports",
     "EPD list"
    ],
    "kind": "named water",
@@ -1221,579 +2416,9 @@
     "Atlanta"
    ],
    "places_from": [
-    "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Lindsey Creek Basin",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     32.4881,
-     -84.93789
-    ]
-   ],
-   "towns": [
-    "Columbus"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "records": [
-    "lindsey-creek-ga"
-   ],
-   "reason": "a water record holds the water this text names (lindsey-creek-ga), but the status resolver reads the text as a watershed or basin label, not a water's name (build/status.py, Watershed labels): its reports are not placed there"
-  },
-  {
-   "name": "New River Basin",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     31.44583,
-     -83.47806
-    ]
-   ],
-   "towns": [
-    "Tifton"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
-  },
-  {
-   "name": "Palmer Branch",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Douglasville"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "places_failed": [
-    {
-     "town": "Douglasville",
-     "reason": "no NHD water of that name within 3 km of Douglasville (the nearest is 225.7 km away)"
-    }
-   ]
-  },
-  {
-   "name": "Panther Ct.",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "storm system or not a named water",
-   "points": [
-    [
-     33.411,
-     -84.34294
-    ]
-   ],
-   "towns": [
-    "Hampton",
-    "Stockbridge"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "a street name, not a water"
-  },
-  {
-   "name": "Peachtree Branch",
-   "reports": 2,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.8667,
-     -84.24558
-    ]
-   ],
-   "towns": [
-    "Tucker",
-    "Decatur",
-    "Stonecrest"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
-   "places_failed": [
-    {
-     "lon": -84.24558,
-     "lat": 33.8667,
-     "reason": "no NHD water of that name within 2 km of the reports' point (33.86670, -84.24558) (the nearest is 159.0 km away)"
-    },
-    {
-     "town": "Tucker",
-     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 153.4 km away)"
-    },
-    {
-     "town": "Decatur",
-     "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 145.2 km away)"
-    },
-    {
-     "town": "Stonecrest",
-     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 136.0 km away)"
-    }
-   ]
-  },
-  {
-   "name": "Pipemakers Canal",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     32.11283,
-     -81.18722
-    ]
-   ],
-   "towns": [
-    "Savannah"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "SOUTH RIVER CREEK",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.65499,
-     -84.35633
-    ]
-   ],
-   "towns": [
-    "Atlanta"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "Stream",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "storm system or not a named water",
-   "points": [
-    [
-     33.40206,
-     -84.78406
-    ],
-    [
-     33.37822,
-     -84.85556
-    ],
-    [
-     33.36691,
-     -84.82969
-    ]
-   ],
-   "towns": [
-    "Newnan",
-    "Loganville"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "a kind of water with no name"
-  },
-  {
-   "name": "Trail Creek",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     34.00204,
-     -83.33214
-    ]
-   ],
-   "towns": [
-    "Athens"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
-   "places_failed": [
-    {
-     "lon": -83.33214,
-     "lat": 34.00204,
-     "reason": "no NHD water of that name within 2 km of the reports' point (34.00204, -83.33214) (the nearest is 3.9 km away)"
-    }
-   ]
-  },
-  {
-   "name": "Tributary to Mill Creek No. 2",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "tributary of a named water",
-   "points": [
-    [
-     33.87461,
-     -84.58052
-    ]
-   ],
-   "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
-   "parts": [
-    "Mill Creek No. 2"
-   ]
-  },
-  {
-   "name": "Tributary to Noonday Creek Tributary No. 7",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton",
-    "Kennesaw"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "parts": [
-    "Noonday Creek tributary No. 7"
-   ]
-  },
-  {
-   "name": "Tributary to Piney Grove Creek",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "parts": [
-    "Piney Grove Creek"
-   ]
-  },
-  {
-   "name": "Tributary to Sweat Mountain Creek",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton",
-    "Roswell"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "parts": [
-    "Sweat Mountain Creek"
-   ]
-  },
-  {
-   "name": "Unamed",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "storm system or not a named water",
-   "points": [
-    [
-     33.27334,
-     -82.98821
-    ]
-   ],
-   "towns": [
-    "Sparta"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "an unnamed or unknown stream: the report names no water"
-  },
-  {
-   "name": "Unnamed",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Fairburn"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "an unnamed or unknown stream: the report names no water"
-  },
-  {
-   "name": "catch basin",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "storm system or not a named water",
-   "towns": [
-    "Savannah"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "part of a sewer, drainage or treatment works, not a public water"
-  },
-  {
-   "name": "Airport Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     32.97006,
-     -85.07494
-    ]
-   ],
-   "towns": [
-    "Lagrange"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "BOAK TUSK",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Conyers"
-   ],
-   "places_from": [
-    "echo-sewer-overflow"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Babashela Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Stone Mountain"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Big Cotton Indian Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Jonesboro",
-    "Ellenwood"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "places_failed": [
-    {
-     "town": "Jonesboro",
-     "reason": "no NHD water of that name within 3 km of Jonesboro (the nearest is 8.3 km away)"
-    }
-   ]
-  },
-  {
-   "name": "Bishop Lake Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Camp Bert Adams Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton"
-   ],
-   "places_from": [
-    "echo-sewer-overflow"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Cauley Creek",
-   "reports": 1,
-   "points": [
-    [
-     34.00248,
-     -84.39051
-    ]
-   ],
-   "towns": [
-    "Johns Creek",
-    "Alpharetta",
-    "Roswell"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "records": [
-    "cauley-creek-ga"
-   ],
-   "reason": "a water record holds the name (cauley-creek-ga), but the reports' points lie too far from it to be placed there",
-   "places_failed": [
-    {
-     "lon": -84.39051,
-     "lat": 34.00248,
-     "reason": "no NHD water of that name within 2 km of the reports' point (34.00248, -84.39051) (the nearest is 21.9 km away)"
-    },
-    {
-     "town": "Alpharetta",
-     "reason": "no NHD water of that name within 3 km of Alpharetta (the nearest is 4.0 km away)"
-    },
-    {
-     "town": "Roswell",
-     "reason": "no NHD water of that name within 3 km of Roswell (the nearest is 10.4 km away)"
-    }
-   ]
-  },
-  {
-   "name": "Cobb Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "2 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "places_failed": [
-    {
-     "town": "Decatur",
-     "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 44.9 km away)"
-    },
-    {
-     "town": "Tucker",
-     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 34.2 km away)"
-    },
-    {
-     "town": "Stonecrest",
-     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 49.6 km away)"
-    }
-   ]
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Dark Entry Creek",
@@ -1811,6 +2436,10 @@
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
+   ],
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
    ],
    "records": [
     "dark-entry-creek-ga"
@@ -1856,10 +2485,26 @@
    ]
   },
   {
+   "name": "Did no enter state waters",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "towns": [
+    "Atlanta"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not a water name"
+  },
+  {
    "name": "Ditch feeding Blue Branch",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "towns": [
@@ -1914,7 +2559,8 @@
    "name": "Dram Branch Basin",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -1936,10 +2582,32 @@
    ]
   },
   {
+   "name": "Dunbar Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     31.14728,
+     -81.49347
+    ]
+   ],
+   "towns": [
+    "Brunswick"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
    "name": "East Jester's Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
@@ -1953,10 +2621,53 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
+   "name": "Edwards Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     34.21835,
+     -83.43789
+    ],
+    [
+     34.23902,
+     -83.49811
+    ]
+   ],
+   "towns": [
+    "Commerce"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "FOWLER BRANCH",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Decatur"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
    "name": "Flint",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -1979,7 +2690,8 @@
    "name": "Fowler",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
@@ -1997,7 +2709,8 @@
    "name": "Fowler Branch Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
@@ -2026,34 +2739,11 @@
    ]
   },
   {
-   "name": "GLENDALE TRIBUTARY",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "tributary of a named water",
-   "points": [
-    [
-     33.78146,
-     -84.28565
-    ]
-   ],
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "a tributary named by a place, not by the water it joins"
-  },
-  {
    "name": "Ginger Cake",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
@@ -2066,10 +2756,47 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "Grant street Tributary to Soque River",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "towns": [
+    "Clarkesville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "a tributary named by a place, not by the water it joins"
+  },
+  {
+   "name": "Griffin Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.92568,
+     -84.82809
+    ]
+   ],
+   "towns": [
+    "Dallas"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
    "name": "Harmony Grove Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
@@ -2101,25 +2828,26 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
-   "name": "Intermittent Creek",
+   "name": "Johnson Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
-    "Sparta"
+    "Griffin"
    ],
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Knollwood Branch",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -2141,7 +2869,8 @@
    "name": "Lake Knickerbocker",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -2160,42 +2889,11 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "Lake Tobesofke",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Macon"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Lindsay Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Columbus"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
    "name": "Little Ogeechee Pond",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -2212,6 +2910,31 @@
     "ga-epd-spills"
    ],
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Long Cane Creek Tributary",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "points": [
+    [
+     33.02421,
+     -84.99905
+    ]
+   ],
+   "towns": [
+    "Lagrange",
+    "Thomasville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "parts": [
+    "Long Cane Creek"
+   ]
   },
   {
    "name": "MS4 ditch",
@@ -2245,6 +2968,23 @@
    "reason": "a storm-sewer system (MS4), not a named water"
   },
   {
+   "name": "McClane Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Conyers"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
    "name": "Mill Creek No 2",
    "reports": 1,
    "seen_in": [
@@ -2262,25 +3002,32 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "Mimms Creek",
+   "name": "Mineral Springs Drainage Basin",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPD list"
    ],
-   "kind": "named water",
+   "kind": "storm system or not a named water",
+   "points": [
+    [
+     33.37506,
+     -84.82968
+    ]
+   ],
    "towns": [
-    "East Point"
+    "Newnan"
    ],
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
   },
   {
    "name": "Mulberry Subdivision Drainage Pond",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "storm system or not a named water",
    "points": [
@@ -2299,10 +3046,34 @@
    "reason": "part of a sewer, drainage or treatment works, not a public water"
   },
   {
+   "name": "New River Basin",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     31.44583,
+     -83.47806
+    ]
+   ],
+   "towns": [
+    "Tifton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
+  },
+  {
    "name": "No name Creek to Middle Oconee",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "towns": [
@@ -2318,27 +3089,11 @@
    ]
   },
   {
-   "name": "No name Wetland",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Athens",
-    "Bogart"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "a wetland (not a named NHD water)"
-  },
-  {
    "name": "Noonday Creek Tributary No. 6",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "points": [
@@ -2360,10 +3115,94 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "North Fork of Little Mud Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Cornelia"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Noses",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Marietta"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Not Application",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Not Professional",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Stone Mountain",
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Noy Applicable",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "towns": [
+    "Atlanta",
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not a water name"
+  },
+  {
    "name": "Oates Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -2382,10 +3221,58 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "Palmer Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Douglasville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Douglasville",
+     "reason": "no NHD water of that name within 3 km of Douglasville (the nearest is 225.7 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Panther Ct.",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "points": [
+    [
+     33.411,
+     -84.34294
+    ]
+   ],
+   "towns": [
+    "Hampton",
+    "Stockbridge"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "a street name, not a water"
+  },
+  {
    "name": "Parker Fairway Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
@@ -2401,10 +3288,94 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
+   "name": "Peachtree Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.8667,
+     -84.24558
+    ]
+   ],
+   "towns": [
+    "Tucker",
+    "Decatur",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -84.24558,
+     "lat": 33.8667,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.86670, -84.24558) (the nearest is 159.0 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 153.4 km away)"
+    },
+    {
+     "town": "Decatur",
+     "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 145.2 km away)"
+    },
+    {
+     "town": "Stonecrest",
+     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 136.0 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Perimeter Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.93648,
+     -84.34167
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Dunwoody"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Petitt Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Cartersville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
    "name": "Pond",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "storm system or not a named water",
    "points": [
@@ -2423,10 +3394,50 @@
    "reason": "a kind of water with no name"
   },
   {
+   "name": "Poole Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     33.63764,
+     -84.3753
+    ]
+   ],
+   "towns": [
+    "Jonesboro",
+    "Forest Park"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Ritchie St tributary leading to Soque River",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "towns": [
+    "Clarkesville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "a tributary named by a place, not by the water it joins"
+  },
+  {
    "name": "River Ridge Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
@@ -2457,64 +3468,26 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
-   "name": "SOUTH FORK PEACHTREE CREK",
+   "name": "Rose Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Woodstock"
    ],
    "places_from": [
-    "echo-sewer-overflow"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "SOUTHRIVER",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.66948,
-     -84.20762
-    ],
-    [
-     33.65474,
-     -84.35577
-    ],
-    [
-     33.69258,
-     -84.39275
-    ],
-    [
-     33.67487,
-     -84.41201
-    ]
-   ],
-   "towns": [
-    "Atlanta",
-    "Decatur",
-    "Tucker",
-    "Stonecrest"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Sandy",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -2551,7 +3524,8 @@
    "name": "Savage Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
@@ -2562,6 +3536,50 @@
     "ga-epd-spills"
    ],
    "reason": "2 NHD waters of that name in GA and the reports give no place to choose one"
+  },
+  {
+   "name": "Sell Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     34.09273,
+     -83.74652
+    ]
+   ],
+   "towns": [
+    "Hoschton"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Seven Branches",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     34.02115,
+     -84.30113
+    ]
+   ],
+   "towns": [
+    "Roswell",
+    "Johns Creek",
+    "Alpharetta"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Skyland Lake",
@@ -2588,7 +3606,8 @@
    "name": "Smyrna Branch",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
@@ -2603,47 +3622,49 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
-   "name": "Spirt Creek",
+   "name": "Storm ditch",
    "reports": 1,
    "seen_in": [
     "EPA reports"
    ],
-   "kind": "named water",
+   "kind": "storm system or not a named water",
    "towns": [
-    "Augusta"
+    "Sylvester"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Tanyard Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     32.97006,
+     -85.07494
+    ]
+   ],
+   "towns": [
+    "Lagrange"
    ],
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Sugar Crek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     30.83511,
-     -83.35808
-    ]
-   ],
-   "towns": [
-    "Valdosta"
-   ],
-   "places_from": [
-    "echo-sewer-overflow"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Thompson Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -2701,10 +3722,60 @@
    ]
   },
   {
+   "name": "Toto Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Town Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Summerville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
+   "name": "Town Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Flintstone",
+    "Chickamauga"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "22 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Vienna",
+     "reason": "no NHD water of that name within 3 km of Vienna (the nearest is 28.4 km away)"
+    }
+   ]
+  },
+  {
    "name": "Tributary  to Clay Branch",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "points": [
@@ -2747,29 +3818,35 @@
    ]
   },
   {
-   "name": "Tributary Litle Cotton Indian Creek",
+   "name": "Tributary of Dozier Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPD list"
    ],
    "kind": "tributary of a named water",
+   "points": [
+    [
+     34.30444,
+     -85.11826
+    ]
+   ],
    "towns": [
-    "Stockbridge",
-    "Mcdonough"
+    "Rome"
    ],
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
    "parts": [
-    "Litle Cotton Indian Creek"
+    "Dozier Creek"
    ]
   },
   {
    "name": "Tributary of Gingercake",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "points": [
@@ -2791,10 +3868,29 @@
    ]
   },
   {
+   "name": "Tributary of Tar Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Dalton"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "parts": [
+    "Tar Creek"
+   ]
+  },
+  {
    "name": "Tributary of Utoy Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "towns": [
@@ -2807,16 +3903,17 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
    "parts": [
-    "oy Creek"
+    "Utoy Creek"
    ]
   },
   {
    "name": "Tributary to Bald Ridge Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "points": [
@@ -2875,7 +3972,8 @@
    "name": "Tributary to Blackjack Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "points": [
@@ -2899,10 +3997,29 @@
    ]
   },
   {
+   "name": "Tributary to Canton Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Canton"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "parts": [
+    "Canton Creek"
+   ]
+  },
+  {
    "name": "Tributary to Harmony Grove Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "points": [
@@ -2963,7 +4080,8 @@
    "name": "Tributary to Milam Branch",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "towns": [
@@ -3038,7 +4156,8 @@
    "name": "Tributary to Noonday Creek Tributary No. 1",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "points": [
@@ -3066,7 +4185,8 @@
    "name": "Tributary to North Oconee Riverr",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "towns": [
@@ -3114,7 +4234,8 @@
    "name": "Tributary to Queen Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "towns": [
@@ -3155,7 +4276,8 @@
    "name": "Tributary to Walden Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "towns": [
@@ -3190,7 +4312,8 @@
    "name": "Tributary to Wild Horse Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "towns": [
@@ -3212,7 +4335,8 @@
    "name": "Trickum Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "towns": [
@@ -3241,29 +4365,44 @@
    ]
   },
   {
-   "name": "Un-named tributary of Gingercake Creek",
+   "name": "Unknown",
    "reports": 1,
    "seen_in": [
     "EPA reports"
    ],
-   "kind": "tributary of a named water",
+   "kind": "storm system or not a named water",
+   "points": [
+    [
+     33.44819,
+     -82.16799
+    ],
+    [
+     33.41767,
+     -82.07238
+    ],
+    [
+     33.45685,
+     -82.2062
+    ]
+   ],
    "towns": [
-    "Fayetteville"
+    "Augusta",
+    "Grovetown",
+    "Atlanta",
+    "Johns Creek"
    ],
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "parts": [
-    "Gingercake Creek"
-   ]
+   "reason": "an unnamed or unknown stream: the report names no water"
   },
   {
    "name": "Unknown Stream",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "storm system or not a named water",
    "towns": [
@@ -3276,21 +4415,25 @@
    "reason": "an unnamed or unknown stream: the report names no water"
   },
   {
-   "name": "Unnamed Stream",
+   "name": "Unname tributary",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPD list"
    ],
-   "kind": "tributary of a named water",
+   "kind": "storm system or not a named water",
+   "points": [
+    [
+     33.42839,
+     -84.43877
+    ]
+   ],
    "towns": [
-    "Athens",
-    "Blue Ridge"
+    "Fayetteville"
    ],
    "places_from": [
-    "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "an unnamed or unknown stream: the report names no water"
+   "reason": "a tributary named by a place, not by the water it joins"
   },
   {
    "name": "Unnamed Tributary of Brushy Fork Creek",
@@ -3312,28 +4455,77 @@
    ]
   },
   {
-   "name": "Unnamed Tributary to Town Creek",
+   "name": "Unnamed Tributary of Fork Creek",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPD list"
    ],
    "kind": "tributary of a named water",
+   "points": [
+    [
+     33.87117,
+     -83.94155
+    ]
+   ],
    "towns": [
-    "Vienna"
+    "Loganville",
+    "Lawrenceville",
+    "Buford"
    ],
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "22 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
    "parts": [
-    "Town Creek"
+    "Fork Creek"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary to Trickum Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Tyrone"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Trickum Creek"
    ],
    "places_failed": [
     {
-     "town": "Vienna",
-     "reason": "no NHD water of that name within 3 km of Vienna (the nearest is 28.4 km away)"
+     "town": "Marietta",
+     "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 39.1 km away)"
+    },
+    {
+     "town": "Smyrna",
+     "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 28.1 km away)"
+    },
+    {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 24.4 km away)"
     }
    ]
+  },
+  {
+   "name": "Unnamed ditch",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "towns": [
+    "Villa Rica"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
   },
   {
    "name": "Unnamed tributary feeding Rooty creek",
@@ -3354,10 +4546,96 @@
    ]
   },
   {
+   "name": "Unnamed tributary feeding into Rooty Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "points": [
+    [
+     33.31942,
+     -83.3727
+    ]
+   ],
+   "towns": [
+    "Eatonton"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "parts": [
+    "feeding"
+   ]
+  },
+  {
+   "name": "Unnamed tributary of Big Dry Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Rome"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "parts": [
+    "Big Dry Creek"
+   ]
+  },
+  {
+   "name": "Unnamed tributary of Tar Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "towns": [
+    "Dalton"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "parts": [
+    "Tar Creek"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Kellogg Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "tributary of a named water",
+   "points": [
+    [
+     34.10245,
+     -84.62328
+    ]
+   ],
+   "towns": [
+    "Canton",
+    "Woodstock"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "parts": [
+    "Kellogg Creek"
+   ]
+  },
+  {
    "name": "Upper Upatoi Basin",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -3380,7 +4658,8 @@
    "name": "Vinings Branch",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -3402,10 +4681,52 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "Walnut Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     32.86635,
+     -83.59678
+    ]
+   ],
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "walnut-creek-ga"
+   ],
+   "reason": "a water record holds the name (walnut-creek-ga), but the reports' points lie too far from it to be placed there"
+  },
+  {
+   "name": "Warren Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "towns": [
+    "Atlanta"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
    "name": "Weracoba Creek Basin",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "named water",
    "points": [
@@ -3430,7 +4751,8 @@
    "name": "Weracoba Creek Trib.",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "tributary of a named water",
    "towns": [
@@ -3446,10 +4768,32 @@
    ]
   },
   {
+   "name": "Wet Weather Ditch",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water",
+   "points": [
+    [
+     34.26435,
+     -85.20459
+    ]
+   ],
+   "towns": [
+    "Rome"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+  },
+  {
    "name": "Wilshire Canal (MS4)",
    "reports": 1,
    "seen_in": [
-    "EPA reports"
+    "EPA reports",
+    "EPD list"
    ],
    "kind": "storm system or not a named water",
    "points": [
@@ -3466,6 +4810,21 @@
     "ga-epd-spills"
    ],
    "reason": "a storm-sewer system (MS4), not a named water"
+  },
+  {
+   "name": "city storm",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water",
+   "towns": [
+    "Nahunta"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "reason": "not a water name"
   },
   {
    "name": "stormwater catch basin",
@@ -3528,6 +4887,10 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
    "records": [
     "rice-creek-royston-ga"
    ],
@@ -3544,7 +4907,7 @@
  "resolved": [
   {
    "name": "North Fork Peachtree Creek",
-   "reports": 51,
+   "reports": 59,
    "slugs": [
     "north-fork-peachtree-creek-ga"
    ],
@@ -3584,7 +4947,7 @@
   },
   {
    "name": "Peachtree Creek",
-   "reports": 34,
+   "reports": 32,
    "slugs": [
     "peachtree-creek-ga"
    ],
@@ -3621,7 +4984,7 @@
   },
   {
    "name": "South Fork Peachtree Creek",
-   "reports": 32,
+   "reports": 28,
    "slugs": [
     "south-fork-peachtree-creek-ga"
    ],
@@ -3660,8 +5023,162 @@
    ]
   },
   {
+   "name": "South River",
+   "reports": 24,
+   "slugs": [
+    "south-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.66948,
+     -84.20762
+    ],
+    [
+     33.65474,
+     -84.35577
+    ],
+    [
+     33.69258,
+     -84.39275
+    ],
+    [
+     33.67487,
+     -84.41201
+    ]
+   ],
+   "towns": [
+    "Atlanta",
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Butler Creek",
+   "reports": 23,
+   "slugs": [
+    "butler-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.38688,
+     -82.09285
+    ],
+    [
+     33.44128,
+     -82.08769
+    ],
+    [
+     33.41767,
+     -82.07238
+    ]
+   ],
+   "towns": [
+    "Augusta",
+    "Hephzibah"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Proctor Creek",
+   "reports": 18,
+   "slugs": [
+    "proctor-creek-ga",
+    "proctor-creek-acworth-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.12346,
+     -84.47305
+    ],
+    [
+     33.12346,
+     -84.42275
+    ],
+    [
+     33.8006,
+     -84.12346
+    ],
+    [
+     33.76254,
+     -84.41958
+    ],
+    [
+     33.82332,
+     -84.45692
+    ]
+   ],
+   "towns": [
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "lon": -84.59693,
+     "lat": 34.05777,
+     "reason": "no NHD water of that name within 2 km of the reports' point (34.05777, -84.59693) (the nearest is 2.8 km away)"
+    },
+    {
+     "town": "Marietta",
+     "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 4.7 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Rocky Creek",
+   "reports": 18,
+   "slugs": [
+    "rocky-creek-macon-bibb-county-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.45209,
+     -82.06229
+    ],
+    [
+     33.42047,
+     -82.04336
+    ],
+    [
+     33.39487,
+     -81.97529
+    ],
+    [
+     32.8231,
+     -83.6955
+    ],
+    [
+     32.19561,
+     -82.40794
+    ]
+   ],
+   "towns": [
+    "Augusta",
+    "Macon",
+    "Vidalia"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Snapfinger Creek",
-   "reports": 16,
+   "reports": 18,
    "slugs": [
     "snapfinger-creek-ga"
    ],
@@ -3700,85 +5217,39 @@
    ]
   },
   {
-   "name": "Chattahoochee River Tributary",
-   "reports": 14,
+   "name": "Flint River",
+   "reports": 15,
    "slugs": [
-    "chattahoochee-river-ga"
+    "flint-river-ga"
    ],
    "how": "a water record already holds the name",
    "points": [
     [
-     32.52046,
-     -84.9717
+     31.57092,
+     -84.14772
     ],
     [
-     32.40206,
-     -84.95571
+     31.53822,
+     -84.14769
     ],
     [
-     32.53297,
-     -84.99868
+     33.57654,
+     -84.41165
+    ],
+    [
+     33.51829,
+     -84.3831
+    ],
+    [
+     33.63702,
+     -84.44163
     ]
    ],
    "towns": [
-    "Columbus"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Pole Bridge Creek",
-   "reports": 14,
-   "slugs": [
-    "pole-bridge-creek-ga"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     33.70516,
-     -84.14263
-    ],
-    [
-     33.67749,
-     -84.15256
-    ]
-   ],
-   "towns": [
-    "Stonecrest",
-    "Decatur",
-    "Tucker",
-    "Lithonia"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Sugar Creek",
-   "reports": 14,
-   "slugs": [
-    "sugar-creek-gresham-park-ga",
-    "sugar-creek-valdosta-ga"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     33.72328,
-     -84.31953
-    ],
-    [
-     30.85128,
-     -83.31486
-    ]
-   ],
-   "towns": [
-    "Atlanta",
-    "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Jonesboro",
+    "College Park",
+    "Albany",
+    "Riverdale"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -3787,7 +5258,7 @@
   },
   {
    "name": "Bull creek tributary",
-   "reports": 13,
+   "reports": 11,
    "slugs": [
     "bull-creek-ga"
    ],
@@ -3815,37 +5286,8 @@
    ]
   },
   {
-   "name": "Raes Creek",
-   "reports": 13,
-   "slugs": [
-    "raes-creek-ga"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     33.48623,
-     -82.01046
-    ],
-    [
-     33.49036,
-     -82.09314
-    ],
-    [
-     33.48575,
-     -82.0464
-    ]
-   ],
-   "towns": [
-    "Augusta"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
    "name": "Sandy Creek",
-   "reports": 12,
+   "reports": 10,
    "slugs": [
     "sandy-creek-ga"
    ],
@@ -3873,8 +5315,126 @@
    ]
   },
   {
-   "name": "Peavine Creek",
+   "name": "Sugar Creek",
+   "reports": 10,
+   "slugs": [
+    "sugar-creek-gresham-park-ga",
+    "sugar-creek-valdosta-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.72328,
+     -84.31953
+    ],
+    [
+     30.85128,
+     -83.31486
+    ]
+   ],
+   "towns": [
+    "Atlanta",
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Barbashela Creek",
    "reports": 9,
+   "slugs": [
+    "barbashela-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.75674,
+     -84.16876
+    ],
+    [
+     33.78393,
+     -84.19539
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Stone Mountain"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Mossy Creek",
+   "reports": 9,
+   "slugs": [
+    "mossy-creek-ga",
+    "mossy-creek-cleveland-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.43926,
+     -83.71722
+    ],
+    [
+     32.48956,
+     -83.66291
+    ],
+    [
+     34.57146,
+     -83.76174
+    ]
+   ],
+   "towns": [
+    "Perry",
+    "Cleveland",
+    "Kathleen"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Chattahoochee River Tributary",
+   "reports": 8,
+   "slugs": [
+    "chattahoochee-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     32.52046,
+     -84.9717
+    ],
+    [
+     32.40206,
+     -84.95571
+    ],
+    [
+     32.53297,
+     -84.99868
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Peavine Creek",
+   "reports": 8,
    "slugs": [
     "peavine-creek-ga"
    ],
@@ -3901,30 +5461,111 @@
    ]
   },
   {
-   "name": "Jester Creek",
-   "reports": 7,
+   "name": "Pole Bridge Creek",
+   "reports": 8,
    "slugs": [
-    "jester-creek-ga"
+    "pole-bridge-creek-ga"
    ],
    "how": "record built from the name",
    "points": [
     [
-     33.57102,
-     -84.35098
+     33.70516,
+     -84.14263
     ],
     [
-     33.53576,
-     -84.37058
-    ],
-    [
-     33.58412,
-     -84.36959
+     33.67749,
+     -84.15256
     ]
    ],
    "towns": [
-    "Jonesboro",
-    "Morrow",
-    "Forest Park"
+    "Stonecrest",
+    "Decatur",
+    "Tucker",
+    "Lithonia"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Raes Creek",
+   "reports": 8,
+   "slugs": [
+    "raes-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.48623,
+     -82.01046
+    ],
+    [
+     33.49036,
+     -82.09314
+    ],
+    [
+     33.48575,
+     -82.0464
+    ]
+   ],
+   "towns": [
+    "Augusta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Cooper Creek",
+   "reports": 7,
+   "slugs": [
+    "cooper-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.50354,
+     -84.92809
+    ],
+    [
+     32.40206,
+     -84.95571
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Ocmulgee River",
+   "reports": 7,
+   "slugs": [
+    "ocmulgee-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     31.92194,
+     -82.66947
+    ],
+    [
+     32.82787,
+     -83.76474
+    ],
+    [
+     32.76953,
+     -83.6402
+    ]
+   ],
+   "towns": [
+    "Macon",
+    "Lumber City"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -3959,45 +5600,27 @@
    ]
   },
   {
-   "name": "Tributary to Olley Creek",
-   "reports": 7,
-   "slugs": [
-    "olley-creek-ga"
-   ],
-   "how": "record built from the name",
-   "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton",
-    "Fair Oaks"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Barbashela Creek",
+   "name": "HENDERSON MILL CREEK",
    "reports": 6,
    "slugs": [
-    "barbashela-creek-ga"
+    "henderson-mill-creek-ga"
    ],
    "how": "record built from the name",
    "points": [
     [
-     33.75674,
-     -84.16876
+     33.66478,
+     -84.21842
     ],
     [
-     33.78393,
-     -84.19539
+     33.86598,
+     -84.25779
     ]
    ],
    "towns": [
     "Decatur",
     "Tucker",
     "Stonecrest",
-    "Stone Mountain"
+    "Chamblee"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4005,42 +5628,23 @@
    ]
   },
   {
-   "name": "Conley Creek",
+   "name": "Intrenchment Creek",
    "reports": 6,
    "slugs": [
-    "conley-creek-ga"
+    "intrenchment-creek-ga"
    ],
-   "how": "record built from the name",
+   "how": "a water record already holds the name",
    "points": [
     [
-     33.63636,
-     -84.32501
+     33.73435,
+     -84.34613
     ]
    ],
    "towns": [
-    "Jonesboro",
-    "Conley"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Heiferhorn Creek Tributary",
-   "reports": 6,
-   "slugs": [
-    "heiferhorn-creek-ga"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     32.56183,
-     -84.96652
-    ]
-   ],
-   "towns": [
-    "Columbus"
+    "Atlanta",
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4069,41 +5673,17 @@
    ]
   },
   {
-   "name": "Honey Creek",
-   "reports": 5,
+   "name": "Tributary to Olley Creek",
+   "reports": 6,
    "slugs": [
-    "honey-creek-ga"
+    "olley-creek-ga"
    ],
    "how": "record built from the name",
    "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Lithonia"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Unnamed Tributary of Beaver Ruin Creek",
-   "reports": 5,
-   "slugs": [
-    "beaver-ruin-creek-ga"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     33.9143,
-     -84.10874
-    ]
-   ],
-   "towns": [
-    "Lawrenceville",
-    "Buford",
-    "Norcross",
-    "Lilburn"
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Fair Oaks"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4112,7 +5692,7 @@
   },
   {
    "name": "Unnamed Tributary of Little Suwanee Creek",
-   "reports": 5,
+   "reports": 6,
    "slugs": [
     "little-suwanee-creek-ga"
    ],
@@ -4127,6 +5707,80 @@
     "Lawrenceville",
     "Buford",
     "Suwanee"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Ball Mill Creek",
+   "reports": 5,
+   "slugs": [
+    "ball-mill-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Dunwoody"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Heiferhorn Creek Tributary",
+   "reports": 5,
+   "slugs": [
+    "heiferhorn-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.56183,
+     -84.96652
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Oaky Woods Creek",
+   "reports": 5,
+   "slugs": [
+    "oaky-woods-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Meigs"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Springfield Canal",
+   "reports": 5,
+   "slugs": [
+    "springfield-canal-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.08009,
+     -81.10291
+    ]
+   ],
+   "towns": [
+    "Savannah"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4157,17 +5811,22 @@
    ]
   },
   {
-   "name": "Ball Mill Creek",
+   "name": "Alcovy River",
    "reports": 4,
    "slugs": [
-    "ball-mill-creek-ga"
+    "alcovy-river-ga"
    ],
-   "how": "record built from the name",
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.97723,
+     -83.94015
+    ]
+   ],
    "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Dunwoody"
+    "Lawrenceville",
+    "Buford",
+    "Dacula"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4175,24 +5834,47 @@
    ]
   },
   {
-   "name": "Bull Creek",
+   "name": "Chattahoochee",
    "reports": 4,
    "slugs": [
-    "bull-creek-ga"
+    "chattahoochee-river-ga"
    ],
-   "how": "record built from the name",
+   "how": "a water record already holds the name",
    "points": [
     [
-     32.47395,
-     -84.92019
-    ],
-    [
-     32.40206,
-     -84.95571
+     33.76874,
+     -84.42512
     ]
    ],
    "towns": [
-    "Columbus"
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Chattahoochee River",
+   "reports": 4,
+   "slugs": [
+    "chattahoochee-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.99242,
+     -84.34816
+    ],
+    [
+     33.97337,
+     -84.36358
+    ]
+   ],
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell",
+    "Sandy Springs"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4223,31 +5905,6 @@
    ]
   },
   {
-   "name": "Cooper Creek",
-   "reports": 4,
-   "slugs": [
-    "cooper-creek-ga"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     32.50354,
-     -84.92809
-    ],
-    [
-     32.40206,
-     -84.95571
-    ]
-   ],
-   "towns": [
-    "Columbus"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
    "name": "Ditch feeding Rocky Creek",
    "reports": 4,
    "slugs": [
@@ -4269,48 +5926,30 @@
    ]
   },
   {
-   "name": "Good Water Creek",
+   "name": "Jester Creek",
    "reports": 4,
    "slugs": [
-    "good-water-creek-ga"
+    "jester-creek-ga"
    ],
    "how": "record built from the name",
    "points": [
     [
-     30.85947,
-     -83.94895
-    ]
-   ],
-   "towns": [
-    "Thomasville"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "HENDERSON MILL CREEK",
-   "reports": 4,
-   "slugs": [
-    "henderson-mill-creek-ga"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     33.66478,
-     -84.21842
+     33.57102,
+     -84.35098
     ],
     [
-     33.86598,
-     -84.25779
+     33.53576,
+     -84.37058
+    ],
+    [
+     33.58412,
+     -84.36959
     ]
    ],
    "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Chamblee"
+    "Jonesboro",
+    "Morrow",
+    "Forest Park"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4318,23 +5957,23 @@
    ]
   },
   {
-   "name": "Jackson Creek",
+   "name": "Noonday Creek",
    "reports": 4,
    "slugs": [
-    "jackson-creek-ga"
+    "noonday-creek-ga"
    ],
    "how": "a water record already holds the name",
    "points": [
     [
-     33.89609,
-     -84.1391
+     33.9846,
+     -84.62498
     ]
    ],
    "towns": [
-    "Lawrenceville",
-    "Buford",
-    "Decatur",
-    "Tucker"
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Kennesaw"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4342,48 +5981,19 @@
    ]
   },
   {
-   "name": "Mossy Creek",
+   "name": "Proctor",
    "reports": 4,
    "slugs": [
-    "mossy-creek-ga",
-    "mossy-creek-cleveland-ga"
+    "proctor-creek-ga"
    ],
-   "how": "record built from the name",
+   "how": "a water record already holds the name",
    "points": [
     [
-     32.43926,
-     -83.71722
-    ],
-    [
-     32.48956,
-     -83.66291
-    ],
-    [
-     34.57146,
-     -83.76174
+     33.76217,
+     -84.42697
     ]
    ],
    "towns": [
-    "Perry",
-    "Cleveland",
-    "Kathleen"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "North Lake",
-   "reports": 4,
-   "slugs": [
-    "north-lake-ga"
-   ],
-   "how": "record built from the name",
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
     "Atlanta"
    ],
    "places_from": [
@@ -4392,69 +6002,20 @@
    ]
   },
   {
-   "name": "Panthers Branch",
+   "name": "Trib of Cooper Creek",
    "reports": 4,
    "slugs": [
-    "panthers-branch-ga"
-   ],
-   "how": "record built from the name",
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Phinizy Ditch",
-   "reports": 4,
-   "slugs": [
-    "phinizy-ditch-ga"
+    "cooper-creek-ga"
    ],
    "how": "record built from the name",
    "points": [
     [
-     33.39744,
-     -81.97543
+     32.53028,
+     -84.91904
     ]
    ],
    "towns": [
-    "Augusta"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Pye Lake Tributary",
-   "reports": 4,
-   "slugs": [
-    "pye-lake-ga"
-   ],
-   "how": "record built from the name",
-   "towns": [
-    "Fayetteville"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Tributary of Johns Creek",
-   "reports": 4,
-   "slugs": [
-    "johns-creek-ga"
-   ],
-   "how": "record built from the name",
-   "towns": [
-    "Johns Creek",
-    "Alpharetta",
-    "Roswell"
+    "Columbus"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4473,27 +6034,6 @@
     "Alpharetta",
     "Roswell",
     "Sandy Springs"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Tributary to Almand Creek",
-   "reports": 4,
-   "slugs": [
-    "almand-creek-ga"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     33.62787,
-     -84.03243
-    ]
-   ],
-   "towns": [
-    "Conyers"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4549,33 +6089,6 @@
    ]
   },
   {
-   "name": "Tributary to Little Noonday Creek",
-   "reports": 4,
-   "slugs": [
-    "little-noonday-creek-ga"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     34.00917,
-     -84.52353
-    ],
-    [
-     34.05755,
-     -84.53139
-    ]
-   ],
-   "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
    "name": "Tributary to Noonday Creek",
    "reports": 4,
    "slugs": [
@@ -4616,40 +6129,80 @@
    ]
   },
   {
-   "name": "Unnamed Tributary of Silver Creek",
+   "name": "Unnamed Tributary to Shoal Creek",
    "reports": 4,
    "slugs": [
-    "silver-creek-ga"
+    "shoal-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Griffin"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Little Red Bluff Creek",
+   "reports": 4,
+   "slugs": [
+    "little-red-bluff-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Pearson"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Yellow River",
+   "reports": 4,
+   "slugs": [
+    "yellow-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.83776,
+     -84.07995
+    ],
+    [
+     33.61903,
+     -83.97303
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Lilburn",
+    "Conyers"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Bull Creek",
+   "reports": 3,
+   "slugs": [
+    "bull-creek-ga"
    ],
    "how": "record built from the name",
    "points": [
     [
-     34.22712,
-     -85.16796
-    ]
-   ],
-   "towns": [
-    "Rome"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "tributary of Little River",
-   "reports": 4,
-   "slugs": [
-    "little-river-social-circle-ga"
-   ],
-   "how": "a water record already holds the name",
-   "points": [
+     32.47395,
+     -84.92019
+    ],
     [
-     33.65183,
-     -83.69962
+     32.40206,
+     -84.95571
     ]
    ],
    "towns": [
-    "Social Circle"
+    "Columbus"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4657,55 +6210,61 @@
    ]
   },
   {
-   "name": "un-named tributary to Suwanee Creek",
-   "reports": 4,
-   "slugs": [
-    "suwanee-creek-ga"
-   ],
-   "how": "a water record already holds the name",
-   "points": [
-    [
-     34.10053,
-     -84.01083
-    ]
-   ],
-   "towns": [
-    "Buford"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Nash Creek",
+   "name": "Cooks Creek",
    "reports": 3,
    "slugs": [
-    "nash-creek-ga"
+    "cooks-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.04622,
+     -83.92047
+    ]
+   ],
+   "towns": [
+    "Forsyth"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Jackson Creek",
+   "reports": 3,
+   "slugs": [
+    "jackson-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.89609,
+     -84.1391
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Decatur",
+    "Tucker"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Long Island Creek",
+   "reports": 3,
+   "slugs": [
+    "long-island-creek-ga"
    ],
    "how": "record built from the name",
    "towns": [
-    "Fayetteville"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Proctor",
-   "reports": 3,
-   "slugs": [
-    "proctor-creek-ga"
-   ],
-   "how": "a water record already holds the name",
-   "points": [
-    [
-     33.76217,
-     -84.42697
-    ]
-   ],
-   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell",
     "Atlanta"
    ],
    "places_from": [
@@ -4714,16 +6273,49 @@
    ]
   },
   {
-   "name": "Springfield Canal",
+   "name": "North Lake",
    "reports": 3,
    "slugs": [
-    "springfield-canal-ga"
+    "north-lake-ga"
    ],
    "how": "record built from the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "North Oconee River",
+   "reports": 3,
+   "slugs": [
+    "north-oconee-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Athens"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Pipemakers Canal",
+   "reports": 3,
+   "slugs": [
+    "pipe-makers-canal-ga"
+   ],
+   "how": "a water record already holds the name",
    "points": [
     [
-     32.08009,
-     -81.10291
+     32.11283,
+     -81.18722
     ]
    ],
    "towns": [
@@ -4735,16 +6327,91 @@
    ]
   },
   {
-   "name": "Sullivan Creek",
+   "name": "Rock Creek",
    "reports": 3,
    "slugs": [
-    "sullivan-creek-ga"
+    "rock-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.86598,
+     -83.78436
+    ],
+    [
+     33.51777,
+     -82.0268
+    ]
+   ],
+   "towns": [
+    "Augusta",
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Stone Mountain Creek",
+   "reports": 3,
+   "slugs": [
+    "stone-mountain-creek-ga"
    ],
    "how": "record built from the name",
    "towns": [
-    "Jonesboro",
-    "College Park",
-    "Atlanta"
+    "Tucker",
+    "Decatur",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Swift Creek",
+   "reports": 3,
+   "slugs": [
+    "swift-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Lithonia"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Tiger Creek",
+   "reports": 3,
+   "slugs": [
+    "tiger-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Columbus",
+    "Douglasville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Trib of Tiger Creek",
+   "reports": 3,
+   "slugs": [
+    "tiger-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Columbus"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4780,23 +6447,26 @@
    ]
   },
   {
-   "name": "Tributary to Rottenwood Creek",
+   "name": "Tributary to Little Noonday Creek",
    "reports": 3,
    "slugs": [
-    "rottenwood-creek-ga"
+    "little-noonday-creek-ga"
    ],
    "how": "record built from the name",
    "points": [
     [
-     33.8929,
-     -84.46959
+     34.00917,
+     -84.52353
+    ],
+    [
+     34.05755,
+     -84.53139
     ]
    ],
    "towns": [
     "Marietta",
     "Smyrna",
-    "Mableton",
-    "Atlanta"
+    "Mableton"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4821,6 +6491,73 @@
    ]
   },
   {
+   "name": "Tributary to Upatoi Creek",
+   "reports": 3,
+   "slugs": [
+    "upatoi-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary of Beaver Ruin Creek",
+   "reports": 3,
+   "slugs": [
+    "beaver-ruin-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.9143,
+     -84.10874
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Norcross",
+    "Lilburn"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary of Chattahoochee River",
+   "reports": 3,
+   "slugs": [
+    "chattahoochee-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.02143,
+     -84.13173
+    ],
+    [
+     34.00773,
+     -84.177
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Duluth",
+    "Suwanee"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Unnamed Tributary of Shoal Creek",
    "reports": 3,
    "slugs": [
@@ -4837,16 +6574,35 @@
    ]
   },
   {
-   "name": "Unnamed Tributary to Shoal Creek",
+   "name": "Whitewater Creek",
    "reports": 3,
    "slugs": [
-    "shoal-creek-ga"
+    "whitewater-creek-ga"
    ],
    "how": "a water record already holds the name",
    "towns": [
-    "Griffin"
+    "Fayetteville",
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
    ],
    "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "tributary to little red bluff creek",
+   "reports": 3,
+   "slugs": [
+    "little-red-bluff-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Pearson"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
     "ga-epd-spills"
    ]
   },
@@ -4889,6 +6645,52 @@
    ]
   },
   {
+   "name": "Bear Creek",
+   "reports": 2,
+   "slugs": [
+    "bear-creek-sparks-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.65978,
+     -84.78226
+    ]
+   ],
+   "towns": [
+    "Douglasville",
+    "Hampton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Big Creek",
+   "reports": 2,
+   "slugs": [
+    "big-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.19608,
+     -84.18656
+    ]
+   ],
+   "towns": [
+    "Cumming",
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Bowman Branch",
    "reports": 2,
    "slugs": [
@@ -4924,14 +6726,21 @@
    ]
   },
   {
-   "name": "Ditch feeding Bowman Branch",
+   "name": "Cabin Creek",
    "reports": 2,
    "slugs": [
-    "bowman-branch-ga"
+    "cabin-creek-ga"
    ],
    "how": "a water record already holds the name",
+   "points": [
+    [
+     33.26819,
+     -84.25672
+    ]
+   ],
    "towns": [
-    "Macon"
+    "Griffin",
+    "Experiment"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4939,7 +6748,59 @@
    ]
   },
   {
-   "name": "Eastanollee",
+   "name": "Chattachoochee",
+   "reports": 2,
+   "slugs": [
+    "chattahoochee-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Douglasville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Conley Creek",
+   "reports": 2,
+   "slugs": [
+    "conley-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.63636,
+     -84.32501
+    ]
+   ],
+   "towns": [
+    "Jonesboro",
+    "Conley"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Dry Creek",
+   "reports": 2,
+   "slugs": [
+    "dry-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Douglasville",
+    "Lithia Springs"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Eastanollee Creek",
    "reports": 2,
    "slugs": [
     "eastanollee-creek-ga"
@@ -4947,12 +6808,45 @@
    "how": "a water record already holds the name",
    "points": [
     [
+     34.57512,
+     -83.32599
+    ],
+    [
      34.54325,
      -83.29969
     ]
    ],
    "towns": [
     "Toccoa"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Etowah River",
+   "reports": 2,
+   "slugs": [
+    "etowah-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Cartersville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Flat Creek",
+   "reports": 2,
+   "slugs": [
+    "flat-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Gainesville"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4975,6 +6869,60 @@
    ]
   },
   {
+   "name": "Honey Creek",
+   "reports": 2,
+   "slugs": [
+    "honey-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Lithonia"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Keg Creek",
+   "reports": 2,
+   "slugs": [
+    "keg-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Senoia",
+    "Sharpsburg"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Lake Erma",
+   "reports": 2,
+   "slugs": [
+    "lake-erma-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.44685,
+     -84.2619
+    ]
+   ],
+   "towns": [
+    "Hampton",
+    "Mcdonough"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Lake Tobesofkee",
    "reports": 2,
    "slugs": [
@@ -4990,14 +6938,17 @@
    ]
   },
   {
-   "name": "Little Bear Creek",
+   "name": "Line Creek",
    "reports": 2,
    "slugs": [
-    "little-bear-creek-ga"
+    "line-creek-ga"
    ],
    "how": "a water record already holds the name",
    "towns": [
-    "Douglasville"
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell",
+    "Palmetto"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -5019,17 +6970,14 @@
    ]
   },
   {
-   "name": "Long Island Creek",
+   "name": "Nash Creek",
    "reports": 2,
    "slugs": [
-    "long-island-creek-ga"
+    "nash-creek-ga"
    ],
    "how": "record built from the name",
    "towns": [
-    "Johns Creek",
-    "Alpharetta",
-    "Roswell",
-    "Atlanta"
+    "Fayetteville"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -5047,6 +6995,138 @@
     "Marietta",
     "Smyrna",
     "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "North River",
+   "reports": 2,
+   "slugs": [
+    "north-river-kings-bay-base-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.75799,
+     -81.53817
+    ]
+   ],
+   "towns": [
+    "Saint Marys"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Ocmulgee",
+   "reports": 2,
+   "slugs": [
+    "ocmulgee-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Macon",
+    "Eastman"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Panther Creek",
+   "reports": 2,
+   "slugs": [
+    "panther-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.57301,
+     -84.28168
+    ]
+   ],
+   "towns": [
+    "Jonesboro",
+    "Stockbridge",
+    "Rex"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Panthers Branch",
+   "reports": 2,
+   "slugs": [
+    "panthers-branch-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Pates Creek",
+   "reports": 2,
+   "slugs": [
+    "pates-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Mcdonough"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Pates Creek Tributary",
+   "reports": 2,
+   "slugs": [
+    "pates-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.48614,
+     -84.23315
+    ]
+   ],
+   "towns": [
+    "Stockbridge",
+    "Mcdonough"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Patsiliga creek",
+   "reports": 2,
+   "slugs": [
+    "patsiliga-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     32.56856,
+     -84.09117
+    ]
+   ],
+   "towns": [
+    "Reynolds"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -5091,25 +7171,14 @@
    ]
   },
   {
-   "name": "Rock Creek",
+   "name": "Pye Lake Tributary",
    "reports": 2,
    "slugs": [
-    "rock-creek-ga"
+    "pye-lake-ga"
    ],
    "how": "record built from the name",
-   "points": [
-    [
-     32.86598,
-     -83.78436
-    ],
-    [
-     33.51777,
-     -82.0268
-    ]
-   ],
    "towns": [
-    "Augusta",
-    "Macon"
+    "Fayetteville"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -5138,20 +7207,20 @@
    ]
   },
   {
-   "name": "Sloans Creek",
+   "name": "Snapping Shoals Creek",
    "reports": 2,
    "slugs": [
-    "sloans-creek-ga"
+    "snapping-shoals-creek-ga"
    ],
-   "how": "record built from the name",
+   "how": "a water record already holds the name",
    "points": [
     [
-     31.15987,
-     -83.81019
+     33.6528,
+     -84.00099
     ]
    ],
    "towns": [
-    "Moultrie"
+    "Conyers"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -5159,16 +7228,31 @@
    ]
   },
   {
-   "name": "Stone Mountain Creek",
+   "name": "Spirit Creek",
    "reports": 2,
    "slugs": [
-    "stone-mountain-creek-ga"
+    "spirit-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Augusta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Sullivan Creek",
+   "reports": 2,
+   "slugs": [
+    "sullivan-creek-ga"
    ],
    "how": "record built from the name",
    "towns": [
-    "Tucker",
-    "Decatur",
-    "Stonecrest"
+    "Jonesboro",
+    "College Park",
+    "Atlanta"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -5197,14 +7281,17 @@
    ]
   },
   {
-   "name": "TRIBUTARY TO YELLOW RIVER",
+   "name": "Sweetwater Creek",
    "reports": 2,
    "slugs": [
-    "yellow-river-ga"
+    "sweetwater-creek-ga"
    ],
    "how": "a water record already holds the name",
    "towns": [
-    "Conyers"
+    "Lawrenceville",
+    "Buford",
+    "Douglasville",
+    "Duluth"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -5212,23 +7299,38 @@
    ]
   },
   {
-   "name": "Trib of Cooper Creek",
+   "name": "Toccoa Creek",
    "reports": 2,
    "slugs": [
-    "cooper-creek-ga"
+    "toccoa-creek-ga"
    ],
-   "how": "record built from the name",
+   "how": "a water record already holds the name",
    "points": [
     [
-     32.53028,
-     -84.91904
+     34.59711,
+     -83.33514
     ]
    ],
    "towns": [
-    "Columbus"
+    "Toccoa"
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Tributary Litle Cotton Indian Creek",
+   "reports": 2,
+   "slugs": [
+    "little-cotton-indian-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Stockbridge",
+    "Mcdonough"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -5274,6 +7376,23 @@
    ]
   },
   {
+   "name": "Tributary of Johns Creek",
+   "reports": 2,
+   "slugs": [
+    "johns-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Tributary to Allatoona Creek",
    "reports": 2,
    "slugs": [
@@ -5298,6 +7417,20 @@
    ]
   },
   {
+   "name": "Tributary to Bettys Branch",
+   "reports": 2,
+   "slugs": [
+    "bettys-branch-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Evans"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Tributary to Noses Creek",
    "reports": 2,
    "slugs": [
@@ -5308,6 +7441,30 @@
     "Marietta",
     "Smyrna",
     "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Tributary to Rottenwood Creek",
+   "reports": 2,
+   "slugs": [
+    "rottenwood-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.8929,
+     -84.46959
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Atlanta"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -5330,23 +7487,6 @@
    "towns": [
     "Gainesville",
     "Cumming"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Unnamed Tributary of Bennett Creek",
-   "reports": 2,
-   "slugs": [
-    "bennett-creek-ga"
-   ],
-   "how": "record built from the name",
-   "towns": [
-    "Lawrenceville",
-    "Buford",
-    "Suwanee"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -5382,34 +7522,6 @@
    ]
   },
   {
-   "name": "Unnamed Tributary of Chattahoochee River",
-   "reports": 2,
-   "slugs": [
-    "chattahoochee-river-ga"
-   ],
-   "how": "a water record already holds the name",
-   "points": [
-    [
-     34.02143,
-     -84.13173
-    ],
-    [
-     34.00773,
-     -84.177
-    ]
-   ],
-   "towns": [
-    "Lawrenceville",
-    "Buford",
-    "Duluth",
-    "Suwanee"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
    "name": "Unnamed Tributary of Jackson Creek",
    "reports": 2,
    "slugs": [
@@ -5429,6 +7541,26 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary of Silver Creek",
+   "reports": 2,
+   "slugs": [
+    "silver-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     34.22712,
+     -85.16796
+    ]
+   ],
+   "towns": [
+    "Rome"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -5476,6 +7608,58 @@
    ]
   },
   {
+   "name": "Academy Creek",
+   "reports": 1,
+   "slugs": [
+    "academy-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Brunswick"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Almand Creek",
+   "reports": 1,
+   "slugs": [
+    "almand-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.65808,
+     -84.02028
+    ]
+   ],
+   "towns": [
+    "Conyers"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Babashela Creek",
+   "reports": 1,
+   "slugs": [
+    "barbashela-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Stone Mountain"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Bear Creek - headwaters",
    "reports": 1,
    "slugs": [
@@ -5493,6 +7677,20 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Birch Creek",
+   "reports": 1,
+   "slugs": [
+    "birch-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Mcdonough"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -5580,27 +7778,6 @@
    ]
   },
   {
-   "name": "Cooks Creek",
-   "reports": 1,
-   "slugs": [
-    "cooks-creek-ga"
-   ],
-   "how": "record built from the name",
-   "points": [
-    [
-     33.04622,
-     -83.92047
-    ]
-   ],
-   "towns": [
-    "Forsyth"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
    "name": "Cooper Creek Tributary",
    "reports": 1,
    "slugs": [
@@ -5615,6 +7792,21 @@
    ],
    "towns": [
     "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Ditch feeding Bowman Branch",
+   "reports": 1,
+   "slugs": [
+    "bowman-branch-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Macon"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -5657,6 +7849,48 @@
    ]
   },
   {
+   "name": "Eastanollee",
+   "reports": 1,
+   "slugs": [
+    "eastanollee-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.54325,
+     -83.29969
+    ]
+   ],
+   "towns": [
+    "Toccoa"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Good Water Creek",
+   "reports": 1,
+   "slugs": [
+    "good-water-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     30.85947,
+     -83.94895
+    ]
+   ],
+   "towns": [
+    "Thomasville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Gum Swamp Creek",
    "reports": 1,
    "slugs": [
@@ -5668,6 +7902,50 @@
    ],
    "places_from": [
     "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Hat Creek",
+   "reports": 1,
+   "slugs": [
+    "hat-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Ashburn"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Hurricane Creek",
+   "reports": 1,
+   "slugs": [
+    "hurricane-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Hampton",
+    "Jonesboro"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "INTREACHMENT CREEK",
+   "reports": 1,
+   "slugs": [
+    "intrenchment-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
    ]
   },
   {
@@ -5685,6 +7963,21 @@
    ],
    "towns": [
     "Griffin"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Jacks Creek",
+   "reports": 1,
+   "slugs": [
+    "jacks-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Lawrenceville",
+    "Buford"
    ],
    "places_from": [
     "echo-sewer-overflow"
@@ -5723,21 +8016,29 @@
    ]
   },
   {
-   "name": "Lake Erma",
+   "name": "Lake Tobesofke",
    "reports": 1,
    "slugs": [
-    "lake-erma-ga"
+    "lake-tobesofkee-ga"
    ],
-   "how": "record built from the name",
-   "points": [
-    [
-     33.44685,
-     -84.2619
-    ]
-   ],
+   "how": "a water record already holds the name",
    "towns": [
-    "Hampton",
-    "Mcdonough"
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Lawrence Creek",
+   "reports": 1,
+   "slugs": [
+    "lawrence-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Dallas"
    ],
    "places_from": [
     "ga-epd-spills"
@@ -5759,6 +8060,50 @@
    ]
   },
   {
+   "name": "Limestone Creek",
+   "reports": 1,
+   "slugs": [
+    "limestone-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Gainesville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Lindsay Creek",
+   "reports": 1,
+   "slugs": [
+    "lindsey-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Little Bear Creek",
+   "reports": 1,
+   "slugs": [
+    "little-bear-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Douglasville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Little Noonday Creek",
    "reports": 1,
    "slugs": [
@@ -5772,6 +8117,77 @@
    ],
    "places_from": [
     "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Little Ocmulgee River",
+   "reports": 1,
+   "slugs": [
+    "little-ocmulgee-river-ga"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Little River",
+   "reports": 1,
+   "slugs": [
+    "little-river-social-circle-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Tifton"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Little Tallapoosa",
+   "reports": 1,
+   "slugs": [
+    "little-tallapoosa-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Carrollton"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Lookout Creek",
+   "reports": 1,
+   "slugs": [
+    "lookout-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Trenton"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Middle Oconee River",
+   "reports": 1,
+   "slugs": [
+    "middle-oconee-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.93768,
+     -83.35954
+    ]
+   ],
+   "towns": [
+    "Athens"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
    ]
   },
   {
@@ -5815,6 +8231,68 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Mossey Creek",
+   "reports": 1,
+   "slugs": [
+    "mossy-creek-cleveland-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.57603,
+     -83.76217
+    ]
+   ],
+   "towns": [
+    "Cleveland"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Muckalee Creek",
+   "reports": 1,
+   "slugs": [
+    "muckalee-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Buena Vista"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Mulberry River",
+   "reports": 1,
+   "slugs": [
+    "mulberry-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Braselton"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "NORTH FORK PEACHTREE",
+   "reports": 1,
+   "slugs": [
+    "north-fork-peachtree-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Atlanta"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -5873,23 +8351,23 @@
    ]
   },
   {
-   "name": "Pates Creek Tributary",
+   "name": "Phinizy Ditch",
    "reports": 1,
    "slugs": [
-    "pates-creek-ga"
+    "phinizy-ditch-ga"
    ],
-   "how": "a water record already holds the name",
+   "how": "record built from the name",
    "points": [
     [
-     33.48614,
-     -84.23315
+     33.39744,
+     -81.97543
     ]
    ],
    "towns": [
-    "Stockbridge",
-    "Mcdonough"
+    "Augusta"
    ],
    "places_from": [
+    "echo-sewer-overflow",
     "ga-epd-spills"
    ]
   },
@@ -5902,6 +8380,27 @@
    "how": "record built from the name",
    "towns": [
     "Augusta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Pipe Makers Canal",
+   "reports": 1,
+   "slugs": [
+    "pipe-makers-canal-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     32.11283,
+     -81.18722
+    ]
+   ],
+   "towns": [
+    "Savannah"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -5933,6 +8432,20 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Pumpkinvine Creek",
+   "reports": 1,
+   "slugs": [
+    "pumpkinvine-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Acworth"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -5997,6 +8510,58 @@
    ]
   },
   {
+   "name": "SOUTH FORK PEACHTREE CREK",
+   "reports": 1,
+   "slugs": [
+    "south-fork-peachtree-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "SOUTHRIVER",
+   "reports": 1,
+   "slugs": [
+    "south-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.66948,
+     -84.20762
+    ],
+    [
+     33.65474,
+     -84.35577
+    ],
+    [
+     33.69258,
+     -84.39275
+    ],
+    [
+     33.67487,
+     -84.41201
+    ]
+   ],
+   "towns": [
+    "Atlanta",
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "ST. Marys",
    "reports": 1,
    "slugs": [
@@ -6038,6 +8603,35 @@
    ]
   },
   {
+   "name": "Savannah River",
+   "reports": 1,
+   "slugs": [
+    "savannah-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Savannah"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Silver Creek",
+   "reports": 1,
+   "slugs": [
+    "silver-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Lindale",
+    "Rome"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Singleton Creek",
    "reports": 1,
    "slugs": [
@@ -6054,6 +8648,27 @@
     "Lawrenceville",
     "Buford",
     "Duluth"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Sloans Creek",
+   "reports": 1,
+   "slugs": [
+    "sloans-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     31.15987,
+     -83.81019
+    ]
+   ],
+   "towns": [
+    "Moultrie"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -6091,6 +8706,21 @@
    ]
   },
   {
+   "name": "Spirt Creek",
+   "reports": 1,
+   "slugs": [
+    "spirit-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Augusta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Standing Boy Creek tributary",
    "reports": 1,
    "slugs": [
@@ -6099,6 +8729,41 @@
    "how": "record built from the name",
    "towns": [
     "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Sugar Crek",
+   "reports": 1,
+   "slugs": [
+    "sugar-creek-valdosta-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.83511,
+     -83.35808
+    ]
+   ],
+   "towns": [
+    "Valdosta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "TRIBUTARY TO YELLOW RIVER",
+   "reports": 1,
+   "slugs": [
+    "yellow-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Conyers"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -6151,17 +8816,16 @@
    ]
   },
   {
-   "name": "Trib of Tiger Creek",
+   "name": "Trib of Lindsey Creek",
    "reports": 1,
    "slugs": [
-    "tiger-creek-ga"
+    "lindsey-creek-ga"
    ],
    "how": "a water record already holds the name",
    "towns": [
     "Columbus"
    ],
    "places_from": [
-    "echo-sewer-overflow",
     "ga-epd-spills"
    ]
   },
@@ -6183,6 +8847,20 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Tributary A Little Anneewakee Creek",
+   "reports": 1,
+   "slugs": [
+    "little-anneewakee-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Douglasville"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -6231,6 +8909,53 @@
    ]
   },
   {
+   "name": "Tributary Upatoi Creek",
+   "reports": 1,
+   "slugs": [
+    "upatoi-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     32.388,
+     -84.93412
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Tributary of Bull Creek",
+   "reports": 1,
+   "slugs": [
+    "bull-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "lon": -84.95571,
+     "lat": 32.40206,
+     "reason": "no NHD water of that name within 2 km of the reports' point (32.40206, -84.95571) (the nearest is 2.7 km away)"
+    },
+    {
+     "lon": -84.8912,
+     "lat": 32.52399,
+     "reason": "no NHD water of that name within 2 km of the reports' point (32.52399, -84.89120) (the nearest is 2.1 km away)"
+    }
+   ]
+  },
+  {
    "name": "Tributary of Seven Branch",
    "reports": 1,
    "slugs": [
@@ -6275,16 +9000,23 @@
    ]
   },
   {
-   "name": "Tributary to Bettys Branch",
+   "name": "Tributary to Almand Creek",
    "reports": 1,
    "slugs": [
-    "bettys-branch-ga"
+    "almand-creek-ga"
    ],
    "how": "record built from the name",
+   "points": [
+    [
+     33.62787,
+     -84.03243
+    ]
+   ],
    "towns": [
-    "Evans"
+    "Conyers"
    ],
    "places_from": [
+    "echo-sewer-overflow",
     "ga-epd-spills"
    ]
   },
@@ -6307,6 +9039,20 @@
    ]
   },
   {
+   "name": "Tributary to Gothards Creek",
+   "reports": 1,
+   "slugs": [
+    "gothards-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Douglasville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Tributary to Ison Branch",
    "reports": 1,
    "slugs": [
@@ -6324,6 +9070,20 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Tributary to Pumpkinvine Creek",
+   "reports": 1,
+   "slugs": [
+    "pumpkinvine-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Dallas"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -6380,17 +9140,22 @@
    ]
   },
   {
-   "name": "Tributary to Upatoi Creek",
+   "name": "Tributary to Weaver Creek",
    "reports": 1,
    "slugs": [
-    "upatoi-creek-ga"
+    "weaver-creek-ga"
    ],
-   "how": "record built from the name",
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.91978,
+     -84.85271
+    ]
+   ],
    "towns": [
-    "Columbus"
+    "Dallas"
    ],
    "places_from": [
-    "echo-sewer-overflow",
     "ga-epd-spills"
    ]
   },
@@ -6408,6 +9173,71 @@
    ],
    "places_from": [
     "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary of Bennett Creek",
+   "reports": 1,
+   "slugs": [
+    "bennett-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Suwanee"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary of Coosa River",
+   "reports": 1,
+   "slugs": [
+    "coosa-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.22171,
+     -85.30752
+    ]
+   ],
+   "towns": [
+    "Rome"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary of Level Creek",
+   "reports": 1,
+   "slugs": [
+    "level-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.10083,
+     -84.04904
+    ]
+   ],
+   "towns": [
+    "Sugar Hill",
+    "Lawrenceville",
+    "Buford"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "town": "Lawrenceville",
+     "reason": "no NHD water of that name within 3 km of Lawrenceville (the nearest is 11.7 km away)"
+    }
    ]
   },
   {
@@ -6468,6 +9298,35 @@
    ]
   },
   {
+   "name": "Unnamed Tributary to Tate Creek",
+   "reports": 1,
+   "slugs": [
+    "tate-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Acworth",
+    "Woodstock"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "town": "Marietta",
+     "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 6.4 km away)"
+    },
+    {
+     "town": "Smyrna",
+     "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 17.0 km away)"
+    },
+    {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 22.2 km away)"
+    }
+   ]
+  },
+  {
    "name": "Unnamed tributary Little Red Bluff Creek",
    "reports": 1,
    "slugs": [
@@ -6479,6 +9338,20 @@
    ],
    "places_from": [
     "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Unnamed tributary of Etowah River",
+   "reports": 1,
+   "slugs": [
+    "etowah-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Rome"
+   ],
+   "places_from": [
+    "ga-epd-spills"
    ]
   },
   {
@@ -6549,6 +9422,20 @@
    ]
   },
   {
+   "name": "Unnamed tributary to little river",
+   "reports": 1,
+   "slugs": [
+    "little-river-social-circle-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Eatonton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
    "name": "Unnamed trributary to Little Red Bluff Creek",
    "reports": 1,
    "slugs": [
@@ -6610,14 +9497,61 @@
    ]
   },
   {
-   "name": "tributary to little red bluff creek",
+   "name": "Withlacoochee River",
    "reports": 1,
    "slugs": [
-    "little-red-bluff-creek-ga"
+    "withlacoochee-river-ga"
    ],
    "how": "a water record already holds the name",
+   "points": [
+    [
+     30.83511,
+     -83.35808
+    ]
+   ],
    "towns": [
-    "Pearson"
+    "Valdosta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "tributary of Little River",
+   "reports": 1,
+   "slugs": [
+    "little-river-social-circle-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.65183,
+     -83.69962
+    ]
+   ],
+   "towns": [
+    "Social Circle"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "un-named tributary to Suwanee Creek",
+   "reports": 1,
+   "slugs": [
+    "suwanee-creek-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.10053,
+     -84.01083
+    ]
+   ],
+   "towns": [
+    "Buford"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -6700,6 +9634,20 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "unnamed tributary to spring branch",
+   "reports": 1,
+   "slugs": [
+    "spring-branch-ga"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Glennville"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   }

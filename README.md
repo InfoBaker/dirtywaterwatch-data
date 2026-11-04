@@ -67,7 +67,10 @@ wrangler uploads up to 300 MiB, and the batch refuses an extract without `meta.j
     COPYFILE_DISABLE=1 tar -czf /tmp/obl-water.tar.gz -C ../openboatlaunch/out water meta.json && (cd worker && npx wrangler r2 object put dirtywaterwatch-data/state/obl-water.tar.gz --file /tmp/obl-water.tar.gz --remote)
 
 For example `-f state=MI -f steps="extract obl-check waters ties"` for a state with no extract yet, and
-`-f state=FL -f steps="osm ties"` for the names NHDPlus does not carry. The registry match (`registry`,
+`-f state=FL -f steps="osm ties"` for the names NHDPlus does not carry. The `waters` step builds the waters the
+national list holds (the outfalls' receiving waters); the waters only the reports name (a state's
+`research/<st>/receiving-waters-missing.json`, for Georgia `scripts/ga_report_water_names.py` over the backfilled
+feeds) need the `names` step: `-f state=GA -f steps="names ties"`. The registry match (`registry`,
 `scripts/match_outfalls.py`) needs EPA's CSO inventory as well and runs where that is; the reach traces have no
 per-state run yet.
 
