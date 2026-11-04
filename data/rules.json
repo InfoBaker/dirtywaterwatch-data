@@ -76,6 +76,12 @@
     "clock": "end_of_discharge",
     "basis": "DC Water's permit requires a warning light on the Anacostia and on the Potomac: one colour while a combined sewer overflow is occurring and a second colour for 24 hours after it has stopped (NPDES permit DC0021199, Part III.B.1.h.i); DC Water's own page adds that after rain over one inch the effects can last up to three days. This site uses 24 hours from the end of the overflow, the permit's light period. No District law requires public notice of overflows, and swimming in the Potomac, the Anacostia and Rock Creek is prohibited by regulation (21 DCMR 1108.1)",
     "source": "NPDES permit DC0021199 (EPA Region 3), Part III.B.1.h; DC Water combined sewer system page; 21 DCMR 1108.1"
+   },
+   "FL": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Florida sets no post-discharge period for the public: an operator must give the Department of Environmental Protection a notice within 24 hours of discovering a pollution release reportable to the State Watch Office, and the Department must post every notice on its website within 24 hours of receiving it and send it to county e-mail lists (section 403.077, Florida Statutes). Sewer overflows of 1,000 gallons or more go to the State Watch Office within 24 hours (F.A.C. 62-604.550). The Department of Health may issue beach health advisories when sampling fails its standards (section 514.023, Florida Statutes), and county health departments issue sewage-spill advisories at their discretion. This site marks a reported discharge while it runs and applies its own caution after it ends",
+    "source": "Fla. Stat. 403.077 and 514.023; F.A.C. 62-604.550 and 62-620.610(20)"
    }
   },
   "by_discharger": {

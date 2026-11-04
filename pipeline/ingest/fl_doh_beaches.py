@@ -182,13 +182,15 @@ def fetch(limit: int | None = None) -> tuple[list[dict], dict, list[str]]:
 
 
 def build(points: list[dict], pages: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[dict], dict]:
-    records, seen, samples_n, read = [], set(), 0, 0
+    records, seen, samples_n, read, empty = [], set(), 0, 0, 0
     for p in points:
         page = pages.get(point_key(p))
         if page is None:
             continue
         rows = parse_page(page)
         read += 1
+        if not rows:
+            empty += 1
         samples_n += len(rows)
         # samples kept from earlier runs for this point (older than the first page)
         old = [s for r in prev_records if r.get("raw", {}).get("county") == p.get("County")
@@ -202,7 +204,8 @@ def build(points: list[dict], pages: dict, prev_records: list[dict], fetched_at:
             records.append(r)
             kept += 1
     records.sort(key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
-    return records, {"points": len(points), "points_read": read, "samples_read": samples_n, "kept_from_earlier_runs": kept,
+    return records, {"points": len(points), "points_read": read, "points_without_samples": empty,
+                     "samples_read": samples_n, "kept_from_earlier_runs": kept,
                      "by_status": dict(Counter(r["status"] for r in records))}
 
 
