@@ -1,0 +1,27 @@
+id: "wa-spokane-cso-update"
+name: "City of Spokane Real Time Combined Sewer Overflow Monitoring (CSOUpdate)"
+url: "https://sewerfinder.spokanecity.org/CSOUpdate"
+homepage: "https://sewerfinder.spokanecity.org/CSOUpdate"
+kind: "html"
+level: "municipal"
+# Notes (research/wa, status candidate, verified fetched, checked 2026-11-03): Dated CSO starts for
+#   Spokane, but bot-walled to scripts; owner should ask the City for a feed or allow-listing.
+# Access detail (research, quoted): curl got HTTP 403 Incapsula; WebFetch got an empty page. Search
+#   snippet: 'If a site is flashing, that represents that a CSO overflow event is occurring or has
+#   occurred in the last 48 hours. The date and time listed is the start time of the overflow event
+#   and will automatically shut off after 48 hours.' 20 (or 25) monitoring sites.
+# Can fill: started_at, source_status, location_text
+# Cannot fill: volume; ended_at
+# Waters: Spokane River, Hangman Creek
+cadence: "real time"
+license: "none stated"
+attribution: "City of Spokane"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["WA"]
+access: ["html"]
+access_detail: "curl got HTTP 403 Incapsula; WebFetch got an empty page. Search snippet: 'If a site is flashing, that represents that a CSO overflow event is occurring or has occurred in the last 48 hours. The date and time listed is the start time of the overflow event and will automatically shut off after 48 hours.' 20 (or 25) monitoring sites."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"

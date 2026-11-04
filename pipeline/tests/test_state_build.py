@@ -404,3 +404,80 @@ def test_the_hourly_run_gives_the_nhd_build_a_budget():
     ingest = run("ingest")
     loop = ingest.split("; do", 1)[0]                       # the feed loop's module list
     assert "waters_from_nhd" not in loop and "waters-nhd" in ingest
+
+
+# ---------------------------------------------------------------- review 2026-11-04 WA: artificial paths, far snaps
+
+def seattle_matcher(dist):
+    """Lake Union's record, the unnamed NHDPlus artificial path NLDI snapped a lakeside outfall to, and a creek in
+    another county that a snap at EPA's wrong point found."""
+    mt = OW.Matcher.__new__(OW.Matcher)
+    mt.waters = {"lake-union-wa": {"state": "WA", "name": "Lake Union", "kind": "lake", "nhd_fcodes": [39004]},
+                 "unnamed-stream-near-seattle-wa": {"state": "WA", "name": "Unnamed stream near Seattle",
+                                                    "kind": "stream", "nhd_fcodes": [55800]},
+                 "possession-sound-wa": {"state": "WA", "name": "Possession Sound", "nhd_fcodes": [56600]},
+                 "blackjack-creek-wa": {"state": "WA", "name": "Blackjack Creek", "nhd_fcodes": [46006]}}
+    mt.reach_slugs = {}
+    mt.outfall_slugs = {("WA0031682", "124"): ("unnamed-stream-near-seattle-wa", "NLDI position COMID 24537864"),
+                        ("WA0031682", "170"): ("blackjack-creek-wa", "NLDI position COMID 1")}
+    mt.dis_waters = {}
+    mt.dist = lambda slug, lat, lon: dist.get(slug) if lat is not None else None
+    near = {"lake-union-wa": 3}
+    mt.resolver = SimpleNamespace(canon=lambda s: s, by_point=lambda lat, lon, st: min(
+        ((d, s) for s, d in near.items()), default=None))
+    mt.by_point = lambda o, text: (("lake-union-wa", "the water record at the outfall's point (3 m)")
+                                   if o["outfall"] == "124" else (None, None))
+    return mt
+
+
+def test_an_unnamed_artificial_path_is_never_an_outfalls_water():
+    mt = seattle_matcher({"unnamed-stream-near-seattle-wa": 1681, "lake-union-wa": 3})
+    assert mt.line_only("unnamed-stream-near-seattle-wa")
+    assert not mt.line_only("possession-sound-wa")                 # a named coastline keeps its own name
+    assert not mt.line_only("lake-union-wa")
+    o = {"state": "WA", "npdes_permit": "WA0031682", "outfall": "124", "lat": 47.6266, "lon": -122.3386}
+    res = mt.match(o)
+    assert res["slug"] == "lake-union-wa" and res["step"] == "point"
+    mt.by_point = lambda o, text: ("unnamed-stream-near-seattle-wa", "the water record at the outfall's point (0 m)")
+    res = mt.match(o)
+    assert res["slug"] is None and "artificial path or coastline" in mt.reason(o, "", None)
+
+
+def test_the_builders_snap_for_an_outfall_must_lie_at_the_rows_own_point():
+    mt = seattle_matcher({"blackjack-creek-wa": 29_435})
+    o = {"state": "WA", "npdes_permit": "WA0031682", "outfall": "170", "lat": 47.5388, "lon": -122.3628}
+    res = mt.match(o)
+    assert res["slug"] is None
+    assert "lies 29435 m from the row's point" in mt.reason(o, "", None)
+    mt = seattle_matcher({"blackjack-creek-wa": 120})
+    res = mt.match(o)
+    assert res["slug"] == "blackjack-creek-wa" and res["step"] == "NHD builder"
+    assert mt.match({**o, "lat": None, "lon": None})["slug"] == "blackjack-creek-wa"   # no point: as the builder chose
+
+
+def test_a_bay_drawn_by_its_coastline_is_a_bay_not_a_stream():
+    """Review 2026-11-04 WA: Budd Inlet, Padilla Bay and Possession Sound came from NHDPlus coastline flowlines and were
+    kinded stream."""
+    assert N.kind_of("Budd Inlet", "line", fcodes=[56600]) == "bay"
+    assert N.kind_of("Possession Sound", "line", fcodes=[56600]) == "bay"
+    assert N.kind_of("Harbor Creek", "line", fcodes=[46006]) == "stream"
+    assert N.kind_of("Bay River", "line", fcodes=[46006]) == "river"
+    w = {r["slug"]: r for r in json.loads((Path(__file__).resolve().parents[2] / "data" / "waters-nhd.json").read_text())["waters"]}
+    assert {w[s]["kind"] for s in ("budd-inlet-wa", "padilla-bay-wa", "possession-sound-wa")} == {"bay"}
+
+
+def test_an_artificial_path_at_the_point_does_not_contradict_the_inventorys_name():
+    """Review 2026-11-04 WA: King County's outfall 027B ('Elliot Bay/Puget Sound') was said to lie on 'Unnamed stream
+    near Seattle', which is Elliott Bay's coastline: the name and the point do not disagree."""
+    mt = seattle_matcher({})
+    mt.waters["unnamed-stream-near-seattle-23989539-wa"] = {"state": "WA", "name": "Unnamed stream near Seattle",
+                                                            "nhd_fcodes": [56600]}
+    mt.resolver = SimpleNamespace(canon=lambda s: s,
+                                  by_point=lambda lat, lon, st: (147, "unnamed-stream-near-seattle-23989539-wa"))
+    for f in ("by_name", "by_nhd_target", "by_reach", "by_builder_permit", "by_point"):
+        setattr(mt, f, lambda o, text: (None, None))
+    mt.by_name_and_town = lambda o, text: (None, None)
+    mt.reason = lambda o, text, not_name: mt._conflict or "no record"
+    o = {"state": "WA", "npdes_permit": "WA0029181", "outfall": "027B", "lat": 47.6, "lon": -122.34,
+         "receiving_water_echo": "Elliot Bay/Puget Sound"}
+    assert mt.match(o, {})["reason"] == "no record" and mt._conflict is None

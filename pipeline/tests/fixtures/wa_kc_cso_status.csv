@@ -1,0 +1,7 @@
+CSO_TagName,X_COORD,Y_COORD,Name,DSN,DateTime,Status,Contact
+CSO_Status1,-120.0,47.66,Dummy1,DSN,11/04/2026  2:30,CurrentlyOverflowing,
+BALL,-122.382333,47.663916,King County CSO: Ballard,3,11/04/2026  2:30,CurrentlyOverflowing,Pat Example 206-555-0123
+MAGN,-122.399021,47.630184,King County CSO: Magnolia S,6,11/04/2026  2:30,NoData,
+NPDES124,-122.3386305,47.62662541,Seattle CSO,124,11/04/2026  2:30,OverflowLast48hrs,
+NPDES026,-120.0,47.26,Seattle CSO,26,11/04/2026  2:30,NoRecentOverflow,
+NPDES012,-122.25295,47.67108,Seattle CSO,12,11/04/2026  2:30,NoRecentOverflow,

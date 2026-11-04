@@ -42,6 +42,10 @@
 #                  Michigan: mi_egle_mienviro (EGLE MiEnviro CSO/SSO List: every open report and the completed
 #                  reports that started in the last 60 days; `--backfill [--from YEAR]` once, default from 2025,
 #                  the list reaching back to 2001)
+#                  Washington: wa_ecology_spills (Ecology's sewage spill list, RCW 90.48.636: the whole layer every
+#                  run, every report since mid-2026, so no backfill) and the generic snapshot block
+#                  wa-kc-cso-status-csv (King County / Seattle CSO status file, events dated to the poll); EPA's
+#                  eRule tables carry JBLM and Puyallup (echo_sewer_overflow_events)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

@@ -1,0 +1,72 @@
+id: "wa-kc-cso-status-csv"
+name: "King County / Seattle CSO overflow status CSV (behind the King County CSO status map)"
+url: "https://your.kingcounty.gov/dnrp/library/wastewater/cso/img/CSO_metadata.CSV"
+homepage: "https://kingcounty.gov/en/dept/dnrp/waste-services/wastewater-treatment/sewer-system-services/cso-status"
+kind: "csv"
+level: "utility"
+# Feed row: the generic snapshot block below writes data/build/events/wa-kc-cso-status-csv.json (python -m
+#   ingest.generic wa-kc-cso-status-csv); the state of every poll is kept in
+#   data/build/generic/wa-kc-cso-status-csv-snapshot.json (the archive: never delete it).
+# One CSV behind King County's CSO status map: 36 King County outfalls (NPDES WA0029181) and 89 Seattle Public
+#   Utilities outfalls (WA0031682), with a point, the discharge serial number (DSN, the permit's outfall number) and
+#   one of four states. Four legend rows (Name Dummy1-4, at -120.0) are dropped; five Seattle rows carry a
+#   placeholder point (-120.0, 47.26), which the bounds reject (the registry's point is used). DateTime is the
+#   file's generation time in Pacific time, the same on every row: it is the poll time of every event.
+# The page: "The status information in this map is updated every 10 minutes"; "the real-time data has not yet been
+#   reviewed for accuracy"; "Stay out of the water near combined sewer overflow outfalls for 48 hours after a
+#   combined sewer overflow occurs". Confirmed data is in the monthly and annual reports to Ecology.
+# Fetched 2026-11-04 10:30 UTC (Last-Modified 10:30:14 GMT): 129 rows, 125 outfalls; 1 CurrentlyOverflowing,
+#   2 OverflowLast48hrs, 11 NoData.
+cadence: "1 hour"
+license: "None stated on the page; the web map item links King County GIS terms (not read)."
+attribution: "King County Wastewater Treatment Division and Seattle Public Utilities"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["WA"]
+registry_ids: ["wa-kc-cso-status-csv"]
+# The same feed is described by the earlier community research row pa-king-county-cso-status (research/community).
+access: ["csv", "arcgis", "html"]
+access_detail: "https://your.kingcounty.gov/dnrp/library/wastewater/cso/img/CSO_metadata.CSV (no auth; the 'CSO Overflow Status' layer of web map 6de3cae45d914326a32ed120b5ace4f8 on the King County CSO status page). Fields CSO_TagName, X_COORD, Y_COORD, Name, DSN, DateTime, Status."
+machine_readable: true
+legal_basis: "NPDES WA0029181 (King County West Point) and WA0031682 (Seattle CSO); WAC 173-245"
+checked: "2026-11-04"
+fetch:
+  platform: "snapshot"
+  live: true
+  rows_from: "csv"
+  url: "https://your.kingcounty.gov/dnrp/library/wastewater/cso/img/CSO_metadata.CSV"
+  csv: {headers: "as_is"}
+  time_zone: "America/Los_Angeles"
+  safe_fields: [CSO_TagName, X_COORD, Y_COORD, Name, DSN, DateTime, Status]
+  reviewed_fields:
+    Name: "the outfall's label ('King County CSO: Ballard', 'Seattle CSO'), the operator's, never a person"
+    CSO_TagName: "the outfall's tag in the operator's system (BALL, NPDES124)"
+  filter: [{field: Name, regex: "^Dummy", exclude: true}]
+  bounds: [-122.7, 47.2, -121.8, 48.0]
+  snapshot:
+    unit: CSO_TagName
+    state: Status
+    states:
+      "^CurrentlyOverflowing$": active
+      "^OverflowLast48hrs$": recent
+      "^NoRecentOverflow$": clear
+      "^NoData$": no_data
+    poll_time: {field: DateTime, formats: ["%m/%d/%Y %H:%M"]}
+    recent_hours: {default: 48}
+    stale_hours: 24
+  record:
+    event_type: {const: cso}
+    lat: {field: Y_COORD, parse: number}
+    lon: {field: X_COORD, parse: number}
+    advice_text: {const: "Stay out of the water near combined sewer overflow outfalls for 48 hours after a combined sewer overflow occurs."}
+    advice_window_hours: {const: 48, parse: number}
+    advice_window_basis: {const: "King County's CSO status map: stay out of the water near the outfall for 48 hours after an overflow"}
+    authority: {const: "King County Wastewater Treatment Division and Seattle Public Utilities (CSO status map)"}
+    source_url: {const: "https://kingcounty.gov/en/dept/dnrp/waste-services/wastewater-treatment/sewer-system-services/cso-status"}
+  transform: "ingest.wa_transforms.kc_cso_outfall"
+  meta:
+    credit: "King County Wastewater Treatment Division and Seattle Public Utilities, CSO status map"
+    license: "None stated"
+    caveat: "King County: the real-time data has not yet been reviewed for accuracy; confirmed overflow data is in the monthly and annual reports to Ecology."
+    time_basis: "Every time is a poll time of the status file (its DateTime, Pacific time): an overflow began at or before its start and ended at or before its end."

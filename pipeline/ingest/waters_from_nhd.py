@@ -1664,6 +1664,8 @@ def kind_of(name: str, typ: str, ftype=None, fcodes=(), order=0) -> str:
         return LAKE_FTYPES.get(ftype, "lake") if ftype != 493 else "bay"
     if any(336 <= (c or 0) // 100 <= 336 for c in fcodes) or lw in ("canal", "ditch"):
         return "canal"
+    if lw in ("bay", "harbor", "cove", "inlet", "sound", "lagoon"):
+        return "bay"        # a bay drawn by its NHDPlus coastline or artificial path (Budd Inlet, Possession Sound)
     if lw == "river" or (order or 0) >= 5:
         return "river"
     return "stream"

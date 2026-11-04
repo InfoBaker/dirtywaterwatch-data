@@ -1,0 +1,20 @@
+id: "wa-ecology-freshwater-algae"
+name: "Washington State Toxic Algae (Ecology freshwater algae program, nwtoxicalgae.org)"
+url: "https://www.nwtoxicalgae.org/"
+homepage: "https://www.nwtoxicalgae.org/"
+kind: "html"
+level: "state"
+# Notes (research/wa, status candidate, verified search_only, checked 2026-11-03): Bloom reports and
+#   toxin results by lake; not fetched.
+cadence: null
+license: "none stated"
+attribution: "Washington State Department of Ecology / King County"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["WA"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"

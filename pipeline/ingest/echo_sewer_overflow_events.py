@@ -1,4 +1,5 @@
-"""EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC and Georgia.
+"""EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC, Georgia and
+Washington State.
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -88,6 +89,14 @@ Georgia (permits GA...; research/ga/report.md section 2.2; the state is not live
   The state's own list (ingest/ga_epd_spills.py, run after this module) is the public record where both describe a
   spill: it takes the end from the EPA record and marks that record duplicate_of its own, in this module's file.
 
+Washington State (permits WA...; research/wa/report.md section 2.3; not live until data/rules.json says so)
+  Two permittees report here (2026-11-03 extract: 36 current rows): American Water Military Services at Joint Base
+  Lewis-McChord (WA0021954, an EPA-issued federal-facility permit, which Ecology's own spill list need not carry) and
+  the City of Puyallup (WA0037168). Their SSO reports name no receiving water and give the event's own point (no
+  point shared by many reports), so the general rules apply unchanged: an SSO with no receiving water and only land
+  impacts is dropped, a bypass that names Puget Sound is kept. Ecology's list (ingest/wa_ecology_spills.py) is the
+  state's public record for the permits it carries.
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -117,7 +126,7 @@ from common import (BUILD_DIR, DATA_DIR, HEADERS, ROOT, event, now_iso, read_jso
 SOURCE_ID = "echo-sewer-overflow"
 URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA"}
 # states whose reports mostly carry the permit's point rather than the event's (module docstring, Georgia)
 REPEATED_POINT_STATES = {"GA"}
 REPEATED_POINT_MIN = 5
