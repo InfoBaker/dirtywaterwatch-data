@@ -358,10 +358,11 @@ def event(**f) -> dict:
     return rec
 
 
-def write_events(source_id: str, records: list[dict], ok: bool = True, error: str | None = None, meta: dict | None = None) -> Path:
-    """Write data/build/events/<source>.json. On failure (ok=False) keep the previous records and
+def write_events(source_id: str, records: list[dict], ok: bool = True, error: str | None = None, meta: dict | None = None,
+                 path: Path | None = None) -> Path:
+    """Write data/build/events/<source>.json (or path). On failure (ok=False) keep the previous records and
     record the error, so a feed outage never empties a water's history."""
-    path = EVENTS_DIR / f"{source_id}.json"
+    path = Path(path) if path is not None else EVENTS_DIR / f"{source_id}.json"
     prev = read_json(path, {}) or {}
     if not ok:
         # the retained records keep the previous file's meta (coverage, registry ids and above all
