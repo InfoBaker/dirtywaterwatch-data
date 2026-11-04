@@ -156,7 +156,8 @@ def test_hand_specs_cite_a_geometry_source():
     for spec in N.HAND:
         assert spec["why"] and spec["state"] and spec["name"]
         assert (spec["source"] == "nhd" and (spec.get("gnis_id") or spec.get("pids"))) or \
-            (spec["source"] == "osm" and spec["ways"])
+            (spec["source"] == "osm" and spec["ways"]) or \
+            (spec["source"] == "census" and spec.get("service") == "tiger" and (spec.get("oids") or spec.get("line_oids")))
         if spec.get("pids"):                 # an identifier search is bounded by a box (the service times out without)
             assert spec["service"] == "hr" and len(spec["box"]) == 4
 
