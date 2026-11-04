@@ -1,0 +1,580 @@
+{
+ "about": "Public-notice channels per operator or agency: pages, sites, feeds, lists and accounts through which the public is told of sewage discharges, by law, permit or voluntarily. Read by pipeline/ingest/notification_pages.py (schema and validator there; test tests/test_notice_channels.py).",
+ "schema_version": 1,
+ "state": "RI",
+ "channels": [
+  {
+   "id": "ri-clean-ocean-access",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Clean Ocean Access",
+   "name": "Clean Ocean Access",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.cleanoceanaccess.org"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Clean Ocean Access monitoring. Voluntary; unreachable in the research. https://www.cleanoceanaccess.org answered 522 to the project user agent on 2026-11-03. (research/ri/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "ri-clean-ocean-access"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-epa-echo-overflow-events",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "U.S. Environmental Protection Agency (ECHO)",
+   "name": "U.S. Environmental Protection Agency (ECHO)",
+   "permit": null,
+   "channel_kind": "feed",
+   "urls": [
+    "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "EPA ECHO sewer overflow and bypass event records (NPDES eReporting). Voluntary publication by EPA: operators must report noncompliance to the permitting authority within 24 hours (40 CFR 122.41(l)(6)); EPA publishes the electronic reports. . Covers every operator in the state. (research/federal/report.md)",
+   "checked": "2026-11-03",
+   "feed_source_id": "echo-sewer-overflow",
+   "noun": "Data feed",
+   "sources": [
+    "fed-echo-sewer-overflow-bypass-events"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-nbc-bucklin-point-cso-alarm-map",
+   "state": "RI",
+   "operator_id": "ri-nbc-bucklin-point",
+   "agency": null,
+   "name": "Narragansett Bay Commission - Bucklin Point WWTF and associated CSOs",
+   "permit": "RI0100072",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.narrabay.com/programs-and-initiatives/combined-sewer-overflow-cso/cso-alarm-map/",
+    "https://cso-api.narrabay.com/pins",
+    "https://cso-api.narrabay.com/dryoverflows"
+   ],
+   "method": "json",
+   "legal_basis": "RIPDES permit RI0100072 (2017): 'develop a system to provide web-based notification to the public on CSO occurrences'",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "status",
+   "note": "Narragansett Bay Commission CSO Alarm Map and its API. Overflows stay visible up to 48 hours; no archive, so the site polls. No email, text or social channel. (research/ri/report.md §2.1, §2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "ri-nbc",
+   "sources": [
+    "ri-nbc-cso-alarm-map-page",
+    "ri-nbc-cso-api-pins",
+    "ri-nbc-cso-api-dryoverflows"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-nbc-environmental-monitoring",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Narragansett Bay Commission",
+   "name": "Narragansett Bay Commission",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.narrabay.com/programs-and-initiatives/environmental-monitoring/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "NBC river and bay bacteria (annual PDFs). Voluntary; annual PDFs through 2022. (research/ri/report.md §2.3)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "ri-nbc-environmental-monitoring"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-nbc-fields-point-cso-alarm-map",
+   "state": "RI",
+   "operator_id": "ri-nbc-fields-point",
+   "agency": null,
+   "name": "Narragansett Bay Commission - Field's Point WWTF and associated CSOs",
+   "permit": "RI0100315",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.narrabay.com/programs-and-initiatives/combined-sewer-overflow-cso/cso-alarm-map/",
+    "https://cso-api.narrabay.com/pins",
+    "https://cso-api.narrabay.com/dryoverflows"
+   ],
+   "method": "json",
+   "legal_basis": "RIPDES permit RI0100315 (2017): 'develop a system to provide web-based notification to the public on CSO occurrences'",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "status",
+   "note": "Narragansett Bay Commission CSO Alarm Map and its API. Overflows stay visible up to 48 hours; no archive, so the site polls. No email, text or social channel. (research/ri/report.md §2.1, §2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "ri-nbc",
+   "sources": [
+    "ri-nbc-cso-alarm-map-page",
+    "ri-nbc-cso-api-pins",
+    "ri-nbc-cso-api-dryoverflows"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-newport-harbor-wqdatalive",
+   "state": "RI",
+   "operator_id": "ri-newport-wpcf",
+   "agency": null,
+   "name": "City of Newport Utilities - Water Pollution Control (WPCF and two CSO treatment facilities)",
+   "permit": "RI0100293",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.wqdatalive.com/public/2461"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "unknown",
+   "note": "Newport Harbor water quality station (WQDataLive). Voluntary sensor display; unreachable in the research. https://www.wqdatalive.com/public/2461 answered connection to the project user agent on 2026-11-03. (research/ri/report.md §6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "sources": [
+    "ri-newport-harbor-wqdatalive"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-newport-red-flags",
+   "state": "RI",
+   "operator_id": "ri-newport-wpcf",
+   "agency": null,
+   "name": "City of Newport Utilities - Water Pollution Control (WPCF and two CSO treatment facilities)",
+   "permit": "RI0100293",
+   "channel_kind": "lights_signs_page",
+   "urls": [
+    "https://www.newportri.gov/city-hall/departments/utilities/wastewater/cso-control-plan/cso-faqs"
+   ],
+   "method": "pdf",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "documents",
+   "note": "Newport red flags at the CSO facilities and the Harbormaster's Building, with the 'Summary of CSO Events since 2001' PDF. Basis not cited in the research (the city is under a consent decree); flags stay up until 24 hours after the overflow stops. URL as recorded in the source registry. (research/ri/report.md §2.4)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Lights and signs",
+   "sources": [
+    "ri-newport-cso-faq"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-operators-no-channel",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Rhode Island sewer system operators",
+   "name": "Rhode Island sewer system operators",
+   "permit": null,
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "note": "Other RI plants and collection systems: own public notice. Voluntary only: Rhode Island has no law requiring public notice of overflows; none of these systems offers one. Their reports reach the public through EPA ECHO and RIDEM shellfish closures. Covers: ri-bristol-wwtf, ri-burrillville-wwtf, ri-central-falls-collection, ri-pawtucket-collection, ri-cranston-wpcf, ri-zambarano-wwcs, ri-east-greenwich-wwtf, ri-east-providence-wpcf, ri-jamestown-wwtf, ri-nbc-member-towns-collection, ri-new-shoreham-wpcf, ri-north-kingstown-collection, ri-quonset-wwtf, ri-scarborough-wwtf, ri-smithfield-wwtp, ri-south-kingstown-wwtf, ri-middletown-collection, ri-warren-wwtf, ri-warwick-wwtf, ri-west-warwick-wwtf, ri-westerly-wwtf, ri-woonsocket-wwtf. (research/ri/report.md §2.4, §3)",
+   "checked": "2026-11-03",
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "ri-press",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "News media (Rhode Island)",
+   "name": "News media (Rhode Island)",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No URL known (not searched): Press (ecoRI, WPRI, Rhode Island Current). Voluntary and ad hoc. Examples: https://ecori.org/when-sewage-spills-into-waterways-theres-no-state-requirement-to-alert-public/. (research/ri/report.md §2.1, §2.7)",
+   "checked": "2026-11-03",
+   "noun": "News page",
+   "sources": [
+    "ri-news-ecori",
+    "ri-news-wpri",
+    "ri-news-other"
+   ],
+   "barrier": "not_verified"
+  },
+  {
+   "id": "ri-ridem-press-releases",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Rhode Island DEM",
+   "name": "Rhode Island DEM",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [
+    "https://dem.ri.gov/press-releases.xml"
+   ],
+   "method": "rss",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "notices",
+   "note": "RIDEM press releases (RSS). Voluntary; big SSOs appear only here, usually with a shellfish closure; Cloudflare blocks servers. (research/ri/report.md §2.2)",
+   "checked": "2026-11-03",
+   "noun": "News page",
+   "sources": [
+    "ri-ridem-press-releases"
+   ],
+   "barrier": "bot_wall"
+  },
+  {
+   "id": "ri-ridem-shellfish-closures",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Rhode Island DEM",
+   "name": "Rhode Island DEM",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://dem.ri.gov/shellfish"
+   ],
+   "method": "html",
+   "legal_basis": "R.I. Gen. Laws § 20-8.1-3: annual newspaper notice of polluted areas; licensees must call a dedicated telephone line before taking shellfish from conditionally approved waters",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "status",
+   "note": "RIDEM shellfish closures: 24-hour hotline 401-222-2900 and status page. The only legal public channel that reaches sewage releases in RI (closures after spills); dem.ri.gov sits behind a Cloudflare challenge. Covers every operator in the state. (research/ri/report.md §2.1-2.2)",
+   "checked": "2026-11-03",
+   "noun": "State page",
+   "sources": [
+    "ri-ridem-shellfish-closure-page"
+   ],
+   "barrier": "bot_wall"
+  },
+  {
+   "id": "ri-ridem-shellfish-email",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Rhode Island DEM",
+   "name": "Rhode Island DEM",
+   "permit": null,
+   "channel_kind": "email_list",
+   "urls": [
+    "https://lp.constantcontactpages.com/sl/vXQmyK9"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "email_only",
+   "publishes": "notices",
+   "note": "RIDEM shellfish closure email alerts (Constant Contact). Voluntary list covering 'emergency closures (harmful alga blooms, sewage releases, etc)'. https://lp.constantcontactpages.com/sl/vXQmyK9 answered 403 to the project user agent on 2026-11-03. Sign-up status: captcha (docs/subscriptions.md). (research/ri/report.md §2.2)",
+   "checked": "2026-11-03",
+   "noun": "Alert list",
+   "signup_url": "https://lp.constantcontactpages.com/sl/vXQmyK9",
+   "sources": [
+    "ri-ridem-shellfish-email-alerts"
+   ],
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "ri-ridoh-beach-closures",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Rhode Island Department of Health",
+   "name": "Rhode Island Department of Health",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://docs.google.com/spreadsheets/d/1KXdH37xHUPrjJSEkryquPQ2GaP-R_9Gl5NkZrUnAjjU/gviz/tq?tqx=out:csv&gid=828265472"
+   ],
+   "method": "html",
+   "legal_basis": "216-RICR-50-10-3 § 3.4.11(B): beach closure advisories at the Beach Action Value, at RIDOH's discretion",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "status",
+   "note": "RIDOH beach closure list (Google Sheet behind health.ri.gov/beaches). Causes are not stated. (research/ri/report.md §2.5)",
+   "checked": "2026-11-03",
+   "feed_source_id": "ri-ridoh-beaches",
+   "noun": "State page",
+   "sources": [
+    "ri-ridoh-beach-closures-sheet"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-ridoh-beach-feed",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Rhode Island Department of Health",
+   "name": "Rhode Island Department of Health",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://health.ri.gov/ridoh-feed-beaches"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "status",
+   "note": "RIDOH beach advisory feed and beach pages. Voluntary publication of the closures in the sheet, timed to the minute; browser only. (research/ri/report.md §2.5)",
+   "checked": "2026-11-03",
+   "noun": "State page",
+   "sources": [
+    "ri-ridoh-beach-advisory-feed",
+    "ri-ridoh-beach-pages"
+   ],
+   "barrier": "bot_wall"
+  },
+  {
+   "id": "ri-ridoh-press-releases",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Rhode Island Department of Health",
+   "name": "Rhode Island Department of Health",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [
+    "https://health.ri.gov/press-releases.xml"
+   ],
+   "method": "rss",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "notices",
+   "note": "RIDOH press releases (RSS), contact advisories after spills. Voluntary; RIDOH 'leads on notifying the public through health advisories' (DEM, ecoRI 2026-06-18). (research/ri/report.md §2.2, §2.5)",
+   "checked": "2026-11-03",
+   "noun": "News page",
+   "sources": [
+    "ri-ridoh-press-releases-rss"
+   ],
+   "barrier": "bot_wall"
+  },
+  {
+   "id": "ri-ridoh-volunteer-beach-risks",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Rhode Island Department of Health",
+   "name": "Rhode Island Department of Health",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://docs.google.com/spreadsheets/d/1TnS_fnhEGhXE17G3M2zB9DjajJPW57ij7JaL4YoGKLU/gviz/tq?tqx=out:csv&gid=406560422"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "RIDOH volunteer beach observations sheet (Save The Bay, URI Watershed Watch). Voluntary; 'RIDOH cannot endorse/verify specific observations.'. (research/ri/report.md §2.5)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "ri-ridoh-volunteer-beach-risks"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-salt-ponds-coalition",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Salt Ponds Coalition",
+   "name": "Salt Ponds Coalition",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://saltpondscoalition.org/wp-content/uploads/2026/10/26_SPC-Bacteria-Final.pdf"
+   ],
+   "method": "pdf",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Salt Ponds Coalition bacteria report. Voluntary annual PDF. (research/ri/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "ri-salt-ponds-coalition"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-save-the-bay",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Save The Bay",
+   "name": "Save The Bay",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://savebay.org/category/water-quality/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Save The Bay water quality posts. Voluntary; data via the RIDOH sheet. (research/ri/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "ri-save-the-bay"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-surfrider-bwtf",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Surfrider Foundation",
+   "name": "Surfrider Foundation",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://ri.surfrider.org/programs/blue-water-task-force"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Surfrider Blue Water Task Force, Rhode Island. Voluntary; data behind a GraphQL widget (terms to check). (research/ri/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "ri-surfrider-bwtf"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-swim-guide",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Swim Drink Fish",
+   "name": "Swim Drink Fish",
+   "permit": null,
+   "channel_kind": "swim_guide",
+   "urls": [
+    "https://www.theswimguide.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "app_only",
+   "publishes": "results",
+   "note": "Swim Guide listings for Rhode Island. Voluntary; 'does not actively update Rhode Island beaches.'. (research/ri/report.md §2.6)",
+   "checked": "2026-11-03",
+   "noun": "Swim Guide listing",
+   "barrier": null,
+   "barrier_review": "an app only (Swim Guide): no web page of its own, but no login wall either"
+  },
+  {
+   "id": "ri-uri-watershed-watch",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "URI Watershed Watch",
+   "name": "URI Watershed Watch",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://uriwatershedwatch-uri.hub.arcgis.com"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "URI Watershed Watch. Voluntary; bacteria in PDFs only. (research/ri/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "ri-uri-watershed-watch"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "ri-wrwc",
+   "state": "RI",
+   "operator_id": null,
+   "agency": "Woonasquatucket River Watershed Council",
+   "name": "Woonasquatucket River Watershed Council",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://wrwc.org/watershed-water-quality-monitoring/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Woonasquatucket River Watershed Council monitoring. Voluntary; unreachable in the research. https://wrwc.org/watershed-water-quality-monitoring/ answered connection to the project user agent on 2026-11-03. (research/ri/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "ri-wrwc"
+   ],
+   "barrier": null
+  }
+ ]
+}

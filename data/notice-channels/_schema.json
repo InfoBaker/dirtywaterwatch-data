@@ -1,0 +1,109 @@
+{
+ "about": "Public-notice channels per operator or agency: pages, sites, feeds, lists and accounts through which the public is told of sewage discharges, by law, permit or voluntarily. Read by pipeline/ingest/notification_pages.py (schema and validator there; test tests/test_notice_channels.py).",
+ "schema_version": 1,
+ "schema": {
+  "fields": {
+   "id": "unique channel id: '<state lower>-' then lowercase letters, digits and hyphens; stable (record ids and snapshots follow the URL, not the id, but merges and reviews follow the id)",
+   "state": "two-letter postal code of the jurisdiction (DC included)",
+   "operator_id": "data/dischargers.json id of the operator, or null for an agency or group channel",
+   "agency": "the agency or group that runs the channel when it is not an operator in data/dischargers.json, else null",
+   "name": "public name of the operator or agency",
+   "permit": "the NPDES / state permit the channel serves (one of the operator's npdes_permits), or null",
+   "channel_kind": "what the channel is (enums.channel_kind)",
+   "urls": "the URL(s) read, http(s); [] only for a channel that is not monitored (none found, email only)",
+   "method": "how the URLs are read (enums.method); null only when urls is []",
+   "legal_basis": "the law or permit clause that makes it a public channel, cited; null only for voluntary",
+   "basis_kind": "law, permit or voluntary (enums.basis_kind)",
+   "monitored": "true when this module fetches it",
+   "unmonitored_reason": "when monitored is false: why (enums.unmonitored_reason); null when monitored",
+   "publishes": "what the research saw on it (enums.publishes): a current status, a rainfall likelihood, dated notices, documents, only a link elsewhere, sampling results, nothing",
+   "note": "research note, internal (not exported); required for none_found and other",
+   "checked": "date the row was last checked against the source, YYYY-MM-DD",
+   "barrier": "what keeps the channel's notices off the open web (enums.barrier), from unmonitored_reason, the kind and the note (barrier_for); null for a monitored row or one read through a feed (feed_ingested), and for a row the register does not settle (then barrier_review says why)"
+  },
+  "optional_fields": {
+   "authority": "who is credited on records from this channel (default: name)",
+   "noun": "the noun of the health wording (default 'Notification page', 'Voluntary page' for voluntary rows)",
+   "link_text": "for link_only / likelihood rows: what the page links to ('the shared rainfall site'); the wording is 'Links to <link_text> only'",
+   "status_pattern": "regular expression that finds the current status on the page; when it stops matching the wording says so",
+   "entry": "{start, end}: regular expressions that cut this row's entry out of a page several rows share (from the first line matching start to the next line matching end)",
+   "ignore_lines": "regular expressions of volatile lines (readings, clocks) left out of the text hash",
+   "records": "false: never make records from this channel (default true)",
+   "dated_lines_are_notices": "true: any added dated line is a notice (an event table)",
+   "default_event_type": "event type of a notice whose words name none (common.EVENT_TYPES)",
+   "every_hours": "fetch at most this often (default: every refresh)",
+   "headers": "'browser' to send a browser user agent (hosts that refuse others)",
+   "feed_source_id": "for feed_ingested: the source id of the feed that reads it",
+   "signup_url": "where the public signs up for its alerts, when it has a list",
+   "seeds": "{url: [{path, fetched_at, http_status}]}: earlier copies (research, surveys) taken as the first snapshots, oldest first; path relative to the project root",
+   "sources": "research or registry ids the row rests on",
+   "barrier_review": "internal: why an unmonitored row has no barrier yet (listed in docs/reviews/2026-11-03-barriers.md)"
+  },
+  "enums": {
+   "channel_kind": [
+    "operator_page",
+    "state_alert_page",
+    "local_health_page",
+    "shared_site",
+    "feed",
+    "social",
+    "lights_signs_page",
+    "news_page",
+    "email_list",
+    "group_results",
+    "swim_guide"
+   ],
+   "method": [
+    "html",
+    "json",
+    "pdf",
+    "rss"
+   ],
+   "basis_kind": [
+    "law",
+    "permit",
+    "voluntary"
+   ],
+   "unmonitored_reason": [
+    "login",
+    "bot_wall",
+    "image_only",
+    "none_found",
+    "email_only",
+    "app_only",
+    "feed_ingested",
+    "other"
+   ],
+   "publishes": [
+    "status",
+    "likelihood",
+    "notices",
+    "documents",
+    "link_only",
+    "results",
+    "none",
+    "unknown"
+   ],
+   "barrier": [
+    "print_only",
+    "login_required",
+    "no_web_page",
+    "varies_by_town",
+    "not_verified",
+    "image_only",
+    "bot_wall",
+    "phone_only",
+    "signs_only"
+   ]
+  },
+  "rules": [
+   "channels sorted by (state, id); ids unique",
+   "operator_id or agency is given; operator_id exists in data/dischargers.json; a permit given with an operator_id is one of that operator's npdes_permits",
+   "monitored rows have urls and a method; unmonitored rows have an unmonitored_reason",
+   "basis_kind law or permit has a legal_basis",
+   "barrier is null for monitored and feed_ingested rows, follows login, bot_wall and image_only, and is set (or barrier_review given) for every other unmonitored row",
+   "regular expressions compile; seeds name the row's urls"
+  ]
+ },
+ "layout": "one file per state, <st>.json {about, schema_version, state, channels}"
+}
