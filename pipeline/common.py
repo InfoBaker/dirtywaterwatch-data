@@ -339,7 +339,9 @@ utilities water sewer sewerage wastewater sanitary sanitation treatment plant fa
 works regional reclamation recovery pollution control services service co company corp corporation inc llc lp ltd assn
 association hoa poa coop cooperative club estates apartments apts mhp mobile home homes school schools elementary middle
 high college university academy ctr center centre correctional prison resort hotel motel inn hospital farm farms dairy
-foundation fdation trust partners properties development""".split())   # not surnames such as Park, Mills, Church, Camp
+foundation fdation trust partners properties development wwsl wwt wwrf rwrf awtf awwtp wqtc wrc cso csos sso psd msd
+mua mud sd ud wsa subdiv subd subdivision elem sch univ campground nursing ministries foods products mfg manufacturing
+enterprises holdings group labs laboratories sons bros brothers sawmill rtb""".split())   # not surnames such as Park, Mills, Church, Camp, Lodge
 NAME_REMOVED = "[name removed]"
 
 
