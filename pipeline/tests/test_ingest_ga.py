@@ -448,3 +448,23 @@ def test_a_catch_up_day_that_fails_is_named_not_silently_skipped():
     got, linked = G.fetch_postings(Sess(), "2026-10-29", None, errors)
     assert linked == "20261103" and [p[0] for p in got] == ["20261103"]
     assert len(errors) == 1 and "20261030" in errors[0] and "503" in errors[0]
+
+
+def test_a_day_precision_spill_with_no_end_gets_72_hours_of_caution_from_the_days_start():
+    """The default for day-precision feeds: the day shown as the precision, the 72-hour caution from the day's start,
+    then the end unconfirmed (hatched) to day 30; never red, and a live state's unknown-status record is untouched."""
+    from datetime import datetime, timedelta, timezone
+    from build import status as S
+    rules = json.loads((common.DATA_DIR / "rules.json").read_text())
+    recs, _ = run([posting("2026-11-02", [row()])])                 # began 2026-10-29, posted 2026-11-02
+    now = datetime(2026, 11, 4, 12, tzinfo=timezone.utc)
+    ivs = S.event_intervals(recs[0], "GA", now, rules=rules)
+    day0 = S.parse_time("2026-10-29")
+    assert day0 == datetime(2026, 10, 29, 4, tzinfo=timezone.utc)      # midnight in Georgia (Eastern time)
+    assert [(i["rule"], i["color"], i["start"], i["end"]) for i in ivs[:2]] == [
+        ("day_start_caution", "yellow", day0, day0 + timedelta(hours=72)),
+        ("unresolved", "unresolved", day0 + timedelta(hours=72), day0 + timedelta(days=30))]
+    assert ivs[0]["rule_applied"]["rule"] == "unresolved.day_start_caution" and ivs[0]["rule_applied"]["hours"] == 72
+    assert "safe" not in rules["unresolved"]["day_start_caution"]["rationale"].lower()
+    other = {**recs[0], "source_id": "nh-permittees", "event_id": "nh-permittees:x"}
+    assert S.event_intervals(other, "NH", now, rules=rules)[0]["rule"] == "no_end"
