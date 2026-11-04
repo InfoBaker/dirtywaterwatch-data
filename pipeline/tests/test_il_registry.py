@@ -172,11 +172,11 @@ def test_the_lake_cut_downloads_check_the_tiger_files(monkeypatch):
     from ingest import waters_extra as WX
     S = _script("cut_lakes_to_state_waters")
     seen = {}
-    monkeypatch.setattr(WX, "states_zip", lambda **kw: seen.update(members=WX.STATES_ZIP_MEMBERS, **kw) or kw["dest"])
+    monkeypatch.setattr(WX, "states_zip", lambda **kw: seen.update(kw) or kw["dest"])   # the members go as a parameter
     before = WX.STATES_ZIP_MEMBERS
     S.tiger_zip()
-    assert seen["members"] == ("tl_2023_us_state.shp", "tl_2023_us_state.dbf") and seen["url"] == S.TIGER_URL
-    assert WX.STATES_ZIP_MEMBERS == before
+    assert tuple(seen["members"]) == ("tl_2023_us_state.shp", "tl_2023_us_state.dbf") and seen["url"] == S.TIGER_URL
+    assert WX.STATES_ZIP_MEMBERS == before                      # the shared default is never swapped
 
 
 def test_lake_michigan_holds_illinois_waters_only():
