@@ -298,7 +298,8 @@ def reached(ev: dict) -> str:
             return "yes"
     if str(row.get("surfaceWater") or "").strip().lower() == "yes" or rep.get("water_threatened") == "Y":
         return "yes"
-    if raw.get("reached_water") is True or raw.get("ENTER_STORM") == 1 and ev.get("waterbody_text"):
+    # "text": the notice's text says the sewage reached the water its form said was not reached (Florida PNP)
+    if raw.get("reached_water") in (True, "text") or raw.get("ENTER_STORM") == 1 and ev.get("waterbody_text"):
         return "yes"
     for s in raw.get("sewage") or []:
         if isinstance(s, dict) and any(isinstance(i, str) and "discharge to state waters" in i.lower()
