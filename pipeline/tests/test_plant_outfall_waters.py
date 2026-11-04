@@ -202,8 +202,9 @@ def test_the_new_operator_rows_have_the_registrys_shape_and_no_permit_is_in_two_
         assert r["id"] == f"{r['state'].lower()}-{r['npdes_permit'].lower()}" and r["aliases"] == [r["id"]]
         assert r["npdes_permit"] in r["npdes_permits"] and r["kind"] in ("plant", "cso")
         assert r["notification_channel"] == "None found online (not searched individually)"
-        # live states: the 2026-11-03 run; a state built ahead of going live (Georgia, 2026-11-04) has its own date
-        assert r["verified"] == "fetched" and (r["checked"] == "2026-11-03" if r["state"] in LIVE else
+        # live states: the 2026-11-03 run, or 2026-11-04 for the permits the plant registry's code-split rebuild added
+        # (research/federal/build_plant_outfalls.py); a state built ahead of going live (Georgia, 2026-11-04) has its own date
+        assert r["verified"] == "fetched" and (r["checked"] in ("2026-11-03", "2026-11-04") if r["state"] in LIVE else
                                                re.fullmatch(r"2026-\d\d-\d\d", r["checked"]))
 
 
