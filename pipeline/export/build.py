@@ -245,7 +245,9 @@ def reach_features(st: dict, by_event: dict) -> tuple[list, list]:
 RULES_FILE_PREFIXES = ("red.by_state.", "red.by_discharger.", "red.none", "yellow.", "unresolved.", "rain_likely")
 # feed meta keys that describe the source to the public; the rest is ingester bookkeeping
 PUBLIC_FEED_META = {"credit", "disclaimer", "terms", "attribution", "license", "url", "api", "portal", "homepage",
-                    "cadence", "poll_cadence", "time_note", "timezone", "timezone_note", "window", "since"}
+                    "cadence", "poll_cadence", "time_note", "timezone", "timezone_note", "window", "since",
+                    # what a feed reads but does not show, counted (ingest/fl_dep_pnp.py left_out_meta)
+                    "left_out", "listed_without_status", "left_out_note"}
 INTERNAL_WORDING = re.compile(r"\bowner(?:'s|s)?\b|\bdocs/|(?<![\w.-])research/|\bfixture|\bcoordinator", re.I)  # "ownership" in a quoted term is fine
 ARCGIS_OWNER = re.compile(r"\s*\((?:[^()]*\bArcGIS\b[^()]*\bowner\b[^()]*)\)", re.I)
 

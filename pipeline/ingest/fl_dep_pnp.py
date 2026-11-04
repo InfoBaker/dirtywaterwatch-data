@@ -33,7 +33,10 @@ Privacy (the service is public but carries personal data)
   Hwy" keeps it; a rare given name can still slip through, so build.redact runs after), then
   common.scrub_text (e-mails, phones, "Inspector X", "contact X at"); build.redact (private names
   in context, the blocklist) runs over the records last. Saved raw pages hold the scrubbed text
-  only. tests/test_fl_dep_pnp.py proves that a contact field and a name in those labels never reach
+  only. INCIDENT_NAME and FACILITY_NAME go through scrub_name_field(): filers often type their own name
+  (or a resident's) there, so a value that is only a person's name becomes "[name removed]" and names
+  inside it go as in the text; a notice filed by a member of the public keeps no street address
+  ("[address removed]": its facility is often the filer's or a neighbour's home). tests/test_fl_dep_pnp.py proves that a contact field and a name in those labels never reach
   a record or the saved raw page.
 
 Which notices become records (the feed mixes every kind of pollution)
@@ -42,17 +45,26 @@ Which notices become records (the feed mixes every kind of pollution)
     Actions: ...". Untreated (and "Untreated mixed with rainwater") -> sso (cause Bypass -> bypass);
     Partially Treated -> plant_bypass; Unknown -> sso with raw._kind_note. Treated, Reuse
     (reclaimed water) and Biosolids are not sewage records: they are counted in meta.excluded and
-    not written (default applied pending the owner's answer: untreated and partly treated
-    discharges are sewage records, treated effluent and reclaimed water are not).
+    not written (the scope rule of 2026-11-04: untreated and partly treated discharges are sewage
+    records, treated effluent, reclaimed water and biosolids are counted but not shown).
   - Notices without the template are read by words (classify()): raw or untreated sewage, a
     sanitary sewer, manhole, lift or pump station, force or gravity main, SSO, or domestic
-    wastewater -> sso (partially treated -> plant_bypass); treated effluent, reclaimed or reuse
-    water with no sewage word -> excluded; fuel, oil, chemicals, stormwater, mining and industrial
-    process water -> excluded (other pollution). raw._pnp_kind says which rule took the notice.
-  - Citizen complaints (default applied pending the owner's answer): a sewage notice filed by a
+    wastewater, and the filers' shorthand (LS #, FM, ARV, gravity line) -> sso (partially treated ->
+    plant_bypass); a "storm sewer" is not a sewer; fuel, oil, leachate, cooling or industrial water
+    released at a pump or lift station, with no word that sewage was released (sewage, overflow, raw,
+    untreated ...), is other pollution; treated effluent, reclaimed or reuse water with no sewage word
+    -> excluded; fuel, oil, chemicals, stormwater, mining and industrial process water -> excluded
+    (other pollution). A template that says Treated (Reuse, Biosolids) while its description reports
+    untreated (or partially treated) wastewater is read by the description. raw._pnp_kind says which
+    rule took the notice.
+  - The counts of what is left out are public and cumulative: data/build/fl-dep-pnp-state.json keeps
+    each left-out notice's id and kind, and the events file's meta.left_out, listed_without_status
+    and left_out_note (export/build.py PUBLIC_FEED_META) give the totals.
+  - Citizen complaints (the scope rule of 2026-11-04): a sewage notice filed by a
     member of the public (relationship OTHER- with citizen, resident, homeowner or neighbour words)
     is a record of event_type unknown and status unknown, raw._pnp_kind "citizen_complaint": kept
-    and listed, never coloured as a discharge (docs: unknown records colour only when ongoing).
+    and listed, never coloured as a discharge (docs: unknown records colour only when ongoing),
+    and never linked to an operator's notice as a revision (a revision supersedes its parent).
 
 Record rules
   - OBJECTID is renumbered whenever DEP rebuilds the layer (newest first), so it is not an id.
@@ -72,6 +84,9 @@ Record rules
     RELEASE_START_DATE_TIME and RELEASE_END_DATE_TIME are dates (always 00:00): started_at and
     ended_at are local midnight of those dates, time_precision "day" (a day-precision end means the
     end of that day). Times written in the text are not parsed into the record.
+  - A notice from an earlier run that the 30-day layer no longer lists gets raw._missing_from_layer_since
+    only while its report time is inside the layer's window (older notices simply aged out). A layer
+    that answers with no notices at all is an outage (ok false, the previous records kept).
   - Status: RELEASE_ONGOING Y -> ongoing (an end date given while ongoing stays in raw); else an end
     date -> ended; else ended with no ended_at (the notice says the release is not ongoing but
     gives no end; none is invented). An end before the start is dropped with a parse_error.
@@ -102,9 +117,10 @@ import argparse
 import hashlib
 import json
 import re
+import string
 import sys
 from collections import Counter, defaultdict
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -169,7 +185,7 @@ _PNAME = r"[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)?(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+(?:[-']
 _PNAME_CAPS = r"[A-Z]{2,}(?:\s+[A-Z]\.?)?\s+[A-Z]{2,}(?:[-'][A-Z]+)?"
 TITLE_THEN_NAME = re.compile(rf"(\b(?i:{JOB_TITLE})\b\s*[:,-]?\s+)(?:{_PNAME}|{_PNAME_CAPS})\b")
 NOT_PERSON_WORDS = set("""staff crews crew department utilities utility county city town village district public works
-water sewer wastewater field the our their state florida dep fdep doh fdoh health environmental protection division
+water waste sewer wastewater field the our their state florida dep fdep doh fdoh health environmental protection division
 office team services service operations maintenance collection collections plant facility station lift compliance
 permitting engineering regulatory systems system senior lead assistant general project safety quality control program
 laboratory lab treatment distribution reclamation sanitation sanitary pump pumping reuse stormwater storm utility's
@@ -194,7 +210,8 @@ PLACE_AFTER = set("""dr drive parkway pkwy hwy highway hall causeway turnpike tp
 state park chapel island bridge blvd boulevard bay trail ln lane rd road st street ave avenue way ct court cir circle pl
 place ter terrace loop run creek river lake pond canal beach shores estates village gardens heights apartments apts
 elementary school middle high college university center centre plaza mall church hospital lift station pump ps ls wwtp
-wwtf wrf awt plant facility utilities inc llc co company corp fl harbor harbour haven sound springs""".split())
+wwtf wrf awt plant facility utilities inc llc co company corp fl harbor harbour haven sound springs air force base
+field""".split())
 PLACE_PAIRS = {"wesley chapel", "mary esther", "holly hill", "marco island", "dana shores", "martin luther", "bob sikes",
                "dale mabry", "courtney campbell", "ronald reagan", "andrew jackson", "jose marti", "john young",
                "lake mary", "fort myers", "port charlotte", "palm bay", "st johns", "st lucie", "santa rosa"}
@@ -208,6 +225,9 @@ NOT_FIRST = set("""hurricane tropical state asset lift contractor center vac ini
 aqua subject incident bypass pumper risk underground seacoast sun northeast northwest southeast southwest north south
 east west central the a an our their county city town village utility utilities emergency environmental code customer
 service services dispatch central sewer water wastewater storm pump plant main""".split())
+# a given name right after these words names a storm or a place, not a person
+NAMED_AFTER = re.compile(r"\b(?:hurricane|tropical\s+storm|tropical\s+depression|TS|TD|lake|mt\.?|mount|port\s+st\.?|"
+                         r"ponce\s+de|san|santa|saint|st\.?)\s+$", re.I)
 GIVEN_PAIR = re.compile(r"(?=\b([A-Z][a-z]+|[A-Z]{2,})\s+([A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)?|[A-Z]{2,}(?:[-'][A-Z]+)?)\b(\s+\w+)?)")
 EMAIL_HEADER = re.compile(r"\bFrom:?\s+[^\n]{0,240}?\bSent:?\s+\w+day,?\s+\w+\s+\d{1,2},\s+\d{4},?\s+\d{1,2}:\d{2}(?::\d{2})?\s*[AP]M")
 
@@ -229,6 +249,8 @@ def drop_given_pairs(s: str) -> str:
             continue
         if re.search(r"\b(?:of|in|at|near)\s+$", s[max(0, m.start() - 6):m.start()], re.I) and nxt in ("", "and", "on", "in"):
             continue
+        if NAMED_AFTER.search(s[max(0, m.start() - 16):m.start()]):
+            continue                          # "Hurricane Ian ...", "TS Debby ...", "Lake Mary Jane": a storm or a place
         if n.lower() in PLACE_AFTER or n.lower() in NOT_PERSON_WORDS or nxt in PLACE_AFTER:
             continue
         end = m.end(2)
@@ -333,14 +355,43 @@ def relationship_code(v) -> str | None:
     return "other"
 
 
+def scrub_name_field(v):
+    """INCIDENT_NAME or FACILITY_NAME with personal data removed. Filers often type their own name, or a resident's,
+    as the incident or facility name (a staff member's name as the incident name; a homeowner's name as the facility
+    of a complaint): a value that is only a person's name (build.redact.person_shaped, read in any case) becomes
+    "[name removed]"; names inside a longer value go as in the notice text (common given name + surname, Mr./Ms.),
+    and e-mails and phone numbers as everywhere."""
+    if not isinstance(v, str):
+        return v
+    s = SPACE.sub(" ", scrub_text(v)).strip()
+    if not s:
+        return s
+    words = {w.lower() for w in re.split(r"[\s\-/.,()]+", s) if w}
+    if not words & (NOT_PERSON_WORDS | PLACE_AFTER) and \
+            (redact.person_shaped(s) or redact.person_shaped(string.capwords(s))):
+        return "[name removed]"
+    if s.islower() or s.isupper():          # "jordan sample", "JORDAN SAMPLE": read with capitals
+        c = drop_given_pairs(HONORIFIC_NAME.sub("[name removed]", string.capwords(s)))
+        if "[name removed]" in c:
+            return c
+    s = HONORIFIC_NAME.sub("[name removed]", s)
+    return drop_given_pairs(s)
+
+
 def safe_attributes(a: dict) -> dict:
-    """The attributes this module keeps: the safe fields only, the relationship as a code, the text scrubbed."""
+    """The attributes this module keeps: the safe fields only, the relationship as a code, the text scrubbed, the
+    incident and facility names cleared of people's names, and (for a notice filed by a member of the public) no
+    street address: the facility of a complaint is often the filer's or a neighbour's home."""
     out = {k: a.get(k) for k in SAFE_FIELDS if k in a}
     # a saved page already holds the code (the relationship itself is never saved)
     out["_filer"] = relationship_code(a.get(RELATIONSHIP_FIELD)) if RELATIONSHIP_FIELD in a else a.get("_filer")
     for k in ("INCIDENT_REPORT", "INCIDENT_NAME", "FACILITY_NAME"):
         if isinstance(out.get(k), str):
-            out[k] = scrub(out[k]) if k == "INCIDENT_REPORT" else scrub_text(out[k])
+            out[k] = scrub(out[k]) if k == "INCIDENT_REPORT" else scrub_name_field(out[k])
+    if out["_filer"] == "citizen":
+        for k in ("FACILITY_ADDRESS_LINE_1", "FACILITY_ADDRESS_LINE_2"):
+            if out.get(k):
+                out[k] = "[address removed]"
     return out
 
 
@@ -365,6 +416,23 @@ WASTEWATER = re.compile(r"\b(waste\s*water|wwtp|wwtf|wrf|awt|wrrf|water\s+reclam
 PARTIAL = re.compile(r"\bpartially[\s-]+treated\b", re.I)
 TREATED = re.compile(r"\b(treated\s+effluent|chlorinated\s+effluent|effluent|reclaimed|reclaim\s+water|reuse|"
                      r"re-use|irrigation\s+quality|diluted\s+effluent)\b", re.I)
+# shorthand filers use for sewer assets (case-sensitive: "LS #104", "FM was hit", "ARV failure")
+SEWER_SHORTHAND = re.compile(r"(?-i:\bL\.?S\.?\s*-?\s*#\s*\d+|\bLS\s*-?\s*\d+\b|\bL/S\b|\bFM\b|\bARVs?\b)|"
+                             r"\bair\s+re(?:lease|lief)\s+valves?\b|\bgravity\b", re.I)
+# "storm sewer" is a stormwater pipe, not a sanitary sewer: fuel or paint in a storm sewer is not a sewage notice
+STORM_SEWER = re.compile(r"\bstorm\s*-?\s*(?:water\s+)?sewers?(?:\s+(?:system|inlets?|lines?|pipes?))?\b", re.I)
+# words that say the release itself was sewage (a sewer asset word alone does not: diesel at a lift station's generator)
+SEWAGE_RELEASED = re.compile(r"\b(sewage|sewer\s+(?:spill|overflow|water|release)|waste\s*water|sanitary|raw|untreated|"
+                             r"ssos?|overflow(?:s|ed|ing)?|influent|septic|black\s*water)\b", re.I)
+# a description that reports untreated sewage although the form's Wastewater Type says Treated, Reuse or Biosolids
+DESCRIBES_UNTREATED = re.compile(r"\b(?<!partially\s)untreated\b|\braw\s+(?:sewage|wastewater)\b|"
+                                 r"\bsanitary\s+sewer\s+overflow|\bSSOs?\b|\bsewage\s+(?:spill|overflow|release)", re.I)
+# what else is released at pumps, lift stations and plants (a generator's diesel, a cooling tower's water)
+OTHER_RELEASE = re.compile(
+    r"\b(diesel|gasoline|petroleum|fuel|hydraulic\s+(?:fluid|oil)|(?:motor|mineral|transformer|engine)\s+oil|"
+    r"oil(?!\s+and\s+grease)\s+(?:sheen|spill|leak)|leachate|cooling\s+(?:water|tower)|industrial\s+(?:waste\s*)?water|"
+    r"process\s+water|antifreeze|coolant|chlorine\s+(?:gas|leak|release|spill)|sulfuric|acid|ammonia\s+(?:leak|release))\b",
+    re.I)                                   # not chlorine or potable water alone: crews disinfect and wash down with them
 NOT_SEWAGE_STRONG = re.compile(
     r"\b(industrial\s+wastewater|process\s+water|cooling\s+water|phosphogypsum|gypstack|leachate|mining|"
     r"oil|fuel|diesel|gasoline|petroleum|hydraulic|transformer|chemical|ammonia|hypochlorite|acid|paint|"
@@ -403,10 +471,24 @@ def classify(text: str | None, facility: str | None, filer: str | None) -> tuple
         else:
             kind, et = "wastewater_unspecified", "sso"
         rule = f"template: Wastewater Type {m.group(1).strip()!r}"
+        desc = template_fields(t).get("description") or ""
+        if et is None and PARTIAL.search(desc):
+            kind, et = "partially_treated", "plant_bypass"
+            rule += "; the description reports partially treated wastewater"
+        elif et is None and DESCRIBES_UNTREATED.search(desc):
+            # the filer picked Treated (or Reuse, Biosolids) but the description reports untreated sewage: the
+            # cautious reading wins
+            kind, et = "untreated", "bypass" if cause.startswith("bypass") else "sso"
+            rule += "; the description reports untreated wastewater"
     else:
-        strong = STRONG_SEWAGE.search(t) or STRONG_SEWAGE.search(facility or "")
+        t_sewer = STORM_SEWER.sub(" ", t)
+        strong = (STRONG_SEWAGE.search(t_sewer) or SEWER_SHORTHAND.search(t_sewer) or
+                  STRONG_SEWAGE.search(STORM_SEWER.sub(" ", facility or "")))
         if PARTIAL.search(t):
             kind, et, rule = "partially_treated", "plant_bypass", "text: partially treated"
+        elif strong and OTHER_RELEASE.search(t) and not SEWAGE_RELEASED.search(t_sewer):
+            kind, et, rule = "other_pollution", None, \
+                f"text: {OTHER_RELEASE.search(t).group(0).lower()!r} released at a sewer asset, no sewage released"
         elif strong and not (TREATED.search(t) and not re.search(r"raw|untreated|sewage|sanitary|sso", t, re.I)
                              and not re.search(r"manhole|lift\s*station|gravity", t, re.I)):
             if re.search(r"industrial\s+wastewater|process\s+water", t, re.I) and not re.search(r"sewage|sanitary|raw", t, re.I):
@@ -526,8 +608,9 @@ def water_names(text: str) -> list[str]:
     for m in WATER_NAME.finditer(text or ""):
         name = SPACE.sub(" ", m.group(1)).strip(" .,;:")
         tail = text[m.end():m.end() + 25]
-        if NOT_WATER_AFTER.match(tail) or NOT_WATER_NAME.search(name):
-            continue
+        if NOT_WATER_AFTER.match(tail) or NOT_WATER_NAME.search(name) or \
+                re.match(r"(?i)(?:the\s+)?(?:city|town|village|county)\s+of\b", name):
+            continue                          # "City of Crystal River": a place, not a water
         name = re.sub(r"^(?:the|of)\s+", "", name, flags=re.I)
         if len(name.split()) == 1 and re.fullmatch(rf"(?:{WATER_KINDS})", name, re.I):
             continue                          # "the bayou", "the harbor": a kind of water, not a name
@@ -730,6 +813,8 @@ def link_revisions(records: list[dict]) -> dict:
     """parent_event_id for later notices of one State Watch Office number; duplicate_of for exact copies."""
     by_num = defaultdict(list)
     for r in records:
+        if (r.get("raw") or {}).get("_pnp_kind") == "citizen_complaint":
+            continue            # a complaint is never a revision of an operator's notice, nor revised by one
         n = (r.get("raw") or {}).get("INCIDENT_NUMBER")
         n = incident_number(n)
         if n and SWO_NUMBER.match(n):
@@ -757,22 +842,28 @@ def build(features: list[dict], fetched_at: str, prev_records: list[dict], permi
           full_layer: bool = False) -> tuple[list[dict], dict]:
     permits = load_permit_index() if permits is None else permits
     prev = {r["event_id"]: r for r in prev_records}
-    records, seen, excluded = [], set(), Counter()
+    records, seen, excluded, left_out = [], set(), Counter(), {}
     kinds = Counter()
     for key, a in keyed([safe_attributes(f) for f in features]):
         eid = f"{SOURCE_ID}:{key}"
         rec = build_record(a, key, fetched_at, prev.get(eid), permits)
         seen.add(eid)
         if rec is None:
-            excluded[classify(a.get("INCIDENT_REPORT"), a.get("FACILITY_NAME"), a.get("_filer"))[0]] += 1
+            kind = classify(a.get("INCIDENT_REPORT"), a.get("FACILITY_NAME"), a.get("_filer"))[0]
+            excluded[kind] += 1
+            left_out[key] = kind
             continue
         kinds[(rec.get("raw") or {}).get("_pnp_kind")] += 1
         records.append(rec)
     kept = 0
+    window_from = _days_before(fetched_at, LAYER_CURRENT_DAYS)
     for eid, r in prev.items():
         if eid in seen:
             continue
-        if not full_layer:
+        if eid.split(":", 1)[1] in left_out:
+            continue            # read again and now classified as not a sewage notice
+        # only a notice still inside the 30-day layer's window can be missing from it; older ones simply aged out
+        if not full_layer and window_from and (r.get("reported_at") or "") >= window_from:
             r.setdefault("raw", {})
             r["raw"]["_missing_from_layer_since"] = r["raw"].get("_missing_from_layer_since") or fetched_at
         records.append(r)
@@ -787,8 +878,37 @@ def build(features: list[dict], fetched_at: str, prev_records: list[dict], permi
              "with_water_name": sum(1 for r in records if r.get("waterbody_text")),
              "with_volume": sum(1 for r in records if r.get("volume_gal") is not None),
              "with_coordinates": sum(1 for r in records if r.get("lat") is not None),
-             "with_operator": sum(1 for r in records if r.get("discharger_id"))}
+             "with_operator": sum(1 for r in records if r.get("discharger_id")),
+             "_left_out_ids": left_out}
     return records, stats
+
+
+LAYER_CURRENT_DAYS = 31     # layer 0 holds the last 30 days of notices (one day's margin)
+# the public names of the notices this feed reads but does not show as sewage reports (meta.left_out)
+LEFT_OUT_LABEL = {"treated": "treated effluent", "reuse": "reclaimed water (reuse)", "biosolids": "biosolids",
+                  "other_pollution": "other pollution (fuel, oil, chemicals, stormwater and the like)"}
+
+
+def _days_before(iso_t: str, days: int) -> str | None:
+    try:
+        t = datetime.fromisoformat(str(iso_t).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return (t.astimezone(TZ) - timedelta(days=days)).isoformat()
+
+
+def left_out_meta(left_out: dict, records: list[dict], backfilled_at: str | None) -> dict:
+    """The public counts of what this feed reads and does not show (the scope rule of 2026-11-04: treated effluent, reuse and
+    biosolids counted but not shown as sewage reports; complaints listed with no status). left_out: every notice
+    ever read and left out, by its source_record_id, so the counts are cumulative and a re-read never doubles them."""
+    by = Counter(LEFT_OUT_LABEL.get(k, k) for k in left_out.values())
+    complaints = sum(1 for r in records if (r.get("raw") or {}).get("_pnp_kind") == "citizen_complaint")
+    scope = ("every notice since July 2017" if backfilled_at else "the notices read so far (the last 30 days at first)")
+    return {"left_out": dict(sorted(by.items())),
+            "listed_without_status": {"filed by a member of the public": complaints},
+            "left_out_note": (f"Counted over {scope}: notices about treated effluent, reclaimed water, biosolids and "
+                              "other pollution are counted here but not shown as sewage reports; sewage notices filed "
+                              "by members of the public are listed with no status.")}
 
 
 # ---------------------------------------------------------------- fetch
@@ -829,6 +949,8 @@ def main(argv=None) -> int:
             sess = requests.Session()
             sess.headers.update(HEADERS)
             features = query_layer(sess, layer)
+            if not features:
+                raise RuntimeError("the layer returned no notices")
     except Exception as e:  # noqa: BLE001
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
@@ -850,8 +972,14 @@ def main(argv=None) -> int:
         write_json(STATE_FILE, state)
     prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
     records, stats = build(features, fetched_at, prev, full_layer=args.backfill)
+    left = {**(state.get("left_out") or {}), **stats.pop("_left_out_ids")}
+    ids = {r["source_record_id"] for r in records}
+    left = {k: v for k, v in left.items() if k not in ids}
+    if not args.file:
+        state["left_out"] = left
+        write_json(STATE_FILE, state)
     records = redact.redact_events(records)
-    meta = {**stats, "layer": layer, "raw_path": raw_path, "time_basis": TIME_BASIS, "credit": CREDIT,
+    meta = {**stats, **left_out_meta(left, records, state.get("backfilled_at")), "layer": layer, "raw_path": raw_path, "time_basis": TIME_BASIS, "credit": CREDIT,
             "backfilled_at": state.get("backfilled_at"), "registry_ids": ["fl-dep-pnp-arcgis"],
             "requested_fields": list(SAFE_FIELDS)}
     path_notes_to_meta(records, meta)
