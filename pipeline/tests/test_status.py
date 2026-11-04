@@ -931,3 +931,29 @@ def test_charts_do_not_count_red_days_from_an_end_not_used(monkeypatch):
     e = ev(status="ended", started_at=iso(start), ended_at="2036-08-10T11:00:00+00:00", fetched_at=iso(NOW - H))
     reds = C.red_intervals(e, "MA", NOW, Counter(), rules=BOUND_RULES)
     assert sum((z - a for a, z in reds), timedelta()) == timedelta(0)
+
+
+def test_a_state_record_that_names_no_water_does_not_absorb_an_epa_report_of_a_water():
+    """A same-day state record whose receiving water is only a placeholder, the ground or a storm drain (no water
+    named: no_receiving_water) colours nothing; an EPA report of the permit that names a water is not made its
+    duplicate, or the water would lose its colour. The state record is the duplicate instead."""
+    day = NOW - 10 * H
+    for text in ("Storm drain", "N/A", "ground", "Unknown"):
+        st, epa = _same_day(day, waterbody_text=text)
+        assert S.find_duplicates([st, epa]) == {st["event_id"]: epa["event_id"]}, text
+    st, epa = _same_day(day, waterbody_text="storm drain to Test Creek")       # names the water: the state wins
+    assert S.find_duplicates([st, epa]) == {epa["event_id"]: st["event_id"]}
+    st, epa = _same_day(day)                                                     # gives no water text at all
+    assert S.find_duplicates([st, epa]) == {epa["event_id"]: st["event_id"]}
+
+
+def test_a_month_or_year_record_for_a_period_not_yet_over_has_no_time_problem(monkeypatch):
+    """A month or year record ends at the period's end by construction: an end after the fetch is not a typing
+    error and puts no validation error on the record."""
+    monkeypatch.setattr(S, "_RULES", BOUND_RULES)
+    m = ev(status="ended", event_type="cso", started_at="2026-08-01T00:00:00-04:00", ended_at="2026-08-31T23:59:00-04:00",
+           time_precision="month", fetched_at=iso(NOW - H))
+    y = ev(status="ended", event_type="annual_total", started_at="2026-01-01", ended_at="2026-12-31",
+           time_precision="year", fetched_at=iso(NOW - H))
+    for e in (m, y):
+        assert S.end_not_credible(e, NOW, BOUND_RULES) is None and S.time_problem(e, NOW, BOUND_RULES) is None

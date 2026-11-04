@@ -387,7 +387,8 @@ def end_not_credible(ev: dict, now: datetime | None = None, rules: dict | None =
     (fetched_at, else the build time): most likely a typing error in the source (a 2036 for 2026), which would
     otherwise colour red for years (generic-ingesters re-check R6). The record then has no confirmed end: it follows
     the rules for records with none (docs/plan.md §2), and the published value stays in the record as given.
-    Advisories keep their end, the authority's own (a seasonal shellfish closure may run for months)."""
+    Advisories keep their end, the authority's own (a seasonal shellfish closure may run for months), and so do
+    month and year records (their end is the period's end; they set no window)."""
     en = parse_time(ev.get("ended_at"))
     if en is None:
         return None
@@ -396,6 +397,8 @@ def end_not_credible(ev: dict, now: datetime | None = None, rules: dict | None =
         return f"ended_at {ev.get('ended_at')} is before started_at {ev.get('started_at')}; the end is ignored"
     if now is None or ev.get("event_type") in ADVISORY_TYPES or ev.get("status") in ("advisory_active", "advisory_lifted"):
         return None
+    if ev.get("event_type") == "annual_total" or ev.get("time_precision") in COARSE_PRECISION:
+        return None     # a month or year record ends at the period's end by construction, and sets no window
     days = end_limit_days(load_rules() if rules is None else rules)
     if days is None:
         return None
@@ -2435,8 +2438,9 @@ def find_duplicates(events: list[dict]) -> dict[str, str]:
     permit and day wins over ECHO records; among ECHO records the one with more fields wins.
     Fixtures and month/year records take no part.
     A report that reached a water never becomes the duplicate of one that says the discharge reached no water
-    (reached_no_water: "Reach Waterbody: No", EPD's dry-land rows): the dry-land record is linked as the duplicate of
-    the ECHO report instead, so the water keeps its colour (GA review 2026-11-04 P2-11). Two reports that name
+    (reached_no_water: "Reach Waterbody: No", EPD's dry-land rows) or that names no water (no_receiving_water: "N/A",
+    the ground, a storm drain): the dry-land record is linked as the duplicate of the ECHO report instead, so the
+    water keeps its colour (GA review 2026-11-04 P2-11). Two reports that name
     different particular waters (waters_differ) are not linked at all: they may be two spills of one system."""
     groups = defaultdict(list)
     for ev in events:
@@ -2451,8 +2455,10 @@ def find_duplicates(events: list[dict]) -> dict[str, str]:
     dry = {}
 
     def is_dry(e):
+        """The record says the discharge reached no water, or names none (a placeholder, the ground, a storm drain:
+        no_receiving_water); either way it colours nothing."""
         if e["event_id"] not in dry:
-            dry[e["event_id"]] = bool(reached_no_water(e))
+            dry[e["event_id"]] = bool(reached_no_water(e) or no_receiving_water(e))
         return dry[e["event_id"]]
 
     def same_place(a, b):
