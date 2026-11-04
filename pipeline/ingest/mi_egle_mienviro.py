@@ -376,7 +376,7 @@ OWNER_CUE = re.compile(
     r"field\s+of|parcel\s+of|driveway\s+of|basement\s+of|homeowners?|residents?|neighbou?rs?|tenants?)[ ]{1,2})"
     r"((?:(?:Mr|Mrs|Ms|Miss|Dr)\.?[ ]{1,2})?[A-Z][\w'.-]*(?:[ ]{1,2}(?:&|and)?[ ]{0,2}[A-Z][\w'.-]*){0,3})")
 # a house number in the free text: a number of two to six digits before a capitalised word or a state highway
-# ("Driveway of <number> Island Lake", "between residences <number> Kingsley and ...", "yard at <number> M-28"),
+# ("Driveway of <number> <name> Lake", "between residences <number> <street> and ...", "yard at <number> M-28"),
 # or after "at" ("Ditch at <number> traveling east"); not a quantity ("40 Feet", "23 Mile Road"), a time, or a number
 # a route, lot, station, outfall or drain word stands before ("Lot 187", "Drain #264", "Station 23")
 ADDR_NUMBER = re.compile(
