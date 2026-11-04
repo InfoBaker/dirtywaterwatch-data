@@ -249,15 +249,34 @@ def _bracketed_person(s: str) -> bool:
     return (2 <= len(words) <= 3 and all(NAME_WORD.match(w) for w in words) and not _site_words(s)) or _person(s)
 
 
+ROLE = re.compile(r"^(owner|manager|operator|superintendent|director|supervisor|president|agent|contact)$", re.I)
+SEGMENT_SEP = re.compile(r"\s+[-\u2013\u2014/]\s+|\s*,\s*")
+
+
 def party_name(v) -> str | None:
     """A filer-typed body name with no person in it: a value that is only a person's name becomes "[name removed]";
-    a person's name in brackets after the body is cut."""
+    a person's name in brackets after the body is cut, and so is one joined to it by a dash or a comma ("<body> -
+    <given> <surname>", "<given> <surname> - <body>", "<given> <surname>, Owner")."""
     s = clean(v)
     if not s:
         return None
     s = BRACKETED.sub(lambda m: "" if _bracketed_person(clean(m.group(1))) else m.group(0), s).strip()
     if _person(s):
         return NAME_REMOVED
+    segs = SEGMENT_SEP.split(s)
+    if len(segs) > 1:
+        seps = SEGMENT_SEP.findall(s)
+        role = any(ROLE.match(x) for x in segs)
+        drop = {i for i, x in enumerate(segs)
+                if _person(x) or ROLE.match(x) or (role and _bracketed_person(x))}
+        if drop:
+            kept = [i for i in range(len(segs)) if i not in drop]
+            if not kept:
+                return NAME_REMOVED
+            out = segs[kept[0]]
+            for i in kept[1:]:
+                out += seps[i - 1] + segs[i]
+            s = out.strip(" ,-")
     return scrub_text(s) or None
 
 
@@ -348,7 +367,9 @@ def scrubbed_row(r: dict) -> dict:
     if out.get("responsiblePartyName") == NAME_REMOVED and out.get("siteName") and not _site_words(out["siteName"]):
         out["siteName"] = NAME_REMOVED
     if out.get("landImpacted"):
-        out["landImpacted"] = strip_house_numbers(scrub_text(clean(out["landImpacted"])))
+        land = re.sub(r"(?i)(\baddress(?:\s+of)?:?\s*)\d{1,6}[A-Za-z]?\b", r"\1[house number removed]",
+                      clean(out["landImpacted"]))
+        out["landImpacted"] = strip_house_numbers(scrub_text(land))
     for k in ("featureDescription", "featureNumber", "dischargeType", "receivingWater", "dischargeQuality"):
         if isinstance(out.get(k), str):
             out[k] = scrub_text(out[k])

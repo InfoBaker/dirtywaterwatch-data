@@ -264,3 +264,21 @@ def test_permit_index_reads_michigan_rows_only():
              {"id": "oh-a", "state": "OH", "npdes_permit": "OH0000001", "npdes_permits": []}]
     idx = M.permit_index(rows_)
     assert idx == {"MI0000001": "mi-a", "3112A-0001": "mi-a"}
+
+
+@pytest.mark.parametrize("given,want", [
+    ("Pat Example - Sample Lake Sewer", "Sample Lake Sewer"),
+    ("Sample County WRC - Pat Example", "Sample County WRC"),
+    ("Pat Example, Owner", "[name removed]"),
+    ("Sample Heights (Pat Example)", "Sample Heights"),
+    ("Sample Holdings, LLC", "Sample Holdings, LLC"),
+    ("Sampleton, City of", "Sampleton, City of"),
+    ("Western Sample Utilities Authority (WSUA)", "Western Sample Utilities Authority (WSUA)"),
+])
+def test_a_persons_name_joined_to_a_body_is_cut_and_the_body_kept(given, want):
+    assert M.party_name(given) == want
+
+
+def test_an_address_typed_on_the_land_reached_loses_its_number():
+    out = M.scrubbed_row({"landImpacted": "Address 51751 Example Road. grassy area by the cleanout"})
+    assert "51751" not in out["landImpacted"] and "grassy area" in out["landImpacted"]
