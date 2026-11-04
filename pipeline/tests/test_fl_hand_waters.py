@@ -5,6 +5,7 @@ Run from pipeline/: python -m pytest tests/test_fl_hand_waters.py -q
 """
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -16,6 +17,8 @@ from shapely.geometry import Polygon  # noqa: E402
 
 from build import status as S  # noqa: E402
 from ingest import waters_from_nhd as N  # noqa: E402
+
+ROOT = Path(__file__).resolve().parents[2]
 
 
 class _States:
@@ -183,3 +186,14 @@ def test_the_hourly_run_restores_the_outlines_where_the_status_build_reads_them(
     skip = next(line for line in mk.splitlines() if line.startswith("INGEST_SKIP"))
     assert "fl_dep_pnp" not in skip and "waters-nhd" in next(l for l in mk.splitlines() if l.startswith("INGEST_EXTRA"))
     assert "__main__" in (root / "pipeline" / "ingest" / "fl_dep_pnp.py").read_text()
+
+
+def test_each_florida_hand_records_note_carries_its_specs_evidence_as_written():
+    # review of 2026-11-04 (P3-1): the GNIS point of Johns Pass lies just inside the Census's Boca Ciega Bay polygon, 95 m
+    # from the pass polygon the record is; the evidence says so, and the record on file carries the spec's words
+    recs = {w["name"]: w for w in json.loads((ROOT / "data" / "waters-nhd.json").read_text())["waters"]
+            if w.get("state") == "FL" and w.get("source") == "census"}
+    for h in FL_HAND:
+        assert h["why"] in recs[h["name"]]["note"], h["name"]
+    jp = next(h for h in FL_HAND if h["name"] == "Johns Pass")
+    assert "holds that point" not in jp["why"] and "95 m from that point" in jp["why"]
