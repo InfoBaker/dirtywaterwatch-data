@@ -1,0 +1,19 @@
+---
+state: FL
+name: Florida
+updated: 2026-11-04
+---
+
+**What the law requires.** Under section 403.077 of the Florida Statutes, the owner or operator of a facility must give the Department of Environmental Protection (DEP) a notice within 24 hours of discovering any pollution release that must be reported to the State Watch Office. For sewage, DEP's rules make that any sewer overflow of 1,000 gallons or more, or any that may endanger health or the environment. DEP must post every notice on its website within 24 hours of receiving it and e-mail it to subscribers by county. The duty to publish falls on DEP, not on the utility. No period after a spill is set in law. The Department of Health samples coastal beaches and may issue health advisories when results fail its standards (section 514.023); county health departments also issue no-contact advisories after some spills, at their discretion. Florida has no combined sewers.
+
+**What is published.** DEP's Public Notice of Pollution service lists every notice since July 2017 with the time DEP received it, the release start and end dates, whether the release is ongoing, the facility, the county and a point. About three notices in four are untreated or partly treated sewage; the rest are treated effluent, reclaimed water, fuel, chemical and other spills, which this site leaves out of its sewage reports. Most sewage notices use a form that gives the wastewater type, cause, volume spilled and recovered, and whether a water body was affected. The Department of Health publishes each beach sample with a yes or no for an advisory, and DEP publishes algal bloom sampling by site.
+
+**What is not published.** The name of the receiving water: the form asks only whether a water body was affected, yes or no, and this site reads a name only when the description gives one. The time a spill started: only the date. Volumes are often blank in the first notice. Whether the public near the spill was told. County health advisories after spills are not collected in one place.
+
+**What stands in the way.** The notice form could require the receiving water's name and the start time. The public service also exposes the names, e-mail addresses and phone numbers of the people who file notices, and the notice text often names staff and residents; this site does not collect those fields and removes names from the text it shows. No licence is stated for the data.
+
+**Known problems in the data.** The service renumbers its rows when it is rebuilt, so this site identifies a notice by its State Watch Office number and the time it was received. The number is typed by the filer and is sometimes missing or reused. Later notices about the same incident (updates and final reports) are linked to the first. Notice times are stored as Florida clock time. Some notices still read "ongoing" years later because no update was filed.
+
+**What this site does about it.** Untreated and partly treated sewage is shown as a sewage report; treated effluent and reclaimed water are not. A notice filed by a member of the public is listed but sets no status. A notice that says no water body was affected is kept but not placed on a water. Dates without a time are shown as dates. With no period in law, this site applies 72 hours of caution from a reported end. Beach advisories and algal blooms are shown in their own categories.
+
+Of this state's reports on this site, {{dated_share}} are dated to the day or better; the newest dated report is from {{latest_dated}}. Coverage: {{grade}}.
