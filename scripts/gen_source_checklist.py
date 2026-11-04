@@ -3,11 +3,14 @@
 
     python3 scripts/gen_source_checklist.py --check            # md must equal what the json generates
     python3 scripts/gen_source_checklist.py --add md va dc     # append research/<area>/sources.json rows, rewrite both files
+    python3 scripts/gen_source_checklist.py --refresh ga nc    # replace an area's rows with its research rows, in place
 
 The json is a list of the research rows in research order (area by area), each with an `area` field
 added last. The md has a counts table and, per area, a table sorted by status (used, candidate, watch,
 rejected, unreachable) then by id. An id that is already in the json is not added twice (the research
-rows of one area are never edited here; a clash with another area needs a hand decision).
+rows of one area are never edited here; a clash with another area needs a hand decision). --refresh takes an area
+already in the checklist back to what research/<area>/sources.json says now (a status that changed, a row added),
+keeping the area's place in the list; an id another area holds is refused the same way.
 """
 from __future__ import annotations
 
@@ -90,6 +93,22 @@ def load() -> list[dict]:
     return json.loads(JSON_PATH.read_text())
 
 
+def refresh(rows: list[dict], area: str, research: list[dict]) -> list[dict]:
+    """The checklist with the area's rows replaced by its research rows (scrubbed, in research order) where the area's
+    first row stood."""
+    at = next((i for i, r in enumerate(rows) if r["area"] == area), None)
+    if at is None:
+        raise SystemExit(f"{area}: not in the checklist (use --add)")
+    others = {r["id"] for r in rows if r["area"] != area}
+    clash = [r["id"] for r in research if r["id"] in others]
+    if clash:
+        raise SystemExit(f"{area}: ids another area holds: {clash}")
+    keep = [r for r in rows if r["area"] != area]
+    new = [{**scrub_row(r), "area": area} for r in research]
+    before = sum(1 for r in rows[:at] if r["area"] != area)
+    return keep[:before] + new + keep[before:]
+
+
 def main(argv: list[str]) -> int:
     rows = load()
     if argv[:1] == ["--check"]:
@@ -108,6 +127,10 @@ def main(argv: list[str]) -> int:
             for r in new:
                 rows.append({**scrub_row(r), "area": area})
                 have.add(r["id"])
+        JSON_PATH.write_text(json.dumps(rows, indent=1, ensure_ascii=False) + "\n")
+    if argv[:1] == ["--refresh"]:
+        for area in argv[1:]:
+            rows = refresh(rows, area, json.loads((ROOT / "research" / area / "sources.json").read_text()))
         JSON_PATH.write_text(json.dumps(rows, indent=1, ensure_ascii=False) + "\n")
     MD_PATH.write_text(render(rows))
     print(f"{len(rows)} rows")
