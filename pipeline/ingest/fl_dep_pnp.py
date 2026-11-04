@@ -115,10 +115,19 @@ Record rules
     first "<n> gallons" not next to "recovered" (raw._volume_basis says which). Volume Recovered is
     kept in raw.
   - Water: the notice gives only "Waterbodies Impacted: Y/N" (raw.reached_water true/false; N means
-    the report is kept but not placed on a water). A water named in the text after "into", "to",
-    "impacted", "reached" ... ("Storm drain discharges into Pottsburg Creek") is waterbody_text
+    the report is kept but not placed on a water, unless its text names a water reached: below). A
+    water named in the text after "into", "to", "impacted", "reached" ... ("Storm drain discharges
+    into Pottsburg Creek") is waterbody_text
     (raw._water_names lists every one found); water_slugs stay empty until Florida's water records
     are built.
+  - The text against the form (owner, 2026-11-04): a notice whose form says "Waterbodies Impacted: N" while its
+    text says the sewage entered, may have entered, reached, impacted, discharged to or flowed into a named water
+    ("overflowed and flowed into Example Creek", "may have entered Example Bayou", "the storm drain discharges into
+    the Example River"), not negated in its part of the sentence ("did not flow into", "no discharge to", "none
+    entered", "contained before reaching", "prevented from entering"), is placed on that water: raw.reached_water
+    "text", waterbody_text that water, raw._reached_water_basis TEXT_REACHED_BASIS, raw._reached_water_words the
+    words, raw._form_waterbodies_impacted "N". build/status.py colours such a record with the site's caution only
+    (rule text_caution, never red). text_reached() is the rule.
   - Coordinates: LATITUDE/LONGITUDE (WGS84 decimal degrees, typed or mapped by the filer; DATUM and
     MAP_SOURCE_SCALE kept). A point outside Florida is dropped (raw._coords_rejected).
     coord_precision_m from the number of decimals given.
@@ -845,10 +854,21 @@ def volume(text: str, tf: dict) -> tuple[int | None, str | None, str, str | None
 
 WATER_KINDS = (r"Creek|River|Bay|Bayou|Canal|Lake|Lagoon|Waterway|Sound|Harbor|Harbour|Inlet|Branch|Slough|Run|"
                r"Springs?|Estuary|Gulf\s+of\s+(?:Mexico|America)|Atlantic\s+Ocean|Ocean|Basin|Marsh|Cove|Pass")
+# a water's name as the notices write it ("Pottsburg Creek", "the St. Johns River", "C-51 Canal", "ICW")
+NAME_PART = (rf"(?:(?:[A-Z][\w'.-]*|[A-Z]-?\d+|St\.?|of|the)\s+){{0,4}}(?:{WATER_KINDS})\b(?:\s+[A-Z]-?\d+[A-Z]?)?"
+             rf"|(?:Lake|Canal)\s+[A-Z][\w'-]+|(?:Intracoastal(?:\s+Waterway)?|ICW)\b|C-\d+[A-Z]?\s+Canal|Canal\s+C-\d+[A-Z]?")
+# the same for the text-against-the-flag rule (text_reached), which also reads "Lake <Name>" and "Canal <Name>" (tried
+# first, else "Lake" alone, a kind, ends the match and the name is lost; not when the words after them end in a kind,
+# "Lake Worth Lagoon", or make a place, "Lake County", "Lake Shore Dr") and the Intracoastal however it is spelt
+# ("intercoastal waterway"). water_names keeps NAME_PART: changing it would move the water of records the rule does
+# not touch.
+REACH_NAME_PART = (rf"(?:Lake|Canal)\s+(?!(?:County|City|Town|Village|Park|Estates|Shores?|Heights|Point|Road|Rd|Street|"
+                   rf"St|Avenue|Ave|Drive|Dr|Boulevard|Blvd)\b)[A-Z][\w'-]+"
+                   rf"(?!\s+(?:[A-Z][\w'.-]*\s+){{0,3}}(?:{WATER_KINDS})\b)"
+                   rf"|(?i:in(?:tra|ter)coastal(?:\s+waterway)?)\b|{NAME_PART}")
 WATER_NAME = re.compile(
     rf"(?i:\b(?:into|to|reached|entered|entering|impacted|impacting|affected|affecting|toward|towards|in|of)\s+(?:the\s+)?)"
-    rf"((?:(?:[A-Z][\w'.-]*|[A-Z]-?\d+|St\.?|of|the)\s+){{0,4}}(?:{WATER_KINDS})\b(?:\s+[A-Z]-?\d+[A-Z]?)?"
-    rf"|(?:Lake|Canal)\s+[A-Z][\w'-]+|(?:Intracoastal(?:\s+Waterway)?|ICW)\b|C-\d+[A-Z]?\s+Canal|Canal\s+C-\d+[A-Z]?)")
+    rf"({NAME_PART})")
 NOT_WATER_AFTER = re.compile(r"^\s*(?:Beach|Rd|Road|Dr|Drive|Blvd|Boulevard|Ave|Avenue|St|Street|Ln|Lane|Way|Ct|Court|Cir|Circle|Pkwy|"
                              r"Parkway|Hwy|Highway|Trl|Trail|Pl|Place|Ter|Terrace|Estates|Apartments|Subdivision|"
                              r"Elementary|School|Park|WRF|WWTP|WWTF|AWT|Plant|Utilities|Utility|Lift|Pump|HOA|Village|"
@@ -857,22 +877,92 @@ NOT_WATER_NAME = re.compile(r"(?i)^(?:the\s+)?(?:storm|retention|detention|drain
                             r"\b(?:retention|detention|stormwater|storm)\b")
 
 
+def _water_name_at(m: re.Match, text: str, group=1) -> str | None:
+    """The water name a WATER_NAME (or REACHED_SHAPE) match holds, or None when it is a place, a road or a kind."""
+    name = SPACE.sub(" ", m.group(group)).strip(" .,;:")
+    tail = text[m.end():m.end() + 25]
+    if NOT_WATER_AFTER.match(tail) or NOT_WATER_NAME.search(name) or \
+            re.match(r"(?i)(?:the\s+)?(?:city|town|village|county)\s+of\b", name):
+        return None                           # "City of Crystal River": a place, not a water
+    name = re.sub(r"^(?:the|of)\s+", "", name, flags=re.I)
+    if len(name.split()) == 1 and re.fullmatch(rf"(?:{WATER_KINDS})", name, re.I):
+        return None                           # "the bayou", "the harbor": a kind of water, not a name
+    if not re.match(r"[A-Z]|ICW|(?i:in(?:tra|ter)coastal)", name):
+        return None
+    return name
+
+
 def water_names(text: str) -> list[str]:
     out = []
     for m in WATER_NAME.finditer(text or ""):
-        name = SPACE.sub(" ", m.group(1)).strip(" .,;:")
-        tail = text[m.end():m.end() + 25]
-        if NOT_WATER_AFTER.match(tail) or NOT_WATER_NAME.search(name) or \
-                re.match(r"(?i)(?:the\s+)?(?:city|town|village|county)\s+of\b", name):
-            continue                          # "City of Crystal River": a place, not a water
-        name = re.sub(r"^(?:the|of)\s+", "", name, flags=re.I)
-        if len(name.split()) == 1 and re.fullmatch(rf"(?:{WATER_KINDS})", name, re.I):
-            continue                          # "the bayou", "the harbor": a kind of water, not a name
-        if not re.match(r"[A-Z]|ICW|Intracoastal", name):
-            continue
-        if name not in out:
+        name = _water_name_at(m, text)
+        if name and name not in out:
             out.append(name)
     return out
+
+
+# ---------------------------------------------------------------- the text against the form's flag
+# The owner's decision of 2026-11-04 (afternoon, item 2): a notice whose form says "Waterbodies Impacted: N" while its
+# text says the sewage entered, may have entered, reached, discharged to or flowed into a named water is placed on that
+# water under the site's caution, and the record says the form's flag said otherwise (err on the side of safety).
+# raw.reached_water is then "text" (the form's value stays in raw._form_waterbodies_impacted) and
+# raw._reached_water_basis says why; build/status.py reads "text" as a placement on the named water that colours only
+# the site's caution, never red (no authority window applies to it).
+TEXT_REACHED_BASIS = "the notice's text names the water; the form's flag said no water was reached"
+# the shapes: "entered (into) X", "entering X", "may have entered X", "possibly reached X", "reached X", "impacted X",
+# "discharged to/into X", "flowed to/into X" and any "into X" ("the storm drain discharges into X Creek"); a present
+# "enter" or "reach" counts only after may, might or could ("may enter X Creek"), never alone ("to enter")
+REACHED_SHAPE = re.compile(
+    r"(?i:\b(?P<verb>(?:(?:may|might|could)\s+(?:have\s+)?(?:possibly\s+)?|possibly\s+|potentially\s+|likely\s+|"
+    r"probably\s+)"
+    r"(?:entered|enter|reached|reach|impacted|impact|gone\s+into|went\s+into|flowed\s+(?:in)?to|flow\s+(?:in)?to|"
+    r"discharged\s+(?:in)?to|discharge\s+(?:in)?to)"
+    r"|(?:entered|enters|entering|reached|reaches|reaching|impacted|impacting)(?:\s+into)?"
+    r"|discharg(?:ed|es|ing)\s+(?:in)?to|flow(?:ed|s|ing)\s+(?:in)?to|into)"
+    r"\s+(?:the\s+)?(?:nearby\s+|adjacent\s+|neighboring\s+|neighbouring\s+)?)"
+    rf"(?P<name>{REACH_NAME_PART})")
+# a statement that the sewage did not reach the water: a negation in the same part of the sentence before the verb
+# ("did not flow into", "no discharge to", "none entered", "prevented it from entering", "contained before reaching");
+# an unsure one ("not known if", "not sure whether") is no negation: "may have" is the reason for the rule
+REACH_NEGATION = re.compile(
+    r"(?i)\b(?:no|not|never|none|nothing|neither|nor|prevent\w*|averted|contained|stopped|kept|blocked|without)\b|n't\b")
+NOT_A_NEGATION = re.compile(r"(?i)\bnot\s+(?:sure|known|certain|clear|determined|confirmed|yet\s+known)\b|"
+                            r"\bno\s+(?:longer)\b|\bnot\s+only\b")
+NEGATION_RIGHT_BEFORE = re.compile(r"(?i)\b(?:before|from|prior\s+to)\s+(?:it\s+|they\s+|any\s+)?(?:could\s+|can\s+)?$")
+# where the part of a sentence that a negation governs begins: a full stop (not "St." or "Mt."), a semicolon, a line
+# break, a comma, a colon (after a label of DEP's form), "and", "but", "however", "although", "while"
+CLAUSE_START = re.compile(r"(?<![A-Z][a-z])(?<!\b[A-Z])\.\s|[;:\n,]|"
+                          r"(?i:\b(?:and|but|however|although|though|while|then)\b)")
+
+
+def _negated(text: str, start: int) -> bool:
+    """Whether the verb at start is negated within its part of the sentence."""
+    before = text[max(0, start - 200):start]
+    cuts = list(CLAUSE_START.finditer(before))
+    part = before[cuts[-1].end():] if cuts else before
+    if NEGATION_RIGHT_BEFORE.search(part):
+        return True
+    part = NOT_A_NEGATION.sub(" ", part)
+    return bool(REACH_NEGATION.search(part))
+
+
+# after the name: a ditch or drain named after the water ("entered Example Lake drainage ditch") is not the water, and
+# a discharge "via our treatment system" is a plant's own permitted outflow, not the spill
+NOT_REACHED_AFTER = re.compile(r"(?i)^\s*(?:drainage|ditch(?:es)?|culverts?|swales?|storm\s*(?:drains?|water|sewers?))\b|"
+                               r"^\s*(?:via|through)\s+(?:our|out|the|its|their)\s+(?:\w+\s+)?treatment\b")
+
+
+def text_reached(text: str) -> tuple[str, str] | None:
+    """(water name, the words that say so) when the notice's text says the sewage entered, may have entered, reached,
+    discharged to or flowed into a named water, not negated; else None. The first such water is returned."""
+    for m in REACHED_SHAPE.finditer(text or ""):
+        name = _water_name_at(m, text, "name")
+        if not name or _negated(text, m.start()) or NOT_REACHED_AFTER.match(text[m.end():m.end() + 40]):
+            continue
+        if re.fullmatch(r"(?i)in(?:tra|ter)coastal(?:\s+waterway)?", name):
+            name = "Intracoastal Waterway"            # "intercoastal waterway", as filers often spell it
+        return name, SPACE.sub(" ", m.group(0)).strip(" .,;:")
+    return None
 
 
 NPDES_RE = re.compile(r"\bFL\s?0\d{6}\b")
@@ -1009,9 +1099,18 @@ def _record(a, base, raw, text, facility, kind, et, rule, prev, permits):
     elif wi == "N":
         raw["reached_water"] = False
     names = water_names(tf.get("description") or text)
+    water = names[0] if names else None
+    said = text_reached(text) if wi == "N" else None
+    if said:
+        # the text wins over the form's N (owner, 2026-11-04): placed on the water the text names, site caution only
+        water, words = said
+        raw["_form_waterbodies_impacted"] = "N"
+        raw["reached_water"] = "text"
+        raw["_reached_water_basis"] = TEXT_REACHED_BASIS
+        raw["_reached_water_words"] = words
+        names = [water] + [n for n in names if n != water]
     if names:
         raw["_water_names"] = names
-    water = names[0] if names else None
     raw["_water"] = {"why_none": (f"named in the notice text ({water!r}); no Florida water record yet" if water else
                                   "the notice names no receiving water (it gives only Waterbodies Impacted Y/N)")}
 
