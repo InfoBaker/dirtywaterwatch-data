@@ -220,3 +220,14 @@ def test_a_persons_name_from_an_owner_field_or_set_after_the_record_is_removed(t
     p = common.write_events("x-late", [rec], path=tmp_path / "x-late.json")
     out = json.loads(p.read_text())["records"][0]
     assert out["discharger_name"] == "[name removed]" and out["npdes_permit"] == "XX0000003"
+
+
+def test_operator_names_with_a_facility_abbreviation_or_business_word_are_kept():
+    """Operator names that read like a person's name but carry a facility abbreviation, a school or district
+    abbreviation or a business word (placeholders here, not real operators)."""
+    for name in ("Pat Example Foods", "Pat Example Elem", "Pat Example Elem Sch", "Pat Example PSD", "Pat Example WWSL",
+                 "Pat Example RWRF", "Pat Example AWTF", "Pat Example WQTC", "Pat Example Subdiv", "Pat Example CSOs",
+                 "Pat Example MUA", "Pat Example MSD", "Pat Example Univ", "Pat Example Products", "Pat Example Mfg",
+                 "Pat Example Campground", "Pat Example Nursing Home", "Pat Example & Sons"):
+        r = common.event(source_id="x-test", source_record_id="4", discharger_name=name, discharger_id="op-1")
+        assert r["discharger_name"] == name and r["discharger_id"] == "op-1", name
