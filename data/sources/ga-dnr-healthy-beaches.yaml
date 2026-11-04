@@ -1,0 +1,26 @@
+id: "ga-dnr-healthy-beaches"
+name: "Georgia DNR Coastal Resources Division Healthy Beaches (with Coastal Health District)"
+url: "https://coastalgadnr.org/HealthyBeaches"
+homepage: "https://coastalgadnr.org/HealthyBeaches"
+kind: "html"
+level: "state"
+# Notes (research/ga, status used, verified fetched, checked 2026-11-04): Weekly enterococci at
+#   Tybee, St. Simons, Jekyll (and others) in season, monthly in winter; a map shows advisories.
+#   Advisory = avoid swimming, not closure. Swim Guide carries GA beaches. Built:
+#   pipeline/ingest/ga_dnr_beaches.py (feed ga-dnr-beaches) reads the map's GeoJSON
+#   (https://webapp.gadnr.org/beach/working/beach.geojson) behind
+#   https://coastalgadnr.org/HealthyBeaches.
+# Research notes: The research found the page at https://gadnrle.org/HealthyBeaches (search only);
+#   the feed reads https://coastalgadnr.org/HealthyBeaches and its GeoJSON (traced 2026-11-04).
+cadence: null
+license: "none stated"
+attribution: "Georgia DNR Coastal Resources Division"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory"]
+states: ["GA"]
+access: ["map_only", "html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-04"
