@@ -1,0 +1,116 @@
+{
+ "about": "Receiving-water names in Washington's reports (Ecology's sewage spill list and EPA's eRule tables, the records read on 2026-11-04: every report on Ecology's list since June 2026) that data/receiving-waters-national.json does not hold for WA, by name as the report gives it, with the number of reports giving each and the towns of the operators that reported them. Reports that say the sewage reached no water are left out. King County's status file names no water: its outfalls carry EPA's receiving water through data/outfalls-wa.json.",
+ "state": "WA",
+ "waters": 8,
+ "reports": 9,
+ "rows": [
+  {
+   "name": "Bellingham Bay",
+   "reports": 2,
+   "permits": [
+    "WA0023744"
+   ],
+   "sources": [
+    "wa-ecology-sewage-spills"
+   ],
+   "towns": [
+    "Bellingham"
+   ]
+  },
+  {
+   "name": "Dry Fork Creek",
+   "reports": 1,
+   "permits": [
+    "WA0044652"
+   ],
+   "sources": [
+    "wa-ecology-sewage-spills"
+   ],
+   "towns": [
+    "Pullman"
+   ]
+  },
+  {
+   "name": "Dyes Inlet",
+   "reports": 1,
+   "permits": [
+    "WA0030520"
+   ],
+   "sources": [
+    "wa-ecology-sewage-spills"
+   ],
+   "towns": [
+    "Kingston",
+    "Manchester",
+    "Poulsbo"
+   ]
+  },
+  {
+   "name": "Hood Canal",
+   "reports": 1,
+   "permits": [
+    "WA0037753"
+   ],
+   "sources": [
+    "wa-ecology-sewage-spills"
+   ],
+   "towns": [
+    "Union"
+   ]
+  },
+  {
+   "name": "Lake Stevens",
+   "reports": 1,
+   "permits": [
+    "WA0020893"
+   ],
+   "sources": [
+    "wa-ecology-sewage-spills"
+   ],
+   "towns": [
+    "Everett",
+    "Lake Stevens"
+   ]
+  },
+  {
+   "name": "Lake Union",
+   "reports": 1,
+   "permits": [
+    "WA0031682"
+   ],
+   "sources": [
+    "wa-ecology-sewage-spills"
+   ],
+   "towns": [
+    "Seattle"
+   ]
+  },
+  {
+   "name": "Mitchell Creek",
+   "reports": 1,
+   "permits": [
+    "WA0020893"
+   ],
+   "sources": [
+    "wa-ecology-sewage-spills"
+   ],
+   "towns": [
+    "Everett",
+    "Lake Stevens"
+   ]
+  },
+  {
+   "name": "Strait Juan de Fuca",
+   "reports": 1,
+   "permits": [
+    "WA0023973"
+   ],
+   "sources": [
+    "wa-ecology-sewage-spills"
+   ],
+   "towns": [
+    "Port Angeles"
+   ]
+  }
+ ]
+}
