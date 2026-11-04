@@ -38,7 +38,7 @@ def fetch(block: dict, sess) -> Fetched:
         if block.get("where"):
             params["$where"] = block["where"]
         pages, n = [], 0
-        while n < cap:
+        while True:
             page = get_json(sess, u["json"], {**params, "$offset": n})
             if isinstance(page, dict) and page.get("error"):
                 raise RuntimeError(f"Socrata error: {page.get('message') or page}")
@@ -46,6 +46,8 @@ def fetch(block: dict, sess) -> Fetched:
             n += len(page)
             if len(page) < size:
                 break
+            if n >= cap:
+                raise RuntimeError(f"reached max_rows ({cap}) before the end of the table: raise max_rows")
         out = Fetched(pages_doc(pages, dataset=block["dataset"]), "json")
     if block.get("metadata"):
         r = get(sess, u["meta"], timeout=(15, 60))

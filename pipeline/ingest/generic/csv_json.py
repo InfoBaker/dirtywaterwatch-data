@@ -92,8 +92,12 @@ def fetch(block: dict, sess) -> Fetched:
             pass
         else:
             url = None
-        if not got or n >= int(paging.get("max_rows", 200_000)):
+        if not got:
             break
+        if url and n >= int(paging.get("max_rows", 200_000)):
+            raise RuntimeError(f"reached max_rows ({paging.get('max_rows', 200_000)}) before the last page")
+        if len(pages) > 10_000:
+            raise RuntimeError("more than 10,000 pages: paging is not moving")
     return Fetched(pages_doc(pages, url=block["url"]) if len(pages) > 1 else json.dumps(pages[0]).encode(), "json")
 
 

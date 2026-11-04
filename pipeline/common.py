@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -34,8 +34,12 @@ PERSONAL_KEYS = re.compile(rf"(reporter|contact|created{_BY}|submitted{_BY}|modi
 KEEP_KEYS = re.compile(r"(class|type|category|count|id)$", re.I)   # reporterClass, operatorType: a kind, not a person
 NAME_KEYS = re.compile(r"^(first|last|middle|full|given|family|sur)[_ -]?name$|^surname$|^(fname|lname)$", re.I)
 EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
-PHONE_RE = re.compile(r"(?<![\w-])(?:\+?1[\s.-]?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]\d{4}(?![\w-])"
-                      r"|(?<![\w-])\d{3}[.-]\d{4}(?![\w-])")
+# a number range followed by a unit ("500-1000 feet", "100-1500 gallons", "830-1030 am") is not a phone number
+_NOT_A_RANGE = (r"(?!\s*(?:-|to\b)?\s*(?:(?:feet|foot|ft|yards?|yds?|miles?|meters?|metres?|km|inch(?:es)?|"
+                r"gallons?|gals?|gal|mg|mgd|gpm|gpd|liters?|litres?|cfs|lbs?|pounds?|tons?|hours?|hrs?|minutes?|"
+                r"mins?|seconds?|secs?|days?|am|pm|percent)\b|a\.m\.|p\.m\.|%))")
+PHONE_RE = re.compile(r"(?<![\w-])(?:\+?1[\s.-]?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]\d{4}(?![\w-])" + _NOT_A_RANGE +
+                      r"|(?<![\w-])\d{3}[.-]\d{4}(?![\w-])" + _NOT_A_RANGE, re.I)
 # Staff names inside free text: "Inspector Eddy", "Investigator Tom Watson", "contact Jane Doe at ...".
 # A name is one to three capitalised words or initials (an optional Mr/Ms/Dr first); common words that
 # follow these titles without being a name ("Inspector General", "Contact Tank at") are not taken.
@@ -377,6 +381,20 @@ def write_events(source_id: str, records: list[dict], ok: bool = True, error: st
            "count": len(records), "records": records}
     write_json(path, out)
     return path
+
+
+def end_after(start: datetime, dur, precision: str | None) -> tuple[datetime, str]:
+    """(end, basis) of a start plus an elapsed duration, in the start's zone. The arithmetic is done in UTC, so an
+    end across a clock change is the elapsed end (21:30 EST plus 31 days 10 h 30 min is 09:00 EDT, not 08:00). A
+    start known only to the day gives the latest end it allows: the date of (that day's end plus the duration),
+    precision day, so no clock time is invented and the caution window never ends early."""
+    tz = start.tzinfo
+    if precision in ("day", "month", "year"):
+        latest = (start.astimezone(UTC) + timedelta(days=1) + dur).astimezone(tz)
+        end = datetime(latest.year, latest.month, latest.day, tzinfo=tz)
+        return end, ("the start is known only to the day: the end is the day of the latest end it allows (the start "
+                     "day's end plus the duration), at day precision")
+    return (start.astimezone(UTC) + dur).astimezone(tz), "start plus the elapsed duration"
 
 
 VOLUME_RANGE = re.compile(r"\d\s*(?:-|\u2013|\u2014|to|and)\s*[<>~]?\s*\d")

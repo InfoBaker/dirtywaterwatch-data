@@ -2,8 +2,8 @@
 event record of docs/plan.md §3. Not a feed; the runner is `python -m ingest.generic <source-id>`.
 
 A `fetch` block in data/sources/<id>.yaml names the platform and endpoint, the safe fields (everything else is
-dropped before anything is read or stored), the free-text fields the scrubbers run on, and `record:`, one entry
-per event field. Each entry is a value spec:
+dropped before anything is mapped or written to a record), the free-text fields the scrubbers run on, and
+`record:`, one entry per event field. Each entry is a value spec:
 
   "FIELD"                                   the field's text (shorthand for {field: FIELD})
   {field: F}  or {field: [F1, F2]}          the first non-empty field; a fallback used is noted in raw._basis
@@ -13,14 +13,16 @@ per event field. Each entry is a value spec:
   upper / lower / regex + replace / map + unmapped / parse / transform   applied in that order
 
 Times (started_at, ended_at, reported_at, published_at, source_updated_at) take a time spec: {field, parse:
-datetime | epoch_ms | epoch_s | epoch_ms_wallclock, formats, time (a separate time-of-day field), precision};
-ended_at may instead be {duration: {days, hours, minutes}} (start plus duration). Naive times are read in the
-block's time_zone. A time is never invented: what the source does not give stays null.
+datetime | date | epoch_ms | epoch_s | epoch_ms_wallclock, formats, time (a separate time-of-day field),
+precision}; ended_at may instead be {duration: {days, hours, minutes}} (elapsed time after the start). Naive
+times are read in the block's time_zone, which every block that reads times names. A time is never invented: what
+the source does not give stays null, and a time outside 1990 to the day after the fetch is not used.
 """
 from __future__ import annotations
 
 import hashlib
 import importlib
+import importlib.util
 import json
 import math
 import re
@@ -30,11 +32,12 @@ from email.utils import parsedate_to_datetime
 from functools import lru_cache
 from zoneinfo import ZoneInfo
 
-from common import (DATA_DIR, EVENT_TYPES, KEEP_KEYS, NAME_KEYS, PERSONAL_KEYS, STATUSES, parse_volume_gal, read_json,
-                    scrub_text)
+from common import (DATA_DIR, EVENT_TYPES, KEEP_KEYS, NAME_KEYS, PERSONAL_KEYS, STATUSES, end_after, parse_volume_gal,
+                    read_json, scrub_text)
 
 TIME_FIELDS = ("started_at", "ended_at", "reported_at", "published_at", "source_updated_at")
 PRECISIONS = {"minute", "hour", "day", "month", "year", "poll"}
+TIME_KINDS = {"datetime", "date", "epoch_ms", "epoch_s", "epoch_ms_wallclock"}
 # record fields a value spec may fill (the runner owns event_id, source_id, fetched_at, raw and the water match)
 VALUE_FIELDS = {"source_record_id", "parent_event_id", "discharger_id", "discharger_name", "npdes_permit", "outfall_id",
                 "outfall_name", "waterbody_text", "coord_precision_m", "material", "authority", "advice_text",
@@ -43,26 +46,46 @@ VALUE_FIELDS = {"source_record_id", "parent_event_id", "discharger_id", "dischar
 SPECIAL_FIELDS = set(TIME_FIELDS) | {"volume"}
 SPEC_KEYS = {"field", "const", "template", "upper", "lower", "regex", "replace", "map", "unmapped", "match", "parse",
              "transform", "formats", "time", "time_formats", "precision", "duration", "otherwise", "unit",
-             "estimate", "text", "bare_number_text", "round"}
+             "estimate", "text", "bare_number_text"}
+FILTERS = {"default", "clean", "upper", "lower", "slug", "address", "address_key", "num", "int", "compact", "strftime",
+           "day"}
 DATE_FORMATS = ("%m/%d/%Y", "%m/%d/%y", "%Y-%m-%d", "%Y/%m/%d", "%d-%b-%Y", "%b %d, %Y", "%B %d, %Y")
 DATETIME_FORMATS = ("%m/%d/%Y %H:%M:%S", "%m/%d/%Y %H:%M", "%m/%d/%Y %I:%M:%S %p", "%m/%d/%Y %I:%M %p",
                     "%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M", "%m/%d/%y %H:%M", "%m/%d/%y %I:%M %p")
 TIME_FORMATS = ("%H:%M:%S", "%H:%M", "%I:%M %p", "%I:%M:%S %p", "%I:%M%p", "%H%M")
+# a date written with an exact midnight is a date (Socrata floating dates, CSV exports "11/01/2026 12:00:00 AM")
+MIDNIGHT_TEXT = re.compile(r"^\d{4}-\d{2}-\d{2}T00:00(:00(\.0+)?)?$|[ T]0?0:00(:00(\.0+)?)?$|\s12:00(:00)?\s*AM$", re.I)
 VOLUME_UNITS = {"gallons": 1, "gal": 1, "mg": 1_000_000, "million_gallons": 1_000_000, "liters": 0.264172,
                 "m3": 264.172}
+EARLIEST = datetime(1990, 1, 1, tzinfo=UTC)
+FUTURE_END_TOLERANCE = timedelta(hours=1)
+TIME_BASIS = {
+    "epoch_ms_wallclock": "The source stores local wall-clock time as if it were UTC: each epoch value is read as UTC "
+                          "and the wall-clock time labelled {tz}.",
+    "epoch_ms": "Epoch milliseconds (UTC), shown in {tz}.",
+    "epoch_s": "Epoch seconds (UTC), shown in {tz}.",
+    "datetime": "Local times as the source writes them, read in {tz} unless they carry an offset.",
+    "date": "Dates as the source writes them, in {tz}, at day precision.",
+}
 # the receiving-water text that names no surface water (kept as text, placed on no water)
 NO_WATER = re.compile(r"^\s*(n\s*/?\s*a|none|no|unknown|unk|null|nil|tbd|-+|0|ground|groundwater|ground water|"
                       r"the ground|on the ground|ground surface|grass|soil|land|storm ?drains?|storm ?sewer|"
                       r"storm ?drain system|side ditch|ditch)\s*[.!]*\s*$", re.I)
 NOT_REACHED = re.compile(r"\b(did not|didn'?t|does not|doesn'?t|never|no discharge)\s+(enter|reach|go)", re.I)
-# a person named after an honorific in free text; "Dr" is left out (in addresses it is Drive)
-HONORIFIC = re.compile(r"\b(?:Mr|Mrs|Ms|Mx|Miss)\.?\s+[A-Z][A-Za-z'’-]+(?:\s+[A-Z][A-Za-z'’-]+)?")
+# a person named after an honorific in free text, in any case ("MR. SURNAME" in a capitalised GIS field);
+# "Dr" is left out (in addresses it is Drive)
+HONORIFIC = re.compile(r"\b(?i:Mr|Mrs|Ms|Mx|Miss)\.?\s+[A-Z][A-Za-z'’-]+(?:\s+[A-Z][A-Za-z'’-]+)?")
 REDACTED = "[name removed]"
+# field names that can hold a private person (beyond common.strip_personal's rule): a review is required
+PERSONAL_FIELD = re.compile(r"(?:^|[_\s.-])name$|^name|owner|caller|resident|complain|report(?:ed)?[_\s-]?by|"
+                            r"submit|homeowner|tenant|occupant|witness|author", re.I)
 ADDR_WORDS = {"street": "st", "str": "st", "avenue": "ave", "av": "ave", "road": "rd", "drive": "dr", "lane": "ln",
               "court": "ct", "place": "pl", "boulevard": "blvd", "parkway": "pkwy", "highway": "hwy", "terrace": "ter",
               "circle": "cir", "square": "sq", "turnpike": "tpke", "east": "e", "west": "w", "north": "n",
               "south": "s", "mount": "mt", "saint": "st", "route": "rt", "rte": "rt", "pike": "pk", "trail": "trl"}
 TEMPLATE_RE = re.compile(r"\{([^{}]+)\}")
+# the modules a block may name a hook from: they hold registered functions only (no side effects on import)
+HOOK_MODULE = re.compile(r"^ingest\.(?:generic\.transforms|[a-z]{2}_transforms)$")
 
 
 class SpecError(ValueError):
@@ -79,6 +102,10 @@ class Ctx:
     source_updated_at: str | None = None
     extra: dict = field(default_factory=dict)       # platform metadata, transform caches
 
+    @property
+    def fetched_dt(self) -> datetime:
+        return datetime.fromisoformat(self.fetched_at.replace("Z", "+00:00"))
+
 
 # ---------------------------------------------------------------- small helpers
 
@@ -94,9 +121,14 @@ def slug(s) -> str:
     return re.sub(r"[^a-z0-9]+", "-", clean(s).lower()).strip("-")
 
 
-def norm_addr(s) -> str:
-    """A street address as a key: lower case, punctuation dropped, street words abbreviated."""
-    t = clean(s).lower().replace("&", " and ")
+def norm_addr(s, for_match: bool = False) -> str:
+    """A street address as a key: lower case, punctuation dropped, street words abbreviated. for_match also drops a
+    source's "(duplicate)" mark and a " - suffix" ("428 E Preston St - SSO Site #72" -> "428 e preston st")."""
+    t = clean(s).lower()
+    if for_match:
+        t = re.sub(r"\(\s*duplicate\s*\)|\bduplicate\b", " ", t)
+        t = re.sub(r"\s+-\s+.*$", "", t)
+    t = t.replace("&", " and ")
     t = re.sub(r"[^a-z0-9]+", " ", t)
     return " ".join(ADDR_WORDS.get(w, w) for w in t.split())
 
@@ -119,16 +151,23 @@ def listify(v) -> list:
     return [] if v is None else list(v) if isinstance(v, (list, tuple)) else [v]
 
 
+def hook(fn):
+    """Register a function a fetch block may name (transform, post, waters.matcher, a spec's transform)."""
+    fn._dww_hook = True
+    return fn
+
+
 def resolve(dotted: str):
-    """A Python function named by its dotted path ("ingest.generic.transforms.md_mde_coords")."""
+    """A registered hook named by its dotted path ("ingest.generic.transforms.md_mde_record"). Only the hook modules
+    (ingest.generic.transforms, ingest.<st>_transforms) are imported, and only functions marked @hook are returned."""
     mod, _, name = str(dotted).rpartition(".")
-    if not mod:
-        raise SpecError(f"transform {dotted!r} is not a dotted module.function path")
-    if not mod.startswith("ingest."):          # a registry row names pipeline code only
-        raise SpecError(f"transform {dotted!r} is outside the pipeline's ingest package")
+    if not mod or not HOOK_MODULE.match(mod):
+        raise SpecError(f"hook {dotted!r} is not in ingest.generic.transforms or an ingest.<st>_transforms module")
+    if importlib.util.find_spec(mod) is None:
+        raise SpecError(f"hook module {mod!r} does not exist")
     fn = getattr(importlib.import_module(mod), name, None)
-    if not callable(fn):
-        raise SpecError(f"transform {dotted!r} is not a function")
+    if not callable(fn) or not getattr(fn, "_dww_hook", False):
+        raise SpecError(f"hook {dotted!r} is not a registered hook function")
     return fn
 
 
@@ -162,11 +201,16 @@ def iso(dt: datetime | None) -> str | None:
     return dt.isoformat() if dt else None
 
 
+def scrub(text):
+    """Emails, phone numbers, staff titles and names after an honorific removed from free text."""
+    return scrub_people(scrub_text(text)) if isinstance(text, str) else text
+
+
 # ---------------------------------------------------------------- templates
 
-def _filter(v, name: str, arg: str | None, ctx: Ctx):
+def _filter(v, name: str, arg: str | None, ctx: Ctx | None):
     if name == "default":
-        return v if clean(v) else arg
+        return v if clean(v[0] if isinstance(v, tuple) else v) else arg
     if v is None or (isinstance(v, str) and not clean(v)):
         return v
     if name == "clean":
@@ -179,30 +223,31 @@ def _filter(v, name: str, arg: str | None, ctx: Ctx):
         return slug(v)
     if name == "address":
         return norm_addr(v)
+    if name == "address_key":
+        return norm_addr(v, for_match=True)
     if name == "num":
         return fmt_num(v)
     if name == "int":
         f = fnum(v)
         return str(int(f)) if f is not None else clean(v)
-    if name == "compact":           # a time as a key: 20260523T0205 at minute precision, 20260523 at day
-        dt, prec = v if isinstance(v, tuple) else (v, None)
-        if isinstance(dt, str):
-            try:
-                dt = datetime.fromisoformat(dt)
-            except ValueError:
-                return clean(dt)
-        if isinstance(dt, datetime):
-            return dt.strftime("%Y%m%d") + (dt.strftime("T%H%M") if prec not in ("day", "month", "year") else "")
-        return clean(dt)
-    if name == "strftime":
-        dt = v[0] if isinstance(v, tuple) else v
-        if isinstance(dt, str):
+    dt, prec = v if isinstance(v, tuple) else (v, None)
+    if isinstance(dt, str):
+        try:
             dt = datetime.fromisoformat(dt)
+        except ValueError:
+            return clean(dt)
+    if not isinstance(dt, datetime):
+        return clean(dt)
+    if name == "compact":           # a time as a key: 20260523T0205 at minute precision, 20260523 at day
+        return dt.strftime("%Y%m%d") + (dt.strftime("T%H%M") if prec not in ("day", "month", "year") else "")
+    if name == "day":
+        return dt.strftime("%Y-%m-%d")
+    if name == "strftime":
         return dt.strftime(arg or "%Y-%m-%d")
     raise SpecError(f"unknown template filter {name!r}")
 
 
-def render(template: str, row: dict, rec: dict | None, ctx: Ctx) -> str | None:
+def render(template: str, row: dict, rec: dict | None, ctx: Ctx | None) -> str | None:
     """'{npdes_no|upper|slug|default:none}-{@started_at|compact}' -> text, or None when a field it names is empty
     and has no default. {@x} reads the record field x being built (a time with its precision for |compact)."""
     empty = False
@@ -213,7 +258,7 @@ def render(template: str, row: dict, rec: dict | None, ctx: Ctx) -> str | None:
         if name.startswith("@"):
             f = name[1:]
             v = (rec or {}).get(f)
-            if f == "started_at" and v is not None:
+            if f in TIME_FIELDS and v is not None:
                 v = (v, (rec or {}).get("time_precision"))
         else:
             v = get(row, name)
@@ -231,9 +276,16 @@ def render(template: str, row: dict, rec: dict | None, ctx: Ctx) -> str | None:
     return None if empty else out
 
 
+def template_parts(template: str) -> list[tuple[str, list[str]]]:
+    out = []
+    for m in TEMPLATE_RE.finditer(template or ""):
+        p = [x.strip() for x in m.group(1).split("|")]
+        out.append((p[0], p[1:]))
+    return out
+
+
 def template_fields(template: str) -> list[str]:
-    return [m.group(1).split("|")[0].strip() for m in TEMPLATE_RE.finditer(template)
-            if not m.group(1).split("|")[0].strip().startswith("@")]
+    return [n for n, _ in template_parts(template) if not n.startswith("@")]
 
 
 # ---------------------------------------------------------------- value specs
@@ -279,7 +331,7 @@ def apply_map(v, spec: dict):
     return (None if un in (None, "null") else un), False
 
 
-def value(spec, row: dict, rec: dict | None, ctx: Ctx, notes: dict | None = None, target: str = ""):
+def value(spec, row: dict, rec: dict | None, ctx: Ctx | None, notes: dict | None = None, target: str = ""):
     spec = norm_spec(spec)
     if "const" in spec:
         v = spec["const"]
@@ -324,19 +376,36 @@ def _localize(dt: datetime, tz: ZoneInfo) -> datetime:
     return dt.replace(tzinfo=tz) if dt.tzinfo is None else dt
 
 
+def wall_note(dt: datetime) -> str | None:
+    """A note when a local wall-clock time is ambiguous (the hour repeated at fall-back: the first is used) or does
+    not exist (the hour skipped at spring-forward)."""
+    if dt is None or not isinstance(dt.tzinfo, ZoneInfo):
+        return None
+    a, b = dt.replace(fold=0), dt.replace(fold=1)
+    if a.utcoffset() == b.utcoffset():
+        return None
+    back = a.astimezone(UTC).astimezone(dt.tzinfo).replace(tzinfo=None)
+    if back != a.replace(tzinfo=None):
+        return f"{a.replace(tzinfo=None).isoformat()} does not exist in {dt.tzinfo.key} (the clock skipped that hour)"
+    return (f"{a.replace(tzinfo=None).isoformat()} happened twice in {dt.tzinfo.key} (the clock went back): read as "
+            f"the first, {a.isoformat()}")
+
+
 def parse_datetime(v, tz: ZoneInfo, formats=None) -> tuple[datetime | None, str | None]:
     """(aware datetime, precision) from a source's text: the block's formats, else ISO 8601, RFC 2822 (RSS) and the
-    common US forms. A date with no time of day is precision day."""
+    common US forms. A date with no time of day, or a naive one written as exact midnight ("2026-11-01T00:00:00.000",
+    "11/01/2026 12:00:00 AM"), is precision day."""
     s = clean(v)
     if not s:
         return None, None
+    midnight = bool(MIDNIGHT_TEXT.search(s))
     for fmt in formats or ():
         try:
             dt = datetime.strptime(s, fmt)
         except ValueError:
             continue
         timed = any(c in fmt for c in ("%H", "%I", "%M"))
-        return _localize(dt, tz), ("minute" if timed else "day")
+        return _localize(dt, tz), ("minute" if timed and not (midnight and dt.tzinfo is None) else "day")
     if formats:
         return None, None
     if re.fullmatch(r"\d{4}-\d{2}-\d{2}", s):
@@ -347,8 +416,7 @@ def parse_datetime(v, tz: ZoneInfo, formats=None) -> tuple[datetime | None, str 
     except ValueError:
         dt = None
     if dt is not None:
-        # a floating timestamp at exactly midnight (Socrata's date columns: 2026-11-01T00:00:00.000) is a date
-        if dt.tzinfo is None and re.fullmatch(r"\d{4}-\d{2}-\d{2}T00:00(:00(\.0+)?)?", s):
+        if dt.tzinfo is None and midnight:
             return dt.replace(tzinfo=tz), "day"
         return _localize(dt, tz), "minute"
     if re.search(r"[A-Za-z]{3},?\s+\d|\d{1,2}\s+[A-Za-z]{3}\s+\d{4}", s):
@@ -360,9 +428,10 @@ def parse_datetime(v, tz: ZoneInfo, formats=None) -> tuple[datetime | None, str 
             pass
     for fmt in DATETIME_FORMATS:
         try:
-            return _localize(datetime.strptime(s, fmt), tz), "minute"
+            dt = datetime.strptime(s, fmt)
         except ValueError:
-            pass
+            continue
+        return _localize(dt, tz), ("day" if midnight else "minute")
     for fmt in DATE_FORMATS:
         try:
             d = datetime.strptime(s, fmt)
@@ -384,17 +453,21 @@ def parse_clock(v, formats=None) -> time | None:
     return None
 
 
-def parse_epoch(v, kind: str, tz: ZoneInfo) -> datetime | None:
+def parse_epoch(v, kind: str, tz: ZoneInfo) -> tuple[datetime | None, str | None]:
+    """(datetime, precision). An epoch at exactly midnight (UTC midnight for epoch_ms / epoch_s, wall midnight for
+    epoch_ms_wallclock) is how date-only fields are stored: the date as written, precision day."""
     f = fnum(v)
     if f is None:
-        return None
+        return None, None
     try:
         t = datetime.fromtimestamp(f / (1000 if kind != "epoch_s" else 1), UTC)
     except (OverflowError, OSError, ValueError):
-        return None
+        return None, None
+    if (t.hour, t.minute, t.second, t.microsecond) == (0, 0, 0, 0):
+        return datetime(t.year, t.month, t.day, tzinfo=tz), "day"
     if kind == "epoch_ms_wallclock":     # local wall-clock time stored as if it were UTC (common on ArcGIS layers)
-        return t.replace(tzinfo=None).replace(tzinfo=tz)
-    return t.astimezone(tz)
+        return t.replace(tzinfo=None).replace(tzinfo=tz), "minute"
+    return t.astimezone(tz), "minute"
 
 
 def time_value(spec, row: dict, rec: dict, ctx: Ctx, notes: dict, target: str) -> tuple[datetime | None, str | None]:
@@ -405,9 +478,10 @@ def time_value(spec, row: dict, rec: dict, ctx: Ctx, notes: dict, target: str) -
         dur = duration(spec["duration"], row)
         if start is None or dur is None:
             return None, None
-        notes.setdefault("_basis", {})[target] = "start plus the source's duration (" + ", ".join(
+        end, basis = end_after(start, dur, rec.get("time_precision"))
+        notes.setdefault("_basis", {})[target] = basis + " (" + ", ".join(
             f"{k} {v}" for k, v in spec["duration"].items()) + ")"
-        return start + dur, rec.get("time_precision")
+        return end, rec.get("time_precision")
     if "const" in spec:
         return parse_datetime(spec["const"], ctx.tz)
     v, used = lookup(spec, row)
@@ -417,8 +491,9 @@ def time_value(spec, row: dict, rec: dict, ctx: Ctx, notes: dict, target: str) -
     kind = spec.get("parse", "datetime")
     if v is None:
         return None, None
+    notes.setdefault("_time_kinds", set()).add(kind)
     if kind in ("epoch_ms", "epoch_s", "epoch_ms_wallclock"):
-        dt, prec = parse_epoch(v, kind, ctx.tz), "minute"
+        dt, prec = parse_epoch(v, kind, ctx.tz)
     elif kind == "date":
         dt, prec = parse_datetime(v, ctx.tz, spec.get("formats"))
         if dt is not None:
@@ -436,12 +511,24 @@ def time_value(spec, row: dict, rec: dict, ctx: Ctx, notes: dict, target: str) -
             dt, prec = dt.replace(hour=t.hour, minute=t.minute), "minute"
     if spec.get("precision"):
         prec = spec["precision"]
+    if kind in ("datetime", "epoch_ms_wallclock") and prec not in ("day", "month", "year"):
+        w = wall_note(dt)
+        if w:
+            notes.setdefault("_time_notes", {})[target] = w
+    # sanity: no source time before 1990 or after the day after the fetch (epoch units, typed years); an end may lie
+    # in the future (a planned lift), which is handled with the status
+    u = dt.astimezone(UTC)
+    if u < EARLIEST or (target != "ended_at" and u > ctx.fetched_dt + timedelta(days=1)):
+        notes.setdefault("_problems", []).append(f"{used} {clean(v)!r} reads as {dt.isoformat()}, outside 1990 to the "
+                                                 f"day after the fetch: not used")
+        notes.setdefault("_unused_times", {})[target] = dt.isoformat()
+        return None, None
     return dt, prec
 
 
 def duration(spec: dict, row: dict) -> timedelta | None:
-    """start + duration: {days: F, hours: F, minutes: F} (any of them); None when none is given, one is not a
-    number or one is negative."""
+    """The source's elapsed duration: {days: F, hours: F, minutes: F} (any of them); None when none is given, one
+    is not a number or one is negative."""
     parts = {k: clean(get(row, f)) for k, f in spec.items() if k in ("days", "hours", "minutes", "seconds")}
     if not any(parts.values()):
         return None
@@ -474,26 +561,34 @@ def scrub_people(text: str, allow=None) -> str:
 
 
 def personal_field(name: str) -> bool:
-    """A field name that looks like it holds a person's name, email or phone (common.strip_personal's rule)."""
-    leaf = str(name).split(".")[-1]
-    return bool(NAME_KEYS.search(leaf) or (PERSONAL_KEYS.search(leaf) and not KEEP_KEYS.search(leaf)))
+    """A field path any part of which looks like it holds a private person: a name, owner, caller, resident,
+    complainant, reporter or submitter, an email or a phone (common.strip_personal's rule and more)."""
+    for part in str(name).split("."):
+        if NAME_KEYS.search(part) or (PERSONAL_KEYS.search(part) and not KEEP_KEYS.search(part)) \
+                or PERSONAL_FIELD.search(part):
+            return True
+    return False
 
 
-def safe_row(row: dict, block: dict) -> dict:
-    """Only the safe fields (a dotted safe field keeps that nested value under its dotted name); free-text fields
-    scrubbed (emails, phones, staff titles, names after an honorific)."""
-    out = {}
+def safe_row(row: dict, block: dict) -> tuple[dict, list[str]]:
+    """(only the safe fields, the safe fields dropped because their value is an object or a list). A dotted safe
+    field keeps that nested leaf under its dotted name; an object is never kept whole (its keys were not reviewed).
+    Free-text fields are scrubbed (emails, phones, staff titles, names after an honorific)."""
+    out, dropped = {}, []
     for f in block["safe_fields"]:
         v = row[f] if f in row else get(row, f)
+        if isinstance(v, (dict, list)):
+            dropped.append(f)
+            continue
         if f in row or v is not None:
             out[f] = v
     for f in block.get("free_text") or ():
         if isinstance(out.get(f), str):
-            out[f] = scrub_people(scrub_text(out[f]))
-    return out
+            out[f] = scrub(out[f])
+    return out, dropped
 
 
-# ---------------------------------------------------------------- the record
+# ---------------------------------------------------------------- validation
 
 def spec_fields(spec) -> list[str]:
     """The source fields a spec reads (to check them against the safe fields)."""
@@ -513,22 +608,121 @@ def spec_fields(spec) -> list[str]:
     return out
 
 
+def _regex_errs(where: str, pat) -> list[str]:
+    try:
+        re.compile(str(pat))
+        return []
+    except re.error as e:
+        return [f"{where}: bad regular expression {pat!r} ({e})"]
+
+
+def spec_errors(where: str, spec, safe: list, target: str | None = None) -> list[str]:
+    """Problems in one value or time spec."""
+    errs = []
+    s = norm_spec(spec)
+    bad = set(s) - SPEC_KEYS
+    if bad:
+        errs.append(f"{where}: unknown keys {sorted(bad)}")
+    for f in spec_fields(s):
+        if f not in safe:
+            errs.append(f"{where} reads {f!r}, which is not a safe field")
+    for t in (s.get("template"), s.get("text")):
+        for _, filters in template_parts(t or ""):
+            for flt in filters:
+                if flt.partition(":")[0] not in FILTERS:
+                    errs.append(f"{where}: unknown template filter {flt!r}")
+    if s.get("regex"):
+        errs += _regex_errs(where, s["regex"])
+    if isinstance(s.get("map"), dict):
+        if any(isinstance(x, bool) or x is None for x in s["map"]):
+            errs.append(f"{where}: a map key reads as true, false or null in YAML (Yes, No, On, Off, ~): quote it")
+        if s.get("match") == "regex":
+            for pat in s["map"]:
+                errs += _regex_errs(where, pat)
+    elif "map" in s:
+        errs.append(f"{where}: map is a mapping")
+    if s.get("match") not in (None, "exact", "regex"):
+        errs.append(f"{where}: match is exact or regex")
+    if s.get("parse") is not None and s["parse"] not in TIME_KINDS | {"number", "float", "int", "text"}:
+        errs.append(f"{where}: unknown parse {s['parse']!r}")
+    if target in TIME_FIELDS and s.get("parse") not in (None, *TIME_KINDS):
+        errs.append(f"{where}: a time is parsed as one of {sorted(TIME_KINDS)}")
+    if target is not None and target not in TIME_FIELDS and s.get("parse") in TIME_KINDS:
+        errs.append(f"{where}: parse {s['parse']!r} is for times")
+    if s.get("precision") is not None and s["precision"] not in PRECISIONS:
+        errs.append(f"{where}: precision {s['precision']!r} is not one of {sorted(PRECISIONS)}")
+    if "duration" in s and (target != "ended_at" or not isinstance(s["duration"], dict) or not s["duration"]
+                            or set(s["duration"]) - {"days", "hours", "minutes", "seconds"}):
+        errs.append(f"{where}: duration is {{days, hours, minutes, seconds}} and only for ended_at")
+    if "unit" in s and str(s["unit"]).lower() not in VOLUME_UNITS:
+        errs.append(f"{where}: unknown volume unit {s['unit']!r} (one of {sorted(VOLUME_UNITS)})")
+    if s.get("estimate") not in (None, "estimated", "measured", "from_text"):
+        errs.append(f"{where}: estimate is estimated, measured or from_text")
+    if s.get("transform"):
+        try:
+            resolve(s["transform"])
+        except SpecError as e:
+            errs.append(f"{where}: {e}")
+    return errs
+
+
+def uses_local_times(block: dict) -> bool:
+    """Whether the block reads a time whose zone the source does not state (text, dates, wall-clock epochs)."""
+    specs = [v for k, v in (block.get("record") or {}).items() if k in TIME_FIELDS]
+    snap = block.get("snapshot") if isinstance(block.get("snapshot"), dict) else {}
+    if snap.get("poll_time"):
+        specs.append(snap["poll_time"])
+    if isinstance(block.get("decoded_times"), dict):
+        specs.append({"parse": block["decoded_times"].get("parse", "datetime")})
+    for s in specs:
+        s = norm_spec(s)
+        if "duration" not in s and s.get("parse", "datetime") in ("datetime", "date", "epoch_ms_wallclock"):
+            return True
+    return False
+
+
+def water_state_module(st: str) -> str | None:
+    """The state's water matcher module (ingest/<st>_waters.py with match_waters), or None."""
+    from ingest.generic.transforms import WATER_MODULES
+    name = WATER_MODULES.get(str(st).upper()) or f"ingest.{str(st).lower()}_waters"
+    try:
+        spec = importlib.util.find_spec(name)
+    except (ImportError, ValueError):
+        return None
+    if spec is None or not spec.origin:
+        return None
+    try:            # read, not imported: the module must define match_waters
+        return name if re.search(r"^def match_waters\(", open(spec.origin).read(), re.M) else None
+    except OSError:
+        return None
+
+
+HISTORY_KEYS = {"keep_missing", "revisions", "track", "missing_key", "supersede"}
+
+
 def validate(block: dict, source_id: str = "") -> list[str]:
-    """Problems that stop a fetch block from running (an empty list when it can run)."""
+    """Problems that stop a fetch block from running (an empty list when it can run). Nothing is fetched or
+    written, and only the hook modules are imported."""
     errs = []
     if not isinstance(block, dict):
         return ["fetch is not a mapping"]
     if not block.get("platform"):
         errs.append("fetch.platform is missing")
     safe = block.get("safe_fields")
-    if not isinstance(safe, list) or not safe:
+    if not isinstance(safe, list) or not safe or not all(isinstance(f, str) and f for f in safe):
         errs.append("fetch.safe_fields is missing: every block lists the fields it may keep")
-        safe = []
+        safe = [f for f in safe if isinstance(f, str)] if isinstance(safe, list) else []
     reviewed = block.get("reviewed_fields") or {}
+    if not isinstance(reviewed, dict):
+        errs.append("reviewed_fields is {field: reason}")
+        reviewed = {}
+    for f, why in reviewed.items():
+        if not clean(why):
+            errs.append(f"reviewed_fields.{f}: give the reason the field holds no private person")
     for f in safe:
         if personal_field(f) and f not in reviewed:
-            errs.append(f"safe field {f!r} looks personal (a name, email or phone); list it under reviewed_fields "
-                        f"with the reason it is not, or leave it out")
+            errs.append(f"safe field {f!r} may hold a private person (a name, owner, caller, reporter, email or phone); "
+                        f"list it under reviewed_fields with the reason it does not, or leave it out")
     rec = block.get("record") or {}
     if not isinstance(rec, dict) or "source_record_id" not in rec:
         errs.append("fetch.record.source_record_id is missing")
@@ -538,26 +732,34 @@ def validate(block: dict, source_id: str = "") -> list[str]:
             errs.append(f"record.{k} is not an event field a block may fill")
             continue
         s = norm_spec(spec)
-        bad = set(s) - SPEC_KEYS
-        if bad:
-            errs.append(f"record.{k}: unknown keys {sorted(bad)}")
-        for f in spec_fields(spec):
-            if f not in safe and f.split(".")[0] not in safe:
-                errs.append(f"record.{k} reads {f!r}, which is not a safe field")
+        errs += spec_errors(f"record.{k}", s, safe, k)
         if k == "event_type" and "const" in s and s["const"] not in EVENT_TYPES:
             errs.append(f"record.event_type {s['const']!r} is not an event type")
         if k == "event_type" and isinstance(s.get("map"), dict):
             for out in s["map"].values():
                 if out not in EVENT_TYPES:
                     errs.append(f"record.event_type maps to {out!r}, not an event type")
-        if isinstance(s.get("map"), dict) and any(isinstance(x, bool) or x is None for x in s["map"]):
-            errs.append(f"record.{k}: a map key reads as true, false or null in YAML (Yes, No, On, Off, ~): quote it")
-        if k == "status" and isinstance(s.get("map"), dict):
-            for out in s["map"].values():
+        if k == "status":
+            for out in (s.get("map") or {}).values() if isinstance(s.get("map"), dict) else ():
                 if out not in STATUSES:
                     errs.append(f"record.status maps to {out!r}, not a status")
+            if "const" in s and s["const"] not in STATUSES:
+                errs.append(f"record.status {s['const']!r} is not a status")
+            other = s.get("otherwise", "from_end")
+            if other != "from_end" and other not in STATUSES:
+                errs.append(f"record.status otherwise {other!r} is from_end or a status")
         if k == "time_precision" and "const" in s and s["const"] not in PRECISIONS:
             errs.append(f"record.time_precision {s['const']!r} is not a precision")
+    for key, spec in (block.get("raw_notes") or {}).items():
+        if not str(key).startswith("_"):
+            errs.append(f"raw_notes.{key}: a note's name starts with _ (raw.row holds the source's fields)")
+        errs += spec_errors(f"raw_notes.{key}", spec, safe)
+    dts = block.get("decoded_times")
+    if dts is not None:
+        if not isinstance(dts, dict) or not isinstance(dts.get("fields"), list) or dts.get("parse", "datetime") not in TIME_KINDS:
+            errs.append("decoded_times is {fields: [...], parse}")
+        else:
+            errs += [f"decoded_times reads {f!r}, which is not a safe field" for f in dts["fields"] if f not in safe]
     for f in block.get("free_text") or ():
         if f not in safe:
             errs.append(f"free_text field {f!r} is not a safe field")
@@ -566,34 +768,83 @@ def validate(block: dict, source_id: str = "") -> list[str]:
             ZoneInfo(block["time_zone"])
         except Exception:  # noqa: BLE001
             errs.append(f"unknown time_zone {block['time_zone']!r}")
+    elif uses_local_times(block):
+        errs.append("time_zone is missing: name the zone the source's times are in (UTC when they are UTC)")
     w = block.get("waters") or {}
-    for k, fn in [("transform", f) for f in listify(block.get("transform"))] + \
-                 [("post", f) for f in listify(block.get("post"))] + [("waters.matcher", f) for f in listify(w.get("matcher"))]:
+    if not isinstance(w, dict):
+        errs.append("waters is a mapping")
+        w = {}
+    bad_w = set(w) - {"matcher", "state", "county", "county_field", "aliases", "no_water"}
+    if bad_w:
+        errs.append(f"waters: unknown keys {sorted(bad_w)}")
+    hooks = [("transform", f) for f in listify(block.get("transform"))] + \
+            [("post", f) for f in listify(block.get("post"))] + [("waters.matcher", f) for f in listify(w.get("matcher"))]
+    for k, fn in hooks:
         try:
             resolve(fn)
-        except Exception as e:  # noqa: BLE001
+        except SpecError as e:
             errs.append(f"{k}: {e}")
+    if str(w.get("matcher") or "").endswith(".state_waters"):
+        if not w.get("state"):
+            errs.append("waters.state is missing: the state matcher needs the state")
+        elif not water_state_module(w["state"]):
+            errs.append(f"waters.state {w['state']!r} has no water matcher (ingest/{str(w['state']).lower()}_waters.py)")
     if w.get("county_field") and w["county_field"] not in safe:
         errs.append(f"waters.county_field {w['county_field']!r} is not a safe field")
+    for p in w.get("no_water") or []:
+        errs += _regex_errs("waters.no_water", p)
     for rule in block.get("filter") or []:
         if not isinstance(rule, dict) or not rule.get("field") or not rule.get("regex"):
             errs.append("each filter rule is {field, regex, exclude}")
         elif rule["field"] not in safe:
             errs.append(f"filter reads {rule['field']!r}, which is not a safe field")
+        else:
+            errs += _regex_errs("filter", rule["regex"])
+    b = block.get("bounds")
+    if b is not None and not (isinstance(b, list) and len(b) == 4 and all(isinstance(x, (int, float)) for x in b)
+                              and b[0] < b[2] and b[1] < b[3]):
+        errs.append("bounds is [lon_min, lat_min, lon_max, lat_max]")
+    d = block.get("dedupe") or {}
+    if not isinstance(d, dict) or set(d) - {"repeats", "order", "ignore"} or d.get("repeats", "suffix") not in ("suffix", "first"):
+        errs.append("dedupe is {repeats: suffix | first, order, ignore}")
+    h = block.get("history") or {}
+    if not isinstance(h, dict):
+        errs.append("history is a mapping")
+        h = {}
+    if set(h) - HISTORY_KEYS:
+        errs.append(f"history: unknown keys {sorted(set(h) - HISTORY_KEYS)}")
+    track = h.get("track") or []
+    items = track.items() if isinstance(track, dict) else ((f, None) for f in track)
+    for f, t in items:
+        if t is not None and (not isinstance(t, dict) or set(t) - {"key", "label", "from", "skip_null"}):
+            errs.append(f"history.track.{f} is {{key, label, from, skip_null}}")
+            continue
+        src = (t or {}).get("from") or f
+        if not str(src).startswith("@") and src not in safe:
+            errs.append(f"history.track reads {src!r}, which is not a safe field")
+    for i, keys in enumerate(h.get("supersede") or []):
+        if not isinstance(keys, list) or not keys:
+            errs.append(f"history.supersede[{i}] is a list of templates")
+            continue
+        for t in keys:
+            errs += spec_errors(f"history.supersede[{i}]", {"template": t}, safe)
+    for k in ("max_error_share", "min_rows_ratio"):
+        if k in block and not (isinstance(block[k], (int, float)) and 0 <= block[k] <= 1):
+            errs.append(f"{k} is a share between 0 and 1")
     return errs
 
+
+# ---------------------------------------------------------------- the record
 
 def volume_fields(spec, row: dict, rec: dict, ctx: Ctx) -> dict:
     """volume_gal, volume_text, estimate_flag from a volume spec: {field, unit (gallons by default), estimate
     (estimated | measured | from_text), text (a template for volume_text), bare_number_text (appended to a bare
-    number), round}."""
+    number)}."""
     spec = norm_spec(spec)
     v, _ = lookup(spec, row)
     if v is None:
         return {"volume_gal": None, "volume_text": None, "estimate_flag": "unknown"}
-    unit = VOLUME_UNITS.get(str(spec.get("unit", "gallons")).lower())
-    if unit is None:
-        raise SpecError(f"unknown volume unit {spec.get('unit')!r}")
+    unit = VOLUME_UNITS[str(spec.get("unit", "gallons")).lower()]
     if isinstance(v, (int, float)) and not isinstance(v, bool):
         f = fnum(v)
         gal = int(round(f * unit)) if f is not None and f >= 0 else None
@@ -617,6 +868,27 @@ def volume_fields(spec, row: dict, rec: dict, ctx: Ctx) -> dict:
     return {"volume_gal": gal, "volume_text": vt, "estimate_flag": est}
 
 
+def decoded_times(row: dict, ctx: Ctx) -> dict:
+    """{field: ISO time} for the block's decoded_times fields, as read (no precision or sanity rule): the source's
+    own values in readable form, cited beside the record's times."""
+    dts = ctx.block["decoded_times"]
+    kind = dts.get("parse", "datetime")
+    out = {}
+    for f in dts["fields"]:
+        v = get(row, f)
+        if v in (None, ""):
+            continue
+        n = fnum(v)
+        if kind == "epoch_ms_wallclock" and n is not None:
+            d = datetime.fromtimestamp(n / 1000, UTC).replace(tzinfo=None).replace(tzinfo=ctx.tz)
+        elif kind in ("epoch_ms", "epoch_s") and n is not None:
+            d = datetime.fromtimestamp(n / (1000 if kind == "epoch_ms" else 1), UTC).astimezone(ctx.tz)
+        else:
+            d = parse_datetime(v, ctx.tz)[0]
+        out[f] = iso(d)
+    return out
+
+
 def build_fields(row: dict, ctx: Ctx) -> tuple[dict, dict]:
     """(event fields, raw notes) from one safe row by the block's record map. Times are read before the fields
     that may name them in a template; status is decided after the times (otherwise: from_end)."""
@@ -631,15 +903,28 @@ def build_fields(row: dict, ctx: Ctx) -> tuple[dict, dict]:
         if t == "started_at":
             rec["_start_dt"] = dt
             rec["time_precision"] = prec
+        if t == "ended_at" and dt is not None and prec in ("day", "month", "year") \
+                and rec.get("time_precision") not in ("day", "month", "year", None) and "duration" not in norm_spec(rmap[t]):
+            # an end known only to the day on a record timed to the minute: the latest it can be is that day's end
+            notes.setdefault("_basis", {})[t] = ("the source gives the end's date only: ended_at is the end of that day "
+                                                 "(the latest it can be)")
+            nxt = (dt.astimezone(UTC) + timedelta(days=1, hours=1)).astimezone(dt.tzinfo)
+            dt = datetime(nxt.year, nxt.month, nxt.day, tzinfo=dt.tzinfo)
         rec[t] = iso(dt)
         if t == "ended_at":
             rec["_end_dt"] = dt
+    kinds = notes.pop("_time_kinds", set())
+    if kinds:
+        tzname = getattr(ctx.tz, "key", str(ctx.tz))
+        notes["_time_basis"] = " ".join(TIME_BASIS[k].format(tz=tzname) for k in sorted(kinds))
     if "time_precision" in rmap:
         rec["time_precision"] = value(rmap["time_precision"], row, rec, ctx, notes, "time_precision")
     for k, spec in rmap.items():
         if k in TIME_FIELDS or k in ("time_precision", "status", "event_type", "volume"):
             continue
         rec[k] = value(spec, row, rec, ctx, notes, k)
+        if k in ("discharger_name", "authority") and "const" not in norm_spec(spec):
+            rec[k] = scrub(rec[k])           # an owner's or filer's name field can hold a private person
     if "volume" in rmap:
         rec.update(volume_fields(rmap["volume"], row, rec, ctx))
     # event type: the map's answer, else unknown with the source's label kept
@@ -670,6 +955,10 @@ def build_fields(row: dict, ctx: Ctx) -> tuple[dict, dict]:
         rec["ended_at"] = None
         if st == "ended":
             st = "unknown"
+    if st == "ended" and end is not None and rec.get("ended_at") \
+            and end.astimezone(UTC) > ctx.fetched_dt + FUTURE_END_TOLERANCE:
+        notes.setdefault("_problems", []).append(f"the end ({rec['ended_at']}) is after the fetch: not counted as ended")
+        st = "unknown"
     rec["status"] = st
     # coordinates: numbers, inside the block's bounds
     for k in ("lat", "lon"):
@@ -682,4 +971,9 @@ def build_fields(row: dict, ctx: Ctx) -> tuple[dict, dict]:
             rec["lat"] = rec["lon"] = None
     if (rec.get("lat") is None) != (rec.get("lon") is None):
         rec["lat"] = rec["lon"] = None
+    # raw notes the block names (decoded codes, each cited beside the record), and the source's times as read
+    for key, spec in (ctx.block.get("raw_notes") or {}).items():
+        notes[key] = value(spec, row, rec, ctx)
+    if ctx.block.get("decoded_times"):
+        notes["_decoded_times"] = decoded_times(row, ctx)
     return rec, notes
