@@ -118,7 +118,9 @@ ATTACH_BY_HAND = {
 # names the rules cannot spell out, and legal forms the name does not say
 NAME_FIX = {"PICAYUNE RNCH-CHUKCHANSI INDNS": "Picayune Rancheria of the Chukchansi Indians",
             "SANTA YNEZ BAND OF CHUMASH IND": "Santa Ynez Band of Chumash Indians",
-            "Murrieta WMWD": "Western Municipal Water District (Murrieta)"}
+            "Murrieta WMWD": "Western Municipal Water District (Murrieta)",
+            "Republic Services of Sonoma County": "Republic Services of Sonoma County (a waste company: the Central "
+                                                  "Landfill leachate line)"}
 FORM_FIX = {
     "California American Water": "investor-owned utility", "California Utilities Service": "investor-owned utility",
     "Cachuma Lake Recreation Area": "county", "Delta Diablo": "special district", "Montara": "special district",
