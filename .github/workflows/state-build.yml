@@ -49,7 +49,7 @@ on:
         default: '1000'
         type: string
       osm_budget:
-        description: "Seconds the osm step's OpenStreetMap pass may spend on Overpass (60 to 1200)"
+        description: "Seconds the osm step's OpenStreetMap pass may spend on Overpass (60 to 1200; with budget_s at most 3780 together)"
         required: false
         default: '1200'
         type: string

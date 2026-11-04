@@ -28,7 +28,9 @@ Steps (--steps, space- or comma-separated; run in this order whatever order they
              (state/obl-water.tar.gz, scripts/state_paths.py unpack-obl, into ../openboatlaunch/out beside the
              checkout); the snapshot date comes from its out/meta.json. Refused at run time, before anything is
              written, when the folder is not there (the object is not in R2 yet) or meta.json gives no date (a source
-             line is never written with an unknown date). data/waters-<st>.json is then one of the pull request's
+             line is never written with an unknown date), and when the snapshot holds no record of the state or
+             fewer than half the records of the extract on file (a partial snapshot never empties or cuts it).
+             data/waters-<st>.json is then one of the pull request's
              files. data/receiving-waters-national.json is not regenerated here (obl-check says when it predates the
              extract).
   obl-check  the state's openboatlaunch extract (data/waters-<st>.json, ingest/obl_waters.py) is on file, and the
@@ -44,7 +46,9 @@ Steps (--steps, space- or comma-separated; run in this order whatever order they
              what it built, and the next run resumes from the raw cache (its own OSM, other-places and NHD
              high-resolution budgets come on top of S).
   osm        the waters step with OpenStreetMap's pass given --osm-budget seconds (60 to 1200, default 1200) instead
-             of the module's 180: python -m ingest.waters_from_nhd --state <ST> ... --osm-budget O. With `waters`
+             of the module's 180: python -m ingest.waters_from_nhd --state <ST> ... --osm-budget O (S + O at most
+             3,780, the batch's worst case before this step, so the job keeps inside the workflow's 120 minutes and
+             saves its caches). With `waters`
              listed too they run as this one command. The OSM pass runs once the NHD pass has finished inside its
              budget (a resumed run answers from the raw cache, free); the Overpass answers are cached per state query
              (data/raw/nhd-waters/osm-state/, in the saved raw caches), so the names a run did not reach are asked by
@@ -87,6 +91,11 @@ BUDGET_S = (60, 3_600)
 MAX_REQUESTS = (1, 20_000)
 OSM_BUDGET = (60, 1_200)
 DEFAULT_OSM_BUDGET = 1_200
+# budget_s and the OSM pass's budget together, with the osm step, at most the batch's worst case before the osm step
+# existed (budget_s 3,600 and the module's 180 s OSM pass): the build's other budgets (NHD high resolution 900 s, other
+# places 120 s), a query begun inside a budget, the loading and the write come on top, and a job past the workflow's
+# 120 minutes is cancelled, so its raw caches are never saved and its pull request never opened
+NET_BUDGET_MAX = 3_600 + 180
 OBL_KEY = "state/obl-water.tar.gz"
 REGIONAL_FILES = ("outfalls-ne.json", "outfalls-mid-atlantic.json")
 CSO_ZIP_URL = "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"
@@ -225,6 +234,11 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
     budget = bounded("budget_s", budget_s, BUDGET_S)
     maxreq = bounded("max_requests", max_requests, MAX_REQUESTS)
     osm = bounded("osm_budget", osm_budget, OSM_BUDGET)
+    if "osm" in steps and budget + osm > NET_BUDGET_MAX:
+        raise Refused(f"budget_s {budget} and osm_budget {osm} together are {budget + osm} s, over {NET_BUDGET_MAX} s "
+                      "(with the build's other budgets, the job would risk the workflow's 120 minutes, and a "
+                      f"cancelled job saves nothing): lower one, for example budget_s {NET_BUDGET_MAX - osm} with "
+                      f"osm_budget {osm}")
     py = py or pipeline_python(root)
     water, water_arg = obl_water_dir(obl_dir, root)
     outlines = {"OBL_WATER_DIR": water_arg}
@@ -271,8 +285,10 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
     return Plan(st, steps, budget, maxreq, cmds, osm, water)
 
 
-def extract_ready(obl_dir: Path | None) -> tuple[bool, str]:
-    """Whether the extract step can run: the snapshot folder is here and its out/meta.json gives a date."""
+def extract_ready(obl_dir: Path | None, state: str | None = None, root: Path = ROOT) -> tuple[bool, str]:
+    """Whether the extract step can run: the snapshot folder is here, its out/meta.json gives a date, and (with state)
+    it holds the state's records: none, or fewer than half the records of the extract on file, is a partial snapshot,
+    which would empty or cut data/waters-<st>.json."""
     if obl_dir is None or not Path(obl_dir).is_dir():
         return False, ("extract: no openboatlaunch snapshot (out/water) beside the checkout or at --obl-dir: "
                        f"{OBL_KEY} is not in R2 (or was not restored). Upload it once from a "
@@ -287,6 +303,18 @@ def extract_ready(obl_dir: Path | None) -> tuple[bool, str]:
         return False, ("extract: the openboatlaunch snapshot has no snapshot date (out/meta.json missing or without "
                        f"built, generated or updated): the source line would be undated; pack {OBL_KEY} again with "
                        "meta.json")
+    if state:
+        st = state.lower()
+        files = sum(1 for _ in Path(obl_dir).glob(f"*-{st}.json"))
+        have = read_json(root / "data" / f"waters-{st}.json")
+        on_file = len(have.get("waters") or []) if isinstance(have, dict) and isinstance(have.get("waters"), list) else 0
+        if not files:
+            return False, (f"extract: the openboatlaunch snapshot {date} holds no {state.upper()} water record "
+                           f"(*-{st}.json): nothing to extract, and data/waters-{st}.json is left as it is")
+        if files * 2 < on_file:
+            return False, (f"extract: the openboatlaunch snapshot {date} holds {files} {state.upper()} water files and "
+                           f"data/waters-{st}.json {on_file} records: a partial snapshot would cut the extract on "
+                           f"file, which is left as it is; pack {OBL_KEY} again from a whole out/water")
     return True, ""
 
 
@@ -311,7 +339,12 @@ def obl_check(state: str, root: Path = ROOT) -> tuple[bool, list[str]]:
     lines: list[str] = []
     ext = root / "data" / f"waters-{st.lower()}.json"
     d = read_json(ext)
-    if not isinstance(d, dict) or not isinstance(d.get("waters"), list):
+    # the file must be this state's extract: data/waters-ne.json is New England's regional records, not Nebraska's
+    if not isinstance(d, dict) or not isinstance(d.get("waters"), list) or str(d.get("state") or "").upper() != st:
+        if isinstance(d, dict) and str(d.get("state") or "").upper() != st:
+            lines.append(f"{st}: data/waters-{st.lower()}.json is not {st}'s openboatlaunch extract (its state is "
+                         f"{d.get('state') or 'not given'}); {st}'s extract needs another file name first")
+            return False, lines
         lines.append(f"{st}: no openboatlaunch extract at data/waters-{st.lower()}.json. Add the extract step "
                      f"before this one (python -m ingest.obl_waters --state {st} --from the snapshot restored from "
                      f"{OBL_KEY}), then python3 -I scripts/gen_receiving_waters.py; then the NHD pass")
@@ -431,7 +464,7 @@ def run(p: Plan, out_dir: Path | None = None, dry_run: bool = False, root: Path 
                 print(x, flush=True)
             (out_dir / f"{c.step}.log").write_text("\n".join(lines) + "\n")
             rc = 0 if ok else 1
-        elif c.step == "extract" and not (ready := extract_ready(p.obl_dir))[0]:
+        elif c.step == "extract" and not (ready := extract_ready(p.obl_dir, p.state, root))[0]:
             print(f"::error::{ready[1]}", flush=True)
             (out_dir / f"{c.step}.log").write_text(ready[1] + "\n")
             rc, lines, refused = 1, [ready[1]], [ready[1]]
