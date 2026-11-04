@@ -277,3 +277,14 @@ def test_the_committed_registry_draws_no_water_plant_and_no_held_back_permit():
     for d in dis:
         ps = d.get("npdes_permits") or [d.get("npdes_permit")]
         assert not (d.get("source_areas") == ["federal"] and ps and all(p in held for p in ps)), d["id"]
+
+
+def test_a_person_in_place_of_a_body_is_no_permit_name(build):
+    """EPA's PERMIT_NAME is often a contact person: a whole person's name, or a couple's, becomes null; a body's name
+    stays as EPA spells it (placeholder names)."""
+    assert build.public_permit_name("Jane Q Doe") is None
+    assert build.public_permit_name("DOE JOHN & JANE") is None
+    assert build.public_permit_name("Doe, Jane") is None
+    assert build.public_permit_name("HOWARD COUNTY PUBLIC SCHOOL SYSTEM") == "HOWARD COUNTY PUBLIC SCHOOL SYSTEM"
+    assert build.public_permit_name("City of Example") == "City of Example"
+    assert build.public_permit_name("  ") is None and build.public_permit_name(None) is None
