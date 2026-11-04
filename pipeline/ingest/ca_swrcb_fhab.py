@@ -68,6 +68,7 @@ ADVISORY_LEVELS = {"caution": "Caution", "warning": "Warning", "danger": "Danger
                    "algal mat alert sign": "Algal mat alert sign"}
 NEW_REPORT_DAYS = 14
 BOUNDS = (-124.6, 32.4, -114.0, 42.1)
+RULES_VERSION = 1          # a run whose table is unchanged still rebuilds the records when this changes
 
 
 def clean(v) -> str:
@@ -181,7 +182,8 @@ def main(argv=None) -> int:
             modified = None
         else:
             modified = ca_datagov.resource_modified(sess, PACKAGE, RESOURCE)
-            if modified and modified == state.get("modified") and prev.get("records"):
+            if modified and modified == state.get("modified") and prev.get("records") \
+                    and state.get("rules") == RULES_VERSION:
                 meta = {**(prev.get("meta") or {}), "checked_at": fetched_at}
                 write_events(SOURCE_ID, prev["records"], ok=True, error=None, meta=meta)
                 print(f"{SOURCE_ID}: table unchanged since {modified}; {len(prev['records'])} records kept")
@@ -201,7 +203,7 @@ def main(argv=None) -> int:
             r["raw"]["_first_seen_at"] = (p.get("raw") or {}).get("_first_seen_at") or r["raw"]["_first_seen_at"]
     recs = redact.redact_events(recs)
     if not args.file:
-        state.update(modified=modified, fetched_at=fetched_at)
+        state.update(modified=modified, rules=RULES_VERSION, fetched_at=fetched_at)
         write_json(STATE_FILE, state)
     meta = {**stats, "table_modified": modified, "page": PAGE, "map": MAP, "credit": CREDIT,
             "license": "Public domain (data.ca.gov)", "registry_ids": [SOURCE_ID],
