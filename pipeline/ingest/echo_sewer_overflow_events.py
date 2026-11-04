@@ -419,8 +419,15 @@ def scrub_free_text(d: dict, keys) -> dict:
     from ingest.mi_egle_mienviro import free_text
     for k in keys:
         if isinstance(d.get(k), str) and d[k].strip():
-            d[k] = free_text(d[k])
+            d[k] = free_text(address_typos(d[k]))
     return d
+
+
+def address_typos(v: str) -> str:
+    """House numbers the scrub would not see as numbers: a letter o typed for a zero ('near 45o1 24th St') and a range
+    of numbers ('611-615 Brookside backup', read as its first number)."""
+    v = re.sub(r"(?<=\d)[oO]+(?=\d|\b)", lambda m: "0" * len(m.group(0)), v)
+    return re.sub(r"(?<![\d/.-])(\d{3,6})-\d{1,6}(?=\s+[A-Za-z])", r"\1", v)
 
 
 def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
