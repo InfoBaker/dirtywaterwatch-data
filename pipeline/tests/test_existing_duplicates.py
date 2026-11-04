@@ -501,3 +501,19 @@ def test_the_place_pass_stops_quietly_when_the_budget_ends_while_a_record_is_bui
     run.place_pass([(t, row)])                                   # before the fix: BudgetExhausted escaped
     assert row["places_failed"] == [{"lon": -88.0, "lat": 41.5, "reason": "not tried this run (--max-requests 10 used)"}]
     assert run.feats == {} and row["slugs"] == []
+
+
+def test_a_canal_named_for_two_places_is_one_water():
+    """Illinois review, 2026-11-04: 'Chicago Sanitary and Ship Canal' (109 Illinois outfall rows) was split at its
+    'and' into targets 'Chicago Sanitary' and 'Ship Canal', so the state's chief CSO receiving water got no record."""
+    for t, want in (("CHICAGO SANITARY AND SHIP CANAL", ["CHICAGO SANITARY and SHIP CANAL"]),
+                    ("Chicago Sanitary & Ship Canal", ["Chicago Sanitary and Ship Canal"]),
+                    ("Illinois and Michigan Canal", ["Illinois and Michigan Canal"]),
+                    ("Delaware & Raritan Canal", ["Delaware and Raritan Canal"]),
+                    ("IL & MICH CANAL CHICAGO SANITARY AND SHIP CANAL", ["IL and MICH CANAL", "CHICAGO SANITARY and SHIP CANAL"]),
+                    # lists still split: a kind word before the 'and', or one after it
+                    ("Mill Creek & Erie Canal", ["Mill Creek", "Erie Canal"]),
+                    ("CEDAR CREEK & COURT CREEK", ["CEDAR CREEK", "COURT CREEK"]),
+                    ("Fox River, Indian Creek and Blackberry Creek", ["Fox River", "Indian Creek", "Blackberry Creek"])):
+        assert N.split_names(t, False) == want, t
+        assert N.national_parts(t) == (want, None), t
