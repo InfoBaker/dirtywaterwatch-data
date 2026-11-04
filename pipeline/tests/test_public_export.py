@@ -207,6 +207,23 @@ def test_reach_waters_inverts_the_per_water_reach_list_with_the_own_water_first(
     assert X.reach_waters({}) == {}
 
 
+def test_records_of_a_feed_whose_jurisdiction_is_not_live_leave_no_public_output(monkeypatch):
+    """A bloom or beach record the status build could not place carries no state (status.event_state reads the live
+    list), so Florida's bloom points reached the live map before its switch (2026-11-04). The export now leaves out
+    every record from a feed whose id opens with a jurisdiction prefix that is not live; records with a live state
+    or with no jurisdiction prefix (EPA's national feeds) stay."""
+    from build import status as S
+    monkeypatch.setattr(S, "_STATES", {"MA", "NY"})
+    live = S.states()
+    evs = [{"event_id": "fl-dep-habs:1", "source_id": "fl-dep-habs", "event_type": "hab_advisory"},
+           {"event_id": "ma-cso:2", "source_id": "ma-cso", "npdes_permit": "MA0101192"},
+           {"event_id": "epa-echo:3", "source_id": "epa-echo"},
+           {"event_id": "wa-ecology-spills:4", "source_id": "wa-ecology-spills", "raw": {"state": "WA"}},
+           {"event_id": "fixture-ny-x:5", "source_id": "fixture-ny-x"}]
+    kept, n = X.live_jurisdiction_events(evs, live)
+    assert [e["event_id"] for e in kept] == ["ma-cso:2", "epa-echo:3", "fixture-ny-x:5"] and n == 2
+
+
 def test_export_keeps_to_the_live_states():
     """Nothing outside live_states reaches out/ (docs/national-approach.md §8 item 3): registry rows, feeds, operator
     rows and per-state windows of a state built but not yet live stay home; national rows and feeds stay."""

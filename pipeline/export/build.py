@@ -688,6 +688,34 @@ def public_rules(o):
     return o
 
 
+US_JURISDICTIONS = frozenset("AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY "
+                             "NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY PR VI GU AS MP".split())
+
+
+def live_jurisdiction_events(events: list[dict], live: set[str]) -> tuple[list[dict], int]:
+    """Every public output is the live states' (rules.json live_states): a record whose state the status build
+    could place (status.event_state reads the live list) stays; one it could not, from a feed whose id opens with
+    a jurisdiction's prefix (fl-dep-habs, wa-ecology-spills) that is not live, is left out, with its advisory
+    point and event page. Florida's bloom points reached the live map before its switch this way (2026-11-04).
+    Records with no jurisdiction prefix (epa-echo) are kept as before."""
+    kept, n = [], 0
+    for e in events:
+        if status_mod.event_state(e):
+            kept.append(e)
+            continue
+        pref = None
+        for sid in (str(e.get("event_id") or "").split(":", 1)[-1], str(e.get("source_id") or "")):
+            m = re.match(r"(?:fixture-)?([a-z]{2})-", sid)
+            if m and m.group(1).upper() in US_JURISDICTIONS:
+                pref = m.group(1).upper()
+                break
+        if pref and pref not in live:
+            n += 1
+            continue
+        kept.append(e)
+    return kept, n
+
+
 def live_registry_rows(rows: list[dict], live: set[str]) -> list[dict]:
     """The registry rows of the live states and the national ones: a row whose `states` list names only states not
     yet live stays home (docs/national-approach.md §8 item 3: nothing outside live_states reaches out/)."""
@@ -1219,6 +1247,9 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     dropped = set(st.get("dropped_fixtures") or [])
     placements = st.get("placements") or {}
     events = [e for e in events if e["event_id"] not in dropped]
+    events, n_foreign = live_jurisdiction_events(events, status_mod.states())
+    if n_foreign:
+        print(f"export: {n_foreign} record(s) of feeds whose jurisdiction is not live left out of every public output")
     # the records as the status build read them: a status line quotes these texts, so its swaps are taken against them
     as_read = {e["event_id"]: e for e in events}
     events = [public_event(e) for e in events]
