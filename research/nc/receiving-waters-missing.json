@@ -1,9 +1,9 @@
 {
- "about": "Receiving waters named by the NC DWR sanitary sewer overflow layers (2022 to date) that data/receiving-waters-national.json does not hold for North Carolina (no name, NHD GNIS name or spelling seen matches, parentheticals ignored). Reports the source says did not reach surface water, duplicates and placeholders (unknown, storm drain, ditch) are left out. stream_index is DWR's own index for the stream where the 2026 layer gives one; points are report locations (DWR's geocode of the address), up to three.",
+ "about": "Receiving waters named by the NC DWR sanitary sewer overflow layers (2022 to date) that data/receiving-waters-national.json does not hold for North Carolina (no name, NHD GNIS name or spelling seen matches, parentheticals ignored). Reports the source says did not reach surface water, duplicates and placeholders (unknown, storm drain, ditch) are left out. stream_index is DWR's own index for the stream where the 2026 layer gives one; points are report locations (DWR's geocode of the address), up to three. One name can be several streams in different places (the points show where); stream_index is the one DWR gives on a 2026 report of that name.",
  "generated": "2026-11-04",
  "state": "NC",
- "waters": 538,
- "reports": 1584,
+ "waters": 536,
+ "reports": 1582,
  "rows": [
   {
    "name": "Mountain Creek",
@@ -8818,23 +8818,6 @@
    ]
   },
   {
-   "name": "None given",
-   "reports": 1,
-   "stream_index": null,
-   "permits": [
-    "WQCS00010"
-   ],
-   "points": [
-    [
-     35.976366,
-     -79.939629
-    ]
-   ],
-   "sources": [
-    "nc-dwr-sso-2026"
-   ]
-  },
-  {
    "name": "North Fork Swannanoa River (Burnett Reservoir)",
    "reports": 1,
    "stream_index": null,
@@ -10064,23 +10047,6 @@
     [
      35.977979,
      -80.043982
-    ]
-   ],
-   "sources": [
-    "nc-dwr-sso-2022-2025"
-   ]
-  },
-  {
-   "name": "Unknown Tributary",
-   "reports": 1,
-   "stream_index": null,
-   "permits": [
-    "WQCS00031"
-   ],
-   "points": [
-    [
-     35.895277,
-     -79.053565
     ]
    ],
    "sources": [

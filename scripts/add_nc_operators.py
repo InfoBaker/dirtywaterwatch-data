@@ -75,7 +75,8 @@ OWNER_ALIASES = {"onwasa": "onslow water and sewer authority", "aqua north carol
                  "eastern band of cherokee indians jacob cornsilk complex": "eastern band of cherokee indians",
                  "eastern band cherokee indians qualla boundary cherokee wwtp": "eastern band of cherokee indians",
                  "county of wake facilities design and construction": "wake county"}
-NAME_OVERRIDE = {"eastern band of cherokee indians": "Eastern Band of Cherokee Indians", "wake county": "Wake County"}
+NAME_OVERRIDE = {"eastern band of cherokee indians": "Eastern Band of Cherokee Indians", "wake county": "Wake County",
+                 "morven": "Town of Morven"}
 FACILITY = re.compile(r"^(.+?)\s+(collection system|wwtp|wwtf|wrf)$", re.I)
 TRAIL = re.compile(r"\s+(public utilities|public works|utilities|water system|general services)$")
 
