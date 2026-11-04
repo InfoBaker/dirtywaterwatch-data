@@ -970,3 +970,16 @@ def test_a_planned_window_of_some_weeks_keeps_the_authoritys_end():
     ivs = S.event_intervals(e, "PA", NOW, None, rules)
     assert ivs[0]["rule"] == "discharge" and not any("end_not_used" in iv for iv in ivs)
     assert S.end_not_credible({**e, "ended_at": "2036-08-10T11:00:00+00:00"}, NOW, rules)
+
+
+def test_a_generic_description_of_the_water_does_not_unlink_a_true_duplicate():
+    """Only a particular water's name is compared: "receiving stream", "creek behind the plant", "Outfall 001 to
+    river" name none, so a same-day EPA report naming the water is still the state record's duplicate (else one
+    discharge would be listed and counted twice)."""
+    day = NOW - 10 * H
+    for text in ("receiving stream", "creek behind the plant", "drainage ditch to creek", "tidal creek",
+                 "Outfall 001 to river", "adjacent creek", "stream next to pump station"):
+        assert S.specific_water_keys(text) == set(), text
+        st, epa = _same_day(day, waterbody_text=text)
+        assert S.find_duplicates([st, epa]) == {epa["event_id"]: st["event_id"]}, text
+    assert S.specific_water_keys("Outfall 001 to Test Creek") and S.specific_water_keys("Tidal Creek of Test Bay")
