@@ -869,30 +869,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-avila-beach-community-services-district-and-port-san-luis-harbor-district",
-   "agency": null,
-   "permit": "CA0047830",
-   "checked": "2026-11-04",
-   "id": "ca-avila-beach-community-services-district-and-port-san-luis-harbor-district-permit-noncompliance-report",
-   "name": "Avila Beach CSD and Port San Luis Harbor District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Avila Beach CSD and Port San Luis Harbor District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-avila-beach-community-services-district",
    "agency": null,
    "permit": null,
@@ -1903,30 +1879,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-buena-vista-rancheria-of-me-wuk-indians",
-   "agency": null,
-   "permit": "CA0049675",
-   "checked": "2026-11-04",
-   "id": "ca-buena-vista-rancheria-of-me-wuk-indians-permit-noncompliance-report",
-   "name": "Buena Vista Rancheria of Me-Wuk Indians",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Buena Vista Rancheria of Me-Wuk Indians: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-burbank",
    "agency": null,
    "permit": null,
@@ -1995,30 +1947,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Burlingame, City of, and North Bayside System Unit: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-burlingame-city-of-and-north-bayside-system-unit",
-   "agency": null,
-   "permit": "CA0037788",
-   "checked": "2026-11-04",
-   "id": "ca-burlingame-city-of-and-north-bayside-system-unit-permit-noncompliance-report",
-   "name": "Burlingame, City of, and North Bayside System Unit",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Burlingame, City of, and North Bayside System Unit: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -2119,30 +2047,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-ca0104841",
-   "agency": null,
-   "permit": "CA0104841",
-   "checked": "2026-11-04",
-   "id": "ca-ca0104841-permit-noncompliance-report",
-   "name": "Date Gardens Mobile Home Park wastewater plant (El Centro)",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Date Gardens Mobile Home Park wastewater plant (El Centro): no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. The law binds any person who causes or permits a discharge, public or private. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-cachuma-lake-recreation-area",
    "agency": null,
    "permit": null,
@@ -2211,30 +2115,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Calaveras County Water District and Saddle Creek Golf Club, LLC: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-calaveras-county-water-district-and-saddle-creek-golf-club-llc",
-   "agency": null,
-   "permit": "CA0084620",
-   "checked": "2026-11-04",
-   "id": "ca-calaveras-county-water-district-and-saddle-creek-golf-club-llc-permit-noncompliance-report",
-   "name": "Calaveras County Water District and Saddle Creek Golf Club, LLC",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Calaveras County Water District and Saddle Creek Golf Club, LLC: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -2886,30 +2766,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-central-marin-sanitation-agency",
-   "agency": null,
-   "permit": "CA0038628",
-   "checked": "2026-11-04",
-   "id": "ca-central-marin-sanitation-agency-permit-noncompliance-report",
-   "name": "Central Marin Sanitation Agency",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Central Marin Sanitation Agency: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-ceres",
    "agency": null,
    "permit": null,
@@ -3146,30 +3002,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: City of Livermore, Livermore-Amador Valley WMA, East Bay Dischargers Authority: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-city-of-livermore-livermore-amador-valley-wma-east-bay-dischargers-authority",
-   "agency": null,
-   "permit": "CA0038008",
-   "checked": "2026-11-04",
-   "id": "ca-city-of-livermore-livermore-amador-valley-wma-east-bay-dischargers-authority-permit-noncompliance-report",
-   "name": "City of Livermore, Livermore-Amador Valley WMA, East Bay Dischargers Authority",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: City of Livermore, Livermore-Amador Valley WMA, East Bay Dischargers Authority: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -3414,30 +3246,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-college-of-redwoods",
-   "agency": null,
-   "permit": "CA0006700",
-   "checked": "2026-11-04",
-   "id": "ca-college-of-redwoods-permit-noncompliance-report",
-   "name": "College of the Redwoods",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: College of the Redwoods: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-colma-town",
    "agency": null,
    "permit": null,
@@ -3506,30 +3314,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Colton/San Bernardino Regional Tertiary Treatment & Water Reclamation Authority: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-colton-san-bernardino-regional-tertiary-treatment-and-water-reclamation-authority",
-   "agency": null,
-   "permit": "CA8000304",
-   "checked": "2026-11-04",
-   "id": "ca-colton-san-bernardino-regional-tertiary-treatment-and-water-reclamation-authority-permit-noncompliance-report",
-   "name": "Colton/San Bernardino Regional Tertiary Treatment & Water Reclamation Authority",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Colton/San Bernardino Regional Tertiary Treatment & Water Reclamation Authority: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -4586,30 +4370,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-cutler-orosi-joint-powers-wastewater-authority",
-   "agency": null,
-   "permit": "CA0081485",
-   "checked": "2026-11-04",
-   "id": "ca-cutler-orosi-joint-powers-wastewater-authority-permit-noncompliance-report",
-   "name": "Cutler-Orosi Joint Powers Wastewater Authority",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Cutler-Orosi Joint Powers Wastewater Authority: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-cutler-public-utility-district",
    "agency": null,
    "permit": null,
@@ -5018,30 +4778,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-discovery-bay-town-of-community-services-district",
-   "agency": null,
-   "permit": "CA0078590",
-   "checked": "2026-11-04",
-   "id": "ca-discovery-bay-town-of-community-services-district-permit-noncompliance-report",
-   "name": "Discovery Bay, Town of, Community Services District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Discovery Bay, Town of, Community Services District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-dixon",
    "agency": null,
    "permit": null,
@@ -5186,30 +4922,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-dry-creek-band-of-pomo-indians",
-   "agency": null,
-   "permit": "CA0005241",
-   "checked": "2026-11-04",
-   "id": "ca-dry-creek-band-of-pomo-indians-permit-noncompliance-report",
-   "name": "DRY CREEK BAND OF POMO INDIANS",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: DRY CREEK BAND OF POMO INDIANS: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-duarte",
    "agency": null,
    "permit": null,
@@ -5254,30 +4966,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Dublin San Ramon SD, Livermore-Amador Valley WMA, East Bay Dischargers Authority: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-dublin-san-ramon-sanitary-district-livermore-amador-valley-wma-east-bay-dischargers-authority",
-   "agency": null,
-   "permit": "CA0037613",
-   "checked": "2026-11-04",
-   "id": "ca-dublin-san-ramon-sanitary-district-livermore-amador-valley-wma-east-bay-dischargers-authority-permit-noncompliance-report",
-   "name": "Dublin San Ramon SD, Livermore-Amador Valley WMA, East Bay Dischargers Authority",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Dublin San Ramon SD, Livermore-Amador Valley WMA, East Bay Dischargers Authority: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -5378,30 +5066,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-east-bay-dischargers-authority-livermore-amador-valley-wma",
-   "agency": null,
-   "permit": "CA0037869",
-   "checked": "2026-11-04",
-   "id": "ca-east-bay-dischargers-authority-livermore-amador-valley-wma-permit-noncompliance-report",
-   "name": "East Bay Dischargers Authority; Livermore-Amador Valley WMA",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: East Bay Dischargers Authority; Livermore-Amador Valley WMA: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-east-bay-mud",
    "agency": null,
    "permit": null,
@@ -5450,30 +5114,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-east-bay-municipal-utility-district",
-   "agency": null,
-   "permit": "CA0037702",
-   "checked": "2026-11-04",
-   "id": "ca-east-bay-municipal-utility-district-permit-noncompliance-report",
-   "name": "East Bay Municipal Utility District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: East Bay Municipal Utility District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-east-bay-municipal-utility-district-special-district-no-1",
    "agency": null,
    "permit": null,
@@ -5494,30 +5134,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: East Bay Municipal Utility District, Special District No. 1: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-east-bay-municipal-utility-district-special-district-no-1",
-   "agency": null,
-   "permit": "CA0038440",
-   "checked": "2026-11-04",
-   "id": "ca-east-bay-municipal-utility-district-special-district-no-1-permit-noncompliance-report",
-   "name": "East Bay Municipal Utility District, Special District No. 1",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: East Bay Municipal Utility District, Special District No. 1: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -6050,30 +5666,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-encina-wastewater-authority",
-   "agency": null,
-   "permit": "CA0107395",
-   "checked": "2026-11-04",
-   "id": "ca-encina-wastewater-authority-permit-noncompliance-report",
-   "name": "Encina Wastewater Authority",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Encina Wastewater Authority: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-encinitas",
    "agency": null,
    "permit": null,
@@ -6574,30 +6166,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Fort Bragg Municipal Improvement District No. 1: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-fort-bragg-municipal-improvement-district-no-1",
-   "agency": null,
-   "permit": "CA0023078",
-   "checked": "2026-11-04",
-   "id": "ca-fort-bragg-municipal-improvement-district-no-1-permit-noncompliance-report",
-   "name": "Fort Bragg Municipal Improvement District No. 1",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Fort Bragg Municipal Improvement District No. 1: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -8019,30 +7587,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-holtville",
-   "agency": null,
-   "permit": "CA0104361",
-   "checked": "2026-11-04",
-   "id": "ca-holtville-permit-noncompliance-report",
-   "name": "City of Holtville",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: City of Holtville: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-home-garden-sanitary-district",
    "agency": null,
    "permit": null,
@@ -8211,30 +7755,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-humboldt-county-resort-improvement-district-no-1",
-   "agency": null,
-   "permit": "CA0023027",
-   "checked": "2026-11-04",
-   "id": "ca-humboldt-county-resort-improvement-district-no-1-permit-noncompliance-report",
-   "name": "Humboldt County Resort Improvement District No. 1",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Humboldt County Resort Improvement District No. 1: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-huntington-beach",
    "agency": null,
    "permit": null,
@@ -8375,30 +7895,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Imperial Community College District: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-imperial-community-college-district",
-   "agency": null,
-   "permit": "CA0104299",
-   "checked": "2026-11-04",
-   "id": "ca-imperial-community-college-district-permit-noncompliance-report",
-   "name": "Imperial Community College District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Imperial Community College District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -8783,30 +8279,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Jamul Indian Village: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-jamul-indian-village",
-   "agency": null,
-   "permit": "CA0084284",
-   "checked": "2026-11-04",
-   "id": "ca-jamul-indian-village-permit-noncompliance-report",
-   "name": "Jamul Indian Village",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Jamul Indian Village: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -9846,30 +9318,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-lee-lake-water-district",
-   "agency": null,
-   "permit": "CA8000100",
-   "checked": "2026-11-04",
-   "id": "ca-lee-lake-water-district-permit-noncompliance-report",
-   "name": "Lee Lake Water District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Lee Lake Water District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-lee-vining-public-utility-district",
    "agency": null,
    "permit": null,
@@ -10082,30 +9530,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Livermore-Amador Valley Water Management Agency: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-livermore-amador-valley-water-management-agency",
-   "agency": null,
-   "permit": "CA0038679",
-   "checked": "2026-11-04",
-   "id": "ca-livermore-amador-valley-water-management-agency-permit-noncompliance-report",
-   "name": "Livermore-Amador Valley Water Management Agency",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Livermore-Amador Valley Water Management Agency: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -10446,30 +9870,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-los-angeles-county-department-of-beaches-and-harbors",
-   "agency": null,
-   "permit": "CA0064670",
-   "checked": "2026-11-04",
-   "id": "ca-los-angeles-county-department-of-beaches-and-harbors-permit-noncompliance-report",
-   "name": "Los Angeles County Department of Beaches and Harbors",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Los Angeles County Department of Beaches and Harbors: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-los-banos-urban-area-sw-system",
    "agency": null,
    "permit": null,
@@ -10590,30 +9990,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-lytton-rancheria-of-california",
-   "agency": null,
-   "permit": "CA0000437",
-   "checked": "2026-11-04",
-   "id": "ca-lytton-rancheria-of-california-permit-noncompliance-report",
-   "name": "Lytton Rancheria of California",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Lytton Rancheria of California: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-madera-county-public-works-department-special-districts",
    "agency": null,
    "permit": null,
@@ -10682,30 +10058,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: MALAGA COUNTY WATER DISTRICT: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-malaga-county-water-district",
-   "agency": null,
-   "permit": "CA0084239",
-   "checked": "2026-11-04",
-   "id": "ca-malaga-county-water-district-permit-noncompliance-report",
-   "name": "MALAGA COUNTY WATER DISTRICT",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: MALAGA COUNTY WATER DISTRICT: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -10950,30 +10302,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-marine-corps-base-camp-pendleton",
-   "agency": null,
-   "permit": "CA0109347",
-   "checked": "2026-11-04",
-   "id": "ca-marine-corps-base-camp-pendleton-permit-noncompliance-report",
-   "name": "Marine Corps Base, Camp Pendleton",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Marine Corps Base, Camp Pendleton: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-mariposa-county-dpw",
    "agency": null,
    "permit": null,
@@ -11094,30 +10422,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-maxwell-public-utility-district",
-   "agency": null,
-   "permit": "CA0079987",
-   "checked": "2026-11-04",
-   "id": "ca-maxwell-public-utility-district-permit-noncompliance-report",
-   "name": "MAXWELL PUD",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: MAXWELL PUD: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-maywood",
    "agency": null,
    "permit": null,
@@ -11162,30 +10466,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: MCCABE USD: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-mccabe-usd",
-   "agency": null,
-   "permit": "CA0104281",
-   "checked": "2026-11-04",
-   "id": "ca-mccabe-usd-permit-noncompliance-report",
-   "name": "MCCABE USD",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: MCCABE USD: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -11310,30 +10590,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-mendocino-county-water-works-district-no-2",
-   "agency": null,
-   "permit": "CA0024040",
-   "checked": "2026-11-04",
-   "id": "ca-mendocino-county-water-works-district-no-2-permit-noncompliance-report",
-   "name": "Mendocino County Water Works District No. 2",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Mendocino County Water Works District No. 2: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-mendota",
    "agency": null,
    "permit": null,
@@ -11450,30 +10706,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Millbrae, City of, and North Bayside System Unit (NBSU): notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-millbrae-city-of-and-north-bayside-system-unit",
-   "agency": null,
-   "permit": "CA0037532",
-   "checked": "2026-11-04",
-   "id": "ca-millbrae-city-of-and-north-bayside-system-unit-permit-noncompliance-report",
-   "name": "Millbrae, City of, and North Bayside System Unit (NBSU)",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Millbrae, City of, and North Bayside System Unit (NBSU): no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -11958,30 +11190,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-morro-bay-city-of-and-cayucos-sanitary-district",
-   "agency": null,
-   "permit": "CA0047881",
-   "checked": "2026-11-04",
-   "id": "ca-morro-bay-city-of-and-cayucos-sanitary-district-permit-noncompliance-report",
-   "name": "MORRO BAY, CITY OF AND CAYUCOS SANITARY DISTRICT",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: MORRO BAY, CITY OF AND CAYUCOS SANITARY DISTRICT: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-morro-bay",
    "agency": null,
    "permit": null,
@@ -12390,30 +11598,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-nevada-county-sanitary-district-no-1",
-   "agency": null,
-   "permit": "CA0077828",
-   "checked": "2026-11-04",
-   "id": "ca-nevada-county-sanitary-district-no-1-permit-noncompliance-report",
-   "name": "NEVADA COUNTY SANITATION DISTRICT NO. 1",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: NEVADA COUNTY SANITATION DISTRICT NO. 1: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-newhall-ranch-sanitary-district",
    "agency": null,
    "permit": null,
@@ -12506,30 +11690,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Niland County Sanitary District: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-niland-county-sanitary-district",
-   "agency": null,
-   "permit": "CA0104451",
-   "checked": "2026-11-04",
-   "id": "ca-niland-county-sanitary-district-permit-noncompliance-report",
-   "name": "Niland County Sanitary District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Niland County Sanitary District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -13041,30 +12201,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-orange-county-sanitary-district",
-   "agency": null,
-   "permit": "CA0110604",
-   "checked": "2026-11-04",
-   "id": "ca-orange-county-sanitary-district-permit-noncompliance-report",
-   "name": "Orange County Sanitation District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Orange County Sanitation District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-orange-cove",
    "agency": null,
    "permit": null,
@@ -13161,30 +12297,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-oro-loma-sanitary-district-castro-valley-sanitary-district",
-   "agency": null,
-   "permit": "CA0037559",
-   "checked": "2026-11-04",
-   "id": "ca-oro-loma-sanitary-district-castro-valley-sanitary-district-permit-noncompliance-report",
-   "name": "Oro Loma Sanitary District; Castro Valley Sanitary District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Oro Loma Sanitary District; Castro Valley Sanitary District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-oro-loma-sanitary-district",
    "agency": null,
    "permit": null,
@@ -13277,30 +12389,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Oroville Region, Sewerage Commission: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-oroville-region-sewerage-commission",
-   "agency": null,
-   "permit": "CA0079235",
-   "checked": "2026-11-04",
-   "id": "ca-oroville-region-sewerage-commission-permit-noncompliance-report",
-   "name": "Oroville Region, Sewerage Commission",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Oroville Region, Sewerage Commission: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -13737,30 +12825,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-peninsula-community-services-district-and-samoa-pacific-group",
-   "agency": null,
-   "permit": "CA1000001",
-   "checked": "2026-11-04",
-   "id": "ca-peninsula-community-services-district-and-samoa-pacific-group-permit-noncompliance-report",
-   "name": "Peninsula Community Services District and Samoa Pacific Group",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Peninsula Community Services District and Samoa Pacific Group: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-perris",
    "agency": null,
    "permit": null,
@@ -13829,30 +12893,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Picayune Rancheria of the Chukchansi Indians: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-picayune-rnch-chukchansi-indns",
-   "agency": null,
-   "permit": "CA0004009",
-   "checked": "2026-11-04",
-   "id": "ca-picayune-rnch-chukchansi-indns-permit-noncompliance-report",
-   "name": "Picayune Rancheria of the Chukchansi Indians",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Picayune Rancheria of the Chukchansi Indians: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -14141,30 +13181,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: PLACER CO FACILITY SERVICES: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-placer-county-facility-services",
-   "agency": null,
-   "permit": "CA0079316",
-   "checked": "2026-11-04",
-   "id": "ca-placer-county-facility-services-permit-noncompliance-report",
-   "name": "PLACER CO FACILITY SERVICES",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: PLACER CO FACILITY SERVICES: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -14865,36 +13881,12 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-regents-university-of-california",
-   "agency": null,
-   "permit": "CA0077895",
-   "checked": "2026-11-04",
-   "id": "ca-regents-university-of-california-permit-noncompliance-report",
-   "name": "Regents, University of California",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Regents, University of California: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-republic-services-of-sonoma-county",
    "agency": null,
    "permit": null,
    "checked": "2026-11-04",
    "id": "ca-republic-services-of-sonoma-county-health-officer-notice",
-   "name": "Republic Services of Sonoma County",
+   "name": "Republic Services of Sonoma County (a waste company: the Central Landfill leachate line)",
    "channel_kind": "local_health_page",
    "urls": [],
    "method": null,
@@ -14908,7 +13900,7 @@
    "sources": [
     "ca-hsc-5411-5"
    ],
-   "note": "No web form: Republic Services of Sonoma County: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. The law binds any person who causes or permits a discharge, public or private. (research/ca/report.md §2.1)",
+   "note": "No web form: Republic Services of Sonoma County (a waste company: the Central Landfill leachate line): notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. The law binds any person who causes or permits a discharge, public or private. (research/ca/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -15149,30 +14141,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: River Highlands CSD, County of Yuba, and Gold Village Land Development LLC: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-river-highlands-community-services-district-county-of-yuba-and-gold-village-land-development-llc",
-   "agency": null,
-   "permit": "CA0081574",
-   "checked": "2026-11-04",
-   "id": "ca-river-highlands-community-services-district-county-of-yuba-and-gold-village-land-development-llc-permit-noncompliance-report",
-   "name": "River Highlands CSD, County of Yuba, and Gold Village Land Development LLC",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: River Highlands CSD, County of Yuba, and Gold Village Land Development LLC: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -15629,30 +14597,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Russian River County Sanitation District: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-russian-river-county-sanitary-district",
-   "agency": null,
-   "permit": "CA0024058",
-   "checked": "2026-11-04",
-   "id": "ca-russian-river-county-sanitary-district-permit-noncompliance-report",
-   "name": "Russian River County Sanitation District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Russian River County Sanitation District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -16209,30 +15153,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-san-elijo-joint-powers-authority",
-   "agency": null,
-   "permit": "CA0107999",
-   "checked": "2026-11-04",
-   "id": "ca-san-elijo-joint-powers-authority-permit-noncompliance-report",
-   "name": "San Elijo Joint Powers Authority",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: San Elijo Joint Powers Authority: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-san-fernando",
    "agency": null,
    "permit": null,
@@ -16301,30 +15221,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: San Francisco, City and County of; North Bayside System Unit: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-san-francisco-city-and-county-of-north-bayside-system-unit",
-   "agency": null,
-   "permit": "CA0038318",
-   "checked": "2026-11-04",
-   "id": "ca-san-francisco-city-and-county-of-north-bayside-system-unit-permit-noncompliance-report",
-   "name": "San Francisco, City and County of; North Bayside System Unit",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: San Francisco, City and County of; North Bayside System Unit: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -16445,30 +15341,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: San Jose and Santa Clara, Cities of; and San Jose/Santa Clara WPCP: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-san-jose-and-santa-clara-cities-of-and-san-jose-santa-clara-wpcp",
-   "agency": null,
-   "permit": "CA0037842",
-   "checked": "2026-11-04",
-   "id": "ca-san-jose-and-santa-clara-cities-of-and-san-jose-santa-clara-wpcp-permit-noncompliance-report",
-   "name": "San Jose and Santa Clara, Cities of; and San Jose/Santa Clara WPCP",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: San Jose and Santa Clara, Cities of; and San Jose/Santa Clara WPCP: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -16925,30 +15797,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Sanitary District No. 5 of Marin County: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-sanitary-district-no-5-of-marin-county",
-   "agency": null,
-   "permit": "CA0037427",
-   "checked": "2026-11-04",
-   "id": "ca-sanitary-district-no-5-of-marin-county-permit-noncompliance-report",
-   "name": "Sanitary District No. 5 of Marin County",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Sanitary District No. 5 of Marin County: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -17457,30 +16305,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-santa-ynez-band-of-chumash-ind",
-   "agency": null,
-   "permit": "CA0050008",
-   "checked": "2026-11-04",
-   "id": "ca-santa-ynez-band-of-chumash-ind-permit-noncompliance-report",
-   "name": "Santa Ynez Band of Chumash Indians",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Santa Ynez Band of Chumash Indians: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-santa-ynez-community-services-district",
    "agency": null,
    "permit": null,
@@ -17597,30 +16421,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Sausalito-Marin City Sanitary District: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-sausalito-marin-city-sanitary-district",
-   "agency": null,
-   "permit": "CA0038067",
-   "checked": "2026-11-04",
-   "id": "ca-sausalito-marin-city-sanitary-district-permit-noncompliance-report",
-   "name": "Sausalito-Marin City Sanitary District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Sausalito-Marin City Sanitary District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -18116,30 +16916,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-shasta-county-service-area-no-17",
-   "agency": null,
-   "permit": "CA0081507",
-   "checked": "2026-11-04",
-   "id": "ca-shasta-county-service-area-no-17-permit-noncompliance-report",
-   "name": "Shasta County Service Area No. 17",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Shasta County Service Area No. 17: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-shasta-csa-13",
    "agency": null,
    "permit": null,
@@ -18524,30 +17300,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-sonoma-valley-county-sanitary-district",
-   "agency": null,
-   "permit": "CA0037800",
-   "checked": "2026-11-04",
-   "id": "ca-sonoma-valley-county-sanitary-district-permit-noncompliance-report",
-   "name": "Sonoma Valley County Sanitation District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Sonoma Valley County Sanitation District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-south-coast-water-district",
    "agency": null,
    "permit": null,
@@ -18592,30 +17344,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: South County Regional Wastewater Authority: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-south-county-regional-wastewater-authority",
-   "agency": null,
-   "permit": "CA0049964",
-   "checked": "2026-11-04",
-   "id": "ca-south-county-regional-wastewater-authority-permit-noncompliance-report",
-   "name": "South County Regional Wastewater Authority",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: South County Regional Wastewater Authority: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -18688,30 +17416,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: South Orange County Wastewater Authority: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-south-orange-county-wastewater-authority",
-   "agency": null,
-   "permit": "CA0107417",
-   "checked": "2026-11-04",
-   "id": "ca-south-orange-county-wastewater-authority-permit-noncompliance-report",
-   "name": "South Orange County Wastewater Authority",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: South Orange County Wastewater Authority: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -18812,30 +17516,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-south-san-francisco-and-san-bruno-cities-of-and-north-bayside-system-unit",
-   "agency": null,
-   "permit": "CA0038130",
-   "checked": "2026-11-04",
-   "id": "ca-south-san-francisco-and-san-bruno-cities-of-and-north-bayside-system-unit-permit-noncompliance-report",
-   "name": "South San Francisco and San Bruno, Cities of & North Bayside System Unit (NBSU)",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: South San Francisco and San Bruno, Cities of & North Bayside System Unit (NBSU): no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-south-san-francisco",
    "agency": null,
    "permit": null,
@@ -18904,30 +17584,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: SOUTH SAN LUIS OBISPO CO SD: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-south-san-luis-obispo-county-sanitary-district",
-   "agency": null,
-   "permit": "CA0048003",
-   "checked": "2026-11-04",
-   "id": "ca-south-san-luis-obispo-county-sanitary-district-permit-noncompliance-report",
-   "name": "SOUTH SAN LUIS OBISPO CO SD",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: SOUTH SAN LUIS OBISPO CO SD: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -19583,30 +18239,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-table-mountain-rancheria",
-   "agency": null,
-   "permit": "CA0084280",
-   "checked": "2026-11-04",
-   "id": "ca-table-mountain-rancheria-permit-noncompliance-report",
-   "name": "Table Mountain Rancheria (wastewater treatment facility)",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Table Mountain Rancheria (wastewater treatment facility): no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-taft",
    "agency": null,
    "permit": null,
@@ -19771,30 +18403,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Tehama County Sanitation District No. 1: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-tehama-county-sanitary-district-no-1",
-   "agency": null,
-   "permit": "CA0084069",
-   "checked": "2026-11-04",
-   "id": "ca-tehama-county-sanitary-district-no-1-permit-noncompliance-report",
-   "name": "Tehama County Sanitation District No. 1",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Tehama County Sanitation District No. 1: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -20131,30 +18739,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: Town of Scotia Company LLC (Scotia WWTF): notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. The law binds any person who causes or permits a discharge, public or private. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-town-of-scotia-company-llc",
-   "agency": null,
-   "permit": "CA0006017",
-   "checked": "2026-11-04",
-   "id": "ca-town-of-scotia-company-llc-permit-noncompliance-report",
-   "name": "Town of Scotia Company LLC (Scotia WWTF)",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Town of Scotia Company LLC (Scotia WWTF): no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. The law binds any person who causes or permits a discharge, public or private. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -20567,30 +19151,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-u-s-department-of-interior-national-park-service-yosemite-national-park",
-   "agency": null,
-   "permit": "CA0081759",
-   "checked": "2026-11-04",
-   "id": "ca-u-s-department-of-interior-national-park-service-yosemite-national-park-permit-noncompliance-report",
-   "name": "U.S. Department of the Interior, National Park Service, Yosemite National Park",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: U.S. Department of the Interior, National Park Service, Yosemite National Park: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-u-s-department-of-navy",
    "agency": null,
    "permit": null,
@@ -20615,30 +19175,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-u-s-department-of-navy",
-   "agency": null,
-   "permit": "CA0110116",
-   "checked": "2026-11-04",
-   "id": "ca-u-s-department-of-navy-permit-noncompliance-report",
-   "name": "U.S. Department of Navy",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: U.S. Department of Navy: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-u-s-navy-and-kjs-support-services-jv-llc",
    "agency": null,
    "permit": null,
@@ -20659,30 +19195,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: U.S. Navy and KJS Support Services JV, LLC: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-u-s-navy-and-kjs-support-services-jv-llc",
-   "agency": null,
-   "permit": "CA0104906",
-   "checked": "2026-11-04",
-   "id": "ca-u-s-navy-and-kjs-support-services-jv-llc-permit-noncompliance-report",
-   "name": "U.S. Navy and KJS Support Services JV, LLC",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: U.S. Navy and KJS Support Services JV, LLC: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -21023,30 +19535,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-united-auburn-indian-community",
-   "agency": null,
-   "permit": "CA0084697",
-   "checked": "2026-11-04",
-   "id": "ca-united-auburn-indian-community-permit-noncompliance-report",
-   "name": "UNITED AUBURN INDIAN COMMUNITY",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: UNITED AUBURN INDIAN COMMUNITY: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-united-states-navy",
    "agency": null,
    "permit": null,
@@ -21067,30 +19555,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: United States Navy: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-united-states-navy",
-   "agency": null,
-   "permit": "CA0110175",
-   "checked": "2026-11-04",
-   "id": "ca-united-states-navy-permit-noncompliance-report",
-   "name": "United States Navy",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: United States Navy: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -21499,30 +19963,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: US Section, International Boundary and Water Commission: South Bay International WWTP and Tijuana River canyon collectors (transboundary flows from Mexico): notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-usibwc-south-bay",
-   "agency": null,
-   "permit": "CA0108928",
-   "checked": "2026-11-04",
-   "id": "ca-usibwc-south-bay-permit-noncompliance-report",
-   "name": "US Section, International Boundary and Water Commission: South Bay International WWTP and Tijuana River canyon collectors (transboundary flows from Mexico)",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: US Section, International Boundary and Water Commission: South Bay International WWTP and Tijuana River canyon collectors (transboundary flows from Mexico): no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
@@ -22100,30 +20540,6 @@
   },
   {
    "state": "CA",
-   "operator_id": "ca-water-replenishment-district-of-southern-california",
-   "agency": null,
-   "permit": "CA0064645",
-   "checked": "2026-11-04",
-   "id": "ca-water-replenishment-district-of-southern-california-permit-noncompliance-report",
-   "name": "Water Replenishment District of Southern California",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: Water Replenishment District of Southern California: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
    "operator_id": "ca-waterford",
    "agency": null,
    "permit": null,
@@ -22288,30 +20704,6 @@
     "ca-hsc-5411-5"
    ],
    "note": "No web form: West County Agency; West County Wastewater District: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "CA",
-   "operator_id": "ca-west-county-agency-west-county-wastewater-district",
-   "agency": null,
-   "permit": "CA0038539",
-   "checked": "2026-11-04",
-   "id": "ca-west-county-agency-west-county-wastewater-district-permit-noncompliance-report",
-   "name": "West County Agency; West County Wastewater District",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the Regional Water Board",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Permit report",
-   "sources": [
-    "ca-go-2022-0103-dwq"
-   ],
-   "note": "No web form: West County Agency; West County Wastewater District: no enrollment under the Statewide Sanitary Sewer Systems General Order was found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks for a 24-hour report of noncompliance to the Regional Water Board, which is not published. No web channel found. (research/ca/report.md §2.3)",
    "barrier": "no_web_page"
   },
   {
