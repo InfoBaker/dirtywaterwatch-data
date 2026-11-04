@@ -77,3 +77,13 @@ def test_every_record_says_how_far_behind_the_table_is_and_an_open_one_is_not_re
     assert ivs[-1]["rule"] == "not_reconfirmed" and ivs[-1]["confirmed"].startswith("2026-03-05")
     assert "lifted" not in {iv["rule"] for iv in ivs}
     assert "time_note" in __import__("export.build", fromlist=["PUBLIC_FEED_META"]).PUBLIC_FEED_META
+
+
+def test_the_registry_row_types_beach_watch_as_beach_advisories_not_sewage_reports():
+    """Review 2026-11-04 P2-5: the row listed sso and cso, so the coverage counted a months-old beach table as a sewage
+    feed for California."""
+    from build import status
+    from export import coverage
+    reg = status.load_registry()["ca-beachwatch-advisories"]
+    assert set(reg["event_types"]) == {"beach_advisory", "beach_closure", "rain_advisory"}
+    assert not set(reg["event_types"]) & coverage.SEWAGE

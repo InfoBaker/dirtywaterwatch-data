@@ -424,8 +424,8 @@
     "role": "advisories",
     "event_types": [
       "beach_advisory",
-      "sso",
-      "cso"
+      "beach_closure",
+      "rain_advisory"
     ],
     "waters_covered": "coastal beaches statewide plus bays",
     "water_slugs": [],

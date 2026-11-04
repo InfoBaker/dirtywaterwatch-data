@@ -12,7 +12,8 @@ level: "state"
 #   on record; `--backfill` takes every spill in the file. Only the safe columns are read (never the
 #   certifier or the operators' narratives); house numbers are cut from the location; a point on
 #   private property is rounded. Category 1 is shown; Categories 2 and 3 are kept with
-#   reached_water false (counted, never placed). A draft has no end and is never given one.
+#   reached_water false (counted, never placed). A report with no end is never given one; an end
+#   before the start is kept as published and not used (unresolved.implausible_end).
 # Notes (research/ca, status used, verified fetched, checked 2026-11-04): Statewide, event-level,
 #   machine-readable, public: read hourly by pipeline/ingest/ca_swrcb_ciwqs_spills.py
 #   (If-Modified-Since: the file changes once a day; 3,567 spills since June 2023 on 2026-11-04 with
