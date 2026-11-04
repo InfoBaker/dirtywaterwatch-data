@@ -33,9 +33,12 @@ What is read (privacy)
   The free text kept is scrubbed: the spill location name (typed by the operator, very often a street address of a
   home) loses every street address's house number (common.strip_house_numbers) after common.scrub_text; the receiving
   water name and the entity that closed or restricted a water pass common.scrub_text, and a value that is only a
-  person's name becomes "[name removed]". When the spill appeared only on private property (a private lateral
-  clean-out or inside a building) its origin point is rounded to three decimals (about 100 m) so it does not mark a
-  home; coord_precision_m says so. common.strip_personal runs on every raw (in event()) and build.redact over the
+  person's name becomes "[name removed]"; a number the house-number cut leaves before a street with no street word or
+  a Spanish street name ("<number> Calle <name>", "<number> Via <name>") is cut too (cut_location_numbers). When the
+  spill appeared only on private property (a private lateral clean-out, a private upper or lower lateral, a backflow
+  prevention device or inside a building) its origin point is rounded to three decimals (about 100 m) so it does not
+  mark a home; coord_precision_m says so. The destination points (where the sewage went: a building, a yard, a
+  street) are always rounded so (they place nothing). common.strip_personal runs on every raw (in event()) and build.redact over the
   records last. The saved raw page (data/raw/<source>/) holds only the scrubbed short-key rows, never the file.
   tests/test_ca_swrcb_ciwqs.py proves that the certifier, the narratives and the placeholder house number never reach
   a record or the saved page.
@@ -58,7 +61,10 @@ Record rules
   - Status: an end at or after the start -> ended (a report not yet certified says in raw._end_basis that the end is
     the operator's draft); no end -> unknown with no end (the draft report form has no end: the Order requires it only
     in the certified report), so the status build gives the plan's unknown-status caution and then "end not
-    reported"; an end before the start, or a time more than a day after the read, is not used and the record says why.
+    reported"; an end before the start, or more than a day after the read, is kept as published with status unknown
+    and raw._end_not_used saying why: the status build's shared rule for an implausible end (unresolved.implausible_end,
+    build/status.end_not_credible) then draws no window from an end before the start (the spill has no confirmed end).
+    A start more than a day after the read is not used (raw._start_not_used).
   - reported_at: the time the operator told Cal OES (DATE_TIME_ENROLLEE_NOTIFIED_CALOES) when given, else the draft
     report's date, else the first certification date (raw._reported_basis says which). published_at is null (the file
     gives no posting time; raw._first_seen_in_file is the file's Last-Modified when the spill was first seen).
@@ -104,8 +110,8 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, NAME_REMOVED, OPERATOR_WORDS, ROOT, event, now_iso,
-                    path_notes_to_meta, read_json, save_raw, scrub_text, strip_house_numbers, write_events, write_json)
+from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, HOUSE_NUMBER_REMOVED, NAME_REMOVED, OPERATOR_WORDS, ROOT,
+                    event, now_iso, path_notes_to_meta, read_json, save_raw, scrub_text, strip_house_numbers, write_events, write_json)
 
 SOURCE_ID = "ca-swrcb-ciwqs-spills-flatfile"
 FILE_URL = "https://www.waterboards.ca.gov/water_issues/programs/sso/docs/data_files/Cat1-2-3-Spills.txt"
@@ -159,7 +165,7 @@ COLUMNS = {
     "SPILL_END_DATE_AND_TIME": "end_at",
     "SPILL_CAUSE(S)": "causes",
     "SYSTEM_FAILURE_LOCATION": "failure_location",
-    "WAS_SPILL_ASSOCIATED_WITH_A_STORM_EVENT_(YES_NO)?": "storm_event",
+    "WAS_THE_SPILL_ASSOCIATED_WITH_A_STORM_EVENT_(YES_NO)?": "storm_event",
     "SPILL_RESPONSE_COMPLETION_DATE": "response_completed_at",
     "NAME_OF_RECEIVING_WATER_BODY(S)": "receiving_water",
     "TYPE_OF_RECEIVING_WATER_BODY(S)": "receiving_water_type",
@@ -181,7 +187,9 @@ TS = re.compile(r"^(\d{1,2})/(\d{1,2})/(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2})
 DMY = re.compile(r"^(\d{1,2})-([A-Za-z]{3})-(\d{2,4})$")
 MONTHS = {m: i for i, m in enumerate(["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], 1)}
 WATER_NONE = re.compile(r"^\s*(n/?a|none|no|nothing|unknown|tbd|not applicable|-+|\.+|0)\s*\.?\s*$", re.I)
-PRIVATE_ONLY = {"lateral clean out (private)", "inside building or structure"}
+# appearance points on private property: a spill that appeared only at these has its point rounded (it marks a home)
+PRIVATE_ONLY = {"lateral clean out (private)", "inside building or structure", "lower lateral (private)",
+                "upper lateral (private)", "backflow prevention device"}
 SITE_WORDS = {"district", "dept", "department", "flood", "control", "parks", "park", "harbor", "harbors", "beaches",
               "health", "environmental", "staff", "county", "city", "state", "water", "regional", "agency", "public",
               "services", "division", "office", "board", "authority", "police", "fire", "coast", "guard", "army",
@@ -328,14 +336,43 @@ def entity_name(v) -> str | None:
     return scrub_text(s) or None
 
 
+# a house number in a typed spill location that common.strip_house_numbers leaves (a street with no street word, or
+# one named in Spanish: "<number> Calle <name>", "<number> Via <name>", "<number> Glen <name>, <town>"): a number of up
+# to six digits before a word, at the start of the text or after a space or bracket; a single digit only at the start.
+# Not cut: a number after an id word ("Manhole 3189", "LS 43832", "Building 031", "Highway 89", "Road 274", "Unit 9B",
+# "Avenue 66"), a number with a leading zero, a quantity ("100 ft", "2800 block", "50 gallons"), a ZIP code at the end,
+# an ordinal ("51st Avenue"), a map-grid number before a bracket or a dash ("1543 (", "1491-0341").
+LOC_NUMBER = re.compile(r"(?:^|(?<=[ (]))(?!0)(\d{1,6}[A-Za-z]?)(?=[ ]{1,2}(?:[NSEWnsew]\.?[ ]{1,2})?[^\W\d_])")
+LOC_ID_BEFORE = re.compile(
+    r"(?i:\b(?:MH|SMH|Manhole|LS|PS|SLS|Station|Lift|Pump|Building|Bldg|Unit|Units|Sec|Section|Outfall|Hwy|Highway|SR|"
+    r"Route|Rte|US|Interstate|I|Road|Rd|Avenue|Ave|Mile|Marker|MM|District|Zone|Gate|Lot|Space|Spc|Apt|Suite|Ste|No|"
+    r"Number|Basin|Pond|Line|Phase|Area|Sewer|Main|Base|Siphon|Valve|Tank|Well|Pier|Dock|Berth|Hangar|Terminal|Plant|"
+    r"Facility|Structure|Cleanout|CO|Box|Vault|Inlet|Grid|Map|Page|Sheet|Item|Q)\.?)[ #.]{0,3}$")
+LOC_QUANTITY_AFTER = re.compile(
+    r"[ ]{1,2}(?i:feet|foot|ft|gallons?|gal|gpm|yards?|yds?|blocks?|miles|mi|meters?|m|am|pm|a\.m|p\.m|hours?|hrs?|"
+    r"minutes?|mins?|inch(?:es)?|in|lf|linear|square|sq|percent|units|x)\b")
+
+
+def cut_location_numbers(s: str) -> str:
+    """Every number LOC_NUMBER reads as a house number -> [house number removed] (see LOC_NUMBER)."""
+    def one(m):
+        if len(m.group(1).rstrip("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")) == 1 and m.start(1) > 0:
+            return m.group(0)
+        if LOC_ID_BEFORE.search(s[max(0, m.start(1) - 16):m.start(1)]) or LOC_QUANTITY_AFTER.match(s[m.end(1):]):
+            return m.group(0)
+        return HOUSE_NUMBER_REMOVED
+    return LOC_NUMBER.sub(one, s)
+
+
 def location_name(v) -> str | None:
-    """The spill location as typed, with every street address's house number cut (it is very often a home)."""
+    """The spill location as typed, with every street address's house number cut (it is very often a home):
+    common.strip_house_numbers, then cut_location_numbers for the numbers it leaves."""
     s = clean(v)
     if not s:
         return None
     if _person(s):
         return NAME_REMOVED
-    return strip_house_numbers(scrub_text(s)) or None
+    return cut_location_numbers(strip_house_numbers(scrub_text(s))) or None
 
 
 def scrubbed_row(r: dict) -> dict:
@@ -442,14 +479,26 @@ def _record(a: dict, base: dict, raw: dict, fetched_at: str, wdids: dict[str, st
         raw["_start_not_used"] = (f"the start as published ({iso(start)}) lies after the file was read, most likely a "
                                   "typing error in the year; the report is kept with no start")
         start = None
-    if end is not None and end > fetched + timedelta(days=1):
-        raw["_end_not_used"] = f"the end as published ({iso(end)}) lies after the file was read"
-        end = None
+    # an end before the start, or after the file was read: kept as published, never counted as an end; the status
+    # build's shared rule (unresolved.implausible_end in data/rules.json, build/status.end_not_credible) treats the
+    # spill as having no confirmed end and says so on the colour window
+    implausible = None
     if end is not None and start is not None and end < start:
-        raw["_end_not_used"] = f"the end as published ({iso(end)}) is before the start"
-        end = None
+        implausible = "is before the start"
+    elif end is not None and end > fetched + timedelta(days=1):
+        implausible = "lies after the file was read"
     certified = clean(a.get("spill_status")).lower() in ("certified", "amended")
-    if end is not None:
+    if implausible:
+        status, ended_at = "unknown", iso(end)
+        raw["_end_not_used"] = f"the end as published ({iso(end)}) {implausible}"
+        raw["_end_basis"] = (
+            "the report gives an end before the start, most likely a typing error: it is kept as published and not "
+            "used, so the spill has no confirmed end (the site's rule for an implausible end, "
+            "unresolved.implausible_end)" if implausible == "is before the start" else
+            "the report gives an end after the file was read, most likely a typing error: it is kept as published and "
+            "the report is not counted as ended; the site's rule for an implausible end (unresolved.implausible_end) "
+            "decides whether a window is drawn to it")
+    elif end is not None:
         status, ended_at = "ended", iso(end)
         if not certified:
             raw["_end_basis"] = (f"the report is not yet certified (CIWQS status {a.get('spill_status')}); the end is "
@@ -461,7 +510,7 @@ def _record(a: dict, base: dict, raw: dict, fetched_at: str, wdids: dict[str, st
                              "is used")
     precision = "minute"
     if start is not None and (start.hour, start.minute) == (0, 0) and \
-            (end is None or (end.hour, end.minute) == (0, 0)):
+            (end is None or implausible or (end.hour, end.minute) == (0, 0)):
         precision = "day"
         notes.append("the times are typed as midnight; read as dates")
     if notes:
@@ -514,12 +563,15 @@ def _record(a: dict, base: dict, raw: dict, fetched_at: str, wdids: dict[str, st
     for i in range(1, 5):
         dla, dlo, _ = point(a.get(f"dest_lat_{i}"), a.get(f"dest_lon_{i}"))
         if dla is not None:
-            dests.append({"lat": dla, "lon": dlo})
+            dests.append({"lat": round(dla, 3), "lon": round(dlo, 3)})
     for i in range(1, 5):
         raw.pop(f"dest_lat_{i}", None)
         raw.pop(f"dest_lon_{i}", None)
     if dests:
         raw["destination_points"] = dests
+        raw["_destination_points_basis"] = ("where the operator says the sewage went (a building, a yard, a street, a "
+                                            "storm drain or a water), rounded to about 100 m: such a point can mark a "
+                                            "home; it places nothing")
 
     # operator
     wdid = clean(a.get("wdid")).upper() or None

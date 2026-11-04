@@ -101,10 +101,20 @@ def test_category_2_and_3_spills_are_kept_but_say_they_reached_no_water():
     assert recs["990003"]["status"] == "ended"
 
 
-def test_an_end_before_the_start_is_not_used():
+def test_an_end_before_the_start_is_kept_as_published_and_the_shared_rule_draws_no_window_from_it():
+    """Review 2026-11-04 P2-1: the end is kept as published (status unknown, never counted as ended) so the status
+    build's shared rule (unresolved.implausible_end) applies and says so on the window; the record no longer says that
+    no end was reported."""
+    from datetime import datetime, timezone
+    from build import status
     recs, _ = records()
     r = recs["990004"]
-    assert r["ended_at"] is None and r["status"] == "unknown" and "before the start" in r["raw"]["_end_not_used"]
+    assert r["status"] == "unknown" and r["ended_at"] == "2026-09-08T06:30:00-07:00"
+    assert "before the start" in r["raw"]["_end_not_used"]
+    assert "no end reported" not in r["raw"]["_end_basis"] and "unresolved.implausible_end" in r["raw"]["_end_basis"]
+    ivs = status.event_intervals(r, "CA", datetime(2026, 9, 12, tzinfo=timezone.utc), None, status.load_rules())
+    assert ivs and all(iv["end_not_used"]["rule"] == "unresolved.implausible_end" for iv in ivs)
+    assert {iv["rule"] for iv in ivs} <= {"no_end", "unresolved", "end_never_reported"}       # never "discharge"
 
 
 def test_a_water_entry_that_names_none_is_not_a_water_and_a_zero_point_is_not_used():
@@ -182,3 +192,52 @@ def test_a_combined_system_wdid_joins_its_operator():
             {"id": "md-x", "state": "MD", "npdes_permit": "2SSO99003", "npdes_permits": []}]
     idx = M.wdid_index(rows)
     assert idx == {"2SSO99001": "ca-sample", "2SSO99001-C": "ca-sample"}
+
+
+def test_house_numbers_that_the_street_word_cut_leaves_are_cut_from_the_location():
+    """Review 2026-11-04 P1-1: a home's number before a street with no street word, or a Spanish street name, stayed."""
+    for typed in ("1133 Sample Oaks, Pasadena", "6083 Calle Sample", "9640 Caminito De Sample", "100 Toda Sample",
+                  "1543 (3120 Via La Sample, Palos Verdes Estates)", "NOT# 40201164514 5815 CAMINITO DEL SAMPLE",
+                  "2 Corte Del Sample, Larkspur CA", "1010 E. SAMPLE", "37552 Road 274 Bass Lake CA 93604",
+                  "Manhole 176B near 355 Camino Del Sample", "3252 North Sample Dirve", "8218 Sample Aver"):
+        out = M.location_name(typed)
+        nums = [n for n in __import__("re").findall(r"\d+", typed) if n in ("1133", "6083", "9640", "100", "3120", "5815",
+                                                                           "2", "1010", "37552", "355", "3252", "8218")]
+        assert nums and not any(f"{n} " in out for n in nums), (typed, out)
+        assert "[house number removed]" in out
+    for kept in ("Manhole 3189 in backyard", "LS 43832 FM", "Building 031 Cleanout", "HWY 89 mile marker 19",
+                 "Avenue 66 and Pierce Street", "2800 block of Whipple Ave", "Fremont Avenue - approximately 100 ft South",
+                 "Joint Outfall B - Unit 9B Trunk Sewer", "1491-0341 (Palos Verdes Estates)", "51st Avenue & Foothill Blvd",
+                 "Mid Valley 1 Sewer Force Main", "Sampleton CA 94558", "Station 16 force main"):
+        assert M.location_name(kept) == kept, kept
+    assert M.location_name("37552 Road 274 Bass Lake") == "[house number removed] Road 274 Bass Lake"
+
+
+def test_points_on_private_property_and_every_destination_point_are_rounded():
+    """Review 2026-11-04 P1-2: private laterals and backflow devices mark a home; the destination points were exact."""
+    for apps in ("Lower Lateral (Private)", "Upper Lateral (Private)", "Backflow Prevention Device",
+                 "Inside Building or Structure; Lateral Clean Out (Private)"):
+        rs = rows()
+        for r in rs:
+            if r["spill_event_id"] == "990001":
+                r["appearance_points"] = apps
+                r["lat"], r["lon"] = "37.812345", "-122.265432"
+        recs, _ = records(rs=rs)
+        r = recs["990001"]
+        assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812, -122.265, 150), apps
+    recs, _ = records()
+    assert recs["990003"]["lat"] == 37.8 and recs["990003"]["coord_precision_m"] is None      # a manhole: as given
+    rs = rows()
+    for r in rs:
+        if r["spill_event_id"] == "990001":
+            r["dest_lat_1"], r["dest_lon_1"] = "37.8012345", "-122.2712345"
+    recs, _ = records(rs=rs)
+    assert recs["990001"]["raw"]["destination_points"] == [{"lat": 37.801, "lon": -122.271}]
+    assert "rounded" in recs["990001"]["raw"]["_destination_points_basis"]
+
+
+def test_the_storm_event_column_is_read_under_its_real_header():
+    """Review 2026-11-04 P3: the column is WAS_THE_SPILL_..., so storm_event was never filled."""
+    assert "WAS_THE_SPILL_ASSOCIATED_WITH_A_STORM_EVENT_(YES_NO)?" in M.COLUMNS
+    header = FIX.read_text(encoding="cp1252").split("\n", 1)[0].split("\t")
+    assert all(c in header for c in M.COLUMNS), [c for c in M.COLUMNS if c not in header]
