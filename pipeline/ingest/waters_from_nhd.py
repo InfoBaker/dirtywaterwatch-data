@@ -49,8 +49,9 @@ the NHDPlus V2.1 features of that GNIS name in the state (asked thirty spellings
 nearest each place the reports give (each cluster of points within 2 km, else each town within 3 km), so every place
 of a name gets its own record; with no place, a name found once in the state. A feature already a record in this file
 maps to it; a feature openboatlaunch already holds maps to that record (new_record: the outline, else the bounding box
-and towns of the tidy, same_water_by_box). Then the NHD high-resolution flowlines of the name near the points or towns,
-then the OSM fallback when Overpass answers. Rows carry from: "reports" and their report count, are merged among the
+and towns of the tidy, same_water_by_box). A name NHDPlus V2.1 does not carry, or carries only away from the reports'
+places, then takes the NHD high-resolution flowlines of the name near the points or towns, then the OSM fallback when
+Overpass answers. Rows carry from: "reports" and their report count, are merged among the
 state's report rows only (the state build's rows stay exactly), and the run's statistics go under
 stats.state_builds.<ST>.report_names. FILE is rewritten to the names still without a record, each with its reason
 (rows), the names a record now holds in `resolved` (with the slugs), so the next run resumes with what is left.
@@ -4003,6 +4004,13 @@ def report_name_choices(nhd: Nhd, t) -> tuple[list[tuple], str | None, list[dict
     return [(feature_key(st, pick(k)), pick(k), how) for k, how in chosen.items()], None, failed
 
 
+def wants_hr(reason: str | None) -> bool:
+    """Whether a report name the name pass left goes to the NHD high-resolution flowlines: NHDPlus V2.1 has no water of
+    the name in the state, or none at the reports' places (a small stream of the name there that V2.1 leaves out);
+    not when the reports give no place, or two waters of the name lie equally near."""
+    return bool(reason) and (reason.startswith("no NHD flowline") or "none within reach" in reason)
+
+
 def resolve_hr_places(nhd: Nhd, t) -> tuple[dict | None, str]:
     """resolve_hr for a report name: the reports' points, else the towns they give (the flowline of the name within
     HR_NEAR_DEG of the town's outline)."""
@@ -4137,7 +4145,7 @@ def names_main(args) -> int:
             if row["how"]:
                 row["reason"] = None
                 row["defined_by"] = "name"
-            elif not choices and reason and reason.startswith("no NHD flowline"):
+            elif not choices and wants_hr(reason):
                 hr_queue.append((t, row))
         except BudgetExhausted as ex:
             run.stop(t, ex)
@@ -4147,7 +4155,7 @@ def names_main(args) -> int:
             run.problems.append(f"{t['key']}: {type(ex).__name__}: {ex}")
             row["reason"] = row["reason"] or f"build error ({type(ex).__name__}: {ex})"
         run.checkpoint(i, len(targets))
-    for t, row in hr_queue:             # NHDPlus V2.1 has no feature of the name: the high-resolution flowlines
+    for t, row in hr_queue:             # NHDPlus V2.1 has none of the name there: the high-resolution flowlines
         if run.stopped:
             row["reason"] = f"{row['reason']}; NHD high resolution not asked ({run.stopped})"
             continue
