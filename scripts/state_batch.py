@@ -486,8 +486,14 @@ def other_changes(st: str, root: Path = ROOT) -> list[str]:
     return sorted({ln[3:].strip() for ln in (out or "").splitlines()} - keep)
 
 
+BATCH_BRANCH = re.compile(r"batch/[a-z]{2}-\d{4}-\d{2}-\d{2}")
+
+
 def publish_cmds(st: str, date: str, body: Path, files: list[str], gh: str = "gh") -> dict:
     branch = f"batch/{st.lower()}-{date}"
+    # the push replaces the branch (--force): only ever a batch branch of this pattern, never main or another
+    if not BATCH_BRANCH.fullmatch(branch):
+        raise Refused(f"not a batch branch name: {branch!r}")
     who = ["-c", f"user.name={BOT[0]}", "-c", f"user.email={BOT[1]}"]
     msg = f"{title(st, date)}: {', '.join(files)}"
     return {

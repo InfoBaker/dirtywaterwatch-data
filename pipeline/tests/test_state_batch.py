@@ -401,3 +401,12 @@ def test_refresh_workflow_keeps_the_raw_cache():
     assert "state_paths.py pack raw-cache.tar.gz" in steps[sr]["run"]
     assert "state_paths.py unpack raw-cache.tar.gz" in steps[rr]["run"]
     assert "check-size build.tar.gz" in steps[sb]["run"]
+
+
+@pytest.mark.parametrize("st,date", [("NC", "2026-11-04 main"), ("N C", "2026-11-04"), ("NC", "../main"),
+                                     ("NCX", "2026-11-04"), ("nc", "x")])
+def test_publish_force_pushes_a_batch_branch_only(st, date):
+    with pytest.raises(B.Refused):
+        B.publish_cmds(st, date, Path("body.md"), ["data/waters-nhd.json"])
+    c = B.publish_cmds("NC", "2026-11-04", Path("body.md"), ["data/waters-nhd.json"])
+    assert c["commit"][-1] == ["git", "push", "--force", "origin", "HEAD:refs/heads/batch/nc-2026-11-04"]

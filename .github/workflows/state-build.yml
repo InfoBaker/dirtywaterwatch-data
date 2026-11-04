@@ -6,8 +6,11 @@ name: State water batch
 # `reaches` is not offered: build/reaches.py has no state scope yet. `registry` needs EPA's CSO inventory and an
 # openboatlaunch snapshot, which this runner does not have, so it is refused here with that reason.
 # It takes the refresh's concurrency group, so it never runs beside a refresh: it waits for a running one, and the
-# hourly refresh waits for it (a dispatch still waiting when the next scheduled refresh queues is replaced by it:
-# dispatch again). The pipeline state (state/build.tar.gz) and the raw caches (state/raw-cache.tar.gz) are restored
+# hourly refresh waits for it. GitHub keeps one waiting run per group and cancels the older waiting one when another
+# queues, whichever workflow it belongs to: a batch still waiting when a refresh queues is replaced by it (dispatch
+# again), and a refresh waiting behind a batch is replaced by a second batch dispatch, so the site's data waits for
+# the next refresh. Dispatch one batch at a time, when no refresh is waiting (gh run list --workflow refresh.yml
+# --status queued; --status pending), and keep the budget well inside the hour. The pipeline state (state/build.tar.gz) and the raw caches (state/raw-cache.tar.gz) are restored
 # from R2; the raw caches are saved back unless the run was cancelled (they are answers, and they are what makes the
 # next dispatch resume where this one stopped); the build state is never saved from here. The workflow commits nothing
 # to main: the changed registry files go on a branch batch/<st>-<date> with a pull request listing the counts, for a
