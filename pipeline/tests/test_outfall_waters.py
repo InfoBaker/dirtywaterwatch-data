@@ -34,6 +34,25 @@ def registry():
     return rows
 
 
+def built_states() -> list[str]:
+    """The states a state build has made water records for (data/waters-nhd.json stats.state_builds)."""
+    d = json.loads((DATA_DIR / "waters-nhd.json").read_text())
+    return sorted(((d.get("stats") or {}).get("state_builds") or {}))
+
+
+@pytest.fixture(scope="module")
+def state_registry():
+    """The rows of the state-built states: data/outfalls-us.json, data/outfalls-plants-us.json, data/outfalls-<st>.json
+    (ingest.outfall_waters --state)."""
+    states = set(built_states())
+    rows = []
+    for name in list(OW.STATE_FILES) + [f"outfalls-{st.lower()}.json" for st in sorted(states)]:
+        path = DATA_DIR / name
+        if path.exists():
+            rows += [(name, o) for o in json.loads(path.read_text())["outfalls"] if (o.get("state") or "") in states]
+    return rows
+
+
 @pytest.fixture(scope="module")
 def waters():
     w = S.load_waters()
@@ -44,6 +63,24 @@ def test_every_registered_outfall_has_a_water_record_or_a_stated_reason(registry
     w, moved = waters
     bad = []
     for name, o in registry:
+        where = f"{name} {o.get('npdes_permit')} {o.get('outfall')}"
+        slug = o.get("water_slug")
+        if slug:
+            if moved.get(slug, slug) not in w:
+                bad.append(f"{where}: water_slug {slug} is no water record")
+        elif not str(o.get("no_water_reason") or "").strip():
+            bad.append(f"{where}: no water_slug and no no_water_reason")
+        if not str(o.get("water_match") or "").strip():
+            bad.append(f"{where}: no water_match note")
+    assert not bad, f"{len(bad)} outfalls:\n" + "\n".join(bad[:40])
+
+
+def test_every_outfall_of_a_state_built_state_has_a_water_record_or_a_stated_reason(state_registry, waters):
+    """A state build (2026-11-04) ties every outfall row of the state, CSO and treatment plant, before the state goes
+    live: a slug that is a water record on file, or no_water_reason; and the note of how."""
+    w, moved = waters
+    bad = []
+    for name, o in state_registry:
         where = f"{name} {o.get('npdes_permit')} {o.get('outfall')}"
         slug = o.get("water_slug")
         if slug:
