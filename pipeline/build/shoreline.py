@@ -2,8 +2,9 @@
 modelled like rivers, not filled whole).
 
 A report from an outfall on a shoreline lake never colours the lake's outline. The outfall's point gets a stretch of
-shoreline instead, walked along the lake's outline up to each_way_km in both directions (lake currents along a shore
-run either way with the wind), carried as a reach record (build/reaches.py writes it to data/build/reaches/ beside the
+shoreline instead, walked along the lake's outline up to each_way_km in both directions (alongshore currents on the
+Great Lakes are driven by the wind and reverse every few days; the distance and its evidence are in the rule's
+rationale and source), carried as a reach record (build/reaches.py writes it to data/build/reaches/ beside the
 river traces, model "shoreline") with the lake as its water, the same lake's records in the other states it touches,
 and those states. The status build colours the stretch and lists the report on the lake (build/status.py); the export
 draws the lake as an outline (display "outline", stretch_model "shoreline") and the stretch in reaches.geojson.
@@ -13,7 +14,8 @@ name_min_area_km2 or more, or (min_area_km2 set) any lake or reservoir that larg
 
 The shore: a lake record's outline is not all shore. The Census-cut Michigan records run along the state and
 international lines in the lake, and the NHDPlus Great Lakes polygons have straight edges on whole degrees where
-their pieces end. An edge is shore when its midpoint lies within shore_m of land (the Census Bureau's 2023 1:500,000
+their pieces end: a record of several pieces is dissolved first (stretch()), so a seam between two pieces is never an
+end; a piece's outer edge away from land still is. An edge is shore when its midpoint lies within shore_m of land (the Census Bureau's 2023 1:500,000
 state outlines, cb_2023_us_state_500k, which end at the shore). The walk crosses a run of edges away from land shorter
 than gap_km (a river mouth, a breakwall) and stops at the start of a longer one (a state or international line, a tile
 edge), and at each_way_km. Without land outlines (land=None) every edge is shore: only for outlines that are all shore.
@@ -27,7 +29,7 @@ import math
 import numpy as np
 
 KINDS = {"lake", "reservoir"}
-DEFAULTS = {"each_way_km": 40.0, "shore_m": 500.0, "gap_km": 3.0, "snap_km": 5.0, "name_min_area_km2": 100.0,
+DEFAULTS = {"each_way_km": 20.0, "shore_m": 500.0, "gap_km": 3.0, "snap_km": 5.0, "name_min_area_km2": 100.0,
             "min_area_km2": None, "lakes": []}
 STATE_NEAR_M = 2_000          # a stretch point this close to a state's land touches that state
 MODEL = "shoreline"
@@ -177,7 +179,7 @@ def _walk(c: np.ndarray, i: int, p: np.ndarray, step: int, limit_m: float, gap_m
     return path, done, STOP_END
 
 
-def stretch(lon: float, lat: float, lake_geom, land=None, each_way_km: float = 40.0, shore_m: float = 500.0,
+def stretch(lon: float, lat: float, lake_geom, land=None, each_way_km: float = 20.0, shore_m: float = 500.0,
             gap_km: float = 3.0, snap_km: float = 5.0, land_states: dict | None = None) -> dict:
     """The shoreline stretch at (lon, lat) on lake_geom (a shapely (multi)polygon, lon/lat). land: the land near
     the lake (a shapely geometry, lon/lat) or None (every edge is shore). land_states: {state: land geometry}
@@ -185,6 +187,9 @@ def stretch(lon: float, lat: float, lake_geom, land=None, each_way_km: float = 4
     "snap_m", "length_km", "states"}. NoShore when no shore edge lies within snap_km of the point."""
     import shapely
     from shapely.geometry import box
+    from shapely.ops import unary_union
+    if len(getattr(lake_geom, "geoms", [])) > 1:      # NHD pieces sharing a seam: one outline (the seam is no shore end)
+        lake_geom = unary_union([g.buffer(0) for g in lake_geom.geoms])
     k = _k(lat)
     p = np.array([lon, lat]) * k
     reach_m = (each_way_km + gap_km) * 1000 + snap_km * 1000
@@ -223,10 +228,45 @@ def stretch(lon: float, lat: float, lake_geom, land=None, each_way_km: float = 4
     states = []
     if land_states:
         from shapely.geometry import MultiPoint
-        pts = MultiPoint([pt for s in sides for pt in (np.asarray(s["coords"]) * k).tolist()] or [p.tolist()])
+        # a side with no length (the walk starts where the shore ends) has no coordinates
+        pts = MultiPoint([pt for s in sides if s["coords"] for pt in (np.asarray(s["coords"]) * k).tolist()]
+                         or [p.tolist()])
         for st, g in sorted(land_states.items()):
             gm = shapely.transform(g, lambda xy: xy * k)
             if gm.distance(pts) <= STATE_NEAR_M:
                 states.append(st)
     return {"sides": sides, "snap_m": round(snap_m), "length_km": round(sum(s["km"] for s in sides), 3),
             "states": states}
+
+
+ONWARD_M = 300          # a stretch that ends this close to another shoreline lake record's outline goes on along it
+
+
+def onward(lon: float, lat: float, lake_geom, land, km: float, walked: list, shore_m: float = 500.0,
+           gap_km: float = 3.0, land_states: dict | None = None) -> dict | None:
+    """The shore of another lake record that a stretch ends on (an end at a state line where the next state's
+    record of the same lake begins, or at the straight line NHD draws between Lake Michigan and Lake Huron in the
+    Straits of Mackinac): the side of a stretch from the end point on lake_geom that runs away from the shore
+    already walked (walked: lon/lat lines), at most km. {"coords", "km", "stop", "states"} or None (no such shore
+    within ONWARD_M of the point, or nothing new)."""
+    from shapely.geometry import LineString
+    try:
+        r = stretch(lon, lat, lake_geom, land, km, shore_m, gap_km, ONWARD_M / 1000, land_states=land_states)
+    except NoShore:
+        return None
+    k = _k(lat)
+    done = [LineString(np.asarray(c, dtype=float) * k) for c in walked if len(c) >= 2]
+    best, best_new = None, 0.0
+    for side in r["sides"]:
+        if len(side["coords"]) < 2:
+            continue
+        line = LineString(np.asarray(side["coords"], dtype=float) * k)
+        new = line.length
+        for d in done:          # the part of the side that is not the shore already walked
+            new -= line.intersection(d.buffer(shore_m / 2)).length
+        if new > best_new:
+            best, best_new = side, new
+    if best is None or best_new < 100 or best_new < 0.5 * best["km"] * 1000:
+        return None
+    return {**best, "states": r["states"]}
+
