@@ -489,6 +489,42 @@ def public_rules(o):
     return o
 
 
+def live_registry_rows(rows: list[dict], live: set[str]) -> list[dict]:
+    """The registry rows of the live states and the national ones: a row whose `states` list names only states not
+    yet live stays home (docs/national-approach.md §8 item 3: nothing outside live_states reaches out/)."""
+    out = []
+    for r in rows:
+        sts = {str(x).upper() for x in (r.get("states") or [])}
+        if not sts or sts & live:
+            out.append(r)
+    return out
+
+
+def live_feeds(feeds: list[dict], kept_registry_ids: set[str]) -> list[dict]:
+    """The feeds whose registry rows survive live_registry_rows (a feed with no registry row is kept: its state is
+    not known here, and its events are already limited to the live waters)."""
+    return [f for f in feeds if not (f.get("registry_ids") or []) or any(r in kept_registry_ids for r in f["registry_ids"])]
+
+
+def live_dischargers(rows: list[dict], live: set[str]) -> list[dict]:
+    """Operator rows of the live states only (a row with no state is kept)."""
+    return [d for d in rows if not d.get("state") or str(d["state"]).upper() in live]
+
+
+def live_rules(rules: dict, live: set[str]) -> dict:
+    """out/rules.json keeps the per-state and per-operator windows of the live states only; the shared rules and
+    their rationale stay whole (the site shows a rule only when one of its sources covers a live water)."""
+    out = dict(rules)
+    red = dict(out.get("red") or {})
+    if isinstance(red.get("by_state"), dict):
+        red["by_state"] = {k: v for k, v in red["by_state"].items() if str(k).upper() in live}
+    if isinstance(red.get("by_discharger"), dict):
+        low = {x.lower() for x in live}
+        red["by_discharger"] = {k: v for k, v in red["by_discharger"].items() if str(k).split("-", 1)[0].lower() in low}
+    out["red"] = red
+    return out
+
+
 def publicize(o):
     """Rule records that come from data/rules.json carry a pointer into out/rules.json ("rules_ref")
     instead of the file's rationale and internal source paths; the methods page prints rules.json.
@@ -987,6 +1023,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     # the operator registry first: an event's discharger_id that the registry lists as an alias is written
     # as the row's id (the original in discharger_id_source) before anything is counted or written
     dis, dis_from = load_dischargers()
+    dis = live_dischargers(dis, status_mod.states())          # operators of the live states only
     aliases = discharger_alias_map(dis)
     events, n_alias_events = canonicalize_events(events, aliases)
     n_alias_status = rewrite_discharger_ids(st, aliases)
@@ -1231,12 +1268,15 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
             if isinstance(row.get(k), str):
                 row[k] = ARCGIS_OWNER.sub("", row[k])       # an ArcGIS account name is not attribution
         reg_rows.append(row)
+    reg_rows = live_registry_rows(reg_rows, status_mod.states())  # the live states' and the national rows only
+    kept_rids = {r["id"] for r in reg_rows}
     feeds = []
     for sid, h in sorted(health.items()):
         f = files.get(sid) or {}
         meta_pub = {k: v for k, v in (f.get("meta") or {}).items() if k in PUBLIC_FEED_META}
         feeds.append({**h, "file": f.get("file"), "meta": meta_pub,
                       "waters_covered": sum(1 for w in st["waters"].values() if sid in w["covered_by"])})
+    feeds = live_feeds(feeds, kept_rids)
     write_compact(OUT_DIR / "sources.json", {"built": now_iso(), "feeds": feeds, "registry": reg_rows})
 
     # what is reported, state by state and water by water (docs/plan.md §2.y; export/coverage.py), with where the
@@ -1341,7 +1381,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     write_compact(OUT_DIR / "meta.json", meta)
     rules_src = DATA_DIR / "rules.json"
     if rules_src.exists():                  # the methods page prints it; internal "_" keys stay home
-        write_json(OUT_DIR / "rules.json", public_rules(json.loads(rules_src.read_text())))
+        write_json(OUT_DIR / "rules.json", live_rules(public_rules(json.loads(rules_src.read_text())), status_mod.states()))
     for name in ("meta.json", "sources.json", "waters.json", "conditions.json", "active.json", "dischargers.json",
                  "coverage.json", "monthly-outfalls.json", "outfalls.json"):
         hits = internal_wording(read_json(OUT_DIR / name))
