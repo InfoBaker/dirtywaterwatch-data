@@ -69790,7 +69790,7 @@
    "state": "KY",
    "city": "ERLANGER",
    "outfall": "027",
-   "outfall_name": "Untreated CSO or Stormwater from\r\n12th St \ufffd River Metals CSO ID 0730129",
+   "outfall_name": "Untreated CSO or Stormwater from\r\n12th St � River Metals CSO ID 0730129",
    "outfall_status": "CSO|SW",
    "feature_type": "EXO",
    "receiving_water_echo": "Licking River",
@@ -69964,7 +69964,7 @@
    "state": "KY",
    "city": "ERLANGER",
    "outfall": "034",
-   "outfall_name": "Untreated CSO from\r\nSouthern \ufffd Twin Oaks CSO ID 0870079",
+   "outfall_name": "Untreated CSO from\r\nSouthern � Twin Oaks CSO ID 0870079",
    "outfall_status": "CSO|SW",
    "feature_type": "EXO",
    "receiving_water_echo": "Licking River",
@@ -71309,7 +71309,7 @@
    "state": "KY",
    "city": "ERLANGER",
    "outfall": "086",
-   "outfall_name": "Untreated CSO or Stormwater from\r\nO\ufffdFallon Ave CSO ID 0600096",
+   "outfall_name": "Untreated CSO or Stormwater from\r\nO�Fallon Ave CSO ID 0600096",
    "outfall_status": "CSO|SW",
    "feature_type": "EXO",
    "receiving_water_echo": "Ohio River",
@@ -81440,7 +81440,8 @@
    "coords_from": null,
    "receiving_water_source": "state",
    "water_match": "name and town: its receiving water 'ROUGE RIVER' by name and the permittee's town (farmington hills): the only record of that name there (the text reads 'ROUGE RIVER', the record 'River Rouge'); River Rouge (river-rouge-mi, openboatlaunch), no point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "no_point_reason": "EPA's inventory carries no coordinates for this outfall and Michigan's state layers give none; an overflow here is read at the operator's plant until a point is found (MI go-live 2026-11-04)"
   },
   {
    "npdes_permit": "MI0037621",
@@ -81469,7 +81470,8 @@
    "coords_from": null,
    "receiving_water_source": "state",
    "water_match": "name and town: its receiving water 'ROUGE RIVER' by name and the permittee's town (farmington hills): the only record of that name there (the text reads 'ROUGE RIVER', the record 'River Rouge'); River Rouge (river-rouge-mi, openboatlaunch), no point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "no_point_reason": "EPA's inventory carries no coordinates for this outfall and Michigan's state layers give none; an overflow here is read at the operator's plant until a point is found (MI go-live 2026-11-04)"
   },
   {
    "npdes_permit": "MI0037621",
@@ -81498,7 +81500,8 @@
    "coords_from": null,
    "receiving_water_source": "state",
    "water_match": "name and town: its receiving water 'ROUGE RIVER' by name and the permittee's town (farmington hills): the only record of that name there (the text reads 'ROUGE RIVER', the record 'River Rouge'); River Rouge (river-rouge-mi, openboatlaunch), no point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "no_point_reason": "EPA's inventory carries no coordinates for this outfall and Michigan's state layers give none; an overflow here is read at the operator's plant until a point is found (MI go-live 2026-11-04)"
   },
   {
    "npdes_permit": "MI0043982",
