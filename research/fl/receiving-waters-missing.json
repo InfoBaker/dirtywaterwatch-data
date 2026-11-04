@@ -1,17 +1,16 @@
 {
  "about": "Receiving-water names in FL's reports that data/receiving-waters-national.json does not hold for FL, by name as typed, with the number of reports giving each.",
  "state": "FL",
- "waters": 255,
- "reports": 459,
+ "waters": 245,
+ "reports": 436,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in FL": 208,
-  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 8,
+  "no NHD flowline or waterbody of that name in FL": 206,
   "a water record holds the name, but the reports' points lie too far from it to be placed there": 6,
   "1 NHD water of that name in FL, none within reach of the reports' places": 5,
   "part of a sewer, drainage or treatment works, not a public water": 4,
-  "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 4,
   "2 NHD waters of that name in FL, none within reach of the reports' places": 3,
   "4 NHD waters of that name in FL, none within reach of the reports' places": 3,
+  "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 3,
   "3 NHD waters of that name in FL, none within reach of the reports' places": 3,
   "the open sea (no NHD record)": 1,
   "the name of a town (Altamonte Springs), not of a water: no NHD water of that name in FL": 1,
@@ -19,20 +18,28 @@
   "the name of a town (Palm Bay), not of a water: no NHD water of that name in FL": 1,
   "the name of a town (Pebble Creek), not of a water: no NHD water of that name in FL": 1,
   "the name of a town (South Bay), not of a water: no NHD water of that name in FL": 1,
+  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 1,
   "6 NHD waters of that name in FL, none within reach of the reports' places": 1,
   "the name of a town (Bonita Springs), not of a water: no NHD water of that name in FL": 1,
   "the name of a town (DeFuniak Springs), not of a water: no NHD water of that name in FL": 1,
   "the name of a town (Palm Harbor), not of a water: no NHD water of that name in FL": 1,
   "the name of a town (Silver Springs), not of a water: no NHD water of that name in FL": 1
  },
- "resolved_names": 195,
- "resolved_reports": 704,
+ "resolved_names": 205,
+ "resolved_reports": 727,
  "build": {
   "date": "2026-11-04",
-  "command": "python -m ingest.waters_from_nhd --names research/fl/receiving-waters-missing.json --state FL",
+  "command": "python -m ingest.waters_from_nhd --names research/fl/receiving-waters-missing.json --state FL --recheck",
   "records_built": 0,
-  "names_resolved": 0,
-  "network_requests": 0
+  "names_resolved": 10,
+  "network_requests": 0,
+  "last_build": {
+   "date": "2026-11-04",
+   "command": "python -m ingest.waters_from_nhd --names research/fl/receiving-waters-missing.json --state FL",
+   "records_built": 0,
+   "names_resolved": 0,
+   "network_requests": 0
+  }
  },
  "rows": [
   {
@@ -231,42 +238,6 @@
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "Indian River Lagoon",
-   "reports": 6,
-   "points": [
-    [
-     28.59606,
-     -80.80432
-    ],
-    [
-     28.12274,
-     -80.64881
-    ],
-    [
-     27.76324,
-     -80.40942
-    ],
-    [
-     28.13,
-     -80.591
-    ],
-    [
-     27.67055,
-     -80.36171
-    ]
-   ],
-   "towns": [
-    "Titusville",
-    "Vero Beach",
-    "Melbourne",
-    "Melbourne Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
    "name": "Klosterman Bayou",
    "reports": 6,
    "points": [
@@ -429,26 +400,6 @@
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "South Fork of Middle River",
-   "reports": 4,
-   "points": [
-    [
-     26.15916,
-     -80.14628
-    ]
-   ],
-   "towns": [
-    "Wilton Manors"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "records": [
-    "south-fork-middle-river-fl"
-   ],
-   "reason": "a water record holds this water but not this spelling (south-fork-middle-river-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
-  },
-  {
    "name": "South Lagoon",
    "reports": 4,
    "points": [
@@ -469,30 +420,6 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "Allen's Creek",
-   "reports": 3,
-   "points": [
-    [
-     27.92042,
-     -82.75571
-    ],
-    [
-     27.93603,
-     -82.72951
-    ]
-   ],
-   "towns": [
-    "Clearwater"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "records": [
-    "allen-creek-fl"
-   ],
-   "reason": "a water record holds this water but not this spelling (allen-creek-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Bass Lake",
@@ -558,26 +485,6 @@
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "North Fork of Middle River",
-   "reports": 3,
-   "points": [
-    [
-     26.155,
-     -80.14
-    ]
-   ],
-   "towns": [
-    "Wilton Manors"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "records": [
-    "north-fork-middle-river-fl"
-   ],
-   "reason": "a water record holds this water but not this spelling (north-fork-middle-river-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
-  },
-  {
    "name": "Seminole Bypass Canal",
    "reports": 3,
    "points": [
@@ -637,30 +544,6 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "Allens Creek",
-   "reports": 2,
-   "points": [
-    [
-     27.92042,
-     -82.75571
-    ],
-    [
-     27.93603,
-     -82.72951
-    ]
-   ],
-   "towns": [
-    "Clearwater"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "records": [
-    "allen-creek-fl"
-   ],
-   "reason": "a water record holds this water but not this spelling (allen-creek-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Altamonte Springs",
@@ -1510,7 +1393,10 @@
    "places_from": [
     "fl-dep-pnp"
    ],
-   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
+   "records": [
+    "allen-creek-fl"
+   ],
+   "reason": "a water record holds this water but not this spelling (allen-creek-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Anglers Lake",
@@ -3297,26 +3183,6 @@
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "Lawne Lake",
-   "reports": 1,
-   "points": [
-    [
-     28.569,
-     -81.442
-    ]
-   ],
-   "towns": [
-    "Apopka"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "records": [
-    "lake-lawne-fl"
-   ],
-   "reason": "a water record holds this water but not this spelling (lake-lawne-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
-  },
-  {
    "name": "Legend Creek",
    "reports": 1,
    "points": [
@@ -3535,30 +3401,6 @@
    "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
   },
   {
-   "name": "Mc Coys Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.31115,
-     -81.7088
-    ],
-    [
-     30.33261,
-     -81.70024
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
    "name": "Meginnis Arm Run",
    "reports": 1,
    "points": [
@@ -3680,26 +3522,6 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "N Fork of Middle River",
-   "reports": 1,
-   "points": [
-    [
-     26.155,
-     -80.14
-    ]
-   ],
-   "towns": [
-    "Wilton Manors"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "records": [
-    "north-fork-middle-river-fl"
-   ],
-   "reason": "a water record holds this water but not this spelling (north-fork-middle-river-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Narrows Waterway",
@@ -4198,26 +4020,6 @@
    ]
   },
   {
-   "name": "S Fork of Middle River",
-   "reports": 1,
-   "points": [
-    [
-     26.15916,
-     -80.14628
-    ]
-   ],
-   "towns": [
-    "Wilton Manors"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "records": [
-    "south-fork-middle-river-fl"
-   ],
-   "reason": "a water record holds this water but not this spelling (south-fork-middle-river-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
-  },
-  {
    "name": "SFWMD C-16 Canal",
    "reports": 1,
    "points": [
@@ -4339,26 +4141,6 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "Sherman's Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.37061,
-     -81.41083
-    ]
-   ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "records": [
-    "sherman-creek-fl"
-   ],
-   "reason": "a water record holds this water but not this spelling (sherman-creek-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Silver Springs",
@@ -5742,6 +5524,45 @@
    ]
   },
   {
+   "name": "Indian River Lagoon",
+   "reports": 6,
+   "slugs": [
+    "indian-river-lagoon-fl"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.59606,
+     -80.80432
+    ],
+    [
+     28.12274,
+     -80.64881
+    ],
+    [
+     27.76324,
+     -80.40942
+    ],
+    [
+     28.13,
+     -80.591
+    ],
+    [
+     27.67055,
+     -80.36171
+    ]
+   ],
+   "towns": [
+    "Titusville",
+    "Vero Beach",
+    "Melbourne",
+    "Melbourne Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
    "name": "Loxahatchee River",
    "reports": 6,
    "slugs": [
@@ -6331,6 +6152,26 @@
    ]
   },
   {
+   "name": "South Fork of Middle River",
+   "reports": 4,
+   "slugs": [
+    "south-fork-middle-river-fl"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.15916,
+     -80.14628
+    ]
+   ],
+   "towns": [
+    "Wilton Manors"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
    "name": "St. Lucie River",
    "reports": 4,
    "slugs": [
@@ -6425,6 +6266,30 @@
     [
      27.93664,
      -82.72948
+    ]
+   ],
+   "towns": [
+    "Clearwater"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
+   "name": "Allen's Creek",
+   "reports": 3,
+   "slugs": [
+    "allen-creek-fl"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.92042,
+     -82.75571
+    ],
+    [
+     27.93603,
+     -82.72951
     ]
    ],
    "towns": [
@@ -6695,6 +6560,26 @@
    ]
   },
   {
+   "name": "North Fork of Middle River",
+   "reports": 3,
+   "slugs": [
+    "north-fork-middle-river-fl"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.155,
+     -80.14
+    ]
+   ],
+   "towns": [
+    "Wilton Manors"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
    "name": "Oldfield Creek",
    "reports": 3,
    "slugs": [
@@ -6851,6 +6736,30 @@
     "Dade City",
     "Dunnellon",
     "Hernando Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
+   "name": "Allens Creek",
+   "reports": 2,
+   "slugs": [
+    "allen-creek-fl"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.92042,
+     -82.75571
+    ],
+    [
+     27.93603,
+     -82.72951
+    ]
+   ],
+   "towns": [
+    "Clearwater"
    ],
    "places_from": [
     "fl-dep-pnp"
@@ -8685,6 +8594,26 @@
    ]
   },
   {
+   "name": "Lawne Lake",
+   "reports": 1,
+   "slugs": [
+    "lake-lawne-fl"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.569,
+     -81.442
+    ]
+   ],
+   "towns": [
+    "Apopka"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
    "name": "Lemon Bay",
    "reports": 1,
    "slugs": [
@@ -8854,6 +8783,33 @@
    ]
   },
   {
+   "name": "Mc Coys Creek",
+   "reports": 1,
+   "slugs": [
+    "mccoys-creek-fl"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.31115,
+     -81.7088
+    ],
+    [
+     30.33261,
+     -81.70024
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
    "name": "McCoy Creek",
    "reports": 1,
    "slugs": [
@@ -8908,6 +8864,26 @@
    ],
    "towns": [
     "Pace"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
+   "name": "N Fork of Middle River",
+   "reports": 1,
+   "slugs": [
+    "north-fork-middle-river-fl"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.155,
+     -80.14
+    ]
+   ],
+   "towns": [
+    "Wilton Manors"
    ],
    "places_from": [
     "fl-dep-pnp"
@@ -9054,6 +9030,26 @@
    ]
   },
   {
+   "name": "S Fork of Middle River",
+   "reports": 1,
+   "slugs": [
+    "south-fork-middle-river-fl"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.15916,
+     -80.14628
+    ]
+   ],
+   "towns": [
+    "Wilton Manors"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
    "name": "Sand Branch Creek",
    "reports": 1,
    "slugs": [
@@ -9104,6 +9100,26 @@
     [
      30.36406,
      -81.40988
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
+   "name": "Sherman's Creek",
+   "reports": 1,
+   "slugs": [
+    "sherman-creek-fl"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.37061,
+     -81.41083
     ]
    ],
    "towns": [

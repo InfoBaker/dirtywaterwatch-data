@@ -3,6 +3,10 @@
   "Lake Allatoona",
   "Allatoona Reservoir"
  ],
+ "allen-creek-fl": [
+  "Allen's Creek",
+  "Allens Creek"
+ ],
  "caloosahatchee-river-fl": [
   "CALOOSAHATCHIE River",
   "CALOOSAHATCHIE RV"
@@ -56,6 +60,9 @@
   "Sidney Lanier Lake",
   "Lake Sydney Lanier"
  ],
+ "lake-lawne-fl": [
+  "Lawne Lake"
+ ],
  "long-island-sound-ct": [
   "Norwalk Harbor",
   "Indian Harbor"
@@ -67,6 +74,9 @@
   "Maiden Choice Creek",
   "Maidens Choice Creek"
  ],
+ "mccoys-creek-fl": [
+  "Mc Coys Creek"
+ ],
  "naugatuck-river-ct": [
   "Naugatuct River"
  ],
@@ -75,6 +85,10 @@
  ],
  "north-atlantic-ocean-me": [
   "Atlantic Ocean"
+ ],
+ "north-fork-middle-river-fl": [
+  "North Fork of Middle River",
+  "N Fork of Middle River"
  ],
  "northwest-branch-anacostia-river-md": [
   "Northwest Branch"
@@ -117,6 +131,16 @@
  ],
  "savannah-river-ga": [
   "SAVANNAH RV"
+ ],
+ "seventeen-mile-river-ga": [
+  "17 Mile River"
+ ],
+ "sherman-creek-fl": [
+  "Sherman's Creek"
+ ],
+ "south-fork-middle-river-fl": [
+  "South Fork of Middle River",
+  "S Fork of Middle River"
  ],
  "west-point-lake-willow-crest-lake-ga": [
   "West Point Lake",

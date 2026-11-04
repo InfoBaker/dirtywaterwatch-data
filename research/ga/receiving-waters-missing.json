@@ -2,46 +2,54 @@
  "about": "Receiving-water names in Georgia's spill reports (EPD's daily list, postings of 2026-06-01, 2026-10-01, 2026-10-15, 2026-10-30, 2026-11-02 and 2026-11-03, and EPA's Sewer Overflow and Bypass Event reports for GA permits, extract of 2026-11-03) that data/receiving-waters-national.json does not hold for GA, by name as typed (case and punctuation ignored). Spelling variants of a held water (Polebridge Creek, Sugar Crek, Ocmuglee) are listed as typed so an alias can be added.",
  "checked": "2026-11-04",
  "state": "GA",
- "waters": 148,
- "reports": 296,
+ "waters": 146,
+ "reports": 294,
  "by_kind": {
   "named water": 73,
   "tributary of a named water": 45,
   "storm system or not a named water": 20
  },
  "by_reason": {
-  "no NHD flowline or waterbody of that name in GA": 79,
+  "no NHD flowline or waterbody of that name in GA": 80,
   "1 NHD water of that name in GA, none within reach of the reports' places": 14,
   "a water record holds the name, but the reports' points lie too far from it to be placed there": 8,
-  "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 7,
   "a storm-sewer system (MS4), not a named water": 7,
   "an unnamed or unknown stream: the report names no water": 5,
   "a storm-sewer system, not a named water": 4,
+  "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 3,
   "private property, not a public water": 3,
   "2 NHD waters of that name in GA, none within reach of the reports' places": 3,
   "3 NHD waters of that name in GA, none within reach of the reports' places": 2,
+  "a water record holds the water this text names, but the status resolver reads the text as a watershed or basin label, no": 2,
   "a kind of water with no name": 2,
   "part of a sewer, drainage or treatment works, not a public water": 2,
-  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 2,
   "not a water name": 1,
   "a street name, not a water": 1,
   "14 NHD waters of that name in GA, none within reach of the reports' places": 1,
   "4 NHD waters of that name in GA and the reports give no place to choose one": 1,
   "13 NHD waters of that name in GA and the reports give no place to choose one": 1,
+  "not reached this run (a recheck builds nothing)": 1,
   "a tributary named by a place, not by the water it joins": 1,
   "a wetland (not a named NHD water)": 1,
   "2 NHD waters of that name in GA and the reports give no place to choose one": 1,
   "22 NHD waters of that name in GA, none within reach of the reports' places": 1,
   "24 NHD waters of that name in GA, none within reach of the reports' places": 1
  },
- "resolved_names": 154,
- "resolved_reports": 540,
+ "resolved_names": 156,
+ "resolved_reports": 542,
  "build": {
   "date": "2026-11-04",
-  "command": "python -m ingest.waters_from_nhd --names research/ga/receiving-waters-missing.json --state GA",
+  "command": "python -m ingest.waters_from_nhd --names research/ga/receiving-waters-missing.json --state GA --recheck",
   "records_built": 0,
-  "names_resolved": 0,
-  "network_requests": 0
+  "names_resolved": 2,
+  "network_requests": 0,
+  "last_build": {
+   "date": "2026-11-04",
+   "command": "python -m ingest.waters_from_nhd --names research/ga/receiving-waters-missing.json --state GA",
+   "records_built": 0,
+   "names_resolved": 0,
+   "network_requests": 0
+  }
  },
  "rows": [
   {
@@ -951,10 +959,9 @@
     "ga-epd-spills"
    ],
    "records": [
-    "proctor-creek-ga",
     "proctor-creek-acworth-ga"
    ],
-   "reason": "a water record holds the name (proctor-creek-ga, proctor-creek-acworth-ga), but the reports' points lie too far from it to be placed there",
+   "reason": "a water record holds the name (proctor-creek-acworth-ga), but the reports' points lie too far from it to be placed there",
    "places_failed": [
     {
      "lon": -84.59693,
@@ -1072,7 +1079,10 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
+   "records": [
+    "big-creek-ga"
+   ],
+   "reason": "a water record holds the water this text names (big-creek-ga), but the status resolver reads the text as a watershed or basin label, not a water's name (build/status.py, Watershed labels): its reports are not placed there"
   },
   {
    "name": "Catch basin in MS4 system",
@@ -1236,7 +1246,10 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
+   "records": [
+    "lindsey-creek-ga"
+   ],
+   "reason": "a water record holds the water this text names (lindsey-creek-ga), but the status resolver reads the text as a watershed or basin label, not a water's name (build/status.py, Watershed labels): its reports are not placed there"
   },
   {
    "name": "New River Basin",
@@ -1600,27 +1613,6 @@
    "reason": "part of a sewer, drainage or treatment works, not a public water"
   },
   {
-   "name": "17 Mile River",
-   "reports": 1,
-   "points": [
-    [
-     31.50086,
-     -82.82389
-    ]
-   ],
-   "towns": [
-    "Douglas"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "records": [
-    "seventeen-mile-river-ga"
-   ],
-   "reason": "a water record holds this water but not this spelling (seventeen-mile-river-ga): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
-  },
-  {
    "name": "Airport Creek",
    "reports": 1,
    "seen_in": [
@@ -1938,7 +1930,10 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
+   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "parts": [
+    "Dram Branch"
+   ]
   },
   {
    "name": "East Jester's Creek",
@@ -3359,27 +3354,6 @@
    ]
   },
   {
-   "name": "Unnamed tributary to 17 Mile River",
-   "reports": 1,
-   "points": [
-    [
-     31.50086,
-     -82.82389
-    ]
-   ],
-   "towns": [
-    "Douglas"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "records": [
-    "seventeen-mile-river-ga"
-   ],
-   "reason": "a water record holds this water but not this spelling (seventeen-mile-river-ga): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
-  },
-  {
    "name": "Upper Upatoi Basin",
    "reports": 1,
    "seen_in": [
@@ -3447,7 +3421,10 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Weracoba Creek"
+   ]
   },
   {
    "name": "Weracoba Creek Trib.",
@@ -5478,6 +5455,27 @@
    ]
   },
   {
+   "name": "17 Mile River",
+   "reports": 1,
+   "slugs": [
+    "seventeen-mile-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     31.50086,
+     -82.82389
+    ]
+   ],
+   "towns": [
+    "Douglas"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Bear Creek - headwaters",
    "reports": 1,
    "slugs": [
@@ -6502,6 +6500,27 @@
     "Lawrenceville",
     "Buford",
     "Duluth"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to 17 Mile River",
+   "reports": 1,
+   "slugs": [
+    "seventeen-mile-river-ga"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     31.50086,
+     -82.82389
+    ]
+   ],
+   "towns": [
+    "Douglas"
    ],
    "places_from": [
     "echo-sewer-overflow",

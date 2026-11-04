@@ -605,3 +605,34 @@ def test_no_mirror_check_when_every_queued_name_is_answered_from_the_cache(monke
     N.Run.osm_state_pass(fake)
     assert mirrors == [] and asked == []
     assert "no OSM feature" in row["reason"]
+
+
+def test_a_target_rows_towns_are_most_counted_first_then_by_name():
+    """The towns written to a target row of data/waters-nhd.json do not follow the order they were counted in (2026-11-04
+    run-time review P3-7: 223 rows changed between two runs on the same inputs)."""
+    def row(order):
+        t = N.Target(key="MD:x", state="MD", name="Gwynns Falls", texts=Counter({"Gwynns Falls": 1}), outfalls=0,
+                     events=4, points=Counter(), towns=Counter())
+        for tw in order:
+            t["towns"][tw] += 2 if tw == "Baltimore" else 1
+        return N.Run.new_row(t)["towns"]
+    a = row(["Towson", "Essex", "Baltimore", "Pikesville", "Catonsville"])
+    b = row(["Catonsville", "Pikesville", "Baltimore", "Essex", "Towson"])
+    assert a == b == ["Baltimore", "Catonsville", "Essex", "Pikesville"]
+
+
+def test_a_target_rows_towns_are_the_same_under_any_hash_seed():
+    """An event's towns are a set; the row must not change with Python's hash seed (two processes, two seeds)."""
+    import os
+    import subprocess
+    code = ("from collections import Counter; from ingest import waters_from_nhd as N; "
+            "t = N.Target(key='MD:x', state='MD', name='x', texts=Counter(), outfalls=0, events=1, points=Counter(), "
+            "towns=Counter()); "
+            "[t['towns'].update([tw]) for tw in {'lonaconing', 'barton', 'cresaptown', 'frostburg', 'westernport', "
+            "'midland', 'luke'}]; print(N.Run.new_row(t)['towns'])")
+    outs = set()
+    for seed in ("1", "2", "3", "4"):
+        r = subprocess.run([sys.executable, "-c", code], cwd=Path(N.__file__).resolve().parent.parent,
+                           env={**os.environ, "PYTHONHASHSEED": seed}, capture_output=True, text=True, check=True)
+        outs.add(r.stdout.strip())
+    assert outs == {"['barton', 'cresaptown', 'frostburg', 'lonaconing']"}
