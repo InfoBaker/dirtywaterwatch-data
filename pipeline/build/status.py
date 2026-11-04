@@ -2700,15 +2700,32 @@ PLACEMENT_CACHE = BUILD_DIR / "placement-cache.json"
 PLACEMENT_CACHE_DAYS = 120      # records that began longer ago than this reuse their placement while nothing changed
 
 
+def outline_files(waters) -> list:
+    """The outlines placement reads from openboatlaunch's folder (water_geometry: a record with no inline geometry),
+    as (slug, size, modified) or (slug, None) where there is none: a moved outline, or a machine without the folder
+    (the hosted runner has none), is a placement input like the records themselves (review 2026-11-04)."""
+    out = [str(OBL_WATER_DIR)]
+    for slug in sorted(waters):
+        if (waters[slug] or {}).get("geometry"):
+            continue
+        try:
+            st = (OBL_WATER_DIR / f"{slug}.json").stat()
+            out.append((slug, st.st_size, st.st_mtime_ns))
+        except OSError:
+            out.append((slug, None))
+    return out
+
+
 def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules, states) -> str:
-    """Everything a placement is made from besides the record: the water records, the outfall registry, the operators'
-    towns and receiving waters, the rules, the live states, the code (this module, build/redact.py, common.py) and
-    the name lists. A change to any of them places every record again."""
+    """Everything a placement is made from besides the record: the water records, the outlines read from
+    openboatlaunch's folder (outline_files), the outfall registry, the operators' towns and receiving waters, the
+    rules, the live states, the placement steps switched on (PLACE_STEPS), the code (this module, build/redact.py,
+    common.py) and the name lists. A change to any of them places every record again."""
     import hashlib
     import sys as _sys
     from build import redact as _redact
-    h = hashlib.sha256(json.dumps([waters, outfalls, discharger_towns, discharger_waters, rules, sorted(states)],
-                                  sort_keys=True, default=str).encode())
+    h = hashlib.sha256(json.dumps([waters, outline_files(waters), outfalls, discharger_towns, discharger_waters, rules,
+                                   sorted(states), PLACE_STEPS], sort_keys=True, default=str).encode())
     for f in (Path(__file__), Path(_redact.__file__), Path(_sys.modules["common"].__file__),
               DATA_DIR / "name-allowlist.json", BUILD_DIR / "name-blocklist.json"):
         h.update(f.read_bytes() if f.exists() else b"-")
