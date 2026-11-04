@@ -51,11 +51,16 @@ Record rules
   - Points: a layer row with the same permit and normalised address, when exactly one, lends LATITUDE / LONGITUDE
     (coord_source "geocode": the layer's point is EPD's location for the address; precision not stated).
   - EPA's copy: Georgia permittees file 24-hour and 5-day reports in EPD's GEOS, and these reach EPA's Sewer Overflow
-    and Bypass Event tables (ingest/echo_sewer_overflow_events.py, run before this module; it has times and an end
-    but no volume for Georgia). An EPD row is duplicate_of the EPA record of the same permit and begin day: the
-    record whose receiving water is the same name first; else, when only one EPD row and one EPA record of that
-    permit and day remain unpaired, those two. Several left on both sides are not paired (raw._epa_candidates).
-    The marks are recomputed on every run, so a report EPA receives later still finds its EPD row.
+    and Bypass Event tables (ingest/echo_sewer_overflow_events.py, run before this module; for Georgia they carry
+    times and an end but no volume, and mostly the plant's point). An EPD row pairs with the EPA record of the same
+    permit and begin day: the record whose receiving water is the same name first; else, when only one EPD row and
+    one EPA record of that permit and day remain unpaired, those two. Several left on both sides are not paired
+    (raw._epa_candidates). The EPD record is the public one (gallons, address, waterway, cause, the map layer's
+    point): it takes EPA's ended_at when it has none (status ended, raw._end_basis names the EPA record and "EPA
+    eRule report") and raw._epa_record; the EPA record is marked duplicate_of the EPD record, written back into
+    EPA's events file (data/build/events/echo-sewer-overflow.json). Unpaired EPA records stay as they are. The pairs
+    are recomputed on every run (earlier marks on both sides are cleared first), so a report EPA receives later
+    still finds its EPD row; the EPA module rewrites its file each run, and this module runs after it.
 
 Privacy: the list names facilities and street addresses, no people. common.strip_personal runs on raw; the export's
   redactor (build/redact.py) runs over CAUSE and every other free text before the file is written.
@@ -362,17 +367,25 @@ def apply_posting(prev: dict[str, dict], rows: list[dict], posting: str | None, 
 
 # ---------------------------------------------------------------- EPA's copy
 
-EPA_BASIS = "EPA Sewer Overflow and Bypass Event report"
+EPA_BASIS = "EPA eRule report"                  # raw._end_basis of an EPD record that took EPA's end
+EPD_BASIS = "Georgia EPD spill list record"     # raw._duplicate_basis of an EPA record paired with an EPD row
 
 
 def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
-    """An EPD row is duplicate_of EPA's record of the same permit and begin day (module docstring)."""
+    """Pair EPD rows with EPA's records of the same permit and begin day (module docstring). The EPD record is the
+    public one: it takes EPA's end when it has none (raw._end_basis) and the EPA record becomes duplicate_of it.
+    Both lists are changed in place; every mark of an earlier run is cleared first, so pairs are recomputed."""
     n: Counter = Counter()
-    for r in records:                                   # recomputed every run
-        if (r["raw"].get("_duplicate_basis") or "").startswith(EPA_BASIS):
-            r["duplicate_of"] = None
-            r["raw"].pop("_duplicate_basis", None)
+    for r in records:
+        if (r["raw"].get("_end_basis") or "").startswith(EPA_BASIS):
+            r["ended_at"], r["status"] = None, "unknown"
+            r["raw"].pop("_end_basis", None)
         r["raw"].pop("_epa_candidates", None)
+        r["raw"].pop("_epa_record", None)
+    for e in epa:
+        if ((e.get("raw") or {}).get("_duplicate_basis") or "").startswith(EPD_BASIS):
+            e["duplicate_of"] = None
+            e["raw"].pop("_duplicate_basis", None)
     groups = defaultdict(list)
     for e in epa:
         if e.get("duplicate_of") or not e.get("npdes_permit") or not e.get("started_at"):
@@ -385,10 +398,11 @@ def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
         if r.get("duplicate_of") or not r.get("npdes_permit") or not r.get("started_at"):
             continue
         mine[(r["npdes_permit"], r["started_at"][:10])].append(r)
+    paired_epa = set()
     for k, rs in mine.items():
         es = list(groups.get(k, []))
         if not es:
-            n["no_epa_report"] += len(rs)
+            n["epd_without_epa"] += len(rs)
             continue
         left = []
         for r in rs:
@@ -396,25 +410,33 @@ def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
             hit = next((e for e in es if wk and any(water_key(w) == wk for w in (e.get("waterbody_text") or "").split("; "))), None)
             if hit:
                 es.remove(hit)
-                _mark(r, hit, "same permit, day and receiving water")
+                _pair(r, hit, "same permit, day and receiving water")
+                paired_epa.add(hit["event_id"])
                 n["paired_by_water"] += 1
             else:
                 left.append(r)
         if len(left) == 1 and len(es) == 1:
-            _mark(left[0], es[0], "the only EPD row and the only EPA report of this permit and day")
+            _pair(left[0], es[0], "the only EPD row and the only EPA report of this permit and day")
+            paired_epa.add(es[0]["event_id"])
             n["paired_alone"] += 1
         elif left:
             for r in left:
                 r["raw"]["_epa_candidates"] = [e["event_id"] for e in es]
-            n["not_paired"] += len(left)
+            n["epd_without_epa"] += len(left)
+    n["epa_without_epd"] = sum(len(v) for v in groups.values()) - len(paired_epa)
     return n
 
 
-def _mark(r: dict, e: dict, why: str) -> None:
-    r["duplicate_of"] = e["event_id"]
-    r["raw"]["_duplicate_basis"] = (f"{EPA_BASIS} {e['event_id']}: {why} (EPA start {e.get('started_at')}, end "
-                                    f"{e.get('ended_at')}; this list {r.get('volume_gal')} gal); EPA's record carries "
-                                    f"the times and the end")
+def _pair(r: dict, e: dict, why: str) -> None:
+    """The EPD record r stays primary; EPA's e is duplicate_of it. r takes e's end only when it has none."""
+    r["raw"]["_epa_record"] = e["event_id"]
+    if not r.get("ended_at") and e.get("ended_at"):
+        r["ended_at"], r["status"] = e["ended_at"], "ended"
+        r["raw"]["_end_basis"] = (f"{EPA_BASIS} {e['event_id']} ({why}; EPA start {e.get('started_at')}, end "
+                                  f"{e['ended_at']}, as given, presumably local time)")
+    e["duplicate_of"] = r["event_id"]
+    e.setdefault("raw", {})["_duplicate_basis"] = (f"{EPD_BASIS} {r['event_id']}: {why}; the state's list carries the "
+                                                   f"gallons, address and waterway")
 
 
 # ---------------------------------------------------------------- fetch
@@ -502,7 +524,8 @@ def build(postings: list[tuple[str, str, bytes, str | None]], prev_records: list
     stats.update({
         "history": dict(stats["history"]), "records_written": len(records), "in_latest_posting": len(current),
         "by_type": dict(Counter(r["event_type"] for r in records)),
-        "duplicates_of_epa": sum(1 for r in records if (r["raw"].get("_duplicate_basis") or "").startswith(EPA_BASIS)),
+        "paired_with_epa": sum(1 for r in records if r["raw"].get("_epa_record")),
+        "end_from_epa": sum(1 for r in records if (r["raw"].get("_end_basis") or "").startswith(EPA_BASIS)),
         "with_coordinates": sum(1 for r in records if r.get("lat") is not None),
         "with_volume": sum(1 for r in records if r.get("volume_gal") is not None),
         "with_operator": sum(1 for r in records if r.get("discharger_id")),
@@ -548,7 +571,8 @@ def main(argv=None) -> int:
                 errors.append(err)
             elif layer is not None:
                 write_json(RAW / "map-layer-latest.json", layer)
-        epa = (read_json(EPA_EVENTS, {}) or {}).get("records", [])
+        epa_doc = read_json(EPA_EVENTS, {}) or {}
+        epa = epa_doc.get("records", [])
         records, stats = build(postings, prev, layer, epa, load_permits(), fetched_at)
     except Exception as e:  # noqa: BLE001 - a failed run keeps the previous records
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
@@ -564,6 +588,9 @@ def main(argv=None) -> int:
             "registry_ids": ["ga-epd-sewage-spills-report", "ga-epd-spills-map-layer"]}
     path_notes_to_meta(records, meta)
     path = write_events(SOURCE_ID, records, ok=True, error=None, meta=meta)
+    if epa:            # EPA's Georgia records paired here become duplicate_of the EPD record (in EPA's events file)
+        epa_doc["meta"] = {**(epa_doc.get("meta") or {}), "ga_epd_pairing": {"at": fetched_at, **stats["epa_pairing"]}}
+        write_json(EPA_EVENTS, epa_doc)
     print(f"{SOURCE_ID}: {len(postings)} posting(s), {stats['in_latest_posting']} in the latest -> "
           f"{stats['records_written']} records; history {stats['history']}; EPA pairing {stats['epa_pairing']}; "
           f"{stats['with_coordinates']} with points -> {path}")

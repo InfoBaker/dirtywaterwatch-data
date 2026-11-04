@@ -85,7 +85,8 @@ Georgia (permits GA...; research/ga/report.md section 2.2; the state is not live
     REPEATED_POINT_STATES a point that REPEATED_POINT_MIN or more kept events of one permit share is not used for
     those events (lat/lon null; raw.reported_point keeps it and raw.point_note says why), unless the event is a
     bypass (a plant bypass happens at the plant). The live states are not in the set.
-  The state's own list (ingest/ga_epd_spills.py, run after this module) marks its rows duplicate_of these records.
+  The state's own list (ingest/ga_epd_spills.py, run after this module) is the public record where both describe a
+  spill: it takes the end from the EPA record and marks that record duplicate_of its own, in this module's file.
 
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
