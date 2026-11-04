@@ -2,11 +2,11 @@
  "about": "Receiving waters named by the NC DWR sanitary sewer overflow layers (2022 to date) that data/receiving-waters-national.json does not hold for North Carolina (no name, NHD GNIS name or spelling seen matches, parentheticals ignored). Reports the source says did not reach surface water, duplicates and placeholders (unknown, storm drain, ditch) are left out. stream_index is DWR's own index for the stream where the 2026 layer gives one; points are report locations (DWR's geocode of the address), up to three. One name can be several streams in different places (the points show where); stream_index is the one DWR gives on a 2026 report of that name.",
  "generated": "2026-11-04",
  "state": "NC",
- "waters": 121,
- "reports": 180,
+ "waters": 116,
+ "reports": 175,
  "by_reason": {
   "no NHD flowline or waterbody of that name in NC": 66,
-  "1 NHD water of that name in NC, none within reach of the reports' places": 24,
+  "1 NHD water of that name in NC, none within reach of the reports' places": 20,
   "2 NHD waters of that name in NC, none within reach of the reports' places": 8,
   "private property, not a public water": 7,
   "a basin": 4,
@@ -15,18 +15,17 @@
   "part of a sewer, drainage or treatment works, not a public water": 2,
   "an unnamed or unknown stream: the report names no water": 2,
   "6 NHD waters of that name in NC, none within reach of the reports' places": 1,
-  "5 NHD waters of that name in NC, none within reach of the reports' places": 1,
   "no water name": 1,
   "not a water name": 1
  },
- "resolved_names": 415,
- "resolved_reports": 1402,
+ "resolved_names": 420,
+ "resolved_reports": 1407,
  "build": {
   "date": "2026-11-04",
   "command": "python -m ingest.waters_from_nhd --names research/nc/receiving-waters-missing.json --state NC",
-  "records_built": 17,
-  "names_resolved": 18,
-  "network_requests": 82
+  "records_built": 5,
+  "names_resolved": 5,
+  "network_requests": 9
  },
  "rows": [
   {
@@ -118,6 +117,10 @@
      "lon": -79.33583,
      "lat": 36.11861,
      "reason": "no NHD water of that name within 2 km of the reports' point (36.11861, -79.33583) (the nearest is 152.1 km away)"
+    },
+    {
+     "town": "Green Level",
+     "reason": "no NHD water of that name within 3 km of Green Level (the nearest is 151.7 km away)"
     }
    ]
   },
@@ -300,6 +303,10 @@
      "lon": -82.51153,
      "lat": 35.47116,
      "reason": "no NHD water of that name within 2 km of the reports' point (35.47116, -82.51153) (the nearest is 486.7 km away)"
+    },
+    {
+     "town": "Asheville",
+     "reason": "no NHD water of that name within 3 km of Asheville (the nearest is 479.0 km away)"
     }
    ]
   },
@@ -448,6 +455,14 @@
      "lon": -80.06856,
      "lat": 36.1457,
      "reason": "no NHD water of that name within 2 km of the reports' point (36.14570, -80.06856) (the nearest is 3.0 km away)"
+    },
+    {
+     "town": "Winston-Salem",
+     "reason": "no NHD water of that name within 3 km of Winston-Salem (the nearest is 3.4 km away)"
+    },
+    {
+     "town": "Greensboro",
+     "reason": "no NHD water of that name within 3 km of Greensboro (the nearest is 9.1 km away)"
     }
    ]
   },
@@ -896,34 +911,6 @@
    ]
   },
   {
-   "name": "Bradley Creek",
-   "reports": 1,
-   "stream_index": null,
-   "permits": [
-    "WQCS00012"
-   ],
-   "points": [
-    [
-     34.234774,
-     -77.92424
-    ]
-   ],
-   "sources": [
-    "nc-dwr-sso-2022-2025"
-   ],
-   "towns": [
-    "Wilmington"
-   ],
-   "reason": "5 NHD waters of that name in NC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
-   "places_failed": [
-    {
-     "lon": -77.92424,
-     "lat": 34.23477,
-     "reason": "no NHD water of that name within 2 km of the reports' point (34.23477, -77.92424) (the nearest is 4.7 km away)"
-    }
-   ]
-  },
-  {
    "name": "Briar Branch",
    "reports": 1,
    "stream_index": "6-78-10-4",
@@ -948,6 +935,10 @@
      "lon": -80.80665,
      "lat": 35.18984,
      "reason": "no NHD water of that name within 2 km of the reports' point (35.18984, -80.80665) (the nearest is 146.3 km away)"
+    },
+    {
+     "town": "Charlotte",
+     "reason": "no NHD water of that name within 3 km of Charlotte (the nearest is 126.3 km away)"
     }
    ]
   },
@@ -1000,6 +991,22 @@
      "lon": -78.40755,
      "lat": 35.80897,
      "reason": "no NHD water of that name within 2 km of the reports' point (35.80897, -78.40755) (the nearest is 63.5 km away)"
+    },
+    {
+     "town": "Raleigh",
+     "reason": "no NHD water of that name within 3 km of Raleigh (the nearest is 58.3 km away)"
+    },
+    {
+     "town": "Garner",
+     "reason": "no NHD water of that name within 3 km of Garner (the nearest is 79.7 km away)"
+    },
+    {
+     "town": "Wake Forest",
+     "reason": "no NHD water of that name within 3 km of Wake Forest (the nearest is 51.1 km away)"
+    },
+    {
+     "town": "Knightdale",
+     "reason": "no NHD water of that name within 3 km of Knightdale (the nearest is 64.9 km away)"
     }
    ]
   },
@@ -1056,37 +1063,6 @@
     "nc-dwr-sso-2022-2025"
    ],
    "reason": "no NHD flowline or waterbody of that name in NC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "College Branch (Institute Branch)",
-   "reports": 1,
-   "stream_index": null,
-   "permits": [
-    "WQCS00286"
-   ],
-   "points": [
-    [
-     36.549179,
-     -77.115196
-    ]
-   ],
-   "sources": [
-    "nc-dwr-sso-2022-2025"
-   ],
-   "towns": [
-    "Murfreesboro"
-   ],
-   "reason": "1 NHD water of that name in NC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
-   "parts": [
-    "College Branch"
-   ],
-   "places_failed": [
-    {
-     "lon": -77.1152,
-     "lat": 36.54918,
-     "reason": "no NHD water of that name within 2 km of the reports' point (36.54918, -77.11520) (the nearest is 12.6 km away)"
-    }
-   ]
   },
   {
    "name": "Community Retention Pond",
@@ -1382,37 +1358,6 @@
    "reason": "no NHD flowline or waterbody of that name in NC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "Irvins Creek (McEwen Lake)",
-   "reports": 1,
-   "stream_index": null,
-   "permits": [
-    "WQCS00001"
-   ],
-   "points": [
-    [
-     35.291174,
-     -80.879402
-    ]
-   ],
-   "sources": [
-    "nc-dwr-sso-2022-2025"
-   ],
-   "towns": [
-    "Charlotte"
-   ],
-   "reason": "1 NHD water of that name in NC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
-   "parts": [
-    "Irvins Creek"
-   ],
-   "places_failed": [
-    {
-     "lon": -80.8794,
-     "lat": 35.29117,
-     "reason": "no NHD water of that name within 2 km of the reports' point (35.29117, -80.87940) (the nearest is 20.0 km away)"
-    }
-   ]
-  },
-  {
    "name": "Isothermal Community College pond",
    "reports": 1,
    "stream_index": null,
@@ -1590,6 +1535,10 @@
      "lon": -77.92824,
      "lat": 34.2154,
      "reason": "no NHD water of that name within 2 km of the reports' point (34.21540, -77.92824) (the nearest is 28.9 km away)"
+    },
+    {
+     "town": "Wilmington",
+     "reason": "no NHD water of that name within 3 km of Wilmington (the nearest is 22.9 km away)"
     }
    ]
   },
@@ -1705,37 +1654,6 @@
     "Knightdale"
    ],
    "reason": "no NHD flowline or waterbody of that name in NC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "Lower Barton Creek",
-   "reports": 1,
-   "stream_index": null,
-   "permits": [
-    "WQCS00002"
-   ],
-   "points": [
-    [
-     35.828181,
-     -78.632306
-    ]
-   ],
-   "sources": [
-    "nc-dwr-sso-2022-2025"
-   ],
-   "towns": [
-    "Raleigh",
-    "Garner",
-    "Wake Forest",
-    "Knightdale"
-   ],
-   "reason": "1 NHD water of that name in NC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
-   "places_failed": [
-    {
-     "lon": -78.63231,
-     "lat": 35.82818,
-     "reason": "no NHD water of that name within 2 km of the reports' point (35.82818, -78.63231) (the nearest is 11.5 km away)"
-    }
-   ]
   },
   {
    "name": "McCoy's Creek",
@@ -2136,34 +2054,6 @@
    "reason": "no NHD flowline or waterbody of that name in NC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "Ross Swamp",
-   "reports": 1,
-   "stream_index": "28-103-4-1",
-   "permits": [
-    "WQCSD0571"
-   ],
-   "points": [
-    [
-     35.559825,
-     -77.05996
-    ]
-   ],
-   "sources": [
-    "nc-dwr-sso-2026"
-   ],
-   "towns": [
-    "Everetts"
-   ],
-   "reason": "1 NHD water of that name in NC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
-   "places_failed": [
-    {
-     "lon": -77.05996,
-     "lat": 35.55982,
-     "reason": "no NHD water of that name within 2 km of the reports' point (35.55982, -77.05996) (the nearest is 32.6 km away)"
-    }
-   ]
-  },
-  {
    "name": "Royal Park Branch",
    "reports": 1,
    "stream_index": null,
@@ -2560,6 +2450,10 @@
      "lon": -78.94684,
      "lat": 36.04231,
      "reason": "no NHD water of that name within 2 km of the reports' point (36.04231, -78.94684) (the nearest is 348.0 km away)"
+    },
+    {
+     "town": "Durham",
+     "reason": "no NHD water of that name within 3 km of Durham (the nearest is 340.2 km away)"
     }
    ]
   },
@@ -2680,6 +2574,10 @@
      "lon": -78.94684,
      "lat": 36.04231,
      "reason": "no NHD water of that name within 2 km of the reports' point (36.04231, -78.94684) (the nearest is 348.0 km away)"
+    },
+    {
+     "town": "Durham",
+     "reason": "no NHD water of that name within 3 km of Durham (the nearest is 340.2 km away)"
     }
    ]
   },
@@ -4768,6 +4666,14 @@
    "how": "record built from the name"
   },
   {
+   "name": "Bradley Creek",
+   "reports": 1,
+   "slugs": [
+    "bradley-creek-nc"
+   ],
+   "how": "record built from the name"
+  },
+  {
    "name": "Bridges Branch",
    "reports": 1,
    "slugs": [
@@ -4876,6 +4782,14 @@
    "reports": 1,
    "slugs": [
     "coley-branch-nc"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "College Branch (Institute Branch)",
+   "reports": 1,
+   "slugs": [
+    "college-branch-nc"
    ],
    "how": "record built from the name"
   },
@@ -5224,6 +5138,14 @@
    "how": "record built from the name"
   },
   {
+   "name": "Irvins Creek (McEwen Lake)",
+   "reports": 1,
+   "slugs": [
+    "irvins-creek-nc"
+   ],
+   "how": "record built from the name"
+  },
+  {
    "name": "Jack Smith Creek",
    "reports": 1,
    "slugs": [
@@ -5396,6 +5318,14 @@
    "reports": 1,
    "slugs": [
     "lovills-creek-nc"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Lower Barton Creek",
+   "reports": 1,
+   "slugs": [
+    "lower-barton-creek-nc"
    ],
    "how": "record built from the name"
   },
@@ -5708,6 +5638,14 @@
    "reports": 1,
    "slugs": [
     "rone-branch-nc"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Ross Swamp",
+   "reports": 1,
+   "slugs": [
+    "ross-swamp-nc"
    ],
    "how": "record built from the name"
   },
