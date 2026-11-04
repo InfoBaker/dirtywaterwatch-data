@@ -269,3 +269,26 @@ def test_a_frozen_backfill_file_is_never_stale_but_a_live_feed_is():
     failed = status.source_health(S.HIST_ID, {"ok": False, "error": "x", "last_ok_at": "2026-01-01T00:00:00Z",
                                               "meta": {"frozen": True}}, reg, now)
     assert failed["stale"] is True                       # a failed read is still reported
+
+
+def test_one_dwr_incident_in_two_layers_or_a_republished_layer_is_counted_once():
+    rows = S._load_file(str(FIX / "nc_dwr_sso_2026.json"))
+    later = S.LAYER.replace("2026", "2027")
+    copy = dict(rows[1][1], globalid="{BBBBBBBB-0000-4000-8000-000000000002}")     # the same incident number
+    recs, stats = S.build(rows + [(later, copy)], FETCHED, [], PERMITS)
+    a = next(r for r in recs if r["event_id"].endswith("aaaaaaaa-0000-4000-8000-000000000002"))
+    b = next(r for r in recs if r["event_id"].endswith("bbbbbbbb-0000-4000-8000-000000000002"))
+    assert b["duplicate_of"] is None and a["duplicate_of"] == b["event_id"]      # the later layer's copy is kept
+    assert "incident number" in a["raw"]["_duplicate_basis"] and stats["duplicates"] == 1
+    # DWR republishes the layer with new global ids: the earlier records (kept, missing from the layer) point at the
+    # new ones, so no overflow is shown twice
+    first, _ = S.build(rows, FETCHED, [], PERMITS)
+    renewed = [(lay, dict(a_, globalid=a_["globalid"].lower().replace("aaaaaaaa", "cccccccc"))) for lay, a_ in rows]
+    again, stats = S.build(renewed, "2026-11-05T03:00:00Z", first, PERMITS)
+    old = [r for r in again if "aaaaaaaa" in r["event_id"]]
+    with_inc = [r for r in old if r["raw"].get("dwr_incident_number")]
+    assert with_inc and all(r["duplicate_of"] and "cccccccc" in r["duplicate_of"] for r in with_inc)
+    assert all(r["duplicate_of"] is None for r in again if "cccccccc" in r["event_id"])
+    # and when the copy goes again, the link goes with it
+    back, _ = S.build(rows, "2026-11-06T03:00:00Z", [r for r in again if "cccccccc" not in r["event_id"]], PERMITS)
+    assert all(r["duplicate_of"] is None for r in back)

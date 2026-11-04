@@ -52,6 +52,10 @@ Record rules (history layer, --backfill)
     (started_at null; reported_at is report_date). volume and volume_reach_water as given.
   - 76 incidents of 2026 are in both layers: the history copy is duplicate_of this year's record.
 
+Duplicates within this year's layers: one incident number on two records (a later year's layer repeating it, or a
+layer republished with new global ids while the earlier records are kept) keeps one record; the others are
+duplicate_of it (link_incidents; recomputed every run).
+
 Privacy
   Only named fields are requested. The history layer's facility_owner holds the owner's name, and for a few
   private systems that is an individual's name: it never reaches a record. A public body's name (a city,
@@ -412,8 +416,9 @@ def build(rows: list[tuple[str, dict]], fetched_at: str, prev_records: list[dict
         r["raw"]["_missing_from_layer_since"] = r["raw"].get("_missing_from_layer_since") or fetched_at
         records.append(r)
         kept += 1
+    dups = link_incidents(records, seen)
     records.sort(key=lambda r: (r.get("started_at") or r.get("reported_at") or "", r["event_id"]), reverse=True)
-    stats = {"layer_rows": len(seen), "kept_from_earlier_runs": kept,
+    stats = {"layer_rows": len(seen), "kept_from_earlier_runs": kept, "duplicates": dups,
              "by_status": dict(Counter(r["status"] for r in records)),
              "by_type": dict(Counter(r["event_type"] for r in records)),
              "reached_water": dict(Counter(str((r.get("raw") or {}).get("reached_water")) for r in records)),
@@ -422,6 +427,37 @@ def build(rows: list[tuple[str, dict]], fetched_at: str, prev_records: list[dict
              "permits": len({r["npdes_permit"] for r in records if r.get("npdes_permit")}),
              "statewide": True}
     return records, stats
+
+
+def link_incidents(records: list[dict], seen: set[str]) -> int:
+    """One DWR incident number on several records (a later year's layer that repeats an incident, or a layer DWR
+    republished with new global ids, whose earlier records are kept): one record stands, the others are duplicate_of
+    it. The one standing is in the layers on this run, from the latest year's layer, and seen last. Links are
+    recomputed every run. Returns the number of duplicates."""
+    def year(r):
+        m = re.search(r"since_Jan_(\d{4})", str((r.get("raw") or {}).get("_layer") or ""))
+        return int(m.group(1)) if m else 0
+    groups: dict[str, list[dict]] = {}
+    for r in records:
+        raw = r.setdefault("raw", {})
+        if raw.pop("_duplicate_basis", None) is not None:
+            r["duplicate_of"] = None
+        inc = clean(raw.get("dwr_incident_number"))
+        if inc:
+            groups.setdefault(inc, []).append(r)
+    n = 0
+    for inc, rs in groups.items():
+        if len(rs) < 2:
+            continue
+        keep = max(rs, key=lambda r: (r["event_id"] in seen, year(r), r["raw"].get("_first_seen_at") or "", r["event_id"]))
+        for r in rs:
+            if r is keep:
+                continue
+            r["duplicate_of"] = keep["event_id"]
+            r["raw"]["_duplicate_basis"] = (f"DWR incident number {inc} is also on {keep['event_id']}, the copy in "
+                                            "the layer DWR publishes now")
+            n += 1
+    return n
 
 
 # ---------------------------------------------------------------- history layer
@@ -492,7 +528,7 @@ def build_history(rows: list[dict], fetched_at: str, current: list[dict],
     by_inc = {}
     for r in current:
         inc = clean((r.get("raw") or {}).get("dwr_incident_number"))
-        if inc:
+        if inc and not r.get("duplicate_of"):
             by_inc.setdefault(inc, r["event_id"])
     counts = Counter(clean(a.get("incident_number")) for a in rows)
     out, ids = [], set()
