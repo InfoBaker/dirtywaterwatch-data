@@ -120,7 +120,7 @@ jobs:
           python3 -I scripts/state_paths.py pack raw-cache.tar.gz
           wrangler r2 object put dirtywaterwatch-data/state/raw-cache.tar.gz --file raw-cache.tar.gz --remote
       - name: Dataset release (daily "latest"; dated on Sundays)
-        if: github.event_name == 'workflow_dispatch' || (github.event.schedule && startsWith(github.run_started_at, 'T03'))
+        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && contains(github.run_started_at, 'T03:'))
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
