@@ -1,6 +1,6 @@
 {
  "version": "2026-11-03g",
- "live_states": ["CT", "MA", "ME", "NH", "RI", "VT", "NJ", "NY", "PA", "MD", "VA", "DC", "NC"],
+ "live_states": ["CT", "MA", "ME", "NH", "RI", "VT", "NJ", "NY", "PA", "MD", "VA", "DC", "NC", "GA"],
  "_live_states_doc": "The states and the District this site publishes: the one list of live states (2026-11-03g). build/status.py states() returns exactly this list; every public output (state pages, waters, the map's outfalls, the radar reads, coverage, the CSV downloads, the source tally) keeps to it, so water records and registry rows built nationally for other states sit in data/ without reaching the site. A state goes live by being added here, after docs/collection-checklist.md.",
  "red": {
   "doc": "Red covers reported ongoing discharges, post-discharge periods used by this site, and official advisories. The source and clock for each period are listed below. by_discharger entries (keyed by discharger id) take precedence over the state row.",
