@@ -259,6 +259,8 @@ def targets(permit: str, waters: dict, outfalls: list[dict], rain_outfalls: list
     for key, r in sorted((reaches or {}).items()):
         if r.get("permit") != permit or r.get("cut_reason") == "no_trace":
             continue
+        if r.get("model") == "shoreline" and r.get("outfall_kind") == "plant":
+            continue        # a treatment plant's shoreline stretch: the permittee's CSO rain caution never reads it
         if r.get("segments"):
             keys.append(key)
             on = set(reach_waters_fn(r, waters))

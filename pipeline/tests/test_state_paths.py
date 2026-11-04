@@ -36,6 +36,7 @@ def tree(tmp_path: Path) -> Path:
     put(root, "data/raw/nhd-waters/nldi-requests.json", "[1.0]")
     put(root, "data/raw/osm-waters/x.json")
     put(root, "data/raw/census/cb_2023_us_state_500k.zip", "zip")
+    put(root, "data/raw/census/tl_2023_us_state.zip", "zip")
     put(root, "data/raw/census/other.zip", "zip")                        # not the outlines: not listed
     put(root, "data/raw/iem-iemre/41.80_-71.40_2026.json")
     put(root, "data/raw/ri-nbc/rigis-nbc-sewer-overflows.json")
@@ -56,7 +57,7 @@ def test_raw_paths_are_the_cached_answers_only(tmp_path):
     root = tree(tmp_path)
     got = SP.raw_paths(root, NOW)
     assert got == ["data/raw/nhd-waters", "data/raw/osm-waters", "data/raw/census/cb_2023_us_state_500k.zip",
-                   "data/raw/iem-iemre", "data/raw/ri-nbc/rigis-nbc-sewer-overflows.json",
+                   "data/raw/census/tl_2023_us_state.zip", "data/raw/iem-iemre", "data/raw/ri-nbc/rigis-nbc-sewer-overflows.json",
                    "data/raw/ri-ridoh-beaches/ridohgis-beaches-view.json", "data/raw/dc-waters/boundary-dcgis.json",
                    "data/raw/ny-dec-sprtk/sprtk-2026.xlsx",
                    "data/raw/nj-echo-monthly/20261104T010203Z.NJ0001-81381.json"]
@@ -159,7 +160,8 @@ def test_unpack_writes_listed_members_only(tmp_path):
 @pytest.mark.parametrize("name,ok", [
     ("data/raw/nhd-waters", True), ("data/raw/nhd-waters/a/b.json", True),
     ("data/raw/nhd-watersX/a.json", False), ("./data/raw/osm-waters/a.json", True),
-    ("data/raw/census/cb_2023_us_state_500k.zip", True), ("data/raw/census/x.zip", False),
+    ("data/raw/census/cb_2023_us_state_500k.zip", True), ("data/raw/census/tl_2023_us_state.zip", True),
+    ("data/raw/census/x.zip", False),
     ("data/raw/nj-echo-monthly/2026.json", True), ("data/raw/ri-nbc/20261104.pins.json", False),
     ("data/raw/../build/x", False), ("", False), ("C:\\x", False),
 ])
