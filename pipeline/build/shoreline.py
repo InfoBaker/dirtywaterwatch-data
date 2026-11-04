@@ -32,7 +32,9 @@ own outline is the ocean, not the state's shore, so the walk is on the state's c
 (build/reaches.py ocean_outline: the TIGER/Line state polygon, which reaches 3 nautical miles out on the Atlantic and 9 on
 Florida's Gulf coast, less the cartographic land, opened by ocean_open_m so that an inlet or pass narrower than twice
 that is closed and the walk follows the open coast, not the lagoon behind a barrier island), and only the part of
-those waters that reaches the state's offshore line. The distance and its evidence are in the rule's ocean rationale.
+those waters that reaches the state's offshore line. A bay or sound that opens wider than that to the sea is part of
+those waters, and the walk follows its shore: build/reaches.py ocean_waters_along adds the records it runs along to the
+stretch's waters. The distance and its evidence are in the rule's ocean rationale.
 
 Pure geometry: no network. Coordinates are lon/lat; the work is in a local equirectangular projection (metres).
 """

@@ -1303,6 +1303,53 @@ def ocean_outline(lon: float, lat: float, state: str, land: dict | None, shore: 
     return g
 
 
+# the waters an ocean stretch runs along besides the ocean (review of 2026-11-04, P2-1): the opening closes an inlet or
+# pass narrower than twice ocean_open_m, but a bay or sound that opens more widely to the sea (St. Joseph Bay, St. Joseph
+# Sound, Biscayne Bay beyond Key Biscayne) is part of the open water and the walk follows its shore; a reach belongs to
+# every water it runs through, so such a record is one of the stretch's waters (its page shows the report) when this
+# much of the stretch lies in it or within ALONG_TOL_M of it. A record with no outline here is not found (the hourly run
+# restores openboatlaunch's outlines); a lagoon behind a barrier island wider than ALONG_TOL_M is not reached.
+ALONG_KINDS = {"bay", "sound", "lake", "lagoon"}
+ALONG_TOL_M = 150
+ALONG_MIN_KM = 1.0
+
+
+def ocean_waters_along(segs: list[dict], waters: dict, ocean_slug: str, shore: dict, states: list[str]) -> list[str]:
+    """The bay, sound or lake records of the stretch's states (not an ocean record) that ALONG_MIN_KM or more of the
+    stretch's segments run in or along (within ALONG_TOL_M of the record's outline), by length along the stretch."""
+    import shapely
+    from shapely.geometry import LineString, box
+    from build.status import water_geometry
+    lines = [LineString(s["coords"]) for s in segs if len(s.get("coords") or []) >= 2]
+    if not lines:
+        return []
+    xs = [x for ln in lines for x, _ in ln.coords]
+    ys = [y for ln in lines for _, y in ln.coords]
+    lat0 = (min(ys) + max(ys)) / 2
+    k = (111_320.0 * math.cos(math.radians(lat0)), 110_574.0)
+    pad = 0.01
+    area = box(min(xs) - pad, min(ys) - pad, max(xs) + pad, max(ys) + pad)
+    lm = [shapely.transform(ln, lambda xy: xy * k) for ln in lines]
+    want = {str(x).upper() for x in states}
+    found = []
+    for slug, w in sorted(waters.items()):
+        if slug == ocean_slug or w.get("kind") not in ALONG_KINDS or SH.is_ocean(w, shore):
+            continue
+        if want and str(w.get("state") or "").upper() not in want:
+            continue
+        bb = w.get("bbox")
+        if bb and not box(*bb).intersects(area):
+            continue
+        g = water_geometry(slug, waters)
+        if g is None or not g.intersects(area):
+            continue
+        gm = shapely.transform(g.intersection(area), lambda xy: xy * k).buffer(ALONG_TOL_M)
+        km = sum(ln.intersection(gm).length for ln in lm) / 1000
+        if km >= ALONG_MIN_KM:
+            found.append((-km, slug))
+    return [s for _, s in sorted(found)]
+
+
 def lake_outline(slug: str, waters: dict, land: dict | None, point: tuple | None = None, shore: dict | None = None) -> tuple:
     """(outline, where from): the record's own (openboatlaunch's file or inline), else census_lake_outline. An
     open-ocean record (reach.shoreline.oceans) is walked on the state's coastal waters at the point (ocean_outline,
@@ -1395,6 +1442,8 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
     lake_recs = SH.lake_waters(slug, states, waters, shore)
     for n_slug in onto:          # the other lake's records too (Lake Michigan's, from a Lake Huron outfall)
         lake_recs += [x for x in SH.lake_waters(n_slug, states, waters, shore) if x not in lake_recs]
+    if rec["ocean"] and segs:    # a bay or sound the ocean stretch runs along (ALONG_KINDS: its mouth is wider than the
+        lake_recs += [x for x in ocean_waters_along(segs, waters, slug, shore, states) if x not in lake_recs]   # opening)
     rec.update(segments=segs, stops=stops, cut_reason=SH.MODEL if segs else "no_trace",
                length_km=round(sum(e["km_from_outfall"] for e in stops), 3), snap_m=r["snap_m"], states=states,
                waters=lake_recs, error=None if segs else "the shore has no length at the point")
