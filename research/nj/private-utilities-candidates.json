@@ -1,0 +1,1377 @@
+{
+ "state": "NJ",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:00Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 29,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 29,
+  "single_residence": 2,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 3,
+  "by_legal_form_proposed": {
+   "business or industrial": 12,
+   "campground or resort": 1,
+   "facility (permittee not named)": 2,
+   "investor-owned utility": 2,
+   "mobile-home park": 3,
+   "not stated by the names": 7,
+   "private club": 2
+  },
+  "public_by_name": 1
+ },
+ "candidates": [
+  {
+   "npdes_permit": "NJ0020281",
+   "state": "NJ",
+   "facility": "CHATHAM HILL STP",
+   "permittee_as_recorded": "CARDINAL HILL NJ LP",
+   "county": "MORRIS",
+   "city": "CHATHAM TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "6513"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-10-01",
+   "permit_expiration": "2027-09-30",
+   "receiving_waters_echo": [
+    "PASSAIC RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0020281"
+  },
+  {
+   "npdes_permit": "NJ0021865",
+   "state": "NJ",
+   "facility": "FIDDLER'S ELBOW CTRY CLUB WWTP",
+   "permittee_as_recorded": "FIDDLERS ELBOW CC & LAMINGTON RIVER FARMS",
+   "county": "SOMERSET",
+   "city": "BEDMINSTER TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "private club",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "7997"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-01",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "LAMINGTON RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0021865"
+  },
+  {
+   "npdes_permit": "NJ0022110",
+   "state": "NJ",
+   "facility": "EDUCATIONAL TESTING SERVICE",
+   "permittee_as_recorded": "EDUCATIONAL TESTING SERVICE",
+   "county": "MERCER",
+   "city": "PRINCETON",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "8748"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.08,
+   "major_minor": "Minor",
+   "permit_effective": "2019-07-01",
+   "permit_expiration": "2024-06-30",
+   "receiving_waters_echo": [
+    "Stony Brook Unnamed Tributary"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0022110"
+  },
+  {
+   "npdes_permit": "NJ0022781",
+   "state": "NJ",
+   "facility": "NEW JERSEY AMERICAN WATER",
+   "permittee_as_recorded": "NJ AMERICAN WATER",
+   "county": "HUNTERDON",
+   "city": "TEWKSBURY TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.048,
+   "major_minor": "Minor",
+   "permit_effective": "2020-10-01",
+   "permit_expiration": "2025-09-30",
+   "receiving_waters_echo": [
+    "LAMINGTON RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0022781"
+  },
+  {
+   "npdes_permit": "NJ0023663",
+   "state": "NJ",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "HMH CARRIER CLINIC INC",
+   "county": "SOMERSET",
+   "city": "MONTGOMERY TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "8063"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.05,
+   "major_minor": "Minor",
+   "permit_effective": "2014-07-01",
+   "permit_expiration": "2019-03-31",
+   "receiving_waters_echo": [
+    "Cruser Brook via unnamed trib."
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0023663"
+  },
+  {
+   "npdes_permit": "NJ0023736",
+   "state": "NJ",
+   "facility": "PINELANDS WASTEWATER CO",
+   "permittee_as_recorded": "PINELANDS WASTEWATER CO",
+   "county": "BURLINGTON",
+   "city": "SOUTHAMPTON TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.5,
+   "major_minor": "Minor",
+   "permit_effective": "2020-04-01",
+   "permit_expiration": "2025-03-31",
+   "receiving_waters_echo": [
+    "Rancocas Creek South Branch"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0023736"
+  },
+  {
+   "npdes_permit": "NJ0023949",
+   "state": "NJ",
+   "facility": "LEGENDS RESORT & COUNTRY CLUB",
+   "permittee_as_recorded": "RACHEL ASSOCIATES LLC",
+   "county": "SUSSEX",
+   "city": "VERNON TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "7011"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.35,
+   "major_minor": "Minor",
+   "permit_effective": "2023-06-01",
+   "permit_expiration": "2028-05-31",
+   "receiving_waters_echo": [
+    "BLACK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0023949"
+  },
+  {
+   "npdes_permit": "NJ0024104",
+   "state": "NJ",
+   "facility": "VEOLIA WATER NJ PRINCETON MEADOWS WWTP",
+   "permittee_as_recorded": "VEOLIA WATER NEW JERSEY INC",
+   "county": "MIDDLESEX",
+   "city": "PLAINSBORO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 1.64,
+   "major_minor": "Major",
+   "permit_effective": "2021-01-01",
+   "permit_expiration": "2025-12-31",
+   "receiving_waters_echo": [
+    "Cranbury Brook"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0024104"
+  },
+  {
+   "npdes_permit": "NJ0024163",
+   "state": "NJ",
+   "facility": "BIG `N` SHOPPING CENTER STP",
+   "permittee_as_recorded": "KERE ASSOCIATES",
+   "county": "SUSSEX",
+   "city": "HAMPTON TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "6513"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2023-12-01",
+   "permit_expiration": "2028-11-30",
+   "receiving_waters_echo": [
+    "Paulins Kill"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0024163"
+  },
+  {
+   "npdes_permit": "NJ0024414",
+   "state": "NJ",
+   "facility": "WEST MILFORD SHOPPING CENTER STP",
+   "permittee_as_recorded": "INSERRA WEST MILFORD LLC",
+   "county": "PASSAIC",
+   "city": "WEST MILFORD TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "BELCHERS CRK VIA UNNAMED TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0024414"
+  },
+  {
+   "npdes_permit": "NJ0026824",
+   "state": "NJ",
+   "facility": "CHESTER SHOPPING CENTER",
+   "permittee_as_recorded": "SAVRO LLC",
+   "county": "MORRIS",
+   "city": "CHESTER BORO",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "6512"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-03-31",
+   "receiving_waters_echo": [
+    "Hacklebarney Brook"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0026824"
+  },
+  {
+   "npdes_permit": "NJ0027201",
+   "state": "NJ",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "PASSAIC",
+   "city": "WEST MILFORD TWP",
+   "system_kind": "single residence",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "facility (permittee not named)",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "1522"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.005,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [
+    "BELCHERS CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0027201"
+  },
+  {
+   "npdes_permit": "NJ0027464",
+   "state": "NJ",
+   "facility": "HANOVER MOBILE VILLAGE ASSOC",
+   "permittee_as_recorded": "AQUA NJ INC",
+   "county": "BURLINGTON",
+   "city": "NORTH HANOVER TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "CROSSWICK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0027464"
+  },
+  {
+   "npdes_permit": "NJ0027511",
+   "state": "NJ",
+   "facility": "CALIFORNIA VILLAGE MHP",
+   "permittee_as_recorded": "AQUA NJ INC",
+   "county": "BURLINGTON",
+   "city": "NORTH HANOVER TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.032,
+   "major_minor": "Minor",
+   "permit_effective": "2025-01-01",
+   "permit_expiration": "2029-12-31",
+   "receiving_waters_echo": [
+    "Crosswicks Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0027511"
+  },
+  {
+   "npdes_permit": "NJ0027529",
+   "state": "NJ",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "CARE ONE @ HOLMDEL",
+   "county": "MONMOUTH",
+   "city": "HOLMDEL TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "8051"
+   ],
+   "naics_codes": [
+    "623110"
+   ],
+   "design_flow_mgd": 0.028,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "Willow Brook"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0027529"
+  },
+  {
+   "npdes_permit": "NJ0027596",
+   "state": "NJ",
+   "facility": "SPARTAN VILLAGE INC",
+   "permittee_as_recorded": "AQUA NJ INC",
+   "county": "BURLINGTON",
+   "city": "WRIGHTSTOWN BORO",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.038,
+   "major_minor": "Minor",
+   "permit_effective": "2022-01-01",
+   "permit_expiration": "2026-12-31",
+   "receiving_waters_echo": [
+    "North Run"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0027596"
+  },
+  {
+   "npdes_permit": "NJ0028304",
+   "state": "NJ",
+   "facility": "QUALITY INN OF LEDGEWOOD",
+   "permittee_as_recorded": "JAI LAXMINARAYAN LLC",
+   "county": "MORRIS",
+   "city": "ROXBURY TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "7011"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.04,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIB. LEDGEWOOD BROOK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0028304"
+  },
+  {
+   "npdes_permit": "NJ0028665",
+   "state": "NJ",
+   "facility": "MOBILE ESTATES OF SOUTHAMPTON INC",
+   "permittee_as_recorded": "MOBILE ESTATES OF SOUTHAMPTON",
+   "county": "BURLINGTON",
+   "city": "SOUTHAMPTON TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2020-07-01",
+   "permit_expiration": "2025-06-30",
+   "receiving_waters_echo": [
+    "Rancocas Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0028665"
+  },
+  {
+   "npdes_permit": "NJ0029041",
+   "state": "NJ",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "REGENCY @ SUSSEX APARTMENT LLC",
+   "county": "SUSSEX",
+   "city": "WANTAGE TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "6513"
+   ],
+   "naics_codes": [
+    "531110"
+   ],
+   "design_flow_mgd": 0.08,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-01",
+   "permit_expiration": "2029-03-31",
+   "receiving_waters_echo": [
+    "Unnamed Trib. of Wantage Brook"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0029041"
+  },
+  {
+   "npdes_permit": "NJ0029858",
+   "state": "NJ",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "OAKLAND OPERATOR LLC",
+   "county": "BERGEN",
+   "city": "OAKLAND BORO",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "8051"
+   ],
+   "naics_codes": [
+    "623110"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2023-11-01",
+   "permit_expiration": "2028-10-31",
+   "receiving_waters_echo": [
+    "Hoppers Lake"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0029858"
+  },
+  {
+   "npdes_permit": "NJ0031674",
+   "state": "NJ",
+   "facility": "POLO CLUB - FORMERLY REMINGTON'S CAFE",
+   "permittee_as_recorded": "[name removed]",
+   "county": "MONMOUTH",
+   "city": "HOLMDEL TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "private club",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "7011"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.028,
+   "major_minor": "Minor",
+   "permit_effective": "2019-07-01",
+   "permit_expiration": "2024-06-30",
+   "receiving_waters_echo": [
+    "Willow Brook"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0031674"
+  },
+  {
+   "npdes_permit": "NJ0031771",
+   "state": "NJ",
+   "facility": "COLTS NECK INN & RESTAURANT",
+   "permittee_as_recorded": "COLTS NECK INN LLC",
+   "county": "MONMOUTH",
+   "city": "COLTS NECK TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.006,
+   "major_minor": "Minor",
+   "permit_effective": "2025-01-01",
+   "permit_expiration": "2029-12-31",
+   "receiving_waters_echo": [
+    "Mine Brook"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0031771"
+  },
+  {
+   "npdes_permit": "NJ0032395",
+   "state": "NJ",
+   "facility": "RINGWOOD PLAZA STP",
+   "permittee_as_recorded": "RINGWOOD ASSOC LTD",
+   "county": "PASSAIC",
+   "city": "RINGWOOD BORO",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "6512"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01168,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "MEADOW BROOK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0032395"
+  },
+  {
+   "npdes_permit": "NJ0033995",
+   "state": "NJ",
+   "facility": "NJAW EDC WWTP",
+   "permittee_as_recorded": "STATEWIDE SEWER NJAW",
+   "county": "SOMERSET",
+   "city": "BEDMINSTER TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 2.1,
+   "major_minor": "Major",
+   "permit_effective": "2020-07-01",
+   "permit_expiration": "2025-06-30",
+   "receiving_waters_echo": [
+    "North Branch Raritan River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0033995"
+  },
+  {
+   "npdes_permit": "NJ0035718",
+   "state": "NJ",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "MONMOUTH",
+   "city": "HOLMDEL TWP",
+   "system_kind": "single residence",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "facility (permittee not named)",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4813"
+   ],
+   "naics_codes": [
+    "517110"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2020-01-01",
+   "permit_expiration": "2024-12-31",
+   "receiving_waters_echo": [
+    "East Branch Willow Brook"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0035718"
+  },
+  {
+   "npdes_permit": "NJ0078018",
+   "state": "NJ",
+   "facility": "EXXONMOBIL RESEARCH & ENGINEERING CO",
+   "permittee_as_recorded": "EXXONMOBIL GLOBAL SERVICES CO",
+   "county": "HUNTERDON",
+   "city": "CLINTON TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2021-04-01",
+   "permit_expiration": "2026-03-31",
+   "receiving_waters_echo": [
+    "BEAVER BROOK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0078018"
+  },
+  {
+   "npdes_permit": "NJ0080811",
+   "state": "NJ",
+   "facility": "RAMAPO RIVER RESERVE WWTP",
+   "permittee_as_recorded": "NJ AMERICAN WATER",
+   "county": "BERGEN",
+   "city": "OAKLAND BORO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.1137,
+   "major_minor": "Minor",
+   "permit_effective": "2024-01-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [
+    "RAMAPO RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0080811"
+  },
+  {
+   "npdes_permit": "NJ0098663",
+   "state": "NJ",
+   "facility": "HOMESTEAD TREATMENT FACILITY",
+   "permittee_as_recorded": "NJ AMERICAN WATER",
+   "county": "BURLINGTON",
+   "city": "MANSFIELD TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-04-01",
+   "permit_expiration": "2028-03-31",
+   "receiving_waters_echo": [
+    "ASSISCUNK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0098663"
+  },
+  {
+   "npdes_permit": "NJ0100528",
+   "state": "NJ",
+   "facility": "GLEN MEADOWS/TWIN OAKS STP",
+   "permittee_as_recorded": "NJ AMERICAN WATER",
+   "county": "HUNTERDON",
+   "city": "CLINTON TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "SOUTH BRANCH RARITAN RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0100528"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "NJ0024635",
+   "state": "NJ",
+   "facility": "FORMER US ARMY PEDRICKTOWN",
+   "permittee_as_recorded": "[name removed]",
+   "county": "SALEM",
+   "city": "OLDMANS TWP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "9711"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "DELAWARE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NJ0024635"
+  }
+ ]
+}

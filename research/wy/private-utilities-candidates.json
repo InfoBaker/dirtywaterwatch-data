@@ -1,0 +1,842 @@
+{
+ "state": "WY",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:00Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 15,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 8,
+  "single_residence": 1,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 4,
+  "by_legal_form_proposed": {
+   "business or industrial": 5,
+   "campground or resort": 3,
+   "facility (permittee not named)": 1,
+   "homeowners' association": 1,
+   "mobile-home park": 5
+  },
+  "public_by_name": 4
+ },
+ "candidates": [
+  {
+   "npdes_permit": "WY0021954",
+   "state": "WY",
+   "facility": "COUNTRY MEADOWS LLC",
+   "permittee_as_recorded": "CV Laramie MHP, LLC",
+   "county": "ALBANY",
+   "city": "LARAMIE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-01-01",
+   "permit_expiration": "2029-09-30",
+   "receiving_waters_echo": [
+    "Laramie River (2AB) via an unnamed drainage (3B),"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0021954"
+  },
+  {
+   "npdes_permit": "WY0022128",
+   "state": "WY",
+   "facility": "B & R MOBILE HOME VILLAGE",
+   "permittee_as_recorded": "Regency of Wyoming, Inc.",
+   "county": null,
+   "city": "UNKNOWN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-08-22",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0022128"
+  },
+  {
+   "npdes_permit": "WY0024651",
+   "state": "WY",
+   "facility": "WADE'S MOBILE MANOR WWTF",
+   "permittee_as_recorded": "Wade's Mobile Manor",
+   "county": null,
+   "city": "LARAMIE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-08-31",
+   "receiving_waters_echo": [
+    "LARAMIE RIVER (2AB) VIA UNNAMED EPHEMERAL TRIBUTAR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0024651"
+  },
+  {
+   "npdes_permit": "WY0024708",
+   "state": "WY",
+   "facility": "GRAND TARGHEE RESORT",
+   "permittee_as_recorded": "Grand Targhee Resort - GT Acquisitions I, LLC",
+   "county": "TETON",
+   "city": "(UNKNOWN CITY)",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "Dry Creek (Class 3B water), Snake River Basin"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0024708"
+  },
+  {
+   "npdes_permit": "WY0028045",
+   "state": "WY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "FREMONT",
+   "city": "(UNKNOWN CITY)",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-06-01",
+   "permit_expiration": "2028-01-31",
+   "receiving_waters_echo": [
+    "BROOKS LAKE (2AB) VIA AN UNNAMED TRIBUTARY (3B), W"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0028045"
+  },
+  {
+   "npdes_permit": "WY0028665",
+   "state": "WY",
+   "facility": "YELLOW CREEK ESTATES STP",
+   "permittee_as_recorded": "Yellow Creek Estates Mobile Home Park",
+   "county": "UINTA",
+   "city": "(UNKNOWN CITY)",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "AN UNNAMED EPHEMERAL TRIBUTARY (3B), TO YELLOW CRE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0028665"
+  },
+  {
+   "npdes_permit": "WY0031348",
+   "state": "WY",
+   "facility": "MEADOW PARK VILLAGE WWTF",
+   "permittee_as_recorded": "Meadow Park Village Homeowners Association",
+   "county": "UINTA",
+   "city": "EVANSTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "CHAPMAN DITCH VIA SIMMS, BLIGHT & TURNER IRRIGATIO"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0031348"
+  },
+  {
+   "npdes_permit": "WY0035700",
+   "state": "WY",
+   "facility": "EVANSTON FLYING J TRAVEL PLAZA #761",
+   "permittee_as_recorded": "Pilot Company",
+   "county": "UINTA",
+   "city": "EVANSTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "5541"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-03-01",
+   "permit_expiration": "2030-02-28",
+   "receiving_waters_echo": [
+    "YELLOW CREEK (CLASS 2C WATER), BEAR RIVER BASIN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0035700"
+  },
+  {
+   "npdes_permit": "WY0036153",
+   "state": "WY",
+   "facility": "FT. BRIDGER TRAVEL STOP #188",
+   "permittee_as_recorded": "Travel Centers of America",
+   "county": "UINTA",
+   "city": "FORT BRIDGER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "A COMPLETELY CONTAINED, CREATED WETLAND (4A), GREE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0036153"
+  },
+  {
+   "npdes_permit": "WY0036251",
+   "state": "WY",
+   "facility": "POWDER HORN WW PLANT - FORMERLY POWDER HORN RANCH PLANNED UNIT",
+   "permittee_as_recorded": "Powder Horn Ranch, LLC",
+   "county": "SHERIDAN COUNTY",
+   "city": "SHERIDAN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-04-01",
+   "permit_expiration": "2026-03-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0036251"
+  },
+  {
+   "npdes_permit": "WY0048488",
+   "state": "WY",
+   "facility": "HOY MOBILE HOME PARK",
+   "permittee_as_recorded": "[name removed]",
+   "county": "CAMPBELL",
+   "city": "(UNKNOWN CITY)",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-03-31",
+   "receiving_waters_echo": [
+    "UNNAMED EPHEMERAL TRIBUTARY (3B) OF LITTLE RAWHIDE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0048488"
+  },
+  {
+   "npdes_permit": "WY0052451",
+   "state": "WY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "ALBANY",
+   "city": "LARAMIE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-07",
+   "permit_expiration": "2029-12-31",
+   "receiving_waters_echo": [
+    "Unnamed perennial stream (3B) tributary to South F"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0052451"
+  },
+  {
+   "npdes_permit": "WY0056227",
+   "state": "WY",
+   "facility": "WEST FRENCHIE DRAW AMINE PLANT",
+   "permittee_as_recorded": "Tallgrass Midstream, LLC",
+   "county": "FREMONT",
+   "city": "(UNKNOWN CITY)",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-02-28",
+   "receiving_waters_echo": [
+    "unnamed tributary of Alkali Creek (3B), Wind River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0056227"
+  },
+  {
+   "npdes_permit": "WY0096580",
+   "state": "WY",
+   "facility": "PILOT TRAVEL CENTERS, LLC - RAWLINS",
+   "permittee_as_recorded": "Pilot Travel Centers LLC",
+   "county": "CARBON COUNTY",
+   "city": "RAWLINS",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-08-01",
+   "permit_expiration": "2030-07-31",
+   "receiving_waters_echo": [
+    "SUGAR CREEK (3B)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0096580"
+  },
+  {
+   "npdes_permit": "WY0097036",
+   "state": "WY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "LINCOLN",
+   "city": "KEMMERER",
+   "system_kind": "single residence",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "facility (permittee not named)",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2031-07-31",
+   "receiving_waters_echo": [
+    "UET, North Fork, Little Muddy Creek (3B), via Big"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0097036"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "WY0020061",
+   "state": "WY",
+   "facility": "LOVELL WASTEWATER LAGOONS",
+   "permittee_as_recorded": "Lovell, Town of",
+   "county": "BIG HORN COUNTY",
+   "city": "LOVELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-11-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "SHOSHONE RIVER (2AB), VIA UNNAMED DITCH, BIG HORN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0020061"
+  },
+  {
+   "npdes_permit": "WY0020435",
+   "state": "WY",
+   "facility": "TOWN OF DAYTON WASTEWATER TREATMENT PLANT",
+   "permittee_as_recorded": "Dayton, Town of",
+   "county": "SHERIDAN COUNTY",
+   "city": "DAYTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [
+    "TONGUE RIVER (2AB), TONGUE RIVER BASIN"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0020435"
+  },
+  {
+   "npdes_permit": "WY0056006",
+   "state": "WY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Douglas, Town of",
+   "county": "CONVERSE",
+   "city": "UNKNOWN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-01",
+   "permit_expiration": "2027-12-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0056006"
+  },
+  {
+   "npdes_permit": "WY0056308",
+   "state": "WY",
+   "facility": "SHERIDAN COUNTY SCHOOL DISTRICT #1, BIGHORN SCHOOL WASTEWATER SYSTEM DRAINAGE",
+   "permittee_as_recorded": "Sheridan County School District #1",
+   "county": "SHERIDAN",
+   "city": "BIGHORN",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "2812"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-11-01",
+   "permit_expiration": "2030-10-31",
+   "receiving_waters_echo": [
+    "JACKSON CREEK (2AB), TONGUE RIVER BASIN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#WY0056308"
+  }
+ ]
+}

@@ -1,0 +1,2382 @@
+{
+ "state": "NY",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:00Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 50,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 4,
+  "single_residence": 1,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 6,
+  "by_legal_form_proposed": {
+   "business or industrial": 31,
+   "campground or resort": 1,
+   "facility (permittee not named)": 1,
+   "homeowners' association": 3,
+   "institution": 1,
+   "mobile-home park": 4,
+   "not stated by the names": 9
+  },
+  "public_by_name": 4
+ },
+ "candidates": [
+  {
+   "npdes_permit": "NY0021814",
+   "state": "NY",
+   "facility": "SHELTER ISLAND HGTS PROP OWNERS CORP",
+   "permittee_as_recorded": "SHELTER ISLAND HGTS PROP OWNERS CORP",
+   "county": "SUFFOLK",
+   "city": "SHELTER ISLAND HEIGHTS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-02-17",
+   "permit_expiration": "2027-01-31",
+   "receiving_waters_echo": [
+    "SHELTER ISLAND SOUND"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0021814"
+  },
+  {
+   "npdes_permit": "NY0026891",
+   "state": "NY",
+   "facility": "HERITAGE HILLS STP",
+   "permittee_as_recorded": "VEOLIA SEWER NEW YORK INC",
+   "county": "WESTCHESTER",
+   "city": "SOMERS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-01",
+   "permit_expiration": "2029-06-30",
+   "receiving_waters_echo": [
+    "BROWN BK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0026891"
+  },
+  {
+   "npdes_permit": "NY0027944",
+   "state": "NY",
+   "facility": "C W MASSEY & SONS DUCK FARM",
+   "permittee_as_recorded": "C W MASSEY AND SONS DUCK FARM",
+   "county": "SUFFOLK",
+   "city": "SOUTHAMPTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "1985-11-01",
+   "permit_expiration": "1990-10-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0027944"
+  },
+  {
+   "npdes_permit": "NY0063584",
+   "state": "NY",
+   "facility": "BRISTOL SEWERAGE DISPOSAL CORP",
+   "permittee_as_recorded": "BRISTOL SEWAGE DISPOSAL CORP",
+   "county": "ONTARIO",
+   "city": "CANANDAIGUA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-02-01",
+   "permit_expiration": "2031-01-31",
+   "receiving_waters_echo": [
+    "SENECA POINT STR"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0063584"
+  },
+  {
+   "npdes_permit": "NY0077259",
+   "state": "NY",
+   "facility": "SUNRISE GARDEN APARTMENTS",
+   "permittee_as_recorded": "SUNRISE PROPERTIES ASSOCIATES",
+   "county": "SUFFOLK",
+   "city": "BOHEMIA",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-23",
+   "permit_expiration": "2034-07-22",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0077259"
+  },
+  {
+   "npdes_permit": "NY0077283",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "SUFFOLK",
+   "city": "OAKDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-16",
+   "permit_expiration": "2034-04-15",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0077283"
+  },
+  {
+   "npdes_permit": "NY0077372",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "SUFFOLK",
+   "city": "HOLBROOK",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-23",
+   "permit_expiration": "2034-07-22",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0077372"
+  },
+  {
+   "npdes_permit": "NY0078123",
+   "state": "NY",
+   "facility": "VILLAGE IN THE WOODS",
+   "permittee_as_recorded": "VILLAGE IN THE WOODS",
+   "county": "SUFFOLK",
+   "city": "SELDEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-16",
+   "permit_expiration": "2034-04-15",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0078123"
+  },
+  {
+   "npdes_permit": "NY0079367",
+   "state": "NY",
+   "facility": "TALL OAKS STP",
+   "permittee_as_recorded": "COLLEGE OAK EQUITIES ASSOCIATES LP",
+   "county": "SUFFOLK",
+   "city": "SELDEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2035-05-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0079367"
+  },
+  {
+   "npdes_permit": "NY0079529",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "SUFFOLK",
+   "city": "PORT JEFFERSON STATION",
+   "system_kind": "single residence",
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "facility (permittee not named)",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2036-03-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0079529"
+  },
+  {
+   "npdes_permit": "NY0080632",
+   "state": "NY",
+   "facility": "HIDDEN MEADOWS",
+   "permittee_as_recorded": "HIDDEN MEADOWS",
+   "county": "SUFFOLK",
+   "city": "MIDDLE ISLAND",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2035-06-30",
+   "receiving_waters_echo": [
+    "GROUNDWATER, GW",
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0080632"
+  },
+  {
+   "npdes_permit": "NY0087858",
+   "state": "NY",
+   "facility": "BASS LAKE RESORT",
+   "permittee_as_recorded": "SJFH HOLDINGS LLC",
+   "county": "OSWEGO",
+   "city": "PARISH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8999"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2031-02-28",
+   "receiving_waters_echo": [
+    "LITTLE SALMON R NF"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0087858"
+  },
+  {
+   "npdes_permit": "NY0101826",
+   "state": "NY",
+   "facility": "NEW YORK INSTITUTE OF TECHNOLOGY STP",
+   "permittee_as_recorded": "NY INSTITUTE OF TECHNOLOGY",
+   "county": "NASSAU",
+   "city": "OLD WESTBURY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-06-01",
+   "permit_expiration": "2036-05-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 11,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0101826"
+  },
+  {
+   "npdes_permit": "NY0136492",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "BROOKWOOD RONKONKOMA, LLC",
+   "county": "SUFFOLK",
+   "city": "LAKE RONKONKOMA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2036-07-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0136492"
+  },
+  {
+   "npdes_permit": "NY0152161",
+   "state": "NY",
+   "facility": "FOREST MANOR MOBILE HOME PK",
+   "permittee_as_recorded": "FOREST MANOR LLC",
+   "county": "BROOME",
+   "city": "CHENANGO FORKS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "PAGE BK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0152161"
+  },
+  {
+   "npdes_permit": "NY0155331",
+   "state": "NY",
+   "facility": "PRIDE MANOR PARK MHP",
+   "permittee_as_recorded": "PRIDE MANOR HOLDINGS LLC",
+   "county": null,
+   "city": "CONKLIN",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": 20000.0,
+   "major_minor": "Minor",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [
+    "SNAKE CK"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0155331"
+  },
+  {
+   "npdes_permit": "NY0156370",
+   "state": "NY",
+   "facility": "MOBILE HOME SITES",
+   "permittee_as_recorded": "[name removed]",
+   "county": "BROOME",
+   "city": "BARKER, TOWN OF",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2018-04-01",
+   "permit_expiration": "2023-03-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0156370"
+  },
+  {
+   "npdes_permit": "NY0196363",
+   "state": "NY",
+   "facility": "DSW PLAZA @ LAKE GROVE",
+   "permittee_as_recorded": "LAKE GROVE OWNERS LLC",
+   "county": "SUFFOLK",
+   "city": "LAKE GROVE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2036-03-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0196363"
+  },
+  {
+   "npdes_permit": "NY0208370",
+   "state": "NY",
+   "facility": "SQUIRE GREENS TREATMENT FACILITY",
+   "permittee_as_recorded": "[name removed]",
+   "county": "DUTCHESS",
+   "city": "PAWLING",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-08-01",
+   "permit_expiration": "2029-07-31",
+   "receiving_waters_echo": [
+    "TRIB OF SWAMP RIVER, TRIBUTARY OF SWAMP RIVER",
+    "TRIBUTARY OF SWAMP RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0208370"
+  },
+  {
+   "npdes_permit": "NY0216321",
+   "state": "NY",
+   "facility": "BRENNAN BEACH RV RESORT, LLC",
+   "permittee_as_recorded": "MHC BRENNAN BEACH RV RESORT, LLC",
+   "county": "OSWEGO",
+   "city": "PULASKI",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-01",
+   "permit_expiration": "2028-08-31",
+   "receiving_waters_echo": [
+    "LAKE ONTARIO"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0216321"
+  },
+  {
+   "npdes_permit": "NY0221678",
+   "state": "NY",
+   "facility": "TALLMADGE WOODS STP",
+   "permittee_as_recorded": "SUFFOLK CO DPW",
+   "county": "SUFFOLK",
+   "city": "MILLER PLACE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952",
+    "8999"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.4,
+   "major_minor": "Minor",
+   "permit_effective": "2019-05-01",
+   "permit_expiration": "2029-04-30",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0221678"
+  },
+  {
+   "npdes_permit": "NY0226254",
+   "state": "NY",
+   "facility": "GREENVIEW COURT",
+   "permittee_as_recorded": "GREENVIEW COURT INC",
+   "county": "SUFFOLK",
+   "city": "OAKDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2035-05-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0226254"
+  },
+  {
+   "npdes_permit": "NY0226998",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "SUNRISE SENIOR LIVING SERVICES INC",
+   "county": "SUFFOLK",
+   "city": "SMITHTOWN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2036-07-30",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0226998"
+  },
+  {
+   "npdes_permit": "NY0227285",
+   "state": "NY",
+   "facility": "HOLIDAY INN EXPRESS",
+   "permittee_as_recorded": "HOLIDAY INN EXPRESS",
+   "county": "SUFFOLK",
+   "city": "HAUPPAUGE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-02-10",
+   "permit_expiration": "2033-01-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0227285"
+  },
+  {
+   "npdes_permit": "NY0252972",
+   "state": "NY",
+   "facility": "SPRUCE PONDS GARDEN APTS",
+   "permittee_as_recorded": "SP OPERATING LTD",
+   "county": "SUFFOLK",
+   "city": "HOLTSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-23",
+   "permit_expiration": "2034-07-22",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0252972"
+  },
+  {
+   "npdes_permit": "NY0253065",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "STRATHMORE ON THE GREEN HOA INC",
+   "county": "SUFFOLK",
+   "city": "MIDDLE ISLAND",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-01",
+   "permit_expiration": "2036-06-30",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0253065"
+  },
+  {
+   "npdes_permit": "NY0253081",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "SELDEN GREENS B LLC",
+   "county": "SUFFOLK",
+   "city": "SELDEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2035-05-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0253081"
+  },
+  {
+   "npdes_permit": "NY0253111",
+   "state": "NY",
+   "facility": "GURWIN CAMPUS STP LLC",
+   "permittee_as_recorded": "GURWIN CAMPUS STP LLC",
+   "county": "SUFFOLK",
+   "city": "COMMACK",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-01",
+   "permit_expiration": "2036-06-30",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0253111"
+  },
+  {
+   "npdes_permit": "NY0253227",
+   "state": "NY",
+   "facility": "GREENVIEW COMMONS",
+   "permittee_as_recorded": "GREENVIEW COMMONS ASSOCIATES LP",
+   "county": "SUFFOLK",
+   "city": "OAKDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-05-01",
+   "permit_expiration": "2035-04-30",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0253227"
+  },
+  {
+   "npdes_permit": "NY0253316",
+   "state": "NY",
+   "facility": "CONIFER VILLAGE STP",
+   "permittee_as_recorded": "CONIFER REALTY LLC",
+   "county": "SUFFOLK",
+   "city": "EAST PATCHOGUE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2035-05-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0253316"
+  },
+  {
+   "npdes_permit": "NY0253375",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "FROWEIN ROAD, LLC",
+   "county": "SUFFOLK",
+   "city": "EAST MORICHES",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-16",
+   "permit_expiration": "2034-04-15",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0253375"
+  },
+  {
+   "npdes_permit": "NY0253421",
+   "state": "NY",
+   "facility": "THE INN @ EASTWIND",
+   "permittee_as_recorded": "KNIGHTWORLD, INC",
+   "county": "SUFFOLK",
+   "city": "WADING RIVER",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-12-01",
+   "permit_expiration": "2032-11-29",
+   "receiving_waters_echo": [
+    "GROUNDWATER",
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0253421"
+  },
+  {
+   "npdes_permit": "NY0254479",
+   "state": "NY",
+   "facility": "PRESERVE AT CONNETQUOT",
+   "permittee_as_recorded": "PRESERVES AT CONNETQUOT HOA",
+   "county": "SUFFOLK",
+   "city": "OAKDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2036-03-31",
+   "receiving_waters_echo": [
+    "GA",
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0254479"
+  },
+  {
+   "npdes_permit": "NY0269328",
+   "state": "NY",
+   "facility": "SPRINGBROOK SHORES WWTP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "ERIE",
+   "city": "ELMA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-01",
+   "permit_expiration": "2028-08-31",
+   "receiving_waters_echo": [
+    "BUFFALO CK, TRIB 11 OF BUFFALO CK",
+    "BUFFALO CK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0269328"
+  },
+  {
+   "npdes_permit": "NY0281727",
+   "state": "NY",
+   "facility": "CLOVEWOOD WWTP",
+   "permittee_as_recorded": "CLOVEWOOD TRANSPORTATION CORPORATION",
+   "county": "ORANGE",
+   "city": "MONROE",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "237210"
+   ],
+   "design_flow_mgd": 0.2568,
+   "major_minor": "Minor",
+   "permit_effective": "2024-12-01",
+   "permit_expiration": "2029-11-30",
+   "receiving_waters_echo": [
+    "SUBTRIB OF SATTERLY CREEK, SUBTRIB SATTERLY CREEK",
+    "SUBTRIB SATTERLY CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0281727"
+  },
+  {
+   "npdes_permit": "NY0285544",
+   "state": "NY",
+   "facility": "AMBER COURT OF SMITHTOWN",
+   "permittee_as_recorded": "AMBER COURT",
+   "county": "SUFFOLK",
+   "city": "NESCONSET",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-05-01",
+   "permit_expiration": "2035-04-30",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0285544"
+  },
+  {
+   "npdes_permit": "NY0285552",
+   "state": "NY",
+   "facility": "LA FITNESS STP",
+   "permittee_as_recorded": "PORT PLAZA - E&A - LLC",
+   "county": "SUFFOLK",
+   "city": "PORT JEFFERSON STATION",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-06-01",
+   "permit_expiration": "2036-05-31",
+   "receiving_waters_echo": [
+    "GROUNDWATER, GW",
+    "GW"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0285552"
+  },
+  {
+   "npdes_permit": "NY0285897",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "BK AT LAKE GROVE, LLC",
+   "county": "SUFFOLK",
+   "city": "LAKE GROVE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2036-07-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0285897"
+  },
+  {
+   "npdes_permit": "NY0286176",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "CONCERN FOR INDEPENDENT LIVING, INC",
+   "county": "SUFFOLK",
+   "city": "LAKE RONKONKOMA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2036-07-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0286176"
+  },
+  {
+   "npdes_permit": "NY0286796",
+   "state": "NY",
+   "facility": "MATINECOCK COURT STP",
+   "permittee_as_recorded": "MATINECOCK COURT HOUSING DEVELOPMENT FUND CORP",
+   "county": "SUFFOLK",
+   "city": "HUNTINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-12-01",
+   "permit_expiration": "2035-11-30",
+   "receiving_waters_echo": [
+    "GENESEE R, GW",
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0286796"
+  },
+  {
+   "npdes_permit": "NY0300101",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "NICHOLS ROAD DEVELOPERS LLC",
+   "county": "SUFFOLK",
+   "city": "ISLANDIA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-10-01",
+   "permit_expiration": "2034-09-30",
+   "receiving_waters_echo": [
+    "GROUNDWATER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0300101"
+  },
+  {
+   "npdes_permit": "NY0300489",
+   "state": "NY",
+   "facility": "WATERMILL CROSSING",
+   "permittee_as_recorded": "WATERMILL CROSSING",
+   "county": "SUFFOLK",
+   "city": "EAST HAMPTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-10-01",
+   "permit_expiration": "2034-09-30",
+   "receiving_waters_echo": [
+    "GROUNDWATER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0300489"
+  },
+  {
+   "npdes_permit": "NY0300608",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "ENGEL BURMAN DALY ROAD LLC",
+   "county": "SUFFOLK",
+   "city": "EAST NORTHPORT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-08-01",
+   "permit_expiration": "2034-07-31",
+   "receiving_waters_echo": [
+    "GROUNDWATER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0300608"
+  },
+  {
+   "npdes_permit": "NY0300616",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "INLAND LONG ISLAND RESIDENTIAL LEASE CO LLC",
+   "county": "SUFFOLK",
+   "city": "FARMINGVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-03-22",
+   "permit_expiration": "2034-03-21",
+   "receiving_waters_echo": [
+    "GROUNDWATER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0300616"
+  },
+  {
+   "npdes_permit": "NY0300756",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "THE HILLS HOMEOWNERS ASSOCIATION INC",
+   "county": "SUFFOLK",
+   "city": "EAST QUOGUE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2036-03-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0300756"
+  },
+  {
+   "npdes_permit": "NY0300829",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "GGV THREE MILE HARBOR LLC",
+   "county": "SUFFOLK",
+   "city": "EAST HAMPTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-10-01",
+   "permit_expiration": "2034-09-30",
+   "receiving_waters_echo": [
+    "GROUNDWATER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0300829"
+  },
+  {
+   "npdes_permit": "NY0300861",
+   "state": "NY",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "THE GABLES OF WESTHAMPTON LTD",
+   "county": "SUFFOLK",
+   "city": "WESTHAMPTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2036-02-29",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0300861"
+  },
+  {
+   "npdes_permit": "NY0300870",
+   "state": "NY",
+   "facility": "MEDFORD GARDENS",
+   "permittee_as_recorded": "MEDFORD GARDENS HOUSING DEVELOPMENT FUND CORP",
+   "county": "SUFFOLK",
+   "city": "MEDFORD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2036-03-31",
+   "receiving_waters_echo": [
+    "GA, GW",
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0300870"
+  },
+  {
+   "npdes_permit": "NY0300888",
+   "state": "NY",
+   "facility": "SUTTON LANDING AT COMMACK",
+   "permittee_as_recorded": "HSRE-EB COMMACK LLC",
+   "county": "SUFFOLK",
+   "city": "COMMACK",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-12-01",
+   "permit_expiration": "2034-11-30",
+   "receiving_waters_echo": [
+    "GROUNDWATER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0300888"
+  },
+  {
+   "npdes_permit": "NY0313181",
+   "state": "NY",
+   "facility": "SFSC FUEL FACILITY - FOK",
+   "permittee_as_recorded": "SIGNATURE FLIGHT SUPPORT LLC",
+   "county": "SUFFOLK",
+   "city": "WESTHAMPTON BEACH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "5171"
+   ],
+   "naics_codes": [
+    "221320",
+    "424710"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-01",
+   "permit_expiration": "2036-05-01",
+   "receiving_waters_echo": [
+    "GROUNDWATER, GW",
+    "GW"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0313181"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "NY0068071",
+   "state": "NY",
+   "facility": "GREENS @ HALF HOLLOW LLC",
+   "permittee_as_recorded": "SUFFOLK COUNTY SD NO. 26",
+   "county": "SUFFOLK",
+   "city": "MELVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "8999"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.33,
+   "major_minor": "Minor",
+   "permit_effective": "2022-11-07",
+   "permit_expiration": "2032-10-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0068071"
+  },
+  {
+   "npdes_permit": "NY0079359",
+   "state": "NY",
+   "facility": "SUFFOLK COUNTY STP#20-W-LEISURE VILLAGE",
+   "permittee_as_recorded": "SUFFOLK COUNTY DPW",
+   "county": "SUFFOLK",
+   "city": "RIDGE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.275,
+   "major_minor": "Minor",
+   "permit_effective": "2024-06-01",
+   "permit_expiration": "2034-05-31",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0079359"
+  },
+  {
+   "npdes_permit": "NY0153206",
+   "state": "NY",
+   "facility": "CHENANGO HEIGHTS SUBDIVISION",
+   "permittee_as_recorded": "TOWN OF CHENANGO",
+   "county": "BROOME",
+   "city": "BINGHAMTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8999"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-02-01",
+   "permit_expiration": "2027-01-31",
+   "receiving_waters_echo": [
+    "CHENANGO R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0153206"
+  },
+  {
+   "npdes_permit": "NY0226688",
+   "state": "NY",
+   "facility": "SCSD#20 - E, RIDGEHAVEN STP",
+   "permittee_as_recorded": "SUFFOLK COUNTY DPW",
+   "county": "SUFFOLK",
+   "city": "RIDGE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.083,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2033-06-30",
+   "receiving_waters_echo": [
+    "GW"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NY0226688"
+  }
+ ]
+}

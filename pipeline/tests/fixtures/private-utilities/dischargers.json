@@ -1,0 +1,12 @@
+[
+ {
+  "id": "zz-hilltop-sewer-co",
+  "name": "Hilltop Sewer Co Inc",
+  "state": "ZZ",
+  "npdes_permit": "ZZ0000011",
+  "npdes_permits": [
+   "ZZ0000011"
+  ],
+  "legal_form": "private utility"
+ }
+]

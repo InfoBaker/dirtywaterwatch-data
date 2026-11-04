@@ -1,0 +1,380 @@
+{
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:00Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "national_candidates": 3348,
+ "earlier_count": {
+  "value": 2359,
+  "where": "research/federal/plant-outfalls.md section 2.8"
+ },
+ "against_earlier_count": {
+  "candidate: POTW component with a private owner type: already in the outfall registry": 376,
+  "candidate: in the 2,359 (one sewage code)": 2265,
+  "candidate: owner type mixed or blank, the name reads private": 347,
+  "candidate: private owner in the plants file (EPA's national dataset or POTW component): already in the outfall registry": 24,
+  "candidate: several codes, one of them sewage (missed by the comma split)": 336,
+  "public by name: POTW component with a private owner type: already in the outfall registry": 60,
+  "public by name: in the 2,359 (one sewage code)": 94,
+  "public by name: several codes, one of them sewage (missed by the comma split)": 19
+ },
+ "by_state": {
+  "AK": {
+   "candidates": 2,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "AL": {
+   "candidates": 139,
+   "public_by_name": 3,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 10,
+   "already_in_registry": 0
+  },
+  "AR": {
+   "candidates": 13,
+   "public_by_name": 2,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "AZ": {
+   "candidates": 20,
+   "public_by_name": 4,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "CA": {
+   "candidates": 4,
+   "public_by_name": 1,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "CO": {
+   "candidates": 42,
+   "public_by_name": 2,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "CT": {
+   "candidates": 2,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "FL": {
+   "candidates": 22,
+   "public_by_name": 2,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "GA": {
+   "candidates": 58,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 1,
+   "already_in_registry": 0
+  },
+  "HI": {
+   "candidates": 2,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "ID": {
+   "candidates": 5,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "IL": {
+   "candidates": 40,
+   "public_by_name": 2,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "IN": {
+   "candidates": 131,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "KS": {
+   "candidates": 15,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "KY": {
+   "candidates": 6,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "LA": {
+   "candidates": 126,
+   "public_by_name": 1,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 1,
+   "already_in_registry": 0
+  },
+  "MD": {
+   "candidates": 11,
+   "public_by_name": 4,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 4
+  },
+  "MI": {
+   "candidates": 5,
+   "public_by_name": 1,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "MN": {
+   "candidates": 19,
+   "public_by_name": 3,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 3,
+   "already_in_registry": 0
+  },
+  "MO": {
+   "candidates": 282,
+   "public_by_name": 28,
+   "single_residence": 1,
+   "industrial_with_sewage_code": 2,
+   "already_in_registry": 0
+  },
+  "MS": {
+   "candidates": 38,
+   "public_by_name": 10,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "MT": {
+   "candidates": 55,
+   "public_by_name": 4,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 2,
+   "already_in_registry": 0
+  },
+  "NC": {
+   "candidates": 180,
+   "public_by_name": 1,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 4,
+   "already_in_registry": 1
+  },
+  "ND": {
+   "candidates": 21,
+   "public_by_name": 2,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 11,
+   "already_in_registry": 0
+  },
+  "NE": {
+   "candidates": 22,
+   "public_by_name": 0,
+   "single_residence": 1,
+   "industrial_with_sewage_code": 1,
+   "already_in_registry": 0
+  },
+  "NH": {
+   "candidates": 0,
+   "public_by_name": 1,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "NJ": {
+   "candidates": 29,
+   "public_by_name": 1,
+   "single_residence": 2,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "NM": {
+   "candidates": 6,
+   "public_by_name": 1,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "NV": {
+   "candidates": 1,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "NY": {
+   "candidates": 50,
+   "public_by_name": 4,
+   "single_residence": 1,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "OH": {
+   "candidates": 237,
+   "public_by_name": 4,
+   "single_residence": 2,
+   "industrial_with_sewage_code": 2,
+   "already_in_registry": 0
+  },
+  "OK": {
+   "candidates": 18,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 1,
+   "already_in_registry": 0
+  },
+  "OR": {
+   "candidates": 1,
+   "public_by_name": 1,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "PA": {
+   "candidates": 666,
+   "public_by_name": 8,
+   "single_residence": 267,
+   "industrial_with_sewage_code": 2,
+   "already_in_registry": 4
+  },
+  "PR": {
+   "candidates": 3,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "SC": {
+   "candidates": 26,
+   "public_by_name": 1,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "SD": {
+   "candidates": 12,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "TN": {
+   "candidates": 36,
+   "public_by_name": 1,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "TX": {
+   "candidates": 792,
+   "public_by_name": 50,
+   "single_residence": 1,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "UT": {
+   "candidates": 3,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 1,
+   "already_in_registry": 0
+  },
+  "VA": {
+   "candidates": 137,
+   "public_by_name": 18,
+   "single_residence": 1,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "VI": {
+   "candidates": 10,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "VT": {
+   "candidates": 1,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "WA": {
+   "candidates": 10,
+   "public_by_name": 6,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "WI": {
+   "candidates": 16,
+   "public_by_name": 3,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "WV": {
+   "candidates": 19,
+   "public_by_name": 0,
+   "single_residence": 0,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  },
+  "WY": {
+   "candidates": 15,
+   "public_by_name": 4,
+   "single_residence": 1,
+   "industrial_with_sewage_code": 0,
+   "already_in_registry": 0
+  }
+ },
+ "decisions": {
+  "private: EPA facility type Corporation": 641,
+  "private: EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body": 363,
+  "private: EPA facility type NON-POTW; the name reads as a private body": 24,
+  "private: EPA facility type Privately Owned Facility": 2242,
+  "private: EPA facility type blank; the name reads as a private body": 78,
+  "public_by_name: EPA facility type Corporation; the name reads as a public body": 25,
+  "public_by_name: EPA facility type Non-Government; the name reads as a public body": 1,
+  "public_by_name: EPA facility type Privately Owned Facility; the name reads as a public body": 147,
+  "skipped: EPA facility type Mixed Ownership (e.g., Public/Private); the name does not read as a private body": 249,
+  "skipped: EPA facility type NON-POTW; the name does not read as a private body": 91,
+  "skipped: EPA facility type blank; the name does not read as a private body": 50,
+  "skipped: public owner type": 16306,
+  "skipped: stormwater-only permit": 15
+ }
+}
