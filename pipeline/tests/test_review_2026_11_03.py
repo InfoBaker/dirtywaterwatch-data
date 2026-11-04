@@ -103,6 +103,21 @@ def test_every_nested_text_of_a_water_reason_goes_through_the_redactor(data_dir)
     assert NAME not in json.dumps(st) and st["waters"]["w"]["reasons"][0]["reach"] == "MA1-001"
 
 
+def test_a_waters_summary_headline_and_unresolved_events_go_through_the_redactor(data_dir):
+    """The water index and the water file also carry the water's summary, headline, per-category status and
+    unresolved events, built from the records (the export's self-check stopped run 41921379232 on one of them)."""
+    events = [ended("1", waterbody_text=f"Storm drain at resident {NAME}")]
+    r = R.redactor_for(events, data_dir)
+    st = {"waters": {"w": {"name": "Old Bay", "reason_short": "CSO", "reasons": [{"event_id": "ma-test:1", "short": "CSO"}],
+                           "summary": f"One report, from {NAME}", "headline": {"status": "red", "text": f"per {NAME}"},
+                           "status_by_category": {"sewage": {"status": "red", "why": f"{NAME} reported it"}},
+                           "unresolved_events": [{"event_id": "ma-test:1", "short": f"reported by {NAME}"}],
+                           "events": ["ma-test:1"], "towns": ["Tampa"]}},
+          "advisory_points": [], "reach_events_active": []}
+    assert X.redact_status_texts(st, r) == 4
+    assert NAME not in json.dumps(st) and st["waters"]["w"]["name"] == "Old Bay"
+
+
 def test_p1_1_the_blocklist_self_check_finds_a_name_in_out_and_fails_the_export(tmp_path, monkeypatch):
     out = tmp_path / "out"
     (out / "waters").mkdir(parents=True)

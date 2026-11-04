@@ -604,9 +604,20 @@ def redact_status_texts(st: dict, r: Redactor, swaps_of: dict | None = None) -> 
         elif isinstance(o, list):
             for v in o:
                 deep(v, eid, skip)
+    WATER_SAFE = ("name", "slug", "kind", "state", "status", "since", "events", "covered_by", "stale", "stale_sources",
+                  "fill", "stretch_model", "status_basis", "slug_aliases", "towns", "reasons", "reason_short", "bbox")
     for w in (st.get("waters") or {}).values():
         reasons = w.get("reasons") or []
         fix(w, "reason_short", reasons[0].get("event_id") if reasons else None)
+        # the water's other texts (its summary, headline, per-category status, unresolved events) quote records too:
+        # the second stop of run 41921379232 was in one of them
+        for k, v in list(w.items()):
+            if k in WATER_SAFE:
+                continue
+            if isinstance(v, str) and v:
+                fix(w, k, reasons[0].get("event_id") if reasons else None)
+            else:
+                deep(v, reasons[0].get("event_id") if reasons else None)
         for x in reasons:
             fix(x, "short")
             fix(x, "monthly_label")
