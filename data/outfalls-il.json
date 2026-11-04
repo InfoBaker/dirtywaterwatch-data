@@ -3,7 +3,7 @@
  "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0",
  "rule": "one row per MWRD outfall point; the owner's combined sewer permit; EPA's outfall number when the point pairs with an EPA row of that permit (nearest within 400 m one to one, then the same street and side), else MWRD's TARP key as the outfall id",
  "generated": "2026-11-04",
- "count": 433,
+ "count": 434,
  "paired_with_epa": 291,
  "outfalls": [
   {
@@ -7443,6 +7443,29 @@
    }
   },
   {
+   "npdes_permit": "IL0020800",
+   "permittee": "Forest View",
+   "state": "IL",
+   "city": "Forest View",
+   "outfall": "DS-M07",
+   "outfall_name": "Grove Ave (N)",
+   "outfall_status": "CSO",
+   "receiving_water_echo": "Chicago Sanitary and Ship Canal",
+   "mwrd_reach": "CSSC Lower (SWRP)",
+   "mwrd_owner": "Forest View",
+   "tarp_connection": "DS-M07",
+   "monitored": false,
+   "lat": 41.80417,
+   "lon": -87.79306,
+   "coords_from": "il-mwrd-cso-points",
+   "outfall_kind": "cso",
+   "country": "US",
+   "source_id": "il-mwrd-cso-points",
+   "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0/query?where=OBJECTID%3D268&outFields=*&f=json",
+   "source_record_id": 268,
+   "epa_row": null
+  },
+  {
    "npdes_permit": "ILM580009",
    "permittee": "LA GRANGE CSOS, VILLAGE OF",
    "state": "IL",
@@ -11747,15 +11770,6 @@
   }
  ],
  "without_permit": [
-  {
-   "owner": "Forest View",
-   "location": "Grove Ave (N)",
-   "lat": 41.80417,
-   "lon": -87.79306,
-   "mwrd_reach": "CSSC Lower (SWRP)",
-   "tarp_connection": "DS-M07",
-   "reason": "EPA's CSO inventory holds no combined sewer permit for this owner"
-  },
   {
    "owner": "Methodist Campground",
    "location": "Algonquin Rd (E)",
