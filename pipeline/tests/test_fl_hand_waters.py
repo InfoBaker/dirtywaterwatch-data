@@ -142,3 +142,44 @@ def test_a_scoped_merge_keeps_the_states_rows_where_they_stood():
     assert [r["name"] for r in out] == ["A", "B", "C", "D"] or [r["name"] for r in out] == ["A", "C", "B", "D"]
     assert out[0]["state"] == "CT" and out[-1]["state"] == "GA"
     assert N.merge_targets_scoped([{"state": "CT", "name": "A"}], new, {"FL"}, "reports")[-1]["name"] == "B"
+
+
+# ---------------------------------------------------------------- the outlines on the hourly path (gate 3)
+
+def test_the_status_build_counts_the_outlines_it_can_measure_against_per_state(tmp_path, monkeypatch):
+    """The placement guard measures a name match against the record's outline: an inline geometry, or openboatlaunch's
+    out/water/<slug>.json, which the hourly run restores. The build says per state how many it has, and a problem when
+    a state's records mostly have none (Florida's 1,030 openboatlaunch records carry no inline geometry)."""
+    obl = tmp_path / "water"
+    obl.mkdir()
+    (obl / "lake-a-fl.json").write_text("{}")
+    monkeypatch.setattr(S, "OBL_WATER_DIR", obl)
+    waters = {"lake-a-fl": {"state": "FL"}, "lake-b-fl": {"state": "FL"}, "lake-c-fl": {"state": "FL"},
+              "bayou-fl": {"state": "FL", "extra": True, "geometry": {"type": "Point", "coordinates": [0, 0]}},
+              "creek-ny": {"state": "NY", "extra": True, "geometry": {"type": "Point", "coordinates": [0, 0]}}}
+    cov = S.outline_coverage(waters)
+    assert cov["FL"] == {"records": 4, "with_outline": 2, "openboatlaunch": 3, "openboatlaunch_with_outline": 1}
+    assert cov["NY"]["with_outline"] == 1 and not S.outline_problems(cov)
+    (obl / "lake-a-fl.json").unlink()
+    probs = S.outline_problems(S.outline_coverage(waters))
+    assert len(probs) == 1 and probs[0].startswith("FL: 1 of 4 water records have an outline here")
+    assert "obl-water" not in probs[0] and "data/" not in probs[0]
+    monkeypatch.setattr(S, "OBL_WATER_DIR", tmp_path / "absent")
+    assert S.outline_coverage(waters)["FL"]["openboatlaunch_with_outline"] == 0
+
+
+def test_the_hourly_run_restores_the_outlines_where_the_status_build_reads_them():
+    """refresh.yml unpacks state/obl-water.tar.gz into ../openboatlaunch/out (water/<slug>.json), the default
+    OBL_WATER_DIR of build/status.py; the Florida feed is an hourly ingest module (not skipped), and the hand records
+    are rebuilt by the hourly waters-nhd step."""
+    root = Path(__file__).resolve().parents[2]
+    wf = (root / ".github" / "workflows" / "refresh.yml").read_text()
+    assert "unpack-obl obl-water.tar.gz" in wf
+    text = (root / "scripts" / "state_paths.py").read_text()
+    assert 'OBL_OUT' in text and '"openboatlaunch" / "out"' in text.replace("'", '"')
+    import os
+    assert S.OBL_WATER_DIR.parts[-3:] == ("openboatlaunch", "out", "water") or "OBL_WATER_DIR" in os.environ
+    mk = (root / "Makefile").read_text()
+    skip = next(line for line in mk.splitlines() if line.startswith("INGEST_SKIP"))
+    assert "fl_dep_pnp" not in skip and "waters-nhd" in next(l for l in mk.splitlines() if l.startswith("INGEST_EXTRA"))
+    assert "__main__" in (root / "pipeline" / "ingest" / "fl_dep_pnp.py").read_text()
