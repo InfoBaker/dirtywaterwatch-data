@@ -53,6 +53,15 @@ Steps (--steps, space- or comma-separated; run in this order whatever order they
              budget (a resumed run answers from the raw cache, free); the Overpass answers are cached per state query
              (data/raw/nhd-waters/osm-state/, in the saved raw caches), so the names a run did not reach are asked by
              the next dispatch. Overpass answers GitHub's runners; the cloud sessions cannot reach it.
+  names      python -m ingest.waters_from_nhd --names ../research/<st>/receiving-waters-missing.json --state <ST>
+             --budget-s S --max-requests N (from pipeline/): the receiving-water names the state's reports give (the
+             names file, its rows with their places), each built from NHD at the reports' places or given its reason;
+             the file is rewritten to what is still missing and data/waters-nhd.json gains the records (the module's
+             docstring, "Report names"). The waters step reads only data/receiving-waters-national.json, which
+             holds the outfalls' waters, not the reports': a water only reports name (Georgia's Nancy Creek and Utoy
+             Creek, 2026-11-04 final audit P1-1) needs this step. Refused when the state has no names file. With
+             waters or osm in the same dispatch the two passes and their OpenStreetMap budgets (the module's 180 s
+             here) share NET_BUDGET_MAX.
   ties       python -m ingest.outfall_waters --state <ST>: every outfall row of the state tied to its record or a
              stated reason (counts in data/build/outfall-waters-<st>.json).
 The NHD, OSM and tie steps run with OBL_WATER_DIR set to the openboatlaunch out/water folder (--obl-dir, else
@@ -81,7 +90,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-STEPS = ("extract", "obl-check", "registry", "waters", "osm", "ties")          # the run order
+STEPS = ("extract", "obl-check", "registry", "waters", "osm", "names", "ties")          # the run order
 DEFAULT_STEPS = ("waters", "ties")
 REFUSED = {
     "reaches": "build/reaches.py has no state scope (it traces the open outfalls of the live states, and the hourly "
@@ -96,6 +105,7 @@ DEFAULT_OSM_BUDGET = 1_200
 # places 120 s), a query begun inside a budget, the loading and the write come on top, and a job past the workflow's
 # 120 minutes is cancelled, so its raw caches are never saved and its pull request never opened
 NET_BUDGET_MAX = 3_600 + 180
+MODULE_OSM_BUDGET = 180      # ingest.waters_from_nhd's own --osm-budget default (the waters and names steps)
 OBL_KEY = "state/obl-water.tar.gz"
 REGIONAL_FILES = ("outfalls-ne.json", "outfalls-mid-atlantic.json")
 CSO_ZIP_URL = "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"
@@ -108,6 +118,7 @@ COUNT_LINES = {
     "waters": re.compile(r"^(state build |EPA reach index:|\d+ records -> |NOT WRITTEN|NHD pass done|unknown state code|"
                          r"targets collected|stopped)"),
     "ties": re.compile(r"^([A-Z]{2}|ALL): |^written: "),
+    "names": re.compile(r"^(report names |\d+ records -> |NOT WRITTEN|--names needs|PROBLEM )"),
     "extract": re.compile(r"^obl_waters: "),
 }
 COUNT_LINES["osm"] = re.compile(COUNT_LINES["waters"].pattern + r"|^\s+[A-Z]{2}: \d+ names")
@@ -239,6 +250,16 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
                       "(with the build's other budgets, the job would risk the workflow's 120 minutes, and a "
                       f"cancelled job saves nothing): lower one, for example budget_s {NET_BUDGET_MAX - osm} with "
                       f"osm_budget {osm}")
+    if "names" in steps and ("waters" in steps or "osm" in steps):
+        both = 2 * budget + MODULE_OSM_BUDGET + (osm if "osm" in steps else MODULE_OSM_BUDGET)
+        if both > NET_BUDGET_MAX:
+            raise Refused(f"names runs a second NHD pass: with {'osm' if 'osm' in steps else 'waters'}, budget_s "
+                          f"{budget} twice and the OpenStreetMap budgets come to {both} s, over {NET_BUDGET_MAX} s; "
+                          "lower budget_s, or dispatch names on its own")
+    names_file = f"research/{st.lower()}/receiving-waters-missing.json"
+    if "names" in steps and not (root / names_file).is_file():
+        raise Refused(f"names: {names_file} is not on file (the state's report names; scripts/ga_report_water_names.py "
+                      "and scripts/il_report_water_names.py build it from the reports)")
     py = py or pipeline_python(root)
     water, water_arg = obl_water_dir(obl_dir, root)
     outlines = {"OBL_WATER_DIR": water_arg}
@@ -279,6 +300,10 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
         elif s == "osm":
             cmds.append(Cmd(s, [py, "-m", "ingest.waters_from_nhd", "--state", st, "--budget-s", str(budget),
                                 "--max-requests", str(maxreq), "--osm-budget", str(osm)], cwd="pipeline",
+                            env=dict(outlines)))
+        elif s == "names":
+            cmds.append(Cmd(s, [py, "-m", "ingest.waters_from_nhd", "--names", f"../{names_file}", "--state", st,
+                                "--budget-s", str(budget), "--max-requests", str(maxreq)], cwd="pipeline",
                             env=dict(outlines)))
         elif s == "ties":
             cmds.append(Cmd(s, [py, "-m", "ingest.outfall_waters", "--state", st], cwd="pipeline", env=dict(outlines)))
