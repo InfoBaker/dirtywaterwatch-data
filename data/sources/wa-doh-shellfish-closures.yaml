@@ -1,0 +1,21 @@
+id: "wa-doh-shellfish-closures"
+name: "Washington DOH Shellfish Safety Map and commercial growing area closures (incl. sewage-spill emergency closures)"
+url: "https://fortress.wa.gov/doh/biotoxin/biotoxin.html"
+homepage: "https://fortress.wa.gov/doh/biotoxin/biotoxin.html"
+kind: "phone"
+level: "state"
+# Notes (research/wa, status candidate, verified search_only, checked 2026-11-03): DOH closes
+#   shellfish beaches after sewage spills (Ecology's page points here); health line 800-525-0127.
+#   Service not examined.
+cadence: null
+license: "none stated"
+attribution: "Washington State Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["shellfish_closure", "sso"]
+states: ["WA"]
+access: ["map_only", "phone"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"

@@ -170,6 +170,7 @@ def test_kc_cso_status_opens_and_closes_an_overflow_at_the_polls_on_the_permits_
     assert r["discharger_id"] == "wa-king-county-west-point" and r["npdes_permit"] == "WA0029181"
     assert r["outfall_id"] == "003" and r["outfall_name"] == "Ballard"
     assert r["lat"] == 47.663916 and "48 hours" in r["advice_text"]
+    assert r["advice_window_hours"] == 48 and "status map" in r["advice_window_basis"]
 
 
 def test_kc_cso_status_first_seen_recent_has_no_start_and_a_placeholder_point_is_not_used():
@@ -266,3 +267,15 @@ def test_every_washington_operator_has_its_permit_duty_row_and_every_cso_operato
     assert rows["wa-spokane-cso-public-notification"]["barrier"] == "bot_wall"
     assert rows["wa-ecology-spill-email-alerts"]["barrier"] == "no_web_page"
     assert not any("@ecy.wa.gov" in json.dumps(r).lower() for r in rows.values())
+
+
+def test_washington_rules_row_cites_the_law_and_is_not_live():
+    from build import status
+    root = Path(__file__).resolve().parents[2]
+    rules = json.loads((root / "data" / "rules.json").read_text())
+    wa = rules["red"]["by_state"]["WA"]
+    assert wa["hours"] is None and "RCW 90.48.636" in wa["basis"] and "WA" not in rules["live_states"]
+    # an Ecology report follows the state row; a status-map overflow carries the operators' own 48 hours
+    assert status.red_rule_for({"discharger_id": "wa-seattle-spu"}, "WA", rules)["rule"] == "red.by_state.WA"
+    recs, _, _ = kc_run()
+    assert status.red_rule_for(recs["ball-20261104T0230"], "WA", rules)["hours"] == 48
