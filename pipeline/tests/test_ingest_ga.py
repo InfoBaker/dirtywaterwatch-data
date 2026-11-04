@@ -281,3 +281,12 @@ def test_beach_advisories_open_continue_and_lift_on_the_map_legend():
     assert t["status"] == "advisory_lifted" and t["ended_at"] == "2026-11-06T10:00:00Z"
     assert t["raw"]["lift_observed_between"] == ["2026-11-05T10:00:00Z", "2026-11-06T10:00:00Z"]
     assert n["lifted"] == 1 and n["opened"] == 0
+
+
+def test_the_state_law_sentence_keeps_the_georgia_citation_whole():
+    from export import coverage as C
+    rules = json.loads((common.DATA_DIR / "rules.json").read_text())
+    assert rules["red"]["by_state"]["GA"]["hours"] is None
+    assert "GA" not in rules["live_states"]
+    s = C.duty_sentence(rules, "GA")
+    assert s.endswith("(Ga. Comp. R. & Regs. 391-3-6-.05(3)).") and "safe" not in s.lower()
