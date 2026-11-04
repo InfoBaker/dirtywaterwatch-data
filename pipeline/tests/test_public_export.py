@@ -203,3 +203,24 @@ def test_reach_waters_inverts_the_per_water_reach_list_with_the_own_water_first(
                      "farmington-river-ct": {"reaches": []}}}
     assert X.reach_waters(st) == {"MA1-008": ["connecticut-river-ma", "connecticut-river-ct"], "CT2-001": ["connecticut-river-ct"]}
     assert X.reach_waters({}) == {}
+
+
+def test_export_keeps_to_the_live_states():
+    """Nothing outside live_states reaches out/ (docs/national-approach.md §8 item 3): registry rows, feeds, operator
+    rows and per-state windows of a state built but not yet live stay home; national rows and feeds stay."""
+    live = {"MA", "MD"}
+    rows = [{"id": "md-x", "states": ["MD"]}, {"id": "ga-x", "states": ["GA"]}, {"id": "fed-echo", "states": []},
+            {"id": "mix", "states": ["ga", "ma"]}]
+    kept = X.live_registry_rows(rows, live)
+    assert [r["id"] for r in kept] == ["md-x", "fed-echo", "mix"]
+    feeds = [{"source_id": "md-f", "registry_ids": ["md-x"]}, {"source_id": "ga-f", "registry_ids": ["ga-x"]},
+             {"source_id": "orphan", "registry_ids": []}]
+    assert [f["source_id"] for f in X.live_feeds(feeds, {r["id"] for r in kept})] == ["md-f", "orphan"]
+    dis = [{"id": "md-a", "state": "MD"}, {"id": "ga-a", "state": "GA"}, {"id": "n", "state": None}]
+    assert [d["id"] for d in X.live_dischargers(dis, live)] == ["md-a", "n"]
+    rules = {"version": "x", "red": {"by_state": {"MD": {"hours": 1}, "GA": {"hours": None}},
+                                     "by_discharger": {"pa-alcosan": {"hours": 48}, "md-x": {"hours": 2}}, "none": 1},
+             "unresolved": {"day_start_caution": {"sources": ["ga-epd-spills"]}}}
+    out = X.live_rules(rules, live)
+    assert set(out["red"]["by_state"]) == {"MD"} and set(out["red"]["by_discharger"]) == {"md-x"}
+    assert out["red"]["none"] == 1 and out["unresolved"] == rules["unresolved"] and "GA" in rules["red"]["by_state"]
