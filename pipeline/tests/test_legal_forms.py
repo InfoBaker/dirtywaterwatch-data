@@ -64,7 +64,7 @@ def test_the_existing_file_never_fails_the_check():
 
 
 def test_a_public_body_filed_as_private_warns():
-    """The North Carolina review's P2-1: a public district filed as a privately owned facility."""
+    """A public district once filed as a privately owned facility."""
     rows = [{"id": "zz-district", "name": "Example County Water & Sewer District I",
              "legal_form": "facility (permittee not named)"},
             {"id": "zz-co", "name": "Example Utilities Inc", "legal_form": "city"},

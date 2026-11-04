@@ -32,6 +32,63 @@ def test_a_persons_name_never_survives(name):
     assert PU.public_name(name) == NAME_REMOVED
 
 
+@pytest.mark.parametrize("name", [
+    # a family's or a person's own company or trust
+    "QUILL FAMILY TRUST", "Quill Family Company, L.P.", "QUILL FAMILY LTD PARTNERSHIP", "QUILL FAMILY HOUSTON LLC",
+    "Quill Trust", "Quillanthony Trust",
+    # a person's name leading the name, however long what follows it
+    "BILL QUILL INC, WILD BILLS NUMBER 4", "CARL QUILL FARMS LIME STABILIZATION SITE", "Mavis Quill MHP",
+    # initials and a surname, in either order
+    "J QUILL MHP", "QUILL J T MHP", "C W QUILL & SONS DUCK FARM", "H QUILL, LLC", "W.Y. QUILL, LLC",
+])
+def test_a_family_a_trust_and_initials_with_a_surname_are_a_persons_name(name):
+    assert PU.public_name(name) == NAME_REMOVED
+
+
+@pytest.mark.parametrize("name", [
+    "EXAMPLE FAMILY CAMPING LLC", "EXAMPLE LAKE FAMILY CAMPGROUND LLC", "FATIMA FAMILY VILLAGE INC.",
+    "RACER TRUST-EXAMPLE ROAD FACILITY", "Big Example Trustee LLC", "U.S. Steel Corporation", "AQUA PA WASTEWATER INC",
+    "NB Example LLC", "MT PLEASANT MHP LLC", "SAN JO UTILITIES INC", "LA SARA WWTP", "ST FRANCIS UNIVERSITY STP",
+    "LAKE ANDREW WWTP", "EXAMPLE SUBDIVISION & EXAMPLE P", "HUTTERVILLE H.B., INC.", "T A Operating LLC",
+    "PITTSBURG N SIDE MHP", "K C UTILITIES INC", "WADE HAMPTON GOLF CLUB WWTP",
+])
+def test_a_bodys_name_with_initials_a_family_or_a_trust_word_is_kept(name):
+    assert PU.public_name(name) == name
+
+
+@pytest.mark.parametrize("facility, permittee, reading", [
+    ("NEWBURY EXAMPLE WWTP", "Example Co Comm Dept of Water Resources", "public"),     # "Co" is County here
+    ("EXAMPLE COUNTY - EXAMPLE CREEK WPCP", "EXAMPLE CO-EXAMPLE CRK", "public"),
+    ("EXAMPLE SCHOOL", "EXAMPLE CO BOE EXAMPLE HGTS SC", "public"),
+    ("EXAMPLE SCHOOL CORP", "EXAMPLE SCHOOL WWTP", "public"),                         # Indiana's public schools
+    ("X", "EXAMPLE COMMUNITY SCHOOL CORPORATION", "public"),
+    ("X", "Example R-IV School", "public"),                                           # Missouri's districts
+    ("X", "UNIFIED GOVT EXAMPLE CO/KCK", "public"),
+    ("X", "EXAMPLE LIGHT & WATER DEPT, NORTH PLANT", "public"),
+    ("EXAMPLE CITY OF", "EXAMPLE WATER & SEWER UTILITY", "public"),
+    ("X", "Example County Sanitary District, Inc. - Dept. of Public Utilities", "mixed"),
+    ("X", "EXAMPLE HOLDINGS, L.P. AND CITY OF", "mixed"),
+    ("X", "Example Banking Co.", "private"),
+    ("X", "Example Co. LTC, LLC", "private"),
+    ("EXAMPLE SEWER CO-SUNRISE", "Example Sewer Company", "private"),
+    ("CITY OF EXAMPLE FALLS STP", "AQUA PA WASTEWATER INC", "private"),            # a plant a company bought
+])
+def test_a_public_bodys_own_words_read_public_before_a_corporate_form(facility, permittee, reading):
+    assert PU.owner_reading(facility, permittee) == reading
+
+
+def _rec(type_code, permittee, facility="EXAMPLE WWTP"):
+    return {"permit": "ZZ0000099", "facility": facility, "permit_name": permittee, "state": "ZZ", "type_code": type_code,
+            "type": "", "permit_type": "NPD", "status": "EFF", "sic": ["4952"], "naics": [], "components": []}
+
+
+def test_a_name_that_reads_public_and_a_company_is_listed_for_a_check_never_filed_private():
+    assert PU.classify(_rec("MXO", "EXAMPLE HOLDINGS LP AND CITY OF"))[0] == "public_by_name"
+    assert PU.classify(_rec("POF", "Example Sanitary District, Inc. - Dept. of Public Utilities"))[0] == "public_by_name"
+    assert PU.classify(_rec("MXO", "Example Co Comm Dept of Water Resources"))[0] is None       # public: not listed
+    assert PU.classify(_rec("POF", "Example R-1 School"))[0] == "public_by_name"
+
+
 @pytest.mark.parametrize("name, kept", [
     ("Example Utility Company LLC", "Example Utility Company LLC"),
     ("SUNNY ACRES MHP", "SUNNY ACRES MHP"),
@@ -114,6 +171,8 @@ def test_a_single_residence_has_both_names_removed(run):
     assert r["facility"] == NAME_REMOVED and r["permittee_as_recorded"] == NAME_REMOVED
     assert r["legal_form_proposed"] == "facility (permittee not named)"
     assert r["receiving_waters_echo"] == []                            # a person's name in the water field is dropped
+    assert r["city"] is None and r["county"] is None                   # a home: the permit and the state only
+    assert r["npdes_permit"] == "ZZ0000008" and r["state"] == "ZZ"
 
 
 def test_no_individual_address_zip_or_point_reaches_the_public_file(run):
@@ -167,3 +226,16 @@ def test_the_committed_files_carry_only_names_that_read_as_a_body():
                 assert v in (None, NAME_REMOVED) or PU.public_name(v) == v, (f.name, r["npdes_permit"], k)
             if r["system_kind"] == "single residence":
                 assert r["facility"] == r["permittee_as_recorded"] == NAME_REMOVED
+                assert r["city"] is None and r["county"] is None and r["receiving_waters_echo"] == []
+
+
+def test_the_fetch_time_is_read_from_the_stamp_beside_the_download(tmp_path):
+    d = tmp_path / "icis" / "2026-11-01"
+    d.mkdir(parents=True)
+    (d / "npdes_outfalls_layer.csv").write_text((FIX / "icis-discharge-points.csv").read_text())
+    (d / "fetched_at.txt").write_text("2026-11-04T05:35:49Z\n")
+    out = tmp_path / "research"
+    assert PU.main(["--icis", str(d / "npdes_outfalls_layer.csv"), "--plants", str(FIX / "plants.json"),
+                    "--registry", str(FIX / "dischargers.json"), "--out", str(out)]) == 0
+    doc = json.loads((out / "zz" / "private-utilities-candidates.json").read_text())
+    assert doc["sources"][0]["fetched_at"] == "2026-11-04T05:35:49Z"

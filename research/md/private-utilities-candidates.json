@@ -6,7 +6,7 @@
    "source": "fed-echo-npdes-discharge-points",
    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
    "file_date": "2026-11-01",
-   "fetched_at": "2026-11-04T05:35:00Z"
+   "fetched_at": "2026-11-04T05:35:49Z"
   },
   {
    "source": "fed-echo-npdes-discharge-points",
@@ -16,10 +16,10 @@
   }
  ],
  "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
- "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
  "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
  "counts": {
-  "candidates": 11,
+  "candidates": 10,
   "already_in_registry": 4,
   "in_research": 0,
   "in_plant_outfall_registry": 4,
@@ -29,11 +29,11 @@
   "by_legal_form_proposed": {
    "business or industrial": 4,
    "campground or resort": 1,
-   "investor-owned utility": 2,
+   "investor-owned utility": 1,
    "mobile-home park": 1,
    "not stated by the names": 3
   },
-  "public_by_name": 4
+  "public_by_name": 5
  },
  "candidates": [
   {
@@ -55,7 +55,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -98,7 +98,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -141,7 +141,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -182,7 +182,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -225,7 +225,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -267,7 +267,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -291,47 +291,6 @@
    "echo_url": "https://echo.epa.gov/effluent-charts#MD0058611"
   },
   {
-   "npdes_permit": "MD0060950",
-   "state": "MD",
-   "facility": "GORMAN WWTP",
-   "permittee_as_recorded": "Garret County Sanitary District, Inc. - Dept. of Public Utilities",
-   "county": "GARRETT",
-   "city": "GORMAN",
-   "system_kind": null,
-   "sewage_basis": [
-    "SIC 4952 (sewerage systems)"
-   ],
-   "legal_form_proposed": "investor-owned utility",
-   "ownership": {
-    "basis": "EPA facility type Privately Owned Facility",
-    "facility_type": "Privately Owned Facility",
-    "facility_type_code": "POF",
-    "source": "fed-echo-npdes-discharge-points",
-    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
-    "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
-   },
-   "permit_type": "NPD",
-   "permit_status": "EFF",
-   "permit_components": [],
-   "sic_codes": [
-    "4952"
-   ],
-   "naics_codes": [],
-   "design_flow_mgd": null,
-   "major_minor": "Minor",
-   "permit_effective": "2025-10-01",
-   "permit_expiration": "2030-09-30",
-   "receiving_waters_echo": [
-    "POTOMAC RIVER"
-   ],
-   "external_outfalls": 1,
-   "in_plant_registry": false,
-   "registry_row": null,
-   "research_row": null,
-   "echo_url": "https://echo.epa.gov/effluent-charts#MD0060950"
-  },
-  {
    "npdes_permit": "MD0062375",
    "state": "MD",
    "facility": "LITTLE ORLEANS CAMPGROUND WWTP",
@@ -350,7 +309,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -391,7 +350,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -432,7 +391,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -474,7 +433,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "SIN",
    "permit_status": "EFF",
@@ -517,7 +476,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -559,7 +518,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -601,7 +560,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -624,6 +583,47 @@
    "echo_url": "https://echo.epa.gov/effluent-charts#MD0054950"
   },
   {
+   "npdes_permit": "MD0060950",
+   "state": "MD",
+   "facility": "GORMAN WWTP",
+   "permittee_as_recorded": "Garret County Sanitary District, Inc. - Dept. of Public Utilities",
+   "county": "GARRETT",
+   "city": "GORMAN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body and a company",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "POTOMAC RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#MD0060950"
+  },
+  {
    "npdes_permit": "MD3155X06",
    "state": "MD",
    "facility": "LIGHTHOUSE SOUND DEVELOPMENT",
@@ -642,7 +642,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "SIN",
    "permit_status": "EFF",

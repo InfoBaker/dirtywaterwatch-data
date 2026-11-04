@@ -6,7 +6,7 @@
    "source": "fed-echo-npdes-discharge-points",
    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
    "file_date": "2026-11-01",
-   "fetched_at": "2026-11-04T05:35:00Z"
+   "fetched_at": "2026-11-04T05:35:49Z"
   },
   {
    "source": "fed-echo-npdes-discharge-points",
@@ -16,18 +16,18 @@
   }
  ],
  "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
- "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
  "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
  "counts": {
-  "candidates": 38,
+  "candidates": 36,
   "already_in_registry": 0,
   "in_research": 0,
   "in_plant_outfall_registry": 5,
   "single_residence": 0,
   "industrial_with_sewage_code": 0,
-  "permittee_name_removed": 4,
+  "permittee_name_removed": 5,
   "by_legal_form_proposed": {
-   "business or industrial": 13,
+   "business or industrial": 11,
    "campground or resort": 1,
    "homeowners' association": 1,
    "institution": 2,
@@ -36,7 +36,7 @@
    "not stated by the names": 8,
    "private club": 1
   },
-  "public_by_name": 10
+  "public_by_name": 12
  },
  "candidates": [
   {
@@ -58,7 +58,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -103,7 +103,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -150,7 +150,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -194,7 +194,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -238,7 +238,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -282,7 +282,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -327,7 +327,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -370,7 +370,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -414,7 +414,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -460,7 +460,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -503,7 +503,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -546,7 +546,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -589,7 +589,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -632,7 +632,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -677,7 +677,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -723,7 +723,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -766,7 +766,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -810,7 +810,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -835,50 +835,6 @@
    "echo_url": "https://echo.epa.gov/effluent-charts#MS0044792"
   },
   {
-   "npdes_permit": "MS0044954",
-   "state": "MS",
-   "facility": "[name removed]",
-   "permittee_as_recorded": "TISHOMINGO CO BOARD OF SUPERVISORS, TRI STATE COMMERCE PARK",
-   "county": "TISHOMINGO",
-   "city": "IUKA",
-   "system_kind": null,
-   "sewage_basis": [
-    "SIC 4952 (sewerage systems)",
-    "NAICS 221320 (sewage treatment facilities)"
-   ],
-   "legal_form_proposed": "business or industrial",
-   "ownership": {
-    "basis": "EPA facility type Privately Owned Facility",
-    "facility_type": "Privately Owned Facility",
-    "facility_type_code": "POF",
-    "source": "fed-echo-npdes-discharge-points",
-    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
-    "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
-   },
-   "permit_type": "NPD",
-   "permit_status": "EXP",
-   "permit_components": [],
-   "sic_codes": [
-    "4952"
-   ],
-   "naics_codes": [
-    "221320"
-   ],
-   "design_flow_mgd": 0.03,
-   "major_minor": "Minor",
-   "permit_effective": "2021-07-01",
-   "permit_expiration": "2026-05-31",
-   "receiving_waters_echo": [
-    "YELLOW CREEK"
-   ],
-   "external_outfalls": 1,
-   "in_plant_registry": false,
-   "registry_row": null,
-   "research_row": null,
-   "echo_url": "https://echo.epa.gov/effluent-charts#MS0044954"
-  },
-  {
    "npdes_permit": "MS0045969",
    "state": "MS",
    "facility": "KATSIB PROPERTIES LLC, SMITH MOBILE HOME PARK",
@@ -897,7 +853,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -942,7 +898,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -985,7 +941,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -1028,7 +984,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1072,7 +1028,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1097,49 +1053,6 @@
    "echo_url": "https://echo.epa.gov/effluent-charts#MS0050695"
   },
   {
-   "npdes_permit": "MS0053589",
-   "state": "MS",
-   "facility": "COLUMBUS LIGHT & WATER DEPT, NORTH WATER TREATMENT PLANT",
-   "permittee_as_recorded": "COLUMBUS LIGHT & WATER DEPT, NORTH WATER TREATMENT PLANT",
-   "county": "LOWNDES",
-   "city": "COLUMBUS",
-   "system_kind": null,
-   "sewage_basis": [
-    "NAICS 221320 (sewage treatment facilities)"
-   ],
-   "legal_form_proposed": "business or industrial",
-   "ownership": {
-    "basis": "EPA facility type Privately Owned Facility",
-    "facility_type": "Privately Owned Facility",
-    "facility_type_code": "POF",
-    "source": "fed-echo-npdes-discharge-points",
-    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
-    "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
-   },
-   "permit_type": "NPD",
-   "permit_status": "EFF",
-   "permit_components": [],
-   "sic_codes": [
-    "4941"
-   ],
-   "naics_codes": [
-    "221320"
-   ],
-   "design_flow_mgd": 0.0546,
-   "major_minor": "Minor",
-   "permit_effective": "2022-07-13",
-   "permit_expiration": "2027-06-30",
-   "receiving_waters_echo": [
-    "LUXAPALLILA CREEK"
-   ],
-   "external_outfalls": 1,
-   "in_plant_registry": false,
-   "registry_row": null,
-   "research_row": null,
-   "echo_url": "https://echo.epa.gov/effluent-charts#MS0053589"
-  },
-  {
    "npdes_permit": "MS0054291",
    "state": "MS",
    "facility": "GREAT RIVER UTILITY OPERATING CO LLC, HILLCREST SUBDIVISION",
@@ -1158,7 +1071,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1201,7 +1114,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1247,7 +1160,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1294,7 +1207,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1338,7 +1251,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -1381,7 +1294,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1427,7 +1340,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -1471,7 +1384,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -1515,7 +1428,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1557,7 +1470,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1585,8 +1498,8 @@
   {
    "npdes_permit": "MS0062588",
    "state": "MS",
-   "facility": "BILL GRAY INC, WILD BILLS NUMBER 4",
-   "permittee_as_recorded": "BILL GRAY INC, WILD BILLS NUMBER 4",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
    "county": "LOWNDES",
    "city": "COLUMBUS",
    "system_kind": null,
@@ -1602,7 +1515,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -1646,7 +1559,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "SIN",
    "permit_status": "ADC",
@@ -1690,7 +1603,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "SIN",
    "permit_status": "EFF",
@@ -1736,7 +1649,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1783,7 +1696,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1830,7 +1743,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1857,8 +1770,8 @@
   {
    "npdes_permit": "MS0042099",
    "state": "MS",
-   "facility": "[name removed]",
-   "permittee_as_recorded": "[name removed]",
+   "facility": "GARY ROAD ELEMENTARY",
+   "permittee_as_recorded": "HINDS COUNTY SCHOOL DISTRICT, GARY ROAD ELEMENTARY",
    "county": "HINDS",
    "city": "BYRAM",
    "system_kind": null,
@@ -1873,7 +1786,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1918,7 +1831,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1963,7 +1876,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1989,6 +1902,50 @@
    "echo_url": "https://echo.epa.gov/effluent-charts#MS0044881"
   },
   {
+   "npdes_permit": "MS0044954",
+   "state": "MS",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "TISHOMINGO CO BOARD OF SUPERVISORS, TRI STATE COMMERCE PARK",
+   "county": "TISHOMINGO",
+   "city": "IUKA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2021-07-01",
+   "permit_expiration": "2026-05-31",
+   "receiving_waters_echo": [
+    "YELLOW CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#MS0044954"
+  },
+  {
    "npdes_permit": "MS0046612",
    "state": "MS",
    "facility": "TISHOMINGO COUNTY SEWER DISTRICT",
@@ -2008,7 +1965,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2053,7 +2010,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2080,6 +2037,49 @@
    "echo_url": "https://echo.epa.gov/effluent-charts#MS0047635"
   },
   {
+   "npdes_permit": "MS0053589",
+   "state": "MS",
+   "facility": "COLUMBUS LIGHT & WATER DEPT, NORTH WATER TREATMENT PLANT",
+   "permittee_as_recorded": "COLUMBUS LIGHT & WATER DEPT, NORTH WATER TREATMENT PLANT",
+   "county": "LOWNDES",
+   "city": "COLUMBUS",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4941"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0546,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-13",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "LUXAPALLILA CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#MS0053589"
+  },
+  {
    "npdes_permit": "MS0055964",
    "state": "MS",
    "facility": "GLENDALE UTILITY DISTRICT",
@@ -2098,7 +2098,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2146,7 +2146,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",

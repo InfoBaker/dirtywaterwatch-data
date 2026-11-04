@@ -15,7 +15,7 @@ python -m ingest.dischargers_schema --strict   # exit 1 when a value is neither 
 ```
 
 It warns (never fails) on a value that is neither on the list nor mapped, on a private form whose row name reads as a
-public body (the North Carolina review's P2-1: a public water and sewer district filed as a privately owned facility),
+public body (a public water and sewer district once filed as a privately owned facility),
 and on a public form whose row name reads as a company or association. On today's file it gives no warning.
 
 ## The list
