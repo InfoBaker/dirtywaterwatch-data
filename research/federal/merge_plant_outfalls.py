@@ -8,25 +8,28 @@ once the tie fields (and fetched_at, the time the source copy was fetched) are s
 
   - every committed row unchanged, byte for byte;
   - every rebuilt row the committed file lacks, as the rebuild wrote it (with its own fetched_at);
-  - the header keys source, rule and fetched_at from the committed file, count and counts and
-    cso_features_not_in_inventory from the rebuild, and a `rebuilds` entry saying when, from which fetch, why and how
-    many rows were added.
+  - the header keys source and fetched_at from the committed file (they describe the copy the committed rows came
+    from), rule, count, counts, excluded_not_sewage and cso_features_not_in_inventory from the rebuild, and a
+    `rebuilds` entry saying when, from which fetch, why and how many rows were added (and dropped).
 
 It refuses (exit 1, nothing written) when a committed row differs from its rebuilt row in any other field, or is
 missing from the rebuild: a rebuild that changes existing rows is a different change and needs its own review. A
 field named with --accept may change (the committed row keeps its other fields and its key order, and takes the
 rebuilt value): the fix that brought the rebuild may move a permit to another plant_basis, and says so in the
-`rebuilds` entry (rows_changed).
+`rebuilds` entry (rows_changed). With --drop-excluded, a committed row whose permit the rebuild lists in
+excluded_not_sewage (build_plant_outfalls.not_sewage: no sewage plant) is dropped instead of refused, and listed in the
+`rebuilds` entry (rows_dropped, with the reason); any other missing row still refuses.
 
 Usage: python -I merge_plant_outfalls.py <committed.json> <rebuilt.json> <out.json> --date YYYY-MM-DD
            --fetched-at <ISO time of the source copy the rebuild read> --why "<one sentence>" [--accept FIELD ...]
+           [--drop-excluded]
 """
 import argparse, json, sys
 
 TIE_FIELDS = ('water_slug', 'water_name', 'water_kind', 'distance_m', 'match', 'water_match', 'water_matched_by',
               'no_water_reason', 'replaced_match')
 IGNORED = set(TIE_FIELDS) | {'fetched_at'}
-HEADER_FROM_COMMITTED = ('source', 'rule', 'fetched_at')
+HEADER_FROM_COMMITTED = ('source', 'fetched_at')
 
 
 def key(r):
@@ -37,10 +40,12 @@ def bare(r):
     return {k: v for k, v in r.items() if k not in IGNORED}
 
 
-def merge(committed, rebuilt, date, fetched_at, why, accept=()):
+def merge(committed, rebuilt, date, fetched_at, why, accept=(), drop_excluded=False):
     """(merged doc, problems, added rows). problems lists the committed rows the rebuild does not reproduce (fields
-    in accept may change)."""
+    in accept may change; with drop_excluded a row of a permit the rebuild lists in excluded_not_sewage is dropped)."""
     old = {key(r): r for r in committed['outfalls']}
+    not_sewage = {x['npdes_permit']: x['reason'] for x in rebuilt.get('excluded_not_sewage') or []}
+    dropped = {}
     new_keys = {key(r) for r in rebuilt['outfalls']}
     problems, rows, added = [], [], []
     changed = {}
@@ -62,7 +67,10 @@ def merge(committed, rebuilt, date, fetched_at, why, accept=()):
         rows.append(o)
     for k, o in old.items():
         if k not in new_keys:
-            problems.append({'npdes_permit': k[0], 'outfall': k[1], 'fields': ['missing from the rebuild']})
+            if drop_excluded and k[0] in not_sewage:
+                dropped.setdefault(not_sewage[k[0]], []).append(f'{k[0]} {k[1]}')
+            else:
+                problems.append({'npdes_permit': k[0], 'outfall': k[1], 'fields': ['missing from the rebuild']})
     doc = {}
     for k in committed:
         if k in ('outfalls', 'cso_features_not_in_inventory'):
@@ -70,6 +78,8 @@ def merge(committed, rebuilt, date, fetched_at, why, accept=()):
         doc[k] = committed[k] if k in HEADER_FROM_COMMITTED or k == 'rebuilds' else rebuilt.get(k, committed[k])
     doc['count'] = len(rows)
     doc['counts'] = rebuilt['counts']
+    doc['excluded_not_sewage'] = list(rebuilt.get('excluded_not_sewage') or [])
+    doc['rebuilds'] = doc.pop('rebuilds', None)
     by_state = {}
     for r in added:
         by_state[r['state']] = by_state.get(r['state'], 0) + 1
@@ -77,6 +87,7 @@ def merge(committed, rebuilt, date, fetched_at, why, accept=()):
         'date': date, 'source_fetched_at': fetched_at, 'why': why, 'rows_added': len(added),
         'permits_added': len({r['npdes_permit'] for r in added}), 'rows_added_by_state': dict(sorted(by_state.items())),
         'rows_changed': {k: v for k, v in sorted(changed.items())},
+        'rows_dropped': {k: v for k, v in sorted(dropped.items())},
         'rows_unchanged': len(rows) - len(added) - len({x for v in changed.values() for x in v})}]
     doc['cso_features_not_in_inventory'] = rebuilt['cso_features_not_in_inventory']
     doc['outfalls'] = rows
@@ -107,9 +118,11 @@ def main(argv=None):
     ap.add_argument('--why', required=True)
     ap.add_argument('--accept', action='append', default=[], metavar='FIELD',
                     help='a row field the rebuild may change on a committed row (repeatable)')
+    ap.add_argument('--drop-excluded', action='store_true',
+                    help="drop a committed row whose permit the rebuild lists in excluded_not_sewage")
     a = ap.parse_args(argv)
     doc, problems, added = merge(json.load(open(a.committed)), json.load(open(a.rebuilt)), a.date, a.fetched_at, a.why,
-                                 a.accept)
+                                 a.accept, a.drop_excluded)
     if problems:
         print(f'{len(problems)} committed rows are not reproduced by the rebuild; nothing written', file=sys.stderr)
         for p in problems[:20]:

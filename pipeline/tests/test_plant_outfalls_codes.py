@@ -150,3 +150,130 @@ def test_merge_accepts_only_the_named_field_on_a_committed_row(merge_mod):
     rebuilt["outfalls"][0]["lat"] = 41.0                                   # another field still refuses
     _, problems, _ = merge_mod.merge(committed, rebuilt, "2026-11-04", "t", "why", accept=["plant_basis"])
     assert problems[0]["fields"] == ["lat", "plant_basis"]
+
+
+# ---------------------------------------------------------------- not every sewerage-code permit is a sewage plant
+# (docs/reviews/2026-11-04-plant-outfalls-codes-review.md in the site repository): SIC 4952 among several codes also
+# marks drinking-water plants (filter backwash), construction projects and sites with no sewage outfall
+
+def _universe(build, kinds=None):
+    with open(FIX / "npdes_outfalls_layer_sample.csv", newline="") as fh:
+        perm, _ = build.group_permits(csv.DictReader(fh))
+    kinds = kinds or {}
+    out = {}
+    for p, e in perm.items():
+        b = build.basis(p, e, {})
+        if b:
+            out[p] = (b, build.not_sewage(p, e, b, kinds.get(p)))
+    return perm, out
+
+
+def test_a_water_plant_or_a_construction_project_with_the_sewerage_code_is_no_sewage_plant(build):
+    _, u = _universe(build, {"PA9900008": {"disinfection"}})
+    assert u["PA9900008"] == ("sewerage_code_public_owner", "water_treatment_plant")   # a water plant chlorinates too
+    assert u["PA9900011"][1] == "water_treatment_plant"                                  # 4952 alone, a water plant's name
+    assert u["PA9900009"][1] == "construction_project"                                   # "Sanitary Sewer Project"
+    # limits that show sewage keep the permit whatever its name ("... WTP" can be a wastewater plant; a project office)
+    _, u = _universe(build, {"PA9900008": {"fecal"}, "PA9900011": {"bod", "disinfection"}, "PA9900009": {"fecal"}})
+    assert u["PA9900008"][1] is None and u["PA9900011"][1] is None and u["PA9900009"][1] is None
+    assert build.WATER_PLANT_NAME.search("Example WWTP") is None
+    assert build.WATER_PLANT_NAME.search("Example Wastewater Treatment Plant") is None
+
+
+def test_a_multi_code_permit_needs_a_sewage_name_or_sewage_limits(build):
+    _, u = _universe(build)
+    assert u["PA9900001"][1] is None                  # "... WWTP": the name shows sewage
+    assert u["PA9900003"][1] is None                  # "... STP" with the water supply code
+    assert u["PA9900007"][1] is None                  # the sewerage code alone: no evidence needed
+    assert u["PA9900010"][1] == "no_sewage_evidence"  # a park, no limits on file
+    for kinds, held in (({"fecal"}, False), ({"bod", "disinfection"}, False), ({"ammonia", "disinfection"}, False),
+                        ({"tkn", "disinfection"}, False), ({"bod", "tkn"}, True), ({"disinfection"}, True), (set(), True)):
+        _, u = _universe(build, {"PA9900010": kinds})
+        assert (u["PA9900010"][1] == "no_sewage_evidence") is held, kinds
+
+
+def test_a_potw_or_tracked_permit_is_never_held_back(build):
+    perm, _ = _universe(build)
+    e = perm["PA9900008"]
+    assert build.not_sewage("PA9900008", e, "potw_component", set()) is None
+    assert build.not_sewage("PA9900008", e, "tracked_operator", set()) is None
+    # a domestic-sewage general permit (NC's single-family and small systems) is a sewage discharge whatever its codes
+    school = dict(r=dict(e["r"], FACILITY_NAME="Example Alternate School", SIC_CODES="8211", NAICS_CODES="221320"))
+    assert build.not_sewage("NCG559999", school, "sewerage_code_public_owner", set()) is None
+    assert build.not_sewage("NC0099999", school, "sewerage_code_public_owner", set()) == "no_sewage_evidence"
+
+
+def test_limit_kinds_come_from_the_limits_pass_and_an_older_limits_file_is_refused(build):
+    lp = load("plant_outfalls_limits_pass")
+    assert lp.sewage_kinds("Coliform, fecal general") == ["fecal"]
+    assert lp.sewage_kinds("E. coli") == ["fecal"]
+    assert lp.sewage_kinds("Enterococci") == ["fecal"]
+    assert lp.sewage_kinds("BOD, 5-day, 20 deg. C") == ["bod"]
+    assert lp.sewage_kinds("BOD, carbonaceous [5 day, 20 C]") == ["bod"]
+    assert lp.sewage_kinds("Nitrogen, ammonia total [as N]") == ["ammonia"]
+    assert lp.sewage_kinds("Nitrogen, Kjeldahl, total [as N]") == ["tkn"]
+    assert lp.sewage_kinds("Chlorine, total residual") == ["disinfection"]
+    assert lp.sewage_kinds("Ultraviolet light intensity") == ["disinfection"]
+    for water_plant in ("Aluminum, total [as Al]", "Iron, total [as Fe]", "Oxygen demand, chem. [high level] (COD)",
+                        "Solids, total suspended", "pH"):
+        assert lp.sewage_kinds(water_plant) == []
+    kinds = build.permit_limit_kinds({"PA1|1": {"sewage": ["bod"]}, "PA1|2": {"sewage": ["disinfection"]},
+                                      "PA2|1": {"sewage": []}})
+    assert kinds["PA1"] == {"bod", "disinfection"} and build.sewage_limits(kinds["PA1"])
+    assert not build.sewage_limits(kinds["PA2"])
+    with pytest.raises(SystemExit):
+        build.permit_limit_kinds({"PA1|1": {"names": [], "types": ["EXO"]}})
+
+
+def _docs_with_exclusion():
+    committed, rebuilt = _docs()
+    rebuilt["rule"] = "R2"
+    del rebuilt["outfalls"][1]                         # PA0000002: now held back as no sewage plant
+    rebuilt["excluded_not_sewage"] = [{"npdes_permit": "PA0000002", "state": "PA", "reason": "water_treatment_plant"}]
+    return committed, rebuilt
+
+
+def test_merge_drops_a_committed_row_of_a_held_back_permit_only_when_told(merge_mod):
+    committed, rebuilt = _docs_with_exclusion()
+    _, problems, _ = merge_mod.merge(committed, rebuilt, "2026-11-04", "t", "why")
+    assert problems == [{"npdes_permit": "PA0000002", "outfall": None, "fields": ["missing from the rebuild"]}]
+    doc, problems, _ = merge_mod.merge(committed, rebuilt, "2026-11-04", "t", "why", drop_excluded=True)
+    assert problems == []
+    assert [r["npdes_permit"] for r in doc["outfalls"]] == ["PA0000001", "PA9900001"]
+    assert doc["outfalls"][0] == committed["outfalls"][0]
+    assert doc["excluded_not_sewage"] == rebuilt["excluded_not_sewage"] and doc["rule"] == "R2"
+    assert doc["rebuilds"][-1]["rows_dropped"] == {"water_treatment_plant": ["PA0000002 None"]}
+    # a row missing for another reason still refuses
+    del rebuilt["outfalls"][0]
+    _, problems, _ = merge_mod.merge(committed, rebuilt, "2026-11-04", "t", "why", drop_excluded=True)
+    assert problems == [{"npdes_permit": "PA0000001", "outfall": "001", "fields": ["missing from the rebuild"]}]
+
+
+def test_the_registry_never_reads_a_row_of_a_held_back_permit(tmp_path):
+    """Even when a later step writes a row back into the outfall list, the loader and the map leave it out."""
+    import common
+    from export import outfalls as export_outfalls
+    doc = {"source": "S", "excluded_not_sewage": [{"npdes_permit": "PA0217905", "reason": "water_treatment_plant"}],
+           "outfalls": [_row("PA0217905", "001"), _row("PA0000001", "001")]}
+    (tmp_path / "outfalls-plants-us.json").write_text(json.dumps(doc))
+    reg = common.load_outfall_registry(tmp_path, provisional=False)
+    assert [r["npdes_permit"] for r in reg] == ["PA0000001"]
+    rows = export_outfalls.outfall_rows(reg, {"PA"})
+    assert [r["npdes_permit"] for r in rows] == ["PA0000001"]
+
+
+def test_the_committed_registry_draws_no_water_plant_and_no_held_back_permit():
+    """data/outfalls-plants-us.json: the drinking-water plants the code split let in (filter backwash outfalls) are
+    held back with their reason, have no row, and have no operator page made for them."""
+    doc = json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())
+    held = {x["npdes_permit"]: x for x in doc.get("excluded_not_sewage") or []}
+    for p in ("PA0217905", "PA0217158", "PA0098779", "SR0026417", "PA0084638"):
+        assert held.get(p, {}).get("reason") in ("water_treatment_plant", "no_sewage_evidence"), p
+    assert held["PAC100021"]["reason"] == "construction_project"
+    assert all(x["reason"] in ("water_treatment_plant", "construction_project", "no_sewage_evidence") and x["why"]
+               for x in held.values())
+    assert not [r for r in doc["outfalls"] if r["npdes_permit"] in held]
+    dis = json.loads((ROOT / "data" / "dischargers.json").read_text())
+    for d in dis:
+        ps = d.get("npdes_permits") or [d.get("npdes_permit")]
+        assert not (d.get("source_areas") == ["federal"] and ps and all(p in held for p in ps)), d["id"]

@@ -13,6 +13,15 @@ SIC_CODES and NAICS_CODES hold several codes separated by spaces ("4952 4941"; c
 permits were missing (docs/reviews/2026-11-04-private-utilities-review.md in the site repository, "The comma fix").
 Rows built from a rebuild are merged into the committed file by merge_plant_outfalls.py, which keeps the water-record
 ties ingest.outfall_waters wrote on the rows already there.
+
+Not every permit with the sewerage code is a sewage plant: SIC 4952 among several codes also marks drinking-water
+plants (filter backwash), construction projects and sites whose outfalls carry no sewage. not_sewage() holds back a
+permit that entered by the code alone (plant_basis sewerage_code_*) and whose ICIS limits show no sewage (a
+fecal-indicator limit, or a BOD, ammonia or TKN limit with a disinfection limit; the `sewage` kinds
+plant_outfalls_limits_pass.py records) when its facility name is a construction project's, or a drinking-water plant's
+and no sewage plant's (SEWAGE_NAME), or, when the sewerage code is one of several codes, names no sewage plant. Such a
+permit has no row; it is listed with its reason in the file's `excluded_not_sewage` section, which no reader of
+`outfalls` sees (common.load_outfall_registry skips a row of one even if a later step writes it back).
 """
 import csv, json, re, struct, sys, zipfile, collections
 import numpy as np
@@ -58,6 +67,92 @@ def codes(v):
 def has_sewer_code(r):
     """SIC 4952 (sewerage systems) or NAICS 221320 (sewage treatment facilities) among the permit's codes."""
     return '4952' in codes(r['SIC_CODES']) or '221320' in codes(r['NAICS_CODES'])
+
+
+SEWER_CODES = {'4952', '221320'}
+# a sewage plant's word in a facility name ("STP", "WWTP", "Sewage", "Sanitary", PA's small flow systems "SFTF"/"SFS")
+SEWAGE_NAME = re.compile(r'\b(?:STP|WWTP|WWTF|WWT|WPCP|WPCF|WRF|WRRF|POTW|SFTF|SRSTP|SFS|SEWAGE|SEWER|SEWERAGE|'
+                         r'SANITARY|SANITATION|WASTEWATER|LAGOONS?)\b|WASTE\s*WATER', re.I)
+# a drinking-water plant ("WTP", "Water Filtration Plt", "Hulton Purification Plt"); "WASTEWATER" never matches \bWATER
+WATER_PLANT_NAME = re.compile(r'\bWTP\b|\bWATER\s+(?:TREATMENT|FILTRATION|PURIFICATION|PLA?N?T|WORKS)\b|'
+                              r'\bFILTRATION\b|\bFILTER\s+PLA?N?T\b|\bPURIFICATION\b', re.I)
+PROJECT_NAME = re.compile(r'\bPROJECT\b', re.I)
+# general permits that cover domestic sewage only (small and single-family treatment systems): never held back
+DOMESTIC_SEWAGE_GP = ('NCG55', 'VAG40', 'PAG04')
+NOT_SEWAGE = {
+    'construction_project': "the facility name is a construction project's and its ICIS limits show no sewage: the "
+                            "permit covers building the works (construction stormwater), not a discharge of sewage",
+    'water_treatment_plant': "the facility name is a drinking-water plant's (WTP, filtration, purification) and names no "
+                             "sewage plant, and its ICIS limits show no sewage: its outfalls carry filter backwash and "
+                             "treatment residuals, not sewage",
+    'no_sewage_evidence': "SIC 4952 / NAICS 221320 is one of several codes on the permit, and neither the facility name "
+                          "(a sewage plant's word) nor its ICIS limits (a fecal-indicator limit, or a BOD, ammonia or "
+                          "TKN limit with a disinfection limit) show a sewage discharge; held back pending review",
+}
+
+
+def sewage_limits(kinds):
+    """True when a permit's ICIS limit kinds (plant_outfalls_limits_pass SEWAGE_PARAMS, over all its features) show a
+    sewage discharge: a fecal-indicator limit, or an oxygen-demand or nitrogen limit together with a disinfection
+    limit (a sewage plant disinfects; a water plant's backwash carries no BOD, ammonia or TKN limit)."""
+    kinds = set(kinds or ())
+    return 'fecal' in kinds or bool(kinds & {'bod', 'ammonia', 'tkn'} and 'disinfection' in kinds)
+
+
+def not_sewage(p, e, b, kinds):
+    """The NOT_SEWAGE key that keeps a permit off the map, or None. Only a permit that entered by the sewerage code
+    alone (plant_basis sewerage_code_*) is read: a POTW component, the national dataset's POTW indicator and an operator
+    already tracked stand on their own, and so does a domestic-sewage general permit (DOMESTIC_SEWAGE_GP: NC's NCG55,
+    Virginia's VAG40, Pennsylvania's PAG04 small flow systems). kinds: the permit's sewage limit kinds (sewage_limits)."""
+    if b not in ('sewerage_code_public_owner', 'sewerage_code_owner_unknown') or p.startswith(DOMESTIC_SEWAGE_GP):
+        return None
+    if sewage_limits(kinds):
+        return None                     # its limits show sewage, whatever the name ("... WTP" can be a wastewater plant)
+    name = (e['r']['FACILITY_NAME'] or '').strip()
+    if PROJECT_NAME.search(name):
+        return 'construction_project'   # before the sewage words: "Sanitary Sewer Project", "WWTP Improvement Project"
+    if SEWAGE_NAME.search(name):
+        return None
+    if WATER_PLANT_NAME.search(name):
+        return 'water_treatment_plant'
+    if (codes(e['r']['SIC_CODES']) | codes(e['r']['NAICS_CODES'])) - SEWER_CODES:
+        return 'no_sewage_evidence'
+    return None
+
+
+def permit_limit_kinds(limits):
+    """{permit: set of sewage limit kinds over all its features} from the limits pass output ({permit|feature: {...,
+    sewage: [...]}}). Refuses an output written before the pass recorded `sewage` (it would hold every multi-code
+    permit back)."""
+    out = collections.defaultdict(set)
+    for k, v in limits.items():
+        if 'sewage' not in v:
+            raise SystemExit(f'{k}: the limits file has no "sewage" kinds; rerun plant_outfalls_limits_pass.py')
+        out[k.split('|')[0]].update(v['sewage'])
+    return out
+
+
+_PU = []
+
+
+def public_permit_name(v):
+    """ICIS PERMIT_NAME as the public file carries it: None when the whole name is a person's (EPA often fills the
+    field with a contact person: no body's word and a person's name by scripts/private_utilities.person_like, the
+    check the private-utility list uses). A person named beside a body ("<a person> - City of X") is not caught here;
+    docs/reviews/2026-11-04-plant-outfalls-codes-review.md in the site repository."""
+    s = (v or '').strip()
+    if not s:
+        return None
+    if not _PU:
+        from pathlib import Path
+        root = Path(__file__).resolve().parents[2]
+        for d in (root / 'pipeline', root / 'scripts'):
+            if str(d) not in sys.path:
+                sys.path.insert(0, str(d))
+        import private_utilities
+        _PU.append(private_utilities)
+    pu = _PU[0]
+    return None if not pu.has_org_word(s) and pu.person_like(pu.clean(s).strip(' .,')) else s
 
 
 def group_permits(ol_rows):
@@ -128,6 +223,7 @@ def main(argv):
         inv_permits[p] += 1
 
     limits = json.load(open(LIMITS)) if LIMITS != '-' else {}
+    limit_kinds = permit_limit_kinds(limits)
 
     # ------------------------------------------------------------------ the discharge points file, grouped by permit
     perm, dups = group_permits(rows(OL))
@@ -151,6 +247,21 @@ def main(argv):
                              ('individual permit' if r['PERMIT_TYPE_CODE'] in INDIVIDUAL else 'general/other permit')] += 1
                 else:
                     excluded['other (' + r['PERMIT_TYPE_CODE'] + ')'] += 1
+
+    # ------------------------------------------------------------------ sewerage-code permits that are no sewage plant
+    not_sewage_rows = []
+    for p, b in sorted(universe.items()):
+        why = not_sewage(p, perm[p], b, limit_kinds.get(p))
+        if why:
+            r = perm[p]['r']
+            not_sewage_rows.append({
+                'npdes_permit': p, 'permittee': (r['FACILITY_NAME'] or '').strip() or None, 'state': r['STATE_CODE'],
+                'city': (r['CITY'] or '').strip() or None, 'sic_codes': sorted(codes(r['SIC_CODES'])),
+                'naics_codes': sorted(codes(r['NAICS_CODES'])), 'facility_type': r['FACILITY_TYPE_DESC'] or None,
+                'plant_basis': b, 'external_outfalls': len(perm[p]['exo']),
+                'sewage_limit_kinds': sorted(limit_kinds.get(p) or ()), 'reason': why, 'why': NOT_SEWAGE[why]})
+            del universe[p]
+            excluded['sewerage code but no sewage plant (' + why + ')'] += 1
 
     # ------------------------------------------------------------------ reach index and registry ids for those permits
     catch = {}
@@ -265,7 +376,7 @@ def main(argv):
         return {
             'npdes_permit': p,
             'permittee': (r['FACILITY_NAME'] or '').strip() or None,
-            'permit_name': (r['PERMIT_NAME'] or '').strip() or None,
+            'permit_name': public_permit_name(r['PERMIT_NAME']),
             'state': r['STATE_CODE'],
             'city': (r['CITY'] or '').strip() or None,
         }
@@ -421,7 +532,7 @@ def main(argv):
             lat, lon = num(f['lat']), num(f['lon'])
             cc = catch.get((p, k)) or {}
             row = {'npdes_permit': p, 'permittee': (fac.get('FACILITY_NAME') or '').strip() or None,
-                   'permit_name': (pm.get('PERMIT_NAME') or '').strip() or None, 'state': state,
+                   'permit_name': public_permit_name(pm.get('PERMIT_NAME')), 'state': state,
                    'city': (fac.get('CITY') or '').strip() or None, 'outfall': f['outfall'], 'outfall_name': None,
                    'outfall_status': None, 'feature_type': 'EXO' if 'EXO' in types else None,
                    'receiving_water_echo': (pm.get('STATE_WATER_BODY_NAME') or '').strip() or None,
@@ -441,7 +552,7 @@ def main(argv):
             if lat is None and cc:
                 lat, lon = num(cc.get('LATITUDE83')), num(cc.get('LONGITUDE83'))
             rows_p.append({'npdes_permit': p, 'permittee': (fac.get('FACILITY_NAME') or '').strip() or None,
-                           'permit_name': (pm.get('PERMIT_NAME') or '').strip() or None, 'state': state,
+                           'permit_name': public_permit_name(pm.get('PERMIT_NAME')), 'state': state,
                            'city': (fac.get('CITY') or '').strip() or None, 'outfall': None, 'outfall_name': None,
                            'outfall_status': None, 'feature_type': None,
                            'receiving_water_echo': (pm.get('STATE_WATER_BODY_NAME') or '').strip() or None,
@@ -521,7 +632,11 @@ def main(argv):
                  'facility\'s point (coords_from facility, outfall null). No water matching yet. outfall_status is null: '
                  'this file carries no ICIS characteristic or open/closed status for plant features; has_limits says '
                  'whether the ICIS permit limit dataset holds any limit set for the feature (a hint that it is a monitored '
-                 'discharge point, not a status) and limit_set_names gives up to four of their names.'),
+                 'discharge point, not a status) and limit_set_names gives up to four of their names. A permit in by '
+                 'the sewerage code alone whose ICIS limits show no sewage (no fecal-indicator limit, nor a BOD, '
+                 'ammonia or TKN limit with a disinfection limit) is held back (excluded_not_sewage, with its reason; no '
+                 'row) when its facility name is a construction project\'s, or a drinking-water plant\'s and no sewage '
+                 'plant\'s, or, when that code is one of several, names no sewage plant.'),
         'fetched_at': FETCHED_AT,
         'count': len(out_rows),
         'counts': {
@@ -533,7 +648,9 @@ def main(argv):
             'build': dict(cnt),
             'excluded_sewer_type_permits': dict(excluded),
             'duplicate_feature_rows_in_source': dups,
+            'excluded_not_sewage': dict(C(x['reason'] for x in not_sewage_rows)),
         },
+        'excluded_not_sewage': sorted(not_sewage_rows, key=lambda x: (x['state'] or '', x['npdes_permit'])),
         'outfalls': out_rows,
         'cso_features_not_in_inventory': cso_suspects,
     }

@@ -203,8 +203,14 @@ def load_outfall_registry(data_dir: Path | None = None, provisional: bool = True
         if not isinstance(rows, list):
             OUTFALL_REGISTRY_SKIPPED.append(f"data/{rel}: no outfall list")
             continue
+        # a plants file lists the sewerage-code permits that are no sewage plant (excluded_not_sewage: a water plant's
+        # backwash, a construction project); a row of one that reaches the outfall list anyway is never read
+        not_sewage = {str(x.get("npdes_permit") or "").strip().upper() for x in
+                      (doc.get("excluded_not_sewage") if isinstance(doc, dict) else None) or [] if isinstance(x, dict)}
         for i, o in enumerate(rows):
             if not isinstance(o, dict):
+                continue
+            if not_sewage and str(o.get("npdes_permit") or "").strip().upper() in not_sewage:
                 continue
             if rank == 3:
                 if str(o.get("record_status") or "provisional") == "superseded":

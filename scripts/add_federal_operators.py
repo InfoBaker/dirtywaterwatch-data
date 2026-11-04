@@ -176,6 +176,18 @@ def load_candidates(registry_permits):
     return cand
 
 
+def public_permit_name(v):
+    """ICIS's permit name, or None when the whole name is a person's (EPA often fills the field with a contact person):
+    no body's word and a person's name by scripts/private_utilities.person_like."""
+    s = str(v or "").strip()
+    if not s:
+        return None
+    if str(ROOT / "scripts") not in sys.path:
+        sys.path.insert(0, str(ROOT / "scripts"))
+    import private_utilities as pu
+    return None if not pu.has_org_word(s) and pu.person_like(pu.clean(s).strip(" .,")) else s
+
+
 def private_reason(p, c):
     """Why a permit is not added now (None when it is): the owner has not decided on private utilities."""
     if p in SKIP_PRIVATE:
@@ -252,7 +264,7 @@ def build_row(group, counts):
              "(scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): "
              "name, city and receiving water as EPA spells them; no contact, notification channel or overflow history "
              "has been researched.")
-    perm_name = r0.get("permit_name")
+    perm_name = public_permit_name(r0.get("permit_name"))
     if perm_name and perm_name.strip().upper() != str(r0.get("permittee") or "").strip().upper():
         notes += f" ICIS permit name: {perm_name}."
     rid = f"{st.lower()}-{p0.lower()}"
