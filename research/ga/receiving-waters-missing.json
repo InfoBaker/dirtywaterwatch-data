@@ -2,44 +2,44 @@
  "about": "Receiving-water names in Georgia's spill reports (EPD's daily list, postings of 2026-06-01, 2026-10-01, 2026-10-15, 2026-10-30, 2026-11-02 and 2026-11-03, and EPA's Sewer Overflow and Bypass Event reports for GA permits, extract of 2026-11-03) that data/receiving-waters-national.json does not hold for GA, by name as typed (case and punctuation ignored). Spelling variants of a held water (Polebridge Creek, Sugar Crek, Ocmuglee) are listed as typed so an alias can be added.",
  "checked": "2026-11-04",
  "state": "GA",
- "waters": 141,
- "reports": 269,
+ "waters": 138,
+ "reports": 266,
  "by_kind": {
-  "named water": 76,
+  "named water": 73,
   "tributary of a named water": 45,
   "storm system or not a named water": 20
  },
  "by_reason": {
-  "no NHD flowline or waterbody of that name in GA": 83,
+  "no NHD flowline or waterbody of that name in GA": 79,
   "1 NHD water of that name in GA, none within reach of the reports' places": 14,
-  "a basin": 7,
-  "a storm-sewer system": 7,
+  "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 7,
+  "a storm-sewer system (MS4), not a named water": 7,
   "an unnamed or unknown stream: the report names no water": 5,
   "a storm-sewer system, not a named water": 4,
   "private property, not a public water": 3,
+  "2 NHD waters of that name in GA, none within reach of the reports' places": 3,
   "3 NHD waters of that name in GA, none within reach of the reports' places": 2,
   "a kind of water with no name": 2,
   "part of a sewer, drainage or treatment works, not a public water": 2,
-  "2 NHD waters of that name in GA, none within reach of the reports' places": 2,
   "not a water name": 1,
   "a street name, not a water": 1,
   "14 NHD waters of that name in GA, none within reach of the reports' places": 1,
   "4 NHD waters of that name in GA and the reports give no place to choose one": 1,
   "13 NHD waters of that name in GA and the reports give no place to choose one": 1,
   "a tributary named by a place, not by the water it joins": 1,
-  "a wetland": 1,
+  "a wetland (not a named NHD water)": 1,
   "2 NHD waters of that name in GA and the reports give no place to choose one": 1,
   "22 NHD waters of that name in GA, none within reach of the reports' places": 1,
   "24 NHD waters of that name in GA, none within reach of the reports' places": 1
  },
- "resolved_names": 161,
- "resolved_reports": 567,
+ "resolved_names": 164,
+ "resolved_reports": 570,
  "build": {
   "date": "2026-11-04",
   "command": "python -m ingest.waters_from_nhd --names research/ga/receiving-waters-missing.json --state GA",
-  "records_built": 7,
-  "names_resolved": 10,
-  "network_requests": 15
+  "records_built": 0,
+  "names_resolved": 3,
+  "network_requests": 16
  },
  "rows": [
   {
@@ -1744,7 +1744,21 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+   "reason": "2 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Decatur",
+     "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 4.9 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 8.0 km away)"
+    },
+    {
+     "town": "Stonecrest",
+     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 3.2 km away)"
+    }
+   ]
   },
   {
    "name": "GLENDALE TRIBUTARY",
@@ -1966,21 +1980,6 @@
    "reason": "a storm-sewer system (MS4), not a named water"
   },
   {
-   "name": "Mill Branch Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Columbus"
-   ],
-   "places_from": [
-    "echo-sewer-overflow"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
    "name": "Mill Creek No 2",
    "reports": 1,
    "seen_in": [
@@ -2118,24 +2117,6 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "Panthers Branch Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
    "name": "Parker Fairway Creek",
    "reports": 1,
    "seen_in": [
@@ -2188,22 +2169,6 @@
     "Alpharetta",
     "Roswell",
     "Sandy Springs"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Roaring Branch Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Columbus"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -4173,6 +4138,14 @@
    "how": "record built from the name"
   },
   {
+   "name": "Mill Branch Creek",
+   "reports": 1,
+   "slugs": [
+    "mill-branch-ga"
+   ],
+   "how": "record built from the name"
+  },
+  {
    "name": "Mill Branch Tributary",
    "reports": 1,
    "slugs": [
@@ -4197,6 +4170,14 @@
    "how": "record built from the name"
   },
   {
+   "name": "Panthers Branch Creek",
+   "reports": 1,
+   "slugs": [
+    "panthers-branch-ga"
+   ],
+   "how": "record built from the name"
+  },
+  {
    "name": "Pates Creek Tributary",
    "reports": 1,
    "slugs": [
@@ -4217,6 +4198,14 @@
    "reports": 1,
    "slugs": [
     "pole-bridge-creek-ga"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Roaring Branch Creek",
+   "reports": 1,
+   "slugs": [
+    "roaring-branch-ga"
    ],
    "how": "record built from the name"
   },

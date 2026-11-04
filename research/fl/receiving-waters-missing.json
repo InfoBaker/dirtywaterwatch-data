@@ -1,8 +1,39 @@
 {
  "about": "Receiving-water names in FL's reports that data/receiving-waters-national.json does not hold for FL, by name as typed, with the number of reports giving each.",
  "state": "FL",
- "waters": 450,
- "reports": 1163,
+ "waters": 241,
+ "reports": 436,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in FL": 206,
+  "1 NHD water of that name in FL, none within reach of the reports' places": 5,
+  "part of a sewer, drainage or treatment works, not a public water": 4,
+  "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 4,
+  "2 NHD waters of that name in FL, none within reach of the reports' places": 3,
+  "4 NHD waters of that name in FL, none within reach of the reports' places": 3,
+  "3 NHD waters of that name in FL, none within reach of the reports' places": 3,
+  "the open sea (no NHD record)": 1,
+  "the name of a town (Altamonte Springs), not of a water: no NHD water of that name in FL": 1,
+  "the name of a town (Coral Springs), not of a water: no NHD water of that name in FL": 1,
+  "the name of a town (Palm Bay), not of a water: no NHD water of that name in FL": 1,
+  "the name of a town (Pebble Creek), not of a water: no NHD water of that name in FL": 1,
+  "the name of a town (South Bay), not of a water: no NHD water of that name in FL": 1,
+  "6 NHD waters of that name in FL, none within reach of the reports' places": 1,
+  "the name of a town (Bonita Springs), not of a water: no NHD water of that name in FL": 1,
+  "not a water name": 1,
+  "the name of a town (DeFuniak Springs), not of a water: no NHD water of that name in FL": 1,
+  "the open ocean (no NHD record)": 1,
+  "the name of a town (Palm Harbor), not of a water: no NHD water of that name in FL": 1,
+  "the name of a town (Silver Springs), not of a water: no NHD water of that name in FL": 1
+ },
+ "resolved_names": 209,
+ "resolved_reports": 727,
+ "build": {
+  "date": "2026-11-04",
+  "command": "python -m ingest.waters_from_nhd --names research/fl/receiving-waters-missing.json --state FL",
+  "records_built": 11,
+  "names_resolved": 20,
+  "network_requests": 76
+ },
  "rows": [
   {
    "name": "Intracoastal Waterway",
@@ -37,65 +68,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Hillsborough River",
-   "reports": 46,
-   "points": [
-    [
-     28.02459,
-     -82.40002
-    ],
-    [
-     28.01076,
-     -82.47129
-    ],
-    [
-     28.054,
-     -82.121
-    ],
-    [
-     27.946,
-     -82.463
-    ],
-    [
-     28.055,
-     -82.388
-    ]
    ],
-   "towns": [
-    "Tampa",
-    "Temple Terrace",
-    "Plant City"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Watson Bayou",
-   "reports": 32,
-   "points": [
-    [
-     30.1707,
-     -85.64818
-    ],
-    [
-     30.15301,
-     -85.63655
-    ],
-    [
-     30.13377,
-     -85.62008
-    ]
-   ],
-   "towns": [
-    "Panama City"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Massalina Bayou",
@@ -115,286 +89,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Pottsburg Creek",
-   "reports": 26,
-   "points": [
-    [
-     30.30003,
-     -81.63123
-    ],
-    [
-     30.28256,
-     -81.59561
-    ],
-    [
-     30.26298,
-     -81.59018
-    ],
-    [
-     30.25683,
-     -81.55703
-    ],
-    [
-     30.22383,
-     -81.57373
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "McKay Creek",
-   "reports": 22,
-   "points": [
-    [
-     27.909,
-     -82.817
-    ],
-    [
-     27.89143,
-     -82.82537
-    ],
-    [
-     27.907,
-     -82.788
-    ],
-    [
-     27.85471,
-     -82.81361
-    ]
-   ],
-   "towns": [
-    "Largo",
-    "Clearwater",
-    "St. Petersburg",
-    "Saint Petersburg"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Ortega River",
-   "reports": 22,
-   "points": [
-    [
-     30.2044,
-     -81.73789
-    ],
-    [
-     30.25285,
-     -81.70144
-    ],
-    [
-     30.24457,
-     -81.78995
-    ],
-    [
-     30.23599,
-     -81.71401
-    ],
-    [
-     30.22588,
-     -81.73785
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "New River",
-   "reports": 16,
-   "points": [
-    [
-     26.11479,
-     -80.14723
-    ]
-   ],
-   "towns": [
-    "Fort Lauderdale"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Escambia Bay",
-   "reports": 15,
-   "points": [
-    [
-     30.523,
-     -87.18
-    ],
-    [
-     30.484,
-     -87.162
-    ],
-    [
-     30.50461,
-     -87.16831
-    ],
-    [
-     30.511,
-     -87.318
-    ],
-    [
-     30.58227,
-     -87.16223
-    ]
-   ],
-   "towns": [
-    "Pensacola",
-    "Pace"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Boca Ciega Bay",
-   "reports": 14,
-   "points": [
-    [
-     27.82582,
-     -82.80274
-    ],
-    [
-     27.8052,
-     -82.80641
-    ],
-    [
-     27.78598,
-     -82.78099
-    ]
-   ],
-   "towns": [
-    "Madeira Beach",
-    "St. Petersburg",
-    "Seminole",
-    "Redington Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Hillsborough Bay",
-   "reports": 14,
-   "points": [
-    [
-     27.94116,
-     -82.46041
-    ],
-    [
-     27.9171,
-     -82.49117
-    ],
-    [
-     27.922,
-     -82.437
-    ],
-    [
-     27.898,
-     -82.492
-    ],
-    [
-     27.93738,
-     -82.4871
-    ]
-   ],
-   "towns": [
-    "Tampa"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Trout River",
-   "reports": 14,
-   "points": [
-    [
-     30.43107,
-     -81.67793
-    ],
-    [
-     30.38546,
-     -81.64082
-    ],
-    [
-     30.40934,
-     -81.72421
-    ],
-    [
-     30.43665,
-     -81.70144
-    ],
-    [
-     30.33046,
-     -81.65718
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Tampa Bay",
-   "reports": 12,
-   "points": [
-    [
-     28.05613,
-     -82.62923
-    ],
-    [
-     27.97466,
-     -82.55887
-    ],
-    [
-     27.72538,
-     -82.47213
-    ],
-    [
-     27.88079,
-     -82.4839
-    ],
-    [
-     27.97713,
-     -82.36579
-    ]
-   ],
-   "towns": [
-    "Tampa",
-    "Ruskin",
-    "Clearwater",
-    "Apollo Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Intracoastal",
@@ -429,96 +125,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Strawberry Creek",
-   "reports": 11,
-   "points": [
-    [
-     30.33266,
-     -81.56966
-    ],
-    [
-     30.35504,
-     -81.57714
-    ],
-    [
-     30.33055,
-     -81.65734
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Ribault River",
-   "reports": 10,
-   "points": [
-    [
-     30.37782,
-     -81.70163
-    ],
-    [
-     30.39937,
-     -81.72725
-    ],
-    [
-     30.39111,
-     -81.68097
-    ],
-    [
-     30.33051,
-     -81.65729
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Clearwater Harbor",
-   "reports": 9,
-   "points": [
-    [
-     27.95356,
-     -82.80605
-    ],
-    [
-     27.89311,
-     -82.84924
-    ],
-    [
-     27.924,
-     -82.821
-    ],
-    [
-     27.976,
-     -82.817
-    ]
-   ],
-   "towns": [
-    "Clearwater",
-    "Indian Rocks Beach",
-    "Belleair",
-    "Belleair Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Gulf of Mexico",
@@ -553,96 +161,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Little Pottsburg Creek",
-   "reports": 9,
-   "points": [
-    [
-     30.286,
-     -81.607
-    ],
-    [
-     30.311,
-     -81.609
-    ],
-    [
-     30.2833,
-     -81.62807
-    ],
-    [
-     30.33051,
-     -81.65729
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Long Bayou",
-   "reports": 9,
-   "points": [
-    [
-     27.8094,
-     -82.7585
-    ],
-    [
-     27.826,
-     -82.772
-    ],
-    [
-     27.91829,
-     -82.77649
-    ],
-    [
-     27.89603,
-     -82.77116
-    ],
-    [
-     27.85014,
-     -82.77349
-    ]
-   ],
-   "towns": [
-    "St. Petersburg",
-    "Clearwater",
-    "Largo",
-    "Saint Petersburg"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Christopher Creek",
-   "reports": 8,
-   "points": [
-    [
-     30.25091,
-     -81.6287
-    ],
-    [
-     30.33046,
-     -81.65718
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "the open sea (no NHD record)"
   },
   {
    "name": "Joe's Creek",
@@ -669,158 +189,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Jones Creek",
-   "reports": 8,
-   "points": [
-    [
-     30.32834,
-     -81.54006
-    ],
-    [
-     26.934,
-     -80.109
-    ],
-    [
-     30.34716,
-     -81.5422
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Jupiter",
-    "Fruit Cove",
-    "Yulee"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Middle River",
-   "reports": 8,
-   "points": [
-    [
-     26.159,
-     -80.146
-    ],
-    [
-     26.15814,
-     -80.11807
-    ]
-   ],
-   "towns": [
-    "Fort Lauderdale",
-    "Wilton Manors"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Callaway Bayou",
-   "reports": 7,
-   "points": [
-    [
-     30.138,
-     -85.574
-    ]
-   ],
-   "towns": [
-    "Callaway Florida",
-    "Callaway",
-    "Panama City"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Choctawhatchee Bay",
-   "reports": 7,
-   "points": [
-    [
-     30.47243,
-     -86.41684
-    ],
-    [
-     30.43845,
-     -86.55949
-    ],
-    [
-     30.4309,
-     -86.15057
-    ],
-    [
-     30.40431,
-     -86.53652
-    ],
-    [
-     30.3849,
-     -86.36589
-    ]
-   ],
-   "towns": [
-    "Fort Walton Beach",
-    "Santa Rosa Beach",
-    "Miramar Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Cinco Bayou",
-   "reports": 7,
-   "points": [
-    [
-     30.43462,
-     -86.61859
-    ],
-    [
-     30.478,
-     -86.568
-    ],
-    [
-     30.45584,
-     -86.47643
-    ]
-   ],
-   "towns": [
-    "Fort Walton Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Goodby's Creek",
-   "reports": 7,
-   "points": [
-    [
-     30.2025,
-     -81.61792
-    ],
-    [
-     30.21818,
-     -81.59183
-    ],
-    [
-     30.2282,
-     -81.60933
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Goose Bayou",
@@ -840,93 +210,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Hogtown Creek",
-   "reports": 7,
-   "points": [
-    [
-     29.69368,
-     -82.34391
-    ],
-    [
-     29.66097,
-     -82.36252
-    ],
-    [
-     29.67368,
-     -82.3394
-    ],
-    [
-     29.69939,
-     -82.31471
-    ],
-    [
-     29.66681,
-     -82.29015
-    ]
    ],
-   "towns": [
-    "Gainesville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "McGirts Creek",
-   "reports": 7,
-   "points": [
-    [
-     30.23382,
-     -81.78927
-    ],
-    [
-     30.27437,
-     -81.83183
-    ],
-    [
-     30.29236,
-     -81.84294
-    ],
-    [
-     30.20231,
-     -81.77584
-    ]
-   ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Santa Rosa Sound",
-   "reports": 7,
-   "points": [
-    [
-     30.40988,
-     -86.77053
-    ],
-    [
-     30.3986,
-     -86.60145
-    ],
-    [
-     30.33528,
-     -87.13055
-    ]
-   ],
-   "towns": [
-    "Mary Esther",
-    "Fort Walton Beach",
-    "Pensacola"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Seminole River",
@@ -942,24 +227,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Church Creek",
-   "reports": 6,
-   "points": [
-    [
-     27.89143,
-     -82.82533
-    ]
    ],
-   "towns": [
-    "Clearwater",
-    "Largo"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Indian River Lagoon",
@@ -994,7 +263,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Klosterman Bayou",
@@ -1010,378 +280,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Loxahatchee River",
-   "reports": 6,
-   "points": [
-    [
-     26.95988,
-     -80.13019
-    ],
-    [
-     26.94759,
-     -80.09016
-    ],
-    [
-     26.94172,
-     -80.14111
-    ]
    ],
-   "towns": [
-    "Jupiter"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "McCoys Creek",
-   "reports": 6,
-   "points": [
-    [
-     30.31115,
-     -81.7088
-    ],
-    [
-     30.33261,
-     -81.70024
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "North Fork New River",
-   "reports": 6,
-   "points": [
-    [
-     26.156,
-     -80.14
-    ],
-    [
-     26.12712,
-     -80.17381
-    ],
-    [
-     26.11639,
-     -80.15039
-    ]
-   ],
-   "towns": [
-    "Wilton Manors"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Salt Creek",
-   "reports": 6,
-   "points": [
-    [
-     29.95328,
-     -85.42991
-    ]
-   ],
-   "towns": [
-    "Panama City"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Shingle Creek",
-   "reports": 6,
-   "points": [
-    [
-     28.346,
-     -81.454
-    ],
-    [
-     28.28555,
-     -81.47162
-    ],
-    [
-     28.472,
-     -81.425
-    ],
-    [
-     28.44252,
-     -81.44146
-    ],
-    [
-     28.52359,
-     -81.20272
-    ]
-   ],
-   "towns": [
-    "Orlando",
-    "Kissimmee"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Turkey Lake",
-   "reports": 6,
-   "points": [
-    [
-     28.51131,
-     -81.47987
-    ]
-   ],
-   "towns": [
-    "Orlando",
-    "Oviedo"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Wills Branch Creek",
-   "reports": 6,
-   "points": [
-    [
-     30.28918,
-     -81.75942
-    ],
-    [
-     30.29315,
-     -81.79132
-    ],
-    [
-     30.3306,
-     -81.65719
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Cedar River",
-   "reports": 5,
-   "points": [
-    [
-     30.32539,
-     -81.74357
-    ],
-    [
-     30.27334,
-     -81.73325
-    ],
-    [
-     30.30356,
-     -81.75965
-    ]
-   ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Graveyard Branch",
-   "reports": 5,
-   "points": [
-    [
-     30.513,
-     -87.17
-    ]
-   ],
-   "towns": [
-    "Pensacola"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Pompano Canal",
-   "reports": 5,
-   "points": [
-    [
-     26.23713,
-     -80.12364
-    ],
-    [
-     26.22701,
-     -80.10382
-    ]
-   ],
-   "towns": [
-    "Pompano Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Posten Bayou",
-   "reports": 5,
-   "points": [
-    [
-     30.17911,
-     -85.68682
-    ],
-    [
-     30.18825,
-     -85.70492
-    ]
-   ],
-   "towns": [
-    "Panama City"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Safety Harbor",
-   "reports": 5,
-   "points": [
-    [
-     27.99527,
-     -82.68985
-    ],
-    [
-     28.022,
-     -82.698
-    ]
-   ],
-   "towns": [
-    "Safety Harbor"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Taylor Lake",
-   "reports": 5,
-   "points": [
-    [
-     27.89891,
-     -82.80385
-    ]
-   ],
-   "towns": [
-    "Largo",
-    "Clearwater"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Wills Branch",
-   "reports": 5,
-   "points": [
-    [
-     30.28861,
-     -81.77898
-    ],
-    [
-     30.28903,
-     -81.75531
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Bear Creek",
-   "reports": 4,
-   "points": [
-    [
-     28.33856,
-     -82.6966
-    ],
-    [
-     28.71404,
-     -81.28158
-    ]
-   ],
-   "towns": [
-    "Hudson",
-    "Winter Springs"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Braden River",
-   "reports": 4,
-   "points": [
-    [
-     27.4208,
-     -82.4264
-    ],
-    [
-     27.46273,
-     -82.49209
-    ]
-   ],
-   "towns": [
-    "Bradenton"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Cross Bayou Canal",
-   "reports": 4,
-   "points": [
-    [
-     27.90756,
-     -82.70463
-    ],
-    [
-     27.842,
-     -82.754
-    ],
-    [
-     27.8649,
-     -82.7358
-    ]
-   ],
-   "towns": [
-    "Pinellas Park",
-    "Clearwater",
-    "St Petersburg"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Gap Creek",
@@ -1401,29 +301,23 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Ginhouse Creek",
-   "reports": 4,
-   "points": [
-    [
-     30.317,
-     -81.531
-    ],
-    [
-     30.33057,
-     -81.65734
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
+   "reason": "2 NHD waters of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -86.64012,
+     "lat": 30.43266,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.43266, -86.64012) (the nearest is 518.7 km away)"
+    },
+    {
+     "lon": -86.568,
+     "lat": 30.478,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.47800, -86.56800) (the nearest is 516.4 km away)"
+    },
+    {
+     "town": "Fort Walton Beach",
+     "reason": "no NHD water of that name within 3 km of Fort Walton Beach (the nearest is 512.9 km away)"
+    }
    ]
   },
   {
@@ -1440,31 +334,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Hogpen Creek",
-   "reports": 4,
-   "points": [
-    [
-     30.31031,
-     -81.49377
-    ],
-    [
-     30.31317,
-     -81.44003
-    ],
-    [
-     30.31956,
-     -81.52255
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Intercoastal Waterway",
@@ -1481,6 +352,10 @@
    ],
    "places_from": [
     "fl-dep-pnp"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Intracoastal Waterway"
    ]
   },
   {
@@ -1497,86 +372,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Little Fishweir Creek",
-   "reports": 4,
-   "points": [
-    [
-     30.30185,
-     -81.71784
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Matanzas River",
-   "reports": 4,
-   "points": [
-    [
-     29.89316,
-     -81.30228
-    ],
-    [
-     29.87597,
-     -81.31058
-    ]
-   ],
-   "towns": [
-    "St. Augustine"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Moncrief Creek",
-   "reports": 4,
-   "points": [
-    [
-     30.37655,
-     -81.67175
-    ],
-    [
-     30.35928,
-     -81.69066
-    ],
-    [
-     30.33055,
-     -81.65734
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Palma Sola Bay",
-   "reports": 4,
-   "points": [
-    [
-     27.49221,
-     -82.64303
-    ]
-   ],
-   "towns": [
-    "Bradenton"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Parker Bayou",
@@ -1589,7 +386,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "River Vista Waterway",
@@ -1606,7 +404,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Skinner Mill Creek",
@@ -1626,23 +425,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "South Fork of Middle River",
-   "reports": 4,
-   "points": [
-    [
-     26.15916,
-     -80.14628
-    ]
    ],
-   "towns": [
-    "Wilton Manors"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "South Lagoon",
@@ -1663,115 +447,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "St. Lucie River",
-   "reports": 4,
-   "points": [
-    [
-     27.2493,
-     -80.318
-    ],
-    [
-     27.27584,
-     -80.3168
-    ]
    ],
-   "towns": [
-    "Port St Lucie",
-    "Port St. Lucie"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Sweetwater Creek",
-   "reports": 4,
-   "points": [
-    [
-     28.00052,
-     -82.54604
-    ],
-    [
-     30.478,
-     -81.622
-    ],
-    [
-     28.01186,
-     -82.5752
-    ],
-    [
-     30.45971,
-     -81.61382
-    ]
-   ],
-   "towns": [
-    "Tampa",
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Williamson Creek",
-   "reports": 4,
-   "points": [
-    [
-     30.275,
-     -81.751
-    ]
-   ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Allen Creek",
-   "reports": 3,
-   "points": [
-    [
-     27.92043,
-     -82.75542
-    ],
-    [
-     27.93664,
-     -82.72948
-    ]
-   ],
-   "towns": [
-    "Clearwater"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Allen's Creek",
-   "reports": 3,
-   "points": [
-    [
-     27.92042,
-     -82.75571
-    ],
-    [
-     27.93603,
-     -82.72951
-    ]
-   ],
-   "towns": [
-    "Clearwater"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Bass Lake",
@@ -1792,182 +469,27 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Bullfrog Creek",
-   "reports": 3,
-   "points": [
-    [
-     27.83531,
-     -82.38171
-    ],
-    [
-     27.83524,
-     -82.34137
-    ]
    ],
-   "towns": [
-    "Gibsonton",
-    "Ruskin"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Cormorant Branch",
-   "reports": 3,
-   "points": [
-    [
-     30.145,
-     -81.63
-    ],
-    [
-     30.163,
-     -81.626
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Cow Branch Creek",
-   "reports": 3,
-   "points": [
-    [
-     28.07145,
-     -82.72501
-    ]
-   ],
-   "towns": [
-    "Palm Harbor"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Craig Creek",
-   "reports": 3,
-   "points": [
-    [
-     30.28817,
-     -81.63307
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Crystal River",
-   "reports": 3,
-   "points": [
-    [
-     28.89893,
-     -82.59681
-    ]
-   ],
-   "towns": [
-    "Crystal River",
-    "Crystal Springs"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Cypress Creek Canal",
-   "reports": 3,
-   "points": [
-    [
-     26.21113,
-     -80.12274
-    ]
-   ],
-   "towns": [
-    "Pompano Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Double Branch Creek",
-   "reports": 3,
-   "points": [
-    [
-     28.05613,
-     -82.62923
-    ],
-    [
-     30.19516,
-     -81.83788
-    ]
-   ],
-   "towns": [
-    "Tampa"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Grand Canal",
-   "reports": 3,
-   "points": [
-    [
-     26.2855,
-     -80.09271
-    ],
-    [
-     27.27599,
-     -82.55111
-    ]
-   ],
-   "towns": [
-    "Lighthouse Point",
-    "Pompano Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Little Trout River",
-   "reports": 3,
-   "points": [
-    [
-     30.41669,
-     -81.75076
-    ],
-    [
-     30.33053,
-     -81.6572
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
+   "reason": "4 NHD waters of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -86.61878,
+     "lat": 30.45646,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.45646, -86.61878) (the nearest is 459.9 km away)"
+    },
+    {
+     "lon": -81.6737,
+     "lat": 28.29116,
+     "reason": "no NHD water of that name within 2 km of the reports' point (28.29116, -81.67370) (the nearest is 40.3 km away)"
+    },
+    {
+     "town": "Fort Walton Beach",
+     "reason": "no NHD water of that name within 3 km of Fort Walton Beach (the nearest is 456.0 km away)"
+    },
+    {
+     "town": "Davenport",
+     "reason": "no NHD water of that name within 3 km of Davenport (the nearest is 43.5 km away)"
+    }
    ]
   },
   {
@@ -1988,137 +510,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Locklin Lake",
-   "reports": 3,
-   "points": [
-    [
-     30.62832,
-     -87.05885
-    ]
    ],
-   "towns": [
-    "Milton"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Munson Slough",
-   "reports": 3,
-   "points": [
-    [
-     30.43278,
-     -84.32744
-    ],
-    [
-     30.42766,
-     -84.29314
-    ],
-    [
-     30.413,
-     -84.317
-    ]
-   ],
-   "towns": [
-    "Tallahassee"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "North Fork of Middle River",
-   "reports": 3,
-   "points": [
-    [
-     26.155,
-     -80.14
-    ]
-   ],
-   "towns": [
-    "Wilton Manors"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Oldfield Creek",
-   "reports": 3,
-   "points": [
-    [
-     30.15955,
-     -81.60465
-    ]
-   ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Pablo Creek",
-   "reports": 3,
-   "points": [
-    [
-     30.229,
-     -81.507
-    ],
-    [
-     30.27739,
-     -81.52392
-    ]
-   ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Quarry Creek",
-   "reports": 3,
-   "points": [
-    [
-     29.88328,
-     -81.29573
-    ]
-   ],
-   "towns": [
-    "City Of St. Augustine",
-    "St. Augustine"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Rice Creek",
-   "reports": 3,
-   "points": [
-    [
-     29.68762,
-     -81.68193
-    ],
-    [
-     27.84926,
-     -82.31961
-    ]
-   ],
-   "towns": [
-    "Palatka",
-    "Riverview"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Seminole Bypass Canal",
@@ -2140,20 +533,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Tarpon River",
-   "reports": 3,
-   "points": [
-    [
-     26.11082,
-     -80.13125
-    ]
    ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Tumblin Creek",
@@ -2169,27 +550,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Wares Creek",
-   "reports": 3,
-   "points": [
-    [
-     27.48419,
-     -82.58036
-    ],
-    [
-     27.456,
-     -82.567
-    ]
    ],
-   "towns": [
-    "Bradenton"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Winston Creek",
@@ -2209,53 +571,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Withlacoochee River",
-   "reports": 3,
-   "points": [
-    [
-     28.36343,
-     -82.18085
-    ],
-    [
-     29.05328,
-     -82.47106
-    ],
-    [
-     28.48422,
-     -82.65041
-    ]
    ],
-   "towns": [
-    "Dade City",
-    "Dunnellon",
-    "Hernando Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Allens Creek",
-   "reports": 2,
-   "points": [
-    [
-     27.92042,
-     -82.75571
-    ],
-    [
-     27.93603,
-     -82.72951
-    ]
-   ],
-   "towns": [
-    "Clearwater"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Altamonte Springs",
@@ -2275,81 +592,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Bennett Branch",
-   "reports": 2,
-   "points": [
-    [
-     30.26468,
-     -81.60704
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Boggy Bayou",
-   "reports": 2,
-   "points": [
-    [
-     30.5108,
-     -86.47291
-    ]
-   ],
-   "towns": [
-    "Niceville",
-    "Valparaiso"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Bull Frog Creek",
-   "reports": 2,
-   "points": [
-    [
-     27.83531,
-     -82.38171
-    ],
-    [
-     27.83524,
-     -82.34137
-    ]
-   ],
-   "towns": [
-    "Gibsonton",
-    "Ruskin"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Carpenter Creek",
-   "reports": 2,
-   "points": [
-    [
-     30.46,
-     -87.209
-    ],
-    [
-     30.482,
-     -87.205
-    ]
-   ],
-   "towns": [
-    "Pensacola"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "the name of a town (Altamonte Springs), not of a water: no NHD water of that name in FL"
   },
   {
    "name": "Cassel Creek",
@@ -2369,7 +613,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Chruch Creek",
@@ -2385,23 +630,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Clam Bayou",
-   "reports": 2,
-   "points": [
-    [
-     27.74686,
-     -82.68862
-    ]
    ],
-   "towns": [
-    "St. Petersburg"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Clipper Cove",
@@ -2417,27 +647,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Collins Canal",
-   "reports": 2,
-   "points": [
-    [
-     25.857,
-     -80.122
-    ],
-    [
-     25.805,
-     -80.128
-    ]
    ],
-   "towns": [
-    "Miami Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Coral Springs",
@@ -2457,23 +668,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Corklan Branch",
-   "reports": 2,
-   "points": [
-    [
-     30.13008,
-     -81.52775
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "the name of a town (Coral Springs), not of a water: no NHD water of that name in FL"
   },
   {
    "name": "Deer Creek",
@@ -2493,42 +689,23 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Delaney Creek",
-   "reports": 2,
-   "points": [
-    [
-     27.92854,
-     -82.36216
-    ],
-    [
-     27.90883,
-     -82.4129
-    ]
    ],
-   "towns": [
-    "Tampa"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Dream Lake",
-   "reports": 2,
-   "points": [
-    [
-     28.685,
-     -81.513
-    ]
-   ],
-   "towns": [
-    "Apopka"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
+   "reason": "1 NHD water of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -82.34658,
+     "lat": 26.94706,
+     "reason": "no NHD water of that name within 2 km of the reports' point (26.94706, -82.34658) (the nearest is 219.4 km away)"
+    },
+    {
+     "lon": -82.48049,
+     "lat": 27.23027,
+     "reason": "no NHD water of that name within 2 km of the reports' point (27.23027, -82.48049) (the nearest is 186.8 km away)"
+    },
+    {
+     "town": "Englewood",
+     "reason": "no NHD water of that name within 3 km of Englewood (the nearest is 210.7 km away)"
+    }
    ]
   },
   {
@@ -2545,43 +722,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Eau Gallie River",
-   "reports": 2,
-   "points": [
-    [
-     28.122,
-     -80.636
-    ]
    ],
-   "towns": [
-    "Melbourne"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Eight Mile Creek",
-   "reports": 2,
-   "points": [
-    [
-     30.519,
-     -87.303
-    ],
-    [
-     30.643,
-     -87.34
-    ]
-   ],
-   "towns": [
-    "Pensacola"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Elizabeth Creek",
@@ -2597,7 +739,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Emmons Bayou",
@@ -2613,7 +756,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Fordham Waterway",
@@ -2633,91 +777,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Fourmile Creek",
-   "reports": 2,
-   "points": [
-    [
-     30.49507,
-     -86.14219
-    ]
    ],
-   "towns": [
-    "Freeport"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Frog Creek",
-   "reports": 2,
-   "points": [
-    [
-     27.584,
-     -82.477
-    ],
-    [
-     27.57388,
-     -82.50234
-    ]
-   ],
-   "towns": [
-    "Palmetto"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Garnier Bayou",
-   "reports": 2,
-   "points": [
-    [
-     30.43973,
-     -86.61145
-    ]
-   ],
-   "towns": [
-    "Fort Walton Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Grass Lake",
-   "reports": 2,
-   "points": [
-    [
-     30.47243,
-     -86.41684
-    ]
-   ],
-   "towns": [
-    "Fort Walton Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Hatchett Creek",
-   "reports": 2,
-   "points": [
-    [
-     27.09551,
-     -82.42033
-    ]
-   ],
-   "towns": [
-    "North Venice"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Hogans Creek",
@@ -2740,43 +801,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Hospital Creek",
-   "reports": 2,
-   "points": [
-    [
-     29.91044,
-     -81.31473
-    ],
-    [
-     29.87597,
-     -81.31058
-    ]
    ],
-   "towns": [
-    "St. Augustine"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Juniper Creek",
-   "reports": 2,
-   "points": [
-    [
-     30.7259,
-     -86.57714
-    ]
-   ],
-   "towns": [
-    "Crestview"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Kansas City Waterway",
@@ -2793,7 +819,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Killarney Lake Canal",
@@ -2809,7 +836,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Kings Cove",
@@ -2826,7 +854,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Forest Creek",
@@ -2842,48 +871,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Little Manatee River",
-   "reports": 2,
-   "points": [
-    [
-     27.719,
-     -82.449
-    ],
-    [
-     27.6901,
-     -82.44201
-    ]
    ],
-   "towns": [
-    "Ruskin"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Long Branch Creek",
-   "reports": 2,
-   "points": [
-    [
-     30.36361,
-     -81.65114
-    ],
-    [
-     27.9193,
-     -82.71971
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Clearwater"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Marion County FLA296651 Silver Springs",
@@ -2899,7 +888,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Marion River",
@@ -2915,7 +905,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Martin Lake",
@@ -2931,30 +922,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "McCoy's Creek",
-   "reports": 2,
-   "points": [
-    [
-     30.31115,
-     -81.7088
-    ],
-    [
-     30.33261,
-     -81.70024
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "McKay Bay",
@@ -2970,7 +939,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Messalina Bayou",
@@ -2986,86 +956,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Mill Cove",
-   "reports": 2,
-   "points": [
-    [
-     30.36836,
-     -81.58478
-    ],
-    [
-     30.3765,
-     -81.51719
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Miller Creek",
-   "reports": 2,
-   "points": [
-    [
-     30.35318,
-     -81.54267
-    ],
-    [
-     30.30554,
-     -81.6222
-    ]
-   ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Moore's Creek",
-   "reports": 2,
-   "points": [
-    [
-     27.448,
-     -80.366
-    ],
-    [
-     27.45134,
-     -80.32404
-    ]
-   ],
-   "towns": [
-    "Fort Pierce"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Mt. Pleasant Creek",
-   "reports": 2,
-   "points": [
-    [
-     30.33053,
-     -81.6572
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Niagara Waterway",
@@ -3085,7 +977,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Niagra Waterway",
@@ -3101,23 +994,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Open Creek",
-   "reports": 2,
-   "points": [
-    [
-     30.28041,
-     -81.46046
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Palm Bay",
@@ -3137,7 +1015,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "the name of a town (Palm Bay), not of a water: no NHD water of that name in FL"
   },
   {
    "name": "Pebble Creek",
@@ -3157,60 +1036,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Perdido Bay",
-   "reports": 2,
-   "points": [
-    [
-     30.347,
-     -87.408
-    ],
-    [
-     30.39432,
-     -87.37879
-    ]
    ],
-   "towns": [
-    "Pensacola"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Phillippi Creek",
-   "reports": 2,
-   "points": [
-    [
-     27.32122,
-     -82.49959
-    ]
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Pretty Bayou",
-   "reports": 2,
-   "points": [
-    [
-     30.18984,
-     -85.70242
-    ],
-    [
-     30.19699,
-     -85.67997
-    ]
-   ],
-   "towns": [
-    "Panama City"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "the name of a town (Pebble Creek), not of a water: no NHD water of that name in FL"
   },
   {
    "name": "Rattlesnake Creek",
@@ -3226,43 +1053,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Red Bay Branch",
-   "reports": 2,
-   "points": [
-    [
-     30.35792,
-     -81.59585
-    ],
-    [
-     30.33092,
-     -81.58747
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Red Wash Branch",
-   "reports": 2,
-   "points": [
-    [
-     30.77594,
-     -86.57805
-    ]
-   ],
-   "towns": [
-    "Crestview"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Regatta Bay",
@@ -3278,7 +1070,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Rio Verde Canal",
@@ -3291,7 +1084,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Robinson Bayou",
@@ -3307,28 +1101,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Rocky Bayou",
-   "reports": 2,
-   "points": [
-    [
-     30.509,
-     -86.447
-    ],
-    [
-     30.494,
-     -86.431
-    ]
    ],
-   "towns": [
-    "Niceville",
-    "Fort Walton Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Rose Bay",
@@ -3348,86 +1122,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "San Sebastian River",
-   "reports": 2,
-   "points": [
-    [
-     29.87597,
-     -81.31058
-    ]
    ],
-   "towns": [
-    "St. Augustine"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Sawgrass Lake",
-   "reports": 2,
-   "points": [
-    [
-     27.8659,
-     -82.83194
-    ],
-    [
-     27.83399,
-     -82.66846
-    ]
-   ],
-   "towns": [
-    "Seminole",
-    "St. Petersburg"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Seaton Creek",
-   "reports": 2,
-   "points": [
-    [
-     30.52247,
-     -81.65459
-    ],
-    [
-     30.33046,
-     -81.65718
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Silversmith Creek",
-   "reports": 2,
-   "points": [
-    [
-     30.3112,
-     -81.57235
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Skinners Mill Creek",
@@ -3447,7 +1143,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Smacks Bayou",
@@ -3463,7 +1160,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Snapper Cove",
@@ -3483,7 +1181,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "South Bay",
@@ -3499,7 +1198,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "the name of a town (South Bay), not of a water: no NHD water of that name in FL"
   },
   {
    "name": "St Joe Bay",
@@ -3515,42 +1215,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "St John's River",
-   "reports": 2,
-   "points": [
-    [
-     30.19907,
-     -81.62526
-    ],
-    [
-     30.20861,
-     -81.67982
-    ],
-    [
-     30.246,
-     -81.634
-    ],
-    [
-     30.3382,
-     -81.60254
-    ],
-    [
-     30.28078,
-     -81.77724
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "St. Joe Bay",
@@ -3566,7 +1232,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Sunrise Waterway",
@@ -3586,60 +1253,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Sykes Creek",
-   "reports": 2,
-   "points": [
-    [
-     28.36827,
-     -80.67302
-    ]
    ],
-   "towns": [
-    "Merritt Island"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Taylor Creek",
-   "reports": 2,
-   "points": [
-    [
-     27.464,
-     -80.335
-    ],
-    [
-     27.23689,
-     -80.82458
-    ]
-   ],
-   "towns": [
-    "Fort Pierce",
-    "Okeechobee"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Thompson Bayou",
-   "reports": 2,
-   "points": [
-    [
-     30.536,
-     -87.23
-    ]
-   ],
-   "towns": [
-    "Pensacola"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Trieste Waterway",
@@ -3652,7 +1267,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Warners Bayou",
@@ -3668,7 +1284,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "ARV. Canal",
@@ -3684,7 +1301,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Aeration Basin",
@@ -3697,7 +1315,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
   },
   {
    "name": "Air Bay",
@@ -3713,7 +1332,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Airport Rd S Canal",
@@ -3729,7 +1349,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Alico Pass",
@@ -3745,7 +1366,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Allens Creek Water Basin",
@@ -3761,23 +1383,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Anderson Bayou",
-   "reports": 1,
-   "points": [
-    [
-     30.24581,
-     -85.64293
-    ]
    ],
-   "towns": [
-    "Lynn Haven"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
   },
   {
    "name": "Anglers Lake",
@@ -3793,23 +1400,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Arlington River",
-   "reports": 1,
-   "points": [
-    [
-     30.33072,
-     -81.60144
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Arrowhead Lake",
@@ -3825,7 +1417,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Australian Ave. The RC-3B Canal",
@@ -3841,7 +1434,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Avonsdale Waterway",
@@ -3857,7 +1451,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Backwash Recovery Basin",
@@ -3873,55 +1468,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Barnett Mill Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.59231,
-     -87.17092
-    ]
    ],
-   "towns": [
-    "Pace"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Bass Branch",
-   "reports": 1,
-   "points": [
-    [
-     30.5108,
-     -86.47291
-    ]
-   ],
-   "towns": [
-    "Niceville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Bear Branch Creek",
-   "reports": 1,
-   "points": [
-    [
-     27.90965,
-     -81.84646
-    ]
-   ],
-   "towns": [
-    "City Of Bartow"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
   },
   {
    "name": "Bear Creek Lake",
@@ -3938,7 +1486,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Bee Branch",
@@ -3954,22 +1503,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Bell Creek",
-   "reports": 1,
-   "points": [
-    [
-     27.80695,
-     -82.24107
-    ]
    ],
-   "towns": [
-    "Dover"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
+   "reason": "6 NHD waters of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -82.7518,
+     "lat": 28.07188,
+     "reason": "no NHD water of that name within 2 km of the reports' point (28.07188, -82.75180) (the nearest is 125.4 km away)"
+    },
+    {
+     "town": "Palm Harbor",
+     "reason": "no NHD water of that name within 3 km of Palm Harbor (the nearest is 120.5 km away)"
+    }
    ]
   },
   {
@@ -3983,23 +1528,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Bens Lake",
-   "reports": 1,
-   "points": [
-    [
-     30.45342,
-     -86.54304
-    ]
    ],
-   "towns": [
-    "Eglin Afb"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Bent Creek",
@@ -4018,23 +1548,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Big Bayou",
-   "reports": 1,
-   "points": [
-    [
-     27.74237,
-     -82.63549
-    ]
    ],
-   "towns": [
-    "St. Petersburg"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Big Fish Weir Creek",
@@ -4053,7 +1568,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Big Fishweir Creek",
@@ -4072,7 +1588,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Big Fishwier Creek",
@@ -4088,7 +1605,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Bigelow Creek",
@@ -4107,23 +1625,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Bishop Creek",
-   "reports": 1,
-   "points": [
-    [
-     28.017,
-     -82.706
-    ]
    ],
-   "towns": [
-    "Safety Harbor"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Bonita Springs",
@@ -4143,26 +1646,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Brandy Branch Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.31852,
-     -81.9279
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "the name of a town (Bonita Springs), not of a water: no NHD water of that name in FL"
   },
   {
    "name": "Briar Creek",
@@ -4178,23 +1663,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Bridge Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.39432,
-     -87.37879
-    ]
    ],
-   "towns": [
-    "Pensacola"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Brittany Bay",
@@ -4210,39 +1680,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Buffalo Canal",
-   "reports": 1,
-   "points": [
-    [
-     27.57985,
-     -82.47418
-    ]
    ],
-   "towns": [
-    "Palmetto"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Butcher Pen Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.25287,
-     -81.74911
-    ]
-   ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Butchers Pen Creek",
@@ -4258,7 +1697,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Butler Mill Creek",
@@ -4274,23 +1714,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Butterford Waterway",
-   "reports": 1,
-   "points": [
-    [
-     26.92389,
-     -82.225
-    ]
    ],
-   "towns": [
-    "Port Charlotte"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Bypass Canal",
@@ -4306,7 +1731,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "C17 Canal",
@@ -4322,23 +1748,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Cabbage Slough",
-   "reports": 1,
-   "points": [
-    [
-     27.587,
-     -82.528
-    ]
    ],
-   "towns": [
-    "Palmetto"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Canal A-8A",
@@ -4354,7 +1765,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; a description, not a name"
   },
   {
    "name": "Canal C-23",
@@ -4370,7 +1782,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Canary Waterway",
@@ -4386,7 +1799,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Carpenters Creek",
@@ -4402,7 +1816,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Carver Canal",
@@ -4418,23 +1833,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Cedar Creek",
-   "reports": 1,
-   "points": [
-    [
-     27.418,
-     -82.48
-    ]
    ],
-   "towns": [
-    "Bradenton"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Cedar Hammock Drainage Canal",
@@ -4450,23 +1850,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Charlotte Harbor",
-   "reports": 1,
-   "points": [
-    [
-     26.785,
-     -82.025
-    ]
    ],
-   "towns": [
-    "Punta Gorda"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "not a water name"
   },
   {
    "name": "Circle Creek",
@@ -4482,7 +1867,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "City RC-3B Canal",
@@ -4498,7 +1884,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "City's Lake",
@@ -4514,36 +1901,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Clapboard Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.45775,
-     -81.51962
-    ]
    ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Clear Lake",
-   "reports": 1,
-   "points": [
-    [
-     28.532,
-     -81.405
-    ]
-   ],
-   "towns": [
-    "Orlando"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Clearwater Bay",
@@ -4559,23 +1918,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Cocohatchee River",
-   "reports": 1,
-   "points": [
-    [
-     26.26644,
-     -81.78737
-    ]
    ],
-   "towns": [
-    "Naples"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Cotee River",
@@ -4591,7 +1935,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Counties Bay",
@@ -4607,7 +1952,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Courtland Waterway",
@@ -4623,7 +1969,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Cousley Waterway",
@@ -4639,7 +1986,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Cresent Lake",
@@ -4655,7 +2003,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Crevalle Canal",
@@ -4668,7 +2017,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Cross Bayou Creek",
@@ -4684,23 +2034,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Cross Canal",
-   "reports": 1,
-   "points": [
-    [
-     27.90761,
-     -82.70356
-    ]
    ],
-   "towns": [
-    "Clearwater"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Cullen Lake",
@@ -4716,7 +2051,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Cypress Bend Lake",
@@ -4732,7 +2068,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "DeFuniak Springs",
@@ -4748,7 +2085,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "the name of a town (DeFuniak Springs), not of a water: no NHD water of that name in FL"
   },
   {
    "name": "Destin Harbor",
@@ -4764,7 +2102,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Dickson Bay",
@@ -4780,38 +2119,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Duck Slough",
-   "reports": 1,
-   "points": [
-    [
-     28.19966,
-     -82.69437
-    ]
    ],
-   "towns": [
-    "New Port Richey"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Dupont Lake",
-   "reports": 1,
-   "points": [
-    [
-     28.91985,
-     -81.20967
-    ]
-   ],
-   "towns": [
-    "Osteen"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
+   "reason": "1 NHD water of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -84.398,
+     "lat": 30.036,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.03600, -84.39800) (the nearest is 90.0 km away)"
+    },
+    {
+     "town": "Panacea",
+     "reason": "no NHD water of that name within 3 km of Panacea (the nearest is 89.4 km away)"
+    }
    ]
   },
   {
@@ -4828,7 +2147,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "E-4 Canal",
@@ -4844,7 +2164,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Eagle Creek",
@@ -4860,6 +2181,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
+   ],
+   "reason": "1 NHD water of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -81.59126,
+     "lat": 30.27518,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.27518, -81.59126) (the nearest is 460.0 km away)"
+    },
+    {
+     "town": "Jacksonville",
+     "reason": "no NHD water of that name within 3 km of Jacksonville (the nearest is 415.9 km away)"
+    }
    ]
   },
   {
@@ -4876,7 +2209,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "East Basin",
@@ -4892,7 +2226,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
   },
   {
    "name": "East Bay Bayou",
@@ -4908,55 +2243,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Eastern Lake",
-   "reports": 1,
-   "points": [
-    [
-     30.31178,
-     -86.08784
-    ]
    ],
-   "towns": [
-    "Santa Rosa Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Egypt Lake",
-   "reports": 1,
-   "points": [
-    [
-     28.01364,
-     -82.49249
-    ]
-   ],
-   "towns": [
-    "Tampa"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "El Rio Canal",
-   "reports": 1,
-   "points": [
-    [
-     26.445,
-     -80.096
-    ]
-   ],
-   "towns": [
-    "Delray Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Elkcam Waterway",
@@ -4972,7 +2260,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Elvenmile Creek",
@@ -4988,7 +2277,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Emerald Lake",
@@ -5005,39 +2295,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Engineers Lake",
-   "reports": 1,
-   "points": [
-    [
-     28.08096,
-     -81.63004
-    ]
    ],
-   "towns": [
-    "Haines City"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "English Creek",
-   "reports": 1,
-   "points": [
-    [
-     28.01883,
-     -82.07332
-    ]
-   ],
-   "towns": [
-    "Plant City"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Esquire Lake",
@@ -5053,7 +2312,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Factory Bay",
@@ -5069,7 +2329,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Fanning Bayou",
@@ -5085,7 +2346,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Fenhalloway River",
@@ -5101,23 +2363,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Fenholloway River",
-   "reports": 1,
-   "points": [
-    [
-     30.063,
-     -83.529
-    ]
    ],
-   "towns": [
-    "Perry"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Fish Trap Bay",
@@ -5130,7 +2377,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Fish Weir Creek",
@@ -5146,7 +2394,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Fishweir Creek",
@@ -5162,26 +2411,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Flora Branch Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.33055,
-     -81.65734
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Flow Equalization Basin",
@@ -5197,23 +2428,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Forked Creek",
-   "reports": 1,
-   "points": [
-    [
-     26.99202,
-     -82.37667
-    ]
    ],
-   "towns": [
-    "Englewood"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
   },
   {
    "name": "Fox Branch",
@@ -5229,6 +2445,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
+   ],
+   "reason": "3 NHD waters of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -81.975,
+     "lat": 28.13,
+     "reason": "no NHD water of that name within 2 km of the reports' point (28.13000, -81.97500) (the nearest is 356.2 km away)"
+    },
+    {
+     "town": "Lakeland",
+     "reason": "no NHD water of that name within 3 km of Lakeland (the nearest is 355.7 km away)"
+    }
    ]
   },
   {
@@ -5242,23 +2470,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Gasparilla Sound",
-   "reports": 1,
-   "points": [
-    [
-     26.83459,
-     -82.26228
-    ]
    ],
-   "towns": [
-    "Port Charlotte"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
   },
   {
    "name": "Gate Waterway",
@@ -5275,23 +2488,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Gates Creek",
-   "reports": 1,
-   "points": [
-    [
-     27.485,
-     -82.427
-    ]
    ],
-   "towns": [
-    "Bradenton"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Gator Bay Slough",
@@ -5304,23 +2502,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Gee Creek",
-   "reports": 1,
-   "points": [
-    [
-     28.6952,
-     -81.30483
-    ]
    ],
-   "towns": [
-    "Winter Springs"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "George English Lake",
@@ -5336,7 +2519,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Glenn Creek",
@@ -5352,50 +2536,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Goodbys Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.2025,
-     -81.61792
-    ],
-    [
-     30.21818,
-     -81.59183
-    ],
-    [
-     30.2282,
-     -81.60933
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Gottfried Creek",
-   "reports": 1,
-   "points": [
-    [
-     26.94706,
-     -82.34658
-    ]
-   ],
-   "towns": [
-    "Englewood"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Graveyard Creek",
@@ -5411,19 +2553,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Greenfield Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.32968,
-     -81.45694
-    ]
    ],
-   "places_from": [
-    "fl-dep-pnp"
+   "reason": "2 NHD waters of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -87.169,
+     "lat": 30.512,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.51200, -87.16900) (the nearest is 124.2 km away)"
+    },
+    {
+     "town": "Pensacola",
+     "reason": "no NHD water of that name within 3 km of Pensacola (the nearest is 120.2 km away)"
+    }
    ]
   },
   {
@@ -5440,7 +2581,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Gum Branch",
@@ -5456,6 +2598,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
+   ],
+   "reason": "2 NHD waters of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -81.54677,
+     "lat": 30.24139,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.24139, -81.54677) (the nearest is 43.9 km away)"
+    },
+    {
+     "town": "Jacksonville",
+     "reason": "no NHD water of that name within 3 km of Jacksonville (the nearest is 4.3 km away)"
+    }
    ]
   },
   {
@@ -5472,7 +2626,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Hamilton Creek",
@@ -5488,7 +2643,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Harbor Waterway",
@@ -5505,7 +2661,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Hatchet Creek",
@@ -5521,6 +2678,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
+   ],
+   "reason": "1 NHD water of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -82.43672,
+     "lat": 27.1,
+     "reason": "no NHD water of that name within 2 km of the reports' point (27.10000, -82.43672) (the nearest is 286.7 km away)"
+    },
+    {
+     "town": "Venice",
+     "reason": "no NHD water of that name within 3 km of Venice (the nearest is 279.0 km away)"
+    }
    ]
   },
   {
@@ -5537,7 +2706,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Heritage Springs",
@@ -5553,7 +2723,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Hog Creek",
@@ -5569,6 +2740,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
+   ],
+   "reason": "4 NHD waters of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -82.53747,
+     "lat": 27.34774,
+     "reason": "no NHD water of that name within 2 km of the reports' point (27.34774, -82.53747) (the nearest is 221.3 km away)"
+    },
+    {
+     "town": "Sarasota",
+     "reason": "no NHD water of that name within 3 km of Sarasota (the nearest is 215.5 km away)"
+    }
    ]
   },
   {
@@ -5592,39 +2775,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Hopkins Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.31496,
-     -81.41016
-    ]
    ],
-   "towns": [
-    "Neptune Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Horse Creek",
-   "reports": 1,
-   "points": [
-    [
-     28.25073,
-     -81.63065
-    ]
-   ],
-   "towns": [
-    "Davenport"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Hudson Bayou",
@@ -5640,7 +2792,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "ICW",
@@ -5656,22 +2809,10 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Indian Bayou",
-   "reports": 1,
-   "points": [
-    [
-     30.52641,
-     -87.08718
-    ]
    ],
-   "towns": [
-    "Pace"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Intracoastal Waterway"
    ]
   },
   {
@@ -5688,7 +2829,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Indigo Branch Creek",
@@ -5704,6 +2846,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
+   ],
+   "reason": "1 NHD water of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -81.75605,
+     "lat": 30.13396,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.13396, -81.75605) (the nearest is 441.3 km away)"
+    },
+    {
+     "town": "Middleburg",
+     "reason": "no NHD water of that name within 3 km of Middleburg (the nearest is 426.0 km away)"
+    }
    ]
   },
   {
@@ -5720,23 +2874,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Joe's Bayou",
-   "reports": 1,
-   "points": [
-    [
-     30.41203,
-     -86.49354
-    ]
    ],
-   "towns": [
-    "Destin"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Johns Pass",
@@ -5752,47 +2891,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Jone's Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.32834,
-     -81.54006
-    ],
-    [
-     26.934,
-     -80.109
-    ],
-    [
-     30.34716,
-     -81.5422
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Jupiter",
-    "Fruit Cove",
-    "Yulee"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Julington Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.1899,
-     -81.55811
-    ]
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Jupiter Bay",
@@ -5808,7 +2908,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Kentucky Branch Creek",
@@ -5827,7 +2928,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Killer Canal",
@@ -5843,39 +2945,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "King Branch",
-   "reports": 1,
-   "points": [
-    [
-     30.7148,
-     -86.54385
-    ]
    ],
-   "towns": [
-    "Crestview"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Kings Bay",
-   "reports": 1,
-   "points": [
-    [
-     28.89893,
-     -82.59681
-    ]
-   ],
-   "towns": [
-    "Crystal River"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "L-30 Canal",
@@ -5891,23 +2962,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Lafayette Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.49301,
-     -86.12477
-    ]
    ],
-   "towns": [
-    "Freeport"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Bonny. The City's Lake",
@@ -5923,7 +2979,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Haines. Lake",
@@ -5939,7 +2996,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Lawne. A Lake",
@@ -5956,7 +3014,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Lexington. Lake",
@@ -5972,7 +3031,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Monroe. Lake",
@@ -5988,7 +3048,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Parker Canal",
@@ -6004,7 +3065,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Parker. Lake",
@@ -6020,7 +3082,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Parker. The City's Lake",
@@ -6036,7 +3099,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Rabama. A Lake",
@@ -6052,7 +3116,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Seminole Bypass Canal",
@@ -6068,7 +3133,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lake Worth Lagoon",
@@ -6084,23 +3150,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Lawne Lake",
-   "reports": 1,
-   "points": [
-    [
-     28.569,
-     -81.442
-    ]
    ],
-   "towns": [
-    "Apopka"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Legend Creek",
@@ -6116,23 +3167,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Lemon Bay",
-   "reports": 1,
-   "points": [
-    [
-     26.92447,
-     -82.3592
-    ]
    ],
-   "towns": [
-    "Placida"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lion Heart Waterway",
@@ -6148,7 +3184,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lipsey Lake",
@@ -6164,58 +3201,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Little Bullfrog Creek",
-   "reports": 1,
-   "points": [
-    [
-     27.8265,
-     -82.33031
-    ]
    ],
-   "towns": [
-    "Ruskin"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Little Cedar Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.483,
-     -81.64748
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Little Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.95279,
-     -85.52636
-    ]
-   ],
-   "towns": [
-    "Graceville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Little Econ River",
@@ -6231,7 +3218,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Little Harbor",
@@ -6247,23 +3235,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Little Hatchet Creek",
-   "reports": 1,
-   "points": [
-    [
-     29.67399,
-     -82.30263
-    ]
    ],
-   "towns": [
-    "Gainesville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Little Hickory Bay",
@@ -6279,7 +3252,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Little Ortega River",
@@ -6298,23 +3272,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Little Sixmile Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.35216,
-     -81.74334
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Longboat Inlet",
@@ -6327,60 +3286,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Longbranch Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.36361,
-     -81.65114
-    ],
-    [
-     27.9193,
-     -82.71971
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Clearwater"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Lost Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.16253,
-     -84.38067
-    ]
-   ],
-   "towns": [
-    "Crawfordville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Lucy Branch Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.15109,
-     -81.75252
-    ]
-   ],
-   "towns": [
-    "Orange Park"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Lullwater Lake",
@@ -6396,7 +3303,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "M-1 Canal",
@@ -6412,7 +3320,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Marjorie Park Marina Basin",
@@ -6428,46 +3337,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Mc Coys Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.31115,
-     -81.7088
-    ],
-    [
-     30.33261,
-     -81.70024
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "McCoy Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.3365,
-     -81.70319
-    ]
-   ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
   },
   {
    "name": "Meginnis Arm Run",
@@ -6483,23 +3354,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Miami Canal",
-   "reports": 1,
-   "points": [
-    [
-     26.69832,
-     -80.80727
-    ]
    ],
-   "towns": [
-    "Lake Harbor"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Middle River Canal",
@@ -6515,7 +3371,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Middle River. Waterway",
@@ -6531,7 +3388,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Millers Creek",
@@ -6550,7 +3408,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Millhopper Creek",
@@ -6566,7 +3425,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Mills Bayou",
@@ -6582,7 +3442,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Monterrey Waterway",
@@ -6599,39 +3460,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Mulatto Bayou",
-   "reports": 1,
-   "points": [
-    [
-     30.561,
-     -87.117
-    ]
    ],
-   "towns": [
-    "Pace"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "N Fork of Middle River",
-   "reports": 1,
-   "points": [
-    [
-     26.155,
-     -80.14
-    ]
-   ],
-   "towns": [
-    "Wilton Manors"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Narrows Waterway",
@@ -6647,7 +3477,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Nassau Amelia River",
@@ -6663,39 +3494,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "New Rose Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.26207,
-     -81.64612
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Newcastle Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.3657,
-     -81.57971
-    ]
-   ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Nice Canal",
@@ -6708,23 +3508,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "North Bay",
-   "reports": 1,
-   "points": [
-    [
-     30.32425,
-     -85.65642
-    ]
    ],
-   "towns": [
-    "South Port"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "North Bay Hills Safety Harbor",
@@ -6740,23 +3525,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "North Palm Beach Waterway",
-   "reports": 1,
-   "points": [
-    [
-     26.8136,
-     -80.06961
-    ]
    ],
-   "towns": [
-    "North Palm Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Nova Canal",
@@ -6772,7 +3542,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Ocean Breeze Waterway",
@@ -6788,23 +3559,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Ochlockonee River",
-   "reports": 1,
-   "points": [
-    [
-     30.61467,
-     -84.41422
-    ]
    ],
-   "towns": [
-    "Havana"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "the open ocean (no NHD record)"
   },
   {
    "name": "Orchid Canal",
@@ -6817,7 +3573,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Orchid Cove",
@@ -6833,7 +3590,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Palm Harbor",
@@ -6849,7 +3607,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "the name of a town (Palm Harbor), not of a water: no NHD water of that name in FL"
   },
   {
    "name": "Palm Lake",
@@ -6865,7 +3624,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Park Springs",
@@ -6881,7 +3641,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Parker Canal",
@@ -6897,7 +3658,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Pelican Lake",
@@ -6913,7 +3675,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Pinellas Park Water Management Canal",
@@ -6929,7 +3692,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Plantation Bay",
@@ -6945,7 +3709,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Plummers Creek",
@@ -6961,23 +3726,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Poley Creek",
-   "reports": 1,
-   "points": [
-    [
-     28.02824,
-     -81.9692
-    ]
    ],
-   "towns": [
-    "Lakeland"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Poste Bayou",
@@ -6993,7 +3743,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Posted Bayou",
@@ -7009,7 +3760,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Red Bug Slough Lake",
@@ -7022,7 +3774,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Rio Weilding Canal",
@@ -7035,7 +3788,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "River Run",
@@ -7051,39 +3805,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Riviera Bay",
-   "reports": 1,
-   "points": [
-    [
-     27.85208,
-     -82.63363
-    ]
    ],
-   "towns": [
-    "St. Petersburg"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Robinson Creek",
-   "reports": 1,
-   "points": [
-    [
-     29.92023,
-     -81.3201
-    ]
-   ],
-   "towns": [
-    "St. Augustine"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Rock Creek Waterway",
@@ -7099,7 +3822,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Rock Spring",
@@ -7116,7 +3840,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Roosevelt Creek",
@@ -7132,7 +3857,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Rosewood Branch Creek",
@@ -7148,7 +3874,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Royal Park Creek",
@@ -7164,42 +3891,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Rushing Branch Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.33051,
-     -81.65729
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "S Fork of Middle River",
-   "reports": 1,
-   "points": [
-    [
-     26.15916,
-     -80.14628
-    ]
-   ],
-   "towns": [
-    "Wilton Manors"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "SFWMD C-16 Canal",
@@ -7212,39 +3905,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Saddle Creek",
-   "reports": 1,
-   "points": [
-    [
-     28.09491,
-     -81.95205
-    ]
    ],
-   "towns": [
-    "Lakeland"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Sand Branch Creek",
-   "reports": 1,
-   "points": [
-    [
-     27.488,
-     -82.359
-    ]
-   ],
-   "towns": [
-    "Bradenton"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Second Puncheon Branch",
@@ -7260,23 +3922,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Secret Lake",
-   "reports": 1,
-   "points": [
-    [
-     28.6768,
-     -81.32779
-    ]
    ],
-   "towns": [
-    "Casselberry"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Seminole Canal",
@@ -7289,7 +3936,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Seven Springs",
@@ -7305,7 +3953,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Seybold Waterway",
@@ -7321,7 +3970,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Sherman Canal",
@@ -7337,55 +3987,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Sherman Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.36406,
-     -81.40988
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Sherman's Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.37061,
-     -81.41083
-    ]
-   ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Shoal River",
-   "reports": 1,
-   "points": [
-    [
-     30.7148,
-     -86.54385
-    ]
-   ],
-   "towns": [
-    "Crestview"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Silver Springs",
@@ -7401,26 +4004,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Six Mile Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.37296,
-     -81.83404
-    ]
    ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "the name of a town (Silver Springs), not of a water: no NHD water of that name in FL"
   },
   {
    "name": "Smith's Creek",
@@ -7436,19 +4021,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "South Creek",
-   "reports": 1,
-   "points": [
-    [
-     27.20778,
-     -82.4562
-    ]
    ],
-   "places_from": [
-    "fl-dep-pnp"
+   "reason": "3 NHD waters of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -82.41378,
+     "lat": 29.68864,
+     "reason": "no NHD water of that name within 2 km of the reports' point (29.68864, -82.41378) (the nearest is 75.2 km away)"
+    },
+    {
+     "town": "Gainesville",
+     "reason": "no NHD water of that name within 3 km of Gainesville (the nearest is 66.6 km away)"
+    }
    ]
   },
   {
@@ -7466,7 +4050,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "South Lake",
@@ -7482,22 +4067,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "South Prong Double Branch",
-   "reports": 1,
-   "points": [
-    [
-     30.18498,
-     -81.8383
-    ]
    ],
-   "towns": [
-    "Orange Park"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
+   "reason": "3 NHD waters of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -80.06889,
+     "lat": 26.80663,
+     "reason": "no NHD water of that name within 2 km of the reports' point (26.80663, -80.06889) (the nearest is 88.2 km away)"
+    },
+    {
+     "town": "Lake Park",
+     "reason": "no NHD water of that name within 3 km of Lake Park (the nearest is 86.7 km away)"
+    }
    ]
   },
   {
@@ -7511,20 +4092,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Spartman Branch Creek",
-   "reports": 1,
-   "points": [
-    [
-     27.9992,
-     -82.14974
-    ]
    ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Springstead Creek",
@@ -7540,91 +4109,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "St Lucie River",
-   "reports": 1,
-   "points": [
-    [
-     27.2493,
-     -80.318
-    ],
-    [
-     27.27584,
-     -80.3168
-    ]
    ],
-   "towns": [
-    "Port St Lucie",
-    "Port St. Lucie"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "St. Andrew's Bay",
-   "reports": 1,
-   "points": [
-    [
-     30.15715,
-     -85.66404
-    ],
-    [
-     30.17928,
-     -85.72649
-    ],
-    [
-     30.20294,
-     -85.70606
-    ],
-    [
-     30.14291,
-     -85.64833
-    ]
-   ],
-   "towns": [
-    "Panama City"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "St. John's River",
-   "reports": 1,
-   "points": [
-    [
-     30.19907,
-     -81.62526
-    ],
-    [
-     30.20861,
-     -81.67982
-    ],
-    [
-     30.246,
-     -81.634
-    ],
-    [
-     30.3382,
-     -81.60254
-    ],
-    [
-     30.28078,
-     -81.77724
-    ]
-   ],
-   "towns": [
-    "Jacksonville",
-    "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Stahl Canal",
@@ -7640,7 +4126,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Starkey Road Basin",
@@ -7656,7 +4143,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
   },
   {
    "name": "Stephenson Creek",
@@ -7672,7 +4160,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Stranahan Lake",
@@ -7685,39 +4174,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Stranahan River",
-   "reports": 1,
-   "points": [
-    [
-     26.1,
-     -80.112
-    ]
    ],
-   "towns": [
-    "Fort Lauderdale"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Sumner Lake",
-   "reports": 1,
-   "points": [
-    [
-     28.36555,
-     -82.18407
-    ]
-   ],
-   "towns": [
-    "Dade City"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Sunnyland Creek",
@@ -7733,7 +4191,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Sunset Harbor",
@@ -7749,20 +4208,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Sunset Lake",
-   "reports": 1,
-   "points": [
-    [
-     26.11681,
-     -80.11386
-    ]
    ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Tampa Bay Bypass Canal",
@@ -7778,7 +4225,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Tanyard Creek",
@@ -7794,7 +4242,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Tarpon Bay Canal",
@@ -7807,7 +4256,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Taylor Creek. Taylor Creek",
@@ -7823,23 +4273,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Tiger Pond Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.35942,
-     -81.49008
-    ]
    ],
-   "towns": [
-    "Jacksonville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Tom's Bayou",
@@ -7855,7 +4290,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Toms Bayou",
@@ -7871,55 +4307,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Trammel Creek",
-   "reports": 1,
-   "points": [
-    [
-     30.75858,
-     -86.5763
-    ]
    ],
-   "towns": [
-    "Crestview"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Trout Bayou",
-   "reports": 1,
-   "points": [
-    [
-     30.514,
-     -87.086
-    ]
-   ],
-   "towns": [
-    "Pace"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Trout Lake",
-   "reports": 1,
-   "points": [
-    [
-     29.63284,
-     -82.27562
-    ]
-   ],
-   "towns": [
-    "Gainesville"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Upper Tampa Bay",
@@ -7935,7 +4324,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Village Springs",
@@ -7951,7 +4341,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "W Lake",
@@ -7967,22 +4358,18 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Ward Lake",
-   "reports": 1,
-   "points": [
-    [
-     27.418,
-     -82.48
-    ]
    ],
-   "towns": [
-    "Bradenton"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
+   "reason": "4 NHD waters of that name in FL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -81.94487,
+     "lat": 28.06977,
+     "reason": "no NHD water of that name within 2 km of the reports' point (28.06977, -81.94487) (the nearest is 91.3 km away)"
+    },
+    {
+     "town": "Lakeland",
+     "reason": "no NHD water of that name within 3 km of Lakeland (the nearest is 77.5 km away)"
+    }
    ]
   },
   {
@@ -7999,7 +4386,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Warners West Bayou",
@@ -8015,7 +4403,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Waterview Lake",
@@ -8031,7 +4420,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Weekley Bayou",
@@ -8047,7 +4437,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Wekiva Canal",
@@ -8064,7 +4455,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "West River",
@@ -8080,23 +4472,8 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
-  },
-  {
-   "name": "Western Lake",
-   "reports": 1,
-   "points": [
-    [
-     30.31658,
-     -86.12008
-    ]
    ],
-   "towns": [
-    "Santa Rosa Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Woodlawn Canal",
@@ -8112,7 +4489,1685 @@
    ],
    "places_from": [
     "fl-dep-pnp"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Hillsborough River",
+   "reports": 46,
+   "slugs": [
+    "hillsborough-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Watson Bayou",
+   "reports": 32,
+   "slugs": [
+    "watson-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Pottsburg Creek",
+   "reports": 26,
+   "slugs": [
+    "pottsburg-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "McKay Creek",
+   "reports": 22,
+   "slugs": [
+    "mckay-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Ortega River",
+   "reports": 22,
+   "slugs": [
+    "ortega-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "New River",
+   "reports": 16,
+   "slugs": [
+    "new-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Escambia Bay",
+   "reports": 15,
+   "slugs": [
+    "escambia-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Boca Ciega Bay",
+   "reports": 14,
+   "slugs": [
+    "boca-ciega-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Hillsborough Bay",
+   "reports": 14,
+   "slugs": [
+    "hillsborough-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Trout River",
+   "reports": 14,
+   "slugs": [
+    "trout-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Tampa Bay",
+   "reports": 12,
+   "slugs": [
+    "tampa-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Strawberry Creek",
+   "reports": 11,
+   "slugs": [
+    "strawberry-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Ribault River",
+   "reports": 10,
+   "slugs": [
+    "ribault-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Clearwater Harbor",
+   "reports": 9,
+   "slugs": [
+    "clearwater-harbor-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Little Pottsburg Creek",
+   "reports": 9,
+   "slugs": [
+    "little-pottsburg-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Long Bayou",
+   "reports": 9,
+   "slugs": [
+    "long-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Christopher Creek",
+   "reports": 8,
+   "slugs": [
+    "christopher-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Jones Creek",
+   "reports": 8,
+   "slugs": [
+    "jones-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Middle River",
+   "reports": 8,
+   "slugs": [
+    "middle-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Callaway Bayou",
+   "reports": 7,
+   "slugs": [
+    "callaway-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Choctawhatchee Bay",
+   "reports": 7,
+   "slugs": [
+    "choctawhatchee-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Cinco Bayou",
+   "reports": 7,
+   "slugs": [
+    "cinco-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Goodby's Creek",
+   "reports": 7,
+   "slugs": [
+    "goodbys-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Hogtown Creek",
+   "reports": 7,
+   "slugs": [
+    "hogtown-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "McGirts Creek",
+   "reports": 7,
+   "slugs": [
+    "mcgirts-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Santa Rosa Sound",
+   "reports": 7,
+   "slugs": [
+    "santa-rosa-sound-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Church Creek",
+   "reports": 6,
+   "slugs": [
+    "church-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Loxahatchee River",
+   "reports": 6,
+   "slugs": [
+    "loxahatchee-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "McCoys Creek",
+   "reports": 6,
+   "slugs": [
+    "mccoys-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "North Fork New River",
+   "reports": 6,
+   "slugs": [
+    "north-fork-new-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Salt Creek",
+   "reports": 6,
+   "slugs": [
+    "salt-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Shingle Creek",
+   "reports": 6,
+   "slugs": [
+    "shingle-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Turkey Lake",
+   "reports": 6,
+   "slugs": [
+    "turkey-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Wills Branch Creek",
+   "reports": 6,
+   "slugs": [
+    "wills-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Cedar River",
+   "reports": 5,
+   "slugs": [
+    "cedar-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Graveyard Branch",
+   "reports": 5,
+   "slugs": [
+    "graveyard-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Pompano Canal",
+   "reports": 5,
+   "slugs": [
+    "pompano-canal-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Posten Bayou",
+   "reports": 5,
+   "slugs": [
+    "posten-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Safety Harbor",
+   "reports": 5,
+   "slugs": [
+    "safety-harbor-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Taylor Lake",
+   "reports": 5,
+   "slugs": [
+    "taylor-lake-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Wills Branch",
+   "reports": 5,
+   "slugs": [
+    "wills-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Bear Creek",
+   "reports": 4,
+   "slugs": [
+    "bear-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Braden River",
+   "reports": 4,
+   "slugs": [
+    "braden-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Cross Bayou Canal",
+   "reports": 4,
+   "slugs": [
+    "cross-bayou-canal-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Ginhouse Creek",
+   "reports": 4,
+   "slugs": [
+    "ginhouse-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Hogpen Creek",
+   "reports": 4,
+   "slugs": [
+    "hogpen-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Little Fishweir Creek",
+   "reports": 4,
+   "slugs": [
+    "little-fishweir-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Matanzas River",
+   "reports": 4,
+   "slugs": [
+    "matanzas-river-saint-augustine-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Moncrief Creek",
+   "reports": 4,
+   "slugs": [
+    "moncrief-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Palma Sola Bay",
+   "reports": 4,
+   "slugs": [
+    "palma-sola-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "South Fork of Middle River",
+   "reports": 4,
+   "slugs": [
+    "south-fork-middle-river-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "St. Lucie River",
+   "reports": 4,
+   "slugs": [
+    "saint-lucie-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Sweetwater Creek",
+   "reports": 4,
+   "slugs": [
+    "sweetwater-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Williamson Creek",
+   "reports": 4,
+   "slugs": [
+    "williamson-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Allen Creek",
+   "reports": 3,
+   "slugs": [
+    "allen-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Allen's Creek",
+   "reports": 3,
+   "slugs": [
+    "allen-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Bullfrog Creek",
+   "reports": 3,
+   "slugs": [
+    "bullfrog-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Cormorant Branch",
+   "reports": 3,
+   "slugs": [
+    "cormorant-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Cow Branch Creek",
+   "reports": 3,
+   "slugs": [
+    "cow-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Craig Creek",
+   "reports": 3,
+   "slugs": [
+    "craig-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Crystal River",
+   "reports": 3,
+   "slugs": [
+    "crystal-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Cypress Creek Canal",
+   "reports": 3,
+   "slugs": [
+    "cypress-creek-canal-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Double Branch Creek",
+   "reports": 3,
+   "slugs": [
+    "double-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Grand Canal",
+   "reports": 3,
+   "slugs": [
+    "grand-canal-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Little Trout River",
+   "reports": 3,
+   "slugs": [
+    "little-trout-river-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Locklin Lake",
+   "reports": 3,
+   "slugs": [
+    "locklin-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Munson Slough",
+   "reports": 3,
+   "slugs": [
+    "munson-slough-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "North Fork of Middle River",
+   "reports": 3,
+   "slugs": [
+    "north-fork-middle-river-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Oldfield Creek",
+   "reports": 3,
+   "slugs": [
+    "oldfield-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Pablo Creek",
+   "reports": 3,
+   "slugs": [
+    "pablo-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Quarry Creek",
+   "reports": 3,
+   "slugs": [
+    "quarry-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Rice Creek",
+   "reports": 3,
+   "slugs": [
+    "rice-creek-fl",
+    "rice-creek-riverview-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Tarpon River",
+   "reports": 3,
+   "slugs": [
+    "tarpon-river-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Wares Creek",
+   "reports": 3,
+   "slugs": [
+    "wares-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Withlacoochee River",
+   "reports": 3,
+   "slugs": [
+    "withlacoochee-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Allens Creek",
+   "reports": 2,
+   "slugs": [
+    "allen-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Bennett Branch",
+   "reports": 2,
+   "slugs": [
+    "bennett-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Boggy Bayou",
+   "reports": 2,
+   "slugs": [
+    "boggy-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Bull Frog Creek",
+   "reports": 2,
+   "slugs": [
+    "bullfrog-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Carpenter Creek",
+   "reports": 2,
+   "slugs": [
+    "carpenter-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Clam Bayou",
+   "reports": 2,
+   "slugs": [
+    "clam-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Collins Canal",
+   "reports": 2,
+   "slugs": [
+    "collins-canal-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Corklan Branch",
+   "reports": 2,
+   "slugs": [
+    "corklan-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Delaney Creek",
+   "reports": 2,
+   "slugs": [
+    "delaney-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Dream Lake",
+   "reports": 2,
+   "slugs": [
+    "dream-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Eau Gallie River",
+   "reports": 2,
+   "slugs": [
+    "eau-gallie-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Eight Mile Creek",
+   "reports": 2,
+   "slugs": [
+    "eightmile-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Fourmile Creek",
+   "reports": 2,
+   "slugs": [
+    "fourmile-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Frog Creek",
+   "reports": 2,
+   "slugs": [
+    "frog-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Garnier Bayou",
+   "reports": 2,
+   "slugs": [
+    "garnier-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Grass Lake",
+   "reports": 2,
+   "slugs": [
+    "grass-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Hatchett Creek",
+   "reports": 2,
+   "slugs": [
+    "hatchett-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Hospital Creek",
+   "reports": 2,
+   "slugs": [
+    "hospital-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Juniper Creek",
+   "reports": 2,
+   "slugs": [
+    "juniper-creek-crestview-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Little Manatee River",
+   "reports": 2,
+   "slugs": [
+    "little-manatee-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Long Branch Creek",
+   "reports": 2,
+   "slugs": [
+    "long-branch-fl",
+    "long-branch-largo-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "McCoy's Creek",
+   "reports": 2,
+   "slugs": [
+    "mccoys-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Mill Cove",
+   "reports": 2,
+   "slugs": [
+    "mill-cove-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Miller Creek",
+   "reports": 2,
+   "slugs": [
+    "miller-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Moore's Creek",
+   "reports": 2,
+   "slugs": [
+    "moore-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Mt. Pleasant Creek",
+   "reports": 2,
+   "slugs": [
+    "mount-pleasant-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Open Creek",
+   "reports": 2,
+   "slugs": [
+    "open-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Perdido Bay",
+   "reports": 2,
+   "slugs": [
+    "perdido-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Phillippi Creek",
+   "reports": 2,
+   "slugs": [
+    "phillippi-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Pretty Bayou",
+   "reports": 2,
+   "slugs": [
+    "pretty-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Red Bay Branch",
+   "reports": 2,
+   "slugs": [
+    "red-bay-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Red Wash Branch",
+   "reports": 2,
+   "slugs": [
+    "red-wash-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Rocky Bayou",
+   "reports": 2,
+   "slugs": [
+    "rocky-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "San Sebastian River",
+   "reports": 2,
+   "slugs": [
+    "san-sebastian-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Sawgrass Lake",
+   "reports": 2,
+   "slugs": [
+    "sawgrass-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Seaton Creek",
+   "reports": 2,
+   "slugs": [
+    "seaton-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Silversmith Creek",
+   "reports": 2,
+   "slugs": [
+    "silversmith-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "St John's River",
+   "reports": 2,
+   "slugs": [
+    "saint-johns-river-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Sykes Creek",
+   "reports": 2,
+   "slugs": [
+    "sykes-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Taylor Creek",
+   "reports": 2,
+   "slugs": [
+    "taylor-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Thompson Bayou",
+   "reports": 2,
+   "slugs": [
+    "thompson-bayou-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Anderson Bayou",
+   "reports": 1,
+   "slugs": [
+    "anderson-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Arlington River",
+   "reports": 1,
+   "slugs": [
+    "arlington-river-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Barnett Mill Creek",
+   "reports": 1,
+   "slugs": [
+    "barnett-mill-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Bass Branch",
+   "reports": 1,
+   "slugs": [
+    "bass-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Bear Branch Creek",
+   "reports": 1,
+   "slugs": [
+    "bear-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Bell Creek",
+   "reports": 1,
+   "slugs": [
+    "bell-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Bens Lake",
+   "reports": 1,
+   "slugs": [
+    "bens-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Big Bayou",
+   "reports": 1,
+   "slugs": [
+    "big-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Bishop Creek",
+   "reports": 1,
+   "slugs": [
+    "bishop-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Brandy Branch Creek",
+   "reports": 1,
+   "slugs": [
+    "brandy-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Bridge Creek",
+   "reports": 1,
+   "slugs": [
+    "bridge-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Buffalo Canal",
+   "reports": 1,
+   "slugs": [
+    "buffalo-canal-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Butcher Pen Creek",
+   "reports": 1,
+   "slugs": [
+    "butcher-pen-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Butterford Waterway",
+   "reports": 1,
+   "slugs": [
+    "butterford-waterway-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Cabbage Slough",
+   "reports": 1,
+   "slugs": [
+    "cabbage-slough-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Cedar Creek",
+   "reports": 1,
+   "slugs": [
+    "cedar-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Charlotte Harbor",
+   "reports": 1,
+   "slugs": [
+    "charlotte-harbor-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Clapboard Creek",
+   "reports": 1,
+   "slugs": [
+    "clapboard-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Clear Lake",
+   "reports": 1,
+   "slugs": [
+    "clear-lake-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Cocohatchee River",
+   "reports": 1,
+   "slugs": [
+    "cocohatchee-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Cross Canal",
+   "reports": 1,
+   "slugs": [
+    "cross-canal-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Duck Slough",
+   "reports": 1,
+   "slugs": [
+    "duck-slough-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Dupont Lake",
+   "reports": 1,
+   "slugs": [
+    "dupont-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Eastern Lake",
+   "reports": 1,
+   "slugs": [
+    "eastern-lake-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Egypt Lake",
+   "reports": 1,
+   "slugs": [
+    "egypt-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "El Rio Canal",
+   "reports": 1,
+   "slugs": [
+    "el-rio-canal-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Engineers Lake",
+   "reports": 1,
+   "slugs": [
+    "engineers-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "English Creek",
+   "reports": 1,
+   "slugs": [
+    "english-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Fenholloway River",
+   "reports": 1,
+   "slugs": [
+    "fenholloway-river-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Flora Branch Creek",
+   "reports": 1,
+   "slugs": [
+    "flora-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Forked Creek",
+   "reports": 1,
+   "slugs": [
+    "forked-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Gasparilla Sound",
+   "reports": 1,
+   "slugs": [
+    "gasparilla-sound-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Gates Creek",
+   "reports": 1,
+   "slugs": [
+    "gates-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Gee Creek",
+   "reports": 1,
+   "slugs": [
+    "gee-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Goodbys Creek",
+   "reports": 1,
+   "slugs": [
+    "goodbys-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Gottfried Creek",
+   "reports": 1,
+   "slugs": [
+    "gottfried-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Greenfield Creek",
+   "reports": 1,
+   "slugs": [
+    "greenfield-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Hopkins Creek",
+   "reports": 1,
+   "slugs": [
+    "hopkins-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Horse Creek",
+   "reports": 1,
+   "slugs": [
+    "horse-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Indian Bayou",
+   "reports": 1,
+   "slugs": [
+    "indian-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Joe's Bayou",
+   "reports": 1,
+   "slugs": [
+    "joes-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Jone's Creek",
+   "reports": 1,
+   "slugs": [
+    "jones-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Julington Creek",
+   "reports": 1,
+   "slugs": [
+    "julington-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "King Branch",
+   "reports": 1,
+   "slugs": [
+    "king-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Kings Bay",
+   "reports": 1,
+   "slugs": [
+    "kings-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Lafayette Creek",
+   "reports": 1,
+   "slugs": [
+    "lafayette-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Lawne Lake",
+   "reports": 1,
+   "slugs": [
+    "lawne-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Lemon Bay",
+   "reports": 1,
+   "slugs": [
+    "lemon-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Little Bullfrog Creek",
+   "reports": 1,
+   "slugs": [
+    "little-bullfrog-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Little Cedar Creek",
+   "reports": 1,
+   "slugs": [
+    "little-cedar-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Little Creek",
+   "reports": 1,
+   "slugs": [
+    "little-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Little Hatchet Creek",
+   "reports": 1,
+   "slugs": [
+    "little-hatchet-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Little Sixmile Creek",
+   "reports": 1,
+   "slugs": [
+    "little-sixmile-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Longbranch Creek",
+   "reports": 1,
+   "slugs": [
+    "long-branch-fl",
+    "long-branch-largo-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Lost Creek",
+   "reports": 1,
+   "slugs": [
+    "lost-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Lucy Branch Creek",
+   "reports": 1,
+   "slugs": [
+    "lucy-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Mc Coys Creek",
+   "reports": 1,
+   "slugs": [
+    "mccoys-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "McCoy Creek",
+   "reports": 1,
+   "slugs": [
+    "mccoy-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Miami Canal",
+   "reports": 1,
+   "slugs": [
+    "miami-canal-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Mulatto Bayou",
+   "reports": 1,
+   "slugs": [
+    "mulatto-bayou-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "N Fork of Middle River",
+   "reports": 1,
+   "slugs": [
+    "north-fork-middle-river-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "New Rose Creek",
+   "reports": 1,
+   "slugs": [
+    "new-rose-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Newcastle Creek",
+   "reports": 1,
+   "slugs": [
+    "newcastle-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "North Bay",
+   "reports": 1,
+   "slugs": [
+    "north-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "North Palm Beach Waterway",
+   "reports": 1,
+   "slugs": [
+    "north-palm-beach-waterway-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Ochlockonee River",
+   "reports": 1,
+   "slugs": [
+    "ochlockonee-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Poley Creek",
+   "reports": 1,
+   "slugs": [
+    "poley-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Riviera Bay",
+   "reports": 1,
+   "slugs": [
+    "riviera-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Robinson Creek",
+   "reports": 1,
+   "slugs": [
+    "robinson-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Rushing Branch Creek",
+   "reports": 1,
+   "slugs": [
+    "rushing-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "S Fork of Middle River",
+   "reports": 1,
+   "slugs": [
+    "south-fork-middle-river-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Saddle Creek",
+   "reports": 1,
+   "slugs": [
+    "saddle-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Sand Branch Creek",
+   "reports": 1,
+   "slugs": [
+    "sand-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Secret Lake",
+   "reports": 1,
+   "slugs": [
+    "secret-lake-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Sherman Creek",
+   "reports": 1,
+   "slugs": [
+    "sherman-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Sherman's Creek",
+   "reports": 1,
+   "slugs": [
+    "sherman-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Shoal River",
+   "reports": 1,
+   "slugs": [
+    "shoal-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Six Mile Creek",
+   "reports": 1,
+   "slugs": [
+    "sixmile-creek-jacksonville-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "South Creek",
+   "reports": 1,
+   "slugs": [
+    "south-creek-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "South Prong Double Branch",
+   "reports": 1,
+   "slugs": [
+    "south-prong-double-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Spartman Branch Creek",
+   "reports": 1,
+   "slugs": [
+    "spartman-branch-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "St Lucie River",
+   "reports": 1,
+   "slugs": [
+    "saint-lucie-river-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "St. Andrew's Bay",
+   "reports": 1,
+   "slugs": [
+    "saint-andrew-s-bay-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "St. John's River",
+   "reports": 1,
+   "slugs": [
+    "saint-johns-river-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Stranahan River",
+   "reports": 1,
+   "slugs": [
+    "stranahan-river-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Sumner Lake",
+   "reports": 1,
+   "slugs": [
+    "sumner-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Sunset Lake",
+   "reports": 1,
+   "slugs": [
+    "sunset-lake-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Tiger Pond Creek",
+   "reports": 1,
+   "slugs": [
+    "tiger-pond-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Trammel Creek",
+   "reports": 1,
+   "slugs": [
+    "trammel-creek-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Trout Bayou",
+   "reports": 1,
+   "slugs": [
+    "trout-bayou-fl"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Trout Lake",
+   "reports": 1,
+   "slugs": [
+    "trout-lake-saint-cloud-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Ward Lake",
+   "reports": 1,
+   "slugs": [
+    "ward-lake-fl"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Western Lake",
+   "reports": 1,
+   "slugs": [
+    "western-lake-fl"
+   ],
+   "how": "a water record already holds the name"
   }
  ]
 }
