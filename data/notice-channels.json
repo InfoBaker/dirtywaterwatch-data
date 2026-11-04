@@ -3789,6 +3789,161 @@
    "barrier": null
   },
   {
+   "id": "fl-dep-algal-bloom",
+   "state": "FL",
+   "operator_id": null,
+   "agency": "Florida Department of Environmental Protection",
+   "name": "Florida Department of Environmental Protection (Algal Bloom Sampling)",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://services1.arcgis.com/nRHtyn3uE1kyzoYc/arcgis/rest/services/AlgalBloom_Final_View/FeatureServer/0"
+   ],
+   "method": "json",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "results",
+   "note": "Algal bloom sampling dashboard layer; read by the fl-dep-habs feed. Blooms, not sewage. (research/fl/report.md §2.5)",
+   "checked": "2026-11-04",
+   "noun": "Voluntary page",
+   "feed_source_id": "fl-dep-habs",
+   "sources": [
+    "fl-dep-algal-bloom"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "fl-dep-pnp-email",
+   "state": "FL",
+   "operator_id": null,
+   "agency": "Florida Department of Environmental Protection",
+   "name": "Florida Department of Environmental Protection",
+   "permit": null,
+   "channel_kind": "email_list",
+   "urls": [
+    "http://prodenv.dep.state.fl.us/DepPNP/reports/addSubscriber"
+   ],
+   "method": "html",
+   "legal_basis": "Fla. Stat. 403.077(3)(b): DEP keeps an electronic mailing list with regional lists by county or district and sends each notice to it",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "County e-mail subscriptions to PNP notices; the same notices as the PNP site, read through the fl-dep-pnp feed. Sign-up status: not attempted. Covers every operator in the state. (research/fl/report.md §2.1)",
+   "checked": "2026-11-04",
+   "noun": "Alert list",
+   "signup_url": "http://prodenv.dep.state.fl.us/DepPNP/reports/addSubscriber",
+   "feed_source_id": "fl-dep-pnp",
+   "sources": [
+    "fl-dep-pnp-email",
+    "fl-law-403-077"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "fl-dep-pnp-site",
+   "state": "FL",
+   "operator_id": null,
+   "agency": "Florida Department of Environmental Protection",
+   "name": "Florida Department of Environmental Protection",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer/0"
+   ],
+   "method": "json",
+   "legal_basis": "Fla. Stat. 403.077(2)(a) and (3)(a): the owner or operator gives DEP a notice within 24 hours of discovering a release reportable to the State Watch Office; DEP publishes every notice on a public website within 24 hours of receipt",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "Public Notice of Pollution (PNP): the statutory posting for every operator in the state (no CSOs in Florida). Read through the feature service by the fl-dep-pnp feed; the HTML list is https://prodenv.dep.state.fl.us/DepPNP/reports/viewIncidentDetails. Covers every operator in the state. (research/fl/report.md §2.1, §2.2)",
+   "checked": "2026-11-04",
+   "feed_source_id": "fl-dep-pnp",
+   "sources": [
+    "fl-dep-pnp-arcgis",
+    "fl-law-403-077"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "fl-doh-county-advisories",
+   "state": "FL",
+   "operator_id": null,
+   "agency": "Florida Department of Health county offices",
+   "name": "Florida Department of Health county offices",
+   "permit": null,
+   "channel_kind": "local_health_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "Varies by town (county by county): county health departments issue no-contact advisories after some sewage spills, at their discretion, as news releases on each county's floridahealth.gov site; no statewide list or feed was found and the county pages are not surveyed yet. (research/fl/report.md §2.5)",
+   "checked": "2026-11-04",
+   "noun": "Voluntary page",
+   "sources": [
+    "fl-doh-healthy-beaches"
+   ],
+   "barrier": "varies_by_town"
+  },
+  {
+   "id": "fl-doh-healthy-beaches",
+   "state": "FL",
+   "operator_id": null,
+   "agency": "Florida Department of Health",
+   "name": "Florida Department of Health (Florida Healthy Beaches Program)",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://c0cqk120.caspio.com/dp/cb8a100027f4e6ea6cbc4260a71e"
+   ],
+   "method": "html",
+   "legal_basis": "Fla. Stat. 514.023(3)-(4): the Department of Health may issue health advisories when beach waters fail its bacteriological standards, and then notifies the city or county and DEP, which investigates wastewater facilities within one mile",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "results",
+   "note": "Beach sampling results and advisory flags per sampling point (beach-detail pages backed by a Caspio data page), read by the fl-doh-beaches feed. (research/fl/report.md §2.5)",
+   "checked": "2026-11-04",
+   "feed_source_id": "fl-doh-beaches",
+   "sources": [
+    "fl-doh-healthy-beaches"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "fl-jea-environmental-incidents",
+   "state": "FL",
+   "operator_id": "fl-jea",
+   "agency": null,
+   "name": "JEA (Jacksonville)",
+   "permit": null,
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.jea.com/outage_center/environmental_incident_reporting/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "notices",
+   "note": "JEA's Environmental Incident Reporting page: this month's sanitary sewer overflows (address, date and time, estimated gallons, action, whether waterways were impacted), including spills below the State Watch Office threshold. Voluntary page; fetched 2026-11-04. Snapshot only for now (records false): the lines are not yet parsed into records. (research/fl/report.md §2.3)",
+   "checked": "2026-11-04",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Voluntary page",
+   "sources": [
+    "fl-jea-incidents"
+   ],
+   "barrier": null
+  },
+  {
    "id": "ga-albany-cso-public-notification",
    "state": "GA",
    "operator_id": "ga-albany",

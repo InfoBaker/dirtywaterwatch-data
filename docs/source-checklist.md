@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1196 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1207 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -27,7 +27,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | dc | 21 | 9 | 26 | 12 | 5 | 73 |
 | nc | 8 | 1 | 6 | 1 | 0 | 16 |
 | ga | 3 | 4 | 4 | 1 | 0 | 12 |
-| **all** | **391** | **243** | **328** | **173** | **61** | **1196** |
+| fl | 5 | 0 | 5 | 1 | 0 | 11 |
+| **all** | **396** | **243** | **333** | **174** | **61** | **1207** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1309,3 +1310,19 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ga-flint-riverkeeper-atlanta-notice` | Flint Riverkeeper / SELC notice of intent to sue Atlanta (2026) | watch | search_only | news | Pending Clean Water Act case over spills to the Flint headwaters (60-day notice, July 2026). |
 | `ga-georgia-water-coalition-dirty-dozen` | Georgia Water Coalition "Dirty Dozen" | watch | search_only | prior_art | Annual advocacy report naming problem sites (sewer spills feature often). Context, not events. |
 | `ga-epd-geos` | Georgia EPD GEOS spill and bypass e-reporting | rejected | fetched | events | Login-only intake for permittees (GEOS Spill/Bypass E-Reporting guidance, July 2025). Not a public output. |
+
+## fl: Florida (11)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `fl-dep-algal-bloom` | Florida DEP Algal Bloom Site Visits (Algal Bloom Sampling Status dashboard) | used | fetched | advisories | 6,778 sampling visits with date, coordinates, bloom observed, dominant taxa, microcystin; edited daily. HAB source (plum). Ingested as fl-dep-habs (bloom episodes per site; the Comments and photo fields are not requested). |
+| `fl-dep-pnp-arcgis` | Florida DEP Public Notice of Pollution (PNP) ArcGIS feature service | used | fetched | events | Statewide, machine-readable notices under s. 403.077 with report time, release start and end dates, ongoing flag, facility, county and coordinates; wastewater notices use a structured text template (Wastewater Type, Cause, Spill Volume, Waterbodies Impacted). Ingested as fl-dep-pnp: layer 0 every run, layer 1 once for the history; sewage and wastewater notices only, with the reporter and contact fields never requested and the notice text scrubbed of names, phones and e-mails. |
+| `fl-doh-healthy-beaches` | Florida Department of Health Healthy Beaches program (beach detail pages; sampling-point layer) | used | fetched | advisories | Weekly or fortnightly enterococcus sampling at about 350 active coastal points; each sample row says whether an advisory followed (Advisory Yes/No). Ingested as fl-doh-beaches (one request per point, at most once a day). County DOH sewage-spill health advisories are issued separately and are not on these pages. |
+| `fl-law-403-077` | Fla. Stat. 403.077 Public notification of pollution | used | fetched | law | The public-notice law: operator notice to DEP within 24 hours; DEP publishes within 24 hours and runs a county email list. |
+| `fl-rule-62-604-550` | F.A.C. 62-604.550 Abnormal events (collection systems) and 62-620.610(20) | used | search_only | law | Regulator reporting: SSOs of 1,000 gallons or more to the State Watch Office (800-320-0519) within 24 hours; smaller ones to the DEP district within 24 hours. Rule text (a .doc) not read; wording from DEP 2021 SSO guidance. |
+| `fl-dep-pnp-email` | Florida DEP PNP email subscription by county | watch | fetched | events | Statutory email list (403.077(3)(b)) by county or district. The ArcGIS layer is the same data; subscribe only as a cross-check. |
+| `fl-dep-wastewater-historical-spills` | Florida DEP Wastewater Historical Spills (ArcGIS, frozen 2020) | watch | fetched | events | 13,988 State Watch Office wastewater incidents with structured cause, volume, waterbody affected and points; last edited 2020-10-07. Useful history; holds CALLER_NAME (personal) so must be field-filtered. |
+| `fl-jea-incidents` | JEA Environmental Incident Reporting page | watch | search_only | events | Utility page of spill notices (search only). |
+| `fl-sarasota-abnormal-event` | Sarasota County AbnormalEventSpill layer | watch | search_only | events | County spill layer found by ArcGIS search; not opened. The PNP feed covers the same events. |
+| `fl-wwals` | WWALS Watershed Coalition pollution notice tracking | watch | search_only | prior_art | Posts and archives FL PNP and GA spill reports for the Suwannee basin. |
+| `fl-epa-sobe` | EPA SOBE extract, FL rows | rejected | inferred | events | No FL rows on 2026-11-03; FL reports through the State Watch Office and PNP. |
