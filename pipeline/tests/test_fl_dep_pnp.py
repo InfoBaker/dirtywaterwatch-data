@@ -258,3 +258,116 @@ def test_an_empty_layer_is_an_outage_not_an_empty_feed(tmp_path, monkeypatch):
     assert P.main([]) == 1
     d = json.loads((ev / f"{P.SOURCE_ID}.json").read_text())
     assert d["ok"] is False and d["count"] == 5
+
+
+# ---------------------------------------------------------------- name review 2026-11-04 (12,499 records read)
+
+def test_names_of_every_shape_found_in_the_notices_are_removed():
+    # each shape found by build/name_review.py over the whole layer, with placeholder names
+    cases = [
+        "At approximately 11:20am, Jordan McSampleton and TB Landmark arrived at the scene.",      # camel-case surname
+        "Contacted Zeb McPlaceholder on 3/19/26 at 9:42am.",
+        "Permit # FL0103349 Reporting Party: Zeb Placeholder A12345 Contact Number: 850-555-0100 The following",
+        "Address: Example Rd Contacted by: Zeb Placeholder Date/Time: 2/12/24 at 12:22 PM",
+        "*TIME: 3:45 pm *PERSON CONTACTED: Zeb Placeholder *STATE WATCH OFFICE: 0 *DATE: 2-13-25",
+        "Status: Closed Assigned To: DEP / Zeb Placeholder Reported to SWO on: 8/10/2017 11:33 ET Severity: Local",
+        "During the response, Q. Placeholder contacted P. Sampleton with Example Water to confirm.",
+        "Received call of an ARV spilling. Q. Placeholder then called S. Sampleton to respond.",
+        "10-10-18 9:25 AM Zeb Placeholder received call and responded to a report of a manhole overflowing.",
+        "while Don was in route Zeb Placeholder called me to report the station had an overflow.",
+        "At 7:00PM, crews & Zeb Placeholder where dispatched to shut down the force main.",
+        "Zeb Placeholder and Quill A, begun to lime the area.",
+        "The report is submitted through the State. Zeb Placeholder is aware that this report is late.",
+        "Compliance Analyst and Environmental Tech Zeb Placeholder visited the site on 1/20/22.",
+        "NPDES Coordinator for the Village, Zeb Placeholder Sampleton, reached out, by phone, the State Watch Office.",
+        "Wednesday, June 17, 2020 Zeb E. Placeholder Environmental Consultant Compliance Assurance Program",
+        "I was contacted by Zeb Placeholder with the compliance assurance program regarding a manhole.",
+        "PER ZEBB W. AROUND 5:45PM STATION HAD A FAULTED PANEL.",
+        "Hello Zeb, The Environmental Protection Commission received a complaint.",
+        "The initial report was filed by myself, Zeb Placeholder, City of Example employee, WW License B1.",
+        "The Fishcamps owner is named Zeb and her cell is 863-555-0100. Please let me know.",
+        "EPC of Example County (Zeb Placeholder) liased with our Operations team.",
+        "At 0916, the operator notified Zeb McPlaceholder (DEP), of the spill.",
+        "SEWER DEPARTMENT EMERGENCY COMMUNICATIONS SECTION WASD Zeb Jo McPlaceholder E-mail: zeb@example.org WRITTEN REPORT",
+        "Incident Report Update 1 - 01/12/2021-09:21 / DEM-Placeholder Reporting party advised that the release",
+        "Ranger Placeholder rendezvoused with the crew; Lead Park Ranger Zeb Sampleton called the office.",
+        # the shapes the earlier rules already took stay taken (a place word further on does not make a facility)
+        "Director of Maintenance (Peter Placeholder) at Harbour's Edge reported sewer seeping out.",
+        "Area resident reported sewage in Example Creek to Steve Placeholder, City of Example Beach, at 1200.",
+        "spoke with Jane Placeholder about the overflow; contact John Placeholder at the plant.",
+        "Reported by: ____ Jane Placeholder ____ Utility Name: Example Utilities",
+        "We contacted John Placeholder County Engineer about the overflow.",
+    ]
+    for t in cases:
+        out = P.scrub(t)
+        assert "Placeholder" not in out and "Sampleton" not in out and "ZEBB" not in out and "Zeb " not in out, (t, out)
+        assert "[name removed]" in out or "[removed]" in out, (t, out)
+    # what the notice says around the name stays
+    assert P.scrub(cases[3]).endswith("Date/Time: 2/12/24 at 12:22 PM")
+    assert "Severity: Local" in P.scrub(cases[5]) and "Reported to SWO on: 8/10/2017" in P.scrub(cases[5])
+    assert "DEM-[name removed] Reporting party advised" in P.scrub(cases[24])
+
+
+def test_companies_roles_places_and_facilities_named_after_people_are_kept():
+    for t in ("On 6/13/2021, PCU Labor Supervisor received a call from dispatch.",
+              "The State Warning Point was notified at 2:00 am.",
+              "On 12/21/2025, Clean Harbors arrived on site and located the spill.",
+              "The City of Punta Gorda received a call regarding sewage.",
+              "PCB Underground Utilities Division was notified by Mears Broadband. Mears was boring.",
+              "City Beach Utilities Department was notified by Blue Streak Telecommunications of a strike.",
+              "As a berm was created (6) Jet Vacs were dispatched to contain the release.",
+              "Sampling of Wills Branch began on 9/26/2023.",
+              "Incident Description: Lift Station #814 Jordan McSample Power outage due to Hurricane Milton.",
+              "The Zeb T. Placeholder Regional WWTF lost power; the Zeb Q. Placeholder Water Reclamation Facility did not.",
+              "Phoned to 24 Hour Notification Number: Yes X No",
+              "SPOKE WITH STATE WARNING POINT TO REPORT THE SPILL. PER FDEP GUIDELINES SIGNS WERE POSTED.",
+              "From Subject Received Size Categories",
+              "Crews were notified of a manhole overflow on Dale Mabry Hwy near Wesley Chapel."):
+        assert P.scrub(t) == t, (t, P.scrub(t))
+    assert P.scrub_name_field("Zeb T. Placeholder Regional WWTF") == "Zeb T. Placeholder Regional WWTF"
+
+
+def test_scrub_is_stable_on_its_own_output_and_a_blank_form_field_is_empty():
+    # a rebuild from the saved page (--file, or a record kept from an earlier run) scrubs the scrubbed text again:
+    # "[email removed]" and "[e-mail header removed]" are markers, not labels that swallow the text after them
+    t = ("Contact info is jane.doe@example.org Wastewater Type: Untreated Cause: Blockage. From: Zeb Placeholder Sent: "
+         "Monday, June 1, 2026 9:15 AM I left a voicemail. *PERSON CONTACTED: ________________ SPILL INFORMATION "
+         "*SPILL CHARACTERISTIC 1 RAW WASTEWATER")
+    once = P.scrub(t)
+    assert P.scrub(once) == once
+    assert "Wastewater Type: Untreated" in once and "I left a voicemail" in once
+    assert "SPILL INFORMATION *SPILL CHARACTERISTIC 1 RAW WASTEWATER" in once
+
+
+def test_a_residence_address_loses_its_number_in_every_field_and_a_complaint_keeps_none():
+    op = _row(0, INCIDENT_NUMBER=202611400, OBJECTID=40, INCIDENT_NAME="SSO 12 Placeholder Ln",
+              FACILITY_ADDRESS_LINE_1="12 Placeholder Ln",
+              INCIDENT_REPORT="Incident Description: A resident at 12 Placeholder Ln reported sewage in the yard. "
+                              "Wastewater Type: Untreated Cause: Blockage Spill Volume: 50 Volume Recovered: 0 "
+                              "Waterbodies Impacted: N")
+    comp = _row(5, INCIDENT_NUMBER=202611401, OBJECTID=41, LATITUDE=27.951234, LONGITUDE=-82.456789,
+                INCIDENT_NAME="Manhole near 77 Example Ave",
+                INCIDENT_REPORT="Sewage from the manhole three houses down from 77 Example Ave runs into my yard.")
+    recs, _ = P.build([op, comp], "2026-11-04T00:00:00Z", [], permits={})
+    text = json.dumps(recs)
+    assert "12 Placeholder" not in text and "77 Example" not in text and "Placeholder Ln" in text
+    c = [r for r in recs if r["raw"]["_pnp_kind"] == "citizen_complaint"][0]
+    assert (c["lat"], c["lon"]) == (27.951, -82.457) and c["coord_precision_m"] == 100
+    assert c["raw"]["LATITUDE"] == 27.951 and "about 100 m" in c["raw"]["_coords_note"]
+    o = [r for r in recs if r is not c][0]
+    assert o["lat"] is not None and "_coords_note" not in o["raw"]                  # an operator's point is kept
+
+
+def test_a_record_kept_from_an_earlier_run_is_scrubbed_under_the_current_rules():
+    # a notice the 30-day layer no longer lists keeps the record an earlier run wrote; a rule added since must reach it
+    old_text = ("Incident Description: Zeb Placeholder received call about a manhole. Wastewater Type: Untreated "
+                "Cause: Blockage Spill Volume: 40 Volume Recovered: 0 Waterbodies Impacted: N")
+    first, _ = P.build([_row(0, INCIDENT_NUMBER=202611500, OBJECTID=50)], "2026-10-01T00:00:00Z", [], permits={})
+    prev = json.loads(json.dumps(first))
+    prev[0]["raw"]["INCIDENT_REPORT"] = old_text                  # as scrubbed under the older rules
+    prev[0]["raw"]["_first_seen_at"] = "2026-10-01T00:00:00Z"
+    recs, stats = P.build([_row(1, INCIDENT_NUMBER=202611501, OBJECTID=51)], "2026-11-04T00:00:00Z", prev, permits={})
+    kept = [r for r in recs if r["event_id"] == prev[0]["event_id"]][0]
+    assert stats["kept_from_earlier_runs"] == 1
+    assert "Placeholder" not in json.dumps(kept) and "[name removed] received call" in kept["raw"]["INCIDENT_REPORT"]
+    assert kept["fetched_at"] == prev[0]["fetched_at"] and kept["raw"]["_first_seen_at"] == "2026-10-01T00:00:00Z"
