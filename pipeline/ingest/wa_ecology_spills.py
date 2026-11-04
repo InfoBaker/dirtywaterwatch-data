@@ -6,6 +6,10 @@ Source
   4fb5f533aabb41ce9e5bd8aa59284ab6 on gis.ecology.wa.gov/portal) whose table reads a public hosted feature layer, the
   results of Ecology's "Sewage Spill Webpage Entry" form:
   https://gis.ecology.wa.gov/hosting/rest/services/Hosted/survey123_48de962d0dea40eb9485805510a40b84_results/FeatureServer/0
+  Terms: Ecology's copyright page (TERMS_URL), which covers "the linked database and map servers": data may be used
+  "provided the Washington State Department of Ecology is credited as the data provider and a link is provided to the
+  Ecology data source web page"; commercial and political use (a campaign or lobbying effort) is prohibited. The
+  layer's item (a15e4d84ba7e47b3a14ac9adcdfa54a9) is public and states no licence of its own.
   The portal, the item and the layer answered HTTP 200 to the project user agent on 2026-11-04 (no key, no cookie);
   the research of 2026-11-03 had a firewall refusal there with another client. Nothing is worked around: if the
   host refuses the project user agent the run fails (ok false) and the records stay. The page's disclaimer: "This
@@ -103,6 +107,7 @@ SOURCE_ID = "wa-ecology-sewage-spills"
 LAYER = ("https://gis.ecology.wa.gov/hosting/rest/services/Hosted/"
          "survey123_48de962d0dea40eb9485805510a40b84_results/FeatureServer/0")
 PAGE_URL = "https://ecology.wa.gov/water-shorelines/water-quality/wastewater/sewage-spills"
+TERMS_URL = "https://ecology.wa.gov/About-us/Accountability-transparency/Our-website/Copyright-information"
 TZ = ZoneInfo("America/Los_Angeles")
 SAFE_FIELDS = ["objectid", "globalid", "ecology_region", "start_date_and_time", "permitee", "location", "county",
                "initial_estimated_amount", "level_of_treatment", "potentially_impacted_area", "end_event_timedate",
@@ -419,7 +424,8 @@ def run(file: str | None = None, out: str | None = None) -> int:
     prev_doc = read_json(path, {}) or {}
     prev = prev_doc.get("records") or []
     base_meta = {"credit": "Washington State Department of Ecology, Sewage spills (RCW 90.48.636)",
-                 "license": "none stated; Ecology's disclaimer applies", "disclaimer": CAVEAT,
+                 "license": "Ecology's terms: data may be used with Ecology credited as the data provider and a link to "
+                            "the source page; no commercial or political use", "terms_url": TERMS_URL, "disclaimer": CAVEAT,
                  "page_url": PAGE_URL, "layer": LAYER, "time_note": "start and end as Ecology lists them (minute)"}
     try:
         rows, info = load_file(file) if file else fetch()
