@@ -32,3 +32,12 @@ def test_georgia_statuses():
     assert {i: CHECKLIST[i]["status"] for i in want} == want
     research = {r["id"]: r for r in json.loads((ROOT / "research" / "ga" / "sources.json").read_text())}
     assert {i: research[i]["status"] for i in want} == want
+
+
+def test_a_beach_feeds_registry_row_names_the_event_type_the_feed_writes():
+    """ga-dnr-beaches writes beach_advisory records; its registry row (ga-dnr-healthy-beaches) said no event type, so
+    the sources' event types for Georgia's beach feed came out empty (Florida's counterpart names beach_advisory)."""
+    for rid in ("ga-dnr-healthy-beaches", "fl-doh-healthy-beaches"):
+        text = (ROOT / "data" / "sources" / f"{rid}.yaml").read_text()
+        assert re.search(r'^event_types: \["beach_advisory"\]', text, re.M), rid
+        assert CHECKLIST[rid]["event_types"] == ["beach_advisory"]

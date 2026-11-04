@@ -228,3 +228,15 @@ def test_a_georgia_drinking_water_plant_gets_no_sewage_spill_rows_and_a_stale_ro
     assert "nc-small-annual-report" not in rows and rep["nc-annual"]["removed"] == ["nc-small-annual-report"]
     assert ARR.ga_water_plant(wtp) and not ARR.ga_water_plant(FIX_DIS[-1])
     assert not ARR.ga_water_plant({"npdes_permits": ["GAG640001", "GA0020001"]})   # a sewer permit too: kept
+
+
+def test_no_duty_row_counts_its_operator_as_told_online():
+    """The coverage disclosure's "posted online for each overflow" (export.coverage.channel_told) never comes from a
+    duty row with no address: printed, signs, a report to a health department, or a yearly report not searched."""
+    from export import coverage as C
+    made = [r for r in REG["channels"] if r["id"].endswith(("-annual-report", "-press-release", "-newspaper-notice",
+                                                            "-legal-organ-notice", "-media-notice",
+                                                            "-health-department", "-spill-signs"))
+            and r.get("operator_id") and not r.get("urls")]
+    assert len(made) > 3000
+    assert {C.channel_told(r) for r in made} <= {"print_only", "signs_only", "none"}

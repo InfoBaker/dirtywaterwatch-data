@@ -49155,7 +49155,9 @@
   "operator": "Georgia DNR Coastal Resources Division",
   "operator_type": "state",
   "role": "advisories",
-  "event_types": [],
+  "event_types": [
+   "beach_advisory"
+  ],
   "waters_covered": null,
   "water_slugs": [],
   "url": "https://coastalgadnr.org/HealthyBeaches",
