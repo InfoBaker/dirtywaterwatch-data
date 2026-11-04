@@ -89,6 +89,20 @@ def test_p1_1_status_lines_that_quote_a_record_go_through_the_same_redactor(data
     assert NAME not in json.dumps(st) and PHONE not in json.dumps(st)
 
 
+def test_every_nested_text_of_a_water_reason_goes_through_the_redactor(data_dir):
+    """A reason's placement note, a rule's basis or a stretch text can quote the record too: the Old Tampa Bay water
+    file carried a blocklisted name in such a field and the export's self-check stopped the run (2026-11-04)."""
+    events = [ended("1", waterbody_text=f"Storm drain at resident {NAME}")]
+    r = R.redactor_for(events, data_dir)
+    st = {"waters": {"w": {"reason_short": "CSO", "reasons": [
+        {"event_id": "ma-test:1", "short": "CSO", "rule": "red.event", "status": "red",
+         "placement": {"note": f"named in the text: {NAME}", "steps": [{"why": f"town of {NAME}"}]},
+         "rule_applied": {"rule": "text_caution", "basis": f"the form said no, the text names {NAME}"},
+         "reach": "MA1-001"}]}}, "advisory_points": [], "reach_events_active": []}
+    assert X.redact_status_texts(st, r) == 3
+    assert NAME not in json.dumps(st) and st["waters"]["w"]["reasons"][0]["reach"] == "MA1-001"
+
+
 def test_p1_1_the_blocklist_self_check_finds_a_name_in_out_and_fails_the_export(tmp_path, monkeypatch):
     out = tmp_path / "out"
     (out / "waters").mkdir(parents=True)
