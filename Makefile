@@ -26,6 +26,9 @@
 #                  January 2025), va_vdh_advisories (VDH issued/lifted releases; `--backfill` pages
 #                  back to 2025); va_waters is a helper ("not a feed"; `python -m ingest.va_waters`
 #                  re-extracts waters-va.json and the VA rows of waters-mid-atlantic.csv)
+#                  Florida: fl_dep_pnp (DEP Public Notice of Pollution, last 30 days; `--backfill` once
+#                  for every notice since 2017), fl_dep_habs (DEP algal bloom visits), fl_doh_beaches
+#                  (Healthy Beaches result pages, one full pass at most every 20 hours)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
