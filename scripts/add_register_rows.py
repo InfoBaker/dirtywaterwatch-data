@@ -23,6 +23,23 @@ other, note 'No web form'". The parts:
               The report goes to customers and the Department; no web posting is required, and operators' own
               postings were not searched one by one, so each row is unmonitored (barrier not_verified).
 
+  nc-notice   G.S. 143-215.1C(b) (municipal or domestic works) and (c) (any other works): a press release to the
+              news media within 24 hours for 1,000 gallons or more reaching surface waters, and a newspaper notice
+              for 15,000 gallons or more. Rows <operator id>-press-release and <operator id>-newspaper-notice for every
+              North Carolina operator in data/dischargers.json (public or private alike; (c) for an industrial
+              system). Both go to the media or the newspaper only, so each is unmonitored, barrier print_only. They
+              replace the statewide rows nc-operator-press-release and nc-operator-newspaper-notice (the Department
+              publishes neither, so no agency channel is left to keep). An operator's own web page for its releases
+              (Charlotte Water, Raleigh) stays its own row and is named in the note.
+
+  ga-notice   Ga. Comp. R. & Regs. 391-3-6-.05(3), the owner of a POTW (every Georgia operator in data/dischargers.json:
+              the registry's Georgia rows are POTW permits): (b) the legal-organ notice of a major spill, (e) the
+              report to local television, radio and print media, (f) the report to the local health department and
+              (g) the posted notice at the spill and the waterway's access points. Rows <operator id>-legal-organ-notice,
+              -media-notice, -health-department and -spill-signs, replacing the statewide rows ga-legal-organ-notice,
+              ga-media-notice, ga-local-health-departments and ga-spill-signs. ga-downstream-water-suppliers stays one
+              row: (3)(d) is EPD's duty as well as the owner's, a direct notice to water suppliers, not to the public.
+
 Idempotent: a part's rows are rebuilt from the inputs and replace rows of the same id; the register stays sorted by
 (state, id) and every row's barrier is what ingest.notification_pages.barrier_for says. `checked` is the date the law
 and the inputs were read (CHECKED), not the run date, so a rerun changes nothing.
@@ -54,6 +71,55 @@ LAW_NC_A = ('G.S. 143-215.1C(a): "The owner or operator of any wastewater collec
             'fiscal year basis and shall be provided no later than 60 days after the end of the calendar or fiscal '
             'year."')
 NC_SOURCE_A = "nc-law-gs-143-215-1c-a"
+NC_SOURCE_B = "nc-law-gs-143-215-1c"
+# G.S. 143-215.1C(b)(1)/(2) and (c)(1)/(2), quoted from the same text
+_PRESS = ('"In the event of a discharge of 1,000 gallons or more of untreated {w} to the surface waters of the State, '
+          'issue a press release to all print and electronic news media that provide general coverage in the county '
+          'where the discharge occurred setting out the details of the discharge. The owner or operator shall issue '
+          'the press release within 24 hours after the owner or operator has determined that the discharge has '
+          'reached the surface waters of the State."')
+_PAPER = ('"In the event of a discharge of 15,000 gallons or more of untreated {w} to the surface waters of the State, '
+          'publish a notice of the discharge in a newspaper having general circulation in the county in which the '
+          'discharge occurs and in each county downstream from the point of discharge that is significantly affected '
+          'by the discharge." The notice is captioned "NOTICE OF DISCHARGE OF UNTREATED {cap}" and published within 10 '
+          'days after the Secretary approves its form, content and newspapers')
+LAW_NC_PRESS = {"b": "G.S. 143-215.1C(b)(1): " + _PRESS.format(w="wastewater"),
+                "c": "G.S. 143-215.1C(c)(1): " + _PRESS.format(w="waste")}
+LAW_NC_PAPER = {"b": "G.S. 143-215.1C(b)(2): " + _PAPER.format(w="wastewater", cap="SEWAGE"),
+                "c": "G.S. 143-215.1C(c)(2): " + _PAPER.format(w="waste", cap="WASTE")}
+NC_REPLACES = ("nc-operator-press-release", "nc-operator-newspaper-notice")
+
+# Ga. Comp. R. & Regs. 391-3-6-.05(3), as research/ga/report.md §2.1 quotes the Cornell LII text
+GA_RULE = "Ga. Comp. R. & Regs. 391-3-6-.05"
+GA_SOURCES = ["ga-rule-391-3-6-05"]
+GA_DUTIES = [
+    # (suffix, channel_kind, noun, legal_basis, what the note says the duty is, the barrier sentence)
+    ("health-department", "local_health_page", "Health department report",
+     GA_RULE + '(3)(f): the owner "shall immediately report the incident to the local health department(s)"',
+     "an immediate report of each spill to the local health department(s); the rule does not require the "
+     "department to publish it",
+     "No web channel found."),
+    ("legal-organ-notice", "news_page", "Printed or broadcast notice",
+     GA_RULE + '(3)(b); O.C.G.A. 12-5-30.1: notice of a major spill (over 10,000 gallons, or one causing a water-quality '
+     'violation) in "the legal organ of the County where the incident occurred ... within seven days"',
+     "a notice of each major spill in the county's legal organ (its newspaper of record) within seven days",
+     "Printed only."),
+    ("media-notice", "news_page", "Printed or broadcast notice",
+     GA_RULE + '(3)(e): the owner "shall report the incident to the local media (television, radio and print media) '
+     'within 24 hours of becoming aware of the incident", with date, location, cause, volume, receiving water and '
+     'corrective action',
+     "a report of each spill to local television, radio and print media within 24 hours",
+     "The notice is broadcast or printed only; no public record of it is kept online."),
+    ("spill-signs", "lights_signs_page", "Lights and signs",
+     GA_RULE + '(3)(g): the owner "shall immediately post a notice as close as possible to where the spill or major '
+     'spill occurred and where the spill or major spill entered State waters" and along the affected waterway "at '
+     'bridge crossings, trails, boat ramps, recreational areas, and other points of public access", kept "a minimum '
+     'of seven days after the spill or major spill has ceased"',
+     "signs at the spill, where it entered State waters and at the waterway's public access points, kept at least "
+     "seven days after it ceases",
+     "No online record."),
+]
+GA_REPLACES = ("ga-legal-organ-notice", "ga-media-notice", "ga-local-health-departments", "ga-spill-signs")
 
 
 def mgd(x: float) -> str:
@@ -143,7 +209,68 @@ def nc_annual_rows(dis: list[dict], plants) -> tuple[list[dict], list[tuple[str,
     return rows, out
 
 
-PARTS = {"nc-annual": {"build": lambda dis, plants: nc_annual_rows(dis, plants), "replaces": ()}}
+def own_pages(register: dict, op_id: str, section: str) -> list[str]:
+    """Ids of the operator's existing web rows that cite the same subsection (its own page for the notices)."""
+    return sorted(r["id"] for r in register.get("channels") or [] if r.get("operator_id") == op_id and r.get("urls")
+                  and str(r.get("legal_basis") or "").startswith(section))
+
+
+def nc_notice_rows(dis: list[dict], plants, register: dict | None = None) -> tuple[list[dict], list]:
+    """The G.S. 143-215.1C(b)/(c) press-release and newspaper rows, two per North Carolina operator."""
+    rows = []
+    for op in dis:
+        if op.get("state") != "NC":
+            continue
+        sub = "c" if nc_industrial(op) else "b"
+        works = ("works other than municipal or domestic, so (c)" if sub == "c"
+                 else "municipal or domestic works, public or private, so (b)")
+        own = own_pages(register or {}, op["id"], f"G.S. 143-215.1C({sub})(1)")
+        own_s = (f" Its own web page for releases is the row {', '.join(own)}." if own else "")
+        rows.append(finish({
+            "id": f"{op['id']}-press-release", "state": "NC", "operator_id": op["id"], "agency": None, "name": op["name"],
+            "permit": None, "channel_kind": "news_page", "urls": [], "method": None, "legal_basis": LAW_NC_PRESS[sub],
+            "basis_kind": "law", "monitored": False, "unmonitored_reason": "other", "publishes": "unknown",
+            "note": (f"No web form: {op['name']} ({works}): a press release to all print and electronic news media "
+                     "covering the county within 24 hours after it determines that 1,000 gallons or more reached "
+                     "surface waters. It reaches the public printed only or on air, as the media carry it; the law "
+                     "requires no web posting. Copies and the media list are kept a year and given to any person on request."
+                     f"{own_s} (G.S. 143-215.1C, read on ncleg.gov 2026-11-04; research/nc/report.md §2.1)"),
+            "checked": CHECKED, "records": False, "noun": "Printed or broadcast notice", "sources": [NC_SOURCE_B]}))
+        rows.append(finish({
+            "id": f"{op['id']}-newspaper-notice", "state": "NC", "operator_id": op["id"], "agency": None,
+            "name": op["name"], "permit": None, "channel_kind": "news_page", "urls": [], "method": None,
+            "legal_basis": LAW_NC_PAPER[sub], "basis_kind": "law", "monitored": False, "unmonitored_reason": "other",
+            "publishes": "unknown",
+            "note": (f"No web form: {op['name']} ({works}): a paid notice in newspapers of the county and of each "
+                     "downstream county the Secretary finds significantly affected, for 15,000 gallons or more; proof "
+                     "of publication is filed with DEQ within 30 days. Printed only; the law requires no web posting. "
+                     "(G.S. 143-215.1C, read on ncleg.gov 2026-11-04; research/nc/report.md §2.1)"),
+            "checked": CHECKED, "records": False, "noun": "Printed or broadcast notice", "sources": [NC_SOURCE_B]}))
+    return rows, []
+
+
+def ga_notice_rows(dis: list[dict], plants, register: dict | None = None) -> tuple[list[dict], list]:
+    """The 391-3-6-.05(3) rows, four per Georgia operator."""
+    rows = []
+    for op in dis:
+        if op.get("state") != "GA":
+            continue
+        for suffix, kind, noun, basis, duty, barrier_s in GA_DUTIES:
+            srcs = GA_SOURCES + (["ga-law-ocgs-12-5-30-1"] if "12-5-30.1" in basis else [])
+            rows.append(finish({
+                "id": f"{op['id']}-{suffix}", "state": "GA", "operator_id": op["id"], "agency": None,
+                "name": op["name"], "permit": None, "channel_kind": kind, "urls": [], "method": None,
+                "legal_basis": basis, "basis_kind": "law", "monitored": False, "unmonitored_reason": "other",
+                "publishes": "unknown",
+                "note": (f"No web form: {op['name']}: {duty}. {barrier_s} The rule binds the owner of a publicly owned "
+                         "treatment works. (research/ga/report.md §2.1)"),
+                "checked": CHECKED, "records": False, "noun": noun, "sources": srcs}))
+    return rows, []
+
+
+PARTS = {"nc-annual": {"build": lambda dis, plants, reg: nc_annual_rows(dis, plants), "replaces": ()},
+         "nc-notice": {"build": nc_notice_rows, "replaces": NC_REPLACES},
+         "ga-notice": {"build": ga_notice_rows, "replaces": GA_REPLACES}}
 
 
 def merge(doc: dict, new: list[dict], replaces=()) -> dict:
@@ -161,7 +288,7 @@ def run(parts: list[str], register: Path = REGISTER, dis_path: Path = DIS, plant
     plants = json.loads(plants_path.read_text()) if plants_path.exists() else {"outfalls": []}
     report: dict = {}
     for p in parts:
-        rows, left_out = PARTS[p]["build"](dis, plants)
+        rows, left_out = PARTS[p]["build"](dis, plants, doc)
         before = {r["id"] for r in doc["channels"]}
         doc = merge(doc, rows, PARTS[p]["replaces"])
         report[p] = {"rows": len(rows), "new": len({r["id"] for r in rows} - before),

@@ -138,15 +138,25 @@ def test_the_unresolved_file_lists_every_report_without_a_permit_with_its_reason
     assert all(x["owner_on_layer"] is None for x in u if x["owner_kind"].startswith("an individual"))
 
 
-def test_the_statewide_notice_rows_cover_private_and_industrial_operators():
+def test_every_operator_private_or_industrial_has_its_own_notice_rows():
+    """G.S. 143-215.1C binds every owner or operator: a press-release and a newspaper row per operator
+    (scripts/add_register_rows.py, part nc-notice), (c) for an industrial system; the statewide rows they replaced
+    are gone."""
     reg = json.loads((DATA_DIR / "notice-channels.json").read_text())["channels"]
     rows = {r["id"]: r for r in reg}
-    for rid in ("nc-operator-press-release", "nc-operator-newspaper-notice"):
-        r = rows[rid]
-        assert r["operator_id"] is None and r["basis_kind"] == "law"
-        assert "(c)" in r["legal_basis"] and "public or private" in r["note"]
+    assert "nc-operator-press-release" not in rows and "nc-operator-newspaper-notice" not in rows
+    for op in REGISTRY:
+        if op["state"] != "NC":
+            continue
+        sub = "c" if "G.S. 143-215.1C(c)" in op["notification_channel"] else "b"
+        press, paper = rows[f"{op['id']}-press-release"], rows[f"{op['id']}-newspaper-notice"]
+        assert press["operator_id"] == paper["operator_id"] == op["id"]
+        assert press["legal_basis"].startswith(f"G.S. 143-215.1C({sub})(1)")
+        assert paper["legal_basis"].startswith(f"G.S. 143-215.1C({sub})(2)")
+        assert press["barrier"] == paper["barrier"] == "print_only"
     # (c)(2) has its own caption: an industrial system's notice is not captioned "... UNTREATED SEWAGE"
-    assert '"NOTICE OF DISCHARGE OF UNTREATED WASTE"' in rows["nc-operator-newspaper-notice"]["legal_basis"]
+    assert '"NOTICE OF DISCHARGE OF UNTREATED WASTE"' in rows["nc-pcs-phosphate-company-newspaper-notice"]["legal_basis"]
+    assert '"NOTICE OF DISCHARGE OF UNTREATED SEWAGE"' in rows["nc-aqua-north-carolina-newspaper-notice"]["legal_basis"]
 
 
 # ---------------------------------------------------------------- scripts/add_nc_operators.py
