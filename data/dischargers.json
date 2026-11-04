@@ -104249,7 +104249,8 @@
   "npdes_permits": [
    "WQCS00012",
    "NC0023965",
-   "NC0023973"
+   "NC0023973",
+   "NC0039527"
   ],
   "receiving_waters": [
    "Cape Fear River",
@@ -104257,15 +104258,15 @@
    "CAPE FEAR RIVER"
   ],
   "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows for NC0023965, NC0023973)",
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows for NC0023965, NC0023973); EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for NC0039527)",
   "notification_channel": "not found by search (7 rows 2026); press releases expected under G.S. 143-215.1C.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Wilmington"
   ],
-  "notes": "Collection-system permit WQCS00012 (NC DWR SSO layers); treatment-plant permits NC0023965, NC0023973 from EPA ICIS-NPDES, joined by the owner's name (scripts/add_nc_operators.py).",
+  "notes": "Collection-system permit WQCS00012 (NC DWR SSO layers); treatment-plant permits NC0023965, NC0023973 from EPA ICIS-NPDES, joined by the owner's name (scripts/add_nc_operators.py). Permits added 2026-11-04 (scripts/add_nc_operators.py): NC0039527 from EPA ICIS-NPDES (owner as ICIS names it: Cpe Fear Public Utility Auth W; facility Walnut Hills Wwtp).",
   "verified": "inferred",
   "checked": "2026-11-03",
   "aliases": [
@@ -105955,22 +105956,23 @@
   "npdes_permits": [
    "WQCS00007",
    "NC0023957",
-   "NC0050105"
+   "NC0050105",
+   "NCG110015"
   ],
   "receiving_waters": [
    "Cape Fear River",
    "CAPE FEAR RIVER"
   ],
   "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows for NC0023957, NC0050105)",
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows for NC0023957, NC0050105); EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for NCG110015)",
   "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Fayetteville"
   ],
-  "notes": "Collection-system permit WQCS00007 (NC DWR SSO layers); treatment-plant permits NC0023957, NC0050105 from EPA ICIS-NPDES, joined by the owner's name (scripts/add_nc_operators.py).",
+  "notes": "Collection-system permit WQCS00007 (NC DWR SSO layers); treatment-plant permits NC0023957, NC0050105 from EPA ICIS-NPDES, joined by the owner's name (scripts/add_nc_operators.py). Permits added 2026-11-04 (scripts/add_nc_operators.py): NCG110015 from EPA ICIS-NPDES (owner as ICIS names it: PWC/Fayetteville; facility Fayetteville-Cross Creek Wrf).",
   "verified": "inferred",
   "checked": "2026-11-03",
   "aliases": [
@@ -106381,14 +106383,15 @@
   "npdes_permit": "NC0047384",
   "npdes_permits": [
    "WQCS00006",
-   "NC0047384"
+   "NC0047384",
+   "NC0024325"
   ],
   "receiving_waters": [
    "South Buffalo Creek"
   ],
   "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for NC0047384)",
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for NC0047384); EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for NC0024325)",
   "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
@@ -106396,7 +106399,7 @@
    "Greensboro",
    "Mc Leansville"
   ],
-  "notes": "Collection-system permit WQCS00006 (NC DWR SSO layers); treatment-plant permits NC0047384 from EPA ICIS-NPDES, joined by the owner's name (scripts/add_nc_operators.py).",
+  "notes": "Collection-system permit WQCS00006 (NC DWR SSO layers); treatment-plant permits NC0047384 from EPA ICIS-NPDES, joined by the owner's name (scripts/add_nc_operators.py). Permits added 2026-11-04 (scripts/add_nc_operators.py): NC0024325 from EPA ICIS-NPDES (owner as ICIS names it: Greensboro N Buffalo Crk WWTP; facility North Buffalo Creek Wwtp).",
   "verified": "inferred",
   "checked": "2026-11-03",
   "aliases": [
@@ -106757,7 +106760,8 @@
   "npdes_permits": [
    "NC0071323",
    "NC0086070",
-   "NC0090247"
+   "NC0090247",
+   "WQCSD0135"
   ],
   "receiving_waters": [
    "FRENCH BROAD RIVER",
@@ -106775,7 +106779,7 @@
    "Edneyville",
    "Hendersonville"
   ],
-  "notes": "Row made from the sources' own names: treatment-plant permit NC0071323, NC0086070, NC0090247 from EPA ICIS-NPDES (owner as ICIS names it). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "notes": "Row made from the sources' own names: treatment-plant permit NC0071323, NC0086070, NC0090247 from EPA ICIS-NPDES (owner as ICIS names it). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified. Permits added 2026-11-04 (scripts/add_nc_operators.py): WQCSD0135 (Etowah Sewer Company WWTP, Henderson County): permittee per WQCSD0135_FiveDayReport_20260811, 8/11/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4642117&dbid=0&repo=WaterResources>.",
   "verified": false,
   "checked": "2026-11-04",
   "aliases": [
@@ -109593,14 +109597,15 @@
    "WQCS00275",
    "NC0023230",
    "NC0034991",
-   "NC0089877"
+   "NC0089877",
+   "NC0030813"
   ],
   "receiving_waters": [
    "Wallace Creek"
   ],
   "water_slugs": [],
-  "outfall_count": 3,
-  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows for NC0023230, NC0034991, NC0089877)",
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows for NC0023230, NC0034991, NC0089877); EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for NC0030813)",
   "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
@@ -109609,7 +109614,7 @@
    "Jacksonville",
    "Hubert"
   ],
-  "notes": "Row made from the sources' own names: collection-system permit WQCS00249, WQCS00275 and its owner from the NC DWR SSO layers; treatment-plant permit NC0023230, NC0034991, NC0089877 from EPA ICIS-NPDES (owner as ICIS names it). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "notes": "Row made from the sources' own names: collection-system permit WQCS00249, WQCS00275 and its owner from the NC DWR SSO layers; treatment-plant permit NC0023230, NC0034991, NC0089877 from EPA ICIS-NPDES (owner as ICIS names it). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified. Permits added 2026-11-04 (scripts/add_nc_operators.py): NC0030813 from EPA ICIS-NPDES (owner as ICIS names it: Onslow Water and Sewer Authority; facility Kenwood Wwtp).",
   "verified": false,
   "checked": "2026-11-04",
   "aliases": [
@@ -112308,21 +112313,22 @@
   "kind": "plant",
   "npdes_permit": "NCG551416",
   "npdes_permits": [
-   "NCG551416"
+   "NCG551416",
+   "NC0049034"
   ],
   "receiving_waters": [
    "Upper Barton Creek"
   ],
   "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for NCG551416)",
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for NCG551416); EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for NC0049034)",
   "notification_channel": "None found online (not searched individually)",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Raleigh"
   ],
-  "notes": "Row made from the sources' own names: treatment-plant permit NCG551416 from EPA ICIS-NPDES (owner as ICIS names it). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "notes": "Row made from the sources' own names: treatment-plant permit NCG551416 from EPA ICIS-NPDES (owner as ICIS names it). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified. Permits added 2026-11-04 (scripts/add_nc_operators.py): NC0049034 from EPA ICIS-NPDES (owner as ICIS names it: Wake County; facility Mount Auburn Training Center).",
   "verified": false,
   "checked": "2026-11-04",
   "aliases": [
@@ -113027,6 +113033,797 @@
   "checked": "2026-11-04",
   "aliases": [
    "nc-yanceyville"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-aberdeen",
+  "name": "Town of Aberdeen",
+  "state": "NC",
+  "kind": "sso",
+  "npdes_permit": "WQCS00245",
+  "npdes_permits": [
+   "WQCS00245"
+  ],
+  "receiving_waters": [
+   "Aberdeen Creek [Pages Lake (Aberdeen Lake)]"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Aberdeen"
+  ],
+  "notes": "Row made from the sources' own names: collection-system permit WQCS00245 from the NC DWR SSO layers, its owner from DWR's permit records (research/nc/private-utilities.json; the overflow layers name no public owner for it). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-aberdeen"
+  ],
+  "source_areas": [
+   "nc"
+  ],
+  "legal_form": "town",
+  "permit_note": "WQCS00245 (Aberdeen Collection System, Moore County): permittee per WQCS00245_Remission Request DV-2026-0087_20261026, 10/26/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4741012&dbid=0&repo=WaterResources>."
+ },
+ {
+  "id": "nc-micro",
+  "name": "Town of Micro",
+  "state": "NC",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0090",
+  "npdes_permits": [
+   "WQCSD0090"
+  ],
+  "receiving_waters": [
+   "Little Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Micro"
+  ],
+  "notes": "Row made from the sources' own names: collection-system permit WQCSD0090 from the NC DWR SSO layers, its owner from DWR's permit records (research/nc/private-utilities.json; the overflow layers name no public owner for it). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-micro"
+  ],
+  "source_areas": [
+   "nc"
+  ],
+  "legal_form": "town",
+  "permit_note": "WQCSD0090 (Micro Collection System, Johnston County): permittee per WQCSD0090_NOV-2026-DV-0252 GC_20261019, 10/19/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4729322&dbid=0&repo=WaterResources>."
+ },
+ {
+  "id": "nc-pasquotank-county",
+  "name": "Pasquotank County",
+  "state": "NC",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0809",
+  "npdes_permits": [
+   "WQCSD0809"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pasquotank County"
+  ],
+  "notes": "Row made from the sources' own names: collection-system permit WQCSD0809 from the NC DWR SSO layers, its owner from DWR's permit records (research/nc/private-utilities.json; the overflow layers name no public owner for it). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-pasquotank-county"
+  ],
+  "source_areas": [
+   "nc"
+  ],
+  "legal_form": "county",
+  "permit_note": "WQCSD0809 (Pasquotank Industrial Park WWTF, Pasquotank County): permittee per WQCSD0809_DV-2026-0046_20260908, 9/8/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4660454&dbid=0&repo=WaterResources>."
+ },
+ {
+  "id": "nc-a-and-d-water-service",
+  "name": "A&D Water Service Inc",
+  "state": "NC",
+  "legal_form": "private utility",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0368",
+  "npdes_permits": [
+   "WQCSD0368"
+  ],
+  "receiving_waters": [
+   "Shaw Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Henderson County"
+  ],
+  "permit_note": "WQCSD0368 (Hunter's Glen WWTP, Henderson County): permittee per WQCSD0368_Press Release_20250918, 9/18/2025 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4105490&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Hunter's Glen WWTP (WQCSD0368). Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-a-and-d-water-service"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-aqua-north-carolina",
+  "name": "Aqua North Carolina Inc",
+  "state": "NC",
+  "legal_form": "private utility",
+  "kind": "sso",
+  "npdes_permit": "WQCS00147",
+  "npdes_permits": [
+   "WQCS00147",
+   "WQCS00293",
+   "WQCS00322",
+   "WQCS00380",
+   "WQCSD0158",
+   "WQCSD0181",
+   "WQCSD0219",
+   "WQCSD0267",
+   "WQCSD0401",
+   "WQCSD0505"
+  ],
+  "receiving_waters": [
+   "Overcup Creek",
+   "Brooks Creek (Branch)",
+   "Mill Creek (near Clayton)",
+   "Upper Barton Creek",
+   "Cub Creek",
+   "Morgan Creek",
+   "Muddy Creek",
+   "Pierce Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Stanley",
+   "Clayton",
+   "Raleigh",
+   "Chapel Hill",
+   "Wake Forest",
+   "Pittsboro",
+   "Union County",
+   "Chatham County",
+   "High Point"
+  ],
+  "permit_note": "WQCS00147 (Neuse Colony Collection System, Johnston County): permittee per WQCS00147_Permit (Issuance)_20261014, 10/14/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4725278&dbid=0&repo=WaterResources>; WQCS00293 (Govenors Club Collection System, Chatham County): permittee per WQCS00293_NOD-2026-DV-0039 Response_20260603, 6/3/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4491857&dbid=0&repo=WaterResources>; WQCS00322 (Country Woods East Collection System, Union County): permittee per WQCS00322_Annual Performance_20260227, 2/27/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4333497&dbid=0&repo=WaterResources>; WQCS00380 (Hawthorne Collection System, Wake County): permittee per WQCS00380_Incident 202600837 - Five Day Report_20260807, 8/7/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4608392&dbid=0&repo=WaterResources>; WQCSD0158 (Preserve at Jordan Lake Collection System, Chatham County): permittee per WQCSD0158_NOD-2026-DV-0001_20260107, 1/7/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4231380&dbid=0&repo=WaterResources>; WQCSD0181 (Chatham WRF Collection System, Chatham County): permittee per WQCSD0181_5 DAY Report_20250305, 3/5/2025 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3716260&dbid=0&repo=WaterResources>; WQCSD0219 (Melbille Heights Collection System, Randolph County): permittee per WQCSD0219_NOV2025DV0283_20251009, 10/9/2025 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4108411&dbid=0&repo=WaterResources>; WQCSD0267 (Chapel Ridge WWTP, Chatham County): permittee per WQCSD0267_NOV-2026-DV-0048_20260310, 3/10/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4338815&dbid=0&repo=WaterResources>; WQCSD0401 (Killian Crossroads Collection System, Catawba County): permittee per WQCSD0401_Compliance Evaluation Inspection_20230505, 5/5/2023 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2782377&dbid=0&repo=WaterResources>; WQCSD0505 (Hasentree Collection System, Wake County): permittee per WQCSD0505_NOV-2026-DV-0082_Response to Notice_20260511, 5/11/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4451442&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Neuse Colony Collection System (WQCS00147); Govenors Club Collection System (WQCS00293); Country Woods East Collection System (WQCS00322); Hawthorne Collection System (WQCS00380); Preserve at Jordan Lake Collection System (WQCSD0158); Chatham WRF Collection System (WQCSD0181); Melbille Heights Collection System (WQCSD0219); Chapel Ridge WWTP (WQCSD0267); Killian Crossroads Collection System (WQCSD0401); Hasentree Collection System (WQCSD0505). Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-aqua-north-carolina"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-birch-and-held",
+  "name": "Birch and Held LLC",
+  "state": "NC",
+  "legal_form": "private company",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0548",
+  "npdes_permits": [
+   "WQCSD0548"
+  ],
+  "receiving_waters": [
+   "Lake Norman"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Mecklenburg County"
+  ],
+  "permit_note": "WQCSD0548 (Sailpointe at Lake Norman, Mecklenburg County): permittee per WQCSD0548_BIMS Report_20230728, 7/28/2023 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2894683&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Sailpointe at Lake Norman (WQCSD0548). DWR's 2022-2025 overflow layer names an earlier owner (WQCSD0548: Babcock and Brown Residential LLC); its reports under the permit are joined to this row. Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-birch-and-held"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-burt-s-bees",
+  "name": "Burt's Bees Inc",
+  "state": "NC",
+  "legal_form": "industrial facility",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0636",
+  "npdes_permits": [
+   "WQCSD0636"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more of untreated waste reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(c), works other than municipal or domestic). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Morrisville"
+  ],
+  "permit_note": "WQCSD0636 (Burt's Bees, Inc., Durham County): permittee per WQCSD0636_NOD-2026-DV-0029_Notice of Deficiency_20260324, 3/24/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4436844&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Burt's Bees, Inc. (WQCSD0636). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-burt-s-bees"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-carolina-trace-utilities",
+  "name": "Carolina Trace Utilities Inc",
+  "state": "NC",
+  "legal_form": "private utility",
+  "kind": "sso",
+  "npdes_permit": "WQCS00217",
+  "npdes_permits": [
+   "WQCS00217"
+  ],
+  "receiving_waters": [
+   "Upper Little River (including Lake Trace below elevation 257 MSL) (5)",
+   "Carrs Creek",
+   "Upper Little River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Sanford"
+  ],
+  "permit_note": "WQCS00217 (Carolina Trace Collection System, Lee County): permittee per WQCS00217_NOV-2026-DV-0246 GC_20261015, 10/15/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4723597&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Carolina Trace Collection System (WQCS00217). Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-carolina-trace-utilities"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-carolina-village-mhc",
+  "name": "Carolina Village MHC LLC",
+  "state": "NC",
+  "legal_form": "mobile-home park",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0564",
+  "npdes_permits": [
+   "WQCSD0564"
+  ],
+  "receiving_waters": [
+   "Rocky River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Cabarrus County"
+  ],
+  "permit_note": "WQCSD0564 (Carolina Village MHP LLC Collection System, Cabarrus County): permittee per WQCSD0564_Notice of Deficiency_20230914, 9/14/2023 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3006012&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Carolina Village MHP LLC Collection System (WQCSD0564). Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-carolina-village-mhc"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-carolina-water-service-of-north-carolina",
+  "name": "Carolina Water Service Inc of North Carolina",
+  "state": "NC",
+  "legal_form": "private utility",
+  "kind": "sso",
+  "npdes_permit": "WQCS00162",
+  "npdes_permits": [
+   "WQCS00162",
+   "WQCS00174",
+   "WQCS00285",
+   "WQCS00331",
+   "WQCSD0244"
+  ],
+  "receiving_waters": [
+   "Flattop Creek",
+   "Nixons Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Avery County",
+   "Wake County",
+   "Dare County",
+   "Hampstead",
+   "Craven County"
+  ],
+  "permit_note": "WQCS00162 (Fairfield Harbour Collection System, Craven County): permittee per WQCS00162_SSO_NOV-2025-DV-0107 for September 2024_20250414, 4/14/2025 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3772039&dbid=0&repo=WaterResources>; WQCS00174 (Sugar Mountain Collection System, Avery County): permittee per WQCS00174_Compliance Evaluation Inspection_20240807, 8/7/2024 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3473579&dbid=0&repo=WaterResources>; WQCS00285 (Village at Nags Head Collection System, Dare County): permittee per WQCS00285_Application (Renewal)_20260121, 1/21/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4257031&dbid=0&repo=WaterResources>; WQCS00331 (Belvedere Plantation Collection System, Pender County): permittee per WQCS00331_Permit (Issuance)_20251003, 10/3/2025 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4077926&dbid=0&repo=WaterResources>; WQCSD0244 (Ashley Hills WWTP, Wake County): permittee per WQCSD0244_NOV-2024-DV-0236 Notce of Violation_20240522, 5/22/2024 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3312215&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Fairfield Harbour Collection System (WQCS00162); Sugar Mountain Collection System (WQCS00174); Village at Nags Head Collection System (WQCS00285); Belvedere Plantation Collection System (WQCS00331); Ashley Hills WWTP (WQCSD0244). Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-carolina-water-service-of-north-carolina"
+  ],
+  "source_areas": [
+   "nc"
+  ],
+  "short_name": "Carolina Water Service"
+ },
+ {
+  "id": "nc-currituck-water-and-sewer",
+  "name": "Currituck Water and Sewer LLC",
+  "state": "NC",
+  "legal_form": "private utility",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0176",
+  "npdes_permits": [
+   "WQCSD0176"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Currituck County"
+  ],
+  "permit_note": "WQCSD0176 (Carolina Village Collection System, Currituck County): permittee per WQCSD0176_DEC 2025 Quarterly ISRP Status Report_20251231, 12/31/2025 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4490192&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Carolina Village Collection System (WQCSD0176). DWR's 2022-2025 overflow layer names an earlier owner (WQCSD0176: Carolina Village NC LLC); its reports under the permit are joined to this row. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-currituck-water-and-sewer"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-greene-county-water-and-sewer-district-i",
+  "name": "Greene County Water & Sewer District I",
+  "state": "NC",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0172",
+  "npdes_permits": [
+   "WQCSD0172"
+  ],
+  "receiving_waters": [
+   "Contentnea Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Greene County"
+  ],
+  "notes": "Row made from the sources' own names: collection-system permit WQCSD0172 from the NC DWR SSO layers, its owner from DWR's permit records (research/nc/private-utilities.json; the overflow layers name no public owner for it). DWR's Owner field for this permit gives the name of the district's chairman, an individual, to whom its documents are addressed; the name is not reproduced. The permittee is the district itself, a public body. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-greene-county-water-and-sewer-district-i"
+  ],
+  "source_areas": [
+   "nc"
+  ],
+  "legal_form": "special district",
+  "permit_note": "WQCSD0172 (Greene County Water & Sewer District I, Greene County): permittee per WQCSD0172_SSO_NOV-2025-DV-0117 for December 2024_20250415, 4/15/2025 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3774462&dbid=0&repo=WaterResources>.",
+  "short_name": "Greene County Water & Sewer District I"
+ },
+ {
+  "id": "nc-havenpark-communities",
+  "name": "Havenpark Communities",
+  "state": "NC",
+  "legal_form": "mobile-home park",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0514",
+  "npdes_permits": [
+   "WQCSD0514"
+  ],
+  "receiving_waters": [
+   "CATAWBA RIVER (Lake Wylie below elevation 570)"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Charlotte"
+  ],
+  "permit_note": "WQCSD0514 (West Bloomfield Acres MHP Collection System, Mecklenburg County): permittee per WQCSD0514_Civil Penalty Assessment_20260302, 3/2/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4352872&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): West Bloomfield Acres MHP Collection System (WQCSD0514). DWR's 2022-2025 overflow layer names an earlier owner (WQCSD0514: West Bloomfield Acres LLC); its reports under the permit are joined to this row. Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-havenpark-communities"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-hillco",
+  "name": "Hillco Ltd",
+  "state": "NC",
+  "legal_form": "private company",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0700",
+  "npdes_permits": [
+   "WQCSD0700"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pitt County"
+  ],
+  "permit_note": "WQCSD0700 (Ayden Court Rehabilitation & Nursing Center, Pitt County): permittee per WQCSD0700_Response to Notice_20230829, 8/29/2023 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2955608&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Ayden Court Rehabilitation & Nursing Center (WQCSD0700). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-hillco"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-keyzer-catering",
+  "name": "Keyzer Catering LLC",
+  "state": "NC",
+  "legal_form": "private company",
+  "kind": "plant",
+  "npdes_permit": "NC0036919",
+  "npdes_permits": [
+   "NC0036919"
+  ],
+  "receiving_waters": [
+   "Pantego Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for NC0036919)",
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pantego"
+  ],
+  "permit_note": "NC0036919 (Keyzer Catering WWTP, Beaufort County): permittee per EPA ICIS-NPDES (ECHO) permit record for NC0036919: permit name and facility type 'Privately Owned Facility' <https://echo.epa.gov/detailed-facility-report?fid=NC0036919>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Keyzer Catering WWTP (NC0036919). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-keyzer-catering"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-lake-creek-corporation",
+  "name": "Lake Creek Corporation",
+  "state": "NC",
+  "legal_form": "private company",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0103",
+  "npdes_permits": [
+   "WQCSD0103"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Bladen County"
+  ],
+  "permit_note": "WQCSD0103 (Baytree Lakes Collection System, Bladen County): permittee per WQCSD0103_Compliance Evaluation Inspection_20260813, 8/13/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4665390&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Baytree Lakes Collection System (WQCSD0103). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-lake-creek-corporation"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-mill-ridge-property-owners-association",
+  "name": "Mill Ridge Property Owners Association",
+  "state": "NC",
+  "legal_form": "owners' association",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0234",
+  "npdes_permits": [
+   "WQCSD0234"
+  ],
+  "receiving_waters": [
+   "WATAUGA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Banner Elk"
+  ],
+  "permit_note": "WQCSD0234 (Mill Ridge Development Collection System, Watauga County): permittee per WQCSD0234_NOV-2022-PC-0346_20220622, 6/22/2022 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2382694&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Mill Ridge Development Collection System (WQCSD0234). Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-mill-ridge-property-owners-association"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-mountain-air-country-club",
+  "name": "Mountain Air Country Club",
+  "state": "NC",
+  "legal_form": "private club",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0349",
+  "npdes_permits": [
+   "WQCSD0349"
+  ],
+  "receiving_waters": [
+   "Phipps Creek",
+   "Baker Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Burnsville"
+  ],
+  "permit_note": "WQCSD0349 (Mountain Air Country Club-Camp Crk M, Yancey County): permittee per WQCSD0349_NOV-2023-DV-0022_20230111, 1/11/2023 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2637541&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Mountain Air Country Club-Camp Crk M (WQCSD0349). Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-mountain-air-country-club"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-old-north-state-water-company",
+  "name": "Old North State Water Company",
+  "state": "NC",
+  "legal_form": "private utility",
+  "kind": "sso",
+  "npdes_permit": "WQCS00372",
+  "npdes_permits": [
+   "WQCS00372",
+   "WQCSD0063",
+   "WQCSD0529"
+  ],
+  "receiving_waters": [
+   "Pokeberry Creek",
+   "Little Northeast Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Chapel Hill",
+   "Jacksonville",
+   "Pender County"
+  ],
+  "permit_note": "WQCS00372 (Briar Chapel Collection System, Chatham County): permittee per WQCS00372_Compliance Evaluation Inspection_20261023, 10/23/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4733525&dbid=0&repo=WaterResources>; WQCSD0063 (Horse Creek Farms Deemed Collection System, Onslow County): permittee per WQCSD0063_Compliance Evaluation Inspection_20250715, 7/15/2025 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3977016&dbid=0&repo=WaterResources>; WQCSD0529 (Majestic Oaks Deemed Collection System, Pender County): permittee per WQCSD0529_NOD-2023-DV-0052_20230609, 6/9/2023 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2837139&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Briar Chapel Collection System (WQCS00372); Horse Creek Farms Deemed Collection System (WQCSD0063); Majestic Oaks Deemed Collection System (WQCSD0529). Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-old-north-state-water-company"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-old-north-utility-services",
+  "name": "Old North Utility Services Inc",
+  "state": "NC",
+  "legal_form": "private utility",
+  "kind": "sso",
+  "npdes_permit": "WQCS00029",
+  "npdes_permits": [
+   "WQCS00029"
+  ],
+  "receiving_waters": [
+   "Beaver Creek (Beaver Creek Pond)",
+   "Tank Creek (McDuffie Cr.) (McFayden Pond)",
+   "Stewarts Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fort Bragg"
+  ],
+  "permit_note": "WQCS00029 (Fort Bragg Collection System, Cumberland County): permittee per WQCS00029_Annual Report_20260819, 8/19/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4625709&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Fort Bragg Collection System (WQCS00029). Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-old-north-utility-services"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-pcs-phosphate-company",
+  "name": "PCS Phosphate Company Inc",
+  "state": "NC",
+  "legal_form": "industrial facility",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0691",
+  "npdes_permits": [
+   "WQCSD0691"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more of untreated waste reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(c), works other than municipal or domestic). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Beaufort County"
+  ],
+  "permit_note": "WQCSD0691 (PCS Phosphate Wastewater Collection System, Beaufort County): permittee per WQCSD0691_SSO_NOV-2025-DV-0125 for August 2024_20250415, 4/15/2025 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3775253&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): PCS Phosphate Wastewater Collection System (WQCSD0691). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-pcs-phosphate-company"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-t3t-colonial",
+  "name": "T3t Colonial LLC",
+  "state": "NC",
+  "legal_form": "mobile-home park",
+  "kind": "sso",
+  "npdes_permit": "WQCSD0710",
+  "npdes_permits": [
+   "WQCSD0710"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Butner"
+  ],
+  "permit_note": "WQCSD0710 (Colonial Mobile Home Park, Granville County): permittee per WQCSD0710_Enforcement (Letter)_DV-2020-0102_20230907, 9/7/2023 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=1285267&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Colonial Mobile Home Park (WQCSD0710). No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-t3t-colonial"
+  ],
+  "source_areas": [
+   "nc"
+  ]
+ },
+ {
+  "id": "nc-transylvania-utilities",
+  "name": "Transylvania Utilities Inc",
+  "state": "NC",
+  "legal_form": "private utility",
+  "kind": "sso",
+  "npdes_permit": "WQCS00219",
+  "npdes_permits": [
+   "WQCS00219"
+  ],
+  "receiving_waters": [
+   "Batson Creek",
+   "Carson Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press release to news media within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)). No web posting is required; none searched for this operator.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Transylvania County"
+  ],
+  "permit_note": "WQCS00219 (Transylvania Collection System, Transylvania County): permittee per WQCS00219_Permit (Issuance)_20260212, 2/12/2026 <https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4293693&dbid=0&repo=WaterResources>.",
+  "notes": "Privately owned; covered like any other operator (G.S. 143-215.1C binds the owner or operator of any permitted wastewater collection or treatment works). Permittee and facilities from the permit records (research/nc/private-utilities.json: NC DWR's for a collection-system permit, EPA ICIS-NPDES for a plant; each is cited in permit_note): Transylvania Collection System (WQCS00219). Receiving waters as the overflow reports under these permits name them. No contact or notification channel was researched (scripts/add_nc_operators.py). Not verified.",
+  "verified": false,
+  "checked": "2026-11-04",
+  "aliases": [
+   "nc-transylvania-utilities"
   ],
   "source_areas": [
    "nc"
