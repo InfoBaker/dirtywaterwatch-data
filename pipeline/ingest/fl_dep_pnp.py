@@ -208,7 +208,7 @@ NOT_FIRST = set("""hurricane tropical state asset lift contractor center vac ini
 aqua subject incident bypass pumper risk underground seacoast sun northeast northwest southeast southwest north south
 east west central the a an our their county city town village utility utilities emergency environmental code customer
 service services dispatch central sewer water wastewater storm pump plant main""".split())
-GIVEN_PAIR = re.compile(r"\b([A-Z][a-z]+|[A-Z]{2,})\s+([A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)?|[A-Z]{2,}(?:[-'][A-Z]+)?)\b(\s+\w+)?")
+GIVEN_PAIR = re.compile(r"(?=\b([A-Z][a-z]+|[A-Z]{2,})\s+([A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)?|[A-Z]{2,}(?:[-'][A-Z]+)?)\b(\s+\w+)?)")
 EMAIL_HEADER = re.compile(r"\bFrom:?\s+[^\n]{0,240}?\bSent:?\s+\w+day,?\s+\w+\s+\d{1,2},\s+\d{4},?\s+\d{1,2}:\d{2}(?::\d{2})?\s*[AP]M")
 
 
@@ -219,19 +219,24 @@ def _given_names():
 
 def drop_given_pairs(s: str) -> str:
     first = _given_names()
-
-    def sub(m: re.Match) -> str:
+    cuts, last_end = [], -1
+    for m in GIVEN_PAIR.finditer(s):           # overlapping: "PM Andrew Sample" tries "PM Andrew" and "Andrew Sample"
         g, n = m.group(1), m.group(2)
+        if m.start(1) < last_end:
+            continue
         nxt = (m.group(3) or "").strip().lower().strip(".,")
         if g.lower() not in first or f"{g} {n}".lower() in PLACE_PAIRS or g.lower() in FL_PLACE_GIVEN:
-            return m.group(0)
-        if re.search(r"\b(?:of|in|at|near)\s+$", m.string[max(0, m.start() - 6):m.start()], re.I) and n.isupper() is False \
-                and nxt in ("", "and", "on", "in"):
-            return m.group(0)
+            continue
+        if re.search(r"\b(?:of|in|at|near)\s+$", s[max(0, m.start() - 6):m.start()], re.I) and nxt in ("", "and", "on", "in"):
+            continue
         if n.lower() in PLACE_AFTER or n.lower() in NOT_PERSON_WORDS or nxt in PLACE_AFTER:
-            return m.group(0)
-        return "[name removed]" + (m.group(3) or "")
-    return GIVEN_PAIR.sub(sub, s)
+            continue
+        end = m.end(2)
+        cuts.append((m.start(1), end))
+        last_end = end
+    for a, b in reversed(cuts):
+        s = s[:a] + "[name removed]" + s[b:]
+    return s
 
 
 def _drop_cue_name(m: re.Match) -> str:
