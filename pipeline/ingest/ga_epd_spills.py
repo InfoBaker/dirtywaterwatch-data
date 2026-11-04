@@ -33,8 +33,10 @@ Record rules
     posting has aged out of the 30-day window: it is kept, raw._aged_out_after (the last posting that showed it).
     A row that disappears while still inside the window was withdrawn or corrected: it is kept with
     raw._missing_from_source_since, and when a row of the same permit and address with another begin date within
-    seven days appeared in that posting (2026-11-03: Cauley Creek moved from 2026-10-06 to 2026-10-03), it is
-    duplicate_of that row.
+    seven days first appeared in that posting (2026-11-03: Cauley Creek moved from 2026-10-06 to 2026-10-03), it is
+    duplicate_of that row. A vanished row is never given an end: its end stays unknown. A posting with no rows at all
+    changes nothing (a fault in the file, not every spill withdrawn); an older posting that cannot be read is skipped
+    and named in meta (unreadable_postings); the newest must be read or the run fails and keeps the previous file.
   - event_type: OVERFLOW_DESTINATION naming a CSO ("CSO Dry-weather") -> cso; every other row -> sso (the rule's
     "spill" is a raw-sewage discharge from the collection system or plant; OVERFLOW_TYPE and SPILL_SOURCE stay in
     raw.row and OVERFLOW_TYPE gives `material`). status unknown: the list has no end date and no time.
@@ -45,19 +47,26 @@ Record rules
     spill has not been determined", EPD's page) -> volume_gal null and volume_text saying so. estimate_flag unknown.
   - Water: WATERWAY_IMPACTED as given in waterbody_text. "Ditch", "Storm Drain", "Basin", "unknown" or blank name no
     water (raw._water.why_none). No Georgia water records yet: water_slugs [], water_match none. A destination that
-    is set and names neither waters of the State nor a CSO (dry land only) is kept with raw.reached_water false.
+    says dry land and names neither waters of the State nor a CSO ("Dry Land Overflow") is kept with
+    raw.reached_water false, unless WATERWAY_IMPACTED names a water; any other destination wording is not read as
+    "did not reach water" (raw._destination_not_read), so a spill is never hidden on a wording not yet seen.
   - Operator: discharger_id from data/dischargers.json by permit (npdes_permit / npdes_permits); discharger_name is
     EPD's FACILITY_NAME. npdes_permit only for a real permit number (GA + 7 digits).
   - Points: a layer row with the same permit and normalised address, when exactly one, lends LATITUDE / LONGITUDE
-    (coord_source "geocode": the layer's point is EPD's location for the address; precision not stated).
+    (coord_source "geocode": the layer's point is EPD's location for the address; precision not stated). When the
+    layer is down or no longer lists the row, the point read earlier stays (raw._coords_kept_from_earlier_read).
   - EPA's copy: Georgia permittees file 24-hour and 5-day reports in EPD's GEOS, and these reach EPA's Sewer Overflow
     and Bypass Event tables (ingest/echo_sewer_overflow_events.py, run before this module; for Georgia they carry
     times and an end but no volume, and mostly the plant's point). An EPD row pairs with the EPA record of the same
-    permit and begin day: the record whose receiving water is the same name first; else, when only one EPD row and
-    one EPA record of that permit and day remain unpaired, those two. Several left on both sides are not paired
-    (raw._epa_candidates). The EPD record is the public one (gallons, address, waterway, cause, the map layer's
-    point): it takes EPA's ended_at when it has none (status ended, raw._end_basis names the EPA record and "EPA
-    eRule report") and raw._epa_record; the EPA record is marked duplicate_of the EPD record, written back into
+    permit and begin day: the record whose receiving water is the same name first, when that name picks exactly one
+    row and one record (two spills of one system on one water that day are not told apart); else, when only one EPD
+    row and one EPA record of that permit and day remain unpaired and they do not contradict each other (two different
+    specific water names, or EPD's dry land against a water EPA names: raw._epa_not_paired), those two. Several left
+    on both sides are not paired (raw._epa_candidates). An end borrowed from the wrong report would be an invented end,
+    so every doubt leaves the EPD row without one. The EPD record is the public one (gallons, address, waterway,
+    cause, the map layer's point): it takes EPA's ended_at when it has none and EPA's end is the spill's own (minute
+    precision; an extreme-weather report's reporting period is not: raw._epa_end_not_used), with status ended,
+    raw._end_basis naming the EPA record and "EPA eRule report", and raw._epa_record; the EPA record is marked duplicate_of the EPD record, written back into
     EPA's events file (data/build/events/echo-sewer-overflow.json). Unpaired EPA records stay as they are. The pairs
     are recomputed on every run (earlier marks on both sides are cleared first), so a report EPA receives later
     still finds its EPD row; the EPA module rewrites its file each run, and this module runs after it.
@@ -68,7 +77,8 @@ Privacy: the list names facilities and street addresses, no people. common.strip
 Run from pipeline/:  python -m ingest.ga_epd_spills [--file posting.xlsx ...] [--layer layer.json]
                                                     [--backfill-from YYYY-MM-DD]
   --file reads saved workbooks (oldest first; no network unless --layer is absent and --no-layer is not given).
-  --backfill-from also reads every dated file from that date to the linked one (a 404 is a day with no posting).
+  --backfill-from also reads every dated file from that date to the linked one (a 404 is a day with no posting; about
+    one request a second). Run by hand, once, before the state goes live; the hourly run never backfills.
   Without options: the linked posting, plus any posting since the last one read (up to 14 days) that a missed run
   skipped. Cadence: each business day (about one business day of latency).
 """
@@ -78,6 +88,7 @@ import argparse
 import json
 import re
 import sys
+import time
 import xml.etree.ElementTree as ET
 import zipfile
 from collections import Counter, defaultdict
@@ -102,6 +113,7 @@ RAW = RAW_DIR / SOURCE_ID
 AUTHORITY = "Georgia Environmental Protection Division (Municipal Sewage Spills Reported to EPD)"
 CATCH_UP_DAYS = 14
 MOVED_DAYS = 7
+BACKFILL_PAUSE_S = 1.0
 REAL_PERMIT = re.compile(r"^GA\d{7}$")
 LINK = re.compile(r"/document/document/sewagespillsreport(\d{8})/download")
 NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
@@ -115,6 +127,8 @@ ADDR_WORDS = {"street": "st", "avenue": "ave", "road": "rd", "drive": "dr", "lan
               "trace": "trce", "circle": "cir", "trail": "trl", "northeast": "ne", "northwest": "nw",
               "southeast": "se", "southwest": "sw", "north": "n", "south": "s", "east": "e", "west": "w",
               "georgia": "ga"}
+WATER_DEST = re.compile(r"waters of the state|\bcso\b", re.I)
+DRY_DEST = re.compile(r"\bdry\s*land\b", re.I)
 ZERO_NOTE = "not yet determined (EPD: a zero or blank quantity means the amount has not been determined)"
 
 
@@ -275,9 +289,16 @@ def to_record(rid: str, row: dict, posting: str | None, ctx: dict) -> dict:
     if NO_WATER.match(water):
         raw["_water"] = {"why_none": f"waterway given as {water!r}: no surface water named" if water else
                          "waterway not given yet"}
-    if dest and not re.search(r"waters of the state|\bcso\b", dest, re.I):
-        raw["reached_water"] = False
-        raw["_reached_water_basis"] = f"destination given as {dest!r}"
+    if dest and not WATER_DEST.search(dest):
+        if not DRY_DEST.search(dest):
+            raw["_destination_not_read"] = (f"destination given as {dest!r}: not a wording this reader knows; "
+                                            f"not taken to mean the spill stayed out of the water")
+        elif water and not NO_WATER.match(water):
+            raw["_destination_not_read"] = (f"destination given as {dest!r} but the waterway impacted is given as "
+                                            f"{water!r}: not taken to mean the spill stayed out of the water")
+        else:
+            raw["reached_water"] = False
+            raw["_reached_water_basis"] = f"destination given as {dest!r}"
     lat = lon = None
     hits = ctx["points"].get((permit, norm_addr(row.get("overflow_location"))), [])
     if len(hits) == 1:
@@ -315,6 +336,11 @@ def apply_posting(prev: dict[str, dict], rows: list[dict], posting: str | None, 
             for k in ("_first_seen_at", "_first_seen_posting", "_revisions"):
                 if praw.get(k) is not None:
                     rec["raw"][k] = praw[k]
+            if rec.get("lat") is None and "_coords" not in rec["raw"] and p.get("lat") is not None:
+                # the map layer is down, or no longer lists the row: the point read earlier stays
+                rec["lat"], rec["lon"], rec["coord_source"] = p["lat"], p["lon"], p.get("coord_source")
+                rec["raw"]["_coords"] = praw.get("_coords") or "a point read earlier from EPD's map layer"
+                rec["raw"]["_coords_kept_from_earlier_read"] = True
             old = praw.get("row") or {}
             changed = {k: old.get(k) for k in set(old) | set(row) if (old.get(k) or "") != (row.get(k) or "")}
             if changed:
@@ -331,6 +357,9 @@ def apply_posting(prev: dict[str, dict], rows: list[dict], posting: str | None, 
             n["new"] += 1
         rec["raw"]["_last_seen_posting"] = posting
         cur[rec["event_id"]] = rec
+    if not cur:            # an empty list for the whole state is a fault in the posting, not 60 withdrawals
+        n["empty_posting"] += 1
+        return {**prev}, n
     oldest = min((r["started_at"] for r in cur.values() if r.get("started_at")), default=None)
     by_permit_addr = defaultdict(list)
     for r in cur.values():
@@ -351,7 +380,7 @@ def apply_posting(prev: dict[str, dict], rows: list[dict], posting: str | None, 
             row = p["raw"].get("row") or {}
             succ = [r for r in by_permit_addr.get(((row.get("permit_number") or "").upper(),
                                                    norm_addr(row.get("overflow_location"))), [])
-                    if r.get("started_at") and p.get("started_at") and abs(
+                    if r["event_id"] not in prev and r.get("started_at") and p.get("started_at") and abs(
                         (date.fromisoformat(r["started_at"]) - date.fromisoformat(p["started_at"])).days) <= MOVED_DAYS]
             if succ and not p.get("duplicate_of"):
                 p["duplicate_of"] = succ[0]["event_id"]
@@ -380,8 +409,8 @@ def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
         if (r["raw"].get("_end_basis") or "").startswith(EPA_BASIS):
             r["ended_at"], r["status"] = None, "unknown"
             r["raw"].pop("_end_basis", None)
-        r["raw"].pop("_epa_candidates", None)
-        r["raw"].pop("_epa_record", None)
+        for k in ("_epa_candidates", "_epa_record", "_epa_not_paired", "_epa_end_not_used"):
+            r["raw"].pop(k, None)
     for e in epa:
         if ((e.get("raw") or {}).get("_duplicate_basis") or "").startswith(EPD_BASIS):
             e["duplicate_of"] = None
@@ -405,21 +434,28 @@ def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
             n["epd_without_epa"] += len(rs)
             continue
         left = []
+        row_keys = Counter(water_key(r.get("waterbody_text")) for r in rs)
         for r in rs:
             wk = water_key(r.get("waterbody_text"))
-            hit = next((e for e in es if wk and any(water_key(w) == wk for w in (e.get("waterbody_text") or "").split("; "))), None)
-            if hit:
-                es.remove(hit)
-                _pair(r, hit, "same permit, day and receiving water")
-                paired_epa.add(hit["event_id"])
+            hits = [e for e in es if wk and wk in epa_water_keys(e)]
+            if len(hits) == 1 and row_keys[wk] == 1:
+                es.remove(hits[0])
+                _pair(r, hits[0], "same permit, day and receiving water")
+                paired_epa.add(hits[0]["event_id"])
                 n["paired_by_water"] += 1
             else:
+                if hits:                 # two spills of one permit, day and water: whose end is whose is not known
+                    n["same_water_ambiguous"] += 1
                 left.append(r)
-        if len(left) == 1 and len(es) == 1:
+        if len(left) == 1 and len(es) == 1 and not contradicts(left[0], es[0]):
             _pair(left[0], es[0], "the only EPD row and the only EPA report of this permit and day")
             paired_epa.add(es[0]["event_id"])
             n["paired_alone"] += 1
         elif left:
+            if len(left) == 1 and len(es) == 1:
+                left[0]["raw"]["_epa_not_paired"] = (f"{es[0]['event_id']} is the only EPA report of this permit and "
+                                                     f"day, but {contradicts(left[0], es[0])}")
+                n["not_paired_contradiction"] += 1
             for r in left:
                 r["raw"]["_epa_candidates"] = [e["event_id"] for e in es]
             n["epd_without_epa"] += len(left)
@@ -427,10 +463,35 @@ def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
     return n
 
 
+# a water key that names no particular water ("Unnamed tributary", "UT", "creek"): it contradicts no name
+GENERIC_WATER = re.compile(r"^(?:unnamed|unamed|unnammed|unknown|an?)?(?:ut|trib\w*|stream|creek|branch|ditch|"
+                           r"storm\w*|ms4\w*|catchbasin|pond)?$")
+
+
+def epa_water_keys(e: dict) -> set[str]:
+    return {k for k in (water_key(w) for w in (e.get("waterbody_text") or "").split("; ")) if k}
+
+
+def contradicts(r: dict, e: dict) -> str | None:
+    """Why the EPD row r and EPA's report e cannot be the same spill, or None. Both name a water and the names differ
+    (another spill of the same system that day), or EPD says the spill stayed on dry land and EPA names a water."""
+    wk, ek = water_key(r.get("waterbody_text")), epa_water_keys(e)
+    specific = {k for k in ek if not GENERIC_WATER.match(k)}
+    if wk and not GENERIC_WATER.match(wk) and specific and not any(wk in k or k in wk for k in specific):
+        return f"EPD names {r.get('waterbody_text')!r} and EPA {e.get('waterbody_text')!r}"
+    if r["raw"].get("reached_water") is False and ek:
+        return f"EPD says the spill did not reach a water and EPA names {e.get('waterbody_text')!r}"
+    return None
+
+
 def _pair(r: dict, e: dict, why: str) -> None:
-    """The EPD record r stays primary; EPA's e is duplicate_of it. r takes e's end only when it has none."""
+    """The EPD record r stays primary; EPA's e is duplicate_of it. r takes e's end only when it has none and e's end is
+    the spill's own reported end (minute precision: not the reporting period of an extreme-weather report)."""
     r["raw"]["_epa_record"] = e["event_id"]
-    if not r.get("ended_at") and e.get("ended_at"):
+    if not r.get("ended_at") and e.get("ended_at") and e.get("time_precision") != "minute":
+        r["raw"]["_epa_end_not_used"] = (f"{e['event_id']} gives an end of {e['ended_at']} at {e.get('time_precision')} "
+                                         f"precision (a reporting period, not the spill's own end)")
+    elif not r.get("ended_at") and e.get("ended_at"):
         r["ended_at"], r["status"] = e["ended_at"], "ended"
         r["raw"]["_end_basis"] = (f"{EPA_BASIS} {e['event_id']} ({why}; EPA start {e.get('started_at')}, end "
                                   f"{e['ended_at']}, as given, presumably local time)")
@@ -446,8 +507,10 @@ def get(sess: requests.Session, url: str, **kw) -> requests.Response:
     return r
 
 
-def fetch_postings(sess: requests.Session, last_read: str | None, backfill_from: str | None) -> tuple[list, str | None]:
-    """[(ymd, url, bytes, last_modified)] oldest first, and the linked file's date."""
+def fetch_postings(sess: requests.Session, last_read: str | None, backfill_from: str | None,
+                   errors: list | None = None) -> tuple[list, str | None]:
+    """[(ymd, url, bytes, last_modified)] oldest first, and the linked file's date. A catch-up or backfill day that
+    answers neither a workbook nor 404 (no posting that day) is named in errors: that posting is not read."""
     page = get(sess, PAGE_URL)
     page.raise_for_status()
     links = sorted(set(LINK.findall(page.text)))
@@ -476,6 +539,10 @@ def fetch_postings(sess: requests.Session, last_read: str | None, backfill_from:
                 out.append((ymd, url, r.content, lm_iso))
             elif ymd == linked:
                 raise ValueError(f"linked file {url} answered {r.status_code} {ctype}")
+            elif r.status_code != 404 and errors is not None:
+                errors.append(f"posting {ymd} not read: {url} answered {r.status_code} {ctype}")
+            if backfill_from:
+                time.sleep(BACKFILL_PAUSE_S)            # one request a second or so for a long backfill
         d += timedelta(days=1)
     return out, linked
 
@@ -509,8 +576,15 @@ def build(postings: list[tuple[str, str, bytes, str | None]], prev_records: list
     state = {r["event_id"]: r for r in prev_records}
     stats: dict = {"postings": [], "history": Counter()}
     pts = layer_points(layer)
-    for ymd, url, content, lm in postings:
-        posting, rows = read_posting(content)
+    stats["unreadable_postings"] = []
+    for i, (ymd, url, content, lm) in enumerate(postings):
+        try:
+            posting, rows = read_posting(content)
+        except (ValueError, KeyError, IndexError, zipfile.BadZipFile, ET.ParseError) as e:
+            if i == len(postings) - 1:
+                raise                                   # the newest posting must be read
+            stats["unreadable_postings"].append(f"{ymd}: {type(e).__name__}: {e}"[:300])
+            continue
         posting = posting or f"{ymd[:4]}-{ymd[4:6]}-{ymd[6:]}"
         ctx = {"file_url": url, "last_modified": lm, "fetched_at": fetched_at, "points": pts, "permits": permits}
         state, n = apply_posting(state, rows, posting, ctx)
@@ -556,7 +630,7 @@ def main(argv=None) -> int:
             linked = postings[-1][0] if postings else None
         else:
             postings, linked = fetch_postings(sess, (prev_doc.get("meta") or {}).get("last_posting_read"),
-                                              args.backfill_from)
+                                              args.backfill_from, errors)
             for ymd, _, content, _ in postings:
                 keep_raw(ymd, content)
         if not postings:

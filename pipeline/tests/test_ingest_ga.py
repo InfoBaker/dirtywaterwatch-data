@@ -170,7 +170,8 @@ def test_map_layer_lends_its_point_to_the_same_permit_and_address():
 
 def epa(eid, day, water, permit="GA0000001"):
     return {"event_id": f"echo-sewer-overflow:{eid}", "npdes_permit": permit, "started_at": f"{day}T10:00:00",
-            "ended_at": f"{day}T11:00:00", "event_type": "sso", "status": "ended", "waterbody_text": water,
+            "ended_at": f"{day}T11:00:00", "time_precision": "minute", "event_type": "sso", "status": "ended",
+            "waterbody_text": water,
             "lat": 33.0, "lon": -84.0, "duplicate_of": None, "raw": {}}
 
 
@@ -335,3 +336,115 @@ def test_georgias_own_no_water_wordings_are_read_for_georgia_only():
     assert not E.no_water("MS4 stormwater system", "GA")
     ok, why = E.reached_water({}, ["SSO"], ["Dry land"], [], "GA")
     assert not ok and why == "receiving water stated as none"
+
+
+# ---------------------------------------------------------------- review fixes (2026-11-04)
+
+def test_only_a_dry_land_destination_says_the_spill_stayed_out_of_the_water():
+    recs, _ = run([posting("2026-11-02", [
+        row(OVERFLOW_LOCATION="5 Elm St", OVERFLOW_DESTINATION="Storm Sewer System"),
+        row(OVERFLOW_LOCATION="6 Elm St", OVERFLOW_DESTINATION="Dry Land Overflow", WATERWAY_IMPACTED="Test Creek"),
+        row(OVERFLOW_LOCATION="7 Elm St", OVERFLOW_DESTINATION="Dry Land Overflow", WATERWAY_IMPACTED="Ditch")])])
+    r = {x["outfall_name"].split()[0]: x for x in recs}
+    assert "reached_water" not in r["5"]["raw"] and "not a wording" in r["5"]["raw"]["_destination_not_read"]
+    assert "reached_water" not in r["6"]["raw"] and "Test Creek" in r["6"]["raw"]["_destination_not_read"]
+    assert r["7"]["raw"]["reached_water"] is False
+
+
+def test_a_map_layer_outage_keeps_the_point_read_earlier():
+    layer = json.loads((FIX / "ga_epd_spills_layer.json").read_text())
+    first, _ = run([posting("2026-11-02", [row()])], layer=layer)
+    assert first[0]["lat"] == 33.75
+    again, _ = run([posting("2026-11-03", [row()])], prev=first, layer=None)
+    assert (again[0]["lat"], again[0]["lon"], again[0]["coord_source"]) == (33.75, -84.39, "geocode")
+    assert again[0]["raw"]["_coords_kept_from_earlier_read"] is True
+
+
+def test_an_empty_posting_withdraws_nothing():
+    first, _ = run([posting("2026-11-02", [row()])])
+    again, stats = run([posting("2026-11-03", [])], prev=first)
+    assert "_missing_from_source_since" not in again[0]["raw"] and stats["history"] == {"empty_posting": 1}
+
+
+def test_a_vanished_row_is_not_made_a_duplicate_of_a_row_already_listed():
+    a = row(SPILL_BEGIN_DATE="2026-10-20", OVERFLOW_LOCATION="3 Fir Dr Testville, Georgia 30000")
+    b = row(SPILL_BEGIN_DATE="2026-10-23", OVERFLOW_LOCATION="3 Fir Dr Testville, Georgia 30000")
+    keep = row(SPILL_BEGIN_DATE="2026-10-05")                 # the window still reaches back past 10-20
+    recs, stats = run([posting("2026-11-02", [keep, a, b]), posting("2026-11-03", [keep, b])])
+    gone = by_id(recs)["ga0000001-20261020-3-fir-dr-testville-ga-30000"]
+    assert gone["duplicate_of"] is None and gone["raw"]["_missing_from_source_since"] == "2026-11-03"
+    assert gone["ended_at"] is None and gone["status"] == "unknown"          # a vanished row gets no end
+    assert stats["history"]["withdrawn_within_window"] == 1
+
+
+def test_the_only_row_and_report_do_not_pair_when_they_name_different_waters():
+    reports = [epa("a", "2026-10-29", "TEST CREEK"), epa("b", "2026-10-29", "Big River")]
+    r, stats = pair_run(reports)
+    assert r["8"]["ended_at"] is None and r["8"]["status"] == "unknown" and reports[1]["duplicate_of"] is None
+    assert "'Other Creek'" in r["8"]["raw"]["_epa_not_paired"] and stats["epa_pairing"]["not_paired_contradiction"] == 1
+    # a generic name ("UT", "Unnamed tributary") or one name inside the other is no contradiction
+    for w in ("UT", "Unnamed Tributary to Other Creek"):
+        reports = [epa("a", "2026-10-29", "TEST CREEK"), epa("b", "2026-10-29", w)]
+        r, _ = pair_run(reports)
+        assert reports[1]["duplicate_of"] == r["8"]["event_id"], w
+
+
+def test_dry_land_on_epds_list_does_not_take_the_end_of_a_report_naming_a_water():
+    rows = [row(OVERFLOW_DESTINATION="Dry Land Overflow")]
+    reports = [epa("a", "2026-10-29", "Test Creek")]
+    recs, _ = run([posting("2026-11-02", rows)], epa=reports)
+    assert recs[0]["ended_at"] is None and reports[0]["duplicate_of"] is None
+    assert "did not reach a water" in recs[0]["raw"]["_epa_not_paired"]
+
+
+def test_two_spills_on_one_water_do_not_take_each_others_end():
+    rows = [row(WATERWAY_IMPACTED="Test Creek"), row(OVERFLOW_LOCATION="9 Oak Rd", WATERWAY_IMPACTED="Test Creek")]
+    reports = [epa("a", "2026-10-29", "Test Creek"), epa("b", "2026-10-29", "Test Creek")]
+    recs, stats = run([posting("2026-11-02", rows)], epa=reports)
+    assert all(x["ended_at"] is None for x in recs) and not any(e["duplicate_of"] for e in reports)
+    assert stats["epa_pairing"]["same_water_ambiguous"] == 2
+    assert all(len(x["raw"]["_epa_candidates"]) == 2 for x in recs)
+
+
+def test_an_extreme_weather_reporting_period_is_not_the_spills_end():
+    rep = {**epa("a", "2026-10-29", "Test Creek"), "started_at": "2026-10-29", "ended_at": "2026-10-31",
+           "time_precision": "day"}
+    recs, _ = run([posting("2026-11-02", [row(WATERWAY_IMPACTED="Test Creek")])], epa=[rep])
+    assert recs[0]["ended_at"] is None and recs[0]["status"] == "unknown"
+    assert rep["duplicate_of"] == recs[0]["event_id"] and "reporting period" in recs[0]["raw"]["_epa_end_not_used"]
+
+
+def test_an_unreadable_older_posting_is_skipped_but_the_newest_must_be_read():
+    bad = ("20261030", G.FILE_URL.format(ymd="20261030"), b"<html>moved</html>", None)
+    recs, stats = run([bad, posting("2026-11-02", [row()])])
+    assert len(recs) == 1 and stats["unreadable_postings"][0].startswith("20261030")
+    try:
+        run([posting("2026-11-02", [row()]), bad])
+    except (ValueError, zipfile.BadZipFile):
+        return
+    raise AssertionError("an unreadable newest posting was accepted")
+
+
+class _Resp:
+    def __init__(self, status, content=b"", text="", headers=None):
+        self.status_code, self.content, self.text, self.headers = status, content, text, headers or {}
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            raise RuntimeError(self.status_code)
+
+
+def test_a_catch_up_day_that_fails_is_named_not_silently_skipped():
+    ok = workbook("2026-11-03", [row()])
+    answers = {G.PAGE_URL: _Resp(200, text='<a href="/document/document/sewagespillsreport20261103/download">'),
+               G.FILE_URL.format(ymd="20261030"): _Resp(503, headers={"content-type": "text/html"}),
+               G.FILE_URL.format(ymd="20261102"): _Resp(404),
+               G.FILE_URL.format(ymd="20261103"): _Resp(200, content=ok)}
+
+    class Sess:
+        def get(self, url, **kw):
+            return answers[url]
+    errors: list = []
+    got, linked = G.fetch_postings(Sess(), "2026-10-29", None, errors)
+    assert linked == "20261103" and [p[0] for p in got] == ["20261103"]
+    assert len(errors) == 1 and "20261030" in errors[0] and "503" in errors[0]
