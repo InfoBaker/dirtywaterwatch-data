@@ -44,6 +44,9 @@
  "gloucester-harbor-ma": [
   "Gloucester Inner Harbor"
  ],
+ "huron-river-mi": [
+  "HURON"
+ ],
  "jones-falls-md": [
   "Jones Fall"
  ],
@@ -91,6 +94,9 @@
  ],
  "north-atlantic-ocean-me": [
   "Atlantic Ocean"
+ ],
+ "north-branch-kalamazoo-river-mi": [
+  "North Branch of the Kalamazoo River"
  ],
  "north-fork-middle-river-fl": [
   "North Fork of Middle River",
@@ -154,6 +160,9 @@
  ],
  "sherman-creek-fl": [
   "Sherman's Creek"
+ ],
+ "south-branch-kalamazoo-river-mi": [
+  "South Branch of the Kalamazoo River"
  ],
  "south-branch-river-raisin-mi": [
   "South Branch Raisin River"

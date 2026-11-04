@@ -123,14 +123,65 @@ def test_a_lake_running_into_other_states_waters_is_cut_to_the_states_own():
 
 
 def test_michigans_great_lakes_records_hold_michigans_waters_only():
+    """The NHD Great Lakes records were cut to Michigan's waters; the tidy (MI audit P1-3) then dropped them for
+    openboatlaunch's whole-lake records, which carry the wikidata ids the shoreline rule keys on. Any NHD record
+    of these slugs left must still be Michigan's part only."""
+    from build import status as S
     w = {x["slug"]: x for x in json.loads((DATA_DIR / "waters-nhd.json").read_text())["waters"]}
     box_mi = (-90.42, 41.69, -82.12, 48.31)                   # Michigan's TIGER box, waters included
-    for slug, most in (("lake-michigan-mi", 40000), ("lake-superior-mi", 30000), ("lake-huron-mi", 25000),
-                       ("lake-erie-mi", 1000)):
-        b = w[slug]["bbox"]
-        assert b[0] >= box_mi[0] - 0.01 and b[1] >= box_mi[1] - 0.01 and b[2] <= box_mi[2] + 0.01 and b[3] <= box_mi[3] + 0.01, slug
-        assert w[slug]["area_km2"] < most, slug               # not the whole lake (Michigan 57,137 km2 before)
+    public = S.load_waters()
+    for slug, most, qid in (("lake-michigan-mi", 40000, "Q1169"), ("lake-superior-mi", 30000, "Q1066"),
+                            ("lake-huron-mi", 25000, "Q1383"), ("lake-erie-mi", 1000, "Q5492")):
+        assert public[slug].get("wikidata") == qid, slug
+        if slug in w:
+            b = w[slug]["bbox"]
+            assert b[0] >= box_mi[0] - 0.01 and b[1] >= box_mi[1] - 0.01 and b[2] <= box_mi[2] + 0.01 and b[3] <= box_mi[3] + 0.01, slug
+            assert w[slug]["area_km2"] < most, slug           # not the whole lake (Michigan 57,137 km2 before)
     assert not [p for p in json.loads((DATA_DIR / "waters-nhd.json").read_text())["problems"] if "outside MI" in p]
+
+
+def test_the_tidy_left_no_michigan_nhd_record_shadowed_but_the_kept_one():
+    """MI audit P1-3: 82 NHD records shared an openboatlaunch slug and were shadowed (status.load_waters keeps the
+    first record of a slug); after `waters_from_nhd --state MI --tidy` only KEEP_NHD_RECORD's are."""
+    from ingest import waters_from_nhd as N
+    obl = {x["slug"] for x in json.loads((DATA_DIR / "waters-mi.json").read_text())["waters"]}
+    nhd = [x for x in json.loads((DATA_DIR / "waters-nhd.json").read_text())["waters"] if x.get("state") == "MI"]
+    assert sorted(x["slug"] for x in nhd if x["slug"] in obl) == sorted(s for s in N.KEEP_NHD_RECORD if s.endswith("-mi"))
+    aliases = json.loads((DATA_DIR / "water-aliases.json").read_text())
+    assert not [a for a in aliases.get("huron-river-mi", []) if "," in a]          # a list of streams (P3-2)
+
+
+@pytest.mark.parametrize("old,new", [
+    ("black-river-mi", "black-river-port-huron-mi"), ("paint-river-mi", "paint-river-iron-river-mi"),
+    ("pine-river-mi", "pine-river-alma-mi"), ("torch-lake-mi", "torch-lake-hubbell-mi"),
+])
+def test_the_target_rows_of_a_shadowed_record_of_another_water_follow_it(old, new):
+    """The NHD records of these slugs were other waters than openboatlaunch's records of the slug (Croswell's
+    Black River resolved to Alpena's); after the tidy no Michigan target row names the old slug."""
+    from build import status as S
+    rows = [t for t in json.loads((DATA_DIR / "waters-nhd.json").read_text())["targets"] if t.get("state") == "MI"]
+    assert not [t["name"] for t in rows if old in (t.get("slugs") or []) or old in (t.get("reach_slugs") or {}).values()]
+    assert new in S.load_waters()
+
+
+def outfall(f, permit, oid):
+    rows = json.loads((DATA_DIR / f).read_text())["outfalls"]
+    return next(r for r in rows if r["npdes_permit"] == permit and r["outfall"] == oid)
+
+
+@pytest.mark.parametrize("f,permit,oid,slug", [
+    # Croswell's plant is on the Black River at Port Huron, not Alpena's (185,770 m before the tidy)
+    ("outfalls-plants-us.json", "MI0021083", "SLD", "black-river-port-huron-mi"),
+    # Standish's point lies on Arenac County's Pine River (openboatlaunch's pine-river-mi), not Alma's
+    ("outfalls-plants-us.json", "MI0024139", "003", "pine-river-mi"),
+    # the Saint Joseph River's plants on their own EPA reach: the river's NHD record, not the mouth (P2-5)
+    *[("outfalls-plants-us.json", p, "SLD", "saint-joseph-river-jonesville-mi")
+      for p in ("MI0020109", "MI0020991", "MI0022136", "MI0060273", "MIG570204", "MIG580404", "MIG580409", "MIG580415")],
+    # Benton Harbor-St Joseph lies at the mouth, on openboatlaunch's polygon (5 m)
+    ("outfalls-plants-us.json", "MI0022322", "SLD", "saint-joseph-river-mi"),
+])
+def test_michigan_outfalls_after_the_tidy(f, permit, oid, slug):
+    assert outfall(f, permit, oid)["water_slug"] == slug
 
 
 def test_the_petroleum_general_permits_outfalls_drive_no_sewage_caution():
