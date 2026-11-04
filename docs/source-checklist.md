@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1168 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1184 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -25,7 +25,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | md | 11 | 8 | 15 | 11 | 4 | 49 |
 | va | 16 | 17 | 28 | 7 | 1 | 69 |
 | dc | 21 | 9 | 26 | 12 | 5 | 73 |
-| **all** | **380** | **238** | **318** | **171** | **61** | **1168** |
+| nc | 8 | 1 | 6 | 1 | 0 | 16 |
+| **all** | **388** | **239** | **324** | **172** | **61** | **1184** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1269,3 +1270,24 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `dc-dcwater-tunnel-status` | DC Water Anacostia River Tunnel / CSO outfall real-time status | unreachable | fetched | events | No public real-time CSO or tunnel status exists; the only real-time signal is the riverside lights. |
 | `dc-doee-hab` | DOEE harmful algal bloom (cyanobacteria) advisories | unreachable | search_only | advisories | No DC HAB advisory programme found (search_only). |
 | `dc-hillrag-dashboard-article` | HillRAG 'New Dashboard Lets Residents Check River Conditions in Real Time' (2026-06-05) | unreachable | search_only | news | Timeout; superseded by the dashboard source. |
+
+## nc: North Carolina (16)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `nc-dwr-algal-bloom-reports` | NC DEQ DWR Fish Kill and Algal Bloom Incidents (North_Carolina_Fish_Kills_and_Algal_Blooms_Public_Reports) | used | fetched | advisories | The current NC algal bloom report layer (replaced Fish_Kill_Algal_Bloom_Public_View in March 2026). Built: pipeline/ingest/nc_algal_blooms.py (172 bloom reports on 2026-11-04). |
+| `nc-dwr-sso-2022-2025` | NC DWR Sanitary Sewer Overflows September 2022 through December 2025 (ArcGIS) | used | fetched | events | History for back-fill (3,208 events). Frozen (lastEditDate 2026-03-09). Built: nc_dwr_sso.py --backfill. |
+| `nc-dwr-sso-2026` | NC DEQ DWR "SSOs and Bypasses" (Sanitary Sewer Overflows since Jan 2026) ArcGIS layer | used | fetched | events | Statewide, machine-readable, event-precision SSO feed with start, end, volume, volume to water, receiving water (with DWR stream index), coordinates and 5-day follow-up fields. Built: pipeline/ingest/nc_dwr_sso.py (571 records on 2026-11-04). |
+| `nc-dwr-sso-info-page` | NC DEQ "Information on Sewer System Overflows" page | used | fetched | law | States the reporting rules and links the tracking map, press-release and public-notice templates, 2014 reporting memo, CS-SSO 5-day form. |
+| `nc-fish-kill-algal-bloom` | NC DEQ Fish Kills and Algal Blooms public reports (Fish_Kill_Algal_Bloom_Public_View) | used | fetched | advisories | Archive of algal bloom and fish kill reports, 2020 to 2026-03-10 (1,364 rows; 1,011 include a bloom). No longer edited: the current reports are nc-dwr-algal-bloom-reports. Built: nc_algal_blooms.py --backfill. |
+| `nc-law-15a-ncac-18a-3400` | 15A NCAC 18A .3400 Coastal Recreational Waters Monitoring, Evaluation and Notification | used | fetched | law | The coastal advisory rules: pending and full swimming advisories from bacteria results (.3403), and advisories with signs for waters impacted by a wastewater spill and at storm-water discharges (.3404). No set number of hours after a spill. |
+| `nc-law-gs-143-215-1c` | N.C. Gen. Stat. 143-215.1C(b) Publication of Notice of Discharge of Untreated Wastewater | used | fetched | law | The public-notice duty: press release within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more. |
+| `nc-rwq-advisories` | NC DEQ Recreational Water Quality program: swimming advisory status layer (RWQ_Advisory_EXTERNAL) | used | fetched | advisories | Coastal (ocean and sound) monitoring stations with current Status (No Alert / Pending Swimming Advisory / Advisory / Precautionary). Built: pipeline/ingest/nc_rwq_advisories.py (snapshot spells; 225 stations on 2026-11-04). |
+| `nc-wnc-rec-monitoring` | NC DEQ Western NC Recreational Water Quality Monitoring Program (E. coli results) | candidate | fetched | monitoring | Inland river E. coli results (2,298 rows; fields Station_ID, SampleDate, Ecoli, Lat, Long). Also published to Swim Guide. |
+| `nc-bims-public-portal` | NC DEQ BIMS Public Incident Portal | watch | search_only | events | Incident lookup by permit or incident number; the ArcGIS layers are easier. Not fetched. |
+| `nc-charlotte-water` | Charlotte Water wastewater overflow notices (press releases) | watch | search_only | news | Notices reach the public through local media (WCCB, WFAE carry "Notice of Wastewater Overflow" text). The 2025 South End spill was also sent by text and Nextdoor. No feed found; the state layer covers the same events. |
+| `nc-dwr-report-sso-survey` | NC DWR "Report an SSO" public view (Survey123 intake) | watch | fetched | events | Public view of the permittee intake form (fields rep_Date, BIMSincNUM, DWR_SSOstart, DWR_IncVolume, reachSurfaceWater, volSurfaceWater, incCause, incDesc ...). 3,208 rows, lastEditDate 2026-05-17; seems to be the 2022-2025 store. Shows that NC uses its own e-reporting, not EPA NeT. |
+| `nc-raleigh-water` | Raleigh Water sanitary sewer overflow page and news | watch | search_only | news | City SSO page and news posts (e.g. May 2026 Airport Boulevard 1,143,800 gallons). No feed. |
+| `nc-shellfish-closures` | NC DMF Shellfish Sanitation closures (Permanent_Shellfish_Closures; temporary closure proclamations) | watch | search_only | advisories | Permanent closure polygons are in the same ArcGIS org; temporary (spill or rain) closures are by proclamation, not checked. |
+| `nc-wwals-and-swim-guide` | Swim Guide affiliates in NC (riverkeepers; WNC program) | watch | search_only | prior_art | NC beaches and WNC river stations appear on Swim Guide; not checked one by one. |
+| `nc-epa-sobe` | EPA SOBE extract, NC rows | rejected | inferred | events | Only a handful of NC rows; NC uses its own reporting. The DWR layer is complete and faster. |

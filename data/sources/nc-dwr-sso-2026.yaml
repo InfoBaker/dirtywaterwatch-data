@@ -1,0 +1,48 @@
+id: "nc-dwr-sso-2026"
+name: "NC DEQ DWR \"SSOs and Bypasses\" (Sanitary Sewer Overflows since Jan 2026) ArcGIS layer"
+url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0"
+homepage: "https://experience.arcgis.com/experience/4a50b5dc87844bab9930a5906522a779"
+kind: "arcgis"
+level: "state"
+# Feed row: the source id written by pipeline/ingest/nc_dwr_sso.py (data/build/events/nc-dwr-sso-2026.json),
+#   which also reads any later Sanitary_Sewer_Overflows_since_Jan_<year> layer in the same organisation.
+# Notes (research/nc, status used, verified fetched, checked 2026-11-04): Statewide,
+#   machine-readable, event-precision SSO feed with start, end, volume, volume to water, receiving
+#   water (with DWR stream index), coordinates and 5-day follow-up fields. Built:
+#   pipeline/ingest/nc_dwr_sso.py (571 records on 2026-11-04).
+# Access detail (research, quoted):
+#   https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0/query?where=1%3D1&outFields=*&f=json
+#   (public, no key; maxRecordCount 2000). Backs the "Sanitary Sewer Overflow Tracking Map"
+#   Experience 4a50b5dc87844bab9930a5906522a779 (web map 20b6faf89710464bb6e009b44fbc63dc, owner
+#   DWR_GIS_Team). 571 rows on 2026-11-03 (Jan 50-74 a month). Sample in raw/sso-sample.json.
+# Can fill: source_record_id (globalid), event_type (SSO; bypass per description), started_at,
+#   ended_at, reported_at (dwr_report_date), source_updated_at (layer lastEditDate), waterbody,
+#   location_text, coordinates, volume, authority (permit name), source_status (ongoing; 5-day
+#   complete), revision_history (24-hour vs 5-day fields)
+# Cannot fill: published_at; advice_text; valid_until; whether the operator issued the press release
+# Waters: statewide; named receiving water with NC stream index (e.g. "Salem Creek - 13-17-36-15")
+# History: 2026-01-01 to date in this layer; Sept 2022 to Dec 2025 in
+#   https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0
+#   (3,208 rows).
+# Research notes: Only SSOs reportable to DWR appear (1,000 gallons or more to ground, or any amount
+#   reaching surface water): 516 of 571 rows say reached water. deq_program is "Sanitary Sewer
+#   Overflow" for every row although the description says storm-related bypasses are included. Not a
+#   press release record: it does not say whether the operator issued the 24-hour press release.
+#   Timezone settled 2026-11-04: epoch values are true UTC (Raleigh's 2026-05-12 overflow starts
+#   12:21 UTC, the 8:21 a.m. EDT start Raleigh Water published). The ingester also reads any later
+#   Sanitary_Sewer_Overflows_since_Jan_<year> layer it finds.
+# Cadence (research): edited as DWR enters reports; median report latency 15.7 hours after start (2026
+#   rows); the layer has lagged a few days at times. Legal deadline: verbal report within 24 hours.
+#   The ingester runs hourly; the feed is stale after 6 hours without a good fetch.
+cadence: "6 hours"
+license: "Item description: \"The North Carolina Department of Environmental Quality shall not be held liable for any errors in this metadata ... These data cannot be construed to be a legal document.\" No licence restriction stated."
+attribution: "North Carolina Department of Environmental Quality, Division of Water Resources"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["NC"]
+access: ["arcgis"]
+access_detail: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0/query?where=1%3D1&outFields=*&f=json (public, no key; maxRecordCount 2000). Backs the \"Sanitary Sewer Overflow Tracking Map\" Experience 4a50b5dc87844bab9930a5906522a779 (web map 20b6faf89710464bb6e009b44fbc63dc, owner DWR_GIS_Team). 571 rows on 2026-11-03 (Jan 50-74 a month). Sample in raw/sso-sample.json."
+machine_readable: true
+legal_basis: "G.S. 143-215.1C; permit conditions (24-hour verbal report, 5-day CS-SSO form)"
+checked: "2026-11-04"

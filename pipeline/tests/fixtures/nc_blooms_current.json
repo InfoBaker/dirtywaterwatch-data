@@ -1,0 +1,59 @@
+{
+ "features": [
+  {
+   "attributes": {
+    "objectid": 3,
+    "globalid": "d85d8ec9-0000-4000-8000-000000000003",
+    "incident_id": "AB-WARO-202601031341",
+    "report_type": "Algal Bloom",
+    "fish_kill_number": null,
+    "observation_date": 1767465660000,
+    "area_impacted": null,
+    "area_units": "River Miles",
+    "regional_office": "WARO",
+    "county": "Tyrrell",
+    "waterbody": "Example Canal",
+    "nearby_landmarks": "12 Example Lane, Columbia",
+    "incident_details": "Behind my house, call 252-555-0199.",
+    "investigation_status": "Completed",
+    "final_investigation_comments": "Thank you for submitting the report. NCDEQ advises the public to avoid contact with discolored water that could indicate the presence of an algal bloom.  Remember: When in doubt, stay out.",
+    "lab_id": null
+   },
+   "geometry": {
+    "x": -76.168562853,
+    "y": 35.933048241
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 4,
+    "globalid": "d85d8ec9-0000-4000-8000-000000000004",
+    "incident_id": "FK-RRO-202602010000",
+    "report_type": "Fish Kill",
+    "observation_date": 1769958000000,
+    "county": "Wake",
+    "waterbody": "Example Lake"
+   },
+   "geometry": {
+    "x": -78.6,
+    "y": 35.8
+   }
+  },
+  {
+   "attributes": {
+    "objectid": 5,
+    "globalid": "d85d8ec9-0000-4000-8000-000000000005",
+    "incident_id": "FKAB-202611031318",
+    "report_type": "Fish Kill and Algal Bloom",
+    "observation_date": 1793729460000,
+    "county": "Wilkes",
+    "waterbody": "Example Reservoir",
+    "investigation_status": "Received"
+   },
+   "geometry": {
+    "x": -81.28449,
+    "y": 36.10321
+   }
+  }
+ ]
+}
