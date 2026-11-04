@@ -287,3 +287,14 @@ def test_the_file_keeps_the_names_still_missing_with_their_reasons(tmp_path):
                               "how": "record built from the name"}]
     assert d["resolved_names"] == 1 and d["build"]["records_built"] == 1 and "--names" in d["build"]["command"]
     assert all("_parts" not in r for r in d["rows"])
+
+
+def test_the_files_reasons_are_counted_by_kind():
+    assert N.reason_kind("a storm-sewer system (MS4), not a named water") == "a storm-sewer system (MS4), not a named water"
+    assert N.reason_kind("1 NHD water of that name in NC, none within reach of the reports' places; no NHD "
+                         "high-resolution flowline of that name within 3 km of the points") == \
+        "1 NHD water of that name in NC, none within reach of the reports' places"
+    assert N.reason_kind("not reached this run (the run's time or request limit was reached on 2026-11-04); the next "
+                         "run resumes") == "not reached this run"
+    assert N.reason_kind("Pew Creek: no NHD flowline or waterbody of that name in GA", multi=True) == \
+        "no NHD flowline or waterbody of that name in GA"
