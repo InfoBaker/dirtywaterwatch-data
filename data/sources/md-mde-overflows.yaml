@@ -22,3 +22,45 @@ access_detail: "CSV https://opendata.maryland.gov/api/views/stgj-u72u/rows.csv?a
 machine_readable: true
 legal_basis: "Md. Code, Environment § 9-331.1; COMAR 26.08.10"
 checked: "2026-11-02"
+# Generic ingester port (docs/generic-ingesters.md): the same feed as a fetch block. live: false, so make ingest
+#   still runs the module; tests/test_generic_parity.py compares the two record by record.
+fetch:
+  platform: "socrata"
+  live: false
+  domain: "https://opendata.maryland.gov"
+  dataset: "stgj-u72u"
+  format: "csv"            # the SODA endpoint here sits behind a firewall that blocked a compound query
+  metadata: true           # rowsUpdatedAt -> source_updated_at (MDE publishes no per-row times)
+  time_zone: "America/New_York"
+  safe_fields: [overflow_type, facility_collection_system, npdes_no, start_date, start_time, duration_day,
+                duration_hour, duration_minute, overflow_address, zip, owner_name, discharge_volume, overflow_cause,
+                receiving_water, county, penalty_id, overflow_latitude, overflow_longitude, id]
+  free_text: [overflow_cause, receiving_water]
+  record:
+    started_at: {field: start_date, time: start_time}
+    ended_at: {duration: {days: duration_day, hours: duration_hour, minutes: duration_minute}}
+    # the table is reloaded whole and its id is a row number: the key is permit, start and address
+    source_record_id: {template: "{npdes_no|upper|slug|default:none}-{@started_at|compact|default:nodate}-{overflow_address|address|slug|default:no-address}"}
+    event_type:
+      field: overflow_type
+      map: {CSO: cso, SSO: sso, Bypass: bypass, Unauthorized Discharge: sso}
+    discharger_name: owner_name
+    authority: owner_name
+    npdes_permit: {field: npdes_no, upper: true, regex: "^MD\\d{7}$"}
+    outfall_name: overflow_address
+    waterbody_text: receiving_water
+    volume: {field: discharge_volume, bare_number_text: "gallons"}
+    source_url: {const: "https://opendata.maryland.gov/dataset/Reported-Sewer-Overflows-New-for-2023-/stgj-u72u"}
+  transform: "ingest.generic.transforms.md_mde_record"       # coordinate repairs and the operator
+  waters:
+    matcher: "ingest.generic.transforms.state_waters"
+    state: "MD"
+    county_field: county
+    no_water: ["^\\s*(nope|duplicate\\b.*)\\s*[.!]*\\s*$"]
+  dedupe: {repeats: suffix, order: ["-volume_gal"], ignore: [id]}
+  post: "ingest.generic.transforms.md_mde_duplicates"         # same start and address; MDE's own marks; City layer
+  history: {keep_missing: true, revisions: true}
+  meta:
+    credit: "Maryland Department of the Environment, Reported Sewer Overflows (New for 2023), opendata.maryland.gov"
+    license: "Public Domain (Socrata metadata)"
+    caveat: "Reported to MDE by the owner or operator; whether the public was notified is not recorded in this table."

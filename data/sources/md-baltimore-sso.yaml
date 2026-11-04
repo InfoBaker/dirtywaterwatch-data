@@ -22,3 +22,63 @@ access_detail: "https://dpwdata.baltimorecity.gov/pubgis/rest/services/Public/SS
 machine_readable: true
 legal_basis: "COMAR 26.08.10; Modified Consent Decree (Civil Action JFM-02-1524)"
 checked: "2026-11-02"
+# Generic ingester port (docs/generic-ingesters.md): the same feed as a fetch block. live: false, so make ingest
+#   still runs the module; tests/test_generic_parity.py compares the two record by record.
+fetch:
+  platform: "arcgis"
+  live: false
+  url: "https://dpwdata.baltimorecity.gov/pubgis/rest/services/Public/SSO_Points2/MapServer/0"
+  order_by: "OBJECTID"
+  time_zone: "America/New_York"
+  bounds: [-79.5, 37.9, -75.0, 39.8]      # Maryland; a point outside is not used (raw._coords_rejected)
+  # every field but the two free-text waiver and relief comments, which no record uses
+  safe_fields: [OBJECTID, SSO_DATE, LOCATION, EST_VOLUME, EST_FLOW, STATUS, REC_WATERS, WATERSHED, START_DATETIME,
+                END_DATETIME, RESPONSIBILITY, Latitude, Longitude, SITE_TYPE, SENSITIVE_AREA, WAIVER_REQUESTED,
+                WAIVER_GRANTED, PENALTY, WAIVER_CLOSED, WAIVER_DENIED, ENTER_STORM, CLEANUP_REQ,
+                STIPULATED_PENALTY_WAIVED, STIPULATED_PENALTY_ASSESSED, ANNUAL_ADJUSTMENT]
+  free_text: [LOCATION]
+  record:
+    source_record_id: OBJECTID
+    # the layer stores local wall-clock time as if it were UTC; SSO_DATE when START_DATETIME is empty
+    started_at: {field: [START_DATETIME, SSO_DATE], parse: epoch_ms_wallclock}
+    ended_at: {field: END_DATETIME, parse: epoch_ms_wallclock}
+    event_type: {const: sso}
+    status: {field: STATUS, upper: true, map: {PROG: ongoing}, otherwise: from_end}
+    lat: {field: Latitude, parse: number}
+    lon: {field: Longitude, parse: number}
+    waterbody_text:
+      field: REC_WATERS
+      unmapped: keep
+      map: {ARGO: Argonne Run, ARMI: Armistead Creek, BIDD: Biddison Run, CHIN: Chinquapin Run, COLG: Colgate Creek,
+            CRTB: Curtis Bay, CRTC: Curtis Creek, DEAD: Dead Run, GUNP: Gunpowder Falls, GWYN: Gwynns Falls,
+            HERR: Herring Run, HARB: Inner Harbor, JF: Jones Falls, LRR: Loch Raven Reservoir,
+            MAID: Maidens Choice Creek, MID: Middle Branch, MOOR: Moores Run, MTPL: Mt Pleasant Run,
+            NWHB: Northwest Harbor, PAT: Patapsco River, SHCV: Stonehouse Cove, SR: Stony Run, TIFF: Tiffany Run,
+            WEST: Western Run}
+    discharger_id:
+      field: RESPONSIBILITY
+      upper: true
+      unmapped: null
+      map: {DPW: md-baltimore-city-dpw, CO: md-baltimore-county-dpw}
+    discharger_name:
+      field: RESPONSIBILITY
+      upper: true
+      unmapped: null
+      map: {DPW: "Baltimore City Department of Public Works",
+            CO: "Baltimore County Department of Public Works and Transportation",
+            PRI: "Private (property owner; not named by the source)", FAC: "Facility (not named by the source)"}
+    outfall_name: LOCATION
+    outfall_id: {field: LOCATION, regex: "\\bSSO\\s+Site\\s*#\\s*(\\d+)", replace: "SSO Site #\\1"}
+    volume: {field: EST_VOLUME, estimate: estimated, text: "{EST_VOLUME|num} gallons (EST_VOLUME)"}
+    authority: {const: "Baltimore City Department of Public Works (Sewer Overflow Map)"}
+    source_url: {template: "https://dpwdata.baltimorecity.gov/pubgis/rest/services/Public/SSO_Points2/MapServer/0/query?where=OBJECTID%3D{OBJECTID}&outFields=*&f=json"}
+  waters:
+    matcher: "ingest.generic.transforms.state_waters"
+    state: "MD"
+    county: "Baltimore City"
+    aliases: {Middle Branch: Middle Branch Patapsco River, Inner Harbor: Northwest Harbor}
+  dedupe: {repeats: first}
+  history: {keep_missing: true, track: [STATUS, EST_VOLUME]}
+  meta:
+    credit: "Baltimore City Department of Public Works, Sewer Overflow Map (SSO_Points2)"
+    time_basis: "The layer stores local wall-clock time as if it were UTC: each epoch value is read as UTC and the wall-clock time labelled America/New_York."
