@@ -50,6 +50,12 @@ jobs:
       - run: python -m venv .venv && .venv/bin/pip install -q -r requirements.txt
         working-directory: pipeline
       - run: npm install -g wrangler@4
+      - name: System tools (pdftotext, for MWRD's table of reversals to Lake Michigan)
+        # ingest/il_mwrd_lake_reversals.py reads the PDF with poppler's pdftotext; without it that feed writes ok=False
+        # and keeps its previous records, so a failed install warns and never stops the run
+        run: |
+          command -v pdftotext >/dev/null || sudo apt-get install -y -qq poppler-utils >/dev/null \
+            || echo "::warning::poppler-utils could not be installed; MWRD's reversals table is not read this run"
       - name: Restore pipeline state from R2
         run: |
           # a missing object is a first run; one that is there but cannot be fetched or unpacked stops the run here, so

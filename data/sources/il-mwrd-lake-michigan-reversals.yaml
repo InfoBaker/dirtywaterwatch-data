@@ -1,0 +1,26 @@
+id: "il-mwrd-lake-michigan-reversals"
+name: "MWRD Lake Michigan reversals table (1985 to present)"
+url: "https://mwrd.org/files/rdrct/Lake_Michigan_Reversals.pdf"
+homepage: "https://mwrd.org/community-action/you-can-help-prevent-flooding-and-protect-water-quality/combined-sewer-overflow-notification"
+kind: "pdf"
+level: "utility"
+# Feed row: written by pipeline/ingest/il_mwrd_lake_reversals.py (data/build/events/il-mwrd-lake-michigan-reversals.json).
+# Built 2026-11-04: one record per reversal and structure, days only, volume in million gallons checked against the
+#   row total; text by pdftotext -layout (poppler-utils): the run fails (ok false, records kept) where it is missing.
+# Notes (research/il, status used, verified search_only, checked 2026-11-04): Read by
+#   pipeline/ingest/il_mwrd_lake_reversals.py: 36 reversals since 1985 (57 records, one per
+#   structure, days only, million gallons); the last on 2023-07-02/03.
+# Access detail (research, quoted): Linked from the MWRD CSO hub page; not downloaded.
+# Waters: Lake Michigan at Wilmette, Chicago River Controlling Works, O'Brien Lock
+cadence: null
+license: "none stated"
+attribution: "Metropolitan Water Reclamation District of Greater Chicago"
+enabled: true
+role: "events"
+event_types: []
+states: ["IL"]
+access: ["pdf"]
+access_detail: "Linked from the MWRD CSO hub page; not downloaded."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-04"

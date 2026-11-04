@@ -49,6 +49,7 @@ AREA_TITLES = {
     "mi": "Michigan",
     "wa": "Washington",
     "ca": "California",
+    "il": "Illinois",
 }
 
 HEADER = """# Source checklist

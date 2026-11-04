@@ -1,0 +1,41 @@
+id: "il-epa-sobe-events"
+name: "EPA NPDES sewer overflow and bypass event reports (eRule Phase 2, \"SOBE\"), Illinois permits"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Read by the national module pipeline/ingest/echo_sewer_overflow_events.py (source id echo-sewer-overflow), Illinois
+#   permits added 2026-11-04: times written with Central offsets, Illinois wordings for no water, free text scrubbed.
+# Notes (research/il, status used, verified fetched, checked 2026-11-03): The only statewide,
+#   machine-readable, event-level overflow table for Illinois. Every row has coordinates; 95% have a
+#   volume. Types: SSO 1,256, CSO 341, BYP 90. It misses the big Cook County CSO systems: no
+#   CSO-typed rows from Chicago (IL0045012), MWRD Stickney/O'Brien/Calumet, or the 37 ILM580xxx
+#   suburban CSO general permits. Only 17 of the 120 CSO permits have a CSO-typed row.
+# Access detail (research, quoted): Daily ZIP (1.1 MB on 2026-11-03, Last-Modified 2026-11-03 12:13
+#   GMT) of CSV tables: sewer_overflow_bypass_report_events.csv joined on
+#   sewer_overflow_bypass_event_key to _types, _receiving_waters, _causes, _impacts,
+#   _corrective_actions; collection_system_permits.csv names the system. Filtered on
+#   permit_identifier LIKE IL%. Summary of IL rows in raw/sobe-permit-counts.json,
+#   raw/sobe-by-seed-permit.json, raw/sobe-top-noncso-permits.json; newest row in
+#   raw/sobe-latest-sample.json.
+# Can fill: source_record_id, event_type, started_at, ended_at, reported_at, waterbody, coordinates,
+#   volume, units, estimate_flag, authority, raw_record, jurisdiction
+# Cannot fill: timezone; published_at; advice_text; valid_until; revision_history (transaction_type
+#   only)
+# Waters: statewide; every Illinois NPDES permittee that files through EPA NeT-SewerOverflow
+# History: Event starts from 2024-10-01 (2024: 96, 2025: 745, 2026 to 2 Nov: 769). Monthly 2026: 43
+#   to 129.
+# Research notes: Pekin STP #1 (IL0034495) alone has 115 CSO rows. Times carry no time zone (assume
+#   America/Chicago; see federal report). Receiving-water names are free text ("marys river maybe").
+cadence: "EPA refreshes daily. Illinois rows: 1,687 events from 267 permits; report received a median 3 days after the start (90th percentile 11 days). Newest row on 2026-11-03: an SSO that started 2026-11-02 12:00 and was received 2026-11-02."
+license: "EPA public data; no licence restriction stated on the ECHO download page."
+attribution: "U.S. EPA (ECHO), data entered by Illinois permittees in NeT-SewerOverflow"
+enabled: true
+role: "events"
+event_types: ["sso", "cso", "bypass"]
+states: ["IL"]
+access: ["csv"]
+access_detail: "Daily ZIP (1.1 MB on 2026-11-03, Last-Modified 2026-11-03 12:13 GMT) of CSV tables: sewer_overflow_bypass_report_events.csv joined on sewer_overflow_bypass_event_key to _types, _receiving_waters, _causes, _impacts, _corrective_actions; collection_system_permits.csv names the system. Filtered on permit_identifier LIKE IL%. Summary of IL rows in raw/sobe-permit-counts.json, raw/sobe-by-seed-permit.json, raw/sobe-top-noncso-permits.json; newest row in raw/sobe-latest-sample.json."
+machine_readable: true
+legal_basis: "40 CFR 122.41(l)(6) and (l)(7); 40 CFR part 127 (eRule Phase 2, from 2025-12-21)"
+checked: "2026-11-03"

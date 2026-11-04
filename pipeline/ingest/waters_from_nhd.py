@@ -360,10 +360,38 @@ def trim_part(p: str) -> str:
     return ""
 
 
+# a canal named for two places ('Chicago Sanitary and Ship Canal', 'Illinois & Michigan Canal', 'Delaware and Raritan
+# Canal') is one water: its 'and' does not split a list (Illinois review, 2026-11-04: the Chicago Sanitary and Ship
+# Canal, 109 of the state's outfall rows, became targets 'Chicago Sanitary' and 'Ship Canal'). The word before the
+# 'and' is not itself a kind word, so 'Mill Creek & Erie Canal' still names two waters.
+CANAL_AND = re.compile(r"\b([A-Za-z][\w.']*)\s+(?:and|&)\s+((?:[A-Za-z][\w.']*\s+)?canal)\b", re.I)
+JOINED = "\x00"
+
+
+def join_canal_names(t: str) -> str:
+    """t with the 'and' of a two-place canal name held (JOINED) so a list split leaves the name whole."""
+    def keep(m):
+        if words(m.group(1))[-1:] and words(m.group(1))[-1] in KIND_WORDS:
+            return m.group(0)
+        if any(w in KIND_WORDS - {"canal"} for w in words(m.group(2))):
+            return m.group(0)
+        return f"{m.group(1)}{JOINED}{m.group(2)}"
+    out = CANAL_AND.sub(keep, t)
+    if JOINED in out:           # 'IL & MICH CANAL CHICAGO SANITARY AND SHIP CANAL': a name after a canal's is another
+        out = re.sub(r"(?i)\b(canal)\s+(?=[a-z])", r"\1, ", out)
+    return out
+
+
+def unjoin(p: str) -> str:
+    return p.replace(JOINED, " and ")
+
+
 def split_names(text: str, point_mode: bool) -> list[str]:
     """The water names in one waterbody text (possibly none)."""
     t = re.sub(r"\s+", " ", str(text or "")).strip()
     t = re.sub(r"\(.*?\)", " ", t).strip()
+    if not point_mode and JOINED not in t:
+        t = join_canal_names(t)
     if point_mode:   # a site name: keep the water named in it ("Harry Wright Lake Low Beach")
         out = []
         for x in re.split(r"\s*-\s+|\s*[,;/]\s*", t):
@@ -376,7 +404,7 @@ def split_names(text: str, point_mode: bool) -> list[str]:
     parts = re.split(r"\s*(?:/|&|;|\+|,|\band\b)\s*", t, flags=re.I)
     out = []
     for p in parts:
-        p = trim_part(p)
+        p = trim_part(unjoin(p))
         if p and not not_water(p):
             out.append(p)
     return out
@@ -1005,10 +1033,10 @@ def national_parts(text: str) -> tuple[list[str], str | None]:
             cut = rx.sub(" , ", cut)        # a tag ends a name ('Black Cr Class III Fresh WBID 2213I St Johns R')
         for rx, rep in NATIONAL_WORD_FIX:
             cut = rx.sub(rep, cut)
-        cut = re.sub(r"\s+", " ", cut).strip(" ,.-")
+        cut = join_canal_names(re.sub(r"\s+", " ", cut).strip(" ,.-"))
         parts = []
         for p in re.split(r"\s*(?:&|;|\+|,|\band\b)\s*", cut, flags=re.I):
-            p = trim_part(p)
+            p = trim_part(unjoin(p))
             if not p or not_water(p) or re.fullmatch(r"(n/?a|na|etc)", p, re.I) or UNNAMED_SEG.fullmatch(p.strip()):
                 continue
             if not has_kind(words(p)) and (len(compact(p)) < 5 or UNNAMED_SEG.search(p)):
@@ -3284,7 +3312,12 @@ class Run:
                 continue
             k = feature_key(t["state"], c)
             if k not in self.feats:
-                rec = self.new_record(k, c, t, row)
+                try:
+                    rec = self.new_record(k, c, t, row)   # fetches the record's geometry: the budget can end here too
+                except BudgetExhausted as ex:
+                    if len(failed) < 12:
+                        failed.append({"lon": lon, "lat": lat, "reason": f"not tried this run ({ex})"})
+                    continue
                 if rec is None:
                     continue
                 self.feats[k] = rec
