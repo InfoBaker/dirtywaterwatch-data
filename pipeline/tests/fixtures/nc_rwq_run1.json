@@ -1,0 +1,108 @@
+{
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 266,
+    "STATION": 1,
+    "COUNTY": "DARE",
+    "TIER": 1,
+    "LATITUDE": 35.9,
+    "LONGITUDE": -75.6,
+    "EFFECTIVE": 1997,
+    "EPA_ID": "NC000000",
+    "StationID": "88",
+    "GlobalID": "{X}",
+    "Status": "Advisory",
+    "Data": "https://xapps.ncdenr.org/mf/beaches/smplData.do?parm.siteId=N88",
+    "ASN": "N88",
+    "ASN2": "N88",
+    "DESCRIPTIO": "Example Soundside Access",
+    "LOCATION": "sound",
+    "GlobalID_2": "g2",
+    "GlobalID_3": "g3"
+   },
+   "geometry": {
+    "x": -75.6,
+    "y": 35.9
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 348,
+    "STATION": 1,
+    "COUNTY": "DARE",
+    "TIER": 1,
+    "LATITUDE": 35.9,
+    "LONGITUDE": -75.6,
+    "EFFECTIVE": 1997,
+    "EPA_ID": "NC000000",
+    "StationID": "15",
+    "GlobalID": "{X}",
+    "Status": "Precautionary",
+    "Data": "https://xapps.ncdenr.org/mf/beaches/smplData.do?parm.siteId=N15",
+    "ASN": "N15",
+    "ASN2": "N15",
+    "DESCRIPTIO": "Drain Pipe at Example Dr.",
+    "LOCATION": "ocean",
+    "GlobalID_2": "g2",
+    "GlobalID_3": "g3"
+   },
+   "geometry": {
+    "x": -75.6,
+    "y": 35.9
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 667,
+    "STATION": 1,
+    "COUNTY": "DARE",
+    "TIER": 1,
+    "LATITUDE": 35.9,
+    "LONGITUDE": -75.6,
+    "EFFECTIVE": 1997,
+    "EPA_ID": "NC000000",
+    "StationID": "01",
+    "GlobalID": "{X}",
+    "Status": "No Alert",
+    "Data": "https://xapps.ncdenr.org/mf/beaches/smplData.do?parm.siteId=S01",
+    "ASN": "S01",
+    "ASN2": "S01",
+    "DESCRIPTIO": "Example Pier",
+    "LOCATION": "ocean",
+    "GlobalID_2": "g2",
+    "GlobalID_3": "g3"
+   },
+   "geometry": {
+    "x": -75.6,
+    "y": 35.9
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 915,
+    "STATION": 1,
+    "COUNTY": "DARE",
+    "TIER": 1,
+    "LATITUDE": 35.9,
+    "LONGITUDE": -75.6,
+    "EFFECTIVE": 1997,
+    "EPA_ID": "NC000000",
+    "StationID": "10",
+    "GlobalID": "{X}",
+    "Status": "Pending Swimming Advisory",
+    "Data": "https://xapps.ncdenr.org/mf/beaches/smplData.do?parm.siteId=C10",
+    "ASN": "C10",
+    "ASN2": "C10",
+    "DESCRIPTIO": "Example Point",
+    "LOCATION": "sound",
+    "GlobalID_2": "g2",
+    "GlobalID_3": "g3"
+   },
+   "geometry": {
+    "x": -75.6,
+    "y": 35.9
+   }
+  }
+ ]
+}

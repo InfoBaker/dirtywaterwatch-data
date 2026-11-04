@@ -1,0 +1,116 @@
+{
+ "layer": "history",
+ "pages": [
+  {
+   "features": [
+    {
+     "attributes": {
+      "OBJECTID": 11,
+      "report_date": 1677682800000,
+      "start_date": 1677664800000,
+      "end_date": 1677664800000,
+      "permit_id": "WQCS00071",
+      "facility_name": "Example Town Collection System",
+      "facility_owner": "Town of Example",
+      "incident_number": "202300101",
+      "regional_office": "Winston-Salem",
+      "location": "36.2, -81.66 Intersection of Example Dr and US 321",
+      "city": null,
+      "county": "Watauga",
+      "volume": 100,
+      "volume_reach_water": 100,
+      "waterbody_impacted": "Boone Creek",
+      "volume_determined": "Estimated",
+      "fish_kill": "0",
+      "incident_cause": "Grease",
+      "latitude": 36.2,
+      "longitude": -81.66,
+      "resolution": "Line cleaned."
+     }
+    },
+    {
+     "attributes": {
+      "OBJECTID": 12,
+      "report_date": 1717254000000,
+      "start_date": null,
+      "end_date": null,
+      "permit_id": "WQCSD0999",
+      "facility_name": "Example Acres Collection System",
+      "facility_owner": "Quill, Pat Q.",
+      "incident_number": "202400777",
+      "regional_office": "Raleigh",
+      "location": "35.8, -78.7 ",
+      "city": "Raleigh",
+      "county": "Wake",
+      "volume": 2500,
+      "volume_reach_water": 0,
+      "waterbody_impacted": null,
+      "volume_determined": null,
+      "fish_kill": null,
+      "incident_cause": "",
+      "latitude": 35.8,
+      "longitude": -78.7,
+      "resolution": null
+     }
+    },
+    {
+     "attributes": {
+      "OBJECTID": 13,
+      "report_date": 1767884400000,
+      "start_date": null,
+      "end_date": null,
+      "permit_id": "WQCS00001",
+      "facility_name": "Charlotte Collection System",
+      "facility_owner": "Charlotte Water",
+      "incident_number": "202601742",
+      "regional_office": "Mooresville",
+      "location": "",
+      "city": "Charlotte",
+      "county": "Mecklenburg",
+      "volume": 5000,
+      "volume_reach_water": 4000,
+      "waterbody_impacted": "Little Sugar Creek",
+      "latitude": 35.2,
+      "longitude": -80.84
+     }
+    },
+    {
+     "attributes": {
+      "OBJECTID": 14,
+      "report_date": 1761922800000,
+      "start_date": 1761867900000,
+      "end_date": 1761867900000,
+      "permit_id": "WQCS00003",
+      "facility_name": "Winston-Salem Collection System",
+      "facility_owner": "City of Winston-Salem",
+      "incident_number": "202502056",
+      "county": "Forsyth",
+      "volume": 21000,
+      "volume_reach_water": 21000,
+      "waterbody_impacted": "Salem Creek",
+      "latitude": 36.06,
+      "longitude": -80.27
+     }
+    },
+    {
+     "attributes": {
+      "OBJECTID": 15,
+      "report_date": 1761926400000,
+      "start_date": null,
+      "end_date": null,
+      "permit_id": "WQCS00003",
+      "facility_name": "Winston-Salem Collection System",
+      "facility_owner": "City of Winston-Salem",
+      "incident_number": "202502056",
+      "county": "Forsyth",
+      "volume": null,
+      "volume_reach_water": null,
+      "waterbody_impacted": null,
+      "latitude": 36.06,
+      "longitude": -80.27
+     }
+    }
+   ]
+  }
+ ]
+}

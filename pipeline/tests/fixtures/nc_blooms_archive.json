@@ -1,0 +1,53 @@
+{
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 2581,
+    "probid": "AB-RRO-2026030842",
+    "category": "AlgalBloom",
+    "GlobalID": "{66199051-0000}",
+    "Creator": "example_account",
+    "details": "Seen from my back yard",
+    "locdesc": "448 Example St, Wendell NC",
+    "County": "Wake",
+    "Waterbody": "Example Creek",
+    "EventDate": 1764596520000,
+    "CreationDate": 1773060470000,
+    "Confirmed": "Yes"
+   },
+   "geometry": {
+    "x": -78.3,
+    "y": 35.78
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 2582,
+    "probid": "AB-WARO-202601031341",
+    "category": "AlgalBloom",
+    "GlobalID": "{66199051-0001}",
+    "County": "Tyrrell",
+    "Waterbody": "Example Canal",
+    "EventDate": 1767465660000,
+    "Confirmed": null
+   },
+   "geometry": {
+    "x": -76.17,
+    "y": 35.93
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 2583,
+    "probid": "FK-1",
+    "category": "FishKill",
+    "County": "Wake",
+    "EventDate": 1704110400000
+   },
+   "geometry": {
+    "x": -78.6,
+    "y": 35.8
+   }
+  }
+ ]
+}
