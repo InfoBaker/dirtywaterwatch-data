@@ -35,7 +35,7 @@ REACH_WATERS = {
     "cssc upper": "Chicago Sanitary and Ship Canal", "cssc lower": "Chicago Sanitary and Ship Canal",
     "nsc upper": "North Shore Channel", "nsc lower": "North Shore Channel",
     "little cal r": "Little Calumet River", "cal r": "Calumet River", "grand cal r": "Grand Calumet River",
-    "cal sag ch": "Calumet-Sag Channel", "salt cr": "Salt Creek", "weller cr": "Weller Creek",
+    "cal sag ch": "Calumet Sag Channel", "salt cr": "Salt Creek", "weller cr": "Weller Creek",
     "addison cr": "Addison Creek", "deer creek": "Deer Creek", "feehanville ditch": "Feehanville Ditch",
     "cal union drainage ditch": "Calumet Union Drainage Ditch", "collateral channel": "Collateral Channel",
     "i and m canal": "Illinois and Michigan Canal",

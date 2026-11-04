@@ -1,0 +1,3055 @@
+{
+ "about": "Receiving-water names in IL's reports (EPA's overflow tables for Illinois permits, MWRD's map and Lake Michigan reversals table, IDPH's BeachGuard list, as read on 2026-11-04) that data/receiving-waters-national.json does not hold for IL, by name as typed, with the number of reports giving each. Reports that say the discharge reached no water are left out.",
+ "state": "IL",
+ "waters": 85,
+ "reports": 147,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in IL": 61,
+  "a water record holds the name, but the reports' points lie too far from it to be placed there": 5,
+  "1 NHD water of that name in IL, none within reach of the reports' places": 4,
+  "an unnamed or unknown stream: the report names no water": 3,
+  "no water name": 2,
+  "3 NHD waters of that name in IL, none within reach of the reports' places": 2,
+  "part of a sewer, drainage or treatment works, not a public water": 2,
+  "10 NHD waters of that name in IL, none within reach of the reports' places": 1,
+  "4 NHD waters of that name in IL, none within reach of the reports' places": 1,
+  "a kind of water with no name": 1,
+  "24 NHD waters of that name in IL, none within reach of the reports' places": 1,
+  "not a water name": 1,
+  "a storm-sewer system, not a named water": 1
+ },
+ "resolved_names": 48,
+ "resolved_reports": 146,
+ "build": {
+  "date": "2026-11-04",
+  "command": "python -m ingest.waters_from_nhd --names research/il/receiving-waters-missing.json --state IL",
+  "records_built": 2,
+  "names_resolved": 48,
+  "network_requests": 13
+ },
+ "rows": [
+  {
+   "name": "Willow Creek",
+   "reports": 13,
+   "permits": [
+    "IL0034207"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     37.42063,
+     -88.34737
+    ]
+   ],
+   "towns": [
+    "Rosiclare"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "10 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -88.34737,
+     "lat": 37.42063,
+     "reason": "no NHD water of that name within 2 km of the reports' point (37.42063, -88.34737) (the nearest is 139.4 km away)"
+    },
+    {
+     "town": "Rosiclare",
+     "reason": "no NHD water of that name within 3 km of Rosiclare (the nearest is 135.0 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Mascoutah surface water Ditch",
+   "reports": 8,
+   "permits": [
+    "IL0025291"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.48333,
+     -89.8
+    ]
+   ],
+   "towns": [
+    "Mascoutah"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "ellis creek",
+   "reports": 8,
+   "permits": [
+    "IL0022322"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.47917,
+     -87.62667
+    ]
+   ],
+   "towns": [
+    "Georgetown"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "unnamed tributary to DeArcy Branch",
+   "reports": 8,
+   "permits": [
+    "IL0024465"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.1025,
+     -90.34361
+    ],
+    [
+     39.12803,
+     -90.33795
+    ],
+    [
+     39.12219,
+     -90.31094
+    ]
+   ],
+   "towns": [
+    "Jerseyville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "DeArcy Branch"
+   ]
+  },
+  {
+   "name": "ditch that runs into Crab Orchard Lake",
+   "reports": 5,
+   "permits": [
+    "IL0025178"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     37.75443,
+     -89.08489
+    ]
+   ],
+   "towns": [
+    "Carterville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Crab Orchard Lake"
+   ]
+  },
+  {
+   "name": "Tributary of Shoal Creek",
+   "reports": 4,
+   "permits": [
+    "IL0020621"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.17632,
+     -89.63578
+    ],
+    [
+     39.1439,
+     -89.63786
+    ]
+   ],
+   "towns": [
+    "Litchfield"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "4 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Shoal Creek"
+   ],
+   "places_failed": [
+    {
+     "lon": -89.63578,
+     "lat": 39.17632,
+     "reason": "no NHD water of that name within 2 km of the reports' point (39.17632, -89.63578) (the nearest is 12.9 km away)"
+    },
+    {
+     "lon": -89.63786,
+     "lat": 39.1439,
+     "reason": "no NHD water of that name within 2 km of the reports' point (39.14390, -89.63786) (the nearest is 10.4 km away)"
+    }
+   ]
+  },
+  {
+   "name": "put creek",
+   "reports": 4,
+   "permits": [
+    "IL0020311"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.48785,
+     -90.19571
+    ]
+   ],
+   "towns": [
+    "Cuba"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -90.19571,
+     "lat": 40.48785,
+     "reason": "no NHD water of that name within 2 km of the reports' point (40.48785, -90.19571) (the nearest is 3.8 km away)"
+    },
+    {
+     "town": "Cuba",
+     "reason": "no NHD water of that name within 3 km of Cuba (the nearest is 233.3 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Charleston Lake",
+   "reports": 3,
+   "permits": [
+    "IL0021644"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.47039,
+     -88.15484
+    ]
+   ],
+   "towns": [
+    "Charleston"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "De Archy Branch",
+   "reports": 3,
+   "permits": [
+    "IL0024465"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.1025,
+     -90.34361
+    ]
+   ],
+   "towns": [
+    "Jerseyville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Nettel creek",
+   "reports": 3,
+   "permits": [
+    "IL0021113"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.355,
+     -88.43167
+    ]
+   ],
+   "towns": [
+    "Morris"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "To storm drain then to Mississippi River",
+   "reports": 3,
+   "permits": [
+    "IL0027464",
+    "IL0033481"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.9003,
+     -90.17506
+    ],
+    [
+     38.71689,
+     -90.1181
+    ],
+    [
+     38.73498,
+     -90.10375
+    ]
+   ],
+   "towns": [
+    "Granite City",
+    "Alton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "to Mississippi River"
+   ]
+  },
+  {
+   "name": "Unnamed Flint Creek Tributary",
+   "reports": 3,
+   "permits": [
+    "IL0021598"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     42.15827,
+     -88.14529
+    ]
+   ],
+   "towns": [
+    "Barrington"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "kiljordin creek",
+   "reports": 3,
+   "permits": [
+    "IL0029688"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.45183,
+     -90.66795
+    ]
+   ],
+   "towns": [
+    "Macomb"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "A tributary to the East Branch of the DuPage River",
+   "reports": 2,
+   "permits": [
+    "IL0028380"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.78802,
+     -87.98693
+    ],
+    [
+     41.83357,
+     -88.02217
+    ]
+   ],
+   "towns": [
+    "Downers Grove"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "East Branch of the DuPage River"
+   ]
+  },
+  {
+   "name": "Il River",
+   "reports": 2,
+   "permits": [
+    "IL0021113"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.355,
+     -88.43167
+    ]
+   ],
+   "towns": [
+    "Morris"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Powdermill Creej",
+   "reports": 2,
+   "permits": [
+    "IL0021873"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.57148,
+     -90.05587
+    ]
+   ],
+   "towns": [
+    "Belleville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Saline Branch",
+   "reports": 2,
+   "permits": [
+    "IL0031500"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.11833,
+     -88.195
+    ]
+   ],
+   "towns": [
+    "Urbana"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Southfork River",
+   "reports": 2,
+   "permits": [
+    "IL0031356"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.54056,
+     -89.29056
+    ]
+   ],
+   "towns": [
+    "Taylorville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Storm drain then to Mississippi River",
+   "reports": 2,
+   "permits": [
+    "IL0027464"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.90428,
+     -90.19366
+    ]
+   ],
+   "towns": [
+    "Alton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "to Mississippi River"
+   ]
+  },
+  {
+   "name": "Tributary to East Branch of the DuPage River",
+   "reports": 2,
+   "permits": [
+    "IL0028380"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.79187,
+     -88.01649
+    ]
+   ],
+   "towns": [
+    "Downers Grove"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "East Branch of the DuPage River"
+   ]
+  },
+  {
+   "name": "Tributary to ThornCreek",
+   "reports": 2,
+   "permits": [
+    "ILG551009"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "ThornCreek"
+   ]
+  },
+  {
+   "name": "Unnamed creek",
+   "reports": 2,
+   "permits": [
+    "ILG580093"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "towns": [
+    "La Harpe",
+    "Laharpe"
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
+  },
+  {
+   "name": "A Tributary that feeds Farm Creek.",
+   "reports": 1,
+   "permits": [
+    "IL0042412"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.71635,
+     -89.42847
+    ]
+   ],
+   "towns": [
+    "Washington"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "that feeds Farm Creek"
+   ]
+  },
+  {
+   "name": "Ackerman-Farm Creek",
+   "reports": 1,
+   "permits": [
+    "IL0022152"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.64833,
+     -89.42667
+    ]
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "An unnamed tributary to DeArcy Branch",
+   "reports": 1,
+   "permits": [
+    "IL0024465"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.1025,
+     -90.34361
+    ]
+   ],
+   "towns": [
+    "Jerseyville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "DeArcy Branch"
+   ]
+  },
+  {
+   "name": "Beaucoup Creek 35° 05´ 18“ North 89° 22’ 36“ West",
+   "reports": 1,
+   "permits": [
+    "IL0021997"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.08833,
+     -89.37667
+    ]
+   ],
+   "towns": [
+    "Pinckneyville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no water name"
+  },
+  {
+   "name": "Big Vermilion",
+   "reports": 1,
+   "permits": [
+    "IL0031429"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.10833,
+     -87.64167
+    ]
+   ],
+   "towns": [
+    "Tilton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Brewster Run (Unnamed creek along Route 66)",
+   "reports": 1,
+   "permits": [
+    "IL0022641"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.1001,
+     -88.43078
+    ]
+   ],
+   "towns": [
+    "Dwight"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Brewster Run"
+   ]
+  },
+  {
+   "name": "Brooks Creek",
+   "reports": 1,
+   "permits": [
+    "IL0031721"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.06167,
+     -87.62833
+    ]
+   ],
+   "towns": [
+    "Belgium"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Clinton lake SRA",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "il-idph-beachguard"
+   ],
+   "points": [
+    [
+     40.14993,
+     -88.80315
+    ]
+   ],
+   "places_from": [
+    "il-idph-beachguard"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Creek",
+   "reports": 1,
+   "permits": [
+    "ILG580142"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "towns": [
+    "Tallula"
+   ],
+   "reason": "a kind of water with no name"
+  },
+  {
+   "name": "Creek north of road leads to Wabash River",
+   "reports": 1,
+   "permits": [
+    "IL0030023"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.42598,
+     -87.76509
+    ]
+   ],
+   "towns": [
+    "Mount Carmel"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Creek north of road leads"
+   ]
+  },
+  {
+   "name": "Crow creek",
+   "reports": 1,
+   "permits": [
+    "IL0021695"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.0,
+     -89.14306
+    ]
+   ],
+   "towns": [
+    "Toluca"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -89.14306,
+     "lat": 41.0,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.00000, -89.14306) (the nearest is 10.2 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Delaplaine Branch",
+   "reports": 1,
+   "permits": [
+    "IL0026310"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.80756,
+     -89.95852
+    ]
+   ],
+   "towns": [
+    "Edwardsville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Ditch feeding West Fork Suger Creek",
+   "reports": 1,
+   "permits": [
+    "ILG580098"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "towns": [
+    "Minier"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "West Fork Suger Creek"
+   ]
+  },
+  {
+   "name": "Ditch flows towards Wabash River",
+   "reports": 1,
+   "permits": [
+    "IL0030023"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.43699,
+     -87.76897
+    ]
+   ],
+   "towns": [
+    "Mount Carmel"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Drainage ditch tributary to Lyman Woods pond",
+   "reports": 1,
+   "permits": [
+    "IL0028380"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.82528,
+     -88.00256
+    ]
+   ],
+   "towns": [
+    "Downers Grove"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Lyman Woods pond"
+   ]
+  },
+  {
+   "name": "East Creek",
+   "reports": 1,
+   "permits": [
+    "IL0021873"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.50622,
+     -89.96585
+    ]
+   ],
+   "towns": [
+    "Belleville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "3 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -89.96585,
+     "lat": 38.50622,
+     "reason": "no NHD water of that name within 2 km of the reports' point (38.50622, -89.96585) (the nearest is 60.8 km away)"
+    },
+    {
+     "town": "Belleville",
+     "reason": "no NHD water of that name within 3 km of Belleville (the nearest is 54.4 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Fargo Run Creek",
+   "reports": 1,
+   "permits": [
+    "IL0021288"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.79223,
+     -89.68896
+    ]
+   ],
+   "towns": [
+    "Peoria"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Fox River, Indian Creek and Blackberry Creek",
+   "reports": 1,
+   "permits": [
+    "IL0048518"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.74167,
+     -88.32667
+    ]
+   ],
+   "towns": [
+    "Aurora"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "Indian Creek: 24 NHD waters of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Fox River",
+    "Indian Creek",
+    "Blackberry Creek"
+   ],
+   "places_failed": [
+    {
+     "lon": -88.32667,
+     "lat": 41.74167,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.74167, -88.32667) (the nearest is 41.9 km away)"
+    },
+    {
+     "town": "Aurora",
+     "reason": "no NHD water of that name within 3 km of Aurora (the nearest is 37.8 km away)"
+    },
+    {
+     "lon": -88.32667,
+     "lat": 41.74167,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.74167, -88.32667) (the nearest is 4.4 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Hoover Branch Tributary to Lake Springfield",
+   "reports": 1,
+   "permits": [
+    "IL0021989"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.74878,
+     -89.63083
+    ]
+   ],
+   "towns": [
+    "Springfield"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "records": [
+    "hoover-branch-il"
+   ],
+   "reason": "a water record holds the name (hoover-branch-il), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -89.63083,
+     "lat": 39.74878,
+     "reason": "no NHD water of that name within 2 km of the reports' point (39.74878, -89.63083) (the nearest is 8.2 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Kildeer Creek",
+   "reports": 1,
+   "permits": [
+    "IL0022055"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     42.19488,
+     -88.03093
+    ]
+   ],
+   "towns": [
+    "Buffalo Grove",
+    "Vernon Hills"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Kildeer Creek to Longview Meadows Lake",
+   "reports": 1,
+   "permits": [
+    "IL0022055"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     42.19917,
+     -87.98972
+    ]
+   ],
+   "towns": [
+    "Buffalo Grove",
+    "Vernon Hills"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Kildeer Creek"
+   ]
+  },
+  {
+   "name": "Kiljorden Creek",
+   "reports": 1,
+   "permits": [
+    "IL0029688"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.44893,
+     -90.67255
+    ]
+   ],
+   "towns": [
+    "Macomb"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Lake Miltmore",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "il-idph-beachguard"
+   ],
+   "points": [
+    [
+     42.39703,
+     -88.04487
+    ]
+   ],
+   "places_from": [
+    "il-idph-beachguard"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Lake Of Egypt",
+   "reports": 1,
+   "permits": [
+    "ILG580053"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "towns": [
+    "Marion"
+   ],
+   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Marion",
+     "reason": "no NHD water of that name within 3 km of Marion (the nearest is 449.2 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Lake Storey",
+   "reports": 1,
+   "permits": [
+    "IL0023141"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.98534,
+     -90.38657
+    ]
+   ],
+   "towns": [
+    "Galesburg"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Lake of Egypt",
+   "reports": 1,
+   "permits": [
+    "ILG580053"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "towns": [
+    "Marion"
+   ],
+   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Marion",
+     "reason": "no NHD water of that name within 3 km of Marion (the nearest is 449.2 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Local detention pond (unnamed).",
+   "reports": 1,
+   "permits": [
+    "IL0031933"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     42.2756,
+     -88.21924
+    ]
+   ],
+   "towns": [
+    "Island Lake"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
+  },
+  {
+   "name": "M Canal",
+   "reports": 1,
+   "permits": [
+    "IL0022519"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "towns": [
+    "Joliet",
+    "Joliet Eastside"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "MESD ditch to Horsehoe Lake",
+   "reports": 1,
+   "permits": [
+    "IL0033481"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.73047,
+     -90.11086
+    ]
+   ],
+   "towns": [
+    "Granite City"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "MESD ditch"
+   ]
+  },
+  {
+   "name": "Mascoutah surface water ditch",
+   "reports": 1,
+   "permits": [
+    "IL0025291"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.48333,
+     -89.8
+    ]
+   ],
+   "towns": [
+    "Mascoutah"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Mud Run Creek tributary spoon river",
+   "reports": 1,
+   "permits": [
+    "IL0023647"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.16333,
+     -90.05167
+    ]
+   ],
+   "towns": [
+    "Galva"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Old Macoupin Creek to Illinois River",
+   "reports": 1,
+   "permits": [
+    "ILG551104"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "Old Macoupin Creek"
+   ]
+  },
+  {
+   "name": "Retention pond",
+   "reports": 1,
+   "permits": [
+    "IL0031488"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.7293,
+     -89.91694
+    ]
+   ],
+   "towns": [
+    "Troy"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
+  },
+  {
+   "name": "Rocky Fork Creek",
+   "reports": 1,
+   "permits": [
+    "IL0036421"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.93083,
+     -90.22694
+    ]
+   ],
+   "towns": [
+    "Godfrey"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Salt Fork of the Saline Branch",
+   "reports": 1,
+   "permits": [
+    "IL0031500"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.11833,
+     -88.195
+    ]
+   ],
+   "towns": [
+    "Urbana"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Small creek tributary to the Embarras River",
+   "reports": 1,
+   "permits": [
+    "IL0029467"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.73225,
+     -87.6883
+    ]
+   ],
+   "towns": [
+    "Lawrenceville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; a description, not a name",
+   "parts": [
+    "Small creek"
+   ]
+  },
+  {
+   "name": "Sony Creek",
+   "reports": 1,
+   "permits": [
+    "IL0028061"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.6625,
+     -87.61
+    ]
+   ],
+   "towns": [
+    "Chicago",
+    "Alsip"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Storm sewer disch. to Saline Branch of Salt Fork",
+   "reports": 1,
+   "permits": [
+    "IL0031500"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.11833,
+     -88.195
+    ]
+   ],
+   "towns": [
+    "Urbana"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Saline Branch of Salt Fork"
+   ]
+  },
+  {
+   "name": "Tributary of Prairie DuPont Creek",
+   "reports": 1,
+   "permits": [
+    "IL0048232"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.53172,
+     -90.03246
+    ]
+   ],
+   "towns": [
+    "Belleville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "records": [
+    "prairie-dupont-creek-il"
+   ],
+   "reason": "a water record holds the name (prairie-dupont-creek-il), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -90.03246,
+     "lat": 38.53172,
+     "reason": "no NHD water of that name within 2 km of the reports' point (38.53172, -90.03246) (the nearest is 4.2 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Tributary of Quarry Banch",
+   "reports": 1,
+   "permits": [
+    "IL0035084"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.29833,
+     -87.975
+    ]
+   ],
+   "towns": [
+    "Casey"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Quarry Banch"
+   ]
+  },
+  {
+   "name": "Tributary to the East Branch of the DuPage River",
+   "reports": 1,
+   "permits": [
+    "IL0028380"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.78802,
+     -87.98693
+    ]
+   ],
+   "towns": [
+    "Downers Grove"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "East Branch of the DuPage River"
+   ]
+  },
+  {
+   "name": "UNKNOWEN CREEK",
+   "reports": 1,
+   "permits": [
+    "IL0061344"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.55535,
+     -89.19531
+    ]
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Unnamed (locally known as Baker Creek)",
+   "reports": 1,
+   "permits": [
+    "IL0029343"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.24,
+     -89.90306
+    ]
+   ],
+   "towns": [
+    "Kewanee"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Unnamed drainage ditch part of South Quincy Draina",
+   "reports": 1,
+   "permits": [
+    "IL0030503"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.89252,
+     -91.41574
+    ]
+   ],
+   "towns": [
+    "Quincy"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Unnamed stormwater detention pond for subdivision",
+   "reports": 1,
+   "permits": [
+    "IL0030503"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.90979,
+     -91.34058
+    ]
+   ],
+   "towns": [
+    "Quincy"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "Unnamed tributary to Cahokia Canal",
+   "reports": 1,
+   "permits": [
+    "IL0028215"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.66722,
+     -90.03194
+    ]
+   ],
+   "towns": [
+    "Collinsville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "records": [
+    "cahokia-canal-il"
+   ],
+   "reason": "a water record holds the name (cahokia-canal-il), but the reports' points lie too far from it to be placed there"
+  },
+  {
+   "name": "Unnamed tributary to Edwards River",
+   "reports": 1,
+   "permits": [
+    "IL0026344"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.175,
+     -90.035
+    ]
+   ],
+   "towns": [
+    "Galva"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "records": [
+    "edwards-river-il"
+   ],
+   "reason": "a water record holds the name (edwards-river-il), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -90.035,
+     "lat": 41.175,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.17500, -90.03500) (the nearest is 8.2 km away)"
+    }
+   ]
+  },
+  {
+   "name": "creek that enters little wabash river",
+   "reports": 1,
+   "permits": [
+    "IL0027910"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     38.08857,
+     -88.15668
+    ]
+   ],
+   "towns": [
+    "Carmi"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "creek to I&amp",
+   "reports": 1,
+   "permits": [
+    "IL0022519"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "towns": [
+    "Joliet",
+    "Joliet Eastside"
+   ],
+   "reason": "no water name"
+  },
+  {
+   "name": "ditch that run to Crab Orchard Lake",
+   "reports": 1,
+   "permits": [
+    "IL0025178"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     37.7545,
+     -89.0841
+    ]
+   ],
+   "towns": [
+    "Carterville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "ditch that run"
+   ]
+  },
+  {
+   "name": "marts river",
+   "reports": 1,
+   "permits": [
+    "IL0072931"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     37.92187,
+     -89.81415
+    ]
+   ],
+   "towns": [
+    "Chester"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "marys river maybe",
+   "reports": 1,
+   "permits": [
+    "IL0072931"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     37.92886,
+     -89.79623
+    ]
+   ],
+   "towns": [
+    "Chester"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "small creek, leads to East Branch of DuPage River",
+   "reports": 1,
+   "permits": [
+    "IL0032689"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.73096,
+     -88.05706
+    ]
+   ],
+   "towns": [
+    "Bolingbrook"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "small creek: no NHD flowline or waterbody of that name in IL; a description, not a name; leads: no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "small creek",
+    "leads"
+   ]
+  },
+  {
+   "name": "tributary to East Branch of DuPage River",
+   "reports": 1,
+   "permits": [
+    "IL0028380"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.80054,
+     -87.9839
+    ]
+   ],
+   "towns": [
+    "Downers Grove"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "East Branch of DuPage River"
+   ]
+  },
+  {
+   "name": "unnamed creek",
+   "reports": 1,
+   "permits": [
+    "ILG580215"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "towns": [
+    "Benton",
+    "West City"
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
+  },
+  {
+   "name": "unnamed creek to the East",
+   "reports": 1,
+   "permits": [
+    "IL0023655"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     40.10376,
+     -87.772
+    ]
+   ],
+   "towns": [
+    "Oakwood"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "unnamed to the Mississippi rivere",
+   "reports": 1,
+   "permits": [
+    "ILG580253"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "towns": [
+    "Thebes"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Mississippi rivere"
+   ]
+  },
+  {
+   "name": "unnamed tributary",
+   "reports": 1,
+   "permits": [
+    "IL0029203"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.14979,
+     -89.49582
+    ]
+   ],
+   "towns": [
+    "Hillsboro"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
+  },
+  {
+   "name": "unnamed tributary Rock River",
+   "reports": 1,
+   "permits": [
+    "IL0029939"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.47793,
+     -90.44915
+    ]
+   ],
+   "towns": [
+    "Moline"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "records": [
+    "rock-river-il"
+   ],
+   "reason": "a water record holds the name (rock-river-il), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -90.44915,
+     "lat": 41.47793,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.47793, -90.44915) (the nearest is 2.5 km away)"
+    }
+   ]
+  },
+  {
+   "name": "unnamed tributary of Pope creek",
+   "reports": 1,
+   "permits": [
+    "IL0021415"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     41.17919,
+     -90.31564
+    ]
+   ],
+   "towns": [
+    "Woodhull"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "1 NHD water of that name in IL, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Pope creek"
+   ],
+   "places_failed": [
+    {
+     "lon": -90.31564,
+     "lat": 41.17919,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.17919, -90.31564) (the nearest is 4.2 km away)"
+    }
+   ]
+  },
+  {
+   "name": "unnamed tributary to De Arcy Branch",
+   "reports": 1,
+   "permits": [
+    "IL0024465"
+   ],
+   "sources": [
+    "echo-sewer-overflow"
+   ],
+   "points": [
+    [
+     39.1025,
+     -90.34361
+    ],
+    [
+     39.12803,
+     -90.33795
+    ],
+    [
+     39.12219,
+     -90.31094
+    ]
+   ],
+   "towns": [
+    "Jerseyville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "De Arcy Branch"
+   ]
+  },
+  {
+   "name": "Collateral Channel",
+   "reports": 0,
+   "permits": [
+    "IL0045012"
+   ],
+   "sources": [
+    "il-mwrd-cso-points"
+   ],
+   "points": [
+    [
+     41.837159,
+     -87.701932
+    ]
+   ],
+   "towns": [
+    "Chicago",
+    "Chicago / Niles"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "South Fork South Branch Chicago River",
+   "reports": 0,
+   "permits": [
+    "IL0028053",
+    "IL0045012"
+   ],
+   "sources": [
+    "il-mwrd-cso-points"
+   ],
+   "points": [
+    [
+     41.841414,
+     -87.665569
+    ]
+   ],
+   "towns": [
+    "Chicago",
+    "Forest View",
+    "Chicago / Niles"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Lake Michigan",
+   "reports": 57,
+   "slugs": [
+    "lake-michigan-il"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     42.07596,
+     -87.68456
+    ],
+    [
+     41.88847,
+     -87.60827
+    ],
+    [
+     41.65474,
+     -87.5694
+    ]
+   ],
+   "places_from": [
+    "il-mwrd-lake-michigan-reversals"
+   ],
+   "places_failed": [
+    {
+     "lon": -87.5694,
+     "lat": 41.65474,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.65474, -87.56940) (the nearest is 6.7 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Powdermill Creek",
+   "reports": 23,
+   "slugs": [
+    "powdermill-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.57148,
+     -90.05587
+    ],
+    [
+     38.49778,
+     -90.05587
+    ]
+   ],
+   "towns": [
+    "Belleville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Drowning Fork",
+   "reports": 5,
+   "slugs": [
+    "drowning-fork-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     40.56,
+     -90.524
+    ]
+   ],
+   "towns": [
+    "Bushnell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Rocky Fork",
+   "reports": 4,
+   "slugs": [
+    "rocky-fork-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.95583,
+     -90.18956
+    ]
+   ],
+   "towns": [
+    "Godfrey"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Tributary of Richland Creek",
+   "reports": 4,
+   "slugs": [
+    "richland-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.50804,
+     -90.00618
+    ]
+   ],
+   "towns": [
+    "Belleville",
+    "Strasburg"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Ohio River",
+   "reports": 4,
+   "slugs": [
+    "ohio-river-il"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     37.4206,
+     -88.34776
+    ]
+   ],
+   "towns": [
+    "Rosiclare"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "unnamed tributary that leads to ohio river",
+   "reports": 4,
+   "slugs": [
+    "ohio-river-il"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Olmsted",
+    "Mounds"
+   ]
+  },
+  {
+   "name": "Stoney Creek",
+   "reports": 3,
+   "slugs": [
+    "stoney-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     40.10357,
+     -87.59608
+    ]
+   ],
+   "towns": [
+    "Danville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Tributary to Silver Creek",
+   "reports": 3,
+   "slugs": [
+    "silver-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Livingston"
+   ]
+  },
+  {
+   "name": "Emery Creek tributary to Curtis Creek tributary",
+   "reports": 2,
+   "slugs": [
+    "emery-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.92666,
+     -91.36358
+    ]
+   ],
+   "towns": [
+    "Quincy"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Engle Creek",
+   "reports": 2,
+   "slugs": [
+    "engle-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.59778,
+     -89.84528
+    ],
+    [
+     38.60469,
+     -89.86737
+    ]
+   ],
+   "towns": [
+    "O'Fallon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Kinney Branch to Richland Creek to Kaskaskia River",
+   "reports": 2,
+   "slugs": [
+    "kinney-branch-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.42779,
+     -89.92124
+    ]
+   ],
+   "towns": [
+    "Freeburg"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "A tributary to Big Hollow Creek.",
+   "reports": 1,
+   "slugs": [
+    "big-hollow-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     40.73762,
+     -89.64781
+    ]
+   ],
+   "towns": [
+    "Peoria"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Cross Lake",
+   "reports": 1,
+   "slugs": [
+    "cross-lake-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     42.49552,
+     -88.0825
+    ]
+   ],
+   "towns": [
+    "Antioch"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Deep Lake",
+   "reports": 1,
+   "slugs": [
+    "deep-lake-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     42.41633,
+     -88.06466
+    ]
+   ],
+   "places_from": [
+    "il-idph-beachguard"
+   ]
+  },
+  {
+   "name": "Deer Creek",
+   "reports": 1,
+   "slugs": [
+    "deer-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     41.44309,
+     -87.672
+    ]
+   ],
+   "towns": [
+    "Belvidere",
+    "Crete",
+    "University Park"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Diamond Lake Drain",
+   "reports": 1,
+   "slugs": [
+    "diamond-lake-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     42.25353,
+     -87.99972
+    ]
+   ],
+   "towns": [
+    "Vernon Hills"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Dieterich Creek",
+   "reports": 1,
+   "slugs": [
+    "dieterich-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.05733,
+     -88.37901
+    ]
+   ],
+   "towns": [
+    "Dieterich"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Ditch leading to the Wabash River",
+   "reports": 1,
+   "slugs": [
+    "wabash-river-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.43863,
+     -87.77184
+    ]
+   ],
+   "towns": [
+    "Mount Carmel"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Evergreen Lake",
+   "reports": 1,
+   "slugs": [
+    "evergreen-lake-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     40.64317,
+     -89.03226
+    ]
+   ],
+   "places_from": [
+    "il-idph-beachguard"
+   ]
+  },
+  {
+   "name": "Fountain Creek",
+   "reports": 1,
+   "slugs": [
+    "fountain-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.34124,
+     -90.16206
+    ]
+   ],
+   "towns": [
+    "Waterloo"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Lick Creek tributary to the Illinois River",
+   "reports": 1,
+   "slugs": [
+    "lick-creek-groveland-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     40.59142,
+     -89.5934
+    ]
+   ],
+   "towns": [
+    "Pekin"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Lily Cache Creek",
+   "reports": 1,
+   "slugs": [
+    "lily-cache-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     41.72214,
+     -88.05445
+    ]
+   ],
+   "towns": [
+    "Bolingbrook"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "McCullom Lake",
+   "reports": 1,
+   "slugs": [
+    "mccullom-lake-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     42.36047,
+     -88.28233
+    ]
+   ],
+   "places_from": [
+    "il-idph-beachguard"
+   ]
+  },
+  {
+   "name": "Negro Creek",
+   "reports": 1,
+   "slugs": [
+    "negro-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Roseville"
+   ]
+  },
+  {
+   "name": "Quarry Branch",
+   "reports": 1,
+   "slugs": [
+    "quarry-branch-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.29635,
+     -87.97838
+    ]
+   ],
+   "towns": [
+    "Casey"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Ramsey Branch",
+   "reports": 1,
+   "slugs": [
+    "ramsey-branch-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.50146,
+     -88.58369
+    ]
+   ],
+   "towns": [
+    "Eddyville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "To ditch potentially unamed tributary to Silver Cr",
+   "reports": 1,
+   "slugs": [
+    "silver-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Livingston"
+   ]
+  },
+  {
+   "name": "Tributary of East Fork Shoal Creek",
+   "reports": 1,
+   "slugs": [
+    "east-fork-shoal-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.26167,
+     -89.33667
+    ]
+   ],
+   "towns": [
+    "Witt",
+    "Montrose"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Tributary of Negro Hollow Creek",
+   "reports": 1,
+   "slugs": [
+    "negro-hollow-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.56944,
+     -89.99823
+    ]
+   ],
+   "towns": [
+    "Belleville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Tributary to Illinois River",
+   "reports": 1,
+   "slugs": [
+    "illinois-river-il"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Trim Creek tributary to Kankakee River",
+   "reports": 1,
+   "slugs": [
+    "trim-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     41.23058,
+     -87.64487
+    ]
+   ],
+   "towns": [
+    "Grant Park"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary to Phil's Creek",
+   "reports": 1,
+   "slugs": [
+    "phils-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.1093,
+     -90.31565
+    ]
+   ],
+   "towns": [
+    "Jerseyville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary to plum creek south",
+   "reports": 1,
+   "slugs": [
+    "plum-creek-sparta-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.14324,
+     -89.71492
+    ]
+   ],
+   "towns": [
+    "Sparta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Unnamed body of water tributary to Spring Creek",
+   "reports": 1,
+   "slugs": [
+    "spring-creek-capital-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.80727,
+     -89.68168
+    ]
+   ],
+   "towns": [
+    "Springfield"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Unnamed ditch that runs to Wabash River",
+   "reports": 1,
+   "slugs": [
+    "wabash-river-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.42633,
+     -87.76091
+    ]
+   ],
+   "towns": [
+    "Mount Carmel"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Unnamed ditch/creek that runs to Wabash River",
+   "reports": 1,
+   "slugs": [
+    "wabash-river-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.42636,
+     -87.76355
+    ]
+   ],
+   "towns": [
+    "Mount Carmel"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Unnamed tributary of Lick Branch",
+   "reports": 1,
+   "slugs": [
+    "lick-branch-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.77064,
+     -90.3992
+    ]
+   ],
+   "towns": [
+    "Chapin"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Shirley Creek",
+   "reports": 1,
+   "slugs": [
+    "shirley-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.72541,
+     -87.9062
+    ]
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Wooster Lake",
+   "reports": 1,
+   "slugs": [
+    "wooster-lake-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     42.36515,
+     -88.15244
+    ]
+   ],
+   "places_from": [
+    "il-idph-beachguard"
+   ]
+  },
+  {
+   "name": "marys river",
+   "reports": 1,
+   "slugs": [
+    "marys-river-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.92363,
+     -89.81354
+    ]
+   ],
+   "towns": [
+    "Chester"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "middle henderson creek",
+   "reports": 1,
+   "slugs": [
+    "middle-henderson-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     41.0579,
+     -90.56549
+    ]
+   ],
+   "towns": [
+    "Alexis"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "unknown name creek to marys river",
+   "reports": 1,
+   "slugs": [
+    "marys-river-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     37.92187,
+     -89.8145
+    ]
+   ],
+   "towns": [
+    "Chester"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "unnamed tributary that leads to mississippi river",
+   "reports": 1,
+   "slugs": [
+    "mississippi-river-il"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Mounds"
+   ]
+  },
+  {
+   "name": "unnamed tributary to Phils Creek",
+   "reports": 1,
+   "slugs": [
+    "phils-creek-il"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.1093,
+     -90.31565
+    ]
+   ],
+   "towns": [
+    "Jerseyville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Calumet River",
+   "reports": 0,
+   "slugs": [
+    "calumet-river-il"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.64499,
+     -87.559662
+    ],
+    [
+     41.72417,
+     -87.54639
+    ],
+    [
+     41.67444,
+     -87.55056
+    ]
+   ],
+   "towns": [
+    "Chicago",
+    "Alsip",
+    "Chicago / Niles"
+   ],
+   "places_failed": [
+    {
+     "lon": -87.54639,
+     "lat": 41.72417,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.72417, -87.54639) (the nearest is 8.7 km away)"
+    },
+    {
+     "lon": -87.55056,
+     "lat": 41.67444,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.67444, -87.55056) (the nearest is 3.2 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Calumet Union Drainage Ditch",
+   "reports": 0,
+   "slugs": [
+    "calumet-union-drainage-ditch-il"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.597001,
+     -87.66555
+    ],
+    [
+     41.603059,
+     -87.616601
+    ]
+   ],
+   "towns": [
+    "South Holland",
+    "Markham"
+   ]
+  },
+  {
+   "name": "Grand Calumet River",
+   "reports": 0,
+   "slugs": [
+    "grand-calumet-river-il"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.631213,
+     -87.539167
+    ]
+   ],
+   "towns": [
+    "Calumet City"
+   ]
+  }
+ ]
+}

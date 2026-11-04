@@ -36,9 +36,16 @@ NOTE = ("; cut to the state's waters along the state and international lines in 
 
 
 def tiger_zip(download: bool = True) -> Path:
+    """The TIGER/Line zip, downloaded once; the download is checked for the TIGER files (states_zip checks for the
+    cartographic file's members by default, which the TIGER zip does not hold)."""
     from ingest import waters_extra as WX
     dest = WX.RAW_DIR / "census" / TIGER_NAME
-    return WX.states_zip(candidates=[dest], download=download, url=TIGER_URL, dest=dest)
+    members = WX.STATES_ZIP_MEMBERS
+    WX.STATES_ZIP_MEMBERS = (f"{TIGER_STEM}.shp", f"{TIGER_STEM}.dbf")
+    try:
+        return WX.states_zip(candidates=[dest], download=download, url=TIGER_URL, dest=dest)
+    finally:
+        WX.STATES_ZIP_MEMBERS = members
 
 
 def cut_record(w: dict, state_shape, states_bbox) -> dict | None:
