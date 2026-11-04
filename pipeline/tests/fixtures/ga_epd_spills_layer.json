@@ -1,0 +1,6 @@
+{"objectIdFieldName": "ObjectId", "features": [
+ {"attributes": {"PERMIT_NUMBER": "GA0000001", "OVERFLOW_LOCATION": "12 Elm St Testville, Georgia 30000 ", "LATITUDE": 33.75, "LONGITUDE": -84.39, "BEGIN_DATE": null, "ObjectId": 1}},
+ {"attributes": {"PERMIT_NUMBER": "GA0000001", "OVERFLOW_LOCATION": "9 Oak Road Testville, Georgia 30000", "LATITUDE": 33.70, "LONGITUDE": -84.30, "BEGIN_DATE": null, "ObjectId": 2}},
+ {"attributes": {"PERMIT_NUMBER": "GA0000001", "OVERFLOW_LOCATION": "9 Oak Rd Testville, Georgia 30000", "LATITUDE": 33.71, "LONGITUDE": -84.31, "BEGIN_DATE": null, "ObjectId": 3}},
+ {"attributes": {"PERMIT_NUMBER": "GA0000001", "OVERFLOW_LOCATION": "4 Bay St Testville, Georgia 30000", "LATITUDE": 42.36, "LONGITUDE": -71.06, "BEGIN_DATE": null, "ObjectId": 4}}
+]}
