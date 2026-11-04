@@ -43,7 +43,8 @@ that cannot be read is replaced by the next good run's.
                                                             meta.json, regular files, are written; the gzip is read to
                                                             its end and the member list checked first, so a damaged
                                                             object, or one with no water record, writes nothing (exit
-                                                            1); never into a folder that is a git checkout
+                                                            1); a record over 256 MB is skipped, an object over 8 GB
+                                                            unpacked refused; never into a folder in a git checkout
     python3 -I scripts/state_paths.py check-size FILE [--max-mb N] [--hard-mb N]
                                                             exit 1 when a tarball is over the cap; with --hard-mb,
                                                             over the cap is a warning and only over N fails
@@ -90,6 +91,10 @@ FETCHED, ABSENT, FAILED = 0, 3, 1
 OBL_KEY = "state/obl-water.tar.gz"
 OBL_OUT = ROOT.parent / "openboatlaunch" / "out"
 OBL_RECORD = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]*(\.[A-Za-z0-9_-]+)*\.json")
+# a water record's outline is a few MB at most (a Great Lake's): a member over OBL_MEMBER_MAX is skipped and counted,
+# and an object that unpacks to more than OBL_TOTAL_MAX in all is refused (a damaged or wrong object, never a snapshot)
+OBL_MEMBER_MAX = 256 * 1024 * 1024
+OBL_TOTAL_MAX = 8 * 1024 * 1024 * 1024
 
 
 class Unreadable(Exception):
@@ -323,29 +328,49 @@ def obl_allowed(name: str) -> bool:
     return len(parts) == 2 and parts[0] == "water" and bool(OBL_RECORD.fullmatch(parts[1]))
 
 
-def unpack_obl(src: Path, dest: Path = OBL_OUT) -> dict:
+def in_git_checkout(dest: Path) -> Path | None:
+    """The folder holding .git that dest is in or under (dest itself or any folder above it), else None."""
+    d = Path(dest).resolve()
+    for p in (d, *d.parents):
+        if (p / ".git").exists():
+            return p
+    return None
+
+
+def unpack_obl(src: Path, dest: Path = OBL_OUT, member_max: int = OBL_MEMBER_MAX,
+               total_max: int = OBL_TOTAL_MAX) -> dict:
     """Restore openboatlaunch's water records into dest (<openboatlaunch>/out). Raises Unreadable, having written
-    nothing, when the gzip or the tar cannot be read to its end or the object holds no water record, and when dest
-    belongs to a git checkout (a real openboatlaunch project is never written over)."""
+    nothing, when the gzip or the tar cannot be read to its end, unpacks to more than total_max, or holds no water
+    record, and when dest is in a git checkout (a real openboatlaunch project, or this one, is never written over).
+    Only the folder water may be a directory: a directory named like a record or meta.json is skipped, and so is a
+    record over member_max."""
     dest = Path(dest)
-    if (dest.parent / ".git").exists() or (dest / ".git").exists():
-        raise Unreadable(f"{dest} is in a git checkout (an openboatlaunch project): not written over")
-    counts = {"records": 0, "meta": 0, "skipped_not_listed": 0, "skipped_not_regular": 0}
+    repo = in_git_checkout(dest)
+    if repo is not None:
+        raise Unreadable(f"{dest} is in a git checkout ({repo.name}): not written over")
+    counts = {"records": 0, "meta": 0, "skipped_not_listed": 0, "skipped_not_regular": 0, "skipped_too_large": 0}
     try:
         with open(src, "rb") as fh:
             if fh.read(2) != b"\x1f\x8b":
                 raise Unreadable(f"{Path(src).name} is not a gzip file")
         with gzip.open(src, "rb") as g:
-            while g.read(1 << 20):
-                pass
+            total = 0
+            while chunk := g.read(1 << 20):
+                total += len(chunk)
+                if total > total_max:
+                    raise Unreadable(f"{Path(src).name} unpacks to more than {mb(total_max)}")
         with tarfile.open(src, "r:gz") as tf:
             members = []
             for m in tf.getmembers():
                 if not obl_allowed(m.name):
                     counts["skipped_not_listed"] += 1
                     continue
-                if not (m.isfile() or m.isdir()):
+                is_top_dir = [x for x in PurePosixPath(m.name).parts if x != "."] == ["water"]
+                if not ((m.isfile() and not is_top_dir) or (m.isdir() and is_top_dir)):
                     counts["skipped_not_regular"] += 1
+                    continue
+                if m.isfile() and m.size > member_max:
+                    counts["skipped_too_large"] += 1
                     continue
                 members.append(m)
                 if m.isfile():

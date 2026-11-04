@@ -287,7 +287,7 @@ def test_restored_cache_lets_the_next_run_answer_without_requests(tmp_path, monk
 # ---------------------------------------------------------------- openboatlaunch's water records (state/obl-water.tar.gz)
 
 def obl_tarball(tmp_path: Path, extra=(), records=3, meta=True) -> Path:
-    """The object as the Mac packs it: tar -czf obl-water.tar.gz -C <openboatlaunch>/out water meta.json."""
+    """The object as the upload packs it: tar -czf obl-water.tar.gz -C <openboatlaunch>/out water meta.json."""
     src = tmp_path / "obl-src" / "out"
     for i, slug in enumerate(["haw-river-nc", "lake-wheeler-nc", "lake-lanier-ga"][:records]):
         put(src, f"water/{slug}.json", json.dumps({"slug": slug, "state": slug[-2:].upper(), "name": slug}))
@@ -367,3 +367,56 @@ def test_unpack_obl_without_meta_warns(tmp_path, capsys):
 def test_obl_default_destination_is_the_sibling_the_pipeline_reads():
     assert SP.OBL_OUT == ROOT.parent / "openboatlaunch" / "out"
     assert SP.OBL_KEY == "state/obl-water.tar.gz" and SP.STATE_KEY.fullmatch(SP.OBL_KEY)
+
+
+def test_unpack_obl_only_the_water_folder_is_a_directory(tmp_path):
+    """A directory named like a record or meta.json, or a file named water, is skipped (status.py would read a
+    directory as a record)."""
+    src = tmp_path / "odd.tar.gz"
+    with tarfile.open(src, "w:gz") as tf:
+        for name, kind in (("water", "dir"), ("water/ok-ny.json", "file"), ("water/dir-ny.json", "dir"),
+                           ("meta.json", "dir")):
+            ti = tarfile.TarInfo(name)
+            if kind == "dir":
+                ti.type = tarfile.DIRTYPE
+                tf.addfile(ti)
+            else:
+                ti.size = 2
+                tf.addfile(ti, io.BytesIO(b"{}"))
+    dest = tmp_path / "openboatlaunch" / "out"
+    c = SP.unpack_obl(src, dest)
+    assert c["records"] == 1 and c["meta"] == 0 and c["skipped_not_regular"] == 2
+    assert sorted(str(p.relative_to(dest)) for p in dest.rglob("*")) == ["water", "water/ok-ny.json"]
+    src2 = tmp_path / "file-water.tar.gz"
+    with tarfile.open(src2, "w:gz") as tf:
+        ti = tarfile.TarInfo("water")
+        ti.size = 2
+        tf.addfile(ti, io.BytesIO(b"{}"))
+    with pytest.raises(SP.Unreadable, match="no water"):
+        SP.unpack_obl(src2, tmp_path / "o2" / "out")
+
+
+def test_unpack_obl_caps_a_member_and_the_whole(tmp_path):
+    """A record over the member cap (a 2 GB sparse member, say) is skipped and counted; an object that unpacks past
+    the total cap writes nothing."""
+    src = obl_tarball(tmp_path, extra=[("water/huge-ny.json", "file", b"0" * 5000)])
+    dest = tmp_path / "openboatlaunch" / "out"
+    c = SP.unpack_obl(src, dest, member_max=1000)
+    assert c["skipped_too_large"] == 1 and c["records"] == 3 and not (dest / "water" / "huge-ny.json").exists()
+    with pytest.raises(SP.Unreadable, match="more than"):
+        SP.unpack_obl(src, tmp_path / "o2" / "out", total_max=4000)
+    assert not (tmp_path / "o2").exists()
+
+
+def test_unpack_obl_never_writes_anywhere_inside_a_checkout(tmp_path):
+    """Not only beside .git: any folder under a checkout (this repository's data/, an openboatlaunch subfolder)."""
+    src = obl_tarball(tmp_path)
+    (tmp_path / "proj" / ".git").mkdir(parents=True)
+    for dest in (tmp_path / "proj" / "data" / "obl" / "out", tmp_path / "proj" / "out"):
+        with pytest.raises(SP.Unreadable, match="checkout"):
+            SP.unpack_obl(src, dest)
+        assert not dest.exists()
+    link = tmp_path / "linked"
+    link.symlink_to(tmp_path / "proj")
+    with pytest.raises(SP.Unreadable, match="checkout"):
+        SP.unpack_obl(src, link / "out")
