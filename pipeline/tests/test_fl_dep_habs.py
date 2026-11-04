@@ -37,3 +37,16 @@ def test_open_episode_is_active_then_unknown_when_stale():
     assert recs[0]["status"] == "advisory_active" and recs[0]["ended_at"] is None
     recs, _ = H.build([v(1, "2026-03-01T14:00", "Yes")], "x", NOW)
     assert recs[0]["status"] == "unknown" and "no later visit" in recs[0]["raw"]["note"]
+
+
+def test_a_site_named_by_a_street_address_keeps_no_house_number():
+    # name review 2026-11-04: DEP names some sites by a street address, often a resident's dock
+    recs, _ = H.build([v(1, "2026-10-20T14:00", "Yes", loc="Example Lake - 1915 Placeholder Lane"),
+                       v(2, "2026-10-25T14:00", "Yes", loc="Example Lake - 1915 Placeholder Lane")], "x", NOW)
+    assert len(recs) == 1 and len(recs[0]["raw"]["visits"]) == 2            # still one site
+    r = recs[0]
+    assert "1915" not in str(r)
+    assert r["outfall_name"] == r["raw"]["site"] == "Example Lake - [house number removed] Placeholder Lane"
+    assert r["waterbody_text"] == "Example Lake"
+    recs, _ = H.build([v(1, "2026-10-20T14:00", "Yes", loc="Example River - Highway 17 Bridge")], "x", NOW)
+    assert recs[0]["outfall_name"] == "Example River - Highway 17 Bridge"

@@ -9,6 +9,8 @@ Source
   County, esrignss_latitude/longitude, BloomObserved (Yes/No), AlgalIDResult (dominant taxa), ToxinPresent
   (Yes/No/Pending), Microcystin, OtherToxin, CyanobacteriaDominant, locationString (the site), EditDate.
   Requested fields only: the layer's Comments (free text) and PicURL (field photographs) are never asked for.
+  A site named by a street address ("Example Lake - 12 Example Lane", often a resident's dock) is published without
+  its house number (common.strip_house_numbers); its visits are still grouped by the name DEP gives.
 
 Records (hab_advisory: a bloom record, the plum category; never a sewage record)
   This is DEP's sampling result, not a health advisory: the Department of Health issues health alerts separately,
@@ -42,7 +44,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import (BUILD_DIR, EVENTS_DIR, HEADERS, ROOT, event, now_iso, path_notes_to_meta, read_json, save_raw,
-                    write_events, write_json)
+                    strip_house_numbers, write_events, write_json)
 
 SOURCE_ID = "fl-dep-habs"
 LAYER = ("https://services1.arcgis.com/nRHtyn3uE1kyzoYc/arcgis/rest/services/AlgalBloom_Final_View/FeatureServer/0")
@@ -146,7 +148,12 @@ def make(ep: dict, lift: dict | None, key: str, fetched_at: str, now: datetime) 
     a = ep["open"]
     last = ep["last_pos"]
     start, last_t = utc_time(a.get("SampleDateTime")), utc_time(last.get("SampleDateTime"))
-    raw = {"site": a.get("locationString"), "site_key": key, "county": a.get("County"),
+    # a site named by a street address ("Sample Lake - 12 Sample Lane") is often a resident's dock: the house number
+    # is not published (common.strip_house_numbers); the visits are grouped by the site as DEP names it
+    site = strip_house_numbers(a["locationString"]) if isinstance(a.get("locationString"), str) else a.get("locationString")
+    if site != a.get("locationString"):
+        key = site_key({**a, "locationString": site})
+    raw = {"site": site, "site_key": key, "county": a.get("County"),
            "group": a.get("MonitoringGroupPublicFacing"), "visits": ep["visits"], "basis": BASIS}
     if lift is not None:
         status, ended = "advisory_lifted", iso(utc_time(lift.get("SampleDateTime")))
@@ -166,8 +173,8 @@ def make(ep: dict, lift: dict | None, key: str, fetched_at: str, now: datetime) 
         source_id=SOURCE_ID, source_record_id=str(a.get("globalid") or a.get("objectid")), fetched_at=fetched_at,
         source_url=f"{LAYER}/query?where=globalid%3D%27{a.get('globalid')}%27&outFields={','.join(FIELDS)}&f=json",
         event_type="hab_advisory", status=status,
-        waterbody_text=water_name(a.get("locationString")), water_slugs=[], water_match="none",
-        outfall_name=a.get("locationString"),
+        waterbody_text=water_name(site), water_slugs=[], water_match="none",
+        outfall_name=site,
         lat=lat, lon=lon, coord_source="source" if lat is not None else None, coord_precision_m=10 if lat is not None else None,
         started_at=iso(start), ended_at=ended, time_precision="minute",
         reported_at=None, published_at=None, source_updated_at=iso(last_t),
