@@ -39,6 +39,12 @@
 #                  for every notice since 2017), fl_dep_habs (DEP algal bloom visits), fl_doh_beaches
 #                  (Healthy Beaches result pages: a full pass starts at most every 20 hours and is spread over
 #                  hourly runs, at most 6 minutes of pages a run, resumed where it stopped)
+#                  California: ca_swrcb_ciwqs_spills (State Water Board CIWQS spill file: If-Modified-Since, a
+#                  304 most hours and about 11 MB once a day; spills of the last 60 days and those on record;
+#                  `--backfill` once for every spill since June 2023), ca_sfpuc_beaches (SFPUC beach map snapshot:
+#                  the combined sewer discharge sign and postings), ca_swrcb_fhab (FHAB bloom reports) and
+#                  ca_beachwatch (Beach Watch postings and closures; `--backfill` once for 1985 on), both read
+#                  only when their data.ca.gov table changes; ca_datagov is a helper
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

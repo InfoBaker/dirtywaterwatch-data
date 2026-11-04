@@ -1,0 +1,56 @@
+id: "ca-swrcb-ciwqs-spills-flatfile"
+name: "State Water Board CIWQS Sanitary Sewer System spill data: Cat1-2-3-Spills.txt (nightly flat file)"
+url: "https://www.waterboards.ca.gov/water_issues/programs/sso/docs/data_files/Cat1-2-3-Spills.txt"
+homepage: "https://www.waterboards.ca.gov/water_issues/programs/sso/docs/index.php"
+kind: "csv"
+level: "state"
+# Feed row: the source id written by pipeline/ingest/ca_swrcb_ciwqs_spills.py
+#   (data/build/events/ca-swrcb-ciwqs-spills-flatfile.json); the research row has the same id.
+# Built 2026-11-04: each hourly run asks for the file with If-Modified-Since (a 304 most hours; about
+#   11 MB, 2.8 MB compressed, once a day after the 06:00 Pacific rebuild) and takes into records the
+#   spills whose start, draft or certification date lies in the last 60 days and every spill already
+#   on record; `--backfill` takes every spill in the file. Only the safe columns are read (never the
+#   certifier or the operators' narratives); house numbers are cut from the location; a point on
+#   private property is rounded. Category 1 is shown; Categories 2 and 3 are kept with
+#   reached_water false (counted, never placed). A draft has no end and is never given one.
+# Notes (research/ca, status used, verified fetched, checked 2026-11-04): Statewide, event-level,
+#   machine-readable, public: read hourly by pipeline/ingest/ca_swrcb_ciwqs_spills.py
+#   (If-Modified-Since: the file changes once a day; 3,567 spills since June 2023 on 2026-11-04 with
+#   the backfill: 1,284 Category 1 shown, 459 Category 2 and 1,824 Category 3 kept as reaching no
+#   water). Narrative and certifier columns never read.
+# Access detail (research, quoted): Tab-delimited text, 95 columns, ~11 MB, no auth, no bot wall on
+#   the file (the HTML map pages sit behind Incapsula). Listing page
+#   https://www.waterboards.ca.gov/water_issues/programs/sso/docs/index.php shows all files
+#   regenerated daily at about 06:00 Pacific (Last-Modified 2026-11-03 14:00 UTC). Sibling files:
+#   annualReports.txt, Enrollee_Info.txt, neworder_monthly_counts.txt, neworder_ssmps.txt,
+#   No_spill.txt, plps_spills.txt (private lateral spills), PLSD.txt. Trimmed sample:
+#   raw/ciwqs-cat1-2-3-spills-sample.json.
+# Can fill: source_record_id (SPILL_EVENT_ID), event_type (SPILL_TYPE), source_status
+#   (SPILL_STATUS), started_at, ended_at (once certified), reported_at
+#   (DATE_TIME_ENROLLEE_NOTIFIED_CALOES, SUBMIT_DRAFT_DATE), waterbody (free text, filled on
+#   certification), location_text, coordinates (2,949 of 3,708 rows), volume, units, authority
+#   (AGENCY_NAME), raw_record, revision_history (SPILL_REPORT_VERSION), source_updated_at (file
+#   Last-Modified)
+# Cannot fill: published_at per row; advice_text; valid_until; official affected area
+# Waters: statewide; all enrollees of the Sanitary Sewer Systems General Order (public systems over
+#   one mile of pipe)
+# History: Reports under the 2022 order: start dates 2023-06-05 to 2026-10-30 (a few back to 2022).
+#   3,708 rows: Category 1 1,382, Category 2 477, monthly Category 3 1,849. Older 2006-order spills
+#   are in other CIWQS reports (not fetched). 2026: 383 Category 1 or 2 spills to end of October.
+# Research notes: Drafts (Work In Progress, Draft Submitted) appear with empty receiving water and
+#   end time; they fill on certification (15 days). 141 rows of 3,708 share SPILL_EVENT_ID with
+#   another row (amended versions): key on SPILL_EVENT_ID and keep the highest SPILL_REPORT_VERSION.
+#   Date formats differ by column (MM/DD/YYYY HH:MM vs DD-MON-YY). CSO discharges from San Francisco
+#   and Sacramento are NOT in this file (they are NPDES permit events).
+cadence: "File rebuilt nightly. Category 1 drafts are due within 3 business days; in 2026 the median gap from spill start to SUBMIT_DRAFT_DATE was 2 days (p90 10 days, n=340). A 2026-10-30 17:00 Long Beach spill was in the 2026-11-03 file. Cal OES notified a median 4.2 hours after start (n=265). Category 3 spills arrive monthly; Category 4 only annually and are not in this file."
+license: "No licence statement on the file listing; State Water Board public records. Quote as found: none."
+attribution: "State Water Resources Control Board"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["CA"]
+access: ["csv"]
+access_detail: "Tab-delimited text, 95 columns, ~11 MB, no auth, no bot wall on the file (the HTML map pages sit behind Incapsula). Listing page https://www.waterboards.ca.gov/water_issues/programs/sso/docs/index.php shows all files regenerated daily at about 06:00 Pacific (Last-Modified 2026-11-03 14:00 UTC). Sibling files: annualReports.txt, Enrollee_Info.txt, neworder_monthly_counts.txt, neworder_ssmps.txt, No_spill.txt, plps_spills.txt (private lateral spills), PLSD.txt. Trimmed sample: raw/ciwqs-cat1-2-3-spills-sample.json."
+machine_readable: true
+legal_basis: "Water Code 13263, 13267, 13383; Order WQ 2022-0103-DWQ Attachment E1"
+checked: "2026-11-04"

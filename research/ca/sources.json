@@ -100,10 +100,10 @@
     "history": "Reports under the 2022 order: start dates 2023-06-05 to 2026-10-30 (a few back to 2022). 3,708 rows: Category 1 1,382, Category 2 477, monthly Category 3 1,849. Older 2006-order spills are in other CIWQS reports (not fetched). 2026: 383 Category 1 or 2 spills to end of October.",
     "license": "No licence statement on the file listing; State Water Board public records. Quote as found: none.",
     "legal_basis": "Water Code 13263, 13267, 13383; Order WQ 2022-0103-DWQ Attachment E1",
-    "status": "candidate",
-    "status_reason": "The best statewide SSO feed in the region: event precision, coordinates, volumes to surface water, stable SPILL_EVENT_ID with version, nightly. Tier A. CERTIFIED_BY and narrative fields can carry personal names and must be dropped at ingest.",
+    "status": "used",
+    "status_reason": "Statewide, event-level, machine-readable, public: read hourly by pipeline/ingest/ca_swrcb_ciwqs_spills.py (If-Modified-Since: the file changes once a day; 3,567 spills since June 2023 on 2026-11-04 with the backfill: 1,284 Category 1 shown, 459 Category 2 and 1,824 Category 3 kept as reaching no water). Narrative and certifier columns never read.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-04",
     "notes": "Drafts (Work In Progress, Draft Submitted) appear with empty receiving water and end time; they fill on certification (15 days). 141 rows of 3,708 share SPILL_EVENT_ID with another row (amended versions): key on SPILL_EVENT_ID and keep the highest SPILL_REPORT_VERSION. Date formats differ by column (MM/DD/YYYY HH:MM vs DD-MON-YY). CSO discharges from San Francisco and Sacramento are NOT in this file (they are NPDES permit events)."
   },
   {
@@ -475,10 +475,10 @@
     "history": "1985 to 2026-03; closures for Sewage Spill 636, Combined Sewer Overflow 814 postings + 18 closures, Line Break 131, Pump Station Failure 80, Tijuana River 404.",
     "license": "Open Data Commons Attribution License (CKAN metadata).",
     "legal_basis": "HSC 115880-115915",
-    "status": "candidate",
-    "status_reason": "Statewide closure history with sewage causes; too slow for live status, good for backfill and for linking spills to closures.",
+    "status": "used",
+    "status_reason": "Read by pipeline/ingest/ca_beachwatch.py when the table changes (last two years each time; --backfill since 1985): county postings and closures with cause. Months behind (newest 2026-03-06 on 2026-11-04): history, not current status.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-04",
     "notes": "Contact-person and agency comment fields carry staff names: drop them at ingest."
   },
   {
@@ -541,10 +541,10 @@
     "history": "None in the service; bacteria results on data.sf.gov v3fv-x3ux (Public Domain Dedication, rows updated 2026-11-03).",
     "license": "none stated for the service; data.sf.gov dataset ODC-PDDL",
     "legal_basis": "NPDES CA0037664 / CA0037681 CSO public notification (Nine Minimum Controls)",
-    "status": "candidate",
-    "status_reason": "The only live CSO signal in California. Needs a snapshot state machine (the cso flag appears and clears). Volumes come later from SFPUC's NPDES reports.",
+    "status": "used",
+    "status_reason": "Read hourly by pipeline/ingest/ca_sfpuc_beaches.py as a snapshot: the combined sewer discharge sign per station (SFPUC's own 24-72 hour window, red while shown) and the postings (beach advisories). 20 stations, no flag on 2026-11-04.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-04",
     "notes": "Undocumented ASMX endpoint: may change without notice."
   },
   {
@@ -652,10 +652,10 @@
     "history": null,
     "license": "CKAN dataset licence not read; data.ca.gov default is ODC-By (inferred)",
     "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "Plum-category HAB advisories with dates and points.",
+    "status": "used",
+    "status_reason": "Read by pipeline/ingest/ca_swrcb_fhab.py when the table changes (about daily): Caution, Warning, Danger and mat-alert advisories (1,304 on 2026-11-04) and new reports not yet assessed; reports with no advisory counted, not shown. Blooms, not sewage.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-04",
     "notes": "Reporter name/email/phone columns exist in some resources; never ingest them."
   },
   {
