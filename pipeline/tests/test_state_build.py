@@ -453,3 +453,14 @@ def test_the_builders_snap_for_an_outfall_must_lie_at_the_rows_own_point():
     res = mt.match(o)
     assert res["slug"] == "blackjack-creek-wa" and res["step"] == "NHD builder"
     assert mt.match({**o, "lat": None, "lon": None})["slug"] == "blackjack-creek-wa"   # no point: as the builder chose
+
+
+def test_a_bay_drawn_by_its_coastline_is_a_bay_not_a_stream():
+    """Review 2026-11-04 WA: Budd Inlet, Padilla Bay and Possession Sound came from NHDPlus coastline flowlines and were
+    kinded stream."""
+    assert N.kind_of("Budd Inlet", "line", fcodes=[56600]) == "bay"
+    assert N.kind_of("Possession Sound", "line", fcodes=[56600]) == "bay"
+    assert N.kind_of("Harbor Creek", "line", fcodes=[46006]) == "stream"
+    assert N.kind_of("Bay River", "line", fcodes=[46006]) == "river"
+    w = {r["slug"]: r for r in json.loads((Path(__file__).resolve().parents[2] / "data" / "waters-nhd.json").read_text())["waters"]}
+    assert {w[s]["kind"] for s in ("budd-inlet-wa", "padilla-bay-wa", "possession-sound-wa")} == {"bay"}
