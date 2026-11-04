@@ -479,3 +479,25 @@ def test_a_tidy_that_repeats_an_action_does_not_count_it_twice(fixture_doc, monk
     N.tidy_main(["NC"], path=path, aliases_path=apath)
     again = json.loads(path.read_text())["stats"]["state_builds"]["NC"]["existing_duplicates"]
     assert again["actions"] == first["actions"] and again["dropped"] == first["dropped"]
+
+
+# ---------------------------------------------------------------- the place pass at the end of the budget (IL review)
+
+def test_the_place_pass_stops_quietly_when_the_budget_ends_while_a_record_is_built(monkeypatch):
+    """resolve_point is inside the pass's BudgetExhausted guard; the geometry fetch of the record it chose
+    (new_record -> build_feature) was not, so the run died with a traceback instead of leaving the place for the
+    next run (Illinois build, 2026-11-04)."""
+    run = N.Run.__new__(N.Run)
+    run.args, run.net_end, run.feats, run.existing, run.nhd = SimpleNamespace(place_budget=None), None, {}, {}, None
+    t = {"key": "il|mill creek", "state": "IL", "name": "Mill Creek", "points": Counter({(-88.0, 41.5): 3})}
+    row = {"how": ["name at a point"], "slugs": [], "_recs": [], "reason": None}
+    monkeypatch.setattr(run, "uncovered_places", lambda t_, r_: [(-88.0, 41.5, 2, 3)], raising=False)
+    monkeypatch.setattr(run, "place_geoms", lambda r_: [], raising=False)
+    monkeypatch.setattr(N, "resolve_point", lambda nhd, t_, lon, lat: ({"type": "line", "gnis_id": "1"}, "point"))
+
+    def out_of_budget(*a, **k):
+        raise N.BudgetExhausted("--max-requests 10 used")
+    monkeypatch.setattr(N, "build_feature", out_of_budget)
+    run.place_pass([(t, row)])                                   # before the fix: BudgetExhausted escaped
+    assert row["places_failed"] == [{"lon": -88.0, "lat": 41.5, "reason": "not tried this run (--max-requests 10 used)"}]
+    assert run.feats == {} and row["slugs"] == []
