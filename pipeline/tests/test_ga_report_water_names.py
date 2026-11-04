@@ -263,6 +263,10 @@ def test_each_georgia_alias_is_on_file_for_a_georgia_record_in_the_reporting_ope
         assert operator and where
 
 
+# the reports' own points, for the two spellings of names several Georgia records share (review P1-1 below)
+SHARED_NAME_POINTS = {"Sugar Crek": (30.835111, -83.358083), "Mossey Creek": (34.576025, -83.762166)}
+
+
 def test_a_report_of_each_aliased_spelling_reaches_its_record():
     waters = S.load_waters(include_nhd=True)
     saved = S._STATES
@@ -270,7 +274,8 @@ def test_a_report_of_each_aliased_spelling_reaches_its_record():
     try:
         res = S.Resolver(waters, [], {}, {}, {})
         for slug, text, *_ in ALIASES:
-            got = res.by_name(text, "GA", None, None, {"raw": {"state": "GA"}, "waterbody_text": text})[0]
+            lat, lon = SHARED_NAME_POINTS.get(text, (None, None))     # the report's own point chooses among the names
+            got = res.by_name(text, "GA", lat, lon, {"raw": {"state": "GA"}, "waterbody_text": text})[0]
             assert slug in got, (text, got)
     finally:
         S._STATES = saved
@@ -324,3 +329,38 @@ def test_georgias_names_file_covers_every_name_with_a_record_or_a_reason():
     res = {r["name"]: r for r in d["resolved"]}
     assert res["Butler Creek"]["slugs"] == ["butler-creek-ga"]
     assert "1,366 records" in d["about"] and "894 records" in d["about"]
+
+
+# ---------------------------------------------------------------- an aliased spelling of a shared name (review P1-1)
+
+def test_a_georgia_spelling_of_a_name_several_records_share_is_on_every_one_of_them():
+    """A spelling slip names whichever water of that name the report means: 'Sugar Crek' is a misspelt Sugar Creek, and
+    Georgia has three Sugar Creek records (Valdosta, Gresham Park in DeKalb, Chauncey). On one record only, a report
+    with no point gives that record whatever its operator's town (a single record is placed without the town check),
+    so the spelling goes on each, and the point or the town chooses among them as for the name itself."""
+    aliases = json.loads((ROOT / "data" / "water-aliases.json").read_text())
+    waters = S.load_waters(include_nhd=True)
+    for slug, text, *_ in ALIASES:
+        name = S.norm_name(waters[slug]["name"])
+        same = [s for s, w in waters.items() if w.get("state") == "GA" and S.norm_name(w.get("name") or "") == name]
+        lacking = [s for s in same if text not in aliases.get(s, [])]
+        assert not lacking, (text, lacking)
+
+
+def test_a_misspelt_sugar_creek_is_placed_by_its_point_or_town_not_on_valdostas_record():
+    waters = S.load_waters(include_nhd=True)
+    saved = S._STATES
+    S._STATES = {"GA"}
+    try:
+        res = S.Resolver(waters, [], {"ga-dekalb-dwm": ["Atlanta"], "ga-valdosta": ["Valdosta"]}, {}, {})
+
+        def by(text, did=None, lat=None, lon=None):
+            ev = {"raw": {"state": "GA"}, "waterbody_text": text, "discharger_id": did}
+            return res.by_name(text, "GA", lat, lon, ev)[0]
+        assert by("Sugar Crek", "ga-dekalb-dwm") == ["sugar-creek-gresham-park-ga"]       # the operator's town
+        assert by("Sugar Crek", lat=30.835111, lon=-83.358083) == ["sugar-creek-valdosta-ga"]   # EPA's Valdosta report
+        assert by("Sugar Crek") == []                                                     # neither: not placed
+        assert by("Mossey Creek", lat=34.576025, lon=-83.762166) == ["mossy-creek-cleveland-ga"]
+        assert by("Mossey Creek") == []
+    finally:
+        S._STATES = saved
