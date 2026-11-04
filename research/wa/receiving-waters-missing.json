@@ -1,8 +1,21 @@
 {
  "about": "Receiving-water names in Washington's reports (Ecology's sewage spill list and EPA's eRule tables, the records read on 2026-11-04: every report on Ecology's list since June 2026) that data/receiving-waters-national.json does not hold for WA, by name as the report gives it, with the number of reports giving each and the towns of the operators that reported them. Reports that say the sewage reached no water are left out. King County's status file names no water: its outfalls carry EPA's receiving water through data/outfalls-wa.json.",
  "state": "WA",
- "waters": 8,
- "reports": 9,
+ "waters": 6,
+ "reports": 7,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in WA": 5,
+  "5 NHD waters of that name in WA, none within reach of the reports' places": 1
+ },
+ "resolved_names": 2,
+ "resolved_reports": 2,
+ "build": {
+  "date": "2026-11-04",
+  "command": "python -m ingest.waters_from_nhd --names research/wa/receiving-waters-missing.json --state WA",
+  "records_built": 2,
+  "names_resolved": 2,
+  "network_requests": 14
+ },
  "rows": [
   {
    "name": "Bellingham Bay",
@@ -15,7 +28,11 @@
    ],
    "towns": [
     "Bellingham"
-   ]
+   ],
+   "places_from": [
+    "wa-ecology-sewage-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in WA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Dry Fork Creek",
@@ -28,7 +45,11 @@
    ],
    "towns": [
     "Pullman"
-   ]
+   ],
+   "places_from": [
+    "wa-ecology-sewage-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in WA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Dyes Inlet",
@@ -43,7 +64,11 @@
     "Kingston",
     "Manchester",
     "Poulsbo"
-   ]
+   ],
+   "places_from": [
+    "wa-ecology-sewage-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in WA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Hood Canal",
@@ -56,34 +81,11 @@
    ],
    "towns": [
     "Union"
-   ]
-  },
-  {
-   "name": "Lake Stevens",
-   "reports": 1,
-   "permits": [
-    "WA0020893"
    ],
-   "sources": [
+   "places_from": [
     "wa-ecology-sewage-spills"
    ],
-   "towns": [
-    "Everett",
-    "Lake Stevens"
-   ]
-  },
-  {
-   "name": "Lake Union",
-   "reports": 1,
-   "permits": [
-    "WA0031682"
-   ],
-   "sources": [
-    "wa-ecology-sewage-spills"
-   ],
-   "towns": [
-    "Seattle"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in WA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Mitchell Creek",
@@ -97,6 +99,17 @@
    "towns": [
     "Everett",
     "Lake Stevens"
+   ],
+   "reason": "5 NHD waters of that name in WA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Everett",
+     "reason": "no NHD water of that name within 3 km of Everett (the nearest is 87.8 km away)"
+    },
+    {
+     "town": "Lake Stevens",
+     "reason": "no NHD water of that name within 3 km of Lake Stevens (the nearest is 89.0 km away)"
+    }
    ]
   },
   {
@@ -110,6 +123,44 @@
    ],
    "towns": [
     "Port Angeles"
+   ],
+   "places_from": [
+    "wa-ecology-sewage-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in WA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Lake Stevens",
+   "reports": 1,
+   "slugs": [
+    "lake-stevens-wa"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Everett",
+    "Lake Stevens"
+   ],
+   "places_failed": [
+    {
+     "town": "Everett",
+     "reason": "no NHD water of that name within 3 km of Everett (the nearest is 4.0 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Lake Union",
+   "reports": 1,
+   "slugs": [
+    "lake-union-wa"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Seattle"
+   ],
+   "places_from": [
+    "wa-ecology-sewage-spills"
    ]
   }
  ]
