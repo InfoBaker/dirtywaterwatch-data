@@ -468,3 +468,14 @@ def test_a_day_precision_spill_with_no_end_gets_72_hours_of_caution_from_the_day
     assert "safe" not in rules["unresolved"]["day_start_caution"]["rationale"].lower()
     other = {**recs[0], "source_id": "nh-permittees", "event_id": "nh-permittees:x"}
     assert S.event_intervals(other, "NH", now, rules=rules)[0]["rule"] == "no_end"
+
+
+def test_a_general_permit_coverage_number_is_an_npdes_permit():
+    recs, _ = run([posting("2026-11-02", [row(PERMIT_NUMBER="GAG640013"),
+                                          row(OVERFLOW_LOCATION="9 Oak Rd", PERMIT_NUMBER="GAJ030751"),
+                                          row(OVERFLOW_LOCATION="4 Bay St", PERMIT_NUMBER="pending")])],
+                  epa=[epa("a", "2026-10-29", "x", permit="GAG640013")], permits={"GAG640013": "ga-gag640013"})
+    r = {x["outfall_name"].split()[0]: x for x in recs}
+    assert r["12"]["npdes_permit"] == "GAG640013" and r["12"]["discharger_id"] == "ga-gag640013"
+    assert r["12"]["raw"]["_epa_record"] == "echo-sewer-overflow:a"
+    assert r["9"]["npdes_permit"] is None and r["4"]["npdes_permit"] is None
