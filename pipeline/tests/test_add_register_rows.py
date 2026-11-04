@@ -174,11 +174,17 @@ def test_the_duty_rows_replace_the_statewide_rows_one_per_operator_and_duty(tmp_
 
 
 def test_every_georgia_operator_has_its_four_duty_rows_and_the_statewide_rows_are_gone():
+    water_plants = 0
     for op in DIS:
         if op["state"] == "GA":
             for suffix in ("legal-organ-notice", "media-notice", "health-department", "spill-signs"):
+                if ARR.ga_water_plant(op):                   # a drinking-water plant: the sewage-spill rule is not claimed
+                    assert f"{op['id']}-{suffix}" not in BY_ID
+                    continue
                 r = BY_ID[f"{op['id']}-{suffix}"]
                 assert r["operator_id"] == op["id"] and r["legal_basis"].startswith("Ga. Comp. R. & Regs. 391-3-6-.05(3)")
+            water_plants += ARR.ga_water_plant(op)
+    assert water_plants > 0
     for gone in ARR.GA_REPLACES + ARR.NC_REPLACES:
         assert gone not in BY_ID
     assert BY_ID["ga-downstream-water-suppliers"]["operator_id"] is None
@@ -202,3 +208,23 @@ def test_the_voluntary_rows_say_why_they_are_voluntary_and_how_their_address_ans
     # the county layer is read for its description only: never its rows (street addresses, free-text notes)
     sar = BY_ID["fl-sarasota-spill-layer"]
     assert all("/query" not in u and u.endswith("FeatureServer/0?f=json") for u in sar["urls"])
+
+
+def test_a_georgia_drinking_water_plant_gets_no_sewage_spill_rows_and_a_stale_row_is_removed(tmp_path):
+    """A permit under Georgia's general permit for water treatment plants (GAG64, filter backwash) is no POTW sewage
+    spill: no duty rows, the reason in the report; rows left from an earlier run (or an earlier scope) are removed."""
+    wtp = {"id": "ga-wtp", "name": "City Of Y (Well #1 WTP)", "state": "GA", "kind": "plant", "npdes_permit": "GAG640001",
+           "npdes_permits": ["GAG640001"], "notification_channel": "None found online (not searched individually)"}
+    stale = dict(OLD_ROW, id="ga-wtp-spill-signs", state="GA", operator_id="ga-wtp", channel_kind="lights_signs_page",
+                 barrier="signs_only")
+    stale_annual = dict(OLD_ROW, id="nc-small-annual-report", operator_id="nc-small")       # out of (a) by its flow
+    paths = _files(tmp_path, sorted([OLD_ROW, stale_annual, stale], key=lambda r: (r["state"], r["id"])))
+    paths["dis_path"].write_text(json.dumps(FIX_DIS + [wtp]))
+    rep = ARR.run(["nc-annual", "ga-notice"], **paths)
+    rows = {r["id"] for r in json.loads(paths["register"].read_text())["channels"]}
+    assert not any(i.startswith("ga-wtp-") for i in rows) and "ga-x-spill-signs" in rows
+    assert "drinking-water" in dict(rep["ga-notice"]["left_out"])["ga-wtp"]
+    assert rep["ga-notice"]["removed"] == ["ga-wtp-spill-signs"]
+    assert "nc-small-annual-report" not in rows and rep["nc-annual"]["removed"] == ["nc-small-annual-report"]
+    assert ARR.ga_water_plant(wtp) and not ARR.ga_water_plant(FIX_DIS[-1])
+    assert not ARR.ga_water_plant({"npdes_permits": ["GAG640001", "GA0020001"]})   # a sewer permit too: kept

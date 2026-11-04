@@ -32,8 +32,11 @@ other, note 'No web form'". The parts:
               publishes neither, so no agency channel is left to keep). An operator's own web page for its releases
               (Charlotte Water, Raleigh) stays its own row and is named in the note.
 
-  ga-notice   Ga. Comp. R. & Regs. 391-3-6-.05(3), the owner of a POTW (every Georgia operator in data/dischargers.json:
-              the registry's Georgia rows are POTW permits): (b) the legal-organ notice of a major spill, (e) the
+  ga-notice   Ga. Comp. R. & Regs. 391-3-6-.05(3), the owner of a POTW (the Georgia operators in data/dischargers.json:
+              the registry's Georgia rows are permits EPA lists with a POTW component), except an operator whose every
+              permit is Georgia's general permit for drinking-water treatment plants (GAG64xxxx, filter backwash): a
+              "spill" in (2) is a discharge of raw sewage, which a water plant's backwash permit does not cover, so
+              the duty is not claimed for it (left out, with the reason): (b) the legal-organ notice of a major spill, (e) the
               report to local television, radio and print media, (f) the report to the local health department and
               (g) the posted notice at the spill and the waterway's access points. Rows <operator id>-legal-organ-notice,
               -media-notice, -health-department and -spill-signs, replacing the statewide rows ga-legal-organ-notice,
@@ -127,6 +130,7 @@ GA_DUTIES = [
      "No online record."),
 ]
 GA_REPLACES = ("ga-legal-organ-notice", "ga-media-notice", "ga-local-health-departments", "ga-spill-signs")
+GA_WATER_PLANT_PERMIT = "GAG64"       # Georgia's general NPDES permit for water treatment plants (filter backwash)
 
 
 def mgd(x: float) -> str:
@@ -256,11 +260,21 @@ def nc_notice_rows(dis: list[dict], plants, register: dict | None = None) -> tup
     return rows, []
 
 
+def ga_water_plant(op: dict) -> bool:
+    """Every permit of the operator is Georgia's general permit for drinking-water treatment plants (GAG64xxxx)."""
+    ps = permits_of(op)
+    return bool(ps) and all(str(p).upper().startswith(GA_WATER_PLANT_PERMIT) for p in ps)
+
+
 def ga_notice_rows(dis: list[dict], plants, register: dict | None = None) -> tuple[list[dict], list]:
-    """The 391-3-6-.05(3) rows, four per Georgia operator."""
-    rows = []
+    """The 391-3-6-.05(3) rows, four per Georgia operator (a drinking-water plant left out, with the reason)."""
+    rows, out = [], []
     for op in dis:
         if op.get("state") != "GA":
+            continue
+        if ga_water_plant(op):
+            out.append((op["id"], "a drinking-water treatment plant (general permit GAG64, filter backwash): the rule's "
+                                  "spill is a discharge of raw sewage by a POTW"))
             continue
         for suffix, kind, noun, basis, duty, barrier_s in GA_DUTIES:
             srcs = GA_SOURCES + (["ga-law-ocgs-12-5-30-1"] if "12-5-30.1" in basis else [])
@@ -272,7 +286,7 @@ def ga_notice_rows(dis: list[dict], plants, register: dict | None = None) -> tup
                 "note": (f"No web form: {op['name']}: {duty}. {barrier_s} The rule binds the owner of a publicly owned "
                          "treatment works. (research/ga/report.md §2.1)"),
                 "checked": CHECKED, "records": False, "noun": noun, "sources": srcs}))
-    return rows, []
+    return rows, out
 
 
 SWIM_GUIDE = "https://www.theswimguide.org/"
@@ -284,7 +298,8 @@ VOLUNTARY = [
      "publishes": "notices",
      "note": ("Sarasota County's AbnormalEventSpill layer: sanitary sewer overflows in the county reported to DEP by the "
               "North Port, Sarasota and Venice utilities, the Englewood district, Sarasota County Utilities and private "
-              "systems (date, type, gallons, whether surface water was affected, a point). Voluntary: a county "
+              "systems (date, type, gallons, whether surface water was affected, a point). Its description calls it an "
+              "archive of the 2016-2020 spills, updated annually. Voluntary: a county "
               "publication no law requires. The layer's description answered 200 to the project user agent on "
               "2026-11-04 (last edit 2026-08-17). Only the description is read (its last-edit time shows a change): "
               "the rows carry street addresses and free-text notes, and the PNP feed (fl-dep-pnp) carries the same "
@@ -338,9 +353,13 @@ def voluntary_rows(dis, plants, register=None) -> tuple[list[dict], list]:
     return [finish(dict(r)) for r in VOLUNTARY], []
 
 
-PARTS = {"nc-annual": {"build": lambda dis, plants, reg: nc_annual_rows(dis, plants), "replaces": ()},
+# "left_ids": the row ids a part would make for an operator it leaves out, removed so a rerun after an operator falls
+# out of scope leaves no stale row
+PARTS = {"nc-annual": {"build": lambda dis, plants, reg: nc_annual_rows(dis, plants), "replaces": (),
+                       "left_ids": lambda oid: [f"{oid}-annual-report"]},
          "nc-notice": {"build": nc_notice_rows, "replaces": NC_REPLACES},
-         "ga-notice": {"build": ga_notice_rows, "replaces": GA_REPLACES},
+         "ga-notice": {"build": ga_notice_rows, "replaces": GA_REPLACES,
+                       "left_ids": lambda oid: [f"{oid}-{d[0]}" for d in GA_DUTIES]},
          "voluntary": {"build": voluntary_rows, "replaces": ()}}
 
 
@@ -361,9 +380,11 @@ def run(parts: list[str], register: Path = REGISTER, dis_path: Path = DIS, plant
     for p in parts:
         rows, left_out = PARTS[p]["build"](dis, plants, doc)
         before = {r["id"] for r in doc["channels"]}
-        doc = merge(doc, rows, PARTS[p]["replaces"])
+        left_ids = PARTS[p].get("left_ids") or (lambda oid: [])
+        drop = tuple(PARTS[p]["replaces"]) + tuple(i for oid, _ in left_out for i in left_ids(oid))
+        doc = merge(doc, rows, drop)
         report[p] = {"rows": len(rows), "new": len({r["id"] for r in rows} - before),
-                     "removed": sorted(set(PARTS[p]["replaces"]) & before), "left_out": left_out,
+                     "removed": sorted(set(drop) & before), "left_out": left_out,
                      "barriers": dict(Counter(r["barrier"] or ("review" if r.get("barrier_review") else "none")
                                                 for r in rows))}
     errs = NP.validate_register(doc, dis, ROOT)
