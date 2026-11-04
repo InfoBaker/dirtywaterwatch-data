@@ -1,0 +1,831 @@
+{
+ "meta": {
+  "title": "North Carolina sewer-system permits with no public owner on DWR's overflow layers: the permittee",
+  "checked": "2026-11-04",
+  "method": "Every collection-system permit (WQCS..., WQCSD...) on the DWR Sanitary Sewer Overflow layers (2026 and September 2022 to December 2025) whose owner is not a public body on the history layer, or which appears only on the 2026 layer (no owner field), looked up in DWR's Water Quality Permitting document repository (Laserfiche WebLink, folder DWR - Water Quality Permitting / <regional office> / Collection System / <permit>): the Owner field of the permit's newest document that has one. A permittee who is an individual is never named; the row names the facility. EPA plant permits with no row come from EPA ICIS-NPDES.",
+  "legal_basis": "G.S. 143-215.1C(b) binds 'the owner or operator of any wastewater collection or treatment works' primarily for municipal or domestic wastewater with a permit under the Part (press release at 1,000 gallons to surface water; newspaper notice at 15,000), and (c) the same for other works' untreated waste: private owners are bound like public ones.",
+  "notes": "Built by hand from the lookups; scripts/add_nc_operators.py reads it."
+ },
+ "collection_permits": [
+  {
+   "permit": "WQCS00029",
+   "operator": "Old North Utility Services Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Old North Utility Services Inc Onus Ft Bragg",
+   "facility": "Fort Bragg Collection System",
+   "county": "Cumberland",
+   "regional_office": "Fayetteville",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Fort Bragg"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00029_Annual Report_20260819",
+    "document_type": "Annual Report",
+    "document_date": "8/19/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4625709&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=655240&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00147",
+   "operator": "Aqua North Carolina Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Aqua North Carolina Inc",
+   "facility": "Neuse Colony Collection System",
+   "county": "Johnston",
+   "regional_office": "Raleigh",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Clayton"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00147_Permit (Issuance)_20261014",
+    "document_type": "Permit (Issuance)",
+    "document_date": "10/14/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4725278&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=667035&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00162",
+   "operator": "Carolina Water Service Inc of North Carolina",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Carolina Water Service Inc of North Carolina",
+   "facility": "Fairfield Harbour Collection System",
+   "county": "Craven",
+   "regional_office": "Washington",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Craven County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00162_SSO_NOV-2025-DV-0107 for September 2024_20250414",
+    "document_type": "Notice of Violation",
+    "document_date": "4/14/2025",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3772039&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=1709340&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00174",
+   "operator": "Carolina Water Service Inc of North Carolina",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Carolina Water Service Inc of North Carolina",
+   "facility": "Sugar Mountain Collection System",
+   "county": "Avery",
+   "regional_office": "Asheville",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Avery County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00174_Compliance Evaluation Inspection_20240807",
+    "document_type": "Compliance Evaluation Inspection",
+    "document_date": "8/7/2024",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3473579&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=712397&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00217",
+   "operator": "Carolina Trace Utilities Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Carolina Trace Utilities Inc",
+   "facility": "Carolina Trace Collection System",
+   "county": "Lee",
+   "regional_office": "Raleigh",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Sanford"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00217_NOV-2026-DV-0246 GC_20261015",
+    "document_type": "NOV and Intent to Assess",
+    "document_date": "10/15/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4723597&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=926045&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00219",
+   "operator": "Transylvania Utilities Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Transylvania Utilities Inc",
+   "facility": "Transylvania Collection System",
+   "county": "Transylvania",
+   "regional_office": "Asheville",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Transylvania County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00219_Permit (Issuance)_20260212",
+    "document_type": "Permit (Issuance)",
+    "document_date": "2/12/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4293693&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=639828&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00245",
+   "operator": "Town of Aberdeen",
+   "legal_form": "town",
+   "permittee_as_recorded": "Town of Aberdeen",
+   "facility": "Aberdeen Collection System",
+   "county": "Moore",
+   "regional_office": "Fayetteville",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Aberdeen"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00245_Remission Request DV-2026-0087_20261026",
+    "document_type": "Remission (Request)",
+    "document_date": "10/26/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4741012&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=638766&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00285",
+   "operator": "Carolina Water Service Inc of North Carolina",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Carolina Water Service Inc of North Carolina",
+   "facility": "Village at Nags Head Collection System",
+   "county": "Dare",
+   "regional_office": "Washington",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Dare County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00285_Application (Renewal)_20260121",
+    "document_type": "Application (Renewal)",
+    "document_date": "1/21/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4257031&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=2657406&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00293",
+   "operator": "Aqua North Carolina Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Aqua North Carolina Inc",
+   "facility": "Govenors Club Collection System",
+   "county": "Chatham",
+   "regional_office": "Raleigh",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Chapel Hill"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00293_NOD-2026-DV-0039 Response_20260603",
+    "document_type": "Response to Notice",
+    "document_date": "6/3/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4491857&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=670141&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00322",
+   "operator": "Aqua North Carolina Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Aqua North Carolina Inc",
+   "facility": "Country Woods East Collection System",
+   "county": "Union",
+   "regional_office": "Mooresville",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Union County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00322_Annual Performance_20260227",
+    "document_type": "Annual Performance",
+    "document_date": "2/27/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4333497&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=1010065&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00331",
+   "operator": "Carolina Water Service Inc of North Carolina",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Carolina Water Service Inc of North Carolina",
+   "facility": "Belvedere Plantation Collection System",
+   "county": "Pender",
+   "regional_office": "Wilmington",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Hampstead"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00331_Permit (Issuance)_20251003",
+    "document_type": "Permit (Issuance)",
+    "document_date": "10/3/2025",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4077926&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=881466&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00372",
+   "operator": "Old North State Water Company",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Old North State Water Company Inc",
+   "facility": "Briar Chapel Collection System",
+   "county": "Chatham",
+   "regional_office": "Raleigh",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Chapel Hill"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00372_Compliance Evaluation Inspection_20261023",
+    "document_type": "Compliance Evaluation Inspection",
+    "document_date": "10/23/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4733525&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=642653&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCS00380",
+   "operator": "Aqua North Carolina Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Aqua North Carolina Inc",
+   "facility": "Hawthorne Collection System",
+   "county": "Wake",
+   "regional_office": "Raleigh",
+   "permit_type": "Collection system management and operation",
+   "towns": [
+    "Raleigh"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCS00380_Incident 202600837 - Five Day Report_20260807",
+    "document_type": "Report",
+    "document_date": "8/7/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4608392&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=670153&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0063",
+   "operator": "Old North State Water Company",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Old North State Water Company Inc",
+   "facility": "Horse Creek Farms Deemed Collection System",
+   "county": "Onslow",
+   "regional_office": "Wilmington",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Jacksonville"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0063_Compliance Evaluation Inspection_20250715",
+    "document_type": "Compliance Evaluation Inspection",
+    "document_date": "7/15/2025",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3977016&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=911999&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0090",
+   "operator": "Town of Micro",
+   "legal_form": "town",
+   "permittee_as_recorded": "Town of Micro",
+   "facility": "Micro Collection System",
+   "county": "Johnston",
+   "regional_office": "Raleigh",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Micro"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0090_NOV-2026-DV-0252 GC_20261019",
+    "document_type": "NOV and Intent to Assess",
+    "document_date": "10/19/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4729322&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=655278&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0103",
+   "operator": "Lake Creek Corporation",
+   "legal_form": "private company",
+   "permittee_as_recorded": "Lake Creek Corporation",
+   "facility": "Baytree Lakes Collection System",
+   "county": "Bladen",
+   "regional_office": "Fayetteville",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Bladen County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0103_Compliance Evaluation Inspection_20260813",
+    "document_type": "Compliance Evaluation Inspection",
+    "document_date": "8/13/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4665390&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=1274840&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0135",
+   "operator": "Henderson County",
+   "legal_form": "county",
+   "permittee_as_recorded": "Henderson County",
+   "facility": "Etowah Sewer Company WWTP",
+   "county": "Henderson",
+   "regional_office": "Asheville",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Etowah"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0135_FiveDayReport_20260811",
+    "document_type": "Compliance Report",
+    "document_date": "8/11/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4642117&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=621402&dbid=0&repo=WaterResources"
+   },
+   "history_layer_owner": "Etowah Sewer Company"
+  },
+  {
+   "permit": "WQCSD0158",
+   "operator": "Aqua North Carolina Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Aqua North Carolina Inc",
+   "facility": "Preserve at Jordan Lake Collection System",
+   "county": "Chatham",
+   "regional_office": "Raleigh",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Chatham County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0158_NOD-2026-DV-0001_20260107",
+    "document_type": "Notice of Deficiency",
+    "document_date": "1/7/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4231380&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=947590&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0172",
+   "operator": "Greene County Water & Sewer District I",
+   "legal_form": "special district",
+   "permittee_as_recorded": null,
+   "facility": "Greene County Water & Sewer District I",
+   "county": "Greene",
+   "regional_office": "Washington",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Greene County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0172_SSO_NOV-2025-DV-0117 for December 2024_20250415",
+    "document_type": "Notice of Violation",
+    "document_date": "4/15/2025",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3774462&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=3590117&dbid=0&repo=WaterResources"
+   },
+   "permittee_note": "DWR's Owner field for this permit gives the name of the district's chairman, an individual, to whom its documents are addressed; the name is not reproduced. The permittee is the district itself, a public body."
+  },
+  {
+   "permit": "WQCSD0176",
+   "operator": "Currituck Water and Sewer LLC",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Currituck Water and Sewer LLC",
+   "facility": "Carolina Village Collection System",
+   "county": "Currituck",
+   "regional_office": "Washington",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Currituck County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0176_DEC 2025 Quarterly ISRP Status Report_20251231",
+    "document_type": "Report",
+    "document_date": "12/31/2025",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4490192&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=805975&dbid=0&repo=WaterResources"
+   },
+   "history_layer_owner": "Carolina Village NC LLC"
+  },
+  {
+   "permit": "WQCSD0181",
+   "operator": "Aqua North Carolina Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Aqua North Carolina Inc",
+   "facility": "Chatham WRF Collection System",
+   "county": "Chatham",
+   "regional_office": "Raleigh",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Chapel Hill"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0181_5 DAY Report_20250305",
+    "document_type": "Report",
+    "document_date": "3/5/2025",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3716260&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=697598&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0219",
+   "operator": "Aqua North Carolina Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Aqua North Carolina Inc",
+   "facility": "Melbille Heights Collection System",
+   "county": "Randolph",
+   "regional_office": "Winston-Salem",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "High Point"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0219_NOV2025DV0283_20251009",
+    "document_type": "Notice of Violation",
+    "document_date": "10/9/2025",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4108411&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=684870&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0234",
+   "operator": "Mill Ridge Property Owners Association",
+   "legal_form": "owners' association",
+   "permittee_as_recorded": "Mill Ridge Property Owners Association",
+   "facility": "Mill Ridge Development Collection System",
+   "county": "Watauga",
+   "regional_office": "Winston-Salem",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Banner Elk"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0234_NOV-2022-PC-0346_20220622",
+    "document_type": "Notice of Violation",
+    "document_date": "6/22/2022",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2382694&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=662982&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0244",
+   "operator": "Carolina Water Service Inc of North Carolina",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Carolina Water Service Inc of North Carolina",
+   "facility": "Ashley Hills WWTP",
+   "county": "Wake",
+   "regional_office": "Raleigh",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Wake County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0244_NOV-2024-DV-0236 Notce of Violation_20240522",
+    "document_type": "Notice of Violation",
+    "document_date": "5/22/2024",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3312215&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=673146&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0267",
+   "operator": "Aqua North Carolina Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Aqua North Carolina Inc",
+   "facility": "Chapel Ridge WWTP",
+   "county": "Chatham",
+   "regional_office": "Raleigh",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Pittsboro"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0267_NOV-2026-DV-0048_20260310",
+    "document_type": "Notice of Violation",
+    "document_date": "3/10/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4338815&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=1084253&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0349",
+   "operator": "Mountain Air Country Club",
+   "legal_form": "private club",
+   "permittee_as_recorded": "Mtn Air Country Club",
+   "facility": "Mountain Air Country Club-Camp Crk M",
+   "county": "Yancey",
+   "regional_office": "Asheville",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Burnsville"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0349_NOV-2023-DV-0022_20230111",
+    "document_type": "Notice of Violation",
+    "document_date": "1/11/2023",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2637541&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=888607&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0368",
+   "operator": "A&D Water Service Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "A&D Water Service Inc",
+   "facility": "Hunter's Glen WWTP",
+   "county": "Henderson",
+   "regional_office": "Asheville",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Henderson County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0368_Press Release_20250918",
+    "document_type": "Other",
+    "document_date": "9/18/2025",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4105490&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=892155&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0401",
+   "operator": "Aqua North Carolina Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Aqua North Carolina Inc",
+   "facility": "Killian Crossroads Collection System",
+   "county": "Catawba",
+   "regional_office": "Mooresville",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Stanley"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0401_Compliance Evaluation Inspection_20230505",
+    "document_type": "Compliance Evaluation Inspection",
+    "document_date": "5/5/2023",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2782377&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=959359&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0505",
+   "operator": "Aqua North Carolina Inc",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Aqua North Carolina Inc",
+   "facility": "Hasentree Collection System",
+   "county": "Wake",
+   "regional_office": "Raleigh",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Wake Forest"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0505_NOV-2026-DV-0082_Response to Notice_20260511",
+    "document_type": "Response to Notice",
+    "document_date": "5/11/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4451442&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=639389&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0514",
+   "operator": "Havenpark Communities",
+   "legal_form": "mobile-home park",
+   "permittee_as_recorded": "Havenpark Communities",
+   "facility": "West Bloomfield Acres MHP Collection System",
+   "county": "Mecklenburg",
+   "regional_office": "Mooresville",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Charlotte"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0514_Civil Penalty Assessment_20260302",
+    "document_type": "Civil Penalty Assessment",
+    "document_date": "3/2/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4352872&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=1668920&dbid=0&repo=WaterResources"
+   },
+   "history_layer_owner": "West Bloomfield Acres LLC"
+  },
+  {
+   "permit": "WQCSD0529",
+   "operator": "Old North State Water Company",
+   "legal_form": "private utility",
+   "permittee_as_recorded": "Old North State Water Company LLC",
+   "facility": "Majestic Oaks Deemed Collection System",
+   "county": "Pender",
+   "regional_office": "Wilmington",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Pender County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0529_NOD-2023-DV-0052_20230609",
+    "document_type": "Notice of Deficiency",
+    "document_date": "6/9/2023",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2837139&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=687286&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0548",
+   "operator": "Birch and Held LLC",
+   "legal_form": "private company",
+   "permittee_as_recorded": "Birch and Held LLC",
+   "facility": "Sailpointe at Lake Norman",
+   "county": "Mecklenburg",
+   "regional_office": "Mooresville",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Mecklenburg County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0548_BIMS Report_20230728",
+    "document_type": "BIMS Report",
+    "document_date": "7/28/2023",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2894683&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=1671132&dbid=0&repo=WaterResources"
+   },
+   "history_layer_owner": "Babcock and Brown Residential LLC"
+  },
+  {
+   "permit": "WQCSD0564",
+   "operator": "Carolina Village MHC LLC",
+   "legal_form": "mobile-home park",
+   "permittee_as_recorded": "Carolina Village Mhc LLC",
+   "facility": "Carolina Village MHP LLC Collection System",
+   "county": "Cabarrus",
+   "regional_office": "Mooresville",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Cabarrus County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0564_Notice of Deficiency_20230914",
+    "document_type": "Notice of Deficiency",
+    "document_date": "9/14/2023",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3006012&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=1120437&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0636",
+   "operator": "Burt's Bees Inc",
+   "legal_form": "industrial facility",
+   "permittee_as_recorded": "Burt's Bees Inc",
+   "facility": "Burt's Bees, Inc.",
+   "county": "Durham",
+   "regional_office": "Raleigh",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Morrisville"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0636_NOD-2026-DV-0029_Notice of Deficiency_20260324",
+    "document_type": "Notice of Deficiency",
+    "document_date": "3/24/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4436844&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=4250558&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0691",
+   "operator": "PCS Phosphate Company Inc",
+   "legal_form": "industrial facility",
+   "permittee_as_recorded": "PCS Phosphate Company Inc",
+   "facility": "PCS Phosphate Wastewater Collection System",
+   "county": "Beaufort",
+   "regional_office": "Washington",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Beaufort County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0691_SSO_NOV-2025-DV-0125 for August 2024_20250415",
+    "document_type": "Notice of Violation",
+    "document_date": "4/15/2025",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=3775253&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=3775251&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0700",
+   "operator": "Hillco Ltd",
+   "legal_form": "private company",
+   "permittee_as_recorded": "Hillco LTD",
+   "facility": "Ayden Court Rehabilitation & Nursing Center",
+   "county": "Pitt",
+   "regional_office": "Washington",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Pitt County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0700_Response to Notice_20230829",
+    "document_type": "Response to Notice",
+    "document_date": "8/29/2023",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=2955608&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=1031591&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0710",
+   "operator": "T3t Colonial LLC",
+   "legal_form": "mobile-home park",
+   "permittee_as_recorded": "T3t Colonial LLC",
+   "facility": "Colonial Mobile Home Park",
+   "county": "Granville",
+   "regional_office": "Raleigh",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Butner"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0710_Enforcement (Letter)_DV-2020-0102_20230907",
+    "document_type": "Enforcement (Letter)",
+    "document_date": "9/7/2023",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=1285267&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=1118734&dbid=0&repo=WaterResources"
+   }
+  },
+  {
+   "permit": "WQCSD0809",
+   "operator": "Pasquotank County",
+   "legal_form": "county",
+   "permittee_as_recorded": "Pasquotank County",
+   "facility": "Pasquotank Industrial Park WWTF",
+   "county": "Pasquotank",
+   "regional_office": "Washington",
+   "permit_type": "Deemed permitted collection system management and operation",
+   "towns": [
+    "Pasquotank County"
+   ],
+   "source": {
+    "title": "NC DEQ Division of Water Resources, Water Quality Permitting records (DWR public document repository): the permit's newest document with an owner",
+    "document": "WQCSD0809_DV-2026-0046_20260908",
+    "document_type": "Enforcement (Payment)",
+    "document_date": "9/8/2026",
+    "url": "https://edocs.deq.nc.gov/WaterResources/DocView.aspx?id=4660454&dbid=0&repo=WaterResources",
+    "permit_folder_url": "https://edocs.deq.nc.gov/WaterResources/Browse.aspx?id=4437755&dbid=0&repo=WaterResources"
+   }
+  }
+ ],
+ "plant_permits": [
+  {
+   "permit": "NC0036919",
+   "operator": "Keyzer Catering LLC",
+   "legal_form": "private company",
+   "permittee_as_recorded": "Keyzer Catering LLC",
+   "facility": "Keyzer Catering WWTP",
+   "county": "Beaufort",
+   "towns": [
+    "Pantego"
+   ],
+   "source": {
+    "title": "EPA ICIS-NPDES (ECHO) permit record for NC0036919: permit name and facility type 'Privately Owned Facility'",
+    "url": "https://echo.epa.gov/detailed-facility-report?fid=NC0036919"
+   }
+  }
+ ]
+}

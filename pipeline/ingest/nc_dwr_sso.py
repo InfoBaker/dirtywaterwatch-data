@@ -39,7 +39,10 @@ Record rules (this year's layers)
     placed on a water. water_slugs is empty (North Carolina has no water records yet; placement by name and
     point is done by the status build).
   - Operator: the permit (WQCS..., a state collection-system permit) is npdes_permit; discharger_id is the
-    data/dischargers.json row that holds the permit, else null; discharger_name is the layer's facility name.
+    data/dischargers.json row that holds the permit (public or private: a utility company, an association, a park
+    is an operator like any other), else null; discharger_name is the layer's facility name. A record with no
+    operator row says why in raw._discharger_basis: no permit number in DWR's record (an operator is never inferred
+    from a place, a facility or an owner name), or no operator on record for the permit yet.
   - Coordinates: deq_latitude / deq_longitude (DWR's point for the reported address), coord_source "source";
     a point outside North Carolina's bounding box is dropped (raw._coords_rejected).
   - reported_at is dwr_report_date (when DWR logged the report). No publication time: published_at null; the
@@ -227,6 +230,19 @@ def permit_index(rows: list[dict] | None = None) -> dict[str, str]:
     return {p: next(iter(v)) for p, v in seen.items() if len(v) == 1}
 
 
+NO_PERMIT = ("DWR's record gives no permit number, so no operator is joined; an operator is never inferred from a "
+             "place, a facility or an owner name.")
+
+
+def operator_basis(permit: str | None, permits: dict[str, str]) -> str | None:
+    """Why a record has no operator row (None when it has one)."""
+    if not permit:
+        return NO_PERMIT
+    if permit not in permits:
+        return f"No operator on record for permit {permit} yet."
+    return None
+
+
 def decoded(a: dict) -> dict:
     return {k: iso(local(a.get(k))) for k in DATE_FIELDS if a.get(k) not in (None, "")}
 
@@ -375,6 +391,8 @@ def _record(a: dict, base: dict, raw: dict, prev: dict | None, permits: dict[str
 
     p_raw = (prev or {}).get("raw") or {}
     raw["_first_seen_at"] = p_raw.get("_first_seen_at") or base["fetched_at"]
+    if why := operator_basis(permit, permits):
+        raw["_discharger_basis"] = why
     return event(
         **base, event_type="bypass" if prog == "bypass" else "sso", status=status,
         discharger_id=permits.get(permit or ""), discharger_name=fac, npdes_permit=permit,
@@ -501,6 +519,8 @@ def hist_record(a: dict, fetched_at: str, rid: str, permits: dict[str, str], dup
         bits = ([f"{vol:,} gallons"] if vol is not None else []) + \
                ([f"{vw:,} gallons reached surface water"] if vw is not None else [])
         permit = clean(a.get("permit_id")).upper() or None
+        if why := operator_basis(permit, permits):
+            raw["_discharger_basis"] = why
         rec = event(
             **base, event_type="sso", status="ended",
             discharger_id=permits.get(permit or ""), discharger_name=clean(a.get("facility_name")) or None,
