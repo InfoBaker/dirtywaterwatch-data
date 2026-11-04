@@ -1,0 +1,22 @@
+id: "mi-epa-gl-cso-michigan"
+name: "EPA: Combined Sewer Overflows in the Great Lakes Basin, Michigan (operator list with websites)"
+url: "https://www.epa.gov/npdes/combined-sewer-overflows-great-lakes-basin-michigan"
+homepage: "https://www.epa.gov/npdes/combined-sewer-overflows-great-lakes-basin-michigan"
+kind: "html"
+level: "federal"
+# Notes (research/mi, status used, verified fetched, checked 2026-11-03): Seeds the per-operator
+#   website column of dischargers.json.
+# Access detail (research, quoted): Fetched (raw/epa-gl-cso-michigan.html): 40 rows, permit, Great
+#   Lake, receiving water, website.
+cadence: null
+license: "none stated"
+attribution: "U.S. EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["MI"]
+access: ["html"]
+access_detail: "Fetched (raw/epa-gl-cso-michigan.html): 40 rows, permit, Great Lake, receiving water, website."
+machine_readable: false
+legal_basis: "40 CFR 122.38(b) annual notice"
+checked: "2026-11-03"

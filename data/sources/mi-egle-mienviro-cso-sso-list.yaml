@@ -1,0 +1,55 @@
+id: "mi-egle-mienviro-cso-sso-list"
+name: "EGLE MiEnviro CSO/SSO List (sewage discharge reports: CSO, SSO, RTB and other discharges)"
+url: "https://mienviro.michigan.gov/ncore/external/overflow/list"
+homepage: "https://mienviro.michigan.gov/ncore/external/overflow/list"
+kind: "api"
+level: "state"
+# Feed row: the source id written by pipeline/ingest/mi_egle_mienviro.py
+#   (data/build/events/mi-egle-mienviro-cso-sso-list.json); the research row has the same id.
+# Built 2026-11-04: each hourly run reads every open (IN_PROCESS) report and the completed ones that
+#   started in the last 60 days, and asks by submission for open reports that dropped out of both;
+#   `--backfill [--from YEAR]` reads completed reports a year at a time (default from 2025; the list
+#   goes back to 2001, about 2,000 reports a year). Narrative fields are never requested. An open
+#   report whose end repeats its start is read as having no end (the form's placeholder).
+# Notes (research/mi, status used, verified fetched, checked 2026-11-04): Statewide, event-level,
+#   machine-readable, public: read hourly by pipeline/ingest/mi_egle_mienviro.py (3,198 records on
+#   2026-11-04 with the backfill from 2025). No coordinates: placement by permit and outfall number
+#   through the outfall registry.
+# Access detail (research, quoted): Public AngularJS page (MiEnviro, Windsor Solutions nCORE) 'CSO
+#   and SSO Information in MiEnviro', linked from Michigan.gov/SewageDischarge. It calls an
+#   unauthenticated JSON service: GET
+#   https://mienviro.michigan.gov/ncore/ss/ssolist?queryParams=<url-encoded JSON
+#   {filter:[{...}],top:2001}>. Filter keys seen in the app: reportStatusId (IN_PROCESS | COMPLETE),
+#   responsiblePartyName, siteName, permitNumber, submissionReferenceNumber (wildcards /%x/%),
+#   eventStartDateMin/Max, eventEndDateMin/Max, receivingWater, countyDescription. Lookups at
+#   /ncore/ss/ssolistlookups (default filter IN_PROCESS); per-record detail at
+#   /ncore/ss/ssodetails/?queryParams={filter:[{submissionId,sectionNumber}]} (same fields, no
+#   coordinates). The page's own 'Download CSV' uses the same service. An unfiltered query timed out
+#   at 60 s; filtered queries return in seconds. Fetched 2026-11-03: IN_PROCESS 332 rows (82 KB gz);
+#   COMPLETE with start >= 2026-10-01: 78 rows (CSO 56, RTB 12, SSO 7, other 3).
+# Can fill: source_record_id, event_type, source_status, started_at, ended_at, timezone,
+#   reported_at, waterbody, location_text, material, volume, units, authority, raw_record,
+#   jurisdiction, source_url
+# Cannot fill: coordinates; published_at; source_updated_at; advice_text; valid_until;
+#   revision_history
+# Waters: statewide; every sewer system subject to MCL 324.3112a
+# History: System holds records back to 2001 (some 2001 rows still IN_PROCESS); one row has a typo
+#   year 3021. Annual CSO/SSO/RTB report PDFs 2019-2021 on the EGLE page.
+# Research notes: dischargeType/dischargeQuality values are doubled ('CSO Discharge,CSO Discharge');
+#   one submission can hold several sections (outfalls) sharing submissionReferenceNumber (e.g.
+#   HQS-P25H-0AHKY with sections 2,3,4); stable key = submissionId + sectionNumber (checked
+#   2026-11-04: `id` is renumbered on every response, and submissionReferenceNumber is blank on some
+#   rows). GLWA's initial rows had no permitNumber or receivingWater. SSO rows use state permit-like
+#   ids '3112a-0707'. Timestamps carry offsets (-04:00/-05:00).
+cadence: "1 hour"
+license: "No licence or terms statement found on the list page; michigan.gov footer 'Copyright 2026 State of Michigan'. Public statutory posting (MCL 324.3112a(2))."
+attribution: "Michigan Department of Environment, Great Lakes, and Energy (EGLE), Water Resources Division"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass", "plant_bypass", "blended", "unknown"]
+states: ["MI"]
+access: ["api"]
+access_detail: "GET https://mienviro.michigan.gov/ncore/ss/ssolist?queryParams={\"filter\":[{...}],\"top\":5000}&includeMetadataInResponse=false&responseFields=<the module's safe fields> (no key; the page's own CSV download sends the same parameters). Filters: reportStatusId (IN_PROCESS, COMPLETE), eventStartDateMin and eventStartDateMax (dates; the maximum is exclusive), submissionId. The id field is renumbered on every response; the key is submissionId and sectionNumber. Times carry offsets. No coordinates; outfall numbers in featureNumber."
+machine_readable: true
+legal_basis: "MCL 324.3112a(1)-(2); 40 CFR 122.38 (GLWA and other CSO permittees designate this list as their 4-hour public notice)"
+checked: "2026-11-04"
