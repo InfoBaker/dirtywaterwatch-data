@@ -12,7 +12,8 @@ Source
     location, sample date, the enterococcus result (CFU/100 mL, sometimes blank) and "Advisory: Yes|No". The first
     page is read (about the last five months of samples); older samples stay from earlier runs.
   No licence is stated; credit "Florida Department of Health, Florida Healthy Beaches Program". The pages carry no
-  personal data. One request every half second; a full pass (about 350 points) runs at most once every 20 hours
+  personal data. One request a second (a fresh connection each; a point with no rows is asked once more); a
+  full pass (about 350 points, about seven minutes) runs at most once every 20 hours
   (data/build/fl-doh-beaches-state.json), unless --force.
 
 Records (beach_advisory; a beach record, never a sewage record)
@@ -168,16 +169,21 @@ def fetch(limit: int | None = None) -> tuple[list[dict], dict, list[str]]:
     if limit:
         pts = pts[:limit]
     pages, errors = {}, []
-    bsess = requests.Session()
-    bsess.headers.update(BROWSER_HEADERS)
     for p in pts:
-        try:
-            pr = bsess.get(CASPIO, params=caspio_params(p), timeout=(15, 60))
-            pr.raise_for_status()
-            pages[point_key(p)] = pr.text
-        except Exception as e:  # noqa: BLE001
-            errors.append(f"{point_key(p)}: {type(e).__name__}")
-        time.sleep(0.5)
+        # a fresh request each time (no session cookie) one second apart: with one session, half-second spacing,
+        # the data page answered "No records found" for every point after about a hundred requests (2026-11-04)
+        for attempt in range(2):
+            try:
+                pr = requests.get(CASPIO, params=caspio_params(p), headers=BROWSER_HEADERS, timeout=(15, 60))
+                pr.raise_for_status()
+                pages[point_key(p)] = pr.text
+                if parse_page(pr.text) or attempt:
+                    break
+            except Exception as e:  # noqa: BLE001
+                if attempt:
+                    errors.append(f"{point_key(p)}: {type(e).__name__}")
+            time.sleep(3)
+        time.sleep(1.0)
     return pts, pages, errors
 
 
