@@ -1,0 +1,24 @@
+{
+ "state": "VI",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 9,
+ "plant_permits_major": 2,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "VI0020036",
+   "permittee": "Anguilla Wastewater Treatment  Facility",
+   "city": "ST.CROIX",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "VI0020044",
+   "permittee": "Red Point Wastewater Treatment Facility",
+   "city": "CHARLOTTE AMALIE",
+   "major": "Major",
+   "status": "EXP"
+  }
+ ]
+}

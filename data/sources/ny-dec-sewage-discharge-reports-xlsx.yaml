@@ -1,0 +1,43 @@
+id: "ny-dec-sewage-discharge-reports-xlsx"
+name: "DEC SPRTK workbook 'SPRTK_Data.xlsx' (NY-Alert export, Jan 2021-Aug 2026) and older 'Sewage_Discharge_Reports.xlsx' (2013-2020)"
+url: "https://www.dec.ny.gov/fs/data/Sewage_Discharge_Reports.xlsx"
+homepage: "https://www.dec.ny.gov/fs/data/Sewage_Discharge_Reports.xlsx"
+kind: "csv"
+level: "state"
+# Notes (research/ny, status used, verified fetched, checked 2026-11-01): The only bulk, structured
+#   SPRTK record with ids, status, UTC times and geocodes; use for history, chain modelling and
+#   backfill. Not live.
+# Access detail (research, quoted): Live URLs https://www.dec.ny.gov/fs/data/SPRTK_Data.xlsx and
+#   .../Sewage_Discharge_Reports.xlsx 301 to extapps.dec.ny.gov, which timed out from this machine
+#   on 2026-11-01. Read instead from the Internet Archive capture of 2026-10-12
+#   (http://web.archive.org/web/20261012004317id_/https://extapps.dec.ny.gov/fs/data/SPRTK_Data.xlsx,
+#   11.5 MB) into the session scratchpad; parsed with a stdlib xlsx reader. Derived stats saved to
+#   raw/sprtk-workbook-stats.json. Wayback also holds captures of Sewage_Discharge_Reports.xlsx
+#   (2021-09-29, 2024-07-07, 2025-02-12, 2025-06-29, 2026-10-12).
+# Can fill: source_record_id (notificationId), source_status, started_at, ended_at
+#   (reported/projected), reported_at (sprtkAirDateTime, UTC), waterbody, location_text, coordinates
+#   (geocode; swap columns), material, volume, units, estimate_flag, authority, jurisdiction,
+#   revision_history (chain by incidentId, or facility+location+start when absent), raw_record
+# Cannot fill: discovery time; outfall id (csoOutfallDescription filled on only 1,356 of 35,177
+#   notices); advice_text; valid_until
+# Waters: statewide
+# History: Jan 2021-Aug 2026 in SPRTK_Data.xlsx (35,177 unique notifications); 2013-2020 in
+#   Sewage_Discharge_Reports.xlsx
+# Research notes: Unique notifications by air year: 2021 6,329; 2022 6,341; 2023 6,437 (3,904 New);
+#   2024 6,175 (3,495 New); 2025 4,379 (2,535 New; Dec 2025 essentially missing); 2026 Jan-Aug 5,389
+#   (3,137 New). 8,872 duplicate notification ids across overlapping tabs. Latency of New notices
+#   2024-26 (air minus reported start): median 1.0 h, p75 4.6 h, p90 25.7 h, 69% within 4 h of
+#   start, 402 negative. 1,169 of 5,749 notices in Nov 2025-Aug 2026 came from one POSS (Kenmore).
+#   Times are UTC.
+cadence: "Batch export, tabs added irregularly (tab names: 'Apr23-Mar24', 'Aug 1- March 31 2025', 'September 2025', 'October 2025', 'December 2025' (holds Nov 2025; December 2025 has 3 rows), 'January 2026-August2026'). Lag 1-2 months at best; gaps."
+license: "No licence stated. NY-Alert notifier terms (Wayback copy of sprtknotifierterms.pdf, 2025-11-14): 'All data provided remains under the ownership of DEC, which has the right to remove, add, delete, and view the data stored on the NY-ALERT databases.'"
+attribution: "NYS DEC"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass"]
+states: ["NY"]
+access: ["csv"]
+access_detail: "Live URLs https://www.dec.ny.gov/fs/data/SPRTK_Data.xlsx and .../Sewage_Discharge_Reports.xlsx 301 to extapps.dec.ny.gov, which timed out from this machine on 2026-11-01. Read instead from the Internet Archive capture of 2026-10-12 (http://web.archive.org/web/20261012004317id_/https://extapps.dec.ny.gov/fs/data/SPRTK_Data.xlsx, 11.5 MB) into the session scratchpad; parsed with a stdlib xlsx reader. Derived stats saved to raw/sprtk-workbook-stats.json. Wayback also holds captures of Sewage_Discharge_Reports.xlsx (2021-09-29, 2024-07-07, 2025-02-12, 2025-06-29, 2026-10-12)."
+machine_readable: true
+legal_basis: "ECL 17-0826-a"
+checked: "2026-11-01"

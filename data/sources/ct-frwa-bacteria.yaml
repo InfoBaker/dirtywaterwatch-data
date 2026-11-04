@@ -1,0 +1,21 @@
+id: "ct-frwa-bacteria"
+name: "Farmington River Watershed Association bacteria monitoring"
+url: "https://frwa.org/research/bacteria/"
+homepage: "https://frwa.org/research/bacteria/"
+kind: "html"
+level: "nonprofit"
+# Notes (research/ct, status candidate, verified search_only, checked 2026-11-01): 42 CT sites in
+#   2024; results published through Is It Clean; 2025 Water Quality Report PDF.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "none stated"
+attribution: "FRWA"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["CT"]
+access: ["html", "pdf"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

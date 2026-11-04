@@ -1,0 +1,32 @@
+id: "dc-reservoir-wq-dashboard"
+name: "Reservoir Center / Xylem 'Water Quality' dashboard and API (Anacostia, Potomac, Shenandoah sondes + CMC E. coli)"
+url: "https://water-quality.reservoircenter.org/"
+homepage: "https://water-quality.reservoircenter.org/"
+kind: "api"
+level: "nonprofit"
+# Notes (research/dc, status candidate, verified fetched, checked 2026-11-02): Machine-readable, but
+#   an undocumented API of a partner site; ask permission before polling (owner decision). E. coli
+#   is not real time.
+# Access detail (research, quoted): Public JSON API found in the page script
+#   (cdn.jsdelivr.net/gh/ReservoirCenter/xylem-prod-files@1.0.7/home.js): GET
+#   https://api.water-quality.reservoircenter.org/api/sites?page=0&size=50 (9 sites);
+#   /datastreams?siteId=; /sensor-types; POST /observations/latest {datastreamIds:[...]}; /cmc-sites
+#   (7 CMC stations); POST /cmc-samples/latest {siteIds:[sonde site ids]} returns the latest CMC E.
+#   coli per station. No key. Saved raw/rc/.
+# Can fill: coordinates, started_at (sample time)
+# Waters: 9 sonde sites: Bladensburg, Buzzard Point, CSX Railroad Bridge, Kingman Island, National
+#   Harbor, North Fork Shenandoah, South Fork Shenandoah, Williamsport, Yards Marina (openboatlaunch
+#   slugs: anacostia-river-dc, anacostia-river-md, potomac-river-md)
+# History: Launched June 2026.
+cadence: "Sondes real time; E. coli weekly in season (last 2026-08-26 for ARK, 2026-09-30 PRK)."
+license: "None stated; undocumented API."
+attribution: "The Reservoir Center for Water Solutions with Anacostia Riverkeeper, Anacostia Watershed Society, Potomac Riverkeeper Network"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["DC"]
+access: ["api", "html"]
+access_detail: "Public JSON API found in the page script (cdn.jsdelivr.net/gh/ReservoirCenter/xylem-prod-files@1.0.7/home.js): GET https://api.water-quality.reservoircenter.org/api/sites?page=0&size=50 (9 sites); /datastreams?siteId=; /sensor-types; POST /observations/latest {datastreamIds:[...]}; /cmc-sites (7 CMC stations); POST /cmc-samples/latest {siteIds:[sonde site ids]} returns the latest CMC E. coli per station. No key. Saved raw/rc/."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

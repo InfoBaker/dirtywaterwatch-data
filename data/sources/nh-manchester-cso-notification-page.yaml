@@ -1,0 +1,31 @@
+id: "nh-manchester-cso-notification-page"
+name: "Manchester CSO Discharge Notification page"
+url: "https://www.manchesternh.gov/Departments/Sewer-and-Stormwater/CSO/CSO-Discharge-Notification"
+homepage: "https://www.manchesternh.gov/Departments/Sewer-and-Stormwater/CSO/CSO-Discharge-Notification"
+kind: "html"
+level: "municipal"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): Only public real-time
+#   Manchester signal
+# Access detail (research, quoted): DNN Reports module 10310 'Announcements'; each post is div id
+#   ItemNNNNN with h4 title and 'Published: MM/DD/YYYY h:mm AM'. No RSS found.
+# Can fill: source_record_id, event_type, source_status, published_at, timezone, authority,
+#   source_url, raw_record, jurisdiction
+# Cannot fill: started_at; ended_at; location_text; coordinates; volume; units; estimate_flag;
+#   geometry; advice_text; valid_until
+# Waters: Merrimack and Piscataquog rivers in Manchester (implied) (openboatlaunch slugs:
+#   merrimack-river-nh, piscataquog-river-nh)
+# History: Only about the 10 latest posts are shown (09/29/2026 to 10/18/2026 on 2026-11-01); needs
+#   snapshotting
+# Research notes: Activation and all-clear were published at the same minute on 10/18/2026.
+cadence: "per event: an 'Activation' post, then a 'No Activations for 12 Hours' all-clear"
+license: "none stated"
+attribution: "City of Manchester DPW EPD"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NH"]
+access: ["html"]
+access_detail: "DNN Reports module 10310 'Announcements'; each post is div id ItemNNNNN with h4 title and 'Published: MM/DD/YYYY h:mm AM'. No RSS found."
+machine_readable: false
+legal_basis: "2020 Consent Decree paragraph 19; NPDES NH0100447 Part I.H.3.g (effective 2026-11-01)"
+checked: "2026-11-01"

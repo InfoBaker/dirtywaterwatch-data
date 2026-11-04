@@ -1,0 +1,160 @@
+{
+  "state": "LA",
+  "name": "Louisiana",
+  "region": "gulf",
+  "epa_region": 6,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "none",
+    "summary": "Permittees report overflows and unauthorized discharges to LDEQ (24 hours; written report within 7 days) and emergencies to the State Police hotline. No duty to tell the public was found in statute, rule or the standard LPDES conditions; New Orleans and Baton Rouge consent decrees contain overflow response plans whose notice terms were not read.",
+    "citations": [
+      {
+        "cite": "LAC 33:I.3915, 3917, 3925",
+        "title": "Notification of unauthorized discharges (emergency, non-emergency, written report)",
+        "url": "https://regulations.justia.com/states/louisiana/title-33/part-i/subpart-2/chapter-39/subchapter-d/section-i-3925",
+        "quote": "The transmittal envelope and report or email subject line and report should be clearly marked \"UNAUTHORIZED DISCHARGE NOTIFICATION REPORT.\" (per search snippet; written report within seven calendar days)",
+        "who": "discharger",
+        "channel": "LDEQ SPOC / Louisiana State Police hotline",
+        "deadline": "24 hours (non-emergency); 7 calendar days written",
+        "threshold": "above reportable quantity or emergency conditions",
+        "verified": "search_only"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "24 hours oral (LPDES standard conditions, mirroring 40 CFR 122.41(l)(6)); 7 days written for unauthorized discharges",
+      "cite": "LAC 33:IX.2701 (not re-read); LAC 33:I Chapter 39"
+    },
+    "cso_permit_notice_clause": {
+      "permit": null,
+      "quote": "No municipal CSO permits; the two EPA-inventory CSO permits are industrial plants.",
+      "deadline": null,
+      "verified": "fetched"
+    },
+    "bills_and_cases": [
+      "U.S. v. Sewerage and Water Board of New Orleans (E.D. La. 93-3212): 1998 decree, Third Modified Consent Decree 2014.",
+      "U.S. and Louisiana v. City of Baton Rouge / Parish of East Baton Rouge: 2002 decree, modified 2012-2013.",
+      "Bills of 2025-2026 on overflow notice: none found (search only)."
+    ]
+  },
+  "erule": {
+    "system": "state",
+    "sobe_events_2026_11_03": 0,
+    "public_output_url": null,
+    "notes": "No Louisiana rows in SOBE; LDEQ takes reports by phone, its online incident form and NetDMR noncompliance forms."
+  },
+  "statewide_feed": {
+    "exists": false,
+    "source_ids": [
+      "la-ldeq-edms"
+    ],
+    "precision": "none",
+    "machine_readable": false,
+    "format": "none",
+    "latency": null,
+    "history": null,
+    "coordinates": "none",
+    "receiving_water": "unknown",
+    "start_end": "unknown",
+    "volume": false,
+    "stable_id": false,
+    "license": null,
+    "notes": "Reports may be retrievable one PDF at a time from EDMS; untested."
+  },
+  "cso": {
+    "permits": 0,
+    "open_outfalls": 0,
+    "operators_with_web_channel": 0,
+    "operators_checked": 0,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "No municipal CSOs. The seed's 2 permits / 2 outfalls are industrial plants (Shell Geismar, LACC Westlake)."
+  },
+  "sso": {
+    "location_source": null,
+    "feeds": [],
+    "notes": "No public SSO location source found."
+  },
+  "beaches": {
+    "program": "LDH Beach Monitoring Program (23 coastal sites; weekly Thursday advisories May to October)",
+    "source_ids": [
+      "la-ldh-beach-monitoring"
+    ],
+    "machine_readable": false,
+    "scope": "coastal",
+    "notes": "LDH site returned 403 (bot protection) to this machine."
+  },
+  "habs": {
+    "program": "LDH ad hoc algal bloom advisories",
+    "source_ids": [
+      "la-ldh-hab-advisories"
+    ],
+    "machine_readable": false,
+    "notes": "No standing program page or list."
+  },
+  "advisories": {
+    "health_department_pages": [
+      "LDH news releases (beach and algal bloom advisories)",
+      "LDH general 'swim at your own risk' advisory for all public waterways (per search)"
+    ],
+    "watershed_groups": [
+      "Pontchartrain Conservancy (Swim Guide)",
+      "Lower Mississippi Riverkeeper",
+      "Atchafalaya Basinkeeper",
+      "Louisiana Bucket Brigade"
+    ],
+    "swim_guide": true
+  },
+  "outfalls": {
+    "state_layer": null,
+    "cso_inventory_gap": "none (no municipal CSOs)",
+    "sso_points": "none"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Mississippi River (MS, AR)",
+      "Pearl River (MS)",
+      "Sabine River and Toledo Bend (TX)",
+      "Red River (TX, AR)",
+      "Gulf of Mexico"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "no_web",
+      "what": "No public-notice duty; overflow reports go only to LDEQ and the State Police.",
+      "fix_level": "legislative",
+      "note": ""
+    },
+    {
+      "kind": "records_request",
+      "what": "Overflow reports, if kept, are reachable only one document at a time in EDMS or by public records request.",
+      "fix_level": "agency",
+      "note": ""
+    },
+    {
+      "kind": "bot_wall",
+      "what": "LDH beach monitoring pages return 403 to automated fetches.",
+      "fix_level": "engineering",
+      "note": "Ask LDH for a data feed or use Swim Guide / BEACON."
+    }
+  ],
+  "subscriptions": [],
+  "readiness": {
+    "tier": "C",
+    "expected_grade": "No public reports",
+    "first_feed": "la-ldh-beach-monitoring",
+    "effort": "medium",
+    "rationale": "No statewide overflow list, no SOBE rows and no municipal CSOs; only EDMS documents (untested) and consent-decree reports. Louisiana shows plant outfalls, the rain caution and the plain statement, plus LDH beach advisories once the 403 is solved.",
+    "order_hint": 6
+  },
+  "owner_questions": [
+    "Label the two industrial 'CSO' permits as industrial combined outfalls, or drop them from the sewage CSO count?",
+    "Ask LDH for beach advisory data access (their site blocks automated fetches)?",
+    "Worth a records request to LDEQ for SSO reports, to make the barrier visible?"
+  ],
+  "surprise": "Louisiana's only two 'CSO' permits in EPA's inventory are petrochemical plants (Shell Geismar and an ethylene plant at Westlake), not sewer systems; the state has no municipal CSOs and no public overflow reports at all."
+}

@@ -1,0 +1,23 @@
+id: "vt-anr-sewage-overflows"
+name: "Vermont ANR sewage overflows page"
+url: "https://anr.vermont.gov/"
+homepage: "https://anr.vermont.gov/"
+kind: "html"
+level: "state"
+# Notes (research/science, status candidate, verified fetched, checked 2026-11-01): Downloaded;
+#   notification feed is the NH-VT agent's area.
+# Access detail (research, quoted): Raw copy
+#   research/science/raw/dl-nne/vt-wqs/anr-SewageOverflows.html (downloaded 2026-11-01 by NNE
+#   sub-researcher; text read by lead)
+cadence: null
+license: "none stated"
+attribution: "Vermont Agency of Natural Resources"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["VT"]
+access: ["html"]
+access_detail: "Raw copy research/science/raw/dl-nne/vt-wqs/anr-SewageOverflows.html (downloaded 2026-11-01 by NNE sub-researcher; text read by lead)"
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

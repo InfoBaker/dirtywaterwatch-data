@@ -1,0 +1,34 @@
+id: "va-richmond-monthly-cso-xlsx"
+name: "Richmond monthly CSO Outfall Reports (XLSX, per-outfall events)"
+url: "https://www.rva.gov/public-utilities/csooutfalls"
+homepage: "https://www.rva.gov/public-utilities/csooutfalls"
+kind: "csv"
+level: "municipal"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Authoritative
+#   per-outfall history with volumes; pair with the live map.
+# Access detail (research, quoted): Links on the CSO Outfalls page: rva.gov/media/{id} redirect
+#   pages that embed a sites/default/files/... XLSX (e.g. July 2026:
+#   https://rva.gov/sites/default/files/2026-08/47_CSOReports2026_Jul2026_CSO_Report_Public_rtswmm%20%281%29.xlsx).
+#   Sheet 'CSO Summary' (sensor type, % good data, activations, observed volume MG) and one sheet
+#   per outfall 'CSO_06-Events' with start, end (Excel serials), rainfall in, volume MG,
+#   overflow_duration_hours. July 2026: '287.0 MG Overflow Observed'. Parsed to
+#   raw/richmond/monthly/jul2026-events.json. Listed months: Jan 2024 - Jul 2026 (Oct 2025 missing).
+# Can fill: started_at, ended_at (end of activation window), volume, units (MG), estimate_flag
+#   (sensor-observed; level sensors estimate), location_text (outfall), waterbody (via outfall list)
+# Cannot fill: timezone (not stated; inferred local); reported_at
+# Waters: 25 CSO outfalls (openboatlaunch slugs: james-river-va)
+# History: 2020 PDFs; 2023-2026 XLSX on the page.
+# Research notes: 'Activations are defined by CSO volumes > 0.01 MG and an interevent time of 72
+#   hours' (sheet note), so 'end' can be days after the duration hours were used.
+cadence: "Monthly, posted 1-2 months after the month (July 2026 file in a 2026-08 folder; Aug-Oct 2026 not yet posted on 2026-11-02)."
+license: "None stated."
+attribution: "City of Richmond Department of Public Utilities"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["VA"]
+access: ["html", "csv"]
+access_detail: "Links on the CSO Outfalls page: rva.gov/media/{id} redirect pages that embed a sites/default/files/... XLSX (e.g. July 2026: https://rva.gov/sites/default/files/2026-08/47_CSOReports2026_Jul2026_CSO_Report_Public_rtswmm%20%281%29.xlsx). Sheet 'CSO Summary' (sensor type, % good data, activations, observed volume MG) and one sheet per outfall 'CSO_06-Events' with start, end (Excel serials), rainfall in, volume MG, overflow_duration_hours. July 2026: '287.0 MG Overflow Observed'. Parsed to raw/richmond/monthly/jul2026-events.json. Listed months: Jan 2024 - Jul 2026 (Oct 2025 missing)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

@@ -1,0 +1,31 @@
+id: "ri-nbc-cso-alarm-map-page"
+name: "NBC CSO Alarm Map web page"
+url: "https://www.narrabay.com/programs-and-initiatives/combined-sewer-overflow-cso/cso-alarm-map/"
+homepage: "https://www.narrabay.com/programs-and-initiatives/combined-sewer-overflow-cso/cso-alarm-map/"
+kind: "html"
+level: "utility"
+# Notes (research/ri, status used, verified fetched, checked 2026-11-01): Source page for
+#   attribution and advice wording.
+# Access detail (research, quoted): WordPress page with Leaflet map; short URL narrabay.com/csomap
+#   (2022 launch post). Advice text quoted in report. No email/text subscription; 'Report a sewer
+#   overflow' mailto IMSupport@narrabay.com.
+# Can fill: advice_text
+# Cannot fill: volume
+# History: none
+# Research notes: Advice: 'public health officials advise against direct contact like swimming in
+#   these waters no matter if it's rained or not' and 'During rainstorms and up to 48 hours after a
+#   sewage overflow, there may be increased health risks from non-contact recreational activities,
+#   such as paddling, fishing, etc.' Page says NBC maintains '64 active combined sewer overflow
+#   pipes'.
+cadence: "live"
+license: "Footer \"Copyright © 2026 Narragansett Bay Commission\"; no data terms."
+attribution: "Narragansett Bay Commission"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["RI"]
+access: ["html", "map_only"]
+access_detail: "WordPress page with Leaflet map; short URL narrabay.com/csomap (2022 launch post). Advice text quoted in report. No email/text subscription; 'Report a sewer overflow' mailto IMSupport@narrabay.com."
+machine_readable: false
+legal_basis: "RIPDES permit condition (2017)."
+checked: "2026-11-01"

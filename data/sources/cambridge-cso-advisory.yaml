@@ -1,0 +1,23 @@
+id: "cambridge-cso-advisory"
+name: "City of Cambridge CSO advisory (March 2024)"
+url: null
+homepage: null
+kind: "html"
+level: "municipal"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): 48 hours from the
+#   time the overflow ends.
+# Access detail (research, quoted): Raw copy: research/science/raw/dl-adv/cambridge-2024-03.html
+#   (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead).
+# Can fill: advice_text
+cadence: null
+license: "none stated"
+attribution: "City of Cambridge"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["MA"]
+access: ["html"]
+access_detail: "Raw copy: research/science/raw/dl-adv/cambridge-2024-03.html (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

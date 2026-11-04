@@ -1,0 +1,215 @@
+[
+  {
+    "id": "fl-miami-dade-wasd",
+    "name": "Miami-Dade Water and Sewer Department",
+    "state": "FL",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Biscayne Bay",
+      "Miami River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched; PNP notices (2 in last 30 days)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Miami"
+    ],
+    "notes": "Federal consent decree utility (2014).",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "fl-jea",
+    "name": "JEA (Jacksonville)",
+    "state": "FL",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "St. Johns River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Environmental Incident Reporting page (search only); PNP (Buckman WRF 2 in last 30 days)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Jacksonville"
+    ],
+    "notes": "",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "fl-fort-lauderdale",
+    "name": "City of Fort Lauderdale",
+    "state": "FL",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "New River",
+      "Tarpon River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched; PNP",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Fort Lauderdale"
+    ],
+    "notes": "Large 2019-2020 force-main spills.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "fl-panama-city-millville",
+    "name": "City of Panama City (Millville AWT and St Andrews WWTF)",
+    "state": "FL",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "St. Andrew Bay",
+      "Watson Bayou"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "PNP (Millville 12, St Andrews 3 in last 30 days)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Panama City"
+    ],
+    "notes": "PNP ArcGIS layer counts, last 30 days to 2026-11-03",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "fl-defuniak-springs",
+    "name": "City of DeFuniak Springs WWTP",
+    "state": "FL",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "PNP (11 in last 30 days)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "DeFuniak Springs"
+    ],
+    "notes": "PNP ArcGIS layer counts, last 30 days to 2026-11-03",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "fl-fort-walton-beach",
+    "name": "City of Fort Walton Beach Collection System",
+    "state": "FL",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Santa Rosa Sound",
+      "Choctawhatchee Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "PNP (9 in last 30 days)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Fort Walton Beach"
+    ],
+    "notes": "PNP ArcGIS layer counts, last 30 days to 2026-11-03",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "fl-port-st-lucie",
+    "name": "City of Port St. Lucie Utility Systems",
+    "state": "FL",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "St. Lucie River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "PNP (8 in last 30 days)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Port St. Lucie"
+    ],
+    "notes": "PNP ArcGIS layer counts, last 30 days to 2026-11-03",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "fl-fort-pierce-ua",
+    "name": "Fort Pierce Utilities Authority",
+    "state": "FL",
+    "kind": "bypass",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Indian River Lagoon"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "PNP (diluted effluent discharge to Indian River Lagoon, Nov 2026)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Fort Pierce"
+    ],
+    "notes": "PNP ArcGIS layer counts, last 30 days to 2026-11-03",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "fl-orlando-iron-bridge",
+    "name": "City of Orlando (Iron Bridge Regional WRF)",
+    "state": "FL",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Little Econlockhatchee River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "PNP",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Orlando"
+    ],
+    "notes": "PNP ArcGIS layer counts, last 30 days to 2026-11-03",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "fl-st-petersburg",
+    "name": "City of St. Petersburg Water Resources",
+    "state": "FL",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Tampa Bay",
+      "Boca Ciega Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "St. Petersburg"
+    ],
+    "notes": "Large hurricane-season discharges 2015-2016 and 2024.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  }
+]

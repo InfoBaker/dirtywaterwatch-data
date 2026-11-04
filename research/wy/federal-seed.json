@@ -1,0 +1,136 @@
+{
+ "state": "WY",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 92,
+ "plant_permits_major": 18,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "WY0020010",
+   "permittee": "Sheridan, City of",
+   "city": "(UNKNOWN CITY)",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0020095",
+   "permittee": "City of Evanston",
+   "city": "EVANSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0020125",
+   "permittee": "Gillette, City of",
+   "city": "(UNKNOWN CITY)",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0020176",
+   "permittee": "Worland, City of",
+   "city": "UNKNOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0020192",
+   "permittee": "Thermopolis, Town of",
+   "city": "(UNKNOWN CITY)",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0020231",
+   "permittee": "City of Torrington",
+   "city": "TORRINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0020320",
+   "permittee": "Kemmerer-Diamondville Joint Powers Board",
+   "city": "(UNKNOWN CITY)",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0020389",
+   "permittee": "Lander, City of",
+   "city": "UNKNOWN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WY0020427",
+   "permittee": "Rawlins, City of",
+   "city": "UNKNOWN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WY0020443",
+   "permittee": "City of Green River",
+   "city": "GREEN RIVER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0020648",
+   "permittee": "Powell, City of",
+   "city": "POWELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0020672",
+   "permittee": "Riverton, City of",
+   "city": "RIVERTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0021458",
+   "permittee": "Jackson, Town of",
+   "city": "(UNKNOWN CITY)",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0021920",
+   "permittee": "Casper, City of",
+   "city": "CASPER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0022209",
+   "permittee": "Laramie, City of",
+   "city": "(UNKNOWN CITY)",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0022357",
+   "permittee": "Rock Springs, City of",
+   "city": "ROCK SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0022381",
+   "permittee": "Cheyenne Board of Public Utilities",
+   "city": "(UNKNOWN CITY)",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WY0022934",
+   "permittee": "Cheyenne Board of Public Utilities",
+   "city": "CHEYENNE",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

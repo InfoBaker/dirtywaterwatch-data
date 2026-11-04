@@ -1,0 +1,286 @@
+[
+ {
+  "id": "ne-omaha-cso",
+  "name": "City of Omaha Public Works (combined sewer overflows)",
+  "state": "NE",
+  "kind": "cso",
+  "npdes_permit": "NE0133680",
+  "receiving_waters": [
+   "Missouri River",
+   "Cole Creek",
+   "Little Papillion Creek",
+   "Blood Creek to Big Papillion Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 25,
+  "outfalls_source": "data/outfalls-us.json",
+  "notification_channel": "No CSO overflow notice page found (omahacso.com is a projects site; city sites 403). Large overflows announced to media. 8 SOBE rows (latest 2026-03-05).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Omaha"
+  ],
+  "notes": "25 open CSO outfalls (EPA inventory). Program to 2037 aims to capture or treat 85% of combined volume. Permit public-notification clause not read.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-omaha-papillion",
+  "name": "Omaha Papillion Creek WWTF and collection system",
+  "state": "NE",
+  "kind": "sso",
+  "npdes_permit": "NE0112810",
+  "receiving_waters": [
+   "Big Papillion Creek",
+   "Little Papillion Creek",
+   "West Papillion Creek",
+   "Boxelder Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Media statements for large overflows (WOWT 2026-10-02); otherwise SOBE only.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Omaha",
+   "Papillion",
+   "La Vista"
+  ],
+  "notes": "71 SOBE events, latest start 2026-09-12. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-omaha-missouri",
+  "name": "Omaha Missouri River WWTF",
+  "state": "NE",
+  "kind": "sso",
+  "npdes_permit": "NE0036358",
+  "receiving_waters": [
+   "Missouri River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; SOBE rows are the public trace.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Omaha"
+  ],
+  "notes": "10 SOBE events, latest start 2026-08-20. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-grand-island",
+  "name": "City of Grand Island WWTF",
+  "state": "NE",
+  "kind": "No receiving water given in the rows.",
+  "npdes_permit": "NE0043702",
+  "receiving_waters": [
+   "Wood River",
+   "Platte River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; SOBE rows are the public trace.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Grand Island"
+  ],
+  "notes": "23 SOBE events, latest start 2026-10-06. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-seward",
+  "name": "City of Seward WWTF",
+  "state": "NE",
+  "kind": "sso",
+  "npdes_permit": "NE0023876",
+  "receiving_waters": [
+   "Big Blue River",
+   "Plum Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; SOBE rows are the public trace.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Seward"
+  ],
+  "notes": "13 SOBE events, latest start 2026-09-11. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-falls-city",
+  "name": "City of Falls City WWTF",
+  "state": "NE",
+  "kind": "sso",
+  "npdes_permit": "NE0021148",
+  "receiving_waters": [
+   "Big Nemaha River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; SOBE rows are the public trace.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Falls City"
+  ],
+  "notes": "9 SOBE events, latest start 2025-07-24. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-lincoln-northeast",
+  "name": "Lincoln Northeast WRRF",
+  "state": "NE",
+  "kind": "Lincoln Transportation and Utilities not searched.",
+  "npdes_permit": "NE0112488",
+  "receiving_waters": [
+   "Salt Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; SOBE rows are the public trace.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lincoln"
+  ],
+  "notes": "5 SOBE events, latest start 2025-12-14. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-lincoln-theresa",
+  "name": "Lincoln Theresa Street WRRF",
+  "state": "NE",
+  "kind": "sso",
+  "npdes_permit": "NE0036820",
+  "receiving_waters": [
+   "Salt Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lincoln"
+  ],
+  "notes": "No SOBE rows under this permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-nebraska-city",
+  "name": "Nebraska City WWTF",
+  "state": "NE",
+  "kind": "sso",
+  "npdes_permit": "NE0021245",
+  "receiving_waters": [
+   "Missouri River",
+   "North Table Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; SOBE rows are the public trace.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nebraska City"
+  ],
+  "notes": "4 SOBE events, latest start 2026-06-10. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-mccook",
+  "name": "McCook WWTF",
+  "state": "NE",
+  "kind": "sso",
+  "npdes_permit": "NE0021504",
+  "receiving_waters": [
+   "Republican River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; SOBE rows are the public trace.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "McCook"
+  ],
+  "notes": "3 SOBE events, latest start 2026-04-10. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-north-platte",
+  "name": "North Platte WWTF",
+  "state": "NE",
+  "kind": "sso",
+  "npdes_permit": "NE0032891",
+  "receiving_waters": [
+   "South Platte River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; SOBE rows are the public trace.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "North Platte"
+  ],
+  "notes": "1 SOBE events, latest start 2026-03-02. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-bellevue",
+  "name": "Bellevue WWTF #1",
+  "state": "NE",
+  "kind": "sso",
+  "npdes_permit": "NE0036307",
+  "receiving_waters": [
+   "Missouri River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bellevue"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ne-kearney",
+  "name": "Kearney WWTF",
+  "state": "NE",
+  "kind": "sso",
+  "npdes_permit": "NE0052647",
+  "receiving_waters": [
+   "Platte River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kearney"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ }
+]

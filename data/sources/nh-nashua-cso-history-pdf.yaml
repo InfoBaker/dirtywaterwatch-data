@@ -1,0 +1,27 @@
+id: "nh-nashua-cso-history-pdf"
+name: "Nashua History of CSO Occurrences (PDF)"
+url: "https://www.nashuanh.gov/DocumentCenter/View/11049"
+homepage: "https://www.nashuanh.gov/DocumentCenter/View/11049"
+kind: "pdf"
+level: "municipal"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): Best per-event NH
+#   volume data
+# Access detail (research, quoted): 97 KB text-layer PDF; one row per date, with flow (MG) and
+#   duration (min) per outfall
+# Can fill: started_at (date only), volume, units, waterbody, source_updated_at
+# Cannot fill: ended_at; exact times; advice_text
+# Waters: 9 outfalls (openboatlaunch slugs: merrimack-river-nh, nashua-river-nh)
+# History: 2013 to Aug 2026
+# Research notes: Join to permit coordinates by outfall number
+cadence: "monthly update (stated)"
+license: "none stated"
+attribution: "City of Nashua Wastewater Treatment Facility"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NH"]
+access: ["pdf"]
+access_detail: "97 KB text-layer PDF; one row per date, with flow (MG) and duration (min) per outfall"
+machine_readable: false
+legal_basis: "NMC #8"
+checked: "2026-11-01"

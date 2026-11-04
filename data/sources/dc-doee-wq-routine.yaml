@@ -1,0 +1,23 @@
+id: "dc-doee-wq-routine"
+name: "DOEE routine ambient E. coli monitoring (6 sites: 3 Potomac, 2 Anacostia, 1 Washington Channel)"
+url: "https://doee.dc.gov/service/water-quality"
+homepage: "https://doee.dc.gov/service/water-quality"
+kind: "html"
+level: "state"
+# Notes (research/dc, status candidate, verified inferred, checked 2026-11-02): Use via the PI
+#   feature service while it lasts; otherwise via the Water Quality Portal (federal agent).
+# Access detail (research, quoted): Site set described in the 2026-02-27 release. Routine results
+#   are reported to EPA WQX/ATTAINS (not checked here); 2026 daily results appear as Source 'DOEE'
+#   in the PI E. coli feature service (418 rows to 2026-09-15).
+cadence: null
+license: "none stated"
+attribution: "DOEE"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["DC"]
+access: ["html"]
+access_detail: "Site set described in the 2026-02-27 release. Routine results are reported to EPA WQX/ATTAINS (not checked here); 2026 daily results appear as Source 'DOEE' in the PI E. coli feature service (418 rows to 2026-09-15)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

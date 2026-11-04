@@ -1,0 +1,135 @@
+[
+  {
+    "id": "ok-okc-utilities",
+    "name": "Oklahoma City Utilities (North Canadian, Deer Creek, Chisholm Creek, South Canadian WWTPs)",
+    "state": "OK",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "North Canadian (Oklahoma) River",
+      "Deer Creek",
+      "Chisholm Creek",
+      "Canadian River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "none found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Oklahoma City"
+    ],
+    "notes": "Largest system.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ok-tulsa",
+    "name": "City of Tulsa Water and Sewer (Southside, Northside, Haikey Creek, Lower Bird Creek WWTPs)",
+    "state": "OK",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Arkansas River",
+      "Bird Creek",
+      "Haikey Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "none found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Tulsa"
+    ],
+    "notes": "Under a 2010s EPA administrative order on SSOs (not re-checked).",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ok-broken-arrow",
+    "name": "City of Broken Arrow",
+    "state": "OK",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Arkansas River tributaries",
+      "Haikey Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "none found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Broken Arrow"
+    ],
+    "notes": "DEQ notice of violation after a 2019 lift-station spill (press).",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ok-norman",
+    "name": "City of Norman",
+    "state": "OK",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Canadian River",
+      "Lake Thunderbird watershed"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Norman"
+    ],
+    "notes": "Lake Thunderbird is a drinking-water and recreation lake with a TMDL.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ok-lawton",
+    "name": "City of Lawton",
+    "state": "OK",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "East Cache Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Lawton"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ok-sulphur",
+    "name": "Sulphur Municipal Authority",
+    "state": "OK",
+    "kind": "sso",
+    "npdes_permit": "OK0020141",
+    "receiving_waters": [
+      "Rock Creek (Chickasaw National Recreation Area)"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Sulphur"
+    ],
+    "notes": "Major permit in the seed; discharges near Chickasaw National Recreation Area swimming areas.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  }
+]

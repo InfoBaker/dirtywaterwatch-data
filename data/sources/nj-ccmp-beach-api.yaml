@@ -1,0 +1,46 @@
+id: "nj-ccmp-beach-api"
+name: "NJ beach monitoring public API behind njbeaches.org (CCMP ocean/bay, ECM, Freshwater Beach Monitoring Program) - beachapi.njdep.rutgers.edu"
+url: "https://njbeaches.org/"
+homepage: "https://njbeaches.org/"
+kind: "api"
+level: "state"
+# Notes (research/nj, status used, verified fetched, checked 2026-11-02): Best NJ feed to build
+#   against: open JSON/CSV, coordinates, daily in season, and it codes sewage-related actions
+#   (Beach_Source_Type 'CSO', indicator 'PREEMPT').
+# Access detail (research, quoted): No auth, CORS open. Base https://beachapi.njdep.rutgers.edu/api/
+#   (found in the Next.js bundle). Fetched: public/beaches/statuses/ (status codes),
+#   public/beaches/statuses/legend (counts by program), public/data/filters (programs, 21 counties,
+#   565 municipalities, 31 local health authorities, beachList of 1,600 stations with lat/lon),
+#   public/lhas/, public/geography, public/data/counts?startDate=&endDate=. Downloads (CSV):
+#   public/data/download/incident/?downloadType=incident&program=&county=&municipality=&locationType=&stationType=&beachId=&lha=&startDate=2026-01-01&endDate=2026-12-31
+#   and
+#   public/data/download/waterQuality?downloadType=water-quality&...&startDate=2026-07-06&endDate=2026-07-07.
+#   Other public routes seen: public/snapshots/, public/dailyFlights/, public/news/, public/photos/,
+#   public/faqs/. https://www.njbeaches.org has a certificate name mismatch; https://njbeaches.org
+#   works.
+# Can fill: event_type (CONTAM_ADV / CLOSURE), started_at/ended_at (dates only), coordinates
+#   (station point), waterbody (via beach), authority (program/LHA), material/indicator
+#   (Enterococcus/E. coli/PREEMPT), raw_record, source_record_id (station+date)
+# Cannot fill: discharger; volume; advice_text (codes only); published_at (no timestamps on
+#   incidents); source_updated_at
+# Waters: 1,600 stations (217 CCMP, 52 ECM, 53 FBMP + 177 FBMP_RA counted in the legend); ocean,
+#   bay, river and lake bathing beaches (openboatlaunch slugs: shark-river-nj, manasquan-river-nj,
+#   barnegat-bay-nj, great-egg-harbor-bay-nj, sandy-hook-bay-nj, raritan-river-nj)
+# History: 2025: 201 incidents; 2026: 409 incidents (2025 CCMP rows look sparse: 27). Water-quality
+#   download by date range; counts endpoint gives totals (e.g. July 2025: 2,211 results, 87
+#   incidents).
+# Research notes: Source codes seen 2025-2026: UNKNOWN (most), ALGAE, STORM, WILDLIFE, CSO (2,
+#   Manasquan 2026-08-22). Remark 'K' appears to mean less-than and 'L' greater-than (inferred from
+#   values 5 and 1000). Raw: raw/beaches/.
+cadence: "In season (mid-May to mid-Sept): ocean/bay sampled weekly on Mondays (incident start dates fall on sample day), retest next day; status changes posted daily. On 2026-11-02 all 499 stations were 'not yet open / closed for season'."
+license: "No terms found on njbeaches.org or in the API. NJDEP is the publisher; credit 'NJDEP Cooperative Coastal Monitoring Program'."
+attribution: "NJDEP (Bureau of Marine Water Monitoring / CCMP) with Rutgers (host); local health agencies sample"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure"]
+states: ["NJ"]
+access: ["api", "csv", "html"]
+access_detail: "No auth, CORS open. Base https://beachapi.njdep.rutgers.edu/api/ (found in the Next.js bundle). Fetched: public/beaches/statuses/ (status codes), public/beaches/statuses/legend (counts by program), public/data/filters (programs, 21 counties, 565 municipalities, 31 local health authorities, beachList of 1,600 stations with lat/lon), public/lhas/, public/geography, public/data/counts?startDate=&endDate=. Downloads (CSV): public/data/download/incident/?downloadType=incident&program=&county=&municipality=&locationType=&stationType=&beachId=&lha=&startDate=2026-01-01&endDate=2026-12-31 and public/data/download/waterQuality?downloadType=water-quality&...&startDate=2026-07-06&endDate=2026-07-07. Other public routes seen: public/snapshots/, public/dailyFlights/, public/news/, public/photos/, public/faqs/. https://www.njbeaches.org has a certificate name mismatch; https://njbeaches.org works."
+machine_readable: true
+legal_basis: "N.J.A.C. 8:26 (State Sanitary Code, Public Recreational Bathing) - not read in this pass; federal BEACH Act grants."
+checked: "2026-11-02"

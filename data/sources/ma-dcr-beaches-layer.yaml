@@ -1,0 +1,23 @@
+id: "ma-dcr-beaches-layer"
+name: "DCR beaches and swimming areas layer (DCR_Beach_public_view)"
+url: "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/DCR_Beach_public_view/FeatureServer/0"
+homepage: "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/DCR_Beach_public_view/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/ma, status candidate, verified fetched, checked 2026-11-01): Points to geolocate
+#   the DCR posting layer above.
+# Access detail (research, quoted): Count 133; fields FID, FullName, Label, Type, Status, Lifeguard,
+#   Accessible, Fees, Address, Town, Phone, DCR_Facili.
+# Waters: 133 DCR beaches
+cadence: "Data last edited 2026-02-19."
+license: "EEA and DCR 'make no representations or warranties ... with respect to the reuse of the data' (per sibling project)."
+attribution: "MA DCR"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["MA"]
+access: ["arcgis"]
+access_detail: "Count 133; fields FID, FullName, Label, Type, Status, Lifeguard, Accessible, Fees, Address, Town, Phone, DCR_Facili."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,682 @@
+{
+ "state": "CO",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 343,
+ "plant_permits_major": 96,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "CO0000005",
+   "permittee": "Lower Fountain Metro Sewage Disposal Dist",
+   "city": "FOUNTAIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0020290",
+   "permittee": "Estes Park Sanitation District",
+   "city": "ESTES PARK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0020320",
+   "permittee": "Windsor Town of",
+   "city": "WINDSOR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0020435",
+   "permittee": "Monument SD&Palmer Lake SD&Woodmoor WSD 1",
+   "city": "MONUMENT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0020451",
+   "permittee": "Frisco Sanitation District",
+   "city": "FRISCO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0020478",
+   "permittee": "Boxelder Sanitation District",
+   "city": "FORT COLLINS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0020508",
+   "permittee": "EVANS, CITY OF",
+   "city": "WELD COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0020532",
+   "permittee": "Fountain Sanitation District",
+   "city": "FOUNTAIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0020699",
+   "permittee": "Granby Sanitation District",
+   "city": "GRAND COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0020737",
+   "permittee": "South Fort Collins Sanitation District",
+   "city": "FORT COLLINS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0020826",
+   "permittee": "Silverthorne Dillon Joint Sewer Authority",
+   "city": "SILVERTHORNE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0020834",
+   "permittee": "Steamboat Springs City of",
+   "city": "STEAMBOAT SPRINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0021067",
+   "permittee": "Widefield Water and Sanitation District",
+   "city": "WIDEFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0021164",
+   "permittee": "Leadville Sanitation District",
+   "city": "LEADVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CO0021181",
+   "permittee": "UNITED STATES DEPARTMENT OF THE ARMY - FORT CARSON",
+   "city": "FORT CARSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0021245",
+   "permittee": "Brush City of",
+   "city": "BRUSH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0021261",
+   "permittee": "La Junta City of",
+   "city": "LA JUNTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0021369",
+   "permittee": "Eagle River WSD",
+   "city": "VAIL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0021440",
+   "permittee": "Fort Lupton City of",
+   "city": "FORT LUPTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0021539",
+   "permittee": "Upper Blue Sanitation District",
+   "city": "SUMMIT COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0021547",
+   "permittee": "Brighton City of",
+   "city": "BRIGHTON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CO0021580",
+   "permittee": "ST. VRAIN SANITATION DISTRICT",
+   "city": "FREDERICK",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CO0021598",
+   "permittee": "Copper Mountain Consolidated Metropolitan District",
+   "city": "COPPER MOUNTAIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0023078",
+   "permittee": "Louisville City of",
+   "city": "LOUISVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0023086",
+   "permittee": "Snowmass Water and Saniation Dist",
+   "city": "SNOWMASS VILLAGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0023124",
+   "permittee": "Lafayette City of",
+   "city": "BOULDER COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0023132",
+   "permittee": "Monte Vista  City of",
+   "city": "RIO GRANDE COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0023671",
+   "permittee": "Lamar City of",
+   "city": "LAMAR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0023850",
+   "permittee": "Rocky Ford City of",
+   "city": "ROCKY FORD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0024082",
+   "permittee": "Durango City of",
+   "city": "DURANGO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0024147",
+   "permittee": "Boulder City of",
+   "city": "BOULDER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0024171",
+   "permittee": "Westminster City of",
+   "city": "WESTMINSTER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0024392",
+   "permittee": "Security Sanitation District",
+   "city": "FOUNTAIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0024431",
+   "permittee": "Eagle River Water & Sanitation Dist",
+   "city": "EAGLE COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0026247",
+   "permittee": "Sterling City of",
+   "city": "STERLING",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0026387",
+   "permittee": "Aspen Consolidated Sanitation District",
+   "city": "ASPEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CO0026409",
+   "permittee": "Broomfield City and County",
+   "city": "ADAMS COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0026425",
+   "permittee": "Fort Collins City of",
+   "city": "FORT COLLINS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0026611",
+   "permittee": "Aurora City of",
+   "city": "AURORA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0026638",
+   "permittee": "Metro Water Recovery",
+   "city": "DENVER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0026646",
+   "permittee": "Pueblo City of",
+   "city": "PUEBLO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0026662",
+   "permittee": "South Adams County WSD",
+   "city": "HENDERSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0026671",
+   "permittee": "Longmont City of",
+   "city": "LONGMONT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0026701",
+   "permittee": "Loveland City of",
+   "city": "LOVELAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0026735",
+   "permittee": "Colorado Springs Utilities",
+   "city": "COLORADO SPRINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0027171",
+   "permittee": "Mt Crested Butte Water and Sanitation Dist",
+   "city": "MOUNT CRESTED BUTTE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0027545",
+   "permittee": "Cortez Sanitation District",
+   "city": "CORTEZ",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0029955",
+   "permittee": "Summit County Government",
+   "city": "SUMMIT COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0031232",
+   "permittee": "Trinidad City of",
+   "city": "TRINIDAD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0031755",
+   "permittee": "Pagosa Area Water and San Dist",
+   "city": "PAGOSA SPRINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0031844",
+   "permittee": "Upper Thompson Sanitation District",
+   "city": "ESTES PARK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0032999",
+   "permittee": "South Platte Renew",
+   "city": "ENGLEWOOD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0033791",
+   "permittee": "Clifton Sanitation District",
+   "city": "CLIFTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0036757",
+   "permittee": "Northglenn City of",
+   "city": "BRIGHTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0036927",
+   "permittee": "Monte Vista City of",
+   "city": "RIO GRANDE COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0037311",
+   "permittee": "Eagle River Water & San District",
+   "city": "EAGLE COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0037681",
+   "permittee": "Three Lakes Water and Sanitation District",
+   "city": "GRAND LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CO0037966",
+   "permittee": "Centennial Water and San Dist",
+   "city": "HIGHLANDS RANCH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0038547",
+   "permittee": "Plum Creek Water Reclamation Authority",
+   "city": "CASTLE ROCK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0039624",
+   "permittee": "Montrose City of",
+   "city": "MONTROSE COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0039641",
+   "permittee": "Delta City of",
+   "city": "DELTA COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0039748",
+   "permittee": "Fremont Sanitation District",
+   "city": "FREMONT COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0039900",
+   "permittee": "Cripple Creek City of",
+   "city": "CRIPPLE CREEK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0040037",
+   "permittee": "Craig  City of",
+   "city": "CRAIG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0040053",
+   "permittee": "Mesa Co Grand Junction City of",
+   "city": "GRAND JUNCTION",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0040142",
+   "permittee": "Fraser Town of",
+   "city": "FRASER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CO0040258",
+   "permittee": "Greeley City of",
+   "city": "GREELEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0040291",
+   "permittee": "Stonegate Village Metropolitan District",
+   "city": "PARKER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0040339",
+   "permittee": "Salida City of",
+   "city": "SALIDA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0040681",
+   "permittee": "Arapahoe County Water and Wastewater Authority",
+   "city": "CENTENNIAL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0040789",
+   "permittee": "Pueblo West Metropolitan District",
+   "city": "PUEBLO COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0041092",
+   "permittee": "Pinery Water and Wastewater Dist",
+   "city": "PARKER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0041530",
+   "permittee": "Gunnison City of",
+   "city": "GUNNISON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0041700",
+   "permittee": "St Vrain Sanitation District",
+   "city": "CITY OF LONGMONT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0041840",
+   "permittee": "Telluride Town of",
+   "city": "SAN MIGUEL COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0042030",
+   "permittee": "Donala Water and Sanitation District",
+   "city": "COLORADO SPRINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0043010",
+   "permittee": "Superior Metropolitan District No 1",
+   "city": "SUPERIOR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0044458",
+   "permittee": "Alamosa City of",
+   "city": "ALAMOSA COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0044849",
+   "permittee": "Fort Morgan City of",
+   "city": "MORGAN COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0045420",
+   "permittee": "Upper Blue Sanitation Dist",
+   "city": "SUMMIT COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0045748",
+   "permittee": "Buena Vista Sanitation District",
+   "city": "BUENA VISTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0046507",
+   "permittee": "Parker Water and Sanitation District",
+   "city": "PARKER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0046663",
+   "permittee": "Berthoud Town of",
+   "city": "BERTHOUD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0046761",
+   "permittee": "Black Hawk/Central City Sanitation District",
+   "city": "GILPIN COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0046850",
+   "permittee": "Colorado Springs Utilities",
+   "city": "COLORADO SPRINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0047091",
+   "permittee": "Woodmen Hills Metropolitan District",
+   "city": "EL PASO COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0047198",
+   "permittee": "Lochbuie Town of",
+   "city": "WELD COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0047287",
+   "permittee": "Evans City of",
+   "city": "WELD COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0047627",
+   "permittee": "Fort Collins City of",
+   "city": "FORT COLLINS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0048151",
+   "permittee": "Rifle City of",
+   "city": "RIFLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0048241",
+   "permittee": "Eagle Town of",
+   "city": "EAGLE COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0048445",
+   "permittee": "Erie Town of",
+   "city": "WELD COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0048852",
+   "permittee": "Glenwood Springs City of",
+   "city": "GARFIELD COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0048854",
+   "permittee": "Fruita City of",
+   "city": "FRUITA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CO0048959",
+   "permittee": "Metro Water Recovery",
+   "city": "BRIGHTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "COX048348",
+   "permittee": "Cherokee Metro District",
+   "city": "COLORADO SPRINGS",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

@@ -1,0 +1,237 @@
+{
+ "state": "XB",
+ "name": "Bordering countries",
+ "region": null,
+ "epa_region": null,
+ "npdes_authority": "mixed",
+ "great_lakes_basin": "part",
+ "checked": "2026-11-04",
+ "region_note": "region is null: Canada and Mexico are not US regions, and 'territories' would be wrong. npdes_authority 'mixed' is a placeholder: no US NPDES authority applies outside the US (Canada: provincial approvals plus the federal WSER; Mexico: CONAGUA discharge permits under NOM-001-SEMARNAT).",
+ "law": {
+  "public_notice_duty": "partial",
+  "summary": "Canada: operators report to provinces (Ontario Spills Action Centre and medical officer of health under CLI-ECAs; Quebec SOMAEU under ROMAEU) and to ECCC annually under WSER; public real-time notice is not a general duty, but Kingston, Windsor and Metro Vancouver publish voluntarily. Mexico: no public notice duty known; binational IBWC protocols require CESPT and OOMAPAS to tell the Mexican Section, which tells USIBWC, which emails a US list and files reports with the San Diego Water Board.",
+  "citations": [
+   {
+    "cite": "Binational Tijuana River Spill Notification Protocol (IBWC)",
+    "title": "Initial Binational Tijuana River Spill Notification Protocol",
+    "url": "https://www.ibwc.gov/wp-content/uploads/2023/08/Initial_Binational_Tijuana_River_Spill_Notification_113017.pdf",
+    "quote": "In the event of occurrence of the events described in points No. 1 or No. 3 above, USIBWC will immediately notify U.S. recipients of USIBWC email list serve developed for these cases.",
+    "who": "USIBWC (after CESPT and the Mexican Section)",
+    "channel": "email list; spill report to San Diego Water Board and Cal OES",
+    "deadline": "CESPT to Mexican Section 'within the hour, whenever this is possible'; USIBWC 'immediately'",
+    "threshold": "pump or pipeline failure that can result in raw sewage reaching the boundary",
+    "verified": "fetched"
+   },
+   {
+    "cite": "Order No. R9-2021-0001 as amended (NPDES CA0108928)",
+    "title": "USIBWC South Bay IWTP permit, spill and transboundary flow reporting",
+    "url": "https://www.waterboards.ca.gov/sandiego/water_issues/programs/tijuana_river_valley_strategy/sewage_issue.html",
+    "quote": "submits preliminary Spill Event and dry weather Canyon Collector Transboundary Flow Event reports within three days of the event and submits monthly reports on river flows",
+    "who": "USIBWC",
+    "channel": "San Diego Water Board, posted as a public table",
+    "deadline": "3 days",
+    "threshold": "spill events and dry-weather transboundary flows",
+    "verified": "fetched"
+   },
+   {
+    "cite": "Ontario CLI-ECA Schedule E",
+    "title": "Sewage collection system reporting",
+    "url": "https://www.ontario.ca/page/municipal-consolidated-linear-infrastructure-environmental-compliance-approvals",
+    "quote": null,
+    "who": "municipality",
+    "channel": "MECP Spills Action Centre, medical officer of health; annual public report",
+    "deadline": "not read",
+    "threshold": "bypasses, overflows, spills",
+    "verified": "search_only"
+   },
+   {
+    "cite": "ROMAEU, RLRQ c. Q-2, r. 34.1",
+    "title": "Quebec municipal wastewater works regulation",
+    "url": "https://www.legisquebec.gouv.qc.ca/",
+    "quote": null,
+    "who": "operator",
+    "channel": "SOMAEU (ministry); published annually as open data",
+    "deadline": "monthly reporting to the ministry (inferred)",
+    "threshold": "overflows of 12 minutes or more counted",
+    "verified": "search_only"
+   },
+   {
+    "cite": "Wastewater Systems Effluent Regulations, SOR/2012-139",
+    "title": "Federal effluent and CSO reporting",
+    "url": "https://open.canada.ca/data/en/dataset/9e11e114-ef0d-4814-8d93-24af23716489",
+    "quote": null,
+    "who": "owner or operator",
+    "channel": "ECCC; annual open data",
+    "deadline": "annual (CSO points)",
+    "threshold": "systems over 100 m3/day",
+    "verified": "search_only"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "varies by province; Mexico per IBWC protocol 'within the hour, whenever this is possible'",
+   "cite": "see citations"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "Ontario EBR application (Lake Ontario Waterkeeper, 2014): ministry decided Toronto should report bypasses to the public in real time; not implemented as of 2017 per the Environmental Commissioner (search_only)",
+   "IBWC Minute 328 (2022): Tijuana sanitation projects due by 2027-12-31 (search_only)",
+   "US-Mexico MOU on the Tijuana River (2025; search_only)"
+  ]
+ },
+ "erule": {
+  "system": "none",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "Not applicable outside the US. USIBWC's own plant (CA0108928) is California-permitted."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [
+   "xb-mx-sdrwqcb-ibwc-spill-table",
+   "xb-on-windsor-bypass",
+   "xb-qc-somaeu-summary",
+   "xb-qc-melccfp-os-annual",
+   "xb-ca-eccc-wser-cso"
+  ],
+  "precision": "event",
+  "machine_readable": false,
+  "format": "html",
+  "latency": "Tijuana: 3-day preliminary reports, table updated about weekly; Windsor: 24 to 48 hours; Quebec: annual (monthly detail); WSER: annual",
+  "history": "varies",
+  "coordinates": "some",
+  "receiving_water": "location names",
+  "start_end": "start and end (Tijuana, Windsor)",
+  "volume": true,
+  "stable_id": false,
+  "license": "CC-BY 4.0 (Quebec); OGL-Canada (WSER); not stated (Water Board, Windsor)",
+  "notes": "No single feed; per-water sources."
+ },
+ "cso": {
+  "permits": null,
+  "open_outfalls": null,
+  "operators_with_web_channel": 3,
+  "operators_checked": 8,
+  "state_outfall_layer": "xb-qc-melccfp-os-annual",
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "Kingston real-time map (bot wall), Windsor bypass CSV, Metro Vancouver 48-hour map; Toronto, Hamilton, Niagara Falls, Sarnia, St. Stephen: no event channel found."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [
+   "xb-mx-sdrwqcb-ibwc-spill-table"
+  ],
+  "notes": "Tijuana events carry named locations (canyon collectors) that can be pinned by hand."
+ },
+ "beaches": {
+  "program": "Toronto beaches (open data); Ontario health units; San Diego County beach closures (US side)",
+  "source_ids": [
+   "xb-on-toronto-beaches"
+  ],
+  "machine_readable": true,
+  "scope": "great-lakes",
+  "notes": "Beaches on the US side are the US state's program."
+ },
+ "habs": {
+  "program": "not searched",
+  "source_ids": [],
+  "machine_readable": false,
+  "notes": "Lake Erie and Missisquoi Bay HABs are covered from the US side."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "Arizona DEQ Nogales Wash alerts (US side)"
+  ],
+  "watershed_groups": [
+   "Swim Drink Fish (Lake Ontario Waterkeeper, Swim Guide)"
+  ],
+  "swim_guide": true
+ },
+ "outfalls": {
+  "state_layer": "xb-qc-melccfp-os-annual",
+  "cso_inventory_gap": "EPA inventory stops at the border; Quebec has outfall points; Ontario has none public (WSER gives system points only)",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": false,
+  "shared_waters": [
+   "Lake Champlain, Missisquoi Bay (VT live, NY live; QC upstream via Pike and Missisquoi rivers)",
+   "Lake Memphremagog (VT live; Magog QC)",
+   "Lake Ontario and the St. Lawrence above Cornwall (NY live; Toronto, Hamilton, Kingston, Cornwall)",
+   "Niagara River (NY live; Niagara Falls, Fort Erie)",
+   "Lake Erie (NY, PA live; OH, MI not; Windsor, Port Colborne)",
+   "Detroit River, St. Clair River, Lake St. Clair (MI not live; Windsor, Amherstburg, Sarnia)",
+   "St. Marys River, Lake Superior (MI, WI, MN not live; Sault Ste. Marie ON, Thunder Bay)",
+   "Rainy River, Lake of the Woods (MN not live; Fort Frances, Kenora)",
+   "St. Croix River, Passamaquoddy Bay (ME live; St. Stephen NB)",
+   "Saint John River boundary reach (ME live; Edmundston NB)",
+   "St. Francis and upper Saint John headwaters (ME live; Pohénégamook, Dégelis QC)",
+   "Columbia River, Okanogan River, Lake Koocanusa (WA, ID, MT not live; Trail, Osoyoos, Elk Valley BC)",
+   "Salish Sea: Boundary Bay, Haro Strait, Strait of Juan de Fuca (WA not live; Victoria, White Rock, Metro Vancouver)",
+   "Tijuana River and Pacific shore (CA not live; Tijuana)",
+   "New River (CA not live; Mexicali)",
+   "Santa Cruz River, Nogales Wash (AZ not live; Nogales, Sonora)",
+   "Rio Grande (TX, NM not live; Ciudad Juárez, Nuevo Laredo, Reynosa, Matamoros)"
+  ],
+  "hydrography_note": "NHD and NLDI stop at the border. North: NRCan National Hydro Network / Canadian Hydrospatial Network (OGL-Canada); south: INEGI Red Hidrográfica; OpenStreetMap waterways for names on both. For waters flowing into the US the downstream reach starts at the boundary crossing, where NHD takes over."
+ },
+ "barriers": [
+  {
+   "kind": "bot_wall",
+   "what": "Utilities Kingston overflow map and log behind a Cloudflare challenge",
+   "fix_level": "owner",
+   "note": "ask for a feed or permission"
+  },
+  {
+   "kind": "bot_wall",
+   "what": "Niagara Region open data portal returned 403",
+   "fix_level": "engineering",
+   "note": ""
+  },
+  {
+   "kind": "bot_wall",
+   "what": "San Diego Water Board page blocks scripts (Incapsula); readable by a browser-like fetch",
+   "fix_level": "engineering",
+   "note": ""
+  },
+  {
+   "kind": "email_only",
+   "what": "USIBWC spill notification list serve",
+   "fix_level": "owner",
+   "note": "request to join"
+  },
+  {
+   "kind": "no_web",
+   "what": "Toronto, Hamilton, Sarnia, St. Stephen and Mexican utilities publish no event record",
+   "fix_level": "legislative",
+   "note": "foreign jurisdictions; the site can only name the gap"
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "USIBWC spill notification list serve (Tijuana River; Nogales protocol)",
+   "url": "https://www.ibwc.gov/",
+   "what": "Immediate email when CESPT or OOMAPAS reports a spill that can cross the border"
+  }
+ ],
+ "readiness": {
+  "tier": "B",
+  "expected_grade": "Dated reports, delayed",
+  "first_feed": "xb-qc-melccfp-os-annual",
+  "effort": "medium",
+  "rationale": "Shared waters next to live states (Lake Champlain and Memphremagog for VT/NY, Lake Ontario and the Niagara for NY, the St. Croix for ME) have only annual or monthly foreign data, except Windsor's bypass CSV (Detroit River, MI not live) and Kingston's map (bot wall). The best dated source, the Tijuana table, is beside California, which is not live. Start with Quebec's outfall points and monthly summaries for the Vermont waters.",
+  "order_hint": null
+ },
+ "owner_questions": [
+  "Show foreign monthly or annual totals (Quebec, WSER) on US water pages as 'monthly' or 'annual' marks, attributed to the foreign authority?",
+  "Treat the Tijuana River's ongoing transboundary flow (listed as one event since 2023-10-11) as a standing condition rather than an event?",
+  "Ask Utilities Kingston for data access, and join the USIBWC spill list?",
+  "Use the OpenStreetMap or NRCan networks north of the border, or stop at the boundary and attach foreign outfalls to the first US reach?"
+ ],
+ "surprise": "The richest cross-border event record is a California Water Board HTML table of Mexican spills, while Canada's best real-time overflow map (Kingston, on Lake Ontario beside New York) is behind a bot wall, and the Richelieu, the obvious Lake Champlain candidate, flows away from the US entirely."
+}

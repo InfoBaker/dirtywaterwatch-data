@@ -1,0 +1,25 @@
+id: "ct-deep-pr-2026-07-07"
+name: "CT DEEP press release 2026-07-07: water quality impacts after heavy rainfall"
+url: "https://portal.ct.gov/deep/news-releases/news-releases---2026/deep-reminds-residents-about-water-quality-impacts-water-safety-following-heavy-rainfall-events"
+homepage: "https://portal.ct.gov/deep/news-releases/news-releases---2026/deep-reminds-residents-about-water-quality-impacts-water-safety-following-heavy-rainfall-events"
+kind: "html"
+level: "state"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): '48-72 hrs' elevated
+#   risk; claims health risk 'isn't significant after rain events' in CT River due to dilution —
+#   conflicts with MA framing.
+# Access detail (research, quoted): Raw copy:
+#   research/science/raw/dl-adv/ct-deep-pr-2026-07-07-heavy-rain.html (fetched 2026-11-01 by the
+#   advisory sub-researcher; text read by the lead).
+# Can fill: advice_text
+cadence: null
+license: "none stated"
+attribution: "Connecticut Department of Energy and Environmental Protection"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["CT"]
+access: ["html"]
+access_detail: "Raw copy: research/science/raw/dl-adv/ct-deep-pr-2026-07-07-heavy-rain.html (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

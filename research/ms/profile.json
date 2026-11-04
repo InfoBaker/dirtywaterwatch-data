@@ -1,0 +1,176 @@
+{
+  "state": "MS",
+  "name": "Mississippi",
+  "region": "gulf",
+  "epa_region": 4,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "partial",
+    "summary": "Permittees must tell MDEQ within 24 hours and file a 5-day electronic report through EPA's NeT-SewerOverflow (since 2025-12-21). No statewide statute or rule requiring notice to the public was found; Jackson's consent-decree overflow response plan calls for news releases and signs for significant overflows.",
+    "citations": [
+      {
+        "cite": "MDEQ, Reporting Sanitary Sewer Overflows or Bypasses in Mississippi (updated 2024-05-03)",
+        "title": "NeT-SewerOverflow flyer",
+        "url": "https://www.mdeq.ms.gov/wp-content/uploads/2025/09/NETSSO-Flyer-Updated.pdf",
+        "quote": "Municipal and private sanitary sewer collection and treatment providers in Mississippi must report sanitary sewer overflows (SSOs) and/or bypasses to the Mississippi Department of Environmental Quality (MDEQ) within 24 hours of the event. ... Starting December 21, 2025, in addition to the 24-hr reporting requirement, an electronic report shall be submitted to the MDEQ within 5 days ... through NeT-SewerOverflow.",
+        "who": "owner or operator",
+        "channel": "MDEQ only (phone, email, voicemail; then NeT-SewerOverflow)",
+        "deadline": "24 hours; 5 days electronic",
+        "threshold": "any SSO or bypass",
+        "verified": "fetched"
+      },
+      {
+        "cite": "City of Jackson Sewer Overflow Response Plan (2013 consent decree)",
+        "title": "Public notice for significant overflows",
+        "url": "https://www.wlbt.com/2020/05/27/report-nearly-half-billion-gallons-raw-sewage-leaked-into-pearl-river-during-flood",
+        "quote": "(per press) a news release and temporary signs for significant overflows",
+        "who": "City of Jackson / JXN Water",
+        "channel": "news release; temporary signs",
+        "deadline": "unknown",
+        "threshold": "significant overflows",
+        "verified": "search_only"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "24 hours to MDEQ MCW Division (601-961-5177, voicemail accepted); 5-day electronic report",
+      "cite": "MDEQ permit conditions; NeT-SewerOverflow flyer"
+    },
+    "cso_permit_notice_clause": {
+      "permit": null,
+      "quote": "No CSO permits in Mississippi.",
+      "deadline": null,
+      "verified": "fetched"
+    },
+    "bills_and_cases": [
+      "United States and Mississippi v. City of Jackson (S.D. Miss.): 2013 sewer consent decree; 2023 interim stipulated order put the sewer system under JXN Water with quarterly public status reports.",
+      "Pearl Riverkeeper petitioned MDEQ to enforce Jackson's overflow response plan notice (press; date not confirmed)."
+    ]
+  },
+  "erule": {
+    "system": "epa",
+    "sobe_events_2026_11_03": 353,
+    "public_output_url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+    "notes": "MDEQ uses EPA's NeT-SewerOverflow; 47 permits filed. Rows carry coordinates (all 353), start, end, volume and receiving water."
+  },
+  "statewide_feed": {
+    "exists": true,
+    "source_ids": [
+      "ms-epa-sobe"
+    ],
+    "precision": "event",
+    "machine_readable": true,
+    "format": "csv",
+    "latency": "median 4 days from start to EPA receipt; daily extract",
+    "history": "January 2026 to date (a few 2023-2024 rows)",
+    "coordinates": "all",
+    "receiving_water": "named in child table (free text)",
+    "start_end": "start and end date-times",
+    "volume": true,
+    "stable_id": true,
+    "license": "EPA ECHO: US government data, public domain.",
+    "notes": "No MDEQ-run list or map of overflows found; the federal extract is the statewide feed."
+  },
+  "cso": {
+    "permits": 0,
+    "open_outfalls": 0,
+    "operators_with_web_channel": 0,
+    "operators_checked": 0,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "No CSOs in Mississippi."
+  },
+  "sso": {
+    "location_source": "ms-epa-sobe (lat/long per event)",
+    "feeds": [
+      "ms-epa-sobe"
+    ],
+    "notes": "Jackson County Utility Authority (Ocean Springs, 88) and Jackson Savanna Street (78) file the most; June 2026 had 125 events."
+  },
+  "beaches": {
+    "program": "Mississippi Beach Monitoring Program (MDEQ with USM Gulf Coast Research Laboratory)",
+    "source_ids": [
+      "ms-mdeq-beach-monitoring",
+      "ms-mdeq-beach-alerts"
+    ],
+    "machine_readable": true,
+    "scope": "coastal",
+    "notes": "21 stations; ArcGIS layer with advisory and closure flags, event type, start date and official beach segments."
+  },
+  "habs": {
+    "program": "HAB advisories and closures on the beach layer (coastal); freshwater by news release",
+    "source_ids": [
+      "ms-hab"
+    ],
+    "machine_readable": true,
+    "notes": "Freshwater HAB list not found."
+  },
+  "advisories": {
+    "health_department_pages": [
+      "MDEQ ad hoc water contact advisories (news releases)"
+    ],
+    "watershed_groups": [
+      "Pearl Riverkeeper",
+      "Gulf Restoration Network",
+      "Mississippi River Collaborative"
+    ],
+    "swim_guide": false
+  },
+  "outfalls": {
+    "state_layer": "https://mgis19.mdeq.ms.gov/arcgis/rest/services/Hosted/Current_NPDES_Points (not queried)",
+    "cso_inventory_gap": "none (no CSOs)",
+    "sso_points": "eRule"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Mississippi River (LA, AR, TN)",
+      "Pearl River (LA)",
+      "Tennessee-Tombigbee Waterway (AL)",
+      "Mississippi Sound and Gulf (AL, LA)",
+      "Pascagoula River and Escatawpa River (AL)"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "no_web",
+      "what": "No statewide duty to tell the public about an overflow; MDEQ itself does not post overflows.",
+      "fix_level": "legislative",
+      "note": "SOBE fills the gap with a lag of days."
+    },
+    {
+      "kind": "login",
+      "what": "The eRule reports go to EPA CDX (login for filers); public output only via EPA's daily extract.",
+      "fix_level": "engineering",
+      "note": "Already handled by the national SOBE ingester."
+    },
+    {
+      "kind": "sign_only",
+      "what": "From 2026-09-08 routine beach advisories go to signs and the website only (no texts or press releases), per press.",
+      "fix_level": "agency",
+      "note": "The website layer remains machine-readable."
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "MDEQ beach text alerts",
+      "url": "https://www.mdeq.ms.gov/11-beach-water-contact-advisories-in-effect",
+      "what": "text MDEQbeach to 95577 (older posts; may be retired)"
+    }
+  ],
+  "readiness": {
+    "tier": "A",
+    "expected_grade": "Dated reports, delayed",
+    "first_feed": "ms-epa-sobe",
+    "effort": "small",
+    "rationale": "Every SSO and bypass report since December 2025 reaches EPA's daily SOBE extract with coordinates, start, end, volume and receiving water; the national ingester already reads it. Median lag 4 days. Coastal beach advisories are on a public ArcGIS layer.",
+    "order_hint": 2
+  },
+  "owner_questions": [
+    "Accept a 4-day median lag (SOBE) as Mississippi's event grade, labelled 'Dated reports, delayed'?",
+    "Poll MDEQ news releases for ad hoc river water-contact advisories?"
+  ],
+  "surprise": "Mississippi's statewide overflow list is EPA's: MDEQ chose EPA's NeT-SewerOverflow tool, so every report since December 2025 is public with coordinates, while the state publishes nothing of its own on overflows."
+}

@@ -1,0 +1,23 @@
+id: "crc-bacteria-monitoring-post-2025"
+name: "Connecticut River Conservancy: Bacteria monitoring & sewer overflows (2025-08-20)"
+url: "https://www.ctriver.org/post/bacteria-monitoring-sewer-overflows"
+homepage: "https://www.ctriver.org/post/bacteria-monitoring-sewer-overflows"
+kind: "html"
+level: "nonprofit"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): Qualitative wet/dry
+#   and CSO findings; CSO email alert signup at https://www.ctriver.org/email (owner to subscribe).
+# Access detail (research, quoted): none recorded
+# Waters: Connecticut River main stem and tributaries (openboatlaunch slugs: connecticut-river-ma,
+#   connecticut-river-ct, connecticut-river-nh)
+cadence: null
+license: "none stated"
+attribution: "Connecticut River Conservancy"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["MA", "CT", "NH", "VT"]
+access: ["html"]
+access_detail: ""
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

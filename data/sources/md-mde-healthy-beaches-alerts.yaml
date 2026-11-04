@@ -1,0 +1,39 @@
+id: "md-mde-healthy-beaches-alerts"
+name: "MDE Maryland Healthy Beaches alerts layer (statewide beach status map)"
+url: "https://mde.maryland.gov/programs/water/MHB/Pages/Current-Conditions.aspx"
+homepage: "https://mde.maryland.gov/programs/water/MHB/Pages/Current-Conditions.aspx"
+kind: "arcgis"
+level: "state"
+# Notes (research/md, status candidate, verified fetched, checked 2026-11-02): Machine-readable
+#   statewide beach status with an 'Algae Bloom' and 'Closed' state; useful for advisories on Bay
+#   waters in season. Must poll and keep our own history.
+# Access detail (research, quoted): MapServer:
+#   https://mde.geodata.md.gov/mdedata/rest/services/WSA_Beaches/WSA_Healthy_Beaches_Alerts/MapServer/0/query?where=1%3D1&outFields=*&f=json
+#   (no auth). Embedded via ArcGIS web maps 724261e6ba0746bc9fa501f2d4f21de0 and
+#   c191def6630640739eb78ec9d5d0fcdc ('Beaches - HSB', snippet 'Maryland Healthy Beaches Alerts').
+#   189 features fetched as counts; 6 sample rows saved raw/beach-alerts-sample.json.
+#   mde.maryland.gov/beaches and marylandhealthybeaches.com redirect to the MHB home page.
+# Can fill: event_type (from Status), source_status, waterbody (beach name), coordinates, authority
+#   (county), advice_text (Description), source_updated_at (Update_Datetime)
+# Cannot fill: started_at; ended_at; volume; sample values; cause; valid_until; history (current
+#   state only)
+# Waters: 189 beach points in 20 counties (83 in Anne Arundel) (openboatlaunch slugs:
+#   chesapeake-bay-md, severn-river-md, magothy-river-md, rhode-river-md, west-river-md,
+#   deep-creek-lake-md, isle-of-wight-bay-md, assawoman-bay-md, sinepuxent-bay-md)
+# History: Current status only; annual Healthy Beaches reports (PDF) for history.
+# Research notes: MDE page text: 'Avoid swimming within 48 hours of a heavy rain event.' and 'If
+#   there is sewage or some other hazardous condition in the water, the local health department will
+#   close the beach because there is a known risk to health.' Legend: 'Advisory (yellow) - Results
+#   for water quality samples collected from this area do not meet the State Beach Action Value.'
+cadence: "Season Memorial Day to Labor Day. Off-season on 2026-11-02: 188 'No Data', 1 'Not Recommended' (Baltimore City). Update_Datetime 2026-08-26; last_edited_date 2026-11-02 19:49 on all rows (bulk rewrite)."
+license: "Layer description credits 'WSA, FSP, MDE'; no licence text found. Map legend statuses: Not Recommended, Open, Advisory, Algae Bloom, Closed, No Data."
+attribution: "Maryland Department of the Environment (local health departments sample and notify)"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure", "hab_advisory"]
+states: ["MD"]
+access: ["arcgis", "map_only", "html"]
+access_detail: "MapServer: https://mde.geodata.md.gov/mdedata/rest/services/WSA_Beaches/WSA_Healthy_Beaches_Alerts/MapServer/0/query?where=1%3D1&outFields=*&f=json (no auth). Embedded via ArcGIS web maps 724261e6ba0746bc9fa501f2d4f21de0 and c191def6630640739eb78ec9d5d0fcdc ('Beaches - HSB', snippet 'Maryland Healthy Beaches Alerts'). 189 features fetched as counts; 6 sample rows saved raw/beach-alerts-sample.json. mde.maryland.gov/beaches and marylandhealthybeaches.com redirect to the MHB home page."
+machine_readable: true
+legal_basis: "COMAR 26.08.09 Public Bathing Beaches"
+checked: "2026-11-02"

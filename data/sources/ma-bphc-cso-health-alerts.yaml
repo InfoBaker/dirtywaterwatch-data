@@ -1,0 +1,25 @@
+id: "ma-bphc-cso-health-alerts"
+name: "Boston Public Health Commission 'Combined Sewer Overflow Health Alerts'"
+url: "https://boston.gov/government/cabinets/boston-public-health-commission/combined-sewer-outflow-health-alerts"
+homepage: "https://boston.gov/government/cabinets/boston-public-health-commission/combined-sewer-outflow-health-alerts"
+kind: "html"
+level: "municipal"
+# Notes (research/ma, status candidate, verified search_only, checked 2026-11-01): A local board of
+#   health that publishes 16.09 warnings online; the model for 'authority' advisories on top of
+#   permittee notices.
+# Access detail (research, quoted): Search result: posts board-of-health warnings under 314 CMR
+#   16.09; advises avoiding contact for at least 48 hours after a discharge.
+# Waters: Boston waters (Boston Harbor, Fort Point Channel, Charles, Mystic) (openboatlaunch slugs:
+#   charles-river-ma, mystic-river-ma, dorchester-bay-ma)
+cadence: null
+license: "none stated"
+attribution: "Boston Public Health Commission"
+enabled: true
+role: "advisories"
+event_types: ["cso"]
+states: ["MA"]
+access: ["html"]
+access_detail: "Search result: posts board-of-health warnings under 314 CMR 16.09; advises avoiding contact for at least 48 hours after a discharge."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

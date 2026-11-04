@@ -1,0 +1,204 @@
+{
+ "state": "IL",
+ "name": "Illinois",
+ "region": "great-lakes",
+ "epa_region": 5,
+ "npdes_authority": "state",
+ "great_lakes_basin": "part",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "partial",
+  "summary": "The 42 Chicago-area CSO permits (Chicago, MWRD and the TARP suburbs) are Great Lakes Basin CSO permits: under 40 CFR 122.38 they must notify the public electronically within 4 hours of becoming aware of a CSO; MWRD does this by email/SMS alerts and a map for itself and the suburbs. Downstate CSO permits carry a permit notification condition (NMC #8, no deadline found). No Illinois statute or rule requiring public notice of SSOs or bypasses was found; those go to Illinois EPA within 24 hours.",
+  "citations": [
+   {
+    "cite": "40 CFR 122.38(a)(3)",
+    "title": "Public notification requirements for CSO discharges to the Great Lakes Basin",
+    "url": "https://www.ecfr.gov/current/title-40/chapter-I/subchapter-D/part-122/subpart-B/section-122.38",
+    "quote": "As soon as possible, but no later than four (4) hours after becoming aware by monitoring, modeling or other means that a CSO discharge has occurred, the Great Lakes Basin CSO permittee shall provide public notification of CSO discharges. The Great Lakes Basin CSO permittee shall provide public notification of CSO discharges electronically, such as by text, email, social media alerts to subscribers or by posting a notice on its public access website",
+    "who": "Great Lakes Basin CSO permittee (42 Chicago-area permits per EPA)",
+    "channel": "text, email, social media or website; signs at outfalls and access areas; local health department within 4 hours",
+    "deadline": "4 hours; supplemental notice within 7 days",
+    "threshold": "any CSO discharge",
+    "verified": "fetched"
+   },
+   {
+    "cite": "EPA Great Lakes CSO list, Illinois",
+    "title": "Combined Sewer Overflows in the Great Lakes Basin: Illinois",
+    "url": "https://19january2025snapshot.epa.gov/npdes/combined-sewer-overflows-great-lakes-basin-illinois/index.html",
+    "quote": "All 42 of these NPDES CSO permits are in the Chicago metropolitan area.",
+    "who": "EPA",
+    "channel": "n/a",
+    "deadline": "n/a",
+    "threshold": "n/a",
+    "verified": "fetched"
+   },
+   {
+    "cite": "Illinois EPA SSO notification form; NPDES standard conditions (40 CFR 122.41(l)(6))",
+    "title": "Sanitary sewer overflow notification to Illinois EPA",
+    "url": "https://epa.illinois.gov/",
+    "quote": "Within 24 hours of the occurrence, notify the Illinois EPA regional wastewater staff by telephone, FAX, email or voice mail",
+    "who": "permittee",
+    "channel": "Illinois EPA regional office only",
+    "deadline": "24 hours; 5-day written report (now electronic via NeT-SewerOverflow)",
+    "threshold": "any SSO",
+    "verified": "search_only"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours to the Illinois EPA regional office, written report within 5 days (electronic through EPA NeT-SewerOverflow)",
+   "cite": "NPDES permit standard conditions; 40 CFR 122.41(l)(6); 40 CFR 127"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "IL0028053",
+   "quote": "MWRD's public notification program is required by Special Condition 13.14 of the Stickney and Calumet WRP permits (per MWRD representative monitoring plan; permit text not read). MWRD: \"CSO notifications are available via both email and SMS/text\" and \"provides notification of CSO events and waterway diversions to Lake Michigan within the MWRD service area.\"",
+   "deadline": "4 hours (40 CFR 122.38)",
+   "verified": "search_only"
+  },
+  "bills_and_cases": [
+   "No 2025-2026 Illinois bill on sewage overflow public notice found (search only).",
+   "City of Chicago CSO permit IL0045012 reissued 2024-04-01 with 10 outfalls designated 'Sensitive Areas' near boat launches and a warning-light pilot (WTTW, Friends of the Chicago River)."
+  ]
+ },
+ "erule": {
+  "system": "EPA NeT-SewerOverflow",
+  "sobe_events_2026_11_03": 1687,
+  "public_output_url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "notes": "267 Illinois permits, events from 2024-10-01. Illinois EPA's 2016 plan said it would follow EPA's NeT tool schedule. Chicago, MWRD and the ILM580 suburban CSO permits have no CSO-typed rows."
+ },
+ "statewide_feed": {
+  "exists": true,
+  "source_ids": [
+   "il-epa-sobe-events"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "median 3 days from start to receipt (90th percentile 11 days); EPA refresh daily",
+  "history": "2024-10-01 to date",
+  "coordinates": "all",
+  "receiving_water": "free text, separate table",
+  "start_end": "start and end datetime, duration",
+  "volume": true,
+  "stable_id": true,
+  "license": "EPA public data; no restriction stated",
+  "notes": "sewer_overflow_bypass_event_key is stable; event_transaction_type marks revisions. Missing the Cook County CSO systems, which MWRD covers."
+ },
+ "cso": {
+  "permits": 120,
+  "open_outfalls": 691,
+  "operators_with_web_channel": 45,
+  "operators_checked": 46,
+  "state_outfall_layer": "il-mwrd-cso-points",
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "Cook County: MWRD alerts by email/SMS (Smart911), a daily 'Possible CSO Events' map and a per-outfall CSO Event Synopsis Report; suburbs rely on MWRD. Downstate: SOBE rows for some permits (Pekin 115 CSO rows); own channels mostly not found or not searched. 45 of 46 checked CSO permits rely on MWRD channels (only MWRD itself runs them); the other 74 downstate permits were checked only against SOBE."
+ },
+ "sso": {
+  "location_source": "EPA SOBE (every Illinois row has coordinates)",
+  "feeds": [
+   "il-epa-sobe-events"
+  ],
+  "notes": "1,256 SSO rows and 90 bypass rows; largest reporters Marion (92), Four Rivers Sanitation Authority (64), Lawrenceville (56)."
+ },
+ "beaches": {
+  "program": "IDPH Illinois BeachGuard (public and private licensed beaches incl. Lake Michigan, data entered by county health departments and park districts); Chicago Park District qPCR testing",
+  "source_ids": [
+   "il-idph-beachguard",
+   "il-chicago-beach-lab-data",
+   "il-lake-county-beaches"
+  ],
+  "machine_readable": true,
+  "scope": "all",
+  "notes": "BeachGuard has an RSS feed of current advisories and closures; several stale entries."
+ },
+ "habs": {
+  "program": "Illinois EPA Harmful Algal Bloom program (routine sites plus Bloom Report Form) and Algal Bloom Dashboard",
+  "source_ids": [
+   "il-iepa-hab-program"
+  ],
+  "machine_readable": false,
+  "notes": "Dashboard endpoint not traced."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "https://idph.illinois.gov/envhealth/ilbeaches/public/",
+   "https://www.lakecountyil.gov/2385/Beach-Monitoring-and-Advisories"
+  ],
+  "watershed_groups": [
+   "Friends of the Chicago River",
+   "Alliance for the Great Lakes (not searched)"
+  ],
+  "swim_guide": true
+ },
+ "outfalls": {
+  "state_layer": "MWRD CSO Points (441 Cook County outfalls, 51 owners, monitored flag)",
+  "cso_inventory_gap": "unknown",
+  "sso_points": "eRule"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Lake Michigan (WI, IN, MI)",
+   "Mississippi River (IA, MO, WI, KY)",
+   "Ohio River (KY, IN)",
+   "Wabash River (IN)",
+   "Rock River (WI)",
+   "Fox River (WI)",
+   "Des Plaines River (WI)",
+   "Calumet River / Little Calumet (IN)",
+   "Illinois Waterway to the Mississippi"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "email_only",
+   "what": "MWRD CSO alerts go only to Smart911 email/SMS subscribers; the public web shows a daily-reset map and a later report.",
+   "fix_level": "owner",
+   "note": "Owner sign-up to Smart911 (third-party account)."
+  },
+  {
+   "kind": "no_web",
+   "what": "No Illinois rule requires public notice of SSOs or bypasses; operators report only to Illinois EPA.",
+   "fix_level": "legislative",
+   "note": "SOBE makes the reports visible with a few days' delay."
+  },
+  {
+   "kind": "login",
+   "what": "MWRD TARP reservoir levels service is token-protected (HTTP 403).",
+   "fix_level": "agency",
+   "note": ""
+  },
+  {
+   "kind": "sign_only",
+   "what": "Chicago's planned CSO warning lights at four boat launches would be on-site only unless the City also publishes their state.",
+   "fix_level": "operator",
+   "note": "Pilot not confirmed live."
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "MWRD CSO notifications (email and SMS)",
+   "url": "https://www.smart911.com/smart911/ref/reg.action?pa=mwrdcso",
+   "what": "CSO events and Lake Michigan diversions in the MWRD service area"
+  },
+  {
+   "name": "IDPH BeachGuard RSS",
+   "url": "https://idph.illinois.gov/envhealth/ilbeaches/public/RssFeed.aspx",
+   "what": "Current beach advisories and closures (no sign-up needed)"
+  }
+ ],
+ "readiness": {
+  "tier": "A",
+  "expected_grade": "Dated reports, delayed",
+  "first_feed": "il-epa-sobe-events",
+  "effort": "medium",
+  "rationale": "EPA's daily SOBE tables carry 1,687 Illinois events with start, end, volume and coordinates, so the statewide feed exists and is already ingested for other states. Latency is a median 3 days, hence 'delayed'. Cook County CSOs are missing from SOBE and need a second ingester: the MWRD CSO Event Synopsis Report (per-outfall open/close times) plus the Possible CSO Events layer as a same-day signal, which would make the Chicago area 'Dated reports'.",
+  "order_hint": 1
+ },
+ "owner_questions": [
+  "Subscribe to MWRD Smart911 CSO alerts (email) so the 4-hour notices can be timed against the map and the synopsis report?",
+  "Accept a session-based scraper for the MWRD CSO Event Synopsis Report (ASP.NET ReportViewer CSV export), or ask MWRD for a direct feed?",
+  "Show downstate CSO permits with no SOBE CSO rows as 'No public reports' or wait for an ECHO DMR check?"
+ ],
+ "surprise": "Illinois is the one heavy-CSO state where EPA's own event tables already work statewide (1,687 events, all with coordinates), yet they miss Chicago entirely: the City, MWRD and 37 suburban CSO permits file nothing there, and the Chicago record lives in an MWRD report server with per-outfall gate open and close times back to 2016."
+}

@@ -1,0 +1,30 @@
+id: "vt-burlington-beach-status-arcgis"
+name: "BTV Beach Status (Beach Closure Tracker)"
+url: "https://maps.burlingtonvt.gov/arcgis/rest/services/BTV_Beach_Status/MapServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson"
+homepage: "https://www.burlingtonvt.gov/1219/Beach-Closure-Tracker"
+kind: "arcgis"
+level: "municipal"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Best
+#   machine-readable municipal source in VT; poll and snapshot
+# Access detail (research, quoted): Public MapServer layer 0, no token; GeoJSON output. Page:
+#   https://www.burlingtonvt.gov/1219/Beach-Closure-Tracker. Latest status per site only, no history
+#   table.
+# Can fill: source_status, source_updated_at, location_text, coordinates, geometry, advice_text,
+#   waterbody, raw_record
+# Cannot fill: volume; started_at; outfall; material
+# Waters: Lake Champlain beaches in Burlington (12 points) (openboatlaunch slugs: lake-champlain-vt)
+# History: none (current state only)
+# Research notes: RED = 'Combined Sewer Outflow' among closure reasons. No CSO-outfall layer is
+#   public on maps.burlingtonvt.gov; the OpenGov folder requires a token.
+cadence: "live Memorial Day to Labor Day"
+license: "none stated"
+attribution: "City of Burlington Parks, Recreation & Waterfront / DPW"
+enabled: true
+role: "advisories"
+event_types: ["beach_closure", "cso", "cyanobacteria"]
+states: ["VT"]
+access: ["arcgis", "api", "html"]
+access_detail: "Public MapServer layer 0, no token; GeoJSON output. Page: https://www.burlingtonvt.gov/1219/Beach-Closure-Tracker. Latest status per site only, no history table."
+machine_readable: true
+legal_basis: "10 V.S.A. 1295 (posting recreation areas within 1 mile)"
+checked: "2026-11-01"

@@ -1,0 +1,26 @@
+id: "ct-deep-spill-incidents-socrata"
+name: "CT DEEP Emergency Response 'Spill Incidents from July 1, 2022 to Recent for Download' (data.ct.gov ffju-s5c5)"
+url: "https://data.ct.gov/resource/ffju-s5c5.json"
+homepage: "https://data.ct.gov/resource/ffju-s5c5.json"
+kind: "api"
+level: "state"
+# Notes (research/ct, status candidate, verified fetched, checked 2026-11-01): Independent second
+#   channel: dispatch-call log including 'Sewage Incident' type (1,866 sewage rows since 2022-07);
+#   public domain; monthly refresh; no volumes in most rows.
+# Access detail (research, quoted): Socrata SODA, no auth: ?$where=upper(chemicals) like
+#   '%SEWAGE%'&$order=reported_date DESC. 16,925 rows total. Older set wr2a-rnsg (1996-2022-06).
+# Can fill: source_record_id, reported_at, started_at, location_text, event_type (from description)
+# Cannot fill: ended_at; volume (mostly); waterbody (sometimes in description); coordinates
+# History: 2022-07-01 onward; 1996-2022 in wr2a-rnsg
+cadence: "'about once a month' (rowsUpdatedAt 2026-10-14)"
+license: "Public Domain (dataset metadata)"
+attribution: "CT DEEP Emergency Response and Spill Prevention Division"
+enabled: true
+role: "events"
+event_types: ["cso", "sso"]
+states: ["CT"]
+access: ["api", "csv"]
+access_detail: "Socrata SODA, no auth: ?$where=upper(chemicals) like '%SEWAGE%'&$order=reported_date DESC. 16,925 rows total. Older set wr2a-rnsg (1996-2022-06)."
+machine_readable: true
+legal_basis: "CGS 22a-450"
+checked: "2026-11-01"

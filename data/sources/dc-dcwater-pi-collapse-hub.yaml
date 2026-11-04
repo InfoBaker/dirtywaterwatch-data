@@ -1,0 +1,25 @@
+id: "dc-dcwater-pi-collapse-hub"
+name: "DC Water Potomac Interceptor Collapse hub page"
+url: "https://www.dcwater.com/about-dc-water/media/potomac-interceptor-collapse"
+homepage: "https://www.dcwater.com/about-dc-water/media/potomac-interceptor-collapse"
+kind: "html"
+level: "utility"
+# Notes (research/dc, status used, verified fetched, checked 2026-11-02): Primary record of the 2026
+#   collapse; source for events.
+# Access detail (research, quoted): Fetched. Links news & updates, the Environmental Rehabilitation
+#   Plan (2026-02-26), the April 2026 Emergency Repair and Rehabilitation Plan, NPS special use
+#   permit, inspection reports, CEO testimony (2026-05-20), and the water quality monitoring page.
+# Waters: Potomac River from Lock 10 / Clara Barton Parkway (Montgomery County, MD) downstream
+#   through DC (openboatlaunch slugs: potomac-river-dc, potomac-river-md)
+cadence: null
+license: "none stated"
+attribution: "DC Water"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["DC"]
+access: ["html", "pdf"]
+access_detail: "Fetched. Links news & updates, the Environmental Rehabilitation Plan (2026-02-26), the April 2026 Emergency Repair and Rehabilitation Plan, NPS special use permit, inspection reports, CEO testimony (2026-05-20), and the water quality monitoring page."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

@@ -1,0 +1,183 @@
+{
+ "state": "KY",
+ "name": "Kentucky",
+ "region": "ohio-valley",
+ "epa_region": 4,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "none",
+  "summary": "Kentucky law requires a permittee to tell the Division of Water immediately (by phone) of a spill, bypass or overflow that may endanger health; no state rule requiring the operator or the state to tell the public was found. Public notice exists only where a consent decree or utility practice provides it (Louisville MSD, SD1).",
+  "citations": [
+   {
+    "cite": "401 KAR 5:065 Section 2(5)",
+    "title": "KPDES permit conditions: reporting",
+    "url": "https://apps.legislature.ky.gov/law/kar/titles/401/005/065/",
+    "quote": "If a spill or release of pollutants or contaminants, bypass, upset, or other event of noncompliance occurs that may present an imminent or substantial danger to the environment or the public health or welfare, the permittee shall immediately notify the Division of Water by calling the Division of Water in Frankfort at (502) 564-3410 or the appropriate regional field office",
+    "who": "permittee",
+    "channel": "phone to the Division of Water (24-hour environmental emergency line after hours)",
+    "deadline": "immediately; then 40 CFR 122.41 (24 hours oral, 5 days written)",
+    "threshold": "events that may present an imminent or substantial danger",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "immediately by phone; 24 hours / 5 days written per 40 CFR 122.41(l)(6)",
+   "cite": "401 KAR 5:065 Section 2(5)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "KY0022411",
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "Louisville MSD consent decree (2005, amended 2009): the public advisory system is assumed to derive from it (not read).",
+   "SD1 amended consent decree, 2019.",
+   "Lexington-Fayette UCG SSO consent decree, 2008, modified 2015 and 2024.",
+   "No 2025-2026 Kentucky bill on sewage public notice found (search only)."
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 43,
+  "public_output_url": null,
+  "notes": "Kentucky's own system (ES2, form sets KY-112xx, 'Incident ID' from the Cabinet) pushed 43 SSO/bypass events to EPA for reports received December 2025 to January 2026, with coordinates; none since. No state public output found."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [
+   "ky-sobe-erule-state-system"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "unknown (flow stopped after 2026-01)",
+  "history": "2025-12 to 2026-01 only",
+  "coordinates": "all",
+  "receiving_water": "separate table, mostly 'Unnamed Tributary or Unknown'",
+  "start_end": "start and end datetimes",
+  "volume": true,
+  "stable_id": true,
+  "license": "EPA public data",
+  "notes": "No state-published list. The only statewide event data are the 43 SOBE rows; treat as a watch item, not a feed."
+ },
+ "cso": {
+  "permits": 17,
+  "open_outfalls": 289,
+  "operators_with_web_channel": 2,
+  "operators_checked": 3,
+  "state_outfall_layer": "https://services3.arcgis.com/ghsX9CKghMvyYjBU/arcgis/rest/services/Ky_DOW_Combined_Sewer_Overflow_Sites_WM_gdb/FeatureServer/0",
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "Louisville MSD: system-wide advisory banner (48 hours after rain) and dated MSD-02 discharge notices; SD1: rule-based email/text alerts May-October (0.25 inch rain or Ohio River above 38 feet, 72 hours) and signs; the 11 smaller CSO towns (Owensboro, Maysville, Henderson, Frankfort, Paducah, Ashland and others) not searched individually."
+ },
+ "sso": {
+  "location_source": "SOBE rows (coordinates) for Dec 2025-Jan 2026 only",
+  "feeds": [
+   "ky-sobe-erule-state-system"
+  ],
+  "notes": "Lexington has an SSO consent decree but no public overflow list was found."
+ },
+ "beaches": {
+  "program": "No BEACH Act program; standing stream swimming advisories by DOW and Public Health; ORSANCO weekly Ohio River bacteria in season",
+  "source_ids": [
+   "ky-dow-swimming-advisories",
+   "ky-orsanco-bacteria"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": "State park and Corps lake beaches not researched."
+ },
+ "habs": {
+  "program": "Kentucky DOW HAB program with HAB Viewer (ArcGIS)",
+  "source_ids": [
+   "ky-dow-hab-viewer"
+  ],
+  "machine_readable": true,
+  "notes": "Point layer with HABSTART, HABEND, HABSTATUS and a text status description."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "https://eec.ky.gov/Environmental-Protection/Water/Monitor/Pages/Swimming-Advisories.aspx"
+  ],
+  "watershed_groups": [
+   "ORSANCO (interstate)"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": "https://services3.arcgis.com/ghsX9CKghMvyYjBU/arcgis/rest/services/Ky_DOW_Combined_Sewer_Overflow_Sites_WM_gdb/FeatureServer/0",
+  "cso_inventory_gap": "none: state layer 286 active sites vs EPA 289 open; state points are named",
+  "sso_points": "eRule"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Ohio River (WV, OH, IN, IL)",
+   "Big Sandy River and Tug Fork (WV)",
+   "Cumberland River (TN)",
+   "Mississippi River (MO, TN)",
+   "Licking River into the Ohio at Cincinnati (OH)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "No law requires public notice; the Division of Water keeps reports by phone and its own system with no public output",
+   "fix_level": "legislative",
+   "note": "401 KAR 5:065 only requires notice to the Division."
+  },
+  {
+   "kind": "records_request",
+   "what": "ERT incident records and CSO annual reports are available only on request",
+   "fix_level": "agency",
+   "note": "KRS 224.10-210; the annual reports are emailed to the Division."
+  },
+  {
+   "kind": "email_only",
+   "what": "SD1 overflow alerts reach only subscribers",
+   "fix_level": "owner",
+   "note": "Sign up; the rule itself is public and reproducible."
+  },
+  {
+   "kind": "bot_wall",
+   "what": "ORSANCO bacteria pages behind Cloudflare",
+   "fix_level": "engineering",
+   "note": "403 to curl and WebFetch."
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "SD1 Wet Weather Overflow Notifications",
+   "url": "https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra",
+   "what": "email/text alerts May-October on 0.25 inch rain or Ohio River above 38 feet; 72-hour advisories"
+  },
+  {
+   "name": "Louisville MSD water quality email list",
+   "url": "https://louisvillemsd.org/",
+   "what": "footer link 'Water Quality Email List Signup'; contents unknown"
+  },
+  {
+   "name": "Louisville Metro GovDelivery (KYLOUISVILLE)",
+   "url": "https://public.govdelivery.com/accounts/KYLOUISVILLE/subscriber/new",
+   "what": "Metro bulletins; MSD community messages on large events"
+  }
+ ],
+ "readiness": {
+  "tier": "B",
+  "expected_grade": "Dated reports, delayed",
+  "first_feed": "ky-louisville-msd-overflow-advisory",
+  "effort": "medium",
+  "rationale": "No statewide public feed (the eRule flow to EPA stopped in January 2026), but the two operators holding 208 of 289 open CSOs publish something dated: Louisville MSD's advisory banner and MSD-02 notices (snapshot polling), SD1's rule-based alerts (reproducible from rain and river stage). The rest of the state is outfalls, rain caution and HAB layer.",
+  "order_hint": 2
+ },
+ "owner_questions": [
+  "Treat Louisville MSD's MSD-01 banner as an authority advisory (red, quoted, 48 hours after rain) or as a caution matching the site's yellow?",
+  "Should the SD1 rule (0.25 inch or river above 38 ft, 72 hours) be written into data/rules.json for Northern Kentucky reaches?",
+  "Subscribe to SD1 and Louisville MSD email lists?",
+  "Ask the Division of Water whether its eRule flow to EPA will resume (the 43 SOBE rows stopped in January 2026)?"
+ ],
+ "surprise": "Kentucky's state reporting system did reach EPA's national overflow table, with coordinates and incident numbers, for exactly two months (December 2025 and January 2026) and then stopped; and the free-text descriptions it sent name the people who called in."
+}

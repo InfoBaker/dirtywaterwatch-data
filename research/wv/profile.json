@@ -1,0 +1,176 @@
+{
+ "state": "WV",
+ "name": "West Virginia",
+ "region": "ohio-valley",
+ "epa_region": 3,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "none",
+  "summary": "Anyone responsible for a spill or accidental discharge, sewage included, must report immediately to the DEP emergency line; no duty to tell the public was found. CSO permittees give notice through annual newspaper legal ads and outfall signs under their permits (Nine Minimum Controls). A 2025 bill for 24-hour public notice by DEP did not pass.",
+  "citations": [
+   {
+    "cite": "W. Va. Code R. § 46-03-2 (LII numbering)",
+    "title": "Reporting spills and accidental discharges (verbatim text not captured; summary fetch says notice must be immediate to 1-800-642-3074 and covers sewage)",
+    "url": "https://law.cornell.edu/regulations/west-virginia/W-Va-C-S-R-SS-46-03-2",
+    "quote": null,
+    "who": "person responsible",
+    "channel": "DEP emergency notification number 1-800-642-3074",
+    "deadline": "immediate",
+    "threshold": "any spill or accidental discharge, including sewage",
+    "verified": "fetched"
+   },
+   {
+    "cite": "Wheeling CSO public notice (permit WV0023230)",
+    "title": "Annual CSO legal notice",
+    "url": "https://wvlegals.com/?p=9121",
+    "quote": "All CSO discharge points have been clearly marked for easy identification by the general public. Each CSO location has a 24″ x 24″ sign which identifies the City NPDES number and the particular outfall CSO number.",
+    "who": "CSO permittee",
+    "channel": "newspaper legal notice; signs",
+    "deadline": "annual (permit-driven, assumed)",
+    "threshold": "all CSO outfalls",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "immediate (phone); 24 hours / 5 days per permit standard conditions (assumed, 40 CFR 122.41)",
+   "cite": "W. Va. Code R. § 46-03-2; 47CSR10 standard conditions (not fetched)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "WV0023230",
+   "quote": null,
+   "deadline": "annual notice inferred from the newspaper ads",
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "HB 3217 (2025 regular session): DEP public notice within 24 hours of any reported spill including sewage, and an online spill database; introduced 2025-03-07, referred to Energy and Public Works, not passed (search found nothing further)."
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "WV DEP Electronic Submission System per its 2017 Phase 2 plan; no WV rows in SOBE."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": null,
+  "receiving_water": null,
+  "start_end": null,
+  "volume": null,
+  "stable_id": null,
+  "license": null,
+  "notes": "No public spill or overflow list; HB 3217 would have created one."
+ },
+ "cso": {
+  "permits": 62,
+  "open_outfalls": 511,
+  "operators_with_web_channel": 0,
+  "operators_checked": 2,
+  "state_outfall_layer": "https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24",
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "Annual newspaper legal notices (wvlegals.com) and outfall signs; standing after-rain advice (Wheeling: 24 hours after 0.10 inch). No event notices found for any CSO town."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [],
+  "notes": "SSO reports go to the DEP spill line; no public output."
+ },
+ "beaches": {
+  "program": "No BEACH Act program (no coastal or Great Lakes shore); ORSANCO Ohio River bacteria at Wheeling and Huntington; state park lakes not researched",
+  "source_ids": [
+   "wv-orsanco-bacteria"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": ""
+ },
+ "habs": {
+  "program": "WV DEP / DHHR HAB response plan (2018) with an ArcGIS advisory service and online report app",
+  "source_ids": [
+   "wv-dep-hab-advisories"
+  ],
+  "machine_readable": true,
+  "notes": "Empty in November."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "https://oehs.wvdhhr.org/news/information-on-cyanobacterial-blooms-blue-green-algae-blooms-or-harmful-algal-blooms/"
+  ],
+  "watershed_groups": [
+   "ORSANCO (interstate)"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": "https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24",
+  "cso_inventory_gap": "small: state layer 519 current CSO outlets for 61 permits vs EPA 511 open; adds outlet numbers and points",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Ohio River (PA, OH, KY)",
+   "Monongahela River (PA)",
+   "Potomac and North Branch Potomac (MD, VA)",
+   "Big Sandy and Tug Fork (KY)",
+   "Cheat River (PA)",
+   "Shenandoah River (VA)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "Spill and overflow reports go by phone to DEP with no public list",
+   "fix_level": "legislative",
+   "note": "HB 3217 (2025) would fix it."
+  },
+  {
+   "kind": "print_only",
+   "what": "CSO public notice is an annual newspaper legal ad and signs",
+   "fix_level": "agency",
+   "note": "Permit Nine Minimum Controls clause could require web notice."
+  },
+  {
+   "kind": "records_request",
+   "what": "Spill files via FOIA (DEPFOIA) or ApplicationXtender documents",
+   "fix_level": "agency",
+   "note": ""
+  },
+  {
+   "kind": "bot_wall",
+   "what": "ORSANCO bacteria pages",
+   "fix_level": "engineering",
+   "note": ""
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "West Virginia Legals notice alerts",
+   "url": "https://wvlegals.com/",
+   "what": "newspaper legal notices by county, including CSO annual notices and NPDES permit notices"
+  }
+ ],
+ "readiness": {
+  "tier": "C",
+  "expected_grade": "Monthly totals only",
+  "first_feed": "wv-dep-npdes-outlets",
+  "effort": "small",
+  "rationale": "WV has the most CSO towns in the region but no event channel at all: no state list, no operator web notices found, no SOBE rows. Build outfalls from the state layer (better than EPA), the rain caution, ECHO monthly DMR counts where permits carry CSO parameters (unknown), and the HAB layer.",
+  "order_hint": 4
+ },
+ "owner_questions": [
+  "Accept 'Monthly totals only' for WV before confirming that its CSO permits report event counts on DMRs?",
+  "Use each town's own stated after-rain period (Wheeling: 24 hours after 0.10 inch) or the site's 72-hour caution? The rule says the site's caution unless overridden with rationale.",
+  "Subscribe to wvlegals.com notice alerts for CSO and NPDES notices?"
+ ],
+ "surprise": "West Virginia's 62 CSO towns tell the public through a once-a-year newspaper legal ad and a sign at each outfall; Wheeling's ad tells people to stay out for 24 hours after 0.10 inch of rain, a third of the site's caution window."
+}

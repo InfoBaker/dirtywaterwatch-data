@@ -1,0 +1,23 @@
+id: "us-epa-beach-guidance-2014"
+name: "EPA National Beach Guidance and Required Performance Criteria for Grants, 2014 Edition (EPA-823-B-14-001)"
+url: "https://www.epa.gov/sites/default/files/2018-12/documents/national-beach-guidance-2014-report.pdf"
+homepage: "https://www.epa.gov/sites/default/files/2018-12/documents/national-beach-guidance-2014-report.pdf"
+kind: "pdf"
+level: "federal"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): Notification wording,
+#   preemptive advisories after rain and sewage spills, sign design, NYC text templates, culture
+#   18–48 h.
+# Access detail (research, quoted): 116 pp extracted; chapters 4–5 read.
+# Waters: n/a (science/guidance)
+cadence: null
+license: "public domain (U.S. federal government work); no licence line on page"
+attribution: "U.S. Environmental Protection Agency"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["US"]
+access: ["pdf"]
+access_detail: "116 pp extracted; chapters 4–5 read."
+machine_readable: false
+legal_basis: "CWA §406 (BEACH Act)"
+checked: "2026-11-01"

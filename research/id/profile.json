@@ -1,0 +1,160 @@
+{
+ "state": "ID",
+ "name": "Idaho",
+ "region": "mountain",
+ "epa_region": 10,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "partial",
+  "summary": "No Idaho statute or rule found that requires public notice of a sewage spill. Municipal permits (West Boise read) require an overflow public-notification plan and immediate notice to 'the public, health agencies and other affected entities', with the channel left to the plan; overflows are phoned to DEQ regional offices within 24 hours. IPDES took the program from EPA Region 10 in stages, 2018 to 2021.",
+  "citations": [
+   {
+    "cite": "Permit ID0023981 (West Boise) Part III.I",
+    "title": "Public Notification",
+    "url": "https://www.epa.gov/sites/default/files/2017-10/documents/r10-npdes-boise-west-id0023981-final-permit-mod-2016.pdf",
+    "quote": "The permittee must immediately notify the public, health agencies and other affected entities (e.g., public water systems) of any overflow which the permittee owns or has operational control; or any unanticipated bypass or upset that exceeds any effluent limitation in the permit in accordance with the notification procedures developed in accordance with Part II.G.",
+    "who": "permittee",
+    "channel": "per the permittee's emergency response and public notification plan",
+    "deadline": "immediately",
+    "threshold": "any overflow the permittee owns or controls",
+    "verified": "fetched"
+   },
+   {
+    "cite": "Permit ID0023981 Part III.G",
+    "title": "Twenty-four hour notice of noncompliance",
+    "url": "https://www.epa.gov/sites/default/files/2017-10/documents/r10-npdes-boise-west-id0023981-final-permit-mod-2016.pdf",
+    "quote": "telephone within 24 hours from the time the permittee becomes aware of the circumstances ... any overflow prior to the treatment works over which the permittee has ownership or has operational control",
+    "who": "permittee",
+    "channel": "regulator (then EPA hotline and IDEQ; now DEQ regional office)",
+    "deadline": "24 hours; written within 5 days",
+    "threshold": "any overflow",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours by phone; 5 days written",
+   "cite": "IPDES permit Part III.G (IDAPA 58.01.25)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "None found (search only)."
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 1,
+  "public_output_url": null,
+  "notes": "One Idaho row in SOBE (Kamiah). Idaho DEQ's IPDES reporting route for overflow reports and any public output not found."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": "none",
+  "receiving_water": "none",
+  "start_end": "none",
+  "volume": false,
+  "stable_id": false,
+  "license": null,
+  "notes": "No public list of reported overflows found."
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 2,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No CSOs. Large-city SSOs announced by statement to media when announced at all."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [],
+  "notes": ""
+ },
+ "beaches": {
+  "program": "No statewide beach bacteria program found; Public Health Districts issue recreation advisories (HAB)",
+  "source_ids": [
+   "id-phd-advisories"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": ""
+ },
+ "habs": {
+  "program": "DEQ and Public Health Districts cyanobacteria recreation advisories, mapped",
+  "source_ids": [
+   "id-hab-advisory-layer",
+   "id-deq-cyan-satellite"
+  ],
+  "machine_readable": true,
+  "notes": "Layer empty out of season."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "Panhandle Health District",
+   "Central District Health",
+   "Southwest District Health (not searched individually)"
+  ],
+  "watershed_groups": [
+   "Spokane Riverkeeper (WA)"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": "TFRO_IPDES_Outfalls (Twin Falls region only)",
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Spokane River (WA)",
+   "Snake River (OR, WA, WY)",
+   "Kootenai River (MT, British Columbia)",
+   "Bear Lake and Bear River (UT, WY)",
+   "Clark Fork / Lake Pend Oreille (MT)",
+   "Priest Lake and Pend Oreille River (WA)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "phone_only",
+   "what": "Overflows reported to DEQ by phone; no public posting",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "no_web",
+   "what": "Permit public-notice duty names no channel",
+   "fix_level": "agency",
+   "note": "DEQ could require web posting in IPDES permits."
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "C",
+  "expected_grade": "No public reports",
+  "first_feed": "id-hab-advisory-layer",
+  "effort": "small",
+  "rationale": "No overflow feed (SOBE nearly empty, no CSOs, no state list). A permit duty to notify the public exists with no web channel. Show outfalls, the rain caution, HAB advisories and the plain statement.",
+  "order_hint": 5
+ },
+ "owner_questions": [
+  "Ask Idaho DEQ whether IPDES overflow reports can be published (or filed through NeT so they reach SOBE)?",
+  "Records request for 2025-2026 overflow reports to Boise River and Spokane River?"
+ ],
+ "surprise": "Idaho permits already say 'immediately notify the public' of any overflow, but neither the state nor Boise posts overflows anywhere on the web; the only federal trace is one Kamiah row."
+}

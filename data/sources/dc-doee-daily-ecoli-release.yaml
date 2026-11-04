@@ -1,0 +1,23 @@
+id: "dc-doee-daily-ecoli-release"
+name: "DOEE release 'DC To Begin Daily E. coli Testing on the Potomac and Anacostia' (2026-02-27)"
+url: "https://doee.dc.gov/release/dc-begin-daily-e-coli-testing-potomac-and-anacostia"
+homepage: "https://doee.dc.gov/release/dc-begin-daily-e-coli-testing-potomac-and-anacostia"
+kind: "html"
+level: "state"
+# Notes (research/dc, status used, verified fetched, checked 2026-11-02): Defines DOEE's six routine
+#   sites incl. the Washington Channel.
+# Access detail (research, quoted): Fetched. Daily testing from 2026-03-02 at 'the existing six DOEE
+#   test locations – three along the Potomac River, two on the Anacostia River, and one on the
+#   Washington Channel'; results 'within 48 hours after sampling'.
+cadence: null
+license: "none stated"
+attribution: "DOEE"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["DC"]
+access: ["html", "pdf"]
+access_detail: "Fetched. Daily testing from 2026-03-02 at 'the existing six DOEE test locations – three along the Potomac River, two on the Anacostia River, and one on the Washington Channel'; results 'within 48 hours after sampling'."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

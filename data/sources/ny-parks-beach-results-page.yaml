@@ -1,0 +1,37 @@
+id: "ny-parks-beach-results-page"
+name: "NYS Parks 'Water Quality - Beach Results' page and live Beach Status layer (2025_Beach_Status_view)"
+url: "https://services.arcgis.com/1xFZPtKn1wKC6POA/arcgis/rest/services/2025_Beach_Status_view/FeatureServer/0"
+homepage: "https://parks.ny.gov/activities/swimming/water-quality-beach-results"
+kind: "arcgis"
+level: "state"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): Live,
+#   machine-readable State Park beach status for the NY shores of Lake Champlain and Long Island
+#   Sound; poll in season.
+# Access detail (research, quoted): Page
+#   https://parks.ny.gov/activities/swimming/water-quality-beach-results (fetched) embeds ArcGIS
+#   Experience 2d17b2b40fc14484a5f4b74f97f0fe6a -> web map 5ae329fb29024c6da9f01198c9cee866 ('2025
+#   NY State Parks Beach Status Web Map') -> layer above; 73 points, open query, dataLastEditDate
+#   2026-09-21. Also NY_State_Parks_Beach_Status and Beaches_Field_Sheet_Public_View services exist
+#   on the same org.
+# Can fill: event_type (closure/advisory), started_at (Date_sampled, date only), waterbody (beach),
+#   coordinates, advice_text (Beach_status, Status_Reason), authority
+# Cannot fill: time of day; reliable per-record update time (EditDate fields are 2024 values)
+# Waters: 73 State Park beach stations incl. Cumberland Bay SP and Point Au Roche SP (Lake
+#   Champlain) and Sunken Meadow, Wildwood, Orient Beach (Long Island Sound) (openboatlaunch slugs:
+#   lake-champlain-vt, long-island-sound-ct)
+# History: current state only (history in wwwd-za77, annual)
+# Research notes: Page quotes: freshwater E. coli 'A result above 235 E.coli colonies/100 ml
+#   represents an exceedance'; ocean enterococcus 'above 104 enterococci colonies/100 ml'; closure
+#   decisions consider 'water conditions (sewage overflows, cold temperatures, or high waves)'.
+cadence: "in season: sampled at least weekly; page says results available about 24 h after sampling and 'the public notified 18-24 hours after an elevated concentration of bacteria occurs'; closures may be preemptive for rainfall ('Predicted exceedance: Rainfall')"
+license: "none stated"
+attribution: "NYS OPRHP"
+enabled: true
+role: "advisories"
+event_types: ["beach_closure"]
+states: ["NY"]
+access: ["arcgis", "html"]
+access_detail: "Page https://parks.ny.gov/activities/swimming/water-quality-beach-results (fetched) embeds ArcGIS Experience 2d17b2b40fc14484a5f4b74f97f0fe6a -> web map 5ae329fb29024c6da9f01198c9cee866 ('2025 NY State Parks Beach Status Web Map') -> layer above; 73 points, open query, dataLastEditDate 2026-09-21. Also NY_State_Parks_Beach_Status and Beaches_Field_Sheet_Public_View services exist on the same org."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

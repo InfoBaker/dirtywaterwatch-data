@@ -1,0 +1,3965 @@
+{
+ "state": "VT",
+ "source": "openboatlaunch out/water snapshot 2026-11-01",
+ "count": 158,
+ "waters": [
+  {
+   "slug": "adams-reservoir-vt",
+   "name": "Adams Reservoir",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Woodford"
+   ],
+   "bbox": [
+    -73.0442,
+    42.88397,
+    -73.03691,
+    42.88933
+   ],
+   "wikidata": "Q49699810",
+   "charted": false,
+   "area_km2": 0.137,
+   "launches": [
+    "adams-reservoir-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "amherst-lake-vt",
+   "name": "Amherst Lake",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Plymouth"
+   ],
+   "bbox": [
+    -72.70814,
+    43.47985,
+    -72.70142,
+    43.49151
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.342,
+   "launches": [
+    "amherst-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ansel-pond-vt",
+   "name": "Ansel Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Bethel"
+   ],
+   "bbox": [
+    -72.61864,
+    43.8362,
+    -72.61693,
+    43.83754
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.011,
+   "launches": [
+    "ansel-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "baker-pond-vt",
+   "name": "Baker Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Brookfield"
+   ],
+   "bbox": [
+    -72.6374,
+    44.06435,
+    -72.63313,
+    44.07107
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.167,
+   "launches": [
+    "baker-pond-brookfield-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bald-hill-pond-vt",
+   "name": "Bald Hill Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Westmore"
+   ],
+   "bbox": [
+    -71.98124,
+    44.73506,
+    -71.97286,
+    44.74452
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.469,
+   "launches": [
+    "bald-hill-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "barton-river-vt",
+   "name": "Barton River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Coventry"
+   ],
+   "bbox": [
+    -72.21421,
+    44.63737,
+    -72.18136,
+    44.90685
+   ],
+   "wikidata": "Q4865675",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "coventry-station-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "batten-kill-vt",
+   "name": "Batten Kill",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Arlington",
+    "Manchester"
+   ],
+   "bbox": [
+    -73.45962,
+    43.06922,
+    -73.00423,
+    43.24893
+   ],
+   "wikidata": "Q4869708",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bullhead-pond-vt",
+    "red-mill-vt",
+    "wagon-wheel-vt",
+    "waterworks-bridge-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bean-pond-vt",
+   "name": "Bean Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Sutton"
+   ],
+   "bbox": [
+    -72.08866,
+    44.69586,
+    -72.08122,
+    44.69996
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.154,
+   "launches": [
+    "bean-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "berlin-pond-vt",
+   "name": "Berlin Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Berlin"
+   ],
+   "bbox": [
+    -72.59265,
+    44.17935,
+    -72.58153,
+    44.20872
+   ],
+   "wikidata": "Q49699991",
+   "charted": false,
+   "area_km2": 1.228,
+   "launches": [
+    "berlin-pond-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "black-pond-vt",
+   "name": "Black Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Hubbardton"
+   ],
+   "bbox": [
+    -73.22715,
+    43.70099,
+    -73.22211,
+    43.70479
+   ],
+   "wikidata": "Q49299581",
+   "charted": false,
+   "area_km2": 0.1,
+   "launches": [
+    "black-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "black-river-vt",
+   "name": "Black River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Coventry",
+    "Newport"
+   ],
+   "bbox": [
+    -72.40095,
+    44.61527,
+    -72.21216,
+    44.92565
+   ],
+   "wikidata": "Q4921623",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "black-river-carry-in-access-vt",
+    "black-river-carry-in-access-coventry-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "breese-pond-vt",
+   "name": "Breese Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Hubbardton"
+   ],
+   "bbox": [
+    -73.21854,
+    43.71237,
+    -73.2141,
+    43.71572
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.069,
+   "launches": [
+    "breese-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brownington-pond-vt",
+   "name": "Brownington Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Brownington"
+   ],
+   "bbox": [
+    -72.15395,
+    44.87483,
+    -72.14172,
+    44.88173
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.587,
+   "launches": [
+    "brownington-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "buck-lake-vt",
+   "name": "Buck Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Woodbury"
+   ],
+   "bbox": [
+    -72.4001,
+    44.45974,
+    -72.39502,
+    44.46704
+   ],
+   "wikidata": "Q49299893",
+   "charted": false,
+   "area_km2": 0.191,
+   "launches": [
+    "buck-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "burr-pond-vt",
+   "name": "Burr Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Sudbury"
+   ],
+   "bbox": [
+    -73.18762,
+    43.76263,
+    -73.17965,
+    43.76857
+   ],
+   "wikidata": "Q49700154",
+   "charted": false,
+   "area_km2": 0.358,
+   "launches": [
+    "burr-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ccc-pond-vt",
+   "name": "CCC Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Sharon"
+   ],
+   "bbox": [
+    -72.39633,
+    43.8157,
+    -72.39209,
+    43.81833
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.048,
+   "launches": [
+    "c-c-c-pond-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-lake-vt",
+   "name": "Cedar Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Monkton"
+   ],
+   "bbox": [
+    -73.13843,
+    44.24626,
+    -73.12756,
+    44.25451
+   ],
+   "wikidata": "Q49300368",
+   "charted": false,
+   "area_km2": 0.534,
+   "launches": [
+    "monkton-pond-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "center-pond-vt",
+   "name": "Center Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Newark"
+   ],
+   "bbox": [
+    -71.92306,
+    44.70826,
+    -71.9173,
+    44.71795
+   ],
+   "wikidata": "Q49300401",
+   "charted": false,
+   "area_km2": 0.347,
+   "launches": [
+    "center-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chittenden-reservoir-vt",
+   "name": "Chittenden Reservoir",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Chittenden"
+   ],
+   "bbox": [
+    -72.92642,
+    43.7195,
+    -72.89651,
+    43.74191
+   ],
+   "wikidata": "Q49700268",
+   "charted": false,
+   "area_km2": 3.142,
+   "launches": [
+    "chittenden-reservoir-boat-launch-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://ahs-vt.maps.arcgis.com/apps/webappviewer/index.html?id=a46d42c05e864a198ab5dc152f9d09b9",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021.",
+     "date": "2021-08-02",
+     "years": [
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "clarendon-river-vt",
+   "name": "Clarendon River",
+   "kind": "stream",
+   "state": "VT",
+   "towns": [
+    "Wallingford"
+   ],
+   "bbox": [
+    -73.04176,
+    43.44972,
+    -73.01053,
+    43.60529
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tinmouth-channel-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clark-pond-vt",
+   "name": "Clark Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Glover"
+   ],
+   "bbox": [
+    -72.20654,
+    44.64211,
+    -72.20165,
+    44.64681
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.139,
+   "launches": [
+    "clark-s-pond-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clyde-river-vt",
+   "name": "Clyde River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Brighton",
+    "Charleston"
+   ],
+   "bbox": [
+    -72.20549,
+    44.79896,
+    -71.85904,
+    44.95087
+   ],
+   "wikidata": "Q23021743",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clyde-river-brighton-vt",
+    "clyde-river-charleston-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coits-pond-vt",
+   "name": "Coits Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Cabot"
+   ],
+   "bbox": [
+    -72.3311,
+    44.44404,
+    -72.32537,
+    44.45037
+   ],
+   "wikidata": "Q49300779",
+   "charted": false,
+   "area_km2": 0.171,
+   "launches": [
+    "coits-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "colby-pond-vt",
+   "name": "Colby Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Plymouth"
+   ],
+   "bbox": [
+    -72.66736,
+    43.46897,
+    -72.66423,
+    43.47334
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.077,
+   "launches": [
+    "colby-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coles-pond-vt",
+   "name": "Coles Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Stannard"
+   ],
+   "bbox": [
+    -72.22072,
+    44.50217,
+    -72.21163,
+    44.51458
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.45,
+   "launches": [
+    "coles-pond-boat-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "colton-pond-vt",
+   "name": "Colton Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Killington"
+   ],
+   "bbox": [
+    -72.823,
+    43.69601,
+    -72.81576,
+    43.69971
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.108,
+   "launches": [
+    "colton-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "connecticut-river-reservoir-barnet-vt",
+   "name": "Connecticut River Reservoir",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Barnet"
+   ],
+   "bbox": [
+    -72.00084,
+    44.32399,
+    -71.8735,
+    44.349
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.478,
+   "launches": [
+    "pine-grove-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "connecticut-river-reservoir-hartford-vt",
+   "name": "Connecticut River Reservoir",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Hartford",
+    "Norwich",
+    "Thetford"
+   ],
+   "bbox": [
+    -72.30612,
+    43.66611,
+    -72.17983,
+    43.84714
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.98,
+   "launches": [
+    "kilowatt-park-north-vt",
+    "north-thetford-landing-vt",
+    "norwich-landing-vt",
+    "ompompanoosuc-river-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "connecticut-river-reservoir-rockingham-vt",
+   "name": "Connecticut River Reservoir",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Rockingham"
+   ],
+   "bbox": [
+    -72.4618,
+    43.13696,
+    -72.43027,
+    43.21756
+   ],
+   "wikidata": "Q34881324",
+   "charted": false,
+   "area_km2": 3.865,
+   "launches": [
+    "herrick-cove-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "connecticut-river-reservoir-vt",
+   "name": "Connecticut River Reservoir",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Vernon"
+   ],
+   "bbox": [
+    -72.55748,
+    42.77104,
+    -72.50519,
+    42.86692
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.442,
+   "launches": [
+    "vernon-dam-portage-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "connecticut-river-vt",
+   "name": "Connecticut River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Bellows Falls",
+    "Bloomfield",
+    "Bradford",
+    "Brattleboro",
+    "Canaan",
+    "Concord",
+    "Guildhall",
+    "Hartford",
+    "Hartland",
+    "Lemington",
+    "Lunenburg",
+    "Newbury"
+   ],
+   "bbox": [
+    -72.55547,
+    42.59636,
+    -71.38563,
+    45.05526
+   ],
+   "wikidata": "Q379648",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bugbee-landing-vt",
+    "canaan-access-vt",
+    "connecticut-river-putney-landing-vt",
+    "connecticut-river-carry-in-access-vt",
+    "debanville-landing-vt",
+    "gilman-boat-launch-vt",
+    "governor-hunt-rec-area-vt",
+    "haverhill-bridge-access-vt",
+    "hoyt-s-landing-vt",
+    "lemington-access-vt",
+    "lyman-point-park-vt",
+    "mt-orne-covered-bridge-access-vt",
+    "old-ferry-road-access-vt",
+    "retreat-meadows-vt",
+    "riverfront-park-vt",
+    "sumner-falls-vt",
+    "wilgus-state-park-vt",
+    "wyoming-dam-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-lake-vt",
+   "name": "Crystal Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Barton"
+   ],
+   "bbox": [
+    -72.17483,
+    44.71822,
+    -72.13525,
+    44.74828
+   ],
+   "wikidata": "Q5191253",
+   "charted": false,
+   "area_km2": 3.292,
+   "launches": [
+    "crystal-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "curtis-pond-vt",
+   "name": "Curtis Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Calais"
+   ],
+   "bbox": [
+    -72.50095,
+    44.37596,
+    -72.49048,
+    44.39014
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.321,
+   "launches": [
+    "curtis-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "daniels-pond-vt",
+   "name": "Daniels Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Glover"
+   ],
+   "bbox": [
+    -72.2673,
+    44.6744,
+    -72.25719,
+    44.67908
+   ],
+   "wikidata": "Q49301364",
+   "charted": false,
+   "area_km2": 0.283,
+   "launches": [
+    "daniels-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dead-creek-fairfield-vt",
+   "name": "Dead Creek",
+   "kind": "stream",
+   "state": "VT",
+   "towns": [
+    "Fairfield"
+   ],
+   "bbox": [
+    -73.01242,
+    44.75053,
+    -72.93478,
+    44.85409
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fairfield-swamp-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dead-creek-vt",
+   "name": "Dead Creek",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Addison",
+    "Panton"
+   ],
+   "bbox": [
+    -73.35225,
+    44.0684,
+    -73.31064,
+    44.18548
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dead-creek-boat-launch-vt",
+    "dead-creek-carry-in-access-near-addison-vt",
+    "dead-creek-carry-in-access-near-addison-vt-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "deweys-pond-vt",
+   "name": "Deweys Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Deweys Mills"
+   ],
+   "bbox": [
+    -72.40636,
+    43.64187,
+    -72.40101,
+    43.64792
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.207,
+   "launches": [
+    "mill-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-bay-vt",
+   "name": "East Bay",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "West Haven"
+   ],
+   "bbox": [
+    -73.40253,
+    43.56797,
+    -73.34291,
+    43.62673
+   ],
+   "wikidata": "Q49376788",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "ward-marsh-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-branch-dead-creek-vt",
+   "name": "East Branch Dead Creek",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Addison",
+    "West Addison"
+   ],
+   "bbox": [
+    -73.34897,
+    44.05489,
+    -73.32416,
+    44.07563
+   ],
+   "wikidata": "Q49898255",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "east-branch-dead-creek-carry-in-access-near-addison-vt",
+    "east-branch-dead-creek-carry-in-access-near-west-addison-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-creek-vt",
+   "name": "East Creek",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Orwell"
+   ],
+   "bbox": [
+    -73.37701,
+    43.79919,
+    -73.31135,
+    43.83251
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "east-creek-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "echo-lake-plymouth-vt",
+   "name": "Echo Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Plymouth"
+   ],
+   "bbox": [
+    -72.70323,
+    43.46554,
+    -72.69594,
+    43.47944
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.386,
+   "launches": [
+    "echo-lake-plymouth-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "echo-lake-vt",
+   "name": "Echo Lake",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Charleston"
+   ],
+   "bbox": [
+    -72.00663,
+    44.85059,
+    -71.98062,
+    44.86695
+   ],
+   "wikidata": "Q5332718",
+   "charted": false,
+   "area_km2": 2.291,
+   "launches": [
+    "echo-lake-charleston-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ewell-pond-vt",
+   "name": "Ewell Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Peacham"
+   ],
+   "bbox": [
+    -72.16823,
+    44.35936,
+    -72.15825,
+    44.36269
+   ],
+   "wikidata": "Q49700669",
+   "charted": false,
+   "area_km2": 0.205,
+   "launches": [
+    "ewell-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "flagg-pond-vt",
+   "name": "Flagg Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Stannard"
+   ],
+   "bbox": [
+    -72.21481,
+    44.561,
+    -72.20325,
+    44.56975
+   ],
+   "wikidata": "Q35697999",
+   "charted": false,
+   "area_km2": 0.48,
+   "launches": [
+    "flagg-pond-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "forest-lake-vt",
+   "name": "Forest Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Woodbury"
+   ],
+   "bbox": [
+    -72.44704,
+    44.40138,
+    -72.43624,
+    44.41241
+   ],
+   "wikidata": "Q35698427",
+   "charted": false,
+   "area_km2": 0.557,
+   "launches": [
+    "nelson-pond-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fosters-pond-vt",
+   "name": "Fosters Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Peacham"
+   ],
+   "bbox": [
+    -72.21446,
+    44.32579,
+    -72.20684,
+    44.33113
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.247,
+   "launches": [
+    "fosters-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gale-meadows-pond-vt",
+   "name": "Gale Meadows Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Winhall"
+   ],
+   "bbox": [
+    -72.88409,
+    43.1647,
+    -72.86323,
+    43.17905
+   ],
+   "wikidata": "Q49700826",
+   "charted": false,
+   "area_km2": 0.79,
+   "launches": [
+    "gale-meadows-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "glen-lake-vt",
+   "name": "Glen Lake",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "West Castleton"
+   ],
+   "bbox": [
+    -73.24647,
+    43.6578,
+    -73.23247,
+    43.67425
+   ],
+   "wikidata": "Q49700862",
+   "charted": false,
+   "area_km2": 0.867,
+   "launches": [
+    "glen-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "great-averill-pond-vt",
+   "name": "Great Averill Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Averill"
+   ],
+   "bbox": [
+    -71.72087,
+    44.97202,
+    -71.68431,
+    44.99661
+   ],
+   "wikidata": "Q49700916",
+   "charted": false,
+   "area_km2": 3.577,
+   "launches": [
+    "great-averill-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "great-hosmer-pond-vt",
+   "name": "Great Hosmer Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Craftsbury"
+   ],
+   "bbox": [
+    -72.36753,
+    44.68038,
+    -72.35313,
+    44.70787
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.633,
+   "launches": [
+    "gordon-peewee-wing-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "green-river-reservoir-vt",
+   "name": "Green River Reservoir",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Morrisville"
+   ],
+   "bbox": [
+    -72.53201,
+    44.6124,
+    -72.50915,
+    44.66689
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.456,
+   "launches": [
+    "green-river-reservoir-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "greenwood-lake-vt",
+   "name": "Greenwood Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Woodbury"
+   ],
+   "bbox": [
+    -72.43098,
+    44.45303,
+    -72.41983,
+    44.46542
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.398,
+   "launches": [
+    "greenwood-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "half-moon-pond-vt",
+   "name": "Half Moon Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Hubbardton"
+   ],
+   "bbox": [
+    -73.22164,
+    43.69049,
+    -73.2165,
+    43.69509
+   ],
+   "wikidata": "Q35704841",
+   "charted": false,
+   "area_km2": 0.109,
+   "launches": [
+    "half-moon-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "halls-lake-vt",
+   "name": "Halls Lake",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Newbury"
+   ],
+   "bbox": [
+    -72.12594,
+    44.08024,
+    -72.12066,
+    44.0909
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.368,
+   "launches": [
+    "halls-lake-boat-launch-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://experience.arcgis.com/experience/194da900279747efa8cee01b57fb23e6/page/Tracker",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020, 2025 and 2026.",
+     "date": "2026-09-23",
+     "years": [
+      "2020",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "hardwick-lake-vt",
+   "name": "Hardwick Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Hardwick"
+   ],
+   "bbox": [
+    -72.37605,
+    44.51906,
+    -72.37088,
+    44.54121
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.409,
+   "launches": [
+    "hardwick-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harvey-s-lake-vt",
+   "name": "Harvey's Lake",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Barnet"
+   ],
+   "bbox": [
+    -72.14421,
+    44.28316,
+    -72.12892,
+    44.30451
+   ],
+   "wikidata": "Q5676953",
+   "charted": false,
+   "area_km2": 1.495,
+   "launches": [
+    "harvey-lake-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "holland-pond-vt",
+   "name": "Holland Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Holland"
+   ],
+   "bbox": [
+    -71.93659,
+    44.97564,
+    -71.92229,
+    44.99715
+   ],
+   "wikidata": "Q35708208",
+   "charted": false,
+   "area_km2": 1.42,
+   "launches": [
+    "holland-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horse-pond-vt",
+   "name": "Horse Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Greensboro"
+   ],
+   "bbox": [
+    -72.21466,
+    44.61517,
+    -72.20896,
+    44.62137
+   ],
+   "wikidata": "Q35709138",
+   "charted": false,
+   "area_km2": 0.148,
+   "launches": [
+    "horse-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "island-pond-vt",
+   "name": "Island Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Brighton"
+   ],
+   "bbox": [
+    -71.88026,
+    44.79232,
+    -71.85786,
+    44.81533
+   ],
+   "wikidata": "Q35711877",
+   "charted": false,
+   "area_km2": 2.6,
+   "launches": [
+    "island-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jobs-pond-vt",
+   "name": "Jobs Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Westmore"
+   ],
+   "bbox": [
+    -71.95638,
+    44.75873,
+    -71.95118,
+    44.76571
+   ],
+   "wikidata": "Q35716469",
+   "charted": false,
+   "area_km2": 0.181,
+   "launches": [
+    "job-s-pond-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "joe-s-pond-vt",
+   "name": "Joe's Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Danville"
+   ],
+   "bbox": [
+    -72.23026,
+    44.40313,
+    -72.19598,
+    44.42189
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.645,
+   "launches": [
+    "joe-s-pond-boat-launch-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://experience.arcgis.com/experience/e84d740b61244ac59a10f9fd443ef3c5/page/Tracker/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 to 2026.",
+     "date": "2026-06-27",
+     "years": [
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "johns-river-vt",
+   "name": "Johns River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Derby"
+   ],
+   "bbox": [
+    -72.18259,
+    44.97751,
+    -72.08585,
+    45.0082
+   ],
+   "wikidata": "Q26852382",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "johns-river-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "keiser-pond-vt",
+   "name": "Keiser Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Peacham"
+   ],
+   "bbox": [
+    -72.17737,
+    44.38474,
+    -72.16596,
+    44.38864
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.154,
+   "launches": [
+    "keiser-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kent-pond-vt",
+   "name": "Kent Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Killington"
+   ],
+   "bbox": [
+    -72.80869,
+    43.67248,
+    -72.79889,
+    43.68077
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.418,
+   "launches": [
+    "kent-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kettle-pond-vt",
+   "name": "Kettle Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Lanesboro"
+   ],
+   "bbox": [
+    -72.33042,
+    44.29376,
+    -72.3078,
+    44.29804
+   ],
+   "wikidata": "Q35718218",
+   "charted": false,
+   "area_km2": 0.458,
+   "launches": [
+    "kettle-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "knapp-brook-pond-number-1-vt",
+   "name": "Knapp Brook Pond Number 1",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Cavendish"
+   ],
+   "bbox": [
+    -72.56567,
+    43.44526,
+    -72.55967,
+    43.44919
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.11,
+   "launches": [
+    "knapp-pond-1-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "knapp-brook-pond-number-2-vt",
+   "name": "Knapp Brook Pond Number 2",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Cavendish"
+   ],
+   "bbox": [
+    -72.57129,
+    43.44585,
+    -72.56573,
+    43.45366
+   ],
+   "wikidata": "Q49701336",
+   "charted": false,
+   "area_km2": 0.133,
+   "launches": [
+    "knapp-pond-2-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://experience.arcgis.com/experience/e84d740b61244ac59a10f9fd443ef3c5/page/Tracker/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 and 2026.",
+     "date": "2026-08-01",
+     "years": [
+      "2022",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lac-memphremagog-vt",
+   "name": "Lac Memphr\u00e9magog",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Lake Park",
+    "Newport City",
+    "Newport Town"
+   ],
+   "bbox": [
+    -72.30414,
+    44.90478,
+    -72.14348,
+    45.2715
+   ],
+   "wikidata": "Q595625",
+   "charted": false,
+   "area_km2": 103.503,
+   "launches": [
+    "hall-s-creek-vt",
+    "south-bay-vt",
+    "whipple-point-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-bomoseen-vt",
+   "name": "Lake Bomoseen",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Bomoseen",
+    "Castleton",
+    "West Castleton"
+   ],
+   "bbox": [
+    -73.23357,
+    43.60517,
+    -73.18563,
+    43.70463
+   ],
+   "wikidata": "Q6475029",
+   "charted": false,
+   "area_km2": 10.022,
+   "launches": [
+    "kehoe-vt",
+    "lake-bomoseen-boat-launch-near-west-castleton-vt",
+    "thomas-evanoika-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://experience.arcgis.com/experience/e84d740b61244ac59a10f9fd443ef3c5/page/Tracker/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-08-07",
+     "years": [
+      "2026"
+     ]
+    },
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2005) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2005-10-20"
+    }
+   ]
+  },
+  {
+   "slug": "lake-carmi-vt",
+   "name": "Lake Carmi",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Franklin"
+   ],
+   "bbox": [
+    -72.89547,
+    44.95361,
+    -72.85336,
+    44.99052
+   ],
+   "wikidata": "Q6475186",
+   "charted": false,
+   "area_km2": 6.031,
+   "launches": [
+    "lake-carmi-boat-launch-vt",
+    "lake-carmi-boat-launch-vt-2",
+    "lake-carmi-boat-launch-franklin-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://experience.arcgis.com/experience/194da900279747efa8cee01b57fb23e6/page/Tracker",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2015 to 2026.",
+     "date": "2026-09-07",
+     "years": [
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-champlain-vt",
+   "name": "Lake Champlain",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Addison",
+    "Alburg",
+    "Alburgh",
+    "Benson",
+    "Burlington",
+    "Charlotte",
+    "Colchester",
+    "Ecole Champlain",
+    "Ferrisburg",
+    "Grand Isle",
+    "Highgate",
+    "Isle La Motte"
+   ],
+   "bbox": [
+    -73.46064,
+    43.55771,
+    -73.07619,
+    45.08459
+   ],
+   "wikidata": "Q68467",
+   "charted": true,
+   "area_km2": 1180.974,
+   "launches": [
+    "benson-landing-vt",
+    "chimney-point-vt",
+    "chipmans-point-vt",
+    "colchester-point-vt",
+    "converse-bay-vt",
+    "dillenbeck-bay-vt",
+    "fort-cassin-vt",
+    "george-davis-singing-cedars-vt",
+    "grand-isle-state-park-boat-launch-vt",
+    "holcomb-bay-vt",
+    "horicans-vt",
+    "john-guilmette-vt",
+    "keeler-bay-vt",
+    "kelly-bay-vt",
+    "lake-champlain-boat-launch-vt-2",
+    "kill-kare-state-park-cartop-boat-launch-vt",
+    "kings-bay-vt",
+    "lake-champlain-boat-launch-burlington-vt",
+    "lake-champlain-boat-launch-near-ecole-champlain-vt",
+    "lake-champlain-boat-launch-vergennes-vt",
+    "lapham-bay-vt",
+    "larrabees-point-vt",
+    "larry-greene-vt",
+    "malletts-bay-vt",
+    "mccuen-slang-vt",
+    "north-hero-state-park-boat-launch-vt",
+    "rock-river-vt",
+    "saint-albans-bay-vt",
+    "sand-bar-wma-vt",
+    "sandbar-state-park-cartop-boat-launch-vt",
+    "shelburne-bay-vt",
+    "stephensen-point-vt",
+    "stoney-point-vt",
+    "tabor-point-vt",
+    "van-everest-vt",
+    "vantines-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-derby-vt",
+   "name": "Lake Derby",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Derby"
+   ],
+   "bbox": [
+    -72.12537,
+    44.94678,
+    -72.10493,
+    44.95931
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.931,
+   "launches": [
+    "derby-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-dunmore-vt",
+   "name": "Lake Dunmore",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Salisbury"
+   ],
+   "bbox": [
+    -73.08782,
+    43.87567,
+    -73.06488,
+    43.92473
+   ],
+   "wikidata": "Q18153098",
+   "charted": false,
+   "area_km2": 4.343,
+   "launches": [
+    "lake-dunmore-carry-in-access-vt",
+    "magoon-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-eden-vt",
+   "name": "Lake Eden",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Eden"
+   ],
+   "bbox": [
+    -72.51576,
+    44.70944,
+    -72.49413,
+    44.72852
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.823,
+   "launches": [
+    "lake-eden-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-elligo-vt",
+   "name": "Lake Elligo",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Greensboro"
+   ],
+   "bbox": [
+    -72.36159,
+    44.58852,
+    -72.35356,
+    44.6152
+   ],
+   "wikidata": "Q35730896",
+   "charted": false,
+   "area_km2": 0.785,
+   "launches": [
+    "lake-elligo-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-elmore-vt",
+   "name": "Lake Elmore",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Elmore"
+   ],
+   "bbox": [
+    -72.531,
+    44.52549,
+    -72.51946,
+    44.54169
+   ],
+   "wikidata": "Q6475729",
+   "charted": false,
+   "area_km2": 0.95,
+   "launches": [
+    "vaughn-m-douglass-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-fairlee-vt",
+   "name": "Lake Fairlee",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "West Fairlee"
+   ],
+   "bbox": [
+    -72.24592,
+    43.87895,
+    -72.20897,
+    43.90148
+   ],
+   "wikidata": "Q49701443",
+   "charted": false,
+   "area_km2": 1.965,
+   "launches": [
+    "lake-fairlee-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-groton-vt",
+   "name": "Lake Groton",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Lakeside"
+   ],
+   "bbox": [
+    -72.2726,
+    44.25019,
+    -72.25333,
+    44.2862
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.847,
+   "launches": [
+    "lake-groton-boat-launch-vt",
+    "lake-groton-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hortonia-vt",
+   "name": "Lake Hortonia",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Hubbardton",
+    "Sudbury"
+   ],
+   "bbox": [
+    -73.22192,
+    43.73269,
+    -73.19395,
+    43.76348
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.984,
+   "launches": [
+    "hortonia-lake-boat-launch-vt",
+    "hortonia-lake-dam-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-08-28",
+     "years": [
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-iroquois-vt",
+   "name": "Lake Iroquois",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Williston"
+   ],
+   "bbox": [
+    -73.09008,
+    44.36074,
+    -73.07797,
+    44.3798
+   ],
+   "wikidata": "Q6476288",
+   "charted": false,
+   "area_km2": 1.048,
+   "launches": [
+    "lake-iroquois-boat-launch-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://experience.arcgis.com/experience/e84d740b61244ac59a10f9fd443ef3c5/page/Tracker/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021, 2022, 2024 and 2026.",
+     "date": "2026-08-07",
+     "years": [
+      "2021",
+      "2022",
+      "2024",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-morey-vt",
+   "name": "Lake Morey",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Fairlee"
+   ],
+   "bbox": [
+    -72.16088,
+    43.91046,
+    -72.13722,
+    43.93494
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.333,
+   "launches": [
+    "lake-morey-boat-launch-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2018 and 2021 to 2023.",
+     "date": "2023-10-04",
+     "years": [
+      "2018",
+      "2021",
+      "2022",
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-ninevah-vt",
+   "name": "Lake Ninevah",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Mount Holly"
+   ],
+   "bbox": [
+    -72.76415,
+    43.46207,
+    -72.74965,
+    43.4752
+   ],
+   "wikidata": "Q49701532",
+   "charted": false,
+   "area_km2": 0.95,
+   "launches": [
+    "joseph-wiltshire-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://experience.arcgis.com/experience/e84d740b61244ac59a10f9fd443ef3c5/page/Tracker/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-06-27",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-paran-vt",
+   "name": "Lake Paran",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "N. Bennington"
+   ],
+   "bbox": [
+    -73.23788,
+    42.93115,
+    -73.22874,
+    42.93428
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.144,
+   "launches": [
+    "lake-paran-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-parker-vt",
+   "name": "Lake Parker",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Glover"
+   ],
+   "bbox": [
+    -72.23968,
+    44.71107,
+    -72.22856,
+    44.72609
+   ],
+   "wikidata": "Q6477313",
+   "charted": false,
+   "area_km2": 1.054,
+   "launches": [
+    "lake-parker-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-raponda-vt",
+   "name": "Lake Raponda",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Wilmington"
+   ],
+   "bbox": [
+    -72.82196,
+    42.86708,
+    -72.81485,
+    42.88401
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.5,
+   "launches": [
+    "lake-raponda-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-rescue-vt",
+   "name": "Lake Rescue",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Ludlow"
+   ],
+   "bbox": [
+    -72.70666,
+    43.44505,
+    -72.69462,
+    43.46186
+   ],
+   "wikidata": "Q6477513",
+   "charted": false,
+   "area_km2": 0.705,
+   "launches": [
+    "lake-rescue-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-sadawga-vt",
+   "name": "Lake Sadawga",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Whitingham"
+   ],
+   "bbox": [
+    -72.88398,
+    42.77352,
+    -72.8726,
+    42.78879
+   ],
+   "wikidata": "Q49702547",
+   "charted": false,
+   "area_km2": 0.784,
+   "launches": [
+    "lake-sadawga-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-saint-catherine-vt",
+   "name": "Lake Saint Catherine",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Poultney",
+    "Wells"
+   ],
+   "bbox": [
+    -73.22268,
+    43.44534,
+    -73.20318,
+    43.49163
+   ],
+   "wikidata": "Q6477610",
+   "charted": false,
+   "area_km2": 3.713,
+   "launches": [
+    "lake-saint-catherine-boat-launch-vt",
+    "lake-saint-catherine-boat-launch-poultney-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020 and 2022.",
+     "date": "2022-09-02",
+     "years": [
+      "2020",
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-shaftsbury-vt",
+   "name": "Lake Shaftsbury",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Shaftsbury"
+   ],
+   "bbox": [
+    -73.18619,
+    43.01769,
+    -73.17983,
+    43.02195
+   ],
+   "wikidata": "Q28209184",
+   "charted": false,
+   "area_km2": 0.123,
+   "launches": [
+    "lake-shaftsbury-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-willoughby-vt",
+   "name": "Lake Willoughby",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Westmore"
+   ],
+   "bbox": [
+    -72.0739,
+    44.71634,
+    -72.03001,
+    44.78016
+   ],
+   "wikidata": "Q6478498",
+   "charted": false,
+   "area_km2": 7.444,
+   "launches": [
+    "lake-willoughby-boat-launch-vt",
+    "lake-willoughby-boat-launch-westmore-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lamoille-river-vt",
+   "name": "Lamoille River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Cambridge",
+    "Johnson",
+    "Milton",
+    "Walnut Ledge",
+    "Wolcott"
+   ],
+   "bbox": [
+    -73.24707,
+    44.50068,
+    -72.20628,
+    44.68645
+   ],
+   "wikidata": "Q6482141",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lamoille-river-dog-head-falls-vt",
+    "lamoille-river-dorothy-smith-vt",
+    "lamoille-river-boat-launch-vt",
+    "lamoille-river-carry-in-access-vt",
+    "lamoille-river-sma-cartop-boat-launch-vt",
+    "upper-lamoille-river-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "leach-creek-vt",
+   "name": "Leach Creek",
+   "kind": "stream",
+   "state": "VT",
+   "towns": [
+    "Canaan"
+   ],
+   "bbox": [
+    -71.68033,
+    44.98496,
+    -71.53999,
+    45.01271
+   ],
+   "wikidata": "Q22522450",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wallace-pond-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "levi-pond-vt",
+   "name": "Levi Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Groton"
+   ],
+   "bbox": [
+    -72.22899,
+    44.26319,
+    -72.22601,
+    44.26844
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.09,
+   "launches": [
+    "levi-pond-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lewis-creek-vt",
+   "name": "Lewis Creek",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Ferrisburg",
+    "Monkton"
+   ],
+   "bbox": [
+    -73.28084,
+    44.18831,
+    -73.02849,
+    44.29037
+   ],
+   "wikidata": "Q49931580",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lewis-creek-boat-launch-vt",
+    "lewis-creek-at-tyler-bridge-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lewis-pond-vt",
+   "name": "Lewis Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Island Pond"
+   ],
+   "bbox": [
+    -71.78422,
+    44.87866,
+    -71.77768,
+    44.88677
+   ],
+   "wikidata": "Q49304004",
+   "charted": false,
+   "area_km2": 0.297,
+   "launches": [
+    "lewis-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-hosmer-pond-vt",
+   "name": "Little Hosmer Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Craftsbury"
+   ],
+   "bbox": [
+    -72.38066,
+    44.66644,
+    -72.37198,
+    44.68567
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.776,
+   "launches": [
+    "little-hosmer-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-otter-creek-vt",
+   "name": "Little Otter Creek",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Ferrisburg"
+   ],
+   "bbox": [
+    -73.28055,
+    44.15556,
+    -73.16016,
+    44.24356
+   ],
+   "wikidata": "Q49942686",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-slang-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-river-vt",
+   "name": "Little River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Stowe"
+   ],
+   "bbox": [
+    -72.76951,
+    44.38195,
+    -72.66302,
+    44.48835
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "moscow-canoe-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-salem-lake-vt",
+   "name": "Little Salem Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Derby"
+   ],
+   "bbox": [
+    -72.09977,
+    44.91112,
+    -72.08427,
+    44.91914
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.656,
+   "launches": [
+    "little-salem-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-pond-vt",
+   "name": "Long Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Westmore"
+   ],
+   "bbox": [
+    -72.02065,
+    44.74292,
+    -72.01467,
+    44.75627
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.388,
+   "launches": [
+    "long-pond-westmore-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lowell-lake-vt",
+   "name": "Lowell Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Londonderry"
+   ],
+   "bbox": [
+    -72.76628,
+    43.22079,
+    -72.75658,
+    43.23074
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.423,
+   "launches": [
+    "lowell-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-symes-pond-vt",
+   "name": "Lower Symes Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Ryegate"
+   ],
+   "bbox": [
+    -72.1093,
+    44.23957,
+    -72.09901,
+    44.2506
+   ],
+   "wikidata": "Q49312689",
+   "charted": false,
+   "area_km2": 0.211,
+   "launches": [
+    "lower-symes-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lyford-pond-vt",
+   "name": "Lyford Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Walden"
+   ],
+   "bbox": [
+    -72.25224,
+    44.44353,
+    -72.24359,
+    44.44706
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.125,
+   "launches": [
+    "lyford-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "maidstone-lake-vt",
+   "name": "Maidstone Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Maidstone"
+   ],
+   "bbox": [
+    -71.66341,
+    44.6329,
+    -71.63951,
+    44.66695
+   ],
+   "wikidata": "Q49305227",
+   "charted": false,
+   "area_km2": 3.218,
+   "launches": [
+    "maidstone-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "martins-pond-vt",
+   "name": "Martins Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Peacham"
+   ],
+   "bbox": [
+    -72.21856,
+    44.30377,
+    -72.20583,
+    44.31084
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.333,
+   "launches": [
+    "martins-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "may-pond-vt",
+   "name": "May Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Barton"
+   ],
+   "bbox": [
+    -72.12357,
+    44.7383,
+    -72.11374,
+    44.74693
+   ],
+   "wikidata": "Q49305466",
+   "charted": false,
+   "area_km2": 0.343,
+   "launches": [
+    "may-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mcintosh-pond-vt",
+   "name": "McIntosh Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Royalton"
+   ],
+   "bbox": [
+    -72.48571,
+    43.82415,
+    -72.48252,
+    43.82917
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.09,
+   "launches": [
+    "mcintosh-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "miles-pond-vt",
+   "name": "Miles Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Concord"
+   ],
+   "bbox": [
+    -71.82545,
+    44.44351,
+    -71.79707,
+    44.44988
+   ],
+   "wikidata": "Q49701980",
+   "charted": false,
+   "area_km2": 0.944,
+   "launches": [
+    "miles-pond-boat-launch-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022.",
+     "date": "2022-09-12",
+     "years": [
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "miller-pond-vt",
+   "name": "Miller Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Strafford"
+   ],
+   "bbox": [
+    -72.31046,
+    43.88973,
+    -72.30208,
+    43.89611
+   ],
+   "wikidata": "Q49305842",
+   "charted": false,
+   "area_km2": 0.275,
+   "launches": [
+    "miller-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mirror-lake-vt",
+   "name": "Mirror Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Calais"
+   ],
+   "bbox": [
+    -72.44754,
+    44.39154,
+    -72.43945,
+    44.39981
+   ],
+   "wikidata": "Q49702013",
+   "charted": false,
+   "area_km2": 0.354,
+   "launches": [
+    "mirror-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "missisquoi-river-vt",
+   "name": "Missisquoi River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Swanton"
+   ],
+   "bbox": [
+    -73.16761,
+    44.8062,
+    -72.38467,
+    45.01277
+   ],
+   "wikidata": "Q974998",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "babbie-access-vt",
+    "louie-s-landing-boat-launch-vt",
+    "macs-bend-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mollys-falls-pond-vt",
+   "name": "Mollys Falls Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Cabot"
+   ],
+   "bbox": [
+    -72.30516,
+    44.34229,
+    -72.27336,
+    44.36613
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.676,
+   "launches": [
+    "marshfield-dam-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://ahs-vt.maps.arcgis.com/apps/webappviewer/index.html?id=a46d42c05e864a198ab5dc152f9d09b9",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021.",
+     "date": "2021-08-02",
+     "years": [
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "moore-reservoir-vt",
+   "name": "Moore Reservoir",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Waterford"
+   ],
+   "bbox": [
+    -71.87595,
+    44.31503,
+    -71.77508,
+    44.40547
+   ],
+   "wikidata": "Q6908217",
+   "charted": false,
+   "area_km2": 13.065,
+   "launches": [
+    "waterford-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "moose-river-vt",
+   "name": "Moose River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Concord",
+    "Victory"
+   ],
+   "bbox": [
+    -72.01152,
+    44.4202,
+    -71.78298,
+    44.63391
+   ],
+   "wikidata": "Q19344091",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "moose-river-chickadee-vt",
+    "moose-river-concord-vt",
+    "moose-river-damon-s-crossing-vt",
+    "moose-river-rail-crossing-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mud-creek-pond-vt",
+   "name": "Mud Creek Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Alburgh"
+   ],
+   "bbox": [
+    -73.27023,
+    44.96675,
+    -73.26807,
+    44.97001
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.025,
+   "launches": [
+    "mud-creek-pond-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "neal-pond-vt",
+   "name": "Neal Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Lunenburg"
+   ],
+   "bbox": [
+    -71.6967,
+    44.48179,
+    -71.68851,
+    44.49755
+   ],
+   "wikidata": "Q49306791",
+   "charted": false,
+   "area_km2": 0.773,
+   "launches": [
+    "neal-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "newark-pond-vt",
+   "name": "Newark Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Newark"
+   ],
+   "bbox": [
+    -71.98602,
+    44.71001,
+    -71.97842,
+    44.72322
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.677,
+   "launches": [
+    "newark-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-hartland-reservoir-vt",
+   "name": "North Hartland Reservoir",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "White River Junction"
+   ],
+   "bbox": [
+    -72.40263,
+    43.60409,
+    -72.36204,
+    43.62062
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.697,
+   "launches": [
+    "north-hartland-reservoir-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-montpelier-pond-vt",
+   "name": "North Montpelier Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "E. Montpelier"
+   ],
+   "bbox": [
+    -72.44767,
+    44.30348,
+    -72.44127,
+    44.31195
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.139,
+   "launches": [
+    "north-montpelier-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "norton-pond-vt",
+   "name": "Norton Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Warrens Gore"
+   ],
+   "bbox": [
+    -71.8868,
+    44.9166,
+    -71.8476,
+    44.95362
+   ],
+   "wikidata": "Q49702184",
+   "charted": false,
+   "area_km2": 2.821,
+   "launches": [
+    "norton-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nulhegan-river-vt",
+   "name": "Nulhegan River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Bloomfield",
+    "Ferdinand"
+   ],
+   "bbox": [
+    -71.81425,
+    44.75091,
+    -71.63221,
+    44.79042
+   ],
+   "wikidata": "Q23959646",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "nulhegan-river-carry-in-access-vt",
+    "wenlock-crossing-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "otter-creek-vt",
+   "name": "Otter Creek",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Clarendon",
+    "Cornwall",
+    "Middlebury",
+    "Mt Tabor",
+    "Pittsford",
+    "Rock Landing",
+    "Sudbury",
+    "Vergennes",
+    "Weybridge"
+   ],
+   "bbox": [
+    -73.32462,
+    43.25166,
+    -72.9714,
+    44.22593
+   ],
+   "wikidata": "Q1338233",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "otter-creek-boat-launch-vt",
+    "otter-creek-clarendon-vt",
+    "otter-creek-cornwall-swamp-vt",
+    "otter-creek-kingsley-vt",
+    "otter-creek-kwonumosk-vt",
+    "otter-creek-middlebury-vt",
+    "otter-creek-neilson-parcel-vt",
+    "otter-creek-sudbury-vt",
+    "otter-creek-wma-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "passumpsic-river-vt",
+   "name": "Passumpsic River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Barnet"
+   ],
+   "bbox": [
+    -72.04639,
+    44.31477,
+    -71.99024,
+    44.55028
+   ],
+   "wikidata": "Q7142870",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "passumpsic-river-cartop-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "peacham-pond-vt",
+   "name": "Peacham Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Peacham"
+   ],
+   "bbox": [
+    -72.27126,
+    44.32399,
+    -72.25052,
+    44.33895
+   ],
+   "wikidata": "Q49702292",
+   "charted": false,
+   "area_km2": 1.489,
+   "launches": [
+    "peacham-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pensioner-pond-vt",
+   "name": "Pensioner Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Charleston"
+   ],
+   "bbox": [
+    -72.06054,
+    44.86685,
+    -72.05132,
+    44.87897
+   ],
+   "wikidata": "Q49308097",
+   "charted": false,
+   "area_km2": 0.732,
+   "launches": [
+    "pensioner-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "perch-pond-vt",
+   "name": "Perch Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Benson"
+   ],
+   "bbox": [
+    -73.28192,
+    43.74885,
+    -73.27795,
+    43.75354
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.103,
+   "launches": [
+    "perch-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pond-brook-vt",
+   "name": "Pond Brook",
+   "kind": "stream",
+   "state": "VT",
+   "towns": [
+    "Bristol"
+   ],
+   "bbox": [
+    -73.11814,
+    44.17853,
+    -73.09385,
+    44.28163
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bristol-pond-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "red-mill-pond-vt",
+   "name": "Red Mill Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Woodford"
+   ],
+   "bbox": [
+    -73.02903,
+    42.88863,
+    -73.02668,
+    42.89048
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.02,
+   "launches": [
+    "red-mill-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "richville-pond-vt",
+   "name": "Richville Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Shoreham"
+   ],
+   "bbox": [
+    -73.27411,
+    43.87489,
+    -73.27389,
+    43.87505
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.0,
+   "launches": [
+    "richville-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ricker-pond-vt",
+   "name": "Ricker Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Lakeside"
+   ],
+   "bbox": [
+    -72.24956,
+    44.24123,
+    -72.23838,
+    44.25114
+   ],
+   "wikidata": "Q49309060",
+   "charted": false,
+   "area_km2": 0.398,
+   "launches": [
+    "ricker-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rock-river-vt",
+   "name": "Rock River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Swanton"
+   ],
+   "bbox": [
+    -73.08842,
+    44.95305,
+    -72.93037,
+    45.01575
+   ],
+   "wikidata": "Q7354647",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rock-river-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rood-pond-vt",
+   "name": "Rood Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Williamstown"
+   ],
+   "bbox": [
+    -72.58917,
+    44.07449,
+    -72.5854,
+    44.07938
+   ],
+   "wikidata": "Q49309282",
+   "charted": false,
+   "area_km2": 0.1,
+   "launches": [
+    "rood-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sabin-pond-vt",
+   "name": "Sabin Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Woodbury"
+   ],
+   "bbox": [
+    -72.42273,
+    44.39219,
+    -72.41039,
+    44.40721
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.595,
+   "launches": [
+    "sabin-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salem-lake-vt",
+   "name": "Salem Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Derby"
+   ],
+   "bbox": [
+    -72.11918,
+    44.919,
+    -72.0947,
+    44.94043
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.557,
+   "launches": [
+    "david-h-wood-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2018 and 2023.",
+     "date": "2023-06-19",
+     "years": [
+      "2018",
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "seymour-lake-vt",
+   "name": "Seymour Lake",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Morgan"
+   ],
+   "bbox": [
+    -72.01523,
+    44.86599,
+    -71.96721,
+    44.91191
+   ],
+   "wikidata": "Q7353424",
+   "charted": false,
+   "area_km2": 7.486,
+   "launches": [
+    "seymour-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shadow-lake-glover-vt",
+   "name": "Shadow Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Glover"
+   ],
+   "bbox": [
+    -72.23355,
+    44.6638,
+    -72.21605,
+    44.67425
+   ],
+   "wikidata": "Q49702623",
+   "charted": false,
+   "area_km2": 0.928,
+   "launches": [
+    "shadow-lake-glover-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024.",
+     "date": "2024-09-01",
+     "years": [
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "shadow-lake-vt",
+   "name": "Shadow Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Concord"
+   ],
+   "bbox": [
+    -71.8764,
+    44.39279,
+    -71.86584,
+    44.40596
+   ],
+   "wikidata": "Q49310301",
+   "charted": false,
+   "area_km2": 0.561,
+   "launches": [
+    "shadow-lake-concord-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shelburne-pond-vt",
+   "name": "Shelburne Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Shelburne"
+   ],
+   "bbox": [
+    -73.16779,
+    44.37621,
+    -73.15061,
+    44.39836
+   ],
+   "wikidata": "Q49310366",
+   "charted": false,
+   "area_km2": 2.036,
+   "launches": [
+    "shelburne-pond-boat-launch-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://experience.arcgis.com/experience/194da900279747efa8cee01b57fb23e6/page/Tracker",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017, 2018 and 2020 to 2026.",
+     "date": "2026-09-01",
+     "years": [
+      "2017",
+      "2018",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "silver-lake-vt",
+   "name": "Silver Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Barnard"
+   ],
+   "bbox": [
+    -72.61866,
+    43.72674,
+    -72.60517,
+    43.73195
+   ],
+   "wikidata": "Q49310539",
+   "charted": false,
+   "area_km2": 0.345,
+   "launches": [
+    "silver-lake-state-park-cartop-boat-launch-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://experience.arcgis.com/experience/194da900279747efa8cee01b57fb23e6/page/Tracker",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024 to 2026.",
+     "date": "2026-09-08",
+     "years": [
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "south-pond-vt",
+   "name": "South Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Marlboro"
+   ],
+   "bbox": [
+    -72.71629,
+    42.84032,
+    -72.70969,
+    42.8477
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.288,
+   "launches": [
+    "south-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-stream-pond-vt",
+   "name": "South Stream Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Pownal"
+   ],
+   "bbox": [
+    -73.18467,
+    42.80693,
+    -73.17592,
+    42.81463
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.211,
+   "launches": [
+    "south-stream-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "spectacle-pond-vt",
+   "name": "Spectacle Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Brighton"
+   ],
+   "bbox": [
+    -71.85586,
+    44.79457,
+    -71.84523,
+    44.80531
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.45,
+   "launches": [
+    "spectacle-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stevens-brook-vt",
+   "name": "Stevens Brook",
+   "kind": "stream",
+   "state": "VT",
+   "towns": [
+    "Saint Albans"
+   ],
+   "bbox": [
+    -73.15187,
+    44.80474,
+    -73.06711,
+    44.84998
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "stevens-brook-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sunset-lake-vt",
+   "name": "Sunset Lake",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Benson"
+   ],
+   "bbox": [
+    -73.27806,
+    43.74992,
+    -73.26398,
+    43.76163
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.857,
+   "launches": [
+    "sunset-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ticklenaked-pond-vt",
+   "name": "Ticklenaked Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Ryegate"
+   ],
+   "bbox": [
+    -72.10149,
+    44.18246,
+    -72.09701,
+    44.19277
+   ],
+   "wikidata": "Q21197275",
+   "charted": false,
+   "area_km2": 0.231,
+   "launches": [
+    "ticklenaked-pond-boat-launch-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017, 2022 and 2024.",
+     "date": "2024-08-01",
+     "years": [
+      "2017",
+      "2022",
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "townshend-reservoir-vt",
+   "name": "Townshend Reservoir",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Townshend"
+   ],
+   "bbox": [
+    -72.70741,
+    43.05258,
+    -72.70117,
+    43.05932
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.193,
+   "launches": [
+    "townshend-lake-boat-ramp-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "valley-lake-vt",
+   "name": "Valley Lake",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Woodbury"
+   ],
+   "bbox": [
+    -72.44739,
+    44.44314,
+    -72.43462,
+    44.45289
+   ],
+   "wikidata": "Q49703055",
+   "charted": false,
+   "area_km2": 0.365,
+   "launches": [
+    "valley-lake-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "vernon-hatchery-pond-vt",
+   "name": "Vernon Hatchery Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Vernon"
+   ],
+   "bbox": [
+    -72.50006,
+    42.74151,
+    -72.49754,
+    42.74369
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.022,
+   "launches": [
+    "vernon-hatchery-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "waterbury-reservoir-vt",
+   "name": "Waterbury Reservoir",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Waterbury"
+   ],
+   "bbox": [
+    -72.77462,
+    44.37819,
+    -72.72528,
+    44.42934
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.542,
+   "launches": [
+    "blush-hill-boat-launch-vt",
+    "reservoir-road-boat-launch-vt",
+    "waterbury-reservoir-boat-launch-waterbury-vt",
+    "waterbury-reservoir-boat-launch-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://experience.arcgis.com/experience/e84d740b61244ac59a10f9fd443ef3c5/page/Tracker/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-06-08",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "weatherhead-hollow-pond-vt",
+   "name": "Weatherhead Hollow Pond",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Guilford"
+   ],
+   "bbox": [
+    -72.61443,
+    42.73716,
+    -72.60798,
+    42.74769
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.122,
+   "launches": [
+    "weatherhead-hollow-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-hill-pond-vt",
+   "name": "West Hill Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Cabot"
+   ],
+   "bbox": [
+    -72.34495,
+    44.41426,
+    -72.34002,
+    44.42156
+   ],
+   "wikidata": "Q49703130",
+   "charted": false,
+   "area_km2": 0.194,
+   "launches": [
+    "west-hill-pond-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-mountain-pond-vt",
+   "name": "West Mountain Pond",
+   "kind": "lake",
+   "state": "VT",
+   "towns": [
+    "Browns Mill"
+   ],
+   "bbox": [
+    -71.66799,
+    44.68595,
+    -71.6596,
+    44.69203
+   ],
+   "wikidata": "Q49315668",
+   "charted": false,
+   "area_km2": 0.257,
+   "launches": [
+    "west-mountain-pond-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wheeler-stream-vt",
+   "name": "Wheeler Stream",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Bloomfield"
+   ],
+   "bbox": [
+    -71.64687,
+    44.69312,
+    -71.61862,
+    44.72521
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wheeler-stream-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "willougby-river-vt",
+   "name": "Willougby River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Barton"
+   ],
+   "bbox": [
+    -72.2039,
+    44.77829,
+    -72.07389,
+    44.81759
+   ],
+   "wikidata": "Q26780691",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "indian-pioneer-point-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "winooski-river-vt",
+   "name": "Winooski River",
+   "kind": "river",
+   "state": "VT",
+   "towns": [
+    "Bolton",
+    "Burlington",
+    "Colchester"
+   ],
+   "bbox": [
+    -73.27626,
+    44.23798,
+    -72.3099,
+    44.53989
+   ],
+   "wikidata": "Q1164787",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "heineberg-bridge-vt",
+    "winooski-river-canoe-access-vt",
+    "winooski-river-carry-in-access-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wolcott-pond-vt",
+   "name": "Wolcott Pond",
+   "kind": "pond",
+   "state": "VT",
+   "towns": [
+    "Wolcott"
+   ],
+   "bbox": [
+    -72.42701,
+    44.56265,
+    -72.41372,
+    44.56788
+   ],
+   "wikidata": "Q49703230",
+   "charted": false,
+   "area_km2": 0.311,
+   "launches": [
+    "wolcott-pond-boat-launch-vt"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://experience.arcgis.com/experience/194da900279747efa8cee01b57fb23e6/page/Tracker",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-16",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "woodward-reservoir-vt",
+   "name": "Woodward Reservoir",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Plymouth"
+   ],
+   "bbox": [
+    -72.76252,
+    43.55948,
+    -72.75458,
+    43.57439
+   ],
+   "wikidata": "Q49703239",
+   "charted": false,
+   "area_km2": 0.482,
+   "launches": [
+    "woodward-reservoir-boat-launch-vt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wrightsville-reservoir-vt",
+   "name": "Wrightsville Reservoir",
+   "kind": "reservoir",
+   "state": "VT",
+   "towns": [
+    "Montpelier"
+   ],
+   "bbox": [
+    -72.57781,
+    44.31123,
+    -72.56538,
+    44.33712
+   ],
+   "wikidata": "Q21197359",
+   "charted": false,
+   "area_km2": 0.764,
+   "launches": [
+    "wrightsville-reservoir-boat-launch-vt"
+   ],
+   "advisories": []
+  }
+ ]
+}

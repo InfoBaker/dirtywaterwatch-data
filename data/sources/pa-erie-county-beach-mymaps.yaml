@@ -1,0 +1,32 @@
+id: "pa-erie-county-beach-mymaps"
+name: "Erie County Department of Health beach and HAB advisory map (Google My Maps KML)"
+url: "https://eriecountypa.gov/departments/health/services-and-programs/health-and-wellness/beach-water-testing-results/"
+homepage: "https://eriecountypa.gov/departments/health/services-and-programs/health-and-wellness/beach-water-testing-results/"
+kind: "api"
+level: "municipal"
+# Notes (research/pa, status candidate, verified fetched, checked 2026-11-02): The only PA beach
+#   advisory source with live status and history in machine-readable form; covers Presque Isle (Lake
+#   Erie). Thresholds per county: advisory 235-999, restriction at 1,000 CFU/100 mL (news reports;
+#   verify).
+# Access detail (research, quoted): Page embeds Google My Maps
+#   mid=1B6FxSFxIGXX5z3R9mgjn3YHEck1ru5GM; KML export
+#   https://www.google.com/maps/d/kml?mid=1B6FxSFxIGXX5z3R9mgjn3YHEck1ru5GM&forcekml=1 fetched: 11
+#   beach placemarks (Presque Isle beaches 1-11, Barracks, Mill Road, Freeport) with 'Current
+#   Status' text and 30 HAB sites ('Below all thresholds' / 'Exceeds dog safety thresholds'). Each
+#   beach links a Google Sheet of results 2015-present (CSV export works: /export?format=csv).
+# Can fill: source_status, coordinates (beach point), started_at (sample date), advice_text (colour
+#   meanings), source_url
+# Cannot fill: discharge events; valid_until
+# History: Sheets 2015-present; WQP org 21PABCH has 903 E. coli results for 2025 (to 2025-09-23).
+cadence: "Season late May-Labor Day; sampling 2x a week (Freeport weekly). HAB sampling weekly May-Oct; 2026 HAB note: 'Sampling for the 2026 season ended 09/02/2026 due to a lack of funding.'"
+license: "None stated."
+attribution: "Erie County Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure", "hab_advisory"]
+states: ["PA"]
+access: ["html", "api"]
+access_detail: "Page embeds Google My Maps mid=1B6FxSFxIGXX5z3R9mgjn3YHEck1ru5GM; KML export https://www.google.com/maps/d/kml?mid=1B6FxSFxIGXX5z3R9mgjn3YHEck1ru5GM&forcekml=1 fetched: 11 beach placemarks (Presque Isle beaches 1-11, Barracks, Mill Road, Freeport) with 'Current Status' text and 30 HAB sites ('Below all thresholds' / 'Exceeds dog safety thresholds'). Each beach links a Google Sheet of results 2015-present (CSV export works: /export?format=csv)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

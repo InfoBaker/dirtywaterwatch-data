@@ -1,0 +1,32 @@
+id: "ma-swsc-springfieldalerts"
+name: "Springfield Alerts (SWSC CSO/SSO/blending advisory site)"
+url: "https://springfieldalerts.com/Suez/"
+homepage: "https://springfieldalerts.com/Suez/"
+kind: "html"
+level: "utility"
+# Notes (research/ma, status candidate, verified fetched, checked 2026-11-01): Official channel, but
+#   per-event content is only in the emails; owner should subscribe
+# Access detail (research, quoted): WordPress. Email sign-up via Constant Contact list 'CSO
+#   Notification - Public' (not subscribed). CSO page embeds the Aquasight map. SSO and blending
+#   pages are blank templates (modified 2022). WP REST page list saved. RSS holds only the 2021
+#   default post. Per-outfall estimate table at /index.php/cso-public-advisory-notice/
+# Can fill: authority, waterbody, location_text, advice_text
+# Cannot fill: started_at; ended_at; measured volume (estimates are 3-yr averages); coordinates;
+#   history
+# Waters: Connecticut, Mill, Chicopee Rivers (Springfield); WWTF outfall at Bondi's Island
+#   (openboatlaunch slugs: connecticut-river-ma)
+# History: Monthly CSO PDFs 2019-01 to 2023-04 (page modified 2023-05-15)
+# Research notes: Estimates e.g. CSO 042 2,799,936; CSO 019 4,806,523; CSO 012 4,019,866 gal per
+#   event
+cadence: "Email per event (not seen); pages static"
+license: "none stated"
+attribution: "Springfield Water and Sewer Commission (site contact is a veolia.com address)"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "partially_treated"]
+states: ["MA"]
+access: ["html", "email", "map_only"]
+access_detail: "WordPress. Email sign-up via Constant Contact list 'CSO Notification - Public' (not subscribed). CSO page embeds the Aquasight map. SSO and blending pages are blank templates (modified 2022). WP REST page list saved. RSS holds only the 2021 default post. Per-outfall estimate table at /index.php/cso-public-advisory-notice/"
+machine_readable: false
+legal_basis: "314 CMR 16.00"
+checked: "2026-11-01"

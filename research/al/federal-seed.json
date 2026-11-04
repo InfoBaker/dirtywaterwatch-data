@@ -1,0 +1,948 @@
+{
+ "state": "AL",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 411,
+ "plant_permits_major": 134,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "AL0000108",
+   "permittee": "Indorama Ventures Xylenes & PTA, LLC",
+   "city": "DECATUR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0001597",
+   "permittee": "FMC Corportation",
+   "city": "AXIS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0002666",
+   "permittee": "UOP LLC - Mobile Plant",
+   "city": "CHICKASAW",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0002755",
+   "permittee": "Packaging Corporation of America",
+   "city": "JACKSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0002801",
+   "permittee": "Kimberly-Clark Corp",
+   "city": "MOBILE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0003018",
+   "permittee": "International Paper-Riverdale",
+   "city": "SELMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0003026",
+   "permittee": "Lenzing Fibers, Inc.",
+   "city": "AXIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0003093",
+   "permittee": "BASF Corporation",
+   "city": "MCINTOSH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0020001",
+   "permittee": "Utilities Board of the City of Sylacauga",
+   "city": "SYLACAUGA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0020036",
+   "permittee": "City of Enterprise",
+   "city": "ENTERPRISE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0020044",
+   "permittee": "ENTERPRISE CITY OF S E LAGOON",
+   "city": "ENTERPRISE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0020061",
+   "permittee": "City of Enterprise",
+   "city": "ENTERPRISE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0020141",
+   "permittee": "Waterworks and Sewer Board of the Town of Ashland",
+   "city": "ASHLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0020150",
+   "permittee": "Guntersville Water and Sewer Board",
+   "city": "GUNTERSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0020192",
+   "permittee": "Municipal Utilities Board of the City of Albertville",
+   "city": "ALBERTVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0020206",
+   "permittee": "City of Athens Utilities",
+   "city": "ATHENS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0020273",
+   "permittee": "The Water Works and Sewer Board of the City of Geneva",
+   "city": "GENEVA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0020486",
+   "permittee": "City of Tallassee",
+   "city": "TALLASSEE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0020532",
+   "permittee": "Water Works and Sewer Board of the City of Greenville",
+   "city": "GREENVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0020672",
+   "permittee": "City of Moulton",
+   "city": "MOULTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0020842",
+   "permittee": "City of Fairhope",
+   "city": "FAIRHOPE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0020885",
+   "permittee": "Utilities Board of the City of Chickasaw",
+   "city": "CHICKASAW",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0020991",
+   "permittee": "Utilities Board of the City of Bridgeport",
+   "city": "BRIDGEPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0021156",
+   "permittee": "City of Alexander City",
+   "city": "ALEXANDER CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0022195",
+   "permittee": "The Water Works & Sewer Board of the City of Anniston",
+   "city": "OXFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0022209",
+   "permittee": "Phenix City Department of Public Utilities",
+   "city": "PHENIX CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0022225",
+   "permittee": "Montgomery Water Works & Sanitary Sewer Board",
+   "city": "MONTGOMERY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0022241",
+   "permittee": "Montgomery Water Works & Sanitary Sewer Board",
+   "city": "MONTGOMERY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0022357",
+   "permittee": "City of Talladega Water & Environmental Services",
+   "city": "TALLADEGA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0022578",
+   "permittee": "The Waterworks and Sewer Board of the City of Selma",
+   "city": "SELMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0022586",
+   "permittee": "Jacksonville Water Works, Gas and Sewer Board",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0022632",
+   "permittee": "BAYOU LA BATRE U B WWTP",
+   "city": "BAYOU LA BATRE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AL0022659",
+   "permittee": "The Water Works & Sewer Board of the City of Gadsden, Alabama",
+   "city": "GADSDEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0022713",
+   "permittee": "City of Tuscaloosa",
+   "city": "TUSCALOOSA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0022756",
+   "permittee": "DOTHAN CITY OF BEAVER CK WWTP",
+   "city": "DOTHAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0022764",
+   "permittee": "City of Dothan",
+   "city": "DOTHAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0022926",
+   "permittee": "Jefferson County Commission",
+   "city": "PINSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0022934",
+   "permittee": "Jefferson County Commission",
+   "city": "TRUSSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0023027",
+   "permittee": "Jefferson County Commission",
+   "city": "BIRMINGHAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0023086",
+   "permittee": "Mobile Area Water and Sewer System",
+   "city": "MOBILE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0023094",
+   "permittee": "Mobile Area Water and Sewer System",
+   "city": "MOBILE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0023116",
+   "permittee": "City of Helena Utilities Board",
+   "city": "HELENA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0023159",
+   "permittee": "City of Lanett",
+   "city": "LANETT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0023205",
+   "permittee": "PRICHARD WWSB C A MORRIS PT",
+   "city": "PRICHARD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0023272",
+   "permittee": "Evonik Corporation",
+   "city": "THEODORE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0023311",
+   "permittee": "City of Fort Payne",
+   "city": "FORT PAYNE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0023400",
+   "permittee": "Winfield Water Works & Sewer Board",
+   "city": "WINFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0023418",
+   "permittee": "Jasper Waterworks & Sewer Board, Inc.",
+   "city": "JASPER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0023647",
+   "permittee": "Jefferson County Commission",
+   "city": "BIRMINGHAM",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0023655",
+   "permittee": "Jefferson County Commission",
+   "city": "BESSEMER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0023825",
+   "permittee": "City of Brewton",
+   "city": "BREWTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0023884",
+   "permittee": "City Of Florence Water/Wastewater Department",
+   "city": "FLORENCE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0024180",
+   "permittee": "Muscle Shoals Utilities Board",
+   "city": "MUSCLE SHOALS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0024376",
+   "permittee": "City of Piedmont Water, Sewer & Gas Board",
+   "city": "PIEDMONT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0024520",
+   "permittee": "The Water Works and Sewer Board of the City of Anniston",
+   "city": "ANNISTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0024724",
+   "permittee": "East Alabama Water, Sewer, and Fire Protection District",
+   "city": "VALLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0025828",
+   "permittee": "City of Alabaster",
+   "city": "ALABASTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0025852",
+   "permittee": "City of Hoover",
+   "city": "HOOVER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0026654",
+   "permittee": "City of Prattville",
+   "city": "PRATTVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0026913",
+   "permittee": "Jefferson County Commission",
+   "city": "FULTONDALE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0027561",
+   "permittee": "Utilities Board of the City of Daphne",
+   "city": "DAPHNE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0027723",
+   "permittee": "City of Prattville",
+   "city": "PRATTVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0027782",
+   "permittee": "The Water Works and Sewer Board of the City of Monroeville",
+   "city": "MONROEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0027863",
+   "permittee": "The Water Works & Sanitary Sewer Board of the City of Montgomery",
+   "city": "MONTGOMERY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0027987",
+   "permittee": "Russellville Water and Sewer Board",
+   "city": "RUSSELLVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0031372",
+   "permittee": "Scottsboro Water, Sewer, and Gas Board",
+   "city": "SCOTTSBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0032310",
+   "permittee": "City of Troy",
+   "city": "TROY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0041653",
+   "permittee": "City of Hoover",
+   "city": "HOOVER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0042765",
+   "permittee": "City of Rainsville",
+   "city": "RAINSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0042838",
+   "permittee": "City of Robertsdale",
+   "city": "ROBERTSDALE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0043168",
+   "permittee": "The Water Works and Sewer Board of the City of Demopolis",
+   "city": "DEMOPOLIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0043176",
+   "permittee": "Dallas County Water And Sewer Authority",
+   "city": "SELMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0044857",
+   "permittee": "The Waterworks & Sewer Board of the City of Centreville and the Water Works Boar",
+   "city": "BRENT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0045993",
+   "permittee": "City of Pell City",
+   "city": "PELL CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0046744",
+   "permittee": "West Escambia Utilities, Inc.",
+   "city": "ATMORE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0047465",
+   "permittee": "City Of Dothan",
+   "city": "DOTHAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0047503",
+   "permittee": "City of Evergreen",
+   "city": "EVERGREEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0048372",
+   "permittee": "City Of Hamilton",
+   "city": "HAMILTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0048593",
+   "permittee": "Decatur Utilities",
+   "city": "DECATUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0048763",
+   "permittee": "Utilities Board of the City of Tuskegee",
+   "city": "TUSKEGEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0048861",
+   "permittee": "City of Alexander City",
+   "city": "ALEXANDER CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0049042",
+   "permittee": "The Utilities Board of the City of Foley",
+   "city": "FOLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0049531",
+   "permittee": "City of Huntsville Water Pollution Control",
+   "city": "MADISON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0049549",
+   "permittee": "Living Water Utilities, LLC",
+   "city": "ALLGOOD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0049557",
+   "permittee": "West Escambia Utilities, Inc.",
+   "city": "ATMORE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0049603",
+   "permittee": "The Board of Water and Sewer Commissioners for the City of Boaz, Alabama",
+   "city": "BOAZ",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0049867",
+   "permittee": "North Baldwin Utilities",
+   "city": "BAY MINETTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0049921",
+   "permittee": "City of Millbrook",
+   "city": "MILLBROOK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0050121",
+   "permittee": "Sheffield Utilities",
+   "city": "SHEFFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0050130",
+   "permittee": "City of Opelika",
+   "city": "OPELIKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0050237",
+   "permittee": "City of Auburn",
+   "city": "AUBURN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0050245",
+   "permittee": "City of Auburn",
+   "city": "AUBURN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0050423",
+   "permittee": "City of Cullman",
+   "city": "CULLMAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0050938",
+   "permittee": "City of Calera",
+   "city": "CALERA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0053201",
+   "permittee": "The Water Works & Sewer Board of the City of Gadsden",
+   "city": "GADSDEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0054313",
+   "permittee": "Utilities Board of the City of Opp",
+   "city": "OPP",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0054356",
+   "permittee": "City of Lincoln",
+   "city": "LINCOLN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0054631",
+   "permittee": "The Water Works & Sewer Board of the City of Clanton",
+   "city": "CLANTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0054640",
+   "permittee": "City of Fayette",
+   "city": "FAYETTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0054666",
+   "permittee": "City of Pelham",
+   "city": "PELHAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0054674",
+   "permittee": "Hartselle Utilities",
+   "city": "HARTSELLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0055042",
+   "permittee": "City of Huntsville Water Pollution Control",
+   "city": "OWENS CROSS ROADS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0055204",
+   "permittee": "Water Works and Sewer Board of the City of Prichard",
+   "city": "PRICHARD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0055417",
+   "permittee": "Utilities Board Of The City Of Andalusia",
+   "city": "ANDALUSIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0055786",
+   "permittee": "Board of Water & Sewer Commissioners of the City of Saraland",
+   "city": "SARALAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0055841",
+   "permittee": "Utilities Board of the City of Gulf Shores",
+   "city": "GULF SHORES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0056022",
+   "permittee": "City of Thomasville Water Works and Sewer Board",
+   "city": "THOMASVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0056324",
+   "permittee": "Utilities Board of the City of Ozark",
+   "city": "OZARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0056839",
+   "permittee": "Utilities Board Of Rainbow City",
+   "city": "RAINBOW CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0056855",
+   "permittee": "City of Huntsville Water Pollution Control",
+   "city": "HUNTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0057100",
+   "permittee": "City of Tuscumbia Department of Utilities",
+   "city": "TUSCUMBIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0057193",
+   "permittee": "Utilities Board of the City of Greensboro",
+   "city": "GREENSBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0057428",
+   "permittee": "City Of Huntsville Water Pollution Control",
+   "city": "HUNTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0057657",
+   "permittee": "City of Attalla",
+   "city": "RAINBOW CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0058394",
+   "permittee": "City of Huntsville Water Pollution Control",
+   "city": "HUNTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0058408",
+   "permittee": "Water Works & Sewer Board of the City of Oxford",
+   "city": "OXFORD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0059218",
+   "permittee": "City of Opelika",
+   "city": "OPELIKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0059579",
+   "permittee": "TALLADEGA CITY OF NIKI LU WWTP",
+   "city": "TALLADEGA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AL0060445",
+   "permittee": "City of Union Springs Utilities Board",
+   "city": "UNION SPRINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0061671",
+   "permittee": "The Water Works and Sewer Board of the City of Eufaula",
+   "city": "EUFAULA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0062715",
+   "permittee": "Utilities Board of the City of Roanoke",
+   "city": "ROANOKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0062723",
+   "permittee": "Water Works & Sewer Board of the Town of Centre",
+   "city": "CENTRE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0062839",
+   "permittee": "City of LaFayette",
+   "city": "LAFAYETTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0064025",
+   "permittee": "The Water Works and Sewer Board of the City of Wetumpka",
+   "city": "WETUMPKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0064394",
+   "permittee": "City of Northport",
+   "city": "NORTHPORT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0067067",
+   "permittee": "Jefferson County Commission",
+   "city": "LEEDS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0071897",
+   "permittee": "Water and Wastewater Board of the City of Madison",
+   "city": "MADISON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0072737",
+   "permittee": "City Of Dothan",
+   "city": "DOTHAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0074608",
+   "permittee": "City of Calera",
+   "city": "CALERA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0078921",
+   "permittee": "Utilities Board of the City of Bayou La Batre",
+   "city": "BAYOU LA BATRE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0079901",
+   "permittee": "Outokumpu Stainless USA, LLC",
+   "city": "CALVERT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0081124",
+   "permittee": "City of Orange Beach",
+   "city": "ORANGE BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AL0082431",
+   "permittee": "The Water Works & Sanitary Sewer Board of the City of Montgomery",
+   "city": "PIKE ROAD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AL0084466",
+   "permittee": "City of Troy",
+   "city": "TROY",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

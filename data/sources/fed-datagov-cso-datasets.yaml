@@ -1,0 +1,26 @@
+id: "fed-datagov-cso-datasets"
+name: "data.gov catalog search for national CSO/SSO datasets"
+url: "https://catalog.data.gov/search?q=combined+sewer+overflow"
+homepage: "https://catalog.data.gov/search?q=combined+sewer+overflow"
+kind: "api"
+level: "federal"
+# Notes (research/federal, status used, verified fetched, checked 2026-11-01): Confirms the ECHO
+#   inventory and SOBE downloads are the only national federal datasets.
+# Access detail (research, quoted): Search endpoint now returns JSON. Hits: 'Region 1 Combined Sewer
+#   Outfalls' (EPA R1, modified 2026-05-20 → the ArcGIS layer above); 'Locations of Combined Sewer
+#   Overflow Outfalls - US EPA Region 3' (2012, CC0); 'Combined Sewer Overflows (CSOs): Beginning
+#   2013' (data.ny.gov, NY agent); city layers (Seattle, DC); SSO datasets for Montgomery County MD
+#   and Texas TCEQ. No national federal CSO/SSO dataset other than ECHO's. catalog.data.gov CKAN API
+#   path /api/3/action/package_search returned 404.
+cadence: null
+license: "per dataset"
+attribution: "GSA data.gov (harvested agency records)"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["US"]
+access: ["api", "html"]
+access_detail: "Search endpoint now returns JSON. Hits: 'Region 1 Combined Sewer Outfalls' (EPA R1, modified 2026-05-20 → the ArcGIS layer above); 'Locations of Combined Sewer Overflow Outfalls - US EPA Region 3' (2012, CC0); 'Combined Sewer Overflows (CSOs): Beginning 2013' (data.ny.gov, NY agent); city layers (Seattle, DC); SSO datasets for Montgomery County MD and Texas TCEQ. No national federal CSO/SSO dataset other than ECHO's. catalog.data.gov CKAN API path /api/3/action/package_search returned 404."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

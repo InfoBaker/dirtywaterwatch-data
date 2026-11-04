@@ -1,0 +1,74 @@
+{
+ "state": "DE",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "DE0020320",
+   "permittee": "CITY OF WILMINGTON REGIONAL WWTP",
+   "city": "WILMINGTON",
+   "open_outfalls": 41,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Brandywine Creek",
+    "Christina River",
+    "Little Mill Creek",
+    "Shellpot Creek",
+    "Silverbrook Run/Little Mill Creek"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 41,
+ "plant_permits": 12,
+ "plant_permits_major": 7,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "DE0020010",
+   "permittee": "Selbyville Wastewater Treatment Facility",
+   "city": "SELBYVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "DE0020028",
+   "permittee": "Rehoboth Beach Wastewater Treatment Plant",
+   "city": "REHOBOTH BEACH",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "DE0020265",
+   "permittee": "Seaford Wastewater Treatment Plant",
+   "city": "SEAFORD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "DE0020338",
+   "permittee": "Kent County Wastewater Treatment Facility",
+   "city": "MILFORD",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "DE0021512",
+   "permittee": "Howard Seymour Water Reclamation Plant",
+   "city": "LEWES",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "DE0050008",
+   "permittee": "South Coastal Regional Wastewater",
+   "city": "FRANKFORD",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "DE0051071",
+   "permittee": "NEW CASTLE COUNTY-MS4",
+   "city": "NEW CASTLE",
+   "major": "Major",
+   "status": "EXP"
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+id: "pa-phila-csocast"
+name: "Philadelphia Water Department CSOcast (Combined Sewer Overflow Public Notification System)"
+url: "https://water.phila.gov/maps/csocast/"
+homepage: "https://water.phila.gov/maps/csocast/"
+kind: "arcgis"
+level: "municipal"
+# Feed row: the source id written by the ingester pipeline/ingest/pa_phila_csocast.py
+#   (data/build/events/pa-phila-csocast.json). It describes the same source as the research row(s)
+#   in registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/pa_phila_csocast.py docstring): Every 15 minutes (state changes are only
+#   seen if polled; a gap longer than 72 hours can miss an overflow entirely). Written as 1 hour:
+#   the refresh runs every 30 minutes (scripts/org.dirtywaterwatch.refresh.plist), so a shorter
+#   threshold would read as overdue between runs.
+cadence: "1 hour"
+license: "No licence on the item (licenseInfo null). Map text: 'CSOcast is not intended to be used as a water quality notification system for recreation.'"
+attribution: "Philadelphia Water Department"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["PA"]
+registry_ids: ["pa-pwd-csocast"]
+access: ["arcgis", "map_only"]
+access_detail: "Public ArcGIS Online FeatureServer (owner phillywatergis, item 70e9d70fd2674f8896e0b560f88040b2, capabilities Query): https://services2.arcgis.com/POWz8dBwmjnei8fu/ArcGIS/rest/services/CSOCast_Layerboard/FeatureServer/0 (ows_csocast_outfall_status, 164 points) and /1 (ows_csocast_raingauge_status). No auth. Fetched all 164 rows 2026-11-02 17:55 UTC."
+machine_readable: true
+legal_basis: "PWD NPDES permits PA0026689, PA0026662, PA0026671 (CSO public notification under Nine Minimum Controls) and the 2011 Green City, Clean Waters Consent Order and Agreement with PA DEP."
+checked: "2026-11-02"

@@ -1,0 +1,199 @@
+{
+ "state": "NM",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 66,
+ "plant_permits_major": 27,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "NM0020109",
+   "permittee": "SILVER CITY, TOWN OF",
+   "city": "GRANT COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NM0020141",
+   "permittee": "LOS ALAMOS COUNTY - BAYO WWTP",
+   "city": "LOS ALAMOS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0020150",
+   "permittee": "BELEN, CITY OF",
+   "city": "BELEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0020168",
+   "permittee": "AZTEC, CITY OF - WWTP",
+   "city": "AZTEC",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0020303",
+   "permittee": "LOS LUNAS, VILLAGE OF",
+   "city": "LOS LUNAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0020311",
+   "permittee": "ROSWELL, NEW MEXICO",
+   "city": "ROSWELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0020583",
+   "permittee": "FARMINGTON, CITY OF (WWTP)",
+   "city": "FARMINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0020672",
+   "permittee": "GALLUP, CITY OF",
+   "city": "GALLUP",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0020681",
+   "permittee": "TRUTH OR CONSEQUENCES, CITY OF",
+   "city": "TRUTH OR CONSEQUENCES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0020711",
+   "permittee": "TUCUMCARI, CITY OF",
+   "city": "TUCUMCARI",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "NM0020770",
+   "permittee": "BLOOMFIELD, CITY OF",
+   "city": "BLOOMFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0022101",
+   "permittee": "TAOS SKI VALLEY, VILLAGE OF",
+   "city": "TAOS SKI VALLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0022250",
+   "permittee": "ALBUQUERQUE BERNALILLO COUNTY WATER UTILITY AUTHORITY",
+   "city": "ALBUQUERQUE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NM0022268",
+   "permittee": "ARTESIA, CITY OF",
+   "city": "ARTESIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0022292",
+   "permittee": "SANTA FE, CITY OF (AIRPORT RD",
+   "city": "SANTA FE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NM0023311",
+   "permittee": "LAS CRUCES, CITY OF",
+   "city": "LAS CRUCES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NM0024066",
+   "permittee": "TAOS, TOWN OF",
+   "city": "RANCHO DE TAOS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0026395",
+   "permittee": "CARLSBAD, CITY OF",
+   "city": "CARLSBAD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0027987",
+   "permittee": "RIO RANCHO, CITY OF",
+   "city": "RIO RANCHO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NM0028827",
+   "permittee": "LAS VEGAS, CITY OF (SOUTH EAST",
+   "city": "LAS VEGAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0028835",
+   "permittee": "SOCORRO, CITY OF",
+   "city": "SOCORRO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "NM0029165",
+   "permittee": "RUIDOSO-RUIDOSO DOWNS WWTP-LIN",
+   "city": "RUIDOSO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0029351",
+   "permittee": "ESPANOLA, CITY OF",
+   "city": "ESPANOLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0029483",
+   "permittee": "CAMINO REAL REGIONAL UTILITY AUTHORITY",
+   "city": "SUNLAND PARK",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "NM0030490",
+   "permittee": "DONA ANA COUNTY (SOUTH CENTRAL REGIONAL WWTP)",
+   "city": "LA MESA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NM0031178",
+   "permittee": "CAMINO REAL REGIONAL UTILITY AUTHORITY NORTH WASTEWATER TREATMENT PLANT",
+   "city": "SUNLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NN0020621",
+   "permittee": "NAVAJO TRIBAL UTILITY AUTHORITY",
+   "city": "SHIPROCK",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

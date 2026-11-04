@@ -1,0 +1,259 @@
+[
+ {
+  "id": "id-boise",
+  "name": "City of Boise (Lander Street and West Boise water renewal facilities)",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0020443",
+  "receiving_waters": [
+   "Boise River",
+   "Thurman Drain"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Permit requires immediate public notice per plan; city statements via media (2025-11-01 overflow). No web overflow list found.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Boise"
+  ],
+  "notes": "West Boise is ID0023981.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "id-coeur-dalene",
+  "name": "City of Coeur d'Alene",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0022853",
+  "receiving_waters": [
+   "Spokane River",
+   "Coeur d'Alene Lake"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not found (news coverage of past spills only).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Coeur d'Alene"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "id-post-falls",
+  "name": "City of Post Falls",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0025852",
+  "receiving_waters": [
+   "Spokane River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Post Falls"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "id-hayden-harsb",
+  "name": "Hayden Area Regional Sewer Board",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0026590",
+  "receiving_waters": [
+   "Spokane River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hayden"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "id-meridian",
+  "name": "City of Meridian",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0020192",
+  "receiving_waters": [
+   "Fivemile Creek",
+   "Boise River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Meridian"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "id-nampa",
+  "name": "City of Nampa",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0022063",
+  "receiving_waters": [
+   "Indian Creek",
+   "Boise River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nampa"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "id-caldwell",
+  "name": "City of Caldwell",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0021504",
+  "receiving_waters": [
+   "Boise River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Reported a March 2024 SSO to DEQ by phone; no public web notice found.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Caldwell"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "id-idaho-falls",
+  "name": "City of Idaho Falls",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0021261",
+  "receiving_waters": [
+   "Snake River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Idaho Falls"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "id-pocatello",
+  "name": "City of Pocatello",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0021784",
+  "receiving_waters": [
+   "Portneuf River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pocatello"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "id-twin-falls",
+  "name": "City of Twin Falls",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0021270",
+  "receiving_waters": [
+   "Snake River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Twin Falls"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "id-lewiston",
+  "name": "City of Lewiston",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0022055",
+  "receiving_waters": [
+   "Snake River",
+   "Clearwater River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lewiston"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "id-kamiah",
+  "name": "City of Kamiah",
+  "state": "ID",
+  "kind": "sso",
+  "npdes_permit": "ID0028002",
+  "receiving_waters": [
+   "Clearwater River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "SOBE only (1 row).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kamiah"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ }
+]

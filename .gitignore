@@ -1,0 +1,15 @@
+# rebuilt or archived elsewhere (R2); git holds only what people write
+data/raw/
+data/build/
+out/
+research/*/raw/
+pipeline/.venv/
+pipeline/**/__pycache__/
+pipeline/.ruff_cache/
+scripts/__pycache__/
+node_modules/
+.DS_Store
+*.log
+*.tmp
+.env
+build.tar.gz

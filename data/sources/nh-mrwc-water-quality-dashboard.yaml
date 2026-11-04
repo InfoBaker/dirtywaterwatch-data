@@ -1,0 +1,29 @@
+id: "nh-mrwc-water-quality-dashboard"
+name: "Merrimack River Watershed Council water quality dashboard layer (E. coli/Enterococci, with CSO field)"
+url: "https://merrimack.org/"
+homepage: "https://merrimack.org/"
+kind: "arcgis"
+level: "nonprofit"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Bacteria results
+#   with a CSO flag column; find the service URL and NH sites before use.
+# Access detail (research, quoted): ArcGIS feature layer captured by the failed sub-agent
+#   (raw/mon-mrwc-wq-dashboard-master.json; service URL not recorded). Fields include Date, Site,
+#   State, Weather, CSO, Ecoli_Conc, Entero_Conc, Ecoli_Status, Entero_Status, Overall_Status.
+#   MRWC's CSO page (https://merrimack.org/cso/) is a directory of plant sign-ups and does not relay
+#   notices: 'there is no centralized system to subscribe in order to receive alerts from all
+#   plants'.
+# Can fill: coordinates, reported_at
+# Research notes: Monitoring-group sweep done briefly after the delegated sweep failed; reachability
+#   tested with curl 2026-11-01.
+cadence: null
+license: "none stated"
+attribution: "Merrimack River Watershed Council"
+enabled: true
+role: "monitoring"
+event_types: ["bacteria"]
+states: ["NH", "MA"]
+access: ["arcgis"]
+access_detail: "ArcGIS feature layer captured by the failed sub-agent (raw/mon-mrwc-wq-dashboard-master.json; service URL not recorded). Fields include Date, Site, State, Weather, CSO, Ecoli_Conc, Entero_Conc, Ecoli_Status, Entero_Status, Overall_Status. MRWC's CSO page (https://merrimack.org/cso/) is a directory of plant sign-ups and does not relay notices: 'there is no centralized system to subscribe in order to receive alerts from all plants'."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

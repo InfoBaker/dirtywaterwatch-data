@@ -1,0 +1,42 @@
+id: "va-vdh-news-advisory-feed"
+name: "VDH news releases: recreational water and swimming advisories (WordPress search RSS)"
+url: "https://www.vdh.virginia.gov/news/?s=recreational+water+advisory&feed=rss2"
+homepage: "https://www.vdh.virginia.gov/news/"
+kind: "rss"
+level: "state"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): The best official
+#   advisory feed: machine-readable RSS with full text and lift notices. Parse titles
+#   'Issued'/'Lifted'.
+# Access detail (research, quoted): WordPress search feeds work:
+#   https://www.vdh.virginia.gov/news/?s=recreational+water+advisory&feed=rss2&paged=N and
+#   ?s=sewage&feed=rss2 (10 items per page; title, link, pubDate, full HTML body). The plain
+#   /news/feed/ carries only a few statewide items. 2025-2026 sewage advisories found: Potomac River
+#   (issued 2026-02-13, partly lifted 03-05, lifted 03-17), McClure River (04-10 to 04-14-2026),
+#   Bailey Bay Hopewell (07-16 to 07-23-2026), Hull Creek Portsmouth (08-05 to 08-17-2026), Hoskins
+#   Creek/Rappahannock (07-10 to 07-16-2025), Gravelly Run/James River (07-12 to 07-18-2025),
+#   Cumberland Plateau (2025-03-21). Also beach swimming advisories (Ocean View, Buckroe,
+#   Huntington, Hilton, King-Lincoln, Cape Charles) and shellfish closures.
+# Can fill: advice_text (quotable), authority (health district), published_at (pubDate), valid_until
+#   (lift release date), waterbody and affected area text, volume (as stated)
+# Cannot fill: geometry (advisory maps are PNG/PDF); structured fields
+# Waters: statewide; named waters per release (openboatlaunch slugs: potomac-river-va,
+#   james-river-va, elizabeth-river-va, rappahannock-river-va, hoskins-creek-va, chesapeake-bay-va)
+# History: 2025 archive under archived-news-releases; 2026 under 2026-regional-news-releases and
+#   2026-news-releases.
+# Research notes: Wording to quote: 'Out of an abundance of caution'; 'avoid recreational water
+#   activities ... where full-body submersion is more likely to occur. Boating activities where
+#   full-body submersion is not likely to occur (motor boating, flatwater canoeing or kayaking, and
+#   fishing) may continue with proper caution'. VDH lift notes give stop times that can differ from
+#   DEQ's (Bailey Bay: VDH 'Tuesday, July 22', DEQ noon Tuesday July 21).
+cadence: "Same day to 2 days after the spill report (Hull Creek advisory the day after; Bailey Bay 2 days after discovery; Potomac 25 days after the collapse)."
+license: "No licence on releases; public government news."
+attribution: "Virginia Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["sso", "bypass", "beach_advisory"]
+states: ["VA"]
+access: ["rss", "html"]
+access_detail: "WordPress search feeds work: https://www.vdh.virginia.gov/news/?s=recreational+water+advisory&feed=rss2&paged=N and ?s=sewage&feed=rss2 (10 items per page; title, link, pubDate, full HTML body). The plain /news/feed/ carries only a few statewide items. 2025-2026 sewage advisories found: Potomac River (issued 2026-02-13, partly lifted 03-05, lifted 03-17), McClure River (04-10 to 04-14-2026), Bailey Bay Hopewell (07-16 to 07-23-2026), Hull Creek Portsmouth (08-05 to 08-17-2026), Hoskins Creek/Rappahannock (07-10 to 07-16-2025), Gravelly Run/James River (07-12 to 07-18-2025), Cumberland Plateau (2025-03-21). Also beach swimming advisories (Ocean View, Buckroe, Huntington, Hilton, King-Lincoln, Cape Charles) and shellfish closures."
+machine_readable: true
+legal_basis: "VDH discretion (no statutory trigger); feeds DEQ's § 62.1-44.19:6 B duty"
+checked: "2026-11-02"

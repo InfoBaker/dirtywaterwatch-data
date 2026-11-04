@@ -1,0 +1,24 @@
+id: "pa-alcosan"
+name: "ALCOSAN Sewer Overflow Advisory Key (SOAK) online overflow log"
+url: "https://www.alcosan.org/clean-water-plan/sewer-overflow-advisories"
+homepage: "https://www.alcosan.org/clean-water-plan/sewer-overflow-advisories"
+kind: "html"
+level: "utility"
+# Feed row: the source id written by the ingester pipeline/ingest/pa_alcosan.py
+#   (data/build/events/pa-alcosan.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/pa_alcosan.py docstring): Hourly in season (status changes are posted 8
+#   a.m. - 7 p.m.); daily off season.
+cadence: "1 hour in season (April 1 to October 31), daily off season"
+license: "No data licence or terms statement found on the page."
+attribution: "Allegheny County Sanitary Authority (ALCOSAN)"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass"]
+states: ["PA"]
+registry_ids: ["pa-alcosan-soak-log", "pa-alcosan-news-advisories"]
+access: ["html", "pdf", "email"]
+access_detail: "Server-rendered HTML (Sitefinity). Five log entries per page; older pages at /clean-water-plan/sewer-overflow-advisories/{n} (n=2..). Pages 1-32 fetched 2026-11-02: 160 entries back to 2025-07-08; deeper pages continue. No JSON/RSS. Annual PDFs (Everbridge export with Notification ID) for 2014-2025 plus a 1995-2013 summary under /docs/default-source/cso-advisories/. Old URL /our-plan/sewer-overflow-advisories redirects."
+machine_readable: false
+legal_basis: "ALCOSAN NPDES permit PA0025984 / 2008 consent decree; CSO Nine Minimum Controls public notification (EPA CSO Control Policy 1994). Not a state statute."
+checked: "2026-11-02"

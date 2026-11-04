@@ -1,0 +1,1130 @@
+{
+ "state": "NC",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 322,
+ "plant_permits_major": 160,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "NC0003450",
+   "permittee": "Town of Wallace",
+   "city": "WALLACE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0005762",
+   "permittee": "Scotland County",
+   "city": "WAGRAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0006033",
+   "permittee": "City of Gastonia",
+   "city": "BELMONT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020044",
+   "permittee": "Town of Williamston",
+   "city": "WILLIAMSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020117",
+   "permittee": "City of Clinton",
+   "city": "CLINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020184",
+   "permittee": "City of Gastonia",
+   "city": "DALLAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020231",
+   "permittee": "Town of Louisburg",
+   "city": "LOUISBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020338",
+   "permittee": "Town of Yadkinville",
+   "city": "YADKINVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020389",
+   "permittee": "Town of Benson",
+   "city": "BENSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0020401",
+   "permittee": "City of Hickory",
+   "city": "HICKORY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020427",
+   "permittee": "City of Rockingham",
+   "city": "ROCKINGHAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020559",
+   "permittee": "City of Henderson",
+   "city": "HENDERSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020567",
+   "permittee": "Yadkin Valley Sewer Authority",
+   "city": "ELKIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020575",
+   "permittee": "Town of Mount Olive",
+   "city": "MOUNT OLIVE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0020591",
+   "permittee": "City of Statesville",
+   "city": "STATESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020605",
+   "permittee": "Town of Tarboro",
+   "city": "TARBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020621",
+   "permittee": "Town of Boone",
+   "city": "BOONE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0020648",
+   "permittee": "City of Washington",
+   "city": "WASHINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020656",
+   "permittee": "City of Laurinburg",
+   "city": "LAURINBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020664",
+   "permittee": "Town of Spindale",
+   "city": "SPINDALE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020737",
+   "permittee": "City of Kings Mountain",
+   "city": "KINGS MOUNTAIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020761",
+   "permittee": "Town of North Wilkesboro",
+   "city": "NORTH WILKESBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020800",
+   "permittee": "Town of Andrews",
+   "city": "ANDREWS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020834",
+   "permittee": "Town of Warrenton",
+   "city": "WARRENTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0020940",
+   "permittee": "Town of Murphy",
+   "city": "MURPHY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021024",
+   "permittee": "City of Roxboro",
+   "city": "ROXBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021121",
+   "permittee": "City of Mount Airy",
+   "city": "MOUNT AIRY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021156",
+   "permittee": "City of Mount Holly",
+   "city": "MOUNT HOLLY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0021181",
+   "permittee": "City of Belmont",
+   "city": "BELMONT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021211",
+   "permittee": "City of Graham",
+   "city": "GRAHAM",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0021229",
+   "permittee": "Town of Old Fort",
+   "city": "OLD FORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021253",
+   "permittee": "City of Havelock",
+   "city": "HAVELOCK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021407",
+   "permittee": "Town of Highlands",
+   "city": "HIGHLANDS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021423",
+   "permittee": "Town of Spruce Pine",
+   "city": "SPRUCE PINE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0021474",
+   "permittee": "City of Mebane",
+   "city": "MEBANE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021547",
+   "permittee": "Town of Franklin",
+   "city": "FRANKLIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021555",
+   "permittee": "Town of Newport",
+   "city": "NEWPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021601",
+   "permittee": "Town of Tryon",
+   "city": "TRYON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021636",
+   "permittee": "Harnett County",
+   "city": "LILLINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021717",
+   "permittee": "Town of Wilkesboro",
+   "city": "WILKESBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021831",
+   "permittee": "Town of Beaufort",
+   "city": "BEAUFORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021865",
+   "permittee": "Town of Chadbourn",
+   "city": "CHADBOURN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0021873",
+   "permittee": "Town of Mayodan",
+   "city": "MAYODAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0021920",
+   "permittee": "City of Whiteville",
+   "city": "WHITEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0023256",
+   "permittee": "Town of Carolina Beach",
+   "city": "CAROLINA BEACH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0023736",
+   "permittee": "City of Lenoir",
+   "city": "HUDSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0023841",
+   "permittee": "City of Durham",
+   "city": "DURHAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0023868",
+   "permittee": "City of Burlington",
+   "city": "BURLINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0023876",
+   "permittee": "City of Burlington",
+   "city": "BURLINGTON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "NC0023884",
+   "permittee": "City of Salisbury",
+   "city": "SALISBURY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0023906",
+   "permittee": "City of Wilson",
+   "city": "WILSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0023931",
+   "permittee": "Greenville Utilities Commission",
+   "city": "GREENVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0023949",
+   "permittee": "City of Goldsboro",
+   "city": "GOLDSBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0023957",
+   "permittee": "Fayetteville Public Works Commission",
+   "city": "FAYETTEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0023965",
+   "permittee": "Cape Fear Public Utility Authority",
+   "city": "WILMINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0023973",
+   "permittee": "Cape Fear Public Utility Authority",
+   "city": "WILMINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0023981",
+   "permittee": "City of Lenoir",
+   "city": "LENOIR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0024112",
+   "permittee": "City of Thomasville",
+   "city": "THOMASVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0024147",
+   "permittee": "City of Sanford",
+   "city": "SANFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024201",
+   "permittee": "Roanoke Rapids Sanitary District",
+   "city": "WELDON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024210",
+   "permittee": "City of High Point",
+   "city": "JAMESTOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0024228",
+   "permittee": "City of High Point",
+   "city": "THOMASVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024236",
+   "permittee": "City of Kinston",
+   "city": "KINSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024244",
+   "permittee": "City of Albemarle",
+   "city": "ALBEMARLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024252",
+   "permittee": "City of Conover",
+   "city": "CONOVER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024325",
+   "permittee": "Greensboro N Buffalo Crk WWTP",
+   "city": "GREENSBORO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "NC0024333",
+   "permittee": "City of Monroe",
+   "city": "MONROE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024538",
+   "permittee": "City of Shelby",
+   "city": "SHELBY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024571",
+   "permittee": "City of Lumberton",
+   "city": "LUMBERTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024872",
+   "permittee": "Davie County",
+   "city": "COOLEEMEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024881",
+   "permittee": "City of Reidsville",
+   "city": "REIDSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0024911",
+   "permittee": "Metropolitan Sewerage District of Buncombe County North Carolina",
+   "city": "ASHEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024937",
+   "permittee": "Charlotte Water",
+   "city": "CHARLOTTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024945",
+   "permittee": "Charlotte Water",
+   "city": "CHARLOTTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0024970",
+   "permittee": "Charlotte Water",
+   "city": "PINEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0025011",
+   "permittee": "City of Elizabeth City",
+   "city": "ELIZABETH CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0025054",
+   "permittee": "City of Oxford",
+   "city": "OXFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0025071",
+   "permittee": "City of Eden",
+   "city": "EDEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0025241",
+   "permittee": "Orange Water and Sewer Authority",
+   "city": "CHAPEL HILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0025321",
+   "permittee": "Town of Waynesville",
+   "city": "WAYNESVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0025348",
+   "permittee": "City of New Bern",
+   "city": "NEW BERN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0025402",
+   "permittee": "Town of Enfield",
+   "city": "ENFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0025445",
+   "permittee": "City of Randleman",
+   "city": "RANDLEMAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0025453",
+   "permittee": "Town of Clayton",
+   "city": "CLAYTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0025496",
+   "permittee": "City of Lincolnton",
+   "city": "LINCOLNTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0025534",
+   "permittee": "City of Hendersonville",
+   "city": "HENDERSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0025542",
+   "permittee": "City of Hickory",
+   "city": "CATAWBA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0025577",
+   "permittee": "Town of Red Springs",
+   "city": "RED SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0025721",
+   "permittee": "Town of Weldon",
+   "city": "WELDON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0025909",
+   "permittee": "Town of Rutherfordton",
+   "city": "RUTHERFORDTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0025984",
+   "permittee": "Town of Forest City",
+   "city": "FOREST CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0026000",
+   "permittee": "Town of Tabor City",
+   "city": "TABOR CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0026042",
+   "permittee": "Town of Robersonville",
+   "city": "ROBERSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026051",
+   "permittee": "Durham County",
+   "city": "DURHAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026123",
+   "permittee": "City of Asheboro",
+   "city": "ASHEBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026433",
+   "permittee": "Town of Hillsborough",
+   "city": "HILLSBOROUGH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026441",
+   "permittee": "Town of Siler City",
+   "city": "SILER CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026492",
+   "permittee": "Town of Belhaven",
+   "city": "BELHAVEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026514",
+   "permittee": "City of Raeford",
+   "city": "RAEFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026573",
+   "permittee": "City of Morganton",
+   "city": "MORGANTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026611",
+   "permittee": "Morehead City",
+   "city": "MOREHEAD CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026646",
+   "permittee": "Town of Pilot Mountain",
+   "city": "PILOT MOUNTAIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026671",
+   "permittee": "Town of Elizabethtown",
+   "city": "ELIZABETHTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026751",
+   "permittee": "Town of Windsor",
+   "city": "WINDSOR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0026824",
+   "permittee": "South Granville Water & Sewer Authority",
+   "city": "BUTNER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0027103",
+   "permittee": "Town of Pembroke",
+   "city": "PEMBROKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0028916",
+   "permittee": "Town of Troy",
+   "city": "TROY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0029033",
+   "permittee": "City of Raleigh",
+   "city": "RALEIGH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0029572",
+   "permittee": "Town of Farmville",
+   "city": "FARMVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0030210",
+   "permittee": "Charlotte Water",
+   "city": "CHARLOTTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0030317",
+   "permittee": "City of Rocky Mount",
+   "city": "ROCKY MOUNT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0030716",
+   "permittee": "Johnston County Public Utilities",
+   "city": "SMITHFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0030759",
+   "permittee": "City of Raleigh",
+   "city": "WAKE FOREST",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0030970",
+   "permittee": "Town of Spring Lake",
+   "city": "SPRING LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0031836",
+   "permittee": "City of Statesville",
+   "city": "STATESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0031879",
+   "permittee": "City of Marion",
+   "city": "MARION",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0032077",
+   "permittee": "Contentnea Metropolitan Sewerage District",
+   "city": "GRIFTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0036196",
+   "permittee": "City of Newton",
+   "city": "NEWTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0036269",
+   "permittee": "Water and Sewer Authority of Cabarrus County",
+   "city": "CONCORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0036277",
+   "permittee": "Charlotte Water",
+   "city": "HUNTERSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0037508",
+   "permittee": "Moore County",
+   "city": "ABERDEEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0037834",
+   "permittee": "City of Winston-Salem",
+   "city": "WINSTON SALEM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0039578",
+   "permittee": "Tuckaseigee Water and Sewer Authority",
+   "city": "SYLVA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0039594",
+   "permittee": "Town of Maiden",
+   "city": "MAIDEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0040797",
+   "permittee": "City of Hickory",
+   "city": "HICKORY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0041408",
+   "permittee": "Anson County",
+   "city": "WADESBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0041696",
+   "permittee": "Town of Valdese",
+   "city": "VALDESE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0043176",
+   "permittee": "City of Dunn",
+   "city": "DUNN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0044440",
+   "permittee": "City of Cherryville",
+   "city": "CHERRYVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0044725",
+   "permittee": "Laurinburg-Maxton Airport Commission",
+   "city": "MAXTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0046728",
+   "permittee": "Town of Mooresville",
+   "city": "MOORESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0047384",
+   "permittee": "City of Greensboro",
+   "city": "MC LEANSVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "NC0047562",
+   "permittee": "City of Hamlet",
+   "city": "HAMLET",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0047597",
+   "permittee": "City of Durham",
+   "city": "CHAPEL HILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0048879",
+   "permittee": "Town of Cary",
+   "city": "CARY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0050105",
+   "permittee": "Fayetteville Public Works Commission",
+   "city": "FAYETTEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0050342",
+   "permittee": "City of Winston-Salem",
+   "city": "WINSTON SALEM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0052469",
+   "permittee": "Eastern Band Cherokee Indians - Qualla Boundary (Cherokee WWTP)",
+   "city": "CHEROKEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0055786",
+   "permittee": "City of Lexington",
+   "city": "LEXINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0056561",
+   "permittee": "Town of Maggie Valley",
+   "city": "MAGGIE VALLEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0060534",
+   "permittee": "City of Brevard",
+   "city": "PISGAH FOREST",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0062855",
+   "permittee": "Town of Robbins",
+   "city": "ROBBINS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0063096",
+   "permittee": "Town of Holly Springs",
+   "city": "HOLLY SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0064050",
+   "permittee": "Town of Apex",
+   "city": "APEX",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0064521",
+   "permittee": "Harnett Co Public Util Erwin W",
+   "city": "ERWIN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "NC0065102",
+   "permittee": "Town of Cary",
+   "city": "APEX",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0066516",
+   "permittee": "Town of Fuquay-Varina",
+   "city": "FUQUAY VARINA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0069311",
+   "permittee": "Franklin County",
+   "city": "FRANKLINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0069841",
+   "permittee": "Union County",
+   "city": "MONROE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0074268",
+   "permittee": "City of Gastonia",
+   "city": "GASTONIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0079057",
+   "permittee": "Town of Manteo",
+   "city": "MANTEO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0079316",
+   "permittee": "City of Raleigh",
+   "city": "ZEBULON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0085359",
+   "permittee": "Union County",
+   "city": "WAXHAW",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0086550",
+   "permittee": "Town of Fairmont",
+   "city": "FAIRMONT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0086819",
+   "permittee": "Brunswick County",
+   "city": "NAVASSA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NC0088366",
+   "permittee": "Harnett County",
+   "city": "SPRING LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0088561",
+   "permittee": "Town of Ahoskie",
+   "city": "AHOSKIE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0088722",
+   "permittee": "Lincoln County",
+   "city": "STANLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0088846",
+   "permittee": "Town of Cary",
+   "city": "NEW HILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NC0089176",
+   "permittee": "Hoke County",
+   "city": "RAEFORD",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

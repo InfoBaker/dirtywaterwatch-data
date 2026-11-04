@@ -1,0 +1,29 @@
+id: "nhdes-gis-npdes-outfalls"
+name: "NHDES GIS 'NPDES Outfalls' (Core_GIS_Datasets/DES_Data_Public MapServer layer 9)"
+url: "https://gis.des.nh.gov/server/rest/services/Core_GIS_Datasets/DES_Data_Public/MapServer/9"
+homepage: "https://gis.des.nh.gov/server/rest/services/Core_GIS_Datasets/DES_Data_Public/MapServer/9"
+kind: "arcgis"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): State outfall
+#   points with permit and outfall numbers; includes retired outfalls, so cross-check with EPA R1
+#   2022 layer and current permits.
+# Access detail (research, quoted): query?where=PERMITNUM IN
+#   ('NH0100447','NH0100170','NH0100234','NH0100013','NH0100871','NH0100366')&outFields=* returned
+#   49 outfalls (Manchester 25 incl. retired CSO numbers, Nashua CSO2-CSO9 and CSO12, Portsmouth
+#   ACSO/BCSO, Lebanon's former CSOs). PTYPE_CODE is empty so CSO vs treated outfalls must be told
+#   apart by number/name. Saved raw/nh-des-npdes-outfalls-cso-permittees.json.
+# Can fill: geometry (outfall point), coordinates
+# Waters: 477 NPDES outfalls statewide (openboatlaunch slugs: merrimack-river-nh, nashua-river-nh,
+#   piscataqua-river-nh, androscoggin-river-nh, squamscott-river-nh, connecticut-river-nh)
+cadence: null
+license: "Service copyrightText \"NHDES\"; description \"Environmental Data from NHDES\"; no licence text on the layer. NHDES AGOL items carry the \"screening purposes only. Distribution is discouraged.\" disclaimer."
+attribution: "NHDES"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["NH"]
+access: ["arcgis"]
+access_detail: "query?where=PERMITNUM IN ('NH0100447','NH0100170','NH0100234','NH0100013','NH0100871','NH0100366')&outFields=* returned 49 outfalls (Manchester 25 incl. retired CSO numbers, Nashua CSO2-CSO9 and CSO12, Portsmouth ACSO/BCSO, Lebanon's former CSOs). PTYPE_CODE is empty so CSO vs treated outfalls must be told apart by number/name. Saved raw/nh-des-npdes-outfalls-cso-permittees.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

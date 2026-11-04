@@ -1,0 +1,276 @@
+[
+  {
+    "id": "tx-houston",
+    "name": "City of Houston Public Works (69th Street, Sims Bayou South, Southwest, Almeda Sims, Northwest and other WWTPs)",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Buffalo Bayou",
+      "Brays Bayou",
+      "Sims Bayou",
+      "White Oak Bayou",
+      "Greens Bayou",
+      "Houston Ship Channel"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Monthly SSO report and map PDFs under the 2021 consent decree",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Houston"
+    ],
+    "notes": "69th Street (698), Sims Bayou South (373), Southwest (177), Almeda Sims (158) and Northwest (78) rows since 2025 in the TCEQ dataset: by far the most in Texas.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "tx-saws",
+    "name": "San Antonio Water System (Steven M. Clouse, Leon Creek, Medio Creek WRCs)",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "San Antonio River",
+      "Leon Creek",
+      "Salado Creek",
+      "Medio Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "San Antonio"
+    ],
+    "notes": "Steven M. Clouse WRC 151 rows since 2025; consent decree 2013; Edwards Aquifer recharge zone triggers the 50,000-gallon public notice.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "tx-austin-water",
+    "name": "Austin Water (South Austin Regional, Walnut Creek WWTPs)",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Colorado River (Lady Bird Lake)",
+      "Walnut Creek",
+      "Onion Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Austin"
+    ],
+    "notes": "South Austin Regional 174, Walnut Creek 125 rows since 2025.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "tx-dallas-water",
+    "name": "Dallas Water Utilities (Central and Southside WWTFs)",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Trinity River",
+      "White Rock Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Dallas"
+    ],
+    "notes": "Central WWTF 105 rows since 2025.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "tx-fort-worth",
+    "name": "City of Fort Worth Water (Village Creek WRF)",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Trinity River (West Fork)",
+      "Village Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Written SSO reporting procedure (NCTCOG); not searched further",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Fort Worth"
+    ],
+    "notes": "Village Creek 103 rows since 2025.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "tx-arlington",
+    "name": "City of Arlington collection system",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Johnson Creek",
+      "Village Creek",
+      "Trinity River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Arlington"
+    ],
+    "notes": "106 rows since 2025.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "tx-trinity-river-authority",
+    "name": "Trinity River Authority (Central Regional WWS and others)",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Trinity River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Press releases for wastewater overflows (trinityra.org)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Grand Prairie",
+      "Arlington",
+      "Irving"
+    ],
+    "notes": "",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "tx-corpus-christi",
+    "name": "City of Corpus Christi Water (Oso, Greenwood, Allison, Broadway WWTPs)",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Oso Bay",
+      "Corpus Christi Bay",
+      "Nueces Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "News posts per overflow (news.cctexas.com, e.g. \"La Volla Creek Wastewater Overflow\")",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Corpus Christi"
+    ],
+    "notes": "Near Texas Beach Watch stations.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "tx-killeen-post-oak",
+    "name": "Post Oak Creek WWTP (Killeen area)",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Post Oak Creek",
+      "Lampasas River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Killeen"
+    ],
+    "notes": "99 rows since 2025.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "tx-waco",
+    "name": "City of Waco collection system",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Brazos River",
+      "Bosque River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Waco"
+    ],
+    "notes": "69 rows since 2025.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "tx-gulf-coast-authority",
+    "name": "Gulf Coast Authority",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": "TX0005380",
+    "receiving_waters": [
+      "Houston Ship Channel",
+      "Galveston Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Pasadena",
+      "Texas City"
+    ],
+    "notes": "Major permit in the seed.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "tx-el-paso-water",
+    "name": "El Paso Water",
+    "state": "TX",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Rio Grande"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "El Paso"
+    ],
+    "notes": "Rio Grande shared with New Mexico and Mexico.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  }
+]

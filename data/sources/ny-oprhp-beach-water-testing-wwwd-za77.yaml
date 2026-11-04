@@ -1,0 +1,31 @@
+id: "ny-oprhp-beach-water-testing-wwwd-za77"
+name: "Open Data NY 'Beach Water Testing: Beginning 2015' (wwwd-za77), NYS Parks beaches"
+url: "https://data.ny.gov/d/wwwd-za77"
+homepage: "https://data.ny.gov/d/wwwd-za77"
+kind: "api"
+level: "state"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): Good history of State
+#   Park closures incl. 'Preemptive: rainfall' (227 rows) and 'Predicted satisfactory (model)';
+#   annual posting makes it useless for live status; live status is on parks.ny.gov beach-results
+#   page.
+# Access detail (research, quoted): SODA https://data.ny.gov/resource/wwwd-za77.json; 17,687 rows
+#   2015-05-12..2025-10-27; rowsUpdatedAt 2025-11-24 (2026 season not yet posted on 2026-11-01).
+# Can fill: event_type (closure/advisory), started_at (date only), waterbody, advice_text
+#   (beach_status/status_reason), authority
+# Cannot fill: coordinates; ended_at (next status row); time of day
+# Waters: State Park beaches only (incl. Lake Champlain: Cumberland Bay SP, Point Au Roche SP; Long
+#   Island Sound: Sunken Meadow, Wildwood, Orient Beach) (openboatlaunch slugs: lake-champlain-vt,
+#   long-island-sound-ct)
+# History: 2015-
+cadence: "'Posting Frequency: Annually' (after season)"
+license: "license: None on the dataset; Open Data NY terms apply."
+attribution: "NYS Office of Parks, Recreation and Historic Preservation"
+enabled: true
+role: "monitoring"
+event_types: ["beach_closure"]
+states: ["NY"]
+access: ["api", "csv"]
+access_detail: "SODA https://data.ny.gov/resource/wwwd-za77.json; 17,687 rows 2015-05-12..2025-10-27; rowsUpdatedAt 2025-11-24 (2026 season not yet posted on 2026-11-01)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

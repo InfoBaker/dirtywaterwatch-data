@@ -1,0 +1,645 @@
+[
+ {
+  "id": "va-richmond-dpu",
+  "name": "City of Richmond Department of Public Utilities (Richmond WWTP and combined sewer system)",
+  "state": "VA",
+  "kind": "cso",
+  "npdes_permit": "VA0063177",
+  "receiving_waters": [
+   "James River",
+   "Gillies Creek",
+   "Almond Creek",
+   "Haxall Canal",
+   "James River and Kanawha Canal",
+   "Manchester Canal / Cotton Mill Creek",
+   "Richmond Dock Canal",
+   "Stoney Run",
+   "Dooley's Branch"
+  ],
+  "water_slugs": [
+   "james-river-va"
+  ],
+  "outfall_count": 25,
+  "outfalls_source": "ECHO National CSO Inventory (25 CSO + 4 closed rows, raw/echo-cso-inventory-va.json); operator points in the EmNet map (raw/richmond/emnet/sites-2026-11-02.json); DEQ EDMA VPDES Outfalls layer 119",
+  "notification_channel": "Public CSO map https://apps.emnet.net/richmond-pub-map-app/?city=47&config=5c0cacee-7e95-4eea-922d-c736c83eb4b9 (red for 48 h after the last overflow at each of 25 monitored outfalls); monthly per-outfall XLSX reports at https://www.rva.gov/public-utilities/csooutfalls; signs at outfalls. 'CSO overflow email notifications are no longer provided'.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Richmond"
+  ],
+  "notes": "Integrated VPDES permit (WWTP, CSS, MS4) effective 2025-09-01, expires 2030-08-31; Part III 1.h public notification = signs, website, meetings, press. 2020 Acts ch. 634: final plan construction complete by July 1, 2035. CSO Final Plan approved by DEQ August 2024. July 2026: 287.0 MG observed overflow. PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 8 on this permit (1.92 million gallons), 20 with 'Richmond' in the name.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-lynchburg-water-resources",
+  "name": "City of Lynchburg Water Resources (Lynchburg Regional Wastewater Treatment Plant)",
+  "state": "VA",
+  "kind": "cso",
+  "npdes_permit": "VA0024970",
+  "receiving_waters": [
+   "James River",
+   "Blackwater Creek",
+   "Fishing Creek",
+   "Trib to Fishing Creek",
+   "Meeting House Branch"
+  ],
+  "water_slugs": [
+   "james-river-va"
+  ],
+  "outfall_count": 17,
+  "outfalls_source": "ECHO National CSO Inventory (17 CSO rows); city layers https://utility.arcgis.com/usrsvcs/servers/62329509147e4d049cca02c02233c595/rest/services/WaterResources/SanitarySewer_UN/MapServer/345 (15 discharge locations) and /344 (18 overflow manholes)",
+  "notification_channel": "Lynchburg Alerts (Everbridge) text/email: alert when a monitored CSO to the James overflows and a second alert 'Thirty hours after the overflow ends'. Sign-up https://www.lynchburgva.gov/626/Lynchburg-Alerts. CSO page https://www.lynchburgva.gov/513/Combined-Sewer-Overflow-System-CSO.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lynchburg"
+  ],
+  "notes": "City: 115 of 132 original overflow points closed or being closed; downtown CSO tunnel blasting finished July 2026 (WDBJ). Permit expires 2030-11-30. PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 34 naming Lynchburg; one CSO-named record (319811, 2025-07-14, James River).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-alexrenew",
+  "name": "Alexandria Renew Enterprises (AlexRenew WRRF and Alexandria combined sewer outfalls)",
+  "state": "VA",
+  "kind": "cso",
+  "npdes_permit": "VA0025160",
+  "receiving_waters": [
+   "Potomac River (Oronoco Bay)",
+   "Hunting Creek",
+   "Hooffs Run"
+  ],
+  "water_slugs": [
+   "potomac-river-va"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "ECHO National CSO Inventory (4 CSO rows: 019-022); AlexRenew layers .../2026_Service_Area_Map_WFL1/FeatureServer/0 and .../Outfall_Overflow_Status_view/FeatureServer/0",
+  "notification_channel": "CSO status layer (red if an overflow in the past 24 hours) https://services8.arcgis.com/gPxDs3sbKpglnSk7/arcgis/rest/services/Outfall_Overflow_Status_view/FeatureServer/0 on https://alexrenew.com/our-work/cso-tracking; email alerts https://alexrenew.com/our-work/cso-tracking/alerts (Real Magnet form are.realmagnet.land/cso-alerts); outfall signs.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Alexandria"
+  ],
+  "notes": "AlexRenew took ownership of the City's CSO outfalls in 2018. RiverRenew tunnel system in service 2026-07-01 (2017 Acts chs. 826/827 deadline as amended by 2024 ch. 97: July 1, 2026). Permit status ADC in ECHO (expired 2026-06-30). Last status-layer events 2026-01-01 (CSO 019, 020). PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 4 on this permit (Hooff Run).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-covington",
+  "name": "City of Covington Wastewater Treatment Plant",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0025542",
+  "receiving_waters": [
+   "Jackson River",
+   "Potts Creek"
+  ],
+  "water_slugs": [
+   "jackson-river-va",
+   "potts-creek-va"
+  ],
+  "outfall_count": 0,
+  "outfalls_source": "ECHO National CSO Inventory: one closed (CLS) CSO row, 711 West Park St, Jackson River",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Covington"
+  ],
+  "notes": "Former CSO community (closed). PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 17 on this permit (266,300 gallons), 16 to the Jackson River.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-hrsd",
+  "name": "Hampton Roads Sanitation District (HRSD)",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0081230; VA0081248; VA0081256; VA0081264; VA0081272; VA0081281; VA0081299; VA0081302; VA0081311; VA0075434; VA0088102",
+  "receiving_waters": [
+   "Elizabeth River",
+   "Hull Creek",
+   "James River",
+   "York River",
+   "Mattaponi River",
+   "Pamunkey River",
+   "Warwick River",
+   "Chesapeake Bay"
+  ],
+  "water_slugs": [
+   "elizabeth-river-va",
+   "western-branch-elizabeth-river-va",
+   "james-river-va",
+   "york-river-va",
+   "mattaponi-river-va",
+   "pamunkey-river-va",
+   "warwick-river-va",
+   "chesapeake-bay-va",
+   "hampton-roads-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "News releases for major failures at https://www.hrsd.com/newsroom (e.g. Douglas Avenue, Aug 4-7, 2026); door-to-door notice; email subscriptions https://www.hrsd.com/subscriptions (news/projects, no SSO topic); Facebook/X @hrsdva. No routine SSO list.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Norfolk",
+   "Virginia Beach",
+   "Chesapeake",
+   "Portsmouth",
+   "Suffolk",
+   "Hampton",
+   "Newport News",
+   "Williamsburg",
+   "Gloucester",
+   "West Point",
+   "King William",
+   "Urbanna",
+   "Onancock"
+  ],
+  "notes": "Regional interceptor and treatment authority for 20 localities. Permit list from ECHO (major plants plus West Point and King William). PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 34 naming HRSD; West Point STP 18, King William STP 17 (Moncuin Creek). Douglas Avenue force main failure 2026-08-04: about 3.1 million gallons to Hull Creek / Elizabeth River.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-henrico-dpu",
+  "name": "Henrico County Department of Public Utilities (Henrico Water Reclamation Facility and collection system)",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0063690",
+  "receiving_waters": [
+   "Almond Creek",
+   "Gillie Creek",
+   "Upham Brook",
+   "Meredith Branch",
+   "James River",
+   "Chickahominy River tributaries"
+  ],
+  "water_slugs": [
+   "james-river-va",
+   "meredith-branch-va",
+   "chickahominy-river-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "SSO map https://henrico.gov/utility/public-data/sanitary-sewer-event-overflow-map-sso/ (ArcGIS layer DPU_SSO_Event_Locations: 273 points, no dates); door hangers and bill inserts under the 2023 settlement.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Henrico",
+   "Glen Allen",
+   "Highland Springs",
+   "Varina"
+  ],
+  "notes": "2023 settlement with CBF, JRA and EIP (modified DEQ consent order): 'a web-based map that is updated daily'. PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 59 on VA0063690 (3.47 million gallons), the most of any permit.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-hopewell-water-renewal",
+  "name": "City of Hopewell - Hopewell Water Renewal",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0066630",
+  "receiving_waters": [
+   "Gravelly Run",
+   "Cattail Creek",
+   "Bailey Creek / Bailey Bay",
+   "Cabin Creek",
+   "Bear Creek",
+   "James River"
+  ],
+  "water_slugs": [
+   "james-river-va",
+   "appomattox-river-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None of its own found; VDH (Crater Health District) advisories and DEQ topic page for the 2026 force main break.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hopewell",
+   "Prince George"
+  ],
+  "notes": "Regional plant also treating industrial flows. PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 53 on VA0066630 (4.37 million gallons). Events: 2025-07-11 plant power failure (~1.2-1.4 million gallons untreated to Gravelly Run); 2026-07-14 force main break (1.5 million gallons).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-wvwa",
+  "name": "Western Virginia Water Authority (Roanoke Regional Water Pollution Control Plant and collection system)",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Roanoke River",
+   "Tinker Creek",
+   "Carvin Creek",
+   "Murray Run",
+   "Wolf Creek",
+   "Peters Creek"
+  ],
+  "water_slugs": [
+   "roanoke-river-va",
+   "tinker-creek-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Roanoke",
+   "Salem",
+   "Vinton",
+   "Roanoke County",
+   "Botetourt County",
+   "Franklin County"
+  ],
+  "notes": "Permit number not confirmed (Roanoke Regional WPCP). PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 153 with 'WVWA' in the name - the most of any operator.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-norfolk-utilities",
+  "name": "City of Norfolk Department of Utilities (collection system)",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Elizabeth River",
+   "Lafayette River",
+   "Mason Creek",
+   "Oastes Creek"
+  ],
+  "water_slugs": [
+   "elizabeth-river-va",
+   "lafayette-river-va",
+   "eastern-branch-of-elizabeth-river-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Norfolk"
+  ],
+  "notes": "Collection system feeding HRSD. PReP reports sometimes cite Norfolk's MS4 permit VA0088650. PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 47 naming Norfolk.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-virginia-beach-utilities",
+  "name": "City of Virginia Beach Public Utilities (collection system)",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Broad Bay",
+   "North Bay",
+   "Little Creek",
+   "Great Neck Creek",
+   "Lake Bradford"
+  ],
+  "water_slugs": [
+   "broad-bay-va",
+   "north-bay-va",
+   "lynhaven-river-va",
+   "little-creek-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Virginia Beach"
+  ],
+  "notes": "Collection system feeding HRSD. PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 40 naming Virginia Beach.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-portsmouth",
+  "name": "City of Portsmouth (collection system and pump stations)",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Elizabeth River",
+   "Hull Creek",
+   "Eastern Branch Elizabeth River"
+  ],
+  "water_slugs": [
+   "elizabeth-river-va",
+   "western-branch-elizabeth-river-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Portsmouth"
+  ],
+  "notes": "City stations sit between HRSD valves on the Douglas Avenue force main. PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 16 naming Portsmouth.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-newport-news",
+  "name": "City of Newport News Public Works, Wastewater Division",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "James River",
+   "Warwick River",
+   "Back River (Northwest Branch)",
+   "Newmarket Creek"
+  ],
+  "water_slugs": [
+   "james-river-va",
+   "warwick-river-va",
+   "back-river-va",
+   "newmarket-creek-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Annual SSO report https://www.nnva.gov/876/Sanitary-Sewer-Overflow-Report (DOCX, table as image)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Newport News"
+  ],
+  "notes": "PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 25 naming Newport News.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-fairfax-dpwes",
+  "name": "Fairfax County DPWES Wastewater (Noman M. Cole Jr. Water Recycling Facility and collection system)",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0025364",
+  "receiving_waters": [
+   "Accotink Creek",
+   "Pohick Creek",
+   "Giles Run",
+   "Backlick Run",
+   "Potomac River"
+  ],
+  "water_slugs": [
+   "potomac-river-va",
+   "gunston-cove-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found (report-an-SSO page only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fairfax County",
+   "Lorton",
+   "Springfield"
+  ],
+  "notes": "About 3,300 miles of pipe and 63 pumping stations (county). PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 14 on VA0025364, 16 naming Fairfax.",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-arlington-des",
+  "name": "Arlington County DES (Water Pollution Control Plant and collection system)",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Four Mile Run",
+   "Spout Run",
+   "Potomac River"
+  ],
+  "water_slugs": [
+   "four-mile-run-va",
+   "potomac-river-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Ad hoc county news and Arlington Alert advisories (2012-2022 Four Mile Run spills)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Arlington"
+  ],
+  "notes": "PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 8 naming Arlington.",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-chesterfield-utilities",
+  "name": "Chesterfield County Utilities (Falling Creek and Proctors Creek WWTPs)",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0024996; VA0060194",
+  "receiving_waters": [
+   "Falling Creek",
+   "Swift Creek",
+   "Ashton Creek",
+   "Appomattox River",
+   "James River"
+  ],
+  "water_slugs": [
+   "james-river-va",
+   "swift-creek-va",
+   "appomattox-river-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chesterfield"
+  ],
+  "notes": "PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). Falling Creek 8 (10.0 million gallons), Proctors Creek 12; 24 naming Chesterfield.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-tappahannock",
+  "name": "Town of Tappahannock Wastewater Treatment Plant",
+  "state": "VA",
+  "kind": "bypass",
+  "npdes_permit": "VA0071471",
+  "receiving_waters": [
+   "Hoskins Creek",
+   "Rappahannock River"
+  ],
+  "water_slugs": [
+   "hoskins-creek-va",
+   "rappahannock-river-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None of its own found; VDH Three Rivers Health District advisory (July 2025)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tappahannock"
+  ],
+  "notes": "July 8-12, 2025 loss of disinfection after lightning: about 725,000 gallons partially treated wastewater. PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 7.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-dickenson-psa",
+  "name": "Dickenson County Public Service Authority (Haysi WWTP)",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0067571",
+  "receiving_waters": [
+   "McClure River",
+   "Russell Fork",
+   "Mill Creek"
+  ],
+  "water_slugs": [
+   "russell-fork-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None of its own found; VDH advisory April 2026",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Haysi",
+   "Clintwood"
+  ],
+  "notes": "McClure River has no openboatlaunch record; Russell Fork downstream does. PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 4.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-front-royal",
+  "name": "Town of Front Royal WWTP",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0062812",
+  "receiving_waters": [
+   "South Fork Shenandoah River",
+   "Happy Creek"
+  ],
+  "water_slugs": [
+   "south-fork-shenandoah-river-va",
+   "shenandoah-river-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Front Royal"
+  ],
+  "notes": "PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 16 on this permit (4.78 million gallons), 10 to the South Fork Shenandoah.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-alleghany-lower-jackson",
+  "name": "Alleghany County - Lower Jackson River Regional WWTP",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0090671",
+  "receiving_waters": [
+   "Jackson River"
+  ],
+  "water_slugs": [
+   "jackson-river-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Alleghany County",
+   "Iron Gate"
+  ],
+  "notes": "PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 10 (1.79 million gallons).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-christiansburg",
+  "name": "Town of Christiansburg WWTF",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0061751",
+  "receiving_waters": [
+   "Crab Creek",
+   "Town Branch",
+   "Walnut Branch"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Christiansburg"
+  ],
+  "notes": "Crab Creek drains to the New River (inferred). PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 17 (3.27 million gallons).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-fredericksburg",
+  "name": "City of Fredericksburg Wastewater Treatment Facility",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0025127",
+  "receiving_waters": [
+   "Rappahannock River",
+   "Hazel Run"
+  ],
+  "water_slugs": [
+   "rappahannock-river-va"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fredericksburg"
+  ],
+  "notes": "PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 14.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-bedford",
+  "name": "Town of Bedford Wastewater Treatment Plant",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0022390",
+  "receiving_waters": [
+   "Little Otter River",
+   "Johns Creek",
+   "Ivy Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bedford"
+  ],
+  "notes": "PReP = DEQ Pollution Response Program reports with SEWAGE_RELATED='Y' since 2025-01-01 (export layer, queried 2026-11-02). 12 (4.13 million gallons).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "va-fcwsa-remington",
+  "name": "Fauquier County Water and Sanitation Authority - Remington WWTP",
+  "state": "VA",
+  "kind": "sso",
+  "npdes_permit": "VA0076805",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Remington",
+   "Bealeton"
+  ],
+  "notes": "PReP 326063 (2026-10-30): manhole overflow ~3,000 gallons, not to water per report.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ }
+]

@@ -1,0 +1,25 @@
+id: "pa-doh-habs"
+name: "PA Department of Health Harmful Algal Blooms dashboard and layer (HABS2018_2021_FIXED)"
+url: "https://www.pa.gov/agencies/health/programs/environmental-health/habs-dashboard"
+homepage: "https://www.pa.gov/agencies/health/programs/environmental-health/habs-dashboard"
+kind: "arcgis"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/pa_habs_beaches.py
+#   (data/build/events/pa-doh-habs.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/pa_habs_beaches.py docstring): Daily (the HAB layer is updated twice a
+#   week; beaches are sampled twice a week in season, late May to Labor Day). One module writes both
+#   pa-doh-habs and pa-erie-beaches.
+cadence: "daily"
+license: "No licence text on the dashboard item."
+attribution: "Pennsylvania Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["PA"]
+registry_ids: ["pa-doh-habs-dashboard"]
+access: ["arcgis"]
+access_detail: "Dashboard 9b653809b2724ff299dc1b5b3d1c546b -> web map a50db3360b044a68ad467c74fd43e38b -> public FeatureServer https://services1.arcgis.com/Nifc7wlHaBPig3Q3/arcgis/rest/services/HABS2018_2021_FIXED/FeatureServer/0 : 3,230 samples 2018-2026, latest sample 2026-10-27; Response_Level 'No HAB issue detected' / 'Advisory (Yellow)' / 'Avoid Contact (Red)'. 2026: 349 yellow, 26 red."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

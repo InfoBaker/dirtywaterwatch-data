@@ -1,0 +1,25 @@
+id: "nhdes-public-beaches-page"
+name: "NHDES Public Beaches (Beach Inspection Program) page"
+url: "https://www.des.nh.gov/water/healthy-swimming/public-beaches"
+homepage: "https://www.des.nh.gov/water/healthy-swimming/public-beaches"
+kind: "html"
+level: "state"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): Programme description,
+#   standards, data paths.
+# Access detail (research, quoted): Read in the browser pane (curl/WebFetch get 403).
+# Research notes: 'monitors coastal beaches and many popular inland beaches regularly throughout the
+#   summer months ... makes these results available daily'. Full results: OneStop Data Search
+#   (onestop.des.nh.gov) > Areas of Interest 'Beaches'. Legacy 'Bacteria Advisories' link
+#   http://www4.des.state.nh.us/WaterShed_BeachMaps/ answers 403.
+cadence: null
+license: "none stated"
+attribution: "NHDES"
+enabled: true
+role: "advisories"
+event_types: ["bacteria"]
+states: ["NH"]
+access: ["html"]
+access_detail: "Read in the browser pane (curl/WebFetch get 403)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

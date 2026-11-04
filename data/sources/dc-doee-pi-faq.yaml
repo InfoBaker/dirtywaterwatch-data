@@ -1,0 +1,24 @@
+id: "dc-doee-pi-faq"
+name: "DOEE 'Potomac Interceptor Update and FAQs'"
+url: "https://doee.dc.gov/release/potomac-interceptor-update-and-faqs"
+homepage: "https://doee.dc.gov/release/potomac-interceptor-update-and-faqs"
+kind: "html"
+level: "state"
+# Notes (research/dc, status used, verified fetched, checked 2026-11-02): Agency roles and
+#   thresholds; DOEE weekly then daily sampling.
+# Access detail (research, quoted): Fetched (updated 2026-03-23). Roles quoted: 'The DC Department
+#   of Health (DOH) tracks the E. Coli levels and issues alerts to the public when appropriate and
+#   necessary.' Uses 410 MPN/100 mL. 'There have not been any spills in the river reported by DC
+#   Water since February 9th.'
+cadence: null
+license: "none stated"
+attribution: "DC Department of Energy and Environment (DOEE)"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["DC"]
+access: ["html"]
+access_detail: "Fetched (updated 2026-03-23). Roles quoted: 'The DC Department of Health (DOH) tracks the E. Coli levels and issues alerts to the public when appropriate and necessary.' Uses 410 MPN/100 mL. 'There have not been any spills in the river reported by DC Water since February 9th.'"
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

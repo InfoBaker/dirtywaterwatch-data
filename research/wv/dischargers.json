@@ -1,0 +1,1365 @@
+[
+ {
+  "id": "wv-elkins-wv0020028",
+  "name": "ELKINS CITY OF",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0020028",
+  "receiving_waters": [
+   "Craven Run/Leading Creek/Tygart Valley River/Monog",
+   "Tygart Valley River/Monongahela River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 14,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Elkins"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 14 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-west-union-wv0020109",
+  "name": "TOWN OF WEST UNION",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0020109",
+  "receiving_waters": [
+   "Unnamed Tributary/Middle Island Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "West Union"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-cameron-wv0020125",
+  "name": "CITY OF CAMERON",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0020125",
+  "receiving_waters": [
+   "GRAVE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cameron"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-mcmechen-wv0020141",
+  "name": "CITY OF MCMECHEN",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0020141",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mcmechen"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-moorefield-wv0020150",
+  "name": "TOWN OF MOOREFIELD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0020150",
+  "receiving_waters": [
+   "S Fk/South Branch Potomac"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Moorefield"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 2 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-follansbee-wv0020273",
+  "name": "FOLLANSBEE CITY OF",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0020273",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Follansbee"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-montgomery-wv0020621",
+  "name": "CITY OF MONTGOMERY",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0020621",
+  "receiving_waters": [
+   "Kanawha River",
+   "Morris Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Montgomery"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 4 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-benwood-wv0020648",
+  "name": "CITY OF BENWOOD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0020648",
+  "receiving_waters": [
+   "Boggs Run of Ohio River",
+   "Boggs Run/Ohio River",
+   "McMechen's Run/Ohio River",
+   "Ohio",
+   "Ohio River",
+   "UNT/Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Benwood"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 7 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-mullens-wv0020681",
+  "name": "CITY OF MULLENS SANITERY BOARD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0020681",
+  "receiving_waters": [
+   "Guyandotte River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mullens"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-smithers-wv0021741",
+  "name": "CITY OF SMITHERS",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0021741",
+  "receiving_waters": [
+   "Kanawha River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Smithers"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-marmet-wv0021750",
+  "name": "TOWN OF MARMET",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0021750",
+  "receiving_waters": [
+   "KANAWHA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Marmet"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-petersburg-wv0021792",
+  "name": "CITY OF PETERSBURG",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0021792",
+  "receiving_waters": [
+   "Lunice Creek of South Potomac River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Petersburg"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 0 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-sistersville-wv0021814",
+  "name": "CITY OF SISTERSVILLE",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0021814",
+  "receiving_waters": [
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sistersville"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-grafton-wv0021822",
+  "name": "CITY OF GRAFTON",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0021822",
+  "receiving_waters": [
+   "Three Fork Creek/Tygart Valley River/ Monongahela",
+   "Three Fork Creek/Tygart Valley River/Monongahela R",
+   "Tygart River Valley/Monongahela River",
+   "Tygart Valley River/ Monongahela River",
+   "Tygart Valley River/Monongahela River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 15,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Grafton"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 15 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-philippi-wv0021857",
+  "name": "PHILIPPI WWTP",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0021857",
+  "receiving_waters": [
+   "TYGART RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Philippi"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 11 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-farmington-wv0021865",
+  "name": "TWON OF FARMINGTON",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0021865",
+  "receiving_waters": [
+   "Buffalo Creek/Monongahela River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Farmington"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-kingwood-wv0021881",
+  "name": "CITY OF KINGWOOD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0021881",
+  "receiving_waters": [
+   "CHEAT RIVER",
+   "Green Run/Cheat River",
+   "MORGAN RUN/CHEAT RIVER",
+   "Morgan Run/Cheat River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kingwood"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-richwood-wv0022004",
+  "name": "RICHWOOD CITY OF",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0022004",
+  "receiving_waters": [
+   "Cherry River/Gauley River/Kanawha River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Richwood"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-point-pleasant-wv0022039",
+  "name": "POINT PLEASANT WASTEWATER TREATMENT PLANT",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0022039",
+  "receiving_waters": [
+   "KANAWHA",
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Point Pleasant"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 2 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-parsons-wv0022063",
+  "name": "CITY OF PARSONS",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0022063",
+  "receiving_waters": [
+   "SHAVERS FORK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Parsons"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 5 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-bethany-wv0022080",
+  "name": "BETHANY SANITATION BOARD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0022080",
+  "receiving_waters": [
+   "BUFFALO CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bethany"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-fayetteville-wv0022314",
+  "name": "FAYETTEVILLE WTTP",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0022314",
+  "receiving_waters": [
+   "MARR BRANCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fayetteville"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 2 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-princeton-wv0023094",
+  "name": "PRINCETON SANITARY BOARD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023094",
+  "receiving_waters": [
+   "Brush Creek/Bluestone River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Princeton"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-south-charleston-wv0023116",
+  "name": "SOUTH CHARLESTON WASTE TREATMENT WORKS (SCWTW)",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023116",
+  "receiving_waters": [
+   "KANAWHA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 25,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "South Charleston"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 25 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-star-city-wv0023124",
+  "name": "MORGANTOWN WWTP",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023124",
+  "receiving_waters": [
+   "MONONGAHELA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 40,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Star City"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 40 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-huntington-wv0023159",
+  "name": "HUNTINGTON SANITARY BOARD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023159",
+  "receiving_waters": [
+   "Fourpole Creek",
+   "Guyandotte River",
+   "Krout Creek of Twelvepole Creek",
+   "OHIO RIVER",
+   "Ohio River",
+   "Pat's Branch"
+  ],
+  "water_slugs": [],
+  "outfall_count": 22,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Huntington"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 22 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-martinsburg-wv0023167",
+  "name": "CITY OF MARTINSBURG WWTP",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023167",
+  "receiving_waters": [
+   "Tuscarora Creek/Opequon Creek/Potomac River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Martinsburg"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-st-albans-wv0023175",
+  "name": "CITY OF ST. ALBANS MUNICIPAL UTILITY COMMISSION",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023175",
+  "receiving_waters": [
+   "Kanawha River/Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "St. Albans"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-beckley-wv0023183",
+  "name": "CITY OF BECKLEY",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023183",
+  "receiving_waters": [
+   "PINEY CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Beckley"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-charleston-wv0023205",
+  "name": "THE SANITARY BOARD OF THE CITY OF CHARLESTON",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023205",
+  "receiving_waters": [
+   "Coal Hollow/Davis Ck/Kanawha",
+   "Elk River/Kanawha River",
+   "Elk River/Kanawha/Ohio",
+   "Joplin Branch/Kanawha River",
+   "KANAWHA RIVER",
+   "Kanawha River",
+   "Rays Br/Davis Ck/Kanawha",
+   "Sugarcamp Ck/Davis Ck/Kanawha",
+   "Two mile Creek/Kanawha",
+   "UNT/Lick Branch/Kanawha",
+   "UT/Kanawha",
+   "Woodward Br/Two mile Ck/Kanawha"
+  ],
+  "water_slugs": [],
+  "outfall_count": 55,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Charleston"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 56 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-parkersburg-wv0023213",
+  "name": "PARKERSBURG UTILITY BOARD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023213",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 17,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Parkersburg"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 17 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-wheeling-wv0023230",
+  "name": "CITY OF WHEELING - WATER POLLUTION CONTROL DIVISION",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023230",
+  "receiving_waters": [
+   "Cadillac and Packard Avenue",
+   "Caldwell Rn/Ohio",
+   "Caldwell Run/Ohio",
+   "Caldwell Run/Ohio River",
+   "Fink Street and S Front Streets",
+   "Little Wheeling Creek/Ohio",
+   "Long Rn/Wheeling Ck/Ohio",
+   "Long Run/Wheeling Ck/Ohio",
+   "Long Run/Wheeling Creek/Ohio",
+   "Ohio",
+   "Ohio River",
+   "Wheeling Ck/Ohio",
+   "Wheeling Creek/Ohio"
+  ],
+  "water_slugs": [],
+  "outfall_count": 40,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "Annual legal notice in The Intelligencer (wvlegals.com, 2015 example) and 24x24 inch signs at each CSO naming NPDES and outfall number; advice to avoid contact for at least 24 hours after 0.10 inch of rain",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wheeling"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 40 current CSO outlets with points.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-moundsville-wv0023264",
+  "name": "CITY OF MOUNDSVILLE",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023264",
+  "receiving_waters": [
+   "Middle Grave Creek/Grave Creek/Ohio River",
+   "OHIO RIVER",
+   "Parr Run/Little Grave Creek/Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Moundsville"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 4 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-nitro-wv0023299",
+  "name": "NITRO WWTP",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023299",
+  "receiving_waters": [
+   "Armour Creek/Kanawha River/Ohio River",
+   "Kanawha River/Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nitro"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 6 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-clarksburg-wv0023302",
+  "name": "CLARKSBURG SANITARY BOARD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023302",
+  "receiving_waters": [
+   "WEST FORK RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 55,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "City of Clarksburg text alerts (text ClarksburgWV to 38276); CSO-specific use unknown",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clarksburg"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 55 current CSO outlets with points.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-fairmont-wv0023353",
+  "name": "CITY OF FAIRMONT",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0023353",
+  "receiving_waters": [
+   "MONONGAHELA RIVER",
+   "Monongahela River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 33,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fairmont"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 33 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-keyser-wv0024392",
+  "name": "CITY OF KEYSER",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0024392",
+  "receiving_waters": [
+   "NORTH BRANCH OF POTOMAC RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Keyser"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-westover-wv0024449",
+  "name": "CITY OF WESTOVER",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0024449",
+  "receiving_waters": [
+   "Monogahela",
+   "Monongahela"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westover"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 5 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-marlinton-wv0024473",
+  "name": "TOWN OF MARLINTON",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0024473",
+  "receiving_waters": [
+   "Knapps Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Marlinton"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-wayne-wv0024562",
+  "name": "TOWN OF WAYNE",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0024562",
+  "receiving_waters": [
+   "TWELVEPOLE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wayne"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-hemphill-wv0024589",
+  "name": "CITY OF WELCH",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0024589",
+  "receiving_waters": [
+   "Browns Creek/Tug Fork/Big Sandy River",
+   "Elkhorn Creek/Tug Fork/Big Sandy River",
+   "Tug Fork/Big Sandy River",
+   "Tug Fork/Big Sandy River/Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hemphill"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 2 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-hinton-wv0024732",
+  "name": "CITY OF HINTON",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0024732",
+  "receiving_waters": [
+   "New River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hinton"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 4 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-davis-wv0024848",
+  "name": "TOWN OF DAVIS",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0024848",
+  "receiving_waters": [
+   "BLACKWATER RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Davis"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-thomas-wv0024856",
+  "name": "CITY OF THOMAS",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0024856",
+  "receiving_waters": [
+   "NORTH FORK/BLACKWATER RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Thomas"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-bridgeport-wv0025461",
+  "name": "BRIDGEPORT WASTEWATER TREATMENT PLANT",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0025461",
+  "receiving_waters": [
+   "Ann Run / West Fork River / Monongahela River",
+   "Simpson Creek / West Fork River / Monongahela Rive"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bridgeport"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 10 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-wellsburg-wv0026832",
+  "name": "WELLSBURG CITY OF",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0026832",
+  "receiving_waters": [
+   "OHIO RIVER",
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wellsburg"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 4 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-monongah-wv0027324",
+  "name": "TOWN OF MONONGAH",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0027324",
+  "receiving_waters": [
+   "WEST FORK RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Monongah"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 2 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-new-martinsville-wv0027472",
+  "name": "NEW MARTINSVILLE",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0027472",
+  "receiving_waters": [
+   "Fishing Creek/Ohio River",
+   "OHIO RIVER",
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "New Martinsville"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 8 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-weston-wv0028088",
+  "name": "WESTON SAITARY BOARD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0028088",
+  "receiving_waters": [
+   "Stonecoal Creek",
+   "West Fork River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Weston"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 5 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-dunbar-wv-wv0028118",
+  "name": "CITY OF DUNBAR SANITARY BOARD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0028118",
+  "receiving_waters": [
+   "Aarons Branch/Kanawha River/Ohio River",
+   "Finney Branch/Kanawha River/Ohio River",
+   "Kanawha River/Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 17,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dunbar Wv"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 17 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-belington-wv0029289",
+  "name": "BELINGTON CITY OF",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0029289",
+  "receiving_waters": [
+   "TYGART VALLEY RIVER/Monongahela River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Belington"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-buckhannon-wv0032336",
+  "name": "CITY OF BUCKHANNON",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0032336",
+  "receiving_waters": [
+   "Buckhannon River/Tygart Vallery River/Monongahela",
+   "Buckhannon River/Tygart Valley River/Monongahela R",
+   "Jawbone Run/Buckhannon River/Tygart Vallery River/"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Buckhannon"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 4 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-logan-wv0033821",
+  "name": "CITY OF LOGAN",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0033821",
+  "receiving_waters": [
+   "GUYANDOTTE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Logan"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 7 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-cedar-grove-wv0035637",
+  "name": "TOWN OF CEDAR GROVE",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0035637",
+  "receiving_waters": [
+   "KANAWHA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cedar Grove"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 1 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-kenova-wv0035912",
+  "name": "CITY OF KENOVA",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0035912",
+  "receiving_waters": [
+   "Big Sandy",
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kenova"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-danville-wv0035939",
+  "name": "BOONE COUNTY PSD",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0035939",
+  "receiving_waters": [
+   "COAL RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Danville"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 5 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-shinnston-wv0054500",
+  "name": "CITY OF SHINNSTON",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0054500",
+  "receiving_waters": [
+   "WEST FORK RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Shinnston"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 10 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-barrackville-wv0081434",
+  "name": "TOWN OF BARRACKVILLE",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0081434",
+  "receiving_waters": [
+   "Buffalo Creek/Monongahela River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Barrackville"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 4 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-gassaway-west-virginia-wv0084042",
+  "name": "FLATWOODS-CANOE RUN PUBLIC SERVICE DISTRICT",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0084042",
+  "receiving_waters": [
+   "ELK RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gassaway, West Virginia"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 6 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-rivesville-wv0084310",
+  "name": "GREATER PAW PAW SANITARY DISTRICT",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0084310",
+  "receiving_waters": [
+   "Paw Paw Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rivesville"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 8 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-nutter-fort-wv0100901",
+  "name": "TOWN OF NUTTER FORT",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0100901",
+  "receiving_waters": [
+   "Elk Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nutter Fort"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 3 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wv-piedmont-wv0105279",
+  "name": "PIEDMONT CITY OF",
+  "state": "WV",
+  "kind": "cso",
+  "npdes_permit": "WV0105279",
+  "receiving_waters": [
+   "North Branch of Potomac River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "WV DEP NPDES Outlets layer (https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24, iut_code CSO) and EPA inventory",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Piedmont"
+  ],
+  "notes": "WV DEP NPDES Outlets layer: 7 current CSO outlets with points. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ }
+]

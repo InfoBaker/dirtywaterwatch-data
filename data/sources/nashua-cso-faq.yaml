@@ -1,0 +1,24 @@
+id: "nashua-cso-faq"
+name: "City of Nashua NH CSO page/FAQ"
+url: null
+homepage: null
+kind: "html"
+level: "municipal"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): 'do not go near these
+#   locations for 48 hours after a discharge'; banner stays 48 h 'allowing the river time to
+#   recover'.
+# Access detail (research, quoted): Raw copy: research/science/raw/dl-adv/nashua-842-cso.html
+#   (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead).
+# Can fill: advice_text
+cadence: null
+license: "none stated"
+attribution: "City of Nashua"
+enabled: true
+role: "advisories"
+event_types: ["cso"]
+states: ["NH"]
+access: ["html"]
+access_detail: "Raw copy: research/science/raw/dl-adv/nashua-842-cso.html (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

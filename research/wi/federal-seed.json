@@ -1,0 +1,669 @@
+{
+ "state": "WI",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "WI0025593",
+   "permittee": "SUPERIOR SEWAGE DISPOSAL SYSTEM",
+   "city": "SUPERIOR",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Nemadji River",
+    "St. Louis Bay of Lake Superior",
+    "Superior Bay"
+   ]
+  },
+  {
+   "npdes_permit": "WI0036820",
+   "permittee": "MILWAUKEE METRO SEW DIST COMBI",
+   "city": "MILWAUKEE",
+   "open_outfalls": 114,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Burnham's Canal",
+    "Kinnickinnic River",
+    "Lake Michigan",
+    "Lincoln Creek",
+    "Menomonee River",
+    "Milwaukee River",
+    "South Menomonee Canal"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 117,
+ "plant_permits": 588,
+ "plant_permits_major": 90,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "WI0020001",
+   "permittee": "WHITEWATER WASTEWATER TREATMEN",
+   "city": "WHITEWATER",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020044",
+   "permittee": "CITY OF RHINELANDER",
+   "city": "RHINELANDER",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020109",
+   "permittee": "CITY OF RICHLAND CENTER",
+   "city": "RICHLAND CENTER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0020150",
+   "permittee": "CITY OF MERRILL",
+   "city": "MERRILL",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020184",
+   "permittee": "Grafton Village Water and Wastewater Utility",
+   "city": "GRAFTON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020192",
+   "permittee": "Hartford Water Pollution Control Facility",
+   "city": "HARTFORD",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020222",
+   "permittee": "CEDARBURG WASTEWATER TREATMENT",
+   "city": "CEDARBURG",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020257",
+   "permittee": "PRAIRIE DU CHIEN WASTEWATER TR",
+   "city": "PRAIRIE DU CHIEN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020265",
+   "permittee": "Mukwonago Village",
+   "city": "MUKWONAGO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020338",
+   "permittee": "CITY OF STOUGHTON",
+   "city": "STOUGHTON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020362",
+   "permittee": "CITY OF MONROE",
+   "city": "MONROE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020371",
+   "permittee": "CITY OF REEDSBURG",
+   "city": "REEDSBURG",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020427",
+   "permittee": "CITY OF PORTAGE",
+   "city": "PORTAGE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020435",
+   "permittee": "CITY OF PLATTEVILLE",
+   "city": "PLATTEVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020460",
+   "permittee": "Port Washington City",
+   "city": "PORT WASHINGTON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020478",
+   "permittee": "SUN PRAIRIE City of",
+   "city": "SUN PRAIRIE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020559",
+   "permittee": "Sussex Village",
+   "city": "SUSSEX",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020605",
+   "permittee": "CITY OF BARABOO",
+   "city": "BARABOO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0020681",
+   "permittee": "VILLAGE OF OREGON",
+   "city": "OREGON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020737",
+   "permittee": "City of Sparta",
+   "city": "SPARTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0020893",
+   "permittee": "NEW HOLSTEIN WASTEWATER TREATM",
+   "city": "NEW HOLSTEIN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0020991",
+   "permittee": "GREEN BAY METROPOLITAN SEWERAG",
+   "city": "GREEN BAY",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0021008",
+   "permittee": "COLUMBUS WASTEWATER TREATMENT",
+   "city": "COLUMBUS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0021024",
+   "permittee": "Marshfield (City of)",
+   "city": "MARSHFIELD",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0021032",
+   "permittee": "City of Ripon",
+   "city": "RIPON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0021113",
+   "permittee": "Sturgeon Bay Utilities",
+   "city": "STURGEON BAY",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0021181",
+   "permittee": "OCONOMOWOC WASTEWATER TREATMENT PLANT",
+   "city": "OCONOMOWOC",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0021318",
+   "permittee": "City of Tomah",
+   "city": "TOMAH",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0021555",
+   "permittee": "Village of Saukville Sewer Utility",
+   "city": "SAUKVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0021695",
+   "permittee": "Twin Lakes Village",
+   "city": "TWIN LAKES",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0021806",
+   "permittee": "JACKSON (VILLAGE) WASTEWATER T",
+   "city": "JACKSON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0021865",
+   "permittee": "CITY OF RICE LAKE - UTILITIES",
+   "city": "RICE LAKE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0022144",
+   "permittee": "CITY OF ANTIGO",
+   "city": "ANTIGO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0022489",
+   "permittee": "CITY OF FORT ATKINSON",
+   "city": "FORT ATKINSON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0022772",
+   "permittee": "WAUPUN WASTEWATER TREATMENT FA",
+   "city": "WAUPUN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0022926",
+   "permittee": "Burlington Water Pollution Control",
+   "city": "BURLINGTON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0023221",
+   "permittee": "APPLETON WASTEWATER TREATMENT",
+   "city": "APPLETON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0023230",
+   "permittee": "City of Arcadia",
+   "city": "ARCADIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0023345",
+   "permittee": "CITY OF BEAVER DAM",
+   "city": "BEAVER DAM",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0023370",
+   "permittee": "BELOIT CITY",
+   "city": "BELOIT",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0023469",
+   "permittee": "Brookfield, City of",
+   "city": "BROOKFIELD",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0023604",
+   "permittee": "City of Chippewa Falls",
+   "city": "CHIPPEWA FALLS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0023787",
+   "permittee": "GBMSD - DE PERE WWTF",
+   "city": "DE PERE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0023850",
+   "permittee": "City of Eau Claire",
+   "city": "EAU CLAIRE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0023990",
+   "permittee": "City of Fond du Lac",
+   "city": "FOND DU LAC COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0024279",
+   "permittee": "HUDSON WASTEWATER TREATMENT FA",
+   "city": "HUDSON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0024333",
+   "permittee": "CITY OF JEFFERSON",
+   "city": "JEFFERSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0024597",
+   "permittee": "MADISON METROPOLITAN SEWERAGE",
+   "city": "MADISON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0024601",
+   "permittee": "City of Manitowoc",
+   "city": "MANITOWOC",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0024643",
+   "permittee": "CITY OF MAYVILLE",
+   "city": "MAYVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0024686",
+   "permittee": "Fox West Regional Sewerage Commission",
+   "city": "NEENAH, CITY OF",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0024708",
+   "permittee": "City of Menomonie",
+   "city": "MENOMONIE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0024929",
+   "permittee": "City of New London",
+   "city": "NEW LONDON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0025038",
+   "permittee": "City of Oshkosh",
+   "city": "OSHKOSH",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0025194",
+   "permittee": "Racine Wastewater Utility",
+   "city": "RACINE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0025411",
+   "permittee": "Sheboygan City",
+   "city": "SHEBOYGAN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0025593",
+   "permittee": "SUPERIOR SEWAGE DISPOSAL SYSTEM",
+   "city": "SUPERIOR",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0025739",
+   "permittee": "Wausau Water Works",
+   "city": "WAUSAU",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0025763",
+   "permittee": "City of West Bend",
+   "city": "WEST BEND",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0025844",
+   "permittee": "WISCONSIN RAPIDS WWTF",
+   "city": "WISCONSIN RAPIDS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0026085",
+   "permittee": "NEENAH MENASHA SEWER COMMISSIO",
+   "city": "MENASHA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0026182",
+   "permittee": "City of Marinette",
+   "city": "MARINETTE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0026590",
+   "permittee": "Two Rivers City of",
+   "city": "TWO RIVERS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0027995",
+   "permittee": "Village of Plover",
+   "city": "PLOVER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0028291",
+   "permittee": "Village of Union Grove",
+   "city": "UNION GROVE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0028452",
+   "permittee": "Wolf Treatment Plant Commission",
+   "city": "SHAWANO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0028541",
+   "permittee": "CITY OF WATERTOWN",
+   "city": "WATERTOWN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0028703",
+   "permittee": "CITY OF KENOSHA",
+   "city": "KENOSHA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0028754",
+   "permittee": "Western Racine Co Sewerage Dist",
+   "city": "ROCHESTER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0028819",
+   "permittee": "South Milwaukee City",
+   "city": "SOUTH MILWAUKEE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0029394",
+   "permittee": "River Falls Municipal Utility  WWTF",
+   "city": "RIVER FALLS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0029572",
+   "permittee": "Stevens Point City of",
+   "city": "STEVENS POINT",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0029581",
+   "permittee": "La Crosse, City of",
+   "city": "LA CROSSE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0029971",
+   "permittee": "Waukesha City",
+   "city": "WAUKESHA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WI0030031",
+   "permittee": "Plymouth City Utilities Commission",
+   "city": "PLYMOUTH",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0030350",
+   "permittee": "JANESVILLE CITY",
+   "city": "JANESVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0030490",
+   "permittee": "City of Waupaca",
+   "city": "WAUPACA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0030651",
+   "permittee": "PESHTIGO JOINT WASTEWATER TREA",
+   "city": "PESHTIGO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0030767",
+   "permittee": "ASHLAND SEWAGE UTILITY",
+   "city": "ASHLAND",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0031194",
+   "permittee": "CITY OF LAKE MILLS",
+   "city": "LAKE MILLS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0031232",
+   "permittee": "HEART OF VALLEY MSD WW TRTMNT",
+   "city": "KAUKAUNA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0031402",
+   "permittee": "WI DELLS LK DELTON SEWERAGE CO",
+   "city": "LAKE DELTON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0031461",
+   "permittee": "Walworth County Metro",
+   "city": "DELAVAN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0031470",
+   "permittee": "Norway TN Sanitary District 1",
+   "city": "WIND LAKE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0031496",
+   "permittee": "SALEM UTILITY DISTRICT NO 2",
+   "city": "SALEM",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0032026",
+   "permittee": "Delafield Hartland Water Pollution Control Commission",
+   "city": "DELAFIELD",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0035581",
+   "permittee": "Rib Mountain Metro Sewage District WWTF",
+   "city": "SCHOFIELD",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0036021",
+   "permittee": "Fontana Walworth Water Pollution Cont. Comm",
+   "city": "WALWORTH",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0036820",
+   "permittee": "MILWAUKEE METRO SEW DIST COMBI",
+   "city": "MILWAUKEE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WI0065251",
+   "permittee": "Green Bay Metropolitan Sewerage District Combined",
+   "city": "GREEN BAY",
+   "major": "Major",
+   "status": "EXP"
+  }
+ ]
+}

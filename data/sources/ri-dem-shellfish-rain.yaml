@@ -1,0 +1,22 @@
+id: "ri-dem-shellfish-rain"
+name: "RI DEM conditional shellfish area rainfall closures (Upper Narragansett Bay)"
+url: "https://www.ri.gov/press/view/28491"
+homepage: "https://www.ri.gov/press/view/28491"
+kind: "html"
+level: "state"
+# Notes (research/hydrography, status candidate, verified search_only, checked 2026-11-01): Example
+#   of a rainfall-triggered closure rule; current values unconfirmed.
+# Access detail (research, quoted): Snippets (2015-2016): seven-day closures after 0.5 in (Conimicut
+#   Triangle), 0.8 in (Area A), 1.5 in (Area B); earlier 0.5/1.0 in.
+cadence: null
+license: "none stated"
+attribution: "RI DEM"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["RI"]
+access: ["html"]
+access_detail: "Snippets (2015-2016): seven-day closures after 0.5 in (Conimicut Triangle), 0.8 in (Area A), 1.5 in (Area B); earlier 0.5/1.0 in."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

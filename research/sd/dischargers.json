@@ -1,0 +1,298 @@
+[
+ {
+  "id": "sd-lead-cso",
+  "name": "City of Lead (CSO)",
+  "state": "SD",
+  "kind": "cso",
+  "npdes_permit": "SD0027481",
+  "receiving_waters": [
+   "Gold Run Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "data/outfalls-us.json",
+  "notification_channel": "None found.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lead"
+  ],
+  "notes": "2 open CSO outfalls (EPA inventory); 3 SOBE events, latest 2026-08-18, receiving water 'gold run creek'.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-lead-deadwood-sd",
+  "name": "Lead-Deadwood Sanitary District",
+  "state": "SD",
+  "kind": "cso",
+  "npdes_permit": "SD0020796",
+  "receiving_waters": [
+   "Whitewood Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "data/outfalls-us.json",
+  "notification_channel": "None found.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Deadwood",
+   "Lead"
+  ],
+  "notes": "1 open CSO outfall (EPA inventory); no SOBE rows.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-rapid-city",
+  "name": "City of Rapid City",
+  "state": "SD",
+  "kind": "sso",
+  "npdes_permit": "SD0023574",
+  "receiving_waters": [
+   "Rapid Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rapid City"
+  ],
+  "notes": "24 SOBE events, latest start 2026-11-02. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-sioux-falls",
+  "name": "City of Sioux Falls",
+  "state": "SD",
+  "kind": "June 2024 flood: partially treated and untreated releases to the Big Sioux River announced by press conference.",
+  "npdes_permit": "SD0022128",
+  "receiving_waters": [
+   "Big Sioux River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sioux Falls"
+  ],
+  "notes": "20 SOBE events, latest start 2026-10-31. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-hot-springs",
+  "name": "City of Hot Springs",
+  "state": "SD",
+  "kind": "sso",
+  "npdes_permit": "SD0022918",
+  "receiving_waters": [
+   "Fall River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hot Springs"
+  ],
+  "notes": "19 SOBE events, latest start 2026-09-03. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-pierre",
+  "name": "City of Pierre",
+  "state": "SD",
+  "kind": "sso",
+  "npdes_permit": "SD0020176",
+  "receiving_waters": [
+   "Missouri River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pierre"
+  ],
+  "notes": "15 SOBE events, latest start 2026-03-26. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-spearfish",
+  "name": "City of Spearfish",
+  "state": "SD",
+  "kind": "sso",
+  "npdes_permit": "SD0020044",
+  "receiving_waters": [
+   "Spearfish Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Spearfish"
+  ],
+  "notes": "12 SOBE events, latest start 2026-10-16. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-aberdeen",
+  "name": "City of Aberdeen",
+  "state": "SD",
+  "kind": "sso",
+  "npdes_permit": "SD0020702",
+  "receiving_waters": [
+   "Moccasin Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Aberdeen"
+  ],
+  "notes": "12 SOBE events, latest start 2026-09-29. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-mitchell",
+  "name": "City of Mitchell",
+  "state": "SD",
+  "kind": "sso",
+  "npdes_permit": "SD0023361",
+  "receiving_waters": [
+   "Dry Run Creek",
+   "Lake Mitchell (ditch)"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mitchell"
+  ],
+  "notes": "11 SOBE events, latest start 2026-03-20. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-watertown",
+  "name": "City of Watertown",
+  "state": "SD",
+  "kind": "sso",
+  "npdes_permit": "SD0023370",
+  "receiving_waters": [
+   "Big Sioux River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Watertown"
+  ],
+  "notes": "8 SOBE events, latest start 2026-07-19. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-yankton",
+  "name": "City of Yankton",
+  "state": "SD",
+  "kind": "sso",
+  "npdes_permit": "SD0023396",
+  "receiving_waters": [
+   "Missouri River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Yankton"
+  ],
+  "notes": "4 SOBE events, latest start 2026-04-23. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-huron",
+  "name": "City of Huron",
+  "state": "SD",
+  "kind": "sso",
+  "npdes_permit": "SD0023434",
+  "receiving_waters": [
+   "James River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Huron"
+  ],
+  "notes": "4 SOBE events, latest start 2025-08-19. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-chamberlain",
+  "name": "City of Chamberlain",
+  "state": "SD",
+  "kind": "sso",
+  "npdes_permit": "SD0023698",
+  "receiving_waters": [
+   "Lake Francis Case (Missouri River)"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chamberlain"
+  ],
+  "notes": "2 SOBE events, latest start 2026-07-28. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "sd-brookings",
+  "name": "Brookings Municipal Utilities",
+  "state": "SD",
+  "kind": "sso",
+  "npdes_permit": "SD0023388",
+  "receiving_waters": [
+   "Big Sioux River tributary"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No web channel found; overflow reports reach the public only through EPA's SOBE extract.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Brookings"
+  ],
+  "notes": "1 SOBE events, latest start undated. ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ }
+]

@@ -1,0 +1,2975 @@
+[
+ {
+  "id": "in-ridgeville-wwtp-in0020001",
+  "name": "RIDGEVILLE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020001",
+  "receiving_waters": [
+   "MISSISSINEWA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ridgeville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-alexandria-wwtp-in0020044",
+  "name": "ALEXANDRIA WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020044",
+  "receiving_waters": [
+   "PIPE CR TO W FK WHITE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Alexandria"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-portland-wwtp-in0020095",
+  "name": "PORTLAND WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020095",
+  "receiving_waters": [
+   "OR/WABASH RIVER/SALAMONIE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 12,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 12 open, 5 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Portland"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-greenfield-wwtp-in0020109",
+  "name": "GREENFIELD WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020109",
+  "receiving_waters": [
+   "OR/E FK WHITE/BIG BLUE/BRANDYWINE C"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 8 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Greenfield"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-montpelier-wwtp-in0020117",
+  "name": "MONTPELIER WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020117",
+  "receiving_waters": [
+   "SALAMONIE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Montpelier"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-royal-center-wwtp-in0020125",
+  "name": "ROYAL CENTER WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020125",
+  "receiving_waters": [
+   "FREDRICKS DITCH",
+   "TIPPECANOE R VIA FREDRICKS DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Royal Center"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-greensburg-wwtp-in0020133",
+  "name": "GREENSBURG WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020133",
+  "receiving_waters": [
+   "Gas Creek-Sand Creek",
+   "OR/E FK WHITE R/SAND CRK/GAS CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Greensburg"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-noblesville-wwtp-city-of-in0020168",
+  "name": "NOBLESVILLE WWTP, CITY OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020168",
+  "receiving_waters": [
+   "OHIO RIVER FROM WHITE RIVER",
+   "OR/WABASH/WHITE/W FK WHITE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 9 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Noblesville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-monticello-wwtp-in0020176",
+  "name": "MONTICELLO WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020176",
+  "receiving_waters": [
+   "TIPPECANOE R (LAKE FREEMAN)",
+   "TIPPECANOE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Monticello"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-edinburgh-wwtp-in0020184",
+  "name": "EDINBURGH WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020184",
+  "receiving_waters": [
+   "BIG BLUE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Edinburgh"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-attica-municipal-wwtp-in0020222",
+  "name": "ATTICA MUNICIPAL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020222",
+  "receiving_waters": [
+   "WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Attica"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-vevay-wwtp-in0020231",
+  "name": "VEVAY WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020231",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Vevay"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-new-haven-wwtp-in0020346",
+  "name": "NEW HAVEN WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020346",
+  "receiving_waters": [
+   "MAUMEE R VIA MARTIN DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "New Haven"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-north-manchester-wwtp-in0020362",
+  "name": "NORTH MANCHESTER WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020362",
+  "receiving_waters": [
+   "EEL R (WABASH)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "North Manchester"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-bremen-wwtp-in0020427",
+  "name": "BREMEN WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020427",
+  "receiving_waters": [
+   "UM/KANKAKEE R/YELLOW RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 5 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bremen"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-north-vernon-wwtp-in0020451",
+  "name": "NORTH VERNON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020451",
+  "receiving_waters": [
+   "MUSCATATUCK R (VERNON FK)",
+   "VERNON FORK OF MUSCATATUCK RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "North Vernon"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-lagrange-wwtp-in0020478",
+  "name": "LAGRANGE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020478",
+  "receiving_waters": [
+   "PIGEON R VIA FLY CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 5 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lagrange"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-winamac-wwtp-in0020516",
+  "name": "WINAMAC WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020516",
+  "receiving_waters": [
+   "TIPPECANOE R TO WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Winamac"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-south-whitley-wwtp-in0020567",
+  "name": "SOUTH WHITLEY WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020567",
+  "receiving_waters": [
+   "EEL RIVER",
+   "WABASH RIVER VIA EEL RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "South Whitley"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-kendallville-wwtp-in0020656",
+  "name": "KENDALLVILLE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020656",
+  "receiving_waters": [
+   "ELKHART R N BR VIA HENDERSON LAKE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "CSO page https://www.kendallvillein.gov/departments/wastewater/cso.aspx (HTTP 403)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kendallville"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-avilla-wwtp-town-of-in0020664",
+  "name": "AVILLA WWTP, TOWN OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020664",
+  "receiving_waters": [
+   "CEDAR CR (LITTLE) VIA UNNAMED DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Avilla"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-auburn-wwtp-in0020672",
+  "name": "AUBURN WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020672",
+  "receiving_waters": [
+   "CEDAR CR TO ST JOSEPH RIVER",
+   "CEDAR CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.ci.auburn.in.us/168/Water-Pollution-Control; annual notice: https://www.ci.auburn.in.us/168/Water-Pollution-Control; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Auburn"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-liberty-wwtp-in0020681",
+  "name": "LIBERTY WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020681",
+  "receiving_waters": [
+   "UNNAMED TRIB TO SILVER CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Liberty"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-waterloo-wwtp-in0020711",
+  "name": "WATERLOO WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020711",
+  "receiving_waters": [
+   "CEDAR CR TO ST JOSEPH RIVER",
+   "Cedar Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 2 closed",
+  "notification_channel": "Dated CSO Public Notification posts: https://waterlooin.gov/category/combined-sewer-overflow/ (latest seen April 2023)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Waterloo"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-ossian-wwtp-town-of-in0020745",
+  "name": "OSSIAN WWTP, TOWN OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020745",
+  "receiving_waters": [
+   "OR/WABASH/LITTLE/EIGHT MILE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 6 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ossian"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-middletown-wwtp-in0020770",
+  "name": "MIDDLETOWN WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020770",
+  "receiving_waters": [
+   "FALL CREEK TO W. FORK WHITE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Middletown"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-north-judson-municipal-wwtp-in0020877",
+  "name": "NORTH JUDSON MUNICIPAL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020877",
+  "receiving_waters": [
+   "KANKAKEE R VIA PINE CREEK&UNNAMED T"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "North Judson"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-rossville-wwtp-in0020907",
+  "name": "ROSSVILLE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020907",
+  "receiving_waters": [
+   "ROSSVILLE WWTP",
+   "WILDCAT CR VIA SILVERTHORN DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rossville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-remington-wwtp-in0020940",
+  "name": "REMINGTON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020940",
+  "receiving_waters": [
+   "IROQUOIS R VIA CARPENTER CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Remington"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-fortville-wwtp-in0020958",
+  "name": "FORTVILLE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020958",
+  "receiving_waters": [
+   "FALL CR VIA FLAT FORT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 9 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fortville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-plymouth-wwtp-in0020991",
+  "name": "PLYMOUTH WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0020991",
+  "receiving_waters": [
+   "YELLOW R TO KANKAKEE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 10 open, 0 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Plymouth"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-tell-city-wwtp-in0021016",
+  "name": "TELL CITY WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021016",
+  "receiving_waters": [
+   "OHIO RIVER",
+   "OHIO RIVER VIA WINDY CR"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tell City"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-rockport-south-wwtp-in0021067",
+  "name": "ROCKPORT SOUTH WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021067",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rockport"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-fairmount-wwtp-in0021105",
+  "name": "FAIRMOUNT WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021105",
+  "receiving_waters": [
+   "BACK CREEK",
+   "MISSISSINEWA R VIA BACK CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 17,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 17 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fairmount"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-franklin-wwtp-city-of-in0021181",
+  "name": "FRANKLIN WWTP, CITY OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021181",
+  "receiving_waters": [
+   "SUGAR CR (E WHITE) VIA YOUNGS CR"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Franklin"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-plainfield-north-water-pollution-control-facility-in0021202",
+  "name": "PLAINFIELD NORTH WATER POLLUTION CONTROL FACILITY",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021202",
+  "receiving_waters": [
+   "OR/W FK WHITE R/WHITE LICK CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Plainfield"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-brazil-wwtp-in0021211",
+  "name": "BRAZIL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021211",
+  "receiving_waters": [
+   "OR/WHITE/EEL/E FK BIRCH/UNNMD DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Brazil"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-brownsburg-wwtp-in0021245",
+  "name": "BROWNSBURG WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021245",
+  "receiving_waters": [
+   "OR/W FK WHITE R/WHITE LICK CREEK",
+   "WHITE LICK CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Brownsburg"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-rushville-wwtp-in0021270",
+  "name": "RUSHVILLE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021270",
+  "receiving_waters": [
+   "OR/E FK WHITE RIVER/FLATROCK RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rushville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-angola-wwtp-in0021296",
+  "name": "ANGOLA WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021296",
+  "receiving_waters": [
+   "PIGEON CREEK VIA H.D. WOOD DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Angola"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-oxford-municipal-wwtp-in0021342",
+  "name": "OXFORD MUNICIPAL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021342",
+  "receiving_waters": [
+   "BROWN DITCH",
+   "UNT TO BROWN DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oxford"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-berne-wwtp-in0021369",
+  "name": "BERNE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021369",
+  "receiving_waters": [
+   "Gales Ditch",
+   "ST MARYS R VIA BLUE CR VIA HABEGGER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 3 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.cityofberne.in.gov/sewage-department; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Berne"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-knox-municipal-wwtp-in0021385",
+  "name": "KNOX MUNICIPAL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021385",
+  "receiving_waters": [
+   "UM/KANKAKEE RIVER/YELLOW RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Knox"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-nappanee-wwtp-city-of-in0021466",
+  "name": "NAPPANEE WWTP, CITY OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021466",
+  "receiving_waters": [
+   "ARMEY DITCH",
+   "BERLIN COURT DITCH",
+   "TURKEY CR VIA TRIBUTARY"
+  ],
+  "water_slugs": [],
+  "outfall_count": 12,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 12 open, 4 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.nappanee.org/government/departments/water-and-sewer-utilities; annual notice: https://www.nappanee.in.gov/home/showpublisheddocument/1003/638497189356907232; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nappanee"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-tipton-wwtp-in0021474",
+  "name": "TIPTON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021474",
+  "receiving_waters": [
+   "CICERO CREEK",
+   "CICERO CREEK TO MORSE RESERVOIR",
+   "OR/W FK WHITE RIVER/CICERO CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 8 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tipton"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-farmland-municipal-stp-in0021512",
+  "name": "FARMLAND MUNICIPAL STP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021512",
+  "receiving_waters": [
+   "W FK WHITE R VIA NELSON-OSWALD D"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Farmland"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-hartford-city-wwtp-in0021628",
+  "name": "HARTFORD CITY WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021628",
+  "receiving_waters": [
+   "MISSISSINEWA R VIA BIG LICK CR TRIB"
+  ],
+  "water_slugs": [],
+  "outfall_count": 16,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 16 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hartford City"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-salem-wwtp-in0021644",
+  "name": "SALEM WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021644",
+  "receiving_waters": [
+   "OR/WEST FORK OF BLUE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Salem"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-eaton-wwtp-in0021652",
+  "name": "EATON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0021652",
+  "receiving_waters": [
+   "WABASH RIVER VIA MISSISSINEWA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Eaton"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-albion-wwtp-in0022144",
+  "name": "ALBION WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022144",
+  "receiving_waters": [
+   "Muncie Lake-South Branch Elkhart River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Albion"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-argos-wastewater-treatment-plant-in0022284",
+  "name": "ARGOS WASTEWATER TREATMENT PLANT",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022284",
+  "receiving_waters": [
+   "YELLOW R/MYERS DITCH/UNNMD DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Argos"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-bluffton-wwtp-in0022411",
+  "name": "BLUFFTON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022411",
+  "receiving_waters": [
+   "WABASH RIVER",
+   "Wabash River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bluffton"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-boonville-municipal-wwtp-in0022420",
+  "name": "BOONVILLE MUNICIPAL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022420",
+  "receiving_waters": [
+   "CYPRESS CR TO OHIO RIVER",
+   "CYPRESS CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Boonville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-butler-wwtp-in0022462",
+  "name": "BUTLER WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022462",
+  "receiving_waters": [
+   "BIG RUN CR TO ST JOSEPH RIVER",
+   "BIG RUN CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.butler.in.us/government/departments/utilities/_wastewater_utility.php; annual notice: https://webgen1files.revize.com/butlerin/CSO%20Events%20February%202023.pdf; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Butler"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-centerville-wwtp-in0022535",
+  "name": "CENTERVILLE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022535",
+  "receiving_waters": [
+   "NOLANDS FK TO WHITEWATER R (W FK)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Centerville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-chesterfield-municipal-wwtp-in0022560",
+  "name": "CHESTERFIELD MUNICIPAL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022560",
+  "receiving_waters": [
+   "W FK WHITE R - SRVD BY ANDERSON CSO"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chesterfield"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-chesterton-wwtp-in0022578",
+  "name": "CHESTERTON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022578",
+  "receiving_waters": [
+   "LAKE MICHIGAN/E BR LITTLE CALUMET"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "No website listed by EPA; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chesterton"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-clinton-municipal-wwtp-in0022608",
+  "name": "CLINTON MUNICIPAL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022608",
+  "receiving_waters": [
+   "WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clinton"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-columbia-city-wwtp-in0022624",
+  "name": "COLUMBIA CITY WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022624",
+  "receiving_waters": [
+   "BLUE RIVER",
+   "EEL R (WABASH) VIA BLUE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 11,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 11 open, 7 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Columbia City"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-crothersville-wwtp-in0022683",
+  "name": "CROTHERSVILLE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022683",
+  "receiving_waters": [
+   "MUSCATATUCK R VIA GRASSY CR - NEHRT",
+   "NEHRT (HOMINY) DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Crothersville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-east-chicago-sanitary-district-in0022829",
+  "name": "EAST CHICAGO SANITARY DISTRICT",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022829",
+  "receiving_waters": [
+   "GRAND CALUMET RIVER",
+   "INDIANA HARBOR SHIP CANAL"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.eastchicago.com/255/Utility-Operations; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "East Chicago"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-frankfort-wwtp-city-of-in0022934",
+  "name": "FRANKFORT WWTP, CITY OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022934",
+  "receiving_waters": [
+   "WILDCAT CR S FK VIA PRAIRIE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Frankfort"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-garrett-wwtp-in0022969",
+  "name": "GARRETT WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022969",
+  "receiving_waters": [
+   "GARRETT CITY DITCH FROM GARRETT WWTP"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Garrett"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-gary-sanitary-district-in0022977",
+  "name": "GARY SANITARY DISTRICT",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0022977",
+  "receiving_waters": [
+   "GRAND CALUMET R & LITTLE CALUMET R"
+  ],
+  "water_slugs": [],
+  "outfall_count": 12,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 12 open, 3 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.gary.gov/environmental-affairs/water-quality; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gary"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-hammond-wastewater-facility-in0023060",
+  "name": "HAMMOND WASTEWATER FACILITY",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0023060",
+  "receiving_waters": [
+   "GRAND CALUMET R TO LAKE MICHIGAN",
+   "GRAND CALUMET RIVER",
+   "SCHOON DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 10 open, 11 closed",
+  "notification_channel": "E-mail notification on request (request by postal mail to the district): https://www.hammondsd.com/cso-notification-plan/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hammond"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-huntington-wwtp-in0023132",
+  "name": "HUNTINGTON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0023132",
+  "receiving_waters": [
+   "OHIO RIVER FROM WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 14,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 14 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Huntington"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-belmont-southport-advanced-wastewater-treatment-plants-in0023183",
+  "name": "BELMONT & SOUTHPORT ADVANCED WASTEWATER TREATMENT PLANTS",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0023183",
+  "receiving_waters": [
+   "LITTLE BUCK CREEK",
+   "PLEASANT RUN",
+   "W FK WHITE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 131,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 131 open, 6 closed",
+  "notification_channel": "Email CSO warnings issued on forecasts of about 0.25 in of rain or more, under the consent decree (blog 2018: https://blog.citizensenergygroup.com/csowarnings); sign-up page not found; no public event list",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Indianapolis"
+  ],
+  "notes": "Citizens Energy Group operates the Indianapolis system; DigIndy tunnel system completed.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-jeffersonville-downtown-wwtp-in0023302",
+  "name": "JEFFERSONVILLE DOWNTOWN WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0023302",
+  "receiving_waters": [
+   "OHIO R IVER",
+   "OHIO R VIA CANE RUN CREEK",
+   "OHIO RIVER",
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 9 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Jeffersonville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-ligonier-wwtp-in0023582",
+  "name": "LIGONIER WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0023582",
+  "receiving_waters": [
+   "ELKHART R TO ST JOSEPH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 8 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ligonier"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-logansport-municipal-wwtp-in0023604",
+  "name": "LOGANSPORT MUNICIPAL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0023604",
+  "receiving_waters": [
+   "OHIO RIVER/WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 14,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 14 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Logansport"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-lowell-wwtp-in0023621",
+  "name": "LOWELL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0023621",
+  "receiving_waters": [
+   "CEDAR CR TO KANKAKEE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.lowell.net/topic/index.php?topicid=72&amp;structureid=40; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lowell"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-markle-wwtp-in0023736",
+  "name": "MARKLE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0023736",
+  "receiving_waters": [
+   "WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Markle"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-michigan-city-j-b-gifford-wwtp-in0023752",
+  "name": "MICHIGAN CITY - J. B. GIFFORD WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0023752",
+  "receiving_waters": [
+   "TRAIL CR TO LAKE MICHIGAN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 2 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.emichigancity.com/207/Sanitary-District; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Michigan City"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-new-castle-wwtp-in0023914",
+  "name": "NEW CASTLE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0023914",
+  "receiving_waters": [
+   "BIG BLUE R TO DRIFTWOOD RIVER",
+   "BIG BLUE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 8 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "New Castle"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-paoli-municipal-wwtp-in0024023",
+  "name": "PAOLI MUNICIPAL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024023",
+  "receiving_waters": [
+   "LOST RIVER VIA LICK CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Paoli"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-redkey-wwtp-in0024406",
+  "name": "REDKEY WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024406",
+  "receiving_waters": [
+   "MISSISSINEWA R VIA HALFWAY CR-REDKE",
+   "REDKEY RUN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 8 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Redkey"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-rensselaer-wwtp-in0024414",
+  "name": "RENSSELAER WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024414",
+  "receiving_waters": [
+   "IROQUOIS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 10 open, 8 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rensselaer"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-seymour-wwtp-city-of-in0024473",
+  "name": "SEYMOUR WWTP, CITY OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024473",
+  "receiving_waters": [
+   "E FK WHITE R TO WHITE R TO WABASH R"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Seymour"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-south-bend-municipal-wwtp-in0024520",
+  "name": "SOUTH BEND MUNICIPAL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024520",
+  "receiving_waters": [
+   "ST JOSEPH R",
+   "ST JOSEPH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 35,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 35 open, 12 closed",
+  "notification_channel": "Email CSO notifications by calling 574.277.8515; annual Great Lakes CSO notice and monthly reports of operation PDFs at https://southbendin.gov/department/public-works/utilities-division/waste-water/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "South Bend"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-sullivan-wwtp-in0024554",
+  "name": "SULLIVAN WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024554",
+  "receiving_waters": [
+   "BUSSERON CR VIA BUCK CREEK TRIB"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sullivan"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-summitville-wwtp-in0024562",
+  "name": "SUMMITVILLE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024562",
+  "receiving_waters": [
+   "OR/W FK WHITE/MUD CR",
+   "OR/W FK WHITE/MUD CR & ILLIFF DRAIN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Summitville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-elden-kuehl-pollution-con-fac-in0024660",
+  "name": "ELDEN KUEHL POLLUTION CON FAC",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024660",
+  "receiving_waters": [
+   "LT CALUMET R VIA SALT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 2 closed",
+  "notification_channel": "Website listed by EPA (not fetched): http://in-valparaisoutilities.civicplus.com/296/Water-Reclamation; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Valparaiso"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-veedersburg-municipal-wwtp-in0024716",
+  "name": "VEEDERSBURG MUNICIPAL WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024716",
+  "receiving_waters": [
+   "COAL CR TO WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 5 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Veedersburg"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-wabash-wwtp-in0024741",
+  "name": "WABASH WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024741",
+  "receiving_waters": [
+   "WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wabash"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-wakarusa-wwtp-in0024775",
+  "name": "WAKARUSA WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024775",
+  "receiving_waters": [
+   "BAUGO CR VIA WERNTZ DITCH TRIB.",
+   "WERNTZ DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 3 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://townofwakarusa.com/; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wakarusa"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-warren-wwtp-in0024791",
+  "name": "WARREN WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024791",
+  "receiving_waters": [
+   "SALAMONIE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 5 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Warren"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-warsaw-1-wwtp-in0024805",
+  "name": "WARSAW #1 WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024805",
+  "receiving_waters": [
+   "OR/WABASH/TIPPECANOE/BIG WALNUT CRK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Warsaw"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-west-lafayette-wwtp-in0024821",
+  "name": "WEST LAFAYETTE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024821",
+  "receiving_waters": [
+   "WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "West Lafayette"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-carthage-wwtp-in0024937",
+  "name": "CARTHAGE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0024937",
+  "receiving_waters": [
+   "BIG BLUE R TO DRIFTWOOD RIVER",
+   "NORTH CARTHAGE CREEK/BIG BLUE R TO DRIFTWOOD RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Carthage"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-akron-wwtp-in0025232",
+  "name": "AKRON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025232",
+  "receiving_waters": [
+   "TIPPECANOE R VIA CHIPPENWANUCK CR"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Akron"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-la-porte-wwtp-in0025577",
+  "name": "LA PORTE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025577",
+  "receiving_waters": [
+   "KANKAKEE R VIA TRAVIS DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "CSO status page with current status and list of past overflows with volume: https://www.cityoflaporte.com/departments/laporte-utilties/wastewater-division/combined-sewer-overflow-status",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "La Porte"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-marion-utilities-in0025585",
+  "name": "MARION UTILITIES",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025585",
+  "receiving_waters": [
+   "OR/WABASH R/MISSISSINEWA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Marion"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-terre-haute-wwtp-city-of-in0025607",
+  "name": "TERRE HAUTE WWTP, CITY OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025607",
+  "receiving_waters": [
+   "OR/WABASH RIVER",
+   "WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 9 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Terre Haute"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-richmond-wwtp-city-of-in0025615",
+  "name": "RICHMOND WWTP, CITY OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025615",
+  "receiving_waters": [
+   "WHITEWATER R (E FK)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Richmond"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-muncie-water-pollution-control-facility-in0025631",
+  "name": "MUNCIE WATER POLLUTION CONTROL FACILITY",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025631",
+  "receiving_waters": [
+   "OR/WEST FORK OF WHITE RIVER",
+   "WEST FK WHITE RIVER",
+   "White River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 11,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 11 open, 19 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Muncie"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-mishawaka-wwtp-in0025640",
+  "name": "MISHAWAKA WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025640",
+  "receiving_waters": [
+   "ELLER DITCH",
+   "ST JOSEPH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 16,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 16 open, 8 closed",
+  "notification_channel": "CSO information page https://mishawaka.in.gov/government/departments/mishawaka-utilities/wastewater/cso-information/ (HTTP 403)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mishawaka"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-washington-wwtp-in0025658",
+  "name": "WASHINGTON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025658",
+  "receiving_waters": [
+   "HAWKINS CREEK",
+   "OR/W FK WHITE RIVER/HAWKINS CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 5 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Washington"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-madison-wwtp-in0025666",
+  "name": "MADISON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025666",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 5 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Madison"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-elkhart-wwtp-in0025674",
+  "name": "ELKHART WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025674",
+  "receiving_waters": [
+   "ST JOSEPH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 29,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 29 open, 11 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://elkhartindiana.org/government/public-works/#tab-f78ce0120e44e60a37f; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Elkhart"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-goshen-wwtp-in0025755",
+  "name": "GOSHEN WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025755",
+  "receiving_waters": [
+   "ELKHART R TO ST JOSEPH RIVER",
+   "ELKHART RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 5 closed",
+  "notification_channel": "CSO Notice posts naming permit and outfall: https://goshenindiana.org/cso-notice",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Goshen"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-crown-point-wwtp-in0025763",
+  "name": "CROWN POINT WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0025763",
+  "receiving_waters": [
+   "BEAVER DAM DITCH",
+   "LM/CLMT-BRNS/DEEP R/MAIN BEAVER DAM"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.crownpoint.in.gov/218/Wastewater-Treatment-Plant; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Crown Point"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-vincennes-wwtp-in0031020",
+  "name": "VINCENNES WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0031020",
+  "receiving_waters": [
+   "OR/WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Vincennes"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-indianapolis-southport-wwtp-in0031950",
+  "name": "INDIANAPOLIS - SOUTHPORT WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0031950",
+  "receiving_waters": [
+   "W FK WHITE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Indianapolis"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-fort-wayne-wwtp-in0032191",
+  "name": "FORT WAYNE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0032191",
+  "receiving_waters": [
+   "BALDWIN DITCH",
+   "MAUMEE R TO ST MARYS RIVER",
+   "MAUMEE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 38,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 38 open, 24 closed",
+  "notification_channel": "CSO notifications page https://utilities.cityoffortwayne.org/sewer-system/cso-notifications (HTTP 403 to curl and WebFetch)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fort Wayne"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-peru-utilities-wwtp-in0032328",
+  "name": "PERU UTILITIES WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0032328",
+  "receiving_waters": [
+   "WABASH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 10 open, 10 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Peru"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-connersville-wwtp-city-of-in0032336",
+  "name": "CONNERSVILLE WWTP, CITY OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0032336",
+  "receiving_waters": [
+   "WHITEWATER R (W FK)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Connersville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-lafayette-wwtp-in0032468",
+  "name": "LAFAYETTE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0032468",
+  "receiving_waters": [
+   "OHIO RIVER VIA WABASH RIVER",
+   "OHIO RV VIA WABASH RV VIA UNNAMED DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 11,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 11 open, 7 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lafayette"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-anderson-wwtp-in0032476",
+  "name": "ANDERSON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0032476",
+  "receiving_waters": [
+   "OR/WEST FORK WHITE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 11,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 11 open, 16 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Anderson"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-columbus-wwtp-city-of-in0032573",
+  "name": "COLUMBUS WWTP, CITY OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0032573",
+  "receiving_waters": [
+   "E FK WHITE R TO WHITE R TO WABASH R",
+   "Little Haw Creek-Haw Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 8 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Columbus"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-elwood-wwtp-city-of-in0032719",
+  "name": "ELWOOD WWTP, CITY OF",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0032719",
+  "receiving_waters": [
+   "OR/W FK WHITE/BIG DUCK CREEK",
+   "OR/W FK WHITE/DUCK CREEK",
+   "OR/W FK WHITE/LITTLE DUCK CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 14,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 14 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Elwood"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-kokomo-wwtp-in0032875",
+  "name": "KOKOMO WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0032875",
+  "receiving_waters": [
+   "WILDCAT CR TO WABASH RIVER",
+   "Wildcat Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 13,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 13 open, 19 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kokomo"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-evansville-westside-wwtp-in0032956",
+  "name": "EVANSVILLE WESTSIDE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0032956",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 12,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 12 open, 11 closed",
+  "notification_channel": "EWSU Clear Path CSO page (https://www.ewsu.com/), channel not traced",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Evansville"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-crawfordsville-wwtp-in0032964",
+  "name": "CRAWFORDSVILLE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0032964",
+  "receiving_waters": [
+   "OR/WABASH RIVER/SUGAR CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Crawfordsville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-speedway-wwtp-in0032972",
+  "name": "SPEEDWAY WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0032972",
+  "receiving_waters": [
+   "EAGLE CR TO W FK WHITE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "CSO Public Notifications https://www.speedwayin.gov/node/1301: email on request or phone (search; HTTP 403)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Speedway"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-evansville-eastside-wwtp-in0033073",
+  "name": "EVANSVILLE EASTSIDE WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0033073",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 11 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Evansville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-mount-vernon-wwtp-in0035696",
+  "name": "MOUNT VERNON WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0035696",
+  "receiving_waters": [
+   "OHIO R VIA UNNAMED DITCH",
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mount Vernon"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-graham-creek-elementary-school-in0037494",
+  "name": "GRAHAM CREEK ELEMENTARY SCHOOL",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0037494",
+  "receiving_waters": [
+   "GRAHAM CR TO MUSCATATUCK RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Commiskey"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-milford-wwtp-in0038318",
+  "name": "MILFORD WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0038318",
+  "receiving_waters": [
+   "TURKEY CR TO ELKHART R"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Milford"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-decatur-wwtp-in0039314",
+  "name": "DECATUR WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0039314",
+  "receiving_waters": [
+   "ST MARYS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Decatur"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-geneva-wwtp-in0039357",
+  "name": "GENEVA WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0039357",
+  "receiving_waters": [
+   "WABASH RIVER TO OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Geneva"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-aqua-indiana-inc-midwest-facility-in0042391",
+  "name": "AQUA INDIANA, INC. - MIDWEST FACILITY",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0042391",
+  "receiving_waters": [
+   "GRAHAM MCCULLOCH DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fort Wayne"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-aurora-combined-collection-system-in0050903",
+  "name": "AURORA COMBINED COLLECTION SYSTEM",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0050903",
+  "receiving_waters": [
+   "OHIO RIVER",
+   "SOUTH DEARBORN RSD (OHIO RIVER)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Aurora"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-warsaw-wwtp-in0060917",
+  "name": "WARSAW WWTP",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0060917",
+  "receiving_waters": [
+   "WALNUT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Warsaw"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-cannelton-wastewater-treatment-plant-in0064913",
+  "name": "CANNELTON WASTEWATER TREATMENT PLANT",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "IN0064913",
+  "receiving_waters": [
+   "CASTLEBERRY CREEK",
+   "CASTLEBERRY CREEK VIA STORM SEWER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cannelton"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-chesterfield-city-of-inm002256",
+  "name": "Chesterfield, City of",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM002256",
+  "receiving_waters": [
+   "Mill Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chesterfield"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-greensburg-combined-sewer-sys-inm020133",
+  "name": "GREENSBURG COMBINED SEWER SYS",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM020133",
+  "receiving_waters": [
+   "SAND CREEK VIA GAS CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Greensburg"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-new-haven-collection-system-inm020346",
+  "name": "NEW HAVEN COLLECTION SYSTEM",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM020346",
+  "receiving_waters": [
+   "MAUMEE R VIA MARTIN DRAIN & TRIER D",
+   "Martin Ditch"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 2 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.newhaven.in.gov/; 327 IAC 5-2.2 4-hour notice applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "New Haven"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-auburn-combined-sewer-system-inm020672",
+  "name": "AUBURN COMBINED SEWER SYSTEM",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM020672",
+  "receiving_waters": [
+   "CEDAR CR AND JOHN DIEHL DRAIN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Auburn"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-rushville-combined-sewer-sys-inm021270",
+  "name": "RUSHVILLE COMBINED SEWER SYS.",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM021270",
+  "receiving_waters": [
+   "FLATROCK R VIA UNNAMED OXBOW"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 2 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rushville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-town-of-oxford-css-inm021342",
+  "name": "TOWN OF OXFORD CSS",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM021342",
+  "receiving_waters": [
+   "BIG PINE CR VIA BROWN DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oxford"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-albion-cso-inm022144",
+  "name": "ALBION CSO",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM022144",
+  "receiving_waters": [
+   "ELKHART R S BR VIA CROFT DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Albion"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-chesterfield-css-inm022560",
+  "name": "CHESTERFIELD CSS",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM022560",
+  "receiving_waters": [
+   "W FK WHITE R VIA MILL CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chesterfield"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-chesterton-combined-sewer-sys-inm022578",
+  "name": "CHESTERTON COMBINED SEWER SYS",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM022578",
+  "receiving_waters": [
+   "LAKE MICHIGAN/LITTLE CALUMET RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chesterton"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-east-chicago-css-inm022829",
+  "name": "EAST CHICAGO CSS",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM022829",
+  "receiving_waters": [
+   "GRAND CALUMET R & IN HARBOR SHIP CN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "East Chicago"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-south-bend-css-inm024520",
+  "name": "SOUTH BEND CSS",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM024520",
+  "receiving_waters": [
+   "ST. JOSEPH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 36 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "South Bend"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-wakarusa-combined-sewer-system-inm024775",
+  "name": "WAKARUSA COMBINED SEWER SYSTEM",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM024775",
+  "receiving_waters": [
+   "BAUGO CREEK/WERNTZ DITCH TRIB."
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 7 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wakarusa"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-goshen-combined-sewer-system-inm025755",
+  "name": "GOSHEN COMBINED SEWER SYSTEM",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM025755",
+  "receiving_waters": [
+   "ST JOSEPH RIVER VIA ELKHART RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 6 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Goshen"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-cannelton-css-inm062901",
+  "name": "CANNELTON CSS",
+  "state": "IN",
+  "kind": "cso",
+  "npdes_permit": "INM062901",
+  "receiving_waters": [
+   "CASTLEBERRY CREEK",
+   "CASTLEBERRY CREEK VIA STORM SEWER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 3 closed",
+  "notification_channel": "not searched; 327 IAC 5-2.1 requires notice to those who ask after the March newspaper notice, and signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cannelton"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "in-highland-sso",
+  "name": "Town of Highland (sanitary sewer)",
+  "state": "IN",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Posts its bypass/overflow incident reports (State Form 48373) as PDFs, e.g. https://highland.in.gov/mt-content/uploads/2026/03/030626_final_sso_1230.pdf",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Highland"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ }
+]

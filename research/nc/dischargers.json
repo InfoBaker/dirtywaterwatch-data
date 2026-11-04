@@ -1,0 +1,215 @@
+[
+  {
+    "id": "nc-charlotte-water",
+    "name": "Charlotte Water (WQCS00001 collection system)",
+    "state": "NC",
+    "kind": "sso",
+    "npdes_permit": "WQCS00001",
+    "receiving_waters": [
+      "Sugar Creek",
+      "Irwin Creek",
+      "McAlpine Creek",
+      "Briar Creek",
+      "Catawba River basin"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Press releases to local media; text and Nextdoor for large spills; 311 / 704-336-7600. No list on the web found.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Charlotte"
+    ],
+    "notes": "77 of 571 rows in the 2026 DWR layer (most of any system).",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "nc-winston-salem",
+    "name": "Winston-Salem Collection System",
+    "state": "NC",
+    "kind": "sso",
+    "npdes_permit": "WQCS00003",
+    "receiving_waters": [
+      "Salem Creek",
+      "Muddy Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched (36 rows in DWR 2026 layer)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Winston-Salem"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "nc-greensboro",
+    "name": "Greensboro Collection System",
+    "state": "NC",
+    "kind": "sso",
+    "npdes_permit": "WQCS00006",
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched (30 rows 2026)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Greensboro"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "nc-raleigh",
+    "name": "City of Raleigh (Raleigh Water) Collection System",
+    "state": "NC",
+    "kind": "sso",
+    "npdes_permit": "WQCS00002",
+    "receiving_waters": [
+      "Neuse River basin",
+      "Crabtree Creek",
+      "Walnut Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "City SSO page https://raleighnc.gov/node/41151 and news releases; 919-996-3245.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Raleigh",
+      "Garner",
+      "Wake Forest",
+      "Knightdale"
+    ],
+    "notes": "27 rows 2026.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "nc-hickory",
+    "name": "Hickory Collection System",
+    "state": "NC",
+    "kind": "sso",
+    "npdes_permit": "WQCS00020",
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched (23 rows 2026)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Hickory"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "nc-durham",
+    "name": "City of Durham Collection System",
+    "state": "NC",
+    "kind": "sso",
+    "npdes_permit": "WQCS00005",
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched (17 rows 2026)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Durham"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "nc-asheboro",
+    "name": "Asheboro Collection System",
+    "state": "NC",
+    "kind": "sso",
+    "npdes_permit": "WQCS00025",
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched (17 rows 2026)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Asheboro"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "nc-msd-buncombe",
+    "name": "Metropolitan Sewerage District of Buncombe County",
+    "state": "NC",
+    "kind": "sso",
+    "npdes_permit": "WQCS00004",
+    "receiving_waters": [
+      "French Broad River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched (9 rows 2026)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Asheville"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "nc-cfpua",
+    "name": "Cape Fear Public Utility Authority",
+    "state": "NC",
+    "kind": "sso",
+    "npdes_permit": "WQCS00012",
+    "receiving_waters": [
+      "Cape Fear River",
+      "Hewletts Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not found by search (7 rows 2026); press releases expected under G.S. 143-215.1C.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Wilmington"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "nc-pwc-fayetteville",
+    "name": "Fayetteville Public Works Commission",
+    "state": "NC",
+    "kind": "sso",
+    "npdes_permit": "WQCS00007",
+    "receiving_waters": [
+      "Cape Fear River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched (8 rows 2026)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Fayetteville"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  }
+]

@@ -1,0 +1,27 @@
+id: "ct-deep-agol-cso-and-cso-groups"
+name: "CT DEEP CSO_and_CSO_Groups (CSO or CSO group locations used for event reporting)"
+url: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0"
+homepage: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/ct, status used, verified fetched, checked 2026-11-01): Small authoritative point
+#   layer of the regulators/groups operators pick in QAlert; key to placing dashboard rows.
+# Access detail (research, quoted): 57 points; fields FACILITY, OUTFALL_LOCATION, RECEIVING_WATER,
+#   CSO_NAME, LATITUDE, LONGITUDE; copyright 'CT DEEP'; item 2045975be0da4c48b238945f8f0795b0; full
+#   layer saved raw/cso-groups-all.json.
+# Can fill: coordinates (outfall/group point), waterbody, geometry (outfall point)
+# Research notes: MDC groups: Folly Brook, Conduits, CT River, Kane Brook, Free Flowing North
+#   Branch, Free Flowing South Branch. GNH: West River, Mill River, Quinnipiac River, New Haven
+#   Harbor. Also Waterbury plant 002-1 and Norwalk plant 002-1.
+cadence: "static (no edit date)"
+license: "copyrightText 'CT DEEP'; no licence text"
+attribution: "CT DEEP"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["CT"]
+access: ["arcgis", "api"]
+access_detail: "57 points; fields FACILITY, OUTFALL_LOCATION, RECEIVING_WATER, CSO_NAME, LATITUDE, LONGITUDE; copyright 'CT DEEP'; item 2045975be0da4c48b238945f8f0795b0; full layer saved raw/cso-groups-all.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,23 @@
+id: "me-arcgis-org-scan"
+name: "Maine ArcGIS Online org RbMX0mRVOFNTdLzd service list scan (1,107 services)"
+url: "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services?f=json"
+homepage: "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services?f=json"
+kind: "arcgis"
+level: "state"
+# Notes (research/me, status used, verified fetched, checked 2026-11-01): Negative finding: Maine
+#   has no published overflow-event layer.
+# Access detail (research, quoted): Filtered names for
+#   cso/sewer/overflow/outfall/wastewater/beach/bacteria/etc. CSO-related services found: CSO_Volume
+#   only. No SSO, bypass or overflow-event service exists in the org.
+cadence: null
+license: "none stated"
+attribution: "State of Maine (maine.maps.arcgis.com)"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["ME"]
+access: ["arcgis"]
+access_detail: "Filtered names for cso/sewer/overflow/outfall/wastewater/beach/bacteria/etc. CSO-related services found: CSO_Volume only. No SSO, bypass or overflow-event service exists in the org."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

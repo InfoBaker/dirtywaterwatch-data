@@ -1,0 +1,40 @@
+id: "ri-nbc-cso-api-pins"
+name: "NBC CSO Alarm Map live outfall status (JSON)"
+url: "https://cso-api.narrabay.com/pins"
+homepage: "https://www.narrabay.com/programs-and-initiatives/combined-sewer-overflow-cso/cso-alarm-map/"
+kind: "api"
+level: "utility"
+# Notes (research/ri, status used, verified fetched, checked 2026-11-01): Only real-time,
+#   machine-readable, outfall-level sewage discharge feed in Rhode Island; best first build target.
+# Access detail (research, quoted): GET https://cso-api.narrabay.com/pins, no auth, returns JSON
+#   array (67 rows on 2026-11-01, 26 KB; IIS/ASP.NET). Called by the Leaflet map on
+#   https://www.narrabay.com/programs-and-initiatives/combined-sewer-overflow-cso/cso-alarm-map/ .
+#   Map colours: HoursSinceLast<=24 red, <=48 orange, else grey. No other paths found (/, /swagger,
+#   /history etc. return 404).
+# Can fill: source_record_id (SITE_ID / CSO_ALARM_HISTORYID), started_at (ACTIVATION_DATE), ended_at
+#   (DEACTIVATION_DATE), location_text (SITE_DESCRIPTION, SITE_NOTES), coordinates
+#   (OUTFALL_LAT/LONG, outfall point), source_status (VERIFIED, REQUIRE_VALIDATION,
+#   UNDER_CONSTRUCTION), geometry (outfall point)
+# Cannot fill: volume; waterbody (not given; infer from location); reported_at; valid_until; history
+#   beyond ~48 h
+# Waters: NBC district urban rivers: Providence, Woonasquatucket, Moshassuck, West, Seekonk,
+#   Blackstone (Pawtucket/Central Falls) (openboatlaunch slugs: providence-river-ri,
+#   seekonk-river-ri, blackstone-river-ri, pawtucket-river-ri)
+# History: None in this endpoint (only the latest activation per site within the window). Archive
+#   must be built by polling.
+# Research notes: Timezone of ACTIVATION_DATE not stated; map code applies moment.utcOffset('4')
+#   before display, so the stored value may be UTC or local - confirm with a live event. 10 of 60
+#   CSO sites carry 'No data available' (no live alarm). Includes a demo row 'OF 000 WBNS Test 2024'
+#   and a blank row (SITE_ID 0) to filter out.
+cadence: "Live alarm feed from NBC's flow/level monitoring (Telog). Page JS has a disabled 60 s refresh; NBC 2022 launch note says overflows show 'as they occur' and stay visible up to 48 hours. On the check date every ACTIVATION_DATE was null (no overflow in the window)."
+license: "none stated"
+attribution: "Narragansett Bay Commission"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["RI"]
+access: ["api"]
+access_detail: "GET https://cso-api.narrabay.com/pins, no auth, returns JSON array (67 rows on 2026-11-01, 26 KB; IIS/ASP.NET). Called by the Leaflet map on https://www.narrabay.com/programs-and-initiatives/combined-sewer-overflow-cso/cso-alarm-map/ . Map colours: HoursSinceLast<=24 red, <=48 orange, else grey. No other paths found (/, /swagger, /history etc. return 404)."
+machine_readable: true
+legal_basis: "RIPDES permits RI0100315/RI0100072 (2017): NBC must 'develop a system to provide web-based notification to the public on CSO occurrences' (DEM release 2017-10-04)."
+checked: "2026-11-01"

@@ -1,0 +1,26 @@
+id: "ny-riverkeeper-data-portal"
+name: "Riverkeeper water quality data portal (data.riverkeeper.org)"
+url: "https://data.riverkeeper.org/"
+homepage: "https://data.riverkeeper.org/"
+kind: "html"
+level: "nonprofit"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): Best public
+#   Enterococcus record for the Hudson with wet-weather context; data said to be freely available
+#   (search result); terms to confirm.
+# Access detail (research, quoted): Fetched landing page (SvelteKit app; has a downloadData
+#   component; per-point results 'and historical trends since 2008').
+#   riverkeeper.org/water-quality/testing now redirects here. Tributary data also archived on
+#   HydroShare.
+# Waters: Hudson River Estuary (~74 boat sites) and tributaries; NYC waterfront
+cadence: null
+license: "none stated"
+attribution: "Riverkeeper"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["NY"]
+access: ["html"]
+access_detail: "Fetched landing page (SvelteKit app; has a downloadData component; per-point results 'and historical trends since 2008'). riverkeeper.org/water-quality/testing now redirects here. Tributary data also archived on HydroShare."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

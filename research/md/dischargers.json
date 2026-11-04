@@ -1,0 +1,1059 @@
+[
+ {
+  "id": "md-cumberland",
+  "name": "Mayor and City Council of Cumberland (John J. DiFonzo Water Reclamation Facility and combined sewer system)",
+  "state": "MD",
+  "kind": "cso",
+  "npdes_permit": "MD0021598",
+  "receiving_waters": [
+   "Wills Creek",
+   "North Branch Potomac River",
+   "Evitts Creek"
+  ],
+  "water_slugs": [
+   "north-branch-potomac-river-md",
+   "potomac-river-md"
+  ],
+  "outfall_count": 11,
+  "outfalls_source": "EPA ECHO CSO inventory ALL_CSO_DOWNLOADS.csv (research/federal/raw/cso_inventory): 11 CSO features 002,003,005,007,008,010,011,012,015,017,019, no coordinates; permit status ADC, expired 2020-03-31",
+  "notification_channel": "No public notice page found on the City site; MDE table only. NPS park planning page for the Mill Race CSO storage project: https://parkplanning.nps.gov/CumberlandCSO",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cumberland"
+  ],
+  "notes": "One MDE row usually aggregates many outfalls (e.g. 2026-10-11: ten named streets). Volumes are large (22,260,587 gal on 2026-10-11). Second owner spelling 'Mayor & City Council of Cumberland' has 8 more CSO rows. MDE table 2023-01..2026-11-01: 180 rows {'CSO': 176, 'SSO': 4}, total reported volume 1,168,185,663 gal, last 2026-10-15; NPDES/collection IDs seen: MD0021598, MDCPRIVAT, MDR001730.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-frostburg",
+  "name": "City of Frostburg (combined sewer system)",
+  "state": "MD",
+  "kind": "cso",
+  "npdes_permit": "MD0067423",
+  "receiving_waters": [
+   "Jennings Run",
+   "Sand Spring Run",
+   "George's Creek",
+   "Braddock Run"
+  ],
+  "water_slugs": [
+   "north-branch-potomac-river-md"
+  ],
+  "outfall_count": 15,
+  "outfalls_source": "EPA CSO inventory: 15 features 001-015, all at one shared point 39.655556,-78.930556; permit EXP 2023-11-30",
+  "notification_channel": "City 'CSO Information' page describes the separation project under a 'State Judicial Order'; no overflow notices: https://www.frostburgcity.org/1350/CSO-Information",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Frostburg"
+  ],
+  "notes": "Most frequent CSO reporter in Maryland (183 rows since 2023). Receiving streams flow to Wills Creek / Georges Creek and then the North Branch Potomac; the openboatlaunch slug is downstream, not the receiving stream. MDE table 2023-01..2026-11-01: 183 rows {'CSO': 183}, total reported volume 4,950,240 gal, last 2026-10-11; NPDES/collection IDs seen: MD0067423.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-lavale",
+  "name": "LaVale Sanitary Commission (combined sewer overflows)",
+  "state": "MD",
+  "kind": "cso",
+  "npdes_permit": "MD0067547",
+  "receiving_waters": [
+   "Braddock Run"
+  ],
+  "water_slugs": [
+   "north-branch-potomac-river-md"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA CSO inventory: features 001,003,006,007 (only 007 has coordinates 39.64453,-78.8197); permit EXP 2023-10-31",
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "LaVale"
+  ],
+  "notes": "Braddock Run flows to Wills Creek then the North Branch Potomac at Cumberland (downstream slug inferred). MDE table 2023-01..2026-11-01: 112 rows {'CSO': 109, 'SSO': 3}, total reported volume 173,633,683 gal, last 2026-10-11; NPDES/collection IDs seen: MD0067547.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-allegany-county-dpw",
+  "name": "Allegany County Department of Public Works (CSO collection system and North Branch / Georges Creek sewers)",
+  "state": "MD",
+  "kind": "cso",
+  "npdes_permit": "MD0067407",
+  "receiving_waters": [
+   "Georges Creek",
+   "Elk Lick Run",
+   "Warrior Run",
+   "North Branch Potomac River",
+   "Jennings Run"
+  ],
+  "water_slugs": [
+   "north-branch-potomac-river-md"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "EPA CSO inventory: 001 Wright's Crossing Pumping Station, 002 Braddock Estates, 003 Grahamtown (coordinates for 002/003 fall in Prince George's County and are wrong); permit EXP 2022-10-31",
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Frostburg",
+   "Lonaconing",
+   "Barton",
+   "Westernport",
+   "Cresaptown"
+  ],
+  "notes": "Also files SSO rows for the 'North Branch Collection System' and Cumberland-area county sewers (MDC121598). MDE table 2023-01..2026-11-01: 192 rows {'SSO': 131, 'CSO': 59, 'Bypass': 2}, total reported volume 62,405,178 gal, last 2026-10-11; NPDES/collection IDs seen: MD0002625, MD00121598, MD0021598, MD0060071, MD0067407, MD0121598, MDC002625, MDC060071.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-westernport",
+  "name": "Town of Westernport (former CSO permit)",
+  "state": "MD",
+  "kind": "cso",
+  "npdes_permit": "MD0067384",
+  "receiving_waters": [
+   "Georges Creek",
+   "North Branch Potomac River"
+  ],
+  "water_slugs": [
+   "north-branch-potomac-river-md"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA CSO inventory: feature 002 at 39.485278,-79.041667; permit EXP 2023-11-30",
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westernport"
+  ],
+  "notes": "Only SSO rows since 2023 (no CSO rows). MDE table 2023-01..2026-11-01: 5 rows {'SSO': 5}, total reported volume 25 gal, last 2026-03-17; NPDES/collection IDs seen: MD0067384.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-cambridge",
+  "name": "City of Cambridge Department of Public Works (Cambridge WWTP; permit lists CSO outfalls)",
+  "state": "MD",
+  "kind": "cso",
+  "npdes_permit": "MD0021636",
+  "receiving_waters": [
+   "Cambridge Creek",
+   "Choptank River"
+  ],
+  "water_slugs": [
+   "cambridge-creek-md",
+   "choptank-river-md"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "EPA CSO inventory: features 012-016 'CSO' with coordinates around 38.5677,-76.0737 on Cambridge Creek; permit EFF to 2029-10-31",
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cambridge"
+  ],
+  "notes": "No CSO-type rows in the MDE table since 2023 (40 SSO rows, many to the Choptank). Whether the CSO outfalls still discharge is unconfirmed. MDE table 2023-01..2026-11-01: 42 rows {'SSO': 40, 'Unauthorized Discharge': 2}, total reported volume 908,022 gal, last 2026-09-24; NPDES/collection IDs seen: MD0021636, MDC021636, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-salisbury",
+  "name": "City of Salisbury (Salisbury WWTP; permit lists CSO outfalls)",
+  "state": "MD",
+  "kind": "cso",
+  "npdes_permit": "MD0021571",
+  "receiving_waters": [
+   "Wicomico River"
+  ],
+  "water_slugs": [
+   "wicomico-river-mt-vernon-md"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA CSO inventory: features 002 (38.363111,-75.613361) and 003 (38.365056,-75.6045); permit EFF to 2028-05-31",
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Salisbury"
+  ],
+  "notes": "No CSO-type rows since 2023. The Salisbury Wicomico is the openboatlaunch record 'wicomico-river-mt-vernon-md' (the plain 'wicomico-river-md' is the St. Mary's/Charles County river). MDE table 2023-01..2026-11-01: 12 rows {'SSO': 9, 'Unauthorized Discharge': 3}, total reported volume 178,814 gal, last 2026-04-01; NPDES/collection IDs seen: MD0021571, MDC021571, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-baltimore-city-dpw",
+  "name": "Baltimore City Department of Public Works (separate sanitary system; Back River and Patapsco WWTPs)",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0021555 (Back River WWTP); MD0021601 (Patapsco WWTP); MDC021555 / MDC021601 (MDE collection-system IDs)",
+  "receiving_waters": [
+   "Jones Falls",
+   "Gwynns Falls",
+   "Herring Run",
+   "Back River",
+   "Bear Creek",
+   "Patapsco River",
+   "Stony Run",
+   "Western Run",
+   "Middle Branch",
+   "Northwest Harbor",
+   "Colgate Creek"
+  ],
+  "water_slugs": [
+   "northwest-harbor-md",
+   "middle-branch-patapsco-river-md",
+   "patapsco-river-md",
+   "back-river-md",
+   "bear-creek-md",
+   "lake-roland-md"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "Remaining SSO structures (all Jones Falls): #67 1911 Falls Rd, #72 rear of 428 E Preston St, #152 N. Charles & W. Lanvale, #154 N. Charles & W. Lafayette (MCD Quarterly Report 35). Points for every SSO: https://dpwdata.baltimorecity.gov/pubgis/rest/services/Public/SSO_Points2/MapServer/0",
+  "notification_channel": "Sewer Overflow Map (ArcGIS Experience https://experience.arcgis.com/experience/f064b1b0addd4017ac179f1652e182e0; layer SSO_Points2/0, about four months kept, status PROG/24HR/5DAY); bypass warning light email list (GovDelivery MDBALT_1350; RSS https://public.govdelivery.com/topics/MDBALT_1350/feed.rss, empty on 2026-11-02); Mandatory Compliance Notification map (WWTFS_w_IMPACT_AREAS, INCIDENT_ACTIVE flag); quarterly consent decree reports (https://www.baltimorecity.gov/publicworks/sanitary-sewer-consent-decree-program); Health Department standing advice to avoid all city streams.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Baltimore"
+  ],
+  "notes": "Largest reporter: 1,103 MDE rows (1,012 SSO, 58 plant bypasses, 33 unauthorized discharges). The City system is separate, not combined: the 'structured overflows' are SSO structures under the 2002 consent decree, modified 2017 (Civil Action JFM-02-1524). DPW says it has eliminated 60 of 62 original structures and 13 of 15 found since. The plants also have a 2023 consent decree with MDE and Blue Water Baltimore (quarterly reports under paragraph 170). MDE table 2023-01..2026-11-01: 1103 rows {'SSO': 1012, 'Bypass': 58, 'Unauthorized Discharge': 33}, total reported volume 1,323,026,313 gal, last 2026-11-01; NPDES/collection IDs seen: MD0000311, MD0021555, MD0021601, MDC021555, MDC021601, MDCPRIVAT, MDR002305, n/a.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-baltimore-county-dpw",
+  "name": "Baltimore County Department of Public Works and Transportation (sewer collection; flows to City plants)",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MDC121555 / MDC121601 (MDE collection-system IDs); consent decree with U.S. and Maryland",
+  "receiving_waters": [
+   "Gwynns Falls",
+   "Herring Run",
+   "Bullneck Creek",
+   "Back River",
+   "Jones Creek",
+   "Maiden Choice Creek",
+   "West Branch Herbert Run"
+  ],
+  "water_slugs": [
+   "back-river-md",
+   "bullneck-creek-md",
+   "bear-creek-md",
+   "jones-creek-md",
+   "middle-river-md",
+   "patapsco-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "SSO structures listed in county consent decree quarterly reports (PDF, baltimorecountymd.gov; not fetched, site returned HTTP 403)",
+  "notification_channel": "Baltimore County Department of Health water contact alerts page https://www.baltimorecountymd.gov/departments/health/environmental/watersampling/alerts (HTTP 403 CloudFront from this machine); press coverage of alerts.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dundalk",
+   "Essex",
+   "Towson",
+   "Catonsville",
+   "Pikesville",
+   "Middle River"
+  ],
+  "notes": "Also files rows for private systems (MDCPRIVAT). MDE table 2023-01..2026-11-01: 356 rows {'SSO': 355, 'Bypass': 1}, total reported volume 7,410,216 gal, last 2026-10-29; NPDES/collection IDs seen: MD0021601, MDC121555, MDC121601, MDCPRIVAT.",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-wssc-water",
+  "name": "WSSC Water (Washington Suburban Sanitary Commission)",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MDC021199 / MDC121199 (Blue Plains collection, Mo. Co. / PG Co.); MD0021539 Piscataway; MD0021491 Seneca; MD0021741 Western Branch; MD0021725 Parkway; MD0020982 Damascus",
+  "receiving_waters": [
+   "Western Branch",
+   "Northwest Branch",
+   "Rock Creek",
+   "Broad Creek",
+   "Paint Branch",
+   "Piscataway Creek",
+   "Muddy Branch",
+   "Anacostia River"
+  ],
+  "water_slugs": [
+   "anacostia-river-md",
+   "piscataway-creek-md",
+   "potomac-river-md",
+   "western-branch-patuxent-river-md",
+   "patuxent-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "SSO written reports (PDF, one per event) at https://www.wsscwater.com/ssoreports, filterable by month/year (?year=609 for 2026; 10 per page), 'posted ... within 10 days of the overflow event'; news releases for larger SSOs; 'Sewer Service Alerts' for open emergencies; phone 301-206-4002.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Montgomery County",
+   "Prince George's County",
+   "Gaithersburg",
+   "Bethesda",
+   "Fort Washington",
+   "Adelphi",
+   "Laurel"
+  ],
+  "notes": "68 PDF reports listed for 2026 and 81 for 2025 on 2026-11-02. Reports name the MDE official called, call time, start/end, manhole/facility ID, water body, cause, volume, notifications (MDE, county DEP/health, municipalities), signs posted and post date. Non-reportable events are posted too, stamped 'NON-REPORTABLE'. MDE table 2023-01..2026-11-01: 369 rows {'SSO': 366, 'Unauthorized Discharge': 3}, total reported volume 454,568 gal, last 2026-10-28; NPDES/collection IDs seen: MD00121199, MD0020982, MD0021491, MD0021539, MD0021725, MDC020982, MDC021199, MDC021491.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-dc-water-potomac-interceptor",
+  "name": "DC Water (Potomac Interceptor in Montgomery County)",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MDC521199 (MDE ID for the Potomac Interceptor)",
+  "receiving_waters": [
+   "Potomac River",
+   "C&O Canal"
+  ],
+  "water_slugs": [
+   "potomac-river-md",
+   "chesapeake-and-ohio-canal-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "DC Water press releases (DC agent's area); MDE press releases on news.maryland.gov.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cabin John",
+   "Potomac",
+   "Bethesda"
+  ],
+  "notes": "2026-01-19 collapse: 280,000,000 gal in MDE table (DC Water estimate 244 million per MDE release). MDE table 2023-01..2026-11-01: 5 rows {'SSO': 5}, total reported volume 280,603,606 gal, last 2026-07-31; NPDES/collection IDs seen: MDC521199.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-anne-arundel-dpw",
+  "name": "Anne Arundel County Department of Public Works (Bureau of Utility Operations)",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0021644 Broadneck; MD0021652 Cox Creek; MD0021661 Patuxent; MD0021814 Annapolis WRF; MD0024350 Broadwater; MDC221601 Patapsco collection",
+  "receiving_waters": [
+   "Cox Creek",
+   "Patapsco River",
+   "Cypress Creek",
+   "Spa Creek",
+   "Boyds Cove",
+   "Marley Creek",
+   "Little Patuxent River"
+  ],
+  "water_slugs": [
+   "patapsco-river-md",
+   "magothy-river-md",
+   "severn-river-md",
+   "spa-creek-md",
+   "curtis-creek-md",
+   "patuxent-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Anne Arundel County Department of Health closings and advisories list (https://www.aahealth.org/environmental-health/recreational-water-quality/closings-and-advisories) with email 'Water Quality Alerts'; occasional DPW news releases (aacounty.org/public-works/news).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Annapolis",
+   "Glen Burnie",
+   "Pasadena",
+   "Severna Park",
+   "Linthicum Heights",
+   "Arnold",
+   "Odenton",
+   "Crofton"
+  ],
+  "notes": "AA Health posts emergency closings for sewage spills, including small ones and private systems. The South River has no openboatlaunch record. MDE table 2023-01..2026-11-01: 182 rows {'SSO': 160, 'Unauthorized Discharge': 20, 'Bypass': 2}, total reported volume 540,758 gal, last 2026-10-28; NPDES/collection IDs seen: MD0021644, MD0021652, MD0021661, MD0021814, MD0024350, MD0059145, MD2602B05, MDC021644.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-howard-county-dpw",
+  "name": "Howard County Department of Public Works (Little Patuxent WRP and collection system)",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0055174 Little Patuxent WRP; MDC055174; MDC421601 (Patapsco collection, Howard)",
+  "receiving_waters": [
+   "Little Patuxent River",
+   "Deep Run",
+   "Patapsco River"
+  ],
+  "water_slugs": [
+   "patuxent-river-md",
+   "patapsco-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Howard County Health Department 'Public Notification' resource pages (e.g. https://howardcountymd.gov/health/resource/public-notification-5972-turnabout-ln11292017-final, 2017-2018 examples); no current list found.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Columbia",
+   "Savage",
+   "Ellicott City",
+   "Elkridge"
+  ],
+  "notes": "2026-10-30 Little Patuxent WRP collection system, 33,000 gal to the Little Patuxent River (MDE). MDE table 2023-01..2026-11-01: 80 rows {'SSO': 76, 'Unauthorized Discharge': 4}, total reported volume 1,481,854 gal, last 2026-10-30; NPDES/collection IDs seen: MD0055174, MD3102N06, MD3448N03, MDC055174, MDC421601, MDCPRIVAT.",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-annapolis",
+  "name": "City of Annapolis Department of Public Works",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MDC121814 (Annapolis WRF collection, City)",
+  "receiving_waters": [
+   "Weems Creek",
+   "Severn River",
+   "Back Creek",
+   "Spa Creek"
+  ],
+  "water_slugs": [
+   "weems-creek-md",
+   "severn-river-md",
+   "back-creek-md",
+   "spa-creek-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Anne Arundel County Department of Health closings list (covers the City).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Annapolis"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 12 rows {'SSO': 11, 'Unauthorized Discharge': 1}, total reported volume 324,650 gal, last 2026-04-21; NPDES/collection IDs seen: MDC121814, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-rockville",
+  "name": "City of Rockville",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MDC221199 / MDC421199 (Blue Plains collection, Rockville)",
+  "receiving_waters": [
+   "Rock Creek",
+   "Watts Branch"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rockville"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 15 rows {'SSO': 15}, total reported volume 24,765 gal, last 2026-06-12; NPDES/collection IDs seen: MDC421199, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-harford-county-dpw",
+  "name": "Harford County Department of Public Works (Sod Run WWTP)",
+  "state": "MD",
+  "kind": "bypass",
+  "npdes_permit": "MD0056545 Sod Run",
+  "receiving_waters": [
+   "Bush River",
+   "Bynum Run"
+  ],
+  "water_slugs": [
+   "bush-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Annual SSO report PDF (e.g. https://harfordcountymd.gov/DocumentCenter/View/29828/2025-Annual-SSO-Report, search_only); MDE table.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bel Air",
+   "Abingdon",
+   "Edgewood",
+   "Joppatowne"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 28 rows {'Bypass': 5, 'SSO': 21, 'Unauthorized Discharge': 2}, total reported volume 3,604,170 gal, last 2026-10-11; NPDES/collection IDs seen: MD0056545, MDC022535, MDC156545, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-charles-county-dpw",
+  "name": "Charles County Department of Public Works (Mattawoman WWTP)",
+  "state": "MD",
+  "kind": "bypass",
+  "npdes_permit": "MD0021865 Mattawoman",
+  "receiving_waters": [
+   "Mattawoman Creek",
+   "Potomac River"
+  ],
+  "water_slugs": [
+   "mattawoman-creek-md",
+   "potomac-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Waldorf",
+   "La Plata",
+   "Indian Head"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 25 rows {'SSO': 17, 'Bypass': 5, 'Unauthorized Discharge': 3}, total reported volume 59,732,213 gal, last 2026-09-14; NPDES/collection IDs seen: MD0021865, MD0053228, MDC021865, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-myersville",
+  "name": "Town of Myersville (WWTP)",
+  "state": "MD",
+  "kind": "bypass",
+  "npdes_permit": "MD0020699",
+  "receiving_waters": [
+   "Grindstone Run",
+   "Catoctin Creek"
+  ],
+  "water_slugs": [
+   "catoctin-creek-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Myersville"
+  ],
+  "notes": "2026-10-25 bypass 560,000 gal (PLC failure). MDE table 2023-01..2026-11-01: 13 rows {'Bypass': 9, 'SSO': 4}, total reported volume 12,161,360 gal, last 2026-10-25; NPDES/collection IDs seen: MD0020699, MDC020699.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-washington-county-dwq",
+  "name": "Washington County Department of Water Quality",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0024317 and others",
+  "receiving_waters": [
+   "Antietam Creek",
+   "Conococheague Creek"
+  ],
+  "water_slugs": [
+   "antietam-creek-md",
+   "potomac-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hagerstown area",
+   "Smithsburg",
+   "Sandy Hook"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 26 rows {'SSO': 23, 'Unauthorized Discharge': 2, 'Bypass': 1}, total reported volume 309,165 gal, last 2026-07-28; NPDES/collection IDs seen: MD0024317, MD0062308, MD0063509, MDC003221, MDC024317, MDC062308, MDC063509, MDC121776.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-hagerstown",
+  "name": "City of Hagerstown (WWTP and collection)",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0021776",
+  "receiving_waters": [
+   "Antietam Creek",
+   "Marsh Run"
+  ],
+  "water_slugs": [
+   "antietam-creek-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hagerstown"
+  ],
+  "notes": "Named in the task as a former CSO city; no CSO rows since 2023 and not in EPA's CSO inventory. MDE table 2023-01..2026-11-01: 8 rows {'SSO': 7, 'Unauthorized Discharge': 1}, total reported volume 318,902 gal, last 2026-02-28; NPDES/collection IDs seen: MD0021776, MDC021776, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-hancock",
+  "name": "Town of Hancock",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0024562",
+  "receiving_waters": [
+   "Little Tonoloway Creek",
+   "Potomac River",
+   "C&O Canal"
+  ],
+  "water_slugs": [
+   "tonoloway-creek-md",
+   "potomac-river-md",
+   "chesapeake-and-ohio-canal-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hancock"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 25 rows {'SSO': 25}, total reported volume 105,475 gal, last 2026-10-05; NPDES/collection IDs seen: M00245622, MD000832, MD0024562, MDC024562.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-crisfield",
+  "name": "City of Crisfield",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0020001",
+  "receiving_waters": [
+   "Tangier Sound",
+   "Daugherty Creek",
+   "Little Annemessex River"
+  ],
+  "water_slugs": [
+   "tangier-sound-md",
+   "little-annemessex-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Crisfield"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 37 rows {'SSO': 33, 'Bypass': 3, 'Unauthorized Discharge': 1}, total reported volume 617,610 gal, last 2026-09-25; NPDES/collection IDs seen: MD0020001, MDC020001.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-frederick-county-utilities",
+  "name": "Frederick County Division of Water and Sewer Utilities",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0020737 and MDC IDs",
+  "receiving_waters": [
+   "Monocacy River"
+  ],
+  "water_slugs": [
+   "monocacy-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Frederick County"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 21 rows {'SSO': 20, 'Unauthorized Discharge': 1}, total reported volume 161,424 gal, last 2026-08-10; NPDES/collection IDs seen: MD0020737, MDC021822, MDC022721, MDC065439, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-frederick-city",
+  "name": "City of Frederick Department of Public Works",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0021610",
+  "receiving_waters": [
+   "Monocacy River",
+   "Carroll Creek"
+  ],
+  "water_slugs": [
+   "monocacy-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Frederick"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 17 rows {'SSO': 12, 'Unauthorized Discharge': 3, 'Bypass': 2}, total reported volume 19,160 gal, last 2026-09-01; NPDES/collection IDs seen: MD0021610, MDC021610, MDC121822, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-metcom",
+  "name": "St. Mary's County Metropolitan Commission (MetCom)",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0021679 Marlay-Taylor and others",
+  "receiving_waters": [
+   "Herring Creek",
+   "St. Mary's River",
+   "Breton Bay"
+  ],
+  "water_slugs": [
+   "herring-creek-md",
+   "st-marys-river-md",
+   "breton-bay-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Public ArcGIS layers '2026 Sanitary Sewer Overflows_WFL1' (https://services3.arcgis.com/oMyOi7kozGXYXHPr/arcgis/rest/services/2026_Sanitary_Sewer_Overflows_WFL1/FeatureServer, 9 rows in 2026 layer; fields DATE_DISCOVERED, LOCATION, DISCHARGE_VOLUME, CAUSE, WATERS_IMPACTED, FILE_LINK) plus 2025 and 2014 layers; bulk-loaded 2026-06-02.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Lexington Park",
+   "Leonardtown",
+   "California"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 30 rows {'SSO': 29, 'Unauthorized Discharge': 1}, total reported volume 198,890 gal, last 2026-09-01; NPDES/collection IDs seen: MD0021679, MD15870CS, MDC021679, MDC124767, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-mes",
+  "name": "Maryland Environmental Service (state-run plants)",
+  "state": "MD",
+  "kind": "bypass",
+  "npdes_permit": "MD0023868, MD0023922 and others",
+  "receiving_waters": [
+   "Dorsey Run",
+   "Wapti Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "various"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 28 rows {'SSO': 16, 'Bypass': 9, 'Unauthorized Discharge': 3}, total reported volume 5,079,665 gal, last 2026-10-14; NPDES/collection IDs seen: MD0023868, MD0023922, MD0023949, MD0023957, MD0023981, MD0051667, MD0063207, MD1971T05.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-garrett-sanitary",
+  "name": "Garrett County Sanitary District",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0021083 and others",
+  "receiving_waters": [
+   "Youghiogheny River"
+  ],
+  "water_slugs": [
+   "youghiogheny-river-md",
+   "deep-creek-lake-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oakland",
+   "McHenry"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 18 rows {'Bypass': 6, 'Unauthorized Discharge': 3, 'SSO': 9}, total reported volume 1,117,228 gal, last 2026-08-12; NPDES/collection IDs seen: MD0021083, MD0051497, MD0052281, MD0054348, MD0060933, MD0063274.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-rock-hall",
+  "name": "Town of Rock Hall",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0020303",
+  "receiving_waters": [
+   "Swan Creek",
+   "Rock Hall Harbor"
+  ],
+  "water_slugs": [
+   "rock-hall-harbor-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rock Hall"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 17 rows {'SSO': 16, 'Unauthorized Discharge': 1}, total reported volume 27,199 gal, last 2025-07-13; NPDES/collection IDs seen: MD0020303, MDC020303.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-gatewater-landing",
+  "name": "Gatewater Landing Apartments (private system, Glen Burnie)",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Marley Creek"
+  ],
+  "water_slugs": [
+   "patapsco-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "AA Health waterway closure notices (e.g. 'Gatewater Landing Apartments: Waterway Closure Notice', 2024-09-04).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Glen Burnie"
+  ],
+  "notes": "Repeat private reporter (17 rows); Marley Creek is a Curtis Creek / Patapsco tributary with no openboatlaunch record of its own. MDE table 2023-01..2026-11-01: 17 rows {'SSO': 17}, total reported volume 10,635 gal, last 2024-10-10; NPDES/collection IDs seen: N/A, NA, private.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-us-navy",
+  "name": "U.S. Navy installations (Annapolis, Indian Head, Patuxent River)",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0020095, MD0020885, MD0023523, MD0025119",
+  "receiving_waters": [
+   "Mattawoman Creek",
+   "Goose Creek"
+  ],
+  "water_slugs": [
+   "mattawoman-creek-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Annapolis",
+   "Indian Head",
+   "Lexington Park"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 24 rows {'SSO': 24}, total reported volume 4,068,200 gal, last 2025-09-17; NPDES/collection IDs seen: MD0020095, MD0020885, MD0023523, MD0025119, MDC221814.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-fort-meade-american-water",
+  "name": "American Water (Fort George G. Meade WWTP)",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0021717",
+  "receiving_waters": [
+   "Little Patuxent River"
+  ],
+  "water_slugs": [
+   "patuxent-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fort Meade"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 18 rows {'SSO': 15, 'Bypass': 3}, total reported volume 3,756,280 gal, last 2026-06-02; NPDES/collection IDs seen: MD0021717, MDG679737.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-somerset-sanitary",
+  "name": "Somerset County Sanitary District",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0020656",
+  "receiving_waters": [
+   "Manokin River"
+  ],
+  "water_slugs": [
+   "manokin-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Princess Anne"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 16 rows {'SSO': 14, 'Unauthorized Discharge': 1, 'Bypass': 1}, total reported volume 84,416 gal, last 2025-10-30; NPDES/collection IDs seen: MD0020656, MDC020656, MDC120001, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-dorchester-county",
+  "name": "Dorchester County Water & Wastewater Department",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MDC121636",
+  "receiving_waters": [
+   "Choptank River"
+  ],
+  "water_slugs": [
+   "choptank-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cambridge area"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 9 rows {'SSO': 9}, total reported volume 134,000 gal, last 2026-09-04; NPDES/collection IDs seen: MDC121636, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-easton-utilities",
+  "name": "Easton Utilities Commission",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MDC020273",
+  "receiving_waters": [
+   "Tanyard Branch",
+   "Tred Avon River"
+  ],
+  "water_slugs": [
+   "tred-avon-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Easton"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 5 rows {'SSO': 5}, total reported volume 34,725 gal, last 2024-07-17; NPDES/collection IDs seen: MDC020273.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-perryville",
+  "name": "Town of Perryville",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0020613",
+  "receiving_waters": [
+   "Mill Creek",
+   "Susquehanna River"
+  ],
+  "water_slugs": [
+   "mill-creek-md",
+   "susquehanna-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Perryville"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 9 rows {'Unauthorized Discharge': 2, 'SSO': 6, 'Bypass': 1}, total reported volume 52,500 gal, last 2026-10-11; NPDES/collection IDs seen: MD0020613, MDC020613.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-maryland-water-service",
+  "name": "Maryland Water Service Utilities (Allegany County)",
+  "state": "MD",
+  "kind": "bypass",
+  "npdes_permit": "MD0022748",
+  "receiving_waters": [
+   "North Branch Potomac River"
+  ],
+  "water_slugs": [
+   "north-branch-potomac-river-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westernport area"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 10 rows {'Bypass': 4, 'SSO': 6}, total reported volume 3,937,702 gal, last 2026-05-27; NPDES/collection IDs seen: MD0022748, MDC022748.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-worcester-county",
+  "name": "Worcester County Department of Public Works",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MDC023477 and others",
+  "receiving_waters": [
+   "An estimated 500 gallons went into the ditch in front of 1210 Ocean Parkway",
+   "NA.  spilled on gravel area, pumper truck called",
+   "ditch",
+   "Estimated 100gal of sewer went into the ditch between 1210-1212 Ocean Pkwy. NO impact on any water ways",
+   "Manklin Creek (Use II)",
+   "Puddling along the curb"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ocean Pines",
+   "West Ocean City"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 34 rows {'SSO': 22, 'Bypass': 11, 'Unauthorized Discharge': 1}, total reported volume 270,210 gal, last 2026-01-28; NPDES/collection IDs seen: MD00023477, MD22730CS, MD2273X04, MD23940CS, MDC023477, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-chesapeake-city",
+  "name": "Town of Chesapeake City",
+  "state": "MD",
+  "kind": "bypass",
+  "npdes_permit": "MD0020401",
+  "receiving_waters": [
+   "C&D Canal",
+   "Back Creek"
+  ],
+  "water_slugs": [
+   "chesapeake-and-delaware-canal-md"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chesapeake City"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 4 rows {'Bypass': 4}, total reported volume 372,000 gal, last 2024-04-04; NPDES/collection IDs seen: MD0020401.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-calvert-county",
+  "name": "Calvert County Department of Public Works",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "various",
+  "receiving_waters": [
+   "Mill Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Solomons",
+   "Prince Frederick"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 13 rows {'SSO': 9, 'Unauthorized Discharge': 4}, total reported volume 567,150 gal, last 2026-09-25; NPDES/collection IDs seen: MD21780CS, MD2178E89, MD27050CS, MD32320CS, MD3232E97, MD33090CS, MD3309E05, MDC120281.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "md-carroll-county",
+  "name": "Carroll County Bureau of Utilities",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": "MD0022446 and others",
+  "receiving_waters": [
+   "South Branch Patapsco River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "No operator feed found; reports appear in MDE's Reported Sewer Overflows table (opendata.maryland.gov stgj-u72u), refreshed daily.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westminster",
+   "Eldersburg"
+  ],
+  "notes": "MDE table 2023-01..2026-11-01: 16 rows {'SSO': 14, 'Unauthorized Discharge': 2}, total reported volume 322,651 gal, last 2026-08-06; NPDES/collection IDs seen: MD0022446, MDC021512, MDC022446, MDCPRIVAT.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ }
+]

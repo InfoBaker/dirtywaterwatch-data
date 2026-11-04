@@ -1,0 +1,24 @@
+id: "va-deq-prep"
+name: "Virginia DEQ Pollution Response Program (PReP) pollution reports, sewage-related"
+url: "https://portal.deq.virginia.gov/prep/api/prepReports"
+homepage: "https://portal.deq.virginia.gov/v2/prep/search"
+kind: "api"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/va_deq_prep.py
+#   (data/build/events/va-deq-prep.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/va_deq_prep.py docstring): hourly (records appear within minutes of a
+#   call; DEQ updates volume and cause for weeks).
+cadence: "1 hour"
+license: "No licence named. DEQ Terms of Use (https://www.deq.virginia.gov/news-info/about-us/terms-of-use): the site must not be used in a way that could overburden it; information 'SHOULD NOT BE RELIED UPON FOR PERSONAL, MEDICAL, LEGAL OR FINANCIAL DECISIONS'. Redistributed PReP data must carry DEQ's statement (attribution)."
+attribution: "DEQ is the data source. DEQ does not certify that this data represents a complete record. This data is provided to the citizens of the Commonwealth free of charge and for informational purposes only."
+enabled: true
+role: "events"
+event_types: ["sso", "bypass", "cso"]
+states: ["VA"]
+registry_ids: ["va-deq-prep-api", "va-deq-prep-export-mapserver", "va-deq-edma-prep-daily-points"]
+access: ["api", "arcgis"]
+access_detail: "GET /prep/api/prepReports?sewageRelated=Y&incidentDateTimeFrom=YYYY-MM-DD (and receivedDateTimeFrom) with expand= sewage sub-record, status log, release subtypes (category), permit links and original report; no key. Fallback when blocked: ArcGIS table https://gisdata.deq.virginia.gov/arcgis/rest/services/public/PREP_REPORT_EXPORTALL/MapServer/0 (times stored as local + 5 h). Points: EDMA layer 175 (local time labelled UTC), joined on PRP_REPORT_ID. A browser User-Agent is sent; 403 is retried after 20 s and 60 s."
+machine_readable: true
+legal_basis: "Va. Code § 62.1-44.5 B; 9VAC25-31-190 L 6 and L 7; Va. Code § 62.1-44.19:6 B (DEQ dissemination)"
+checked: "2026-11-02"

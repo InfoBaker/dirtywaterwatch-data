@@ -1,0 +1,41 @@
+id: "vt-dec-sewage-overflow-public-alerts"
+name: "VT DEC Public Alerts (untreated discharge alerts) on the Sewage Overflows report page"
+url: "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+homepage: "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+kind: "html"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): The only
+#   near-real-time statewide sewage alert feed in NH/VT; carries outfall names and receiving water;
+#   no API so it must be scraped by POST.
+# Access detail (research, quoted): ASP.NET WebForms page. GET returns the last ~30 days
+#   (TextBoxDateBegin defaults to one month back). Any date range: POST back to the same URL with
+#   the page's hidden __VIEWSTATE/__EVENTVALIDATION fields plus
+#   ctl00$body$TextBoxDateBegin=MM/DD/YYYY, ctl00$body$TextBoxDateEnd=MM/DD/YYYY,
+#   ctl00$body$ButtonSearch=Search. Table id body_GridViewPublicAlerts. No pagination: a full
+#   calendar year returns in one response (~250 KB). No auth. Fetched 2025, 2026 and 2016-2024 year
+#   ranges on 2026-11-01 (raw/vt-overflows-YYYY.json).
+# Can fill: source_record_id, event_type (coarse: alert only), reported_at (Date/Time Submission
+#   Entered), published_at (posted immediately on submission, per DEC), waterbody (free text),
+#   location_text, authority, jurisdiction, source_url, raw_record
+# Cannot fill: started_at; ended_at; volume; units; coordinates; material (beyond 'untreated
+#   discharge'); advice_text; valid_until; revision_history
+# Waters: statewide; every permitted WWTF; receiving water named per alert (openboatlaunch slugs:
+#   lake-champlain-vt, winooski-river-vt, otter-creek-vt, stevens-brook-vt, passumpsic-river-vt,
+#   connecticut-river-vt, missisquoi-river-vt, lac-memphremagog-vt)
+# History: Alerts from 2016 (Act 86 effective May 4, 2016); 49 alerts in 2016, 191 in 2019, 125 in
+#   2024, 114 in 2025, 94 in 2026 to Nov 1. Alert IDs reach 4300 (Oct 2026).
+# Research notes: Alert text is free-form (receiving waters misspelled e.g. 'Intervals wetlands');
+#   one alert may name several outfalls. Alerts carry no start time; pair with the incident report
+#   (same facility, date) for start/end/volume. Times are local Eastern (not labelled).
+cadence: "Operator-entered in real time. Law: alert 'as soon as possible, but no longer than one hour from discovery' (four hours if no phone/internet at the site). DEC: 'Once submitted, the Public Alert will be immediately available for public viewing'. Observed latencies 2026: Vergennes CSO#002 began 9:00 pm 4/16, alert 9:33 pm; Burlington Park St CSO began 5:02 pm 8/8, alert 6:11 pm; Montpelier CSOs began ~5:35 pm 6/10, alert 6:11 am 6/11; St Johnsbury CSO-06 began 10:55 pm 10/13, alert 9:41 am 10/14 (discovery time is not published, so whether a deadline was missed cannot be judged)."
+license: "Page footer: \"Copyright © 2025 State of Vermont. All rights reserved\" with links to Accessibility Policy and Privacy Policy. No data licence stated on the WWInventory pages. (Public record under 10 V.S.A. § 1295; ANR open data elsewhere is under the Vermont Open Geodata Policy v1.1.)"
+attribution: "Vermont Department of Environmental Conservation, Watershed Management Division, Wastewater Program"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass", "partially_treated", "other"]
+states: ["VT"]
+access: ["html", "email"]
+access_detail: "ASP.NET WebForms page. GET returns the last ~30 days (TextBoxDateBegin defaults to one month back). Any date range: POST back to the same URL with the page's hidden __VIEWSTATE/__EVENTVALIDATION fields plus ctl00$body$TextBoxDateBegin=MM/DD/YYYY, ctl00$body$TextBoxDateEnd=MM/DD/YYYY, ctl00$body$ButtonSearch=Search. Table id body_GridViewPublicAlerts. No pagination: a full calendar year returns in one response (~250 KB). No auth. Fetched 2025, 2026 and 2016-2024 year ranges on 2026-11-01 (raw/vt-overflows-YYYY.json)."
+machine_readable: false
+legal_basis: "10 V.S.A. § 1295(b)"
+checked: "2026-11-01"

@@ -1,0 +1,118 @@
+{
+ "state": "AS",
+ "name": "American Samoa",
+ "region": "territories",
+ "epa_region": 9,
+ "npdes_authority": "epa",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-04",
+ "law": {
+  "public_notice_duty": "unknown",
+  "summary": "EPA Region 9 issues the permits. No public-notice duty for sewage spills found; AS-EPA issues beach advisories that stay in effect until resampling.",
+  "citations": [],
+  "regulator_report": {
+   "deadline": "24 hours oral, 5 days written (EPA permit standard condition)",
+   "cite": "40 CFR 122.41(l)(6)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": []
+ },
+ "erule": {
+  "system": "epa",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "Two ASPA collection systems registered, no events."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": "none",
+  "receiving_water": "none",
+  "start_end": "none",
+  "volume": false,
+  "stable_id": false,
+  "license": null,
+  "notes": ""
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 1,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No combined sewers."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [],
+  "notes": ""
+ },
+ "beaches": {
+  "program": "AS-EPA beach monitoring (46 beaches)",
+  "source_ids": [
+   "as-asepa-beach-advisory"
+  ],
+  "machine_readable": false,
+  "scope": "coastal",
+  "notes": "Latest-only PDF behind a bot check."
+ },
+ "habs": {
+  "program": "none found",
+  "source_ids": [],
+  "machine_readable": false,
+  "notes": "A leptospirosis page exists."
+ },
+ "advisories": {
+  "health_department_pages": [],
+  "watershed_groups": [],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": []
+ },
+ "barriers": [
+  {
+   "kind": "bot_wall",
+   "what": "asepa.gov returns HTTP 429 'Checking your request' to scripts",
+   "fix_level": "engineering",
+   "note": ""
+  },
+  {
+   "kind": "no_web",
+   "what": "No sewage spill notices from ASPA or AS-EPA found",
+   "fix_level": "agency",
+   "note": ""
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "D",
+  "expected_grade": "No public reports",
+  "first_feed": "as-asepa-beach-advisory",
+  "effort": "small",
+  "rationale": "No overflow reports in any channel; beach advisories exist as a stale latest-only PDF.",
+  "order_hint": 5
+ },
+ "owner_questions": [
+  "Show American Samoa at all, given only beach advisories and two plant outfalls?"
+ ],
+ "surprise": "AS-EPA advises staying 400 feet from polluted beaches, the widest buffer seen in the territories, but the advisory linked on its site was four months old."
+}

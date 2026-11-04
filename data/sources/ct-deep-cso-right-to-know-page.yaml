@@ -1,0 +1,23 @@
+id: "ct-deep-cso-right-to-know-page"
+name: "CT DEEP 'Combined Sewer Overflows: Right to Know' page (CSO map, fact sheets, LTCPs, emergency contacts)"
+url: "https://portal.ct.gov/deep/municipal-wastewater/combined-sewer-overflows-right-to-know"
+homepage: "https://portal.ct.gov/deep/municipal-wastewater/combined-sewer-overflows-right-to-know"
+kind: "html"
+level: "state"
+# Notes (research/ct, status used, verified fetched, checked 2026-11-01): Lists the CSO
+#   municipalities (Bridgeport, New Haven, Norwich, Hartford; Waterbury and Norwalk without LTCPs),
+#   fact sheets, LTCP links and sewer emergency numbers; links 'Bypass / CSO Live Map' to the QScend
+#   dashboard.
+# Access detail (research, quoted): none recorded
+cadence: "Content last updated: March 30, 2026"
+license: "none stated"
+attribution: "CT DEEP"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["CT"]
+access: ["html", "map_only", "pdf"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

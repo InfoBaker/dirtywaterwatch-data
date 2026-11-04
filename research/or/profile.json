@@ -1,0 +1,177 @@
+{
+  "state": "OR",
+  "name": "Oregon",
+  "region": "pacific",
+  "epa_region": 10,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "partial",
+    "summary": "Oregon has no statute requiring public notice of sewage releases. Every DEQ wastewater permit's general conditions require the permittee to 'alert the public, health agencies and other affected entities' when an overflow threatens public health, following its own Emergency Response and Public Notification Plan, with no deadline; the regulator gets a phone report to OERS within 24 hours and a written report within 5 days.",
+    "citations": [
+      {
+        "cite": "DEQ permit general conditions (NPDES Schedule F; WPCF domestic general conditions)",
+        "title": "Public notification of effluent violation or overflow",
+        "url": "https://www.oregon.gov/deq/FilterPermitsDocs/WPCFGenCondDom.pdf",
+        "quote": "If effluent limitations specified in this permit are exceeded or an overflow occurs that threatens public health, the permittee must take such steps as are necessary to alert the public, health agencies and other affected entities (e.g., public water systems) about the extent and nature of the discharge in accordance with the notification procedures specified in this permit or as specified in its Emergency Response and Public Notification Plan",
+        "who": "permittee",
+        "channel": "as set in the permittee's Emergency Response and Public Notification Plan",
+        "deadline": "none stated",
+        "threshold": "overflow that threatens public health",
+        "verified": "search_only"
+      },
+      {
+        "cite": "OAR 340-142-0040",
+        "title": "Required reporting (OERS)",
+        "url": "https://www.law.cornell.edu/regulations/oregon/Or-Admin-Code-SS-340-142-0040",
+        "quote": null,
+        "who": "person in charge of a release",
+        "channel": "OERS 1-800-452-0311",
+        "deadline": "immediately",
+        "threshold": "reportable quantity",
+        "verified": "search_only"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "24 hours oral (OERS), 5 days written (DEQ SSO Report Form)",
+      "cite": "NPDES Schedule F D.5; DEQ SSO Report Form"
+    },
+    "cso_permit_notice_clause": {
+      "permit": "OR0026905 (Portland Columbia Boulevard)",
+      "quote": null,
+      "deadline": "not read; practice: CSO Advisory published within about 30 minutes of the overflow start (2025-12-18)",
+      "verified": "inferred"
+    },
+    "bills_and_cases": []
+  },
+  "erule": {
+    "system": "state",
+    "sobe_events_2026_11_03": 0,
+    "public_output_url": null,
+    "notes": "Oregon reports go to DEQ through OERS and written forms; no public eRule output found."
+  },
+  "statewide_feed": {
+    "exists": false,
+    "source_ids": [
+      "or-deq-oers-spills-2013-2025"
+    ],
+    "precision": "event",
+    "machine_readable": true,
+    "format": "arcgis",
+    "latency": "frozen: last record 2025-03-27",
+    "history": "2013-08 to 2025-03 (2,371 sewage spills)",
+    "coordinates": "all",
+    "receiving_water": "free text (Affected_Waterway, often 'Unknown')",
+    "start_end": "report date and time only",
+    "volume": true,
+    "stable_id": true,
+    "license": null,
+    "notes": "A static ArcGIS layer of OERS spills verified by DEQ; good for backfill and SSO locations, not live. No current statewide list found."
+  },
+  "cso": {
+    "permits": 3,
+    "open_outfalls": 78,
+    "operators_with_web_channel": 1,
+    "operators_checked": 3,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "Portland publishes a dated CSO Advisory (news article plus RSS, email and Big Pipe gauge) with the affected stretch, advice and expiry 48 hours after the overflow ends. Astoria (38 outfalls) and Corvallis: no event notices found."
+  },
+  "sso": {
+    "location_source": "DEQ OERS spill layer 2013-2025 (points)",
+    "feeds": [
+      "or-bes-news-rss"
+    ],
+    "notes": "Portland also posts Sewage Advisories for SSOs; a few small districts (Oak Lodge) post each overflow."
+  },
+  "beaches": {
+    "program": "Oregon Beach Monitoring Program (OHA with DEQ), coastal, May to September",
+    "source_ids": [
+      "or-oha-beach-monitoring"
+    ],
+    "machine_readable": false,
+    "scope": "coastal",
+    "notes": "GovDelivery ORHA_190 advisory notices; current-conditions page not examined."
+  },
+  "habs": {
+    "program": "OHA cyanoHAB recreational use advisories",
+    "source_ids": [
+      "or-oha-hab-advisories"
+    ],
+    "machine_readable": true,
+    "notes": "ArcGIS FeatureServer with issue dates, status and points (64 features); archive layer exists."
+  },
+  "advisories": {
+    "health_department_pages": [
+      "OHA beach advisories",
+      "OHA cyanoHAB advisories"
+    ],
+    "watershed_groups": [
+      "Willamette Riverkeeper",
+      "Columbia Riverkeeper"
+    ],
+    "swim_guide": true
+  },
+  "outfalls": {
+    "state_layer": null,
+    "cso_inventory_gap": "unknown",
+    "sso_points": "state_table"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Columbia River (WA)",
+      "Snake River (ID, WA)",
+      "Klamath River (CA)",
+      "Columbia Slough"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "no_web",
+      "what": "The public duty is a permit condition with no channel or deadline; Astoria and Corvallis publish no event notices",
+      "fix_level": "legislative",
+      "note": "No statute; DEQ could set a web posting rule in permits (agency)."
+    },
+    {
+      "kind": "records_request",
+      "what": "DEQ's OERS spill layer stops at 2025-03-27; newer SSO reports are in DEQ files",
+      "fix_level": "agency",
+      "note": "Ask DEQ whether the layer is refreshed."
+    },
+    {
+      "kind": "phone_only",
+      "what": "Regulator reporting by phone to OERS",
+      "fix_level": "agency",
+      "note": ""
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "Portland CSO Advisories email",
+      "url": "https://public.govdelivery.com/accounts/ORPORTLAND_ENT/signup/39493",
+      "what": "CSO advisory issued and lifted"
+    },
+    {
+      "name": "OHA beach advisory notices",
+      "url": "https://public.govdelivery.com/accounts/ORHA/subscriber/new?topic_id=ORHA_190",
+      "what": "Coastal bacteria advisories"
+    }
+  ],
+  "readiness": {
+    "tier": "B",
+    "expected_grade": "Dated reports",
+    "first_feed": "or-bes-news-rss",
+    "effort": "small",
+    "rationale": "Portland, which holds 36 of 78 open CSO outfalls and most of the population on the Willamette, publishes dated advisories with an RSS feed. Statewide SSOs exist only as a frozen 2013-2025 layer; elsewhere outfalls plus the rain caution.",
+    "order_hint": 3
+  },
+  "owner_questions": [
+    "Ask Oregon DEQ (owner contact) whether the OERS spills layer is refreshed after 2025-03-27, or request the newer rows.",
+    "Portland's advisory ends 48 hours after the overflow stops: show Portland's window as the authority's red, and the 72-hour site caution elsewhere?",
+    "Subscribe to the Portland CSO email and OHA beach notices?"
+  ],
+  "surprise": "Oregon has no statewide live sewage list, but a little-known state ArcGIS layer holds every OERS spill DEQ verified from 2013 to March 2025, 2,371 of them sewage, each with a point and a gallon figure."
+}

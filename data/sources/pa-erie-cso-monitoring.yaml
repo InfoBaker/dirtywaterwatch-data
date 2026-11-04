@@ -1,0 +1,35 @@
+id: "pa-erie-cso-monitoring"
+name: "City of Erie Bureau of Sewers CSO Monitoring (real-time map and event reports)"
+url: "https://telog.erie.pa.us/CSO.Monitoring/Map"
+homepage: "https://telog.erie.pa.us/CSO.Monitoring/"
+kind: "html"
+level: "municipal"
+# Notes (research/pa, status candidate, verified fetched, checked 2026-11-02): Second-best PA event
+#   feed after ALCOSAN: per-outfall start/end/volume, date-range queries, coordinates. Unit of
+#   'Discharge (Gallons)' needs confirming (values like 0.05886 and 306.1 suggest millions of
+#   gallons).
+# Access detail (research, quoted): Map page embeds markers inline (lat, lng, site id, location,
+#   status Active/Inactive, NPDES, receiving stream, affected water). Event table: GET
+#   /CSO.Monitoring/Report?startDate=M%2FD%2FYYYY%2012%3A00%3A00%20AM&endDate=... returns
+#   server-rendered HTML table (CSO Site, Date Event Started, Date Event Ended, Discharge
+#   (Gallons)); arbitrary date ranges work; a PDF 'Download' button exists. Fetched 2025 (22 rows)
+#   and 2026 to date (124 rows). No auth.
+# Can fill: source_record_id (site + start), started_at, ended_at, volume, units (as labelled),
+#   coordinates (outfall), waterbody, source_status (map Active/Inactive), authority
+# Cannot fill: timezone (implied local); reported_at; published_at; advice_text; valid_until
+# Waters: 4 monitored CSOs (003 Front St, 008 5th & German, 014 12th & French, 030 505 Hi..) all
+#   discharging to the enclosed Mill Creek Tube, affected water 'Lake Erie' (openboatlaunch slugs:
+#   lake-erie-pa)
+# History: Report accepts any date range; 2025 and 2026 fetched.
+cadence: "Real-time telemetry; the About page says data are updated 'in accordance with the established EPA rule' (40 CFR 122.38). Records are split at every flow gap (many short rows per storm)."
+license: "None stated. Footer: '© 2026 - Process and Data Automation, LLC'."
+attribution: "City of Erie Bureau of Sewers (site by Process and Data Automation, LLC; Telog)"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["PA"]
+access: ["html"]
+access_detail: "Map page embeds markers inline (lat, lng, site id, location, status Active/Inactive, NPDES, receiving stream, affected water). Event table: GET /CSO.Monitoring/Report?startDate=M%2FD%2FYYYY%2012%3A00%3A00%20AM&endDate=... returns server-rendered HTML table (CSO Site, Date Event Started, Date Event Ended, Discharge (Gallons)); arbitrary date ranges work; a PDF 'Download' button exists. Fetched 2025 (22 rows) and 2026 to date (124 rows). No auth."
+machine_readable: true
+legal_basis: "40 CFR 122.38 (Great Lakes CSO public notification, effective 2018-02-07); Erie NPDES PA0026301."
+checked: "2026-11-02"

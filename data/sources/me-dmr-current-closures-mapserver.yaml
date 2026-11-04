@@ -1,0 +1,28 @@
+id: "me-dmr-current-closures-mapserver"
+name: "DMR Public Health Current Shellfish Closures MapServer (bacterial closures layer 7, emergency layer 0)"
+url: "https://gis.maine.gov/mapservices/rest/services/dmr/DMR_Public_Health_Current_Shellfish_Closures/MapServer/7"
+homepage: "https://experience.arcgis.com/experience/9a77c51d546247739a7cfc5ed11bd0bf"
+kind: "arcgis"
+level: "state"
+# Notes (research/me, status candidate, verified fetched, checked 2026-11-01): Polygons for
+#   WWTP/CSO-conditional shellfish areas = mapped downstream impact zones for specific plants (e.g.
+#   Freeport, Yarmouth, Blue Hill, Ellsworth, Castine WWTP).
+# Access detail (research, quoted): Layer 7 Bacterial Closures 440 polygons (NSSP P 215, CA 119, R
+#   55, A 44, CR 7); 28 conditional rows with CA_TYPE containing 'WWTP'. Layer 0 Emergency Closure
+#   returned 0 rows on 2026-11-01. Used by DMR map
+#   https://experience.arcgis.com/experience/9a77c51d546247739a7cfc5ed11bd0bf.
+# Can fill: geometry (official affected area), authority, source_url (notice PDF)
+# Cannot fill: current open/closed state of conditional areas (in the CA PDF, not the layer);
+#   started_at of a specific closure event
+cadence: "Classification layer; emergency layer populated during emergency closures."
+license: "copyrightText: 'Maine Department of Marine Resources, Bureau of Public Health & Aquaculture'."
+attribution: "Maine DMR Bureau of Public Health & Aquaculture"
+enabled: true
+role: "advisories"
+event_types: ["shellfish_closure"]
+states: ["ME"]
+access: ["arcgis"]
+access_detail: "Layer 7 Bacterial Closures 440 polygons (NSSP P 215, CA 119, R 55, A 44, CR 7); 28 conditional rows with CA_TYPE containing 'WWTP'. Layer 0 Emergency Closure returned 0 rows on 2026-11-01. Used by DMR map https://experience.arcgis.com/experience/9a77c51d546247739a7cfc5ed11bd0bf."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

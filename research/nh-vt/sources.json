@@ -1,0 +1,5526 @@
+[
+ {
+  "id": "vt-alert-statewide",
+  "name": "VT-Alert (Vermont Emergency Management)",
+  "jurisdiction": "VT",
+  "operator": "Vermont Emergency Management",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "cso",
+   "emergency"
+  ],
+  "waters_covered": "statewide, town-issued",
+  "water_slugs": [],
+  "url": "https://vem.vermont.gov/vtalert",
+  "access": [
+   "email",
+   "phone"
+  ],
+  "access_detail": "Sign-up only. Burlington says it uses it for CSO notices; Montpelier and Brattleboro use it for emergencies. Not subscribed.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "published_at"
+  ],
+  "cannot_fill": [
+   "volume",
+   "coordinates",
+   "history"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "ad hoc",
+  "history": "none public",
+  "license": null,
+  "legal_basis": "",
+  "status": "rejected",
+  "status_reason": "Push-only, no public archive",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Burlington's 2025 CSO annual report says the city issues CSO notifications through \"VT Alert, social media (i.e. Facebook & Twitter), and Front Porch Forum\". No sign that DEC's statewide overflow alerts go through VT-Alert (2016 coverage: idea floated, DEC built its own subscription system). Not the ANR overflow alert subscription, which the state agent covers",
+  "state": "VT"
+ },
+ {
+  "id": "vt-anr-active-npdes-permits",
+  "name": "ANR active NPDES permits report (has CSO/SSO column)",
+  "jurisdiction": "VT",
+  "operator": "VT DEC Wastewater Program",
+  "operator_type": "state",
+  "role": "permits",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "statewide",
+  "water_slugs": [],
+  "url": "https://anrweb.vt.gov/DEC/IWIS/ReportViewer2.aspx?Report=WWActiveNPDESPermits&ViewParms=False",
+  "access": [
+   "html",
+   "csv"
+  ],
+  "access_detail": "SSRS report. CSV export works with the session cookie: ExportUrlBase plus Format=CSV. 169 permits.",
+  "machine_readable": true,
+  "sample_record": {
+   "PermitID": "3-1285",
+   "NPDESPermitNumber": "VT0100871",
+   "FacilityName": "Rutland",
+   "Ownership": "Municipal",
+   "ReceivingWater": "East Creek; Otter Creek",
+   "CSO/SSO": "Yes",
+   "IssueDate": "5/18/2022"
+  },
+  "fields": [
+   "PermitID",
+   "NPDESPermitNumber",
+   "FacilityName",
+   "Ownership",
+   "City",
+   "County",
+   "ReceivingWater",
+   "CSO/SSO",
+   "IssueDate"
+  ],
+  "fills_event_fields": [
+   "authority",
+   "jurisdiction",
+   "coverage_note"
+  ],
+  "cannot_fill": [
+   "events"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "live",
+  "history": "current permits only",
+  "license": null,
+  "legal_basis": "10 V.S.A. ch.47",
+  "status": "used",
+  "status_reason": "Defines the current permittee list (13 'Yes')",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Saved as vtp-anr-active-npdes-permits-2026-11-01.csv",
+  "state": "VT"
+ },
+ {
+  "id": "vt-anr-docbrowser-permits",
+  "name": "ANR DocBrowser wastewater permit folders",
+  "jurisdiction": "VT",
+  "operator": "VT DEC",
+  "operator_type": "state",
+  "role": "outfalls",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "per permit",
+  "water_slugs": [],
+  "url": "https://anrweb.vt.gov/ANR/vtANR/DocBrowser.aspx?Directory=DEC/WSMD/Wastewater/permits/3-1285/",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "Files at https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/{permit}/{file}: permits, fact sheets, 1272 orders, LTCPs, annual CSO reports through 2025. Directory listing of the PubDocs path itself is 403.",
+  "machine_readable": false,
+  "sample_record": {
+   "file": "3-1285.2025CSOAnnualReport.20260130.pdf",
+   "date": "02/02/2026"
+  },
+  "fields": [
+   "filename",
+   "size",
+   "date"
+  ],
+  "fills_event_fields": [
+   "history",
+   "coverage_note"
+  ],
+  "cannot_fill": [
+   "real-time events"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "annual reports Jan-Aug",
+  "history": "2013+",
+  "license": null,
+  "legal_basis": "CSO Rule 34-403/404; 1272 Orders",
+  "status": "used",
+  "status_reason": "Outfall IDs, coordinates (Newport, Hartford, St. Albans), annual totals",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "See privacy note in section 4 about Montpelier's 2024 report",
+  "state": "VT"
+ },
+ {
+  "id": "vt-anr-waste-water-facilities",
+  "name": "VT ANR Waste Water Facilities (direct-discharge WWTF points)",
+  "jurisdiction": "VT",
+  "operator": "VT DEC Wastewater Program (via ANR Open Data)",
+  "operator_type": "state",
+  "role": "outfalls",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_FACILITIES_SP_NOCACHE_v2/MapServer/166",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "232 points; fields FacilityName, FacilityID, WWInventoryURL. FacilityID equals the F= parameter in the overflow report links, so every overflow row can be placed at its plant.",
+  "machine_readable": true,
+  "sample_record": {
+   "FacilityName": "Barre City",
+   "FacilityID": 2,
+   "WWInventoryURL": "https://anrweb.vt.gov/DEC/WWInventory/UpdateFacility.aspx?F=2&option=view",
+   "x": -72.5214,
+   "y": 44.2104
+  },
+  "fields": [
+   "FacilityName",
+   "FacilityID",
+   "WWInventoryURL",
+   "GISLOCATION"
+  ],
+  "fills_event_fields": [
+   "coordinates (plant, not outfall; precision: facility)"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": "Description: \"Spatial data is not maintained and therefore, this dataset may not be complete.\" Vermont Open Geodata Policy v1.1.",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Join key between overflow reports and locations.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-anr-wastewater-infrastructure-cso-outfalls",
+  "name": "VT ANR Wastewater Infrastructure (Point features), Type 23 'Combined sewer outfall'",
+  "jurisdiction": "VT",
+  "operator": "VT DEC Watershed Investment Division (via ANR Open Data)",
+  "operator_type": "state",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "CSO municipalities",
+  "water_slugs": [
+   "lake-champlain-vt",
+   "winooski-river-vt",
+   "otter-creek-vt",
+   "passumpsic-river-vt",
+   "connecticut-river-vt",
+   "lac-memphremagog-vt",
+   "missisquoi-river-vt",
+   "stevens-brook-vt"
+  ],
+  "url": "https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "Query: .../MapServer/166/query?where=Type%3D23&outFields=*&outSR=4326&f=json returns 84 points (53 Status 'Existing', 31 'Abandoned'); layer total 29,181 points. Saved raw/vt-anr-cso-outfalls.json.",
+  "machine_readable": true,
+  "sample_record": {
+   "Type_resolved": "23 - Combined sewer outfall",
+   "Status": "Existing",
+   "PermitNo": "S/N #2",
+   "Notes": "CSO - 001",
+   "Municipality": "Montpelier",
+   "Source_resolved": "13 - Wastewater division plan interpretation",
+   "SystemType": "Combined",
+   "lat": 44.25983,
+   "lon": -72.58
+  },
+  "fields": [
+   "OBJECTID",
+   "Type",
+   "Status",
+   "Source",
+   "PermitNo",
+   "Owner",
+   "Creator",
+   "CreateDate",
+   "Editor",
+   "EditDate",
+   "SystemType",
+   "Type_resolved",
+   "Owner_resolved",
+   "Notes",
+   "Source_resolved",
+   "SourceNotes",
+   "SourceDate",
+   "GEOID",
+   "Municipality",
+   "Audience"
+  ],
+  "fills_event_fields": [
+   "geometry (outfall point)",
+   "coordinates (source, precision via Source_resolved)"
+  ],
+  "cannot_fill": [
+   "any event field"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "Static inventory; edits dated 2013-2020 in sample.",
+  "history": null,
+  "license": "copyrightText \"Watershed Investment Division, VT DEC\"; description: \"Accuracy of all data is for planning purposes and field verification is at the users discretion.\" Portal terms: Vermont Open Geodata Policy v1.1.",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Only VT outfall point layer found; join by municipality + S/N or CSO number to DEC incident 'Location' text.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Stale/inconsistent: some 'Existing' Newport City points are annotated 'closed'; 5 Existing points have null Municipality; St Johnsbury has 13 Existing points (DEC reports name CSO-06, -14, -24 etc.). Existing by municipality: St Johnsbury 13, Montpelier 6, Newport City 6, Burlington 5, Hartford 5, Rutland City 4, Middlebury 4, Northfield 1, Randolph 1, Vergennes 1, Enosburgh 1, St Albans City 1, null 5.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-anr-wwinventory-facility-pages",
+  "name": "VT DEC Wastewater Inventory facility pages (updateFacility.aspx)",
+  "jurisdiction": "VT",
+  "operator": "VT DEC",
+  "operator_type": "state",
+  "role": "permits",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://anrweb.vt.gov/DEC/WWInventory/updateFacility.aspx?F=15&option=view",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Public view of a facility record: name, address, population served, NPDES major flag, Latitude/Longitude ('Lat/Long Validated With Google Maps' date).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [
+   "Facility Name",
+   "Facility Status",
+   "Street Address",
+   "City",
+   "Population Served",
+   "Major NPDES",
+   "Facility Number",
+   "Latitude",
+   "Longitude"
+  ],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": "Page footer: \"Copyright © 2025 State of Vermont. All rights reserved\" with links to Accessibility Policy and Privacy Policy. No data licence stated on the WWInventory pages. (Public record under 10 V.S.A. § 1295; ANR open data elsewhere is under the Vermont Open Geodata Policy v1.1.)",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Plant coordinates and facility metadata.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-barre-city-site",
+  "name": "Barre City website",
+  "jurisdiction": "VT",
+  "operator": "City of Barre",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "",
+  "water_slugs": [],
+  "url": "https://www.barrecity.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "HTTP 403 'Security Check' bot challenge; not bypassed",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "all"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "",
+  "history": "",
+  "license": null,
+  "legal_basis": "",
+  "status": "unreachable",
+  "status_reason": "403 bot challenge",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-bill-h843-2026",
+  "name": "H.843 (2026) An act relating to monitoring of municipal wastewater discharges",
+  "jurisdiction": "VT",
+  "operator": "Vermont General Assembly",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://legislature.vermont.gov/bill/status/2026/H.843",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "Status page and As Introduced PDF fetched. Would amend 10 V.S.A. § 1263 to require monitoring of WWTF discharges for pesticides and pharmaceuticals. Last action 1/30/2026 'Read first time and referred to the Committee on Environment'.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "Not about overflow notification; died in committee (no action after referral).",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "No 2025-2026 bill amending § 1295 was found (search_only).",
+  "state": "VT"
+ },
+ {
+  "id": "vt-black-river-action-team",
+  "name": "Black River Action Team swim-site E. coli (Springfield VT)",
+  "jurisdiction": "VT",
+  "operator": "Black River Action Team",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.blackriveractionteam.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "Connection failed; results appear in CRC 'Is It Clean?' (data-organization black-river-action-team). Black River (Springfield) has no slug.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-burlington-1272-order-2023",
+  "name": "Burlington Main/North/East CSO 1272 Order (2023-05-19)",
+  "jurisdiction": "VT",
+  "operator": "VT DEC",
+  "operator_type": "state",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Lake Champlain, Winooski",
+  "water_slugs": [
+   "lake-champlain-vt",
+   "winooski-river-vt"
+  ],
+  "url": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1331/3-1331.CSO.1272Order.20230519.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "location_text"
+  ],
+  "cannot_fill": [
+   "coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "",
+  "history": "",
+  "license": null,
+  "legal_basis": "10 V.S.A. 1272",
+  "status": "used",
+  "status_reason": "S/N IDs",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Northfield order: https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1158/3-1158.CSO.1272Order.20220419.pdf; Enosburg order: https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1234/3-1234.CSO.1272Order.20250828.pdf",
+  "state": "VT"
+ },
+ {
+  "id": "vt-burlington-beach-status-arcgis",
+  "name": "BTV Beach Status (Beach Closure Tracker)",
+  "jurisdiction": "VT",
+  "operator": "City of Burlington Parks, Recreation & Waterfront / DPW",
+  "operator_type": "municipal",
+  "role": "advisories",
+  "event_types": [
+   "beach_closure",
+   "cso",
+   "cyanobacteria"
+  ],
+  "waters_covered": "Lake Champlain beaches in Burlington (12 points)",
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "url": "https://maps.burlingtonvt.gov/arcgis/rest/services/BTV_Beach_Status/MapServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+  "access": [
+   "arcgis",
+   "api",
+   "html"
+  ],
+  "access_detail": "Public MapServer layer 0, no token; GeoJSON output. Page: https://www.burlingtonvt.gov/1219/Beach-Closure-Tracker. Latest status per site only, no history table.",
+  "machine_readable": true,
+  "sample_record": {
+   "OBJECTID": 3434,
+   "LocationName": "North Shore Natural Area",
+   "ResultDateTime": "09/13/2026 10:32 AM",
+   "CyanobacteriaDescription": "Open",
+   "EColi": 0,
+   "StatusReason": "Safe",
+   "Notes": null,
+   "coordinates": [
+    -73.269149,
+    44.519986
+   ]
+  },
+  "fields": [
+   "LocationId",
+   "LocationName",
+   "DisplayOrder",
+   "ResultDateTime",
+   "CyanobacteriaCategory",
+   "CyanobacteriaDescription",
+   "EColi",
+   "Notes",
+   "StatusReason",
+   "geometry"
+  ],
+  "fills_event_fields": [
+   "source_status",
+   "source_updated_at",
+   "location_text",
+   "coordinates",
+   "geometry",
+   "advice_text",
+   "waterbody",
+   "raw_record"
+  ],
+  "cannot_fill": [
+   "volume",
+   "started_at",
+   "outfall",
+   "material"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "live Memorial Day to Labor Day",
+  "history": "none (current state only)",
+  "license": null,
+  "legal_basis": "10 V.S.A. 1295 (posting recreation areas within 1 mile)",
+  "status": "candidate",
+  "status_reason": "Best machine-readable municipal source in VT; poll and snapshot",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "RED = 'Combined Sewer Outflow' among closure reasons. No CSO-outfall layer is public on maps.burlingtonvt.gov; the OpenGov folder requires a token.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-burlington-cso-control",
+  "name": "Burlington CSO Control in BTV page, LTCP and annual reports",
+  "jurisdiction": "VT",
+  "operator": "City of Burlington DPW",
+  "operator_type": "municipal",
+  "role": "permits",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Burlington CSOs",
+  "water_slugs": [
+   "lake-champlain-vt",
+   "winooski-river-vt"
+  ],
+  "url": "https://www.burlingtonvt.gov/349/CSO-Control-in-BTV",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "Annual reports also at https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1331/3-1331.2025CSOAnnualReport20260130.pdf",
+  "machine_readable": false,
+  "sample_record": {
+   "date": "10/8/25",
+   "location": "Pine",
+   "duration_min": 75,
+   "volume_gal": 51221
+  },
+  "fields": [
+   "date",
+   "location",
+   "duration",
+   "volume",
+   "rainfall",
+   "return frequency"
+  ],
+  "fills_event_fields": [
+   "started_at",
+   "volume",
+   "units",
+   "location_text",
+   "history"
+  ],
+  "cannot_fill": [
+   "coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "annual (January)",
+  "history": "2019+",
+  "license": null,
+  "legal_basis": "CSO Rule ch.34; 1272 Order 2023",
+  "status": "used",
+  "status_reason": "Outfall list and notification practice",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-burlington-dpw-social",
+  "name": "Burlington DPW Facebook/X/Instagram",
+  "jurisdiction": "VT",
+  "operator": "City of Burlington DPW",
+  "operator_type": "municipal",
+  "role": "social",
+  "event_types": [
+   "cso",
+   "bypass"
+  ],
+  "waters_covered": "Burlington",
+  "water_slugs": [
+   "lake-champlain-vt",
+   "winooski-river-vt"
+  ],
+  "url": "https://www.facebook.com/BTVDPW",
+  "access": [
+   "social"
+  ],
+  "access_detail": "Also https://twitter.com/BTVDPW and https://www.instagram.com/btv_dpw/ (linked from /296/Public-Works-Department). The city says CSO notices go out on Facebook and Twitter. Posts not fetched (login walls).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "published_at",
+   "location_text"
+  ],
+  "cannot_fill": [
+   "volume"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "ad hoc",
+  "history": "unknown",
+  "license": null,
+  "legal_basis": "10 V.S.A. 1295",
+  "status": "watch",
+  "status_reason": "Not scrapeable without accounts",
+  "verified": "inferred",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-burlington-newsflash-publicworks",
+  "name": "Burlington News Flash, Public Works category",
+  "jurisdiction": "VT",
+  "operator": "City of Burlington DPW",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "bypass",
+   "cso"
+  ],
+  "waters_covered": "Lake Champlain, Winooski River (Burlington)",
+  "water_slugs": [
+   "lake-champlain-vt",
+   "winooski-river-vt"
+  ],
+  "url": "https://www.burlingtonvt.gov/m/newsflash?cat=8",
+  "access": [
+   "html",
+   "rss"
+  ],
+  "access_detail": "CivicPlus. Articles at /CivicAlerts.aspx?AID=n. RSS https://www.burlingtonvt.gov/RSSFeed.aspx?ModID=1&CID=Public-Works-8 returned empty; the All-newsflash.xml feed carries only the ~7 newest items. The HTML list keeps history.",
+  "machine_readable": true,
+  "sample_record": {
+   "aid": 3863,
+   "title": "July 28 Main Plant Storm Response & Recreation Area Closures",
+   "posted": "2026-07-28",
+   "closed": [
+    "Blanchard Beach",
+    "Oakledge Cove",
+    "Blodgett Access Area",
+    "Coast Guard ramp",
+    "Perkins Pier"
+   ],
+   "reopened": "2026-07-30 17:30",
+   "bacteria": "6500 col/100 mL vs wet-weather limit 6160"
+  },
+  "fields": [
+   "title",
+   "posted date",
+   "category",
+   "free text"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "published_at",
+   "location_text",
+   "advice_text",
+   "valid_until",
+   "source_url",
+   "revision_history"
+  ],
+  "cannot_fill": [
+   "volume",
+   "coordinates",
+   "ended_at (unstructured)"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "ad hoc, mainly plant discharges that close beaches",
+  "history": "articles back to at least 2026; older Drupal node URLs 404",
+  "license": null,
+  "legal_basis": "10 V.S.A. 1295; CSO Rule 34-404",
+  "status": "candidate",
+  "status_reason": "Narrative supplement; routine CSOs are not posted here",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "June 11, 2026 East Plant item: AID 3842",
+  "state": "VT"
+ },
+ {
+  "id": "vt-burlington-notifyme",
+  "name": "Burlington Notify Me (email/SMS)",
+  "jurisdiction": "VT",
+  "operator": "City of Burlington",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso",
+   "bypass"
+  ],
+  "waters_covered": "Burlington",
+  "water_slugs": [
+   "lake-champlain-vt",
+   "winooski-river-vt"
+  ],
+  "url": "https://www.burlingtonvt.gov/list.aspx",
+  "access": [
+   "email"
+  ],
+  "access_detail": "Mirrors News Flash categories including Public Works. Not subscribed.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "published_at",
+   "advice_text"
+  ],
+  "cannot_fill": [
+   "volume",
+   "coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "ad hoc",
+  "history": "none",
+  "license": null,
+  "legal_basis": "",
+  "status": "watch",
+  "status_reason": "Duplicates News Flash",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-cso-rule-ch34",
+  "name": "VT Combined Sewer Overflow Rule (Env. Prot. Rule ch.34, 2016)",
+  "jurisdiction": "VT",
+  "operator": "VT DEC",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "statewide",
+  "water_slugs": [],
+  "url": "https://dec.vermont.gov/sites/dec/files/documents/wsmd_Combined_Sewer_Overflow_Rule_2016-08-26.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "34-404: public alert within 1 h (4 h max), agency notice within 12 h, permanent outfall signs. Appendix A lists 16 CSO municipalities as of 2016.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "",
+  "history": "",
+  "license": null,
+  "legal_basis": "10 V.S.A. 1295",
+  "status": "used",
+  "status_reason": "Legal basis",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": " Also linked from the DEC Facility Compliance page as https://dec.vermont.gov/sites/dec/files/wsm/Laws-Regulations-Rules/2016_08_26%3B%202015_WSMD_005%3B%20Final_Adopted_CSO_Rule.pdf",
+  "state": "VT"
+ },
+ {
+  "id": "vt-dec-cso-ltcp-guidance-2024",
+  "name": "VT DEC CSO Long Term Control Plan Guidance v1.1 (2024-10-22)",
+  "jurisdiction": "VT",
+  "operator": "VT DEC",
+  "operator_type": "state",
+  "role": "permits",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://dec.vermont.gov/sites/dec/files/documents/CSO%20LTCP%20Guidance%20Document%20v1.1%2020241022.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "LTCP context only.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-dec-lay-monitoring-larosa",
+  "name": "VT DEC Lay Monitoring Program and LaRosa Partnership Program",
+  "jurisdiction": "VT",
+  "operator": "VT DEC Watershed Management Division",
+  "operator_type": "state",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://dec.vermont.gov/watershed/lakes-ponds/monitor/lay-monitoring",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Page reachable (200). Data are served through DEC's Integrated Watershed Information System (inferred; not opened). LaRosa supports volunteer river sampling (nutrients, some E. coli).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Monitoring context; not advisories.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-dec-notice-untreated-discharges-page",
+  "name": "VT DEC 'Notice of Untreated or Unpermitted Discharges' program page",
+  "jurisdiction": "VT",
+  "operator": "VT DEC Wastewater Program",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "cso",
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": "statewide",
+  "water_slugs": [],
+  "url": "https://dec.vermont.gov/watershed/wastewater/notice-untreated-or-unpermitted-discharges",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Program page; links to dashboard, subscription, operator alert form (anrweb.vt.gov/DEC/WWInventory/SubmitPublicAlert.aspx), incident form (anronline.vermont.gov/?FormTag=WW_CSOReport), sign templates in 7 languages.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "advice_text"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "10 V.S.A. § 1295; Act 86 (H.674) of 2016",
+  "status": "used",
+  "status_reason": "Source of DEC's public advice line and the operator procedure.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Advice quoted: 'Avoid swimming, wading, boating, or fishing after wastewater overflow, releases, or illicit discharges!' Signs: temporary 'Notice of Potential Threat to Public Health' signs 'at public access areas downstream within one mile' kept 48 hours after the discharge stops; permanent 'Caution for Combined Sewer Discharge Point' signs at each active CSO outfall.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-dec-overflow-alert-subscriptions",
+  "name": "WSMD Notification Subscription System (email/text alerts for public alerts, incident reports, unpermitted discharges)",
+  "jurisdiction": "VT",
+  "operator": "VT DEC Watershed Management Division",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "cso",
+   "sso",
+   "bypass",
+   "other"
+  ],
+  "waters_covered": "statewide or by drainage basin (per 2016 press coverage)",
+  "water_slugs": [],
+  "url": "https://anrweb.vt.gov/DEC/WWInventory/Subscriptions.aspx",
+  "access": [
+   "email"
+  ],
+  "access_detail": "Login page (Email Address + Password). Page: 'Subscribe here to receive email or text notifications when new public alerts, sewer overflow and release incident reports, or unpermitted discharges are reported.' Not subscribed (brief forbids). Help: ANR.WSMD@vermont.gov.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Push on submission (inferred from page text).",
+  "history": null,
+  "license": null,
+  "legal_basis": "10 V.S.A. § 1295",
+  "status": "candidate",
+  "status_reason": "Owner should subscribe statewide to get push notice as a scrape trigger and as a check on latency.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Requires creating an account (email + password); owner action.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-dec-procedure-untreated-unpermitted-discharges",
+  "name": "VT DEC Procedure for Public Notice of Untreated Discharges and Unpermitted Discharges (PDF, file dated 2017-01-06)",
+  "jurisdiction": "VT",
+  "operator": "VT DEC",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "cso",
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://dec.vermont.gov/sites/dec/files/wsm/wastewater/docs/ProcedureUntreatedUnpermittedDischarges.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Downloaded (raw/vt-procedure-untreated.pdf, 370 KB). Text layer mostly unreadable (custom font encoding); legible headings: '1. Post an electronic Public Alert as soon as possible but no longer than within 1 hour from discovery of an untreated discharge.' '2. Post a follow-up Overflow and Incident Report within 12 hours of discovery of an untreated discharge and notify the town health officer.'",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "10 V.S.A. § 1295",
+  "status": "watch",
+  "status_reason": "Operator procedure; statute text is clearer and current.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-dec-sewage-overflow-incident-reports",
+  "name": "VT DEC sewer overflow and release Incident Reports (New/pending, Reviewed, and Wet Weather CSO tables) on the Sewage Overflows report page",
+  "jurisdiction": "VT",
+  "operator": "Vermont Department of Environmental Conservation, Wastewater Program",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "cso",
+   "sso",
+   "bypass",
+   "partially_treated",
+   "other"
+  ],
+  "waters_covered": "statewide",
+  "water_slugs": [
+   "lake-champlain-vt",
+   "winooski-river-vt",
+   "otter-creek-vt",
+   "stevens-brook-vt",
+   "passumpsic-river-vt",
+   "connecticut-river-vt",
+   "missisquoi-river-vt",
+   "lac-memphremagog-vt"
+  ],
+  "url": "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx",
+  "access": [
+   "html",
+   "email"
+  ],
+  "access_detail": "Same page and POST as the alerts. Three tables: body_GridViewSewageOverflowsUnOfficial ('NEW INCIDENT REPORTS Pending review from DEC Wastewater staff'; links to nFormSewageOverflow.aspx?S=<submission no.>), body_GridViewSewageOverflowsOther ('INCIDENT REPORTS Reviewed by DEC Wastewater staff'), body_GridViewSewageOverflowsAuthorized ('WET WEATHER COMBINED SEWER OVERFLOWS INCIDENT REPORTS Reviewed by DEC Wastewater staff'). Each reviewed row links to UpdateFacilityIncident.aspx?F=<facility id>&FI=<incident id>&option=view (detail page, no login) and updateFacility.aspx?F=<id>&option=view (facility page with plant lat/long). Facility id F joins to the ANR Waste Water Facilities GIS layer FacilityID.",
+  "machine_readable": false,
+  "sample_record": {
+   "Start Date": "2026-10-13",
+   "End Date": "2026-10-14",
+   "Start/End Times": "10:55 pm to 01:15 am",
+   "Municipality": "St. Johnsbury",
+   "Location": "CSO – 06: (Bay Street – south of CVPS)",
+   "Waterbody": "Passumpsic River",
+   "Nature of Incident": "Authorized Wet Weather CSO Overflow",
+   "Estimated Volume (gallons)": "75236",
+   "Wastewater Treatment Facility": "St Johnsbury",
+   "Contact Person": "<operator name>",
+   "Submission Number": "HQS-9Z3H-AB97G",
+   "ID": "7105",
+   "detail.Cause Of Discharge": "High Flows",
+   "detail.Point Of Discharge": "Combined sewer overflow structure",
+   "detail.Public Overflow Report For Web": "Y",
+   "detail.Description Of Incident": "High Flows caused by heavy rain on 10/13/2026 resulted in the discharge of a combination of sewage and storm water from CSO - 06. This is an authorized discharge ..."
+  },
+  "fields": [
+   "Start Date",
+   "End Date",
+   "Start/End Times",
+   "Municipality",
+   "Location",
+   "Waterbody",
+   "Nature of Incident",
+   "Estimated Volume (gallons)",
+   "Wastewater Treatment Facility",
+   "Contact Person",
+   "Submission Number",
+   "ID",
+   "detail: Facility Name",
+   "Caller Name And Title",
+   "Incident Start Date",
+   "Incident End Date",
+   "Incident Start End Times",
+   "Estimated Duration Of Event",
+   "Nature Of Incident",
+   "Estimated Volume (gallons)",
+   "Cause Of Discharge",
+   "Type Of Obstruction",
+   "Point Of Discharge",
+   "Corrective Action Taken",
+   "Waterbody Impacted",
+   "Contact Name And Title For Public",
+   "Call Date",
+   "WW Staff Called",
+   "Type Of Notification",
+   "Public Overflow Report For Web",
+   "Description Of Incident",
+   "nForm Submission Number",
+   "pending form: Current Status (e.g. 'In Review'), SubVersionID, Public Contact Phone Number"
+  ],
+  "fills_event_fields": [
+   "source_record_id (ID / Submission Number)",
+   "event_type (Nature of Incident: 'Authorized Wet Weather CSO Overflow', 'Discharged untreated sewage', 'Discharged partially treated ... effluent', 'Other')",
+   "source_status (pending vs reviewed table; nForm 'Current Status')",
+   "started_at",
+   "ended_at",
+   "timezone (implicit America/New_York)",
+   "waterbody",
+   "location_text",
+   "material (Nature of Incident)",
+   "volume",
+   "units (gallons)",
+   "estimate_flag (field is 'Estimated'; 2016-2024 rows often give a range bucket such as '>10,000 to 100,000 gallons')",
+   "authority",
+   "source_url",
+   "raw_record",
+   "jurisdiction"
+  ],
+  "cannot_fill": [
+   "coordinates (outfall; only plant lat/long on facility page)",
+   "reported_at (submission time not shown on reviewed rows)",
+   "source_updated_at",
+   "advice_text",
+   "valid_until",
+   "revision_history (amendments overwrite)"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "Law: report to DEC and local health officer within 12 hours of discovery; end time and volume amended within three business days if unknown. Reviewed rows appear after DEC staff review (days to weeks; some pending rows from 12/28/2025 were still 'In Review' on 11/01/2026).",
+  "history": "DEC: 'There is no data available prior to January 1, 2007.' 2007 range returned 45 incident rows; CSO table populated from 2016. Per-year counts (CSO reports / other reports): 2016 117/30, 2019 213/71, 2023 112/90, 2024 206/65, 2025 172/55, 2026 (to Nov 1) 115/33. Archive = same page with an older date range.",
+  "license": "Page footer: \"Copyright © 2025 State of Vermont. All rights reserved\" with links to Accessibility Policy and Privacy Policy. No data licence stated on the WWInventory pages. (Public record under 10 V.S.A. § 1295; ANR open data elsewhere is under the Vermont Open Geodata Policy v1.1.)",
+  "legal_basis": "10 V.S.A. § 1295(c)",
+  "status": "candidate",
+  "status_reason": "Gives start, end, volume, outfall and waterbody for every reported VT overflow since 2016, back to 2007 for other incidents; best structured source in either state.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Volume is free text: exact numbers, comma-formatted strings ('105,000 gallons'), range buckets through 2024, and occasional junk ('.0425', 'CSO is still flowing, volume i'). Contact Person and Caller fields carry staff names and, on pending nForm pages, a phone number: drop them. 2025 CSO reports came only from Rutland (69), St Johnsbury (48), Montpelier (35), Vergennes (8), Middlebury (7), St Albans City (3), Burlington Main (2).",
+  "state": "VT"
+ },
+ {
+  "id": "vt-dec-sewage-overflow-public-alerts",
+  "name": "VT DEC Public Alerts (untreated discharge alerts) on the Sewage Overflows report page",
+  "jurisdiction": "VT",
+  "operator": "Vermont Department of Environmental Conservation, Watershed Management Division, Wastewater Program",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "cso",
+   "sso",
+   "bypass",
+   "partially_treated",
+   "other"
+  ],
+  "waters_covered": "statewide; every permitted WWTF; receiving water named per alert",
+  "water_slugs": [
+   "lake-champlain-vt",
+   "winooski-river-vt",
+   "otter-creek-vt",
+   "stevens-brook-vt",
+   "passumpsic-river-vt",
+   "connecticut-river-vt",
+   "missisquoi-river-vt",
+   "lac-memphremagog-vt"
+  ],
+  "url": "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx",
+  "access": [
+   "html",
+   "email"
+  ],
+  "access_detail": "ASP.NET WebForms page. GET returns the last ~30 days (TextBoxDateBegin defaults to one month back). Any date range: POST back to the same URL with the page's hidden __VIEWSTATE/__EVENTVALIDATION fields plus ctl00$body$TextBoxDateBegin=MM/DD/YYYY, ctl00$body$TextBoxDateEnd=MM/DD/YYYY, ctl00$body$ButtonSearch=Search. Table id body_GridViewPublicAlerts. No pagination: a full calendar year returns in one response (~250 KB). No auth. Fetched 2025, 2026 and 2016-2024 year ranges on 2026-11-01 (raw/vt-overflows-YYYY.json).",
+  "machine_readable": false,
+  "sample_record": {
+   "Facility Name": "St Johnsbury",
+   "Town": "St Johnsbury",
+   "Location Description": "CSO – 06: (Bay Street – south of CVPS) CSO – 14: (Mill Street)",
+   "Receiving Waters": "Passumpsic River",
+   "Date/Time Submission Entered": "10/14/2026 9:41:15 AM",
+   "ID": "4298"
+  },
+  "fields": [
+   "Facility Name",
+   "Town",
+   "Location Description",
+   "Receiving Waters",
+   "Date/Time Submission Entered",
+   "ID"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "event_type (coarse: alert only)",
+   "reported_at (Date/Time Submission Entered)",
+   "published_at (posted immediately on submission, per DEC)",
+   "waterbody (free text)",
+   "location_text",
+   "authority",
+   "jurisdiction",
+   "source_url",
+   "raw_record"
+  ],
+  "cannot_fill": [
+   "started_at",
+   "ended_at",
+   "volume",
+   "units",
+   "coordinates",
+   "material (beyond 'untreated discharge')",
+   "advice_text",
+   "valid_until",
+   "revision_history"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "Operator-entered in real time. Law: alert 'as soon as possible, but no longer than one hour from discovery' (four hours if no phone/internet at the site). DEC: 'Once submitted, the Public Alert will be immediately available for public viewing'. Observed latencies 2026: Vergennes CSO#002 began 9:00 pm 4/16, alert 9:33 pm; Burlington Park St CSO began 5:02 pm 8/8, alert 6:11 pm; Montpelier CSOs began ~5:35 pm 6/10, alert 6:11 am 6/11; St Johnsbury CSO-06 began 10:55 pm 10/13, alert 9:41 am 10/14 (discovery time is not published, so whether a deadline was missed cannot be judged).",
+  "history": "Alerts from 2016 (Act 86 effective May 4, 2016); 49 alerts in 2016, 191 in 2019, 125 in 2024, 114 in 2025, 94 in 2026 to Nov 1. Alert IDs reach 4300 (Oct 2026).",
+  "license": "Page footer: \"Copyright © 2025 State of Vermont. All rights reserved\" with links to Accessibility Policy and Privacy Policy. No data licence stated on the WWInventory pages. (Public record under 10 V.S.A. § 1295; ANR open data elsewhere is under the Vermont Open Geodata Policy v1.1.)",
+  "legal_basis": "10 V.S.A. § 1295(b)",
+  "status": "candidate",
+  "status_reason": "The only near-real-time statewide sewage alert feed in NH/VT; carries outfall names and receiving water; no API so it must be scraped by POST.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Alert text is free-form (receiving waters misspelled e.g. 'Intervals wetlands'); one alert may name several outfalls. Alerts carry no start time; pair with the incident report (same facility, date) for start/end/volume. Times are local Eastern (not labelled).",
+  "state": "VT"
+ },
+ {
+  "id": "vt-dec-unpermitted-discharges-public-report",
+  "name": "VT ANR Unpermitted Discharges - Public Report",
+  "jurisdiction": "VT",
+  "operator": "VT ANR (DEC Waste Management / Watershed Management)",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "spill",
+   "illicit_discharge"
+  ],
+  "waters_covered": "statewide",
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "url": "https://anrweb.vt.gov/DEC/WWInventory/UnpermittedDischargesPublicReport.aspx",
+  "access": [
+   "html",
+   "email"
+  ],
+  "access_detail": "ASP.NET page, default shows open incidents plus those ended in the previous 30 days; Begin Date adjustable (same POST pattern). Columns: Reported Date/Time Of Incident, Town, Receiving Water, Location Description, Reporting Entity, Cause, Released Materials, Description And Updates, Last Updated, ID (e.g. WMD3422026).",
+  "machine_readable": false,
+  "sample_record": {
+   "Town": "Morgan",
+   "Receiving Water": "Lake Seymour",
+   "Location Description": "44.90152, -71.99449",
+   "Reporting Entity": "State",
+   "Cause": "Spill",
+   "Released Materials": "Jet Fuel",
+   "Last Updated": "7/27/2026 9:16:15 AM",
+   "ID": "WMD3422026"
+  },
+  "fields": [
+   "Reported Date/Time Of Incident",
+   "Town",
+   "Receiving Water",
+   "Location Description",
+   "Reporting Entity",
+   "Cause",
+   "Released Materials",
+   "Description And Updates",
+   "Last Updated",
+   "ID"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "started_at (sometimes)",
+   "waterbody",
+   "location_text",
+   "coordinates (sometimes typed into location)",
+   "material",
+   "source_updated_at (Last Updated)",
+   "raw_record"
+  ],
+  "cannot_fill": [
+   "volume (free text only)",
+   "ended_at",
+   "advice_text"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Law: Secretary posts within four hours of discovery (by 10:00 am if found 9 pm-5 am). Observed: mostly fuel/chemical spills.",
+  "history": "Adjustable begin date; depth not tested.",
+  "license": "Page footer: \"Copyright © 2025 State of Vermont. All rights reserved\" with links to Accessibility Policy and Privacy Policy. No data licence stated on the WWInventory pages. (Public record under 10 V.S.A. § 1295; ANR open data elsewhere is under the Vermont Open Geodata Policy v1.1.)",
+  "legal_basis": "10 V.S.A. § 1295(d)",
+  "status": "watch",
+  "status_reason": "Mostly petroleum spills, not sewage; rows include private addresses and personal narratives (privacy). Useful later for non-sewage pollution.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-doh-cyanobacteria-all-reports",
+  "name": "VT Dept of Health Cyanobacteria Tracker - All Reports (current season, ArcGIS view)",
+  "jurisdiction": "VT",
+  "operator": "Vermont Department of Health",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "cyanobacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "url": "https://services.arcgis.com/YKJ5JtnaPQ2jDbX8/arcgis/rest/services/Cyanobacteria_All_Reports_view/FeatureServer/0",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "3,370 reports, ReportDate 2026-05-13 to 2026-10-30 (current season only).",
+  "machine_readable": true,
+  "sample_record": {
+   "ReportDate": "2026-10-25T18:30:00Z",
+   "Waterbody": "Lake Champlain",
+   "Municipality": "Burlington",
+   "SiteName": "US Coast Guard Boat Access Ramp",
+   "StatusWeb": "Low Alert",
+   "Latitude": 44.480131,
+   "Longitude": -73.222956,
+   "EditDate": "2026-10-26T12:22:16Z"
+  },
+  "fields": [
+   "OBJECTID",
+   "ReportDate",
+   "ReportFrequency",
+   "Waterbody",
+   "Municipality",
+   "SiteName",
+   "Site",
+   "Method",
+   "WaterSurface",
+   "H2OTemp",
+   "Details",
+   "WaterConditions",
+   "StatusWeb",
+   "Density",
+   "CyanoTaxa",
+   "OtherTaxa",
+   "Longitude",
+   "Latitude",
+   "PlanktonSamplingMethod",
+   "ReportID",
+   "SupplementalSiteName",
+   "AccessToSampleSite",
+   "TownSupplemental",
+   "ApproximateShoreLengthOfBloom",
+   "ApproximateOffShoreLengthBloom",
+   "RequestToBecomeAMonitor",
+   "Affiliation",
+   "Anatoxin",
+   "Microcystin",
+   "CYN_uGL",
+   "Saxitoxin",
+   "SampleSubmitted",
+   "WaterbodySupplemental",
+   "CreationDate",
+   "EditDate",
+   "GlobalID",
+   "DisplayField",
+   "DisplayFieldS",
+   "ModeratorComments"
+  ],
+  "fills_event_fields": [
+   "source_status",
+   "reported_at",
+   "source_updated_at (EditDate)",
+   "coordinates",
+   "waterbody",
+   "raw_record"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "As filed (weekly per site).",
+  "history": "Season only; earlier seasons via XLSX summaries.",
+  "license": "none stated",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "History within season; drop Affiliation/RequestToBecomeAMonitor/Details (volunteer free text).",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-doh-cyanobacteria-season-summaries",
+  "name": "VT Dept of Health cyanobacteria season summary spreadsheets 2012-2024",
+  "jurisdiction": "VT",
+  "operator": "Vermont Department of Health, Environmental Public Health Tracking",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "cyanobacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.healthvermont.gov/environment/tracking/cyanobacteria-blue-green-algae-tracker",
+  "access": [
+   "csv",
+   "html"
+  ],
+  "access_detail": "XLS/XLSX links e.g. /sites/default/files/document/env-epht-cyanobacteria-season-summary-2024.xlsx; 2012-2024 listed; no 2025 file listed (page last updated June 10, 2026).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": "2012-2024",
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Archive for backfill; not downloaded.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-doh-cyanobacteria-tracker-current",
+  "name": "VT Dept of Health Cyanobacteria Tracker - Current Approved Reports (ArcGIS view)",
+  "jurisdiction": "VT",
+  "operator": "Vermont Department of Health (with VT DEC and Lake Champlain Committee)",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "cyanobacteria"
+  ],
+  "waters_covered": "Lake Champlain and monitored inland lakes (VT and some NY shore sites)",
+  "water_slugs": [
+   "lake-champlain-vt",
+   "lac-memphremagog-vt",
+   "lake-carmi-vt",
+   "seymour-lake-vt"
+  ],
+  "url": "https://services.arcgis.com/YKJ5JtnaPQ2jDbX8/arcgis/rest/services/Cyanobacteria_Current_Approved_Reports_View/FeatureServer/0",
+  "access": [
+   "arcgis",
+   "map_only"
+  ],
+  "access_detail": "Public FeatureServer (org YKJ5JtnaPQ2jDbX8, owner AHS_Production) behind Experience 194da900279747efa8cee01b57fb23e6 embedded on healthvermont.gov. 126 features (latest report per site) on 2026-11-01; dataLastEditDate 2026-10-31.",
+  "machine_readable": true,
+  "sample_record": {
+   "ReportDate": "2026-10-30T19:54:00Z",
+   "Waterbody": "Lake Champlain",
+   "Municipality": "Charlotte",
+   "SiteName": "Converse Bay",
+   "StatusWeb": "Generally Safe",
+   "x": -73.2897,
+   "y": 44.2938
+  },
+  "fields": [
+   "OBJECTID",
+   "ReportDate",
+   "Waterbody",
+   "Municipality",
+   "SiteName",
+   "StatusWeb",
+   "GlobalID"
+  ],
+  "fills_event_fields": [
+   "source_record_id (GlobalID)",
+   "event_type (cyanobacteria)",
+   "source_status (StatusWeb: Generally Safe / Low Alert / High Alert)",
+   "reported_at (ReportDate)",
+   "waterbody",
+   "location_text",
+   "coordinates (site point)",
+   "authority"
+  ],
+  "cannot_fill": [
+   "ended_at",
+   "valid_until",
+   "volume",
+   "advice_text (on page, not in data)"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "Weekly site observations early June to early October; reports reviewed before posting. Page: 'Test site observations and samples are collected once each week. Conditions can and do change.'",
+  "history": "Current view only; see all-reports view and season summaries.",
+  "license": "Item licenseInfo and accessInformation null; tracker page states no terms.",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Clean, public, machine-readable HAB status per site.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-doh-healthy-recreational-waters-faq",
+  "name": "VT Dept of Health 'Healthy Recreational Waters' FAQ (PDF)",
+  "jurisdiction": "VT",
+  "operator": "Vermont Department of Health",
+  "operator_type": "state",
+  "role": "science",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.healthvermont.gov/sites/default/files/documents/pdf/Env_RW_healthy_recreational_waters_faq.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "advice_text"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Vermont's own rain/E. coli advice wording.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Quotes: 'Stay out of the water 48 hours following a significant rain event.' Rain sign 'posted during or right after a heavy rainfall event of more than ½ inch over a 24-hour period ... remain posted for at least 24 hours ... or E. coli sample results are less than 235 cfu ... per 100 mL'; closure sign when 'greater than 235 cfu per 100 mL'.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-doh-swimming-water-safety-page",
+  "name": "VT Dept of Health Swimming & Water Safety page",
+  "jurisdiction": "VT",
+  "operator": "Vermont Department of Health",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.healthvermont.gov/environment/swimming-water-safety",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Points to State Parks beach look-up and tracker; says town swim-area testing is a town health officer matter (no statewide beach E. coli feed).",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "'Questions about the water quality of your town's public swimming area? Ask your town health officer about local swim water testing and results.' Last Updated: August 27, 2026.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-epa-echo-cwa",
+  "name": "EPA ECHO CWA facility search (VT)",
+  "jurisdiction": "VT",
+  "operator": "US EPA (federal)",
+  "operator_type": "federal",
+  "role": "permits",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "statewide",
+  "water_slugs": [],
+  "url": "https://echodata.epa.gov/echo/cwa_rest_services.get_facilities?output=JSON&p_st=VT&p_ptype=NPD&qcolumns=1,2,4,5,48,158,159",
+  "access": [
+   "api"
+  ],
+  "access_detail": "Then get_qid for rows. Columns 158/159 are CWPCsoFlag/CWPCsoOutfalls.",
+  "machine_readable": true,
+  "sample_record": {
+   "SourceID": "VT0100871",
+   "CWPName": "RUTLAND",
+   "CWPCsoFlag": "Y",
+   "CWPCsoOutfalls": "8"
+  },
+  "fields": [
+   "SourceID",
+   "CWPName",
+   "CWPCsoFlag",
+   "CWPCsoOutfalls"
+  ],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "events"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "",
+  "history": "",
+  "license": "public domain",
+  "legal_basis": "CWA",
+  "status": "used",
+  "status_reason": "NPDES IDs only; CSO flags stale",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "CSO flags stale (ECHO still flags Barton, Swanton, Hardwick, Randolph, Richford).",
+  "state": "VT"
+ },
+ {
+  "id": "vt-fpr-state-parks-swim-water-status",
+  "name": "Vermont State Parks swim water results (Current Status of Vermont State Parks Recreational Water)",
+  "jurisdiction": "VT",
+  "operator": "VT Department of Forests, Parks and Recreation",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "bacteria",
+   "cyanobacteria"
+  ],
+  "waters_covered": "~40 state park beaches (Lake Champlain, Carmi, Bomoseen, Dunmore, St. Catherine, Waterbury Res., etc.)",
+  "water_slugs": [
+   "lake-champlain-vt",
+   "lake-carmi-vt",
+   "lake-bomoseen-vt",
+   "lake-dunmore-vt",
+   "lake-saint-catherine-vt",
+   "waterbury-reservoir-vt",
+   "lake-elmore-vt",
+   "crystal-lake-vt",
+   "lake-groton-vt",
+   "maidstone-lake-vt",
+   "adams-reservoir-vt",
+   "lake-shaftsbury-vt",
+   "silver-lake-vt"
+  ],
+  "url": "https://anrweb.vt.gov/FPR/SwimWater/PublicReport.aspx",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "URL returns a generated PDF (not HTML). Columns: Region, Park, Water Body, Status, Note. Legend: OPEN 'The area meets criteria suitable for swimming.' ALERT 'category 2 Blue Green Algae Bloom.' CLOSED 'exceeded the criteria making it unsuitable for swimming.' Saved raw/vt-fpr-swimwater-public.pdf.",
+  "machine_readable": false,
+  "sample_record": {
+   "Region": "Northwest",
+   "Park": "Sand Bar Beach (Center)",
+   "Water Body": "Lake Champlain",
+   "Status": "Open",
+   "Note": ""
+  },
+  "fields": [
+   "Region",
+   "Park",
+   "Water Body",
+   "Status",
+   "Note"
+  ],
+  "fills_event_fields": [
+   "source_status",
+   "waterbody",
+   "location_text",
+   "authority"
+  ],
+  "cannot_fill": [
+   "reported_at (no sample date in PDF)",
+   "coordinates",
+   "valid_until"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "'We test water weekly at all Vermont State Park swimming areas during the operating season'; testing 'ends no later than September 30'. On 2026-11-01 every site read Open (stale, off-season).",
+  "history": null,
+  "license": "none stated",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Only state-run E. coli beach status in VT; PDF parse needed; no dates in output.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-friends-of-winooski",
+  "name": "Friends of the Winooski River E. coli monitoring",
+  "jurisdiction": "VT",
+  "operator": "Friends of the Winooski River",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "winooski-river-vt"
+  ],
+  "url": "https://www.winooskiriver.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "403 to curl.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-front-porch-forum-burlington",
+  "name": "Front Porch Forum (Burlington DPW posts)",
+  "jurisdiction": "VT",
+  "operator": "Front Porch Forum (company); posts by City of Burlington",
+  "operator_type": "municipal",
+  "role": "social",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Burlington",
+  "water_slugs": [],
+  "url": "https://frontporchforum.com",
+  "access": [
+   "email"
+  ],
+  "access_detail": "Membership required. Not accessed.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "all"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "",
+  "history": "",
+  "license": null,
+  "legal_basis": "",
+  "status": "rejected",
+  "status_reason": "Account required",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Named in Burlington's 2021 and 2025 CSO reports",
+  "state": "VT"
+ },
+ {
+  "id": "vt-hartford-2025-cso-report",
+  "name": "Hartford WRJ 2025 CSO Annual Report",
+  "jurisdiction": "VT",
+  "operator": "Town of Hartford",
+  "operator_type": "municipal",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Connecticut River",
+  "water_slugs": [
+   "connecticut-river-vt"
+  ],
+  "url": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1225/3-1225.2025CSOAnnualReport.20260824.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Table 1 gives lat/long for 5 outfalls",
+  "machine_readable": false,
+  "sample_record": {
+   "name": "Wilder PS",
+   "CSO": "004",
+   "S/N": "003",
+   "lat": 43.6708,
+   "lon": -72.3072
+  },
+  "fields": [
+   "name",
+   "CSO #",
+   "S/N",
+   "lat",
+   "lon"
+  ],
+  "fills_event_fields": [
+   "coordinates"
+  ],
+  "cannot_fill": [
+   "events (none in 2025)"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "annual",
+  "history": "2013+",
+  "license": null,
+  "legal_basis": "1272 Order 2022",
+  "status": "used",
+  "status_reason": "",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-hartford-alertcenter",
+  "name": "Hartford CivicPlus Alert Center, DPW category",
+  "jurisdiction": "VT",
+  "operator": "Town of Hartford",
+  "operator_type": "municipal",
+  "role": "advisories",
+  "event_types": [
+   "bypass",
+   "cso"
+  ],
+  "waters_covered": "Hartford",
+  "water_slugs": [
+   "connecticut-river-vt"
+  ],
+  "url": "https://www.hartfordvt.gov/RSSFeed.aspx?ModID=63&CID=Department-of-Public-Works-11",
+  "access": [
+   "rss",
+   "html"
+  ],
+  "access_detail": "Currently only boil-water and office notices",
+  "machine_readable": true,
+  "sample_record": {
+   "title": "Boil Water Advisory for Pleasant View Terrace",
+   "pubDate": "Fri, 30 Oct 2026"
+  },
+  "fields": [
+   "title",
+   "pubDate",
+   "link"
+  ],
+  "fills_event_fields": [
+   "published_at"
+  ],
+  "cannot_fill": [
+   "volume"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "ad hoc",
+  "history": "live only",
+  "license": null,
+  "legal_basis": "",
+  "status": "watch",
+  "status_reason": "No wastewater posts seen",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-lake-bomoseen-association",
+  "name": "Lake Bomoseen Association",
+  "jurisdiction": "VT",
+  "operator": "Lake Bomoseen Association",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "lake-bomoseen-vt"
+  ],
+  "url": "https://lakebomoseen.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Reachable (200); content not reviewed. Cyanobacteria at Bomoseen also reported through the VT Health tracker and State Parks status.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Not reviewed.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-law-10-vsa-1295",
+  "name": "10 V.S.A. § 1295 Notification of sewage and wastewater discharges",
+  "jurisdiction": "VT",
+  "operator": "Vermont General Assembly",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "cso",
+   "sso",
+   "bypass",
+   "partially_treated"
+  ],
+  "waters_covered": "waters of the State",
+  "water_slugs": [],
+  "url": "https://legislature.vermont.gov/statutes/section/10/047/01295",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Vermont Statutes Online (unofficial copy; page says it includes 2026 session actions). Saved raw/vt-10vsa1295.html.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "10 V.S.A. § 1295 (Added 2015, No. 86 (Adj. Sess.), § 1, eff. May 4, 2016). History note lists no later amendment.",
+  "status": "used",
+  "status_reason": "Legal basis for VT deadlines (1 h public alert; 12 h agency notice; 3 business days to amend; 4 h Secretary posting; 48 h signs).",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-law-act-86-2016-h674",
+  "name": "Act 86 of 2016 (H.674) An act relating to public notice of wastewater discharges",
+  "jurisdiction": "VT",
+  "operator": "Vermont General Assembly",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://legislature.vermont.gov/bill/status/2016/H.674",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "Bill page and as-passed PDFs found by search; not opened. Enacted text is codified as 10 V.S.A. § 1295 (fetched).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "2015 Acts and Resolves No. 86 (Adj. Sess.)",
+  "status": "used",
+  "status_reason": "Origin of § 1295; drafts show the section was briefly numbered § 1285.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-lcbp-data",
+  "name": "Lake Champlain Basin Program data portal / State of the Lake",
+  "jurisdiction": "VT",
+  "operator": "Lake Champlain Basin Program",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "url": "https://www.lcbp.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "403 to curl (sibling project also saw 403); State of the Lake is periodic context.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-lcc-cyanobacteria-monitoring",
+  "name": "Lake Champlain Committee cyanobacteria monitoring network and weekly community reports",
+  "jurisdiction": "VT",
+  "operator": "Lake Champlain Committee",
+  "operator_type": "nonprofit",
+  "role": "advisories",
+  "event_types": [
+   "cyanobacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "url": "https://www.lakechamplaincommittee.org/lcc-at-work/cyanobacteria-in-lake",
+  "access": [
+   "html",
+   "email"
+  ],
+  "access_detail": "Homepage read: weekly 'Cyano. Monitoring Report' Mailchimp posts (e.g. Week 18, 10/11-10/17/2026, posted 10/21/26). Volunteer reports feed the VT Health Cyanobacteria Tracker (per Health page: 'a data collaboration project of the Departments of Health and Environmental Conservation and the Lake Champlain Committee').",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Weekly narrative, June-October.",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Data already reachable through the Health tracker layers; weekly narrative useful for context.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-legislature-2024-cso-testimony",
+  "name": "DEC testimony on CSO grants (Senate Natural Resources, 2024-04-24, Kamman) and 2018 DEC CSO progress report",
+  "jurisdiction": "VT",
+  "operator": "VT DEC",
+  "operator_type": "state",
+  "role": "permits",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://legislature.vermont.gov/Documents/2024/WorkGroups/Senate%20Natural%20Resources/Bills/H.687/Witness%20Testimony/W~Neil%20Kamman~Combined%20Stormwater~4-24-2024.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "PDF text not readable by WebFetch; figures from search snippets: 14 facilities with CSOs (27 in 1990), 49 discharge points (178 in 1990); ARPA grants 'to each of the remaining 11 communities with active combined sewer overflow points'.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Only statewide count found; no current DEC CSO community list page exists.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-memphremagog-watershed-association",
+  "name": "Memphremagog Watershed Association",
+  "jurisdiction": "VT",
+  "operator": "Memphremagog Watershed Association",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "lac-memphremagog-vt"
+  ],
+  "url": "https://www.memphremagog.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Reachable (200); content not reviewed.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Possible lake monitoring; not reviewed.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-middlebury-sso-docs",
+  "name": "Middlebury SSO annual reports and 1272 Order",
+  "jurisdiction": "VT",
+  "operator": "Town of Middlebury",
+  "operator_type": "municipal",
+  "role": "outfalls",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "Otter Creek",
+  "water_slugs": [
+   "otter-creek-vt"
+  ],
+  "url": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1210/3-1210.SSO.1272Order.20241112.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "2024 report 3-1210.2024SSOAnnualReport.20250131.pdf",
+  "machine_readable": false,
+  "sample_record": {
+   "outfall": "S/N 002 CSO 001 PS9",
+   "date": "7/11/2024",
+   "hours": 2.5,
+   "volume_gal": 7200
+  },
+  "fields": [],
+  "fills_event_fields": [
+   "history"
+  ],
+  "cannot_fill": [
+   "coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "annual",
+  "history": "2018+",
+  "license": null,
+  "legal_basis": "EPA consent order 2016; 1272 Order 2024",
+  "status": "used",
+  "status_reason": "",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "TextMyGov: https://www.middleburyvt.gov/services/textmygov.php (generic town alerts; watch)",
+  "state": "VT"
+ },
+ {
+  "id": "vt-montpelier-notifications",
+  "name": "Montpelier Get Notifications page",
+  "jurisdiction": "VT",
+  "operator": "City of Montpelier",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Winooski, North Branch",
+  "water_slugs": [
+   "winooski-river-vt"
+  ],
+  "url": "https://www.montpelier-vt.org/1499/Get-Notifications-Emergency-Alerts",
+  "access": [
+   "html",
+   "email"
+  ],
+  "access_detail": "Links the state CSO page as 'Statewide Combined Sewer Overflow Notifications'. Notify Me at /list.aspx; VT-Alert.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "all"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "",
+  "history": "",
+  "license": null,
+  "legal_basis": "",
+  "status": "rejected",
+  "status_reason": "Defers to the state system",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Outfall table: https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1207/3-1207.2024.CSOAnnualReport.20250131.pdf; new order 3-1207.CSO.1272Order.20260813.pdf",
+  "state": "VT"
+ },
+ {
+  "id": "vt-newport-2025-cso-report",
+  "name": "Newport 2025 CSO Annual Report",
+  "jurisdiction": "VT",
+  "operator": "City of Newport",
+  "operator_type": "municipal",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Lake Memphremagog, Clyde River",
+  "water_slugs": [
+   "lac-memphremagog-vt",
+   "clyde-river-vt"
+  ],
+  "url": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1241/3-1241.2025CSOAnnualReport.20260626.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Table 1 gives lat/long for 6 outfalls",
+  "machine_readable": false,
+  "sample_record": {
+   "S/N": "006",
+   "name": "Western Avenue",
+   "lat": 44.936682,
+   "lon": -72.202376,
+   "status": "Open"
+  },
+  "fields": [
+   "name",
+   "S/N",
+   "lat",
+   "lon",
+   "status"
+  ],
+  "fills_event_fields": [
+   "coordinates",
+   "location_text"
+  ],
+  "cannot_fill": [
+   "events (none in 2025)"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "annual",
+  "history": "2019+",
+  "license": null,
+  "legal_basis": "1272 Order 2022",
+  "status": "used",
+  "status_reason": "Outfall coordinates",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "newportvermont.org: no overflow channel",
+  "state": "VT"
+ },
+ {
+  "id": "vt-news-sevendays-why-public-hears-late",
+  "name": "Seven Days 'WTF: Why does the public hear about sewage spills days after they occur?'",
+  "jurisdiction": "VT",
+  "operator": "Seven Days",
+  "operator_type": "commercial",
+  "role": "news",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.sevendaysvt.com/arts-culture/wtf-why-does-the-public-hear-about-sewage-spills-days-after-they-occur-2738404/",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Background on latency complaints; VT-Alert not used.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-news-wcax-burlington-2026-07",
+  "name": "WCAX: 'Heavy rain creates wastewater plant issue closing Burlington beaches' (2026-07-29)",
+  "jurisdiction": "VT",
+  "operator": "WCAX",
+  "operator_type": "commercial",
+  "role": "news",
+  "event_types": [
+   "partially_treated"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "url": "https://www.wcax.com/2026/07/30/heavy-rain-creates-wastewater-plant-issue-closing-burlington-beaches/",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "News cross-check for event vt-2026-07-28-burlington-main.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Closed: Blanchard Beach, Oakledge Cove, Blodgett Access Area, Coast Guard ramp, Perkins Pier; closed until 5:30 p.m. Thursday.",
+  "state": "VT"
+ },
+ {
+  "id": "vt-open-geodata-policy",
+  "name": "Vermont Open Geodata Policy v1.1 (2025-12-10)",
+  "jurisdiction": "VT",
+  "operator": "VCGI / State of Vermont",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://files.vcgi.vermont.gov/other/policies/vermont-open-geodata-policy.html",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": "\"Neither the State of Vermont nor the contributors of data, services, and products provided through the Vermont Open Geodata Portal shall be held liable for any improper or incorrect use of those data, services, and products and assume no responsibility for anyone's use of those data, services, and products.\" Open geodata defined as \"Public record data which is provided to the public through the internet at no cost, without requiring a data request form, and without requiring creation of a login.\"",
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Terms for ANR/VCGI GIS layers.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-rutland-2025-cso-report",
+  "name": "Rutland 2025 CSO Annual Report",
+  "jurisdiction": "VT",
+  "operator": "City of Rutland DPW",
+  "operator_type": "municipal",
+  "role": "permits",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Otter Creek, East Creek (Rutland)",
+  "water_slugs": [
+   "otter-creek-vt"
+  ],
+  "url": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1285/3-1285.2025CSOAnnualReport.20260130.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Also LTCP 3-1285.LTCP.20220726.pdf and 1272 Order 20230426",
+  "machine_readable": false,
+  "sample_record": {
+   "event": 18,
+   "date": "31-Oct-2025",
+   "start": "5:49 AM",
+   "stop": "1:40 PM",
+   "volume_gal": 2516255
+  },
+  "fields": [
+   "event",
+   "date",
+   "start",
+   "stop",
+   "duration",
+   "volume",
+   "rainfall"
+  ],
+  "fills_event_fields": [
+   "started_at",
+   "ended_at",
+   "volume",
+   "units",
+   "history"
+  ],
+  "cannot_fill": [
+   "coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "annual",
+  "history": "2021+",
+  "license": null,
+  "legal_basis": "1272 Order",
+  "status": "used",
+  "status_reason": "Confirms state-only notification",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-rutland-city-wwtf-page",
+  "name": "Rutland City WWTF and Wastewater Collection pages",
+  "jurisdiction": "VT",
+  "operator": "City of Rutland",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "",
+  "water_slugs": [],
+  "url": "https://www.rutlandcity.org/departments/department-of-public-works/divisions/wastewater-treatment-facility/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "WordPress; wp-json search for overflow/CSO finds nothing relevant",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "all"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "",
+  "history": "",
+  "license": null,
+  "legal_basis": "",
+  "status": "rejected",
+  "status_reason": "No CSO notices",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "VT"
+ },
+ {
+  "id": "vt-stalbans-cso-page",
+  "name": "St. Albans 'Addressing the Combined Sewer Overflow' and Houghton Park pages",
+  "jurisdiction": "VT",
+  "operator": "City of St. Albans",
+  "operator_type": "municipal",
+  "role": "permits",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Stevens Brook",
+  "water_slugs": [
+   "stevens-brook-vt"
+  ],
+  "url": "https://www.stalbansvt.com/cso",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "LTCP 2019 and addendum Oct 2024 (rev Apr 2025); https://www.stalbansvt.com/csohoughton",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "coverage_note"
+  ],
+  "cannot_fill": [
+   "events"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "",
+  "history": "",
+  "license": null,
+  "legal_basis": "",
+  "status": "candidate",
+  "status_reason": "Context only",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Annual report: https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1279/3-1279.2025CSOAnnualReport.20260325.pdf",
+  "state": "VT"
+ },
+ {
+  "id": "vt-stjohnsbury-2025-cso-report",
+  "name": "St. Johnsbury 2025 CSO Annual Report",
+  "jurisdiction": "VT",
+  "operator": "Town of St. Johnsbury",
+  "operator_type": "municipal",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Passumpsic, Sleepers",
+  "water_slugs": [
+   "passumpsic-river-vt"
+  ],
+  "url": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1290/3-1290.2025CSOAnnualReport.20260306.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Per-structure appendix with photos",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "history"
+  ],
+  "cannot_fill": [
+   "coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "annual",
+  "history": "2013+",
+  "license": null,
+  "legal_basis": "1272 Order 2022",
+  "status": "used",
+  "status_reason": "",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Town site stjvt.com has no CSO content (rejected)",
+  "state": "VT"
+ },
+ {
+  "id": "vt-vergennes-sewer-page",
+  "name": "Vergennes Sewer & Wastewater page (SSO annual reports)",
+  "jurisdiction": "VT",
+  "operator": "City of Vergennes",
+  "operator_type": "municipal",
+  "role": "permits",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "Potash Brook, Otter Creek",
+  "water_slugs": [
+   "otter-creek-vt"
+  ],
+  "url": "https://www.vergennes.org/departments/sewer___wastewater_treatment.php",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "Report at https://www.vergennes.org/SSO%20Annual%20Report_2025.pdf. LTCP and 1272 order on Dropbox links.",
+  "machine_readable": false,
+  "sample_record": {
+   "event": 8,
+   "date": "12/19/2025",
+   "start": "12:30 PM",
+   "stop": "9:00 PM",
+   "volume_gal": 373100
+  },
+  "fields": [
+   "date",
+   "start",
+   "stop",
+   "duration",
+   "volume"
+  ],
+  "fills_event_fields": [
+   "started_at",
+   "ended_at",
+   "volume",
+   "history"
+  ],
+  "cannot_fill": [
+   "coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "annual",
+  "history": "2022+",
+  "license": null,
+  "legal_basis": "1272 Order 3-0368",
+  "status": "used",
+  "status_reason": "",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Everbridge sign-up (https://member.everbridge.net/84492207259741/new) is for parking bans and emergencies, not overflows",
+  "state": "VT"
+ },
+ {
+  "id": "vt-white-river-partnership",
+  "name": "White River Partnership / White River NRCD swim-site E. coli",
+  "jurisdiction": "VT",
+  "operator": "White River Partnership",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.whiteriverpartnership.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "Connection failed; White River NRCD sites appear in CRC 'Is It Clean?'. White River has no slug.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "VT"
+ },
+ {
+  "id": "nh-berlin-permit-nh0100013-2024",
+  "name": "NPDES NH0100013 2024 Final Permit",
+  "jurisdiction": "NH",
+  "operator": "US EPA Region 1",
+  "operator_type": "federal",
+  "role": "permits",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "Androscoggin River",
+  "water_slugs": [
+   "androscoggin-river-nh"
+  ],
+  "url": "https://www.epa.gov/system/files/documents/2025-06/finalnh0100013permit-2024.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "coordinates"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "5-year",
+  "history": "",
+  "license": null,
+  "legal_basis": "CWA 402",
+  "status": "used",
+  "status_reason": "",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-berlin-wastewater-event-alert",
+  "name": "Berlin Notify Me 'Wastewater Event Alert'",
+  "jurisdiction": "NH",
+  "operator": "City of Berlin",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Androscoggin River",
+  "water_slugs": [
+   "androscoggin-river-nh"
+  ],
+  "url": "https://www.berlinnh.gov/list.aspx",
+  "access": [
+   "email"
+  ],
+  "access_detail": "CivicPlus News Flash mid 239; no public RSS or posts; All-newsflash RSS https://www.berlinnh.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml contained no wastewater items",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "unknown",
+  "history": "none public",
+  "license": null,
+  "legal_basis": "NH0100013",
+  "status": "candidate",
+  "status_reason": "Requires subscribing",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-bills-2024-2026-sewage-notification",
+  "name": "NH legislation 2024-2026 on sewage/CSO public notification",
+  "jurisdiction": "NH",
+  "operator": "New Hampshire General Court",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://gc.nh.gov/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Three web searches found no NH bill; gc.nh.gov/bill_status/ answered 403 to both curl and the browser; LegiScan 403.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "No NH notification bill found; NH has no statewide public-notice statute for CSOs (MA's 2021 law does not reach Nashua/Manchester).",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-echo-effluent-api",
+  "name": "EPA ECHO effluent chart API (NH CSO outfalls)",
+  "jurisdiction": "NH",
+  "operator": "US EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Manchester and Nashua outfalls",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "nashua-river-nh"
+  ],
+  "url": "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?p_id=NH0100170&output=JSON",
+  "access": [
+   "api"
+  ],
+  "access_detail": "Nashua and Manchester CSO outfalls show only E. coli parameters; permits still show as 'Admin Continued'",
+  "machine_readable": true,
+  "sample_record": {},
+  "fields": [
+   "PermFeatureNmbr",
+   "ParameterCode",
+   "DMRValueStandardUnits",
+   "MonitoringPeriodEndDate"
+  ],
+  "fills_event_fields": [
+   "volume (future)"
+  ],
+  "cannot_fill": [
+   "started_at",
+   "ended_at"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "monthly DMR",
+  "history": "",
+  "license": null,
+  "legal_basis": "40 CFR 127",
+  "status": "watch",
+  "status_reason": "No CSO volume parameters yet; new permits require monthly CSO DMRs",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-epa-lebanon-cso-elimination",
+  "name": "EPA release: Lebanon eliminates CSO outfalls",
+  "jurisdiction": "NH",
+  "operator": "US EPA",
+  "operator_type": "federal",
+  "role": "law",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Connecticut and Mascoma rivers",
+  "water_slugs": [
+   "connecticut-river-nh",
+   "mascoma-river-nh"
+  ],
+  "url": "https://www.epa.gov/newsreleases/city-lebanon-meets-epa-consent-decree-requirements-eliminating-cso-outfalls",
+  "access": [
+   "html"
+  ],
+  "access_detail": "",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "",
+  "history": "",
+  "license": null,
+  "legal_basis": "",
+  "status": "used",
+  "status_reason": "Status evidence",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "The NHDES blog copy returned 403",
+  "state": "NH"
+ },
+ {
+  "id": "nh-epa-manchester-uncontested-notice-2026",
+  "name": "EPA Notice of Uncontested and Severable Permit Conditions, NPDES Appeal 25-05",
+  "jurisdiction": "NH",
+  "operator": "US EPA Region 1",
+  "operator_type": "federal",
+  "role": "law",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Manchester",
+  "water_slugs": [
+   "merrimack-river-nh"
+  ],
+  "url": "https://www.epa.gov/system/files/documents/2026-09/epa-notice-of-uncontested-and-severable-permit-conditions-npdes-25-05-09-25-2026.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "3 pages",
+  "machine_readable": false,
+  "sample_record": {
+   "quote": "all conditions of the permit are now uncontested and severable and accordingly will become fully effective and enforceable on November 1, 2026"
+  },
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "one-off",
+  "history": "",
+  "license": null,
+  "legal_basis": "40 CFR 124.16, 124.60",
+  "status": "used",
+  "status_reason": "Sets the effective date of the 2-hour rule",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Contested item 3 had been 'Part I.H.3(g)(2) requiring the initial notification of a probable CSO activation within two (2) hours.'",
+  "state": "NH"
+ },
+ {
+  "id": "nh-epa-nh-medium-wwtf-gp",
+  "name": "EPA NH Medium WWTF General Permit NHG590000",
+  "jurisdiction": "NH",
+  "operator": "US EPA Region 1",
+  "operator_type": "federal",
+  "role": "law",
+  "event_types": [
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": "21 POTWs",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "connecticut-river-nh",
+   "sugar-river-nh",
+   "piscataqua-river-nh",
+   "salmon-falls-river-nh",
+   "souhegan-river-nh",
+   "contoocook-river-nh"
+  ],
+  "url": "https://www.epa.gov/npdes-permits/region-1-final-new-hampshire-medium-wastewater-treatment-facility-general-permit",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "GP PDF https://www.epa.gov/system/files/documents/2025-11/nh_medium_wwtf_final_gp_nhg590000.pdf; facility list in Attachment E",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "",
+  "history": "",
+  "license": null,
+  "legal_basis": "40 CFR 122.28",
+  "status": "used",
+  "status_reason": "Basis for SSO web notices and for CSO-free status",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-epa-r1-permit-listing-json",
+  "name": "EPA Region 1 NH final and draft permit DataTable JSON",
+  "jurisdiction": "NH",
+  "operator": "US EPA Region 1",
+  "operator_type": "federal",
+  "role": "permits",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "Statewide",
+  "water_slugs": [],
+  "url": "https://www.epa.gov/system/files/other-files/2025-07/permit-listing-nh.json",
+  "access": [
+   "api"
+  ],
+  "access_detail": "Static JSON (169 final rows). Draft list: https://www.epa.gov/system/files/other-files/2024-04/draft-permit-listing-nh.json. Linked from https://www.epa.gov/npdes-permits/new-hampshire-final-individual-npdes-permits",
+  "machine_readable": true,
+  "sample_record": {
+   "City / Town (Receiving Water)": "Nashua (Merrimack River (Wastewater Treatment Facility [Outfall 001] and CSOs [Outfalls 002-005 and 014]); Nashua River (CSOs [Outfalls 006-009]))",
+   "Permit Number": "NH0100170",
+   "Date of Issuance": "11/03/2025"
+  },
+  "fields": [
+   "City / Town (Receiving Water)",
+   "Applicant / Facility Name (HTML with PDF links)",
+   "Permit Number",
+   "Date of Issuance"
+  ],
+  "fills_event_fields": [
+   "coverage_note"
+  ],
+  "cannot_fill": [
+   "events"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "irregular (page updated 2026-07-10)",
+  "history": "2000 onward",
+  "license": null,
+  "legal_basis": "",
+  "status": "used",
+  "status_reason": "Permit change watch",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-exeter-cso-sso-page",
+  "name": "Exeter Combined Sewer & Sanitary Sewer Overflows page",
+  "jurisdiction": "NH",
+  "operator": "Town of Exeter DPW",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso",
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": "Clemson Pond, Squamscott River, Little River",
+  "water_slugs": [
+   "squamscott-river-nh"
+  ],
+  "url": "https://www.exeternh.gov/publicworks/combined-sewer-sanitary-sewer-overflows",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Drupal page with three lists: bypass prose, CSO table, SSO table",
+  "machine_readable": false,
+  "sample_record": {
+   "date": "2023-12-12",
+   "total_gallons": "14,072",
+   "description": "CSO discharges from the Spring St and Water St CSO structures: Spring Street CSO of 968 gallons, Water Street CSO of 13,104 gallons occurred at approximately 10:50 pm and ended at 11:05 pm due to a power outage"
+  },
+  "fields": [
+   "date",
+   "total_gallons",
+   "description"
+  ],
+  "fills_event_fields": [
+   "started_at",
+   "ended_at (sometimes)",
+   "volume",
+   "units",
+   "location_text",
+   "event_type",
+   "raw_record"
+  ],
+  "cannot_fill": [
+   "coordinates",
+   "published_at"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "ad hoc",
+  "history": "2016 to 2026-09",
+  "license": null,
+  "legal_basis": "NH0100871 Parts I.B.2 and I.H.3.g",
+  "status": "used",
+  "status_reason": "",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-exeter-permit-nh0100871-2022",
+  "name": "NPDES NH0100871 2022 Final Permit",
+  "jurisdiction": "NH",
+  "operator": "US EPA Region 1",
+  "operator_type": "federal",
+  "role": "permits",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "Squamscott River, Clemson Pond",
+  "water_slugs": [
+   "squamscott-river-nh"
+  ],
+  "url": "https://www.epa.gov/system/files/documents/2025-06/finalnh0100871permit-2022.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "waterbody"
+  ],
+  "cannot_fill": [
+   "CSO 003 coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "5-year",
+  "history": "",
+  "license": null,
+  "legal_basis": "CWA 402",
+  "status": "used",
+  "status_reason": "",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-granit-npdes-layer",
+  "name": "NH GRANIT 'National Pollutant Discharge Elimination System (NPDES)' (EC_OpenData_MiscVectorData FeatureServer/5) and other GRANIT services",
+  "jurisdiction": "NH",
+  "operator": "NH GRANIT (UNH)",
+  "operator_type": "academic",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://nhgeodata.unh.edu/hosting/rest/services/Hosted/EC_OpenData_MiscVectorData/FeatureServer/5",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "DNS: 'Could not resolve host: nhgeodata.unh.edu' (curl) and getaddrinfo ENOTFOUND (WebFetch); granit.unh.edu also failed. No separate GRANIT CSO layer was found in ArcGIS Online search.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": "Public record (NH GRANIT) per sibling project checklist",
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "DNS failure from this machine; likely duplicates the NHDES NPDES Outfalls layer.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-great-bay-nerr",
+  "name": "Great Bay National Estuarine Research Reserve / Great Bay groups",
+  "jurisdiction": "NH",
+  "operator": "NH Fish and Game / NOAA",
+  "operator_type": "state",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "great-bay-nh"
+  ],
+  "url": "https://www.greatbay.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "Connection failed (curl 000). NERRS SWMP data (cdmo.baruch.sc.edu) is the likely data route; not checked.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH"
+ },
+ {
+  "id": "nh-lake-winnipesaukee-association",
+  "name": "Lake Winnipesaukee Alliance / Association water quality",
+  "jurisdiction": "NH",
+  "operator": "Lake Winnipesaukee Alliance",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "lake-winnipesaukee-nh"
+  ],
+  "url": "https://winnipesaukee.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "Connection failed (curl 000). Beach bacteria for Winnipesaukee are in the NHDES mapper anyway.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH"
+ },
+ {
+  "id": "nh-law-rsa-485a-13-bypass-notice",
+  "name": "RSA 485-A:13, I(c) - notice of bypass or upset to downstream water systems",
+  "jurisdiction": "NH",
+  "operator": "New Hampshire General Court",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "bypass",
+   "upset"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://gc.nh.gov/rsa/html/L/485-A/485-A-mrg.htm",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Merged chapter page fetched (raw/nh-rsa-485A.html).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "RSA 485-A:13, I(c): \"Any person responsible for a bypass or upset at a wastewater facility shall give immediate notice of the bypass or upset to all public or privately owned water systems drawing water from the same receiving water and located within 20 miles downstream of the point of discharge. The permittee shall maintain a list of persons, and their telephone numbers, who are to be notified immediately by telephone. In addition, written notification, which shall be postmarked within 3 days of the bypass or upset, shall be sent to such persons.\" Source note for 485-A:13: 1989, 339:1. 1990, 248:3. 1996, 228:108.",
+  "status": "used",
+  "status_reason": "Only NH statute requiring notice of a sewage release; it runs to downstream water systems, not the public, and does not cover CSOs as such.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "RSA 485-A:2 defines \"Bypass\" as \"the intentional diversion of waste streams from any portion of the wastewater facilities.\"",
+  "state": "NH"
+ },
+ {
+  "id": "nh-law-rsa-485a-8-cso-partial-use",
+  "name": "RSA 485-A:8, II-III - CSO temporary partial use areas; criteria apply during CSO and up to 3 days after",
+  "jurisdiction": "NH",
+  "operator": "New Hampshire General Court",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://gc.nh.gov/rsa/html/L/485-A/485-A-mrg.htm",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "RSA 485-A:8, II: class B waters \"shall be considered as being acceptable for fishing, swimming and other recreational purposes ... Where it is demonstrated ... that the class B criteria cannot reasonably be met in certain surface waters at all times as a result of combined sewer overflow events, temporary partial use areas shall be established by rules ...\" III: partial-use criteria \"shall apply during combined sewer overflow discharges and up to 3 days following cessation of said discharge.\"",
+  "status": "used",
+  "status_reason": "Gives NH's statutory 3-day post-CSO window (useful context, not a public-notice rule).",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-manchester-cso-consent-decree-2019",
+  "name": "United States and State of New Hampshire v. City of Manchester, Consent Decree (Civ. No. 20-cv-762-SM, entered 2020; signature draft dated 11-26-19), paragraph 19 public notification",
+  "jurisdiction": "NH",
+  "operator": "US DOJ / EPA / NHDES / City of Manchester",
+  "operator_type": "federal",
+  "role": "law",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "merrimack-river-nh",
+   "piscataquog-river-nh"
+  ],
+  "url": "https://justice.gov/enrd/consent-decree/file/1293746/download",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "5.3 MB PDF retrieved by WebFetch; its text layer could not be decoded (font encoding). Paragraph 19(a) as quoted by the City in its comments on the 2025 permit (Response to Comments, Comment 7, via the NH permittee sub-agent): notify the public \"no later than, four (4) hours after the City has become aware, by monitoring, modeling or other means, that a CSO discharge has occurred\". A search snippet also mentions a 24-hour notice and an annual notification by March 15, and electronic notice 'such as posting to the City's publicly available website and reasonable efforts to provide other, direct notification'. Appendix E is a 'List of Public Access Locations' (signage).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "Consent decree paragraph 19 (court order under the Clean Water Act)",
+  "status": "used",
+  "status_reason": "Legal basis for Manchester's existing activation notices (4-hour initial notice) until the 2-hour permit plan is implemented (~2027-11-01, inferred).",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-manchester-cso-email",
+  "name": "Manchester 'CSO Discharge Notification' email newsletter",
+  "jurisdiction": "NH",
+  "operator": "City of Manchester",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Manchester CSOs",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "piscataquog-river-nh"
+  ],
+  "url": "https://www.manchesternh.gov/Residents/e-Services/Email-Notifications",
+  "access": [
+   "email"
+  ],
+  "access_detail": "DNN opt-in form; checkbox 'CSO Discharge Notification'. Not subscribed.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "event_type",
+   "published_at"
+  ],
+  "cannot_fill": [
+   "coordinates",
+   "volume"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "per event (presumed same text as web posts)",
+  "history": "none",
+  "license": null,
+  "legal_basis": "Consent Decree paragraph 19",
+  "status": "candidate",
+  "status_reason": "Requires subscribing; MRWC says the email 'links to a map'",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-manchester-cso-map",
+  "name": "Manchester CSO Discharge Map (Flow Assessment Services)",
+  "jurisdiction": "NH",
+  "operator": "Flow Assessment Services, Inc. for City of Manchester",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "6 metered outfalls",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "piscataquog-river-nh"
+  ],
+  "url": "https://www.manchesternh.gov/csomap",
+  "access": [
+   "map_only",
+   "arcgis"
+  ],
+  "access_detail": "Iframe appservices.flowassessment.com/mapserver/cso_map.html?project=Manchester, built on ArcGIS JS 4.32. Web map item id and API key come from a vendor api-keys.csv, which I did not retrieve (blocked). ArcGIS Online items owned by 'Greentek': FeatureServer FlowAssessment_Manchester_NH_Online (046b1a4d247946ef9deec3c5dd7a17a9) and FlowAssessment_Manchester_Online (cacede3ba573458298569904d520deda) on services3.arcgis.com/K07962askBFjIyrM both return 499 'Token Required'. MapServer at gisserver.flowassessment.com:6443/arcgis/rest/services/FAS_CSOs fails because its TLS certificate has expired.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [
+   "outfall",
+   "activation time",
+   "termination time",
+   "volume (per city text)"
+  ],
+  "fills_event_fields": [
+   "started_at",
+   "ended_at",
+   "volume",
+   "units",
+   "coordinates",
+   "location_text"
+  ],
+  "cannot_fill": [
+   "advice_text"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "near real time (claimed)",
+  "history": "unknown",
+  "license": null,
+  "legal_basis": "Consent Decree Gantt item 18",
+  "status": "watch",
+  "status_reason": "Token-gated vendor service; needs permission",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-manchester-cso-notification-page",
+  "name": "Manchester CSO Discharge Notification page",
+  "jurisdiction": "NH",
+  "operator": "City of Manchester DPW EPD",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Merrimack and Piscataquog rivers in Manchester (implied)",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "piscataquog-river-nh"
+  ],
+  "url": "https://www.manchesternh.gov/Departments/Sewer-and-Stormwater/CSO/CSO-Discharge-Notification",
+  "access": [
+   "html"
+  ],
+  "access_detail": "DNN Reports module 10310 'Announcements'; each post is div id ItemNNNNN with h4 title and 'Published: MM/DD/YYYY h:mm AM'. No RSS found.",
+  "machine_readable": false,
+  "sample_record": {
+   "item_id": "Item14032",
+   "title": "City Of Manchester CSO Notification - Activation",
+   "published": "10/18/2026 8:23 AM",
+   "body": "Please be advised that the City of Manchester has experienced CSO activations due to heavy rain and corresponding high flows.",
+   "link": "https://www.manchesternh.gov/csomap"
+  },
+  "fields": [
+   "item_id",
+   "title",
+   "published",
+   "body",
+   "link"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "event_type",
+   "source_status",
+   "published_at",
+   "timezone",
+   "authority",
+   "source_url",
+   "raw_record",
+   "jurisdiction"
+  ],
+  "cannot_fill": [
+   "started_at",
+   "ended_at",
+   "location_text",
+   "coordinates",
+   "volume",
+   "units",
+   "estimate_flag",
+   "geometry",
+   "advice_text",
+   "valid_until"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "per event: an 'Activation' post, then a 'No Activations for 12 Hours' all-clear",
+  "history": "Only about the 10 latest posts are shown (09/29/2026 to 10/18/2026 on 2026-11-01); needs snapshotting",
+  "license": null,
+  "legal_basis": "2020 Consent Decree paragraph 19; NPDES NH0100447 Part I.H.3.g (effective 2026-11-01)",
+  "status": "used",
+  "status_reason": "Only public real-time Manchester signal",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Activation and all-clear were published at the same minute on 10/18/2026.",
+  "state": "NH"
+ },
+ {
+  "id": "nh-manchester-dpw-facebook",
+  "name": "Manchester Public Works Facebook",
+  "jurisdiction": "NH",
+  "operator": "City of Manchester DPW",
+  "operator_type": "municipal",
+  "role": "social",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Manchester",
+  "water_slugs": [
+   "merrimack-river-nh"
+  ],
+  "url": "https://www.facebook.com/CityofManchesterNHPublicWorks",
+  "access": [
+   "social"
+  ],
+  "access_detail": "Linked from https://www.manchesternh.gov/Residents/e-Services/Alert-Notifications; Instagram manchester_nh_publicworks",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "unknown",
+  "history": "",
+  "license": null,
+  "legal_basis": "",
+  "status": "watch",
+  "status_reason": "CSO posting not verified",
+  "verified": "inferred",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-manchester-health-recreational-water",
+  "name": "Manchester Health Department recreational water quality page",
+  "jurisdiction": "NH",
+  "operator": "City of Manchester Health Department",
+  "operator_type": "municipal",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "merrimack-river-nh"
+  ],
+  "url": "https://www.manchesternh.gov/Departments/Health/Environmental-Health/Recreational-Water-Quality",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Reachable (200); WebFetch read only menus. A search snippet says the city samples weekly and may close a swim area if results exceed an average of 158 E. coli/100 mL, with July 2026 results listed.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Possible city swim-site results; content not confirmed.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH"
+ },
+ {
+  "id": "nh-manchester-permit-nh0100447-2025",
+  "name": "NPDES NH0100447 2025 Final Permit (with 2024 Fact Sheet and Response to Comments)",
+  "jurisdiction": "NH",
+  "operator": "US EPA Region 1",
+  "operator_type": "federal",
+  "role": "permits",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "Merrimack, Piscataquog, Baker Brook, Rays Brook, Unnamed Brook",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "piscataquog-river-nh"
+  ],
+  "url": "https://www.epa.gov/system/files/documents/2025-11/finalnh0100447permit-2025.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "7.4 MB text PDF; outfall table in Attachment F and 2024 Fact Sheet Table 4",
+  "machine_readable": false,
+  "sample_record": {
+   "outfall": "011",
+   "name": "Schiller Street",
+   "receiving": "Merrimack River",
+   "lat": "42° 58' 18.86\" N",
+   "lon": "071° 28' 26.42\" W"
+  },
+  "fields": [
+   "outfall",
+   "regulator name",
+   "receiving water",
+   "lat",
+   "lon"
+  ],
+  "fills_event_fields": [
+   "coordinates",
+   "waterbody",
+   "location_text"
+  ],
+  "cannot_fill": [
+   "started_at",
+   "volume"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "5-year permit",
+  "history": "2008, 2015, 2025 permits",
+  "license": null,
+  "legal_basis": "CWA 402",
+  "status": "used",
+  "status_reason": "Outfall registry and notification law",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "See also the draft revision page https://www.epa.gov/nh/draft-permit-manchester-wastewater-treatment-facility-and-co-permittees-bedford-nhc010447-0",
+  "state": "NH"
+ },
+ {
+  "id": "nh-manchester-supplemental-cso-info",
+  "name": "Manchester Supplemental CSO Information (CD reports, annual CSO DMRs, outfall map)",
+  "jurisdiction": "NH",
+  "operator": "City of Manchester DPW EPD",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "All 15 outfalls",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "piscataquog-river-nh"
+  ],
+  "url": "https://www.manchesternh.gov/Departments/Sewer-and-Stormwater/CSO/Supplemental-CSO-Information",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "Semiannual Consent Decree compliance reports No. 1-10 (2021-2025); annual 'Combined Sewer Overflow DMRs' PDFs 2021-2025 (2025 file is 6.8 MB and scanned, so it needs OCR); 2019 CD outfall location map",
+  "machine_readable": false,
+  "sample_record": {
+   "doc": "CSO Consent Decree Report No. 10 - July 1 to December 31, 2025",
+   "dated": "2026-01-30"
+  },
+  "fields": [
+   "monthly outfall volumes (scanned)"
+  ],
+  "fills_event_fields": [
+   "volume",
+   "units",
+   "waterbody"
+  ],
+  "cannot_fill": [
+   "started_at",
+   "ended_at"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "semiannual/annual",
+  "history": "2009-2025",
+  "license": null,
+  "legal_basis": "Consent Decree paragraph 19(c)",
+  "status": "used",
+  "status_reason": "Annual history",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-mrwc-cso-page",
+  "name": "Merrimack River Watershed Council CSO page",
+  "jurisdiction": "NH",
+  "operator": "Merrimack River Watershed Council",
+  "operator_type": "nonprofit",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Merrimack mainstem",
+  "water_slugs": [
+   "merrimack-river-nh"
+  ],
+  "url": "https://merrimack.org/cso/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Directory of plant sign-ups; does not relay notices",
+  "machine_readable": false,
+  "sample_record": {
+   "quote": "there is no centralized system to subscribe in order to receive alerts from all plants"
+  },
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "all"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "",
+  "history": "Annual totals in posts (e.g., 2023: Manchester 875 MG, Nashua 20 MG)",
+  "license": null,
+  "legal_basis": "",
+  "status": "rejected",
+  "status_reason": "Links to Manchester and Nashua; no NH relay",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-nashua-cso-history-pdf",
+  "name": "Nashua History of CSO Occurrences (PDF)",
+  "jurisdiction": "NH",
+  "operator": "City of Nashua Wastewater Treatment Facility",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "9 outfalls",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "nashua-river-nh"
+  ],
+  "url": "https://www.nashuanh.gov/DocumentCenter/View/11049",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "97 KB text-layer PDF; one row per date, with flow (MG) and duration (min) per outfall",
+  "machine_readable": false,
+  "sample_record": {
+   "date": "8/3/2026",
+   "outfall": "CSO 006",
+   "total_flow_MG": 6.466,
+   "total_duration_min": 190
+  },
+  "fields": [
+   "date",
+   "outfall",
+   "total_flow_MG",
+   "total_duration_min"
+  ],
+  "fills_event_fields": [
+   "started_at (date only)",
+   "volume",
+   "units",
+   "waterbody",
+   "source_updated_at"
+  ],
+  "cannot_fill": [
+   "ended_at",
+   "exact times",
+   "advice_text"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "monthly update (stated)",
+  "history": "2013 to Aug 2026",
+  "license": null,
+  "legal_basis": "NMC #8",
+  "status": "used",
+  "status_reason": "Best per-event NH volume data",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Join to permit coordinates by outfall number",
+  "state": "NH"
+ },
+ {
+  "id": "nh-nashua-notify-me",
+  "name": "Nashua Notify Me 'Wastewater Department' list",
+  "jurisdiction": "NH",
+  "operator": "City of Nashua",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Nashua",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "nashua-river-nh"
+  ],
+  "url": "https://www.nashuanh.gov/list.aspx",
+  "access": [
+   "email"
+  ],
+  "access_detail": "CivicPlus News Flash mid 338; no public RSS category listed in https://www.nashuanh.gov/rss.aspx",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "unknown",
+  "history": "",
+  "license": null,
+  "legal_basis": "",
+  "status": "candidate",
+  "status_reason": "Not CSO-specific; requires subscribing",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "The CSO opt-in channel required by the permit is due by 2027-02-01",
+  "state": "NH"
+ },
+ {
+  "id": "nh-nashua-permit-nh0100170-2025",
+  "name": "NPDES NH0100170 2025 Final Permit, Fact Sheet and Response to Comments",
+  "jurisdiction": "NH",
+  "operator": "US EPA Region 1",
+  "operator_type": "federal",
+  "role": "permits",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "Merrimack and Nashua rivers",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "nashua-river-nh"
+  ],
+  "url": "https://www.epa.gov/system/files/documents/2025-11/finalnh0100170permit-2025.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "8.9 MB; Attachment A outfall table; Appendix E annual CSO data 2019-2023",
+  "machine_readable": false,
+  "sample_record": {
+   "outfall": "002",
+   "name": "Salmon Brook",
+   "lat": "42°44'50\"",
+   "lon": "71°26'23\"",
+   "receiving": "Merrimack River"
+  },
+  "fields": [
+   "outfall",
+   "name",
+   "lat",
+   "lon",
+   "receiving water"
+  ],
+  "fills_event_fields": [
+   "coordinates",
+   "waterbody"
+  ],
+  "cannot_fill": [
+   "started_at"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "5-year",
+  "history": "2015 and 2025 permits",
+  "license": null,
+  "legal_basis": "CWA 402",
+  "status": "used",
+  "status_reason": "Outfall registry and notification law",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Minor modification: https://www.epa.gov/system/files/documents/2025-11/finalnh0100170permitmod-2025.pdf",
+  "state": "NH"
+ },
+ {
+  "id": "nh-nashua-wastewater-banner",
+  "name": "Nashua Wastewater Department page CSO banner",
+  "jurisdiction": "NH",
+  "operator": "City of Nashua",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Merrimack and Nashua rivers in Nashua",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "nashua-river-nh"
+  ],
+  "url": "https://www.nashuanh.gov/392/Wastewater-Department",
+  "access": [
+   "html"
+  ],
+  "access_detail": "CivicPlus page; no banner was present on 2026-11-01; Alert Center had no CSO category",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [
+   "occurrence",
+   "location"
+  ],
+  "fills_event_fields": [
+   "event_type",
+   "location_text",
+   "valid_until"
+  ],
+  "cannot_fill": [
+   "volume",
+   "coordinates",
+   "started_at"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "live while active, up to 48 hours after the end",
+  "history": "none (ephemeral)",
+  "license": null,
+  "legal_basis": "NH0100170 Part I.H.3.g (effective 2026-02-01)",
+  "status": "candidate",
+  "status_reason": "Not observed live",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Advice from the CSO page: 'Public Health recommends that individuals do not go near these locations for 48 hours after a discharge.'",
+  "state": "NH"
+ },
+ {
+  "id": "nh-nhlakes",
+  "name": "NH LAKES",
+  "jurisdiction": "NH",
+  "operator": "NH LAKES",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://nhlakes.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Reachable (200).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "Lake Host/LakeSmart programmes; no advisory feed (sibling project reached the same conclusion).",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH"
+ },
+ {
+  "id": "nh-portsmouth-cso-dashboard",
+  "name": "Portsmouth CSO Dashboard (Flow Assessment)",
+  "jurisdiction": "NH",
+  "operator": "Flow Assessment Services for City of Portsmouth",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "3 outfalls",
+  "water_slugs": [
+   "piscataqua-river-nh"
+  ],
+  "url": "https://appservices.flowassessment.com/mapserver/cso_map.html?project=Portsmouth",
+  "access": [
+   "map_only",
+   "arcgis"
+  ],
+  "access_detail": "Same token-gated vendor app as Manchester; no public ArcGIS Online item found",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "real time (claimed)",
+  "history": "",
+  "license": null,
+  "legal_basis": "",
+  "status": "watch",
+  "status_reason": "Token-gated",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-portsmouth-cso-email",
+  "name": "Portsmouth CSO email list (Mailchimp)",
+  "jurisdiction": "NH",
+  "operator": "City of Portsmouth",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "3 outfalls",
+  "water_slugs": [
+   "piscataqua-river-nh"
+  ],
+  "url": "https://www.portsmouthnh.gov/publicworks/wastewater/combined-sewer-overflows-cso",
+  "access": [
+   "email"
+  ],
+  "access_detail": "Embedded form posting to cityofportsmouth.us2.list-manage.com/subscribe/post (u=09a251212294eb25c93966499, id=5e033c4988); device-generated emails; not subscribed",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "started_at",
+   "location_text"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "per event (automated)",
+  "history": "",
+  "license": null,
+  "legal_basis": "",
+  "status": "candidate",
+  "status_reason": "Requires subscribing",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-portsmouth-cso-page",
+  "name": "Portsmouth Combined Sewer Overflows page (dashboard and monthly table)",
+  "jurisdiction": "NH",
+  "operator": "City of Portsmouth DPW",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "South Mill Pond, Piscataqua River",
+  "water_slugs": [
+   "piscataqua-river-nh"
+  ],
+  "url": "https://www.portsmouthnh.gov/publicworks/wastewater/combined-sewer-overflows-cso",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "Drupal HTML table (Year, Month, 10A/10B/013/Total MG) linking monthly PDFs under files.portsmouthnh.gov/files/ww/YYYY_MM_CSO_NH0100234_1A.pdf; the PDFs are scanned memos with daily flow and rain",
+  "machine_readable": false,
+  "sample_record": {
+   "year": "2025",
+   "month": "May",
+   "cso_10a_mg": "0.055",
+   "cso_10b_mg": "0.000",
+   "cso_013_mg": "0.000",
+   "total_mg": "0.055",
+   "memo": "CSO 10A 05/10/2025 Volume = 0.055 MG Rain = 1.140 Inches Duration = 4.45 Hours"
+  },
+  "fields": [
+   "year",
+   "month",
+   "cso_10a_mg",
+   "cso_10b_mg",
+   "cso_013_mg",
+   "total_mg",
+   "pdf"
+  ],
+  "fills_event_fields": [
+   "started_at (date, from PDF)",
+   "volume",
+   "units",
+   "waterbody",
+   "source_url"
+  ],
+  "cannot_fill": [
+   "exact times (only duration)",
+   "coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "monthly, about 1 month lag",
+  "history": "2015-01 to 2026-08",
+  "license": null,
+  "legal_basis": "NH0100234 Part I.H.3.g",
+  "status": "used",
+  "status_reason": "",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Memo headers contain errors (May data labeled 'June 2025 Results' and 'April 2025')",
+  "state": "NH"
+ },
+ {
+  "id": "nh-portsmouth-permit-nh0100234-2023",
+  "name": "NPDES NH0100234 2023 Final Permit",
+  "jurisdiction": "NH",
+  "operator": "US EPA Region 1",
+  "operator_type": "federal",
+  "role": "permits",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "Piscataqua River, South Mill Pond",
+  "water_slugs": [
+   "piscataqua-river-nh"
+  ],
+  "url": "https://www.epa.gov/system/files/documents/2025-06/finalnh0100234permit-2023.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Attachment B outfall table",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [
+   "outfall",
+   "location",
+   "lat/lon (decimal minutes)",
+   "receiving water"
+  ],
+  "fills_event_fields": [
+   "coordinates",
+   "waterbody"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "5-year",
+  "history": "",
+  "license": null,
+  "legal_basis": "CWA 402",
+  "status": "used",
+  "status_reason": "",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-portsmouth-x-portsmouthcsos",
+  "name": "@PortsmouthCSOs (X/Twitter)",
+  "jurisdiction": "NH",
+  "operator": "City of Portsmouth Sewer Division",
+  "operator_type": "municipal",
+  "role": "social",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "3 outfalls",
+  "water_slugs": [
+   "piscataqua-river-nh"
+  ],
+  "url": "https://twitter.com/portsmouthcsos",
+  "access": [
+   "social"
+  ],
+  "access_detail": "2018 city release: 'When a CSO event occurs, the device will automatically send a tweet to @PortsmouthCSOs'",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "per event (2018 claim)",
+  "history": "",
+  "license": null,
+  "legal_basis": "",
+  "status": "watch",
+  "status_reason": "No longer linked from the CSO page; X requires login",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Source: https://www.portsmouthnh.gov/node/201921",
+  "state": "NH"
+ },
+ {
+  "id": "nh-prep-piscataqua-estuaries",
+  "name": "Piscataqua Region Estuaries Partnership (PREP) data and State of Our Estuaries",
+  "jurisdiction": "NH",
+  "operator": "PREP (UNH)",
+  "operator_type": "academic",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "great-bay-nh",
+   "piscataqua-river-nh",
+   "little-bay-nh"
+  ],
+  "url": "https://prepestuaries.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Bacteria and CSO context for Great Bay/Piscataqua in State of Our Estuaries reports (inferred).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "Connection failed (curl 000).",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH"
+ },
+ {
+  "id": "nh-rivers-council",
+  "name": "NH Rivers Council",
+  "jurisdiction": "NH",
+  "operator": "NH Rivers Council",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.nhrivers.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Reachable (200).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "Advocacy; no bacteria or overflow data found.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH"
+ },
+ {
+  "id": "nh-rule-env-wq-1108-14-beach-standards",
+  "name": "Env-Wq 1108.14 Water Quality Standards for Designated Beaches (Env-Wq 1100 Public Bathing Places)",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "bacteria",
+   "cyanobacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://gc.nh.gov/rules/state_agencies/env-wq1100.html",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "Designated beach \"unsafe for public use\" if the single-sample standard \"is exceeded by 70 counts in any one sample or by any amount in 2 or more samples taken during the same sampling event\" or the geometric-mean standard \"is exceeded in 3 samples over a 60-day period.\" Freshwater: E. coli >88 counts/100 mL single, geometric mean 47. Saltwater: Enterococci >104 single, geometric mean 35. On exceedance the owner shall \"Retest for bacteria\" and \"Post a bacteria advisory provided by the department.\" Cyanobacteria advisory when scum is dominant (>50% of algal cell count) or total cyanobacteria >70,000 cells/mL.",
+  "status": "used",
+  "status_reason": "Defines when NH beach advisories are issued.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-rule-env-wq-1703-cso-bacteria",
+  "name": "Env-Wq 1703.05 Combined Sewer Overflows and 1703.06 Bacteria (surface water quality standards; ss by #14203 eff 2-26-25)",
+  "jurisdiction": "NH",
+  "operator": "NHDES (rules published by NH General Court OLS)",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://gc.nh.gov/rules/state_agencies/env-wq1700.html",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "Env-Wq 1703.05(c): \"Exceedances of class B criteria and uses due to combined sewer overflows shall be limited to those identified in the long-term combined sewer overflow plan developed in accordance with EPA Combined Sewer Overflow (CSO) Control Policy ... after full implementation of the control measures.\" Env-Wq 1703.06(d): \"For any combined sewer overflow that discharges into non-tidal surface waters, a bacteria criteria of 1,000 Escherichia coli per 100 milliliters shall apply at the end of the combined sewer overflow s discharge pipe.\"",
+  "status": "used",
+  "status_reason": "CSO water quality rule; contains no public-notice requirement.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nh-souhegan-watershed-association-reports",
+  "name": "Souhegan Watershed Association river water quality reports",
+  "jurisdiction": "NH",
+  "operator": "Souhegan Watershed Association",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "souhegan-river-nh",
+   "merrimack-river-nh"
+  ],
+  "url": "https://www.souheganriver.org/river-water-quality-reports/",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "Reachable (200). Bi-weekly summer E. coli testing per press.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Seasonal bacteria reports; no feed.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH"
+ },
+ {
+  "id": "nh-vrap-vlap-emd",
+  "name": "NHDES Volunteer River Assessment Program (VRAP) and Volunteer Lake Assessment Program (VLAP) via Environmental Monitoring Database / Lake Information Mapper",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.des.nh.gov/resource-center/data-and-mapping",
+  "access": [
+   "html",
+   "pdf",
+   "arcgis"
+  ],
+  "access_detail": "Failed sub-agent captured Lake Info Mapper VLAP rows (WB_ID, Lake_Name, Town, Station_ID, VLAP_Yr1, report PDF name, BEACH flag) in raw/mon-nhdes-lakeinfomapper-vlap.txt; EMD downloads need the des.nh.gov/OneStop hosts (403 to scripts).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Trophic/monitoring data, not advisories; E. coli at VRAP river sites could support context later.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-advisories-page",
+  "name": "NHDES Advisories page",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.des.nh.gov/advisories",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Latency statement.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "'When fecal bacteria or cyanobacteria counts at designated public beaches are higher than the state standards, an advisory is issued to notify the public, approximately 24 hours after sampling.' No sewage overflow advisories listed.",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-agol-org-services",
+  "name": "NHDES ArcGIS Online organisation (services1.arcgis.com/MAcUimSes4gPY4sM) - search for CSO/outfall layers",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "outfalls",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://services1.arcgis.com/MAcUimSes4gPY4sM/arcgis/rest/services",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "90 services listed; relevant: 2024_Healthy_Swimming_Mapper_V2_WFL1, Cyanobacteria_Bloom_Report views, SWQA_2024_WFL1, test2026SWQA, TMDL mapper. No CSO, SSO or outfall service.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "No overflow data in the org.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-cso-program-page",
+  "name": "NHDES CSO program page / statewide overflow list or map",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "cso",
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.des.nh.gov/water/wastewater/combined-sewer-overflows",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Guessed URL returns 'Page Not Found' (browser). NHDES site search for 'combined sewer overflow', 'CSO' and 'sewer overflow' returns only WEB-9, a Lebanon blog post and unrelated pages. No NHDES overflow list, map, feed or ArcGIS layer was found (NHDES AGOL org MAcUimSes4gPY4sM has 90 services, none for CSO/SSO).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "Does not exist: NH has no statewide public overflow notification system; EPA Region 1 issues the NPDES permits and each permittee notifies on its own.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-cyanobacteria-bloom-report-views",
+  "name": "NHDES Cyanobacteria Bloom Report survey views (2025 HSM VIEW, HSMView)",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "cyanobacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://services1.arcgis.com/MAcUimSes4gPY4sM/arcgis/rest/services/Cyanobacteria_Bloom_Report___2025_HSM_VIEW/FeatureServer/0",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "Survey123-backed view; 0 rows on 2026-11-01; fields include date_bloom_observed, wb_name, bloom_location, status, current_warning, current_warning_message, Creator/Editor.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [
+   "objectid",
+   "globalid",
+   "CreationDate",
+   "Creator",
+   "EditDate",
+   "Editor",
+   "date_bloom_observed",
+   "wb_name",
+   "bloom_location",
+   "size_of_bloom",
+   "bloom_description",
+   "location_details",
+   "status",
+   "Outcome_",
+   "observed_year",
+   "current_warning",
+   "current_warning_message",
+   "area_name"
+  ],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Empty off-season; may carry active public reports in summer; contains Creator/Editor fields.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-data-and-mapping-page",
+  "name": "NHDES Data and Mapping page (Geodata Portal, OneStop Data Mapper, EMD)",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "monitoring",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.des.nh.gov/resource-center/data-and-mapping",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Index of NHDES data tools; no overflow tool listed.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-gis-npdes-outfalls",
+  "name": "NHDES GIS 'NPDES Outfalls' (Core_GIS_Datasets/DES_Data_Public MapServer layer 9)",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "477 NPDES outfalls statewide",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "nashua-river-nh",
+   "piscataqua-river-nh",
+   "androscoggin-river-nh",
+   "squamscott-river-nh",
+   "connecticut-river-nh"
+  ],
+  "url": "https://gis.des.nh.gov/server/rest/services/Core_GIS_Datasets/DES_Data_Public/MapServer/9",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "query?where=PERMITNUM IN ('NH0100447','NH0100170','NH0100234','NH0100013','NH0100871','NH0100366')&outFields=* returned 49 outfalls (Manchester 25 incl. retired CSO numbers, Nashua CSO2-CSO9 and CSO12, Portsmouth ACSO/BCSO, Lebanon's former CSOs). PTYPE_CODE is empty so CSO vs treated outfalls must be told apart by number/name. Saved raw/nh-des-npdes-outfalls-cso-permittees.json.",
+  "machine_readable": true,
+  "sample_record": {
+   "PERMITNUM": "NH0100170",
+   "OUTFALLNUM": "CSO5",
+   "FACILITY": "Nashua WWTP",
+   "TOWN": "Nashua",
+   "BASIN": "MERR",
+   "STREAM": "Merrimack River",
+   "WSG_LAT": 42.76349,
+   "WSG_LONG": -71.44422
+  },
+  "fields": [
+   "PERMITID",
+   "OUTFALLID",
+   "PERMITNUM",
+   "OUTFALLNUM",
+   "ASSESS_UID",
+   "PTYPE_CODE",
+   "TIDAL_FAC",
+   "LAGOONS",
+   "PARAMETERS",
+   "DESIGN_FLOW",
+   "F7Q10_DATE",
+   "F7Q10_LOC",
+   "WSG_LONG",
+   "WSG_LAT",
+   "FACILITY",
+   "TOWN",
+   "BASIN",
+   "STREAM",
+   "F7Q10_CFS",
+   "DILUT_F",
+   "OBJECTID",
+   "SHAPE"
+  ],
+  "fills_event_fields": [
+   "geometry (outfall point)",
+   "coordinates"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": null,
+  "history": null,
+  "license": "Service copyrightText \"NHDES\"; description \"Environmental Data from NHDES\"; no licence text on the layer. NHDES AGOL items carry the \"screening purposes only. Distribution is discouraged.\" disclaimer.",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "State outfall points with permit and outfall numbers; includes retired outfalls, so cross-check with EPA R1 2022 layer and current permits.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-hab-program-page",
+  "name": "NHDES Cyanobacteria Harmful Algal Blooms page",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "cyanobacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.des.nh.gov/water/healthy-swimming/harmful-algal-blooms",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Programme description.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "'NHDES tracks cyanobacteria bloom reports on our Healthy Swimming Mapper, representing a static point in time.' 'NHDES does not close waterbodies but does recommend avoiding swimming in water in the vicinity of a bloom.'",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-healthy-swimming-email-alerts",
+  "name": "NHDES Healthy Swimming waterbody-specific email notifications (Constant Contact)",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "cyanobacteria",
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://lp.constantcontactpages.com/su/pHPCXq8/healthyswimming",
+  "access": [
+   "email"
+  ],
+  "access_detail": "Sign-up form linked from the Public Beaches page: 'sign up for waterbody-specific email to get notified when a cyanobacteria warning or watch has been put in place on your favorite waterbody.' Not subscribed.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Owner should subscribe as a trigger/check.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-healthy-swimming-mapper-beaches",
+  "name": "NHDES Healthy Swimming Mapper - Beach Mapper Points (layer 0 of '2026 NHDES Healthy Swimming Mapper' feature service)",
+  "jurisdiction": "NH",
+  "operator": "NHDES Beach Inspection Program",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": "93 designated beaches incl. 16 Atlantic coast beaches and inland lakes",
+  "water_slugs": [
+   "lake-winnipesaukee-nh",
+   "lake-winnisquam-nh",
+   "lake-sunapee-nh",
+   "opechee-bay-nh",
+   "saco-river-nh",
+   "hampton-harbor-nh",
+   "rye-harbor-nh",
+   "little-harbor-rye-nh",
+   "portsmouth-harbor-nh"
+  ],
+  "url": "https://services1.arcgis.com/MAcUimSes4gPY4sM/arcgis/rest/services/2024_Healthy_Swimming_Mapper_V2_WFL1/FeatureServer/0",
+  "access": [
+   "arcgis",
+   "map_only",
+   "email"
+  ],
+  "access_detail": "Public FeatureServer; item 25c31a6d07134c5689c3a5a7b97606fd titled '2026 NHDES Healthy Swimming Mapper' although the service name says 2024. query?where=1%3D1&outFields=*&f=json returns 93 points. dataLastEditDate 2026-09-03. Dashboard item 8d84a6b03acb4efaab571b222c78447b.",
+  "machine_readable": true,
+  "sample_record": {
+   "Beach_Name": "North Hampton State Park Beach",
+   "Waterbody_Name": "Atlantic Ocean",
+   "EPA_ID": "(NH id)",
+   "Status": "Monitoring Season Completed",
+   "SampleDate": "2026-09-01",
+   "Sample_Results": "left: 4.1, center: <1, right: 3.1",
+   "Advisory_history": "7/3-7/5, 7/7 - 7/9, 7/17-7/21, 8/4-8/6, 8/18-8/22, 9/1-9/3",
+   "Report": "https://www4.des.state.nh.us/OneStopPub/Beach/<id>_2025annualreport_<name>.pdf"
+  },
+  "fields": [
+   "OBJECTID",
+   "Long",
+   "Lat",
+   "Waterbody_ID",
+   "EPA_ID",
+   "Beach_Name",
+   "Waterbody_Name",
+   "Status",
+   "SamplingFrequency",
+   "DateIssued",
+   "SampleDate",
+   "Sample_Results",
+   "ResamplingStatus",
+   "Report",
+   "Advisory_history"
+  ],
+  "fills_event_fields": [
+   "source_record_id (EPA_ID)",
+   "event_type (bacteria advisory)",
+   "source_status (Status)",
+   "started_at (DateIssued while active)",
+   "waterbody",
+   "location_text",
+   "coordinates (beach point)",
+   "authority",
+   "raw_record"
+  ],
+  "cannot_fill": [
+   "ended_at (only in Advisory_history text, month/day without year)",
+   "valid_until",
+   "volume"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "Item snippet: 'Current advisories & alerts ... are posted & updated on this map daily.' Advisory 'approximately 24 hours after sampling' (NHDES Advisories page). Season roughly June to Labor Day; on 2026-11-01 all 93 read 'Monitoring Season Completed'.",
+  "history": "Current season only in the layer; Advisory_history string lists this season's advisory date ranges; per-beach annual report PDFs on www4.des.state.nh.us (403 here); full results in NHDES OneStop.",
+  "license": "\"User is required to read metadata completely before using the data. The information provided in this coverage is a subset of spatial databases developed by the New Hampshire Department of Environmental Services (NHDES). The data presented is under constant revision and may not depict the most up to date information. The NHDES is not responsible for the use or interpretation of this information, or for any inaccuracies in the site names, tax map and lot information, or locations. All information is subject to verification. These data are to be used for screening purposes only. Distribution is discouraged.\" (licenseInfo on items 8d84a6b03acb4efaab571b222c78447b and 083302ea9c904498a620930698be3340; accessInformation \"NHDES\")",
+  "legal_basis": "RSA 485-A:8; Env-Wq 1108.14",
+  "status": "candidate",
+  "status_reason": "Best NH swim-advisory feed; machine-readable; licence says 'Distribution is discouraged' so the owner must decide on republishing.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "31 of 93 beaches had advisories in 2026 (e.g. North Beach (the Wall) 6/16-6/18, 7/7-7/9, 8/12-8/14). Coastal beaches downstream of the Merrimack/Piscataqua are the ones a CSO story would touch.",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-healthy-swimming-mapper-cyanobacteria",
+  "name": "NHDES Healthy Swimming Mapper - CyanobacteriaMapperLayer2 (layer 9)",
+  "jurisdiction": "NH",
+  "operator": "NHDES Harmful Algal Bloom Program",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "cyanobacteria"
+  ],
+  "waters_covered": "2,401 waterbody polygons (NH lakes plus some ME tidal creeks)",
+  "water_slugs": [
+   "lake-winnipesaukee-nh",
+   "squam-lake-nh",
+   "lake-sunapee-nh",
+   "great-bay-nh"
+  ],
+  "url": "https://services1.arcgis.com/MAcUimSes4gPY4sM/arcgis/rest/services/2024_Healthy_Swimming_Mapper_V2_WFL1/FeatureServer/9",
+  "access": [
+   "arcgis",
+   "map_only",
+   "email"
+  ],
+  "access_detail": "Polygon layer, 2,401 rows; dataLastEditDate 2026-10-15. Bloom_status values: 'no bloom reported', 'No bloom reported', 'Warning' (1 row, Angle Pond, while Status read 'No bloom reported' and LatestAdvisory 'No Warnings issued').",
+  "machine_readable": true,
+  "sample_record": {
+   "WB_ID": "NHLAK700060905-01-01",
+   "WB_NAME": "Baboosic Lake",
+   "Town": "Amherst",
+   "Status": "No bloom reported",
+   "SamplingDate": "2026-07-29",
+   "Description": "Green clouds and ribbons near shoreline",
+   "Cyanobacteria": "Dolichospermum lemmermennii",
+   "TotalCyanoDensity": "2,115,400",
+   "LatestAdvisory": "No Warnings issued",
+   "CyanoHistory": "https://www4.des.state.nh.us/onestoppub/TrophicSurveys/Baboosic.Amherst.Cyano.html",
+   "Bloom_status": "no bloom reported"
+  },
+  "fields": [
+   "OBJECTID",
+   "WB_ID",
+   "WB_NAME",
+   "WB_CLASS",
+   "Town",
+   "Status",
+   "SamplingDate",
+   "StatusDate",
+   "Description",
+   "Cyanobacteria",
+   "TotalCyanoDensity",
+   "LatestAdvisory",
+   "CyanoHistory",
+   "Shape__Area",
+   "Shape__Length",
+   "Photodescription",
+   "Bloom_status"
+  ],
+  "fills_event_fields": [
+   "source_record_id (WB_ID)",
+   "source_status (Bloom_status / LatestAdvisory)",
+   "reported_at (SamplingDate)",
+   "source_updated_at (StatusDate)",
+   "waterbody",
+   "geometry (official affected area = whole waterbody polygon)"
+  ],
+  "cannot_fill": [
+   "valid_until",
+   "ended_at"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "Daily per item snippet; warnings issued after sampling; NHDES 'does not close waterbodies'.",
+  "history": "CyanoHistory link per waterbody (www4 host, 403 here).",
+  "license": "\"User is required to read metadata completely before using the data. The information provided in this coverage is a subset of spatial databases developed by the New Hampshire Department of Environmental Services (NHDES). The data presented is under constant revision and may not depict the most up to date information. The NHDES is not responsible for the use or interpretation of this information, or for any inaccuracies in the site names, tax map and lot information, or locations. All information is subject to verification. These data are to be used for screening purposes only. Distribution is discouraged.\" (licenseInfo on items 8d84a6b03acb4efaab571b222c78447b and 083302ea9c904498a620930698be3340; accessInformation \"NHDES\")",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Machine-readable HAB warnings; status fields disagree, so read Bloom_status and LatestAdvisory together.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-lebanon-cso-elimination-2024",
+  "name": "NHDES blog 'City of Lebanon Meets EPA Consent Decree Requirements by Eliminating CSO Outfalls' (2024-01-05)",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "permits",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "connecticut-river-nh",
+   "mascoma-river-nh"
+  ],
+  "url": "https://www.des.nh.gov/news-and-media/blog/city-lebanon-meets-epa-consent-decree-requirements-eliminating-cso-outfalls",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Confirms Lebanon no longer has CSOs (consent decree dissolved fall 2021; work completed 2022).",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Before: 'nearly 14 million gallons ... per year from as many as 60 to 70 CSO events' to the Connecticut River, Mascoma River and Great Brook.",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-onestop-data-search",
+  "name": "NHDES OneStop Data Search (Oracle APEX) - Beaches area of interest",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://onestop.des.nh.gov/ords/r/apex_whs/nhdesbasicsearch/querypage",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Reachable by curl (200). Session-based APEX form; Areas of Interest list includes 'Beaches' and 'Water-related interests'. Not scraped. Legacy OneStop on www4.des.state.nh.us (DESOnestop, OneStopPub annual reports, TrophicSurveys cyano histories) answers 403.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Holds beach sample history; stateful APEX app needs a scraper or a data request.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-public-beaches-page",
+  "name": "NHDES Public Beaches (Beach Inspection Program) page",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.des.nh.gov/water/healthy-swimming/public-beaches",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Read in the browser pane (curl/WebFetch get 403).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Programme description, standards, data paths.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "'monitors coastal beaches and many popular inland beaches regularly throughout the summer months ... makes these results available daily'. Full results: OneStop Data Search (onestop.des.nh.gov) > Areas of Interest 'Beaches'. Legacy 'Bacteria Advisories' link http://www4.des.state.nh.us/WaterShed_BeachMaps/ answers 403.",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-statement-haverhill-spill-2026-06",
+  "name": "NHDES Statement on Haverhill, MA Sewage Spill (2026-06-30)",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "news",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "hampton-harbor-nh"
+  ],
+  "url": "https://www.des.nh.gov/news-and-media/nhdes-statement-haverhill-ma-sewage-spill",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Cross-border event: MA raw sewage in the Merrimack prompted extra NH coastal beach testing; no NH advisories issued.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-web9-cso-fact-sheet",
+  "name": "NHDES fact sheet WEB-9 'Combined Sewer Overflows (CSOs)' (2022)",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "permits",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.des.nh.gov/sites/g/files/ehbemt341/files/documents/web-9.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "curl and WebFetch: HTTP 403 (Akamai 'Access Denied'); in the browser pane the PDF triggers a file download (not taken). Search snippet lists Berlin, Exeter, Manchester, Nashua and Portsmouth as NH CSO communities.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "403 from this machine; download would need owner approval.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "nhdes-www4-legacy-hosts",
+  "name": "NHDES legacy host www4.des.state.nh.us (OneStopPub beach annual reports, cyanobacteria history pages, WaterShed_BeachMaps, Environmental Dashboard)",
+  "jurisdiction": "NH",
+  "operator": "NHDES",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www4.des.state.nh.us/onestoppub/",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "All tested URLs return HTTP 403 Akamai 'Access Denied' to curl.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "403 from this machine (try from the production host).",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "une-csos-on-the-merrimack-2020",
+  "name": "'CSOs on the Merrimack' ArcGIS layer (ADavis_UNE, 2020)",
+  "jurisdiction": "NH",
+  "operator": "University of New England (user account)",
+  "operator_type": "academic",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "merrimack-river-nh"
+  ],
+  "url": "https://services7.arcgis.com/0vd30ZJwMECKNLFu/arcgis/rest/services/CSOs_on_the_Merrimack_WFL1/FeatureServer",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "Personal 2020 map; superseded by EPA R1 2022 layer and NHDES outfalls.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "us-stop-cso-act",
+  "name": "STOP CSO Act (Moulton/Trahan, federal bill) - public alerts within 4 hours",
+  "jurisdiction": "NH",
+  "operator": "US Congress",
+  "operator_type": "federal",
+  "role": "law",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://moulton.house.gov/news/press-releases/moulton-introduces-stop-cso-act",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Would cover NH plants on the Merrimack; status not confirmed.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH"
+ },
+ {
+  "id": "epa-echo-sewer-overflow-bypass-events",
+  "name": "EPA ECHO NPDES Sewer Overflow and Bypass Event data (eRule Phase 2)",
+  "jurisdiction": "NH/VT",
+  "operator": "US EPA OECA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "cso",
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "Summary page read by WebFetch: zipped CSV set; tables sewer_overflow_bypass_report_events (start/end datetime, duration, volume gallons, permitted_feature_id or lat/long, wet-weather flag), _types (CSO/SSO/BYP), _receiving_waters, _causes, _corrective_actions, _impacts, treatment codes; 'currently in development' and incomplete; latest version only (an All Versions set exists). ZIP not downloaded (national file).",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [
+   "started_at",
+   "ended_at",
+   "volume",
+   "units",
+   "event_type",
+   "waterbody",
+   "coordinates (non-permitted features)",
+   "source_record_id"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "40 CFR part 127 (NPDES Electronic Reporting Rule) Phase 2",
+  "status": "watch",
+  "status_reason": "Because EPA is the NPDES authority in NH, NH permittees' overflow reports should land here first; coverage of NH/VT not yet tested. Left to the federal agent; flagged as the likely NH statewide substitute.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "",
+  "state": "NH/VT"
+ },
+ {
+  "id": "epa-r1-cso-outfall-locations-2022",
+  "name": "EPA Region 1 'R1 Combined Sewer Outfall (CSO) Locations, 2022' (NH and VT rows)",
+  "jurisdiction": "NH/VT",
+  "operator": "US EPA Region 1",
+  "operator_type": "federal",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "NH: 29 outfalls (Manchester 15, Nashua 9, Portsmouth 3, Berlin 1, Exeter 1); VT: 49 outfalls in 13 permits",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "piscataquog-river-nh",
+   "nashua-river-nh",
+   "piscataqua-river-nh",
+   "androscoggin-river-nh",
+   "squamscott-river-nh",
+   "winooski-river-vt",
+   "lake-champlain-vt",
+   "otter-creek-vt",
+   "stevens-brook-vt",
+   "passumpsic-river-vt",
+   "missisquoi-river-vt",
+   "lac-memphremagog-vt",
+   "connecticut-river-vt"
+  ],
+  "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "Layer 1. query?where=NPDES_ID LIKE 'NH%' OR NPDES_ID LIKE 'VT%' returned 78 rows (raw/epa-r1-cso-nhvt.json). dataLastEditDate 2023-01-03.",
+  "machine_readable": true,
+  "sample_record": {
+   "FACILITY_N": "City of Manchester",
+   "OUTFALL_NA": "053",
+   "NPDES_ID": "NH0100447",
+   "OUTFALL_ID": 53,
+   "LOCATION": "Walnut/North Streets and Canal/West Pennacook Streets",
+   "LATITUDE": 43.00081137,
+   "LONGITUDE": -71.46961553,
+   "WATERBODY": "Merrimack River",
+   "STATUS": null
+  },
+  "fields": [
+   "OBJECTID_1",
+   "OBJECTID",
+   "FACILITY_N",
+   "OUTFALL_NA",
+   "NPDES_ID",
+   "OUTFALL_ID",
+   "LOCATION",
+   "DATA_SOURC",
+   "LATITUDE",
+   "LONGITUDE",
+   "WATERBODY",
+   "STATUS"
+  ],
+  "fills_event_fields": [
+   "geometry (outfall point)",
+   "coordinates"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": null,
+  "history": null,
+  "license": "copyrightText \"CT: CT DEEP; ME: MEDEP; MA: MassDEP, EPA; NH: EPA; RI: Narragansett Bay Commission; VT Open Geodata Portal\". NH rows: \"Active CSO outfalls collected from NH NPDES permits. EPA made corrections based upon updated information available in EPA's files.\" VT rows from the VT Open Geodata Portal stormwater/wastewater infrastructure layer.",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Best single list of active NH CSO outfalls with coordinates and receiving water; VT rows carry NPDES IDs that the ANR layer lacks.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Probably also covered by the federal agent; NH/VT rows recorded here.",
+  "state": "NH/VT"
+ },
+ {
+  "id": "intl-swim-guide-nhvt",
+  "name": "Swim Guide (theswimguide.org) NH/VT beaches",
+  "jurisdiction": "NH/VT",
+  "operator": "Swim Drink Fish",
+  "operator_type": "nonprofit",
+  "role": "prior_art",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.theswimguide.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Reachable (200); NH/VT affiliates not checked.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Prior art aggregator; check which NH/VT sources feed it.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH/VT"
+ },
+ {
+  "id": "ma-sewage-notification-law-2021",
+  "name": "Massachusetts sewage public notification law (2021) / 314 CMR 16.00",
+  "jurisdiction": "MA",
+  "operator": "Commonwealth of Massachusetts",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "MA permittees only",
+  "water_slugs": [],
+  "url": "https://merrimack.org/2021/01/13/passage-of-sewage-public-notification-law/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "MassDEP regulation page returned 403",
+  "machine_readable": false,
+  "sample_record": {
+   "quote": "Two plants in New Hampshire - in Nashua and Manchester ... are not subject to the newly-passed Massachusetts law."
+  },
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "",
+  "history": "",
+  "license": null,
+  "legal_basis": "St. 2020 c.322 (citation inferred)",
+  "status": "rejected",
+  "status_reason": "Does not apply to NH dischargers",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Downstream MA plants (Lowell, GLSD, Haverhill) are covered",
+  "state": "MA"
+ },
+ {
+  "id": "nh-mrwc-water-quality-dashboard",
+  "name": "Merrimack River Watershed Council water quality dashboard layer (E. coli/Enterococci, with CSO field)",
+  "jurisdiction": "NH/MA",
+  "operator": "Merrimack River Watershed Council",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "merrimack-river-nh"
+  ],
+  "url": "https://merrimack.org/",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "ArcGIS feature layer captured by the failed sub-agent (raw/mon-mrwc-wq-dashboard-master.json; service URL not recorded). Fields include Date, Site, State, Weather, CSO, Ecoli_Conc, Entero_Conc, Ecoli_Status, Entero_Status, Overall_Status. MRWC's CSO page (https://merrimack.org/cso/) is a directory of plant sign-ups and does not relay notices: 'there is no centralized system to subscribe in order to receive alerts from all plants'.",
+  "machine_readable": true,
+  "sample_record": {
+   "Date": "2024-12-18",
+   "Site": "West Newbury - Ferry Park",
+   "State": "MA",
+   "Ecoli_Conc": 114,
+   "Entero_Conc": 238,
+   "Overall_Status": "Not Safe",
+   "CSO": null
+  },
+  "fields": [
+   "Date",
+   "Abbreviation",
+   "Site",
+   "State",
+   "Water_Type",
+   "Lat",
+   "Long",
+   "River_Mile",
+   "Weather",
+   "CSO",
+   "pH_Avg",
+   "Temp_Avg",
+   "Ecoli_Conc",
+   "Entero_Conc",
+   "Ecoli_Status",
+   "Entero_Status",
+   "Overall_Status",
+   "Photo_URL"
+  ],
+  "fills_event_fields": [
+   "coordinates",
+   "reported_at"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Bacteria results with a CSO flag column; find the service URL and NH sites before use.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH/MA"
+ },
+ {
+  "id": "nhvt-crc-is-it-clean",
+  "name": "Connecticut River Conservancy 'Is It Clean?' E. coli map (connecticutriver.us)",
+  "jurisdiction": "NH/VT",
+  "operator": "Connecticut River Conservancy with partner groups (Black River Action Team, White River NRCD, Ottauquechee River Group, Ashuelot River LAC)",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [
+   "connecticut-river-vt",
+   "connecticut-river-nh",
+   "ashuelot-river-nh"
+  ],
+  "url": "https://connecticutriver.us/",
+  "access": [
+   "html",
+   "map_only"
+  ],
+  "access_detail": "connecticutriver.us answers 200; connecticutriver.org timed out. Site list carries per-site data attributes (value, data-date, data-latitude, data-longtitude [sic], data-waterbody, data-quality [latest E. coli], data-state, data-town, data-clean-dry/-wet, data-boat-wet/-dry, data-not-clean-*, data-organization, data-slug). Sample saved by the failed sub-agent: raw/mon-isitclean-sites-sample.json.",
+  "machine_readable": true,
+  "sample_record": {
+   "value": "2-SBA",
+   "data-date": "2026-09-15T13:40:00.000Z",
+   "data-latitude": "42.876",
+   "data-longtitude": "-72.2773",
+   "data-waterbody": "south-branch-of-the-ashuelot-river",
+   "data-quality": "152",
+   "data-state": "nh",
+   "data-town": "swanzey",
+   "data-organization": "ashuelot-river-local-advisory-committee",
+   "name": "Ashuelot River (South Branch) at Rte 32"
+  },
+  "fields": [
+   "value",
+   "data-date",
+   "data-latitude",
+   "data-longtitude",
+   "data-waterbody",
+   "data-watershed",
+   "data-quality",
+   "data-state",
+   "data-county",
+   "data-town",
+   "data-clean-dry",
+   "data-clean-wet",
+   "data-boat-wet",
+   "data-boat-dry",
+   "data-not-clean-dry",
+   "data-not-clean-wet",
+   "data-slug",
+   "data-organization",
+   "name"
+  ],
+  "fills_event_fields": [
+   "reported_at (sample date)",
+   "coordinates",
+   "waterbody",
+   "raw_record"
+  ],
+  "cannot_fill": [
+   "any discharge field"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "Weekly at many sites in season (press: results ~24 h after sampling); some VT tributary sites stale (e.g. Black River at Mill Road last 2016).",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Covers VT/NH Connecticut tributaries (Black, White, Ottauquechee, Ashuelot) where no state beach data exist; swim/boat categories map to boating vs swimming exposure.",
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH/VT"
+ },
+ {
+  "id": "nhvt-crjc",
+  "name": "Connecticut River Joint Commissions",
+  "jurisdiction": "NH/VT",
+  "operator": "CRJC",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.crjc.org/",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "Answered 406; planning body, no monitoring data feed found.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH/VT"
+ },
+ {
+  "id": "us-water-quality-portal-nhvt",
+  "name": "Water Quality Portal (waterqualitydata.us) for NH/VT volunteer and state E. coli data",
+  "jurisdiction": "NH/VT",
+  "operator": "USGS/EPA/NWQMC",
+  "operator_type": "federal",
+  "role": "monitoring",
+  "event_types": [
+   "bacteria"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.waterqualitydata.us/",
+  "access": [
+   "api",
+   "csv"
+  ],
+  "access_detail": "Reachable (200); NH/VT organisation coverage not tested.",
+  "machine_readable": false,
+  "sample_record": {},
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Possible federated route for VRAP/LaRosa/CRC results; test org IDs later.",
+  "verified": "search_only",
+  "checked": "2026-11-01",
+  "notes": "Monitoring-group sweep done briefly after the delegated sweep failed; reachability tested with curl 2026-11-01.",
+  "state": "NH/VT"
+ }
+]

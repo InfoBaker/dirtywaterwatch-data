@@ -1,0 +1,23 @@
+id: "ny-dec-habs"
+name: "DEC NYHABS current HAB reports (Current_HAB_Reports_DIL / Current_HAB_Reports_7_3_19) and Archived_HAB_Reports"
+url: "https://services6.arcgis.com/DZHaqZm9cxOD4CWM/arcgis/rest/services/Current_HAB_Reports_DIL/FeatureServer/0"
+homepage: "https://on.ny.gov/nyhabs"
+kind: "arcgis"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/ny_beaches_habs.py
+#   (data/build/events/ny-dec-habs.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence: pipeline/ingest/ny_beaches_habs.py states none; the research row's text is kept.
+cadence: "season May-Oct (2026 season announced in May press release); edits a few times a week"
+license: "none stated"
+attribution: "NYS DEC HABs Program"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["NY"]
+registry_ids: ["ny-dec-hab-current-reports"]
+access: ["arcgis"]
+access_detail: "No service is literally named 'Current_HAB_Reports'; live ones are Current_HAB_Reports_DIL (adds STATUS_DATE) and Current_HAB_Reports_7_3_19, both 61 features on 2026-11-01, dataLastEditDate 2026-10-30. Archived_HAB_Reports has 1,443 features. Public map: https://on.ny.gov/nyhabs."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,37 @@
+id: "md-aahealth-closings-advisories"
+name: "Anne Arundel County Department of Health Recreational Water Closings and Advisories"
+url: "https://www.aahealth.org/environmental-health/recreational-water-quality/closings-and-advisories"
+homepage: "https://www.aahealth.org/environmental-health/recreational-water-quality/closings-and-advisories"
+kind: "html"
+level: "municipal"
+# Notes (research/md, status used, verified fetched, checked 2026-11-02): The best official 'what to
+#   do' layer in Maryland: names the affected stretch, the advice and the end date for sewage
+#   spills; scrape the list.
+# Access detail (research, quoted): Drupal list, 20 per page (?page=N), each item a dated notice
+#   page that is edited in place ('*Update 6-9-26*' prefix, rescission line added on top). Fetched
+#   list pages 0-8 and five sewage notices (raw/aah-*.html). Email: 'Recreational Water Quality
+#   Email Alerts' via https://www.aahealth.org/about-us/community-health-alerts (not subscribed). No
+#   RSS link found.
+# Can fill: advice_text, valid_until, published_at, geometry (text description of affected area),
+#   started_at (often), volume (sometimes), revision_history (update lines)
+# Cannot fill: coordinates; structured fields
+# Waters: Anne Arundel County tidal waters and 80+ beaches (openboatlaunch slugs: patapsco-river-md,
+#   magothy-river-md, severn-river-md, spa-creek-md, weems-creek-md, rhode-river-md, west-river-md,
+#   chesapeake-bay-md, curtis-creek-md, stony-creek-md)
+# History: List back to at least 2023 (page 3).
+# Research notes: Standing texts: 'Emergency Closing The Department of Health issues a closure when
+#   a sewage spill, leak or other problem indicates human waste has impacted the water.' and
+#   'Preemptive Rainfall Advisory After rainfall of 1/2 inch or more, all Anne Arundel County
+#   beaches are under a no swimming/no direct water contact advisory for at least 48 hours'.
+cadence: "Issued within about a day of the spill; sewage closures last one week unless a bathing beach is affected. Sewage-related notices 2023-2026: Cypress Creek (2026-06), Forked Creek (2026-02/03), Linthicum Heights (2026-02, 2026-01), Annapolis Spa Creek (2026-01), Boyds Cove (2025-08), Weems Creek (2025-06), Patapsco (2025-05/06), Fort Smallwood Rd (2025-03), Gatewater Landing (2024-09), Severna Park (2024-08), Marley Creek (2024-07, 2023-10/12), Cox Creek (2024-01), Linthicum (2023-06)."
+license: "No terms found."
+attribution: "Anne Arundel County Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["sso", "beach_advisory", "beach_closure", "hab_advisory"]
+states: ["MD"]
+access: ["html", "email"]
+access_detail: "Drupal list, 20 per page (?page=N), each item a dated notice page that is edited in place ('*Update 6-9-26*' prefix, rescission line added on top). Fetched list pages 0-8 and five sewage notices (raw/aah-*.html). Email: 'Recreational Water Quality Email Alerts' via https://www.aahealth.org/about-us/community-health-alerts (not subscribed). No RSS link found."
+machine_readable: false
+legal_basis: "COMAR 26.08.10.07-.10 (health department decides public-health determinations)"
+checked: "2026-11-02"

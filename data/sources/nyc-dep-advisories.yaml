@@ -1,0 +1,25 @@
+id: "nyc-dep-advisories"
+name: "NYC DEP Waterbody Advisory System (dashboard JSON API)"
+url: "https://nycwaterbodyadvisory.azurewebsites.net/"
+homepage: "https://nycwaterbodyadvisory.azurewebsites.net/"
+kind: "api"
+level: "municipal"
+# Feed row: the source id written by the ingester pipeline/ingest/nyc_dep_advisories.py
+#   (data/build/events/nyc-dep-advisories.json). It describes the same source as the research row(s)
+#   in registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/nyc_dep_advisories.py docstring): Poll hourly. The API keeps no history
+#   (occurredOn is ignored as a parameter), so data/build/nyc-dep-advisories-state.json is the
+#   archive of episodes.
+cadence: "1 hour"
+license: "No licence stated on the app. NYC Terms of Use apply to nyc.gov content (not quoted)."
+attribution: "NYC Department of Environmental Protection"
+enabled: true
+role: "advisories"
+event_types: ["cso"]
+states: ["NY"]
+registry_ids: ["nyc-dep-waterbody-advisory-api", "nyc-dep-arcgis-advisory-layers"]
+access: ["api", "html", "arcgis"]
+access_detail: "Angular dashboard linked from https://www.nyc.gov/site/dep/water/waterbody-advisories.page. Unauthenticated JSON endpoints found in the app bundle and fetched 2026-11-01: /api/profile (config: show_advisories 'wq'; wq layer waterbody_wq_advisory_staging; cso layer waterbody_csov2_advisory_staging), /api/advisory?advisoryType=WQ|CSO (45 rows: occurredOn, waterbody{id,name,class,rainGauge}, duration [hours], message, volume), /api/sensors (14 WRRF rain gauges with accumulatedLast24Hours), /api/rainfall-samples?page=N&pageSize=96&sensorId=CI (hourly rainfall, history back to at least Sept 2025), /api/calendar. The occurredOn parameter is ignored: /api/advisory returns only the current state."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

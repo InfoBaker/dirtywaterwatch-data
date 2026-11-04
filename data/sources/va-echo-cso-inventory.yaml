@@ -1,0 +1,25 @@
+id: "va-echo-cso-inventory"
+name: "EPA National CSO Inventory - Virginia rows"
+url: "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/cso-inventory-download-summary"
+kind: "arcgis"
+level: "federal"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Outfall backbone for
+#   the three CSO systems; matches operator layers.
+# Access detail (research, quoted): From the federal agent's ALL_CSO_DOWNLOADS.csv (2026-10-31): 51
+#   VA rows: 46 CSO + 5 closed (CLS). VA0063177 Richmond 25 CSO + 4 CLS; VA0024970 Lynchburg 17 CSO;
+#   VA0025160 AlexRenew 4 CSO (permit status ADC, expired 2026-06-30); VA0025542 Covington 1 CLS
+#   (Jackson River). Receiving waters and coordinates per outfall. Saved
+#   raw/echo-cso-inventory-va.json. Not in data/outfalls-mid-atlantic.json yet.
+cadence: null
+license: "US public domain (EPA)"
+attribution: "US EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["VA"]
+access: ["csv", "arcgis"]
+access_detail: "From the federal agent's ALL_CSO_DOWNLOADS.csv (2026-10-31): 51 VA rows: 46 CSO + 5 closed (CLS). VA0063177 Richmond 25 CSO + 4 CLS; VA0024970 Lynchburg 17 CSO; VA0025160 AlexRenew 4 CSO (permit status ADC, expired 2026-06-30); VA0025542 Covington 1 CLS (Jackson River). Receiving waters and coordinates per outfall. Saved raw/echo-cso-inventory-va.json. Not in data/outfalls-mid-atlantic.json yet."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

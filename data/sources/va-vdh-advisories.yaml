@@ -1,0 +1,23 @@
+id: "va-vdh-advisories"
+name: "Virginia Department of Health recreational water and swimming advisories (newsroom search RSS)"
+url: "https://www.vdh.virginia.gov/news/?s=recreational+water+advisory&feed=rss2"
+homepage: "https://www.vdh.virginia.gov/news/"
+kind: "rss"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/va_vdh_advisories.py
+#   (data/build/events/va-vdh-advisories.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/va_vdh_advisories.py docstring): hourly.
+cadence: "1 hour"
+license: "No licence on releases; public government news."
+attribution: "Virginia Department of Health news releases"
+enabled: true
+role: "advisories"
+event_types: ["sso", "bypass", "beach_advisory", "hab_advisory"]
+states: ["VA"]
+registry_ids: ["va-vdh-news-advisory-feed"]
+access: ["rss"]
+access_detail: "WordPress search feeds (10 items a page, &paged=N): ?s=recreational+water+advisory, ?s=swimming+advisory, ?s=advisory+lifted and ?s=sewage, each &feed=rss2; full release text in content:encoded. Issued and lifted releases are paired into one advisory."
+machine_readable: true
+legal_basis: "VDH discretion (no statutory trigger); feeds DEQ's § 62.1-44.19:6 B duty"
+checked: "2026-11-02"

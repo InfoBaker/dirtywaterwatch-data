@@ -1,0 +1,41 @@
+id: "va-deq-prep-export-mapserver"
+name: "DEQ PReP Report Export All (ArcGIS table; GeoHub / data.virginia.gov dataset)"
+url: "https://gisdata.deq.virginia.gov/arcgis/rest/services/public/PREP_REPORT_EXPORTALL/MapServer/0"
+homepage: "https://data.virginia.gov/dataset/prep-report-export-all"
+kind: "arcgis"
+level: "state"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Documented,
+#   statistics-capable fallback and backfill for the PReP API; flattened sewage fields; good for
+#   history and counts.
+# Access detail (research, quoted): ArcGIS 12.1 MapServer table (no geometry), maxRecordCount 2000,
+#   supports statistics. Query:
+#   .../MapServer/0/query?where=SEWAGE_RELATED%3D%27Y%27&outFields=*&orderByFields=INCIDENT_DATE_TIME%20DESC&f=json
+#   . Hub item 1b01cc4bd6e54d4e9f8f22195415b2a5 (owner arthur.s.kay_VADEQ, recordCount 117,334);
+#   CSV/GeoJSON/KML downloads at
+#   https://geohub-vadeq.hub.arcgis.com/api/download/v1/items/1b01cc4bd6e54d4e9f8f22195415b2a5/csv?layers=0
+#   ; listed on data.virginia.gov as prep-report-export-all. 27,134 SEWAGE_RELATED='Y' rows; 2,011
+#   since 2025-01-01 (1,420 typed 'Sanitary Sewer Overflow (SSO)' only).
+# Can fill: source_record_id (IR_NUMBER), event_type (INCIDENT_TYPES), source_status
+#   (IR_DESCRIPTION_STATUS), started_at, reported_at, waterbody, location_text, material
+#   (MATERIALS_INVOLVED), volume, units, authority (DEQ_REGION), raw_record
+# Cannot fill: coordinates; ended_at (only duration hours); source_updated_at; advice_text;
+#   valid_until
+# Waters: statewide (openboatlaunch slugs: james-river-va, elizabeth-river-va, potomac-river-va,
+#   rappahannock-river-va, roanoke-river-va)
+# History: Pre-2008 to present.
+# Research notes: TIME TRAP: epoch values equal the local wall-clock time plus 5 hours all year
+#   (e.g. API 2026-08-04T19:16:57 = export 1785889017000 = 2026-08-05T00:16:57Z), so in summer they
+#   are one hour late if read as UTC. Convert by subtracting 5 h and treating the result as
+#   America/New_York wall-clock.
+cadence: "Export refreshed at least daily (rows from 2026-10-30 present on 2026-11-02); same lag as PReP."
+license: "Hub licenseInfo: 'See DEQ Terms of Use'. Same attribution statement as the PReP page applies."
+attribution: "Virginia Department of Environmental Quality"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass", "cso"]
+states: ["VA"]
+access: ["arcgis", "csv", "api"]
+access_detail: "ArcGIS 12.1 MapServer table (no geometry), maxRecordCount 2000, supports statistics. Query: .../MapServer/0/query?where=SEWAGE_RELATED%3D%27Y%27&outFields=*&orderByFields=INCIDENT_DATE_TIME%20DESC&f=json . Hub item 1b01cc4bd6e54d4e9f8f22195415b2a5 (owner arthur.s.kay_VADEQ, recordCount 117,334); CSV/GeoJSON/KML downloads at https://geohub-vadeq.hub.arcgis.com/api/download/v1/items/1b01cc4bd6e54d4e9f8f22195415b2a5/csv?layers=0 ; listed on data.virginia.gov as prep-report-export-all. 27,134 SEWAGE_RELATED='Y' rows; 2,011 since 2025-01-01 (1,420 typed 'Sanitary Sewer Overflow (SSO)' only)."
+machine_readable: true
+legal_basis: "As PReP"
+checked: "2026-11-02"

@@ -1,0 +1,23 @@
+id: "me-mhb-risk-matrix"
+name: "Maine Healthy Beaches Risk Assessment Matrix; freshwater beach sampling guidance (2021)"
+url: "https://www.mainehealthybeaches.org/"
+homepage: "https://www.mainehealthybeaches.org/"
+kind: "html"
+level: "academic"
+# Notes (research/science, status candidate, verified fetched, checked 2026-11-01): Downloaded, not
+#   mined.
+# Access detail (research, quoted): Raw copy research/science/raw/dl-nne/mhb/*.pdf (downloaded
+#   2026-11-01 by NNE sub-researcher; text read by lead)
+# Research notes: Also recorded as me-mhb-advisory-factsheet.
+cadence: null
+license: "none stated"
+attribution: "Maine Healthy Beaches"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["ME"]
+access: ["html"]
+access_detail: "Raw copy research/science/raw/dl-nne/mhb/*.pdf (downloaded 2026-11-01 by NNE sub-researcher; text read by lead)"
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

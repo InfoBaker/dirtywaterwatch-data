@@ -1,0 +1,866 @@
+{
+ "state": "KY",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "KY0020095",
+   "permittee": "RWRA MAX RHOADS WWTP",
+   "city": "OWENSBORO",
+   "open_outfalls": 8,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "KY0020257",
+   "permittee": "MAYSVILLE STP",
+   "city": "MAYSVILLE",
+   "open_outfalls": 14,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Limestone Creek",
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "KY0020711",
+   "permittee": "HENDERSON STP",
+   "city": "HENDERSON",
+   "open_outfalls": 15,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "KY0021440",
+   "permittee": "MORGANFIELD WWTP",
+   "city": "MORGANFIELD",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "UT to Lost Creek"
+   ]
+  },
+  {
+   "npdes_permit": "KY0021466",
+   "permittee": "NORTHERN KY SANITATION DISTRICT 1- DRY CREEK",
+   "city": "ERLANGER",
+   "open_outfalls": 88,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Banklick Creek",
+    "Licking River",
+    "Ohio River",
+    "Pleasant Run Creek",
+    "UT to Banklick Creek",
+    "UT to Fourmile Creek",
+    "UT to Ohio River",
+    "UT to Ohio River (Taylor Creek)",
+    "UT to Ohio River (UT to Taylor Cree",
+    "UT to Ohio River (UT to Taylor Creek)",
+    "UT to Pleasant Run Creek",
+    "Unnamed Tributary to Ohio River (Covert Run)",
+    "Unnamed Tributary to Ohio River (UT to Taylor Cree"
+   ]
+  },
+  {
+   "npdes_permit": "KY0021512",
+   "permittee": "VANCEBURG STP",
+   "city": "VANCEBURG",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "KY0022373",
+   "permittee": "ASHLAND STP",
+   "city": "ASHLAND",
+   "open_outfalls": 8,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "OHIO RIVER",
+    "UT / OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "KY0022411",
+   "permittee": "MORRIS FORMAN WQTC MSD",
+   "city": "LOUISVILLE",
+   "open_outfalls": 121,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "OHIO RIVER",
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "KY0022799",
+   "permittee": "PADUCAH/MCCRACKEN COUNTY JSA - PADUCAH",
+   "city": "PADUCAH",
+   "open_outfalls": 11,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "KY0022861",
+   "permittee": "FRANKFORT MUNICIPAL STP",
+   "city": "FRANKFORT",
+   "open_outfalls": 16,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "Benson Creek",
+    "KENTUCKY RIVER",
+    "Kentucky River",
+    "UT of Penitentiary Branch"
+   ]
+  },
+  {
+   "npdes_permit": "KY0022926",
+   "permittee": "WORTHINGTON WWTP",
+   "city": "WORTHINGTON",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "KY0024058",
+   "permittee": "PINEVILLE STP",
+   "city": "PINEVILLE",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Cumberland River"
+   ]
+  },
+  {
+   "npdes_permit": "KY0025291",
+   "permittee": "PIKEVILLE WWTP",
+   "city": "PIKEVILLE",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "Levisa Fork",
+    "Pikeville Pond"
+   ]
+  },
+  {
+   "npdes_permit": "KY0026093",
+   "permittee": "HARLAN STP",
+   "city": "LOYALL",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "UT to Martins Fork"
+   ]
+  },
+  {
+   "npdes_permit": "KY0026115",
+   "permittee": "LOYALL STP",
+   "city": "LOYALL",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "UT to Cumberland River"
+   ]
+  },
+  {
+   "npdes_permit": "KY0027413",
+   "permittee": "PRESTONSBURG STP",
+   "city": "PRESTONSBURG",
+   "open_outfalls": 0,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "Levisa Fork",
+    "Trimble Branch"
+   ]
+  },
+  {
+   "npdes_permit": "KY0035467",
+   "permittee": "CATLETTSBURG STP",
+   "city": "CATLETTSBURG",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Catletts Creek"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 289,
+ "plant_permits": 359,
+ "plant_permits_major": 95,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "KY0020001",
+   "permittee": "La Grange STP",
+   "city": "LA GRANGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0020010",
+   "permittee": "Greenville STP",
+   "city": "GREENVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0020079",
+   "permittee": "Hazard, City of",
+   "city": "HAZARD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0020095",
+   "permittee": "Rwra Max Rhoads WWTP",
+   "city": "OWENSBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0020133",
+   "permittee": "Corbin STP",
+   "city": "CITY OF CORBIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0020150",
+   "permittee": "Georgetown STP #1",
+   "city": "GEORGETOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0020257",
+   "permittee": "Maysville STP",
+   "city": "MAYSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0020427",
+   "permittee": "Shelbyville STP",
+   "city": "SHELBYVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0020621",
+   "permittee": "Versailles STP",
+   "city": "VERSAILLES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0020711",
+   "permittee": "Henderson STP",
+   "city": "HENDERSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0020877",
+   "permittee": "Russellville STP",
+   "city": "RUSSELLVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0020974",
+   "permittee": "Lancaster WWTP",
+   "city": "LANCASTER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0021067",
+   "permittee": "Lawrenceburg STP",
+   "city": "LAWRENCEBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0021164",
+   "permittee": "Glasgow STP",
+   "city": "GLASGOW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0021172",
+   "permittee": "Benton STP",
+   "city": "BENTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0021211",
+   "permittee": "Mayfield STP",
+   "city": "MAYFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0021229",
+   "permittee": "Flemingsburg STP",
+   "city": "FLEMINGSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0021237",
+   "permittee": "Bardstown Town Creek WWTP",
+   "city": "BARDSTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0021270",
+   "permittee": "London STP",
+   "city": "LONDON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0021440",
+   "permittee": "Morganfield WWTP",
+   "city": "MORGANFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0021466",
+   "permittee": "Northern KY Sanitation District 1- Dry Creek",
+   "city": "ERLANGER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0021491",
+   "permittee": "Lexington Town Branch STP",
+   "city": "LEXINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0021504",
+   "permittee": "Lexington West Hickman STP",
+   "city": "NICHOLASVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0022039",
+   "permittee": "Elizabethtown Valley Creek WWTP",
+   "city": "ELIZABETHTOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0022373",
+   "permittee": "Ashland STP",
+   "city": "ASHLAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0022390",
+   "permittee": "Radcliff STP",
+   "city": "RADCLIFF",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0022403",
+   "permittee": "Bowling Green Municipal Utilities",
+   "city": "BOWLING GREEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0022411",
+   "permittee": "Morris Forman WQTC MSD",
+   "city": "LOUISVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0022420",
+   "permittee": "Hite Creek WQTC MSD",
+   "city": "LOUISVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0022799",
+   "permittee": "Paducah/McCracken County JSA - Paducah",
+   "city": "PADUCAH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0022845",
+   "permittee": "RICHMOND DREAMING CREEK STP",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "KY0022853",
+   "permittee": "RICHMOND TATES CREEK STP",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "KY0022861",
+   "permittee": "Frankfort Municipal STP",
+   "city": "FRANKFORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0022934",
+   "permittee": "Leitchfield STP",
+   "city": "LEITCHFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0023540",
+   "permittee": "Central City STP",
+   "city": "CENTRAL CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0024082",
+   "permittee": "Barbourville STP",
+   "city": "BARBOURVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0024317",
+   "permittee": "Columbia/Adair County STP",
+   "city": "COLUMBIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0024619",
+   "permittee": "Stanford STP",
+   "city": "STANFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0024783",
+   "permittee": "Scottsville STP",
+   "city": "SCOTTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0025291",
+   "permittee": "Pikeville WWTP",
+   "city": "PIKEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0025810",
+   "permittee": "Paducah/McCracken County JSA - Reidland",
+   "city": "PADUCAH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0025909",
+   "permittee": "Irvine STP",
+   "city": "IRVINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0026093",
+   "permittee": "Harlan STP",
+   "city": "LOYALL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0026549",
+   "permittee": "Lebanon STP",
+   "city": "LEBANON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0026611",
+   "permittee": "Somerset STP",
+   "city": "SOMERSET",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0027359",
+   "permittee": "Shepherdsville STP",
+   "city": "SHEPHERDSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0027421",
+   "permittee": "Harrodsburg STP",
+   "city": "HARRODSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0027456",
+   "permittee": "Franklin STP",
+   "city": "FRANKLIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0027979",
+   "permittee": "Eddyville STP",
+   "city": "EDDYVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0028347",
+   "permittee": "Williamsburg STP",
+   "city": "WILLIAMSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0028401",
+   "permittee": "Princeton STP",
+   "city": "PRINCETON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0028428",
+   "permittee": "Wilmore STP",
+   "city": "WILMORE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0029122",
+   "permittee": "Manchester STP",
+   "city": "MANCHESTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0033553",
+   "permittee": "Greenup Joint Sewer Agency",
+   "city": "WURTLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0033804",
+   "permittee": "Mount Washington STP",
+   "city": "MOUNT WASHINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0033847",
+   "permittee": "Monticello STP",
+   "city": "MONTICELLO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0034428",
+   "permittee": "Red River WWTP",
+   "city": "STANTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0037991",
+   "permittee": "Strodes Creek STP",
+   "city": "WINCHESTER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0040126",
+   "permittee": "Louisville and Jefferson County MSD",
+   "city": "LA GRANGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0048348",
+   "permittee": "Greenup County Environmental Commission Wastewater Treatment Plant",
+   "city": "RUSSELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0052752",
+   "permittee": "Morehead STP",
+   "city": "MOREHEAD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0054437",
+   "permittee": "Campbellsville STP",
+   "city": "CAMPBELLSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0057193",
+   "permittee": "Danville STP",
+   "city": "DANVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0062995",
+   "permittee": "Russell County Regional STP",
+   "city": "JAMESTOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0066532",
+   "permittee": "Hopkinsville Hammond Wood STP",
+   "city": "HOPKINSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0072761",
+   "permittee": "Bee Creek WWTP",
+   "city": "MURRAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0072885",
+   "permittee": "Middlesboro STP",
+   "city": "MIDDLESBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0073377",
+   "permittee": "Owensboro East STP",
+   "city": "OWENSBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0078956",
+   "permittee": "Derek R Guthrie WQTC MSD",
+   "city": "LOUISVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0079898",
+   "permittee": "Berea Municipal Utilities WWTP",
+   "city": "BEREA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0082007",
+   "permittee": "Georgetown STP #2",
+   "city": "GEORGETOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0090654",
+   "permittee": "Paris STP",
+   "city": "PARIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0091561",
+   "permittee": "Caveland Environmental Authority",
+   "city": "HORSE CAVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0098043",
+   "permittee": "Madisonville STP West Side",
+   "city": "MADISONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0098540",
+   "permittee": "Cedar Creek WQTC MSD",
+   "city": "LOUISVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0100293",
+   "permittee": "Henderson South STP #2",
+   "city": "ROBARDS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0100404",
+   "permittee": "Jessamine Creek Environmental Control #1",
+   "city": "NICHOLASVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0102784",
+   "permittee": "Floyds Fork WQTC MSD",
+   "city": "LOUISVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0103357",
+   "permittee": "Richmond Silver Creek STP",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0103578",
+   "permittee": "Honey Branch Regional STP",
+   "city": "VAN LEAR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0104027",
+   "permittee": "Jerry L Riley STP",
+   "city": "BARDSTOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0104400",
+   "permittee": "Mount Sterling Hinkston Creek STP",
+   "city": "MOUNT STERLING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0104931",
+   "permittee": "Carrollton Regional WWTP",
+   "city": "CARROLLTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0105031",
+   "permittee": "Eastern Regional STP- Eastern Regional",
+   "city": "ALEXANDRIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0105376",
+   "permittee": "Northern Madison County Sanitation District",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0105791",
+   "permittee": "Ohio County Regional STP",
+   "city": "BEAVER DAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0105856",
+   "permittee": "Cynthiana STP New",
+   "city": "CYNTHIANA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "KY0106143",
+   "permittee": "Louisville and Jefferson County MSD",
+   "city": "GOSHEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0107107",
+   "permittee": "Richmond Otter Creek STP",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0107239",
+   "permittee": "Western Regional Water Reclamation Facility",
+   "city": "PETERSBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KY0108740",
+   "permittee": "Winchester Municipal Utilities",
+   "city": "WINCHESTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0109991",
+   "permittee": "Williamstown Regional WRF",
+   "city": "WILLIAMSTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0111716",
+   "permittee": "Louisville and Jefferson County MSD",
+   "city": "CRESTWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0112721",
+   "permittee": "Fort Knox WWTP",
+   "city": "FORT KNOX",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KY0113247",
+   "permittee": "New Marion WWTP",
+   "city": "MARION",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

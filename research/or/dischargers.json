@@ -1,0 +1,206 @@
+[
+  {
+    "id": "or-portland-bes",
+    "name": "City of Portland Bureau of Environmental Services (Columbia Boulevard WWTP and combined sewer system)",
+    "state": "OR",
+    "kind": "cso",
+    "npdes_permit": "OR0026905",
+    "receiving_waters": [
+      "Willamette River",
+      "Columbia Slough"
+    ],
+    "water_slugs": [],
+    "outfall_count": 36,
+    "outfalls_source": "EPA National CSO Inventory (research/or/federal-seed.json)",
+    "notification_channel": "CSO Advisories and Sewage Advisories on portland.gov/bes/news (RSS https://www.portland.gov/bes/news/rss); Big Pipe Tracker; GovDelivery email list ORPORTLAND_ENT 39493",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Portland"
+    ],
+    "notes": "Big Pipe project (2011) cut CSOs to rare storm events (several a year in 2025-26: 2025-02-23, 2025-12-09, 2025-12-18, 2026-03-12). Advisory: avoid contact during the overflow and 48 hours after; area downstream of the Ross Island Bridge.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "or-astoria",
+    "name": "City of Astoria (wastewater treatment plant and combined sewer system)",
+    "state": "OR",
+    "kind": "cso",
+    "npdes_permit": "OR0027561",
+    "receiving_waters": [
+      "Columbia River",
+      "Youngs Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": 38,
+    "outfalls_source": "EPA National CSO Inventory (research/or/federal-seed.json)",
+    "notification_channel": "None found (city CSO page is background, marked 2019; one 2025 pump-station overflow known from the Daily Astorian)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Astoria"
+    ],
+    "notes": "DEQ consent order (2010 memo) on CSO reduction.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "or-corvallis",
+    "name": "City of Corvallis (wastewater reclamation plant)",
+    "state": "OR",
+    "kind": "cso",
+    "npdes_permit": "OR0026361",
+    "receiving_waters": [
+      "Willamette River"
+    ],
+    "water_slugs": [],
+    "outfall_count": 4,
+    "outfalls_source": "EPA National CSO Inventory (research/or/federal-seed.json)",
+    "notification_channel": "Public Notification & Spill Response Plan page (corvallisoregon.gov/node/9031); no event list found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Corvallis"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "or-clean-water-services",
+    "name": "Clean Water Services (Washington County)",
+    "state": "OR",
+    "kind": "sso",
+    "npdes_permit": "OR0020168 and others",
+    "receiving_waters": [
+      "Tualatin River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "DEQ OERS spill points 2013-2025 (location of reported releases)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Hillsboro",
+      "Beaverton",
+      "Tigard",
+      "Forest Grove"
+    ],
+    "notes": "Large separate-sewer operator; SSOs reported to DEQ via OERS. NPDES numbers not checked unless given.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "or-wes-clackamas",
+    "name": "Water Environment Services (Clackamas County)",
+    "state": "OR",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Willamette River",
+      "Clackamas River",
+      "Kellogg Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "DEQ OERS spill points 2013-2025 (location of reported releases)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Oregon City",
+      "Milwaukie",
+      "Happy Valley"
+    ],
+    "notes": "Large separate-sewer operator; SSOs reported to DEQ via OERS. NPDES numbers not checked unless given.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "or-oak-lodge",
+    "name": "Oak Lodge Water Services",
+    "state": "OR",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Willamette River",
+      "Forest Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "DEQ OERS spill points 2013-2025 (location of reported releases)",
+    "notification_channel": "Posts each overflow on its website (oakwater.specialdistrict.org)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Oak Grove",
+      "Jennings Lodge"
+    ],
+    "notes": "Large separate-sewer operator; SSOs reported to DEQ via OERS. NPDES numbers not checked unless given.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "or-salem",
+    "name": "City of Salem (Willow Lake WPCF)",
+    "state": "OR",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Willamette River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "DEQ OERS spill points 2013-2025 (location of reported releases)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Salem",
+      "Keizer"
+    ],
+    "notes": "Large separate-sewer operator; SSOs reported to DEQ via OERS. NPDES numbers not checked unless given.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "or-mwmc-eugene-springfield",
+    "name": "Metropolitan Wastewater Management Commission (Eugene-Springfield)",
+    "state": "OR",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Willamette River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "DEQ OERS spill points 2013-2025 (location of reported releases)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Eugene",
+      "Springfield"
+    ],
+    "notes": "Large separate-sewer operator; SSOs reported to DEQ via OERS. NPDES numbers not checked unless given.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "or-tillamook",
+    "name": "City of Tillamook",
+    "state": "OR",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Hoquarten Slough",
+      "Trask River",
+      "Tillamook Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "DEQ OERS spill points 2013-2025 (location of reported releases)",
+    "notification_channel": "none found; OERS rows (2025-03-26 sewer bypass)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Tillamook"
+    ],
+    "notes": "Large separate-sewer operator; SSOs reported to DEQ via OERS. NPDES numbers not checked unless given.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  }
+]

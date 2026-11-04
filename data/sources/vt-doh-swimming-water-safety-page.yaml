@@ -1,0 +1,24 @@
+id: "vt-doh-swimming-water-safety-page"
+name: "VT Dept of Health Swimming & Water Safety page"
+url: "https://www.healthvermont.gov/environment/swimming-water-safety"
+homepage: "https://www.healthvermont.gov/environment/swimming-water-safety"
+kind: "html"
+level: "state"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): Points to State Parks
+#   beach look-up and tracker; says town swim-area testing is a town health officer matter (no
+#   statewide beach E. coli feed).
+# Access detail (research, quoted): none recorded
+# Research notes: 'Questions about the water quality of your town's public swimming area? Ask your
+#   town health officer about local swim water testing and results.' Last Updated: August 27, 2026.
+cadence: null
+license: "none stated"
+attribution: "Vermont Department of Health"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["VT"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

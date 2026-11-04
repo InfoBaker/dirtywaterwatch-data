@@ -1,0 +1,283 @@
+[
+  {
+    "id": "ok-deq-opdes-rules",
+    "name": "OAC 252:606 Oklahoma Pollutant Discharge Elimination System (OPDES) Standards",
+    "jurisdiction": "OK",
+    "operator": "Oklahoma Department of Environmental Quality",
+    "operator_type": "state",
+    "role": "law",
+    "event_types": [
+      "sso",
+      "bypass"
+    ],
+    "waters_covered": "statewide",
+    "water_slugs": [],
+    "url": "https://www.law.cornell.edu/regulations/oklahoma/title-252/chapter-606",
+    "access": [
+      "html"
+    ],
+    "access_detail": "Chapter outline read on LII (justia returned 403): Subchapters 1, 3, 5, 6 (Point Source Discharges), 11 (Tests and Reports). No section titled on overflows or public notice in the outline; Subchapters 6 and 11 not read. OPDES permits carry the federal 24-hour / 5-day noncompliance condition (inferred from 40 CFR 122.41(l)(6) adoption).",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "n/a",
+    "history": "n/a",
+    "license": "n/a",
+    "legal_basis": "OAC 252:606",
+    "status": "used",
+    "status_reason": "No public-notice duty found in the outline.",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ok-deq-industrial-spill-rule",
+    "name": "OAC 252:616-5-3 (industrial wastewater) spill notice to DEQ",
+    "jurisdiction": "OK",
+    "operator": "Oklahoma Department of Environmental Quality",
+    "operator_type": "state",
+    "role": "law",
+    "event_types": [
+      "unauthorized_discharge"
+    ],
+    "waters_covered": "industrial wastewater systems",
+    "water_slugs": [],
+    "url": "https://regulations.justia.com/states/oklahoma/title-252/chapter-616/subchapter-5/section-252-616-5-3/",
+    "access": [
+      "html"
+    ],
+    "access_detail": "Per search snippet: notice to DEQ within 24 hours of any wastewater spill or release, written notice within 7 days. Applies to industrial systems; relevance to municipal SSOs unconfirmed.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "n/a",
+    "history": "n/a",
+    "license": "n/a",
+    "legal_basis": "OAC 252:616-5-3",
+    "status": "watch",
+    "status_reason": "Industrial only.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ok-epa-sobe",
+    "name": "EPA SOBE (eRule) extract, Oklahoma rows",
+    "jurisdiction": "OK",
+    "operator": "US EPA",
+    "operator_type": "federal",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "n/a",
+    "water_slugs": [],
+    "url": "https://echo.epa.gov/tools/data-downloads",
+    "access": [
+      "csv"
+    ],
+    "access_detail": "0 Oklahoma rows on 2026-11-03.",
+    "machine_readable": true,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "daily",
+    "history": "n/a",
+    "license": "public domain",
+    "legal_basis": "40 CFR 127",
+    "status": "rejected",
+    "status_reason": "No rows.",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ok-deq-gis-waterqweb",
+    "name": "Oklahoma DEQ WaterQWeb MapServer",
+    "jurisdiction": "OK",
+    "operator": "Oklahoma Department of Environmental Quality",
+    "operator_type": "state",
+    "role": "outfalls",
+    "event_types": [
+      "permitted"
+    ],
+    "waters_covered": "statewide",
+    "water_slugs": [],
+    "url": "https://gis.deq.ok.gov/server/rest/services/WaterQWeb/MapServer",
+    "access": [
+      "arcgis"
+    ],
+    "access_detail": "Public layers include 4 \"NPDES Dischargers\", 5 PWS surface water intakes, 7 total retention facilities, 18-20 2024 integrated report / 303(d) / TMDLs, 21 biosolid sites. No overflow or spill layer on the server (folders AirData, Hosted, Utilities; services listed in raw/deq-services.json).",
+    "machine_readable": true,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [
+      "coordinates (dischargers)"
+    ],
+    "cannot_fill": [
+      "events"
+    ],
+    "has_coordinates": true,
+    "has_outfall_ids": false,
+    "cadence": "unknown",
+    "history": "n/a",
+    "license": "None shown.",
+    "legal_basis": null,
+    "status": "watch",
+    "status_reason": "Discharger points and drinking-water intakes; no events.",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ok-otrd-checkmyoklake",
+    "name": "Oklahoma Tourism and Recreation Department \"Check My OK Lake\" blue-green algae status",
+    "jurisdiction": "OK",
+    "operator": "Oklahoma Tourism and Recreation Department",
+    "operator_type": "state",
+    "role": "advisories",
+    "event_types": [
+      "hab"
+    ],
+    "waters_covered": "state-park and public lakes",
+    "water_slugs": [],
+    "url": "https://www.checkmyoklake.com/",
+    "access": [
+      "html"
+    ],
+    "access_detail": "WebFetch HTTP 503; curl TLS verification failure on 2026-11-03. Per search: shows recreational water quality and blue-green algae levels by lake. Advisory basis in statute (74 O.S. 2301 as summarised in search): advisories when both cell counts and toxin tests exceed WHO moderate-risk guidelines, lifted after two consecutive tests below.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [
+      "source_status",
+      "waterbody"
+    ],
+    "cannot_fill": [
+      "coordinates (unknown)"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "unknown",
+    "history": "unknown",
+    "license": "unknown",
+    "legal_basis": "74 O.S. 2301 (not read)",
+    "status": "unreachable",
+    "status_reason": "503 / TLS error; retry from another network.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ok-usace-tulsa-hab",
+    "name": "US Army Corps of Engineers Tulsa District blue-green algae lake advisories",
+    "jurisdiction": "OK",
+    "operator": "US Army Corps of Engineers, Tulsa District",
+    "operator_type": "federal",
+    "role": "advisories",
+    "event_types": [
+      "hab"
+    ],
+    "waters_covered": "Corps lakes (Texoma, Eufaula, Keystone, Tenkiller and others)",
+    "water_slugs": [],
+    "url": "https://www.swt.usace.army.mil/",
+    "access": [
+      "html"
+    ],
+    "access_detail": "Corps posts and updates algae advisories for its lakes (press 2011-2013). Not fetched.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "seasonal",
+    "history": "unknown",
+    "license": "US government",
+    "legal_basis": null,
+    "status": "watch",
+    "status_reason": "Possible HAB source for Corps lakes.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ok-okc-tulsa-utilities",
+    "name": "Oklahoma City Utilities and City of Tulsa Water and Sewer overflow notices",
+    "jurisdiction": "OK",
+    "operator": "City of Oklahoma City; City of Tulsa",
+    "operator_type": "municipal",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "North Canadian (Oklahoma) River, Deep Fork; Arkansas River, Haikey Creek",
+    "water_slugs": [],
+    "url": "https://www.okc.gov/departments/utilities",
+    "access": [
+      "html",
+      "social"
+    ],
+    "access_detail": "No overflow notice page or map found for either city (search only).",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": null,
+    "status": "watch",
+    "status_reason": "None found.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ok-beaches",
+    "name": "Oklahoma bacteria beach monitoring",
+    "jurisdiction": "OK",
+    "operator": "Oklahoma Department of Environmental Quality",
+    "operator_type": "state",
+    "role": "advisories",
+    "event_types": [
+      "beach_advisory"
+    ],
+    "waters_covered": "none found",
+    "water_slugs": [],
+    "url": "https://www.deq.ok.gov/",
+    "access": [],
+    "access_detail": "No state bacteria beach program found (inland, not a BEACH Act state). Grand River Dam Authority and Blue Thumb (Oklahoma Conservation Commission) sample some waters (not checked).",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": null,
+    "status": "rejected",
+    "status_reason": "None found.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  }
+]

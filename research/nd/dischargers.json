@@ -1,0 +1,193 @@
+[
+ {
+  "id": "nd-fargo",
+  "name": "City of Fargo",
+  "state": "ND",
+  "kind": "sso",
+  "npdes_permit": "ND0022870",
+  "receiving_waters": [
+   "Red River of the North"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Permit requires an SSO public notification plan and immediate notice to the public; channel not found on the web (not searched in depth).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fargo"
+  ],
+  "notes": "Legacy EIR table shows Cass County sewage spills (2014, 2017).",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nd-grand-forks",
+  "name": "City of Grand Forks",
+  "state": "ND",
+  "kind": "sso",
+  "npdes_permit": "ND0022888",
+  "receiving_waters": [
+   "Red River of the North",
+   "Red Lake River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found (not searched in depth).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Grand Forks"
+  ],
+  "notes": "Most frequent sewage reporter in the 1975-2020 EIR table (500,000 gallon spills in Sept 2019).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nd-bismarck",
+  "name": "City of Bismarck Public Works",
+  "state": "ND",
+  "kind": "sso",
+  "npdes_permit": "ND0023434",
+  "receiving_waters": [
+   "Missouri River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bismarck"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nd-west-fargo",
+  "name": "City of West Fargo",
+  "state": "ND",
+  "kind": "sso",
+  "npdes_permit": "ND0022616",
+  "receiving_waters": [
+   "Sheyenne River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "West Fargo"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nd-minot",
+  "name": "City of Minot",
+  "state": "ND",
+  "kind": "sso",
+  "npdes_permit": "ND0022896",
+  "receiving_waters": [
+   "Souris River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Minot"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nd-mandan",
+  "name": "City of Mandan",
+  "state": "ND",
+  "kind": "sso",
+  "npdes_permit": "ND0022861",
+  "receiving_waters": [
+   "Missouri River",
+   "Heart River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mandan"
+  ],
+  "notes": "EPA permit name field holds a person's name; withheld.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nd-williston",
+  "name": "City of Williston",
+  "state": "ND",
+  "kind": "sso",
+  "npdes_permit": "ND0022349",
+  "receiving_waters": [
+   "Missouri River (Lake Sakakawea headwaters)"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Williston"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nd-dickinson",
+  "name": "City of Dickinson",
+  "state": "ND",
+  "kind": "sso",
+  "npdes_permit": "ND0023175",
+  "receiving_waters": [
+   "Heart River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dickinson"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nd-jamestown",
+  "name": "City of Jamestown",
+  "state": "ND",
+  "kind": "sso",
+  "npdes_permit": "ND0023370",
+  "receiving_waters": [
+   "James River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Jamestown"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ }
+]

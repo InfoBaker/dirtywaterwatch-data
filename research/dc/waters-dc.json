@@ -1,0 +1,729 @@
+{
+ "note": "Proposed DC water records. openboatlaunch has no DC waters (it has potomac-river-md, potomac-river-va, anacostia-river-md). NHD names, GNIS IDs and reach codes from USGS NHD MapServer layer 6 clipped to the DC GIS boundary polygon (layer 10); bbox_in_dc is the bbox of NHD vertices inside DC. Slugs follow '<name>-dc' and are proposals, not final. Checked 2026-11-02.",
+ "waters": [
+  {
+   "proposed_slug": "potomac-river-dc",
+   "name": "Potomac River",
+   "kind": "river",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Potomac River",
+   "gnis_id": "00597915",
+   "nhd_reachcodes_in_dc": [
+    "02070008003684",
+    "02070008014420",
+    "02070010000046",
+    "02070010000047",
+    "02070010000084",
+    "02070010001251",
+    "02070010001252",
+    "02070010001253",
+    "02070010011807",
+    "02070010011820",
+    "02070010012816",
+    "02070010012824",
+    "02070010012836",
+    "02070010012837"
+   ],
+   "bbox_in_dc": [
+    -77.11828,
+    38.79678,
+    -77.02305,
+    38.9335
+   ],
+   "length_km_in_dc": 19.34,
+   "dc_wqs_class_21_DCMR_1101": "current B,C,D,E; designated A,B,C,D,E",
+   "wikidata": "Q179444",
+   "openboatlaunch_neighbours": [
+    "potomac-river-md",
+    "potomac-river-va"
+   ],
+   "cso_outfalls_dc0021199": "11 in ECHO inventory (003, 003A, 020-029); 8 active in Q2 2026 (003A, 020, 021, 022, 024, 027, 028, 029)",
+   "source_aliases": [
+    "Potomac River",
+    "Potomac River, East Side"
+   ],
+   "why_listed": "CSO and SSO receiving water; Potomac Interceptor overflows; DC Health advisory 2026",
+   "note": "DC's boundary takes in the river to the Virginia shore; openboatlaunch splits it into MD and VA records. Reach codes 0207000800xxxx above Little Falls, 0207001000xxxx below."
+  },
+  {
+   "proposed_slug": "anacostia-river-dc",
+   "name": "Anacostia River",
+   "kind": "river",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Anacostia River",
+   "gnis_id": "00532032",
+   "nhd_reachcodes_in_dc": [
+    "02070010000050",
+    "02070010000051",
+    "02070010001217",
+    "02070010001218",
+    "02070010001222",
+    "02070010001250"
+   ],
+   "bbox_in_dc": [
+    -77.02305,
+    38.85201,
+    -76.94193,
+    38.91855
+   ],
+   "length_km_in_dc": 11.75,
+   "dc_wqs_class_21_DCMR_1101": "current B,C,D,E; designated A,B,C,D,E",
+   "wikidata": "Q483607",
+   "openboatlaunch_neighbours": [
+    "anacostia-river-md"
+   ],
+   "cso_outfalls_dc0021199": "15 in ECHO (005-019A; 019 mis-tagged 'Potomac River'); 11 active in Q2 2026; 015-018 consolidated to tunnel",
+   "source_aliases": [
+    "Anacostia River",
+    "Anacostia river",
+    "Anacostia River, East Side",
+    "Anacostia River, West Side",
+    "Lower Anacostia River",
+    "Anacostia (DC GIS)"
+   ],
+   "why_listed": "CSO, Anacostia Force Main SSO 2025",
+   "note": "openboatlaunch's anacostia-river-md covers only the Bladensburg segment (bbox 38.917-38.942 N)."
+  },
+  {
+   "proposed_slug": "rock-creek-dc",
+   "name": "Rock Creek",
+   "kind": "river",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Rock Creek",
+   "gnis_id": "00531463",
+   "nhd_reachcodes_in_dc": [
+    "02070010000087",
+    "02070010012810",
+    "02070010012820",
+    "02070010012826",
+    "02070010012827",
+    "02070010012828",
+    "02070010012829",
+    "02070010012831",
+    "02070010012832",
+    "02070010012833",
+    "02070010012834",
+    "02070010012835"
+   ],
+   "bbox_in_dc": [
+    -77.05935,
+    38.89869,
+    -77.03949,
+    38.98701
+   ],
+   "length_km_in_dc": 15.74,
+   "dc_wqs_class_21_DCMR_1101": "current B,C,D,E; designated A,B,C,D,E",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "29 in ECHO (031-060, some separated); 23 active in Q2 2026",
+   "source_aliases": [
+    "Rock Creek",
+    "Rock Creek ",
+    "ROCK CREEK",
+    "Rock Creek East Side",
+    "Rock Creek West Side"
+   ],
+   "why_listed": "CSO and SSO receiving water",
+   "note": "Rock Creek also continues into Montgomery County MD (no openboatlaunch record seen)."
+  },
+  {
+   "proposed_slug": "piney-branch-dc",
+   "name": "Piney Branch",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Piney Branch",
+   "gnis_id": "00528659",
+   "nhd_reachcodes_in_dc": [
+    "02070010001830"
+   ],
+   "bbox_in_dc": [
+    -77.04788,
+    38.93522,
+    -77.03831,
+    38.93776
+   ],
+   "length_km_in_dc": 0.91,
+   "dc_wqs_class_21_DCMR_1101": "Rock Creek tributary: current B,C,D; designated A,B,C,D",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "CSO 046-049 on Piney Branch Parkway (ECHO tags them Rock Creek); CSO 049 is the Piney Branch outfall the Piney Branch tunnel will store",
+   "source_aliases": [
+    "@PARK RD @PINEY BRANCH PKY NW (SOBE text)"
+   ],
+   "why_listed": "CSO and SSO",
+   "note": "NHD shows only 0.9 km named in DC; much of Piney Branch is piped."
+  },
+  {
+   "proposed_slug": "broad-branch-dc",
+   "name": "Broad Branch",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Broad Branch",
+   "gnis_id": "00528572",
+   "nhd_reachcodes_in_dc": [
+    "02070010012553",
+    "02070010012554",
+    "02070010012555",
+    "02070010012556",
+    "02070010012557",
+    "02070010012558",
+    "02070010012559",
+    "02070010012560",
+    "02070010012561",
+    "02070010012562",
+    "02070010012563",
+    "02070010012564",
+    "02070010012565",
+    "02070010012566",
+    "02070010012567",
+    "02070010012568",
+    "02070010012569",
+    "02070010012570",
+    "02070010012571",
+    "02070010012572",
+    "02070010012573",
+    "02070010012574"
+   ],
+   "bbox_in_dc": [
+    -77.06684,
+    38.94358,
+    -77.04987,
+    38.95878
+   ],
+   "length_km_in_dc": 2.72,
+   "dc_wqs_class_21_DCMR_1101": "Rock Creek tributary: current B,C,D; designated A,B,C,D",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": null,
+   "source_aliases": [
+    "Broad Branch"
+   ],
+   "why_listed": "SSO receiving water (7 SOBE events 2025-2026)",
+   "note": ""
+  },
+  {
+   "proposed_slug": "soapstone-valley-run-dc",
+   "name": "Soapstone Valley stream",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": null,
+   "gnis_id": null,
+   "nhd_reachcodes_in_dc": [],
+   "bbox_in_dc": [
+    -77.075,
+    38.94,
+    -77.055,
+    38.95
+   ],
+   "length_km_in_dc": null,
+   "dc_wqs_class_21_DCMR_1101": "Rock Creek tributary: current B,C,D; designated A,B,C,D",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": null,
+   "source_aliases": [
+    "soapstone",
+    "Soapstone Stream"
+   ],
+   "why_listed": "SSO receiving water (3 SOBE events)",
+   "note": "No NHD flowline name and not in DC GIS centerline names; runs through Soapstone Valley Park (Rock Creek Park unit) from about 38.944 N, -77.074 W to Rock Creek. Name to confirm with NPS/DC GIS."
+  },
+  {
+   "proposed_slug": "pinehurst-branch-dc",
+   "name": "Pinehurst Branch",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Pinehurst Branch",
+   "gnis_id": "00528879",
+   "nhd_reachcodes_in_dc": [
+    "02070010012609",
+    "02070010012610",
+    "02070010012612",
+    "02070010012613",
+    "02070010012614",
+    "02070010012615",
+    "02070010012616",
+    "02070010012617",
+    "02070010012619",
+    "02070010012620",
+    "02070010012621",
+    "02070010012623",
+    "02070010012624"
+   ],
+   "bbox_in_dc": [
+    -77.0629,
+    38.97113,
+    -77.04362,
+    38.97879
+   ],
+   "length_km_in_dc": 2.38,
+   "dc_wqs_class_21_DCMR_1101": "Rock Creek tributary",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": null,
+   "source_aliases": [],
+   "why_listed": "Rock Creek tributary (no events seen)",
+   "note": ""
+  },
+  {
+   "proposed_slug": "fenwick-branch-dc",
+   "name": "Fenwick Branch",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Fenwick Branch",
+   "gnis_id": "00528596",
+   "nhd_reachcodes_in_dc": [
+    "02070010001796",
+    "02070010001799"
+   ],
+   "bbox_in_dc": [
+    -77.04455,
+    38.98401,
+    -77.04187,
+    38.99505
+   ],
+   "length_km_in_dc": 1.44,
+   "dc_wqs_class_21_DCMR_1101": "Rock Creek tributary",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": null,
+   "source_aliases": [],
+   "why_listed": "Rock Creek tributary (no events seen)",
+   "note": ""
+  },
+  {
+   "proposed_slug": "washington-channel-dc",
+   "name": "Washington Channel",
+   "kind": "channel",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Washington Channel",
+   "gnis_id": "00529389",
+   "nhd_reachcodes_in_dc": [
+    "02070010001048"
+   ],
+   "bbox_in_dc": [
+    -77.04431,
+    38.8569,
+    -77.01921,
+    38.88353
+   ],
+   "length_km_in_dc": 4.62,
+   "dc_wqs_class_21_DCMR_1101": "Washington Ship Channel: current B,C,D,E; designated A,B,C,D,E",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [
+    "Washington Ship Channel",
+    "WC-1 (PRK)"
+   ],
+   "why_listed": "monitoring site; downstream of Potomac CSOs",
+   "note": "No CSO outfalls; DOEE routine E. coli site; marinas (The Wharf)."
+  },
+  {
+   "proposed_slug": "tidal-basin-dc",
+   "name": "Tidal Basin",
+   "kind": "lake",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": null,
+   "gnis_id": null,
+   "nhd_reachcodes_in_dc": [],
+   "bbox_in_dc": null,
+   "length_km_in_dc": null,
+   "dc_wqs_class_21_DCMR_1101": "current B,C,D,E; designated A,B,C,D,E",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [
+    "Tidal Basin"
+   ],
+   "why_listed": "listed in 21 DCMR 1101; paddle boats",
+   "note": "Named in DC GIS Hydrography Centerline; no NHD waterbody name returned."
+  },
+  {
+   "proposed_slug": "kingman-lake-dc",
+   "name": "Kingman Lake",
+   "kind": "lake",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": null,
+   "gnis_id": null,
+   "nhd_reachcodes_in_dc": [],
+   "bbox_in_dc": null,
+   "length_km_in_dc": null,
+   "dc_wqs_class_21_DCMR_1101": "Anacostia River tributary/part: current B,C,D; designated A,B,C,D",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [
+    "Kingman Lake",
+    "AR-3 Anacostia River Kingman Lake (Swim Guide)"
+   ],
+   "why_listed": "ARK monitoring site",
+   "note": "110-acre tidal impoundment beside the Anacostia (DOEE TMDL page); named in DC GIS, not NHD."
+  },
+  {
+   "proposed_slug": "oxon-run-dc",
+   "name": "Oxon Run",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Oxon Run",
+   "gnis_id": "00532036",
+   "nhd_reachcodes_in_dc": [
+    "02070010001228"
+   ],
+   "bbox_in_dc": [
+    -77.00647,
+    38.81719,
+    -76.9728,
+    38.8433
+   ],
+   "length_km_in_dc": 5.14,
+   "dc_wqs_class_21_DCMR_1101": "current B,C,D; designated A,B,C,D",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [
+    "Oxon Run"
+   ],
+   "why_listed": "SSO receiving water (2025-08-18)",
+   "note": "Lower reach in MD is NHD 'Oxon Creek'."
+  },
+  {
+   "proposed_slug": "watts-branch-dc",
+   "name": "Watts Branch",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Watts Branch",
+   "gnis_id": "00532039",
+   "nhd_reachcodes_in_dc": [
+    "02070010000362",
+    "02070010012467",
+    "02070010012468",
+    "02070010012469",
+    "02070010012470",
+    "02070010012471",
+    "02070010012472",
+    "02070010012473",
+    "02070010012474",
+    "02070010012475",
+    "02070010012476",
+    "02070010012477",
+    "02070010012478",
+    "02070010012479",
+    "02070010012480",
+    "02070010012481",
+    "02070010012482",
+    "02070010012483",
+    "02070010012484",
+    "02070010012485",
+    "02070010012486",
+    "02070010012487"
+   ],
+   "bbox_in_dc": [
+    -76.95777,
+    38.89098,
+    -76.91182,
+    38.90828
+   ],
+   "length_km_in_dc": 6.08,
+   "dc_wqs_class_21_DCMR_1101": "current B,C,D; designated A,B,C,D",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [
+    "Watts Branch Creek",
+    "Watts Branch",
+    "WB-1, WB-2 (ARK)"
+   ],
+   "why_listed": "SSO receiving water; ARK monitoring",
+   "note": ""
+  },
+  {
+   "proposed_slug": "hickey-run-dc",
+   "name": "Hickey Run",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Hickey Run",
+   "gnis_id": "00528618",
+   "nhd_reachcodes_in_dc": [
+    "02070010012684",
+    "02070010012685",
+    "02070010012686",
+    "02070010012687",
+    "02070010012688",
+    "02070010012689",
+    "02070010012690",
+    "02070010012691",
+    "02070010012692",
+    "02070010012693",
+    "02070010012694",
+    "02070010012695",
+    "02070010012696",
+    "02070010012697"
+   ],
+   "bbox_in_dc": [
+    -76.9702,
+    38.90779,
+    -76.95697,
+    38.92553
+   ],
+   "length_km_in_dc": 2.68,
+   "dc_wqs_class_21_DCMR_1101": "current B,C,D; designated A,B,C,D",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [
+    "Hickory Run",
+    "Hickory RUN"
+   ],
+   "why_listed": "SSO receiving water (2 events May 2025)",
+   "note": "SOBE spells it 'Hickory Run'."
+  },
+  {
+   "proposed_slug": "pope-branch-dc",
+   "name": "Pope Branch",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Pope Branch",
+   "gnis_id": "00529274",
+   "nhd_reachcodes_in_dc": [
+    "02070010012738",
+    "02070010012739",
+    "02070010012740",
+    "02070010012741",
+    "02070010012742",
+    "02070010012743",
+    "02070010012744",
+    "02070010012745",
+    "02070010012746",
+    "02070010012747",
+    "02070010012748",
+    "02070010012749"
+   ],
+   "bbox_in_dc": [
+    -76.97211,
+    38.87082,
+    -76.94741,
+    38.87979
+   ],
+   "length_km_in_dc": 2.83,
+   "dc_wqs_class_21_DCMR_1101": "Anacostia tributary: current B,C,D; designated A,B,C,D",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [
+    "Pope Branch"
+   ],
+   "why_listed": "SSO receiving water (2026-05-20)",
+   "note": ""
+  },
+  {
+   "proposed_slug": "piney-run-dc",
+   "name": "Piney Run",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Piney Run",
+   "gnis_id": "00532037",
+   "nhd_reachcodes_in_dc": [
+    "02070010012718",
+    "02070010012719",
+    "02070010012720",
+    "02070010012721",
+    "02070010012722",
+    "02070010012723",
+    "02070010012724",
+    "02070010012725"
+   ],
+   "bbox_in_dc": [
+    -76.9635,
+    38.87925,
+    -76.92681,
+    38.88968
+   ],
+   "length_km_in_dc": 3.85,
+   "dc_wqs_class_21_DCMR_1101": "Anacostia tributary",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [],
+   "why_listed": "Anacostia tributary (no events seen)",
+   "note": "NHD 'Piney Run' (GNIS 00532037) east of the Anacostia (Fort Dupont area); local name to confirm."
+  },
+  {
+   "proposed_slug": "barnaby-run-dc",
+   "name": "Barnaby Run",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Barnaby Run",
+   "gnis_id": "00597050",
+   "nhd_reachcodes_in_dc": [
+    "02070010012488",
+    "02070010012511",
+    "02070010012512",
+    "02070010012513",
+    "02070010012514",
+    "02070010012516",
+    "02070010012517"
+   ],
+   "bbox_in_dc": [
+    -77.00646,
+    38.81719,
+    -76.99135,
+    38.82887
+   ],
+   "length_km_in_dc": 1.53,
+   "dc_wqs_class_21_DCMR_1101": "Potomac tributary",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [
+    "Barnaby Run"
+   ],
+   "why_listed": "tributary (no events seen)",
+   "note": "Mostly in MD; 1.5 km in DC."
+  },
+  {
+   "proposed_slug": "maddox-branch-dc",
+   "name": "Maddox Branch",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Maddox Branch",
+   "gnis_id": "00531302",
+   "nhd_reachcodes_in_dc": [
+    "02070010012711",
+    "02070010012712",
+    "02070010012713",
+    "02070010012714",
+    "02070010012715",
+    "02070010012716",
+    "02070010012717"
+   ],
+   "bbox_in_dc": [
+    -77.10146,
+    38.9196,
+    -77.09382,
+    38.92903
+   ],
+   "length_km_in_dc": 1.5,
+   "dc_wqs_class_21_DCMR_1101": "Potomac tributary",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [],
+   "why_listed": "tributary (no events seen)",
+   "note": "Palisades area."
+  },
+  {
+   "proposed_slug": "chesapeake-and-ohio-canal-dc",
+   "name": "Chesapeake and Ohio Canal",
+   "kind": "canal",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Chesapeake and Ohio Canal",
+   "gnis_id": "00532035",
+   "nhd_reachcodes_in_dc": [
+    "02070010001848"
+   ],
+   "bbox_in_dc": [
+    -77.11637,
+    38.9311,
+    -77.1127,
+    38.93589
+   ],
+   "length_km_in_dc": 0.62,
+   "dc_wqs_class_21_DCMR_1101": "C & O Canal: current B,C,D,E; designated A,B,C,D,E",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [
+    "C&O Canal"
+   ],
+   "why_listed": "PI collapse context",
+   "note": "Only 0.6 km of the NHD-named line falls in DC; the canal's Georgetown section runs along CSO 027-029 sewersheds. The Maryland section near Lock 10-13 held the PI bypass in 2026."
+  },
+  {
+   "proposed_slug": "beaverdam-creek-dc",
+   "name": "Beaverdam Creek",
+   "kind": "stream",
+   "state": "DC",
+   "towns": [
+    "Washington"
+   ],
+   "nhd_gnis_name": "Beaverdam Creek",
+   "gnis_id": "00532034",
+   "nhd_reachcodes_in_dc": [
+    "02070010000336"
+   ],
+   "bbox_in_dc": [
+    -76.94372,
+    38.91651,
+    -76.93933,
+    38.9169
+   ],
+   "length_km_in_dc": 0.41,
+   "dc_wqs_class_21_DCMR_1101": "Anacostia tributary",
+   "wikidata": null,
+   "openboatlaunch_neighbours": [],
+   "cso_outfalls_dc0021199": "none",
+   "source_aliases": [
+    "Beaverdam Creek"
+   ],
+   "why_listed": "WSSC overflow route into the Anacostia",
+   "note": "0.4 km in DC at the mouth; WSSC Anacostia WWPS controlled-overflow point is upstream in MD."
+  }
+ ]
+}

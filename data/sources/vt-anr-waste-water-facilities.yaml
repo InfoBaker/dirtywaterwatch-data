@@ -1,0 +1,24 @@
+id: "vt-anr-waste-water-facilities"
+name: "VT ANR Waste Water Facilities (direct-discharge WWTF points)"
+url: "https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_FACILITIES_SP_NOCACHE_v2/MapServer/166"
+homepage: "https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_FACILITIES_SP_NOCACHE_v2/MapServer/166"
+kind: "arcgis"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Join key between
+#   overflow reports and locations.
+# Access detail (research, quoted): 232 points; fields FacilityName, FacilityID, WWInventoryURL.
+#   FacilityID equals the F= parameter in the overflow report links, so every overflow row can be
+#   placed at its plant.
+# Can fill: coordinates (plant, not outfall; precision: facility)
+cadence: null
+license: "Description: \"Spatial data is not maintained and therefore, this dataset may not be complete.\" Vermont Open Geodata Policy v1.1."
+attribution: "VT DEC Wastewater Program (via ANR Open Data)"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["VT"]
+access: ["arcgis"]
+access_detail: "232 points; fields FacilityName, FacilityID, WWInventoryURL. FacilityID equals the F= parameter in the overflow report links, so every overflow row can be placed at its plant."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,182 @@
+{
+ "state": "AK",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "AK0023213",
+   "permittee": "JUNEAU DOUGLAS WW TREATMENT FACILITY",
+   "city": "JUNEAU",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Gastineau Channel"
+   ]
+  },
+  {
+   "npdes_permit": "AKG320002",
+   "permittee": "APSC - TRANS-ALASKA PIPELINE SYSTEM",
+   "city": "NORTH POLE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": []
+  }
+ ],
+ "cso_open_outfalls": 4,
+ "plant_permits": 101,
+ "plant_permits_major": 20,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "AK0020010",
+   "permittee": "SKAGWAY, MUNICIPALITY  OF",
+   "city": "SKAGWAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AK0020036",
+   "permittee": "City of Soldotna",
+   "city": "SOLDOTNA",
+   "major": "Major",
+   "status": "ADC",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0021245",
+   "permittee": "City of Homer",
+   "city": "HOMER",
+   "major": "Major",
+   "status": "EFF",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0021377",
+   "permittee": "City of Kenai",
+   "city": "KENAI",
+   "major": "Major",
+   "status": "ADC",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0021385",
+   "permittee": "HAINES, MUNICIPALITY OF",
+   "city": "HAINES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AK0021431",
+   "permittee": "City of Valdez",
+   "city": "VALDEZ",
+   "major": "Major",
+   "status": "EFF",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0021440",
+   "permittee": "KETCHIKAN, CITY OF",
+   "city": "KETCHIKAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AK0021458",
+   "permittee": "PETERSBURG, CITY OF",
+   "city": "PETERSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AK0021466",
+   "permittee": "WRANGELL, CITY OF",
+   "city": "WRANGELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AK0021474",
+   "permittee": "SITKA, CITY AND BOROUGH OF",
+   "city": "SITKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AK0021547",
+   "permittee": "City of Cordova",
+   "city": "CORDOVA",
+   "major": "Major",
+   "status": "EFF",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0021555",
+   "permittee": "City of Kodiak",
+   "city": "KODIAK",
+   "major": "Major",
+   "status": "EFF",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0022497",
+   "permittee": "City of Palmer",
+   "city": "PALMER",
+   "major": "Major",
+   "status": "EFF",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0022543",
+   "permittee": "permit holder in EAGLE RIVER (EPA permit name is a person; name withheld)",
+   "city": "EAGLE RIVER",
+   "major": "Major",
+   "status": "EFF",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0022551",
+   "permittee": "ANCHORAGE, MUNICIPALITY OF",
+   "city": "ANCHORAGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AK0022951",
+   "permittee": "City & Borough of Juneau",
+   "city": "JUNEAU",
+   "major": "Major",
+   "status": "ADC",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0023213",
+   "permittee": "City & Borough of Juneau",
+   "city": "JUNEAU",
+   "major": "Major",
+   "status": "ADC",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0023451",
+   "permittee": "City of Fairbanks and Golden Heart Utilities, Inc.",
+   "city": "FAIRBANKS",
+   "major": "Major",
+   "status": "EFF",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0043451",
+   "permittee": "City of Unalaska",
+   "city": "UNALASKA",
+   "major": "Major",
+   "status": "ADC",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "AK0047856",
+   "permittee": "AWWU",
+   "city": "GIRDWOOD",
+   "major": "Major",
+   "status": "ADC",
+   "permittee_note": "contact name removed from EPA permit name"
+  }
+ ]
+}

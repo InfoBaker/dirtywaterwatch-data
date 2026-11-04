@@ -1,0 +1,27 @@
+id: "md-mde-reported-sewer-overflow-page"
+name: "MDE 'Maryland Reported Sewer Overflow Database' web page"
+url: "https://mde.maryland.gov/programs/water/Compliance/Pages/ReportedSewerOverflow.aspx"
+homepage: "https://mde.maryland.gov/programs/water/Compliance/Pages/ReportedSewerOverflow.aspx"
+kind: "html"
+level: "state"
+# Notes (research/md, status used, verified fetched, checked 2026-11-02): Landing page to credit;
+#   states the dataset is 'currently updated monthly' (the Socrata metadata says Daily and the
+#   observed refresh was daily).
+# Access detail (research, quoted): Fetched (raw/mde-overflow.html). Pointer page only; links the
+#   two Socrata datasets.
+# Research notes: Quote: "Although MDE requires that all public sewer system owners or operators
+#   report overflows to us, there may be incidents that were not reported. Note that overflow
+#   amounts provided by the person reporting the overflow may be estimated using best professional
+#   judgment or they may be actual readings from flow measurement devices when available."
+cadence: null
+license: "none stated"
+attribution: "Maryland Department of the Environment"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass"]
+states: ["MD"]
+access: ["html"]
+access_detail: "Fetched (raw/mde-overflow.html). Pointer page only; links the two Socrata datasets."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

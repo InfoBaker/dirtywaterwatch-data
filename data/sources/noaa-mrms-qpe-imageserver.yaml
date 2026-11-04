@@ -1,0 +1,26 @@
+id: "noaa-mrms-qpe-imageserver"
+name: "NOAA MRMS radar-only rainfall estimate (QPE), 1 to 72 hours, ImageServer"
+url: "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer"
+homepage: "https://www.nssl.noaa.gov/projects/mrms/"
+kind: "api"
+level: "federal"
+# Notes (pipeline/ingest/rainfall.py and mrms_grid.py, 2026-11-03): read as a grid every hour: one
+#   catalog query (object ids and valid end times of conus_QPE_01H and conus_QPE_24H, and 48H/72H
+#   when a history needs backfill), one exportImage of each over a box around every CSO outfall
+#   point (1,227 points at 0.01 degree: New England, NY, PA, MD, VA, DC), sampled locally, and one
+#   identify at the wettest point as a check: 4 requests an hour. The per-point identify of
+#   2026-11-02 (1/3/6/12/24/48/72-hour totals, one call per point) is the fallback, capped at 350
+#   calls. Feeds the "discharge likely; no report received" caution (docs/rain-likely.md): never a
+#   discharge record. Radar-only: no gauge correction.
+cadence: "hourly"
+license: "NOAA/NWS data, public domain"
+attribution: "NOAA National Weather Service, Multi-Radar Multi-Sensor (MRMS)"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["US"]
+access: ["arcgis"]
+access_detail: "query?where=name IN ('conus_QPE_01H','conus_QPE_24H')&outFields=objectid,name,idp_validendtime; exportImage?bbox=...&bboxSR=4326&imageSR=4326&size=W,H&format=tiff&compression=LZ77&pixelType=F32&noData=-9999&interpolation=RSP_NearestNeighbor&mosaicRule={esriMosaicLockRaster, lockRasterIds:[objectid]}&f=image (0.01-degree pixels centred on the hundredths); fallback identify?geometry={x,y,spatialReference 4326}&geometryType=esriGeometryPoint&returnCatalogItems=true&f=json; Values pair with catalog items conus_QPE_01H ... conus_QPE_72H; negative pixels are no data."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-03"

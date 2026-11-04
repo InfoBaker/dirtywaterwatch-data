@@ -1,0 +1,40 @@
+id: "pa-pwd-csocast"
+name: "Philadelphia Water Department CSOcast (Combined Sewer Overflow Public Notification System)"
+url: "https://water.phila.gov/maps/csocast/"
+homepage: "https://water.phila.gov/maps/csocast/"
+kind: "arcgis"
+level: "municipal"
+# Notes (research/pa, status candidate, verified fetched, checked 2026-11-02): The only per-outfall,
+#   machine-readable CSO status feed in PA. At fetch 64 of 164 outfalls read 'Data is not currently
+#   available.' and 13 had LastPoll dates months or years old; no outfall was overflowing.
+# Access detail (research, quoted): Public ArcGIS Online FeatureServer (owner phillywatergis, item
+#   70e9d70fd2674f8896e0b560f88040b2, capabilities Query):
+#   https://services2.arcgis.com/POWz8dBwmjnei8fu/ArcGIS/rest/services/CSOCast_Layerboard/FeatureServer/0
+#   (ows_csocast_outfall_status, 164 points) and /1 (ows_csocast_raingauge_status). No auth. Fetched
+#   all 164 rows 2026-11-02 17:55 UTC.
+# Can fill: source_record_id (Name = outfall id), source_status, coordinates (outfall point),
+#   waterbody (letter code), location_text (Street), source_updated_at (LastPoll), geometry (outfall
+#   point)
+# Cannot fill: started_at; ended_at; volume; reported_at; history (current state only)
+# Waters: 164 CSO outfalls: Delaware River (D, 53), Schuylkill River (S, 40), Cobbs Creek (C, 34),
+#   Frankford Creek (F, 17), Tacony Creek (T, 15), Pennypack Creek (P, 5) (openboatlaunch slugs:
+#   delaware-river-pa, schuylkill-river-pa)
+# History: None: a current-state layer. Building history means polling and storing state changes
+#   ourselves.
+# Research notes: Domain values say '24 hours' but rows say 'No overflow in the past 72 hours.'.
+#   Page text: 'Waterways where a combined sewer outfall is overflowing are unsafe for any type of
+#   recreation, and may remain unsafe for recreation for a period of up to 72 hours following storm
+#   events, particularly in the Delaware and tidal Schuylkill rivers.' Disclaimer calls CSOcast 'a
+#   pilot program' using flow monitors and a SWMM model. No email/text sign-up on the map.
+cadence: "Polled per outfall roughly every few minutes to hours; layer lastEditDate 2026-11-02 17:50 UTC at fetch. LastPoll epoch equals the local wall-clock LastPoll_DATE/TIME, so the epoch is Eastern local time labelled as UTC (inferred from edit time)."
+license: "No licence on the item (licenseInfo null). Map text: 'CSOcast is not intended to be used as a water quality notification system for recreation.'"
+attribution: "Philadelphia Water Department"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["PA"]
+access: ["arcgis", "map_only"]
+access_detail: "Public ArcGIS Online FeatureServer (owner phillywatergis, item 70e9d70fd2674f8896e0b560f88040b2, capabilities Query): https://services2.arcgis.com/POWz8dBwmjnei8fu/ArcGIS/rest/services/CSOCast_Layerboard/FeatureServer/0 (ows_csocast_outfall_status, 164 points) and /1 (ows_csocast_raingauge_status). No auth. Fetched all 164 rows 2026-11-02 17:55 UTC."
+machine_readable: true
+legal_basis: "PWD NPDES permits PA0026689, PA0026662, PA0026671 (CSO public notification under Nine Minimum Controls) and the 2011 Green City, Clean Waters Consent Order and Agreement with PA DEP."
+checked: "2026-11-02"

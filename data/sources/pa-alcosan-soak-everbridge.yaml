@@ -1,0 +1,28 @@
+id: "pa-alcosan-soak-everbridge"
+name: "ALCOSAN SOAK text/email alerts (Everbridge)"
+url: "https://member.everbridge.net/index/337966681555020#/signup"
+homepage: "https://member.everbridge.net/index/337966681555020#/signup"
+kind: "email"
+level: "utility"
+# Notes (research/pa, status candidate, verified fetched, checked 2026-11-02): Owner should
+#   subscribe: email timestamps give reported_at, which the web log lacks.
+# Access detail (research, quoted): Everbridge member portal sign-up (text and email). Not
+#   subscribed (brief rule). The 2025 annual PDF is an Everbridge export: Notification ID, Incident
+#   Template ('Overflows in Effect', 'Overflows Ceased', 'Dry Weather Operation'), Message Body.
+# Can fill: source_status, started_at, ended_at, valid_until, reported_at (email time)
+# Cannot fill: coordinates; volume; outfall ids
+# Waters: Same as SOAK log (openboatlaunch slugs: allegheny-river-pa, monongahela-river-pa,
+#   ohio-river-pa)
+# Research notes: Sign-up URL fetched from the ALCOSAN page; not opened.
+cadence: "Push at each status change, 8 a.m.-7 p.m.; overnight changes at 8 a.m."
+license: "none stated"
+attribution: "ALCOSAN"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["PA"]
+access: ["email"]
+access_detail: "Everbridge member portal sign-up (text and email). Not subscribed (brief rule). The 2025 annual PDF is an Everbridge export: Notification ID, Incident Template ('Overflows in Effect', 'Overflows Ceased', 'Dry Weather Operation'), Message Body."
+machine_readable: false
+legal_basis: "As SOAK"
+checked: "2026-11-02"

@@ -1,0 +1,672 @@
+[
+ {
+  "id": "nh-manchester-epd",
+  "name": "City of Manchester DPW Environmental Protection Division (Manchester WWTF, 300 Winston St, and 15 CSOs)",
+  "state": "NH",
+  "kind": "cso",
+  "npdes_permit": "NH0100447",
+  "receiving_waters": [
+   "Merrimack River",
+   "Piscataquog River",
+   "Baker Brook (Tannery Brook)",
+   "Rays Brook",
+   "Unnamed Brook"
+  ],
+  "water_slugs": [
+   "merrimack-river-nh",
+   "piscataquog-river-nh"
+  ],
+  "outfall_count": 15,
+  "outfalls_source": "https://www.epa.gov/system/files/documents/2025-11/finalnh0100447permit-2025.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+  "notification_channel": "(a) Web notice list https://www.manchesternh.gov/Departments/Sewer-and-Stormwater/CSO/CSO-Discharge-Notification. Posts are titled 'City Of Manchester CSO Notification - Activation' or '- No Activations for 12 Hours' and give no outfall, time or volume. (b) Email newsletter 'CSO Discharge Notification': page text says 'subscribe to the \"CSO Discharge Notification\" Newsletter by visiting our Newsletter page and filling out the form at the bottom' (https://www.manchesternh.gov/Residents/e-Services/Email-Notifications). (c) Flow Assessment Services ArcGIS map https://www.manchesternh.gov/csomap, an iframe of https://appservices.flowassessment.com/mapserver/cso_map.html?project=Manchester. Page text: 'identifies the six (6) combined sewer overflow (CSO)outfalls the city currently has active. Each outfall has a drop down menu that details the individual CSO activation time, termination time, and volume of discharge.' (d) 28 river signs at 14 outfalls, in English and Spanish.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Manchester",
+   "Bedford",
+   "Goffstown",
+   "Londonderry"
+  ],
+  "notes": "Outfalls (permit Attachment F / 2024 Fact Sheet Table 4, DMS lat/long): 011 Schiller St; 018 Turner/Ferry Sts; 031 Stark Brook; 039 Third St (Piscataquog); 043 Tannery Brook; 044 Cemetery Brook; 045 Granite St; 046 Bridge St; 047 Penacook St; 050 MH #1; 051 West Side Pump Station (Piscataquog); 052 MH #2; 053 Walnut/North St Canal/W. Penacook; 054 Ray Brook; 055 Dunbar St. Six outfalls are metered under the Consent Decree; the other nine may be estimated. Permit history: 2025 permit issued 2025-11-03 and appealed (EAB NPDES 25-05). On 2026-09-25 EPA gave notice that all conditions are uncontested and severable and 'will become fully effective and enforceable on November 1, 2026'. The ammonia limit was withdrawn; a draft revision was out for comment 10/01-11/02/2026. The city had contested the 2-hour initial-notice condition before moving to dismiss. Consent Decree (Civ. No. 20-cv-762-SM, entered 2020), paragraph 19(a): 4-hour notice. The FAS notification program went live March 2022 (9-year contract). Under the permit the Public Notification Plan is due 180 days after the effective date and must be implemented within 12 months, so about 2027-11-01 (inferred). Map data comes from ArcGIS Online services owned by 'Greentek' and returns 'Token Required'. Volumes: 2023 875 MG (MRWC); 2024 about half of roughly 896 MG Merrimack-wide (MRWC via NHPR); EPA baseline about 280 MG/yr. Co-permittees Bedford, Goffstown and Londonderry carry the 24-hour public web notice duty for SSOs (Part I.B.2). MRWC notes Manchester does not publish per-event data. All 15 outfalls with decimal coordinates are in the EPA R1 2022 layer (NPDES_ID NH0100447).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "nh-nashua-wastewater",
+  "name": "City of Nashua Division of Public Works, Wastewater Department (Nashua WWTF, Sawmill Rd, and 9 CSOs)",
+  "state": "NH",
+  "kind": "cso",
+  "npdes_permit": "NH0100170",
+  "receiving_waters": [
+   "Merrimack River",
+   "Nashua River"
+  ],
+  "water_slugs": [
+   "merrimack-river-nh",
+   "nashua-river-nh"
+  ],
+  "outfall_count": 9,
+  "outfalls_source": "https://www.epa.gov/system/files/documents/2025-11/finalnh0100170permit-2025.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+  "notification_channel": "Banner on the Wastewater Department page https://www.nashuanh.gov/392/Wastewater-Department. The CSO page https://www.nashuanh.gov/842/Combined-Sewer-Overflows says: 'The City of Nashua's Wastewater web page will have a banner that will inform the public any time there is a Combined Sewer Overflow occurrence, as well as the location. This notification will stay up for 48 hours after the end of the overflow'. History PDF https://www.nashuanh.gov/DocumentCenter/View/11049 ('This data will be uploaded monthly'). CivicPlus Notify Me list 'Wastewater Department' (News Flash, https://www.nashuanh.gov/list.aspx) exists but is not CSO-specific. No CSO email or text list found.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nashua",
+   "Hudson"
+  ],
+  "notes": "Outfalls (permit Attachment A): 002 Salmon Brook 42°44'50\" 71°26'23\" Merrimack; 003 Farmington Rd 42°44'21\" 71°26'23\" Merrimack; 004 Burke St 42°45'13\" 71°26'25\" Merrimack; 005 East Hollis St 42°45'48\" 71°26'40\" Merrimack; 006 Nashua River 42°45'57\" 71°27'03\" Nashua; 007 Tampa St 42°45'44\" 71°28'39\" Nashua; 008 Broad St listed as 42°16'09\" 71°29'17\" (latitude typo, probably 42°46'); 009 Locke St 42°46'01\" 71°27'21\" Nashua; 014 Screening/Disinfection Facility 42°45'51\" 71°26'40\" Merrimack. Label conflict: the history PDF calls 006 'Nashua River' and 014 'Bridge St.', while the city page puts 006 off Bridge St and 014 off Bancroft St. Permit issued 2025-11-03, effective 2026-02-01 (EPA minor-mod letter); no 2025 appeal found. The permit requires an opt-in direct electronic notice. Plan due about 2026-07-30; implementation by 2027-02-01 (inferred). Annual volumes (Fact Sheet Appendix E): 2019 45.7 MG; 2020 10.36; 2021 50; 2022 4.501; 2023 52. MRWC gives 20 MG for 2023, which conflicts. Hudson is co-permittee for SSO/O&M duties (NHC010170). Consent Decree: Civ. No. 05-376-PB (2005, amended 2009). EPA R1 2022 layer gives 008 Broad St at 42.77001,-71.48805 (resolves the permit latitude typo).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "nh-portsmouth-peirce-island",
+  "name": "City of Portsmouth DPW Wastewater Division (Peirce Island WWTF and 3 CSOs)",
+  "state": "NH",
+  "kind": "cso",
+  "npdes_permit": "NH0100234",
+  "receiving_waters": [
+   "South Mill Pond (tidal, to Piscataqua River)",
+   "Piscataqua River"
+  ],
+  "water_slugs": [
+   "piscataqua-river-nh"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "https://www.epa.gov/system/files/documents/2025-06/finalnh0100234permit-2023.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+  "notification_channel": "Page https://www.portsmouthnh.gov/publicworks/wastewater/combined-sewer-overflows-cso. It has a 'CSO Dashboard' iframe (https://appservices.flowassessment.com/mapserver/cso_map.html?project=Portsmouth). Page text: 'If an overflow is detected in any of the measuring devices in the City's three active CSO outfall locations, it will show up here in real time.' Email: 'sign up for our email list below. Your email will be added to a list in which our measuring devices will email you directly as events occur.' The embedded Mailchimp form posts to cityofportsmouth.us2.list-manage.com (list id 5e033c4988); not submitted. The page also has a monthly volume table (10A/10B/013) with monthly PDF memos back to 2015. Legacy X/Twitter @PortsmouthCSOs (auto-tweets since 2018) is no longer linked from the page.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Portsmouth",
+   "New Castle"
+  ],
+  "notes": "Outfalls: 10A and 10B Parrott Ave to South Mill Pond, 43°04.80' 70°45.53'; 013 Deer St to Piscataqua River, 43°04.39' 70°45.47' (permit Attachment B). The Deer St and Parrott latitudes look swapped; verify against GIS. Page text: 'At one time there were 14 combined sewer CSO discharge sites.' Permit signed 2023-09-26, effective about 2023-12-01; notification plan due for implementation by about 2024-12-01 (inferred). Volumes: 2023 13.27 MG; 2024 about 10.25 MG (June 10A 0.149 MG while the total column shows 0); 2025 0.055 MG; Jan-Aug 2026 0. Pease WWTF (NH0109000) is a separate, non-CSO system. EPA R1 2022 layer resolves the coordinate doubt: 10A 43.07354,-70.75722 and 10B 43.07321,-70.75791 (Parrott Ave, South Mill Pond); 013 Deer St 43.07969,-70.75933.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "nh-exeter-wwtp",
+  "name": "Town of Exeter DPW (Exeter WWTP, 13 Newfields Rd, and CSO 003)",
+  "state": "NH",
+  "kind": "cso",
+  "npdes_permit": "NH0100871",
+  "receiving_waters": [
+   "Clemson Pond (CSO 003; tide gate to Squamscott River)",
+   "Squamscott River (Outfall 001)"
+  ],
+  "water_slugs": [
+   "squamscott-river-nh"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://www.epa.gov/system/files/documents/2025-06/finalnh0100871permit-2022.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+  "notification_channel": "HTML table 'Notice of Combined Sewer Overflow (CSO) at Outfall #003 Located at Clemson Pond' (Date / Total Gallons / Description) on https://www.exeternh.gov/publicworks/combined-sewer-sanitary-sewer-overflows. The town has general E-News and Mailchimp newsletters; no CSO-specific list.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Exeter",
+   "Stratham",
+   "Hampton"
+  ],
+  "notes": "CSO 003 is fed by the Spring St and Water St CSO structures through two 36-inch siphons from Swasey Parkway; siphon cleaning was underway in March 2026. Last listed CSO: 2023-12-12, 14,072 gal. Clemson Pond has no slug. CSO 003 coordinates were not in the permit text; the Outfall 001 point is 42°59'48\"N 70°56'17\"W. A 2010 EPA administrative order requires the Long-Term Control Plan. Permit signed 2022-08-05; plan implementation by about 2023-11-01 (inferred). EPA R1 2022 layer gives CSO 003 at 42.986875,-70.950463 (into Clemson Pond).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "nh-exeter-wwtp-bypass",
+  "name": "Town of Exeter WWTP non-disinfected discharges (Outfall 001)",
+  "state": "NH",
+  "kind": "bypass",
+  "npdes_permit": "NH0100871",
+  "receiving_waters": [
+   "Squamscott River"
+  ],
+  "water_slugs": [
+   "squamscott-river-nh"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://www.epa.gov/system/files/documents/2025-06/finalnh0100871permit-2022.pdf",
+  "notification_channel": "Dated prose list on the same page https://www.exeternh.gov/publicworks/combined-sewer-sanitary-sewer-overflows, plus an SSO table (Date / Total Gallons / Description).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Exeter"
+  ],
+  "notes": "Entries from 2019 to 2026-09-17. Usually caused by power outages, with time, duration and gallons given. The SSO table runs from 2019 to 2025-09-30.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "nh-berlin-pcf",
+  "name": "City of Berlin Pollution Control Facility (10 Shelby St) and CSO 002",
+  "state": "NH",
+  "kind": "cso",
+  "npdes_permit": "NH0100013",
+  "receiving_waters": [
+   "Androscoggin River"
+  ],
+  "water_slugs": [
+   "androscoggin-river-nh"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://www.epa.gov/system/files/documents/2025-06/finalnh0100013permit-2024.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+  "notification_channel": "CivicPlus Notify Me News Flash list 'Wastewater Event Alert' (internal mid 239) at https://www.berlinnh.gov/list.aspx, for email or SMS. No public posts, RSS category or CSO web page found; Alert Center showed 'There are no active alerts.'",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Berlin"
+  ],
+  "notes": "CSO 002 at 44°27'17\"N 71°11'12\"W (2024 Fact Sheet section 3.1). Permit signed 2024-04-29, effective about 2024-07-01; 2-hour/24-hour plan due for implementation by about 2025-07-01 (inferred). No 2025-2026 events found. EPA R1 2022 layer: 002 Watson Street Pump Station 44.45472,-71.18667.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "nh-lebanon",
+  "name": "City of Lebanon WWTF (CSOs eliminated)",
+  "state": "NH",
+  "kind": "cso",
+  "npdes_permit": "NH0100366",
+  "receiving_waters": [
+   "Connecticut River",
+   "Mascoma River",
+   "Great Brook"
+  ],
+  "water_slugs": [
+   "connecticut-river-nh",
+   "mascoma-river-nh"
+  ],
+  "outfall_count": 0,
+  "outfalls_source": "https://www.epa.gov/newsreleases/city-lebanon-meets-epa-consent-decree-requirements-eliminating-cso-outfalls",
+  "notification_channel": "None (no active CSOs)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lebanon",
+   "Enfield"
+  ],
+  "notes": "EPA: 'On November 19, 2021, the United States District Court ... terminated the Consent Decree ... by eliminating all its CSO outfalls.' Before the decree, discharges were 'up to nearly 14 million gallons ... per year from as many as 60 to 70 CSO events.' Now covered under NH Medium WWTF GP authorization NHG590019 (coverage transferred 04/01/2026). It is subject to the GP's SSO web-notice clause.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "nh-medium-wwtf-gp-sso",
+  "name": "NH Medium WWTF General Permit facilities (21 POTWs) - SSO/unauthorized discharge web notices",
+  "state": "NH",
+  "kind": "sso",
+  "npdes_permit": "NHG590000",
+  "receiving_waters": [
+   "Merrimack River",
+   "Connecticut River",
+   "Sugar River",
+   "Piscataqua River",
+   "Salmon Falls River",
+   "Souhegan River",
+   "Contoocook River",
+   "Oyster River",
+   "Squam River",
+   "Gulf of Maine"
+  ],
+  "water_slugs": [
+   "merrimack-river-nh",
+   "connecticut-river-nh",
+   "sugar-river-nh",
+   "piscataqua-river-nh",
+   "salmon-falls-river-nh",
+   "souhegan-river-nh",
+   "contoocook-river-nh"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "https://www.epa.gov/system/files/documents/2025-11/nh_medium_wwtf_gp_attachment_e_eligiblewwtfs_specificreqs_2025.pdf",
+  "notification_channel": "Each permittee's own public website, which must carry SSO and unauthorized-discharge notices within 24 hours and keep them 12 months (GP Part II.B.2). Individual sites were not checked.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Seabrook",
+   "Hampton",
+   "Rye",
+   "Durham",
+   "Dover",
+   "Somersworth",
+   "Lincoln",
+   "Ashland",
+   "Jaffrey",
+   "Milford",
+   "Wilton",
+   "Penacook",
+   "Boscawen",
+   "Derry",
+   "Hooksett",
+   "Merrimack",
+   "Allenstown",
+   "Pembroke",
+   "Claremont",
+   "Newport",
+   "Littleton",
+   "Lancaster",
+   "Lebanon",
+   "Enfield",
+   "Hanover",
+   "Charlestown"
+  ],
+  "notes": "GP issued 2025-11-03, effective 2026-02-01. Part I.C.5 makes ineligible 'Any facility with one or more active, designated Combined Sewer Overflow (CSO) outfalls'. Coverage for Claremont, Dover and Lebanon was transferred 04/01/2026, so none of them has an active CSO (inferred from eligibility). The same 24-hour SSO web clause is in Concord Hall St NH0100901 (2022; co-permittee Bow) and in every CSO permit above.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-burlington-dpw-main",
+  "name": "Burlington Main WWTF combined sewer system (City of Burlington DPW Water Resources)",
+  "state": "VT",
+  "kind": "cso",
+  "npdes_permit": "VT0100153 (VT Discharge Permit 3-1331)",
+  "receiving_waters": [
+   "Lake Champlain via Pine Street Barge Canal (CSO #3, S/N 005 Pine St)",
+   "Wetlands contiguous to Winooski River / Intervale (CSO #1 S/N 003 Manhattan Dr/Park St; CSO #2 S/N 004 Manhattan Dr/North Champlain St)"
+  ],
+  "water_slugs": [
+   "lake-champlain-vt",
+   "winooski-river-vt"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1331/3-1331.CSO.1272Order.20230519.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "Per 2025 CSO annual report: 'The City utilizes several platforms to issue required notifications, including VT Alert, social media (i.e. Facebook & Twitter), and Front Porch Forum.' Plant discharges that close beaches go out as News Flash posts (https://www.burlingtonvt.gov/m/newsflash?cat=8). Beach status: https://www.burlingtonvt.gov/1219/Beach-Closure-Tracker. Recreation areas within 1 mile are posted with physical signs. Also the state ANR system. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Burlington"
+  ],
+  "notes": "Machine-readable means the beach-status ArcGIS layer (GeoJSON) plus the CivicPlus News Flash pages. CSO events themselves are NOT in the city feeds: the Aug 2026 Pine/Park/Manhattan CSOs do not appear in the Public Works News Flash list. All 5 city CSO structures (Main x3, North, East) have Mission alarm monitors and ADS flow meters. Events: 2025 had 2 (Pine 7/7/25 535 gal; 10/8/25 51,221 gal); 2026 has 5 state reports (Aug 6, Aug 8 x3, Aug 10). LTCP approved 2022; 1272 Order 2023-05-19; LTCP revision discussed with DEC Nov 2025; 2025 LAKE bond. No outfall coordinates in the documents I fetched.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-burlington-dpw-north",
+  "name": "Burlington North WWTF combined sewer (Gazo Ave CSO)",
+  "state": "VT",
+  "kind": "cso",
+  "npdes_permit": "VT0100226 (3-1245)",
+  "receiving_waters": [
+   "Winooski River (CSO #1, S/N 002 Gazo Avenue; some state reports say Intervale Wetlands)"
+  ],
+  "water_slugs": [
+   "winooski-river-vt"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1331/3-1331.CSO.1272Order.20230519.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "Same as Burlington Main (VT-Alert, Facebook/X @BTVDPW, Front Porch Forum) plus the state ANR system | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Burlington"
+  ],
+  "notes": "State CSO reports: 2019 x2, 2020 x2, 2023 x1, 2024 x1. None in 2025 or 2026 to date.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-burlington-dpw-east",
+  "name": "Burlington East ('Burlington River') WWTF, Riverside Ave CSO",
+  "state": "VT",
+  "kind": "cso",
+  "npdes_permit": "VT0100307 (3-1247)",
+  "receiving_waters": [
+   "Winooski River below Winooski Falls (CSO #1, S/N 002 Riverside Ave / 'Colchester Ave CSO')"
+  ],
+  "water_slugs": [
+   "winooski-river-vt"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1331/3-1331.CSO.1272Order.20230519.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "Same as Burlington Main. A News Flash was posted for the June 10-11, 2026 plant discharge (https://www.burlingtonvt.gov/CivicAlerts.aspx?AID=3842). | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Burlington"
+  ],
+  "notes": "Last CSO report 2021. June 10-11, 2026: about 220,000 gal (city figure; state ID 7039 says 225,000) of treated but partially disinfected effluent from the plant (PLC failure). The city said no posting was required because there are no recreation areas within 1 mile. The plant is slated to become a pump station feeding Main Plant.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-rutland-city",
+  "name": "City of Rutland WWTF combined sewer system",
+  "state": "VT",
+  "kind": "cso",
+  "npdes_permit": "VT0100871 (3-1285)",
+  "receiving_waters": [
+   "Otter Creek (CSO #1 Calvary Cemetery)",
+   "East Creek, the Rutland tributary of Otter Creek (CSO #2 Home Plate/Ball Field; CSO #3 School St & #4 Meadow St combined, 'Third Base, Ball Field')",
+   "CSO #5 West Street Siphon (reported as Otter Creek in 2025 and East Creek in 2026)"
+  ],
+  "water_slugs": [
+   "otter-creek-vt"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1285/3-1285.2025CSOAnnualReport.20260130.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "State only. 2025 annual report: 'In 2025, the City notified the public of CSOs through the Department of Environmental Conservation's Combined Sewer Overflows and Untreated Discharges reporting web page.' rutlandcity.org has no CSO notices. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rutland"
+  ],
+  "notes": "Do NOT use the east-creek-vt slug: it is a different East Creek in Orwell. Largest CSO volumes in VT: 2025 had 20 events, 9,487,355 gal. The annual report summarizes outfalls as #001, #002, #009(?) and #005. Telemetry level sensors at all CSO structures. About 600,000-gal Connor Park storage tank under construction ($7M per WCAX, to be operational Dec 2026), plus Meadow St separation. LTCP 2022; 1272 Order 2023-04-26. VNRC appeal of the permit (22-ENV-00054). In 2018 the DPW posted CSO warnings on Facebook, but there is no current evidence of that. ECHO lists 8 CSO outfalls (stale).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-st-albans-city",
+  "name": "City of St. Albans WWTF, Lower Weldon (Welden) Street CSO",
+  "state": "VT",
+  "kind": "cso",
+  "npdes_permit": "VT0100323 (3-1279)",
+  "receiving_waters": [
+   "Stevens Brook",
+   "Lake Champlain (St. Albans Bay; WWTF discharges to wetlands contiguous with Lake Champlain)"
+  ],
+  "water_slugs": [
+   "stevens-brook-vt",
+   "lake-champlain-vt"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/PublicNotice/3-1279/3-1279_1272Order.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "State only. 2025 annual report: 'The City completes public notification requirements through the ANR notification system as required by Condition II.A.2 of the Discharge Permit.' The city has a CSO info page (https://www.stalbansvt.com/cso) with LTCP documents but no alerts. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "St. Albans City"
+  ],
+  "notes": "Outfall coordinates from the 1272 order: 44.80881, -73.09359. 2025 had 3 events (May 17 120,000; Oct 31 and Dec 19, volumes inconsistent between the annual report and state records). 500,000-gal Houghton Park storage under construction through 2026. New 1272 Order 2026-08-13. LTCP 2020 plus addendum Oct 2024 (rev Apr 2025); updated LTCP planned 2027. Data quality: the 2026-07-09 state record lists the volume as '.0425'.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-montpelier",
+  "name": "City of Montpelier Water Resource Recovery Facility combined sewer system",
+  "state": "VT",
+  "kind": "cso",
+  "npdes_permit": "VT0100196 (3-1207)",
+  "receiving_waters": [
+   "Winooski River (CSO 001 Taylor St Bridge; CSO 003 Bailey Ave; CSO 023 Bailey Ave Bridge siphon)",
+   "North Branch Winooski River (CSO 007 10 Main St siphon; CSO 008 Main/Barre St intersection; CSO 009 152 Main St)"
+  ],
+  "water_slugs": [
+   "winooski-river-vt"
+  ],
+  "outfall_count": 6,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1207/3-1207.2024.CSOAnnualReport.20250131.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "Points to the state. The city's Get Notifications page links 'Statewide Combined Sewer Overflow Notifications' (https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx). VT-Alert is used for emergencies and CivicPlus Notify Me for non-urgent news. The city posts no CSO notices of its own. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Montpelier"
+  ],
+  "notes": "The city site says 6 CSO structures. ECHO lists 12 (stale). The operator SOP uses ADS Prism flow alarms, then files a state public alert. 2025: 35 state reports; 2026: 14 through 06-20. Largest: 2026-06-10/11, 881,661 gal at CSO 001. New 1272 Order 2026-08-13. LTCP final draft 2021.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-st-johnsbury",
+  "name": "Town of St. Johnsbury WWTF combined sewer system",
+  "state": "VT",
+  "kind": "cso",
+  "npdes_permit": "VT0100579 (3-1290)",
+  "receiving_waters": [
+   "Passumpsic River",
+   "Sleepers River (CSO 024 Fairbanks Village)"
+  ],
+  "water_slugs": [
+   "passumpsic-river-vt"
+  ],
+  "outfall_count": 12,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1290/3-1290.2025CSOAnnualReport.20260306.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "State only. 2025 annual report: 'Warning signs have been installed at all discharge locations and discharge events are notified through the Vermont Watershed Management Combined Sewer Overflows and Untreated Discharges website.' The town website (stjvt.com) has no CSO content. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "St. Johnsbury"
+  ],
+  "notes": "14 of 26 permitted CSOs eliminated, 12 remain. IDs in the 2025 report: 006, 006A, 007, 008, 009, 010, 010A, 011, 014, 020, 021, 023, 024, 027. Most active: 006 (Bay St south of CVPS) and 014 (Mill St). Blue Siren remote flow meters. Two dry-weather discharges in 2025 (CSO 007 in May, CSO 024 in Sept). 2025: 48 state reports; 2026: 35. The Moose River slug does not apply (no Moose River outfalls found). LTCP 2021; 1272 Order 2022.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-vergennes",
+  "name": "City of Vergennes, Macdonough Drive Pump Station overflow (CSO #002)",
+  "state": "VT",
+  "kind": "sso",
+  "npdes_permit": "VT0100404 (3-0368)",
+  "receiving_waters": [
+   "Potash Brook (Vergennes) just upstream of Otter Creek; state reports say 'Otter Creek below the falls' / 'Lake Champlain via Otter Creek'"
+  ],
+  "water_slugs": [
+   "otter-creek-vt"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://www.vergennes.org/SSO%20Annual%20Report_2025.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "State only. 2025 SSO report: 'The City notifies Vermont DEC (VTDEC) following SSO occurrences... The VTDEC posts notifications of the overflows on their website.' The city's Everbridge sign-up is for parking bans/emergencies only. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Vergennes"
+  ],
+  "notes": "The city calls it an SSO, but the state lists it as CSO and files events as 'Authorized Wet Weather CSO Overflow'. Mission monitor with V-notch weir. 2025: 8 events, largest 12/19/2025 373,100 gal. 2026-04-16/17: 814,400 gal. Also pump-station SSOs (Job Corps lift station, S Water St). LTCP 2022 (Hoyle Tanner); 1272 Orders 2018 and 2023; 2022 sewer bond.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-middlebury",
+  "name": "Town of Middlebury pump-station overflows (permit-listed CSO outfalls)",
+  "state": "VT",
+  "kind": "sso",
+  "npdes_permit": "VT0100188 (3-1210)",
+  "receiving_waters": [
+   "Otter Creek"
+  ],
+  "water_slugs": [
+   "otter-creek-vt"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1210/3-1210.SSO.1272Order.20241112.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "State system plus temporary signs. 2024 report: 'The Town uses the State of Vermont's online reporting system to report any CSO events. Additionally, signage is posted temporarily at know[n] recreational area...' Generic town email and TextMyGov alerts (text MIDDLEBURYALERTS to 91896) are not CSO-specific. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Middlebury"
+  ],
+  "notes": "Outfalls: S/N 002 = CSO 001 (Pump Station 9, Weybridge St); S/N 003 = CSO 002 (PS 3, Route 23 / 274 Weybridge); S/N 011 = CSO 010 (PS 2, Battell Block); S/N 013 = CSO 012 (PS 17 Main PS, Lucius Shaw Ln). EPA consent order 2016; SSO 1272 Order 2024-11-12. The 2024 order notes a 2022 meter mis-calibration: 'SSOs likely occurred without Middlebury notifying the public'. 2025: 7 reports; 2026: 4 (June 18 2026: two 75,000-gal events).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-newport-city",
+  "name": "City of Newport WWTF combined sewer overflows",
+  "state": "VT",
+  "kind": "cso",
+  "npdes_permit": "VT0100200 (3-1241)",
+  "receiving_waters": [
+   "Lake Memphremagog",
+   "Clyde River (Causeway Siphon)",
+   "Upper South Bay"
+  ],
+  "water_slugs": [
+   "lac-memphremagog-vt",
+   "clyde-river-vt"
+  ],
+  "outfall_count": 6,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1241/3-1241.2025CSOAnnualReport.20260626.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "None found on newportvermont.org (only a general Facebook page, https://www.facebook.com/Newport.Vermont/). Presumably the state ANR system. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Newport City"
+  ],
+  "notes": "Coordinates come from the 2025 report: S/N 006 Western Ave 44.936682,-72.202376; 010 Bayview St/Fyfe Dr 44.9363063,-72.2114273; 013 Union St PS 44.951468,-72.19601; 014 Lake Rd PS 44.934064,-72.2170064; 015 Causeway Siphon 44.9403623,-72.2040217; 016 Bluff Rd PS 44.9548909,-72.204133. No CSO events in 2025; last CSO reports 2019 and 2023. 2025-05-05: 50,000 gal untreated (SSO) at 601 Bluff Rd into Lake Memphremagog. LTCP update due 2026-27.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-northfield",
+  "name": "Town of Northfield WWTF, East St CSO",
+  "state": "VT",
+  "kind": "cso",
+  "npdes_permit": "VT0100242 (3-1158)",
+  "receiving_waters": [
+   "Dog River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1158/3-1158.CSO.1272Order.20220419.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "None on northfield-vt.gov (Wix site; Water & Sewer page has contact info only). Presumably the state ANR system. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Northfield"
+  ],
+  "notes": "S/N 002. The 2022 order asks for a letter requesting removal of S/N 002 from the permit once separation is verified. Last CSO reports 2019 and 2020. The 2023 annual report is a scanned PDF and its text could not be extracted.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-enosburg-falls",
+  "name": "Village of Enosburg Falls, Route 108 Bridge CSO",
+  "state": "VT",
+  "kind": "cso",
+  "npdes_permit": "VT0100102 (3-1234)",
+  "receiving_waters": [
+   "Missisquoi River"
+  ],
+  "water_slugs": [
+   "missisquoi-river-vt"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1234/3-1234.CSO.1272Order.20250828.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "None found (village WordPress site search for overflow/CSO returns nothing). Presumably the state ANR system. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Enosburg Falls"
+  ],
+  "notes": "Dickenson Ave CSO eliminated; Route 108 Bridge CSO remains. CSO reports in 2019 (1) and 2023 (2). New 1272 Order 2025-08-28. LTCP 2020.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-hartford-wrj",
+  "name": "Town of Hartford, White River Junction WWTF CSOs",
+  "state": "VT",
+  "kind": "cso",
+  "npdes_permit": "VT0101010 (3-1225)",
+  "receiving_waters": [
+   "Connecticut River",
+   "White River (some WRJ outfalls; inferred, not confirmed)"
+  ],
+  "water_slugs": [
+   "connecticut-river-vt"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1225/3-1225.2025CSOAnnualReport.20260824.pdf ; https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1 ; https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166 (Type=23)",
+  "notification_channel": "No CSO-specific channel. The town's CivicPlus Alert Center has a DPW category RSS (https://www.hartfordvt.gov/RSSFeed.aspx?ModID=63&CID=Department-of-Public-Works-11) with no wastewater posts seen. State ANR public alerts are used (e.g. ID 4299, 2026-10-23). | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hartford",
+   "White River Junction",
+   "Wilder"
+  ],
+  "notes": "Coordinates come from the 2025 report: CSO 003 / S/N 002 Passumpsic Ave PS 43.67843,-72.30324; CSO 004 / S/N 003 Wilder PS 43.67080,-72.30720; CSO 005 / S/N 004 Nutt Lane 43.64247,-72.31753; CSO 009 / S/N 006 Municipal Building 43.65003,-72.31670; CSO 010 / S/N 007 Maple St 43.65126,-72.31644. No CSOs in 2025; S/N 004 and 006 are effectively inactive. The report cites 'Permit No. 3-1224', which looks like a typo. Check whether the Wilder outfalls sit in connecticut-river-reservoir-hartford-vt. Plant partial-treatment discharges in 2026 (Jul 27-31: 924,200 gal) and a high E. coli alert on 9/16/2026. Updated LTCP due 2027-01-31.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-barre-city",
+  "name": "City of Barre collection system (SSO-prone)",
+  "state": "VT",
+  "kind": "sso",
+  "npdes_permit": "VT0100889 (3-1272)",
+  "receiving_waters": [
+   "Stevens Branch of the Winooski River",
+   "Jail Branch",
+   "Potash Brook (Barre)"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Unknown: barrecity.org returned 403 'Security Check' (bot challenge, not bypassed). State ANR system. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Barre"
+  ],
+  "notes": "CSO/SSO flag is 'No'. Untreated discharges: 2026-04-16, 50,000 gal into Potash Brook west of Camp St (ID 6988); 2025-12-19, 1,200 gal into Stevens Branch (6949); 2025-08-01, 4,800 gal into Jail Branch from a Boynton St manhole (6885). 1272 Order 2021 (leaking pump-station overflow pipe). The permit 3-1207 folder holds a scanned '3-1272.CSOEvents.20260202.pdf' that may be misfiled.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-brattleboro",
+  "name": "Town of Brattleboro WWTF and collection system",
+  "state": "VT",
+  "kind": "sso",
+  "npdes_permit": "VT0100064 (3-1242)",
+  "receiving_waters": [
+   "Connecticut River",
+   "Whetstone Brook"
+  ],
+  "water_slugs": [
+   "connecticut-river-vt"
+  ],
+  "outfall_count": 0,
+  "outfalls_source": null,
+  "notification_channel": "No overflow channel. The town site links VT-Alert, a Mailchimp newsletter and a Facebook page. | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Brattleboro"
+  ],
+  "notes": "No CSOs (CSO/SSO flag 'No'). 2025-08-16/18: 8,000 gal untreated into Whetstone Brook (ID 6887). 2026-07-21: dechlorination failure, 250,000 gal (7072). 2025-01-07: 200,000 gal partly disinfected.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-proctor",
+  "name": "Town of Proctor WWTF (bypass/SSO)",
+  "state": "VT",
+  "kind": "bypass",
+  "npdes_permit": "VT0100528 (3-1298)",
+  "receiving_waters": [
+   "Otter Creek"
+  ],
+  "water_slugs": [
+   "otter-creek-vt"
+  ],
+  "outfall_count": 0,
+  "outfalls_source": null,
+  "notification_channel": "None found; state ANR system | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Proctor"
+  ],
+  "notes": "2025-12-23 to 2026-01-20: 5,300,000 gal treated, partly disinfected (ID 6963). 2025-05-10/11: Park pump station, 20,000 gal untreated (6801).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-hartford-quechee",
+  "name": "Town of Hartford, Quechee WWTF (bypass)",
+  "state": "VT",
+  "kind": "bypass",
+  "npdes_permit": "VT0100978 (3-1185)",
+  "receiving_waters": [
+   "Ottauquechee River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": null,
+  "notification_channel": "State ANR system | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hartford",
+   "Quechee"
+  ],
+  "notes": "2025-12-28: 15,000,000 gal partially treated, undisinfected (HQJ-JM15-BF8DW). Still listed as 'pending review' on 2026-11-01.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "vt-windsor-main",
+  "name": "Town of Windsor Main WWTF (bypass)",
+  "state": "VT",
+  "kind": "bypass",
+  "npdes_permit": "VT0100919 (3-1253)",
+  "receiving_waters": [
+   "Connecticut River"
+  ],
+  "water_slugs": [
+   "connecticut-river-vt"
+  ],
+  "outfall_count": 0,
+  "outfalls_source": null,
+  "notification_channel": "Not checked beyond the state system | Statewide: every VT permittee must post a public alert at https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx within 1 hour of discovery (10 V.S.A. § 1295(b)).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Windsor"
+  ],
+  "notes": "2025-11-06/08: 400,000 gal partially treated (ID 6936). CSO/SSO flag 'No'.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ }
+]

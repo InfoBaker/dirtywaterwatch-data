@@ -1,0 +1,25 @@
+id: "nyc-dohmh-beach-water-samples-2xir-kwzz"
+name: "NYC Open Data 'Beach Water Samples' (2xir-kwzz), DOHMH"
+url: "https://data.cityofnewyork.us/d/2xir-kwzz"
+homepage: "https://data.cityofnewyork.us/d/2xir-kwzz"
+kind: "api"
+level: "municipal"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): Weekly enterococci
+#   results; advisories themselves are on nyc.gov/beach (not a feed).
+# Access detail (research, quoted): SODA https://data.cityofnewyork.us/resource/2xir-kwzz.json;
+#   31,179 rows 2005-05-02..2026-09-29.
+# Can fill: monitoring result
+# Cannot fill: advisory status; coordinates
+# History: 2005-
+cadence: "'Between May and September of each year, the data is published weekly while NYC beaches are open'"
+license: "none stated (NYC Open Data terms)"
+attribution: "NYC Department of Health and Mental Hygiene"
+enabled: true
+role: "monitoring"
+event_types: ["beach_closure"]
+states: ["NY"]
+access: ["api", "csv"]
+access_detail: "SODA https://data.cityofnewyork.us/resource/2xir-kwzz.json; 31,179 rows 2005-05-02..2026-09-29."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

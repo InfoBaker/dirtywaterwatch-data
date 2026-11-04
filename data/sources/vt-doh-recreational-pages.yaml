@@ -1,0 +1,22 @@
+id: "vt-doh-recreational-pages"
+name: "Vermont DOH recreational water, swimming and cyanobacteria pages"
+url: "https://www.healthvermont.gov/environment/recreational-water"
+homepage: "https://www.healthvermont.gov/environment/recreational-water"
+kind: "html"
+level: "state"
+# Notes (research/science, status candidate, verified fetched, checked 2026-11-01): Downloaded, not
+#   mined.
+# Access detail (research, quoted): Raw copy research/science/raw/dl-nne/vt-doh/*.html (downloaded
+#   2026-11-01 by NNE sub-researcher; text read by lead)
+cadence: null
+license: "none stated"
+attribution: "Vermont Department of Health"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["VT"]
+access: ["html"]
+access_detail: "Raw copy research/science/raw/dl-nne/vt-doh/*.html (downloaded 2026-11-01 by NNE sub-researcher; text read by lead)"
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

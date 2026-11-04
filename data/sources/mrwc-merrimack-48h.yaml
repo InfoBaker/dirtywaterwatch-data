@@ -1,0 +1,23 @@
+id: "mrwc-merrimack-48h"
+name: "Merrimack River Watershed Council statements on 48-hour hazard after CSOs (via search)"
+url: "https://merrimack.org/"
+homepage: "https://merrimack.org/"
+kind: "html"
+level: "nonprofit"
+# Notes (research/science, status candidate, verified search_only, checked 2026-11-01): Search
+#   snippet: each overflow 'creates a public health hazard in the river for about 48 hours';
+#   advisory agent / MA agent to verify.
+# Access detail (research, quoted): none recorded
+# Waters: n/a (science/guidance) (openboatlaunch slugs: merrimack-river-ma, merrimack-river-nh)
+cadence: null
+license: "none stated"
+attribution: "Merrimack River Watershed Council"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["MA", "NH"]
+access: ["html"]
+access_detail: ""
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

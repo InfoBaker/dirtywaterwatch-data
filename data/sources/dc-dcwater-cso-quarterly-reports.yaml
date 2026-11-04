@@ -1,0 +1,34 @@
+id: "dc-dcwater-cso-quarterly-reports"
+name: "DC Water CSO Facilities Quarterly Reports (monthly CSS operations + modeled/metered CSO results per outfall)"
+url: "https://www.dcwater.com/resources/publications?term_node_tid_depth=50"
+homepage: "https://www.dcwater.com/resources/publications?term_node_tid_depth=50"
+kind: "pdf"
+level: "utility"
+# Notes (research/dc, status candidate, verified fetched, checked 2026-11-02): The legally required
+#   public CSO record. Quarter-precision totals per outfall: use as annual/quarterly totals (no
+#   event pages). Needs PDF parsing, OCR for some quarters.
+# Access detail (research, quoted): Signed PDFs per quarter, 2020 Q3 to 2026 Q3, e.g.
+#   /sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf.
+#   2026 Q2 extracts as text; 2026 Q3 text layer is garbage and needed OCR (raw/cso-quarterly/).
+#   Last pages: 'Combined Sewer System Metered and Model Results' table.
+# Can fill: event_type, volume (quarter total), waterbody, source_record_id (outfall), coverage_note
+# Cannot fill: started_at/ended_at per event (quarter only); coordinates
+# Waters: All 42-48 active CSO outfalls (Anacostia, Potomac, Rock Creek) (openboatlaunch slugs:
+#   anacostia-river-dc, potomac-river-dc, rock-creek-dc)
+# History: 2020 Q3 onward on the publications page.
+# Research notes: Q3 2026 shows a metered 5.54 MG pumped overflow at CSO 010 (O Street PS) into the
+#   Anacostia: the first Anacostia CSO volume in the 2026 tables seen. Each monthly section says
+#   'There was no dry weather combined sewer overflow reported during <month>' even for months where
+#   EPA SOBE has a DWO row.
+cadence: "Quarterly; due the 28th of the month after the quarter (Q3 2026 posted October 2026). Permit Part III Section E."
+license: "Public permit report; no terms stated."
+attribution: "DC Water"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["DC"]
+access: ["pdf"]
+access_detail: "Signed PDFs per quarter, 2020 Q3 to 2026 Q3, e.g. /sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf. 2026 Q2 extracts as text; 2026 Q3 text layer is garbage and needed OCR (raw/cso-quarterly/). Last pages: 'Combined Sewer System Metered and Model Results' table."
+machine_readable: false
+legal_basis: "Permit DC0021199 Part III.B.1.h.ii(d) website record of CSO events by outfall for the prior quarter; Part III Section E quarterly reports."
+checked: "2026-11-02"

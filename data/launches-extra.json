@@ -1,0 +1,19 @@
+[
+  {
+    "slug": "pioneer-valley-yacht-club-ma",
+    "name": "Pioneer Valley Yacht Club",
+    "kind": "ramp",
+    "town": "Longmeadow",
+    "state": "MA",
+    "water_slug": "connecticut-river-ma",
+    "lat": 42.0635,
+    "lon": -72.5927,
+    "fee": null,
+    "access": "club",
+    "url": null,
+    "operator": "Pioneer Valley Yacht Club",
+    "website": "https://www.ourpvyc.net/",
+    "source": "OpenStreetMap node 13717188102 (marina, 200 Anthony Road, Longmeadow), retrieved 2026-11-02; the club's site places it on the Connecticut River. Position is the clubhouse; the ramp itself is not mapped in any public source yet.",
+    "_added": "2026-11-02: SEO review found the club on the Connecticut River had no launch record in any source openboatlaunch reads (OpenStreetMap has only a marina point; openboatlaunch takes slipways and canoe put-ins). Owner confirmed the club is in Longmeadow, MA. Remove this row once openboatlaunch carries it."
+  }
+]

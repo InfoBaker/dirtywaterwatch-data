@@ -1,0 +1,341 @@
+[
+  {
+    "id": "ar-deq-overflow-incidents",
+    "name": "Arkansas DEQ \"Reported Noncompliance Incident Data\" (SSO, bypass, upset, unpermitted discharge) search",
+    "jurisdiction": "AR",
+    "operator": "Arkansas Department of Energy and Environment, Division of Environmental Quality (DEQ)",
+    "operator_type": "state",
+    "role": "events",
+    "event_types": [
+      "sso",
+      "bypass",
+      "upset",
+      "unpermitted_discharge"
+    ],
+    "waters_covered": "statewide; location text, no receiving-water field seen (Impact says whether it reached waters, public land, private property)",
+    "water_slugs": [],
+    "url": "https://adeq.state.ar.us/water/enforcement/sso/data.aspx",
+    "access": [
+      "html",
+      "csv"
+    ],
+    "access_detail": "Public search page: plain HTML POST (no viewstate) to https://adeq.state.ar.us/water/enforcement/sso/data.aspx with T_FacilityName, T_NPID, T_MiscSearch, C_SSO/C_Bypass/C_Upset/C_Unpermitted (=1), T_DateStart, T_DateEnd (mm/dd/yyyy), Search=Search. Page says \"Data current as of 11/03/2026\"; a query for 2026-10-25 to 11-03 returned 7 SSOs including one reported 10/29/2026; October 2026 returned 41 SSOs (15 per page; export to Text, Excel, PDF links). A year-wide multi-type query returned 0 (likely a size limit), so query by month or week. Online reporting forms feed it directly (24 Hour Online Overflow Reporting Forms, each with a Web Confirmation Number). Sample raw/sso-search-sample.json, page raw/sso-search-recent.html.",
+    "machine_readable": true,
+    "sample_record": {
+      "permit": "AR0047554",
+      "facility": "Ward, City of",
+      "location": "Sweetwater Liftstation",
+      "started": "10/28/2026",
+      "stopped": "10/28/2026",
+      "reported": "10/29/2026",
+      "volume_gallons": "400",
+      "impact": "SSO Affected Private Property (ground)",
+      "type": "SSO;",
+      "environmental_damage": "No Evidence of Adverse Health/Environmental Impact;",
+      "detail": "Web Confirmation Number: 598b8f31-...; Cause: Power Failure; Action Taken: Spread Lime on Affected Area; Type of Overflow: Lift Station Overflow;"
+    },
+    "fields": [
+      "NPDES Permit Number",
+      "Facility Name",
+      "Location",
+      "Date Overflow Started",
+      "Date Overflow Stopped",
+      "Date Reported",
+      "Volume (Gallons)",
+      "Impact",
+      "Type",
+      "Environmental Damage",
+      "Web Confirmation Number",
+      "Cause",
+      "Action Taken (including \"Public Notification\")",
+      "Type of Overflow"
+    ],
+    "fills_event_fields": [
+      "source_record_id (Web Confirmation Number)",
+      "event_type",
+      "started_at (date)",
+      "ended_at (date)",
+      "reported_at (date)",
+      "volume",
+      "location_text",
+      "material",
+      "advice_text (action taken)"
+    ],
+    "cannot_fill": [
+      "coordinates",
+      "waterbody (only impact class)",
+      "times of day"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "Live: reports filed online appear the next day or sooner. Rule: notify DEQ within 24 hours; 5-day written report for most.",
+    "history": "Access database snapshot back to at least 2014 (dates seen 2014-04 to 2020-09 in strings; ZIP Last-Modified 2025-08-13); the web search covers current reports",
+    "license": "None shown.",
+    "legal_basis": "DEQ NPDES permit Part II reporting conditions (24 hours / 5 days)",
+    "status": "candidate",
+    "status_reason": "Statewide, dated, current to the day before, with volume, impact and cause; HTML only (POST search) and no coordinates.",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": "Also a downloadable Access database NPDES_SSO_web.zip (5 MB, 28 MB .mdb) whose ZIP was last modified 2025-08-13, so it lags the web search; not parsed (no Access tools here). Location text is free text and may include customer addresses: show only to street level and run the name blocklist."
+  },
+  {
+    "id": "ar-deq-sso-access-db",
+    "name": "Arkansas DEQ NPDES_SSO_web.zip (full Access database)",
+    "jurisdiction": "AR",
+    "operator": "Arkansas Department of Energy and Environment, Division of Environmental Quality (DEQ)",
+    "operator_type": "state",
+    "role": "events",
+    "event_types": [
+      "sso",
+      "bypass",
+      "upset",
+      "unpermitted_discharge"
+    ],
+    "waters_covered": "statewide",
+    "water_slugs": [],
+    "url": "https://adeq.state.ar.us/water/enforcement/sso/NPDES_SSO_web.zip",
+    "access": [
+      "csv"
+    ],
+    "access_detail": "Downloaded to the scratchpad (not the repo): 5,065,954 bytes zipped, NPDES_SSO_web.mdb 28.6 MB, Last-Modified 2025-08-13. Free-text overflow types (\"Manhole Overflow\", \"MH overflow\") visible in strings; tables not parsed.",
+    "machine_readable": true,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [
+      "history"
+    ],
+    "cannot_fill": [
+      "current events (stale since 2025-08)"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "irregular (last 2025-08-13)",
+    "history": "at least 2014 to 2025-08",
+    "license": "None shown.",
+    "legal_basis": null,
+    "status": "candidate",
+    "status_reason": "History backfill once parsed (needs an Access reader such as mdbtools).",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ar-deq-overflow-forms",
+    "name": "Arkansas DEQ 24-hour online overflow reporting forms",
+    "jurisdiction": "AR",
+    "operator": "Arkansas Department of Energy and Environment, Division of Environmental Quality (DEQ)",
+    "operator_type": "state",
+    "role": "law",
+    "event_types": [
+      "sso",
+      "bypass",
+      "upset",
+      "unpermitted_discharge"
+    ],
+    "waters_covered": "statewide",
+    "water_slugs": [],
+    "url": "https://adeq.state.ar.us/water/enforcement/sso/submit.aspx",
+    "access": [
+      "html"
+    ],
+    "access_detail": "Forms: ?type=b bypass, ?type=d upset, ?type=s SSO, ?type=u unpermitted discharge; email ee.waterenf.sso@arkansas.gov. The page states: \"Permittees are required to report any instances of noncompliance that may endanger human health or the environment to DEQ's Water Quality Enforcement. Notification must be made within 24 hours ... an additional 5-Day Written Report is required for ... Any Sanitary Sewer Overflow (SSO), no matter how small\".",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "n/a",
+    "history": "n/a",
+    "license": "n/a",
+    "legal_basis": "NPDES permit conditions",
+    "status": "used",
+    "status_reason": "Regulator-report duty, quoted.",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ar-deq-hab-advisories",
+    "name": "Arkansas DEQ Harmful Algal Bloom current advisories table and news releases",
+    "jurisdiction": "AR",
+    "operator": "Arkansas Department of Energy and Environment, Division of Environmental Quality (DEQ)",
+    "operator_type": "state",
+    "role": "advisories",
+    "event_types": [
+      "hab"
+    ],
+    "waters_covered": "lakes statewide (Lake Hamilton, Huston Lake, Lake June, Lake DeSoto, Lake Poinsett, Lake Alma stream in 2026)",
+    "water_slugs": [],
+    "url": "https://www.adeq.state.ar.us/water/planning/hab/",
+    "access": [
+      "html",
+      "pdf"
+    ],
+    "access_detail": "HTML table \"Current Advisories\" (Waterbody Name, Nearest Area, AR County, Date Posted; Last Updated), empty on 2026-11-03; archive at /water/planning/hab/archive.aspx; each advisory and lift is a dated news-release PDF (e.g. 2026-08-17 Huston Lake; 2026-07-23 lifted Lake Alma). curl got a connection reset; WebFetch read it.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [
+      "Waterbody Name",
+      "Nearest Area",
+      "AR County",
+      "Date Posted"
+    ],
+    "fills_event_fields": [
+      "started_at (date posted)",
+      "waterbody",
+      "advice_text (release)",
+      "ended_at (lift release)"
+    ],
+    "cannot_fill": [
+      "coordinates"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "as issued and lifted, May to October",
+    "history": "archive page; releases 2026 seen",
+    "license": "None shown.",
+    "legal_basis": "DEQ HAB Response Plan (2019)",
+    "status": "candidate",
+    "status_reason": "Small HTML table plus the archive: a snapshot state machine gives dated HAB advisories.",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ar-epa-sobe",
+    "name": "EPA SOBE (eRule) extract, Arkansas rows",
+    "jurisdiction": "AR",
+    "operator": "US EPA",
+    "operator_type": "federal",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "n/a",
+    "water_slugs": [],
+    "url": "https://echo.epa.gov/tools/data-downloads",
+    "access": [
+      "csv"
+    ],
+    "access_detail": "0 Arkansas rows on 2026-11-03.",
+    "machine_readable": true,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "daily",
+    "history": "n/a",
+    "license": "public domain",
+    "legal_basis": "40 CFR 127",
+    "status": "rejected",
+    "status_reason": "No rows; Arkansas uses its own forms.",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ar-lrwra-sso-plan",
+    "name": "Little Rock Water Reclamation Authority SSO Response Plan (Sierra Club settlement) and overflow reporting line",
+    "jurisdiction": "AR",
+    "operator": "Little Rock Water Reclamation Authority",
+    "operator_type": "utility",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "Fourche Creek, Arkansas River, Rock Creek (Little Rock)",
+    "water_slugs": [],
+    "url": "https://lrwra.com/",
+    "access": [
+      "html",
+      "phone"
+    ],
+    "access_detail": "The 2004 compliance letter describes an SSO Response Plan with \"Signage/Public Notification/Public Information\" developed under the Sierra Club settlement; a 2023 certification of final compliance closed the program (339 overflow locations mitigated since 2006). Public reporting line 501-223-1509. No public overflow list found.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": "Settlement agreement",
+    "status": "watch",
+    "status_reason": "No web list.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ar-deq-aquaview",
+    "name": "Arkansas DEQ AquaView (ArcGIS Experience)",
+    "jurisdiction": "AR",
+    "operator": "Arkansas Department of Energy and Environment, Division of Environmental Quality (DEQ)",
+    "operator_type": "state",
+    "role": "monitoring",
+    "event_types": [
+      "bacteria"
+    ],
+    "waters_covered": "statewide monitoring stations",
+    "water_slugs": [],
+    "url": "https://experience.arcgis.com/experience/57e4fa8751524d54bd69ab58a7296e3e/",
+    "access": [
+      "arcgis"
+    ],
+    "access_detail": "Water-quality data viewer; not opened. May hold monitoring stations and outfalls.",
+    "machine_readable": true,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": true,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": null,
+    "status": "watch",
+    "status_reason": "Check for outfall and station layers.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "ar-beaches",
+    "name": "Arkansas swimming beach monitoring",
+    "jurisdiction": "AR",
+    "operator": "Arkansas Department of Health; US Army Corps of Engineers lake offices",
+    "operator_type": "state",
+    "role": "advisories",
+    "event_types": [
+      "beach_advisory"
+    ],
+    "waters_covered": "none found",
+    "water_slugs": [],
+    "url": "https://www.healthy.arkansas.gov/",
+    "access": [],
+    "access_detail": "No state bacteria beach-monitoring program found (inland state, not a BEACH Act state). Corps lake swim beaches are managed by district offices.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": null,
+    "status": "rejected",
+    "status_reason": "No program found (search only).",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  }
+]

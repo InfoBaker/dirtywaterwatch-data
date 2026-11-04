@@ -1,0 +1,24 @@
+id: "md-mde-overflows"
+name: "MDE Reported Sewer Overflows (New for 2023), Maryland Open Data Portal (Socrata stgj-u72u)"
+url: "https://opendata.maryland.gov/dataset/Reported-Sewer-Overflows-New-for-2023-/stgj-u72u"
+homepage: "https://mde.maryland.gov/programs/water/Compliance/Pages/ReportedSewerOverflow.aspx"
+kind: "api"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/md_mde_overflows.py
+#   (data/build/events/md-mde-overflows.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/md_mde_overflows.py docstring): daily (metadata "Daily"; MDE's page says
+#   monthly; one reload observed with about a day of latency). The whole table is reloaded each time.
+cadence: "daily"
+license: "Public Domain (Socrata metadata)"
+attribution: "Maryland Department of the Environment"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass"]
+states: ["MD"]
+registry_ids: ["md-mde-sewer-overflows-2023"]
+access: ["csv", "api"]
+access_detail: "CSV https://opendata.maryland.gov/api/views/stgj-u72u/rows.csv?accessType=DOWNLOAD (full table, about 3,500 rows) and metadata https://opendata.maryland.gov/api/views/stgj-u72u.json (rowsUpdatedAt). The SODA endpoint is behind Cloudflare, which blocked a compound query."
+machine_readable: true
+legal_basis: "Md. Code, Environment § 9-331.1; COMAR 26.08.10"
+checked: "2026-11-02"

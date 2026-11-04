@@ -1,0 +1,117 @@
+[
+ {
+  "id": "mn-minneapolis-dept-public-works",
+  "name": "Minneapolis Public Works and Metropolitan Council Environmental Services (joint CSO permit)",
+  "state": "MN",
+  "kind": "cso",
+  "npdes_permit": "MN0046744",
+  "receiving_waters": [
+   "Minnehaha Creek",
+   "Mississippi River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 7 closed",
+  "notification_channel": "Annual CSO reports (history); all 7 outfalls closed per EPA",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Minneapolis"
+  ],
+  "notes": "2018 Met Council item on CSO permit termination (search only).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mn-wlssd",
+  "name": "Western Lake Superior Sanitary District",
+  "state": "MN",
+  "kind": "sso+bypass",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "St. Louis River",
+   "Lake Superior",
+   "Duluth streams"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "WLSSD overflow points layer (116 releases with coordinates)",
+  "notification_channel": "https://wlssd.com/services/wastewater/overflows/ (ArcGIS dashboard over a public FeatureServer)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Duluth",
+   "Cloquet",
+   "Hermantown",
+   "Proctor"
+  ],
+  "notes": "Newest release 2026-11-02 at the treatment plant, '70 MGD'. Permit number not looked up.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mn-duluth",
+  "name": "City of Duluth (sanitary collection system)",
+  "state": "MN",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Chester Creek",
+   "Lake Superior",
+   "St. Louis River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "City press releases with email subscription (duluthmn.gov web-subscriptions)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Duluth"
+  ],
+  "notes": "2009 federal consent decree with WLSSD ended after overflows stopped; overflows recurred in 2023 and 2024.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mn-mces",
+  "name": "Metropolitan Council Environmental Services",
+  "state": "MN",
+  "kind": "sso+bypass",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Mississippi River",
+   "Minnesota River",
+   "St. Croix River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Twin Cities metro"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mn-bois-forte",
+  "name": "Bois Forte Tribal Council sanitary sewer collection system",
+  "state": "MN",
+  "kind": "sso",
+  "npdes_permit": "MN0061310",
+  "receiving_waters": [
+   "Pike Bay, Lake Vermilion"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE coordinates",
+  "notification_channel": "EPA SOBE (1 event, 2024-06-18)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Tower"
+  ],
+  "notes": "EPA-issued tribal permit.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ }
+]

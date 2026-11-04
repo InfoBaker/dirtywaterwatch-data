@@ -1,0 +1,58 @@
+id: "va-deq-prep-api"
+name: "DEQ Pollution Response Program (PReP) public report API (myDEQ portal)"
+url: "https://portal.deq.virginia.gov/v2/prep/search"
+homepage: "https://portal.deq.virginia.gov/v2/prep/search"
+kind: "api"
+level: "state"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): The best statewide
+#   event feed: live, JSON, filterable by sewage flag and date, with volume, receiving water, cause
+#   and NRC/VDEM/SSORS cross-ids. Undocumented internal API, so treat as fragile; the ArcGIS export
+#   is the documented fallback.
+# Access detail (research, quoted): JSON API behind the public PReP search page (Vue app; found in
+#   the page bundle). GET
+#   https://portal.deq.virginia.gov/prep/api/prepReports?orderBy=incidentDateTime%20desc&limit=N&offset=M&expand=prepStatusCode
+#   ; any record column works as a filter (sewageRelated=Y, incidentDateTimeFrom=YYYY-MM-DD,
+#   incidentDateTimeTo, siteFipsCodesId, id). Detail:
+#   /prep/api/prepReports/{id}?expand=prepStatusCode,prepFipsCode.fipsRegion,prepReportAgencies,prepReceptorImpactCode,prepReportSewages,prepStatusReasonCode,prepIntentionCode
+#   . Sewage sub-record:
+#   /prep/api/prepReportSewages?reportId={id}&expand=prepComponentTypeCode,prepSewageCauses.prepCauseCode,prepSewageImpacts.prepImpactTypeCode,prepSewageRemediations.prepRemediationCode
+#   . Also prepReportEvents, prepReportMaterials, prepReportReleaseSubtypes. No login, no key.
+#   Response wrapper {offset,limit,count,total,results}. total=117,586 on 2026-11-02; 419 reports
+#   with incidentDateTime since 2026-10-01, 111 of them sewageRelated=Y. Newest record created the
+#   same day (2026-11-02 13:51). Saved raw/prep/*.json. Status log:
+#   /prep/api/prepReportEvents?reportId={id}&expand=prepEventTypeCode&orderBy=eventDate%20desc (e.g.
+#   324738: Call Received 2026-08-04T21:30:30, Under Investigation and Assigned
+#   2026-08-05T10:55:36), which can fill revision_history.
+# Can fill: source_record_id (id; also ssorsId, nrcId, vdemId), event_type (sewageRelated + siteName
+#   prefix SSO/CSO; incident types only in the export layer), source_status (prepStatusCode: New /
+#   Under Investigation / Closed), started_at (incidentDateTime, local wall-clock, no zone),
+#   reported_at (receivedDateTime), source_updated_at (modifiedDate), waterbody
+#   (receptorWaterbodyId, otherWaterbodyDesc), location_text (siteName, siteAddress1,
+#   locationComment), material, volume (receptorEstimateLow/High;
+#   prepReportSewages.dischargeVolume), units, estimate_flag (dischargeUnknown), authority (DEQ
+#   region via prepFipsCode.fipsRegion), raw_record, revision_history (prepReportEvents status log
+#   plus createdDate/modifiedDate)
+# Cannot fill: ended_at (incidentEndDateTime almost always null; derive from duration hours);
+#   coordinates (none in the API; use the EDMA point layer); outfall ids; advice_text; valid_until;
+#   published_at (no publish timestamp); timezone (implied America/New_York)
+# Waters: statewide; receptor waterbody named per report (openboatlaunch slugs: james-river-va,
+#   elizabeth-river-va, potomac-river-va, rappahannock-river-va, roanoke-river-va,
+#   meredith-branch-va, hoskins-creek-va)
+# History: Records from previous systems back to before 2008; current PReP schema since 2019-05-29;
+#   fields renamed 2022-09-09 (older rows keep old names).
+# Research notes: Data quality: free-text waterbody names ("Gillie Creek", "Gravel Run"), duplicate
+#   records for one event (Douglas Ave = 324738 and 324765), permit-number field sometimes holds an
+#   MS4 permit (VA0088650 = Norfolk MS4), mediaType sometimes wrong (an SSO coded Petroleum).
+#   Routine permitted wet-weather CSOs are not reported here (only 3 CSO-named records since 2024).
+cadence: "Live: records appear within minutes of a call-center or online report (records created 2026-11-02 seen the same afternoon). Permittees must call within 24 hours (Va. Code § 62.1-44.5 B; 9VAC25-31-190 L 6-7) and file a written report within 5 days; DEQ staff then update volume, cause and status over days to weeks (Douglas Ave record modified 13 days later)."
+license: "Page text: \"If downloaded information will be distributed to other entities, the following statement should be included: 'DEQ is the data source. DEQ does not certify that this data represents a complete record. This data is provided to the citizens of the Commonwealth free of charge and for informational purposes only.'\" Terms of Use on the same page: information \"SHOULD NOT BE RELIED UPON FOR PERSONAL, MEDICAL, LEGAL OR FINANCIAL DECISIONS\"; \"By downloading any dataset, you are affirmatively stating that you have read and understood these Terms of Use\". https://www.deq.virginia.gov/land-waste/pollution-response/pollution-data-and-reporting"
+attribution: "Virginia Department of Environmental Quality, Office of Pollution Response and Emergency Preparedness"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass", "cso"]
+states: ["VA"]
+access: ["api", "html"]
+access_detail: "JSON API behind the public PReP search page (Vue app; found in the page bundle). GET https://portal.deq.virginia.gov/prep/api/prepReports?orderBy=incidentDateTime%20desc&limit=N&offset=M&expand=prepStatusCode ; any record column works as a filter (sewageRelated=Y, incidentDateTimeFrom=YYYY-MM-DD, incidentDateTimeTo, siteFipsCodesId, id). Detail: /prep/api/prepReports/{id}?expand=prepStatusCode,prepFipsCode.fipsRegion,prepReportAgencies,prepReceptorImpactCode,prepReportSewages,prepStatusReasonCode,prepIntentionCode . Sewage sub-record: /prep/api/prepReportSewages?reportId={id}&expand=prepComponentTypeCode,prepSewageCauses.prepCauseCode,prepSewageImpacts.prepImpactTypeCode,prepSewageRemediations.prepRemediationCode . Also prepReportEvents, prepReportMaterials, prepReportReleaseSubtypes. No login, no key. Response wrapper {offset,limit,count,total,results}. total=117,586 on 2026-11-02; 419 reports with incidentDateTime since 2026-10-01, 111 of them sewageRelated=Y. Newest record created the same day (2026-11-02 13:51). Saved raw/prep/*.json. Status log: /prep/api/prepReportEvents?reportId={id}&expand=prepEventTypeCode&orderBy=eventDate%20desc (e.g. 324738: Call Received 2026-08-04T21:30:30, Under Investigation and Assigned 2026-08-05T10:55:36), which can fill revision_history."
+machine_readable: true
+legal_basis: "Va. Code § 62.1-44.5 B; 9VAC25-31-190 L 6 and L 7; Va. Code § 62.1-44.19:6 B (DEQ dissemination)"
+checked: "2026-11-02"

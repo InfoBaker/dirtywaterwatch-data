@@ -1,0 +1,35 @@
+id: "ri-echo-dfr-sewer-events"
+name: "EPA ECHO detailed facility reports - RI single-event violations and sewer overflow/bypass event totals"
+url: "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100072&output=JSON"
+homepage: "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100072&output=JSON"
+kind: "api"
+level: "federal"
+# Notes (research/ri, status used, verified fetched, checked 2026-11-01): Only public place where RI
+#   SSOs and bypasses outside the NBC map appear; confirmed against NBC (OF 220, 10/05/2026) and DEM
+#   (East Providence, 05/04/2026). Coordinate with the federal agent's ECHO work.
+# Access detail (research, quoted): GET per permit, no auth, JSON ~50 KB. Keys used:
+#   Results.CWASECompliance.Sources[].Violations[] (ViolationDesc, NPDESViolationId, QtrNValue =
+#   event date or date range) and Results.SBEEventTotals (annual counts and gallons, SortOrder 1/2).
+#   Fetched for 20 RI permits; summary in raw/echo-dfr-ri-summary.json.
+# Can fill: source_record_id (NPDESViolationId), event_type (from ViolationDesc: SSO/CSO/bypass,
+#   wet/dry), started_at/ended_at (date only), authority, jurisdiction, volume (annual totals only)
+# Cannot fill: outfall/location; waterbody; times of day; per-event volume; advice_text
+# Waters: All RI individual-permit WWTFs (openboatlaunch slugs: providence-river-ri,
+#   pawtuxet-river-ri, blackstone-river-ri, greenwich-cove-ri, warren-river-ri, pawcatuck-river-ri)
+# History: Rolling 13 quarters (from 07/2023) for violations; annual totals 2022-2026.
+# Research notes: Lists only events coded as violations (dry-weather CSOs, SSOs, unanticipated
+#   bypasses), not routine permitted wet-weather CSOs. RIDEM's NeT-SewerOverflow FAQ says 'How to
+#   View NETSEWEROVERFLOW Reports in ECHO - Coming Soon!' (rev. 11/16/23). SBE totals and violation
+#   lists do not always agree (e.g., East Providence 2026 shows '--').
+cadence: "ICIS-NPDES extract weekly-ish (SystemExtractDate 10/30/2026 on check). Event appears after the operator's 5-day NeT-SewerOverflow report and state review; lag days to weeks."
+license: "U.S. federal government data (public domain); ECHO asks users to cite it."
+attribution: "U.S. EPA (data reported by RI permittees via NeT-SewerOverflow / ICIS-NPDES)"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass", "cso (dry-weather only)"]
+states: ["RI"]
+access: ["api"]
+access_detail: "GET per permit, no auth, JSON ~50 KB. Keys used: Results.CWASECompliance.Sources[].Violations[] (ViolationDesc, NPDESViolationId, QtrNValue = event date or date range) and Results.SBEEventTotals (annual counts and gallons, SortOrder 1/2). Fetched for 20 RI permits; summary in raw/echo-dfr-ri-summary.json."
+machine_readable: true
+legal_basis: "250-RICR-150-10-4 § 4.5(A)(8) (electronic SSO report within 5 calendar days); 250-RICR-150-10-1 § 1.14(R),(T)."
+checked: "2026-11-01"

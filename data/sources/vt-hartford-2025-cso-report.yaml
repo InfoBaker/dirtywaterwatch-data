@@ -1,0 +1,24 @@
+id: "vt-hartford-2025-cso-report"
+name: "Hartford WRJ 2025 CSO Annual Report"
+url: "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1225/3-1225.2025CSOAnnualReport.20260824.pdf"
+homepage: "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1225/3-1225.2025CSOAnnualReport.20260824.pdf"
+kind: "pdf"
+level: "municipal"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): no reason recorded
+# Access detail (research, quoted): Table 1 gives lat/long for 5 outfalls
+# Can fill: coordinates
+# Cannot fill: events (none in 2025)
+# Waters: Connecticut River (openboatlaunch slugs: connecticut-river-vt)
+# History: 2013+
+cadence: "annual"
+license: "none stated"
+attribution: "Town of Hartford"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["VT"]
+access: ["pdf"]
+access_detail: "Table 1 gives lat/long for 5 outfalls"
+machine_readable: false
+legal_basis: "1272 Order 2022"
+checked: "2026-11-01"

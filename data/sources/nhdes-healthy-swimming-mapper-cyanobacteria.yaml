@@ -1,0 +1,30 @@
+id: "nhdes-healthy-swimming-mapper-cyanobacteria"
+name: "NHDES Healthy Swimming Mapper - CyanobacteriaMapperLayer2 (layer 9)"
+url: "https://services1.arcgis.com/MAcUimSes4gPY4sM/arcgis/rest/services/2024_Healthy_Swimming_Mapper_V2_WFL1/FeatureServer/9"
+homepage: "https://services1.arcgis.com/MAcUimSes4gPY4sM/arcgis/rest/services/2024_Healthy_Swimming_Mapper_V2_WFL1/FeatureServer/9"
+kind: "arcgis"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Machine-readable
+#   HAB warnings; status fields disagree, so read Bloom_status and LatestAdvisory together.
+# Access detail (research, quoted): Polygon layer, 2,401 rows; dataLastEditDate 2026-10-15.
+#   Bloom_status values: 'no bloom reported', 'No bloom reported', 'Warning' (1 row, Angle Pond,
+#   while Status read 'No bloom reported' and LatestAdvisory 'No Warnings issued').
+# Can fill: source_record_id (WB_ID), source_status (Bloom_status / LatestAdvisory), reported_at
+#   (SamplingDate), source_updated_at (StatusDate), waterbody, geometry (official affected area =
+#   whole waterbody polygon)
+# Cannot fill: valid_until; ended_at
+# Waters: 2,401 waterbody polygons (NH lakes plus some ME tidal creeks) (openboatlaunch slugs:
+#   lake-winnipesaukee-nh, squam-lake-nh, lake-sunapee-nh, great-bay-nh)
+# History: CyanoHistory link per waterbody (www4 host, 403 here).
+cadence: "Daily per item snippet; warnings issued after sampling; NHDES 'does not close waterbodies'."
+license: "\"User is required to read metadata completely before using the data. The information provided in this coverage is a subset of spatial databases developed by the New Hampshire Department of Environmental Services (NHDES). The data presented is under constant revision and may not depict the most up to date information. The NHDES is not responsible for the use or interpretation of this information, or for any inaccuracies in the site names, tax map and lot information, or locations. All information is subject to verification. These data are to be used for screening purposes only. Distribution is discouraged.\" (licenseInfo on items 8d84a6b03acb4efaab571b222c78447b and 083302ea9c904498a620930698be3340; accessInformation \"NHDES\")"
+attribution: "NHDES Harmful Algal Bloom Program"
+enabled: true
+role: "advisories"
+event_types: ["cyanobacteria"]
+states: ["NH"]
+access: ["arcgis", "map_only", "email"]
+access_detail: "Polygon layer, 2,401 rows; dataLastEditDate 2026-10-15. Bloom_status values: 'no bloom reported', 'No bloom reported', 'Warning' (1 row, Angle Pond, while Status read 'No bloom reported' and LatestAdvisory 'No Warnings issued')."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

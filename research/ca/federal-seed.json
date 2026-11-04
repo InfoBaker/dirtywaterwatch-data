@@ -1,0 +1,1360 @@
+{
+ "state": "CA",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "CA0037664",
+   "permittee": "SOUTHEAST WPCP, NORTH POINT WWF, BAYSIDE WWF",
+   "city": "SAN FRANCISCO",
+   "open_outfalls": 29,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Candlestick Cove Southeast Drainage Basin",
+    "Central Basin Central Drainage Basin",
+    "Islais Creek Central Drainage Basin",
+    "Marina Beach North Shore Drainage Basin",
+    "Mission Creek Central Drainage Basin",
+    "Pacific Ocean",
+    "Yosemite Creek Sountheast Drainage Basin"
+   ]
+  },
+  {
+   "npdes_permit": "CA0037681",
+   "permittee": "OCEANSIDE WPCP",
+   "city": "SAN FRANCISCO",
+   "open_outfalls": 7,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "PACIFIC OCEAN",
+    "Pacific Ocean"
+   ]
+  },
+  {
+   "npdes_permit": "CA0038610",
+   "permittee": "NPD MAJ-BAYSIDE CSO",
+   "city": "SAN FRANCISCO",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SAN FRANCISCO BAY"
+   ]
+  },
+  {
+   "npdes_permit": "CA0079111",
+   "permittee": "SACRAMENTO COMBINED WWCTS",
+   "city": "SACRAMENTO",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Sacramento River"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 43,
+ "plant_permits": 286,
+ "plant_permits_major": 186,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "CA0004995",
+   "permittee": "Corning, City of",
+   "city": "CORNING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0022713",
+   "permittee": "Arcata, City of",
+   "city": "ARCATA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0022730",
+   "permittee": "Fortuna, City of",
+   "city": "FORTUNA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0022756",
+   "permittee": "Crescent City, City of",
+   "city": "CRESCENT CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0022764",
+   "permittee": "Santa Rosa, City of",
+   "city": "SANTA ROSA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0022888",
+   "permittee": "Ukiah, City of",
+   "city": "UKIAH",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0022977",
+   "permittee": "Cloverdale, City of",
+   "city": "CLOVERDALE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0023060",
+   "permittee": "Willits, City of",
+   "city": "WILLITS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0023345",
+   "permittee": "Windsor Water District",
+   "city": "WINDSOR",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0024449",
+   "permittee": "Eureka, City of",
+   "city": "EUREKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0024490",
+   "permittee": "McKinleyville Community Services District",
+   "city": "MCKINLEYVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0025135",
+   "permittee": "Healdsburg, City of",
+   "city": "HEALDSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037532",
+   "permittee": "Millbrae, City of, and North Bayside System Unit (NBSU)",
+   "city": "MILLBRAE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0037541",
+   "permittee": "San Mateo, City of",
+   "city": "SAN MATEO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037575",
+   "permittee": "Napa Sanitation District",
+   "city": "NAPA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037613",
+   "permittee": "Dublin San Ramon SD, Livermore-Amador Valley WMA, East Bay Dischargers Authority",
+   "city": "PLEASANTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037621",
+   "permittee": "Sunnyvale, City of",
+   "city": "SUNNYVALE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0037648",
+   "permittee": "Central Contra Costa Sanitary District",
+   "city": "MARTINEZ",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037664",
+   "permittee": "San Francisco, City and County of",
+   "city": "SAN FRANCISCO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0037681",
+   "permittee": "SAN FRANCISCO, CITY & COUNTY",
+   "city": "SAN FRANCISCO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0037699",
+   "permittee": "Vallejo Flood and Wastewater District",
+   "city": "VALLEJO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037702",
+   "permittee": "East Bay Municipal Utility District",
+   "city": "OAKLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037711",
+   "permittee": "Sewerage Agency of Southern Marin",
+   "city": "MILL VALLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037737",
+   "permittee": "North San Mateo County Sanitation District",
+   "city": "DALY CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037770",
+   "permittee": "Mt. View Sanitary District",
+   "city": "MARTINEZ",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037788",
+   "permittee": "Burlingame, City of, and North Bayside System Unit",
+   "city": "BURLINGAME",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037796",
+   "permittee": "Pinole, City of",
+   "city": "PINOLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037800",
+   "permittee": "Sonoma Valley County Sanitation District",
+   "city": "SONOMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037810",
+   "permittee": "Petaluma, City of",
+   "city": "PETALUMA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0037826",
+   "permittee": "Rodeo Sanitary District",
+   "city": "RODEO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037834",
+   "permittee": "Palo Alto, City of",
+   "city": "PALO ALTO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037842",
+   "permittee": "San Jose and Santa Clara, Cities of; and San Jose/Santa Clara WPCP",
+   "city": "SAN JOSE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037851",
+   "permittee": "Las Gallinas Valley Sanitary District",
+   "city": "SAN RAFAEL",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0037869",
+   "permittee": "East Bay Dischargers Authority; Livermore-Amador Valley WMA",
+   "city": "SAN LEANDRO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0037958",
+   "permittee": "Novato Sanitary District",
+   "city": "NOVATO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0038008",
+   "permittee": "City of Livermore, Livermore-Amador Valley WMA, East Bay Dischargers Authority",
+   "city": "LIVERMORE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0038024",
+   "permittee": "Fairfield-Suisun Sewer District",
+   "city": "FAIRFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0038067",
+   "permittee": "Sausalito-Marin City Sanitary District",
+   "city": "SAUSALITO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0038091",
+   "permittee": "Benicia, City of",
+   "city": "BENICIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0038130",
+   "permittee": "South San Francisco and San Bruno, Cities of & North Bayside System Unit (NBSU)",
+   "city": "SOUTH SAN FRANCISCO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0038318",
+   "permittee": "San Francisco, City and County of; North Bayside System Unit",
+   "city": "SAN BRUNO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0038369",
+   "permittee": "Silicon Valley Clean Water",
+   "city": "REDWOOD CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0038539",
+   "permittee": "West County Agency; West County Wastewater District",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0038547",
+   "permittee": "Delta Diablo",
+   "city": "ANTIOCH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0038598",
+   "permittee": "Sewer Authority Mid-Coastside",
+   "city": "HALF MOON BAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0038628",
+   "permittee": "Central Marin Sanitation Agency",
+   "city": "SAN RAFAEL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0038768",
+   "permittee": "American Canyon, City of",
+   "city": "AMERICAN CANYON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0038776",
+   "permittee": "Pacifica, City of",
+   "city": "PACIFICA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0047364",
+   "permittee": "Carpinteria Sanitary District",
+   "city": "CARPINTERIA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0047856",
+   "permittee": "California Department of Corrections and Rehabilitation",
+   "city": "SAN LUIS OBISPO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0047881",
+   "permittee": "MORRO BAY, CITY OF AND CAYUCOS SANITARY DISTRICT",
+   "city": "MORRO BAY",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0047899",
+   "permittee": "Montecito Sanitary District",
+   "city": "SANTA BARBARA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0047953",
+   "permittee": "El Paso de Robles, City of",
+   "city": "PASO ROBLES",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0047996",
+   "permittee": "Carmel Area Wastewater District",
+   "city": "MONTEREY COUNTY",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0048003",
+   "permittee": "SOUTH SAN LUIS OBISPO CO SD",
+   "city": "OCEANO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0048127",
+   "permittee": "Lompoc, City of",
+   "city": "LOMPOC",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0048143",
+   "permittee": "Santa Barbara, City of",
+   "city": "SANTA BARBARA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0048151",
+   "permittee": "Pismo Beach, City of",
+   "city": "PISMO BEACH",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0048160",
+   "permittee": "GOLETA SANITARY DISTRICT",
+   "city": "GOLETA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0048194",
+   "permittee": "Santa Cruz, City of",
+   "city": "SANTA CRUZ",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0048216",
+   "permittee": "Watsonville, City of",
+   "city": "WATSONVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0048551",
+   "permittee": "Monterey One Water",
+   "city": "MARINA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0048828",
+   "permittee": "Scotts Valley, City of",
+   "city": "SCOTTS VALLEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0049224",
+   "permittee": "San Luis Obispo, City of",
+   "city": "SAN LUIS OBISPO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0049964",
+   "permittee": "South County Regional Wastewater Authority",
+   "city": "GILROY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0053597",
+   "permittee": "Camarillo Sanitary District",
+   "city": "CAMARILLO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0053619",
+   "permittee": "Joint Outfall System",
+   "city": "POMONA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0053651",
+   "permittee": "Ventura, City of",
+   "city": "VENTURA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0053716",
+   "permittee": "Joint Outfall System",
+   "city": "EL MONTE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0053813",
+   "permittee": "Joint Outfall System (JOS)",
+   "city": "CARSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0053856",
+   "permittee": "Los Angeles, City of",
+   "city": "SAN PEDRO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0053911",
+   "permittee": "Joint Outfall System",
+   "city": "WHITTIER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0053953",
+   "permittee": "Los Angeles, City of",
+   "city": "LOS ANGELES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0053961",
+   "permittee": "Ojai Valley Sanitary District",
+   "city": "VENTURA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0054011",
+   "permittee": "Joint Outfall System",
+   "city": "CERRITOS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0054097",
+   "permittee": "City of Oxnard Municipal Corporation",
+   "city": "OXNARD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0054119",
+   "permittee": "Joint Outfall System",
+   "city": "LONG BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0054216",
+   "permittee": "Santa Clarita Valley Sanitation District",
+   "city": "SANTA CLARITA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0054313",
+   "permittee": "Santa Clarita Valley Sanitation District of Los Angeles County",
+   "city": "SANTA CLARITA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0054372",
+   "permittee": "Avalon, City of",
+   "city": "AVALON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0055221",
+   "permittee": "Simi Valley, City of",
+   "city": "VENTURA COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0055531",
+   "permittee": "Burbank, City of",
+   "city": "BURBANK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0056014",
+   "permittee": "Las Virgenes Municipal Water District",
+   "city": "CALABASAS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0056227",
+   "permittee": "Los Angeles, City of",
+   "city": "VAN NUYS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0056294",
+   "permittee": "Thousand Oaks, City of",
+   "city": "CAMARILLO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0064556",
+   "permittee": "Newhall Ranch Sanitation District",
+   "city": "NEWHALL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0064645",
+   "permittee": "Water Replenishment District of Southern California",
+   "city": "PICO RIVERA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0077682",
+   "permittee": "Sacramento Regional County Sanitation District",
+   "city": "ELK GROVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0077691",
+   "permittee": "Vacaville, City of",
+   "city": "ELMIRA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0077704",
+   "permittee": "Anderson, City of",
+   "city": "ANDERSON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0077836",
+   "permittee": "Olivehurst Public Utility District",
+   "city": "OLIVEHURST",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0077895",
+   "permittee": "Regents, University of California",
+   "city": "DAVIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0077950",
+   "permittee": "Woodland, City of",
+   "city": "WOODLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0078590",
+   "permittee": "Discovery Bay, Town of, Community Services District",
+   "city": "CONTRA COSTA COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0078671",
+   "permittee": "EL DORADO IRRIGATION DISTRICT",
+   "city": "PLACERVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0078891",
+   "permittee": "Red Bluff, City of",
+   "city": "RED BLUFF",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0078948",
+   "permittee": "Turlock, City of",
+   "city": "TURLOCK",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0078981",
+   "permittee": "Quincy Community Services District",
+   "city": "QUINCY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0079049",
+   "permittee": "Davis, City of",
+   "city": "DAVIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0079081",
+   "permittee": "Chico, City of",
+   "city": "CHICO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0079103",
+   "permittee": "Modesto, City of",
+   "city": "MODESTO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0079138",
+   "permittee": "Stockton, City of",
+   "city": "STOCKTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0079154",
+   "permittee": "Tracy, City of",
+   "city": "TRACY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0079189",
+   "permittee": "VISALIA, CITY OF",
+   "city": "VISALIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0079197",
+   "permittee": "ATWATER, CITY OF",
+   "city": "ATWATER",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0079219",
+   "permittee": "Merced, City of",
+   "city": "MERCED",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0079235",
+   "permittee": "Oroville Region, Sewerage Commission",
+   "city": "OROVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0079243",
+   "permittee": "LODI, CITY OF",
+   "city": "LODI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0079260",
+   "permittee": "Yuba City, City of",
+   "city": "YUBA CITY",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0079316",
+   "permittee": "PLACER CO FACILITY SERVICES",
+   "city": "AUBURN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0079511",
+   "permittee": "Shasta Lake, City of",
+   "city": "SHASTA LAKE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0079651",
+   "permittee": "Linda County Water District",
+   "city": "MARYSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0079731",
+   "permittee": "Redding, City of",
+   "city": "ANDERSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0081434",
+   "permittee": "Galt, City of",
+   "city": "GALT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0081485",
+   "permittee": "Cutler-Orosi Joint Powers Wastewater Authority",
+   "city": "CUTLER",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0081558",
+   "permittee": "Manteca, City of",
+   "city": "MANTECA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0081759",
+   "permittee": "U.S. Department of the Interior, National Park Service, Yosemite National Park",
+   "city": "EL PORTAL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0082589",
+   "permittee": "Redding, City of",
+   "city": "ANDERSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0082660",
+   "permittee": "Brentwood, City of",
+   "city": "BRENTWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0083771",
+   "permittee": "Rio Vista, City of",
+   "city": "RIO VISTA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0084239",
+   "permittee": "MALAGA COUNTY WATER DISTRICT",
+   "city": "FRESNO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0084271",
+   "permittee": "Mountain House Community Services District",
+   "city": "MOUNTAIN HOUSE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0084476",
+   "permittee": "Lincoln, City of",
+   "city": "LINCOLN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0084573",
+   "permittee": "ROSEVILLE, CITY OF",
+   "city": "ROSEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0085235",
+   "permittee": "Clovis, City of",
+   "city": "CLOVIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0085260",
+   "permittee": "Ironhouse Sanitary District",
+   "city": "OAKLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0085316",
+   "permittee": "Turlock, City of",
+   "city": "MODESTO DIVISION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0085359",
+   "permittee": "City of Lathrop",
+   "city": "LATHROP",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0102695",
+   "permittee": "SUSANVILLE SANITARY DISTRICT",
+   "city": "SUSANVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0102822",
+   "permittee": "Victor Valley Wastewater Reclamation Authority",
+   "city": "VICTORVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0104370",
+   "permittee": "Heber Public Utility District",
+   "city": "HEBER",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0104400",
+   "permittee": "Imperial, City of",
+   "city": "IMPERIAL",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0104426",
+   "permittee": "El Centro, City of",
+   "city": "EL CENTRO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0104477",
+   "permittee": "Valley Sanitary District",
+   "city": "INDIO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0104493",
+   "permittee": "Coachella Sanitary District",
+   "city": "COACHELLA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0104523",
+   "permittee": "Brawley, City of",
+   "city": "BRAWLEY",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0104973",
+   "permittee": "Coachella Valley Water District",
+   "city": "THERMAL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0105015",
+   "permittee": "Calipatria, City of",
+   "city": "CALIPATRIA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0105236",
+   "permittee": "Colton, City of",
+   "city": "COLTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0105295",
+   "permittee": "Rialto, City of",
+   "city": "RIALTO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0105350",
+   "permittee": "Riverside, City of; Department of Public Works",
+   "city": "RIVERSIDE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0105376",
+   "permittee": "Beaumont, City of",
+   "city": "BEAUMONT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0105392",
+   "permittee": "San Bernardino, City of, Municipal Water Department",
+   "city": "SAN BERNARDINO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0105619",
+   "permittee": "Yucaipa Valley Water District",
+   "city": "YUCAIPA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0107395",
+   "permittee": "Encina Wastewater Authority",
+   "city": "CARLSBAD",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0107409",
+   "permittee": "San Diego, City of",
+   "city": "SAN DIEGO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0107417",
+   "permittee": "South Orange County Wastewater Authority",
+   "city": "DANA POINT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0107433",
+   "permittee": "Oceanside, City of",
+   "city": "OCEANSIDE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0107492",
+   "permittee": "Padre Dam Municipal Water District",
+   "city": "SANTEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0107611",
+   "permittee": "South Orange County Wastewater Authority",
+   "city": "ORANGE COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0107981",
+   "permittee": "Escondido, City of",
+   "city": "ESCONDIDO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0107999",
+   "permittee": "San Elijo Joint Powers Authority",
+   "city": "CARDIFF BY THE SEA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0108031",
+   "permittee": "Fallbrook Public Utility District",
+   "city": "FALLBROOK",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0108928",
+   "permittee": "United States Section of International Boundary and Water Commission (USIBWC)",
+   "city": "SAN DIEGO COUNTY",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0108944",
+   "permittee": "ESCONDIDO, CITY OF",
+   "city": "ESCONDIDO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA0109045",
+   "permittee": "San Diego, City of",
+   "city": "SAN DIEGO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0109347",
+   "permittee": "Marine Corps Base, Camp Pendleton",
+   "city": "CAMP PENDLETON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0109398",
+   "permittee": "San Diego, City of",
+   "city": "SAN DIEGO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0109991",
+   "permittee": "Los Angeles, City of",
+   "city": "PLAYA DEL REY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA0110116",
+   "permittee": "U.S. Department of Navy",
+   "city": "SAN FRANCISCO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA0110604",
+   "permittee": "Orange County Sanitation District",
+   "city": "FOUNTAIN VALLEY",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA3000002",
+   "permittee": "City of Morro Bay",
+   "city": "MORRO BAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CA7000009",
+   "permittee": "Calexico, City of",
+   "city": "CALEXICO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA8000027",
+   "permittee": "Elsinore Valley Municipal Water District",
+   "city": "LAKE ELSINORE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA8000073",
+   "permittee": "INLAND EMPIRE UTILITIES AGENCY",
+   "city": "CHINO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA8000100",
+   "permittee": "Lee Lake Water District",
+   "city": "CORONA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA8000188",
+   "permittee": "Eastern Municipal Water District",
+   "city": "LAKE ELSINORE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA8000304",
+   "permittee": "Colton/San Bernardino Regional Tertiary Treatment & Water Reclamation Authority",
+   "city": "COLTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "CA8000316",
+   "permittee": "Western Riverside County Regional Wastewater Authority (WRCRWA)",
+   "city": "EASTVALE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA8000326",
+   "permittee": "Irvine Ranch Water District",
+   "city": "IRVINE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA8000383",
+   "permittee": "Corona, City of, Department of Water & Power",
+   "city": "CORONA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA8000395",
+   "permittee": "Corona, City of, Department of Water and Power",
+   "city": "CORONA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA8000402",
+   "permittee": "INLAND EMPIRE UTILITIES AGENCY",
+   "city": "CHINO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CA8000409",
+   "permittee": "Inland Empire Utilities Agency",
+   "city": "CHINO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CAC422026",
+   "permittee": "Atwater City",
+   "city": "ATWATER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CAC425238",
+   "permittee": "El Dorado Irrigation District",
+   "city": "EL DORADO HILLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CAC426201",
+   "permittee": "Roseville, City of",
+   "city": "ROSEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CAC429451",
+   "permittee": "Lodi, City of",
+   "city": "LODI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CAC432817",
+   "permittee": "Roseville, City of",
+   "city": "ROSEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CAC433255",
+   "permittee": "EL DORADO IRRIGATION DISTRICT",
+   "city": "CAMERON PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CAC439621",
+   "permittee": "Placerville City",
+   "city": "PLACERVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CAC443249",
+   "permittee": "Galt, City of",
+   "city": "GALT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CAC444735",
+   "permittee": "Live Oak, City of",
+   "city": "LIVE OAK",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CAC446876",
+   "permittee": "Grass Valley City",
+   "city": "GRASS VALLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "CAC447786",
+   "permittee": "City of Willows",
+   "city": "WILLOWS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "CAC448871",
+   "permittee": "City of Auburn",
+   "city": "AUBURN",
+   "major": "Major",
+   "status": "EXP"
+  }
+ ]
+}

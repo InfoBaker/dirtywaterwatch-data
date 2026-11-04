@@ -1,0 +1,26 @@
+id: "nh-manchester-supplemental-cso-info"
+name: "Manchester Supplemental CSO Information (CD reports, annual CSO DMRs, outfall map)"
+url: "https://www.manchesternh.gov/Departments/Sewer-and-Stormwater/CSO/Supplemental-CSO-Information"
+homepage: "https://www.manchesternh.gov/Departments/Sewer-and-Stormwater/CSO/Supplemental-CSO-Information"
+kind: "html"
+level: "municipal"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): Annual history
+# Access detail (research, quoted): Semiannual Consent Decree compliance reports No. 1-10
+#   (2021-2025); annual 'Combined Sewer Overflow DMRs' PDFs 2021-2025 (2025 file is 6.8 MB and
+#   scanned, so it needs OCR); 2019 CD outfall location map
+# Can fill: volume, units, waterbody
+# Cannot fill: started_at; ended_at
+# Waters: All 15 outfalls (openboatlaunch slugs: merrimack-river-nh, piscataquog-river-nh)
+# History: 2009-2025
+cadence: "semiannual/annual"
+license: "none stated"
+attribution: "City of Manchester DPW EPD"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NH"]
+access: ["html", "pdf"]
+access_detail: "Semiannual Consent Decree compliance reports No. 1-10 (2021-2025); annual 'Combined Sewer Overflow DMRs' PDFs 2021-2025 (2025 file is 6.8 MB and scanned, so it needs OCR); 2019 CD outfall location map"
+machine_readable: false
+legal_basis: "Consent Decree paragraph 19(c)"
+checked: "2026-11-01"

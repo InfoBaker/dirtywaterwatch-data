@@ -1,0 +1,22 @@
+id: "ri-newport-cso-faq"
+name: "Newport CSO FAQ (red-flag notification)"
+url: "https://www.newportri.gov/city-hall/departments/utilities/wastewater/cso-control-plan/cso-faqs"
+homepage: "https://www.newportri.gov/city-hall/departments/utilities/wastewater/cso-control-plan/cso-faqs"
+kind: "html"
+level: "municipal"
+# Notes (research/ri, status used, verified fetched, checked 2026-11-01): Documents Newport's only
+#   public CSO notice: red flags at the facility and Harbormaster's building until 24 h after
+#   overflow stops; 'Summary of CSO Events since 2001' PDF.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "none stated"
+attribution: "City of Newport Utilities"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["RI"]
+access: ["html", "pdf"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,1422 @@
+[
+ {
+  "id": "az-az0020524",
+  "name": "CITY Of PHOENIX - 91st AVE WWTP",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020524",
+  "receiving_waters": [
+   "Az Canal Diversion Channel",
+   "Salt River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Phoenix"
+  ],
+  "notes": "SOBE: 45 events  to 2026-10-28.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0022152",
+  "name": "USDOI NPS - GRAND CANYON NP - SOUTH RIM WWTP",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0022152",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 32 events 2019-11-29 to 2026-08-05.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0020443",
+  "name": "City Of Yuma - Department Of Public Works",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020443",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Yuma"
+  ],
+  "notes": "SOBE: 17 events 2021-05-21 to 2026-09-23.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025313",
+  "name": "City Of Buckeye",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025313",
+  "receiving_waters": [
+   "AZ15070101-210"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Buckeye"
+  ],
+  "notes": "SOBE: 16 events 2019-11-06 to 2026-08-01.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024716",
+  "name": "City Of Cottonwood",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024716",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Cottonwood"
+  ],
+  "notes": "SOBE: 15 events 2020-05-07 to 2026-09-02.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025381",
+  "name": "Town Of Prescott Valley",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025381",
+  "receiving_waters": [
+   "AZ15070102-032A"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Prescott Valley"
+  ],
+  "notes": "SOBE: 14 events 2021-07-23 to 2026-07-20.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025178",
+  "name": "City Of Casa Grande",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025178",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Casa Grande"
+  ],
+  "notes": "SOBE: 12 events 2020-03-02 to 2026-01-11.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025071",
+  "name": "AZPDES permit AZ0025071",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025071",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 11 events 2021-03-17 to 2026-02-02.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025119",
+  "name": "City Of Peoria",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025119",
+  "receiving_waters": [
+   "AZ15070102-002"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Peoria"
+  ],
+  "notes": "SOBE: 9 events 2020-12-31 to 2023-12-01.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0023931",
+  "name": "Apache Junction Sewer District",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023931",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Apache Junction"
+  ],
+  "notes": "SOBE: 9 events 2021-01-27 to 2026-09-16.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025879",
+  "name": "PINEWOOD SANITARY DISTRICT - KAY S BLACKMAN WWTP",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025879",
+  "receiving_waters": [
+   "AZ15060202-421",
+   "AZ15060202-415"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 9 events 2020-03-11 to 2024-09-25.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0026808",
+  "name": "City Of Bullhead City",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026808",
+  "receiving_waters": [
+   "AZ15030101-011"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Bullhead City"
+  ],
+  "notes": "SOBE: 7 events 2022-01-05 to 2023-12-29.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024031",
+  "name": "City Of Mesa - Water Resources",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024031",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Mesa"
+  ],
+  "notes": "SOBE: 7 events 2021-03-24 to 2026-03-17.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024520",
+  "name": "Town Of Marana",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024520",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Marana"
+  ],
+  "notes": "SOBE: 7 events 2021-05-30 to 2026-09-17.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0020338",
+  "name": "City Of Tolleson",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020338",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Tolleson"
+  ],
+  "notes": "SOBE: 6 events 2019-12-25 to 2025-02-06.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025712",
+  "name": "AZPDES permit AZ0025712",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025712",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 6 events 2021-05-22 to 2026-08-15.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0020117",
+  "name": "Northern Gila County Sanitary District - Dba Green Valley Water",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020117",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Payson"
+  ],
+  "notes": "SOBE: 6 events 2023-01-14 to 2024-04-10.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0023272",
+  "name": "City Of El Mirage",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023272",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "El Mirage"
+  ],
+  "notes": "SOBE: 5 events 2019-11-28 to 2023-10-19.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024881",
+  "name": "City Of Buckeye",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024881",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Buckeye"
+  ],
+  "notes": "SOBE: 5 events 2021-05-04 to 2023-05-30.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0020427",
+  "name": "City Of Flagstaff",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020427",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Flagstaff"
+  ],
+  "notes": "SOBE: 5 events 2020-03-30 to 2025-11-12.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0023582",
+  "name": "CITY OF GOODYEAR - CORGETT WASH WRF",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023582",
+  "receiving_waters": [
+   "AZ15070101-505"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 5 events 2022-07-01 to 2025-12-02.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025241",
+  "name": "City Of Mesa - Water Resources",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025241",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Gilbert"
+  ],
+  "notes": "SOBE: 5 events 2024-02-28 to 2026-09-23.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0020249",
+  "name": "City Of Globe",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020249",
+  "receiving_waters": [
+   "AZ15060103-280B"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Globe"
+  ],
+  "notes": "SOBE: 5 events 2025-01-05 to 2025-11-26.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0022357",
+  "name": "City Of Goodyear",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0022357",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Goodyear"
+  ],
+  "notes": "SOBE: 4 events 2021-03-30 to 2024-01-21.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025828",
+  "name": "TOWN OF CAVE CREEK - WRF",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025828",
+  "receiving_waters": [
+   "AZ15060106B-8861",
+   "AZ15060106B-8233"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 4 events 2021-07-23 to 2026-09-16.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025194",
+  "name": "TOWN OF FLORENCE - NORTH FLORENCE WWTP",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025194",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 3 events 2021-11-03 to 2025-03-21.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0020559",
+  "name": "City Of Phoenix",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020559",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Phoenix"
+  ],
+  "notes": "SOBE: 2 events 2024-08-04 to 2024-10-16.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0020231",
+  "name": "GILA BEND - WWTP",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020231",
+  "receiving_waters": [
+   "AZ15070101-004"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 2 events 2019-12-03 to 2021-08-14.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0026077",
+  "name": "City Of Bisbee",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026077",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Bisbee"
+  ],
+  "notes": "SOBE: 2 events 2019-09-24 to 2025-01-09.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0021804",
+  "name": "TOWN OF JEROME - WWTP",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0021804",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 1 events 2021-06-17 to 2021-06-17.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0026204",
+  "name": "AZPDES permit AZ0026204",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026204",
+  "receiving_waters": [
+   "AZ15050100-013B"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 1 events 2023-02-02 to 2023-02-02.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0026620",
+  "name": "AZ STATE PKS PATAGONIA LAKE",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026620",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 1 events 2025-01-11 to 2025-01-11.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0021199",
+  "name": "TOWN OF SUPERIOR WWTP",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0021199",
+  "receiving_waters": [
+   "AZ15050100-014B"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 1 events 2022-10-20 to 2022-10-20.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0110426",
+  "name": "USDOI NPS - GRAND CANYON NP - NORTH RIM WWTP",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0110426",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 1 events 2025-05-18 to 2025-05-18.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0023639",
+  "name": "Flagstaff Utilities Division",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023639",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Flagstaff"
+  ],
+  "notes": "SOBE: 1 events 2024-02-25 to 2024-02-25.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025135",
+  "name": "CITY OF GOODYEAR - RAINBOW VALLEY WRF",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025135",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 1 events 2021-08-18 to 2021-08-18.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024082",
+  "name": "BIG PARK DOMESTIC WASTEWATER IMPROVEMENT DISTRICT WWTP",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024082",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 1 events 2020-02-15 to 2020-02-15.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0023281",
+  "name": "City Of Avondale",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023281",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Avondale"
+  ],
+  "notes": "SOBE: 1 events 2025-01-22 to 2025-01-22.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025216",
+  "name": "City Of Buckeye",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025216",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Buckeye"
+  ],
+  "notes": "SOBE: 1 events 2025-05-02 to 2025-05-02.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025151",
+  "name": "City Of Mesa - Water Resources",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025151",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Mesa"
+  ],
+  "notes": "SOBE: 1 events 2026-03-17 to 2026-03-17.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025208",
+  "name": "Town Of Florence",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025208",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Florence"
+  ],
+  "notes": "SOBE: 1 events 2024-10-31 to 2024-10-31.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0023485",
+  "name": "AZPDES permit AZ0023485",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023485",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json); SSO points in EPA SOBE",
+  "notification_channel": "EPA SOBE event reports (dated, with coordinates); no operator public notice found (not searched per operator)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "SOBE: 1 events 2026-07-14 to 2026-07-14.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0020001",
+  "name": "Pima County - Regional Wastewater Reclamation Department",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020001",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (service-request portal and emergency line only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tucson"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0020923",
+  "name": "PIMA CNTY WASTEWATER MGMT",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0020923",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (service-request portal and emergency line only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tucson"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0023833",
+  "name": "WINSLOW, CITY OF",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023833",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Winslow"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0023841",
+  "name": "CITY OF SHOW LOW - MAIN WWTP",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0023841",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Show Low"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024121",
+  "name": "Pima County - Regional Wastewater Reclamation Department",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024121",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (service-request portal and emergency line only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tucson"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024244",
+  "name": "Arizona City Sanitary District",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024244",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Arizona City"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024465",
+  "name": "PHOENIX CITY OF",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024465",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Phoenix"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024627",
+  "name": "MESA, CITY OF",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024627",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mesa"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024911",
+  "name": "City Of Safford",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024911",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Safford"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024937",
+  "name": "Pima County - Regional Wastewater Reclamation Department",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024937",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (service-request portal and emergency line only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sahuarita"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0024945",
+  "name": "City Of Peoria",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0024945",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Peoria"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025127",
+  "name": "BUCKEYE, TOWN OF",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025127",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Buckeye"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025291",
+  "name": "Pima County - Stadium District",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025291",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (service-request portal and emergency line only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tucson"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025348",
+  "name": "Us Bureau Of Reclamation",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025348",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Yuma"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025437",
+  "name": "PINETOP-LAKESIDE SAN DIST",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025437",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lakeside"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025518",
+  "name": "Town Of Buckeye",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025518",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Buckeye"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025542",
+  "name": "City Of Holbrook",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025542",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Holbrook"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025607",
+  "name": "International Boundary And Water Commission",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025607",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rio Rico"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025691",
+  "name": "Town Of Buckeye",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025691",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Buckeye"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0025844",
+  "name": "KINGMAN, CITY OF",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0025844",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kingman"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0026026",
+  "name": "City Of Benson",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026026",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Benson"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0026107",
+  "name": "Pima County - Regional Wastewater Reclamation Department",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026107",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (service-request portal and emergency line only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tucson"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0026310",
+  "name": "City Of Winslow",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026310",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Winslow"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0026417",
+  "name": "City Of Tucson - Water",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026417",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tucson"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0026603",
+  "name": "City Of Somerton",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026603",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Somerton"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0026727",
+  "name": "City Of Phoenix",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026727",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Phoenix"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-az0026913",
+  "name": "City Of Buckeye",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZ0026913",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Buckeye"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-azs000001",
+  "name": "TUCSON, CITY OF",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZS000001",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Unknown"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-azs000002",
+  "name": "PIMA COUNTY",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZS000002",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (service-request portal and emergency line only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Unknown"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-azs000003",
+  "name": "PHOENIX, CITY OF_MS4",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZS000003",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Unknown"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-azs000005",
+  "name": "TEMPE, CITY OF",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "AZS000005",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Unknown"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-nn0020290",
+  "name": "NAVAJO TRIBAL UTILITY AUTHORITY",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "NN0020290",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tuba City"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "az-nn0021555",
+  "name": "NAVAJO TRIBAL UTILITY AUTHORITY",
+  "state": "AZ",
+  "kind": "sso",
+  "npdes_permit": "NN0021555",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fort Defiance"
+  ],
+  "notes": "Major permit; no SOBE rows on 2026-11-03.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ }
+]

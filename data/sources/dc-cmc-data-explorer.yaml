@@ -1,0 +1,33 @@
+id: "dc-cmc-data-explorer"
+name: "Chesapeake Monitoring Cooperative (CMC) Data Explorer API (Anacostia Riverkeeper, Potomac Riverkeeper E. coli)"
+url: "https://cmc.vims.edu/"
+homepage: "https://cmc.vims.edu/"
+kind: "api"
+level: "academic"
+# Notes (research/dc, status candidate, verified fetched, checked 2026-11-02): Best machine-readable
+#   bacteria source for DC waters (the groups' Swim Guide entries mirror it).
+# Access detail (research, quoted): Endpoints from the Data Explorer bundle
+#   (assets/DataExplorerPage-*.js): POST https://cmc.vims.edu/api/dashboard/stations
+#   {states:'District of
+#   Columbia',groups:'',watersheds:'',subwatersheds:'',parameters:'',startDate,endDate} -> station
+#   list with SamplesCount; POST /api/dashboard/station-data
+#   {stationId:994,startDate,endDate,parameters:''} -> samples; also /download/samples (CSV-like
+#   JSON after a data-use survey). No key. Saved raw/cmc/.
+# Can fill: coordinates, started_at (sample time), source_record_id
+# Waters: 29 DC stations active in 2026: ARK Anacostia AR-1..AR-8, AR-PD, Watts Branch WB-1/2, Rock
+#   Creek RC-1..8 (ARK;PRK), PRK Potomac PR-1..7, Little Falls, Three Sisters, Daingerfield Island,
+#   Boundary Bridge, Washington Channel WC-1 (openboatlaunch slugs: anacostia-river-dc,
+#   rock-creek-dc, potomac-river-dc, watts-branch-dc, washington-channel-dc)
+# History: ARK from 2018; PRK from 2019.
+cadence: "Weekly May-September (PRK samples Wednesdays, posts Fridays; ARK weekly/bi-weekly)."
+license: "CMC Data Ethics page not read; download path asks a data-use survey."
+attribution: "Chesapeake Monitoring Cooperative (VIMS / Alliance for the Chesapeake Bay)"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["DC"]
+access: ["api", "csv"]
+access_detail: "Endpoints from the Data Explorer bundle (assets/DataExplorerPage-*.js): POST https://cmc.vims.edu/api/dashboard/stations {states:'District of Columbia',groups:'',watersheds:'',subwatersheds:'',parameters:'',startDate,endDate} -> station list with SamplesCount; POST /api/dashboard/station-data {stationId:994,startDate,endDate,parameters:''} -> samples; also /download/samples (CSV-like JSON after a data-use survey). No key. Saved raw/cmc/."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

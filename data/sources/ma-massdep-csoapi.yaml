@@ -1,0 +1,51 @@
+id: "ma-massdep-csoapi"
+name: "MassDEP CSO API behind the portal (eeaonline.eea.state.ma.us/dep/CSOAPI/api/)"
+url: "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/"
+homepage: "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/"
+kind: "api"
+level: "state"
+# Notes (research/ma, status used, verified fetched, checked 2026-11-01): Build against this first:
+#   poll orderBy=submittedDate desc every 15-30 minutes, upsert by incidentId, follow parent/child.
+# Access detail (research, quoted): Unauthenticated JSON. Endpoints read from the app bundle and
+#   called 2026-11-01: GET
+#   Incident/GetIncidentsBySearchFields/?[ReporterClass=&EventType=&Municipality=&OutfallId=&WaterBody=&PermiteeClass=&PermiteeName=&VolumeOfDischargeFrom/To=&RainfallDataFrom/To=]&pageNumber=1&pageSize=N&&orderBy=incidentDate%20desc
+#   (pageSize 1000 accepted; orderBy submittedDate also works; IncidentFromDate/IncidentToDate
+#   returned HTTP 500 in every format tried). GET Incident/GetIncidentById?id={incidentId} (adds
+#   compliance self-check answers, parentIncidentId, attachment list, and personal fields
+#   reporterName/createdBy/modifiedBy which must be dropped). GET
+#   Incident/GetChildIncidentsByParent?id=...&pageNumber=1&pageSize=10& (updates such as 'Ceased').
+#   GET Metadata/GetMetadataForIncident (enumerations: reporterClass, eventType, permiteeClass,
+#   municipality list). GET Incident/GetIncidentsForExcel/?{same filters} returns xlsx (26 columns).
+#   GET Attachment/GetActiveAttachments?id=... lists the attached advisory (.eml or .pdf);
+#   Attachment/Download/{incidentId}/{fileExternalId} returned HTTP 500. GET
+#   Permitee/GetPermiteeDetails?permiteeName=... returns the permittee's WWTP outfall with lat/lon
+#   only. Requests without Origin/Referer headers returned HTTP 500; with Origin
+#   https://eeaonline.eea.state.ma.us and the portal Referer they returned 200.
+# Can fill: source_record_id, event_type, source_status(reportingType: Initial-Ongoing /
+#   Initial-Ceased / Ceased), started_at(incidentDate date + incidentTime),
+#   published_at(submittedDate), source_updated_at(modifiedDt), waterbody, location_text, volume,
+#   units, authority(permittee), raw_record, revision_history, source_url(details page)
+# Cannot fill: ended_at (no cessation timestamp; VDR gives duration hours/minutes); coordinates
+#   (mostly null); advice_text; valid_until
+# Waters: statewide (openboatlaunch slugs: connecticut-river-ma, chicopee-river-ma,
+#   merrimack-river-ma, concord-river-ma, charles-river-ma, mystic-river-ma, dorchester-bay-ma,
+#   massachusetts-bay-ma, lynn-harbor-ma, saugus-river-ma, gloucester-harbor-ma, taunton-river-ma,
+#   acushnet-river-ma, new-bedford-harbor-ma, clarks-cove-ma, nashua-river-ma, blackstone-river-ma,
+#   westfield-river-ma)
+# History: 2022-07-06 onward.
+# Research notes: No documented API; it is the portal's own backend, may change without notice.
+#   incidentTime is local clock text (no timezone; 'amPm' used in 2022-2023 rows, null since).
+#   '00:00' times (Chicopee) look like unknown times. Waterbody spellings vary ('CONNECTICUT R.' vs
+#   'CONNECTICUT RIVER', 'MERIMACK RIVER').
+cadence: "Live; reflects permittee submissions immediately as far as observed (submittedDate equals the record's create time)."
+license: "EEA Data Portal disclaimer (eeaonline.eea.state.ma.us/portal#!/disclaimer, text read from the portal's custom.js): \"The data contained in this public data portal has been retrieved through the agency's pre-existing data systems and/or existing hard copy documentation that have been converted into a data format. Although reasonable efforts have been made to make this data useful to the public, the data presented through this portal has not been fully verified for accuracy and/or completeness, and the agency assumes no obligation to either maintain or update any of the data contained on this website.\" and \"This portal does not include all of the agency's regulatory data, and therefore should not be relied upon to determine overall compliance.\" No licence or reuse restriction stated."
+attribution: "MassDEP / EEA"
+enabled: true
+role: "events"
+event_types: ["cso", "cso_treated", "partially_treated", "blended", "sso"]
+states: ["MA"]
+access: ["api", "csv"]
+access_detail: "Unauthenticated JSON. Endpoints read from the app bundle and called 2026-11-01: GET Incident/GetIncidentsBySearchFields/?[ReporterClass=&EventType=&Municipality=&OutfallId=&WaterBody=&PermiteeClass=&PermiteeName=&VolumeOfDischargeFrom/To=&RainfallDataFrom/To=]&pageNumber=1&pageSize=N&&orderBy=incidentDate%20desc (pageSize 1000 accepted; orderBy submittedDate also works; IncidentFromDate/IncidentToDate returned HTTP 500 in every format tried). GET Incident/GetIncidentById?id={incidentId} (adds compliance self-check answers, parentIncidentId, attachment list, and personal fields reporterName/createdBy/modifiedBy which must be dropped). GET Incident/GetChildIncidentsByParent?id=...&pageNumber=1&pageSize=10& (updates such as 'Ceased'). GET Metadata/GetMetadataForIncident (enumerations: reporterClass, eventType, permiteeClass, municipality list). GET Incident/GetIncidentsForExcel/?{same filters} returns xlsx (26 columns). GET Attachment/GetActiveAttachments?id=... lists the attached advisory (.eml or .pdf); Attachment/Download/{incidentId}/{fileExternalId} returned HTTP 500. GET Permitee/GetPermiteeDetails?permiteeName=... returns the permittee's WWTP outfall with lat/lon only. Requests without Origin/Referer headers returned HTTP 500; with Origin https://eeaonline.eea.state.ma.us and the portal Referer they returned 200."
+machine_readable: true
+legal_basis: "314 CMR 16.07"
+checked: "2026-11-01"

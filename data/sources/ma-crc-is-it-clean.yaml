@@ -1,0 +1,38 @@
+id: "ma-crc-is-it-clean"
+name: "Connecticut River Conservancy 'Is It Clean?' (isitclean.us, formerly connecticutriver.us)"
+url: "https://www.isitclean.us/map"
+homepage: "https://www.isitclean.us/map"
+kind: "html"
+level: "nonprofit"
+# Notes (research/ma, status candidate, verified fetched, checked 2026-11-01): The only public
+#   bacteria results for the Springfield-Holyoke-Chicopee reach; categories 'Clean for swimming' /
+#   'Clean for boating only' / 'Not clean for either'. Numeric cut-offs are drawn as images, not
+#   text; ask CRC for a data export or API.
+# Access detail (research, quoted): Webflow site; site records are embedded in the map page HTML as
+#   data attributes (data-slug, data-waterbody, data-watershed, data-town, data-state,
+#   data-latitude, data-longtitude, data-date, data-quality, data-clean-dry/-wet,
+#   data-boat-dry/-wet, data-not-clean-dry/-wet). First page holds 100 sites (pagination
+#   ?663469da_page=2). Scripts on cdn.jsdelivr.net/gh/ryan-ctriver/iic-prod@1.6.4; a Heroku endpoint
+#   is-it-clean-089e6447542b.herokuapp.com/api/v1/weathers supplies weather only. Saved
+#   raw/watershed/iic-map.html, iic-sample-sites.json.
+# Can fill: monitoring: waterbody, coordinates, sample date, E. coli value (quality)
+# Cannot fill: discharge events
+# Waters: Connecticut River watershed sites in MA and VT (CRC lab: 'over 80 locations'); MA sites
+#   incl. Chicopee River and tributaries in Chicopee/Springfield, mainstem sites (openboatlaunch
+#   slugs: connecticut-river-ma, chicopee-river-ma, westfield-river-ma, deerfield-river-ma,
+#   millers-river-ma)
+# History: Multi-year; the first page's Chicopee sites show 2021 dates (stale sites retained).
+# Research notes: CRC's own analysis (search result) says the Holyoke-Chicopee-Springfield stretch
+#   tends to have the highest E. coli levels and names CSOs as the main suspected cause.
+cadence: "'Monitoring typically occurs from late May to October'; 'Results are posted to this site's map within 24 hours after the sample was taken' (how-it-works page). Search results: weekly sampling at 13 MA and 8 CT locations."
+license: "Not stated on pages read."
+attribution: "Connecticut River Conservancy"
+enabled: true
+role: "monitoring"
+event_types: ["bacteria"]
+states: ["MA"]
+access: ["html", "map_only"]
+access_detail: "Webflow site; site records are embedded in the map page HTML as data attributes (data-slug, data-waterbody, data-watershed, data-town, data-state, data-latitude, data-longtitude, data-date, data-quality, data-clean-dry/-wet, data-boat-dry/-wet, data-not-clean-dry/-wet). First page holds 100 sites (pagination ?663469da_page=2). Scripts on cdn.jsdelivr.net/gh/ryan-ctriver/iic-prod@1.6.4; a Heroku endpoint is-it-clean-089e6447542b.herokuapp.com/api/v1/weathers supplies weather only. Saved raw/watershed/iic-map.html, iic-sample-sites.json."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

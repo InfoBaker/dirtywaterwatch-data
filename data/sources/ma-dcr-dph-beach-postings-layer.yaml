@@ -1,0 +1,33 @@
+id: "ma-dcr-dph-beach-postings-layer"
+name: "DCR layer 'WaterQuality_PullFromDPH' (DCR beach postings pulled from DPH)"
+url: "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/WaterQuality_PullFromDPH/FeatureServer/0"
+homepage: "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/WaterQuality_PullFromDPH/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/ma, status candidate, verified fetched, checked 2026-11-01): Only machine-readable
+#   posting feed found; it is the one MA source that explicitly codes 'Precautionary - CSO/SSO
+#   event' (8 postings in 2026: Kings Beach and Lynn Shore Beach in Lynn, Salisbury Beach, Sandy
+#   Point/Plum Island). DCR beaches only.
+# Access detail (research, quoted): query?where=1%3D1&outFields=*&f=json returned 280 rows
+#   (raw/beaches/dph-all.json). Features have NO geometry. Item 8eb167192d214d4b8f3e2f3019c2e0b4,
+#   owner dcrsGIS_frod.
+# Can fill: advisories: waterbody(beach name), started_at, ended_at(posting removed), advice reason
+# Cannot fill: coordinates (join DCR beaches layer); sample values
+# Waters: DCR-operated beaches only (names end '(DCR)'); 280 posting records 2026-05-19 to
+#   2026-09-04
+# History: This season's postings (a log, not a live status).
+# Research notes: POSTREASON values seen: Bacterial Exceedance (247), Other (16),
+#   Algae/Cyanobacteria Advisory (9), Precautionary - CSO/SSO event (8). Sibling project rejected it
+#   for launch pages; for this project it is a candidate advisory source.
+cadence: "Layer data last edited 2026-11-01 17:49 UTC (editingInfo epoch 1793555384363), so it is still being refreshed; postings seasonal (May-Sept)."
+license: "None stated on item (licenseInfo empty)."
+attribution: "MA DCR (GIS) from DPH data"
+enabled: true
+role: "advisories"
+event_types: ["beach_closure", "bacteria", "cyanobacteria", "cso_precaution"]
+states: ["MA"]
+access: ["arcgis"]
+access_detail: "query?where=1%3D1&outFields=*&f=json returned 280 rows (raw/beaches/dph-all.json). Features have NO geometry. Item 8eb167192d214d4b8f3e2f3019c2e0b4, owner dcrsGIS_frod."
+machine_readable: true
+legal_basis: "105 CMR 445.000"
+checked: "2026-11-01"

@@ -1,0 +1,28 @@
+id: "nyc-dep-nyalert-citywide-cso"
+name: "NYCDEP 'City Wide CSO' NY-Alert notices (notifier id NYCDEPCSO)"
+url: "https://dec.ny.gov/environmental-protection/water/water-quality/sewage-pollution-right-to-know"
+homepage: "https://dec.ny.gov/environmental-protection/water/water-quality/sewage-pollution-right-to-know"
+kind: "html"
+level: "municipal"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): Shows that for ~397
+#   NYC outfalls SPRTK yields only a citywide 'may have occurred' notice; the waterbody advisory API
+#   is the real NYC signal.
+# Access detail (research, quoted): NYC files one generic citywide NY-Alert per rain event instead
+#   of per-outfall reports. Seen 2025-10-15 and 2026-01-18 in Wayback copies of the DEC view:
+#   'Discharge location: Please see DEP's website below ... Discharge description: Wet
+#   weather-related combined sewer overflows may have occurred. Please see the Current NYC Waterbody
+#   Advisories page...', duration '2 Hours', volume '0 Gallons per Minute'.
+# Can fill: started_at (rain start), reported_at
+# Cannot fill: outfall; waterbody; volume; coordinates
+cadence: null
+license: "none stated"
+attribution: "NYC DEP"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NY"]
+access: ["email", "html"]
+access_detail: "NYC files one generic citywide NY-Alert per rain event instead of per-outfall reports. Seen 2025-10-15 and 2026-01-18 in Wayback copies of the DEC view: 'Discharge location: Please see DEP's website below ... Discharge description: Wet weather-related combined sewer overflows may have occurred. Please see the Current NYC Waterbody Advisories page...', duration '2 Hours', volume '0 Gallons per Minute'."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

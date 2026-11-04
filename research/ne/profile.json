@@ -1,0 +1,176 @@
+{
+ "state": "NE",
+ "name": "Nebraska",
+ "region": "plains",
+ "epa_region": 7,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "unknown",
+  "summary": "No Nebraska statute or rule found that requires public notice of a sewage overflow; Title 126's release rule covers oil and hazardous substances. Permittees report overflows and bypasses to DWEE and file them through EPA's NeT-SewerOverflow, which makes them public in EPA's daily extract. Omaha's CSO permit (NE0133680) presumably carries a Nine Minimum Controls notification clause, but its text was not reachable.",
+  "citations": [
+   {
+    "cite": "40 CFR 127; DWEE NeTSSO guidance (pub. 25-032)",
+    "title": "Electronic sewer overflow and bypass event reports",
+    "url": "https://dee.nebraska.gov/sites/default/files/publications/25-032%20-%20Creating%20Event%20Report%20in%20NeTSSO.pdf",
+    "quote": null,
+    "who": "NPDES permittees",
+    "channel": "EPA NeT-SewerOverflow (public via ECHO SOBE extract)",
+    "deadline": "permit noncompliance reporting (24-hour/5-day, inferred)",
+    "threshold": "overflows and bypasses",
+    "verified": "search_only"
+   },
+   {
+    "cite": "Neb. Admin. Code Title 119 ch. 1 § 028",
+    "title": "Definition of SSO",
+    "url": "https://www.law.cornell.edu/regulations/nebraska/119-Neb-Admin-Code-ch-1-SS-028",
+    "quote": "\"Sanitary Sewer Overflow (SSO)\" means untreated or partially treated sewage overflows from a sanitary sewer collection system.",
+    "who": null,
+    "channel": null,
+    "deadline": null,
+    "threshold": null,
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours oral, 5 days written (DWEE noncompliance form WAT098; inferred from standard conditions)",
+   "cite": "Title 119 / NPDES permit standard conditions (not read)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "NE0133680",
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "Title 126 rewrite proposed 2026 (release notification moves to Chapter 1); not sewage-specific (search only)."
+  ]
+ },
+ "erule": {
+  "system": "epa",
+  "sobe_events_2026_11_03": 162,
+  "public_output_url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "notes": "162 events from 21 permits, start dates 2022 to 2026-10-06; all with coordinates. Reporting coverage looks uneven (Lincoln 5, Omaha CSO 8)."
+ },
+ "statewide_feed": {
+  "exists": true,
+  "source_ids": [
+   "ne-epa-sobe"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "start to receipt median 23 days (10% within 1 day; 10% over 83 days)",
+  "history": "2022 to date",
+  "coordinates": "all",
+  "receiving_water": "free text, 49 of 162 events",
+  "start_end": "start and end date-times",
+  "volume": true,
+  "stable_id": true,
+  "license": "EPA public data",
+  "notes": "Federal feed; ingester exists."
+ },
+ "cso": {
+  "permits": 1,
+  "open_outfalls": 25,
+  "operators_with_web_channel": 0,
+  "operators_checked": 1,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "no",
+  "notification_practice": "Omaha: no web overflow notice found; announces major overflows through media. 8 Omaha CSO-permit events in SOBE. DMR event counts only at two treated outfalls (102, 205R)."
+ },
+ "sso": {
+  "location_source": "ne-epa-sobe (coordinates on every report)",
+  "feeds": [
+   "ne-epa-sobe"
+  ],
+  "notes": "About half are basement backups."
+ },
+ "beaches": {
+  "program": "DWEE Beach Watch: weekly E. coli and microcystin at about 56 public beach sites, mid-May to mid-September; health alert above 8 ug/L microcystin",
+  "source_ids": [
+   "ne-dwee-beachwatch",
+   "ne-dwee-beachwatch-page"
+  ],
+  "machine_readable": true,
+  "scope": "inland",
+  "notes": "E. coli above 235/100 mL is reported but triggers no advisory."
+ },
+ "habs": {
+  "program": "Same Beach Watch layer (microcystin health alerts, joint DWEE/DHHS)",
+  "source_ids": [
+   "ne-dwee-beachwatch",
+   "ne-dhhs-hab-alerts"
+  ],
+  "machine_readable": true,
+  "notes": ""
+ },
+ "advisories": {
+  "health_department_pages": [
+   "Douglas County Health Department (not searched)"
+  ],
+  "watershed_groups": [
+   "Papio-Missouri River NRD (not searched)"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "unknown (HDR describes 29 CSO points; EPA inventory has 25 open)",
+  "sso_points": "eRule"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Missouri River (IA, SD, MO, KS)",
+   "Lewis and Clark Lake (SD)",
+   "Platte River system (North Platte from WY, South Platte from CO)",
+   "Republican River (CO, KS)",
+   "Big Blue and Little Blue rivers (KS)",
+   "Big Nemaha River (KS)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "Omaha CSO overflows have no web notice found; city sites block non-browser clients (403)",
+   "fix_level": "operator",
+   "note": "Ask Omaha for its CSO notification plan."
+  },
+  {
+   "kind": "records_request",
+   "what": "Permit texts are in DWEE's OnBase viewer, not linkable PDFs",
+   "fix_level": "agency",
+   "note": ""
+  },
+  {
+   "kind": "no_web",
+   "what": "SOBE rows arrive weeks after the event (median 23 days)",
+   "fix_level": "legislative",
+   "note": "No 24-hour public duty."
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "DWEE Beach Watch listserv",
+   "url": "https://dwee.nebraska.gov/node/4996",
+   "what": "Weekly Beach Watch results and health alerts (sign-up route named in the release; URL not traced)"
+  }
+ ],
+ "readiness": {
+  "tier": "A",
+  "expected_grade": "Dated reports, delayed",
+  "first_feed": "ne-epa-sobe",
+  "effort": "small",
+  "rationale": "EPA's SOBE extract carries event-level Nebraska reports with coordinates and volume (ingester exists); add the Beach Watch ArcGIS layer for beaches and HABs. Delay is long (median 23 days) and Omaha's CSO outfalls need the rain caution.",
+  "order_hint": 2
+ },
+ "owner_questions": [
+  "Accept a median 23-day delay for Nebraska's overflow reports, labelled 'Dated reports, delayed'?",
+  "Request Omaha's CSO public notification plan from the city or DWEE (records request)?",
+  "Subscribe to the Beach Watch listserv?"
+ ],
+ "surprise": "Omaha, the region's only big CSO city, has no web overflow notice found, yet its overflows (and Papillion Creek SSOs, 71 reports) are public with coordinates in EPA's daily extract, weeks late."
+}

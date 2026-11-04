@@ -1,0 +1,223 @@
+{
+  "state": "CA",
+  "name": "California",
+  "region": "pacific",
+  "epa_region": 9,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "partial",
+    "summary": "Sewer operators must tell the local health officer immediately (HSC 5411.5) and Cal OES within 2 hours for 1,000 gallons or more, and file a draft spill report in CIWQS within 3 business days. The public duty falls on county health officers, who must immediately post and close ocean beaches after a known sewage release and keep a closure hotline (HSC 115885, AB 411 regulations). CSO permits (San Francisco, Sacramento) carry their own notification plans.",
+    "citations": [
+      {
+        "cite": "HSC 5411.5",
+        "title": "Notice of sewage discharge to local health officer",
+        "url": "https://california.public.law/codes/health_and_safety_code_section_5411.5",
+        "quote": "shall, as soon as that person has knowledge of the discharge, immediately notify the local health officer or the director of environmental health of the discharge.",
+        "who": "any person who causes or permits a discharge",
+        "channel": "local health officer or director of environmental health",
+        "deadline": "immediately",
+        "threshold": "any sewage discharged in or on waters of the state, or where it probably will be",
+        "verified": "fetched"
+      },
+      {
+        "cite": "HSC 115885(a)(1)(D),(F)",
+        "title": "Public beaches: health officer duties",
+        "url": "https://california.public.law/codes/health_and_safety_code_section_115885",
+        "quote": "Establish a telephone hotline to inform the public of all beaches currently closed, posted, or otherwise restricted. ... In the event of a known untreated sewage release, immediately test the waters adjacent to the public beach and to take action pursuant to regulations",
+        "who": "county health officer",
+        "channel": "posting, closure signs, telephone hotline",
+        "deadline": "immediately",
+        "threshold": "known untreated sewage release near a public beach",
+        "verified": "fetched"
+      },
+      {
+        "cite": "17 CCR 7958 / 7961 (AB 411 regulations)",
+        "title": "Sewage release closure",
+        "url": "https://admin.publichealth.lacounty.gov/eh/safety/state-ocean-water-quality-standards.htm",
+        "quote": "(1) Immediately post and close the beach or a portion thereof, or otherwise restrict its use until the source of the sewage release is eliminated.",
+        "who": "local health officer",
+        "channel": "posting and closure",
+        "deadline": "immediately",
+        "threshold": "known release of untreated sewage into waters adjacent to a public beach",
+        "verified": "search_only"
+      },
+      {
+        "cite": "Order WQ 2022-0103-DWQ Att. E1 1.1 and 3.1.1",
+        "title": "Statewide Sanitary Sewer Systems General Order",
+        "url": "https://www.waterboards.ca.gov/board_decisions/adopted_orders/water_quality/2022/wqo_2022-0103-dwq.pdf",
+        "quote": "no later than two (2) hours after: The Enrollee has knowledge of the spill ... Within three (3) business days of the Enrollee's knowledge of a Category 1 spill, the Enrollee shall submit a Draft Spill Report to the online CIWQS Sanitary Sewer System Database.",
+        "who": "sewer system enrollee",
+        "channel": "Cal OES; CIWQS (published nightly)",
+        "deadline": "2 hours (Cal OES, >= 1,000 gal); 3 business days draft; 15 days certified",
+        "threshold": "Category 1: any volume reaching surface water",
+        "verified": "fetched"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "2 hours to Cal OES (>= 1,000 gal); draft CIWQS report 3 business days; certified 15 days; technical report 45 days (>= 50,000 gal)",
+      "cite": "Water Code 13271; Order WQ 2022-0103-DWQ Att. E1"
+    },
+    "cso_permit_notice_clause": {
+      "permit": "CA0079111 (City of Sacramento, Order R5-2026-0003)",
+      "quote": "The Discharger shall implement its \"Spill Emergency Response Plan\" for CSS outflow notifications and the \"Combined Wastewater Collection and Treatment System Plan of Operations\" for CSO notifications to ensure that the public is receiving adequate notification of CSS outflows and CSO's in accordance with the U.S. EPA's CSO Control Policy.",
+      "deadline": "none stated for the public; phone call within 2 hours to Freeport Regional Water Authority / Sacramento County Water Agency",
+      "verified": "fetched"
+    },
+    "bills_and_cases": [
+      "United States v. City and County of San Francisco (CSO; EPA suit; Supreme Court 2025 decision on generic NPDES terms, City and County of San Francisco v. EPA) - search_only",
+      "Tijuana River transboundary sewage: IBWC Minute 328 projects (2022) - search_only"
+    ]
+  },
+  "erule": {
+    "system": "state",
+    "sobe_events_2026_11_03": 0,
+    "public_output_url": "https://www.waterboards.ca.gov/water_issues/programs/sso/docs/index.php",
+    "notes": "California SSOs are reported to CIWQS under the statewide General Order, which publishes nightly flat files. CSO events (SF, Sacramento) go to the regional boards through NPDES self-monitoring reports (CIWQS eSMR), not to EPA's tool."
+  },
+  "statewide_feed": {
+    "exists": true,
+    "source_ids": [
+      "ca-swrcb-ciwqs-spills-flatfile"
+    ],
+    "precision": "event",
+    "machine_readable": true,
+    "format": "csv",
+    "latency": "median 2 days from spill start to draft report (p90 10 days); file rebuilt nightly",
+    "history": "2023-06 (2022 order) to date; older 2006-order data in CIWQS",
+    "coordinates": "most (2,949 of 3,708 rows)",
+    "receiving_water": "free text, filled at certification",
+    "start_end": "start and end (end after certification)",
+    "volume": true,
+    "stable_id": true,
+    "license": "none stated",
+    "notes": "Tab-delimited, 95 columns; key SPILL_EVENT_ID + SPILL_REPORT_VERSION. Drop CERTIFIED_BY and narrative fields (personal names). SSOs only: CSOs are not in it."
+  },
+  "cso": {
+    "permits": 4,
+    "open_outfalls": 43,
+    "operators_with_web_channel": 1,
+    "operators_checked": 2,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "SFPUC flags a 'Combined Sewer Discharge ... within the last 24-72 hours' per beach station on its map and posts signs; Sacramento notifies drinking-water agencies by phone, email or fax and has no public web channel found."
+  },
+  "sso": {
+    "location_source": "CIWQS spill file LATITUDE/LONGITUDE (spill origin) and up to four destination points",
+    "feeds": [
+      "ca-swrcb-ciwqs-spills-flatfile",
+      "ca-swrcb-plps-spills"
+    ],
+    "notes": "About 380 Category 1 and 2 spills a year statewide, most reaching surface water."
+  },
+  "beaches": {
+    "program": "AB 411 / BEACH Act beach monitoring by county health agencies, compiled by the State Water Board in Beach Watch",
+    "source_ids": [
+      "ca-beachwatch-advisories",
+      "ca-sfpuc-beach-map",
+      "ca-sdcounty-beachinfo",
+      "ca-lacounty-beach",
+      "ca-ocbeachinfo"
+    ],
+    "machine_readable": true,
+    "scope": "coastal",
+    "notes": "Beach Watch on data.ca.gov is about seven months behind (newest advisory 2026-03-06); live status sits on county sites without documented APIs."
+  },
+  "habs": {
+    "program": "California Cyanobacteria and Harmful Algal Bloom Network (CCHAB) / State Water Board FHAB program",
+    "source_ids": [
+      "ca-swrcb-fhab"
+    ],
+    "machine_readable": true,
+    "notes": "Bloom reports with advisory level (Caution, Warning, Danger) and dates on data.ca.gov; map at mywaterquality.ca.gov."
+  },
+  "advisories": {
+    "health_department_pages": [
+      "LA County Public Health beach closures",
+      "Orange County ocbeachinfo.com",
+      "San Diego County sdbeachinfo.com",
+      "SFPUC/SFDPH beach map"
+    ],
+    "watershed_groups": [
+      "Heal the Bay",
+      "San Diego Coastkeeper",
+      "Surfrider chapters"
+    ],
+    "swim_guide": true
+  },
+  "outfalls": {
+    "state_layer": null,
+    "cso_inventory_gap": "unknown",
+    "sso_points": "state_table"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Tijuana River and Pacific Ocean at Imperial Beach (Mexico)",
+      "Colorado River (AZ, NV, Mexico)",
+      "Lake Tahoe (NV)",
+      "Klamath River (OR)",
+      "New River (Mexico)"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "bot_wall",
+      "what": "Water Boards HTML maps (Incapsula) and leginfo.legislature.ca.gov (Cloudflare challenge) refuse scripted fetches",
+      "fix_level": "engineering",
+      "note": "Flat files are not walled; read law from mirrors."
+    },
+    {
+      "kind": "phone_only",
+      "what": "The statutory public channel for beach closures is a telephone hotline (HSC 115885) and signs",
+      "fix_level": "legislative",
+      "note": "No duty to publish closures online or in a machine-readable form."
+    },
+    {
+      "kind": "no_web",
+      "what": "Sacramento CSO/outflow notices go to water agencies by phone, email and fax; nothing public found",
+      "fix_level": "operator",
+      "note": ""
+    },
+    {
+      "kind": "licence",
+      "what": "CIWQS rows and Beach Watch rows carry personal names (certifiers, contacts)",
+      "fix_level": "engineering",
+      "note": "Strip at ingest; never republish."
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "SFPUC beach posting email alerts",
+      "url": "https://sfpuc.gov/programs/ocean-and-beach-monitoring",
+      "what": "Postings and de-postings incl. combined sewer discharges (sign-up link not found on the page)"
+    },
+    {
+      "name": "Water Boards email subscriptions (Sanitary Sewer Systems; San Diego Region 9)",
+      "url": "https://www.waterboards.ca.gov/resources/email_subscriptions/",
+      "what": "Program notices; Region 9 Tijuana River updates"
+    },
+    {
+      "name": "USIBWC spill notification listserv",
+      "url": "https://www.ibwc.gov/",
+      "what": "Transboundary spill alerts (search_only)"
+    }
+  ],
+  "readiness": {
+    "tier": "A",
+    "expected_grade": "Dated reports",
+    "first_feed": "ca-swrcb-ciwqs-spills-flatfile",
+    "effort": "medium",
+    "rationale": "A nightly statewide SSO file with event ids, versions, coordinates and surface-water volumes. Add the SFPUC CSO flag snapshot and FHAB. Medium only because of size (95 columns, versions, privacy stripping, 840 miles of coast) and the separate CSO and beach sources.",
+    "order_hint": 1
+  },
+  "owner_questions": [
+    "California reports Category 1 spills as small as a few gallons that reach a storm drain: show every Category 1 spill, or set a display floor?",
+    "The site colours from spill start; CIWQS drafts lack an end time until certified (15 days). Treat drafts as 'end not confirmed' (hatched) until certification?",
+    "Include the Tijuana River transboundary flows (a shared water with Mexico) at launch?",
+    "Sign up for SFPUC beach email alerts and the USIBWC listserv?"
+  ],
+  "surprise": "California's statewide spill data is a plain nightly tab-delimited file with about 380 sewage spills a year reaching water, each with a point and a stable id. The only 'live' CSO signal in the state is an undocumented JSON service behind SFPUC's beach map."
+}

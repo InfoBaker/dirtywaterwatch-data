@@ -1,0 +1,27 @@
+id: "ct-deep-agol-npdes-outfalls"
+name: "CT DEEP NPDES_Outfalls / NPDES_PermiteeSite (ICIS data pull 2026-01-14)"
+url: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0"
+homepage: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/ct, status used, verified fetched, checked 2026-11-01): Outfall-numbered CSO
+#   points per permit with receiving water; best key for linking outfall numbers in reports to
+#   coordinates.
+# Access detail (research, quoted): 1,209 features; query by NPDES_ID. CSO permittees: CT0100251 MDC
+#   39 outfalls, CT0100056 Bridgeport West 27, CT0101010 Bridgeport East 7, CT0100366 GNH 12,
+#   CT0100412 Norwich 15, CT0101249 Norwalk 2. Saved raw/npdes-outfalls-cso-permittees.json.
+# Can fill: coordinates (outfall), waterbody, geometry
+# Research notes: ICIS has no CSO flag; CSOs identified by permit and description. Waterbury
+#   CT0100625 returned no features.
+cadence: "periodic ICIS pulls (2026-01-14)"
+license: "none stated on the page or item (checked)"
+attribution: "CT DEEP (from EPA ICIS-NPDES)"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["CT"]
+access: ["arcgis", "api"]
+access_detail: "1,209 features; query by NPDES_ID. CSO permittees: CT0100251 MDC 39 outfalls, CT0100056 Bridgeport West 27, CT0101010 Bridgeport East 7, CT0100366 GNH 12, CT0100412 Norwich 15, CT0101249 Norwalk 2. Saved raw/npdes-outfalls-cso-permittees.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

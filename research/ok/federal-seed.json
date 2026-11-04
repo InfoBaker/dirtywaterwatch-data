@@ -1,0 +1,507 @@
+{
+ "state": "OK",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 318,
+ "plant_permits_major": 71,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "OK0020141",
+   "permittee": "Sulphur Municipal Authority",
+   "city": "SULPHUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0020281",
+   "permittee": "Coweta PWA",
+   "city": "COWETA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OK0020303",
+   "permittee": "Owasso PWA",
+   "city": "OWASSO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0021521",
+   "permittee": "Broken Bow PWA",
+   "city": "BROKEN BOW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0021563",
+   "permittee": "Weatherford PWA",
+   "city": "WEATHERFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0021610",
+   "permittee": "Poteau, City of",
+   "city": "POTEAU",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0021628",
+   "permittee": "Enid, City of",
+   "city": "ENID",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0021938",
+   "permittee": "Fort Gibson Utilities Authority",
+   "city": "FORT GIBSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0022870",
+   "permittee": "Seminole, City of WWTF",
+   "city": "SEMINOLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026018",
+   "permittee": "Chickasha Municipal Authority",
+   "city": "CHICKASHA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026026",
+   "permittee": "Edmond, City of-Coffee Creek",
+   "city": "EDMOND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026069",
+   "permittee": "Ponca City, City of",
+   "city": "PONCA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026077",
+   "permittee": "Bethany Warr Acres PWA -Bluff",
+   "city": "OKLAHOMA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026085",
+   "permittee": "Del City MSA",
+   "city": "DEL CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026093",
+   "permittee": "McAlester City of (West Plant)",
+   "city": "MCALESTER",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OK0026107",
+   "permittee": "McAlester WWTF-East Plant",
+   "city": "MCALESTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026115",
+   "permittee": "Ada, City of",
+   "city": "ADA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026221",
+   "permittee": "Tulsa MUA - Northside",
+   "city": "TULSA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026239",
+   "permittee": "TMUA",
+   "city": "TULSA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026638",
+   "permittee": "Duncan PWA",
+   "city": "DUNCAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026701",
+   "permittee": "Cushing Municipal Authority",
+   "city": "CUSHING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026816",
+   "permittee": "Mustang Improvement Authority",
+   "city": "MUSTANG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026832",
+   "permittee": "Wagoner PWA",
+   "city": "WAGONER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026841",
+   "permittee": "Midwest City, City of (Northside)",
+   "city": "MIDWEST CITY",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OK0026913",
+   "permittee": "Bixby PWA-South",
+   "city": "BIXBY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0026964",
+   "permittee": "Tahlequah PWA",
+   "city": "TAHLEQUAH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OK0027049",
+   "permittee": "Claremore,  City of",
+   "city": "CLAREMORE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0027057",
+   "permittee": "Stillwater, City of",
+   "city": "STILLWATER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0027138",
+   "permittee": "Glenpool Utility Service Authority",
+   "city": "GLENPOOL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0027391",
+   "permittee": "Moore, City of",
+   "city": "MOORE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0027553",
+   "permittee": "OK City Water Utilities Trust-Chisholm",
+   "city": "OKLAHOMA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0027561",
+   "permittee": "OK City Water Utilities Trust-Deer Ck",
+   "city": "OKLAHOMA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0027677",
+   "permittee": "Idabel PWA",
+   "city": "IDABEL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0027715",
+   "permittee": "Guthrie PWA",
+   "city": "GUTHRIE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OK0028037",
+   "permittee": "Altus, City of SE WDS",
+   "city": "ALTUS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0028134",
+   "permittee": "Okmulgee, City of",
+   "city": "OKMULGEE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OK0028169",
+   "permittee": "Sallisaw, City of",
+   "city": "SALLISAW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0028266",
+   "permittee": "Henryetta Municipal Authority",
+   "city": "HENRYETTA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0028487",
+   "permittee": "Hugo Municipal Authority",
+   "city": "HUGO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0028584",
+   "permittee": "Yukon, City of",
+   "city": "YUKON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0028614",
+   "permittee": "Newcastle PWA",
+   "city": "NEWCASTLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0029084",
+   "permittee": "Elk City, City of",
+   "city": "ELK CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0029131",
+   "permittee": "Muskogee Utilities Authority",
+   "city": "MUSKOGEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0029190",
+   "permittee": "Norman WWTF",
+   "city": "NORMAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0030295",
+   "permittee": "American Water Enterprises, Inc",
+   "city": "LAWTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0030333",
+   "permittee": "Bartlesville, City of (Plant #1)",
+   "city": "BARTLESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0030341",
+   "permittee": "Stilwell Area Development Authority",
+   "city": "STILWELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0030864",
+   "permittee": "Sand Springs, City of (Main Plant)",
+   "city": "SAND SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0031011",
+   "permittee": "Clinton PWA",
+   "city": "CLINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0031798",
+   "permittee": "Miami WWTF-SE Plant",
+   "city": "MIAMI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0031909",
+   "permittee": "Blackwell, City of",
+   "city": "BLACKWELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0031976",
+   "permittee": "Jay Utilities Authority",
+   "city": "JAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0034363",
+   "permittee": "RMUA-Haikey Creek",
+   "city": "TULSA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0034509",
+   "permittee": "Woodward, City of",
+   "city": "WOODWARD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0034568",
+   "permittee": "OK Ordnance Works Auth/ TSC",
+   "city": "PRYOR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0035246",
+   "permittee": "Lawton, City of-Lawton STP",
+   "city": "LAWTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0036978",
+   "permittee": "OK City, City of-North Canadian",
+   "city": "JONES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0037401",
+   "permittee": "Jenks PWA",
+   "city": "JENKS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0037788",
+   "permittee": "Vinita, City of",
+   "city": "VINITA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0037893",
+   "permittee": "Shawnee Municipal Authority-North",
+   "city": "SHAWNEE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OK0038385",
+   "permittee": "OK City, City of-South Canadian",
+   "city": "OKLAHOMA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0038440",
+   "permittee": "Ardmore, City of",
+   "city": "ARDMORE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0039063",
+   "permittee": "Durant City Utilities Auth",
+   "city": "DURANT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0040053",
+   "permittee": "Broken Arrow, City of",
+   "city": "BROKEN ARROW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0040461",
+   "permittee": "Skiatook, Town of (West)",
+   "city": "SKIATOOK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0040479",
+   "permittee": "Pryor Creek, City of",
+   "city": "PRYOR CREEK DIVISION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0041491",
+   "permittee": "Foss Reservoir M.C.D.",
+   "city": "FOSS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OK0042935",
+   "permittee": "Tulsa MUA-Lower Bird Creek",
+   "city": "CATOOSA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0043974",
+   "permittee": "Sapulpa, City of",
+   "city": "SAPULPA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0045713",
+   "permittee": "Guymon, City of -WWTF",
+   "city": "GUYMON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OK0100382",
+   "permittee": "El Reno Municipal Authority",
+   "city": "EL RENO",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

@@ -1,0 +1,566 @@
+[
+  {
+    "id": "ct-mdc-hartford",
+    "name": "The Metropolitan District (MDC) - Hartford Water Pollution Control Facility and combined sewer system",
+    "state": "CT",
+    "kind": "cso",
+    "npdes_permit": "CT0100251",
+    "receiving_waters": [
+      "Connecticut River",
+      "North Branch Park River (and conduit)",
+      "South Branch Park River (and conduit)",
+      "Park River Conduit / Park River Auxiliary Conduit",
+      "Gully Brook Conduit",
+      "Cemetery Brook Conduit",
+      "Folly Brook (conduit)",
+      "Kane Brook",
+      "North Meadows Storage Pond via Tower Brook Conduit",
+      "Wethersfield Cove (per MDC FAQ)"
+    ],
+    "water_slugs": [
+      "connecticut-river-ct",
+      "park-river-ct"
+    ],
+    "outfall_count": 38,
+    "outfalls_source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0 (ICIS pull 2026-01-14); DEEP regulator layer https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0; EPA R1 https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town. MDC itself: no CSO event page found on themdc.org; 'MDC Alerts' (Everbridge, https://member.everbridge.net/453003085612528/new) is described as water/sewer emergencies (water main breaks), not CSO notices; X @mdcwater, Facebook mdcwater; physical outfall signs ('Wet Weather Sewage Discharge Outfall #040'). Clean Water Project site thecleanwaterproject.com has no event feed.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Hartford",
+      "West Hartford",
+      "East Hartford",
+      "Wethersfield",
+      "Windsor",
+      "Bloomfield",
+      "Newington",
+      "Rocky Hill"
+    ],
+    "notes": "ICIS lists 39 external outfalls (001 = treated effluent to CT River + 38 CSOs); EPA R1 2022 lists 38 CSO outfalls. DEEP dashboard reports MDC CSOs by group ('Conduits', 'CT River', 'Free-Flowing North Branch', 'Free-Flowing South Branch', 'Folly Brook', 'Kane Brook'), not by outfall; 2026 rows have CSO Group Name and Receiving Waterbody null in the public view. 2025: 50 CSO reports, 82 overflow days, 524,114,000 gal (DEEP 2026 annual report); plus 52 NPDES permitted bypasses at Hartford WPCF, 612.3 MG (counted as SSO/bypass). Consent Order COWRMU22002 (2022, modified 2023 and 2025). South Hartford Conveyance and Storage Tunnel (~41 MG) due Dec 31 2026. Other MDC plants: East Hartford CT0100170, Rocky Hill CT0100480, Windsor-Poquonock CT0100994. Emergency line 860-278-7850 press 1.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-mdc-collection-west-hartford",
+    "name": "MDC collection system in West Hartford / Newington (sanitary overflows to Piper Brook, Trout Brook)",
+    "state": "CT",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Piper Brook",
+      "Trout Brook"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "West Hartford",
+      "Newington"
+    ],
+    "notes": "Reported in DEEP data as 'MDC COLLECTIONS ONLY' / municipality West Hartford. 2025: 22 events, 36,063,520 gal (15 storm events, 36.0 MG); Piper Brook 21.2 MG and Trout Brook 14.9 MG were in DEEP's top-10 receiving waters for 2025. Recurring storm overflow at 115 Hillcrest Ave to Piper Brook (e.g. 2026-10-11, 0.132 MG; DEEP spill log 2026-09-28 'CSO - Solids - 115 Hillcrest Ave - Piper Brook'). No openboatlaunch water for these brooks (tributaries of the Park/Connecticut River).",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-bridgeport-wpca-west",
+    "name": "City of Bridgeport WPCA - West Side WPCF (Bostwick Ave) and West Side combined sewers",
+    "state": "CT",
+    "kind": "cso",
+    "npdes_permit": "CT0100056",
+    "receiving_waters": [
+      "Pequonnock River",
+      "Cedar Creek",
+      "Black Rock Harbor",
+      "Burr Creek",
+      "Ash Creek",
+      "Island Brook",
+      "Bridgeport Harbor",
+      "Long Island Sound"
+    ],
+    "water_slugs": [
+      "cedar-creek-ct",
+      "ash-creek-ct",
+      "bridgeport-harbor-ct",
+      "long-island-sound-ct"
+    ],
+    "outfall_count": 26,
+    "outfalls_source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0 (ICIS pull 2026-01-14); DEEP regulator layer https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0; EPA R1 https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town. City WPCA page (bridgeportct.gov) shows a 'Notification:' heading with only customer-service/emergency numbers (203-332-5550; emergency 203-551-2309); operator Inframark. No event page or feed found.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Bridgeport",
+      "Fairfield (Ash Creek boundary)"
+    ],
+    "notes": "ICIS: 27 external outfalls (001 effluent to Cedar Creek/LIS + 26 CSO); EPA R1 2022: 24; DEEP regulator layer: ~22 named regulators (e.g. '33 HUNT', '38 SEAB', '47 TER N&S', '207 STATE A&B'). Dashboard 2026 rows mostly have null CSO Group/receiving water. 2025: 105 reports, 20 days, 65.75 MG. Plant NPDES permitted wet-weather bypass at 205 Bostwick Ave (e.g. 2026-10-11 reported 80 mgd, status still Open 2026-11-01, 'Reach Waterbody: No'). Note DEEP's Sewage_Treatment_Plant_Locations layer appears to swap the East/West names against ICIS permit numbers; use ICIS (CT0100056 = West). LTCP update 2021.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-bridgeport-wpca-east",
+    "name": "City of Bridgeport WPCA - East Side WPCF (Seaview Ave) and East Side combined sewers",
+    "state": "CT",
+    "kind": "cso",
+    "npdes_permit": "CT0101010",
+    "receiving_waters": [
+      "Yellow Mill Pond (Yellow Mill Channel)",
+      "Johnson's Creek",
+      "Bridgeport Harbor",
+      "Poquonnock River (Bridgeport) / Long Island Sound"
+    ],
+    "water_slugs": [
+      "bridgeport-harbor-ct",
+      "long-island-sound-ct"
+    ],
+    "outfall_count": 6,
+    "outfalls_source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0 (ICIS pull 2026-01-14); DEEP regulator layer https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0; EPA R1 https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town. Same city channels as West Side.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Bridgeport",
+      "Stratford (some reports list Stratford)"
+    ],
+    "notes": "CSO outfalls 006 BAYEL (Johnson's Creek), 012 STRAT, 016 DEAC, 018 BARN, 022 CHUR, 153 WANN (Yellow Mill Pond). The only utility whose 2026 dashboard rows still carry CSO Group Name and Receiving Waterbody. 2025: 12 reports, 8 days, 3.62 MG. Plant bypass at 695 Seaview Ave (2026-10-11, 32 MGD, Open).",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-gnhwpca",
+    "name": "Greater New Haven Water Pollution Control Authority (East Shore WPAF)",
+    "state": "CT",
+    "kind": "cso",
+    "npdes_permit": "CT0100366",
+    "receiving_waters": [
+      "West River",
+      "Mill River",
+      "Quinnipiac River",
+      "New Haven Harbor",
+      "Long Island Sound"
+    ],
+    "water_slugs": [
+      "mill-river-ct",
+      "quinnipiac-river-hamden-ct",
+      "long-island-sound-ct"
+    ],
+    "outfall_count": 11,
+    "outfalls_source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0 (ICIS pull 2026-01-14); DEEP regulator layer https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0; EPA R1 https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town. gnhwpca.com: CSO documents/LTCP and 'Construction Alerts' only; no CSO event notices found; Twitter/Facebook links in footer. Emergency 203-466-5260.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "New Haven",
+      "Hamden",
+      "East Haven",
+      "Woodbridge"
+    ],
+    "notes": "CSOs grouped in reports: West River 003-006, Mill River 009/011, Quinnipiac River 015/016 (019/020 in older group names), New Haven Harbor 021/024/025. Final volumes are free text per outfall ('003-0.197 MG 2005 to 2145'). 2025: 60 reports, 30 days, 13.85 MG CSO; plus 44 permitted bypasses at East Shore plant (345 East Shore Pkwy) 100.8 MG. West River and New Haven Harbor have no openboatlaunch slug. Consent Order COWRMU5509 (2009, mod. 2015, 2019); 2027 LTCP in development.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-norwich-npu",
+    "name": "Norwich Public Utilities (City of Norwich WPCF)",
+    "state": "CT",
+    "kind": "cso",
+    "npdes_permit": "CT0100412",
+    "receiving_waters": [
+      "Shetucket River",
+      "Thames River",
+      "Yantic River (plant)"
+    ],
+    "water_slugs": [
+      "shetucket-river-norwich-ct",
+      "thames-river-ct",
+      "yantic-river-ct"
+    ],
+    "outfall_count": 13,
+    "outfalls_source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0 (ICIS pull 2026-01-14); DEEP regulator layer https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0; EPA R1 https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town. norwichpublicutilities.com: CivicAlerts and outage map (electric), no CSO notices found. Emergency 860-887-2555.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Norwich"
+    ],
+    "notes": "ICIS lists 13 CSO outfalls (004, 005, 017-025, 029, 031, 032; 040 in DEEP layer); EPA R1 2022 lists 11; DEEP 2026 annual report: regulators reduced from 14 to 11. Reports per regulator with flow-meter volumes in gallons. 2025: 290 reports, 58 days, 928,317 gal (Shetucket 837,198; Thames 91,119). Consent Order COWRMU17001 (2017); LTCP revision 2020.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-norwalk-wpca",
+    "name": "City of Norwalk WPCA (Norwalk WPCF) - NPDES permitted secondary-treatment bypass and Ann Street Siphon emergency overflow",
+    "state": "CT",
+    "kind": "bypass",
+    "npdes_permit": "CT0101249",
+    "receiving_waters": [
+      "Norwalk River",
+      "Norwalk Harbor / Long Island Sound"
+    ],
+    "water_slugs": [
+      "norwalk-river-ct",
+      "long-island-sound-ct"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0 (ICIS pull 2026-01-14); DEEP regulator layer https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0; EPA R1 https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town. norwalkwpca.org: no event notices found. Emergency 203-943-0222.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Norwalk"
+    ],
+    "notes": "DEEP lists Norwalk among CSO communities without an LTCP requirement; ICIS outfall 002 = 'Primary Treated Chlorinated/Declorinated combine sewer waste'. DEEP Order WRMU22001 (2022). 2025: 0 CSO reports; 6 SSOs, 50,266 gal. EPA R1 map excludes Norwalk (no collection-system CSO outfalls).",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-waterbury-wpca",
+    "name": "City of Waterbury WPCF",
+    "state": "CT",
+    "kind": "bypass",
+    "npdes_permit": "CT0100625",
+    "receiving_waters": [
+      "Naugatuck River",
+      "Mad River (SSO example)"
+    ],
+    "water_slugs": [],
+    "outfall_count": 1,
+    "outfalls_source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0 ('WATERBURY PLANT 002-1')",
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town. waterburyct.org water-pollution page: FOG education only. Emergency (203) 574-8265.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Waterbury"
+    ],
+    "notes": "DEEP CSO community without LTCP requirement (treatment-plant CSO-related bypass 002-1). 2025: 0 CSO reports; 5 SSOs 2,105 gal. Naugatuck River has no openboatlaunch slug. NPDES_Outfalls (ICIS) returned no features for CT0100625.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-naugatuck-wpcf",
+    "name": "Borough of Naugatuck WPCF",
+    "state": "CT",
+    "kind": "bypass",
+    "npdes_permit": "CT0100641",
+    "receiving_waters": [
+      "Naugatuck River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Naugatuck"
+    ],
+    "notes": "2025: 4 events, 16,500,310 gal (one storm event 10.5 MG, one electrical failure 6.0 MG) - DEEP top-10 receiving water list (Naugatuck River 16.5 MG).",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-derby-wpcf",
+    "name": "City of Derby WPCF",
+    "state": "CT",
+    "kind": "sso",
+    "npdes_permit": "CT0100161",
+    "receiving_waters": [
+      "Housatonic River",
+      "Naugatuck River (confluence)"
+    ],
+    "water_slugs": [
+      "housatonic-river-ct"
+    ],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Derby"
+    ],
+    "notes": "2025: 3 events 2,833,030 gal (incl. 2.25 MG one event, 583,000 electrical failure). No active CSO outfalls in ICIS/EPA R1 (historical CSOs not confirmed).",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-mattabassett",
+    "name": "Mattabassett District WPCF (Cromwell; serves Berlin, Cromwell, New Britain, Middletown portions)",
+    "state": "CT",
+    "kind": "bypass",
+    "npdes_permit": "CT0100307",
+    "receiving_waters": [
+      "Connecticut River",
+      "Mattabesset River"
+    ],
+    "water_slugs": [
+      "connecticut-river-ct"
+    ],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Cromwell",
+      "Berlin",
+      "New Britain",
+      "Middletown"
+    ],
+    "notes": "2025: 3 storm events, 2,172,888 gal, all reached water.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-middletown-wpcf",
+    "name": "City of Middletown WPCF",
+    "state": "CT",
+    "kind": "sso",
+    "npdes_permit": "CT0100323",
+    "receiving_waters": [
+      "Connecticut River"
+    ],
+    "water_slugs": [
+      "connecticut-river-ct"
+    ],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Middletown"
+    ],
+    "notes": "Not in DEEP's CSO community list; no CSO outfalls in ICIS or EPA R1 2022; Middletown not in 2025 SSO summary. Listed because the task named it; historical CSO status not confirmed (inferred eliminated).",
+    "verified": "inferred",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-new-london-wpcf",
+    "name": "City of New London WPCF",
+    "state": "CT",
+    "kind": "sso",
+    "npdes_permit": "CT0100382",
+    "receiving_waters": [
+      "Thames River",
+      "New London Harbor"
+    ],
+    "water_slugs": [
+      "thames-river-ct",
+      "new-london-harbor-ct"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0 (ICIS pull 2026-01-14); DEEP regulator layer https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0; EPA R1 https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "New London",
+      "Waterford (tributary flows)"
+    ],
+    "notes": "Only outfall 001 in ICIS (no CSO outfalls). 2025: 2 SSOs, 673,970 gal (one 673,920 gal event, cause category 'sewer breaks/damaged').",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-shelton-wpcf",
+    "name": "City of Shelton WPCF",
+    "state": "CT",
+    "kind": "sso",
+    "npdes_permit": "CT0100714",
+    "receiving_waters": [
+      "Housatonic River"
+    ],
+    "water_slugs": [
+      "housatonic-river-ct"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0 (ICIS pull 2026-01-14); DEEP regulator layer https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0; EPA R1 https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Shelton"
+    ],
+    "notes": "Only outfall 001 in ICIS. 2025: 3 SSOs, 750 gal, none reached water. Not a CSO community.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-jewett-city-wpca",
+    "name": "Jewett City WPCA (Griswold)",
+    "state": "CT",
+    "kind": "sso",
+    "npdes_permit": "CT0100269",
+    "receiving_waters": [
+      "Quinebaug River"
+    ],
+    "water_slugs": [],
+    "outfall_count": 1,
+    "outfalls_source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0 (ICIS pull 2026-01-14); DEEP regulator layer https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0; EPA R1 https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1",
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Griswold"
+    ],
+    "notes": "Only outfall 001 in ICIS. 2025: 1 event, 5 gal. Not a CSO community today (historical CSOs not confirmed). Quinebaug River has no openboatlaunch slug in CT list.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-stamford-wpca",
+    "name": "Stamford WPCA (Stamford WPCF)",
+    "state": "CT",
+    "kind": "sso",
+    "npdes_permit": "CT0101087",
+    "receiving_waters": [
+      "Stamford Harbor",
+      "Rippowam River",
+      "Long Island Sound"
+    ],
+    "water_slugs": [
+      "stamford-harbor-ct",
+      "long-island-sound-ct"
+    ],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Stamford"
+    ],
+    "notes": "2025: 3 SSOs, 7,596 gal (1 reached water). No CSOs.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-east-windsor-wpca",
+    "name": "Town of East Windsor WPCA",
+    "state": "CT",
+    "kind": "sso",
+    "npdes_permit": "CT0100196",
+    "receiving_waters": [
+      "Connecticut River",
+      "Scantic River"
+    ],
+    "water_slugs": [
+      "connecticut-river-ct"
+    ],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town. April 2025 break also announced by DEEP press release and the First Selectman's office.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "East Windsor"
+    ],
+    "notes": "2025-04-03 sewer line break at 249 South Water Street: DEEP advised avoiding the river from East Windsor downstream to at least Hartford; 2025 annual total 380,000 gal (1 event). An East Windsor SSO from 2024-09-04 still shows 'Open' on the dashboard map.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-stratford-wpcf",
+    "name": "Town of Stratford WPCF",
+    "state": "CT",
+    "kind": "bypass",
+    "npdes_permit": "CT0101036",
+    "receiving_waters": [
+      "Housatonic River"
+    ],
+    "water_slugs": [
+      "housatonic-river-ct"
+    ],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Stratford"
+    ],
+    "notes": "Reports disinfection-bypass events (fully treated except UV), e.g. 2026-10-14 'Fully treated sewage from WWTP', Open.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-westport-wpcf",
+    "name": "Town of Westport WPCF and pump stations",
+    "state": "CT",
+    "kind": "sso",
+    "npdes_permit": "CT0100684",
+    "receiving_waters": [
+      "Saugatuck River",
+      "Muddy Brook"
+    ],
+    "water_slugs": [
+      "saugatuck-river-ct"
+    ],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Westport"
+    ],
+    "notes": "2026-09-13 storm overflow at pump station manhole (24 Center St) to Muddy Brook, final 50,000 gal.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-plainville-wpcf",
+    "name": "Town of Plainville WPCF",
+    "state": "CT",
+    "kind": "sso",
+    "npdes_permit": "CT0100455",
+    "receiving_waters": [
+      "Quinnipiac River (headwaters)"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Plainville"
+    ],
+    "notes": "2026-10-30 sewer-main release to Quinnipiac River, 'Ongoing - TBD', Open. The openboatlaunch slug quinnipiac-river-hamden-ct covers the lower river (Hamden-New Haven), ~25 miles downstream; not mapped.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-greenwich-grass-island",
+    "name": "Town of Greenwich Grass Island WPCF",
+    "state": "CT",
+    "kind": "bypass",
+    "npdes_permit": "CT0100234",
+    "receiving_waters": [
+      "Greenwich Harbor",
+      "Long Island Sound"
+    ],
+    "water_slugs": [
+      "long-island-sound-ct"
+    ],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Greenwich"
+    ],
+    "notes": "2025: 3 events 7,600 gal; 2026-10-02 partially treated, ~50 gal to Greenwich Harbor.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ct-groton-town-wpca",
+    "name": "Town of Groton WPCF and collection system",
+    "state": "CT",
+    "kind": "sso",
+    "npdes_permit": "CT0100242",
+    "receiving_waters": [
+      "Thames River",
+      "Poquonock River",
+      "unnamed brooks"
+    ],
+    "water_slugs": [
+      "thames-river-ct",
+      "poquonock-river-ct"
+    ],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "CT DEEP Performance Dashboard (QScend QAlert reports shown in Zoho Analytics open views: https://deepct.qscend.mygovcenter.com/cms/cms?id=1); X/Twitter @CTSewageSpills (manual DEEP posts). Statutory local notice: operator must notify the chief elected official and local health official within 2 h; they must inform the public within 2 h of receipt (CGS 22a-424a(c)(3)) - channel varies by town.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Groton"
+    ],
+    "notes": "Several Groton SSOs remain 'Open' on the dashboard map months after the event (e.g. 2026-03-20, 2026-03-21).",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  }
+]

@@ -1,0 +1,28 @@
+id: "nh-portsmouth-cso-page"
+name: "Portsmouth Combined Sewer Overflows page (dashboard and monthly table)"
+url: "https://www.portsmouthnh.gov/publicworks/wastewater/combined-sewer-overflows-cso"
+homepage: "https://www.portsmouthnh.gov/publicworks/wastewater/combined-sewer-overflows-cso"
+kind: "html"
+level: "municipal"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): no reason recorded
+# Access detail (research, quoted): Drupal HTML table (Year, Month, 10A/10B/013/Total MG) linking
+#   monthly PDFs under files.portsmouthnh.gov/files/ww/YYYY_MM_CSO_NH0100234_1A.pdf; the PDFs are
+#   scanned memos with daily flow and rain
+# Can fill: started_at (date, from PDF), volume, units, waterbody, source_url
+# Cannot fill: exact times (only duration); coordinates
+# Waters: South Mill Pond, Piscataqua River (openboatlaunch slugs: piscataqua-river-nh)
+# History: 2015-01 to 2026-08
+# Research notes: Memo headers contain errors (May data labeled 'June 2025 Results' and 'April
+#   2025')
+cadence: "monthly, about 1 month lag"
+license: "none stated"
+attribution: "City of Portsmouth DPW"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NH"]
+access: ["html", "pdf"]
+access_detail: "Drupal HTML table (Year, Month, 10A/10B/013/Total MG) linking monthly PDFs under files.portsmouthnh.gov/files/ww/YYYY_MM_CSO_NH0100234_1A.pdf; the PDFs are scanned memos with daily flow and rain"
+machine_readable: false
+legal_basis: "NH0100234 Part I.H.3.g"
+checked: "2026-11-01"

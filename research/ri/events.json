@@ -1,0 +1,341 @@
+[
+  {
+    "event_id": "ri-2026-05-04-east-providence-force-main",
+    "event_type": "sso",
+    "date": "2026-05-04",
+    "started_at": "2026-05-04T11:45 (approx; 'just before noon' per ecoRI, not an agency time)",
+    "ended_at": null,
+    "timezone": "America/New_York",
+    "discharger": "East Providence Wastewater Treatment Facility / City of East Providence collection system",
+    "npdes_permit": "RI0100048",
+    "outfall": "20-inch force main break near the East Bay Bike Path (not a permitted outfall)",
+    "receiving_water": "Providence River at Watchemoket Cove",
+    "water_slugs": [
+      "providence-river-ri"
+    ],
+    "volume": 800000,
+    "units": "gallons",
+    "estimate_flag": true,
+    "reported_at": null,
+    "published_at": "2026-05-05T14:07-04:00 (DEM press release)",
+    "notice_urls": [
+      "https://dem.ri.gov/press-releases/shellfish-area-16e-closed-due-east-providence-sewage-discharge",
+      "https://dem.ri.gov/press-releases/shellfish-areas-reopen-after-emergency-closures-lifted",
+      "https://ecori.org/when-sewage-spills-into-waterways-theres-no-state-requirement-to-alert-public/",
+      "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100048&output=JSON"
+    ],
+    "how_reported": "DEM press release closing shellfish Area 16E (also DEM shellfish email list and 24-h hotline 401-222-2900); RIDOH advised avoiding direct contact with Watchemoket Cove (stated in DEM's 2026-05-15 release); EPA ECHO lists a 'Dry-weather SSO discharge to waters of the U.S. that may endanger health or the environment' dated 05/04/2026 for RI0100048 (from the operator's NeT-SewerOverflow report).",
+    "source_ids": [
+      "ri-ridem-press-releases",
+      "ri-echo-dfr-sewer-events",
+      "ri-ridem-shellfish-closure-page",
+      "ri-news-ecori"
+    ],
+    "verified": "fetched",
+    "checked": "2026-11-01",
+    "notes": "DEM wording: 'approximately 800,000 gallons of untreated sewage discharging into the Providence River in the area of Watchemoket Cove'; 'The discharge has been significantly reduced but has not been eliminated at this time' (as of 2026-05-05). ecoRI later says nearly a million gallons. Area 16E reopened to commercial harvest 7 AM 2026-05-18; RIDOH contact advice lifted 2026-05-15. ECHO also lists 'Failure to properly operate and maintain the sanitary sewer system' 05/12/2026 and a 'Sanitary Sewer Overflow - Under Review' notice dated 08/18/2026. ECHO annual sewer-event totals for 2026 still show '--' for this permit (lag or different counting)."
+  },
+  {
+    "event_id": "ri-2026-04-24-bristol-mt-hope-pump-station",
+    "event_type": "sso",
+    "date": "2026-04-24",
+    "started_at": "2026-04-24 (date from ECHO violation record; time unknown)",
+    "ended_at": null,
+    "timezone": "America/New_York",
+    "discharger": "Bristol Wastewater Treatment Facility / Town of Bristol collection system (Mt. Hope Pump Station)",
+    "npdes_permit": "RI0100005",
+    "outfall": "Mt. Hope Pump Station, Annawamscutt Ave area, Bristol (not a permitted outfall)",
+    "receiving_water": "Mount Hope Bay",
+    "water_slugs": [],
+    "volume": 5000,
+    "units": "gallons",
+    "estimate_flag": true,
+    "reported_at": null,
+    "published_at": null,
+    "notice_urls": [
+      "https://www.wpri.com/news/local-news/east-bay/dem-5000-gallons-of-sewage-spilled-into-mount-hope-bay/",
+      "https://dem.ri.gov/press-releases/shellfish-areas-reopen-after-emergency-closures-lifted",
+      "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100005&output=JSON"
+    ],
+    "how_reported": "DEM shellfish closure alert (email list / hotline; no DEM press release found in the press-release index for April 2026); WPRI story; ECHO lists 'Dry-weather SSO discharge to waters of the U.S. that may endanger health or the environment' 04/24/2026 for RI0100005. DEM's 2026-05-15 release says the closure of Mt. Hope Bay growing area 17 'has also ended and has reopened to shellfish harvest today'.",
+    "source_ids": [
+      "ri-echo-dfr-sewer-events",
+      "ri-ridem-shellfish-email-alerts",
+      "ri-news-wpri"
+    ],
+    "verified": "search_only",
+    "checked": "2026-11-01",
+    "notes": "WPRI page blocked by bot protection; the 5,000-gallon figure, 'Friday', the pump station name and the closure 'north of Mount Hope Point in Bristol to the Massachusetts state line' come from search snippets. Matching the WPRI story to the ECHO 04/24/2026 record (a Friday) is inferred. ecoRI (2026-06-18) also mentions the 5,000-gallon Bristol pump-station spill 'weeks before' May 4. No openboatlaunch slug exists for Mount Hope Bay."
+  },
+  {
+    "event_id": "ri-2026-10-05-nbc-of220-moshassuck-esten",
+    "event_type": "cso",
+    "date": "2026-10-05",
+    "started_at": "Oct  5 2026  8:50PM (NBC string, timezone not stated; presumed local)",
+    "ended_at": "Oct  5 2026 11:11PM",
+    "timezone": "America/New_York",
+    "discharger": "Narragansett Bay Commission (Bucklin Point system)",
+    "npdes_permit": "RI0100072",
+    "outfall": "OF 220_Moshassuck_Esten (41.86001263, -71.402142927)",
+    "receiving_water": "Moshassuck River (inferred from site name and location)",
+    "water_slugs": [],
+    "volume": null,
+    "units": null,
+    "estimate_flag": null,
+    "reported_at": "Oct  6 2026  8:12AM (NBC 'DATE_VERIFIED')",
+    "published_at": null,
+    "notice_urls": [
+      "https://cso-api.narrabay.com/dryoverflows",
+      "https://www.narrabay.com/programs-and-initiatives/combined-sewer-overflow-cso/cso-alarm-map/",
+      "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100072&output=JSON"
+    ],
+    "how_reported": "NBC CSO Alarm Map table 'Verified Overflow Events in the last 30 Days' (JSON endpoint /dryoverflows); EPA ECHO lists 'Dry-weather CSO discharge to waters of the U.S. that may endanger health or the environment' 10/05/2026-10/06/2026 for RI0100072.",
+    "source_ids": [
+      "ri-nbc-cso-api-dryoverflows",
+      "ri-echo-dfr-sewer-events"
+    ],
+    "verified": "fetched",
+    "checked": "2026-11-01",
+    "notes": "Raw NBC record: {\"SITE_NAME\":\"OF 220_Moshassuck_Esten\",\"ACTIVATION_DATE\":\"Oct  5 2026  8:50PM\",\"DEACTIVATION_DATE\":\"Oct  5 2026 11:11PM\",\"DATE_VERIFIED\":\"Oct  6 2026  8:12AM\"}. This row will drop off the NBC endpoint about 30 days after the event; only polling preserves it. NBC gives no volume. ECHO's 2026 annual total for RI0100072 is 2 events / 506,410 gallons, not attributable to individual events. Cross-match between NBC and ECHO confirms both sources describe the same dry-weather overflow."
+  },
+  {
+    "event_id": "ri-2026-08-17-nbc-bucklin-point-dry-weather-cso",
+    "event_type": "cso",
+    "date": "2026-08-17",
+    "started_at": "2026-08-17 (ECHO date only)",
+    "ended_at": null,
+    "timezone": "America/New_York",
+    "discharger": "Narragansett Bay Commission (Bucklin Point system)",
+    "npdes_permit": "RI0100072",
+    "outfall": null,
+    "receiving_water": null,
+    "water_slugs": [],
+    "volume": null,
+    "units": null,
+    "estimate_flag": null,
+    "reported_at": null,
+    "published_at": null,
+    "notice_urls": [
+      "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100072&output=JSON"
+    ],
+    "how_reported": "EPA ECHO 'Dry-weather CSO discharge to waters of the U.S. that may endanger health or the environment' dated 08/17/2026. Outside the NBC endpoint's 30-day window by the check date, so not visible there.",
+    "source_ids": [
+      "ri-echo-dfr-sewer-events"
+    ],
+    "verified": "fetched",
+    "checked": "2026-11-01",
+    "notes": "Test case for backfilling from ECHO: outfall and receiving water are not in the ECHO DFR record."
+  },
+  {
+    "event_id": "ri-2026-03-13-west-warwick-wwtf-bypass",
+    "event_type": "bypass",
+    "date": "2026-03-13",
+    "started_at": "2026-03-13",
+    "ended_at": "2026-03-18",
+    "timezone": "America/New_York",
+    "discharger": "West Warwick Regional Wastewater Treatment Facility",
+    "npdes_permit": "RI0100153",
+    "outfall": "treatment plant bypass (outfall not stated)",
+    "receiving_water": "Pawtuxet River (plant's receiving water; inferred)",
+    "water_slugs": [
+      "pawtuxet-river-ri"
+    ],
+    "volume": 2948333,
+    "units": "gallons (ECHO 2026 total for 2 events: 03/13-03/18 and 04/10/2026)",
+    "estimate_flag": true,
+    "reported_at": null,
+    "published_at": null,
+    "notice_urls": [
+      "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100153&output=JSON"
+    ],
+    "how_reported": "EPA ECHO only: 'Dry-weather unanticipated prohibited bypass discharge to waters of the U.S. - endangerment' 03/13/2026-03/18/2026 and 04/10/2026; ECHO also lists 'PR: Failure to submit noncompliance report - CSO, SSO, or Bypass' 03/19/2026 and 04/15/2026. No public notice found.",
+    "source_ids": [
+      "ri-echo-dfr-sewer-events"
+    ],
+    "verified": "fetched",
+    "checked": "2026-11-01",
+    "notes": "Volume is an annual total across two events, not per event. Shows the class of event the public never hears about."
+  },
+  {
+    "event_id": "ri-2026-03-13-zambarano-bypass",
+    "event_type": "bypass",
+    "date": "2026-03-13",
+    "started_at": "2026-03-13",
+    "ended_at": "2026-03-16",
+    "timezone": "America/New_York",
+    "discharger": "Dr. U.E. Zambarano Memorial Hospital wastewater system (state hospital, Burrillville)",
+    "npdes_permit": "RI0100129",
+    "outfall": null,
+    "receiving_water": "unknown (NBEP lists the Blackstone River basin)",
+    "water_slugs": [],
+    "volume": 231280,
+    "units": "gallons (ECHO 2026 total; one event)",
+    "estimate_flag": true,
+    "reported_at": null,
+    "published_at": null,
+    "notice_urls": [
+      "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100129&output=JSON"
+    ],
+    "how_reported": "EPA ECHO only: 'Dry-weather unanticipated prohibited bypass discharge to waters of the U.S. - endangerment' 03/13/2026-03/16/2026.",
+    "source_ids": [
+      "ri-echo-dfr-sewer-events"
+    ],
+    "verified": "fetched",
+    "checked": "2026-11-01",
+    "notes": "Single 2026 event, so the annual total equals this event's volume."
+  },
+  {
+    "event_id": "ri-2026-03-17-east-greenwich-bypass",
+    "event_type": "bypass",
+    "date": "2026-03-17",
+    "started_at": "2026-03-17",
+    "ended_at": null,
+    "timezone": "America/New_York",
+    "discharger": "East Greenwich Wastewater Treatment Facility",
+    "npdes_permit": "RI0100030",
+    "outfall": null,
+    "receiving_water": "Greenwich Cove (inferred from plant location)",
+    "water_slugs": [
+      "greenwich-cove-ri"
+    ],
+    "volume": 35669,
+    "units": "gallons (ECHO 2026 total for 2 events)",
+    "estimate_flag": true,
+    "reported_at": null,
+    "published_at": null,
+    "notice_urls": [
+      "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100030&output=JSON"
+    ],
+    "how_reported": "EPA ECHO only: two 'Wet-weather unanticipated prohibited bypass discharge to waters of the U.S. - endangerment' records dated 03/17/2026.",
+    "source_ids": [
+      "ri-echo-dfr-sewer-events"
+    ],
+    "verified": "fetched",
+    "checked": "2026-11-01",
+    "notes": ""
+  },
+  {
+    "event_id": "ri-2026-03-06-newport-wpcf-bypass",
+    "event_type": "bypass",
+    "date": "2026-03-06",
+    "started_at": "2026-03-06",
+    "ended_at": null,
+    "timezone": "America/New_York",
+    "discharger": "City of Newport Water Pollution Control Facility",
+    "npdes_permit": "RI0100293",
+    "outfall": null,
+    "receiving_water": "East Passage of Narragansett Bay (plant's receiving water; inferred)",
+    "water_slugs": [
+      "east-passage-ri",
+      "narragansett-bay-ri"
+    ],
+    "volume": 83456,
+    "units": "gallons (ECHO 2026 total; one event)",
+    "estimate_flag": true,
+    "reported_at": null,
+    "published_at": null,
+    "notice_urls": [
+      "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100293&output=JSON"
+    ],
+    "how_reported": "EPA ECHO only: 'Wet-weather unanticipated prohibited bypass discharge to waters of the U.S. - endangerment' 03/06/2026. Newport's own CSO notification (red flags at the CSO facility and Harbormaster's building) covers its two CSO facilities, not plant bypasses.",
+    "source_ids": [
+      "ri-echo-dfr-sewer-events",
+      "ri-newport-cso-faq"
+    ],
+    "verified": "fetched",
+    "checked": "2026-11-01",
+    "notes": ""
+  },
+  {
+    "event_id": "ri-2026-07-23-ridoh-multi-beach-closures",
+    "event_type": "beach_closure",
+    "date": "2026-07-23",
+    "started_at": "2026-07-23",
+    "ended_at": "2026-07-24 to 2026-07-28 (per beach)",
+    "timezone": "America/New_York",
+    "discharger": null,
+    "npdes_permit": null,
+    "outfall": null,
+    "receiving_water": "Narragansett Bay beaches: Sandy Point Beach (Portsmouth), Bristol Town Beach, Warren Town Beach, City Park Beach (Warwick); also Kingston Camp (South Kingstown) and Kent County YMCA (Warwick) in the sheet",
+    "water_slugs": [
+      "narragansett-bay-ri",
+      "sakonnet-river-ri",
+      "warren-river-ri"
+    ],
+    "volume": null,
+    "units": null,
+    "estimate_flag": null,
+    "reported_at": null,
+    "published_at": "2026-07-23 14:49 (RIDOH beach advisory feed item)",
+    "notice_urls": [
+      "https://health.ri.gov/ridoh-feed-beaches",
+      "https://docs.google.com/spreadsheets/d/1KXdH37xHUPrjJSEkryquPQ2GaP-R_9Gl5NkZrUnAjjU/gviz/tq?tqx=out:csv&gid=828265472"
+    ],
+    "how_reported": "RIDOH advisory feed item 'RIDOH Recommends Swimming Advisories at Multiple Beaches' ('due to high bacteria counts'); rows in the RIDOH closure Google Sheet with Closed On / Re-Opened / Number of Days Closed; recorded phone line 401-222-2751.",
+    "source_ids": [
+      "ri-ridoh-beach-closures-sheet",
+      "ri-ridoh-beach-advisory-feed"
+    ],
+    "verified": "fetched",
+    "checked": "2026-11-01",
+    "notes": "Cause is NOT stated by RIDOH; do not label as sewage. Included as a test case for advisory ingestion and for joining with discharge events by date and place. Sandy Point Beach is on the Sakonnet River side of Portsmouth (slug choice inferred). Season ended 2026-09-23 per the feed."
+  },
+  {
+    "event_id": "ri-2025-07-27-nbc-fields-point-sso",
+    "event_type": "sso",
+    "date": "2025-07-27",
+    "started_at": "2025-07-27",
+    "ended_at": "2025-07-29",
+    "timezone": "America/New_York",
+    "discharger": "Narragansett Bay Commission (Field's Point system)",
+    "npdes_permit": "RI0100315",
+    "outfall": null,
+    "receiving_water": null,
+    "water_slugs": [],
+    "volume": 6033,
+    "units": "gallons (ECHO 2025 total; one event)",
+    "estimate_flag": true,
+    "reported_at": null,
+    "published_at": null,
+    "notice_urls": [
+      "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100315&output=JSON"
+    ],
+    "how_reported": "EPA ECHO only: 'Dry-weather SSO discharge to waters of the U.S., not permit compliant, no endangerment' 07/27/2025-07/29/2025.",
+    "source_ids": [
+      "ri-echo-dfr-sewer-events"
+    ],
+    "verified": "fetched",
+    "checked": "2026-11-01",
+    "notes": "The NBC CSO map covers CSO outfalls; it would not show an SSO from an interceptor."
+  },
+  {
+    "event_id": "ri-2025-07-01-woonsocket-wwtf-bypass",
+    "event_type": "bypass",
+    "date": "2025-07-01",
+    "started_at": "2025-07-01",
+    "ended_at": null,
+    "timezone": "America/New_York",
+    "discharger": "Woonsocket Regional Wastewater Treatment Facility",
+    "npdes_permit": "RI0100111",
+    "outfall": null,
+    "receiving_water": "Blackstone River",
+    "water_slugs": [
+      "blackstone-river-ri"
+    ],
+    "volume": 1875200,
+    "units": "gallons (ECHO 2025 total for 3 events)",
+    "estimate_flag": true,
+    "reported_at": null,
+    "published_at": null,
+    "notice_urls": [
+      "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100111&output=JSON"
+    ],
+    "how_reported": "EPA ECHO only: 'Dry-weather unanticipated prohibited bypass discharge to waters of the U.S. - endangerment' 01/01/2025 and 07/01/2025, plus 'Failure to submit noncompliance report' 01/07/2025-01/10/2025.",
+    "source_ids": [
+      "ri-echo-dfr-sewer-events"
+    ],
+    "verified": "fetched",
+    "checked": "2026-11-01",
+    "notes": "Woonsocket has history: AG and DEM sued the city and its operators in March 2023 over partially treated discharges; DEM issued, then lifted (2023-03-15), a no-contact advisory on the Blackstone River. No 2025 public advisory found."
+  }
+]

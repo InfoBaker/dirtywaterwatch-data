@@ -1,0 +1,34 @@
+id: "vt-anr-wastewater-infrastructure-cso-outfalls"
+name: "VT ANR Wastewater Infrastructure (Point features), Type 23 'Combined sewer outfall'"
+url: "https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166"
+homepage: "https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166"
+kind: "arcgis"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Only VT outfall
+#   point layer found; join by municipality + S/N or CSO number to DEC incident 'Location' text.
+# Access detail (research, quoted): Query:
+#   .../MapServer/166/query?where=Type%3D23&outFields=*&outSR=4326&f=json returns 84 points (53
+#   Status 'Existing', 31 'Abandoned'); layer total 29,181 points. Saved
+#   raw/vt-anr-cso-outfalls.json.
+# Can fill: geometry (outfall point), coordinates (source, precision via Source_resolved)
+# Cannot fill: any event field
+# Waters: CSO municipalities (openboatlaunch slugs: lake-champlain-vt, winooski-river-vt,
+#   otter-creek-vt, passumpsic-river-vt, connecticut-river-vt, lac-memphremagog-vt,
+#   missisquoi-river-vt, stevens-brook-vt)
+# Research notes: Stale/inconsistent: some 'Existing' Newport City points are annotated 'closed'; 5
+#   Existing points have null Municipality; St Johnsbury has 13 Existing points (DEC reports name
+#   CSO-06, -14, -24 etc.). Existing by municipality: St Johnsbury 13, Montpelier 6, Newport City 6,
+#   Burlington 5, Hartford 5, Rutland City 4, Middlebury 4, Northfield 1, Randolph 1, Vergennes 1,
+#   Enosburgh 1, St Albans City 1, null 5.
+cadence: "Static inventory; edits dated 2013-2020 in sample."
+license: "copyrightText \"Watershed Investment Division, VT DEC\"; description: \"Accuracy of all data is for planning purposes and field verification is at the users discretion.\" Portal terms: Vermont Open Geodata Policy v1.1."
+attribution: "VT DEC Watershed Investment Division (via ANR Open Data)"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["VT"]
+access: ["arcgis"]
+access_detail: "Query: .../MapServer/166/query?where=Type%3D23&outFields=*&outSR=4326&f=json returns 84 points (53 Status 'Existing', 31 'Abandoned'); layer total 29,181 points. Saved raw/vt-anr-cso-outfalls.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

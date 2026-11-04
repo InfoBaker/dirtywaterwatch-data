@@ -1,0 +1,21 @@
+id: "cambridge-public-health-advisories"
+name: "Cambridge Public Health Department water advisories"
+url: "https://www.cambridgepublichealth.org/?p=5057"
+homepage: "https://www.cambridgepublichealth.org/?p=5057"
+kind: "html"
+level: "municipal"
+# Notes (research/ma, status candidate, verified search_only, checked 2026-11-01): Municipal
+#   co-issuer of Charles advisories; HTML.
+# Access detail (research, quoted): Search result only (August 21, 2026 notice).
+cadence: null
+license: "none stated"
+attribution: "Cambridge Public Health Department"
+enabled: true
+role: "advisories"
+event_types: ["cyanobacteria"]
+states: ["MA"]
+access: ["html"]
+access_detail: "Search result only (August 21, 2026 notice)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

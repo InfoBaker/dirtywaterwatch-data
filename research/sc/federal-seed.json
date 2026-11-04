@@ -1,0 +1,726 @@
+{
+ "state": "SC",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 212,
+ "plant_permits_major": 102,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "SC0001741",
+   "permittee": "CHESTER SEWER DISTRICT",
+   "city": "LANDO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0020010",
+   "permittee": "City of Clemson",
+   "city": "CLEMSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0020125",
+   "permittee": "Town of Winnsboro",
+   "city": "WINNSBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0020214",
+   "permittee": "WARE SHOALS TOWN OF",
+   "city": "WARE SHOALS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0020249",
+   "permittee": "CHERAW TOWN OF",
+   "city": "CHERAW",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0020371",
+   "permittee": "FORT MILL TOWN OF",
+   "city": "FORT MILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0020419",
+   "permittee": "MANNING CITY OF",
+   "city": "MANNING",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0020435",
+   "permittee": "SPARTANBURG SANITARY SEWER DISTRICT",
+   "city": "SPARTANBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0020443",
+   "permittee": "ROCK HILL CITY OF",
+   "city": "ROCK HILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0020702",
+   "permittee": "LAURENS COMMISSION OF PUBLIC WORKS",
+   "city": "LAURENS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0020940",
+   "permittee": "Utilities, COLUMBIA CITY OF",
+   "city": "COLUMBIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0021032",
+   "permittee": "CAMDEN CITY OF",
+   "city": "CAMDEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0021211",
+   "permittee": "GREAT FALLS TOWN OF",
+   "city": "GREAT FALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0021229",
+   "permittee": "CHARLESTON WATER SYSTEM",
+   "city": "CHARLESTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0021300",
+   "permittee": "LYMAN TOWN OF",
+   "city": "LYMAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0021318",
+   "permittee": "LOWCOUNTRY REGIONAL WATER SYSTEM",
+   "city": "HAMPTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0021580",
+   "permittee": "CITY OF HARTSVILLE",
+   "city": "HARTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0021598",
+   "permittee": "MONCKS CORNER TOWN OF",
+   "city": "MONCKS CORNER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0021601",
+   "permittee": "INMAN CITY OF",
+   "city": "INMAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0021709",
+   "permittee": "GREENWOOD METROPOLITAN DISTRICT",
+   "city": "GREENWOOD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0021733",
+   "permittee": "Grand Strand Water & Sewer Authority",
+   "city": "CONWAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0021776",
+   "permittee": "City of Dillon",
+   "city": "DILLON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0022152",
+   "permittee": "NORTH MYRTLE BEACH CITY OF",
+   "city": "NORTH MYRTLE BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0022161",
+   "permittee": "NORTH MYRTLE BEACH CITY OF",
+   "city": "NORTH MYRTLE BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0022870",
+   "permittee": "GREENWOOD METROPOLITAN DISTRICT",
+   "city": "GREENWOOD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0023744",
+   "permittee": "ANDERSON CITY OF",
+   "city": "ANDERSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0023752",
+   "permittee": "ANDERSON CITY OF",
+   "city": "ANDERSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0023906",
+   "permittee": "REWA/PIEDMONT WWTP",
+   "city": "PIEDMONT",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "SC0024147",
+   "permittee": "City of Cayce",
+   "city": "CAYCE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0024261",
+   "permittee": "RENEWABLE WATER RESOURCES",
+   "city": "SIMPSONVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0024317",
+   "permittee": "REWA/GROVE CREEK WWTP",
+   "city": "PIEDMONT",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "SC0024457",
+   "permittee": "AIKEN COUNTY PUBLIC SERVICE AUTHORITY",
+   "city": "BEECH ISLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0024465",
+   "permittee": "BATESBURG LEESVILLE TOWN OF",
+   "city": "BATESBURG-LEESVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0024481",
+   "permittee": "Orangeburg Department of Public Utilities",
+   "city": "ORANGEBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0024490",
+   "permittee": "NEWBERRY CITY OF",
+   "city": "NEWBERRY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0024783",
+   "permittee": "NORTH CHARLESTON SEWER DISTRICT",
+   "city": "N CHARLESTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0025178",
+   "permittee": "City of Bennettsville",
+   "city": "BENNETTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0025356",
+   "permittee": "FLORENCE CITY OF",
+   "city": "TIMMONSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0025402",
+   "permittee": "LATTA TOWN OF",
+   "city": "LATTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0025844",
+   "permittee": "DORCHESTER COUNTY WATER AND SEWER DEPARTMENT",
+   "city": "ST. GEORGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0025933",
+   "permittee": "JOHNSONVILLE CITY OF",
+   "city": "JOHNSONVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0026735",
+   "permittee": "LEXINGTON/COVENTRY WOODS WWTP",
+   "city": "LEXINGTON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "SC0026875",
+   "permittee": "SPARTANBURG SANITARY SEWER DISTRICT",
+   "city": "LANDRUM",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0027707",
+   "permittee": "City of Sumter",
+   "city": "SUMTER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0029408",
+   "permittee": "GRAND STRAND WATER & SEWER AUTHORITY",
+   "city": "MULLINS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0030783",
+   "permittee": "MCCORMICK COMMISSION OF PUBLIC WORKS",
+   "city": "MCCORMICK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0031551",
+   "permittee": "GAFFNEY BOARD OF PUBLIC WORKS",
+   "city": "GAFFNEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0033553",
+   "permittee": "OCONEE JOINT REGIONAL SEWER AUTHORITY",
+   "city": "SENECA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0033804",
+   "permittee": "RENEWABLE WATER RESOURCES",
+   "city": "GREER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0034584",
+   "permittee": "BEAUFORT JASPER WATER & SEWER AUTHORITY",
+   "city": "HARDEEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0035378",
+   "permittee": "BISHOPVILLE CITY OF",
+   "city": "BISHOPVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0035700",
+   "permittee": "permit holder in PENDLETON (EPA permit name is a person; name withheld)",
+   "city": "PENDLETON",
+   "major": "Major",
+   "status": "ADC",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "SC0035971",
+   "permittee": "KINGSTREE TOWN OF",
+   "city": "KINGSTREE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0036056",
+   "permittee": "CHESTER SEWER DISTRICT",
+   "city": "CHESTER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0036081",
+   "permittee": "CHESTER SEWER DISTRICT",
+   "city": "CHESTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0037541",
+   "permittee": "SUMMERVILLE COMMISSIONERS OF PUBLIC WORKS",
+   "city": "SUMMERVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "SC0037753",
+   "permittee": "GRAND STRAND WATER & SEWER AUTHORITY",
+   "city": "BUCKSPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0037974",
+   "permittee": "LAURENS COUNTY WATER AND SEWER COMMISSION",
+   "city": "KINARDS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0038156",
+   "permittee": "YORK CITY OF",
+   "city": "YORK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0038822",
+   "permittee": "DORCHESTER COUNTY",
+   "city": "NORTH CHARLESTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0038865",
+   "permittee": "East Richland County PSD",
+   "city": "COLUMBIA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "SC0039624",
+   "permittee": "DARLINGTON CITY OF",
+   "city": "DARLINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0039853",
+   "permittee": "Easley Combined Utilities",
+   "city": "EASLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0039870",
+   "permittee": "KERSHAW COUNTY",
+   "city": "LUGOFF",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0039918",
+   "permittee": "ALLENDALE TOWN OF",
+   "city": "ALLENDALE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0039951",
+   "permittee": "GEORGETOWN COUNTY WATER & SEWER DISTRICT",
+   "city": "PAWLEYS ISL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0040002",
+   "permittee": "RENEWABLE WATER RESOURCES",
+   "city": "FOUNTAIN INN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0040029",
+   "permittee": "GEORGETOWN CITY OF",
+   "city": "GEORGETOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0040436",
+   "permittee": "City of Walterboro",
+   "city": "WALTERBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0040525",
+   "permittee": "RENEWABLE WATER RESOURCES",
+   "city": "SIMPSONVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0040614",
+   "permittee": "ABBEVILLE CITY OF",
+   "city": "ABBEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0040631",
+   "permittee": "CHAPIN TOWN OF",
+   "city": "CHAPIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0040771",
+   "permittee": "MOUNT PLEASANT WATERWORKS",
+   "city": "MOUNT PLEASANT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0040878",
+   "permittee": "GRAND STRAND WATER & SEWER AUTHORITY",
+   "city": "LONGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0040959",
+   "permittee": "GEORGETOWN COUNTY WATER & SEWER DISTRICT",
+   "city": "MURRELLS INLET",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0041211",
+   "permittee": "RENEWABLE WATER RESOURCES",
+   "city": "GREENVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0041696",
+   "permittee": "Grand Strand Water and Sewer Authority",
+   "city": "LONGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0042501",
+   "permittee": "SOUTH ISLAND PUBLIC SERVICE DISTRICT",
+   "city": "HILTON HEAD ISLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0042994",
+   "permittee": "PICKENS COUNTY PUBLIC SERVICE COMMISSION",
+   "city": "LIBERTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0045462",
+   "permittee": "FLORENCE CITY OF",
+   "city": "FLORENCE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0045624",
+   "permittee": "SPARTANBURG SANITARY SEWER DISTRICT",
+   "city": "COWPENS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0045896",
+   "permittee": "BELTON CITY OF",
+   "city": "BELTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0046060",
+   "permittee": "BERKELEY COUNTY WATER & SANITATION AUTHORITY",
+   "city": "GOOSE CREEK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0046191",
+   "permittee": "HILTON HEAD PUBLIC SERVICE DISTRICT",
+   "city": "HILTON HEAD, SC 29925",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0046230",
+   "permittee": "Grand Strand Water & Sewer Authority",
+   "city": "MARION",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0046311",
+   "permittee": "City of Lake City",
+   "city": "LAKE CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0046345",
+   "permittee": "GREER COMMISSION OF PUBLIC WORKS",
+   "city": "GREER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0046621",
+   "permittee": "RICHLAND COUNTY UTILITIES & SERVICES",
+   "city": "IRMO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0046841",
+   "permittee": "WILLIAMSTON TOWN OF",
+   "city": "WILLIAMSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0046892",
+   "permittee": "permit holder in LANCASTER (EPA permit name is a person; name withheld)",
+   "city": "LANCASTER",
+   "major": "Major",
+   "status": "EFF",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "SC0047091",
+   "permittee": "GAFFNEY BOARD OF PUBLIC WORKS",
+   "city": "GAFFNEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0047244",
+   "permittee": "UNION CITY OF",
+   "city": "UNION",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0047279",
+   "permittee": "BEAUFORT JASPER WATER & SEWER AUTHORITY",
+   "city": "RIDGELAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0047309",
+   "permittee": "RENEWABLE WATER RESOURCES",
+   "city": "GREENVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0047716",
+   "permittee": "PICKENS CITY OF",
+   "city": "PICKENS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0047732",
+   "permittee": "SPARTANBURG SANITARY SEWER DISTRICT",
+   "city": "MOORE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0047856",
+   "permittee": "PICKENS CO PSC, 18 MILE CREEK UPPER WWTP",
+   "city": "CENTRAL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0047864",
+   "permittee": "LANCASTER COUNTY WATER & SEWER DISTRICT",
+   "city": "FORT MILL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0047872",
+   "permittee": "BARNWELL CITY OF",
+   "city": "BARNWELL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0048143",
+   "permittee": "SPARTANBURG SANITARY SEWER DISTRICT",
+   "city": "ROEBUCK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SC0048348",
+   "permittee": "Beaufort Jasper Water & Sewer Authority",
+   "city": "BEAUFORT, SOUTH CAROLINA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SC0048470",
+   "permittee": "RENEWABLE WATER RESOURCES",
+   "city": "PIEDMONT",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

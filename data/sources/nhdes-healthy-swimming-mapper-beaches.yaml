@@ -1,0 +1,38 @@
+id: "nhdes-healthy-swimming-mapper-beaches"
+name: "NHDES Healthy Swimming Mapper - Beach Mapper Points (layer 0 of '2026 NHDES Healthy Swimming Mapper' feature service)"
+url: "https://services1.arcgis.com/MAcUimSes4gPY4sM/arcgis/rest/services/2024_Healthy_Swimming_Mapper_V2_WFL1/FeatureServer/0"
+homepage: "https://services1.arcgis.com/MAcUimSes4gPY4sM/arcgis/rest/services/2024_Healthy_Swimming_Mapper_V2_WFL1/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Best NH
+#   swim-advisory feed; machine-readable; licence says 'Distribution is discouraged' so the owner
+#   must decide on republishing.
+# Access detail (research, quoted): Public FeatureServer; item 25c31a6d07134c5689c3a5a7b97606fd
+#   titled '2026 NHDES Healthy Swimming Mapper' although the service name says 2024.
+#   query?where=1%3D1&outFields=*&f=json returns 93 points. dataLastEditDate 2026-09-03. Dashboard
+#   item 8d84a6b03acb4efaab571b222c78447b.
+# Can fill: source_record_id (EPA_ID), event_type (bacteria advisory), source_status (Status),
+#   started_at (DateIssued while active), waterbody, location_text, coordinates (beach point),
+#   authority, raw_record
+# Cannot fill: ended_at (only in Advisory_history text, month/day without year); valid_until; volume
+# Waters: 93 designated beaches incl. 16 Atlantic coast beaches and inland lakes (openboatlaunch
+#   slugs: lake-winnipesaukee-nh, lake-winnisquam-nh, lake-sunapee-nh, opechee-bay-nh,
+#   saco-river-nh, hampton-harbor-nh, rye-harbor-nh, little-harbor-rye-nh, portsmouth-harbor-nh)
+# History: Current season only in the layer; Advisory_history string lists this season's advisory
+#   date ranges; per-beach annual report PDFs on www4.des.state.nh.us (403 here); full results in
+#   NHDES OneStop.
+# Research notes: 31 of 93 beaches had advisories in 2026 (e.g. North Beach (the Wall) 6/16-6/18,
+#   7/7-7/9, 8/12-8/14). Coastal beaches downstream of the Merrimack/Piscataqua are the ones a CSO
+#   story would touch.
+cadence: "Item snippet: 'Current advisories & alerts ... are posted & updated on this map daily.' Advisory 'approximately 24 hours after sampling' (NHDES Advisories page). Season roughly June to Labor Day; on 2026-11-01 all 93 read 'Monitoring Season Completed'."
+license: "\"User is required to read metadata completely before using the data. The information provided in this coverage is a subset of spatial databases developed by the New Hampshire Department of Environmental Services (NHDES). The data presented is under constant revision and may not depict the most up to date information. The NHDES is not responsible for the use or interpretation of this information, or for any inaccuracies in the site names, tax map and lot information, or locations. All information is subject to verification. These data are to be used for screening purposes only. Distribution is discouraged.\" (licenseInfo on items 8d84a6b03acb4efaab571b222c78447b and 083302ea9c904498a620930698be3340; accessInformation \"NHDES\")"
+attribution: "NHDES Beach Inspection Program"
+enabled: true
+role: "advisories"
+event_types: ["bacteria"]
+states: ["NH"]
+access: ["arcgis", "map_only", "email"]
+access_detail: "Public FeatureServer; item 25c31a6d07134c5689c3a5a7b97606fd titled '2026 NHDES Healthy Swimming Mapper' although the service name says 2024. query?where=1%3D1&outFields=*&f=json returns 93 points. dataLastEditDate 2026-09-03. Dashboard item 8d84a6b03acb4efaab571b222c78447b."
+machine_readable: true
+legal_basis: "RSA 485-A:8; Env-Wq 1108.14"
+checked: "2026-11-01"

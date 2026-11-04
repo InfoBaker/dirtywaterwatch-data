@@ -1,0 +1,24 @@
+id: "ct-deep-cso-dashboard"
+name: "CT DEEP CSO/SSO Performance Dashboard (QScend)"
+url: "https://deepct.qscend.mygovcenter.com/"
+homepage: "https://deepct.qscend.mygovcenter.com/"
+kind: "html"
+level: "state"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): 48 h after heavy
+#   rain; explicitly 'not to swim, fish or utilize paddlecraft'.
+# Access detail (research, quoted): Raw copy:
+#   research/science/raw/dl-adv/ct-deep-qscend-dashboard.html (fetched 2026-11-01 by the advisory
+#   sub-researcher; text read by the lead).
+# Can fill: advice_text
+cadence: null
+license: "none stated"
+attribution: "Connecticut Department of Energy and Environmental Protection"
+enabled: true
+role: "advisories"
+event_types: ["cso", "sso"]
+states: ["CT"]
+access: ["html"]
+access_detail: "Raw copy: research/science/raw/dl-adv/ct-deep-qscend-dashboard.html (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

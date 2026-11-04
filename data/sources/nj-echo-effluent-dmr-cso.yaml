@@ -1,0 +1,35 @@
+id: "nj-echo-effluent-dmr-cso"
+name: "EPA ECHO Effluent Charts REST (NJ CSO outfall DMRs: 'Duration of discharge' days per month, precipitation, solids/floatables)"
+url: "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?p_id=NJ0108723&start_date=01/01/2025&end_date=10/31/2026&parameter_code=81381&output=JSON"
+homepage: "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?p_id=NJ0108723&start_date=01/01/2025&end_date=10/31/2026&parameter_code=81381&output=JSON"
+kind: "api"
+level: "federal"
+# Notes (research/nj, status candidate, verified fetched, checked 2026-11-02): Best historical,
+#   machine-readable record of NJ CSO activity per outfall. Monthly and modeled, so it is a
+#   history/statistics layer, not a notice feed.
+# Access detail (research, quoted): No key. Parameter 81381 'Duration of discharge', unit 'd',
+#   statistical base 'MO TOTAL' per CSO outfall (feature type EXO); outfall 002 of each permit also
+#   carries 00193 precipitation and 51892 solids/floatables. Trimmed results:
+#   raw/echo/cso-dmr-days-trimmed.json.
+# Can fill: source_record_id (permit+outfall+period), authority, waterbody (join to NJDEP layer),
+#   coordinates (join), reported_at (ValueReceivedDate)
+# Cannot fill: started_at/ended_at of individual events (month only); volume (not reported in NJ CSO
+#   DMRs); real-time status
+# Waters: All NJ CSO permits in ICIS (tested 9: Newark, JCMUA, Camden City, Paterson, Bayonne,
+#   Gloucester City, NHSA Adams St, Trenton, plus PVSC DFR) (openboatlaunch slugs: passaic-river-nj,
+#   hackensack-river-nj, hudson-river-nj, newark-bay-nj, delaware-river-nj, cooper-river-nj)
+# History: Years (ICIS-NPDES); tested 2025-01 to 2026-09.
+# Research notes: Data quality: Bayonne's May-25 and Jul-25 rows are identical; Bayonne 001 reports
+#   17-26 days a month. 2025 May had 11-15 discharge days at many JCMUA/Camden/Newark outfalls.
+cadence: "Monthly. Received 16-27 days after month end at most permittees (median), but Newark 36-146 days (median 97); Gloucester City 0-13. Latest period on 2026-11-02: Aug or Sep 2026."
+license: "EPA public data (US government work)."
+attribution: "US EPA (data reported by permittees to NJDEP and passed to ICIS-NPDES)"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NJ"]
+access: ["api", "csv"]
+access_detail: "No key. Parameter 81381 'Duration of discharge', unit 'd', statistical base 'MO TOTAL' per CSO outfall (feature type EXO); outfall 002 of each permit also carries 00193 precipitation and 51892 solids/floatables. Trimmed results: raw/echo/cso-dmr-days-trimmed.json."
+machine_readable: true
+legal_basis: "NJPDES CSO permits Part IV.C.1.d ('as a whole day for any calendar day when a discharge occurs'); values are modeled for most permittees (Part IV.A.1.c allows a DEP-approved model)."
+checked: "2026-11-02"

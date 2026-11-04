@@ -1,0 +1,39 @@
+id: "pa-crc-is-it-clean"
+name: "Connecticut River Conservancy 'Is It Clean?' (isitclean.us)"
+url: "https://www.isitclean.us/"
+homepage: "https://www.isitclean.us/"
+kind: "html"
+level: "nonprofit"
+# Notes (research/community, status candidate, verified fetched, checked 2026-11-01): The bacteria
+#   source for the Connecticut River, the project's founding river. Partner first: ask CRC for a
+#   feed or a WQX pull, and reuse its 'latest sample' versus 'likely condition' split and recency
+#   legend.
+# Access detail (research, quoted): Home and how-it-works pages fetched. Site data are embedded in
+#   Webflow CMS HTML; the page POSTs site lists to
+#   https://is-it-clean-089e6447542b.herokuapp.com/api/v1/weathers to get the 'likely condition'. No
+#   documented API or download. Results also go to EPA Water Quality Exchange (so WQP may carry
+#   them).
+# Cannot fill: discharge fields (sampling program)
+# Waters: 250+ recreation sites on the Connecticut River and tributaries in four states
+#   (openboatlaunch slugs: connecticut-river-ma, connecticut-river-ct, connecticut-river-vt,
+#   connecticut-river-nh, deerfield-river-ma, millers-river-ma, westfield-river-ma,
+#   chicopee-river-ma, ware-river-ma, farmington-river-ct)
+# History: Since about 2012 (original 'Is It Clean' database); new site launched 26 Aug 2025
+# Research notes: Categories: 'clean for swimming', 'clean for boating only', 'not clean for
+#   either'. Two layers: 'Latest samples: reflect the most recent water test results.' 'Likely
+#   condition: based on recent weather and historical trends.' Recency legend: less than a month /
+#   1-12 months / more than 12 months. Disclaimer: 'While we can't guarantee water safety, we give
+#   you the tools to assess the risks yourself.' Tip: 'Avoid contact with the river downstream of a
+#   sewage outfall'. 2026 season funded by a $50,000 MassDEP grant.
+cadence: "Weekly sampling May to October (Wednesday mornings at many sites); 'Results are posted to this site's map within 24 hours after the sample was taken.'"
+license: "none stated beyond site privacy/terms link"
+attribution: "Connecticut River Conservancy (built with The Commons)"
+enabled: true
+role: "monitoring"
+event_types: ["sample", "model_bacteria"]
+states: ["VT", "NH", "MA", "CT"]
+access: ["html"]
+access_detail: "Home and how-it-works pages fetched. Site data are embedded in Webflow CMS HTML; the page POSTs site lists to https://is-it-clean-089e6447542b.herokuapp.com/api/v1/weathers to get the 'likely condition'. No documented API or download. Results also go to EPA Water Quality Exchange (so WQP may carry them)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

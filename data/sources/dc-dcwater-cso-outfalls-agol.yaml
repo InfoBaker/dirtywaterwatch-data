@@ -1,0 +1,29 @@
+id: "dc-dcwater-cso-outfalls-agol"
+name: "DC Water CSOSheds interactive map: Combined Sewer Outfalls layer"
+url: "https://services2.arcgis.com/kZWfT06uhil5hMQO/arcgis/rest/services/CSOSheds_InteractiveMap_CSOOutfalls/FeatureServer/0"
+homepage: "https://services2.arcgis.com/kZWfT06uhil5hMQO/arcgis/rest/services/CSOSheds_InteractiveMap_CSOOutfalls/FeatureServer/0"
+kind: "arcgis"
+level: "utility"
+# Notes (research/dc, status used, verified fetched, checked 2026-11-02): Owner-published outfall
+#   points with photos; matches ECHO inventory IDs.
+# Access detail (research, quoted): No key. query?where=1%3D1&outFields=*&outSR=4326&f=json returns
+#   46 points. Web map 4a8bd77b72ba4802934c007224f87f3e, app 7796821c5b6a4166b4eae7f17d915a78
+#   (embedded on the CSS page). Companion catchments layer
+#   CSOSheds_InteractiveMap_CSOCatchments/FeatureServer/0. Saved raw/agol-dcwater-cso-outfalls.json.
+# Can fill: coordinates (outfall), geometry (outfall point)
+# Waters: Anacostia, Potomac, Rock Creek CSOs (openboatlaunch slugs: anacostia-river-dc,
+#   potomac-river-dc, rock-creek-dc)
+# Research notes: No receiving-water field; take it from the ECHO inventory. Missing 003/003A and
+#   019A (tunnel overflows) present in ECHO.
+cadence: "Static; last edit 2017-02-02."
+license: "Not stated."
+attribution: "DC Clean Rivers (DC Water)"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["DC"]
+access: ["arcgis"]
+access_detail: "No key. query?where=1%3D1&outFields=*&outSR=4326&f=json returns 46 points. Web map 4a8bd77b72ba4802934c007224f87f3e, app 7796821c5b6a4166b4eae7f17d915a78 (embedded on the CSS page). Companion catchments layer CSOSheds_InteractiveMap_CSOCatchments/FeatureServer/0. Saved raw/agol-dcwater-cso-outfalls.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

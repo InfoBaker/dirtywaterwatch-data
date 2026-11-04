@@ -1,0 +1,430 @@
+{
+ "state": "AZ",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 130,
+ "plant_permits_major": 60,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "AZ0020001",
+   "permittee": "Pima County - Regional Wastewater Reclamation Department",
+   "city": "TUCSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0020117",
+   "permittee": "Northern Gila County Sanitary District - Dba Green Valley Water",
+   "city": "PAYSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0020249",
+   "permittee": "City Of Globe",
+   "city": "GLOBE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0020338",
+   "permittee": "City Of Tolleson",
+   "city": "TOLLESON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AZ0020427",
+   "permittee": "City Of Flagstaff",
+   "city": "FLAGSTAFF",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AZ0020443",
+   "permittee": "City Of Yuma - Department Of Public Works",
+   "city": "YUMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0020524",
+   "permittee": "CITY Of PHOENIX - 91st AVE WWTP",
+   "city": "PHOENIX",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0020559",
+   "permittee": "City Of Phoenix",
+   "city": "PHOENIX",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0020923",
+   "permittee": "PIMA CNTY WASTEWATER MGMT",
+   "city": "TUCSON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AZ0021415",
+   "permittee": "COLORADO RIVER SEWAGE SYSTEM",
+   "city": "PARKER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0022357",
+   "permittee": "City Of Goodyear",
+   "city": "GOODYEAR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0023272",
+   "permittee": "City Of El Mirage",
+   "city": "EL MIRAGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0023281",
+   "permittee": "City Of Avondale",
+   "city": "AVONDALE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0023639",
+   "permittee": "Flagstaff Utilities Division",
+   "city": "FLAGSTAFF",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0023833",
+   "permittee": "WINSLOW, CITY OF",
+   "city": "WINSLOW",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AZ0023841",
+   "permittee": "CITY OF SHOW LOW - MAIN WWTP",
+   "city": "SHOW LOW",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AZ0023931",
+   "permittee": "Apache Junction Sewer District",
+   "city": "APACHE JUNCTION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0024031",
+   "permittee": "City Of Mesa - Water Resources",
+   "city": "MESA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0024121",
+   "permittee": "Pima County - Regional Wastewater Reclamation Department",
+   "city": "TUCSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0024244",
+   "permittee": "Arizona City Sanitary District",
+   "city": "ARIZONA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0024465",
+   "permittee": "PHOENIX CITY OF",
+   "city": "PHOENIX",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AZ0024520",
+   "permittee": "Town Of Marana",
+   "city": "MARANA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0024627",
+   "permittee": "MESA, CITY OF",
+   "city": "MESA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AZ0024716",
+   "permittee": "City Of Cottonwood",
+   "city": "COTTONWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0024881",
+   "permittee": "City Of Buckeye",
+   "city": "BUCKEYE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0024911",
+   "permittee": "City Of Safford",
+   "city": "SAFFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0024937",
+   "permittee": "Pima County - Regional Wastewater Reclamation Department",
+   "city": "SAHUARITA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0024945",
+   "permittee": "City Of Peoria",
+   "city": "PEORIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0025119",
+   "permittee": "City Of Peoria",
+   "city": "PEORIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0025127",
+   "permittee": "BUCKEYE, TOWN OF",
+   "city": "BUCKEYE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AZ0025151",
+   "permittee": "City Of Mesa - Water Resources",
+   "city": "MESA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0025178",
+   "permittee": "City Of Casa Grande",
+   "city": "CASA GRANDE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0025208",
+   "permittee": "Town Of Florence",
+   "city": "FLORENCE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AZ0025216",
+   "permittee": "City Of Buckeye",
+   "city": "BUCKEYE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0025241",
+   "permittee": "City Of Mesa - Water Resources",
+   "city": "GILBERT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0025291",
+   "permittee": "Pima County - Stadium District",
+   "city": "TUCSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0025313",
+   "permittee": "City Of Buckeye",
+   "city": "BUCKEYE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0025348",
+   "permittee": "Us Bureau Of Reclamation",
+   "city": "YUMA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AZ0025381",
+   "permittee": "Town Of Prescott Valley",
+   "city": "PRESCOTT VALLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0025437",
+   "permittee": "PINETOP-LAKESIDE SAN DIST",
+   "city": "LAKESIDE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AZ0025518",
+   "permittee": "Town Of Buckeye",
+   "city": "BUCKEYE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0025542",
+   "permittee": "City Of Holbrook",
+   "city": "HOLBROOK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0025607",
+   "permittee": "International Boundary And Water Commission",
+   "city": "RIO RICO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AZ0025691",
+   "permittee": "Town Of Buckeye",
+   "city": "BUCKEYE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AZ0025844",
+   "permittee": "KINGMAN, CITY OF",
+   "city": "KINGMAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AZ0026026",
+   "permittee": "City Of Benson",
+   "city": "BENSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0026077",
+   "permittee": "City Of Bisbee",
+   "city": "BISBEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0026107",
+   "permittee": "Pima County - Regional Wastewater Reclamation Department",
+   "city": "TUCSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0026310",
+   "permittee": "City Of Winslow",
+   "city": "WINSLOW",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AZ0026417",
+   "permittee": "City Of Tucson - Water",
+   "city": "TUCSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0026603",
+   "permittee": "City Of Somerton",
+   "city": "SOMERTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0026727",
+   "permittee": "City Of Phoenix",
+   "city": "PHOENIX",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZ0026808",
+   "permittee": "City Of Bullhead City",
+   "city": "BULLHEAD CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AZ0026913",
+   "permittee": "City Of Buckeye",
+   "city": "BUCKEYE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZS000001",
+   "permittee": "TUCSON, CITY OF",
+   "city": "UNKNOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZS000002",
+   "permittee": "PIMA COUNTY",
+   "city": "UNKNOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZS000003",
+   "permittee": "PHOENIX, CITY OF_MS4",
+   "city": "UNKNOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AZS000005",
+   "permittee": "TEMPE, CITY OF",
+   "city": "UNKNOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NN0020290",
+   "permittee": "NAVAJO TRIBAL UTILITY AUTHORITY",
+   "city": "TUBA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NN0021555",
+   "permittee": "NAVAJO TRIBAL UTILITY AUTHORITY",
+   "city": "FORT DEFIANCE",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

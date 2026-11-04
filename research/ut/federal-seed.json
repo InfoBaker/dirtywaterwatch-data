@@ -1,0 +1,255 @@
+{
+ "state": "UT",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 92,
+ "plant_permits_major": 35,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "UT0020001",
+   "permittee": "Snyderville Basin Water Reclamation District",
+   "city": "PARK CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0020109",
+   "permittee": "SPANISH FORK CITY CORP",
+   "city": "SPANISH FORK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0020222",
+   "permittee": "Pitman Family Farms, Inc",
+   "city": "MORONI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0020303",
+   "permittee": "TREMONTON CITY CORP",
+   "city": "TREMONTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0020419",
+   "permittee": "MOAB- CITY OF",
+   "city": "MOAB",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "UT0020427",
+   "permittee": "PAYSON CITY CORP",
+   "city": "PAYSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0020834",
+   "permittee": "SPRINGVILLE- CITY OF",
+   "city": "SPRINGVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0020915",
+   "permittee": "OREM CITY CORP",
+   "city": "OREM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0020974",
+   "permittee": "CENTRAL DAVIS CO SEWER",
+   "city": "KAYSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "UT0021130",
+   "permittee": "GRANTSVILLE CITY",
+   "city": "GRANTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0021440",
+   "permittee": "MAGNA WATER & SEWER DIST",
+   "city": "MAGNA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0021628",
+   "permittee": "SOUTH DAVIS SEWER DISTRICT-SOUTH PLANT",
+   "city": "NORTH SALT LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0021636",
+   "permittee": "SOUTH DAVIS SEWER DISTRICT-NORTH PLANT",
+   "city": "WEST BOUNTIFUL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0021717",
+   "permittee": "PROVO CITY",
+   "city": "PROVO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0021725",
+   "permittee": "SLC WATER RECLAMATION FACILITY",
+   "city": "SALT LAKE CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0021741",
+   "permittee": "NORTH DAVIS SEWER DIST",
+   "city": "SYRACUSE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "UT0021814",
+   "permittee": "PRICE R WATER IMP DIST",
+   "city": "PRICE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0021911",
+   "permittee": "CENTRAL WEBER SEWER IMPROVEMENT",
+   "city": "OGDEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0021920",
+   "permittee": "LOGAN CITY CORPORATION",
+   "city": "LOGAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0022365",
+   "permittee": "BRIGHAM CITY CORP",
+   "city": "BRIGHAM CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0023205",
+   "permittee": "HYRUM CITY CORPORATION",
+   "city": "HYRUM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0023639",
+   "permittee": "TIMPANOGOS SANITARY SEWER DISTRICT",
+   "city": "AMERICAN FORK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0024384",
+   "permittee": "South Valley Water Reclamation Facility",
+   "city": "WEST JORDAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0024392",
+   "permittee": "CENTRAL VALLEY WATER RECLAMATION FACILITY",
+   "city": "SOUTH SALT LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0024414",
+   "permittee": "SNYDERVILLE BSID-SILVER CREEK",
+   "city": "PARK CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "UT0024686",
+   "permittee": "ST GEORGE CITY CORPORATION",
+   "city": "SAINT GEORGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0024732",
+   "permittee": "MOUNTAIN GREEN SEWER IMPROVEME",
+   "city": "MOUNTAIN GREEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0024970",
+   "permittee": "CEDAR CITY CORPORATION",
+   "city": "CEDAR CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0025348",
+   "permittee": "ASHLEY VALLEY WATER REC. FACIL",
+   "city": "VERNAL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "UT0025721",
+   "permittee": "The City of Perry",
+   "city": "WILLARD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0025747",
+   "permittee": "Jordanelle Special Service District Water Reclamation Facility",
+   "city": "HEBER CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0025852",
+   "permittee": "Jordan Basin Improvement District",
+   "city": "RIVERTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0026000",
+   "permittee": "Santaquin Water Reclamation Facility",
+   "city": "SANTAQUIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0026085",
+   "permittee": "Salem City Water Reclamation Facility",
+   "city": "SALEM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "UT0026301",
+   "permittee": "Ash Creek Special Service District",
+   "city": "LA VERKIN",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+id: "nj-hab"
+name: "NJDEP Harmful Algal Bloom (HAB) Dashboard and its public feature service 'NJDEP_Production_HAB_Sampling_2021_public'"
+url: "https://www.arcgis.com/home/item.html?id=49190166531d4e5a811c9a91e4a41677"
+homepage: "https://www.arcgis.com/home/item.html?id=49190166531d4e5a811c9a91e4a41677"
+kind: "arcgis"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/nj_hab.py
+#   (data/build/events/nj-hab.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/nj_hab.py docstring): Rows appear 1-2 days after sampling; poll daily
+#   (more often in season does no harm). The dashboard is updated each day at noon.
+cadence: "daily"
+license: "Item terms: 'This map is provided for information purposes only and is not monitored 24/7 for accuracy and currency.' plus the NJDEP Data Distribution Agreement (data 'provided, as is'; 'may not be reproduced or redistributed without all the metadata provided'; products 'will credit the NJDEP's Geographic Information System')."
+attribution: "NJDEP Division of Water Monitoring, Standards and Pesticide Control (HAB program)"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["NJ"]
+registry_ids: ["nj-njdep-hab-dashboard"]
+access: ["arcgis"]
+access_detail: "Dashboard item 49190166531d4e5a811c9a91e4a41677 -> web map 2d2c6469bba143bf9b3487170c9904aa -> layer 'HAB Alert Level' = https://services1.arcgis.com/QWdNfRs7lkPq4g4Q/arcgis/rest/services/NJDEP_Production_HAB_Sampling_2021_public/FeatureServer/0 (HAB_sample_table, points, no auth). Query used: where=sitevisitdate>=date '2026-06-01'&orderByFields=sitevisitdate DESC. Also a mobile dashboard (7b91233096fc4b9ea5ef2de1a2280359) and an older public view (NJDEP_Production_HAB_Sampling_public)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

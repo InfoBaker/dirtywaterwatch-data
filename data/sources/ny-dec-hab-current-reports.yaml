@@ -1,0 +1,30 @@
+id: "ny-dec-hab-current-reports"
+name: "DEC NYHABS current HAB reports (Current_HAB_Reports_DIL / Current_HAB_Reports_7_3_19) and Archived_HAB_Reports"
+url: "https://services6.arcgis.com/DZHaqZm9cxOD4CWM/arcgis/rest/services/Current_HAB_Reports_DIL/FeatureServer/0"
+homepage: "https://on.ny.gov/nyhabs"
+kind: "arcgis"
+level: "state"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): Machine-readable HAB
+#   points; join to Lake Champlain for the VT/NY shared water.
+# Access detail (research, quoted): No service is literally named 'Current_HAB_Reports'; live ones
+#   are Current_HAB_Reports_DIL (adds STATUS_DATE) and Current_HAB_Reports_7_3_19, both 61 features
+#   on 2026-11-01, dataLastEditDate 2026-10-30. Archived_HAB_Reports has 1,443 features. Public map:
+#   https://on.ny.gov/nyhabs.
+# Can fill: event_type hab, started_at (date_time), source_updated_at (STATUS_DATE), waterbody,
+#   coordinates (report point), authority
+# Cannot fill: toxin values; ended_at (record leaves current layer)
+# Waters: statewide lakes incl. Lake Champlain NY side when reported (openboatlaunch slugs:
+#   lake-champlain-vt)
+# History: archive layer
+cadence: "season May-Oct (2026 season announced in May press release); edits a few times a week"
+license: "none stated"
+attribution: "NYS DEC HABs Program"
+enabled: true
+role: "advisories"
+event_types: ["hab"]
+states: ["NY"]
+access: ["arcgis"]
+access_detail: "No service is literally named 'Current_HAB_Reports'; live ones are Current_HAB_Reports_DIL (adds STATUS_DATE) and Current_HAB_Reports_7_3_19, both 61 features on 2026-11-01, dataLastEditDate 2026-10-30. Archived_HAB_Reports has 1,443 features. Public map: https://on.ny.gov/nyhabs."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

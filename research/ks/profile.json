@@ -1,0 +1,144 @@
+{
+ "state": "KS",
+ "name": "Kansas",
+ "region": "plains",
+ "epa_region": 7,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "none",
+  "summary": "Owners must report any emergency or accidental sewage discharge to KDHE immediately (24 hours and a 5-day written report by KDHE guidance) and get approval 7 days before a planned bypass; no public notice duty was found.",
+  "citations": [
+   {
+    "cite": "K.A.R. 28-16-27",
+    "title": "Emergency or accidental discharge of sewage or other detrimental material into waters; report to department of health",
+    "url": "https://www.law.cornell.edu/regulations/kansas/K-A-R-28-16-27",
+    "quote": "Emergency or accidental discharge of sewage or other materials detrimental to the quality of waters of the state shall be immediately reported to the state department of health by the owner of the treatment plant or his representative.",
+    "who": "owner of the treatment plant",
+    "channel": "KDHE (phone; incident form)",
+    "deadline": "immediately; 7 days' prior notice for planned bypass",
+    "threshold": "any discharge not provided for by permit",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "immediately (24 hours by KDHE guidance), written within 5 days",
+   "cite": "K.A.R. 28-16-27; KDHE bypass form"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "KS0038563",
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "Unified Government (KCK) consent decree, 2013.",
+   "No 2025-2026 Kansas bill on sewage public notice found (search only)."
+  ]
+ },
+ "erule": {
+  "system": "unknown",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "5 Kansas collection-system permit rows exist in the SOBE collection_system_permits table, but no events."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": null,
+  "receiving_water": null,
+  "start_end": null,
+  "volume": null,
+  "stable_id": null,
+  "license": null,
+  "notes": ""
+ },
+ "cso": {
+  "permits": 3,
+  "open_outfalls": 60,
+  "operators_with_web_channel": 1,
+  "operators_checked": 2,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "Topeka posts stream advisories as city news for some SSOs; KCK (48 CSOs) and Atchison: none found."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [
+   "ks-leavenworth-sso-transparency",
+   "ks-topeka-stream-advisories"
+  ],
+  "notes": "Leavenworth publishes each SSO as a web page."
+ },
+ "beaches": {
+  "program": "No state bacteria beach program found; KDHE HAB program covers public lakes",
+  "source_ids": [],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": "Not researched further."
+ },
+ "habs": {
+  "program": "KDHE Harmful Algal Bloom Response Program (Hazard, Warning, Watch, Lift), April 1 to October 31",
+  "source_ids": [
+   "ks-kdhe-hab-status"
+  ],
+  "machine_readable": true,
+  "notes": "16 lakes under advisory on 2026-10-30."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "https://www.kdhe.ks.gov/HAB"
+  ],
+  "watershed_groups": [
+   "Friends of the Kaw (not checked)"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "unknown",
+  "sso_points": "city_maps"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Missouri River (MO, NE)",
+   "Kansas River into the Missouri at Kansas City (MO)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "No public notice duty; KDHE publishes no overflow list",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "bot_wall",
+   "what": "kdhe.ks.gov and leavenworthks.gov block automated access",
+   "fix_level": "engineering",
+   "note": "ArcGIS services are open."
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "C",
+  "expected_grade": "Monthly totals only",
+  "first_feed": "ks-kdhe-hab-status",
+  "effort": "small",
+  "rationale": "No statewide or KCK overflow data; two small dated channels (Leavenworth per-event SSO pages, Topeka stream advisories) give local B-level coverage. HAB layer is the best state source.",
+  "order_hint": 3
+ },
+ "owner_questions": [
+  "Build the two small municipal scrapers (Leavenworth, Topeka) now, or wait for a statewide source?",
+  "Ask KCK (Unified Government) whether it notifies the public of CSOs to the Missouri and Kansas rivers?"
+ ],
+ "surprise": "Little Leavenworth posts every sanitary sewer overflow as its own web page and keeps yearly 'transparency reports', while Kansas City, Kansas, with 48 CSO outfalls on the Missouri and Kansas rivers, has no public notice at all that we could find."
+}

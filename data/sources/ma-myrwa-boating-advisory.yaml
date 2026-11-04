@@ -1,0 +1,29 @@
+id: "ma-myrwa-boating-advisory"
+name: "Mystic River Watershed Association 'Mystic Daily Boating Advisory' and CSO sign-up guide"
+url: "https://mysticriver.org/boatingadvisory"
+homepage: "https://mysticriver.org/boatingadvisory"
+kind: "html"
+level: "nonprofit"
+# Notes (research/ma, status candidate, verified search_only, checked 2026-11-01): Model-based daily
+#   advisory for the Mystic; machine access not checked.
+# Access detail (research, quoted): Search result: daily morning predictions from an automated
+#   bacteria model plus cyanobacteria testing; categories Good / Advisory; Twitter @SafeMystic. Page
+#   not fetched. The 2023 guide (fetched) lists permittee sign-ups: MWRA
+#   https://www.mwra.com/updates/everbridge/join.html; BWSC
+#   https://www.bwsc.org/form/sign-up-for-cso-notifications-fo ('Request CSO Notification');
+#   Cambridge https://www.cambridgema.gov/Subscribe ('Combined Sewer Overflow Alerts'); Chelsea
+#   https://lp.constantcontactpages.com/su/FrwP28o; Somerville https://www.somervillema.gov/cso.
+# Waters: Mystic River, Malden River, Alewife Brook, Mystic Lakes (openboatlaunch slugs:
+#   mystic-river-ma)
+cadence: "Daily in boating season (per search)."
+license: "none stated"
+attribution: "Mystic River Watershed Association"
+enabled: true
+role: "advisories"
+event_types: ["bacteria_model", "cyanobacteria"]
+states: ["MA"]
+access: ["html", "social"]
+access_detail: "Search result: daily morning predictions from an automated bacteria model plus cyanobacteria testing; categories Good / Advisory; Twitter @SafeMystic. Page not fetched. The 2023 guide (fetched) lists permittee sign-ups: MWRA https://www.mwra.com/updates/everbridge/join.html; BWSC https://www.bwsc.org/form/sign-up-for-cso-notifications-fo ('Request CSO Notification'); Cambridge https://www.cambridgema.gov/Subscribe ('Combined Sewer Overflow Alerts'); Chelsea https://lp.constantcontactpages.com/su/FrwP28o; Somerville https://www.somervillema.gov/cso."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,25 @@
+id: "nh-portsmouth-cso-email"
+name: "Portsmouth CSO email list (Mailchimp)"
+url: "https://www.portsmouthnh.gov/publicworks/wastewater/combined-sewer-overflows-cso"
+homepage: "https://www.portsmouthnh.gov/publicworks/wastewater/combined-sewer-overflows-cso"
+kind: "email"
+level: "municipal"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Requires
+#   subscribing
+# Access detail (research, quoted): Embedded form posting to
+#   cityofportsmouth.us2.list-manage.com/subscribe/post (u=09a251212294eb25c93966499,
+#   id=5e033c4988); device-generated emails; not subscribed
+# Can fill: started_at, location_text
+# Waters: 3 outfalls (openboatlaunch slugs: piscataqua-river-nh)
+cadence: "per event (automated)"
+license: "none stated"
+attribution: "City of Portsmouth"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NH"]
+access: ["email"]
+access_detail: "Embedded form posting to cityofportsmouth.us2.list-manage.com/subscribe/post (u=09a251212294eb25c93966499, id=5e033c4988); device-generated emails; not subscribed"
+machine_readable: false
+legal_basis: ""
+checked: "2026-11-01"

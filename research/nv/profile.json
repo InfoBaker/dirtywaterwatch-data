@@ -1,0 +1,167 @@
+{
+ "state": "NV",
+ "name": "Nevada",
+ "region": "southwest",
+ "epa_region": 9,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "none",
+  "summary": "Since 2025 (SB 276) cities, counties and wastewater districts that know of a sewage discharge to state waters must tell NDEP online or by phone, and NDEP must tell any affected tribe; no deadline and no public notice. Spill rules require phone notice 'as soon as practicable' for releases to surface water.",
+  "citations": [
+   {
+    "cite": "SB 276 (2025) sec. 3(1)(a), new section of NRS chapter 445A",
+    "title": "Notification of discharge of sewage",
+    "url": "https://www.leg.state.nv.us/Session/83rd2025/Bills/SB/SB276_EN.pdf",
+    "quote": "In the event of an incident resulting in the discharge of sewage or industrial waste or any other unauthorized discharge into the waters of the State: (a) Any city, county, unincorporated town, general improvement district, wastewater district or water authority of this State that has powers, duties or jurisdiction within the area of the incident that has been notified or is aware of the incident shall notify the Division electronically on the Internet website of the Division or by telephone.",
+    "who": "city, county, town, GID, wastewater district or water authority",
+    "channel": "NDEP (online or phone); NDEP then notifies affected tribes",
+    "deadline": "none stated",
+    "threshold": "any discharge of sewage into waters of the State",
+    "verified": "fetched"
+   },
+   {
+    "cite": "NAC 445A.3473(1)(b)",
+    "title": "Notification required as soon as practicable",
+    "url": "https://www.leg.state.nv.us/NAC/NAC-445A.html",
+    "quote": "shall notify the Director as soon as practicable after he or she notifies any emergency response agencies, if required, and initiates any action required to prevent or abate any imminent danger ... if the release: ... (b) Involves any amount of a hazardous substance that is released to surface water",
+    "who": "facility owner or operator",
+    "channel": "NDEP spill hotline by telephone (888) 331-6337 (NAC 445A.3475(2))",
+    "deadline": "as soon as practicable",
+    "threshold": "any amount of a hazardous substance to surface water",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "as soon as practicable (spill hotline); permits: 24 hours and five days (NDEP guidance WTS-24, search only)",
+   "cite": "NAC 445A.3473; NPDES permit standard conditions"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "SB 276 (2025) enacted after the unreported 2022 Sparks spill to the Truckee River (signed 2025-05-31 per a tracker).",
+   "Pyramid Lake Paiute Tribe suit over the Sparks spill (2025-2026, search only); NDEP settlement with the developer (USD 33,000) and a notice of violation to Sparks (news)."
+  ]
+ },
+ "erule": {
+  "system": "unknown",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "No Nevada collection systems registered in EPA's collection_system_permits.csv; NDEP's eRule route not found."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": null,
+  "receiving_water": null,
+  "start_end": null,
+  "volume": false,
+  "stable_id": false,
+  "license": null,
+  "notes": "NDEP spill database is internal; the portal is intake only."
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 3,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No CSOs."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [],
+  "notes": ""
+ },
+ "beaches": {
+  "program": "No state beach program found; Lake Tahoe and Lake Mead beaches not reached",
+  "source_ids": [
+   "nv-tahoe-beaches"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": ""
+ },
+ "habs": {
+  "program": "Nevada HAB Task Force (NDEP lead) with a Power BI dashboard and a weekly email list",
+  "source_ids": [
+   "nv-ndep-hab-dashboard",
+   "nv-state-parks-hab",
+   "nv-nps-lake-mead-habs"
+  ],
+  "machine_readable": false,
+  "notes": ""
+ },
+ "advisories": {
+  "health_department_pages": [],
+  "watershed_groups": [],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Lake Tahoe and the Truckee River (CA)",
+   "Lake Mead, Lake Mohave and the Colorado River (AZ)",
+   "Carson and Walker rivers (CA)",
+   "Virgin River (UT, AZ)",
+   "Pyramid Lake (Pyramid Lake Paiute Tribe)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "Sewage spill notices to NDEP are not published",
+   "fix_level": "agency",
+   "note": ""
+  },
+  {
+   "kind": "no_web",
+   "what": "SB 276 gave tribes notice but the public none",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "email_only",
+   "what": "HAB status is a Power BI dashboard plus a weekly email",
+   "fix_level": "owner",
+   "note": "Owner can subscribe to 'Nevada Harmful Algal Bloom Updates'."
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "Nevada Harmful Algal Bloom Updates (NDEP list)",
+   "url": "https://ndep.nv.gov/water/rivers-streams-lakes/water-quality-monitoring/harmful-algal-bloom-program",
+   "what": "weekly HAB data and health advisories by email"
+  }
+ ],
+ "readiness": {
+  "tier": "D",
+  "expected_grade": "No public reports",
+  "first_feed": null,
+  "effort": "small",
+  "rationale": "No CSOs, no SOBE events, no public spill list. Show plant outfalls, the rain caution, HAB status from the email list, and the plain statement.",
+  "order_hint": 5
+ },
+ "owner_questions": [
+  "Subscribe to the Nevada HAB weekly email (the only HAB channel besides Power BI)?",
+  "Records request to NDEP for SB 276 sewage notices since mid-2025, which exist but are unpublished?"
+ ],
+ "surprise": "Nevada's 2025 law after the unreported Sparks spill into the Truckee River now makes towns tell the state, and the state tell the downstream tribe, but nobody has to tell the public, and there is no deadline."
+}

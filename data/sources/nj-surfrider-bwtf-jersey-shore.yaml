@@ -1,0 +1,30 @@
+id: "nj-surfrider-bwtf-jersey-shore"
+name: "Surfrider Foundation Blue Water Task Force - Jersey Shore chapter lab (lab id 80)"
+url: "https://bwtf.surfrider.org/"
+homepage: "https://bwtf.surfrider.org/"
+kind: "api"
+level: "nonprofit"
+# Notes (research/nj, status candidate, verified fetched, checked 2026-11-02): Shoulder-season ocean
+#   data where the state program stops; volunteer data.
+# Access detail (research, quoted): Public CSV
+#   https://mmvk4falrj.execute-api.us-west-2.amazonaws.com/v1/annual?year=2026 (all labs); NJ subset
+#   saved raw/groups/bwtf-2026-nj.csv: 114 samples 2026-07-30 to 2026-10-29 (stored collectionTime),
+#   all lab 80.
+# Can fill: coordinates, started_at (sample time), published_at, raw_record
+# Cannot fill: discharger; advice
+# Waters: Monmouth County ocean beaches: South Avon-by-the-Sea, South Bradley Beach, Loch Arbor,
+#   North Belmar, Takanasee Beach, Seven Presidents Oceanfront Park, South Asbury Park, Manasquan
+#   Inlet Beach, South Spring Lake
+# Research notes: 'collection date' column reads 'Invalid Date'; use 'stored collectionTime'.
+cadence: "Roughly weekly; continues after the state season ends (to late October)."
+license: "See community agent's pa-surfrider-bwtf entry."
+attribution: "Surfrider Foundation, Jersey Shore Chapter"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["NJ"]
+access: ["csv", "api"]
+access_detail: "Public CSV https://mmvk4falrj.execute-api.us-west-2.amazonaws.com/v1/annual?year=2026 (all labs); NJ subset saved raw/groups/bwtf-2026-nj.csv: 114 samples 2026-07-30 to 2026-10-29 (stored collectionTime), all lab 80."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

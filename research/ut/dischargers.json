@@ -1,0 +1,691 @@
+[
+ {
+  "id": "ut-ut0020001",
+  "name": "Snyderville Basin Water Reclamation District",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0020001",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Park City"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0020109",
+  "name": "SPANISH FORK CITY CORP",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0020109",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Spanish Fork"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0020303",
+  "name": "TREMONTON CITY CORP",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0020303",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tremonton"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0020419",
+  "name": "MOAB- CITY OF",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0020419",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Moab"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0020427",
+  "name": "PAYSON CITY CORP",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0020427",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Payson"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0020834",
+  "name": "SPRINGVILLE- CITY OF",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0020834",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Springville"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0020915",
+  "name": "OREM CITY CORP",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0020915",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Orem"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0020974",
+  "name": "CENTRAL DAVIS CO SEWER",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0020974",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kaysville"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0021130",
+  "name": "GRANTSVILLE CITY",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0021130",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Grantsville"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0021440",
+  "name": "MAGNA WATER & SEWER DIST",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0021440",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Magna"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0021628",
+  "name": "SOUTH DAVIS SEWER DISTRICT-SOUTH PLANT",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0021628",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "North Salt Lake"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0021636",
+  "name": "SOUTH DAVIS SEWER DISTRICT-NORTH PLANT",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0021636",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "West Bountiful"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0021717",
+  "name": "PROVO CITY",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0021717",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Provo"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0021725",
+  "name": "SLC WATER RECLAMATION FACILITY",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0021725",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Salt Lake City"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0021741",
+  "name": "NORTH DAVIS SEWER DIST",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0021741",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Syracuse"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0021814",
+  "name": "PRICE R WATER IMP DIST",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0021814",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Price"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0021911",
+  "name": "CENTRAL WEBER SEWER IMPROVEMENT",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0021911",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ogden"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0021920",
+  "name": "LOGAN CITY CORPORATION",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0021920",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Logan"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0022365",
+  "name": "BRIGHAM CITY CORP",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0022365",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Brigham City"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0023205",
+  "name": "HYRUM CITY CORPORATION",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0023205",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hyrum"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0023639",
+  "name": "TIMPANOGOS SANITARY SEWER DISTRICT",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0023639",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "American Fork"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0024384",
+  "name": "South Valley Water Reclamation Facility",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0024384",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "West Jordan"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0024392",
+  "name": "CENTRAL VALLEY WATER RECLAMATION FACILITY",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0024392",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "South Salt Lake"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0024414",
+  "name": "SNYDERVILLE BSID-SILVER CREEK",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0024414",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Park City"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0024686",
+  "name": "ST GEORGE CITY CORPORATION",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0024686",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Saint George"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0024732",
+  "name": "MOUNTAIN GREEN SEWER IMPROVEME",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0024732",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mountain Green"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0024970",
+  "name": "CEDAR CITY CORPORATION",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0024970",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cedar City"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0025348",
+  "name": "ASHLEY VALLEY WATER REC. FACIL",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0025348",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Vernal"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0025721",
+  "name": "The City of Perry",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0025721",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Willard"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0025747",
+  "name": "Jordanelle Special Service District Water Reclamation Facility",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0025747",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Heber City"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0025852",
+  "name": "Jordan Basin Improvement District",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0025852",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Riverton"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0026000",
+  "name": "Santaquin Water Reclamation Facility",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0026000",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Santaquin"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0026085",
+  "name": "Salem City Water Reclamation Facility",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0026085",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Salem"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0026301",
+  "name": "Ash Creek Special Service District",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0026301",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features (data/outfalls-plants-us.json)",
+  "notification_channel": "not searched; Class 1 SSOs reach DEQ by phone, and a few appear in the DEQ Environmental Incidents layer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "La Verkin"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0023639",
+  "name": "Timpanogos Special Service District",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0023639",
+  "receiving_waters": [
+   "Utah Lake",
+   "American Fork"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "EPA SOBE (1 event) and DEQ Environmental Incidents (2026-08-17 bypass-line break, 1,000 gallons to a stream draining to Utah Lake)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "American Fork"
+  ],
+  "notes": "Only Utah permit with a SOBE event.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ut-ut0021725",
+  "name": "Salt Lake City Water Reclamation Facility",
+  "state": "UT",
+  "kind": "sso",
+  "npdes_permit": "UT0021725",
+  "receiving_waters": [
+   "Jordan River / Great Salt Lake wetlands (not verified)"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Salt Lake City"
+  ],
+  "notes": "Registered collection system (population 200,478) in EPA collection_system_permits.csv; no SOBE events.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ }
+]

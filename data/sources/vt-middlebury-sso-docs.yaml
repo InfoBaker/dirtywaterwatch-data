@@ -1,0 +1,26 @@
+id: "vt-middlebury-sso-docs"
+name: "Middlebury SSO annual reports and 1272 Order"
+url: "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1210/3-1210.SSO.1272Order.20241112.pdf"
+homepage: "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1210/3-1210.SSO.1272Order.20241112.pdf"
+kind: "pdf"
+level: "municipal"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): no reason recorded
+# Access detail (research, quoted): 2024 report 3-1210.2024SSOAnnualReport.20250131.pdf
+# Can fill: history
+# Cannot fill: coordinates
+# Waters: Otter Creek (openboatlaunch slugs: otter-creek-vt)
+# History: 2018+
+# Research notes: TextMyGov: https://www.middleburyvt.gov/services/textmygov.php (generic town
+#   alerts; watch)
+cadence: "annual"
+license: "none stated"
+attribution: "Town of Middlebury"
+enabled: true
+role: "outfalls"
+event_types: ["sso"]
+states: ["VT"]
+access: ["pdf"]
+access_detail: "2024 report 3-1210.2024SSOAnnualReport.20250131.pdf"
+machine_readable: false
+legal_basis: "EPA consent order 2016; 1272 Order 2024"
+checked: "2026-11-01"

@@ -1,0 +1,31 @@
+id: "md-mde-sewer-overflows-2005-2023"
+name: "MDE Reported Sewer Overflows (2005 to January 2023, frozen), Maryland Open Data Portal"
+url: "https://opendata.maryland.gov/Energy-and-Environment/Reported-Sewer-Overflows/3rgd-zjxx/data"
+homepage: "https://opendata.maryland.gov/Energy-and-Environment/Reported-Sewer-Overflows/3rgd-zjxx"
+kind: "api"
+level: "state"
+# Notes (research/md, status used, verified fetched, checked 2026-11-02): Archive and per-operator
+#   history (counts per outfall, typical volumes); one-time load.
+# Access detail (research, quoted): SODA: https://opendata.maryland.gov/resource/3rgd-zjxx.json ;
+#   fetched metadata and 2 sample rows; 27,479 rows, date_discovered 2005-01-01 to 2023-02-10.
+#   rowsUpdatedAt 2023-02-23.
+# Can fill: event_type, started_at, ended_at (derived), waterbody, location_text, coordinates
+#   (some), volume, authority
+# Cannot fill: source_record_id; reported_at; advice_text; valid_until
+# Waters: statewide
+# History: 2005-01-01 to 2023-01-31 (a few rows to 2023-02-10)
+# Research notes: Field names differ from the 2023 table (municipality_facility vs owner_name,
+#   quantity_in_gallons_estimated vs discharge_volume); has a 'watershed' and 'net' volume the new
+#   table lacks. 'Penalty information started during 2013.'
+cadence: "Frozen. Description: 'NOTE: This dataset is no longer updated.'"
+license: "Socrata metadata: 'Public Domain'; attribution Maryland Department of the Environment."
+attribution: "Maryland Department of the Environment"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass"]
+states: ["MD"]
+access: ["api", "csv", "json"]
+access_detail: "SODA: https://opendata.maryland.gov/resource/3rgd-zjxx.json ; fetched metadata and 2 sample rows; 27,479 rows, date_discovered 2005-01-01 to 2023-02-10. rowsUpdatedAt 2023-02-23."
+machine_readable: true
+legal_basis: "COMAR 26.08.10"
+checked: "2026-11-02"

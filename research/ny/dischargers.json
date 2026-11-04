@@ -1,0 +1,1517 @@
+[
+ {
+  "id": "ny-albany-water-board",
+  "name": "City of Albany",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0025747",
+  "receiving_waters": [
+   "Hudson River",
+   "Krum Kill"
+  ],
+  "water_slugs": [],
+  "outfall_count": 13,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; Albany Pool site points to NY-Alert only (https://www.albanypoolcso.org/)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Albany County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 14 9 13; avg annual events 58 58 40; avg annual volume MG 739 685 685; measurement Modeled CSO. Open Data rows: 11. Albany Pool. 2025 report: 13 current outfalls (12 Hudson River, 1 Krum Kill), avg 40 events/yr, 685 MG/yr modeled. Beaver Creek Satellite Treatment Facility (100 MGD screening/disinfection) in full operation 2025. Albany says it is deploying SmartCover real-time CSO monitoring (search result, not verified).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-cohoes",
+  "name": "City of Cohoes",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0031046",
+  "receiving_waters": [
+   "Hudson River",
+   "Mohawk River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 14,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; Albany Pool site points to NY-Alert only (https://www.albanypoolcso.org/)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Albany County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 17 14 14; avg annual events 15 26 14; avg annual volume MG 20 13 9.43; measurement Modeled CSO. Open Data rows: 17. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-green-island",
+  "name": "Village of Green Island",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0033031",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; Albany Pool site points to NY-Alert only (https://www.albanypoolcso.org/)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Albany County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 3 3 3; avg annual events 41 35 2; avg annual volume MG 4.60 4.20 0; measurement Modeled CSO. Open Data rows: 3. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-rensselaer-city",
+  "name": "City of Rensselaer",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0026026",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; Albany Pool site points to NY-Alert only (https://www.albanypoolcso.org/)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rensselaer County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 8 7 6; avg annual events 52 45 36; avg annual volume MG 20 2.06 6.8; measurement Modeled CSO. Open Data rows: 8. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-troy",
+  "name": "City of Troy",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0099309",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 46,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; Albany Pool site points to NY-Alert only (https://www.albanypoolcso.org/)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rensselaer County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 48 46 46; avg annual events 65 65 49; avg annual volume MG 447 207 168; measurement Modeled CSO. Open Data rows: 48. Troy: 46 outfalls to Hudson River; 2025: 49 events, 168 MG modeled. Regulators also reported by Rensselaer County SD#1 (NY0087971) for blockages.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-watervliet",
+  "name": "City of Watervliet",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0030899",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; Albany Pool site points to NY-Alert only (https://www.albanypoolcso.org/)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Albany County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 5 0 3; avg annual events 44 10 15; avg annual volume MG 4.80 2.20 1.4; measurement Modeled CSO. Open Data rows: 5. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-amsterdam",
+  "name": "City of Amsterdam",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0020290",
+  "receiving_waters": [
+   "Mohawk River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Montgomery County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 3 3 3; avg annual events 18 5 4; avg annual volume MG NA 9.6 2.98; measurement Monitoring. Open Data rows: 3. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-auburn",
+  "name": "City of Auburn",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0021903",
+  "receiving_waters": [
+   "Owasco Lake Outlet",
+   "Hunter Brook"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cayuga County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 35 6 6; avg annual events 16 13 15; avg annual volume MG 424 109 114.7; measurement Metered CSO. Open Data rows: 9. Auburn: 6 outfalls (Owasco Outlet 5, Hunter Brook 1); 2025: 15 events, 114.7 MG metered. Files separate UPDATE notices per outfall/ORF.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-binghamton",
+  "name": "City of Binghamton",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0024414",
+  "receiving_waters": [
+   "Chenango River",
+   "Susquehanna River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": null,
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 26 8 9; avg annual events 17 12 19; avg annual volume MG 588 475.66 173.3; measurement Flow meters. Open Data rows: 0. 9 outfalls (Susquehanna 8, Chenango 1); 2025: 19 events, 173.3 MG (flow meters). Treated at Binghamton-Johnson City STP (regional). DEC Table 5 lists Johnson City under the same permit NY0024414 though Open Data lists NY0023981.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-boonville",
+  "name": "Village of Boonville",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0020494",
+  "receiving_waters": [
+   "Mill Creek and tributaries"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oneida County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = N/A N/A 1; avg annual events N/A N/A 1; avg annual volume MG N/A N/A 2.52; measurement Metered Receiving. Open Data rows: 1. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-buffalo-sewer-authority",
+  "name": "Buffalo Sewer Authority (BSA) Bird Island WWTP",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0028410",
+  "receiving_waters": [
+   "Black Rock Canal",
+   "Buffalo Harbor",
+   "Buffalo River",
+   "Cazevonia Creek",
+   "Cornelius Creek",
+   "Erie Basin",
+   "Niagara River",
+   "Scajaquada Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 52,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; per-outfall risk map https://buffalosewer.org/#CSO_Map; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Erie County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 65 52 52; avg annual events 85 9 24; avg annual volume MG 1,886 486 1,025; measurement Modeled CSO. Open Data rows: 52. 52 outfalls; 2025 report: 24 avg events, 1,025 MG modeled. Publishes a per-outfall model/forecast risk layer (see ny-buffalo-sewer-cso-status). New LTCP under DEC review (2025 report). Great Lakes PNP permittee.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-canastota",
+  "name": "Village of Canastota",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0029807",
+  "receiving_waters": [
+   "Canastota Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Madison County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 2 1 1; avg annual events 3 2 3; avg annual volume MG 12.50 3.85 1.6; measurement Metered CSO. Open Data rows: 1. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-catskill",
+  "name": "Village of Catskill",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0020389",
+  "receiving_waters": [
+   "Catskill Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Greene County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 25 0 4; avg annual events 25 0 6; avg annual volume MG - 0 1.0; measurement Estimated CSO. Open Data rows: 7. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-chemung-county-elmira-sd",
+  "name": "Chemung County (Chemung County - Elmira S.D .)",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0035742",
+  "receiving_waters": [
+   "Chemung River",
+   "Newtown Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chemung County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 10 7 7; avg annual events 80 - 12; avg annual volume MG - - 16.55; measurement Modeled. Open Data rows: 12. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-dunkirk",
+  "name": "City of Dunkirk",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0027961",
+  "receiving_waters": [
+   "Lake Erie"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chautauqua County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 1 1 1; avg annual events 5 4 1; avg annual volume MG 27 10.44 5; measurement Metered CSO. Open Data rows: 1. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-glens-falls",
+  "name": "City of Glens Falls",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0029050",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Warren County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 1 1 1; avg annual events 29 6 23; avg annual volume MG 11.4 >6.0 3.34; measurement Metered CSO. Open Data rows: 1. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-gouverneur",
+  "name": "Village of Gouverneur",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0020117",
+  "receiving_waters": [
+   "Oswegatchie River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "St. Lawrence County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 1 1 1; avg annual events 8 4 1; avg annual volume MG 1.0 0.25 0.5; measurement Metered CSO. Open Data rows: 1. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-hudson-city",
+  "name": "City of Hudson",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0022039",
+  "receiving_waters": [
+   "Hudson River",
+   "Underhill Pond"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Columbia County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 8 5 3; avg annual events 50 40 44; avg annual volume MG 50 40 40.9; measurement Metered at. Open Data rows: 9. Hudson (C): 3 current outfalls (Hudson River 4/Underhill Pond 1 per receiving-water table); 2025: 44 events, 40.9 MG metered. Files plant-bypass/high-flow alerts (e.g. 2025-10-13, 0.822 MG partially treated with disinfection).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-johnson-city",
+  "name": "Village of Johnson City",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0023981",
+  "receiving_waters": [
+   "Susquehanna River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Broome County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 2 2 2; avg annual events 11 N/A 8; avg annual volume MG 164.9 95.5 6.3; measurement Metered CSO. Open Data rows: 2. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-kingston",
+  "name": "City of Kingston",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0029351",
+  "receiving_waters": [
+   "Rondout Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ulster County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 4 4 4; avg annual events 85 85 39; avg annual volume MG 29.07 144.9 87.2; measurement Modeled and. Open Data rows: 4. Kingston: 4 outfalls to Rondout Creek; 2025: 39 events, 87.2 MG modeled/metered. Riverkeeper reported a Kingston web notification system (not verified live).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-little-falls",
+  "name": "City of Little Falls",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0022403",
+  "receiving_waters": [
+   "Mohawk River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Herkimer County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 3 3 3; avg annual events 69 29 15; avg annual volume MG 24.8 0.46 0.2; measurement Metered CSO. Open Data rows: 3. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-lockport",
+  "name": "City of Lockport",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0027057",
+  "receiving_waters": [
+   "Eighteen Mile Creek Tributary",
+   "NYS Barge Canal"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Niagara County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 30 12 10; avg annual events - 38 35; avg annual volume MG - 17.02 18; measurement Metered CSO. Open Data rows: 13. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-massena",
+  "name": "Village of Massena",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0031194",
+  "receiving_waters": [
+   "Grasse River",
+   "Raquette River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "St. Lawrence County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 8 8 8; avg annual events 251 11 9; avg annual volume MG 0.05 1.5 3; measurement Estimated. Open Data rows: 10. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-medina",
+  "name": "Village of Medina",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0021873",
+  "receiving_waters": [
+   "Barge Canal",
+   "Oak Orchard Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Orleans County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = None; avg annual events - - 0; avg annual volume MG - - 0; measurement Estimated CSO. Open Data rows: 9. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-monroe-county-van-lare",
+  "name": "Monroe County - Frank E. Van Lare STP",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0028339",
+  "receiving_waters": [
+   "Genesee River",
+   "Irondequoit Bay",
+   "Irondequoit Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Monroe County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = None; avg annual events - 3 1; avg annual volume MG - 69 19; measurement Metered CSO. Open Data rows: 6. Rochester area: 6 outfalls (Genesee River 4, Irondequoit Bay 1, Irondequoit Creek 1); 2025: 1 event, 19 MG metered. CSO Abatement Program tunnels.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-newburgh",
+  "name": "City of Newburgh",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0026310",
+  "receiving_waters": [
+   "Hudson River",
+   "Quassaic Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 13,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Orange County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 13 13 13; avg annual events 47 - 60; avg annual volume MG 185 - 167; measurement Flow meter. Open Data rows: 12. Newburgh: 13 outfalls (Hudson 12, Quassaic Creek 1); 2025: 60 events, 167 MG (flow meter).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-niagara-falls-water-board",
+  "name": "Niagara Falls Water Board",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0026336",
+  "receiving_waters": [
+   "Niagara River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Niagara County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 8 6 6; avg annual events 69 - 44; avg annual volume MG 253 - 450; measurement Metered Outfalls. Open Data rows: 9. Niagara Falls Water Board: 6 outfalls to Niagara River (Gorge); 2025: 44 events, 450 MG metered. Also files SSO/lift-station reports (Cayuga Creek) under NY0026336. April 2026 Gorge discharge reported 43,717,017 gal 'Ongoing'.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-north-tonawanda",
+  "name": "City of North Tonawanda",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0026280",
+  "receiving_waters": [
+   "Niagara River, Upper, Main Stem"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Niagara County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = N/A N/A 1; avg annual events N/A N/A 0; avg annual volume MG N/A N/A 0; measurement Metered. Open Data rows: 6. North Tonawanda: 1 outfall; no CSO event in 30+ years per DEC; exempt from Great Lakes PNP.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-ogdensburg",
+  "name": "City of Ogdensburg",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0029831",
+  "receiving_waters": [
+   "Oswegatchie River",
+   "Saint Lawrence River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 17,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "St. Lawrence County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 19 18 17; avg annual events 73 49 104; avg annual volume MG - 75.13 123.2; measurement Metered. Open Data rows: 17. Ogdensburg: 17 outfalls (Oswegatchie 9, St. Lawrence 8); 2025: 104 events, 123.2 MG metered. Great Lakes PNP permittee.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-onondaga-county-metro-syracuse",
+  "name": "Onondaga County - Syracuse Metropolitan WWTP",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0027081",
+  "receiving_waters": [
+   "Harbor Brook",
+   "Ley Creek",
+   "Onondaga Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 45,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Onondaga County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 72 45 45; avg annual events - - 45; avg annual volume MG - - 152; measurement Modeled CSO. Open Data rows: 66. 45 outfalls (Onondaga Creek 28, Harbor Brook 15, Ley Creek 2); 2025: 45 events, 152 MG modeled. Files multiple NY-Alerts per wet-weather event, one per creek, plus SSO/basement-backup reports for county trunk sewers (e.g. 24 Industrial Dr to Onondaga Lake). New LTCP under DEC review.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-oswego-east",
+  "name": "City of Oswego - East Side",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0029114",
+  "receiving_waters": [
+   "Lake Ontario"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oswego County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 6 1 1; avg annual events 17 4 6; avg annual volume MG 3.6 4.8 5.2; measurement Metered CSO. Open Data rows: 6. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-oswego-west",
+  "name": "City of Oswego - West Side",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0029106",
+  "receiving_waters": [
+   "Oswego River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oswego County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 2 2 2; avg annual events 32 4 7; avg annual volume MG 44.60 5. 0 16.5; measurement Metered CSO. Open Data rows: 1. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-plattsburgh",
+  "name": "City of Plattsburgh",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0026018",
+  "receiving_waters": [
+   "Lake Champlain",
+   "Saranac River"
+  ],
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "outfall_count": 11,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clinton County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 26 11 11; avg annual events 16 5 17; avg annual volume MG 5.49 4.20 0.8; measurement Modeled. Open Data rows: 11. Plattsburgh: 11 outfalls (Saranac River 9, Lake Champlain 2); 2025: 17 events, 0.8 MG modeled. Only NY CSO permittee discharging directly to Lake Champlain (shared with VT). Saranac River enters Lake Champlain at Plattsburgh.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-poughkeepsie",
+  "name": "City of Poughkeepsie",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0026255",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dutchess County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 6 6 4; avg annual events 181 134 50; avg annual volume MG 114.54 61 56.6; measurement Metered CSO. Open Data rows: 6. Poughkeepsie: 4 outfalls to Hudson River; 2025: 50 events, 56.6 MG metered.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-target-hill-west-point",
+  "name": "Target Hill WWTP",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0023761",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Orange County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = None; avg annual events 2 - 0; avg annual volume MG 0.66 - 0; measurement Estimated CSO. Open Data rows: 1. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-ticonderoga",
+  "name": "Town of Ticonderoga",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0036706",
+  "receiving_waters": [
+   "La Chute River"
+  ],
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Essex County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 2 1 1; avg annual events 38 18 0; avg annual volume MG 71 63 0; measurement Information not. Open Data rows: 1. Ticonderoga SD#5: 1 outfall to La Chute River (flows to Lake Champlain); 2025: 0 events. Revised LTCP approved 2026.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-washington-county-sd2",
+  "name": "Washington County",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0183695",
+  "receiving_waters": [
+   "Bond Creek",
+   "Hudson River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Washington County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 11 10 10; avg annual events 150 77 31; avg annual volume MG 8.29 9.9 7.9; measurement Metered CSO. Open Data rows: 11. Washington County SD#2 (Hudson Falls/Fort Edward): 10 outfalls (Hudson River 9, Bond Creek 1); 2025: 31 events, 7.9 MG metered. Files two NY-Alerts per overflow (an immediate 'estimated rate' notice, then an 'Actual' volume notice); see events.json 2026-05-14/15.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-waterford",
+  "name": "Town of Waterford",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0029173",
+  "receiving_waters": [
+   "Mohawk River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Saratoga County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 2 2 2; avg annual events 30 4 1; avg annual volume MG 10 <0.1 0.01; measurement Estimated CSO. Open Data rows: 2. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-watertown",
+  "name": "City of Watertown",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0025984",
+  "receiving_waters": [
+   "Black River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view; EPA Great Lakes CSO public notification plan (40 CFR 122.38) applies",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Jefferson County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 9 9 9; avg annual events - 24 19; avg annual volume MG - 75 72.2; measurement Metered at. Open Data rows: 16. Watertown: 9 outfalls to Black River; 2025: 19 events, 72.2 MG.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-westchester-yonkers",
+  "name": "Westchester County - Yonkers",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0026689",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 13,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westchester County"
+  ],
+  "notes": "2025 DEC report: outfalls before/after LTCP/current = 13 13 13; avg annual events - 11 10; avg annual volume MG - - 125.8; measurement Metered at. Open Data rows: 19. Westchester County Yonkers Joint WWTP: 13 outfalls to Hudson River (class SB); 2025: 10 events, 125.8 MG metered. City of Yonkers collection system feeds it.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-utica",
+  "name": "City of Utica",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0031429",
+  "receiving_waters": [
+   "Ballou Creek",
+   "Nail Creek",
+   "Mohawk River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 35,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (2015 outfall points); DECinfo Locator CSO layer https://gisservices.dec.ny.gov/gis/dil/index.html?cat=CSO",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oneida County"
+  ],
+  "notes": "Utica: 35 outfalls (Ballou/Nail Creek 29, Mohawk River 6); 2025: 16 events, 47.1 MG metered/estimated; 3 meters at outfalls 076, 127, 142 (CSO 076 = 85% of flow). Flows treated at Oneida County WPCP (regional, HRD CSO-related bypass). PCCM report found inconclusive in 2025. Open Data rows: 47.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-nyc-dep",
+  "name": "New York City Department of Environmental Protection (12 WRRF CSO permits)",
+  "state": "NY",
+  "kind": "cso",
+  "npdes_permit": "NY0026131; NY0026247; NY0026191; NY0026204; NY0027073; NY0026166; NY0026158; NY0026239; NY0026115; NY0026182; NY0026212; NY0026107",
+  "receiving_waters": [
+   "East River",
+   "Hudson River",
+   "Harlem River",
+   "Bronx River",
+   "Westchester Creek",
+   "Hutchinson River",
+   "Eastchester Bay",
+   "Long Island Sound",
+   "Flushing Bay",
+   "Flushing Creek",
+   "Alley Creek",
+   "Little Neck Bay",
+   "Newtown Creek",
+   "Gowanus Canal",
+   "Upper New York Bay",
+   "Kill Van Kull",
+   "Newark Bay",
+   "Jamaica Bay tributaries (Bergen, Thurston, Fresh Creek, Hendrix, Spring Creek, Paerdegat)",
+   "Coney Island Creek",
+   "Gravesend Bay"
+  ],
+  "water_slugs": [
+   "long-island-sound-ct"
+  ],
+  "outfall_count": 397,
+  "outfalls_source": "https://data.ny.gov/d/ephi-ffu6 (NYC rows, 2015); NYC CSO outfall map PDF https://www.nyc.gov/assets/dep/downloads/pdf/water/stormwater/cso-outfalls-map.pdf; DEC 2025 report: 397 permitted outfalls at 12 WRRFs",
+  "notification_channel": "Generic citywide NY-Alert per rain event (notifier 'NYCDEP City Wide CSO', id NYCDEPCSO: 'Wet weather-related combined sewer overflows may have occurred'); Waterbody Advisory System for 45 waterbodies (https://nycwaterbodyadvisory.azurewebsites.net/, JSON /api/advisory); Notify NYC waterbody alerts (https://a858-nycnotify.nyc.gov/notifynyc/)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Bronx",
+   "Brooklyn (Kings)",
+   "Manhattan (New York)",
+   "Queens",
+   "Staten Island (Richmond)"
+  ],
+  "notes": "2025 DEC report: 397 current outfalls; largest modeled single-outfall count 36 events; avg annual CSO volume 12,370 MG (ICN cites DEC: 20.25 billion gal in 2024). DEP's nyc.gov CSO page cites '700 combined sewer outfalls' (includes non-CSO). Rockaway (2021/2022) and Oakwood Beach are not CSS. Appellate Division (June 2026) held DEP's notices fell short of SPRTK; city seeking Court of Appeals review. Hunts Point WRRF outfalls discharge to Western Long Island Sound/Eastchester Bay/Hutchinson River (shared water with CT). Per-permit Open Data rows: NY0026107 NYCDEP - Port Richmond WPCF (37); NY0026115 NYCDEP - Jamaica WPCP (6); NY0026131 NYCDEP - Wards Island WPCP (75); NY0026158 NYCDEP - Bowery Bay WPCP (43); NY0026165 NYCDEP - Owls Head WPCP (1); NY0026166 NYCDEP - Owls Head WPCP (16); NY0026174 NYCDEP - Oakwood Beach WPCP (2); NY0026182 NYCDEP - Coney Island WPCP (5); NY0026191 NYCDEP - Hunt's Point WPCP (35); NY0026204 NYCDEP - Newtown Creek WPCP (82); NY0026212 NYCDEP - 26th Ward (5); NY0026221 NYCDEP - Rockaway WWTP (11); NY0026239 NYCDEP - Tallmans Island WPCP (22); NY0026247 NYCDEP - North River WPCF (53); NY0027073 NYCDEP - Red Hook WPCP (34)",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-long-beach-wpcp",
+  "name": "City of Long Beach WPCP",
+  "state": "NY",
+  "kind": "bypass",
+  "npdes_permit": "NY0020567",
+  "receiving_waters": [
+   "Reynolds Channel"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nassau County"
+  ],
+  "notes": "7 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 4, 'Update': 3}); top waters [['Reynolds Channel', 5], ['none', 2]]. April 2026 plant overflow, 10,000-20,000 gal partially treated with disinfection.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-warwick-sd1",
+  "name": "Town of Warwick SD #1 WWTP",
+  "state": "NY",
+  "kind": "bypass",
+  "npdes_permit": "NY0021890",
+  "receiving_waters": [
+   "Tributary of Longhouse Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Orange County"
+  ],
+  "notes": "130 NY-Alert notices 2025-11-01..2026-08-31 ({'Update': 130}); top waters [['Tributary of Longhouse creek', 130]]. Ongoing partially treated discharge since 2025-05-30 (events.json).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-erie-county-sd6-lackawanna-orf",
+  "name": "Erie County Sewer District #6 (Lackawanna ORF)",
+  "state": "NY",
+  "kind": "orf",
+  "npdes_permit": "NY0022136",
+  "receiving_waters": [
+   "Smoke Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Erie County"
+  ],
+  "notes": "19 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 8, 'Update': 6, 'Close': 5}); top waters [['Smoke Creek', 19]]. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-dannemora-v",
+  "name": "Village of Dannemora WWTP",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0022195",
+  "receiving_waters": [
+   "Behan Brook (Saranac River tributary)"
+  ],
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clinton County"
+  ],
+  "notes": "2 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 1, 'Close': 1}); top waters [['Minor Trib to middle Saranac River (Behan brook)', 2]]. Saranac basin, to Lake Champlain.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-washingtonville-wwtp",
+  "name": "Village of Washingtonville WWTP",
+  "state": "NY",
+  "kind": "bypass",
+  "npdes_permit": "NY0023671",
+  "receiving_waters": [
+   "Moodna Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Orange County"
+  ],
+  "notes": "50 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 4, 'Update': 46}); top waters [['moodna', 48], ['moodna creek', 2]]. Months-long partially treated bypass in 2026: chain of 50 notices Jan 22 - Sep 1, daily volumes 401,000-640,000 gal Actual, start field edited from Jan 26 to Feb 17 inside the chain.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-hoosick-falls-wwtp",
+  "name": "Village of Hoosick Falls WWTP",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0024821",
+  "receiving_waters": [
+   "Hoosic River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rensselaer County"
+  ],
+  "notes": "80 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 2, 'Update': 78}); top waters [['hoosick river', 80]]. Hoosic River downstream of MA (North Adams, Williamstown) and VT (Pownal); NY discharges do not flow back into New England waters, but the river record is shared (hoosic-river-ma covers the MA reach).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-whitehall",
+  "name": "Village of Whitehall WWTP",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0024929",
+  "receiving_waters": [
+   "Champlain Canal",
+   "Mud Creek"
+  ],
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Washington County"
+  ],
+  "notes": "3 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 3}); top waters [['Mud Creek', 1], ['Lake Champlain Canal', 1], ['Champlain Canal', 1]]. Champlain Canal reaches the south end of Lake Champlain at Whitehall.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-ausable-keeseville",
+  "name": "Town of AuSable - Keeseville Wastewater Plant",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0025097",
+  "receiving_waters": [
+   "Ausable River"
+  ],
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clinton County"
+  ],
+  "notes": "1 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 1}); top waters [['Ausable River', 1]]. Ausable River enters Lake Champlain.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-nassau-bay-park",
+  "name": "Nassau County Bay Park STP (South Shore Water Reclamation Facility) collection system",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0026450",
+  "receiving_waters": [
+   "Baldwin Bay",
+   "Island Park Harbor",
+   "Parsonage Cove",
+   "Bannister Bay"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nassau County"
+  ],
+  "notes": "15 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 9, 'Update': 6}); top waters [['NA', 3], ['Island Park Harbor', 2], ['Bannister Bay', 2]]. South Shore bays (not Long Island Sound).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-glen-cove-wwtf",
+  "name": "City of Glen Cove WWTF",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0026620",
+  "receiving_waters": [
+   "Glen Cove Creek",
+   "Dosoris Pond"
+  ],
+  "water_slugs": [
+   "long-island-sound-ct"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nassau County"
+  ],
+  "notes": "6 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 4, 'Update': 2}); top waters [['No', 2], ['NA', 2], ['Unknown', 1]]. North Shore Long Island Sound.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-new-rochelle-sd",
+  "name": "Westchester County New Rochelle Sanitary Sewer District (New Rochelle WRRF)",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0026697",
+  "receiving_waters": [
+   "Larchmont Harbor (Long Island Sound)"
+  ],
+  "water_slugs": [
+   "long-island-sound-ct"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westchester County"
+  ],
+  "notes": "7 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 3, 'Update': 4}); top waters [['Larchmont Harbor', 7]]. 7 notices to Larchmont Harbor.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-mamaroneck-sd",
+  "name": "Westchester County Mamaroneck Sanitary Sewer District (Mamaroneck WRRF)",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0026701",
+  "receiving_waters": [
+   "Long Island Sound",
+   "Mamaroneck River"
+  ],
+  "water_slugs": [
+   "long-island-sound-ct"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westchester County"
+  ],
+  "notes": "14 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 7, 'Update': 7}); top waters [['Long Island Sound', 12], ['LONG ISLAND SOUND', 2]]. 14 notices to Long Island Sound in the window (pipe failures).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-great-neck-wpcd",
+  "name": "Great Neck Water Pollution Control District",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0026999",
+  "receiving_waters": [
+   "Manhasset Bay",
+   "Little Neck Bay"
+  ],
+  "water_slugs": [
+   "long-island-sound-ct"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nassau County"
+  ],
+  "notes": "2 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 2}); top waters [['Manhasset bay', 1], ['little neck bay', 1]]. Western Long Island Sound embayments.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-grand-island-sd2",
+  "name": "Town of Grand Island SD #2 WWTP",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0027693",
+  "receiving_waters": [
+   "Niagara River",
+   "Spicer Creek",
+   "Woods Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Erie County"
+  ],
+  "notes": "115 NY-Alert notices 2025-11-01..2026-08-31 ({'Update': 57, 'New': 58}); top waters [['Niagara River', 33], ['Spicer Creek', 22], ['niagara river', 10]]. Pump station overflows.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-onondaga-meadowbrook-limestone",
+  "name": "Onondaga County Meadowbrook-Limestone WWTP service area",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0027723",
+  "receiving_waters": [
+   "none (basement backups)"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Onondaga County"
+  ],
+  "notes": "6 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 3, 'Close': 3}); top waters [['NONE', 4], ['None', 2]]. Basement backups reported under SPRTK.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-rensselaer-county-sd1",
+  "name": "Rensselaer County Sewer District #1 WWTP (Albany Pool regional plant)",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0087971",
+  "receiving_waters": [
+   "Hudson River",
+   "Wynantskill Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rensselaer County"
+  ],
+  "notes": "13 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 11, 'Update': 2}); top waters [['Hudson River', 9], ['Wynantskill Creek', 3], ['Hudson  river', 1]]. Regional plant for Troy and Rensselaer; reports regulator blockages (e.g. Regulator 013A, Troy).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-erie-county-sd1-cayuga-orf",
+  "name": "Erie County Sewer District #1 (Cayuga ORF)",
+  "state": "NY",
+  "kind": "orf",
+  "npdes_permit": "NY0091731",
+  "receiving_waters": [
+   "Cayuga Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Erie County"
+  ],
+  "notes": "10 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 3, 'Update': 4, 'Close': 3}); top waters [['Cayuga Creek', 10]]. Overflow retention facility; partially treated with disinfection.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-skaneateles-wwtp",
+  "name": "Village of Skaneateles WWTP",
+  "state": "NY",
+  "kind": "orf",
+  "npdes_permit": "NY0094480",
+  "receiving_waters": [
+   "Skaneateles Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Onondaga County"
+  ],
+  "notes": "7 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 4, 'Update': 1, 'Close': 2}); top waters [['Skaneateles Creek', 6], ['None', 1]]. Overflow retention facility.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-erie-county-sd4-depew-orf",
+  "name": "Erie County Sewer District #4 (Depew ORF)",
+  "state": "NY",
+  "kind": "orf",
+  "npdes_permit": "NY0110698",
+  "receiving_waters": [
+   "Cayuga Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Erie County"
+  ],
+  "notes": "9 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 3, 'Update': 3, 'Close': 3}); top waters [['Cayuga Creek', 9]]. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-essex-sd1",
+  "name": "Town of Essex SD #1 WWTP",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NY0256471",
+  "receiving_waters": [
+   "Lake Champlain"
+  ],
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Essex County"
+  ],
+  "notes": "2 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 1, 'Close': 1}); top waters [['Lake Champlain', 2]]. 2 notices direct to Lake Champlain.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-manorhaven-poss",
+  "name": "Village of Manorhaven POSS",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NYS100001 (POSS registration id)",
+  "receiving_waters": [
+   "Sheets Creek",
+   "Manhasset Bay"
+  ],
+  "water_slugs": [
+   "long-island-sound-ct"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nassau County"
+  ],
+  "notes": "4 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 2, 'Close': 2}); top waters [['Sheets Creek', 2], ['Manhasset Bay - Sheets Creek', 2]]. Jan 1 2026 force-main/manhole discharge, volume Unknown.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-harrison-mamaroneck-poss",
+  "name": "Town of Harrison POSS (Mamaroneck district)",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NYS300011 (POSS registration id)",
+  "receiving_waters": [
+   "Mamaroneck River"
+  ],
+  "water_slugs": [
+   "long-island-sound-ct"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westchester County"
+  ],
+  "notes": "1 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 1}); top waters [['Mamaroneck River', 1]]. Tributary to Long Island Sound.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-peekskill-poss",
+  "name": "City of Peekskill POSS",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NYS300017 (POSS registration id)",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westchester County"
+  ],
+  "notes": "2 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 1, 'Close': 1}); top waters [['Hudson River', 2]]. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-white-plains-mamaroneck-poss",
+  "name": "City of White Plains POSS (Mamaroneck district)",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NYS300028 (POSS registration id)",
+  "receiving_waters": [
+   "catch basin to Mamaroneck River basin (inferred)"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westchester County"
+  ],
+  "notes": "1 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 1}); top waters [['CATCH BASIN', 1]]. ",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-cheektowaga-poss",
+  "name": "Town of Cheektowaga sanitary sewers",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NYS900020 (POSS registration id)",
+  "receiving_waters": [
+   "Scajaquada Creek",
+   "Buffalo River",
+   "Ellicott Creek",
+   "Cayuga Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Erie County"
+  ],
+  "notes": "431 NY-Alert notices 2025-11-01..2026-08-31 ({'New': 242, 'Close': 170, 'Update': 19}); top waters [['Scajaquada Creek', 331], ['Buffalo River', 55], ['Ellicott Creek', 34]]. 431 notices in the window.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ny-kenmore-poss",
+  "name": "Village of Kenmore POSS",
+  "state": "NY",
+  "kind": "sso",
+  "npdes_permit": "NYS900021 (POSS registration id)",
+  "receiving_waters": [
+   "Two Mile Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Notice-level geocodes in DEC SPRTK workbook (lat/lon columns swapped)",
+  "notification_channel": "NY-Alert 'Sewage Discharge Notifications' (email/text/phone/fax, per-county subscription at https://alert.ny.gov/sign-up-ny-alert); copies appear briefly in the DEC SPRTK page 'Recent NY-Alert Notifications' view",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Erie County"
+  ],
+  "notes": "1169 NY-Alert notices 2025-11-01..2026-08-31 ({'Close': 567, 'New': 592, 'Update': 10}); top waters [['2 Mile Creek', 1169]]. Most prolific notifier statewide (1,169 notices in the window), one chain per manhole per storm; DEC consent order.",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ }
+]

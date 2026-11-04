@@ -1,0 +1,190 @@
+{
+  "state": "TX",
+  "name": "Texas",
+  "region": "gulf",
+  "epa_region": 6,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "partial",
+    "summary": "Every unauthorized discharge or SSO goes to the TCEQ regional office within 24 hours (written report in 5 working days). A local-government facility must also notify local government officials and local media within 24 hours, but only for spills likely to affect drinking water, 50,000 gallons or more near a water supply or in a recharge zone, or 100,000 gallons or more; nothing requires a web posting.",
+    "citations": [
+      {
+        "cite": "30 TAC 319.302(b)-(d)",
+        "title": "Notification Requirements",
+        "url": "https://www.law.cornell.edu/regulations/texas/30-Tex-Admin-Code-SS-319-302",
+        "quote": "The owner of a facility must designate a responsible individual to comply with this subchapter. ... (3) a spill of 100,000 gallons or more.",
+        "who": "owner of a facility (local government) through its responsible individual",
+        "channel": "local government officials and local media; hand delivery, fax, email, or phone with written follow-up",
+        "deadline": "as soon as possible, no later than 24 hours after becoming aware; copy to the TCEQ regional office within 48 hours of the notice",
+        "threshold": "any spill likely to affect a drinking-water source; 50,000 gallons or more near a source or in a sensitive area; 100,000 gallons or more",
+        "verified": "fetched"
+      },
+      {
+        "cite": "30 TAC 319.303(c)",
+        "title": "Notice to Local Officials and Local Media: precautionary statements",
+        "url": "https://www.law.cornell.edu/regulations/texas/30-Tex-Admin-Code-SS-319-303",
+        "quote": "(precautionary statements include that the public should) avoid contact with spill material, soil, or water in the affected area",
+        "who": "owner",
+        "channel": "the notice",
+        "deadline": "with the notice",
+        "threshold": "319.302(b)(2)-(3) spills",
+        "verified": "fetched"
+      },
+      {
+        "cite": "TCEQ UD/SSO reporting page (30 TAC 305.125(9))",
+        "title": "Reporting Unauthorized Discharges and SSOs",
+        "url": "https://www.tceq.texas.gov/compliance/investigation/ud-sso",
+        "quote": "as soon as possible but no later than 24 hours ... within five working days",
+        "who": "permittee",
+        "channel": "TCEQ regional office (phone, in person, fax); after hours 800-832-8224",
+        "deadline": "24 hours; 5 working days written; monthly summary for qualifying small spills by the 20th of the next month",
+        "threshold": "any UD or SSO regardless of volume",
+        "verified": "fetched"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "24 hours to the regional office; written within 5 working days; or monthly summary for qualifying small spills",
+      "cite": "30 TAC 305.125(9); 30 TAC 319.301-319.303"
+    },
+    "cso_permit_notice_clause": {
+      "permit": null,
+      "quote": "No CSO permits in Texas.",
+      "deadline": null,
+      "verified": "fetched"
+    },
+    "bills_and_cases": [
+      "No 2025 (89th Legislature) bill on public notice of sewage spills found; SB 565 (2025) amends Water Code 7.0026 (text not read).",
+      "2015 HB 2051 / SB 912 and 2013 HB 824 (thresholds and monthly reporting for small spills).",
+      "Consent decrees: Houston (2021, 4:18-cv-03368), San Antonio (2013), others not checked."
+    ]
+  },
+  "erule": {
+    "system": "state",
+    "sobe_events_2026_11_03": 8,
+    "public_output_url": "https://data.texas.gov/resource/8kc5-95uk.json",
+    "notes": "TCEQ takes reports through its regional offices and STEERS; only 8 Texas events from 5 permits in SOBE."
+  },
+  "statewide_feed": {
+    "exists": true,
+    "source_ids": [
+      "tx-tceq-sso-opendata"
+    ],
+    "precision": "daily",
+    "machine_readable": true,
+    "format": "socrata",
+    "latency": "one to four months (refreshed in batches; on 2026-11-03 it held reports received to 2026-08-31, refreshed 2026-09-24)",
+    "history": "2010-09 to date (56,545 rows; about 4,000 to 6,000 a year since 2016)",
+    "coordinates": "none",
+    "receiving_water": "free text when given (about 59 percent of rows) plus TCEQ river segment code",
+    "start_end": "start and end dates (no times)",
+    "volume": true,
+    "stable_id": true,
+    "license": "No licence stated (licenseId null); data.texas.gov terms apply.",
+    "notes": "Metadata says 'Update Frequency: Semiannually'; geocoding needed from addresses in incident_description or the regulated entity location."
+  },
+  "cso": {
+    "permits": 0,
+    "open_outfalls": 0,
+    "operators_with_web_channel": 0,
+    "operators_checked": 0,
+    "state_outfall_layer": "https://gisweb.tceq.texas.gov/arcgis/rest/services/Public/WW_oufalls/MapServer",
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "No CSOs in Texas."
+  },
+  "sso": {
+    "location_source": "none with coordinates; county, address text and regulated entity",
+    "feeds": [
+      "tx-tceq-sso-opendata",
+      "tx-houston-sso-monthly"
+    ],
+    "notes": "Houston's plants dominate (about 1,500 rows since 2025)."
+  },
+  "beaches": {
+    "program": "Texas Beach Watch (Texas General Land Office; local governments post advisories)",
+    "source_ids": [
+      "tx-glo-beach-watch",
+      "tx-gchd-beach-advisories"
+    ],
+    "machine_readable": true,
+    "scope": "coastal",
+    "notes": "174 stations on a public ArcGIS layer with advisory level, last result and date."
+  },
+  "habs": {
+    "program": "none for freshwater found; TPWD red tide tracking on the coast",
+    "source_ids": [
+      "tx-hab"
+    ],
+    "machine_readable": false,
+    "notes": ""
+  },
+  "advisories": {
+    "health_department_pages": [
+      "Galveston County Health District beach water advisories"
+    ],
+    "watershed_groups": [
+      "Galveston Bay Foundation",
+      "Bayou City Waterkeeper",
+      "Texas Stream Team",
+      "San Antonio River Authority"
+    ],
+    "swim_guide": false
+  },
+  "outfalls": {
+    "state_layer": "https://gisweb.tceq.texas.gov/arcgis/rest/services/Public/WW_oufalls/MapServer",
+    "cso_inventory_gap": "none (no CSOs)",
+    "sso_points": "none"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Rio Grande (NM, Mexico)",
+      "Sabine River and Toledo Bend (LA)",
+      "Red River and Lake Texoma (OK, AR)",
+      "Gulf of Mexico"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "no_web",
+      "what": "The public notice under 30 TAC 319.302 goes to local officials and media only, and only above 100,000 gallons (or 50,000 near water supplies); no web posting.",
+      "fix_level": "legislative",
+      "note": ""
+    },
+    {
+      "kind": "records_request",
+      "what": "The TCEQ open dataset lags one to four months and is refreshed in batches; current reports are only in regional files.",
+      "fix_level": "agency",
+      "note": "Ask TCEQ for a monthly or weekly refresh."
+    },
+    {
+      "kind": "print_only",
+      "what": "Houston's monthly SSO reports and maps are PDFs.",
+      "fix_level": "operator",
+      "note": ""
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "Texas Beach Watch email alerts",
+      "url": "https://www.texasbeachwatch.com/",
+      "what": "advisory alerts per beach (alertSignup.cfm)"
+    }
+  ],
+  "readiness": {
+    "tier": "A",
+    "expected_grade": "Dated reports, delayed",
+    "first_feed": "tx-tceq-sso-opendata",
+    "effort": "medium",
+    "rationale": "A statewide Socrata table of every reported SSO since 2010 with dates, volume, cause, permit and often the water body, but no coordinates and a lag of months; geocoding is the extra work. Texas Beach Watch is a clean ArcGIS advisory feed.",
+    "order_hint": 1
+  },
+  "owner_questions": [
+    "Accept a one-to-four-month lag for Texas (label 'Dated reports, delayed')?",
+    "Geocode SSOs from address text (most rows have a street address in the description) or place them at the plant / county only?",
+    "Many rows say 'NO WATER BODY PROVIDED': show them as land spills or only those naming water?"
+  ],
+  "surprise": "Texas, with no web-posting duty at all, publishes 56,545 sewer overflow reports since 2010 as an open Socrata dataset (created July 2025), the largest SSO table in this group."
+}

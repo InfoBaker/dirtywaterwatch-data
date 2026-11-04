@@ -1,0 +1,22 @@
+id: "ct-aspetuck-hd"
+name: "Aspetuck Health District (formerly Westport Weston HD) beach results (Compo, Burying Hill)"
+url: "https://www.aspetuckhd.org/"
+homepage: "https://www.aspetuckhd.org/"
+kind: "html"
+level: "municipal"
+# Notes (research/ct, status candidate, verified search_only, checked 2026-11-01): Weekly Monday
+#   sampling, DPH lab; closures >104 enterococci; results posted on district site (not fetched).
+# Access detail (research, quoted): none recorded
+# Research notes: aspetuckhd.org answered HTTP 200; beach result page not located.
+cadence: null
+license: "none stated"
+attribution: "Aspetuck Health District"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["CT"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

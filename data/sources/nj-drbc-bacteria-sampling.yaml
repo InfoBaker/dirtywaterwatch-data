@@ -1,0 +1,26 @@
+id: "nj-drbc-bacteria-sampling"
+name: "Delaware River Basin Commission bacteria sampling results (e.g. 'June 22, 2026, Bacterial Sampling Data')"
+url: "https://www.nj.gov/drbc/library/documents/bacti062226.pdf"
+homepage: "https://www.nj.gov/drbc/library/documents/bacti062226.pdf"
+kind: "pdf"
+level: "other"
+# Notes (research/nj, status candidate, verified fetched, checked 2026-11-02): Only routine bacteria
+#   data for the Camden-Trenton Delaware River reach where NJ CSOs discharge; PDF only. Coordinate
+#   with the PA agent.
+# Access detail (research, quoted): Fetched one PDF (raw/groups/drbc-bacti062226.pdf): table of
+#   Enterococcus and fecal coliform with zone standards (33/88/35 Entero; 200/770 FC). File-name
+#   pattern bactiMMDDYY.pdf.
+# Waters: Delaware River tidal reach: Trenton (RM 131) to Delaware Bay, 20+ sites incl. Florence,
+#   Burlington, Betsy Ross Br., Ben Franklin Br. (openboatlaunch slugs: delaware-river-nj)
+cadence: "Periodic boat runs in season (several 2024-2026 files seen)."
+license: "none stated"
+attribution: "Delaware River Basin Commission"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["NJ"]
+access: ["pdf"]
+access_detail: "Fetched one PDF (raw/groups/drbc-bacti062226.pdf): table of Enterococcus and fecal coliform with zone standards (33/88/35 Entero; 200/770 FC). File-name pattern bactiMMDDYY.pdf."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

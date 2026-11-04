@@ -1,0 +1,30 @@
+id: "me-dep-vrmp-geomeans"
+name: "Maine DEP Volunteer River Monitoring Program (VRMP) bacteria geomeans layer"
+url: "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services/VRMP_GEOMEANS_2020_2023/FeatureServer/0"
+homepage: "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services/VRMP_GEOMEANS_2020_2023/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/me, status candidate, verified fetched, checked 2026-11-01): Only statewide river
+#   bacteria dataset, includes Kennebec and Androscoggin reaches below CSO cities; seasonal
+#   summaries, not advisories.
+# Access detail (research, quoted): 541 rows; despite the name includes 2025 (data last edited
+#   2026-08-17). Related: VRMP_Sites_Current (site list, BACTERIA_CRITERION field), 'VRMP Data 2024'
+#   (sample-level, fields BACTERIA_NUM, BACTERIA_MODIFIER).
+# Waters: sites of Friends of Merrymeeting Bay, Presumpscot Regional Land Trust, Mousam and
+#   Kennebunk Rivers Alliance, Friends of Scarborough Marsh, Midcoast Conservancy, Rockport
+#   Conservation Commission, Skowhegan Conservation Commission, Weskeag River Monitoring Project,
+#   Northeast Creek (openboatlaunch slugs: kennebec-river-me, androscoggin-river-me,
+#   presumpscot-river-me, mousam-river-me, kennebunk-river-me, scarborough-river-me,
+#   weskeag-river-me, merrymeeting-bay-me)
+cadence: "Annual summaries; sample-level layer for 2024 only."
+license: "none stated"
+attribution: "Maine DEP VRMP with volunteer groups"
+enabled: true
+role: "monitoring"
+event_types: ["river_monitoring"]
+states: ["ME"]
+access: ["arcgis"]
+access_detail: "541 rows; despite the name includes 2025 (data last edited 2026-08-17). Related: VRMP_Sites_Current (site list, BACTERIA_CRITERION field), 'VRMP Data 2024' (sample-level, fields BACTERIA_NUM, BACTERIA_MODIFIER)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,23 @@
+id: "ma-massdep-portal-permittee-outfalls"
+name: "Portal permittee detail (WWTP outfall coordinates)"
+url: "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Permitee/GetPermiteeDetails?permiteeName=CITY%20OF%20HOLYOKE"
+homepage: "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Permitee/GetPermiteeDetails?permiteeName=CITY%20OF%20HOLYOKE"
+kind: "api"
+level: "state"
+# Notes (research/ma, status candidate, verified fetched, checked 2026-11-01): Fills the point for
+#   partially-treated/blended WWTP discharges not in the CSO layer.
+# Access detail (research, quoted): Returns permittee number, municipality and one outfall ('001 -
+#   ', CONNECTICUT RIVER, 42.18977475, -72.61155352 for Holyoke; 42.08598546, -72.58571807 for
+#   Springfield). CSO outfalls are not listed here.
+cadence: null
+license: "EEA Data Portal disclaimer (eeaonline.eea.state.ma.us/portal#!/disclaimer, text read from the portal's custom.js): \"The data contained in this public data portal has been retrieved through the agency's pre-existing data systems and/or existing hard copy documentation that have been converted into a data format. Although reasonable efforts have been made to make this data useful to the public, the data presented through this portal has not been fully verified for accuracy and/or completeness, and the agency assumes no obligation to either maintain or update any of the data contained on this website.\" and \"This portal does not include all of the agency's regulatory data, and therefore should not be relied upon to determine overall compliance.\" No licence or reuse restriction stated."
+attribution: "MassDEP"
+enabled: true
+role: "outfalls"
+event_types: ["partially_treated"]
+states: ["MA"]
+access: ["api"]
+access_detail: "Returns permittee number, municipality and one outfall ('001 - ', CONNECTICUT RIVER, 42.18977475, -72.61155352 for Holyoke; 42.08598546, -72.58571807 for Springfield). CSO outfalls are not listed here."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

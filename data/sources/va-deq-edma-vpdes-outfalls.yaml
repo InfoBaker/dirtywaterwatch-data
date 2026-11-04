@@ -1,0 +1,30 @@
+id: "va-deq-edma-vpdes-outfalls"
+name: "DEQ EDMA layer 119 'VPDES Outfalls (Daily)' (Virginia GIS / data.virginia.gov)"
+url: "https://gisdata.deq.virginia.gov/arcgis/rest/services/public/EDMA/MapServer/119"
+homepage: "https://gisdata.deq.virginia.gov/arcgis/rest/services/public/EDMA/MapServer/119"
+kind: "arcgis"
+level: "state"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): State outfall points
+#   for every VPDES permit; CSO outfalls must be picked by number from the ECHO inventory or the
+#   permit.
+# Access detail (research, quoted): 10,842 points. Fields OUTFALL_ID, OUTFALLNO, VAP_PMT_NO,
+#   VAP_TYPE, FAC_NAME, VAP_MAJOR_MINOR, Lat, Lon. Richmond VA0063177: 33 outfalls incl. CSO numbers
+#   004-040; Lynchburg VA0024970: 24; AlexRenew VA0025160: 11 incl. 019-022. Also listed on
+#   data.virginia.gov as virginia-pollutant-discharge-elimination-system-vpdes-permit-outfalls.
+# Can fill: coordinates (outfall, by permit+outfall number)
+# Cannot fill: CSO flag (no outfall type field); receiving water name
+# Waters: statewide VPDES outfalls
+# Research notes: Many outfalls share the plant coordinates (e.g. Lynchburg 001/400), so precision
+#   varies.
+cadence: "Daily"
+license: "DEQ Terms of Use"
+attribution: "Virginia Department of Environmental Quality"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["VA"]
+access: ["arcgis"]
+access_detail: "10,842 points. Fields OUTFALL_ID, OUTFALLNO, VAP_PMT_NO, VAP_TYPE, FAC_NAME, VAP_MAJOR_MINOR, Lat, Lon. Richmond VA0063177: 33 outfalls incl. CSO numbers 004-040; Lynchburg VA0024970: 24; AlexRenew VA0025160: 11 incl. 019-022. Also listed on data.virginia.gov as virginia-pollutant-discharge-elimination-system-vpdes-permit-outfalls."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

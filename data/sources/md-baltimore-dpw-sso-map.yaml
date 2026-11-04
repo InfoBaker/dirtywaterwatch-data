@@ -1,0 +1,44 @@
+id: "md-baltimore-dpw-sso-map"
+name: "Baltimore City DPW Sewer Overflow Map (SSO_Points2 map service)"
+url: "https://experience.arcgis.com/experience/f064b1b0addd4017ac179f1652e182e0"
+homepage: "https://experience.arcgis.com/experience/f064b1b0addd4017ac179f1652e182e0"
+kind: "arcgis"
+level: "municipal"
+# Notes (research/md, status used, verified fetched, checked 2026-11-02): Faster and richer than the
+#   MDE table for Baltimore City (start and end time, status, flow, structured-SSO flag,
+#   coordinates). Use it for live City events and reconcile to MDE.
+# Access detail (research, quoted): Layer query (no auth):
+#   https://dpwdata.baltimorecity.gov/pubgis/rest/services/Public/SSO_Points2/MapServer/0/query?where=1%3D1&outFields=*&orderByFields=START_DATETIME%20DESC&f=json
+#   . 97 features on 2026-11-02 (oldest 2024-06-23, most within ~4 months). Layer 1
+#   Permanent_Pollution_Signs; layer 3 RainData. Linked from
+#   https://www.baltimorecity.gov/publicworks/interactive-maps ('information on all sanitary sewer
+#   overflow reports in Baltimore City for the most recent four months'). Experience item title
+#   'Sanitary Sewer Overflow (SSO) Public Notices', owner OAMSR.STAFF.
+# Can fill: source_record_id (OBJECTID), started_at, ended_at, source_status (PROG / 24HR / 5DAY /
+#   FORM), waterbody (coded REC_WATERS, WATERSHED), coordinates, volume, estimate_flag (EST_),
+#   authority (RESPONSIBILITY: DPW/Private/County), geometry (point)
+# Cannot fill: reported_at; published_at; advice_text; valid_until; cause; history beyond ~4 months
+# Waters: Baltimore City streams and harbor (openboatlaunch slugs: northwest-harbor-md,
+#   middle-branch-patapsco-river-md, patapsco-river-md, back-river-md)
+# History: Rolling window of about four months.
+# Research notes: Dates are epoch values that decode to local wall-clock time when read as UTC
+#   (2026-10-11 11:15 start matches MDE's 11:15). REC_WATERS domain: ARGO Argonne Run, ARMI
+#   Armistead Creek, BIDD Biddison Run, CHIN Chinquapin Run, COLG Colgate Creek, CRTB Curtis Bay,
+#   CRTC Curtis Creek, DEAD Dead Run, GUNP Gunpowder Falls, GWYN Gwynns Falls, HERR Herring Run,
+#   HARB Inner Harbor, JF Jones Falls, LRR Loch Raven Reservoir, MAID Maidens Choice Creek, MID
+#   Middle Branch, MOOR Moores Run, MTPL Mt Pleasant Run, NWHB Northwest Harbor, PAT Patapsco River,
+#   SHCV Stonehouse Cove, SR Stony Run, TIFF Tiffany Run, WEST Western Run. 64 of 97 rows have no
+#   REC_WATERS. Volumes can differ from MDE (500 W University Pkwy 2026-10-27: DPW 17,520 vs MDE
+#   11,000; 3915 Stokes Dr: DPW 448 vs MDE 2).
+cadence: "Near real time: a record started 2026-11-02 12:20 was present (STATUS 'PROG', no volume yet) the same day. Volumes are filled in when the 5-day report is filed."
+license: "Interactive maps page links 'View Terms and Conditions' (not read). No licence on the service (copyrightText empty)."
+attribution: "Baltimore City Department of Public Works"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["MD"]
+access: ["arcgis"]
+access_detail: "Layer query (no auth): https://dpwdata.baltimorecity.gov/pubgis/rest/services/Public/SSO_Points2/MapServer/0/query?where=1%3D1&outFields=*&orderByFields=START_DATETIME%20DESC&f=json . 97 features on 2026-11-02 (oldest 2024-06-23, most within ~4 months). Layer 1 Permanent_Pollution_Signs; layer 3 RainData. Linked from https://www.baltimorecity.gov/publicworks/interactive-maps ('information on all sanitary sewer overflow reports in Baltimore City for the most recent four months'). Experience item title 'Sanitary Sewer Overflow (SSO) Public Notices', owner OAMSR.STAFF."
+machine_readable: true
+legal_basis: "COMAR 26.08.10; Modified Consent Decree (Civil Action JFM-02-1524)"
+checked: "2026-11-02"

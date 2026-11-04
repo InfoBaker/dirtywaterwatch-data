@@ -1,0 +1,31 @@
+id: "me-dmr-shellfish-closure-notices"
+name: "Maine DMR Shellfish Closures: legal notices (Conditional Area, Area 500 Emergency, Pollution Abatement, growing-area PDFs)"
+url: "https://www.maine.gov/dmr/fisheries/shellfish/closures"
+homepage: "https://www.maine.gov/dmr/fisheries/shellfish/closures"
+kind: "html"
+level: "state"
+# Notes (research/me, status candidate, verified fetched, checked 2026-11-01): Indirect CSO signal:
+#   WWTP/CSO conditional areas and rainfall closures; PDF parsing needed; no history.
+# Access detail (research, quoted): Index page lists PDFs replaced in place (e.g. CA.pdf, 500.pdf,
+#   AC.pdf, WA.pdf ...?v=070226). CA.pdf dated October 23, 2026 and 500.pdf dated September 29, 2026
+#   fetched. Hotline 1-800-232-4733 / 207-624-7727.
+# Can fill: started_at (effective time), valid_until (reopen time), advice_text, authority,
+#   location_text (growing area)
+# Cannot fill: discharger (rarely named); volume; coordinates (use layer 7 polygons)
+# Waters: coastal growing areas statewide
+# Research notes: CA notice: 'Whenever a Conditional Area is impacted by rainfall AND a WWTP CSO or
+#   bypass event, the area remains closed until the WWTP closure is lifted.' Page: conditional areas
+#   'open and close depending on various conditions that affect pollution levels, such as wastewater
+#   treatment plants, sewage treatment plants, marinas, rainfall, or seasons.'
+cadence: "Notices issued as conditions change; PDFs overwritten (no archive found)."
+license: "DMR page disclaimer: 'Neither the State of Maine, nor any agency, officer, or employee of the State of Maine warrants the accuracy, reliability, or timeliness of any information published on this website'."
+attribution: "Maine Department of Marine Resources, Bureau of Public Health"
+enabled: true
+role: "advisories"
+event_types: ["shellfish_closure"]
+states: ["ME"]
+access: ["html", "pdf", "phone"]
+access_detail: "Index page lists PDFs replaced in place (e.g. CA.pdf, 500.pdf, AC.pdf, WA.pdf ...?v=070226). CA.pdf dated October 23, 2026 and 500.pdf dated September 29, 2026 fetched. Hotline 1-800-232-4733 / 207-624-7727."
+machine_readable: false
+legal_basis: "12 M.R.S. s.6172; DMR Chapter 95 (bacterial) notices"
+checked: "2026-11-01"

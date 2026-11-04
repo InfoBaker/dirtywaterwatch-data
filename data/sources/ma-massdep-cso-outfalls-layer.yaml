@@ -1,0 +1,33 @@
+id: "ma-massdep-cso-outfalls-layer"
+name: "MassDEP CSOs feature layer (MassDEP_CSOs_2)"
+url: "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0"
+homepage: "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/ma, status used, verified fetched, checked 2026-11-01): DEP_OUTFL_ equals the
+#   portal's outfallId (SPR010, HOL018, CHI03, NEW003): the join that gives every portal record a
+#   point.
+# Access detail (research, quoted): query?where=1%3D1&outFields=*&f=json&outSR=4326 returned all 193
+#   points (raw/portal/massdep-csos-all.json). Item 0262b339c2c74213bdaaa15adccc0e96.
+# Can fill: coordinates (outfall point, precision: 'estimates'), geometry(outfall point), waterbody
+# Cannot fill: all event times and volumes
+# Waters: all 193 permitted CSO outfalls in MA (19 permittees) (openboatlaunch slugs:
+#   connecticut-river-ma, chicopee-river-ma, merrimack-river-ma, concord-river-ma, charles-river-ma,
+#   mystic-river-ma, dorchester-bay-ma, massachusetts-bay-ma, lynn-harbor-ma, saugus-river-ma,
+#   gloucester-harbor-ma, taunton-river-ma, acushnet-river-ma, new-bedford-harbor-ma,
+#   clarks-cove-ma, nashua-river-ma, blackstone-river-ma, westfield-river-ma)
+# History: Described as the 2021 CSO layer, maintained since.
+# Research notes: Somerville's one outfall appears twice (MA0101982 and MA0103284). A few portal
+#   outfall ids are WWTP outfalls (e.g. Lowell '035', Chicopee '010') not in this layer.
+cadence: "Occasional; data last edited 2025-06-23."
+license: "Item licenseInfo: 'Locations are estimates and should only be used as a guide.' ... 'The Commonwealth of Massachusetts Executive Office of Energy and Environmental Affairs (EEA) and MassDEP make no representations or warranties, express or implied, with respect to the reuse of the data or cartographic digital files provided herewith' ... 'Permission is granted to copy and use the materials herein.' (from the web app item 08c0019270254f0095a0806b155abcde)"
+attribution: "MassDEP GIS Program"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["MA"]
+access: ["arcgis"]
+access_detail: "query?where=1%3D1&outFields=*&f=json&outSR=4326 returned all 193 points (raw/portal/massdep-csos-all.json). Item 0262b339c2c74213bdaaa15adccc0e96."
+machine_readable: true
+legal_basis: "NPDES permits; 314 CMR 16.05(1)(a) requires permittee outfall maps"
+checked: "2026-11-01"

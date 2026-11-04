@@ -1,0 +1,31 @@
+id: "va-deq-topic-douglas-ave"
+name: "DEQ topic page 'Douglas Avenue Sewer Main Failure' (Portsmouth, 2026-08-04)"
+url: "https://www.deq.virginia.gov/news-info/shortcuts/topics-of-interest/douglas-avenue-sewer-main-failure"
+homepage: "https://www.deq.virginia.gov/news-info/shortcuts/topics-of-interest/douglas-avenue-sewer-main-failure"
+kind: "html"
+level: "state"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): DEQ's practical
+#   channel for the § 62.1-44.19:6 B dissemination on big spills; watch the Topics of Interest index
+#   for new incident pages.
+# Access detail (research, quoted): Read in the browser pane (DEQ blocks curl). Dated timeline Aug 5
+#   - Aug 21, 2026; advisory text; volume 3,150,000 gallons.
+# Can fill: started_at ('Aug. 4, 2026 at approximately 6 p.m.'), ended_at (flow stopped about 5 a.m.
+#   Aug 5), volume, advice_text, valid_until (advisory lifted Aug 17), revision_history (dated
+#   timeline)
+# Cannot fill: coordinates; machine-readable anything
+# Waters: Hull Creek, Western Branch Elizabeth River (openboatlaunch slugs: elizabeth-river-va,
+#   western-branch-elizabeth-river-va)
+# Research notes: Companion pages: Potomac Interceptor Collapse; South First Avenue Sewer Main
+#   Failure (Hopewell, unlisted on the index on 2026-11-02 but live).
+cadence: "Ad hoc for large incidents only; updated daily during the incident"
+license: "none stated"
+attribution: "Virginia Department of Environmental Quality"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["VA"]
+access: ["html"]
+access_detail: "Read in the browser pane (DEQ blocks curl). Dated timeline Aug 5 - Aug 21, 2026; advisory text; volume 3,150,000 gallons."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

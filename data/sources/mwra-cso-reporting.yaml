@@ -1,0 +1,23 @@
+id: "mwra-cso-reporting"
+name: "MWRA CSO discharge reporting page"
+url: "https://www.mwra.com/cso/cso_reporting.html"
+homepage: "https://www.mwra.com/cso/cso_reporting.html"
+kind: "html"
+level: "utility"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): 'during rainstorms
+#   and for 48 hours afterwards' (rain-based).
+# Access detail (research, quoted): Raw copy: research/science/raw/dl-adv/mwra-cso_reporting.html
+#   (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead).
+# Can fill: advice_text
+cadence: null
+license: "none stated"
+attribution: "Massachusetts Water Resources Authority"
+enabled: true
+role: "advisories"
+event_types: ["cso"]
+states: ["MA"]
+access: ["html"]
+access_detail: "Raw copy: research/science/raw/dl-adv/mwra-cso_reporting.html (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

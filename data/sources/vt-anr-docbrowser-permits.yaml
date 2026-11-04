@@ -1,0 +1,29 @@
+id: "vt-anr-docbrowser-permits"
+name: "ANR DocBrowser wastewater permit folders"
+url: "https://anrweb.vt.gov/ANR/vtANR/DocBrowser.aspx?Directory=DEC/WSMD/Wastewater/permits/3-1285/"
+homepage: "https://anrweb.vt.gov/ANR/vtANR/DocBrowser.aspx?Directory=DEC/WSMD/Wastewater/permits/3-1285/"
+kind: "html"
+level: "state"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): Outfall IDs,
+#   coordinates (Newport, Hartford, St. Albans), annual totals
+# Access detail (research, quoted): Files at
+#   https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/{permit}/{file}: permits, fact sheets,
+#   1272 orders, LTCPs, annual CSO reports through 2025. Directory listing of the PubDocs path
+#   itself is 403.
+# Can fill: history, coverage_note
+# Cannot fill: real-time events
+# Waters: per permit
+# History: 2013+
+# Research notes: See privacy note in section 4 about Montpelier's 2024 report
+cadence: "annual reports Jan-Aug"
+license: "none stated"
+attribution: "VT DEC"
+enabled: true
+role: "outfalls"
+event_types: ["cso", "sso"]
+states: ["VT"]
+access: ["html", "pdf"]
+access_detail: "Files at https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/{permit}/{file}: permits, fact sheets, 1272 orders, LTCPs, annual CSO reports through 2025. Directory listing of the PubDocs path itself is 403."
+machine_readable: false
+legal_basis: "CSO Rule 34-403/404; 1272 Orders"
+checked: "2026-11-01"

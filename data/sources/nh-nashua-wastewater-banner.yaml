@@ -1,0 +1,28 @@
+id: "nh-nashua-wastewater-banner"
+name: "Nashua Wastewater Department page CSO banner"
+url: "https://www.nashuanh.gov/392/Wastewater-Department"
+homepage: "https://www.nashuanh.gov/392/Wastewater-Department"
+kind: "html"
+level: "municipal"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Not observed live
+# Access detail (research, quoted): CivicPlus page; no banner was present on 2026-11-01; Alert
+#   Center had no CSO category
+# Can fill: event_type, location_text, valid_until
+# Cannot fill: volume; coordinates; started_at
+# Waters: Merrimack and Nashua rivers in Nashua (openboatlaunch slugs: merrimack-river-nh,
+#   nashua-river-nh)
+# History: none (ephemeral)
+# Research notes: Advice from the CSO page: 'Public Health recommends that individuals do not go
+#   near these locations for 48 hours after a discharge.'
+cadence: "live while active, up to 48 hours after the end"
+license: "none stated"
+attribution: "City of Nashua"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NH"]
+access: ["html"]
+access_detail: "CivicPlus page; no banner was present on 2026-11-01; Alert Center had no CSO category"
+machine_readable: false
+legal_basis: "NH0100170 Part I.H.3.g (effective 2026-02-01)"
+checked: "2026-11-01"

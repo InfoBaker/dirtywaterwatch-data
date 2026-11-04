@@ -1,0 +1,135 @@
+{
+ "state": "VI",
+ "name": "U.S. Virgin Islands",
+ "region": "territories",
+ "epa_region": 2,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-04",
+ "law": {
+  "public_notice_duty": "unknown",
+  "summary": "The territory runs its own NPDES program (TPDES, authorized 1976). No public-notice duty for overflows was found; VIWMA issues notices by press release in practice. The TPDES rules (12 VIRR ch. 184) were not read.",
+  "citations": [
+   {
+    "cite": "12 V.I.C. ch. 7; 12 VIRR ch. 184",
+    "title": "Water Pollution Control; TPDES",
+    "url": "https://dpnr.vi.gov/wp-content/uploads/2022/10/12_VIRR_Ch.184-2007.pdf",
+    "quote": null,
+    "who": "permittee",
+    "channel": "unknown",
+    "deadline": "unknown",
+    "threshold": "unknown",
+    "verified": "search_only"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "assumed 24 hours oral, 5 days written (federal standard condition)",
+   "cite": "TPDES standard conditions (inferred)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": []
+ },
+ "erule": {
+  "system": "epa",
+  "sobe_events_2026_11_03": 14,
+  "public_output_url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "notes": "VIWMA files through NeT-SewerOverflow for 3 of its 8 collection systems; nothing after 2026-06."
+ },
+ "statewide_feed": {
+  "exists": true,
+  "source_ids": [
+   "vi-epa-sobe"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "median 5 days",
+  "history": "2024-11 to 2026-06",
+  "coordinates": "all",
+  "receiving_water": "3 of 14 rows",
+  "start_end": "start and end",
+  "volume": true,
+  "stable_id": true,
+  "license": "US federal data",
+  "notes": "Thin and incomplete."
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 1,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No combined sewers."
+ },
+ "sso": {
+  "location_source": "vi-epa-sobe",
+  "feeds": [
+   "vi-epa-sobe"
+  ],
+  "notes": "News carries more events than SOBE."
+ },
+ "beaches": {
+  "program": "DPNR Beach Water Quality Monitoring Program",
+  "source_ids": [
+   "vi-dpnr-beach-advisories"
+  ],
+  "machine_readable": false,
+  "scope": "coastal",
+  "notes": "Weekly text PDFs, found through the WordPress media API; lists failing and not-sampled beaches."
+ },
+ "habs": {
+  "program": "none found",
+  "source_ids": [],
+  "machine_readable": false,
+  "notes": "Sargassum is mentioned in advisory text."
+ },
+ "advisories": {
+  "health_department_pages": [],
+  "watershed_groups": [],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "eRule"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": []
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "VIWMA notices reach the public mainly through news outlets and social posts",
+   "fix_level": "operator",
+   "note": ""
+  },
+  {
+   "kind": "bot_wall",
+   "what": "VIWMA site reset connections from this machine",
+   "fix_level": "engineering",
+   "note": "unconfirmed whether a block or an outage"
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "B",
+  "expected_grade": "Dated reports, delayed",
+  "first_feed": "vi-dpnr-beach-advisories",
+  "effort": "small",
+  "rationale": "SOBE gives a few dated events with points; the weekly DPNR beach PDF is the steadier signal. VIWMA's notices are scattered in news.",
+  "order_hint": 3
+ },
+ "owner_questions": [
+  "Accept a weekly PDF parse (DPNR beach advisories) as an advisory source?",
+  "SOBE has stopped at 2026-06 for VI: show the territory as 'Dated reports, delayed' anyway?"
+ ],
+ "surprise": "The Virgin Islands, unlike the other territories, issue their own NPDES permits (TPDES since 1976), yet their only dated overflow data is the 14 events VIWMA filed with EPA."
+}

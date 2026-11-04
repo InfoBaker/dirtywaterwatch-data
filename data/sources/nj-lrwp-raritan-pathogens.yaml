@@ -1,0 +1,27 @@
+id: "nj-lrwp-raritan-pathogens"
+name: "Lower Raritan Watershed Partnership / Rutgers Cooperative Extension weekly Raritan River pathogen results"
+url: "https://lowerraritanwatershed.org/lower-raritan-pathogens-monitoring-results-09-24-2026/"
+homepage: "https://lowerraritanwatershed.org/lower-raritan-pathogens-monitoring-results-09-24-2026/"
+kind: "api"
+level: "nonprofit"
+# Notes (research/nj, status candidate, verified fetched, checked 2026-11-02): Covers the Perth
+#   Amboy CSO area; parseable but prose.
+# Access detail (research, quoted): Fetched the 2026-09-24 post. WordPress site (posts like
+#   /raritan-river-pathogen-results-for-10-08-2026/), so the WP REST API (/wp-json/wp/v2/posts)
+#   should list them (not tested). Results are in prose and a map/chart image.
+# Waters: Six non-bathing public access sites: Riverside Park (Piscataway), Rutgers Boat House (New
+#   Brunswick), Edison Boat Basin, Second Street Park (Perth Amboy), Ken Buchanan Waterfront Park
+#   (Sayreville), Raritan Bay Waterfront Park (South Amboy); plus Lock 11, South Bound Brook
+#   (openboatlaunch slugs: raritan-river-nj)
+cadence: "Weekly, May to October; IEC lab."
+license: "none stated"
+attribution: "Lower Raritan Watershed Partnership"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["NJ"]
+access: ["html", "api"]
+access_detail: "Fetched the 2026-09-24 post. WordPress site (posts like /raritan-river-pathogen-results-for-10-08-2026/), so the WP REST API (/wp-json/wp/v2/posts) should list them (not tested). Results are in prose and a map/chart image."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

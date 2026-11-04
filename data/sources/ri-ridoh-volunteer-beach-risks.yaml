@@ -1,0 +1,30 @@
+id: "ri-ridoh-volunteer-beach-risks"
+name: "RIDOH 'Beach Risks Observed by Volunteer Groups' (Google Sheet)"
+url: "https://docs.google.com/spreadsheets/d/1TnS_fnhEGhXE17G3M2zB9DjajJPW57ij7JaL4YoGKLU/gviz/tq?tqx=out:csv&gid=406560422"
+homepage: "https://docs.google.com/spreadsheets/d/1TnS_fnhEGhXE17G3M2zB9DjajJPW57ij7JaL4YoGKLU/gviz/tq?tqx=out:csv&gid=406560422"
+kind: "csv"
+level: "state"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Only public signal
+#   for urban Upper Bay spots near CSOs (Gaspee Point, Stillhouse Cove, Bold Point, Sabin Point).
+# Access detail (research, quoted): Behind
+#   https://health.ri.gov/data/beach-risks-observed-volunteer-groups ; 541 rows 2021-2026 (89 in
+#   2026: Save The Bay 50, RIDOH BMP 24, URI WW 15). Contact column holds staff emails - drop on
+#   ingest.
+# Can fill: started_at (sample date), location_text, advice_text (category only)
+# Cannot fill: coordinates; numeric results; ended_at
+# Waters: Non-licensed coastal swimming spots (Upper Bay, Newport, salt ponds, Pawcatuck)
+#   (openboatlaunch slugs: providence-river-ri, narragansett-bay-ri, stillhouse-cove-ri,
+#   pawcatuck-river-ri, narrow-river-ri)
+# History: 2021-2026
+cadence: "weekly/biweekly in season, into October"
+license: "Page: \"Information is reported by approved volunteer partners. RIDOH cannot endorse/verify specific observations.\""
+attribution: "RIDOH with Save The Bay, URI Watershed Watch, Clean Ocean Access"
+enabled: true
+role: "monitoring"
+event_types: ["bacteria_exceedance"]
+states: ["RI"]
+access: ["csv", "html"]
+access_detail: "Behind https://health.ri.gov/data/beach-risks-observed-volunteer-groups ; 541 rows 2021-2026 (89 in 2026: Save The Bay 50, RIDOH BMP 24, URI WW 15). Contact column holds staff emails - drop on ingest."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

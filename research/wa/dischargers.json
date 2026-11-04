@@ -1,0 +1,310 @@
+[
+  {
+    "id": "wa-king-county-west-point",
+    "name": "King County Wastewater Treatment Division (West Point Treatment Plant and King County CSOs)",
+    "state": "WA",
+    "kind": "cso",
+    "npdes_permit": "WA0029181",
+    "receiving_waters": [
+      "Puget Sound",
+      "Elliott Bay",
+      "Duwamish River",
+      "Lake Washington",
+      "Lake Union / Ship Canal"
+    ],
+    "water_slugs": [],
+    "outfall_count": 36,
+    "outfalls_source": "King County CSO status CSV (36 outfalls with coordinates); EPA seed shows 4 open, 44 closed",
+    "notification_channel": "CSO status map and CSV every 10 minutes (kingcounty.gov CSO status page; https://your.kingcounty.gov/dnrp/library/wastewater/cso/img/CSO_metadata.CSV); CSO warning signs at outfalls",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Seattle"
+    ],
+    "notes": "Also plants South (Renton, WA0029581) and Brightwater (WA0032247). Not the source of the 36 SOBE events in the national brief (those are JBLM and Puyallup).",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-seattle-spu",
+    "name": "Seattle Public Utilities combined sewer system",
+    "state": "WA",
+    "kind": "cso",
+    "npdes_permit": "WA0031682",
+    "receiving_waters": [
+      "Lake Washington",
+      "Lake Union",
+      "Salmon Bay",
+      "Elliott Bay",
+      "Duwamish Waterway",
+      "Puget Sound"
+    ],
+    "water_slugs": [],
+    "outfall_count": 89,
+    "outfalls_source": "King County CSO status CSV (89 Seattle DSNs, 84 with coordinates); EPA inventory flags 86 closed, which the live status file contradicts",
+    "notification_channel": "Same King County CSO status map/CSV; signs at outfalls",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Seattle"
+    ],
+    "notes": "DSN 124 was CurrentlyOverflowing on 2026-11-03 15:40.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-spokane",
+    "name": "City of Spokane (Riverside Park Water Reclamation Facility and CSO system)",
+    "state": "WA",
+    "kind": "cso",
+    "npdes_permit": "WA0024473",
+    "receiving_waters": [
+      "Spokane River",
+      "Hangman Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": 29,
+    "outfalls_source": "EPA National CSO Inventory (research/wa/federal-seed.json) (2 open, 27 closed; city says 20-25 monitored sites)",
+    "notification_channel": "Real-time CSO monitoring page sewerfinder.spokanecity.org/CSOUpdate (start time of each overflow, shown 48 hours); bot-walled",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Spokane"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-bremerton",
+    "name": "City of Bremerton",
+    "state": "WA",
+    "kind": "cso",
+    "npdes_permit": "WA0029289",
+    "receiving_waters": [
+      "Sinclair Inlet",
+      "Port Washington Narrows",
+      "Port Orchard Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": 15,
+    "outfalls_source": "EPA National CSO Inventory (research/wa/federal-seed.json) (2 open, 13 closed)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Bremerton"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-snohomish",
+    "name": "City of Snohomish",
+    "state": "WA",
+    "kind": "cso",
+    "npdes_permit": "WA0029548",
+    "receiving_waters": [
+      "Snohomish River"
+    ],
+    "water_slugs": [],
+    "outfall_count": 4,
+    "outfalls_source": "EPA National CSO Inventory (research/wa/federal-seed.json) (2 open, 2 closed)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Snohomish"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-lott",
+    "name": "LOTT Clean Water Alliance (Budd Inlet)",
+    "state": "WA",
+    "kind": "cso",
+    "npdes_permit": "WA0037061",
+    "receiving_waters": [
+      "Budd Inlet"
+    ],
+    "water_slugs": [],
+    "outfall_count": 2,
+    "outfalls_source": "EPA National CSO Inventory (research/wa/federal-seed.json) (1 open, 1 closed)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Olympia"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-everett",
+    "name": "City of Everett",
+    "state": "WA",
+    "kind": "cso",
+    "npdes_permit": "WA0024490",
+    "receiving_waters": [
+      "Port Gardner Bay",
+      "Snohomish River"
+    ],
+    "water_slugs": [],
+    "outfall_count": 13,
+    "outfalls_source": "EPA National CSO Inventory (research/wa/federal-seed.json) (0 open, 13 closed)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Everett"
+    ],
+    "notes": "EPA inventory: all closed; Everett has historically reported CSOs: verify.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-port-angeles",
+    "name": "City of Port Angeles",
+    "state": "WA",
+    "kind": "cso",
+    "npdes_permit": "WA0023973",
+    "receiving_waters": [
+      "Port Angeles Harbor",
+      "Ennis Creek",
+      "Peabody Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": 9,
+    "outfalls_source": "EPA National CSO Inventory (research/wa/federal-seed.json) (0 open, 9 closed; also WAG994562 with 5 closed)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Port Angeles"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-mount-vernon",
+    "name": "City of Mount Vernon",
+    "state": "WA",
+    "kind": "cso",
+    "npdes_permit": "WA0024074",
+    "receiving_waters": [
+      "Skagit River"
+    ],
+    "water_slugs": [],
+    "outfall_count": 4,
+    "outfalls_source": "EPA National CSO Inventory (research/wa/federal-seed.json) (0 open, 4 closed)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Mount Vernon"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-anacortes",
+    "name": "City of Anacortes",
+    "state": "WA",
+    "kind": "cso",
+    "npdes_permit": "WA0020257",
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": 2,
+    "outfalls_source": "EPA National CSO Inventory (research/wa/federal-seed.json) (0 open, 2 closed)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Anacortes"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-sound-transit-east-link",
+    "name": "Sound Transit E130 IDS East Link (inventory record)",
+    "state": "WA",
+    "kind": "cso",
+    "npdes_permit": "WAR304893",
+    "receiving_waters": [
+      "Lake Washington"
+    ],
+    "water_slugs": [],
+    "outfall_count": 1,
+    "outfalls_source": "EPA National CSO Inventory (research/wa/federal-seed.json) (0 open, 1 closed)",
+    "notification_channel": "n/a",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Bellevue"
+    ],
+    "notes": "A construction stormwater permit listed in the CSO inventory: likely an inventory error.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-jblm",
+    "name": "American Water Military Services, Joint Base Lewis-McChord",
+    "state": "WA",
+    "kind": "sso",
+    "npdes_permit": "WA0021954",
+    "receiving_waters": [
+      "Puget Sound (Nisqually Reach area)"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "EPA SOBE event coordinates",
+    "notification_channel": "EPA eRule SOBE (33 events 2023-2026)",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Joint Base Lewis-McChord"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-puyallup",
+    "name": "City of Puyallup",
+    "state": "WA",
+    "kind": "sso",
+    "npdes_permit": "WA0037168",
+    "receiving_waters": [
+      "Puyallup River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "EPA SOBE event coordinates",
+    "notification_channel": "EPA eRule SOBE (3 events)",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Puyallup"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "wa-tacoma",
+    "name": "City of Tacoma Environmental Services",
+    "state": "WA",
+    "kind": "sso",
+    "npdes_permit": "WA0037087",
+    "receiving_waters": [
+      "Commencement Bay",
+      "Puyallup River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched; Ecology sewage spill list",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Tacoma"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  }
+]

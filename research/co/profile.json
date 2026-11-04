@@ -1,0 +1,165 @@
+{
+ "state": "CO",
+ "name": "Colorado",
+ "region": "mountain",
+ "epa_region": 8,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "none",
+  "summary": "Whoever causes a spill that may pollute state waters must notify the Water Quality Control Division as soon as practicable (CDPHE asks for all sanitary sewer releases on its hotline); permits require a 24-hour oral and five-day written report. No duty to tell the public; CDPHE, local health and Parks and Wildlife issue advisories for big spills.",
+  "citations": [
+   {
+    "cite": "C.R.S. 25-8-601(2)",
+    "title": "Division to be notified of suspected violations and accidental discharges",
+    "url": "https://colorado.public.law/statutes/crs_25-8-601",
+    "quote": "Any person engaged in any operation or activity which results in a spill or discharge of oil or other substance which may cause pollution of the waters of the state contrary to the provisions of this article 8, as soon as the person has knowledge thereof, shall notify the division of such discharge. Any person who fails to notify the division as soon as practicable commits a class 2 misdemeanor",
+    "who": "any person causing the spill",
+    "channel": "Water Quality Control Division (hotline 1-877-518-5608 or online form)",
+    "deadline": "as soon as practicable",
+    "threshold": "spill that may cause pollution of state waters",
+    "verified": "fetched"
+   },
+   {
+    "cite": "CDPS permit CO0032999 Part II.A",
+    "title": "Noncompliance notification (standard permit condition)",
+    "url": "https://cms3.revize.com/revize/arapahoe/Clerk%20and%20Recorder/Public%20Notices/2022/CDPS%20CO0032999%20Public%20Notice%20Permit%208-11-22%20A.pdf",
+    "quote": "The permittee shall report the following circumstances orally within twenty-four (24) hours from the time the permittee becomes aware of the circumstances, and shall mail to the Division a written report ... within five (5) working days after becoming aware of the following circumstances: i) Circumstances leading to any noncompliance which may endanger health or the environment regardless of the cause of the incident",
+    "who": "permittee",
+    "channel": "Division",
+    "deadline": "24 hours oral; five working days written",
+    "threshold": "noncompliance which may endanger health or the environment",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "as soon as practicable (statute); 24 hours oral, five working days written (permits)",
+   "cite": "C.R.S. 25-8-601(2); CDPS permits Part II"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "HB24-1359 (Community Right to Know, chemical releases) does not cover sewage (search only).",
+   "Pueblo spill, August 2026 (4.25 million gallons, Arkansas River): state health advisory and CPW closures; enforcement not yet found.",
+   "Colorado Springs Utilities Fountain Creek enforcement history (2000s, order closed 2013) and EPA/state stormwater settlement (search only)."
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "No Colorado collection systems registered in EPA's file; CDPHE's eRule route not found."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": null,
+  "receiving_water": null,
+  "start_end": null,
+  "volume": false,
+  "stable_id": false,
+  "license": null,
+  "notes": "Hotline and Google Form intake; nothing published except press releases for major spills."
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 4,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No CSOs."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [],
+  "notes": ""
+ },
+ "beaches": {
+  "program": "CDPHE natural swimming area (fee swim beach) E. coli monitoring under 5 CCR 1003-5; closure above 235 E. coli per 100 mL",
+  "source_ids": [
+   "co-cdphe-swim-beaches"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": "Free river spots (Confluence Park) are not monitored."
+ },
+ "habs": {
+  "program": "CDPHE and CPW toxic algae monitoring May to September; status Google Sheet and Tableau story",
+  "source_ids": [
+   "co-cdphe-toxic-algae-sheet"
+  ],
+  "machine_readable": true,
+  "notes": "Closure at 8 ug/L microcystin."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "https://cdphe.colorado.gov/toxic-algae",
+   "https://www.douglas.co.us/?p=138080"
+  ],
+  "watershed_groups": [],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Colorado River (UT)",
+   "Arkansas River (KS)",
+   "South Platte River (NE)",
+   "Rio Grande (NM)",
+   "San Juan and Animas rivers (NM)",
+   "Green and Yampa rivers (UT)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "Sewage spill reports to CDPHE (hotline, Google Form) are not published",
+   "fix_level": "agency",
+   "note": ""
+  },
+  {
+   "kind": "no_web",
+   "what": "No public notice duty",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "bot_wall",
+   "what": "cdphe.colorado.gov returns 403 to WebFetch (curl with a browser user agent works)",
+   "fix_level": "engineering",
+   "note": ""
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "D",
+  "expected_grade": "No public reports",
+  "first_feed": null,
+  "effort": "small",
+  "rationale": "No CSOs, no SOBE, no published spill list. Only press releases for the biggest spills (Pueblo 2026), which a news watcher could catch; HAB sheet is machine-readable.",
+  "order_hint": 4
+ },
+ "owner_questions": [
+  "Watch CDPHE and CPW press releases so a spill like Pueblo's (4.25 million gallons) appears as a dated advisory, or keep Colorado at the plain statement?",
+  "Records request to CDPHE for sanitary sewer release reports (hotline log)?",
+  "Use the CDPHE toxic algae Google Sheet (names only, no coordinates) for HAB status?"
+ ],
+ "surprise": "Colorado asks for every sanitary sewer release on its hotline yet publishes none; the public heard about the 4.25-million-gallon Pueblo spill into the Arkansas River only through press releases and park closures."
+}

@@ -1,0 +1,32 @@
+id: "va-jra-james-river-watch"
+name: "James River Association - James River Watch bacteria data (ArcGIS)"
+url: "https://thejamesriver.org/james-river-watch/"
+homepage: "https://thejamesriver.org/james-river-watch/"
+kind: "arcgis"
+level: "nonprofit"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Public, token-free
+#   weekly bacteria results on the James with coordinates; monitoring context next to Richmond CSO
+#   events. Ask JRA for reuse terms.
+# Access detail (research, quoted): Page embeds Experience a4993d1967c84cb88f1fd3a324c570fc; data
+#   layer
+#   https://services7.arcgis.com/9ZKA6C4VwqZYRSvM/arcgis/rest/services/River_Watch_data_with_station_locations/FeatureServer/0
+#   (4,115 rows; 982 since 2026-01-01; latest 2026-10-01). Two schemas: older rows (to 2024)
+#   StationNumber/StationName/CollectionDate (string)/Organization (JRA, VDH, PMN, RCA, VSU,
+#   American Water); 2025-2026 rows use name (station code e.g. J41), creationdate, Ecoli,
+#   Enterococci, SiteConditions. Example: J41 (37.5254,-77.4217, Richmond) E. coli 2419.6 on
+#   2026-09-11 'Heavy rainfall in the area the day before sampling occurred.'
+# Waters: James River basin incl. Jackson, Cowpasture, Appomattox, Richmond and tidal James
+#   (openboatlaunch slugs: james-river-va, jackson-river-va, cowpasture-river-va,
+#   appomattox-river-va, maury-river-va)
+cadence: "'Bacteria samples are available every Friday from Memorial Day through Labor Day'; results also on Swim Guide ~24 h after collection."
+license: "None stated on the layer."
+attribution: "James River Association"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["VA"]
+access: ["arcgis"]
+access_detail: "Page embeds Experience a4993d1967c84cb88f1fd3a324c570fc; data layer https://services7.arcgis.com/9ZKA6C4VwqZYRSvM/arcgis/rest/services/River_Watch_data_with_station_locations/FeatureServer/0 (4,115 rows; 982 since 2026-01-01; latest 2026-10-01). Two schemas: older rows (to 2024) StationNumber/StationName/CollectionDate (string)/Organization (JRA, VDH, PMN, RCA, VSU, American Water); 2025-2026 rows use name (station code e.g. J41), creationdate, Ecoli, Enterococci, SiteConditions. Example: J41 (37.5254,-77.4217, Richmond) E. coli 2419.6 on 2026-09-11 'Heavy rainfall in the area the day before sampling occurred.'"
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

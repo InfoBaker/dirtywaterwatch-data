@@ -1,0 +1,28 @@
+[
+ {
+  "id": "pr-prasa",
+  "name": "Autoridad de Acueductos y Alcantarillados de Puerto Rico (PRASA)",
+  "state": "PR",
+  "kind": "cso",
+  "npdes_permit": "PR0021555 (CSO, Puerto Nuevo); 53 plant permits incl. 37 major (see federal-seed.json)",
+  "receiving_waters": [
+   "San Juan Bay",
+   "Rio Puerto Nuevo",
+   "Canal Martin Pena",
+   "Caribbean Sea",
+   "Atlantic Ocean",
+   "island rivers and creeks"
+  ],
+  "water_slugs": [],
+  "outfall_count": 12,
+  "outfalls_source": "https://gis.acueductospr.com/arcgis_local/rest/services/Hosted/CSO_Data/FeatureServer/0",
+  "notification_channel": "SOBE (EPA eRule) for every SSO and bypass; CSO locations web map; no overflow event list found on acueductos.pr.gov",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "island-wide"
+  ],
+  "notes": "Sole public sewer operator. 924 SOBE events from 45 permits (2025-04 to 2026-10). Top permits: PR0020460 Dorado, PR0025976 Caguas, PR0026484 Juan Martin pump station. Consent decree 3:15-cv-02283.",
+  "verified": "fetched",
+  "checked": "2026-11-04"
+ }
+]

@@ -1,0 +1,24 @@
+id: "holyoke-cso-notices"
+name: "City of Holyoke CSO notifications (holyoke.org)"
+url: "https://www.holyoke.org/dpw-sewer-and-waste-water/"
+homepage: "https://www.holyoke.org/dpw-sewer-and-waste-water/"
+kind: "html"
+level: "municipal"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): Verbatim 48-hour
+#   'Avoid contact' text.
+# Access detail (research, quoted): Raw copy:
+#   research/science/raw/dl-adv/holyoke-cso-notification-may-8-2025.html (fetched 2026-11-01 by the
+#   advisory sub-researcher; text read by the lead).
+# Can fill: advice_text
+cadence: null
+license: "none stated"
+attribution: "City of Holyoke DPW"
+enabled: true
+role: "advisories"
+event_types: ["cso"]
+states: ["MA"]
+access: ["html"]
+access_detail: "Raw copy: research/science/raw/dl-adv/holyoke-cso-notification-may-8-2025.html (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

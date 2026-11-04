@@ -1,0 +1,26 @@
+id: "ri-ridem-press-releases"
+name: "RIDEM press releases (and RSS)"
+url: "https://dem.ri.gov/press-releases"
+homepage: "https://dem.ri.gov/press-releases"
+kind: "rss"
+level: "state"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Carries the big SSO
+#   notices (East Providence 2026, Warwick 2022) and no-contact advisories (Seekonk 2018, Blackstone
+#   2023); feed access blocked by Cloudflare for servers.
+# Access detail (research, quoted): RSS https://dem.ri.gov/press-releases.xml (10 latest items, RSS
+#   2.0 with created time). Cloudflare challenge blocks non-browser clients.
+# Can fill: published_at, advice_text, volume (when stated), waterbody, authority
+# Cannot fill: coordinates
+# History: paged archive at /press-releases?page=N
+cadence: "ad hoc"
+license: "DEM site disclaimer (https://dem.ri.gov/disclaimer): \"The compiled information presented on this WWW site is considered public information and may be distributed or copied. However, use of appropriate byline/photo/image credits is requested.\""
+attribution: "RIDEM"
+enabled: true
+role: "advisories"
+event_types: ["shellfish_closure", "no_contact_advisory", "cyanobacteria"]
+states: ["RI"]
+access: ["html", "rss"]
+access_detail: "RSS https://dem.ri.gov/press-releases.xml (10 latest items, RSS 2.0 with created time). Cloudflare challenge blocks non-browser clients."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

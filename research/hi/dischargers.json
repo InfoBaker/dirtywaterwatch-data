@@ -1,0 +1,147 @@
+[
+  {
+    "id": "hi-honolulu-env",
+    "name": "City and County of Honolulu Department of Environmental Services (Sand Island, Honouliuli, Waianae, Kailua, Wahiawa plants and collection system)",
+    "state": "HI",
+    "kind": "sso",
+    "npdes_permit": "HI0020877; HI0021296; HI0021953 (and others)",
+    "receiving_waters": [
+      "Mamala Bay",
+      "Kaneohe Bay",
+      "Honolulu Harbor",
+      "Ala Wai Canal",
+      "Oahu streams"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DOH CWB advisories (Sewage Spill and Permit Exceedance events); city web notices not searched",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Honolulu",
+      "Ewa Beach",
+      "Waianae",
+      "Kailua",
+      "Wahiawa"
+    ],
+    "notes": "42 of 50 Sewage Spill advisories in the newest 500 CWB events were on Oahu, e.g. Kailua plant, Kaneohe tunnel, Wahiawa plant, Kahala pump station (2026). Operates under a 2010 global consent decree (search).",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "hi-mcbh-kaneohe",
+    "name": "Marine Corps Base Hawaii, Kaneohe Bay wastewater treatment plant",
+    "state": "HI",
+    "kind": "bypass",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Kaneohe Bay",
+      "Nu'upia Ponds"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DOH CWB 'Permit Exceedance' advisories (2025-11-19, 2026-04-11, 2026-05-06, 2026-10-31 open)",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Kaneohe"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "hi-jbphh",
+    "name": "Joint Base Pearl Harbor-Hickam",
+    "state": "HI",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Pearl Harbor"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DOH CWB advisories (2026-05-16, 2026-05-29)",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Honolulu"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "hi-hawaii-county",
+    "name": "County of Hawaii Department of Environmental Management (Hilo and Kona plants)",
+    "state": "HI",
+    "kind": "sso",
+    "npdes_permit": "HI0021377",
+    "receiving_waters": [
+      "Hilo Bay",
+      "Reeds Bay",
+      "Puhi Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DOH CWB advisories (4 sewage spills)",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Hilo",
+      "Kailua-Kona"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "hi-kauai-county",
+    "name": "County of Kauai Wastewater Management (Wailua, Waimea, Lihue)",
+    "state": "HI",
+    "kind": "sso",
+    "npdes_permit": "HI0020257",
+    "receiving_waters": [
+      "Wailua River",
+      "Waimea Bay (Kauai)",
+      "Nawiliwili"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DOH CWB advisories (2026-04-10 Waimea plant, 2026-07-01 Kapaia pump station)",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Wailua",
+      "Waimea",
+      "Lihue"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "hi-maui-county",
+    "name": "County of Maui Department of Environmental Management (Kihei, Lahaina, Wailuku-Kahului)",
+    "state": "HI",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Kihei coast",
+      "Lahaina coast"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DOH CWB advisories (2026-10-23 Kihei Pump Station #6)",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Kihei",
+      "Lahaina",
+      "Kahului"
+    ],
+    "notes": "Maui plants dispose to injection wells, so no NPDES permit numbers.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  }
+]

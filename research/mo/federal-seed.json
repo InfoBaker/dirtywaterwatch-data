@@ -1,0 +1,995 @@
+{
+ "state": "MO",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "MO0023043",
+   "permittee": "ST JOSEPH WATER PROTECTION FACILITY",
+   "city": "ST JOSEPH",
+   "open_outfalls": 14,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Roys Branch",
+    "Tributary to Missouri R."
+   ]
+  },
+  {
+   "npdes_permit": "MO0023221",
+   "permittee": "MACON WWTP",
+   "city": "MACON",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Sewer Creek"
+   ]
+  },
+  {
+   "npdes_permit": "MO0024911",
+   "permittee": "KC BLUE RIVER WWTP",
+   "city": "KANSAS CITY",
+   "open_outfalls": 80,
+   "closed_outfalls": 15,
+   "receiving_waters": [
+    "Blue R.",
+    "Blue River",
+    "Brush Creek",
+    "Dyke Branch",
+    "Mill Creek",
+    "Missouri R.",
+    "Missouri River",
+    "Town fork (Mill) Creek",
+    "Tributary to Blue R.",
+    "Tributary to Brush Creek",
+    "Tributary to Mill Creek",
+    "Unnamed Tributary to Blue River",
+    "Unnamed Tributary to Mill Creek"
+   ]
+  },
+  {
+   "npdes_permit": "MO0024929",
+   "permittee": "KC WESTSIDE WWTP",
+   "city": "KANSAS CITY",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Tributary to Missouri R."
+   ]
+  },
+  {
+   "npdes_permit": "MO0025151",
+   "permittee": "MSD LEMAY WWTP",
+   "city": "ST. LOUIS",
+   "open_outfalls": 0,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "Deer Creek tributary",
+    "Lower River Des Peres"
+   ]
+  },
+  {
+   "npdes_permit": "MO0050580",
+   "permittee": "CAPE GIRARDEAU WWTF",
+   "city": "CAPE GIRARDEAU",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Tributary to Cape La Croix Creek"
+   ]
+  },
+  {
+   "npdes_permit": "MO0117960",
+   "permittee": "MOBERLY WWTP",
+   "city": "MOBERLY",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Sweet Spring Creek",
+    "Tributary to Trib. to Coon Cr."
+   ]
+  },
+  {
+   "npdes_permit": "MO0134198",
+   "permittee": "SHOW ME ETHANOL LLC",
+   "city": "CARROLLTON",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Tributary to Little Wakenda Creek"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 108,
+ "plant_permits": 912,
+ "plant_permits_major": 127,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "MO0004391",
+   "permittee": "Metropolitan St Louis Sewer District",
+   "city": "ST. LOUIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0021440",
+   "permittee": "City of Monett",
+   "city": "MONETT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0021768",
+   "permittee": "City of Salem",
+   "city": "SALEM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0022098",
+   "permittee": "City of Republic",
+   "city": "REPUBLIC",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0022373",
+   "permittee": "Liberty Utilities (Missouri Water) LLC",
+   "city": "BOLIVAR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0022381",
+   "permittee": "City of Mount Vernon",
+   "city": "MOUNT VERNON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0022853",
+   "permittee": "City of Jackson",
+   "city": "JACKSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0023019",
+   "permittee": "City of Sedalia",
+   "city": "SEDALIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0023027",
+   "permittee": "City of Sedalia",
+   "city": "SEDALIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0023043",
+   "permittee": "City of St. Joseph",
+   "city": "ST JOSEPH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0023213",
+   "permittee": "City of Dexter",
+   "city": "DEXTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0023221",
+   "permittee": "City of Macon",
+   "city": "MACON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0023256",
+   "permittee": "City of Joplin",
+   "city": "JOPLIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0023272",
+   "permittee": "City of California",
+   "city": "CALIFORNIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0024911",
+   "permittee": "City of Kansas City",
+   "city": "KANSAS CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0024929",
+   "permittee": "City of Kansas City",
+   "city": "KANSAS CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0024961",
+   "permittee": "City of Kansas City",
+   "city": "KANSAS CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0025151",
+   "permittee": "Metropolitan St. Louis Sewer District",
+   "city": "ST. LOUIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0025160",
+   "permittee": "Metropolitan St Louis Sewer District",
+   "city": "FLORISSANT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0025178",
+   "permittee": "Metropolitan St Louis Sewer District",
+   "city": "ST LOUIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0025186",
+   "permittee": "City of Carl Junction",
+   "city": "CARL JUNCTION",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0025241",
+   "permittee": "City of Branson",
+   "city": "BRANSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0025283",
+   "permittee": "City of Union",
+   "city": "UNION",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0025810",
+   "permittee": "City of Washington",
+   "city": "WASHINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0026298",
+   "permittee": "City of Platte City",
+   "city": "PLATTE CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0026301",
+   "permittee": "City of Cabool",
+   "city": "CABOOL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0026336",
+   "permittee": "City of Savannah",
+   "city": "SAVANNAH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0026379",
+   "permittee": "City of Odessa",
+   "city": "ODESSA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0026387",
+   "permittee": "City of Odessa",
+   "city": "ODESSA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0026662",
+   "permittee": "City of DeSoto",
+   "city": "DE SOTO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0027111",
+   "permittee": "City of Herculaneum",
+   "city": "HERCULANEUM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0028037",
+   "permittee": "City of Nixa",
+   "city": "NIXA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0028070",
+   "permittee": "City of Harrisonville",
+   "city": "HARRISONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0028568",
+   "permittee": "Kennett Board of Public Works",
+   "city": "KENNETT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0028720",
+   "permittee": "City of O'Fallon",
+   "city": "O'FALLON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0028843",
+   "permittee": "City of Excelsior Springs",
+   "city": "EXCELSIOR SPRINGS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MO0028860",
+   "permittee": "City of Farmington",
+   "city": "FARMINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0028886",
+   "permittee": "City of Blue Springs",
+   "city": "GRAIN VALLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0029742",
+   "permittee": "American Water Military Services, LLC",
+   "city": "FORT LEONARD WOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0030970",
+   "permittee": "City of St Peters",
+   "city": "ST PETERS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0032883",
+   "permittee": "Marshall Municipal Utilities",
+   "city": "MARSHALL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0033286",
+   "permittee": "City of Maryville",
+   "city": "MARYVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0035009",
+   "permittee": "Sikeston Board of Municipal Utilities",
+   "city": "SIKESTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0036242",
+   "permittee": "City of Mexico",
+   "city": "MEXICO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MO0036757",
+   "permittee": "City of Aurora",
+   "city": "AURORA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0039136",
+   "permittee": "City of Carthage",
+   "city": "CARTHAGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0039659",
+   "permittee": "MISSOURI-AMERICAN WATER COMPANY",
+   "city": "EUREKA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MO0039748",
+   "permittee": "Trenton Municipal Utilities",
+   "city": "TRENTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0040142",
+   "permittee": "City of Pevely",
+   "city": "PEVELY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0040185",
+   "permittee": "Center Creek 201 Wastewater",
+   "city": "WEBB CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0040312",
+   "permittee": "City of Farmington",
+   "city": "FARMINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0040738",
+   "permittee": "City of Boonville",
+   "city": "BOONVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0040843",
+   "permittee": "City of Marshfield",
+   "city": "MARSHFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0041131",
+   "permittee": "City of Pacific",
+   "city": "PACIFIC",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0042579",
+   "permittee": "City of Cassville",
+   "city": "CASSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0043648",
+   "permittee": "City of Poplar Bluff",
+   "city": "POPLAR BLUFF",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0047023",
+   "permittee": "City of Rolla",
+   "city": "ROLLA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0047031",
+   "permittee": "City of Rolla",
+   "city": "ROLLA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0048305",
+   "permittee": "City of Kansas City",
+   "city": "KANSAS CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0048313",
+   "permittee": "City of Kansas City",
+   "city": "KANSAS CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0049506",
+   "permittee": "City of Kirksville",
+   "city": "KIRKSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0049522",
+   "permittee": "City of Springfield",
+   "city": "SPRINGFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0049531",
+   "permittee": "City of Kansas City",
+   "city": "KANSAS CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0050652",
+   "permittee": "City of Rolla",
+   "city": "ROLLA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0051144",
+   "permittee": "City of Perryville",
+   "city": "PERRYVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0055204",
+   "permittee": "City of Smithville",
+   "city": "SMITHVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0055905",
+   "permittee": "City of Warrensburg",
+   "city": "WARRENSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0056162",
+   "permittee": "Glaize Creek Sewer District",
+   "city": "BARNHART",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0058343",
+   "permittee": "City of St. Charles",
+   "city": "ST. CHARLES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0058351",
+   "permittee": "City of St. Charles",
+   "city": "ST. CHARLES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0080632",
+   "permittee": "Festus Crystal City Sewage Comission",
+   "city": "CRYSTAL CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0084158",
+   "permittee": "City of Montgomery",
+   "city": "MONTGOMERY CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0085472",
+   "permittee": "DCSD Treatment Plant 1",
+   "city": "ST. CHARLES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0086126",
+   "permittee": "Metropolitan Saint Louis Sewer District",
+   "city": "FENTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0087912",
+   "permittee": "City of Warrenton",
+   "city": "WARRENTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0089010",
+   "permittee": "City of Lebanon",
+   "city": "LEBANON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0089109",
+   "permittee": "City of Nevada",
+   "city": "NEVADA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0089681",
+   "permittee": "City of Independence",
+   "city": "INDEPENDENCE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0093513",
+   "permittee": "Hannibal Board of Public Works",
+   "city": "HANNIBAL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0093564",
+   "permittee": "City of St. James",
+   "city": "ST. JAMES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0093599",
+   "permittee": "City of Wentzville",
+   "city": "WENTZVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0094161",
+   "permittee": "City of Waynseville",
+   "city": "WAYNESVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0094579",
+   "permittee": "City of Warrensburg",
+   "city": "WARRENSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0094846",
+   "permittee": "City of Jefferson City",
+   "city": "JEFFERSON CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0094854",
+   "permittee": "City of Buffalo",
+   "city": "BUFFALO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0094919",
+   "permittee": "City of Cuba",
+   "city": "CUBA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0095028",
+   "permittee": "City of Caruthersville",
+   "city": "CARUTHERSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0096229",
+   "permittee": "City of Butler",
+   "city": "BUTLER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0096318",
+   "permittee": "City of Carrollton",
+   "city": "CARROLLTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0096610",
+   "permittee": "City of West Plains",
+   "city": "WEST PLAINS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0097390",
+   "permittee": "City of Clinton",
+   "city": "CLINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0097837",
+   "permittee": "City of Columbia",
+   "city": "COLUMBIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0099163",
+   "permittee": "City of Ozark",
+   "city": "OZARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0099465",
+   "permittee": "City of St Clair",
+   "city": "ST. CLAIR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0100676",
+   "permittee": "City of Eldon",
+   "city": "ELDON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0101087",
+   "permittee": "Little Blue Valley Sewer District",
+   "city": "INDEPENDENCE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0101362",
+   "permittee": "Metropolitan St Louis Sewer District",
+   "city": "VALLEY PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0101567",
+   "permittee": "City of Sedalia",
+   "city": "SEDALIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0103039",
+   "permittee": "City of Springfield",
+   "city": "SPRINGFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0103241",
+   "permittee": "Lake Ozark and Osage Beach Joint Board",
+   "city": "LAKE OZARK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0103331",
+   "permittee": "City of Fulton",
+   "city": "FULTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0103349",
+   "permittee": "City of Joplin",
+   "city": "JOPLIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0103560",
+   "permittee": "City of Park Hills",
+   "city": "PARK HILLS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0104299",
+   "permittee": "City of Cameron",
+   "city": "CAMERON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0104736",
+   "permittee": "City of Sullivan",
+   "city": "SULLIVAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0104906",
+   "permittee": "City of Neosho",
+   "city": "NEOSHO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0106461",
+   "permittee": "Rock Creek Public Sewer District",
+   "city": "KIMMSWICK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0107883",
+   "permittee": "City of Kearney",
+   "city": "KEARNEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0108227",
+   "permittee": "City of Chillicothe",
+   "city": "CHILLICOTHE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0111716",
+   "permittee": "Pulaski County Sewer District No. 1",
+   "city": "ST. ROBERT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0112925",
+   "permittee": "City of St Robert",
+   "city": "ST ROBERT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0116041",
+   "permittee": "City of Hollister",
+   "city": "HOLLISTER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0116572",
+   "permittee": "Duckett Creek Sanitary District",
+   "city": "ST. CHARLES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0116599",
+   "permittee": "City of Branson",
+   "city": "BRANSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0117412",
+   "permittee": "City of Belton",
+   "city": "BELTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0117960",
+   "permittee": "City of Moberly",
+   "city": "MOBERLY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0119474",
+   "permittee": "Platte County Regional Sewer District",
+   "city": "PARKVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0120081",
+   "permittee": "City of Charleston",
+   "city": "CHARLESTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0127949",
+   "permittee": "Metropolitan St Louis Sewer District",
+   "city": "ST. LOUIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0128490",
+   "permittee": "Northeast Public Sewer District",
+   "city": "FENTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0130371",
+   "permittee": "City of Oak Grove",
+   "city": "OAK GROVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0131296",
+   "permittee": "City of Troy",
+   "city": "TROY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0133671",
+   "permittee": "City of Ozark",
+   "city": "OZARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0136328",
+   "permittee": "Cape Girardeau Municipal WWTF",
+   "city": "CAPE GIRARDEAU",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0137111",
+   "permittee": "City of Liberty",
+   "city": "LIBERTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MO0137553",
+   "permittee": "City of Brookfield",
+   "city": "BROOKFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MO0140503",
+   "permittee": "PUBLIC WATER SUPPLY DISTRICT NO. 2",
+   "city": "WRIGHT CITY",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

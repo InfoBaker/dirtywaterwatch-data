@@ -1,0 +1,21 @@
+id: "ct-deep-agol-org-catalog"
+name: "CT DEEP ArcGIS Online org FjPcSmEFuDYlIdKC (service catalog)"
+url: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services?f=json"
+homepage: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services?f=json"
+kind: "arcgis"
+level: "state"
+# Notes (research/ct, status used, verified fetched, checked 2026-11-01): 499 services listed;
+#   relevant ones recorded individually.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "per item; most CSO/bypass items state none"
+attribution: "CT DEEP"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["CT"]
+access: ["arcgis", "api"]
+access_detail: null
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

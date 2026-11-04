@@ -1,0 +1,27 @@
+id: "nj-cso-likely"
+name: "NJ CSO Group 'Combined Sewer Overflow Notification System (interim)' (njcsonotifications.com)"
+url: "https://njcsonotifications.com/"
+homepage: "https://njcsonotifications.com/"
+kind: "api"
+level: "utility"
+# Feed row: the source id written by the ingester pipeline/ingest/nj_cso_likely.py (writes
+#   data/build/nj-cso-likely.json, a snapshot for the rain-likely rule, not an events file). It
+#   describes the same source as the research row(s) in registry_ids, whose files hold the research
+#   notes, access detail and fill lists.
+# Cadence (pipeline/ingest/nj_cso_likely.py docstring): The module states no cadence of its own; the
+#   source page re-polls its JSON every 300 s and keeps no history. Written as 1 hour: the refresh
+#   runs every 30 minutes (scripts/org.dirtywaterwatch.refresh.plist), so a shorter threshold would
+#   read as overdue between runs.
+cadence: "1 hour"
+license: "No terms found on the site. Footer: '© 2026 NJ Combined Sewer Overflow Notification System'. Site says: 'This site indicates when an overflow is likely, not that one has occurred.' and 'is not a substitute for official notifications from a permit holder or from the New Jersey Department of Environmental Protection.'"
+attribution: "NJ CSO Group (permittees coordinated by Passaic Valley Sewerage Commission; site does not name its operator or developer)"
+enabled: true
+role: "advisories"
+event_types: ["cso_likely"]
+states: ["NJ"]
+registry_ids: ["nj-njcso-group-interim-outlook"]
+access: ["html", "api"]
+access_detail: "Server-rendered page plus undocumented JSON: GET https://njcsonotifications.com/?handler=Status (no auth; JSON; page polls it every 300 s per its live-status-settings). Same JSON is embedded in the page as <script id='permittee-status-data'>. Old URL https://njcso.hdrgateway.com/ now shows 'This site has moved' and redirects after 15 s. A 'past conditions' view is mentioned on /About but no query parameter was found (asOf=, at=, date= ignored). Fetched 2026-11-02 17:53 UTC: 0 of 15 'likely'."
+machine_readable: true
+legal_basis: "NJPDES CSO permits Part IV.F.8.b.iii: 'The permittee shall maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred.'"
+checked: "2026-11-02"

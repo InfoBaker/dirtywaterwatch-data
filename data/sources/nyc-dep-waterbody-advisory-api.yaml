@@ -1,0 +1,41 @@
+id: "nyc-dep-waterbody-advisory-api"
+name: "NYC DEP Waterbody Advisory System (dashboard JSON API)"
+url: "https://nycwaterbodyadvisory.azurewebsites.net/"
+homepage: "https://nycwaterbodyadvisory.azurewebsites.net/"
+kind: "api"
+level: "municipal"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): Real-time,
+#   polygon-based, model-driven advisories for 45 waterbodies; poll hourly and store. Not a
+#   discharge record; an official advisory.
+# Access detail (research, quoted): Angular dashboard linked from
+#   https://www.nyc.gov/site/dep/water/waterbody-advisories.page. Unauthenticated JSON endpoints
+#   found in the app bundle and fetched 2026-11-01: /api/profile (config: show_advisories 'wq'; wq
+#   layer waterbody_wq_advisory_staging; cso layer waterbody_csov2_advisory_staging),
+#   /api/advisory?advisoryType=WQ|CSO (45 rows: occurredOn, waterbody{id,name,class,rainGauge},
+#   duration [hours], message, volume), /api/sensors (14 WRRF rain gauges with
+#   accumulatedLast24Hours), /api/rainfall-samples?page=N&pageSize=96&sensorId=CI (hourly rainfall,
+#   history back to at least Sept 2025), /api/calendar. The occurredOn parameter is ignored:
+#   /api/advisory returns only the current state.
+# Can fill: event_type (advisory), started_at (occurredOn = model run hour, local time, no offset),
+#   valid_until (occurredOn + duration hours, computed by the app), waterbody, geometry (official
+#   affected area polygon via ArcGIS layer), authority, advice_text (message)
+# Cannot fill: outfall; volume per outfall; history (current state only; poll to build history)
+# Waters: 45 NYC waterbodies (not beaches) (openboatlaunch slugs: long-island-sound-ct)
+# History: none for advisories; hourly rainfall paged back >1 year
+# Research notes: nyc.gov page: system uses '10-years of hourly modeled bacterial data to project
+#   when and for how long a waterbody is likely to exceed its bacterial limit' with rain gauges at
+#   all 14 WRRFs; 'Reports advisories for 45 individual waterbodies citywide'; sign-up via Notify
+#   NYC. On 2026-11-01 every waterbody read 'No Advisory' (0.0 in of rain in prior 24 h at all
+#   gauges).
+cadence: "hourly model run from WRRF rain gauges; rainfall sample for 16:00 created 22:58Z (about 1-2 h lag) on 2026-11-01"
+license: "No licence stated on the app. NYC Terms of Use apply to nyc.gov content (not quoted)."
+attribution: "NYC Department of Environmental Protection"
+enabled: true
+role: "advisories"
+event_types: ["cso"]
+states: ["NY"]
+access: ["api", "html"]
+access_detail: "Angular dashboard linked from https://www.nyc.gov/site/dep/water/waterbody-advisories.page. Unauthenticated JSON endpoints found in the app bundle and fetched 2026-11-01: /api/profile (config: show_advisories 'wq'; wq layer waterbody_wq_advisory_staging; cso layer waterbody_csov2_advisory_staging), /api/advisory?advisoryType=WQ|CSO (45 rows: occurredOn, waterbody{id,name,class,rainGauge}, duration [hours], message, volume), /api/sensors (14 WRRF rain gauges with accumulatedLast24Hours), /api/rainfall-samples?page=N&pageSize=96&sensorId=CI (hourly rainfall, history back to at least Sept 2025), /api/calendar. The occurredOn parameter is ignored: /api/advisory returns only the current state."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,27 @@
+id: "va-vdh-hab-dashboard"
+name: "VDH Harmful Algal Bloom dashboard and '2026 HAB Sample Results' layers"
+url: "https://virginiahealth.maps.arcgis.com/apps/dashboards/5336b3174db64819ad172199347cfd73"
+homepage: "https://virginiahealth.maps.arcgis.com/apps/dashboards/5336b3174db64819ad172199347cfd73"
+kind: "arcgis"
+level: "state"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Token-free HAB status
+#   layer with advisory text.
+# Access detail (research, quoted): Dashboard -> web map b571208f08fc4e5a992073275f3b2ba0 ->
+#   https://services5.arcgis.com/8CMfd3uYk8d4J22E/arcgis/rest/services/2025_HAB_Sample_Results/FeatureServer/0
+#   (service name says 2025, layer is '2026 HAB Sample Results': 66 points; AdvisoryStatus Coastal
+#   40, NoAdvisory 25, Mat 1) and /1 polygons (1); bloom reports Survey123 layer
+#   survey123_7d57838ee1854cf9a6f154797e0ffdbd_results. Page: map 'updated regularly during the
+#   months of May – October'.
+# History: Archive dashboard 4149e8df061f4f3ca7d983ae5f3db52d and 2025 archive layers
+cadence: "May-October, business days"
+license: "none stated"
+attribution: "Virginia Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["VA"]
+access: ["arcgis", "map_only"]
+access_detail: "Dashboard -> web map b571208f08fc4e5a992073275f3b2ba0 -> https://services5.arcgis.com/8CMfd3uYk8d4J22E/arcgis/rest/services/2025_HAB_Sample_Results/FeatureServer/0 (service name says 2025, layer is '2026 HAB Sample Results': 66 points; AdvisoryStatus Coastal 40, NoAdvisory 25, Mat 1) and /1 polygons (1); bloom reports Survey123 layer survey123_7d57838ee1854cf9a6f154797e0ffdbd_results. Page: map 'updated regularly during the months of May – October'."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

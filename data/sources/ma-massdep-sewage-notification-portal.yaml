@@ -1,0 +1,43 @@
+id: "ma-massdep-sewage-notification-portal"
+name: "MassDEP Sewage Notification public portal (EEA Data Portal 'CSO Data Portal')"
+url: "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/"
+homepage: "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/"
+kind: "api"
+level: "state"
+# Notes (research/ma, status used, verified fetched, checked 2026-11-01): The only statewide,
+#   machine-readable, near-real-time record of MA sewage discharges; includes outfall ids and both
+#   preliminary and verified reports.
+# Access detail (research, quoted): Angular single-page app (main.324f8c104c6da2136b73.js, page
+#   last-modified 2026-09-10). Search form, results table, per-record detail page at
+#   /portal/dep/cso-data-portal/details/{incidentId}, and 'Export To Excel' (xlsx). All data comes
+#   from the JSON API recorded as ma-massdep-csoapi. No RSS, no email list, no map on the portal
+#   itself.
+# Can fill: source_record_id, event_type, source_status, started_at, timezone(inferred
+#   America/New_York), published_at(submittedDate), waterbody, location_text, authority,
+#   jurisdiction, volume(VDR), units(gallons, implied), source_url, raw_record,
+#   revision_history(parent/child)
+# Cannot fill: ended_at (only derivable from VDR hours+minutes or a 'Ceased' child without a
+#   cessation timestamp); advice_text; valid_until; coordinates (null for >90% of rows; join
+#   outfallId to MassDEP CSO layer); estimate_flag
+# Waters: statewide; every CSO permittee and SSO-reporting sewer system; receiving water named per
+#   record (openboatlaunch slugs: connecticut-river-ma, chicopee-river-ma, merrimack-river-ma,
+#   concord-river-ma, charles-river-ma, mystic-river-ma, dorchester-bay-ma, massachusetts-bay-ma,
+#   lynn-harbor-ma, saugus-river-ma, gloucester-harbor-ma, taunton-river-ma, acushnet-river-ma,
+#   new-bedford-harbor-ma, clarks-cove-ma, nashua-river-ma, blackstone-river-ma, westfield-river-ma)
+# History: Records from 2022-07-06 (first day of enforcement) to present; 19,574 rows on 2026-11-01
+#   (9,437 Public Notification, 9,960 Verified Data, 177 'No Events for the month'); 18,735
+#   CSO-permittee rows, 662 non-CSO (SSO) rows.
+# Research notes: Records come in two classes; never sum both (DEP's annual report uses Verified
+#   Data Reports only). A VDR with zero volume is a retraction.
+cadence: "Permittee files a Public Notification Report within 18 hours of its public advisory (DEP how-to); statute: DEP displays within 24 hours of receipt. Observed (last 1,000 rows, Jul-Oct 2026): event start to portal submission median 6 h (New Bedford, Fall River, Lowell), 18 h (Springfield), 39 h (Holyoke); weekend events often filed Monday. Verified Data Reports by the 15th of the next month."
+license: "EEA Data Portal disclaimer (eeaonline.eea.state.ma.us/portal#!/disclaimer, text read from the portal's custom.js): \"The data contained in this public data portal has been retrieved through the agency's pre-existing data systems and/or existing hard copy documentation that have been converted into a data format. Although reasonable efforts have been made to make this data useful to the public, the data presented through this portal has not been fully verified for accuracy and/or completeness, and the agency assumes no obligation to either maintain or update any of the data contained on this website.\" and \"This portal does not include all of the agency's regulatory data, and therefore should not be relied upon to determine overall compliance.\" No licence or reuse restriction stated."
+attribution: "MassDEP / EEA"
+enabled: true
+role: "events"
+event_types: ["cso", "cso_treated", "partially_treated", "blended", "sso"]
+states: ["MA"]
+access: ["html", "api", "csv"]
+access_detail: "Angular single-page app (main.324f8c104c6da2136b73.js, page last-modified 2026-09-10). Search form, results table, per-record detail page at /portal/dep/cso-data-portal/details/{incidentId}, and 'Export To Excel' (xlsx). All data comes from the JSON API recorded as ma-massdep-csoapi. No RSS, no email list, no map on the portal itself."
+machine_readable: true
+legal_basis: "M.G.L. c. 21 s. 43A(i); 314 CMR 16.07"
+checked: "2026-11-01"

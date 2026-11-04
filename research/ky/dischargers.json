@@ -1,0 +1,405 @@
+[
+ {
+  "id": "ky-owensboro-ky0020095",
+  "name": "RWRA MAX RHOADS WWTP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0020095",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 8 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Owensboro"
+  ],
+  "notes": "State DOW CSO layer: 8 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-maysville-ky0020257",
+  "name": "MAYSVILLE STP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0020257",
+  "receiving_waters": [
+   "Limestone Creek",
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 14,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 14 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Maysville"
+  ],
+  "notes": "State DOW CSO layer: 14 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-henderson-ky0020711",
+  "name": "HENDERSON STP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0020711",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 15,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 15 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Henderson"
+  ],
+  "notes": "State DOW CSO layer: 14 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-morganfield-ky0021440",
+  "name": "MORGANFIELD WWTP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0021440",
+  "receiving_waters": [
+   "UT to Lost Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 2 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Morganfield"
+  ],
+  "notes": "State DOW CSO layer: 2 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-erlanger-ky0021466",
+  "name": "Sanitation District No. 1 of Northern Kentucky (Dry Creek WWTP and combined system)",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0021466",
+  "receiving_waters": [
+   "Banklick Creek",
+   "Licking River",
+   "Ohio River",
+   "Pleasant Run Creek",
+   "UT to Banklick Creek",
+   "UT to Fourmile Creek",
+   "UT to Ohio River",
+   "UT to Ohio River (Taylor Creek)",
+   "UT to Ohio River (UT to Taylor Cree",
+   "UT to Ohio River (UT to Taylor Creek)",
+   "UT to Pleasant Run Creek",
+   "Unnamed Tributary to Ohio River (Covert Run)",
+   "Unnamed Tributary to Ohio River (UT to Taylor Cree"
+  ],
+  "water_slugs": [],
+  "outfall_count": 88,
+  "outfalls_source": "Kentucky DOW CSO Sites layer (88 active) and SD1 map PDF https://sd1.org/DocumentCenter/View/207/Local-Sewer-Overflows-PDF",
+  "notification_channel": "Wet Weather Overflow Notification Program https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra : email/text sign-up, May to October, when rain >= 0.25 inch or Ohio River > 38 feet, advisories last 72 hours; CSO signs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Boone County",
+   "Campbell County",
+   "Kenton County"
+  ],
+  "notes": "Amended consent decree 2019 (Clean H2O40). Rule-based alerts, not per-event reports.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-vanceburg-ky0021512",
+  "name": "VANCEBURG STP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0021512",
+  "receiving_waters": [
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 0 open, 1 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Vanceburg"
+  ],
+  "notes": "State DOW CSO layer: 0 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-ashland-ky0022373",
+  "name": "ASHLAND STP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0022373",
+  "receiving_waters": [
+   "OHIO RIVER",
+   "UT / OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 8 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ashland"
+  ],
+  "notes": "State DOW CSO layer: 8 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-louisville-ky0022411",
+  "name": "Louisville/Jefferson County Metropolitan Sewer District (Morris Forman WQTC and combined sewer system)",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0022411",
+  "receiving_waters": [
+   "OHIO RIVER",
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 121,
+  "outfalls_source": "Kentucky DOW CSO Sites layer (120 active, points) and EPA inventory (121 open)",
+  "notification_channel": "Overflow Advisory Level banner on louisvillemsd.org and /overflowalert (MSD-01 system-wide wet-weather advisory with a 48-hour after-rain rule; MSD-02 dated discharge notices with start time); CSO signs; email list sign-up in site footer",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Louisville"
+  ],
+  "notes": "Advisory node 31322 stamped 'November 3, 2026 3:00 AM'. Old MSD-02 nodes are removed (Feb 2025 node now 404). Consent decree (2005, amended 2009). 120 active CSO sites in the state layer.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-paducah-ky0022799",
+  "name": "PADUCAH/MCCRACKEN COUNTY JSA - PADUCAH",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0022799",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 11,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 11 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Paducah"
+  ],
+  "notes": "State DOW CSO layer: 11 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-frankfort-ky0022861",
+  "name": "FRANKFORT MUNICIPAL STP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0022861",
+  "receiving_waters": [
+   "Benson Creek",
+   "KENTUCKY RIVER",
+   "Kentucky River",
+   "UT of Penitentiary Branch"
+  ],
+  "water_slugs": [],
+  "outfall_count": 16,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 16 open, 4 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Frankfort"
+  ],
+  "notes": "State DOW CSO layer: 14 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-worthington-ky0022926",
+  "name": "WORTHINGTON WWTP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0022926",
+  "receiving_waters": [
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 0 open, 1 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Worthington"
+  ],
+  "notes": "State DOW CSO layer: 0 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-pineville-ky0024058",
+  "name": "PINEVILLE STP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0024058",
+  "receiving_waters": [
+   "Cumberland River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 2 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pineville"
+  ],
+  "notes": "State DOW CSO layer: 2 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-pikeville-ky0025291",
+  "name": "PIKEVILLE WWTP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0025291",
+  "receiving_waters": [
+   "Levisa Fork",
+   "Pikeville Pond"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 0 open, 4 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pikeville"
+  ],
+  "notes": "State DOW CSO layer: 0 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-loyall-ky0026093",
+  "name": "HARLAN STP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0026093",
+  "receiving_waters": [
+   "UT to Martins Fork"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 1 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Loyall"
+  ],
+  "notes": "State DOW CSO layer: 2 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-loyall-ky0026115",
+  "name": "LOYALL STP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0026115",
+  "receiving_waters": [
+   "UT to Cumberland River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 2 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Loyall"
+  ],
+  "notes": "State DOW CSO layer: 2 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-prestonsburg-ky0027413",
+  "name": "PRESTONSBURG STP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0027413",
+  "receiving_waters": [
+   "Levisa Fork",
+   "Trimble Branch"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 0 open, 3 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Prestonsburg"
+  ],
+  "notes": "State DOW CSO layer: 0 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-catlettsburg-ky0035467",
+  "name": "CATLETTSBURG STP",
+  "state": "KY",
+  "kind": "cso",
+  "npdes_permit": "KY0035467",
+  "receiving_waters": [
+   "Catletts Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 1 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Catlettsburg"
+  ],
+  "notes": "State DOW CSO layer: 1 active sites. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ky-lexington-lfucg",
+  "name": "Lexington-Fayette Urban County Government (Town Branch and West Hickman WWTPs)",
+  "state": "KY",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Town Branch",
+   "Wolf Run",
+   "Cane Run",
+   "West Hickman Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "none found (consent decree reports to EPA and the Cabinet)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lexington"
+  ],
+  "notes": "SSO consent decree 2008, modified 2015 and 2024; KPDES permit numbers not confirmed in this round.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ }
+]

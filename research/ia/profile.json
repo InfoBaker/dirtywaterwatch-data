@@ -1,0 +1,154 @@
+{
+ "state": "IA",
+ "name": "Iowa",
+ "region": "plains",
+ "epa_region": 7,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "partial",
+  "summary": "Operators must phone the DNR field office within 24 hours of an unanticipated bypass and send a written report within 5 days. A public notice is required only when the DNR decides one is necessary; the operator then prepares it. No channel or deadline for that notice is set in the rule.",
+  "citations": [
+   {
+    "cite": "567 IAC 63.6(3)",
+    "title": "Notification of unanticipated bypass or upset and public notices (PNs)",
+    "url": "https://www.legis.iowa.gov/docs/iac/rule/05-14-2025.567.63.6.pdf",
+    "quote": "63.6(3) Notification of unanticipated bypass or upset and public notices (PNs). In the event that a bypass or upset occurs without prior notice having been provided pursuant to 63.6(2) or as a result of mechanical failure or acts beyond the control of the owner or operator, the owner or operator of the treatment facility or collection system shall notify the department by telephone as soon as possible but not later than 24 hours after the onset or discovery. ... c. Upon notification, the department shall determine if a PN for an unanticipated bypass is necessary. If the department determines that a PN is necessary, the owner or operator of the treatment facility or the collection system shall prepare a PN.",
+    "who": "owner or operator of the treatment facility or collection system, when DNR so decides",
+    "channel": "not specified",
+    "deadline": "24 hours to DNR by telephone; written report within 5 days; PN timing not specified",
+    "threshold": "any unanticipated bypass or upset",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "telephone within 24 hours to the DNR field office (after hours 515-725-8694); written report within 5 days",
+   "cite": "567 IAC 63.6(3)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "IA0058611",
+   "quote": "Not read; Iowa CSO permits assumed to carry an NMC #8 notification clause.",
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "567 IAC 63.6 rewritten by ARC 9205C, effective 2025-06-18.",
+   "Keokuk: press reports of EPA consent-order pressure on sewer projects (2026, search only)."
+  ]
+ },
+ "erule": {
+  "system": "unknown",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "No Iowa rows in EPA SOBE; 2 Iowa collection-system rows. Iowa's eRule implementation not identified."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [
+   "ia-dnr-news-releases"
+  ],
+  "precision": "event",
+  "machine_readable": false,
+  "format": "html",
+  "latency": "days to a week, discretionary",
+  "history": "2016 to date (press releases)",
+  "coordinates": "none",
+  "receiving_water": "in text",
+  "start_end": "start in text, rarely an end",
+  "volume": false,
+  "stable_id": true,
+  "license": "State of Iowa site policies (not quoted)",
+  "notes": "Only events DNR chooses to announce; the field-office spill database rarely holds sewage."
+ },
+ "cso": {
+  "permits": 9,
+  "open_outfalls": 39,
+  "operators_with_web_channel": 0,
+  "operators_checked": 5,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No city CSO notice channel found for Keokuk, Ottumwa, Burlington, Clinton or Des Moines; DNR news releases cover only notable events. Des Moines reports its last CSO eliminated in 2025."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [
+   "ia-waterloo-sso-notices"
+  ],
+  "notes": "Waterloo posts an event table; others not searched."
+ },
+ "beaches": {
+  "program": "Iowa DNR beach monitoring (AQuIA): weekly E. coli and microcystin at state park and some local beaches, Memorial Day to Labor Day",
+  "source_ids": [
+   "ia-aquia-beaches"
+  ],
+  "machine_readable": true,
+  "scope": "inland",
+  "notes": "JSON API and CSV download; empty off season."
+ },
+ "habs": {
+  "program": "Microcystin sampled with the weekly beach program (8 ug/L advisory)",
+  "source_ids": [
+   "ia-aquia-beaches"
+  ],
+  "machine_readable": true,
+  "notes": ""
+ },
+ "advisories": {
+  "health_department_pages": [],
+  "watershed_groups": [
+   "Iowa Environmental Council (season recaps)"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "Des Moines may be stale (3 open outfalls listed after 2025 elimination)",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Mississippi River (IL, WI, MN, MO)",
+   "Missouri River (NE, SD)",
+   "Big Sioux River (SD)",
+   "Des Moines River (MN, MO)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "Public notice of a bypass is required only when DNR decides it is necessary; no channel is named.",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "records_request",
+   "what": "Five-day written bypass reports go to DNR field offices and are not published.",
+   "fix_level": "agency",
+   "note": "Ask DNR for a bypass log or to join EPA SOBE."
+  },
+  {
+   "kind": "phone_only",
+   "what": "Beach status by phone hotline (515-725-3434) alongside the web; bypasses reported by phone.",
+   "fix_level": "agency",
+   "note": "Beach data are also on the web."
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "C",
+  "expected_grade": "No public reports",
+  "first_feed": "ia-dnr-news-releases",
+  "effort": "small",
+  "rationale": "No statewide overflow data: nothing in SOBE, written bypass reports are not public and the spill database rarely holds sewage. DNR press releases give dated notices for a few notable bypasses (Keokuk, August 2026) and Waterloo posts its own SSO table; both are small HTML pollers. The nine CSO cities show outfalls, the rain caution and the plain statement; check ECHO DMR for monthly CSO counts.",
+  "order_hint": 4
+ },
+ "owner_questions": [
+  "Ask Iowa DNR for a public log of bypass reports (567 IAC 63.6(3)d written submissions) or for its eRule plan?",
+  "Show DNR press releases as dated events even though they are discretionary and sparse?",
+  "Treat Des Moines' three EPA-listed open CSO outfalls as closed on the strength of 2025 press reports?"
+ ],
+ "surprise": "Iowa's rule makes public notice of a sewage bypass the DNR's call, not the operator's duty, and the clearest recent notice (Keokuk, August 2026) came about a week after the bypass began, through a CSO outfall just upstream of a public boat ramp."
+}

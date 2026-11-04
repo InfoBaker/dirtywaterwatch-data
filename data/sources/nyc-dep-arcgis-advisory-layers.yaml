@@ -1,0 +1,36 @@
+id: "nyc-dep-arcgis-advisory-layers"
+name: "NYC DEP ArcGIS waterbody advisory layers (csov2_prod, waterbody_wq_advisory_staging, waterbody_csov2_advisory_staging, NYCWaterbodiesContaminationAdvisory45 and views, cso_prd)"
+url: "https://services.arcgis.com/at3rDjch5X7i9Bag/arcgis/rest/services/waterbody_wq_advisory_staging/FeatureServer/0"
+homepage: "https://services.arcgis.com/at3rDjch5X7i9Bag/arcgis/rest/services/waterbody_wq_advisory_staging/FeatureServer/0"
+kind: "arcgis"
+level: "municipal"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): Polygon geometry for
+#   the 45 advisory waterbodies; pair with the JSON API. Field semantics inferred: in the csov2
+#   layers Advisory=1 on 35 waterbodies with zero rain, so it is not 'advisory in effect' there
+#   (inferred static flag); the WQ layer read Advisory=0 everywhere.
+# Access detail (research, quoted): All fetched 2026-11-01 with
+#   query?where=1=1&outFields=*&returnGeometry=false&f=json (45 features each). Live
+#   (dataLastEditDate 2026-11-01 22:06Z): csov2_prod, waterbody_wq_advisory_staging,
+#   waterbody_csov2_advisory_staging (despite 'staging' names, the production dashboard profile
+#   points to the two *_staging layers). Stale: NYCWaterbodiesContaminationAdvisory45 / _View /
+#   _CSOView (last edit 2025-07-09), cso_prd (2026-06-26). The task-prompt name
+#   'NYCWaterbodiesContaminationAdvisories' corresponds to NYCWaterbodiesContaminationAdvisory45*.
+# Can fill: geometry (official affected area), waterbody, valid_until (Expires/Hours when set)
+# Cannot fill: discharge facts
+# Waters: 45 NYC waterbody polygons (openboatlaunch slugs: long-island-sound-ct)
+# History: none
+# Research notes: Each polygon carries a class (I, SB, SC, SD), the use ('Boating', 'Bathing and
+#   Boating', 'Minimize Contact'), indicator 'Fecal Coliform', three rain gauges and fitted curve
+#   coefficients A-F with a rainfall threshold (0.1 in on most).
+cadence: "edited hourly by the model"
+license: "none stated"
+attribution: "NYC DEP"
+enabled: true
+role: "advisories"
+event_types: ["cso"]
+states: ["NY"]
+access: ["arcgis"]
+access_detail: "All fetched 2026-11-01 with query?where=1=1&outFields=*&returnGeometry=false&f=json (45 features each). Live (dataLastEditDate 2026-11-01 22:06Z): csov2_prod, waterbody_wq_advisory_staging, waterbody_csov2_advisory_staging (despite 'staging' names, the production dashboard profile points to the two *_staging layers). Stale: NYCWaterbodiesContaminationAdvisory45 / _View / _CSOView (last edit 2025-07-09), cso_prd (2026-06-26). The task-prompt name 'NYCWaterbodiesContaminationAdvisories' corresponds to NYCWaterbodiesContaminationAdvisory45*."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

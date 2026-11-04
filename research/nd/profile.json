@@ -1,0 +1,165 @@
+{
+ "state": "ND",
+ "name": "North Dakota",
+ "region": "plains",
+ "epa_region": 8,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "partial",
+  "summary": "No statute or rule found that requires public notice of a sewage spill. Municipal NDPDES permits (Fargo read) require an oral report to DEQ within 24 hours and a permittee plan to 'immediately notify the public' of SSOs, with the channel left to the plan. Spills are reported to the state's unified spill line and land in HazConnect, whose public list exists but is bot-walled.",
+  "citations": [
+   {
+    "cite": "NDPDES permit ND0022870 (Fargo), special conditions, Public Notice",
+    "title": "Reporting, Record Keeping, and Public Notification for Unauthorized Sanitary Sewer Overflows",
+    "url": "https://deq.nd.gov/PublicComment/NDPDES-Fargo-20231216.pdf",
+    "quote": "The permittee shall immediately notify the public, public health agencies, and other affected entities (e.g. public water systems) of any sanitary sewer overflow that the permittee owns or has operational control which are identified in the plan required in paragraph A of this section.",
+    "who": "permittee",
+    "channel": "per the permittee's notification plan (not specified)",
+    "deadline": "immediately",
+    "threshold": "overflows identified in the plan as potentially endangering public health",
+    "verified": "fetched"
+   },
+   {
+    "cite": "North Dakota Spill Notification Procedures (2021-01-05)",
+    "title": "Immediate hazmat spill/release reporting criteria",
+    "url": "https://www.spill.nd.gov/sites/www/files/documents/Spill%20Notification%20Procedures%2001052021.pdf",
+    "quote": "Any spill/release that has an impact, or potential impact, to public health; Waterways impacted/threatened",
+    "who": "responsible party",
+    "channel": "state agencies via the unified reporting system (no public channel)",
+    "deadline": "immediate",
+    "threshold": "impact or threat to public health or waterways",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "oral within 24 hours; written within 5 days (waivable)",
+   "cite": "NDPDES permit special conditions (Fargo ND0022870); NDAC 33.1-16-01"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "None found (search only)."
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": "https://northdakota.hazconnect.com/ListIncidentPublic.aspx",
+  "notes": "No ND rows in SOBE. Overflows go to DEQ by phone and the unified spill system; whether they all reach HazConnect is unconfirmed."
+ },
+ "statewide_feed": {
+  "exists": true,
+  "source_ids": [
+   "nd-hazconnect-public-incidents",
+   "nd-deq-eir-legacy-general"
+  ],
+  "precision": "event",
+  "machine_readable": false,
+  "format": "html",
+  "latency": "unknown",
+  "history": "HazConnect 2021 to date; legacy table 1975-2020",
+  "coordinates": "some (legacy table has lat/long)",
+  "receiving_water": "none in legacy table",
+  "start_end": "incident date and report date only (legacy)",
+  "volume": true,
+  "stable_id": true,
+  "license": null,
+  "notes": "HazConnect is Cloudflare-protected (blocked 2026-11-03). Legacy table: 31 'Sewage' records 2013-2020, so municipal SSO coverage was thin even before."
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 1,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No CSOs. SSO public notice is a permit condition with the channel left to each permittee's plan."
+ },
+ "sso": {
+  "location_source": "nd-deq-eir-legacy-general (lat/long per incident, to 2020)",
+  "feeds": [
+   "nd-hazconnect-public-incidents"
+  ],
+  "notes": "Sewage spills appeared in the incident system as 'Sanitary sewage'/'Domestic sewage' contaminant text."
+ },
+ "beaches": {
+  "program": "No statewide beach bacteria program found",
+  "source_ids": [
+   "nd-beach-ecoli"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": "search only"
+ },
+ "habs": {
+  "program": "ND DEQ HAB advisories and warnings, 1 May to 31 Dec",
+  "source_ids": [
+   "nd-deq-hab-program"
+  ],
+  "machine_readable": false,
+  "notes": "Story Map and weekly PDF press releases; 20 waterbodies by mid-September 2026."
+ },
+ "advisories": {
+  "health_department_pages": [],
+  "watershed_groups": [
+   "Red River Basin Commission (not searched)"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "state_table"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Red River of the North (MN, Manitoba)",
+   "Missouri River / Lake Sakakawea / Lake Oahe (MT, SD)",
+   "Souris River (Saskatchewan, Manitoba)",
+   "Bois de Sioux River (MN, SD)",
+   "Pembina River (Manitoba)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "bot_wall",
+   "what": "HazConnect public incident list blocks non-browser clients (Cloudflare)",
+   "fix_level": "agency",
+   "note": "Ask DEQ/NDDES for an export or allow-listing; else a browser-session poller."
+  },
+  {
+   "kind": "no_web",
+   "what": "Permit public-notice duty names no channel; no operator overflow page found",
+   "fix_level": "agency",
+   "note": "DEQ could require web posting in permit plans."
+  },
+  {
+   "kind": "phone_only",
+   "what": "Overflow reports to DEQ are oral within 24 hours",
+   "fix_level": "legislative",
+   "note": ""
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "B",
+  "expected_grade": "Dated reports",
+  "first_feed": "nd-hazconnect-public-incidents",
+  "effort": "medium",
+  "rationale": "A statewide public incident list exists with event dates, but it is bot-walled and whether municipal SSOs reach it since 2021 is unconfirmed. Without it the state falls to Tier D (no SOBE, no CSOs).",
+  "order_hint": 3
+ },
+ "owner_questions": [
+  "Ask ND DEQ for access to HazConnect public data (export or allow-listing), or approve a browser-based poller?",
+  "Show the 1975-2020 legacy sewage incidents as history on water pages?"
+ ],
+ "surprise": "North Dakota publishes every reported spill since 1975, with coordinates, but the 2021+ list sits behind Cloudflare, and the old table shows only 31 sewage incidents in 45 years, mostly Grand Forks."
+}

@@ -1,0 +1,23 @@
+id: "ri-ridoh-beach-pages"
+name: "RIDOH Beaches, Beach Monitoring Program and Beach Closure Data pages"
+url: "https://health.ri.gov/beaches"
+homepage: "https://health.ri.gov/beaches"
+kind: "html"
+level: "state"
+# Notes (research/ri, status used, verified fetched, checked 2026-11-01): Program facts: sampling
+#   Memorial Day to Labor Day, risk-based schedule; 'closures remain in effect until the next
+#   sampling event'; closures 'based on exceedances of more than 60 cfu/100 ml in saltwater and in
+#   freshwater'; sample data 'from 2000 to present'; season reports 2017-2021 only.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "RI.gov policies"
+attribution: "RIDOH"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["RI"]
+access: ["html", "pdf"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

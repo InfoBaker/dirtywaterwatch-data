@@ -1,0 +1,24 @@
+id: "crc-ecoli-report-2019-2023"
+name: "CRC Connecticut River E. coli Report (2019–2023), 2024-08-08"
+url: "https://www.ctriver.org/post/e-coli-report"
+homepage: "https://www.ctriver.org/post/e-coli-report"
+kind: "html"
+level: "nonprofit"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): Wet weather = >0.1 in
+#   rain in prior 48 h; CSO-affected cluster at Medina St / Pioneer Valley Riverfront Club / Pioneer
+#   Valley Yacht Club.
+# Access detail (research, quoted): none recorded
+# Waters: n/a (science/guidance) (openboatlaunch slugs: connecticut-river-ma, connecticut-river-ct,
+#   connecticut-river-nh)
+cadence: null
+license: "none stated"
+attribution: "Connecticut River Conservancy"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["MA", "CT", "VT"]
+access: ["html"]
+access_detail: ""
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

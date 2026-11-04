@@ -1,0 +1,28 @@
+id: "pa-epa-echo-cso-inventory-pa"
+name: "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS) Pennsylvania rows"
+url: "https://echo.epa.gov/tools/data-downloads"
+homepage: "https://echo.epa.gov/tools/data-downloads"
+kind: "arcgis"
+level: "federal"
+# Notes (research/pa, status used, verified fetched, checked 2026-11-02): Outfall backbone for
+#   dischargers.json; reconcile against DEP eMapPA/PASDA where reachable.
+# Access detail (research, quoted): Already joined to openboatlaunch waters in
+#   data/outfalls-mid-atlantic.json (fetched 2026-11-01 by the federal agent). Summary by permit in
+#   research/pa/raw/echo-cso-pa-summary.txt.
+# Waters: 1,633 PA CSO outfall rows across 132 permit numbers (ALCOSAN 252, Pittsburgh PWSA 198,
+#   Scranton 77, PWD 165, Shamokin-Coal 72, Harrisburg 59, Wyoming Valley 51 ...)
+# Research notes: Some permits appear twice (old individual + new PAG-06 general permit numbers,
+#   e.g. Etna PA0253332 TRM and PAG066140). Reading and Johnstown have no rows; Altoona has 1 per
+#   plant.
+cadence: null
+license: "none stated"
+attribution: "US EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["PA"]
+access: ["csv", "arcgis"]
+access_detail: "Already joined to openboatlaunch waters in data/outfalls-mid-atlantic.json (fetched 2026-11-01 by the federal agent). Summary by permit in research/pa/raw/echo-cso-pa-summary.txt."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

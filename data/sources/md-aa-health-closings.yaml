@@ -1,0 +1,24 @@
+id: "md-aa-health-closings"
+name: "Anne Arundel County Department of Health Recreational Water Closings and Advisories"
+url: "https://www.aahealth.org/environmental-health/recreational-water-quality/closings-and-advisories"
+homepage: "https://www.aahealth.org/environmental-health/recreational-water-quality"
+kind: "html"
+level: "municipal"
+# Feed row: the source id written by the ingester pipeline/ingest/md_aa_health_closings.py
+#   (data/build/events/md-aa-health-closings.json). It describes the same source as the research row(s)
+#   in registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/md_aa_health_closings.py docstring): every 6 hours; only sewage-related
+#   closures and advisories are taken (the routine high-bacteria beach advisories are left out).
+cadence: "6 hours"
+license: "None stated."
+attribution: "Anne Arundel County Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["beach_closure", "beach_advisory"]
+states: ["MD"]
+registry_ids: ["md-aahealth-closings-advisories"]
+access: ["html"]
+access_detail: "Drupal list ?page=0,1,... (about 20 a page, each with its date); each notice page is edited in place (dated update paragraphs above the original, '*Update M-D-YY*' in the title); the node id (shortlink) is stable."
+machine_readable: false
+legal_basis: "COMAR 26.08.10.07-.10 (the health department decides public-health determinations)"
+checked: "2026-11-02"

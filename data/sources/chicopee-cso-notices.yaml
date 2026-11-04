@@ -1,0 +1,24 @@
+id: "chicopee-cso-notices"
+name: "City of Chicopee CSO public notification page and notices"
+url: "https://chicopeema.gov/936/Combined-Sewer-Overflow-Public-Notificat"
+homepage: "https://chicopeema.gov/936/Combined-Sewer-Overflow-Public-Notificat"
+kind: "html"
+level: "municipal"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): Verbatim 48-hour
+#   text; cessation time sometimes 'unknown'.
+# Access detail (research, quoted): Raw copy:
+#   research/science/raw/dl-adv/chicopee-cso-notification-2025-07-27.txt (fetched 2026-11-01 by the
+#   advisory sub-researcher; text read by the lead).
+# Can fill: advice_text
+cadence: null
+license: "none stated"
+attribution: "City of Chicopee"
+enabled: true
+role: "advisories"
+event_types: ["cso"]
+states: ["MA"]
+access: ["html"]
+access_detail: "Raw copy: research/science/raw/dl-adv/chicopee-cso-notification-2025-07-27.txt (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

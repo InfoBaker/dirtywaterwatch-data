@@ -1,0 +1,23 @@
+id: "nyc-dep-harbor-water-quality-5uug-f49n"
+name: "NYC Open Data 'Harbor Water Quality' (5uug-f49n), DEP Harbor Survey"
+url: "https://data.cityofnewyork.us/d/5uug-f49n"
+homepage: "https://data.cityofnewyork.us/d/5uug-f49n"
+kind: "api"
+level: "municipal"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): Science/context for
+#   NYC waters (wet vs dry bacteria); not an event feed.
+# Access detail (research, quoted): SODA; 98,288 rows 1909..2025-12-16; fields include top/bottom
+#   fecal coliform and enterococci, lat, long, weather_condition_dry_or_wet.
+# History: 1909-
+cadence: "'Update Frequency: Monthly' (latest sample 2025-12-16 on 2026-11-01, so lagging)"
+license: "none stated"
+attribution: "NYC DEP"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["NY"]
+access: ["api", "csv"]
+access_detail: "SODA; 98,288 rows 1909..2025-12-16; fields include top/bottom fecal coliform and enterococci, lat, long, weather_condition_dry_or_wet."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

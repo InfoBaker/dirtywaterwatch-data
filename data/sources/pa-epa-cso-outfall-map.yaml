@@ -1,0 +1,20 @@
+id: "pa-epa-cso-outfall-map"
+name: "EPA 'Where Combined Sewer Overflow Outfalls Are Located' national map"
+url: "https://www.epa.gov/npdes/where-combined-sewer-overflow-outfalls-are-located"
+homepage: "https://www.epa.gov/npdes/where-combined-sewer-overflow-outfalls-are-located"
+kind: "arcgis"
+level: "federal"
+# Notes (research/pa, status used, verified search_only, checked 2026-11-02): Same National CSO
+#   Inventory already joined (pa-epa-echo-cso-inventory-pa).
+cadence: null
+license: "none stated"
+attribution: "US EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["PA"]
+access: ["map_only", "arcgis"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

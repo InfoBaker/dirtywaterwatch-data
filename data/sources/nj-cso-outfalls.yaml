@@ -1,0 +1,25 @@
+id: "nj-cso-outfalls"
+name: "NJDEP 'NJPDES Combined Sewer Overflow (CSO)' outfall points (Utilities MapServer layer 0; NJGIN 'Util_NJPDES_CSO', Edition 20230327)"
+url: "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0"
+homepage: "https://www.nj.gov/dep/gis/digidownload/metadata/html/Util_NJPDES_CSO.html"
+kind: "arcgis"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/nj_outfalls.py (writes
+#   data/build/nj-cso-outfalls.json, an outfall registry, not an events file). It describes the same
+#   source as the research row(s) in registry_ids, whose files hold the research notes, access
+#   detail and fill lists.
+# Cadence (pipeline/ingest/nj_outfalls.py docstring): The layer is static (last edits 2022-2023): a
+#   run refetches only when the file is older than 7 days (--force refetches now).
+cadence: "7 days"
+license: "NJDEP GIS data are distributed under the NJDEP Data Distribution Agreement (quoted from the HAB dashboard item; same agreement applies to NJDEP GIS data): 'Digital data received from the NJDEP may not be reproduced or redistributed without all the metadata provided.' and maps/publications 'will credit the NJDEP's Geographic Information System...'"
+attribution: "NJDEP Division of Water Quality / Bureau of GIS"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["NJ"]
+registry_ids: ["nj-njdep-cso-outfalls-arcgis"]
+access: ["arcgis"]
+access_detail: "GET .../MapServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&f=json (no auth; maxRecordCount 2000). All 211 fetched (raw/cso-outfalls-all.json). Metadata page https://www.nj.gov/dep/gis/digidownload/metadata/html/Util_NJPDES_CSO.html returned 403 to curl."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

@@ -1,0 +1,38 @@
+id: "pa-mi-egle-mienviro-cso-sso"
+name: "Michigan EGLE MiEnviro Portal public CSO/SSO/RTB discharge list (JSON behind the search page)"
+url: "https://mienviro.michigan.gov/ncore/external/overflow/list"
+homepage: "https://mienviro.michigan.gov/ncore/external/overflow/list"
+kind: "api"
+level: "state"
+# Notes (research/community, status candidate, verified fetched, checked 2026-11-01): The richest
+#   statewide discharge record found in the US: initial versus final status, start and end, quality,
+#   volume, receiving water and permit, all in public JSON. The model for our event schema and for
+#   any state agency we ask to publish. Candidate feed for national expansion.
+# Access detail (research, quoted): Fetched (no login): GET
+#   https://mienviro.michigan.gov/ncore/ss/ssolist?includeMetadataInResponse=false&loadChildren=false&queryParams={"filter":[{"eventStartDateMin":"2026-10-01"}],"top":5}
+#   returns gzip JSON {queryResults[...]}; lookups at /ncore/ss/ssolistlookups (12,752 receiving
+#   waters, 92 counties, statuses COMPLETE/IN_PROCESS). Filters: reportStatusId,
+#   responsiblePartyName, siteName, permitNumber, eventStartDateMin/Max, eventEndDateMin/Max,
+#   receivingWater, counties, submissionReferenceNumber. The UI has a CSV download and public email
+#   subscriptions by county/township.
+# Can fill: source_record_id, event_type, source_status (In Process / Completed), started_at,
+#   ended_at, timezone (offset in value), reported_at (submissionReceivedDate), waterbody,
+#   location_text, material (dischargeQuality), volume (when final), authority, jurisdiction
+# Cannot fill: coordinates (none in list); advice_text; valid_until
+# Waters: Statewide; named receiving water per report
+# History: Annual reports since July 2000 (PDF); MiEnviro list depth not measured
+# Research notes: Start and end are equal on many initial reports (end not yet known); treat end_at
+#   as unknown until status is COMPLETE. Values are doubled strings ('CSO Discharge,CSO Discharge')
+#   because of multi-section forms. The API is undocumented and may change.
+cadence: "As filed by permittees; Michigan rule requires notice within 24 hours (not quoted here, state law outside this area). Sample: event 2026-10-01 23:20, report received 2026-10-02 00:40."
+license: "none stated"
+attribution: "Michigan Department of Environment, Great Lakes, and Energy"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "rtb"]
+states: ["MI"]
+access: ["api", "csv", "html", "email"]
+access_detail: "Fetched (no login): GET https://mienviro.michigan.gov/ncore/ss/ssolist?includeMetadataInResponse=false&loadChildren=false&queryParams={\"filter\":[{\"eventStartDateMin\":\"2026-10-01\"}],\"top\":5} returns gzip JSON {queryResults[...]}; lookups at /ncore/ss/ssolistlookups (12,752 receiving waters, 92 counties, statuses COMPLETE/IN_PROCESS). Filters: reportStatusId, responsiblePartyName, siteName, permitNumber, eventStartDateMin/Max, eventEndDateMin/Max, receivingWater, counties, submissionReferenceNumber. The UI has a CSV download and public email subscriptions by county/township."
+machine_readable: true
+legal_basis: "MCL 324.3112a (Part 31, NREPA); 40 CFR 122.38 for Great Lakes CSOs"
+checked: "2026-11-01"

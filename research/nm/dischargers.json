@@ -1,0 +1,517 @@
+[
+ {
+  "id": "nm-nm0020109",
+  "name": "SILVER CITY, TOWN OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020109",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Grant County"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0020141",
+  "name": "LOS ALAMOS COUNTY - BAYO WWTP",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020141",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Los Alamos"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0020150",
+  "name": "BELEN, CITY OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020150",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Belen"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0020168",
+  "name": "AZTEC, CITY OF - WWTP",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020168",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Aztec"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0020303",
+  "name": "LOS LUNAS, VILLAGE OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020303",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Los Lunas"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0020583",
+  "name": "FARMINGTON, CITY OF (WWTP)",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020583",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Farmington"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0020672",
+  "name": "GALLUP, CITY OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020672",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gallup"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0020681",
+  "name": "TRUTH OR CONSEQUENCES, CITY OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020681",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Truth Or Consequences"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0020711",
+  "name": "TUCUMCARI, CITY OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020711",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tucumcari"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0020770",
+  "name": "BLOOMFIELD, CITY OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0020770",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bloomfield"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0022101",
+  "name": "TAOS SKI VALLEY, VILLAGE OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0022101",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Taos Ski Valley"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0022250",
+  "name": "ALBUQUERQUE BERNALILLO COUNTY WATER UTILITY AUTHORITY",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0022250",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (news coverage and case-by-case notice to NMED, EPA and Isleta Pueblo only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Albuquerque"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0022268",
+  "name": "ARTESIA, CITY OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0022268",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Artesia"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0022292",
+  "name": "SANTA FE, CITY OF (AIRPORT RD",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0022292",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Santa Fe"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0023311",
+  "name": "LAS CRUCES, CITY OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0023311",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Las Cruces"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0024066",
+  "name": "TAOS, TOWN OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0024066",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "EPA SOBE (2 events, 2026)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Rancho De Taos"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0026395",
+  "name": "CARLSBAD, CITY OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0026395",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Carlsbad"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0027987",
+  "name": "RIO RANCHO, CITY OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0027987",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rio Rancho"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0028827",
+  "name": "LAS VEGAS, CITY OF (SOUTH EAST",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0028827",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Las Vegas"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0028835",
+  "name": "SOCORRO, CITY OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0028835",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Socorro"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0029165",
+  "name": "RUIDOSO-RUIDOSO DOWNS WWTP-LIN",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0029165",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ruidoso"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0029351",
+  "name": "ESPANOLA, CITY OF",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0029351",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Espanola"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0029483",
+  "name": "CAMINO REAL REGIONAL UTILITY AUTHORITY",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0029483",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sunland Park"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0030490",
+  "name": "DONA ANA COUNTY (SOUTH CENTRAL REGIONAL WWTP)",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0030490",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "La Mesa"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nm0031178",
+  "name": "CAMINO REAL REGIONAL UTILITY AUTHORITY NORTH WASTEWATER TREATMENT PLANT",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NM0031178",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sunland"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nn0020621",
+  "name": "NAVAJO TRIBAL UTILITY AUTHORITY",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NN0020621",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found in EPA SOBE; operator channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Shiprock"
+  ],
+  "notes": "Major permit (EPA Region 6).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nm-nn0020621-shiprock",
+  "name": "Navajo Tribal Utility Authority, Shiprock WWTF (Navajo Nation, EPA-issued)",
+  "state": "NM",
+  "kind": "sso",
+  "npdes_permit": "NN0020621",
+  "receiving_waters": [
+   "San Juan River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "EPA SOBE (3 events 2024-2025)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Shiprock"
+  ],
+  "notes": "Navajo Nation permit (NN prefix); listed here because it discharges to the San Juan River in New Mexico.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ }
+]

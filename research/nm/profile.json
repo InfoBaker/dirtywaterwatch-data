@@ -1,0 +1,156 @@
+{
+ "state": "NM",
+ "name": "New Mexico",
+ "region": "southwest",
+ "epa_region": 6,
+ "npdes_authority": "epa",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "none",
+  "summary": "Anyone in charge of a facility must tell NMED orally within 24 hours of a discharge that may harm health or property, in writing within a week, and report corrective action in 15 days. EPA Region 6 issues the NPDES permits (federal 24-hour report to EPA). No duty to tell the public was found.",
+  "citations": [
+   {
+    "cite": "20.6.2.1203.A(1) NMAC",
+    "title": "Notification of discharge - removal",
+    "url": "https://www.law.cornell.edu/regulations/new-mexico/N-M-Admin-Code-SS-20.6.2.1203",
+    "quote": "As soon as possible after learning of such a discharge, but in no event more than twenty-four (24) hours thereafter, any person in charge of the facility shall orally notify the chief of the ground water quality bureau of the department, or the appropriate counterpart in any constituent agency delegated responsibility for enforcement of these rules",
+    "who": "person in charge of the facility",
+    "channel": "NMED (oral, then written)",
+    "deadline": "24 hours oral; one week written; 15 days corrective-action report",
+    "threshold": "discharge of oil or other water contaminant 'in such quantity as may with reasonable probability injure or be detrimental to human health, animal or plant life, or property, or unreasonably interfere with the public welfare or the use of property'",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours oral, 5 days written to EPA Region 6 (permit); 24 hours oral, one week written to NMED (20.6.2.1203)",
+   "cite": "40 CFR 122.41(l)(6); 20.6.2.1203 NMAC"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "NM pursuing NPDES primacy (state program pending; not checked this round).",
+   "EPA and ABCWUA settlement 2024 (USD 72,600) over Rio Grande sewage discharges (search only).",
+   "NMED actions against El Paso Water over Rio Grande sewage discharges (search only)."
+  ]
+ },
+ "erule": {
+  "system": "epa",
+  "sobe_events_2026_11_03": 2,
+  "public_output_url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "notes": "EPA-issued permits, so permittees should file with EPA's NeT tool; 55 NM collection systems registered, but only Taos has filed events."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [
+   "nm-epa-sobe"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "about 10 days (one event)",
+  "history": "2026",
+  "coordinates": "yes",
+  "receiving_water": "none",
+  "start_end": "start and end",
+  "volume": true,
+  "stable_id": true,
+  "license": "EPA public data",
+  "notes": "SOBE is a federal fallback covering one town; no NMED list of spills found."
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 1,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No CSOs."
+ },
+ "sso": {
+  "location_source": "EPA SOBE (Taos only)",
+  "feeds": [
+   "nm-epa-sobe"
+  ],
+  "notes": "Albuquerque, Santa Fe and Las Cruces registered for eRule but file no events."
+ },
+ "beaches": {
+  "program": "No state beach program found",
+  "source_ids": [
+   "nm-rio-grande-bacteria"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": ""
+ },
+ "habs": {
+  "program": "NMED SWQB HAB monitoring and advisories (HABs Mapper)",
+  "source_ids": [
+   "nm-nmed-hab-mapper"
+  ],
+  "machine_readable": true,
+  "notes": "Warning advisories at Eagle Nest and Quemado lakes in October 2026."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "https://www.env.nm.gov/surface-water-quality/hab/"
+  ],
+  "watershed_groups": [],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "eRule"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Rio Grande (CO, TX, Mexico)",
+   "San Juan River (CO, UT, Navajo Nation)",
+   "Gila River (AZ)",
+   "Pecos River (TX)",
+   "Canadian River (TX)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "NMED receives 20.6.2.1203 spill notices but publishes no list",
+   "fix_level": "agency",
+   "note": ""
+  },
+  {
+   "kind": "no_web",
+   "what": "No public notice duty",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "records_request",
+   "what": "Overflow reports filed with EPA Region 6 outside the eRule tool",
+   "fix_level": "agency",
+   "note": "EPA should require NeT-SewerOverflow filing (eRule deadline passed 2025-12-21)."
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "C",
+  "expected_grade": "No public reports",
+  "first_feed": "nm-epa-sobe",
+  "effort": "small",
+  "rationale": "Only Taos files SOBE events; no NMED list; HAB layer is good. Show outfalls, rain caution, SOBE events where they exist and the plain statement.",
+  "order_hint": 3
+ },
+ "owner_questions": [
+  "Albuquerque, Santa Fe and Las Cruces are registered for eRule but have filed no SOBE events: ask EPA Region 6 whether their SSO reports go elsewhere?",
+  "Records request to NMED for 20.6.2.1203 notices (sewage), 2024 to date?",
+  "Show Navajo Nation SOBE events (Shiprock on the San Juan) on New Mexico waters?"
+ ],
+ "surprise": "New Mexico's permits are issued by EPA, so its overflow reports should be in EPA's national file, yet only the Town of Taos has filed any; Albuquerque, on the Rio Grande, has none."
+}

@@ -1,0 +1,228 @@
+[
+ {
+  "id": "mo-st-joseph-mo0023043",
+  "name": "ST JOSEPH WATER PROTECTION FACILITY",
+  "state": "MO",
+  "kind": "cso",
+  "npdes_permit": "MO0023043",
+  "receiving_waters": [
+   "Roys Branch",
+   "Tributary to Missouri R."
+  ],
+  "water_slugs": [],
+  "outfall_count": 14,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 14 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "St Joseph"
+  ],
+  "notes": "Missouri DNR outfall layer: 14 CSO-flagged outfalls. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mo-macon-mo0023221",
+  "name": "MACON WWTP",
+  "state": "MO",
+  "kind": "cso",
+  "npdes_permit": "MO0023221",
+  "receiving_waters": [
+   "Sewer Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 3 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Macon"
+  ],
+  "notes": "Missouri DNR outfall layer: 3 CSO-flagged outfalls. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mo-kansas-city-mo0024911",
+  "name": "City of Kansas City, Missouri (KC Water), Blue River WWTP and combined system",
+  "state": "MO",
+  "kind": "cso",
+  "npdes_permit": "MO0024911",
+  "receiving_waters": [
+   "Blue R.",
+   "Blue River",
+   "Brush Creek",
+   "Dyke Branch",
+   "Mill Creek",
+   "Missouri R.",
+   "Missouri River",
+   "Town fork (Mill) Creek",
+   "Tributary to Blue R.",
+   "Tributary to Brush Creek",
+   "Tributary to Mill Creek",
+   "Unnamed Tributary to Blue River",
+   "Unnamed Tributary to Mill Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 80,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 80 open, 15 closed",
+  "notification_channel": "Press releases for some overflows; signs posted near overflow sites; Smart Sewer site (403 to curl)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kansas City"
+  ],
+  "notes": "EPA inventory 80 open; Missouri DNR layer does not flag this permit's outfalls as CSO.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mo-kansas-city-mo0024929",
+  "name": "KC WESTSIDE WWTP",
+  "state": "MO",
+  "kind": "cso",
+  "npdes_permit": "MO0024929",
+  "receiving_waters": [
+   "Tributary to Missouri R."
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 5 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kansas City"
+  ],
+  "notes": "Missouri DNR outfall layer: 5 CSO-flagged outfalls. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mo-st-louis-mo0025151",
+  "name": "Metropolitan St. Louis Sewer District, Lemay WWTP and combined system",
+  "state": "MO",
+  "kind": "cso",
+  "npdes_permit": "MO0025151",
+  "receiving_waters": [
+   "River des Peres",
+   "Mississippi River",
+   "Deer Creek",
+   "Black Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 120,
+  "outfalls_source": "Missouri DNR outfall layer https://gis.dnr.mo.gov/host/rest/services/waste/NPDES_WasteWaterOutfalls/MapServer/1 (120 CSO outfalls with points, River des Peres and Mississippi tributaries); EPA inventory shows 0 open / 3 closed",
+  "notification_channel": "Outfall signs ('do not play, swim or fish during possible sewage overflow'); msdprojectclear.org behind a bot wall; no event notices found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "St. Louis",
+   "St. Louis County"
+  ],
+  "notes": "Missouri DNR outfall layer: 120 CSO-flagged outfalls.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mo-cape-girardeau-mo0050580",
+  "name": "CAPE GIRARDEAU WWTF",
+  "state": "MO",
+  "kind": "cso",
+  "npdes_permit": "MO0050580",
+  "receiving_waters": [
+   "Tributary to Cape La Croix Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 1 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cape Girardeau"
+  ],
+  "notes": "Missouri DNR outfall layer: 0 CSO-flagged outfalls. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mo-moberly-mo0117960",
+  "name": "MOBERLY WWTP",
+  "state": "MO",
+  "kind": "cso",
+  "npdes_permit": "MO0117960",
+  "receiving_waters": [
+   "Sweet Spring Creek",
+   "Tributary to Trib. to Coon Cr."
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 4 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Moberly"
+  ],
+  "notes": "Missouri DNR outfall layer: 4 CSO-flagged outfalls. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mo-carrollton-mo0134198",
+  "name": "SHOW ME ETHANOL LLC",
+  "state": "MO",
+  "kind": "cso",
+  "npdes_permit": "MO0134198",
+  "receiving_waters": [
+   "Tributary to Little Wakenda Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 1 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Carrollton"
+  ],
+  "notes": "Industrial (ethanol plant) listed as CSO in the EPA inventory; probably a coding error, not a sewage CSO. Missouri DNR layer: 0 CSO-flagged outfalls. Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mo-msd-stl-bissell-point",
+  "name": "Metropolitan St. Louis Sewer District, Bissell Point WWTP and combined system",
+  "state": "MO",
+  "kind": "cso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Mississippi River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Outfall signs; msdprojectclear.org (bot wall)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "St. Louis"
+  ],
+  "notes": "Bissell Point WWTP does not appear in the Missouri DNR outfall layer at all (MSD plants present: Lemay MO0025151, Coldwater Creek MO0025160, Grand Glaize MO0101362, Missouri River MO0004391, Fenton MO0086126, Lower Meramec MO0127949), nor as a CSO permit in the EPA inventory. Permit number not confirmed (MO0025178 is a recollection, unverified). News coverage cites about 200 CSO outfalls in MSD's combined area. Largest inventory gap in the region.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mo-msd-stl-sso",
+  "name": "Metropolitan St. Louis Sewer District, Missouri River WWTP and separate sewer system (SSO consent decree 2011)",
+  "state": "MO",
+  "kind": "sso",
+  "npdes_permit": "MO0004391",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "none found (bot wall)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "St. Louis County"
+  ],
+  "notes": "Major permit in the seed list under MSD.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ }
+]

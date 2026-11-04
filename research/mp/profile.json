@@ -1,0 +1,124 @@
+{
+ "state": "MP",
+ "name": "Northern Mariana Islands",
+ "region": "territories",
+ "epa_region": 9,
+ "npdes_authority": "epa",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-04",
+ "law": {
+  "public_notice_duty": "unknown",
+  "summary": "EPA Region 9 issues the permits. No public-notice duty for sewage spills found; BECQ red-flags beaches for 48 hours on its weekly results.",
+  "citations": [],
+  "regulator_report": {
+   "deadline": "24 hours oral, 5 days written (EPA permit standard condition)",
+   "cite": "40 CFR 122.41(l)(6)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": []
+ },
+ "erule": {
+  "system": "epa",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "Three collection systems registered, no events."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": "none",
+  "receiving_water": "none",
+  "start_end": "none",
+  "volume": false,
+  "stable_id": false,
+  "license": null,
+  "notes": ""
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 1,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No combined sewers."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [],
+  "notes": ""
+ },
+ "beaches": {
+  "program": "BECQ Water Quality Surveillance / NPS program, weekly red and green flags",
+  "source_ids": [
+   "mp-becq-beach-results"
+  ],
+  "machine_readable": false,
+  "scope": "coastal",
+  "notes": "One HTML page, parseable."
+ },
+ "habs": {
+  "program": "none found",
+  "source_ids": [],
+  "machine_readable": false,
+  "notes": ""
+ },
+ "advisories": {
+  "health_department_pages": [],
+  "watershed_groups": [],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": []
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "No sewage spill notices from CUC found",
+   "fix_level": "operator",
+   "note": ""
+  },
+  {
+   "kind": "email_only",
+   "what": "Red-flag email list joined on request",
+   "fix_level": "owner",
+   "note": ""
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "BECQ beach advisory email list",
+   "url": "https://www.deq.gov.mp/beach-advisories.html",
+   "what": "Weekly red-flag notices"
+  }
+ ],
+ "readiness": {
+  "tier": "D",
+  "expected_grade": "No public reports",
+  "first_feed": "mp-becq-beach-results",
+  "effort": "small",
+  "rationale": "No overflow reports; a good weekly beach advisory page with a stated 48-hour window.",
+  "order_hint": 6
+ },
+ "owner_questions": [
+  "BECQ's red flag carries its own 48-hour window: show it as the authority's red window?"
+ ],
+ "surprise": "The CNMI's weekly beach page is one of the cleanest advisory records in the territories (466 weekly reports since 2022, site codes, an explicit 48-hour, 300-foot advice), yet no sewage spill is reported anywhere."
+}

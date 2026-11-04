@@ -1,0 +1,41 @@
+id: "pa-crwa-flagging-program"
+name: "Charles River Watershed Association Flagging Program (boathouse flags, website, Public Flagging API)"
+url: "https://crwa-flagging.herokuapp.com/"
+homepage: "https://crwa-flagging.herokuapp.com/"
+kind: "api"
+level: "nonprofit"
+# Notes (research/community, status candidate, verified fetched, checked 2026-11-01): Open JSON API,
+#   good for the Charles River water page and a direct partner. Flag rules are public. Caveat:
+#   'reason' still reads 'sewage' or 'cyanobacteria' while 'safe' is true off season, so read 'safe'
+#   plus is_boating_season, never 'reason' alone.
+# Access detail (research, quoted): Fetched: GET
+#   https://crwa-flagging.herokuapp.com/api/v1/boathouses (boathouse, latitude, longitude, reach,
+#   safe, overridden, reason); /api/v1/model (is_boating_season, model_outputs[reach,
+#   predictions[time, prediction, safe]], model_version, time_returned); /api/v1/model_input_data
+#   (rain, stream flow, gage height, air temp etc). No auth. Swagger docs linked from /api. Email
+#   alerts via CRWA; Twitter @crwaflagging.
+# Can fill: advice_text (derived: red/blue), geometry (boathouse points, reach number), valid_until
+#   (implicit 48 h for CSO), source_updated_at (prediction time)
+# Cannot fill: started_at/ended_at of the CSO itself; volume; outfall id; which CSO triggered the
+#   flag
+# Waters: Lower Charles River Basin, Watertown Dam to New Charles River Dam; 13 boathouses in 4
+#   reaches (openboatlaunch slugs: charles-river-ma)
+# History: API returns 24 hourly predictions per reach; older history not exposed
+# Research notes: Rules quoted: 'If any Combined Sewer Overflow (CSO) discharges took place in the
+#   past 48 hours in the Lower Basin, red flags will be flown downstream of the CSO discharge
+#   point.' Cyanobacteria: red 'for the duration of the bloom'. Flags: 'BLUE FLAGS mean the river is
+#   safe for recreation.' 'RED FLAGS mean there are public health risks.' 'Email communications from
+#   the CRWA are the official source for status updates.' 2025 Cambridge evaluation found flag
+#   programs 'well-supported by their recreational communities'.
+cadence: "Hourly model predictions in season (May to late October); off season the site shows no flags. Site banner seen today: 'The database has not updated in at least 24 hours.'"
+license: "API: 'CRWA allows open access to its Public Flagging API' (page wording). Code: MIT license (github.com/codeforboston/flagging)."
+attribution: "Charles River Watershed Association (site built by Code for Boston)"
+enabled: true
+role: "advisories"
+event_types: ["cso", "hab", "model_bacteria"]
+states: ["MA"]
+access: ["html", "api", "email", "social"]
+access_detail: "Fetched: GET https://crwa-flagging.herokuapp.com/api/v1/boathouses (boathouse, latitude, longitude, reach, safe, overridden, reason); /api/v1/model (is_boating_season, model_outputs[reach, predictions[time, prediction, safe]], model_version, time_returned); /api/v1/model_input_data (rain, stream flow, gage height, air temp etc). No auth. Swagger docs linked from /api. Email alerts via CRWA; Twitter @crwaflagging."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

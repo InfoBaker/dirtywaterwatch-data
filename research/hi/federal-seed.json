@@ -1,0 +1,45 @@
+{
+ "state": "HI",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 10,
+ "plant_permits_major": 5,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "HI0020257",
+   "permittee": "County of Kauai",
+   "city": "WAILUA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "HI0020877",
+   "permittee": "City and County of Honolulu",
+   "city": "EWA BEACH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "HI0021296",
+   "permittee": "City and County of Honolulu",
+   "city": "HONOLULU COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "HI0021377",
+   "permittee": "County of Hawaii",
+   "city": "HILO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "HI0021953",
+   "permittee": "City and County of Honolulu, Department of Environmental Services",
+   "city": "WAIANAE",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

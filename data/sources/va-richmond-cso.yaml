@@ -1,0 +1,24 @@
+id: "va-richmond-cso"
+name: "City of Richmond monthly CSO outfall reports (per-outfall overflow events, XLSX)"
+url: "https://www.rva.gov/public-utilities/csooutfalls"
+homepage: "https://www.rva.gov/public-utilities/csooutfalls"
+kind: "csv"
+level: "municipal"
+# Feed row: the source id written by the ingester pipeline/ingest/va_richmond_cso.py
+#   (data/build/events/va-richmond-cso.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/va_richmond_cso.py docstring): daily (files posted one to two months
+#   after the month).
+cadence: "daily"
+license: "None stated."
+attribution: "City of Richmond Department of Public Utilities"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["VA"]
+registry_ids: ["va-richmond-monthly-cso-xlsx"]
+access: ["html", "csv"]
+access_detail: "Month links on the CSO Outfalls page lead to rva.gov/media/<id> pages that link sites/default/files/...xlsx; sheet 'CSO Summary' and one sheet per outfall 'CSO_06-Events' (start, end as Excel serials, rainfall in, observed overflow volume MG, overflow_duration_hours). The EmNet live map is not polled."
+machine_readable: true
+legal_basis: "VPDES permit VA0063177; 2020 Acts ch. 634"
+checked: "2026-11-02"

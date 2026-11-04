@@ -1,0 +1,3388 @@
+[
+ {
+  "id": "pa-pa0020125",
+  "name": "MONACA BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0020125",
+  "receiving_waters": [
+   "Ohio River",
+   "Unnamed Trib To Ohio River"
+  ],
+  "water_slugs": [
+   "ohio-river-pa"
+  ],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Monaca Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Beaver, region SWRO, Major; LTCP approach: Presumption (85% capture); ECHO inventory lists 4 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0020346",
+  "name": "PUNXSUTAWNEY BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0020346",
+  "receiving_waters": [
+   "Mahoning Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Punxsutawney Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Jefferson, region NWRO, Major; LTCP approach: Presumption (85% capture)",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0020397",
+  "name": "BRIDGEPORT BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0020397",
+  "receiving_waters": [
+   "Schuylkill River",
+   "Diamond Run",
+   "Sawmill Run"
+  ],
+  "water_slugs": [
+   "schuylkill-river-pa"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bridgeport Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Montgomery, region SERO, Minor; LTCP approach: Partial Separation / Presumption; enforcement: Consent Order & Agreement (COA); ECHO inventory lists 6 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0020613",
+  "name": "WAYNESBURG STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0020613",
+  "receiving_waters": [
+   "South Fork Tenmile Creek"
+  ],
+  "water_slugs": [
+   "south-fork-tenmile-creek-pa"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Franklin Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Greene, region SWRO, Minor; LTCP approach: Separation",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0020681",
+  "name": "SEWICKLEY BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0020681",
+  "receiving_waters": [
+   "Ohio River"
+  ],
+  "water_slugs": [
+   "ohio-river-pa"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sewickley Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; ECHO inventory lists 4 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0020702",
+  "name": "FAYETTE CITY STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0020702",
+  "receiving_waters": [
+   "Downers Run",
+   "Lamb Lick Run"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fayette City Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Fayette, region SWRO, Minor; LTCP approach: Presumption; enforcement: DEP Enforcement Action",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0021113",
+  "name": "GLASSPORT BORO - STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0021113",
+  "receiving_waters": [
+   "Unnamed Trib To Monongahela River",
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Glassport Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Major; LTCP approach: Presumption (85% capture)",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0021148",
+  "name": "MT PLEASANT BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0021148",
+  "receiving_waters": [
+   "Sherrick Run",
+   "Shupe Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 3 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mount Pleasant Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Westmoreland, region SWRO, Major; LTCP approach: Presumption (85% capture); enforcement: DEP Enforcement Action",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0021237",
+  "name": "NEWPORT STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0021237",
+  "receiving_waters": [
+   "Juniata River",
+   "Little Buffalo Creek"
+  ],
+  "water_slugs": [
+   "juniata-river-pa"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 3 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Newport Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Perry, region SCRO, Minor; LTCP approach: Presumption; enforcement: Consent Order & Agreement (COA); ECHO inventory lists 3 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0021407",
+  "name": "POINT MARION WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0021407",
+  "receiving_waters": [
+   "Monongahela River",
+   "Camp Run",
+   "Cheat River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Point Marion Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Fayette, region SWRO, Minor; LTCP approach: Separation",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0021521",
+  "name": "SMETHPORT BORO AUTH STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0021521",
+  "receiving_waters": [
+   "Marvin Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Smethport Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county McKean, region NWRO, Minor; LTCP approach: Presumption (4-6 overflows )",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0021610",
+  "name": "BLAIRSVILLE MUNI AUTH STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0021610",
+  "receiving_waters": [
+   "Conemaugh River",
+   "Unnamed Trib To Conemaugh River"
+  ],
+  "water_slugs": [
+   "conemaugh-river-pa"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 5 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Blairsville Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Indiana, region NWRO, Major; LTCP approach: Separation",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0021687",
+  "name": "WELLSBORO MUN AUTH",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0021687",
+  "receiving_waters": [
+   "Marsh Creek",
+   "Kelsey Creek"
+  ],
+  "water_slugs": [
+   "marsh-creek-reservoir-pa"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wellsboro Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Tioga, region NCRO, Major; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0021814",
+  "name": "MANSFIELD MUNI SEW AUTH",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0021814",
+  "receiving_waters": [
+   "Tioga River"
+  ],
+  "water_slugs": [
+   "tioga-reservoir-pa"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mansfield Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Tioga, region NCRO, Major; LTCP approach: Presumption (85% capture); ECHO inventory lists 4 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0022209",
+  "name": "BEDFORD STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0022209",
+  "receiving_waters": [
+   "Raystown Branch Juniata River"
+  ],
+  "water_slugs": [
+   "raystown-branch-juniata-river-pa"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bedford Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Bedford, region SCRO, Major; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0022292",
+  "name": "EBENSBURG WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0022292",
+  "receiving_waters": [
+   "Howells Run"
+  ],
+  "water_slugs": [
+   "lake-rowena-pa"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cambria Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Cambria, region SWRO, Major; LTCP approach: Separation; ECHO inventory lists 2 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0023167",
+  "name": "PINE STREET STP KANE",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0023167",
+  "receiving_waters": [
+   "West Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kane Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county McKean, region NWRO, Major; LTCP approach: CSO-related bypass only",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0023175",
+  "name": "KINZUA ROAD STP KANE",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0023175",
+  "receiving_waters": [
+   "Hubert Run",
+   "Unnamed Trib To Hubert Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kane Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county McKean, region NWRO, Major; LTCP approach: Presumption (85% capture); enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0023469",
+  "name": "CTL WAYNE REG AUTH",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0023469",
+  "receiving_waters": [
+   "Unnamed Trib To Lackawaxen River"
+  ],
+  "water_slugs": [
+   "lackawaxen-river-pa"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Texas Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Wayne, region NERO, Major; LTCP approach: Partial Separation / Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0023558",
+  "name": "ASHLAND BOROUGH WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0023558",
+  "receiving_waters": [
+   "Mahanoy Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 9 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ashland Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Schuylkill, region NERO, Major; LTCP approach: Demonstration (85% load reduction); ECHO inventory lists 9 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0023701",
+  "name": "MIDLAND BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0023701",
+  "receiving_waters": [
+   "Ohio River"
+  ],
+  "water_slugs": [
+   "ohio-river-pa"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Midland Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Beaver, region SWRO, Major; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0023736",
+  "name": "TRI-BORO MUN AUTH",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0023736",
+  "receiving_waters": [
+   "Susquehanna River"
+  ],
+  "water_slugs": [
+   "susquehanna-river-pa"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Susquehanna Depot Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Susquehanna, region NERO, Minor; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0024490",
+  "name": "ROCKWOOD BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0024490",
+  "receiving_waters": [
+   "Casselman River",
+   "Coxes Creek"
+  ],
+  "water_slugs": [
+   "casselman-river-pa"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rockwood Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Somerset, region SWRO, Minor; LTCP approach: Presumption (4-6 overflows )",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0024589",
+  "name": "LEETSDALE MUN AUTH STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0024589",
+  "receiving_waters": [
+   "Ohio River",
+   "Unnamed Trib To Ohio River",
+   "Little Sewickley Creek"
+  ],
+  "water_slugs": [
+   "ohio-river-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Leetsdale Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA; ECHO inventory lists 6 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0024716",
+  "name": "FREELAND BORO MUN AUTH",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0024716",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": null,
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Foster Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Luzerne, region NERO, Major; LTCP approach: Presumption; ECHO inventory has no rows for this permit",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0025224",
+  "name": "ST CLAIR WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0025224",
+  "receiving_waters": [
+   "Mill Creek",
+   "Unnamed Trib To Mill Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "East Norwegian Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Schuylkill, region NERO, Minor; LTCP approach: No LTCP Approach",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0025755",
+  "name": "FREEPORT BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0025755",
+  "receiving_waters": [
+   "Allegheny River",
+   "Buffalo Creek"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa",
+   "little-buffalo-lake-pa"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 5 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Freeport Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Armstrong, region NWRO, Minor; LTCP approach: Presumption (85% capture)",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0025950",
+  "name": "MONONGAHELA CITY STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0025950",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": null,
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Monongahela City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Washington, region SWRO, Major; LTCP approach: Presumption; enforcement: COA; ECHO inventory has no rows for this permit",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0025984",
+  "name": "ALCOSAN SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0025984",
+  "receiving_waters": [
+   "Allegheny River",
+   "Monongahela River",
+   "Ohio River",
+   "Chartiers Creek",
+   "Saw Mill Run",
+   "Turtle Creek",
+   "Thompson Run"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa",
+   "monongahela-river-pa",
+   "ohio-river-pa"
+  ],
+  "outfall_count": 254,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 252 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "SOAK web log https://www.alcosan.org/clean-water-plan/sewer-overflow-advisories (system-wide status, Apr 1-Oct 31, 8 a.m.-7 p.m.); Everbridge text/email sign-up https://member.everbridge.net/index/337966681555020#/signup; orange CSO flags at 9 river sites; signs at 259 CSO and 53 SSO structures; dry-weather hotline 888-936-9363; annual PDF logs 2014-2025.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pittsburgh  City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Major; LTCP approach: Demonstration; enforcement: EPA/DEP Enforcement Action Finalized; ECHO inventory lists 252 outfall rows; DEP counts 254 outfalls; ECHO 252. Status is one system-wide advisory, not per outfall. Federal/state consent decree (2008, modified 2020).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026042",
+  "name": "BETHLEHEM CITY WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026042",
+  "receiving_waters": [
+   "Saucon Creek",
+   "Lehigh River"
+  ],
+  "water_slugs": [
+   "lehigh-river-pa"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 3 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bethlehem City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Northampton, region NERO, Major; LTCP approach: Demonstration; ECHO inventory lists 3 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026069",
+  "name": "LATROBE MUNIC AUTH STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026069",
+  "receiving_waters": [
+   "Loyalhanna Creek",
+   "Saxman Run",
+   "Monastery Run"
+  ],
+  "water_slugs": [
+   "loyalhanna-creek-pa"
+  ],
+  "outfall_count": 12,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 12 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Latrobe Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Westmoreland, region SWRO, Major; LTCP approach: Presumption (85% capture); enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026107",
+  "name": "WYOMING VLY SAN AUTH",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026107",
+  "receiving_waters": [
+   "Susquehanna River",
+   "Hicks Creek",
+   "Unnamed Trib To Nanticoke Creek",
+   "Newport Creek",
+   "South Branch Newport Creek",
+   "Warrior Creek",
+   "Mill Creek",
+   "Unnamed Trib Of Nanticoke Creek",
+   "Nanticoke Creek",
+   "Toby Creek"
+  ],
+  "water_slugs": [
+   "susquehanna-river-pa"
+  ],
+  "outfall_count": 51,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 51 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "No CSO notice channel found; https://www.wvsa-pa.gov/notices returned HTTP 403; emergency line 570-825-3416.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hanover Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Luzerne, region NERO, Major; LTCP approach: Demonstration; Wilkes-Barre area; DEP: 51 outfalls; fact sheet lists Espy Run, Forge Creek, Warrior Creek, Toby Creek, Hicks Creek.",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026140",
+  "name": "ROCHESTER AREA JT SEW AUTH - STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026140",
+  "receiving_waters": [
+   "Beaver River"
+  ],
+  "water_slugs": [
+   "beaver-river-pa"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rochester Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Beaver, region SWRO, Major; LTCP approach: Presumption; enforcement: COA; ECHO inventory lists 1 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026158",
+  "name": "MON VLY SEW AUTH STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026158",
+  "receiving_waters": [
+   "Monongahela River",
+   "Unnamed Trib To Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 21,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 17 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Carroll Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Washington, region SWRO, Major; LTCP approach: Presumption; enforcement: DEP Enforcement Action; ECHO inventory lists 17 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026174",
+  "name": "FRANKLIN CITY STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026174",
+  "receiving_waters": [
+   "French Creek",
+   "Allegheny River"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa",
+   "french-creek-pa"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 8 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Franklin City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Venango, region NWRO, Major; LTCP approach: Presumption (85% capture); ECHO inventory lists 8 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026182",
+  "name": "LANSDALE BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026182",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": null,
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lansdale Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Montgomery, region SERO, Major; LTCP approach: Presumption; ECHO inventory has no rows for this permit",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026191",
+  "name": "HUNTINGDON STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026191",
+  "receiving_waters": [
+   "Juniata River",
+   "Unnamed Trib To Juniata River"
+  ],
+  "water_slugs": [
+   "juniata-river-pa"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 5 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Huntingdon Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Huntingdon, region SCRO, Major; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026204",
+  "name": "OIL CITY STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026204",
+  "receiving_waters": [
+   "Allegheny River",
+   "Oil Creek"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa",
+   "oil-creek-pa"
+  ],
+  "outfall_count": 13,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 14 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oil City City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Venango, region NWRO, Major; LTCP approach: Presumption (85% capture); enforcement: COA; ECHO inventory lists 14 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026301",
+  "name": "ERIE CITY STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026301",
+  "receiving_waters": [
+   "Mill Creek (enclosed Mill Creek Tube) to Presque Isle Bay / Lake Erie"
+  ],
+  "water_slugs": [
+   "lake-erie-pa"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 5 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "City of Erie CSO Monitoring site (Process and Data Automation / Telog) https://telog.erie.pa.us/CSO.Monitoring/Map with per-event Report pages (start, end, discharge) by date range; annual notice PDF on ecode360.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Erie City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Erie, region NWRO, Major; LTCP approach: Presumption; The only PA permittee under the federal Great Lakes CSO public notification rule (40 CFR 122.38). 4 monitored CSOs (003, 008, 014, 030) all to the Mill Creek Tube; DEP lists 5 outfalls.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026310",
+  "name": "CLEARFIELD MUN SEW SYS STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026310",
+  "receiving_waters": [
+   "West Branch Susquehanna River",
+   "Montgomery Creek"
+  ],
+  "water_slugs": [
+   "west-branch-susquehanna-river-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lawrence Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Clearfield, region NCRO, Major; LTCP approach: Presumption (85% capture); enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026361",
+  "name": "LOWER LACKAWANNA VALLEY SANITARY AUTHORITY",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026361",
+  "receiving_waters": [
+   "Lackawanna River",
+   "Unnamed Trib To Saint Johns Creek",
+   "Unnamed Trib To Keyser Creek",
+   "Saint Johns Creek",
+   "Mill Creek"
+  ],
+  "water_slugs": [
+   "lackawanna-river-pa",
+   "susquehanna-river-pa"
+  ],
+  "outfall_count": 14,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 14 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Duryea Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Luzerne, region NERO, Major; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026476",
+  "name": "COALDALE LANSFORD SUMMIT HLL SEW",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026476",
+  "receiving_waters": [
+   "Panther Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Coaldale Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Schuylkill, region NERO, Major; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026492",
+  "name": "PA AMERICAN WATER COMPANY SCRANTON WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026492",
+  "receiving_waters": [
+   "Lackawanna River",
+   "Roaring Brook",
+   "Unnamed Trib To Lackawanna River",
+   "Meadow Brook",
+   "Leggetts Creek",
+   "Keyser Creek",
+   "Little Roaring Brook"
+  ],
+  "water_slugs": [
+   "lackawanna-river-pa"
+  ],
+  "outfall_count": 80,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 77 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "Static CSO locations map image on the City of Scranton stormwater page (2023); no event notices found. Operator Pennsylvania American Water.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Scranton City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Lackawanna, region NERO, Major; LTCP approach: Presumption; enforcement: EP Enforcement Action; ECHO inventory lists 77 outfall rows; DEP: 80 outfalls; 2025-08-04 draft renewal permit exists on files.dep.state.pa.us (unreachable). 2012 permit read via Wayback: NMC 8 plus 4-hour DEP notice and 'if reasonably possible' downstream-user notice.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026557",
+  "name": "SUNBURY MUNI AUTH STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026557",
+  "receiving_waters": [
+   "Susquehanna River",
+   "Unnamed Trib To Susquehanna River",
+   "Unnamed Trib To Little Shamokin Creek",
+   "Shamokin Creek"
+  ],
+  "water_slugs": [
+   "susquehanna-river-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sunbury City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Northumberland, region NCRO, Major; LTCP approach: Presumption (85% capture)",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026581",
+  "name": "SCOTTDALE STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026581",
+  "receiving_waters": [
+   "Jacobs Creek",
+   "Unnamed Trib To Jacobs Creek",
+   "Stauffer Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 8 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "East Huntingdon Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Westmoreland, region SWRO, Major; LTCP approach: Presumption; enforcement: DEP Enforcement Action",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026662",
+  "name": "PHILA WATER DEPT - SOUTHEAST WPC PLANT",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026662",
+  "receiving_waters": [
+   "Delaware River"
+  ],
+  "water_slugs": [
+   "delaware-river-pa"
+  ],
+  "outfall_count": 34,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 34 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "PWD CSOcast (see PA0026689).",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Philadelphia City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Philadelphia, region SERO, Major; LTCP approach: Presumption; enforcement: COA executed on 8/4/2008 & 7/1/11; Southeast WPC plant drainage: Delaware River outfalls.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026671",
+  "name": "PHILA WATER DEPT - SOUTHWEST WPC PLANT",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026671",
+  "receiving_waters": [
+   "Schuylkill River",
+   "Cobbs Creek",
+   "West Branch Indian Creek",
+   "Unnamed Trib Of Schuylkill River",
+   "Unnamed Trib To Cobbs Creek",
+   "East Branch Indian Creek",
+   "Indian Creek"
+  ],
+  "water_slugs": [
+   "schuylkill-river-pa"
+  ],
+  "outfall_count": 75,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 74 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "PWD CSOcast (see PA0026689).",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Philadelphia City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Philadelphia, region SERO, Major; LTCP approach: Presumption; enforcement: COA executed on 8/4/2008 & 7/1/11; ECHO inventory lists 74 outfall rows; Southwest WPC plant drainage: Schuylkill River and Cobbs Creek outfalls.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026689",
+  "name": "PHILA WATER DEPT - NORTHEAST WPC PLANT",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026689",
+  "receiving_waters": [
+   "Frankford Creek",
+   "Delaware River",
+   "Unnamed Trib To Delaware River",
+   "Tacony Creek",
+   "Pennypack Creek",
+   "Unnamed Trib To Pennypack Creek",
+   "Unnamed Trib To Tacony Creek"
+  ],
+  "water_slugs": [
+   "delaware-river-pa"
+  ],
+  "outfall_count": 57,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 57 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "PWD CSOcast map https://water.phila.gov/maps/csocast/ backed by public ArcGIS FeatureServer CSOCast_Layerboard/0 (per-outfall status, LastPoll); no sign-up on the map.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Philadelphia City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Philadelphia, region SERO, Major; LTCP approach: Presumption; enforcement: COA executed on 8/4/2008. A new COA excuted on 7/1/2011.; Northeast WPC plant drainage: Delaware River, Frankford Creek, Tacony Creek, Pennypack Creek outfalls. CSOcast: 'not intended to be used as a water quality notification system for recreation'.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026743",
+  "name": "LANCASTER CITY STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026743",
+  "receiving_waters": [
+   "Conestoga River",
+   "Mill Creek"
+  ],
+  "water_slugs": [
+   "conestoga-river-pa"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "Red/yellow warning lights at the five Conestoga River outfalls (red = overflow in progress; yellow = 24 h after it ends) and outfall signs; no online status found.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lancaster City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Lancaster, region SCRO, Major; LTCP approach: Demonstration; enforcement: EPA Consent Decree executed 2/27/2018.; ECHO inventory lists 6 outfall rows; EPA/DOJ consent decree 2018. Lights since March 2021.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026824",
+  "name": "CLAIRTON MUN AUTH STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026824",
+  "receiving_waters": [
+   "Peters Creek",
+   "Unnamed Trib To Peters Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 5 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clairton City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Major; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026891",
+  "name": "CHARLEROI BORO AUTH STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026891",
+  "receiving_waters": [
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 10,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 11 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Charleroi Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Washington, region SWRO, Major; LTCP approach: Presumption; enforcement: COA; ECHO inventory lists 11 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026905",
+  "name": "CONNELLSVILLE STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026905",
+  "receiving_waters": [
+   "Youghiogheny River",
+   "Connell Run",
+   "Unnamed Trib To Youghiogheny River"
+  ],
+  "water_slugs": [
+   "youghiogheny-river-pa"
+  ],
+  "outfall_count": 16,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 17 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Connellsville City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Fayette, region SWRO, Major; LTCP approach: Presumption (85% capture); enforcement: EPA Order; ECHO inventory lists 17 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026913",
+  "name": "MCKEESPORT STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026913",
+  "receiving_waters": [
+   "Youghiogheny River",
+   "Monongahela River",
+   "Unnamed Trib Of Youghiogheny River",
+   "Unnamed Trib To Youghiogheny River",
+   "Crooked Run",
+   "Unnamed Trib To Long Run"
+  ],
+  "water_slugs": [
+   "long-pond-pa",
+   "monongahela-river-pa",
+   "youghiogheny-river-pa"
+  ],
+  "outfall_count": 30,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 30 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "McKeesport City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Major; LTCP approach: Presumption; enforcement: CAO following PAWC Purchase",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026921",
+  "name": "GR HAZLETON JT SEW AUTH WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026921",
+  "receiving_waters": [
+   "Unnamed Trib To Black Creek",
+   "Hazle Creek",
+   "Black Creek",
+   "Cranberry Creek",
+   "Hazel Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 14,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 15 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hazleton City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Luzerne, region NERO, Major; LTCP approach: Presumption; ECHO inventory lists 15 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0026981",
+  "name": "DUQUESNE STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0026981",
+  "receiving_waters": [
+   "Thompson Run",
+   "Crooked Run",
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 5 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Duquesne City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Major; LTCP approach: Presumption; ECHO inventory lists 5 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027006",
+  "name": "TAMAQUA BORO",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027006",
+  "receiving_waters": [
+   "Little Schuylkill River",
+   "Panther Creek",
+   "Wabash Creek"
+  ],
+  "water_slugs": [
+   "little-schuylkill-river-pa"
+  ],
+  "outfall_count": 12,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 12 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Walker Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Schuylkill, region NERO, Major; LTCP approach: No LTCP Approach",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027014",
+  "name": "ALTOONA EAST STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027014",
+  "receiving_waters": [
+   "Little Juniata River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "Altoona Water Authority CSO discharge points page (HTTP 403 here); two signed CSO points with ~1 MG storage tanks; no event channel known.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Altoona City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Blair, region SCRO, Major; LTCP approach: Presumption",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027022",
+  "name": "ALTOONA WEST STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027022",
+  "receiving_waters": [
+   "Bradley Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "Altoona Water Authority CSO discharge points page (HTTP 403 here); two signed CSO points with ~1 MG storage tanks; no event channel known.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Altoona City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Blair, region SCRO, Major; LTCP approach: Presumption",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027049",
+  "name": "WILLIAMSPORT SANITARY AUTHORITY - WEST STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027049",
+  "receiving_waters": [
+   "West Branch Susquehanna River"
+  ],
+  "water_slugs": [
+   "west-branch-susquehanna-river-pa"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "No CSO notices found on WMWA/WSA news page (boil-water notices only).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Williamsport City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Lycoming, region NCRO, Major; LTCP approach: Presumption (85% capture); enforcement: EPA Order; Outfalls at Basin, Chestnut and Locust Streets (2016 permit, search snippet). EPA Order / 2010 settlement.",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027057",
+  "name": "WILLIAMSPORT SANI AUTH CENTRAL STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027057",
+  "receiving_waters": [
+   "Unnamed Trib To West Branch Susquehanna River",
+   "West Branch Susquehanna River"
+  ],
+  "water_slugs": [
+   "west-branch-susquehanna-river-pa"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 3 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "No CSO notices found on WMWA/WSA news page (boil-water notices only).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Williamsport City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Lycoming, region NCRO, Major; LTCP approach: Presumption (85% capture); enforcement: EPA Order; Outfalls at Basin, Chestnut and Locust Streets (2016 permit, search snippet). EPA Order / 2010 settlement.",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027065",
+  "name": "LRBSA - ARCHBALD WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027065",
+  "receiving_waters": [
+   "Lackawanna River",
+   "Wilson Creek"
+  ],
+  "water_slugs": [
+   "lackawanna-river-pa"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Archbald Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Lackawanna, region NERO, Major; LTCP approach: Presumption; ECHO inventory lists 6 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027081",
+  "name": "LRBSA - CLINTON TWP PLANT",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027081",
+  "receiving_waters": [
+   "Lackawanna River",
+   "Unnamed Trib To Lackawanna River"
+  ],
+  "water_slugs": [
+   "lackawanna-river-pa"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 3 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clinton Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Wayne, region NERO, Minor; LTCP approach: Presumption (85% capture)",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027090",
+  "name": "LRBSA - THROOP PLANT",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027090",
+  "receiving_waters": [
+   "Lackawanna River",
+   "Pancoast Creek",
+   "Hull Creek",
+   "Wildcat Creek"
+  ],
+  "water_slugs": [
+   "lackawanna-river-pa"
+  ],
+  "outfall_count": 16,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 16 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Throop Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Lackawanna, region NERO, Major; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027103",
+  "name": "DELCORA STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027103",
+  "receiving_waters": [
+   "Delaware River",
+   "Chester Creek",
+   "Ridley Creek"
+  ],
+  "water_slugs": [
+   "delaware-river-pa"
+  ],
+  "outfall_count": 26,
+  "outfalls_source": "DEP CSO spreadsheet (26 outfalls); not in the ECHO CSO inventory",
+  "notification_channel": "Consent decree (2015) visual notification: warning lights and flags at 3+ public-access sites on each of the Delaware River, Chester Creek and Ridley Creek; outfall signs. No online status found (delcora.org CSO pages fetched).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chester  City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Delaware, region SERO, Major; LTCP approach: Presumption; ECHO inventory has no rows for this permit; Missing from the ECHO national CSO inventory.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027111",
+  "name": "NEW KENSINGTON STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027111",
+  "receiving_waters": [
+   "Pucketa Creek",
+   "Riddle Run"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa"
+  ],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "New Kensington City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Westmoreland, region SWRO, Major; LTCP approach: Presumption (85% capture); enforcement: EPA Enforcement Action",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027120",
+  "name": "WARREN CITY WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027120",
+  "receiving_waters": [
+   "Allegheny River",
+   "Unnamed Trib To Allegheny River"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Warren City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Warren, region NWRO, Major; LTCP approach: Presumption (85% capture)",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027197",
+  "name": "HARRISBURG AWTF",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027197",
+  "receiving_waters": [
+   "Susquehanna River",
+   "Paxton Creek"
+  ],
+  "water_slugs": [
+   "susquehanna-river-pa"
+  ],
+  "outfall_count": 61,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 59 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "Capital Region Water CSO Advisory Status page https://capitalregionwater.com/resources/cso/ embedding ArcGIS Experience 'Combined Sewer Overflow Community Outreach App' (daily inspection status for 58 outfalls from Cityworks layer; real-time alarm layer for 10 monitored outfalls). Separate CRW emergency-alert sign-up https://capitalregionwater.com/customer-support/updates-alerts/ (CSO content not stated).",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Harrisburg City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Dauphin, region SCRO, Major; LTCP approach: Presumption; enforcement: EPA Consent Decree; ECHO inventory lists 59 outfall rows; Licence on the app: data 'may not be redistributed, republished, or used for commercial purposes without prior written permission from CRW'. 2015 partial consent decree; Public Notification Plan filed 2023-09-22.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027227",
+  "name": "FARRELL MUN SEW",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027227",
+  "receiving_waters": [
+   "Shenango River"
+  ],
+  "water_slugs": [
+   "shenango-river-pa"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Farrell  City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Mercer, region NWRO, Major; LTCP approach: Presumption (85% capture); ECHO inventory lists 4 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027324",
+  "name": "SHAMOKIN-COAL TWP JT SEW AUTH",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027324",
+  "receiving_waters": [
+   "Shamokin Creek",
+   "Quaker Run",
+   "Furnace Run",
+   "Carbon Run",
+   "Coal Run",
+   "Bennys Run",
+   "Mahanoy Creek"
+  ],
+  "water_slugs": [
+   "quaker-lake-pa"
+  ],
+  "outfall_count": 67,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 72 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ralpho Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Northumberland, region NCRO, Major; LTCP approach: Presumption (85% capture); enforcement: COA; ECHO inventory lists 72 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027391",
+  "name": "UPPER ALLEGHENY JT SANI AUTH STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027391",
+  "receiving_waters": [
+   "Allegheny River",
+   "Crawford Run",
+   "Bailey Run",
+   "Unnamed Trib To Chartiers Run",
+   "Bull Creek"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa"
+  ],
+  "outfall_count": 19,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 17 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "East Deer Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Major; LTCP approach: TBD; enforcement: EPA Enforcement Action; ECHO inventory lists 17 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027421",
+  "name": "NORRISTOWN MUNI STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027421",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": null,
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Norristown Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Montgomery, region SERO, Major; LTCP approach: Separation; enforcement: COA; ECHO inventory has no rows for this permit",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027430",
+  "name": "JEANNETTE STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027430",
+  "receiving_waters": [
+   "Brush Creek",
+   "Unnamed Trib To Little Sewickley Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Jeannette City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Westmoreland, region SWRO, Major; LTCP approach: Presumption; enforcement: EPA Enforcement Action; ECHO inventory lists 6 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027456",
+  "name": "GREATER GREENSBURG STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027456",
+  "receiving_waters": [
+   "Coal Tar Run",
+   "Jacks Run",
+   "Zellers Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 37,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 42 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hempfield Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Westmoreland, region SWRO, Major; LTCP approach: Presumption; ECHO inventory lists 42 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027626",
+  "name": "KISKI VLY WPCA STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027626",
+  "receiving_waters": [
+   "Kiskiminetas River"
+  ],
+  "water_slugs": [
+   "kiskiminetas-river-pa"
+  ],
+  "outfall_count": 21,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 21 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Allegheny Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Westmoreland, region SWRO, Major; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027651",
+  "name": "W NEWTON BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027651",
+  "receiving_waters": [
+   "Youghiogheny River",
+   "Unnamed Trib To Youghiogheny River"
+  ],
+  "water_slugs": [
+   "youghiogheny-river-pa"
+  ],
+  "outfall_count": 13,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 13 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "West Newton Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Westmoreland, region SWRO, Minor; LTCP approach: Presumption; enforcement: DEP Enforcement Action",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027693",
+  "name": "MINERSVILLE SEWER AUTHORITY WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0027693",
+  "receiving_waters": [
+   "West Branch Schuylkill River"
+  ],
+  "water_slugs": [
+   "west-branch-schuylkill-river-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Minersville Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Schuylkill, region NERO, Major; LTCP approach: Partial Separation / Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0028207",
+  "name": "REYNOLDSVILLE STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0028207",
+  "receiving_waters": [
+   "Sandy Lick Creek",
+   "Soldier Run",
+   "Pitchpine Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 7 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Reynoldsville Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Jefferson, region NWRO, Minor; LTCP approach: Presumption (85% capture); enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0028223",
+  "name": "CORRY WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0028223",
+  "receiving_waters": [
+   "Hare Creek",
+   "Bear Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 3 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Corry City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Erie, region NWRO, Major; LTCP approach: Presumption (4 6 overflows); enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0028401",
+  "name": "DRAVOSBURG BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0028401",
+  "receiving_waters": [
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dravosburg Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA Following PAWC purchase",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0028436",
+  "name": "ELIZABETH BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0028436",
+  "receiving_waters": [
+   "Monongahela River",
+   "Fallen Timber Run"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Elizabeth Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Major; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0028631",
+  "name": "MID-CAMERON AUTHORITY",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0028631",
+  "receiving_waters": [
+   "Driftwood Branch Sinnemahoning Creek"
+  ],
+  "water_slugs": [
+   "driftwood-branch-sinnemahoning-creek-pa"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Emporium Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Cameron, region NCRO, Major; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0036650",
+  "name": "TITUSVILLE WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0036650",
+  "receiving_waters": [
+   "Oil Creek",
+   "Church Run"
+  ],
+  "water_slugs": [
+   "oil-creek-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Titusville City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Crawford, region NWRO, Major; LTCP approach: Presumption (85% capture); enforcement: COA signed 10/25/10",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0036820",
+  "name": "GALETON BORO WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0036820",
+  "receiving_waters": [
+   "Pine Creek"
+  ],
+  "water_slugs": [
+   "pine-creek-pa"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Galeton Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Potter, region NCRO, Minor; LTCP approach: Presumption (85% capture)",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0037044",
+  "name": "FORD CITY BORO MUNI SEW DISPOSAL AUTH WWTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0037044",
+  "receiving_waters": [
+   "Allegheny River"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 5 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ford City Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Armstrong, region NWRO, Major; LTCP approach: Separation; enforcement: DEP Enforcement Action; ECHO inventory lists 5 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0043273",
+  "name": "HOLLIDAYSBURG REGIONAL STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0043273",
+  "receiving_waters": [
+   "Frankstown Branch Juniata River",
+   "Brush Run",
+   "Beaverdam Branch",
+   "Unnamed Trib To Beaverdam Branch"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Frankstown Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Blair, region SCRO, Major; LTCP approach: Partial Separation / Presumption; ECHO inventory lists 4 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0043885",
+  "name": "POTTSVILLE MAIN STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0043885",
+  "receiving_waters": [
+   "Unnamed Trib To Schuylkill River",
+   "Schuylkill River",
+   "Mill Creek",
+   "Unnamed Trib To West Branch Schuylkill River"
+  ],
+  "water_slugs": [
+   "schuylkill-river-pa"
+  ],
+  "outfall_count": 22,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 22 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pottsville City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Schuylkill, region NERO, Major; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0070041",
+  "name": "MAHANOY CITY MUN SEW AUTH",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0070041",
+  "receiving_waters": [
+   "Mahanoy Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mahanoy City Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Schuylkill, region NERO, Major; LTCP approach: No LTCP Approach",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0070386",
+  "name": "SHENANDOAH MUN SEW AUTH",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0070386",
+  "receiving_waters": [
+   "Shenandoah Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 14,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 14 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Shenandoah Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Schuylkill, region NERO, Major; LTCP approach: Presumption (85% capture)",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0217611",
+  "name": "PGH CITY COMBINED SEW OVERFLOWS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0217611",
+  "receiving_waters": [
+   "Allegheny River",
+   "Monongahela River",
+   "Ohio River",
+   "Chartiers Creek",
+   "Unnamed Trib To Sawmill Run",
+   "Sawmill Run",
+   "Ninemile Run",
+   "Unnamed Trib To Yellow Creek",
+   "Unnamed Trib Of Monongahela River",
+   "Unnamed Trib To Streets Run",
+   "Unnamed Trib To Nelson Run",
+   "Streets Run",
+   "Unnamed Trib To Monongahela River",
+   "Unnamed Trib To Allegheny River"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa",
+   "monongahela-river-pa",
+   "ohio-river-pa"
+  ],
+  "outfall_count": 194,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 198 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None of its own found; PWSA's page refers the public to ALCOSAN's SOAK advisories and CSO flags.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pittsburgh  City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: EPA/DEP COA Pending; ECHO inventory lists 198 outfall rows; DEP: 194 outfalls, 'EPA/DEP COA Pending'. ECHO has no DMR lines for this permit.",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0254606",
+  "name": "SALTSBURG STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0254606",
+  "receiving_waters": [
+   "Conemaugh River",
+   "Kiskiminetas River"
+  ],
+  "water_slugs": [
+   "conemaugh-river-pa",
+   "kiskiminetas-river-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 5 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Saltsburg Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Indiana, region NWRO, Minor; LTCP approach: Presumption (85% capture); ECHO inventory lists 5 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag062201",
+  "name": "EASTON CITY CSOS AND PUMP STATIONS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG062201",
+  "receiving_waters": [
+   "Delaware River",
+   "Lehigh River"
+  ],
+  "water_slugs": [
+   "delaware-river-pa",
+   "lehigh-river-pa"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Easton City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Northampton, region NERO, Minor; LTCP approach: No LTCP Approach",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag062202",
+  "name": "LACKAWANNA RIVER BASIN SEW AUTH MOOSIC CSO",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG062202",
+  "receiving_waters": [
+   "Lackawanna River"
+  ],
+  "water_slugs": [
+   "lackawanna-river-pa"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 3 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Moosic Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Lackawanna, region NERO, Minor; LTCP approach: No LTCP Approach",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag063501",
+  "name": "STEELTON BORO SANITARY SEWERS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG063501",
+  "receiving_waters": [
+   "Susquehanna River",
+   "Unnamed Trib To Spring Creek",
+   "Pennsylvania Canal"
+  ],
+  "water_slugs": [
+   "susquehanna-river-pa"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Steelton Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Dauphin, region SCRO, Minor; LTCP approach: Separation; enforcement: COA; ECHO inventory lists 4 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066101",
+  "name": "PITCAIRN BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066101",
+  "receiving_waters": [
+   "Turtle Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pitcairn Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066102",
+  "name": "BRADDOCK BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066102",
+  "receiving_waters": [
+   "Unnamed Trib Of Humms Run",
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 8 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Braddock  Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA; ECHO inventory lists 8 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066103",
+  "name": "HOMESTEAD BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066103",
+  "receiving_waters": [
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Homestead Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066104",
+  "name": "WILMERDING BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066104",
+  "receiving_waters": [
+   "Turtle Creek",
+   "Unnamed Trib To Turtle Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 8 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wilmerding Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA; ECHO inventory lists 8 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066105",
+  "name": "RANKIN BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066105",
+  "receiving_waters": [
+   "Unnamed Trib Of Humms Run",
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rankin Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066106",
+  "name": "GIRTYS RUN SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066106",
+  "receiving_waters": [
+   "Girtys Run"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa"
+  ],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 9 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Millvale Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066107",
+  "name": "STOWE TWP SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066107",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": null,
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Stowe Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA; ECHO inventory has no rows for this permit",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066108",
+  "name": "WILKINS TOWNSHIP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066108",
+  "receiving_waters": [
+   "Thompson Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wilkins Twp"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066109",
+  "name": "MCDONALD SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066109",
+  "receiving_waters": [
+   "Robinson Run",
+   "Robbs Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 20,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 20 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "McDonald Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Washington, region SWRO, Minor; LTCP approach: Presumption; enforcement: DEP Enforcement Action",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066110",
+  "name": "CRAFTON BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066110",
+  "receiving_waters": [
+   "Chartiers Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 3 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Crafton Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066112",
+  "name": "MCKEES ROCKS BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066112",
+  "receiving_waters": [
+   "Chartiers Creek",
+   "Ohio River",
+   "Unnamed Trib To Chartiers Creek"
+  ],
+  "water_slugs": [
+   "ohio-river-pa"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 11 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "McKees Rocks Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA; ECHO inventory lists 11 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066113",
+  "name": "ASPINWALL BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066113",
+  "receiving_waters": [
+   "Unnamed Trib To Allegheny River",
+   "Allegheny River"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 4 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Aspinwall Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066114",
+  "name": "N BRADDOCK BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066114",
+  "receiving_waters": [
+   "Unnamed Trib Of Humms Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "North Braddock Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066116",
+  "name": "W VIEW BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066116",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": null,
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "West View Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA; ECHO inventory has no rows for this permit",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066118",
+  "name": "TURTLE CREEK BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066118",
+  "receiving_waters": [
+   "Turtle Creek",
+   "Thompson Run",
+   "Unnamed Trib Of Humms Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 7 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Turtle Creek Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066120",
+  "name": "E PGH BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066120",
+  "receiving_waters": [
+   "Turtle Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 3 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "East Pittsburgh Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066121",
+  "name": "ARNOLD CITY SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066121",
+  "receiving_waters": [
+   "Allegheny River"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Arnold City"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Westmoreland, region SWRO, Minor; LTCP approach: Presumption; enforcement: EPA Enforcement Action",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066123",
+  "name": "W HOMESTEAD SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066123",
+  "receiving_waters": [
+   "West Run",
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 5 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "West Homestead Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA; ECHO inventory lists 5 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066125",
+  "name": "SHARPSBURG BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066125",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": null,
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sharpsburg Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA; ECHO inventory has no rows for this permit",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066126",
+  "name": "CARNEGIE BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066126",
+  "receiving_waters": [
+   "Chartiers Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 11,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 15 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Carnegie Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA; ECHO inventory lists 15 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066128",
+  "name": "SWISSVALE BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066128",
+  "receiving_waters": [
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Swissvale Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066130",
+  "name": "EXPORT BORO SEW",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066130",
+  "receiving_waters": [
+   "Turtle Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 5 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Export Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Westmoreland, region SWRO, Minor; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066133",
+  "name": "ROCHESTER BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066133",
+  "receiving_waters": [
+   "Ohio River"
+  ],
+  "water_slugs": [
+   "ohio-river-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rochester Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Beaver, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA; ECHO inventory lists 2 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066135",
+  "name": "CORAOPOLIS CSO COLL SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066135",
+  "receiving_waters": [
+   "Ohio River",
+   "McCabe Run"
+  ],
+  "water_slugs": [
+   "ohio-river-pa"
+  ],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 6 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Coraopolis Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066139",
+  "name": "INGRAM BORO CSO C 19 DISCH",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066139",
+  "receiving_waters": [
+   "Unnamed Trib To Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 1 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ingram Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066140",
+  "name": "ETNA BORO CSO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066140",
+  "receiving_waters": [
+   "Pine Creek"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa"
+  ],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 10 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Etna Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Presumption; enforcement: COA; ECHO inventory lists 10 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066141",
+  "name": "MUNHALL BORO CSO SEW SYS",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PAG066141",
+  "receiving_waters": [
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS, 2 PA rows for this permit, joined in data/outfalls-mid-atlantic.json)",
+  "notification_channel": "None found online (not searched individually unless noted). DEP FAQ #34: residents may ask the municipality or sewer authority for its NMC public notification plan; outfall signs expected.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Munhall Boro"
+  ],
+  "notes": "DEP CSO list (Sept 2025 snapshot): county Allegheny, region SWRO, Minor; LTCP approach: Separation; enforcement: COA; ECHO inventory lists 2 outfall rows",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0028673",
+  "name": "GALLITZIN BORO - WWTP",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0028673",
+  "receiving_waters": [
+   "Unnamed Trib To Bradley Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 6 rows; permit status {'EXP': 6}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gallitzin"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO facility; final separation completed 3/31/2017",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0037711",
+  "name": "EVERETT STP",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0037711",
+  "receiving_waters": [
+   "Raystown Branch Juniata River",
+   "Bloody Run"
+  ],
+  "water_slugs": [
+   "raystown-branch-juniata-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 2 rows; permit status {'EFF': 2}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Everett"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO facility. Removed from CSO list in September 2011.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0037818",
+  "name": "SALTSBURG BORO STP",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0037818",
+  "receiving_waters": [
+   "Conemaugh River",
+   "Kiskiminetas River"
+  ],
+  "water_slugs": [
+   "conemaugh-river-pa",
+   "kiskiminetas-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 5 rows; permit status {'TRM': 5}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Saltsburg"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO facility.  Removed from CSO list on November 19, 2015.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0110469",
+  "name": "PATTON BORO STP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0110469",
+  "receiving_waters": [
+   "Little Chest Creek",
+   "Chest Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 2 rows; permit status {'EFF': 2}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Patton"
+  ],
+  "notes": "Not on DEP's Sept 2025 existing-CSO list; ECHO still lists CSO outfalls (likely superseded permit number or closed outfalls).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0218961",
+  "name": "PGH WTP",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0218961",
+  "receiving_waters": [
+   "Allegheny River"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 1 rows; permit status {'EFF': 1}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pittsburgh"
+  ],
+  "notes": "Not on DEP's Sept 2025 existing-CSO list; ECHO still lists CSO outfalls (likely superseded permit number or closed outfalls).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0252751",
+  "name": "LEET TWP MUN AUTH - SEW COLL SYS",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0252751",
+  "receiving_waters": [
+   "Big Sewickley Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 1 rows; permit status {'TRM': 1}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Leet Twp"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Separated and closed CSO Outfall. Permit rescinded 6/12/18.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0253332",
+  "name": "ETNA BORO CSO SEW SYS",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0253332",
+  "receiving_waters": [
+   "Pine Creek"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 10 rows; permit status {'TRM': 10}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Etna"
+  ],
+  "notes": "Not on DEP's Sept 2025 existing-CSO list; ECHO still lists CSO outfalls (likely superseded permit number or closed outfalls).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0253740",
+  "name": "INGRAM BORO CSO C 19 DISCHARGE",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0253740",
+  "receiving_waters": [
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 1 rows; permit status {'TRM': 1}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pittsburgh"
+  ],
+  "notes": "Not on DEP's Sept 2025 existing-CSO list; ECHO still lists CSO outfalls (likely superseded permit number or closed outfalls).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0253901",
+  "name": "DALE BORO CSO SEW SYSTEM",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0253901",
+  "receiving_waters": [
+   "Solomon Run",
+   "Stonycreek River"
+  ],
+  "water_slugs": [
+   "stonycreek-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 8 rows; permit status {'TRM': 8}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Johnstown"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO facility.  Removed from CSO list on November 21, 2016.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0254690",
+  "name": "PORT VUE BORO SEW SYS",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0254690",
+  "receiving_waters": [
+   "Youghiogheny River",
+   "Unnamed Trib To Youghiogheny River"
+  ],
+  "water_slugs": [
+   "youghiogheny-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 10 rows; permit status {'TRM': 10}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Port Vue, Borough Of"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Port Vue Borough's CSO responsibilities have been incorporated into the NPDES Permit for McKeesport WPCP (PA0026913) as of January 24, 2018.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pag066132",
+  "name": "E ROCHESTER BORO CSO",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PAG066132",
+  "receiving_waters": [
+   "Lacock Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 1 rows; permit status {'TRM': 1}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "East Rochester"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO facility. Permit Terminated 8/13/2020.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0024406",
+  "name": "MT CARMEL MUNI SEW COLL SYS & STP",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0024406",
+  "receiving_waters": [
+   "Shamokin Creek",
+   "Butternut Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 19 rows; permit status {'EFF': 19}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kulpmont"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO facility. Removed from CSO list in October 2013.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0039489",
+  "name": "GARRETT BORO STP",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0039489",
+  "receiving_waters": [
+   "Fosselman RV",
+   "Buffalo Creek"
+  ],
+  "water_slugs": [
+   "casselman-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 2 rows; permit status {'EFF': 2}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Garrett"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO facility. Removed from CSO list November 2013.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0042234",
+  "name": "KITTANNING BORO STP",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0042234",
+  "receiving_waters": [
+   "Allegheny River"
+  ],
+  "water_slugs": [
+   "allegheny-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 8 rows; permit status {'EFF': 8}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kittanning"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO Facility. Removed from CSO list in November 2013.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0092355",
+  "name": "BELLE VERNON STP",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0092355",
+  "receiving_waters": [
+   "Monongahela River",
+   "Unnamed Tributary to Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 16 rows; permit status {'EFF': 16}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Belle Vernon"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO facility. Removed from CSO list in November 2013.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0253979",
+  "name": "Clairton City CSO Sew Sys",
+  "state": "PA",
+  "kind": "cso",
+  "npdes_permit": "PA0253979",
+  "receiving_waters": [
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 6 rows; permit status {'': 6}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clairton City"
+  ],
+  "notes": "Not on DEP's Sept 2025 existing-CSO list; ECHO still lists CSO outfalls (likely superseded permit number or closed outfalls).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0021571",
+  "name": "MARYSVILLE STP",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0021571",
+  "receiving_waters": [
+   "Susquehanna River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 3 rows; permit status {'ADC': 3}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Marysville"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO Facility. Final separation completed 7/17/2018.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0022331",
+  "name": "W ELIZABETH STP",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0022331",
+  "receiving_waters": [
+   "Monongahela River"
+  ],
+  "water_slugs": [
+   "monongahela-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 1 rows; permit status {'EXP': 1}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "West Elizabeth"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO facility. Removed from CSO list in October 2014.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0023248",
+  "name": "BERWICK AREA JT SEW AUTH",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0023248",
+  "receiving_waters": [
+   "Susquehanna River"
+  ],
+  "water_slugs": [
+   "susquehanna-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 2 rows; permit status {'EFF': 2}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Berwick"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO Facility. Final separation completed 4/9/2019.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-pa0027570",
+  "name": "BRUSH CREEK STP",
+  "state": "PA",
+  "kind": "cso_closed_or_none",
+  "npdes_permit": "PA0027570",
+  "receiving_waters": [
+   "Brush Creek",
+   "Tributary to Brush Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA National CSO Inventory (ECHO) 3 rows; permit status {'EFF': 3}",
+  "notification_channel": "None found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "North Huntingdon"
+  ],
+  "notes": "On DEP 'Former CSOs' sheet: Former CSO facility.  Removed from CSO list in December 2016. ",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-meadville-area-sewer-authority",
+  "name": "Meadville Area Sewer Authority (MASA)",
+  "state": "PA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "French Creek"
+  ],
+  "water_slugs": [
+   "french-creek-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found; April 2026 spill (~10 million gallons) known through local news only.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Meadville"
+  ],
+  "notes": "Main pump station on Clark Road flooded 2026-04-18; 18-19 hours offline. NPDES permit number not confirmed.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-bucks-county-water-sewer-authority",
+  "name": "Bucks County Water and Sewer Authority",
+  "state": "PA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found; 2021 EPA/DOJ/DEP consent decree describes over 100 SSOs in Plumstead Township since 2014.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Plumstead Twp",
+   "Bensalem",
+   "Richland",
+   "Doylestown",
+   "Middletown",
+   "Upper Dublin",
+   "New Hope",
+   "Solebury"
+  ],
+  "notes": "$450,000 penalty (Dec 22, 2021).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-reading-city",
+  "name": "City of Reading (Fritz Island WWTP and collection system)",
+  "state": "PA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Schuylkill River"
+  ],
+  "water_slugs": [
+   "schuylkill-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found. Not on DEP's CSO list. Federal consent decree (modified; 2024 Federal Register amendment notice) and past main breaks (2011) sent raw sewage to the Schuylkill.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Reading"
+  ],
+  "notes": "Search only.",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "pa-johnstown-jra",
+  "name": "Johnstown Redevelopment Authority / City of Johnstown collection system",
+  "state": "PA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Stonycreek River",
+   "Conemaugh River",
+   "Little Conemaugh River"
+  ],
+  "water_slugs": [
+   "stonycreek-river-pa",
+   "conemaugh-river-pa"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found. 2010 DEP consent order and agreement requires elimination of all SSOs. Not on DEP's CSO list (Dale Borough's CSO permit PA0253901 is terminated).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Johnstown"
+  ],
+  "notes": "Search only.",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ }
+]

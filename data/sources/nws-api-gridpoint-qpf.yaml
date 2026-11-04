@@ -1,0 +1,22 @@
+id: "nws-api-gridpoint-qpf"
+name: "NWS gridpoint forecast, quantitative precipitation (api.weather.gov)"
+url: "https://api.weather.gov/gridpoints/BOX/22,80"
+homepage: "https://www.weather.gov/documentation/services-web-api"
+kind: "api"
+level: "federal"
+# Notes (pipeline/ingest/rainfall.py, 2026-11-02): /points/{lat},{lon} gives each outfall point's
+#   grid cell (kept); /gridpoints/{wfo}/{x},{y} quantitativePrecipitation (mm, 1-6 h periods) is
+#   summed over the next 24 hours. 196 grid cells, each fetched at most every 3 hours. Shown as
+#   "rain expected" on water and discharger pages; it never sets a colour.
+cadence: "3 hours"
+license: "NWS data, public domain"
+attribution: "NOAA National Weather Service"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["US"]
+access: ["api"]
+access_detail: "points/{lat},{lon} -> gridId, gridX, gridY; gridpoints/{wfo}/{x},{y} properties.quantitativePrecipitation values [{validTime: start/PTnH, value: mm}], updateTime."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

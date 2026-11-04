@@ -1,0 +1,724 @@
+{
+ "state": "FL",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 169,
+ "plant_permits_major": 102,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "FL0000922",
+   "permittee": "American Water Military Services, LLC",
+   "city": "MAYPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0000957",
+   "permittee": "USN NAS Jacksonville",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0020109",
+   "permittee": "Winter Garden, City of",
+   "city": "WINTER GARDEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0020141",
+   "permittee": "Sanford, City of",
+   "city": "SANFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0020206",
+   "permittee": "PORT ST. JOE",
+   "city": "PORT SAINT JOE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "FL0020231",
+   "permittee": "Jacksonville Beach, City of",
+   "city": "JACKSONVILLE BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0020303",
+   "permittee": "City of Deland",
+   "city": "DE LAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0020401",
+   "permittee": "Palmetto, City of",
+   "city": "PALMETTO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0020427",
+   "permittee": "Neptune Beach, City of",
+   "city": "NEPTUNE BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0020451",
+   "permittee": "City of Panama City",
+   "city": "PANAMA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0020532",
+   "permittee": "City of Ormond Beach",
+   "city": "ORMOND BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0020940",
+   "permittee": "City of Tampa - Department of Sanitary Sewers",
+   "city": "TAMPA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0021105",
+   "permittee": "Cocoa Beach, City Of",
+   "city": "COCOA BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0021261",
+   "permittee": "City of Fort Myers",
+   "city": "FORT MYERS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0021270",
+   "permittee": "City of Fort Myers",
+   "city": "FORT MYERS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0021326",
+   "permittee": "City of Dunedin",
+   "city": "DUNEDIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0021369",
+   "permittee": "Bradenton, City of",
+   "city": "BRADENTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0021440",
+   "permittee": "MAIN STREET WWTP",
+   "city": "PENSACOLA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "FL0021512",
+   "permittee": "City of Panama City Beach",
+   "city": "PANAMA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0021857",
+   "permittee": "City of Clearwater",
+   "city": "CLEARWATER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0021865",
+   "permittee": "City of Clearwater",
+   "city": "CLEARWATER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0021903",
+   "permittee": "City of Milton",
+   "city": "MILTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0021938",
+   "permittee": "City of St. Augustine",
+   "city": "SAINT AUGUSTINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0023248",
+   "permittee": "ATLANTIC BEACH - BUCCANEER STP",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "FL0023493",
+   "permittee": "JEA",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0023604",
+   "permittee": "JEA",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0023663",
+   "permittee": "SAN JOSE WWTF",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "FL0023671",
+   "permittee": "JEA - JACKSONVILLE HEIGHTS WWT",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "FL0023922",
+   "permittee": "Town of Orange Park",
+   "city": "ORANGE PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0024007",
+   "permittee": "Emerald Coast Utilities Authority",
+   "city": "PENSACOLA BEACH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0024805",
+   "permittee": "Miami-Dade County - Public Works Department",
+   "city": "MIAMI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0025151",
+   "permittee": "Clay County Utility Authority",
+   "city": "ORANGE PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0025984",
+   "permittee": "CITY OF DAYTONA BEACH",
+   "city": "DAYTONA BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026000",
+   "permittee": "JEA",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026255",
+   "permittee": "City of Hollywood",
+   "city": "HOLLYWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026271",
+   "permittee": "City of Naples",
+   "city": "NAPLES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026344",
+   "permittee": "City of Boca Raton Department of Utility Services",
+   "city": "BOCA RATON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026387",
+   "permittee": "City of Perry",
+   "city": "PERRY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026441",
+   "permittee": "JEA",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026450",
+   "permittee": "JEA",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026468",
+   "permittee": "JEA",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026557",
+   "permittee": "City of Plant City",
+   "city": "PLANT CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026603",
+   "permittee": "City of Largo - WWTP",
+   "city": "CLEARWATER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026611",
+   "permittee": "Flagler Beach, City of",
+   "city": "FLAGLER BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0026867",
+   "permittee": "City of Blountstown",
+   "city": "BLOUNTSTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0027251",
+   "permittee": "Gainesville Regional Utilities",
+   "city": "GAINESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0027260",
+   "permittee": "City of Fernandina Beach",
+   "city": "FERNANDINA BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0027278",
+   "permittee": "Fort Pierce Utilities Authority",
+   "city": "FORT PIERCE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0027511",
+   "permittee": "City of Arcadia",
+   "city": "ARCADIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0027651",
+   "permittee": "City of Oldsmar",
+   "city": "OLDSMAR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0027677",
+   "permittee": "City of Holly Hill",
+   "city": "HOLLY HILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0027731",
+   "permittee": "City of Bonifay",
+   "city": "BONIFAY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0027821",
+   "permittee": "RIVER OAKS AWWTP",
+   "city": "TAMPA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0027880",
+   "permittee": "City of Jasper",
+   "city": "JASPER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0028061",
+   "permittee": "Hillsborough County Public Utilities Department",
+   "city": "RUSKIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0028126",
+   "permittee": "City of Starke",
+   "city": "STARKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0029033",
+   "permittee": "City of Quincy",
+   "city": "QUINCY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0030007",
+   "permittee": "City of Cape Coral",
+   "city": "CAPE CORAL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0030325",
+   "permittee": "North Fort Myers, City of - Waterway Estates Advanced WWTP",
+   "city": "NORTH FORT MYERS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0030406",
+   "permittee": "City of Tarpon Springs",
+   "city": "TARPON SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0031402",
+   "permittee": "Florida State Hospital",
+   "city": "CHATTAHOOCHEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0031771",
+   "permittee": "Broward County Water and Wastewater Services",
+   "city": "POMPANO BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0031801",
+   "permittee": "Emerald Coast Utilities Authority",
+   "city": "PENSACOLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0032182",
+   "permittee": "Miami-Dade County - Public Works Department",
+   "city": "MIAMI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0033251",
+   "permittee": "Altamonte Springs, City of",
+   "city": "ALTAMONTE SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0034649",
+   "permittee": "Loxahatchee Environmental Control District - WWTP",
+   "city": "JUPITER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0035980",
+   "permittee": "S. Central Regional WWT  Disp",
+   "city": "DELRAY BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0036048",
+   "permittee": "Winter Haven, City of",
+   "city": "WINTER HAVEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0036820",
+   "permittee": "HILLSBOROUGH CTY - DALE MABRY",
+   "city": "TAMPA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0037966",
+   "permittee": "CITY OF ORLANDO PUBLIC WORKS",
+   "city": "OVIEDO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0038555",
+   "permittee": "City of Graceville",
+   "city": "GRACEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0038776",
+   "permittee": "Atlantic Beach, City of",
+   "city": "ATLANTIC BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0038831",
+   "permittee": "St Johns County, Florida",
+   "city": "ST AUGUSTINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0038849",
+   "permittee": "OCU Department",
+   "city": "ORLANDO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0038857",
+   "permittee": "APALACHICOLA, CITY OF",
+   "city": "APALACHICOLA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "FL0039721",
+   "permittee": "Clay County Utility Authority",
+   "city": "MIDDLEBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0039772",
+   "permittee": "City Of Lakeland",
+   "city": "LAKELAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0039829",
+   "permittee": "Lee County Utilities",
+   "city": "FORT MYERS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0040061",
+   "permittee": "City of Palatka WWTF",
+   "city": "PALATKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0040398",
+   "permittee": "City of Cooper City",
+   "city": "COOPER CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0040436",
+   "permittee": "Pinellas County Utilities",
+   "city": "SAINT PETERSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0040495",
+   "permittee": "City of Macclenny",
+   "city": "MACCLENNY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0040614",
+   "permittee": "Hillsborough County Public Utilities Department",
+   "city": "TAMPA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0040665",
+   "permittee": "City of Clewiston",
+   "city": "CLEWISTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0040771",
+   "permittee": "City of Sarasota",
+   "city": "SARASOTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0040983",
+   "permittee": "Hillsborough County Public Utilities Department",
+   "city": "DOVER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0041360",
+   "permittee": "EAST CENTRAL REGIONAL WWTP",
+   "city": "WEST PALM BEACH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0041441",
+   "permittee": "Venice, City of",
+   "city": "VENICE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0041637",
+   "permittee": "Indian River County Utilities Department (IRCUD)",
+   "city": "VERO BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0041670",
+   "permittee": "Hillsborough County Public Utilities Department",
+   "city": "TAMPA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0042625",
+   "permittee": "SEMINOLE CTY DEPT OF EVIO SRV",
+   "city": "SANFORD",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "FL0043214",
+   "permittee": "Martin County",
+   "city": "STUART",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0043834",
+   "permittee": "Clay County Utility Authority",
+   "city": "ORANGE PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0044245",
+   "permittee": "St Johns County Utility Dept",
+   "city": "PONTE VEDRA BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0103349",
+   "permittee": "CITY OF TITUSVILLE",
+   "city": "TITUSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0111392",
+   "permittee": "CITY OF DAYTONA BEACH",
+   "city": "DAYTONA BEACH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0128937",
+   "permittee": "City of Clearwater",
+   "city": "SAFETY HARBOR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0167959",
+   "permittee": "Bay County Utility Services Department",
+   "city": "PANAMA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0169978",
+   "permittee": "Lynn Haven, City of",
+   "city": "LYNN HAVEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0170909",
+   "permittee": "City of Panama City",
+   "city": "PANAMA CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "FL0173371",
+   "permittee": "Clay County Utility Authority",
+   "city": "ORANGE PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "FL0559351",
+   "permittee": "Emerald Coast Utilities Authority",
+   "city": "CANTONMENT",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

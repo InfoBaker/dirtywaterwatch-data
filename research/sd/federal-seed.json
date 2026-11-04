@@ -1,0 +1,164 @@
+{
+ "state": "SD",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "SD0020796",
+   "permittee": "LEAD - DEADWOOD SANITARY DISTRICT",
+   "city": "DEADWOOD",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Whitewood Creek"
+   ]
+  },
+  {
+   "npdes_permit": "SD0027481",
+   "permittee": "LEAD, CITY OF (CSO)",
+   "city": "LEAD",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Gold Run Creek"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 3,
+ "plant_permits": 505,
+ "plant_permits_major": 19,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "SD0000281",
+   "permittee": "USAF - Ellsworth AFB",
+   "city": "ELLSWORTH AIR FORCE BASE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0020010",
+   "permittee": "Madison, City of",
+   "city": "MADISON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SD0020044",
+   "permittee": "Spearfish, City of",
+   "city": "SPEARFISH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0020052",
+   "permittee": "Sturgis, City of",
+   "city": "STURGIS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0020061",
+   "permittee": "Vermillion, City of",
+   "city": "VERMILLION",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0020176",
+   "permittee": "Pierre, City of",
+   "city": "PIERRE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SD0020371",
+   "permittee": "Milbank, City of",
+   "city": "MILBANK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0020702",
+   "permittee": "Aberdeen, City of",
+   "city": "ABERDEEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0020796",
+   "permittee": "Lead - Deadwood Sanitary District",
+   "city": "DEADWOOD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0022128",
+   "permittee": "Sioux Falls, City of",
+   "city": "SIOUX FALLS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0022918",
+   "permittee": "Hot Springs, City of",
+   "city": "HOT SPRINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0023361",
+   "permittee": "Mitchell, City of",
+   "city": "MITCHELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SD0023370",
+   "permittee": "Watertown, City of",
+   "city": "WATERTOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0023388",
+   "permittee": "Brookings Municipal Utilities",
+   "city": "BROOKINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0023396",
+   "permittee": "Yankton, City of",
+   "city": "YANKTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0023434",
+   "permittee": "Huron, City of",
+   "city": "HURON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SD0023574",
+   "permittee": "Rapid City, City of",
+   "city": "RAPID CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "SD0025186",
+   "permittee": "BOXELDER, CITY OF",
+   "city": "BOX ELDER, CITY OF",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "SD0028611",
+   "permittee": "South Dakota Ellsworth Development Authority (SDEDA)",
+   "city": "BOX ELDER",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

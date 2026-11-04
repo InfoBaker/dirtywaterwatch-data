@@ -1,0 +1,23 @@
+id: "va-deq-hab-topic"
+name: "DEQ 'Harmful Algal Blooms' topic page"
+url: "https://www.deq.virginia.gov/news-info/shortcuts/topics-of-interest/harmful-algal-blooms"
+homepage: "https://www.deq.virginia.gov/news-info/shortcuts/topics-of-interest/harmful-algal-blooms"
+kind: "html"
+level: "state"
+# Notes (research/va, status used, verified fetched, checked 2026-11-02): Explains the DEQ/VDH
+#   split; the data is VDH's.
+# Access detail (research, quoted): Browser read. 'DEQ conducts field investigations and collects
+#   water samples ... and VDH may issue advisories to the public'. Points to VDH for advisories;
+#   Lake Anna and Shenandoah studies.
+cadence: null
+license: "none stated"
+attribution: "Virginia Department of Environmental Quality"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["VA"]
+access: ["html"]
+access_detail: "Browser read. 'DEQ conducts field investigations and collects water samples ... and VDH may issue advisories to the public'. Points to VDH for advisories; Lake Anna and Shenandoah studies."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

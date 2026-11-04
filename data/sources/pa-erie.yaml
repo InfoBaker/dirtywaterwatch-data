@@ -1,0 +1,24 @@
+id: "pa-erie"
+name: "City of Erie Bureau of Sewers CSO Monitoring (real-time map and event reports)"
+url: "https://telog.erie.pa.us/CSO.Monitoring/Map"
+homepage: "https://telog.erie.pa.us/CSO.Monitoring/"
+kind: "html"
+level: "municipal"
+# Feed row: the source id written by the ingester pipeline/ingest/pa_erie.py
+#   (data/build/events/pa-erie.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/pa_erie.py docstring): Hourly (the map is real time; the report has no
+#   lag that we know of).
+cadence: "1 hour"
+license: "None stated. Footer: '© 2026 - Process and Data Automation, LLC'."
+attribution: "City of Erie Bureau of Sewers (site by Process and Data Automation, LLC; Telog)"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["PA"]
+registry_ids: ["pa-erie-cso-monitoring"]
+access: ["html"]
+access_detail: "Map page embeds markers inline (lat, lng, site id, location, status Active/Inactive, NPDES, receiving stream, affected water). Event table: GET /CSO.Monitoring/Report?startDate=M%2FD%2FYYYY%2012%3A00%3A00%20AM&endDate=... returns server-rendered HTML table (CSO Site, Date Event Started, Date Event Ended, Discharge (Gallons)); arbitrary date ranges work; a PDF 'Download' button exists. Fetched 2025 (22 rows) and 2026 to date (124 rows). No auth."
+machine_readable: true
+legal_basis: "40 CFR 122.38 (Great Lakes CSO public notification, effective 2018-02-07); Erie NPDES PA0026301."
+checked: "2026-11-02"

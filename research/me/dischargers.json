@@ -1,0 +1,808 @@
+[
+  {
+    "id": "me-auburn-sd",
+    "name": "Auburn Sewerage District",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100005",
+    "receiving_waters": [
+      "Androscoggin River"
+    ],
+    "water_slugs": [
+      "androscoggin-river-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100005%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: auburnsewer.org did not resolve; not checked further.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Auburn"
+    ],
+    "notes": "DEP-reported 2024: 348,684 gal, 2 event-days. DEP-reported 2025: 0 gal, 0 event-days. Regulators (end 2025): 1. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-bangor",
+    "name": "City of Bangor (Wastewater Treatment Plant)",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100781",
+    "receiving_waters": [
+      "Kenduskeag Stream",
+      "Penobscot River"
+    ],
+    "water_slugs": [
+      "kenduskeag-stream-me",
+      "penobscot-river-me"
+    ],
+    "outfall_count": 8,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100781%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "City CSO Control Program page https://bangormaine.gov/294/Combined-Sewer-Overflow-CSO-Control-Prog (history and LTCP, no event notices); city general alerts at https://me-bangor.civicplus.com/636/Alerts-Notifications (not CSO-specific). Signs at outfalls per permit.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Bangor"
+    ],
+    "notes": "DEP-reported 2024: 73,011,955 gal, 16 event-days. DEP-reported 2025: 9,226,984 gal, 8 event-days. Regulators (end 2025): 10. 5 outfalls to Kenduskeag Stream, 3 to Penobscot River. DEP revised Bangor 2024 volume (block-trip events) and removed 2 dry weather overflows from the 2024 event count (2025 report notes). kenduskeag-stream-me slug lists town Kenduskeag; the CSOs are on the lower stream in Bangor. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-bar-harbor-hulls-cove",
+    "name": "Town of Bar Harbor - Hulls Cove WWTF",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0102466",
+    "receiving_waters": [
+      "Frenchman Bay"
+    ],
+    "water_slugs": [
+      "frenchman-bay-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0102466%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: barharbormaine.gov homepage scanned; CivicAlerts news only.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Bar Harbor"
+    ],
+    "notes": "Regulators (end 2025): 1. DEP reports Bar Harbor's two permits together: 2024 3,179,664 gal / 8 event-days; 2025 1,899,328 gal / 13 event-days. MHB beach Hulls Cove is named by DEP as potentially CSO-impacted. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-bar-harbor-main",
+    "name": "Town of Bar Harbor - Main WWTP",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0101214",
+    "receiving_waters": [
+      "Frenchman Bay",
+      "Eddie Brook"
+    ],
+    "water_slugs": [
+      "frenchman-bay-me"
+    ],
+    "outfall_count": 3,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0101214%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: barharbormaine.gov homepage scanned; CivicAlerts news only.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Bar Harbor"
+    ],
+    "notes": "Regulators (end 2025): 3. 2 outfalls to Frenchman Bay, 1 to Eddie Brook (no slug). Volumes combined with Hulls Cove in DEP tables (see me-bar-harbor-hulls-cove). DEP names Town Beach off Town Pier as potentially CSO-impacted. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-bath",
+    "name": "City of Bath Water Pollution Control",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100021",
+    "receiving_waters": [
+      "Kennebec River"
+    ],
+    "water_slugs": [
+      "kennebec-river-me",
+      "sagadahoc-river-me"
+    ],
+    "outfall_count": 4,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100021%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: cityofbath.com did not respond.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Bath"
+    ],
+    "notes": "DEP-reported 2024: 2,645,771 gal, 11 event-days. DEP-reported 2025: 1,672,367 gal, 10 event-days. Regulators (end 2025): 4. sagadahoc-river-me is the openboatlaunch record for the Kennebec at Bath (same Wikidata item Q1431323). Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-belfast",
+    "name": "City of Belfast WWTP",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0101532",
+    "receiving_waters": [
+      "Passagassawakeag River",
+      "Belfast Harbor"
+    ],
+    "water_slugs": [
+      "passagassawakeag-river-me",
+      "penobscot-bay-me"
+    ],
+    "outfall_count": 2,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0101532%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: belfastmaine.org returned 403.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Belfast"
+    ],
+    "notes": "DEP-reported 2024: 207,301 gal, 1 event-days. DEP-reported 2025: 0 gal, 0 event-days. Regulators (end 2025): 2. Belfast Harbor mapped to penobscot-bay-me as the parent bay (inferred). Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-biddeford",
+    "name": "City of Biddeford WWTF",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100048",
+    "receiving_waters": [
+      "Saco River"
+    ],
+    "water_slugs": [
+      "saco-river-me"
+    ],
+    "outfall_count": 7,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100048%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: biddefordmaine.org homepage scanned; only general CivicAlerts news, no CSO notices.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Biddeford"
+    ],
+    "notes": "DEP-reported 2024: 20,631,322 gal, 13 event-days. DEP-reported 2025: 3,669,880 gal, 8 event-days. Regulators (end 2025): 7. DEP names Hills Beach, Biddeford Pool, Middle Beach and Fortunes Rocks Beach (MHB beaches) as potentially CSO-impacted. 2024 report: 99.0% of Biddeford's 2024 discharge came from winter/frozen-ground events. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-brewer",
+    "name": "City of Brewer WWTP",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100072",
+    "receiving_waters": [
+      "Penobscot River",
+      "Sedgeunkedunk Stream"
+    ],
+    "water_slugs": [
+      "penobscot-river-me"
+    ],
+    "outfall_count": 4,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100072%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: brewermaine.gov offers 'Notify Brewer' (AlertSense) general alerts; no CSO category seen.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Brewer"
+    ],
+    "notes": "DEP-reported 2024: 1,979,681 gal, 9 event-days. DEP-reported 2025: 280,292 gal, 1 event-days. Regulators (end 2025): 4. 3 outfalls to Penobscot River, 1 to Sedgeunkedunk Stream (no slug). Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-bucksport",
+    "name": "Town of Bucksport",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100111",
+    "receiving_waters": [
+      "Penobscot River"
+    ],
+    "water_slugs": [
+      "penobscot-river-me"
+    ],
+    "outfall_count": 0,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100111%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Bucksport"
+    ],
+    "notes": "DEP-reported 2024: 0 gal, 0 event-days. DEP-reported 2025: 0 gal, 0 event-days. Listed by DEP as a CSO permittee with 0 outfalls: 'SWIRL to Penobscot River' (a treated swirl-concentrator discharge). No CSO volume reported 2011-2025. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-calais",
+    "name": "City of Calais WWTP",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100129",
+    "receiving_waters": [
+      "St. Croix River",
+      "Landing Brook"
+    ],
+    "water_slugs": [
+      "saint-croix-river-me"
+    ],
+    "outfall_count": 3,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100129%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: calaismaine.org has a generic 'Subscribe to Updates'; no CSO page seen.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Calais"
+    ],
+    "notes": "DEP-reported 2024: 1,975,800 gal, 4 event-days. DEP-reported 2025: 881,100 gal, 1 event-days. Regulators (end 2025): 3. 2 outfalls to St. Croix River, 1 to Landing Brook. DEP: Red Beach (not a swimming beach) potentially CSO-impacted; Calais reported shellfish closures attributed to CSO in 2024. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-cape-elizabeth-ottawa-rd",
+    "name": "Cape Elizabeth - Ottawa Road Pump Station (co-permittees South Portland, PWD, Cape Elizabeth)",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0102806",
+    "receiving_waters": [
+      "Atlantic Ocean"
+    ],
+    "water_slugs": [],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0102806%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: capeelizabeth.com links only Smart911 emergency notification.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Cape Elizabeth",
+      "South Portland"
+    ],
+    "notes": "DEP-reported 2024: 492,425 gal, 7 event-days. DEP-reported 2025: 99,000 gal, 2 event-days. Regulators (end 2025): 1. Receiving water 'Atlantic Ocean' has no matching openboatlaunch slug (north-atlantic-ocean-me does not list Cape Elizabeth). DEP names Cliff House Beach, Casino Beach and Fort Williams Park as potentially CSO-impacted. Draft 2026 permit (EPA-posted) carries the same sign condition; no event notification condition. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-gardiner",
+    "name": "City of Gardiner WWTF",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0101702",
+    "receiving_waters": [
+      "Kennebec River"
+    ],
+    "water_slugs": [
+      "kennebec-river-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0101702%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: gardinermaine.com returned 403.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Gardiner"
+    ],
+    "notes": "DEP-reported 2024: 2,200,000 gal, 1 event-days. DEP-reported 2025: 0 gal, 0 event-days. Regulators (end 2025): 1. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-gaud",
+    "name": "Greater Augusta Utility District (incl. Hallowell sanitary sewers and CSO)",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100013",
+    "receiving_waters": [
+      "Kennebec River"
+    ],
+    "water_slugs": [
+      "kennebec-river-me"
+    ],
+    "outfall_count": 9,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100013%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: gaud.org homepage scanned; no CSO or alert links.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Augusta",
+      "Hallowell"
+    ],
+    "notes": "DEP-reported 2024: 10,679,193 gal, 5 event-days. DEP-reported 2025: 3,624,263 gal, 6 event-days. Regulators (end 2025): 9. GAUD closed CSO008 in 2024. The GIS layer still shows 10 STATUS=ACTIVE outfalls (snapshot predates the closure). Hallowell Water District's former permit ME0101010 was folded into GAUD in 2008. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-hampden",
+    "name": "Town of Hampden",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0102512",
+    "receiving_waters": [
+      "Souadabscook Stream"
+    ],
+    "water_slugs": [
+      "souadabscook-stream-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0102512%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "Permit ME0102512 renewed 2026 (EPA-posted copy fetched): Special Condition 10 requires an identification sign at the CSO; no event notification. Cognizant official: Public Works Director (phone in permit).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Hampden"
+    ],
+    "notes": "DEP-reported 2024: 158,730 gal, 3 event-days. DEP-reported 2025: 0 gal, 0 event-days. Regulators (end 2025): 1. One CSO at the Souadabscook Stream Pump Station, 139 Main Road North; sewage treated at Bangor POTW (satellite system). Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-lewiston",
+    "name": "City of Lewiston",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100994",
+    "receiving_waters": [
+      "Androscoggin River",
+      "Goff Brook / Hart Brook",
+      "Jepson Brook"
+    ],
+    "water_slugs": [
+      "androscoggin-river-me"
+    ],
+    "outfall_count": 8,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100994%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: lewistonmaine.gov homepage scanned; CivicAlerts news only.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Lewiston"
+    ],
+    "notes": "DEP-reported 2024: 33,696,254 gal, 17 event-days. DEP-reported 2025: 1,269,778 gal, 12 event-days. Regulators (end 2025): 9. 3 outfalls to Androscoggin River, 1 to Goff/Hart Brook, 4 to Jepson Brook (no slugs for the brooks). Satellite collection system to LACWA. 2024: 90.3% of discharge in winter/frozen-ground events. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-lacwa",
+    "name": "Lewiston-Auburn Clean Water Authority (LACWA, formerly LAWPCA)",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0101478",
+    "receiving_waters": [
+      "Androscoggin River"
+    ],
+    "water_slugs": [
+      "androscoggin-river-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0101478%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "https://www.lacwa.org/combined-sewer-overflow-cso-tank-project/ (project news only; no event notices).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Lewiston",
+      "Auburn"
+    ],
+    "notes": "DEP-reported 2024: 57,861,000 gal, 27 event-days. DEP-reported 2025: 8,797,000 gal, 16 event-days. Regulators (end 2025): 1. Single CSO ('Structure B' at the treatment facility). 2.1 MG storage tank under construction; DEP estimated it would have cut 2024 events from 21 to 5. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-machias",
+    "name": "Town of Machias WWTF",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100323",
+    "receiving_waters": [
+      "Machias River"
+    ],
+    "water_slugs": [
+      "machias-river-me"
+    ],
+    "outfall_count": 2,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100323%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: machiasmaine.gov did not respond.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Machias"
+    ],
+    "notes": "DEP-reported 2024: 220,129 gal, 5 event-days. DEP-reported 2025: 1,073,653 gal, 3 event-days. Regulators (end 2025): 2. DEP: 11 shellfish area closures in 2024 and 3 in 2025 attributed to Machias CSO activity; new pump station and river-crossing force main started spring 2025, no siphon-outfall CSO events after startup. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-madawaska",
+    "name": "Town of Madawaska",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0101681",
+    "receiving_waters": [
+      "St. John River"
+    ],
+    "water_slugs": [
+      "saint-john-river-me"
+    ],
+    "outfall_count": 2,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0101681%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: madawaskamaine.com did not respond.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Madawaska"
+    ],
+    "notes": "DEP-reported 2024: 789,394 gal, 2 event-days. DEP-reported 2025: 0 gal, 0 event-days. Regulators (end 2025): 2. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-mechanic-falls-sd",
+    "name": "Mechanic Falls Sanitary District",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100391",
+    "receiving_waters": [
+      "Little Androscoggin River"
+    ],
+    "water_slugs": [],
+    "outfall_count": 2,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100391%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Mechanic Falls"
+    ],
+    "notes": "DEP-reported 2024: 711,433 gal, 18 event-days. DEP-reported 2025: 9,930 gal, 3 event-days. Regulators (end 2025): 2. No openboatlaunch slug for the Little Androscoggin River. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-milford",
+    "name": "Town of Milford",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0102695",
+    "receiving_waters": [
+      "Penobscot River"
+    ],
+    "water_slugs": [
+      "penobscot-river-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0102695%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Milford"
+    ],
+    "notes": "DEP-reported 2024: 46,267 gal, 2 event-days. DEP-reported 2025: 4,674 gal, 2 event-days. Regulators (end 2025): 1. Permit number differs between sources: DEP status report tables list ME0102695; the DEP GIS CSO layer lists NEPDES_FAC ME0001678. Treat as unresolved; owner should confirm with DEP. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-old-town",
+    "name": "City of Old Town Pollution Control Facility",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100471",
+    "receiving_waters": [
+      "Penobscot River"
+    ],
+    "water_slugs": [
+      "penobscot-river-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100471%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: oldtownmaine.org did not respond.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Old Town"
+    ],
+    "notes": "DEP-reported 2024: 93,715 gal, 5 event-days. DEP-reported 2025: 0 gal, 0 event-days. Regulators (end 2025): 1. Closed CSO #003 and #004 in 2025; the remaining CSO discharges to the Penobscot. GIS layer still shows 3 active (incl. one to Stillwater River). Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-orono",
+    "name": "Town of Orono WPCF",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100498",
+    "receiving_waters": [
+      "Penobscot River"
+    ],
+    "water_slugs": [
+      "penobscot-river-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100498%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: orono.org homepage scanned; no CSO links.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Orono"
+    ],
+    "notes": "DEP-reported 2024: 5,386,128 gal, 6 event-days. DEP-reported 2025: 1,770,882 gal, 4 event-days. Regulators (end 2025): 1. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-portland-city",
+    "name": "City of Portland (Department of Public Works / Water Resources)",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0101435",
+    "receiving_waters": [
+      "Back Cove",
+      "Capisic Brook",
+      "Portland Harbor",
+      "Nason Brook to Fore River"
+    ],
+    "water_slugs": [
+      "casco-bay-me",
+      "fore-river-me"
+    ],
+    "outfall_count": 7,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0101435%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No CSO event page or alert found on portlandmaine.gov (city page URLs tried returned 404). Signs at outfalls per permit. Per-event, per-outfall data exist in the annual 'CSO Activity and Volumes' spreadsheets filed with DEP; CBEP obtained 2015-2019 Portland files by email from PWD (github.com/CBEP-SoCB-Details/Casco_Bay_CSOs).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Portland"
+    ],
+    "notes": "DEP-reported 2024: 290,214,400 gal, 48 event-days. DEP-reported 2025: 115,308,100 gal, 38 event-days. Regulators (end 2025): 10. Volumes and event-days are reported by DEP jointly for City + PWD. 3 outfalls to Back Cove, 1 Capisic Brook, 2 Portland Harbor, 1 Nason Brook to Fore River marsh. Back Cove South Storage Facility in service late Aug 2025. DEP: one beach closure due to CSO at East End Beach in 2024; none in 2025. Back Cove and Portland Harbor have no own slug; mapped to casco-bay-me (inferred parent water). Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-pwd",
+    "name": "Portland Water District (Portland CSOs and East End WWTF)",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0102075",
+    "receiving_waters": [
+      "Back Cove",
+      "Casco Bay",
+      "Fore River",
+      "Portland Harbor"
+    ],
+    "water_slugs": [
+      "casco-bay-me",
+      "fore-river-me"
+    ],
+    "outfall_count": 16,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0102075%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "PWD alerts page https://www.pwd.org/alerts-notifications/ (email/SMS sign-up; categories are water main flushing and water main breaks only; RSS https://www.pwd.org/news/category/alerts/feed/). No CSO category; site search for overflow/CSO returned no CSO notice pages.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Portland"
+    ],
+    "notes": "Regulators (end 2025): 16. Volumes combined with City of Portland (see me-portland-city). 5 outfalls Back Cove, 3 Casco Bay, 4 Fore River, 4 Portland Harbor. East End WWTF also has wet-weather flows that bypass secondary treatment but receive primary treatment and disinfection (CBEP note); those are reported on DEP-49-CSO forms, not counted as CSO volume. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-randolph",
+    "name": "Town of Randolph",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0102423",
+    "receiving_waters": [
+      "Kennebec River"
+    ],
+    "water_slugs": [
+      "kennebec-river-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0102423%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Randolph"
+    ],
+    "notes": "DEP-reported 2024: 50,000 gal, 2 event-days. DEP-reported 2025: 0 gal, 0 event-days. Regulators (end 2025): 1. Satellite system (sewers to another entity's POTW, per DEP 'bold' list) - inferred. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-rockland",
+    "name": "City of Rockland WWTF",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100595",
+    "receiving_waters": [
+      "Rockland Harbor (Lermond Cove)"
+    ],
+    "water_slugs": [
+      "rockland-harbor-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100595%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: rocklandmaine.gov homepage scanned; CivicAlerts news only.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Rockland"
+    ],
+    "notes": "Regulators (end 2025): 1. DEP table cells for Rockland 2016-2025 volume/events are blank in the extracted text (table shows zeros for earlier years); GIS lists receiving water as Lermond Cove. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-saco",
+    "name": "City of Saco Water Resource Recovery Facility",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0101117",
+    "receiving_waters": [
+      "Saco River"
+    ],
+    "water_slugs": [
+      "saco-river-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0101117%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: sacomaine.org homepage scanned; emergency alerts only (police), no CSO notices.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Saco"
+    ],
+    "notes": "DEP-reported 2024: 4,027,000 gal, 14 event-days. DEP-reported 2025: 971,000 gal, 6 event-days. Regulators (end 2025): 1. DEP names Camp Ellis and the Biddeford/Saco beaches as potentially CSO-impacted. 2024: 96.1% of discharge in winter events. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-skowhegan",
+    "name": "Town of Skowhegan WWTP",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100625",
+    "receiving_waters": [
+      "Kennebec River"
+    ],
+    "water_slugs": [
+      "kennebec-river-me"
+    ],
+    "outfall_count": 5,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100625%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "2026 permit renewal (EPA-posted copy fetched) lists five active CSOs in Special Condition K plus a CSO-related primary-clarifier bypass (Outfall 001B, reported on DEP-49-CSO form). No event notification condition found. Website check 2026-11-01: skowhegan.org homepage scanned; no CSO links.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Skowhegan"
+    ],
+    "notes": "DEP-reported 2024: 2,448,510 gal, 6 event-days. DEP-reported 2025: 910,000 gal, 7 event-days. Regulators (end 2025): 5. Earlier permits authorized eight CSOs; #002, #007 and #009 removed/converted to emergency bypasses. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-south-portland",
+    "name": "City of South Portland Water Resource Protection",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100633",
+    "receiving_waters": [
+      "Barberry Creek",
+      "Fore River",
+      "Calvary Pond",
+      "Portland Harbor"
+    ],
+    "water_slugs": [
+      "fore-river-me",
+      "casco-bay-me"
+    ],
+    "outfall_count": 4,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100633%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: southportland.org homepage scanned; CivicAlerts news only.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "South Portland"
+    ],
+    "notes": "DEP-reported 2024: 4,242,992 gal, 5 event-days. DEP-reported 2025: 791,675 gal, 2 event-days. Regulators (end 2025): 4. DEP names Willard Beach as potentially CSO-impacted. 2024: 99.9% of discharge in winter events. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-westbrook",
+    "name": "Westbrook (Portland Water District Westbrook WWTF)",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100846",
+    "receiving_waters": [
+      "Presumpscot River"
+    ],
+    "water_slugs": [
+      "presumpscot-river-me"
+    ],
+    "outfall_count": 5,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100846%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: westbrookmaine.com homepage scanned; CivicAlerts news only.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Westbrook"
+    ],
+    "notes": "DEP-reported 2024: 7,843,700 gal, 5 event-days. DEP-reported 2025: 525,000 gal, 1 event-days. Regulators (end 2025): 5. PWD operates; PWD alerts page has no CSO category (see me-pwd). Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-winslow",
+    "name": "Town of Winslow",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0102628",
+    "receiving_waters": [
+      "Sebasticook River",
+      "Kennebec River"
+    ],
+    "water_slugs": [
+      "kennebec-river-me"
+    ],
+    "outfall_count": 2,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0102628%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year). Website check 2026-11-01: winslow-me.gov has a general 'Sign up for Alerts' (enotify); no CSO category seen.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Winslow"
+    ],
+    "notes": "DEP-reported 2024: 7,361,250 gal, 8 event-days. DEP-reported 2025: 0 gal, 0 event-days. Regulators (end 2025): 2. No openboatlaunch slug for the Sebasticook River (sebasticook-lake-me is the lake). Winslow sewers go to KSTD (satellite, inferred). Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-winterport",
+    "name": "Winterport Water District (formerly Winterport Sewerage District)",
+    "state": "ME",
+    "kind": "cso",
+    "npdes_permit": "ME0100749",
+    "receiving_waters": [
+      "Penobscot River"
+    ],
+    "water_slugs": [
+      "penobscot-river-me"
+    ],
+    "outfall_count": 1,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2/query?where=NEPDES_FAC%3D%27ME0100749%27+AND+STATUS%3D%27ACTIVE%27&outFields=%2A&f=json",
+    "notification_channel": "No event notification found. Permit requires a permanent 12x18 inch green 'wet weather sewage discharge' sign at each CSO outfall (standard MEPDES CSO special condition) and Ch. 570 annual newspaper notice; annual totals appear only in the DEP CSO Status Report (published each June-July for the prior year).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Winterport"
+    ],
+    "notes": "DEP-reported 2024: 48,000 gal, 2 event-days. DEP-reported 2025: 0 gal, 0 event-days. Regulators (end 2025): 1. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-kstd",
+    "name": "Kennebec Sanitary Treatment District (KSTD)",
+    "state": "ME",
+    "kind": "emergency_overflow",
+    "npdes_permit": "ME0100854",
+    "receiving_waters": [
+      "Kennebec River"
+    ],
+    "water_slugs": [
+      "kennebec-river-me"
+    ],
+    "outfall_count": 0,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2 (closed outfalls, STATUS='CLOSED')",
+    "notification_channel": "No public channel found.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Waterville",
+      "Fairfield",
+      "Benton",
+      "Winslow",
+      "Oakland",
+      "Vassalboro"
+    ],
+    "notes": "DEP-reported 2024: 0 gal, 0 event-days. Exited the CSO program in 2024; CSO003 and CSO005 converted to Emergency Overflows. DEP: an EO 'has to be electronically monitored on a continuous basis with any discharge being treated as an illicit discharge and reported as a sanitary sewer overflow (SSO)'. Reports go to DEP (24-hour oral / 5-day written), not to the public. Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "me-paris-ud",
+    "name": "Paris Utility District",
+    "state": "ME",
+    "kind": "emergency_overflow",
+    "npdes_permit": "ME0100951",
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": 0,
+    "outfalls_source": "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2 (closed outfalls, STATUS='CLOSED')",
+    "notification_channel": "No public channel found.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Paris",
+      "South Paris"
+    ],
+    "notes": "DEP-reported 2024: 442,000 gal, 1 event-days. Exited the CSO program in 2024 (with KSTD, first exits since Sanford in 2014). Receiving water not stated in the extracted report text (Little Androscoggin River, inferred). Outfall count and volumes: DEP Maine CSO 2025 Status Report (June 2026) https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  }
+]

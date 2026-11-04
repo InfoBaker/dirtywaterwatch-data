@@ -1,0 +1,31 @@
+id: "nj-pvsc-website-cso"
+name: "Passaic Valley Sewerage Commission website: 'PVSC & NJCSO' page and 'CSO Notification System' link"
+url: "https://www.nj.gov/pvsc/what/njcso/"
+homepage: "https://www.nj.gov/pvsc/what/njcso/"
+kind: "html"
+level: "utility"
+# Notes (research/nj, status used, verified fetched, checked 2026-11-02): Establishes PVSC's
+#   notification practice in fact: a link to the shared rainfall-model site.
+# Access detail (research, quoted): Fetched home https://www.nj.gov/pvsc/ (link 'CSO Notification
+#   System' -> https://njcso.hdrgateway.com) and /pvsc/what/njcso/ (quarterly 'District CSO
+#   Construction Related Activities' PDFs 2020 through '1st Half 2026'). No PVSC-specific alerts,
+#   email/text list, RSS or social feed of CSO events found. Facebook/Twitter accounts named:
+#   facebook.com/njcleanwaterways, @NJWaterways (not checked).
+# Waters: PVSC district (48 municipalities; 8 combined: Bayonne, East Newark, Harrison, Jersey City,
+#   Kearny, Newark, North Bergen, Paterson) (openboatlaunch slugs: passaic-river-nj, newark-bay-nj,
+#   hackensack-river-nj, hudson-river-nj)
+# Research notes: PVSC also has an 'Ambient Water Quality Monitoring Program' page
+#   (/pvsc/what/njhdg/, NJ Harbor Discharger Group reports, e.g. 2010 report PDF) - not read. PVSC
+#   press releases 2026 (skimmer vessel, pump station) mention no overflow events. Raw: raw/pvsc/.
+cadence: "No event notices of its own; relies on the NJ CSO Group outlook."
+license: "none stated"
+attribution: "Passaic Valley Sewerage Commission"
+enabled: true
+role: "events"
+event_types: []
+states: ["NJ"]
+access: ["html", "pdf"]
+access_detail: "Fetched home https://www.nj.gov/pvsc/ (link 'CSO Notification System' -> https://njcso.hdrgateway.com) and /pvsc/what/njcso/ (quarterly 'District CSO Construction Related Activities' PDFs 2020 through '1st Half 2026'). No PVSC-specific alerts, email/text list, RSS or social feed of CSO events found. Facebook/Twitter accounts named: facebook.com/njcleanwaterways, @NJWaterways (not checked)."
+machine_readable: false
+legal_basis: "PVSC NJPDES CSO permit NJ0021016 (final 2025-10-28)"
+checked: "2026-11-02"

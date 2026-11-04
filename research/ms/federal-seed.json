@@ -1,0 +1,493 @@
+{
+ "state": "MS",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 366,
+ "plant_permits_major": 69,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "MS0020117",
+   "permittee": "MERIDIAN POTW",
+   "city": "MERIDIAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020176",
+   "permittee": "LAUREL POTW, NUMBER 2",
+   "city": "LAUREL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020184",
+   "permittee": "GREENVILLE POTW",
+   "city": "GREENVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020249",
+   "permittee": "JACKSON COUNTY UTILITY AUTHORITY, POTW 7C",
+   "city": "PASCAGOULA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020303",
+   "permittee": "HATTIESBURG SOUTH LAGOON",
+   "city": "HATTIESBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020311",
+   "permittee": "CLARKSDALE POTW",
+   "city": "CLARKSDALE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020362",
+   "permittee": "FOREST POTW",
+   "city": "FOREST",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020371",
+   "permittee": "BELZONI POTW",
+   "city": "BELZONI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020389",
+   "permittee": "YAZOO CITY POTW",
+   "city": "YAZOO CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020397",
+   "permittee": "GRENADA POTW",
+   "city": "GRENADA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020494",
+   "permittee": "PEARL RIVER CO UTILITY AUTHORITY, POPLARVILLE POTW",
+   "city": "POPLARVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020567",
+   "permittee": "CLEVELAND POTW",
+   "city": "BOYLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020788",
+   "permittee": "WEST POINT POTW, WEST",
+   "city": "WEST POINT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0020826",
+   "permittee": "HATTIESBURG NORTH LAGOON",
+   "city": "HATTIESBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0021024",
+   "permittee": "WINONA POTW",
+   "city": "WINONA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0021156",
+   "permittee": "PHILADELPHIA POTW",
+   "city": "PHILADELPHIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0021521",
+   "permittee": "JACKSON COUNTY UTILITY AUTHORITY, POTW 6C",
+   "city": "ESCATAWPA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0021652",
+   "permittee": "CORINTH POTW",
+   "city": "CORINTH",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MS0022331",
+   "permittee": "WATER VALLEY POTW",
+   "city": "WATER VALLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0022381",
+   "permittee": "VICKSBURG POTW",
+   "city": "VICKSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0023159",
+   "permittee": "HARRISON CO UTILITY AUTHORITY, EAST BILOXI POTW",
+   "city": "BILOXI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0023833",
+   "permittee": "GREENWOOD POTW",
+   "city": "GREENWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0024147",
+   "permittee": "BROOKHAVEN POTW",
+   "city": "BROOKHAVEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0024163",
+   "permittee": "LAUREL POTW, NUMBER 1",
+   "city": "LAUREL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0024228",
+   "permittee": "WAYNESBORO POTW",
+   "city": "WAYNESBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0024252",
+   "permittee": "NATCHEZ POTW",
+   "city": "NATCHEZ",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0024295",
+   "permittee": "JACKSON POTW, SAVANNA STREET",
+   "city": "JACKSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0024619",
+   "permittee": "INDIANOLA POTW",
+   "city": "INDIANOLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0024627",
+   "permittee": "Batesville POTW",
+   "city": "BATESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0027774",
+   "permittee": "KOSCIUSKO POTW, SOUTH",
+   "city": "KOSCIUSKO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0027847",
+   "permittee": "HANCOCK COUNTY UTILITY AUTHORITY, SOUTHERN REGIONAL WWTP",
+   "city": "WAVELAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0029017",
+   "permittee": "OXFORD POTW",
+   "city": "OXFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0029513",
+   "permittee": "DCRUA, OLIVE BRANCH POTW ROSS ROAD",
+   "city": "OLIVE BRANCH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0030333",
+   "permittee": "HARRISON CO UTILITY AUTHORITY, WEST BILOXI POTW",
+   "city": "BILOXI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0036111",
+   "permittee": "TUPELO POTW",
+   "city": "TUPELO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0036145",
+   "permittee": "STARKVILLE POTW",
+   "city": "STARKVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0036234",
+   "permittee": "MORTON POTW",
+   "city": "MORTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0042030",
+   "permittee": "BOONEVILLE POTW",
+   "city": "BOONEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0042048",
+   "permittee": "VERONA POTW",
+   "city": "VERONA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0042161",
+   "permittee": "PEARL RIVER COUNTY UTILITY AUTHORITY, PRCUA AIRPORT ROAD POTW",
+   "city": "PICAYUNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0042455",
+   "permittee": "CANTON MUNICIPAL UTILITIES, HYDROGRAPH CONTROLLED RELEASE POTW",
+   "city": "CANTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0043010",
+   "permittee": "JACKSON COUNTY UTILITY AUTHORITY, POTW 2C",
+   "city": "GAUTIER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0043141",
+   "permittee": "HARRISON COUNTY UTILITY AUTHORITY, LONG BEACH & PASS CHRISTIAN",
+   "city": "PASS CHRISTIAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0044059",
+   "permittee": "JACKSON POTW, TRAHON AND BIG CREEK WWTF",
+   "city": "JACKSON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MS0044164",
+   "permittee": "COLUMBIA POTW, SOUTH",
+   "city": "COLUMBIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0045446",
+   "permittee": "JACKSON COUNTY UTILITY AUTHORITY, POTW 1C",
+   "city": "OCEAN SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0045489",
+   "permittee": "AMORY POTW",
+   "city": "AMORY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0046078",
+   "permittee": "DIAMONDHEAD WATER AND SEWER DISTRICT",
+   "city": "DIAMONDHEAD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0048691",
+   "permittee": "TUNICA COUNTY UTILITY DISTRICT",
+   "city": "ROBINSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0051756",
+   "permittee": "HARRISON COUNTY UTILITY AUTHORITY, GULFPORT POTW, NORTH AND SOUTH PLANTS",
+   "city": "GULFPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0052221",
+   "permittee": "SENATOBIA POTW",
+   "city": "SENATOBIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0053503",
+   "permittee": "Mississippi Band of Choctaw Indians (Pearl River WWTF)",
+   "city": "PHILADELPHIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0054992",
+   "permittee": "CLINTON POTW, SOUTHSIDE",
+   "city": "CLINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0055581",
+   "permittee": "ABERDEEN POTW, EAST",
+   "city": "ABERDEEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MS0055735",
+   "permittee": "EAST MERIDIAN POTW",
+   "city": "MERIDIAN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MS0056472",
+   "permittee": "COLUMBUS, CITY OF, REYNOLDS R RIDGLEY WWTP",
+   "city": "COLUMBUS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0057517",
+   "permittee": "CANTON MUNICIPAL UTILITIES, BEATTIES BLUFF WASTEWATER TREATMENT FACILITY",
+   "city": "CANTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0058581",
+   "permittee": "PONTOTOC, CITY OF,  ACTIVATED SLUDGE FACILITY",
+   "city": "PONTOTOC",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MS0059838",
+   "permittee": "MSARNG, CAMP SHELBY JOINT FORCES TRAINING CENTER",
+   "city": "CAMP SHELBY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0061077",
+   "permittee": "MCCOMB POTW",
+   "city": "MCCOMB",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0061174",
+   "permittee": "PEARL RIVER COUNTY UTILITY AUTHORITY, NEAL ROAD POTW",
+   "city": "PICAYUNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0061204",
+   "permittee": "HARRISON CO UTIL AUTHORITY, SOUTH WOOLMARKET WRRF",
+   "city": "HARRISON COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0061221",
+   "permittee": "HARRISON CO UTIL AUTH, S20 D'IBERVILLE WWTF AND TRANSMISSION SYSTEM",
+   "city": "D'IBERVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0061239",
+   "permittee": "HANCOCK CO UTIL AUTH, NORTHERN REGIONAL WWTP",
+   "city": "KILN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0061271",
+   "permittee": "DESOTO CO REGIONAL UTILITY AUTH, JOHNSON CREEK WWTF",
+   "city": "WALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0061328",
+   "permittee": "CORINTH POTW",
+   "city": "CORINTH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0061743",
+   "permittee": "WEST RANKIN UTILITY AUTHORITY WASTEWATER TREATMENT FACILITY",
+   "city": "RICHLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0062227",
+   "permittee": "DESOTO COUNTY REGIONAL UTILITY AUTHORITY, SHORT FORK WWTF",
+   "city": "HERNANDO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MS0062651",
+   "permittee": "NEW ALBANY POTW",
+   "city": "NEW ALBANY",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

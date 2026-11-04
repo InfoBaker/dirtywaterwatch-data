@@ -1,0 +1,26 @@
+id: "notification-pages"
+name: "Operators' and agencies' public notification pages (monitor of data/notice-channels.json)"
+url: null
+homepage: null
+kind: "html"
+level: "utility"
+# Feed row: the source id written by pipeline/ingest/notification_pages.py (2026-11-03). It fetches every
+#   monitored row of data/notice-channels.json once a refresh (the register of public-notice channels per
+#   operator or agency, by law, permit or voluntarily; New Jersey's 25 CSO permits first), keeps a snapshot
+#   per page in data/build/notice-pages/, and turns a dated overflow notice that newly appears on a page
+#   into a record (time_precision "day"); boilerplate, the shared site's wording and text already on the
+#   previous snapshot never make records. Its page-health table (data/build/notice-pages/health.json) is
+#   carried in out/coverage.json as states.<ST>.notification_pages.
+# States: New Jersey's rows only so far; add each state here when its register rows are monitored.
+cadence: "1 hour"
+license: "Each page's own terms; most state none."
+attribution: "The operators and agencies named on each record"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass", "plant_bypass", "unknown"]
+states: ["NJ"]
+access: ["html", "pdf", "json", "rss"]
+access_detail: "One GET per distinct URL per refresh with the project user agent; raw copies kept when the text changes."
+machine_readable: false
+legal_basis: "Per row of data/notice-channels.json (New Jersey: NJPDES CSO permits, Part IV.F.8.b.iii, a CSO Notification System website kept up daily)."
+checked: "2026-11-03"

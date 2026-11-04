@@ -1,0 +1,25 @@
+id: "me-mhb-monitoring-data"
+name: "Maine Healthy Beaches monitoring results download (CSV/XLSX/XML per beach)"
+url: "https://apps.web.maine.gov/online/healthy_beaches/public/monitoring-data.csv?beach=East%20End%20Beach&siteIds=&dateCollectedMin=&dateCollectedMax="
+homepage: "https://apps.web.maine.gov/online/healthy_beaches/public/monitoring-data.csv?beach=East%20End%20Beach&siteIds=&dateCollectedMin=&dateCollectedMax="
+kind: "csv"
+level: "state"
+# Notes (research/me, status candidate, verified fetched, checked 2026-11-01): Bacteria context for
+#   CSO-impacted beaches; per-beach calls.
+# Access detail (research, quoted): Also .xlsx and .xml with the same parameters. Requires a beach
+#   name; a blank beach returned HTTP 500. East End Beach CSV: 186 rows 2024-05-29 to 2026-09-02
+#   (raw/mhb-eastend.csv).
+# History: 2024 onward in the portal (older MHB data likely only in EPA BEACON; not checked here).
+# Research notes: Caution: the CSV and XML drop the '<' qualifier (HTML shows '< 10', CSV shows 10).
+cadence: "Results 'typically available the following day'; season Memorial Day-Labor Day."
+license: "maine.gov: 'Neither the State of Maine, nor any agency, officer, or employee of the State of Maine warrants the accuracy, reliability or timeliness of any information published on the Maine.gov website ... Any person or entity that relies on any information obtained from this system does so at their own risk.' (https://www.maine.gov/portal/policies/disclaimer.html). No reuse licence stated."
+attribution: "Maine DEP, Maine Healthy Beaches Program"
+enabled: true
+role: "monitoring"
+event_types: ["beach_monitoring"]
+states: ["ME"]
+access: ["csv", "html"]
+access_detail: "Also .xlsx and .xml with the same parameters. Requires a beach name; a blank beach returned HTTP 500. East End Beach CSV: 186 rows 2024-05-29 to 2026-09-02 (raw/mhb-eastend.csv)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

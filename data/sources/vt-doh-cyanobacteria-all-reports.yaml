@@ -1,0 +1,25 @@
+id: "vt-doh-cyanobacteria-all-reports"
+name: "VT Dept of Health Cyanobacteria Tracker - All Reports (current season, ArcGIS view)"
+url: "https://services.arcgis.com/YKJ5JtnaPQ2jDbX8/arcgis/rest/services/Cyanobacteria_All_Reports_view/FeatureServer/0"
+homepage: "https://services.arcgis.com/YKJ5JtnaPQ2jDbX8/arcgis/rest/services/Cyanobacteria_All_Reports_view/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): History within
+#   season; drop Affiliation/RequestToBecomeAMonitor/Details (volunteer free text).
+# Access detail (research, quoted): 3,370 reports, ReportDate 2026-05-13 to 2026-10-30 (current
+#   season only).
+# Can fill: source_status, reported_at, source_updated_at (EditDate), coordinates, waterbody,
+#   raw_record
+# History: Season only; earlier seasons via XLSX summaries.
+cadence: "As filed (weekly per site)."
+license: "none stated"
+attribution: "Vermont Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["cyanobacteria"]
+states: ["VT"]
+access: ["arcgis"]
+access_detail: "3,370 reports, ReportDate 2026-05-13 to 2026-10-30 (current season only)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

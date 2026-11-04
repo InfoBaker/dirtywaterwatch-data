@@ -1,0 +1,38 @@
+id: "pa-alcosan-soak-log"
+name: "ALCOSAN Sewer Overflow Advisory Key (SOAK) online overflow log"
+url: "https://www.alcosan.org/clean-water-plan/sewer-overflow-advisories"
+homepage: "https://www.alcosan.org/clean-water-plan/sewer-overflow-advisories"
+kind: "html"
+level: "utility"
+# Notes (research/pa, status candidate, verified fetched, checked 2026-11-02): Best PA event record:
+#   real start/end times for every overflow period, three-stage wording, season-long history. HTML
+#   scrape only; one system-wide status, not per outfall.
+# Access detail (research, quoted): Server-rendered HTML (Sitefinity). Five log entries per page;
+#   older pages at /clean-water-plan/sewer-overflow-advisories/{n} (n=2..). Pages 1-32 fetched
+#   2026-11-02: 160 entries back to 2025-07-08; deeper pages continue. No JSON/RSS. Annual PDFs
+#   (Everbridge export with Notification ID) for 2014-2025 plus a 1995-2013 summary under
+#   /docs/default-source/cso-advisories/. Old URL /our-plan/sewer-overflow-advisories redirects.
+# Can fill: event_type (cso, system-wide), source_status (three stages), started_at (In), ended_at
+#   (Out), valid_until (Dry = Out + 48 h), published_at (alert date only, no time), advice_text,
+#   authority, source_url, source_record_id (PDF Notification ID only)
+# Cannot fill: coordinates; outfall ids; volume; waterbody per outfall; timezone (implied
+#   America/New_York); source_updated_at
+# Waters: System-wide advisory for the Allegheny, Monongahela and Ohio rivers in the ALCOSAN service
+#   area (Allegheny County); no per-outfall detail (openboatlaunch slugs: allegheny-river-pa,
+#   monongahela-river-pa, ohio-river-pa)
+# History: HTML pagination reaches back through 2025 at least; PDFs 2014-2025; summary 1995-2013.
+# Research notes: Advisory wording ties to 'orange CSO flags' at nine sites. Allegheny County Health
+#   Department gives a different post-event window. ALCOSAN signs at 259 CSO and 53 SSO structures;
+#   dry-weather hotline 888-936-9363.
+cadence: "Status posted 8 a.m.-7 p.m. daily, April 1-October 31; changes outside those hours posted at 8 a.m. next day. Hand-typed times: typos seen (e.g. '07:33 AN', '06/22/2016', '08/17:2025', '08/20/205', '9/3/26 - 6:30' without AM/PM, '06/18/2026' for 07/18)."
+license: "No data licence or terms statement found on the page."
+attribution: "Allegheny County Sanitary Authority (ALCOSAN)"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["PA"]
+access: ["html", "pdf", "email"]
+access_detail: "Server-rendered HTML (Sitefinity). Five log entries per page; older pages at /clean-water-plan/sewer-overflow-advisories/{n} (n=2..). Pages 1-32 fetched 2026-11-02: 160 entries back to 2025-07-08; deeper pages continue. No JSON/RSS. Annual PDFs (Everbridge export with Notification ID) for 2014-2025 plus a 1995-2013 summary under /docs/default-source/cso-advisories/. Old URL /our-plan/sewer-overflow-advisories redirects."
+machine_readable: false
+legal_basis: "ALCOSAN NPDES permit PA0025984 / 2008 consent decree; CSO Nine Minimum Controls public notification (EPA CSO Control Policy 1994). Not a state statute."
+checked: "2026-11-02"

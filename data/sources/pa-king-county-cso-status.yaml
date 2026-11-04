@@ -1,0 +1,36 @@
+id: "pa-king-county-cso-status"
+name: "King County / Seattle Public Utilities real-time CSO status map and CSV feed"
+url: "https://kingcounty.gov/en/dept/dnrp/waste-services/wastewater-treatment/sewer-system-services/cso-status"
+homepage: "https://kingcounty.gov/en/dept/dnrp/waste-services/wastewater-treatment/sewer-system-services/cso-status"
+kind: "arcgis"
+level: "utility"
+# Notes (research/community, status candidate, verified fetched, checked 2026-11-01): The simplest
+#   real-time outfall status feed found: a public CSV with four plain states. Candidate for the
+#   national phase and a model for our outfall status vocabulary.
+# Access detail (research, quoted): Fetched CSV
+#   https://your.kingcounty.gov/dnrp/library/wastewater/cso/img/CSO_metadata.CSV (Last-Modified
+#   2026-11-01 18:20 GMT), used by ArcGIS web map 6de3cae45d914326a32ed120b5ace4f8 (refreshInterval
+#   5 min). Old page aqua.kingcounty.gov embeds mapitpk.com, which no longer resolves.
+# Can fill: coordinates (outfall), source_record_id (DSN), source_status, source_updated_at
+#   (DateTime = feed time)
+# Cannot fill: started_at; ended_at; volume; waterbody (not in feed)
+# Waters: About 125 CSO outfalls in Seattle (King County and SPU)
+# History: None in feed; confirmed data in monthly and annual reports to Washington Ecology
+# Research notes: States and labels from the map renderer: CurrentlyOverflowing 'Overflowing now';
+#   OverflowLast48hrs 'Overflowed in the last 48 hrs'; NoRecentOverflow 'No recent overflow'; NoData
+#   'Data not available'. Today: 5 real outfalls in last 48 h, 11 NoData. Four 'Dummy' rows at lon
+#   -120 exist only to drive the legend; filter them out. Advice: 'Stay out of the water near
+#   combined sewer overflow outfalls for 48 hours after a combined sewer overflow occurs'. Caveat:
+#   'the real-time data has not yet been reviewed for accuracy.'
+cadence: "Page: 'updated every 10 minutes'. DateTime is the feed generation time, identical on every row."
+license: "Web map item links King County GIS terms (https://kingcounty.gov/en/dept/kcit/data-information-services/gis-center/about/terms-conditions-copyrights); not read"
+attribution: "King County Wastewater Treatment Division and Seattle Public Utilities"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["WA"]
+access: ["csv", "arcgis", "html"]
+access_detail: "Fetched CSV https://your.kingcounty.gov/dnrp/library/wastewater/cso/img/CSO_metadata.CSV (Last-Modified 2026-11-01 18:20 GMT), used by ArcGIS web map 6de3cae45d914326a32ed120b5ace4f8 (refreshInterval 5 min). Old page aqua.kingcounty.gov embeds mapitpk.com, which no longer resolves."
+machine_readable: true
+legal_basis: "WA Ecology NPDES permits"
+checked: "2026-11-01"

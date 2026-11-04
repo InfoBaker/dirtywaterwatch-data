@@ -1,0 +1,302 @@
+[
+ {
+  "id": "ks-law-kar-28-16-27",
+  "name": "K.A.R. 28-16-27: emergency or accidental discharge of sewage; report to the department",
+  "jurisdiction": "KS",
+  "operator": "Kansas Department of Health and Environment (regulation)",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.law.cornell.edu/regulations/kansas/K-A-R-28-16-27",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Fetched (raw/kar-28-16-27.html).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "K.A.R. 28-16-27",
+  "status": "used",
+  "status_reason": "Immediate report to KDHE; planned bypass needs 7 days' notice and approval; no public notice.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": "Quote: \"Emergency or accidental discharge of sewage or other materials detrimental to the quality of waters of the state shall be immediately reported to the state department of health by the owner of the treatment plant or his representative.\" KDHE forms and Kansas Rural Water guidance state 24 hours and a 5-day written report."
+ },
+ {
+  "id": "ks-kdhe-hab-status",
+  "name": "KDHE HAB Status service (Lake Points, Lake Status)",
+  "jurisdiction": "KS",
+  "operator": "Kansas Department of Health and Environment",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "hab"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://maps.kdhe.ks.gov/kdhe_doe/rest/services/HAB/HAB_County/MapServer",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "Layer 0 queried 2026-11-03: 16 lakes (8 Warning, 8 Watch), StatusDate 2026-10-30; saved raw/kdhe-hab-status-2026-11-03.json. Polygons in layer 2. Viewer https://maps.kdhe.ks.gov/habkscounty/ ; test results service HAB/HAB_Sample_ALL_norelate.",
+  "machine_readable": true,
+  "sample_record": {
+   "STATUS": "Warning",
+   "WATERBODY_ID": "LM0652",
+   "WATERBODY_NAME": "FRISCO LAKE",
+   "StatusDate": 1793379600000
+  },
+  "fields": [
+   "OBJECTID",
+   "STATUS",
+   "WATERBODY_ID",
+   "WATERBODY_NAME",
+   "StatusDate"
+  ],
+  "fills_event_fields": [
+   "waterbody",
+   "coordinates",
+   "source_updated_at",
+   "advice_text (status class)"
+  ],
+  "cannot_fill": [
+   "started_at (only latest status date)",
+   "valid_until"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "weekly in season (April 1 to October 31); status dates are the update date",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Clean statewide HAB advisory layer with lake polygons; Hazard/Warning/Watch/Lift classes.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ks-kdhe-hab-page",
+  "name": "KDHE HAB page and CivicAlerts press releases",
+  "jurisdiction": "KS",
+  "operator": "KDHE",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "hab"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.kdhe.ks.gov/HAB",
+  "access": [
+   "html"
+  ],
+  "access_detail": "kdhe.ks.gov (CivicPlus) returns Cloudflare 'Sorry, you have been blocked' to curl and 403 to WebFetch.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "Bot wall; the ArcGIS service carries the same status.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ks-leavenworth-sso-transparency",
+  "name": "City of Leavenworth Sanitary Sewer Overflow Transparency Reports and per-event SSO pages",
+  "jurisdiction": "KS",
+  "operator": "City of Leavenworth",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "Missouri River tributaries in Leavenworth (Three Mile Creek, Five Mile Creek and storm drains)",
+  "water_slugs": [],
+  "url": "https://www.leavenworthks.gov/publicworks/page/sanitary-sewer-overflow-transparency-report",
+  "access": [
+   "html"
+  ],
+  "access_detail": "WebFetch read the index (years 2020 to 2026, newest first); curl gets 403 'Access Denied'. Per-event pages titled e.g. 'Sanitary Sewer Overflow in the 1200 block of Metropolitan reported Thursday Oct. 23, 2025'. Semiannual EPA reports also posted (2018 example).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [
+   "started_at (date)",
+   "location_text",
+   "authority"
+  ],
+  "cannot_fill": [
+   "volume (unknown)",
+   "coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "per event, posted by the city",
+  "history": "2017 to date",
+  "license": null,
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "The only dated per-event SSO notices found in Kansas; small city, scrape needs a browser-like client.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ks-topeka-stream-advisories",
+  "name": "City of Topeka stream advisories (Utilities, topeka.org news)",
+  "jurisdiction": "KS",
+  "operator": "City of Topeka Utilities",
+  "operator_type": "municipal",
+  "role": "advisories",
+  "event_types": [
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": "Kansas River, Shunganunga Creek, Deer Creek, Butcher Creek, Soldier Creek",
+  "water_slugs": [],
+  "url": "https://www.topeka.org/news/?p=650",
+  "access": [
+   "html",
+   "rss"
+  ],
+  "access_detail": "Search found 'Stream Advisory 1/10/2020' and press coverage of advisories (2023 Soldier Creek, 2024 Shunganunga and Deer creeks). Topeka's news site is WordPress (an RSS feed is likely, not tested).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Dated authority advisories naming the stretch to avoid; but a 2025 Oakland plant overflow got no public notice ('no threat to the public', KDHE said no advisory needed).",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ks-ug-kck-consent-decree",
+  "name": "Unified Government of Wyandotte County/Kansas City, Kansas: consent decree (2013) and overflow control plan",
+  "jurisdiction": "KS",
+  "operator": "Unified Government of Wyandotte County and Kansas City, Kansas",
+  "operator_type": "municipal",
+  "role": "permits",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.epa.gov/enforcement/unified-government-wyandotte-county-and-kansas-city-kansas",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Collection System Release Response Plan under the decree; no public notice channel found.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ks-kdhe-incident-report",
+  "name": "KDHE incident report form and spill line",
+  "jurisdiction": "KS",
+  "operator": "KDHE",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.kdhe.ks.gov/DocumentCenter/View/9325/Incident-Report-Form-PDF",
+  "access": [
+   "pdf",
+   "phone"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "Intake form; no public incident list found.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ks-kdhe-monitoring-sites",
+  "name": "KDHE Surface Water Monitoring Sites (lakes and streams)",
+  "jurisdiction": "KS",
+  "operator": "KDHE",
+  "operator_type": "state",
+  "role": "monitoring",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://maps.kdhe.ks.gov/kdhe_oits/rest/services/Reference/Hydro_MonitorSites_External/FeatureServer/0",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Station locations for bacteria context; not an advisory source.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ }
+]

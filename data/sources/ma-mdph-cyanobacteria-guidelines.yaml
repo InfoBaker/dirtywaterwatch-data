@@ -1,0 +1,25 @@
+id: "ma-mdph-cyanobacteria-guidelines"
+name: "MDPH Guidelines for Cyanobacteria at Recreational Freshwater Locations"
+url: "https://www.mass.gov/info-details/guidelines-for-cyanobacteria-at-recreational-freshwater-locations"
+homepage: "https://www.mass.gov/info-details/guidelines-for-cyanobacteria-at-recreational-freshwater-locations"
+kind: "html"
+level: "state"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): Current MDPH HAB
+#   advisory values (70,000 cells/mL; microcystins 8 ug/L; cylindrospermopsin 15; anatoxin-a 60
+#   provisional).
+# Access detail (research, quoted): Read via built-in browser. 'LAST UPDATED: August 6, 2025'.
+# History: Older MDPH value for microcystin was 14 ug/L (2008 guidance per search results).
+# Research notes: Not an event source; fills no event fields directly (provides criteria/definitions
+#   for context text).
+cadence: null
+license: "none stated"
+attribution: "Massachusetts Department of Public Health - Bureau of Climate and Environmental Health"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["MA"]
+access: ["html"]
+access_detail: "Read via built-in browser. 'LAST UPDATED: August 6, 2025'."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

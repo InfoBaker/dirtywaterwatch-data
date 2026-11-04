@@ -1,0 +1,24 @@
+id: "nysdec-cso-page"
+name: "NYSDEC Combined Sewer Overflow page"
+url: "https://dec.ny.gov/environmental-protection/water/water-quality/combined-sewer-overflow"
+homepage: "https://dec.ny.gov/environmental-protection/water/water-quality/combined-sewer-overflow"
+kind: "html"
+level: "state"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): 'During or following
+#   a significant rainfall or snowmelt event ... avoid contact or recreation (swimming, boating, and
+#   fishing)'; no hours.
+# Access detail (research, quoted): Raw copy: research/science/raw/dl-adv/nysdec-cso.html (fetched
+#   2026-11-01 by the advisory sub-researcher; text read by the lead).
+# Can fill: advice_text
+cadence: null
+license: "none stated"
+attribution: "New York State Department of Environmental Conservation"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["NY"]
+access: ["html"]
+access_detail: "Raw copy: research/science/raw/dl-adv/nysdec-cso.html (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

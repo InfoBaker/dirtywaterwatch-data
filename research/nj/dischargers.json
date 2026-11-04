@@ -1,0 +1,665 @@
+[
+ {
+  "id": "nj-paterson",
+  "name": "City of Paterson",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0108880",
+  "receiving_waters": [
+   "Passaic River"
+  ],
+  "water_slugs": [
+   "passaic-river-nj"
+  ],
+  "outfall_count": 23,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0108880%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Paterson",
+   "Prospect Park"
+  ],
+  "notes": "23 active of 23 points in NJDEP layer (by receiving water: {'Passaic River': 23}). Final renewal 2025-10-28. PVSC district. ECHO DMR: 24 outfalls report; e.g. 027 had 14 discharge days in May 2025, 11 in Jul 2026. Layer shows 23 points.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-north-bergen-mua-central",
+  "name": "North Bergen MUA (Central / PVSC-connected)",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0108898",
+  "receiving_waters": [
+   "Cromakill Creek",
+   "Cromakill Creek UNT",
+   "Wolf Creek UNT",
+   "Penhorn Creek",
+   "Penhorn Creek UNT"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0108898%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "North Bergen",
+   "Secaucus"
+  ],
+  "notes": "9 active of 9 points in NJDEP layer (by receiving water: {'Wolf Creek UNT': 1, 'Cromakill Creek UNT': 2, 'Cromakill Creek': 4, 'Penhorn Creek': 1, 'Penhorn Creek UNT': 1}). Final renewal 2025-10-28. Receiving waters Cromakill and Penhorn Creeks (Hackensack tributaries) - no openboatlaunch slugs.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-ridgefield-park",
+  "name": "Village of Ridgefield Park",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0109118",
+  "receiving_waters": [
+   "Hackensack River",
+   "Overpeck Creek"
+  ],
+  "water_slugs": [
+   "hackensack-river-nj",
+   "overpeck-creek-nj"
+  ],
+  "outfall_count": 6,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0109118%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Ridgefield Park"
+  ],
+  "notes": "6 active of 6 points in NJDEP layer (by receiving water: {'Overpeck Creek': 2, 'Hackensack River': 4}). Final renewal 2025-01-30. Served by BCUA Little Ferry. Hackensack Riverkeeper samples at Waterside Park, Ridgefield Park.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-bayonne",
+  "name": "City of Bayonne (Bayonne MUA)",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0109240",
+  "receiving_waters": [
+   "Newark Bay",
+   "Kill Van Kull",
+   "Upper Newark Bay",
+   "Hudson River",
+   "Upper New York Bay"
+  ],
+  "water_slugs": [
+   "hudson-river-nj",
+   "newark-bay-nj"
+  ],
+  "outfall_count": 30,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0109240%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Bayonne"
+  ],
+  "notes": "28 active of 30 points in NJDEP layer (by receiving water: {'Kill Van Kull': 10, 'Upper Newark Bay': 1, 'Hudson River': 1, 'Newark Bay': 17, 'Upper New York Bay': 1}). Final renewal 2025-10-28. 30 points (28 active, 2 sealed). ECHO: outfall 001 reports 17-26 discharge days a month; May-25 and Jul-25 rows identical (data quality). Kill Van Kull, Newark Bay, Upper NY Bay have no openboatlaunch slugs except newark-bay-nj.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-kearny",
+  "name": "Town of Kearny",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0111244",
+  "receiving_waters": [
+   "Passaic River",
+   "Passaic River UNT (Frank's Creek)"
+  ],
+  "water_slugs": [
+   "passaic-river-nj"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0111244%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Kearny"
+  ],
+  "notes": "5 active of 5 points in NJDEP layer (by receiving water: {'Passaic River': 3, \"Passaic River UNT (Frank's Creek)\": 2}). Final renewal 2025-10-28. Includes Frank's Creek (Passaic River UNT).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-east-newark",
+  "name": "Borough of East Newark",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0117846",
+  "receiving_waters": [
+   "Passaic River"
+  ],
+  "water_slugs": [
+   "passaic-river-nj"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0117846%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "East Newark"
+  ],
+  "notes": "1 active of 1 points in NJDEP layer (by receiving water: {'Passaic River': 1}). Final renewal 2025-10-28. One outfall.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-perth-amboy",
+  "name": "City of Perth Amboy",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0156132",
+  "receiving_waters": [
+   "Arthur Kill",
+   "Raritan River"
+  ],
+  "water_slugs": [
+   "raritan-river-nj"
+  ],
+  "outfall_count": 16,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0156132%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Perth Amboy"
+  ],
+  "notes": "16 active of 16 points in NJDEP layer (by receiving water: {'Arthur Kill': 8, 'Raritan River': 8}). Still on 2020 final permit; renewal draft issued 2025-11-03 (comments Jan 2026). Served by MCUA. LRWP samples Second Street Park weekly (exceeded 104 on 2026-09-24).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-elizabeth",
+  "name": "City of Elizabeth",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0108782",
+  "receiving_waters": [
+   "Elizabeth River",
+   "Arthur Kill",
+   "Newark Bay",
+   "Elizabeth Channel UNT",
+   "Elizabeth Channel"
+  ],
+  "water_slugs": [
+   "newark-bay-nj"
+  ],
+  "outfall_count": 29,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0108782%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down. City CSO page https://www.elizabethnj.org/182/CSO.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Elizabeth",
+   "Bayonne (one outfall location)"
+  ],
+  "notes": "29 active of 29 points in NJDEP layer (by receiving water: {'Elizabeth River': 21, 'Arthur Kill': 4, 'Newark Bay': 2, 'Elizabeth Channel UNT': 1, 'Elizabeth Channel': 1}). Final renewal 2025-02-28. Served by Joint Meeting of Essex & Union Counties. Aug 1 2026 report: 'The City reports the number and duration of overflows to the NJDEP monthly, using modeling data'. Elizabeth River and Arthur Kill have no slugs (bridge-creek-nj is a different Elizabeth water).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-camden-city",
+  "name": "City of Camden",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0108812",
+  "receiving_waters": [
+   "Delaware River",
+   "Cooper River",
+   "Delaware River/Newton Creek",
+   "Newton Creek"
+  ],
+  "water_slugs": [
+   "cooper-river-nj",
+   "delaware-river-nj"
+  ],
+  "outfall_count": 22,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0108812%27&outFields=*&f=json",
+  "notification_channel": "None found for Camden City's own 22 outfalls. CCMUA's page https://www.ccmua.org/cso-status/ shows only CCMUA outfall 040A. Not on the NJ CSO Group outlook.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Camden",
+   "Collingswood (one outfall location)"
+  ],
+  "notes": "22 active of 22 points in NJDEP layer (by receiving water: {'Delaware River/Newton Creek': 1, 'Newton Creek': 1, 'Delaware River': 11, 'Cooper River': 9}). Final renewal 2024-11-04 (effective 2025-01-01, expires 2029-12-31); permit text read. 11 outfalls to Delaware River Zone 3, 9 to Cooper River, 2 to Newton Creek. ECHO: 9-14 discharge days at many outfalls in May and Jul 2025.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-gloucester-city",
+  "name": "Gloucester City",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0108847",
+  "receiving_waters": [
+   "Delaware River",
+   "Delaware River/Newton Creek"
+  ],
+  "water_slugs": [
+   "delaware-river-nj"
+  ],
+  "outfall_count": 7,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0108847%27&outFields=*&f=json",
+  "notification_channel": "None found. Not on the NJ CSO Group outlook.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gloucester City"
+  ],
+  "notes": "7 active of 7 points in NJDEP layer (by receiving water: {'Delaware River': 6, 'Delaware River/Newton Creek': 1}). Final renewal 2024-11-04. Fastest DMR filer seen (median 2 days after month end).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-harrison",
+  "name": "Town of Harrison",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0108871",
+  "receiving_waters": [
+   "Passaic River"
+  ],
+  "water_slugs": [
+   "passaic-river-nj"
+  ],
+  "outfall_count": 7,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0108871%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Harrison",
+   "Newark (one outfall location)"
+  ],
+  "notes": "6 active of 7 points in NJDEP layer (by receiving water: {'Passaic River': 7}). Final renewal 2025-10-28. 7 points (6 active, 1 sealed).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-nhsa-adams-street",
+  "name": "North Hudson Sewerage Authority - Adams Street WWTP (Hoboken, Weehawken, Union City)",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0026085",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [
+   "hudson-river-nj",
+   "weehawken-cove-nj",
+   "harsimus-cove-nj"
+  ],
+  "outfall_count": 7,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0026085%27&outFields=*&f=json",
+  "notification_channel": "NHSA Waterbody Advisory System https://www.nhudsonsa.com/waterbody-advisor-system (level-sensor map; map link returned 404 on 2026-11-02); hotline 866.689.3970.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hoboken",
+   "Weehawken",
+   "Union City",
+   "Jersey City (one outfall location)"
+  ],
+  "notes": "7 active of 7 points in NJDEP layer (by receiving water: {'Hudson River': 7}). Final renewal 2024-02-07. ECHO: 7 outfalls; 002 had 10 discharge days in Jul 2026.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-ccmua",
+  "name": "Camden County Municipal Utilities Authority (Delaware #1 WPCF)",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0026182",
+  "receiving_waters": [
+   "Delaware River"
+  ],
+  "water_slugs": [
+   "delaware-river-nj"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0026182%27&outFields=*&f=json",
+  "notification_channel": "CCMUA 'CSO Status' page https://www.ccmua.org/cso-status/ (outfall 040A, text OPEN/CLOSED, no timestamp; WP REST /wp-json/wp/v2/pages/13694).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Camden"
+  ],
+  "notes": "1 active of 1 points in NJDEP layer (by receiving water: {'Delaware River': 1}). Final renewal 2024-11-04. Treatment plant for Camden City and Gloucester City CSS. ECHO SSO flag 'N'.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-north-bergen-mua-woodcliff",
+  "name": "North Bergen MUA - Woodcliff STP",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0029084",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [
+   "hudson-river-nj"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0029084%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "North Bergen",
+   "Guttenberg (outfall location)"
+  ],
+  "notes": "1 active of 1 points in NJDEP layer (by receiving water: {'Hudson River': 1}). Final renewal 2023-05-25.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-fort-lee",
+  "name": "Borough of Fort Lee",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0034517",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [
+   "hudson-river-nj"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0034517%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Fort Lee",
+   "Edgewater (outfall location)"
+  ],
+  "notes": "2 active of 2 points in NJDEP layer (by receiving water: {'Hudson River': 2}). Final renewal 2025-01-30. Outfalls are in Edgewater on the Hudson; openboatlaunch hudson-river-nj is the Alpine reach (same river, nearest record).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-guttenberg",
+  "name": "Town of Guttenberg",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0108715",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [
+   "hudson-river-nj"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0108715%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Guttenberg"
+  ],
+  "notes": "1 active of 1 points in NJDEP layer (by receiving water: {'Hudson River': 1}). Final renewal 2023-05-25.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-jersey-city-mua",
+  "name": "Jersey City Municipal Utilities Authority",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0108723",
+  "receiving_waters": [
+   "Hudson River",
+   "Hackensack River",
+   "Penhorn Creek UNT",
+   "Newark Bay"
+  ],
+  "water_slugs": [
+   "hackensack-river-nj",
+   "hudson-river-nj",
+   "newark-bay-nj",
+   "harsimus-cove-nj",
+   "little-basin-nj"
+  ],
+  "outfall_count": 21,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0108723%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Jersey City"
+  ],
+  "notes": "21 active of 21 points in NJDEP layer (by receiving water: {'Penhorn Creek UNT': 2, 'Hackensack River': 8, 'Newark Bay': 2, 'Hudson River': 9}). Final renewal 2025-10-28. ECHO: 21 outfalls; May 2025 up to 15 discharge days (011, 016, 029). Harsimus Cove and Little Basin (Jersey City) are openboatlaunch waters near Hudson outfalls (outfall-to-cove match not checked).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-newark",
+  "name": "City of Newark",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0108758",
+  "receiving_waters": [
+   "Passaic River",
+   "Elizabeth Channel",
+   "Queen Ditch"
+  ],
+  "water_slugs": [
+   "passaic-river-nj"
+  ],
+  "outfall_count": 18,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0108758%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Newark"
+  ],
+  "notes": "18 active of 18 points in NJDEP layer (by receiving water: {'Passaic River': 13, 'Elizabeth Channel': 4, 'Queen Ditch': 1}). Final renewal 2025-10-28. ECHO DMRs filed late (median 97 days after month end; Jan-Apr 2025 flagged 'DMR, Monitor Only - Overdue'). Elizabeth Channel and Queen Ditch outfalls have no slugs.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-hackensack",
+  "name": "City of Hackensack",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0108766",
+  "receiving_waters": [
+   "Hackensack River"
+  ],
+  "water_slugs": [
+   "hackensack-river-nj"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0108766%27&outFields=*&f=json",
+  "notification_channel": "NJ CSO Group outlook https://njcsonotifications.com/ (rainfall-threshold 'CSO event likely/unlikely' for the whole permittee; JSON at /?handler=Status). Linked from PVSC as 'CSO Notification System'. Elizabeth's Aug 2026 report says the old site was down.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Hackensack"
+  ],
+  "notes": "2 active of 2 points in NJDEP layer (by receiving water: {'Hackensack River': 2}). Final renewal 2025-01-30. Served by BCUA Little Ferry.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-trenton",
+  "name": "Trenton Sewer Utility",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0020923",
+  "receiving_waters": [
+   "Delaware River"
+  ],
+  "water_slugs": [
+   "delaware-river-nj"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0020923%27&outFields=*&f=json",
+  "notification_channel": "'CSO Advisory System' PDF https://www.trentonnj.org/DocumentCenter/View/396/ (says it will post live starts and ends; contains 1994-2021 event table). No live page found.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Trenton"
+  ],
+  "notes": "1 active of 1 points in NJDEP layer (by receiving water: {'Delaware River': 1}). Final permit 2021-02-05 (ECHO: expires 2026-03-31, status ADC - administratively continued). One outfall 002A; 20 MG detention basin; ECHO 2025-01..2026-08 all 'Conditional Monitoring - Not Required This Period'.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-nhsa-river-road",
+  "name": "North Hudson Sewerage Authority - River Road WWTP (West New York)",
+  "state": "NJ",
+  "kind": "cso",
+  "npdes_permit": "NJ0025321",
+  "receiving_waters": [
+   "Hudson River"
+  ],
+  "water_slugs": [
+   "hudson-river-nj"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0/query?where=NJPDES_NO%3D%27NJ0025321%27&outFields=*&f=json",
+  "notification_channel": "NHSA Waterbody Advisory System (see Adams Street).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "West New York"
+  ],
+  "notes": "1 active of 2 points in NJDEP layer (by receiving water: {'Hudson River': 2}). Final renewal 2025-12-23. 2 points (1 active, 1 sealed).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-pvsc",
+  "name": "Passaic Valley Sewerage Commission (Newark WRRF)",
+  "state": "NJ",
+  "kind": "cso_receiving_stp",
+  "npdes_permit": "NJ0021016",
+  "receiving_waters": [
+   "Passaic River",
+   "Newark Bay",
+   "Upper New York Bay"
+  ],
+  "water_slugs": [
+   "passaic-river-nj",
+   "newark-bay-nj"
+  ],
+  "outfall_count": 0,
+  "outfalls_source": null,
+  "notification_channel": "PVSC home page links 'CSO Notification System' (njcso.hdrgateway.com -> njcsonotifications.com). No PVSC event notices, email/text list or feed found.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Newark"
+  ],
+  "notes": "CSO permit (CSM) final 2025-10-28; owns no CSO outfalls in the NJDEP layer but receives flow from 8 combined systems (Bayonne, East Newark, Harrison, Jersey City, Kearny, Newark, North Bergen, Paterson). Plant failure in Hurricane Sandy (2012) released ~840 million gallons (news). ECHO SSO report flag 'N'. Plant bypasses/upsets are reportable only to the DEP Hotline (N.J.A.C. 7:14A-6.10).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-jmeuc",
+  "name": "Joint Meeting of Essex & Union Counties (Elizabeth WWTP)",
+  "state": "NJ",
+  "kind": "cso_receiving_stp",
+  "npdes_permit": "NJ0024741",
+  "receiving_waters": [
+   "Arthur Kill"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": null,
+  "notification_channel": "None found; Elizabeth uses the NJ CSO Group outlook.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Elizabeth"
+  ],
+  "notes": "CSO permit final 2025-02-28; treats Elizabeth's combined flow. Plant bypasses/upsets are reportable only to the DEP Hotline (N.J.A.C. 7:14A-6.10).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-bcua",
+  "name": "Bergen County Utilities Authority (Little Ferry WPCF)",
+  "state": "NJ",
+  "kind": "cso_receiving_stp",
+  "npdes_permit": "NJ0020028",
+  "receiving_waters": [
+   "Hackensack River"
+  ],
+  "water_slugs": [
+   "hackensack-river-nj"
+  ],
+  "outfall_count": 0,
+  "outfalls_source": null,
+  "notification_channel": "None found; its CSO municipalities (Fort Lee, Hackensack, Ridgefield Park) use the NJ CSO Group outlook.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Little Ferry"
+  ],
+  "notes": "CSO permit final 2025-01-30. Plant bypasses/upsets are reportable only to the DEP Hotline (N.J.A.C. 7:14A-6.10).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-mcua",
+  "name": "Middlesex County Utilities Authority (Sayreville)",
+  "state": "NJ",
+  "kind": "cso_receiving_stp",
+  "npdes_permit": "NJ0020141",
+  "receiving_waters": [
+   "Raritan River",
+   "Raritan Bay"
+  ],
+  "water_slugs": [
+   "raritan-river-nj"
+  ],
+  "outfall_count": 0,
+  "outfalls_source": null,
+  "notification_channel": "None found.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sayreville"
+  ],
+  "notes": "CSO permit final 2020-05-01; renewal draft 2025-11-03. Treats Perth Amboy's combined flow. 2003 line break sent sewage to the Raritan (news, old). Plant bypasses/upsets are reportable only to the DEP Hotline (N.J.A.C. 7:14A-6.10).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-belmar-sanitary",
+  "name": "Borough of Belmar sanitary sewer (L Street / K Street area, Shark River)",
+  "state": "NJ",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Shark River"
+  ],
+  "water_slugs": [
+   "shark-river-nj",
+   "south-arm-nj"
+  ],
+  "outfall_count": 0,
+  "outfalls_source": null,
+  "notification_channel": "None found; closures appear only as NJ beach program actions (njbeaches.org) and news.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Belmar"
+  ],
+  "notes": "Past news (dates not confirmed in this pass): DEP violation notice for sanitary-line leaks near K Street and Route 35 reaching the Shark River; L Street river beach closed repeatedly. 2026: L Street sampled 155 cfu (07-06) and >1000 cfu (07-07, 'L' remark) and closed 07-07. Cause in 2026 not stated.",
+  "verified": "search_only",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "nj-pinewood-estates-barnegat",
+  "name": "Pinewood Estates mobile home community (private collection system), Barnegat Township",
+  "state": "NJ",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "land (Mill Creek branch to Barnegat Bay nearby, not reported affected)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": null,
+  "notification_channel": "None; DEP Hotline intake record obtained by a reporter via OPRA.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Barnegat Township"
+  ],
+  "notes": "See event nj-2026-05-31-barnegat-pinewood-estates. Included to show the SSO class NJ has no public channel for.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ }
+]

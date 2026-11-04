@@ -1,0 +1,33 @@
+id: "ny-nyalert-sewage-notifications"
+name: "NY-Alert 'Sewage Discharge Notifications' subscription (email, text, phone, fax)"
+url: "https://alert.ny.gov/sign-up-ny-alert"
+homepage: "https://alert.ny.gov/sign-up-ny-alert"
+kind: "email"
+level: "state"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): Authoritative push
+#   channel; can be machine-ingested by parsing subscribed emails (template is fixed). Requires
+#   owner sign-up per county (62 counties).
+# Access detail (research, quoted): Requires a NY.gov ID account, then NY-Alert (Everbridge member
+#   portal https://member.everbridge.net/saml/login/NYAlert/...) subscription: My Subscriptions >
+#   Edit > county > check 'Sewage Discharge Notifications'. Channels per alert.ny.gov/about: 'email,
+#   text messaging, phone, and fax'. No public RSS (alert.ny.gov/rss.xml is an empty Drupal
+#   channel), no public API, no public archive page. The legacy nyalert.gov host no longer resolves.
+#   Owner must subscribe (account creation not done by agent).
+# Can fill: as ny-dec-sprtk-page-recent-alerts
+# Cannot fill: as ny-dec-sprtk-page-recent-alerts
+# Waters: statewide by county subscription
+# History: none public
+# Research notes: alert.ny.gov/about lists 'Sewage Discharge Notifications - Be informed when public
+#   waterways near you are impacted by untreated and partially treated sewage discharges'.
+cadence: "push, as filed; law: 'as soon as possible but no later than four hours' after discovery to the public"
+license: "NY-Alert website disclaimer only; no data licence"
+attribution: "NYS Division of Homeland Security and Emergency Services (NY-Alert platform, Everbridge back end); alerts authored by municipal notifiers"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass", "partially_treated"]
+states: ["NY"]
+access: ["email"]
+access_detail: "Requires a NY.gov ID account, then NY-Alert (Everbridge member portal https://member.everbridge.net/saml/login/NYAlert/...) subscription: My Subscriptions > Edit > county > check 'Sewage Discharge Notifications'. Channels per alert.ny.gov/about: 'email, text messaging, phone, and fax'. No public RSS (alert.ny.gov/rss.xml is an empty Drupal channel), no public API, no public archive page. The legacy nyalert.gov host no longer resolves. Owner must subscribe (account creation not done by agent)."
+machine_readable: false
+legal_basis: "ECL 17-0826-a(2); 6 NYCRR 750-2.7(b)"
+checked: "2026-11-01"

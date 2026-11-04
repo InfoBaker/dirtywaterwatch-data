@@ -1,0 +1,40 @@
+id: "nj-ccmua-cso-status"
+name: "Camden County MUA 'CSO Status' page (outfall 040A, 32nd Street)"
+url: "https://www.ccmua.org/cso-status/"
+homepage: "https://www.ccmua.org/cso-status/"
+kind: "api"
+level: "utility"
+# Notes (research/nj, status candidate, verified fetched, checked 2026-11-02): Single-outfall HTML
+#   status; could be polled and diffed, but has no timestamp and covers 1 of 30 Camden-area
+#   outfalls. Never seen in an OPEN state.
+# Access detail (research, quoted): WordPress page (Breakdance builder) with a server-side code
+#   block that prints 'CLOSED' with a gate icon. WP REST:
+#   https://www.ccmua.org/wp-json/wp/v2/pages/13694 (content.rendered, modified). Fetched
+#   2026-11-02: 'The 32nd Street CSO permitted outfall 040A located at 32nd and Farragut Street into
+#   the Delaware River is CLOSED and discharges are unlikely to be occurring.' Page created
+#   2025-09-25, modified 2026-02-10.
+# Can fill: source_status, location_text, waterbody, authority
+# Cannot fill: volume; history; source_updated_at (no timestamp on the status). started_at and
+#   ended_at only to our poll.
+# Waters: One outfall: 040A at 32nd and Farragut Street to the Delaware River (CCMUA permit
+#   NJ0026182). Camden City's 22 and Gloucester City's 7 outfalls are not shown. (openboatlaunch
+#   slugs: delaware-river-nj)
+# History: None.
+# Research notes: 2016 accounts say CCMUA posted model-based warnings 'when storm conditions likely
+#   to cause overflows occur'. Contact on page: publicengagement@ccmua.org. Raw:
+#   raw/ccmua-cso-status.html, raw/ccmua-wp-page-13694.json.
+# Feed (2026-11-03): pipeline/ingest/nj_ccmua.py writes data/build/events/nj-ccmua-cso-status.json, one
+#   cso event per OPEN spell dated to our polls (time_precision "poll"); the page's own cadence is
+#   unknown ('Press F5 to Refresh Page'; the status appears to come from a gate position signal).
+cadence: "1 hour"
+license: "No terms found."
+attribution: "Camden County Municipal Utilities Authority"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NJ"]
+access: ["html", "api"]
+access_detail: "WordPress page (Breakdance builder) with a server-side code block that prints 'CLOSED' with a gate icon. WP REST: https://www.ccmua.org/wp-json/wp/v2/pages/13694 (content.rendered, modified). Fetched 2026-11-02: 'The 32nd Street CSO permitted outfall 040A located at 32nd and Farragut Street into the Delaware River is CLOSED and discharges are unlikely to be occurring.' Page created 2025-09-25, modified 2026-02-10."
+machine_readable: false
+legal_basis: "CCMUA NJPDES CSO permit NJ0026182 (final 2024-11-04), Part IV.F.8"
+checked: "2026-11-02"
