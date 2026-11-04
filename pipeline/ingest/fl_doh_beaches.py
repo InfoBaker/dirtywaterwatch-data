@@ -62,6 +62,8 @@ AUTHORITY = "Florida Department of Health (Florida Healthy Beaches Program)"
 CREDIT = "Florida Department of Health, Florida Healthy Beaches Program"
 POINT_FIELDS = ("FID", "County", "EPAbeachID", "STORET_Sta", "SPLocation", "Active", "SPLat", "SPLong", "Link")
 MIN_HOURS = 20
+END_BASIS = ("the sample date of the next result without an advisory; the Department of Health lifts the advisory when "
+             "that result is known, usually one to three days later, and the page gives no lifting date")
 START_BASIS = ("the sample date of the first result with an advisory; the Department of Health issues the advisory "
                "when the laboratory result is known, usually one to three days after sampling")
 
@@ -111,6 +113,8 @@ def day(d: str) -> str:
 
 
 def episodes(p: dict, samples: list[dict], fetched_at: str) -> list[dict]:
+    """samples: older ones first, the page's rows last: a sample read again replaces the copy kept from an earlier run
+    (a result posted late, or an advisory flag corrected)."""
     samples = sorted({s["period"]: s for s in samples}.values(), key=lambda s: (s["date"], int(s["period"])))
     out, ep = [], None
     for s in samples:
@@ -139,6 +143,8 @@ def make(p: dict, ep: dict, lift: dict | None, fetched_at: str) -> dict:
            "location": p.get("SPLocation"), "samples": ep["samples"], "start_basis": START_BASIS,
            "detail_page": p.get("Link")}
     status = "advisory_lifted" if lift else "advisory_active"
+    if lift:
+        raw["end_basis"] = END_BASIS
     return event(
         source_id=SOURCE_ID, source_record_id=f"{point_id(p)}:{o['period']}", fetched_at=fetched_at,
         source_url=p.get("Link") or PAGE_URL, event_type="beach_advisory", status=status,
@@ -189,6 +195,7 @@ def fetch(limit: int | None = None) -> tuple[list[dict], dict, list[str]]:
 
 def build(points: list[dict], pages: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[dict], dict]:
     records, seen, samples_n, read, empty = [], set(), 0, 0, 0
+    read_points = set()
     for p in points:
         page = pages.get(point_key(p))
         if page is None:
@@ -198,14 +205,19 @@ def build(points: list[dict], pages: dict, prev_records: list[dict], fetched_at:
         if not rows:
             empty += 1
         samples_n += len(rows)
-        # samples kept from earlier runs for this point (older than the first page)
+        # samples kept from earlier runs for this point (older than the first page); the fresh rows win
         old = [s for r in prev_records if r.get("raw", {}).get("county") == p.get("County")
                and r.get("raw", {}).get("location") == p.get("SPLocation") for s in r["raw"].get("samples") or []]
-        for rec in episodes(p, rows + old, fetched_at):
+        read_points.add((p.get("County"), p.get("SPLocation")))
+        for rec in episodes(p, old + rows, fetched_at):
             seen.add(rec["event_id"])
             records.append(rec)
     kept = 0
     for r in prev_records:
+        # a point read this run was rebuilt from all its samples: an earlier record it no longer yields (an advisory
+        # flag corrected to No) is dropped, not kept
+        if (r.get("raw", {}).get("county"), r.get("raw", {}).get("location")) in read_points:
+            continue
         if r["event_id"] not in seen:
             records.append(r)
             kept += 1
@@ -242,6 +254,13 @@ def main(argv=None) -> int:
         return 1
     prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
     records, stats = build(points, pages, prev, fetched_at)
+    if stats["points_read"] >= 10 and stats["points_without_samples"] == stats["points_read"]:
+        # every page answered without a sample row: the data page changed or refused us ("No records found"); keep the
+        # previous records, report the feed as failing and try again next hour (no full_pass_at)
+        err = f"no sample rows on any of {stats['points_read']} result pages (layout changed or requests refused)"
+        write_events(SOURCE_ID, [], ok=False, error=err)
+        print(f"{SOURCE_ID}: FAILED {err}", file=sys.stderr)
+        return 1
     if not args.file:
         state.update({"fetched_at": fetched_at, "page_errors": errors[:50]})
         if not args.limit:
