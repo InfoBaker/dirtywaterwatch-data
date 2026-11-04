@@ -1199,6 +1199,7 @@ TIGER_STEM = "tl_2023_us_state"
 TIGER_URL = f"https://www2.census.gov/geo/tiger/TIGER2023/STATE/{TIGER_STEM}.zip"
 _TIGER: dict = {}
 _CENSUS_LAKES: dict = {}
+CENSUS_PIECE_KM2 = 1.0          # smaller pieces of a state's waters (slivers along the shore) are left out
 
 
 def tiger_states() -> dict:
@@ -1218,7 +1219,9 @@ def census_lake_outline(slug: str, waters: dict, land: dict | None):
     """The outline of a shoreline lake record that carries none (openboatlaunch's Great Lakes records keep theirs in
     openboatlaunch's files, which the hourly run does not have): the record's state's waters in the lake, the TIGER/Line
     state polygon (tiger_states) less the land of the cartographic outlines (cb_2023_us_state_500k, which end at the
-    shore), within the record's box; its largest piece. None without the record's box or the Census files."""
+    shore), within the record's box: its pieces of CENSUS_PIECE_KM2 or more (Michigan's waters in Lake Erie's box are
+    Lake Erie's, the Detroit River's and Lake St. Clair's: the largest piece is not always the lake's own). None without
+    the record's box or the Census files."""
     if slug in _CENSUS_LAKES:
         return _CENSUS_LAKES[slug]
     from shapely.geometry import box
@@ -1234,8 +1237,11 @@ def census_lake_outline(slug: str, waters: dict, land: dict | None):
             region = box(*bb).buffer(0.05)
             near = unary_union([x for x in land.values() if x.intersects(region)])
             water = poly.intersection(region).difference(near)
-            parts = [p for p in getattr(water, "geoms", [water]) if p.geom_type == "Polygon" and not p.is_empty]
-            g = max(parts, key=lambda p: p.area) if parts else None
+            from shapely.geometry import MultiPolygon
+            from ingest import waters_extra as WX
+            parts = [p for p in getattr(water, "geoms", [water]) if p.geom_type == "Polygon" and not p.is_empty
+                     and WX.area_km2(p) >= CENSUS_PIECE_KM2]
+            g = (parts[0] if len(parts) == 1 else MultiPolygon(parts)) if parts else None
     _CENSUS_LAKES[slug] = g
     return g
 
