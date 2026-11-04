@@ -34,11 +34,12 @@ PERSONAL_KEYS = re.compile(rf"(reporter|contact|created{_BY}|submitted{_BY}|modi
 KEEP_KEYS = re.compile(r"(class|type|category|count|id)$", re.I)   # reporterClass, operatorType: a kind, not a person
 NAME_KEYS = re.compile(r"^(first|last|middle|full|given|family|sur)[_ -]?name$|^surname$|^(fname|lname)$", re.I)
 EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
-# a number range followed by a unit ("500-1000 feet", "100-1500 gallons", "830-1030 am") is not a phone number
+# a number range followed by a unit ("500-1000 feet", "100-1500 gallons", "830-1030 am") is not a phone number;
+# only the short form can be a range: a ten-digit number followed by "hours" or "am" is still a phone number
 _NOT_A_RANGE = (r"(?!\s*(?:-|to\b)?\s*(?:(?:feet|foot|ft|yards?|yds?|miles?|meters?|metres?|km|inch(?:es)?|"
                 r"gallons?|gals?|gal|mg|mgd|gpm|gpd|liters?|litres?|cfs|lbs?|pounds?|tons?|hours?|hrs?|minutes?|"
                 r"mins?|seconds?|secs?|days?|am|pm|percent)\b|a\.m\.|p\.m\.|%))")
-PHONE_RE = re.compile(r"(?<![\w-])(?:\+?1[\s.-]?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]\d{4}(?![\w-])" + _NOT_A_RANGE +
+PHONE_RE = re.compile(r"(?<![\w-])(?:\+?1[\s.-]?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]\d{4}(?![\w-])"
                       r"|(?<![\w-])\d{3}[.-]\d{4}(?![\w-])" + _NOT_A_RANGE, re.I)
 # Staff names inside free text: "Inspector Eddy", "Investigator Tom Watson", "contact Jane Doe at ...".
 # A name is one to three capitalised words or initials (an optional Mr/Ms/Dr first); common words that

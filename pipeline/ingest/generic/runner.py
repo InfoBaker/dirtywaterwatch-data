@@ -39,10 +39,12 @@ RECORD_INTERNAL = {"_start_dt", "_end_dt"}
 MISSING_KEY = "_missing_from_source_since"
 MAX_ERROR_SHARE = 0.2
 MIN_ROWS_RATIO = 0.5
+SHORT_RUNS_TO_ACCEPT = 3      # a short response that persists this many runs in a row is the source's new size
 # keys every block may carry, and the keys of each platform (every block setting is checked)
 COMMON_KEYS = {"platform", "live", "time_zone", "safe_fields", "reviewed_fields", "free_text", "filter", "bounds",
                "record", "transform", "waters", "dedupe", "post", "history", "meta", "raw_notes", "decoded_times",
-               "headers", "browser_headers", "max_error_share", "min_rows_ratio", "after", "module"}
+               "headers", "browser_headers", "max_error_share", "min_rows_ratio", "after", "module",
+               "short_runs_to_accept"}
 PLATFORM_KEYS = {
     "socrata": {"domain", "dataset", "format", "metadata", "where", "order", "page_size", "max_rows"},
     "arcgis": {"url", "where", "out_fields", "order_by", "cursor_field", "page_size", "max_rows", "geometry", "metadata"},
@@ -185,6 +187,9 @@ def validate_block(block: dict, source_id: str = "") -> list[str]:
             errs.append("arcgis out_fields is a list of safe fields (never *)")
     if inner == "socrata" and block.get("format") not in (None, "json", "csv"):
         errs.append("socrata format is json or csv")
+    k = block.get("short_runs_to_accept")
+    if k is not None and (isinstance(k, bool) or not isinstance(k, int) or k < 1):
+        errs.append("short_runs_to_accept is a whole number of runs, 1 or more")
     if p == "snapshot":
         errs = [e for e in errs if "source_record_id" not in e] + mod.validate(block)
         if inner and inner != "snapshot":
@@ -264,9 +269,10 @@ def to_record(row: dict, ctx: F.Ctx, dropped: list | None = None) -> dict:
         errors.append(f"{(block.get('waters') or {}).get('matcher')}: {type(e).__name__}: {e}")
         slugs, how = [], "none"
         notes["_water"] = {"why_none": "the water matcher failed on this row"}
-    problems = notes.pop("_problems", []) + errors
-    if errors:
-        notes["_hook_errors"] = errors
+    hook_errors = notes.get("_hook_errors", []) + errors        # a value spec's failures, then the hooks'
+    problems = notes.pop("_problems", []) + hook_errors
+    if hook_errors:
+        notes["_hook_errors"] = hook_errors
     raw.update(notes)
     sid = rec.pop("source_record_id", None)
     if sid is None:
@@ -512,8 +518,8 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
         return 2
     path = Path(out) if out else EVENTS_DIR / f"{source_id}.json"
 
-    def fail(msg: str, code: int = 1) -> int:
-        write_events(source_id, [], ok=False, error=msg, path=path)
+    def fail(msg: str, code: int = 1, meta: dict | None = None) -> int:
+        write_events(source_id, [], ok=False, error=msg, path=path, meta=meta)
         print(f"{source_id}: FAILED {msg}", file=sys.stderr)
         return code
 
@@ -527,6 +533,13 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
         return fail(f"{type(e).__name__}: {e}")
     prev_doc = read_json(path, {}) or {}
     prev = prev_doc.get("records", [])
+    # a failed run keeps the last good run's meta, so meta.rows is the last good count; short_runs counts the short
+    # responses in a row: a short one fails until it persists for short_runs_to_accept runs, then it is accepted
+    # as the source's new size (a table that retires rows, a snapshot that loses outfalls never freezes for good)
+    prev_meta = prev_doc.get("meta") or {}
+    short_runs = int(prev_meta.get("short_runs") or 0) + 1
+    accept_after = int(block.get("short_runs_to_accept", SHORT_RUNS_TO_ACCEPT))
+    short = None
     extra = {"events_dir": EVENTS_DIR}
     if snapshot:
         snap = importlib.import_module("ingest.generic.snapshot")
@@ -534,17 +547,28 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
         extra["state"] = read_json(extra["state_path"], {}) or {}
         ratio = float((block.get("snapshot") or {}).get("min_units_ratio", 0.5))
         units = snap.unit_count([r for r in rows if keep_row(r, block)], block)
+        if not units:
+            return fail("no units in the snapshot")
         if snap.too_few(units, extra["state"], ratio):
-            return fail(f"{units} units in the snapshot (the last one had {extra['state'].get('last_units_n')})")
+            short = {"units": units, "last_good": extra["state"].get("last_units_n")}
     else:
-        prev_rows = (prev_doc.get("meta") or {}).get("rows") if prev_doc.get("ok") else None
+        prev_rows = prev_meta.get("rows")
         ratio = float(block.get("min_rows_ratio", MIN_ROWS_RATIO))
         if isinstance(prev_rows, int) and prev_rows and len(rows) < prev_rows * ratio:
-            return fail(f"{len(rows)} rows in the response (the last good one had {prev_rows})")
+            short = {"rows": len(rows), "last_good": prev_rows}
+    if short is not None:
+        what = f"{short.get('units', short.get('rows'))} {'units' if snapshot else 'rows'}"
+        if short_runs < accept_after:
+            return fail(f"{what} in the response (the last good one had {short['last_good']}); short run "
+                        f"{short_runs} of the {accept_after} in a row after which it is accepted",
+                        meta={"short_runs": short_runs})
+        short["short_runs"] = short_runs
     try:
         records, stats = build(source_id, block, rows, fetched_at, prev, pmeta, extra)
     except Exception as e:  # noqa: BLE001 - a run that cannot finish keeps the previous records
         return fail(f"{type(e).__name__}: {e}")
+    if short is not None:
+        stats["short_response_accepted"] = short
     if snapshot:
         write_json(extra["state_path"], extra["state"])
     meta = {**stats, **public_meta(block.get("meta") or {}), "platform": block["platform"], "raw_path": raw_path,

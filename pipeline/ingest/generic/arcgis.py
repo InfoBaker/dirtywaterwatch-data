@@ -47,6 +47,11 @@ def fetch(block: dict, sess) -> Fetched:
             raise RuntimeError(f"features without {oid}: the cursor cannot page this layer")
         if last is not None and min(ids) <= last:
             raise RuntimeError(f"the layer returned {oid} {min(ids)} again after {last}: paging is not moving")
+        more = bool(d.get("exceededTransferLimit")) or len(got) >= size
+        if more and any(x >= y for x, y in zip(ids, ids[1:])):
+            # the server ignored orderByFields: the cursor (the page's largest id) would skip the ids below it
+            raise RuntimeError(f"the layer returned a page out of {oid} order (orderByFields ignored): the cursor "
+                               f"cannot page it")
         pages.append(d)
         n += len(got)
         last = max(ids)

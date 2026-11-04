@@ -23,8 +23,9 @@ feed module (`ingest/<id>.py`) is still a feed is refused until the module is re
 file. `--check` validates every block without fetching or writing anything.
 
 Every failure is written to the events file as `ok: false` with the reason, and the previous records stay: a block
-that cannot run, a fetch that fails, a response with fewer than half the rows of the last good one (`min_rows_ratio`),
-a table that reaches `max_rows` before its end, and a run where more than a fifth of the rows could not be read by a
+that cannot run, a fetch that fails, a response with fewer than half the rows of the last good one (`min_rows_ratio`;
+a short response that persists for `short_runs_to_accept` runs in a row, 3 by default, is accepted as the source's
+new size, so a source that retires rows never freezes its records), a table that reaches `max_rows` before its end, and a run where more than a fifth of the rows could not be read by a
 transform or the water matcher (`max_error_share`). A single row whose transform fails keeps every field the field
 map read and its record key, with the error in `parse_error` and `raw._hook_errors`.
 
@@ -36,8 +37,9 @@ The code is `pipeline/ingest/generic/`: `fieldmap.py` (the field map), one reade
 - **Three clocks, kept apart.** The source's own times (`started_at`, `ended_at`, and `source_updated_at`, the
   record's or the dataset's last edit), the publication time (`published_at`, `reported_at`) and our fetch time
   (`fetched_at`). Each is filled only from what the source gives; a time the source does not give stays empty. A
-  date without a time of day is `time_precision: day`, and so is a date written as exact midnight (a date-only
-  field stored as an epoch at midnight, "11/01/2026 12:00:00 AM"); a snapshot's times are `poll`. Every block that
+  date without a time of day is `time_precision: day`, and so is text written as exact midnight
+  ("11/01/2026 12:00:00 AM"); an epoch is a time, also at 00:00, unless the spec says `midnight: date` (a
+  date-only field stored as an epoch); a snapshot's times are `poll`. Every block that
   reads local times names its `time_zone`; a local time that happened twice or not at all at a clock change is
   noted in `raw._time_notes`. A time before 1990 or after the day after the fetch (epoch seconds read as
   milliseconds, a typed year) is not used and the record says so; an end after the fetch is kept but the record is
@@ -55,7 +57,7 @@ The code is `pipeline/ingest/generic/`: `fieldmap.py` (the field map), one reade
   resident, complainant, reporter, submitter, contact, inspector, email or phone field) is refused unless
   `reviewed_fields` gives the reason it does not; emails, phone numbers and names after a title or an honorific
   are removed from the `free_text` fields and from a `discharger_name` or `authority` read from a field (a number
-  range with a unit, "500-1000 feet", is not taken for a phone number); `common.strip_personal` runs on every `raw`;
+  range with a unit, "500-1000 feet", is not taken for a phone number; a ten-digit number always is); `common.strip_personal` runs on every `raw`;
   and the name redactor runs over every record before it is compared with the last run and again before it is
   written.
 - **History.** Records that leave the source stay in the events file with the missing mark
@@ -88,6 +90,7 @@ The code is `pipeline/ingest/generic/`: `fieldmap.py` (the field map), one reade
 | `raw_notes` | `{_name: value spec}`: notes written on each record (decoded codes, labels) |
 | `decoded_times` | `{fields, parse}`: the source's date fields as read, on each record (`raw._decoded_times`) |
 | `min_rows_ratio`, `max_error_share` | the failure thresholds (0.5 and 0.2) |
+| `short_runs_to_accept` | the short responses in a row after which a short response is accepted (3) |
 | `after`, `module` | blocks that run first; the feed module the block replaces |
 | `meta` | added to the events file's meta: `credit`, `license`, `caveat` (published as `disclaimer`), `time_basis` (as `time_note`) |
 
@@ -114,9 +117,12 @@ Template filters: `clean`, `upper`, `lower`, `slug`, `address` (street words abb
 Special entries:
 
 - **Times** (`started_at`, `ended_at`, `reported_at`, `published_at`, `source_updated_at`):
-  `{field, parse, formats, time, time_formats, precision}`. `parse` is `datetime` (ISO 8601, RFC 2822 and the
-  common US forms, or the block's `formats`), `date`, `epoch_ms`, `epoch_s` or `epoch_ms_wallclock` (local
+  `{field, parse, formats, time, time_formats, precision, midnight}`. `parse` is `datetime` (ISO 8601, RFC 2822
+  and the common US forms, or the block's `formats`), `date`, `epoch_ms`, `epoch_s` or `epoch_ms_wallclock` (local
   wall-clock time stored as if it were UTC, common on ArcGIS layers). `time` names a separate time-of-day field.
+  `midnight: date` reads a value at exactly 00:00 as a date (a date-only field stored as an epoch);
+  `midnight: time` reads text written as midnight as a time. By default text at midnight is a date and an epoch
+  is a time (an overflow can end at 00:00).
   `ended_at` may be `{duration: {days, hours, minutes}}`: the start plus the elapsed duration, so an end across a
   clock change is the elapsed one; when the start is known only to the day, the end is the day of the latest end
   it allows (that day's end plus the duration), at day precision, so no clock time is invented and a caution
@@ -361,7 +367,8 @@ fetch:
 A unit first seen as `recent` had an event that began and ended between polls: it is recorded as ended, with no
 start and `raw.occurred_after`, the earliest it can have begun. `no_data` is not an event; an ongoing event becomes
 unknown until the unit reports again. A snapshot with fewer than half the units of the last snapshot
-(`min_units_ratio`) is treated as a failed fetch, and the previous records stay. A replay of a saved snapshot
+(`min_units_ratio`) is treated as a failed fetch, and the previous records stay, until it persists for
+`short_runs_to_accept` runs. A replay of a saved snapshot
 (`--file`) needs `--out`, and its state is kept next to that file: only live polls reach the archive.
 
 ## Adding a feed

@@ -120,6 +120,23 @@ def test_baltimore_port_keeps_the_module_history_over_runs():
         assert g["raw"][key] == m["raw"][key], key
 
 
+def test_baltimore_port_matches_the_module_when_an_overflow_starts_or_ends_at_midnight():
+    """END_DATETIME and START_DATETIME hold wall-clock times: one at exactly 00:00 is a time, as the module reads
+    it, and not a date whose end is moved a day later."""
+    import datetime as D
+    content = (FIX / "md_baltimore_sso_layer.json").read_bytes()
+    doc = json.loads(content)
+    timed = [f["attributes"] for f in doc["features"] if f["attributes"].get("END_DATETIME")
+             and f["attributes"].get("START_DATETIME")]
+    a, b = timed[0], timed[1]
+    end = D.datetime.fromtimestamp(a["END_DATETIME"] / 1000, D.UTC)
+    a["END_DATETIME"] = int((D.datetime(end.year, end.month, end.day, tzinfo=D.UTC) + D.timedelta(days=1)).timestamp() * 1000)
+    start = D.datetime.fromtimestamp(b["START_DATETIME"] / 1000, D.UTC)
+    b["START_DATETIME"] = int(D.datetime(start.year, start.month, start.day, tzinfo=D.UTC).timestamp() * 1000)
+    mod, gen, _, _ = baltimore_runs([json.dumps(doc).encode()])
+    assert compare(mod, gen, layer_fields(content)) == {"only_module": [], "only_generic": [], "fields": {}}
+
+
 def test_baltimore_port_keeps_only_the_safe_fields_in_raw():
     _, gen, _, block = baltimore()
     safe = set(block["safe_fields"])
