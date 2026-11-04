@@ -17,12 +17,12 @@ The law (research/ca/report.md §2.1 in the site repository; the General Order r
     hotline and signs rows; the counties' voluntary pages below).
   - CSO permits: Sacramento's (CA0079111, Order R5-2026-0003, read) and San Francisco's (CA0037664, CA0037681, not read).
   - NPDES standard provision (40 CFR 122.41(l)(6)): a permittee reports noncompliance that may endanger health or the
-    environment to the Regional Water Board within 24 hours; nothing is published. It is the only spill channel of a
-    plant operator with no enrollment under the General Order, whose spills do not reach the CIWQS file.
+    environment to the Regional Water Board within 24 hours; nothing is published. A report to the regulator is not a
+    channel the public is told through, so it has no register row (review 2026-11-04 P2-3); the operator row of a plant
+    operator with no enrollment under the General Order says its spills do not reach the CIWQS file.
 
 Rows
-  - Per operator (every California row of data/dischargers.json): <id>-health-officer-notice (no_web_page). For an
-    operator with no WDID (no enrollment): <id>-permit-noncompliance-report (permit basis, no_web_page).
+  - Per operator (every California row of data/dischargers.json): <id>-health-officer-notice (no_web_page).
   - SFPUC's beach map (CSO flag, read by the ca-sfpuc-beach-map feed), its signs and e-mail alerts; Sacramento's CSO
     notification (no web channel found).
   - Agency and voluntary rows: AGENCY below.
@@ -65,9 +65,6 @@ Q_115885 = ('Health and Safety Code 115885(a)(1)(D): the health officer shall "E
             'the public of all beaches currently closed, posted, or otherwise restricted"; 115885(a)(1)(F) and 17 CCR '
             '7958: on a known untreated sewage release, "Immediately post and close the beach or a portion thereof, '
             'or otherwise restrict its use until the source of the sewage release is eliminated"')
-Q_NPDES = ("40 CFR 122.41(l)(6) (a standard provision of every NPDES permit): the permittee reports any noncompliance "
-           "that may endanger health or the environment orally within 24 hours and in writing within 5 days, to the "
-           "Regional Water Board")
 Q_SAC = ('Order R5-2026-0003 (NPDES CA0079111): "The Discharger shall implement its \'Spill Emergency Response Plan\' '
          'for CSS outflow notifications and the \'Combined Wastewater Collection and Treatment System Plan of '
          'Operations\' for CSO notifications to ensure that the public is receiving adequate notification of CSS '
@@ -245,10 +242,6 @@ PRIVATE_FORMS = ("investor-owned utility", "member-owned utility", "homeowners' 
                  "facility (permittee not named)")
 
 
-def has_wdid(op: dict) -> bool:
-    return any(re.match(r"^\d[A-Z]?SSO\d+(?:-[A-Z])?$", str(p)) for p in op.get("npdes_permits") or [])
-
-
 def operator_rows(dis: list[dict]) -> list[dict]:
     rows = []
     for op in dis:
@@ -264,17 +257,6 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             note=(f"No web form: {name}: notice of each sewage discharge to the local health officer or director of "
                   "environmental health as soon as it is known; the law does not require the officer to publish it. "
                   f"No web channel found.{who} (research/ca/report.md §2.1)"))))
-        if not has_wdid(op):
-            permit = op.get("npdes_permit")
-            rows.append(finish(base(
-                id=f"{op['id']}-permit-noncompliance-report", operator_id=op["id"], name=name, permit=permit,
-                channel_kind="operator_page", urls=[], method=None, legal_basis=Q_NPDES, basis_kind="permit",
-                monitored=False, unmonitored_reason="other", publishes="unknown", records=False,
-                noun="Permit report", sources=["ca-go-2022-0103-dwq"],
-                note=(f"No web form: {name}: no enrollment under the Statewide Sanitary Sewer Systems General Order was "
-                      "found, so its spills do not reach the State Water Board's public CIWQS file; its permit asks "
-                      "for a 24-hour report of noncompliance to the Regional Water Board, which is not published. "
-                      f"No web channel found.{who} (research/ca/report.md §2.3)"))))
     return rows
 
 
