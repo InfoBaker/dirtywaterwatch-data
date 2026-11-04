@@ -1,0 +1,26 @@
+id: "ga-epd-spills"
+name: "Georgia EPD Municipal Sewage Spills Reported to EPD (daily 30-day workbook, with the Spills in Georgia map layer's points)"
+url: "https://epd.georgia.gov/sewage-spills-report"
+homepage: "https://epd.georgia.gov/sewage-spills-report"
+kind: "csv"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/ga_epd_spills.py
+#   (data/build/events/ga-epd-spills.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/ga_epd_spills.py docstring): each business day, about one business day of
+#   latency. The workbook is a rolling 30-day list with no row id: history is built from the dated
+#   postings (older dated files stay at the same URL pattern); rows that leave the window are kept.
+#   Rows of the same permit and day as an EPA Sewer Overflow and Bypass Event report are duplicate_of it.
+cadence: "daily"
+license: "None stated."
+attribution: "Georgia Environmental Protection Division"
+enabled: true
+role: "events"
+event_types: ["sso", "cso"]
+states: ["GA"]
+registry_ids: ["ga-epd-sewage-spills-report", "ga-epd-spills-map-layer"]
+access: ["csv", "arcgis"]
+access_detail: "Page https://epd.georgia.gov/sewage-spills-report links https://epd.georgia.gov/document/document/sewagespillsreportYYYYMMDD/download (an .xlsx served as XLS; a day with no posting answers 404). Points: https://services1.arcgis.com/p0dLjwtOaJHU8zq2/arcgis/rest/services/Spill_Summary_Continuous_Update/FeatureServer/0/query?where=1%3D1&outFields=*&f=json (BEGIN_DATE null on every row; joined by permit and address)."
+machine_readable: true
+legal_basis: "Ga. Comp. R. & Regs. 391-3-6-.05; O.C.G.A. 12-5-30.1"
+checked: "2026-11-04"
