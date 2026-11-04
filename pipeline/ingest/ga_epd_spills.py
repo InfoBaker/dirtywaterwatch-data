@@ -53,7 +53,8 @@ Record rules
     raw.reached_water false, unless WATERWAY_IMPACTED names a water; any other destination wording is not read as
     "did not reach water" (raw._destination_not_read), so a spill is never hidden on a wording not yet seen.
   - Operator: discharger_id from data/dischargers.json by permit (npdes_permit / npdes_permits); discharger_name is
-    EPD's FACILITY_NAME. npdes_permit only for a real permit number (GA + 7 digits).
+    EPD's FACILITY_NAME. npdes_permit only for an NPDES permit number (GA0 + 6 digits, or a general permit's
+    coverage GAG + 6 digits); a state land-application permit (GAJ, GAU) or text stays in raw.row only.
   - Points: a layer row with the same permit and normalised address, when exactly one, lends LATITUDE / LONGITUDE
     (coord_source "geocode": the layer's point is EPD's location for the address; precision not stated). When the
     layer is down or no longer lists the row, the point read earlier stays (raw._coords_kept_from_earlier_read).
@@ -116,7 +117,7 @@ AUTHORITY = "Georgia Environmental Protection Division (Municipal Sewage Spills 
 CATCH_UP_DAYS = 14
 MOVED_DAYS = 7
 BACKFILL_PAUSE_S = 1.0
-REAL_PERMIT = re.compile(r"^GA\d{7}$")
+REAL_PERMIT = re.compile(r"^GA[0G]\d{6}$")      # an individual (GA0...) or general (GAG...) NPDES permit
 LINK = re.compile(r"/document/document/sewagespillsreport(\d{8})/download")
 NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
 HEADER_ALIASES = {"spill_begin_date": "begin_date"}
