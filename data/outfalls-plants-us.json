@@ -105165,9 +105165,9 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)",
+   "water_match": "none: the record of that name was set aside by the placement guard: atlantic-intracoastal-waterway-palm-coast-fl, name match too far (3.5 km) and the report's town (flaglerbeach) is not among the water's towns (Palm Coast); NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek); the town's record Atlantic Intracoastal Waterway is 3.5 km from the point and its name is not the receiving water's ('Intracoastal Waterway'): not matched",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)"
+   "no_water_reason": "the record of that name was set aside by the placement guard: atlantic-intracoastal-waterway-palm-coast-fl, name match too far (3.5 km) and the report's town (flaglerbeach) is not among the water's towns (Palm Coast); NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek); the town's record Atlantic Intracoastal Waterway is 3.5 km from the point and its name is not the receiving water's ('Intracoastal Waterway'): not matched"
   },
   {
    "npdes_permit": "FL0026867",
@@ -107403,9 +107403,9 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)",
+   "water_match": "none: the record of that name was set aside by the placement guard: atlantic-intracoastal-waterway-ponte-vedra-fl, name match too far (15.3 km; limit 12.0 km: the canal record's extent (13.1 km, counted to 10 km) plus 2 km); NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)"
+   "no_water_reason": "the record of that name was set aside by the placement guard: atlantic-intracoastal-waterway-ponte-vedra-fl, name match too far (15.3 km; limit 12.0 km: the canal record's extent (13.1 km, counted to 10 km) plus 2 km); NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)"
   },
   {
    "npdes_permit": "FL0038776",
@@ -109512,14 +109512,13 @@
    "country": "US",
    "source": "fed-echo-npdes-discharge-points",
    "fetched_at": "2026-11-03T21:02:45Z",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)"
+   "water_slug": "atlantic-intracoastal-waterway-ponte-vedra-fl",
+   "water_name": "Atlantic Intracoastal Waterway",
+   "water_kind": "canal",
+   "distance_m": 1114,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Intracoastal Waterway' by name; Atlantic Intracoastal Waterway (atlantic-intracoastal-waterway-ponte-vedra-fl, openboatlaunch), 1114 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
    "npdes_permit": "FL0044245",
@@ -109651,9 +109650,9 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)",
+   "water_match": "none: the record of that name was set aside by the placement guard: atlantic-intracoastal-waterway-ponte-vedra-fl, name match too far (2.7 km) and the report's town (pontevedrabeach) is not among the water's towns (Ponte Vedra); NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)"
+   "no_water_reason": "the record of that name was set aside by the placement guard: atlantic-intracoastal-waterway-ponte-vedra-fl, name match too far (2.7 km) and the report's town (pontevedrabeach) is not among the water's towns (Ponte Vedra); NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)"
   },
   {
    "npdes_permit": "FL0102679",
@@ -110082,14 +110081,13 @@
    "country": "US",
    "source": "fed-echo-npdes-discharge-points",
    "fetched_at": "2026-11-03T21:02:45Z",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)"
+   "water_slug": "atlantic-intracoastal-waterway-palm-coast-fl",
+   "water_name": "Atlantic Intracoastal Waterway",
+   "water_kind": "canal",
+   "distance_m": 3,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Intracoastal Waterway' by name; Atlantic Intracoastal Waterway (atlantic-intracoastal-waterway-palm-coast-fl, openboatlaunch), 3 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
    "npdes_permit": "FL0116009",
@@ -110172,14 +110170,13 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "point_shared_by": 3,
    "coords_note": "3 of this permit's outfalls share this one point in ICIS",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Cabbage Creek, Cut Creek)"
+   "water_slug": "atlantic-intracoastal-waterway-palm-coast-fl",
+   "water_name": "Atlantic Intracoastal Waterway",
+   "water_kind": "canal",
+   "distance_m": 2949,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Intracoastal Waterway' by name; Atlantic Intracoastal Waterway (atlantic-intracoastal-waterway-palm-coast-fl, openboatlaunch), 2949 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
    "npdes_permit": "FL0116009",
