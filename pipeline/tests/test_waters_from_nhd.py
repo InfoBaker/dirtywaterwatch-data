@@ -312,7 +312,7 @@ def test_osm_state_pass_stops_asking_overpass_when_the_time_budget_is_used(monke
     monkeypatch.setattr(W, "state_fetch", lambda *a_, **k: asked.append(1) or (None, "x"))
     monkeypatch.setattr(W.WX, "is_cached", lambda *a_, **k: False)
     monkeypatch.setattr(W, "osm_spec", lambda t, towns: {"key": f"k-{t['name']}", "name": t["name"], "box": (0.0, 0.0, 1.0, 1.0), "osm_names": []})
-    monkeypatch.setattr(W, "mirror_order", lambda: ["m"])
+    monkeypatch.setattr(W, "mirror_order", lambda **k: ["m"])
     monkeypatch.setattr(W.time, "monotonic", iter([0.0, 10.0, 20.0]).__next__)   # start, then over budget
     t = {"name": "Mill Brook", "state": "MA", "key": "MA|Mill Brook", "events": 3, "outfalls": 0, "points": [[0, 0]], "words": ["brook"]}
     row = {"reason": "no NHD feature", "how": None}
@@ -490,3 +490,106 @@ def test_a_hand_record_yields_quietly_to_a_found_record_of_the_same_name(monkeyp
     W.Run.hand_pass(fake, [])
     assert built == [] and fake.problems == []
     assert "not needed" in capsys.readouterr().out
+
+
+# ---------------------------------------------------------------- 2026-11-04: --wall-s bounds the whole hourly target
+
+def test_a_pass_budget_is_cut_to_the_time_left_before_the_wall():
+    assert N.left_of(180.0, None) == 180.0 and N.left_of(None, None) is None
+    assert N.left_of(180.0, 100.0, now=40.0) == 60.0          # 60 s left: the OSM fallback gets 60, not 180
+    assert N.left_of(None, 100.0, now=40.0) == 60.0
+    assert N.left_of(120.0, 100.0, now=130.0) == 0.0          # past the wall: nothing
+
+
+def _osm_fake(monkeypatch, budget, net_end, clock):
+    import types
+    asked, mirrors = [], []
+    monkeypatch.setattr(N, "state_fetch", lambda *a_, **k: asked.append(k.get("deadline")) or (None, "time budget used"))
+    monkeypatch.setattr(N.WX, "is_cached", lambda *a_, **k: False)
+    monkeypatch.setattr(N, "osm_spec", lambda t, towns: {"key": f"k-{t['name']}", "name": t["name"],
+                                                         "box": (0.0, 0.0, 1.0, 1.0), "osm_names": []})
+    monkeypatch.setattr(N, "mirror_order", lambda **k: mirrors.append(k.get("timeout")) or ["m"])
+    monkeypatch.setattr(N.time, "monotonic", iter(clock).__next__)
+    t = {"name": "Mill Brook", "state": "MA", "key": "MA|Mill Brook", "events": 3, "outfalls": 0, "points": [[0, 0]],
+         "words": ["brook"]}
+    row = {"reason": "no NHD feature", "how": None}
+    fake = types.SimpleNamespace(args=types.SimpleNamespace(osm_max=600, refresh=False, offline=False, osm_budget=budget),
+                                 osm_queue=[(t, row)], towns={}, osm_used=0, osm_remaining=[], feats={}, states={},
+                                 existing_list=[], problems=[], attach=lambda *a_: None, net_end=net_end)
+    return fake, row, asked, mirrors
+
+
+def test_the_osm_fallback_starts_nothing_when_the_wall_leaves_too_little_time(monkeypatch):
+    """Run 41788856038: the mirror check took 62 s outside the OSM budget and the queries ran on past it; with --wall-s
+    the budget is what is left before the wall, and under OSM_MIN_S neither the check nor a query is started."""
+    fake, row, asked, mirrors = _osm_fake(monkeypatch, 180.0, net_end=1005.0, clock=[1000.0] + [1001.0] * 20)
+    N.Run.osm_state_pass(fake)
+    assert mirrors == [] and asked == []
+    assert "time budget used" in row["reason"] and "left for the next run" in row["reason"]
+    assert fake.osm_states["MA"]["failed"].startswith("time budget")
+
+
+def test_the_mirror_check_and_the_queries_keep_inside_the_wall(monkeypatch):
+    fake, row, asked, mirrors = _osm_fake(monkeypatch, 180.0, net_end=1060.0, clock=[1000.0] + [1001.0] * 20)
+    N.Run.osm_state_pass(fake)
+    assert mirrors == [10.0]                     # 60 s left: each mirror is given a sixth of it, not 30 s
+    assert asked == [1060.0]                     # the state query is cut to the wall
+    # without a wall it is as it was: 30 s a mirror, a query started inside the budget not cut
+    fake, row, asked, mirrors = _osm_fake(monkeypatch, 180.0, net_end=None, clock=[1000.0] + [1001.0] * 20)
+    N.Run.osm_state_pass(fake)
+    assert mirrors == [30.0] and asked == [None]
+
+
+def test_a_state_query_is_not_sent_without_time_left(monkeypatch, tmp_path):
+    monkeypatch.setattr(N, "CACHE_DIR", tmp_path)
+    sent = []
+    monkeypatch.setattr(N.requests, "post", lambda *a_, **k: sent.append(k["timeout"]))
+    monkeypatch.setattr(N.time, "monotonic", lambda: 100.0)
+    assert N.state_fetch("q", ["m1", "m2"], False, False, deadline=105.0) == (None, "time budget used")
+    assert sent == []
+
+
+def test_http_stops_at_the_wall_and_says_so(monkeypatch):
+    clock = [100.0]
+    monkeypatch.setattr(N.time, "monotonic", lambda: clock[0])
+    slept = []
+    monkeypatch.setattr(N.time, "sleep", slept.append)
+    h = N.Http(deadline=130.0, deadline_reason="--wall-s used", nldi_log=Path("/nonexistent/x.json"))
+    assert h.timeout(120) == 30.0                # a request never runs two minutes past the wall
+    h.nap(120)
+    assert slept == [30.0]                       # nor a retry pause
+    clock[0] = 131.0
+    with pytest.raises(N.BudgetExhausted, match="--wall-s used"):
+        h.spend("near2")
+    # the reason reaches the public outfall registry in public voice
+    text, found = N.public_voice(f"{N.NOT_REACHED} (--wall-s used); the next run resumes", "2026-11-04")
+    assert found == ["(--wall-s used)"] and "time or request limit" in text
+
+
+def test_the_hourly_check_resolves_only_the_unplaced_events_again(monkeypatch):
+    resolved = []
+
+    class Res:
+        def resolve(self, ev):
+            resolved.append(ev["event_id"])
+            return {"water_slugs": ["mill-brook-ma"] if ev["event_id"] == "a" else []}
+
+    monkeypatch.setattr(N.S, "make_resolver", lambda waters: Res())
+    monkeypatch.setattr(N.S, "derive_states", lambda waters, rules: {})
+    monkeypatch.setattr(N.S, "load_rules", lambda: {})
+    monkeypatch.setattr(N, "public_record", lambda r: {"slug": r["slug"]})
+    unplaced = [{"event_id": "a", "waterbody_text": "Mill Brook"}, {"event_id": "b", "waterbody_text": "Elsewhere"}]
+    out = N.evaluate_unplaced({}, [{"slug": "mill-brook-ma"}], unplaced)
+    assert resolved == ["a", "b"]                # not every event, not twice
+    assert out["before"]["unplaced_with_text"] == 2 and out["after"]["unplaced_with_text"] == 1
+    assert out["before"]["ids"] - out["after"]["ids"] == {"a"}
+    assert out["before"]["unplaced"] is None     # the count over all events is not made in this check
+
+
+def test_the_last_line_gives_the_seconds_of_each_phase_and_why_the_run_stopped():
+    import types
+    args = types.SimpleNamespace(wall_s=300.0, finish_s=60.0)
+    line = N.timing_line(287.4, {"targets": 41.6, "nhd": 150.2, "places": 0.1, "osm": 47.0, "finish": 48.5}, args,
+                         "--budget-s used")
+    assert line.startswith("waters-nhd: 287 s of --wall-s 300 (60 s kept for the end): loading the targets 42 s, NHDPlus 150 s")
+    assert line.endswith("stopped early: --budget-s used; the next run resumes from the cache")
