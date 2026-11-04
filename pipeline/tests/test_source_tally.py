@@ -349,3 +349,23 @@ def test_combined_sewer_and_plant_outfalls_are_counted_apart_for_the_live_states
     assert "Treatment plant" not in secs["CT"]
     T.set_live_states(tmp_path / "nowhere")                       # no rules file: the fixed twelve
     assert T.STATES == T.STATE_ORDER
+
+
+def test_the_register_split_per_state_reads_the_same(tmp_path):
+    # data/notice-channels/<st>.json (ingest/notification_pages.py --split) gives the tally the same rows
+    _, md_single = run(tmp_path / "a", REGISTER)
+    root = tmp_path / "b" / "proj"
+    by_state = {}
+    for r in REGISTER["channels"]:
+        by_state.setdefault(r["state"], []).append(r)
+
+    def run_split(tmp):
+        obl = make_project(tmp / "proj")
+        for st, rows in by_state.items():
+            w(tmp / "proj" / f"data/notice-channels/{st.lower()}.json", {"state": st, "channels": rows})
+        w(tmp / "proj" / "data/notice-channels/_schema.json", {"schema": {}})
+        assert T.main(["--root", str(tmp / "proj"), "--now", NOW, "--obl-dir", str(obl)]) == 0
+        return (tmp / "proj" / "docs/source-tally.md").read_text()
+    md_split = run_split(tmp_path / "b")
+    assert root.exists() and "data/notice-channels/<st>.json (4 rows, 2 monitored)" in md_split
+    assert md_split.replace("data/notice-channels/<st>.json (4", "data/notice-channels.json (4") == md_single

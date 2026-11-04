@@ -33,6 +33,11 @@ Files:
                      edge, gauge, flow, label per downstream-approach.md section 4) plus a stop
                      marker where the model stops (tidal, lake, 40 km cap)
   reach-paths.geojson every traced outfall path with its status now (replay with history.json reaches)
+  reaches/<st>.geojson the same per live state (write_reach_state_files): the traced paths (feature "path"), the
+                     active segments and stop markers of every reach that touches the state, each with
+                     properties.states (the outfall's state first); a reach crossing a state line is in both files.
+                     reaches/index.json lists them {state, file, features, paths, segments, stops, bytes, built}.
+                     The national reaches.geojson and reach-paths.geojson stay until the site reads these.
   launches.geojson   launches on tracked waters with access public, public_restricted, private,
                      commercial or club (openboatlaunch; unknown skipped), plus the editorial rows
                      in data/launches-extra.json (launches no source carries yet; each cites where
@@ -87,7 +92,7 @@ from pathlib import Path
 from build import status as status_mod
 from build.redact import BlockScan, Redactor, blocklist, quote_swaps, redact_events, redactor_for
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, OUT_DIR, OUTFALL_REGISTRY_GLOB, OUTFALL_REGISTRY_SKIPPED,
-                    PROVISIONAL_FIELDS, REPORTED_OUTFALLS, ROOT, discharger_alias_map, is_provisional, now_iso, read_json,
+                    PROVISIONAL_FIELDS, REPORTED_OUTFALLS, ROOT, STATE_CODE, discharger_alias_map, is_provisional, now_iso, read_json,
                     scrub_names, split_path_notes, strip_personal, write_json)
 from export import outfalls as outfalls_mod
 
@@ -167,10 +172,11 @@ def reach_waters(st: dict) -> dict[str, list[str]]:
     return {k: ([own[k]] if own.get(k) else []) + sorted(s - {own.get(k)}) for k, s in out.items()}
 
 
-def reach_features(st: dict, by_event: dict) -> tuple[list, list]:
-    """(active event x segment features plus stop markers, one path feature per traced outfall)."""
+def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tuple[list, list]:
+    """(active event x segment features plus stop markers, one path feature per traced outfall). cached: the trace
+    records (build/reaches.load_reaches()), read here when not given."""
     from build import reaches as reaches_mod
-    cached = reaches_mod.load_reaches()
+    cached = reaches_mod.load_reaches() if cached is None else cached
     cap = reaches_mod.cap_km()
     waters_by_reach = reach_waters(st)
     feats = []
@@ -238,6 +244,111 @@ def reach_features(st: dict, by_event: dict) -> tuple[list, list]:
                                      "stop_label": STOP_TEXT.get(r.get("cut_reason"), "").format(cap=cap),
                                      "line_text": LINE_TEXT}})
     return feats, paths
+
+
+# ---------------------------------------------------------------- the reaches per state
+
+# out/reaches/<st>.geojson, one per live state, and out/reaches/index.json (docs/national-approach.md §7 item 1): the
+# map loads a state's file instead of every reach in the country. The national out/reaches.geojson and
+# out/reach-paths.geojson are still written unchanged until the site and the Worker read the state files.
+REACH_STATE_DIR = "reaches"
+REACH_STATE_FILE = re.compile(r"^[a-z]{2}\.geojson$")
+REACH_STATE_MAX = 64            # 50 states, DC and the territories: scripts/upload-current.sh puts no more than this
+
+
+def reach_states(rec: dict | None, waters: list[str], state_of) -> list[str]:
+    """The states a reach touches: its outfall's first (the trace record's state, else its permit's two letters),
+    then the state of every water record the modeled stretch runs through (state_of: slug -> state or None),
+    sorted. A reach that crosses a state line names both."""
+    rec = rec or {}
+    own = str(rec.get("state") or "").upper()
+    if not STATE_CODE.fullmatch(own):
+        own = str(rec.get("permit") or "")[:2].upper()
+    head = [own] if STATE_CODE.fullmatch(own) else []
+    rest = {state_of(s) for s in waters or [] if s} - {None, ""} - set(head)
+    return head + sorted(rest)
+
+
+def water_state_of(st: dict, live: set[str]):
+    """slug -> its state: the status build's water record, else a slug ending in a live state's code
+    ("susquehanna-river-ny"), as the site's map reads it; None when neither says."""
+    known = {slug: str((w or {}).get("state") or "").upper() for slug, w in (st.get("waters") or {}).items()}
+
+    def state_of(slug: str) -> str | None:
+        v = known.get(slug)
+        if v and STATE_CODE.fullmatch(v):
+            return v
+        m = re.search(r"-([a-z]{2})$", str(slug or ""))
+        return m.group(1).upper() if m and m.group(1).upper() in live else None
+    return state_of
+
+
+def reaches_by_state(feats: list, paths: list, st: dict, cached: dict, live: set[str]) -> tuple[dict[str, list], list]:
+    """({state: features} for every live state (an empty list when none touches it), the reach keys no live state
+    could be found for). The traced paths (marked feature "path") come first, then the active event segments and stop
+    markers, each in every state file its reach touches, with those states in properties.states. The features are
+    copies: the national files are not changed."""
+    live = {str(s).upper() for s in live}
+    state_of = water_state_of(st, live)
+    by_reach = reach_waters(st)
+    memo: dict[str, list[str]] = {}
+
+    def states_of(f: dict) -> list[str]:
+        p = f.get("properties") or {}
+        key = p.get("reach") or f.get("id")
+        if key not in memo:
+            rec = cached.get(key) or {}
+            waters = p.get("waters") or by_reach.get(key) or [rec.get("water_slug") or p.get("water_slug")]
+            memo[key] = reach_states(rec or {"permit": p.get("permit")}, waters, state_of)
+        return memo[key]
+
+    out: dict[str, list] = {s: [] for s in sorted(live)}
+    homeless: dict[str, None] = {}
+    for kind, group in (("path", paths), (None, feats)):
+        for f in group:
+            sts = states_of(f)
+            props = {**(f.get("properties") or {}), **({"feature": kind} if kind else {}), "states": sts}
+            g = {**f, "properties": props}
+            placed = [s for s in sts if s in out]
+            for s in placed:
+                out[s].append(g)
+            if not placed:
+                homeless[str(props.get("reach") or f.get("id"))] = None
+    return out, list(homeless)
+
+
+def write_reach_state_files(by_state: dict[str, list], out_dir: Path = OUT_DIR, built: str | None = None,
+                            without_state: list | None = None) -> dict:
+    """out/reaches/<st>.geojson per state and out/reaches/index.json {built, national, paths, states_property,
+    files: [{state, file, features, paths, segments, stops, bytes, built}], without_state}; a state file left from
+    an earlier export whose state is no longer listed is removed. without_state: the reach keys in no state file
+    (counted in the index; they stay in the national files). Returns the index."""
+    if len(by_state) > REACH_STATE_MAX:
+        raise ValueError(f"reaches per state: {len(by_state)} states, more than {REACH_STATE_MAX}")
+    d = Path(out_dir) / REACH_STATE_DIR
+    built = built or now_iso()
+    files, written = [], set()
+    for s in sorted(by_state):
+        if not STATE_CODE.fullmatch(s):
+            raise ValueError(f"reaches per state: {s!r} is not a state code")
+        name = f"{s.lower()}.geojson"
+        assert REACH_STATE_FILE.fullmatch(name)
+        path = d / name
+        fs = by_state[s]
+        write_compact(path, {"type": "FeatureCollection", "state": s, "built": built, "features": fs})
+        written.add(name)
+        kinds = Counter((f.get("properties") or {}).get("feature") for f in fs)
+        files.append({"state": s, "file": f"{REACH_STATE_DIR}/{name}", "features": len(fs), "paths": kinds["path"],
+                      "segments": kinds["segment"], "stops": kinds["stop"], "bytes": path.stat().st_size, "built": built})
+    for p in d.glob("*.geojson"):
+        if p.name not in written:
+            p.unlink()
+    index = {"built": built, "national": "reaches.geojson", "paths": "reach-paths.geojson", "states_property": "states",
+             "about": "Modeled downstream reaches per state: the traced paths (feature \"path\"), the active events' "
+                      "segments and the stop markers. A reach is in the file of every state it touches.",
+             "files": files, "without_state": len(without_state or [])}
+    write_compact(d / "index.json", index)
+    return index
 
 
 # ---------------------------------------------------------------- public wording
@@ -419,7 +530,7 @@ def blocklist_hits(out_dir: Path, names: list[str]) -> list[str]:
     # the map and list payloads too: the monthly marks, overlays, advisory points, reaches, active rows, rain and
     # coverage files carry labels and names copied from records (review 2026-11-03 SOL P1-1)
     paths = [out_dir / n for n in ("events.json",) + PUBLIC_PAYLOADS] + sorted((out_dir / "waters").glob("*.json")) \
-        + sorted((out_dir / "events").glob("*.json"))
+        + sorted((out_dir / "events").glob("*.json")) + sorted((out_dir / REACH_STATE_DIR).glob("*.geojson"))
     hits = []
     for p in paths:
         try:
@@ -1209,9 +1320,17 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                                                       "outfalls": publicize(st.get("monthly_outfalls") or [])})
 
     # modeled reaches: active events x segments, the stop markers, and every traced path for replay
-    reach_feats, path_feats = reach_features(st, by_event)
+    from build import reaches as reaches_mod
+    reach_cache = reaches_mod.load_reaches()
+    reach_feats, path_feats = reach_features(st, by_event, reach_cache)
     write_compact(OUT_DIR / "reaches.geojson", {"type": "FeatureCollection", "features": reach_feats})
     write_compact(OUT_DIR / "reach-paths.geojson", {"type": "FeatureCollection", "features": path_feats})
+    # the same features per state (out/reaches/<st>.geojson, index.json), for the map to load by state
+    by_state, no_state = reaches_by_state(reach_feats, path_feats, st, reach_cache, status_mod.states())
+    reach_index = write_reach_state_files(by_state, without_state=no_state)
+    if no_state:
+        print(f"export: {len(no_state)} reach(es) touch no live state and are only in the national files: "
+              f"{', '.join(no_state[:5])}{' ...' if len(no_state) > 5 else ''}")
 
     # history: only tracked waters (all are, by construction)
     hist_out = dict(hist)
@@ -1335,7 +1454,8 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         "reaches": {"traced_paths": len(path_feats), "with_events": len(st.get("reaches") or {}),
                     "active_events": len(st.get("reach_events_active") or []),
                     "segment_features": sum(1 for f in reach_feats if f["properties"]["feature"] == "segment"),
-                    "cut_reasons": dict(Counter(f["properties"]["cut_reason"] for f in path_feats))},
+                    "cut_reasons": dict(Counter(f["properties"]["cut_reason"] for f in path_feats)),
+                    "state_files": {e["state"]: e["features"] for e in reach_index["files"]}},
         "counts": {
             "waters": len(tracked), "waters_by_status": dict(totals),
             "waters_by_state": {s: dict(c) for s, c in sorted(by_state_status.items())},

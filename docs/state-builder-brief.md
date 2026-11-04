@@ -59,7 +59,9 @@ Read this whole file first. Then the files it names. You get no other context be
    shows the shape).
 3. **The register**: `data/notice-channels.json` rows per channel per operator or agency (law, permit,
    voluntary), validated by `cd pipeline && .venv/bin/python -m ingest.notification_pages --validate`; rows
-   sorted by (state, id); every CSO permittee named by a row or covered by a statewide row.
+   sorted by (state, id); every CSO permittee named by a row or covered by a statewide row. Once the register is
+   split (`--split`), a state's rows are in `data/notice-channels/<st>.json` (the same schema, sorted by id) and
+   `--validate` checks every file and the ids across them; add rows to your state's file only.
 4. **Rules**: `data/rules.json` `red.by_state.<ST>` (hours or null, clock, basis in public voice, source
    citation) and the state's law entries for the site (the `meta.states` block the export writes: find where
    `MD` is defined and add the state the same way).
