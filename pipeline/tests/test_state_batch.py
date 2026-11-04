@@ -8,6 +8,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import stat
+import tarfile
 import subprocess
 import sys
 from pathlib import Path
@@ -68,8 +69,10 @@ def test_plan_commands_for_north_carolina(capsys):
     ]
     assert B.run(p, dry_run=True) == 0
     out = capsys.readouterr().out.splitlines()
-    assert out == ["[waters] (cd pipeline && /py -m ingest.waters_from_nhd --state NC --budget-s 1500 --max-requests 1000)",
-                   "[ties] (cd pipeline && /py -m ingest.outfall_waters --state NC)"]
+    # the outlines' folder is named on the steps that measure against it (the restored openboatlaunch snapshot)
+    assert out == ["[waters] (cd pipeline && OBL_WATER_DIR=../../openboatlaunch/out/water /py -m ingest.waters_from_nhd "
+                   "--state NC --budget-s 1500 --max-requests 1000)",
+                   "[ties] (cd pipeline && OBL_WATER_DIR=../../openboatlaunch/out/water /py -m ingest.outfall_waters --state NC)"]
 
 
 def test_plan_cli_dry_run_runs_nothing(capsys):
@@ -364,7 +367,7 @@ def test_state_build_workflow():
     w = load("state-build.yml")
     assert set(w["on"]) == {"workflow_dispatch"}
     inputs = w["on"]["workflow_dispatch"]["inputs"]
-    assert set(inputs) == {"state", "steps", "budget_s", "max_requests"}
+    assert set(inputs) == {"state", "steps", "budget_s", "max_requests", "osm_budget"}
     assert inputs["state"]["required"] is True
     assert (inputs["steps"]["default"], inputs["budget_s"]["default"], inputs["max_requests"]["default"]) == \
         ("waters ties", "1500", "1000")
@@ -410,3 +413,194 @@ def test_publish_force_pushes_a_batch_branch_only(st, date):
         B.publish_cmds(st, date, Path("body.md"), ["data/waters-nhd.json"])
     c = B.publish_cmds("NC", "2026-11-04", Path("body.md"), ["data/waters-nhd.json"])
     assert c["commit"][-1] == ["git", "push", "--force", "origin", "HEAD:refs/heads/batch/nc-2026-11-04"]
+
+
+# ---------------------------------------------------------------- openboatlaunch in the batch: extract, osm, outlines
+
+OBL_REL = "../../openboatlaunch/out/water"          # the restored sibling, from pipeline/
+
+
+def test_steps_extract_and_osm_order():
+    assert B.parse_steps("ties osm extract waters obl-check") == ["extract", "obl-check", "waters", "osm", "ties"]
+    assert B.parse_steps("osm") == ["osm"]
+
+
+def test_plan_extract_osm_ties_with_the_restored_snapshot():
+    p = B.plan("nc", "extract obl-check osm ties", "1500", "1000", py=PY, osm_budget="1200")
+    assert [(c.step, c.cwd, c.argv, c.env) for c in p.cmds] == [
+        ("extract", "pipeline", [PY, "-m", "ingest.obl_waters", "--state", "NC", "--from", OBL_REL,
+                                 "--out", "../data/waters-nc.json"], {}),
+        ("obl-check", ".", [PY, "scripts/state_batch.py", "obl-check", "--state", "NC"], {}),
+        ("osm", "pipeline", [PY, "-m", "ingest.waters_from_nhd", "--state", "NC", "--budget-s", "1500",
+                             "--max-requests", "1000", "--osm-budget", "1200"], {"OBL_WATER_DIR": OBL_REL}),
+        ("ties", "pipeline", [PY, "-m", "ingest.outfall_waters", "--state", "NC"], {"OBL_WATER_DIR": OBL_REL}),
+    ]
+    assert p.osm_budget == 1200 and p.obl_dir == B.ROOT.parent / "openboatlaunch" / "out" / "water"
+
+
+def test_plan_waters_and_osm_run_as_one_build():
+    p = B.plan("FL", "waters osm", py=PY, osm_budget=600)
+    assert p.steps == ["waters", "osm"]
+    assert [(c.step, c.argv[-2:]) for c in p.cmds] == [("osm", ["--osm-budget", "600"])]
+    w = B.plan("FL", "waters", py=PY)
+    assert "--osm-budget" not in w.cmds[0].argv and w.cmds[0].env == {"OBL_WATER_DIR": OBL_REL}
+
+
+def test_plan_osm_budget_bounded():
+    for bad in ("0", "59", "1201", "x"):
+        with pytest.raises(B.Refused, match="osm_budget"):
+            B.plan("FL", "osm", py=PY, osm_budget=bad)
+
+
+def test_plan_given_obl_dir_is_absolute(tmp_path):
+    water = tmp_path / "out" / "water"
+    p = B.plan("NC", "extract ties", py=PY, obl_dir=str(water))
+    assert p.cmds[0].argv[p.cmds[0].argv.index("--from") + 1] == str(water.resolve())
+    assert p.cmds[1].env == {"OBL_WATER_DIR": str(water.resolve())}
+
+
+def test_plan_dry_run_shows_the_outline_path(capsys):
+    assert B.main(["plan", "--state", "NC", "--steps", "extract osm ties", "--osm-budget", "900"]) == 0
+    out = capsys.readouterr().out.splitlines()
+    assert out[0].startswith("[extract] (cd pipeline && ") and f"--from {OBL_REL} --out ../data/waters-nc.json" in out[0]
+    assert out[1].startswith(f"[osm] (cd pipeline && OBL_WATER_DIR={OBL_REL} ") and out[1].endswith("--osm-budget 900)")
+    assert out[2].endswith(f"OBL_WATER_DIR={OBL_REL} {B.pipeline_python()} -m ingest.outfall_waters --state NC)")
+
+
+def obl_fixture(tmp_path: Path, meta: bool = True) -> Path:
+    """Three fake openboatlaunch records (two in NC, one in GA) packed as the Mac packs them, restored as the workflow
+    restores them; returns <tmp>/openboatlaunch/out/water."""
+    sp_spec = importlib.util.spec_from_file_location("state_paths", ROOT / "scripts" / "state_paths.py")
+    SP = importlib.util.module_from_spec(sp_spec)
+    sys.modules["state_paths"] = SP
+    sp_spec.loader.exec_module(SP)
+    src = tmp_path / "mac" / "out"
+    (src / "water").mkdir(parents=True)
+    line = {"type": "LineString", "coordinates": [[-79.30, 35.90], [-79.20, 35.95], [-79.10, 36.00]]}
+    poly = {"type": "Polygon", "coordinates": [[[-78.70, 35.70], [-78.68, 35.70], [-78.68, 35.72], [-78.70, 35.70]]]}
+    for slug, name, kind, geom in (("haw-river-nc", "Haw River", "river", line),
+                                   ("lake-wheeler-nc", "Lake Wheeler", "lake", poly),
+                                   ("lake-lanier-ga", "Lake Lanier", "lake", poly)):
+        (src / "water" / f"{slug}.json").write_text(json.dumps({
+            "slug": slug, "name": name, "kind": kind, "state": slug[-2:].upper(), "towns": ["Example"],
+            "bbox": [-79.3, 35.7, -78.6, 36.0], "launches": [{"s": f"{slug}-ramp"}], "geometry": geom}))
+    if meta:
+        (src / "meta.json").write_text(json.dumps({"built": "2026-11-01T04:00:00Z"}))
+    tgz = tmp_path / "obl-water.tar.gz"
+    with tarfile.open(tgz, "w:gz") as tf:
+        tf.add(src / "water", arcname="water")
+        if meta:
+            tf.add(src / "meta.json", arcname="meta.json")
+    SP.unpack_obl(tgz, tmp_path / "openboatlaunch" / "out")
+    return tmp_path / "openboatlaunch" / "out" / "water"
+
+
+def test_extract_step_on_three_fake_records(tmp_path, monkeypatch):
+    root = repo(tmp_path)                                   # <tmp>/repo: its sibling is <tmp>/openboatlaunch
+    water = obl_fixture(tmp_path)
+    (root / "pipeline").mkdir()                             # the steps run from pipeline/; the code comes from here
+    monkeypatch.setenv("PYTHONPATH", str(ROOT / "pipeline"))
+    p = B.plan("NC", "extract obl-check", py=sys.executable, root=root)
+    assert p.obl_dir == water.parent.parent.parent / "openboatlaunch" / "out" / "water"
+    assert B.run(p, tmp_path / "out", root=root) == 0
+    d = json.loads((root / "data/waters-nc.json").read_text())
+    assert d["count"] == 2 and [w["slug"] for w in d["waters"]] == ["haw-river-nc", "lake-wheeler-nc"]
+    assert d["source"] == "openboatlaunch out/water snapshot 2026-11-01"
+    assert d["waters"][0]["launches"] == ["haw-river-nc-ramp"] and "geometry" not in d["waters"][0]
+    s = json.loads((tmp_path / "out" / "summary.json").read_text())
+    assert s["files"] == ["data/waters-nc.json"]
+    assert s["results"][0]["counts"][0].startswith("obl_waters: 2 NC waters")
+    assert "2 records (openboatlaunch out/water snapshot 2026-11-01)" in s["results"][1]["counts"][0]
+    assert "data/waters-nc.json" in B.candidate_files("NC")
+
+
+def test_ties_read_the_restored_outlines(tmp_path):
+    """build/status.py water_geometry (what ingest.outfall_waters and ingest.waters_from_nhd measure against) reads
+    the outline from OBL_WATER_DIR, the path the batch sets on its steps."""
+    import os
+    water = obl_fixture(tmp_path)
+    code = ("from build import status as S;g=S.water_geometry('haw-river-nc');"
+            "print(S.OBL_WATER_DIR, g.geom_type if g is not None else None)")
+    py = str(ROOT / "pipeline/.venv/bin/python") if (ROOT / "pipeline/.venv").exists() else sys.executable
+    base = {k: v for k, v in os.environ.items() if k != "OBL_WATER_DIR"}
+    r = subprocess.run([py, "-c", code], cwd=ROOT / "pipeline", text=True, capture_output=True,
+                       env={**base, "OBL_WATER_DIR": str(water)})
+    assert r.stdout.strip() == f"{water} LineString", r.stderr
+    r = subprocess.run([py, "-c", code], cwd=ROOT / "pipeline", text=True, capture_output=True, env=base)
+    assert r.stdout.strip().startswith(str(ROOT.parent / "openboatlaunch" / "out" / "water")), r.stderr
+
+
+@pytest.mark.parametrize("meta", [False, None])
+def test_extract_refuses_without_the_snapshot_or_its_date(tmp_path, meta, capsys):
+    root = repo(tmp_path)
+    if meta is False:
+        obl_fixture(tmp_path, meta=False)
+    p = B.plan("NC", "extract ties", py=sys.executable, root=root)
+    p.cmds[1] = B.Cmd("ties", fake_step("print('never')"))
+    assert B.run(p, tmp_path / "out", root=root) == 1
+    s = json.loads((tmp_path / "out" / "summary.json").read_text())
+    assert s["not_run"] == ["ties"]
+    msg = s["results"][0]["counts"][0]
+    assert ("no snapshot date" in msg) if meta is False else ("state/obl-water.tar.gz" in msg)
+    assert "never" not in capsys.readouterr().out
+    assert json.loads((root / "data/waters-nc.json").read_text())["source"].endswith("2026-11-02")   # untouched
+
+
+def test_osm_counts_reach_the_summary_and_body(tmp_path):
+    root = repo(tmp_path)
+    change = ("import json,pathlib;p=pathlib.Path('data/waters-nhd.json');d=json.loads(p.read_text());"
+              "d.setdefault('stats',{})['state_builds']={'FL':{'built':'2999-01-01T00:00:00Z','targets':3,"
+              "'run':{'network_requests':2,'stopped':None,'osm':{'by_state':{'FL':{'targets':40,'queries':3,'sent':2,"
+              "'failed':'time budget of 1200 s used','via':['x']}},'left_for_next_run':11}}}};p.write_text(json.dumps(d));"
+              "print('state build FL: {}');print('  FL: 40 names, 30 asked in 3 queries; stopped after 2 (time budget)')")
+    write(root, "data/receiving-waters-national.json", {"states": {"FL": {"waters": []}}})
+    p = B.Plan("FL", ["osm"], 60, 7, [B.Cmd("osm", fake_step(change))], osm_budget=1200)
+    assert B.run(p, tmp_path / "out", root=root) == 0
+    s = json.loads((tmp_path / "out" / "summary.json").read_text())
+    assert s["osm_budget"] == 1200
+    assert s["results"][0]["counts"] == ["state build FL: {}",
+                                         "  FL: 40 names, 30 asked in 3 queries; stopped after 2 (time budget)"]
+    assert s["counts"]["waters"]["osm"]["left_for_next_run"] == 11
+    body = (tmp_path / "out" / "pr-body.md").read_text()
+    assert "OpenStreetMap budget 1200 s" in body
+    assert "- OpenStreetMap pass: 2 of 3 queries answered; 11 names left for the next run" in body
+
+
+def test_state_stats_carry_the_osm_pass():
+    from types import SimpleNamespace
+    from ingest import waters_from_nhd as N
+    http = SimpleNamespace(fetched={}, requests=0, cached={}, failed={})
+    run = SimpleNamespace(skipped_reason={}, stopped=None, place_stats={}, osm_remaining=["FL: Tampa Bay"],
+                          osm_states={"FL": {"targets": 1, "queries": 1, "sent": 0, "failed": "x", "via": []}})
+    out = N.state_stats(["FL"], [], [], [], {}, http, run)
+    assert out["FL"]["run"]["osm"] == {"by_state": run.osm_states, "left_for_next_run": 1}
+
+
+def test_state_build_workflow_restores_the_openboatlaunch_object():
+    w = load("state-build.yml")
+    inputs = w["on"]["workflow_dispatch"]["inputs"]
+    assert inputs["osm_budget"]["default"] == "1200"
+    assert "extract" in inputs["steps"]["description"] and "osm" in inputs["steps"]["description"]
+    job = next(iter(w["jobs"].values()))
+    assert job["env"]["OSM_BUDGET"] == "${{ inputs.osm_budget }}"
+    names = [s.get("name", "") for s in job["steps"]]
+    ro = next(i for i, n in enumerate(names) if n.startswith("Restore openboatlaunch"))
+    run = next(i for i, n in enumerate(names) if n.startswith("Run the steps"))
+    assert names.index("Restore pipeline state from R2 (read only here)") < ro < run
+    assert "state_paths.py unpack-obl obl-water.tar.gz" in job["steps"][ro]["run"]
+    for s in job["steps"]:
+        if s.get("run") and "state_batch.py" in s["run"] and ("plan" in s["run"] or " run " in s["run"]):
+            assert '--osm-budget "$OSM_BUDGET"' in s["run"]
+    text = (ROOT / ".github/workflows/state-build.yml").read_text()
+    assert "object put dirtywaterwatch-data/state/obl-water.tar.gz" not in text      # restored only, never saved
+    assert "object put dirtywaterwatch-data/state/obl-water.tar.gz" not in (ROOT / ".github/workflows/refresh.yml").read_text()
+
+
+def test_extract_never_overwrites_a_regional_water_file(tmp_path):
+    root = repo(tmp_path)
+    write(root, "data/receiving-waters-national.json", {"states": {"NE": {"waters": []}, "NC": {"waters": []}}})
+    write(root, "data/waters-ne.json", {"source": "New England", "count": 0, "waters": []})
+    with pytest.raises(B.Refused, match="New England"):
+        B.plan("NE", "extract", py=PY, root=root)
+    assert B.plan("NE", "waters", py=PY, root=root).cmds                 # the other steps are not affected
+    assert B.plan("NC", "extract", py=PY, root=root).cmds[0].step == "extract"   # NC's own extract is replaced

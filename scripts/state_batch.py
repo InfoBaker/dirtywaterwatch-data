@@ -4,6 +4,7 @@ build a state's water records and tie its outfalls to them, run by .github/workf
 the pull request that carries the changed registry files to a person for review.
 
     python scripts/state_batch.py plan    --state NC [--steps "waters ties"] [--budget-s 1500] [--max-requests 1000]
+                                          [--osm-budget 1200] [--obl-dir DIR]
                                           print the commands the steps run, in order, and nothing else (a dry run)
     python scripts/state_batch.py run     (the same options) [--dry-run] [--out DIR]
                                           run them; each step's output is shown and kept in DIR/<step>.log (default
@@ -22,6 +23,14 @@ the pull request that carries the changed registry files to a person for review.
                                           the caches each time) and open the pull request, or update the open one
 
 Steps (--steps, space- or comma-separated; run in this order whatever order they are given in):
+  extract    python -m ingest.obl_waters --state <ST> --from <obl-dir> --out ../data/waters-<st>.json (from pipeline/):
+             the state's openboatlaunch water records from the snapshot the workflows restore from R2
+             (state/obl-water.tar.gz, scripts/state_paths.py unpack-obl, into ../openboatlaunch/out beside the
+             checkout); the snapshot date comes from its out/meta.json. Refused at run time, before anything is
+             written, when the folder is not there (the object is not in R2 yet) or meta.json gives no date (a source
+             line is never written with an unknown date). data/waters-<st>.json is then one of the pull request's
+             files. data/receiving-waters-national.json is not regenerated here (obl-check says when it predates the
+             extract).
   obl-check  the state's openboatlaunch extract (data/waters-<st>.json, ingest/obl_waters.py) is on file, and the
              national target list's 'record' rows find their slugs; fails when the extract is missing (the NHD pass
              would build records openboatlaunch already has). Reads files only.
@@ -34,8 +43,18 @@ Steps (--steps, space- or comma-separated; run in this order whatever order they
              receiving waters from data/receiving-waters-national.json; stops before a request at the budget, writes
              what it built, and the next run resumes from the raw cache (its own OSM, other-places and NHD
              high-resolution budgets come on top of S).
+  osm        the waters step with OpenStreetMap's pass given --osm-budget seconds (60 to 1200, default 1200) instead
+             of the module's 180: python -m ingest.waters_from_nhd --state <ST> ... --osm-budget O. With `waters`
+             listed too they run as this one command. The OSM pass runs once the NHD pass has finished inside its
+             budget (a resumed run answers from the raw cache, free); the Overpass answers are cached per state query
+             (data/raw/nhd-waters/osm-state/, in the saved raw caches), so the names a run did not reach are asked by
+             the next dispatch. Overpass answers GitHub's runners; the cloud sessions cannot reach it.
   ties       python -m ingest.outfall_waters --state <ST>: every outfall row of the state tied to its record or a
              stated reason (counts in data/build/outfall-waters-<st>.json).
+The NHD, OSM and tie steps run with OBL_WATER_DIR set to the openboatlaunch out/water folder (--obl-dir, else
+OBL_WATER_DIR, else the restored ../openboatlaunch/out/water): build/status.py water_geometry reads each record's
+outline there, which ingest.outfall_waters measures a point against and ingest.waters_from_nhd checks a duplicate
+with; without it those rows are held "until a run with the record's outline".
 Refused: reaches (build/reaches.py has no state scope: it traces the open outfalls of the live states, and the hourly
 refresh already does so within its budget; a state batch needs a --state option there first).
 
@@ -58,7 +77,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-STEPS = ("obl-check", "registry", "waters", "ties")          # the run order
+STEPS = ("extract", "obl-check", "registry", "waters", "osm", "ties")          # the run order
 DEFAULT_STEPS = ("waters", "ties")
 REFUSED = {
     "reaches": "build/reaches.py has no state scope (it traces the open outfalls of the live states, and the hourly "
@@ -66,6 +85,9 @@ REFUSED = {
 }
 BUDGET_S = (60, 3_600)
 MAX_REQUESTS = (1, 20_000)
+OSM_BUDGET = (60, 1_200)
+DEFAULT_OSM_BUDGET = 1_200
+OBL_KEY = "state/obl-water.tar.gz"
 REGIONAL_FILES = ("outfalls-ne.json", "outfalls-mid-atlantic.json")
 CSO_ZIP_URL = "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"
 LINE_MAX = 400               # a printed count line kept in the summary, at most this long
@@ -77,7 +99,9 @@ COUNT_LINES = {
     "waters": re.compile(r"^(state build |EPA reach index:|\d+ records -> |NOT WRITTEN|NHD pass done|unknown state code|"
                          r"targets collected|stopped)"),
     "ties": re.compile(r"^([A-Z]{2}|ALL): |^written: "),
+    "extract": re.compile(r"^obl_waters: "),
 }
+COUNT_LINES["osm"] = re.compile(COUNT_LINES["waters"].pattern + r"|^\s+[A-Z]{2}: \d+ names")
 
 
 class Refused(ValueError):
@@ -179,18 +203,42 @@ class Plan:
     budget_s: int
     max_requests: int
     cmds: list[Cmd]
+    osm_budget: int = DEFAULT_OSM_BUDGET
+    obl_dir: Path | None = None          # openboatlaunch's out/water folder the steps read
+
+
+def obl_water_dir(obl_dir=None, root: Path = ROOT) -> tuple[Path, str]:
+    """(the out/water folder, how the pipeline/ steps name it): --obl-dir, else OBL_WATER_DIR, else the sibling
+    ../openboatlaunch/out/water the workflows restore state/obl-water.tar.gz into (named relative to pipeline/, so
+    no machine's path is printed into a log or a pull request)."""
+    given = obl_dir or os.environ.get("OBL_WATER_DIR")
+    if given:
+        p = Path(given).resolve()
+        return p, str(p)
+    return root.parent / "openboatlaunch" / "out" / "water", "../../openboatlaunch/out/water"
 
 
 def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=None, py=None,
-         root: Path = ROOT) -> Plan:
+         root: Path = ROOT, osm_budget=DEFAULT_OSM_BUDGET) -> Plan:
     st = valid_state(state, root)
     steps = parse_steps(steps)
     budget = bounded("budget_s", budget_s, BUDGET_S)
     maxreq = bounded("max_requests", max_requests, MAX_REQUESTS)
+    osm = bounded("osm_budget", osm_budget, OSM_BUDGET)
     py = py or pipeline_python(root)
+    water, water_arg = obl_water_dir(obl_dir, root)
+    outlines = {"OBL_WATER_DIR": water_arg}
     cmds: list[Cmd] = []
     for s in steps:
-        if s == "obl-check":
+        if s == "extract":
+            have = read_json(root / "data" / f"waters-{st.lower()}.json")
+            if have is not None and not (isinstance(have, dict) and str(have.get("state") or "").upper() == st):
+                raise Refused(f"extract: data/waters-{st.lower()}.json is another file (not {st}'s openboatlaunch "
+                              "extract: data/waters-ne.json is New England's regional records), which the extract "
+                              "would overwrite; that state's extract needs another file name first")
+            cmds.append(Cmd(s, [py, "-m", "ingest.obl_waters", "--state", st, "--from", water_arg,
+                                "--out", f"../data/waters-{st.lower()}.json"], cwd="pipeline"))
+        elif s == "obl-check":
             cmds.append(Cmd(s, [py, "scripts/state_batch.py", "obl-check", "--state", st]))
         elif s == "registry":
             cso_csv = cso_csv or os.environ.get("DWW_CSO_CSV")
@@ -201,8 +249,8 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
             if not obl_dir or not Path(obl_dir).is_dir():
                 missing.append("an openboatlaunch out/water snapshot (--obl-dir or OBL_WATER_DIR)")
             if missing:
-                raise Refused("registry needs " + " and ".join(missing) + "; the Actions runner has neither, so run "
-                              "this step where they are and dispatch the others")
+                raise Refused("registry needs " + " and ".join(missing) + "; the Actions runner has no CSO inventory, "
+                              "so run this step where it is and dispatch the others")
             if st in regional_states(root):
                 raise Refused(f"registry: {st}'s rows are in the regional files ({', '.join(REGIONAL_FILES)}), which "
                               "the national match never writes")
@@ -211,12 +259,35 @@ def plan(state, steps, budget_s=1500, max_requests=1000, cso_csv=None, obl_dir=N
                                 "data/outfalls-us.json", "--national", "--append"], env=env))
             cmds.append(Cmd(s, [py, "-I", "scripts/match_outfalls.py", "data/outfalls-plants-us.json", str(obl_dir),
                                 "data/outfalls-plants-us.json", "--plants"], env=dict(env)))
-        elif s == "waters":
+        elif s == "waters" and "osm" not in steps:        # with osm: one build, the osm step's command
             cmds.append(Cmd(s, [py, "-m", "ingest.waters_from_nhd", "--state", st, "--budget-s", str(budget),
-                                "--max-requests", str(maxreq)], cwd="pipeline"))
+                                "--max-requests", str(maxreq)], cwd="pipeline", env=dict(outlines)))
+        elif s == "osm":
+            cmds.append(Cmd(s, [py, "-m", "ingest.waters_from_nhd", "--state", st, "--budget-s", str(budget),
+                                "--max-requests", str(maxreq), "--osm-budget", str(osm)], cwd="pipeline",
+                            env=dict(outlines)))
         elif s == "ties":
-            cmds.append(Cmd(s, [py, "-m", "ingest.outfall_waters", "--state", st], cwd="pipeline"))
-    return Plan(st, steps, budget, maxreq, cmds)
+            cmds.append(Cmd(s, [py, "-m", "ingest.outfall_waters", "--state", st], cwd="pipeline", env=dict(outlines)))
+    return Plan(st, steps, budget, maxreq, cmds, osm, water)
+
+
+def extract_ready(obl_dir: Path | None) -> tuple[bool, str]:
+    """Whether the extract step can run: the snapshot folder is here and its out/meta.json gives a date."""
+    if obl_dir is None or not Path(obl_dir).is_dir():
+        return False, ("extract: no openboatlaunch snapshot (out/water) beside the checkout or at --obl-dir: "
+                       f"{OBL_KEY} is not in R2 (or was not restored). Upload it once from a "
+                       "machine with the openboatlaunch checkout (the command is in README.md, the batch section), "
+                       "then dispatch again")
+    try:
+        m = json.loads((Path(obl_dir).parent / "meta.json").read_text())
+        date = str(m.get("built") or m.get("generated") or m.get("updated") or "")[:10]
+    except (OSError, ValueError, AttributeError):
+        date = ""
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
+        return False, ("extract: the openboatlaunch snapshot has no snapshot date (out/meta.json missing or without "
+                       f"built, generated or updated): the source line would be undated; pack {OBL_KEY} again with "
+                       "meta.json")
+    return True, ""
 
 
 # ---------------------------------------------------------------- obl-check
@@ -241,9 +312,9 @@ def obl_check(state: str, root: Path = ROOT) -> tuple[bool, list[str]]:
     ext = root / "data" / f"waters-{st.lower()}.json"
     d = read_json(ext)
     if not isinstance(d, dict) or not isinstance(d.get("waters"), list):
-        lines.append(f"{st}: no openboatlaunch extract at data/waters-{st.lower()}.json. On a machine with an "
-                     f"openboatlaunch snapshot: cd pipeline && python -m ingest.obl_waters --state {st} --from "
-                     "<openboatlaunch>/out/water, then python3 -I scripts/gen_receiving_waters.py; then the NHD pass")
+        lines.append(f"{st}: no openboatlaunch extract at data/waters-{st.lower()}.json. Add the extract step "
+                     f"before this one (python -m ingest.obl_waters --state {st} --from the snapshot restored from "
+                     f"{OBL_KEY}), then python3 -I scripts/gen_receiving_waters.py; then the NHD pass")
         return False, lines
     n = len(d["waters"])
     lines.append(f"{st}: openboatlaunch extract data/waters-{st.lower()}.json: {n} records ({d.get('source') or 'no source line'})")
@@ -299,6 +370,8 @@ def state_counts(st: str, since: str, root: Path = ROOT) -> dict:
                                                 "targets_failed", "records", "records_by_kind", "failed_reasons")}
         out["waters"]["network_requests"] = run.get("network_requests")
         out["waters"]["stopped"] = run.get("stopped")
+        if run.get("osm"):
+            out["waters"]["osm"] = run["osm"]
     t = read_json(root / "data" / "build" / f"outfall-waters-{st.lower()}.json", {}) or {}
     if str(t.get("built") or "") >= since and (t.get("counts") or {}).get(st):
         out["ties"] = {"counts": t["counts"][st], "files_written": t.get("files_written") or []}
@@ -351,21 +424,27 @@ def run(p: Plan, out_dir: Path | None = None, dry_run: bool = False, root: Path 
     for i, c in enumerate(p.cmds, 1):
         say(f"step {c.step} ({i}/{len(p.cmds)}): {c.shown()}")
         t0 = time.monotonic()
+        refused = None
         if c.step == "obl-check":
             ok, lines = obl_check(p.state, root)        # in process: the same code the command line runs
             for x in lines:
                 print(x, flush=True)
             (out_dir / f"{c.step}.log").write_text("\n".join(lines) + "\n")
             rc = 0 if ok else 1
+        elif c.step == "extract" and not (ready := extract_ready(p.obl_dir))[0]:
+            print(f"::error::{ready[1]}", flush=True)
+            (out_dir / f"{c.step}.log").write_text(ready[1] + "\n")
+            rc, lines, refused = 1, [ready[1]], [ready[1]]
         else:
             rc, lines = _stream(c, root, out_dir / f"{c.step}{'-' + str(i) if c.step == 'registry' else ''}.log")
         results.append({"step": c.step, "command": c.shown(), "exit": rc, "seconds": round(time.monotonic() - t0),
-                        "counts": count_lines(c.step, lines)})
+                        "counts": refused or count_lines(c.step, lines)})
         if rc != 0:
             say(f"step {c.step} failed (exit {rc}); the steps after it are not run")
             break
     ok = len(results) == len(p.cmds) and all(r["exit"] == 0 for r in results)
     summary = {"state": p.state, "steps": p.steps, "budget_s": p.budget_s, "max_requests": p.max_requests,
+               "osm_budget": p.osm_budget if "osm" in p.steps else None,
                "started": started, "finished": now_iso(), "ok": ok, "results": results,
                "not_run": [c.step for c in p.cmds[len(results):]], "counts": state_counts(p.state, started, root),
                "before_after": before_after(p.state, root), "files": changed_files(p.state, root)}
@@ -409,6 +488,7 @@ def pr_body(s: dict) -> str:
     out = [f"## {title(st, s['started'][:10])}", "",
            f"The per-state water batch (`.github/workflows/state-build.yml`{f', [run]({run_url})' if run_url else ''}): "
            f"steps `{' '.join(s['steps'])}`, budget {s['budget_s']} s, at most {s['max_requests']} requests, "
+           + (f"OpenStreetMap budget {s['osm_budget']} s, " if s.get("osm_budget") else "") +
            f"{s['started']} to {s['finished']}. "
            + ("The pipeline state and the raw caches were restored from R2 and the caches saved back, so the next "
               "dispatch resumes where this one stopped." if os.environ.get("GITHUB_ACTIONS") == "true" else
@@ -432,6 +512,12 @@ def pr_body(s: dict) -> str:
                 f"{w.get('targets_failed')}",
                 f"- Records built: {w.get('records')} ({_fmt(w.get('records_by_kind'))})",
                 f"- Network requests: {w.get('network_requests')}"]
+        osm = w.get("osm") or {}
+        if osm.get("by_state"):
+            q = sum(int(v.get("queries") or 0) for v in osm["by_state"].values())
+            sent = sum(int(v.get("sent") or 0) for v in osm["by_state"].values())
+            out.append(f"- OpenStreetMap pass: {sent} of {q} queries answered; {osm.get('left_for_next_run') or 0} "
+                       "names left for the next run")
         if w.get("stopped"):
             out.append(f"- Stopped at the budget: {w['stopped']}. Dispatch again with the same state to go on.")
         if w.get("failed_reasons"):
@@ -457,8 +543,8 @@ def pr_body(s: dict) -> str:
 
 def candidate_files(st: str) -> list[str]:
     s = st.lower()
-    return ["data/waters-nhd.json", "data/outfalls-us.json", "data/outfalls-plants-us.json", f"data/outfalls-{s}.json",
-            f"research/{s}/receiving-waters-missing.json"]
+    return [f"data/waters-{s}.json", "data/waters-nhd.json", "data/outfalls-us.json", "data/outfalls-plants-us.json",
+            f"data/outfalls-{s}.json", f"research/{s}/receiving-waters-missing.json"]
 
 
 def git(root: Path, *args, check=True, capture=True) -> subprocess.CompletedProcess:
@@ -636,8 +722,10 @@ def main(argv=None) -> int:
         s.add_argument("--steps", default=" ".join(DEFAULT_STEPS))
         s.add_argument("--budget-s", default="1500")
         s.add_argument("--max-requests", default="1000")
+        s.add_argument("--osm-budget", default=str(DEFAULT_OSM_BUDGET))
         s.add_argument("--cso-csv")
-        s.add_argument("--obl-dir")
+        s.add_argument("--obl-dir", help="openboatlaunch's out/water (default OBL_WATER_DIR, else the restored "
+                                         "../openboatlaunch/out/water)")
         if name == "run":
             s.add_argument("--dry-run", action="store_true", help="print the commands, run nothing")
             s.add_argument("--out")
@@ -657,7 +745,7 @@ def main(argv=None) -> int:
     a = ap.parse_args(argv)
     try:
         if a.cmd in ("plan", "run"):
-            p = plan(a.state, a.steps, a.budget_s, a.max_requests, a.cso_csv, a.obl_dir)
+            p = plan(a.state, a.steps, a.budget_s, a.max_requests, a.cso_csv, a.obl_dir, osm_budget=a.osm_budget)
             if a.cmd == "plan":
                 return run(p, dry_run=True)
             return run(p, Path(a.out) if a.out else None, dry_run=a.dry_run)
