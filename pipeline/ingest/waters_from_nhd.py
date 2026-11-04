@@ -4,6 +4,8 @@
                                      [--osm-max N] [--osm-only] [--rebuild] [--budget-s S] [--max-requests N]
     python -m ingest.waters_from_nhd --state XX [--state YY ...] [--budget-s S] [--max-requests N] [--targets-only]
     python -m ingest.waters_from_nhd --state XX [--state YY ...] --tidy     (offline; tidy_main)
+    python -m ingest.waters_from_nhd --names research/<st>/receiving-waters-missing.json --state XX [--add-places]
+                                     [--budget-s S] [--max-requests N] [--targets-only]
 
 A state build (--state, 2026-11-04; docs/national-waters.md in the site repository): a state's records are built
 before it goes live, from data/receiving-waters-national.json (scripts/gen_receiving_waters.py: one row per receiving
@@ -34,6 +36,26 @@ of the same waters are dropped for openboatlaunch's (the public record) and the 
 openboatlaunch slug take a town slug (resolve_existing_duplicates; with no out/water outline on this machine the
 record's bounding box decides, same_water_by_box); target rows' reasons are put in public voice, the tool's detail kept
 in reason_detail (public_reasons); 'Unnamed stream' records are named for their town (name_unnamed_streams).
+
+Report names (--names FILE --state XX, 2026-11-04): the receiving-water names a state's reports give that the national
+list does not hold (research/<st>/receiving-waters-missing.json) as targets, one per water name, most reports first,
+with the points and towns the file gives (--add-places, nothing fetched, first writes them into the file from the
+state's reports in data/build/events: the points the reports carry and their town fields, and the towns of the
+operators they name). A text that names no public water (a storm-sewer system or MS4, a catch basin or treatment
+works, private property, the open sea, a street, an unnamed or unknown stream, a river basin, a county) gets that
+reason and never a record (report_name_parts); a tributary of a named water gives the named water. A name the status
+resolver already places on a record maps to it, nothing built. The others take the name pass (report_name_choices):
+the NHDPlus V2.1 features of that GNIS name in the state (asked thirty spellings to a query, prefetch_names), the one
+nearest each place the reports give (each cluster of points within 2 km; each town within 3 km when no point finds the
+name), so every place
+of a name gets its own record; with no place, a name found once in the state. A feature already a record in this file
+maps to it; a feature openboatlaunch already holds maps to that record (new_record: the outline, else the bounding box
+and towns of the tidy, same_water_by_box). A name NHDPlus V2.1 does not carry, or carries only away from the reports'
+places, then takes the NHD high-resolution flowlines of the name near the points or towns, then the OSM fallback when
+Overpass answers. Rows carry from: "reports" and their report count, are merged among the
+state's report rows only (the state build's rows stay exactly), and the run's statistics go under
+stats.state_builds.<ST>.report_names. FILE is rewritten to the names still without a record, each with its reason
+(rows), the names a record now holds in `resolved` (with the slugs), so the next run resumes with what is left.
 
 Budgets: --max-requests (network requests; cached answers are free) and --budget-s (seconds) stop the run before a
 request, never inside one (BudgetExhausted); the targets not reached say so, what was built is written (merged, never
@@ -131,6 +153,7 @@ import sys
 import time
 import zipfile
 from collections import Counter, defaultdict
+from pathlib import Path
 from urllib.parse import urlencode
 
 import numpy as np
@@ -389,7 +412,14 @@ def sql_names(t: dict) -> list[str]:
         else:
             joined.append(w)
     out.add(" ".join(joined).upper())
-    if t.get("define_by"):          # a state build: the inverted GNIS form too ('APOPKA, LAKE' for Lake Apopka)
+    if t.get("report_name"):        # a report's spelling: without 'of', without a possessive, 'Wills Branch Creek' as
+        for x in list(out):         # 'WILLS BRANCH', the Intracoastal Waterway under GNIS's two names
+            y = re.sub(r"\b(OF|THE)\b\s*", "", x).strip()
+            out.update({y, re.sub(r"'S\b", "S", y), re.sub(r"'S\b", "", y), re.sub(r"\bBRANCH CREEK$", "BRANCH", y)})
+            if re.fullmatch(r"(INTRACOASTAL WATERWAY|INTRACOASTAL)", y):
+                out.update({"ATLANTIC INTRACOASTAL WATERWAY", "GULF INTRACOASTAL WATERWAY"})
+    if t.get("define_by") or t.get("report_name"):
+        # a state build or a report name: the inverted GNIS form too ('APOPKA, LAKE' for Lake Apopka)
         for x in list(out):
             first, _, rest = x.partition(" ")
             if rest and first.lower() in INVERTED_LEAD:
@@ -1670,13 +1700,32 @@ def TOWNS_FROM(state: str) -> str:
             else "Census 2020 county subdivisions crossed (TIGERweb)")
 
 
-def same_named_existing(existing: dict, state: str, name: str) -> list[str]:
+INVERTIBLE_KIND = ("lake", "bayou")
+
+
+def name_forms(name: str) -> set[str]:
+    """A water's name normalised (status.norm_name), with the lake or bayou word on the other side as well: GNIS's
+    'Lawne Lake' is openboatlaunch's 'Lake Lawne' (2026-11-04 review: a report-name record duplicated it)."""
     n = S.norm_name(name or "")
+    out = {n} if n else set()
+    m = re.fullmatch(rf"({'|'.join(INVERTIBLE_KIND)}) (.+)", n)
+    if m:
+        out.add(f"{m.group(2)} {m.group(1)}")
+    m = re.fullmatch(rf"(.+) ({'|'.join(INVERTIBLE_KIND)})", n)
+    if m:
+        out.add(f"{m.group(2)} {m.group(1)}")
+    return out
+
+
+def same_named_existing(existing: dict, state: str, name: str) -> list[str]:
+    """The existing records of the state that carry the name (their name or an alias, spelling aside, the lake or
+    bayou word on either side: name_forms); the geometry then decides whether one is the same water."""
+    forms = name_forms(name)
     out = []
     for slug, w in existing.items():
         if w.get("state") != state:
             continue
-        if S.norm_name(w.get("name") or "") == n or n in {S.norm_name(a) for a in w.get("aliases") or []}:
+        if ({S.norm_name(w.get("name") or "")} | {S.norm_name(a) for a in w.get("aliases") or []}) & forms:
             out.append(slug)
     return out
 
@@ -1942,6 +1991,20 @@ def previous_rows(path=None) -> list[tuple]:
     return out
 
 
+def slug_towns(r: dict) -> list[str]:
+    """The towns a record's slug may take, in order: the towns of the report points near it (most reports first), the
+    listed towns (operators' or reports' towns, no weight) that the record reaches, the towns it crosses, then the
+    other listed towns. A listed town comes from the whole target, which may name the water in several places
+    (2026-11-04 review: 'brier-creek-charlotte-nc' was the Brier Creek at Raleigh, as the reports' first town was
+    Charlotte's)."""
+    weighted = [x for x, n in r["_slug_towns"].most_common() if n]
+    listed = [x for x, n in r["_slug_towns"].items() if not n]
+    along = list(r.get("towns") or [])
+    keys = {town_key(x) for x in along}
+    reached = [x for x in listed if town_key(x) in keys]
+    return list(dict.fromkeys(weighted + reached + along + listed))
+
+
 def assign_slugs(recs: list[dict], existing: dict, previous: dict | None = None, kept: list | None = None) -> None:
     """Slugs: <name>-<st> for the record of a name with the most reports, <name>-<town>-<st> for the others
     and when the name is already a record of the state. previous ({water_identity: slug}, previous_slugs()):
@@ -1986,7 +2049,7 @@ def assign_slugs(recs: list[dict], existing: dict, previous: dict | None = None,
             if r is first and not exists and base not in taken:
                 slug = base
             else:
-                for tw in [x for x, _ in r["_slug_towns"].most_common()] + list(r["towns"]):
+                for tw in slug_towns(r):
                     s = f"{slugify(r['name'])}-{slugify(tw)}-{state.lower()}"
                     if s not in taken:
                         slug = s
@@ -2122,6 +2185,8 @@ def merge_waters(old: list[dict], new: list[dict]) -> list[dict]:
 
 def target_key(row: dict) -> tuple:
     """A target row's identity in the file: state and name; a site (no name) by its first text."""
+    if row.get("from") == "reports":      # a report name's row (--names) never stands for the national list's row
+        return (row.get("state"), row.get("name"), "reports")
     if row.get("name"):
         return (row.get("state"), row["name"])
     return (row.get("state"), None, (row.get("texts") or [""])[0])
@@ -2143,11 +2208,14 @@ def merge_targets(old: list[dict], new: list[dict]) -> list[dict]:
     return list(by_key.values())
 
 
-def merge_targets_scoped(old: list[dict], new: list[dict], scope) -> list[dict]:
+def merge_targets_scoped(old: list[dict], new: list[dict], scope, rows_from=None) -> list[dict]:
     """A state build's target rows: the file's rows of every other state exactly as they are (site rows of the same
-    text included), the scope states' rows merged with this run's over them (merge_targets)."""
-    keep = [r for r in old if r.get("state") not in scope]
-    return keep + merge_targets([r for r in old if r.get("state") in scope], new)
+    text included), the scope states' rows merged with this run's over them (merge_targets). rows_from ('reports', a
+    --names run): only the scope states' rows of that origin are merged; the state build's own rows stay exactly."""
+    def mine(r):
+        return r.get("state") in scope and (rows_from is None or r.get("from") == rows_from)
+    keep = [r for r in old if not mine(r)]
+    return keep + merge_targets([r for r in old if mine(r)], new)
 
 
 def describe_write(info: dict) -> str:
@@ -2160,7 +2228,7 @@ def describe_write(info: dict) -> str:
 
 
 def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None, keep=(),
-                 final: bool = False, rebuild: bool = False, scope_states=None) -> dict:
+                 final: bool = False, rebuild: bool = False, scope_states=None, rows_from=None) -> dict:
     """Write OUT, merged into the file on disk (merge_waters, merge_targets when partial): a checkpoint
     (final=False) or a partial final write (--limit) never drops a record. The final write of a full run
     (final=True) with fewer records than the file holds still merges (nothing is dropped) and notes it in
@@ -2169,7 +2237,9 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
     keep: rows already in public form (an --osm-only run keeps the last full run's records).
     scope_states: a state build (--state): the run covers only these states, so the file's target rows, skipped texts and
     problems of every other state stay (this run's rows over them), the file's partial flag and statistics stay, and
-    stats (when final) is this run's statistics per state, written under stats.state_builds.<ST>."""
+    stats (when final) is this run's statistics per state, written under stats.state_builds.<ST>.
+    rows_from ('reports': a --names run, with scope_states): only the state's report-name rows are merged (the state
+    build's rows stay exactly) and the statistics go under stats.state_builds.<ST>.report_names, the rest kept."""
     done = [r for r in recs if r.get("slug")]
     run_rows = list(keep) + [public_record(r) for r in done]
     try:
@@ -2210,6 +2280,9 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
         builds = dict((prev.get("stats") or {}).get("state_builds") or {})
         if final:
             for st, v in (stats or {}).items():
+                if rows_from:
+                    builds[st] = {**(builds.get(st) or {}), "report_names": {**v, "write": info}}
+                    continue
                 # the tidy's log (--tidy: records dropped or renamed for openboatlaunch's) is the provenance of records
                 # no longer in the file: a rebuild of the state keeps it (2026-11-04 review: NC's 41 drops and 9
                 # renames were lost to the rebuild that followed the tidy)
@@ -2217,7 +2290,7 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
                 builds[st] = {**v, "write": info, **({"existing_duplicates": dup} if dup else {})}
         stats = {**(prev.get("stats") or {}), "state_builds": dict(sorted(builds.items()))}
         partial = bool(prev.get("partial"))
-        targets_rows = merge_targets_scoped(prev.get("targets") or [], targets_out, scope_states)
+        targets_rows = merge_targets_scoped(prev.get("targets") or [], targets_out, scope_states, rows_from)
         skipped = list({(r.get("state"), r.get("text")): r for r in list(prev.get("skipped") or []) + list(skipped)}.values())
         problems = list(dict.fromkeys(list(prev.get("problems") or []) + list(problems)))
     else:
@@ -2754,6 +2827,7 @@ class Run:
         self.reach_index = {}                   # a state build: EPA's reach codes and NHDPlus ids (reach_index())
         self.only_states = None                 # a state build: its states (hand records of other states not rebuilt)
         self.stopped = None                     # why the run stopped early (BudgetExhausted), if it did
+        self.rows_from = None                   # a --names run: its target rows are the reports' ("reports")
 
     def attach(self, rec, row, t, how):
         rec["_targets"].append(row)
@@ -3242,7 +3316,8 @@ class Run:
             assign_slugs(built, self.existing, getattr(self, "previous", None), getattr(self, "kept_rows", None))
             try:
                 info = write_output(built, finish_rows(self.rows), skipped_list(self.skipped_reason), [], partial=True,
-                                    scope_states=getattr(self, "only_states", None))
+                                    scope_states=getattr(self, "only_states", None),
+                                    rows_from=getattr(self, "rows_from", None))
             except WriteRefused as ex:      # an unreadable file: not overwritten; the next checkpoint tries again
                 print(f"[{i}/{n}] checkpoint not written: {ex}", flush=True)
                 return
@@ -3288,7 +3363,20 @@ def main(argv=None):
                          "openboatlaunch record now on file (resolve_existing_duplicates), its target rows' reasons in "
                          "public voice (public_reasons), its 'Unnamed stream' records named for their town "
                          "(name_unnamed_streams)")
+    ap.add_argument("--names", metavar="FILE",
+                    help="a state's report names (research/<st>/receiving-waters-missing.json) as the targets, with "
+                         "--state XX: the name pass on each, merged into data/waters-nhd.json as rows from the reports; "
+                         "FILE is rewritten to the names still without a record, each with its reason")
+    ap.add_argument("--add-places", action="store_true",
+                    help="with --names: nothing built or fetched; the file's rows gain the points and towns of the "
+                         "state's reports in data/build/events that give each name")
     args = ap.parse_args(argv)
+    if args.names:
+        if args.rebuild or args.osm_only or args.tidy or (args.state and len(args.state) > 1):
+            ap.error("--names takes one --state and no --rebuild, --osm-only or --tidy")
+        return names_main(args)
+    if args.add_places:
+        ap.error("--add-places needs --names")
     if args.tidy:
         if not args.state:
             ap.error("--tidy needs --state")
@@ -3564,6 +3652,828 @@ def state_main(args) -> int:
     for p in problems[:40]:
         print("PROBLEM", p)
     return 0
+
+
+# ---------------------------------------------------------------- report names (--names, 2026-11-04)
+# The receiving-water names a state's reports give that no water record holds yet (research/<st>/receiving-waters-
+# missing.json, written by each state's build: North Carolina's DWR overflow layers, Georgia's EPD lists and EPA's
+# overflow reports, Florida's DEP pollution notices). The state build above targets the national list (outfalls and
+# permits), not these names; the live (no --state) build targets unplaced events, which need data/build/events.
+
+REPORT_FIX = [(re.compile(r"\bun-?n?am+ed\b", re.I), "unnamed"),
+              (re.compile(r"\btrib(?:ua|au|uat|u)tary\b|\btribuatary\b|\btributray\b", re.I), "tributary"),
+              (re.compile(r"^\s*icw\s*$", re.I), "Intracoastal Waterway"),
+              (re.compile(r"\bintercoastal\b", re.I), "Intracoastal")]
+# a report's text that names no public water (checked on the whole text, before any name is read from it)
+REPORT_NOT_WATER = [
+    (re.compile(r"\bms4\b|\bmunicipal separate storm", re.I), "a storm-sewer system (MS4), not a named water"),
+    (re.compile(r"\bstorm\s*water\b|\bstorm\s*(drain|drains|sewer|sewers|system|pipe|line|inlet)\b", re.I),
+     "a storm-sewer system, not a named water"),
+    (re.compile(r"\b(catch\s+basin|manhole|lift\s+station|pump\s+station|aeration\s+basin|clarifier|backwash|"
+                r"equalization|(retention|detention|drainage|holding)\s+pond)\b", re.I),
+     "part of a sewer, drainage or treatment works, not a public water"),
+    (re.compile(r"\b(subdivision|resident'?s?|yard|private|parking|driveway|basement|crawl\s*space)\b", re.I),
+     "private property, not a public water"),
+    (re.compile(r"\bgulf\s+of\s+(mexico|america)\b|\b(atlantic|pacific)\s+ocean\b|^\s*(the\s+)?ocean\s*$", re.I),
+     "the open sea (no NHD record)"),
+]
+STREET_NAME = re.compile(r"^[\w' .-]+?\s+(ct|st|rd|ave|av|dr|ln|blvd|cir|trce|trl|pkwy|hwy|ter|pl|way|court|street|"
+                         r"road|avenue|drive|lane|boulevard|circle|trace|trail|parkway|highway|terrace|place)\.?$", re.I)
+TRIB_LEAD = re.compile(r"^(an?\s+|the\s+)?(unnamed\s+|unknown\s+|small\s+)?(tributary|tributaries|trib\.?|unt|ut)"
+                       r"(\s+(of|to|into)\b)?\s*(the\s+)?", re.I)
+TRIB_ANY = re.compile(r"\b(tributary|tributaries|trib|unt|ut)\b", re.I)
+REPORT_TOWN_M = 3000        # a water of the name within 3 km of a town the reports give (the name pass's rule)
+
+
+def report_name_parts(text: str) -> tuple[list[str], str | None, bool]:
+    """(water names, reason, tributary) for one receiving-water name as a report gives it. A tributary of a named water
+    ('Tributary to Proctor Creek', 'UT Eno River', 'Ditch feeding Rocky Creek', 'Bull creek tributary') gives the named
+    water (the tributary has no name of its own and its water reaches that one), tributary True. reason: why the text
+    names no public water (storm-sewer systems, catch basins and treatment works, private property, the open sea, street
+    names, an unnamed or unknown stream, a kind of water with no name, a river basin), never a record."""
+    t = re.sub(r"\s+", " ", str(text or "")).strip()
+    for rx, rep in REPORT_FIX:
+        t = rx.sub(rep, t)
+    fixed = t
+    # a chain ('Stormdrain to UT of Island Creek', 'Catch basin to Fall Mountain Lake'): the storm drain or sewer works
+    # the report names first is the way, the water after it the receiving water
+    chain = re.split(r"\s+(?:to|into|via|then|thence|(?:flows?|flowing|discharges?|discharging|leading|draining)\s+(?:in)?to)\s+",
+                     t, flags=re.I)
+    through = None
+    while chain:
+        why = next((w for rx, w in REPORT_NOT_WATER if rx.search(chain[0])), None)
+        if why is None:
+            break
+        if len(chain) == 1:
+            return [], why, False
+        through = through or why
+        chain = chain[1:]
+    if through or len(chain) > 1:
+        why = next((w for rx, w in REPORT_NOT_WATER if rx.search(" ".join(chain))), None)
+        if why:
+            return [], why, False
+    if through:
+        t = " to ".join(chain)
+        if not TRIB_ANY.search(t) and not re.match(r"^(an?|the)\s+", t, re.I):
+            t = f"tributary to {t}"         # through a storm drain: the water it reaches is named, not where it entered
+    t = re.sub(r",\s*(a|which is a|that is a)\s+(trib|tributary)\b.*$", "", t, flags=re.I)
+    t = re.sub(r"\b(that|which)\s+(runs|flows|drains|leads|goes)\s+(in)?to\b", "to", t, flags=re.I)
+    t = re.sub(r"^\s*(the\s+)?(drainage\s+)?(ditch|swale|creek|stream|branch|channel)\s+(feeding|leading\s+to|draining\s+"
+               r"(in)?to|running\s+(in)?to|flowing\s+(in)?to)\s+", "tributary to ", t, flags=re.I)
+    tributary = bool(TRIB_ANY.search(t))
+    prev = None
+    while prev != t:
+        prev, t = t, TRIB_LEAD.sub("", t, count=1).strip()
+    if tributary and re.match(r"^(at|near|behind|by|on|in|off|along|beside|from)\b", t, re.I):
+        return [], "an unnamed tributary named by a place, not by the water it joins", False
+    if not t or re.fullmatch(r"(unnamed|unknown|unk)?\s*(creek|stream|branch|tributary|pond|lake|ditch|canal|river)?", t, re.I):
+        return [], ("an unnamed or unknown stream: the report names no water" if re.search(r"unnamed|unknown|unk|trib", fixed, re.I)
+                    else "a kind of water with no name"), False
+    if STREET_NAME.match(t) and not has_kind(words(t)[:-1]):
+        return [], "a street name, not a water", False
+    parts, why = national_parts(t)
+    if not parts and why and why.startswith(("a county", "a road")) and has_kind(words(t)):
+        parts = split_names(t, False)       # 'County Home Branch', 'Mill Road Branch': a water's own name
+    if not parts and named_after_all(t, why):
+        parts = [re.sub(r"\s+", " ", re.sub(r"\(.*?\)", " ", t)).strip(" ,.-")]   # 'Ocean Breeze Waterway'
+    if not parts:
+        if why and why.startswith("a river basin"):
+            why = "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
+        elif tributary:
+            why = "a tributary named by a place, not by the water it joins"
+        elif re.fullmatch(r"[A-Za-z]{3,4}", t.strip()):
+            why = "a short name with no kind of water (creek, river, lake): not looked up"
+        return [], (why or "no water name").replace("in EPA's receiving-water field", "in the report"), False
+    return parts, None, tributary
+
+
+def named_after_all(text: str, why: str | None) -> bool:
+    """Whether a report's text the national rules refuse still gives a water's own name: 'ocean' in a name that does not
+    end in it ('Ocean Breeze Waterway', 'Ocean Pond'), a word such as 'drainage' beside a proper name and a kind of
+    water ('Cedar Hammock Drainage Canal'). The name pass then builds a record only for a GNIS name of that spelling
+    at the reports' places (2026-11-04 review: both were refused as the open ocean and as no water name)."""
+    ws = [w for w in words(re.sub(r"\(.*?\)", " ", text)) if w not in ("the", "of", "a", "an")]
+    if not why or len(ws) < 2:
+        return False
+    if why.startswith("the open ocean"):
+        rest = [w for w in ws if w != "ocean"]
+        proper = [w for w in rest if w not in TRAILING_JUNK and w not in ("water", "waters")]
+        return ws[-1] != "ocean" and bool(proper) and (has_kind(rest) or len(proper) >= 2) \
+            and not any(w in NON_NAME or w in WETLAND for w in rest)
+    if why == "not a water name":
+        proper = [w for w in ws if w not in NON_NAME and w not in KIND_WORDS and not w.isdigit()]
+        return bool(proper) and has_kind(ws) and not any(w in WETLAND for w in ws)
+    return False
+
+
+def read_names_file(path) -> tuple[dict, list[dict]]:
+    """(the file's own keys, its rows) for the three shapes the states wrote: North Carolina {rows: [{name, reports,
+    points [[lat, lon]], permits, stream_index, sources}]}, Georgia {names: [{name, reports, seen_in, kind}]}, Florida
+    [[name, reports]], and this module's own rewrite {rows: [...]}. Rows keep every field they carry."""
+    d = read_json(path)
+    if isinstance(d, list):
+        meta, rows = {}, [{"name": r[0], "reports": r[1]} if isinstance(r, list) else dict(r) for r in d]
+    else:
+        meta = {k: v for k, v in (d or {}).items() if k not in ("rows", "names")}
+        rows = [dict(r) for r in (d or {}).get("rows") or (d or {}).get("names") or []]
+    for r in rows:
+        r["reports"] = int(r.get("reports") or 0)
+    rows.sort(key=lambda r: (-r["reports"], str(r.get("name") or "")))
+    return meta, rows
+
+
+def state_discharger_towns(state: str) -> dict:
+    """{permit or discharger id: [towns]} from research/<st>/dischargers.json and data/dischargers.json."""
+    out = defaultdict(list)
+    for p in (ROOT / "research" / state.lower() / "dischargers.json", DATA_DIR / "dischargers.json"):
+        d = read_json(p) if p.exists() else None
+        for r in (d.get("dischargers") if isinstance(d, dict) else d) or []:
+            if not isinstance(r, dict) or (r.get("state") or state) != state:
+                continue
+            for k in (r.get("npdes_permit"), r.get("id")):
+                if k:
+                    out[k] += [x for x in r.get("towns") or [] if x and x not in out[k]]
+    return out
+
+
+def report_places(state: str, rows: list[dict], events, towns_by_permit: dict | None = None) -> dict:
+    """{row name: {"points": Counter((lon, lat)), "towns": Counter, "sources": Counter}} from the state's reports whose
+    waterbody text (or one of the water names the source read from its text, raw._water_names) is the row's name, case
+    and punctuation aside; and from the operators the row names (permits) through the registry's towns."""
+    by_key = defaultdict(list)
+    for r in rows:
+        by_key[compact(r["name"])].append(r["name"])
+    dis = state_discharger_towns(state)
+    reg = towns_by_permit if towns_by_permit is not None else registry_towns({state})
+    out = {r["name"]: {"points": Counter(), "towns": Counter(), "sources": Counter()} for r in rows}
+
+    def permit_towns(key):
+        return list(dis.get(key) or []) + [t for t, _ in (reg.get(key) or Counter()).most_common(2)]
+    for r in rows:
+        for p in r.get("permits") or []:
+            for tw in permit_towns(p):
+                out[r["name"]]["towns"][str(tw).title()] += 1
+    for ev in events:
+        texts = [ev.get("waterbody_text") or ""] + list(((ev.get("raw") or {}).get("_water_names") or []))
+        names = {n for x in texts if x for n in by_key.get(compact(x), [])}
+        if not names:
+            continue
+        if S.event_state(ev) != state:
+            continue
+        raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+        row = raw.get("row") if isinstance(raw.get("row"), dict) else {}
+        tws = [raw.get("FACILITY_CITY"), row.get("city")] + [raw.get(k) for k in S.TOWN_KEYS]
+        tws += permit_towns(ev.get("npdes_permit")) + permit_towns(ev.get("discharger_id"))
+        tws = [re.sub(r",\s*(fl|fla|florida|ga|georgia|nc|north carolina)\.?$", "", str(x).strip(), flags=re.I).title()
+               for x in tws if isinstance(x, str) and x.strip() and not re.search(r"\d", x)]
+        for n in names:
+            o = out[n]
+            o["sources"][ev.get("source_id") or "?"] += 1
+            if ev.get("lat") is not None and ev.get("lon") is not None:
+                o["points"][(round(float(ev["lon"]), 5), round(float(ev["lat"]), 5))] += 1
+            for tw in dict.fromkeys(tws):
+                o["towns"][tw] += 1
+    return out
+
+
+def add_places(path, state: str, events_dir=None) -> int:
+    """--names FILE --add-places (nothing fetched): each row of the names file gains `towns` (the reports' own town
+    fields and the towns of the operators they name, most reports first) and `points` ([lat, lon], up to five places
+    2 km apart, most reports first) from the state's reports in data/build/events, and `places_from` (the sources).
+    A row's own points and towns are kept first. The build reads only the file, so its places are on the record."""
+    meta, rows = read_names_file(path)
+    S._STATES = S.derive_states(S.load_waters(include_nhd=False), S.load_rules(), live_only=False) | {state}
+    _, events, _ = S.load_events(events_dir or EVENTS_DIR, False, False)
+    places = report_places(state, rows, events)
+    n = 0
+    for r in rows:
+        p = places[r["name"]]
+        pts = Counter({(lon, lat): 2 for lat, lon in r.get("points") or []}) + p["points"]
+        if pts:
+            r["points"] = [[lat, lon] for lon, lat in cluster_points(pts, n=5, sep_m=NEAR_M)]
+        tws = list(dict.fromkeys(list(r.get("towns") or []) + [t for t, _ in p["towns"].most_common(4)]))
+        if tws:
+            r["towns"] = tws[:4]
+        if p["sources"]:
+            r["places_from"] = sorted(p["sources"])
+        n += bool(pts or tws)
+    write_names_file(path, meta, state, rows, None)
+    print(f"{state}: {n} of {len(rows)} names given places from {len(events)} reports -> {shown(path)}")
+    return 0
+
+
+def reason_kind(reason: str, multi: bool = False) -> str:
+    """A row's reason as counted in the file's by_reason: the first clause, without the place or the date detail ('(the
+    nearest is 2.2 km away)', '(35.36514, -80.14824)') and, for a text naming several waters, without the water's name."""
+    r = re.sub(r"^[^:;(]*?: ", "", reason) if multi else reason
+    r = r.split("; ")[0]
+    r = re.sub(r"^(a water record holds (this water but not this spelling|the name)) \([^)]*\)", r"\1", r)  # records
+    r = re.sub(r"\s*\((?=[^()]*(\d+\.\d|\d{4}-\d\d))[^()]*\)", "", r)       # a distance, a point or a date
+    return r.strip()[:120]
+
+
+def write_names_file(path, meta: dict, state: str, rows: list[dict], resolved: list[dict] | None,
+                     run_note: dict | None = None) -> None:
+    """The names file in one shape for the three states: the file's own keys, `rows` (the names still without a water
+    record, most reports first, each with its reason once a build has run), `resolved` (the names a record now holds,
+    with the slugs and how), and the counts."""
+    old_resolved = list(meta.get("resolved") or [])
+    if resolved is not None:
+        done = {r["name"] for r in resolved}
+        resolved = [r for r in old_resolved if r["name"] not in done] + resolved
+    else:
+        resolved = old_resolved
+    resolved.sort(key=lambda r: (-r.get("reports", 0), r["name"]))
+    rows = sorted(rows, key=lambda r: (-r["reports"], r["name"]))
+    keep = {k: v for k, v in meta.items() if k not in ("waters", "count", "reports", "by_kind", "by_reason", "resolved",
+                                                        "resolved_names", "resolved_reports", "rows", "names", "build")}
+    if not keep.get("about"):
+        keep = {"about": f"Receiving-water names in {state}'s reports that data/receiving-waters-national.json does not "
+                         f"hold for {state}, by name as typed, with the number of reports giving each.", **keep}
+    doc = {**keep, "state": state, "waters": len(rows), "reports": sum(r["reports"] for r in rows)}
+    if any(r.get("kind") for r in rows):
+        doc["by_kind"] = dict(Counter(r["kind"] for r in rows if r.get("kind")).most_common())
+    reasons = Counter(reason_kind(r["reason"], multi=len(r.get("parts") or []) > 1) for r in rows if r.get("reason"))
+    if reasons:
+        doc["by_reason"] = dict(reasons.most_common())
+    if resolved:
+        doc["resolved_names"] = len(resolved)
+        doc["resolved_reports"] = sum(r.get("reports", 0) for r in resolved)
+    if run_note:
+        doc["build"] = run_note
+    doc["rows"] = rows
+    if resolved:
+        doc["resolved"] = resolved
+    write_json(path, doc)
+
+
+def has_record_at(resolver: S.Resolver, name: str, state: str, places: list[tuple], towns: list[str],
+                  per_place: bool = False):
+    """The water records the status resolver gives a report of this name in the state (the name, an alias or a stem,
+    kept by the placement guard) at the reports' places: each point, else each town, else with no place. per_place:
+    ([slugs], [the slugs kept at each point]) instead, so a name whose reports lie at several places is a record only
+    where each of them is (2026-11-04 review: 'Tributary to Butler Creek' at Kennesaw was counted as resolved by the
+    Butler Creek at Augusta that another spelling's point found)."""
+    tries = [(lat, lon, towns[0] if towns else "") for lon, lat in places[:3]] or \
+            [(None, None, tw) for tw in towns[:3]] or [(None, None, "")]
+    out, at = [], []
+    for lat, lon, tw in tries:
+        ev = {"lat": lat, "lon": lon, "raw": {"state": state, "town": tw}, "waterbody_text": name}
+        slugs, _, _ = resolver.by_name(name, state, lat, lon, ev)
+        kept = resolver.guard(slugs, ev)[0] if slugs else []
+        out += [s for s in kept if s not in out]
+        if lat is not None:
+            at.append(list(kept))
+    return (out, at) if per_place else out
+
+
+def holds_name(rec: dict, name: str) -> bool:
+    """Whether a water record carries the name itself (its name or an alias, spelling aside, or the name without its
+    kind word): not only by the status resolver's qualifier rule, which gives 'West Fork Deep River' to the Deep River."""
+    ws = words(name)
+    for n in [rec.get("name") or ""] + list(rec.get("aliases") or []):
+        sc = name_score(ws, n)
+        if sc in (1.0, 0.85) or (sc == 0.8 and abs(len(compact(ws)) - len(compact(gnis_display(n) or ""))) <= 2):
+            return True
+    return False
+
+
+def collect_name_targets(state: str, rows: list[dict], resolver: S.Resolver, waters: dict | None = None):
+    """(targets, done, skipped_reason): one target per water name a row gives (most reports first), with the row's
+    report count, points and towns; done: [(target, slugs)] for names a water record already holds (the status resolver
+    places these reports on it and the record carries the name: nothing is built); skipped_reason: {(state, name): why}
+    for names that are no water. A name the resolver gives to a record of another name (a fork or branch to its river)
+    is built, and its row notes where the resolver puts it today."""
+    targets, done, skipped = {}, [], {}
+    for r in rows:
+        parts, why, trib = report_name_parts(r["name"])
+        r["_parts"] = parts
+        if not parts:
+            skipped[(state, r["name"])] = why
+            continue
+        pts = Counter()
+        for i, (lat, lon) in enumerate(r.get("points") or []):
+            pts[(round(float(lon), 5), round(float(lat), 5))] += max(1, r["reports"] // (i + 1))
+        tws = [str(x) for x in r.get("towns") or [] if x]
+        for p in parts:
+            ws = words(p)
+            key = (state, compact(ws))
+            t = targets.get(key)
+            if t is None:
+                t = targets[key] = Target(state=state, key=f"{state}:reports:{key[1]}", names=Counter(), texts=Counter(),
+                                          outfalls=0, events=0, points=Counter(), towns=Counter(), sources=Counter(),
+                                          point_mode=False, refs=[], outfall_points=Counter(), report_rows=[],
+                                          tributary=False, notes=[], report_name=True)
+            t["names"][p] += r["reports"]
+            t["texts"][r["name"]] += r["reports"]
+            t["events"] += r["reports"]
+            t["points"] += pts
+            for tw in tws:
+                t["towns"][tw] += r["reports"]
+            t["sources"]["reports"] += 1
+            t["report_rows"].append(r["name"])
+            if trib:
+                t["tributary"] = True
+                t["notes"].append(f"'{r['name']}': a tributary of {p} (the tributary has no name of its own)")
+    out = []
+    for t in targets.values():
+        t["name"] = t["names"].most_common(1)[0][0]
+        t["words"] = words(t["name"])
+        places = cluster_points(t["points"], n=3, sep_m=NEAR_M)
+        slugs, at = has_record_at(resolver, t["name"], state, places, [x for x, _ in t["towns"].most_common(3)],
+                                  per_place=True)
+        own = [x for x in slugs if waters is None or holds_name(waters.get(x) or {}, t["name"])]
+        if own and all(set(own) & set(k) for k in at):     # every point of the reports finds its record
+            done.append((t, own))
+            continue
+        if own:
+            t["notes"].append(f"{', '.join(own)} holds the name at some of the reports' points, not at all of them: "
+                              f"the name pass looks at each")
+        other = [x for x in slugs if x not in own]
+        if other:
+            t["notes"].append(f"the status resolver gives the name to {', '.join(other)} (another name): the name's own "
+                              f"water is built")
+        out.append(t)
+    out.sort(key=lambda t: (-t["events"], t["key"]))
+    done.sort(key=lambda x: (-x[0]["events"], x[0]["key"]))
+    return out, done, skipped
+
+
+NAME_BATCH = 30             # GNIS spellings asked in one MapServer query (one target's spellings are never split)
+
+
+def prefetch_names(nhd: Nhd, state: str, targets: list, layer: int, attr: str) -> None:
+    """t[attr] = the layer's features whose GNIS name is one of t's spellings in the state's box, for every target, asked
+    NAME_BATCH spellings at a time (the same features a query per target gives, for about a thirtieth of the requests;
+    a cached batch costs nothing). BudgetExhausted propagates: the targets of the batches not asked have no attr."""
+    batch, names = [], []
+
+    def ask():
+        if not batch:
+            return
+        where = "UPPER(gnis_name) IN (" + ",".join(f"'{n}'" for n in sorted(set(names))) + ")"
+        fs = arcgis(nhd.http, f"name{layer}", layer, where=where, geometry=nhd.state_env(state),
+                    geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
+                    outFields=FL_FIELDS if layer == 2 else WB_FIELDS, maxAllowableOffset="0.001")
+        for t in batch:
+            mine = {n.replace("''", "'") for n in sql_names(t)}
+            t[attr] = [f for f in fs if str(f.get("gnis_name") or "").upper() in mine]
+        batch.clear()
+        names.clear()
+    for t in targets:
+        sn = sql_names(t)
+        if batch and len(names) + len(sn) > NAME_BATCH:
+            ask()
+        batch.append(t)
+        names.extend(sn)
+    ask()
+
+
+def report_score(target_ws: list[str], gnis: str | None) -> float:
+    """name_score for a report's spelling: 'of' and 'the' aside ('South Fork of Middle River'), and GNIS's 'Atlantic' or
+    'Gulf' in front of the Intracoastal Waterway aside."""
+    tw = [w for w in target_ws if w not in ("of", "the")]
+    gw = [w for w in words(gnis_display(gnis)) if w not in ("of", "the")] if gnis else []
+    sc = name_score(tw, " ".join(gw)) if gw else 0.0
+    if sc < 0.8 and gw and [w for w in gw if w not in ("atlantic", "gulf")] == tw and "intracoastal" in tw:
+        return 0.9
+    return sc
+
+
+def report_name_choices(nhd: Nhd, t) -> tuple[list[tuple], str | None, list[dict]]:
+    """([(feature key, choice, how)], reason when none, places that found none): the NHDPlus V2.1 features of the
+    target's name in the state (prefetch_names), the one nearest each place the reports give: each cluster of their
+    points (a feature within 2 km, NEAR_M), and when no point finds one, each town (crossing it or within 3 km: EPA's
+    overflow reports may give the plant's point, while the town is the overflow's); a place two features of the
+    name lie equally near chooses neither. With no place, a name found once in the state is taken."""
+    st = t["state"]
+    groups = defaultdict(list)
+    for f in t.get("_l2") or []:
+        if f.get("gnis_id") and report_score(t["words"], f.get("gnis_name")) >= 0.8:
+            groups[("line", f["gnis_id"])].append(f)
+    if wants_area(t) or not groups:
+        for f in t.get("_l4") or []:
+            if f.get("ftype") in LAKE_FTYPES and report_score(t["words"], f.get("gnis_name")) >= 0.8:
+                groups[("wb", f.get("gnis_id") or f["comid"])].append(f)
+    shape_ = nhd.states.shapes[st].buffer(0.01)
+    groups = {k: v for k, v in groups.items() if any(f["_geom"] is not None and f["_geom"].intersects(shape_) for f in v)}
+    if not groups:
+        town = nhd.towns.canonical(st, t["name"])
+        if town:
+            return [], f"the name of a town ({town}), not of a water: no NHD water of that name in {st}", []
+        return [], f"no NHD flowline or waterbody of that name in {st}", []
+
+    def pick(k):
+        f = groups[k][0]
+        if k[0] == "line":
+            return {"type": "line", "gnis_id": k[1], "gnis_name": f["gnis_name"], "comid": f["comid"]}
+        return {"type": "wb", "comid": f["comid"], "gnis_id": f.get("gnis_id"), "gnis_name": f.get("gnis_name"),
+                "ftype": f.get("ftype")}
+    geoms = {k: unary_union([f["_geom"] for f in fs if f["_geom"] is not None]) for k, fs in groups.items()}
+    several = f" ({len(groups)} waters of that name in {st})" if len(groups) > 1 else ""
+    points = [(Point(lon, lat), f"the reports' point ({lat:.5f}, {lon:.5f})", NEAR_M, {"lon": lon, "lat": lat})
+              for lon, lat in cluster_points(t["points"], n=6, sep_m=NEAR_M)]
+    towns = []
+    for tw, _ in t["towns"].most_common(4):
+        g = nhd.towns.outlines(st, [tw])
+        if g:
+            towns.append((unary_union(g), tw, REPORT_TOWN_M, {"town": tw}))
+    if not points and not towns:
+        if len(groups) == 1:
+            k = next(iter(groups))
+            return [(feature_key(st, pick(k)), pick(k), f"the only NHD water of that name in {st} (the reports give "
+                                                         f"no place)")], None, []
+        return [], f"{len(groups)} NHD waters of that name in {st} and the reports give no place to choose one", []
+    chosen, failed = {}, []
+    # the points first; the towns only when no point finds the name (a report's point may be the operator's plant, as
+    # EPA's overflow reports give it, while its town is where the overflow was)
+    for place in points + [None] + towns:
+        if place is None:
+            if chosen:
+                break
+            continue
+        g, label, lim, where = place
+        scored = sorted((0.0 if G.intersects(g) else geom_dist_m(G, g), k) for k, G in geoms.items())
+        d0, k0 = scored[0]
+        # two waters of the name both crossing a town (or both through a point) are equally near: neither is chosen
+        if d0 <= lim and (len(scored) == 1 or scored[1][0] > d0):
+            chosen.setdefault(k0, f"GNIS name in {st}, {'crossing' if d0 == 0 else f'{d0:.0f} m from'} {label}{several}")
+        elif d0 <= lim:
+            failed.append({**where, "reason": f"two NHD waters of that name lie equally near {label}"})
+        else:
+            failed.append({**where, "reason": f"no NHD water of that name within {lim / 1000:g} km of {label} (the "
+                                              f"nearest is {d0 / 1000:.1f} km away)"})
+    if not chosen:
+        return [], (f"{len(groups)} NHD water{'s' if len(groups) > 1 else ''} of that name in {st}, none within reach of "
+                    f"the reports' places"), failed
+    return [(feature_key(st, pick(k)), pick(k), how) for k, how in chosen.items()], None, failed
+
+
+def wants_hr(reason: str | None) -> bool:
+    """Whether a report name the name pass left goes to the NHD high-resolution flowlines: NHDPlus V2.1 has no water of
+    the name in the state, or none at the reports' places (a small stream of the name there that V2.1 leaves out);
+    not when the reports give no place, or two waters of the name lie equally near."""
+    return bool(reason) and (reason.startswith("no NHD flowline") or "none within reach" in reason)
+
+
+def resolve_hr_places(nhd: Nhd, t) -> tuple[dict | None, str]:
+    """resolve_hr for a report name: the reports' points, else the towns they give (the flowline of the name within
+    HR_NEAR_DEG of the town's outline)."""
+    if t["points"]:
+        return resolve_hr(nhd, t)
+    names = sql_names(t)
+    where = "UPPER(gnis_name) IN (" + ",".join(f"'{n}'" for n in names) + ")"
+    for tw, _ in t["towns"].most_common(2):
+        g = nhd.towns.outlines(t["state"], [tw])
+        if not g:
+            continue
+        g = unary_union(g)
+        b = g.bounds
+        env = f"{b[0] - HR_NEAR_DEG},{b[1] - HR_NEAR_DEG},{b[2] + HR_NEAR_DEG},{b[3] + HR_NEAR_DEG}"
+        fs = arcgis(nhd.http, "nhd-hr-near", HR_FLOWLINES, service=NHD_HR, where=where, geometry=env,
+                    geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
+                    outFields=HR_FIELDS, maxAllowableOffset="0.0001")
+        cands = [(geom_dist_m(f["_geom"], g) if not f["_geom"].intersects(g) else 0.0, f) for f in fs
+                 if f.get("gnis_id") and f["_geom"] is not None and name_score(t["words"], f.get("gnis_name")) >= 0.8]
+        cands = [c for c in cands if c[0] <= REPORT_TOWN_M]
+        if cands:
+            d, f = min(cands, key=lambda x: x[0])
+            c = g.centroid
+            return ({"type": "hr-line", "gnis_id": str(int(f["gnis_id"])), "gnis_name": f["gnis_name"],
+                     "box": [round(c.x - HR_SPAN_DEG, 4), round(c.y - HR_SPAN_DEG, 4), round(c.x + HR_SPAN_DEG, 4),
+                             round(c.y + HR_SPAN_DEG, 4)]},
+                    f"NHD high resolution: flowline named '{f['gnis_name']}' (GNIS {int(f['gnis_id'])}) "
+                    f"{'crossing' if d == 0 else f'{d:.0f} m from'} {tw}")
+    return None, ("no NHD high-resolution flowline of that name near the reports' points" if t["points"] else
+                  "no NHD high-resolution flowline of that name within 3 km of the reports' towns" if t["towns"] else
+                  "the reports give no place to look for it in the NHD high-resolution flowlines")
+
+
+def nhd_identities(state: str, path=None) -> dict:
+    """{feature key: slug} of the state's records in data/waters-nhd.json (a GNIS id, else an NHDPlus COMID): a report
+    name whose feature is already a record maps to it (a rebuild here would replace that record with this run's)."""
+    d = read_json(path or OUT) or {}
+    out = {}
+    for r in d.get("waters") or []:
+        if r.get("state") != state or not r.get("slug"):
+            continue
+        if r.get("gnis_id"):
+            kind = "wb" if r.get("area_km2") is not None else "line"
+            out.setdefault((kind, state, str(r["gnis_id"])), r["slug"])
+        elif r.get("comids") and r.get("area_km2") is not None:
+            out.setdefault(("wb", state, f"comid{r['comids'][0]}"), r["slug"])
+    return out
+
+
+REPORT_ROWS = "reports"
+
+
+def names_main(args) -> int:
+    """--names FILE [--state XX]: water records for the receiving-water names a state's reports give (module docstring,
+    "Report names"). The file is rewritten to the names still without a record, each with its reason."""
+    path = Path(args.names)
+    meta, rows = read_names_file(path)
+    state = (args.state[0] if args.state else meta.get("state") or "").upper()
+    if state not in FIPS:
+        print(f"--names needs --state XX (the file gives {meta.get('state')!r})")
+        return 2
+    if getattr(args, "add_places", False):
+        return add_places(path, state)
+    rows = [r for r in rows if r.get("name")]
+    existing = existing_waters()
+    allw = S.load_waters(include_nhd=True)
+    S._STATES = S.derive_states(existing, S.load_rules(), live_only=False) | {state}
+    S._GEOM_CACHE.clear()
+    resolver = S.make_resolver(allw)
+    back = recheck_resolved(meta, state, resolver)
+    if back:
+        print(f"report names {state}: {len(back)} resolved names no longer placed on their records, asked again", flush=True)
+        rows = sorted(rows + back, key=lambda r: (-r["reports"], str(r.get("name") or "")))
+    targets, done, skipped_reason = collect_name_targets(state, rows, resolver, allw)
+    print(f"report names {state}: {len(rows)} names, {len(targets)} waters to build, {len(done)} already a record, "
+          f"{len(skipped_reason)} no water", flush=True)
+    if args.targets_only:
+        print_targets(targets, None)
+        for (st, text), why in sorted(skipped_reason.items()):
+            print(f"no water {st}  {text[:50]:50}  {why}")
+        return 0
+    http = Http(args.refresh, args.offline, max_requests=args.max_requests,
+                deadline=time.monotonic() + args.budget_s if args.budget_s else None)
+    shapes = States()
+    towns = Towns(http)
+    nhd = Nhd(http, shapes, towns)
+    run = Run(nhd, shapes, towns, existing, args, http, skipped_reason)
+    run.only_states, run.rows_from = {state}, REPORT_ROWS
+    known = nhd_identities(state)
+    for t, slugs in done:
+        row = run.new_row(t)
+        row.update({"from": REPORT_ROWS, "reports": t["events"], "slugs": slugs,
+                    "how": ["already a water record: the status resolver places reports of this name on it"]})
+        if t["notes"]:
+            row["notes"] = list(dict.fromkeys(t["notes"]))[:6]
+        run.rows.append(row)
+    try:
+        towns.load(state)
+        prefetch_names(nhd, state, targets, 2, "_l2")
+        prefetch_names(nhd, state, [t for t in targets if wants_area(t) or not t.get("_l2")], 4, "_l4")
+    except BudgetExhausted as ex:
+        run.stopped = str(ex)
+    hr_queue = []
+    for i, t in enumerate(targets, 1):
+        row = run.new_row(t)
+        row.update({"from": REPORT_ROWS, "reports": t["events"]})
+        if t["notes"]:
+            row["notes"] = list(dict.fromkeys(t["notes"]))[:6]
+        if run.stopped or "_l2" not in t:
+            row["reason"] = f"{NOT_REACHED} ({run.stopped or 'the name query was not asked'}); the next run resumes"
+            run.rows.append(row)
+            continue
+        run.rows.append(row)
+        try:
+            choices, reason, failed = report_name_choices(nhd, t)
+            if failed:
+                row["places_failed"] = failed[:12]
+            row["reason"] = reason
+            for k, c, how in choices:
+                slug = known.get(k)
+                if slug:
+                    row["slugs"].append(slug)
+                    row["how"].append(f"{how}; the same NHD feature as record {slug}")
+                    continue
+                if k not in run.feats:
+                    rec = run.new_record(k, c, t, row)
+                    if rec is None:
+                        continue
+                    run.feats[k] = rec
+                rec = run.feats[k]
+                if rec.get("_existing"):
+                    row["slugs"].append(rec["_existing"])
+                    row["how"].append(f"{how}; the same water as existing record {rec['_existing']}")
+                    continue
+                run.attach(rec, row, t, how)
+            if row["how"]:
+                row["reason"] = None
+                row["defined_by"] = "name"
+            elif not choices and wants_hr(reason):
+                hr_queue.append((t, row))
+        except BudgetExhausted as ex:
+            run.stop(t, ex)
+        except Exception as ex:      # one bad name must not stop the run
+            import traceback
+            traceback.print_exc()
+            run.problems.append(f"{t['key']}: {type(ex).__name__}: {ex}")
+            row["reason"] = row["reason"] or f"build error ({type(ex).__name__}: {ex})"
+        run.checkpoint(i, len(targets))
+    for t, row in hr_queue:             # NHDPlus V2.1 has none of the name there: the high-resolution flowlines
+        if run.stopped:
+            row["reason"] = f"{row['reason']}; NHD high resolution not asked ({run.stopped})"
+            continue
+        if generic_name(t["name"]):
+            row["reason"] = f"{row['reason']}; a description, not a name"
+            continue
+        try:
+            c, how = resolve_hr_places(nhd, t)
+            if c is None:
+                row["reason"] = f"{row['reason']}; {how}"
+            else:
+                k = feature_key(state, c)
+                if known.get(k):
+                    row["slugs"].append(known[k])
+                    row["how"].append(f"{how}; the same NHD feature as record {known[k]}")
+                else:
+                    if k not in run.feats:
+                        rec = run.new_record(k, c, t, row)
+                        if rec is not None:
+                            run.feats[k] = rec
+                    rec = run.feats.get(k)
+                    if rec is None:
+                        row["reason"] = f"{row['reason']}; {how}: no geometry in {state}"
+                    elif rec.get("_existing"):
+                        row["slugs"].append(rec["_existing"])
+                        row["how"].append(f"{how}; the same water as existing record {rec['_existing']}")
+                    else:
+                        run.attach(rec, row, t, how)
+                if row["how"]:
+                    row["reason"], row["defined_by"] = None, "name (NHD high resolution)"
+        except BudgetExhausted as ex:
+            run.stopped = str(ex)
+            row["reason"] = f"{row['reason']}; NHD high resolution not asked ({ex})"
+        if not row["how"] and t["points"] and not args.no_osm and not generic_name(t["name"]):
+            run.osm_queue.append((t, row))
+    if run.osm_queue and not run.stopped:
+        if args.offline or not mirror_answers():
+            for t, row in run.osm_queue:
+                row["reason"] = f"{row['reason']}; OSM fallback: Overpass not reachable"
+        else:
+            run.osm_state_pass()
+    elif run.osm_queue:
+        for t, row in run.osm_queue:
+            row["reason"] = f"{row['reason']}; OSM fallback not tried ({run.stopped})"
+    recs = [r for r in run.feats.values() if not r.get("_existing")]
+    for r in recs:
+        if not r["towns"]:
+            r["towns"] = sorted(x for x, n in r["_slug_towns"].most_common(3) if n)
+            r["towns_from"] = "the Census places of the reports' points"
+    assign_slugs(recs, existing, run.previous, run.kept_rows)
+    problems = run.problems + validate(recs, shapes)
+    problems += [f"slug {r['slug']} collides with an existing record" for r in recs if r["slug"] in existing]
+    out_rows = finish_rows(run.rows)
+    problems += [f"target {r['state']} {r['name']}: neither mapped nor given a reason" for r in out_rows
+                 if not r["slugs"] and not r["reason"]]
+    stats_out = {state: names_stats(state, path, rows, targets, done, out_rows, recs, skipped_reason, http, run)}
+    try:
+        info = write_output(recs, out_rows, skipped_list(skipped_reason), problems, partial=True, stats=stats_out,
+                            final=True, scope_states={state}, rows_from=REPORT_ROWS)
+    except WriteRefused as ex:
+        print(f"\nNOT WRITTEN: {ex}")
+        return 1
+    S._GEOM_CACHE.clear()          # the records this run wrote: the status resolver as the hourly run will build it
+    after = S.make_resolver(S.load_waters(include_nhd=True))
+    rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats_out[state],
+                  placed=lambda text, r, slugs: resolver_places(after, text, state, r, slugs))
+    print(f"\n{len(recs)} records -> {shown(OUT)}: {describe_write(info)}")
+    print(json.dumps(stats_out, indent=1))
+    for p in problems[:40]:
+        print("PROBLEM", p)
+    return 0
+
+
+def mirror_answers() -> bool:
+    """Whether any Overpass instance answers a trivial query (mirror_order); the OSM fallback is skipped when none does."""
+    try:
+        return any(_ping(u) for u in OSM_STATE_MIRRORS)
+    except Exception:
+        return False
+
+
+def _ping(url: str) -> bool:
+    try:
+        r = requests.post(url, data={"data": "[out:json][timeout:10];node(1);out ids;"}, headers=HEADERS, timeout=15)
+        return r.status_code == 200 and "elements" in r.text
+    except requests.RequestException:
+        return False
+
+
+def names_stats(state, path, rows, targets, done, out_rows, recs, skipped_reason, http, run) -> dict:
+    mine = [r for r in out_rows if r.get("from") == REPORT_ROWS]
+    built = [r for r in mine if r["slugs"] and not str(r["how"][0] if r["how"] else "").startswith("already a water")]
+    return {"built": now_iso(), "file": str(Path(path).resolve().relative_to(ROOT)) if str(Path(path).resolve()).startswith(str(ROOT)) else Path(path).name,
+            "names": len(rows), "reports": sum(r["reports"] for r in rows),
+            "names_no_water": len(skipped_reason), "waters_named": len(targets) + len(done),
+            "already_a_record": len(done), "targets": len(targets),
+            "targets_mapped": sum(1 for r in mine if r["slugs"]) - len(done), "records": len(recs),
+            "targets_failed": sum(1 for r in mine if not r["slugs"]),
+            "failed_reasons": dict(Counter(re.sub(r"\s*\(.*", "", r["reason"] or "no reason")[:120]
+                                           for r in mine if not r["slugs"]).most_common(15)),
+            "network_requests": http.requests, "requests": dict(http.fetched), "cached": dict(http.cached),
+            "failed": dict(http.failed), "stopped": run.stopped}
+
+
+PLACE_KEYS = ("points", "towns", "places_from")
+UNPLACED = {
+    "spelling": ("a water record holds this water but not this spelling ({slugs}): a report of it is not placed there "
+                 "until the spelling is an alias (data/water-aliases.json)"),
+    "guard": "a water record holds the name ({slugs}), but the reports' points lie too far from it to be placed there",
+}
+
+
+def resolver_places(resolver, text: str, state: str, row: dict, slugs) -> str | None:
+    """Why the status resolver does not place a report of this text on one of these records at the places the names
+    file gives for it (each point, else each town, else no place): None when it does at one of them (its name, alias
+    or stem, kept by the placement guard); "guard" when it reads the name as one of them but the placement guard sets
+    the report aside at every place (the reports' points lie too far from the record); "spelling" when it does not
+    read this text as one of them. A name several records share that the resolver cannot choose among here (no
+    outline on this machine, no point) is not held against it when one of them is among the slugs."""
+    pts = [(float(lat), float(lon)) for lat, lon in (row.get("points") or [])[:5]]
+    towns = [str(x) for x in row.get("towns") or [] if x]
+    tries = [(lat, lon, towns[0] if towns else "") for lat, lon in pts] or [(None, None, tw) for tw in towns[:3]] \
+        or [(None, None, "")]
+    want = set(slugs)
+    why = "spelling"
+    for lat, lon, tw in tries:
+        ev = {"lat": lat, "lon": lon, "raw": {"state": state, "town": tw}, "waterbody_text": text}
+        got, note, ambiguous = resolver.by_name(text, state, lat, lon, ev)
+        if got:
+            kept, _ = resolver.guard(got, ev)
+            if want & set(kept):
+                return None
+            if want & set(got):
+                why = "guard"
+        elif ambiguous and note and any(x in note for x in want):
+            return None
+    return why
+
+
+def recheck_resolved(meta: dict, state: str, resolver) -> list[dict]:
+    """The file's resolved names the status resolver no longer places on their records (a record since dropped by a
+    tidy, an alias since removed), taken out of meta['resolved'] and returned as rows to be asked again with their
+    places. An entry written before resolved names kept their places is checked with no place."""
+    keep, back = [], []
+    for r in meta.get("resolved") or []:
+        if resolver_places(resolver, r["name"], state, r, r.get("slugs") or []) is None:
+            keep.append(r)
+        else:
+            back.append({k: v for k, v in r.items() if k not in ("slugs", "how", "places_failed")})
+    meta["resolved"] = keep
+    return back
+
+
+def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats, placed=None) -> None:
+    """The names file rewritten to what is still missing: a row whose every water name now has a record moves to
+    `resolved` (with the slugs and the row's places); the others stay with their reason (no water, or why each name
+    found no record). placed(text, row, slugs): why the status resolver does not place a report of the row's own text
+    on those records (resolver_places: None when it does); a row it does not stays, its `records` named, with the
+    reason: its spelling needs an alias, or its points lie beyond the placement guard (2026-11-04 review: "Allen's
+    Creek", "17 Mile River" and "South Fork of Middle River" were listed as resolved while their reports went unplaced
+    or to the Middle River, and records chosen by a town 12 to 30 km from the reports' points place none of them)."""
+    by_name = {}
+    for r in out_rows:
+        if r.get("from") == REPORT_ROWS:
+            by_name[compact(r["name"])] = r
+    left, resolved = [], []
+    for r in rows:
+        parts = r.pop("_parts", None) or []
+        base = {k: v for k, v in r.items() if k not in ("reason", "places_failed", "parts", "records")}
+        why = skipped_reason.get((state, r["name"]))
+        if not parts:
+            left.append({**base, "reason": why or "no water name"})
+            continue
+        trs = [by_name.get(compact(p)) for p in parts]
+        if all(x is not None and x["slugs"] for x in trs):
+            slugs = list(dict.fromkeys(s for x in trs for s in x["slugs"]))
+            fails = [f for x in trs for f in x.get("places_failed") or []]
+            unplaced = placed(r["name"], r, slugs) if placed is not None else None
+            if unplaced:
+                left.append({**base, "records": slugs, "reason": UNPLACED[unplaced].format(slugs=", ".join(slugs)),
+                             **({"places_failed": fails[:6]} if fails else {})})
+                continue
+            resolved.append({"name": r["name"], "reports": r["reports"], "slugs": slugs,
+                             "how": "; ".join(dict.fromkeys(
+                                 ("a water record already holds the name" if (x["how"] or [""])[0].startswith("already")
+                                  else "record built from the name" if x.get("defined_by") else "the same water as a "
+                                  "record on file") for x in trs)),
+                             **{k: r[k] for k in PLACE_KEYS if r.get(k)},
+                             **({"places_failed": fails[:6]} if fails else {})})
+            continue
+        bits = []
+        for p, x in zip(parts, trs):
+            if x is None:
+                bits.append(f"{p}: not reached this run")
+            elif not x["slugs"]:
+                bits.append(f"{p}: {x['reason']}" if len(parts) > 1 else x["reason"])
+        out = {**base, "reason": "; ".join(bits)}
+        if len(parts) > 1 or compact(parts[0]) != compact(r["name"]):
+            out["parts"] = parts
+        fails = [f for x in trs if x for f in x.get("places_failed") or []]
+        if fails:
+            out["places_failed"] = fails[:6]
+        left.append(out)
+    note = {"date": stats["built"][:10], "command": f"python -m ingest.waters_from_nhd --names {stats['file']} "
+            f"--state {state}", "records_built": stats["records"], "names_resolved": len(resolved),
+            "network_requests": stats["network_requests"]}
+    if stats.get("stopped"):
+        note["stopped"] = stats["stopped"]
+    write_names_file(path, meta, state, left, resolved, note)
 
 
 NHD_FAILED = re.compile(r"no NHD flowline or waterbody of that name|has no GNIS name in NHDPlus")
