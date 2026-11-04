@@ -14,7 +14,7 @@ _spec = importlib.util.spec_from_file_location("add_register_rows", ROOT / "scri
 ARR = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(ARR)
 
-REG = json.loads((DATA_DIR / "notice-channels.json").read_text())
+REG = NP.load_register()          # either layout of the register
 DIS = json.loads((DATA_DIR / "dischargers.json").read_text())
 BY_ID = {r["id"]: r for r in REG["channels"]}
 

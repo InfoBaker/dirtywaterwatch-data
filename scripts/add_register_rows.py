@@ -65,7 +65,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "pipeline"))
 from ingest import notification_pages as NP  # noqa: E402
 
-REGISTER = ROOT / "data" / "notice-channels.json"
+REGISTER = ROOT / "data" / "notice-channels"      # the per-state register (or the single file, if that is what data/ holds)
 DIS = ROOT / "data" / "dischargers.json"
 PLANTS = ROOT / "data" / "outfalls-plants-us.json"
 CHECKED = "2026-11-04"
@@ -373,7 +373,7 @@ def merge(doc: dict, new: list[dict], replaces=()) -> dict:
 
 def run(parts: list[str], register: Path = REGISTER, dis_path: Path = DIS, plants_path: Path = PLANTS,
         dry_run: bool = False) -> dict:
-    doc = json.loads(register.read_text())
+    doc = NP.load_register(register if register.exists() else None)   # either layout
     dis = json.loads(dis_path.read_text())
     plants = json.loads(plants_path.read_text()) if plants_path.exists() else {"outfalls": []}
     report: dict = {}
@@ -391,7 +391,10 @@ def run(parts: list[str], register: Path = REGISTER, dis_path: Path = DIS, plant
     if errs:
         raise SystemExit("the register would not validate:\n" + "\n".join(errs[:20]))
     if not dry_run:
-        register.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n")
+        if register.is_file():                       # a single file given on purpose (fixtures): written as such
+            register.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n")
+        else:
+            NP.save_register(doc["channels"], register)   # the layout data/ has (per state after the split)
     return report
 
 
