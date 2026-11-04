@@ -135,3 +135,57 @@ def test_main_reads_a_saved_zip(tmp_path, monkeypatch):
     doc = json.loads((tmp_path / "events" / "echo-sewer-overflow.json").read_text())
     assert doc["count"] == 1 and doc["meta"]["via"] == "file sobe.zip" and doc["meta"]["last_modified"] is None
     assert doc["records"][0]["started_at"].endswith("-05:00")
+
+
+# ---------------------------------------------------------------- MWRD Possible CSO Events
+
+def _layer():
+    return json.loads((FIX / "il_mwrd_possible_cso.json").read_text())
+
+
+def test_possible_cso_layer_rows_become_dated_unconfirmed_records(tmp_path, monkeypatch):
+    from ingest import il_mwrd_possible_cso as P
+    monkeypatch.setattr(P, "registry_rows", lambda: [
+        {"npdes_permit": "IL0045012", "outfall": "001", "lat": 42.0002, "lon": -87.7001,
+         "receiving_water_echo": "NORTH SHORE CHANNEL", "water_slug": "north-shore-channel-il"}])
+    recs, meta = P.run(_layer(), "2026-07-04T22:00:00Z", tmp_path / "state.json")
+    by = {r["outfall_name"]: r for r in recs}
+    a = by["Sample Ave (E)"]
+    assert a["event_type"] == "cso" and a["status"] == "unknown" and a["ended_at"] is None
+    assert a["started_at"] == "2026-07-04T21:26:19Z" and a["time_precision"] == "poll"
+    assert a["npdes_permit"] == "IL0045012" and a["outfall_id"] == "001" and a["water_slugs"] == ["north-shore-channel-il"]
+    assert a["source_record_id"].endswith(":2026-07-04") and "at or before" in a["raw"]["start_basis"]
+    w = by["Wilmette Gate"]
+    assert w["waterbody_text"] == "Lake Michigan" and w["raw"]["diversion"].startswith("Wilmette")
+    c = by["Example St (W)"]   # no edit time: our first poll, said so; no permit known for the owner
+    assert c["started_at"] == "2026-07-04T22:00:00Z" and "first poll" in c["raw"]["start_basis"] and c["npdes_permit"] is None
+    assert meta["features_now"] == 3
+    blob = json.dumps(recs) + (tmp_path / "state.json").read_text()
+    assert "jdoe" not in blob and "Jane Doe" not in blob and "GlobalID" not in blob   # only the safe fields are kept
+
+
+def test_possible_cso_records_continue_leave_and_reopen_next_day(tmp_path):
+    from ingest import il_mwrd_possible_cso as P
+    st = tmp_path / "state.json"
+    doc = _layer()
+    P.run(doc, "2026-07-04T22:00:00Z", st)
+    recs, meta = P.run(doc, "2026-07-04T23:00:00Z", st)
+    assert len(recs) == 3 and meta["poll"]["continued"] == 3
+    empty = dict(doc, features=[])
+    recs, meta = P.run(empty, "2026-07-05T06:00:00Z", st)     # the nightly reset: no end is written
+    assert meta["poll"]["left"] == 3 and all(r["raw"]["left_layer_at"] == "2026-07-05T06:00:00Z" for r in recs)
+    assert all(r["ended_at"] is None and r["status"] == "unknown" for r in recs)
+    nxt = json.loads(json.dumps(doc))
+    nxt["features"] = [nxt["features"][0]]
+    nxt["features"][0]["attributes"]["last_edited_date"] = 1783290000000            # 2026-07-05 22:20 UTC
+    recs, meta = P.run(nxt, "2026-07-05T23:00:00Z", st)
+    assert meta["poll"]["opened"] == 1 and len(recs) == 4
+    assert sum(r["outfall_name"] == "Sample Ave (E)" for r in recs) == 2
+
+
+def test_possible_cso_file_replay_needs_out(tmp_path):
+    from ingest import il_mwrd_possible_cso as P
+    out = tmp_path / "ev.json"
+    assert P.main(["--file", str(FIX / "il_mwrd_possible_cso.json"), "--out", str(out)]) == 0
+    doc = json.loads(out.read_text())
+    assert doc["count"] == 3 and (tmp_path / "ev.state.json").exists()
