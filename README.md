@@ -28,10 +28,30 @@ Raw fetches are not kept in git; every record carries its source, the source's o
 
 ## How it runs
 
-`make refresh` runs every feed, the builds and the export (`out/`); the GitHub Actions workflow runs it on a
-schedule, keeps the pipeline's state between runs in object storage, publishes the live files for the site and
-attaches the full dataset to a release. `make test` runs the test suite. Python 3.12 or later; `make setup`
-creates the virtual environment.
+`make refresh` runs every feed, the builds and the export (`out/`); the GitHub Actions workflow
+(`.github/workflows/refresh.yml`) runs it every hour, publishes the live files for the site and attaches the full
+dataset to a release. `make test` runs the test suite. Python 3.12 or later; `make setup` creates the virtual
+environment.
+
+Between runs the pipeline's state is kept in object storage as two archives: `data/build` (the feeds' history and
+snapshots, the reach traces) and the raw caches, the service answers in `data/raw` the code reads back (NHD, NLDI
+and OpenStreetMap answers, the Census state outlines, the rainfall per outfall and a few layers).
+`scripts/state_paths.py` lists those caches with the reason for each; every other raw fetch stays on the runner and
+is never saved. Both are restored at the start and saved only after a run that ended well, and each is capped at
+200 MB.
+
+A state's water records are built by a separate, on-demand workflow (`.github/workflows/state-build.yml`), never
+inside the hourly run, because a state takes hours of rate-limited requests:
+
+    gh workflow run state-build.yml -f state=NC -f steps="waters ties" -f budget_s=1500 -f max_requests=1000
+
+It runs the NHD pass for the state's receiving waters (`ingest.waters_from_nhd --state`) within the budget, ties
+every outfall of the state to its record or a stated reason (`ingest.outfall_waters --state`), saves the raw caches
+so the next dispatch resumes where this one stopped, and opens a pull request (branch `batch/<st>-<date>`) with the
+changed registry files and the counts, for a person to review. It never runs beside the hourly refresh.
+`scripts/state_batch.py` is the same batch by hand (`plan` prints the commands without running them). The registry
+match (`registry`, `scripts/match_outfalls.py`) needs EPA's CSO inventory and an openboatlaunch snapshot and runs
+where those are; the reach traces have no per-state run yet.
 
 ## Using the data
 
