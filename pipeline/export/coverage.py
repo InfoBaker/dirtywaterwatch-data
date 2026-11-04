@@ -18,10 +18,10 @@ so the pages, the /reporting/ table and the CSV agree:
                delayed", "Monthly totals only", "Annual totals only", "No public reports", with its sentence
   duty         the first sentence of data/rules.json red.by_state[<st>].basis (null where none)
   rain_caution where the "discharge likely" caution is computed (build/rain_likely.caution_coverage)
-  notification_pages  per state in the public-notice channel register (data/notice-channels.json): the page-health
-               table of ingest/notification_pages.py (data/build/notice-pages/health.json): {built, counts, operators,
-               channels}, each channel and operator with its one public line (`wording`); absent where the register
-               has no rows for the state
+  notification_pages  per state in the public-notice channel register (data/notice-channels.json, or per state
+               data/notice-channels/<st>.json): the page-health table of ingest/notification_pages.py
+               (data/build/notice-pages/health.json): {built, counts, operators, channels}, each channel and operator
+               with its one public line (`wording`); absent where the register has no rows for the state
 
 Per water: the same figures over the reports placed on the water, its grade and a sentence for the status card
 ("Only monthly totals are reported for this water ..."). Never a safety verdict.
@@ -286,11 +286,13 @@ def notice_reach(register: dict, sewage_sources=frozenset()) -> dict[str, dict]:
 
 
 def load_register(path=None) -> dict | None:
-    """data/notice-channels.json, or None."""
-    import json
-    from common import DATA_DIR
+    """The notice-channel register in either layout (data/notice-channels.json or data/notice-channels/<st>.json;
+    ingest/notification_pages.load_register), or None when there is none or it does not read."""
+    from ingest import notification_pages as np_mod
     try:
-        return json.loads((path or DATA_DIR / "notice-channels.json").read_text())
+        if np_mod.register_layout(path) == "none":
+            return None
+        return np_mod.load_register(path)
     except (OSError, ValueError):
         return None
 
