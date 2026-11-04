@@ -2406,7 +2406,15 @@ def _filled(ev: dict) -> int:
 # text (more than SAME_DAY_NAME_WORDS words): only short names such as "Test Creek" or "UT to Mill River" are.
 UNSPECIFIC_WATER_WORDS = {"unnamed", "unamed", "unnammed", "unknown", "un", "ut", "trib", "tributary", "tributaries",
                           "to", "of", "the", "a", "an", "and", "into", "storm", "drain", "drains", "ditch", "ms4",
-                          "catch", "basin", "nearby", "local", "near", "small"}
+                          "catch", "basin", "nearby", "local", "near", "small",
+                          # descriptions, not names: "receiving stream", "tidal creek", "Outfall 001 to river" (an
+                          # outfall number is never a water's name)
+                          "receiving", "tidal", "drainage", "outfall", "outfalls", "outlet", "adjacent", "adjoining",
+                          "nearest", "closest", "surface", "waterway", "waterbody", "possibly"}
+# After a water word, these start a description of where ("creek behind the plant", "Mill Creek at Route 1", "stream
+# next to the pump station"): the rest of the part is not compared
+WHERE_WORDS = {"behind", "beside", "next", "adjacent", "across", "along", "near", "at", "by", "on", "in", "from",
+               "below", "above", "off", "via", "downstream", "upstream", "then", "which", "eventually", "ultimately"}
 SAME_DAY_NAME_WORDS = 6
 
 
@@ -2420,7 +2428,11 @@ def specific_water_keys(text) -> set[str]:
         toks = norm_name(part).split()
         if len(toks) > SAME_DAY_NAME_WORDS:
             continue
-        named = [t for t in toks if t not in UNSPECIFIC_WATER_WORDS]
+        first = next((i for i, t in enumerate(toks) if WATER_WORD.fullmatch(t)), None)
+        if first is not None:
+            cut = next((i for i in range(first + 1, len(toks)) if toks[i] in WHERE_WORDS), len(toks))
+            toks = toks[:cut]
+        named = [t for t in toks if t not in UNSPECIFIC_WATER_WORDS and not t.isdigit()]
         if named and not all(WATER_WORD.fullmatch(t) for t in named):
             keys.add("".join(named))
     return keys
