@@ -204,6 +204,26 @@ def why_not_a_name(text: str) -> str | None:
     return f"'{text}': {w}"
 
 
+def index_targets(rows: list[dict]) -> tuple[dict, dict, dict]:
+    """(targets, reach_slugs, outfall_slugs) from data/waters-nhd.json's target rows (Matcher). A report name's row
+    (waters_from_nhd --names, from: "reports") names the water of a report, not of an outfall: it is left out, so a
+    report-name build changes no outfall's tie by the builder's rows."""
+    targets, reach_slugs, outfall_slugs = {}, {}, {}
+    for t in rows:
+        if t.get("from") == "reports":
+            continue
+        if t.get("name"):
+            targets[(t["state"], N.compact(t["name"]))] = t
+        for x in t.get("texts") or []:
+            targets.setdefault((t["state"], N.compact(x)), t)
+        for k, v in (t.get("reach_slugs") or {}).items():
+            reach_slugs.setdefault(str(k), v)
+        if t.get("outfall_ref") and t.get("slugs"):
+            ref = (t["outfall_ref"][0], str(t["outfall_ref"][1]))
+            outfall_slugs[ref] = (t["slugs"][0], "; ".join(x for x in t.get("how") or [] if x)[:200])
+    return targets, reach_slugs, outfall_slugs
+
+
 class Matcher:
     def __init__(self, offline: bool = False, states=None):
         """states: a state build (--state): these states are placed as if live (derive_states(live_only=False))."""
@@ -216,19 +236,9 @@ class Matcher:
         self.dis_waters = S.load_discharger_waters()
         self.dis_towns = S.load_discharger_towns()
         nhd = read_json(DATA_DIR / "waters-nhd.json") or {}
-        self.targets = {}
-        self.reach_slugs = {}           # a state build's targets: EPA reach code or NHDPlus id -> the record it named
-        self.outfall_slugs = {}         # a state build's unnamed outfalls: (permit, outfall) -> (slug, how)
-        for t in nhd.get("targets") or []:
-            if t.get("name"):
-                self.targets[(t["state"], N.compact(t["name"]))] = t
-            for x in t.get("texts") or []:
-                self.targets.setdefault((t["state"], N.compact(x)), t)
-            for k, v in (t.get("reach_slugs") or {}).items():
-                self.reach_slugs.setdefault(str(k), v)
-            if t.get("outfall_ref") and t.get("slugs"):
-                ref = (t["outfall_ref"][0], str(t["outfall_ref"][1]))
-                self.outfall_slugs[ref] = (t["slugs"][0], "; ".join(x for x in t.get("how") or [] if x)[:200])
+        # targets: the NHD builder's rows by (state, name); reach_slugs: a state build's EPA reach code or NHDPlus id ->
+        # the record it named; outfall_slugs: a state build's unnamed outfalls, (permit, outfall) -> (slug, how)
+        self.targets, self.reach_slugs, self.outfall_slugs = index_targets(nhd.get("targets") or [])
         self.states = N.States()
         self.offline = offline
         self.towns = N.Towns(N.Http(offline=offline))       # Census county subdivisions (cached TIGERweb answers)
