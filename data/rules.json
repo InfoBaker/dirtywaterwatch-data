@@ -100,6 +100,12 @@
     "clock": "end_of_discharge",
     "basis": "Michigan law sets no period after a sewage discharge during which the water is to be avoided: whoever is responsible for a sewer system that discharges untreated or partially treated sewage must notify the Department of Environment, Great Lakes, and Energy (EGLE), the local health departments and a daily newspaper immediately and within 24 hours of the discharge's start, report its volume, receiving waters and times when it ends, and test the affected waters for E. coli (MCL 324.3112a). EGLE must promptly post each notification on its website, its MiEnviro list of sewage discharges, and combined sewer operators in the Great Lakes basin must give the public notice within 4 hours (40 CFR 122.38). Local health departments decide on beach advisories and closures from their own sampling. This site marks a reported discharge while it runs and applies its own caution after it ends",
     "source": "MCL 324.3112a(1)-(3); 40 CFR 122.38; Great Lakes Water Authority CSO Public Notification Plan (2018); EGLE MiEnviro CSO/SSO List"
+   },
+   "WA": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Washington law sets no period after a sewage spill during which the water is to be avoided. The Department of Ecology must post on a public website each sewage spill reported to it under an individual water quality permit, with the estimated volume, the level of treatment, when it began, where, when it ended once known and the area potentially affected, and add the final information within a reasonable time after the spill ends (RCW 90.48.636); the law sets no posting deadline, and Ecology aims to post within five working days of the operator's report. Operators report spills to Ecology under their permits. King County and Seattle advise staying out of the water near a combined sewer outfall for 48 hours after it overflows; that window is used for the overflows their status map reports. This site marks a reported discharge while it runs and applies its own caution after it ends",
+    "source": "RCW 90.48.632 and 90.48.636 (2025 c 315); Washington State Department of Ecology, Sewage spills; King County CSO status map"
    }
   },
   "by_discharger": {

@@ -109,6 +109,7 @@ PLANTS_SUMMARY = BUILD_DIR / "plant-outfall-waters.json"
 PLANT_FIELDS = ("water_slug", "water_name", "water_kind", "distance_m", "match", "water_match", "water_matched_by")
 BY_MATCHER = "scripts/match_outfalls.py (2026-11-01)"
 BY_HERE = "ingest.outfall_waters"
+LINE_ONLY_FCODES = {55800, 56600}   # NHDPlus artificial path, coastline (Matcher.line_only)
 TIGHT_M = 400               # match_outfalls' distance: a record this close to the point is "geometry"
 POINT_M = S.OUTFALL_POINT_M  # the snap for an outfall with no usable name
 POINT_WRONG_M = 10_000      # a point this far from its named water in the permittee's town is not the outfall's
@@ -322,6 +323,38 @@ class Matcher:
     def clear_row(self) -> None:
         self._aside = self._several = self._conflict = self._builder_far = None
         self._evidence, self._held = {}, {}
+        self._refused = []
+
+    def line_only(self, s: str | None) -> bool:
+        """An unnamed NHD record made only of NHDPlus artificial paths (FCode 55800: the line NHDPlus draws through a
+        lake, a bay, a ship canal or a wide river) or coastline (56600: the edge of the sea). It stands for no water of
+        its own: an outfall on it discharges to the lake, bay or sound around it. An outfall is never tied to one; the
+        row keeps the water its point or name finds, or a reason (review 2026-11-04 WA: Seattle's CSO outfalls on Lake
+        Union, Portage Bay and Elliott Bay had become 'Unnamed stream near Seattle')."""
+        w = self.waters.get(s) or {}
+        fc = w.get("nhd_fcodes") or []
+        return (bool(fc) and all(int(f) in LINE_ONLY_FCODES for f in fc)
+                and str(w.get("name") or "").lower().startswith("unnamed"))
+
+    def usable(self, s: str | None, o: dict, step: str) -> bool:
+        """Whether a step's record may be the row's water: not a line_only record, and for the NHD builder's record
+        for the outfall (by_outfall_ref, found at the point of the permit and outfall in whichever file the builder
+        read) one that lies within TIGHT_M of this row's own point (outfall 170 of WA0031682: EPA's point is 20 km from
+        the operator's, and its snap was Blackjack Creek, 29 km from the outfall). A refused record is named in the
+        reason."""
+        if not s:
+            return False
+        if self.line_only(s):
+            self._refused.append(f"the NHD record at the outfall ({s}) is an unnamed NHDPlus artificial path or "
+                                 f"coastline, the line through a lake, bay or sound and not a water of its own")
+            return False
+        if step == "NHD builder (outfall)" and o.get("lat") is not None:
+            d = self.dist(s, o.get("lat"), o.get("lon"))
+            if d is not None and d > TIGHT_M:
+                self._refused.append(f"the NHD builder's record for this outfall ({s}) lies {m(d)} m from the row's "
+                                     f"point (found at another file's point for the same outfall)")
+                return False
+        return True
 
     def town_unknown(self, o: dict) -> bool:
         """Whether the permittee's town has no Census outline to check a water against (none named, none found, or no
@@ -721,25 +754,27 @@ class Matcher:
             for step, fn in (("name", self.by_name), ("NHD builder", self.by_nhd_target), ("reach", self.by_reach),
                              ("NHD builder for the permit", self.by_builder_permit)):
                 s, how = fn(o, text)
-                if s:
+                if s and self.usable(s, o, step):
                     return {"slug": s, "how": how, "step": step}
         if not text or not_name:
-            for step, fn in (("reach", lambda x: self.by_reach(x, text)), ("NHD builder", self.by_outfall_ref)):
+            for step, fn in (("reach", lambda x: self.by_reach(x, text)), ("NHD builder (outfall)", self.by_outfall_ref)):
                 s, how = fn(o)
-                if s:
-                    return {"slug": s, "how": f"{not_name}; {how}" if not_name else how, "step": step}
+                if s and self.usable(s, o, step):
+                    return {"slug": s, "how": f"{not_name}; {how}" if not_name else how,
+                            "step": "NHD builder" if step == "NHD builder (outfall)" else step}
         s, how = self.by_permit_waters(o) if (not text or not_name) else (None, None)
-        if s:
+        if s and self.usable(s, o, "permit's receiving water"):
             return {"slug": s, "how": f"{not_name}; {how}" if not_name else how, "step": "permit's receiving water"}
         if lat is not None:
             s, how = self.by_point(o, text)
-            if s:
+            if s and self.usable(s, o, "point"):
                 return {"slug": s, "how": f"{not_name}; {how}" if not_name else how, "step": "point"}
         if text and not not_name:
             s, how = self.by_name_and_town(o, text)
             d = self.dist(s, lat, lon) if s else None
             near = self.resolver.by_point(lat, lon, o["state"]) if lat is not None else None
-            if near and near[0] <= POINT_M and S.names_disagree(text, self.waters[self.canon(near[1])].get("name")) \
+            if near and near[0] <= POINT_M and not self.line_only(self.canon(near[1])) \
+                    and S.names_disagree(text, self.waters[self.canon(near[1])].get("name")) \
                     and not (d is not None and d > POINT_WRONG_M):
                 # the point lies on another named water and is not a far-off mistake: the name and the point disagree
                 self._conflict = (f"EPA's point lies on {self.waters[self.canon(near[1])]['name']} ({m(near[0])} m), "
@@ -799,6 +834,7 @@ class Matcher:
         if dw and dw.get("names") and (not text or not_name):
             bits.append(f"the permit's listed receiving waters ({', '.join(dw['names'][:5])}) cannot be told apart "
                         f"for this outfall")
+        bits += [x for x in dict.fromkeys(getattr(self, "_refused", None) or []) if x not in bits]
         return "; ".join(bits)
 
 

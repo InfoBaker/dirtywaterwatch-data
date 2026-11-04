@@ -18,10 +18,30 @@
       "html",
       "arcgis"
     ],
-    "access_detail": "The page (fetched, HTTP 200) explains the list; the table itself is an embedded ArcGIS Experience Builder app https://gis.ecology.wa.gov/portal/apps/experiencebuilder/experience/?id=4fb5f533aabb41ce9e5bd8aa59284ab6. The portal's item and data endpoints returned HTTP 403 (Microsoft Azure Application Gateway WAF) to scripted requests; the underlying feature service URL was not obtained. Do not work around the WAF: ask Ecology for the service URL or an export.",
-    "machine_readable": null,
+    "access_detail": "The page embeds an ArcGIS Experience ('Sewage spill table only', item 4fb5f533aabb41ce9e5bd8aa59284ab6) whose table reads the public hosted layer https://gis.ecology.wa.gov/hosting/rest/services/Hosted/survey123_48de962d0dea40eb9485805510a40b84_results/FeatureServer/0 (Query, Extract; 72 reports from 2026-06-15 on 2026-11-04). The portal, item and layer answered HTTP 200 to the project user agent on 2026-11-04; the firewall refusal of 2026-11-03 was with another client. Every point on the layer is 0,0.",
+    "machine_readable": true,
     "sample_record": null,
-    "fields": [],
+    "fields": [
+      "objectid",
+      "globalid",
+      "ecology_region",
+      "start_date_and_time",
+      "permitee",
+      "location",
+      "county",
+      "initial_estimated_amount",
+      "level_of_treatment",
+      "potentially_impacted_area",
+      "steps_taken_to_contain_or_clean (not requested: operator narrative)",
+      "end_event_timedate",
+      "final_event_duration_hours",
+      "final_total_event_volume",
+      "link_to_5_day_report",
+      "event_type",
+      "event_type_other",
+      "erts_number",
+      "was_the_spill_continuous"
+    ],
     "fills_event_fields": [
       "started_at",
       "ended_at (once known)",
@@ -33,18 +53,20 @@
       "link to official report"
     ],
     "cannot_fill": [
-      "unknown until the service schema is seen"
+      "coordinates (all 0,0)",
+      "Ecology's receipt and posting times",
+      "permit number (facility name only)"
     ],
-    "has_coordinates": null,
+    "has_coordinates": false,
     "has_outfall_ids": false,
     "cadence": "'After we receive the report from the facility, our goal is to publish the information within five working days.' Final information added after the spill concludes.",
-    "history": "Statute required the site by 2026-07-01; history depth unknown.",
+    "history": "Every report since the site began (2026-06-15) stays on the layer.",
     "license": "Page disclaimer: 'This information is provided as it has been reported. It has not been independently verified by Ecology. The information is provided for educational, informational, and research purposes.'",
     "legal_basis": "RCW 90.48.632, 90.48.636 (2025 c 315)",
-    "status": "candidate",
-    "status_reason": "The statewide dated feed Washington's law now requires; content matches the event model. Blocked only by the WAF on scripted access to the GIS portal.",
+    "status": "used",
+    "status_reason": "The statewide dated feed Washington's law requires, read by pipeline/ingest/wa_ecology_spills.py.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-04",
     "notes": "Excludes private backups, illegal dumping and other spills. Ecology reports roughly 300 sewage spills a year (search)."
   },
   {
@@ -139,10 +161,10 @@
     "history": "Current state only; confirmed data in monthly and annual reports to Ecology.",
     "license": "none stated",
     "legal_basis": "NPDES WA0029181 (King County West Point) and WA0031682 (Seattle CSO); WAC 173-245",
-    "status": "candidate",
-    "status_reason": "Real-time outfall status for both Seattle and King County in one file: snapshot every 10 minutes and build events from state changes.",
+    "status": "used",
+    "status_reason": "Read every hour as a snapshot (data/sources/wa-kc-cso-status-csv.yaml, generic snapshot block); events open and close at the polls.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-04",
     "notes": "On 2026-11-03 15:40 Seattle DSN 124 was CurrentlyOverflowing. The 89 Seattle DSNs active here contradict EPA's inventory, which flags Seattle's 86 outfalls closed."
   },
   {
@@ -283,10 +305,10 @@
     "history": null,
     "license": null,
     "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "Covers JBLM, which Ecology's state site may not (EPA permit).",
+    "status": "used",
+    "status_reason": "Read by the national eRule ingester (echo-sewer-overflow) with Washington in its states: 1 of 36 rows kept (a bypass to Puget Sound); the SSOs name no water.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-04",
     "notes": ""
   },
   {

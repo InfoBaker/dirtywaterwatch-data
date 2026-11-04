@@ -1,0 +1,21 @@
+id: "wa-beach-program"
+name: "Washington BEACH program (Ecology and DOH) swimming beach advisories and status map"
+url: "https://ecology.wa.gov/beach"
+homepage: "https://ecology.wa.gov/beach"
+kind: "html"
+level: "state"
+# Notes (research/wa, status candidate, verified search_only, checked 2026-11-03): Advisories are
+#   issued by local health departments; a status map exists; no service URL found in the time box.
+# Waters: marine and some freshwater swimming beaches; Memorial Day to Labor Day
+cadence: null
+license: "none stated"
+attribution: "Washington State Department of Ecology / Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory"]
+states: ["WA"]
+access: ["map_only", "html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"

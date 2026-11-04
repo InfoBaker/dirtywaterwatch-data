@@ -53,6 +53,8 @@ HOMEPAGES = {
     "nc-rwq-advisories": "https://www.deq.nc.gov/about/divisions/marine-fisheries/shellfish-sanitation-and-recreational-water-quality/recreational-water-quality",
     "nc-dwr-algal-bloom-reports": "https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms",
     "nc-fish-kill-algal-bloom": "https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms",
+    "wa-ecology-sewage-spills": "https://ecology.wa.gov/water-shorelines/water-quality/wastewater/sewage-spills",
+    "wa-kc-cso-status-csv": "https://kingcounty.gov/en/dept/dnrp/waste-services/wastewater-treatment/sewer-system-services/cso-status",
     "nc-wnc-rec-monitoring": "https://www.deq.nc.gov/about/divisions/water-resources/locations/asheville-regional-office/western-nc-recreational-water-quality-monitoring-program",
 }
 
