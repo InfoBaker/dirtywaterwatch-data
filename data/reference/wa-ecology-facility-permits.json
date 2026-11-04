@@ -1,0 +1,3155 @@
+{
+ "about": "Ecology's facility names on the Washington sewage spill list (the layer's permittee domain) matched to NPDES permits; scripts/wa_ecology_facility_permits.py",
+ "checked": "2026-11-04",
+ "counts": {
+  "hand": 15,
+  "name": 290,
+  "none": 219
+ },
+ "facilities": {
+  "ABERDEEN STP": {
+   "name": "ABERDEEN STP",
+   "npdes_permit": "WA0037192",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ADDY BLUE CREEK SEWER SYSTEM": {
+   "name": "ADDY BLUE CREEK SEWER SYSTEM",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "AIRWAY HEIGHTS WATER RECLAMATIO": {
+   "name": "AIRWAY HEIGHTS WATER RECLAMATION FACILITY",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "ALBION STP": {
+   "name": "ALBION STP",
+   "npdes_permit": "WA0022608",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ALDER LAKE PARK STP": {
+   "name": "ALDER LAKE PARK STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "ALDERWOOD STP": {
+   "name": "ALDERWOOD STP",
+   "npdes_permit": "WA0020826",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ANACORTES WWTP": {
+   "name": "ANACORTES WWTP",
+   "npdes_permit": "WA0020257",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ARLINGTON STP": {
+   "name": "ARLINGTON STP",
+   "npdes_permit": "WA0022560",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ASOTIN STP": {
+   "name": "ASOTIN STP",
+   "npdes_permit": "WA0020818",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Aberdeen STP": {
+   "name": "Aberdeen STP",
+   "npdes_permit": "WA0037192",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Addy Blue Creek Sewer System": {
+   "name": "Addy Blue Creek Sewer System",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Airway Heights WRF": {
+   "name": "Airway Heights WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Albion STP": {
+   "name": "Albion STP",
+   "npdes_permit": "WA0022608",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Alder Lake Park STP": {
+   "name": "Alder Lake Park STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Alderbrook Resort & Spa STP": {
+   "name": "Alderbrook Resort & Spa STP",
+   "npdes_permit": "WA0037753",
+   "basis": "hand",
+   "why": "EPA: ALDERBROOK RESORT & SPA"
+  },
+  "Almira STP": {
+   "name": "Almira STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Anacortes WWTP": {
+   "name": "Anacortes WWTP",
+   "npdes_permit": "WA0020257",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Arlington WRF": {
+   "name": "Arlington WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Asotin STP": {
+   "name": "Asotin STP",
+   "npdes_permit": "WA0020818",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "BAINBRIDGE ISLAND CITY": {
+   "name": "BAINBRIDGE ISLAND CITY",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "BELFAIR WATER WASTEWATER RECLAM": {
+   "name": "BELFAIR WATER WASTEWATER RECLAMATION FACILITY",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "BELLINGHAM STP": {
+   "name": "BELLINGHAM STP",
+   "npdes_permit": "WA0023744",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "BIRCH BAY STP": {
+   "name": "BIRCH BAY STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "BOSTON HARBOR STP": {
+   "name": "BOSTON HARBOR STP",
+   "npdes_permit": "WA0040291",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "BREMERTON STP": {
+   "name": "BREMERTON STP",
+   "npdes_permit": "WA0029289",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "BUCKLEY STP": {
+   "name": "BUCKLEY STP",
+   "npdes_permit": "WA0023361",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "BURLINGTON WWTP": {
+   "name": "BURLINGTON WWTP",
+   "npdes_permit": "WA0020150",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Badger Lake Estates STP": {
+   "name": "Badger Lake Estates STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Bainbridge Island WWTP": {
+   "name": "Bainbridge Island WWTP",
+   "npdes_permit": "WA0020907",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Basin City Mobile Home Park STP": {
+   "name": "Basin City Mobile Home Park STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Benton City POTW": {
+   "name": "Benton City POTW",
+   "npdes_permit": "WA0051349",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Big Lake WWTP": {
+   "name": "Big Lake WWTP",
+   "npdes_permit": "WA0030597",
+   "basis": "hand",
+   "why": "EPA: SKAGIT COUNTY SEWER DIST 2 BIG LAKE WWTP"
+  },
+  "Bingen POTW": {
+   "name": "Bingen POTW",
+   "npdes_permit": "WA0022373",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Birch Bay WWTP": {
+   "name": "Birch Bay WWTP",
+   "npdes_permit": "WA0029556",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Boston Harbor STP": {
+   "name": "Boston Harbor STP",
+   "npdes_permit": "WA0040291",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Bremerton WWTP": {
+   "name": "Bremerton WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Brewster POTW": {
+   "name": "Brewster POTW",
+   "npdes_permit": "WA0021008",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Bridgeport POTW": {
+   "name": "Bridgeport POTW",
+   "npdes_permit": "WA0024066",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Buckley STP": {
+   "name": "Buckley STP",
+   "npdes_permit": "WA0023361",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Buena POTW": {
+   "name": "Buena POTW",
+   "npdes_permit": "WA0052132",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Burlington WWTP": {
+   "name": "Burlington WWTP",
+   "npdes_permit": "WA0020150",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CAMAS STP": {
+   "name": "CAMAS STP",
+   "npdes_permit": "WA0020249",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CARBONADO STP": {
+   "name": "CARBONADO STP",
+   "npdes_permit": "WA0020834",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CASCADIA WASTEWATER TREATMENT P": {
+   "name": "CASCADIA WASTEWATER TREATMENT PLANT",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "CASTLE ROCK STP": {
+   "name": "CASTLE ROCK STP",
+   "npdes_permit": "WA0022683",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CATHLAMET STP": {
+   "name": "CATHLAMET STP",
+   "npdes_permit": "WA0022667",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CEDAR CREEK CORRECTIONS CENTER": {
+   "name": "CEDAR CREEK CORRECTIONS CENTER STP",
+   "npdes_permit": "WA0037737",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CENTRALIA STP": {
+   "name": "CENTRALIA STP",
+   "npdes_permit": "WA0020982",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CHAMBERS CREEK STP": {
+   "name": "CHAMBERS CREEK STP",
+   "npdes_permit": "WA0039624",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CHEHALIS WATER RECLAMATION FACI": {
+   "name": "CHEHALIS WATER RECLAMATION FACILITY",
+   "npdes_permit": "WA0021105",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CHENEY WWTP": {
+   "name": "CHENEY WWTP",
+   "npdes_permit": "WA0020842",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CHEWELAH WWTP": {
+   "name": "CHEWELAH WWTP",
+   "npdes_permit": "WA0023604",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CLALLAM BAY CORRECTION CENTER S": {
+   "name": "CLALLAM BAY CORRECTION CENTER STP",
+   "npdes_permit": "WA0039845",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CLALLAM BAY STP": {
+   "name": "CLALLAM BAY STP",
+   "npdes_permit": "WA0024431",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CLARKSTON WWTP": {
+   "name": "CLARKSTON WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "CMR Lands WWTP": {
+   "name": "CMR Lands WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "COLFAX STP": {
+   "name": "COLFAX STP",
+   "npdes_permit": "WA0020613",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "COLLEGE PLACE STP": {
+   "name": "COLLEGE PLACE STP",
+   "npdes_permit": "WA0020656",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "COLTON STP": {
+   "name": "COLTON STP",
+   "npdes_permit": "WA0023175",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "COLVILLE STP": {
+   "name": "COLVILLE STP",
+   "npdes_permit": "WA0022616",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CONCRETE STP": {
+   "name": "CONCRETE STP",
+   "npdes_permit": "WA0020851",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CONNELL WWTP": {
+   "name": "CONNELL WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "COULEE CITY STP": {
+   "name": "COULEE CITY STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "COUPEVILLE STP": {
+   "name": "COUPEVILLE STP",
+   "npdes_permit": "WA0029378",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "CRESTON STP": {
+   "name": "CRESTON STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "CUSICK WWTP": {
+   "name": "CUSICK WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Camas STP": {
+   "name": "Camas STP",
+   "npdes_permit": "WA0020249",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Carbonado STP": {
+   "name": "Carbonado STP",
+   "npdes_permit": "WA0020834",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Cardinal Float Glass Winlock ST": {
+   "name": "Cardinal Float Glass Winlock STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Carlyon Beach STP": {
+   "name": "Carlyon Beach STP",
+   "npdes_permit": "WA0037915",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Carnation Farms STP": {
+   "name": "Carnation Farms STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Cashmere POTW": {
+   "name": "Cashmere POTW",
+   "npdes_permit": "WA0023183",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Castle Rock STP": {
+   "name": "Castle Rock STP",
+   "npdes_permit": "WA0022683",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Cathlamet STP": {
+   "name": "Cathlamet STP",
+   "npdes_permit": "WA0022667",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Cedar Creek Corrections STP": {
+   "name": "Cedar Creek Corrections STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Centralia STP": {
+   "name": "Centralia STP",
+   "npdes_permit": "WA0020982",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Chehalis WRF": {
+   "name": "Chehalis WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Chelan POTW": {
+   "name": "Chelan POTW",
+   "npdes_permit": "WA0020605",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Cheney WWTP": {
+   "name": "Cheney WWTP",
+   "npdes_permit": "WA0020842",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Cherrywood Mobile Home Manor ST": {
+   "name": "Cherrywood Mobile Home Manor STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Chewelah WWTP": {
+   "name": "Chewelah WWTP",
+   "npdes_permit": "WA0023604",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Clallam Bay Corrections STP": {
+   "name": "Clallam Bay Corrections STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Clallam Bay STP": {
+   "name": "Clallam Bay STP",
+   "npdes_permit": "WA0024431",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Clarkston WWTP": {
+   "name": "Clarkston WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Cle Elum POTW": {
+   "name": "Cle Elum POTW",
+   "npdes_permit": "WA0021938",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Colfax STP": {
+   "name": "Colfax STP",
+   "npdes_permit": "WA0020613",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "College Place STP": {
+   "name": "College Place STP",
+   "npdes_permit": "WA0020656",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Colton STP": {
+   "name": "Colton STP",
+   "npdes_permit": "WA0023175",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Colville STP": {
+   "name": "Colville STP",
+   "npdes_permit": "WA0022616",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Community Sewer & Water Distric": {
+   "name": "Community Sewer & Water District of Kennewick",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Conconully POTW": {
+   "name": "Conconully POTW",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Concrete WWTP": {
+   "name": "Concrete WWTP",
+   "npdes_permit": "WA0020851",
+   "basis": "hand",
+   "why": "EPA: CONCRETE STP, Town of Concrete"
+  },
+  "Connell WWTP": {
+   "name": "Connell WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Coulee City STP": {
+   "name": "Coulee City STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Coupeville STP": {
+   "name": "Coupeville STP",
+   "npdes_permit": "WA0029378",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Cowiche Regional POTW": {
+   "name": "Cowiche Regional POTW",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Cowlitz County - Ryderwood STP": {
+   "name": "Cowlitz County - Ryderwood STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Cowlitz County - Toutle STP": {
+   "name": "Cowlitz County - Toutle STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Cowlitz County - Woodbrook STP": {
+   "name": "Cowlitz County - Woodbrook STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Cowlitz Indian Tribal Housing W": {
+   "name": "Cowlitz Indian Tribal Housing Wastewater Treatment Plant",
+   "npdes_permit": "WA0040258",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Crescent Bar WWTP": {
+   "name": "Crescent Bar WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Creston STP": {
+   "name": "Creston STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Crystal Mountain STP": {
+   "name": "Crystal Mountain STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Cusick WWTP": {
+   "name": "Cusick WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "DAVENPORT WWTP": {
+   "name": "DAVENPORT WWTP",
+   "npdes_permit": "WA0045578",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "DAYTON STP": {
+   "name": "DAYTON STP",
+   "npdes_permit": "WA0020729",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "DCWA  - Salmon Creek STP": {
+   "name": "DCWA  - Salmon Creek STP",
+   "npdes_permit": null,
+   "basis": "hand",
+   "why": "Discovery Clean Water Alliance's Salmon Creek plant: not in EPA's lists (EPA's SALMON CREEK WWTP, WA0022772, is Southwest Suburban's, in Burien)"
+  },
+  "DCWA - Ridgefield STP": {
+   "name": "DCWA - Ridgefield STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "DEER PARK STP": {
+   "name": "DEER PARK STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "DIAMOND LAKE STP": {
+   "name": "DIAMOND LAKE STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "DOSEWALLIPS STATE PARK": {
+   "name": "DOSEWALLIPS STATE PARK",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "DUVALL STP": {
+   "name": "DUVALL STP",
+   "npdes_permit": "WA0029513",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Dallesport POTW": {
+   "name": "Dallesport POTW",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Davenport WWTP": {
+   "name": "Davenport WWTP",
+   "npdes_permit": "WA0045578",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Dayton STP": {
+   "name": "Dayton STP",
+   "npdes_permit": "WA0020729",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Deer Park STP": {
+   "name": "Deer Park STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Diamond Lake STP": {
+   "name": "Diamond Lake STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Dosewallips State Park STP": {
+   "name": "Dosewallips State Park STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Douglas County Sewer District W": {
+   "name": "Douglas County Sewer District WWTP",
+   "npdes_permit": "WA0020621",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Dryden POTW": {
+   "name": "Dryden POTW",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Duval WWTP": {
+   "name": "Duval WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "EASTSOUND ORCAS VILLAGE": {
+   "name": "EASTSOUND ORCAS VILLAGE",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "EASTSOUND WATER DISTRICT": {
+   "name": "EASTSOUND WATER DISTRICT",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "EATONVILLE STP": {
+   "name": "EATONVILLE STP",
+   "npdes_permit": "WA0037231",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "EDISON WWTF": {
+   "name": "EDISON WWTF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "EDMONDS STP": {
+   "name": "EDMONDS STP",
+   "npdes_permit": "WA0024058",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ELMA STP": {
+   "name": "ELMA STP",
+   "npdes_permit": "WA0023132",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ENDICOTT STP": {
+   "name": "ENDICOTT STP",
+   "npdes_permit": "WA0023981",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ENUMCLAW STP": {
+   "name": "ENUMCLAW STP",
+   "npdes_permit": "WA0020575",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "EPHRATA WATER RECLAMATION FACIL": {
+   "name": "EPHRATA WATER RECLAMATION FACILITY",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "EVERETT STP": {
+   "name": "EVERETT STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "EVERSON STP": {
+   "name": "EVERSON STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Eastsound - Orcas Village WWTP": {
+   "name": "Eastsound - Orcas Village WWTP",
+   "npdes_permit": "WA0030911",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Eastsound Sewer and Water Distr": {
+   "name": "Eastsound Sewer and Water District WWTP",
+   "npdes_permit": "WA0030571",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Eatonville STP": {
+   "name": "Eatonville STP",
+   "npdes_permit": "WA0037231",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Edison WWTF": {
+   "name": "Edison WWTF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Edmonds WWTP": {
+   "name": "Edmonds WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Ellensburg POTW": {
+   "name": "Ellensburg POTW",
+   "npdes_permit": "WA0024341",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Elma STP": {
+   "name": "Elma STP",
+   "npdes_permit": "WA0023132",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Endicott STP": {
+   "name": "Endicott STP",
+   "npdes_permit": "WA0023981",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Entiat POTW": {
+   "name": "Entiat POTW",
+   "npdes_permit": "WA0051276",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Enumclaw STP": {
+   "name": "Enumclaw STP",
+   "npdes_permit": "WA0020575",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Ephrata WRF": {
+   "name": "Ephrata WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Everett WPCF": {
+   "name": "Everett WPCF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Everson WWTP": {
+   "name": "Everson WWTP",
+   "npdes_permit": "WA0020435",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "FAIRFIELD WWTP": {
+   "name": "FAIRFIELD WWTP",
+   "npdes_permit": "WA0045489",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "FARMINGTON STP": {
+   "name": "FARMINGTON STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "FERNDALE STP": {
+   "name": "FERNDALE STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "FISHERMAN BAY STP": {
+   "name": "FISHERMAN BAY STP",
+   "npdes_permit": "WA0030589",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "FORKS STP": {
+   "name": "FORKS STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "FORT COLUMBIA STATE PARK STP": {
+   "name": "FORT COLUMBIA STATE PARK STP",
+   "npdes_permit": "WA0038709",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "FORT FLAGLER STATE PARK STP": {
+   "name": "FORT FLAGLER STATE PARK STP",
+   "npdes_permit": "WA0039829",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "FRIDAY HARBOR STP": {
+   "name": "FRIDAY HARBOR STP",
+   "npdes_permit": "WA0023582",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Fairchild Monile Home Community": {
+   "name": "Fairchild Monile Home Community STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Fairfield WWTP": {
+   "name": "Fairfield WWTP",
+   "npdes_permit": "WA0045489",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Farmington STP": {
+   "name": "Farmington STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Ferndale WWTP": {
+   "name": "Ferndale WWTP",
+   "npdes_permit": "WA0022454",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Fire Training Academy RWF": {
+   "name": "Fire Training Academy RWF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Fisherman Bay WWTP": {
+   "name": "Fisherman Bay WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Forks STP": {
+   "name": "Forks STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Fort Columbia State Park STP": {
+   "name": "Fort Columbia State Park STP",
+   "npdes_permit": "WA0038709",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Fort Flagler State Park STP": {
+   "name": "Fort Flagler State Park STP",
+   "npdes_permit": "WA0039829",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Freeman School District 358": {
+   "name": "Freeman School District 358",
+   "npdes_permit": "WA0045403",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Friday Harbor WWTP": {
+   "name": "Friday Harbor WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "GARFIELD STP": {
+   "name": "GARFIELD STP",
+   "npdes_permit": "WA0044822",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "GEORGE WWTP": {
+   "name": "GEORGE WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "GIG HARBOR STP": {
+   "name": "GIG HARBOR STP",
+   "npdes_permit": "WA0023957",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "GRAND COULEE WWTP": {
+   "name": "GRAND COULEE WWTP",
+   "npdes_permit": "WA0044857",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "GRAND MOUND STP": {
+   "name": "GRAND MOUND STP",
+   "npdes_permit": "WA0042099",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "GRANITE FALLS STP": {
+   "name": "GRANITE FALLS STP",
+   "npdes_permit": "WA0021130",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Garfield STP": {
+   "name": "Garfield STP",
+   "npdes_permit": "WA0044822",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "George WWTP": {
+   "name": "George WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Gig Harbor STP": {
+   "name": "Gig Harbor STP",
+   "npdes_permit": "WA0023957",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Glenwood POTW": {
+   "name": "Glenwood POTW",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Goldendale POTW": {
+   "name": "Goldendale POTW",
+   "npdes_permit": "WA0021121",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Grand Coulee WWTP": {
+   "name": "Grand Coulee WWTP",
+   "npdes_permit": "WA0044857",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Grand Mound STP": {
+   "name": "Grand Mound STP",
+   "npdes_permit": "WA0042099",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Grandview POTW": {
+   "name": "Grandview POTW",
+   "npdes_permit": "WA0052205",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Granger POTW": {
+   "name": "Granger POTW",
+   "npdes_permit": "WA0022691",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Granite Falls WWTP": {
+   "name": "Granite Falls WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "HARRINGTON WWTP": {
+   "name": "HARRINGTON WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "HARTSTENE POINTE STP": {
+   "name": "HARTSTENE POINTE STP",
+   "npdes_permit": "WA0038377",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "HOQUIAM STP": {
+   "name": "HOQUIAM STP",
+   "npdes_permit": "WA0020915",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Hamlet of Pleasant Harbor RWF": {
+   "name": "Hamlet of Pleasant Harbor RWF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Harrington WWTP": {
+   "name": "Harrington WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Hartstene Pointe STP": {
+   "name": "Hartstene Pointe STP",
+   "npdes_permit": "WA0038377",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Holmes Harbor RWF": {
+   "name": "Holmes Harbor RWF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Hoquiam STP": {
+   "name": "Hoquiam STP",
+   "npdes_permit": "WA0020915",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ILWACO STP": {
+   "name": "ILWACO STP",
+   "npdes_permit": "WA0023159",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "IONE STP": {
+   "name": "IONE STP",
+   "npdes_permit": "WA0045373",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Ilwaco STP": {
+   "name": "Ilwaco STP",
+   "npdes_permit": "WA0023159",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Ione STP": {
+   "name": "Ione STP",
+   "npdes_permit": "WA0045373",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "KALAMA STP": {
+   "name": "KALAMA STP",
+   "npdes_permit": "WA0020320",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "KETTLE FALLS STP": {
+   "name": "KETTLE FALLS STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "KING CNTY SOUTH WATER RECLAMATI": {
+   "name": "KING CNTY SOUTH WATER RECLAMATION",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "KING COUNTY BRIGHTWATER RECLAIM": {
+   "name": "KING COUNTY BRIGHTWATER RECLAIMED WATER PLANT",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "KING COUNTY BRIGHTWATER WWTP": {
+   "name": "KING COUNTY BRIGHTWATER WWTP",
+   "npdes_permit": "WA0032247",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "KING COUNTY SOUTH WWTP": {
+   "name": "KING COUNTY SOUTH WWTP",
+   "npdes_permit": "WA0029581",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "KING COUNTY WEST POINT WWTP": {
+   "name": "KING COUNTY WEST POINT WWTP",
+   "npdes_permit": "WA0029181",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "KITSAP CNTY CENTRAL KITSAP": {
+   "name": "KITSAP CNTY CENTRAL KITSAP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "KITSAP CNTY MANCHESTER": {
+   "name": "KITSAP CNTY MANCHESTER",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "KITSAP CNTY SEWER DIST 7": {
+   "name": "KITSAP CNTY SEWER DIST 7",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "KITSAP COUNTY KINGSTON WWTP": {
+   "name": "KITSAP COUNTY KINGSTON WWTP",
+   "npdes_permit": "WA0032077",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Kalama STP": {
+   "name": "Kalama STP",
+   "npdes_permit": "WA0020320",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Kennewick POTW": {
+   "name": "Kennewick POTW",
+   "npdes_permit": "WA0044784",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Kettle Falls STP": {
+   "name": "Kettle Falls STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "King County - Brightwater RWP": {
+   "name": "King County - Brightwater RWP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "King County - Brightwater WWTP": {
+   "name": "King County - Brightwater WWTP",
+   "npdes_permit": "WA0032247",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "King County - Carnation WWTP": {
+   "name": "King County - Carnation WWTP",
+   "npdes_permit": "WA0032182",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "King County - South Plant RWP": {
+   "name": "King County - South Plant RWP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "King County - South Plant WWTP": {
+   "name": "King County - South Plant WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "King County - Vashon STP": {
+   "name": "King County - Vashon STP",
+   "npdes_permit": "WA0022527",
+   "basis": "hand",
+   "why": "EPA: KING COUNTY VASHON WWTP"
+  },
+  "King County - West Point WWTP": {
+   "name": "King County - West Point WWTP",
+   "npdes_permit": "WA0029181",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "King County Carnation WWTP": {
+   "name": "King County Carnation WWTP",
+   "npdes_permit": "WA0032182",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "King County VASHON STP": {
+   "name": "King County VASHON STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Kitsap County - Central Kitsap": {
+   "name": "Kitsap County - Central Kitsap WWTP",
+   "npdes_permit": "WA0030520",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Kitsap County - Kingston WWTP": {
+   "name": "Kitsap County - Kingston WWTP",
+   "npdes_permit": "WA0032077",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Kitsap County - Manchester WWTP": {
+   "name": "Kitsap County - Manchester WWTP",
+   "npdes_permit": "WA0023701",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Kitsap County Sewer District #7": {
+   "name": "Kitsap County Sewer District #7 WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Kittitas POTW": {
+   "name": "Kittitas POTW",
+   "npdes_permit": "WA0021253",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Klickitat POTW": {
+   "name": "Klickitat POTW",
+   "npdes_permit": "WA0023698",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "LA CENTER STP": {
+   "name": "LA CENTER STP",
+   "npdes_permit": "WA0023230",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "LA CONNER STP": {
+   "name": "LA CONNER STP",
+   "npdes_permit": "WA0022446",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "LAKE STEVENS SEWER DISTRICT": {
+   "name": "LAKE STEVENS SEWER DISTRICT",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "several permits share the name"
+  },
+  "LAKOTA STP": {
+   "name": "LAKOTA STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "LANGLEY STP": {
+   "name": "LANGLEY STP",
+   "npdes_permit": "WA0020702",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "LARCH CORRECTION CENTER": {
+   "name": "LARCH CORRECTION CENTER",
+   "npdes_permit": "WA0038687",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "LATAH CREEK WWTP": {
+   "name": "LATAH CREEK WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "LEWIS COUNTY WATER & SEWER DIST": {
+   "name": "LEWIS COUNTY WATER & SEWER DIST 6 - LAKE MAYFIELD",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "LEWIS COUNTY WATER DIST NO 2 -": {
+   "name": "LEWIS COUNTY WATER DIST NO 2 - ONALASKA",
+   "npdes_permit": "WA0024546",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "LIBERTY LAKE SEWER & WATER DIST": {
+   "name": "LIBERTY LAKE SEWER & WATER DIST",
+   "npdes_permit": "WA0045144",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "LIGHTHOUSE POINT WATER RECLAMAT": {
+   "name": "LIGHTHOUSE POINT WATER RECLAMATION FACILITY",
+   "npdes_permit": "WA0022641",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "LIND WWTP": {
+   "name": "LIND WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "LONG BEACH STP": {
+   "name": "LONG BEACH STP",
+   "npdes_permit": "WA0022489",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "LOON LAKE SEWER DIST 4": {
+   "name": "LOON LAKE SEWER DIST 4",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "LOTT - Budd Inlet WRF": {
+   "name": "LOTT - Budd Inlet WRF",
+   "npdes_permit": "WA0037061",
+   "basis": "hand",
+   "why": "EPA: LOTT BUDD INLET WATER RECLAMATION FACILITY"
+  },
+  "LOTT - Martin Way WRF": {
+   "name": "LOTT - Martin Way WRF",
+   "npdes_permit": null,
+   "basis": "hand",
+   "why": "LOTT's Martin Way reclaimed-water plant: no NPDES permit in EPA's lists"
+  },
+  "LOTT BUDD INLET WATER RECLAMATI": {
+   "name": "LOTT BUDD INLET WATER RECLAMATION FACILITY",
+   "npdes_permit": "WA0037061",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "LOTT MARTIN WAY WATER RECLAMATI": {
+   "name": "LOTT MARTIN WAY WATER RECLAMATION FACILITY",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "LYNDEN STP": {
+   "name": "LYNDEN STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "LYNNWOOD STP": {
+   "name": "LYNNWOOD STP",
+   "npdes_permit": "WA0024031",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "La Center STP": {
+   "name": "La Center STP",
+   "npdes_permit": "WA0023230",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "La Conner STP": {
+   "name": "La Conner STP",
+   "npdes_permit": "WA0022446",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "LaCrosse STP": {
+   "name": "LaCrosse STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Lake Stevens Sewer District  WW": {
+   "name": "Lake Stevens Sewer District  WWTP",
+   "npdes_permit": "WA0020893",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Lake Wenatchee POTW": {
+   "name": "Lake Wenatchee POTW",
+   "npdes_permit": "WA0052094",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Lakehaven - Lakota WWTP": {
+   "name": "Lakehaven - Lakota WWTP",
+   "npdes_permit": "WA0022624",
+   "basis": "hand",
+   "why": "EPA: LAKOTA WWTP, Lakehaven Water and Sewer District"
+  },
+  "Lakehaven - Redondo WWTP": {
+   "name": "Lakehaven - Redondo WWTP",
+   "npdes_permit": "WA0023451",
+   "basis": "hand",
+   "why": "EPA: REDONDO WWTP, Lakehaven Water and Sewer District"
+  },
+  "Lakeview Terrice Community STP": {
+   "name": "Lakeview Terrice Community STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Langley STP": {
+   "name": "Langley STP",
+   "npdes_permit": "WA0020702",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Larch Corrections STP": {
+   "name": "Larch Corrections STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Larrabee WWTP": {
+   "name": "Larrabee WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Latah Creek WWTP": {
+   "name": "Latah Creek WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Leavenworth POTW": {
+   "name": "Leavenworth POTW",
+   "npdes_permit": "WA0020974",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Lewis County #2 - Onalaska": {
+   "name": "Lewis County #2 - Onalaska",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Lewis County #6 - Lake Mayfield": {
+   "name": "Lewis County #6 - Lake Mayfield",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Liberty Lake Sewer & Water Dist": {
+   "name": "Liberty Lake Sewer & Water Dist",
+   "npdes_permit": "WA0045144",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Liberty School District 362": {
+   "name": "Liberty School District 362",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Lighthouse Point WRF": {
+   "name": "Lighthouse Point WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Lind WWTP": {
+   "name": "Lind WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Long Beach STP": {
+   "name": "Long Beach STP",
+   "npdes_permit": "WA0022489",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Loon Lake Sewer Dist 4": {
+   "name": "Loon Lake Sewer Dist 4",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Lyle POTW": {
+   "name": "Lyle POTW",
+   "npdes_permit": "WA0050482",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Lynden WWTP": {
+   "name": "Lynden WWTP",
+   "npdes_permit": "WA0022578",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Lynnwood STP": {
+   "name": "Lynnwood STP",
+   "npdes_permit": "WA0024031",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "MARYSVILLE STP": {
+   "name": "MARYSVILLE STP",
+   "npdes_permit": "WA0022497",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "MATTAWA WWTP": {
+   "name": "MATTAWA WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "MCCLEARY STP": {
+   "name": "MCCLEARY STP",
+   "npdes_permit": "WA0024040",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "MEDICAL LAKE WATER RECLAMATION": {
+   "name": "MEDICAL LAKE WATER RECLAMATION FACILITY",
+   "npdes_permit": "WA0021148",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "MESA STP": {
+   "name": "MESA STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "METALINE FALLS STP": {
+   "name": "METALINE FALLS STP",
+   "npdes_permit": "WA0991009",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "METALINE STP": {
+   "name": "METALINE STP",
+   "npdes_permit": "WA0020699",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "MIDWAY SEWER DISTRICT": {
+   "name": "MIDWAY SEWER DISTRICT",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "several permits share the name"
+  },
+  "MILLER CREEK WWTP (SWSSD)": {
+   "name": "MILLER CREEK WWTP (SWSSD)",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "MILLERSYLVANIA STATE PARK": {
+   "name": "MILLERSYLVANIA STATE PARK",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "MONROE STP": {
+   "name": "MONROE STP",
+   "npdes_permit": "WA0020486",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "MONTESANO STP": {
+   "name": "MONTESANO STP",
+   "npdes_permit": "WA0024660",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "MORTON STP": {
+   "name": "MORTON STP",
+   "npdes_permit": "WA0022659",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "MOSES LAKE LARSON STP": {
+   "name": "MOSES LAKE LARSON STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "MOSES LAKE WWTP DUNES": {
+   "name": "MOSES LAKE WWTP DUNES",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "MOSSYROCK STP": {
+   "name": "MOSSYROCK STP",
+   "npdes_permit": "WA0021024",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "MT VERNON WWTP": {
+   "name": "MT VERNON WWTP",
+   "npdes_permit": "WA0024074",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "MUKILTEO WATER AND WASTEWATER D": {
+   "name": "MUKILTEO WATER AND WASTEWATER DISTRICT",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Mabton POTW": {
+   "name": "Mabton POTW",
+   "npdes_permit": "WA0020648",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Mansfield POTW": {
+   "name": "Mansfield POTW",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Marysville WWTP": {
+   "name": "Marysville WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Mason County - Belfair WRF": {
+   "name": "Mason County - Belfair WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Mason County - North Bay/Case I": {
+   "name": "Mason County - North Bay/Case Inlet WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Mason County - Rustlewood STP": {
+   "name": "Mason County - Rustlewood STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Mattawa WWTP": {
+   "name": "Mattawa WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "McCleary STP": {
+   "name": "McCleary STP",
+   "npdes_permit": "WA0024040",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "McNeil Island WWTP": {
+   "name": "McNeil Island WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Medical Lake WRF": {
+   "name": "Medical Lake WRF",
+   "npdes_permit": "WA0021148",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Mesa STP": {
+   "name": "Mesa STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Messenger House Care Center WWT": {
+   "name": "Messenger House Care Center WWTP",
+   "npdes_permit": "WA0023469",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Metaline Falls STP": {
+   "name": "Metaline Falls STP",
+   "npdes_permit": "WA0991009",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Metaline STP": {
+   "name": "Metaline STP",
+   "npdes_permit": "WA0020699",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Midway WWTP": {
+   "name": "Midway WWTP",
+   "npdes_permit": "WA0020958",
+   "basis": "hand",
+   "why": "EPA: MIDWAY SEWER DISTRICT WWTP"
+  },
+  "Millersylvania STP": {
+   "name": "Millersylvania STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Monroe WWTP": {
+   "name": "Monroe WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Montesano STP": {
+   "name": "Montesano STP",
+   "npdes_permit": "WA0024660",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Morton STP": {
+   "name": "Morton STP",
+   "npdes_permit": "WA0022659",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Moses Lake Dunes WWTP": {
+   "name": "Moses Lake Dunes WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Moses Lake Larson STP": {
+   "name": "Moses Lake Larson STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Mossyrock STP": {
+   "name": "Mossyrock STP",
+   "npdes_permit": "WA0021024",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Mount Vernon WWTP": {
+   "name": "Mount Vernon WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Mukilteo WWTP": {
+   "name": "Mukilteo WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "NEWPORT WWTP": {
+   "name": "NEWPORT WWTP",
+   "npdes_permit": "WA0022322",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "NORTH BAY/CASE INLET WATER RECL": {
+   "name": "NORTH BAY/CASE INLET WATER RECLAMATION FACILITY",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "NORTH BEND STP": {
+   "name": "NORTH BEND STP",
+   "npdes_permit": "WA0029351",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "NORTH BONNEVILLE STP": {
+   "name": "NORTH BONNEVILLE STP",
+   "npdes_permit": "WA0023388",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Naches POTW": {
+   "name": "Naches POTW",
+   "npdes_permit": "WA0022586",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Newport WWTP": {
+   "name": "Newport WWTP",
+   "npdes_permit": "WA0022322",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "North Bend WWTP": {
+   "name": "North Bend WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "North Bonneville STP": {
+   "name": "North Bonneville STP",
+   "npdes_permit": "WA0023388",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "OAK HARBOR STP": {
+   "name": "OAK HARBOR STP",
+   "npdes_permit": "WA0020567",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "OAKESDALE STP": {
+   "name": "OAKESDALE STP",
+   "npdes_permit": "WA0044792",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "OCEAN SHORES STP": {
+   "name": "OCEAN SHORES STP",
+   "npdes_permit": "WA0023817",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ODESSA STP": {
+   "name": "ODESSA STP",
+   "npdes_permit": "WA0045560",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "OLYMPIC CORRECTIONS CENTER": {
+   "name": "OLYMPIC CORRECTIONS CENTER",
+   "npdes_permit": "WA0038938",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ORTING STP": {
+   "name": "ORTING STP",
+   "npdes_permit": "WA0020303",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "OTHELLO STP": {
+   "name": "OTHELLO STP",
+   "npdes_permit": "WA0022357",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Oak Harbor Clean Water Facility": {
+   "name": "Oak Harbor Clean Water Facility",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Oakesdale STP": {
+   "name": "Oakesdale STP",
+   "npdes_permit": "WA0044792",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Ocean Shores STP": {
+   "name": "Ocean Shores STP",
+   "npdes_permit": "WA0023817",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Odessa STP": {
+   "name": "Odessa STP",
+   "npdes_permit": "WA0045560",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Okanogan POTW": {
+   "name": "Okanogan POTW",
+   "npdes_permit": "WA0022365",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Olympic Corrections STP": {
+   "name": "Olympic Corrections STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Omak POTW": {
+   "name": "Omak POTW",
+   "npdes_permit": "WA0020940",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Oroville POTW": {
+   "name": "Oroville POTW",
+   "npdes_permit": "WA0022390",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Orting STP": {
+   "name": "Orting STP",
+   "npdes_permit": "WA0020303",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Othello STP": {
+   "name": "Othello STP",
+   "npdes_permit": "WA0022357",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "PACIFIC BEACH STP": {
+   "name": "PACIFIC BEACH STP",
+   "npdes_permit": "WA0037095",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "PALOUSE STP": {
+   "name": "PALOUSE STP",
+   "npdes_permit": "WA0044806",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "PE ELL STP": {
+   "name": "PE ELL STP",
+   "npdes_permit": "WA0020192",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "PENN COVE WWTP": {
+   "name": "PENN COVE WWTP",
+   "npdes_permit": "WA0029386",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "POMEROY STP": {
+   "name": "POMEROY STP",
+   "npdes_permit": "WA0021164",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "PORT ANGELES STP": {
+   "name": "PORT ANGELES STP",
+   "npdes_permit": "WA0023973",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "PORT ORCHARD WWTP": {
+   "name": "PORT ORCHARD WWTP",
+   "npdes_permit": "WA0020346",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "PORT TOWNSEND STP": {
+   "name": "PORT TOWNSEND STP",
+   "npdes_permit": "WA0037052",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "PULLMAN WWTP": {
+   "name": "PULLMAN WWTP",
+   "npdes_permit": "WA0044652",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Pacific Beach STP": {
+   "name": "Pacific Beach STP",
+   "npdes_permit": "WA0037095",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Palouse STP": {
+   "name": "Palouse STP",
+   "npdes_permit": "WA0044806",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Pasco WWTP": {
+   "name": "Pasco WWTP",
+   "npdes_permit": "WA0044962",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Pateros POTW": {
+   "name": "Pateros POTW",
+   "npdes_permit": "WA0020559",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Pe Ell STP": {
+   "name": "Pe Ell STP",
+   "npdes_permit": "WA0020192",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Pearrygin Lake State Park, West": {
+   "name": "Pearrygin Lake State Park, West Campground",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Penn Cove WWTP": {
+   "name": "Penn Cove WWTP",
+   "npdes_permit": "WA0029386",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Peshastin POTW": {
+   "name": "Peshastin POTW",
+   "npdes_permit": "WA0052175",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Picnic Point WWTP": {
+   "name": "Picnic Point WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Pierce County - Cascadia WWTP": {
+   "name": "Pierce County - Cascadia WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Pierce County - Chambers Creek": {
+   "name": "Pierce County - Chambers Creek WWTP",
+   "npdes_permit": "WA0039624",
+   "basis": "hand",
+   "why": "EPA: CHAMBERS CREEK STP, Pierce County Public Works"
+  },
+  "Pomeroy STP": {
+   "name": "Pomeroy STP",
+   "npdes_permit": "WA0021164",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Port Angeles STP": {
+   "name": "Port Angeles STP",
+   "npdes_permit": "WA0023973",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Port Gamble RWP": {
+   "name": "Port Gamble RWP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Port Hadlocl STP": {
+   "name": "Port Hadlocl STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Port Ludlow WWP": {
+   "name": "Port Ludlow WWP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Port Orchard WWTP": {
+   "name": "Port Orchard WWTP",
+   "npdes_permit": "WA0020346",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Port Townsend STP": {
+   "name": "Port Townsend STP",
+   "npdes_permit": "WA0037052",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Post Point Resource Recovery Pl": {
+   "name": "Post Point Resource Recovery Plant",
+   "npdes_permit": "WA0023744",
+   "basis": "hand",
+   "why": "EPA: BELLINGHAM STP (Post Point), City of Bellingham"
+  },
+  "Prosser POTW": {
+   "name": "Prosser POTW",
+   "npdes_permit": "WA0020800",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Pullman WWTP": {
+   "name": "Pullman WWTP",
+   "npdes_permit": "WA0044652",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Quincy WRF": {
+   "name": "Quincy WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Quincy Water Reclamation Facili": {
+   "name": "Quincy Water Reclamation Facility",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "REARDAN STP": {
+   "name": "REARDAN STP",
+   "npdes_permit": "WA0045306",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "REDONDO STP": {
+   "name": "REDONDO STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "REPUBLIC STP": {
+   "name": "REPUBLIC STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "RIDGEFIELD STP": {
+   "name": "RIDGEFIELD STP",
+   "npdes_permit": "WA0023272",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "RITZVILLE WWTP": {
+   "name": "RITZVILLE WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "ROCKFORD WWTP": {
+   "name": "ROCKFORD WWTP",
+   "npdes_permit": "WA0044831",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ROSALIA STP": {
+   "name": "ROSALIA STP",
+   "npdes_permit": "WA0044687",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "ROYAL CITY WATER RECLAMATION FA": {
+   "name": "ROYAL CITY WATER RECLAMATION FACILITY (WRF)",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "RUSTLEWOOD STP": {
+   "name": "RUSTLEWOOD STP",
+   "npdes_permit": "WA0038075",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Radar Hill Sewer System": {
+   "name": "Radar Hill Sewer System",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Reardan STP": {
+   "name": "Reardan STP",
+   "npdes_permit": "WA0045306",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Republic STP": {
+   "name": "Republic STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Richland POTW": {
+   "name": "Richland POTW",
+   "npdes_permit": "WA0020419",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Ridgefield STP": {
+   "name": "Ridgefield STP",
+   "npdes_permit": "WA0023272",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Rim Rock Cove WWTP": {
+   "name": "Rim Rock Cove WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Ritzville WWTP": {
+   "name": "Ritzville WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Roche Harbor Resort STP": {
+   "name": "Roche Harbor Resort STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Rock Island POTW": {
+   "name": "Rock Island POTW",
+   "npdes_permit": "WA0501487",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Rockford WWTP": {
+   "name": "Rockford WWTP",
+   "npdes_permit": "WA0044831",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Rosalia STP": {
+   "name": "Rosalia STP",
+   "npdes_permit": "WA0044687",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Rosario WWTP": {
+   "name": "Rosario WWTP",
+   "npdes_permit": "WA0029891",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Royal City WRF": {
+   "name": "Royal City WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SACHEEN LAKE WATER & SEWER DIST": {
+   "name": "SACHEEN LAKE WATER & SEWER DISTRICT",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SALMON CREEK STP (DCWA)": {
+   "name": "SALMON CREEK STP (DCWA)",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SALMON CREEK WWTP (SWSSD)": {
+   "name": "SALMON CREEK WWTP (SWSSD)",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SATSOP BUSINESS PARK WASTEWATER": {
+   "name": "SATSOP BUSINESS PARK WASTEWATER TREATMENT PLANT",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SEATTLE CITY LIGHT NEWHALEM": {
+   "name": "SEATTLE CITY LIGHT NEWHALEM",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SEDRO WOOLLEY STP": {
+   "name": "SEDRO WOOLLEY STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SEKIU STP": {
+   "name": "SEKIU STP",
+   "npdes_permit": "WA0024449",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "SEQUIM WATER RECLAMATION FACILI": {
+   "name": "SEQUIM WATER RECLAMATION FACILITY",
+   "npdes_permit": "WA0022349",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "SHELTON STP": {
+   "name": "SHELTON STP",
+   "npdes_permit": "WA0023345",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "SHELTON WATER RECLAMATION FACIL": {
+   "name": "SHELTON WATER RECLAMATION FACILITY",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SKAGIT CNTY 2 BIG LAKE": {
+   "name": "SKAGIT CNTY 2 BIG LAKE",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SNOHOMISH STP": {
+   "name": "SNOHOMISH STP",
+   "npdes_permit": "WA0029548",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "SNOQUALMIE WWTP": {
+   "name": "SNOQUALMIE WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SOAP LAKE STP": {
+   "name": "SOAP LAKE STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SOUTH PRAIRIE STP": {
+   "name": "SOUTH PRAIRIE STP",
+   "npdes_permit": "WA0040479",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "SPANGLE WWTP": {
+   "name": "SPANGLE WWTP",
+   "npdes_permit": "WA0991010",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "SPOKANE COUNTY REGIONAL WATER R": {
+   "name": "SPOKANE COUNTY REGIONAL WATER RECLAMATION FACILITY (SCRWRF)",
+   "npdes_permit": "WA0093317",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "SPOKANE RIVERSIDE PARK WATER RE": {
+   "name": "SPOKANE RIVERSIDE PARK WATER RECLAMATION FACILITY",
+   "npdes_permit": "WA0024473",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "SPRAGUE STP": {
+   "name": "SPRAGUE STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "SPRINGDALE WWTP": {
+   "name": "SPRINGDALE WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "STANWOOD STP": {
+   "name": "STANWOOD STP",
+   "npdes_permit": "WA0020290",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "STEPTOE SEWER DISTRICT 1": {
+   "name": "STEPTOE SEWER DISTRICT 1",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "STEVENSON STP": {
+   "name": "STEVENSON STP",
+   "npdes_permit": "WA0020672",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "SULTAN WWTP": {
+   "name": "SULTAN WWTP",
+   "npdes_permit": "WA0023302",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "SUMNER STP": {
+   "name": "SUMNER STP",
+   "npdes_permit": "WA0023353",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "SWSSD - Miller Creek WWTP": {
+   "name": "SWSSD - Miller Creek WWTP",
+   "npdes_permit": "WA0022764",
+   "basis": "hand",
+   "why": "EPA: MILLER CREEK WWTP, Southwest Suburban Sewer District"
+  },
+  "SWSSD - Salmon Creek WWTP": {
+   "name": "SWSSD - Salmon Creek WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Sacheen Lake Water & Sewer Dist": {
+   "name": "Sacheen Lake Water & Sewer District",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Satsop Business Park STP": {
+   "name": "Satsop Business Park STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Seashore Villa STP": {
+   "name": "Seashore Villa STP",
+   "npdes_permit": "WA0037273",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Seattle CSO": {
+   "name": "Seattle CSO",
+   "npdes_permit": "WA0031682",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Seattle City Light - Newhalem W": {
+   "name": "Seattle City Light - Newhalem WWTP",
+   "npdes_permit": "WA0029670",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Sedro Wolley WWTP": {
+   "name": "Sedro Wolley WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Sekiu STP": {
+   "name": "Sekiu STP",
+   "npdes_permit": "WA0024449",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Selah POTW": {
+   "name": "Selah POTW",
+   "npdes_permit": "WA0021032",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Selkirk School Disrtict 70": {
+   "name": "Selkirk School Disrtict 70",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Sequim WRF": {
+   "name": "Sequim WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Shelton STP": {
+   "name": "Shelton STP",
+   "npdes_permit": "WA0023345",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Shelton WRF": {
+   "name": "Shelton WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Snohomish WWTP": {
+   "name": "Snohomish WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Snoqualmie Pass Utility Dist PO": {
+   "name": "Snoqualmie Pass Utility Dist POTW",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Snoqualmie WRF": {
+   "name": "Snoqualmie WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Soap Lake STP": {
+   "name": "Soap Lake STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "South Prairie STP": {
+   "name": "South Prairie STP",
+   "npdes_permit": "WA0040479",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Spangle WWTP": {
+   "name": "Spangle WWTP",
+   "npdes_permit": "WA0991010",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Spokane County Regional WRF": {
+   "name": "Spokane County Regional WRF",
+   "npdes_permit": "WA0093317",
+   "basis": "hand",
+   "why": "EPA: SPOKANE COUNTY REGIONAL WATER RECLAMATION FACILITY"
+  },
+  "Spokane Riverside Park WRF": {
+   "name": "Spokane Riverside Park WRF",
+   "npdes_permit": "WA0024473",
+   "basis": "hand",
+   "why": "EPA: SPOKANE RIVERSIDE PARK WATER RECLAMATION FACILITY"
+  },
+  "Sprague STP": {
+   "name": "Sprague STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Springdale WWTP": {
+   "name": "Springdale WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "St. John WWTP": {
+   "name": "St. John WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Stanwood WWTP": {
+   "name": "Stanwood WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Stella STO": {
+   "name": "Stella STO",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Steptoe Sewer District 1": {
+   "name": "Steptoe Sewer District 1",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Stevens Pass Sewer District": {
+   "name": "Stevens Pass Sewer District",
+   "npdes_permit": "WA0029521",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Stevenson STP": {
+   "name": "Stevenson STP",
+   "npdes_permit": "WA0020672",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Sultan WWTP": {
+   "name": "Sultan WWTP",
+   "npdes_permit": "WA0023302",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Sumner STP": {
+   "name": "Sumner STP",
+   "npdes_permit": "WA0023353",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Sun Village Resort STP": {
+   "name": "Sun Village Resort STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Sunland WRF": {
+   "name": "Sunland WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Sunnyside POTW": {
+   "name": "Sunnyside POTW",
+   "npdes_permit": "WA0020991",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "TACOMA CENTRAL NO 1": {
+   "name": "TACOMA CENTRAL NO 1",
+   "npdes_permit": "WA0037087",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "TACOMA NORTH NO 3": {
+   "name": "TACOMA NORTH NO 3",
+   "npdes_permit": "WA0037214",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "TAMOSHAN STP": {
+   "name": "TAMOSHAN STP",
+   "npdes_permit": "WA0037290",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "TEKOA STP": {
+   "name": "TEKOA STP",
+   "npdes_permit": "WA0023141",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "TENINO WATER RECLAMATION FACILI": {
+   "name": "TENINO WATER RECLAMATION FACILITY",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "THREE RIVERS REGIONAL WASTEWATE": {
+   "name": "THREE RIVERS REGIONAL WASTEWATER PLANT",
+   "npdes_permit": "WA0037788",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "TOLEDO STP": {
+   "name": "TOLEDO STP",
+   "npdes_permit": "WA0036986",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "TOUTLE STP": {
+   "name": "TOUTLE STP",
+   "npdes_permit": "WA0037770",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "TOWN OF ST. JOHN": {
+   "name": "TOWN OF ST. JOHN",
+   "npdes_permit": "WA0021229",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Tacoma - Central STP": {
+   "name": "Tacoma - Central STP",
+   "npdes_permit": "WA0037087",
+   "basis": "hand",
+   "why": "EPA: TACOMA CENTRAL NO 1, City of Tacoma"
+  },
+  "Tacoma - North STP": {
+   "name": "Tacoma - North STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Tamoshan STP": {
+   "name": "Tamoshan STP",
+   "npdes_permit": "WA0037290",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Taylor Bay Beach Club STP": {
+   "name": "Taylor Bay Beach Club STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Tekoa STP": {
+   "name": "Tekoa STP",
+   "npdes_permit": "WA0023141",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Tenino WRF": {
+   "name": "Tenino WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Three Rivers Regional STP": {
+   "name": "Three Rivers Regional STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Toledo STP": {
+   "name": "Toledo STP",
+   "npdes_permit": "WA0036986",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Tonasket POTW": {
+   "name": "Tonasket POTW",
+   "npdes_permit": "WA0052337",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Twisp POTW": {
+   "name": "Twisp POTW",
+   "npdes_permit": "WA0023370",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Tyson Fresh Meats STP": {
+   "name": "Tyson Fresh Meats STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "UNIONTOWN STP": {
+   "name": "UNIONTOWN STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Uniontown STP": {
+   "name": "Uniontown STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Upper Columbia Academy STP": {
+   "name": "Upper Columbia Academy STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "VADER STP": {
+   "name": "VADER STP",
+   "npdes_permit": "WA0021083",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "VANCOUVER MARINE PARK STP": {
+   "name": "VANCOUVER MARINE PARK STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "VANCOUVER WEST STP": {
+   "name": "VANCOUVER WEST STP",
+   "npdes_permit": "WA0024350",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Vader STP": {
+   "name": "Vader STP",
+   "npdes_permit": "WA0021083",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Vancouver - Marine Park STP": {
+   "name": "Vancouver - Marine Park STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Vancouver - Westside STP": {
+   "name": "Vancouver - Westside STP",
+   "npdes_permit": "WA0024350",
+   "basis": "hand",
+   "why": "EPA: VANCOUVER WEST STP, City of Vancouver"
+  },
+  "Vantage Bay Wastewater Treatmen": {
+   "name": "Vantage Bay Wastewater Treatment Plant",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Vantage POTW": {
+   "name": "Vantage POTW",
+   "npdes_permit": "WA0050474",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "WA DSHS MCNEIL ISLAND WWTP": {
+   "name": "WA DSHS MCNEIL ISLAND WWTP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "WA PARKS LARRABEE": {
+   "name": "WA PARKS LARRABEE",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "WA State Fire Training Academy": {
+   "name": "WA State Fire Training Academy",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "WAITSBURG STP": {
+   "name": "WAITSBURG STP",
+   "npdes_permit": "WA0045551",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "WAITTS LAKE SEWER SYSTEM": {
+   "name": "WAITTS LAKE SEWER SYSTEM",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "WALLA WALLA WATER DISTRICT 2": {
+   "name": "WALLA WALLA WATER DISTRICT 2",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "WALLA WALLA WATER RECLAMATION F": {
+   "name": "WALLA WALLA WATER RECLAMATION FACILITY",
+   "npdes_permit": "WA0024627",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "WARDEN WATER RECLAMATION FACILI": {
+   "name": "WARDEN WATER RECLAMATION FACILITY",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "WASHOUGAL STP": {
+   "name": "WASHOUGAL STP",
+   "npdes_permit": "WA0037427",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "WASHTUCNA_": {
+   "name": "WASHTUCNA ",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "WESTPORT STP": {
+   "name": "WESTPORT STP",
+   "npdes_permit": "WA0020923",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "WHATCOM CNTY WATER DIST 13_": {
+   "name": "WHATCOM CNTY WATER DIST 13 ",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "WILBUR STP": {
+   "name": "WILBUR STP",
+   "npdes_permit": "WA0044920",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "WILKESON STP": {
+   "name": "WILKESON STP",
+   "npdes_permit": "WA0023281",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "WILLAPA REGIONAL WASTEWATER TRE": {
+   "name": "WILLAPA REGIONAL WASTEWATER TREATMENT PLANT",
+   "npdes_permit": "WA0041041",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "WILLIAMS LAKE SEWER DISTRICT NO": {
+   "name": "WILLIAMS LAKE SEWER DISTRICT NO 2",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "WINLOCK STP": {
+   "name": "WINLOCK STP",
+   "npdes_permit": "WA0021199",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "WOODBROOK STP": {
+   "name": "WOODBROOK STP",
+   "npdes_permit": "WA0023795",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "WOODLAND STP": {
+   "name": "WOODLAND STP",
+   "npdes_permit": "WA0020401",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Waitsburg STP": {
+   "name": "Waitsburg STP",
+   "npdes_permit": "WA0045551",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Waitts Lake Sewer System": {
+   "name": "Waitts Lake Sewer System",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Walla Walla WRF": {
+   "name": "Walla Walla WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Walla Walla Water District 2": {
+   "name": "Walla Walla Water District 2",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Warden Hutterian Brethren STP": {
+   "name": "Warden Hutterian Brethren STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Warden WRF": {
+   "name": "Warden WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Warm Beach Campground STP": {
+   "name": "Warm Beach Campground STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Washougal STP": {
+   "name": "Washougal STP",
+   "npdes_permit": "WA0037427",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Washtucna": {
+   "name": "Washtucna",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Waterville POTW": {
+   "name": "Waterville POTW",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Wenatchee POTW": {
+   "name": "Wenatchee POTW",
+   "npdes_permit": "WA0023949",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "West Richland POTW": {
+   "name": "West Richland POTW",
+   "npdes_permit": "WA0051063",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Westport STP": {
+   "name": "Westport STP",
+   "npdes_permit": "WA0020923",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Whatcom  District 13 STP": {
+   "name": "Whatcom  District 13 STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Wilbur STP": {
+   "name": "Wilbur STP",
+   "npdes_permit": "WA0044920",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Wilkeson STP": {
+   "name": "Wilkeson STP",
+   "npdes_permit": "WA0023281",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Willapa Regional STP": {
+   "name": "Willapa Regional STP",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Williams Lake Sewer District No": {
+   "name": "Williams Lake Sewer District No 2",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Winlock STP": {
+   "name": "Winlock STP",
+   "npdes_permit": "WA0021199",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Winthrop POTW": {
+   "name": "Winthrop POTW",
+   "npdes_permit": "WA0020885",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Wishram POTW": {
+   "name": "Wishram POTW",
+   "npdes_permit": "WA0051292",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Woodland STP": {
+   "name": "Woodland STP",
+   "npdes_permit": "WA0020401",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "YELM WATER RECLAMATION FACILITY": {
+   "name": "YELM WATER RECLAMATION FACILITY",
+   "npdes_permit": "WA0040762",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Yakima POTW": {
+   "name": "Yakima POTW",
+   "npdes_permit": "WA0024023",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "Yelm WRF": {
+   "name": "Yelm WRF",
+   "npdes_permit": null,
+   "basis": "none",
+   "why": "no permit in EPA's lists has this name"
+  },
+  "Zillah POTW": {
+   "name": "Zillah POTW",
+   "npdes_permit": "WA0020168",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "_Ridgefield STP": {
+   "name": " Ridgefield STP",
+   "npdes_permit": "WA0023272",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  },
+  "choice_500": {
+   "name": "SEKIU STP",
+   "npdes_permit": "WA0024449",
+   "basis": "name",
+   "why": "Ecology's name equals EPA's facility or permittee name"
+  }
+ }
+}
