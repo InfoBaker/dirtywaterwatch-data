@@ -13,7 +13,7 @@ from ingest import wa_ecology_spills as E
 
 FIX = Path(__file__).resolve().parent / "fixtures"
 FETCHED = "2026-11-04T12:00:00Z"
-FACILITIES = {"Sample City STP": {"name": "Sample City STP", "npdes_permit": "WA0099001", "basis": "name"},
+FACILITIES = {"Sample City STP": {"name": "Sample City Sewage Treatment Plant", "npdes_permit": "WA0099001", "basis": "name"},
               "Seattle CSO": {"name": "Seattle CSO", "npdes_permit": "WA0031682", "basis": "name"},
               "Sample Bay WWTP": {"name": "Sample Bay WWTP", "npdes_permit": "WA0099003", "basis": "hand"}}
 OPERATORS = {"WA0099001": "wa-sample-city", "WA0031682": "wa-seattle-spu"}
@@ -53,6 +53,7 @@ def test_ecology_sso_keeps_its_times_operator_volume_and_named_water():
     assert r["reported_at"] is None and r["published_at"] is None and r["source_updated_at"] is None
     assert r["raw"]["_first_seen_at"] == FETCHED
     assert r["npdes_permit"] == "WA0099001" and r["discharger_id"] == "wa-sample-city"
+    assert r["discharger_name"] == "Sample City Sewage Treatment Plant"          # the full name, not the 30-letter code
     assert r["volume_gal"] == 1200 and r["volume_text"] == "1,200 Gallons"
     assert r["waterbody_text"] == "Sample River" and r["raw"]["reached_water"] is True
     assert r["lat"] is None and r["material"] == "None (Raw Sewage)"

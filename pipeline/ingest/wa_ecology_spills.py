@@ -63,7 +63,7 @@ Record rules
     unknown. water_slugs stay empty: the status build places by name, permit and town.
   - Operator: permitee -> permit through data/reference/wa-ecology-facility-permits.json, then the Washington row of
     data/dischargers.json holding that permit (raw._discharger_basis says which); discharger_name is Ecology's
-    facility name.
+    facility name in full (the stored code is cut to 30 characters).
   - Volume: final_total_event_volume, else initial_estimated_amount (estimate_flag estimated). A plain "N gallons"
     is volume_gal; ranges, rates and words stay volume_text only.
   - History: a report that leaves the layer keeps its record with raw._missing_from_layer_since; fields that change
@@ -355,7 +355,7 @@ def to_record(a: dict, fetched_at: str, facilities: dict, operators: dict, prev:
         raw["_revisions"] = revisions
     where = urllib.parse.quote("globalid='{" + gid.upper() + "}'")
     return event(source_id=SOURCE_ID, source_record_id=gid, event_type=et, status=status,
-                 discharger_id=dis, discharger_name=code or None, npdes_permit=permit,
+                 discharger_id=dis, discharger_name=clean(fac.get("name")) or code or None, npdes_permit=permit,
                  outfall_name=clean(a.get("location")) or None,
                  waterbody_text="; ".join(names) or None, water_slugs=[], water_match="none",
                  started_at=iso(start), ended_at=ended, time_precision="minute" if start else None,
