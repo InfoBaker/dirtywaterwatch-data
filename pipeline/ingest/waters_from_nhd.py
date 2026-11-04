@@ -412,7 +412,14 @@ def sql_names(t: dict) -> list[str]:
         else:
             joined.append(w)
     out.add(" ".join(joined).upper())
-    if t.get("define_by"):          # a state build: the inverted GNIS form too ('APOPKA, LAKE' for Lake Apopka)
+    if t.get("report_name"):        # a report's spelling: without 'of', without a possessive, 'Wills Branch Creek' as
+        for x in list(out):         # 'WILLS BRANCH', the Intracoastal Waterway under GNIS's two names
+            y = re.sub(r"\b(OF|THE)\b\s*", "", x).strip()
+            out.update({y, re.sub(r"'S\b", "S", y), re.sub(r"'S\b", "", y), re.sub(r"\bBRANCH CREEK$", "BRANCH", y)})
+            if re.fullmatch(r"(INTRACOASTAL WATERWAY|INTRACOASTAL)", y):
+                out.update({"ATLANTIC INTRACOASTAL WATERWAY", "GULF INTRACOASTAL WATERWAY"})
+    if t.get("define_by") or t.get("report_name"):
+        # a state build or a report name: the inverted GNIS form too ('APOPKA, LAKE' for Lake Apopka)
         for x in list(out):
             first, _, rest = x.partition(" ")
             if rest and first.lower() in INVERTED_LEAD:
@@ -3622,7 +3629,8 @@ def state_main(args) -> int:
 
 REPORT_FIX = [(re.compile(r"\bun-?n?am+ed\b", re.I), "unnamed"),
               (re.compile(r"\btrib(?:ua|au|uat|u)tary\b|\btribuatary\b|\btributray\b", re.I), "tributary"),
-              (re.compile(r"^\s*icw\s*$", re.I), "Intracoastal Waterway")]
+              (re.compile(r"^\s*icw\s*$", re.I), "Intracoastal Waterway"),
+              (re.compile(r"\bintercoastal\b", re.I), "Intracoastal")]
 # a report's text that names no public water (checked on the whole text, before any name is read from it)
 REPORT_NOT_WATER = [
     (re.compile(r"\bms4\b|\bmunicipal separate storm", re.I), "a storm-sewer system (MS4), not a named water"),
@@ -3895,7 +3903,7 @@ def collect_name_targets(state: str, rows: list[dict], resolver: S.Resolver, wat
                 t = targets[key] = Target(state=state, key=f"{state}:reports:{key[1]}", names=Counter(), texts=Counter(),
                                           outfalls=0, events=0, points=Counter(), towns=Counter(), sources=Counter(),
                                           point_mode=False, refs=[], outfall_points=Counter(), report_rows=[],
-                                          tributary=False, notes=[])
+                                          tributary=False, notes=[], report_name=True)
             t["names"][p] += r["reports"]
             t["texts"][r["name"]] += r["reports"]
             t["events"] += r["reports"]
@@ -3956,6 +3964,17 @@ def prefetch_names(nhd: Nhd, state: str, targets: list, layer: int, attr: str) -
     ask()
 
 
+def report_score(target_ws: list[str], gnis: str | None) -> float:
+    """name_score for a report's spelling: 'of' and 'the' aside ('South Fork of Middle River'), and GNIS's 'Atlantic' or
+    'Gulf' in front of the Intracoastal Waterway aside."""
+    tw = [w for w in target_ws if w not in ("of", "the")]
+    gw = [w for w in words(gnis_display(gnis)) if w not in ("of", "the")] if gnis else []
+    sc = name_score(tw, " ".join(gw)) if gw else 0.0
+    if sc < 0.8 and gw and [w for w in gw if w not in ("atlantic", "gulf")] == tw and "intracoastal" in tw:
+        return 0.9
+    return sc
+
+
 def report_name_choices(nhd: Nhd, t) -> tuple[list[tuple], str | None, list[dict]]:
     """([(feature key, choice, how)], reason when none, places that found none): the NHDPlus V2.1 features of the
     target's name in the state (prefetch_names), the one nearest each place the reports give: each cluster of their
@@ -3965,15 +3984,18 @@ def report_name_choices(nhd: Nhd, t) -> tuple[list[tuple], str | None, list[dict
     st = t["state"]
     groups = defaultdict(list)
     for f in t.get("_l2") or []:
-        if f.get("gnis_id") and name_score(t["words"], f.get("gnis_name")) >= 0.8:
+        if f.get("gnis_id") and report_score(t["words"], f.get("gnis_name")) >= 0.8:
             groups[("line", f["gnis_id"])].append(f)
     if wants_area(t) or not groups:
         for f in t.get("_l4") or []:
-            if f.get("ftype") in LAKE_FTYPES and name_score(t["words"], f.get("gnis_name")) >= 0.8:
+            if f.get("ftype") in LAKE_FTYPES and report_score(t["words"], f.get("gnis_name")) >= 0.8:
                 groups[("wb", f.get("gnis_id") or f["comid"])].append(f)
     shape_ = nhd.states.shapes[st].buffer(0.01)
     groups = {k: v for k, v in groups.items() if any(f["_geom"] is not None and f["_geom"].intersects(shape_) for f in v)}
     if not groups:
+        town = nhd.towns.canonical(st, t["name"])
+        if town:
+            return [], f"the name of a town ({town}), not of a water: no NHD water of that name in {st}", []
         return [], f"no NHD flowline or waterbody of that name in {st}", []
 
     def pick(k):
