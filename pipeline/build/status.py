@@ -2773,10 +2773,14 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         assumed = end_assumed(ev, now, rules)
         if assumed:             # no end reported, 30 days on: the site assumes it ended (owner, 2026-11-03)
             placements[eid]["end_assumed_at"] = iso(assumed)
+            when = f"{assumed.astimezone(LOCAL):%b} {assumed.astimezone(LOCAL).day}, {assumed.astimezone(LOCAL).year}"
+            days = int(unresolved_days(rules))
             placements[eid]["note"] = "; ".join(x for x in (placements[eid].get("note"), (
-                f"no end was reported: this site assumes the discharge ended {int(unresolved_days(rules))} days after it "
-                f"began ({assumed.astimezone(LOCAL):%b} {assumed.astimezone(LOCAL).day}, {assumed.astimezone(LOCAL).year}) "
-                "and it colours nothing since; the end was never reported")) if x)
+                f"the published end ({ev.get('ended_at')}) is not used: this site assumes the discharge ended {days} days "
+                f"after it began ({when}) and it colours nothing since; no usable end was reported"
+                if ev.get("ended_at") else
+                f"no end was reported: this site assumes the discharge ended {days} days after it "
+                f"began ({when}) and it colours nothing since; the end was never reported")) if x)
         for s in pl["unknown_slugs"]:
             unknown_slugs[s] += 1
         eff = effective.get(eid, ev)
