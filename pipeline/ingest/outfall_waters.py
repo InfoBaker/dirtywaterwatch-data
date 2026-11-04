@@ -774,10 +774,13 @@ def names_another_water(o: dict, waters: dict) -> bool:
     return not any(f" {n} " in f" {rn} " or f" {rn} " in f" {n} " for n in names if n)
 
 
-def match_cso_row(mt: Matcher, name: str, o: dict, shared: Counter, diag: list, counts) -> None:
-    """One CSO registry row (run(), run_state()): match_outfalls' match kept or re-matched, the result written in place."""
+def match_cso_row(mt: Matcher, name: str, o: dict, shared: Counter, diag: list, counts, state_build: bool = False) -> None:
+    """One CSO registry row (run(), run_state()): match_outfalls' match kept or re-matched, the result written in place.
+    state_build: match_outfalls' match is kept only when its slug is an openboatlaunch record (its note says so); a slug
+    no water file held when it matched, now an NHD record of the same slug, is matched again here."""
     st = o.get("state")
-    if is_matchers(o) and mt.canon(o["water_slug"]) in mt.waters:
+    if is_matchers(o) and mt.canon(o["water_slug"]) in mt.waters and \
+            (not state_build or mt.source_of(mt.canon(o["water_slug"])) == "openboatlaunch"):
         slug0 = mt.canon(o["water_slug"])
         if names_another_water(o, mt.waters):
             why = "a name-only match to a water of another name"
