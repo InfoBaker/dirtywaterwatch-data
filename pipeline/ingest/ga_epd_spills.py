@@ -10,9 +10,11 @@ Source
   October 2026), COUNTY, CITY, OVERFLOW_LOCATION (a street address), QUANTITY_GALLONS, OVERFLOW_TYPE, PERMIT_NUMBER,
   SPILL_SOURCE, CAUSE, RIVER_BASIN, WATERWAY_IMPACTED, OVERFLOW_DESTINATION. No licence is stated.
   Older dated files stay at the same URL pattern: on 2026-11-04 EPD served every business day's posting from
-  2025-10-09 (earlier days answer 404, probed monthly back to 2018-01), all in the same layout (BEGIN_DATE before mid
+  2025-10-09 (earlier days answer 404, probed monthly back to 2018-01), with the same 13 columns (BEGIN_DATE before mid
   October 2026; the 2025-12-01 file gives its Posting Date as text, "12/1/2025"); a day with no posting answers 404
-  with an HTML page. Only the 13 columns above are read (safe fields); any other column is named in meta
+  with an HTML page. Some older files add columns: LATITUDE / LONGITUDE (ten files, 2025-11-14 to 2026-07-14),
+  SPILL_END_DATE (the 2026-10-13 file), FORM_TYPE (2026-04-02), BYPASS_ID and FORM_VERSION_NUM (2026-10-26). Only the
+  13 columns above and the point and end date are read (safe fields); any other column is named in meta
   (unread_columns), its values never read. Points: the public ArcGIS layer behind EPD's "Spills in Georgia" StoryMap,
   https://services1.arcgis.com/p0dLjwtOaJHU8zq2/arcgis/rest/services/Spill_Summary_Continuous_Update/
   FeatureServer/0 (registry ga-epd-spills-map-layer): the same rows with LATITUDE / LONGITUDE, but BEGIN_DATE is
@@ -37,9 +39,14 @@ Record rules
     A row that disappears while still inside the window was withdrawn or corrected: it is kept with
     raw._missing_from_source_since, and when a row of the same permit and address with another begin date within
     seven days first appeared in that posting (2026-11-03: Cauley Creek moved from 2026-10-06 to 2026-10-03), it is
-    duplicate_of that row. A vanished row is never given an end: its end stays unknown. A posting with no rows at all
-    changes nothing (a fault in the file, not every spill withdrawn); an older posting that cannot be read is skipped
-    and named in meta (unreadable_postings); the newest must be read or the run fails and keeps the previous file.
+    duplicate_of that row; failing that, so is exactly one row of the same begin day first listed in that posting
+    with the same permit (the address corrected, a house number changed) or at the same address (the permit
+    corrected): about 100 such corrections in the 13 months to 2026-11; two candidates or more: no mark. A vanished
+    row is never given an end: its end stays unknown. A posting with no rows at all changes nothing (a fault in the
+    file, not every spill withdrawn). The posting's date is the file's Posting Date unless it is more than 3 days from
+    the date in the file's URL (older files misspell the label, leave it out, or give a wrong year), then the URL's
+    date (meta.posting_date_from_url). An older posting that cannot be read is skipped and named in meta
+    (unreadable_postings); the newest must be read or the run fails and keeps the previous file.
   - event_type: OVERFLOW_DESTINATION naming a CSO ("CSO Dry-weather") -> cso; every other row -> sso (the rule's
     "spill" is a raw-sewage discharge from the collection system or plant; OVERFLOW_TYPE and SPILL_SOURCE stay in
     raw.row and OVERFLOW_TYPE gives `material`). status unknown: the list has no end date and no time.
@@ -50,6 +57,8 @@ Record rules
     catch-up day) has raw._read_from_archive, the time that file was read: never a time EPD received the report.
     Colour (build/status.py, data/rules.json unresolved.day_start_caution, which lists this source): a row with no end
     is a caution for 72 hours from the start of its begin day, then unresolved (end not reported) to day 30.
+    SPILL_END_DATE (one posting only) is kept as given in raw.epd_spill_end_date (value, posting) and carried to later
+    postings, but is not made the record's end: a day gives no time the spill stopped.
   - Volume: QUANTITY_GALLONS in gallons; blank, or "0" ("A 'zero' in the quantity field indicates the amount of the
     spill has not been determined", EPD's page) -> volume_gal null and volume_text saying so. estimate_flag unknown.
   - Water: WATERWAY_IMPACTED as given in waterbody_text (blank: null). "Ditch", "Storm Drain", "Basin", "unknown"
@@ -61,7 +70,8 @@ Record rules
   - Operator: discharger_id from data/dischargers.json by permit (npdes_permit / npdes_permits); discharger_name is
     EPD's FACILITY_NAME. npdes_permit only for an NPDES permit number (GA0 + 6 digits, or a general permit's
     coverage GAG + 6 digits); a state land-application permit (GAJ, GAU) or text stays in raw.row only.
-  - Points: a layer row with the same permit and normalised address, when exactly one, lends LATITUDE / LONGITUDE
+  - Points: a row's own LATITUDE / LONGITUDE, when the posting gives them inside Georgia (coord_source "source");
+    else a layer row with the same permit and normalised address, when exactly one, lends LATITUDE / LONGITUDE
     (coord_source "geocode": the layer's point is EPD's location for the address; precision not stated). When the
     layer is down or no longer lists the row, the point read earlier stays (raw._coords_kept_from_earlier_read).
   - EPA's copy: Georgia permittees file 24-hour and 5-day reports in EPD's GEOS, and these reach EPA's Sewer Overflow
@@ -143,6 +153,9 @@ NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
 HEADER_ALIASES = {"spill_begin_date": "begin_date"}
 FIELDS = ["facility_name", "begin_date", "county", "city", "overflow_location", "quantity_gallons", "overflow_type",
           "permit_number", "spill_source", "cause", "river_basin", "waterway_impacted", "overflow_destination"]
+# columns some older postings add, read when present: EPD's own point (ten files, 2025-11-14 to 2026-07-14) and its end
+# date (the 2026-10-13 file only); BYPASS_ID, FORM_TYPE and FORM_VERSION_NUM are named in meta and not read
+OPTIONAL = ["latitude", "longitude", "spill_end_date"]
 NO_WATER = re.compile(r"^\s*(|n\s*/?\s*a|none|unknown|unk|basin|ditch|storm ?ditch|storm ?drains?|storm ?sewer|"
                       r"ground|dry land|land)\s*\.?\s*$", re.I)
 ADDR_WORDS = {"street": "st", "avenue": "ave", "road": "rd", "drive": "dr", "lane": "ln", "court": "ct",
@@ -220,12 +233,13 @@ def read_posting(content: bytes, unread: list | None = None) -> tuple[str | None
     if "permit_number" not in hdr or "begin_date" not in hdr:
         raise ValueError(f"unexpected headers {hdr}")
     if unread is not None:
-        unread.extend(h for h in hdr if h and h not in FIELDS and h not in unread)
+        unread.extend(h for h in hdr if h and h not in FIELDS and h not in OPTIONAL and h not in unread)
     out = []
     for r in rows[hdr_i + 1:]:
         if not any(c.strip() for c in r):
             continue
-        out.append({h: " ".join((r[j] if j < len(r) else "").split()) for j, h in enumerate(hdr) if h in FIELDS})
+        out.append({h: " ".join((r[j] if j < len(r) else "").split()) for j, h in enumerate(hdr)
+                    if h in FIELDS or h in OPTIONAL})
     return posting, out
 
 
@@ -326,8 +340,21 @@ def to_record(rid: str, row: dict, posting: str | None, ctx: dict) -> dict:
             raw["reached_water"] = False
             raw["_reached_water_basis"] = f"destination given as {dest!r}"
     lat = lon = None
+    end_text = row.get("spill_end_date") or ""
+    if end_text:
+        raw["epd_spill_end_date"] = {
+            "value": excel_date(end_text) or end_text, "posting": posting,
+            "note": ("EPD's end date for the spill, day precision, given on this posting only; kept as given and not "
+                     "used as the record's end (a day gives no time the spill stopped)")}
+    try:
+        wlat, wlon = float(row.get("latitude") or ""), float(row.get("longitude") or "")
+    except ValueError:
+        wlat = wlon = None
     hits = ctx["points"].get((permit, norm_addr(row.get("overflow_location"))), [])
-    if len(hits) == 1:
+    if wlat is not None and 30.3 <= wlat <= 35.1 and -85.7 <= wlon <= -80.7:      # Georgia's box, a little wide
+        lat, lon = wlat, wlon
+        raw["_coords"] = f"EPD's LATITUDE / LONGITUDE for this row on the {posting} posting"
+    elif len(hits) == 1:
         lat, lon = hits[0]
         raw["_coords"] = "the point of the same permit and address on EPD's Spills in Georgia map layer"
     elif len(hits) > 1:
@@ -342,7 +369,7 @@ def to_record(rid: str, row: dict, posting: str | None, ctx: dict) -> dict:
                  outfall_name=row.get("overflow_location") or None,
                  waterbody_text=water or None,         # as given: status reads "Ditch", "unknown" as naming no water
                  water_slugs=[], water_match="none",
-                 lat=lat, lon=lon, coord_source="geocode" if lat is not None else None,
+                 lat=lat, lon=lon, coord_source=(("source" if wlat == lat else "geocode") if lat is not None else None),
                  started_at=start, time_precision="day" if start else None,
                  material=material, volume_gal=vol, volume_text=vtext, estimate_flag="unknown",
                  raw=raw, parse_error="; ".join(problems) or None)
@@ -367,8 +394,11 @@ def apply_posting(prev: dict[str, dict], rows: list[dict], posting: str | None, 
                 rec["lat"], rec["lon"], rec["coord_source"] = p["lat"], p["lon"], p.get("coord_source")
                 rec["raw"]["_coords"] = praw.get("_coords") or "a point read earlier from EPD's map layer"
                 rec["raw"]["_coords_kept_from_earlier_read"] = True
+            if praw.get("epd_spill_end_date") and "epd_spill_end_date" not in rec["raw"]:
+                rec["raw"]["epd_spill_end_date"] = praw["epd_spill_end_date"]     # given on one posting only
             old = praw.get("row") or {}
-            changed = {k: old.get(k) for k in set(old) | set(row) if (old.get(k) or "") != (row.get(k) or "")}
+            changed = {k: old.get(k) for k in set(old) | set(row) if (old.get(k) or "") != (row.get(k) or "")
+                       and (k not in OPTIONAL or (k in row and k in old))}   # a column one posting lacks is no revision
             if changed:
                 rec["raw"].setdefault("_revisions", [])
                 rec["raw"]["_revisions"] = [*rec["raw"]["_revisions"],
@@ -392,9 +422,14 @@ def apply_posting(prev: dict[str, dict], rows: list[dict], posting: str | None, 
         return {**prev}, n
     oldest = min((r["started_at"] for r in cur.values() if r.get("started_at")), default=None)
     by_permit_addr = defaultdict(list)
+    by_permit_day, by_addr_day = defaultdict(list), defaultdict(list)    # rows first listed in this posting
     for r in cur.values():
         row = r["raw"]["row"]
         by_permit_addr[((row.get("permit_number") or "").upper(), norm_addr(row.get("overflow_location")))].append(r)
+        if r["event_id"] not in prev and r.get("started_at"):
+            by_permit_day[((row.get("permit_number") or "").upper(), r["started_at"])].append(r)
+            if norm_addr(row.get("overflow_location")):
+                by_addr_day[(norm_addr(row.get("overflow_location")), r["started_at"])].append(r)
     for eid, p in prev.items():
         if eid in cur:
             continue
@@ -412,11 +447,22 @@ def apply_posting(prev: dict[str, dict], rows: list[dict], posting: str | None, 
                                                    norm_addr(row.get("overflow_location"))), [])
                     if r["event_id"] not in prev and r.get("started_at") and p.get("started_at") and abs(
                         (date.fromisoformat(r["started_at"]) - date.fromisoformat(p["started_at"])).days) <= MOVED_DAYS]
+            why = "same permit and address"
+            if not succ and p.get("started_at"):
+                # the address or the permit corrected: exactly one row of the same begin day first listed in this
+                # posting with the same permit (address edited) or at the same address (permit edited)
+                for cands, w in ((by_permit_day.get(((row.get("permit_number") or "").upper(), p["started_at"]), []),
+                                  "same permit and begin day, address corrected"),
+                                 (by_addr_day.get((norm_addr(row.get("overflow_location")), p["started_at"]), [])
+                                  if norm_addr(row.get("overflow_location")) else [], "same address and begin day, "
+                                                                                      "permit corrected")):
+                    if len(cands) == 1:
+                        succ, why = cands, w
+                        break
             if succ and not p.get("duplicate_of"):
                 p["duplicate_of"] = succ[0]["event_id"]
-                p["raw"]["_duplicate_basis"] = (f"gone from the {posting} posting; {succ[0]['event_id']} (same permit "
-                                                f"and address, begin date {succ[0]['started_at']}) looks like its "
-                                                f"corrected row")
+                p["raw"]["_duplicate_basis"] = (f"gone from the {posting} posting; {succ[0]['event_id']} ({why}, "
+                                                f"begin date {succ[0]['started_at']}) looks like its corrected row")
                 n["superseded_by_corrected_row"] += 1
             else:
                 n["withdrawn_within_window"] += 1
@@ -634,6 +680,23 @@ def saved_postings(archive: Path | None = None) -> tuple[list, dict]:
 
 # ---------------------------------------------------------------- main
 
+POSTING_DATE_SLACK = 3     # days a file's own Posting Date may differ from the date in its URL
+
+
+def posting_date(cell: str | None, ymd: str, stats: dict) -> str | None:
+    """The posting's date: the file's Posting Date cell, unless the URL's date says otherwise. Older files spell the
+    label variously ("Positng Date"), leave it out, or give a wrong year (the 2026-05-18 file says 2025-05-18): the
+    URL's date is used then, and a disagreement is named in stats["posting_date_from_url"]."""
+    url_day = f"{ymd[:4]}-{ymd[4:6]}-{ymd[6:]}" if re.fullmatch(r"20\d{6}", ymd or "") else None
+    if not url_day:
+        return cell
+    if cell and abs((date.fromisoformat(cell) - date.fromisoformat(url_day)).days) <= POSTING_DATE_SLACK:
+        return cell
+    if cell:
+        stats.setdefault("posting_date_from_url", []).append(f"{ymd}: the file says {cell}; {url_day} used")
+    return url_day
+
+
 CARRIED = ("_first_seen_at", "_read_from_archive")     # a rebuild keeps these from the previous file, by event id
 
 
@@ -662,7 +725,7 @@ def build(postings: list[tuple[str, str, bytes, str | None]], prev_records: list
                 raise                                   # the newest posting must be read
             stats["unreadable_postings"].append(f"{ymd}: {type(e).__name__}: {e}"[:300])
             continue
-        posting = posting or f"{ymd[:4]}-{ymd[4:6]}-{ymd[6:]}"
+        posting = posting_date(posting, ymd, stats)
         archived = ((read_at or {}).get(ymd) or fetched_at) if i < len(postings) - 1 else None
         ctx = {"file_url": url, "last_modified": lm, "fetched_at": fetched_at, "points": pts, "permits": permits,
                "archived": archived}
