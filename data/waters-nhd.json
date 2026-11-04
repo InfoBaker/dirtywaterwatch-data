@@ -180922,7 +180922,7 @@
   {
    "slug": "birch-bay-wa",
    "name": "Birch Bay",
-   "kind": "stream",
+   "kind": "bay",
    "state": "WA",
    "towns": [
     "Birch Bay",
@@ -219591,7 +219591,7 @@
   {
    "slug": "budd-inlet-wa",
    "name": "Budd Inlet",
-   "kind": "stream",
+   "kind": "bay",
    "state": "WA",
    "towns": [
     "Olympia"
@@ -846549,7 +846549,7 @@
   {
    "slug": "padilla-bay-wa",
    "name": "Padilla Bay",
-   "kind": "stream",
+   "kind": "bay",
    "state": "WA",
    "towns": [],
    "bbox": [
@@ -876294,7 +876294,7 @@
   {
    "slug": "penn-cove-wa",
    "name": "Penn Cove",
-   "kind": "stream",
+   "kind": "bay",
    "state": "WA",
    "towns": [
     "Coupeville",
@@ -906396,7 +906396,7 @@
   {
    "slug": "possession-sound-wa",
    "name": "Possession Sound",
-   "kind": "stream",
+   "kind": "bay",
    "state": "WA",
    "towns": [
     "Everett"
@@ -985017,7 +985017,7 @@
   {
    "slug": "samish-bay-wa",
    "name": "Samish Bay",
-   "kind": "stream",
+   "kind": "bay",
    "state": "WA",
    "towns": [
     "Edison"
