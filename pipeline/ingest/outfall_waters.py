@@ -389,6 +389,9 @@ class Matcher:
         towns = self.towns_of(o)
         common = sorted(self.record_towns(slug) & towns)
         lat, lon = o.get("lat"), o.get("lon")
+        ocean = self.ocean_evidence(slug, o)
+        if ocean is not None:
+            return ocean
         lb = self.box_dist(slug, lat, lon) if lat is not None and lon is not None else None
         lim = f"limit {limit / 1000:.1f} km" + (f": {basis}" if basis else "")
         if lb is not None and lb > limit and not town_first:
@@ -424,6 +427,34 @@ class Matcher:
             if conflict:
                 return False, f"its bounding box is {lb / 1000:.1f} km from the point and {conflict}"
         return True, why
+
+    def ocean_evidence(self, slug, o: dict) -> tuple[bool, str] | None:
+        """(kept, why) for an open-ocean record (data/rules.json reach.shoreline.oceans: Florida's Atlantic Ocean and
+        Gulf records, which carry neither an outline here nor a bounding box), or None for any other record. The ocean
+        is one water: a receiving water that names it is that water wherever on the coast EPA's point lies, so the
+        evidence is the point itself, within snap_km of the state's shore (in the water off it, or on the land beside
+        it: a plant's own point), where a shoreline stretch can start. A point farther inland is held."""
+        from build import shoreline as SH
+        shore = SH.rule(S.load_rules())
+        w = self.waters.get(slug) or {}
+        if not SH.is_ocean(w, shore):
+            return None
+        lat, lon = o.get("lat"), o.get("lon")
+        if lat is None or lon is None:
+            return False, f"an ocean record needs EPA's point to place the outfall on the coast: {HELD}"
+        shp = self.states.shapes.get(w.get("state") or o.get("state"))
+        if shp is None:
+            return False, f"no state outline to measure the coast against: {HELD}"
+        from shapely.geometry import Point
+        inside = shp.contains(Point(lon, lat))
+        d = N.dist_m(shp.boundary, lon, lat)
+        limit = float(shore["snap_km"]) * 1000
+        where = "inland" if inside else "offshore"
+        if d > limit:
+            return False, (f"an open-ocean record (data/rules.json reach.shoreline.oceans), but EPA's point lies "
+                           f"{d / 1000:.1f} km {where} of the state's shore, more than {limit / 1000:g} km: {HELD}")
+        return True, (f"an open-ocean record (data/rules.json reach.shoreline.oceans), and EPA's point lies "
+                      f"{d / 1000:.1f} km {where} of the state's shore (within {limit / 1000:g} km)")
 
     def box_dist(self, slug, lat, lon) -> float | None:
         """Metres from the point to the record's bounding box: never more than the distance to the water itself, so a

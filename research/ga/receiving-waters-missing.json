@@ -2,29 +2,27 @@
  "about": "Receiving-water names in Georgia's spill reports (EPD's Municipal Sewage Spills list: the daily list and every dated posting from 2025-10-09 to 2026-11-04, 1,366 records; and EPA's Sewer Overflow and Bypass Event reports for GA permits, 894 records, 629 of them the same spill as an EPD row) as typed (case and punctuation ignored), each counted once per spill, with the number of spills giving it: every name, whether or not a water record holds it, so each has a record or a stated reason. Spelling variants of a held water (Polebridge Creek, Sugar Crek, Ocmuglee) are listed as typed so an alias can be added. Built by scripts/ga_report_water_names.py.",
  "checked": "2026-11-04",
  "state": "GA",
- "waters": 201,
- "reports": 476,
+ "waters": 172,
+ "reports": 334,
  "by_kind": {
-  "named water": 103,
-  "tributary of a named water": 57,
+  "named water": 83,
+  "tributary of a named water": 45,
   "storm system or not a named water": 33
  },
  "by_reason": {
-  "no NHD flowline or waterbody of that name in GA": 69,
-  "not reached this run (a recheck builds nothing)": 47,
-  "1 NHD water of that name in GA, none within reach of the reports' places": 16,
-  "a water record holds the name, but the reports' points lie too far from it to be placed there": 10,
+  "no NHD flowline or waterbody of that name in GA": 86,
+  "1 NHD water of that name in GA, none within reach of the reports' places": 18,
+  "a water record holds the name, but the reports' points lie too far from it to be placed there": 8,
   "an unnamed or unknown stream: the report names no water": 7,
   "a storm-sewer system (MS4), not a named water": 7,
   "not a water name": 5,
   "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 5,
+  "2 NHD waters of that name in GA, none within reach of the reports' places": 5,
   "a storm-sewer system, not a named water": 4,
   "a tributary named by a place, not by the water it joins": 4,
   "private property, not a public water": 3,
-  "24 NHD waters of that name in GA, none within reach of the reports' places": 3,
-  "2 NHD waters of that name in GA, none within reach of the reports' places": 3,
+  "3 NHD waters of that name in GA, none within reach of the reports' places": 3,
   "a water record holds the water this text names, but the status resolver reads the text as a watershed or basin label, no": 2,
-  "3 NHD waters of that name in GA, none within reach of the reports' places": 2,
   "a kind of water with no name": 2,
   "22 NHD waters of that name in GA, none within reach of the reports' places": 2,
   "part of a sewer, drainage or treatment works, not a public water": 2,
@@ -34,144 +32,21 @@
   "14 NHD waters of that name in GA, none within reach of the reports' places": 1,
   "4 NHD waters of that name in GA and the reports give no place to choose one": 1,
   "13 NHD waters of that name in GA and the reports give no place to choose one": 1,
+  "4 NHD waters of that name in GA, none within reach of the reports' places": 1,
   "a street name, not a water": 1,
   "2 NHD waters of that name in GA and the reports give no place to choose one": 1
  },
- "resolved_names": 238,
- "resolved_reports": 744,
+ "resolved_names": 267,
+ "resolved_reports": 886,
  "build": {
   "date": "2026-11-04",
-  "command": "python -m ingest.waters_from_nhd --names research/ga/receiving-waters-missing.json --state GA --recheck",
-  "records_built": 0,
-  "names_resolved": 82,
-  "network_requests": 0
+  "command": "python -m ingest.waters_from_nhd --names research/ga/receiving-waters-missing.json --state GA",
+  "records_built": 26,
+  "names_resolved": 32,
+  "network_requests": 95,
+  "stopped": "--budget-s used"
  },
  "rows": [
-  {
-   "name": "Nancy Creek",
-   "reports": 38,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.82332,
-     -84.45692
-    ],
-    [
-     33.94719,
-     -84.32118
-    ],
-    [
-     33.90943,
-     -84.32601
-    ],
-    [
-     33.95009,
-     -84.29126
-    ],
-    [
-     33.89483,
-     -84.30189
-    ]
-   ],
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Atlanta"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
-  },
-  {
-   "name": "Shoal Creek",
-   "reports": 33,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.71802,
-     -84.26911
-    ],
-    [
-     33.7662,
-     -84.29139
-    ],
-    [
-     33.74545,
-     -84.2781
-    ],
-    [
-     33.66478,
-     -84.21842
-    ]
-   ],
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Lawrenceville"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "records": [
-    "shoal-creek-ga"
-   ],
-   "reason": "a water record holds the name (shoal-creek-ga), but the reports' points lie too far from it to be placed there"
-  },
-  {
-   "name": "Utoy Creek",
-   "reports": 21,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.74419,
-     -84.50883
-    ],
-    [
-     33.82332,
-     -84.45692
-    ],
-    [
-     33.72744,
-     -84.42218
-    ],
-    [
-     33.70221,
-     -84.49446
-    ],
-    [
-     33.70256,
-     -84.54261
-    ]
-   ],
-   "towns": [
-    "Atlanta",
-    "Johns Creek",
-    "Alpharetta",
-    "Roswell"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
-  },
   {
    "name": "Not Applicable",
    "reports": 19,
@@ -213,44 +88,6 @@
    "reason": "not a water name"
   },
   {
-   "name": "Camp Creek",
-   "reports": 15,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.68343,
-     -84.49087
-    ],
-    [
-     33.64544,
-     -84.57682
-    ],
-    [
-     33.54911,
-     -84.41503
-    ],
-    [
-     33.51537,
-     -84.37198
-    ]
-   ],
-   "towns": [
-    "Atlanta",
-    "Jonesboro",
-    "Johns Creek",
-    "Alpharetta"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
-  },
-  {
    "name": "Shoals Creek",
    "reports": 10,
    "seen_in": [
@@ -278,7 +115,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
     {
      "lon": -84.26911,
@@ -295,12 +132,12 @@
      "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 71.5 km away)"
     },
     {
-     "town": "Tucker",
-     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 80.0 km away)"
-    },
-    {
      "town": "Stonecrest",
      "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 65.6 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 80.0 km away)"
     }
    ]
   },
@@ -369,32 +206,6 @@
     "ga-epd-spills"
    ],
    "reason": "dry land, not a water: the report names no receiving water"
-  },
-  {
-   "name": "Indian Creek",
-   "reports": 7,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.78514,
-     -84.24957
-    ]
-   ],
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Clarkston"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Private Pond",
@@ -482,22 +293,7 @@
    "records": [
     "doolittle-creek-ga"
    ],
-   "reason": "a water record holds the name (doolittle-creek-ga), but the reports' points lie too far from it to be placed there",
-   "places_failed": [
-    {
-     "lon": -84.21842,
-     "lat": 33.66478,
-     "reason": "no NHD water of that name within 2 km of the reports' point (33.66478, -84.21842) (the nearest is 5.8 km away)"
-    },
-    {
-     "town": "Tucker",
-     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 9.1 km away)"
-    },
-    {
-     "town": "Stonecrest",
-     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 6.9 km away)"
-    }
-   ]
+   "reason": "a water record holds the name (doolittle-creek-ga), but the reports' points lie too far from it to be placed there"
   },
   {
    "name": "MS4 stormwater system",
@@ -542,20 +338,20 @@
    "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
    "places_failed": [
     {
-     "town": "Johns Creek",
-     "reason": "no NHD water of that name within 3 km of Johns Creek (the nearest is 47.1 km away)"
-    },
-    {
      "town": "Alpharetta",
      "reason": "no NHD water of that name within 3 km of Alpharetta (the nearest is 50.0 km away)"
     },
     {
-     "town": "Roswell",
-     "reason": "no NHD water of that name within 3 km of Roswell (the nearest is 43.9 km away)"
-    },
-    {
      "town": "Atlanta",
      "reason": "no NHD water of that name within 3 km of Atlanta (the nearest is 5.0 km away)"
+    },
+    {
+     "town": "Johns Creek",
+     "reason": "no NHD water of that name within 3 km of Johns Creek (the nearest is 47.1 km away)"
+    },
+    {
+     "town": "Roswell",
+     "reason": "no NHD water of that name within 3 km of Roswell (the nearest is 43.9 km away)"
     }
    ]
   },
@@ -576,6 +372,23 @@
     "ga-epd-spills"
    ],
    "reason": "a short name with no kind of water (creek, river, lake): not looked up"
+  },
+  {
+   "name": "Chattahoochee",
+   "reports": 4,
+   "points": [
+    [
+     33.76874,
+     -84.42512
+    ]
+   ],
+   "towns": [
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Crockett Creek",
@@ -600,7 +413,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
     {
      "lon": -84.28246,
@@ -612,12 +425,12 @@
      "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 103.2 km away)"
     },
     {
-     "town": "Tucker",
-     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 89.4 km away)"
-    },
-    {
      "town": "Stonecrest",
      "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 92.4 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 89.4 km away)"
     }
    ]
   },
@@ -702,7 +515,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "3 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "3 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Laurel Creek"
    ],
@@ -713,16 +526,16 @@
      "reason": "no NHD water of that name within 2 km of the reports' point (33.85852, -84.49800) (the nearest is 98.9 km away)"
     },
     {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 101.2 km away)"
+    },
+    {
      "town": "Marietta",
      "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 84.6 km away)"
     },
     {
      "town": "Smyrna",
      "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 94.1 km away)"
-    },
-    {
-     "town": "Mableton",
-     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 101.2 km away)"
     }
    ]
   },
@@ -821,7 +634,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Brooklyn Creek",
@@ -844,7 +657,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Burnt Fork Creek",
@@ -906,7 +719,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Clay Branch",
@@ -925,12 +738,16 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
     {
      "lon": -84.57534,
      "lat": 33.81802,
      "reason": "no NHD water of that name within 2 km of the reports' point (33.81802, -84.57534) (the nearest is 406.5 km away)"
+    },
+    {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 400.2 km away)"
     },
     {
      "town": "Marietta",
@@ -939,10 +756,6 @@
     {
      "town": "Smyrna",
      "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 400.8 km away)"
-    },
-    {
-     "town": "Mableton",
-     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 400.2 km away)"
     }
    ]
   },
@@ -988,7 +801,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "GLENDALE TRIBUTARY",
@@ -1036,7 +849,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "MS4 system",
@@ -1084,7 +897,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
     {
      "lon": -84.21842,
@@ -1092,20 +905,20 @@
      "reason": "no NHD water of that name within 2 km of the reports' point (33.66478, -84.21842) (the nearest is 365.7 km away)"
     },
     {
-     "town": "Johns Creek",
-     "reason": "no NHD water of that name within 3 km of Johns Creek (the nearest is 387.0 km away)"
-    },
-    {
      "town": "Alpharetta",
      "reason": "no NHD water of that name within 3 km of Alpharetta (the nearest is 394.8 km away)"
     },
     {
-     "town": "Roswell",
-     "reason": "no NHD water of that name within 3 km of Roswell (the nearest is 391.6 km away)"
-    },
-    {
      "town": "Decatur",
      "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 376.5 km away)"
+    },
+    {
+     "town": "Johns Creek",
+     "reason": "no NHD water of that name within 3 km of Johns Creek (the nearest is 387.0 km away)"
+    },
+    {
+     "town": "Roswell",
+     "reason": "no NHD water of that name within 3 km of Roswell (the nearest is 391.6 km away)"
     }
    ]
   },
@@ -1205,7 +1018,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Tributary to Proctor Creek",
@@ -1231,21 +1044,9 @@
     "EPD list"
    ],
    "records": [
-    "proctor-creek-ga",
     "proctor-creek-acworth-ga"
    ],
-   "reason": "a water record holds the name (proctor-creek-ga, proctor-creek-acworth-ga), but the reports' points lie too far from it to be placed there",
-   "places_failed": [
-    {
-     "lon": -84.59693,
-     "lat": 34.05777,
-     "reason": "no NHD water of that name within 2 km of the reports' point (34.05777, -84.59693) (the nearest is 2.8 km away)"
-    },
-    {
-     "town": "Marietta",
-     "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 4.7 km away)"
-    }
-   ]
+   "reason": "a water record holds the name (proctor-creek-acworth-ga), but the reports' points lie too far from it to be placed there"
   },
   {
    "name": "Tributary to Timber Ridge Branch",
@@ -1270,7 +1071,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Timber Ridge Branch"
    ]
@@ -1318,29 +1119,6 @@
    "reason": "an unnamed or unknown stream: the report names no water"
   },
   {
-   "name": "Wolf Creek",
-   "reports": 3,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     32.8373,
-     -83.71381
-    ]
-   ],
-   "towns": [
-    "Macon"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
-  },
-  {
    "name": "storm water catch basin",
    "reports": 3,
    "seen_in": [
@@ -1357,22 +1135,6 @@
    "reason": "a storm-sewer system, not a named water"
   },
   {
-   "name": "Buffalo Creek",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Sparta"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
-  },
-  {
    "name": "Catch basin in MS4 system",
    "reports": 2,
    "seen_in": [
@@ -1387,30 +1149,6 @@
     "ga-epd-spills"
    ],
    "reason": "a storm-sewer system (MS4), not a named water"
-  },
-  {
-   "name": "Cedar Creek",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.93451,
-     -83.31951
-    ]
-   ],
-   "towns": [
-    "Athens",
-    "Wrightsville"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "City Stormwater system",
@@ -1441,46 +1179,6 @@
     "echo-sewer-overflow"
    ],
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Crooked Creek",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.76579,
-     -84.14722
-    ],
-    [
-     33.77221,
-     -84.08696
-    ]
-   ],
-   "towns": [
-    "Decatur",
-    "Tucker",
-    "Stonecrest",
-    "Lithonia"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "24 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "places_failed": [
-    {
-     "town": "Lawrenceville",
-     "reason": "no NHD water of that name within 3 km of Lawrenceville (the nearest is 16.9 km away)"
-    },
-    {
-     "town": "Buford",
-     "reason": "no NHD water of that name within 3 km of Buford (the nearest is 25.9 km away)"
-    }
-   ]
   },
   {
    "name": "Ditch feeding Bowman Creek",
@@ -1525,7 +1223,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Huey Creek",
@@ -1548,7 +1246,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Intermittent Creek",
@@ -1604,12 +1302,12 @@
      "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 17.2 km away)"
     },
     {
-     "town": "Tucker",
-     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 9.1 km away)"
-    },
-    {
      "town": "Stonecrest",
      "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 26.7 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 9.1 km away)"
     }
    ]
   },
@@ -1637,28 +1335,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "Mill Creek",
-   "reports": 2,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     34.74545,
-     -85.45584
-    ]
-   ],
-   "towns": [
-    "Rising Fawn"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Mimms Creek",
@@ -1694,21 +1371,6 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
-   "name": "Olive Creek",
-   "reports": 2,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Thomasville"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
-  },
-  {
    "name": "SOUTH RIVER CREEK",
    "reports": 2,
    "seen_in": [
@@ -1729,7 +1391,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "South Fork Peavine Creek",
@@ -1755,7 +1417,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Steam from Beaverdam creek",
@@ -1777,7 +1439,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Steam"
    ]
@@ -1803,7 +1465,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
     {
      "lon": -83.33214,
@@ -1829,7 +1491,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Favor Creek"
    ]
@@ -1857,7 +1519,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Mill Creek No. 2"
    ]
@@ -1921,9 +1583,31 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
    "parts": [
     "cooper lake creek"
+   ]
+  },
+  {
+   "name": "Un-named tributary to Lake Lanier",
+   "reports": 2,
+   "points": [
+    [
+     34.19608,
+     -84.18656
+    ]
+   ],
+   "towns": [
+    "Gainesville",
+    "Cumming"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "parts": [
+    "Lake Lanier"
    ]
   },
   {
@@ -1945,36 +1629,25 @@
    "reason": "an unnamed or unknown stream: the report names no water"
   },
   {
-   "name": "Unnamed Tributary of Crooked Creek",
+   "name": "Unnamed Tributary to Lake Lanier",
    "reports": 2,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
+   "points": [
+    [
+     34.19608,
+     -84.18656
+    ]
    ],
-   "kind": "tributary of a named water",
    "towns": [
-    "Lawrenceville",
-    "Buford",
-    "Peachtree Corners",
-    "Norcross"
+    "Gainesville",
+    "Cumming"
    ],
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "24 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
-    "Crooked Creek"
-   ],
-   "places_failed": [
-    {
-     "town": "Lawrenceville",
-     "reason": "no NHD water of that name within 3 km of Lawrenceville (the nearest is 16.9 km away)"
-    },
-    {
-     "town": "Buford",
-     "reason": "no NHD water of that name within 3 km of Buford (the nearest is 25.9 km away)"
-    }
+    "Lake Lanier"
    ]
   },
   {
@@ -1999,39 +1672,11 @@
     {
      "town": "Vienna",
      "reason": "no NHD water of that name within 3 km of Vienna (the nearest is 28.4 km away)"
+    },
+    {
+     "town": "Chickamauga",
+     "reason": "no NHD water of that name within 3 km of Chickamauga (the nearest is 9.6 km away)"
     }
-   ]
-  },
-  {
-   "name": "Unnamed tributary of cedar creek",
-   "reports": 2,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "points": [
-    [
-     33.97723,
-     -83.95845
-    ],
-    [
-     33.99887,
-     -83.72056
-    ]
-   ],
-   "towns": [
-    "Lawrenceville",
-    "Buford",
-    "Winder"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
-   "parts": [
-    "cedar creek"
    ]
   },
   {
@@ -2071,7 +1716,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "BOAK TUSK",
@@ -2104,29 +1749,6 @@
     "ga-epd-spills"
    ],
    "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
-  },
-  {
-   "name": "Bell Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     32.86595,
-     -84.32541
-    ]
-   ],
-   "towns": [
-    "Thomaston"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Big Cotton Indian Creek",
@@ -2206,7 +1828,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Boar Tusk Creek",
@@ -2221,7 +1843,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Briley's Lake",
@@ -2236,7 +1858,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Camp Bert Adams Creek",
@@ -2253,44 +1875,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Campcreek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.68343,
-     -84.49087
-    ],
-    [
-     33.64544,
-     -84.57682
-    ],
-    [
-     33.54911,
-     -84.41503
-    ],
-    [
-     33.51537,
-     -84.37198
-    ]
-   ],
-   "towns": [
-    "Atlanta",
-    "Jonesboro",
-    "Johns Creek",
-    "Alpharetta"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Cauley Creek",
@@ -2351,19 +1936,19 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "2 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "2 NHD waters of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
     {
      "town": "Decatur",
      "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 44.9 km away)"
     },
     {
-     "town": "Tucker",
-     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 34.2 km away)"
-    },
-    {
      "town": "Stonecrest",
      "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 49.6 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 34.2 km away)"
     }
    ]
   },
@@ -2385,8 +1970,16 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
+    {
+     "town": "Austell",
+     "reason": "no NHD water of that name within 3 km of Austell (the nearest is 99.7 km away)"
+    },
+    {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 101.9 km away)"
+    },
     {
      "town": "Marietta",
      "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 87.7 km away)"
@@ -2394,14 +1987,6 @@
     {
      "town": "Smyrna",
      "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 98.9 km away)"
-    },
-    {
-     "town": "Mableton",
-     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 101.9 km away)"
-    },
-    {
-     "town": "Austell",
-     "reason": "no NHD water of that name within 3 km of Austell (the nearest is 99.7 km away)"
     }
    ]
   },
@@ -2418,7 +2003,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Dark Entry Creek",
@@ -2468,15 +2053,15 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "14 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "14 NHD waters of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
-    {
-     "town": "Johns Creek",
-     "reason": "no NHD water of that name within 3 km of Johns Creek (the nearest is 49.3 km away)"
-    },
     {
      "town": "Alpharetta",
      "reason": "no NHD water of that name within 3 km of Alpharetta (the nearest is 49.9 km away)"
+    },
+    {
+     "town": "Johns Creek",
+     "reason": "no NHD water of that name within 3 km of Johns Creek (the nearest is 49.3 km away)"
     },
     {
      "town": "Roswell",
@@ -2550,7 +2135,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Dillon Branch"
    ]
@@ -2576,7 +2161,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Dram Branch"
    ]
@@ -2600,7 +2185,18 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "places_failed": [
+    {
+     "lon": -81.49347,
+     "lat": 31.14728,
+     "reason": "no NHD water of that name within 2 km of the reports' point (31.14728, -81.49347) (the nearest is 9.8 km away)"
+    },
+    {
+     "town": "Brunswick",
+     "reason": "no NHD water of that name within 3 km of Brunswick (the nearest is 3.6 km away)"
+    }
+   ]
   },
   {
    "name": "East Jester's Creek",
@@ -2618,7 +2214,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Edwards Creek",
@@ -2645,7 +2241,23 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "places_failed": [
+    {
+     "lon": -83.43789,
+     "lat": 34.21835,
+     "reason": "no NHD water of that name within 2 km of the reports' point (34.21835, -83.43789) (the nearest is 192.6 km away)"
+    },
+    {
+     "lon": -83.49811,
+     "lat": 34.23902,
+     "reason": "no NHD water of that name within 2 km of the reports' point (34.23902, -83.49811) (the nearest is 191.7 km away)"
+    },
+    {
+     "town": "Commerce",
+     "reason": "no NHD water of that name within 3 km of Commerce (the nearest is 185.5 km away)"
+    }
+   ]
   },
   {
    "name": "FOWLER BRANCH",
@@ -2660,7 +2272,13 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "2 NHD waters of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "places_failed": [
+    {
+     "town": "Decatur",
+     "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 4.9 km away)"
+    }
+   ]
   },
   {
    "name": "Flint",
@@ -2684,7 +2302,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Fowler",
@@ -2703,7 +2321,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Fowler Branch Creek",
@@ -2722,19 +2340,19 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "2 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "2 NHD waters of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
     {
      "town": "Decatur",
      "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 4.9 km away)"
     },
     {
-     "town": "Tucker",
-     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 8.0 km away)"
-    },
-    {
      "town": "Stonecrest",
      "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 3.2 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 8.0 km away)"
     }
    ]
   },
@@ -2753,7 +2371,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Grant street Tributary to Soque River",
@@ -2769,27 +2387,6 @@
     "ga-epd-spills"
    ],
    "reason": "a tributary named by a place, not by the water it joins"
-  },
-  {
-   "name": "Griffin Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     33.92568,
-     -84.82809
-    ]
-   ],
-   "towns": [
-    "Dallas"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Harmony Grove Creek",
@@ -2808,7 +2405,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Henderson Creek Mill",
@@ -2825,7 +2422,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Johnson Creek",
@@ -2840,7 +2437,13 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "4 NHD waters of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "places_failed": [
+    {
+     "town": "Griffin",
+     "reason": "no NHD water of that name within 3 km of Griffin (the nearest is 115.6 km away)"
+    }
+   ]
   },
   {
    "name": "Knollwood Branch",
@@ -2863,7 +2466,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Lake Knickerbocker",
@@ -2886,7 +2489,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Little Ogeechee Pond",
@@ -2909,32 +2512,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "Long Cane Creek Tributary",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "points": [
-    [
-     33.02421,
-     -84.99905
-    ]
-   ],
-   "towns": [
-    "Lagrange",
-    "Thomasville"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
-   "parts": [
-    "Long Cane Creek"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "MS4 ditch",
@@ -2982,7 +2560,13 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "places_failed": [
+    {
+     "town": "Conyers",
+     "reason": "no NHD water of that name within 3 km of Conyers (the nearest is 3.5 km away)"
+    }
+   ]
   },
   {
    "name": "Mill Creek No 2",
@@ -2999,7 +2583,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Mineral Springs Drainage Basin",
@@ -3083,7 +2667,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; a description, not a name",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "No name Creek"
    ]
@@ -3112,22 +2696,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "North Fork of Little Mud Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Cornelia"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Noses",
@@ -3142,7 +2711,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Not Application",
@@ -3159,7 +2728,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Not Professional",
@@ -3177,7 +2746,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Noy Applicable",
@@ -3218,7 +2787,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Palmer Branch",
@@ -3235,7 +2804,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
     {
      "town": "Douglasville",
@@ -3285,7 +2854,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Peachtree Branch",
@@ -3308,16 +2877,12 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
     {
      "lon": -84.24558,
      "lat": 33.8667,
      "reason": "no NHD water of that name within 2 km of the reports' point (33.86670, -84.24558) (the nearest is 159.0 km away)"
-    },
-    {
-     "town": "Tucker",
-     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 153.4 km away)"
     },
     {
      "town": "Decatur",
@@ -3326,6 +2891,10 @@
     {
      "town": "Stonecrest",
      "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 136.0 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 153.4 km away)"
     }
    ]
   },
@@ -3353,7 +2922,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Petitt Creek",
@@ -3368,7 +2937,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Pond",
@@ -3415,7 +2984,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Ritchie St tributary leading to Soque River",
@@ -3450,7 +3019,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Roaring Branch Crekk",
@@ -3465,22 +3034,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
-  },
-  {
-   "name": "Rose Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Woodstock"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Sandy",
@@ -3503,7 +3057,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Savage Branch",
@@ -3518,7 +3072,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Savage Creek",
@@ -3556,7 +3110,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Seven Branches",
@@ -3579,7 +3133,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Skyland Lake",
@@ -3600,7 +3154,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Smyrna Branch",
@@ -3619,7 +3173,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Storm ditch",
@@ -3657,7 +3211,18 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "3 NHD waters of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "places_failed": [
+    {
+     "lon": -85.07494,
+     "lat": 32.97006,
+     "reason": "no NHD water of that name within 2 km of the reports' point (32.97006, -85.07494) (the nearest is 95.2 km away)"
+    },
+    {
+     "town": "Lagrange",
+     "reason": "no NHD water of that name within 3 km of Lagrange (the nearest is 84.5 km away)"
+    }
+   ]
   },
   {
    "name": "Thompson Creek",
@@ -3682,12 +3247,16 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "3 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "3 NHD waters of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "places_failed": [
     {
      "lon": -84.43381,
      "lat": 33.99109,
      "reason": "no NHD water of that name within 2 km of the reports' point (33.99109, -84.43381) (the nearest is 52.9 km away)"
+    },
+    {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 38.3 km away)"
     },
     {
      "town": "Marietta",
@@ -3696,10 +3265,6 @@
     {
      "town": "Smyrna",
      "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 42.1 km away)"
-    },
-    {
-     "town": "Mableton",
-     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 38.3 km away)"
     }
    ]
   },
@@ -3716,37 +3281,10 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Tibutary"
    ]
-  },
-  {
-   "name": "Toto Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "named water",
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
-  },
-  {
-   "name": "Town Branch",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Summerville"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
   },
   {
    "name": "Town Creek",
@@ -3767,6 +3305,10 @@
     {
      "town": "Vienna",
      "reason": "no NHD water of that name within 3 km of Vienna (the nearest is 28.4 km away)"
+    },
+    {
+     "town": "Chickamauga",
+     "reason": "no NHD water of that name within 3 km of Chickamauga (the nearest is 9.6 km away)"
     }
    ]
   },
@@ -3793,7 +3335,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Clay Branch"
    ],
@@ -3804,41 +3346,17 @@
      "reason": "no NHD water of that name within 2 km of the reports' point (33.81802, -84.57534) (the nearest is 406.5 km away)"
     },
     {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 400.2 km away)"
+    },
+    {
      "town": "Marietta",
      "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 408.2 km away)"
     },
     {
      "town": "Smyrna",
      "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 400.8 km away)"
-    },
-    {
-     "town": "Mableton",
-     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 400.2 km away)"
     }
-   ]
-  },
-  {
-   "name": "Tributary of Dozier Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "points": [
-    [
-     34.30444,
-     -85.11826
-    ]
-   ],
-   "towns": [
-    "Rome"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
-   "parts": [
-    "Dozier Creek"
    ]
   },
   {
@@ -3862,50 +3380,9 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Gingercake"
-   ]
-  },
-  {
-   "name": "Tributary of Tar Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Dalton"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
-   "parts": [
-    "Tar Creek"
-   ]
-  },
-  {
-   "name": "Tributary of Utoy Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Johns Creek",
-    "Alpharetta",
-    "Roswell",
-    "Atlanta"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
-   "parts": [
-    "Utoy Creek"
    ]
   },
   {
@@ -3929,7 +3406,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Bald Ridge Creek"
    ]
@@ -3955,16 +3432,16 @@
    ],
    "places_failed": [
     {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 15.7 km away)"
+    },
+    {
      "town": "Marietta",
      "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 4.1 km away)"
     },
     {
      "town": "Smyrna",
      "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 7.4 km away)"
-    },
-    {
-     "town": "Mableton",
-     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 15.7 km away)"
     }
    ]
   },
@@ -3991,27 +3468,9 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Blackjack Creek"
-   ]
-  },
-  {
-   "name": "Tributary to Canton Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Canton"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
-   "parts": [
-    "Canton Creek"
    ]
   },
   {
@@ -4037,7 +3496,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Harmony Grove Creek"
    ]
@@ -4057,11 +3516,15 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Little Allatoona Creek"
    ],
    "places_failed": [
+    {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 20.4 km away)"
+    },
     {
      "town": "Marietta",
      "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 10.4 km away)"
@@ -4069,10 +3532,6 @@
     {
      "town": "Smyrna",
      "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 19.9 km away)"
-    },
-    {
-     "town": "Mableton",
-     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 20.4 km away)"
     }
    ]
   },
@@ -4093,7 +3552,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Milam Branch"
    ]
@@ -4113,11 +3572,15 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Morgan Lake"
    ],
    "places_failed": [
+    {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 344.6 km away)"
+    },
     {
      "town": "Marietta",
      "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 350.0 km away)"
@@ -4125,10 +3588,6 @@
     {
      "town": "Smyrna",
      "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 344.3 km away)"
-    },
-    {
-     "town": "Mableton",
-     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 344.6 km away)"
     }
    ]
   },
@@ -4147,7 +3606,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Noonday Creek tributary No 6"
    ]
@@ -4176,7 +3635,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Noonday Creek tributary No. 1"
    ]
@@ -4196,7 +3655,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "North Oconee Riverr"
    ]
@@ -4216,7 +3675,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Pitner Creek"
    ]
@@ -4247,7 +3706,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Queen Creek"
    ]
@@ -4267,7 +3726,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Soper Creek"
    ]
@@ -4289,11 +3748,15 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Walden Creek"
    ],
    "places_failed": [
+    {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 100.3 km away)"
+    },
     {
      "town": "Marietta",
      "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 84.0 km away)"
@@ -4301,10 +3764,6 @@
     {
      "town": "Smyrna",
      "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 92.4 km away)"
-    },
-    {
-     "town": "Mableton",
-     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 100.3 km away)"
     }
    ]
   },
@@ -4326,42 +3785,9 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Wild Horse Creek"
-   ]
-  },
-  {
-   "name": "Trickum Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "towns": [
-    "Marietta",
-    "Smyrna",
-    "Mableton"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "places_failed": [
-    {
-     "town": "Marietta",
-     "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 39.1 km away)"
-    },
-    {
-     "town": "Smyrna",
-     "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 28.1 km away)"
-    },
-    {
-     "town": "Mableton",
-     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 24.4 km away)"
-    }
    ]
   },
   {
@@ -4449,7 +3875,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Brushy Fork Creek"
    ]
@@ -4475,40 +3901,27 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "reason": "2 NHD waters of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Fork Creek"
-   ]
-  },
-  {
-   "name": "Unnamed Tributary to Trickum Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Tyrone"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "parts": [
-    "Trickum Creek"
    ],
    "places_failed": [
     {
-     "town": "Marietta",
-     "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 39.1 km away)"
+     "lon": -83.94155,
+     "lat": 33.87117,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.87117, -83.94155) (the nearest is 81.9 km away)"
     },
     {
-     "town": "Smyrna",
-     "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 28.1 km away)"
+     "town": "Buford",
+     "reason": "no NHD water of that name within 3 km of Buford (the nearest is 78.9 km away)"
     },
     {
-     "town": "Mableton",
-     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 24.4 km away)"
+     "town": "Lawrenceville",
+     "reason": "no NHD water of that name within 3 km of Lawrenceville (the nearest is 81.0 km away)"
+    },
+    {
+     "town": "Loganville",
+     "reason": "no NHD water of that name within 3 km of Loganville (the nearest is 76.3 km away)"
     }
    ]
   },
@@ -4540,7 +3953,7 @@
    "places_from": [
     "echo-sewer-overflow"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "feeding Rooty creek"
    ]
@@ -4564,70 +3977,9 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "feeding"
-   ]
-  },
-  {
-   "name": "Unnamed tributary of Big Dry Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Rome"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
-   "parts": [
-    "Big Dry Creek"
-   ]
-  },
-  {
-   "name": "Unnamed tributary of Tar Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Dalton"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
-   "parts": [
-    "Tar Creek"
-   ]
-  },
-  {
-   "name": "Unnamed tributary to Kellogg Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPD list"
-   ],
-   "kind": "tributary of a named water",
-   "points": [
-    [
-     34.10245,
-     -84.62328
-    ]
-   ],
-   "towns": [
-    "Canton",
-    "Woodstock"
-   ],
-   "places_from": [
-    "ga-epd-spills"
-   ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD",
-   "parts": [
-    "Kellogg Creek"
    ]
   },
   {
@@ -4678,33 +4030,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "Walnut Creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports",
-    "EPD list"
-   ],
-   "kind": "named water",
-   "points": [
-    [
-     32.86635,
-     -83.59678
-    ]
-   ],
-   "towns": [
-    "Macon"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ],
-   "records": [
-    "walnut-creek-ga"
-   ],
-   "reason": "a water record holds the name (walnut-creek-ga), but the reports' points lie too far from it to be placed there"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Warren Creek",
@@ -4719,7 +4045,13 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "1 NHD water of that name in GA, none within reach of the reports' places; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)",
+   "places_failed": [
+    {
+     "town": "Atlanta",
+     "reason": "no NHD water of that name within 3 km of Atlanta (the nearest is 157.8 km away)"
+    }
+   ]
   },
   {
    "name": "Weracoba Creek Basin",
@@ -4742,7 +4074,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Weracoba Creek"
    ]
@@ -4762,7 +4094,7 @@
     "echo-sewer-overflow",
     "ga-epd-spills"
    ],
-   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
    "parts": [
     "Weracoba Creek"
    ]
@@ -4786,7 +4118,7 @@
    "places_from": [
     "ga-epd-spills"
    ],
-   "reason": "not reached this run (a recheck builds nothing); the next --names run asks NHD"
+   "reason": "no NHD flowline or waterbody of that name in GA; NHD high resolution not asked (the run's time or request limit was reached on 2026-11-04)"
   },
   {
    "name": "Wilshire Canal (MS4)",
@@ -4841,35 +4173,6 @@
     "ga-epd-spills"
    ],
    "reason": "a storm-sewer system, not a named water"
-  },
-  {
-   "name": "unnamed trib. crooked creek",
-   "reports": 1,
-   "seen_in": [
-    "EPA reports"
-   ],
-   "kind": "tributary of a named water",
-   "towns": [
-    "Lawrenceville",
-    "Buford"
-   ],
-   "places_from": [
-    "echo-sewer-overflow"
-   ],
-   "reason": "24 NHD waters of that name in GA, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
-   "parts": [
-    "crooked creek"
-   ],
-   "places_failed": [
-    {
-     "town": "Lawrenceville",
-     "reason": "no NHD water of that name within 3 km of Lawrenceville (the nearest is 16.9 km away)"
-    },
-    {
-     "town": "Buford",
-     "reason": "no NHD water of that name within 3 km of Buford (the nearest is 25.9 km away)"
-    }
-   ]
   },
   {
    "name": "unnamed tributary to Rice Creek",
@@ -4943,6 +4246,96 @@
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Nancy Creek",
+   "reports": 38,
+   "slugs": [
+    "nancy-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.82332,
+     -84.45692
+    ],
+    [
+     33.94719,
+     -84.32118
+    ],
+    [
+     33.90943,
+     -84.32601
+    ],
+    [
+     33.95009,
+     -84.29126
+    ],
+    [
+     33.89483,
+     -84.30189
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "lon": -84.32118,
+     "lat": 33.94719,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.94719, -84.32118) (the nearest is 3.6 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Shoal Creek",
+   "reports": 33,
+   "slugs": [
+    "shoal-creek-candler-mcafee-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.71802,
+     -84.26911
+    ],
+    [
+     33.7662,
+     -84.29139
+    ],
+    [
+     33.74545,
+     -84.2781
+    ],
+    [
+     33.66478,
+     -84.21842
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Lawrenceville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "lon": -84.21842,
+     "lat": 33.66478,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.66478, -84.21842) (the nearest is 3.9 km away)"
+    }
    ]
   },
   {
@@ -5089,6 +4482,68 @@
    ]
   },
   {
+   "name": "Utoy Creek",
+   "reports": 21,
+   "slugs": [
+    "utoy-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.74419,
+     -84.50883
+    ],
+    [
+     33.82332,
+     -84.45692
+    ],
+    [
+     33.72744,
+     -84.42218
+    ],
+    [
+     33.70221,
+     -84.49446
+    ],
+    [
+     33.70256,
+     -84.54261
+    ]
+   ],
+   "towns": [
+    "Atlanta",
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "lon": -84.45692,
+     "lat": 33.82332,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.82332, -84.45692) (the nearest is 11.2 km away)"
+    },
+    {
+     "lon": -84.42218,
+     "lat": 33.72744,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.72744, -84.42218) (the nearest is 8.5 km away)"
+    },
+    {
+     "lon": -84.49446,
+     "lat": 33.70221,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.70221, -84.49446) (the nearest is 3.5 km away)"
+    },
+    {
+     "lon": -84.54261,
+     "lat": 33.70256,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.70256, -84.54261) (the nearest is 3.7 km away)"
+    }
+   ]
+  },
+  {
    "name": "Proctor Creek",
    "reports": 18,
    "slugs": [
@@ -5214,6 +4669,69 @@
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Camp Creek",
+   "reports": 15,
+   "slugs": [
+    "camp-creek-alpharetta-ga",
+    "camp-creek-atlanta-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.68343,
+     -84.49087
+    ],
+    [
+     33.64544,
+     -84.57682
+    ],
+    [
+     33.54911,
+     -84.41503
+    ],
+    [
+     33.51537,
+     -84.37198
+    ]
+   ],
+   "towns": [
+    "Atlanta",
+    "Jonesboro",
+    "Johns Creek",
+    "Alpharetta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "lon": -84.49087,
+     "lat": 33.68343,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.68343, -84.49087) (the nearest is 3.4 km away)"
+    },
+    {
+     "lon": -84.57682,
+     "lat": 33.64544,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.64544, -84.57682) (the nearest is 3.4 km away)"
+    },
+    {
+     "lon": -84.41503,
+     "lat": 33.54911,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.54911, -84.41503) (the nearest is 2.1 km away)"
+    },
+    {
+     "lon": -84.37198,
+     "lat": 33.51537,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.51537, -84.37198) (the nearest is 4.0 km away)"
+    },
+    {
+     "town": "Jonesboro",
+     "reason": "no NHD water of that name within 3 km of Jonesboro (the nearest is 3.3 km away)"
+    }
    ]
   },
   {
@@ -5543,6 +5061,30 @@
    ]
   },
   {
+   "name": "Indian Creek",
+   "reports": 7,
+   "slugs": [
+    "indian-creek-scottdale-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.78514,
+     -84.24957
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Clarkston"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Ocmulgee River",
    "reports": 7,
    "slugs": [
@@ -5831,26 +5373,6 @@
    "places_from": [
     "echo-sewer-overflow",
     "ga-epd-spills"
-   ]
-  },
-  {
-   "name": "Chattahoochee",
-   "reports": 4,
-   "slugs": [
-    "chattahoochee-river-ga"
-   ],
-   "how": "a water record already holds the name",
-   "points": [
-    [
-     33.76874,
-     -84.42512
-    ]
-   ],
-   "towns": [
-    "Atlanta"
-   ],
-   "places_from": [
-    "echo-sewer-overflow"
    ]
   },
   {
@@ -6592,6 +6114,27 @@
    ]
   },
   {
+   "name": "Wolf Creek",
+   "reports": 3,
+   "slugs": [
+    "wolf-creek-macon-bibb-county-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.8373,
+     -83.71381
+    ]
+   ],
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "tributary to little red bluff creek",
    "reports": 3,
    "slugs": [
@@ -6705,6 +6248,20 @@
    ]
   },
   {
+   "name": "Buffalo Creek",
+   "reports": 2,
+   "slugs": [
+    "buffalo-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Sparta"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Butler Creek Tributary",
    "reports": 2,
    "slugs": [
@@ -6748,6 +6305,30 @@
    ]
   },
   {
+   "name": "Cedar Creek",
+   "reports": 2,
+   "slugs": [
+    "cedar-creek-ga",
+    "cedar-creek-athens-clarke-county-unified-government-balance-ga",
+    "cedar-creek-lawrenceville-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.93451,
+     -83.31951
+    ]
+   ],
+   "towns": [
+    "Athens",
+    "Wrightsville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Chattachoochee",
    "reports": 2,
    "slugs": [
@@ -6777,6 +6358,34 @@
    "towns": [
     "Jonesboro",
     "Conley"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Crooked Creek",
+   "reports": 2,
+   "slugs": [
+    "crooked-creek-decatur-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.76579,
+     -84.14722
+    ],
+    [
+     33.77221,
+     -84.08696
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Lithonia"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -6970,6 +6579,26 @@
    ]
   },
   {
+   "name": "Mill Creek",
+   "reports": 2,
+   "slugs": [
+    "mill-creek-318209-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     34.74545,
+     -85.45584
+    ]
+   ],
+   "towns": [
+    "Rising Fawn"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Nash Creek",
    "reports": 2,
    "slugs": [
@@ -7034,6 +6663,20 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Olive Creek",
+   "reports": 2,
+   "slugs": [
+    "olive-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Thomasville"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -7472,28 +7115,6 @@
    ]
   },
   {
-   "name": "Un-named tributary to Lake Lanier",
-   "reports": 2,
-   "slugs": [
-    "lake-lanier-ga"
-   ],
-   "how": "a water record already holds the name",
-   "points": [
-    [
-     34.19608,
-     -84.18656
-    ]
-   ],
-   "towns": [
-    "Gainesville",
-    "Cumming"
-   ],
-   "places_from": [
-    "echo-sewer-overflow",
-    "ga-epd-spills"
-   ]
-  },
-  {
    "name": "Unnamed Tributary of Big Haynes Creek",
    "reports": 2,
    "slugs": [
@@ -7515,6 +7136,24 @@
     "Buford",
     "Snellville",
     "Grayson"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary of Crooked Creek",
+   "reports": 2,
+   "slugs": [
+    "crooked-creek-decatur-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Peachtree Corners",
+    "Norcross"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -7565,21 +7204,28 @@
    ]
   },
   {
-   "name": "Unnamed Tributary to Lake Lanier",
+   "name": "Unnamed tributary of cedar creek",
    "reports": 2,
    "slugs": [
-    "lake-lanier-ga"
+    "cedar-creek-ga",
+    "cedar-creek-athens-clarke-county-unified-government-balance-ga",
+    "cedar-creek-lawrenceville-ga"
    ],
-   "how": "a water record already holds the name",
+   "how": "record built from the name",
    "points": [
     [
-     34.19608,
-     -84.18656
+     33.97723,
+     -83.95845
+    ],
+    [
+     33.99887,
+     -83.72056
     ]
    ],
    "towns": [
-    "Gainesville",
-    "Cumming"
+    "Lawrenceville",
+    "Buford",
+    "Winder"
    ],
    "places_from": [
     "echo-sewer-overflow",
@@ -7681,6 +7327,27 @@
    ]
   },
   {
+   "name": "Bell Creek",
+   "reports": 1,
+   "slugs": [
+    "bell-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.86595,
+     -84.32541
+    ]
+   ],
+   "towns": [
+    "Thomaston"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Birch Creek",
    "reports": 1,
    "slugs": [
@@ -7746,6 +7413,69 @@
    ],
    "places_from": [
     "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Campcreek",
+   "reports": 1,
+   "slugs": [
+    "camp-creek-alpharetta-ga",
+    "camp-creek-atlanta-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.68343,
+     -84.49087
+    ],
+    [
+     33.64544,
+     -84.57682
+    ],
+    [
+     33.54911,
+     -84.41503
+    ],
+    [
+     33.51537,
+     -84.37198
+    ]
+   ],
+   "towns": [
+    "Atlanta",
+    "Jonesboro",
+    "Johns Creek",
+    "Alpharetta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "lon": -84.49087,
+     "lat": 33.68343,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.68343, -84.49087) (the nearest is 3.4 km away)"
+    },
+    {
+     "lon": -84.57682,
+     "lat": 33.64544,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.64544, -84.57682) (the nearest is 3.4 km away)"
+    },
+    {
+     "lon": -84.41503,
+     "lat": 33.54911,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.54911, -84.41503) (the nearest is 2.1 km away)"
+    },
+    {
+     "lon": -84.37198,
+     "lat": 33.51537,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.51537, -84.37198) (the nearest is 4.0 km away)"
+    },
+    {
+     "town": "Jonesboro",
+     "reason": "no NHD water of that name within 3 km of Jonesboro (the nearest is 3.3 km away)"
+    }
    ]
   },
   {
@@ -7887,6 +7617,26 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Griffin Creek",
+   "reports": 1,
+   "slugs": [
+    "griffin-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.92568,
+     -84.82809
+    ]
+   ],
+   "towns": [
+    "Dallas"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -8156,6 +7906,27 @@
    ]
   },
   {
+   "name": "Long Cane Creek Tributary",
+   "reports": 1,
+   "slugs": [
+    "long-cane-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     33.02421,
+     -84.99905
+    ]
+   ],
+   "towns": [
+    "Lagrange",
+    "Thomasville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Lookout Creek",
    "reports": 1,
    "slugs": [
@@ -8291,6 +8062,20 @@
    "how": "a water record already holds the name",
    "towns": [
     "Atlanta"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "North Fork of Little Mud Creek",
+   "reports": 1,
+   "slugs": [
+    "north-fork-little-mud-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Cornelia"
    ],
    "places_from": [
     "ga-epd-spills"
@@ -8476,6 +8261,20 @@
    ],
    "places_from": [
     "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Rose Creek",
+   "reports": 1,
+   "slugs": [
+    "rose-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Woodstock"
+   ],
+   "places_from": [
+    "ga-epd-spills"
    ]
   },
   {
@@ -8771,6 +8570,31 @@
    ]
   },
   {
+   "name": "Toto Creek",
+   "reports": 1,
+   "slugs": [
+    "toto-creek-ga"
+   ],
+   "how": "record built from the name",
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Town Branch",
+   "reports": 1,
+   "slugs": [
+    "town-branch-summerville-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Summerville"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Trib Heiferhorn Creek",
    "reports": 1,
    "slugs": [
@@ -8956,6 +8780,26 @@
    ]
   },
   {
+   "name": "Tributary of Dozier Creek",
+   "reports": 1,
+   "slugs": [
+    "dozier-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     34.30444,
+     -85.11826
+    ]
+   ],
+   "towns": [
+    "Rome"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
+  },
+  {
    "name": "Tributary of Seven Branch",
    "reports": 1,
    "slugs": [
@@ -8975,6 +8819,20 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Tributary of Tar Creek",
+   "reports": 1,
+   "slugs": [
+    "tar-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Dalton"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -9000,6 +8858,46 @@
    ]
   },
   {
+   "name": "Tributary of Utoy Creek",
+   "reports": 1,
+   "slugs": [
+    "utoy-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "lon": -84.45692,
+     "lat": 33.82332,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.82332, -84.45692) (the nearest is 11.2 km away)"
+    },
+    {
+     "lon": -84.42218,
+     "lat": 33.72744,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.72744, -84.42218) (the nearest is 8.5 km away)"
+    },
+    {
+     "lon": -84.49446,
+     "lat": 33.70221,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.70221, -84.49446) (the nearest is 3.5 km away)"
+    },
+    {
+     "lon": -84.54261,
+     "lat": 33.70256,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.70256, -84.54261) (the nearest is 3.7 km away)"
+    }
+   ]
+  },
+  {
    "name": "Tributary to Almand Creek",
    "reports": 1,
    "slugs": [
@@ -9017,6 +8915,20 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Tributary to Canton Creek",
+   "reports": 1,
+   "slugs": [
+    "canton-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Canton"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -9176,6 +9088,37 @@
    ]
   },
   {
+   "name": "Trickum Creek",
+   "reports": 1,
+   "slugs": [
+    "trickum-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 24.4 km away)"
+    },
+    {
+     "town": "Marietta",
+     "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 39.1 km away)"
+    },
+    {
+     "town": "Smyrna",
+     "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 28.1 km away)"
+    }
+   ]
+  },
+  {
    "name": "Unnamed Tributary of Bennett Creek",
    "reports": 1,
    "slugs": [
@@ -9327,6 +9270,34 @@
    ]
   },
   {
+   "name": "Unnamed Tributary to Trickum Creek",
+   "reports": 1,
+   "slugs": [
+    "trickum-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Tyrone"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "places_failed": [
+    {
+     "town": "Mableton",
+     "reason": "no NHD water of that name within 3 km of Mableton (the nearest is 24.4 km away)"
+    },
+    {
+     "town": "Marietta",
+     "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 39.1 km away)"
+    },
+    {
+     "town": "Smyrna",
+     "reason": "no NHD water of that name within 3 km of Smyrna (the nearest is 28.1 km away)"
+    }
+   ]
+  },
+  {
    "name": "Unnamed tributary Little Red Bluff Creek",
    "reports": 1,
    "slugs": [
@@ -9338,6 +9309,20 @@
    ],
    "places_from": [
     "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "Unnamed tributary of Big Dry Creek",
+   "reports": 1,
+   "slugs": [
+    "big-dry-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Rome"
+   ],
+   "places_from": [
+    "ga-epd-spills"
    ]
   },
   {
@@ -9361,6 +9346,20 @@
     "proctor-creek-acworth-ga"
    ],
    "how": "record built from the name"
+  },
+  {
+   "name": "Unnamed tributary of Tar Creek",
+   "reports": 1,
+   "slugs": [
+    "tar-creek-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Dalton"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed tributary of singleton creek",
@@ -9397,6 +9396,27 @@
    ],
    "places_from": [
     "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Kellogg Creek",
+   "reports": 1,
+   "slugs": [
+    "kellogg-creek-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     34.10245,
+     -84.62328
+    ]
+   ],
+   "towns": [
+    "Canton",
+    "Woodstock"
+   ],
+   "places_from": [
     "ga-epd-spills"
    ]
   },
@@ -9470,6 +9490,27 @@
     "vineville-branch-ga"
    ],
    "how": "record built from the name",
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
+  },
+  {
+   "name": "Walnut Creek",
+   "reports": 1,
+   "slugs": [
+    "walnut-creek-macon-bibb-county-ga"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     32.86635,
+     -83.59678
+    ]
+   ],
    "towns": [
     "Macon"
    ],
@@ -9610,6 +9651,21 @@
    "how": "a water record already holds the name",
    "towns": [
     "Pearson"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
+  },
+  {
+   "name": "unnamed trib. crooked creek",
+   "reports": 1,
+   "slugs": [
+    "crooked-creek-decatur-ga"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Lawrenceville",
+    "Buford"
    ],
    "places_from": [
     "echo-sewer-overflow"
