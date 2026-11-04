@@ -13,7 +13,11 @@ Two state objects:
                            files, not answers, and are not in it either.
 
 Restore order: build.tar.gz, then raw-cache.tar.gz (the NY workbook entry is named by a data/build file). Save: both
-only after a run that ended well (a cancelled or failed refresh never overwrites the saved state).
+only after a run that ended well (a cancelled or failed refresh never overwrites the saved state). A state object
+that is there but cannot be fetched (fetch exits 1) is never saved over: the refresh stops when build.tar.gz cannot be
+fetched or unpacked (a run without its history and blocklist would publish and then save a history that starts from
+nothing), and a run that could not fetch raw-cache.tar.gz goes on without it and keeps the stored one. A raw cache
+that cannot be read is replaced by the next good run's.
 
     python3 -I scripts/state_paths.py list                  the raw-cache paths present now, one per line
     python3 -I scripts/state_paths.py pack FILE [--max-mb N]  raw-cache tarball of them; prints the size per entry
@@ -23,24 +27,47 @@ only after a run that ended well (a cancelled or failed refresh never overwrites
                                                             absolute or '..' paths, AppleDouble '._*' files and
                                                             anything else are skipped and counted (a tarball made
                                                             elsewhere, or by an older list, cannot widen the set)
-    python3 -I scripts/state_paths.py check-size FILE [--max-mb N]   exit 1 when a tarball is over the cap
+    python3 -I scripts/state_paths.py check-size FILE [--max-mb N] [--hard-mb N]
+                                                            exit 1 when a tarball is over the cap; with --hard-mb,
+                                                            over the cap is a warning and only over N fails
+    python3 -I scripts/state_paths.py fetch KEY FILE        get state object KEY (e.g. state/build.tar.gz) from the
+                                                            bucket with wrangler, tried three times; exit 0 fetched,
+                                                            3 when there is no such object (a first run), 1 when it
+                                                            could not be fetched (the workflow then keeps the stored
+                                                            object: a run that could not restore it never saves over it)
 
-The cap is 200 MB (STATE_MAX_MB in the environment, or --max-mb, overrides it). Nothing here prints a file's
+The cap is 200 MB (STATE_MAX_MB in the environment, or --max-mb, overrides it). The build state's save warns over the
+cap and fails only over wrangler's upload limit (300 MiB, --hard-mb 314), where the upload would fail anyway: a build
+state that grew is still saved, so no history is lost while the growth is looked at. Nothing here prints a file's
 contents, only paths, counts and sizes. Standard library only.
+
+The NY workbook is DEC's public download as published; its free text can carry contact details, which the ingester
+scrubs before anything is written. Like the name blocklist in build.tar.gz, it is kept only in the private state
+bucket, never committed or published.
 """
 from __future__ import annotations
 
 import argparse
+import gzip
 import json
 import os
+import re
+import subprocess
 import sys
 import tarfile
+import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_MAX_MB = 200.0
+WRANGLER_MAX_MB = 314.0          # wrangler r2 object put refuses a file over 300 MiB (314.6 MB)
+BUCKET = "dirtywaterwatch-data"
+STATE_KEY = re.compile(r"state/[a-z0-9][a-z0-9._-]*\.tar\.gz")
+# wrangler's answer for a key that is not there ("The specified key does not exist."): a first run, not a failure
+MISSING = re.compile(r"specified key does not exist|NoSuchKey", re.I)
+FETCHED, ABSENT, FAILED = 0, 3, 1
 
 
 @dataclass(frozen=True)
@@ -147,15 +174,57 @@ def mb(b: int) -> str:
     return f"{b / 1e6:.1f} MB"
 
 
-def check_size(path: Path, cap_mb: float, label: str | None = None) -> bool:
+def check_size(path: Path, cap_mb: float, label: str | None = None, hard_mb: float | None = None) -> bool:
+    """False when the file is over the cap, or, given hard_mb, only when it is over hard_mb (over the cap is then a
+    warning and the file is saved)."""
     size, label = path.stat().st_size, label or path.name
-    if size > cap_mb * 1e6:
-        print(f"::error::{label} is {mb(size)}, over the {cap_mb:g} MB cap for a state object; it is not saved. "
-              f"Find what grew (the sizes above), prune it or raise STATE_MAX_MB in the workflow on purpose.",
-              flush=True)
+    if hard_mb is not None and cap_mb * 1e6 < size <= hard_mb * 1e6:
+        print(f"::warning::{label} is {mb(size)}, over the {cap_mb:g} MB cap for a state object; it is saved (the "
+              f"upload limit is {hard_mb:g} MB). Find what grew, prune it or raise STATE_MAX_MB in the workflow on "
+              f"purpose.", flush=True)
+        return True
+    limit = hard_mb if hard_mb is not None else cap_mb
+    if size > limit * 1e6:
+        print(f"::error::{label} is {mb(size)}, over the {limit:g} MB {'upload limit' if hard_mb is not None else 'cap'}"
+              f" for a state object; it is not saved. Find what grew, prune it or raise STATE_MAX_MB in the workflow "
+              f"on purpose.", flush=True)
         return False
     say(f"{label}: {mb(size)} (cap {cap_mb:g} MB)")
     return True
+
+
+def fetch(key: str, out: Path, tries: int = 3, wrangler: str | None = None) -> int:
+    """Get a state object with wrangler: FETCHED (0), ABSENT (3: wrangler says there is no such key) or FAILED (1:
+    anything else, after `tries` attempts). Never leaves a partial file behind on ABSENT or FAILED."""
+    if not STATE_KEY.fullmatch(key):
+        raise ValueError(f"not a state object key: {key!r}")
+    cmd = [wrangler or os.environ.get("WRANGLER") or "wrangler", "r2", "object", "get", f"{BUCKET}/{key}",
+           "--file", str(out), "--remote"]
+    pause = float(os.environ.get("STATE_FETCH_RETRY_S") or 15)
+    last = "no answer"
+    for n in range(tries):
+        out.unlink(missing_ok=True)
+        try:
+            p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors="replace",
+                               timeout=900)
+        except (OSError, subprocess.TimeoutExpired) as ex:
+            p, text = None, f"{type(ex).__name__}"
+        else:
+            text = p.stdout or ""
+        if p is not None and p.returncode == 0 and out.is_file():
+            say(f"{key}: fetched, {mb(out.stat().st_size)}")
+            return FETCHED
+        out.unlink(missing_ok=True)
+        if MISSING.search(text):
+            say(f"{key}: not in the bucket")
+            return ABSENT
+        lines = [x.strip() for x in text.splitlines() if x.strip()]
+        last = lines[-1][:300] if lines else (f"exit {p.returncode}" if p is not None else text)
+        if n < tries - 1:
+            say(f"{key}: not fetched ({last}); trying again")
+            time.sleep(pause * (n + 1))
+    print(f"::warning::{key} could not be fetched ({last})", flush=True)
+    return FAILED
 
 
 def pack(out: Path, root: Path = ROOT, cap_mb: float = DEFAULT_MAX_MB, now: datetime | None = None) -> bool:
@@ -189,8 +258,15 @@ def pack(out: Path, root: Path = ROOT, cap_mb: float = DEFAULT_MAX_MB, now: date
 
 
 def unpack(src: Path, root: Path = ROOT) -> dict:
-    """Restore a raw-cache tarball under root, members on the list only. Returns the counts."""
+    """Restore a raw-cache tarball under root, members on the list only. Returns the counts. A gzip file is read to
+    its end first (its length and checksum), so a damaged tarball raises before anything is written."""
     counts = {"files": 0, "dirs": 0, "skipped_not_listed": 0, "skipped_not_regular": 0}
+    with open(src, "rb") as fh:
+        is_gz = fh.read(2) == b"\x1f\x8b"
+    if is_gz:
+        with gzip.open(src, "rb") as g:
+            while g.read(1 << 20):
+                pass
     with tarfile.open(src, "r:*") as tf:
         members = []
         for m in tf.getmembers():
@@ -216,7 +292,12 @@ def main(argv=None) -> int:
         s = sub.add_parser(name)
         s.add_argument("file")
         s.add_argument("--max-mb", type=float)
+        if name == "check-size":
+            s.add_argument("--hard-mb", type=float, help="over the cap is a warning; only over this fails")
     s = sub.add_parser("unpack")
+    s.add_argument("file")
+    s = sub.add_parser("fetch")
+    s.add_argument("key")
     s.add_argument("file")
     a = ap.parse_args(argv)
     if a.cmd == "list":
@@ -225,7 +306,13 @@ def main(argv=None) -> int:
     if a.cmd == "pack":
         return 0 if pack(Path(a.file), cap_mb=max_mb(a.max_mb)) else 1
     if a.cmd == "check-size":
-        return 0 if check_size(Path(a.file), max_mb(a.max_mb)) else 1
+        return 0 if check_size(Path(a.file), max_mb(a.max_mb), hard_mb=a.hard_mb) else 1
+    if a.cmd == "fetch":
+        try:
+            return fetch(a.key, Path(a.file))
+        except ValueError as ex:
+            print(f"::error::{ex}", flush=True)
+            return 2
     unpack(Path(a.file))
     return 0
 

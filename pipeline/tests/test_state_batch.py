@@ -396,7 +396,8 @@ def test_refresh_workflow_keeps_the_raw_cache():
     sb = names.index("Save pipeline state to R2")
     sr = next(i for i, n in enumerate(names) if n.startswith("Save the raw caches"))
     assert rb < rr < refresh < sb < sr
-    assert steps[sr]["if"] == "success()" and steps[sb]["if"] == "success()"
+    assert steps[sb]["if"] == "success()" and steps[sr]["if"].startswith("success() && ")
+    assert "steps.restore_raw.outputs.keep != '1'" in steps[sr]["if"]       # a cache it could not fetch stays
     assert "state_paths.py pack raw-cache.tar.gz" in steps[sr]["run"]
     assert "state_paths.py unpack raw-cache.tar.gz" in steps[rr]["run"]
     assert "check-size build.tar.gz" in steps[sb]["run"]
