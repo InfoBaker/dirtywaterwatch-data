@@ -285,6 +285,26 @@ def town_key(t) -> str:
     return re.sub(r"\s+(township|twp|borough|boro|village|city|town|plantation|gore|grant|cdp)$", "", t).strip()
 
 
+# a named county or intercounty drain ("Koehler Drain", "Fowler Extension No. 2 Drain", "Laingsburg Drain #264",
+# "LEMON DRAIN"): in Michigan (and Indiana and Ohio) a legally established drain is usually an open watercourse, and
+# NHD names many of them; "storm drain", "floor drain" or "French drain" stay plumbing
+NAMED_DRAIN = re.compile(r"^\s*([A-Z0-9][\w'.&-]*(?:[ ]+[\w'.&-]+){0,4})[ ]+(?:Drain|DRAIN)"
+                         r"(?:[ ]+(?:No\.?|NO\.?|#)[ ]*\d+[A-Za-z]?|[ ]*#[ ]*\d+[A-Za-z]?)?(?:[ ]*\([^()]*\))?\s*$")
+DRAIN_NOT_NAME = {"french", "floor", "roof", "trench", "footing", "foundation", "sump", "tile", "field", "curb", "area",
+                  "yard", "sanitary", "sewer", "pipe", "outlet", "inlet", "basement", "gutter", "window", "shower",
+                  "main", "lateral", "drain", "the", "a", "an"}
+
+
+def named_drain(t: str) -> bool:
+    """Whether a text is a named drain (NAMED_DRAIN) whose name words are not plumbing or a place of the works."""
+    m = NAMED_DRAIN.match(t)
+    if not m:
+        return False
+    head = words(m.group(1))
+    return bool(head) and not any(w in NON_NAME or w in DRAIN_NOT_NAME for w in head) \
+        and not re.fullmatch(r"[\d\s#.]+", m.group(1))
+
+
 def not_water(text: str) -> str | None:
     """Why a text is not a water's name (None when it may be one)."""
     t = str(text or "").strip()
@@ -292,6 +312,8 @@ def not_water(text: str) -> str | None:
         return "empty"
     if ADDRESS.search(t):
         return "a street address"
+    if named_drain(t):
+        return None
     if re.fullmatch(r"\W*[A-Za-z]{1,2}\W*", t):
         return "not a water name"           # 'N', 'A' (a yes/no column), 'UT' (an unnamed tributary)
     ws = words(t)
