@@ -89,6 +89,9 @@ RAW_CACHE: tuple[Entry, ...] = (
     Entry("data/raw/census/cb_2023_us_state_500k.zip",
           "ingest/waters_extra.py states_zip(): the Census state outlines every water record is cut to "
           "(downloaded once, 3 MB)"),
+    Entry("data/raw/census/tl_2023_us_state.zip",
+          "build/reaches.py tiger_states(): the Census TIGER/Line state boundaries through the Great Lakes, the outline "
+          "of a Great Lakes record that has none (its state's waters in the lake; downloaded once, 10 MB)"),
     Entry("data/raw/iem-iemre",
           "build/rain_thresholds.py: IEM's MRMS daily rainfall per outfall point and year (past years final)"),
     Entry("data/raw/ri-nbc/rigis-nbc-sewer-overflows.json",

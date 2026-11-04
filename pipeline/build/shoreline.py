@@ -20,6 +20,12 @@ state outlines, cb_2023_us_state_500k, which end at the shore). The walk crosses
 than gap_km (a river mouth, a breakwall) and stops at the start of a longer one (a state or international line, a tile
 edge), and at each_way_km. Without land outlines (land=None) every edge is shore: only for outlines that are all shore.
 
+A lake record with no outline of its own (openboatlaunch's Great Lakes records keep theirs in openboatlaunch's files,
+which the hourly run does not have) is walked on its state's waters in the lake: build/reaches.py census_lake_outline
+(the TIGER/Line state polygon, which runs through the lake along the state and international lines, less the
+cartographic land). Where a stretch ends on another shoreline lake record (the next state's, or Lake Michigan beyond
+NHD's line in the Straits of Mackinac), build/reaches.py goes on along that record's shore (onward()).
+
 Pure geometry: no network. Coordinates are lon/lat; the work is in a local equirectangular projection (metres).
 """
 from __future__ import annotations

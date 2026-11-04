@@ -1195,6 +1195,61 @@ def land_outlines() -> dict:
     return _LAND
 
 
+TIGER_STEM = "tl_2023_us_state"
+TIGER_URL = f"https://www2.census.gov/geo/tiger/TIGER2023/STATE/{TIGER_STEM}.zip"
+_TIGER: dict = {}
+_CENSUS_LAKES: dict = {}
+
+
+def tiger_states() -> dict:
+    """{state: polygon} from the Census Bureau's TIGER/Line 2023 state boundaries (tl_2023_us_state.zip, public
+    domain: data/raw/census/, downloaded once, about 10 MB), which run through the Great Lakes along the state and
+    international lines. Raises when it cannot be had."""
+    if not _TIGER:
+        from ingest import waters_extra as WX
+        from ingest import waters_from_nhd as N
+        dest = WX.RAW_DIR / "census" / f"{TIGER_STEM}.zip"
+        z = WX.states_zip(candidates=[dest], url=TIGER_URL, dest=dest, members=(f"{TIGER_STEM}.shp", f"{TIGER_STEM}.dbf"))
+        _TIGER.update(N.read_state_outlines(None, zip_path=z, stem=TIGER_STEM))
+    return _TIGER
+
+
+def census_lake_outline(slug: str, waters: dict, land: dict | None):
+    """The outline of a shoreline lake record that carries none (openboatlaunch's Great Lakes records keep theirs in
+    openboatlaunch's files, which the hourly run does not have): the record's state's waters in the lake, the TIGER/Line
+    state polygon (tiger_states) less the land of the cartographic outlines (cb_2023_us_state_500k, which end at the
+    shore), within the record's box; its largest piece. None without the record's box or the Census files."""
+    if slug in _CENSUS_LAKES:
+        return _CENSUS_LAKES[slug]
+    from shapely.geometry import box
+    from shapely.ops import unary_union
+    w = waters.get(slug) or {}
+    st, bb, g = str(w.get("state") or "").upper(), w.get("bbox"), None
+    if land and bb and len(bb) == 4:
+        try:
+            poly = tiger_states().get(st)
+        except Exception:           # no TIGER file this run: no outline, and the stretch is rebuilt next run
+            poly = None
+        if poly is not None:
+            region = box(*bb).buffer(0.05)
+            near = unary_union([x for x in land.values() if x.intersects(region)])
+            water = poly.intersection(region).difference(near)
+            parts = [p for p in getattr(water, "geoms", [water]) if p.geom_type == "Polygon" and not p.is_empty]
+            g = max(parts, key=lambda p: p.area) if parts else None
+    _CENSUS_LAKES[slug] = g
+    return g
+
+
+def lake_outline(slug: str, waters: dict, land: dict | None) -> tuple:
+    """(outline, where from): the record's own (openboatlaunch's file or inline), else census_lake_outline."""
+    from build.status import water_geometry
+    g = water_geometry(slug, waters) if slug else None
+    if g is not None:
+        return g, "record"
+    g = census_lake_outline(slug, waters, land) if slug else None
+    return g, ("census" if g is not None else None)
+
+
 def shore_sig(shore: dict) -> str:
     """The rule values a cached stretch was built with: a change rebuilds every stretch."""
     return "|".join(str(shore.get(k)) for k in ("each_way_km", "shore_m", "gap_km", "snap_km"))
@@ -1206,7 +1261,6 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
     touches, and those states. A point too far from the shore, or a lake with no outline, is a no_trace record."""
     from shapely.geometry import box
     from shapely.ops import unary_union
-    from build.status import water_geometry
     each = float(shore["each_way_km"])
     rec = {**c, "fetched_at": now_iso(), "model": SH.MODEL, "method": SH.MODEL, "navigation": None, "cap_km": each,
            "each_way_km": each, "rule_sig": shore_sig(shore), "npdes_id": None, "start_comid": None, "segments": [],
@@ -1216,10 +1270,11 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
     entry = SH.shoreline_entry(w, shore)
     rec["river"] = (entry or {}).get("name") or w.get("name")
     rec["lake"] = rec["river"]
-    g = water_geometry(slug, waters) if slug else None
+    g, outline = lake_outline(slug, waters, land)
     if g is None or c.get("lat") is None:
         rec["error"] = "no outline for the lake record" if g is None else "no point to start from"
         return rec
+    rec["outline"] = outline        # "census": the state's waters in the lake from the Census files (no record outline)
     near = None
     if land is not None:
         bb = box(*g.bounds).buffer(0.5)
@@ -1275,7 +1330,6 @@ def onward_record(pt, km: float, walked: list, waters: dict, shore: dict, land: 
     Erie share one) is not another shore."""
     from shapely.geometry import Point, box
     from shapely.ops import unary_union
-    from build.status import water_geometry
     lon, lat = float(pt[0]), float(pt[1])
     probe = Point(lon, lat)
     pad = SH.ONWARD_M / 111_000 * 2
@@ -1284,7 +1338,7 @@ def onward_record(pt, km: float, walked: list, waters: dict, shore: dict, land: 
         bb = w2.get("bbox")
         if bb and not (bb[0] - pad <= lon <= bb[2] + pad and bb[1] - pad <= lat <= bb[3] + pad):
             continue
-        g2 = water_geometry(s2, waters)
+        g2, _ = lake_outline(s2, waters, land)
         if g2 is None or g2 is g0 or (g2.bounds == g0.bounds and abs(g2.area - g0.area) < 1e-9):
             continue
         if g2.boundary.distance(probe) > pad:

@@ -223,7 +223,9 @@ def _status_state():
     S._GEOM_CACHE.clear()
     S._REACH_WATERS.clear()
     S._STATES = {"PA", "NY"}
+    R._CENSUS_LAKES.clear()
     yield
+    R._CENSUS_LAKES.clear()
     S.PLACE_STEPS.update(saved)
     S._GEOM_CACHE.clear()
     S._REACH_WATERS.clear()
@@ -461,6 +463,7 @@ def test_an_outfall_whose_lake_had_no_outline_gets_its_stretch_as_soon_as_the_ou
     no_outline = copy.deepcopy(WATERS)
     no_outline["lake-erie-pa"].pop("geometry")
     monkeypatch.setattr(S, "OBL_WATER_DIR", tmp_path / "none")
+    monkeypatch.setattr(R, "tiger_states", lambda: {})          # nor any Census outline for it
     cands = [{"key": f"{PERMIT}-001", "permit": PERMIT, "outfall": "001", "water_slug": "lake-erie-pa",
               "lat": 41.999, "lon": -80.0, "sources": ["echo"], "state": "PA", "model": "shoreline"}]
     S._GEOM_CACHE.clear()
@@ -471,3 +474,62 @@ def test_an_outfall_whose_lake_had_no_outline_gets_its_stretch_as_soon_as_the_ou
     out = R.run_shorelines(cands, WATERS, SHORE, log=lambda m: None, land=LAND)      # the next run, outline added
     assert out["due"] == 1 and out["built"] == 1
     assert R.outcome(json.loads((tmp_path / f"{PERMIT}-001.json").read_text())) == "shoreline"
+
+
+def _census(monkeypatch):
+    """TIGER/Line-shaped state polygons that run out into the box lake to a line at 42.3 (the international line),
+    split at -79.76 (the state line), and a record of each state with no outline of its own."""
+    monkeypatch.setattr(R, "tiger_states", lambda: {"PA": box(-81.0, 41.5, -79.76, 42.3),
+                                                    "NY": box(-79.76, 41.5, -79.0, 42.3)})
+    R._CENSUS_LAKES.clear()
+    S._GEOM_CACHE.clear()
+    monkeypatch.setattr(S, "OBL_WATER_DIR", Path(tempfile.mkdtemp()))
+    waters = copy.deepcopy(WATERS)
+    for s in ("lake-erie-pa", "lake-erie-ny"):
+        waters[s].pop("geometry")
+    return waters
+
+
+def test_a_great_lake_record_without_an_outline_takes_its_states_waters_from_the_census_files(monkeypatch):
+    waters = _census(monkeypatch)
+    g, where = R.lake_outline("lake-erie-pa", waters, LAND)
+    assert where == "census" and g.bounds[1:] == pytest.approx((42.0, -79.76, 42.3), abs=1e-6)
+    c = {"key": f"{PERMIT}-001", "permit": PERMIT, "outfall": "001", "water_slug": "lake-erie-pa", "lat": 41.999,
+         "lon": -79.9, "state": "PA", "outfall_kind": "cso", "model": "shoreline"}
+    rec = R.shoreline_record(c, waters, SHORE, LAND)
+    assert rec["outline"] == "census" and rec["cut_reason"] == "shoreline" and rec["error"] is None
+    # east: to Pennsylvania's line in the lake (about 11.6 km), then on along New York's waters to 20 km
+    ny = [sg for sg in rec["segments"] if sg.get("water_slug") == "lake-erie-ny"]
+    assert len(ny) == 1 and ny[0]["km_start"] == pytest.approx(11.6, abs=0.2)
+    assert ny[0]["km_end"] == pytest.approx(20, abs=0.05)
+    assert all(y == pytest.approx(42.0, abs=1e-6) for _, y in ny[0]["coords"])        # the shore, not the state line
+    assert rec["waters"] == ["lake-erie-pa", "lake-erie-ny"] and rec["states"] == ["NY", "PA"]
+    # the record's own outline wins over the Census files
+    R._CENSUS_LAKES.clear()
+    S._GEOM_CACHE.clear()
+    assert R.lake_outline("lake-erie-pa", WATERS, LAND)[1] == "record"
+    S._GEOM_CACHE.clear()
+
+
+def test_without_the_census_boundaries_a_lake_with_no_outline_gets_no_stretch_this_run(monkeypatch):
+    waters = _census(monkeypatch)
+    monkeypatch.setattr(R, "tiger_states", lambda: (_ for _ in ()).throw(OSError("offline")))
+    rec = shore_rec_for(waters)
+    assert rec["error"] == "no outline for the lake record" and rec["segments"] == []
+    R._CENSUS_LAKES.clear()
+
+
+def shore_rec_for(waters):
+    c = {"key": f"{PERMIT}-001", "permit": PERMIT, "outfall": "001", "water_slug": "lake-erie-pa", "lat": 41.999,
+         "lon": -80.0, "state": "PA", "outfall_kind": "cso", "model": "shoreline"}
+    return R.shoreline_record(c, waters, SHORE, LAND)
+
+
+def test_one_failing_stretch_never_stops_the_reach_build(tmp_path, monkeypatch):
+    monkeypatch.setattr(R, "REACH_DIR", tmp_path)
+    monkeypatch.setattr(R, "shoreline_record", lambda *a, **k: (_ for _ in ()).throw(ValueError("bad ring")))
+    cands = [{"key": f"{PERMIT}-001", "permit": PERMIT, "outfall": "001", "water_slug": "lake-erie-pa",
+              "lat": 41.999, "lon": -80.0, "sources": ["echo"], "state": "PA", "model": "shoreline"}]
+    out = R.run_shorelines(cands, WATERS, SHORE, log=lambda m: None, land=LAND)
+    rec = json.loads((tmp_path / f"{PERMIT}-001.json").read_text())
+    assert out["no_trace"] == 1 and "bad ring" in rec["error"] and R.outcome(rec) == "no_trace"
