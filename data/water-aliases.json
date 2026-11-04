@@ -1,6 +1,35 @@
 {
+ "allatoona-lake-ga": [
+  "Lake Allatoona",
+  "Allatoona Reservoir"
+ ],
+ "caloosahatchee-river-fl": [
+  "CALOOSAHATCHIE River",
+  "CALOOSAHATCHIE RV"
+ ],
+ "carters-lake-ga": [
+  "Carters Reservoir"
+ ],
  "charles-river-ma": [
   "Charles River Basin"
+ ],
+ "chattahoochee-river-ga": [
+  "CHATTAHOOCHEE RV"
+ ],
+ "chatuge-lake-ga": [
+  "Lake Chatuge",
+  "Chatuge Reservoir"
+ ],
+ "clarks-hill-lake-ga": [
+  "Clark Hill Lake",
+  "Clark Hill Reservoir",
+  "Clarks Hill Reservoir",
+  "J. Strom Thurmond Lake",
+  "J Strom Thurmond Reservoir",
+  "Lake Thurmond"
+ ],
+ "coosa-river-ga": [
+  "COOSA RV"
  ],
  "east-branch-north-river-vt": [
   "East Branch of the North River"
@@ -13,6 +42,19 @@
  ],
  "jones-falls-md": [
   "Jones Fall"
+ ],
+ "lake-blue-ridge-ga": [
+  "Blue Ridge Lake",
+  "Blue Ridge Reservoir"
+ ],
+ "lake-hartwell-ga": [
+  "Hartwell Lake",
+  "Hartwell Reservoir"
+ ],
+ "lake-lanier-ga": [
+  "Lake Sidney Lanier",
+  "Sidney Lanier Lake",
+  "Lake Sydney Lanier"
  ],
  "long-island-sound-ct": [
   "Norwalk Harbor",
@@ -41,6 +83,18 @@
   "NW Harbor",
   "Baltimore Harbor"
  ],
+ "nottely-lake-ga": [
+  "Lake Nottely",
+  "Nottely Reservoir"
+ ],
+ "ochlockonee-river-ga": [
+  "OCHLOCKNEE River",
+  "OCHLOCKNEE RV"
+ ],
+ "ocmulgee-river-ga": [
+  "OCMULGEE RV",
+  "Ocmuglee River"
+ ],
  "ottauquechee-river-vt": [
   "Ottaquechee River"
  ],
@@ -53,5 +107,20 @@
  "pequonnock-river-ct": [
   "Pequannock River",
   "Pequonneck River"
+ ],
+ "richard-b-russell-lake-ga": [
+  "Lake Russell",
+  "Richard B. Russell Reservoir"
+ ],
+ "saint-johns-river-fl": [
+  "Lower St Johns River",
+  "Lower Saint Johns River"
+ ],
+ "savannah-river-ga": [
+  "SAVANNAH RV"
+ ],
+ "west-point-lake-willow-crest-lake-ga": [
+  "West Point Lake",
+  "West Point Reservoir"
  ]
 }
