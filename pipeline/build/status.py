@@ -956,7 +956,9 @@ def no_water_flag(ev: dict) -> str | None:
     if str(row.get("surfaceWater") or "").strip().lower() == "no":
         return "the notifier says the discharge did not reach surface water (surfaceWater: No)"
     if raw.get("reached_water") is False:
-        return "the report says the discharge did not reach a water"
+        # a feed that reads "reached no water" from the words (Washington's area text) says why in _no_water_reason
+        why = raw.get("_no_water_reason")
+        return why if isinstance(why, str) and why else "the report says the discharge did not reach a water"
     rep = raw.get("report") if isinstance(raw.get("report"), dict) else {}
     if rep.get("water_threatened") == "N":
         return "the report says no water was impacted or threatened (isImpactThreatWaterbody: N)"
