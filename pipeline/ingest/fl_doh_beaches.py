@@ -12,9 +12,23 @@ Source
     location, sample date, the enterococcus result (CFU/100 mL, sometimes blank) and "Advisory: Yes|No". The first
     page is read (about the last five months of samples); older samples stay from earlier runs.
   No licence is stated; credit "Florida Department of Health, Florida Healthy Beaches Program". The pages carry no
-  personal data. One request a second (a fresh connection each; a point with no rows is asked once more); a
-  full pass (about 350 points, about seven minutes) runs at most once every 20 hours
-  (data/build/fl-doh-beaches-state.json), unless --force.
+  personal data. One request a second (a fresh connection each; a point with no rows is asked once more).
+
+Passes (2026-11-04): a full pass reads every active point once; a new pass starts at most once every 20 hours
+  (from the start of the last completed one; --force starts one sooner). A pass is spread over hourly runs: each run
+  reads the points this pass has not read yet, in a fixed order, for at most --budget-s seconds (360 by default), and
+  the next run continues where it stopped. The pass and the 20-hour stamp are kept in
+  data/build/fl-doh-beaches-state.json, inside the pipeline state the workflow saves. When the data page answers
+  without a sample row for REFUSED_RUN points in a row (from a GitHub runner it did so for the last 286 of 352 points
+  on 2026-11-04, each costing a 3 s wait and a second request: 23 minutes), the last point that had rows (the probe)
+  is asked again: the page says "No records found" both for a point without samples and when it refuses, so only the
+  probe tells them apart. The probe still has rows: the five are read (no samples) and the run goes on. It has none,
+  or there is no probe yet: the run stops to be safe ("no rows for five points in a row"); the five are not counted
+  read. Points not read in a run (set aside, or a request that failed twice) are asked again on the next runs, after
+  the points not asked yet; a point not read in GIVE_UP_RUNS runs of a pass is left for that pass (it keeps its
+  records; meta.pass.points_given_up), so no point holds a pass open. A point not read this run keeps its previous
+  records as they were; the feed's meta.pass says how far the pass got (points read in this pass, of how many, why
+  this run stopped), also on a failing run.
 
 Records (beach_advisory; a beach record, never a sewage record)
   Per sampling point, in date order: a sample with Advisory Yes opens an advisory (or continues the open one); the next
@@ -28,7 +42,8 @@ Records (beach_advisory; a beach record, never a sewage record)
   Florida's water records are built. Coordinates: the point's SPLat/SPLong.
 
 Cadence: daily (results are posted within days of each weekly or fortnightly sample).
-Run from pipeline/:  python -m ingest.fl_doh_beaches [--force] [--limit N] [--file saved.json]
+Run from pipeline/:  python -m ingest.fl_doh_beaches [--force] [--budget-s S] [--limit N] [--file saved.json]
+  --limit N reads the first N points only (a test run: the pass and its stamp are left as they are).
   --file reads {"points": [point attributes ...], "pages": {"<County>|<SPLocation>": "<html>"}} instead of fetching.
 """
 from __future__ import annotations
@@ -62,6 +77,9 @@ AUTHORITY = "Florida Department of Health (Florida Healthy Beaches Program)"
 CREDIT = "Florida Department of Health, Florida Healthy Beaches Program"
 POINT_FIELDS = ("FID", "County", "EPAbeachID", "STORET_Sta", "SPLocation", "Active", "SPLat", "SPLong", "Link")
 MIN_HOURS = 20
+BUDGET_S = 360.0           # seconds of result pages a run may spend; the pass continues next run
+REFUSED_RUN = 5            # this many points in a row without a sample row: ask the probe whether the page refuses us
+GIVE_UP_RUNS = 3           # a point not read in this many runs of a pass is left for that pass (it keeps its records)
 END_BASIS = ("the sample date of the next result without an advisory; the Department of Health lifts the advisory when "
              "that result is known, usually one to three days later, and the page gives no lifting date")
 START_BASIS = ("the sample date of the first result with an advisory; the Department of Health issues the advisory "
@@ -165,31 +183,98 @@ def caspio_params(p: dict) -> dict:
     return q
 
 
-def fetch(limit: int | None = None) -> tuple[list[dict], dict, list[str]]:
+def fetch_points(limit: int | None = None) -> list[dict]:
+    """The active sampling points, in a fixed order (County|SPLocation), so a pass spread over runs resumes."""
     sess = requests.Session()
     sess.headers.update(HEADERS)
     r = sess.get(f"{POINTS}/query", params={"where": "Active='Yes'", "outFields": ",".join(POINT_FIELDS),
                                             "returnGeometry": "false", "f": "json"}, timeout=(15, 60))
     r.raise_for_status()
-    pts = [f["attributes"] for f in r.json().get("features") or []]
-    if limit:
-        pts = pts[:limit]
-    pages, errors = {}, []
-    for p in pts:
+    pts = sorted((f["attributes"] for f in r.json().get("features") or []), key=point_key)
+    return pts[:limit] if limit else pts
+
+
+def ask(p: dict, read_s: float = 60.0) -> tuple[str | None, list[dict], str | None]:
+    """(page, rows, error) for one point: a fresh request (no session cookie); a page without rows, or a failed
+    request, is asked once more after 3 s. read_s: the read timeout (cut to what is left of the run's budget)."""
+    page, rows, error = None, [], None
+    for attempt in range(2):
+        try:
+            pr = requests.get(CASPIO, params=caspio_params(p), headers=BROWSER_HEADERS, timeout=(15, read_s))
+            pr.raise_for_status()
+            page, error = pr.text, None
+            rows = parse_page(pr.text)
+            if rows or attempt:
+                break
+        except Exception as e:  # noqa: BLE001
+            error = type(e).__name__
+            if attempt:
+                break
+        time.sleep(3)
+    return page, rows, error
+
+
+def fetch_pages(points: list[dict], budget_s: float | None = None,
+                probe: dict | None = None) -> tuple[dict, list[str], dict]:
+    """(pages, errors, info) for the points in order, until the time budget is used or the data page refuses us.
+    probe: a point that had rows earlier in the pass (the last one becomes the probe as the run goes on).
+    info: {"asked": points asked, "stopped": why the run stopped asking (None when every point was asked),
+    "set_aside": the points of a refusal run (asked, not counted read), "failed": the points whose request failed
+    twice, "probe": the key of the last point with rows, "probe_ok": a probe answered with rows, "seconds"}."""
+    started = time.monotonic()
+    pages, errors, failed, asked, empty_run, stopped, probe_ok = {}, [], [], 0, [], None, False
+
+    def read_s() -> float:
+        if budget_s is None:
+            return 60.0
+        return max(10.0, min(60.0, budget_s - (time.monotonic() - started)))
+
+    for p in points:
+        if budget_s is not None and time.monotonic() - started >= budget_s:
+            stopped = f"time budget of {budget_s:g} s used"
+            break
+        asked += 1
         # a fresh request each time (no session cookie) one second apart: with one session, half-second spacing,
         # the data page answered "No records found" for every point after about a hundred requests (2026-11-04)
-        for attempt in range(2):
-            try:
-                pr = requests.get(CASPIO, params=caspio_params(p), headers=BROWSER_HEADERS, timeout=(15, 60))
-                pr.raise_for_status()
-                pages[point_key(p)] = pr.text
-                if parse_page(pr.text) or attempt:
-                    break
-            except Exception as e:  # noqa: BLE001
-                if attempt:
-                    errors.append(f"{point_key(p)}: {type(e).__name__}")
-            time.sleep(3)
+        page, rows, error = ask(p, read_s())
+        if page is not None:
+            pages[point_key(p)] = page
+        else:
+            errors.append(f"{point_key(p)}: {error}")
+            failed.append(point_key(p))
+        if rows:
+            probe = p
+        empty_run = [] if rows else empty_run + [point_key(p)]
+        if len(empty_run) >= REFUSED_RUN:
+            answering = False
+            if probe is not None:
+                time.sleep(1.0)
+                _, probe_rows, _ = ask(probe, read_s())
+                answering = bool(probe_rows)
+                probe_ok = probe_ok or answering
+            if answering:
+                # the page answers the probe with its rows: these points have no samples (they are read)
+                empty_run = []
+            else:
+                stopped = (f"no sample rows for {REFUSED_RUN} points in a row and "
+                           + ("none for the last point that had rows either" if probe is not None
+                              else "no point with rows yet to ask again")
+                           + ": stopped to be safe (the page may be refusing requests); those points are asked again "
+                             "on the next run")
+                break
         time.sleep(1.0)
+    set_aside = empty_run if stopped and len(empty_run) >= REFUSED_RUN else []
+    for k in set_aside:            # not read: they keep their previous records and are asked again next run
+        pages.pop(k, None)
+    return pages, errors, {"asked": asked, "stopped": stopped, "set_aside": set_aside,
+                           "failed": [k for k in failed if k not in set_aside],
+                           "probe": point_key(probe) if probe is not None else None, "probe_ok": probe_ok,
+                           "seconds": round(time.monotonic() - started, 1)}
+
+
+def fetch(limit: int | None = None, budget_s: float | None = None) -> tuple[list[dict], dict, list[str]]:
+    pts = fetch_points(limit)
+    pages, errors, _ = fetch_pages(pts, budget_s)
     return pts, pages, errors
 
 
@@ -227,50 +312,116 @@ def build(points: list[dict], pages: dict, prev_records: list[dict], fetched_at:
                      "by_status": dict(Counter(r["status"] for r in records))}
 
 
+def pass_summary(cur: dict, points: list[dict], info: dict) -> dict:
+    """meta.pass: how far the pass got (points read in it, of how many, left for it, why this run stopped)."""
+    keys = {point_key(p) for p in points}
+    given = keys & set(cur.get("given_up") or [])
+    done = keys & set(cur.get("done") or [])
+    return {"started_at": cur.get("started_at"), "points_read_in_pass": len(done - given), "points": len(keys),
+            "points_given_up": sorted(given), "runs": cur.get("runs"), "complete": bool(keys) and done == keys,
+            "this_run_stopped": info.get("stopped"), "this_run_set_aside": len(info.get("set_aside") or []),
+            "this_run_failed": len(info.get("failed") or []), "this_run_seconds": info.get("seconds")}
+
+
+def close_pass(state: dict, cur: dict, points: list[dict], info: dict) -> dict:
+    """meta.pass; a pass with every point read (or left for it) is closed: the 20-hour cadence counts from its start,
+    so each point is read about every 20 hours."""
+    meta = pass_summary(cur, points, info)
+    if meta["complete"]:
+        state["full_pass_at"] = cur["started_at"]
+        state.pop("pass", None)
+    meta["last_full_pass_at"] = state.get("full_pass_at")
+    return meta
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--file")
-    ap.add_argument("--force", action="store_true")
+    ap.add_argument("--force", action="store_true", help="start a new pass even within 20 hours of the last one")
     ap.add_argument("--limit", type=int)
+    ap.add_argument("--budget-s", type=float, default=BUDGET_S,
+                    help=f"seconds this run may spend on result pages (default {BUDGET_S:g}); the pass continues on "
+                         "the next run")
     args = ap.parse_args(argv)
     fetched_at = now_iso()
     state = read_json(STATE_FILE, {}) or {}
-    if not args.file and not args.force and state.get("full_pass_at"):
+    live_pass = not args.file and not args.limit
+    cur = state.get("pass") if live_pass else None
+    if live_pass and cur is None and not args.force and state.get("full_pass_at"):
         last = datetime.fromisoformat(state["full_pass_at"].replace("Z", "+00:00"))
         if datetime.now(UTC) - last < timedelta(hours=MIN_HOURS):
-            print(f"{SOURCE_ID}: last full pass {state['full_pass_at']}; next after {MIN_HOURS} h (use --force)")
+            print(f"{SOURCE_ID}: last full pass started {state['full_pass_at']}; next after {MIN_HOURS} h (use --force)")
             return 0
+    if live_pass and cur is None:
+        cur = {"started_at": fetched_at, "done": [], "runs": 0}
+    info = {"stopped": None, "set_aside": [], "failed": [], "seconds": None, "probe_ok": False}
+    points = []
     try:
         if args.file:
             d = json.loads(Path(args.file).read_text())
             points, pages, errors = d["points"], d["pages"], []
         else:
-            points, pages, errors = fetch(args.limit)
-        if points and not pages:
-            raise RuntimeError("no result page could be read")
+            points = fetch_points(args.limit)
+            if not points:              # an empty answer from the points layer is an outage, not a pass
+                raise RuntimeError("the sampling points layer listed no active point")
+            done = set(cur["done"]) if cur else set()
+            retry = dict(cur.get("retry") or {}) if cur else {}
+            # the points not asked yet first, then those not read on an earlier run of this pass (fewest tries first):
+            # a point that does not answer never stands in front of the rest
+            todo = sorted((p for p in points if point_key(p) not in done), key=lambda p: retry.get(point_key(p), 0))
+            by_key = {point_key(p): p for p in points}
+            probe = by_key.get(cur.get("probe")) if cur else None
+            pages, errors, info = fetch_pages(todo, args.budget_s, probe=probe)
+            if live_pass:
+                missed = set(info["set_aside"]) | set(info["failed"])
+                for k in missed:
+                    retry[k] = retry.get(k, 0) + 1
+                given = {k for k in missed if retry[k] >= GIVE_UP_RUNS}
+                cur["done"] = sorted(done | set(pages) | given)
+                cur["given_up"] = sorted(set(cur.get("given_up") or []) | given)
+                cur["retry"] = {k: n for k, n in sorted(retry.items()) if k not in cur["done"]}
+                cur["probe"] = info.get("probe") or cur.get("probe")
+                cur["runs"] = int(cur.get("runs") or 0) + 1
+                state["pass"] = cur
+            if todo and not pages:
+                raise RuntimeError(f"no result page could be read ({info['stopped'] or 'every request failed'})")
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
+        meta = None
+        if live_pass and cur is not None:
+            state.update({"fetched_at": fetched_at, "pass": cur})
+            meta = {"pass": close_pass(state, cur, points, info)}
+            write_json(STATE_FILE, state)
+        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=meta)
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1
     prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
     records, stats = build(points, pages, prev, fetched_at)
-    if stats["points_read"] >= 10 and stats["points_without_samples"] == stats["points_read"]:
+    if stats["points_read"] >= 10 and stats["points_without_samples"] == stats["points_read"] and not info["probe_ok"]:
         # every page answered without a sample row: the data page changed or refused us ("No records found"); keep the
         # previous records, report the feed as failing and try again next hour (no full_pass_at)
         err = f"no sample rows on any of {stats['points_read']} result pages (layout changed or requests refused)"
         write_events(SOURCE_ID, [], ok=False, error=err)
         print(f"{SOURCE_ID}: FAILED {err}", file=sys.stderr)
         return 1
+    pass_meta = None
     if not args.file:
         state.update({"fetched_at": fetched_at, "page_errors": errors[:50]})
-        if not args.limit:
-            state["full_pass_at"] = fetched_at
+        if live_pass:
+            pass_meta = close_pass(state, cur, points, info)
         write_json(STATE_FILE, state)
     meta = {**stats, "page_errors": len(errors), "points_layer": POINTS, "results_page": CASPIO, "credit": CREDIT,
             "registry_ids": ["fl-doh-healthy-beaches"]}
+    if pass_meta:
+        meta["pass"] = pass_meta
     path = write_events(SOURCE_ID, records, ok=True, error=None, meta=meta)
-    print(f"{SOURCE_ID}: {stats['points_read']}/{stats['points']} points, {stats['samples_read']} samples -> "
-          f"{len(records)} advisory records {stats['by_status']} ({len(errors)} page errors) -> {path}")
+    how_far = ""
+    if pass_meta:
+        how_far = (f"; pass from {pass_meta['started_at']}: {pass_meta['points_read_in_pass']}/{pass_meta['points']} "
+                   f"points read{' (complete)' if pass_meta['complete'] else ''}")
+        if info["stopped"]:
+            how_far += f"; stopped: {info['stopped']}"
+    print(f"{SOURCE_ID}: {stats['points_read']}/{stats['points']} points read this run, {stats['samples_read']} samples "
+          f"-> {len(records)} advisory records {stats['by_status']} ({len(errors)} page errors){how_far} -> {path}")
     return 0
 
 

@@ -37,7 +37,8 @@
 #                  live: false (ports being compared with their modules) are not run.
 #                  Florida: fl_dep_pnp (DEP Public Notice of Pollution, last 30 days; `--backfill` once
 #                  for every notice since 2017), fl_dep_habs (DEP algal bloom visits), fl_doh_beaches
-#                  (Healthy Beaches result pages, one full pass at most every 20 hours)
+#                  (Healthy Beaches result pages: a full pass starts at most every 20 hours and is spread over
+#                  hourly runs, at most 6 minutes of pages a run, resumed where it stopped)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
@@ -66,7 +67,9 @@
 #   make build     research fixtures + per-water status and hourly history (data/build/)
 #   make export    write out/ for the site
 #   make charts    chart series (build/charts.py)
-#   make refresh   ingest, reaches, build, charts, export
+#   make refresh   ingest, provisional outfalls, reaches, build, charts, export (REFRESH_STAGES, in order; stops at
+#                  the first that fails). Every feed, extra and stage prints "timing: NAME SECONDS s"
+#                  (scripts/timed.sh; TIMINGS_FILE collects them, scripts/refresh-data.sh prints the longest at the end)
 #   make tally     docs/source-tally.md: every information source by state, what we collect, what we do not and
 #                  what would unlock it (scripts/gen_source_tally.py; reads out/ and data/, writes only the doc;
 #                  scripts/refresh.sh runs it after the export)
@@ -83,6 +86,7 @@ VENV_PY := $(abspath pipeline/.venv/bin/python)
 OBL_PY := $(abspath ../openboatlaunch/pipeline/.venv/bin/python)
 PYTHON ?= $(if $(wildcard $(VENV_PY)),$(VENV_PY),$(OBL_PY))
 PY = cd pipeline && $(PYTHON)
+TIMED = sh $(abspath scripts/timed.sh)
 
 FIXTURES ?= 0
 FIXTURE_FLAG = $(if $(filter 1 yes true,$(FIXTURES)),--fixtures,) $(if $(filter 1 yes true,$(NHDES)),--include-nhdes,)
@@ -93,8 +97,13 @@ INGEST_EXTRA = waters-nhd conditions rainfall   # not feeds (no events file), ru
 # the NHD receiving-water build in the hourly run: new targets from this hour's reports, within a time budget (it stops
 # before a request, writes what it built merged into data/waters-nhd.json, and the next run resumes from data/raw's
 # cache). Without the budget, a runner with no data/raw cache asked NHDPlus for every target (about 7,000 requests)
-# and passed the workflow's 55-minute limit. Its own OSM (180 s) and other-places (120 s) budgets come on top.
-WATERS_NHD_BUDGET_S ?= 300
+# and passed the workflow's 55-minute limit. --wall-s bounds the whole target, loading and writing included (run
+# 41788856038 took 11 minutes with --budget-s 300: the OSM fallback, its mirror check and the placement check over every
+# event came on top): NHDPlus and the other places of a name share WATERS_NHD_BUDGET_S of requests, the OSM fallback
+# (its mirror check included) gets what is left of the wall less 60 s kept for the hand records, the placement check
+# and the write. The last line gives the seconds per phase.
+WATERS_NHD_BUDGET_S ?= 150
+WATERS_NHD_WALL_S ?= 300
 INGEST_MODULES = $(sort $(basename $(notdir $(shell grep -l '__name__ == .__main__.' pipeline/ingest/*.py 2>/dev/null | xargs grep -L 'not a feed' 2>/dev/null))))
 
 setup:
@@ -103,24 +112,24 @@ setup:
 ingest:
 	@for m in $(INGEST_PRE) $(filter-out $(INGEST_SKIP) $(INGEST_PRE) $(INGEST_SNAPSHOTS),$(INGEST_MODULES)); do \
 	  echo "== ingest.$$m"; \
-	  (cd pipeline && $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
+	  (cd pipeline && $(TIMED) ingest.$$m $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
 	done
 	@ids=$$(cd pipeline && $(PYTHON) -m ingest.generic --list) || echo "!! ingest.generic --list reported problems (exit $$?)"; \
 	for g in $$ids; do \
 	  echo "== ingest.generic $$g"; \
-	  (cd pipeline && $(PYTHON) -m ingest.generic $$g) || echo "!! ingest.generic $$g failed (exit $$?)"; \
+	  (cd pipeline && $(TIMED) generic.$$g $(PYTHON) -m ingest.generic $$g) || echo "!! ingest.generic $$g failed (exit $$?)"; \
 	done
 	@for m in $(INGEST_SNAPSHOTS); do \
 	  echo "== ingest.$$m"; \
-	  (cd pipeline && $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
+	  (cd pipeline && $(TIMED) ingest.$$m $(PYTHON) -m ingest.$$m) || echo "!! ingest.$$m failed (exit $$?)"; \
 	done
 	@for t in $(INGEST_EXTRA); do \
 	  echo "== $$t"; \
-	  $(MAKE) --no-print-directory $$t || echo "!! $$t failed (exit $$?)"; \
+	  $(TIMED) $$t $(MAKE) --no-print-directory $$t || echo "!! $$t failed (exit $$?)"; \
 	done
 
 waters-nhd:         ## receiving-water records from NHDPlus for new targets (ingest/waters_from_nhd.py), budgeted
-	$(PY) -m ingest.waters_from_nhd --budget-s $(WATERS_NHD_BUDGET_S)
+	$(PY) -m ingest.waters_from_nhd --budget-s $(WATERS_NHD_BUDGET_S) --wall-s $(WATERS_NHD_WALL_S)
 
 conditions:
 	$(PY) -m ingest.gauges
@@ -141,8 +150,8 @@ fixtures:
 	$(PY) -m build.fixtures
 
 build: $(if $(filter 1 yes true,$(FIXTURES)),fixtures,)
-	$(PY) -m build.rain_thresholds || echo "!! rain thresholds failed; the previous file stays"
-	$(PY) -m build.status $(FIXTURE_FLAG)
+	cd pipeline && $(TIMED) rain-thresholds $(PYTHON) -m build.rain_thresholds || echo "!! rain thresholds failed; the previous file stays"
+	cd pipeline && $(TIMED) status $(PYTHON) -m build.status $(FIXTURE_FLAG)
 
 charts:             ## per-water, per-discharger and per-state chart series (after build, before export)
 	$(PY) -m build.charts
@@ -150,7 +159,11 @@ charts:             ## per-water, per-discharger and per-state chart series (aft
 export:
 	$(PY) -m export.build $(FIXTURE_FLAG)
 
-refresh: ingest provisional-outfalls reaches build charts export
+REFRESH_STAGES = ingest provisional-outfalls reaches build charts export
+refresh:
+	@for t in $(REFRESH_STAGES); do \
+	  $(TIMED) stage.$$t $(MAKE) --no-print-directory $$t || exit 1; \
+	done
 
 tally:              ## docs/source-tally.md from the checklist, the registry, out/ and the water files (after export)
 	$(PYTHON) scripts/gen_source_tally.py
