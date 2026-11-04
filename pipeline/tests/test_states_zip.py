@@ -30,6 +30,21 @@ class FakeResponse:
     def raise_for_status(self):
         pass
 
+    def iter_content(self, n):
+        for i in range(0, len(self.content), n):
+            yield self.content[i:i + n]
+
+
+def outlines_zip(**extra) -> bytes:
+    """A zip shaped like the Census file: the .shp and .dbf States reads (contents faked), plus extra members."""
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        for m in WX.STATES_ZIP_MEMBERS:
+            z.writestr(m, b"x")
+        for k, v in extra.items():
+            z.writestr(k, v)
+    return buf.getvalue()
+
 
 class FakeSession:
     def __init__(self, content: bytes):
@@ -56,11 +71,8 @@ def test_the_sibling_copy_when_the_census_folder_has_none(tmp_path):
 
 
 def test_downloaded_once_into_the_census_folder_when_neither_has_it(tmp_path):
-    buf = io.BytesIO()
-    with zipfile.ZipFile(buf, "w") as z:
-        z.writestr("tag.txt", "downloaded")
     dest = tmp_path / "raw" / "census" / WX.STATES_ZIP_NAME
-    s = FakeSession(buf.getvalue())
+    s = FakeSession(outlines_zip(**{"tag.txt": "downloaded"}))
     got = WX.states_zip([dest, tmp_path / "nowhere.zip"], dest=dest, session=s)
     assert got == dest and zipfile.ZipFile(got).read("tag.txt") == b"downloaded"
     assert s.calls == [WX.STATES_ZIP_URL] and "census.gov" in WX.STATES_ZIP_URL
@@ -77,3 +89,21 @@ def test_a_download_that_is_not_a_zip_is_not_kept(tmp_path):
 def test_no_download_when_asked_not_to(tmp_path):
     with pytest.raises(FileNotFoundError):
         WX.states_zip([tmp_path / "a.zip"], download=False)
+
+
+def test_a_zip_without_the_shapefile_is_not_kept(tmp_path):
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        z.writestr("index.html", "a mirror's error page, zipped")
+    dest = tmp_path / "raw" / "census" / WX.STATES_ZIP_NAME
+    with pytest.raises(ValueError, match="lacks"):
+        WX.states_zip([dest], dest=dest, session=FakeSession(buf.getvalue()))
+    assert not dest.exists() and not list(dest.parent.glob("*.tmp"))
+
+
+def test_an_oversized_answer_is_not_kept(tmp_path, monkeypatch):
+    monkeypatch.setattr(WX, "STATES_ZIP_MAX_BYTES", 1000)
+    dest = tmp_path / "raw" / "census" / WX.STATES_ZIP_NAME
+    with pytest.raises(ValueError, match="more than"):
+        WX.states_zip([dest], dest=dest, session=FakeSession(outlines_zip(**{"big.bin": b"0" * 5000})))
+    assert not dest.exists() and not list(dest.parent.glob("*.tmp"))
