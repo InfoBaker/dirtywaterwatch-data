@@ -82899,14 +82899,15 @@
     }
    ],
    "match": "name_only",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "name: its receiving water 'Kalamazoo River' by name; Kalamazoo River (kalamazoo-river-mi, NHDPlus V2.1 record), 2194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 10
+   "point_shared_by": 10,
+   "kind_note": "not a combined sewer outfall: Enbridge Line 6B (Marshall), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081156",
@@ -82943,14 +82944,15 @@
     }
    ],
    "match": "name_only",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "name: its receiving water 'Kalamazoo River' by name; Kalamazoo River (kalamazoo-river-mi, NHDPlus V2.1 record), 2194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 10
+   "point_shared_by": 10,
+   "kind_note": "not a combined sewer outfall: Enbridge Line 6B (Marshall), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081156",
@@ -82987,14 +82989,15 @@
     }
    ],
    "match": "name_only",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "name: its receiving water 'Kalamazoo River' by name; Kalamazoo River (kalamazoo-river-mi, NHDPlus V2.1 record), 2194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 10
+   "point_shared_by": 10,
+   "kind_note": "not a combined sewer outfall: Enbridge Line 6B (Marshall), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081156",
@@ -83031,14 +83034,15 @@
     }
    ],
    "match": "name_only",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "name: its receiving water 'Kalamazoo River' by name; Kalamazoo River (kalamazoo-river-mi, NHDPlus V2.1 record), 2194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 10
+   "point_shared_by": 10,
+   "kind_note": "not a combined sewer outfall: Enbridge Line 6B (Marshall), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081156",
@@ -83075,14 +83079,15 @@
     }
    ],
    "match": "name_only",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "name: its receiving water 'Kalamazoo River' by name; Kalamazoo River (kalamazoo-river-mi, NHDPlus V2.1 record), 2194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 10
+   "point_shared_by": 10,
+   "kind_note": "not a combined sewer outfall: Enbridge Line 6B (Marshall), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081156",
@@ -83119,14 +83124,15 @@
     }
    ],
    "match": "name_only",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "name: its receiving water 'Kalamazoo River' by name; Kalamazoo River (kalamazoo-river-mi, NHDPlus V2.1 record), 2194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 10
+   "point_shared_by": 10,
+   "kind_note": "not a combined sewer outfall: Enbridge Line 6B (Marshall), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081156",
@@ -83163,14 +83169,15 @@
     }
    ],
    "match": "name_only",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "name: its receiving water 'Kalamazoo River' by name; Kalamazoo River (kalamazoo-river-mi, NHDPlus V2.1 record), 2194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 10
+   "point_shared_by": 10,
+   "kind_note": "not a combined sewer outfall: Enbridge Line 6B (Marshall), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081156",
@@ -83207,14 +83214,15 @@
     }
    ],
    "match": "name_only",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "name: its receiving water 'Kalamazoo River' by name; Kalamazoo River (kalamazoo-river-mi, NHDPlus V2.1 record), 2194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 10
+   "point_shared_by": 10,
+   "kind_note": "not a combined sewer outfall: Enbridge Line 6B (Marshall), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081156",
@@ -83251,14 +83259,15 @@
     }
    ],
    "match": "name_only",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "name: its receiving water 'Kalamazoo River' by name; Kalamazoo River (kalamazoo-river-mi, NHDPlus V2.1 record), 2194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 10
+   "point_shared_by": 10,
+   "kind_note": "not a combined sewer outfall: Enbridge Line 6B (Marshall), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081156",
@@ -83295,14 +83304,15 @@
     }
    ],
    "match": "name_only",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "name: its receiving water 'Kalamazoo River' by name; Kalamazoo River (kalamazoo-river-mi, NHDPlus V2.1 record), 2194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 10
+   "point_shared_by": 10,
+   "kind_note": "not a combined sewer outfall: Enbridge Line 6B (Marshall), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081159",
@@ -83332,14 +83342,15 @@
     }
    ],
    "match": "none",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "none: the record of that name was set aside by the placement guard: lake-michigan-mi, name match too far (24.4 km; limit 3.0 km: the lake's outline plus 3 km); the NHD builder's record for 'Lake Michigan' for this permit, lake-michigan-mi, is 24.4 km from EPA's point and the permittee's town (saint ignace) could not be checked against it: not matched; at this place: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby)",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "the record of that name was set aside by the placement guard: lake-michigan-mi, name match too far (24.4 km; limit 3.0 km: the lake's outline plus 3 km); the NHD builder's record for 'Lake Michigan' for this permit, lake-michigan-mi, is 24.4 km from EPA's point and the permittee's town (saint ignace) could not be checked against it: not matched; at this place: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby)"
+   "no_water_reason": "the record of that name was set aside by the placement guard: lake-michigan-mi, name match too far (24.4 km; limit 3.0 km: the lake's outline plus 3 km); the NHD builder's record for 'Lake Michigan' for this permit, lake-michigan-mi, is 24.4 km from EPA's point and the permittee's town (saint ignace) could not be checked against it: not matched; at this place: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby)",
+   "kind_note": "not a combined sewer outfall: Enbridge Energy (St. Ignace), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081161",
@@ -83363,13 +83374,14 @@
    "distance_m": 53,
    "alternatives": [],
    "match": "geometry+name",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
    "water_match": "name: its receiving water 'Chippewa River' by name; Chippewa River (chippewa-river-mi, NHDPlus V2.1 record), 53 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "kind_note": "not a combined sewer outfall: MRP Properties (Mt. Pleasant), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MIG081165",
@@ -83393,12 +83405,13 @@
    "distance_m": 544,
    "alternatives": [],
    "match": "name_only",
-   "outfall_kind": "cso",
+   "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "name: its receiving water 'Clinton River' by name; Clinton River (clinton-river-mi, NHDPlus V2.1 record), 544 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
+   "kind_note": "not a combined sewer outfall: Speedway 8860 (Sterling Heights), a general permit (MIG08) for petroleum and remediation discharges; EPA's inventory flags it TCS"
   },
   {
    "npdes_permit": "MN0046744",
