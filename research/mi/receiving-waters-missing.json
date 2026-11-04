@@ -1,0 +1,2177 @@
+{
+ "about": "Receiving-water names in MI's reports (EGLE's MiEnviro CSO/SSO List, the records read on 2026-11-04: open reports and completed reports since January 2025) that data/receiving-waters-national.json does not hold for MI, by name as typed (a list of names split at commas), with the number of reports giving each. Reports that say the discharge reached no water and copies are left out.",
+ "state": "MI",
+ "waters": 104,
+ "reports": 145,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in MI": 43,
+  "not a water name": 21,
+  "a storm-sewer system, not a named water": 10,
+  "a county name in the report, not a water": 7,
+  "part of a sewer, drainage or treatment works, not a public water": 6,
+  "a wetland (not a named NHD water)": 2,
+  "no water name": 2,
+  "22 NHD waters of that name in MI and the reports give no place to choose one": 2,
+  "a short name with no kind of water (creek, river, lake): not looked up": 1,
+  "a road in the report, not a water": 1,
+  "3 NHD waters of that name in MI, none within reach of the reports' places": 1,
+  "2 NHD waters of that name in MI, none within reach of the reports' places": 1,
+  "6 NHD waters of that name in MI and the reports give no place to choose one": 1,
+  "1 NHD water of that name in MI, none within reach of the reports' places": 1,
+  "a kind of water with no name": 1,
+  "2 NHD waters of that name in MI and the reports give no place to choose one": 1,
+  "3 NHD waters of that name in MI and the reports give no place to choose one": 1,
+  "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 1,
+  "a street name, not a water": 1
+ },
+ "resolved_names": 37,
+ "resolved_reports": 120,
+ "build": {
+  "date": "2026-11-04",
+  "command": "python -m ingest.waters_from_nhd --names research/mi/receiving-waters-missing.json --state MI",
+  "records_built": 26,
+  "names_resolved": 37,
+  "network_requests": 74
+ },
+ "rows": [
+  {
+   "name": "Tittabawasee River",
+   "reports": 12,
+   "permits": [
+    "MI0023582",
+    "MI0023973"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Saginaw",
+    "Midland"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Koehler Drain",
+   "reports": 7,
+   "permits": [
+    "MI0022497"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Saginaw"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Davey Creek",
+   "reports": 6,
+   "permits": [
+    "MIG580216"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Rockland"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "GLWA",
+   "reports": 3,
+   "permits": [
+    "MI0025542"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Dearborn"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a short name with no kind of water (creek, river, lake): not looked up"
+  },
+  {
+   "name": "LeBlanc Drain",
+   "reports": 3,
+   "permits": [
+    "3112a-0258"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Allen Park"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Lorraine Drain",
+   "reports": 3,
+   "permits": [
+    "3112a-0930"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Storm Water Pond",
+   "reports": 3,
+   "permits": [
+    "GW1810038"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "Big Cedar River",
+   "reports": 2,
+   "permits": [
+    "MIG580212"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Spalding"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Gunderman Lake Drain",
+   "reports": 2,
+   "permits": [
+    "3112a-0806"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "Gunderman Lake"
+   ]
+  },
+  {
+   "name": "Hall Drain",
+   "reports": 2,
+   "permits": [
+    "3112a-0707"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Bath"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Hammel Creek",
+   "reports": 2,
+   "permits": [
+    "MI0043982"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Calumet"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Lake Nepessing",
+   "reports": 2,
+   "permits": [
+    "3112a-0226"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Lapeer"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Lingle Drain",
+   "reports": 2,
+   "permits": [
+    "MIS420040"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Main Rouge River",
+   "reports": 2,
+   "permits": [
+    "MI0028819",
+    "MI0051489"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "River Rouge",
+    "Dearborn Heights"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Onsite stormwater retention pond",
+   "reports": 2,
+   "permits": [
+    "GW1810038"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "Painterville Drain",
+   "reports": 2,
+   "permits": [
+    "3112a-0032"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Lake Charter Township"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Storm sewer retention pond",
+   "reports": 2,
+   "permits": [
+    "GW1810038"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "wetland",
+   "reports": 2,
+   "permits": [
+    "3112a-0845",
+    "3112a-1031"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a wetland (not a named NHD water)"
+  },
+  {
+   "name": "11 Mile Road Drain",
+   "reports": 1,
+   "permits": [
+    "MI0043982"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Calumet"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a road in the report, not a water"
+  },
+  {
+   "name": "Allen Creek",
+   "reports": 1,
+   "permits": [
+    "3112a-0724"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Ann Arbor"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "3 NHD waters of that name in MI, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Ann Arbor",
+     "reason": "no NHD water of that name within 3 km of Ann Arbor (the nearest is 240.1 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Ashton Retention pond",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
+  },
+  {
+   "name": "Barkham summers Drain",
+   "reports": 1,
+   "permits": [
+    "MIG580129"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Sheridan"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Beguns Creek",
+   "reports": 1,
+   "permits": [
+    "MI0043982"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Calumet"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Black Creek and adjacent celery pond",
+   "reports": 1,
+   "permits": [
+    "MI0027391"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Muskegon"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "adjacent celery pond: no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Black Creek",
+    "adjacent celery pond"
+   ],
+   "places_failed": [
+    {
+     "town": "Muskegon",
+     "reason": "no NHD water of that name within 3 km of Muskegon (the nearest is 12.8 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Buck Lake creek",
+   "reports": 1,
+   "permits": [
+    "GW1610079"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Alpha"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Byram Drain",
+   "reports": 1,
+   "permits": [
+    "MI0022993"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Linden",
+    "Byron"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Canterbury House Apartments Pond - SE of Overflow",
+   "reports": 1,
+   "permits": [
+    "3112a-0546"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Kalamazoo"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no water name"
+  },
+  {
+   "name": "Caro River",
+   "reports": 1,
+   "permits": [
+    "MI0022551"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Caro"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Carter Drain",
+   "reports": 1,
+   "permits": [
+    "MI0029122"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Clinton River Spillway",
+   "reports": 1,
+   "permits": [
+    "3112a-0719"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Clinton - Department Of Public Services"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Decorative pond for community",
+   "reports": 1,
+   "permits": [
+    "GW1810261"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Drainage ditch along west side of South Main Street",
+   "reports": 1,
+   "permits": [
+    "MIG580310"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Hermansville"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "East Branch Pine River",
+   "reports": 1,
+   "permits": [
+    "MI0020591"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "St. Clair"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "2 NHD waters of that name in MI, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "St. Clair",
+     "reason": "no NHD water of that name within 3 km of St. Clair (the nearest is 198.4 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Eaton County drain system",
+   "reports": 1,
+   "permits": [
+    "MI0022799"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Lansing"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a county name in the report, not a water"
+  },
+  {
+   "name": "Ecorse Creek",
+   "reports": 1,
+   "permits": [
+    "3112a-0258"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Allen Park"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Elm Creek",
+   "reports": 1,
+   "permits": [
+    "MIG580093"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "6 NHD waters of that name in MI and the reports give no place to choose one"
+  },
+  {
+   "name": "Ferry Renshaw Drain",
+   "reports": 1,
+   "permits": [
+    "3112a-0115"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Troy"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "French Drain",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Green Lake Stream",
+   "reports": 1,
+   "permits": [
+    "MI0055107"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Wayland"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Hickory Storm Water",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "Highland Greens WWTP Discharge Pond",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Holland Drain",
+   "reports": 1,
+   "permits": [
+    "MI0022063"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Durand"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Huron County Drain",
+   "reports": 1,
+   "permits": [
+    "MI0020672"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Harbor Beach"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a county name in the report, not a water"
+  },
+  {
+   "name": "Huron County Water St Drain",
+   "reports": 1,
+   "permits": [
+    "MI0020672"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Harbor Beach"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a county name in the report, not a water"
+  },
+  {
+   "name": "Ingham County Drain",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a county name in the report, not a water"
+  },
+  {
+   "name": "Island Lake",
+   "reports": 1,
+   "permits": [
+    "3112a-0550"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Green Oak Charter Township"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "22 NHD waters of that name in MI and the reports give no place to choose one"
+  },
+  {
+   "name": "Knapp Drain",
+   "reports": 1,
+   "permits": [
+    "MIG580084"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Lake at the Former Waverly Golf Course",
+   "reports": 1,
+   "permits": [
+    "MI0023400"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Lansing"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no water name"
+  },
+  {
+   "name": "Lapeer County Drain",
+   "reports": 1,
+   "permits": [
+    "MI0023167"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Imlay City"
+   ],
+   "reason": "a county name in the report, not a water"
+  },
+  {
+   "name": "Little Travese Bay",
+   "reports": 1,
+   "permits": [
+    "3112a-0100"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Lloyds Bayou",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Local retention pond",
+   "reports": 1,
+   "permits": [
+    "GW1810131"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
+  },
+  {
+   "name": "Loch Erin",
+   "reports": 1,
+   "permits": [
+    "MI0053848"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Onsted",
+    "Brooklyn",
+    "Hudson",
+    "Jasper"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "MIOPS property surface water swale",
+   "reports": 1,
+   "permits": [
+    "MI0000868"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Malletts Creek",
+   "reports": 1,
+   "permits": [
+    "3112a-0724"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Ann Arbor"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Methven Drain",
+   "reports": 1,
+   "permits": [
+    "MIG580318"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Moore Drain",
+   "reports": 1,
+   "permits": [
+    "MI0024252"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Vassar"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "No name natural watercourse",
+   "reports": 1,
+   "permits": [
+    "3112a-0353"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Not sure where the storm drain goes to",
+   "reports": 1,
+   "permits": [
+    "3112a-0207"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Spring Arbor Township/Summit Township"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "Open ditch along the north side of I696 tributary to the Minnow Pond Chapter 20 Drain",
+   "reports": 1,
+   "permits": [
+    "3112a-0936"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Novi"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Open ditch"
+   ]
+  },
+  {
+   "name": "Ottawa County Drain",
+   "reports": 1,
+   "permits": [
+    "MI0057679"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Allendale"
+   ],
+   "reason": "a county name in the report, not a water"
+  },
+  {
+   "name": "Painters Creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Pebble Creek",
+   "reports": 1,
+   "permits": [
+    "3112a-0814"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Novi"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "1 NHD water of that name in MI, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Novi",
+     "reason": "no NHD water of that name within 3 km of Novi (the nearest is 3.7 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Pine Lake",
+   "reports": 1,
+   "permits": [
+    "MI0024350"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Remus"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "22 NHD waters of that name in MI and the reports give no place to choose one"
+  },
+  {
+   "name": "Pine Run Creek",
+   "reports": 1,
+   "permits": [
+    "3112a-0499"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Pond",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a kind of water with no name"
+  },
+  {
+   "name": "Pond with no outlet",
+   "reports": 1,
+   "permits": [
+    "GW1810167"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Hamburg Township"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Potter and Mulliken IC Drain",
+   "reports": 1,
+   "permits": [
+    "MIG580058"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Mulliken"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Potter"
+   ]
+  },
+  {
+   "name": "Rayner Creek Drain",
+   "reports": 1,
+   "permits": [
+    "MI0020435"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Mason"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Rayner Creek"
+   ]
+  },
+  {
+   "name": "Red Run County Drain",
+   "reports": 1,
+   "permits": [
+    "MI0024295"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Warren"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "Red Run County"
+   ]
+  },
+  {
+   "name": "Retention pond",
+   "reports": 1,
+   "permits": [
+    "3112a-0814"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Novi"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
+  },
+  {
+   "name": "STDBKC190010 - Detention Basin",
+   "reports": 1,
+   "permits": [
+    "3112a-0546"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Kalamazoo"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "STDBKC190010"
+   ]
+  },
+  {
+   "name": "Saint Clair Lake",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "2 NHD waters of that name in MI and the reports give no place to choose one"
+  },
+  {
+   "name": "Secret Creek",
+   "reports": 1,
+   "permits": [
+    "MI0020133"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "L'Anse"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Steel-Walbridge Drain",
+   "reports": 1,
+   "permits": [
+    "3112a-0749"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "St Johns"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Stone Lake",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "3 NHD waters of that name in MI and the reports give no place to choose one"
+  },
+  {
+   "name": "Storm Pond corner of Leeson and West Division",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "West Division"
+   ]
+  },
+  {
+   "name": "Storm Water pond",
+   "reports": 1,
+   "permits": [
+    "GW1810038"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "Storm pond",
+   "reports": 1,
+   "permits": [
+    "GW1810038"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Storm retention pond",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
+  },
+  {
+   "name": "Stormwater Retention Pond",
+   "reports": 1,
+   "permits": [
+    "GW1810038"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "Stormwater retention pond onsite",
+   "reports": 1,
+   "permits": [
+    "GW1810131"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "The water was discharged into the Shiawassee river fully treated as the permit allows",
+   "reports": 1,
+   "permits": [
+    "MI0055026"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Byron",
+    "Linden"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "water was discharged"
+   ]
+  },
+  {
+   "name": "Thornapple Drain",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "Tracy mine unnamed pond",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "Unamed creek leading to unamed pond to tracy mine",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "tracy mine"
+   ]
+  },
+  {
+   "name": "Unnamed small detention basin north of Indian Lake Rd",
+   "reports": 1,
+   "permits": [
+    "3112a-0632"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Novi"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
+  },
+  {
+   "name": "Upper St Mary's River",
+   "reports": 1,
+   "permits": [
+    "MI0024058"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Sault Ste Marie"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Utica Drain",
+   "reports": 1,
+   "permits": [
+    "3112a-0039"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Utica"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "West Grand Traverse Bay",
+   "reports": 1,
+   "permits": [
+    "3112a-0890"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Traverse City"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Wetland area just east of Pentwater Lake",
+   "reports": 1,
+   "permits": [
+    "3112a-0409"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Pentwater Township"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a wetland (not a named NHD water)"
+  },
+  {
+   "name": "Wetland directly behind the lift station",
+   "reports": 1,
+   "permits": [
+    "3112a-1031"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
+  },
+  {
+   "name": "Wetland directly next to SPS 1B",
+   "reports": 1,
+   "permits": [
+    "3112a-1031"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "SPS 1B"
+   ]
+  },
+  {
+   "name": "county drain",
+   "reports": 1,
+   "permits": [
+    "MIG580058"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Mulliken"
+   ],
+   "reason": "a county name in the report, not a water"
+  },
+  {
+   "name": "cuttle creek",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "downstream of Lowell",
+   "reports": 1,
+   "permits": [
+    "3112a-0293"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; the reports give no place to look for it in the NHD high-resolution flowlines"
+  },
+  {
+   "name": "lower Rough river",
+   "reports": 1,
+   "permits": [
+    "MI0051489"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Dearborn Heights"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "nearby ditch",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "not a water name"
+  },
+  {
+   "name": "old maid harris and whaley drain",
+   "reports": 1,
+   "permits": [
+    "MI0053562"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Dimondale"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "old maid harris"
+   ]
+  },
+  {
+   "name": "onsite retention basin for parking lot run off- no direct discharge to surface waters",
+   "reports": 1,
+   "permits": [
+    "3112a-0641"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Madison Charter Township"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MI; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "parts": [
+    "surface waters"
+   ]
+  },
+  {
+   "name": "private retention pond",
+   "reports": 1,
+   "permits": [
+    "3112a-0724"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Ann Arbor"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
+  },
+  {
+   "name": "storm sewer and city ditch",
+   "reports": 1,
+   "permits": [
+    "MIG580284"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Brown City"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "storm sewer that eventually ends up in Tittabawassee River",
+   "reports": 1,
+   "permits": [
+    "MI0023582"
+   ],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "towns": [
+    "Midland"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "wetlands west of Novi Rd",
+   "reports": 1,
+   "permits": [],
+   "sources": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "reason": "a street name, not a water"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Bell Branch",
+   "reports": 44,
+   "slugs": [
+    "bell-branch-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Redford Township"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Tarabusi Creek",
+   "reports": 28,
+   "slugs": [
+    "tarabusi-creek-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Redford Township"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ],
+   "places_failed": [
+    {
+     "town": "Redford Township",
+     "reason": "no NHD water of that name within 3 km of Redford Township (the nearest is 5.6 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Morrison Channel",
+   "reports": 4,
+   "slugs": [
+    "morrison-channel-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "St. Joseph"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Lower River Rouge",
+   "reports": 3,
+   "slugs": [
+    "lower-river-rouge-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Inkster"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Pere Marquette Lake",
+   "reports": 3,
+   "slugs": [
+    "pere-marquette-lake-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Ludington"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Boardman Lake",
+   "reports": 2,
+   "slugs": [
+    "boardman-lake-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Garfield",
+    "Traverse City"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Davis Creek",
+   "reports": 2,
+   "slugs": [
+    "davis-creek-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Kalamazoo"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Forester Creek",
+   "reports": 2,
+   "slugs": [
+    "forester-creek-mi"
+   ],
+   "how": "record built from the name",
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Holloway Reservoir",
+   "reports": 2,
+   "slugs": [
+    "holloway-reservoir-mi"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Columbiaville"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Ottawa Creek",
+   "reports": 2,
+   "slugs": [
+    "ottawa-creek-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Allendale"
+   ]
+  },
+  {
+   "name": "Woodland Creek",
+   "reports": 2,
+   "slugs": [
+    "woodland-creek-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Lake Odessa"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Bear Creek Drain",
+   "reports": 1,
+   "slugs": [
+    "bear-creek-mi"
+   ],
+   "how": "a water record already holds the name",
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Carp Creek and Partridge Creek",
+   "reports": 1,
+   "slugs": [
+    "carp-creek-mi",
+    "partridge-creek-mi"
+   ],
+   "how": "a water record already holds the name; record built from the name",
+   "towns": [
+    "Ishpeming"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Christiana Creek",
+   "reports": 1,
+   "slugs": [
+    "christiana-creek-mi"
+   ],
+   "how": "record built from the name",
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Detroit",
+   "reports": 1,
+   "slugs": [
+    "detroit-river-mi"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Detroit"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Ecorse River",
+   "reports": 1,
+   "slugs": [
+    "ecorse-river-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Lincooln Park"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Galien River near New Buffalo Harbor",
+   "reports": 1,
+   "slugs": [
+    "galien-river-mi"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "New Buffalo"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Gallagher Creek",
+   "reports": 1,
+   "slugs": [
+    "gallagher-creek-mi"
+   ],
+   "how": "record built from the name",
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Goguac Lake",
+   "reports": 1,
+   "slugs": [
+    "goguac-lake-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Battle Creek"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Hammell Creek",
+   "reports": 1,
+   "slugs": [
+    "hammell-creek-mi"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Calumet"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Indian Mill Creek",
+   "reports": 1,
+   "slugs": [
+    "indian-mill-creek-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Grand Rapids"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Jordan Lake",
+   "reports": 1,
+   "slugs": [
+    "jordan-lake-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Lake Odessa"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Kids Creek",
+   "reports": 1,
+   "slugs": [
+    "kids-creek-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Traverse City"
+   ]
+  },
+  {
+   "name": "Lake Mitchell",
+   "reports": 1,
+   "slugs": [
+    "lake-mitchell-mi"
+   ],
+   "how": "record built from the name",
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Lake Orion",
+   "reports": 1,
+   "slugs": [
+    "lake-orion-mi"
+   ],
+   "how": "record built from the name",
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Macatawa River",
+   "reports": 1,
+   "slugs": [
+    "macatawa-river-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Holland"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "McCoy Creek",
+   "reports": 1,
+   "slugs": [
+    "mccoy-creek-mi"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Buchanan"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Middle River Rouge",
+   "reports": 1,
+   "slugs": [
+    "middle-river-rouge-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Redford Township"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Monarch Millpond",
+   "reports": 1,
+   "slugs": [
+    "monarch-millpond-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Kalamazoo"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Mud Lake",
+   "reports": 1,
+   "slugs": [
+    "mud-lake-mi"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Decatur"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Red Run",
+   "reports": 1,
+   "slugs": [
+    "red-run-mi"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Warren"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Shavehead Lake",
+   "reports": 1,
+   "slugs": [
+    "shavehead-lake-mi"
+   ],
+   "how": "record built from the name",
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "St.Mary's River",
+   "reports": 1,
+   "slugs": [
+    "saint-marys-river-mi"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Sault Ste Marie"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Sycamore Creek Drain",
+   "reports": 1,
+   "slugs": [
+    "sycamore-creek-mi"
+   ],
+   "how": "a water record already holds the name",
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Lake Macatawa",
+   "reports": 1,
+   "slugs": [
+    "lake-macatawa-mi"
+   ],
+   "how": "a water record already holds the name",
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Rogue River",
+   "reports": 1,
+   "slugs": [
+    "rogue-river-mi"
+   ],
+   "how": "a water record already holds the name",
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  },
+  {
+   "name": "Upper Straits Lake",
+   "reports": 1,
+   "slugs": [
+    "upper-straits-lake-mi"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Orchard Lake Village"
+   ],
+   "places_from": [
+    "mi-egle-mienviro-cso-sso-list"
+   ]
+  }
+ ]
+}

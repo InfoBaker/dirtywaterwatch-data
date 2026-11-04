@@ -39,6 +39,9 @@
 #                  for every notice since 2017), fl_dep_habs (DEP algal bloom visits), fl_doh_beaches
 #                  (Healthy Beaches result pages: a full pass starts at most every 20 hours and is spread over
 #                  hourly runs, at most 6 minutes of pages a run, resumed where it stopped)
+#                  Michigan: mi_egle_mienviro (EGLE MiEnviro CSO/SSO List: every open report and the completed
+#                  reports that started in the last 60 days; `--backfill [--from YEAR]` once, default from 2025,
+#                  the list reaching back to 2001)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

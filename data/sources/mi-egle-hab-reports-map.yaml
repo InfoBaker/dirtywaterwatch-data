@@ -1,0 +1,22 @@
+id: "mi-egle-hab-reports-map"
+name: "EGLE/MDHHS Michigan HAB Reports Map and reporting form"
+url: "https://www.michigan.gov/egle/about/organization/water-resources/glwarm/harmful-algal-blooms"
+homepage: "https://www.michigan.gov/egle/about/organization/water-resources/glwarm/harmful-algal-blooms"
+kind: "map_only"
+level: "state"
+# Notes (research/mi, status candidate, verified search_only, checked 2026-11-03): State HAB reports
+#   with locations; trace the map's layer next.
+# Access detail (research, quoted): Map of verified reported blooms (last two weeks by default) and
+#   cyanotoxin results; new online report form launched May 2026. Map service not traced.
+cadence: null
+license: "none stated"
+attribution: "EGLE and MDHHS"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["MI"]
+access: ["map_only"]
+access_detail: "Map of verified reported blooms (last two weeks by default) and cyanotoxin results; new online report form launched May 2026. Map service not traced."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"
