@@ -51,6 +51,11 @@ Privacy (the service is public but carries personal data)
   to three decimals (about 100 m, raw._coords_note). Records kept from an earlier run are rebuilt from their raw
   attributes under the current rules (rebuilt()). A rare given name standing alone as the incident name, or a name that
   is also a company's, can still pass: the owner's blocklist (data/build/name-blocklist.json) covers those.
+  The value of "Reporting Party:", "Person Contacted:", "Contacted by:" and "Assigned To:" ends at the next contact,
+  date or time label when no safe label follows (NAME_VALUE_LABELS), so the account after it stays; a forwarded
+  e-mail's addressees ("To: <surname>, <given> <address>") are removed; a Florida town of two words or more
+  (data/waters-fl.json) before an action verb is the utility, not a person; a rounded complaint point carries its
+  precision (raw._coord_precision_m: about 100 m, or the source's own when coarser).
 
 Which notices become records (the feed mixes every kind of pollution)
   - Notices filed on DEP's wastewater template carry "Wastewater Type: <type> Cause: <cause> Spill
@@ -256,6 +261,13 @@ BLANK_VALUE = re.compile(r"\s*[:#?-]?\s*_{3,}(?=\s*$|\s+\*?(?:SPILL|SOURCE|AREA|
                          r"PERMIT|RESPONSIBLE|METHOD|WRITTEN|CORRECTIVE|EFFLUENT|OTHER)\b)")
 # words of PERSON_LABEL that are labels only with a colon (or "#", "-") after them: "crews were notified", "contacted by
 # phone", "the reporting party advised", "a contractor was assigned to" are ordinary text
+# labels whose value is one person or one office ("Reporting Party: <name> <id> Contact Number: ..."): when no safe
+# label follows, the value ends at the next contact-number, phone, e-mail, date or time label or at a line break within
+# VALUE_REACH characters, so that the account after it (the volume, the water) is not cut with the name
+NAME_VALUE_LABELS = {"reporting party", "person contacted", "contacted by", "assigned to"}
+VALUE_REACH = 80
+VALUE_STOP = re.compile(r"\n|\s(?=(?i:(?:contact|phone|cell|telephone|mobile|office|work)\s*(?:number|no\.?|#)|phone|cell|"
+                        r"e-?mail|date\s*/\s*time|date|time)\s*[:#])")
 LABEL_ONLY_WITH_COLON = {"notified", "caller", "cell", "signed", "reporter", "phone", "reporting party", "person contacted",
                          "contacted by", "assigned to"}
 # a person named by what a person does: "<name> received a call", "<name> and <name> arrived", "<initial>. <surname>
@@ -293,7 +305,11 @@ team crew crews staff police sheriff fire rescue ems dot fdot fpl teco duke comc
 harbor vac vacs truck trucks tanker tankers unit units jet support ops operations point desk room line dispatch personnel
 employee employees notification summary report notice pollution inspection annual number information update incident
 form spill sso overflow leak break release discharge event warning watch emergency response subject received size
-categories sent attachment attachments cell phone office mobile tel fax email e-mail""".split())
+categories sent attachment attachments cell phone office mobile tel fax email e-mail
+fertilizer phosphate phosphates mining mine mines ranch nursery nurseries citrus groves plantation port yacht yachts
+boatyard bayou slough prairie hammock preserve sanctuary refuge seafood brewing brewery packing chemical chemicals paper
+lumber concrete asphalt aggregates materials recycling landfill disposal logistics railroad railway rail airlines airport
+shipyard navy army pointe isles isle cove inlet lagoon estuary reservoir canal creek river sheriff's""".split())
 # an initial and a surname after a contact verb ("then called S. Sample to respond")
 CUE_INITIAL = re.compile(rf"(\b(?i:called|contacted|notified|informed|advised|told|asked|met\s+with|spoke\s+(?:with|to)|per|by)\s+)"
                          rf"({_INITIAL_SURNAME})\b")
@@ -321,12 +337,35 @@ TITLE_ORG_NAME = re.compile(rf"(\b(?i:{JOB_TITLE})\s+(?i:for|of|with|at)\s+(?:th
 # a person given by a name cue, a lone given name included: "the owner is named <name>", "her name is <name>"
 NAMED_CUE = re.compile(r"(\b(?i:(?:owner|resident|person|man|woman|lady|gentleman|caller|neighbou?r|tenant|customer|contact|he|she)"
                        r"\s+(?:is\s+|was\s+)?named|(?:his|her|their)\s+name\s+(?:is|was))\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\b")
+# a forwarded e-mail's addressees ("To: Sample, Pat <pat@example.org>; Example, Lee S <...>"): the words right before an
+# address in angle brackets are a person's name, in either order
+EMAIL_ADDRESSEE = re.compile(r"(?<![\w\[])(?:[A-Z][A-Za-z'.-]*,?\s+){1,4}(?=<\s*(?:\[email removed\]|[\w.+-]+@))")
 EMAIL_HEADER = re.compile(r"\bFrom:?\s+[^\n]{0,240}?\bSent:?\s+\w+day,?\s+\w+\s+\d{1,2},\s+\d{4},?\s+\d{1,2}:\d{2}(?::\d{2})?\s*[AP]M")
 
 
 def _given_names():
     from build.redact import FIRST_NAMES
     return FIRST_NAMES
+
+
+_FL_TOWNS: set[str] | None = None
+
+
+def _fl_towns() -> set[str]:
+    """Florida's towns of two words or more ("cape coral", "fort lauderdale", "punta gorda"), from the towns of the state's
+    water records (data/waters-fl.json): a city before "received a call" or "began to" is the utility, not a person."""
+    global _FL_TOWNS
+    if _FL_TOWNS is None:
+        towns = set()
+        waters = (read_json(DATA_DIR / "waters-fl.json", {}) or {}).get("waters") or []
+        for w in waters.values() if isinstance(waters, dict) else waters:
+            for t in (w.get("towns") or []) if isinstance(w, dict) else []:
+                t = re.sub(r"\s+", " ", str(t).lower().replace(".", "")).strip()
+                if " " in t:
+                    towns.add(t)
+                    towns.add(" ".join(t.split()[:2]))     # "royal palm beach" is also written "Royal Palm"
+        _FL_TOWNS = towns
+    return _FL_TOWNS
 
 
 # a facility named after a person: the words right after the name ("<name> Regional WWTF", "<name> Water Reclamation
@@ -370,8 +409,9 @@ def _drop_cue_name(m: re.Match) -> str:
     nxt = re.match(r"\s+([A-Za-z]+)", m.string[m.end():])
     if w[0].lower() in NOT_FIRST or _not_person(m.group(2)) or w[-1].lower() in PLACE_AFTER or \
             w[-1].lower().strip(".") in NOT_FIRST or w[-1].lower().strip(".") in COMPANY_SUFFIX | JOB_WORDS or \
-            (nxt and nxt.group(1).lower() in COMPANY_SUFFIX | PLACE_AFTER | VENUE_WORDS):
-        return m.group(0)
+            (nxt and nxt.group(1).lower() in COMPANY_SUFFIX | PLACE_AFTER | VENUE_WORDS | AGENCY_NEXT) or \
+            re.sub(r"'s$", "", w[-1].lower()) in AGENCY_TAIL or _is_fl_town(m.group(2)):
+        return m.group(0)                     # "notified by <County> Sheriff's Office", "spoke with Cape Coral"
     return m.group(1) + "[name removed]"
 
 
@@ -384,6 +424,14 @@ def _drop_name_with_agency(m: re.Match) -> str:
     if any(w.strip(".") in NOT_PERSON_WORDS for w in words):
         return m.group(0)
     return "[name removed]" + m.group(2)
+
+
+AGENCY_TAIL = {"sheriff", "sheriffs", "police", "fire", "rescue", "ems"}
+AGENCY_NEXT = {"office", "department", "dept", "division", "district"}
+
+
+def _is_fl_town(name: str) -> bool:
+    return re.sub(r"\s+", " ", name.lower().replace(".", "")).strip() in _fl_towns()
 
 
 def _place_after(m: re.Match) -> bool:
@@ -402,6 +450,9 @@ def _company_or_place(name: str, function_words: bool = True) -> bool:
     function_words, also one with an ordinary word in it ("Yes X No")."""
     words = [w.lower().strip(".,'") for w in re.split(r"[\s&,]+", name) if w]
     words = [w[:-2] if w.endswith("'s") else w for w in words]
+    joined = " ".join(words)
+    if any(f" {t} " in f" {joined} " for t in _fl_towns()):
+        return True                                     # "Cape Coral", "Fort Lauderdale": a city
     return any(w in COMPANY_WORDS or w in NOT_PERSON_WORDS or w in PLACE_AFTER or w in redact.KILL or w in OPERATOR_WORDS
                or w in JOB_WORDS or (function_words and len(w) > 1 and w in redact.FUNCTION) for w in words) or \
         (words and words[0] in NOT_FIRST) or " ".join(words[:2]) in PLACE_PAIRS
@@ -477,6 +528,12 @@ def scrub(text) -> str | None:
             continue
         out.append(s[pos:m.end()])
         nxt = SAFE_LABEL.search(s, m.end())
+        if re.sub(r"\s+", " ", m.group(0).lower()) in NAME_VALUE_LABELS:
+            stop = VALUE_STOP.search(s, m.end(), m.end() + VALUE_REACH)
+            if stop and (nxt is None or stop.start() < nxt.start()):
+                out.append(": [removed] ")
+                pos = stop.end()
+                continue
         # the value must not swallow a safe label that starts right after (empty value)
         if nxt:
             out.append(": [removed] " if not s[m.end():nxt.start()].strip(" :#?-") else ": [removed] ")
@@ -499,6 +556,7 @@ def scrub(text) -> str | None:
     s = CUE_NAME_CAPS.sub(_drop_caps_cue, s)
     s = HONORIFIC_NAME.sub("[name removed]", s)
     s = EMAIL_HEADER.sub("[e-mail header removed]", s)
+    s = EMAIL_ADDRESSEE.sub("[name removed] ", s)
     s = drop_given_pairs(s)
     s = CUE_NAME.sub(_drop_cue_name, s)
     s = CUE_INITIAL.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) or _place_after(m) else m.group(1) + "[name removed]", s)
@@ -550,6 +608,7 @@ def scrub_name_field(v):
 
 
 CITIZEN_COORD_DIGITS = 3      # about 100 m: a complaint's point is often the filer's home
+CITIZEN_PRECISION_M = 100
 
 
 def safe_attributes(a: dict) -> dict:
@@ -577,6 +636,12 @@ def safe_attributes(a: dict) -> dict:
         for k in ("INCIDENT_REPORT", "INCIDENT_NAME", "FACILITY_NAME"):
             if isinstance(out.get(k), str):
                 out[k] = strip_house_numbers(out[k])
+        lat0 = fnum(out.get("LATITUDE"))
+        if lat0 is not None:
+            # the precision of the rounded point: about 100 m, or the source's own when coarser; carried, because a
+            # rounded value that ends in zero ("27.45") would read as 1 km (a rebuild reads the carried value)
+            given = a.get("_coord_precision_m")
+            out["_coord_precision_m"] = given if isinstance(given, int) else max(CITIZEN_PRECISION_M, precision_m(lat0))
         for k in ("LATITUDE", "LONGITUDE"):
             v = fnum(out.get(k))
             if v is not None:
@@ -978,7 +1043,7 @@ def _record(a, base, raw, text, facility, kind, et, rule, prev, permits):
         outfall_id=None, outfall_name=loc,
         waterbody_text=water, water_slugs=[], water_match="none",
         lat=lat, lon=lon, coord_source="source" if lat is not None else None,
-        coord_precision_m=precision_m(lat) if lat is not None else None,
+        coord_precision_m=(a.get("_coord_precision_m") or precision_m(lat)) if lat is not None else None,
         started_at=iso(start), ended_at=ended_at, time_precision="day" if start else None,
         reported_at=iso(reported), published_at=None, source_updated_at=None,
         material=material, volume_gal=gal, volume_text=vtext, estimate_flag=flag if gal is not None or vtext else "unknown",
@@ -1039,6 +1104,8 @@ def rebuilt(r: dict, permits: dict) -> dict:
         return r
     a = {k: raw[k] for k in SAFE_FIELDS if k in raw and k != "OBJECTID"}
     a["OBJECTID"], a["_filer"] = raw.get("_layer_objectid"), raw.get("_filer")
+    if raw.get("_coord_precision_m") is not None:
+        a["_coord_precision_m"] = raw["_coord_precision_m"]
     try:
         new = build_record(safe_attributes(a), r["source_record_id"], r.get("fetched_at"), r, permits)
     except Exception:  # noqa: BLE001 - never drop a record

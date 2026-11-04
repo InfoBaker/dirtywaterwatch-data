@@ -371,3 +371,49 @@ def test_a_record_kept_from_an_earlier_run_is_scrubbed_under_the_current_rules()
     assert stats["kept_from_earlier_runs"] == 1
     assert "Placeholder" not in json.dumps(kept) and "[name removed] received call" in kept["raw"]["INCIDENT_REPORT"]
     assert kept["fetched_at"] == prev[0]["fetched_at"] and kept["raw"]["_first_seen_at"] == "2026-10-01T00:00:00Z"
+
+
+# ---------------------------------------------------------------- review of the name-review branch (2026-11-04)
+
+def test_a_name_label_with_no_safe_label_after_it_does_not_cut_the_account():
+    # "Reporting Party:" cut everything after it when no safe label followed: the volume and the account went with it
+    t = ("Permit # FL0000001 Reporting Party: Zeb Placeholder A12345 Contact Number: 850-555-0100 The following is an "
+         "account of the night: 2108 gallons reached Example Creek.")
+    out = P.scrub(t)
+    assert "Placeholder" not in out and "A12345" not in out and "555-0100" not in out
+    assert out.endswith("The following is an account of the night: 2108 gallons reached Example Creek."), out
+    # with nothing to stop at, the value still runs to the end (a name is never kept)
+    assert P.scrub("Reporting Party: Zeb Placeholder said 40 gallons") == "Reporting Party: [removed]"
+
+
+def test_a_rounded_complaint_point_keeps_an_honest_precision():
+    # 27.450123 rounds to 27.45: read by its digits that is 1 km; the point is good to about 100 m, and a rebuild agrees
+    comp = _row(5, INCIDENT_NUMBER=202611601, OBJECTID=61, LATITUDE=27.450123, LONGITUDE=-82.400456)
+    recs, _ = P.build([comp], "2026-11-04T00:00:00Z", [], permits={})
+    c = recs[0]
+    assert (c["lat"], c["lon"]) == (27.45, -82.4) and c["coord_precision_m"] == 100
+    again, _ = P.build([], "2026-11-04T01:00:00Z", json.loads(json.dumps(recs)), permits={}, full_layer=True)
+    assert again[0]["coord_precision_m"] == 100 and again[0]["lat"] == 27.45
+    # a source point given to two decimals stays as coarse as the source says
+    coarse = _row(5, INCIDENT_NUMBER=202611602, OBJECTID=62, LATITUDE=27.45, LONGITUDE=-82.41)
+    recs, _ = P.build([coarse], "2026-11-04T00:00:00Z", [], permits={})
+    assert recs[0]["coord_precision_m"] == 1000
+
+
+def test_a_city_a_company_a_water_or_an_agency_before_an_action_verb_is_kept():
+    for t in ("Cape Coral began to pump down the wet well.",
+              "Fort Lauderdale received a call about the overflow.",
+              "Example Fertilizer began to pump the stack water.",
+              "Example Bayou began to rise after the rain.",
+              "Example Citrus is aware of the release.",
+              "The spill was notified by Example Sheriff's Office at 11:30 am."):
+        assert P.scrub(t) == t, (t, P.scrub(t))
+    assert P.scrub("Zeb Placeholder began to pump the station.") == "[name removed] began to pump the station."
+
+
+def test_the_addressees_of_a_forwarded_e_mail_are_removed():
+    t = ("Update. From: Placeholder, Zeb <zeb@example.org> Sent: Monday, July 12, 2023 10:00 AM To: Sampleton, Quill "
+         "<quill@example.org> Cc: Placeholder, Lee S <lee@example.org>; Example Ops <ops@example.org> Subject: Bleach")
+    out = P.scrub(t)
+    assert "Sampleton" not in out and "Placeholder" not in out and "Quill" not in out, out
+    assert "Subject: Bleach" in out and P.scrub(out) == out
