@@ -1,0 +1,949 @@
+{
+ "state": "NE",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:00Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 22,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 9,
+  "single_residence": 1,
+  "industrial_with_sewage_code": 1,
+  "permittee_name_removed": 3,
+  "by_legal_form_proposed": {
+   "business or industrial": 10,
+   "facility (permittee not named)": 1,
+   "homeowners' association": 4,
+   "not stated by the names": 7
+  },
+  "public_by_name": 0
+ },
+ "candidates": [
+  {
+   "npdes_permit": "NE0043371",
+   "state": "NE",
+   "facility": "INNOVATIVE EXHAUST SOLUTIONS, INC",
+   "permittee_as_recorded": "INNOVATIVE EXHAUST SOLUTIONS, INC",
+   "county": "LANCASTER",
+   "city": "LINCOLN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "3669",
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [
+    "STEVENS CREEK"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0043371"
+  },
+  {
+   "npdes_permit": "NE0050890",
+   "state": "NE",
+   "facility": "BEAVER LAKE ASSOCIATION WWTF",
+   "permittee_as_recorded": "Beaver Lake Association WWTF",
+   "county": "CASS",
+   "city": "PLATTSMOUTH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.89,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-01",
+   "permit_expiration": "2029-03-31",
+   "receiving_waters_echo": [
+    "ROCK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0050890"
+  },
+  {
+   "npdes_permit": "NE0112330",
+   "state": "NE",
+   "facility": "GIBBON INN WASTEWATER TREATMENT FACILITY",
+   "permittee_as_recorded": "W.Y. HUNDAN, LLC",
+   "county": "BUFFALO",
+   "city": "GIBBON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7011"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.035,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "TRIB TO MID PLAT"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0112330"
+  },
+  {
+   "npdes_permit": "NE0112895",
+   "state": "NE",
+   "facility": "EAGLE LAKE SUBDIVISION WWTF",
+   "permittee_as_recorded": "EAGLE LAKE WWTF",
+   "county": "CASS",
+   "city": "EAGLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-01-01",
+   "permit_expiration": "2029-12-31",
+   "receiving_waters_echo": [
+    "TRIB TO LT NE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0112895"
+  },
+  {
+   "npdes_permit": "NE0113298",
+   "state": "NE",
+   "facility": "HASTINGS WWTF MAXON AVENUE",
+   "permittee_as_recorded": "HASTINGS PCF MAXON AVE",
+   "county": "ADAMS",
+   "city": "HASTINGS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-01",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "DT TO FARM POND"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0113298"
+  },
+  {
+   "npdes_permit": "NE0113450",
+   "state": "NE",
+   "facility": "VALLEY VIEW HOMEOWNERS ASSOCIATION",
+   "permittee_as_recorded": "Valley View Homeowners Association",
+   "county": "DODGE",
+   "city": "FREMONT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.017,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "ELM CR"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0113450"
+  },
+  {
+   "npdes_permit": "NE0123064",
+   "state": "NE",
+   "facility": "SOUTH BEND LAKES, INC",
+   "permittee_as_recorded": "South Bend Lakes, Inc",
+   "county": "CASS",
+   "city": "SOUTH BEND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "DECKER CREEK TO PLATTE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0123064"
+  },
+  {
+   "npdes_permit": "NE0123986",
+   "state": "NE",
+   "facility": "WOODLAND HILLS HOMEOWNERS ASSOCIATION",
+   "permittee_as_recorded": "Woodland Hills Homeowners Association",
+   "county": "CASS",
+   "city": "EAGLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.054,
+   "major_minor": "Minor",
+   "permit_effective": "2022-10-01",
+   "permit_expiration": "2027-09-30",
+   "receiving_waters_echo": [
+    "HOOPER CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0123986"
+  },
+  {
+   "npdes_permit": "NE0132608",
+   "state": "NE",
+   "facility": "SID #8 SAUNDERS CO WASTEWATER TREATMENT FACILITY",
+   "permittee_as_recorded": "SID 8 SAUNDERS CO WWTF",
+   "county": null,
+   "city": "SAUNDERS COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [
+    "PLATTE RIVER"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0132608"
+  },
+  {
+   "npdes_permit": "NE0132632",
+   "state": "NE",
+   "facility": "SID 101-SARPY CO - HANSON LAKE",
+   "permittee_as_recorded": "SID 101-SARPY CO - HANSON LAKE",
+   "county": "SARPY",
+   "city": "BELLEVUE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [
+    "PLATTE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0132632"
+  },
+  {
+   "npdes_permit": "NE0133167",
+   "state": "NE",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "SAUNDERS",
+   "city": "ASHLAND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0112,
+   "major_minor": "Minor",
+   "permit_effective": "2020-10-01",
+   "permit_expiration": "2025-09-30",
+   "receiving_waters_echo": [
+    "LOWER PLATTE RIVER BASIN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0133167"
+  },
+  {
+   "npdes_permit": "NE0133841",
+   "state": "NE",
+   "facility": "CARDWELL WOODS HOMEOWNERS ASSN",
+   "permittee_as_recorded": "CARDWELL WOOD WWTF",
+   "county": "LANCASTER",
+   "city": "LINCOLN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0133841"
+  },
+  {
+   "npdes_permit": "NE0137499",
+   "state": "NE",
+   "facility": "TRAVEL CENTERS OF AMERICA",
+   "permittee_as_recorded": "GRAND ISLAND TRAVEL CENTER",
+   "county": "HALL",
+   "city": "ALDA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0315,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "PLATTE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0137499"
+  },
+  {
+   "npdes_permit": "NE0137553",
+   "state": "NE",
+   "facility": "FOREMAN RIDGE WASTEWATER TREATMENT FACILITY",
+   "permittee_as_recorded": "[name removed]",
+   "county": "LANCASTER",
+   "city": "LINCOLN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-10-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0137553"
+  },
+  {
+   "npdes_permit": "NE0137596",
+   "state": "NE",
+   "facility": "CARDWELL RESERVE WASTEWATER TREATMENT FACILITY",
+   "permittee_as_recorded": "CARDWELL RESERVE HOMEOWNERS' ASSOCIATION, INC",
+   "county": "LANCASTER",
+   "city": "LINCOLN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0109,
+   "major_minor": "Minor",
+   "permit_effective": "2021-10-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0137596"
+  },
+  {
+   "npdes_permit": "NE0137669",
+   "state": "NE",
+   "facility": "HIDDEN VALLEY ESTATES",
+   "permittee_as_recorded": "HIDDEN VALLEY ESTATES, LLC",
+   "county": "LANCASTER",
+   "city": "LINCOLN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-01",
+   "permit_expiration": "2027-12-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0137669"
+  },
+  {
+   "npdes_permit": "NE0137821",
+   "state": "NE",
+   "facility": "DAKOTA SPRINGS WWTF",
+   "permittee_as_recorded": "DAKOTA SPRINGS WWTF",
+   "county": "LANCASTER",
+   "city": "ROCA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0042,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-01",
+   "permit_expiration": "2027-12-31",
+   "receiving_waters_echo": [
+    "UNDESIG. TRIB OF SALT CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0137821"
+  },
+  {
+   "npdes_permit": "NE0139700",
+   "state": "NE",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "LANCASTER COUNTY",
+   "city": "BENNET",
+   "system_kind": "single residence",
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "facility (permittee not named)",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0006,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "LITTLE NEMAHA RIVER"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0139700"
+  },
+  {
+   "npdes_permit": "NE0140341",
+   "state": "NE",
+   "facility": "FARMER'S COOPERATIVE",
+   "permittee_as_recorded": "Farmer's Cooperative, Cortland Service Center",
+   "county": "GAGE",
+   "city": "CORTLAND",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "7542"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "INDIAN CREEK"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0140341"
+  },
+  {
+   "npdes_permit": "NE0140350",
+   "state": "NE",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Mason Emmons Trucklines, LLC",
+   "county": null,
+   "city": "BRADY",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [
+    "Middle Platte River Basin via Land Application"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0140350"
+  },
+  {
+   "npdes_permit": "NE0140431",
+   "state": "NE",
+   "facility": "DUTTON LAINSON COMPANY",
+   "permittee_as_recorded": "Dutton Lainson Company",
+   "county": null,
+   "city": "HASTINGS",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [
+    "WEST FORK BIG BLUE RIVER"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0140431"
+  },
+  {
+   "npdes_permit": "NE0140457",
+   "state": "NE",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "ROBERT BOSCH NORTH AMERICAN CORPORATION",
+   "county": "LANCASTER",
+   "city": "LINCOLN",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "3669"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-03-31",
+   "receiving_waters_echo": [
+    "STEVENS CREEK"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NE0140457"
+  }
+ ],
+ "public_by_name": []
+}

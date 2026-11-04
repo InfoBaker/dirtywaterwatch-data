@@ -1,0 +1,59 @@
+{
+ "fetched_at": "2026-11-03T21:02:45Z",
+ "outfalls": [
+  {
+   "npdes_permit": "ZZ0000011",
+   "permittee": "HILLTOP SEWER CO WWTP",
+   "permit_name": "Hilltop Sewer Co Inc",
+   "state": "ZZ",
+   "city": "EXAMPLEVILLE",
+   "outfall": "001",
+   "receiving_water_echo": "EXAMPLE CREEK",
+   "permit_status": "EFF",
+   "permit_type": "NPD",
+   "permit_components": [
+    "POTW"
+   ],
+   "plant_basis": "potw_component",
+   "facility_type": "Privately Owned Facility",
+   "source": "fed-echo-npdes-discharge-points",
+   "lat": 40.1,
+   "lon": -75.1
+  },
+  {
+   "npdes_permit": "ZZ0000013",
+   "permittee": "OAK HOLLOW MHP",
+   "permit_name": "Oak Hollow Communities LLC",
+   "state": "ZZ",
+   "city": "EXAMPLEVILLE",
+   "outfall": null,
+   "receiving_water_echo": "EXAMPLE RUN",
+   "permit_status": "EFF",
+   "permit_type": "NPD",
+   "permit_components": [
+    "POTW"
+   ],
+   "plant_basis": "potw_component",
+   "facility_type": "Privately Owned Facility",
+   "source": "fed-echo-icis-npdes-national-dataset",
+   "lat": 40.2,
+   "lon": -75.2
+  },
+  {
+   "npdes_permit": "ZZ0000009",
+   "permittee": "EXAMPLEVILLE WWTP",
+   "permit_name": "EXAMPLEVILLE, CITY OF",
+   "state": "ZZ",
+   "city": "EXAMPLEVILLE",
+   "outfall": "001",
+   "permit_status": "EFF",
+   "permit_type": "NPD",
+   "permit_components": [
+    "POTW"
+   ],
+   "plant_basis": "potw_component",
+   "facility_type": "Municipality",
+   "source": "fed-echo-npdes-discharge-points"
+  }
+ ]
+}

@@ -1,0 +1,1071 @@
+{
+ "state": "ND",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:00Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 21,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 21,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 11,
+  "permittee_name_removed": 5,
+  "by_legal_form_proposed": {
+   "business or industrial": 14,
+   "not stated by the names": 7
+  },
+  "public_by_name": 2
+ },
+ "candidates": [
+  {
+   "npdes_permit": "ND0000094",
+   "state": "ND",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "American Crystal Sugar Company",
+   "county": "PEMBINA",
+   "city": "DRAYTON",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "2063"
+   ],
+   "naics_codes": [
+    "311313"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2025-04-01",
+   "permit_expiration": "2030-03-31",
+   "receiving_waters_echo": [
+    "Red River"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0000094"
+  },
+  {
+   "npdes_permit": "ND0000370",
+   "state": "ND",
+   "facility": "MINNKOTA POWER COOPERATIVE",
+   "permittee_as_recorded": "Minnkota Power Cooperative Inc",
+   "county": "OLIVER",
+   "city": "CENTER",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4911"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "Nelson Lake",
+    "Branch To Nelson Lake",
+    "Missouri River"
+   ],
+   "external_outfalls": 4,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0000370"
+  },
+  {
+   "npdes_permit": "ND0024201",
+   "state": "ND",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "RICHLAND",
+   "city": "HANKINSON",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "1442"
+   ],
+   "naics_codes": [
+    "212321"
+   ],
+   "design_flow_mgd": 0.001,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-01",
+   "permit_expiration": "2027-12-31",
+   "receiving_waters_echo": [
+    "BRANCH TO LAKE ELSIE, WESTERN WILD RICE",
+    "Branch To Lake Elsie"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0024201"
+  },
+  {
+   "npdes_permit": "ND0024279",
+   "state": "ND",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "American Crystal Sugar Company",
+   "county": "TRAILL",
+   "city": "HILLSBORO",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "2063"
+   ],
+   "naics_codes": [
+    "311313"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "GOOSE RIVER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0024279"
+  },
+  {
+   "npdes_permit": "ND0024368",
+   "state": "ND",
+   "facility": "MINN DAK FARMERS COOPERATIVE",
+   "permittee_as_recorded": "Minn Dak Farmers Cooperative",
+   "county": "RICHLAND",
+   "city": "WAHPETON",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "2063"
+   ],
+   "naics_codes": [
+    "311313"
+   ],
+   "design_flow_mgd": 10.0,
+   "major_minor": "Major",
+   "permit_effective": "2022-10-01",
+   "permit_expiration": "2027-09-30",
+   "receiving_waters_echo": [
+    "Red River"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0024368"
+  },
+  {
+   "npdes_permit": "ND0024449",
+   "state": "ND",
+   "facility": "HALL'S FARM HOOPLE",
+   "permittee_as_recorded": "Hall's Farm Hoople",
+   "county": "WALSH",
+   "city": "HOOPLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "0134",
+    "0723"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "NORTH BRANCH OF THE FOREST RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0024449"
+  },
+  {
+   "npdes_permit": "ND0024601",
+   "state": "ND",
+   "facility": "BNI COAL LTD CENTER",
+   "permittee_as_recorded": "[name removed]",
+   "county": "OLIVER",
+   "city": "CENTER",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "1221"
+   ],
+   "naics_codes": [
+    "212111"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "Branch Of Hagel Creek To Nelson Lake",
+    "Branch Of Square Butte Creek",
+    "Drainage To Hagel Creek",
+    "Tributary To Hagel Creek",
+    "Tributary To Square Butte Creek",
+    "Hagel Creek",
+    "Square Butte Creek",
+    "Hagel Creek Via Unnamed Drainage",
+    "Unnamed Surface Drainage to Hagel Creek",
+    "unnamed drainage to Square Butte Creek",
+    "Hagel Creek via unnamed surface drainages",
+    "Square Butte Creek via unnamed surface drainages",
+    "Unnamed tributary of Hagel Creek",
+    "Unnamed Tributary of Square Butte Creek",
+    "Square Butte",
+    "Tributary of Hagel Creek",
+    "Tributary of Square Butte Creek",
+    "Unnamed Tributary to Square Butte",
+    "Unnamed Tributary to Square Butte Creek"
+   ],
+   "external_outfalls": 46,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0024601"
+  },
+  {
+   "npdes_permit": "ND0024651",
+   "state": "ND",
+   "facility": "HOME ON THE RANGE",
+   "permittee_as_recorded": "Home On The Range",
+   "county": "GOLDEN VALLEY",
+   "city": "SENTINEL BUTTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": 0.001,
+   "major_minor": "Minor",
+   "permit_effective": "2022-10-01",
+   "permit_expiration": "2027-09-30",
+   "receiving_waters_echo": [
+    "BEAVER, BRANCH OF ANDREWS CREEK",
+    "Branch Of Andrews Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0024651"
+  },
+  {
+   "npdes_permit": "ND0024856",
+   "state": "ND",
+   "facility": "FISHER INDUSTRIES",
+   "permittee_as_recorded": "Fisher Industries",
+   "county": "STARK",
+   "city": "DICKINSON",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": 0.001,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "Green River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0024856"
+  },
+  {
+   "npdes_permit": "ND0025011",
+   "state": "ND",
+   "facility": "DAKOTA GASIFICATION CO",
+   "permittee_as_recorded": "Dakota Gasification Company",
+   "county": "MERCER",
+   "city": "BEULAH",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4925"
+   ],
+   "naics_codes": [
+    "325311"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "West Antelope Creek"
+   ],
+   "external_outfalls": 4,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0025011"
+  },
+  {
+   "npdes_permit": "ND0025283",
+   "state": "ND",
+   "facility": "LEONARDITE PRODUCTS LLC",
+   "permittee_as_recorded": "Leonardite Products, LLC",
+   "county": "WILLIAMS",
+   "city": "WILLISTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [
+    "212111"
+   ],
+   "design_flow_mgd": 0.001,
+   "major_minor": "Minor",
+   "permit_effective": "2023-04-01",
+   "permit_expiration": "2028-03-31",
+   "receiving_waters_echo": [
+    "BRANCH OF LITTLE MUDDY AND STONY CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0025283"
+  },
+  {
+   "npdes_permit": "ND0025321",
+   "state": "ND",
+   "facility": "CENTER COAL CO",
+   "permittee_as_recorded": "Center Coal Co",
+   "county": "OLIVER",
+   "city": "CENTER",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "1221"
+   ],
+   "naics_codes": [
+    "212111"
+   ],
+   "design_flow_mgd": 0.001,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [
+    "Branch To Nelson Lake"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0025321"
+  },
+  {
+   "npdes_permit": "ND0025810",
+   "state": "ND",
+   "facility": "NUSTAR JAMESTOWN NORTH TERMINAL",
+   "permittee_as_recorded": "NuStar Jamestown North Terminal",
+   "county": "STUTSMAN",
+   "city": "ELDRIDGE",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4613"
+   ],
+   "naics_codes": [
+    "493190"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "Tributary Of The Pipestem Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0025810"
+  },
+  {
+   "npdes_permit": "ND0025836",
+   "state": "ND",
+   "facility": "HESS TIOGA GAS PLANT LLC",
+   "permittee_as_recorded": "Hess Tioga Gas Plant LLC",
+   "county": "WILLIAMS",
+   "city": "TIOGA",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "1321"
+   ],
+   "naics_codes": [
+    "211130"
+   ],
+   "design_flow_mgd": 0.001,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-01",
+   "permit_expiration": "2029-03-31",
+   "receiving_waters_echo": [
+    "LAKE SAKAKAWEA, UNNAMED STREAM TO PAULSEN CREEK",
+    "Unnamed Stream To Paulsen Creek"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0025836"
+  },
+  {
+   "npdes_permit": "ND0025984",
+   "state": "ND",
+   "facility": "ASSOC POTATO GROWERS GRAFTON",
+   "permittee_as_recorded": "Assoc Potato Growers Grafton",
+   "county": "WALSH",
+   "city": "GRAFTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": 0.001,
+   "major_minor": "Minor",
+   "permit_effective": "2024-01-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [
+    "DRAINAGE DITCH TO THE PARK RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0025984"
+  },
+  {
+   "npdes_permit": "ND0026018",
+   "state": "ND",
+   "facility": "EAST CENTRAL REGIONAL WD-GF",
+   "permittee_as_recorded": "East Central Regional WD-GF",
+   "county": "GRAND FORKS",
+   "city": "ARVILLA",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4941"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-03-31",
+   "receiving_waters_echo": [
+    "Branch Of Hazen Brook"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0026018"
+  },
+  {
+   "npdes_permit": "ND0026077",
+   "state": "ND",
+   "facility": "AMERICAN COLLOID CO GASCOYNE",
+   "permittee_as_recorded": "[name removed]",
+   "county": "BOWMAN",
+   "city": "SCRANTON",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "1499"
+   ],
+   "naics_codes": [
+    "212319"
+   ],
+   "design_flow_mgd": 0.001,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-01",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "CLOSED BASIN, CLOSED BASIN OR OPEN PITS, DRAINAGE TO BUFFALO CREEK, NORTH FORK GRAND, UNNAMED TO BUFFALO CREEK, UNNAMED TRIBUTARY OF BUFFALO CREEK",
+    "Drainage To Buffalo Creek",
+    "Unnamed to Buffalo Creek",
+    "Unnamed tributary of Buffalo Creek",
+    "Closed basin or open pits",
+    "Closed basin"
+   ],
+   "external_outfalls": 9,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0026077"
+  },
+  {
+   "npdes_permit": "ND0026085",
+   "state": "ND",
+   "facility": "H & S VENTURES, LLC",
+   "permittee_as_recorded": "Hall's Farm Hoople",
+   "county": "WALSH",
+   "city": "HOOPLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": 0.001,
+   "major_minor": "Minor",
+   "permit_effective": "2022-10-01",
+   "permit_expiration": "2027-09-30",
+   "receiving_waters_echo": [
+    "PARK, PARK RIVER",
+    "Park River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0026085"
+  },
+  {
+   "npdes_permit": "ND0026204",
+   "state": "ND",
+   "facility": "ASSOC POTATO GROWERS DRAYTON",
+   "permittee_as_recorded": "[name removed]",
+   "county": "PEMBINA",
+   "city": "DRAYTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "0723"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "RED RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0026204"
+  },
+  {
+   "npdes_permit": "ND0026263",
+   "state": "ND",
+   "facility": "WCCO BELTING INC",
+   "permittee_as_recorded": "WCCO Belting Inc",
+   "county": null,
+   "city": "WAHPETON",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": 0.001,
+   "major_minor": "Minor",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [
+    "Upper Red"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0026263"
+  },
+  {
+   "npdes_permit": "ND0026361",
+   "state": "ND",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "OLIVER",
+   "city": "CENTER",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4911"
+   ],
+   "naics_codes": [
+    "221121"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-04-01",
+   "permit_expiration": "2030-03-31",
+   "receiving_waters_echo": [
+    "NELSON LAKE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0026361"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "ND0026301",
+   "state": "ND",
+   "facility": "SOUTH CENTRAL REGIONAL WATER DISTRICT - BURLEIGH COUNTY",
+   "permittee_as_recorded": "South Central Regional Water District",
+   "county": "BURLEIGH COUNTY",
+   "city": "BISMARCK",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4941"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "Missouri River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0026301"
+  },
+  {
+   "npdes_permit": "ND0026344",
+   "state": "ND",
+   "facility": "SOUTH CENTRAL REGIONAL WATER DISTRICT - EMMONS COUNTY",
+   "permittee_as_recorded": "South Central Regional Water District",
+   "county": "EMMONS",
+   "city": "LINTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4941"
+   ],
+   "naics_codes": [
+    "221310"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-04-01",
+   "permit_expiration": "2030-03-31",
+   "receiving_waters_echo": [
+    "MISSOURI RIVER / LAKE OAHE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#ND0026344"
+  }
+ ]
+}

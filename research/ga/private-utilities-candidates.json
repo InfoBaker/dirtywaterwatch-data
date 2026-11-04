@@ -1,0 +1,2568 @@
+{
+ "state": "GA",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:00Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 58,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 10,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 1,
+  "permittee_name_removed": 3,
+  "by_legal_form_proposed": {
+   "business or industrial": 21,
+   "campground or resort": 6,
+   "institution": 3,
+   "investor-owned utility": 13,
+   "mobile-home park": 10,
+   "not stated by the names": 3,
+   "private club": 2
+  },
+  "public_by_name": 0
+ },
+ "candidates": [
+  {
+   "npdes_permit": "GA0000060",
+   "state": "GA",
+   "facility": "RABUN COUNTY - RABUN APPAREL",
+   "permittee_as_recorded": "RABUN APPAREL INC.",
+   "county": null,
+   "city": "RABUN GAP",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [
+    "LITTLE TENNESSEE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0000060"
+  },
+  {
+   "npdes_permit": "GA0021873",
+   "state": "GA",
+   "facility": "GECON LEASING, LLC - MAYFIELD WPCP",
+   "permittee_as_recorded": "Gecon Leasing , LLC",
+   "county": "WARREN COUNTY",
+   "city": "JEWELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "6531"
+   ],
+   "naics_codes": [
+    "531390"
+   ],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2021-10-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [
+    "unnamed tributary of Fulsome Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0021873"
+  },
+  {
+   "npdes_permit": "GA0022284",
+   "state": "GA",
+   "facility": "KENDALL SOUTH LLC",
+   "permittee_as_recorded": "Kendall South LLC",
+   "county": "BUTTS",
+   "city": "JACKSON",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2026-02-01",
+   "permit_expiration": "2031-01-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF CABIN CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0022284"
+  },
+  {
+   "npdes_permit": "GA0022314",
+   "state": "GA",
+   "facility": "GEORGIA BAPTIST CHILDREN'S HOME AND FAMILY MINISTRIES, INC. - MEANSVILLE CAMPUS",
+   "permittee_as_recorded": "Georgia Baptist Children's Home & Family Ministries, Inc.",
+   "county": "PIKE",
+   "city": "MEANSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8661"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.006,
+   "major_minor": "Minor",
+   "permit_effective": "2024-12-01",
+   "permit_expiration": "2029-11-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO THREE MILE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0022314"
+  },
+  {
+   "npdes_permit": "GA0022489",
+   "state": "GA",
+   "facility": "PARAKEET COMMUNITIES - SHADY ACRES MOBILE HOME COMMUNITY WPCP",
+   "permittee_as_recorded": "Parakeet Communities",
+   "county": "GLYNN",
+   "city": "BRUNSWICK",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.016,
+   "major_minor": "Minor",
+   "permit_effective": "2021-10-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [
+    "COWPEN CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0022489"
+  },
+  {
+   "npdes_permit": "GA0022527",
+   "state": "GA",
+   "facility": "CGR GEORGIA LLC - CALLAWAY RESORT & GARDENS WPCP",
+   "permittee_as_recorded": "CGR Georgia, LLC",
+   "county": "HARRIS",
+   "city": "PINE MOUNTAIN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "721110"
+   ],
+   "design_flow_mgd": 0.5,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2031-07-31",
+   "receiving_waters_echo": [
+    "Unnamed Tributary of Mountain Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0022527"
+  },
+  {
+   "npdes_permit": "GA0022594",
+   "state": "GA",
+   "facility": "AASHANA, LLC - SHELL FOOD MART WPCP",
+   "permittee_as_recorded": "AASHANA, LLC",
+   "county": "HOUSTON",
+   "city": "ELKO",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "5411",
+    "5541"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0,
+   "major_minor": "Minor",
+   "permit_effective": "2025-02-01",
+   "permit_expiration": "2030-01-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO BIG CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0022594"
+  },
+  {
+   "npdes_permit": "GA0022616",
+   "state": "GA",
+   "facility": "ALLATOONA LANDING MARINA RESORT - ALLATOONA CAMPGROUND WPCP",
+   "permittee_as_recorded": "Allatoona Landing Marine Resort",
+   "county": "BARTOW",
+   "city": "CARTERSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "7033"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2020-01-01",
+   "permit_expiration": "2024-12-31",
+   "receiving_waters_echo": [
+    "Lake Allatoona"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0022616"
+  },
+  {
+   "npdes_permit": "GA0022675",
+   "state": "GA",
+   "facility": "UTILITIES, INC. OF GEORGIA - HOLLAND'S FOLLY SUBDIVISION WPCP",
+   "permittee_as_recorded": "Utilities, Inc. of Georgia",
+   "county": "DOUGHERTY",
+   "city": "ALBANY",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "9511"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.045,
+   "major_minor": "Minor",
+   "permit_effective": "2019-04-01",
+   "permit_expiration": "2024-03-31",
+   "receiving_waters_echo": [
+    "Dry Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0022675"
+  },
+  {
+   "npdes_permit": "GA0023043",
+   "state": "GA",
+   "facility": "GREENLEAF INVESTMENT PARTNERS L026D, LLC - DIXIE MOBILE HOME PARK WPCP",
+   "permittee_as_recorded": "Greenleaf Investment Partners L026, LLC",
+   "county": "HALL",
+   "city": "GAINESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0043,
+   "major_minor": "Minor",
+   "permit_effective": "2018-11-01",
+   "permit_expiration": "2023-10-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO FLAT CREEK"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0023043"
+  },
+  {
+   "npdes_permit": "GA0023388",
+   "state": "GA",
+   "facility": "YES FOUR SEASONS, LLC - FOUR SEASONS MOBILE HOME COMMUNITY WPCP",
+   "permittee_as_recorded": "YES Four Seasons, LLC",
+   "county": "JASPER",
+   "city": "FAYETTEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.019,
+   "major_minor": "Minor",
+   "permit_effective": "2019-05-01",
+   "permit_expiration": "2024-04-30",
+   "receiving_waters_echo": [
+    "Tar Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0023388"
+  },
+  {
+   "npdes_permit": "GA0024015",
+   "state": "GA",
+   "facility": "GREENLEAF INVESTMENT PROPERTIES, LLC - HIGHLAND MOBILE HOME VILLAGE WPCP",
+   "permittee_as_recorded": "Greenleaf Investment Properties, LLC",
+   "county": "HALL",
+   "city": "GAINESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2022-09-01",
+   "permit_expiration": "2027-08-31",
+   "receiving_waters_echo": [
+    "NONE IDENTIFIED, UNNAMED TRIBUTARY OF NORTH OCONEE RIVER",
+    "Unnamed Tributary of North Oconee River",
+    "None Identified"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0024015"
+  },
+  {
+   "npdes_permit": "GA0024465",
+   "state": "GA",
+   "facility": "EVANS 522, LLC - EVANS 522 WPCP",
+   "permittee_as_recorded": "Evans 522, LLC",
+   "county": "TIFT",
+   "city": "CHULA",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "7011"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0,
+   "major_minor": "Minor",
+   "permit_effective": "2019-11-01",
+   "permit_expiration": "2024-10-31",
+   "receiving_waters_echo": [
+    "Unnamed Tributary to Middle Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0024465"
+  },
+  {
+   "npdes_permit": "GA0025305",
+   "state": "GA",
+   "facility": "CF MH II SOUTH HAMPTON, LLC. - SOUTH HAMPTON MOBILE HOME COMMUNITY WPCP",
+   "permittee_as_recorded": "CF MH II South Hampton, LLC",
+   "county": "HENRY",
+   "city": "HAMPTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0301,
+   "major_minor": "Minor",
+   "permit_effective": "2024-12-01",
+   "permit_expiration": "2029-11-30",
+   "receiving_waters_echo": [
+    "Unnamed Tributary of Thompson Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0025305"
+  },
+  {
+   "npdes_permit": "GA0025798",
+   "state": "GA",
+   "facility": "TOCCOA FALLS COLLEGE - TOCCOA FALLS COLLEGE WPCP",
+   "permittee_as_recorded": "Toccoa Falls College",
+   "county": "STEPHENS",
+   "city": "TOCCOA FALLS",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "8221"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2021-06-01",
+   "permit_expiration": "2026-04-30",
+   "receiving_waters_echo": [
+    "TOCCOA FALLS CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0025798"
+  },
+  {
+   "npdes_permit": "GA0026891",
+   "state": "GA",
+   "facility": "UTILITIES INC, - WORTHY MANOR SUBDIVISION WPCP",
+   "permittee_as_recorded": "Utilities, Inc.",
+   "county": "WORTH",
+   "city": "ALBANY",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "1623"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.075,
+   "major_minor": "Minor",
+   "permit_effective": "2018-05-01",
+   "permit_expiration": "2023-04-30",
+   "receiving_waters_echo": [
+    "ROCKY BRANCH CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0026891"
+  },
+  {
+   "npdes_permit": "GA0027049",
+   "state": "GA",
+   "facility": "GREENLEAF INVESTMENT PARTNERS L052, LLC - BAKER & GLOVER MOBILE HOME PARK WPCP",
+   "permittee_as_recorded": "Greenleaf Investment Partners L052, LLC",
+   "county": "HALL",
+   "city": "GAINESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.018,
+   "major_minor": "Minor",
+   "permit_effective": "2019-06-01",
+   "permit_expiration": "2024-05-31",
+   "receiving_waters_echo": [
+    "Unnamed Tributary to the East Fork Little River",
+    "LITTLE RV/CHATTAHOOCHEE"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0027049"
+  },
+  {
+   "npdes_permit": "GA0027456",
+   "state": "GA",
+   "facility": "YMCA OF METROPOLITAN ATLANTA - LAKE ALLATOONA RECREATIONAL FACILITY WPCP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "BARTOW",
+   "city": "CARTERSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "7032"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2019-09-01",
+   "permit_expiration": "2024-08-31",
+   "receiving_waters_echo": [
+    "Lake Allatoona"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0027456"
+  },
+  {
+   "npdes_permit": "GA0030198",
+   "state": "GA",
+   "facility": "YES COMMUNITIES EXP2 WFC, LLC - MARNELLE MOBILE HOME ESTATES WPCP",
+   "permittee_as_recorded": "Yes Communities EXP2 WFC, LLC",
+   "county": "FAYETTE",
+   "city": "FAYETTEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2020-08-01",
+   "permit_expiration": "2025-07-31",
+   "receiving_waters_echo": [
+    "Unnamed Tributary of Pelham Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0030198"
+  },
+  {
+   "npdes_permit": "GA0030252",
+   "state": "GA",
+   "facility": "UTILITIES, INC. OF GEORGIA - BIG CANOE WPCP",
+   "permittee_as_recorded": "Utilities, Inc. of Georgia",
+   "county": "PICKENS",
+   "city": "JASPER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.25,
+   "major_minor": "Minor",
+   "permit_effective": "2020-11-01",
+   "permit_expiration": "2025-10-31",
+   "receiving_waters_echo": [
+    "East Branch Long Swamp Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0030252"
+  },
+  {
+   "npdes_permit": "GA0031526",
+   "state": "GA",
+   "facility": "ABP ENTERPRISES, LLC - ARBOR VILLAGE WPCP",
+   "permittee_as_recorded": "ABP Enterprises, LLC",
+   "county": "DOUGLAS",
+   "city": "DOUGLASVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.021,
+   "major_minor": "Minor",
+   "permit_effective": "2018-09-01",
+   "permit_expiration": "2023-08-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO ANNEEWAKEE CR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0031526"
+  },
+  {
+   "npdes_permit": "GA0031551",
+   "state": "GA",
+   "facility": "JOHNSON COUNTY LTC, LLC - SCOTT HEALTH & REHABILITATION WPCP",
+   "permittee_as_recorded": "Johnson Co. LTC, LLC",
+   "county": "EMANUEL",
+   "city": "ADRIAN",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "8051",
+    "8361"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0067,
+   "major_minor": "Minor",
+   "permit_effective": "2019-06-01",
+   "permit_expiration": "2024-05-31",
+   "receiving_waters_echo": [
+    "PENDLETON CREEK, UNNAMED TRIBUTARY OF PENDLETON CREEK",
+    "Unnamed Tributary of Pendleton Creek",
+    "PENDLETON CREEK"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0031551"
+  },
+  {
+   "npdes_permit": "GA0033189",
+   "state": "GA",
+   "facility": "SAVANNAH YACHT CLUB, INC. - SAVANNAH YACHT CLUB WPCP",
+   "permittee_as_recorded": "Savannah Yacht Club, Inc.",
+   "county": "CHATHAM",
+   "city": "SAVANNAH",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "private club",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "7997"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.00825,
+   "major_minor": "Minor",
+   "permit_effective": "2019-08-01",
+   "permit_expiration": "2024-07-31",
+   "receiving_waters_echo": [
+    "WILMINGTON RIVER, WILMINGTON RV",
+    "Wilmington River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0033189"
+  },
+  {
+   "npdes_permit": "GA0033928",
+   "state": "GA",
+   "facility": "SUNBELT PLANTATIONS INC. - MAGNOLIA PLANTATION WPCP",
+   "permittee_as_recorded": "Sunbelt Plantations Inc.",
+   "county": "TIFT COUNTY",
+   "city": "ELDORADO",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "5947"
+   ],
+   "naics_codes": [
+    "453220"
+   ],
+   "design_flow_mgd": 0.005,
+   "major_minor": "Minor",
+   "permit_effective": "2024-05-01",
+   "permit_expiration": "2029-04-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF LITTLE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0033928"
+  },
+  {
+   "npdes_permit": "GA0034291",
+   "state": "GA",
+   "facility": "CROSSVIEW CARE CENTER - CROSSVIEW CARE CENTER WPCP",
+   "permittee_as_recorded": "Crossview Care Center",
+   "county": "WILCOX",
+   "city": "PINEVIEW",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8051"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.012,
+   "major_minor": "Minor",
+   "permit_effective": "2026-02-01",
+   "permit_expiration": "2031-01-31",
+   "receiving_waters_echo": [
+    "Unnamed Tributary of Cedar Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0034291"
+  },
+  {
+   "npdes_permit": "GA0034754",
+   "state": "GA",
+   "facility": "LANDING PROPERTY - STERLING MOBILE HOME PARK WPCP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "GLYNN",
+   "city": "BRUNSWICK",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.009,
+   "major_minor": "Minor",
+   "permit_effective": "2021-05-01",
+   "permit_expiration": "2026-04-30",
+   "receiving_waters_echo": [
+    "Unnamed tributary to Cowpen Creek (Satilla Riv",
+    "Unnamed Tributary of Cowpen Creek - sample 300 fee",
+    "UNNAMED TRIB/COWPEM CRK"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0034754"
+  },
+  {
+   "npdes_permit": "GA0034819",
+   "state": "GA",
+   "facility": "CONSOLIDATED UTILITIES, INC. - LARCHMONT ESTATES WPCP",
+   "permittee_as_recorded": "Consolidated Utilities, Inc.",
+   "county": "CHATHAM",
+   "city": "SAVANNAH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 1.5,
+   "major_minor": "Minor",
+   "permit_effective": "2021-10-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [
+    "Little Ogeechee River",
+    "NA"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0034819"
+  },
+  {
+   "npdes_permit": "GA0034959",
+   "state": "GA",
+   "facility": "WALESKA ABBINGTON HALL LP - MOUNTAINBROOK CENTER WPCP",
+   "permittee_as_recorded": "Waleska Abbington Hall LP",
+   "county": "CHEROKEE",
+   "city": "WALESKA",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "6512"
+   ],
+   "naics_codes": [
+    "531120"
+   ],
+   "design_flow_mgd": 0.006,
+   "major_minor": "Minor",
+   "permit_effective": "2025-04-01",
+   "permit_expiration": "2030-03-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF MOORE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0034959"
+  },
+  {
+   "npdes_permit": "GA0035441",
+   "state": "GA",
+   "facility": "TALLULAH FALLS SCHOOL - TALLULAH FALLS SCHOOL WPCP",
+   "permittee_as_recorded": "Tallulah Falls School",
+   "county": "HABERSHAM",
+   "city": "TALLULAH FALLS",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2021-09-01",
+   "permit_expiration": "2026-08-31",
+   "receiving_waters_echo": [
+    "NA, UNNAMED TRIBUTARY TO TALLULAH RIVER",
+    "Unnamed tributary to Tallulah River",
+    "NA"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0035441"
+  },
+  {
+   "npdes_permit": "GA0035491",
+   "state": "GA",
+   "facility": "POYNTSOURCE SOLUTIONS, INC. - LAKEVIEW UTILITIES WPCP",
+   "permittee_as_recorded": "Poyntsource Solutions, Inc.",
+   "county": "ROCKDALE",
+   "city": "CONYERS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.149,
+   "major_minor": "Minor",
+   "permit_effective": "2025-03-01",
+   "permit_expiration": "2029-08-31",
+   "receiving_waters_echo": [
+    "Yellow River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0035491"
+  },
+  {
+   "npdes_permit": "GA0035599",
+   "state": "GA",
+   "facility": "RIVER OAKS MOBILE HOME PARK WPCP",
+   "permittee_as_recorded": "River Oaks Moblie Home Park",
+   "county": "CAMDEN",
+   "city": "WOODBINE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2020-12-01",
+   "permit_expiration": "2025-11-30",
+   "receiving_waters_echo": [
+    "Unnamed tributary of Crooked River",
+    "CROOKED RIVER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0035599"
+  },
+  {
+   "npdes_permit": "GA0037940",
+   "state": "GA",
+   "facility": "VULCAN MATERIALS CO",
+   "permittee_as_recorded": "VULCAN MATL -WALKER CO QUARRY",
+   "county": null,
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [
+    "DUCK CRK"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0037940"
+  },
+  {
+   "npdes_permit": "GA0038440",
+   "state": "GA",
+   "facility": "FULTON COUNTY - CAULEY CREEK WPCP",
+   "permittee_as_recorded": "FULTON CO-CAULEY CRK",
+   "county": null,
+   "city": "DULUTH",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": 5.0,
+   "major_minor": "Major",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [
+    "CAULEY CRK/CHATTAHOOCHEE RV"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0038440"
+  },
+  {
+   "npdes_permit": "GA0038512",
+   "state": "GA",
+   "facility": "PENTAGON PROPERTIES, INC. - CEDAR VILLAGE MANUFACTURED HOME COMMUNITY WPCP",
+   "permittee_as_recorded": "Pentagon Proterties, Inc.",
+   "county": "CARROLL",
+   "city": "CARROLLTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.033,
+   "major_minor": "Minor",
+   "permit_effective": "2018-11-01",
+   "permit_expiration": "2023-10-31",
+   "receiving_waters_echo": [
+    "Unnamed Tributary to Whooping Creek",
+    "UNNAMED TRIB TO WHOPPING CREEK"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0038512"
+  },
+  {
+   "npdes_permit": "GA0038903",
+   "state": "GA",
+   "facility": "SETTENDOWN PUBLIC UTILITY, LLC - HAMPTON CREEK WRF",
+   "permittee_as_recorded": "Settendown Public Utility, LLC",
+   "county": "FORSYTH",
+   "city": "CUMMING",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "1623",
+    "4952"
+   ],
+   "naics_codes": [
+    "237110"
+   ],
+   "design_flow_mgd": 0.45,
+   "major_minor": "Minor",
+   "permit_effective": "2017-12-01",
+   "permit_expiration": "2022-11-30",
+   "receiving_waters_echo": [
+    "NA",
+    "Settingdown Creek",
+    "SETTINGDOWN CREEK-ETOWAH RB"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0038903"
+  },
+  {
+   "npdes_permit": "GA0046400",
+   "state": "GA",
+   "facility": "MOUNTAIN LAKES WATER & SEWER AUTHORITY, INC. - MOUNTAIN LAKE RESORT WPCP",
+   "permittee_as_recorded": "Mountain Lakes Water & Sewer Authority, Inc.",
+   "county": "WHITE",
+   "city": "CLEVELAND",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "7011",
+    "7033"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.009,
+   "major_minor": "Minor",
+   "permit_effective": "2023-04-01",
+   "permit_expiration": "2028-03-31",
+   "receiving_waters_echo": [
+    "Lake Qualatchee"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0046400"
+  },
+  {
+   "npdes_permit": "GA0049506",
+   "state": "GA",
+   "facility": "GARDEN ACRES UTILITIES, INC - GARDEN ACRES ESTATES WPCP",
+   "permittee_as_recorded": "Garden Acres Estates",
+   "county": "CHATHAM",
+   "city": "POOLER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.05,
+   "major_minor": "Minor",
+   "permit_effective": "2020-06-01",
+   "permit_expiration": "2025-05-31",
+   "receiving_waters_echo": [
+    "Hardin Canal"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0049506"
+  },
+  {
+   "npdes_permit": "GA0050274",
+   "state": "GA",
+   "facility": "COMMUNITY SERVICES LLLP - TROUBLESOME CREEK WRF",
+   "permittee_as_recorded": "Community Services L.L.L.P.",
+   "county": "DEKALB COUNTY",
+   "city": "ATLANTA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.69,
+   "major_minor": "Minor",
+   "permit_effective": "2025-12-01",
+   "permit_expiration": "2030-11-30",
+   "receiving_waters_echo": [
+    "Troublesome Creek",
+    "NA"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GA0050274"
+  },
+  {
+   "npdes_permit": "GAJ010583",
+   "state": "GA",
+   "facility": "KINGSTON PARK LLC",
+   "permittee_as_recorded": "Kingston Park LLC",
+   "county": "BARTOW COUNTY",
+   "city": "KINGSTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.058,
+   "major_minor": "Minor",
+   "permit_effective": "2021-07-01",
+   "permit_expiration": "2026-06-30",
+   "receiving_waters_echo": [
+    "NA",
+    "stream"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ010583"
+  },
+  {
+   "npdes_permit": "GAJ020030",
+   "state": "GA",
+   "facility": "STOKER UTILITIES, LLC - HAMILTON POINT/HEATHER WOODS SUBDIVISION WPCP",
+   "permittee_as_recorded": "Stoker Utilities, LLC",
+   "county": "LOWNDES COUNTY",
+   "city": "VALDOSTA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2022-02-01",
+   "permit_expiration": "2027-01-31",
+   "receiving_waters_echo": [
+    "NA"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ020030"
+  },
+  {
+   "npdes_permit": "GAJ030708",
+   "state": "GA",
+   "facility": "MCLEMORE SEWER, INC. - MCLEMORE WRF",
+   "permittee_as_recorded": "McLemore Sewer, Inc.",
+   "county": "WALKER COUNTY",
+   "city": "RISING FAWN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.07,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2026-06-30",
+   "receiving_waters_echo": [
+    "N/A",
+    "None",
+    "Surface water adjacent or traversing the LAS; Ups"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ030708"
+  },
+  {
+   "npdes_permit": "GAJ030753",
+   "state": "GA",
+   "facility": "RAMAH DAROM, INC. - CAMP RAMAH DAROM WPCP",
+   "permittee_as_recorded": "Ramah Darom, Inc.",
+   "county": "RABUN",
+   "city": "CLAYTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2025-11-01",
+   "permit_expiration": "2030-10-31",
+   "receiving_waters_echo": [
+    "NA",
+    "Persimmon Creek"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ030753"
+  },
+  {
+   "npdes_permit": "GAJ030768",
+   "state": "GA",
+   "facility": "WATER UTILITY MANAGEMENT, LLC - WATERFORD LANDING WPCP",
+   "permittee_as_recorded": "Water Utility Management, LLC",
+   "county": "BRYAN COUNTY",
+   "city": "RICHMOND HILL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.104,
+   "major_minor": "Minor",
+   "permit_effective": "2025-02-01",
+   "permit_expiration": "2030-01-31",
+   "receiving_waters_echo": [
+    "N/A"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ030768"
+  },
+  {
+   "npdes_permit": "GAJ030797",
+   "state": "GA",
+   "facility": "CHATHAM WATER UTILITY - SANCTUARY COVE AT ST. ANDREWS SOUND WRF",
+   "permittee_as_recorded": "Chatham Water Utility, LLC",
+   "county": "CAMDEN COUNTY",
+   "city": "WAVERLY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.13,
+   "major_minor": "Minor",
+   "permit_effective": "2021-03-01",
+   "permit_expiration": "2026-02-28",
+   "receiving_waters_echo": [
+    "N/A (REUSE SYSTEM)"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ030797"
+  },
+  {
+   "npdes_permit": "GAJ030952",
+   "state": "GA",
+   "facility": "WATER UTILITY MANAGEMENT - STONEGATE SUBDIVISION WPCP",
+   "permittee_as_recorded": "Water Utility Management",
+   "county": "EFFINGHAM COUNTY",
+   "city": "EDEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0405,
+   "major_minor": "Minor",
+   "permit_effective": "2020-12-01",
+   "permit_expiration": "2025-11-30",
+   "receiving_waters_echo": [
+    "NA"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ030952"
+  },
+  {
+   "npdes_permit": "GAJ030984",
+   "state": "GA",
+   "facility": "CHATHAM WATER UTILITY - RIVER PLACE PLANTATION WRF",
+   "permittee_as_recorded": "Chatham Water Utility",
+   "county": "CAMDEN COUNTY",
+   "city": "WAVERLY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.045,
+   "major_minor": "Minor",
+   "permit_effective": "2021-06-01",
+   "permit_expiration": "2026-05-31",
+   "receiving_waters_echo": [
+    "N/A, NA",
+    "NA",
+    "n/a"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ030984"
+  },
+  {
+   "npdes_permit": "GAJ040027",
+   "state": "GA",
+   "facility": "MARCUS JEWISH COMMUNITY CENTER - CAMP BARNEY MEDINTZ WPCP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "WHITE",
+   "city": "CLEVELAND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.027,
+   "major_minor": "Minor",
+   "permit_effective": "2019-11-01",
+   "permit_expiration": "2024-10-31",
+   "receiving_waters_echo": [
+    "na"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ040027"
+  },
+  {
+   "npdes_permit": "GAJ040042",
+   "state": "GA",
+   "facility": "CONSOLIDATED UTILITIES, INC. - BLACK CREEK WPCP",
+   "permittee_as_recorded": "Consolidated Utilities, Inc.",
+   "county": "CHATHAM COUNTY",
+   "city": "SAVANNAH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.1,
+   "major_minor": "Minor",
+   "permit_effective": "2021-11-01",
+   "permit_expiration": "2026-10-31",
+   "receiving_waters_echo": [
+    "n/a"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ040042"
+  },
+  {
+   "npdes_permit": "GAJ040048",
+   "state": "GA",
+   "facility": "A&D CAMPING, LLC - BLUE RIDGE RV RESORT WPCP",
+   "permittee_as_recorded": "A&D Camping, LLC",
+   "county": "FANNIN COUNTY",
+   "city": "MINERAL BLUFF",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7033"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.00855,
+   "major_minor": "Minor",
+   "permit_effective": "2023-06-01",
+   "permit_expiration": "2028-05-31",
+   "receiving_waters_echo": [
+    "NA",
+    "Hemptown Creek"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ040048"
+  },
+  {
+   "npdes_permit": "GAJ040050",
+   "state": "GA",
+   "facility": "DIVINE VILLAGE MOTORCOACH & CABIN RESORT - DIVINE VILLAGE DEVELOPMENT WPCP",
+   "permittee_as_recorded": "DiVine Village Development LLC",
+   "county": null,
+   "city": "DAHLONEGA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-10-01",
+   "permit_expiration": "2029-09-30",
+   "receiving_waters_echo": [
+    "NA",
+    "Lake Arthur"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ040050"
+  },
+  {
+   "npdes_permit": "GAJ040052",
+   "state": "GA",
+   "facility": "VINEYARDS RV - VINEYARDS RV PARK WPCP",
+   "permittee_as_recorded": "Vinyards RV",
+   "county": null,
+   "city": "CLEVELAND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-01",
+   "permit_expiration": "2029-06-30",
+   "receiving_waters_echo": [
+    "NA"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ040052"
+  },
+  {
+   "npdes_permit": "GAJ040053",
+   "state": "GA",
+   "facility": "FIDES WATERSIDE, LLC. - WATERSIDE NORTH WRF",
+   "permittee_as_recorded": "Fides Waterside, LLC.",
+   "county": "HALL COUNTY",
+   "city": "BUFORD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-04-01",
+   "permit_expiration": "2030-03-31",
+   "receiving_waters_echo": [
+    "N/a",
+    "Unnamed tributary of Lake Lanier"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ040053"
+  },
+  {
+   "npdes_permit": "GAJ040058",
+   "state": "GA",
+   "facility": "GRIFFIN RESIDUALS - REGIONAL BIOSOLIDS FACILITY",
+   "permittee_as_recorded": "Griffin Residuals, LLC",
+   "county": "JACKSON COUNTY",
+   "city": "JEFFERSON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-03-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ040058"
+  },
+  {
+   "npdes_permit": "GAJ040060",
+   "state": "GA",
+   "facility": "ATLANTA MOTORSPORTS PARK, LLC - ATLANTA MOTORSPORTS PARK WPCP",
+   "permittee_as_recorded": "Atlanta Motorsports Park, LLC",
+   "county": null,
+   "city": "DAWSONVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.018,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "NA"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ040060"
+  },
+  {
+   "npdes_permit": "GAJ040062",
+   "state": "GA",
+   "facility": "LATHEM CREEK PARTNERS - ESTATES AT LATHEM CREEK WPCP",
+   "permittee_as_recorded": "Lathem Creek Partners, LLC",
+   "county": null,
+   "city": "GAINESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "N/A"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ040062"
+  },
+  {
+   "npdes_permit": "GAJ040066",
+   "state": "GA",
+   "facility": "ROSE FOUNDERS LLC - ROSE GOLF AND RESIDENTIAL DEVELOPMENT WPCP",
+   "permittee_as_recorded": "Rose Founders LLC",
+   "county": null,
+   "city": "HULL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "private club",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.063,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "NA"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAJ040066"
+  },
+  {
+   "npdes_permit": "GAU020250",
+   "state": "GA",
+   "facility": "INDIAN CREEK WPCP",
+   "permittee_as_recorded": "INDIAN CREEK - HENRY CO",
+   "county": null,
+   "city": "LOCUST GROVE",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAU020250"
+  },
+  {
+   "npdes_permit": "GAU020296",
+   "state": "GA",
+   "facility": "PUMPKINVINE WATER REUSE",
+   "permittee_as_recorded": "PAULDING CO-PUMPKINVINE WRF",
+   "county": null,
+   "city": "ACWORTH",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [
+    "COOSA RVR BASIN"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#GAU020296"
+  }
+ ],
+ "public_by_name": []
+}

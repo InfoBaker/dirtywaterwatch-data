@@ -1,0 +1,5703 @@
+{
+ "state": "IN",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:00Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 131,
+  "already_in_registry": 0,
+  "in_research": 1,
+  "in_plant_outfall_registry": 34,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 6,
+  "by_legal_form_proposed": {
+   "business or industrial": 24,
+   "campground or resort": 9,
+   "homeowners' association": 4,
+   "institution": 6,
+   "investor-owned utility": 15,
+   "mobile-home park": 50,
+   "not stated by the names": 22,
+   "private club": 1
+  },
+  "public_by_name": 0
+ },
+ "candidates": [
+  {
+   "npdes_permit": "IN0020753",
+   "state": "IN",
+   "facility": "MIAMI VILLAGE MOBILE HOME PARK",
+   "permittee_as_recorded": "MIAMI VILLAGE MOBILE HOME PARK",
+   "county": "WHITLEY",
+   "city": "COLUMBIA CITY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "EEL R (WABASH)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0020753"
+  },
+  {
+   "npdes_permit": "IN0024970",
+   "state": "IN",
+   "facility": "OAK MEADOWS MHC",
+   "permittee_as_recorded": "OAK MEADOWS MHC",
+   "county": "JOHNSON",
+   "city": "GREENWOOD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0406,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "W FK WHITE R VIA TRAVIS CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0024970"
+  },
+  {
+   "npdes_permit": "IN0025208",
+   "state": "IN",
+   "facility": "SUBURBAN ACRES MOBILE HOME PARK",
+   "permittee_as_recorded": "SUBURBAN ACRES MOBILE HOME PARK",
+   "county": "KOSCIUSKO",
+   "city": "WARSAW",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.038,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-01",
+   "permit_expiration": "2031-04-30",
+   "receiving_waters_echo": [
+    "TIPPECANOE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0025208"
+  },
+  {
+   "npdes_permit": "IN0025356",
+   "state": "IN",
+   "facility": "INDIANAPOLIS KOA CAMPGROUND",
+   "permittee_as_recorded": "INDIANAPOLIS KOA CAMPGROUND WWTP",
+   "county": "HANCOCK",
+   "city": "GREENFIELD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7033"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0103,
+   "major_minor": "Minor",
+   "permit_effective": "2023-05-01",
+   "permit_expiration": "2028-04-30",
+   "receiving_waters_echo": [
+    "OR/E FK WHITE RIVER/BUCK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0025356"
+  },
+  {
+   "npdes_permit": "IN0025437",
+   "state": "IN",
+   "facility": "PHILLY ESTATES, LLC",
+   "permittee_as_recorded": "PHILLY ESTATES WWTP",
+   "county": "HANCOCK",
+   "city": "GREENFIELD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2025-04-01",
+   "permit_expiration": "2030-03-31",
+   "receiving_waters_echo": [
+    "E FK WHT/DRIFTWOOD R/SUGAR/EASTES D"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0025437"
+  },
+  {
+   "npdes_permit": "IN0025526",
+   "state": "IN",
+   "facility": "TALL TIMBERS MOBILE HOME PARK",
+   "permittee_as_recorded": "TALL TIMBERS MOBILE HOME PARK",
+   "county": "HAMILTON",
+   "city": "NOBLESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0126,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-03-31",
+   "receiving_waters_echo": [
+    "OR/W FK WHITE R/STONEY CR/UNNMD TRB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0025526"
+  },
+  {
+   "npdes_permit": "IN0025569",
+   "state": "IN",
+   "facility": "PINE RIDGE ESTATES MOBILE HOME COMMUNITY",
+   "permittee_as_recorded": "PINE RIDGE ESTATES MOBILE HOME COMMUNITY",
+   "county": "BOONE",
+   "city": "ZIONSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "W FK WHITE R/EAGLE CRK/UNNAMED TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0025569"
+  },
+  {
+   "npdes_permit": "IN0025798",
+   "state": "IN",
+   "facility": "DAUGHTERS OF CHARITY MINISTRIES",
+   "permittee_as_recorded": "DAUGHTERS OF CHARITY MINISTRIES WWTP",
+   "county": "VANDERBURGH",
+   "city": "EVANSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8361"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.021,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "OR/WABASH RIVER/BIG RIVER/LITTLE CR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0025798"
+  },
+  {
+   "npdes_permit": "IN0029815",
+   "state": "IN",
+   "facility": "SOMERSET SUBDIVISION WWTP",
+   "permittee_as_recorded": "SOMERSET SUBDIVISION",
+   "county": "WABASH",
+   "city": "SOMERSET",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0845,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "OR/WABASH R/MISSISSENOWA RIV/RESRVR, OR/WABASH R/MISSISSINEWA RIV/RESRVR",
+    "OR/WABASH R/MISSISSENOWA RIV/RESRVR"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0029815"
+  },
+  {
+   "npdes_permit": "IN0029963",
+   "state": "IN",
+   "facility": "WEATHER ROCK CAMPGROUND WWTP",
+   "permittee_as_recorded": "WEATHER ROCK KAMPGROUND WWTP",
+   "county": "GIBSON",
+   "city": "HAUBSTADT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7033"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0058,
+   "major_minor": "Minor",
+   "permit_effective": "2023-05-01",
+   "permit_expiration": "2028-04-30",
+   "receiving_waters_echo": [
+    "OHIO RIVER/HURRICANE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0029963"
+  },
+  {
+   "npdes_permit": "IN0030023",
+   "state": "IN",
+   "facility": "ASHBURY RIDGE MANF HOME COMMUNITY WWTP",
+   "permittee_as_recorded": "ASHBURY RIDGE MANUFACTURED HOME COM.",
+   "county": "MORGAN",
+   "city": "MOORESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.039,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "OR/W FK WHITE/WHITE LICK/UNNMD TRIB"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0030023"
+  },
+  {
+   "npdes_permit": "IN0030651",
+   "state": "IN",
+   "facility": "SOUTH HAVEN SEWER WORKS WWTP - AQUA INDIANA, INC.",
+   "permittee_as_recorded": "SOUTH HAVEN SEWER WORKS INC WWTP",
+   "county": "PORTER",
+   "city": "VALPARAISO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 2.0,
+   "major_minor": "Major",
+   "permit_effective": "2024-08-01",
+   "permit_expiration": "2029-07-31",
+   "receiving_waters_echo": [
+    "LT CALUMET R VIA SALT CREEK",
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 10,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0030651"
+  },
+  {
+   "npdes_permit": "IN0030881",
+   "state": "IN",
+   "facility": "HIDEAWAY HILLS MHP WWTP",
+   "permittee_as_recorded": "HIDEAWAY HILLS MOBILE HOME PARK WWTP",
+   "county": "KOSCIUSKO",
+   "city": "WARSAW",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0366,
+   "major_minor": "Minor",
+   "permit_effective": "2026-09-01",
+   "permit_expiration": "2031-08-31",
+   "receiving_waters_echo": [
+    "OR/WABASH/TIPPECN/BOGGS/SICKLE LAKE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0030881"
+  },
+  {
+   "npdes_permit": "IN0030902",
+   "state": "IN",
+   "facility": "ECHO LAKE MOBILE HOME COMMUNITY",
+   "permittee_as_recorded": "ECHO LAKE MOBILE HOME COMMUNITY",
+   "county": "MORGAN",
+   "city": "MOORESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.1,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "WHITE R/WHITE LICK CRK/MCCRACKEN CR"
+   ],
+   "external_outfalls": 4,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0030902"
+  },
+  {
+   "npdes_permit": "IN0031119",
+   "state": "IN",
+   "facility": "SHOREWOOD FOREST UTILITIES",
+   "permittee_as_recorded": "SHOREWOOD FOREST UTILITIES INC.",
+   "county": "PORTER",
+   "city": "VALPARAISO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.45,
+   "major_minor": "Minor",
+   "permit_effective": "2023-05-01",
+   "permit_expiration": "2028-04-30",
+   "receiving_waters_echo": [
+    "LT CALUMET R VIA SALT CR VIA TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0031119"
+  },
+  {
+   "npdes_permit": "IN0031551",
+   "state": "IN",
+   "facility": "HSI PROPERTIES, INC.",
+   "permittee_as_recorded": "HSI PROPERTIES, INC",
+   "county": "BARTHOLOMEW",
+   "city": "HOPE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0156,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-01",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "OR/E FK WHITE R/HAW CR/SLASH DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0031551"
+  },
+  {
+   "npdes_permit": "IN0031763",
+   "state": "IN",
+   "facility": "MACONAQUAH SCHOOL CORP",
+   "permittee_as_recorded": "MACONAQUAH SCHOOL WWTP",
+   "county": "MIAMI",
+   "city": "BUNKER HILL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "611110"
+   ],
+   "design_flow_mgd": 0.075,
+   "major_minor": "Minor",
+   "permit_effective": "2025-04-01",
+   "permit_expiration": "2030-03-31",
+   "receiving_waters_echo": [
+    "OR/WABASH R/PIPE CREEK/STORM SEWER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0031763"
+  },
+  {
+   "npdes_permit": "IN0031844",
+   "state": "IN",
+   "facility": "OAK BROOK ESTATES",
+   "permittee_as_recorded": "OAK BROOK ESTATES",
+   "county": "HOWARD",
+   "city": "KOKOMO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.07,
+   "major_minor": "Minor",
+   "permit_effective": "2025-03-01",
+   "permit_expiration": "2030-02-28",
+   "receiving_waters_echo": [
+    "WILDCAT CR VIA KOKOMO CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0031844"
+  },
+  {
+   "npdes_permit": "IN0031879",
+   "state": "IN",
+   "facility": "DRIFTSIDE MOBILE HOME PARK",
+   "permittee_as_recorded": "DRIFTSIDE MOBILE HOME PARK",
+   "county": "BARTHOLOMEW",
+   "city": "TAYLORSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0354,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "DRIFTWOOD R TO E FK WHITE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0031879"
+  },
+  {
+   "npdes_permit": "IN0032107",
+   "state": "IN",
+   "facility": "INDIAN SPRINGS CAMPGROUND",
+   "permittee_as_recorded": "INDIAN SPRINGS CAMPGROUND",
+   "county": "DE KALB",
+   "city": "GARRETT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7033"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.04,
+   "major_minor": "Minor",
+   "permit_effective": "2022-11-01",
+   "permit_expiration": "2027-10-31",
+   "receiving_waters_echo": [
+    "LE/ST JOSEPH/CEDAR/LITTLE CEDAR CRK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0032107"
+  },
+  {
+   "npdes_permit": "IN0032140",
+   "state": "IN",
+   "facility": "CLIFTY CREEK MOBILE HOME PARK WWTP",
+   "permittee_as_recorded": "CLIFTY CREEK MOBILE HOME PARK WWTP",
+   "county": "BARTHOLOMEW",
+   "city": "COLUMBUS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2024-10-01",
+   "permit_expiration": "2029-09-30",
+   "receiving_waters_echo": [
+    "CLIFTY CR VIA TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0032140"
+  },
+  {
+   "npdes_permit": "IN0033065",
+   "state": "IN",
+   "facility": "NORTH CENTRAL MOBILE HOME PARK",
+   "permittee_as_recorded": "NORTH CENTRAL MOBILE HOME PARK",
+   "county": "ELKHART",
+   "city": "BRISTOL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.12,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-01",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "LM/ST JOSEPH RIVER/SHEEP CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0033065"
+  },
+  {
+   "npdes_permit": "IN0035521",
+   "state": "IN",
+   "facility": "HENRYVILLE MEMBERSHIP SANITATION CORP",
+   "permittee_as_recorded": "HENRYVILLE MEMBERSHIP SANITATION CORP",
+   "county": "CLARK",
+   "city": "HENRYVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.24,
+   "major_minor": "Minor",
+   "permit_effective": "2024-06-01",
+   "permit_expiration": "2029-05-31",
+   "receiving_waters_echo": [
+    "SILVER CR VIA MILLER FORK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0035521"
+  },
+  {
+   "npdes_permit": "IN0036412",
+   "state": "IN",
+   "facility": "MILLWOOD ACRES MHP LLC",
+   "permittee_as_recorded": "MILLWOOD ACRES MHP LLC",
+   "county": "KOSCIUSKO",
+   "city": "ETNA GREEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.007438,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [
+    "TIPPECANOE R VIA DAUSMAN DITCH TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0036412"
+  },
+  {
+   "npdes_permit": "IN0036803",
+   "state": "IN",
+   "facility": "LA LUMIERE SCHOOL",
+   "permittee_as_recorded": "LA LUMIERE SCHOOL, INC.",
+   "county": "LA PORTE",
+   "city": "LA PORTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "GALENA R VIA LAKE OUTFALL DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0036803"
+  },
+  {
+   "npdes_permit": "IN0036901",
+   "state": "IN",
+   "facility": "JONES ESTATES RIVERBEND MHP LLC",
+   "permittee_as_recorded": "JONES ESTATES RIVERBEND MHP, LLC",
+   "county": "ADAMS",
+   "city": "DECATUR",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.035,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "LE/MAUMEE R/ST. MARYS R/BULHAM DITC"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0036901"
+  },
+  {
+   "npdes_permit": "IN0036935",
+   "state": "IN",
+   "facility": "FOREST LODGE MHP",
+   "permittee_as_recorded": "FOREST LODGE MOBILE HOME PARK",
+   "county": "HOWARD",
+   "city": "KOKOMO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0238,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "WILDCAT CR VIA HARRISON-HARLAN DTCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0036935"
+  },
+  {
+   "npdes_permit": "IN0036943",
+   "state": "IN",
+   "facility": "LANDINGS HOME OWNERS ASSN",
+   "permittee_as_recorded": "LANDINGS HOME OWNERS ASSN, THE",
+   "county": "CARROLL",
+   "city": "PATTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "WABASH R/TIPPECANOE R/LAKE FREEMAN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0036943"
+  },
+  {
+   "npdes_permit": "IN0037168",
+   "state": "IN",
+   "facility": "BIG CEDAR MHP LLC",
+   "permittee_as_recorded": "BIG CEDAR MHP LLC",
+   "county": "FRANKLIN",
+   "city": "BROOKVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "OR/GRT MIAMI/WHITEWATER R/BIG CEDAR, OR/GRT MIAMI/WHITEWATER R/BIG CEDAR CR",
+    "OR/GRT MIAMI/WHITEWATER R/BIG CEDAR CR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0037168"
+  },
+  {
+   "npdes_permit": "IN0037176",
+   "state": "IN",
+   "facility": "INDIANA AMERICAN WATER COMPANY INC",
+   "permittee_as_recorded": "INDIANA AMERICAN WATER COMPANY INC",
+   "county": "LAKE",
+   "city": "CROWN POINT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 1.1,
+   "major_minor": "Major",
+   "permit_effective": "2023-06-01",
+   "permit_expiration": "2028-05-31",
+   "receiving_waters_echo": [
+    "EAST BRANCH O STONEY RUN CRK, EAST BRANCH OF STONEY RUN CRK",
+    "East Branch o STONEY RUN CRK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0037176"
+  },
+  {
+   "npdes_permit": "IN0037281",
+   "state": "IN",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "LAWRENCE",
+   "city": "MITCHELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7032"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2021-11-01",
+   "permit_expiration": "2026-10-31",
+   "receiving_waters_echo": [
+    "OHIO RIVER/EAST FORK WHITE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0037281"
+  },
+  {
+   "npdes_permit": "IN0037729",
+   "state": "IN",
+   "facility": "BLUE RIDGE ESTATES MANUFACTURED HOUSING COMMUNITY",
+   "permittee_as_recorded": "BLUE RIDGE ESTATES MHC",
+   "county": "WHITLEY",
+   "city": "CHURUBUSCO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2021-12-01",
+   "permit_expiration": "2026-11-30",
+   "receiving_waters_echo": [
+    "OR/WABASH/EEL/BLUE/GROWCOCK/SB CRTR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0037729"
+  },
+  {
+   "npdes_permit": "IN0037761",
+   "state": "IN",
+   "facility": "CLEAR WATER MOBILE HOME PARK",
+   "permittee_as_recorded": "CLEAR WATER MOBILE HOME VILLAGE",
+   "county": "ST. JOSEPH",
+   "city": "SOUTH BEND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.058,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "LM/ST JOSEPH R/BOWMAN CRK/AUTEN DIT"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0037761"
+  },
+  {
+   "npdes_permit": "IN0038326",
+   "state": "IN",
+   "facility": "HARDIN MONROE INC",
+   "permittee_as_recorded": "HARDIN-MONROE, INC.",
+   "county": "MONROE",
+   "city": "HARRODSBURG",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.006,
+   "major_minor": "Minor",
+   "permit_effective": "2023-11-01",
+   "permit_expiration": "2028-10-31",
+   "receiving_waters_echo": [
+    "E FK WHITE R/SALT CRK/MONROE RSVOIR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038326"
+  },
+  {
+   "npdes_permit": "IN0038415",
+   "state": "IN",
+   "facility": "OAKWOOD MOBILE HOME ESTATES",
+   "permittee_as_recorded": "OAKWOOD MOBILE HOME ESTATES",
+   "county": "DAVIESS",
+   "city": "WASHINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2026-02-01",
+   "permit_expiration": "2031-01-31",
+   "receiving_waters_echo": [
+    "W FK WHITE R/VEALE CREEK/UNNMD DTCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038415"
+  },
+  {
+   "npdes_permit": "IN0038431",
+   "state": "IN",
+   "facility": "CREEKSIDE MHP SOUND BUILT STRATEGIES, INC.",
+   "permittee_as_recorded": "CREEKSIDE MOBILE HOME PARK",
+   "county": "SHELBY",
+   "city": "LONDON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0135,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [
+    "SUGAR CR VIA COUNTY DRAIN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038431"
+  },
+  {
+   "npdes_permit": "IN0038598",
+   "state": "IN",
+   "facility": "SUBURBAN ESTATES MOBILE HOME PARK",
+   "permittee_as_recorded": "SUBURBAN ESTATES MOBILE HOME PARK",
+   "county": "HAMILTON",
+   "city": "NOBLESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.09,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-01",
+   "permit_expiration": "2028-08-31",
+   "receiving_waters_echo": [
+    "OR/W FK WHITE RIVER/INGERMAN DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038598"
+  },
+  {
+   "npdes_permit": "IN0038695",
+   "state": "IN",
+   "facility": "RUBY HILLS MANUFACTURED HOUSING COMMUNITY",
+   "permittee_as_recorded": "RUBY HILLS MANUFACTURED HOUSING COMMUNITY",
+   "county": "MORGAN",
+   "city": "MARTINSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-01",
+   "permit_expiration": "2028-07-31",
+   "receiving_waters_echo": [
+    "OR/W FK WHITE RIVER/UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038695"
+  },
+  {
+   "npdes_permit": "IN0038709",
+   "state": "IN",
+   "facility": "LIBERTY FARM MOBILE HOME PARK",
+   "permittee_as_recorded": "LIBERTY FARM MOBILE HOME PARK",
+   "county": "PORTER",
+   "city": "VALPARAISO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-03-31",
+   "receiving_waters_echo": [
+    "LM/CALUMET R/MNMD POND W/NO OUTFALL"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038709"
+  },
+  {
+   "npdes_permit": "IN0038857",
+   "state": "IN",
+   "facility": "GASTON HOLDINGS IN, LLC",
+   "permittee_as_recorded": "GASTON HOLDINGS IN, LLC",
+   "county": "DELAWARE",
+   "city": "MUNCIE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "5541"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-01",
+   "permit_expiration": "2028-07-31",
+   "receiving_waters_echo": [
+    "YEAGER-FINLEY-MANARD DITCH - WHT RV"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038857"
+  },
+  {
+   "npdes_permit": "IN0038890",
+   "state": "IN",
+   "facility": "NORTH HARRISON COMMUNITY SCHOOL CORPORATION",
+   "permittee_as_recorded": "NORTH HARRISON HIGH SCHOOL",
+   "county": "HARRISON",
+   "city": "RAMSEY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.05,
+   "major_minor": "Minor",
+   "permit_effective": "2023-12-01",
+   "permit_expiration": "2028-11-30",
+   "receiving_waters_echo": [
+    "SINK HOLE ON SCHOOL PROPERTY"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038890"
+  },
+  {
+   "npdes_permit": "IN0038911",
+   "state": "IN",
+   "facility": "INDIAN HILLS MOBILE HOME PARK",
+   "permittee_as_recorded": "INDIAN HILLS MOBILE HOME PARK",
+   "county": "UNION",
+   "city": "WEST COLLEGE CORNER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0108,
+   "major_minor": "Minor",
+   "permit_effective": "2024-01-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [
+    "MIAMI R/INDIAN CRK/UNNMD DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038911"
+  },
+  {
+   "npdes_permit": "IN0038938",
+   "state": "IN",
+   "facility": "HILLVIEW ESTATES SUBDIVISION UTILITITES, INC.",
+   "permittee_as_recorded": "HILLVIEW ESTATES SUBDIVISION UTILITIES",
+   "county": "BARTHOLOMEW",
+   "city": "COLUMBUS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.035,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "E FK WHITE R VIA WHITE CR VIA TRIB."
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038938"
+  },
+  {
+   "npdes_permit": "IN0038954",
+   "state": "IN",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "CAMP LIVINGSTON WWTP",
+   "county": "SWITZERLAND",
+   "city": "BENNINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7032"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.014,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2031-07-31",
+   "receiving_waters_echo": [
+    "OR/INDIAN CREEK/UNNAMED TRIBUTARY"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038954"
+  },
+  {
+   "npdes_permit": "IN0038962",
+   "state": "IN",
+   "facility": "COUNTY LINE MOBILE HOME PARK, LLC",
+   "permittee_as_recorded": "COUNTY LINE MOBILE HOME PARK, LLC",
+   "county": "GRANT",
+   "city": "FAIRMOUNT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0186,
+   "major_minor": "Minor",
+   "permit_effective": "2024-03-01",
+   "permit_expiration": "2029-02-28",
+   "receiving_waters_echo": [
+    "MISSISSINEWA R VIA BACK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038962"
+  },
+  {
+   "npdes_permit": "IN0038971",
+   "state": "IN",
+   "facility": "ROYAL OAKS ESTATES MOBILE HOME PARK",
+   "permittee_as_recorded": "ROYAL OAKS ESTATES MOBILE HOME PARK",
+   "county": "TIPPECANOE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0125,
+   "major_minor": "Minor",
+   "permit_effective": "2023-12-01",
+   "permit_expiration": "2028-11-30",
+   "receiving_waters_echo": [
+    "WEA CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038971"
+  },
+  {
+   "npdes_permit": "IN0038989",
+   "state": "IN",
+   "facility": "BROADMORE ESTATES MANUFACTURED HOUSING COMMUNITY",
+   "permittee_as_recorded": "BROADMORE ESTATES MANUFACTURED HOUSING COMMUNITY",
+   "county": "ELKHART",
+   "city": "GOSHEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.076,
+   "major_minor": "Minor",
+   "permit_effective": "2022-06-01",
+   "permit_expiration": "2027-05-31",
+   "receiving_waters_echo": [
+    "LM/ST JOSEPH R/ELKHART R/PINE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0038989"
+  },
+  {
+   "npdes_permit": "IN0039446",
+   "state": "IN",
+   "facility": "SALAMONIE COUNTRY ESTATES WWTP",
+   "permittee_as_recorded": "SALAMONIE COUNTRY ESTATES WWTP",
+   "county": "WABASH",
+   "city": "LA FONTAINE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0132,
+   "major_minor": "Minor",
+   "permit_effective": "2026-09-01",
+   "permit_expiration": "2031-08-31",
+   "receiving_waters_echo": [
+    "OR/WABASH/SALAMONIE/RUSH CR/UNNMD T"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0039446"
+  },
+  {
+   "npdes_permit": "IN0039497",
+   "state": "IN",
+   "facility": "VILLAGE GREEN MOBILE HOME PARK",
+   "permittee_as_recorded": "VILLAGE GREEN MOBILE HOME PARK",
+   "county": "HOWARD",
+   "city": "KOKOMO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.026,
+   "major_minor": "Minor",
+   "permit_effective": "2024-11-01",
+   "permit_expiration": "2029-10-31",
+   "receiving_waters_echo": [
+    "WILDCAT CR (LITTLE) E FK VIA TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0039497"
+  },
+  {
+   "npdes_permit": "IN0039535",
+   "state": "IN",
+   "facility": "SUNNY TRAILS ESTATES WWTP",
+   "permittee_as_recorded": "SUNNY TRAILS ESTATES, LLC",
+   "county": "LA PORTE",
+   "city": "LA PORTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.012,
+   "major_minor": "Minor",
+   "permit_effective": "2025-11-01",
+   "permit_expiration": "2030-10-31",
+   "receiving_waters_echo": [
+    "LAKE MICHIGAN VIA GALENA RIVER",
+    "GALENA R VIA OUTFALL 001"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0039535"
+  },
+  {
+   "npdes_permit": "IN0039543",
+   "state": "IN",
+   "facility": "SILVER LAKE MOBILE HOME PARK",
+   "permittee_as_recorded": "SILVER LAKE MHP WWTP",
+   "county": "STEUBEN",
+   "city": "ANGOLA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [
+    "PIGEON CR VIA SILVER LAKE WETLANDS"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0039543"
+  },
+  {
+   "npdes_permit": "IN0039551",
+   "state": "IN",
+   "facility": "BEEF HOUSE RESTAURANT",
+   "permittee_as_recorded": "BEEF HOUSE, INC.",
+   "county": "VERMILLION",
+   "city": "PERRYSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "5812"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0252,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [
+    "UNNMD TRIB/SPRING CRK/WABASH R, UNT TO SPRING CR TO WABASH R",
+    "UNNMD TRIB/SPRING CRK/WABASH R",
+    "UNT TO SPRING CR TO WABASH R"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0039551"
+  },
+  {
+   "npdes_permit": "IN0039560",
+   "state": "IN",
+   "facility": "WOODVIEW MOBILE HOME PARK",
+   "permittee_as_recorded": "WOODVIEW MOBILE HOME PARK",
+   "county": "WAYNE",
+   "city": "CENTERVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "531190"
+   ],
+   "design_flow_mgd": 0.0096,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "WHITEWATER R/GREENS FRK/PINHOOK DRN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0039560"
+  },
+  {
+   "npdes_permit": "IN0039608",
+   "state": "IN",
+   "facility": "HOUSE OF PRAYER EVANSVILLE, INC.",
+   "permittee_as_recorded": "HOUSE OF PRAYER EVANSVILLE INC",
+   "county": "VANDERBURGH",
+   "city": "HEUSLER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0036,
+   "major_minor": "Minor",
+   "permit_effective": "2022-10-01",
+   "permit_expiration": "2027-09-30",
+   "receiving_waters_echo": [
+    "OR/WABASH/NEU CREEK/UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0039608"
+  },
+  {
+   "npdes_permit": "IN0040835",
+   "state": "IN",
+   "facility": "THUNDER HILL MOBILE HOME PARK",
+   "permittee_as_recorded": "THUNDER HILL MOBILE HOME PARK",
+   "county": "KNOX",
+   "city": "VINCENNES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0098,
+   "major_minor": "Minor",
+   "permit_effective": "2024-03-01",
+   "permit_expiration": "2029-02-28",
+   "receiving_waters_echo": [
+    "WABASH R VIA SNAPP CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0040835"
+  },
+  {
+   "npdes_permit": "IN0041173",
+   "state": "IN",
+   "facility": "RIVERSIDE MOBILE HOME PARK LLC",
+   "permittee_as_recorded": "RIVERSIDE MOBILE HOME PARK LLC",
+   "county": "RANDOLPH",
+   "city": "FAIRVIEW",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.008,
+   "major_minor": "Minor",
+   "permit_effective": "2025-05-01",
+   "permit_expiration": "2030-04-30",
+   "receiving_waters_echo": [
+    "MISSISSINEWA RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0041173"
+  },
+  {
+   "npdes_permit": "IN0041181",
+   "state": "IN",
+   "facility": "ROYCE GOLDEN PEBBLE ESTATES, LLC",
+   "permittee_as_recorded": "ROYCE GOLDEN PEBBLE ESTATES, LLC",
+   "county": "HENRY",
+   "city": "NEW CASTLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "BIG BLUE R VIA DUCK CRK VIA RAVINE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0041181"
+  },
+  {
+   "npdes_permit": "IN0041602",
+   "state": "IN",
+   "facility": "SUNSET VILLAGE & RV PARK",
+   "permittee_as_recorded": "SUNSET VILLAGE & RV PARK",
+   "county": "ST JOSEPH",
+   "city": "SOUTH BEND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.007,
+   "major_minor": "Minor",
+   "permit_effective": "2022-08-01",
+   "permit_expiration": "2027-07-31",
+   "receiving_waters_echo": [
+    "LM/ST. JOSEPH R/BOWMAN/AUTEN DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0041602"
+  },
+  {
+   "npdes_permit": "IN0041637",
+   "state": "IN",
+   "facility": "COCOJO'S RV RESORT",
+   "permittee_as_recorded": "COCOJO'S RV RESORT",
+   "county": "WABASH",
+   "city": "LAGRO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.012,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "SALAMONIE RESERVOIR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0041637"
+  },
+  {
+   "npdes_permit": "IN0041734",
+   "state": "IN",
+   "facility": "TOWN & COUNTRY MHC LLC",
+   "permittee_as_recorded": "TOWN AND COUNTRY MHC LLC",
+   "county": "VANDERBURGH",
+   "city": "EVANSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-01",
+   "permit_expiration": "2027-12-31",
+   "receiving_waters_echo": [
+    "OR/WABASH/BIG/LITTLE CR/UNNAMD TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0041734"
+  },
+  {
+   "npdes_permit": "IN0041777",
+   "state": "IN",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "BARTHOLOMEW",
+   "city": "COLUMBUS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7032"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.014,
+   "major_minor": "Minor",
+   "permit_effective": "2024-10-01",
+   "permit_expiration": "2029-09-30",
+   "receiving_waters_echo": [
+    "DRIFTWOOD R VIA WOLF CREEK TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0041777"
+  },
+  {
+   "npdes_permit": "IN0042056",
+   "state": "IN",
+   "facility": "NORTH HOGAN MOBILE HOME PARK",
+   "permittee_as_recorded": "NORTH HOGAN MOBILE HOME PARK",
+   "county": "DEARBORN",
+   "city": "MOORES HILL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.012,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "OHIO R/LITTLE HOGAN CRK/UNNMD TRIB."
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0042056"
+  },
+  {
+   "npdes_permit": "IN0042391",
+   "state": "IN",
+   "facility": "AQUA INDIANA, INC. - MIDWEST FACILITY",
+   "permittee_as_recorded": "AQUA INDIANA INC - MIDWEST WWTP",
+   "county": "ALLEN",
+   "city": "FORT WAYNE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids",
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 3.5,
+   "major_minor": "Major",
+   "permit_effective": "2022-08-01",
+   "permit_expiration": "2027-07-31",
+   "receiving_waters_echo": [
+    "GRAHAM MCCULLOCH DITCH, LITTLE R VIA GRAHAM MCCULLOCK DITCH",
+    "LITTLE R VIA GRAHAM MCCULLOCK DITCH",
+    "GRAHAM MCCULLOCH DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": "in-aqua-indiana-inc-midwest-facility-in0042391",
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0042391"
+  },
+  {
+   "npdes_permit": "IN0043273",
+   "state": "IN",
+   "facility": "CARRIAGE ESTATES SUBDIVISION",
+   "permittee_as_recorded": "CARRIAGE ESTATES III WWTP",
+   "county": "TIPPECANOE",
+   "city": "WEST LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 3.0,
+   "major_minor": "Major",
+   "permit_effective": "2026-02-01",
+   "permit_expiration": "2031-01-31",
+   "receiving_waters_echo": [
+    "OR/WABASH RIVER/INDIAN CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0043273"
+  },
+  {
+   "npdes_permit": "IN0043397",
+   "state": "IN",
+   "facility": "APPLE VALLEY UTILITIES INC",
+   "permittee_as_recorded": "APPLE VALLEY UTILITIES, INC.",
+   "county": "LAKE",
+   "city": "LOWELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.185,
+   "major_minor": "Minor",
+   "permit_effective": "2026-09-01",
+   "permit_expiration": "2031-08-31",
+   "receiving_waters_echo": [
+    "BRYANT DITCH, UM VIA KANKAKEE R VIA SINGLETON D VIA BRYANT DITCH",
+    "BRYANT DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0043397"
+  },
+  {
+   "npdes_permit": "IN0043559",
+   "state": "IN",
+   "facility": "SHADY HILLS UTILITIES",
+   "permittee_as_recorded": "SHADY HILLS UTILITIES",
+   "county": "MARION",
+   "city": "INDIANAPOLIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0219,
+   "major_minor": "Minor",
+   "permit_effective": "2022-09-01",
+   "permit_expiration": "2027-08-31",
+   "receiving_waters_echo": [
+    "OR/W FK WHITE R/EAGLE CR/MCCURDY CR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0043559"
+  },
+  {
+   "npdes_permit": "IN0043699",
+   "state": "IN",
+   "facility": "SALT CREEK SERVICES INC",
+   "permittee_as_recorded": "SALT CREEK SERVICES WWTP",
+   "county": "MONROE",
+   "city": "MONROE COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "UNNAMED DCH TO SALT CR TO EFK WHITE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0043699"
+  },
+  {
+   "npdes_permit": "IN0043893",
+   "state": "IN",
+   "facility": "JONES ESTATES CEDAR CREEK MOBILE HOME PARK LLC",
+   "permittee_as_recorded": "JONES ESTATES CEDAR CREEK MHP",
+   "county": "MIAMI",
+   "city": "BUNKER HILL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0131,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [
+    "PIPE CR TO WABASH RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0043893"
+  },
+  {
+   "npdes_permit": "IN0043923",
+   "state": "IN",
+   "facility": "WYMBERLY SANITARY WORKS INC",
+   "permittee_as_recorded": "WYMBERLY SANITARY WORKS, INC.",
+   "county": "FLOYD",
+   "city": "FLOYDS KNOBS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-01",
+   "permit_expiration": "2027-12-31",
+   "receiving_waters_echo": [
+    "OR/INDIAN/LIT INDIAN/YELLOW/BUCK CR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0043923"
+  },
+  {
+   "npdes_permit": "IN0043966",
+   "state": "IN",
+   "facility": "SPEEDWAY STORE #8061 LLC",
+   "permittee_as_recorded": "SPEEDWAY STORE #8061 LLC",
+   "county": "HENRY",
+   "city": "KNIGHTSTOWN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "5541"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.012,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-01",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "BIG BLUE R/MONTGOMERY CRK/UNNMD DTC"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0043966"
+  },
+  {
+   "npdes_permit": "IN0044211",
+   "state": "IN",
+   "facility": "SPRINGHILL CAMPS WWTP",
+   "permittee_as_recorded": "SPRINGHILL CAMPS, INC.",
+   "county": "JACKSON",
+   "city": "SEYMOUR",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "3792",
+    "4952",
+    "6515",
+    "7032",
+    "7033"
+   ],
+   "naics_codes": [
+    "721214"
+   ],
+   "design_flow_mgd": 0.0196,
+   "major_minor": "Minor",
+   "permit_effective": "2024-10-01",
+   "permit_expiration": "2029-09-30",
+   "receiving_waters_echo": [
+    "SALT CR (LITTLE) VIA TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0044211"
+  },
+  {
+   "npdes_permit": "IN0044423",
+   "state": "IN",
+   "facility": "SIOBUD PARC LOOP, LLC",
+   "permittee_as_recorded": "SIOBUD PARC LOOP, LLC",
+   "county": "GRANT",
+   "city": "MARION",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "237210"
+   ],
+   "design_flow_mgd": 0.0185,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2031-07-31",
+   "receiving_waters_echo": [
+    "MISSISSINEWA RIVER, OR/WABASH R/MISSISSINEWA RIVER",
+    "OR/WABASH R/MISSISSINEWA RIVER",
+    "MISSISSINEWA RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0044423"
+  },
+  {
+   "npdes_permit": "IN0044474",
+   "state": "IN",
+   "facility": "EMINENCE COMMUNITY SCHOOL CORPORATION",
+   "permittee_as_recorded": "EMINENCE COMMUNITY SCHOOL CORP",
+   "county": "MORGAN",
+   "city": "EMINENCE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0175,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "OR/W FK WHITE R/MILL CR/LAKE DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0044474"
+  },
+  {
+   "npdes_permit": "IN0044491",
+   "state": "IN",
+   "facility": "TWIN LAKES MOBILE HOME COMMUNITY",
+   "permittee_as_recorded": "TWIN LAKES MOBILE HOME COMMUNITY LLC",
+   "county": "POSEY",
+   "city": "HEUSLER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.045,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "OR/BAYOU CR/UNNMD INTRMTTNT TRIBTRY"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0044491"
+  },
+  {
+   "npdes_permit": "IN0044652",
+   "state": "IN",
+   "facility": "DEVON WOODS SEWER UTILITY, INC.",
+   "permittee_as_recorded": "DEVON WOODS SEWER UTILITY",
+   "county": "HOWARD",
+   "city": "KOKOMO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.027,
+   "major_minor": "Minor",
+   "permit_effective": "2025-12-01",
+   "permit_expiration": "2030-11-30",
+   "receiving_waters_echo": [
+    "WILDCAT CR TO WABASH RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0044652"
+  },
+  {
+   "npdes_permit": "IN0044776",
+   "state": "IN",
+   "facility": "PLEASANTVIEW UTILITIES WWTP",
+   "permittee_as_recorded": "PLEASANTVIEW UTILITIES WWTP",
+   "county": "FAYETTE COUNTY",
+   "city": "CONNERSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2021-11-01",
+   "permit_expiration": "2026-10-31",
+   "receiving_waters_echo": [
+    "OR/MIAMI/W WHITEWATER/WILLIAMS/TRIB"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0044776"
+  },
+  {
+   "npdes_permit": "IN0045292",
+   "state": "IN",
+   "facility": "COUNTRY COURT UTILITY WWTP",
+   "permittee_as_recorded": "COUNTRY COURT UTILITIY WWTP",
+   "county": "ALLEN",
+   "city": "FORT WAYNE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.064,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-01",
+   "permit_expiration": "2029-06-30",
+   "receiving_waters_echo": [
+    "ST MARYS R VIA MARION DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0045292"
+  },
+  {
+   "npdes_permit": "IN0045357",
+   "state": "IN",
+   "facility": "LAKEVIEW ESTATES SUBDIVISION",
+   "permittee_as_recorded": "LAKEVIEW ESTATES SUBDIVISION",
+   "county": "WABASH",
+   "city": "WABASH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2025-03-01",
+   "permit_expiration": "2030-02-28",
+   "receiving_waters_echo": [
+    "WABASH R VIA KENTNER CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0045357"
+  },
+  {
+   "npdes_permit": "IN0045471",
+   "state": "IN",
+   "facility": "KINGSBURY UTILITY CORP",
+   "permittee_as_recorded": "KINGSBURY UTILITY CORPORATION",
+   "county": "LA PORTE",
+   "city": "KINGSBURY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "4953"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-11-01",
+   "permit_expiration": "2026-10-31",
+   "receiving_waters_echo": [
+    "KANKAKEE R VIA TRAVIS DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0045471"
+  },
+  {
+   "npdes_permit": "IN0045667",
+   "state": "IN",
+   "facility": "RICHMOND MOBILE HOME PARK",
+   "permittee_as_recorded": "RICHMOND MOBILE HOME PARK",
+   "county": "WAYNE",
+   "city": "RICHMOND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.016,
+   "major_minor": "Minor",
+   "permit_effective": "2024-10-01",
+   "permit_expiration": "2029-09-30",
+   "receiving_waters_echo": [
+    "WHITEWATER (E FK)- LICK CR - KING D"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0045667"
+  },
+  {
+   "npdes_permit": "IN0045853",
+   "state": "IN",
+   "facility": "WESTVIEW ELEM & JR SR HS",
+   "permittee_as_recorded": "WESTVIEW SCHOOL CORPORATION",
+   "county": "LAGRANGE",
+   "city": "TOPEKA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.026,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "LM/ST. JOE R/L ELKHART/BONTRAGER D."
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0045853"
+  },
+  {
+   "npdes_permit": "IN0046094",
+   "state": "IN",
+   "facility": "HORSESHOE LAKES CAMPGROUND",
+   "permittee_as_recorded": "HORSESHOE LAKES CAMPGROUND",
+   "county": "VERMILLION",
+   "city": "CLINTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7033"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.022,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-01",
+   "permit_expiration": "2029-03-31",
+   "receiving_waters_echo": [
+    "WABASH R VIA BROUILLETTS CR VIA TRB, WABASH R VIA BROUILLETTS CR VIA TRIB/MINERS LAKE",
+    "WABASH R VIA BROUILLETTS CR VIA TRIB/MINERS LAKE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0046094"
+  },
+  {
+   "npdes_permit": "IN0047082",
+   "state": "IN",
+   "facility": "SHADELAND MOBILE HOME PARK",
+   "permittee_as_recorded": "SHADELAND MOBILE HOME PARK",
+   "county": "TIPPECANOE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0152,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-01",
+   "permit_expiration": "2031-06-30",
+   "receiving_waters_echo": [
+    "WABASH R/WEA CREEK/UNNMD DRNG TILE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0047082"
+  },
+  {
+   "npdes_permit": "IN0048453",
+   "state": "IN",
+   "facility": "CAMP MONETO WWTP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "BROWN",
+   "city": "NASHVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7032"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0187,
+   "major_minor": "Minor",
+   "permit_effective": "2022-09-01",
+   "permit_expiration": "2027-08-31",
+   "receiving_waters_echo": [
+    "OR/E FK WHITE/N FK SALT/GNAW BONE C"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0048453"
+  },
+  {
+   "npdes_permit": "IN0048763",
+   "state": "IN",
+   "facility": "JACKSON HEIGHTS MOBILE HOMEPARK",
+   "permittee_as_recorded": "JACKSON HEIGHTS MOBILE HOME PARK",
+   "county": "SCOTT",
+   "city": "SCOTTSBURG",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0105,
+   "major_minor": "Minor",
+   "permit_effective": "2024-01-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [
+    "MUSCATATUCK-STUCKER-BIG OX-HONEY RN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0048763"
+  },
+  {
+   "npdes_permit": "IN0049361",
+   "state": "IN",
+   "facility": "MAPLETURN UTILITIES INC.",
+   "permittee_as_recorded": "MAPLETURN UTILITIES, INC. WWTP",
+   "county": "MORGAN COUNTY",
+   "city": "MARTINSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.25,
+   "major_minor": "Minor",
+   "permit_effective": "2023-06-01",
+   "permit_expiration": "2028-05-31",
+   "receiving_waters_echo": [
+    "W FK WHITE R TO WHITE R TO WABASH R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0049361"
+  },
+  {
+   "npdes_permit": "IN0050041",
+   "state": "IN",
+   "facility": "AUTUMN CREEK MOBILE HOME PARK",
+   "permittee_as_recorded": "AUTUMN CREEK MOBILE HOME PARK",
+   "county": "LA PORTE",
+   "city": "MICHIGAN CITY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2022-05-01",
+   "permit_expiration": "2027-04-30",
+   "receiving_waters_echo": [
+    "LAKE MICHIGAN/EAST BRANCH TRAIL CRK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0050041"
+  },
+  {
+   "npdes_permit": "IN0050148",
+   "state": "IN",
+   "facility": "DOE CREEK SEWER UTILITY",
+   "permittee_as_recorded": "DOE CREEK SEWER UTILITY",
+   "county": "HANCOCK",
+   "city": "GREENFIELD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-01",
+   "permit_expiration": "2031-04-30",
+   "receiving_waters_echo": [
+    "OR/E FK WHITE R/SUGAR/BUCK/DOE CRK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0050148"
+  },
+  {
+   "npdes_permit": "IN0050211",
+   "state": "IN",
+   "facility": "BEARCREEK FARMS INC",
+   "permittee_as_recorded": "BEARCREEK FARMS, INC. WWTP",
+   "county": "JAY",
+   "city": "BRYANT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2023-12-01",
+   "permit_expiration": "2028-11-30",
+   "receiving_waters_echo": [
+    "WABASH R VIA BEARCREEK DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0050211"
+  },
+  {
+   "npdes_permit": "IN0050971",
+   "state": "IN",
+   "facility": "MAPLELANE VILLAGE MANUFACTURED HOUSING COMMUNITY",
+   "permittee_as_recorded": "MAPLELANE VILLAGE MANUFACTURED HOUSING COMMUNITY",
+   "county": "CASS",
+   "city": "LOGANSPORT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0172,
+   "major_minor": "Minor",
+   "permit_effective": "2023-04-01",
+   "permit_expiration": "2028-03-31",
+   "receiving_waters_echo": [
+    "OR/WABASH R/MINNOW CR/UNNMD TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0050971"
+  },
+  {
+   "npdes_permit": "IN0051691",
+   "state": "IN",
+   "facility": "EASTWAY APARTMENTS",
+   "permittee_as_recorded": "EASTWAY APARTMENTS WWTP",
+   "county": "HANCOCK",
+   "city": "GREENFIELD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6513"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0334,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-01",
+   "permit_expiration": "2029-03-31",
+   "receiving_waters_echo": [
+    "SUGAR CR VIA BUCK CR VIA BREIER CR."
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0051691"
+  },
+  {
+   "npdes_permit": "IN0051861",
+   "state": "IN",
+   "facility": "CARRIAGE HOUSE ESTATES MHP",
+   "permittee_as_recorded": "CARRIAGE HOUSE ESTATES MHP",
+   "county": "WABASH",
+   "city": "WABASH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "WABASH R VIA CHAMBERLAIN DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0051861"
+  },
+  {
+   "npdes_permit": "IN0051870",
+   "state": "IN",
+   "facility": "LEN DEL MOBILE HOME PARK",
+   "permittee_as_recorded": "LEN-DEL MOBILE HOME PARK",
+   "county": "WAYNE",
+   "city": "CAMBRIDGE CITY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.013,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-03-31",
+   "receiving_waters_echo": [
+    "WHITEWATER R (W FK) VIA FRANKLIN CR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0051870"
+  },
+  {
+   "npdes_permit": "IN0052230",
+   "state": "IN",
+   "facility": "RAINTREE LAKE CAMPGROUND",
+   "permittee_as_recorded": "RAINTREE LAKE CAMPGROUND",
+   "county": "SCOTT",
+   "city": "SCOTTSBURG",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7033"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2022-05-01",
+   "permit_expiration": "2027-04-30",
+   "receiving_waters_echo": [
+    "OR/E FK WHITE R/MUSCATATUK/ZION RUN, OR/E FK WHITE R/MUSCATATUK/ZION RUN/RAINWAY SPILLW",
+    "OR/E FK WHITE R/MUSCATATUK/ZION RUN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0052230"
+  },
+  {
+   "npdes_permit": "IN0052370",
+   "state": "IN",
+   "facility": "MAPLE LAWN VILLAGE MHC, LLC",
+   "permittee_as_recorded": "MAPLE LAWN VILLAGE MHC, LLC",
+   "county": "MIAMI",
+   "city": "MIAMI COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.028,
+   "major_minor": "Minor",
+   "permit_effective": "2023-11-01",
+   "permit_expiration": "2028-10-31",
+   "receiving_waters_echo": [
+    "WABASH R VIA DEER CREEK VIA RUSSELL DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0052370"
+  },
+  {
+   "npdes_permit": "IN0052523",
+   "state": "IN",
+   "facility": "WHEELOCK LAKE CAMPGROUND",
+   "permittee_as_recorded": "WHEELOCK LAKE CAMPGROUND",
+   "county": "DEARBORN",
+   "city": "ELROD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7032"
+   ],
+   "naics_codes": [
+    "721214"
+   ],
+   "design_flow_mgd": 0.024,
+   "major_minor": "Minor",
+   "permit_effective": "2025-11-01",
+   "permit_expiration": "2030-10-31",
+   "receiving_waters_echo": [
+    "OR/LAUGHERY CREEK/LITTLE TURKEY CRK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0052523"
+  },
+  {
+   "npdes_permit": "IN0053091",
+   "state": "IN",
+   "facility": "GRANDVIEW LOT OWNERS ASSOCIATION",
+   "permittee_as_recorded": "GRANDVIEW LOT OWNERS ASSOCIATION",
+   "county": "BARTHOLOMEW",
+   "city": "COLUMBUS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.045,
+   "major_minor": "Minor",
+   "permit_effective": "2022-06-01",
+   "permit_expiration": "2027-05-20",
+   "receiving_waters_echo": [
+    "E FK WHITE R TO WHITE R TO WABASH R"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0053091"
+  },
+  {
+   "npdes_permit": "IN0053112",
+   "state": "IN",
+   "facility": "CRAWFORD COUNTY JR SR HIGH SCH",
+   "permittee_as_recorded": "CRAWFORD CO. JR/SR HIGH SCH00L",
+   "county": "CRAWFORD",
+   "city": "MARENGO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "BLUE R VIA SLICK RUN CR VIA DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0053112"
+  },
+  {
+   "npdes_permit": "IN0053147",
+   "state": "IN",
+   "facility": "ANOKA ACRES MOBILE HOME PARK LLC",
+   "permittee_as_recorded": "ANOKA ACRES MOBILE HOME PARK LLC",
+   "county": "CASS",
+   "city": "LOGANSPORT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.016,
+   "major_minor": "Minor",
+   "permit_effective": "2025-03-01",
+   "permit_expiration": "2030-02-28",
+   "receiving_waters_echo": [
+    "WABASH R VIA MINNOW CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0053147"
+  },
+  {
+   "npdes_permit": "IN0053643",
+   "state": "IN",
+   "facility": "SPEEDUP 6, LLC",
+   "permittee_as_recorded": "SPEEDUP 6 LLC",
+   "county": "HENRY",
+   "city": "NEW LISBON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "5541"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.012,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [
+    "WHITEWATER R (W FK) VIA SYMONS CR."
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0053643"
+  },
+  {
+   "npdes_permit": "IN0053759",
+   "state": "IN",
+   "facility": "PICNIC WOODS DEVELOPMENT",
+   "permittee_as_recorded": "PICNIC WOODS DEVELOPMENT",
+   "county": "DEARBORN",
+   "city": "LAWRENCEBURG",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.48,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-01",
+   "permit_expiration": "2031-04-30",
+   "receiving_waters_echo": [
+    "LAUGHERY CR VIA TURKEY CR VIA TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0053759"
+  },
+  {
+   "npdes_permit": "IN0053783",
+   "state": "IN",
+   "facility": "MEADOW ACRES MOBILE HOME PARK",
+   "permittee_as_recorded": "MEADOW ACRES MOBILE HOME PARK",
+   "county": "WABASH",
+   "city": "SIDNEY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.013,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-01",
+   "permit_expiration": "2027-12-31",
+   "receiving_waters_echo": [
+    "OR/WABASH/EEL R/S HAINES & J ALSPGH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0053783"
+  },
+  {
+   "npdes_permit": "IN0053899",
+   "state": "IN",
+   "facility": "CAMP GALLAHUE WWTP",
+   "permittee_as_recorded": "CAMP GALLAHUE WWTP",
+   "county": "BROWN",
+   "city": "FRUITDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7032"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.013,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-01",
+   "permit_expiration": "2029-06-30",
+   "receiving_waters_echo": [
+    "BEANBLOSSOM CR VIA JACK CR TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0053899"
+  },
+  {
+   "npdes_permit": "IN0054101",
+   "state": "IN",
+   "facility": "DEERWOOD ENVIRONMENTAL INC - FKA WOODS OF LAFAYETTE WWTP",
+   "permittee_as_recorded": "DEERWOOD ENVIRONMENTAL INC WWTP",
+   "county": "FLOYD",
+   "city": "FLOYDS KNOBS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6512"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.15,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-01",
+   "permit_expiration": "2028-07-31",
+   "receiving_waters_echo": [
+    "OHIO RIVER VIA LITTLE INDIAN CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0054101"
+  },
+  {
+   "npdes_permit": "IN0054127",
+   "state": "IN",
+   "facility": "LAKEVIEW MOBILE HOME PARK WWTP",
+   "permittee_as_recorded": "LAKEVIEW MOBILE HOME PARK",
+   "county": "WABASH",
+   "city": "WABASH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.012,
+   "major_minor": "Minor",
+   "permit_effective": "2025-11-01",
+   "permit_expiration": "2030-10-31",
+   "receiving_waters_echo": [
+    "WABASH R VIA KENTNER CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0054127"
+  },
+  {
+   "npdes_permit": "IN0054470",
+   "state": "IN",
+   "facility": "CROWN POINT CHRISTIAN VILLAGE",
+   "permittee_as_recorded": "CROWN POINT CHRISTIAN VILLAGE",
+   "county": "LAKE",
+   "city": "CROWN POINT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8361"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.05,
+   "major_minor": "Minor",
+   "permit_effective": "2022-11-01",
+   "permit_expiration": "2027-10-31",
+   "receiving_waters_echo": [
+    "LM/DEEP RIVER/DEER CREEK/UNNMD TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0054470"
+  },
+  {
+   "npdes_permit": "IN0054704",
+   "state": "IN",
+   "facility": "MECK'S WHISPERING PINES II, LLC",
+   "permittee_as_recorded": "MECK'S WHISPERING PINES II, LLC",
+   "county": "KOSCIUSKO",
+   "city": "WARSAW",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.05,
+   "major_minor": "Minor",
+   "permit_effective": "2022-05-01",
+   "permit_expiration": "2027-04-30",
+   "receiving_waters_echo": [
+    "OR/WABASH/TIPPECANOE/HEIMAN DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0054704"
+  },
+  {
+   "npdes_permit": "IN0054992",
+   "state": "IN",
+   "facility": "COTTONWOOD VILLAGE MOBILE HOME PARK",
+   "permittee_as_recorded": "COTTONWOOD VILLAGE MHP WWTP",
+   "county": "MONTGOMERY",
+   "city": "CRAWFORDSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.024,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "SUGAR CR (WABASH) VIA BLACK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0054992"
+  },
+  {
+   "npdes_permit": "IN0055921",
+   "state": "IN",
+   "facility": "WESTERN MHP, LLC",
+   "permittee_as_recorded": "WESTERN MHP, LLC",
+   "county": "HOWARD",
+   "city": "KOKOMO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-03-31",
+   "receiving_waters_echo": [
+    "OR/WABASH R/WILDCAT CR/UNNMD CO DRN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0055921"
+  },
+  {
+   "npdes_permit": "IN0057347",
+   "state": "IN",
+   "facility": "AGUDETH ISRAEL OF ILLINOIS CAMP WWTP",
+   "permittee_as_recorded": "AGUDETH ISRAEL OF ILLINOIS CAMP WWTP",
+   "county": "PARKE",
+   "city": "MARSHALL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8641"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.022,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [
+    "SUGAR CR (WABASH) VIA 250' DR DITCH, UNN DITCH TO SUGAR CR (WABASH) VIA 250' DR DITCH",
+    "UNN DITCH TO SUGAR CR (WABASH) VIA 250' DR DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0057347"
+  },
+  {
+   "npdes_permit": "IN0057363",
+   "state": "IN",
+   "facility": "LUTHERAN LAKES RESORT ASSOCIATION",
+   "permittee_as_recorded": "LUTHERAN LAKE RESORT ASSOCIATION",
+   "county": "BARTHOLOMEW",
+   "city": "WAYMANSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7032"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.016,
+   "major_minor": "Minor",
+   "permit_effective": "2024-09-01",
+   "permit_expiration": "2029-08-31",
+   "receiving_waters_echo": [
+    "E FK WHITE R VIA WHITE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0057363"
+  },
+  {
+   "npdes_permit": "IN0057487",
+   "state": "IN",
+   "facility": "ROLLING VISTA ESTATES WWTP",
+   "permittee_as_recorded": "ROLLING VISTA ESTATES WWTP",
+   "county": "MORGAN",
+   "city": "MOORESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2024-01-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [
+    "UNNAMED D TO SINKING CREEK BRANCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0057487"
+  },
+  {
+   "npdes_permit": "IN0057959",
+   "state": "IN",
+   "facility": "ARROWHEAD MOBILE HOME PARK",
+   "permittee_as_recorded": "ARROWHEAD MOBILE HOME PARK",
+   "county": "HANCOCK",
+   "city": "NEW PALESTINE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2025-03-01",
+   "permit_expiration": "2030-02-28",
+   "receiving_waters_echo": [
+    "SUGAR CR TO DRIFTWOOD RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0057959"
+  },
+  {
+   "npdes_permit": "IN0058548",
+   "state": "IN",
+   "facility": "BUCKHILL ESTATES WWTP",
+   "permittee_as_recorded": "BUCKHILL ESTATES WWTP",
+   "county": "LAKE",
+   "city": "CROWN POINT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.019,
+   "major_minor": "Minor",
+   "permit_effective": "2025-12-01",
+   "permit_expiration": "2030-11-30",
+   "receiving_waters_echo": [
+    "UM/KANKAKEE R/CEDAR CREEK/FOSS DITC"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0058548"
+  },
+  {
+   "npdes_permit": "IN0059013",
+   "state": "IN",
+   "facility": "WESTERN HANCOCK UTILITIES",
+   "permittee_as_recorded": "WESTERN HANCOCK UTILITIES",
+   "county": "HANCOCK",
+   "city": "HANCOCK COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8811"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 1.0,
+   "major_minor": "Minor",
+   "permit_effective": "2022-02-01",
+   "permit_expiration": "2027-01-31",
+   "receiving_waters_echo": [
+    "OR/E FK WHT R/SUGAR CRK/BUCK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0059013"
+  },
+  {
+   "npdes_permit": "IN0059064",
+   "state": "IN",
+   "facility": "MALLARDS POINTE CONDO ASSOC",
+   "permittee_as_recorded": "MALLARD'S POINTE CONDOMINIUM",
+   "county": "PORTER",
+   "city": "VALPARAISO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6513"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.021,
+   "major_minor": "Minor",
+   "permit_effective": "2022-11-01",
+   "permit_expiration": "2027-10-31",
+   "receiving_waters_echo": [
+    "LM/KANKAKEE/CEDAR/SALT CR/UNNMD TRB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0059064"
+  },
+  {
+   "npdes_permit": "IN0059072",
+   "state": "IN",
+   "facility": "COUNTRY VIEW ESTATES",
+   "permittee_as_recorded": "COUNTRY VIEW ESTATES",
+   "county": "MORGAN",
+   "city": "MOORESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2031-07-31",
+   "receiving_waters_echo": [
+    "OR/W FK WHITE R/WHITE LICK CR/UNNMD"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0059072"
+  },
+  {
+   "npdes_permit": "IN0059218",
+   "state": "IN",
+   "facility": "KINGS COURT WWTP",
+   "permittee_as_recorded": "BUNKER HILL AND PERU MHC, LLC",
+   "county": "MIAMI",
+   "city": "PERU",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "531190"
+   ],
+   "design_flow_mgd": 0.0033,
+   "major_minor": "Minor",
+   "permit_effective": "2022-06-01",
+   "permit_expiration": "2027-05-31",
+   "receiving_waters_echo": [
+    "OR/WABASH/EEL/PIPE CR/UNNAMED TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0059218"
+  },
+  {
+   "npdes_permit": "IN0059544",
+   "state": "IN",
+   "facility": "CITIZENS OF WESTFIELD LLC WWTP",
+   "permittee_as_recorded": "CITIZENS OF WESTFIELD LLC WWTP",
+   "county": "HAMILTON",
+   "city": "WESTFIELD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids",
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 5.0,
+   "major_minor": "Major",
+   "permit_effective": "2022-06-01",
+   "permit_expiration": "2027-05-31",
+   "receiving_waters_echo": [
+    "W FK WHITE R VIA LITTLE EAGLE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0059544"
+  },
+  {
+   "npdes_permit": "IN0059781",
+   "state": "IN",
+   "facility": "CAESARS RIVERBOAT CASINO WWTP",
+   "permittee_as_recorded": "CAESARS RIVERBOAT CASINO LLC",
+   "county": "HARRISON",
+   "city": "ELIZABETH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7999"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.187,
+   "major_minor": "Minor",
+   "permit_effective": "2022-11-01",
+   "permit_expiration": "2027-10-31",
+   "receiving_waters_echo": [
+    "OHIO RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0059781"
+  },
+  {
+   "npdes_permit": "IN0060321",
+   "state": "IN",
+   "facility": "CAMP HUNT WHEELER MISSION",
+   "permittee_as_recorded": "CAMP HUNT WWTP",
+   "county": "MONROE",
+   "city": "MONROE COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7032"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2022-10-01",
+   "permit_expiration": "2027-09-30",
+   "receiving_waters_echo": [
+    "OR/W FK WHITE/BEAN BLOSSOM C/LAZY C"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0060321"
+  },
+  {
+   "npdes_permit": "IN0060674",
+   "state": "IN",
+   "facility": "LAKE & FOREST CLUB",
+   "permittee_as_recorded": "LAKE AND FOREST CLUB",
+   "county": "JACKSON",
+   "city": "JACKSON COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "private club",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7997"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "OR/WBSH/UPPR E FK WHT/HOUGH CRK/UNM"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0060674"
+  },
+  {
+   "npdes_permit": "IN0062405",
+   "state": "IN",
+   "facility": "PROSSER COUNTRY ESTATES WWTP",
+   "permittee_as_recorded": "PROSSER COUNTRY ESTATES WWTP",
+   "county": "WABASH",
+   "city": "WABASH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8361"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2022-01-01",
+   "permit_expiration": "2026-12-31",
+   "receiving_waters_echo": [
+    "WABASH RIVER/IRA ROBY LEGAL DRAIN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0062405"
+  },
+  {
+   "npdes_permit": "IN0063363",
+   "state": "IN",
+   "facility": "REMINGTON TRUCK STOP LLC WWTP",
+   "permittee_as_recorded": "REMINGTON TRUCK STOP WWTP",
+   "county": "JASPER",
+   "city": "REMINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7011"
+   ],
+   "naics_codes": [
+    "721199"
+   ],
+   "design_flow_mgd": 0.00378,
+   "major_minor": "Minor",
+   "permit_effective": "2025-01-01",
+   "permit_expiration": "2029-12-31",
+   "receiving_waters_echo": [
+    "BICE DITCH VIA TRIB"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0063363"
+  },
+  {
+   "npdes_permit": "IN0063754",
+   "state": "IN",
+   "facility": "GREEN ACRES SUBDIVISION SEWER SYSTEM, INC.",
+   "permittee_as_recorded": "GREEN ACRES SUBDIVISION SEWER SYSTEM, INC.",
+   "county": "HOWARD",
+   "city": "RUSSIAVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-03-31",
+   "receiving_waters_echo": [
+    "WILDCAT CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0063754"
+  },
+  {
+   "npdes_permit": "IN0063789",
+   "state": "IN",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "BROWN",
+   "city": "NASHVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-01",
+   "permit_expiration": "2031-06-30",
+   "receiving_waters_echo": [
+    "GOLD WELL HOLLOW TO LOWER SCHOONER CREEK, UNNAMED DITCH TO GOLD WELL HOLLOW TO LOWER SCHOONE",
+    "UNNAMED DITCH TO GOLD WELL HOLLOW TO LOWER SCHOONE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0063789"
+  },
+  {
+   "npdes_permit": "IN0064416",
+   "state": "IN",
+   "facility": "WINDCREST SUBDIVISION WWTP",
+   "permittee_as_recorded": "WINDCREST SUBDIVISION WWTP",
+   "county": "OWEN",
+   "city": "SPENCER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "UNT TO MCCORMICK'S CR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0064416"
+  },
+  {
+   "npdes_permit": "IN0064926",
+   "state": "IN",
+   "facility": "KINGS RIDGE HOMEOWNERS ASSOCIATION INC",
+   "permittee_as_recorded": "KINGS RIDGE HOMEOWNERS ASSOCIATION INC",
+   "county": "TIPPECANOE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4941",
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-01",
+   "permit_expiration": "2028-08-31",
+   "receiving_waters_echo": [
+    "WILDCAT CREEK VIA POND"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0064926"
+  },
+  {
+   "npdes_permit": "IN0064941",
+   "state": "IN",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "ST. JOSEPH COUNTY",
+   "city": "NEW CARLISLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.22,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "Filter Backwash"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0064941"
+  },
+  {
+   "npdes_permit": "IN0109967",
+   "state": "IN",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "MORGAN",
+   "city": "MARTINSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7032"
+   ],
+   "naics_codes": [
+    "721214"
+   ],
+   "design_flow_mgd": 0.0243,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "OR/W FK WHITE RIVER/HIGHLAND CREEK, UNNAMED DITCH TO HIGHLAND CREEK",
+    "OR/W FK WHITE RIVER/HIGHLAND CREEK",
+    "UNNAMED DITCH TO HIGHLAND CREEK"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IN0109967"
+  },
+  {
+   "npdes_permit": "INJ043168",
+   "state": "IN",
+   "facility": "VALLEY RURAL UTILITY COMPANY",
+   "permittee_as_recorded": "VALLEY RURAL COMPANY COLLECTION SYSTEM",
+   "county": "DEARBORN",
+   "city": "LAWRENCEBURG",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-06-01",
+   "permit_expiration": "2027-05-31",
+   "receiving_waters_echo": [
+    "DOUBBLE LICK CR & HIDDEN VALLEY LK"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#INJ043168"
+  }
+ ],
+ "public_by_name": []
+}

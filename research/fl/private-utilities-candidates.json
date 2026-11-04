@@ -1,0 +1,1128 @@
+{
+ "state": "FL",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:00Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 22,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 0,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 0,
+  "by_legal_form_proposed": {
+   "business or industrial": 14,
+   "homeowners' association": 1,
+   "investor-owned utility": 2,
+   "mobile-home park": 4,
+   "private club": 1
+  },
+  "public_by_name": 2
+ },
+ "candidates": [
+  {
+   "npdes_permit": "FL0000132",
+   "state": "FL",
+   "facility": "DUKE ENERGY FLORIDA - BARTOW PLANT",
+   "permittee_as_recorded": "Duke Energy Florida LLC",
+   "county": "PINELLAS",
+   "city": "ST PETERSBURG",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4911",
+    "4952"
+   ],
+   "naics_codes": [
+    "221111",
+    "221320"
+   ],
+   "design_flow_mgd": 562.0,
+   "major_minor": "Major",
+   "permit_effective": "2023-03-01",
+   "permit_expiration": "2028-01-11",
+   "receiving_waters_echo": [
+    "Old Tampa Bay Class II Marine WBID 1656"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0000132"
+  },
+  {
+   "npdes_permit": "FL0000523",
+   "state": "FL",
+   "facility": "MOSAIC FERTILIZER LLC - BONNIE FACILITY",
+   "permittee_as_recorded": "Mosaic Fertilizer LLC",
+   "county": "POLK",
+   "city": "BARTOW",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "2874",
+    "4226",
+    "4952"
+   ],
+   "naics_codes": [
+    "221320",
+    "325312",
+    "493110"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2024-01-01",
+   "permit_expiration": "2028-11-16",
+   "receiving_waters_echo": [
+    "Skinned Sapling Cr Class III Fresh WBID 1610A",
+    "N Prong Alafia R Class III Fresh WBID 1621E"
+   ],
+   "external_outfalls": 10,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0000523"
+  },
+  {
+   "npdes_permit": "FL0000671",
+   "state": "FL",
+   "facility": "MOSAIC FERTILIZER, LLC - MULBERRY CHEMICAL PLANT",
+   "permittee_as_recorded": "Mosaic Fertilizer LLC",
+   "county": "POLK",
+   "city": "MULBERRY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "2874",
+    "4952"
+   ],
+   "naics_codes": [
+    "221320",
+    "325312"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-04-17",
+   "receiving_waters_echo": [
+    "Skinned Sapling Creek WBID 1610A"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0000671"
+  },
+  {
+   "npdes_permit": "FL0002992",
+   "state": "FL",
+   "facility": "DUKE ENERGY FLORIDA, LLC - ANCLOTE STATION",
+   "permittee_as_recorded": "Duke Energy Florida LLC",
+   "county": "PASCO",
+   "city": "HOLIDAY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4911",
+    "4952"
+   ],
+   "naics_codes": [
+    "221111",
+    "221320"
+   ],
+   "design_flow_mgd": 2869.0,
+   "major_minor": "Major",
+   "permit_effective": "2024-07-01",
+   "permit_expiration": "2029-05-28",
+   "receiving_waters_echo": [
+    "discharge canal",
+    "Anclote Anchorage Class III Marine WBID 8045C"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0002992"
+  },
+  {
+   "npdes_permit": "FL0023396",
+   "state": "FL",
+   "facility": "WELLINGTON ARMS CONDO WWTP",
+   "permittee_as_recorded": "Wellington Arms Condominium, Inc.",
+   "county": "PALM BEACH",
+   "city": "OCEAN RIDGE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2024-03-01",
+   "permit_expiration": "2029-01-18",
+   "receiving_waters_echo": [
+    "Intracoastal Wtwy Class III Marine WBID 3226F"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0023396"
+  },
+  {
+   "npdes_permit": "FL0023426",
+   "state": "FL",
+   "facility": "IDEAL MOBILE HOME PARK WWTF",
+   "permittee_as_recorded": "Ideal Mobile Home Park",
+   "county": "DUVAL",
+   "city": "JACKSONVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.011,
+   "major_minor": "Minor",
+   "permit_effective": "2019-08-01",
+   "permit_expiration": "2024-06-12",
+   "receiving_waters_echo": [
+    "RIBAULT R CLASS III MARINE WBID 2224B"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0023426"
+  },
+  {
+   "npdes_permit": "FL0028380",
+   "state": "FL",
+   "facility": "OCEAN MAISONETTES WWTP",
+   "permittee_as_recorded": "Ocean Ridge Management Inc.",
+   "county": "PALM BEACH",
+   "city": "OCEAN RIDGE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2021-03-01",
+   "permit_expiration": "2026-01-18",
+   "receiving_waters_echo": [
+    "Lk Worth and Spanish Canal Class III Marine 3226F"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0028380"
+  },
+  {
+   "npdes_permit": "FL0032174",
+   "state": "FL",
+   "facility": "FLORIDA POWER LIGHT CO - MANATEE PLANT",
+   "permittee_as_recorded": "FPL Manatee Plant",
+   "county": "MANATEE",
+   "city": "PARRISH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4911",
+    "4952"
+   ],
+   "naics_codes": [
+    "221111",
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-08-24",
+   "receiving_waters_echo": [
+    "Little Manatee R Class III Fresh WBID 1742A1",
+    "Gamble Creek Class III Fresh WBID 1819"
+   ],
+   "external_outfalls": 4,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0032174"
+  },
+  {
+   "npdes_permit": "FL0032662",
+   "state": "FL",
+   "facility": "GOODBREAD MOBILE HOME PARK WWTF",
+   "permittee_as_recorded": "Amelia Pines, LLC",
+   "county": "NASSAU",
+   "city": "YULEE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.005,
+   "major_minor": "Minor",
+   "permit_effective": "2021-05-01",
+   "permit_expiration": "2026-03-03",
+   "receiving_waters_echo": [
+    "LOFTON CR CLASS III FRESH WBID 2142"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0032662"
+  },
+  {
+   "npdes_permit": "FL0033294",
+   "state": "FL",
+   "facility": "MOSAIC FERTILIZER, LLC - HOOKERS PRAIRIE MINE",
+   "permittee_as_recorded": "Mosaic Fertilizer LLC",
+   "county": "POLK",
+   "city": "BRADLEY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "1475",
+    "4952"
+   ],
+   "naics_codes": [
+    "212390",
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2022-01-01",
+   "permit_expiration": "2026-11-18",
+   "receiving_waters_echo": [
+    "Hookers Prairie WBID 1671A",
+    "Hookers Prairie WBID 1673",
+    "Bryant's Branch WBID 1764",
+    "Whidden Creek"
+   ],
+   "external_outfalls": 4,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0033294"
+  },
+  {
+   "npdes_permit": "FL0034789",
+   "state": "FL",
+   "facility": "MID-COUNTY WWTP",
+   "permittee_as_recorded": "Sunshine Water Services Company",
+   "county": "PINELLAS",
+   "city": "DUNEDIN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.9,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "CURLEW CREEK CLASS III FRESH WBID 1538A, WBID 1528C OF CLEARWATER HARBOR N CLASS III MARINE",
+    "Curlew Creek Class III Fresh WBID 1538A"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0034789"
+  },
+  {
+   "npdes_permit": "FL0036251",
+   "state": "FL",
+   "facility": "WEKIVA HUNT CLUB WRF",
+   "permittee_as_recorded": "Sunshine Water Services Company",
+   "county": "SEMINOLE",
+   "city": "CASSELBERRY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "private club",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 2.9,
+   "major_minor": "Minor",
+   "permit_effective": "2022-01-01",
+   "permit_expiration": "2026-11-02",
+   "receiving_waters_echo": [
+    "Sweetwater Creek Class III Fresh WBID 2956"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0036251"
+  },
+  {
+   "npdes_permit": "FL0040215",
+   "state": "FL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Brittany Estates Group, LLC",
+   "county": "ALACHUA",
+   "city": "GAINESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-01",
+   "permit_expiration": "2028-06-07",
+   "receiving_waters_echo": [
+    "LITTLE HATCHET CR CLASS III FRESH WBID 2695, LITTLE HATCHETT CR CLASS III FRESH WBID 2695",
+    "Little Hatchet Cr Class III Fresh WBID 2695"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0040215"
+  },
+  {
+   "npdes_permit": "FL0041751",
+   "state": "FL",
+   "facility": "HARDEE POWER STATION UNITS 1 2",
+   "permittee_as_recorded": "Hardee Power Partners, Ltd",
+   "county": "HARDEE",
+   "city": "FORT GREEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4911",
+    "4952"
+   ],
+   "naics_codes": [
+    "221111",
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2023-02-01",
+   "permit_expiration": "2027-12-08",
+   "receiving_waters_echo": [
+    "Payne Cr WBID 1757B",
+    "cooling reservoir discharge"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0041751"
+  },
+  {
+   "npdes_permit": "FL0043419",
+   "state": "FL",
+   "facility": "STUDY ESTATES WWTF",
+   "permittee_as_recorded": "Study Estates MHP",
+   "county": "DUVAL",
+   "city": "JACKSONVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0099,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-04-29",
+   "receiving_waters_echo": [
+    "Nine Mile Creek Class III Fresh WBID 2220"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0043419"
+  },
+  {
+   "npdes_permit": "FL0044229",
+   "state": "FL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Seminole Electric Cooperative Inc",
+   "county": "HARDEE",
+   "city": "FORT GREEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4911",
+    "4952"
+   ],
+   "naics_codes": [
+    "221111",
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2023-02-01",
+   "permit_expiration": "2027-12-08",
+   "receiving_waters_echo": [
+    "Payne Cr WBID 1757B",
+    "cooling reservoir discharge"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0044229"
+  },
+  {
+   "npdes_permit": "FL0102202",
+   "state": "FL",
+   "facility": "PACE WATER SYSTEM WWTP",
+   "permittee_as_recorded": "Pace Water System, Inc.",
+   "county": "SANTA ROSA",
+   "city": "PACE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 5.0,
+   "major_minor": "Minor",
+   "permit_effective": "2020-08-01",
+   "permit_expiration": "2025-06-29",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0102202"
+  },
+  {
+   "npdes_permit": "FL0102482",
+   "state": "FL",
+   "facility": "SOUTH WALTON UTILITY COMPANY WWTP",
+   "permittee_as_recorded": "South Walton Utility Company, Inc.",
+   "county": "WALTON",
+   "city": "MIRAMAR BEACH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 2.75,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-08-30",
+   "receiving_waters_echo": [
+    "FDOT ditch system Class III Fresh WBID 897",
+    "Emerald Bay Regatta Bay Class III Fresh WBID 897"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0102482"
+  },
+  {
+   "npdes_permit": "FL0115231",
+   "state": "FL",
+   "facility": "NORMANDY RYZE LLC WWTF",
+   "permittee_as_recorded": "Normandy Ryze LLC",
+   "county": "DUVAL",
+   "city": "JACKSONVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.003,
+   "major_minor": "Minor",
+   "permit_effective": "2023-03-01",
+   "permit_expiration": "2028-01-10",
+   "receiving_waters_echo": [
+    "Rowell Cr WBID 2309 Class III Fresh"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0115231"
+  },
+  {
+   "npdes_permit": "FL0116921",
+   "state": "FL",
+   "facility": "FLORIDA MOTEL INC. WWTF",
+   "permittee_as_recorded": "Florida Motel Inc.",
+   "county": "NASSAU",
+   "city": "YULEE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.023,
+   "major_minor": "Minor",
+   "permit_effective": "2023-11-01",
+   "permit_expiration": "2028-09-07",
+   "receiving_waters_echo": [
+    "MCQUEEN SWAMP CLASS III FRESH WBID 2118"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0116921"
+  },
+  {
+   "npdes_permit": "FL0122076",
+   "state": "FL",
+   "facility": "RICE CREEK WWTF",
+   "permittee_as_recorded": "Wilder, LLC",
+   "county": "HILLS",
+   "city": "RIVERVIEW",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.225,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-11-12",
+   "receiving_waters_echo": [
+    "Rice Cr Class III Fresh WBID 1659"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0122076"
+  },
+  {
+   "npdes_permit": "FL0824381",
+   "state": "FL",
+   "facility": "BRADEN RIVER UTILITY",
+   "permittee_as_recorded": "Braden River Utilities",
+   "county": "MANATEE",
+   "city": "LAKEWOOD RANCH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 19.0,
+   "major_minor": "Minor",
+   "permit_effective": "2024-02-01",
+   "permit_expiration": "2028-12-12",
+   "receiving_waters_echo": [
+    "LONG BR, COOPER CR, WOLF SLOUGH, BRADEN R"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0824381"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "FL0040541",
+   "state": "FL",
+   "facility": "TOWN OF DAVIE WWTP",
+   "permittee_as_recorded": "Davie, Town of",
+   "county": "BROWARD",
+   "city": "DAVIE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 4.85,
+   "major_minor": "Major",
+   "permit_effective": "2023-03-01",
+   "permit_expiration": "2028-01-29",
+   "receiving_waters_echo": [
+    "Atlantic Ocean Class III Marine WBID 8093"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0040541"
+  },
+  {
+   "npdes_permit": "FL0139475",
+   "state": "FL",
+   "facility": "SLCUD SOUTH HUTCHINSON ISLAND WATER RECLAMATION FACILITY",
+   "permittee_as_recorded": "St. Lucie County Utilities",
+   "county": "ST. LUCIE COUNTY",
+   "city": "JENSEN BEACH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:00Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 1.6,
+   "major_minor": "Minor",
+   "permit_effective": "2022-11-01",
+   "permit_expiration": "2027-09-22",
+   "receiving_waters_echo": [
+    "Atlantic Ocean Class III Marine WBID 8103"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#FL0139475"
+  }
+ ]
+}
