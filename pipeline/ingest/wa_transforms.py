@@ -28,8 +28,10 @@ def kc_operator(name: str) -> tuple[str, str, str] | None:
 
 
 def dsn(v) -> str | None:
-    s = F.clean(v)
-    return s.zfill(3) if re.fullmatch(r"\d{1,3}[A-Za-z]?", s) and s[0].isdigit() else None
+    """The permit's outfall number as EPA writes it: three digits and an upper-case letter (the file's '027a' and
+    '44a' are outfalls 027A and 044A)."""
+    m = re.fullmatch(r"(\d{1,3})([A-Za-z]?)", F.clean(v))
+    return f"{int(m.group(1)):03d}{m.group(2).upper()}" if m else None
 
 
 @F.hook
