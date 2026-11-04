@@ -6,6 +6,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -162,6 +163,26 @@ def _project(tmp_path, index, states=("pa", "ny"), fail=(), flaky=(), missing=()
     puts = [ln.split()[0].removeprefix("dirtywaterwatch-data/current/") for ln in lines if not ln.startswith("slept ")]
     r.sleeps = [int(ln.split()[1]) for ln in lines if ln.startswith("slept ")]
     return r, puts
+
+
+def test_upload_runs_the_outfalls_export_on_the_pipeline_venv_when_it_exists(tmp_path):
+    """The export imports build/status.py and build/shoreline.py (shapely, numpy): the system python3 on the runners
+    lacks them (run 41888486686 failed the step on numpy), so the script prefers pipeline/.venv/bin/python."""
+    r, _ = _project(tmp_path, _index("reaches/pa.geojson"))
+    root = tmp_path / "proj"
+    (root / "pipeline" / ".venv" / "bin").mkdir(parents=True)
+    marker = tmp_path / "venv-ran"
+    (root / "scripts" / "export-outfalls.py").write_text("import pathlib, sys\n"
+                                                        f"pathlib.Path({str(marker)!r}).write_text(sys.argv[0])\n")
+    venv_py = root / "pipeline" / ".venv" / "bin" / "python"
+    venv_py.write_text(f"#!/bin/sh\nexec {sys.executable} \"$@\"\n")
+    os.chmod(venv_py, 0o755)
+    env = {**os.environ, "PATH": f"{tmp_path / 'bin'}:{os.environ['PATH']}"}
+    r = subprocess.run(["sh", str(root / "scripts" / "upload-current.sh")], env=env, capture_output=True, text=True,
+                       timeout=60)
+    assert r.returncode == 0, r.stderr
+    assert marker.exists() and marker.read_text().endswith("export-outfalls.py")
+    assert "outfalls export failed" not in r.stdout
 
 
 def _index(*files):
