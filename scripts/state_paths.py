@@ -206,7 +206,7 @@ def fetch(key: str, out: Path, tries: int = 3, wrangler: str | None = None) -> i
         out.unlink(missing_ok=True)
         try:
             p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors="replace",
-                               timeout=900)
+                               timeout=300)
         except (OSError, subprocess.TimeoutExpired) as ex:
             p, text = None, f"{type(ex).__name__}"
         else:
