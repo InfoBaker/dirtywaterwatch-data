@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -191,9 +192,11 @@ def test_the_new_operator_rows_have_the_registrys_shape_and_no_permit_is_in_two_
     for r in new:
         assert [k for k in r if k != "short_name"] == list(first)
         assert r["id"] == f"{r['state'].lower()}-{r['npdes_permit'].lower()}" and r["aliases"] == [r["id"]]
-        assert r["npdes_permit"] in r["npdes_permits"] and r["kind"] in ("plant", "cso") and r["state"] in LIVE
+        assert r["npdes_permit"] in r["npdes_permits"] and r["kind"] in ("plant", "cso")
         assert r["notification_channel"] == "None found online (not searched individually)"
-        assert r["verified"] == "fetched" and r["checked"] == "2026-11-03"
+        # live states: the 2026-11-03 run; a state built ahead of going live (Georgia, 2026-11-04) has its own date
+        assert r["verified"] == "fetched" and (r["checked"] == "2026-11-03" if r["state"] in LIVE else
+                                               re.fullmatch(r"2026-\d\d-\d\d", r["checked"]))
 
 
 def test_every_public_live_state_plant_permit_has_an_operator_page(plants):
