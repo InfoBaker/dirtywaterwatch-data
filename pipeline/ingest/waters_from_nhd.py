@@ -3871,13 +3871,17 @@ REPORT_NOT_WATER = [
      "part of a sewer, drainage or treatment works, not a public water"),
     (re.compile(r"\b(subdivision|resident'?s?|yard|private|parking|driveway|basement|crawl\s*space)\b", re.I),
      "private property, not a public water"),
+    (re.compile(r"^\s*dry\s*-?\s*land(\s+overflow)?\s*\.?\s*$", re.I),       # EPD's 'Dryland' (a Dry Land Overflow)
+     "dry land, not a water: the report names no receiving water"),
     (re.compile(r"\bgulf\s+of\s+(mexico|america)\b|\b(atlantic|pacific)\s+ocean\b|^\s*(the\s+)?ocean\s*$", re.I),
      "the open sea (no NHD record)"),
 ]
 STREET_NAME = re.compile(r"^[\w' .-]+?\s+(ct|st|rd|ave|av|dr|ln|blvd|cir|trce|trl|pkwy|hwy|ter|pl|way|court|street|"
                          r"road|avenue|drive|lane|boulevard|circle|trace|trail|parkway|highway|terrace|place)\.?$", re.I)
+# the abbreviation ends at a word's end: 'Utoy Creek' is not 'UT oy Creek' (2026-11-04 GA final audit P1-1: Utoy Creek
+# and 'Tributary of Utoy Creek' were asked of NHD as 'oy Creek')
 TRIB_LEAD = re.compile(r"^(an?\s+|the\s+)?(unnamed\s+|unknown\s+|small\s+)?(tributary|tributaries|trib\.?|unt|ut)"
-                       r"(\s+(of|to|into)\b)?\s*(the\s+)?", re.I)
+                       r"(?![a-z])(\s+(of|to|into)\b)?\s*(the\s+)?", re.I)
 TRIB_ANY = re.compile(r"\b(tributary|tributaries|trib|unt|ut)\b", re.I)
 # a sewershed named for its creek ('Lindsey Creek Basin', 'Dram Branch Basin', 'Allens Creek Water Basin'): it drains to
 # that creek, as a tributary does, so it gives the creek (2026-11-04 report-name review, P3-1). A river's basin ('New
