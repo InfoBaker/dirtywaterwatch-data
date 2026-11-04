@@ -2348,11 +2348,46 @@ def _filled(ev: dict) -> int:
     return sum(1 for k, v in ev.items() if not k.startswith("_") and k != "raw" and v not in (None, "", [], {}))
 
 
+# Words that name no particular water. A receiving-water text made only of these and water words ("unnamed
+# tributary", "storm drain to creek") is not compared between two reports of one permit and day; nor is longer free
+# text (more than SAME_DAY_NAME_WORDS words): only short names such as "Test Creek" or "UT to Mill River" are.
+UNSPECIFIC_WATER_WORDS = {"unnamed", "unamed", "unnammed", "unknown", "un", "ut", "trib", "tributary", "tributaries",
+                          "to", "of", "the", "a", "an", "and", "into", "storm", "drain", "drains", "ditch", "ms4",
+                          "catch", "basin", "nearby", "local", "near", "small"}
+SAME_DAY_NAME_WORDS = 6
+
+
+def specific_water_keys(text) -> set[str]:
+    """The particular waters a receiving-water text names, as comparison keys ("Test Creek" and "UT to Test Cr" give
+    "testcreek"); each part between semicolons is read on its own (EPA joins several waters with "; ")."""
+    keys = set()
+    for part in re.split(r"[;\n]", str(text or "")):
+        if not part.strip() or no_water_text(part) or stated_no_water(part) or not WATER_WORD.search(part):
+            continue
+        toks = norm_name(part).split()
+        if len(toks) > SAME_DAY_NAME_WORDS:
+            continue
+        named = [t for t in toks if t not in UNSPECIFIC_WATER_WORDS]
+        if named and not all(WATER_WORD.fullmatch(t) for t in named):
+            keys.add("".join(named))
+    return keys
+
+
+def waters_differ(a: dict, b: dict) -> bool:
+    """Both reports name a particular water and no name of one is part of a name of the other."""
+    ka, kb = specific_water_keys(a.get("waterbody_text")), specific_water_keys(b.get("waterbody_text"))
+    return bool(ka and kb) and not any(x in y or y in x for x in ka for y in kb)
+
+
 def find_duplicates(events: list[dict]) -> dict[str, str]:
     """{event_id: duplicate_of} for ECHO-reported discharges repeated across sources: same
     npdes_permit and same local start day (and no differing outfall ids). A state notice for that
     permit and day wins over ECHO records; among ECHO records the one with more fields wins.
-    Fixtures and month/year records take no part."""
+    Fixtures and month/year records take no part.
+    A report that reached a water never becomes the duplicate of one that says the discharge reached no water
+    (reached_no_water: "Reach Waterbody: No", EPD's dry-land rows): the dry-land record is linked as the duplicate of
+    the ECHO report instead, so the water keeps its colour (GA review 2026-11-04 P2-11). Two reports that name
+    different particular waters (waters_differ) are not linked at all: they may be two spills of one system."""
     groups = defaultdict(list)
     for ev in events:
         if ev.get("_fixture") or ev.get("time_precision") in COARSE_PRECISION or ev.get("duplicate_of"):
@@ -2363,9 +2398,20 @@ def find_duplicates(events: list[dict]) -> dict[str, str]:
         if t:
             groups[(ev["npdes_permit"], t.astimezone(LOCAL).date())].append(ev)
     dup = {}
+    dry = {}
 
-    def compatible(a, b):
-        return not (a.get("outfall_id") and b.get("outfall_id") and norm_oid(a["outfall_id"]) != norm_oid(b["outfall_id"]))
+    def is_dry(e):
+        if e["event_id"] not in dry:
+            dry[e["event_id"]] = bool(reached_no_water(e))
+        return dry[e["event_id"]]
+
+    def same_place(a, b):
+        return not (a.get("outfall_id") and b.get("outfall_id") and norm_oid(a["outfall_id"]) != norm_oid(b["outfall_id"])) \
+            and not waters_differ(a, b)
+
+    def compatible(a, keep):
+        """a may be made the duplicate of keep."""
+        return same_place(a, keep) and not (is_dry(keep) and not is_dry(a))
 
     for group in groups.values():
         echo = [e for e in group if is_echo(e)]
@@ -2387,6 +2433,16 @@ def find_duplicates(events: list[dict]) -> dict[str, str]:
                 dup[e["event_id"]] = keep["event_id"]
             else:
                 kept.append(e)
+        for x in state:         # a dry-land state record beside an ECHO report of a water: the state record repeats it
+            if is_dry(x):
+                keep = next((e for e in kept if compatible(x, e)), None)
+                if keep:
+                    dup[x["event_id"]] = keep["event_id"]
+    for k in list(dup):         # an ECHO record that a dry-land record absorbed follows it to the report kept
+        seen = {k}
+        while dup[k] in dup and dup[k] not in seen:
+            seen.add(dup[k])
+            dup[k] = dup[dup[k]]
     return dup
 
 

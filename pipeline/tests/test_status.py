@@ -799,3 +799,58 @@ def test_a_reach_does_not_flag_a_tributary_at_its_mouth():
     unnamed["segments"][0]["coords"] = named["segments"][0]["coords"]
     unnamed["segments"][0]["gnis_name"] = None
     assert set(S.reach_waters(unnamed, waters)) == {"test-river-ma", "trib-river-ma"}
+
+
+# ---------------------------------------------------------------- ECHO duplicates and dry-land records (GA review P2-11)
+
+def _same_day(day, **state_kw):
+    st = ev("s", source_id="ga-epd-spills", event_type="sso", status="ended", npdes_permit="GA0000001",
+            started_at=iso(day), ended_at=iso(day + 2 * H), volume_gal=1200, **state_kw)
+    epa = ev("e1", source_id="echo-sewer-overflow", event_type="sso", status="ended", npdes_permit="GA0000001",
+             started_at=iso(day + H), ended_at=iso(day + 2 * H), waterbody_text="Test Creek")
+    return st, epa
+
+
+def test_a_dry_land_state_record_does_not_absorb_an_epa_report_that_names_a_water():
+    """A report that reached a water never loses its colour to a same-day record of the permit saying it did not:
+    the dry-land record is the duplicate, EPA's report stays primary."""
+    day = NOW - 10 * H
+    for flag in ({"raw": {"reached_water": False}},                                # GA EPD
+                 {"raw": {"Reach Waterbody": "No"}},                               # CT DEEP
+                 {"raw": {"row": {"surfaceWater": "No"}}},                         # NY Sewage Pollution Right to Know
+                 {"raw": {"report": {"water_threatened": "N"}}},                   # VA DEQ
+                 {"raw": {"_water": {"why_none": "receiving water given as 'none': no surface water named "
+                                                 "(decision 3)"}}},              # MD MDE
+                 {"waterbody_text": "Did not reach state waters"}):               # any state's own words
+        st, epa = _same_day(day, **flag)
+        assert S.find_duplicates([st, epa]) == {st["event_id"]: epa["event_id"]}, flag
+    st, epa = _same_day(day, raw={"reached_water": False})
+    st["outfall_id"], epa["outfall_id"] = "001", "002"          # different outfalls: two discharges, no link
+    assert S.find_duplicates([st, epa]) == {}
+
+
+def test_a_state_record_and_an_epa_report_naming_different_waters_are_not_linked():
+    day = NOW - 10 * H
+    st, epa = _same_day(day, waterbody_text="Other Creek")
+    assert S.find_duplicates([st, epa]) == {}
+    for same in ("Test Creek", "unnamed tributary to Test Creek", "UT to Test Cr", "creek",
+                 "sewage left the manhole near the bridge and ran down the hill toward the river"):
+        st, epa = _same_day(day, waterbody_text=same)
+        assert S.find_duplicates([st, epa]) == {epa["event_id"]: st["event_id"]}, same
+    st, epa = _same_day(day, waterbody_text="Mill River")
+    epa["waterbody_text"] = "Test Creek; Mill River"             # EPA names two, one is the state's
+    assert S.find_duplicates([st, epa]) == {epa["event_id"]: st["event_id"]}
+
+
+def test_a_dry_land_record_beside_an_epa_report_keeps_the_water_coloured():
+    day = NOW - 10 * H
+    st = ev("s", status="ended", event_type="sso", npdes_permit="MA0101613", started_at=iso(day),
+            ended_at=iso(day + 2 * H), raw={"Reach Waterbody": "No"}, water_slugs=[])
+    epa = ev("e1", source_id="echo-sewer-overflow", event_type="sso", status="ended", npdes_permit="MA0101613",
+             started_at=iso(day + H), ended_at=iso(day + 2 * H), waterbody_text="Test River",
+             water_slugs=["test-river-ma"])
+    w = _echo_world({"ma-test": [st], "echo-sewer-overflow": [epa]})
+    out, _ = S.build(now=NOW, write=False, **w)
+    assert out["duplicates"] == {"ma-test:s": "echo-sewer-overflow:e1"}
+    assert out["waters"]["test-river-ma"]["status"] == "red"
+    assert {r["event_id"] for r in out["waters"]["test-river-ma"]["reasons"]} == {"echo-sewer-overflow:e1"}
