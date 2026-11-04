@@ -47,7 +47,9 @@ jobs:
       - name: Refresh (feeds, status, reaches, charts, export, tally, R2 current/)
         run: sh scripts/refresh-data.sh
       - name: Save pipeline state to R2
-        if: always()
+        # only after a refresh that ran to the end: a cancelled or failed run must not overwrite the saved history
+        # (a seed from the owner's machine, or the last good run) with a partial one
+        if: success()
         run: |
           tar -czf build.tar.gz data/build && wrangler r2 object put dirtywaterwatch-data/state/build.tar.gz --file build.tar.gz --remote
       - name: Dataset release (daily "latest"; dated on Sundays)
