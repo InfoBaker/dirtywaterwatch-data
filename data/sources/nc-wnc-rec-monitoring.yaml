@@ -1,0 +1,21 @@
+id: "nc-wnc-rec-monitoring"
+name: "NC DEQ Western NC Recreational Water Quality Monitoring Program (E. coli results)"
+url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/WNC_Recreational_Monitoring_Program_(View_Join)/FeatureServer/0"
+homepage: "https://www.deq.nc.gov/about/divisions/water-resources/locations/asheville-regional-office/western-nc-recreational-water-quality-program"
+kind: "arcgis"
+level: "state"
+# Notes (research/nc, status candidate, verified fetched, checked 2026-11-03): Inland river E. coli
+#   results (2,298 rows; fields Station_ID, SampleDate, Ecoli, Lat, Long). Also published to Swim
+#   Guide.
+cadence: null
+license: "none stated"
+attribution: "NC DEQ DWR Asheville Regional Office"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["NC"]
+access: ["arcgis"]
+access_detail: null
+machine_readable: true
+legal_basis: null
+checked: "2026-11-03"

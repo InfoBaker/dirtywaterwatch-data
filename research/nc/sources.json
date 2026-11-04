@@ -100,7 +100,7 @@
       "published_at",
       "advice_text",
       "valid_until",
-      "timezone (epoch ms; local wall clock vs UTC to be tested)"
+      "whether the operator issued the press release"
     ],
     "has_coordinates": true,
     "has_outfall_ids": false,
@@ -108,11 +108,11 @@
     "history": "2026-01-01 to date in this layer; Sept 2022 to Dec 2025 in https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0 (3,208 rows).",
     "license": "Item description: \"The North Carolina Department of Environmental Quality shall not be held liable for any errors in this metadata ... These data cannot be construed to be a legal document.\" No licence restriction stated.",
     "legal_basis": "G.S. 143-215.1C; permit conditions (24-hour verbal report, 5-day CS-SSO form)",
-    "status": "candidate",
-    "status_reason": "Statewide, machine-readable, event-precision SSO feed with start, end, volume, volume to water, receiving water (with DWR stream index), coordinates and 5-day follow-up fields. The first feed to build.",
+    "status": "used",
+    "status_reason": "Statewide, machine-readable, event-precision SSO feed with start, end, volume, volume to water, receiving water (with DWR stream index), coordinates and 5-day follow-up fields. Built: pipeline/ingest/nc_dwr_sso.py (571 records on 2026-11-04).",
     "verified": "fetched",
-    "checked": "2026-11-03",
-    "notes": "Only SSOs reportable to DWR appear (1,000 gallons or more to ground, or any amount reaching surface water): 516 of 571 rows say reached water. deq_program is \"Sanitary Sewer Overflow\" for every row although the description says storm-related bypasses are included. Not a press release record: it does not say whether the operator issued the 24-hour press release."
+    "checked": "2026-11-04",
+    "notes": "Only SSOs reportable to DWR appear (1,000 gallons or more to ground, or any amount reaching surface water): 516 of 571 rows say reached water. deq_program is \"Sanitary Sewer Overflow\" for every row although the description says storm-related bypasses are included. Not a press release record: it does not say whether the operator issued the 24-hour press release. Timezone settled 2026-11-04: epoch values are true UTC (Raleigh's 2026-05-12 overflow starts 12:21 UTC, the 8:21 a.m. EDT start Raleigh Water published). The ingester also reads any later Sanitary_Sewer_Overflows_since_Jan_<year> layer it finds."
   },
   {
     "id": "nc-dwr-sso-2022-2025",
@@ -173,15 +173,15 @@
     ],
     "has_coordinates": true,
     "has_outfall_ids": false,
-    "cadence": null,
+    "cadence": "frozen (read once with --backfill)",
     "history": "Sept 2022 to Dec 2025",
     "license": null,
     "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "History for back-fill (3,208 events). Frozen (lastEditDate 2026-03-09).",
+    "status": "used",
+    "status_reason": "History for back-fill (3,208 events). Frozen (lastEditDate 2026-03-09). Built: nc_dwr_sso.py --backfill.",
     "verified": "fetched",
-    "checked": "2026-11-03",
-    "notes": ""
+    "checked": "2026-11-04",
+    "notes": "end_date equals start_date on every row (not an end time); 240 rows have no start date; 76 incidents of 2026 are also in the 2026 layer. facility_owner names a few private owners who are individuals: never ingested by name."
   },
   {
     "id": "nc-dwr-report-sso-survey",
@@ -312,6 +312,38 @@
     "notes": "(b)(1): \"In the event of a discharge of 1,000 gallons or more of untreated wastewater to the surface waters of the State, issue a press release to all print and electronic news media that provide general coverage in the county where the discharge occurred ... The owner or operator shall issue the press release within 24 hours after the owner or operator has determined that the discharge has reached the surface waters of the State.\" (b)(2): for 15,000 gallons or more \"publish a notice of the discharge in a newspaper having general circulation in the county ... and in each county downstream ... significantly affected\", captioned \"NOTICE OF DISCHARGE OF UNTREATED SEWAGE\", within 10 days after the Secretary approves the form. Raw: raw/gs-143-215.1C.html"
   },
   {
+    "id": "nc-law-15a-ncac-18a-3400",
+    "name": "15A NCAC 18A .3400 Coastal Recreational Waters Monitoring, Evaluation and Notification",
+    "jurisdiction": "NC",
+    "operator": "NC Marine Fisheries Commission (rules); NC DEQ Division of Marine Fisheries (advisories)",
+    "operator_type": "state",
+    "role": "law",
+    "event_types": [],
+    "waters_covered": "coastal swimming areas (ocean and sound)",
+    "water_slugs": [],
+    "url": "http://reports.oah.state.nc.us/ncac/title%2015a%20-%20environmental%20quality/chapter%2018%20-%20environmental%20health/subchapter%20a/15a%20ncac%2018a%20.3404.pdf",
+    "access": [
+      "pdf"
+    ],
+    "access_detail": null,
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": "G.S. 113-221.3; 15A NCAC 18A .3401-.3405 (readopted eff. April 1, 2021)",
+    "status": "used",
+    "status_reason": "The coastal advisory rules: pending and full swimming advisories from bacteria results (.3403), and advisories with signs for waters impacted by a wastewater spill and at storm-water discharges (.3404). No set number of hours after a spill.",
+    "verified": "fetched",
+    "checked": "2026-11-04",
+    "notes": ".3404(b): \"A swimming advisory shall be issued by the Division and at least one sign shall be posted at the public access to swimming waters that have been impacted by a wastewater system failure.\" Sign: \"WARNING! WASTEWATER SPILL. SWIMMING IS NOT ADVISED IN THESE WATERS BECAUSE OF THE INCREASED RISK OF ILLNESS.\" .3404(c): storm drain and pipe signs (the Precautionary status). .3403(d) sign text: \"ATTENTION: SWIMMING IN THIS AREA IS NOT RECOMMENDED. BACTERIA TESTING INDICATES LEVELS OF CONTAMINATION THAT MAY BE HAZARDOUS TO YOUR HEALTH. THIS ADVISORY AFFECTS WATERS WITHIN 200' OF THIS SIGN.\""
+  },
+  {
     "id": "nc-rwq-advisories",
     "name": "NC DEQ Recreational Water Quality program: swimming advisory status layer (RWQ_Advisory_EXTERNAL)",
     "jurisdiction": "NC",
@@ -357,12 +389,12 @@
     "cadence": null,
     "history": null,
     "license": null,
-    "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "Coastal (ocean and sound) monitoring stations with current Status (No Alert / Precautionary / Advisory) and a link to sample data. Machine-readable current state; snapshot to keep history.",
+    "legal_basis": "15A NCAC 18A .3400 (.3403 bacteria advisories; .3404 point-source, wastewater spill and storm-water advisories)",
+    "status": "used",
+    "status_reason": "Coastal (ocean and sound) monitoring stations with current Status (No Alert / Pending Swimming Advisory / Advisory / Precautionary). Built: pipeline/ingest/nc_rwq_advisories.py (snapshot spells; 225 stations on 2026-11-04).",
     "verified": "fetched",
-    "checked": "2026-11-03",
-    "notes": "225 stations on 2026-11-03: 216 No Alert, 8 Precautionary, 1 Advisory. The program also issues sewage-spill swimming advisories by press release (search only). Related layer PUBLICVIEWRecreationWaterQualityDatabase (229 stations)."
+    "checked": "2026-11-04",
+    "notes": "225 stations on 2026-11-03: 216 No Alert, 8 Precautionary, 1 Advisory. The program also issues sewage-spill swimming advisories by press release (search only). Related layer PUBLICVIEWRecreationWaterQualityDatabase (229 stations). Checked 2026-11-04: the station Data links (xapps.ncdenr.org/mf/beaches/smplData.do) answer 404; the layer's last data edit was 2026-09-03, so the 1 Advisory and 8 Precautionary stations had not been re-confirmed since then. Precautionary is the storm-water discharge area advisory of .3404(c)."
   },
   {
     "id": "nc-wnc-rec-monitoring",
@@ -418,15 +450,77 @@
     "cannot_fill": [],
     "has_coordinates": true,
     "has_outfall_ids": false,
-    "cadence": null,
-    "history": null,
+    "cadence": "frozen (read once with --backfill)",
+    "history": "2020 to 2026-03-10",
     "license": null,
     "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "Algal bloom and fish kill reports with Waterbody, EventDate, Confirmed (1,364 rows). The NC HAB source; blooms are a separate category (plum).",
+    "status": "used",
+    "status_reason": "Archive of algal bloom and fish kill reports, 2020 to 2026-03-10 (1,364 rows; 1,011 include a bloom). No longer edited: the current reports are nc-dwr-algal-bloom-reports. Built: nc_algal_blooms.py --backfill.",
     "verified": "fetched",
-    "checked": "2026-11-03",
-    "notes": "Creator field may hold account names: do not ingest it."
+    "checked": "2026-11-04",
+    "notes": "Creator, details, locdesc and Landmark (reporter text and home addresses) are never ingested."
+  },
+  {
+    "id": "nc-dwr-algal-bloom-reports",
+    "name": "NC DEQ DWR Fish Kill and Algal Bloom Incidents (North_Carolina_Fish_Kills_and_Algal_Blooms_Public_Reports)",
+    "jurisdiction": "NC",
+    "operator": "NC DEQ Division of Water Resources",
+    "operator_type": "state",
+    "role": "advisories",
+    "event_types": [
+      "hab"
+    ],
+    "waters_covered": "statewide; the waterbody as reported",
+    "water_slugs": [],
+    "url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/North_Carolina_Fish_Kills_and_Algal_Blooms_Public_Reports/FeatureServer/0",
+    "access": [
+      "arcgis"
+    ],
+    "access_detail": "query?where=1%3D1&outFields=...&outSR=4326&f=json (public, no key). 260 reports on 2026-11-04 (156 algal bloom, 88 fish kill, 16 both), January to November 2026, edited daily. Behind DEQ's Fish Kill and Algal Bloom dashboard (https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms).",
+    "machine_readable": true,
+    "sample_record": null,
+    "fields": [
+      "objectid",
+      "globalid",
+      "incident_id",
+      "report_type",
+      "fish_kill_number",
+      "observation_date",
+      "area_impacted",
+      "area_units",
+      "regional_office",
+      "county",
+      "waterbody",
+      "nearby_landmarks",
+      "incident_details",
+      "investigation_status",
+      "final_investigation_comments",
+      "lab_id"
+    ],
+    "fills_event_fields": [
+      "source_record_id (incident_id)",
+      "event_type (hab_advisory for bloom reports)",
+      "started_at (observation_date)",
+      "waterbody",
+      "coordinates",
+      "advice_text (DWR public comment)"
+    ],
+    "cannot_fill": [
+      "ended_at",
+      "an advisory status (these are reports, not advisories)",
+      "reported_at"
+    ],
+    "has_coordinates": true,
+    "has_outfall_ids": false,
+    "cadence": "daily",
+    "history": "2026-01 to date (earlier reports in nc-fish-kill-algal-bloom)",
+    "license": null,
+    "legal_basis": null,
+    "status": "used",
+    "status_reason": "The current NC algal bloom report layer (replaced Fish_Kill_Algal_Bloom_Public_View in March 2026). Built: pipeline/ingest/nc_algal_blooms.py (172 bloom reports on 2026-11-04).",
+    "verified": "fetched",
+    "checked": "2026-11-04",
+    "notes": "incident_details is the reporter's own description and nearby_landmarks is often a home address: neither is ingested; points are rounded to about 100 m. Blooms are a separate category (plum)."
   },
   {
     "id": "nc-shellfish-closures",

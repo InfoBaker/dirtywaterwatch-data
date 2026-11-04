@@ -1,0 +1,34 @@
+id: "nc-dwr-algal-bloom-reports"
+name: "NC DEQ DWR Fish Kill and Algal Bloom Incidents (North_Carolina_Fish_Kills_and_Algal_Blooms_Public_Reports)"
+url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/North_Carolina_Fish_Kills_and_Algal_Blooms_Public_Reports/FeatureServer/0"
+homepage: "https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms"
+kind: "arcgis"
+level: "state"
+# Feed row: the source id written by pipeline/ingest/nc_algal_blooms.py (data/build/events/nc-dwr-algal-bloom-reports.json).
+# Notes (research/nc, status used, verified fetched, checked 2026-11-04): The current NC algal bloom
+#   report layer (replaced Fish_Kill_Algal_Bloom_Public_View in March 2026). Built:
+#   pipeline/ingest/nc_algal_blooms.py (172 bloom reports on 2026-11-04).
+# Access detail (research, quoted): query?where=1%3D1&outFields=...&outSR=4326&f=json (public, no
+#   key). 260 reports on 2026-11-04 (156 algal bloom, 88 fish kill, 16 both), January to November
+#   2026, edited daily. Behind DEQ's Fish Kill and Algal Bloom dashboard
+#   (https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms).
+# Can fill: source_record_id (incident_id), event_type (hab_advisory for bloom reports), started_at
+#   (observation_date), waterbody, coordinates, advice_text (DWR public comment)
+# Cannot fill: ended_at; an advisory status (these are reports, not advisories); reported_at
+# Waters: statewide; the waterbody as reported
+# History: 2026-01 to date (earlier reports in nc-fish-kill-algal-bloom)
+# Research notes: incident_details is the reporter's own description and nearby_landmarks is often a
+#   home address: neither is ingested; points are rounded to about 100 m. Blooms are a separate
+#   category (plum).
+cadence: "daily"
+license: "none stated"
+attribution: "NC DEQ Division of Water Resources"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["NC"]
+access: ["arcgis"]
+access_detail: "query?where=1%3D1&outFields=...&outSR=4326&f=json (public, no key). 260 reports on 2026-11-04 (156 algal bloom, 88 fish kill, 16 both), January to November 2026, edited daily. Behind DEQ's Fish Kill and Algal Bloom dashboard (https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-04"

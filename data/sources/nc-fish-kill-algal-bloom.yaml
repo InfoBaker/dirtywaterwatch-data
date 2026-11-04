@@ -1,0 +1,26 @@
+id: "nc-fish-kill-algal-bloom"
+name: "NC DEQ Fish Kills and Algal Blooms public reports (Fish_Kill_Algal_Bloom_Public_View)"
+url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Fish_Kill_Algal_Bloom_Public_View/FeatureServer/0"
+homepage: "https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms"
+kind: "arcgis"
+level: "state"
+# Feed row: written once by pipeline/ingest/nc_algal_blooms.py --backfill (data/build/events/nc-fish-kill-algal-bloom.json).
+#   A frozen layer: its cadence never makes it stale.
+# Notes (research/nc, status used, verified fetched, checked 2026-11-04): Archive of algal bloom and
+#   fish kill reports, 2020 to 2026-03-10 (1,364 rows; 1,011 include a bloom). No longer edited: the
+#   current reports are nc-dwr-algal-bloom-reports. Built: nc_algal_blooms.py --backfill.
+# History: 2020 to 2026-03-10
+# Research notes: Creator, details, locdesc and Landmark (reporter text and home addresses) are
+#   never ingested.
+cadence: "frozen (read once with --backfill)"
+license: "none stated"
+attribution: "NC DEQ DWR"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["NC"]
+access: ["arcgis"]
+access_detail: null
+machine_readable: true
+legal_basis: null
+checked: "2026-11-04"

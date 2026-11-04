@@ -46,6 +46,12 @@ HOMEPAGES = {
     "va-vdh-news-advisory-feed": "https://www.vdh.virginia.gov/news/",
     "va-echo-cso-inventory": "https://echo.epa.gov/tools/data-downloads/cso-inventory-download-summary",
     "dc-echo-sobe-dc0021199": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
+    "nc-dwr-sso-2026": "https://experience.arcgis.com/experience/4a50b5dc87844bab9930a5906522a779",
+    "nc-dwr-sso-2022-2025": "https://www.deq.nc.gov/about/divisions/water-resources/water-quality-permitting/collection-systems/information-sewer-system-overflows",
+    "nc-rwq-advisories": "https://www.deq.nc.gov/about/divisions/marine-fisheries/shellfish-sanitation-and-recreational-water-quality/recreational-water-quality",
+    "nc-dwr-algal-bloom-reports": "https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms",
+    "nc-fish-kill-algal-bloom": "https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms",
+    "nc-wnc-rec-monitoring": "https://www.deq.nc.gov/about/divisions/water-resources/locations/asheville-regional-office/western-nc-recreational-water-quality-program",
 }
 
 
