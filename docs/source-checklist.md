@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1208 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1223 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -28,7 +28,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | nc | 9 | 1 | 6 | 1 | 0 | 17 |
 | ga | 7 | 0 | 4 | 1 | 0 | 12 |
 | fl | 5 | 0 | 5 | 1 | 0 | 11 |
-| **all** | **423** | **217** | **333** | **174** | **61** | **1208** |
+| mi | 6 | 2 | 5 | 2 | 0 | 15 |
+| **all** | **429** | **219** | **338** | **176** | **61** | **1223** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1327,3 +1328,23 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `fl-sarasota-abnormal-event` | Sarasota County AbnormalEventSpill layer | watch | search_only | events | County spill layer found by ArcGIS search; not opened. The PNP feed covers the same events. |
 | `fl-wwals` | WWALS Watershed Coalition pollution notice tracking | watch | search_only | prior_art | Posts and archives FL PNP and GA spill reports for the Suwannee basin. |
 | `fl-epa-sobe` | EPA SOBE extract, FL rows | rejected | inferred | events | No FL rows on 2026-11-03; FL reports through the State Watch Office and PNP. |
+
+## mi: Michigan (15)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `mi-egle-mienviro-cso-sso-list` | EGLE MiEnviro CSO/SSO List (sewage discharge reports: CSO, SSO, RTB and other discharges) | used | fetched | events | Statewide, event-level, machine-readable, public: read hourly by pipeline/ingest/mi_egle_mienviro.py (3,198 records on 2026-11-04 with the backfill from 2025). No coordinates: placement by permit and outfall number through the outfall registry. |
+| `mi-egle-sso-cso-rtb-program` | EGLE SSO, CSO and RTB program page (Michigan.gov/SewageDischarge) with annual reports | used | fetched | permits | Program context; annual report PDFs are a historical check. |
+| `mi-epa-cso-inventory` | EPA National CSO Inventory (Michigan extract) | used | fetched | outfalls | Outfall points to join to MiEnviro rows (permit + feature number). |
+| `mi-epa-gl-cso-michigan` | EPA: Combined Sewer Overflows in the Great Lakes Basin, Michigan (operator list with websites) | used | fetched | outfalls | Seeds the per-operator website column of dischargers.json. |
+| `mi-glwa-cso-notification-plan` | Great Lakes Water Authority CSO Public Notification Plan (2018) | used | fetched | law | Shows the largest Michigan CSO permittee uses the state list as its public 4-hour notice channel. |
+| `mi-law-mcl-324-3112a` | MCL 324.3112a (NREPA Part 31): discharge of untreated or partially treated sewage; notice, posting, E. coli testing | used | fetched | law | Primary legal basis: 24-hour notice to EGLE, local health departments and daily newspapers; EGLE must post on its website; E. coli testing of affected waters. |
+| `mi-egle-beachguard` | EGLE BeachGuard (MiEnviro nSITE beach explorer) | candidate | fetched | advisories | Statewide current status with points; history and reasons need the logged-in detail or snapshots. |
+| `mi-egle-hab-reports-map` | EGLE/MDHHS Michigan HAB Reports Map and reporting form | candidate | search_only | advisories | State HAB reports with locations; trace the map's layer next. |
+| `mi-egle-annual-cso-sso-rtb-reports` | EGLE Annual CSO/SSO/RTB Reports (PDF) | watch | search_only | events | Annual PDFs with event appendices; superseded by the live list for current data; latest found is 2021. |
+| `mi-egle-mienviro-subscriptions` | MiEnviro email subscriptions (beach advisories, permit notices) | watch | inferred | advisories | Owner sign-up for beach advisory emails; no overflow alert exists. |
+| `mi-hb-4365-4035` | Michigan HB 4365 and HB 4035 (2025-2026) sewage discharge reporting and penalties | watch | search_only | law | Penalty and reporting bills in committee per trackers; not fetched. |
+| `mi-hb-4427-brown-alert` | Michigan HB 4427 (2025-2026) 'Brown Alert' for E. coli or sewage | watch | fetched | law | Would add a Wireless Emergency Alert ('brown alert') via county emergency coordinators within 12 hours of detection (per bill trackers; bill text not fetched). |
+| `mi-watershed-groups` | Michigan watershed groups and Swim Guide affiliates (Detroit Riverkeeper, Huron River Watershed Council, others) | watch | inferred | monitoring | Not searched in this round (time-boxed). |
+| `mi-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Michigan | rejected | inferred | events | 0 Michigan rows on 2026-11-03; Michigan collects through its own MiEnviro system. |
+| `mi-egle-peas` | EGLE Pollution Emergency Alerting System (PEAS) hotline | rejected | inferred | events | Inbound reporting line, no public output found. |

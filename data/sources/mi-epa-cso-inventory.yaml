@@ -1,0 +1,21 @@
+id: "mi-epa-cso-inventory"
+name: "EPA National CSO Inventory (Michigan extract)"
+url: null
+homepage: null
+kind: "csv"
+level: "federal"
+# Notes (research/mi, status used, verified fetched, checked 2026-11-03): Outfall points to join to
+#   MiEnviro rows (permit + feature number).
+# Access detail (research, quoted): research/mi/federal-seed.json: 59 permits, 163 open outfalls.
+cadence: null
+license: "none stated"
+attribution: "U.S. EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["MI"]
+access: ["csv"]
+access_detail: "research/mi/federal-seed.json: 59 permits, 163 open outfalls."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"

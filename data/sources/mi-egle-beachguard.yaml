@@ -1,0 +1,33 @@
+id: "mi-egle-beachguard"
+name: "EGLE BeachGuard (MiEnviro nSITE beach explorer)"
+url: "https://mienviro.michigan.gov/nsite/beach/map/"
+homepage: "https://mienviro.michigan.gov/nsite/beach/map/"
+kind: "api"
+level: "state"
+# Notes (research/mi, status candidate, verified fetched, checked 2026-11-03): Statewide current
+#   status with points; history and reasons need the logged-in detail or snapshots.
+# Access detail (research, quoted): React app; POST
+#   https://mienviro.michigan.gov/nsite/ss/explorersites with JSON
+#   {insertUpdateList:[{displayHeight,displayWidth,filterValuesJson:null,isIncludeUnmappable,latitudeMin/Max,longitudeMin/Max,modeId:'BEACH',searchTerm:''}]}
+#   and headers Origin/Referer from the site (without Referer it returns 400). Statewide extent
+#   returns clusters (totalSiteCount 2913); a small bbox returns sites: id, siteId, siteName,
+#   geographyWKT POINT, color (#188018 no advisory, #AAAAAA no data; red closed, yellow advisory per
+#   EGLE). Advisory detail endpoints (beachadvisories, beachresults) need login (401). Mode settings
+#   at /nsite/api/settings/getWslSettings?environment=beach.
+# Can fill: coordinates, waterbody, source_status
+# Cannot fill: started_at; ended_at; advice_text; volume
+# Waters: 2,913 beach sites (Great Lakes and inland)
+# Research notes: Status colour includes green for 'no advisory'; the site must not map that to
+#   green (grey = no report).
+cadence: "Local health departments enter results; EGLE says advisories/closures 'within 24 hours' of an exceedance; weekly sampling Memorial Day to Labor Day."
+license: "none stated"
+attribution: "EGLE with local health departments"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure"]
+states: ["MI"]
+access: ["map_only", "api"]
+access_detail: "React app; POST https://mienviro.michigan.gov/nsite/ss/explorersites with JSON {insertUpdateList:[{displayHeight,displayWidth,filterValuesJson:null,isIncludeUnmappable,latitudeMin/Max,longitudeMin/Max,modeId:'BEACH',searchTerm:''}]} and headers Origin/Referer from the site (without Referer it returns 400). Statewide extent returns clusters (totalSiteCount 2913); a small bbox returns sites: id, siteId, siteName, geographyWKT POINT, color (#188018 no advisory, #AAAAAA no data; red closed, yellow advisory per EGLE). Advisory detail endpoints (beachadvisories, beachresults) need login (401). Mode settings at /nsite/api/settings/getWslSettings?environment=beach."
+machine_readable: true
+legal_basis: "BEACH Act; Michigan Part 31 water quality standard (E. coli 300/100 mL daily geometric mean, 130/100 mL 30-day)"
+checked: "2026-11-03"
