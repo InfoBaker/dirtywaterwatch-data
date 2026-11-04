@@ -170,26 +170,56 @@ def test_map_layer_lends_its_point_to_the_same_permit_and_address():
 
 def epa(eid, day, water, permit="GA0000001"):
     return {"event_id": f"echo-sewer-overflow:{eid}", "npdes_permit": permit, "started_at": f"{day}T10:00:00",
-            "ended_at": f"{day}T11:00:00", "event_type": "sso", "waterbody_text": water, "duplicate_of": None}
+            "ended_at": f"{day}T11:00:00", "event_type": "sso", "status": "ended", "waterbody_text": water,
+            "lat": 33.0, "lon": -84.0, "duplicate_of": None, "raw": {}}
 
 
-def test_epd_rows_are_duplicates_of_the_epa_report_of_the_same_permit_and_day():
-    rows = [row(WATERWAY_IMPACTED="Test Creek"), row(OVERFLOW_LOCATION="8 Elm St", WATERWAY_IMPACTED="Other Creek"),
-            row(SPILL_BEGIN_DATE="2026-10-28", OVERFLOW_LOCATION="1 A St"), row(SPILL_BEGIN_DATE="2026-10-28", OVERFLOW_LOCATION="2 A St"),
-            row(SPILL_BEGIN_DATE="2026-10-27", OVERFLOW_LOCATION="3 A St")]
+PAIR_ROWS = [row(WATERWAY_IMPACTED="Test Creek", QUANTITY_GALLONS="4024"),
+             row(OVERFLOW_LOCATION="8 Elm St", WATERWAY_IMPACTED="Other Creek"),
+             row(SPILL_BEGIN_DATE="2026-10-28", OVERFLOW_LOCATION="1 A St"),
+             row(SPILL_BEGIN_DATE="2026-10-28", OVERFLOW_LOCATION="2 A St"),
+             row(SPILL_BEGIN_DATE="2026-10-27", OVERFLOW_LOCATION="3 A St")]
+
+
+def pair_run(reports, prev=()):
+    layer = {"features": [{"attributes": {"PERMIT_NUMBER": "GA0000001", "LATITUDE": 33.75, "LONGITUDE": -84.39,
+                                          "OVERFLOW_LOCATION": "12 Elm Street Testville, Georgia 30000"}}]}
+    recs, stats = run([posting("2026-11-02", PAIR_ROWS)], prev=prev, layer=layer, epa=reports)
+    return {x["outfall_name"].split()[0]: x for x in recs}, stats
+
+
+def test_the_epd_record_is_primary_when_the_receiving_water_matches():
+    reports = [epa("a", "2026-10-29", "TEST CREEK"), epa("b", "2026-10-29", "Unnamed tributary")]
+    r, _ = pair_run(reports)
+    p = r["12"]
+    assert p["duplicate_of"] is None and reports[0]["duplicate_of"] == p["event_id"]
+    assert p["ended_at"] == "2026-10-29T11:00:00" and p["status"] == "ended"
+    assert "EPA eRule report" in p["raw"]["_end_basis"] and "echo-sewer-overflow:a" in p["raw"]["_end_basis"]
+    assert p["volume_gal"] == 4024 and p["waterbody_text"] == "Test Creek"          # its own figures stay
+    assert (p["lat"], p["lon"]) == (33.75, -84.39)                                  # EPD's point, not EPA's
+    assert p["started_at"] == "2026-10-29" and p["time_precision"] == "day"
+    assert "Georgia EPD spill list record" in reports[0]["raw"]["_duplicate_basis"]
+
+
+def test_the_only_row_and_the_only_report_of_a_permit_and_day_pair():
+    reports = [epa("a", "2026-10-29", "TEST CREEK"), epa("b", "2026-10-29", "Unnamed tributary")]
+    r, _ = pair_run(reports)
+    assert reports[1]["duplicate_of"] == r["8"]["event_id"] and r["8"]["status"] == "ended"
+
+
+def test_several_left_on_both_sides_stay_unpaired_and_pairs_are_recomputed():
     reports = [epa("a", "2026-10-29", "TEST CREEK"), epa("b", "2026-10-29", "Unnamed tributary"),
-               epa("c", "2026-10-28", "X Creek"), epa("d", "2026-10-28", "Y Creek")]
-    recs, stats = run([posting("2026-11-02", rows)], epa=reports)
-    r = {x["outfall_name"].split()[0]: x for x in recs}
-    assert r["12"]["duplicate_of"] == "echo-sewer-overflow:a"            # same receiving water
-    assert r["8"]["duplicate_of"] == "echo-sewer-overflow:b"             # the only one left on each side
-    assert r["1"]["duplicate_of"] is None and r["1"]["raw"]["_epa_candidates"] == ["echo-sewer-overflow:c",
-                                                                                     "echo-sewer-overflow:d"]
-    assert r["3"]["duplicate_of"] is None
-    assert stats["epa_pairing"] == {"paired_by_water": 1, "paired_alone": 1, "not_paired": 2, "no_epa_report": 1}
-    # recomputed each run: when EPA's report goes, the mark goes with it
-    again, _ = run([posting("2026-11-02", rows)], prev=recs, epa=[])
-    assert not any(x["duplicate_of"] for x in again)
+               epa("c", "2026-10-28", "X Creek"), epa("d", "2026-10-28", "Y Creek"), epa("e", "2026-10-20", "Z Creek")]
+    r, stats = pair_run(reports)
+    assert r["1"]["ended_at"] is None and r["1"]["raw"]["_epa_candidates"] == ["echo-sewer-overflow:c",
+                                                                                 "echo-sewer-overflow:d"]
+    assert reports[2]["duplicate_of"] is None and reports[4]["duplicate_of"] is None   # unpaired EPA records stay
+    assert r["3"]["ended_at"] is None and not any(x["duplicate_of"] for x in r.values())
+    assert stats["epa_pairing"] == {"paired_by_water": 1, "paired_alone": 1, "epd_without_epa": 3,
+                                    "epa_without_epd": 3}
+    # the next run without EPA's reports clears the end taken from them
+    again, _ = pair_run([], prev=list(r.values()))
+    assert again["12"]["ended_at"] is None and again["12"]["status"] == "unknown" and "_end_basis" not in again["12"]["raw"]
 
 
 # ---------------------------------------------------------------- privacy
@@ -213,6 +243,11 @@ def test_main_reads_saved_files_and_writes_the_events_file(tmp_path, monkeypatch
     out = json.loads((ev / "ga-epd-spills.json").read_text())
     assert out["ok"] and out["count"] == 1 and out["meta"]["last_posting_read"] == "2026-11-03"
     assert out["records"][0]["source_url"].endswith("sewagespillsreport20261103/download")
+    (ev / "echo-sewer-overflow.json").write_text(json.dumps({"source_id": "echo-sewer-overflow", "meta": {},
+                                                             "records": [epa("a", "2026-10-29", "x")]}))
+    assert G.main(["--file", str(f)]) == 0
+    back = json.loads((ev / "echo-sewer-overflow.json").read_text())
+    assert back["records"][0]["duplicate_of"] == out["records"][0]["event_id"]
 
 
 # ---------------------------------------------------------------- the EPA tables in Georgia
