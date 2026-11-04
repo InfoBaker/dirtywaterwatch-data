@@ -3,6 +3,7 @@
     python -m ingest.waters_from_nhd [--offline] [--refresh] [--limit N] [--targets-only] [--no-osm]
                                      [--osm-max N] [--osm-only] [--rebuild] [--budget-s S] [--max-requests N]
     python -m ingest.waters_from_nhd --state XX [--state YY ...] [--budget-s S] [--max-requests N] [--targets-only]
+    python -m ingest.waters_from_nhd --state XX [--state YY ...] --tidy     (offline; tidy_main)
 
 A state build (--state, 2026-11-04; docs/national-waters.md in the site repository): a state's records are built
 before it goes live, from data/receiving-waters-national.json (scripts/gen_receiving_waters.py: one row per receiving
@@ -27,6 +28,12 @@ texts and problems stay, and the run's statistics go under stats.state_builds.<S
 carry define_by (the national list's), defined_by (how the record was found), permits, reach_slugs ({EPA id: slug},
 read by ingest.outfall_waters --state) and, for an unnamed outfall, outfall_ref. Then
 `python -m ingest.outfall_waters --state XX` ties every outfall row of the state to its record or a reason.
+
+--tidy (2026-11-04, nothing fetched): once openboatlaunch's extract for a state is on file, the state build's NHD records
+of the same waters are dropped for openboatlaunch's (the public record) and the records that only shared an
+openboatlaunch slug take a town slug (resolve_existing_duplicates; with no out/water outline on this machine the
+record's bounding box decides, same_water_by_box); target rows' reasons are put in public voice, the tool's detail kept
+in reason_detail (public_reasons); 'Unnamed stream' records are named for their town (name_unnamed_streams).
 
 Budgets: --max-requests (network requests; cached answers are free) and --budget-s (seconds) stop the run before a
 request, never inside one (BudgetExhausted); the targets not reached say so, what was built is written (merged, never
@@ -1048,8 +1055,59 @@ def collect_state_targets(states, existing: dict, national: dict | None = None, 
     return out, skipped_reason, stats
 
 
-def unnamed_name(downstream: str | None) -> str:
-    return f"Unnamed tributary to {downstream}" if downstream else "Unnamed stream"
+UNNAMED_STREAM = "Unnamed stream"
+
+
+def unnamed_name(downstream: str | None, town: str | None = None) -> str:
+    """An unnamed flowline's public name: the first named water downstream ('Unnamed tributary to X'), else the town it
+    lies in ('Unnamed stream near Palmetto': no named water within 50 km downstream, a coastal ditch or canal), else
+    'Unnamed stream' (listed by name_unnamed_streams)."""
+    if downstream:
+        return f"Unnamed tributary to {downstream}"
+    return f"{UNNAMED_STREAM} near {town_display(town)}" if town else UNNAMED_STREAM
+
+
+def name_unnamed_streams(doc: dict, states, when: str | None = None) -> tuple[list[dict], list[str]]:
+    """The records of `states` named just 'Unnamed stream' (built before unnamed_name took the town), in place: named
+    for the first town of their own town list, else of their target rows' (the operators'), with the slug that name
+    gives (the old slug kept in slug_aliases, which build/status.py follows) and the target rows following. Returns
+    (the actions, the slugs left as they are for want of a town)."""
+    states = {x.upper() for x in states}
+    when = when or now_iso()[:10]
+    waters = doc.get("waters") or []
+    taken = {w["slug"] for w in waters if w.get("slug")}
+    rows_of = defaultdict(list)
+    for t in doc.get("targets") or []:
+        for x in t.get("slugs") or []:
+            rows_of[x].append(t)
+    moved, actions, left = {}, [], []
+    for i, w in enumerate(waters):
+        if w.get("state") not in states or w.get("name") != UNNAMED_STREAM:
+            continue
+        towns = list(w.get("towns") or []) or [x for t in rows_of.get(w["slug"], []) for x in t.get("towns") or []]
+        if not towns:
+            left.append(w["slug"])
+            continue
+        name = unnamed_name(None, towns[0])
+        new = f"{slugify(name)}-{w['state'].lower()}"
+        if new in taken:
+            new = f"{slugify(name)}-{slugify(str((w.get('comids') or [w['slug']])[0]))}-{w['state'].lower()}"
+        taken.add(new)
+        from_ = "its town list" if w.get("towns") else "its operators' town"
+        waters[i] = {**w, "name": name, "slug": new,
+                     "slug_aliases": list(dict.fromkeys(list(w.get("slug_aliases") or []) + [w["slug"]])),
+                     "note": (w.get("note") or "") + f"; no named water within 50 km downstream: named for {from_} "
+                                                     f"({towns[0]}) on {when}"}
+        moved[w["slug"]] = new
+        actions.append({"slug": w["slug"], "action": "named", "to": new, "why": f"{name} ({from_})"})
+    for t in doc.get("targets") or []:
+        if not any(x in moved for x in t.get("slugs") or []):
+            continue
+        t["slugs"] = [moved.get(x, x) for x in t["slugs"]]
+        if t.get("reach_slugs"):
+            t["reach_slugs"] = {k: moved.get(v, v) for k, v in t["reach_slugs"].items()}
+    doc["waters"] = sorted(waters, key=lambda r: r.get("slug") or "")
+    return actions, left
 
 
 # ---------------------------------------------------------------- resolving a target to an NHD feature
@@ -1788,6 +1846,26 @@ def resolve_existing_duplicates(doc: dict, existing: dict, states, when: str | N
         t["notes"] = list(dict.fromkeys(notes))
     for old, (new, act, why) in sorted(moved.items()):
         actions.append({"slug": old, "action": act, "to": new, "why": why})
+    # a row the build left without a record whose name an existing record now carries (openboatlaunch's extract, or a
+    # hand alias in data/water-aliases.json: 'Lake Lanier' at Buford), the only one of that name in the state, and
+    # reaching one of the operators' towns by its town list: that record, and the row says so
+    for t in doc.get("targets") or []:
+        if t.get("state") not in states or t.get("slugs") or not t.get("name"):
+            continue
+        cands = same_named_existing(existing, t["state"], t["name"])
+        if len(cands) != 1:
+            continue
+        s = cands[0]
+        common = sorted({town_key(x) for x in t.get("towns") or []}
+                        & {town_key(x) for x in existing[s].get("towns") or []})
+        if not common:
+            continue
+        why = (f"{existing[s].get('name')} ({s}) carries the name '{t['name']}' and reaches the operators' town"
+               f"{'s' if len(common) > 1 else ''} ({', '.join(common[:3])})")
+        t["slugs"] = [s]
+        t["reason"] = None
+        t["notes"] = list(dict.fromkeys(list(t.get("notes") or []) + [f"{when}: openboatlaunch's record: {why}"]))
+        actions.append({"slug": None, "action": "mapped", "to": s, "row": t["name"], "why": why})
     out = {**doc, "waters": sorted(keep, key=lambda r: r.get("slug") or ""), "count": len(keep)}
     return out, actions, aliases
 
@@ -2693,6 +2771,9 @@ class Run:
             return None
         if not rec["name"]:
             rec["name"] = t["name"] or "Unnamed water"
+        if rec["name"] == UNNAMED_STREAM:        # no named water downstream: the town it lies in, else the operators'
+            town = next(iter(rec.get("towns") or []), None) or next((x for x, _ in t["towns"].most_common(1)), None)
+            rec["name"] = unnamed_name(None, town)
         rec.update(_targets=[], _weight=0, _slug_towns=Counter(), _key=k)
         same = same_named_existing(self.existing, t["state"], rec["name"])
         if not same:
@@ -3198,14 +3279,16 @@ def main(argv=None):
                     help="a state build: seconds the NHD high-resolution pass may spend (default 900)")
     ap.add_argument("--max-requests", type=int, help="at most this many network requests in the run (cached answers "
                                                      "are free); the run then stops cleanly and the next one resumes")
-    ap.add_argument("--dedupe-existing", action="store_true",
-                    help="with --state: no build; resolve the state's records that duplicate an openboatlaunch record "
-                         "now on file (resolve_existing_duplicates), offline")
+    ap.add_argument("--tidy", action="store_true",
+                    help="with --state: no build, nothing fetched: the state's records that duplicate an "
+                         "openboatlaunch record now on file (resolve_existing_duplicates), its target rows' reasons in "
+                         "public voice (public_reasons), its 'Unnamed stream' records named for their town "
+                         "(name_unnamed_streams)")
     args = ap.parse_args(argv)
-    if args.dedupe_existing:
+    if args.tidy:
         if not args.state:
-            ap.error("--dedupe-existing needs --state")
-        return dedupe_main(args.state)
+            ap.error("--tidy needs --state")
+        return tidy_main(args.state)
     if args.state:
         if args.rebuild or args.osm_only:
             ap.error("--state merges into data/waters-nhd.json: no --rebuild or --osm-only")
@@ -3344,9 +3427,11 @@ def state_stats(states, targets, rows, recs, tstats, http, run) -> dict:
     return out
 
 
-def dedupe_main(states, path=None, aliases_path=None) -> int:
-    """--state XX --dedupe-existing: resolve_existing_duplicates on data/waters-nhd.json, the aliases into
-    data/water-aliases.json (merged, sorted by slug), the counts under stats.state_builds.<ST>.existing_duplicates."""
+def tidy_main(states, path=None, aliases_path=None) -> int:
+    """--state XX --tidy (offline, after a state build or a new openboatlaunch extract): resolve_existing_duplicates
+    on data/waters-nhd.json, the aliases into data/water-aliases.json (merged, sorted by slug), public_reasons and
+    name_unnamed_streams; the counts and actions under stats.state_builds.<ST>.existing_duplicates. Then rerun
+    `python -m ingest.outfall_waters --state XX` so the outfall rows follow the slugs."""
     states = sorted({x.upper() for x in states})
     path = path or OUT
     aliases_path = aliases_path or (DATA_DIR / S.WATER_ALIASES_FILE)
@@ -3354,14 +3439,21 @@ def dedupe_main(states, path=None, aliases_path=None) -> int:
     existing = existing_waters()
     doc = read_json(path) or {}
     new, actions, aliases = resolve_existing_duplicates(doc, existing, states)
+    voiced = public_reasons(new, set(states))
+    named, unnamed_left = name_unnamed_streams(new, states)
+    actions += named
     builds = dict((new.get("stats") or {}).get("state_builds") or {})
     for st in states:
-        mine = [a for a in actions if a["slug"].endswith(f"-{st.lower()}")]
+        mine = [a for a in actions if a["to"].endswith(f"-{st.lower()}")]
         builds[st] = {**(builds.get(st) or {}), "existing_duplicates": {
             "date": now_iso()[:10], "dropped": sum(a["action"] == "dropped" for a in mine),
-            "renamed": sum(a["action"] == "renamed" for a in mine), "actions": mine}}
+            "renamed": sum(a["action"] == "renamed" for a in mine),
+            "rows_mapped": sum(a["action"] == "mapped" for a in mine),
+            "unnamed_named": sum(a["action"] == "named" for a in mine),
+            "unnamed_left": [x for x in unnamed_left if x.endswith(f"-{st.lower()}")], "actions": mine}}
     new["stats"] = {**(new.get("stats") or {}), "state_builds": dict(sorted(builds.items()))}
-    if actions:
+    if actions or voiced:
+        new["count"] = len(new["waters"])
         write_json(path, new)
     if aliases:
         cur = read_json(aliases_path) or {}
@@ -3369,10 +3461,14 @@ def dedupe_main(states, path=None, aliases_path=None) -> int:
             cur[k] = list(dict.fromkeys(list(cur.get(k) or []) + v))
         aliases_path.write_text(json.dumps(dict(sorted(cur.items())), indent=1, ensure_ascii=False) + "\n")
     for a in actions:
-        print(f"  {a['action']:8} {a['slug']} -> {a['to']}: {a['why']}")
+        print(f"  {a['action']:8} {a['slug'] or 'row ' + repr(a.get('row'))} -> {a['to']}: {a['why']}")
     print(f"{', '.join(states)}: {sum(a['action'] == 'dropped' for a in actions)} NHD records dropped for the "
           f"openboatlaunch record of the same water, {sum(a['action'] == 'renamed' for a in actions)} renamed off an "
-          f"openboatlaunch slug; {len(aliases)} records given aliases in {shown(aliases_path)}")
+          f"openboatlaunch slug, {sum(a['action'] == 'mapped' for a in actions)} target rows without a record mapped "
+          f"to the one now carrying their name; {len(aliases)} records given aliases in {shown(aliases_path)}; "
+          f"{voiced} target rows' reasons put in public voice (the detail in reason_detail); "
+          f"{len(named)} 'Unnamed stream' records named for their town"
+          + (f", left as they are (no town): {', '.join(unnamed_left)}" if unnamed_left else ""))
     return 0
 
 
@@ -3560,9 +3656,76 @@ def town_display(t) -> str:
     return " ".join(w.capitalize() for w in str(t).split())
 
 
-def finish_rows(rows):
-    """Target rows in the file's form. A state build's row also carries reach_slugs: {EPA reach code or NHDPlus id:
-    slug} for the features its reach codes and ids named (ingest.outfall_waters ties an outfall by its own reach)."""
+# A target row's reason reaches the public outfall registry (ingest.outfall_waters copies it into no_water_reason), so it
+# is written in public voice; the tool's detail (the endpoint, the exception, the command-line flag) goes to the row's
+# reason_detail (a place's to its `detail`), which nothing exports. (review 2026-11-04 P3: "OSM state query for FL
+# failed twice (https://overpass-api.de/api/interpreter: ConnectionError)".)
+TOOL_DETAIL = [
+    (re.compile(r"OSM state query for [A-Z]{2} failed twice \([^)]*\)|OSM fallback: Overpass not reachable"),
+     "the map service (OpenStreetMap) could not be reached on {date}"),
+    (re.compile(r"OSM fallback: not cached \(--offline\)|not cached \(--offline\)"),
+     "the map service (OpenStreetMap) was not asked on {date}"),
+    (re.compile(r"\((?:--place-budget [\d.]+ s used|--budget-s used|--max-requests[^)]*)\)"),
+     "(the run's time or request limit was reached on {date})"),
+    (re.compile(r"build error \([A-Za-z_]+(?:Error|Exception)[^)]*\)|OSM fallback failed \([A-Za-z_]+\)"),
+     "the record could not be built on {date} (a fault in the build, logged)"),
+]
+
+
+def public_voice(text: str | None, date: str) -> tuple[str | None, list[str]]:
+    """(the text with each piece of tool detail replaced by its public wording, the pieces replaced)."""
+    if not text:
+        return text, []
+    found = []
+    for rx, say in TOOL_DETAIL:
+        def sub(m, say=say):
+            found.append(m.group(0))
+            return say.format(date=date)
+        text = rx.sub(sub, text)
+    return text, found
+
+
+def public_row(row: dict, date: str) -> dict:
+    """A target row with its reason and its places' reasons in public voice (public_voice), the detail kept in
+    reason_detail and the place's `detail`. A row already in public voice is returned unchanged."""
+    out = dict(row)
+    reason, found = public_voice(row.get("reason"), date)
+    if found:
+        out["reason"] = reason
+        out["reason_detail"] = list(dict.fromkeys(list(row.get("reason_detail") or []) + found))
+    if row.get("places_failed"):
+        places = []
+        for p in row["places_failed"]:
+            r, f = public_voice(p.get("reason"), date)
+            places.append({**p, "reason": r, "detail": "; ".join(dict.fromkeys(([p["detail"]] if p.get("detail") else []) + f))}
+                          if f else p)
+        out["places_failed"] = places
+    return out
+
+
+def public_reasons(doc: dict, states, date_of=None) -> int:
+    """The target rows of `states` in doc put in public voice in place (public_row); the date is the state's build date
+    (stats.state_builds.<ST>.built) unless date_of(state) gives one. Returns the number of rows changed."""
+    builds = (doc.get("stats") or {}).get("state_builds") or {}
+    n = 0
+    rows = doc.get("targets") or []
+    for i, r in enumerate(rows):
+        st = r.get("state")
+        if st not in states:
+            continue
+        date = (date_of(st) if date_of else None) or str((builds.get(st) or {}).get("built") or doc.get("built") or "")[:10]
+        new = public_row(r, date)
+        if new != r:
+            rows[i] = new
+            n += 1
+    return n
+
+
+def finish_rows(rows, date: str | None = None):
+    """Target rows in the file's form, their reasons in public voice (public_row). A state build's row also carries
+    reach_slugs: {EPA reach code or NHDPlus id: slug} for the features its reach codes and ids named
+    (ingest.outfall_waters ties an outfall by its own reach)."""
+    date = date or now_iso()[:10]
     out = []
     for r in rows:
         recs = r.get("_recs") or []
@@ -3576,7 +3739,7 @@ def finish_rows(rows):
                     reach.setdefault(x, s)
         if reach:
             row["reach_slugs"] = dict(sorted(reach.items()))
-        out.append(row)
+        out.append(public_row(row, date))
     return out
 
 

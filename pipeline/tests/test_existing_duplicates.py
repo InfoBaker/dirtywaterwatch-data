@@ -1,5 +1,5 @@
 """NHD records that duplicate an openboatlaunch record now on file (ingest.waters_from_nhd.resolve_existing_duplicates,
---dedupe-existing), and the outfall steps on a record whose outline is not on this machine (ingest.outfall_waters,
+--tidy), and the outfall steps on a record whose outline is not on this machine (ingest.outfall_waters,
 2026-11-04: the NC, GA and FL openboatlaunch extracts arrived without their out/water files in cloud sessions).
 Run from pipeline/: python -m pytest tests -q
 """
@@ -134,13 +134,13 @@ def test_the_builder_takes_the_openboatlaunch_record_when_its_outline_is_absent(
     assert "_existing" not in out                    # another Little River: built, and assign_slugs gives it a town slug
 
 
-def test_dedupe_main_writes_the_file_and_the_hand_aliases(fixture_doc, monkeypatch, tmp_path):
+def test_tidy_main_writes_the_file_and_the_hand_aliases(fixture_doc, monkeypatch, tmp_path):
     doc, existing = fixture_doc
     path, apath = tmp_path / "waters-nhd.json", tmp_path / "water-aliases.json"
     path.write_text(json.dumps(doc))
     apath.write_text(json.dumps({"neuse-river-nc": ["Neuse"], "charles-river-ma": ["Charles River Basin"]}))
     monkeypatch.setattr(N, "existing_waters", lambda: existing)
-    assert N.dedupe_main(["nc"], path=path, aliases_path=apath) == 0
+    assert N.tidy_main(["nc"], path=path, aliases_path=apath) == 0
     out = json.loads(path.read_text())
     assert out["stats"]["state_builds"]["NC"]["existing_duplicates"]["dropped"] == 2
     assert out["stats"]["state_builds"]["NC"]["existing_duplicates"]["renamed"] == 1
@@ -218,3 +218,118 @@ def test_the_far_builder_record_reason_reads_without_a_point():
     o = {"state": "NC", "npdes_permit": "NC0000003", "city": "KENLY", "lat": None, "lon": None}
     assert mt.by_builder_permit(o, "Little River") == (None, None)
     assert "little-river-nc, does not reach the permittee's town (kenly)" in mt._builder_far
+
+
+def test_a_reservoir_by_its_hand_alias_and_a_row_without_a_record(monkeypatch, tmp_path):
+    """Lake Sidney Lanier (review P2-4): NHDPlus names only an 18 km2 polygon near Buford 'Lake Sidney Lanier'; with the
+    hand alias on openboatlaunch's Lake Lanier the fragment is dropped for it, and the 'Lake Lanier' row the build left
+    without a record takes it (the operators' towns are on its town list)."""
+    monkeypatch.setattr(S, "OBL_WATER_DIR", tmp_path / "no-snapshot")
+    lanier = {"slug": "lake-lanier-ga", "name": "Lake Lanier", "kind": "reservoir", "state": "GA",
+              "bbox": [-84.1211, 34.14627, -83.68924, 34.43986], "aliases": ["Lake Sidney Lanier"],
+              "towns": ["Buford", "Cumming", "Flowery Branch", "Gainesville"]}
+    frag = Polygon([(-84.07, 34.15), (-84.0, 34.15), (-84.0, 34.19), (-84.07, 34.19)])
+    doc = {"targets": [
+        {"state": "GA", "name": "Lake Sidney Lanier", "slugs": ["lake-sidney-lanier-ga"], "towns": ["Gainesville", "Cumming"]},
+        {"state": "GA", "name": "Lake Lanier", "slugs": [], "towns": ["Buford", "Dahlonega"], "reason": "not found"},
+        {"state": "GA", "name": "Mill Creek", "slugs": [], "towns": ["Dalton"], "reason": "not found"}],
+        "waters": [{"slug": "lake-sidney-lanier-ga", "name": "Lake Sidney Lanier", "kind": "lake", "state": "GA",
+                    "towns": ["Buford"], "bbox": list(frag.bounds), "geometry": mapping(frag)}]}
+    existing = {"lake-lanier-ga": lanier,
+                "mill-creek-ga": {"slug": "mill-creek-ga", "name": "Mill Creek", "state": "GA", "towns": ["Macon"]}}
+    new, actions, _ = N.resolve_existing_duplicates(doc, existing, ["GA"], when="2026-11-04")
+    assert new["waters"] == []
+    rows = {t["name"]: t for t in new["targets"]}
+    assert rows["Lake Sidney Lanier"]["slugs"] == ["lake-lanier-ga"]
+    assert rows["Lake Lanier"]["slugs"] == ["lake-lanier-ga"] and rows["Lake Lanier"]["reason"] is None
+    assert "reaches the operators' town (buford)" in rows["Lake Lanier"]["notes"][-1]
+    assert rows["Mill Creek"]["slugs"] == []           # Macon's Mill Creek does not reach Dalton: left as it was
+    assert sorted(a["action"] for a in actions) == ["dropped", "mapped"]
+
+
+# ---------------------------------------------------------------- public reasons (review 2026-11-04 P3)
+
+FL_REASON = ("no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within "
+             "3 km of the points; OSM state query for FL failed twice (https://overpass-api.de/api/interpreter: "
+             "ConnectionError): left for the next run")
+
+
+def test_a_reason_names_no_tool_and_keeps_the_detail_aside():
+    row = {"state": "FL", "name": "Bayou Chico", "slugs": [], "reason": FL_REASON,
+           "places_failed": [{"lon": -87.2, "lat": 30.4, "reason": "not tried this run (--place-budget 120 s used)"},
+                             {"lon": -87.3, "lat": 30.5, "reason": "no NHD flowline of that name within 2 km"}]}
+    out = N.public_row(row, "2026-11-04")
+    assert out["reason"].endswith("the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run")
+    assert "overpass" not in out["reason"].lower() and "Error" not in out["reason"]
+    assert out["reason_detail"] == ["OSM state query for FL failed twice (https://overpass-api.de/api/interpreter: "
+                                    "ConnectionError)"]
+    assert out["places_failed"][0] == {"lon": -87.2, "lat": 30.4, "detail": "(--place-budget 120 s used)",
+                                       "reason": "not tried this run (the run's time or request limit was reached on 2026-11-04)"}
+    assert out["places_failed"][1] == row["places_failed"][1]
+    assert N.public_row(out, "2026-11-05") == out                 # already public: unchanged, the date kept
+    assert N.public_voice("build error (KeyError: 'geometry')", "2026-11-04")[0] == \
+        "the record could not be built on 2026-11-04 (a fault in the build, logged)"
+
+
+def test_a_row_not_reached_still_reads_as_not_reached_for_the_merge():
+    row = {"state": "NC", "name": "Mill Creek", "slugs": [], "reason": f"{N.NOT_REACHED} (--budget-s used); the next run resumes"}
+    out = N.finish_rows([{**row, "_recs": []}], date="2026-11-04")[0]
+    assert out["reason"].startswith(N.NOT_REACHED) and "--budget" not in out["reason"]
+    old = [{"state": "NC", "name": "Mill Creek", "slugs": ["mill-creek-nc"], "reason": None}]
+    assert N.merge_targets(old, [out]) == old
+
+
+def test_public_reasons_dates_each_state_by_its_build(monkeypatch):
+    doc = {"built": "2026-11-05T00:00:00Z", "stats": {"state_builds": {"FL": {"built": "2026-11-04T02:45:19Z"}}},
+           "targets": [{"state": "FL", "name": "A", "reason": FL_REASON},
+                       {"state": "GA", "name": "B", "reason": FL_REASON.replace("FL", "GA")},
+                       {"state": "VA", "name": "C", "reason": FL_REASON}]}
+    assert N.public_reasons(doc, {"FL", "GA"}) == 2
+    assert "reached on 2026-11-04" in doc["targets"][0]["reason"]
+    assert "reached on 2026-11-05" in doc["targets"][1]["reason"]         # no build date: the file's
+    assert doc["targets"][2]["reason"] == FL_REASON                        # another state: not touched
+
+
+# ---------------------------------------------------------------- 'Unnamed stream' records (review 2026-11-04 P3)
+
+def test_an_unnamed_stream_is_named_for_its_town_or_its_operators_and_listed_otherwise():
+    line = mapping(LineString([(-82.60, 27.52), (-82.59, 27.53)]))
+    doc = {"targets": [
+        {"state": "FL", "name": None, "slugs": ["unnamed-stream-palmetto-fl"], "towns": ["Palmetto"],
+         "reach_slugs": {"16919440": "unnamed-stream-palmetto-fl"}, "outfall_ref": ["FL0020401", "001"]},
+        {"state": "FL", "name": None, "slugs": ["unnamed-stream-2178575-fl"], "towns": ["Southport"]}],
+        "waters": [
+            {"slug": "unnamed-stream-palmetto-fl", "name": "Unnamed stream", "state": "FL", "towns": ["Palmetto"],
+             "comids": [16919440], "note": "NHDPlus V2.1: the unnamed network flowline COMID 16919440", "geometry": line},
+            {"slug": "unnamed-stream-2178575-fl", "name": "Unnamed stream", "state": "FL", "towns": [],
+             "comids": [2178575], "geometry": line},
+            {"slug": "unnamed-stream-9-fl", "name": "Unnamed stream", "state": "FL", "towns": [], "comids": [9],
+             "geometry": line},
+            {"slug": "unnamed-tributary-to-neuse-river-nc", "name": "Unnamed tributary to Neuse River", "state": "NC",
+             "towns": ["Kinston"], "geometry": line}]}
+    actions, left = N.name_unnamed_streams(doc, ["FL", "NC"], when="2026-11-04")
+    by = {w["slug"]: w for w in doc["waters"]}
+    w = by["unnamed-stream-near-palmetto-fl"]
+    assert w["name"] == "Unnamed stream near Palmetto" and w["slug_aliases"] == ["unnamed-stream-palmetto-fl"]
+    assert "named for its town list (Palmetto)" in w["note"]
+    assert by["unnamed-stream-near-southport-fl"]["name"] == "Unnamed stream near Southport"   # the operators' town
+    assert left == ["unnamed-stream-9-fl"] and by["unnamed-stream-9-fl"]["name"] == "Unnamed stream"
+    assert "unnamed-tributary-to-neuse-river-nc" in by                                          # already named: kept
+    assert doc["targets"][0]["slugs"] == ["unnamed-stream-near-palmetto-fl"]
+    assert doc["targets"][0]["reach_slugs"] == {"16919440": "unnamed-stream-near-palmetto-fl"}
+    assert S.slug_aliases(by)["unnamed-stream-palmetto-fl"] == "unnamed-stream-near-palmetto-fl"     # status follows it
+    assert N.name_unnamed_streams(doc, ["FL"], when="2026-11-04") == ([], ["unnamed-stream-9-fl"])  # idempotent
+
+
+def test_the_build_names_a_new_unnamed_stream_for_its_town(monkeypatch, tmp_path):
+    monkeypatch.setattr(S, "OBL_WATER_DIR", tmp_path / "no-snapshot")
+    assert N.unnamed_name("Manatee River") == "Unnamed tributary to Manatee River"
+    assert N.unnamed_name(None, "west palm beach") == "Unnamed stream near West Palm Beach"
+    assert N.unnamed_name(None) == "Unnamed stream"
+    rec = {"name": "Unnamed stream", "towns": [], "_geom": LineString([(-80.07, 26.68), (-80.071, 26.69)]),
+           "length_km": 0.6, "note": "", "comids": [59942]}
+    monkeypatch.setattr(N, "build_feature", lambda nhd, st, c: dict(rec))
+    run = N.Run.__new__(N.Run)
+    run.existing, run.nhd = {}, None
+    t = {"state": "FL", "name": None, "points": Counter(), "towns": Counter({"West Palm Beach": 2})}
+    assert run.new_record(("line", "FL", "comid59942"), {}, t, {})["name"] == "Unnamed stream near West Palm Beach"
