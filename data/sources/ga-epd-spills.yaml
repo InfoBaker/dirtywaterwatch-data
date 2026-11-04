@@ -10,6 +10,15 @@ level: "state"
 # Cadence (pipeline/ingest/ga_epd_spills.py docstring): each business day, about one business day of
 #   latency. The workbook is a rolling 30-day list with no row id: history is built from the dated
 #   postings (older dated files stay at the same URL pattern); rows that leave the window are kept.
+# Backfill (python -m ingest.ga_epd_spills --backfill; once, by hand or in a dispatched refresh with the backfill input
+#   "ga_epd_spills", never in the scheduled hourly run): every dated posting EPD still serves (on 2026-11-04, every business day from 2025-10-09; earlier
+#   days answer 404), so spills that began from 2025-09-09. Same 13 columns (ten files add EPD's
+#   point, used; the 2026-10-13 file an end date, kept in raw, not used), day precision, no time. The
+#   postings are applied oldest first from no records (--rebuild), so a backfilled row and the daily feed's row are
+#   one record (one key); EPA's reports pair by the feed's rules; a rerun gives the same ids. A row first read from an
+#   archived posting carries raw._read_from_archive (when the file was read, never when EPD was told). Every posting
+#   read is kept in data/build/archive/ga-epd-spills/ with the pipeline state; meta.backfill gives the range and the
+#   counts by begin year. Rows past day 30 set no colour: history, charts and counts only.
 #   Where a row and an EPA Sewer Overflow and Bypass Event report of the same permit and day are one spill, the
 #   EPA report is duplicate_of the row, which takes EPA's end; any doubt leaves them unpaired (module docstring).
 cadence: "daily"
