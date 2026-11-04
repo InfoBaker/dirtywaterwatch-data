@@ -152,3 +152,42 @@ def test_egles_statewide_list_credits_every_michigan_operator_online():
     mi = C.notice_reach(reg, frozenset({M.SOURCE_ID}))["MI"]["told_online"]
     assert mi["operators"] == 565
     assert mi["online"] == 565
+
+
+@pytest.fixture
+def mi_resolver(monkeypatch):
+    from build import status as S
+    monkeypatch.setattr(S, "_STATES", set(S.rules_live_states(S.load_rules()) or []) | {"MI"})
+    return S.make_resolver()
+
+
+def test_rouge_river_as_the_operators_type_it_finds_both_river_rouge_records(mi_resolver):
+    """GLWA and Dearborn type "Rouge River" (and "Main Rouge River"); the records are "River Rouge" (the audit's
+    P1-2: the resolver found no water)."""
+    from build import status as S
+    for text in ("Rouge River", "Main Rouge River"):
+        key = ("MI", S.norm_name(text))
+        found = set(mi_resolver.names.get(key, [])) | set(mi_resolver.exact.get(key, []))
+        assert found == {"river-rouge-mi", "river-rouge-detroit-mi"}, text
+
+
+@pytest.mark.parametrize("ev,slug", [
+    # GLWA's report names no outfall in the registry: Detroit, its town, holds only the Detroit record
+    ({"npdes_permit": "MI0022802", "discharger_id": "mi-glwa-wrrf-mi0022802", "outfall_id": "063"},
+     "river-rouge-detroit-mi"),
+    # Dearborn's outfall 013 lies on the River Rouge record (registry, 16 m)
+    ({"npdes_permit": "MI0025542", "discharger_id": "mi-dearborn-cso-mi0025542", "outfall_id": "013"},
+     "river-rouge-mi"),
+])
+def test_the_operator_chooses_which_river_rouge_a_rouge_river_report_reaches(mi_resolver, ev, slug):
+    ev = {"event_id": "mi-egle-mienviro-cso-sso-list:x", "source_id": M.SOURCE_ID, "event_type": "cso",
+          "waterbody_text": "Rouge River", **ev}
+    assert mi_resolver.resolve(ev)["water_slugs"] == [slug]
+
+
+def test_a_rouge_river_report_whose_town_holds_neither_record_is_not_guessed(mi_resolver):
+    ev = {"event_id": "mi-egle-mienviro-cso-sso-list:y", "source_id": M.SOURCE_ID, "event_type": "cso",
+          "waterbody_text": "Main Rouge River", "npdes_permit": "MI0051489",
+          "discharger_id": "mi-wayne-co-dearborn-heights-cso-mi0051489"}
+    r = mi_resolver.resolve(ev)
+    assert r["water_slugs"] == [] and r.get("unplaced_reason") == "ambiguous name"
