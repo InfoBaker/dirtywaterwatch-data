@@ -65,7 +65,7 @@ LAW = ("Press release to news media within 24 hours for 1,000 gallons or more re
 LAW_C = ("Press release to news media within 24 hours for 1,000 gallons or more of untreated waste reaching surface "
          "waters; newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(c), works other than municipal or "
          "domestic). No web posting is required; none searched for this operator.")
-# legal_form of a row made from research/nc/private-utilities.json
+# legal_form an entry of research/nc/private-utilities.json may carry (the row it makes writes registry_form of it)
 LEGAL_FORMS = ("private utility", "private company", "owners' association", "mobile-home park", "private club",
                "industrial facility", "facility (permittee not named)", "town", "county", "special district")
 # a public body: grouped with its public owner key and never described as privately owned
@@ -165,6 +165,16 @@ def public_by_name(name) -> bool:
         sys.path.insert(0, str(ROOT / "pipeline"))
     from ingest.nc_dwr_sso import owner_kind
     return owner_kind(name)[0] == "public"
+
+
+def registry_form(form: str) -> str:
+    """The research file's legal form as the registry writes it: the controlled value (ingest/dischargers_schema.py;
+    "private utility" is an "investor-owned utility", "private company" and "industrial facility" are "business or
+    industrial", "owners' association" is a "homeowners' association")."""
+    if str(ROOT / "pipeline") not in sys.path:
+        sys.path.insert(0, str(ROOT / "pipeline"))
+    from ingest.dischargers_schema import LEGACY
+    return LEGACY.get(form, form)
 
 
 def cite(e: dict) -> str:
@@ -338,7 +348,7 @@ def main(argv) -> int:
             ents = sorted(g["research"], key=lambda e: e["permit"])
             form = ents[0]["legal_form"]
             earlier = [f"{e['permit']}: {e['history_layer_owner']}" for e in ents if e.get("history_layer_owner")]
-            row = {"id": rid, "name": name, "state": "NC", "legal_form": form, "kind": "sso" if wqcs else "plant",
+            row = {"id": rid, "name": name, "state": "NC", "legal_form": registry_form(form), "kind": "sso" if wqcs else "plant",
                    "npdes_permit": first, "npdes_permits": permits, "receiving_waters": waters, "water_slugs": [],
                    "outfall_count": len(prow) or None, "outfalls_source": src,
                    "notification_channel": LAW_C if form == "industrial facility" else LAW,
@@ -382,7 +392,7 @@ def main(argv) -> int:
                                "Not verified."),
                    "verified": False, "checked": TODAY, "aliases": [rid], "source_areas": ["nc"]}
             if ents:
-                row["legal_form"] = ents[0]["legal_form"]
+                row["legal_form"] = registry_form(ents[0]["legal_form"])
                 row["permit_note"] = "; ".join(cite(e) for e in ents if e["permit"] in permits) + "."
                 pnotes = "".join(f" {e['permittee_note']}" for e in ents if e.get("permittee_note"))
                 if pnotes:
@@ -404,7 +414,7 @@ def main(argv) -> int:
     print(f"collection permits joined by facility name: {by_name}")
     print(f"existing rows that gained permits: {grown}")
     print(f"NC operator rows: {len(new_rows)} new ({sum(1 for r in new_rows if r['kind'] == 'sso')} with a collection "
-          f"permit; {sum(1 for r in new_rows if r.get('legal_form') in LEGAL_FORMS and r['legal_form'] not in PUBLIC_FORMS)} private), {added_permits} "
+          f"permit; {sum(1 for r in new_rows if r.get('legal_form') in {registry_form(f) for f in LEGAL_FORMS} and r['legal_form'] not in PUBLIC_FORMS)} private), {added_permits} "
           f"permits; skipped {dict(skipped)}" + (" (dry run)" if dry else ""))
     if not dry:
         tmp = DIS.with_suffix(".json.tmp")
