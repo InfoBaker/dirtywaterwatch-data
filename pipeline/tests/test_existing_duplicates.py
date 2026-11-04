@@ -517,3 +517,35 @@ def test_a_canal_named_for_two_places_is_one_water():
                     ("Fox River, Indian Creek and Blackberry Creek", ["Fox River", "Indian Creek", "Blackberry Creek"])):
         assert N.split_names(t, False) == want, t
         assert N.national_parts(t) == (want, None), t
+
+
+def test_a_list_of_streams_is_not_an_alias():
+    """EPA's 'HURON,HONEY,ALLEN,TRAVER,MILLERCREK' for an Ann Arbor permit names five streams (MI audit P3-2); an
+    inverted GNIS name with a space ('Rouge, River') is not a list."""
+    assert N.ALIAS_NOT_A_NAME.search("HURON,HONEY,ALLEN,TRAVER,MILLERCREK")
+    assert not N.ALIAS_NOT_A_NAME.search("HURON") and not N.ALIAS_NOT_A_NAME.search("Rouge, River")
+
+
+def test_a_kept_nhd_record_stays_and_its_rows_go_to_the_rest_of_the_river(monkeypatch, tmp_path):
+    """KEEP_NHD_RECORD (MI audit P2-5): openboatlaunch's record of the slug is a stub at the mouth, which the box test
+    takes for the river; the NHD river is kept, and as openboatlaunch's record still wins the slug, its rows go to
+    the NHD remainder of the river (covers_part_of, same GNIS id)."""
+    monkeypatch.setattr(S, "OBL_WATER_DIR", tmp_path / "no-snapshot")
+    monkeypatch.setitem(N.KEEP_NHD_RECORD, "long-river-nc", "the openboatlaunch record is a stub at the mouth")
+    existing = {"long-river-nc": obl_rec("long-river-nc", "Long River", [-78.0, 35.0, -77.99, 35.005], ["Mouth"])}
+    whole = nhd_rec("long-river-nc", "Long River", [(-78.0, 35.0), (-77.0, 35.5)], ["Mouth", "Upton"])
+    rest = {**nhd_rec("long-river-upton-nc", "Long River", [(-77.99, 35.01), (-77.0, 35.5)], ["Upton"]),
+            "gnis_id": "long-river-nc", "covers_part_of": "long-river-nc"}
+    doc = {"stats": {}, "waters": [whole, rest], "targets": [
+        {"state": "NC", "name": "Long River", "slugs": ["long-river-nc"], "towns": ["Upton"],
+         "reach_slugs": {"03020201000555": "long-river-nc"}}]}
+    assert N.same_water_by_box(LineString([(-78.0, 35.0), (-77.0, 35.5)]), existing["long-river-nc"])[0]
+    new, actions, _ = N.resolve_existing_duplicates(json.loads(json.dumps(doc)), existing, ["NC"], when="2026-11-04")
+    assert [w["slug"] for w in new["waters"]] == ["long-river-nc", "long-river-upton-nc"]     # not dropped
+    row = new["targets"][0]
+    assert row["slugs"] == ["long-river-upton-nc"]
+    assert row["reach_slugs"] == {"03020201000555": "long-river-upton-nc"}
+    assert any("is kept, shadowed by openboatlaunch's record" in n for n in row["notes"])
+    assert [(a["slug"], a["action"], a["to"]) for a in actions] == [("long-river-nc", "kept", "long-river-upton-nc")]
+    again, more, _ = N.resolve_existing_duplicates(new, existing, ["NC"], when="2026-11-04")
+    assert more == [] and again["targets"] == new["targets"]
