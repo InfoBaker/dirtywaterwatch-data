@@ -135,8 +135,20 @@ def key(o: dict) -> tuple:
     return (o.get("npdes_permit"), str(o.get("outfall")))
 
 
+STATE_TEXT = False      # run_state(): EPA's receiving-water text read the way the national list reads it
+
+
 def text_of(o: dict) -> str:
-    return str((o.get("receiving_water_override") or {}).get("water") or o.get("receiving_water_echo") or "").strip()
+    """The receiving-water text: the override, else ECHO's. In a state build (STATE_TEXT) the waters it names as the
+    NHD builder's state targets read them (waters_from_nhd.national_parts: 'St Johns R Class III Marine WBID 2213H' is
+    the St Johns River, 'BOGGY CRK/SPRING CRK/FLINT RIVER' is Boggy Creek), joined by 'and'; a text that names none
+    stays as it is."""
+    raw = str((o.get("receiving_water_override") or {}).get("water") or o.get("receiving_water_echo") or "").strip()
+    if STATE_TEXT and raw and not (o.get("receiving_water_override") or {}).get("water"):
+        parts, _ = N.national_parts(raw)
+        if parts:
+            return " and ".join(parts)
+    return raw
 
 
 def variants(text: str) -> list[str]:
@@ -959,7 +971,16 @@ def run_state(states, dry_run: bool = False, offline: bool = False) -> dict:
     NHD builder's record for the outfall's own EPA reach (Matcher.by_reach) and, for an outfall whose permit names no
     water, the record the builder made at it (Matcher.by_outfall_ref). match_outfalls' matches are kept only where
     their slug is an openboatlaunch record. Rows of other states are not touched."""
+    global STATE_TEXT
     states = sorted({x.upper() for x in states})
+    STATE_TEXT = True
+    try:
+        return _run_state(states, dry_run, offline)
+    finally:
+        STATE_TEXT = False
+
+
+def _run_state(states, dry_run: bool, offline: bool) -> dict:
     mt = Matcher(offline=offline, states=states)
     names = list(STATE_FILES) + [f"outfalls-{st.lower()}.json" for st in states
                                  if (DATA_DIR / f"outfalls-{st.lower()}.json").exists()]

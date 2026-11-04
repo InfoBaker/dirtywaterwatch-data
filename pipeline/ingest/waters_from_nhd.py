@@ -316,6 +316,21 @@ def split_names(text: str, point_mode: bool) -> list[str]:
     return out
 
 
+INVERTED = re.compile(r"^\s*([^,]+?),\s*([A-Za-z.' ]{2,20}?)\s*$")
+INVERTED_LEAD = {"lake", "lakes", "bayou", "mount", "point", "lac", "bay", "big", "little", "old", "the"}
+
+
+def gnis_display(name: str | None) -> str | None:
+    """A GNIS name as written: NHDPlus V2.1 carries some in the inverted form GNIS files them under ('Apopka, Lake',
+    'Marcus, Bayou' in Florida, 2026-11-04): 'Lake Apopka', 'Bayou Marcus'."""
+    if not name:
+        return name
+    m = INVERTED.match(name)
+    if m and words(m.group(2)) and words(m.group(2))[0] in INVERTED_LEAD:
+        return f"{m.group(2).strip()} {m.group(1).strip()}"
+    return name
+
+
 def name_score(target_ws: list[str], gnis: str | None) -> float:
     """How well an NHD GNIS name matches a target's name: 1 equal (spaces, numbers and abbreviations
     aside), 0.9 the GNIS name inside the target (with a kind word), 0.85 the target inside the GNIS name
@@ -323,7 +338,7 @@ def name_score(target_ws: list[str], gnis: str | None) -> float:
     10+ letters), else 0."""
     if not gnis or not target_ws:
         return 0.0
-    gw = words(gnis)
+    gw = words(gnis_display(gnis))
     a, b = compact(target_ws), compact(gw)
     if a == b:
         return 1.0
@@ -367,6 +382,11 @@ def sql_names(t: dict) -> list[str]:
         else:
             joined.append(w)
     out.add(" ".join(joined).upper())
+    if t.get("define_by"):          # a state build: the inverted GNIS form too ('APOPKA, LAKE' for Lake Apopka)
+        for x in list(out):
+            first, _, rest = x.partition(" ")
+            if rest and first.lower() in INVERTED_LEAD:
+                out.add(f"{rest}, {first}")
     return sorted(x.replace("'", "''") for x in out if x)
 
 
@@ -1419,6 +1439,59 @@ def resolve_unnamed(nhd: "Nhd", t, index: dict) -> tuple[list, str | None]:
              epa_ids_of(f))], None
 
 
+HR_NEAR_DEG = 0.03          # the box around a point the high-resolution flowlines of a name are asked in (~3 km)
+HR_SPAN_DEG = 0.5           # the box around the points a high-resolution water's flowlines are gathered in (~50 km)
+HR_FIELDS = "permanent_identifier,gnis_id,gnis_name,reachcode,fcode,ftype,lengthkm"
+
+
+def resolve_hr(nhd: "Nhd", t) -> tuple[dict | None, str]:
+    """(choice, how) from the USGS NHD high-resolution flowlines (layer 6 of hydro.nationalmap.gov's NHD MapServer) for
+    a state build's target NHDPlus V2.1 does not name: the flowline of the target's name within HR_NEAR_DEG of one of
+    its points (most reported first), by GNIS name; the nearest when several. The medium-resolution V2.1 network leaves
+    out many small named streams and canals (Florida, 2026-11-04: Brooker Creek, Possum Creek)."""
+    names = sql_names(t)
+    where = "UPPER(gnis_name) IN (" + ",".join(f"'{n}'" for n in names) + ")"
+    for lon, lat in cluster_points(t["points"]):
+        env = f"{lon - HR_NEAR_DEG},{lat - HR_NEAR_DEG},{lon + HR_NEAR_DEG},{lat + HR_NEAR_DEG}"
+        fs = arcgis(nhd.http, "nhd-hr-near", HR_FLOWLINES, service=NHD_HR, where=where, geometry=env,
+                    geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
+                    outFields=HR_FIELDS, maxAllowableOffset="0.0001")
+        cands = [(dist_m(f["_geom"], lon, lat), f) for f in fs if f.get("gnis_id") and f["_geom"] is not None
+                 and name_score(t["words"], f.get("gnis_name")) >= 0.8]
+        if cands:
+            d, f = min(cands, key=lambda x: x[0])
+            return ({"type": "hr-line", "gnis_id": str(int(f["gnis_id"])), "gnis_name": f["gnis_name"],
+                     "box": [round(lon - HR_SPAN_DEG, 4), round(lat - HR_SPAN_DEG, 4), round(lon + HR_SPAN_DEG, 4),
+                             round(lat + HR_SPAN_DEG, 4)]},
+                    f"NHD high resolution: flowline named '{f['gnis_name']}' (GNIS {int(f['gnis_id'])}) {d:.0f} m from "
+                    f"the point ({lat:.5f}, {lon:.5f})")
+    return None, "no NHD high-resolution flowline of that name within 3 km of the points"
+
+
+def build_hr_feature(nhd: "Nhd", state: str, choice: dict) -> dict | None:
+    """A record from the NHD high-resolution flowlines of a GNIS id within the choice's box (resolve_hr)."""
+    gid = str(int(choice["gnis_id"]))
+    fs = arcgis(nhd.http, "nhd-hr", HR_FLOWLINES, service=NHD_HR, where=f"gnis_id IN ('{gid.zfill(8)}','{gid}')",
+                geometry=",".join(str(x) for x in choice["box"]), geometryType="esriGeometryEnvelope", inSR="4326",
+                spatialRel="esriSpatialRelIntersects", outFields=HR_FIELDS, maxAllowableOffset="0.00005")
+    geom = to_geom_line(fs, state, nhd.states)
+    if not fs or geom is None or geom.is_empty:
+        return None
+    fcodes = sorted({f.get("fcode") for f in fs if f.get("fcode")})
+    name = gnis_display(choice["gnis_name"])
+    b = geom.bounds
+    return {"name": name, "kind": kind_of(name, "line", fcodes=fcodes), "state": state, "towns": nhd.towns.along(state, geom),
+            "bbox": [round(b[0], 5), round(b[1], 5), round(b[2], 5), round(b[3], 5)], "wikidata": None, "charted": None,
+            "length_km": round(WX.length_km(geom), 2), "area_km2": None, "launches": [], "advisories": [], "aliases": [],
+            "source": "nhd", "gnis_id": gid, "comids": [], "nhd_fcodes": fcodes, "fetched_at": now_iso(),
+            "towns_from": TOWNS_FROM(state),
+            "note": (f"USGS National Hydrography Dataset, high resolution (The National Map NHD MapServer, layer 6 "
+                     f"'Flowline - Large Scale'): {len(fs)} flowlines with GNIS id {gid} within "
+                     f"{HR_SPAN_DEG} degrees of the outfall's point, cut to the state, merged and simplified to ~10 m; "
+                     f"NHDPlus V2.1 has no flowline of that name"),
+            "_geom": geom}
+
+
 # ---------------------------------------------------------------- building records
 
 def kind_of(name: str, typ: str, ftype=None, fcodes=(), order=0) -> str:
@@ -1468,6 +1541,8 @@ def to_geom_area(features, state, states: States):
 
 
 def feature_key(state, choice) -> tuple:
+    if choice["type"] == "hr-line":
+        return ("line", state, str(choice["gnis_id"]))
     if choice["type"] == "comid-line":
         return ("line", state, f"comid{int(choice['comid'])}")
     if choice["type"] == "line":
@@ -1477,6 +1552,8 @@ def feature_key(state, choice) -> tuple:
 
 def build_feature(nhd: Nhd, state: str, choice: dict) -> dict | None:
     """A record without slug: geometry, name, kind, towns, comids."""
+    if choice["type"] == "hr-line":
+        return build_hr_feature(nhd, state, choice)
     if choice["type"] == "comid-line":         # an unnamed flowline at an outfall (a state build's unnamed outfalls)
         fs = nhd.by_comid(2, choice["comid"])
         geom = to_geom_line(fs, state, nhd.states)
@@ -1521,7 +1598,7 @@ def build_feature(nhd: Nhd, state: str, choice: dict) -> dict | None:
     towns = nhd.towns.along(state, geom)
     b = geom.bounds
     return {
-        "name": choice.get("gnis_name"), "kind": kind, "state": state, "towns": towns,
+        "name": gnis_display(choice.get("gnis_name")), "kind": kind, "state": state, "towns": towns,
         "bbox": [round(b[0], 5), round(b[1], 5), round(b[2], 5), round(b[3], 5)],
         "wikidata": None, "charted": None, **size, "launches": [], "advisories": [], "aliases": [],
         "source": "nhd", "gnis_id": choice.get("gnis_id"),
@@ -2641,6 +2718,45 @@ class Run:
         if row["how"]:
             row["reason"] = None
 
+    def hr_pass(self, pairs, budget=None):
+        """A state build: the targets with a name and points that neither NHDPlus V2.1 nor the name pass placed go to
+        the NHD high-resolution flowlines (resolve_hr), within budget seconds of requests; those not reached say so."""
+        started, n, found = time.monotonic(), 0, 0
+        for t, row in pairs:
+            if row["how"] or not t["name"] or not t["points"] or not has_kind(t["words"]) or generic_name(t["name"]):
+                continue
+            if self.stopped or (budget is not None and time.monotonic() - started > budget):
+                row["reason"] = f"{row['reason']}; NHD high resolution not asked this run (budget)"
+                continue
+            n += 1
+            try:
+                c, how = resolve_hr(self.nhd, t)
+                rec = None
+                if c is not None:
+                    k = feature_key(t["state"], c)
+                    if k not in self.feats:
+                        rec = self.new_record(k, c, t, row)
+                        if rec is not None:
+                            self.feats[k] = rec
+                    rec = self.feats.get(k)
+            except BudgetExhausted as ex:
+                self.stopped = str(ex)
+                row["reason"] = f"{row['reason']}; NHD high resolution not asked ({ex})"
+                continue
+            if rec is None:
+                row["reason"] = f"{row['reason']}; {how}"
+                continue
+            if rec.get("_existing"):
+                row["slugs"].append(rec["_existing"])
+                row["how"].append(f"{how}; the same water as existing record {rec['_existing']}")
+            else:
+                self.attach(rec, row, t, how)
+            row["defined_by"] = "point (NHD high resolution)"
+            row["reason"] = None
+            found += 1
+        print(f"  NHD high resolution: {n} targets asked, {found} with a record ({time.monotonic() - started:.0f} s)",
+              flush=True)
+
     def not_reached(self, t) -> dict:
         row = self.new_row(t)
         row["reason"] = f"not reached this run ({self.stopped}); the next run resumes"
@@ -2897,6 +3013,8 @@ def main(argv=None):
                          "(data/receiving-waters-national.json), live or not; see the module docstring")
     ap.add_argument("--budget-s", type=float, help="stop starting network requests after this many seconds; what is "
                                                    "built is written and the next run resumes from the cache")
+    ap.add_argument("--hr-budget", type=float, default=900.0,
+                    help="a state build: seconds the NHD high-resolution pass may spend (default 900)")
     ap.add_argument("--max-requests", type=int, help="at most this many network requests in the run (cached answers "
                                                      "are free); the run then stops cleanly and the next one resumes")
     args = ap.parse_args(argv)
@@ -3091,6 +3209,8 @@ def state_main(args) -> int:
     pairs = [(t, r) for t, r in zip(todo, run.rows)]
     if not run.stopped:
         run.place_pass([(t, r) for t, r in pairs if t["name"]])
+        run.hr_pass(pairs, args.hr_budget)
+        run.osm_queue = [(t, r) for t, r in run.osm_queue if not r["how"]]
         if not args.no_osm:
             run.osm_state_pass()
         run.hand_pass(pairs)
