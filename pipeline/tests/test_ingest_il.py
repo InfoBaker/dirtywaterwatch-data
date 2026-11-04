@@ -189,3 +189,32 @@ def test_possible_cso_file_replay_needs_out(tmp_path):
     assert P.main(["--file", str(FIX / "il_mwrd_possible_cso.json"), "--out", str(out)]) == 0
     doc = json.loads(out.read_text())
     assert doc["count"] == 3 and (tmp_path / "ev.state.json").exists()
+
+
+# ---------------------------------------------------------------- MWRD reversals to Lake Michigan
+
+def test_reversal_rows_become_one_record_per_structure_with_days_only():
+    from ingest import il_mwrd_lake_reversals as R
+    recs, meta = R.build((FIX / "il_mwrd_lake_reversals.txt").read_text(), "2026-02-04T14:30:51Z")
+    by = {r["source_record_id"]: r for r in recs}
+    a = by["2023-07-02-crcw"]
+    assert a["started_at"] == "2023-07-02" and a["ended_at"] == "2023-07-03" and a["time_precision"] == "day"
+    assert a["status"] == "ended" and a["event_type"] == "cso" and a["waterbody_text"] == "Lake Michigan"
+    assert a["volume_gal"] == 911_800_000 and a["raw"]["diversion"] == "Chicago River Controlling Works"
+    assert by["2023-07-02-wilmette"]["volume_gal"] == 230_800_000
+    assert by["2013-04-18-o-brien-lock"]["volume_gal"] == 3_185_600_000                     # three structures
+    assert by["2019-10-03-wilmette"]["ended_at"] == "2019-10-03"                           # one day: that day
+    assert by["1998-12-31-wilmette"]["ended_at"] == "1999-01-01"                           # into the next year
+    assert 2025 in meta["years_without_reversal"] and 2023 not in meta["years_without_reversal"]
+    assert a["source_updated_at"] == "2026-02-04T14:30:51Z" and a["published_at"] is None
+    bad = by["1997-08-16-crcw"]                                                             # 559.0, not 600.0
+    assert bad["parse_error"] and "do not add up" in bad["parse_error"] and meta["problems"]
+
+
+def test_a_reversal_table_without_its_header_fails_the_run(tmp_path):
+    from ingest import il_mwrd_lake_reversals as R
+    t = tmp_path / "x.txt"
+    t.write_text("Reversals to Lake Michigan\n 2023  7/2-7/3   911.8\n")
+    out = tmp_path / "ev.json"
+    assert R.main(["--text", str(t), "--out", str(out)]) == 1
+    assert json.loads(out.read_text())["ok"] is False

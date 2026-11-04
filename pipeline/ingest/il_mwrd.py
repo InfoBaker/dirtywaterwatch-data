@@ -46,6 +46,10 @@ DIVERSIONS = [
     (re.compile(r"(?i)chicago\s+river\s+controlling\s+works|\bcrcw\b"), "CRCW", "Chicago River Controlling Works"),
     (re.compile(r"(?i)o'?\s*brien\s+lock"), "O'Brien Lock", "O'Brien Lock and Dam (Calumet River)"),
 ]
+# the structures' points (MWRD's CSO Points layer, 2026-11-04), for the reversal records
+DIVERSION_POINTS = {"Wilmette": (42.075959, -87.684557), "CRCW": (41.888471, -87.608273),
+                    "O'Brien Lock": (41.654744, -87.569396)}
+DIVERSION_WATERWAYS = {"Wilmette": "North Shore Channel", "CRCW": "Chicago River", "O'Brien Lock": "Calumet River"}
 # MWRD's own outfalls: the permit of the plant whose service area holds them (the nearest of EPA's rows decides
 # between these; scripts/add_il_mwrd_outfalls.py)
 MWRD_PERMITS = ["IL0028053", "IL0028061", "IL0028088", "IL0047741", "IL0028070"]
