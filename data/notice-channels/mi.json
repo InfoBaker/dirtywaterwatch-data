@@ -1205,78 +1205,6 @@
   },
   {
    "state": "MI",
-   "operator_id": "mi-ann-arbor-ms4",
-   "agency": null,
-   "permit": null,
-   "checked": "2026-11-04",
-   "id": "mi-ann-arbor-ms4-ecoli-results",
-   "name": "ANN ARBOR MS4",
-   "channel_kind": "local_health_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "MCL 324.3112a(3): \"Each time a discharge to surface waters occurs under subsection (1), the person responsible for the sewer system shall test the affected waters for E. coli to assess the risk to the public health\", with the results to the county health departments and the department (up to 10 tests; the health department may waive it)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Testing results",
-   "sources": [
-    "mi-law-mcl-324-3112a"
-   ],
-   "note": "No web form: ANN ARBOR MS4: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. (research/mi/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "MI",
-   "operator_id": "mi-ann-arbor-ms4",
-   "agency": null,
-   "permit": null,
-   "checked": "2026-11-04",
-   "id": "mi-ann-arbor-ms4-health-department-notice",
-   "name": "ANN ARBOR MS4",
-   "channel_kind": "local_health_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "MCL 324.3112a(1): \"the person responsible for the sewer system shall immediately, but not more than 24 hours after the discharge begins, notify the department; local health departments ...; a daily newspaper of general circulation in the county or counties in which a municipality notified pursuant to subsection (4) is located; and a daily newspaper of general circulation in the county in which the discharge occurred or is occurring\"",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Health department notice",
-   "sources": [
-    "mi-law-mcl-324-3112a"
-   ],
-   "note": "No web form: ANN ARBOR MS4: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. (research/mi/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "MI",
-   "operator_id": "mi-ann-arbor-ms4",
-   "agency": null,
-   "permit": null,
-   "checked": "2026-11-04",
-   "id": "mi-ann-arbor-ms4-newspaper-notice",
-   "name": "ANN ARBOR MS4",
-   "channel_kind": "news_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "MCL 324.3112a(1): \"the person responsible for the sewer system shall immediately, but not more than 24 hours after the discharge begins, notify the department; local health departments ...; a daily newspaper of general circulation in the county or counties in which a municipality notified pursuant to subsection (4) is located; and a daily newspaper of general circulation in the county in which the discharge occurred or is occurring\"",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Printed notice",
-   "sources": [
-    "mi-law-mcl-324-3112a"
-   ],
-   "note": "No web form: ANN ARBOR MS4: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. (research/mi/report.md §2.1)",
-   "barrier": "print_only"
-  },
-  {
-   "state": "MI",
    "operator_id": "mi-ann-arbor",
    "agency": null,
    "permit": null,
@@ -10569,78 +10497,6 @@
   },
   {
    "state": "MI",
-   "operator_id": "mi-flint-ms4",
-   "agency": null,
-   "permit": null,
-   "checked": "2026-11-04",
-   "id": "mi-flint-ms4-ecoli-results",
-   "name": "FLINT MS4",
-   "channel_kind": "local_health_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "MCL 324.3112a(3): \"Each time a discharge to surface waters occurs under subsection (1), the person responsible for the sewer system shall test the affected waters for E. coli to assess the risk to the public health\", with the results to the county health departments and the department (up to 10 tests; the health department may waive it)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Testing results",
-   "sources": [
-    "mi-law-mcl-324-3112a"
-   ],
-   "note": "No web form: FLINT MS4: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. (research/mi/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "MI",
-   "operator_id": "mi-flint-ms4",
-   "agency": null,
-   "permit": null,
-   "checked": "2026-11-04",
-   "id": "mi-flint-ms4-health-department-notice",
-   "name": "FLINT MS4",
-   "channel_kind": "local_health_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "MCL 324.3112a(1): \"the person responsible for the sewer system shall immediately, but not more than 24 hours after the discharge begins, notify the department; local health departments ...; a daily newspaper of general circulation in the county or counties in which a municipality notified pursuant to subsection (4) is located; and a daily newspaper of general circulation in the county in which the discharge occurred or is occurring\"",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Health department notice",
-   "sources": [
-    "mi-law-mcl-324-3112a"
-   ],
-   "note": "No web form: FLINT MS4: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. (research/mi/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "MI",
-   "operator_id": "mi-flint-ms4",
-   "agency": null,
-   "permit": null,
-   "checked": "2026-11-04",
-   "id": "mi-flint-ms4-newspaper-notice",
-   "name": "FLINT MS4",
-   "channel_kind": "news_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "MCL 324.3112a(1): \"the person responsible for the sewer system shall immediately, but not more than 24 hours after the discharge begins, notify the department; local health departments ...; a daily newspaper of general circulation in the county or counties in which a municipality notified pursuant to subsection (4) is located; and a daily newspaper of general circulation in the county in which the discharge occurred or is occurring\"",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Printed notice",
-   "sources": [
-    "mi-law-mcl-324-3112a"
-   ],
-   "note": "No web form: FLINT MS4: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. (research/mi/report.md §2.1)",
-   "barrier": "print_only"
-  },
-  {
-   "state": "MI",
    "operator_id": "mi-flint",
    "agency": null,
    "permit": null,
@@ -12155,7 +12011,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: GM Flint Complex: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. (research/mi/report.md §2.1)",
+   "note": "No web form: GM Flint Complex: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -12179,7 +12035,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: GM Flint Complex: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. (research/mi/report.md §2.1)",
+   "note": "No web form: GM Flint Complex: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -12203,7 +12059,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: GM Flint Complex: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. (research/mi/report.md §2.1)",
+   "note": "No web form: GM Flint Complex: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "print_only"
   },
   {
@@ -15297,7 +15153,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Infrastructure Alternatives: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. (research/mi/report.md §2.1)",
+   "note": "No web form: Infrastructure Alternatives: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -15321,7 +15177,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Infrastructure Alternatives: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. (research/mi/report.md §2.1)",
+   "note": "No web form: Infrastructure Alternatives: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -15345,7 +15201,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Infrastructure Alternatives: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. (research/mi/report.md §2.1)",
+   "note": "No web form: Infrastructure Alternatives: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "print_only"
   },
   {
@@ -29673,7 +29529,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Sun Highland Greens Estates: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. (research/mi/report.md §2.1)",
+   "note": "No web form: Sun Highland Greens Estates: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -29697,7 +29553,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Sun Highland Greens Estates: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. (research/mi/report.md §2.1)",
+   "note": "No web form: Sun Highland Greens Estates: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -29721,7 +29577,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Sun Highland Greens Estates: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. (research/mi/report.md §2.1)",
+   "note": "No web form: Sun Highland Greens Estates: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "print_only"
   },
   {
@@ -30374,78 +30230,6 @@
   },
   {
    "state": "MI",
-   "operator_id": "mi-tom-gillenwater-lenawee-county-drain-commission",
-   "agency": null,
-   "permit": null,
-   "checked": "2026-11-04",
-   "id": "mi-tom-gillenwater-lenawee-county-drain-commission-ecoli-results",
-   "name": "Tom Gillenwater, Lenawee County Drain Commission",
-   "channel_kind": "local_health_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "MCL 324.3112a(3): \"Each time a discharge to surface waters occurs under subsection (1), the person responsible for the sewer system shall test the affected waters for E. coli to assess the risk to the public health\", with the results to the county health departments and the department (up to 10 tests; the health department may waive it)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Testing results",
-   "sources": [
-    "mi-law-mcl-324-3112a"
-   ],
-   "note": "No web form: Tom Gillenwater, Lenawee County Drain Commission: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. (research/mi/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "MI",
-   "operator_id": "mi-tom-gillenwater-lenawee-county-drain-commission",
-   "agency": null,
-   "permit": null,
-   "checked": "2026-11-04",
-   "id": "mi-tom-gillenwater-lenawee-county-drain-commission-health-department-notice",
-   "name": "Tom Gillenwater, Lenawee County Drain Commission",
-   "channel_kind": "local_health_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "MCL 324.3112a(1): \"the person responsible for the sewer system shall immediately, but not more than 24 hours after the discharge begins, notify the department; local health departments ...; a daily newspaper of general circulation in the county or counties in which a municipality notified pursuant to subsection (4) is located; and a daily newspaper of general circulation in the county in which the discharge occurred or is occurring\"",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Health department notice",
-   "sources": [
-    "mi-law-mcl-324-3112a"
-   ],
-   "note": "No web form: Tom Gillenwater, Lenawee County Drain Commission: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. (research/mi/report.md §2.1)",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "MI",
-   "operator_id": "mi-tom-gillenwater-lenawee-county-drain-commission",
-   "agency": null,
-   "permit": null,
-   "checked": "2026-11-04",
-   "id": "mi-tom-gillenwater-lenawee-county-drain-commission-newspaper-notice",
-   "name": "Tom Gillenwater, Lenawee County Drain Commission",
-   "channel_kind": "news_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "MCL 324.3112a(1): \"the person responsible for the sewer system shall immediately, but not more than 24 hours after the discharge begins, notify the department; local health departments ...; a daily newspaper of general circulation in the county or counties in which a municipality notified pursuant to subsection (4) is located; and a daily newspaper of general circulation in the county in which the discharge occurred or is occurring\"",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Printed notice",
-   "sources": [
-    "mi-law-mcl-324-3112a"
-   ],
-   "note": "No web form: Tom Gillenwater, Lenawee County Drain Commission: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. (research/mi/report.md §2.1)",
-   "barrier": "print_only"
-  },
-  {
-   "state": "MI",
    "operator_id": "mi-torch-lake-area-sewage-authority",
    "agency": null,
    "permit": null,
@@ -31041,7 +30825,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Veolia: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. (research/mi/report.md §2.1)",
+   "note": "No web form: Veolia: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -31065,7 +30849,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Veolia: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. (research/mi/report.md §2.1)",
+   "note": "No web form: Veolia: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -31089,7 +30873,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Veolia: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. (research/mi/report.md §2.1)",
+   "note": "No web form: Veolia: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "print_only"
   },
   {
@@ -42249,7 +42033,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Yes Communities: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. (research/mi/report.md §2.1)",
+   "note": "No web form: Yes Communities: E. coli tests of the affected waters after each discharge to surface waters, with the results sent to the county health departments and EGLE; the law does not require their publication. No web channel found: the results stay with the health departments and EGLE. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -42273,7 +42057,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Yes Communities: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. (research/mi/report.md §2.1)",
+   "note": "No web form: Yes Communities: notice of each discharge to the local health departments within 24 hours of its start; the law does not require the departments to publish it. No web channel found. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -42297,7 +42081,7 @@
    "sources": [
     "mi-law-mcl-324-3112a"
    ],
-   "note": "No web form: Yes Communities: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. (research/mi/report.md §2.1)",
+   "note": "No web form: Yes Communities: notice of each discharge to a daily newspaper of general circulation in the county where it occurred (and in the counties of downstream municipalities that asked to be told) within 24 hours of its start. Printed only; EGLE's posting of the same notice on its list is the web record. The law binds the person responsible for the sewer system, public or private. (research/mi/report.md §2.1)",
    "barrier": "print_only"
   },
   {
