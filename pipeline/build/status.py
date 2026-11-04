@@ -13,8 +13,10 @@ discharge windows (ongoing red 72 h, yellow to 7 days, then "end never reported"
 the authority window, yellow to 72 h; unknown-status no end: yellow 7 days); state default
 windows and caution windows from data/rules.json (red_rule / yellow_rule); month/year records never colour; beach/rain/HAB advisories colour only lakes,
 ponds and reservoirs under 50 km² and are otherwise advisory points; active advisories age out
-14 days after the last confirmation; revisions (resolve_revisions); ECHO duplicates
-(find_duplicates); the placement guard (Resolver.guard_detail: 2 km, or the water's own reach for a
+14 days after the last confirmation; a discharge's end before its start or more than
+unresolved.implausible_end.days_after_fetch days after the report was read is not used (end_not_credible: the record
+has no confirmed end, the published value stays, intervals carry end_not_used); revisions (resolve_revisions); ECHO
+duplicates (find_duplicates: a dry-land record never absorbs a report of a water); the placement guard (Resolver.guard_detail: 2 km, or the water's own reach for a
 named match), the outfall registry for reports that name no water or a water no record matches (Resolver.by_registry:
 the outfalls a report names, outfall_ids_of, each to its water, Resolver.by_outfalls), reports that
 name no receiving water (no_receiving_water: counted apart, colour nothing) and reports of no release (no_release,
@@ -372,6 +374,38 @@ def future_start(ev: dict, now: datetime | None) -> str | None:
     return f"start is in the future as published (started_at {ev.get('started_at')}); it sets no status"
 
 
+def end_limit_days(rules: dict | None) -> float | None:
+    """unresolved.implausible_end.days_after_fetch in data/rules.json: how far after the report was read a published
+    end may lie and still be quoted as the end of the window (None: no limit)."""
+    v = (((rules or {}).get("unresolved") or {}).get("implausible_end") or {}).get("days_after_fetch")
+    return float(v) if v is not None else None
+
+
+def end_not_credible(ev: dict, now: datetime | None = None, rules: dict | None = None) -> str | None:
+    """Why the published end is not quoted as the end of a colour window, or None. An end before the start, or (with
+    now) a discharge's end more than unresolved.implausible_end.days_after_fetch days after the report was read
+    (fetched_at, else the build time): most likely a typing error in the source (a 2036 for 2026), which would
+    otherwise colour red for years (generic-ingesters re-check R6). The record then has no confirmed end: it follows
+    the rules for records with none (docs/plan.md §2), and the published value stays in the record as given.
+    Advisories keep their end, the authority's own (a seasonal shellfish closure may run for months)."""
+    en = parse_time(ev.get("ended_at"))
+    if en is None:
+        return None
+    st = parse_time(ev.get("started_at"))
+    if st and en < st:
+        return f"ended_at {ev.get('ended_at')} is before started_at {ev.get('started_at')}; the end is ignored"
+    if now is None or ev.get("event_type") in ADVISORY_TYPES or ev.get("status") in ("advisory_active", "advisory_lifted"):
+        return None
+    days = end_limit_days(load_rules() if rules is None else rules)
+    if days is None:
+        return None
+    read = min(t for t in (parse_time(ev.get("fetched_at")), now) if t)
+    if en <= read + timedelta(days=days):
+        return None
+    return (f"ended_at {ev.get('ended_at')} is more than {days:g} days after the report was read "
+            f"({read.astimezone(LOCAL):%Y-%m-%d}); the end is not used and is treated as not confirmed")
+
+
 def latest_observations(files: dict) -> dict[tuple, dict]:
     """{(source_id, permit, outfall key): {month, discharged, ...}}: each outfall's latest monthly observation as its
     collector saw it, explicit zero and "no discharge" months included (meta.latest_month_by_outfall, keyed
@@ -396,7 +430,8 @@ def end_assumed(ev: dict, now: datetime, rules: dict) -> datetime | None:
     et = ev.get("event_type")
     if not (et in DISCHARGE_TYPES or (et == "unknown" and ev.get("status") == "ongoing")):
         return None
-    if ev.get("time_precision") in COARSE_PRECISION or parse_time(ev.get("ended_at")) is not None:
+    if ev.get("time_precision") in COARSE_PRECISION or (parse_time(ev.get("ended_at")) is not None
+                                                        and not end_not_credible(ev, now, rules)):
         return None
     if ev.get("status") == "ended" and (ev.get("raw") or {}).get("_ended_before"):
         return None
@@ -463,13 +498,13 @@ def monthly_interval(ev: dict, mark: dict) -> dict:
     return iv
 
 
-def time_problem(ev: dict, now: datetime | None = None) -> str | None:
-    """A validation error in the record's times (an end before the start; with now, a start in the future), else
-    None."""
+def time_problem(ev: dict, now: datetime | None = None, rules: dict | None = None) -> str | None:
+    """A validation error in the record's times (an end before the start; with now, a start in the future or an end
+    too far after the report was read: end_not_credible), else None."""
     out = []
-    st, en = parse_time(ev.get("started_at")), parse_time(ev.get("ended_at"))
-    if st and en and en < st:
-        out.append(f"ended_at {ev.get('ended_at')} is before started_at {ev.get('started_at')}; the end is ignored")
+    bad_end = end_not_credible(ev, now, rules)
+    if bad_end:
+        out.append(bad_end)
     fs = future_start(ev, now)
     if fs:
         out.append(fs)
@@ -2030,8 +2065,22 @@ def _iv(ev, start, end, rule, red=None, yellow=None):
 def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None = None,
                     rules: dict | None = None) -> list[dict]:
     """The colour intervals one event sets on a water (its state, and the water record for the
-    caution window). end None = open (in effect now)."""
+    caution window). end None = open (in effect now). A published end that is not credible (end_not_credible) is
+    not used: the intervals are those of a record with no end, each with end_not_used (the published end, why, and
+    the rule)."""
     rules = load_rules() if rules is None else rules
+    out = _event_intervals(ev, state, now, water, rules)
+    why = end_not_credible(ev, now, rules) if out and ev.get("ended_at") else None
+    if why:
+        r = ((rules.get("unresolved") or {}).get("implausible_end") or {})
+        note = {"published_end": ev.get("ended_at"), "why": why, "rule": "unresolved.implausible_end",
+                "days_after_fetch": end_limit_days(rules), "rationale": r.get("rationale"), "source": "data/rules.json"}
+        for iv in out:
+            iv["end_not_used"] = note
+    return out
+
+
+def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None, rules: dict) -> list[dict]:
     et, st = ev.get("event_type") or "unknown", ev.get("status") or "unknown"
     if et == "annual_total" or ev.get("time_precision") in COARSE_PRECISION:
         return []                 # outfall-months and annual totals are history, never a colour
@@ -2043,8 +2092,9 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
     if start is None:
         return []
     end = parse_time(ev.get("ended_at"))
-    if end is not None and parse_time(ev.get("started_at")) and end < parse_time(ev.get("started_at")):
-        end = None                           # recorded as a validation error by build() (time_problem)
+    end_not_used = end_not_credible(ev, now, rules) if end is not None else None
+    if end_not_used:
+        end = None      # before the start, or too far ahead: no confirmed end (validation error in build: time_problem)
     if end is not None and ev.get("time_precision") == "day":
         end = end_of_local_day(end)          # a day-precision end counts from the end of that day
     bound = None
@@ -2500,6 +2550,13 @@ def start_txt(iv: dict) -> str:
 
 
 def short_reason(iv: dict, ev: dict | None) -> str:
+    text = _short_reason(iv, ev)
+    if iv.get("end_not_used"):
+        text += " · published end not used"
+    return text
+
+
+def _short_reason(iv: dict, ev: dict | None) -> str:
     if iv.get("rule") == "rain_likely":
         from build import rain_likely as rain_mod
         return rain_mod.short(iv, where(iv))
@@ -2704,7 +2761,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             placements[eid]["superseded"] = superseded[eid]
         if eid in duplicates:
             placements[eid]["duplicate_of"] = duplicates[eid]
-        tp = time_problem(ev, now)
+        tp = time_problem(ev, now, rules)
         future = bool(future_start(ev, now))   # kept and listed; no status, reach or colour (FUTURE_START_H)
         if tp:
             placements[eid]["validation_error"] = tp
@@ -2950,6 +3007,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             "confirmed": iv.get("confirmed"), "ended_by": iv.get("ended_by"),
                             "red_rule": iv.get("red_rule"), "yellow_rule": iv.get("yellow_rule"),
                             "rule_applied": iv.get("rule_applied"), "placement": iv.get("placement"),
+                            **({"end_not_used": iv["end_not_used"]} if iv.get("end_not_used") else {}),
                             "reach": iv.get("reach"), "category": iv.get("category") or "sewage",
                             "ended_at": iv["ended_at"],
                             # rain_likely: the radar total, the threshold and its basis (build/rain_likely.py)
