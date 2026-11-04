@@ -3282,7 +3282,12 @@ class Run:
                 continue
             k = feature_key(t["state"], c)
             if k not in self.feats:
-                rec = self.new_record(k, c, t, row)
+                try:
+                    rec = self.new_record(k, c, t, row)   # fetches the record's geometry: the budget can end here too
+                except BudgetExhausted as ex:
+                    if len(failed) < 12:
+                        failed.append({"lon": lon, "lat": lat, "reason": f"not tried this run ({ex})"})
+                    continue
                 if rec is None:
                     continue
                 self.feats[k] = rec
