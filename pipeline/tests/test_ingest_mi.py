@@ -83,11 +83,27 @@ def test_an_open_report_with_a_later_end_is_ended_by_the_operators_end_and_rtb_i
     assert r["outfall_id"] == "R03" and r["volume_gal"] == 480000
 
 
-def test_a_completed_report_with_the_same_start_and_end_keeps_the_filers_end_flagged():
+def test_a_completed_report_with_the_same_start_and_end_has_no_confirmed_end():
+    """The form fills the start in as the end until a report is completed; a completed report that kept it gives no
+    end (a discharge of thousands of gallons does not start and end in the same minute): ended, no end, so the status
+    build applies the rule for a discharge with no reported end instead of a zero-length window."""
     recs, _ = records()
     r = recs["-1000000000000000016-3"]
-    assert r["status"] == "ended" and r["ended_at"] == r["started_at"] and r["raw"]["_end_equals_start"] is True
+    assert r["status"] == "ended" and r["ended_at"] is None and r["started_at"] is not None
+    assert r["raw"]["_end_equals_start"] is True and "not confirmed" in r["raw"]["_end_not_used"]
+    assert r["raw"]["eventEndDate"] and r["time_precision"] == "minute"   # the published value stays in raw
     assert r["raw"]["reached_water"] is False                      # completed, no water named, land named
+
+
+def test_the_status_build_gives_an_end_equal_to_the_start_no_zero_length_window():
+    from datetime import datetime, timezone
+    from build import status as S
+    recs, _ = records()
+    ev = dict(recs["-1000000000000000016-3"])
+    now = datetime.fromisoformat(ev["started_at"]).astimezone(timezone.utc) + S.timedelta(days=2)
+    ivs = S._event_intervals(ev, "MI", now, {"kind": "river"}, S.load_rules())
+    rules = [iv["rule"] for iv in ivs]
+    assert "discharge" not in rules and rules[0] == "no_end"       # the site's caution from the report time
 
 
 def test_glwa_without_a_permit_is_joined_by_name_only_from_the_list_of_names():
@@ -282,3 +298,55 @@ def test_a_persons_name_joined_to_a_body_is_cut_and_the_body_kept(given, want):
 def test_an_address_typed_on_the_land_reached_loses_its_number():
     out = M.scrubbed_row({"landImpacted": "Address 51751 Example Road. grassy area by the cleanout"})
     assert "51751" not in out["landImpacted"] and "grassy area" in out["landImpacted"]
+
+
+def test_a_named_owner_or_resident_of_the_land_reached_is_cut_and_a_body_kept():
+    out = M.scrubbed_row({"landImpacted": "southeasterly across property owned by Robin Placeholder at 1740 E. Sample "
+                                          "City Road, Sampleton, MI 48000."})
+    assert "Robin Placeholder" not in out["landImpacted"] and "1740" not in out["landImpacted"]
+    assert "property owned by [name removed] at [house number removed] E. Sample City Road" in out["landImpacted"]
+    body = M.scrubbed_row({"landImpacted": "Undeveloped parcel around the pump station owned by Sample Township",
+                           "featureDescription": "Tennis courts owned by Sample View Association"})
+    assert body["landImpacted"].endswith("owned by Sample Township")
+    assert body["featureDescription"].endswith("owned by Sample View Association")
+    assert M.scrubbed_row({"featureDescription": "yard of Mrs. Placeholder"})["featureDescription"] == \
+        "yard of [name removed]"
+
+
+@pytest.mark.parametrize("field,given,gone,kept", [
+    ("landImpacted", "Driveway of 6201 Sample Lake", "6201", "Driveway of [house number removed] Sample Lake"),
+    ("landImpacted", "Ditch at 7705 traveling east to the lake between residences 7603 Sampleton and 7601 Sampleton",
+     "7603", "between residences [house number removed] Sampleton"),
+    ("landImpacted", "The yard at 15147 M-28 and the creek bank to the west", "15147", "yard at [house number removed] M-28"),
+    ("landImpacted", "area adjacent to manhole(10033 Sample) and lower area", "10033", "manhole([house number removed] Sample)"),
+    ("featureDescription", "Manhole located in yard of 17176 Example Ave, Sampleton MI", "17176", "yard of [house number removed]"),
+    ("featureDescription", "Private property located at 915 Westexample and the curb", "915", "at [house number removed]"),
+    ("featureNumber", "Restaurant cleanout, 1234 Example Ave", "1234", "[house number removed] Example Ave"),
+])
+def test_a_house_number_in_the_free_text_is_cut(field, given, gone, kept):
+    out = M.scrubbed_row({field: given})[field]
+    assert gone not in out and kept in out
+
+
+@pytest.mark.parametrize("field,given", [
+    ("featureNumber", "002"), ("featureNumber", "Outfall 003"), ("featureDescription", "001 Discharge to Sample Creek"),
+    ("landImpacted", "Approximately 250 Square feet of grass"), ("landImpacted", "Lot 187 - front yard portion"),
+    ("featureDescription", "Manhole on 10 Mile Drain at Sample St"), ("landImpacted", "isolated by 0815am, done by 1646hrs"),
+    ("dischargeType", "Approximately 100 Gallons of the oxidation ditch contents"),
+    ("featureDescription", "Lift Station 23 Gate area"), ("landImpacted", "a spill in October 2026 Event review area"),
+])
+def test_numbers_that_are_not_house_numbers_stay(field, given):
+    assert M.scrubbed_row({field: given})[field] == given
+
+
+def test_activated_sludge_is_partially_treated_sewage_and_stays_a_record():
+    """Return or waste activated sludge is partially treated sewage (MCL 324.3112a(9)), not biosolids."""
+    assert M.classify(["Other Discharge", "Return Activated Sludge line broke underground seeped"],
+                      ["Partially Treated"])[0] == "plant_bypass"
+    assert M.classify(["Other Discharge", "Discharge of Waste activated sludge"], ["Partially Treated"])[0] == "plant_bypass"
+    assert M.classify(["Dewatered Biosolids cake spill", "Other Discharge"], ["Partially Treated"])[1] == "biosolids"
+
+
+def test_the_left_out_note_names_the_span_the_counts_cover():
+    assert M.left_scope({"backfill": {"from": 2025}}) == "every report read since January 2025"
+    assert M.left_scope({}).startswith("the reports read so far")

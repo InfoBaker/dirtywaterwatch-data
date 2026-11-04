@@ -28,8 +28,10 @@ What is requested (privacy)
   responsiblePartyName and siteName are typed by the filer: a value that is only a person's name becomes
   "[name removed]", and a person's name in brackets after a body ("City of X (<name>)") is cut (party_name()); when
   the responsible party is a person, the site name goes too unless it names a works or a place (a lagoon, a park).
-  landImpacted (the land the sewage reached) loses every street address's house number (it can be a home's
-  driveway or yard); featureDescription and the free-text discharge type lose a house number tied to a residence.
+  landImpacted (the land the sewage reached), featureDescription, a featureNumber that is not an outfall number and the
+  free-text discharge type lose every house number (an address's, and a number before a name or a state highway, or
+  after "at": the land can be a home's driveway or yard; free_text()) and the name of a person given as the land's
+  owner or resident ("property owned by <given> <surname>"; a body such as a township stays: cut_owner_names()).
   Every string then passes common.strip_personal (in event()) and build.redact runs over the records last.
   tests/test_ingest_mi.py proves that the withheld fields and the placeholder names never reach a record or the
   saved raw page.
@@ -45,7 +47,8 @@ Which reports become records
   - Left out, counted (meta.left_out, cumulative in data/build/mi-egle-mienviro-state.json): an "Other" report whose
     words name only fuel, oil, paint or chemicals and no sewage word (other pollution), and one whose words name only
     biosolids or sludge and names no receiving water (the scope rule applied to Florida on 2026-11-04: biosolids are
-    counted, not shown; a spill that reached a named water stays a record).
+    counted, not shown; a spill that reached a named water stays a record). Activated sludge (return or waste
+    activated sludge, mixed liquor) is partially treated sewage under MCL 324.3112a(9), not biosolids: a record.
   - No type and no quality: event_type unknown with a parse_error (kept for review).
 
 Record rules
@@ -56,8 +59,11 @@ Record rules
     day after the read (one report starts in 3021) is not used (raw._start_not_used). reported_at is
     submissionReceivedDate (EGLE's receipt). published_at is null: the list gives no posting time (it shows a report
     as soon as it is submitted). source_updated_at is null. raw._first_seen_at is our clock.
-  - Status. A report EGLE lists as completed (COMPLETE) with an end -> ended at that end (an end equal to the start is
-    the filer's, kept and flagged raw._end_equals_start). A report in process (IN_PROCESS, the first notice, until it
+  - Status. A report EGLE lists as completed (COMPLETE) with an end -> ended at that end. A completed report whose end
+    repeats its start to the minute -> ended with no end (raw._end_equals_start, raw._end_not_used): the form fills
+    the start in as the end until the report is completed and 107 completed reports since 2025 kept it, 98 of them
+    with a volume, so the end is not confirmed; the status build then gives the site's caution from the report time
+    and "end not confirmed" to day 30. A report in process (IN_PROCESS, the first notice, until it
     is completed) whose end equals its start, or has none, -> ongoing with no end: the form repeats the start as the
     end until the report is completed (151 of 334 open reports on 2026-11-04), so it is never read as an end; the
     status build gives an ongoing report 7 days of red, then "end not confirmed" to day 30. An in-process report with
@@ -110,7 +116,8 @@ from pathlib import Path
 
 import requests
 
-from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, NAME_REMOVED, OPERATOR_WORDS, ROOT, event, now_iso,
+from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, HOUSE_NUMBER_REMOVED, NAME_REMOVED, OPERATOR_WORDS, ROOT,
+                    event, now_iso,
                     path_notes_to_meta, read_json, save_raw, scrub_text, strip_house_numbers, write_events, write_json)
 
 SOURCE_ID = "mi-egle-mienviro-cso-sso-list"
@@ -159,7 +166,8 @@ BIOSOLIDS = re.compile(r"\b(biosolids?|sludge|cake)\b", re.I)
 SEWAGE_WORDS = re.compile(
     r"sewage|sanitary|\braw\b|influent|wastewater|waste water|overflow|by-?pass|lagoon|wwsl|effluent|mixed liq|"
     r"\bras\b|\bwas\b|filtrate|primary|secondary|\bcso\b|\bsso\b|\brtb\b|grit|digester|clarifier|oxidation ditch|"
-    r"septage|septic|drain ?field|force main|lift station|pump station|manhole|partial|untreated|diluted|blended",
+    r"septage|septic|drain ?field|force main|lift station|pump station|manhole|partial|untreated|diluted|blended|"
+    r"activated|mixed liquor",
     re.I)
 PLANT_WORDS = re.compile(r"\b(plant|wwtp|wwtf|wrrf|wrf|potw|treatment|lagoons?|wwsl|headworks|influent|grit|digester|"
                          r"clarifier|reactor|aeration|basin|tank|facility|oxidation ditch|filtration|filters?)\b", re.I)
@@ -357,6 +365,57 @@ def safe_row(r: dict) -> dict:
     return {k: r.get(k) for k in FIELDS if k in r}
 
 
+# a person named as the owner or resident of the land the sewage reached ("property owned by <given> <surname> at
+# ...", "the yard of Mr. <surname>"): the name is cut unless it names a body (a township, a company)
+OWNER_CUE = re.compile(
+    r"(?i:\b(owned\s+by|property\s+of|home\s+of|house\s+of|residence\s+of|yard\s+of|lot\s+of|land\s+of|farm\s+of|"
+    r"field\s+of|parcel\s+of|driveway\s+of|basement\s+of|homeowners?|residents?|neighbou?rs?|tenants?)[ ]{1,2})"
+    r"((?:(?:Mr|Mrs|Ms|Miss|Dr)\.?[ ]{1,2})?[A-Z][\w'.-]*(?:[ ]{1,2}(?:&|and)?[ ]{0,2}[A-Z][\w'.-]*){0,3})")
+# a house number in the free text: a number of two to six digits before a capitalised word or a state highway
+# ("Driveway of <number> Island Lake", "between residences <number> Kingsley and ...", "yard at <number> M-28"),
+# or after "at" ("Ditch at <number> traveling east"); not a quantity ("40 Feet", "23 Mile Road"), a time, or a number
+# a route, lot, station, outfall or drain word stands before ("Lot 187", "Drain #264", "Station 23")
+ADDR_NUMBER = re.compile(
+    r"(?<![\w.,/:#$-])(?!0)(\d{2,6})(?=[ ]{1,2}(?:[NSEW]\.?[ ]{1,2})?(?:[A-Z][A-Za-z']+\b|M-\d|US[ -]?\d))")
+AT_NUMBER = re.compile(r"(?i:\b(?:at|near|behind|of)[ ]{1,2})(?!0)(\d{3,6})(?=[ ]{1,2}[a-z]|[ ]{0,2}[,.;)]|$)")
+QUANTITY_AFTER = re.compile(
+    r"[ ]{1,2}(?i:feet|foot|ft|gallons?|gal|yards?|yds?|square|sq|acres?|hours?|hrs?|minutes?|mins?|inch(?:es)?|"
+    r"percent|mg|gpm|mgd|million|thousand|miles?|mile|lbs?|pounds?|cubic|cu|linear|lf|am|pm|block)\b")
+NUMBER_WORD_BEFORE = re.compile(
+    r"(?i:\b(?:US|SR|CR|M|I|Hwy|Highway|Route|Rte|Interstate|Exit|Mile|Marker|MM|Lot|Unit|Site|Sites|Suite|Ste|Apt|"
+    r"Bldg|Building|Station|LS|PS|No|Number|Outfall|CSO|SSO|RTB|Manhole|MH|Basin|Structure|Drain|Pump|Pumps|Tank|"
+    r"Cell|Lagoon|Gate|Door|Bay|Section|Phase|Zone|Room|Line|Feature|Permit|Year|January|February|March|April|May|"
+    r"June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.?)"
+    r"[ #.-]{0,3}$")
+
+
+def cut_owner_names(v: str) -> str:
+    """'property owned by <given> <surname> at ...' -> 'property owned by [name removed] at ...' (a body stays)."""
+    def one(m):
+        name = m.group(2)
+        if _site_words(name) or re.search(r"(?i)\b(llc|inc|corp|company|co|ltd|lp)\b", name):
+            return m.group(0)
+        return m.group(0)[:m.start(2) - m.start(0)] + NAME_REMOVED
+    return OWNER_CUE.sub(one, v)
+
+
+def cut_address_numbers(v: str) -> str:
+    """Every number that reads as a house number in free text (ADDR_NUMBER, AT_NUMBER) -> [house number removed]."""
+    def one(m):
+        before, after = v[max(0, m.start(1) - 16):m.start(1)], v[m.end(1):m.end(1) + 16]
+        if NUMBER_WORD_BEFORE.search(before) or QUANTITY_AFTER.match(after):
+            return m.group(0)
+        return m.group(0)[:m.start(1) - m.start(0)] + HOUSE_NUMBER_REMOVED + m.group(0)[m.end(1) - m.start(0):]
+    v = ADDR_NUMBER.sub(one, v)
+    return AT_NUMBER.sub(one, v)
+
+
+def free_text(v: str) -> str:
+    """A filer's free text as the record keeps it: emails, phones and staff names (scrub_text), owners' and residents'
+    names, and house numbers cut."""
+    return cut_address_numbers(strip_house_numbers(cut_owner_names(scrub_text(clean(v)))))
+
+
 def scrubbed_row(r: dict) -> dict:
     """The fields as the record keeps them: names checked, house numbers cut (see the docstring)."""
     out = safe_row(r)
@@ -369,10 +428,17 @@ def scrubbed_row(r: dict) -> dict:
     if out.get("landImpacted"):
         land = re.sub(r"(?i)(\baddress(?:\s+of)?:?\s*)\d{1,6}[A-Za-z]?\b", r"\1[house number removed]",
                       clean(out["landImpacted"]))
-        out["landImpacted"] = strip_house_numbers(scrub_text(land))
-    for k in ("featureDescription", "featureNumber", "dischargeType", "receivingWater", "dischargeQuality"):
+        out["landImpacted"] = free_text(land)
+    for k in ("featureDescription", "dischargeType"):
         if isinstance(out.get(k), str):
-            out[k] = scrub_text(out[k])
+            out[k] = free_text(out[k])
+    # an outfall number stays as typed ("002", "Outfall 003"); any other feature text is free text
+    if isinstance(out.get("featureNumber"), str):
+        fn = scrub_text(out["featureNumber"])
+        out["featureNumber"] = fn if OUTFALL_NO.match(clean(fn)) else free_text(fn)
+    for k in ("receivingWater", "dischargeQuality"):
+        if isinstance(out.get(k), str):
+            out[k] = cut_owner_names(scrub_text(out[k]))
     return out
 
 
@@ -430,12 +496,18 @@ def _record(a, base, raw, etype, types, quality, fetched_at, permits) -> dict:
         raw["_end_not_used"] = f"the end as published ({iso(end)}) is before the start"
         end = None
     if complete:
-        if end is not None:
+        if end is not None and start is not None and end == start:
+            # the form repeats the start as the end until the report is completed, and some completed reports keep
+            # it (107 of the completed reports since 2025, 98 of them with a volume: a discharge of millions of
+            # gallons does not start and end in the same minute), so the end is not confirmed
+            status, ended_at = "ended", None
+            raw["_end_equals_start"] = True
+            raw["_end_not_used"] = (f"the completed report gives the same time for the start and the end of the "
+                                    f"discharge ({iso(end)}), the time the form fills in until the report is "
+                                    "completed; the end is not confirmed")
+            raw["_end_basis"] = "the completed report gives no end distinct from its start"
+        elif end is not None:
             status, ended_at = "ended", iso(end)
-            if start is not None and end == start:
-                raw["_end_equals_start"] = True
-                raw["_end_basis"] = ("the completed report gives the same time for the start and the end of the "
-                                     "discharge; the end is the filer's")
         else:
             status, ended_at = "ended", None
             raw["_end_basis"] = "the completed report gives no end time"
@@ -669,6 +741,13 @@ def load_file(path: str) -> list[dict]:
     return out
 
 
+def left_scope(state: dict) -> str:
+    """The span the left-out counts cover, for the site's sentence ("Of <span>, ...")."""
+    b = state.get("backfill") or {}
+    return (f"every report read since January {b['from']}" if b.get("from") else
+            "the reports read so far (open reports and those completed in the last 60 days at first)")
+
+
 def main(argv=None) -> int:
     from build import redact
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
@@ -718,8 +797,9 @@ def main(argv=None) -> int:
     meta = {**stats, "newest_report": newest, "raw_path": raw_path, "page": PAGE_URL, "service": LIST_URL,
             "time_basis": MI_TZ_NOTE, "credit": CREDIT, "registry_ids": [SOURCE_ID],
             "left_out": dict(left),
-            "left_out_note": ("Reports on the list that are not sewage records: other pollution (fuel, oil, paint or "
-                              "chemicals with no sewage named) and biosolids or sludge spills. Counted, not shown."),
+            "left_out_note": (f"Counted over {left_scope(state)}: reports on the list that are not sewage records, "
+                              "other pollution (fuel, oil, paint or chemicals with no sewage named) and spills of "
+                              "biosolids or sludge onto land, are counted here but not shown as sewage reports."),
             "backfill": state.get("backfill"), "lookup_errors": errors or None}
     path_notes_to_meta(records, meta)
     path = write_events(SOURCE_ID, records, ok=True, error=None, meta=meta)
