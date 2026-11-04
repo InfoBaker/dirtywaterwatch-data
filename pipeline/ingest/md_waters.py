@@ -1,7 +1,7 @@
 """Maryland water records and name matching for the Maryland ingesters (shared helper, not a feed).
 
 - extract(): openboatlaunch's Maryland water records (../openboatlaunch/out/water/*-md.json with state
-  MD) -> data/waters-md.json in the shape of data/waters-{nj,ny,pa}.json (slug, name, kind, state,
+  MD; the generic extractor for any state is ingest/obl_waters.py) -> data/waters-md.json in the shape of data/waters-{nj,ny,pa}.json (slug, name, kind, state,
   towns, bbox, wikidata, charted, area_km2, launches as slugs, advisories), and the MD rows of
   data/waters-mid-atlantic.csv (rows of other states kept as they are). Run once per openboatlaunch
   snapshot:  python -m ingest.md_waters --extract
@@ -34,6 +34,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from common import DATA_DIR, ROOT, write_json
+from ingest import obl_waters as OW_
 from ingest.nh_vt_waters import FLOW_BEFORE, TRIB_BEFORE, WATER_WORD, norm
 
 STATE = "MD"
@@ -83,43 +84,16 @@ def norm_town(s: str | None) -> str:
 
 # ---------------------------------------------------------------- extract
 
-def water_record(d: dict) -> dict:
-    """One openboatlaunch out/water/<slug>.json -> the extract's shape."""
-    return {
-        "slug": d["slug"], "name": d.get("name"), "kind": d.get("kind"), "state": d.get("state"),
-        "towns": list(d.get("towns") or []), "bbox": d.get("bbox"), "wikidata": d.get("wikidata"),
-        "charted": d.get("charted"), "area_km2": d.get("area_km2"),
-        "launches": [x["s"] for x in d.get("launches") or [] if isinstance(x, dict) and x.get("s")],
-        "advisories": list(d.get("advisories") or []),
-    }
+water_record = OW_.water_record      # one openboatlaunch out/water/<slug>.json -> the extract's shape (ingest.obl_waters)
 
 
 def extract(obl_dir: Path = OBL_WATER_DIR, out_json: Path = WATERS_JSON, out_csv: Path | None = WATERS_CSV,
             snapshot: str | None = None) -> dict:
-    """Write data/waters-md.json (and the MD rows of data/waters-mid-atlantic.csv)."""
-    waters = []
-    for p in sorted(Path(obl_dir).glob("*-md.json")):
-        try:
-            d = json.loads(p.read_text())
-        except Exception:  # noqa: BLE001 - a half-written file in the snapshot is skipped, not fatal
-            continue
-        if d.get("state") != STATE or not d.get("slug"):
-            continue
-        waters.append(water_record(d))
-    waters.sort(key=lambda w: w["slug"])
-    snap = snapshot
-    if snap is None:
-        meta = Path(obl_dir).parent / "meta.json"
-        try:
-            m = json.loads(meta.read_text())
-            snap = str(m.get("built") or m.get("generated") or m.get("updated") or "")[:10] or None
-        except Exception:  # noqa: BLE001
-            snap = None
-    out = {"state": STATE, "source": f"openboatlaunch out/water snapshot {snap or 'unknown date'}",
-           "count": len(waters), "waters": waters}
-    write_json(out_json, out)
+    """Write data/waters-md.json (ingest.obl_waters.extract for MD) and the MD rows of data/waters-mid-atlantic.csv."""
+    out = OW_.extract(STATE, Path(obl_dir), out_json, snapshot)
+    out.pop("_read", None)
     if out_csv is not None:
-        _write_csv_rows(out_csv, waters)
+        _write_csv_rows(out_csv, out["waters"])
     _records.cache_clear()
     _index.cache_clear()
     return out
