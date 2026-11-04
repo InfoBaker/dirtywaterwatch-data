@@ -285,6 +285,26 @@ def town_key(t) -> str:
     return re.sub(r"\s+(township|twp|borough|boro|village|city|town|plantation|gore|grant|cdp)$", "", t).strip()
 
 
+# a named county or intercounty drain ("Koehler Drain", "Fowler Extension No. 2 Drain", "Laingsburg Drain #264",
+# "LEMON DRAIN"): in Michigan (and Indiana and Ohio) a legally established drain is usually an open watercourse, and
+# NHD names many of them; "storm drain", "floor drain" or "French drain" stay plumbing
+NAMED_DRAIN = re.compile(r"^\s*([A-Z0-9][\w'.&-]*(?:[ ]+[\w'.&-]+){0,4})[ ]+(?:Drain|DRAIN)"
+                         r"(?:[ ]+(?:No\.?|NO\.?|#)[ ]*\d+[A-Za-z]?|[ ]*#[ ]*\d+[A-Za-z]?)?(?:[ ]*\([^()]*\))?\s*$")
+DRAIN_NOT_NAME = {"french", "floor", "roof", "trench", "footing", "foundation", "sump", "tile", "field", "curb", "area",
+                  "yard", "sanitary", "sewer", "pipe", "outlet", "inlet", "basement", "gutter", "window", "shower",
+                  "main", "lateral", "drain", "the", "a", "an"}
+
+
+def named_drain(t: str) -> bool:
+    """Whether a text is a named drain (NAMED_DRAIN) whose name words are not plumbing or a place of the works."""
+    m = NAMED_DRAIN.match(t)
+    if not m:
+        return False
+    head = words(m.group(1))
+    return bool(head) and not any(w in NON_NAME or w in DRAIN_NOT_NAME for w in head) \
+        and not re.fullmatch(r"[\d\s#.]+", m.group(1))
+
+
 def not_water(text: str) -> str | None:
     """Why a text is not a water's name (None when it may be one)."""
     t = str(text or "").strip()
@@ -292,6 +312,8 @@ def not_water(text: str) -> str | None:
         return "empty"
     if ADDRESS.search(t):
         return "a street address"
+    if named_drain(t):
+        return None
     if re.fullmatch(r"\W*[A-Za-z]{1,2}\W*", t):
         return "not a water name"           # 'N', 'A' (a yes/no column), 'UT' (an unnamed tributary)
     ws = words(t)
@@ -361,7 +383,8 @@ def split_names(text: str, point_mode: bool) -> list[str]:
 
 
 INVERTED = re.compile(r"^\s*([^,]+?),\s*([A-Za-z.' ]{2,20}?)\s*$")
-INVERTED_LEAD = {"lake", "lakes", "bayou", "mount", "point", "lac", "bay", "big", "little", "old", "the"}
+INVERTED_LEAD = {"lake", "lakes", "bayou", "mount", "point", "lac", "bay", "big", "little", "old", "the",
+                 "river"}         # 'Rouge, River' (Michigan, 2026-11-04): River Rouge
 
 
 def gnis_display(name: str | None) -> str | None:
@@ -619,13 +642,14 @@ def arcgis(http: Http, kind: str, layer: int, *, service: str = EPA_NHD, **param
 
 # ---------------------------------------------------------------- states and towns
 
-def read_state_outlines(codes) -> dict:
+def read_state_outlines(codes, zip_path=None, stem: str = "cb_2023_us_state_500k") -> dict:
     """Census cartographic state outlines (cb_2023_us_state_500k.zip, the Census Bureau's 2023 1:500,000 file:
     data/raw/census/, else the sibling openboatlaunch copy, else downloaded once from
     https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_state_500k.zip; waters_extra.states_zip()), read
-    without pyshp: shapefile polygons (outer rings clockwise, holes counter-clockwise) and the dbf's STUSPS."""
-    z = zipfile.ZipFile(WX.states_zip())
-    stem = "cb_2023_us_state_500k"
+    without pyshp: shapefile polygons (outer rings clockwise, holes counter-clockwise) and the dbf's STUSPS. zip_path and
+    stem read another Census state file of the same layout (TIGER/Line tl_2023_us_state, whose boundaries run through
+    the Great Lakes: scripts/cut_lakes_to_state_waters.py)."""
+    z = zipfile.ZipFile(zip_path or WX.states_zip())
     shp, dbf = z.read(f"{stem}.shp"), z.read(f"{stem}.dbf")
     nrec = struct.unpack("<I", dbf[4:8])[0]
     hlen, rlen = struct.unpack("<HH", dbf[8:12])

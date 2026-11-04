@@ -636,3 +636,16 @@ def test_a_target_rows_towns_are_the_same_under_any_hash_seed():
                            env={**os.environ, "PYTHONHASHSEED": seed}, capture_output=True, text=True, check=True)
         outs.add(r.stdout.strip())
     assert outs == {"['barton', 'cresaptown', 'frostburg', 'lonaconing']"}
+
+
+@pytest.mark.parametrize("text,ok", [
+    ("Koehler Drain", True), ("LEMON DRAIN", True), ("Fowler Extension No. 2 Drain", True), ("Laingsburg Drain #264", True),
+    ("Perry Drain No. 2", True), ("Rich Intercounty Drain", True), ("Schollenbarger Drain (tributary to Bear Creek)", True),
+    ("storm drain", False), ("Storm Drain", False), ("French Drain", False), ("Floor drain", False), ("Drain", False),
+    ("Private Drain", False), ("12 Drain", False), ("RICH INTERCOUNTY DRAIN V STORM DRN", False),
+])
+def test_a_named_county_drain_is_a_water_name_and_plumbing_is_not(text, ok):
+    """Michigan's legally established drains are open watercourses that NHD names ('Koehler Drain'); a CSO permittee's
+    receiving water can be one (Capac's Lemon Drain). A drain that is plumbing stays 'not a water name'."""
+    assert (N.not_water(text) is None) is ok
+    assert bool(N.split_names("unnamed tributary to Hamilton Drain", False)) is True

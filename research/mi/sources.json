@@ -121,11 +121,11 @@
   "history": "System holds records back to 2001 (some 2001 rows still IN_PROCESS); one row has a typo year 3021. Annual CSO/SSO/RTB report PDFs 2019-2021 on the EGLE page.",
   "license": "No licence or terms statement found on the list page; michigan.gov footer 'Copyright 2026 State of Michigan'. Public statutory posting (MCL 324.3112a(2)).",
   "legal_basis": "MCL 324.3112a(1)-(2); 40 CFR 122.38 (GLWA and other CSO permittees designate this list as their 4-hour public notice)",
-  "status": "candidate",
-  "status_reason": "Statewide, event-level, machine-readable, public: the feed to build first. Needs join to EPA inventory for coordinates (permitNumber + featureNumber).",
+  "status": "used",
+  "status_reason": "Statewide, event-level, machine-readable, public: read hourly by pipeline/ingest/mi_egle_mienviro.py (3,198 records on 2026-11-04 with the backfill from 2025). No coordinates: placement by permit and outfall number through the outfall registry.",
   "verified": "fetched",
-  "checked": "2026-11-03",
-  "notes": "dischargeType/dischargeQuality values are doubled ('CSO Discharge,CSO Discharge'); one submission can hold several sections (outfalls) sharing submissionReferenceNumber (e.g. HQS-P25H-0AHKY with sections 2,3,4); stable key = id (Int64 as string) or submissionReferenceNumber+sectionNumber. GLWA's initial rows had no permitNumber or receivingWater. SSO rows use state permit-like ids '3112a-0707'. Timestamps carry offsets (-04:00/-05:00)."
+  "checked": "2026-11-04",
+  "notes": "dischargeType/dischargeQuality values are doubled ('CSO Discharge,CSO Discharge'); one submission can hold several sections (outfalls) sharing submissionReferenceNumber (e.g. HQS-P25H-0AHKY with sections 2,3,4); stable key = submissionId + sectionNumber (checked 2026-11-04: `id` is renumbered on every response, and submissionReferenceNumber is blank on some rows). GLWA's initial rows had no permitNumber or receivingWater. SSO rows use state permit-like ids '3112a-0707'. Timestamps carry offsets (-04:00/-05:00)."
  },
  {
   "id": "mi-law-mcl-324-3112a",
