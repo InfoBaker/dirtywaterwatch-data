@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from ingest import md_waters, obl_waters  # noqa: E402
 
-FIX = Path(__file__).parent / "fixtures" / "obl" / "out" / "water"
+FIX = Path(__file__).parent / "fixtures" / "obl-snapshot" / "water"     # openboatlaunch out/ layout (not named out/: git ignores out/)
 
 
 def test_the_states_records_in_the_extract_shape(tmp_path):
