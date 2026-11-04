@@ -122,17 +122,26 @@ def test_the_export_writes_the_state_files_beside_the_unchanged_national_ones():
 
 # ---------------------------------------------------------------- scripts/upload-current.sh
 
-def _project(tmp_path, index, states=("pa", "ny"), fail=(), flaky=()):
+NATIONAL = ["outfalls.json", "meta.json", "waters.json", "active.json", "rules.json", "overlays.geojson", "reaches.geojson",
+            "advisory-points.geojson", "launches.geojson", "history.json", "events-index.json", "sources.json",
+            "dischargers.json"]       # the thirteen files the Worker and the site read, in the script's order
+
+
+def _project(tmp_path, index, states=("pa", "ny"), fail=(), flaky=(), missing=()):
+    """Run scripts/upload-current.sh under sh (dash on the runners) in a scratch project with a stub wrangler that logs
+    every put (fail: keys that never put; flaky: keys that fail once, then put). Returns (the process, the keys put)."""
     root = tmp_path / "proj"
     (root / "scripts").mkdir(parents=True)
     shutil.copy(ROOT / "scripts" / "upload-current.sh", root / "scripts" / "upload-current.sh")
     (root / "scripts" / "export-outfalls.py").write_text("")
     (root / "out" / "reaches").mkdir(parents=True)
-    for f in ("meta.json", "reaches.geojson"):
-        (root / "out" / f).write_text("{}")
+    for f in NATIONAL:
+        if f not in missing:
+            (root / "out" / f).write_text("{}")
     for s in states:
         (root / "out" / "reaches" / f"{s}.geojson").write_text("{}")
-    (root / "out" / "reaches" / "index.json").write_text(index if isinstance(index, str) else json.dumps(index))
+    if index is not None:
+        (root / "out" / "reaches" / "index.json").write_text(index if isinstance(index, str) else json.dumps(index))
     bin_ = tmp_path / "bin"
     bin_.mkdir()
     log = tmp_path / "put.log"
@@ -143,14 +152,15 @@ def _project(tmp_path, index, states=("pa", "ny"), fail=(), flaky=()):
                                    f'for k in {flakes or "none"}; do [ "$4" = "$k" ] && [ ! -e "{mark}" ] && '
                                    f'{{ : > "{mark}"; exit 1; }}; done\n'
                                    f'echo "$4 $6" >> "{log}"\n')
-    (bin_ / "sleep").write_text("#!/bin/sh\n")
+    (bin_ / "sleep").write_text(f'#!/bin/sh\necho "slept $1" >> "{log}"\n')
     for b in ("wrangler", "sleep"):
         os.chmod(bin_ / b, 0o755)
     env = {**os.environ, "PATH": f"{bin_}:{os.environ['PATH']}"}
     r = subprocess.run(["sh", str(root / "scripts" / "upload-current.sh")], env=env, capture_output=True, text=True,
                        timeout=60)
-    puts = [ln.split()[0].removeprefix("dirtywaterwatch-data/current/") for ln in log.read_text().splitlines()] \
-        if log.exists() else []
+    lines = log.read_text().splitlines() if log.exists() else []
+    puts = [ln.split()[0].removeprefix("dirtywaterwatch-data/current/") for ln in lines if not ln.startswith("slept ")]
+    r.sleeps = [int(ln.split()[1]) for ln in lines if ln.startswith("slept ")]
     return r, puts
 
 
@@ -158,34 +168,56 @@ def _index(*files):
     return {"files": [{"state": f[8:10].upper(), "file": f} for f in files]}
 
 
-def test_upload_puts_the_listed_state_files_then_the_index_last(tmp_path):
+def test_upload_puts_the_national_files_as_before_then_the_listed_state_files_then_the_index_last(tmp_path):
     r, puts = _project(tmp_path, _index("reaches/pa.geojson", "reaches/ny.geojson"))
     assert r.returncode == 0, r.stderr
-    assert puts == ["meta.json", "reaches.geojson", "reaches/pa.geojson", "reaches/ny.geojson", "reaches/index.json"]
+    assert puts == NATIONAL + ["reaches/pa.geojson", "reaches/ny.geojson", "reaches/index.json"]
+    assert [ln for ln in r.stdout.splitlines() if not ln.startswith("uploaded current/")] == []
+
+
+def test_upload_without_an_index_puts_the_national_files_only_and_passes(tmp_path):
+    r, puts = _project(tmp_path, None, states=())
+    assert r.returncode == 0 and puts == NATIONAL
 
 
 @pytest.mark.parametrize("index", [
     _index("reaches/pa.geojson", "../secrets.json"),
     _index("reaches/pa.geojson", "reaches/pa.geojson"),
+    _index("reaches/pa.geojson", "reaches/PA.geojson"),
     _index(*[f"reaches/{chr(97 + i // 26)}{chr(97 + i % 26)}.geojson" for i in range(65)]),
+    {"files": [{"file": "reaches/pa.geojson reaches/ny.geojson"}]},
+    {"files": "reaches/pa.geojson"},
     "{not json",
 ])
-def test_upload_refuses_an_index_outside_the_bounds_and_puts_no_state_file(tmp_path, index):
+def test_upload_refuses_an_index_outside_the_bounds_puts_no_state_file_and_fails(tmp_path, index):
     r, puts = _project(tmp_path, index)
-    assert r.returncode == 0
-    assert puts == ["meta.json", "reaches.geojson"] and "the index did not pass the check" in r.stdout
+    assert puts == NATIONAL and "the index did not pass the check" in r.stdout
+    assert r.returncode == 1 and "not uploaded: reaches/index.json" in r.stdout
 
 
-def test_upload_keeps_the_old_index_when_a_state_file_fails_or_is_missing(tmp_path):
+def test_upload_keeps_the_old_index_when_a_state_file_fails_or_is_missing_and_exits_1(tmp_path):
     r, puts = _project(tmp_path, _index("reaches/pa.geojson", "reaches/ny.geojson"), fail=("reaches/pa.geojson",))
-    assert puts == ["meta.json", "reaches.geojson", "reaches/ny.geojson"]
+    assert puts == NATIONAL + ["reaches/ny.geojson"]
     assert "not uploaded: reaches/pa.geojson" in r.stdout and "index.json left as it was" in r.stdout
+    assert r.returncode == 1 and r.stdout.rstrip().endswith("upload-current: not uploaded: reaches/pa.geojson")
     r, puts = _project(tmp_path / "b", _index("reaches/pa.geojson", "reaches/ny.geojson"), states=("pa",))
-    assert "reaches/index.json" not in puts and "not in out/: reaches/ny.geojson" in r.stdout
+    assert "reaches/index.json" not in puts and "not in out/: reaches/ny.geojson" in r.stdout and r.returncode == 1
+
+
+def test_upload_exits_1_after_a_failed_or_missing_national_file_but_still_puts_the_rest(tmp_path):
+    # scripts/refresh-data.sh reads the exit code: 1 means the live files in R2 were not all replaced
+    r, puts = _project(tmp_path, _index("reaches/pa.geojson"), states=("pa",), fail=("waters.json",))
+    assert puts == [f for f in NATIONAL if f != "waters.json"] + ["reaches/pa.geojson", "reaches/index.json"]
+    assert r.returncode == 1 and "upload failed: current/waters.json" in r.stdout
+    assert r.stdout.rstrip().endswith("upload-current: not uploaded: waters.json")
+    assert r.sleeps == [2, 4, 8]                        # the three retries' backoff
+    r, puts = _project(tmp_path / "b", _index("reaches/pa.geojson"), states=("pa",), missing=("history.json",))
+    assert puts == [f for f in NATIONAL if f != "history.json"] + ["reaches/pa.geojson", "reaches/index.json"]
+    assert r.returncode == 1 and "not in out/: history.json" in r.stdout
 
 
 def test_upload_retries_a_transient_failure_under_a_posix_shell(tmp_path):
     # the old backoff, $((2 ** n)), is not POSIX: dash (sh on the runners) stopped the whole upload at the first retry
     r, puts = _project(tmp_path, _index("reaches/pa.geojson"), states=("pa",), flaky=("meta.json",))
-    assert r.returncode == 0 and "arithmetic" not in r.stderr
-    assert puts == ["meta.json", "reaches.geojson", "reaches/pa.geojson", "reaches/index.json"]
+    assert r.returncode == 0 and "arithmetic" not in r.stderr and r.sleeps == [2]
+    assert puts == NATIONAL + ["reaches/pa.geojson", "reaches/index.json"]
