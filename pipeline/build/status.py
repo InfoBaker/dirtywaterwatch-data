@@ -38,6 +38,7 @@ waters: {slug: one char per hour, r/y/g}, intervals: {slug: [[from, until, colou
 from __future__ import annotations
 
 import argparse
+import copy
 import functools
 import json
 import math
@@ -2762,14 +2763,62 @@ def source_health(sid: str, f: dict, reg: dict, now: datetime) -> dict:
 
 # ---------------------------------------------------------------- build
 
+PLACEMENT_CACHE = BUILD_DIR / "placement-cache.json"
+PLACEMENT_CACHE_DAYS = 120      # records that began longer ago than this reuse their placement while nothing changed
+
+
+def outline_files(waters) -> list:
+    """The outlines placement reads from openboatlaunch's folder (water_geometry: a record with no inline geometry),
+    as (slug, size, modified) or (slug, None) where there is none: a moved outline, or a machine without the folder
+    (the hosted runner has none), is a placement input like the records themselves (review 2026-11-04)."""
+    out = [str(OBL_WATER_DIR)]
+    for slug in sorted(waters):
+        if (waters[slug] or {}).get("geometry"):
+            continue
+        try:
+            st = (OBL_WATER_DIR / f"{slug}.json").stat()
+            out.append((slug, st.st_size, st.st_mtime_ns))
+        except OSError:
+            out.append((slug, None))
+    return out
+
+
+def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules, states) -> str:
+    """Everything a placement is made from besides the record: the water records, the outlines read from
+    openboatlaunch's folder (outline_files), the outfall registry, the operators' towns and receiving waters, the
+    rules, the live states, the placement steps switched on (PLACE_STEPS), the code (this module, build/redact.py,
+    common.py) and the name lists. A change to any of them places every record again."""
+    import hashlib
+    import sys as _sys
+    from build import redact as _redact
+    h = hashlib.sha256(json.dumps([waters, outline_files(waters), outfalls, discharger_towns, discharger_waters, rules,
+                                   sorted(states), PLACE_STEPS], sort_keys=True, default=str).encode())
+    for f in (Path(__file__), Path(_redact.__file__), Path(_sys.modules["common"].__file__),
+              DATA_DIR / "name-allowlist.json", BUILD_DIR / "name-blocklist.json"):
+        h.update(f.read_bytes() if f.exists() else b"-")
+    return h.hexdigest()
+
+
+def record_hash(ev: dict) -> str:
+    import hashlib
+    return hashlib.blake2b(json.dumps(ev, sort_keys=True, default=str).encode(), digest_size=16).hexdigest()
+
+
 def build(include_fixtures: bool = False, now: datetime | None = None, events_dir: Path = EVENTS_DIR,
           write: bool = True, waters: dict | None = None, outfalls: list | None = None,
           registry: dict | None = None, include_restricted: bool = False, rules: dict | None = None,
           reaches: dict | None = None, flows: tuple | None = None, discharger_towns: dict | None = None,
-          rain: dict | None = None, discharger_waters: dict | None = None, discharger_aliases_map: dict | None = None):
+          rain: dict | None = None, discharger_waters: dict | None = None, discharger_aliases_map: dict | None = None,
+          placement_cache: Path | None | bool = True):
     """rain: {"rainfall", "history", "thresholds"} (build/rain_likely.py); read from data/build/ when
     None and rules.rain_likely.enabled is true. Placement reads every outfall registry file
-    (load_registry_outfalls) when outfalls is None, else the outfalls given."""
+    (load_registry_outfalls) when outfalls is None, else the outfalls given.
+    placement_cache: a record that began more than PLACEMENT_CACHE_DAYS ago keeps the placement the last run made
+    for it when the record and everything placement reads are unchanged (placement_stamp, record_hash): with the
+    history of a state on file (Michigan from 2001, some 55,000 records) placing every record again took 30 s an
+    hour. Everything else (intervals, colours, counts) is computed for every record as before. True: the file
+    PLACEMENT_CACHE when this build writes the shared outputs (write and the default events directory); a path: that
+    file; None or False: no cache."""
     now = now or datetime.now(UTC)
     loaded = waters is None
     waters = load_waters() if loaded else waters
@@ -2801,10 +2850,22 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     reach_index = index_reaches(reaches)
     if not rules.get("version"):
         problems.append("data/rules.json missing or without a version: no red windows, no caution windows")
-    resolver = Resolver(waters, placement_outfalls,
-                        load_discharger_towns() if discharger_towns is None else discharger_towns,
-                        load_discharger_waters() if discharger_waters is None else discharger_waters,
-                        rules.get("placement") or {})
+    discharger_towns = load_discharger_towns() if discharger_towns is None else discharger_towns
+    discharger_waters = load_discharger_waters() if discharger_waters is None else discharger_waters
+    resolver = Resolver(waters, placement_outfalls, discharger_towns, discharger_waters, rules.get("placement") or {})
+    if placement_cache is True:
+        placement_cache = PLACEMENT_CACHE if write and Path(events_dir) == Path(EVENTS_DIR) else None
+    cache_old, cache_new, cache_stamp = {}, {}, None
+    if placement_cache:
+        cache_stamp = placement_stamp(waters, placement_outfalls, discharger_towns, discharger_waters, rules, _STATES)
+        try:
+            c = read_json(Path(placement_cache)) or {}
+        except (OSError, ValueError):
+            c = {}
+        if c.get("stamp") == cache_stamp:
+            cache_old = c.get("placements") or {}
+    cache_before = (now - timedelta(days=PLACEMENT_CACHE_DAYS)) if placement_cache else None
+    cache_hits = 0
 
     # live records supersede fixture traces of the same record; revisions supersede parents
     live_ids = set()
@@ -2844,7 +2905,18 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     latest_month = {}       # outfall -> (event, water slugs, monthly mark) of its latest month report
     for ev in events:
         eid = ev["event_id"]
-        pl = resolver.resolve(ev)
+        began = parse_time(ev.get("started_at") or ev.get("reported_at")) if cache_before else None
+        if began is not None and began < cache_before:
+            h = record_hash(ev)
+            hit = cache_old.get(eid)
+            if hit and hit[0] == h:
+                pl = copy.deepcopy(hit[1])
+                cache_hits += 1
+            else:
+                pl = resolver.resolve(ev)
+            cache_new[eid] = [h, copy.deepcopy(pl)]
+        else:
+            pl = resolver.resolve(ev)
         placements[eid] = {k: v for k, v in pl.items() if k != "unknown_slugs"}
         if pl.get("set_aside"):
             aside_events[ev["source_id"]][("still placed" if pl["water_slugs"] else "left unplaced")] += 1
@@ -3312,6 +3384,15 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     if write:
         write_json(BUILD_DIR / "status.json", status)
         write_json(BUILD_DIR / "history.json", history)
+    if placement_cache:
+        p = Path(placement_cache)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        tmp = p.with_suffix(p.suffix + ".tmp")
+        tmp.write_text(json.dumps({"stamp": cache_stamp, "built": iso(now), "placements": cache_new},
+                                  separators=(",", ":"), default=str))
+        tmp.replace(p)
+        print(f"status: placement reused for {cache_hits} of {len(cache_new)} records that began over "
+              f"{PLACEMENT_CACHE_DAYS} days ago")
     return status, history
 
 
