@@ -142,3 +142,13 @@ def test_the_petroleum_general_permits_outfalls_drive_no_sewage_caution():
     rows = [r for r in load_outfall_registry(DATA_DIR) if str(r.get("npdes_permit")).startswith("MIG0811")]
     assert len(rows) == 13 and all(r["outfall_kind"] == "other" and "petroleum" in r["kind_note"] for r in rows)
     assert not [o for o in rainfall.cso_outfalls({"MI"}) if str(o["permit"]).startswith("MIG0811")]
+
+
+def test_egles_statewide_list_credits_every_michigan_operator_online():
+    """MCL 324.3112a(2): EGLE posts every operator's notice, so /reporting/ credits each Michigan operator with
+    online notice (the go-live audit's P1-1: without the marker only GLWA, 1 of 565, was credited)."""
+    from export import coverage as C
+    reg = C.load_register()
+    mi = C.notice_reach(reg, frozenset({M.SOURCE_ID}))["MI"]["told_online"]
+    assert mi["operators"] == 565
+    assert mi["online"] == 565

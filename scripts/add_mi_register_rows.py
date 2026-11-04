@@ -84,7 +84,8 @@ AGENCY = [
               "Michigan, public or private, because each must notify EGLE (MCL 324.3112a(1)) and EGLE must post the "
               "notice. GLWA's CSO notification plan names it as GLWA's 4-hour public notice. The list gives no "
               "coordinates and no posting time, and its JSON service is undocumented and carries no licence "
-              "statement. No e-mail alert for overflows exists. (research/mi/report.md §2.2)"),
+              "statement. No e-mail alert for overflows exists. Covers every operator in the state. "
+              "(research/mi/report.md §2.2)"),
      "sources": [FEED, LAW]},
     {"id": "mi-egle-sewage-discharge-program", "agency": "Michigan Department of Environment, Great Lakes, and Energy",
      "name": "Michigan EGLE (SSO, CSO and RTB program page)", "channel_kind": "state_alert_page",

@@ -9817,7 +9817,7 @@
    "feed_source_id": "mi-egle-mienviro-cso-sso-list",
    "publishes": "notices",
    "noun": "State page",
-   "note": "EGLE's public list of sewage discharge reports (CSO, SSO, retention treatment basin and other discharges) with start, end, volume, permit, outfall and receiving water; it covers every operator in Michigan, public or private, because each must notify EGLE (MCL 324.3112a(1)) and EGLE must post the notice. GLWA's CSO notification plan names it as GLWA's 4-hour public notice. The list gives no coordinates and no posting time, and its JSON service is undocumented and carries no licence statement. No e-mail alert for overflows exists. (research/mi/report.md §2.2)",
+   "note": "EGLE's public list of sewage discharge reports (CSO, SSO, retention treatment basin and other discharges) with start, end, volume, permit, outfall and receiving water; it covers every operator in Michigan, public or private, because each must notify EGLE (MCL 324.3112a(1)) and EGLE must post the notice. GLWA's CSO notification plan names it as GLWA's 4-hour public notice. The list gives no coordinates and no posting time, and its JSON service is undocumented and carries no licence statement. No e-mail alert for overflows exists. Covers every operator in the state. (research/mi/report.md §2.2)",
    "sources": [
     "mi-egle-mienviro-cso-sso-list",
     "mi-law-mcl-324-3112a"
