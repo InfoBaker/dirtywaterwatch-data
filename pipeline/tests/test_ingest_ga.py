@@ -152,7 +152,9 @@ def test_cso_dry_land_and_no_water_rows():
     r = {x["outfall_name"].split()[0]: x for x in recs}
     assert r["12"]["event_type"] == "cso" and r["12"]["material"] == "combined sewage (dry weather)"
     assert r["5"]["raw"]["reached_water"] is False
-    assert r["6"]["waterbody_text"] is None and "no surface water" in r["6"]["raw"]["_water"]["why_none"]
+    assert r["6"]["waterbody_text"] == "Storm ditch" and "no surface water" in r["6"]["raw"]["_water"]["why_none"]
+    from build import status as S       # read as naming no water: never placed on the operator's receiving water
+    assert "names no water" in S.no_receiving_water(r["6"])
     assert "reached_water" not in r["7"]["raw"]
 
 

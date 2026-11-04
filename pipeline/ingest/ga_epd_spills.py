@@ -47,8 +47,9 @@ Record rules
     is a caution for 72 hours from the start of its begin day, then unresolved (end not reported) to day 30.
   - Volume: QUANTITY_GALLONS in gallons; blank, or "0" ("A 'zero' in the quantity field indicates the amount of the
     spill has not been determined", EPD's page) -> volume_gal null and volume_text saying so. estimate_flag unknown.
-  - Water: WATERWAY_IMPACTED as given in waterbody_text. "Ditch", "Storm Drain", "Basin", "unknown" or blank name no
-    water (raw._water.why_none). No Georgia water records yet: water_slugs [], water_match none. A destination that
+  - Water: WATERWAY_IMPACTED as given in waterbody_text (blank: null). "Ditch", "Storm Drain", "Basin", "unknown"
+    name no water (raw._water.why_none); the text is kept so that build/status.py reads it as naming no water and
+    never places the spill on the operator's listed receiving water instead. No Georgia water records yet: water_slugs [], water_match none. A destination that
     says dry land and names neither waters of the State nor a CSO ("Dry Land Overflow") is kept with
     raw.reached_water false, unless WATERWAY_IMPACTED names a water; any other destination wording is not read as
     "did not reach water" (raw._destination_not_read), so a spill is never hidden on a wording not yet seen.
@@ -317,7 +318,7 @@ def to_record(rid: str, row: dict, posting: str | None, ctx: dict) -> dict:
                  discharger_id=ctx["permits"].get(permit), discharger_name=row.get("facility_name") or None,
                  npdes_permit=permit if REAL_PERMIT.match(permit) else None,
                  outfall_name=row.get("overflow_location") or None,
-                 waterbody_text=water if water and not NO_WATER.match(water) else None,
+                 waterbody_text=water or None,         # as given: status reads "Ditch", "unknown" as naming no water
                  water_slugs=[], water_match="none",
                  lat=lat, lon=lon, coord_source="geocode" if lat is not None else None,
                  started_at=start, time_precision="day" if start else None,
@@ -468,7 +469,7 @@ def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
 
 # a water key that names no particular water ("Unnamed tributary", "UT", "creek"): it contradicts no name
 GENERIC_WATER = re.compile(r"^(?:unnamed|unamed|unnammed|unknown|an?)?(?:ut|trib\w*|stream|creek|branch|ditch|"
-                           r"storm\w*|ms4\w*|catchbasin|pond)?$")
+                           r"storm\w*|ms4\w*|catchbasin|basin|pond|unk|na|none|ground|land|dryland)?$")
 
 
 def epa_water_keys(e: dict) -> set[str]:
