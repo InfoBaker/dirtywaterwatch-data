@@ -1904,11 +1904,27 @@ def target_key(row: dict) -> tuple:
     return (row.get("state"), None, (row.get("texts") or [""])[0])
 
 
+NOT_REACHED = "not reached this run"
+
+
 def merge_targets(old: list[dict], new: list[dict]) -> list[dict]:
-    """The file's target rows with this run's over them, the file's order kept (new targets at the end)."""
+    """The file's target rows with this run's over them, the file's order kept (new targets at the end). A row this run
+    did not reach (its budget ran out first: no slugs, reason 'not reached this run') does not replace the file's row
+    for that target: the file's row keeps its slugs until a run resolves the target again."""
     by_key = {target_key(r): r for r in old}
-    by_key.update({target_key(r): r for r in new})
+    for r in new:
+        k = target_key(r)
+        if k in by_key and not r.get("slugs") and str(r.get("reason") or "").startswith(NOT_REACHED):
+            continue
+        by_key[k] = r
     return list(by_key.values())
+
+
+def merge_targets_scoped(old: list[dict], new: list[dict], scope) -> list[dict]:
+    """A state build's target rows: the file's rows of every other state exactly as they are (site rows of the same
+    text included), the scope states' rows merged with this run's over them (merge_targets)."""
+    keep = [r for r in old if r.get("state") not in scope]
+    return keep + merge_targets([r for r in old if r.get("state") in scope], new)
 
 
 def describe_write(info: dict) -> str:
@@ -1949,10 +1965,19 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
         warning = (f"this run resolved {len(run_rows)} records and the file holds {len(old_rows)}; the "
                    f"{len(old_rows) - len(run_rows)} not resolved this run were kept from the file (failed requests, "
                    f"the OSM time budget, or changed targets); --rebuild replaces the file with this run's records")
-    rows = sorted(run_rows, key=lambda r: r.get("slug") or "") if replace else merge_waters(old_rows, run_rows)
+    # the states built by --state (stats.state_builds) that this run has no target in: a run of the live targets
+    # (no --state) keeps their records (even with --rebuild), target rows, skipped texts and statistics as they are
+    builds_prev = dict((prev.get("stats") or {}).get("state_builds") or {})
+    keep_states = set() if scope_states else set(builds_prev) - {r.get("state") for r in targets_out}
+    kept_built = [r for r in old_rows if r.get("state") in keep_states]
+    if replace:
+        rows = sorted(run_rows + [r for r in kept_built if r.get("slug") not in run_slugs], key=lambda r: r.get("slug") or "")
+    else:
+        rows = merge_waters(old_rows, run_rows)
     info = {"mode": "rebuild" if replace else "merge", "existing_records": len(old_rows),
             "run_records": len(run_rows), "replaced": len(old_slugs & run_slugs), "added": len(run_slugs - old_slugs),
-            "kept": 0 if replace else len(old_slugs - run_slugs), "dropped": len(old_slugs - run_slugs) if replace else 0,
+            "kept": len({r["slug"] for r in kept_built if r.get("slug")} - run_slugs) if replace else len(old_slugs - run_slugs),
+            "dropped": len(old_slugs - run_slugs - {r.get("slug") for r in kept_built}) if replace else 0,
             "written": len(rows)}
     if warning:
         info["warning"] = warning
@@ -1965,13 +1990,20 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
                 builds[st] = {**v, "write": info}
         stats = {**(prev.get("stats") or {}), "state_builds": dict(sorted(builds.items()))}
         partial = bool(prev.get("partial"))
-        targets_rows = merge_targets(prev.get("targets") or [], targets_out)
+        targets_rows = merge_targets_scoped(prev.get("targets") or [], targets_out, scope_states)
         skipped = list({(r.get("state"), r.get("text")): r for r in list(prev.get("skipped") or []) + list(skipped)}.values())
         problems = list(dict.fromkeys(list(prev.get("problems") or []) + list(problems)))
-    elif final:
-        stats = {**(stats or {}), "write": info}
-    elif stats is None:
-        stats = prev.get("stats") or {}       # a checkpoint keeps the last full run's statistics
+    else:
+        if final:
+            stats = {**(stats or {}), "write": info}
+        elif stats is None:
+            stats = prev.get("stats") or {}   # a checkpoint keeps the last full run's statistics
+        if builds_prev:
+            stats = {**stats, "state_builds": builds_prev}
+        if keep_states:
+            if targets_rows is targets_out:
+                targets_rows = list(targets_out) + [r for r in prev.get("targets") or [] if r.get("state") in keep_states]
+            skipped = list(skipped) + [r for r in prev.get("skipped") or [] if r.get("state") in keep_states]
     write_json(OUT, {
         "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); "
                   "hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map); "
@@ -2759,7 +2791,7 @@ class Run:
 
     def not_reached(self, t) -> dict:
         row = self.new_row(t)
-        row["reason"] = f"not reached this run ({self.stopped}); the next run resumes"
+        row["reason"] = f"{NOT_REACHED} ({self.stopped}); the next run resumes"
         self.rows.append(row)
         return row
 
@@ -2771,7 +2803,7 @@ class Run:
         if row is None:
             self.not_reached(t)
         elif not row["how"]:
-            row["reason"] = f"not reached this run ({self.stopped}); the next run resumes"
+            row["reason"] = f"{NOT_REACHED} ({self.stopped}); the next run resumes"
 
     def place_geoms(self, row) -> list:
         geoms = [r["_geom"] for r in row["_recs"] if r.get("_geom") is not None]

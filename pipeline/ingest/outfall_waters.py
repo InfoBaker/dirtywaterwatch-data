@@ -372,21 +372,43 @@ class Matcher:
         """A state build's step: the record the NHD builder made for this receiving water for this very permit (the
         target row's permits; its record was chosen by EPA's reach, or by the name nearest the operators' towns, or at
         their points). EPA's treatment-plant points are often the facility's, kilometres from the water the permit
-        names, so the placement guard's distance check is not applied here; the note gives the distance."""
+        names, so the placement guard's distance check is not applied here; the note gives the distance. The builder
+        keeps one target per name and state, pooling every permit that names it, so its record can be another water of
+        that name (2026-11-04 review: Raeford's plants on the Rockfish Creek at Wallace, 110 km away): the record is
+        taken only when EPA's point lies on it (TIGHT_M) or it reaches the permittee's town (reaches_town), or, with
+        neither a point nor a known town, as the builder chose it; otherwise none, and reason() says why."""
         st, permit = o.get("state"), o.get("npdes_permit")
+        lat, lon = o.get("lat"), o.get("lon")
+        self._builder_far = None
         keys = [N.compact(text)] + [N.compact(p) for p in N.national_parts(text)[0]]
         for k in keys:
             t = self.targets.get((st, k))
             if not t or not t.get("define_by") or permit not in (t.get("permits") or []) or not t.get("slugs"):
                 continue
-            cands = [self.canon(x) for x in t["slugs"] if self.canon(x) in self.waters]
+            cands = list(dict.fromkeys(self.canon(x) for x in t["slugs"] if self.canon(x) in self.waters))
             if not cands:
                 continue
-            ds = sorted(((self.dist(x, o.get("lat"), o.get("lon")) or 0), x) for x in cands)
-            d, slug = ds[0]
+            ranked = []
+            for x in cands:
+                d = self.dist(x, lat, lon)
+                rt = self.reaches_town(x, o)
+                ok = (d is not None and d <= TIGHT_M) or rt is True or (rt is None and d is None)
+                ranked.append((not ok, rt is not True, d if d is not None else 0, x, d, rt))
+            ranked.sort(key=lambda r: r[:4])
+            bad, _, _, slug, d, rt = ranked[0]
+            if bad:
+                towns = ", ".join(sorted(self.towns_of(o))) or "unknown"
+                self._builder_far = (f"the NHD builder's record for '{text}' for this permit, {slug}, is "
+                                     + (f"{m(d) / 1000:.1f} km from EPA's point and " if d is not None else "")
+                                     + (f"does not reach the permittee's town ({towns}): likely another water of that "
+                                        f"name, not matched" if rt is False else
+                                        f"the permittee's town ({towns}) could not be checked against it: not matched"))
+                return None, None
             how = "; ".join(x for x in t.get("how") or [] if x)[:200]
-            return slug, (f"its receiving water '{text}': the NHD builder's record for it for this permit ({how})"
-                          + (f"; EPA's point is {m(d) / 1000:.1f} km from it" if o.get("lat") is not None and d > TIGHT_M else ""))
+            where = "" if lat is None or d is None or d <= TIGHT_M else f"; EPA's point is {m(d) / 1000:.1f} km from it"
+            if rt is True and where:
+                where += ", and it reaches the permittee's town"
+            return slug, f"its receiving water '{text}': the NHD builder's record for it for this permit ({how}){where}"
         return None, None
 
     def by_outfall_ref(self, o: dict):
@@ -506,6 +528,7 @@ class Matcher:
         self._aside = None
         self._several = None
         self._conflict = None
+        self._builder_far = None
         text = text_of(o)
         lat, lon = o.get("lat"), o.get("lon")
         not_name = why_not_a_name(text)
@@ -571,7 +594,9 @@ class Matcher:
             elif self._aside:
                 bits.append(f"the record of that name was set aside by the placement guard: "
                             f"{self._aside[0][0]}, {self._aside[0][1]}")
-            if t and not t.get("slugs") and t.get("reason"):
+            if getattr(self, "_builder_far", None):
+                bits.append(self._builder_far)
+            elif t and not t.get("slugs") and t.get("reason"):
                 bits.append(f"NHD builder: {t['reason']}")
             elif t and t.get("slugs"):
                 bits.append(f"the NHD builder's records for '{parts[0]}' ({', '.join(t['slugs'])}) lie elsewhere in the state")
@@ -612,6 +637,7 @@ def match_plant(mt: "Matcher", o: dict, flags: dict | None = None) -> dict:
     mt._aside = None
     mt._several = None
     mt._conflict = None
+    mt._builder_far = None
     text, gnis = text_of(o), gnis_of(o)
     lat = o.get("lat")
     not_name = why_not_a_name(text)
