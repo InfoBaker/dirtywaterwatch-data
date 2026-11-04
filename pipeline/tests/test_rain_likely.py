@@ -414,6 +414,23 @@ def test_a_water_with_a_likely_and_a_possible_operator_reads_likely():
     assert pond["rain"]["label"] == LIKELY
 
 
+def test_a_mixed_water_lists_its_strongest_rain_caution_first():
+    """reasons[0] sets the water's reason_short, the overlay's rain_trigger_basis and the page's "About this status"
+    line: with an operator's own amount and the site default meeting on one water, all read "likely" as the badge
+    and the water's rain context do (review 2026-11-04, P2-1)."""
+    w = _basis_world("operator")
+    rain = w["rain"]
+    other = "MA0100552"                                 # no history: the default; its permit sorts first
+    rain["rainfall"]["permits"][other] = {**rain["rainfall"]["permits"][PERMIT], "name": "Other Sewer"}
+    rain["history"]["permits"][other] = list(rain["history"]["permits"][PERMIT])
+    st, _ = S.build(now=NOW, write=False, **w)
+    pond = st["waters"]["other-pond-ma"]
+    assert [r["trigger_basis"] for r in pond["reasons"]] == ["operator", "default"]
+    assert pond["reason_short"].startswith(LIKELY) and pond["rain"]["trigger_basis"] == "operator"
+    # the order is the only change: colour, rule and windows as before
+    assert {(r["status"], r["rule"]) for r in pond["reasons"]} == {("yellow", "rain_likely")}
+
+
 def test_the_export_carries_the_basis_and_the_label():
     st, _ = S.build(now=NOW, write=False, **_basis_world("default"))
     active_now = {}
