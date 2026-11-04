@@ -22,13 +22,15 @@ def test_timed_prints_one_line_keeps_the_exit_code_and_collects_the_seconds(tmp_
     env = {**os.environ, "TIMINGS_FILE": str(tf)}
     ok = subprocess.run(["sh", str(ROOT / "scripts" / "timed.sh"), "ingest.demo", "sh", "-c", "echo hello"],
                         capture_output=True, text=True, env=env)
-    # (whole seconds from date +%s: a command that crosses a second boundary takes 1 s)
+    # whole seconds from date +%s: the count depends on the machine's load, so only its form is checked (a test that
+    # expected 0 or 1, and 1 or 2 around a sleep, failed on a busy runner)
     assert ok.returncode == 0 and ok.stdout.splitlines()[0] == "hello"
-    assert re.fullmatch(r"timing: ingest\.demo [01] s", ok.stdout.splitlines()[1])
-    bad = subprocess.run(["sh", str(ROOT / "scripts" / "timed.sh"), "stage.x", "sh", "-c", "sleep 1; exit 3"],
+    assert re.fullmatch(r"timing: ingest\.demo \d+ s", ok.stdout.splitlines()[1])
+    bad = subprocess.run(["sh", str(ROOT / "scripts" / "timed.sh"), "stage.x", "sh", "-c", "echo out; echo err >&2; exit 3"],
                          capture_output=True, text=True, env=env)
-    assert bad.returncode == 3 and re.fullmatch(r"timing: stage\.x [12] s \(exit 3\)", bad.stdout.strip())
-    assert re.fullmatch(r"ingest\.demo\t[01]\nstage\.x\t[12]\n", tf.read_text())
+    assert bad.returncode == 3 and bad.stderr == "err\n"
+    assert bad.stdout.splitlines()[0] == "out" and re.fullmatch(r"timing: stage\.x \d+ s \(exit 3\)", bad.stdout.splitlines()[1])
+    assert re.fullmatch(r"ingest\.demo\t\d+\nstage\.x\t\d+\n", tf.read_text())
 
 
 def test_make_refresh_times_every_feed_extra_step_and_stage(tmp_path):
