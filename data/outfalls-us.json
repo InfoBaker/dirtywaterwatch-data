@@ -78143,7 +78143,7 @@
    "lat": 42.3081,
    "lon": -83.2067,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 340,
    "alternatives": [],
@@ -78152,7 +78152,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 340 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 340 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -78172,7 +78172,7 @@
    "lat": 42.3997,
    "lon": -83.2719,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 6,
    "alternatives": [],
@@ -78181,7 +78181,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 6 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 6 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -78201,7 +78201,7 @@
    "lat": 42.4289,
    "lon": -83.2692,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 4,
    "alternatives": [],
@@ -78210,7 +78210,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 4 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 4 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -78318,7 +78318,7 @@
    "lat": 42.294713,
    "lon": -83.141901,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 307,
    "alternatives": [],
@@ -78327,7 +78327,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 307 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 307 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -78376,7 +78376,7 @@
    "lat": 42.2836,
    "lon": -83.1419,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 406,
    "alternatives": [],
@@ -78385,7 +78385,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 406 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 406 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80036,7 +80036,7 @@
    "lat": 42.563333,
    "lon": -83.25,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 3562,
    "alternatives": [],
@@ -80046,7 +80046,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "NHD builder for the permit: its receiving water 'ROUGE RIVER': the NHD builder's record for it for this permit (NLDI position COMID 10849618 (9 m)); EPA's point is 3.6 km from it, and it reaches the permittee's town; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 3562 m from the point",
+   "water_match": "NHD builder for the permit: its receiving water 'ROUGE RIVER': the NHD builder's record for it for this permit (NLDI position COMID 10849618 (9 m)); EPA's point is 3.6 km from it, and it reaches the permittee's town; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 3562 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 2
   },
@@ -80067,7 +80067,7 @@
    "lat": 42.563333,
    "lon": -83.25,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 3562,
    "alternatives": [],
@@ -80077,7 +80077,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "NHD builder for the permit: its receiving water 'ROUGE RIVER': the NHD builder's record for it for this permit (NLDI position COMID 10849618 (9 m)); EPA's point is 3.6 km from it, and it reaches the permittee's town; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 3562 m from the point",
+   "water_match": "NHD builder for the permit: its receiving water 'ROUGE RIVER': the NHD builder's record for it for this permit (NLDI position COMID 10849618 (9 m)); EPA's point is 3.6 km from it, and it reaches the permittee's town; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 3562 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 2
   },
@@ -80128,7 +80128,7 @@
    "lat": 42.5391858,
    "lon": -83.22798,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 48,
    "alternatives": [],
@@ -80137,7 +80137,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 48 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 48 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80157,7 +80157,7 @@
    "lat": 42.301944,
    "lon": -83.2825,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 4735,
    "alternatives": [],
@@ -80166,7 +80166,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Lower Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 4735 m from the point",
+   "water_match": "name: its receiving water 'Lower Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 4735 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80186,7 +80186,7 @@
    "lat": 42.301944,
    "lon": -83.282222,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 4707,
    "alternatives": [],
@@ -80195,7 +80195,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Lower Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 4707 m from the point",
+   "water_match": "name: its receiving water 'Lower Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 4707 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80215,7 +80215,7 @@
    "lat": 42.301111,
    "lon": -83.275555,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 4109,
    "alternatives": [],
@@ -80224,7 +80224,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Lower Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 4109 m from the point",
+   "water_match": "name: its receiving water 'Lower Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 4109 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80244,7 +80244,7 @@
    "lat": 42.301388,
    "lon": -83.271944,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 3747,
    "alternatives": [],
@@ -80253,7 +80253,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Lower Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 3747 m from the point",
+   "water_match": "name: its receiving water 'Lower Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 3747 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80273,7 +80273,7 @@
    "lat": 42.303888,
    "lon": -83.263333,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 2757,
    "alternatives": [],
@@ -80282,7 +80282,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 2757 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 2757 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80302,7 +80302,7 @@
    "lat": 42.309444,
    "lon": -83.252222,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 1376,
    "alternatives": [],
@@ -80311,7 +80311,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 1376 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 1376 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80331,7 +80331,7 @@
    "lat": 42.307222,
    "lon": -83.219444,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 8,
    "alternatives": [],
@@ -80340,7 +80340,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 8 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 8 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80360,7 +80360,7 @@
    "lat": 42.304166,
    "lon": -83.204166,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 87,
    "alternatives": [],
@@ -80369,7 +80369,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 87 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 87 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80389,7 +80389,7 @@
    "lat": 42.308611,
    "lon": -83.212222,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 175,
    "alternatives": [],
@@ -80398,7 +80398,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 175 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 175 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80418,7 +80418,7 @@
    "lat": 42.304444,
    "lon": -83.160277,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 1115,
    "alternatives": [],
@@ -80427,7 +80427,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 1115 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 1115 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80447,7 +80447,7 @@
    "lat": 42.3046591,
    "lon": -83.262565,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 2644,
    "alternatives": [],
@@ -80456,7 +80456,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Lower Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 2644 m from the point",
+   "water_match": "name: its receiving water 'Lower Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 2644 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80476,7 +80476,7 @@
    "lat": 42.3083761,
    "lon": -83.25402,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 1606,
    "alternatives": [],
@@ -80485,7 +80485,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Lower Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 1606 m from the point",
+   "water_match": "name: its receiving water 'Lower Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 1606 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80505,7 +80505,7 @@
    "lat": 42.30417,
    "lon": -83.20147,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 229,
    "alternatives": [],
@@ -80514,7 +80514,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name and town: its receiving water 'Rogue River' by name and the permittee's town (dearborn): the only record of that name there (the text reads 'Rogue River', the record 'Rouge, River'); the research lists Rouge, River for the permit (data/dischargers.json); Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 229 m from the point",
+   "water_match": "name and town: its receiving water 'Rogue River' by name and the permittee's town (dearborn): the only record of that name there (the text reads 'Rogue River', the record 'River Rouge'); the research lists River Rouge for the permit (data/dischargers.json); River Rouge (rouge-river-mi, NHDPlus V2.1 record), 229 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -80534,7 +80534,7 @@
    "lat": 42.3044069,
    "lon": -83.160623,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 1128,
    "alternatives": [],
@@ -80543,7 +80543,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 1128 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 1128 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -81335,7 +81335,7 @@
    "lat": 42.28056,
    "lon": -83.12944,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 21,
    "alternatives": [],
@@ -81345,7 +81345,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 21 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 21 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -81515,7 +81515,7 @@
    "lat": 42.5232061,
    "lon": -83.246336,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 90,
    "alternatives": [],
@@ -81524,7 +81524,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 90 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 90 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -81544,7 +81544,7 @@
    "lat": null,
    "lon": null,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": null,
    "alternatives": [],
@@ -81553,7 +81553,7 @@
    "country": "US",
    "coords_from": null,
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'ROUGE RIVER' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), no point",
+   "water_match": "name: its receiving water 'ROUGE RIVER' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), no point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -81573,7 +81573,7 @@
    "lat": null,
    "lon": null,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": null,
    "alternatives": [],
@@ -81582,7 +81582,7 @@
    "country": "US",
    "coords_from": null,
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'ROUGE RIVER' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), no point",
+   "water_match": "name: its receiving water 'ROUGE RIVER' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), no point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -81602,7 +81602,7 @@
    "lat": null,
    "lon": null,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": null,
    "alternatives": [],
@@ -81611,7 +81611,7 @@
    "country": "US",
    "coords_from": null,
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'ROUGE RIVER' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), no point",
+   "water_match": "name: its receiving water 'ROUGE RIVER' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), no point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -81690,7 +81690,7 @@
    "lat": 42.5311111,
    "lon": -83.243333,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 382,
    "alternatives": [],
@@ -81699,7 +81699,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 382 m from the point",
+   "water_match": "name: its receiving water 'Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 382 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82008,7 +82008,7 @@
    "lat": 42.343888,
    "lon": -83.273055,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 2135,
    "alternatives": [],
@@ -82017,7 +82017,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Middle Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 2135 m from the point",
+   "water_match": "name: its receiving water 'Middle Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 2135 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82037,7 +82037,7 @@
    "lat": 42.35717,
    "lon": -83.26617,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 680,
    "alternatives": [],
@@ -82046,7 +82046,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 10850152 (507 m): GNIS 'Rouge, River' (635966)); Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 680 m from the point",
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 10850152 (507 m): GNIS 'River Rouge' (635966)); River Rouge (rouge-river-mi, NHDPlus V2.1 record), 680 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82066,7 +82066,7 @@
    "lat": 42.29781,
    "lon": -83.29036,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 5723,
    "alternatives": [],
@@ -82075,7 +82075,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Lower Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 5723 m from the point",
+   "water_match": "name: its receiving water 'Lower Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 5723 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82095,7 +82095,7 @@
    "lat": 42.33167,
    "lon": -83.25319,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 704,
    "alternatives": [],
@@ -82104,7 +82104,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Middle Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 704 m from the point",
+   "water_match": "name: its receiving water 'Middle Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 704 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82124,7 +82124,7 @@
    "lat": 42.33067,
    "lon": -83.25367,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 804,
    "alternatives": [],
@@ -82133,7 +82133,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Middle Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 804 m from the point",
+   "water_match": "name: its receiving water 'Middle Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 804 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82215,7 +82215,7 @@
    "lat": 42.4069178,
    "lon": -83.295829,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 2363,
    "alternatives": [],
@@ -82224,7 +82224,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "NHD builder for the permit: its receiving water 'Upper Rouge River': the NHD builder's record for it for this permit (nearest flowline named 'Rouge, River' (1745 m; NLDI COMID 10849602 is 'Upper River Rouge')); EPA's point is 2.4 km from it, and it reaches the permittee's town; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 2363 m from the point",
+   "water_match": "NHD builder for the permit: its receiving water 'Upper Rouge River': the NHD builder's record for it for this permit (nearest flowline named 'River Rouge' (1745 m; NLDI COMID 10849602 is 'Upper River Rouge')); EPA's point is 2.4 km from it, and it reaches the permittee's town; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 2363 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82244,7 +82244,7 @@
    "lat": 42.36428,
    "lon": -83.26897,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 1194,
    "alternatives": [],
@@ -82253,7 +82253,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Upper Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 1194 m from the point",
+   "water_match": "name: its receiving water 'Upper Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 1194 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82273,7 +82273,7 @@
    "lat": 42.39869,
    "lon": -83.31397,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 4479,
    "alternatives": [],
@@ -82282,7 +82282,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "NHD builder for the permit: its receiving water 'Upper Rouge River': the NHD builder's record for it for this permit (nearest flowline named 'Rouge, River' (1745 m; NLDI COMID 10849602 is 'Upper River Rouge')); EPA's point is 4.5 km from it, and it reaches the permittee's town; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 4479 m from the point",
+   "water_match": "NHD builder for the permit: its receiving water 'Upper Rouge River': the NHD builder's record for it for this permit (nearest flowline named 'River Rouge' (1745 m; NLDI COMID 10849602 is 'Upper River Rouge')); EPA's point is 4.5 km from it, and it reaches the permittee's town; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 4479 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82302,7 +82302,7 @@
    "lat": 42.39333,
    "lon": -83.31397,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 4638,
    "alternatives": [],
@@ -82311,7 +82311,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "NHD builder for the permit: its receiving water 'Upper Rouge River': the NHD builder's record for it for this permit (nearest flowline named 'Rouge, River' (1745 m; NLDI COMID 10849602 is 'Upper River Rouge')); EPA's point is 4.6 km from it, and it reaches the permittee's town; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 4638 m from the point",
+   "water_match": "NHD builder for the permit: its receiving water 'Upper Rouge River': the NHD builder's record for it for this permit (nearest flowline named 'River Rouge' (1745 m; NLDI COMID 10849602 is 'Upper River Rouge')); EPA's point is 4.6 km from it, and it reaches the permittee's town; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 4638 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82331,7 +82331,7 @@
    "lat": 42.40114,
    "lon": -83.30963,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 3953,
    "alternatives": [],
@@ -82340,7 +82340,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "NHD builder for the permit: its receiving water 'Upper Rouge River': the NHD builder's record for it for this permit (nearest flowline named 'Rouge, River' (1745 m; NLDI COMID 10849602 is 'Upper River Rouge')); EPA's point is 4.0 km from it, and it reaches the permittee's town; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 3953 m from the point",
+   "water_match": "NHD builder for the permit: its receiving water 'Upper Rouge River': the NHD builder's record for it for this permit (nearest flowline named 'River Rouge' (1745 m; NLDI COMID 10849602 is 'Upper River Rouge')); EPA's point is 4.0 km from it, and it reaches the permittee's town; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 3953 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82360,7 +82360,7 @@
    "lat": 42.39647,
    "lon": -83.28625,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 1574,
    "alternatives": [],
@@ -82369,7 +82369,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Upper Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 1574 m from the point",
+   "water_match": "name: its receiving water 'Upper Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 1574 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82389,7 +82389,7 @@
    "lat": 42.39517,
    "lon": -83.28608,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 1610,
    "alternatives": [],
@@ -82398,7 +82398,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'Upper Rouge River' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 1610 m from the point",
+   "water_match": "name: its receiving water 'Upper Rouge River' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 1610 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82418,7 +82418,7 @@
    "lat": 42.39083,
    "lon": -83.29658,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 2875,
    "alternatives": [],
@@ -82427,7 +82427,7 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "NHD builder for the permit: its receiving water 'Upper Rouge River': the NHD builder's record for it for this permit (nearest flowline named 'Rouge, River' (1745 m; NLDI COMID 10849602 is 'Upper River Rouge')); EPA's point is 2.9 km from it, and it reaches the permittee's town; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 2875 m from the point",
+   "water_match": "NHD builder for the permit: its receiving water 'Upper Rouge River': the NHD builder's record for it for this permit (nearest flowline named 'River Rouge' (1745 m; NLDI COMID 10849602 is 'Upper River Rouge')); EPA's point is 2.9 km from it, and it reaches the permittee's town; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 2875 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82665,7 +82665,7 @@
    "lat": 42.345,
    "lon": -83.288889,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 3516,
    "alternatives": [],
@@ -82675,7 +82675,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "name: its receiving water 'MIDDLE ROUGE RIVER' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 3516 m from the point",
+   "water_match": "name: its receiving water 'MIDDLE ROUGE RIVER' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 3516 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -82757,7 +82757,7 @@
    "lat": 42.300306,
    "lon": -83.183389,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 622,
    "alternatives": [],
@@ -82767,7 +82767,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "name: its receiving water 'ROUGE RIVER' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 622 m from the point",
+   "water_match": "name: its receiving water 'ROUGE RIVER' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 622 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 4
   },
@@ -82788,7 +82788,7 @@
    "lat": 42.300306,
    "lon": -83.183389,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 622,
    "alternatives": [],
@@ -82798,7 +82798,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "name: its receiving water 'ROUGE RIVER' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 622 m from the point",
+   "water_match": "name: its receiving water 'ROUGE RIVER' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 622 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 4
   },
@@ -82819,7 +82819,7 @@
    "lat": 42.300306,
    "lon": -83.183389,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 622,
    "alternatives": [],
@@ -82829,7 +82829,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "name: its receiving water 'ROUGE RIVER' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 622 m from the point",
+   "water_match": "name: its receiving water 'ROUGE RIVER' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 622 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 4
   },
@@ -82850,7 +82850,7 @@
    "lat": 42.300306,
    "lon": -83.183389,
    "water_slug": "rouge-river-mi",
-   "water_name": "Rouge, River",
+   "water_name": "River Rouge",
    "water_kind": "river",
    "distance_m": 622,
    "alternatives": [],
@@ -82860,7 +82860,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "name: its receiving water 'ROUGE RIVER' by name; Rouge, River (rouge-river-mi, NHDPlus V2.1 record), 622 m from the point",
+   "water_match": "name: its receiving water 'ROUGE RIVER' by name; River Rouge (rouge-river-mi, NHDPlus V2.1 record), 622 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 4
   },

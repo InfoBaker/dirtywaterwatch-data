@@ -84,3 +84,20 @@ def test_the_duty_rows_go_to_sewer_systems_only(rows, register):
         else:
             assert named[r["id"]] >= 3, r["id"]
     assert all(named[r["id"]] for r in rows if r["kind"] == "cso")   # the checklist's CSO one-liner
+
+
+def test_an_inverted_river_name_reads_as_written():
+    from ingest import waters_from_nhd as N
+    assert N.gnis_display("Rouge, River") == "River Rouge" and N.gnis_display("Apopka, Lake") == "Lake Apopka"
+
+
+@pytest.mark.parametrize("text,slug", [
+    ("Lower Rouge River", "lower-river-rouge-mi"), ("Middle Rouge River", "middle-river-rouge-mi"),
+    ("Tittabawasee River", "tittabawassee-river-mi"), ("Raisin River", "river-raisin-mi"),
+])
+def test_michigan_spellings_in_the_reports_reach_their_own_records(text, slug):
+    """Dearborn's and Wayne County's CSO outfalls on the Lower Rouge River went to the River Rouge record 4 to 6 km
+    away, and 12 reports naming the Tittabawassee with one 's' found no record; data/water-aliases.json now says."""
+    from build import status as S
+    R = S.Resolver(S.load_waters(), [], {}, {})
+    assert R.by_name(text, "MI", None, None)[0] == [slug]
