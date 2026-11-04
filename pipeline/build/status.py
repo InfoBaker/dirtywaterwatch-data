@@ -317,6 +317,7 @@ RULES = {
     "rain_advisory": ("yellow", "Precautionary rainfall advisory"),
     "advisory_unconfirmed": ("yellow", "Advisory with no reported status, issued less than 7 days ago"),
     # build/rain_likely.py: radar rainfall over the permittee's threshold, no notice in the last 24 h
+    # ("Discharge possible: ..." where only this site's default amount applies: rain_likely.label_for, per interval)
     "rain_likely": ("yellow", "Discharge likely: heavy rain, no report received"),
     # docs/plan.md §2.x: a month-precision report (EPA's monthly DMR totals): its own mark, never red or yellow
     "monthly": ("monthly", "Monthly report: days with discharge, dates not given"),
@@ -3246,6 +3247,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             "ended_at": iv["ended_at"],
                             # rain_likely: the radar total, the threshold and its basis (build/rain_likely.py)
                             **({"permit": iv.get("permit"), "rain": iv["rain"]} if iv.get("rain") else {}),
+                            # which amount set it: operator, state or default (the label follows it)
+                            **({"trigger_basis": iv.get("trigger_basis")} if iv["rule"] == "rain_likely" else {}),
                             **({k: iv.get(k) for k in ("days", "events", "month", "received_at", "retrieved_at",
                                                        "monthly_label")} if iv["rule"] == "monthly" else {})})
         have = {r["event_id"] for r in reasons}
@@ -3327,6 +3330,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             "active": sorted({iv["event_id"] for iv in act
                                               if iv["color"] != "grey" and iv["rule"] != "rain_likely"}),
                             "rain_likely": sorted({iv["event_id"] for iv in act if iv["rule"] == "rain_likely"}),
+                            # the amount behind the reach's rain caution now (operator, state, default), else None
+                            "rain_trigger_basis": rain_mod.strongest_basis(iv.get("trigger_basis") for iv in act
+                                                                            if iv["rule"] == "rain_likely"),
                             **({"model": SH.MODEL, "states": r.get("states") or [], "waters": r.get("waters") or []}
                                if r.get("model") == SH.MODEL else {})}
         reach_strips[key] = paint(ivs, h0, h_end, n_hours)
@@ -3408,7 +3414,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     status = {
         "built": now_iso(), "now": iso(now), "fixtures_included": include_fixtures,
         "restricted_included": include_restricted, "withheld_sources": withheld,
-        "rules": {k: {"status": v[0], "label": v[1]} for k, v in RULES.items()},
+        "rules": {k: {"status": v[0], "label": v[1],
+                      # the caution's label by which amount applied (build/rain_likely.py label_by_basis)
+                      **({"label_by_basis": rain_mod.labels(rules)} if k == "rain_likely" else {})}
+                  for k, v in RULES.items()},
         "advisory_windows": {"file": "data/rules.json", "version": rules.get("version")},
         "constants": {"advisory_no_end_days": ADVISORY_NO_END_DAYS, "confirm_days": CONFIRM_DAYS,
                       "history_days": HISTORY_DAYS, "unresolved": rules.get("unresolved"),
