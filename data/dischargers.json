@@ -35125,8 +35125,7 @@
   "kind": "plant",
   "npdes_permit": "ME0100561",
   "npdes_permits": [
-   "ME0100561",
-   "MEU508017"
+   "ME0100561"
   ],
   "receiving_waters": [
    "Presque Isle Stream"
@@ -35140,7 +35139,7 @@
   "towns": [
    "Presque Isle"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: ME0100561, NPD permit, status EFF, Municipal or Water District, Major, design flow 2.31 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: PRESQUE ISLE UTILITIES DISTRICT. Permit added 2026-11-04 from EPA ECHO ICIS-NPDES (scripts/add_federal_operators.py): MEU508017 (PRESQUE ISLE, PRESQUE ISLE); same operator by name ('PRESQUE ISLE' = 'PRESQUE ISLE WWTF').",
+  "notes": "EPA ECHO ICIS-NPDES: ME0100561, NPD permit, status EFF, Municipal or Water District, Major, design flow 2.31 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: PRESQUE ISLE UTILITIES DISTRICT.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "aliases": [
@@ -39756,37 +39755,6 @@
   ]
  },
  {
-  "id": "nj-njg034924",
-  "name": "ATLANTIC HIGHLANDS WTP",
-  "state": "NJ",
-  "kind": "plant",
-  "npdes_permit": "NJG034924",
-  "npdes_permits": [
-   "NJG034924"
-  ],
-  "receiving_waters": [
-   "Many Mind Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Atlantic Highlands Boro"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: NJG034924, GPC permit, status EFF, Municipal or Water District, Minor, design flow 0.1 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: ATLANTIC HIGHLANDS BORO.",
-  "verified": "fetched",
-  "checked": "2026-11-03",
-  "aliases": [
-   "nj-njg034924"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "nj-nj0021709",
   "name": "CENTRAL AVE WASTEWATER TREATMENT PLANT",
   "state": "NJ",
@@ -40809,38 +40777,6 @@
   ]
  },
  {
-  "id": "nj-njg035190",
-  "name": "NORTH BRUNSWICK TWP-WTP",
-  "state": "NJ",
-  "kind": "plant",
-  "npdes_permit": "NJG035190",
-  "npdes_permits": [
-   "NJG035190"
-  ],
-  "receiving_waters": [
-   "Delaware and Raritan Canal",
-   "Delaware & Raritan Canal"
-  ],
-  "water_slugs": [],
-  "outfall_count": 3,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Franklin Twp"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: NJG035190, GPC permit, status EFF, Municipal or Water District, Minor, design flow 2.8 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: AMERICAN WATER SERVICES INC.",
-  "verified": "fetched",
-  "checked": "2026-11-03",
-  "aliases": [
-   "nj-njg035190"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "nj-nj0024660",
   "name": "BURLINGTON CITY WWTP",
   "state": "NJ",
@@ -41436,8 +41372,7 @@
   "kind": "plant",
   "npdes_permit": "NJ0027715",
   "npdes_permits": [
-   "NJ0027715",
-   "NJG155764"
+   "NJ0027715"
   ],
   "receiving_waters": [
    "Moores Creek"
@@ -41451,7 +41386,7 @@
   "towns": [
    "Hopewell Twp"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: NJ0027715, NPD permit, status EXP, County Government, Minor, design flow 0.09 MGD; NJG155764, GPC permit, status EFF, County Government, Minor. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: MERCER CNTY.",
+  "notes": "EPA ECHO ICIS-NPDES: NJ0027715, NPD permit, status EXP, County Government, Minor, design flow 0.09 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: MERCER CNTY.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "aliases": [
@@ -41741,37 +41676,6 @@
   ]
  },
  {
-  "id": "nj-njg029190",
-  "name": "FREEHOLD WATER TREATMENT PLANT",
-  "state": "NJ",
-  "kind": "plant",
-  "npdes_permit": "NJG029190",
-  "npdes_permits": [
-   "NJG029190"
-  ],
-  "receiving_waters": [
-   "McGellaird's Brook"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Freehold Twp"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: NJG029190, GPC permit, status EFF, Municipal or Water District, Minor, design flow 0.01 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: FREEHOLD BORO.",
-  "verified": "fetched",
-  "checked": "2026-11-03",
-  "aliases": [
-   "nj-njg029190"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "nj-nj0029831",
   "name": "FRENCHTOWN WASTEWATER TREATMENT PLANT",
   "state": "NJ",
@@ -41829,37 +41733,6 @@
   "checked": "2026-11-03",
   "aliases": [
    "nj-nj0024902"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
-  "id": "nj-njg031887",
-  "name": "HARBOR ROAD WTP",
-  "state": "NJ",
-  "kind": "plant",
-  "npdes_permit": "NJG031887",
-  "npdes_permits": [
-   "NJG031887"
-  ],
-  "receiving_waters": [
-   "Deep Run"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Marlboro Twp"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: NJG031887, GPC permit, status EFF, Municipal or Water District, Minor, design flow 0.01 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: MARLBORO TWP.",
-  "verified": "fetched",
-  "checked": "2026-11-03",
-  "aliases": [
-   "nj-njg031887"
   ],
   "source_areas": [
    "federal"
@@ -59586,7 +59459,7 @@
   "towns": [
    "Scenery Hill"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: PA0090131, NPD permit, status EXP, Municipality, Minor, design flow 0.011 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: MERASHOFF ROBERT M JR.",
+  "notes": "EPA ECHO ICIS-NPDES: PA0090131, NPD permit, status EXP, Municipality, Minor, design flow 0.011 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "aliases": [
@@ -66788,37 +66661,6 @@
   ]
  },
  {
-  "id": "pa-pag130076",
-  "name": "MILBOURNE BOROUGH MS4",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PAG130076",
-  "npdes_permits": [
-   "PAG130076"
-  ],
-  "receiving_waters": [
-   "Cobbs Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Millbourne"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PAG130076, GPC permit, status EXP, Municipality, Minor. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: MILLBOURNE BORO DELAWARE CNTY.",
-  "verified": "fetched",
-  "checked": "2026-11-03",
-  "aliases": [
-   "pa-pag130076"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "pa-pa0024091",
   "name": "MILLVILLE BOROUGH",
   "state": "PA",
@@ -69862,37 +69704,6 @@
   ]
  },
  {
-  "id": "pa-pa0216712",
-  "name": "H BURNS SMITH WTP",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PA0216712",
-  "npdes_permits": [
-   "PA0216712"
-  ],
-  "receiving_waters": [
-   "Allegheny River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 5,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 5 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "New Kensington"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PA0216712, NPD permit, status EFF, Municipality, Minor, design flow 0.062 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: NEW KENSINGTON CITY MUNI AUTH WESTMORELAND CNTY.",
-  "verified": "fetched",
-  "checked": "2026-11-03",
-  "aliases": [
-   "pa-pa0216712"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "pa-pa0229253",
   "name": "KARTHAUS-BURNSIDE WWTP",
   "state": "PA",
@@ -72261,38 +72072,6 @@
   ]
  },
  {
-  "id": "pa-pa0216399",
-  "name": "CONEMAUGH TWP MUN AUTH WTP",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PA0216399",
-  "npdes_permits": [
-   "PA0216399"
-  ],
-  "receiving_waters": [
-   "South Fork Bens Creek",
-   "Unnamed Trib To South Fork Bens Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 3,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Davidsville"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PA0216399, NPD permit, status EFF, Municipality, Minor, design flow 0.643 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: CONEMAUGH TWP SOMERSET CNTY.",
-  "verified": "fetched",
-  "checked": "2026-11-03",
-  "aliases": [
-   "pa-pa0216399"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "pa-pa0247197",
   "name": "CONESTOGA WATER TREATMENT PLANT",
   "state": "PA",
@@ -72821,37 +72600,6 @@
   ]
  },
  {
-  "id": "pa-pad410033",
-  "name": "LARRY'S CREEK WATER TREATMENT PLANT",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PAD410033",
-  "npdes_permits": [
-   "PAD410033"
-  ],
-  "receiving_waters": [
-   "UNNAMED STREAM"
-  ],
-  "water_slugs": [],
-  "outfall_count": null,
-  "outfalls_source": "EPA ECHO ICIS-NPDES (data/outfalls-plants-us.json: the plant's point only, no outfall coordinates)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Cogan Station"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PAD410033, NPD permit, status EFF, Municipality, Minor. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: JERSEY SHORE AREA JT WATER AUTH LYCOMING CNTY.",
-  "verified": "fetched",
-  "checked": "2026-11-03",
-  "aliases": [
-   "pa-pad410033"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "pa-pa0050148",
   "name": "FISH CREEK STP",
   "state": "PA",
@@ -72877,37 +72625,6 @@
   "checked": "2026-11-03",
   "aliases": [
    "pa-pa0050148"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
-  "id": "pa-pa0244171",
-  "name": "GLANRAFFAN CREEK REMEDIATION PROJECT",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PA0244171",
-  "npdes_permits": [
-   "PA0244171"
-  ],
-  "receiving_waters": [
-   "Glanraffan Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Gladwyne"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PA0244171, NPD permit, status EFF, Municipality, Minor, design flow 0.12 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: LOWER MERION TWP MONTGOMERY CNTY.",
-  "verified": "fetched",
-  "checked": "2026-11-03",
-  "aliases": [
-   "pa-pa0244171"
   ],
   "source_areas": [
    "federal"
@@ -74863,69 +74580,6 @@
   "checked": "2026-11-03",
   "aliases": [
    "pa-pa0247154"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
-  "id": "pa-pa0056880",
-  "name": "LBCJMA WATER TREATMENT PLANT",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PA0056880",
-  "npdes_permits": [
-   "PA0056880"
-  ],
-  "receiving_waters": [
-   "Delaware River",
-   "Martins Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 3,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Tullytown"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PA0056880, NPD permit, status EFF, Municipality, Minor, design flow 1.181 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: LOWER BUCKS CNTY JT MUNI AUTH.",
-  "verified": "fetched",
-  "checked": "2026-11-03",
-  "aliases": [
-   "pa-pa0056880"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
-  "id": "pa-pa0096172",
-  "name": "MCKEESPORT WTP",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PA0096172",
-  "npdes_permits": [
-   "PA0096172"
-  ],
-  "receiving_waters": [
-   "Youghiogheny River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 6,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 6 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Mckeesport"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PA0096172, NPD permit, status EFF, Municipality, Minor, design flow 0.318 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: MUNI AUTH OF WESTMORELAND CNTY.",
-  "verified": "fetched",
-  "checked": "2026-11-03",
-  "aliases": [
-   "pa-pa0096172"
   ],
   "source_areas": [
    "federal"
@@ -84547,7 +84201,7 @@
   "towns": [
    "Falls Township"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: PAC090834, GPC permit, status EFF, Municipal or Water District, Minor. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: John Warenda.",
+  "notes": "EPA ECHO ICIS-NPDES: PAC090834, GPC permit, status EFF, Municipal or Water District, Minor. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "aliases": [
@@ -94813,7 +94467,7 @@
   "towns": [
    "Scottsburg"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: VA0022748, NPD permit, status EFF, Municipality, Minor, design flow 0.0072 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: Dale Miller.",
+  "notes": "EPA ECHO ICIS-NPDES: VA0022748, NPD permit, status EFF, Municipality, Minor, design flow 0.0072 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "aliases": [
@@ -124688,37 +124342,6 @@
   ]
  },
  {
-  "id": "ga-gag640163",
-  "name": "LAFAYETTE, CITY OF (DICKSON SPRING WTP)",
-  "state": "GA",
-  "kind": "plant",
-  "npdes_permit": "GAG640163",
-  "npdes_permits": [
-   "GAG640163"
-  ],
-  "receiving_waters": [
-   "Dickson Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Lafayette"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: GAG640163, GPC permit, status EFF, Municipality, Minor, design flow 0.04 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: City of LaFayette.",
-  "verified": "fetched",
-  "checked": "2026-11-04",
-  "aliases": [
-   "ga-gag640163"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "ga-ga0047139",
   "name": "DILLARD, CITY OF (DILLARD WPCP)",
   "state": "GA",
@@ -124962,37 +124585,6 @@
   "checked": "2026-11-04",
   "aliases": [
    "ga-gag640108"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
-  "id": "ga-gag640143",
-  "name": "FLOYD COUNTY WATER DEPARTMENT (FULTON ROAD WTP)",
-  "state": "GA",
-  "kind": "plant",
-  "npdes_permit": "GAG640143",
-  "npdes_permits": [
-   "GAG640143"
-  ],
-  "receiving_waters": [
-   "Unnamed Tributary of Youngs Mill Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Kingston"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: GAG640143, GPC permit, status EFF, County Government, Minor, design flow 0.032 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: Floyd County Water Department.",
-  "verified": "fetched",
-  "checked": "2026-11-04",
-  "aliases": [
-   "ga-gag640143"
   ],
   "source_areas": [
    "federal"
@@ -139812,37 +139404,6 @@
   ]
  },
  {
-  "id": "ny-sr0026417",
-  "name": "ST. REGIS MOHAWK TRIBE WTP",
-  "state": "NY",
-  "kind": "plant",
-  "npdes_permit": "SR0026417",
-  "npdes_permits": [
-   "SR0026417"
-  ],
-  "receiving_waters": [
-   "ST. LAWRENCE RIVER"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Hogansbury"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: SR0026417, NPD permit, status EXP, Tribal Government, Minor, design flow 1.4 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: ST. REGIS MOHAWK TRIBE.",
-  "verified": "fetched",
-  "checked": "2026-11-04",
-  "aliases": [
-   "ny-sr0026417"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "ny-ny0263133",
   "name": "HAMDEN SD WWTF",
   "state": "NY",
@@ -139936,37 +139497,6 @@
   ]
  },
  {
-  "id": "pa-pa0084638",
-  "name": "BOYERTOWN BORO/ IW",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PA0084638",
-  "npdes_permits": [
-   "PA0084638"
-  ],
-  "receiving_waters": [
-   "Unnamed Trib To Ironstone Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Boyertown"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PA0084638, NPD permit, status EFF, Municipality, Minor, design flow 0.04 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: BOYERTOWN BORO BERKS CNTY.",
-  "verified": "fetched",
-  "checked": "2026-11-04",
-  "aliases": [
-   "pa-pa0084638"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "pa-pag043628",
   "name": "SFS BROAD TOP TWP RANKIN",
   "state": "PA",
@@ -140023,37 +139553,6 @@
   "checked": "2026-11-04",
   "aliases": [
    "pa-pa0087955"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
-  "id": "pa-pa0217158",
-  "name": "CHARLEROI WATER FILTRATION PLT",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PA0217158",
-  "npdes_permits": [
-   "PA0217158"
-  ],
-  "receiving_waters": [
-   "Monongahela River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Charleroi"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PA0217158, NPD permit, status EFF, Municipality, Minor, design flow 0.293 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: CHARLEROI BORO AUTH WASHINGTON CNTY.",
-  "verified": "fetched",
-  "checked": "2026-11-04",
-  "aliases": [
-   "pa-pa0217158"
   ],
   "source_areas": [
    "federal"
@@ -140148,37 +139647,6 @@
   "checked": "2026-11-04",
   "aliases": [
    "pa-pa0103551"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
-  "id": "pa-pa0098779",
-  "name": "MARTINDALE WTP",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PA0098779",
-  "npdes_permits": [
-   "PA0098779"
-  ],
-  "receiving_waters": [
-   "Trout Run"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Portage"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PA0098779, NPD permit, status EFF, Municipality, Minor, design flow 0.024 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: PORTAGE BORO MUNI WATER AUTH CAMBRIA CNTY.",
-  "verified": "fetched",
-  "checked": "2026-11-04",
-  "aliases": [
-   "pa-pa0098779"
   ],
   "source_areas": [
    "federal"
@@ -140373,38 +139841,6 @@
   ]
  },
  {
-  "id": "pa-pa0217905",
-  "name": "HULTON PURIFICATION PLT",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PA0217905",
-  "npdes_permits": [
-   "PA0217905"
-  ],
-  "receiving_waters": [
-   "Falling Springs Run",
-   "Allegheny River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 12,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 12 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Oakmont"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PA0217905, NPD permit, status EFF, Municipality, Minor, design flow 0.44 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: OAKMONT BORO MUNI AUTH ALLEGHENY CNTY.",
-  "verified": "fetched",
-  "checked": "2026-11-04",
-  "aliases": [
-   "pa-pa0217905"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "pa-pa0035009",
   "name": "LAKE LEHMAN SCHOOL DIST",
   "state": "PA",
@@ -140461,35 +139897,6 @@
   "checked": "2026-11-04",
   "aliases": [
    "pa-pa0024970"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
-  "id": "pa-pac100021",
-  "name": "MERCER TOWNSHIP SANITARY SEWER PROJECT",
-  "state": "PA",
-  "kind": "plant",
-  "npdes_permit": "PAC100021",
-  "npdes_permits": [
-   "PAC100021"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": null,
-  "outfalls_source": "EPA ECHO ICIS-NPDES (data/outfalls-plants-us.json: the plant's point only, no outfall coordinates)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Forestville"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: PAC100021, GPC permit, status EXP, Municipality, Minor. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: Mercer Township.",
-  "verified": "fetched",
-  "checked": "2026-11-04",
-  "aliases": [
-   "pa-pac100021"
   ],
   "source_areas": [
    "federal"
@@ -140750,8 +140157,7 @@
   "kind": "plant",
   "npdes_permit": "VA0020699",
   "npdes_permits": [
-   "VA0020699",
-   "VAN040077"
+   "VA0020699"
   ],
   "receiving_waters": [
    "James River, UT"
@@ -140765,7 +140171,7 @@
   "towns": [
    "State Farm"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: VA0020699, NPD permit, status EFF, State Government, Minor, design flow 0.465 MGD; VAN040077, GPC permit, status EFF, State Government, Minor. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: VDOC - Central Region.",
+  "notes": "EPA ECHO ICIS-NPDES: VA0020699, NPD permit, status EFF, State Government, Minor, design flow 0.465 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: VDOC - Central Region.",
   "verified": "fetched",
   "checked": "2026-11-04",
   "aliases": [
@@ -140807,44 +140213,6 @@
   ]
  },
  {
-  "id": "va-va0089605",
-  "name": "US NAVY - DEFENSE FUEL SUPPORT POINT CRANEY ISLAND",
-  "state": "VA",
-  "kind": "plant",
-  "npdes_permit": "VA0089605",
-  "npdes_permits": [
-   "VA0089605"
-  ],
-  "receiving_waters": [
-   "Elizabeth River",
-   "CRANEY ISLAND CREEK",
-   "ELIZABETH RIVER",
-   "ELIZABETH RIVER AT CRANEY ISLND CRK",
-   "ELIZABET RIVER",
-   "CRANEY ISLND CRK AT ELIZ RIVR",
-   "CRANEY ISLND CRK",
-   "N/A"
-  ],
-  "water_slugs": [],
-  "outfall_count": 33,
-  "outfalls_source": "EPA ECHO ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 33 rows for this permit)",
-  "notification_channel": "None found online (not searched individually)",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Portsmouth"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: VA0089605, NPD permit, status EFF, Federal Facility (U.S. Government), Minor. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: U.S. Navy.",
-  "verified": "fetched",
-  "checked": "2026-11-04",
-  "aliases": [
-   "va-va0089605"
-  ],
-  "source_areas": [
-   "federal"
-  ]
- },
- {
   "id": "va-va0022721",
   "name": "HALIFAX COUNTY SCHOOLS MEADVILLE ELEM",
   "state": "VA",
@@ -140865,7 +140233,7 @@
   "towns": [
    "Nathalie"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: VA0022721, NPD permit, status EFF, Municipality, Minor, design flow 0.0051 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched. ICIS permit name: Dale Miller.",
+  "notes": "EPA ECHO ICIS-NPDES: VA0022721, NPD permit, status EFF, Municipality, Minor, design flow 0.0051 MGD. Added 2026-11-03 so the permit's outfalls have an operator page (scripts/add_federal_operators.py; data/outfalls-plants-us.json, research/federal/plant-outfalls.md): name, city and receiving water as EPA spells them; no contact, notification channel or overflow history has been researched.",
   "verified": "fetched",
   "checked": "2026-11-04",
   "aliases": [
