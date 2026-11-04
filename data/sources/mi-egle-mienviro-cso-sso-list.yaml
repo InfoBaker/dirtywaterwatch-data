@@ -10,7 +10,8 @@ level: "state"
 #   started in the last 60 days, and asks by submission for open reports that dropped out of both;
 #   `--backfill [--from YEAR]` reads completed reports a year at a time (default from 2025; the list
 #   goes back to 2001, about 2,000 reports a year). Narrative fields are never requested. An open
-#   report whose end repeats its start is read as having no end (the form's placeholder).
+#   report whose end repeats its start is read as having no end (the form's placeholder), and a
+#   completed one's end is then not confirmed (no end used).
 # Notes (research/mi, status used, verified fetched, checked 2026-11-04): Statewide, event-level,
 #   machine-readable, public: read hourly by pipeline/ingest/mi_egle_mienviro.py (3,198 records on
 #   2026-11-04 with the backfill from 2025). No coordinates: placement by permit and outfall number
