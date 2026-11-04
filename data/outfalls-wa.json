@@ -34,13 +34,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 268 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 268 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
+   "water_slug": "lake-washington-ship-canal-wa",
+   "water_name": "Lake Washington Ship Canal",
+   "water_kind": "river",
+   "distance_m": 10,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (10 m; snapped within 150 m); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 10 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -74,13 +73,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 137 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 137 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "lake-washington-ship-canal-wa",
+   "water_name": "Lake Washington Ship Canal",
+   "water_kind": "river",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -114,13 +112,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -159,8 +156,8 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 34 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 34 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 34 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 34 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -199,8 +196,8 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 31 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 31 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 31 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 31 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -239,7 +236,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -278,7 +275,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -317,7 +314,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -391,12 +388,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": "lake-union-wa",
-   "water_name": "Lake Union",
+   "water_slug": "portage-bay-wa",
+   "water_name": "Portage Bay",
    "water_kind": "lake",
-   "distance_m": 3,
+   "distance_m": 5,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (3 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 3 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (4 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 5 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -430,13 +427,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989541-wa, 88 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989541-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989541-wa, 88 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989541-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -470,13 +466,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "NO",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989541-wa, 147 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989541-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989541-wa, 147 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989541-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -510,13 +505,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 38 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 38 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 52,
+   "match": "geometry",
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Elliott Bay' (data/dischargers.json, from the research), the listed water whose record lies at the point (52 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 52 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -550,13 +544,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 11 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 11 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 31,
+   "match": "geometry",
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Elliott Bay' (data/dischargers.json, from the research), the listed water whose record lies at the point (31 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 31 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -630,13 +623,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "NO",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 107 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 107 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -715,7 +707,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -749,13 +741,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 106 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 106 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -789,12 +780,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": "duwamish-waterway-wa",
-   "water_name": "Duwamish Waterway",
-   "water_kind": "river",
-   "distance_m": 55,
+   "water_slug": "harbor-island-reach-wa",
+   "water_name": "Harbor Island Reach",
+   "water_kind": "bay",
+   "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (55 m; snapped within 150 m); Duwamish Waterway (duwamish-waterway-wa, NHDPlus V2.1 record), 55 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Harbor Island Reach (harbor-island-reach-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -867,13 +858,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 168 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 168 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 4,
+   "match": "geometry",
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Duwamish River' (data/dischargers.json, from the research), the listed water whose record lies at the point (4 m); Duwamish River (duwamish-river-wa, openboatlaunch), 4 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -907,13 +897,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 63 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 63 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 2,
+   "match": "geometry",
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Duwamish River' (data/dischargers.json, from the research), the listed water whose record lies at the point (2 m); Duwamish River (duwamish-river-wa, openboatlaunch), 2 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -947,13 +936,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 72 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 72 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -987,13 +975,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 139 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 139 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 35,
+   "match": "geometry",
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Duwamish River' (data/dischargers.json, from the research), the listed water whose record lies at the point (35 m); Duwamish River (duwamish-river-wa, openboatlaunch), 35 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1027,13 +1014,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 120 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 120 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1067,13 +1053,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 14,
+   "match": "geometry",
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Duwamish River' (data/dischargers.json, from the research), the listed water whose record lies at the point (14 m); Duwamish River (duwamish-river-wa, openboatlaunch), 14 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1107,13 +1092,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 41 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 41 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1150,9 +1134,9 @@
    "water_slug": "lake-washington-wa",
    "water_name": "Lake Washington",
    "water_kind": "lake",
-   "distance_m": 24,
+   "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (24 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 24 m from the point",
+   "water_match": "permit's receiving water: no receiving-water text; the permit's receiving water 'Lake Washington' (data/dischargers.json, from the research), the listed water whose record lies at the point (0 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1186,13 +1170,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "NO",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989551-wa, 63 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989551-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989551-wa, 63 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989551-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1231,7 +1214,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1265,13 +1248,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989525-wa, 180 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989525-wa, 180 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1305,13 +1287,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 324 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 324 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1345,13 +1326,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 302 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 302 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1385,13 +1365,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000563523",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 298 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 298 m); the permit's listed receiving waters (Puget Sound, Elliott Bay, Duwamish River, Lake Washington, Lake Union / Ship Canal) cannot be told apart for this outfall",
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1470,7 +1449,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1509,7 +1488,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1548,7 +1527,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1587,7 +1566,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1626,7 +1605,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1665,7 +1644,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1704,8 +1683,8 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24538732-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24538732-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: lake-washington-wa, 324 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24538732-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: lake-washington-wa, 324 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24538732-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1742,9 +1721,9 @@
    "water_slug": "lake-washington-wa",
    "water_name": "Lake Washington",
    "water_kind": "lake",
-   "distance_m": 0,
+   "distance_m": 16,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (16 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 16 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1781,9 +1760,9 @@
    "water_slug": "lake-washington-wa",
    "water_name": "Lake Washington",
    "water_kind": "lake",
-   "distance_m": 46,
+   "distance_m": 19,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (46 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 46 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (19 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 19 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1822,7 +1801,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1861,7 +1840,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1900,7 +1879,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1939,7 +1918,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -1978,7 +1957,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2017,7 +1996,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2056,7 +2035,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2095,7 +2074,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2134,7 +2113,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2173,7 +2152,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2212,7 +2191,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2241,7 +2220,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2280,7 +2259,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2319,7 +2298,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2358,7 +2337,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2397,7 +2376,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2431,12 +2410,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": "lake-washington-wa",
-   "water_name": "Lake Washington",
-   "water_kind": "lake",
+   "water_slug": "andrews-bay-wa",
+   "water_name": "Andrews Bay",
+   "water_kind": "bay",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Andrews Bay (andrews-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2475,7 +2454,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2514,7 +2493,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2553,7 +2532,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2592,7 +2571,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2631,7 +2610,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2668,9 +2647,9 @@
    "water_slug": "lake-washington-wa",
    "water_name": "Lake Washington",
    "water_kind": "lake",
-   "distance_m": 5,
+   "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (5 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 5 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2694,13 +2673,12 @@
    "status_tag": "NPDES056",
    "fetched_at": "2026-11-04T10:30:14Z",
    "supersedes": null,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989551-wa, 6 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989551-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989551-wa, 6 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989551-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "shilshole-bay-wa",
+   "water_name": "Shilshole Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Shilshole Bay (shilshole-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2734,13 +2712,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989551-wa, 2 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989551-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989551-wa, 2 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989551-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "shilshole-bay-wa",
+   "water_name": "Shilshole Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Shilshole Bay (shilshole-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2779,8 +2756,8 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 111 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 111 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 111 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 111 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2819,8 +2796,8 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 187 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 187 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 187 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 187 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2854,13 +2831,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 30,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (30 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 30 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2894,13 +2870,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2934,13 +2909,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -2974,13 +2948,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989541-wa, 19 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989541-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989541-wa, 19 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989541-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3014,13 +2987,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 44 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 44 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3054,13 +3026,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "NO",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 28 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 28 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 16,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (16 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 16 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3094,13 +3065,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 16 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 16 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 4,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (4 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 4 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3134,13 +3104,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "NO",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 31 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989539-wa, 31 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989539-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 1,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (1 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 1 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3174,13 +3143,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989525-wa, 36 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989525-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989525-wa, 36 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989525-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3214,13 +3182,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989525-wa, 52 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989525-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989525-wa, 52 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989525-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "elliott-bay-wa",
+   "water_name": "Elliott Bay",
+   "water_kind": "bay",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Elliott Bay (elliott-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3254,13 +3221,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989525-wa, 130 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989525-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-23989525-wa, 130 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-23989525-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3294,13 +3260,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 30 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 30 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 6,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (6 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 6 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3334,13 +3299,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 28 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 28 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-burien-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3374,13 +3338,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 279 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-burien-wa, 279 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
+   "water_slug": "puget-sound-wa",
+   "water_name": "Puget Sound",
+   "water_kind": "sound",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Puget Sound (puget-sound-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3613,13 +3576,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 87 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-tributary-to-duwamish-waterway-wa, 87 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-tributary-to-duwamish-waterway-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "duwamish-river-wa",
+   "water_name": "Duwamish River",
+   "water_kind": "river",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Duwamish River (duwamish-river-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3658,7 +3620,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3697,7 +3659,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3734,9 +3696,9 @@
    "water_slug": "lake-union-wa",
    "water_name": "Lake Union",
    "water_kind": "lake",
-   "distance_m": 3,
+   "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (3 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 3 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3775,7 +3737,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3814,7 +3776,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3853,7 +3815,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3892,7 +3854,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3931,7 +3893,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -3970,7 +3932,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4004,12 +3966,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": "lake-union-wa",
-   "water_name": "Lake Union",
+   "water_slug": "portage-bay-wa",
+   "water_name": "Portage Bay",
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4043,12 +4005,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": "lake-union-wa",
-   "water_name": "Lake Union",
+   "water_slug": "portage-bay-wa",
+   "water_name": "Portage Bay",
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4082,12 +4044,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": "lake-union-wa",
-   "water_name": "Lake Union",
+   "water_slug": "portage-bay-wa",
+   "water_name": "Portage Bay",
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4121,12 +4083,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": "lake-union-wa",
-   "water_name": "Lake Union",
+   "water_slug": "portage-bay-wa",
+   "water_name": "Portage Bay",
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4160,12 +4122,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": "lake-union-wa",
-   "water_name": "Lake Union",
+   "water_slug": "portage-bay-wa",
+   "water_name": "Portage Bay",
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4199,12 +4161,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": "lake-union-wa",
-   "water_name": "Lake Union",
+   "water_slug": "portage-bay-wa",
+   "water_name": "Portage Bay",
    "water_kind": "lake",
-   "distance_m": 10,
+   "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (10 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 10 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Portage Bay (portage-bay-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4243,7 +4205,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4280,9 +4242,9 @@
    "water_slug": "lake-union-wa",
    "water_name": "Lake Union",
    "water_kind": "lake",
-   "distance_m": 8,
+   "distance_m": 3,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (8 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 8 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (3 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 3 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4319,9 +4281,9 @@
    "water_slug": "lake-union-wa",
    "water_name": "Lake Union",
    "water_kind": "lake",
-   "distance_m": 22,
+   "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (22 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 22 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4360,7 +4322,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4394,13 +4356,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 70 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 70 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "lake-washington-ship-canal-wa",
+   "water_name": "Lake Washington Ship Canal",
+   "water_kind": "river",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4434,13 +4395,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "NO",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 294 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 294 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall",
+   "water_slug": "lake-washington-ship-canal-wa",
+   "water_name": "Lake Washington Ship Canal",
+   "water_kind": "river",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4474,13 +4434,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 291 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 291 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "lake-washington-ship-canal-wa",
+   "water_name": "Lake Washington Ship Canal",
+   "water_kind": "river",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4514,13 +4473,12 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039705334",
    "permit_status": "EFF",
    "in_icis": "YES",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 210 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 210 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_slug": "lake-washington-ship-canal-wa",
+   "water_name": "Lake Washington Ship Canal",
+   "water_kind": "river",
+   "distance_m": 0,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington Ship Canal (lake-washington-ship-canal-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4599,7 +4557,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4758,7 +4716,7 @@
    "water_kind": "lake",
    "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, NHDPlus V2.1 record), 0 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Washington (lake-washington-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4797,8 +4755,8 @@
    "water_kind": null,
    "distance_m": null,
    "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 34 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-24537862-wa, 34 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-24537862-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 34 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-seattle-wa, 34 m); the permit's listed receiving waters (Lake Washington, Lake Union, Salmon Bay, Elliott Bay, Duwamish Waterway) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-seattle-wa) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -4835,9 +4793,9 @@
    "water_slug": "lake-union-wa",
    "water_name": "Lake Union",
    "water_kind": "lake",
-   "distance_m": 22,
+   "distance_m": 0,
    "match": "geometry",
-   "water_match": "point: no receiving-water text; the water record at the outfall's point (22 m; snapped within 150 m); Lake Union (lake-union-wa, NHDPlus V2.1 record), 22 m from the point",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (0 m; snapped within 150 m); Lake Union (lake-union-wa, openboatlaunch), 0 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   }
  ],
