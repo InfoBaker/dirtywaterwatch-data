@@ -73,13 +73,15 @@ Washington DC (permit DC0021199, DC Water; research/dc/report.md section 2.3)
 
 Georgia (permits GA...; research/ga/report.md section 2.2; the state is not live until data/rules.json says so)
   Georgia permittees file their 24-hour and 5-day spill reports in EPD's GEOS, and these reach this dataset: 1,232
-  current GA rows from 90 permits in the 2026-11-03 extract, with start and end times and receiving waters but no
+  current GA rows from 90 permits in the 2026-11-03 extract (887 kept, from 83 permits), with start and end times and receiving waters but no
   volume (the volume field is empty on every GA row). Two Georgia habits are handled here:
   - The receiving-water field often says the spill did not reach a water ('DID NOT ENTER STATE WATERS', 'did not
     reach waters', misspelt variants): NO_WATER_TEXT reads these as "receiving water stated as none" (dropped, like
-    'none'). No row of another state used these words in that extract.
-  - The point is mostly the permit's own (the plant or the utility's office), not the spill's: in that extract 916 of
-    994 kept GA events share a point with four or more other events of the same permit. For the states in
+    'none'). No row of another state used these words in that extract. STATE_NO_WATER["GA"] adds Georgia's other
+    wordings for no water ('Dry land', 'N/A dry land', 'Not Appicable', 'Bulding Basement', 'DID NOT DISCHARGE TO
+    STATE WATERS'), read for GA permits only. Storm drains, MS4 systems and catch basins stay waters, as everywhere.
+  - The point is mostly the permit's own (the plant or the utility's office), not the spill's: in that extract 757 of
+    887 kept GA events share a point with four or more other events of the same permit. For the states in
     REPEATED_POINT_STATES a point that REPEATED_POINT_MIN or more kept events of one permit share is not used for
     those events (lat/lon null; raw.reported_point keeps it and raw.point_note says why), unless the event is a
     bypass (a plant bypass happens at the plant). The live states are not in the set.
@@ -130,6 +132,16 @@ WATER_IMPACTS = {"AHI", "ALI", "SBC", "BEC", "DWC"}
 BUILDING_TEXT = re.compile(r"basement|bathtub|bathroom|toilet|\bhome\b|\bhouse\b|residential", re.I)
 NO_WATER_TEXT = re.compile(r"^\s*(none|n/?a|no water ?body|no discharge.*|no direct discharge.*|not applicable|"
                            r"did\s*n\S*\s+(?:enter|reach)\b.*)\s*\.?\s*$", re.I)
+# Georgia reports' own ways of saying no water was reached (dry land, misspelt "not applicable", a basement), read
+# only for GA permits so the live states' rows are untouched
+STATE_NO_WATER = {"GA": re.compile(r"^\s*((?:n/?a\s+)?dry\s*land(?:\s+spill)?|n[o0][a-z]?t?\s+ap+l?i?c\w*|non\s+applicable|"
+                                   r"bu\w*ding\s+basement|did\s*n\S*\s+discharge\b.*)\s*\.?\s*$", re.I)}
+
+
+def no_water(w: str, state: str | None = None) -> bool:
+    """The receiving-water text says there was none (NO_WATER_TEXT, and the state's own wordings)."""
+    pat = STATE_NO_WATER.get(state or "")
+    return bool(NO_WATER_TEXT.match(w) or (pat and pat.match(w)))
 WATER_WORDS = re.compile(r"\b(river|brook|stream|creek|pond|lake|harbou?r|bay|cove|waterway|body of water|"
                          r"storm ?drain|catch basin|wetland|swamp|ocean)\b", re.I)
 OUTFALL_TEXT = re.compile(r"\bcso\b|regulator|outfall", re.I)
@@ -313,11 +325,12 @@ class Waters:
 
 # --------------------------------------------------------------------------- rule
 
-def reached_water(ev: dict, types: list[str], waters: list[str], impacts: list[dict]) -> tuple[bool, str]:
+def reached_water(ev: dict, types: list[str], waters: list[str], impacts: list[dict],
+                  state: str | None = None) -> tuple[bool, str]:
     struct = ev.get("sewer_overflow_structure_type_code") or ""
     other = ev.get("sewer_overflow_structure_type_code_other_text") or ""
     codes = {i["sewer_overflow_bypass_impact_code"] for i in impacts}
-    real_waters = [w for w in waters if w.strip() and not NO_WATER_TEXT.match(w)]
+    real_waters = [w for w in waters if w.strip() and not no_water(w, state)]
     if struct == "BAS" or "SBB" in codes or (struct == "OTH" and BUILDING_TEXT.search(other)):
         if not real_waters:
             return False, "building backup"
@@ -368,7 +381,7 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         t_codes = [r["sewer_overflow_bypass_type_code"] for r in t_rows]
         w_names = [r["name_receiving_water"] for r in rws.get(k, [])]
         i_rows = imps.get(k, [])
-        ok, reason = reached_water(ev, t_codes, w_names, i_rows)
+        ok, reason = reached_water(ev, t_codes, w_names, i_rows, state)
         why[(state, "kept" if ok else "dropped", reason)] += 1
         srid = f"{permit}:{ev['program_report_form_set_id']}:{ev['sewer_overflow_bypass_event_id_ext'] or '0'}"
         if not ok:
@@ -407,7 +420,7 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         reg = W.outfalls.get((permit, outfall.zfill(3))) if outfall and etype == "cso" else None
         if reg and reg.get("water_slug"):
             slugs, how = [reg["water_slug"]], "outfall_registry"
-        real_w = [w.strip() for w in w_names if w.strip() and not NO_WATER_TEXT.match(w)]
+        real_w = [w.strip() for w in w_names if w.strip() and not no_water(w, state)]
         w_aliases = {}
         if state == "DC":   # free text -> the NHD name; what was typed stays in raw.receiving_waters
             w_aliases = {w: normalise_dc_water(w) for w in w_names if w.strip() and not NO_WATER_TEXT.match(w)
