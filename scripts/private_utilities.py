@@ -123,6 +123,8 @@ ADDRESS_RE = re.compile(r"^\s*\d+[a-z]?\s+(?:[nsew]\.?\s+)?[\w.' -]*\b(rd|road|l
 DBA_RE = re.compile(r"\b(?:d\s*/\s*b\s*/\s*a|dba|d\.b\.a\.?|t\s*/\s*a)\b", re.I)
 
 LEGAL_FORM_HINTS = [   # (private legal form, words in either name): first match wins
+    # a Texas water supply corporation is a non-profit owned by its members, whatever else its name says
+    ("member-owned utility", re.compile(r"\b(wsc|water\s+supply\s+corp\w*)\b", re.I)),
     ("mobile-home park", re.compile(r"\b(mhp|mhc|mobile\s*home|manufactured|trailer|mh\s+park|mobile\s+(estates|"
                                     r"park|court|village|manor))\b", re.I)),
     ("campground or resort", re.compile(r"\b(rv|campground|camp\s*ground|camping|koa|resort|marina|travel\s+park|"
@@ -135,7 +137,7 @@ LEGAL_FORM_HINTS = [   # (private legal form, words in either name): first match
                                r"sanitarium|prison|correctional|detention|jail|church|chapel|ministr\w*|mennonite|"
                                r"brethren|hutterian|colony|monastery|abbey|bible|retreat|conference|conf|"
                                r"children|orphan|salvation)\b", re.I)),
-    ("investor-owned utility", re.compile(r"\b(utilities|utility|wsc|water\s+supply\s+corp\w*|water\s+service|"
+    ("investor-owned utility", re.compile(r"\b(utilities|utility|water\s+service|"
                                           r"sewer\s+(co|company|service|services|corp\w*|inc|llc)|sewage\s+(co|"
                                           r"company|corp\w*)|wastewater\s+(co|company|services|inc|llc)|"
                                           r"water\s+(co|company|corp\w*)|environmental\s+services|aqua|"
@@ -146,6 +148,8 @@ LEGAL_FORM_HINTS = [   # (private legal form, words in either name): first match
                                           r"restaurant|cafe|motel|hotel|inn|casino|store|market|shopping|plaza|"
                                           r"mall|foods|products|dairy|farms?)\b", re.I)),
 ]
+# the forms whose words make a family's name a place or a body, not a family's own company (family_company)
+PLACE_FORMS = ("mobile-home park", "campground or resort", "homeowners' association", "private club", "institution")
 
 
 # ------------------------------------------------------------------ names
@@ -343,7 +347,7 @@ def family_vehicle(s: str) -> bool:
         return False
     if mid and CORPORATE_RE.fullmatch(mid):           # "Quill Family Ltd Partnership"
         return True
-    return not (mid and (_breaks(mid) or any(rx.search(mid) for _, rx in LEGAL_FORM_HINTS[:5])))
+    return not (mid and (_breaks(mid) or any(rx.search(mid) for f, rx in LEGAL_FORM_HINTS if f in PLACE_FORMS)))
 
 
 def personal_trust(s: str) -> bool:
