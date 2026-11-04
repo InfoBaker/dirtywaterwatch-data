@@ -63,11 +63,20 @@ QUERY = LAYER_URL + "/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=43
 RESEARCH = ROOT / "research" / "me"
 AUTHORITY = "Maine DEP CSO Status Report"
 
+def _report_text(name: str):
+    """The extracted report text: the tracked copy in data/reference/ (the public data repository carries it), else
+    the research raw folder on the machine that extracted it."""
+    for p in (ROOT / "data" / "reference" / name, RESEARCH / "raw" / name):
+        if p.exists():
+            return p
+    return ROOT / "data" / "reference" / name
+
+
 REPORTS = [
-    {"year": 2025, "text": RESEARCH / "raw" / "me-cso-2025-status-report.txt", "published_at": "2026-06-30",
+    {"year": 2025, "text": _report_text("me-cso-2025-status-report.txt"), "published_at": "2026-06-30",
      "url": "https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf",
      "title": "Maine Combined Sewer Overflow 2025 Status Report (June 2026)"},
-    {"year": 2024, "text": RESEARCH / "raw" / "me-cso-2024-status-report.txt", "published_at": "2025-06-30",
+    {"year": 2024, "text": _report_text("me-cso-2024-status-report.txt"), "published_at": "2025-06-30",
      "url": "https://www.maine.gov/dep/publications/reports/index.html",
      "title": "Maine Combined Sewer Overflow 2024 Status Report (June 2025)"},
 ]
