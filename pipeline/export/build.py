@@ -91,6 +91,7 @@ from pathlib import Path
 
 from build import status as status_mod
 from build.redact import BlockScan, Redactor, blocklist, quote_swaps, redact_events, redactor_for
+from common import scrub_residence_numbers
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, OUT_DIR, OUTFALL_REGISTRY_GLOB, OUTFALL_REGISTRY_SKIPPED,
                     PROVISIONAL_FIELDS, REPORTED_OUTFALLS, ROOT, STATE_CODE, discharger_alias_map, is_provisional, now_iso, read_json,
                     scrub_names, split_path_notes, strip_personal, write_json)
@@ -370,12 +371,14 @@ FREE_TEXT_FIELDS = ("outfall_name", "waterbody_text", "advice_text", "material",
 def public_event(e: dict) -> dict:
     """An event as out/ carries it: raw with personal fields and staff names stripped again under the
     current rules (events files written before a rule was added are covered too) and without
-    pipeline notes that name repository files; staff names scrubbed from the free-text fields."""
+    pipeline notes that name repository files; staff names, and the house number of an address tied to a residence or
+    a resident (common.scrub_residence_numbers: raw loses it, so must an outfall name or a water text quoting the same
+    sentence), scrubbed from the free-text fields."""
     raw, _notes = split_path_notes(strip_personal(e.get("raw") or {}))
     out = {**e, "raw": raw}
     for k in FREE_TEXT_FIELDS:
         if isinstance(out.get(k), str):
-            out[k] = scrub_names(out[k])
+            out[k] = scrub_residence_numbers(scrub_names(out[k]))
     return out
 
 
@@ -1130,7 +1133,10 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     problems.extend(problems_registry)
     dropped = set(st.get("dropped_fixtures") or [])
     placements = st.get("placements") or {}
-    events = [public_event(e) for e in events if e["event_id"] not in dropped]
+    events = [e for e in events if e["event_id"] not in dropped]
+    # the records as the status build read them: a status line quotes these texts, so its swaps are taken against them
+    as_read = {e["event_id"]: e for e in events}
+    events = [public_event(e) for e in events]
     # the operator registry first: an event's discharger_id that the registry lists as an alias is written
     # as the row's id (the original in discharger_id_source) before anything is counted or written
     dis, dis_from = load_dischargers()
@@ -1147,7 +1153,8 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     # redact_status_texts), each record's quotes swapped for its redacted text first (quote_swaps)
     redactor = redactor_for(events)
     redacted = redact_events(events, redactor=redactor)
-    swaps_of = {e["event_id"]: s for e, r in zip(events, redacted) if (s := quote_swaps(e, r))}
+    swaps_of = {r["event_id"]: s for e, r in zip(events, redacted)
+                if (s := quote_swaps(as_read.get(r["event_id"], e), r))}
     events = redacted
     n_status = redact_status_texts(st, redactor, swaps_of)
     if n_status:

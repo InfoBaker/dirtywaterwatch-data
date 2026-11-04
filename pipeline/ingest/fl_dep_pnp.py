@@ -38,6 +38,24 @@ Privacy (the service is public but carries personal data)
   inside it go as in the text; a notice filed by a member of the public keeps no street address
   ("[address removed]": its facility is often the filer's or a neighbour's home). tests/test_fl_dep_pnp.py proves that a contact field and a name in those labels never reach
   a record or the saved raw page.
+  The name review of 2026-11-04 (build/name_review.py over all 12,499 records) added the shapes it found: camel-case
+  and particle surnames ("Mc...", "De..."), "Reporting Party:", "Contacted by:", "PERSON CONTACTED:", "Assigned To:"
+  labels (a blank "____" field is empty), an initial and a surname next to a contact verb, any name before what only a
+  person does ("received call", "called me", "were dispatched", "is aware", "began to"), "myself, <name>", a greeting,
+  "is named <name>", "<name> (DEP)", "<agency> (<name>)", "<title> for the Village, <name>", a name before an e-mail or
+  phone, a capitalised "PER <NAME> W.", "Ranger <surname>", and the State Watch Office's "DEM-<surname>"; a company,
+  agency, role, place, water, storm or facility in those places is kept (_company_or_place). common.scrub_text removes a
+  phone number typed without separators after a contact word and the house number of an address the text ties to a
+  residence or a resident (the street stays); safe_attributes cuts that number from the incident name, facility name and
+  address line too. A notice filed by a member of the public keeps no house number anywhere and its point is rounded
+  to three decimals (about 100 m, raw._coords_note). Records kept from an earlier run are rebuilt from their raw
+  attributes under the current rules (rebuilt()). A rare given name standing alone as the incident name, or a name that
+  is also a company's, can still pass: the owner's blocklist (data/build/name-blocklist.json) covers those.
+  The value of "Reporting Party:", "Person Contacted:", "Contacted by:" and "Assigned To:" ends at the next contact,
+  date or time label when no safe label follows (NAME_VALUE_LABELS), so the account after it stays; a forwarded
+  e-mail's addressees ("To: <surname>, <given> <address>") are removed; a Florida town of two words or more
+  (data/waters-fl.json) before an action verb is the utility, not a person; a rounded complaint point carries its
+  precision (raw._coord_precision_m: about 100 m, or the source's own when coarser).
 
 Which notices become records (the feed mixes every kind of pollution)
   - Notices filed on DEP's wastewater template carry "Wastewater Type: <type> Cause: <cause> Spill
@@ -127,8 +145,9 @@ from zoneinfo import ZoneInfo
 import requests
 
 from build import redact
-from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, ROOT, event, now_iso, parse_volume_gal,
-                    path_notes_to_meta, read_json, save_raw, scrub_text, write_events, write_json)
+from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, OPERATOR_WORDS, ROOT, drop_house_numbers, event, now_iso,
+                    parse_volume_gal, path_notes_to_meta, read_json, residence_numbers, save_raw, scrub_text,
+                    strip_house_numbers, write_events, write_json)
 
 SOURCE_ID = "fl-dep-pnp"
 SERVICE = "https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer"
@@ -159,7 +178,7 @@ PERSON_LABEL = re.compile(
     r"point\s+of\s+contact|on[- ]scene\s+contact|employee\s+id|employee\s+name|reporter(?:'s)?\s+name|reporter|"
     r"incident\s+reported\s+by|person\s+reporting|responsible\s+party(?:\s+name)?|suspected\s+responsible\s+party|"
     r"signature|signed|e-?mail(?:\s+address)?|phone(?:\s+number|\s*#)?|sewer\s+phone\s+number|cell|fax|"
-    r"name\s+of\s+(?:reporter|caller|person))\b)"
+    r"name\s+of\s+(?:reporter|caller|person)|reporting\s+party|person\s+contacted|contacted\s+by|assigned\s+to)\b)"
     r"|\b(?:NAME|Name)\b")
 # labels that are safe to resume at (a field of the report, not a person)
 SAFE_LABEL = re.compile(
@@ -177,11 +196,16 @@ SAFE_LABEL = re.compile(
     r"discharge\s+stopped\s+on|post\s+signs|feet\s+into\s+surface\s+water|status|update|worksheets?|"
     r"satellite\s+collection\s+systems|released\s+estimate\s+range|raw\s+sewage\s*/\s*treated\s+effluent|"
     r"injuries|this\s+situation\s+involves|release\s+occurred\s+from\s+a|dep\s+use\s+only|written\s+report\s+requested|"
-    r"due\s+date|represents|affiliation|title|employee\s+title|relationship|date)\s*(?:[:?]|-\s|\u2013\s))")
+    r"due\s+date|represents|affiliation|title|employee\s+title|relationship|installation\s+name|reported\s+to\s+swo\s+on|"
+    r"severity|state\s+watch\s+office|date\s*/\s*time|date)\s*(?:[:?]|-\s|\u2013\s))")
 JOB_TITLE = (r"(?:director|manager|supervisor|superintendent|coordinator|specialist|engineer|operator|chief\s+of\s+staff|"
              r"chief|foreman|technician|officer|administrator|dispatcher|mayor|commissioner|inspector|investigator|"
-             r"analyst|planner|scientist|president|chairman|chair|deputy|representative|agent)")
-_PNAME = r"[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)?(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)*"
+             r"analyst|planner|scientist|president|chairman|chair|deputy|representative|agent|consultant|ranger)")
+# a given name and a surname; either may be camel-case or carry a particle ("McSample", "DeSample", "O'Sample"), and a
+# middle initial or a middle name may stand between ("Pat E. Sample", "Lee Ann McSample")
+_GNAME = r"(?:Ma?c|De|Di|Da|La|Le|O')?[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)?"
+_SNAME = r"(?:Ma?c|De|Di|Da|La|Le|O')?[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)*"
+_PNAME = rf"{_GNAME}(?:\s+[A-Z]\.?|\s+[A-Z][a-z]+(?=\s+(?:Ma?c|De|O')[A-Z]))?\s+{_SNAME}"
 _PNAME_CAPS = r"[A-Z]{2,}(?:\s+[A-Z]\.?)?\s+[A-Z]{2,}(?:[-'][A-Z]+)?"
 TITLE_THEN_NAME = re.compile(rf"(\b(?i:{JOB_TITLE})\b\s*[:,-]?\s+)(?:{_PNAME}|{_PNAME_CAPS})\b")
 NOT_PERSON_WORDS = set("""staff crews crew department utilities utility county city town village district public works
@@ -199,7 +223,7 @@ LABEL_END = re.compile(r"\s*(?::|#|\?|-\s|\u2013\s)")
 NAME_OF_THING = set("""utility facility company business contractor street water body storm location station plant system
 site severe beach waterbody road project product chemical vessel boat vehicle carrier""".split())
 HONORIFIC_NAME = re.compile(r"\b(?:Mr|Mrs|Ms|Miss)\.?\s+[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)*(?:\s+[A-Z][a-z]+)?")
-FIRST_PERSON_NAME = re.compile(rf"\b((?:I|[Mm]y\s+name\s+is|[Tt]his\s+is)\s+)({_PNAME})\b")
+FIRST_PERSON_NAME = re.compile(rf"\b((?:I|[Mm]y\s+name\s+is|[Tt]his\s+is|[Mm]yself,?)\s+)({_PNAME})\b")
 NAME_THEN_TITLE = re.compile(rf"\b({_PNAME})(?=,?\s+(?:[A-Z][A-Za-z/&]+\s+){{0,3}}(?i:{JOB_TITLE})\b)")
 
 
@@ -218,9 +242,11 @@ PLACE_PAIRS = {"wesley chapel", "mary esther", "holly hill", "marco island", "da
 FL_PLACE_GIVEN = {"orlando", "stuart", "wesley", "lynn", "marco", "dana", "holly", "charlotte"}
 # a person named after a cue ("spoke with X Y", "contact X Y", "Thank you X Y", "per X Y"): any capitalised pair that is
 # not a place, an organisation or a storm
-CUE_NAME = re.compile(r"(\b(?i:spoke\s+(?:with|to)|discussed(?:\s+individually)?\s+with|voice\s+message\s+from|"
+CUE_NAME = re.compile(r"(\b(?i:(?:contacted|notified|visited|e-?mailed|reported)\s+by|spoke\s+(?:with|to)|discussed(?:\s+individually)?\s+with|voice\s+message\s+from|"
                       r"(?:a\s+)?call\s+from|called\s+by|contacted|contact|call|thank\s+you|thanks|regards|sincerely|"
-                      r"per|rep\.?|met\s+with|talked\s+(?:with|to))\s*,?\s+)([A-Z][a-z]+(?:\s+[A-Z]\.)?\s+[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)?)\b")
+                      r"per|rep\.?|met\s+with|talked\s+(?:with|to))\s*,?\s+)"
+                      r"((?:Ma?c|De|O')?[A-Z][a-z]+(?:\s+[A-Z]\.)?\s+(?:Ma?c|De|O')?[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)?|"
+                      r"[A-Z]\.\s?(?:Ma?c|De|O')?[A-Z][a-z]{2,})\b")
 NOT_FIRST = set("""hurricane tropical state asset lift contractor center vac initial public field florida duke star simple
 aqua subject incident bypass pumper risk underground seacoast sun northeast northwest southeast southwest north south
 east west central the a an our their county city town village utility utilities emergency environmental code customer
@@ -228,13 +254,126 @@ service services dispatch central sewer water wastewater storm pump plant main""
 # a given name right after these words names a storm or a place, not a person
 NAMED_AFTER = re.compile(r"\b(?:hurricane|tropical\s+storm|tropical\s+depression|TS|TD|lake|mt\.?|mount|port\s+st\.?|"
                          r"ponce\s+de|san|santa|saint|st\.?)\s+$", re.I)
-GIVEN_PAIR = re.compile(r"(?=\b([A-Z][a-z]+|[A-Z]{2,})\s+([A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)?|[A-Z]{2,}(?:[-'][A-Z]+)?)\b(\s+\w+)?)")
+GIVEN_PAIR = re.compile(r"(?=\b([A-Z][a-z]+|[A-Z]{2,})\s+((?:Ma?c|De|O')?[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)?|"
+                        r"[A-Z]{2,}(?:[-'][A-Z]+)?)\b(\s+\w+)?)")
+BLANK_VALUE = re.compile(r"\s*[:#?-]?\s*_{3,}(?=\s*$|\s+\*?(?:SPILL|SOURCE|AREA|FACILITY|INCIDENT|LOCATION|CAUSE|ACTION|DATE|"
+                         r"TIME|COUNTY|STATE|NOTIFICATION|AGENCIES|COMMENTS|REMARKS|DESCRIPTION|WASTEWATER|DISCHARGE|"
+                         r"PERMIT|RESPONSIBLE|METHOD|WRITTEN|CORRECTIVE|EFFLUENT|OTHER)\b)")
+# words of PERSON_LABEL that are labels only with a colon (or "#", "-") after them: "crews were notified", "contacted by
+# phone", "the reporting party advised", "a contractor was assigned to" are ordinary text
+# labels whose value is one person or one office ("Reporting Party: <name> <id> Contact Number: ..."): when no safe
+# label follows, the value ends at the next contact-number, phone, e-mail, date or time label or at a line break within
+# VALUE_REACH characters, so that the account after it (the volume, the water) is not cut with the name
+NAME_VALUE_LABELS = {"reporting party", "person contacted", "contacted by", "assigned to"}
+VALUE_REACH = 80
+VALUE_STOP = re.compile(r"\n|\s(?=(?i:(?:contact|phone|cell|telephone|mobile|office|work)\s*(?:number|no\.?|#)|phone|cell|"
+                        r"e-?mail|date\s*/\s*time|date|time)\s*[:#])")
+LABEL_ONLY_WITH_COLON = {"notified", "caller", "cell", "signed", "reporter", "phone", "reporting party", "person contacted",
+                         "contacted by", "assigned to"}
+# a person named by what a person does: "<name> received a call", "<name> and <name> arrived", "<initial>. <surname>
+# contacted ...", "<name> is aware" (any name, not only a common given name: a filer's colleague often has a rare one);
+# a company, an agency, a place or a storm before the verb is kept (COMPANY_WORDS, NOT_PERSON_WORDS, PLACE_AFTER, NOT_FIRST)
+_ACT_PERSON = (r"(?:received\s+(?:a\s+|the\s+)?(?:phone\s+)?call|called\s+(?:me|us)|(?:was|were|where)\s+dispatched|is\s+aware|was\s+aware|"
+               r"began\s+to|begun\s+to|visited\s+the\s+site|went\s+out|drove\s+(?:out|to))")
+_ACT = (rf"(?:{_ACT_PERSON}|arrived|responded|contacted|called|notified|informed|advised|stated|said|reported|spoke|met|"
+        r"confirmed|explained|instructed|requested|emailed|e-mailed|texted)")
+_INITIAL_SURNAME = r"[A-Z]\.\s?(?:Ma?c|De|O')?[A-Z][a-z]{2,}"
+_ANY_NAME = rf"(?:{_PNAME}|{_INITIAL_SURNAME})"
+_MORE_NAMES = rf"((?:\s*(?:,|and|&)\s+(?:{_ANY_NAME}|[A-Z][a-z]+\s+[A-Z]\b\.?))*)"
+NAME_BEFORE_ACTION = re.compile(rf"(?<![\w.'-])({_PNAME}){_MORE_NAMES}(?=,?\s+{_ACT_PERSON}\b)")
+INITIAL_BEFORE_ACTION = re.compile(rf"(?<![\w.'-])({_INITIAL_SURNAME}){_MORE_NAMES}"
+                                   rf"(?=,?\s+(?:(?:then|also|later|immediately|subsequently|again)\s+)?{_ACT}\b)")
+# the last word of a company's name ("Example Broadband", "Example Underground"), never a surname
+COMPANY_SUFFIX = set("""inc llc co corp company construction contracting contractors contractor underground plumbing septic
+systems group communications telecommunications broadband technologies technology solutions services pumping drilling
+boring cable engineering energy enterprises industries partners associates management development builders realty
+properties excavating paving utilities environmental enviro rooter aquatics electric electrical marine harbors""".split())
+VENUE_WORDS = {"golf", "course", "club", "marina", "resort", "apartments", "condominium", "community", "subdivision"}
+JOB_WORDS = set("""director manager supervisor superintendent superintendant coordinator specialist engineer operator chief
+foreman technician tech officer administrator dispatcher mayor commissioner inspector investigator analyst planner
+scientist president chairman chair deputy representative agent consultant ranger mechanic electrician laborer labor
+worker workers crew personnel""".split())
+COMPANY_WORDS = set("""inc llc co corp company marine electric electrical construction contracting contractors contractor underground
+plumbing septic systems system group communications communication telecommunications broadband technologies technology
+solutions services service pumping drilling boring cable engineering energy power gas barrel enterprises industries
+partners associates management development developers builders homes realty properties excavating paving utilities
+environmental enviro rooter drain drains vac hauling transport trucking towing landscaping lawn irrigation tree pest
+pharmacy restaurant grill bar hotel motel resort club park camp church school academy university college hospital
+center store market mall plaza dept department office division county city town village state federal national
+american florida gulf atlantic coast coastal bay river lake beach island key keys south north east west central
+team crew crews staff police sheriff fire rescue ems dot fdot fpl teco duke comcast att verizon spectrum aquatics harbors
+harbor vac vacs truck trucks tanker tankers unit units jet support ops operations point desk room line dispatch personnel
+employee employees notification summary report notice pollution inspection annual number information update incident
+form spill sso overflow leak break release discharge event warning watch emergency response subject received size
+categories sent attachment attachments cell phone office mobile tel fax email e-mail
+fertilizer phosphate phosphates mining mine mines ranch nursery nurseries citrus groves plantation port yacht yachts
+boatyard bayou slough prairie hammock preserve sanctuary refuge seafood brewing brewery packing chemical chemicals paper
+lumber concrete asphalt aggregates materials recycling landfill disposal logistics railroad railway rail airlines airport
+shipyard navy army pointe isles isle cove inlet lagoon estuary reservoir canal creek river sheriff's""".split())
+# an initial and a surname after a contact verb ("then called S. Sample to respond")
+CUE_INITIAL = re.compile(rf"(\b(?i:called|contacted|notified|informed|advised|told|asked|met\s+with|spoke\s+(?:with|to)|per|by)\s+)"
+                         rf"({_INITIAL_SURNAME})\b")
+# the same in a capitalised report ("PER JOHN W.", "CONTACTED JANE SAMPLE"): a cue, then a word and an initial or a common
+# given name and a word
+CUE_NAME_CAPS = re.compile(r"\b((?:PER|CONTACTED|SPOKE\s+(?:WITH|TO)|CALLED\s+BY|REPORTED\s+BY|NOTIFIED\s+BY|MET\s+WITH|CALL\s+FROM)\s+)"
+                           r"([A-Z]{2,}(?:\s+[A-Z]\.?(?![\w])|\s+[A-Z]{2,}(?:[-'][A-Z]+)?))")
+# a rank or a ranger's title before a surname alone ("Ranger Sample", "Deputy Sample", "Officer Sample")
+RANK_SURNAME = re.compile(r"\b((?:Ranger|Deputy|Sergeant|Sgt\.?|Lieutenant|Lt\.?|Captain|Capt\.?|Officer|Trooper|Corporal|Cpl\.?|"
+                          r"Detective|Det\.?|Firefighter)\s+)((?:Ma?c|De|O')?[A-Z][a-z]+(?:-[A-Z][a-z]+)?)\b(?!\s+[A-Z][a-z])")
+# the State Watch Office signs its forwarded reports "<date> / DEM-<surname>" (Division of Emergency Management)
+AGENCY_DASH_SURNAME = re.compile(r"\b((?:F?DEM|SWO|SWP)-)(?:Ma?c|De|O')?[A-Z][a-z]+(?:-[A-Z][a-z]+)?\b")
+GREETING_NAME = re.compile(r"\b((?:Hello|Hi|Dear|Good\s+(?:morning|afternoon|evening)),?\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)(?=\s*[,:!])")
+# a name right before a contact label whose value is gone ("Lee Ann Sample E-mail: [removed]")
+NAME_BEFORE_CONTACT = re.compile(rf"\b({_PNAME}|[A-Z][a-z]+\s+[A-Z][a-z]+\s+(?:Ma?c|De|O')?[A-Z][a-z]+)"
+                                 r"(?=\s*,?\s*(?:(?:E-?mail|Phone|Cell|Tel|Office|Mobile)\b\s*(?:#|:)?\s*\[(?:removed|phone removed|email removed)\]|"
+                                 r"(?:and\s+)?<?[\w.+-]+@[\w-]+\.|\[(?:phone|email) removed\]))")
+# a person of an agency: "<name> (DEP)", "EPC of <County> (<name>)", "<title> for the Village, <name>"
+_AGENCY_ABBR = r"(?:F?DEP|F?DOH|EPC|SWO|DERM|EPD|DEM|FWC|USACE|EPA)"
+NAME_THEN_AGENCY = re.compile(rf"\b({_PNAME})(?=\s*\(\s*{_AGENCY_ABBR}\s*\))")
+AGENCY_THEN_NAME = re.compile(rf"((?:\b{_AGENCY_ABBR}|\b(?i:county|department|dept|commission|district|utilities|program|office))\s*\(\s*)"
+                              rf"({_PNAME})(?=\s*\))")
+TITLE_ORG_NAME = re.compile(rf"(\b(?i:{JOB_TITLE})\s+(?i:for|of|with|at)\s+(?:the\s+)?(?:[A-Z][\w.&'-]*\s+){{0,3}}[A-Z][\w.&'-]*\s*,\s+)"
+                            rf"({_PNAME}(?:\s+[A-Z][a-z]+)?)\b")
+# a person given by a name cue, a lone given name included: "the owner is named <name>", "her name is <name>"
+NAMED_CUE = re.compile(r"(\b(?i:(?:owner|resident|person|man|woman|lady|gentleman|caller|neighbou?r|tenant|customer|contact|he|she)"
+                       r"\s+(?:is\s+|was\s+)?named|(?:his|her|their)\s+name\s+(?:is|was))\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\b")
+# a forwarded e-mail's addressees ("To: Sample, Pat <pat@example.org>; Example, Lee S <...>"): the words right before an
+# address in angle brackets are a person's name, in either order
+EMAIL_ADDRESSEE = re.compile(r"(?<![\w\[])(?:[A-Z][A-Za-z'.-]*,?\s+){1,4}(?=<\s*(?:\[email removed\]|[\w.+-]+@))")
 EMAIL_HEADER = re.compile(r"\bFrom:?\s+[^\n]{0,240}?\bSent:?\s+\w+day,?\s+\w+\s+\d{1,2},\s+\d{4},?\s+\d{1,2}:\d{2}(?::\d{2})?\s*[AP]M")
 
 
 def _given_names():
     from build.redact import FIRST_NAMES
     return FIRST_NAMES
+
+
+_FL_TOWNS: set[str] | None = None
+
+
+def _fl_towns() -> set[str]:
+    """Florida's towns of two words or more ("cape coral", "fort lauderdale", "punta gorda"), from the towns of the state's
+    water records (data/waters-fl.json): a city before "received a call" or "began to" is the utility, not a person."""
+    global _FL_TOWNS
+    if _FL_TOWNS is None:
+        towns = set()
+        waters = (read_json(DATA_DIR / "waters-fl.json", {}) or {}).get("waters") or []
+        for w in waters.values() if isinstance(waters, dict) else waters:
+            for t in (w.get("towns") or []) if isinstance(w, dict) else []:
+                t = re.sub(r"\s+", " ", str(t).lower().replace(".", "")).strip()
+                if " " in t:
+                    towns.add(t)
+                    towns.add(" ".join(t.split()[:2]))     # "royal palm beach" is also written "Royal Palm"
+        _FL_TOWNS = towns
+    return _FL_TOWNS
+
+
+# a facility named after a person: the words right after the name ("<name> Regional WWTF", "<name> Water Reclamation
+# Facility", "<name> Energy Center"); a name right after a station number is the station's ("Lift Station #814 <name>")
+FACILITY_AFTER = re.compile(r"[\"'\u201d]?[ ]{1,2}(?i:(?:regional|reclamation|treatment|plant|facility|wwtp|wwtf|wrf|wrrf|awt|awtp|awwtf|wwrf|"
+                            r"rf|generating|combined|advanced|memorial|elementary)\b|(?:water|waste|wastewater|energy|power)[ ]{1,2}"
+                            r"(?:reclamation|treatment|plant|facility|center|station|wwtp|wwtf)\b)")
+STATION_BEFORE = re.compile(r"(?i:\b(?:lift|pump(?:ing)?)\s+station|\bL\.?S\.?|\bP\.?S\.?)\s*(?:no\.?|#)?\s*[\w-]*\d[\w-]*\s*[-:]?\s*$")
 
 
 def drop_given_pairs(s: str) -> str:
@@ -253,6 +392,10 @@ def drop_given_pairs(s: str) -> str:
             continue                          # "Hurricane Ian ...", "TS Debby ...", "Lake Mary Jane": a storm or a place
         if n.lower() in PLACE_AFTER or n.lower() in NOT_PERSON_WORDS or nxt in PLACE_AFTER:
             continue
+        if STATION_BEFORE.search(s[max(0, m.start() - 24):m.start()]):
+            continue                          # "Lift Station #814 <name>": the station's name
+        if FACILITY_AFTER.match(s, m.end(2)):
+            continue                          # "<name> Water Reclamation Facility", "<name> Regional WWTF": a facility
         end = m.end(2)
         cuts.append((m.start(1), end))
         last_end = end
@@ -263,9 +406,12 @@ def drop_given_pairs(s: str) -> str:
 
 def _drop_cue_name(m: re.Match) -> str:
     w = m.group(2).split()
+    nxt = re.match(r"\s+([A-Za-z]+)", m.string[m.end():])
     if w[0].lower() in NOT_FIRST or _not_person(m.group(2)) or w[-1].lower() in PLACE_AFTER or \
-            w[-1].lower().strip(".") in NOT_FIRST:
-        return m.group(0)
+            w[-1].lower().strip(".") in NOT_FIRST or w[-1].lower().strip(".") in COMPANY_SUFFIX | JOB_WORDS or \
+            (nxt and nxt.group(1).lower() in COMPANY_SUFFIX | PLACE_AFTER | VENUE_WORDS | AGENCY_NEXT) or \
+            re.sub(r"'s$", "", w[-1].lower()) in AGENCY_TAIL or _is_fl_town(m.group(2)):
+        return m.group(0)                     # "notified by <County> Sheriff's Office", "spoke with Cape Coral"
     return m.group(1) + "[name removed]"
 
 
@@ -278,6 +424,62 @@ def _drop_name_with_agency(m: re.Match) -> str:
     if any(w.strip(".") in NOT_PERSON_WORDS for w in words):
         return m.group(0)
     return "[name removed]" + m.group(2)
+
+
+AGENCY_TAIL = {"sheriff", "sheriffs", "police", "fire", "rescue", "ems"}
+AGENCY_NEXT = {"office", "department", "dept", "division", "district"}
+
+
+def _is_fl_town(name: str) -> bool:
+    return re.sub(r"\s+", " ", name.lower().replace(".", "")).strip() in _fl_towns()
+
+
+def _place_after(m: re.Match) -> bool:
+    nxt = re.match(r"\s+([A-Za-z]+)", m.string[m.end():])
+    return bool(nxt and _place_or_company_word(nxt.group(1)))
+
+
+def _place_or_company_word(word: str) -> bool:
+    """The word after a name that makes the name a place's or a company's ("<name> Street", "<name> Telecommunications")."""
+    w = word.lower().strip(".,'")
+    return w in COMPANY_WORDS or w in PLACE_AFTER or w in redact.KILL or w in OPERATOR_WORDS
+
+
+def _company_or_place(name: str, function_words: bool = True) -> bool:
+    """A capitalised run that is a company, an agency, a role, a place, a water or a storm, not a person; with
+    function_words, also one with an ordinary word in it ("Yes X No")."""
+    words = [w.lower().strip(".,'") for w in re.split(r"[\s&,]+", name) if w]
+    words = [w[:-2] if w.endswith("'s") else w for w in words]
+    joined = " ".join(words)
+    if any(f" {t} " in f" {joined} " for t in _fl_towns()):
+        return True                                     # "Cape Coral", "Fort Lauderdale": a city
+    return any(w in COMPANY_WORDS or w in NOT_PERSON_WORDS or w in PLACE_AFTER or w in redact.KILL or w in OPERATOR_WORDS
+               or w in JOB_WORDS or (function_words and len(w) > 1 and w in redact.FUNCTION) for w in words) or \
+        (words and words[0] in NOT_FIRST) or " ".join(words[:2]) in PLACE_PAIRS
+
+
+def _drop_named_before_action(m: re.Match) -> str:
+    """The names of NAME_BEFORE_ACTION, each unless it is a company, an agency, a place or a storm."""
+    first, rest = m.group(1), m.group(2) or ""
+    before = m.string[max(0, m.start() - 16):m.start()]
+    if _company_or_place(first) or NAMED_AFTER.search(before) or re.search(r"\b(?i:city|town|county|village)\s+of\s+$", before):
+        return m.group(0)
+    rest = re.sub(rf"({_ANY_NAME}|[A-Z][a-z]+\s+[A-Z]\b\.?)", lambda x: x.group(0) if _company_or_place(x.group(0)) else "[name removed]", rest)
+    return "[name removed]" + rest
+
+
+def _drop_caps_cue(m: re.Match) -> str:
+    words = m.group(2).split()
+    w0 = words[0].lower()
+    if _company_or_place(words[0]) or w0 in NOT_FIRST or len(words[0]) < 3:
+        return m.group(0)
+    if words[1].lower() in redact.FUNCTION:                     # "SPOKE WITH JAMIE FROM ...": the given name alone
+        return m.group(1) + ("[name removed] " + words[1] if w0 in _given_names() else m.group(2))
+    if _company_or_place(m.group(2)):
+        return m.group(0)
+    if re.fullmatch(r"[A-Z]\.?", words[1]) or w0 in _given_names():
+        return m.group(1) + "[name removed]"
+    return m.group(0)
 
 
 def _drop_title_name(m: re.Match) -> str:
@@ -299,6 +501,15 @@ def scrub(text) -> str | None:
         if not m:
             out.append(s[pos:])
             break
+        if m.start() and s[m.start() - 1] == "[":
+            out.append(s[pos:m.end()])     # "[email removed]", "[e-mail header removed]": a marker, not a label
+            pos = m.end()
+            continue
+        blank = BLANK_VALUE.match(s, m.end())
+        if blank:
+            out.append(s[pos:blank.end()])     # "PERSON CONTACTED: ________": an empty form field
+            pos = blank.end()
+            continue
         # a bare "Name"/"NAME" only counts as a label when a colon (or a form's table header) follows
         after = s[m.end():m.end() + 4]
         bare = m.group(0).lower() == "name"
@@ -311,13 +522,18 @@ def scrub(text) -> str | None:
             out.append(s[pos:m.end()])
             pos = m.end()
             continue
-        if not bare and m.group(0).lower() in ("notified", "caller", "cell", "signed", "reporter", "phone") \
-                and not LABEL_END.match(after):
+        if not bare and re.sub(r"\s+", " ", m.group(0).lower()) in LABEL_ONLY_WITH_COLON and not LABEL_END.match(after):
             out.append(s[pos:m.end()])   # an ordinary word ("crews were notified"), not a form label
             pos = m.end()
             continue
         out.append(s[pos:m.end()])
         nxt = SAFE_LABEL.search(s, m.end())
+        if re.sub(r"\s+", " ", m.group(0).lower()) in NAME_VALUE_LABELS:
+            stop = VALUE_STOP.search(s, m.end(), m.end() + VALUE_REACH)
+            if stop and (nxt is None or stop.start() < nxt.start()):
+                out.append(": [removed] ")
+                pos = stop.end()
+                continue
         # the value must not swallow a safe label that starts right after (empty value)
         if nxt:
             out.append(": [removed] " if not s[m.end():nxt.start()].strip(" :#?-") else ": [removed] ")
@@ -331,10 +547,23 @@ def scrub(text) -> str | None:
     s = NAME_WITH_AGENCY.sub(_drop_name_with_agency, s)
     s = NAME_THEN_TITLE.sub(lambda m: m.group(0) if _not_person(m.group(1)) else "[name removed]", s)
     s = FIRST_PERSON_NAME.sub(lambda m: m.group(0) if _not_person(m.group(2)) else m.group(1) + "[name removed]", s)
+    s = TITLE_ORG_NAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
+    s = NAME_BEFORE_CONTACT.sub(lambda m: m.group(0) if _company_or_place(m.group(1)) else "[name removed]", s)
+    s = NAME_THEN_AGENCY.sub(lambda m: m.group(0) if _company_or_place(m.group(1)) else "[name removed]", s)
+    s = AGENCY_THEN_NAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
+    s = NAMED_CUE.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
+    s = GREETING_NAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
+    s = CUE_NAME_CAPS.sub(_drop_caps_cue, s)
     s = HONORIFIC_NAME.sub("[name removed]", s)
     s = EMAIL_HEADER.sub("[e-mail header removed]", s)
+    s = EMAIL_ADDRESSEE.sub("[name removed] ", s)
     s = drop_given_pairs(s)
     s = CUE_NAME.sub(_drop_cue_name, s)
+    s = CUE_INITIAL.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) or _place_after(m) else m.group(1) + "[name removed]", s)
+    s = NAME_BEFORE_ACTION.sub(_drop_named_before_action, s)
+    s = INITIAL_BEFORE_ACTION.sub(_drop_named_before_action, s)
+    s = RANK_SURNAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
+    s = AGENCY_DASH_SURNAME.sub(r"\1[name removed]", s)
     s = scrub_text(s)
     s = SPACE.sub(" ", s).strip()
     return s or None
@@ -378,20 +607,45 @@ def scrub_name_field(v):
     return drop_given_pairs(s)
 
 
+CITIZEN_COORD_DIGITS = 3      # about 100 m: a complaint's point is often the filer's home
+CITIZEN_PRECISION_M = 100
+
+
 def safe_attributes(a: dict) -> dict:
     """The attributes this module keeps: the safe fields only, the relationship as a code, the text scrubbed, the
-    incident and facility names cleared of people's names, and (for a notice filed by a member of the public) no
-    street address: the facility of a complaint is often the filer's or a neighbour's home."""
+    incident and facility names cleared of people's names, the house number of an address the text ties to a residence
+    or a resident (common.residence_numbers) cut from the names and the address line too, and, for a notice filed by a
+    member of the public, no street address, no house number anywhere and the point rounded to about 100 m: the facility
+    of a complaint is often the filer's or a neighbour's home."""
     out = {k: a.get(k) for k in SAFE_FIELDS if k in a}
     # a saved page already holds the code (the relationship itself is never saved)
     out["_filer"] = relationship_code(a.get(RELATIONSHIP_FIELD)) if RELATIONSHIP_FIELD in a else a.get("_filer")
+    homes = residence_numbers(out["INCIDENT_REPORT"]) if isinstance(out.get("INCIDENT_REPORT"), str) else []
     for k in ("INCIDENT_REPORT", "INCIDENT_NAME", "FACILITY_NAME"):
         if isinstance(out.get(k), str):
             out[k] = scrub(out[k]) if k == "INCIDENT_REPORT" else scrub_name_field(out[k])
+            if out[k] and homes:
+                out[k] = drop_house_numbers(out[k], homes)
+    for k in ("FACILITY_ADDRESS_LINE_1", "FACILITY_ADDRESS_LINE_2"):
+        if isinstance(out.get(k), str) and homes:
+            out[k] = drop_house_numbers(out[k], homes)
     if out["_filer"] == "citizen":
         for k in ("FACILITY_ADDRESS_LINE_1", "FACILITY_ADDRESS_LINE_2"):
             if out.get(k):
                 out[k] = "[address removed]"
+        for k in ("INCIDENT_REPORT", "INCIDENT_NAME", "FACILITY_NAME"):
+            if isinstance(out.get(k), str):
+                out[k] = strip_house_numbers(out[k])
+        lat0 = fnum(out.get("LATITUDE"))
+        if lat0 is not None:
+            # the precision of the rounded point: about 100 m, or the source's own when coarser; carried, because a
+            # rounded value that ends in zero ("27.45") would read as 1 km (a rebuild reads the carried value)
+            given = a.get("_coord_precision_m")
+            out["_coord_precision_m"] = given if isinstance(given, int) else max(CITIZEN_PRECISION_M, precision_m(lat0))
+        for k in ("LATITUDE", "LONGITUDE"):
+            v = fnum(out.get(k))
+            if v is not None:
+                out[k] = round(v, CITIZEN_COORD_DIGITS)
     return out
 
 
@@ -742,6 +996,9 @@ def _record(a, base, raw, text, facility, kind, et, rule, prev, permits):
         lat = lon = None
     elif lat is None or lon is None:
         lat = lon = None
+    elif a.get("_filer") == "citizen":
+        raw["_coords_note"] = (f"filed by a member of the public: the point is rounded to {CITIZEN_COORD_DIGITS} decimals "
+                               "(about 100 m), since it is often the filer's home")
 
     wi = (tf.get("waterbodies_impacted") or "").upper()
     if not wi:
@@ -786,7 +1043,7 @@ def _record(a, base, raw, text, facility, kind, et, rule, prev, permits):
         outfall_id=None, outfall_name=loc,
         waterbody_text=water, water_slugs=[], water_match="none",
         lat=lat, lon=lon, coord_source="source" if lat is not None else None,
-        coord_precision_m=precision_m(lat) if lat is not None else None,
+        coord_precision_m=(a.get("_coord_precision_m") or precision_m(lat)) if lat is not None else None,
         started_at=iso(start), ended_at=ended_at, time_precision="day" if start else None,
         reported_at=iso(reported), published_at=None, source_updated_at=None,
         material=material, volume_gal=gal, volume_text=vtext, estimate_flag=flag if gal is not None or vtext else "unknown",
@@ -838,6 +1095,28 @@ def link_revisions(records: list[dict]) -> dict:
     return {"revisions": revised, "exact_copies": dup}
 
 
+def rebuilt(r: dict, permits: dict) -> dict:
+    """A record kept from an earlier run, rebuilt from its own raw attributes under the current rules, so that a privacy
+    rule added since reaches the notices the 30-day layer no longer lists (their text was scrubbed when first read). The
+    record stays as it was when its raw holds no notice or the rebuild no longer reads it as the same sewage record."""
+    raw = r.get("raw") or {}
+    if not isinstance(raw.get("INCIDENT_REPORT"), str) and not isinstance(raw.get("INCIDENT_NAME"), str):
+        return r
+    a = {k: raw[k] for k in SAFE_FIELDS if k in raw and k != "OBJECTID"}
+    a["OBJECTID"], a["_filer"] = raw.get("_layer_objectid"), raw.get("_filer")
+    if raw.get("_coord_precision_m") is not None:
+        a["_coord_precision_m"] = raw["_coord_precision_m"]
+    try:
+        new = build_record(safe_attributes(a), r["source_record_id"], r.get("fetched_at"), r, permits)
+    except Exception:  # noqa: BLE001 - never drop a record
+        return r
+    if new is None or new.get("event_id") != r.get("event_id"):
+        return r
+    if raw.get("_missing_from_layer_since"):
+        new["raw"]["_missing_from_layer_since"] = raw["_missing_from_layer_since"]
+    return new
+
+
 def build(features: list[dict], fetched_at: str, prev_records: list[dict], permits: dict | None = None,
           full_layer: bool = False) -> tuple[list[dict], dict]:
     permits = load_permit_index() if permits is None else permits
@@ -863,6 +1142,7 @@ def build(features: list[dict], fetched_at: str, prev_records: list[dict], permi
         if eid.split(":", 1)[1] in left_out:
             continue            # read again and now classified as not a sewage notice
         # only a notice still inside the 30-day layer's window can be missing from it; older ones simply aged out
+        r = rebuilt(r, permits)
         if not full_layer and window_from and (r.get("reported_at") or "") >= window_from:
             r.setdefault("raw", {})
             r["raw"]["_missing_from_layer_since"] = r["raw"].get("_missing_from_layer_since") or fetched_at
