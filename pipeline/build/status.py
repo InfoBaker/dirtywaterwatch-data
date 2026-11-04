@@ -777,6 +777,43 @@ def water_geometry(slug: str, waters: dict | None = None):
     return g
 
 
+OUTLINE_SHARE_MIN = 0.5        # a live state whose records have outlines here for less than this share is a problem
+
+
+def outline_coverage(waters: dict) -> dict:
+    """{state: {"records", "with_outline", "openboatlaunch", "openboatlaunch_with_outline"}} for the records the build
+    places on: an outline is an inline geometry (NHD, Census, OSM and hand records) or openboatlaunch's
+    out/water/<slug>.json in OBL_WATER_DIR (the hourly run restores state/obl-water.tar.gz there). The placement guard
+    measures a name match against the outline; a record with none keeps a name match anywhere in its state (only its
+    town list can set it aside), so a state with few outlines here is placed less carefully (FL review of 2026-11-04,
+    P2-6). Only file existence is checked: nothing is read."""
+    out: dict[str, dict] = {}
+    have_dir = OBL_WATER_DIR.is_dir()
+    for slug, w in waters.items():
+        st = str(w.get("state") or "").upper()
+        c = out.setdefault(st, {"records": 0, "with_outline": 0, "openboatlaunch": 0, "openboatlaunch_with_outline": 0})
+        c["records"] += 1
+        obl = not w.get("extra") and not w.get("geometry")
+        has = bool(w.get("geometry")) or (have_dir and (OBL_WATER_DIR / f"{slug}.json").is_file())
+        c["with_outline"] += has
+        if obl:
+            c["openboatlaunch"] += 1
+            c["openboatlaunch_with_outline"] += has
+    return dict(sorted(out.items()))
+
+
+def outline_problems(cov: dict) -> list[str]:
+    """A problem line per state whose water records mostly have no outline here."""
+    out = []
+    for st, c in cov.items():
+        if c["records"] and c["with_outline"] < OUTLINE_SHARE_MIN * c["records"]:
+            out.append(f"{st}: {c['with_outline']} of {c['records']} water records have an outline here "
+                       f"({c['openboatlaunch_with_outline']} of {c['openboatlaunch']} openboatlaunch records: their "
+                       "outlines were not available to this run): a name match on a record with no outline is not "
+                       "measured against the water")
+    return out
+
+
 # ---------------------------------------------------------------- placement
 
 ABBREV = {"r": "river", "riv": "river", "bk": "brook", "brk": "brook", "hbr": "harbor", "harbour": "harbor",
@@ -3333,6 +3370,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                         f"({', '.join(f'{v} {k}' for k, v in sorted(c.items()))}; see placements[].set_aside)")
     for s, n in sorted(unknown_slugs.items()):
         problems.append(f"water slug {s} on {n} event(s) is not in the water records")
+    outlines = outline_coverage(waters)
+    problems.extend(outline_problems(outlines))
     # reports that name no receiving water (no_receiving_water: decision 3 and its like) colour nothing and
     # are counted apart from the unplaced ones (a water named but not placed)
     no_water = sorted(i for i, p in placements.items() if not p["water_slugs"] and p.get("no_receiving_water"))
@@ -3380,6 +3419,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         "rain_likely": rain_block,
         "needs_reach": needs_reach,
         "dropped_fixtures": dropped,
+        "outlines": outlines,
         "problems": problems,
     }
     history = {"built": status["built"], "start": hours[0], "step_hours": 1, "count": n_hours,
@@ -3418,6 +3458,9 @@ def main() -> None:
     print(f"status: {len(status['waters'])} tracked waters {dict(by)}; {status['counts']['events']} events "
           f"({status['counts']['unplaced']} unplaced, {status['counts']['no_receiving_water']} name no receiving "
           f"water); fixtures {'in' if status['fixtures_included'] else 'out'}")
+    cov = status.get("outlines") or {}
+    print("status: water records with an outline here, by state: "
+          + ", ".join(f"{st} {c['with_outline']}/{c['records']}" for st, c in cov.items()))
     for p in status["problems"][:20]:
         print("  problem:", p)
 
