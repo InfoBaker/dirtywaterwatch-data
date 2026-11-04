@@ -2210,7 +2210,11 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
         builds = dict((prev.get("stats") or {}).get("state_builds") or {})
         if final:
             for st, v in (stats or {}).items():
-                builds[st] = {**v, "write": info}
+                # the tidy's log (--tidy: records dropped or renamed for openboatlaunch's) is the provenance of records
+                # no longer in the file: a rebuild of the state keeps it (2026-11-04 review: NC's 41 drops and 9
+                # renames were lost to the rebuild that followed the tidy)
+                dup = (builds.get(st) or {}).get("existing_duplicates")
+                builds[st] = {**v, "write": info, **({"existing_duplicates": dup} if dup else {})}
         stats = {**(prev.get("stats") or {}), "state_builds": dict(sorted(builds.items()))}
         partial = bool(prev.get("partial"))
         targets_rows = merge_targets_scoped(prev.get("targets") or [], targets_out, scope_states)
@@ -3447,6 +3451,8 @@ def tidy_main(states, path=None, aliases_path=None) -> int:
         # a later pass adds to the earlier ones' actions (the counts are of all of them)
         prev = (builds.get(st) or {}).get("existing_duplicates") or {}
         mine = list(prev.get("actions") or []) + [a for a in actions if a["to"].endswith(f"-{st.lower()}")]
+        # a pass that repeats an earlier action (a rebuild reset a row the tidy had mapped) is not counted twice
+        mine = list({json.dumps(a, sort_keys=True): a for a in mine}.values())
         builds[st] = {**(builds.get(st) or {}), "existing_duplicates": {
             "date": now_iso()[:10], "dropped": sum(a["action"] == "dropped" for a in mine),
             "renamed": sum(a["action"] == "renamed" for a in mine),
