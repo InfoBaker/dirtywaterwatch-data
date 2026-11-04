@@ -63,6 +63,15 @@ dropping a record), and the next run resumes from the cached responses. NLDI req
 hour per address across runs (data/raw/nhd-waters/nldi-requests.json): a request over it waits, or stops the run when
 the wait passes --budget-s. The national list puts four in five named waters on EPA reach codes, so a state needs NLDI
 only for its point rows and unnamed outfalls.
+--wall-s (2026-11-04, the hourly run): the whole run, loading the targets and writing the file included. Every pass
+that asks the network (NHDPlus, the other places of a name, the OSM fallback with its mirror check, the hand records)
+stops starting requests --finish-s seconds (60) before the wall, which are kept for the hand records from the cache, the
+placement check and the write; --budget-s, --place-budget and --osm-budget still apply inside it. The run then checks
+only the events the targets came from (the unplaced events with a waterbody text, already resolved when the targets
+were collected) against its records, not every event twice (evaluate_unplaced). The last line gives the seconds of
+each phase and why the run stopped. (Run 41788856038 took 11 minutes with --budget-s 300: 42 s loading the targets
+before the budget started, 300 s of NHDPlus, a 62 s Overpass mirror check outside the OSM budget, 173 s of Overpass
+queries, and 82 s checking all 71,000 events twice and writing.)
 
 Targets: every outfall in data/outfalls-ne.json, data/outfalls-mid-atlantic.json and the state layers
 (data/build/ma-cso-outfalls.json, me-cso-outfalls.json, nj-cso-outfalls.json) whose water_slug is
@@ -187,6 +196,7 @@ PLACE_STATES |= {"AL", "AZ", "CA", "CO", "FL", "GA", "HI", "ID", "MT", "NV", "NM
 CACHE_DIR = RAW_DIR / "nhd-waters"
 OUT = DATA_DIR / "waters-nhd.json"
 PAUSE_S = 0.5
+FINISH_S = 60.0            # --wall-s: seconds kept for the end of the run (hand records, placement check, write)
 CHECKPOINT_EVERY = 25
 NEAR_M = 2000              # flowlines and waterbodies searched around a point (status.NAME_MATCH_M)
 SITE_M = 300               # a beach/HAB site's lake or pond: containing or within this
@@ -445,8 +455,10 @@ class Http:
     request that would exceed it waits for the oldest to age out, or stops the run when the wait passes the deadline."""
 
     def __init__(self, refresh: bool = False, offline: bool = False, max_requests: int | None = None,
-                 deadline: float | None = None, nldi_log=None, nldi_per_hour: int = NLDI_PER_HOUR):
+                 deadline: float | None = None, nldi_log=None, nldi_per_hour: int = NLDI_PER_HOUR,
+                 deadline_reason: str = "--budget-s used"):
         self.refresh, self.offline = refresh, offline
+        self.deadline_reason = deadline_reason
         self.session = requests.Session()
         self.last = 0.0
         self.fetched = Counter()
@@ -481,19 +493,32 @@ class Http:
         if self.max_requests is not None and self.requests >= self.max_requests:
             raise BudgetExhausted(f"--max-requests {self.max_requests} used")
         if self.deadline is not None and time.monotonic() >= self.deadline:
-            raise BudgetExhausted("--budget-s used")
+            raise BudgetExhausted(self.deadline_reason)
         if kind.startswith("nldi"):
             recent = self._nldi_recent()
             if len(recent) >= self.nldi_per_hour:
                 wait = 3600 - (time.time() - recent[-self.nldi_per_hour]) + 1
                 if self.deadline is not None and time.monotonic() + wait >= self.deadline:
                     raise BudgetExhausted(f"the NLDI limit ({self.nldi_per_hour} requests an hour) is reached and "
-                                          f"the wait ({wait:.0f} s) passes --budget-s")
+                                          f"the wait ({wait:.0f} s) passes {self.deadline_reason.split()[0]}")
                 print(f"  NLDI: {self.nldi_per_hour} requests in the last hour; waiting {wait:.0f} s", flush=True)
                 time.sleep(max(0.0, wait))
                 self._nldi_recent()
             self._nldi_note()
         self.requests += 1
+
+    def timeout(self, t: float) -> float:
+        """A request's read timeout, cut to the time left before the deadline (at least 10 s): a request started just
+        before it never holds the run for two more minutes."""
+        if self.deadline is None:
+            return t
+        return max(10.0, min(t, self.deadline - time.monotonic()))
+
+    def nap(self, s: float) -> None:
+        """A retry pause, never past the deadline (the next try then stops the run)."""
+        if self.deadline is not None:
+            s = min(s, max(0.0, self.deadline - time.monotonic()))
+        time.sleep(s)
 
     @staticmethod
     def path(kind: str, url: str, params: dict):
@@ -516,11 +541,11 @@ class Http:
             if wait > 0:
                 time.sleep(wait)
             try:
-                r = self.session.get(url, params=params, headers=HEADERS, timeout=120)
+                r = self.session.get(url, params=params, headers=HEADERS, timeout=self.timeout(120))
             except requests.RequestException as ex:
                 self.last = time.time()
                 print(f"  {kind}: {type(ex).__name__}; retrying", flush=True)
-                time.sleep(min(120, 5 * 2 ** attempt))
+                self.nap(min(120, 5 * 2 ** attempt))
                 continue
             self.last = time.time()
             if r.status_code >= 500 and attempt + 1 >= attempts:
@@ -529,7 +554,7 @@ class Http:
                 ra = r.headers.get("Retry-After") or ""
                 pause = float(ra) if ra.isdigit() else min(300, (30 if r.status_code == 429 else 3) * 2 ** attempt)
                 print(f"  {kind}: HTTP {r.status_code}; waiting {pause:.0f} s", flush=True)
-                time.sleep(pause)
+                self.nap(pause)
                 continue
             if r.status_code in (400, 404) and kind.startswith("nldi"):
                 data = {"_status": r.status_code, "_text": r.text[:300]}   # off the network: remembered
@@ -542,7 +567,7 @@ class Http:
                     continue
                 if isinstance(data, dict) and data.get("error"):    # ArcGIS reports errors in a 200
                     print(f"  {kind}: {str(data['error'])[:160]}; retrying", flush=True)
-                    time.sleep(min(60, 5 * 2 ** attempt))
+                    self.nap(min(60, 5 * 2 ** attempt))
                     continue
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(json.dumps({"url": url, "params": params, "fetched_at": now_iso(), "response": data}))
@@ -748,9 +773,10 @@ class Target(dict):
     pass
 
 
-def collect_targets(existing: dict, events=None, verbose=True):
+def collect_targets(existing: dict, events=None, verbose=True, unplaced: list | None = None):
     """(targets, skipped, stats). A target: one water name in one state, with the outfalls and events
-    that name it, their points (weighted) and towns."""
+    that name it, their points (weighted) and towns. unplaced: a list that receives the events with a waterbody text
+    the resolver left unplaced (evaluate_unplaced checks them again after the run)."""
     S._STATES = S.derive_states(existing, S.load_rules())
     S._GEOM_CACHE.clear()
     resolver = S.make_resolver(existing)
@@ -822,6 +848,8 @@ def collect_targets(existing: dict, events=None, verbose=True):
             skipped_reason.setdefault((S.event_state(ev), text), "the report names no receiving water")
             continue
         stats["unplaced events with a waterbody_text"] += 1
+        if unplaced is not None:
+            unplaced.append(ev)
         state = S.event_state(ev)
         if not state:
             skipped["event with no state"] += 1
@@ -2670,6 +2698,16 @@ def osm_record(t, spec: dict, d: dict, states: States, towns: Towns, existing_li
 OSM_STATE_MIRRORS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter",
                      "https://lz4.overpass-api.de/api/interpreter"]
 OSM_STATE_TIMEOUT = 90
+OSM_MIN_S = 10.0                # less time than this left: no Overpass query (nor mirror check) is started
+
+
+def left_of(budget: float | None, end: float | None, now: float | None = None) -> float | None:
+    """A pass's own budget (seconds) cut to the time left before end (time.monotonic(); --wall-s), at least 0; None
+    when neither limits it."""
+    if end is None:
+        return budget
+    left = max(0.0, end - (time.monotonic() if now is None else now))
+    return left if budget is None else min(budget, left)
 OSM_REGEX_MAX = 4000            # characters of name alternation per query; a longer list is split
 
 
@@ -2726,9 +2764,10 @@ def mirror_order(mirrors=OSM_STATE_MIRRORS, timeout=30) -> list[str]:
     return [u for _, _, u in sorted(timed)]
 
 
-def state_fetch(q: str, mirrors: list[str], refresh: bool, offline: bool):
+def state_fetch(q: str, mirrors: list[str], refresh: bool, offline: bool, deadline: float | None = None):
     """(response, endpoint) for one state query, cached in data/raw/nhd-waters/osm-state/<hash>.json;
-    two tries (the fastest instance, then the next), OSM_STATE_TIMEOUT s each; (None, why) when both fail."""
+    two tries (the fastest instance, then the next), OSM_STATE_TIMEOUT s each, cut to the time left before deadline
+    (time.monotonic()); (None, why) when both fail, why 'time budget used' when no time was left for a try."""
     path = CACHE_DIR / "osm-state" / f"{hashlib.sha1(q.encode()).hexdigest()[:24]}.json"
     if path.exists() and not refresh:
         d = json.loads(path.read_text())
@@ -2737,8 +2776,14 @@ def state_fetch(q: str, mirrors: list[str], refresh: bool, offline: bool):
         return None, "not cached (--offline)"
     why = "no instance listed"
     for url in (mirrors * 2)[:2]:
+        timeout = OSM_STATE_TIMEOUT + 10
+        if deadline is not None:
+            timeout = min(timeout, deadline - time.monotonic())
+            if timeout < OSM_MIN_S:
+                why = "time budget used"
+                break
         try:
-            r = requests.post(url, data={"data": q}, headers=HEADERS, timeout=OSM_STATE_TIMEOUT + 10)
+            r = requests.post(url, data={"data": q}, headers=HEADERS, timeout=timeout)
         except requests.RequestException as ex:
             why = f"{url}: {type(ex).__name__}"
             continue
@@ -2806,6 +2851,25 @@ def evaluate(existing: dict, recs: list[dict], events) -> dict:
     return out
 
 
+def evaluate_unplaced(existing: dict, recs: list[dict], unplaced: list[dict]) -> dict:
+    """evaluate() for a run with --wall-s: only the events with a waterbody text that the existing records left
+    unplaced (collect_targets resolved every event once already) are resolved again with this run's records added. The
+    counts over all events (unplaced, with or without a text) are not made: None."""
+    nhd_waters = {r["slug"]: {**public_record(r), "extra": True} for r in recs}
+    waters = {**existing, **{k: v for k, v in nhd_waters.items() if k not in existing}}
+    S._GEOM_CACHE.clear()
+    S._STATES = S.derive_states(waters, S.load_rules())
+    res = S.make_resolver(waters)
+    after = []
+    for ev in unplaced:
+        pl = res.resolve(ev)
+        if not pl["water_slugs"] and not pl.get("no_receiving_water"):
+            after.append(ev)
+    S._GEOM_CACHE.clear()
+    return {"before": {"unplaced": None, "unplaced_with_text": len(unplaced), "ids": {ev["event_id"] for ev in unplaced}},
+            "after": {"unplaced": None, "unplaced_with_text": len(after), "ids": {ev["event_id"] for ev in after}}}
+
+
 class Run:
     """The resolving pass: target rows, the records by NHD feature, checkpoints."""
 
@@ -2828,6 +2892,7 @@ class Run:
         self.only_states = None                 # a state build: its states (hand records of other states not rebuilt)
         self.stopped = None                     # why the run stopped early (BudgetExhausted), if it did
         self.rows_from = None                   # a --names run: its target rows are the reports' ("reports")
+        self.net_end = None                     # --wall-s: time.monotonic() after which no pass starts a request
 
     def attach(self, rec, row, t, how):
         rec["_targets"].append(row)
@@ -3146,7 +3211,7 @@ class Run:
         cached place costs almost nothing); places not reached are left for the next run and listed in the
         target's places_failed with that reason. Only targets NHDPlus named at a point resolve() tried: the others
         go to the OSM fallback."""
-        budget = getattr(self.args, "place_budget", None)
+        budget = left_of(getattr(self.args, "place_budget", None), getattr(self, "net_end", None))
         queue = []
         for t, row in pairs:
             if not row["how"]:
@@ -3227,13 +3292,28 @@ class Run:
             by_state[t["state"]].append((t, row, osm_spec(t, self.towns)))
         for t, row in self.osm_queue[a.osm_max:]:
             row["reason"] = f"{row['reason']}; OSM fallback not tried (over --osm-max {a.osm_max})"
-        mirrors = mirror_order() if (by_state and not a.offline) else []      # nothing queued: no Overpass ping
         self.osm_states = {}
-        started, budget = time.monotonic(), getattr(a, "osm_budget", None)
+        # the mirror check counts inside the budget; with --wall-s the budget is cut to the time left, the mirror check
+        # and each query to it, and under OSM_MIN_S nothing is started (2026-11-04: the check alone took 62 s outside
+        # the 180 s, two of the three instances not answering, and a query started inside the budget ran past it)
+        started = time.monotonic()
+        budget, wall = getattr(a, "osm_budget", None), getattr(self, "net_end", None)
+        deadline, mirror_timeout, no_time = None, 30.0, False
+        if wall is not None:
+            budget = left_of(budget, wall, started)
+            deadline, mirror_timeout = started + budget, max(3.0, min(30.0, budget / 6))
+            no_time = budget < OSM_MIN_S
+        todos = {state: [x for x in items if not WX.is_cached(x[2], x[2]["key"], a.refresh)]
+                 for state, items in by_state.items()}
+        # nothing to ask (nothing queued, or every queued name answered from the cache): no Overpass ping
+        if any(todos.values()) and not a.offline and not no_time:
+            mirrors = mirror_order(timeout=mirror_timeout)
+        else:
+            mirrors = []
         for state, items in sorted(by_state.items()):
-            todo = [x for x in items if not WX.is_cached(x[2], x[2]["key"], a.refresh)]
+            todo = todos[state]
             elements, failed, via = [], None, set()
-            over = budget is not None and todo and time.monotonic() - started > budget
+            over = budget is not None and todo and (no_time or time.monotonic() - started > budget)
             if over:
                 failed = f"time budget of {budget:g} s used"
             chunks = state_chunks([sp for _, _, sp in todo])
@@ -3244,7 +3324,7 @@ class Run:
                 if budget is not None and time.monotonic() - started > budget:
                     stopped = f"time budget of {budget:g} s used"
                     break
-                resp, how = state_fetch(state_query(names, box), mirrors, a.refresh, a.offline)
+                resp, how = state_fetch(state_query(names, box), mirrors, a.refresh, a.offline, deadline=deadline)
                 if resp is None:
                     failed = how
                     break
@@ -3326,6 +3406,7 @@ class Run:
 
 
 def main(argv=None):
+    t_start = time.monotonic()
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--refresh", action="store_true", help="refetch even when a cached response exists")
     ap.add_argument("--offline", action="store_true", help="use only cached responses")
@@ -3354,6 +3435,12 @@ def main(argv=None):
                          "(data/receiving-waters-national.json), live or not; see the module docstring")
     ap.add_argument("--budget-s", type=float, help="stop starting network requests after this many seconds; what is "
                                                    "built is written and the next run resumes from the cache")
+    ap.add_argument("--wall-s", type=float,
+                    help="seconds for the whole run, loading and writing included: every network pass stops starting "
+                         "requests --finish-s before it (the hourly run; see the module docstring)")
+    ap.add_argument("--finish-s", type=float, default=FINISH_S,
+                    help=f"with --wall-s: seconds kept at the end for the hand records, the placement check and the "
+                         f"write (default {FINISH_S:g})")
     ap.add_argument("--hr-budget", type=float, default=900.0,
                     help="a state build: seconds the NHD high-resolution pass may spend (default 900)")
     ap.add_argument("--max-requests", type=int, help="at most this many network requests in the run (cached answers "
@@ -3393,7 +3480,8 @@ def main(argv=None):
     existing = existing_waters()
     _, events, _ = S.load_events(EVENTS_DIR, False, False)
     t0 = time.time()
-    targets, skipped, skipped_reason, stats, _ = collect_targets(existing, events)
+    unplaced = []
+    targets, skipped, skipped_reason, stats, _ = collect_targets(existing, events, unplaced=unplaced)
     print(f"targets collected in {time.time() - t0:.0f} s: {dict(stats)}")
     print_targets(targets, None if args.targets_only else 60)
     if args.targets_only:
@@ -3401,15 +3489,23 @@ def main(argv=None):
             print(f"skipped {n:6}  {k}")
         return 0
 
-    http = Http(args.refresh, args.offline, max_requests=args.max_requests,
-                deadline=time.monotonic() + args.budget_s if args.budget_s else None)
+    phases = {"targets": time.monotonic() - t_start}
+    net_end = t_start + args.wall_s - args.finish_s if args.wall_s else None
+    deadline, why = None, "--budget-s used"
+    if args.budget_s:
+        deadline = time.monotonic() + args.budget_s
+    if net_end is not None and (deadline is None or net_end < deadline):
+        deadline, why = net_end, "--wall-s used"
+    http = Http(args.refresh, args.offline, max_requests=args.max_requests, deadline=deadline, deadline_reason=why)
     states = States()
     towns = Towns(http)
     nhd = Nhd(http, states, towns)
     nhd.use_hydrolocation = args.hydrolocation
 
     run = Run(nhd, states, towns, existing, args, http, skipped_reason)
+    run.net_end = net_end
     todo = targets[:args.limit] if args.limit else targets
+    mark = time.monotonic()
     for i, t in enumerate(todo, 1):
         if run.stopped:
             run.not_reached(t)
@@ -3428,13 +3524,16 @@ def main(argv=None):
         run.checkpoint(i, len(todo))
     pairs = list(zip(todo, run.rows)) if len(run.rows) == len(todo) else \
         [(t, r) for t in todo for r in run.rows if r["_key"] == t["key"]]
+    phases["nhd"], mark = time.monotonic() - mark, time.monotonic()
     run.place_pass(pairs)
+    phases["places"], mark = time.monotonic() - mark, time.monotonic()
     print(f"NHD pass done: {sum(1 for r in run.feats.values() if not r.get('_existing'))} records; "
           f"OSM fallback for {min(len(run.osm_queue), args.osm_max)} of {len(run.osm_queue)} targets", flush=True)
     if args.osm_per_name:
         run.osm_pass()            # one Overpass query per name: slow, kept for debugging a single name
     else:
         run.osm_state_pass()      # one query per state, within --osm-budget seconds
+    phases["osm"], mark = time.monotonic() - mark, time.monotonic()
     run.hand_pass(pairs)
     feats, target_rows, problems = run.feats, run.rows, run.problems
     recs = [r for r in feats.values() if not r.get("_existing")]
@@ -3450,7 +3549,8 @@ def main(argv=None):
     unmapped = [r for r in rows if not r["slugs"] and not r["reason"]]
     problems += [f"target {r['state']} {r['name']}: neither mapped nor given a reason" for r in unmapped]
 
-    ev_eval = evaluate(existing, recs, events)
+    # a run with --wall-s checks only the events its targets came from; a full check resolves every event twice
+    ev_eval = evaluate_unplaced(existing, recs, unplaced) if args.wall_s else evaluate(existing, recs, events)
     newly = ev_eval["before"]["ids"] - ev_eval["after"]["ids"]
     kinds = Counter(r["kind"] for r in recs)
     stats_out = {"targets": len(todo), "targets_mapped": sum(1 for r in rows if r["slugs"]),
@@ -3464,6 +3564,8 @@ def main(argv=None):
                  "events_unplaced_with_text_after": ev_eval["after"]["unplaced_with_text"],
                  "other_places": run.place_stats,
                  "requests": dict(http.fetched), "cached": dict(http.cached), "failed": dict(http.failed)}
+    if args.wall_s:
+        stats_out["events_checked"] = "the unplaced events with a waterbody text only (--wall-s)"
     if run.stopped:
         stats_out["stopped"] = run.stopped
     try:
@@ -3486,7 +3588,19 @@ def main(argv=None):
         print(f"unmapped {n:5}  {k}")
     for p in problems[:40]:
         print("PROBLEM", p)
+    phases["finish"] = time.monotonic() - mark
+    print(timing_line(time.monotonic() - t_start, phases, args, run.stopped), flush=True)
     return 0                       # problems are listed above and kept in stats; the file was written
+
+
+def timing_line(total: float, phases: dict, args, stopped: str | None) -> str:
+    """The run's last line: seconds in all and per phase, the wall it kept to, why it stopped."""
+    names = {"targets": "loading the targets", "nhd": "NHDPlus", "places": "other places", "osm": "OSM fallback",
+             "finish": "hand records, placement check and write"}
+    parts = ", ".join(f"{names[k]} {v:.0f} s" for k, v in phases.items())
+    wall = f" of --wall-s {args.wall_s:g} ({args.finish_s:g} s kept for the end)" if getattr(args, "wall_s", None) else ""
+    return (f"waters-nhd: {total:.0f} s{wall}: {parts}; "
+            + (f"stopped early: {stopped}; the next run resumes from the cache" if stopped else "every target asked"))
 
 
 def state_stats(states, targets, rows, recs, tstats, http, run) -> dict:
@@ -4583,7 +4697,7 @@ TOOL_DETAIL = [
      "the map service (OpenStreetMap) could not be reached on {date}"),
     (re.compile(r"OSM fallback: not cached \(--offline\)|not cached \(--offline\)"),
      "the map service (OpenStreetMap) was not asked on {date}"),
-    (re.compile(r"\((?:--place-budget [\d.]+ s used|--budget-s used|--max-requests[^)]*)\)"),
+    (re.compile(r"\((?:--place-budget [\d.]+ s used|--budget-s used|--wall-s used|--max-requests[^)]*)\)"),
      "(the run's time or request limit was reached on {date})"),
     (re.compile(r"build error \([A-Za-z_]+(?:Error|Exception)[^)]*\)|OSM fallback failed \([A-Za-z_]+\)"),
      "the record could not be built on {date} (a fault in the build, logged)"),
