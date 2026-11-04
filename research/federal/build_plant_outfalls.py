@@ -136,10 +136,11 @@ _PU = []
 
 
 def public_permit_name(v):
-    """ICIS PERMIT_NAME as the public file carries it: None when the whole name is a person's (EPA often fills the
-    field with a contact person: no body's word and a person's name by scripts/private_utilities.person_like, the
-    check the private-utility list uses). A person named beside a body ("<a person> - City of X") is not caught here;
-    docs/reviews/2026-11-04-plant-outfalls-codes-review.md in the site repository."""
+    """ICIS PERMIT_NAME as the public file carries it: None when it names a person in place of a body (EPA often fills
+    the field with a contact person): no body's word, and a person's name, whole or in a part joined by '&', 'and' or
+    a comma, by scripts/private_utilities.person_like (the check the private-utility list uses). A person named beside
+    a body ("<a person> - City of X") is not caught here; docs/reviews/2026-11-04-plant-outfalls-codes-review.md in
+    the site repository."""
     s = (v or '').strip()
     if not s:
         return None
@@ -152,7 +153,10 @@ def public_permit_name(v):
         import private_utilities
         _PU.append(private_utilities)
     pu = _PU[0]
-    return None if not pu.has_org_word(s) and pu.person_like(pu.clean(s).strip(' .,')) else s
+    if pu.has_org_word(s):
+        return s
+    parts = [x.strip(' .,') for x in re.split(r'\s*[;,()/&]\s*|\s+-\s*|\s*-\s+|\s+and\s+', pu.clean(s), flags=re.I)]
+    return None if any(x and pu.person_like(x) for x in [pu.clean(s).strip(' .,')] + parts) else s
 
 
 def group_permits(ol_rows):
