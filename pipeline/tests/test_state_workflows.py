@@ -80,7 +80,8 @@ def condition(expr, results: dict, outputs: dict, event: str, failed: bool) -> b
     e = re.sub(r"steps\.(\w+)\.outputs\.(\w+)", lambda m: repr(outputs.get(m.group(1), {}).get(m.group(2), "")), e)
     e = re.sub(r"steps\.(\w+)\.outcome", lambda m: repr(results.get(m.group(1), "skipped")), e)
     e = e.replace("github.event_name", repr(event)).replace("github.event.inputs.backfill", "''")
-    e = re.sub(r"\(github\.event\.schedule && startsWith\([^)]*\)\)", "False", e)   # the 03Z daily release
+    e = re.sub(r"\(github\.event\.schedule && startsWith\([^)]*\)\)", "False", e)   # the 03Z daily release (old form)
+    e = re.sub(r"contains\(github\.run_started_at, '[^']*'\)", "False", e)   # the 03Z daily release
     e = (e.replace("success()", str(not failed)).replace("!cancelled()", "True").replace("cancelled()", "False")
          .replace("always()", "True").replace("&&", " and ").replace("||", " or ").replace("!=", " != "))
     return bool(eval(e, {}, {}))          # the expressions are the repository's own workflow text
