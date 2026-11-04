@@ -77786,7 +77786,11 @@
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
    "water_match": "name: its receiving water 'LEMON DRAIN' by name; Unnamed tributary to Belle River (unnamed-tributary-to-belle-river-mi, NHDPlus V2.1 record), 987 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 3
+   "point_shared_by": 3,
+   "receiving_water_override": {
+    "water": "Lemon Drain",
+    "basis": "EPA's inventory names Lemon Drain and gives these outfalls NHD reach 04090001000512; EPA's NPDES discharge points pair that reach with NHDPlus V2.1 COMID 13194504 (the same plant's general permit MIG580271, outfall SLD), an unnamed flowline that joins the Belle River, which is the record unnamed-tributary-to-belle-river-mi; NHDPlus V2.1 and NHD high resolution carry no name for it, so 'Lemon Drain' is the permit's name for that flowline (data/water-aliases.json) (MI go-live audit 2026-11-04, P2-7)"
+   }
   },
   {
    "npdes_permit": "MI0021733",
@@ -77817,7 +77821,11 @@
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
    "water_match": "name: its receiving water 'LEMON DRAIN' by name; Unnamed tributary to Belle River (unnamed-tributary-to-belle-river-mi, NHDPlus V2.1 record), 987 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 3
+   "point_shared_by": 3,
+   "receiving_water_override": {
+    "water": "Lemon Drain",
+    "basis": "EPA's inventory names Lemon Drain and gives these outfalls NHD reach 04090001000512; EPA's NPDES discharge points pair that reach with NHDPlus V2.1 COMID 13194504 (the same plant's general permit MIG580271, outfall SLD), an unnamed flowline that joins the Belle River, which is the record unnamed-tributary-to-belle-river-mi; NHDPlus V2.1 and NHD high resolution carry no name for it, so 'Lemon Drain' is the permit's name for that flowline (data/water-aliases.json) (MI go-live audit 2026-11-04, P2-7)"
+   }
   },
   {
    "npdes_permit": "MI0021733",
@@ -77848,7 +77856,11 @@
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
    "water_match": "name: its receiving water 'LEMON DRAIN' by name; Unnamed tributary to Belle River (unnamed-tributary-to-belle-river-mi, NHDPlus V2.1 record), 987 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "point_shared_by": 3
+   "point_shared_by": 3,
+   "receiving_water_override": {
+    "water": "Lemon Drain",
+    "basis": "EPA's inventory names Lemon Drain and gives these outfalls NHD reach 04090001000512; EPA's NPDES discharge points pair that reach with NHDPlus V2.1 COMID 13194504 (the same plant's general permit MIG580271, outfall SLD), an unnamed flowline that joins the Belle River, which is the record unnamed-tributary-to-belle-river-mi; NHDPlus V2.1 and NHD high resolution carry no name for it, so 'Lemon Drain' is the permit's name for that flowline (data/water-aliases.json) (MI go-live audit 2026-11-04, P2-7)"
+   }
   },
   {
    "npdes_permit": "MI0022284",
