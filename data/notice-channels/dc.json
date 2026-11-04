@@ -1,0 +1,627 @@
+{
+ "about": "Public-notice channels per operator or agency: pages, sites, feeds, lists and accounts through which the public is told of sewage discharges, by law, permit or voluntarily. Read by pipeline/ingest/notification_pages.py (schema and validator there; test tests/test_notice_channels.py).",
+ "schema_version": 1,
+ "state": "DC",
+ "channels": [
+  {
+   "id": "dc-acb-dc-monitoring",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "Alliance for the Chesapeake Bay DC volunteer monitoring",
+   "name": "Alliance for the Chesapeake Bay DC volunteer monitoring",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.allianceforthebay.org/project/dc-volunteer-water-quality-monitoring/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Alliance for the Chesapeake Bay DC volunteer monitoring. Voluntary. Feeds CMC. (research/dc/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "dc-acb-dc-volunteer-monitoring"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-alertdc",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "DC HSEMA",
+   "name": "DC HSEMA",
+   "permit": null,
+   "channel_kind": "email_list",
+   "urls": [
+    "https://hsema.dc.gov/page/alertdc"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "email_only",
+   "publishes": "notices",
+   "note": "AlertDC. Voluntary; use for sewage not confirmed. (research/dc/report.md §4)",
+   "checked": "2026-11-03",
+   "noun": "Alert list",
+   "signup_url": "https://hsema.dc.gov/page/alertdc",
+   "sources": [
+    "dc-alertdc"
+   ],
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "dc-ark-swim-guide",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "Anacostia Riverkeeper",
+   "name": "Anacostia Riverkeeper",
+   "permit": null,
+   "channel_kind": "swim_guide",
+   "urls": [
+    "https://www.theswimguide.org/affiliates/anacostia-riverkeeper/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "app_only",
+   "publishes": "results",
+   "note": "Anacostia Riverkeeper on Swim Guide ('CSO in the past 48 hours' special status). Voluntary. Weekly May-September; no API. (research/dc/report.md §2.6)",
+   "checked": "2026-11-03",
+   "noun": "Swim Guide listing",
+   "sources": [
+    "dc-ark-swim-guide"
+   ],
+   "barrier": null,
+   "barrier_review": "an app only (Swim Guide): no web page of its own, but no login wall either"
+  },
+  {
+   "id": "dc-ark-website",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "Anacostia Riverkeeper monitoring pages",
+   "name": "Anacostia Riverkeeper monitoring pages",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.anacostiariverkeeper.org/programs/water-quality-monitoring/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Anacostia Riverkeeper monitoring pages. Voluntary. Data also in CMC. (research/dc/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "dc-ark-website"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-cmc-data-explorer",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "Chesapeake Monitoring Cooperative data explorer",
+   "name": "Chesapeake Monitoring Cooperative data explorer",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://cmc.vims.edu/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Chesapeake Monitoring Cooperative data explorer (API). Voluntary. 29 DC stations in 2026; keyless JSON. (research/dc/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "dc-cmc-data-explorer"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-dc-health-advisories",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "DC Health",
+   "name": "DC Health",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://dchealth.dc.gov/page/potomac-sewer-line-collapse-update"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "unknown",
+   "note": "DC Health river advisories (Potomac sewer line collapse update). Voluntary: DC Health's public-health authority, no notification rule cited; the only DC advisory of 2025-2026. Swimming is prohibited regardless (21 DCMR 1108.1). (research/dc/report.md §2.4)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "State page",
+   "sources": [
+    "dc-dchealth-potomac-advisory"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-dcwater-cso-lights",
+   "state": "DC",
+   "operator_id": "dc-dc0021199",
+   "agency": null,
+   "name": "District of Columbia Water and Sewer Authority (DC Water)",
+   "permit": "DC0021199",
+   "channel_kind": "lights_signs_page",
+   "urls": [
+    "https://www.dcwater.com/about-dc-water/what-we-do/wastewater-collection/css"
+   ],
+   "method": "html",
+   "legal_basis": "NPDES permit DC0021199 (EPA Region 3), Part III.B.1.h.i: a light on the Anacostia and on the Potomac, colour A during a CSO and colour B for 24 hours after",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "note": "DC Water CSO warning lights (red during a CSO, yellow for 24 hours after) and the page that describes them. One Potomac light and four Anacostia lights; the light state itself is not published anywhere (the page only explains it). (research/dc/report.md §2.1-2.2)",
+   "checked": "2026-11-03",
+   "noun": "Lights and signs",
+   "sources": [
+    "dc-dcwater-cso-indicator-lights"
+   ],
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "dc-dcwater-cso-quarterly-reports",
+   "state": "DC",
+   "operator_id": "dc-dc0021199",
+   "agency": null,
+   "name": "District of Columbia Water and Sewer Authority (DC Water)",
+   "permit": "DC0021199",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.dcwater.com/resources/publications?term_node_tid_depth=50"
+   ],
+   "method": "pdf",
+   "legal_basis": "NPDES permit DC0021199 (EPA Region 3), Part III.B.1.h.ii(d): record of CSO events by outfall for the prior quarter; Section E: due the 28th of January, April, July and October",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "documents",
+   "note": "DC Water quarterly CSO reports (per-outfall record, modeled and metered). Quarter totals only; some PDFs need OCR. (research/dc/report.md §2.1-2.2)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "sources": [
+    "dc-dcwater-cso-quarterly-reports"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-dcwater-cso-signs",
+   "state": "DC",
+   "operator_id": "dc-dc0021199",
+   "agency": null,
+   "name": "District of Columbia Water and Sewer Authority (DC Water)",
+   "permit": "DC0021199",
+   "channel_kind": "lights_signs_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NPDES permit DC0021199 (EPA Region 3), Part III.B.1.h.vii",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No web form: Warning signs at all CSO outfalls. No online record. (research/dc/report.md §2.1)",
+   "checked": "2026-11-03",
+   "noun": "Lights and signs",
+   "barrier": "signs_only"
+  },
+  {
+   "id": "dc-dcwater-css-website",
+   "state": "DC",
+   "operator_id": "dc-dc0021199",
+   "agency": null,
+   "name": "District of Columbia Water and Sewer Authority (DC Water)",
+   "permit": "DC0021199",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.dcwater.com/about-dc-water/what-we-do/wastewater-collection/css"
+   ],
+   "method": "html",
+   "legal_basis": "NPDES permit DC0021199 (EPA Region 3), Part III.B.1.h.ii: website on CSO nature, locations, health threats, light system and harmful conditions",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "documents",
+   "note": "DC Water combined sewer system website. Says effects can last up to three days after rain over one inch. (research/dc/report.md §2.1-2.2)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "sources": [
+    "dc-dcwater-css-page"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-dcwater-everbridge",
+   "state": "DC",
+   "operator_id": "dc-dc0021199",
+   "agency": null,
+   "name": "District of Columbia Water and Sewer Authority (DC Water)",
+   "permit": "DC0021199",
+   "channel_kind": "email_list",
+   "urls": [
+    "https://www.dcwater.com/customer-center/alerts-and-notifications/dc-water-alert-notification-signups"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "email_only",
+   "publishes": "notices",
+   "note": "DC Water alert sign-up (Everbridge: emergency alerts, news releases). Voluntary; CSO alerts not mentioned. Sign-up status: not attempted (docs/subscriptions.md). (research/dc/report.md §2.2)",
+   "checked": "2026-11-03",
+   "noun": "Alert list",
+   "signup_url": "https://www.dcwater.com/customer-center/alerts-and-notifications/dc-water-alert-notification-signups",
+   "sources": [
+    "dc-dcwater-everbridge-alerts"
+   ],
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "dc-dcwater-news",
+   "state": "DC",
+   "operator_id": "dc-dc0021199",
+   "agency": null,
+   "name": "District of Columbia Water and Sewer Authority (DC Water)",
+   "permit": "DC0021199",
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.dcwater.com/about-dc-water/media/news"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "DC Water news releases and public notices (large SSOs). Voluntary: no statute or permit clause requires a press release; small SSOs and routine CSOs get none. No RSS. (research/dc/report.md §2.2)",
+   "checked": "2026-11-03",
+   "feed_source_id": "dc-water-news",
+   "noun": "News page",
+   "sources": [
+    "dc-dcwater-news-notices"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-dcwater-pamphlets",
+   "state": "DC",
+   "operator_id": "dc-dc0021199",
+   "agency": null,
+   "name": "District of Columbia Water and Sewer Authority (DC Water)",
+   "permit": "DC0021199",
+   "channel_kind": "news_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NPDES permit DC0021199 (EPA Region 3), Part III.B.1.h.iii",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No web form: Semi-annual informational pamphlet in sewer bills. No web form. (research/dc/report.md §2.1)",
+   "checked": "2026-11-03",
+   "noun": "Printed or broadcast notice",
+   "barrier": "print_only"
+  },
+  {
+   "id": "dc-dcwater-pi-collapse-hub",
+   "state": "DC",
+   "operator_id": "dc-dc0021199",
+   "agency": null,
+   "name": "District of Columbia Water and Sewer Authority (DC Water)",
+   "permit": "DC0021199",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.dcwater.com/about-dc-water/media/potomac-interceptor-collapse"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "documents",
+   "note": "DC Water Potomac Interceptor collapse hub and water quality page. Voluntary incident hub (59 releases in eight weeks). (research/dc/report.md §2.4)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "sources": [
+    "dc-dcwater-pi-collapse-hub",
+    "dc-dcwater-wq-monitoring"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-dcwater-social",
+   "state": "DC",
+   "operator_id": "dc-dc0021199",
+   "agency": null,
+   "name": "District of Columbia Water and Sewer Authority (DC Water)",
+   "permit": "DC0021199",
+   "channel_kind": "social",
+   "urls": [
+    "https://x.com/dcwater"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "login",
+   "publishes": "notices",
+   "note": "DC Water social accounts (X @dcwater, Facebook, Instagram). Voluntary; not read. (research/dc/report.md §2.2)",
+   "checked": "2026-11-03",
+   "noun": "Social account",
+   "sources": [
+    "dc-dcwater-social"
+   ],
+   "barrier": "login_required"
+  },
+  {
+   "id": "dc-dcwater-sso-dashboard",
+   "state": "DC",
+   "operator_id": "dc-dc0021199",
+   "agency": null,
+   "name": "District of Columbia Water and Sewer Authority (DC Water)",
+   "permit": "DC0021199",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.dcwater.com/resources/open-data-portal/sanitary-sewer-dashboard"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "unknown",
+   "note": "DC Water Sanitary Sewer dashboard CSV. Voluntary; 36 rows, gap September 2024 to October 2025; 'not for any commercial, legal or other use'. (research/dc/report.md §2.2)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "sources": [
+    "dc-dcwater-sso-csv"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-doee-river-monitoring",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "DC DOEE",
+   "name": "DC DOEE",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://doee.dc.gov/service/anacostia-and-potomac-river-monitoring"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "documents",
+   "note": "DOEE Anacostia and Potomac river monitoring page. Voluntary; real-time display offline. (research/dc/report.md §2.5)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "State page",
+   "sources": [
+    "dc-doee-river-monitoring",
+    "dc-doee-wq-routine"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-epa-echo-overflow-events",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "U.S. Environmental Protection Agency (ECHO)",
+   "name": "U.S. Environmental Protection Agency (ECHO)",
+   "permit": null,
+   "channel_kind": "feed",
+   "urls": [
+    "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "EPA ECHO sewer overflow and bypass event records (NPDES eReporting). Voluntary publication by EPA: operators must report noncompliance to the permitting authority within 24 hours (40 CFR 122.41(l)(6)); EPA publishes the electronic reports. . Covers every operator in the state. (research/federal/report.md)",
+   "checked": "2026-11-03",
+   "feed_source_id": "echo-sewer-overflow",
+   "noun": "Data feed",
+   "sources": [
+    "fed-echo-sewer-overflow-bypass-events"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-nps-alerts",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "National Park Service",
+   "name": "National Park Service",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://www.nps.gov/choh/planyourvisit/conditions.htm"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "status",
+   "note": "National Park Service alerts (C&O Canal conditions). Voluntary; check later. (research/dc/report.md §4)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "State page",
+   "sources": [
+    "dc-nps-alerts"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-potomacinterceptor-dc-gov",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "District of Columbia government",
+   "name": "District of Columbia government",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://potomacinterceptor.dc.gov/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "documents",
+   "note": "potomacinterceptor.dc.gov and the five-agency E. coli feature service. Voluntary incident site; static since September 2026. (research/dc/report.md §2.4)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "State page",
+   "sources": [
+    "dc-potomacinterceptor-dc-gov",
+    "dc-dcgis-pi-ecoli-samples"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-press",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "News media (District of Columbia)",
+   "name": "News media (District of Columbia)",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No URL known (not searched): Press (HillRAG, Washington Post and local outlets). Voluntary and ad hoc. (research/dc/report.md §6)",
+   "checked": "2026-11-03",
+   "noun": "News page",
+   "sources": [
+    "dc-news-coverage"
+   ],
+   "barrier": "not_verified"
+  },
+  {
+   "id": "dc-prkn-community-science",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "Potomac Riverkeeper Network community science",
+   "name": "Potomac Riverkeeper Network community science",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://potomacriverkeepernetwork.org/the-community-science-water-quality-monitoring/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Potomac Riverkeeper Network community science. Voluntary. Wednesday sampling, results Friday. (research/dc/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "dc-prkn-community-science"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-prkn-pi-spill-page",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "Potomac Riverkeeper Network Interceptor spill page",
+   "name": "Potomac Riverkeeper Network Interceptor spill page",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://potomacriverkeepernetwork.org/potomac-sewage-spill-data-updates/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Potomac Riverkeeper Network Interceptor spill page. Voluntary. Incident data. (research/dc/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "dc-prkn-pi-spill-page"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "dc-reservoir-center-dashboard",
+   "state": "DC",
+   "operator_id": null,
+   "agency": "Reservoir Center water quality dashboard",
+   "name": "Reservoir Center water quality dashboard",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://water-quality.reservoircenter.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Reservoir Center water quality dashboard. Voluntary. Sondes measure no bacteria; CMC samples shown; undocumented API (ask first). (research/dc/report.md §2.6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "dc-reservoir-wq-dashboard"
+   ],
+   "barrier": null
+  }
+ ]
+}

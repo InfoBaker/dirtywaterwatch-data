@@ -1,0 +1,964 @@
+{
+ "about": "Public-notice channels per operator or agency: pages, sites, feeds, lists and accounts through which the public is told of sewage discharges, by law, permit or voluntarily. Read by pipeline/ingest/notification_pages.py (schema and validator there; test tests/test_notice_channels.py).",
+ "schema_version": 1,
+ "state": "VT",
+ "channels": [
+  {
+   "id": "vt-black-river-action-team",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Black River Action Team",
+   "name": "Black River Action Team",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.blackriveractionteam.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Black River Action Team: monitoring results. Voluntary monitoring; unreachable in the research. https://www.blackriveractionteam.org/ answered connection to the project user agent on 2026-11-03. (research/nh-vt/report.md §2.8)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "vt-black-river-action-team"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-brandon-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-brandon",
+   "agency": null,
+   "name": "Brandon",
+   "permit": "VT0100056",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "Brandon: public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. Registry row built from the feed's facility name. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-burlington-beach-tracker",
+   "state": "VT",
+   "operator_id": "vt-burlington-dpw-main",
+   "agency": null,
+   "name": "Burlington Main WWTF combined sewer system (City of Burlington DPW Water Resources)",
+   "permit": "VT0100153",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.burlingtonvt.gov/1219/Beach-Closure-Tracker"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "status",
+   "note": "Burlington Beach Closure Tracker and beach status layer (StatusReason includes 'Combined Sewer Outflow'). Voluntary online record of the city's postings (the § 1295(e) signs are the legal channel). (research/nh-vt/report.md §2.4)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-advisories",
+   "sources": [
+    "vt-burlington-beach-status-arcgis"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-burlington-dpw-east-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-burlington-dpw-east",
+   "agency": null,
+   "name": "Burlington East ('Burlington River') WWTF, Riverside Ave CSO",
+   "permit": "VT0100307",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "Burlington East ('Burlington River') WWTF, Riverside Ave CSO: public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-burlington-dpw-main-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-burlington-dpw-main",
+   "agency": null,
+   "name": "Burlington Main WWTF combined sewer system (City of Burlington DPW Water Resources)",
+   "permit": "VT0100153",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "Burlington Main WWTF combined sewer system (City of Burlington DPW Water Resources): public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-burlington-dpw-north-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-burlington-dpw-north",
+   "agency": null,
+   "name": "Burlington North WWTF combined sewer (Gazo Ave CSO)",
+   "permit": "VT0100226",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "Burlington North WWTF combined sewer (Gazo Ave CSO): public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-burlington-dpw-social",
+   "state": "VT",
+   "operator_id": "vt-burlington-dpw-main",
+   "agency": null,
+   "name": "Burlington Main WWTF combined sewer system (City of Burlington DPW Water Resources)",
+   "permit": "VT0100153",
+   "channel_kind": "social",
+   "urls": [
+    "https://www.facebook.com/BTVDPW"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "login",
+   "publishes": "notices",
+   "note": "Burlington DPW Facebook and X. Voluntary; login wall. Front Porch Forum posts also reported (not readable). (research/nh-vt/report.md §3)",
+   "checked": "2026-11-03",
+   "noun": "Social account",
+   "sources": [
+    "vt-burlington-dpw-social"
+   ],
+   "barrier": "login_required"
+  },
+  {
+   "id": "vt-burlington-newsflash",
+   "state": "VT",
+   "operator_id": "vt-burlington-dpw-main",
+   "agency": null,
+   "name": "Burlington Main WWTF combined sewer system (City of Burlington DPW Water Resources)",
+   "permit": "VT0100153",
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.burlingtonvt.gov/m/newsflash?cat=8"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "notices",
+   "note": "Burlington News Flash (Public Works) posts on plant discharges and beach closures. Voluntary city posts beyond the state alert (10 V.S.A. § 1295 and CSO Rule 34-404 cited by the source row). (research/nh-vt/report.md §2.4)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "News page",
+   "sources": [
+    "vt-burlington-newsflash-publicworks"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-burlington-notify-me",
+   "state": "VT",
+   "operator_id": "vt-burlington-dpw-main",
+   "agency": null,
+   "name": "Burlington Main WWTF combined sewer system (City of Burlington DPW Water Resources)",
+   "permit": "VT0100153",
+   "channel_kind": "email_list",
+   "urls": [
+    "https://www.burlingtonvt.gov/list.aspx"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "email_only",
+   "publishes": "notices",
+   "note": "Burlington Notify Me (News Flash email). Voluntary; beach closures, not routine CSOs. Sign-up status: needs_owner (docs/subscriptions.md). (research/nh-vt/report.md §3)",
+   "checked": "2026-11-03",
+   "noun": "Alert list",
+   "signup_url": "https://www.burlingtonvt.gov/list.aspx",
+   "sources": [
+    "vt-burlington-notifyme"
+   ],
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "vt-burlington-vt-alert",
+   "state": "VT",
+   "operator_id": "vt-burlington-dpw-main",
+   "agency": null,
+   "name": "Burlington Main WWTF combined sewer system (City of Burlington DPW Water Resources)",
+   "permit": "VT0100153",
+   "channel_kind": "email_list",
+   "urls": [
+    "https://vem.vermont.gov/vtalert"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "email_only",
+   "publishes": "notices",
+   "note": "Burlington CSO notices through VT-Alert. Voluntary city channel; VT-Alert also publishes a public RSS feed (found in the sign-up pass; URL not recorded). Sign-up status: needs_owner (docs/subscriptions.md). Covers: vt-burlington-dpw-main, vt-burlington-dpw-north, vt-burlington-dpw-east. (research/nh-vt/report.md §2.2, §3)",
+   "checked": "2026-11-03",
+   "noun": "Alert list",
+   "signup_url": "https://vem.vermont.gov/vtalert",
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "vt-crc-is-it-clean",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Connecticut River Conservancy",
+   "name": "Connecticut River Conservancy",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.isitclean.us/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Connecticut River Conservancy, Is It Clean? (VT tributaries). Voluntary; Black, White and Ottauquechee rivers. (research/nh-vt/report.md §2.8)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "nhvt-crc-is-it-clean"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-dec-sewage-overflows",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Vermont DEC",
+   "name": "Vermont DEC",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): public alert within 1 hour of discovery on the electronic media the Secretary designates; (c): 12-hour report via DEC's online event reporting system",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "DEC Sewage Overflows page: public alerts and incident reports. Staff names and phone numbers appear in rows; dropped at ingest. Covers every operator in the state. (research/nh-vt/report.md §2.1-2.2)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "sources": [
+    "vt-dec-sewage-overflow-public-alerts",
+    "vt-dec-sewage-overflow-incident-reports"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-dec-subscriptions",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Vermont DEC",
+   "name": "Vermont DEC",
+   "permit": null,
+   "channel_kind": "email_list",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/Subscriptions.aspx"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "login",
+   "publishes": "notices",
+   "note": "DEC Wastewater Notification Subscription System (email or text). Voluntary push beyond the designated page; needs an email-and-password account. Sign-up status: needs_owner (docs/subscriptions.md). Covers every operator in the state. (research/nh-vt/report.md §2.2)",
+   "checked": "2026-11-03",
+   "noun": "Alert list",
+   "signup_url": "https://anrweb.vt.gov/DEC/WWInventory/Subscriptions.aspx",
+   "sources": [
+    "vt-dec-overflow-alert-subscriptions"
+   ],
+   "barrier": "login_required"
+  },
+  {
+   "id": "vt-dec-unpermitted-discharges",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Vermont DEC",
+   "name": "Vermont DEC",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/UnpermittedDischargesPublicReport.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(d): the Secretary posts other unpermitted discharges within 4 hours (by 10:00 a.m. if found overnight)",
+   "basis_kind": "law",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "unknown",
+   "note": "DEC Unpermitted Discharges Public Report. Mostly fuel spills; some rows carry private addresses (store nothing personal). (research/nh-vt/report.md §2.1-2.2)",
+   "checked": "2026-11-03",
+   "records": false,
+   "noun": "State page",
+   "sources": [
+    "vt-dec-unpermitted-discharges-public-report"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-enosburg-falls-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-enosburg-falls",
+   "agency": null,
+   "name": "Village of Enosburg Falls, Route 108 Bridge CSO",
+   "permit": "VT0100102",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "Village of Enosburg Falls, Route 108 Bridge CSO: public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-epa-echo-overflow-events",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "U.S. Environmental Protection Agency (ECHO)",
+   "name": "U.S. Environmental Protection Agency (ECHO)",
+   "permit": null,
+   "channel_kind": "feed",
+   "urls": [
+    "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "EPA ECHO sewer overflow and bypass event records (NPDES eReporting). Voluntary publication by EPA: operators must report noncompliance to the permitting authority within 24 hours (40 CFR 122.41(l)(6)); EPA publishes the electronic reports. . Covers every operator in the state. (research/federal/report.md)",
+   "checked": "2026-11-03",
+   "feed_source_id": "echo-sewer-overflow",
+   "noun": "Data feed",
+   "sources": [
+    "fed-echo-sewer-overflow-bypass-events"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-friends-of-winooski",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Friends of the Winooski River",
+   "name": "Friends of the Winooski River",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.winooskiriver.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Friends of the Winooski River: monitoring results. Voluntary monitoring; unreachable in the research. (research/nh-vt/report.md §2.8)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "vt-friends-of-winooski"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-hartford-alert-center",
+   "state": "VT",
+   "operator_id": "vt-hartford-wrj",
+   "agency": null,
+   "name": "Town of Hartford, White River Junction WWTF CSOs",
+   "permit": "VT0101010",
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.hartfordvt.gov/RSSFeed.aspx?ModID=63&CID=Department-of-Public-Works-11"
+   ],
+   "method": "rss",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "notices",
+   "note": "Hartford Public Works alert center RSS. Voluntary town alerts. (research/nh-vt/report.md §6)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "News page",
+   "sources": [
+    "vt-hartford-alertcenter"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-hartford-wrj-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-hartford-wrj",
+   "agency": null,
+   "name": "Town of Hartford, White River Junction WWTF CSOs",
+   "permit": "VT0101010",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "Town of Hartford, White River Junction WWTF CSOs: public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-health-swimming-page",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Vermont Department of Health",
+   "name": "Vermont Department of Health",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://www.healthvermont.gov/environment/swimming-water-safety"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "documents",
+   "note": "Vermont Department of Health swimming water safety page (48 hours after significant rain). Voluntary standing advice. (research/nh-vt/report.md §2.4)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "State page",
+   "sources": [
+    "vt-doh-swimming-water-safety-page"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-lake-bomoseen-association",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Lake Bomoseen Association",
+   "name": "Lake Bomoseen Association",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://lakebomoseen.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Lake Bomoseen Association: monitoring results. Voluntary monitoring; no data reviewed. (research/nh-vt/report.md §2.8)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "vt-lake-bomoseen-association"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-lcbp",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Lake Champlain Basin Program",
+   "name": "Lake Champlain Basin Program",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.lcbp.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Lake Champlain Basin Program: monitoring results. Voluntary monitoring; unreachable in the research. (research/nh-vt/report.md §2.8)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "vt-lcbp-data"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-memphremagog-wa",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Memphremagog Watershed Association",
+   "name": "Memphremagog Watershed Association",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.memphremagog.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Memphremagog Watershed Association: monitoring results. Voluntary monitoring; no data reviewed. (research/nh-vt/report.md §2.8)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "vt-memphremagog-watershed-association"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-middlebury-sso-docs",
+   "state": "VT",
+   "operator_id": "vt-middlebury",
+   "agency": null,
+   "name": "Town of Middlebury pump-station overflows (permit-listed CSO outfalls)",
+   "permit": "VT0100188",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No URL known (not searched): Middlebury overflow documents and signs. Voluntary signs beyond the state alert; the example is the 2024 order on ANR DocBrowser, not a notice page. Examples: https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1210/3-1210.SSO.1272Order.20241112.pdf. (research/nh-vt/report.md §3)",
+   "checked": "2026-11-03",
+   "sources": [
+    "vt-middlebury-sso-docs"
+   ],
+   "barrier": "not_verified"
+  },
+  {
+   "id": "vt-montpelier-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-montpelier",
+   "agency": null,
+   "name": "City of Montpelier Water Resource Recovery Facility combined sewer system",
+   "permit": "VT0100196",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "City of Montpelier Water Resource Recovery Facility combined sewer system: public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-newport-city-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-newport-city",
+   "agency": null,
+   "name": "City of Newport WWTF combined sewer overflows",
+   "permit": "VT0100200",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "City of Newport WWTF combined sewer overflows: public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-newport-facebook",
+   "state": "VT",
+   "operator_id": "vt-newport-city",
+   "agency": null,
+   "name": "City of Newport WWTF combined sewer overflows",
+   "permit": "VT0100200",
+   "channel_kind": "social",
+   "urls": [
+    "https://www.facebook.com/Newport.Vermont/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "login",
+   "publishes": "notices",
+   "note": "Newport City Facebook. Voluntary; no CSO notices found. (research/nh-vt/report.md §3)",
+   "checked": "2026-11-03",
+   "noun": "Social account",
+   "barrier": "login_required"
+  },
+  {
+   "id": "vt-northfield-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-northfield",
+   "agency": null,
+   "name": "Town of Northfield WWTF, East St CSO",
+   "permit": "VT0100242",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "Town of Northfield WWTF, East St CSO: public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-press",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "News media (Vermont)",
+   "name": "News media (Vermont)",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No URL known (not searched): Press (Seven Days, WCAX). Voluntary and ad hoc. Examples: https://www.wcax.com/2026/07/30/heavy-rain-creates-wastewater-plant-issue-closing-burlingt. (research/nh-vt/report.md §6)",
+   "checked": "2026-11-03",
+   "noun": "News page",
+   "sources": [
+    "vt-news-sevendays-why-public-hears-late",
+    "vt-news-wcax-burlington-2026-07"
+   ],
+   "barrier": "not_verified"
+  },
+  {
+   "id": "vt-rutland-city-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-rutland-city",
+   "agency": null,
+   "name": "City of Rutland WWTF combined sewer system",
+   "permit": "VT0100871",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "City of Rutland WWTF combined sewer system: public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-signs",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Vermont sewer system operators",
+   "name": "Vermont sewer system operators",
+   "permit": null,
+   "channel_kind": "lights_signs_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "10 V.S.A. § 1295(e)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No web form: Permanent signs at every CSO outfall; temporary signs downstream of other discharges for 48 hours. DEC adds 'within one mile'; no online record (Burlington's beach tracker is its local record). Covers every operator in the state. (research/nh-vt/report.md §2.1)",
+   "checked": "2026-11-03",
+   "noun": "Lights and signs",
+   "barrier": "signs_only"
+  },
+  {
+   "id": "vt-springfield-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-springfield",
+   "agency": null,
+   "name": "Springfield",
+   "permit": "VT0100374",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "Springfield: public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. Registry row built from the feed's facility name. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-st-albans-city-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-st-albans-city",
+   "agency": null,
+   "name": "City of St. Albans WWTF, Lower Weldon (Welden) Street CSO",
+   "permit": "VT0100323",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "City of St. Albans WWTF, Lower Weldon (Welden) Street CSO: public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-st-albans-cso-page",
+   "state": "VT",
+   "operator_id": "vt-st-albans-city",
+   "agency": null,
+   "name": "City of St. Albans WWTF, Lower Weldon (Welden) Street CSO",
+   "permit": "VT0100323",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.stalbansvt.com/cso"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "unknown",
+   "note": "St. Albans City CSO page. Voluntary city page; the state page is the legal channel. (research/nh-vt/report.md §3)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "barrier": null
+  },
+  {
+   "id": "vt-st-johnsbury-dec-public-alert",
+   "state": "VT",
+   "operator_id": "vt-st-johnsbury",
+   "agency": null,
+   "name": "Town of St. Johnsbury WWTF combined sewer system",
+   "permit": "VT0100579",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "10 V.S.A. § 1295(b): the operator posts a public alert within 1 hour of discovery on the electronic media the Secretary designates (the DEC page); (e): a permanent sign at every CSO outfall",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "Town of St. Johnsbury WWTF combined sewer system: public alert on the DEC Sewage Overflows page. The operator's legal channel is the shared state page. (research/nh-vt/report.md §2.1-2.3)",
+   "checked": "2026-11-03",
+   "feed_source_id": "vt-dec",
+   "noun": "State page",
+   "barrier": null
+  },
+  {
+   "id": "vt-state-parks-swim-status",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Vermont Department of Forests, Parks and Recreation",
+   "name": "Vermont Department of Forests, Parks and Recreation",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://anrweb.vt.gov/FPR/SwimWater/PublicReport.aspx"
+   ],
+   "method": "pdf",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "status",
+   "note": "Vermont State Parks swim water status (PDF). Voluntary weekly E. coli and algae status for about 40 beaches; no dates in the PDF. (research/nh-vt/report.md §2.4)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "State page",
+   "sources": [
+    "vt-fpr-state-parks-swim-water-status"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "vt-swim-guide",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Swim Drink Fish",
+   "name": "Swim Drink Fish",
+   "permit": null,
+   "channel_kind": "swim_guide",
+   "urls": [
+    "https://www.theswimguide.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "app_only",
+   "publishes": "results",
+   "note": "Swim Guide listings for Vermont. Voluntary; affiliates not resolved. (research/nh-vt/report.md §2.8)",
+   "checked": "2026-11-03",
+   "noun": "Swim Guide listing",
+   "sources": [
+    "intl-swim-guide-nhvt"
+   ],
+   "barrier": null,
+   "barrier_review": "an app only (Swim Guide): no web page of its own, but no login wall either"
+  },
+  {
+   "id": "vt-town-health-officers",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "Vermont town health officers",
+   "name": "Vermont town health officers",
+   "permit": null,
+   "channel_kind": "local_health_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No URL known (not searched): Town health officers (local swim water testing and the 12-hour report). Voluntary for the public: § 1295(c)(1) sends the report to the local health officer, but no public duty follows; the Health Department says to ask the town health officer. Covers every operator in the state. (research/nh-vt/report.md §2.1, §2.4)",
+   "checked": "2026-11-03",
+   "noun": "Health department page",
+   "barrier": "not_verified"
+  },
+  {
+   "id": "vt-white-river-partnership",
+   "state": "VT",
+   "operator_id": null,
+   "agency": "White River Partnership",
+   "name": "White River Partnership",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.whiteriverpartnership.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "White River Partnership: monitoring results. Voluntary monitoring; unreachable in the research. https://www.whiteriverpartnership.org/ answered connection to the project user agent on 2026-11-03. (research/nh-vt/report.md §2.8)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "vt-white-river-partnership"
+   ],
+   "barrier": null
+  }
+ ]
+}

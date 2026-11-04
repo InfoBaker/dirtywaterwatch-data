@@ -1,0 +1,709 @@
+{
+ "about": "Public-notice channels per operator or agency: pages, sites, feeds, lists and accounts through which the public is told of sewage discharges, by law, permit or voluntarily. Read by pipeline/ingest/notification_pages.py (schema and validator there; test tests/test_notice_channels.py).",
+ "schema_version": 1,
+ "state": "VA",
+ "channels": [
+  {
+   "id": "va-alexrenew-email-alerts",
+   "state": "VA",
+   "operator_id": "va-alexrenew",
+   "agency": null,
+   "name": "Alexandria Renew Enterprises (AlexRenew WRRF and Alexandria combined sewer outfalls)",
+   "permit": "VA0025160",
+   "channel_kind": "email_list",
+   "urls": [
+    "https://alexrenew.com/our-work/cso-tracking/alerts"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "email_only",
+   "publishes": "notices",
+   "note": "AlexRenew CSO email alerts (Real Magnet form). Voluntary list. https://alexrenew.com/our-work/cso-tracking/alerts answered 403 to the project user agent on 2026-11-03. Sign-up status: not attempted (docs/subscriptions.md). (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "noun": "Alert list",
+   "signup_url": "https://alexrenew.com/our-work/cso-tracking/alerts",
+   "sources": [
+    "va-alexrenew-cso-alerts"
+   ],
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "va-alexrenew-status-layer",
+   "state": "VA",
+   "operator_id": "va-alexrenew",
+   "agency": null,
+   "name": "Alexandria Renew Enterprises (AlexRenew WRRF and Alexandria combined sewer outfalls)",
+   "permit": "VA0025160",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://services8.arcgis.com/gPxDs3sbKpglnSk7/arcgis/rest/services/Outfall_Overflow_Status_view/FeatureServer/0"
+   ],
+   "method": "json",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "status",
+   "note": "AlexRenew CSO status (red if an overflow in the past 24 hours). Basis not cited in the research (permit administratively continued; RiverRenew in service 2026-07-01). (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "feed_source_id": "va-alexrenew-cso",
+   "sources": [
+    "va-alexrenew-cso-status-layer"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "va-arlington-alerts",
+   "state": "VA",
+   "operator_id": "va-arlington-des",
+   "agency": null,
+   "name": "Arlington County DES (Water Pollution Control Plant and collection system)",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.arlingtonva.us/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "notices",
+   "note": "Arlington County news and Arlington Alert advisories. Voluntary ad hoc advisories (2012-2022 Four Mile Run spills); homepage URL. (research/va/report.md §3)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "News page",
+   "sources": [
+    "va-arlington-alerts"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "va-cbf",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Chesapeake Bay Foundation",
+   "name": "Chesapeake Bay Foundation",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.cbf.org/issues/sewage-septic-systems/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Chesapeake Bay Foundation. Voluntary. Advocacy; no data. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "va-cbf"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "va-deq-email-lists",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Virginia DEQ",
+   "name": "Virginia DEQ",
+   "permit": null,
+   "channel_kind": "email_list",
+   "urls": [
+    "https://public.govdelivery.com/accounts/VADEQ/subscriber/new"
+   ],
+   "method": "html",
+   "legal_basis": "Va. Code § 62.1-44.19:6 B: DEQ provides the report to VDH and to local newspapers, television and radio, and disseminates it by official social media and email lists, when VDH finds a risk to health or DEQ finds the discharge may impair beneficial uses (no deadline)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "email_only",
+   "publishes": "notices",
+   "note": "DEQ email notification lists (GovDelivery). The list's RSS carried no 2026 spill notice. Sign-up status: not attempted (docs/subscriptions.md). Covers every operator in the state. (research/va/report.md §2, §4)",
+   "checked": "2026-11-03",
+   "noun": "Alert list",
+   "signup_url": "https://public.govdelivery.com/accounts/VADEQ/subscriber/new",
+   "sources": [
+    "va-deq-govdelivery"
+   ],
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "va-deq-media-notice",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Virginia DEQ",
+   "name": "Virginia DEQ",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "Va. Code § 62.1-44.19:6 B: DEQ provides the report to VDH and to local newspapers, television and radio, and disseminates it by official social media and email lists, when VDH finds a risk to health or DEQ finds the discharge may impair beneficial uses (no deadline)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No web form: DEQ notice to VDH and local newspapers, television and radio. No web form. Covers every operator in the state. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "noun": "Printed or broadcast notice",
+   "barrier": null,
+   "barrier_review": "the register does not say what keeps it off the web: no web form: deq notice to vdh and local newspapers, television and radio. no web form. covers every operator in the sta"
+  },
+  {
+   "id": "va-deq-prep",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Virginia DEQ",
+   "name": "Virginia DEQ",
+   "permit": null,
+   "channel_kind": "feed",
+   "urls": [
+    "https://portal.deq.virginia.gov/v2/prep/search"
+   ],
+   "method": "json",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "DEQ Pollution Response Program (PReP) reports, search page and API. Voluntary publication: overflows are reported to DEQ within 24 hours (Va. Code § 62.1-44.5 B; 9VAC25-31-190 L 6-7); routine permitted CSOs are not in PReP. Covers every operator in the state. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "feed_source_id": "va-deq-prep",
+   "noun": "Data feed",
+   "sources": [
+    "va-deq-prep-api",
+    "va-deq-prep-search-page"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "va-deq-social",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Virginia DEQ",
+   "name": "Virginia DEQ",
+   "permit": null,
+   "channel_kind": "social",
+   "urls": [
+    "https://x.com/VirginiaDEQ"
+   ],
+   "method": "html",
+   "legal_basis": "Va. Code § 62.1-44.19:6 B: DEQ provides the report to VDH and to local newspapers, television and radio, and disseminates it by official social media and email lists, when VDH finds a risk to health or DEQ finds the discharge may impair beneficial uses (no deadline)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "login",
+   "publishes": "notices",
+   "note": "DEQ official social media (X @VirginiaDEQ). Whether DEQ uses X for spills is unverified. Covers every operator in the state. (research/va/report.md §2, §4)",
+   "checked": "2026-11-03",
+   "noun": "Social account",
+   "sources": [
+    "va-deq-social"
+   ],
+   "barrier": "login_required"
+  },
+  {
+   "id": "va-deq-topics-of-interest",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Virginia DEQ",
+   "name": "Virginia DEQ",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://www.deq.virginia.gov/news-info/shortcuts/topics-of-interest/douglas-avenue-sewer-main-failure"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "unknown",
+   "note": "DEQ Topics of Interest pages for large spills (Douglas Avenue, S. 1st Ave, Potomac Interceptor). Voluntary pages for big events (Douglas Avenue page given; also S. 1st Ave and Potomac Interceptor). https://www.deq.virginia.gov/news-info/shortcuts/topics-of-interest/douglas-avenue-sewer-main-failure answered 403 to the project user agent on 2026-11-03. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "noun": "State page",
+   "sources": [
+    "va-deq-topic-douglas-ave",
+    "va-deq-topic-s1st-ave",
+    "va-deq-topic-potomac-interceptor"
+   ],
+   "barrier": "bot_wall"
+  },
+  {
+   "id": "va-epa-echo-overflow-events",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "U.S. Environmental Protection Agency (ECHO)",
+   "name": "U.S. Environmental Protection Agency (ECHO)",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "note": "No rows for this state in EPA's dataset: EPA ECHO sewer overflow and bypass event records (NPDES eReporting). Voluntary publication by EPA: operators must report noncompliance to the permitting authority within 24 hours (40 CFR 122.41(l)(6)); EPA publishes the electronic reports. No VA rows in the dataset (research/va); add the state to the ingester's STATES when rows appear. Covers every operator in the state. (research/federal/report.md)",
+   "checked": "2026-11-03",
+   "noun": "State page",
+   "sources": [
+    "fed-echo-sewer-overflow-bypass-events"
+   ],
+   "barrier": null,
+   "barrier_review": "the register does not say what keeps it off the web: no rows for this state in epa's dataset: epa echo sewer overflow and bypass event records (npdes ereporting). voluntary "
+  },
+  {
+   "id": "va-henrico-sso-map",
+   "state": "VA",
+   "operator_id": "va-henrico-dpu",
+   "agency": null,
+   "name": "Henrico County Department of Public Utilities (Henrico Water Reclamation Facility and collection system)",
+   "permit": "VA0063690",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://henrico.gov/utility/public-data/sanitary-sewer-event-overflow-map-sso/"
+   ],
+   "method": "html",
+   "legal_basis": "2023 settlement (CBF/JRA/EIP v. Henrico; modified DEQ consent order): 'a web-based map that is updated daily'",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "documents",
+   "note": "Henrico sanitary sewer overflow map (no dates). 273 points without dates; door hangers and bill inserts. https://henrico.gov/utility/public-data/sanitary-sewer-event-overflow-map-sso/ answered 403 to the project user agent on 2026-11-03. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "sources": [
+    "va-henrico-sso-map"
+   ],
+   "barrier": "bot_wall"
+  },
+  {
+   "id": "va-hrsd-newsroom",
+   "state": "VA",
+   "operator_id": "va-hrsd",
+   "agency": null,
+   "name": "Hampton Roads Sanitation District (HRSD)",
+   "permit": "VA0081230",
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.hrsd.com/newsroom"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "notices",
+   "note": "HRSD newsroom (major failures). Voluntary; no routine SSO list; door-to-door notice for big events. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "News page",
+   "sources": [
+    "va-hrsd-newsroom"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "va-jra-james-river-watch",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "James River Association",
+   "name": "James River Association",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://thejamesriver.org/james-river-watch/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "James River Association, James River Watch. Voluntary. ArcGIS layer of weekly bacteria. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "va-jra-james-river-watch"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "va-lynchburg-alerts",
+   "state": "VA",
+   "operator_id": "va-lynchburg-water-resources",
+   "agency": null,
+   "name": "City of Lynchburg Water Resources (Lynchburg Regional Wastewater Treatment Plant)",
+   "permit": "VA0024970",
+   "channel_kind": "email_list",
+   "urls": [
+    "https://www.lynchburgva.gov/626/Lynchburg-Alerts"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "login",
+   "publishes": "notices",
+   "note": "Lynchburg Alerts (Everbridge) CSO text and email; second alert 30 hours after the end. Voluntary; account required; no public archive of alerts. Sign-up status: not attempted (docs/subscriptions.md). (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "noun": "Alert list",
+   "signup_url": "https://www.lynchburgva.gov/626/Lynchburg-Alerts",
+   "sources": [
+    "va-lynchburg-cso-alerts"
+   ],
+   "barrier": "login_required"
+  },
+  {
+   "id": "va-lynchburg-cso-page",
+   "state": "VA",
+   "operator_id": "va-lynchburg-water-resources",
+   "agency": null,
+   "name": "City of Lynchburg Water Resources (Lynchburg Regional Wastewater Treatment Plant)",
+   "permit": "VA0024970",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.lynchburgva.gov/513/Combined-Sewer-Overflow-System-CSO"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "documents",
+   "note": "Lynchburg CSO system page. Voluntary page explaining the alerts. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "barrier": null
+  },
+  {
+   "id": "va-lynnhaven-river-now",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Lynnhaven River NOW water quality",
+   "name": "Lynnhaven River NOW water quality",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.lynnhavenrivernow.org/water-quality/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Lynnhaven River NOW water quality. Voluntary. Monthly Google Sheet. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "va-lynnhaven-river-now"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "va-newport-news-sso-report",
+   "state": "VA",
+   "operator_id": "va-newport-news",
+   "agency": null,
+   "name": "City of Newport News Public Works, Wastewater Division",
+   "permit": null,
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.nnva.gov/876/Sanitary-Sewer-Overflow-Report"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "image_only",
+   "publishes": "documents",
+   "note": "Newport News annual SSO report (DOCX, table as an image). Voluntary annual report. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "sources": [
+    "va-newport-news-sso-report"
+   ],
+   "barrier": "image_only"
+  },
+  {
+   "id": "va-operators-no-channel",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Virginia sewer system operators",
+   "name": "Virginia sewer system operators",
+   "permit": null,
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "note": "Other SSO reporters' own notices (WVWA, Norfolk, Virginia Beach, Fairfax, Chesterfield and others). Voluntary only: Virginia law places no public notice duty on the discharger; none found. Covers: va-covington, va-hopewell-water-renewal, va-wvwa, va-norfolk-utilities, va-virginia-beach-utilities, va-portsmouth, va-fairfax-dpwes, va-chesterfield-utilities, va-tappahannock, va-dickenson-psa, va-front-royal, va-alleghany-lower-jackson, va-christiansburg, va-fredericksburg, va-bedford, va-fcwsa-remington. (research/va/report.md §2-3)",
+   "checked": "2026-11-03",
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "va-press",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "News media (Virginia)",
+   "name": "News media (Virginia)",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No URL known (not searched): Press (WRIC, Chesapeake Bay Magazine and local outlets). Voluntary and ad hoc. (research/va/report.md §6)",
+   "checked": "2026-11-03",
+   "noun": "News page",
+   "sources": [
+    "va-news-wric-richmond-map"
+   ],
+   "barrier": "not_verified"
+  },
+  {
+   "id": "va-prkn-spill-page",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Potomac Riverkeeper Network spill data updates",
+   "name": "Potomac Riverkeeper Network spill data updates",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://potomacriverkeepernetwork.org/potomac-sewage-spill-data-updates/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Potomac Riverkeeper Network spill data updates. Voluntary. Interceptor sampling map. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "va-prkn"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "va-richmond-cso-website",
+   "state": "VA",
+   "operator_id": "va-richmond-dpu",
+   "agency": null,
+   "name": "City of Richmond Department of Public Utilities (Richmond WWTP and combined sewer system)",
+   "permit": "VA0063177",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.rva.gov/public-utilities/csooutfalls"
+   ],
+   "method": "html",
+   "legal_basis": "VPDES permit VA0063177 Part III public notification (signs, website, meetings, press)",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "documents",
+   "note": "Richmond DPU CSO outfalls page with monthly per-outfall reports. Monthly spreadsheets: start, end, rainfall, MG and hours per outfall. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "feed_source_id": "va-richmond-cso",
+   "sources": [
+    "va-richmond-monthly-cso-xlsx"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "va-richmond-emnet-map",
+   "state": "VA",
+   "operator_id": "va-richmond-dpu",
+   "agency": null,
+   "name": "City of Richmond Department of Public Utilities (Richmond WWTP and combined sewer system)",
+   "permit": "VA0063177",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://apps.emnet.net/richmond-pub-map-app/?city=47&config=5c0cacee-7e95-4eea-922d-c736c83eb4b9"
+   ],
+   "method": "json",
+   "legal_basis": "VPDES permit VA0063177 Part III public notification",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "login",
+   "publishes": "status",
+   "note": "Richmond public CSO map (EmNet): red for 48 hours after an overflow. Polling needs a token embedded in the public app (owner decision). (research/va/report.md §2, §4)",
+   "checked": "2026-11-03",
+   "sources": [
+    "va-richmond-emnet-cso-map"
+   ],
+   "barrier": "login_required"
+  },
+  {
+   "id": "va-richmond-signs",
+   "state": "VA",
+   "operator_id": "va-richmond-dpu",
+   "agency": null,
+   "name": "City of Richmond Department of Public Utilities (Richmond WWTP and combined sewer system)",
+   "permit": "VA0063177",
+   "channel_kind": "lights_signs_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "VPDES permit VA0063177 Part III public notification",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No web form: Richmond CSO outfall signs. No online record. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "noun": "Lights and signs",
+   "barrier": "signs_only"
+  },
+  {
+   "id": "va-swim-guide",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Swim Drink Fish",
+   "name": "Swim Drink Fish",
+   "permit": null,
+   "channel_kind": "swim_guide",
+   "urls": [
+    "https://www.theswimguide.org/affiliates/potomac-riverkeeper-network/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "app_only",
+   "publishes": "results",
+   "note": "Swim Guide listings for Virginia (Potomac Riverkeeper Network). Voluntary; no API. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "noun": "Swim Guide listing",
+   "sources": [
+    "va-swim-guide"
+   ],
+   "barrier": null,
+   "barrier_review": "an app only (Swim Guide): no web page of its own, but no login wall either"
+  },
+  {
+   "id": "va-vdh-advisory-feed",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Virginia Department of Health",
+   "name": "Virginia Department of Health",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://www.vdh.virginia.gov/news/?s=recreational+water+advisory&feed=rss2"
+   ],
+   "method": "rss",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "unknown",
+   "note": "VDH recreational water advisories (news RSS). Voluntary: VDH issues advisories at its discretion; DEQ must pass reports to VDH under § 62.1-44.19:6 B. Covers every operator in the state. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "feed_source_id": "va-vdh-advisories",
+   "noun": "State page",
+   "sources": [
+    "va-vdh-news-advisory-feed"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "va-vdh-beach-map",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Virginia Department of Health",
+   "name": "Virginia Department of Health",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://www.vdh.virginia.gov/waterborne-hazards-control/swimming-advisories-and-monitored-beaches-map/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "status",
+   "note": "VDH swimming advisories and monitored beaches map (Tableau). Voluntary; the page answers, but the Tableau map in it sits behind a bot wall. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "noun": "State page",
+   "sources": [
+    "va-vdh-beach-map-tableau"
+   ],
+   "barrier": "bot_wall"
+  },
+  {
+   "id": "va-vdh-beach-x",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Virginia Department of Health",
+   "name": "Virginia Department of Health",
+   "permit": null,
+   "channel_kind": "social",
+   "urls": [
+    "http://x.com/vdhbeach"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "login",
+   "publishes": "notices",
+   "note": "VDH beach X account @vdhbeach. Voluntary; login wall. (research/va/report.md §6)",
+   "checked": "2026-11-03",
+   "noun": "Social account",
+   "sources": [
+    "va-vdh-beach-x"
+   ],
+   "barrier": "login_required"
+  },
+  {
+   "id": "va-vdh-shellfish",
+   "state": "VA",
+   "operator_id": null,
+   "agency": "Virginia Department of Health",
+   "name": "Virginia Department of Health",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://services5.arcgis.com/8CMfd3uYk8d4J22E/arcgis/rest/services/VDH_DSSWH_Shellfish_Web_Map_WFL1/FeatureServer"
+   ],
+   "method": "json",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "status",
+   "note": "VDH shellfish condemnation layers. Voluntary map. (research/va/report.md §2)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "State page",
+   "sources": [
+    "va-vdh-shellfish-layers"
+   ],
+   "barrier": null
+  }
+ ]
+}

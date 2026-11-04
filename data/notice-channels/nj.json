@@ -1,0 +1,1499 @@
+{
+ "about": "Public-notice channels per operator or agency: pages, sites, feeds, lists and accounts through which the public is told of sewage discharges, by law, permit or voluntarily. Read by pipeline/ingest/notification_pages.py (schema and validator there; test tests/test_notice_channels.py).",
+ "schema_version": 1,
+ "state": "NJ",
+ "channels": [
+  {
+   "id": "nj-bayonne-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-bayonne",
+   "agency": null,
+   "name": "City of Bayonne (Bayonne MUA)",
+   "permit": "NJ0109240",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0109240 (final 2025-10-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0109240",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-bcua-none-found",
+   "state": "NJ",
+   "operator_id": "nj-bcua",
+   "agency": null,
+   "name": "Bergen County Utilities Authority (Little Ferry WPCF)",
+   "permit": "NJ0020028",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NJPDES CSO permit NJ0020028 (final 2025-01-30), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "note": "Treatment plant with a CSO permit and no CSO outfalls of its own; no page found. Its CSO towns (Fort Lee, Hackensack, Ridgefield Park) use the shared site.",
+   "checked": "2026-11-03",
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "nj-camden-city-none-found",
+   "state": "NJ",
+   "operator_id": "nj-camden-city",
+   "agency": null,
+   "name": "City of Camden",
+   "permit": "NJ0108812",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NJPDES CSO permit NJ0108812 (final 2024-11-04), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "note": "No notification page found for Camden City's 22 outfalls (research 2026-11-02); CCMUA's page shows only CCMUA outfall 040A, and Camden City is not on the shared site. Camden City's own website was not searched in the 2026-11-03 survey.",
+   "checked": "2026-11-03",
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "nj-ccmua-cso-status-page",
+   "state": "NJ",
+   "operator_id": "nj-ccmua",
+   "agency": null,
+   "name": "Camden County Municipal Utilities Authority (Delaware #1 WPCF)",
+   "permit": "NJ0026182",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.ccmua.org/cso-status/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0026182 (final 2024-11-04), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "status",
+   "note": "Gate position of one outfall (040A); the status itself is read as events by the nj-ccmua-cso-status feed (from the WordPress REST copy). This monitor reads the public page for change and reachability. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "status_pattern": "Delaware River is (?:OPEN|CLOSED)\\b",
+   "authority": "Camden County MUA, CSO Status page",
+   "default_event_type": "cso",
+   "seeds": {
+    "https://www.ccmua.org/cso-status/": [
+     {
+      "path": "research/nj/raw/ccmua-cso-status.html",
+      "fetched_at": "2026-11-02T17:56:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-cso-leaflets-mailing",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "New Jersey CSO permittees",
+   "name": "New Jersey CSO permittees",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NJPDES CSO permits Part IV.F.8.b.i-ii",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No web form: Leaflets at beaches, marinas and ramps; yearly mail or email notice to residents. No web channel. Covers: nj-paterson, nj-north-bergen-mua-central, nj-ridgefield-park, nj-bayonne, nj-kearny, nj-east-newark, nj-perth-amboy, nj-elizabeth, nj-camden-city, nj-gloucester-city, nj-harrison, nj-nhsa-adams-street, nj-ccmua, nj-north-bergen-mua-woodcliff, nj-fort-lee, nj-guttenberg, nj-jersey-city-mua, nj-newark, nj-hackensack, nj-trenton, nj-nhsa-river-road, nj-pvsc, nj-jmeuc, nj-bcua, nj-mcua. (research/nj/report.md §2.1)",
+   "checked": "2026-11-03",
+   "noun": "Printed or broadcast notice",
+   "barrier": "print_only"
+  },
+  {
+   "id": "nj-cso-outfall-signs",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "New Jersey CSO permittees",
+   "name": "New Jersey CSO permittees",
+   "permit": null,
+   "channel_kind": "lights_signs_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NJPDES CSO permits Part IV.F.8.a",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "status",
+   "note": "No web form: Signs within 100 feet of each CSO outfall ('Warning, possible sewage overflows during and following wet weather...'). No online record. Covers: nj-paterson, nj-north-bergen-mua-central, nj-ridgefield-park, nj-bayonne, nj-kearny, nj-east-newark, nj-perth-amboy, nj-elizabeth, nj-camden-city, nj-gloucester-city, nj-harrison, nj-nhsa-adams-street, nj-ccmua, nj-north-bergen-mua-woodcliff, nj-fort-lee, nj-guttenberg, nj-jersey-city-mua, nj-newark, nj-hackensack, nj-trenton, nj-nhsa-river-road, nj-pvsc, nj-jmeuc, nj-bcua, nj-mcua. (research/nj/report.md §2.1)",
+   "checked": "2026-11-03",
+   "noun": "Lights and signs",
+   "barrier": "signs_only"
+  },
+  {
+   "id": "nj-delaware-riverkeeper-cso-monitoring",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "Delaware Riverkeeper Network",
+   "name": "Delaware Riverkeeper Network",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://delawareriverkeeper.org/our-work/monitoring/cso-monitoring/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "documents",
+   "note": "Volunteer visual checks of CSO outfalls in the Philadelphia region; no public results page found.",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "barrier": null
+  },
+  {
+   "id": "nj-drbc-bacteria",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "Delaware River Basin Commission bacteria sampling",
+   "name": "Delaware River Basin Commission bacteria sampling",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.nj.gov/drbc/library/documents/bacti062226.pdf"
+   ],
+   "method": "pdf",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Delaware River Basin Commission bacteria sampling. Voluntary. PDFs; example document URL. (research/nj/report.md §2.7)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "nj-drbc-bacteria-sampling"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nj-east-newark-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-east-newark",
+   "agency": null,
+   "name": "Borough of East Newark",
+   "permit": "NJ0117846",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0117846 (final 2025-10-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0117846",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-elizabeth-cso-page",
+   "state": "NJ",
+   "operator_id": "nj-elizabeth",
+   "agency": null,
+   "name": "City of Elizabeth",
+   "permit": "NJ0108782",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.elizabethnj.org/182/CSO"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0108782 (final 2025-02-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "link_only",
+   "note": "Links 'CSO Notification System' (old HDR host, forwards to the shared site), semi-annual LTCP progress reports and meeting material; no status. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "authority": "City of Elizabeth, CSO page",
+   "default_event_type": "cso",
+   "seeds": {
+    "https://www.elizabethnj.org/182/CSO": [
+     {
+      "path": "research/nj/raw/permittee-pages-20261103/elizabeth-182-cso.html",
+      "fetched_at": "2026-11-03T12:41:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-elizabeth-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-elizabeth",
+   "agency": null,
+   "name": "City of Elizabeth",
+   "permit": "NJ0108782",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0108782 (final 2025-02-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0108782",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-epa-echo-cso-dmr",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "U.S. Environmental Protection Agency (ECHO)",
+   "name": "U.S. Environmental Protection Agency (ECHO)",
+   "permit": null,
+   "channel_kind": "feed",
+   "urls": [
+    "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart"
+   ],
+   "method": "json",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "documents",
+   "note": "EPA ECHO monthly days with CSO discharge per outfall (parameter 81381). Voluntary publication by EPA of permit-required monthly reports (NJPDES CSO permits Part IV.C.1.d: a whole day for any calendar day with a discharge); weeks to months late. https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart answered 500 to the project user agent on 2026-11-03. Covers every operator in the state. (research/nj/report.md §2.6)",
+   "checked": "2026-11-03",
+   "feed_source_id": "nj-echo-monthly",
+   "noun": "Data feed",
+   "sources": [
+    "nj-echo-effluent-dmr-cso"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nj-epa-echo-overflow-events",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "U.S. Environmental Protection Agency (ECHO)",
+   "name": "U.S. Environmental Protection Agency (ECHO)",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "note": "No rows for this state in EPA's dataset: EPA ECHO sewer overflow and bypass event records (NPDES eReporting). Voluntary publication by EPA: operators must report noncompliance to the permitting authority within 24 hours (40 CFR 122.41(l)(6)); EPA publishes the electronic reports. No NJ rows in the dataset (research/nj); add the state to the ingester's STATES when rows appear. Covers every operator in the state. (research/federal/report.md)",
+   "checked": "2026-11-03",
+   "noun": "State page",
+   "sources": [
+    "fed-echo-sewer-overflow-bypass-events"
+   ],
+   "barrier": null,
+   "barrier_review": "the register does not say what keeps it off the web: no rows for this state in epa's dataset: epa echo sewer overflow and bypass event records (npdes ereporting). voluntary "
+  },
+  {
+   "id": "nj-fort-lee-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-fort-lee",
+   "agency": null,
+   "name": "Borough of Fort Lee",
+   "permit": "NJ0034517",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0034517 (final 2025-01-30), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0034517",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-gloucester-city-none-found",
+   "state": "NJ",
+   "operator_id": "nj-gloucester-city",
+   "agency": null,
+   "name": "Gloucester City",
+   "permit": "NJ0108847",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NJPDES CSO permit NJ0108847 (final 2024-11-04), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "note": "No notification page found for Gloucester City's 7 outfalls (research 2026-11-02); not on the shared site. Its own website was not searched in the 2026-11-03 survey.",
+   "checked": "2026-11-03",
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "nj-guttenberg-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-guttenberg",
+   "agency": null,
+   "name": "Town of Guttenberg",
+   "permit": "NJ0108715",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0108715 (final 2023-05-25), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0108715",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-hackensack-riverkeeper-results",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "Hackensack Riverkeeper",
+   "name": "Hackensack Riverkeeper",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.hackensackriverkeeper.org/water-quality-blog"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Weekly Thursday bacteria sampling May-September with the Interstate Environmental Commission; yearly result pages linked from the blog. Sampling results, not overflow notices.",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "barrier": null
+  },
+  {
+   "id": "nj-hackensack-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-hackensack",
+   "agency": null,
+   "name": "City of Hackensack",
+   "permit": "NJ0108766",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0108766 (final 2025-01-30), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0108766",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-harrison-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-harrison",
+   "agency": null,
+   "name": "Town of Harrison",
+   "permit": "NJ0108871",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0108871 (final 2025-10-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0108871",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-jersey-city-mua-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-jersey-city-mua",
+   "agency": null,
+   "name": "Jersey City Municipal Utilities Authority",
+   "permit": "NJ0108723",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0108723 (final 2025-10-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0108723",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-jmeuc-none-found",
+   "state": "NJ",
+   "operator_id": "nj-jmeuc",
+   "agency": null,
+   "name": "Joint Meeting of Essex & Union Counties (Elizabeth WWTP)",
+   "permit": "NJ0024741",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NJPDES CSO permit NJ0024741 (final 2025-02-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "note": "Treatment plant with a CSO permit and no CSO outfalls of its own; no page found. Elizabeth, the combined system it serves, uses the shared site.",
+   "checked": "2026-11-03",
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "nj-kearny-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-kearny",
+   "agency": null,
+   "name": "Town of Kearny",
+   "permit": "NJ0111244",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0111244 (final 2025-10-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0111244",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-lrwp-pathogen-results",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "Lower Raritan Watershed Partnership",
+   "name": "Lower Raritan Watershed Partnership",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "results",
+   "note": "Weekly pathogen results posted as dated WordPress posts (e.g. 2026-09-24); no standing results page found; the site's post listing API was not tested.",
+   "checked": "2026-11-03",
+   "barrier": null,
+   "barrier_review": "the register does not say what keeps it off the web: weekly pathogen results posted as dated wordpress posts (e.g. 2026-09-24); no standing results page found; the site's po"
+  },
+  {
+   "id": "nj-mcua-none-found",
+   "state": "NJ",
+   "operator_id": "nj-mcua",
+   "agency": null,
+   "name": "Middlesex County Utilities Authority (Sayreville)",
+   "permit": "NJ0020141",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NJPDES CSO permit NJ0020141 (2020 permit; renewal drafted 2025-11-03): CSO public notification; the clause in this permit was not read (the 2024-26 renewals put the daily CSO Notification System website at Part IV.F.8.b.iii)",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "none_found",
+   "publishes": "none",
+   "note": "Treatment plant with a CSO permit and no CSO outfalls of its own; no page found. Perth Amboy, the combined system it serves, uses the shared site.",
+   "checked": "2026-11-03",
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "nj-newark-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-newark",
+   "agency": null,
+   "name": "City of Newark",
+   "permit": "NJ0108758",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0108758 (final 2025-10-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0108758",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-nhsa-adams-street-advisory-page",
+   "state": "NJ",
+   "operator_id": "nj-nhsa-adams-street",
+   "agency": null,
+   "name": "North Hudson Sewerage Authority - Adams Street WWTP (Hoboken, Weehawken, Union City)",
+   "permit": "NJ0026085",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.nhudsonsa.com/waterbody-advisor-system"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0026085 (final 2024-02-07), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "link_only",
+   "note": "The page describes the 'Waterbody Advisory System' level-sensor map (green no CSO activity, red CSO activity: avoid contact within 100 feet) and links to it; the page itself shows no status. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the sensor map",
+   "authority": "North Hudson Sewerage Authority",
+   "default_event_type": "cso",
+   "seeds": {
+    "https://www.nhudsonsa.com/waterbody-advisor-system": [
+     {
+      "path": "research/nj/raw/nhsa-was.html",
+      "fetched_at": "2026-11-02T17:57:00Z",
+      "http_status": 200
+     },
+     {
+      "path": "research/nj/raw/permittee-pages-20261103/nhsa-waterbody-advisor-system.html",
+      "fetched_at": "2026-11-03T12:41:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-nhsa-adams-street-sensor-map",
+   "state": "NJ",
+   "operator_id": "nj-nhsa-adams-street",
+   "agency": null,
+   "name": "North Hudson Sewerage Authority - Adams Street WWTP (Hoboken, Weehawken, Union City)",
+   "permit": "NJ0026085",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.123mc.com/123mc/login.asp?1=aufn&4=yJKKhQt3WHSpb7AM6hmg1Q%3D%3D&87=aufn11776&Mobi=N&f=y"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0026085 (final 2024-02-07), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "status",
+   "note": "Public guest link on the telemetry vendor's host, as published on the NHSA page; it redirected to map2009.4.asp?pbl=27731, which returned HTTP 404 on 2026-11-02 and 2026-11-03. The status pattern is a guess until the map is seen. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "noun": "Sensor map",
+   "authority": "North Hudson Sewerage Authority",
+   "default_event_type": "cso",
+   "seeds": {
+    "https://www.123mc.com/123mc/login.asp?1=aufn&4=yJKKhQt3WHSpb7AM6hmg1Q%3D%3D&87=aufn11776&Mobi=N&f=y": [
+     {
+      "path": "research/nj/raw/nhsa-123mc.html",
+      "fetched_at": "2026-11-02T17:57:00Z",
+      "http_status": 404
+     },
+     {
+      "path": "research/nj/raw/permittee-pages-20261103/nhsa-123mc-map-404.html",
+      "fetched_at": "2026-11-03T12:41:00Z",
+      "http_status": 404
+     }
+    ]
+   },
+   "status_pattern": "(?i)\\b(?:outfall|CSO activity|no activity)\\b",
+   "barrier": null
+  },
+  {
+   "id": "nj-nhsa-river-road-advisory-page",
+   "state": "NJ",
+   "operator_id": "nj-nhsa-river-road",
+   "agency": null,
+   "name": "North Hudson Sewerage Authority - River Road WWTP (West New York)",
+   "permit": "NJ0025321",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.nhudsonsa.com/waterbody-advisor-system"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0025321 (final 2025-12-23), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "link_only",
+   "note": "The page describes the 'Waterbody Advisory System' level-sensor map (green no CSO activity, red CSO activity: avoid contact within 100 feet) and links to it; the page itself shows no status. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the sensor map",
+   "authority": "North Hudson Sewerage Authority",
+   "default_event_type": "cso",
+   "seeds": {
+    "https://www.nhudsonsa.com/waterbody-advisor-system": [
+     {
+      "path": "research/nj/raw/nhsa-was.html",
+      "fetched_at": "2026-11-02T17:57:00Z",
+      "http_status": 200
+     },
+     {
+      "path": "research/nj/raw/permittee-pages-20261103/nhsa-waterbody-advisor-system.html",
+      "fetched_at": "2026-11-03T12:41:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-nhsa-river-road-sensor-map",
+   "state": "NJ",
+   "operator_id": "nj-nhsa-river-road",
+   "agency": null,
+   "name": "North Hudson Sewerage Authority - River Road WWTP (West New York)",
+   "permit": "NJ0025321",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.123mc.com/123mc/login.asp?1=aufn&4=yJKKhQt3WHSpb7AM6hmg1Q%3D%3D&87=aufn11776&Mobi=N&f=y"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0025321 (final 2025-12-23), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "status",
+   "note": "Public guest link on the telemetry vendor's host, as published on the NHSA page; it redirected to map2009.4.asp?pbl=27731, which returned HTTP 404 on 2026-11-02 and 2026-11-03. The status pattern is a guess until the map is seen. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "noun": "Sensor map",
+   "authority": "North Hudson Sewerage Authority",
+   "default_event_type": "cso",
+   "seeds": {
+    "https://www.123mc.com/123mc/login.asp?1=aufn&4=yJKKhQt3WHSpb7AM6hmg1Q%3D%3D&87=aufn11776&Mobi=N&f=y": [
+     {
+      "path": "research/nj/raw/nhsa-123mc.html",
+      "fetched_at": "2026-11-02T17:57:00Z",
+      "http_status": 404
+     },
+     {
+      "path": "research/nj/raw/permittee-pages-20261103/nhsa-123mc-map-404.html",
+      "fetched_at": "2026-11-03T12:41:00Z",
+      "http_status": 404
+     }
+    ]
+   },
+   "status_pattern": "(?i)\\b(?:outfall|CSO activity|no activity)\\b",
+   "barrier": null
+  },
+  {
+   "id": "nj-njdep-beach-program",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "New Jersey Department of Environmental Protection (Cooperative Coastal Monitoring Program)",
+   "name": "New Jersey Department of Environmental Protection (Cooperative Coastal Monitoring Program)",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://njbeaches.org/"
+   ],
+   "method": "json",
+   "legal_basis": "N.J.A.C. 8:26 (State Sanitary Code, Public Recreational Bathing); not read in the research",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "status",
+   "note": "Beach advisories and closures, read as the nj-beaches feed from the program's public API.",
+   "checked": "2026-11-03",
+   "feed_source_id": "nj-beaches",
+   "barrier": null
+  },
+  {
+   "id": "nj-njdep-govdelivery",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "New Jersey Department of Environmental Protection",
+   "name": "New Jersey Department of Environmental Protection",
+   "permit": null,
+   "channel_kind": "email_list",
+   "urls": [
+    "https://public.govdelivery.com/accounts/NJDEP/subscriber/new"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "email_only",
+   "publishes": "notices",
+   "note": "GovDelivery bulletins by email (draft CSO permits, hearings); not subscribed. No overflow notices seen.",
+   "checked": "2026-11-03",
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "nj-njdep-hab-dashboard",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "New Jersey Department of Environmental Protection (HAB program)",
+   "name": "New Jersey Department of Environmental Protection (HAB program)",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://www.arcgis.com/home/item.html?id=49190166531d4e5a811c9a91e4a41677"
+   ],
+   "method": "json",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "status",
+   "note": "Harmful algal bloom sampling and advisory tiers, read as the nj-hab feed; no legal basis found.",
+   "checked": "2026-11-03",
+   "feed_source_id": "nj-hab",
+   "barrier": null
+  },
+  {
+   "id": "nj-north-bergen-mua-central-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-north-bergen-mua-central",
+   "agency": null,
+   "name": "North Bergen MUA (Central / PVSC-connected)",
+   "permit": "NJ0108898",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0108898 (final 2025-10-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0108898",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-north-bergen-mua-woodcliff-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-north-bergen-mua-woodcliff",
+   "agency": null,
+   "name": "North Bergen MUA - Woodcliff STP",
+   "permit": "NJ0029084",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0029084 (final 2023-05-25), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0029084",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-nynj-baykeeper",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "NY/NJ Baykeeper",
+   "name": "NY/NJ Baykeeper",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.nynjbaykeeper.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "NY/NJ Baykeeper. Voluntary. Via Swim Guide only. (research/nj/report.md §2.7)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "nj-nynj-baykeeper"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nj-passaic-river-coalition",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "Passaic River Coalition",
+   "name": "Passaic River Coalition",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://www.passaicriver.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Passaic River Coalition. Voluntary. Timed out in the research. https://www.passaicriver.org/ answered connection to the project user agent on 2026-11-03. (research/nj/report.md §2.7)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "nj-passaic-river-coalition"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nj-paterson-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-paterson",
+   "agency": null,
+   "name": "City of Paterson",
+   "permit": "NJ0108880",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0108880 (final 2025-10-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0108880",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-perth-amboy-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-perth-amboy",
+   "agency": null,
+   "name": "City of Perth Amboy",
+   "permit": "NJ0156132",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0156132 (2020 permit; renewal drafted 2025-11-03): CSO public notification; the clause in this permit was not read (the 2024-26 renewals put the daily CSO Notification System website at Part IV.F.8.b.iii)",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to.",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0156132",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-press",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "News media (New Jersey)",
+   "name": "News media (New Jersey)",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No URL known (not searched): Press (Patch and local outlets). Voluntary and ad hoc. (research/nj/report.md §6)",
+   "checked": "2026-11-03",
+   "noun": "News page",
+   "sources": [
+    "nj-news-local"
+   ],
+   "barrier": "not_verified"
+  },
+  {
+   "id": "nj-pvsc-njcleanwaterways-page",
+   "state": "NJ",
+   "operator_id": "nj-pvsc",
+   "agency": null,
+   "name": "Passaic Valley Sewerage Commission (Newark WRRF)",
+   "permit": "NJ0021016",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.njcleanwaterways.com/public-notification"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0021016 (final 2025-10-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "link_only",
+   "note": "Describes the shared system as predicting whether a CSO is likely from radar rainfall and model rating curves, and links to it. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "authority": "PVSC district LTCP site (Clean Waterways, Healthy Neighborhoods)",
+   "default_event_type": "cso",
+   "seeds": {
+    "https://www.njcleanwaterways.com/public-notification": [
+     {
+      "path": "research/nj/raw/pvsc/ncw-public-notification.html",
+      "fetched_at": "2026-11-02T18:11:00Z",
+      "http_status": 200
+     },
+     {
+      "path": "research/nj/raw/permittee-pages-20261103/njcleanwaterways-public-notification.html",
+      "fetched_at": "2026-11-03T12:41:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-pvsc-njcso-page",
+   "state": "NJ",
+   "operator_id": "nj-pvsc",
+   "agency": null,
+   "name": "Passaic Valley Sewerage Commission (Newark WRRF)",
+   "permit": "NJ0021016",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.nj.gov/pvsc/what/njcso/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0021016 (final 2025-10-28), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "link_only",
+   "note": "LTCP background, quarterly 'District CSO Construction Related Activities' PDFs and a 'CSO Notification System' link to the old HDR host (forwards to the shared site). PVSC owns no CSO outfalls; its eight combined-sewer towns each have their own permit. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "authority": "Passaic Valley Sewerage Commission, PVSC & NJCSO page",
+   "default_event_type": "cso",
+   "seeds": {
+    "https://www.nj.gov/pvsc/what/njcso/": [
+     {
+      "path": "research/nj/raw/pvsc/njcso-page.html",
+      "fetched_at": "2026-11-02T18:11:00Z",
+      "http_status": 200
+     },
+     {
+      "path": "research/nj/raw/permittee-pages-20261103/pvsc-what-njcso.html",
+      "fetched_at": "2026-11-03T12:41:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-raritan-riverkeeper",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "Raritan Riverkeeper",
+   "name": "Raritan Riverkeeper",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://raritanriverkeeper.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Raritan Riverkeeper. Voluntary. Domain did not resolve in the research. https://raritanriverkeeper.org/ answered connection to the project user agent on 2026-11-03. (research/nj/report.md §2.7)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "nj-raritan-riverkeeper"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nj-ridgefield-park-shared-site",
+   "state": "NJ",
+   "operator_id": "nj-ridgefield-park",
+   "agency": null,
+   "name": "Village of Ridgefield Park",
+   "permit": "NJ0109118",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://njcsonotifications.com/"
+   ],
+   "method": "html",
+   "legal_basis": "NJPDES CSO permit NJ0109118 (final 2025-01-30), Part IV.F.8.b.iii: \"maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred\"",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "likelihood",
+   "note": "Rain-based 'CSO event likely / unlikely' per permittee, not discharge detection; no history. The page's JSON (https://njcsonotifications.com/?handler=Status) is read by the nj-cso-likely snapshot for the rain-likely caution, so this monitor reads the HTML page the permittees link to. Clause text read in Camden City's permit NJ0108812 (final 2024-11-04); the 2023-25 renewals carry the same public-notification part (research/nj/report.md §2.1).",
+   "checked": "2026-11-03",
+   "link_text": "the shared rainfall site",
+   "noun": "Shared site entry",
+   "entry": {
+    "start": "NJ0109118",
+    "end": "\\bNJ\\d{7}\\b|This site indicates"
+   },
+   "ignore_lines": [
+    "^[\\d.]+″(?: total)?$",
+    "^CSO event (?:likely|unlikely)$",
+    "^[A-Z][a-z]{2} \\d{1,2}, \\d{1,2}:\\d{2} [AP]M$"
+   ],
+   "status_pattern": "CSO event (?:likely|unlikely)",
+   "records": false,
+   "authority": "NJ CSO Group shared notification site (interim)",
+   "seeds": {
+    "https://njcsonotifications.com/": [
+     {
+      "path": "research/nj/raw/njcsonotif-home.html",
+      "fetched_at": "2026-11-02T17:53:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  },
+  {
+   "id": "nj-surfrider-bwtf",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "Surfrider Blue Water Task Force, Jersey Shore",
+   "name": "Surfrider Blue Water Task Force, Jersey Shore",
+   "permit": null,
+   "channel_kind": "group_results",
+   "urls": [
+    "https://bwtf.surfrider.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Surfrider Blue Water Task Force, Jersey Shore. Voluntary. Public CSV. (research/nj/report.md §2.7)",
+   "checked": "2026-11-03",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "nj-surfrider-bwtf-jersey-shore"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nj-swim-guide",
+   "state": "NJ",
+   "operator_id": null,
+   "agency": "Swim Guide (Water Rangers / Waterkeeper Alliance)",
+   "name": "Swim Guide (Water Rangers / Waterkeeper Alliance)",
+   "permit": null,
+   "channel_kind": "swim_guide",
+   "urls": [
+    "https://www.theswimguide.org/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "app_only",
+   "publishes": "results",
+   "note": "New Jersey listings render in a script app; data access not established (research: watch).",
+   "checked": "2026-11-03",
+   "barrier": null,
+   "barrier_review": "an app only (Swim Guide): no web page of its own, but no login wall either"
+  },
+  {
+   "id": "nj-trenton-cso-advisory-pdf",
+   "state": "NJ",
+   "operator_id": "nj-trenton",
+   "agency": null,
+   "name": "Trenton Sewer Utility",
+   "permit": "NJ0020923",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.trentonnj.org/DocumentCenter/View/396/Trenton-Sewer-Utility-CSO-Advisory-System-PDF"
+   ],
+   "method": "pdf",
+   "legal_basis": "NJPDES CSO permit NJ0020923 (final 2021-02-05, administratively continued): CSO public notification; the clause in this permit was not read (the 2024-26 renewals put the daily CSO Notification System website at Part IV.F.8.b.iii)",
+   "basis_kind": "permit",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "notices",
+   "note": "'CSO Advisory System' PDF (rev. 9-1-21): says starts and ends of CSO events will be posted; its table of events (date, duration, gallons, precipitation) ends at 2021-09-01. The 2026-11-03 survey copy was byte-identical to the 2026-11-02 research copy. A new dated table row counts as a notice.",
+   "checked": "2026-11-03",
+   "dated_lines_are_notices": true,
+   "authority": "Trenton Sewer Utility, CSO Advisory System PDF",
+   "default_event_type": "cso",
+   "seeds": {
+    "https://www.trentonnj.org/DocumentCenter/View/396/Trenton-Sewer-Utility-CSO-Advisory-System-PDF": [
+     {
+      "path": "research/nj/raw/trenton-cso-advisory.pdf",
+      "fetched_at": "2026-11-02T17:58:00Z",
+      "http_status": 200
+     },
+     {
+      "path": "research/nj/raw/trenton-cso-advisory.pdf",
+      "fetched_at": "2026-11-03T12:41:00Z",
+      "http_status": 200
+     }
+    ]
+   },
+   "barrier": null
+  }
+ ]
+}
