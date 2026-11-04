@@ -17,7 +17,7 @@ license: "none stated"
 attribution: "Georgia DNR Coastal Resources Division"
 enabled: true
 role: "advisories"
-event_types: []
+event_types: ["beach_advisory"]
 states: ["GA"]
 access: ["map_only", "html"]
 access_detail: null
