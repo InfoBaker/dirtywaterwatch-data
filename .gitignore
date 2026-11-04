@@ -13,3 +13,5 @@ node_modules/
 *.tmp
 .env
 build.tar.gz
+raw-cache.tar.gz
+out.tar.gz
