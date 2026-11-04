@@ -7,6 +7,7 @@
     python -m ingest.waters_from_nhd --names research/<st>/receiving-waters-missing.json --state XX [--add-places]
                                      [--budget-s S] [--max-requests N] [--targets-only]
     python -m ingest.waters_from_nhd --names research/<st>/receiving-waters-missing.json --state XX --recheck
+    python -m ingest.waters_from_nhd --names research/<st>/receiving-waters-missing.json --state XX --hand-only
 
 A state build (--state, 2026-11-04; docs/national-waters.md in the site repository): a state's records are built
 before it goes live, from data/receiving-waters-national.json (scripts/gen_receiving_waters.py: one row per receiving
@@ -60,6 +61,9 @@ stats.state_builds.<ST>.report_names. FILE is rewritten to the names still witho
 (rows), the names a record now holds in `resolved` (with the slugs), so the next run resumes with what is left.
 --recheck judges the file again with nothing built or fetched and data/waters-nhd.json untouched (after an alias is
 added to data/water-aliases.json, or a rule here changes): names_recheck.
+Every --names run also builds the state's hand records (HAND) and attaches each to the names it carries;
+--hand-only does only that, with no NHD or OSM request, every other name keeping the last build's outcome
+(names_hand_only: Florida's bays and bayous from the Census TIGER/Line hydrography, 2026-11-04).
 
 Budgets: --max-requests (network requests; cached answers are free) and --budget-s (seconds) stop the run before a
 request, never inside one (BudgetExhausted); the targets not reached say so, what was built is written (merged, never
@@ -123,7 +127,10 @@ and OSM was not yet asked (written once, at the end).
 Hand records (HAND): receiving waters the automatic passes cannot reach, each from a cited public
 geometry (an NHDPlus GNIS id with its reach codes; USGS NHD high-resolution flowlines, service "hr", by GNIS
 id or by permanent identifier inside a box, from layer 6 of hydro.nationalmap.gov's NHD MapServer, cached in
-data/raw/nhd-waters/nhd-hr/; or OSM way ids fetched by id and cached in data/raw/nhd-waters/osm-hand/),
+data/raw/nhd-waters/nhd-hr/; Census TIGER/Line area or linear water features by TIGER id, service "tiger", from
+TIGERweb's Hydro MapServer, cached in data/raw/nhd-waters/tiger-hand/, with the USGS GNIS feature of the name, whose
+point an unnamed Census polygon must hold within GNIS_POINT_M; or OSM way ids fetched by id and cached in
+data/raw/nhd-waters/osm-hand/),
 rebuilt in every run and marked hand: true. The medium-resolution NHDPlus V2.1 network leaves out small
 streams and culverted stretches (2026-11-03: Scajaquada Creek has 4.9 km of its 24 km there; Penhorn Creek and
 Webster Brook none), which the high-resolution flowlines carry. A spec with supersede: true replaces the
@@ -188,6 +195,12 @@ EPA_NHD = "https://watersgeo.epa.gov/arcgis/rest/services/NHDPlus/NHDPlus/MapSer
 NHD_HR = "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer"
 HR_FLOWLINES = 6
 TIGER = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer"
+# Census TIGER/Line hydrography (TIGERweb Hydro; public domain): layer 1 "Areal Hydrography" (bays, bayous, lagoons and
+# canals as polygons, with the Census's abbreviated names: "Mc Kay Bay", "Goose Byu", "Destin Hbr") and layer 0
+# "Linear Hydrography". Hand records (service "tiger", 2026-11-04): Florida's bays and bayous, which NHDPlus V2.1 and
+# the NHD high-resolution flowlines do not name.
+TIGER_HYDRO = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Hydro/MapServer"
+TIGER_AREA, TIGER_LINE = 1, 0
 TIGER_COUSUB = f"{TIGER}/22/query"             # Census 2020 county subdivisions (towns, townships, cities)
 TIGER_PLACES = [f"{TIGER}/25/query", f"{TIGER}/26/query"]   # incorporated places, census designated places
 # where county subdivisions are election or magisterial districts ("10, Lonaconing", "C-01"), towns are
@@ -203,6 +216,7 @@ PAUSE_S = 0.5
 FINISH_S = 60.0            # --wall-s: seconds kept for the end of the run (hand records, placement check, write)
 CHECKPOINT_EVERY = 25
 NEAR_M = 2000              # flowlines and waterbodies searched around a point (status.NAME_MATCH_M)
+GNIS_POINT_M = 150            # a TIGER polygon a hand record takes lies this close to the GNIS point of its name
 SITE_M = 300               # a beach/HAB site's lake or pond: containing or within this
 SAME_WATER_M = 300         # an NHD water this close to a same-named record is that record
 REMAINDER_MIN_KM = 1.0
@@ -2161,7 +2175,7 @@ def public_record(r: dict) -> dict:
             "launches", "advisories", "aliases", "source", "gnis_id", "comids", "nhd_fcodes", "fetched_at",
             "towns_from", "note"]
     out = {k: r.get(k) for k in keys}
-    for k in ("fallback_for", "osm", "osm_timestamp", "covers_part_of", "hand", "reachcodes"):
+    for k in ("fallback_for", "osm", "osm_timestamp", "covers_part_of", "hand", "reachcodes", "tiger_ids"):
         if r.get(k) is not None:
             out[k] = r[k]
     out["targets"] = r.get("_targets_n", 0)
@@ -2206,6 +2220,8 @@ def water_identity(r: dict) -> tuple | None:
         return (st, "comids", tuple(sorted(int(c) for c in r["comids"])))
     if r.get("osm"):
         return (st, "osm", tuple(sorted(str(w) for w in r["osm"])))
+    if r.get("tiger_ids"):
+        return (st, "tiger", tuple(sorted(str(x) for x in r["tiger_ids"])))
     return None
 
 
@@ -2311,7 +2327,14 @@ def merge_targets_scoped(old: list[dict], new: list[dict], scope, rows_from=None
     def mine(r):
         return r.get("state") in scope and (rows_from is None or r.get("from") == rows_from)
     keep = [r for r in old if not mine(r)]
-    return keep + merge_targets([r for r in old if mine(r)], new)
+    merged = merge_targets([r for r in old if mine(r)], new)
+    # the merged rows go where the scope's rows stood in the file, so a rerun's diff is the rows that changed, not a
+    # move of the whole block to the end
+    at = next((i for i, r in enumerate(old) if mine(r)), None)
+    if at is None:
+        return keep + merged
+    at = sum(1 for r in old[:at] if not mine(r))
+    return keep[:at] + merged + keep[at:]
 
 
 def describe_write(info: dict) -> str:
@@ -2402,7 +2425,8 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
             skipped = list(skipped) + [r for r in prev.get("skipped") or [] if r.get("state") in keep_states]
     write_json(OUT, {
         "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); "
-                  "hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map); "
+                  "hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the "
+                  "Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); "
                   "towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): "
                   "data (c) OpenStreetMap contributors, ODbL",
         "built": now_iso(),
@@ -2422,7 +2446,8 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
 
 # ---------------------------------------------------------------- hand records
 # Receiving waters the automatic passes cannot reach, each from a public geometry source named here
-# (USGS/EPA NHDPlus by GNIS id and reach code, or OpenStreetMap by way id) and built in every run.
+# (USGS/EPA NHDPlus by GNIS id and reach code, the Census TIGER/Line hydrography by TIGER id, or OpenStreetMap by way id)
+# and built in every run.
 HAND: list[dict] = [
     dict(name="Jennings Run", state="MD", kind="stream", source="nhd", gnis_id="585223",
          why="MDE's overflow table names Jennings Run for Frostburg's and Allegany County's overflows (Water and "
@@ -2537,6 +2562,144 @@ HAND: list[dict] = [
              "Lunenburg Street) and 072 (Pearl Street at Townsend Street) (MA0100986); NHDPlus V2.1 names only the North "
              "Nashua River within 2 km; the NHD high-resolution flowlines carry Baker Brook (GNIS 617539) 822 m from "
              "outfall 024."),
+    # 2026-11-04 (Florida's go-live gates, docs/checklists/2026-11-04-fl.md in the site repository): bays, bayous and
+    # passes Florida DEP's pollution notices name that NHDPlus V2.1 and the NHD high-resolution flowlines do not carry
+    # (research/fl/receiving-waters-missing.json). Each is the Census TIGER/Line area water the Census names so (or, where
+    # it leaves the polygon unnamed, the one that holds the USGS GNIS point of the name: gnis_point), at the place the
+    # GNIS feature gives (near); no model supplied a coordinate, and kind bay keeps them unfilled like every bay.
+    dict(name='Massalina Bayou', state="FL", kind="bay", source="census", service="tiger", gnis_id='286507',
+         oids=['11090501436'],
+         gnis_point=(-85.6559045, 30.1545507),
+         near=(-85.6559045, 30.1545507),
+         aliases=['Messalina Bayou'],
+         why=("Florida DEP's pollution notices name 'Massalina Bayou' / 'Messalina Bayou' as the water reached (28 "
+              "reports, Panama City). NHDPlus V2.1 and the NHD high-resolution flowlines carry no water of that name "
+              "there; GNIS lists Massalina Bayou (feature 286507, class Bay, Bay County) at 30.15455 N 85.65590 W, and "
+              "this record is the Census TIGER/Line area water polygon that holds that point (the Census gives it no "
+              "name), 97 m from the nearest report point.")),
+    dict(name='Goose Bayou', state="FL", kind="bay", source="census", service="tiger", gnis_id='283187',
+         oids=['11037545494160', '11035780397591', '11090500968'],
+         near=(-85.6878466, 30.2208146),
+         why=("Florida DEP's pollution notices name 'Goose Bayou' as the water reached (7 reports, Panama City). "
+              "NHDPlus V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS lists Goose "
+              "Bayou (feature 283187, class Bay, Bay County) at 30.22081 N 85.68785 W, and this record is the Census "
+              "TIGER/Line area water polygons it names 'Goose Byu', 41 m from the nearest report point.")),
+    dict(name='Johnson Bayou', state="FL", kind="bay", source="census", service="tiger", gnis_id='284862',
+         oids=['11090501019'],
+         near=(-85.6696188, 30.1617754),
+         why=("Florida DEP's pollution notices name 'Johnson Bayou' as the water reached (4 reports, Panama City). "
+              "NHDPlus V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS lists Johnson "
+              "Bayou (feature 284862, class Lake, Bay County) at 30.16178 N 85.66962 W, and this record is the Census "
+              "TIGER/Line area water polygon it names 'Johnson Byu', 315 m from the nearest report point. GNIS lists a "
+              "second Johnson Bayou (feature 284863) 12.6 km from the reports; this record is the one at Panama City.")),
+    dict(name='Parker Bayou', state="FL", kind="bay", source="census", service="tiger", gnis_id='288509',
+         oids=['11090501002', '11090501003'],
+         near=(-85.6037603, 30.1244354),
+         why=("Florida DEP's pollution notices name 'Parker Bayou' as the water reached (4 reports). NHDPlus V2.1 and "
+              "the NHD high-resolution flowlines carry no water of that name there; GNIS lists Parker Bayou (feature "
+              "288509, class Bay, Bay County) at 30.12444 N 85.60376 W, and this record is the Census TIGER/Line area "
+              "water polygons it names 'Parker Byu', 81 m from the nearest report point.")),
+    dict(name='Robinson Bayou', state="FL", kind="bay", source="census", service="tiger", gnis_id='289795',
+         oids=['11090501088'],
+         near=(-85.6969445, 30.2107316),
+         why=("Florida DEP's pollution notices name 'Robinson Bayou' as the water reached (2 reports, Panama City). "
+              "NHDPlus V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS lists "
+              "Robinson Bayou (feature 289795, class Bay, Bay County) at 30.21073 N 85.69694 W, and this record is the "
+              "Census TIGER/Line area water polygon it names 'Robinson Byu', 1930 m from the nearest report point.")),
+    dict(name='Rose Bay', state="FL", kind="bay", source="census", service="tiger", gnis_id='289956',
+         oids=['110372059807'],
+         near=(-80.9656968, 29.0997224),
+         why=("Florida DEP's pollution notices name 'Rose Bay' as the water reached (2 reports, Port Orange). NHDPlus "
+              "V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS lists Rose Bay "
+              "(feature 289956, class Bay, Volusia County) at 29.09972 N 80.96570 W, and this record is the Census "
+              "TIGER/Line area water polygon it names 'Rose Bay', 62 m from the nearest report point.")),
+    dict(name='McKay Bay', state="FL", kind="bay", source="census", service="tiger", gnis_id='286623',
+         oids=['110510128796'],
+         near=(-82.421904, 27.9382338),
+         why=("Florida DEP's pollution notices name 'McKay Bay' as the water reached (2 reports, Tampa). NHDPlus V2.1 "
+              "and the NHD high-resolution flowlines carry no water of that name there; GNIS lists McKay Bay (feature "
+              "286623, class Bay, Hillsborough County) at 27.93823 N 82.42190 W, and this record is the Census "
+              "TIGER/Line area water polygon it names 'Mc Kay Bay', 68 m from the nearest report point.")),
+    dict(name='Destin Harbor', state="FL", kind="bay", source="census", service="tiger", gnis_id='281517',
+         oids=['11095229843'],
+         near=(-86.4990025, 30.3900812),
+         why=("Florida DEP's pollution notices name 'Destin Harbor' as the water reached (1 report, Destin). NHDPlus "
+              "V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS lists Destin Harbor "
+              "(feature 281517, class Bay, Okaloosa County) at 30.39008 N 86.49900 W, and this record is the Census "
+              "TIGER/Line area water polygon it names 'Destin Hbr', 39 m from the nearest report point.")),
+    dict(name='Fish Trap Bay', state="FL", kind="bay", source="census", service="tiger", gnis_id='282495',
+         oids=['110446308287'],
+         near=(-81.843116, 26.3397617),
+         why=("Florida DEP's pollution notices name 'Fish Trap Bay' as the water reached (1 report). NHDPlus V2.1 and "
+              "the NHD high-resolution flowlines carry no water of that name there; GNIS lists Fish Trap Bay (feature "
+              "282495, class Bay, Lee County) at 26.33976 N 81.84312 W, and this record is the Census TIGER/Line area "
+              "water polygon it names 'Fish Trap Bay', 317 m from the nearest report point.")),
+    dict(name='Little Hickory Bay', state="FL", kind="bay", source="census", service="tiger", gnis_id='285709',
+         oids=['110418565982'],
+         near=(-81.8329182, 26.3219574),
+         why=("Florida DEP's pollution notices name 'Little Hickory Bay' as the water reached (1 report, Bonita "
+              "Springs). NHDPlus V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS "
+              "lists Little Hickory Bay (feature 285709, class Bay, Collier County) at 26.32196 N 81.83292 W, and this "
+              "record is the Census TIGER/Line area water polygon it names 'Little Hickory Bay', 0 m from the nearest "
+              "report point.")),
+    dict(name='Hudson Bayou', state="FL", kind="bay", source="census", service="tiger", gnis_id='284370',
+         oids=['110500396700'],
+         near=(-82.5388973, 27.3261317),
+         why=("Florida DEP's pollution notices name 'Hudson Bayou' as the water reached (1 report, Sarasota). NHDPlus "
+              "V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS lists Hudson Bayou "
+              "(feature 284370, class Bay, Sarasota County) at 27.32613 N 82.53890 W, and this record is the Census "
+              "TIGER/Line area water polygon it names 'Hudson Byu', 2646 m from the nearest report point.")),
+    dict(name='Toms Bayou', state="FL", kind="bay", source="census", service="tiger", gnis_id='292349',
+         oids=['11095229808'],
+         near=(-86.4961428, 30.5021058),
+         aliases=["Tom's Bayou"],
+         why=("Florida DEP's pollution notices name 'Toms Bayou' / 'Tom's Bayou' as the water reached (2 reports, "
+              "Valparaiso). NHDPlus V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS "
+              "lists Toms Bayou (feature 292349, class Bay, Okaloosa County) at 30.50211 N 86.49614 W, and this record "
+              "is the Census TIGER/Line area water polygon it names 'Toms Byu', 31 m from the nearest report point.")),
+    dict(name='Dickson Bay', state="FL", kind="bay", source="census", service="tiger", gnis_id='304105',
+         oids=['110372433197'],
+         near=(-84.3556494, 29.9886776),
+         why=("Florida DEP's pollution notices name 'Dickson Bay' as the water reached (1 report, Panacea). NHDPlus "
+              "V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS lists Dickson Bay "
+              "(feature 304105, class Bay, Wakulla County) at 29.98868 N 84.35565 W, and this record is the Census "
+              "TIGER/Line area water polygon it names 'Dickson Bay', 5929 m from the nearest report point.")),
+    dict(name='Warner East Bayou', state="FL", kind="bay", source="census", service="tiger", gnis_id='294189',
+         oids=['110436239047'],
+         gnis_point=(-82.6153879, 27.5071444),
+         near=(-82.6153879, 27.5071444),
+         aliases=['Warner Bayou', 'Warners Bayou', "Warner's Bayou"],
+         why=("Florida DEP's pollution notices name 'Warners Bayou' / 'Warner's Bayou' as the water reached (3 reports, "
+              "Bradenton). NHDPlus V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS "
+              "lists Warner East Bayou (feature 294189, class Lake, Manatee County) at 27.50714 N 82.61539 W, and this "
+              "record is the Census TIGER/Line area water polygon that holds that point, 59 m from the nearest report "
+              "point. The Census names the polygon 'Warner Byu' and GNIS's Warner East Bayou lies inside it.")),
+    dict(name='Warner West Bayou', state="FL", kind="bay", source="census", service="tiger", gnis_id='292889',
+         oids=['110436239076'],
+         near=(-82.6228651, 27.5085022),
+         aliases=['Warners West Bayou'],
+         why=("Florida DEP's pollution notices name 'Warners West Bayou' as the water reached (1 report, Bradenton). "
+              "NHDPlus V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS lists Warner "
+              "West Bayou (feature 292889, class Lake, Manatee County) at 27.50850 N 82.62287 W, and this record is the "
+              "Census TIGER/Line area water polygon it names 'Warner W Byu', 44 m from the nearest report point.")),
+    dict(name='Johns Pass', state="FL", kind="bay", source="census", service="tiger", gnis_id='284857',
+         oids=['11029550562136'],
+         gnis_point=(-82.7817686, 27.7836375),
+         near=(-82.7817686, 27.7836375),
+         aliases=["John's Pass", "Intracoastal Waterway of John's Pass"],
+         why=("Florida DEP's pollution notices name 'Johns Pass' / 'Intracoastal Waterway of John's Pass' as the water "
+              "reached (2 reports, Madeira Beach, St. Petersburg). NHDPlus V2.1 and the NHD high-resolution flowlines "
+              "carry no water of that name there; GNIS lists Johns Pass (feature 284857, class Channel, Pinellas "
+              "County) at 27.78364 N 82.78177 W, and this record is the Census TIGER/Line area water polygon that holds "
+              "that point (the Census gives it no name), 204 m from the nearest report point.")),
+    dict(name='Clearwater Bay', state="FL", kind="bay", source="census", service="tiger", gnis_id='297360',
+         oids=['11098597690'],
+         near=(-82.8218934, 27.9720747),
+         why=("Florida DEP's pollution notices name 'Clearwater Bay' as the water reached (1 report, Belleair Beach). "
+              "NHDPlus V2.1 and the NHD high-resolution flowlines carry no water of that name there; GNIS lists "
+              "Clearwater Bay (feature 297360, class Bay, Pinellas County) at 27.97207 N 82.82189 W, and this record is "
+              "the Census TIGER/Line area water polygon it names 'Clearwater Bay', 1761 m from the nearest report "
+              "point. GNIS's point lies 737 m from the polygon the Census names Clearwater Bay.")),
 ]
 
 
@@ -2585,10 +2748,62 @@ def build_hr(spec: dict, nhd: Nhd) -> tuple[dict | None, str]:
     return rec, ""
 
 
+def build_tiger(spec: dict, nhd: Nhd) -> tuple[dict | None, str]:
+    """(record without slug, problem): a hand record from the Census TIGER/Line hydrography (TIGERweb Hydro): the area
+    water polygons with the spec's TIGER ids (oids, layer 1), or the linear water features (line_oids, layer 0). The
+    spec's gnis_id and gnis_point (the USGS GNIS feature of the water's name and its primary point) are the evidence
+    that a polygon the Census leaves unnamed is the named water: the polygon holds that point."""
+    state = spec["state"]
+    area = bool(spec.get("oids"))
+    ids = [str(x) for x in (spec.get("oids") or spec.get("line_oids") or [])]
+    if not ids:
+        return None, f"hand record {spec['name']} ({state}): no TIGER ids given"
+    fs = arcgis(nhd.http, "tiger-hand", TIGER_AREA if area else TIGER_LINE, service=TIGER_HYDRO,
+                where="OID IN (" + ",".join(f"'{x}'" for x in ids) + ")", outFields="OID,NAME,MTFCC",
+                maxAllowableOffset="0.00005")
+    got = {str(f.get("OID")) for f in fs}
+    missing = [x for x in ids if x not in got]
+    if missing:
+        return None, f"hand record {spec['name']} ({state}): TIGER features {missing} not returned"
+    geom = to_geom_area(fs, state, nhd.states) if area else to_geom_line(fs, state, nhd.states)
+    if geom is None or geom.is_empty:
+        return None, f"hand record {spec['name']} ({state}): the TIGER features have no geometry in {state}"
+    if area and spec.get("gnis_point"):
+        lon, lat = spec["gnis_point"]
+        if dist_m(geom, lon, lat) > GNIS_POINT_M:
+            return None, (f"hand record {spec['name']} ({state}): the GNIS point ({lat}, {lon}) lies "
+                          f"{dist_m(geom, lon, lat):.0f} m from the TIGER polygons, more than {GNIS_POINT_M} m")
+    names = sorted({f.get("NAME") for f in fs} - {None, ""})
+    mtfcc = sorted({f.get("MTFCC") for f in fs} - {None, ""})
+    b = geom.bounds
+    layer = "layer 1 'Areal Hydrography'" if area else "layer 0 'Linear Hydrography'"
+    gnis = (f"; the name and place from the USGS Geographic Names Information System, feature {spec['gnis_id']}"
+            + (f" (primary point {spec['gnis_point'][1]}, {spec['gnis_point'][0]}, {GNIS_POINT_M} m or less from the "
+               f"polygons)" if spec.get("gnis_point") else "") if spec.get("gnis_id") else "")
+    rec = {"name": spec["name"], "kind": spec.get("kind") or kind_of(spec["name"], "wb" if area else "line"),
+           "state": state, "towns": nhd.towns.along(state, geom),
+           "bbox": [round(b[0], 5), round(b[1], 5), round(b[2], 5), round(b[3], 5)], "wikidata": None, "charted": None,
+           "length_km": None if area else round(WX.length_km(geom), 2),
+           "area_km2": round(WX.area_km2(geom), 3) if area else None, "launches": [], "advisories": [],
+           "aliases": [], "source": "census", "gnis_id": str(spec["gnis_id"]) if spec.get("gnis_id") else None,
+           "comids": [], "nhd_fcodes": [], "tiger_ids": ids, "fetched_at": now_iso(), "towns_from": TOWNS_FROM(state),
+           "note": (f"U.S. Census Bureau TIGER/Line hydrography (TIGERweb Hydro, {layer}): {len(fs)} feature"
+                    f"{'s' if len(fs) != 1 else ''} {', '.join(ids)} (MTFCC {', '.join(mtfcc) or 'not given'}; "
+                    f"named {' / '.join(repr(n) for n in names) if names else 'nothing'} by the Census), cut to the "
+                    f"state and simplified to ~10 m{gnis}. Hand record: {spec['why']}"),
+           "_geom": geom}
+    return rec, ""
+
+
 def build_hand(spec: dict, nhd: Nhd, http: Http) -> tuple[dict | None, str]:
     """(record without slug, problem): one HAND record."""
     state = spec["state"]
-    if spec["source"] == "nhd" and spec.get("service") == "hr":
+    if spec["source"] == "census" and spec.get("service") == "tiger":
+        rec, problem = build_tiger(spec, nhd)
+        if rec is None:
+            return None, problem
+        geom = rec["_geom"]
+    elif spec["source"] == "nhd" and spec.get("service") == "hr":
         rec, problem = build_hr(spec, nhd)
         if rec is None:
             return None, problem
@@ -3074,7 +3289,9 @@ class Run:
             self.feats[rec["_key"]] = rec
             seen = set()
             how = (f"hand record ({rec['source']}: " +
-                   (f"{'NHD high resolution ' if spec.get('service') == 'hr' else ''}GNIS {spec['gnis_id']}" if spec.get("gnis_id")
+                   (f"Census TIGER/Line hydrography {', '.join(rec.get('tiger_ids') or [])}"
+                    + (f", GNIS {spec['gnis_id']}" if spec.get("gnis_id") else "") if spec.get("service") == "tiger"
+                    else f"{'NHD high resolution ' if spec.get('service') == 'hr' else ''}GNIS {spec['gnis_id']}" if spec.get("gnis_id")
                     else "NHD high resolution flowline" if spec.get("pids") else "OSM ways") + ")")
             for n in [spec["name"]] + list(spec.get("aliases") or []):
                 for t, row in by_key.get((spec["state"], compact(n)), []):
@@ -3535,9 +3752,14 @@ def main(argv=None):
                          "again against the water records and aliases on disk (a name an alias or rule now gives to a "
                          "record moves to resolved; the reasons of names that are no water are refreshed); a name that "
                          "needs a build keeps the last build's outcome, or waits for the next --names run")
+    ap.add_argument("--hand-only", action="store_true",
+                    help="with --names: no NHD or OSM request; only the state's hand records (HAND) are built and "
+                         "attached to the names they carry; every other name keeps the last build's outcome")
     args = ap.parse_args(argv)
     if args.recheck and not args.names:
         ap.error("--recheck needs --names")
+    if args.hand_only and not args.names:
+        ap.error("--hand-only needs --names")
     if args.names:
         if args.rebuild or args.osm_only or args.tidy or (args.state and len(args.state) > 1):
             ap.error("--names takes one --state and no --rebuild, --osm-only or --tidy")
@@ -4411,6 +4633,8 @@ def names_main(args) -> int:
           f"{len(skipped_reason)} no water", flush=True)
     if getattr(args, "recheck", False):
         return names_recheck(path, meta, state, rows, targets, done, skipped_reason, resolver)
+    if getattr(args, "hand_only", False):
+        return names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason, existing)
     if args.targets_only:
         print_targets(targets, None)
         for (st, text), why in sorted(skipped_reason.items()):
@@ -4528,6 +4752,55 @@ def names_main(args) -> int:
     elif run.osm_queue:
         for t, row in run.osm_queue:
             row["reason"] = f"{row['reason']}; OSM fallback not tried ({run.stopped})"
+    # the state's hand records (HAND), each attached to the names it carries: a name the passes above left without a
+    # record gets it (Florida's bays and bayous from the Census TIGER/Line hydrography, 2026-11-04)
+    by_key = {r.get("_key"): r for r in run.rows}
+    run.hand_pass([(t, by_key[t["key"]]) for t in targets if t["key"] in by_key])
+    return names_finish(args, path, meta, state, rows, targets, done, skipped_reason, existing, shapes, http, run)
+
+
+def names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason, existing) -> int:
+    """--names FILE --state XX --hand-only: no NHD or OSM request; the state's hand records (HAND) are built (their
+    own sources: the Census TIGER/Line hydrography, NHD by GNIS id, OSM ways by id) and attached to the names they
+    carry, and every other name keeps the outcome of the last build's row (as --recheck does), so a hand record can be
+    added without asking NHD again for every name the state's reports give."""
+    previous = [r for r in (read_json(OUT) or {}).get("targets") or [] if r.get("from") == REPORT_ROWS
+                and r.get("state") == state]
+    last = {compact(r["name"]): r for r in previous if r.get("name")}
+    http = Http(args.refresh, args.offline, max_requests=args.max_requests,
+                deadline=time.monotonic() + args.budget_s if args.budget_s else None)
+    shapes = States()
+    towns = Towns(http)
+    nhd = Nhd(http, shapes, towns)
+    run = Run(nhd, shapes, towns, existing, args, http, skipped_reason)
+    run.only_states, run.rows_from = {state}, REPORT_ROWS
+    for t, slugs in done:
+        row = run.new_row(t)
+        row.update({"from": REPORT_ROWS, "reports": t["events"], "slugs": slugs,
+                    "how": ["already a water record: the status resolver places reports of this name on it"]})
+        run.rows.append(row)
+    pairs = []
+    for t in targets:
+        row = run.new_row(t)
+        prev = last.get(compact(t["name"]))
+        row.update({"from": REPORT_ROWS, "reports": t["events"]})
+        if prev is None:
+            row["reason"] = f"{NOT_REACHED} (a hand-only run asks no NHD); the next --names run asks NHD"
+        else:
+            row.update({k: list(prev[k]) if isinstance(prev[k], list) else prev[k]
+                        for k in ("slugs", "how", "reason", "defined_by", "places_failed") if k in prev})
+        run.rows.append(row)
+        pairs.append((t, row))
+    try:
+        towns.load(state)
+    except BudgetExhausted as ex:
+        run.stopped = str(ex)
+    run.hand_pass(pairs)
+    return names_finish(args, path, meta, state, rows, targets, done, skipped_reason, existing, shapes, http, run)
+
+
+def names_finish(args, path, meta, state, rows, targets, done, skipped_reason, existing, shapes, http, run) -> int:
+    """The end of a --names run: slugs, checks, the merged write and the names file rewritten."""
     recs = [r for r in run.feats.values() if not r.get("_existing")]
     for r in recs:
         if not r["towns"]:
