@@ -1,0 +1,79 @@
+{
+ "displayFieldName": "LOCATION",
+ "geometryType": "esriGeometryPoint",
+ "spatialReference": {
+  "wkid": 4326
+ },
+ "fields": [
+  {
+   "name": "OBJECTID"
+  },
+  {
+   "name": "OWNER"
+  },
+  {
+   "name": "OUTFALL_CITY"
+  },
+  {
+   "name": "WATERWAY_REACH"
+  },
+  {
+   "name": "LOCATION"
+  },
+  {
+   "name": "last_edited_date"
+  },
+  {
+   "name": "GlobalID"
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 1,
+    "OWNER": "Chicago",
+    "OUTFALL_CITY": "Chicago",
+    "WATERWAY_REACH": "NSC Lower (NSWRP)",
+    "LOCATION": "Sample Ave (E)",
+    "last_edited_date": 1783200379000,
+    "GlobalID": "{00000000-0000-0000-0000-000000000001}",
+    "last_edited_user": "jdoe_sample",
+    "Editor": "Jane Doe"
+   },
+   "geometry": {
+    "x": -87.7,
+    "y": 42.0
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 2,
+    "OWNER": "MWRD",
+    "OUTFALL_CITY": "Wilmette",
+    "WATERWAY_REACH": "NSC Upper (NSWRP)",
+    "LOCATION": "Wilmette Gate",
+    "last_edited_date": 1783203000000,
+    "GlobalID": "{00000000-0000-0000-0000-000000000002}"
+   },
+   "geometry": {
+    "x": -87.684557,
+    "y": 42.075959
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 3,
+    "OWNER": "Sample Park",
+    "OUTFALL_CITY": "Sample Park",
+    "WATERWAY_REACH": "DesPlaines Middle",
+    "LOCATION": "Example St (W)",
+    "last_edited_date": null,
+    "GlobalID": "{00000000-0000-0000-0000-000000000003}"
+   },
+   "geometry": {
+    "x": -87.85,
+    "y": 41.9
+   }
+  }
+ ]
+}
