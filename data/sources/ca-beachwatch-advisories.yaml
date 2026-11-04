@@ -1,0 +1,38 @@
+id: "ca-beachwatch-advisories"
+name: "Beach Watch: Beach Advisories (Postings and Closures) and Beach Water Quality Monitoring (data.ca.gov)"
+url: "https://data.ca.gov/dataset/beach-water-quality-postings-and-closures"
+homepage: "https://data.ca.gov/dataset/beach-water-quality-postings-and-closures"
+kind: "api"
+level: "state"
+# Feed row: the source id written by pipeline/ingest/ca_beachwatch.py
+#   (data/build/events/ca-beachwatch-advisories.json); the research row has the same id.
+# Built 2026-11-04: one package_show an hour; when the table changes, the advisories of the last two
+#   years (datastore SQL); `--backfill` reads all since 1985. Postings, closures and rain advisories
+#   with their cause; an open advisory ages from the date the table is current to.
+# Notes (research/ca, status used, verified fetched, checked 2026-11-04): Read by
+#   pipeline/ingest/ca_beachwatch.py when the table changes (last two years each time; --backfill
+#   since 1985): county postings and closures with cause. Months behind (newest 2026-03-06 on
+#   2026-11-04): history, not current status.
+# Access detail (research, quoted): CKAN datastore resource d5cd6a23-829c-426d-a63e-689a55a3db9c
+#   (advisories, 35,748 rows, 1985 to 2026-03-06) and 7bd961cf-abe4-433b-8033-378161237ff3 (bacteria
+#   results); datastore_search and datastore_search_sql work without a key. Sample
+#   raw/beach-advisories-sample.json (contact-person fields removed).
+# Can fill: source_record_id, event_type, started_at, ended_at (DateOpened), waterbody, coordinates
+#   (station), authority, advice_text (type)
+# Cannot fill: valid_until; published_at
+# Waters: coastal beaches statewide plus bays
+# History: 1985 to 2026-03; closures for Sewage Spill 636, Combined Sewer Overflow 814 postings + 18
+#   closures, Line Break 131, Pump Station Failure 80, Tijuana River 404.
+# Research notes: Contact-person and agency comment fields carry staff names: drop them at ingest.
+cadence: "Resource last modified 2026-10-01 but newest advisory is dated 2026-03-06: about seven months behind. Monthly republish."
+license: "Open Data Commons Attribution License (CKAN metadata)."
+attribution: "State Water Resources Control Board (data from county health agencies)"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure", "rain_advisory"]
+states: ["CA"]
+access: ["api", "csv"]
+access_detail: "CKAN datastore resource d5cd6a23-829c-426d-a63e-689a55a3db9c (advisories, 35,748 rows, 1985 to 2026-03-06) and 7bd961cf-abe4-433b-8033-378161237ff3 (bacteria results); datastore_search and datastore_search_sql work without a key. Sample raw/beach-advisories-sample.json (contact-person fields removed)."
+machine_readable: true
+legal_basis: "HSC 115880-115915"
+checked: "2026-11-04"

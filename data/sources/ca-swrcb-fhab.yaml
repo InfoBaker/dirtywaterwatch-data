@@ -1,0 +1,35 @@
+id: "ca-swrcb-fhab"
+name: "Surface Water - Freshwater Harmful Algal Blooms (FHAB bloom reports, cases, advisories)"
+url: "https://data.ca.gov/dataset/surface-water-freshwater-harmful-algal-blooms"
+homepage: "https://data.ca.gov/dataset/surface-water-freshwater-harmful-algal-blooms"
+kind: "arcgis"
+level: "state"
+# Feed row: the source id written by pipeline/ingest/ca_swrcb_fhab.py
+#   (data/build/events/ca-swrcb-fhab.json); the research row has the same id.
+# Built 2026-11-04: one package_show an hour; the table (safe fields only, about 3 MB) when its
+#   last_modified changes. Caution, Warning, Danger and mat-alert advisories become hab_advisory
+#   records (active, or lifted at the advisory's end or the closed case's end); new reports not yet
+#   assessed are unknown; reports with no advisory are counted, not shown.
+# Notes (research/ca, status used, verified fetched, checked 2026-11-04): Read by
+#   pipeline/ingest/ca_swrcb_fhab.py when the table changes (about daily): Caution, Warning, Danger
+#   and mat-alert advisories (1,304 on 2026-11-04) and new reports not yet assessed; reports with no
+#   advisory counted, not shown. Blooms, not sewage.
+# Access detail (research, quoted): CKAN datastore c6a36b91-ad38-4611-8750-87ee99e497dd (bloom
+#   reports, 3,733 rows, updated 2026-10-31), plus cases, responses, results. Fields include
+#   Bloom_Report_ID, Observation_Date, Water_Body_Name, Bloom_Latitude/Longitude,
+#   Advisory_Recommended (Caution/Warning/Danger), AdvisoryStartDate, AdvisoryEndDate. Public
+#   incident map at mywaterquality.ca.gov/habs (not fetched).
+# Waters: statewide freshwater
+# Research notes: Reporter name/email/phone columns exist in some resources; never ingest them.
+cadence: "CKAN republish about weekly; the map is near real time."
+license: "CKAN dataset licence not read; data.ca.gov default is ODC-By (inferred)"
+attribution: "State Water Resources Control Board (CCHAB)"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["CA"]
+access: ["api", "csv", "arcgis"]
+access_detail: "CKAN datastore c6a36b91-ad38-4611-8750-87ee99e497dd (bloom reports, 3,733 rows, updated 2026-10-31), plus cases, responses, results. Fields include Bloom_Report_ID, Observation_Date, Water_Body_Name, Bloom_Latitude/Longitude, Advisory_Recommended (Caution/Warning/Danger), AdvisoryStartDate, AdvisoryEndDate. Public incident map at mywaterquality.ca.gov/habs (not fetched)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-04"

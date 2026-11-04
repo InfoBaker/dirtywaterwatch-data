@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1237 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1260 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -30,7 +30,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | fl | 5 | 0 | 5 | 1 | 0 | 11 |
 | mi | 6 | 2 | 5 | 2 | 0 | 15 |
 | wa | 5 | 4 | 4 | 1 | 0 | 14 |
-| **all** | **434** | **223** | **342** | **177** | **61** | **1237** |
+| ca | 9 | 1 | 10 | 3 | 0 | 23 |
+| **all** | **443** | **224** | **352** | **180** | **61** | **1260** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1368,3 +1369,31 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `wa-kc-swimming-beach-bacteria` | King County swimming beach bacteria monitoring | watch | search_only | monitoring | Lake beaches; not fetched. |
 | `wa-spokane-annual-cso` | City of Spokane annual CSO reports | watch | search_only | monitoring | Annual totals per outfall (2015-2017 PDFs seen in search). |
 | `wa-ecology-erts` | Ecology Environmental Report Tracking System (ERTS) | rejected | search_only | events | Intake system for complaints and spill reports; no public list found; the sewage spill website is its public output for permitted facilities. |
+
+## ca: California (23)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ca-beachwatch-advisories` | Beach Watch: Beach Advisories (Postings and Closures) and Beach Water Quality Monitoring (data.ca.gov) | used | fetched | advisories | Read by pipeline/ingest/ca_beachwatch.py when the table changes (last two years each time; --backfill since 1985): county postings and closures with cause. Months behind (newest 2026-03-06 on 2026-11-04): history, not current status. |
+| `ca-go-2022-0103-dwq` | Statewide Sanitary Sewer Systems General Order WQ 2022-0103-DWQ (effective 2023-06-05), Attachment E1 | used | fetched | law | Defines categories and deadlines: Cat 1 = any volume reaching surface water; Cat 2 >= 1,000 gal not reaching water; Cat 3 50 to 999 gal; Cat 4 < 50 gal. |
+| `ca-hsc-115885` | Health and Safety Code 115885 and 17 CCR 7956-7961 (AB 411 beach posting and closure) | used | fetched | law | The public duty in California: the health officer posts and closes beaches after a known sewage release and runs a closure hotline. |
+| `ca-hsc-5411-5` | Health and Safety Code 5411.5 (notice to local health officer) | used | fetched | law | Duty to tell the health officer, not the public. |
+| `ca-sacramento-css-permit` | City of Sacramento Combined Wastewater Collection and Treatment System, Order R5-2026-0003 (NPDES CA0079111) | used | fetched | permits | Read the public notification clause. |
+| `ca-sfpuc-beach-map` | SFPUC San Francisco Beach Water Quality map (combined sewer discharge flags) and getBeaches service | used | fetched | events | Read hourly by pipeline/ingest/ca_sfpuc_beaches.py as a snapshot: the combined sewer discharge sign per station (SFPUC's own 24-72 hour window, red while shown) and the postings (beach advisories). 20 stations, no flag on 2026-11-04. |
+| `ca-swrcb-ciwqs-spills-flatfile` | State Water Board CIWQS Sanitary Sewer System spill data: Cat1-2-3-Spills.txt (nightly flat file) | used | fetched | events | Statewide, event-level, machine-readable, public: read hourly by pipeline/ingest/ca_swrcb_ciwqs_spills.py (If-Modified-Since: the file changes once a day; 3,567 spills since June 2023 on 2026-11-04 with the backfill: 1,284 Category 1 shown, 459 Category 2 and 1,824 Category 3 kept as reaching no water). Narrative and certifier columns never read. |
+| `ca-swrcb-fhab` | Surface Water - Freshwater Harmful Algal Blooms (FHAB bloom reports, cases, advisories) | used | fetched | advisories | Read by pipeline/ingest/ca_swrcb_fhab.py when the table changes (about daily): Caution, Warning, Danger and mat-alert advisories (1,304 on 2026-11-04) and new reports not yet assessed; reports with no advisory counted, not shown. Blooms, not sewage. |
+| `ca-water-code-13271` | Water Code 13271 and 23 CCR 2250 (Cal OES notification, 1,000 gallons) | used | search_only | law | Regulator notice: 1,000 gallons or more of sewage to waters of the State to Cal OES; Cal OES then tells the regional board and the health officer. |
+| `ca-sd-regional-board-ibwc-spills` | San Diego Water Board: USIBWC Spill Events and Transboundary Flow Events from Mexico | candidate | fetched | events | The shared-water (US-Mexico) case the owner's rule covers; small HTML table, poll weekly. |
+| `ca-caloes-spill-reports` | Cal OES Hazardous Materials Spill Reports | watch | search_only | events | Potentially faster (hours) than CIWQS for >= 1,000 gal; format and reuse unconfirmed. |
+| `ca-heal-the-bay` | Heal the Bay Beach Report Card and River Report Card | watch | search_only | prior_art | Prior art: weekly grades; their app shows closures. |
+| `ca-lacounty-beach` | Los Angeles County Public Health ocean water quality and beach closures | watch | search_only | advisories | Closures for sewage spills in LA County; not fetched in the time box. LA County also publishes 'sewage discharge reporting guidelines'. |
+| `ca-ocbeachinfo` | Orange County Health Care Agency ocean and bay water closures (ocbeachinfo.com) | watch | search_only | advisories | Sewage-spill closures with extent; not fetched. |
+| `ca-sdcoastkeeper-swim-guide` | San Diego Coastkeeper beach advisories (Swim Guide affiliate) | watch | search_only | prior_art | Republishes county closures; prior art. |
+| `ca-sdcounty-beachinfo` | San Diego County DEHQ beach and bay status (sdbeachinfo.com) | watch | fetched | advisories | Live closures (incl. sewage and Tijuana closures) but no documented API; Beach Watch carries the same records later. The prompt's 'API' lead was not confirmed. |
+| `ca-sf-beach-wq-opendata` | DataSF Beach Water Quality Monitoring (v3fv-x3ux) | watch | fetched | monitoring | Bacteria results; context. |
+| `ca-swrcb-plps-spills` | plps_spills.txt (private lateral and private system spills, voluntary) | watch | fetched | events | Voluntary, small, privacy-sensitive. |
+| `ca-swrcb-sewer-overflows-arcgis` | Water Boards ArcGIS MapServer Water_Quality/Sewer_Overflows | watch | fetched | events | Bot-walled to scripts; the nightly flat file carries the same points. |
+| `ca-swrcb-sso-monthly-counts` | neworder_monthly_counts.txt and annualReports.txt (SSS WDR) | watch | fetched | monitoring | Context only (monthly/annual totals per enrollee). |
+| `ca-epa-sobe` | EPA eRule SOBE extract (California permittees) | rejected | inferred | events | 0 California events on 2026-11-03: California reports SSOs to CIWQS, not NeT-SewerOverflow. |
+| `ca-swrcb-ciwqs-interactive-sso-report` | CIWQS Interactive Sanitary Sewer System Spill Report | rejected | search_only | events | Form-driven HTML; the flat file has the same records. |
+| `ca-swrcb-sso-incident-map` | Sanitary Sewer Systems Spills Incident Map (public and private-lateral maps) | rejected | fetched | events | Duplicate of the flat file and bot-walled; use the flat file. |

@@ -4212,6 +4212,15 @@ def report_score(target_ws: list[str], gnis: str | None) -> float:
     return sc
 
 
+def safe_union(geoms):
+    """unary_union that survives an invalid NHD outline (a self-touching lake polygon raised a GEOS
+    TopologyException for Clear Lake, CA, 2026-11-04): the parts are repaired with make_valid and united again."""
+    try:
+        return unary_union(geoms)
+    except shapely.errors.GEOSException:
+        return unary_union([shapely.make_valid(g) for g in geoms])
+
+
 def report_name_choices(nhd: Nhd, t) -> tuple[list[tuple], str | None, list[dict]]:
     """([(feature key, choice, how)], reason when none, places that found none): the NHDPlus V2.1 features of the
     target's name in the state (prefetch_names), the one nearest each place the reports give: each cluster of their
@@ -4241,7 +4250,7 @@ def report_name_choices(nhd: Nhd, t) -> tuple[list[tuple], str | None, list[dict
             return {"type": "line", "gnis_id": k[1], "gnis_name": f["gnis_name"], "comid": f["comid"]}
         return {"type": "wb", "comid": f["comid"], "gnis_id": f.get("gnis_id"), "gnis_name": f.get("gnis_name"),
                 "ftype": f.get("ftype")}
-    geoms = {k: unary_union([f["_geom"] for f in fs if f["_geom"] is not None]) for k, fs in groups.items()}
+    geoms = {k: safe_union([f["_geom"] for f in fs if f["_geom"] is not None]) for k, fs in groups.items()}
     several = f" ({len(groups)} waters of that name in {st})" if len(groups) > 1 else ""
     points = [(Point(lon, lat), f"the reports' point ({lat:.5f}, {lon:.5f})", NEAR_M, {"lon": lon, "lat": lat})
               for lon, lat in cluster_points(t["points"], n=6, sep_m=NEAR_M)]

@@ -1,0 +1,29 @@
+id: "ca-sd-regional-board-ibwc-spills"
+name: "San Diego Water Board: USIBWC Spill Events and Transboundary Flow Events from Mexico"
+url: "https://www.waterboards.ca.gov/sandiego/water_issues/programs/tijuana_river_valley_strategy/sewage_issue.html"
+homepage: "https://www.waterboards.ca.gov/sandiego/water_issues/programs/tijuana_river_valley_strategy/sewage_issue.html"
+kind: "html"
+level: "state"
+# Notes (research/ca, status candidate, verified fetched, checked 2026-11-03): The shared-water
+#   (US-Mexico) case the owner's rule covers; small HTML table, poll weekly.
+# Access detail (research, quoted): HTML table: Start Date, End Date, Event Type, Discharge
+#   Location, Approximate Discharge Volume, Volume Recovered, Notes. Latest rows 2026-03-13/15;
+#   'updated, if needed, approximately once a week'; page last updated 5/27/26.
+# Can fill: started_at, ended_at, waterbody, volume, location_text
+# Cannot fill: coordinates; stable id
+# Waters: Tijuana River, Smuggler's Gulch, Goat Canyon, Stewart's Drain, Pacific Ocean at Imperial
+#   Beach
+# Research notes: USIBWC also sends a listserv alert (search_only); Tijuana River flow on
+#   waterdata.ibwc.gov.
+cadence: null
+license: "none stated"
+attribution: "San Diego Regional Water Quality Control Board (data from USIBWC)"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["CA"]
+access: ["html"]
+access_detail: "HTML table: Start Date, End Date, Event Type, Discharge Location, Approximate Discharge Volume, Volume Recovered, Notes. Latest rows 2026-03-13/15; 'updated, if needed, approximately once a week'; page last updated 5/27/26."
+machine_readable: false
+legal_basis: "NPDES CA0108928 (USIBWC South Bay plant); IBWC Minute 320/328"
+checked: "2026-11-03"

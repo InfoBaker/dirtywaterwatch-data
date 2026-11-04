@@ -365,6 +365,8 @@ def barrier_for(r: dict) -> tuple[str | None, str | None]:
         return None, "an app only (Swim Guide): no web page of its own, but no login wall either"
     if kind == "lights_signs_page":
         return "signs_only", None
+    if "hotline only" in low or "by telephone only" in low:
+        return "phone_only", None
     if "answers 403" in low:
         return "bot_wall", None
     if "varies by town" in low or "town pages not surveyed" in low:
