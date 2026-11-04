@@ -1,0 +1,5165 @@
+{
+ "state": "LA",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:49Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 126,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 3,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 1,
+  "permittee_name_removed": 0,
+  "by_legal_form_proposed": {
+   "business or industrial": 42,
+   "campground or resort": 1,
+   "homeowners' association": 1,
+   "investor-owned utility": 77,
+   "mobile-home park": 1,
+   "not stated by the names": 2,
+   "private club": 2
+  },
+  "public_by_name": 1
+ },
+ "candidates": [
+  {
+   "npdes_permit": "LA0032221",
+   "state": "LA",
+   "facility": "AMERICAN WATER OPERATIONS AND MAINTENANCE, LLC. - SOUTH FORT POLK WWTP",
+   "permittee_as_recorded": "American Water Operations and Maintenance, LLC. - South Fort Polk WWTP",
+   "county": "VERNON",
+   "city": "FORT POLK",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2021-04-01",
+   "permit_expiration": "2026-03-31",
+   "receiving_waters_echo": [
+    "DRAKES CK-OUISKA CHITTO-CALCASIEU"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0032221"
+  },
+  {
+   "npdes_permit": "LA0032239",
+   "state": "LA",
+   "facility": "AMERICAN WATER OPERATIONS AND MAINTENANCE, LLC. - NORTH FORT POLK WWTP",
+   "permittee_as_recorded": "American Water Operations and Maintenance, LLC. - North Fort Polk WWTP",
+   "county": "VERNON",
+   "city": "FORT POLK",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2023-07-15",
+   "permit_expiration": "2028-07-14",
+   "receiving_waters_echo": [
+    "3D"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0032239"
+  },
+  {
+   "npdes_permit": "LA0038091",
+   "state": "LA",
+   "facility": "SEWERAGE & WATER BOARD OF NEW ORLEANS - EAST BANK STP",
+   "permittee_as_recorded": "Sewerage & Water Board of New Orleans - East Bank STP",
+   "county": "ORLEANS",
+   "city": "NEW ORLEANS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2031-02-28",
+   "receiving_waters_echo": [
+    "MISSISSIPPI RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0038091"
+  },
+  {
+   "npdes_permit": "LA0039993",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- GREEN ACRES",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "VERNON",
+   "city": "DERIDDER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [
+    "FLAT CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0039993"
+  },
+  {
+   "npdes_permit": "LA0044377",
+   "state": "LA",
+   "facility": "BEAU CHENE WASTEWATER TREATMENT FACILITY",
+   "permittee_as_recorded": "BEAU CHENE HOMEOWNERS ASSOCIATION INC.",
+   "county": "ST. TAMMANY",
+   "city": "MANDEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6531"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-05-01",
+   "permit_expiration": "2028-04-30",
+   "receiving_waters_echo": [
+    "BAYOU L'OURS"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0044377"
+  },
+  {
+   "npdes_permit": "LA0045446",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- EDEN ISLES",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "ST. TAMMANY",
+   "city": "SLIDELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2024-10-01",
+   "permit_expiration": "2029-09-30",
+   "receiving_waters_echo": [
+    "GRAND LAGOON LAKE PONTCHARTRAIN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0045446"
+  },
+  {
+   "npdes_permit": "LA0049344",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC - TWIN OAKS WWTP",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC - MAISON TRACE SUBDIVISION",
+   "county": "LAFOURCHE",
+   "city": "RACELAND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2018-10-01",
+   "permit_expiration": "2023-09-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0049344"
+  },
+  {
+   "npdes_permit": "LA0049379",
+   "state": "LA",
+   "facility": "TCHEFUNCTA CLUB ESTATES, INC.- TCE AERATED LAGOON",
+   "permittee_as_recorded": "Tchefuncta Club Estates, Inc.- TCE Aerated Lagoon",
+   "county": "ST. TAMMANY",
+   "city": "COVINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "private club",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-12-01",
+   "permit_expiration": "2027-11-30",
+   "receiving_waters_echo": [
+    "BORROW C-TCHEFUNTA R-PONTCHARTRAIN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0049379"
+  },
+  {
+   "npdes_permit": "LA0049794",
+   "state": "LA",
+   "facility": "UTILITIES INC OF LOUISIANA - KINGSPOINT WASTEWATER TREATMENT PLANT",
+   "permittee_as_recorded": "Utilities Inc of Louisiana - Kingspoint Wastewater Treatment Plant",
+   "county": "ST. TAMMANY",
+   "city": "SLIDELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.852,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "W-14 Canal"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0049794"
+  },
+  {
+   "npdes_permit": "LA0050351",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - RESOLVE SYSTEMS WASTEWATER TREATM",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Resolve Systems Wastewater Treatm",
+   "county": "ST. TAMMANY",
+   "city": "SLIDELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.734,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "FRENCH BRANCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0050351"
+  },
+  {
+   "npdes_permit": "LA0051179",
+   "state": "LA",
+   "facility": "MAGNOLIA FOREST SUBDIVISION",
+   "permittee_as_recorded": "UTILITIES INC., OF LOUISIANA",
+   "county": "ST. TAMMANY",
+   "city": "SLIDELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-01",
+   "permit_expiration": "2028-07-31",
+   "receiving_waters_echo": [
+    "GUM BAYOU"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0051179"
+  },
+  {
+   "npdes_permit": "LA0052078",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC - OAKWOOD REGIONAL WWT FACILITY",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC - OAKWOOD REGIONAL WWT FACILITY",
+   "county": "OUACHITA",
+   "city": "MONROE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-01",
+   "permit_expiration": "2028-08-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0052078"
+  },
+  {
+   "npdes_permit": "LA0054500",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - MAGNOLIA HILLS SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Magnolia Hills Subdivision",
+   "county": "LAFAYETTE",
+   "city": "CARENCRO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0288,
+   "major_minor": "Minor",
+   "permit_effective": "2025-04-01",
+   "permit_expiration": "2030-03-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0054500"
+  },
+  {
+   "npdes_permit": "LA0055310",
+   "state": "LA",
+   "facility": "UTILITIES INC OF LOUISIANA - WOODRIDGE WASTEWATER TREATMENT PLANT",
+   "permittee_as_recorded": "Utilities Inc of Louisiana - Woodridge Wastewater Treatment Plant",
+   "county": "ST. TAMMANY",
+   "city": "MANDEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-09",
+   "permit_expiration": "2030-07-31",
+   "receiving_waters_echo": [
+    "LOCAL DRAINAGE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0055310"
+  },
+  {
+   "npdes_permit": "LA0062804",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - CAJUN ESTATES SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Cajun Estates Subdivision",
+   "county": "LAFAYETTE",
+   "city": "BROUSSARD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.046,
+   "major_minor": "Minor",
+   "permit_effective": "2025-04-01",
+   "permit_expiration": "2030-03-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0062804"
+  },
+  {
+   "npdes_permit": "LA0062812",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - CARENCRO VILLAGE",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Carencro Village",
+   "county": "LAFAYETTE",
+   "city": "CARENCRO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0432,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0062812"
+  },
+  {
+   "npdes_permit": "LA0062847",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - FLANDER'S GARDEN SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Flander's Garden Subdivision",
+   "county": "LAFAYETTE",
+   "city": "YOUNGSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0404,
+   "major_minor": "Minor",
+   "permit_effective": "2025-05-01",
+   "permit_expiration": "2030-04-30",
+   "receiving_waters_echo": [
+    "Unnamed Tributary"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0062847"
+  },
+  {
+   "npdes_permit": "LA0065714",
+   "state": "LA",
+   "facility": "UTILITIES INC OF LOUISIANA - HUNTWYCK VILLAGE WASTEWATER TREATMENT PLANT",
+   "permittee_as_recorded": "Utilities Inc of Louisiana - Huntwyck Village Wastewater Treatment Plant",
+   "county": "ST. TAMMANY",
+   "city": "SLIDELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.278,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "Unnamed Ditch"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0065714"
+  },
+  {
+   "npdes_permit": "LA0065731",
+   "state": "LA",
+   "facility": "UTILITIES INC OF LOUISIANA - QUAIL RIDGE WASTEWATER TREATMENT PLANT",
+   "permittee_as_recorded": "Utilities Inc of Louisiana - Quail Ridge Wastewater Treatment Plant",
+   "county": "ST. TAMMANY",
+   "city": "SLIDELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.075,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "WEST PEARL RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0065731"
+  },
+  {
+   "npdes_permit": "LA0065757",
+   "state": "LA",
+   "facility": "LAKE VILLAGE WWTP",
+   "permittee_as_recorded": "UTILITIES INC., OF LOUISIANA",
+   "county": "ST. TAMMANY",
+   "city": "SLIDELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-15",
+   "permit_expiration": "2028-09-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0065757"
+  },
+  {
+   "npdes_permit": "LA0066427",
+   "state": "LA",
+   "facility": "R360-MERMENTAU TREATMENT FACILITY",
+   "permittee_as_recorded": "R360 ENVIRONMENTAL SOLUTIONS OF LOUISIANA LLC",
+   "county": "JEFFERSON DAVIS PARISH",
+   "city": "JENNINGS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "1389",
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-03-01",
+   "permit_expiration": "2027-02-28",
+   "receiving_waters_echo": [],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0066427"
+  },
+  {
+   "npdes_permit": "LA0066486",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - MAGNOLIA PARK SERVICE SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Magnolia Park Service Subdivision",
+   "county": "LAFOURCHE",
+   "city": "THIBODAUX",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-09-01",
+   "permit_expiration": "2031-08-31",
+   "receiving_waters_echo": [
+    "UNNAMED CANAL"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0066486"
+  },
+  {
+   "npdes_permit": "LA0066559",
+   "state": "LA",
+   "facility": "UTILITIES, INC. OF LA- ARROWWOOD REGIONAL WWTP",
+   "permittee_as_recorded": "Utilities, Inc. of LA- Arrowwood Regional WWTP",
+   "county": "ST. TAMMANY",
+   "city": "COVINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [
+    "ABITA RIVER, TCHEFRUNCTE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0066559"
+  },
+  {
+   "npdes_permit": "LA0066567",
+   "state": "LA",
+   "facility": "UTILITIES INC OF LOUISIANA - GREENBRIAR WWTP",
+   "permittee_as_recorded": "Utilities Inc of Louisiana - Greenbriar WWTP",
+   "county": "SAINT TAMMANY",
+   "city": "COVINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.64,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-19",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "Flowers Bayou"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0066567"
+  },
+  {
+   "npdes_permit": "LA0068730",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- GREENLEAVES",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "ST. TAMMANY",
+   "city": "MANDEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.95,
+   "major_minor": "Major",
+   "permit_effective": "2024-10-01",
+   "permit_expiration": "2029-09-30",
+   "receiving_waters_echo": [
+    "BAYOU CHINCHUBA"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0068730"
+  },
+  {
+   "npdes_permit": "LA0072265",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- LETRIOMPHE GOLF & COUNTRY CLUB",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "LAFAYETTE",
+   "city": "BROUSSARD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "private club",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-01-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [
+    "CYPRESS BAYOU/COULEE LASALLE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0072265"
+  },
+  {
+   "npdes_permit": "LA0073148",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- THE MEADOWS",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "ST. TAMMANY",
+   "city": "SLIDELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-11-01",
+   "permit_expiration": "2029-10-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0073148"
+  },
+  {
+   "npdes_permit": "LA0073946",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - DERBY HEIGHTS SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Derby Heights Subdivision",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0464,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "UNNAMED COULEE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0073946"
+  },
+  {
+   "npdes_permit": "LA0074586",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - RIVER GREEN SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - River Green Subdivision",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0428,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0074586"
+  },
+  {
+   "npdes_permit": "LA0074764",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- LANCASTER ESTATES SUBDIVISION",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-02-01",
+   "permit_expiration": "2030-01-31",
+   "receiving_waters_echo": [
+    "COULEE ILE DES CANNES"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0074764"
+  },
+  {
+   "npdes_permit": "LA0074772",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - DIAMONDHEAD ESTATES SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Diamondhead Estates Subdivision",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0402,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0074772"
+  },
+  {
+   "npdes_permit": "LA0074781",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - ILE DES CANNES",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Ile Des Cannes",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.275,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0074781"
+  },
+  {
+   "npdes_permit": "LA0074853",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - ABADIE OAKS SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Abadie Oaks Subdivision",
+   "county": "VERMILION",
+   "city": "ABBEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0436,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0074853"
+  },
+  {
+   "npdes_permit": "LA0074861",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - ROSE HILL SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Rose Hill Subdivision",
+   "county": "VERMILION",
+   "city": "ABBEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.026,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "LOCAL DRAINAGE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0074861"
+  },
+  {
+   "npdes_permit": "LA0074951",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - AVIES KNOLL SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Avies Knoll Subdivision",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.231264,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "ANSELM COULEE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0074951"
+  },
+  {
+   "npdes_permit": "LA0075086",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- CHERRYWOOD & LONE OAK PARK",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "ST. TAMMANY",
+   "city": "PEARL RIVER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "GUM BAYOU"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0075086"
+  },
+  {
+   "npdes_permit": "LA0077101",
+   "state": "LA",
+   "facility": "PATRICIAN MANAGEMENT, LLC- OLE LONDON TOWNE APARTMENTS",
+   "permittee_as_recorded": "OLD LONDON TOWNE APARTMENTS",
+   "county": "EAST BATON ROUGE",
+   "city": "BATON ROUGE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6513"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2017-08-01",
+   "permit_expiration": "2022-07-31",
+   "receiving_waters_echo": [
+    "AMITE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0077101"
+  },
+  {
+   "npdes_permit": "LA0077518",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - VICTORIA VILLAGE SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Victoria Village Subdivision",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0876,
+   "major_minor": "Minor",
+   "permit_effective": "2025-05-01",
+   "permit_expiration": "2030-04-30",
+   "receiving_waters_echo": [
+    "LOCAL DRAINAGE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0077518"
+  },
+  {
+   "npdes_permit": "LA0077917",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - THE GLADES SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - The Glades Subdivision",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.11,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0077917"
+  },
+  {
+   "npdes_permit": "LA0078051",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- FOX RUN",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-02-01",
+   "permit_expiration": "2030-01-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0078051"
+  },
+  {
+   "npdes_permit": "LA0078182",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - TREWHILL SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Trewhill Subdivision",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0292,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "Local Drainage"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0078182"
+  },
+  {
+   "npdes_permit": "LA0078204",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - HACKBERRY PLACE SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Hackberry Place Subdivision",
+   "county": "LAFAYETTE",
+   "city": "CARENCRO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0284,
+   "major_minor": "Minor",
+   "permit_effective": "2025-05-01",
+   "permit_expiration": "2030-04-30",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0078204"
+  },
+  {
+   "npdes_permit": "LA0078247",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - QUAIL HOLLOW SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Quail Hollow Subdivision",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.1236,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0078247"
+  },
+  {
+   "npdes_permit": "LA0078263",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - JACKSON SQUARE",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Jackson Square",
+   "county": "LAFAYETTE",
+   "city": "DUSON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.13484,
+   "major_minor": "Minor",
+   "permit_effective": "2025-11-01",
+   "permit_expiration": "2030-10-31",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0078263"
+  },
+  {
+   "npdes_permit": "LA0078387",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - MARION HEIGHTS SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Marion Heights Subdivision",
+   "county": "VERMILION",
+   "city": "NUNEZ",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.028,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0078387"
+  },
+  {
+   "npdes_permit": "LA0078484",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- MED SOUTH",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "SAINT LANDRY",
+   "city": "OPELOUSAS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-08-01",
+   "permit_expiration": "2027-07-31",
+   "receiving_waters_echo": [
+    "DITCH-BAYOU SYLVAIN-BAYOU BOURBEAUX"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0078484"
+  },
+  {
+   "npdes_permit": "LA0078557",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC - BAYOU GRAND WASTEWATER TREATMENT PLANT",
+   "permittee_as_recorded": "National Water Infrastructure LLC - Bayou Grand Wastewater Treatment Plant",
+   "county": "ASCENSION",
+   "city": "GONZALES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2031-02-28",
+   "receiving_waters_echo": [
+    "GRAND GOUDINE BAYOU"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0078557"
+  },
+  {
+   "npdes_permit": "LA0079294",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE, LLC - VILLA GALVEZ",
+   "permittee_as_recorded": "NATIONAL WATER INFRASTRUCTURE, LLC - VILLA GALVEZ",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2020-11-01",
+   "permit_expiration": "2025-10-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0079294"
+  },
+  {
+   "npdes_permit": "LA0081418",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- SOUTHWOOD VILLAGE",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-01",
+   "permit_expiration": "2028-07-31",
+   "receiving_waters_echo": [
+    "GRAND GOUDINE BAYOU NEW RIVER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0081418"
+  },
+  {
+   "npdes_permit": "LA0081809",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- PLANTATION TRACE",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "LAFOURCHE",
+   "city": "THIBODAUX",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-15",
+   "permit_expiration": "2028-08-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0081809"
+  },
+  {
+   "npdes_permit": "LA0081981",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- LAKE STREET",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "CALCASIEU",
+   "city": "LAKE CHARLES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2020-11-01",
+   "permit_expiration": "2025-10-31",
+   "receiving_waters_echo": [
+    "TO COULEE AGPOLYTE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0081981"
+  },
+  {
+   "npdes_permit": "LA0084425",
+   "state": "LA",
+   "facility": "VACCO INC.",
+   "permittee_as_recorded": "VACCO INC",
+   "county": "BEXAR COUNTY",
+   "city": "HOUMA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "5172"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-08-01",
+   "permit_expiration": "2026-07-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 4,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0084425"
+  },
+  {
+   "npdes_permit": "LA0101834",
+   "state": "LA",
+   "facility": "SE REGIONAL WWTF",
+   "permittee_as_recorded": "GREATER OUACHITA WATER COMPANY",
+   "county": "OUACHITA",
+   "city": "WEST MONROE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0101834"
+  },
+  {
+   "npdes_permit": "LA0105058",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE, LLC - PELICAN POINT WWTP",
+   "permittee_as_recorded": "NATIONAL WATER INFRASTRUCTURE, LLC - PELICAN POINT WWTP",
+   "county": "ASCENSION",
+   "city": "GONZALES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-05-01",
+   "permit_expiration": "2027-04-30",
+   "receiving_waters_echo": [
+    "PANAMA CANAL"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0105058"
+  },
+  {
+   "npdes_permit": "LA0105163",
+   "state": "LA",
+   "facility": "GREATER OUACHITA WATER CO - INDIAN LAKES SUBDIVISION STP",
+   "permittee_as_recorded": "Greater Ouachita Water Co - Indian Lakes Subdivision STP",
+   "county": "OUACHITA",
+   "city": "WEST MONROE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.18,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "UNNAMED CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0105163"
+  },
+  {
+   "npdes_permit": "LA0105554",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- MONTEREY",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "BARREN",
+   "city": "MANDEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0105554"
+  },
+  {
+   "npdes_permit": "LA0110485",
+   "state": "LA",
+   "facility": "NORTHEAST REGIONAL WWTP",
+   "permittee_as_recorded": "GREATER OUACHITA WATER CO.,INC",
+   "county": "LIVINGSTON",
+   "city": "WEST MONROE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-06-01",
+   "permit_expiration": "2028-05-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0110485"
+  },
+  {
+   "npdes_permit": "LA0110515",
+   "state": "LA",
+   "facility": "COUNTRY AIRE MHP LLC",
+   "permittee_as_recorded": "COUNTRY AIRE MHP LLC",
+   "county": "CALCASIEU",
+   "city": "LAKE CHARLES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-08-01",
+   "permit_expiration": "2027-07-31",
+   "receiving_waters_echo": [
+    "ENGLISH BAYOU-CALCASIEU RIVER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0110515"
+  },
+  {
+   "npdes_permit": "LA0110825",
+   "state": "LA",
+   "facility": "HARCROS CHEMICALS INC - ST. GABRIEL FACILITY",
+   "permittee_as_recorded": "HARCROS CHEMICAL INC",
+   "county": "IBERVILLE",
+   "city": "SAINT GABRIEL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "5169"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-10-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0110825"
+  },
+  {
+   "npdes_permit": "LA0111686",
+   "state": "LA",
+   "facility": "WESTIN SERVICES LLC",
+   "permittee_as_recorded": "WESTIN SERVICES, LLC",
+   "county": "VERNON",
+   "city": "LEESVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2009-02-01",
+   "permit_expiration": "2014-01-31",
+   "receiving_waters_echo": [
+    "CASTOR CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0111686"
+  },
+  {
+   "npdes_permit": "LA0113255",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC - TERREBONNE SEWERAGE SYSTEM",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC - TERREBONNE SEWERAGE SYSTEM",
+   "county": "TERREBONNE",
+   "city": "HOUMA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-15",
+   "permit_expiration": "2028-07-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0113255"
+  },
+  {
+   "npdes_permit": "LA0115274",
+   "state": "LA",
+   "facility": "A LA CARTE FOODS PROPERTIES LLC",
+   "permittee_as_recorded": "A LA CARTE FOODS PROPERTIES LLC",
+   "county": "ASSUMPTION",
+   "city": "BELLE ROSE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "2092",
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-12-01",
+   "permit_expiration": "2026-11-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 6,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0115274"
+  },
+  {
+   "npdes_permit": "LA0116092",
+   "state": "LA",
+   "facility": "PORT SHIP SERVICE, INC.",
+   "permittee_as_recorded": "PORT SHIP SERVICES, INC.",
+   "county": "ST BERNARD",
+   "city": "ARABI",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4489",
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-15",
+   "permit_expiration": "2028-09-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0116092"
+  },
+  {
+   "npdes_permit": "LA0116424",
+   "state": "LA",
+   "facility": "GREATER OUACHITA WATER CO INC - US HWY 165 N REGIONAL WWTF",
+   "permittee_as_recorded": "Greater Ouachita Water Co Inc - US Hwy 165 N Regional WWTF",
+   "county": "OUACHITA",
+   "city": "MONROE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.789,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2031-02-28",
+   "receiving_waters_echo": [
+    "OUACHITA RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0116424"
+  },
+  {
+   "npdes_permit": "LA0117765",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC - OAK HARBOR EAST STP",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC - OAK HARBOR EAST STP",
+   "county": "ST. TAMMANY",
+   "city": "SLIDELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.95,
+   "major_minor": "Major",
+   "permit_effective": "2021-07-19",
+   "permit_expiration": "2026-07-18",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0117765"
+  },
+  {
+   "npdes_permit": "LA0118656",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - ATWOOD ACRES SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Atwood Acres Subdivision",
+   "county": "ACADIA",
+   "city": "CROWLEY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0448,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "Local Drainage"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0118656"
+  },
+  {
+   "npdes_permit": "LA0118966",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- PENN MILL LAKES",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "ST. TAMMANY",
+   "city": "COVINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "1629",
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-08-01",
+   "permit_expiration": "2026-07-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0118966"
+  },
+  {
+   "npdes_permit": "LA0120111",
+   "state": "LA",
+   "facility": "DELTA DOWNS RACETRACK, CASINO AND HOTEL",
+   "permittee_as_recorded": "BOYD RACING LLC",
+   "county": "CALCASIEU",
+   "city": "VINTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7948"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-15",
+   "permit_expiration": "2028-09-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 7,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0120111"
+  },
+  {
+   "npdes_permit": "LA0120243",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- GUSTE ISLAND STF",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "ST TAMMANY",
+   "city": "MADISONVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2020-09-01",
+   "permit_expiration": "2025-08-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0120243"
+  },
+  {
+   "npdes_permit": "LA0120669",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITIES OPERATING COMPANY LLC - OLDE OAKS SEWER TREATMENT PLANT",
+   "permittee_as_recorded": "Magnolia Water Utilities Operating Company LLC - Olde Oaks Sewer Treatment Plant",
+   "county": "BOSSIER",
+   "city": "HAUGHTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.105,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2031-02-28",
+   "receiving_waters_echo": [
+    "RED CHUTE BAYOU"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0120669"
+  },
+  {
+   "npdes_permit": "LA0121703",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE, LLC - OLD DUTCHTOWN SUBDIVISION",
+   "permittee_as_recorded": "National Water Infrastructure LLC - Old Dutchtown Sub.",
+   "county": "ASCENSION",
+   "city": "GONZALES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-05-01",
+   "permit_expiration": "2027-04-30",
+   "receiving_waters_echo": [
+    "NEW RIVER CANAL"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0121703"
+  },
+  {
+   "npdes_permit": "LA0122017",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- DELMAR ESTATES SOUTH",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-10-01",
+   "permit_expiration": "2027-09-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0122017"
+  },
+  {
+   "npdes_permit": "LA0122343",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- WINDY MEADOWS",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "LAFAYETTE",
+   "city": "YOUNGSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-02-15",
+   "permit_expiration": "2028-02-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0122343"
+  },
+  {
+   "npdes_permit": "LA0122505",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE, LLC - SEVEN OAKS FLEA MARKET",
+   "permittee_as_recorded": "NATIONAL WATER INFRASTRUCTURE, LLC - SEVEN OAKS FLEA MARKET",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-05-01",
+   "permit_expiration": "2029-04-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0122505"
+  },
+  {
+   "npdes_permit": "LA0123293",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- STONE HILL SUBDIVISION",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "LIVINGSTON",
+   "city": "DENHAM SPRINGS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-08-01",
+   "permit_expiration": "2027-07-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0123293"
+  },
+  {
+   "npdes_permit": "LA0123439",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- LIVINGSTON TRACE",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "LIVINGSTON",
+   "city": "DENHAM SPRINGS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-15",
+   "permit_expiration": "2027-04-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0123439"
+  },
+  {
+   "npdes_permit": "LA0123749",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC. - BULLION CROSSING",
+   "permittee_as_recorded": "National Water Infrastructure LLC - Bullion Crossing",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0123749"
+  },
+  {
+   "npdes_permit": "LA0124176",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC - SHADOWS OF ASCENSION WWTP",
+   "permittee_as_recorded": "National Water Infrastructure LLC - Shadows of Ascension WWTP",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.169,
+   "major_minor": "Minor",
+   "permit_effective": "2026-02-01",
+   "permit_expiration": "2031-01-31",
+   "receiving_waters_echo": [
+    "HENDERSON BAYOU"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0124176"
+  },
+  {
+   "npdes_permit": "LA0124265",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- THE LANDINGS",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "TANGIPAHOA",
+   "city": "PONCHATOULA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-11-01",
+   "permit_expiration": "2029-10-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0124265"
+  },
+  {
+   "npdes_permit": "LA0124281",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - VILLE MARIE SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Ville Marie Subdivision",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0396,
+   "major_minor": "Minor",
+   "permit_effective": "2025-05-01",
+   "permit_expiration": "2030-04-30",
+   "receiving_waters_echo": [
+    "LOCAL DRAINAGE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0124281"
+  },
+  {
+   "npdes_permit": "LA0124524",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - COUNTRY LAKES SUBDIVISION PHASES",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Country Lakes Subdivision Phases",
+   "county": "LAFAYETTE",
+   "city": "RAYNE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.1848,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2031-07-31",
+   "receiving_waters_echo": [
+    "Indian Bayou"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0124524"
+  },
+  {
+   "npdes_permit": "LA0124656",
+   "state": "LA",
+   "facility": "COUSHATTA CASINO RESORT WWTP",
+   "permittee_as_recorded": "COUSHATTA CASINO RESORT WWTP",
+   "county": "ALLEN PARISH",
+   "city": "KINDER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.8,
+   "major_minor": "Minor",
+   "permit_effective": "2021-11-01",
+   "permit_expiration": "2026-10-31",
+   "receiving_waters_echo": [
+    "CALCASIEU RIVER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0124656"
+  },
+  {
+   "npdes_permit": "LA0124753",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC - MEADOW RIDGE SUBDIVISION STP",
+   "permittee_as_recorded": "National Water Infrastructure LLC - Meadow Ridge Subdivision STP",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.2088,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "MUDDY CREEK"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0124753"
+  },
+  {
+   "npdes_permit": "LA0124761",
+   "state": "LA",
+   "facility": "MANCHAC PLACE WASTEWATER TREATMENT PLANT",
+   "permittee_as_recorded": "National Water Infrastructure, LLC",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-05-01",
+   "permit_expiration": "2027-04-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0124761"
+  },
+  {
+   "npdes_permit": "LA0124893",
+   "state": "LA",
+   "facility": "DANIELS CONSTRUCTION OF CP LLC - DANIEL'S CONSTRUCTION LLC - SUNSET",
+   "permittee_as_recorded": "Daniels Construction of CP LLC - Daniel's Construction LLC - Sunset",
+   "county": "ST. LANDRY",
+   "city": "SUNSET",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-06-01",
+   "permit_expiration": "2031-05-31",
+   "receiving_waters_echo": [
+    "Coulee Croche"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0124893"
+  },
+  {
+   "npdes_permit": "LA0124958",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC - PELICAN CROSSING WASTEWATER TREATMENT POND",
+   "permittee_as_recorded": "National Water Infrastructure LLC - Pelican Crossing Wastewater Treatment Pond",
+   "county": "ASCENSION",
+   "city": "GONZALES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.334,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2026-09-22",
+   "receiving_waters_echo": [
+    "Local Drainage"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0124958"
+  },
+  {
+   "npdes_permit": "LA0125849",
+   "state": "LA",
+   "facility": "ENVIRONMENTAL PROCESSING INC.",
+   "permittee_as_recorded": "ENVIRONMENTAL PROCESSING INC",
+   "county": "ST. LANDRY",
+   "city": "EUNICE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "4953"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-01-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0125849"
+  },
+  {
+   "npdes_permit": "LA0126136",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- WOODLAND CROSSING 7",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "LIVINGSTON",
+   "city": "DENHAM SPRINGS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-05-01",
+   "permit_expiration": "2029-04-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0126136"
+  },
+  {
+   "npdes_permit": "LA0126225",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- ARBOR WALK WWTP",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "LIVINGSTON",
+   "city": "DENHAM SPRINGS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-01",
+   "permit_expiration": "2029-06-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0126225"
+  },
+  {
+   "npdes_permit": "LA0126802",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE, LLC - OLE HOMESTEAD/KEYSTONE WWTP",
+   "permittee_as_recorded": "NATIONAL WATER INFRASTRUCTURE, LLC - OLE HOMESTEAD/KEYSTONE WWTP",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-02-01",
+   "permit_expiration": "2030-01-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0126802"
+  },
+  {
+   "npdes_permit": "LA0126854",
+   "state": "LA",
+   "facility": "JOE'S SEPTIC CONTRACTORS INC",
+   "permittee_as_recorded": "Joe's Septic Contractors Inc",
+   "county": "LAFOURCHE",
+   "city": "THIBODAUX",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01806,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "Unnamed Ditch"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0126854"
+  },
+  {
+   "npdes_permit": "LA0126857",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - SAWGRASS SUBDIVISION & SAWGRASS P",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Sawgrass Subdivision & Sawgrass P",
+   "county": "LAFAYETTE",
+   "city": "LAFAYETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0556,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "VERMILION RIVER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0126857"
+  },
+  {
+   "npdes_permit": "LA0126920",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC - HIGH PLAINS CROSSING WWTP",
+   "permittee_as_recorded": "National Water Infrastructure LLC - High Plains Crossing WWTP",
+   "county": "EAST BATON ROUGE",
+   "city": "ZACHARY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.1104,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "LOCAL DRAINAGE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0126920"
+  },
+  {
+   "npdes_permit": "LA0126950",
+   "state": "LA",
+   "facility": "NWI, LLC- ULTIMA PLAZA STP",
+   "permittee_as_recorded": "National Water Infrastructure LLC - Ultima Plaza",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-05-01",
+   "permit_expiration": "2028-04-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0126950"
+  },
+  {
+   "npdes_permit": "LA0126974",
+   "state": "LA",
+   "facility": "D&M SEPTIC TANK LLC",
+   "permittee_as_recorded": "D&M Septic Tank LLC",
+   "county": "ST. MARTIN",
+   "city": "BREAUX BRIDGE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "Roadside Ditch"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0126974"
+  },
+  {
+   "npdes_permit": "LA0127034",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- MONEY HILL",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "ST. TAMMANY",
+   "city": "BUSH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127034"
+  },
+  {
+   "npdes_permit": "LA0127112",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE, LLC - MEADOW OAKS SUBDIVISION",
+   "permittee_as_recorded": "NATIONAL WATER INFRASTRUCTURE, LLC - MEADOW OAKS SUBDIVISION",
+   "county": "IBERVILLE",
+   "city": "SAINT GABRIEL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-15",
+   "permit_expiration": "2028-08-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127112"
+  },
+  {
+   "npdes_permit": "LA0127133",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC-SILVER HILLS & THE ESTATES SUBDIVISION",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC - SILVER HILLS & THE ESTATES SUBD",
+   "county": "TANGIPAHOA",
+   "city": "PONCHATOULA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-15",
+   "permit_expiration": "2028-08-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127133"
+  },
+  {
+   "npdes_permit": "LA0127178",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE, LLC - RENAISSANCE SUBDIVISION",
+   "permittee_as_recorded": "NATIONAL WATER INFRASTRUCTURE, LLC - RENAISSANCE SUBDIVISION",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-01-15",
+   "permit_expiration": "2029-01-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127178"
+  },
+  {
+   "npdes_permit": "LA0127196",
+   "state": "LA",
+   "facility": "MAUSAN DEVELOPMENT LLC - SUGARCANE TOWNES SUBDIVISION",
+   "permittee_as_recorded": "MAUSAN DEVELOPMENT LLC - SUGARCANE TOWNES SUBDIVISION",
+   "county": "CALCASIEU",
+   "city": "IOWA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127196"
+  },
+  {
+   "npdes_permit": "LA0127277",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- RIVER PARK",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "ST. TAMMANY",
+   "city": "COVINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-04-01",
+   "permit_expiration": "2028-03-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127277"
+  },
+  {
+   "npdes_permit": "LA0127328",
+   "state": "LA",
+   "facility": "LA SEWER UTILTILIES STP",
+   "permittee_as_recorded": "LA SEWER UTILTILIES STP",
+   "county": "LAFOURCHE",
+   "city": "THIBODAUX",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-08-01",
+   "permit_expiration": "2026-07-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127328"
+  },
+  {
+   "npdes_permit": "LA0127346",
+   "state": "LA",
+   "facility": "FLOW MORE SEWER SERVICES INC.",
+   "permittee_as_recorded": "FLOW MORE SEWER SERVICES INC.",
+   "county": "TANGIPAHOA",
+   "city": "LORANGER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-01",
+   "permit_expiration": "2029-06-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127346"
+  },
+  {
+   "npdes_permit": "LA0127349",
+   "state": "LA",
+   "facility": "L&R UTILITIES, INC - SOUTHERN PINES STP",
+   "permittee_as_recorded": "L&R UTILITIES INC-SOUTHERN PINES STP",
+   "county": "OUACHITA",
+   "city": "CALHOUN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-09-01",
+   "permit_expiration": "2029-08-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127349"
+  },
+  {
+   "npdes_permit": "LA0127361",
+   "state": "LA",
+   "facility": "ABBY PLANTATION ESTATES SEWERAGE CORP - LOUISIANA SEWER UTILITES-WAVERLY SUBDIVI",
+   "permittee_as_recorded": "Abby Plantation Estates Sewerage Corp - Louisiana Sewer Utilites-Waverly Subdivi",
+   "county": "LAFOURCHE",
+   "city": "THIBODAUX",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-01",
+   "permit_expiration": "2031-06-30",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127361"
+  },
+  {
+   "npdes_permit": "LA0127376",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING COMPANY LLC - WESTLAKES SUBDIVISION",
+   "permittee_as_recorded": "Magnolia Water Utility Operating Company LLC - Westlakes Subdivision",
+   "county": "OUACHITA",
+   "city": "WEST MONROE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-15",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "LOCAL DRAINAGE"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127376"
+  },
+  {
+   "npdes_permit": "LA0127385",
+   "state": "LA",
+   "facility": "CLEAN WATER, INC. - PORTER'S COVE SUBDIVISION STP",
+   "permittee_as_recorded": "CLEAN WATER, INC.",
+   "county": "CALCASIEU",
+   "city": "MOSS BLUFF",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2020-01-01",
+   "permit_expiration": "2024-12-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127385"
+  },
+  {
+   "npdes_permit": "LA0127436",
+   "state": "LA",
+   "facility": "UTILITIES INC OF LA - WOODLAND ACRES UNIT #1, 2, 3, 4, 5",
+   "permittee_as_recorded": "Utilities Inc of LA - Woodland Acres Unit #1, 2, 3, 4, 5",
+   "county": "MOREHOUSE",
+   "city": "BASTROP",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0484,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "LOCAL DRAINAGE"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127436"
+  },
+  {
+   "npdes_permit": "LA0127445",
+   "state": "LA",
+   "facility": "UTILITIES INC OF LOUISIANA - COUNTRY PINES",
+   "permittee_as_recorded": "UTILITIES INC OF LOUISIANA - COUNTRY PINES",
+   "county": "CALCASIEU",
+   "city": "LAKE CHARLES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-01-01",
+   "permit_expiration": "2025-12-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127445"
+  },
+  {
+   "npdes_permit": "LA0127472",
+   "state": "LA",
+   "facility": "GREATER OUACHITA WATER CO - NEW EAST REGIONAL WASTEWATER TREATMENT PLANT",
+   "permittee_as_recorded": "Greater Ouachita Water Co - New East Regional Wastewater Treatment Plant",
+   "county": "OUACHITA",
+   "city": "MONROE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.49,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127472"
+  },
+  {
+   "npdes_permit": "LA0127475",
+   "state": "LA",
+   "facility": "GREATER OUACHITA WATER CO - MID-SOUTH REGIONAL WASTEWATER TREATMENT PLANT",
+   "permittee_as_recorded": "Greater Ouachita Water Co - Mid-South Regional Wastewater Treatment Plant",
+   "county": "OUACHITA",
+   "city": "MONROE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.58,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "UNNAMED DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127475"
+  },
+  {
+   "npdes_permit": "LA0127487",
+   "state": "LA",
+   "facility": "ARTESIAN UTILITY COMPANY INC - LAKE RAMSEY SUBDIVISION",
+   "permittee_as_recorded": "ARTESIAN UTILITY COMPANY INC - LAKE RAMSEY SUBDIVISION",
+   "county": "ST. TAMMANY",
+   "city": "COVINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-12-01",
+   "permit_expiration": "2028-11-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127487"
+  },
+  {
+   "npdes_permit": "LA0127496",
+   "state": "LA",
+   "facility": "UTILITIES INC OF LOUISIANA - BON LIEU SUBDIVISION",
+   "permittee_as_recorded": "Utilities Inc of Louisiana - Bon Lieu Subdivision",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2031-07-31",
+   "receiving_waters_echo": [
+    "Henderson Bayou"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127496"
+  },
+  {
+   "npdes_permit": "LA0127535",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC - WESTVIEW CROSSING",
+   "permittee_as_recorded": "NATIONAL WATER INFRASTRUCTURE LLC - WESTVIEW CROSSING",
+   "county": "WEST BATON ROUGE",
+   "city": "PORT ALLEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-12-09",
+   "permit_expiration": "2026-12-08",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127535"
+  },
+  {
+   "npdes_permit": "LA0127553",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- COTEAU RIDGE SUBDIVISION",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "IBERIA",
+   "city": "NEW IBERIA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-08-16",
+   "permit_expiration": "2026-08-15",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127553"
+  },
+  {
+   "npdes_permit": "LA0127601",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC - HWY 42 INTERMEDIATE WASTEWATER TREATMENT PLA",
+   "permittee_as_recorded": "National Water Infrastructure LLC - Hwy 42 Intermediate Wastewater Treatment Pla",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.172,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-01",
+   "permit_expiration": "2027-10-26",
+   "receiving_waters_echo": [
+    "MUDDY CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127601"
+  },
+  {
+   "npdes_permit": "LA0127634",
+   "state": "LA",
+   "facility": "LA SEWER UTILITIES",
+   "permittee_as_recorded": "LA SEWER UTILITIES",
+   "county": "TANGIPAHOA",
+   "city": "ROBERT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-01",
+   "permit_expiration": "2028-07-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127634"
+  },
+  {
+   "npdes_permit": "LA0127643",
+   "state": "LA",
+   "facility": "AIR LIQUIDE LARGE INDUSTRIES US, LP - GEISMAR FACILITY",
+   "permittee_as_recorded": "AIR LIQUIDE LARGE INDUSTRIES US, LP - GEISMAR FACILITY",
+   "county": "ASCENSION",
+   "city": "GEISMAR",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "2813"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-06-06",
+   "permit_expiration": "2028-06-05",
+   "receiving_waters_echo": [],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127643"
+  },
+  {
+   "npdes_permit": "LA0127703",
+   "state": "LA",
+   "facility": "MAGNOLIA WATER UTILITY OPERATING CO., LLC- MAGNOLIA LAKES SUBDIVISION",
+   "permittee_as_recorded": "MAGNOLIA WATER UTILITY OPERATING CO., LLC",
+   "county": "VERMILION",
+   "city": "MAURICE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-15",
+   "permit_expiration": "2028-10-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127703"
+  },
+  {
+   "npdes_permit": "LA0127715",
+   "state": "LA",
+   "facility": "CARTER PLANTATION COMMUNITY DEVELOPMENT DISTRICT- CARTER PLANTATION CDD",
+   "permittee_as_recorded": "CARTER PLANTATION COMMUNITY DEVELOPMENT DISTRICT- CARTER PLANTATION CDD",
+   "county": "LIVINGSTON",
+   "city": "SPRINGFIELD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-01",
+   "permit_expiration": "2029-03-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127715"
+  },
+  {
+   "npdes_permit": "LA0127748",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC - TACO BELL WWTP",
+   "permittee_as_recorded": "NATIONAL WATER INFRASTRUCTURE LLC - TACO BELL WWTP",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-08-01",
+   "permit_expiration": "2029-07-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127748"
+  },
+  {
+   "npdes_permit": "LA0127880",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC - LAKE AT TWIN OAKS SUBDIVISION",
+   "permittee_as_recorded": "National Water Infrastructure LLC - Lake at Twin Oaks Subdivision",
+   "county": "ASCENSION",
+   "city": "PRAIRIEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-01",
+   "permit_expiration": "2031-04-30",
+   "receiving_waters_echo": [
+    "LOCAL DRAINAGE"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127880"
+  },
+  {
+   "npdes_permit": "LA0127895",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC - PELICAN POINT WASTEWATER TREATMENT PLANT #2",
+   "permittee_as_recorded": "National Water Infrastructure LLC - Pelican Point Wastewater Treatment Plant #2",
+   "county": "Ascension",
+   "city": "GONZALES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "Panama Canal"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127895"
+  },
+  {
+   "npdes_permit": "LA0127904",
+   "state": "LA",
+   "facility": "ROGERS SEPTIC SERVICE & DIRT WORK LLC",
+   "permittee_as_recorded": "Rogers Septic Service & Dirt Work LLC",
+   "county": "RICHLAND",
+   "city": "RAYVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-01",
+   "permit_expiration": "2031-06-30",
+   "receiving_waters_echo": [
+    "Bee Bayou"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127904"
+  },
+  {
+   "npdes_permit": "LA0127907",
+   "state": "LA",
+   "facility": "PRECISION DRAINAGE SOLUTIONS LLC",
+   "permittee_as_recorded": "Precision Drainage Solutions LLC",
+   "county": "ACADIA",
+   "city": "CHURCH POINT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0015,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-01",
+   "permit_expiration": "2031-06-30",
+   "receiving_waters_echo": [
+    "Unnamed Stream"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127907"
+  },
+  {
+   "npdes_permit": "LA0127910",
+   "state": "LA",
+   "facility": "NATIONAL WATER INFRASTRUCTURE LLC - ASCENSION PARISH REGIONAL WWTP",
+   "permittee_as_recorded": "National Water Infrastructure LLC - Ascension Parish Regional WWTP",
+   "county": "Ascension",
+   "city": "GEISMAR",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 3.8,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "Mississippi River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127910"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "LA0127526",
+   "state": "LA",
+   "facility": "CWSD1- CYPRESS GARDENS OXIDATION PONDS",
+   "permittee_as_recorded": "Consolidated Waterwork/Sewerage Dist.1. Bossie - CYPRESS GARDENS OXIDATION PONDS",
+   "county": "BOSSIER",
+   "city": "BENTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-08-01",
+   "permit_expiration": "2026-07-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#LA0127526"
+  }
+ ]
+}

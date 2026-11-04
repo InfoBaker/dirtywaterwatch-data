@@ -1,0 +1,6331 @@
+{
+ "state": "AL",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:49Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 136,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 37,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 10,
+  "permittee_name_removed": 7,
+  "by_legal_form_proposed": {
+   "business or industrial": 48,
+   "campground or resort": 4,
+   "homeowners' association": 6,
+   "institution": 20,
+   "investor-owned utility": 41,
+   "mobile-home park": 7,
+   "not stated by the names": 9,
+   "private club": 1
+  },
+  "public_by_name": 3
+ },
+ "candidates": [
+  {
+   "npdes_permit": "AL0000108",
+   "state": "AL",
+   "facility": "INDORAMA VENTURES XYLENES & PTA, LLC",
+   "permittee_as_recorded": "Indorama Ventures Xylenes & PTA, LLC",
+   "county": "MORGAN",
+   "city": "DECATUR",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "2869"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2021-10-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [
+    "Tennessee River"
+   ],
+   "external_outfalls": 6,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0000108"
+  },
+  {
+   "npdes_permit": "AL0001597",
+   "state": "AL",
+   "facility": "MOBILE MANUFACTURING CENTER",
+   "permittee_as_recorded": "[name removed]",
+   "county": "MOBILE",
+   "city": "AXIS",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "2869",
+    "2879"
+   ],
+   "naics_codes": [
+    "325199",
+    "325320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2011-10-01",
+   "permit_expiration": "2016-09-30",
+   "receiving_waters_echo": [
+    "Mobile River",
+    "SEYMORE BRANCH",
+    "CARTER BRANCH"
+   ],
+   "external_outfalls": 10,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0001597"
+  },
+  {
+   "npdes_permit": "AL0002666",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "UOP LLC - Mobile Plant",
+   "county": "MOBILE",
+   "city": "CHICKASAW",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "2819"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2014-02-01",
+   "permit_expiration": "2019-01-31",
+   "receiving_waters_echo": [
+    "CHICKASAW CREEK"
+   ],
+   "external_outfalls": 4,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0002666"
+  },
+  {
+   "npdes_permit": "AL0002755",
+   "state": "AL",
+   "facility": "PACKAGING CORPORATION OF AMERICA",
+   "permittee_as_recorded": "Packaging Corporation of America",
+   "county": "CLARKE",
+   "city": "JACKSON",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "2621"
+   ],
+   "naics_codes": [
+    "322120"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2025-08-04",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [
+    "Tombigbee River",
+    "Bassett Creek"
+   ],
+   "external_outfalls": 5,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0002755"
+  },
+  {
+   "npdes_permit": "AL0002801",
+   "state": "AL",
+   "facility": "KIMBERLY-CLARK CORP",
+   "permittee_as_recorded": "Kimberly-Clark Corp",
+   "county": "MOBILE",
+   "city": "MOBILE",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "2621",
+    "2676"
+   ],
+   "naics_codes": [
+    "322120",
+    "322291"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2024-08-01",
+   "permit_expiration": "2029-07-31",
+   "receiving_waters_echo": [
+    "Mobile River",
+    "Chickasaw Creek",
+    "Threemile Creek"
+   ],
+   "external_outfalls": 19,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0002801"
+  },
+  {
+   "npdes_permit": "AL0003018",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "DALLAS",
+   "city": "SELMA",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "2611"
+   ],
+   "naics_codes": [
+    "322120"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "Alabama River"
+   ],
+   "external_outfalls": 5,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0003018"
+  },
+  {
+   "npdes_permit": "AL0003026",
+   "state": "AL",
+   "facility": "LENZING FIBERS, INC.",
+   "permittee_as_recorded": "Lenzing Fibers, Inc.",
+   "county": "MOBILE",
+   "city": "AXIS",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "2823"
+   ],
+   "naics_codes": [
+    "325220"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-03-31",
+   "receiving_waters_echo": [
+    "Mobile River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0003026"
+  },
+  {
+   "npdes_permit": "AL0003093",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "BASF Corporation",
+   "county": "WASHINGTON",
+   "city": "MCINTOSH",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "2869"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2017-09-01",
+   "permit_expiration": "2022-08-31",
+   "receiving_waters_echo": [
+    "Tombigbee River"
+   ],
+   "external_outfalls": 9,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0003093"
+  },
+  {
+   "npdes_permit": "AL0023272",
+   "state": "AL",
+   "facility": "EVONIK CORPORATION",
+   "permittee_as_recorded": "Evonik Corporation",
+   "county": "MOBILE",
+   "city": "THEODORE",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "2821",
+    "2873",
+    "2879"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2021-02-01",
+   "permit_expiration": "2026-01-31",
+   "receiving_waters_echo": [
+    "THEODORE BARGE CANAL",
+    "MIDDLE FORK DEER RIVER"
+   ],
+   "external_outfalls": 6,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0023272"
+  },
+  {
+   "npdes_permit": "AL0027570",
+   "state": "AL",
+   "facility": "RIVER BEND APARTMENTS WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "ST. CLAIR",
+   "city": "RIVERSIDE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6513"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.07,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2031-07-31",
+   "receiving_waters_echo": [
+    "Coosa River (Logan Martin Lake)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0027570"
+  },
+  {
+   "npdes_permit": "AL0027642",
+   "state": "AL",
+   "facility": "FORESTDALE MOBILE HOME PARK",
+   "permittee_as_recorded": "Springfield MPH, LLC",
+   "county": "JEFFERSON",
+   "city": "BIRMINGHAM",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "Fivemile Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0027642"
+  },
+  {
+   "npdes_permit": "AL0027821",
+   "state": "AL",
+   "facility": "I- 59 WELCOME CENTER",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "DEKALB",
+   "city": "VALLEY HEAD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2026-04-30",
+   "receiving_waters_echo": [
+    "RED RIVER BRANCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0027821"
+  },
+  {
+   "npdes_permit": "AL0042234",
+   "state": "AL",
+   "facility": "SPANISH FORT SEWER WWTP",
+   "permittee_as_recorded": "Baldwin County Sewer Service, LLC",
+   "county": "BALDWIN",
+   "city": "LOXLEY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 4.25,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2031-07-31",
+   "receiving_waters_echo": [
+    "BAY BRANCH, FISH RIVER",
+    "Bay Branch",
+    "Fish River"
+   ],
+   "external_outfalls": 6,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0042234"
+  },
+  {
+   "npdes_permit": "AL0042366",
+   "state": "AL",
+   "facility": "LG UTILITIES LLC WWTP",
+   "permittee_as_recorded": "LG Utilities LLC",
+   "county": "MARSHALL",
+   "city": "GUNTERSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.09,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "Tennessee River (Guntersville Lake)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0042366"
+  },
+  {
+   "npdes_permit": "AL0043010",
+   "state": "AL",
+   "facility": "ALABAMA 4-H CENTER LAGOON",
+   "permittee_as_recorded": "Alabama 4-H Center",
+   "county": "SHELBY",
+   "city": "COLUMBIANA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2026-09-01",
+   "permit_expiration": "2031-08-31",
+   "receiving_waters_echo": [
+    "COOSA RIVER (LAY LAKE)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0043010"
+  },
+  {
+   "npdes_permit": "AL0043851",
+   "state": "AL",
+   "facility": "IDER SCHOOL WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "DE KALB",
+   "city": "IDER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.023,
+   "major_minor": "Minor",
+   "permit_effective": "2023-06-01",
+   "permit_expiration": "2028-05-31",
+   "receiving_waters_echo": [
+    "Moore Branch"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0043851"
+  },
+  {
+   "npdes_permit": "AL0045560",
+   "state": "AL",
+   "facility": "DONALDSON CORRECTIONAL FACILITY WWTP",
+   "permittee_as_recorded": "Asset Management Professionals, LLC",
+   "county": "JEFFERSON",
+   "city": "BESSEMER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "9223"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.35,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-01",
+   "permit_expiration": "2031-06-30",
+   "receiving_waters_echo": [
+    "Big Branch"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0045560"
+  },
+  {
+   "npdes_permit": "AL0045861",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "DALLAS",
+   "city": "VALLEY GRANDE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.023,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2031-02-28",
+   "receiving_waters_echo": [
+    "TATE BRANCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0045861"
+  },
+  {
+   "npdes_permit": "AL0045969",
+   "state": "AL",
+   "facility": "RIVERVIEW WRRF",
+   "permittee_as_recorded": "Alabama Water Utilities, Inc.",
+   "county": "SHELBY COUNTY",
+   "city": "BIRMINGHAM",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 3.0,
+   "major_minor": "Minor",
+   "permit_effective": "2024-01-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [
+    "Cahaba River"
+   ],
+   "external_outfalls": 4,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0045969"
+  },
+  {
+   "npdes_permit": "AL0046761",
+   "state": "AL",
+   "facility": "TENSAW SHORES WWTP",
+   "permittee_as_recorded": "Tensaw Island Landowners Association",
+   "county": "BALDWIN",
+   "city": "BAY MINETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2021-08-01",
+   "permit_expiration": "2026-07-31",
+   "receiving_waters_echo": [
+    "TENSAW RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0046761"
+  },
+  {
+   "npdes_permit": "AL0047546",
+   "state": "AL",
+   "facility": "BRADFORD HEALTH SERVICES WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "JEFFERSON",
+   "city": "WARRIOR",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7011"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2025-12-01",
+   "permit_expiration": "2029-12-31",
+   "receiving_waters_echo": [
+    "Thomas Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0047546"
+  },
+  {
+   "npdes_permit": "AL0047571",
+   "state": "AL",
+   "facility": "LOCKERBIE SUBDIVISION WWTP",
+   "permittee_as_recorded": "Lockerbie Homeowners Association",
+   "county": "JEFFERSON",
+   "city": "BIRMINGHAM",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7033"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0135,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-03-31",
+   "receiving_waters_echo": [
+    "LITTLE SHADES CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0047571"
+  },
+  {
+   "npdes_permit": "AL0047601",
+   "state": "AL",
+   "facility": "STILLWATERS RESORT WWTP AND SPRAYFIELD",
+   "permittee_as_recorded": "Harbor Pointe Utilities LLC",
+   "county": "TALLAPOOSA",
+   "city": "DADEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7997"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.09,
+   "major_minor": "Minor",
+   "permit_effective": "2025-04-01",
+   "permit_expiration": "2030-03-31",
+   "receiving_waters_echo": [
+    "Land Application",
+    "Beaver Creek",
+    "Groundwater"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0047601"
+  },
+  {
+   "npdes_permit": "AL0048135",
+   "state": "AL",
+   "facility": "SAFETYNET YOUTH SYSTEMS",
+   "permittee_as_recorded": "Safetynet Youth Systems LLC",
+   "county": "DALLAS",
+   "city": "MINTER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8322"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.014,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-01",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO OAK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0048135"
+  },
+  {
+   "npdes_permit": "AL0048275",
+   "state": "AL",
+   "facility": "CAMP SUMATANGA WWTP",
+   "permittee_as_recorded": "Sumatanga Camp & Conference Center",
+   "county": "ETOWAH",
+   "city": "GALLANT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7032"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.038,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "Little Canoe Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0048275"
+  },
+  {
+   "npdes_permit": "AL0049051",
+   "state": "AL",
+   "facility": "VILLAGE AT COOK SPRINGS",
+   "permittee_as_recorded": "Village at Cook Springs, LLC",
+   "county": "ST. CLAIR",
+   "city": "PELL CITY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8052"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.038,
+   "major_minor": "Minor",
+   "permit_effective": "2025-12-01",
+   "permit_expiration": "2030-11-30",
+   "receiving_waters_echo": [
+    "Cane Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0049051"
+  },
+  {
+   "npdes_permit": "AL0049549",
+   "state": "AL",
+   "facility": "ONEONTA WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "BLOUNT",
+   "city": "ALLGOOD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 2.2,
+   "major_minor": "Major",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2026-06-30",
+   "receiving_waters_echo": [
+    "Mill Creek"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0049549"
+  },
+  {
+   "npdes_permit": "AL0049891",
+   "state": "AL",
+   "facility": "SHOAL CREEK COUNTRY CLUB WWTP",
+   "permittee_as_recorded": "Shoal Creek Country Club",
+   "county": "SHELBY",
+   "city": "SHOAL CREEK",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "private club",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7991"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2025-05-01",
+   "permit_expiration": "2030-04-30",
+   "receiving_waters_echo": [
+    "Shoal Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0049891"
+  },
+  {
+   "npdes_permit": "AL0050385",
+   "state": "AL",
+   "facility": "PARADISE ISLE CONDOMINIUMS WWTP",
+   "permittee_as_recorded": "Paradise Isle Condominium Association",
+   "county": "ST CLAIR",
+   "city": "RIVERSIDE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6513"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2026-02-01",
+   "permit_expiration": "2031-01-31",
+   "receiving_waters_echo": [
+    "COOSA RIVER (LOGAN MARTIN LAKE)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0050385"
+  },
+  {
+   "npdes_permit": "AL0050466",
+   "state": "AL",
+   "facility": "HILLWOOD APARTMENTS WWTP",
+   "permittee_as_recorded": "Hillwood Apartments",
+   "county": "LAUDERDALE",
+   "city": "ANDERSON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6513"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.004,
+   "major_minor": "Minor",
+   "permit_effective": "2021-10-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [
+    "Anderson Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0050466"
+  },
+  {
+   "npdes_permit": "AL0050563",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "BLOUNT",
+   "city": "ALTOONA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2031-02-28",
+   "receiving_waters_echo": [
+    "LOCUST FORK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0050563"
+  },
+  {
+   "npdes_permit": "AL0050768",
+   "state": "AL",
+   "facility": "HOLLY POND WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "CULLMAN",
+   "city": "HOLLY POND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.121,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "Mud Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0050768"
+  },
+  {
+   "npdes_permit": "AL0051055",
+   "state": "AL",
+   "facility": "PEACHTREE CROSSING MOBILE HOME PARK WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "JEFFERSON",
+   "city": "GARDENDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.09,
+   "major_minor": "Minor",
+   "permit_effective": "2025-01-01",
+   "permit_expiration": "2029-12-31",
+   "receiving_waters_echo": [
+    "Black Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0051055"
+  },
+  {
+   "npdes_permit": "AL0051080",
+   "state": "AL",
+   "facility": "COLD SPRINGS SCHOOL WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "CULLMAN",
+   "city": "BREMEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.024,
+   "major_minor": "Minor",
+   "permit_effective": "2023-12-01",
+   "permit_expiration": "2027-01-31",
+   "receiving_waters_echo": [
+    "Big Branch"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0051080"
+  },
+  {
+   "npdes_permit": "AL0051098",
+   "state": "AL",
+   "facility": "FAIRVIEW SCHOOL WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "CULLMAN",
+   "city": "CULLMAN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2023-12-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [
+    "Duck Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0051098"
+  },
+  {
+   "npdes_permit": "AL0051161",
+   "state": "AL",
+   "facility": "MINOR MIDDLE SCHOOL LAGOON",
+   "permittee_as_recorded": "SWWC Services, Inc.",
+   "county": "JEFFERSON",
+   "city": "ADAMSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.017,
+   "major_minor": "Minor",
+   "permit_effective": "2024-08-01",
+   "permit_expiration": "2029-07-31",
+   "receiving_waters_echo": [
+    "Prudes Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0051161"
+  },
+  {
+   "npdes_permit": "AL0051195",
+   "state": "AL",
+   "facility": "JOHNSON ELEMENTARY SCHOOL LAGOON",
+   "permittee_as_recorded": "SWWC Services, Inc.",
+   "county": "JEFFERSON",
+   "city": "PINSON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "Self Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0051195"
+  },
+  {
+   "npdes_permit": "AL0051268",
+   "state": "AL",
+   "facility": "ALPINE BAY WWTP",
+   "permittee_as_recorded": "Alpine Bay Sewer System",
+   "county": "TALLADEGA",
+   "city": "ALPINE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6514"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.1,
+   "major_minor": "Minor",
+   "permit_effective": "2022-02-01",
+   "permit_expiration": "2027-01-31",
+   "receiving_waters_echo": [
+    "CLEAR CREEK (LOGAN MARTIN LAKE)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0051268"
+  },
+  {
+   "npdes_permit": "AL0051403",
+   "state": "AL",
+   "facility": "RED EAGLE HONOR FARM",
+   "permittee_as_recorded": "Clearwater Solutions, LLC",
+   "county": "MONTGOMERY",
+   "city": "MONTGOMERY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2022-08-01",
+   "permit_expiration": "2027-07-31",
+   "receiving_waters_echo": [
+    "Tallapoosa River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0051403"
+  },
+  {
+   "npdes_permit": "AL0051691",
+   "state": "AL",
+   "facility": "BUCKHORN HIGH SCHOOL WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "MADISON",
+   "city": "NEW MARKET",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2022-12-01",
+   "permit_expiration": "2027-11-30",
+   "receiving_waters_echo": [
+    "Flint River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0051691"
+  },
+  {
+   "npdes_permit": "AL0051853",
+   "state": "AL",
+   "facility": "BREWER HIGH SCHOOL WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "MORGAN",
+   "city": "SOMERVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.024,
+   "major_minor": "Minor",
+   "permit_effective": "2023-05-01",
+   "permit_expiration": "2028-04-30",
+   "receiving_waters_echo": [
+    "SIX MILE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0051853"
+  },
+  {
+   "npdes_permit": "AL0051861",
+   "state": "AL",
+   "facility": "COTACO SCHOOL WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "MORGAN",
+   "city": "SOMERVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.024,
+   "major_minor": "Minor",
+   "permit_effective": "2022-12-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [
+    "WOODLAND MILLS CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0051861"
+  },
+  {
+   "npdes_permit": "AL0051870",
+   "state": "AL",
+   "facility": "DANVILLE HIGH SCHOOL WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "MORGAN",
+   "city": "DANVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.024,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "Danville Branch"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0051870"
+  },
+  {
+   "npdes_permit": "AL0052281",
+   "state": "AL",
+   "facility": "HARBORTOWN TOWNHOMES STP",
+   "permittee_as_recorded": "Enviro Management Co",
+   "county": "ST. CLAIR",
+   "city": "CROPWELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6514"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-01",
+   "permit_expiration": "2031-04-30",
+   "receiving_waters_echo": [
+    "EASONVILLE CREEK (LOGAN MARTIN LAKE)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0052281"
+  },
+  {
+   "npdes_permit": "AL0052736",
+   "state": "AL",
+   "facility": "BIG OAK BOYS RANCH WWTP",
+   "permittee_as_recorded": "Big Oak Ranch, Inc",
+   "county": "ETOWAH",
+   "city": "GADSDEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8322"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2023-03-01",
+   "permit_expiration": "2028-02-29",
+   "receiving_waters_echo": [
+    "Big Oak Lake"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0052736"
+  },
+  {
+   "npdes_permit": "AL0053121",
+   "state": "AL",
+   "facility": "MORRIS MANOR WWTP",
+   "permittee_as_recorded": "Alabama Water Utilities, Inc",
+   "county": "JEFFERSON",
+   "city": "MORRIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6513"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.1,
+   "major_minor": "Minor",
+   "permit_effective": "2023-02-01",
+   "permit_expiration": "2028-01-31",
+   "receiving_waters_echo": [
+    "Turkey Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0053121"
+  },
+  {
+   "npdes_permit": "AL0053422",
+   "state": "AL",
+   "facility": "RIVERSIDE HOTEL",
+   "permittee_as_recorded": "Naiya, LLC",
+   "county": "SAINT CLAIR",
+   "city": "RIVERSIDE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7011"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.038,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-30",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [
+    "COOSA RIVER (LOGAN MARTIN LAKE)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0053422"
+  },
+  {
+   "npdes_permit": "AL0053538",
+   "state": "AL",
+   "facility": "KOWALIGA RETREAT WWTP",
+   "permittee_as_recorded": "Kowaliga Retreat Homeowners Association, Inc.",
+   "county": "ELMORE",
+   "city": "ECLECTIC",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.045,
+   "major_minor": "Minor",
+   "permit_effective": "2022-09-01",
+   "permit_expiration": "2027-08-31",
+   "receiving_waters_echo": [
+    "Kowaliga Creek (Lake Martin)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0053538"
+  },
+  {
+   "npdes_permit": "AL0054011",
+   "state": "AL",
+   "facility": "RIVER BEND TOWNHOUSES WWTP",
+   "permittee_as_recorded": "Community Utilities of Alabama Inc.",
+   "county": "JEFFERSON",
+   "city": "MORRIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6513"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2024-01-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [
+    "Turkey Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0054011"
+  },
+  {
+   "npdes_permit": "AL0054348",
+   "state": "AL",
+   "facility": "LOCUST FORK HIGH SCHOOL LAGOON",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "BLOUNT",
+   "city": "LOCUST FORK",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.022,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-01",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "Blackburn Fork"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0054348"
+  },
+  {
+   "npdes_permit": "AL0056197",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "JACKSON",
+   "city": "BRIDGEPORT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "8062"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.035,
+   "major_minor": "Minor",
+   "permit_effective": "2025-04-21",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "WIDOWS CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0056197"
+  },
+  {
+   "npdes_permit": "AL0056251",
+   "state": "AL",
+   "facility": "NORTH SHELBY WATER RESOURCE RECOVERY FACILITY",
+   "permittee_as_recorded": "Alabama Water Utilities, Inc",
+   "county": "SHELBY",
+   "city": "BIRMINGHAM",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 3.0,
+   "major_minor": "Minor",
+   "permit_effective": "2023-03-01",
+   "permit_expiration": "2028-02-29",
+   "receiving_waters_echo": [
+    "Jeb Branch"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0056251"
+  },
+  {
+   "npdes_permit": "AL0056553",
+   "state": "AL",
+   "facility": "THE COVE MOBILE HOME PARK LAGOON",
+   "permittee_as_recorded": "The Cove Mobile Home Park",
+   "county": "JEFFERSON",
+   "city": "MORRIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.024,
+   "major_minor": "Minor",
+   "permit_effective": "2024-11-01",
+   "permit_expiration": "2029-10-31",
+   "receiving_waters_echo": [
+    "Turkey Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0056553"
+  },
+  {
+   "npdes_permit": "AL0056685",
+   "state": "AL",
+   "facility": "EASTWOOD MOBILE HOME VILLAGE WWTP",
+   "permittee_as_recorded": "Phoenix Water Resources, LLC",
+   "county": "JEFFERSON",
+   "city": "IRONDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.07,
+   "major_minor": "Minor",
+   "permit_effective": "2021-12-01",
+   "permit_expiration": "2026-11-30",
+   "receiving_waters_echo": [
+    "Abes Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0056685"
+  },
+  {
+   "npdes_permit": "AL0056715",
+   "state": "AL",
+   "facility": "EL REPOSO NURSING FACILITY LAGOON",
+   "permittee_as_recorded": "El Reposo Nursing Facility",
+   "county": "LAUDERDALE",
+   "city": "FLORENCE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8063"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "COWPEN CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0056715"
+  },
+  {
+   "npdes_permit": "AL0056901",
+   "state": "AL",
+   "facility": "LAUDERDALE CHRISTIAN NURSING HOME LAGOON",
+   "permittee_as_recorded": "[name removed]",
+   "county": "LAUDERDALE",
+   "city": "KILLEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8059"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2021-05-01",
+   "permit_expiration": "2026-04-30",
+   "receiving_waters_echo": [
+    "West Fork Sixmile Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0056901"
+  },
+  {
+   "npdes_permit": "AL0057096",
+   "state": "AL",
+   "facility": "ST. CLAIR HEALTH AND REHAB, INC.",
+   "permittee_as_recorded": "St. Clair Health and Rehab, Inc.",
+   "county": "ST. CLAIR",
+   "city": "PELL CITY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8062"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2025-05-01",
+   "permit_expiration": "2030-04-30",
+   "receiving_waters_echo": [
+    "Cane Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0057096"
+  },
+  {
+   "npdes_permit": "AL0057509",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "PIKE",
+   "city": "TROY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-01",
+   "permit_expiration": "2029-03-31",
+   "receiving_waters_echo": [
+    "WALNUT CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0057509"
+  },
+  {
+   "npdes_permit": "AL0057681",
+   "state": "AL",
+   "facility": "EWTN WWTP",
+   "permittee_as_recorded": "Phoenix Water Resources, LLC",
+   "county": "JEFFERSON",
+   "city": "IRONDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2025-01-01",
+   "permit_expiration": "2029-12-31",
+   "receiving_waters_echo": [
+    "Cahaba River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0057681"
+  },
+  {
+   "npdes_permit": "AL0057703",
+   "state": "AL",
+   "facility": "WHISPERING PINES WWTP",
+   "permittee_as_recorded": "Jacksonville MHP, LLC",
+   "county": "CALHOUN",
+   "city": "JACKSONVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7033"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.045,
+   "major_minor": "Minor",
+   "permit_effective": "2025-06-01",
+   "permit_expiration": "2030-05-31",
+   "receiving_waters_echo": [
+    "Weavers Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0057703"
+  },
+  {
+   "npdes_permit": "AL0057827",
+   "state": "AL",
+   "facility": "SHARON HEIGHTS MOBILE HOME PARK",
+   "permittee_as_recorded": "Sharon Heights Mobile Home Park",
+   "county": "JEFFERSON",
+   "city": "BIRMINGHAM",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "Fivemile Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0057827"
+  },
+  {
+   "npdes_permit": "AL0057975",
+   "state": "AL",
+   "facility": "HEALTH CARE, INC.",
+   "permittee_as_recorded": "Health Care, Inc.",
+   "county": "ST. CLAIR",
+   "city": "ASHVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8052"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.011,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "MUCKLEROY CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0057975"
+  },
+  {
+   "npdes_permit": "AL0058343",
+   "state": "AL",
+   "facility": "GOOD HOPE WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "CULLMAN",
+   "city": "CULLMAN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.225,
+   "major_minor": "Minor",
+   "permit_effective": "2022-02-01",
+   "permit_expiration": "2027-01-31",
+   "receiving_waters_echo": [
+    "Bavar Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0058343"
+  },
+  {
+   "npdes_permit": "AL0058670",
+   "state": "AL",
+   "facility": "SWAN CREEK COMMUNITY LAGOON",
+   "permittee_as_recorded": "Inspire Communities",
+   "county": "LIMESTONE",
+   "city": "TANNER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.099,
+   "major_minor": "Minor",
+   "permit_effective": "2024-05-01",
+   "permit_expiration": "2029-04-30",
+   "receiving_waters_echo": [
+    "SWAN CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0058670"
+  },
+  {
+   "npdes_permit": "AL0059234",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "MONTGOMERY",
+   "city": "HOPE HULL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2004-04-01",
+   "permit_expiration": "2009-03-31",
+   "receiving_waters_echo": [
+    "PINTLALLA CREEK, UT TO PINTLALLA CREEK",
+    "PINTLALLA CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0059234"
+  },
+  {
+   "npdes_permit": "AL0059331",
+   "state": "AL",
+   "facility": "JEMISON WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "CHILTON",
+   "city": "JEMISON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.3,
+   "major_minor": "Minor",
+   "permit_effective": "2021-11-01",
+   "permit_expiration": "2026-10-31",
+   "receiving_waters_echo": [
+    "MOHORN CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0059331"
+  },
+  {
+   "npdes_permit": "AL0059544",
+   "state": "AL",
+   "facility": "MOUNTAIN VIEW HOSPITAL WWTP",
+   "permittee_as_recorded": "Mountain View Hospital",
+   "county": "ETOWAH",
+   "city": "GADSDEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8062"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.05,
+   "major_minor": "Minor",
+   "permit_effective": "2021-10-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [
+    "Black Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0059544"
+  },
+  {
+   "npdes_permit": "AL0059765",
+   "state": "AL",
+   "facility": "MONTGOMERY CAMPGROUND LLC",
+   "permittee_as_recorded": "Montgomery Campground LLC",
+   "county": "MONTGOMERY",
+   "city": "HOPE HULL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7033"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2016-05-01",
+   "permit_expiration": "2021-04-30",
+   "receiving_waters_echo": [
+    "PINTLALA CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0059765"
+  },
+  {
+   "npdes_permit": "AL0060372",
+   "state": "AL",
+   "facility": "BLOUNT SPRINGS RECOLONIZATION WWTP",
+   "permittee_as_recorded": "BSR Sewer Company, Inc.",
+   "county": "BLOUNT",
+   "city": "BLOUNT SPRINGS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2026-02-01",
+   "permit_expiration": "2031-01-31",
+   "receiving_waters_echo": [
+    "MILL CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0060372"
+  },
+  {
+   "npdes_permit": "AL0062863",
+   "state": "AL",
+   "facility": "REDSTONE ARSENAL CENTRAL WWTP",
+   "permittee_as_recorded": "PDR Properties, Inc.",
+   "county": "MADISON",
+   "city": "REDSTONE ARSENAL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 3.3,
+   "major_minor": "Minor",
+   "permit_effective": "2021-06-01",
+   "permit_expiration": "2026-05-31",
+   "receiving_waters_echo": [
+    "Tennessee River (Wheeler Lake)"
+   ],
+   "external_outfalls": 4,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0062863"
+  },
+  {
+   "npdes_permit": "AL0064181",
+   "state": "AL",
+   "facility": "CHEROKEE RIDGE PROPERTY OWNERS ASSOCIATION WWTP",
+   "permittee_as_recorded": "Cherokee Ridge Property Owners Association",
+   "county": "MARSHALL",
+   "city": "UNION GROVE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.1,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2031-02-28",
+   "receiving_waters_echo": [
+    "Land Application",
+    "Hughes Creek",
+    "Groundwater"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0064181"
+  },
+  {
+   "npdes_permit": "AL0066630",
+   "state": "AL",
+   "facility": "SILVER LAKES WASTEWATER TREATMENT FACILITY",
+   "permittee_as_recorded": "Township Services Corporation",
+   "county": "CALHOUN",
+   "city": "GLENCOE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.25,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2031-02-28",
+   "receiving_waters_echo": [
+    "OHATCHEE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0066630"
+  },
+  {
+   "npdes_permit": "AL0067814",
+   "state": "AL",
+   "facility": "LIBERTY PARK WRRF",
+   "permittee_as_recorded": "Enviro Services, LLC",
+   "county": "JEFFERSON",
+   "city": "VESTAVIA HILLS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 1.15,
+   "major_minor": "Minor",
+   "permit_effective": "2024-08-01",
+   "permit_expiration": "2029-07-31",
+   "receiving_waters_echo": [
+    "Gumsuck Branch"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0067814"
+  },
+  {
+   "npdes_permit": "AL0068420",
+   "state": "AL",
+   "facility": "EAST TUSCALOOSA-WEST JEFFERSON WWTP",
+   "permittee_as_recorded": "Knobloch, Inc.",
+   "county": "TUSCALOOSA",
+   "city": "MCCALLA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.3,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "Mud Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0068420"
+  },
+  {
+   "npdes_permit": "AL0068675",
+   "state": "AL",
+   "facility": "SOUTHEASTERN SCHOOL LAGOON",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "BLOUNT",
+   "city": "REMLAP",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.005,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-01",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "CAMPBELL CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0068675"
+  },
+  {
+   "npdes_permit": "AL0070467",
+   "state": "AL",
+   "facility": "MADISON COUNTY HIGH SCHOOL WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "MADISON",
+   "city": "BROWNSBORO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.05,
+   "major_minor": "Minor",
+   "permit_effective": "2024-09-01",
+   "permit_expiration": "2029-08-31",
+   "receiving_waters_echo": [
+    "FLINT RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0070467"
+  },
+  {
+   "npdes_permit": "AL0070904",
+   "state": "AL",
+   "facility": "STEELWOOD LIMITED WWTP",
+   "permittee_as_recorded": "Baldwin County Sewer Service, LLC",
+   "county": "BALDWIN",
+   "city": "LOXLEY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2024-02-01",
+   "permit_expiration": "2029-01-31",
+   "receiving_waters_echo": [
+    "Roans Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0070904"
+  },
+  {
+   "npdes_permit": "AL0071021",
+   "state": "AL",
+   "facility": "GORHAM'S BLUFF WWTP",
+   "permittee_as_recorded": "Gorham's Bluff Planned Community",
+   "county": "JACKSON",
+   "city": "PISGAH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2023-03-01",
+   "permit_expiration": "2028-02-29",
+   "receiving_waters_echo": [
+    "GROUNDWATER, LAND APPLICATION, PARTON BRANCH",
+    "Land Application",
+    "Parton Branch",
+    "Groundwater"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0071021"
+  },
+  {
+   "npdes_permit": "AL0071501",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "SHELBY",
+   "city": "CHELSEA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 2.0,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-14",
+   "permit_expiration": "2026-10-31",
+   "receiving_waters_echo": [
+    "North Fork Yellowleaf Creek"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0071501"
+  },
+  {
+   "npdes_permit": "AL0072427",
+   "state": "AL",
+   "facility": "STONEGATE COMMUNITY WWTP",
+   "permittee_as_recorded": "Kendall South LLC",
+   "county": "TUSCALOOSA",
+   "city": "COALING",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.1,
+   "major_minor": "Minor",
+   "permit_effective": "2022-10-01",
+   "permit_expiration": "2027-09-30",
+   "receiving_waters_echo": [
+    "Land Application",
+    "Groundwater"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0072427"
+  },
+  {
+   "npdes_permit": "AL0073083",
+   "state": "AL",
+   "facility": "OSDS WWTP",
+   "permittee_as_recorded": "OSDS, LLC",
+   "county": "MADISON",
+   "city": "TONEY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.5,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [
+    "Beaverdam Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0073083"
+  },
+  {
+   "npdes_permit": "AL0073351",
+   "state": "AL",
+   "facility": "ENVIRO-SYSTEMS WWTP",
+   "permittee_as_recorded": "Enviro-Systems, LLC",
+   "county": "SHELBY",
+   "city": "HARPERSVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.25,
+   "major_minor": "Minor",
+   "permit_effective": "2023-03-01",
+   "permit_expiration": "2028-02-29",
+   "receiving_waters_echo": [
+    "YELLOW LEAF CREEK, YELLOWLEAF CREEK",
+    "Yellowleaf Creek",
+    "Yellow Leaf Creek"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0073351"
+  },
+  {
+   "npdes_permit": "AL0073539",
+   "state": "AL",
+   "facility": "WEATHERLY WATER RECLAMATION CENTER",
+   "permittee_as_recorded": "Alabama Water Utilities, Inc",
+   "county": "SHELBY",
+   "city": "PELHAM",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.1,
+   "major_minor": "Minor",
+   "permit_effective": "2025-03-01",
+   "permit_expiration": "2030-02-28",
+   "receiving_waters_echo": [
+    "BUCK CREEK, GROUNDWATER, KIMBERLY-CLARK LAKE, LAND APPLICATION",
+    "Land Application",
+    "Buck Creek",
+    "Kimberly-clark Lake",
+    "Groundwater"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0073539"
+  },
+  {
+   "npdes_permit": "AL0073946",
+   "state": "AL",
+   "facility": "ALEXANDRIA MALL WWTP",
+   "permittee_as_recorded": "Prichard Properties",
+   "county": "CALHOUN",
+   "city": "ALEXANDRIA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2022-06-01",
+   "permit_expiration": "2027-05-31",
+   "receiving_waters_echo": [
+    "Alexandria Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0073946"
+  },
+  {
+   "npdes_permit": "AL0074896",
+   "state": "AL",
+   "facility": "HULL ROAD WETLANDS, LLC",
+   "permittee_as_recorded": "Hull Road Wetlands, LLC",
+   "county": "TUSCALOOSA",
+   "city": "MOUNDVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.499,
+   "major_minor": "Minor",
+   "permit_effective": "2024-09-01",
+   "permit_expiration": "2029-08-31",
+   "receiving_waters_echo": [
+    "BIG SANDY CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0074896"
+  },
+  {
+   "npdes_permit": "AL0075256",
+   "state": "AL",
+   "facility": "NORTH JEFFERSON MIDDLE SCHOOL WWTP",
+   "permittee_as_recorded": "SWWC Services, Inc.",
+   "county": "JEFFERSON",
+   "city": "KIMBERLY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.012,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-01",
+   "permit_expiration": "2029-06-30",
+   "receiving_waters_echo": [
+    "Lick Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0075256"
+  },
+  {
+   "npdes_permit": "AL0075523",
+   "state": "AL",
+   "facility": "SOUTH VINEMONT WWTF",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "CULLMAN",
+   "city": "CULLMAN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.095,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-20",
+   "permit_expiration": "2029-01-31",
+   "receiving_waters_echo": [
+    "Land Application",
+    "Price Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0075523"
+  },
+  {
+   "npdes_permit": "AL0076520",
+   "state": "AL",
+   "facility": "WEATHERLY UTILITY SERVICES - SITE 2",
+   "permittee_as_recorded": "SWWC Utilities, Inc.",
+   "county": "SHELBY",
+   "city": "PELHAM",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2021-03-01",
+   "permit_expiration": "2026-02-28",
+   "receiving_waters_echo": [
+    "GROUNDWATER, LAND APPLICATION, SOUTH FORK YELLOWLEAF CREEK",
+    "Land Application",
+    "South Fork Yellowleaf Creek",
+    "GROUNDWATER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0076520"
+  },
+  {
+   "npdes_permit": "AL0076813",
+   "state": "AL",
+   "facility": "FORT NOVOSEL CAIRNS WWTP",
+   "permittee_as_recorded": "American Water Enterprises, LLC",
+   "county": "DALE",
+   "city": "FORT NOVOSEL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2025-02-01",
+   "permit_expiration": "2030-01-31",
+   "receiving_waters_echo": [
+    "Claybank Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0076813"
+  },
+  {
+   "npdes_permit": "AL0076821",
+   "state": "AL",
+   "facility": "FORT RUCKER MAIN WWTP",
+   "permittee_as_recorded": "American Water Enterprises, LLC",
+   "county": "DALE",
+   "city": "FORT RUCKER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 2.5,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-01",
+   "permit_expiration": "2031-04-30",
+   "receiving_waters_echo": [
+    "CLAYBANK CREEK"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0076821"
+  },
+  {
+   "npdes_permit": "AL0077453",
+   "state": "AL",
+   "facility": "NORTH MOBILE COUNTY WPCF",
+   "permittee_as_recorded": "Integra Water Creola, LLC",
+   "county": "DALE COUNTY",
+   "city": "AXIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 1.5,
+   "major_minor": "Minor",
+   "permit_effective": "2011-05-01",
+   "permit_expiration": "2016-04-30",
+   "receiving_waters_echo": [
+    "Mobile River"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0077453"
+  },
+  {
+   "npdes_permit": "AL0077950",
+   "state": "AL",
+   "facility": "INSPIRATION POINTE WWTP",
+   "permittee_as_recorded": "OSDS, LLC",
+   "county": "MADISON",
+   "city": "MERIDIANVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.3,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [
+    "Beaverdam Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0077950"
+  },
+  {
+   "npdes_permit": "AL0078034",
+   "state": "AL",
+   "facility": "BLACKWATER WWTF",
+   "permittee_as_recorded": "Baldwin County Sewer Service, LLC",
+   "county": "BALDWIN",
+   "city": "LILLIAN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.5,
+   "major_minor": "Minor",
+   "permit_effective": "2024-05-01",
+   "permit_expiration": "2029-04-30",
+   "receiving_waters_echo": [
+    "Narrow Gap Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0078034"
+  },
+  {
+   "npdes_permit": "AL0078298",
+   "state": "AL",
+   "facility": "INTEGRA MADISON COUNTY WWTF",
+   "permittee_as_recorded": "Integra Water Madison County, LLC",
+   "county": "MADISON",
+   "city": "MERIDIANVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "1623",
+    "4952"
+   ],
+   "naics_codes": [
+    "221320",
+    "237110"
+   ],
+   "design_flow_mgd": 0.5,
+   "major_minor": "Minor",
+   "permit_effective": "2023-12-01",
+   "permit_expiration": "2028-11-30",
+   "receiving_waters_echo": [
+    "Brier Fork Flint River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0078298"
+  },
+  {
+   "npdes_permit": "AL0078344",
+   "state": "AL",
+   "facility": "WEST FORK WWTP",
+   "permittee_as_recorded": "HICO Utility Company",
+   "county": "MADISON",
+   "city": "HAZEL GREEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.48,
+   "major_minor": "Minor",
+   "permit_effective": "2024-05-01",
+   "permit_expiration": "2029-04-30",
+   "receiving_waters_echo": [
+    "WEST FORK FLINT RIVER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0078344"
+  },
+  {
+   "npdes_permit": "AL0078395",
+   "state": "AL",
+   "facility": "IRONDALE WWTF",
+   "permittee_as_recorded": "Phoenix Water Resources, LLC",
+   "county": "JEFFERSON",
+   "city": "IRONDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "4959"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.099,
+   "major_minor": "Minor",
+   "permit_effective": "2024-06-01",
+   "permit_expiration": "2029-05-31",
+   "receiving_waters_echo": [
+    "ABES CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0078395"
+  },
+  {
+   "npdes_permit": "AL0078492",
+   "state": "AL",
+   "facility": "DOSS FERRY WWTP",
+   "permittee_as_recorded": "Integrated Wastewater Management, Inc.",
+   "county": "JEFFERSON",
+   "city": "KIMBERLY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "1521",
+    "1611",
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.15,
+   "major_minor": "Minor",
+   "permit_effective": "2019-08-01",
+   "permit_expiration": "2024-07-31",
+   "receiving_waters_echo": [
+    "Land Application",
+    "LICK CREEK",
+    "Locust Fork",
+    "GROUNDWATER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0078492"
+  },
+  {
+   "npdes_permit": "AL0078506",
+   "state": "AL",
+   "facility": "BROOKWOOD SEU WWTP",
+   "permittee_as_recorded": "Alabama Water Utilities, Inc.",
+   "county": "TUSCALOOSA",
+   "city": "BROOKWOOD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2023-04-01",
+   "permit_expiration": "2028-03-31",
+   "receiving_waters_echo": [
+    "GROUNDWATER, LAND APPLICATION, NORTH FORK HURRICANE CREEK",
+    "Land Application",
+    "North Fork Hurricane Creek",
+    "Groundwater"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0078506"
+  },
+  {
+   "npdes_permit": "AL0078841",
+   "state": "AL",
+   "facility": "DUNCANVILLE WETLANDS WWTF",
+   "permittee_as_recorded": "Duncanville Wetlands, LLC",
+   "county": "TUSCALOOSA",
+   "city": "DUNCANVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.75,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-01",
+   "permit_expiration": "2027-12-31",
+   "receiving_waters_echo": [
+    "Big Sandy Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0078841"
+  },
+  {
+   "npdes_permit": "AL0079774",
+   "state": "AL",
+   "facility": "FOSTERS WATER TREATMENT FACILITY",
+   "permittee_as_recorded": "ST Exit 62, LLC",
+   "county": "TUSCALOOSA",
+   "city": "FOSTERS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.29,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "GRANT CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0079774"
+  },
+  {
+   "npdes_permit": "AL0079901",
+   "state": "AL",
+   "facility": "OUTOKUMPU STAINLESS USA, LLC - CALVERT MILL",
+   "permittee_as_recorded": "Outokumpu Stainless USA, LLC",
+   "county": "WASHINGTON",
+   "city": "CALVERT",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "3312",
+    "3316",
+    "3471"
+   ],
+   "naics_codes": [
+    "331221",
+    "332813"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2023-08-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "Tombigbee River"
+   ],
+   "external_outfalls": 4,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0079901"
+  },
+  {
+   "npdes_permit": "AL0080047",
+   "state": "AL",
+   "facility": "THE CROSSING WWTP",
+   "permittee_as_recorded": "TCBC Development Company",
+   "county": "HOUSTON",
+   "city": "COTTONWOOD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "7922",
+    "7993"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.12,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "BIG CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0080047"
+  },
+  {
+   "npdes_permit": "AL0080276",
+   "state": "AL",
+   "facility": "HUEYTOWN HIGH SCHOOL WWTP",
+   "permittee_as_recorded": "SWWC Services, Inc.",
+   "county": "JEFFERSON",
+   "city": "HUEYTOWN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2026-02-01",
+   "permit_expiration": "2031-01-31",
+   "receiving_waters_echo": [
+    "Lick Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0080276"
+  },
+  {
+   "npdes_permit": "AL0080870",
+   "state": "AL",
+   "facility": "DODGE CITY WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "CULLMAN",
+   "city": "HANCEVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.09,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-28",
+   "permit_expiration": "2027-02-28",
+   "receiving_waters_echo": [
+    "PEWTERFORK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0080870"
+  },
+  {
+   "npdes_permit": "AL0081396",
+   "state": "AL",
+   "facility": "KINGS ACRES SANITARY LAGOON",
+   "permittee_as_recorded": "West Alabama Utilities, LLC",
+   "county": "TUSCALOOSA",
+   "city": "TUSCALOOSA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.031,
+   "major_minor": "Minor",
+   "permit_effective": "2023-02-01",
+   "permit_expiration": "2028-01-31",
+   "receiving_waters_echo": [
+    "MOODY SWAMP"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0081396"
+  },
+  {
+   "npdes_permit": "AL0081698",
+   "state": "AL",
+   "facility": "ALABAMA BELLE WWTP",
+   "permittee_as_recorded": "Community Utilities of Alabama Inc.",
+   "county": "CHEROKEE",
+   "city": "CENTRE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0125,
+   "major_minor": "Minor",
+   "permit_effective": "2024-09-01",
+   "permit_expiration": "2028-02-29",
+   "receiving_waters_echo": [
+    "COOSA RIVER (WEISS LAKE)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0081698"
+  },
+  {
+   "npdes_permit": "AL0082562",
+   "state": "AL",
+   "facility": "MOUNDVILLE WESTERVELT POTW",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "HALE",
+   "city": "MOUNDVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0281,
+   "major_minor": "Minor",
+   "permit_effective": "2021-04-01",
+   "permit_expiration": "2026-03-31",
+   "receiving_waters_echo": [
+    "Millians Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0082562"
+  },
+  {
+   "npdes_permit": "AL0082813",
+   "state": "AL",
+   "facility": "WOODRUFF FARMS WWTP",
+   "permittee_as_recorded": "Community Utilities of Alabama Inc.",
+   "county": "JEFFERSON",
+   "city": "LEEDS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.112,
+   "major_minor": "Minor",
+   "permit_effective": "2021-08-01",
+   "permit_expiration": "2026-07-31",
+   "receiving_waters_echo": [
+    "Little Cahaba River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0082813"
+  },
+  {
+   "npdes_permit": "AL0083097",
+   "state": "AL",
+   "facility": "HARDY WC WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "CLEBURNE",
+   "city": "HEFLIN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2021-11-01",
+   "permit_expiration": "2026-10-31",
+   "receiving_waters_echo": [
+    "KEMP CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0083097"
+  },
+  {
+   "npdes_permit": "AL0083399",
+   "state": "AL",
+   "facility": "OCEAN CANYON RESORTS, LLC. WWTP",
+   "permittee_as_recorded": "Ocean Canyon Resorts, LLC",
+   "county": "BALDWIN",
+   "city": "ROBERTSDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2025-01-01",
+   "permit_expiration": "2027-11-30",
+   "receiving_waters_echo": [
+    "STYX RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0083399"
+  },
+  {
+   "npdes_permit": "AL0083470",
+   "state": "AL",
+   "facility": "SUMMERDALE WWTF",
+   "permittee_as_recorded": "Baldwin County Sewer Service, LLC",
+   "county": "BALDWIN",
+   "city": "SUMMERDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.5,
+   "major_minor": "Minor",
+   "permit_effective": "2024-12-01",
+   "permit_expiration": "2029-11-30",
+   "receiving_waters_echo": [
+    "NEGRO CREEK"
+   ],
+   "external_outfalls": 8,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0083470"
+  },
+  {
+   "npdes_permit": "AL0083518",
+   "state": "AL",
+   "facility": "MORRIS WATER RECLAMATION FACILITY",
+   "permittee_as_recorded": "Alabama Water Utilities, Inc.",
+   "county": "JEFFERSON",
+   "city": "MORRIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2024-07-01",
+   "permit_expiration": "2029-06-30",
+   "receiving_waters_echo": [
+    "TURKEY CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0083518"
+  },
+  {
+   "npdes_permit": "AL0083593",
+   "state": "AL",
+   "facility": "MOUNTAIN LAKES RESORT WWTP",
+   "permittee_as_recorded": "Ocean Canyon Resorts, LLC",
+   "county": "MARSHALL",
+   "city": "LANGSTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.05,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-01",
+   "permit_expiration": "2028-07-31",
+   "receiving_waters_echo": [
+    "Tennessee River (Guntersville Lake)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0083593"
+  },
+  {
+   "npdes_permit": "AL0083879",
+   "state": "AL",
+   "facility": "LAWRENCE LANDING SUBDIVISION WWTP",
+   "permittee_as_recorded": "Guthrie & Associates, Inc.",
+   "county": "CHEROKEE",
+   "city": "CEDAR BLUFF",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2026-02-01",
+   "permit_expiration": "2031-01-31",
+   "receiving_waters_echo": [
+    "COOSA RIVER (WEISS LAKE)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0083879"
+  },
+  {
+   "npdes_permit": "AL0084107",
+   "state": "AL",
+   "facility": "LIVING WATER RECLAMATION FACILITY",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "CULLMAN",
+   "city": "CULLMAN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.05,
+   "major_minor": "Minor",
+   "permit_effective": "2021-12-01",
+   "permit_expiration": "2026-11-30",
+   "receiving_waters_echo": [
+    "COPPERAS BRANCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084107"
+  },
+  {
+   "npdes_permit": "AL0084123",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "JEFFERSON",
+   "city": "KIMBERLY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0495,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-01",
+   "permit_expiration": "2031-04-30",
+   "receiving_waters_echo": [
+    "LICK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084123"
+  },
+  {
+   "npdes_permit": "AL0084166",
+   "state": "AL",
+   "facility": "AUTAUGA COUNTY WWTP",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "AUTAUGA",
+   "city": "PRATTVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.099,
+   "major_minor": "Minor",
+   "permit_effective": "2022-05-24",
+   "permit_expiration": "2026-05-31",
+   "receiving_waters_echo": [
+    "KENNER CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084166"
+  },
+  {
+   "npdes_permit": "AL0084239",
+   "state": "AL",
+   "facility": "KINGS COVE WWTP",
+   "permittee_as_recorded": "Wastewater Solutions, LLC",
+   "county": "TUSCALOOSA",
+   "city": "TUSCALOOSA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.09,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [
+    "BIG SANDY CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084239"
+  },
+  {
+   "npdes_permit": "AL0084271",
+   "state": "AL",
+   "facility": "BROOKSIDE SQUARE CWF",
+   "permittee_as_recorded": "Pinnacle Wastewater Services, LLC",
+   "county": "JEFFERSON",
+   "city": "BROOKSIDE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.045,
+   "major_minor": "Minor",
+   "permit_effective": "2022-06-01",
+   "permit_expiration": "2027-05-31",
+   "receiving_waters_echo": [
+    "FIVEMILE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084271"
+  },
+  {
+   "npdes_permit": "AL0084298",
+   "state": "AL",
+   "facility": "VANCE KYKENKEE POTW",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "TUSCALOOSA",
+   "city": "VANCE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.030526,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "BANKS CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084298"
+  },
+  {
+   "npdes_permit": "AL0084344",
+   "state": "AL",
+   "facility": "PONDEROSA WRF",
+   "permittee_as_recorded": "SRD Holdings, LLC",
+   "county": "JEFFERSON",
+   "city": "MORRIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.099,
+   "major_minor": "Minor",
+   "permit_effective": "2022-11-01",
+   "permit_expiration": "2027-10-31",
+   "receiving_waters_echo": [
+    "Turkey Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084344"
+  },
+  {
+   "npdes_permit": "AL0084395",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Metro City Services, LLC",
+   "county": "JEFFERSON",
+   "city": "WEST JEFFERSON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2023-03-01",
+   "permit_expiration": "2028-02-29",
+   "receiving_waters_echo": [
+    "LOCUST FORK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084395"
+  },
+  {
+   "npdes_permit": "AL0084446",
+   "state": "AL",
+   "facility": "INTEGRA WATER NORTH LIMESTONE WRF",
+   "permittee_as_recorded": "Integra Water Madison County, LLC",
+   "county": "LIMESTONE",
+   "city": "ATHENS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.25,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-01",
+   "permit_expiration": "2029-03-31",
+   "receiving_waters_echo": [
+    "PINEY CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084446"
+  },
+  {
+   "npdes_permit": "AL0084449",
+   "state": "AL",
+   "facility": "WARRIOR CLEAN WATER FACILITY",
+   "permittee_as_recorded": "Pinnacle Wastewater Services, LLC",
+   "county": "JEFFERSON",
+   "city": "WARRIOR",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.099,
+   "major_minor": "Minor",
+   "permit_effective": "2023-03-01",
+   "permit_expiration": "2028-02-29",
+   "receiving_waters_echo": [
+    "LOCUST FORK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084449"
+  },
+  {
+   "npdes_permit": "AL0084468",
+   "state": "AL",
+   "facility": "HERITAGE LANDING WRF",
+   "permittee_as_recorded": "Drummond Company, Inc.",
+   "county": "WALKER",
+   "city": "QUINTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.05,
+   "major_minor": "Minor",
+   "permit_effective": "2023-12-01",
+   "permit_expiration": "2028-11-30",
+   "receiving_waters_echo": [
+    "BURNT CANE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084468"
+  },
+  {
+   "npdes_permit": "AL0084474",
+   "state": "AL",
+   "facility": "TANNEHILL PRESERVE CLEAN WATER FACILITY",
+   "permittee_as_recorded": "Living Water Utilities, LLC",
+   "county": "TUSCALOOSA",
+   "city": "MCCALLA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.045,
+   "major_minor": "Minor",
+   "permit_effective": "2026-02-05",
+   "permit_expiration": "2029-01-31",
+   "receiving_waters_echo": [
+    "COOLEY CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084474"
+  },
+  {
+   "npdes_permit": "AL0084490",
+   "state": "AL",
+   "facility": "WILCOX WWTP",
+   "permittee_as_recorded": "Baldwin County Sewer Service, LLC",
+   "county": "BALDWIN",
+   "city": "ROBERTSDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.1,
+   "major_minor": "Minor",
+   "permit_effective": "2024-08-01",
+   "permit_expiration": "2029-07-31",
+   "receiving_waters_echo": [
+    "STYX RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084490"
+  },
+  {
+   "npdes_permit": "AL0084494",
+   "state": "AL",
+   "facility": "QUINTON CLEAN WATER FACILITY",
+   "permittee_as_recorded": "Pinnacle Wastewater Services, LLC",
+   "county": "JEFFERSON",
+   "city": "QUINTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.063,
+   "major_minor": "Minor",
+   "permit_effective": "2025-01-01",
+   "permit_expiration": "2029-12-31",
+   "receiving_waters_echo": [
+    "LOCUST FORK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084494"
+  },
+  {
+   "npdes_permit": "AL0084495",
+   "state": "AL",
+   "facility": "BROWNS FERRY MARINA & DEVELOPMENT WWTP",
+   "permittee_as_recorded": "StructCon, LLC",
+   "county": "LIMESTONE",
+   "city": "ATHENS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.1,
+   "major_minor": "Minor",
+   "permit_effective": "2024-12-01",
+   "permit_expiration": "2029-11-30",
+   "receiving_waters_echo": [
+    "Tennessee River (Wheeler Lake)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084495"
+  },
+  {
+   "npdes_permit": "AL0084496",
+   "state": "AL",
+   "facility": "WOODSTOCK CLEAN WATER FACILITY",
+   "permittee_as_recorded": "Pinnacle Wastewater Services, LLC",
+   "county": "TUSCALOOSA",
+   "city": "MCCALLA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.095,
+   "major_minor": "Minor",
+   "permit_effective": "2025-01-01",
+   "permit_expiration": "2029-12-31",
+   "receiving_waters_echo": [
+    "MUD CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084496"
+  },
+  {
+   "npdes_permit": "AL0084498",
+   "state": "AL",
+   "facility": "NEWBERN WWTP",
+   "permittee_as_recorded": "5020 Engineering Resource Group Incorporated",
+   "county": "HALE",
+   "city": "NEWBERN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2025-01-01",
+   "permit_expiration": "2029-12-31",
+   "receiving_waters_echo": [
+    "BIG PRAIRIE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084498"
+  },
+  {
+   "npdes_permit": "AL0084499",
+   "state": "AL",
+   "facility": "PIKE ROAD CLEAN WATER FACILITY",
+   "permittee_as_recorded": "Pike Road Sewer, LLC",
+   "county": "MONTGOMERY",
+   "city": "PIKE ROAD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "562219"
+   ],
+   "design_flow_mgd": 0.099,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2030-12-31",
+   "receiving_waters_echo": [
+    "Catoma Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084499"
+  },
+  {
+   "npdes_permit": "AL0084509",
+   "state": "AL",
+   "facility": "MADELYN PLACE SUBDIVISION WWTP",
+   "permittee_as_recorded": "Land Venues, Inc.",
+   "county": "MADISON",
+   "city": "HARVEST",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.066,
+   "major_minor": "Minor",
+   "permit_effective": "2026-08-01",
+   "permit_expiration": "2031-07-31",
+   "receiving_waters_echo": [
+    "Hardin Branch"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084509"
+  },
+  {
+   "npdes_permit": "AL0084510",
+   "state": "AL",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Land Venues, Inc.",
+   "county": "MADISON",
+   "city": "HARVEST",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.075,
+   "major_minor": "Minor",
+   "permit_effective": "2025-11-01",
+   "permit_expiration": "2030-10-31",
+   "receiving_waters_echo": [
+    "LIMESTONE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084510"
+  },
+  {
+   "npdes_permit": "AL0084511",
+   "state": "AL",
+   "facility": "WATSON CLEAN WATER FACILITY",
+   "permittee_as_recorded": "Pinnacle Wastewater Services, LLC",
+   "county": "JEFFERSON",
+   "city": "BROOKSIDE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.07,
+   "major_minor": "Minor",
+   "permit_effective": "2026-04-01",
+   "permit_expiration": "2031-03-31",
+   "receiving_waters_echo": [
+    "Fivemile Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084511"
+  },
+  {
+   "npdes_permit": "AL0084516",
+   "state": "AL",
+   "facility": "VISTA LAGO SMITH LAKE DEVELOPMENT",
+   "permittee_as_recorded": "Maverick Construction, LLC",
+   "county": "CULLMAN",
+   "city": "BREMEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2026-06-01",
+   "permit_expiration": "2031-05-31",
+   "receiving_waters_echo": [
+    "RYAN CREEK (SMITH LAKE)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0084516"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "AL0032301",
+   "state": "AL",
+   "facility": "DIXIE MANOR HOUSING PROJECT WWTP",
+   "permittee_as_recorded": "Jefferson County Housing Authority",
+   "county": "JEFFERSON",
+   "city": "PINSON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Corporation; the name reads as a public body",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "6513"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-01",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "Self Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0032301"
+  },
+  {
+   "npdes_permit": "AL0043338",
+   "state": "AL",
+   "facility": "RAGLAND HOUSING AUTHORITY",
+   "permittee_as_recorded": "Ragland Housing Authority",
+   "county": "ST. CLAIR COUNTY",
+   "city": "RAGLAND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952",
+    "6513"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.021,
+   "major_minor": "Minor",
+   "permit_effective": "2021-11-01",
+   "permit_expiration": "2026-10-31",
+   "receiving_waters_echo": [
+    "Trout Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0043338"
+  },
+  {
+   "npdes_permit": "AL0062456",
+   "state": "AL",
+   "facility": "PORT OF EPES INDUSTRIAL COMPLEX",
+   "permittee_as_recorded": "Industrial Development Authority of Sumter County",
+   "county": "SUMTER",
+   "city": "EPES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2021-05-01",
+   "permit_expiration": "2026-04-30",
+   "receiving_waters_echo": [
+    "TOMBIGBEE RIVER (DEMOPOLIS LAKE)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AL0062456"
+  }
+ ]
+}

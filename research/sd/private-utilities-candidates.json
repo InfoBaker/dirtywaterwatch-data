@@ -1,0 +1,602 @@
+{
+ "state": "SD",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:49Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 12,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 12,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 2,
+  "by_legal_form_proposed": {
+   "business or industrial": 1,
+   "campground or resort": 1,
+   "institution": 7,
+   "mobile-home park": 1,
+   "not stated by the names": 2
+  },
+  "public_by_name": 0
+ },
+ "candidates": [
+  {
+   "npdes_permit": "SD0020443",
+   "state": "SD",
+   "facility": "SLIC-E HOLDINGS",
+   "permittee_as_recorded": "Star Academy - West Campus",
+   "county": null,
+   "city": "CUSTER",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [
+    "UNNAMED TRIB OF BEAVER CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0020443"
+  },
+  {
+   "npdes_permit": "SD0026999",
+   "state": "SD",
+   "facility": "COUNTRY VILLAGE MHC",
+   "permittee_as_recorded": "Country Village MHC",
+   "county": "BROWN",
+   "city": "ABERDEEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-01",
+   "permit_expiration": "2027-12-31",
+   "receiving_waters_echo": [
+    "Foot Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0026999"
+  },
+  {
+   "npdes_permit": "SD0027456",
+   "state": "SD",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "CLAY",
+   "city": "JUNCTION CITY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2022-08-01",
+   "permit_expiration": "2027-07-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF BIG DITCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0027456"
+  },
+  {
+   "npdes_permit": "SD0028177",
+   "state": "SD",
+   "facility": "ROSEDALE HUTTERIAN BRETHREN",
+   "permittee_as_recorded": "Rosedale Hutterian Brethren",
+   "county": "HANSON",
+   "city": "MITCHELL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2023-07-01",
+   "permit_expiration": "2028-06-30",
+   "receiving_waters_echo": [
+    "James River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0028177"
+  },
+  {
+   "npdes_permit": "SD0028401",
+   "state": "SD",
+   "facility": "EVERGREEN COLONY TURKEY PRODUCTION",
+   "permittee_as_recorded": "Evergreen Colony Turkey Production",
+   "county": "FAULK",
+   "city": "FAULKTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "0253",
+    "4952"
+   ],
+   "naics_codes": [
+    "112330",
+    "221320"
+   ],
+   "design_flow_mgd": 0.0007,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "unnamed tributary of North Fork Sna"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0028401"
+  },
+  {
+   "npdes_permit": "SD0028410",
+   "state": "SD",
+   "facility": "DEERFIELD HUTTERIAN BRETHREN INC.",
+   "permittee_as_recorded": "Deerfield Hutterian Brethren Inc.",
+   "county": "EDMUNDS",
+   "city": "IPSWICH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-01",
+   "permit_expiration": "2027-06-30",
+   "receiving_waters_echo": [
+    "unnamed tributary of Snake Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0028410"
+  },
+  {
+   "npdes_permit": "SD0028615",
+   "state": "SD",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "LAWRENCE",
+   "city": "LEAD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.15,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-01",
+   "permit_expiration": "2027-12-31",
+   "receiving_waters_echo": [
+    "unnamed tributary of Whitewood Cree"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0028615"
+  },
+  {
+   "npdes_permit": "SD0028620",
+   "state": "SD",
+   "facility": "APPLE SPRINGS RESORT - H2O CLEAR SOLUTIONS LLC",
+   "permittee_as_recorded": "Apple Springs Resort - H2O Clear Solutions LLC",
+   "county": "MEADE",
+   "city": "STURGIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2024-05-01",
+   "permit_expiration": "2029-04-30",
+   "receiving_waters_echo": [
+    "Bear Butte Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0028620"
+  },
+  {
+   "npdes_permit": "SD0028621",
+   "state": "SD",
+   "facility": "PEARL CREEK COLONY",
+   "permittee_as_recorded": "Pearl Creek Colony",
+   "county": "BEADLE",
+   "city": "IROQUOIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0076,
+   "major_minor": "Minor",
+   "permit_effective": "2024-01-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [
+    "Middle Pearl Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0028621"
+  },
+  {
+   "npdes_permit": "SD0028622",
+   "state": "SD",
+   "facility": "HUTTERVILLE H.B., INC.",
+   "permittee_as_recorded": "Hutterville H.B., Inc.",
+   "county": "BROWN",
+   "city": "STRATFORD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0236,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "Dry Run Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0028622"
+  },
+  {
+   "npdes_permit": "SD0028648",
+   "state": "SD",
+   "facility": "GRASS RANCH HUTTERIAN BRETHREN",
+   "permittee_as_recorded": "Grass Ranch Hutterian Brethren",
+   "county": "BRULE",
+   "city": "KIMBALL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2022-03-01",
+   "permit_expiration": "2027-02-28",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF PLATTE CREEK, WATERS OF THE STATE",
+    "Unnamed tributary of Platte Creek",
+    "Waters of the State"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0028648"
+  },
+  {
+   "npdes_permit": "SD0028651",
+   "state": "SD",
+   "facility": "SUNSET COLONY",
+   "permittee_as_recorded": "Sunset Colony",
+   "county": "MARSHALL",
+   "city": "BRITTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2022-02-01",
+   "permit_expiration": "2027-01-31",
+   "receiving_waters_echo": [
+    "UNNAMED WETLAND"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SD0028651"
+  }
+ ],
+ "public_by_name": []
+}

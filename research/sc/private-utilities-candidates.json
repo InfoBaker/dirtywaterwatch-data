@@ -1,0 +1,1250 @@
+{
+ "state": "SC",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:49Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 26,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 1,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 17,
+  "by_legal_form_proposed": {
+   "business or industrial": 4,
+   "homeowners' association": 1,
+   "institution": 1,
+   "investor-owned utility": 12,
+   "mobile-home park": 4,
+   "not stated by the names": 4
+  },
+  "public_by_name": 1
+ },
+ "candidates": [
+  {
+   "npdes_permit": "SC0022357",
+   "state": "SC",
+   "facility": "CSWR FOXWOOD HILLS SD",
+   "permittee_as_recorded": "[name removed]",
+   "county": "OCONEE",
+   "city": "WESTMINSTER",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "6514"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2014-07-01",
+   "permit_expiration": "2018-09-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO LAKE HARTWELL"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0022357"
+  },
+  {
+   "npdes_permit": "SC0023141",
+   "state": "SC",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "KING REAL ESTATE HOLDINGS LP",
+   "county": "PICKENS",
+   "city": "CENTRAL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320",
+    "531190"
+   ],
+   "design_flow_mgd": 0.024,
+   "major_minor": "Minor",
+   "permit_effective": "2018-10-04",
+   "permit_expiration": "2021-10-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO LAKE HARTWELL"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0023141"
+  },
+  {
+   "npdes_permit": "SC0026565",
+   "state": "SC",
+   "facility": "REWA NORTH GREENVILLE UNIVERSITY WWTP",
+   "permittee_as_recorded": "Renewable Water Resources",
+   "county": "GREENVILLE",
+   "city": "TIGERVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952",
+    "8221"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0026565"
+  },
+  {
+   "npdes_permit": "SC0027146",
+   "state": "SC",
+   "facility": "BLUE GRANITE WATER COMPANY FOXWOOD SD WWTP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "YORK",
+   "city": "FORT MILL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952",
+    "6514",
+    "8811"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2031-02-28",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0027146"
+  },
+  {
+   "npdes_permit": "SC0027189",
+   "state": "SC",
+   "facility": "BLUE GRANITE WATER COMPANY SHANDON WWTP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "YORK",
+   "city": "ROCK HILL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6514"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2019-05-01",
+   "permit_expiration": "2024-04-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0027189"
+  },
+  {
+   "npdes_permit": "SC0028673",
+   "state": "SC",
+   "facility": "BLUE GRANITE WATER COMPANY VALLEYBROOK WWTP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "GREENVILLE",
+   "city": "PIEDMONT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6514"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.096,
+   "major_minor": "Minor",
+   "permit_effective": "2016-09-01",
+   "permit_expiration": "2021-08-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0028673"
+  },
+  {
+   "npdes_permit": "SC0029475",
+   "state": "SC",
+   "facility": "WOODLAND HILLS WEST SD",
+   "permittee_as_recorded": "[name removed]",
+   "county": "RICHLAND",
+   "city": "COLUMBIA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6514"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2019-03-01",
+   "permit_expiration": "2023-06-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0029475"
+  },
+  {
+   "npdes_permit": "SC0029483",
+   "state": "SC",
+   "facility": "ALPINE UTILITIES STOOP CREEK WWTP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "LEXINGTON",
+   "city": "COLUMBIA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2018-07-01",
+   "permit_expiration": "2023-06-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0029483"
+  },
+  {
+   "npdes_permit": "SC0030112",
+   "state": "SC",
+   "facility": "CWS INC OF NC LAMPLIGHTER VILLAGE SOUTH",
+   "permittee_as_recorded": "[name removed]",
+   "county": "LANCASTER",
+   "city": "INDIAN LAND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952",
+    "6514"
+   ],
+   "naics_codes": [
+    "221320",
+    "531110"
+   ],
+   "design_flow_mgd": 0.63,
+   "major_minor": "Minor",
+   "permit_effective": "2026-01-01",
+   "permit_expiration": "2028-12-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0030112"
+  },
+  {
+   "npdes_permit": "SC0030571",
+   "state": "SC",
+   "facility": "WELLFORD ESTATES TRAILER PARK",
+   "permittee_as_recorded": "[name removed]",
+   "county": "SPARTANBURG",
+   "city": "WELLFORD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2026-02-01",
+   "permit_expiration": "2031-01-31",
+   "receiving_waters_echo": [
+    "Unnamed tributary to Tyger River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0030571"
+  },
+  {
+   "npdes_permit": "SC0030678",
+   "state": "SC",
+   "facility": "BLUE GRANITE WATER COMPANY OAKLAND PLANTATION SD WWTP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "SUMTER",
+   "city": "SUMTER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2018-07-01",
+   "permit_expiration": "2023-06-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO BEECH CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0030678"
+  },
+  {
+   "npdes_permit": "SC0030724",
+   "state": "SC",
+   "facility": "BLUE GRANITE WATER COMPANY POCALLA VILLAGE",
+   "permittee_as_recorded": "[name removed]",
+   "county": "SUMTER",
+   "city": "SUMTER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2016-08-01",
+   "permit_expiration": "2021-07-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO POCOTALIGO RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0030724"
+  },
+  {
+   "npdes_permit": "SC0031801",
+   "state": "SC",
+   "facility": "SOUTH OF THE BORDER MOTEL",
+   "permittee_as_recorded": "[name removed]",
+   "county": "DILLON",
+   "city": "HAMER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.18,
+   "major_minor": "Minor",
+   "permit_effective": "2026-10-01",
+   "permit_expiration": "2031-09-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO HAYES SWAMP"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0031801"
+  },
+  {
+   "npdes_permit": "SC0032018",
+   "state": "SC",
+   "facility": "CEDAR CREEK MHP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "RICHLAND",
+   "city": "EASTOVER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320",
+    "531190"
+   ],
+   "design_flow_mgd": 0.0158,
+   "major_minor": "Minor",
+   "permit_effective": "2015-04-01",
+   "permit_expiration": "2020-03-31",
+   "receiving_waters_echo": [
+    "Cedar Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0032018"
+  },
+  {
+   "npdes_permit": "SC0032212",
+   "state": "SC",
+   "facility": "CAROLINA MOBILE COURT WWTF",
+   "permittee_as_recorded": "[name removed]",
+   "county": "SUMTER",
+   "city": "SUMTER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2026-03-01",
+   "permit_expiration": "2030-07-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO LONG BRANCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0032212"
+  },
+  {
+   "npdes_permit": "SC0032743",
+   "state": "SC",
+   "facility": "SYNERGY UTILITIES LP BUSH RIVER WWTP",
+   "permittee_as_recorded": "South Carolina Water Utilities",
+   "county": "LEXINGTON",
+   "city": "COLUMBIA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2019-05-01",
+   "permit_expiration": "2023-06-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0032743"
+  },
+  {
+   "npdes_permit": "SC0035980",
+   "state": "SC",
+   "facility": "VISION CENTER",
+   "permittee_as_recorded": "Vision Center",
+   "county": "FAIRFIELD",
+   "city": "WINNSBORO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952",
+    "8661"
+   ],
+   "naics_codes": [
+    "221320",
+    "813110"
+   ],
+   "design_flow_mgd": 0.0495,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2029-08-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0035980"
+  },
+  {
+   "npdes_permit": "SC0037605",
+   "state": "SC",
+   "facility": "LAKE WYLIE MHP UTILITIES LLC",
+   "permittee_as_recorded": "[name removed]",
+   "county": "YORK",
+   "city": "CLOVER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952",
+    "6515"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.09,
+   "major_minor": "Minor",
+   "permit_effective": "2025-02-01",
+   "permit_expiration": "2030-01-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0037605"
+  },
+  {
+   "npdes_permit": "SC0037788",
+   "state": "SC",
+   "facility": "BOLEN POINT PLANTATION PROPERTY OWNERS ASSOCIATION, INC.",
+   "permittee_as_recorded": "BOLEN POINT PLANTATION PROPERTY OWNERS ASSOCIATION, INC.",
+   "county": "COLLETON",
+   "city": "GREEN POND",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2024-11-01",
+   "permit_expiration": "2029-10-31",
+   "receiving_waters_echo": [
+    "Unnamed tributary to Ashepoo River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0037788"
+  },
+  {
+   "npdes_permit": "SC0039055",
+   "state": "SC",
+   "facility": "SYNERGY UTILITIES LP RAINTREE ACRES SD",
+   "permittee_as_recorded": "[name removed]",
+   "county": "RICHLAND",
+   "city": "IRMO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2003-08-01",
+   "permit_expiration": "2007-09-30",
+   "receiving_waters_echo": [
+    "Broad River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0039055"
+  },
+  {
+   "npdes_permit": "SC0039217",
+   "state": "SC",
+   "facility": "BLUE GRANITE WATER COMPANY COUNTRY OAKS WWTP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "YORK",
+   "city": "ROCK HILL",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "6514",
+    "8811"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "Unnamed tributary to Wildcat Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0039217"
+  },
+  {
+   "npdes_permit": "SC0042684",
+   "state": "SC",
+   "facility": "JACABB UTILITIES LLC LINKS OF TRYON SD WWTP",
+   "permittee_as_recorded": "JACABB UTILITIES LLC",
+   "county": "SPARTANBURG",
+   "city": "CAMPOBELLO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6513"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.024,
+   "major_minor": "Minor",
+   "permit_effective": "2017-06-01",
+   "permit_expiration": "2022-05-31",
+   "receiving_waters_echo": [
+    "Unnamed tributary to Motlow Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0042684"
+  },
+  {
+   "npdes_permit": "SC0043451",
+   "state": "SC",
+   "facility": "SOUTH CAROLINA WATER UTILITIES – PUI, INC./SPEARS CREEK WWTP",
+   "permittee_as_recorded": "PALMETTO UTILITIES INC",
+   "county": "RICHLAND",
+   "city": "ELGIN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6514"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Major",
+   "permit_effective": "2019-01-08",
+   "permit_expiration": "2022-08-31",
+   "receiving_waters_echo": [
+    "Wateree River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0043451"
+  },
+  {
+   "npdes_permit": "SC0046817",
+   "state": "SC",
+   "facility": "DEWEES ISLAND RO WTP",
+   "permittee_as_recorded": "DEWEES UTILITY CORPORATION",
+   "county": "CHARLESTON",
+   "city": "DEWEES ISLAND",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4941"
+   ],
+   "naics_codes": [
+    "221310",
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2019-03-01",
+   "permit_expiration": "2024-02-29",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0046817"
+  },
+  {
+   "npdes_permit": "SC0047813",
+   "state": "SC",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "FEDERAL PACIFIC ELECTRIC COMPANY",
+   "county": "EDGEFIELD",
+   "city": "EDGEFIELD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "562910"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2018-06-01",
+   "permit_expiration": "2023-05-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0047813"
+  },
+  {
+   "npdes_permit": "SC0049374",
+   "state": "SC",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "ORANGEBURG",
+   "city": "HOLLY HILL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.1,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-01",
+   "permit_expiration": "2031-04-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO HOME BRANCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0049374"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "SC0027162",
+   "state": "SC",
+   "facility": "TOWN OF LEXINGTON WATER GATE WWTF",
+   "permittee_as_recorded": "[name removed]",
+   "county": "LEXINGTON",
+   "city": "LEXINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2009-12-01",
+   "permit_expiration": "2014-09-30",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#SC0027162"
+  }
+ ]
+}

@@ -1,0 +1,1860 @@
+{
+ "state": "CO",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:49Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 42,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 9,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 3,
+  "by_legal_form_proposed": {
+   "business or industrial": 19,
+   "campground or resort": 5,
+   "homeowners' association": 2,
+   "institution": 4,
+   "investor-owned utility": 4,
+   "mobile-home park": 2,
+   "not stated by the names": 6
+  },
+  "public_by_name": 2
+ },
+ "candidates": [
+  {
+   "npdes_permit": "CO0000009",
+   "state": "CO",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "LARIMER",
+   "city": "BELLVUE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type blank; the name reads as a private body",
+    "facility_type": null,
+    "facility_type_code": "",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2014-06-01",
+   "permit_expiration": "2019-05-31",
+   "receiving_waters_echo": [
+    "CACHE LA POUDRE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0000009"
+  },
+  {
+   "npdes_permit": "CO0001163",
+   "state": "CO",
+   "facility": "MOLSON COORSGOLDEN FACILITY",
+   "permittee_as_recorded": "Molson Coors USA LLC",
+   "county": "JEFFERSON",
+   "city": "JEFFERSON COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "2082",
+    "3411",
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 13.0,
+   "major_minor": "Major",
+   "permit_effective": "2018-11-01",
+   "permit_expiration": "2023-10-31",
+   "receiving_waters_echo": [
+    "Clear Creek"
+   ],
+   "external_outfalls": 4,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0001163"
+  },
+  {
+   "npdes_permit": "CO0020184",
+   "state": "CO",
+   "facility": "SAN LAZARO MHP WWTF",
+   "permittee_as_recorded": "San Lazaro Park Properties LLP",
+   "county": "BOULDER",
+   "city": "BOULDER COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.11,
+   "major_minor": "Minor",
+   "permit_effective": "2010-06-01",
+   "permit_expiration": "2015-05-31",
+   "receiving_waters_echo": [
+    "Boulder Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0020184"
+  },
+  {
+   "npdes_permit": "CO0023876",
+   "state": "CO",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Dundee Resort Development LLC",
+   "county": "SUMMIT",
+   "city": "DILLON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.035,
+   "major_minor": "Minor",
+   "permit_effective": "2015-08-01",
+   "permit_expiration": "2020-07-31",
+   "receiving_waters_echo": [
+    "Snake River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0023876"
+  },
+  {
+   "npdes_permit": "CO0026468",
+   "state": "CO",
+   "facility": "LIGHTNER CREEK CAMPGROUND",
+   "permittee_as_recorded": "Cottonwood Canyon LLC",
+   "county": "LA PLATA",
+   "city": "LA PLATA COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2013-10-01",
+   "permit_expiration": "2018-09-30",
+   "receiving_waters_echo": [
+    "LIGHTNER CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0026468"
+  },
+  {
+   "npdes_permit": "CO0028444",
+   "state": "CO",
+   "facility": "MONARCH MOUNTAIN LODGE WASTWATER COMPANY",
+   "permittee_as_recorded": "Monarch Mountain Lodge WW Co & Inn-Vestors Inc",
+   "county": "CHAFFEE",
+   "city": "MONARCH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.037,
+   "major_minor": "Minor",
+   "permit_effective": "2015-08-01",
+   "permit_expiration": "2020-07-31",
+   "receiving_waters_echo": [
+    "SOUTH FORK OF ARKANSAS RIVER, SOUTH FORK OF ARKASAS RIVER",
+    "South Fork of Arkansas River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0028444"
+  },
+  {
+   "npdes_permit": "CO0029033",
+   "state": "CO",
+   "facility": "ROYAL GORGE COMPANY OF COLORADO",
+   "permittee_as_recorded": "Royal Gorge Bridge and Park Co",
+   "county": "FREMONT",
+   "city": "CANON CITY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.036,
+   "major_minor": "Minor",
+   "permit_effective": "2014-10-01",
+   "permit_expiration": "2019-09-30",
+   "receiving_waters_echo": [
+    "Hanging Bridge Gulch"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0029033"
+  },
+  {
+   "npdes_permit": "CO0030112",
+   "state": "CO",
+   "facility": "GLACIER VIEW RANCH",
+   "permittee_as_recorded": "Seventh-Day Adventist Assoc of Colorado",
+   "county": "BOULDER",
+   "city": "BOULDER COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.04,
+   "major_minor": "Minor",
+   "permit_effective": "2012-11-01",
+   "permit_expiration": "2017-10-31",
+   "receiving_waters_echo": [
+    "UNMD DRY WASH TRIB TO S ST VRAIN CR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0030112"
+  },
+  {
+   "npdes_permit": "CO0030261",
+   "state": "CO",
+   "facility": "BROOK FOREST INN",
+   "permittee_as_recorded": "Brookside Chateau LLC",
+   "county": "JEFFERSON",
+   "city": "EVERGREEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.009,
+   "major_minor": "Minor",
+   "permit_effective": "2009-05-01",
+   "permit_expiration": "2014-04-30",
+   "receiving_waters_echo": [
+    "Cub Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0030261"
+  },
+  {
+   "npdes_permit": "CO0031399",
+   "state": "CO",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "PowderMonarch LLC",
+   "county": "CHAFFEE",
+   "city": "CHAFFEE COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.023,
+   "major_minor": "Minor",
+   "permit_effective": "2014-12-01",
+   "permit_expiration": "2019-11-30",
+   "receiving_waters_echo": [
+    "Arkansas River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0031399"
+  },
+  {
+   "npdes_permit": "CO0036129",
+   "state": "CO",
+   "facility": "TINY TOWN HISTORICAL PARK",
+   "permittee_as_recorded": "Tiny Town Company LLC",
+   "county": "JEFFERSON",
+   "city": "MORRISON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.005,
+   "major_minor": "Minor",
+   "permit_effective": "2026-09-01",
+   "permit_expiration": "2031-08-31",
+   "receiving_waters_echo": [
+    "Turkey Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0036129"
+  },
+  {
+   "npdes_permit": "CO0037702",
+   "state": "CO",
+   "facility": "VISTA VERDE VILLAGE",
+   "permittee_as_recorded": "Vista Verde Village",
+   "county": "MONTEZUMA",
+   "city": "MONTEZUMA COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2013-02-01",
+   "permit_expiration": "2018-01-31",
+   "receiving_waters_echo": [
+    "MCELMO CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0037702"
+  },
+  {
+   "npdes_permit": "CO0038598",
+   "state": "CO",
+   "facility": "SUNLIGHT, INC.",
+   "permittee_as_recorded": "Sunlight Inc",
+   "county": "GARFIELD COUNTY",
+   "city": "GARFIELD COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.05,
+   "major_minor": "Minor",
+   "permit_effective": "2015-01-01",
+   "permit_expiration": "2019-12-31",
+   "receiving_waters_echo": [
+    "FOURMILE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0038598"
+  },
+  {
+   "npdes_permit": "CO0039691",
+   "state": "CO",
+   "facility": "CASCADE VILLAGE WWTF",
+   "permittee_as_recorded": "Grizzly Peak Water Sales and Distribution LLC",
+   "county": "SAN JUAN",
+   "city": "DURANGO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.12,
+   "major_minor": "Minor",
+   "permit_effective": "2019-02-01",
+   "permit_expiration": "2024-01-31",
+   "receiving_waters_echo": [
+    "CASCADE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0039691"
+  },
+  {
+   "npdes_permit": "CO0040266",
+   "state": "CO",
+   "facility": "EDGEMONT RANCH METRO DISTRICT WWTF",
+   "permittee_as_recorded": "Edgemont Ranch Metro District",
+   "county": null,
+   "city": "LA PLATA COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type NON-POTW; the name reads as a private body",
+    "facility_type": "NON-POTW",
+    "facility_type_code": null,
+    "source": "fed-echo-icis-npdes-national-dataset",
+    "file": "data/outfalls-plants-us.json",
+    "fetched_at": "2026-11-03T21:02:45Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": 0.1,
+   "major_minor": "Minor",
+   "permit_effective": null,
+   "permit_expiration": null,
+   "receiving_waters_echo": [
+    "FLORIDA RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0040266"
+  },
+  {
+   "npdes_permit": "CO0040819",
+   "state": "CO",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "A-Ventures LLC",
+   "county": "BOULDER",
+   "city": "BOULDER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0045,
+   "major_minor": "Minor",
+   "permit_effective": "2014-05-01",
+   "permit_expiration": "2019-04-30",
+   "receiving_waters_echo": [
+    "Fourt Mile Creek",
+    "Four Mile Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0040819"
+  },
+  {
+   "npdes_permit": "CO0040835",
+   "state": "CO",
+   "facility": "LOVELAND SKI AREA WWTF",
+   "permittee_as_recorded": "Clear Creek Skiing Corp",
+   "county": "CLEAR CREEK",
+   "city": "GEORGETOWN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2011-10-01",
+   "permit_expiration": "2016-09-30",
+   "receiving_waters_echo": [
+    "CLEAR CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0040835"
+  },
+  {
+   "npdes_permit": "CO0042617",
+   "state": "CO",
+   "facility": "HORIZON HEALTH CARE & RETIREMENT COMMUNITY",
+   "permittee_as_recorded": "Volunteers of America Care Fac",
+   "county": "DELTA",
+   "city": "DELTA COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2014-05-01",
+   "permit_expiration": "2019-04-30",
+   "receiving_waters_echo": [
+    "SURFACE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0042617"
+  },
+  {
+   "npdes_permit": "CO0042820",
+   "state": "CO",
+   "facility": "DAO HOUSE WWTF",
+   "permittee_as_recorded": "Dao House LLC",
+   "county": "LARIMER",
+   "city": "ESTES PARK",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.021,
+   "major_minor": "Minor",
+   "permit_effective": "2016-12-01",
+   "permit_expiration": "2021-11-30",
+   "receiving_waters_echo": [
+    "TAHOSA CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0042820"
+  },
+  {
+   "npdes_permit": "CO0044971",
+   "state": "CO",
+   "facility": "KING MOUNTAIN RANCH LLC",
+   "permittee_as_recorded": "Circle C Ranch King LLC",
+   "county": "GRAND",
+   "city": "GRAND COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2004-09-01",
+   "permit_expiration": "2009-08-31",
+   "receiving_waters_echo": [
+    "GROUNDWATER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0044971"
+  },
+  {
+   "npdes_permit": "CO0045411",
+   "state": "CO",
+   "facility": "CROOKED CREEK RANCH",
+   "permittee_as_recorded": "Young Life Campaign Inc",
+   "county": "GRAND",
+   "city": "FRASER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.033,
+   "major_minor": "Minor",
+   "permit_effective": "2011-10-01",
+   "permit_expiration": "2016-09-30",
+   "receiving_waters_echo": [
+    "CROOKED CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0045411"
+  },
+  {
+   "npdes_permit": "CO0045802",
+   "state": "CO",
+   "facility": "OAK MEADOWS WWTF",
+   "permittee_as_recorded": "Oak Meadows Service Company",
+   "county": "GARFIELD",
+   "city": "GARFIELD COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.035,
+   "major_minor": "Minor",
+   "permit_effective": "2014-12-01",
+   "permit_expiration": "2019-11-30",
+   "receiving_waters_echo": [
+    "Fourmile Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0045802"
+  },
+  {
+   "npdes_permit": "CO0045993",
+   "state": "CO",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "DOUGLAS",
+   "city": "SEDALIA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.012,
+   "major_minor": "Minor",
+   "permit_effective": "2015-06-01",
+   "permit_expiration": "2020-05-31",
+   "receiving_waters_echo": [
+    "Fourmile Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0045993"
+  },
+  {
+   "npdes_permit": "CO0046221",
+   "state": "CO",
+   "facility": "ORICA USA, INC.",
+   "permittee_as_recorded": "East Aurora Ventures LLC",
+   "county": "ADAMS",
+   "city": "WATKINS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.012,
+   "major_minor": "Minor",
+   "permit_effective": "2015-01-01",
+   "permit_expiration": "2019-12-31",
+   "receiving_waters_echo": [
+    "Coal Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0046221"
+  },
+  {
+   "npdes_permit": "CO0046566",
+   "state": "CO",
+   "facility": "DEVIL'S THUMB RANCH",
+   "permittee_as_recorded": "Colorado Mountain Resort Investors LLC",
+   "county": "GRAND",
+   "city": "GRAND COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.034,
+   "major_minor": "Minor",
+   "permit_effective": "2014-12-01",
+   "permit_expiration": "2019-11-30",
+   "receiving_waters_echo": [
+    "RANCH CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0046566"
+  },
+  {
+   "npdes_permit": "CO0047252",
+   "state": "CO",
+   "facility": "ELLICOTT SPRINGS WWTF",
+   "permittee_as_recorded": "Ellicott Utilities Company",
+   "county": "EL PASO",
+   "city": "EL PASO COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.25,
+   "major_minor": "Minor",
+   "permit_effective": "2014-09-01",
+   "permit_expiration": "2019-08-31",
+   "receiving_waters_echo": [
+    "BLACK SQUIRREL CREEK, UNNMD TRIB TO BLACK SQUIRREL CREEK",
+    "Black Squirrel Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0047252"
+  },
+  {
+   "npdes_permit": "CO0047473",
+   "state": "CO",
+   "facility": "SHWAYDER CAMP WWTF",
+   "permittee_as_recorded": "[name removed]",
+   "county": "CLEAR CREEK",
+   "city": "CLEAR CREEK COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.009,
+   "major_minor": "Minor",
+   "permit_effective": "2014-09-01",
+   "permit_expiration": "2019-08-31",
+   "receiving_waters_echo": [
+    "CHICAGO CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0047473"
+  },
+  {
+   "npdes_permit": "CO0048828",
+   "state": "CO",
+   "facility": "PEACEFUL VALLEY RANCH",
+   "permittee_as_recorded": "Peaceful Valley Ranch LLC",
+   "county": "BOULDER",
+   "city": "LYONS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.013,
+   "major_minor": "Minor",
+   "permit_effective": "2018-07-01",
+   "permit_expiration": "2023-06-30",
+   "receiving_waters_echo": [
+    "MIDDLE ST. VRAIN CREEK",
+    "St. Vrain Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0048828"
+  },
+  {
+   "npdes_permit": "CO0048847",
+   "state": "CO",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Petroleum Wholesale LP",
+   "county": "MESA",
+   "city": "PALISADE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.015,
+   "major_minor": "Minor",
+   "permit_effective": "2011-11-01",
+   "permit_expiration": "2016-10-31",
+   "receiving_waters_echo": [
+    "LOWER COLORADO RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0048847"
+  },
+  {
+   "npdes_permit": "CO0048861",
+   "state": "CO",
+   "facility": "HIDDEN VIEW ESTATES HOA WWTF",
+   "permittee_as_recorded": "Hidden View Estates HOA",
+   "county": "LARIMER",
+   "city": "LARIMER COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.008,
+   "major_minor": "Minor",
+   "permit_effective": "2018-04-01",
+   "permit_expiration": "2023-03-31",
+   "receiving_waters_echo": [
+    "BUCKHORN CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0048861"
+  },
+  {
+   "npdes_permit": "CO0048900",
+   "state": "CO",
+   "facility": "BEAR RANCH WWTF",
+   "permittee_as_recorded": "Bear Ranch LLC",
+   "county": "GUNNISON",
+   "city": "SOMERSET",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.016,
+   "major_minor": "Minor",
+   "permit_effective": "2014-01-01",
+   "permit_expiration": "2018-12-31",
+   "receiving_waters_echo": [
+    "Deep Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0048900"
+  },
+  {
+   "npdes_permit": "CO0049000",
+   "state": "CO",
+   "facility": "OLD HOMESTEAD MHP WWTF",
+   "permittee_as_recorded": "Old Homestead Park Ltd",
+   "county": "LA PLATA",
+   "city": "DURANGO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "mobile-home park",
+   "ownership": {
+    "basis": "EPA facility type blank; the name reads as a private body",
+    "facility_type": null,
+    "facility_type_code": "",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0399,
+   "major_minor": "Minor",
+   "permit_effective": "2016-08-01",
+   "permit_expiration": "2021-07-31",
+   "receiving_waters_echo": [
+    "Trumble Draw"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0049000"
+  },
+  {
+   "npdes_permit": "CO0049020",
+   "state": "CO",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Asphalt Specialties Co Inc",
+   "county": "ADAMS",
+   "city": "HENDERSON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type blank; the name reads as a private body",
+    "facility_type": null,
+    "facility_type_code": "",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "1442",
+    "4952",
+    "4953"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2017-10-01",
+   "permit_expiration": "2022-09-30",
+   "receiving_waters_echo": [
+    "South Platte River"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0049020"
+  },
+  {
+   "npdes_permit": "CO0049021",
+   "state": "CO",
+   "facility": "MOUNTAIN VALLEY ESTATES WWTP",
+   "permittee_as_recorded": "Mountain Valley Estates LLC",
+   "county": "LAKE",
+   "city": "LEADVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type blank; the name reads as a private body",
+    "facility_type": null,
+    "facility_type_code": "",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2018-08-01",
+   "permit_expiration": "2023-07-31",
+   "receiving_waters_echo": [
+    "ARKANSAS RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0049021"
+  },
+  {
+   "npdes_permit": "CO0049022",
+   "state": "CO",
+   "facility": "CR 5001 WWTF",
+   "permittee_as_recorded": "County Road 50 Homeowners Association",
+   "county": "GRAND",
+   "city": "FRASER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.009,
+   "major_minor": "Minor",
+   "permit_effective": "2020-01-01",
+   "permit_expiration": "2024-12-31",
+   "receiving_waters_echo": [
+    "Crooked Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0049022"
+  },
+  {
+   "npdes_permit": "CO0049036",
+   "state": "CO",
+   "facility": "FROST CREEK CLUBHOUSE WWTF",
+   "permittee_as_recorded": "Frost Creek Clubhouse WWTF",
+   "county": "EAGLE",
+   "city": "EAGLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2019-06-01",
+   "permit_expiration": "2024-05-31",
+   "receiving_waters_echo": [
+    "Brush Creek"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0049036"
+  },
+  {
+   "npdes_permit": "COE008000",
+   "state": "CO",
+   "facility": "LAS VEGAS STREET WWTF",
+   "permittee_as_recorded": "Colorado Springs Utilities",
+   "county": "EL PASO",
+   "city": "COLORADO SPRINGS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type blank; the name reads as a private body",
+    "facility_type": null,
+    "facility_type_code": "",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 12.0,
+   "major_minor": "Minor",
+   "permit_effective": "2015-08-20",
+   "permit_expiration": "2020-08-19",
+   "receiving_waters_echo": [],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#COE008000"
+  },
+  {
+   "npdes_permit": "COE017000",
+   "state": "CO",
+   "facility": "ELBERT CREEK WWTP",
+   "permittee_as_recorded": "Elbert Creek Water Company LLC",
+   "county": "LA PLATA",
+   "city": "LA PLATA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type blank; the name reads as a private body",
+    "facility_type": null,
+    "facility_type_code": "",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.2,
+   "major_minor": "Minor",
+   "permit_effective": "2015-08-13",
+   "permit_expiration": "2020-08-12",
+   "receiving_waters_echo": [],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#COE017000"
+  },
+  {
+   "npdes_permit": "COE025000",
+   "state": "CO",
+   "facility": "JD PHILLIPS WATER RESOURCE RECOVERY FACILITY",
+   "permittee_as_recorded": "Colorado Springs Utilities",
+   "county": "EL PASO",
+   "city": "COLORADO SPRINGS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type blank; the name reads as a private body",
+    "facility_type": null,
+    "facility_type_code": "",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 11.0,
+   "major_minor": "Minor",
+   "permit_effective": "2015-11-27",
+   "permit_expiration": "2020-11-26",
+   "receiving_waters_echo": [],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#COE025000"
+  },
+  {
+   "npdes_permit": "COX041874",
+   "state": "CO",
+   "facility": "SACRED HEART RETREAT",
+   "permittee_as_recorded": "Sacred Heart Retreat",
+   "county": "DOUGLAS",
+   "city": "DOUGLAS COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0045,
+   "major_minor": "Minor",
+   "permit_effective": "2005-05-01",
+   "permit_expiration": "2010-04-30",
+   "receiving_waters_echo": [
+    "GROUNDWATER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#COX041874"
+  },
+  {
+   "npdes_permit": "COX047511",
+   "state": "CO",
+   "facility": "PONDEROSA RETREAT&CONF CNTR",
+   "permittee_as_recorded": "Ponderosa Retreat and Conference Center",
+   "county": "DOUGLAS",
+   "city": "DOUGLAS COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0215,
+   "major_minor": "Minor",
+   "permit_effective": "2007-08-01",
+   "permit_expiration": "2012-07-31",
+   "receiving_waters_echo": [
+    "GROUNDWATER, GROUNWATER",
+    "GROUNDWATER",
+    "GROUNWATER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#COX047511"
+  },
+  {
+   "npdes_permit": "COX048904",
+   "state": "CO",
+   "facility": "4UR RANCH",
+   "permittee_as_recorded": "4UR Ranch Inc",
+   "county": "MINERAL",
+   "city": "CREEDE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.012,
+   "major_minor": "Minor",
+   "permit_effective": "2014-02-01",
+   "permit_expiration": "2019-01-31",
+   "receiving_waters_echo": [
+    "Groundwater"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#COX048904"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "CO0046914",
+   "state": "CO",
+   "facility": "ASPEN INSTITUTE WWTF",
+   "permittee_as_recorded": "Baca Grande Water and Sanitation District",
+   "county": "SAGUACHE",
+   "city": "SAGUACHE COUNTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.15,
+   "major_minor": "Minor",
+   "permit_effective": "2019-12-01",
+   "permit_expiration": "2024-11-30",
+   "receiving_waters_echo": [
+    "South Crestone Creek"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0046914"
+  },
+  {
+   "npdes_permit": "CO0047317",
+   "state": "CO",
+   "facility": "UNIVERSITY OF DENVER KENNEDY MOUNTAIN CAMPUS WWTF",
+   "permittee_as_recorded": "University of Denver",
+   "county": "LARIMER",
+   "city": "RED FEATHER LAKES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.013,
+   "major_minor": "Minor",
+   "permit_effective": "2015-09-01",
+   "permit_expiration": "2020-08-31",
+   "receiving_waters_echo": [
+    "SOUTH LONE PINE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#CO0047317"
+  }
+ ]
+}

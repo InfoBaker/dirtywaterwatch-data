@@ -1,0 +1,338 @@
+{
+ "state": "NM",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:49Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 5,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 0,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 1,
+  "by_legal_form_proposed": {
+   "business or industrial": 4,
+   "investor-owned utility": 1
+  },
+  "public_by_name": 2
+ },
+ "candidates": [
+  {
+   "npdes_permit": "NM0028088",
+   "state": "NM",
+   "facility": "GLORIETA CAMPS WASTEWATER TREATMENT PLANT",
+   "permittee_as_recorded": "[name removed]",
+   "county": "SANTA FE",
+   "city": "GLORIETA",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "8661"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-11-01",
+   "permit_expiration": "2028-10-31",
+   "receiving_waters_echo": [
+    "GLORIETA CREEK"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NM0028088"
+  },
+  {
+   "npdes_permit": "NM0029238",
+   "state": "NM",
+   "facility": "CDS RAINMAKERS UTILITIES, LLC",
+   "permittee_as_recorded": "CDS RAINMAKERS UTILITIES, LLC",
+   "county": "LINCOLN",
+   "city": "LINCOLN COULTY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [
+    "LITTLE CREEK/EAGLE CREEK"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NM0029238"
+  },
+  {
+   "npdes_permit": "NM0030686",
+   "state": "NM",
+   "facility": "RIO PUERCO WWTP/ROUTE 66 CASINO",
+   "permittee_as_recorded": "RIO PUERCO WWTP",
+   "county": "BERNALILLO",
+   "city": "ALBUQUERQUE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7011"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-12-01",
+   "permit_expiration": "2026-11-30",
+   "receiving_waters_echo": [
+    "UNNAMED ARROYA TO RIO PUERCO"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NM0030686"
+  },
+  {
+   "npdes_permit": "NM0031194",
+   "state": "NM",
+   "facility": "CUTTER LATERAL WATER TREATMENT PLANT",
+   "permittee_as_recorded": "CUTTER LATERAL WATER TREATMENT PLANT",
+   "county": "SAN JUAN COUNTY",
+   "city": "FARMINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-02-01",
+   "permit_expiration": "2029-01-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NM0031194"
+  },
+  {
+   "npdes_permit": "NM0031224",
+   "state": "NM",
+   "facility": "TESUQUE CASINO WASTEWATER TREATMENT PLANT",
+   "permittee_as_recorded": "TESUQUE CASINO WASTEWATER TREATMENT PLANT",
+   "county": "SANTA FE COUNTY",
+   "city": "TESUQUE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-08-01",
+   "permit_expiration": "2030-07-31",
+   "receiving_waters_echo": [
+    "RIO GRANDE BASIN, RIO TESUQUE",
+    "RIO TESUQUE"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NM0031224"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "NM0028479",
+   "state": "NM",
+   "facility": "JEMEZ VALLEY PUBLIC SCHOOLS",
+   "permittee_as_recorded": "JEMEZ VALLEY PUBLIC SCHOOLS",
+   "county": "SANDOVAL",
+   "city": "JEMEZ PUEBLO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2024-11-01",
+   "permit_expiration": "2029-10-31",
+   "receiving_waters_echo": [
+    "JEMEZ RIVER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NM0028479"
+  },
+  {
+   "npdes_permit": "NN0030325",
+   "state": "NM",
+   "facility": "PINEHILL WWTF",
+   "permittee_as_recorded": "RAMAH NAVAJO SCHOOL BOARD, INC",
+   "county": "CIBOLA",
+   "city": "PINEHILL",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body and a company",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.035,
+   "major_minor": "Minor",
+   "permit_effective": "2021-08-01",
+   "permit_expiration": "2026-07-31",
+   "receiving_waters_echo": [
+    "UNNAMED WASH, TRIBUTARY TO LITTLE COLORADO RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NN0030325"
+  }
+ ]
+}

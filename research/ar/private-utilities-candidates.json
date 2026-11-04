@@ -1,0 +1,709 @@
+{
+ "state": "AR",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:49Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 13,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 0,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 1,
+  "by_legal_form_proposed": {
+   "business or industrial": 4,
+   "homeowners' association": 3,
+   "institution": 1,
+   "investor-owned utility": 4,
+   "not stated by the names": 1
+  },
+  "public_by_name": 2
+ },
+ "candidates": [
+  {
+   "npdes_permit": "AR0034258",
+   "state": "AR",
+   "facility": "VILLAGE WASTE WATER COMPANY, INC.",
+   "permittee_as_recorded": "Village Waste Water Company, Inc.",
+   "county": "BENTON",
+   "city": "BELLA VISTA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.9,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "Little Sugar Cr"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0034258"
+  },
+  {
+   "npdes_permit": "AR0034282",
+   "state": "AR",
+   "facility": "ST. JOSEPH'S UTILITY OPERATING COMPANY, LLC - CHEROKEE VILLAGE WWTF",
+   "permittee_as_recorded": "St. Joseph's Utility Operating Company, LLC - Cherokee Village WWTF",
+   "county": "SHARP",
+   "city": "CHEROKEE VILLAGE",
+   "system_kind": null,
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "6552"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.016,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-01",
+   "permit_expiration": "2031-06-30",
+   "receiving_waters_echo": [
+    "S Fork Spring R,Spring R,Black R,White R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0034282"
+  },
+  {
+   "npdes_permit": "AR0034363",
+   "state": "AR",
+   "facility": "SHUMAKER PUBLIC SERVICE CORP.",
+   "permittee_as_recorded": "Shumaker Public Service Corp.",
+   "county": "CALHOUN",
+   "city": "EAST CAMDEN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 1.5,
+   "major_minor": "Minor",
+   "permit_effective": "2021-09-01",
+   "permit_expiration": "2026-08-31",
+   "receiving_waters_echo": [
+    "E TWO BU,OUACHITA R",
+    "Two Bu,Ouachita R"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0034363"
+  },
+  {
+   "npdes_permit": "AR0039403",
+   "state": "AR",
+   "facility": "HEPOA, LLC - HARBOR EAST POA, LLC",
+   "permittee_as_recorded": "HEPOA, LLC - Harbor East POA, LLC",
+   "county": "MONTGOMERY",
+   "city": "MOUNT IDA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.089,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-01",
+   "permit_expiration": "2029-03-31",
+   "receiving_waters_echo": [
+    "Trib,Lk Ouachita,Ouachita R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0039403"
+  },
+  {
+   "npdes_permit": "AR0044580",
+   "state": "AR",
+   "facility": "FAIRFIELD BAY WASTEWATER CORP. - LYNN CREEK",
+   "permittee_as_recorded": "Fairfield Bay Wastewater Corp.- Lynn Creek WWTP",
+   "county": "VAN BUREN",
+   "city": "FAIRFIELD BAY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.5,
+   "major_minor": "Minor",
+   "permit_effective": "2021-05-01",
+   "permit_expiration": "2026-04-30",
+   "receiving_waters_echo": [
+    "Lynn Cr,Greers Ferry Lk,Ltl Red R,White R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0044580"
+  },
+  {
+   "npdes_permit": "AR0046141",
+   "state": "AR",
+   "facility": "AR DISTRICT COUNCIL OF THE ASSEMBLIES OF GOD - MOUNTAIN VALLEY RETREAT CENTER",
+   "permittee_as_recorded": "Arkansas District Council of the Assemblies of God",
+   "county": "GARLAND",
+   "city": "MOUNTAIN VALLEY (HISTORICAL), TOWNSHIP OF",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.025,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [
+    "Trib,South Fork Saline R,Saline R,Ouachita R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0046141"
+  },
+  {
+   "npdes_permit": "AR0050130",
+   "state": "AR",
+   "facility": "CALLAGHAN CREEK SUBDIVISION",
+   "permittee_as_recorded": "Callaghan Creek POA, Inc.",
+   "county": "PULASKI",
+   "city": "LITTLE ROCK",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2021-08-01",
+   "permit_expiration": "2026-07-31",
+   "receiving_waters_echo": [
+    "CALLAGHAN CR,FOURCHE CR,ARKANSAS R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0050130"
+  },
+  {
+   "npdes_permit": "AR0050181",
+   "state": "AR",
+   "facility": "ST. JOSEPH'S GLEN SUBDIVISION WASTEWATER TREATMENT SYSTEM",
+   "permittee_as_recorded": "St. Joseph's Utility Operating Company, LLC-St. Joseph's Glenn Subdivision",
+   "county": "SALINE",
+   "city": "ALEXANDER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2026-06-01",
+   "permit_expiration": "2031-05-31",
+   "receiving_waters_echo": [
+    "TRIB,CROOKED CR,FOURCHE CR,ARKANSAS R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0050181"
+  },
+  {
+   "npdes_permit": "AR0050202",
+   "state": "AR",
+   "facility": "DESTINED TO WIN/SECOND CHANCE RANCH, INC.",
+   "permittee_as_recorded": "DESTINED TO WIN/SECOND CHANCE RANCH, INC.",
+   "county": "SALINE",
+   "city": "BENTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8361"
+   ],
+   "naics_codes": [
+    "221320",
+    "623990"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2020-09-01",
+   "permit_expiration": "2025-08-31",
+   "receiving_waters_echo": [
+    "TRIB,N FRK SALINE R,SALINE R,OUACHITA R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0050202"
+  },
+  {
+   "npdes_permit": "AR0051004",
+   "state": "AR",
+   "facility": "EAGLE VIEW WASTEWATER TREATMENT FACILITY",
+   "permittee_as_recorded": "Eagle View Property Owners' Association, Inc.",
+   "county": "LAFAYETTE",
+   "city": "BRADLEY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320",
+    "237210"
+   ],
+   "design_flow_mgd": 0.018,
+   "major_minor": "Minor",
+   "permit_effective": "2021-02-01",
+   "permit_expiration": "2026-01-31",
+   "receiving_waters_echo": [
+    "DIT,TRIB,LAKE ERLING,BODCAU CR"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0051004"
+  },
+  {
+   "npdes_permit": "AR0051039",
+   "state": "AR",
+   "facility": "SEBASTIAN LAKE UTILITY OPERATING COMPANY, LLC - SEBASTIAN LAKE PUBLIC WATER",
+   "permittee_as_recorded": "Sebastian Lake Utility Operating Company, LLC - Sebastian Lake Public Water",
+   "county": "SEBASTIAN",
+   "city": "HACKETT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2026-06-01",
+   "permit_expiration": "2031-05-31",
+   "receiving_waters_echo": [
+    "Big Br,James Frk,Poteau R,Arkansas R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0051039"
+  },
+  {
+   "npdes_permit": "AR0052001",
+   "state": "AR",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "LONOKE",
+   "city": "CABOT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": 0.0005,
+   "major_minor": "Minor",
+   "permit_effective": "2021-11-01",
+   "permit_expiration": "2026-10-31",
+   "receiving_waters_echo": [
+    "Trib,Wattensaw Bu, White R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0052001"
+  },
+  {
+   "npdes_permit": "AR0052281",
+   "state": "AR",
+   "facility": "CAMP BUNKER, LLC - THE OXBOW",
+   "permittee_as_recorded": "Camp Bunker, LLC - The Oxbow",
+   "county": "CHICOT",
+   "city": "LAKE VILLAGE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7032"
+   ],
+   "naics_codes": [
+    "221320",
+    "721214"
+   ],
+   "design_flow_mgd": 0.0022,
+   "major_minor": "Minor",
+   "permit_effective": "2025-12-01",
+   "permit_expiration": "2030-11-30",
+   "receiving_waters_echo": [
+    "Ditch Bayou, Macon Bayou"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0052281"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "AR0000906",
+   "state": "AR",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "PRESCOTT, CITY OF-PRESCOTT LUMBER MILL",
+   "county": "NEVADA",
+   "city": "PRESCOTT",
+   "system_kind": "industrial permit with a sewage code",
+   "sewage_basis": [
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Corporation; the name reads as a public body",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "2421"
+   ],
+   "naics_codes": [
+    "221320"
+   ],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2020-01-01",
+   "permit_expiration": "2024-12-31",
+   "receiving_waters_echo": [
+    "MILL BR,ONION CR,TERRE ROUGE CR,LTL MISSOURI R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0000906"
+  },
+  {
+   "npdes_permit": "AR0041424",
+   "state": "AR",
+   "facility": "PLEASANT OAKS SEWER IMPROVEMENT DISTRICT #31",
+   "permittee_as_recorded": "Pleasant Oaks Sewer Improvement District #31",
+   "county": "SALINE",
+   "city": "MABELVALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "NAICS 221320 (sewage treatment facilities)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6552"
+   ],
+   "naics_codes": [
+    "221320",
+    "237210"
+   ],
+   "design_flow_mgd": 0.02,
+   "major_minor": "Minor",
+   "permit_effective": "2021-02-01",
+   "permit_expiration": "2026-01-31",
+   "receiving_waters_echo": [
+    "TRIB,OTTER CR,FOURCHE CR,ARKANSAS R"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AR0041424"
+  }
+ ]
+}
