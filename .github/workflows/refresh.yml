@@ -9,6 +9,11 @@ name: Refresh data
 # OPENROUTER_API_KEY (without it they run rules-only).
 on:
   workflow_dispatch:
+    inputs:
+      backfill:
+        description: "Ingest modules to run once with --backfill before the refresh, space-separated (e.g. nc_dwr_sso nc_algal_blooms fl_dep_pnp); their history then lives in the saved state"
+        required: false
+        default: ''
   schedule:
     - cron: '7 * * * *'   # hourly, off the hour (enabled 2026-11-04 after run 3 restored the seeded state and uploaded)
 
@@ -45,6 +50,20 @@ jobs:
         run: |
           wrangler r2 object get dirtywaterwatch-data/state/build.tar.gz --file build.tar.gz --remote && tar -xzf build.tar.gz || echo "no state yet"
           find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
+      - name: Backfill (one-time history loads named in the dispatch input, before the refresh)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.backfill != ''
+        env:
+          BACKFILL: ${{ github.event.inputs.backfill }}
+        run: |
+          # each module reads its full history once (--backfill); the refresh that follows dedupes and the state save keeps it
+          rc=0
+          for m in $BACKFILL; do
+            case "$m" in *[!a-z0-9_]*) echo "::error::bad module name: $m"; exit 1 ;; esac
+            [ -f "pipeline/ingest/$m.py" ] || { echo "::error::no such ingest module: $m"; exit 1; }
+            echo "== backfill ingest.$m"
+            (cd pipeline && .venv/bin/python -m "ingest.$m" --backfill) || { echo "::error::ingest.$m --backfill failed"; rc=1; }
+          done
+          exit $rc
       - name: Refresh (feeds, status, reaches, charts, export, tally, R2 current/)
         run: sh scripts/refresh-data.sh
       - name: Full export to R2 for the site build (state/out.tar.gz; the site repository's publish workflow reads it)
