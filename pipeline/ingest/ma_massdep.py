@@ -73,7 +73,11 @@ TZ = ZoneInfo("America/New_York")
 ROWS_PATH = BUILD_DIR / "ma-massdep-rows.json"
 LAYER_CACHE = BUILD_DIR / "ma-cso-outfalls.json"
 LAYER_FALLBACK = ROOT / "research/ma/raw/portal/massdep-csos-all.json"
-CROSSWALK = ROOT / "research/ma/raw/portal/waterbody-crosswalk.csv"
+# The hand-kept portal-name -> water-slug crosswalk: the tracked copy in data/reference/ first (the public data
+# repository carries it), else the research raw folder on the machine that built it; missing: no crosswalk.
+CROSSWALK = next((p for p in (ROOT / "data/reference/ma-portal-waterbody-crosswalk.csv",
+                               ROOT / "research/ma/raw/portal/waterbody-crosswalk.csv") if p.exists()),
+                 ROOT / "data/reference/ma-portal-waterbody-crosswalk.csv")
 DISCHARGERS = ROOT / "research/ma/dischargers.json"
 WATERS_CSV = DATA_DIR / "waters-ne.csv"
 ECHO_OUTFALLS = DATA_DIR / "outfalls-ne.json"
@@ -226,6 +230,10 @@ def norm_name(s: str | None) -> str:
 
 def load_crosswalk() -> dict:
     cw = {}
+    if not CROSSWALK.exists():
+        print(f"{SOURCE_ID if 'SOURCE_ID' in globals() else 'ma-massdep'}: no waterbody crosswalk at {CROSSWALK.name}; "
+              "water names resolve by name only (copy the crosswalk to data/reference/)", file=sys.stderr)
+        return cw
     with CROSSWALK.open() as fh:
         for row in csv.DictReader(fh):
             v = (row["water_slug"].strip() or None, row["confidence"].strip(), row["note"].strip())

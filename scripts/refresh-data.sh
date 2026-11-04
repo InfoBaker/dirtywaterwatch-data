@@ -19,5 +19,5 @@ make tally || echo "source tally failed"
 # the export's blocklist self-check (pipeline/export/build.py enforce_blocklist) found a private name in out/:
 # nothing is uploaded until an export passes it (the mark lists the files)
 [ -f data/build/export-blocked.json ] && { echo "export blocked: a blocklisted name is in out/ (data/build/export-blocked.json); not uploading"; exit 1; }
-scripts/upload-current.sh || echo "upload failed"
+sh scripts/upload-current.sh || echo "upload failed"
 echo "===== $(date -u +%FT%TZ) refresh end"
