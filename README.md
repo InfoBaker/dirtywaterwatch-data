@@ -38,6 +38,8 @@ creates the virtual environment.
 The dataset release (`out/`) holds every normalised report (`events.json`, one record per report with its source,
 record id, times, water, operator, volume as reported and the rule applied), the water statuses, the coverage
 grades, the outfalls, the operators and the sources. CSV downloads per water, operator and state are on the site.
+The dataset is released under the Open Database License (ODbL) 1.0 with attribution to DirtyWaterWatch and to each
+source named in the records; the code under MIT. See `DATA-LICENSE.md`.
 
 Licence: see `DATA-LICENSE.md`. Each source's own terms are quoted in its `data/sources/*.yaml` record and must be
 honoured when the data is reused; records from sources whose terms discourage redistribution are not in the
