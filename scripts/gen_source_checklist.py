@@ -41,6 +41,7 @@ AREA_TITLES = {
     "va": "Virginia",
     "dc": "District of Columbia",
     "nc": "North Carolina",
+    "ga": "Georgia",
 }
 
 HEADER = """# Source checklist

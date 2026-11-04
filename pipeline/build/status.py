@@ -295,6 +295,7 @@ RULES = {
     "advisory_active": ("red", "Official advisory in effect"),
     "caution": ("yellow", "Within the site's caution window after the discharge ended (data/rules.json)"),
     "no_end": ("yellow", "Discharge record with no status and no reported end"),
+    "day_start_caution": ("yellow", "Report dated to the day only, with no end: caution from the start of that day"),
     "end_never_reported": ("grey", "Unresolved: no end reported (off the map after 30 days)"),
     "not_reconfirmed": ("grey", "Advisory not re-confirmed by the source for 14 days (sets no colour)"),
     "rain_advisory": ("yellow", "Precautionary rainfall advisory"),
@@ -2148,6 +2149,18 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
         return out
     # from the source's own report time: reported_at, else published_at, else the start; never a retrieval or
     # extract date that is later than the report (owner, 2026-11-03), and never before the start
+    ds = u.get("day_start_caution") or {}
+    if ev.get("time_precision") == "day" and ev.get("source_id") in (ds.get("sources") or []) and ds.get("hours") \
+            and parse_time(ev.get("started_at")):
+        # a feed that gives only the day a discharge began and never an end (Georgia EPD's daily list): the site's
+        # caution runs from the start of that day, then the end is unconfirmed to day 30 (unresolved.day_start_caution)
+        day0 = parse_time(ev["started_at"])
+        out = no_end(day0, day0 + timedelta(hours=float(ds["hours"])), "day_start_caution")
+        for iv in out:
+            if iv["rule"] == "day_start_caution":
+                iv["rule_applied"] = {"rule": "unresolved.day_start_caution", "hours": float(ds["hours"]),
+                                      "rationale": ds.get("rationale"), "source": "data/rules.json"}
+        return out
     told = next((t for t in (parse_time(ev.get("reported_at")), parse_time(ev.get("published_at"))) if t), None)
     anchor = max(start, told) if told else start
     return no_end(anchor, anchor + timedelta(days=unknown_days), "no_end")
@@ -2463,6 +2476,10 @@ def short_reason(iv: dict, ev: dict | None) -> str:
         return f"{et} ended {endtxt}; caution to {int(h)} h after the end{who}{at}" if h else f"{et} ended {endtxt}{who}{at}"
     if rule == "no_end":
         return f"{et} with no reported end{who}{at}"
+    if rule == "day_start_caution":
+        h = (iv.get("rule_applied") or {}).get("hours")
+        return (f"{et} reported to the day only, with no end; caution to {int(h)} h from the start of that day{who}{at}"
+                if h else f"{et} reported to the day only, with no end{who}{at}")
     if rule in ("advisory_active", "rain_advisory"):
         return f"{et} in effect{who}"
     return f"{iv['label']}{who}"

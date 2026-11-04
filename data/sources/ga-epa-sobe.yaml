@@ -1,0 +1,24 @@
+id: "ga-epa-sobe"
+name: "EPA SOBE (eRule Phase 2) extract, GA rows"
+url: "https://echo.epa.gov/tools/data-downloads"
+homepage: "https://echo.epa.gov/tools/data-downloads"
+kind: "csv"
+level: "federal"
+# Notes (research/ga, status candidate, verified inferred, checked 2026-11-03): 1,232 events from 90
+#   GA permits on 2026-11-03 (coordinator count). GA permittees file through EPD GEOS; the events
+#   reach EPA. Likely carries start/end times and volumes; use for history and to fill end times the
+#   EPD list lacks.
+# Access detail (research, quoted): current_sewer_overflow_and_collection_systems_tables.zip (daily
+#   ZIP from ECHO); not re-downloaded here.
+cadence: null
+license: "none stated"
+attribution: "US EPA"
+enabled: true
+role: "events"
+event_types: []
+states: ["GA"]
+access: ["csv"]
+access_detail: "current_sewer_overflow_and_collection_systems_tables.zip (daily ZIP from ECHO); not re-downloaded here."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-03"
