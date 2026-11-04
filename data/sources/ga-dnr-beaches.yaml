@@ -1,0 +1,25 @@
+id: "ga-dnr-beaches"
+name: "Georgia DNR Coastal Resources Division Healthy Beaches advisory map (beach.geojson)"
+url: "https://webapp.gadnr.org/beach/working/beach.geojson"
+homepage: "https://coastalgadnr.org/HealthyBeaches"
+kind: "api"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/ga_dnr_beaches.py
+#   (data/build/events/ga-dnr-beaches.json). It describes the same source as the research row(s) in
+#   registry_ids. The endpoint was traced on 2026-11-04 from the page's ArcGIS Experience
+#   (db7233b5d80b4fb7a6768d090257b704) and its web map (029c5375c5f64691a04d32c1e01658c3), whose legend
+#   gives the meaning of the status field ("Temporary Advisory: Bacteria Levels are Elevated").
+# Cadence: the file changes when the program posts a result (weekly sampling in season); polled daily.
+cadence: "daily"
+license: "None stated."
+attribution: "Georgia Department of Natural Resources, Coastal Resources Division"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory"]
+states: ["GA"]
+registry_ids: ["ga-dnr-healthy-beaches"]
+access: ["api"]
+access_detail: "GeoJSON https://webapp.gadnr.org/beach/working/beach.geojson (no key, Last-Modified given): 37 beach polygons with beachId, beachName, status (Green, Yellow, Gray), dateCollected, entero, permanentAdvisory, tierRankingCode."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-04"

@@ -243,3 +243,41 @@ def test_a_point_shared_by_many_reports_of_a_permit_is_not_the_spills():
     assert kept[5]["lat"] == 33.66                               # a bypass happens at the plant
     assert kept[6]["lat"] == 33.70                               # a point of its own
     assert all(k["lat"] == 33.66 for k in kept[7:])              # a live state is not touched
+
+
+# ---------------------------------------------------------------- Healthy Beaches
+
+def beach_doc(**changes):
+    from ingest import ga_dnr_beaches as B   # noqa: F401
+    doc = json.loads((FIX / "ga_dnr_beaches.geojson").read_text())
+    for f in doc["features"]:
+        f["properties"].update(changes.get(f["properties"]["beachId"], {}))
+    return doc
+
+
+def test_beach_advisories_open_continue_and_lift_on_the_map_legend():
+    from ingest import ga_dnr_beaches as B
+    recs, n = B.apply_snapshot([], beach_doc(), {"fetched_at": "2026-11-04T10:00:00Z", "last_modified": None})
+    r = {x["source_record_id"]: x for x in recs}
+    assert set(r) == {"GA000001-2026-10-05", "GA000002-permanent"} and n["opened"] == 2   # green and gray: none
+    t = r["GA000001-2026-10-05"]
+    assert t["event_type"] == "beach_advisory" and t["status"] == "advisory_active"
+    assert t["started_at"] == "2026-10-05" and t["time_precision"] == "day" and t["advice_text"] == B.TEMP_TEXT
+    assert abs(t["lat"] - 32.001) < 0.001 and t["waterbody_text"] == "Test Beach North"
+    p = r["GA000002-permanent"]
+    assert p["time_precision"] == "poll" and "not published" in p["raw"]["start_basis"]
+    # a new sample while the advisory stands continues it; a missing beach is not a lift
+    doc = beach_doc(GA000001={"dateCollected": "10/12/2026", "entero": "120"})
+    doc["features"] = [f for f in doc["features"] if f["properties"]["beachId"] != "GA000002"]
+    recs, n = B.apply_snapshot(recs, doc, {"fetched_at": "2026-11-05T10:00:00Z", "last_modified": None})
+    r = {x["source_record_id"]: x for x in recs}
+    assert n == {"opened": 0, "continued": 1, "lifted": 0, "missing": 1}
+    assert [s["date"] for s in r["GA000001-2026-10-05"]["raw"]["samples"]] == ["2026-10-05", "2026-10-12"]
+    assert r["GA000002-permanent"]["status"] == "advisory_active" and r["GA000002-permanent"]["raw"]["missing_since"]
+    # green lifts it at the poll that saw it
+    recs, n = B.apply_snapshot(recs, beach_doc(GA000001={"status": "Green", "dateCollected": "10/19/2026"}),
+                               {"fetched_at": "2026-11-06T10:00:00Z", "last_modified": None})
+    t = {x["source_record_id"]: x for x in recs}["GA000001-2026-10-05"]
+    assert t["status"] == "advisory_lifted" and t["ended_at"] == "2026-11-06T10:00:00Z"
+    assert t["raw"]["lift_observed_between"] == ["2026-11-05T10:00:00Z", "2026-11-06T10:00:00Z"]
+    assert n["lifted"] == 1 and n["opened"] == 0
