@@ -4,10 +4,11 @@ url: "https://services1.arcgis.com/p0dLjwtOaJHU8zq2/arcgis/rest/services/Spill_S
 homepage: "https://services1.arcgis.com/p0dLjwtOaJHU8zq2/arcgis/rest/services/Spill_Summary_Continuous_Update/FeatureServer/0"
 kind: "arcgis"
 level: "state"
-# Notes (research/ga, status candidate, verified fetched, checked 2026-11-03): Public ArcGIS layer
-#   behind the "Spills in Georgia" StoryMap (updated weekly): same 30-day rows with
-#   LATITUDE/LONGITUDE. BEGIN_DATE was null in all 61 rows on 2026-11-03, so it supplies points
-#   only, joined to the spreadsheet.
+# Notes (research/ga, status used, verified fetched, checked 2026-11-04): Public ArcGIS layer behind
+#   the "Spills in Georgia" StoryMap (updated weekly): same 30-day rows with LATITUDE/LONGITUDE.
+#   BEGIN_DATE was null in all 61 rows on 2026-11-03, so it supplies points only, joined to the
+#   spreadsheet. Built: read by pipeline/ingest/ga_epd_spills.py (feed ga-epd-spills), which lends a
+#   layer point to a workbook row of the same permit and address.
 # Access detail (research, quoted):
 #   https://services1.arcgis.com/p0dLjwtOaJHU8zq2/arcgis/rest/services/Spill_Summary_Continuous_Update/FeatureServer/0/query?where=1%3D1&outFields=*&f=json;
 #   lastEditDate 2026-11-02; StoryMap 6b07c1e209fc496eb0d78ee409c377ed, web map
@@ -25,4 +26,4 @@ access: ["arcgis"]
 access_detail: "https://services1.arcgis.com/p0dLjwtOaJHU8zq2/arcgis/rest/services/Spill_Summary_Continuous_Update/FeatureServer/0/query?where=1%3D1&outFields=*&f=json; lastEditDate 2026-11-02; StoryMap 6b07c1e209fc496eb0d78ee409c377ed, web map e001226eb0fd4aa295aa25fb1e312134. Sample raw/spill-summary-sample.json."
 machine_readable: true
 legal_basis: null
-checked: "2026-11-03"
+checked: "2026-11-04"
