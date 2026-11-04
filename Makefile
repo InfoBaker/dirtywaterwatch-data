@@ -94,8 +94,12 @@ INGEST_EXTRA = waters-nhd conditions rainfall   # not feeds (no events file), ru
 # the NHD receiving-water build in the hourly run: new targets from this hour's reports, within a time budget (it stops
 # before a request, writes what it built merged into data/waters-nhd.json, and the next run resumes from data/raw's
 # cache). Without the budget, a runner with no data/raw cache asked NHDPlus for every target (about 7,000 requests)
-# and passed the workflow's 55-minute limit. Its own OSM (180 s) and other-places (120 s) budgets come on top.
-WATERS_NHD_BUDGET_S ?= 300
+# and passed the workflow's 55-minute limit. --wall-s bounds the whole target, loading and writing included (run
+# 41788856038 took 11 minutes with --budget-s 300: the OSM fallback, its mirror check and the placement check over every
+# event came on top): NHDPlus gets WATERS_NHD_BUDGET_S, the other places and the OSM fallback what is left of the wall
+# less 60 s kept for the hand records, the placement check and the write. The last line gives the seconds per phase.
+WATERS_NHD_BUDGET_S ?= 150
+WATERS_NHD_WALL_S ?= 300
 INGEST_MODULES = $(sort $(basename $(notdir $(shell grep -l '__name__ == .__main__.' pipeline/ingest/*.py 2>/dev/null | xargs grep -L 'not a feed' 2>/dev/null))))
 
 setup:
@@ -121,7 +125,7 @@ ingest:
 	done
 
 waters-nhd:         ## receiving-water records from NHDPlus for new targets (ingest/waters_from_nhd.py), budgeted
-	$(PY) -m ingest.waters_from_nhd --budget-s $(WATERS_NHD_BUDGET_S)
+	$(PY) -m ingest.waters_from_nhd --budget-s $(WATERS_NHD_BUDGET_S) --wall-s $(WATERS_NHD_WALL_S)
 
 conditions:
 	$(PY) -m ingest.gauges

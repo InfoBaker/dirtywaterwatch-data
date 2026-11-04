@@ -504,7 +504,7 @@ def test_p3_9_the_osm_budget_is_checked_before_each_chunk_of_a_state(monkeypatch
     monkeypatch.setattr(W, "osm_spec", lambda t, towns: {"key": f"k-{t['name']}", "name": t["name"],
                                                          "box": (0.0, 0.0, 1.0, 1.0), "osm_names": []})
     monkeypatch.setattr(W, "state_chunks", lambda specs: [([sp["name"]], (0, 0, 1, 1)) for sp in specs])  # one name each
-    monkeypatch.setattr(W, "mirror_order", lambda: ["m"])
+    monkeypatch.setattr(W, "mirror_order", lambda **k: ["m"])
     monkeypatch.setattr(W, "osm_record", lambda *a_, **k: (None, "no OSM feature of that name near the points"))
     clock = iter([0.0, 1.0, 2.0, 10.0, 11.0])        # start, state check, chunk 1, chunk 2 (over budget) ...
     monkeypatch.setattr(W.time, "monotonic", clock.__next__)
