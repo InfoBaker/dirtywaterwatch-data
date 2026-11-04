@@ -35,6 +35,8 @@ TYPE_MAP = {"dwo": ["cso"], "hab": ["hab_advisory"], "hab_watch": ["hab_advisory
 # Rows whose url is an endpoint, file or API call get a human page as homepage (what /sources links to); every
 # other row's homepage is its url. Hand-picked from the research rows and the feed yamls that name them.
 HOMEPAGES = {
+    "fl-dep-pnp-arcgis": "https://floridadep.gov/sec/sec/content/public-notice-pollution",
+    "fl-dep-algal-bloom": "https://floridadep.gov/AlgalBloom",
     "nj-njdep-cso-outfalls-arcgis": "https://www.nj.gov/dep/gis/digidownload/metadata/html/Util_NJPDES_CSO.html",
     "pa-erie-cso-monitoring": "https://telog.erie.pa.us/CSO.Monitoring/",
     "pa-alcosan-news-advisories": "https://www.alcosan.org/news-and-events/featured-news",

@@ -35,6 +35,9 @@
 #                  block whose module is still a feed is refused; --list problems print "!!"), after every module and before
 #                  INGEST_SNAPSHOTS (so a generic feed can dedupe against a module's events file); blocks with
 #                  live: false (ports being compared with their modules) are not run.
+#                  Florida: fl_dep_pnp (DEP Public Notice of Pollution, last 30 days; `--backfill` once
+#                  for every notice since 2017), fl_dep_habs (DEP algal bloom visits), fl_doh_beaches
+#                  (Healthy Beaches result pages, one full pass at most every 20 hours)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

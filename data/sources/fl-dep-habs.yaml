@@ -1,0 +1,23 @@
+id: "fl-dep-habs"
+name: "Florida DEP Algal Bloom Sampling, blooms and toxins by site (Algal Bloom Site Visits layer)"
+url: "https://services1.arcgis.com/nRHtyn3uE1kyzoYc/arcgis/rest/services/AlgalBloom_Final_View/FeatureServer/0"
+homepage: "https://floridadep.gov/AlgalBloom"
+kind: "arcgis"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/fl_dep_habs.py
+#   (data/build/events/fl-dep-habs.json). Bloom records (sampling results, not health advisories): a
+#   visit with a bloom observed or a toxin present opens an episode at the site, the next clear visit
+#   ends it. The Comments and photo fields are not requested.
+cadence: "daily"
+license: "None stated."
+attribution: "Florida Department of Environmental Protection, Algal Bloom Sampling Status"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["FL"]
+registry_ids: ["fl-dep-algal-bloom"]
+access: ["arcgis"]
+access_detail: "https://services1.arcgis.com/nRHtyn3uE1kyzoYc/arcgis/rest/services/AlgalBloom_Final_View/FeatureServer/0/query (about 6,800 visits; SampleDateTime in UTC); no key."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-04"
