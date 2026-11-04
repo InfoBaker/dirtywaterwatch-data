@@ -12162,6 +12162,314 @@
    "barrier": "print_only"
   },
   {
+   "id": "nc-charlotte-water-news",
+   "state": "NC",
+   "operator_id": "nc-charlotte-water",
+   "agency": null,
+   "name": "Charlotte Water",
+   "permit": "WQCS00001",
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.charlottenc.gov/water"
+   ],
+   "method": "html",
+   "legal_basis": "G.S. 143-215.1C(b)(1): press release to all print and electronic news media covering the county within 24 hours after the owner or operator determines that 1,000 gallons or more of untreated wastewater reached surface waters",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "notices",
+   "note": "Charlotte Water's overflow notices (\"Notice of Wastewater Overflow\") reach the public through local media; the 2025 South End spill was also sent by text and Nextdoor. charlottenc.gov answered 403 to the project's user agent on 2026-11-04. The DWR map carries the same events. (research/nc/report.md §2.3)",
+   "checked": "2026-11-04",
+   "noun": "News page",
+   "sources": [
+    "nc-charlotte-water"
+   ],
+   "barrier": "bot_wall"
+  },
+  {
+   "id": "nc-deq-press-releases",
+   "state": "NC",
+   "operator_id": null,
+   "agency": "NC Department of Environmental Quality",
+   "name": "NC Department of Environmental Quality",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.deq.nc.gov/news/press-releases"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "notices",
+   "note": "DEQ press releases, including the Division of Marine Fisheries' coastal swimming advisories issued and lifted (sound-side and ocean sites). Voluntary. (research/nc/report.md §2.5)",
+   "checked": "2026-11-04",
+   "records": false,
+   "every_hours": 24,
+   "noun": "News page",
+   "sources": [
+    "nc-rwq-advisories"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nc-dmf-spill-signs",
+   "state": "NC",
+   "operator_id": null,
+   "agency": "NC DEQ Division of Marine Fisheries",
+   "name": "NC DEQ Division of Marine Fisheries",
+   "permit": null,
+   "channel_kind": "lights_signs_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "15A NCAC 18A .3404(b): a swimming advisory is issued and at least one sign posted at the public access to swimming waters impacted by a wastewater system failure (\"WARNING! WASTEWATER SPILL. SWIMMING IS NOT ADVISED IN THESE WATERS ...\")",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No web form: the rule requires a posted sign at the swimming water, not a web posting. Spill advisories appear on the coastal station layer only where a station is affected, and in DEQ press releases. (15A NCAC 18A .3404)",
+   "checked": "2026-11-04",
+   "noun": "Posted signs",
+   "sources": [
+    "nc-law-15a-ncac-18a-3400"
+   ],
+   "barrier": "signs_only"
+  },
+  {
+   "id": "nc-dmf-swimming-advisory-layer",
+   "state": "NC",
+   "operator_id": null,
+   "agency": "NC DEQ Division of Marine Fisheries",
+   "name": "NC DEQ Division of Marine Fisheries (Recreational Water Quality)",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://www.deq.nc.gov/about/divisions/marine-fisheries/shellfish-sanitation-and-recreational-water-quality/recreational-water-quality",
+    "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/RWQ_Advisory_EXTERNAL/FeatureServer/1"
+   ],
+   "method": "json",
+   "legal_basis": "15A NCAC 18A .3403 (pending and full swimming advisories from bacteria results) and .3404 (spill and storm-water advisories, with signs)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "status",
+   "note": "Coastal swimming advisory map: 225 ocean and sound stations with a current status (No Alert, Pending Swimming Advisory, Advisory, Precautionary). Current state only; the station sample-data links answered 404 on 2026-11-04. (research/nc/report.md §2.5)",
+   "checked": "2026-11-04",
+   "feed_source_id": "nc-rwq-advisories",
+   "noun": "State page",
+   "sources": [
+    "nc-rwq-advisories"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nc-dwr-algal-bloom-dashboard",
+   "state": "NC",
+   "operator_id": null,
+   "agency": "NC DEQ Division of Water Resources",
+   "name": "NC DEQ Division of Water Resources (algal blooms)",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://www.deq.nc.gov/about/divisions/water-resources/water-sciences-section/algal-blooms",
+    "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/North_Carolina_Fish_Kills_and_Algal_Blooms_Public_Reports/FeatureServer/0"
+   ],
+   "method": "json",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "Fish Kill and Algal Bloom dashboard: reports with DWR's investigation status and public comment; not advisories. Voluntary. (research/nc/report.md §2.5)",
+   "checked": "2026-11-04",
+   "feed_source_id": "nc-dwr-algal-bloom-reports",
+   "noun": "State page",
+   "sources": [
+    "nc-dwr-algal-bloom-reports",
+    "nc-fish-kill-algal-bloom"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nc-dwr-sso-history-layer",
+   "state": "NC",
+   "operator_id": null,
+   "agency": "NC DEQ Division of Water Resources",
+   "name": "NC DEQ Division of Water Resources (SSO history)",
+   "permit": null,
+   "channel_kind": "feed",
+   "urls": [
+    "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0"
+   ],
+   "method": "json",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "Reportable sewer overflows September 2022 to December 2025 (3,208), frozen; read once. Covers every operator in the state. (research/nc/report.md §2.2)",
+   "checked": "2026-11-04",
+   "feed_source_id": "nc-dwr-sso-2022-2025",
+   "noun": "Data feed",
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nc-dwr-sso-info-page",
+   "state": "NC",
+   "operator_id": null,
+   "agency": "NC DEQ Division of Water Resources",
+   "name": "NC DEQ Division of Water Resources",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://www.deq.nc.gov/about/divisions/water-resources/water-quality-permitting/information-sewer-system-overflows"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "documents",
+   "note": "DEQ 'Information on Sewer System Overflows': reporting rules (verbal report within 24 hours, 5-day written report), press release and public notice templates, link to the tracking map. Watched for rule changes. (research/nc/report.md §2.1)",
+   "checked": "2026-11-04",
+   "records": false,
+   "every_hours": 168,
+   "noun": "State page",
+   "sources": [
+    "nc-dwr-sso-info-page"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nc-dwr-sso-map",
+   "state": "NC",
+   "operator_id": null,
+   "agency": "NC DEQ Division of Water Resources",
+   "name": "NC DEQ Division of Water Resources (Sanitary Sewer Overflow Tracking Map)",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://experience.arcgis.com/experience/4a50b5dc87844bab9930a5906522a779",
+    "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0"
+   ],
+   "method": "json",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "Every overflow reportable to DWR (1,000 gallons or more, or any amount reaching surface water) with start, end, volume, receiving water and a point; the operators' reports to DWR are a permit duty, the map itself is voluntary. Year-scoped layer. Covers every operator in the state. (research/nc/report.md §2.2)",
+   "checked": "2026-11-04",
+   "feed_source_id": "nc-dwr-sso-2026",
+   "noun": "State page",
+   "sources": [
+    "nc-dwr-sso-2026"
+   ],
+   "barrier": null
+  },
+  {
+   "id": "nc-operator-newspaper-notice",
+   "state": "NC",
+   "operator_id": null,
+   "agency": "North Carolina wastewater system owners and operators",
+   "name": "North Carolina wastewater system owners and operators",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "G.S. 143-215.1C(b)(2): newspaper notice captioned \"NOTICE OF DISCHARGE OF UNTREATED SEWAGE\" in the county and each significantly affected downstream county for 15,000 gallons or more, within 10 days after the Secretary approves it",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "Printed only: a paid notice in newspapers; proof is filed with DEQ within 30 days. Not posted online by law. Covers every operator in the state. (research/nc/report.md §2.1, §2.6)",
+   "checked": "2026-11-04",
+   "noun": "Printed or broadcast notice",
+   "sources": [
+    "nc-law-gs-143-215-1c"
+   ],
+   "barrier": "print_only"
+  },
+  {
+   "id": "nc-operator-press-release",
+   "state": "NC",
+   "operator_id": null,
+   "agency": "North Carolina wastewater system owners and operators",
+   "name": "North Carolina wastewater system owners and operators",
+   "permit": null,
+   "channel_kind": "news_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "G.S. 143-215.1C(b)(1): press release to all print and electronic news media covering the county within 24 hours after the owner or operator determines that 1,000 gallons or more of untreated wastewater reached surface waters",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No web channel found: the release goes to news media; the law requires no web posting. Copies and the media list are kept a year and given to any person on request. Some operators also post releases (Charlotte Water, Raleigh: their own rows). Covers every operator in the state. (research/nc/report.md §2.1, §2.6)",
+   "checked": "2026-11-04",
+   "noun": "Printed or broadcast notice",
+   "sources": [
+    "nc-law-gs-143-215-1c"
+   ],
+   "barrier": "no_web_page"
+  },
+  {
+   "id": "nc-raleigh-sso-page",
+   "state": "NC",
+   "operator_id": "nc-raleigh",
+   "agency": null,
+   "name": "City of Raleigh (Raleigh Water)",
+   "permit": "WQCS00002",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://raleighnc.gov/node/41151"
+   ],
+   "method": "html",
+   "legal_basis": "G.S. 143-215.1C(b)(1): press release to all print and electronic news media covering the county within 24 hours after the owner or operator determines that 1,000 gallons or more of untreated wastewater reached surface waters",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "notices",
+   "note": "Raleigh Water's sanitary sewer overflow page and news releases (e.g. the May 2026 Brier Creek overflow). raleighnc.gov answered 403 to the project's user agent on 2026-11-04. (research/nc/report.md §2.3)",
+   "checked": "2026-11-04",
+   "noun": "Notification page",
+   "sources": [
+    "nc-raleigh-water"
+   ],
+   "barrier": "bot_wall"
+  },
+  {
+   "id": "nc-wnc-rec-monitoring",
+   "state": "NC",
+   "operator_id": null,
+   "agency": "NC DEQ Division of Water Resources, Asheville Regional Office",
+   "name": "Western NC Recreational Water Quality Program",
+   "permit": null,
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://www.deq.nc.gov/about/divisions/water-resources/locations/asheville-regional-office/western-nc-recreational-water-quality-monitoring-program"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "note": "Weekly E. coli results at mountain river sites, May to September (also on Swim Guide); NCDHHS, not DEQ, issues health advisories. Voluntary. (research/nc/report.md §2.5)",
+   "checked": "2026-11-04",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Results page",
+   "sources": [
+    "nc-wnc-rec-monitoring"
+   ],
+   "barrier": null
+  },
+  {
    "id": "nh-berlin-pcf-electronic-notice",
    "state": "NH",
    "operator_id": "nh-berlin-pcf",

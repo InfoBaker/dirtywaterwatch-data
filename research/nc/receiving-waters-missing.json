@@ -1,0 +1,10954 @@
+{
+ "about": "Receiving waters named by the NC DWR sanitary sewer overflow layers (2022 to date) that data/receiving-waters-national.json does not hold for North Carolina (no name, NHD GNIS name or spelling seen matches, parentheticals ignored). Reports the source says did not reach surface water, duplicates and placeholders (unknown, storm drain, ditch) are left out. stream_index is DWR's own index for the stream where the 2026 layer gives one; points are report locations (DWR's geocode of the address), up to three. One name can be several streams in different places (the points show where); stream_index is the one DWR gives on a 2026 report of that name.",
+ "generated": "2026-11-04",
+ "state": "NC",
+ "waters": 536,
+ "reports": 1582,
+ "rows": [
+  {
+   "name": "Mountain Creek",
+   "reports": 35,
+   "stream_index": "13-5-(0.7)",
+   "permits": [
+    "WQCS00016"
+   ],
+   "points": [
+    [
+     35.365135,
+     -80.148244
+    ],
+    [
+     35.349435,
+     -80.165743
+    ],
+    [
+     35.365135,
+     -80.148244
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Brier Creek",
+   "reports": 26,
+   "stream_index": "11-137-8-2",
+   "permits": [
+    "WQCS00001",
+    "WQCS00002",
+    "WQCS00005",
+    "WQCS00057",
+    "WQCS00189"
+   ],
+   "points": [
+    [
+     35.233037,
+     -80.774899
+    ],
+    [
+     35.870169,
+     -78.802372
+    ],
+    [
+     35.194374,
+     -80.802279
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Irish Buffalo Creek",
+   "reports": 26,
+   "stream_index": "13-17-9-(2)",
+   "permits": [
+    "WQCS00326",
+    "WQCS00327"
+   ],
+   "points": [
+    [
+     35.397013,
+     -80.578404
+    ],
+    [
+     35.478855,
+     -80.630091
+    ],
+    [
+     35.467155,
+     -80.643956
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Peters Creek",
+   "reports": 23,
+   "stream_index": "12-94-12-8",
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.125681,
+     -80.318747
+    ],
+    [
+     36.090216,
+     -80.255351
+    ],
+    [
+     36.103437,
+     -80.259408
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Stewart Creek",
+   "reports": 21,
+   "stream_index": "11-137-1-2",
+   "permits": [
+    "WQCS00001",
+    "WQCS00166"
+   ],
+   "points": [
+    [
+     35.280933,
+     -80.860591
+    ],
+    [
+     35.398152,
+     -78.664316
+    ],
+    [
+     35.258877,
+     -80.855073
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Vestal Creek",
+   "reports": 20,
+   "stream_index": "17-22-4",
+   "permits": [
+    "WQCS00025"
+   ],
+   "points": [
+    [
+     35.667875,
+     -79.81009
+    ],
+    [
+     35.675721,
+     -79.794225
+    ],
+    [
+     35.695154,
+     -79.790585
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Cedar Fork Creek",
+   "reports": 19,
+   "stream_index": "13-2-3-3-2",
+   "permits": [
+    "WQCS00025"
+   ],
+   "points": [
+    [
+     35.71506,
+     -79.836804
+    ],
+    [
+     35.698849,
+     -79.822374
+    ],
+    [
+     35.694513,
+     -79.817328
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Penwood Branch",
+   "reports": 16,
+   "stream_index": "17-12-1",
+   "permits": [
+    "WQCS00025"
+   ],
+   "points": [
+    [
+     35.707945,
+     -79.80559
+    ],
+    [
+     35.709588,
+     -79.805349
+    ],
+    [
+     35.736908,
+     -79.786043
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Brushy Fork",
+   "reports": 15,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.123966,
+     -80.228003
+    ],
+    [
+     36.074159,
+     -80.211761
+    ],
+    [
+     36.12845,
+     -80.23274
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "McMullen Creek",
+   "reports": 15,
+   "stream_index": "11-137-9-5",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.161263,
+     -80.808678
+    ],
+    [
+     35.093802,
+     -80.858159
+    ],
+    [
+     35.160597,
+     -80.795889
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Hanks Branch",
+   "reports": 14,
+   "stream_index": "12-119-7-3-1",
+   "permits": [
+    "WQCS00057"
+   ],
+   "points": [
+    [
+     35.896131,
+     -80.100837
+    ],
+    [
+     35.89614,
+     -80.100842
+    ],
+    [
+     35.896144,
+     -80.100842
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Stonecutter Creek",
+   "reports": 14,
+   "stream_index": "9-26-1",
+   "permits": [
+    "WQCS00053"
+   ],
+   "points": [
+    [
+     35.346103,
+     -81.946428
+    ],
+    [
+     35.346391,
+     -81.946393
+    ],
+    [
+     35.346393,
+     -81.946395
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Thorntons Creek",
+   "reports": 14,
+   "stream_index": null,
+   "permits": [
+    "WQCS00166"
+   ],
+   "points": [
+    [
+     35.406629,
+     -78.680635
+    ],
+    [
+     35.406629,
+     -78.680635
+    ],
+    [
+     35.406629,
+     -78.680635
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Black River (Little Black River) (Popes Lake, Rhodes Pond)",
+   "reports": 13,
+   "stream_index": null,
+   "permits": [
+    "WQCS00073",
+    "WQCS00166",
+    "WQCS00183"
+   ],
+   "points": [
+    [
+     35.3232,
+     -78.662822
+    ],
+    [
+     35.315793,
+     -78.645434
+    ],
+    [
+     35.320177,
+     -78.754187
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Fourmile Creek",
+   "reports": 13,
+   "stream_index": "11-137-9-4",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.093357,
+     -80.778749
+    ],
+    [
+     35.076563,
+     -80.784608
+    ],
+    [
+     35.112402,
+     -80.71857
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Frye Creek",
+   "reports": 13,
+   "stream_index": "11-54-1",
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.745188,
+     -81.360117
+    ],
+    [
+     35.746087,
+     -81.361737
+    ],
+    [
+     35.745192,
+     -81.360117
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Meadow Branch",
+   "reports": 13,
+   "stream_index": null,
+   "permits": [
+    "WQCS00024",
+    "WQCS00054"
+   ],
+   "points": [
+    [
+     34.641032,
+     -79.013649
+    ],
+    [
+     34.640976,
+     -79.013625
+    ],
+    [
+     34.64091,
+     -78.987263
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary near Neuse",
+   "reports": 13,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.855872,
+     -78.595805
+    ],
+    [
+     35.880795,
+     -78.516139
+    ],
+    [
+     35.859112,
+     -78.595975
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Brush Creek",
+   "reports": 12,
+   "stream_index": "16-11-4-(1)",
+   "permits": [
+    "WQCS00006"
+   ],
+   "points": [
+    [
+     36.111537,
+     -79.957845
+    ],
+    [
+     36.134163,
+     -79.926012
+    ],
+    [
+     36.139681,
+     -79.921373
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Third Fork Creek",
+   "reports": 12,
+   "stream_index": "16-41-1-12-(1)",
+   "permits": [
+    "WQCS00005"
+   ],
+   "points": [
+    [
+     35.974692,
+     -78.932135
+    ],
+    [
+     35.959297,
+     -78.912904
+    ],
+    [
+     35.977032,
+     -78.895103
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary to Cold Water Creek (Lake Concord)",
+   "reports": 12,
+   "stream_index": null,
+   "permits": [
+    "WQCS00327"
+   ],
+   "points": [
+    [
+     35.485281,
+     -80.611686
+    ],
+    [
+     35.488557,
+     -80.612604
+    ],
+    [
+     35.50192,
+     -80.614135
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Elkin Creek (River)",
+   "reports": 11,
+   "stream_index": "12-54-(3.5)",
+   "permits": [
+    "WQCS00376"
+   ],
+   "points": [
+    [
+     36.244321,
+     -80.860279
+    ],
+    [
+     36.265297,
+     -80.857547
+    ],
+    [
+     36.265297,
+     -80.857547
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Payne Creek",
+   "reports": 11,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     35.951269,
+     -80.017891
+    ],
+    [
+     35.939296,
+     -80.034373
+    ],
+    [
+     35.966637,
+     -80.027942
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Second Creek",
+   "reports": 11,
+   "stream_index": "12-117-2",
+   "permits": [
+    "WQCS00019"
+   ],
+   "points": [
+    [
+     35.546899,
+     -80.409719
+    ],
+    [
+     35.552997,
+     -80.399614
+    ],
+    [
+     35.546319,
+     -80.409749
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Bracketts Creek",
+   "reports": 10,
+   "stream_index": "9-37-2",
+   "permits": [
+    "WQCS00050"
+   ],
+   "points": [
+    [
+     35.315617,
+     -81.863975
+    ],
+    [
+     35.344551,
+     -81.893715
+    ],
+    [
+     35.316134,
+     -81.864425
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Campbell Creek",
+   "reports": 10,
+   "stream_index": "11-137-9-1",
+   "permits": [
+    "WQCS00001",
+    "WQCS00122"
+   ],
+   "points": [
+    [
+     35.103603,
+     -80.792422
+    ],
+    [
+     35.102952,
+     -80.791965
+    ],
+    [
+     35.21844,
+     -80.728371
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Chockoyotte Creek",
+   "reports": 10,
+   "stream_index": null,
+   "permits": [
+    "WQCS00027",
+    "WQCS00115"
+   ],
+   "points": [
+    [
+     36.430562,
+     -77.60751
+    ],
+    [
+     36.459076,
+     -77.666308
+    ],
+    [
+     36.430562,
+     -77.60751
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cold Water Creek",
+   "reports": 10,
+   "stream_index": "13-17-9-4-(0.5)",
+   "permits": [
+    "WQCS00019",
+    "WQCS00326",
+    "WQCS00327",
+    "WQCS00343"
+   ],
+   "points": [
+    [
+     35.536068,
+     -80.607443
+    ],
+    [
+     35.453142,
+     -80.586468
+    ],
+    [
+     35.536626,
+     -80.606988
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Horsepen Creek",
+   "reports": 10,
+   "stream_index": "16-11-5-(0.5)",
+   "permits": [
+    "WQCS00006"
+   ],
+   "points": [
+    [
+     36.098349,
+     -79.818909
+    ],
+    [
+     36.092118,
+     -79.977191
+    ],
+    [
+     36.083277,
+     -79.910141
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Mingo Swamp",
+   "reports": 10,
+   "stream_index": null,
+   "permits": [
+    "WQCS00073"
+   ],
+   "points": [
+    [
+     35.299907,
+     -78.586144
+    ],
+    [
+     35.299946,
+     -78.586386
+    ],
+    [
+     35.313686,
+     -78.598284
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Swannanoa River",
+   "reports": 10,
+   "stream_index": "6-78",
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.596395,
+     -82.416055
+    ],
+    [
+     35.578224,
+     -82.509777
+    ],
+    [
+     35.601435,
+     -82.411322
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Wash Creek",
+   "reports": 10,
+   "stream_index": null,
+   "permits": [
+    "WQCS00070"
+   ],
+   "points": [
+    [
+     35.313354,
+     -82.475646
+    ],
+    [
+     35.308341,
+     -82.468823
+    ],
+    [
+     35.308735,
+     -82.468971
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "West Fork Deep River (Oak Hollow Reservoir)",
+   "reports": 10,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     36.049006,
+     -79.985395
+    ],
+    [
+     35.995431,
+     -79.996921
+    ],
+    [
+     35.997994,
+     -80.008673
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cowlick Branch",
+   "reports": 9,
+   "stream_index": "28-71",
+   "permits": [
+    "WQCS00011"
+   ],
+   "points": [
+    [
+     35.942328,
+     -77.779149
+    ],
+    [
+     35.959679,
+     -77.768437
+    ],
+    [
+     35.942336,
+     -77.779152
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Glade Creek",
+   "reports": 9,
+   "stream_index": null,
+   "permits": [
+    "WQCS00135"
+   ],
+   "points": [
+    [
+     35.92194,
+     -81.184388
+    ],
+    [
+     35.914871,
+     -81.130579
+    ],
+    [
+     35.906532,
+     -81.169661
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Haw Branch",
+   "reports": 9,
+   "stream_index": null,
+   "permits": [
+    "WQCS00130"
+   ],
+   "points": [
+    [
+     36.141642,
+     -80.656304
+    ],
+    [
+     36.142979,
+     -80.655827
+    ],
+    [
+     36.126,
+     -80.655696
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Hickory Creek",
+   "reports": 9,
+   "stream_index": "9-50-30",
+   "permits": [
+    "WQCS00037"
+   ],
+   "points": [
+    [
+     35.309624,
+     -81.52139
+    ],
+    [
+     35.286813,
+     -81.532417
+    ],
+    [
+     35.288487,
+     -81.521726
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Kenneth Creek",
+   "reports": 9,
+   "stream_index": null,
+   "permits": [
+    "WQCS00193"
+   ],
+   "points": [
+    [
+     35.584807,
+     -78.803065
+    ],
+    [
+     35.580177,
+     -78.776976
+    ],
+    [
+     35.587461,
+     -78.796576
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Lampley Branch",
+   "reports": 9,
+   "stream_index": "13-42-1-1",
+   "permits": [
+    "WQCS00384"
+   ],
+   "points": [
+    [
+     34.961634,
+     -80.084718
+    ],
+    [
+     34.947009,
+     -80.075394
+    ],
+    [
+     34.947027,
+     -80.075403
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Little Long Creek",
+   "reports": 9,
+   "stream_index": "11-129-16-9",
+   "permits": [
+    "WQCS00016",
+    "WQCS00165"
+   ],
+   "points": [
+    [
+     35.320086,
+     -81.175914
+    ],
+    [
+     35.322921,
+     -81.165744
+    ],
+    [
+     35.360586,
+     -80.204099
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Paw Creek",
+   "reports": 9,
+   "stream_index": "11-124",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.256546,
+     -80.9604
+    ],
+    [
+     35.264223,
+     -80.917245
+    ],
+    [
+     35.257833,
+     -80.89947
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Red Bud Creek",
+   "reports": 9,
+   "stream_index": "28-17-2-3",
+   "permits": [
+    "WQCS00055"
+   ],
+   "points": [
+    [
+     36.317952,
+     -78.43329
+    ],
+    [
+     36.310041,
+     -78.414629
+    ],
+    [
+     36.30281,
+     -78.45591
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Threemile Branch",
+   "reports": 9,
+   "stream_index": "13-17-9-4-5",
+   "permits": [
+    "WQCS00326",
+    "WQCS00327"
+   ],
+   "points": [
+    [
+     35.411094,
+     -80.573463
+    ],
+    [
+     35.486603,
+     -80.623475
+    ],
+    [
+     35.463992,
+     -80.589316
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Bolin Creek",
+   "reports": 8,
+   "stream_index": null,
+   "permits": [
+    "WQCS00031"
+   ],
+   "points": [
+    [
+     35.915294,
+     -79.056915
+    ],
+    [
+     35.924634,
+     -79.065878
+    ],
+    [
+     35.917337,
+     -79.054146
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "East Fork Deep River",
+   "reports": 8,
+   "stream_index": null,
+   "permits": [
+    "WQCS00006",
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     36.082113,
+     -79.952772
+    ],
+    [
+     36.076734,
+     -79.950992
+    ],
+    [
+     36.066455,
+     -79.954613
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Leak Fork",
+   "reports": 8,
+   "stream_index": "12-94-7-4",
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.159081,
+     -80.26699
+    ],
+    [
+     36.164612,
+     -80.262135
+    ],
+    [
+     36.14676,
+     -80.232075
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "McDeeds Creek",
+   "reports": 8,
+   "stream_index": null,
+   "permits": [
+    "WQCS00034",
+    "WQCS00309"
+   ],
+   "points": [
+    [
+     35.179356,
+     -79.396996
+    ],
+    [
+     35.192277,
+     -79.384428
+    ],
+    [
+     35.190905,
+     -79.384861
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Michael Branch",
+   "reports": 8,
+   "stream_index": "12-113-3",
+   "permits": [
+    "WQCS00042"
+   ],
+   "points": [
+    [
+     35.825836,
+     -80.272759
+    ],
+    [
+     35.824626,
+     -80.260222
+    ],
+    [
+     35.836101,
+     -80.260709
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Reeds Creek",
+   "reports": 8,
+   "stream_index": "11-104-(1)",
+   "permits": [
+    "WQCS00043"
+   ],
+   "points": [
+    [
+     35.587695,
+     -80.826844
+    ],
+    [
+     35.59285,
+     -80.823272
+    ],
+    [
+     35.591988,
+     -80.815106
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Taggart Creek (Taggard Creek)",
+   "reports": 8,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.197287,
+     -80.923196
+    ],
+    [
+     35.2309,
+     -80.90524
+    ],
+    [
+     35.214957,
+     -80.926209
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Abbotts Creek",
+   "reports": 7,
+   "stream_index": "12-119-(1)",
+   "permits": [
+    "WQCS00003",
+    "WQCS00042"
+   ],
+   "points": [
+    [
+     36.095688,
+     -80.071466
+    ],
+    [
+     36.089703,
+     -80.082211
+    ],
+    [
+     36.100899,
+     -80.070143
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Blounts Creek",
+   "reports": 7,
+   "stream_index": null,
+   "permits": [
+    "WQCS00007"
+   ],
+   "points": [
+    [
+     35.045478,
+     -78.891431
+    ],
+    [
+     35.028207,
+     -78.927525
+    ],
+    [
+     35.025652,
+     -78.918472
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Covenant Branch",
+   "reports": 7,
+   "stream_index": null,
+   "permits": [
+    "WQCS00018"
+   ],
+   "points": [
+    [
+     36.49743,
+     -79.693691
+    ],
+    [
+     36.497423,
+     -79.693686
+    ],
+    [
+     36.497423,
+     -79.693686
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Jimmys Creek",
+   "reports": 7,
+   "stream_index": null,
+   "permits": [
+    "WQCS00057"
+   ],
+   "points": [
+    [
+     35.873228,
+     -80.132715
+    ],
+    [
+     35.87329,
+     -80.132596
+    ],
+    [
+     35.87329,
+     -80.132596
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Kennedy Mill Creek",
+   "reports": 7,
+   "stream_index": "12-119-7-2",
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     35.934458,
+     -80.043825
+    ],
+    [
+     35.933103,
+     -80.038022
+    ],
+    [
+     35.937016,
+     -80.039037
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Kerners Mill Creek",
+   "reports": 7,
+   "stream_index": "12-94-12-2-(0.3)",
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.123702,
+     -80.061054
+    ],
+    [
+     36.106106,
+     -80.089047
+    ],
+    [
+     36.125391,
+     -80.098462
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Reed Creek",
+   "reports": 7,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004",
+    "WQCS00195"
+   ],
+   "points": [
+    [
+     35.616078,
+     -82.542623
+    ],
+    [
+     35.743276,
+     -79.636947
+    ],
+    [
+     35.743275,
+     -79.636946
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Shallotte River",
+   "reports": 7,
+   "stream_index": "15-25-2-(7.5)",
+   "permits": [
+    "WQCS00284",
+    "WQCS00296"
+   ],
+   "points": [
+    [
+     33.965352,
+     -78.380919
+    ],
+    [
+     33.92694,
+     -78.47388
+    ],
+    [
+     33.972498,
+     -78.386637
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Swearing Creek",
+   "reports": 7,
+   "stream_index": "12-113",
+   "permits": [
+    "WQCS00042"
+   ],
+   "points": [
+    [
+     35.820837,
+     -80.260982
+    ],
+    [
+     35.85134,
+     -80.263658
+    ],
+    [
+     35.786949,
+     -80.292775
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "West Branch Rocky River",
+   "reports": 7,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001",
+    "WQCS00043"
+   ],
+   "points": [
+    [
+     35.543403,
+     -80.814191
+    ],
+    [
+     35.557191,
+     -80.818452
+    ],
+    [
+     35.543476,
+     -80.814186
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Bear Creek",
+   "reports": 6,
+   "stream_index": "10-1-28",
+   "permits": [
+    "WQCS00091",
+    "WQCS00124",
+    "WQCS00156"
+   ],
+   "points": [
+    [
+     35.859518,
+     -80.576283
+    ],
+    [
+     35.850708,
+     -80.583734
+    ],
+    [
+     35.841584,
+     -80.593517
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Bearskin Creek",
+   "reports": 6,
+   "stream_index": null,
+   "permits": [
+    "WQCS00026"
+   ],
+   "points": [
+    [
+     34.981237,
+     -80.545056
+    ],
+    [
+     34.96806,
+     -80.504753
+    ],
+    [
+     35.000865,
+     -80.530106
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Beason Creek",
+   "reports": 6,
+   "stream_index": "9-53-8",
+   "permits": [
+    "WQCS00036"
+   ],
+   "points": [
+    [
+     35.22924,
+     -81.370318
+    ],
+    [
+     35.235864,
+     -81.394357
+    ],
+    [
+     35.236127,
+     -81.358798
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Beaver Creek (Beaver Creek Pond)",
+   "reports": 6,
+   "stream_index": "18-31-24-5",
+   "permits": [
+    "WQCS00007",
+    "WQCS00029"
+   ],
+   "points": [
+    [
+     35.043741,
+     -78.978785
+    ],
+    [
+     35.13271,
+     -78.99383
+    ],
+    [
+     35.085408,
+     -78.967377
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Big Marsh Swamp (Marsh Swamp) (Lake McNeill, Odom Pond)",
+   "reports": 6,
+   "stream_index": null,
+   "permits": [
+    "WQCS00187"
+   ],
+   "points": [
+    [
+     34.807789,
+     -78.981172
+    ],
+    [
+     34.810276,
+     -78.971244
+    ],
+    [
+     34.867236,
+     -79.049928
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "CATAWBA RIVER (Lake Wylie below elevation 570) North Carolina portion",
+   "reports": 6,
+   "stream_index": "11-(123.5)",
+   "permits": [
+    "WQCS00001",
+    "WQCS00046"
+   ],
+   "points": [
+    [
+     35.189955,
+     -81.008924
+    ],
+    [
+     35.245837,
+     -81.047146
+    ],
+    [
+     35.274629,
+     -81.042
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Cold Water Creek (Lake Fisher)",
+   "reports": 6,
+   "stream_index": null,
+   "permits": [
+    "WQCS00327"
+   ],
+   "points": [
+    [
+     35.511082,
+     -80.607735
+    ],
+    [
+     35.509181,
+     -80.608546
+    ],
+    [
+     35.512647,
+     -80.593302
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cripple Creek",
+   "reports": 6,
+   "stream_index": "11-54-2",
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.7431,
+     -81.334218
+    ],
+    [
+     35.745883,
+     -81.34797
+    ],
+    [
+     35.748548,
+     -81.346224
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Dry Creek",
+   "reports": 6,
+   "stream_index": null,
+   "permits": [
+    "WQCS00018"
+   ],
+   "points": [
+    [
+     36.535953,
+     -79.640287
+    ],
+    [
+     36.529263,
+     -79.673733
+    ],
+    [
+     36.535953,
+     -79.640287
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Fiddlers Creek",
+   "reports": 6,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.083573,
+     -80.117511
+    ],
+    [
+     36.053937,
+     -80.183792
+    ],
+    [
+     36.081999,
+     -80.143817
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Hewletts Creek",
+   "reports": 6,
+   "stream_index": "18-87-26",
+   "permits": [
+    "WQCS00012"
+   ],
+   "points": [
+    [
+     34.186896,
+     -77.862652
+    ],
+    [
+     34.179606,
+     -77.873053
+    ],
+    [
+     34.175943,
+     -77.87862
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Howard Creek (Propst Creek)",
+   "reports": 6,
+   "stream_index": "11-42-(1)",
+   "permits": [
+    "WQCS00323"
+   ],
+   "points": [
+    [
+     35.773001,
+     -81.586165
+    ],
+    [
+     35.772435,
+     -81.58509
+    ],
+    [
+     35.759221,
+     -81.606768
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Little Gunpowder Creek",
+   "reports": 6,
+   "stream_index": null,
+   "permits": [
+    "WQCS00035"
+   ],
+   "points": [
+    [
+     35.842293,
+     -81.499635
+    ],
+    [
+     35.844822,
+     -81.500081
+    ],
+    [
+     35.841051,
+     -81.499329
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Little Lick Creek",
+   "reports": 6,
+   "stream_index": "27-9-(0.5)",
+   "permits": [
+    "WQCS00005"
+   ],
+   "points": [
+    [
+     35.994393,
+     -78.85094
+    ],
+    [
+     36.003357,
+     -78.8265
+    ],
+    [
+     35.982565,
+     -78.805426
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Long Branch",
+   "reports": 6,
+   "stream_index": "18-74-19-0.5",
+   "permits": [
+    "WQCS00010",
+    "WQCS00023",
+    "WQCS00037",
+    "WQCS00053",
+    "WQCSD0257"
+   ],
+   "points": [
+    [
+     35.372808,
+     -77.979654
+    ],
+    [
+     36.03978,
+     -79.935413
+    ],
+    [
+     35.305362,
+     -81.918059
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Melchor Branch",
+   "reports": 6,
+   "stream_index": null,
+   "permits": [
+    "WQCS00016"
+   ],
+   "points": [
+    [
+     35.368443,
+     -80.193056
+    ],
+    [
+     35.368447,
+     -80.193055
+    ],
+    [
+     35.368447,
+     -80.193055
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Mine Creek",
+   "reports": 6,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.84474,
+     -78.661741
+    ],
+    [
+     35.875483,
+     -78.627628
+    ],
+    [
+     35.855298,
+     -78.65613
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Otter Creek",
+   "reports": 6,
+   "stream_index": "16-18-5-(1)",
+   "permits": [
+    "WQCSD0289"
+   ],
+   "points": [
+    [
+     36.118611,
+     -79.335833
+    ],
+    [
+     36.118609,
+     -79.335831
+    ],
+    [
+     36.118587,
+     -79.335817
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Steele Creek",
+   "reports": 6,
+   "stream_index": "11-137-10",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.119413,
+     -80.95414
+    ],
+    [
+     35.11845,
+     -80.957021
+    ],
+    [
+     35.105562,
+     -80.948862
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Toby Creek",
+   "reports": 6,
+   "stream_index": "13-17-5-4",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.295561,
+     -80.741138
+    ],
+    [
+     35.275338,
+     -80.756879
+    ],
+    [
+     35.286732,
+     -80.754044
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Walnut Creek",
+   "reports": 6,
+   "stream_index": "27-34-(1)",
+   "permits": [
+    "WQCS00002",
+    "WQCS00013"
+   ],
+   "points": [
+    [
+     35.784367,
+     -78.757135
+    ],
+    [
+     35.765757,
+     -78.626165
+    ],
+    [
+     35.766801,
+     -78.597185
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Big Branch",
+   "reports": 5,
+   "stream_index": "18-7-6-1",
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.69931,
+     -78.542816
+    ],
+    [
+     35.83944,
+     -78.632802
+    ],
+    [
+     35.859131,
+     -78.625805
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Drowning Creek",
+   "reports": 5,
+   "stream_index": "11-52-(1)",
+   "permits": [
+    "WQCS00324"
+   ],
+   "points": [
+    [
+     35.738756,
+     -81.421833
+    ],
+    [
+     35.737788,
+     -81.421668
+    ],
+    [
+     35.738676,
+     -81.42179
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Grants Creek",
+   "reports": 5,
+   "stream_index": "12-110",
+   "permits": [
+    "WQCS00019"
+   ],
+   "points": [
+    [
+     35.686853,
+     -80.501777
+    ],
+    [
+     35.690103,
+     -80.454654
+    ],
+    [
+     35.672913,
+     -80.479877
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Grassy Creek",
+   "reports": 5,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003",
+    "WQCS00091"
+   ],
+   "points": [
+    [
+     35.894426,
+     -82.064811
+    ],
+    [
+     36.236629,
+     -80.297024
+    ],
+    [
+     36.223076,
+     -80.290664
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Little Cokey Swamp",
+   "reports": 5,
+   "stream_index": "28-83-3-1",
+   "permits": [
+    "WQCS00011"
+   ],
+   "points": [
+    [
+     35.921574,
+     -77.786406
+    ],
+    [
+     35.921992,
+     -77.78637
+    ],
+    [
+     35.921267,
+     -77.788817
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Red Hill Branch",
+   "reports": 5,
+   "stream_index": null,
+   "permits": [
+    "WQCS00252"
+   ],
+   "points": [
+    [
+     34.494669,
+     -78.674733
+    ],
+    [
+     34.494669,
+     -78.674733
+    ],
+    [
+     34.492962,
+     -78.668895
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Reedy Fork",
+   "reports": 5,
+   "stream_index": "16-11-(1)",
+   "permits": [
+    "WQCS00003",
+    "WQCS00006"
+   ],
+   "points": [
+    [
+     36.174555,
+     -79.730114
+    ],
+    [
+     36.171108,
+     -79.698833
+    ],
+    [
+     36.112581,
+     -80.043399
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Toisnot Swamp",
+   "reports": 5,
+   "stream_index": "27-86-11-(5)",
+   "permits": [
+    "WQCS00021"
+   ],
+   "points": [
+    [
+     35.75151,
+     -77.925843
+    ],
+    [
+     35.761446,
+     -77.930789
+    ],
+    [
+     35.721117,
+     -77.882211
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Big Creek",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00203"
+   ],
+   "points": [
+    [
+     34.29255,
+     -78.493763
+    ],
+    [
+     34.300223,
+     -78.483371
+    ],
+    [
+     34.301589,
+     -78.486223
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Bledsoe Creek",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00160"
+   ],
+   "points": [
+    [
+     36.475996,
+     -81.108418
+    ],
+    [
+     36.499058,
+     -81.118647
+    ],
+    [
+     36.501302,
+     -81.124471
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Boone Creek",
+   "reports": 4,
+   "stream_index": "10-1-4-4",
+   "permits": [
+    "WQCS00071"
+   ],
+   "points": [
+    [
+     36.210708,
+     -81.675869
+    ],
+    [
+     36.215478,
+     -81.675054
+    ],
+    [
+     36.216756,
+     -81.682987
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Browns Creek (Cross Pond)",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00154"
+   ],
+   "points": [
+    [
+     34.615629,
+     -78.624911
+    ],
+    [
+     34.627269,
+     -78.602408
+    ],
+    [
+     34.628782,
+     -78.602219
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Brush Fork",
+   "reports": 4,
+   "stream_index": "13-42-1-3-1",
+   "permits": [
+    "WQCS00066",
+    "WQCS00384"
+   ],
+   "points": [
+    [
+     34.963104,
+     -80.053492
+    ],
+    [
+     34.961,
+     -80.041
+    ],
+    [
+     34.964382,
+     -80.063591
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Brushy Fork Branch",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.118494,
+     -80.219786
+    ],
+    [
+     36.122753,
+     -80.228137
+    ],
+    [
+     36.136202,
+     -80.233189
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Calabash River",
+   "reports": 4,
+   "stream_index": "15-25-13",
+   "permits": [
+    "WQCS00284"
+   ],
+   "points": [
+    [
+     33.902514,
+     -78.514794
+    ],
+    [
+     33.891768,
+     -78.558902
+    ],
+    [
+     33.886318,
+     -78.563739
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Cline Creek",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00088"
+   ],
+   "points": [
+    [
+     35.710792,
+     -81.245649
+    ],
+    [
+     35.705464,
+     -81.229899
+    ],
+    [
+     35.702868,
+     -81.226291
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "East Belews Creek",
+   "reports": 4,
+   "stream_index": "22-27-8-(1)",
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.136656,
+     -80.062794
+    ],
+    [
+     36.138994,
+     -80.060478
+    ],
+    [
+     36.138994,
+     -80.060478
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "East Fork Twelvemile Creek",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00054"
+   ],
+   "points": [
+    [
+     34.96326,
+     -80.735396
+    ],
+    [
+     34.96511,
+     -80.737232
+    ],
+    [
+     35.033264,
+     -80.657046
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Goose Creek",
+   "reports": 4,
+   "stream_index": "15-25-2-16-4-(1)",
+   "permits": [
+    "WQCS00005",
+    "WQCS00054"
+   ],
+   "points": [
+    [
+     35.989128,
+     -78.886566
+    ],
+    [
+     35.112463,
+     -80.634518
+    ],
+    [
+     35.134392,
+     -80.619791
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Grindle Creek",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00014"
+   ],
+   "points": [
+    [
+     35.734851,
+     -77.358402
+    ],
+    [
+     35.794998,
+     -77.374868
+    ],
+    [
+     35.794998,
+     -77.374868
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Gum Branch",
+   "reports": 4,
+   "stream_index": "11-120-5",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.2989,
+     -80.929238
+    ],
+    [
+     35.298086,
+     -80.925716
+    ],
+    [
+     35.286092,
+     -80.933162
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Hildebran Creek (Anthony Creek)",
+   "reports": 4,
+   "stream_index": "11-129-5-3",
+   "permits": [
+    "WQCS00044"
+   ],
+   "points": [
+    [
+     35.653787,
+     -81.236532
+    ],
+    [
+     35.652183,
+     -81.239409
+    ],
+    [
+     35.664264,
+     -81.218102
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Hollands Creek",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00050",
+    "WQCS00053"
+   ],
+   "points": [
+    [
+     35.379468,
+     -81.915525
+    ],
+    [
+     35.374671,
+     -81.906165
+    ],
+    [
+     35.364645,
+     -81.901764
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Hunts Fork",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00057"
+   ],
+   "points": [
+    [
+     35.911694,
+     -80.079965
+    ],
+    [
+     35.911701,
+     -80.079971
+    ],
+    [
+     35.902939,
+     -80.096759
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Joes Branch",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00026",
+    "WQCS00104"
+   ],
+   "points": [
+    [
+     34.995662,
+     -80.489895
+    ],
+    [
+     34.864937,
+     -76.904172
+    ],
+    [
+     34.864691,
+     -76.903924
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Lake Waccamaw",
+   "reports": 4,
+   "stream_index": "15-2",
+   "permits": [
+    "WQCS00203"
+   ],
+   "points": [
+    [
+     34.28884,
+     -78.471398
+    ],
+    [
+     34.317141,
+     -78.524195
+    ],
+    [
+     34.317349,
+     -78.524366
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Lowery Mill Creek",
+   "reports": 4,
+   "stream_index": "12-94-12-3-(0.5)",
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.110421,
+     -80.169647
+    ],
+    [
+     36.142004,
+     -80.162148
+    ],
+    [
+     36.11282,
+     -80.172115
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "McKee Creek",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.220843,
+     -80.672693
+    ],
+    [
+     35.234333,
+     -80.650469
+    ],
+    [
+     35.231067,
+     -80.642691
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Peppermint Branch",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00329"
+   ],
+   "points": [
+    [
+     35.954532,
+     -77.947574
+    ],
+    [
+     35.954095,
+     -77.946837
+    ],
+    [
+     35.954712,
+     -77.947101
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Picture Creek",
+   "reports": 4,
+   "stream_index": "27-4-7-(2)",
+   "permits": [
+    "WQCS00068"
+   ],
+   "points": [
+    [
+     36.144279,
+     -78.757349
+    ],
+    [
+     36.104454,
+     -78.780884
+    ],
+    [
+     36.146588,
+     -78.75577
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Reems Creek",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.687524,
+     -82.593711
+    ],
+    [
+     35.684172,
+     -82.567395
+    ],
+    [
+     35.690606,
+     -82.532532
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Reynolds Creek",
+   "reports": 4,
+   "stream_index": "12-94-9",
+   "permits": [
+    "WQCS00003",
+    "WQCS00053"
+   ],
+   "points": [
+    [
+     36.093411,
+     -80.392064
+    ],
+    [
+     35.367688,
+     -81.936812
+    ],
+    [
+     35.367669,
+     -81.93685
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Shoe Heel Creek (Big Shoe Heel Creek)(Maxton Pond)",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00169",
+    "WQCS00212"
+   ],
+   "points": [
+    [
+     34.537237,
+     -79.296755
+    ],
+    [
+     34.535839,
+     -79.297657
+    ],
+    [
+     34.53547,
+     -79.301231
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Sixmile Creek",
+   "reports": 4,
+   "stream_index": "11-138-3",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.013303,
+     -80.833226
+    ],
+    [
+     35.025434,
+     -80.829735
+    ],
+    [
+     35.046265,
+     -80.781868
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Smith River",
+   "reports": 4,
+   "stream_index": "22-40-(1)",
+   "permits": [
+    "WQCS00018"
+   ],
+   "points": [
+    [
+     36.518373,
+     -79.770614
+    ],
+    [
+     36.514332,
+     -79.753082
+    ],
+    [
+     36.48471,
+     -79.751539
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Snow Creek",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.787771,
+     -81.285736
+    ],
+    [
+     35.76618,
+     -81.282762
+    ],
+    [
+     35.788533,
+     -81.286097
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Stirewalt Creek",
+   "reports": 4,
+   "stream_index": "11-69-6-(1)",
+   "permits": [
+    "WQCS00135"
+   ],
+   "points": [
+    [
+     35.92017,
+     -81.168921
+    ],
+    [
+     35.909523,
+     -81.181103
+    ],
+    [
+     35.92197,
+     -81.184918
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Sweeten Creek (Busbee Reservoir)",
+   "reports": 4,
+   "stream_index": "6-78-24",
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.546286,
+     -82.516984
+    ],
+    [
+     35.561106,
+     -82.52114
+    ],
+    [
+     35.547354,
+     -82.529311
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Torrence Creek",
+   "reports": 4,
+   "stream_index": "11-115-4",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.38715,
+     -80.845526
+    ],
+    [
+     35.405118,
+     -80.847486
+    ],
+    [
+     35.398231,
+     -80.851901
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Uwharrie River",
+   "reports": 4,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010",
+    "WQCS00312",
+    "WQCS00363",
+    "WQCSD0005"
+   ],
+   "points": [
+    [
+     35.920764,
+     -80.02107
+    ],
+    [
+     35.127217,
+     -79.999746
+    ],
+    [
+     35.904233,
+     -80.007428
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Walker Branch",
+   "reports": 4,
+   "stream_index": "11-137-10-1",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.107963,
+     -80.968097
+    ],
+    [
+     35.099271,
+     -80.9969
+    ],
+    [
+     35.096798,
+     -80.958108
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Beaver Creek",
+   "reports": 3,
+   "stream_index": "10-1-25",
+   "permits": [
+    "WQCS00214"
+   ],
+   "points": [
+    [
+     36.380214,
+     -81.487292
+    ],
+    [
+     36.374969,
+     -81.46456
+    ],
+    [
+     36.380191,
+     -81.487306
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Big Beaver Island Creek",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00144"
+   ],
+   "points": [
+    [
+     36.399917,
+     -79.976374
+    ],
+    [
+     36.388825,
+     -79.974204
+    ],
+    [
+     36.55117,
+     -80.45158
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Black Creek",
+   "reports": 3,
+   "stream_index": "27-33-5",
+   "permits": [
+    "WQCS00013",
+    "WQCS00193"
+   ],
+   "points": [
+    [
+     35.796006,
+     -78.78695
+    ],
+    [
+     35.598303,
+     -78.754456
+    ],
+    [
+     35.795475,
+     -78.774567
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Boulding Branch",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     35.995492,
+     -79.992052
+    ],
+    [
+     35.977839,
+     -79.981428
+    ],
+    [
+     35.967112,
+     -80.009226
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Boyds Creek",
+   "reports": 3,
+   "stream_index": "16-16",
+   "permits": [
+    "WQCS00008",
+    "WQCSD0289"
+   ],
+   "points": [
+    [
+     36.063703,
+     -79.419946
+    ],
+    [
+     36.117806,
+     -79.358872
+    ],
+    [
+     36.117806,
+     -79.358872
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Brown Branch",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.528733,
+     -82.527206
+    ],
+    [
+     35.528759,
+     -82.529112
+    ],
+    [
+     35.529534,
+     -82.528512
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Burton Branch",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00018",
+    "WQCS00381"
+   ],
+   "points": [
+    [
+     36.489096,
+     -79.770265
+    ],
+    [
+     35.28174,
+     -81.135805
+    ],
+    [
+     35.289046,
+     -81.138899
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cabin Creek",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00124",
+    "WQCS00337"
+   ],
+   "points": [
+    [
+     35.311316,
+     -79.739486
+    ],
+    [
+     35.31132,
+     -79.739487
+    ],
+    [
+     35.431301,
+     -79.59046
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Clarke Creek",
+   "reports": 3,
+   "stream_index": "13-17-4",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.412202,
+     -80.759797
+    ],
+    [
+     35.407652,
+     -80.760552
+    ],
+    [
+     35.407604,
+     -80.770121
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Cokey Swamp",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00011",
+    "WQCS00370"
+   ],
+   "points": [
+    [
+     35.87336,
+     -77.827865
+    ],
+    [
+     35.87345,
+     -77.828075
+    ],
+    [
+     35.921775,
+     -77.786999
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cotton Mill Branch",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00024"
+   ],
+   "points": [
+    [
+     34.61355,
+     -79.015968
+    ],
+    [
+     34.615086,
+     -79.01693
+    ],
+    [
+     34.614334,
+     -79.015502
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Evans Lake",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00007"
+   ],
+   "points": [
+    [
+     35.077905,
+     -78.941678
+    ],
+    [
+     35.107086,
+     -78.870921
+    ],
+    [
+     35.10634,
+     -78.869872
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Fites Creek",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00046"
+   ],
+   "points": [
+    [
+     35.276912,
+     -81.041059
+    ],
+    [
+     35.267345,
+     -81.056577
+    ],
+    [
+     35.274629,
+     -81.042
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Floyds Creek",
+   "reports": 3,
+   "stream_index": "9-37",
+   "permits": [
+    "WQCS00053"
+   ],
+   "points": [
+    [
+     35.328684,
+     -81.916571
+    ],
+    [
+     35.328681,
+     -81.916569
+    ],
+    [
+     35.32869,
+     -81.916574
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Grinnel Creek",
+   "reports": 3,
+   "stream_index": "27-87.5",
+   "permits": [
+    "WQCS00014"
+   ],
+   "points": [
+    [
+     35.797929,
+     -77.372984
+    ],
+    [
+     35.80425,
+     -77.372123
+    ],
+    [
+     35.804457,
+     -77.372235
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Gum Branch Canal",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00024"
+   ],
+   "points": [
+    [
+     34.608069,
+     -79.022444
+    ],
+    [
+     34.608636,
+     -79.021004
+    ],
+    [
+     34.608388,
+     -79.019862
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Hare Snipe Creek",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.852152,
+     -78.691833
+    ],
+    [
+     35.901622,
+     -78.708445
+    ],
+    [
+     35.86427,
+     -78.705153
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Johnson Creek",
+   "reports": 3,
+   "stream_index": "12-91",
+   "permits": [
+    "WQCS00003",
+    "WQCS00149"
+   ],
+   "points": [
+    [
+     36.006344,
+     -80.382132
+    ],
+    [
+     36.009423,
+     -80.386916
+    ],
+    [
+     35.429192,
+     -80.990272
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Lick Branch",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00026",
+    "WQCS00344"
+   ],
+   "points": [
+    [
+     34.980266,
+     -80.362481
+    ],
+    [
+     35.013913,
+     -80.564002
+    ],
+    [
+     35.021536,
+     -80.560211
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Little Alamance Creek (Gant Lake, Mays Lake) (Alamance County)",
+   "reports": 3,
+   "stream_index": "16-19-11",
+   "permits": [
+    "WQCS00008"
+   ],
+   "points": [
+    [
+     36.070911,
+     -79.435229
+    ],
+    [
+     36.071445,
+     -79.447421
+    ],
+    [
+     36.095957,
+     -79.451576
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Little Ledge Creek",
+   "reports": 3,
+   "stream_index": "27-10-3-(1)",
+   "permits": [
+    "WQCS00068"
+   ],
+   "points": [
+    [
+     36.11534,
+     -78.725857
+    ],
+    [
+     36.115335,
+     -78.725853
+    ],
+    [
+     36.11727,
+     -78.72829
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Little Rockfish Creek [Hope Mills Lake (Number Four Lake)]",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00007"
+   ],
+   "points": [
+    [
+     35.058302,
+     -79.073757
+    ],
+    [
+     34.976487,
+     -78.944103
+    ],
+    [
+     34.971345,
+     -78.918836
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "North Hamby Creek",
+   "reports": 3,
+   "stream_index": "12-119-7-4-1",
+   "permits": [
+    "WQCS00057"
+   ],
+   "points": [
+    [
+     35.876745,
+     -80.080213
+    ],
+    [
+     35.870956,
+     -80.084001
+    ],
+    [
+     35.885259,
+     -80.057889
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Nutbush Creek (Including Nutbush Creek Arm of John H. Kerr Reservoir below normal pool elevation)",
+   "reports": 3,
+   "stream_index": "23-8-(1)",
+   "permits": [
+    "WQCS00055"
+   ],
+   "points": [
+    [
+     36.33304,
+     -78.386751
+    ],
+    [
+     36.350081,
+     -78.410105
+    ],
+    [
+     36.337901,
+     -78.412424
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Perry Creek",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.876898,
+     -78.586853
+    ],
+    [
+     35.873989,
+     -78.557436
+    ],
+    [
+     35.883242,
+     -78.560851
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Pigeon House Branch",
+   "reports": 3,
+   "stream_index": "27-33-18",
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.803062,
+     -78.632811
+    ],
+    [
+     35.803246,
+     -78.632352
+    ],
+    [
+     35.802673,
+     -78.630148
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Powell Creek (Lake Julian)",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.471159,
+     -82.511525
+    ],
+    [
+     35.47122,
+     -82.511455
+    ],
+    [
+     35.480661,
+     -82.51897
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Price Mill Creek",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00054"
+   ],
+   "points": [
+    [
+     35.004852,
+     -80.688263
+    ],
+    [
+     34.992896,
+     -80.685293
+    ],
+    [
+     35.035668,
+     -80.673746
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Private pond",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00047",
+    "WQCS00077",
+    "WQCS00162"
+   ],
+   "points": [
+    [
+     36.081432,
+     -79.075157
+    ],
+    [
+     35.457496,
+     -79.217804
+    ],
+    [
+     35.066702,
+     -76.963182
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Saw Pit Swamp",
+   "reports": 3,
+   "stream_index": "15-25-2-2",
+   "permits": [
+    "WQCS00284"
+   ],
+   "points": [
+    [
+     33.926931,
+     -78.474249
+    ],
+    [
+     33.93756,
+     -78.48126
+    ],
+    [
+     33.92566,
+     -78.476141
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Second Creek (North Second Creek)",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00019"
+   ],
+   "points": [
+    [
+     35.565883,
+     -80.416955
+    ],
+    [
+     35.54387,
+     -80.395434
+    ],
+    [
+     35.551532,
+     -80.399185
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Smith Creek",
+   "reports": 3,
+   "stream_index": "12-93-1",
+   "permits": [
+    "WQCS00003",
+    "WQCS00012",
+    "WQCS00106"
+   ],
+   "points": [
+    [
+     35.98502,
+     -80.440191
+    ],
+    [
+     34.263198,
+     -77.892782
+    ],
+    [
+     36.118431,
+     -80.068943
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "South Fork Muddy Creek",
+   "reports": 3,
+   "stream_index": "12-94-13",
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.017882,
+     -80.256587
+    ],
+    [
+     36.040972,
+     -80.248387
+    ],
+    [
+     36.02999,
+     -80.23378
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Southwest Prong Beaverdam Creek",
+   "reports": 3,
+   "stream_index": "27-33-15-1",
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.797617,
+     -78.682504
+    ],
+    [
+     35.808593,
+     -78.673088
+    ],
+    [
+     35.806876,
+     -78.673283
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Southwest Prong Slocum Creek",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00104"
+   ],
+   "points": [
+    [
+     34.896753,
+     -76.921709
+    ],
+    [
+     34.896753,
+     -76.921709
+    ],
+    [
+     34.896753,
+     -76.921709
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Studman Branch",
+   "reports": 3,
+   "stream_index": "11-134",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.085528,
+     -81.027225
+    ],
+    [
+     35.084763,
+     -81.029412
+    ],
+    [
+     35.092133,
+     -81.036224
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Toisnot Swamp (Toisnot Reservoir)",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00021"
+   ],
+   "points": [
+    [
+     35.753522,
+     -77.916988
+    ],
+    [
+     35.765201,
+     -77.916667
+    ],
+    [
+     35.765201,
+     -77.916667
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary to Cold Water Creek",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00327"
+   ],
+   "points": [
+    [
+     35.464095,
+     -80.605377
+    ],
+    [
+     35.467454,
+     -80.60524
+    ],
+    [
+     35.467542,
+     -80.604428
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Walker Creek",
+   "reports": 3,
+   "stream_index": "11-129-5-10",
+   "permits": [
+    "WQCS00040"
+   ],
+   "points": [
+    [
+     35.477757,
+     -81.25191
+    ],
+    [
+     35.496171,
+     -81.239715
+    ],
+    [
+     35.47777,
+     -81.259106
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Woodward Branch (Charles Branch)",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00284",
+    "WQCS00296"
+   ],
+   "points": [
+    [
+     33.995879,
+     -78.377337
+    ],
+    [
+     33.978342,
+     -78.377015
+    ],
+    [
+     33.979953,
+     -78.377015
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "hardins pond",
+   "reports": 3,
+   "stream_index": null,
+   "permits": [
+    "WQCS00083"
+   ],
+   "points": [
+    [
+     34.806948,
+     -79.200672
+    ],
+    [
+     34.805486,
+     -79.193354
+    ],
+    [
+     34.805801,
+     -79.182177
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Abernethy Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00107"
+   ],
+   "points": [
+    [
+     35.279568,
+     -81.301716
+    ],
+    [
+     35.275302,
+     -81.272565
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Afton Run",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00327"
+   ],
+   "points": [
+    [
+     35.435628,
+     -80.676225
+    ],
+    [
+     35.439289,
+     -80.658039
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Basal Creek [(Bass Lake, (Mills Pond)]",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00193"
+   ],
+   "points": [
+    [
+     35.619109,
+     -78.810581
+    ],
+    [
+     35.600138,
+     -78.819459
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Batson Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00219"
+   ],
+   "points": [
+    [
+     35.158064,
+     -82.737343
+    ],
+    [
+     35.153588,
+     -82.731566
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Belews Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003",
+    "WQCS00006"
+   ],
+   "points": [
+    [
+     36.036735,
+     -79.868761
+    ],
+    [
+     36.145701,
+     -80.068563
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Big Buffalo Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00047"
+   ],
+   "points": [
+    [
+     35.487998,
+     -79.188367
+    ],
+    [
+     35.494612,
+     -79.189352
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Bloomery Swamp",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00021"
+   ],
+   "points": [
+    [
+     35.717848,
+     -77.952828
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Bolin Creek (Hogan Lake)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00031"
+   ],
+   "points": [
+    [
+     35.930209,
+     -79.080741
+    ],
+    [
+     35.929616,
+     -79.080222
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Brandy Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00179"
+   ],
+   "points": [
+    [
+     36.041878,
+     -78.48714
+    ],
+    [
+     36.041442,
+     -78.487055
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Branson Creek (Branson Lake)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00007"
+   ],
+   "points": [
+    [
+     35.050742,
+     -78.935462
+    ],
+    [
+     35.051195,
+     -78.932228
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Britton Creek",
+   "reports": 2,
+   "stream_index": "6-55-9",
+   "permits": [
+    "WQCS00070"
+   ],
+   "points": [
+    [
+     35.327426,
+     -82.472643
+    ],
+    [
+     35.343207,
+     -82.499679
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Brooks Creek (Branch)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0267"
+   ],
+   "points": [
+    [
+     35.784272,
+     -79.223623
+    ],
+    [
+     35.775539,
+     -79.221046
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Brown Creek",
+   "reports": 2,
+   "stream_index": "13-20",
+   "permits": [
+    "WQCS00066"
+   ],
+   "points": [
+    [
+     35.001681,
+     -80.188649
+    ],
+    [
+     34.991325,
+     -80.176325
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Brushy Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00037"
+   ],
+   "points": [
+    [
+     35.303133,
+     -81.578813
+    ],
+    [
+     35.303139,
+     -81.578817
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Buckhead Creek (Buckland Creek)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00007"
+   ],
+   "points": [
+    [
+     35.074413,
+     -78.959507
+    ],
+    [
+     35.070254,
+     -78.962397
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Burke Creek",
+   "reports": 2,
+   "stream_index": "12-94-12-9",
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.065016,
+     -80.295696
+    ],
+    [
+     36.062707,
+     -80.303801
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Burnt Swamp",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00114"
+   ],
+   "points": [
+    [
+     34.66099,
+     -79.163933
+    ],
+    [
+     34.68608,
+     -79.192986
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Bushy Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.772831,
+     -78.690353
+    ],
+    [
+     35.786088,
+     -78.697549
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Camp Creek (Grass Creek)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00376"
+   ],
+   "points": [
+    [
+     36.280168,
+     -80.847925
+    ],
+    [
+     36.280168,
+     -80.847925
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Canie Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.56636,
+     -82.624342
+    ],
+    [
+     35.577333,
+     -82.619386
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Carrs Creek",
+   "reports": 2,
+   "stream_index": "18-20-7",
+   "permits": [
+    "WQCS00047",
+    "WQCS00217"
+   ],
+   "points": [
+    [
+     35.444241,
+     -79.117263
+    ],
+    [
+     35.431042,
+     -79.114577
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Carvers Creek (Cypress Lake)",
+   "reports": 2,
+   "stream_index": "18-24",
+   "permits": [
+    "WQCS00007"
+   ],
+   "points": [
+    [
+     35.159022,
+     -78.871586
+    ],
+    [
+     35.162838,
+     -78.866595
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Cherry Run",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00087"
+   ],
+   "points": [
+    [
+     35.570438,
+     -77.080494
+    ],
+    [
+     35.565503,
+     -77.039084
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Church Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00019"
+   ],
+   "points": [
+    [
+     35.605467,
+     -80.435367
+    ],
+    [
+     35.604697,
+     -80.43844
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Clarks Creek",
+   "reports": 2,
+   "stream_index": "13-16",
+   "permits": [
+    "WQCS00040",
+    "WQCS00133"
+   ],
+   "points": [
+    [
+     35.47474,
+     -81.257379
+    ],
+    [
+     35.211411,
+     -80.042918
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Coles Branch",
+   "reports": 2,
+   "stream_index": "27-33-3",
+   "permits": [
+    "WQCS00013"
+   ],
+   "points": [
+    [
+     35.804605,
+     -78.817204
+    ],
+    [
+     35.792051,
+     -78.800076
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Collie Swamp",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0571"
+   ],
+   "points": [
+    [
+     35.832438,
+     -77.180328
+    ],
+    [
+     35.833787,
+     -77.180597
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Crane Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00019"
+   ],
+   "points": [
+    [
+     35.619383,
+     -80.447237
+    ],
+    [
+     35.614825,
+     -80.450796
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Curl Tail Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00171"
+   ],
+   "points": [
+    [
+     35.472312,
+     -80.251538
+    ],
+    [
+     35.472296,
+     -80.251555
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Dingle Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.506143,
+     -82.526184
+    ],
+    [
+     35.497322,
+     -82.51791
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Doby Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001",
+    "WQCSD0114"
+   ],
+   "points": [
+    [
+     35.289297,
+     -80.775529
+    ],
+    [
+     35.298789,
+     -80.774897
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Double Branch",
+   "reports": 2,
+   "stream_index": "11-44-1",
+   "permits": [
+    "WQCS00032"
+   ],
+   "points": [
+    [
+     35.737267,
+     -81.577186
+    ],
+    [
+     35.738374,
+     -81.579901
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Driving Branch",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00109"
+   ],
+   "points": [
+    [
+     35.384493,
+     -78.546824
+    ],
+    [
+     35.384821,
+     -78.546977
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Dutchmans Creek",
+   "reports": 2,
+   "stream_index": "11-119-(6)",
+   "permits": [
+    "WQCS00059"
+   ],
+   "points": [
+    [
+     35.301276,
+     -81.006214
+    ],
+    [
+     35.338995,
+     -81.014576
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "East Buies Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00166"
+   ],
+   "points": [
+    [
+     35.418102,
+     -78.890333
+    ],
+    [
+     35.409234,
+     -78.729947
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "East Prong Slocum Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00104"
+   ],
+   "points": [
+    [
+     34.87558,
+     -76.90345
+    ],
+    [
+     34.879837,
+     -76.908083
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Flat Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.624767,
+     -82.317923
+    ],
+    [
+     35.627067,
+     -82.314374
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Forest Lake",
+   "reports": 2,
+   "stream_index": "9-41-15",
+   "permits": [
+    "WQCS00050"
+   ],
+   "points": [
+    [
+     35.355278,
+     -81.891741
+    ],
+    [
+     35.355285,
+     -81.891743
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Four Mile Branch (Bass Pond)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.52102,
+     -82.536075
+    ],
+    [
+     35.52039,
+     -82.539009
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Gabriels Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00025"
+   ],
+   "points": [
+    [
+     35.740368,
+     -79.76331
+    ],
+    [
+     35.743968,
+     -79.751273
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Gashes Creek (Cedar Mountain Lake)",
+   "reports": 2,
+   "stream_index": "6-78-21",
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.55503,
+     -82.48968
+    ],
+    [
+     35.560206,
+     -82.486697
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Geitner Branch",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.720325,
+     -81.362754
+    ],
+    [
+     35.725929,
+     -81.341597
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Henderson Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00070"
+   ],
+   "points": [
+    [
+     35.351605,
+     -82.368636
+    ],
+    [
+     35.35168,
+     -82.370605
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Hominy Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.543781,
+     -82.637532
+    ],
+    [
+     35.57233,
+     -82.599358
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Hoyle Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00017",
+    "WQCS00032"
+   ],
+   "points": [
+    [
+     35.749475,
+     -81.529974
+    ],
+    [
+     35.337899,
+     -81.133739
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Jenkins Branch",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00170"
+   ],
+   "points": [
+    [
+     35.402608,
+     -83.455087
+    ],
+    [
+     35.419452,
+     -83.456476
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Joes Fork",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00034"
+   ],
+   "points": [
+    [
+     35.208504,
+     -79.461086
+    ],
+    [
+     35.19943,
+     -79.470079
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Jordan Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00086"
+   ],
+   "points": [
+    [
+     36.316277,
+     -78.587067
+    ],
+    [
+     36.316277,
+     -78.587067
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Lee Creek",
+   "reports": 2,
+   "stream_index": "6-83",
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.620461,
+     -82.62446
+    ],
+    [
+     35.620461,
+     -82.62446
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Little Alamance Creek (Guilford County)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00006"
+   ],
+   "points": [
+    [
+     36.05078,
+     -79.606575
+    ],
+    [
+     35.987175,
+     -79.749599
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Little Arm Branch",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.72433,
+     -78.625913
+    ],
+    [
+     35.712401,
+     -78.607536
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Little Cawcaw Swamp",
+   "reports": 2,
+   "stream_index": "15-23-1",
+   "permits": [
+    "WQCS00284"
+   ],
+   "points": [
+    [
+     33.939567,
+     -78.567737
+    ],
+    [
+     33.941682,
+     -78.53805
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Little Crabtree Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00143"
+   ],
+   "points": [
+    [
+     35.916263,
+     -82.2831
+    ],
+    [
+     35.915544,
+     -82.286748
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Little Hope Creek",
+   "reports": 2,
+   "stream_index": "11-137-8-3",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.173359,
+     -80.875417
+    ],
+    [
+     35.164251,
+     -80.864699
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Little Rockfish Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00007"
+   ],
+   "points": [
+    [
+     35.017281,
+     -79.017815
+    ],
+    [
+     34.994118,
+     -79.029343
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Long Shoal Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.790249,
+     -81.251867
+    ],
+    [
+     35.800133,
+     -81.247144
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Maple Swamp",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00011"
+   ],
+   "points": [
+    [
+     35.948466,
+     -77.833535
+    ],
+    [
+     35.940703,
+     -77.84347
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "McGill Creek",
+   "reports": 2,
+   "stream_index": "11-135-2",
+   "permits": [
+    "WQCS00036"
+   ],
+   "points": [
+    [
+     35.24112,
+     -81.333247
+    ],
+    [
+     35.245341,
+     -81.331349
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Middle Reedy Fork",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00006"
+   ],
+   "points": [
+    [
+     36.171101,
+     -79.69883
+    ],
+    [
+     36.189981,
+     -79.687103
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Miller Branch (Bolicks Dry Branch)",
+   "reports": 2,
+   "stream_index": "11-129-5-1",
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.699193,
+     -81.281018
+    ],
+    [
+     35.710584,
+     -81.273357
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Mitchell Branch",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00087"
+   ],
+   "points": [
+    [
+     35.587921,
+     -77.070897
+    ],
+    [
+     35.586005,
+     -77.09606
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "New Years Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00142"
+   ],
+   "points": [
+    [
+     36.132245,
+     -81.681191
+    ],
+    [
+     36.13488,
+     -81.67787
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Overcup Creek",
+   "reports": 2,
+   "stream_index": "16-41-4-2-(1)",
+   "permits": [
+    "WQCS00293"
+   ],
+   "points": [
+    [
+     35.839602,
+     -79.032893
+    ],
+    [
+     35.836074,
+     -79.032282
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Oxford Branch",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.807544,
+     -78.644174
+    ],
+    [
+     35.807187,
+     -78.646563
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "PIGEON RIVER",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00182",
+    "WQCS00307"
+   ],
+   "points": [
+    [
+     35.523948,
+     -82.841364
+    ],
+    [
+     35.54206,
+     -82.928575
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Patterson Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00047"
+   ],
+   "points": [
+    [
+     35.484033,
+     -79.212326
+    ],
+    [
+     35.48409,
+     -79.212314
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Pinner Creek (Morgan Lake)",
+   "reports": 2,
+   "stream_index": "6-57-18",
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.452602,
+     -82.497902
+    ],
+    [
+     35.45611,
+     -82.506996
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Potts Creek (Pilot Branch)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00036"
+   ],
+   "points": [
+    [
+     35.242848,
+     -81.352076
+    ],
+    [
+     35.260659,
+     -81.422459
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Private Pond",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00008",
+    "WQCSD0259"
+   ],
+   "points": [
+    [
+     35.994548,
+     -80.425266
+    ],
+    [
+     36.129447,
+     -79.464502
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Rat Spring Branch",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00042"
+   ],
+   "points": [
+    [
+     35.801876,
+     -80.265692
+    ],
+    [
+     35.8016,
+     -80.277042
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Reddicks Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00315"
+   ],
+   "points": [
+    [
+     36.014814,
+     -79.885022
+    ],
+    [
+     36.010454,
+     -79.880308
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Ross Creek (Lake Kenilworth)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.614422,
+     -82.522674
+    ],
+    [
+     35.585605,
+     -82.533258
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Runyon Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00087"
+   ],
+   "points": [
+    [
+     35.548101,
+     -77.033432
+    ],
+    [
+     35.552844,
+     -77.018544
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Shady Branch",
+   "reports": 2,
+   "stream_index": "11-129-5-7-3",
+   "permits": [
+    "WQCS00120"
+   ],
+   "points": [
+    [
+     35.575623,
+     -81.211568
+    ],
+    [
+     35.566537,
+     -81.205049
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Sides Branch",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.06417,
+     -80.348076
+    ],
+    [
+     36.032616,
+     -80.276315
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Silver Creek",
+   "reports": 2,
+   "stream_index": "11-34-(6.5)",
+   "permits": [
+    "WQCS00028"
+   ],
+   "points": [
+    [
+     35.73359,
+     -81.707723
+    ],
+    [
+     35.733046,
+     -81.726828
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Stevens Creek",
+   "reports": 2,
+   "stream_index": "13-17-18-1",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.118729,
+     -80.668314
+    ],
+    [
+     35.277873,
+     -80.872144
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Stirrup Iron Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00038"
+   ],
+   "points": [
+    [
+     35.910981,
+     -78.847798
+    ],
+    [
+     35.937147,
+     -78.825785
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Stoney Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00023"
+   ],
+   "points": [
+    [
+     35.367894,
+     -77.9639
+    ],
+    [
+     35.375512,
+     -77.979127
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Sycamore Creek (Big Lake)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.927248,
+     -78.75362
+    ],
+    [
+     35.896211,
+     -78.765147
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Tank Creek (McDuffie Cr.) (McFayden Pond)",
+   "reports": 2,
+   "stream_index": "18-23-27",
+   "permits": [
+    "WQCS00007",
+    "WQCS00029"
+   ],
+   "points": [
+    [
+     35.065953,
+     -78.993828
+    ],
+    [
+     35.145395,
+     -78.990055
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Toisnot Swamp (Silver Lake, Lake Wilson)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00021"
+   ],
+   "points": [
+    [
+     35.735355,
+     -77.90238
+    ],
+    [
+     35.668117,
+     -77.839023
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Torrence Branch",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.054505,
+     -81.029214
+    ],
+    [
+     35.054801,
+     -81.029667
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Little Gunpowder Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00035"
+   ],
+   "points": [
+    [
+     35.842834,
+     -81.499244
+    ],
+    [
+     35.841042,
+     -81.499329
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Redbud Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00055"
+   ],
+   "points": [
+    [
+     36.326889,
+     -78.441251
+    ],
+    [
+     36.328088,
+     -78.440083
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Wagner Branch",
+   "reports": 2,
+   "stream_index": "6-87-13",
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.686908,
+     -82.593819
+    ],
+    [
+     35.685144,
+     -82.591416
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "West Buies Creek",
+   "reports": 2,
+   "stream_index": "18-18-2-(1)",
+   "permits": [
+    "WQCS00183"
+   ],
+   "points": [
+    [
+     35.458702,
+     -78.749726
+    ],
+    [
+     35.454125,
+     -78.751749
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025",
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Yadkin Branch (Adkin Branch)",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00022"
+   ],
+   "points": [
+    [
+     35.249802,
+     -77.561355
+    ],
+    [
+     35.266213,
+     -77.566893
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Zacks Fork Creek",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00035"
+   ],
+   "points": [
+    [
+     35.91626,
+     -81.532136
+    ],
+    [
+     35.91606,
+     -81.531477
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "private pond",
+   "reports": 2,
+   "stream_index": null,
+   "permits": [
+    "WQCS00006",
+    "WQCS00054"
+   ],
+   "points": [
+    [
+     35.005002,
+     -80.455699
+    ],
+    [
+     36.003973,
+     -79.687266
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "(North) Fowler Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00108"
+   ],
+   "points": [
+    [
+     35.09966,
+     -83.088399
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Abernathy Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00036"
+   ],
+   "points": [
+    [
+     35.256766,
+     -81.315796
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Anderson Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00326"
+   ],
+   "points": [
+    [
+     35.254556,
+     -80.500069
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Anthony Creek",
+   "reports": 1,
+   "stream_index": "11-130-2-(2)",
+   "permits": [
+    "WQCS00044"
+   ],
+   "points": [
+    [
+     35.684613,
+     -81.2263
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Bachelor Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00013"
+   ],
+   "points": [
+    [
+     35.793705,
+     -78.877451
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Bailey Fork",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00028"
+   ],
+   "points": [
+    [
+     35.720416,
+     -81.697194
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Baker Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0349"
+   ],
+   "points": [
+    [
+     35.879424,
+     -82.344336
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Bald Cypress Gut",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00067"
+   ],
+   "points": [
+    [
+     34.913182,
+     -76.905339
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Barger Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.706022,
+     -81.336321
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Beddingfield Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00110"
+   ],
+   "points": [
+    [
+     35.68718,
+     -78.462891
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Beech Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00011"
+   ],
+   "points": [
+    [
+     35.94998,
+     -77.803875
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Bell Swamp",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00284"
+   ],
+   "points": [
+    [
+     34.122114,
+     -78.089774
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Bill Moore Creek (Enka Lake)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.533422,
+     -82.651847
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Billy Branch",
+   "reports": 1,
+   "stream_index": "11-55-3",
+   "permits": [
+    "WQCS00145"
+   ],
+   "points": [
+    [
+     35.803197,
+     -81.434565
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Bishop Branch",
+   "reports": 1,
+   "stream_index": "18-81-7-1",
+   "permits": [
+    "WQCS00202"
+   ],
+   "points": [
+    [
+     34.180425,
+     -78.095997
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Blanket Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.049626,
+     -80.38715
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Blanket Creek (Lasater Lake)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.039942,
+     -80.411549
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Blood Run Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00056"
+   ],
+   "points": [
+    [
+     35.719891,
+     -79.483906
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Bones Creek",
+   "reports": 1,
+   "stream_index": "18-31-24-2",
+   "permits": [
+    "WQCS00007"
+   ],
+   "points": [
+    [
+     35.031015,
+     -79.040448
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Boyd Branch",
+   "reports": 1,
+   "stream_index": "6-104-5-1",
+   "permits": [
+    "WQCS00065"
+   ],
+   "points": [
+    [
+     36.07678,
+     -79.412202
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Bradley Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00012"
+   ],
+   "points": [
+    [
+     34.234774,
+     -77.92424
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Briar Branch",
+   "reports": 1,
+   "stream_index": "6-78-10-4",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.189838,
+     -80.806648
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Briar creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.220307,
+     -80.761842
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Bridges Branch",
+   "reports": 1,
+   "stream_index": "27-33-19",
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.796518,
+     -78.610981
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Brittian Branch",
+   "reports": 1,
+   "stream_index": "1-52-68-(2)",
+   "permits": [
+    "WQCS00132"
+   ],
+   "points": [
+    [
+     35.09757,
+     -84.021642
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Buck Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.707851,
+     -78.634004
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Buck branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00124"
+   ],
+   "points": [
+    [
+     34.926384,
+     -78.729841
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Buffalo Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.808975,
+     -78.40755
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Burnt House Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00268"
+   ],
+   "points": [
+    [
+     34.747426,
+     -77.410385
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Caldwell Station Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.453065,
+     -80.857154
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Carson Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00219"
+   ],
+   "points": [
+    [
+     35.148312,
+     -82.715069
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cary Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00192"
+   ],
+   "points": [
+    [
+     35.617993,
+     -78.879989
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cat Tail Branch",
+   "reports": 1,
+   "stream_index": "18-68-1-10-2",
+   "permits": [
+    "WQCS00079"
+   ],
+   "points": [
+    [
+     34.999659,
+     -78.322633
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Cates Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00077"
+   ],
+   "points": [
+    [
+     36.068895,
+     -79.08521
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cemetery Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.796015,
+     -78.625332
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Chadwick Bay",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00249"
+   ],
+   "points": [
+    [
+     34.526565,
+     -77.347877
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Charles Creek",
+   "reports": 1,
+   "stream_index": "30-3-11",
+   "permits": [
+    "WQCS00082"
+   ],
+   "points": [
+    [
+     36.293553,
+     -76.250223
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Clark Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00284"
+   ],
+   "points": [
+    [
+     34.042617,
+     -78.235524
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Coffey Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.17229,
+     -80.958531
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Coleman Place Pond",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00055"
+   ],
+   "points": [
+    [
+     36.324397,
+     -78.450015
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Coley Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00016"
+   ],
+   "points": [
+    [
+     35.371094,
+     -80.212539
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "College Branch (Institute Branch)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00286"
+   ],
+   "points": [
+    [
+     36.549179,
+     -77.115196
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Community Retention Pond",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.699298,
+     -78.542818
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Compass Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00011"
+   ],
+   "points": [
+    [
+     35.998872,
+     -77.788823
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cope Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00108"
+   ],
+   "points": [
+    [
+     35.373053,
+     -83.198125
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Copper Mine Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00050"
+   ],
+   "points": [
+    [
+     35.326854,
+     -81.855936
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cornelius Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00043"
+   ],
+   "points": [
+    [
+     35.625597,
+     -80.82445
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cottage Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00284"
+   ],
+   "points": [
+    [
+     33.927607,
+     -78.025972
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "County Home Branch (Still House Branch)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00065"
+   ],
+   "points": [
+    [
+     36.052565,
+     -79.390442
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cove Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0059"
+   ],
+   "points": [
+    [
+     35.24451,
+     -82.33553
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Crawford Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00101"
+   ],
+   "points": [
+    [
+     35.175198,
+     -83.390489
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Creek is named but name not given",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00006"
+   ],
+   "points": [
+    [
+     36.066346,
+     -79.839755
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Crooked Run Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00350"
+   ],
+   "points": [
+    [
+     36.266041,
+     -80.398516
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cross Creek (Big Cross Creek)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00007"
+   ],
+   "points": [
+    [
+     35.107578,
+     -78.90696
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Cub Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0181"
+   ],
+   "points": [
+    [
+     35.851746,
+     -79.023788
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Dairy Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.197607,
+     -80.852672
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Darr Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00042"
+   ],
+   "points": [
+    [
+     35.821386,
+     -80.251547
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Devils Fork",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00070"
+   ],
+   "points": [
+    [
+     35.34859,
+     -82.379845
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Dollar Branch (Marsh Branch)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00079"
+   ],
+   "points": [
+    [
+     34.987068,
+     -78.321312
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Dry Fork",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00026"
+   ],
+   "points": [
+    [
+     35.017389,
+     -80.597349
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Dye Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00070"
+   ],
+   "points": [
+    [
+     35.288518,
+     -82.43381
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Edenton Bay",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00272"
+   ],
+   "points": [
+    [
+     36.068563,
+     -76.608634
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Edwards Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.196427,
+     -80.776407
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Elisha Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00156"
+   ],
+   "points": [
+    [
+     35.925128,
+     -80.588527
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Eskridge Cove Branch (Beacon Reservoir)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.598429,
+     -82.392255
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "FRENCH BROAD",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00084"
+   ],
+   "points": [
+    [
+     35.223489,
+     -82.727631
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Fan Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00031"
+   ],
+   "points": [
+    [
+     35.869534,
+     -79.080661
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Fern Valley Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00042"
+   ],
+   "points": [
+    [
+     35.789629,
+     -80.25691
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Fiddlers Run",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00028"
+   ],
+   "points": [
+    [
+     35.727687,
+     -81.664232
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Fishers Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.104031,
+     -80.147502
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Flattop Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00174"
+   ],
+   "points": [
+    [
+     36.13545,
+     -81.84587
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Fornes Branch",
+   "reports": 1,
+   "stream_index": "28-96-1",
+   "permits": [
+    "WQCS00014"
+   ],
+   "points": [
+    [
+     35.595351,
+     -77.356521
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Fox Creek",
+   "reports": 1,
+   "stream_index": "28-25",
+   "permits": [
+    "WQCS00113"
+   ],
+   "points": [
+    [
+     36.093179,
+     -78.293534
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Fuda Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00328"
+   ],
+   "points": [
+    [
+     35.296074,
+     -80.660259
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Gash Creek",
+   "reports": 1,
+   "stream_index": "6-47",
+   "permits": [
+    "WQCSD0135"
+   ],
+   "points": [
+    [
+     35.315865,
+     -82.597518
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Gibsons Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00107"
+   ],
+   "points": [
+    [
+     35.292222,
+     -81.274766
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Gill Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.704532,
+     -82.564441
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Goose Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00011"
+   ],
+   "points": [
+    [
+     35.974735,
+     -77.827235
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Goulds Fork",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00384"
+   ],
+   "points": [
+    [
+     34.990515,
+     -80.09241
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Grassy Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.594244,
+     -82.478408
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Graveyard Creek (Crystal Falls Creek)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00091"
+   ],
+   "points": [
+    [
+     35.895717,
+     -82.069056
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Grays Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00007"
+   ],
+   "points": [
+    [
+     34.925805,
+     -78.918354
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Greenfield Creek",
+   "reports": 1,
+   "stream_index": "18-76",
+   "permits": [
+    "WQCS00012"
+   ],
+   "points": [
+    [
+     34.212167,
+     -77.946904
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Greenfield Lake",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00012"
+   ],
+   "points": [
+    [
+     34.201062,
+     -77.931612
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Gregory Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00030"
+   ],
+   "points": [
+    [
+     35.793709,
+     -80.921453
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Gum Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00008"
+   ],
+   "points": [
+    [
+     36.070605,
+     -79.490858
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Gum Log Canal",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0552"
+   ],
+   "points": [
+    [
+     35.083927,
+     -78.835369
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Halls Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00249"
+   ],
+   "points": [
+    [
+     34.687151,
+     -77.146981
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Hatters Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.963915,
+     -78.500322
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Haw Creek",
+   "reports": 1,
+   "stream_index": "6-78-22",
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.585561,
+     -82.509842
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Hiatt Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     36.00908,
+     -80.021549
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Hicks Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00258"
+   ],
+   "points": [
+    [
+     35.719219,
+     -80.899317
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Hogans Creek",
+   "reports": 1,
+   "stream_index": "22-31",
+   "permits": [
+    "WQCS00364"
+   ],
+   "points": [
+    [
+     36.36263,
+     -79.94533
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Hollifield Lake",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00222"
+   ],
+   "points": [
+    [
+     35.249662,
+     -81.66673
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Horn Beam Swamp",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00011"
+   ],
+   "points": [
+    [
+     35.974158,
+     -77.788493
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Horseford Creek",
+   "reports": 1,
+   "stream_index": "11-54-(3)",
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.752851,
+     -81.364009
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "House Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00371"
+   ],
+   "points": [
+    [
+     35.800363,
+     -78.70436
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Hughes Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00170"
+   ],
+   "points": [
+    [
+     35.416289,
+     -83.448844
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Intracoastal Waterway",
+   "reports": 1,
+   "stream_index": "18-87-(5.5)",
+   "permits": [
+    "WQCS00278"
+   ],
+   "points": [
+    [
+     34.433415,
+     -77.550746
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Irvins Creek (McEwen Lake)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.291174,
+     -80.879402
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Isothermal Community College pond",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00053"
+   ],
+   "points": [
+    [
+     35.340899,
+     -81.919649
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Isothermal Lake",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00053"
+   ],
+   "points": [
+    [
+     35.34093,
+     -81.919625
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Jack Smith Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00052"
+   ],
+   "points": [
+    [
+     35.114585,
+     -77.062289
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Jacks Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00087"
+   ],
+   "points": [
+    [
+     35.544541,
+     -77.053248
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Jacob Swamp (Jacob Branch)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00024"
+   ],
+   "points": [
+    [
+     34.587029,
+     -79.022682
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Jacob Swamp (Warwick Millpond, Carolina Power and Light Company Cooling Lake)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00024"
+   ],
+   "points": [
+    [
+     34.587108,
+     -79.006172
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Jefferson Village Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00042"
+   ],
+   "points": [
+    [
+     35.84,
+     -80.25
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Jennies Gut (Gum Pond Run)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00209"
+   ],
+   "points": [
+    [
+     36.191052,
+     -76.475025
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Joe Branch",
+   "reports": 1,
+   "stream_index": "2-79-47-1",
+   "permits": [
+    "WQCS00104"
+   ],
+   "points": [
+    [
+     34.864591,
+     -76.903868
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Johnson Drainage Ditch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00070"
+   ],
+   "points": [
+    [
+     35.30426,
+     -82.455263
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Jumping Run Branch",
+   "reports": 1,
+   "stream_index": "18-76-1-3",
+   "permits": [
+    "WQCS00012"
+   ],
+   "points": [
+    [
+     34.215399,
+     -77.928237
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Jumping Run Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00105"
+   ],
+   "points": [
+    [
+     35.198028,
+     -78.987906
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Kennedy Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00087"
+   ],
+   "points": [
+    [
+     35.559755,
+     -77.072665
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Kit Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00013"
+   ],
+   "points": [
+    [
+     35.8656,
+     -78.86297
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Knobbs Creek",
+   "reports": 1,
+   "stream_index": "30-3-8",
+   "permits": [
+    "WQCS00082"
+   ],
+   "points": [
+    [
+     36.322718,
+     -76.223218
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Knox Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.496397,
+     -80.884608
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "LITTLE TENNESSEE RIVER (Including the backwaters of Lake Emory)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00101"
+   ],
+   "points": [
+    [
+     35.18479,
+     -83.36774
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Lacey Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00054"
+   ],
+   "points": [
+    [
+     34.918344,
+     -80.75525
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Lake Hickory",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.804979,
+     -81.312066
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Lake Jeanette",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00006"
+   ],
+   "points": [
+    [
+     36.125643,
+     -79.822025
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Lake Norman",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0548"
+   ],
+   "points": [
+    [
+     35.487664,
+     -80.887189
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Leak Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.000303,
+     -80.228927
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Ledbetter Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00066"
+   ],
+   "points": [
+    [
+     35.002963,
+     -80.207759
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Ledge Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00068"
+   ],
+   "points": [
+    [
+     36.115344,
+     -78.725858
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Leonard Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00156"
+   ],
+   "points": [
+    [
+     35.911766,
+     -80.557793
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Lick Fork Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00049"
+   ],
+   "points": [
+    [
+     36.365192,
+     -79.653836
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Little Brier Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.890324,
+     -78.799167
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Little Cross Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00007"
+   ],
+   "points": [
+    [
+     35.088139,
+     -78.943867
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Little Northeast Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0063"
+   ],
+   "points": [
+    [
+     34.764675,
+     -77.301878
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Little Piney Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.644256,
+     -82.306978
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Little Troublesome Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00049"
+   ],
+   "points": [
+    [
+     36.32813,
+     -79.671469
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Lockwoods Folly River",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00284"
+   ],
+   "points": [
+    [
+     34.047301,
+     -78.176566
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Longview Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.787297,
+     -78.592938
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Longview Creek",
+   "reports": 1,
+   "stream_index": "11-129-1-17",
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.723737,
+     -81.365817
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Lovills Creek (Lovell Creek)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00033"
+   ],
+   "points": [
+    [
+     36.476784,
+     -80.61264
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Lower Barton Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.828181,
+     -78.632306
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Lynn Branch (Meadows Creek) (Lochmere Lake)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00013"
+   ],
+   "points": [
+    [
+     35.77289,
+     -78.777901
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Mahlers Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.661623,
+     -78.599402
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Mango Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.790327,
+     -78.483355
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Maple Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00011"
+   ],
+   "points": [
+    [
+     35.971126,
+     -77.892112
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Maple Creek (28-66)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00011"
+   ],
+   "points": [
+    [
+     35.944929,
+     -77.835659
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Marsh Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.797856,
+     -78.589175
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "McCoy's Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00171"
+   ],
+   "points": [
+    [
+     35.232776,
+     -80.319319
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "McDowell Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00101"
+   ],
+   "points": [
+    [
+     35.138115,
+     -83.39739
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "McIntyre Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.316091,
+     -80.873972
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Micol Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00032"
+   ],
+   "points": [
+    [
+     35.740242,
+     -81.555921
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Middle Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00024"
+   ],
+   "points": [
+    [
+     34.641091,
+     -79.013713
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Mills Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00191"
+   ],
+   "points": [
+    [
+     36.324148,
+     -80.150216
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Muddy Fork",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00135"
+   ],
+   "points": [
+    [
+     35.927697,
+     -81.182102
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Mulberry Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00093"
+   ],
+   "points": [
+    [
+     36.188018,
+     -81.113904
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Mundy Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00149"
+   ],
+   "points": [
+    [
+     35.542826,
+     -81.035899
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "N0rthview Heights Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00042"
+   ],
+   "points": [
+    [
+     35.83979,
+     -80.249196
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "NEW RIVER",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00268"
+   ],
+   "points": [
+    [
+     34.752438,
+     -77.361548
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Neills Creek (Neals Creek)",
+   "reports": 1,
+   "stream_index": "18-16-(0.7)",
+   "permits": [
+    "WQCS00183"
+   ],
+   "points": [
+    [
+     35.533689,
+     -78.763403
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Nicks Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0134"
+   ],
+   "points": [
+    [
+     35.25353,
+     -79.41279
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Nicks Creek (Von Canon Lake)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00309"
+   ],
+   "points": [
+    [
+     35.25231,
+     -79.411924
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Nixons Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00331"
+   ],
+   "points": [
+    [
+     34.395789,
+     -77.651717
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "North Fork Swannanoa River (Burnett Reservoir)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.624997,
+     -82.355427
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Northview Heights Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00042"
+   ],
+   "points": [
+    [
+     35.843229,
+     -80.246552
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Oak Hollow Lake",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     36.03686,
+     -80.014255
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Oak Hollow Reservoir",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     36.023085,
+     -80.029539
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Ogburn Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.117804,
+     -80.214676
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Oleander Memorial Gardens pond",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00012"
+   ],
+   "points": [
+    [
+     34.20702,
+     -77.834934
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "PAMLICO RIVER",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00087"
+   ],
+   "points": [
+    [
+     35.540348,
+     -77.063058
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Pages Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00012"
+   ],
+   "points": [
+    [
+     34.277507,
+     -77.802931
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Panther Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00013"
+   ],
+   "points": [
+    [
+     35.817588,
+     -78.914889
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Peebles Pond (private)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00297"
+   ],
+   "points": [
+    [
+     35.40485,
+     -78.823194
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Peltier Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00100"
+   ],
+   "points": [
+    [
+     34.731316,
+     -76.788048
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Perry Creek (Greshams Lake)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.884638,
+     -78.621156
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Phils Creek",
+   "reports": 1,
+   "stream_index": "16-41-2-2-(0.3)",
+   "permits": [
+    "WQCS00031"
+   ],
+   "points": [
+    [
+     35.922194,
+     -79.126968
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Phipps Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0349"
+   ],
+   "points": [
+    [
+     35.878243,
+     -82.347723
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Piedmont Creek",
+   "reports": 1,
+   "stream_index": "16-11-14-2-1",
+   "permits": [
+    "WQCS00006"
+   ],
+   "points": [
+    [
+     36.0477,
+     -79.819182
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Pierce Creek",
+   "reports": 1,
+   "stream_index": "27-16.5-1-(1)",
+   "permits": [
+    "WQCSD0505"
+   ],
+   "points": [
+    [
+     35.984277,
+     -78.595898
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Pitcher Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00068"
+   ],
+   "points": [
+    [
+     36.104445,
+     -78.780874
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Plum Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00154"
+   ],
+   "points": [
+    [
+     34.598283,
+     -78.564328
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Pokeberry Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00372"
+   ],
+   "points": [
+    [
+     35.821638,
+     -79.106462
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Polly Gully Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00284"
+   ],
+   "points": [
+    [
+     33.948306,
+     -78.121476
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Pond on private property",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00060"
+   ],
+   "points": [
+    [
+     35.609935,
+     -78.582057
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Poplar Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00222"
+   ],
+   "points": [
+    [
+     35.245379,
+     -81.646697
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Poplar Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.730488,
+     -78.479626
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Potential wetland SW of manhole",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00249"
+   ],
+   "points": [
+    [
+     34.715731,
+     -77.320615
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Private pond on county property",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00364"
+   ],
+   "points": [
+    [
+     36.395295,
+     -79.74302
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Purgatory Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00047"
+   ],
+   "points": [
+    [
+     35.529019,
+     -79.233738
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Queen Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00249"
+   ],
+   "points": [
+    [
+     34.687152,
+     -77.146979
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Ramah Creek",
+   "reports": 1,
+   "stream_index": "13-17-4-4",
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.447736,
+     -80.828783
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Reeder Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00043"
+   ],
+   "points": [
+    [
+     35.589438,
+     -80.842172
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Reedy Fork (including Lake Brandt and Lake Townsend below normal operating levels)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00006"
+   ],
+   "points": [],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Rice Swamp (Rye Swamp) (Laurel Lake)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0046"
+   ],
+   "points": [
+    [
+     34.993749,
+     -78.501342
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Rich Fork Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     35.977979,
+     -80.043982
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Richlands Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.790364,
+     -78.716682
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Robertson Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00068"
+   ],
+   "points": [
+    [
+     36.11883,
+     -78.683244
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Rochelle Pond",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00027"
+   ],
+   "points": [
+    [
+     36.472614,
+     -77.659498
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Rock Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.838387,
+     -81.307961
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Rocky Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.827533,
+     -78.559808
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Rone Branch (Rhone Branch)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00054"
+   ],
+   "points": [
+    [
+     34.915955,
+     -80.746607
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Ross Swamp",
+   "reports": 1,
+   "stream_index": "28-103-4-1",
+   "permits": [
+    "WQCSD0571"
+   ],
+   "points": [
+    [
+     35.559825,
+     -77.05996
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Royal Park Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00042"
+   ],
+   "points": [
+    [
+     35.828327,
+     -80.263222
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Saddletree Swamp",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00024"
+   ],
+   "points": [
+    [
+     34.678588,
+     -79.01417
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Sandy Berry Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00376"
+   ],
+   "points": [
+    [
+     36.239688,
+     -80.819379
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Sandy Run Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00268"
+   ],
+   "points": [
+    [
+     34.759066,
+     -77.413088
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Scales Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00268"
+   ],
+   "points": [
+    [
+     34.754517,
+     -77.397174
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Schoolhouse Branch",
+   "reports": 1,
+   "stream_index": "28-93",
+   "permits": [
+    "WQCS00014"
+   ],
+   "points": [
+    [
+     35.611632,
+     -77.418887
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Service Creek (Servis Creek)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00008"
+   ],
+   "points": [
+    [
+     36.097614,
+     -79.401254
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Sevenmile Creek",
+   "reports": 1,
+   "stream_index": "27-2-6-(0.5)",
+   "permits": [
+    "WQCS00077"
+   ],
+   "points": [
+    [
+     36.089874,
+     -79.1163
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Sharron Creek (Grissett Swamp)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00296"
+   ],
+   "points": [
+    [
+     33.979794,
+     -78.364953
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Shaw Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0368"
+   ],
+   "points": [
+    [
+     35.342026,
+     -82.548324
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Simmons Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.781871,
+     -78.720126
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Skunk Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00047"
+   ],
+   "points": [
+    [
+     35.45948,
+     -79.189289
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Slocum Creek",
+   "reports": 1,
+   "stream_index": "27-112",
+   "permits": [
+    "WQCS00067"
+   ],
+   "points": [
+    [
+     34.8885,
+     -76.910738
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Small Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00054"
+   ],
+   "points": [
+    [
+     35.083287,
+     -80.661884
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Smith Mill Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.591385,
+     -82.5828
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "South Prong West Branch Rocky River",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00001"
+   ],
+   "points": [
+    [
+     35.487703,
+     -80.849331
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "South River",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00353"
+   ],
+   "points": [
+    [
+     35.19295,
+     -78.644943
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Southport Restricted Area",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00137"
+   ],
+   "points": [
+    [
+     33.916937,
+     -78.019574
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Stony Creek (Boddies Millpond) 28-68",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00011"
+   ],
+   "points": [
+    [
+     35.975336,
+     -77.860929
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Stony Run",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00171"
+   ],
+   "points": [
+    [
+     35.232655,
+     -80.320055
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Stormdrain to UT of Island Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00365"
+   ],
+   "points": [
+    [
+     35.252607,
+     -80.409414
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Strouds Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00077"
+   ],
+   "points": [
+    [
+     36.087867,
+     -79.070247
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Sturgeon Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00202"
+   ],
+   "points": [
+    [
+     34.230754,
+     -78.056374
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Suck Branch",
+   "reports": 1,
+   "stream_index": "13-25-20-11",
+   "permits": [
+    "WQCS00134"
+   ],
+   "points": [
+    [
+     35.379523,
+     -79.889211
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Tackett Branch",
+   "reports": 1,
+   "stream_index": "22-40-4",
+   "permits": [
+    "WQCS00018"
+   ],
+   "points": [
+    [
+     36.506046,
+     -79.761352
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Tar Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.090415,
+     -80.247968
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Taylors Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00179"
+   ],
+   "points": [
+    [
+     36.10693,
+     -78.465608
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Terry Road Branch Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.082323,
+     -80.187066
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Thunder Swamp",
+   "reports": 1,
+   "stream_index": "27-54-5-1",
+   "permits": [
+    "WQCS00129"
+   ],
+   "points": [
+    [
+     35.196292,
+     -78.077231
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Tributary of hunting creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00028"
+   ],
+   "points": [
+    [
+     35.707913,
+     -81.693405
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Tributary to Nutbush Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00055"
+   ],
+   "points": [
+    [
+     36.337833,
+     -78.403887
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "UT Eno River",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00005"
+   ],
+   "points": [
+    [
+     36.029331,
+     -78.98427
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "UT tributary of Ellerbe Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00005"
+   ],
+   "points": [
+    [
+     36.023563,
+     -78.813211
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unknown Tribuatary to Rich Fork Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     35.977979,
+     -80.043982
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unknown Tributary to Swannanoa River",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.593466,
+     -82.424736
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed Trib to Black River",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00183"
+   ],
+   "points": [
+    [
+     35.511552,
+     -78.740321
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary at Belmont Abbey College",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00046"
+   ],
+   "points": [
+    [
+     35.255362,
+     -81.037721
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed Tributary to Lake Rhodhiss",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00145"
+   ],
+   "points": [
+    [
+     35.793837,
+     -81.438592
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Unnamed tributary that runs to Lake Hickory",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00020"
+   ],
+   "points": [
+    [
+     35.789895,
+     -81.320225
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Bolin Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00031"
+   ],
+   "points": [
+    [
+     35.928802,
+     -79.036059
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Broad River Basin (9-50-(28))",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00037"
+   ],
+   "points": [
+    [
+     35.277159,
+     -81.570065
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Bryar creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0114"
+   ],
+   "points": [
+    [
+     35.210371,
+     -80.775873
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Church Branch, a trib to Sandy Run",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00222"
+   ],
+   "points": [
+    [
+     35.25213,
+     -81.683699
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Dry Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00031"
+   ],
+   "points": [
+    [
+     35.952077,
+     -79.008294
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to East Fork Deep River",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     36.031721,
+     -79.970104
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Edwards Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [],
+   "points": [
+    [
+     35.198169,
+     -80.787786
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Haw Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00081"
+   ],
+   "points": [
+    [
+     36.204435,
+     -79.238433
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Hodges Mill Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [],
+   "points": [
+    [
+     35.852264,
+     -78.49802
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Kit Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00013"
+   ],
+   "points": [
+    [
+     35.838288,
+     -78.859917
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Lake Jeanette",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00006"
+   ],
+   "points": [
+    [
+     36.144048,
+     -79.798842
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Laurel Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00038"
+   ],
+   "points": [
+    [
+     35.964351,
+     -78.725327
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Little S Basin",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.813178,
+     -78.3315
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Marsh Basin",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.830537,
+     -78.589881
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Michael Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00042"
+   ],
+   "points": [
+    [
+     35.828358,
+     -80.263272
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Red Bud Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00055"
+   ],
+   "points": [
+    [
+     36.310047,
+     -78.4146
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Rich Fork Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     35.977977,
+     -80.043984
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Southgate Basin",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.749665,
+     -78.609609
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Tackett Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00018"
+   ],
+   "points": [
+    [
+     36.518373,
+     -79.770614
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Third Fork",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00005"
+   ],
+   "points": [
+    [
+     35.967465,
+     -78.924231
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Warren Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00005"
+   ],
+   "points": [
+    [
+     36.047735,
+     -78.912591
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to bolding branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     35.97334,
+     -79.999492
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to lower river",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00105"
+   ],
+   "points": [
+    [
+     35.182708,
+     -78.964493
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Unnamed tributary to the Collie Swamp",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCSD0571"
+   ],
+   "points": [
+    [
+     35.83488,
+     -77.17357
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Upper Reedy Forks Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00006"
+   ],
+   "points": [
+    [
+     36.108887,
+     -79.986277
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "WATAUGA RIVER",
+   "reports": 1,
+   "stream_index": "8-(1)",
+   "permits": [
+    "WQCSD0234"
+   ],
+   "points": [
+    [
+     36.154262,
+     -81.775621
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Walnut Creek (Lake Johnson)",
+   "reports": 1,
+   "stream_index": "27-34-(1.5)",
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.760687,
+     -78.729734
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Walnut Creek (Lake Raleigh)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.75926,
+     -78.663071
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Warner Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00134"
+   ],
+   "points": [
+    [
+     35.356524,
+     -79.900922
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Warren Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00005"
+   ],
+   "points": [
+    [
+     36.042309,
+     -78.946844
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Watsons Lake",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00034"
+   ],
+   "points": [
+    [
+     35.176869,
+     -79.455002
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Weathers Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00258"
+   ],
+   "points": [
+    [
+     35.657317,
+     -80.833141
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "West Belews Creek (Little Belews Creek)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00003"
+   ],
+   "points": [
+    [
+     36.177756,
+     -80.146092
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "West Fork Deep River",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     36.037456,
+     -79.983144
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "West Fork Twelvemile Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00054"
+   ],
+   "points": [
+    [
+     34.986024,
+     -80.766344
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Whitaker Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00068"
+   ],
+   "points": [
+    [
+     36.11826,
+     -78.682793
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "White Lake",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00136"
+   ],
+   "points": [
+    [
+     34.652646,
+     -78.495624
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "White Oak Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00192"
+   ],
+   "points": [
+    [
+     35.661551,
+     -78.886001
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "White Oak Creek (Austin Pond)",
+   "reports": 1,
+   "stream_index": "27-43-11",
+   "permits": [
+    "WQCS00060"
+   ],
+   "points": [
+    [
+     35.641035,
+     -78.510992
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  },
+  {
+   "name": "Wildcat Branch",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.732095,
+     -78.626111
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Wilson Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00028"
+   ],
+   "points": [
+    [
+     35.776053,
+     -81.706451
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Wolf Island Creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00049"
+   ],
+   "points": [
+    [
+     36.363239,
+     -79.695883
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "Wolfpit Branch (previously called Briar Branch)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00004"
+   ],
+   "points": [
+    [
+     35.59937,
+     -82.340603
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "black creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00166"
+   ],
+   "points": [
+    [
+     35.323208,
+     -78.662827
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "hardins pond (private)",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00083"
+   ],
+   "points": [
+    [
+     34.802936,
+     -79.193581
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "unknown tributary",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00002"
+   ],
+   "points": [
+    [
+     35.747652,
+     -78.447188
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "unnamed creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00099"
+   ],
+   "points": [
+    [
+     35.832814,
+     -79.777726
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2022-2025"
+   ]
+  },
+  {
+   "name": "unnamed tributary to rich fork creek",
+   "reports": 1,
+   "stream_index": null,
+   "permits": [
+    "WQCS00010"
+   ],
+   "points": [
+    [
+     35.985682,
+     -80.036203
+    ]
+   ],
+   "sources": [
+    "nc-dwr-sso-2026"
+   ]
+  }
+ ]
+}

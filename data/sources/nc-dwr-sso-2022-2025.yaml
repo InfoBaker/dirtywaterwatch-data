@@ -1,0 +1,32 @@
+id: "nc-dwr-sso-2022-2025"
+name: "NC DWR Sanitary Sewer Overflows September 2022 through December 2025 (ArcGIS)"
+url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0"
+homepage: "https://www.deq.nc.gov/about/divisions/water-resources/water-quality-permitting/information-sewer-system-overflows"
+kind: "arcgis"
+level: "state"
+# Feed row: written once by pipeline/ingest/nc_dwr_sso.py --backfill (data/build/events/nc-dwr-sso-2022-2025.json).
+#   A frozen layer: the events file carries meta.frozen, so it is never stale for its age (build/status.py).
+# Notes (research/nc, status used, verified fetched, checked 2026-11-04): History for back-fill
+#   (3,208 events). Frozen (lastEditDate 2026-03-09). Built: nc_dwr_sso.py --backfill.
+# Access detail (research, quoted):
+#   https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0/query
+#   (public). Sample raw/sso-2022-2025-sample.json.
+# Can fill: started_at, reported_at, waterbody, coordinates, volume, authority (no end time: see below),
+#   source_record_id (incident_number)
+# Cannot fill: published_at; advice_text
+# History: Sept 2022 to Dec 2025
+# Research notes: end_date equals start_date on every row (not an end time); 240 rows have no start
+#   date; 76 incidents of 2026 are also in the 2026 layer. facility_owner names a few private owners
+#   who are individuals: never ingested by name.
+cadence: "frozen (read once with --backfill)"
+license: "none stated"
+attribution: "NC DEQ Division of Water Resources"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["NC"]
+access: ["arcgis"]
+access_detail: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0/query (public). Sample raw/sso-2022-2025-sample.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-04"
