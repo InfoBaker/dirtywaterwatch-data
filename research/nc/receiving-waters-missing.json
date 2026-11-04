@@ -5,11 +5,11 @@
  "waters": 116,
  "reports": 175,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in NC": 66,
-  "1 NHD water of that name in NC, none within reach of the reports' places": 20,
+  "no NHD flowline or waterbody of that name in NC": 65,
+  "1 NHD water of that name in NC, none within reach of the reports' places": 21,
   "2 NHD waters of that name in NC, none within reach of the reports' places": 8,
   "private property, not a public water": 7,
-  "a basin": 4,
+  "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 4,
   "an unnamed tributary named by a place, not by the water it joins": 2,
   "4 NHD waters of that name in NC, none within reach of the reports' places": 2,
   "part of a sewer, drainage or treatment works, not a public water": 2,
@@ -23,9 +23,9 @@
  "build": {
   "date": "2026-11-04",
   "command": "python -m ingest.waters_from_nhd --names research/nc/receiving-waters-missing.json --state NC",
-  "records_built": 5,
-  "names_resolved": 5,
-  "network_requests": 9
+  "records_built": 0,
+  "names_resolved": 0,
+  "network_requests": 17
  },
  "rows": [
   {
@@ -1671,7 +1671,14 @@
    "sources": [
     "nc-dwr-sso-2022-2025"
    ],
-   "reason": "no NHD flowline or waterbody of that name in NC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+   "reason": "1 NHD water of that name in NC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -80.31932,
+     "lat": 35.23278,
+     "reason": "no NHD water of that name within 2 km of the reports' point (35.23278, -80.31932) (the nearest is 45.2 km away)"
+    }
+   ]
   },
   {
    "name": "Middle Branch",
