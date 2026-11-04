@@ -1,10 +1,12 @@
 {
  "about": "Receiving-water names in FL's reports that data/receiving-waters-national.json does not hold for FL, by name as typed, with the number of reports giving each.",
  "state": "FL",
- "waters": 241,
- "reports": 436,
+ "waters": 255,
+ "reports": 459,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in FL": 206,
+  "no NHD flowline or waterbody of that name in FL": 208,
+  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 8,
+  "a water record holds the name, but the reports' points lie too far from it to be placed there": 6,
   "1 NHD water of that name in FL, none within reach of the reports' places": 5,
   "part of a sewer, drainage or treatment works, not a public water": 4,
   "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 4,
@@ -19,20 +21,18 @@
   "the name of a town (South Bay), not of a water: no NHD water of that name in FL": 1,
   "6 NHD waters of that name in FL, none within reach of the reports' places": 1,
   "the name of a town (Bonita Springs), not of a water: no NHD water of that name in FL": 1,
-  "not a water name": 1,
   "the name of a town (DeFuniak Springs), not of a water: no NHD water of that name in FL": 1,
-  "the open ocean (no NHD record)": 1,
   "the name of a town (Palm Harbor), not of a water: no NHD water of that name in FL": 1,
   "the name of a town (Silver Springs), not of a water: no NHD water of that name in FL": 1
  },
- "resolved_names": 209,
- "resolved_reports": 727,
+ "resolved_names": 195,
+ "resolved_reports": 704,
  "build": {
   "date": "2026-11-04",
   "command": "python -m ingest.waters_from_nhd --names research/fl/receiving-waters-missing.json --state FL",
-  "records_built": 11,
-  "names_resolved": 20,
-  "network_requests": 76
+  "records_built": 0,
+  "names_resolved": 0,
+  "network_requests": 0
  },
  "rows": [
   {
@@ -429,6 +429,26 @@
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "South Fork of Middle River",
+   "reports": 4,
+   "points": [
+    [
+     26.15916,
+     -80.14628
+    ]
+   ],
+   "towns": [
+    "Wilton Manors"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "south-fork-middle-river-fl"
+   ],
+   "reason": "a water record holds this water but not this spelling (south-fork-middle-river-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
+  },
+  {
    "name": "South Lagoon",
    "reports": 4,
    "points": [
@@ -449,6 +469,30 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Allen's Creek",
+   "reports": 3,
+   "points": [
+    [
+     27.92042,
+     -82.75571
+    ],
+    [
+     27.93603,
+     -82.72951
+    ]
+   ],
+   "towns": [
+    "Clearwater"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "allen-creek-fl"
+   ],
+   "reason": "a water record holds this water but not this spelling (allen-creek-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Bass Lake",
@@ -514,6 +558,26 @@
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "North Fork of Middle River",
+   "reports": 3,
+   "points": [
+    [
+     26.155,
+     -80.14
+    ]
+   ],
+   "towns": [
+    "Wilton Manors"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "north-fork-middle-river-fl"
+   ],
+   "reason": "a water record holds this water but not this spelling (north-fork-middle-river-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
+  },
+  {
    "name": "Seminole Bypass Canal",
    "reports": 3,
    "points": [
@@ -573,6 +637,30 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Allens Creek",
+   "reports": 2,
+   "points": [
+    [
+     27.92042,
+     -82.75571
+    ],
+    [
+     27.93603,
+     -82.72951
+    ]
+   ],
+   "towns": [
+    "Clearwater"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "allen-creek-fl"
+   ],
+   "reason": "a water record holds this water but not this spelling (allen-creek-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Altamonte Springs",
@@ -958,6 +1046,44 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Mt. Pleasant Creek",
+   "reports": 2,
+   "points": [
+    [
+     30.33053,
+     -81.6572
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "mount-pleasant-creek-fl"
+   ],
+   "reason": "a water record holds the name (mount-pleasant-creek-fl), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -81.6572,
+     "lat": 30.33053,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.33053, -81.65720) (the nearest is 17.0 km away)"
+    },
+    {
+     "town": "Fruit Cove",
+     "reason": "no NHD water of that name within 3 km of Fruit Cove (the nearest is 24.3 km away)"
+    },
+    {
+     "town": "Yulee",
+     "reason": "no NHD water of that name within 3 km of Yulee (the nearest is 24.2 km away)"
+    }
+   ]
   },
   {
    "name": "Niagara Waterway",
@@ -1837,23 +1963,6 @@
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
-   "name": "Cedar Hammock Drainage Canal",
-   "reports": 1,
-   "points": [
-    [
-     27.448,
-     -82.586
-    ]
-   ],
-   "towns": [
-    "Bradenton"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "reason": "not a water name"
-  },
-  {
    "name": "Circle Creek",
    "reports": 1,
    "points": [
@@ -2413,6 +2522,40 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Flora Branch Creek",
+   "reports": 1,
+   "points": [
+    [
+     30.33055,
+     -81.65734
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "flora-branch-fl"
+   ],
+   "reason": "a water record holds the name (flora-branch-fl), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -81.65734,
+     "lat": 30.33055,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.33055, -81.65734) (the nearest is 22.7 km away)"
+    },
+    {
+     "town": "Yulee",
+     "reason": "no NHD water of that name within 3 km of Yulee (the nearest is 48.6 km away)"
+    }
+   ]
   },
   {
    "name": "Flow Equalization Basin",
@@ -3154,6 +3297,26 @@
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "Lawne Lake",
+   "reports": 1,
+   "points": [
+    [
+     28.569,
+     -81.442
+    ]
+   ],
+   "towns": [
+    "Apopka"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "lake-lawne-fl"
+   ],
+   "reason": "a water record holds this water but not this spelling (lake-lawne-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
+  },
+  {
    "name": "Legend Creek",
    "reports": 1,
    "points": [
@@ -3203,6 +3366,37 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Little Bullfrog Creek",
+   "reports": 1,
+   "points": [
+    [
+     27.8265,
+     -82.33031
+    ]
+   ],
+   "towns": [
+    "Ruskin"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "little-bullfrog-creek-fl"
+   ],
+   "reason": "a water record holds the name (little-bullfrog-creek-fl), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -82.33031,
+     "lat": 27.8265,
+     "reason": "no NHD water of that name within 2 km of the reports' point (27.82650, -82.33031) (the nearest is 4.0 km away)"
+    },
+    {
+     "town": "Ruskin",
+     "reason": "no NHD water of that name within 3 km of Ruskin (the nearest is 5.7 km away)"
+    }
+   ]
   },
   {
    "name": "Little Econ River",
@@ -3341,6 +3535,30 @@
    "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
   },
   {
+   "name": "Mc Coys Creek",
+   "reports": 1,
+   "points": [
+    [
+     30.31115,
+     -81.7088
+    ],
+    [
+     30.33261,
+     -81.70024
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
    "name": "Meginnis Arm Run",
    "reports": 1,
    "points": [
@@ -3464,6 +3682,26 @@
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "N Fork of Middle River",
+   "reports": 1,
+   "points": [
+    [
+     26.155,
+     -80.14
+    ]
+   ],
+   "towns": [
+    "Wilton Manors"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "north-fork-middle-river-fl"
+   ],
+   "reason": "a water record holds this water but not this spelling (north-fork-middle-river-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
+  },
+  {
    "name": "Narrows Waterway",
    "reports": 1,
    "points": [
@@ -3560,7 +3798,7 @@
    "places_from": [
     "fl-dep-pnp"
    ],
-   "reason": "the open ocean (no NHD record)"
+   "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Orchid Canal",
@@ -3730,6 +3968,33 @@
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "Poley Creek",
+   "reports": 1,
+   "points": [
+    [
+     28.02824,
+     -81.9692
+    ]
+   ],
+   "towns": [
+    "Lakeland"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "poley-creek-fl"
+   ],
+   "reason": "a water record holds the name (poley-creek-fl), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -81.9692,
+     "lat": 28.02824,
+     "reason": "no NHD water of that name within 2 km of the reports' point (28.02824, -81.96920) (the nearest is 6.9 km away)"
+    }
+   ]
+  },
+  {
    "name": "Poste Bayou",
    "reports": 1,
    "points": [
@@ -3895,6 +4160,64 @@
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "Rushing Branch Creek",
+   "reports": 1,
+   "points": [
+    [
+     30.33051,
+     -81.65729
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "rushing-branch-fl"
+   ],
+   "reason": "a water record holds the name (rushing-branch-fl), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -81.65729,
+     "lat": 30.33051,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.33051, -81.65729) (the nearest is 14.7 km away)"
+    },
+    {
+     "town": "Fruit Cove",
+     "reason": "no NHD water of that name within 3 km of Fruit Cove (the nearest is 34.8 km away)"
+    },
+    {
+     "town": "Yulee",
+     "reason": "no NHD water of that name within 3 km of Yulee (the nearest is 11.5 km away)"
+    }
+   ]
+  },
+  {
+   "name": "S Fork of Middle River",
+   "reports": 1,
+   "points": [
+    [
+     26.15916,
+     -80.14628
+    ]
+   ],
+   "towns": [
+    "Wilton Manors"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "south-fork-middle-river-fl"
+   ],
+   "reason": "a water record holds this water but not this spelling (south-fork-middle-river-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
+  },
+  {
    "name": "SFWMD C-16 Canal",
    "reports": 1,
    "points": [
@@ -3907,6 +4230,33 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Saddle Creek",
+   "reports": 1,
+   "points": [
+    [
+     28.09491,
+     -81.95205
+    ]
+   ],
+   "towns": [
+    "Lakeland"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "saddle-creek-fl"
+   ],
+   "reason": "a water record holds the name (saddle-creek-fl), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -81.95205,
+     "lat": 28.09491,
+     "reason": "no NHD water of that name within 2 km of the reports' point (28.09491, -81.95205) (the nearest is 7.8 km away)"
+    }
+   ]
   },
   {
    "name": "Second Puncheon Branch",
@@ -3989,6 +4339,26 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Sherman's Creek",
+   "reports": 1,
+   "points": [
+    [
+     30.37061,
+     -81.41083
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ],
+   "records": [
+    "sherman-creek-fl"
+   ],
+   "reason": "a water record holds this water but not this spelling (sherman-creek-fl): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Silver Springs",
@@ -4500,7 +4870,37 @@
    "slugs": [
     "hillsborough-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.02459,
+     -82.40002
+    ],
+    [
+     28.01076,
+     -82.47129
+    ],
+    [
+     28.054,
+     -82.121
+    ],
+    [
+     27.946,
+     -82.463
+    ],
+    [
+     28.055,
+     -82.388
+    ]
+   ],
+   "towns": [
+    "Tampa",
+    "Temple Terrace",
+    "Plant City"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Watson Bayou",
@@ -4508,7 +4908,27 @@
    "slugs": [
     "watson-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.1707,
+     -85.64818
+    ],
+    [
+     30.15301,
+     -85.63655
+    ],
+    [
+     30.13377,
+     -85.62008
+    ]
+   ],
+   "towns": [
+    "Panama City"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Pottsburg Creek",
@@ -4516,7 +4936,38 @@
    "slugs": [
     "pottsburg-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.30003,
+     -81.63123
+    ],
+    [
+     30.28256,
+     -81.59561
+    ],
+    [
+     30.26298,
+     -81.59018
+    ],
+    [
+     30.25683,
+     -81.55703
+    ],
+    [
+     30.22383,
+     -81.57373
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "McKay Creek",
@@ -4524,7 +4975,34 @@
    "slugs": [
     "mckay-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.909,
+     -82.817
+    ],
+    [
+     27.89143,
+     -82.82537
+    ],
+    [
+     27.907,
+     -82.788
+    ],
+    [
+     27.85471,
+     -82.81361
+    ]
+   ],
+   "towns": [
+    "Largo",
+    "Clearwater",
+    "St. Petersburg",
+    "Saint Petersburg"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Ortega River",
@@ -4532,7 +5010,38 @@
    "slugs": [
     "ortega-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.2044,
+     -81.73789
+    ],
+    [
+     30.25285,
+     -81.70144
+    ],
+    [
+     30.24457,
+     -81.78995
+    ],
+    [
+     30.23599,
+     -81.71401
+    ],
+    [
+     30.22588,
+     -81.73785
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "New River",
@@ -4540,7 +5049,19 @@
    "slugs": [
     "new-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.11479,
+     -80.14723
+    ]
+   ],
+   "towns": [
+    "Fort Lauderdale"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Escambia Bay",
@@ -4548,7 +5069,36 @@
    "slugs": [
     "escambia-bay-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.523,
+     -87.18
+    ],
+    [
+     30.484,
+     -87.162
+    ],
+    [
+     30.50461,
+     -87.16831
+    ],
+    [
+     30.511,
+     -87.318
+    ],
+    [
+     30.58227,
+     -87.16223
+    ]
+   ],
+   "towns": [
+    "Pensacola",
+    "Pace"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Boca Ciega Bay",
@@ -4556,7 +5106,30 @@
    "slugs": [
     "boca-ciega-bay-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.82582,
+     -82.80274
+    ],
+    [
+     27.8052,
+     -82.80641
+    ],
+    [
+     27.78598,
+     -82.78099
+    ]
+   ],
+   "towns": [
+    "Madeira Beach",
+    "St. Petersburg",
+    "Seminole",
+    "Redington Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Hillsborough Bay",
@@ -4564,7 +5137,35 @@
    "slugs": [
     "hillsborough-bay-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.94116,
+     -82.46041
+    ],
+    [
+     27.9171,
+     -82.49117
+    ],
+    [
+     27.922,
+     -82.437
+    ],
+    [
+     27.898,
+     -82.492
+    ],
+    [
+     27.93738,
+     -82.4871
+    ]
+   ],
+   "towns": [
+    "Tampa"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Trout River",
@@ -4572,7 +5173,38 @@
    "slugs": [
     "trout-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.43107,
+     -81.67793
+    ],
+    [
+     30.38546,
+     -81.64082
+    ],
+    [
+     30.40934,
+     -81.72421
+    ],
+    [
+     30.43665,
+     -81.70144
+    ],
+    [
+     30.33046,
+     -81.65718
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Tampa Bay",
@@ -4580,7 +5212,38 @@
    "slugs": [
     "tampa-bay-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.05613,
+     -82.62923
+    ],
+    [
+     27.97466,
+     -82.55887
+    ],
+    [
+     27.72538,
+     -82.47213
+    ],
+    [
+     27.88079,
+     -82.4839
+    ],
+    [
+     27.97713,
+     -82.36579
+    ]
+   ],
+   "towns": [
+    "Tampa",
+    "Ruskin",
+    "Clearwater",
+    "Apollo Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Strawberry Creek",
@@ -4588,7 +5251,30 @@
    "slugs": [
     "strawberry-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.33266,
+     -81.56966
+    ],
+    [
+     30.35504,
+     -81.57714
+    ],
+    [
+     30.33055,
+     -81.65734
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Ribault River",
@@ -4596,7 +5282,34 @@
    "slugs": [
     "ribault-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.37782,
+     -81.70163
+    ],
+    [
+     30.39937,
+     -81.72725
+    ],
+    [
+     30.39111,
+     -81.68097
+    ],
+    [
+     30.33051,
+     -81.65729
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Clearwater Harbor",
@@ -4604,7 +5317,34 @@
    "slugs": [
     "clearwater-harbor-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.95356,
+     -82.80605
+    ],
+    [
+     27.89311,
+     -82.84924
+    ],
+    [
+     27.924,
+     -82.821
+    ],
+    [
+     27.976,
+     -82.817
+    ]
+   ],
+   "towns": [
+    "Clearwater",
+    "Indian Rocks Beach",
+    "Belleair",
+    "Belleair Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Little Pottsburg Creek",
@@ -4612,7 +5352,34 @@
    "slugs": [
     "little-pottsburg-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.286,
+     -81.607
+    ],
+    [
+     30.311,
+     -81.609
+    ],
+    [
+     30.2833,
+     -81.62807
+    ],
+    [
+     30.33051,
+     -81.65729
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Long Bayou",
@@ -4620,7 +5387,38 @@
    "slugs": [
     "long-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.8094,
+     -82.7585
+    ],
+    [
+     27.826,
+     -82.772
+    ],
+    [
+     27.91829,
+     -82.77649
+    ],
+    [
+     27.89603,
+     -82.77116
+    ],
+    [
+     27.85014,
+     -82.77349
+    ]
+   ],
+   "towns": [
+    "St. Petersburg",
+    "Clearwater",
+    "Largo",
+    "Saint Petersburg"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Christopher Creek",
@@ -4628,7 +5426,26 @@
    "slugs": [
     "christopher-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.25091,
+     -81.6287
+    ],
+    [
+     30.33046,
+     -81.65718
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Jones Creek",
@@ -4636,7 +5453,30 @@
    "slugs": [
     "jones-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.32834,
+     -81.54006
+    ],
+    [
+     26.934,
+     -80.109
+    ],
+    [
+     30.34716,
+     -81.5422
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Jupiter",
+    "Fruit Cove",
+    "Yulee"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Middle River",
@@ -4644,7 +5484,24 @@
    "slugs": [
     "middle-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.159,
+     -80.146
+    ],
+    [
+     26.15814,
+     -80.11807
+    ]
+   ],
+   "towns": [
+    "Fort Lauderdale",
+    "Wilton Manors"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Callaway Bayou",
@@ -4652,7 +5509,21 @@
    "slugs": [
     "callaway-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.138,
+     -85.574
+    ]
+   ],
+   "towns": [
+    "Callaway Florida",
+    "Callaway",
+    "Panama City"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Choctawhatchee Bay",
@@ -4660,7 +5531,37 @@
    "slugs": [
     "choctawhatchee-bay-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.47243,
+     -86.41684
+    ],
+    [
+     30.43845,
+     -86.55949
+    ],
+    [
+     30.4309,
+     -86.15057
+    ],
+    [
+     30.40431,
+     -86.53652
+    ],
+    [
+     30.3849,
+     -86.36589
+    ]
+   ],
+   "towns": [
+    "Fort Walton Beach",
+    "Santa Rosa Beach",
+    "Miramar Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Cinco Bayou",
@@ -4668,7 +5569,27 @@
    "slugs": [
     "cinco-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.43462,
+     -86.61859
+    ],
+    [
+     30.478,
+     -86.568
+    ],
+    [
+     30.45584,
+     -86.47643
+    ]
+   ],
+   "towns": [
+    "Fort Walton Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Goodby's Creek",
@@ -4676,7 +5597,30 @@
    "slugs": [
     "goodbys-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.2025,
+     -81.61792
+    ],
+    [
+     30.21818,
+     -81.59183
+    ],
+    [
+     30.2282,
+     -81.60933
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Hogtown Creek",
@@ -4684,7 +5628,35 @@
    "slugs": [
     "hogtown-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     29.69368,
+     -82.34391
+    ],
+    [
+     29.66097,
+     -82.36252
+    ],
+    [
+     29.67368,
+     -82.3394
+    ],
+    [
+     29.69939,
+     -82.31471
+    ],
+    [
+     29.66681,
+     -82.29015
+    ]
+   ],
+   "towns": [
+    "Gainesville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "McGirts Creek",
@@ -4692,7 +5664,31 @@
    "slugs": [
     "mcgirts-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.23382,
+     -81.78927
+    ],
+    [
+     30.27437,
+     -81.83183
+    ],
+    [
+     30.29236,
+     -81.84294
+    ],
+    [
+     30.20231,
+     -81.77584
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Santa Rosa Sound",
@@ -4700,7 +5696,29 @@
    "slugs": [
     "santa-rosa-sound-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.40988,
+     -86.77053
+    ],
+    [
+     30.3986,
+     -86.60145
+    ],
+    [
+     30.33528,
+     -87.13055
+    ]
+   ],
+   "towns": [
+    "Mary Esther",
+    "Fort Walton Beach",
+    "Pensacola"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Church Creek",
@@ -4708,7 +5726,20 @@
    "slugs": [
     "church-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.89143,
+     -82.82533
+    ]
+   ],
+   "towns": [
+    "Clearwater",
+    "Largo"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Loxahatchee River",
@@ -4716,7 +5747,27 @@
    "slugs": [
     "loxahatchee-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.95988,
+     -80.13019
+    ],
+    [
+     26.94759,
+     -80.09016
+    ],
+    [
+     26.94172,
+     -80.14111
+    ]
+   ],
+   "towns": [
+    "Jupiter"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "McCoys Creek",
@@ -4724,7 +5775,26 @@
    "slugs": [
     "mccoys-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.31115,
+     -81.7088
+    ],
+    [
+     30.33261,
+     -81.70024
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "North Fork New River",
@@ -4732,7 +5802,27 @@
    "slugs": [
     "north-fork-new-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.156,
+     -80.14
+    ],
+    [
+     26.12712,
+     -80.17381
+    ],
+    [
+     26.11639,
+     -80.15039
+    ]
+   ],
+   "towns": [
+    "Wilton Manors"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Salt Creek",
@@ -4740,7 +5830,19 @@
    "slugs": [
     "salt-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     29.95328,
+     -85.42991
+    ]
+   ],
+   "towns": [
+    "Panama City"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Shingle Creek",
@@ -4748,7 +5850,36 @@
    "slugs": [
     "shingle-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.346,
+     -81.454
+    ],
+    [
+     28.28555,
+     -81.47162
+    ],
+    [
+     28.472,
+     -81.425
+    ],
+    [
+     28.44252,
+     -81.44146
+    ],
+    [
+     28.52359,
+     -81.20272
+    ]
+   ],
+   "towns": [
+    "Orlando",
+    "Kissimmee"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Turkey Lake",
@@ -4756,7 +5887,20 @@
    "slugs": [
     "turkey-lake-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.51131,
+     -81.47987
+    ]
+   ],
+   "towns": [
+    "Orlando",
+    "Oviedo"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Wills Branch Creek",
@@ -4764,7 +5908,30 @@
    "slugs": [
     "wills-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.28918,
+     -81.75942
+    ],
+    [
+     30.29315,
+     -81.79132
+    ],
+    [
+     30.3306,
+     -81.65719
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Cedar River",
@@ -4772,7 +5939,27 @@
    "slugs": [
     "cedar-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.32539,
+     -81.74357
+    ],
+    [
+     30.27334,
+     -81.73325
+    ],
+    [
+     30.30356,
+     -81.75965
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Graveyard Branch",
@@ -4780,7 +5967,19 @@
    "slugs": [
     "graveyard-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.513,
+     -87.17
+    ]
+   ],
+   "towns": [
+    "Pensacola"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Pompano Canal",
@@ -4788,7 +5987,23 @@
    "slugs": [
     "pompano-canal-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     26.23713,
+     -80.12364
+    ],
+    [
+     26.22701,
+     -80.10382
+    ]
+   ],
+   "towns": [
+    "Pompano Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Posten Bayou",
@@ -4796,7 +6011,23 @@
    "slugs": [
     "posten-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.17911,
+     -85.68682
+    ],
+    [
+     30.18825,
+     -85.70492
+    ]
+   ],
+   "towns": [
+    "Panama City"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Safety Harbor",
@@ -4804,7 +6035,23 @@
    "slugs": [
     "safety-harbor-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.99527,
+     -82.68985
+    ],
+    [
+     28.022,
+     -82.698
+    ]
+   ],
+   "towns": [
+    "Safety Harbor"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Taylor Lake",
@@ -4812,7 +6059,20 @@
    "slugs": [
     "taylor-lake-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.89891,
+     -82.80385
+    ]
+   ],
+   "towns": [
+    "Largo",
+    "Clearwater"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Wills Branch",
@@ -4820,7 +6080,26 @@
    "slugs": [
     "wills-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.28861,
+     -81.77898
+    ],
+    [
+     30.28903,
+     -81.75531
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Bear Creek",
@@ -4828,7 +6107,24 @@
    "slugs": [
     "bear-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.33856,
+     -82.6966
+    ],
+    [
+     28.71404,
+     -81.28158
+    ]
+   ],
+   "towns": [
+    "Hudson",
+    "Winter Springs"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Braden River",
@@ -4836,7 +6132,23 @@
    "slugs": [
     "braden-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.4208,
+     -82.4264
+    ],
+    [
+     27.46273,
+     -82.49209
+    ]
+   ],
+   "towns": [
+    "Bradenton"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Cross Bayou Canal",
@@ -4844,7 +6156,29 @@
    "slugs": [
     "cross-bayou-canal-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.90756,
+     -82.70463
+    ],
+    [
+     27.842,
+     -82.754
+    ],
+    [
+     27.8649,
+     -82.7358
+    ]
+   ],
+   "towns": [
+    "Pinellas Park",
+    "Clearwater",
+    "St Petersburg"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Ginhouse Creek",
@@ -4852,7 +6186,26 @@
    "slugs": [
     "ginhouse-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.317,
+     -81.531
+    ],
+    [
+     30.33057,
+     -81.65734
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Hogpen Creek",
@@ -4860,7 +6213,27 @@
    "slugs": [
     "hogpen-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.31031,
+     -81.49377
+    ],
+    [
+     30.31317,
+     -81.44003
+    ],
+    [
+     30.31956,
+     -81.52255
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Little Fishweir Creek",
@@ -4868,7 +6241,19 @@
    "slugs": [
     "little-fishweir-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.30185,
+     -81.71784
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Matanzas River",
@@ -4876,7 +6261,23 @@
    "slugs": [
     "matanzas-river-saint-augustine-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     29.89316,
+     -81.30228
+    ],
+    [
+     29.87597,
+     -81.31058
+    ]
+   ],
+   "towns": [
+    "St. Augustine"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Moncrief Creek",
@@ -4884,7 +6285,30 @@
    "slugs": [
     "moncrief-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.37655,
+     -81.67175
+    ],
+    [
+     30.35928,
+     -81.69066
+    ],
+    [
+     30.33055,
+     -81.65734
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Palma Sola Bay",
@@ -4892,15 +6316,19 @@
    "slugs": [
     "palma-sola-bay-fl"
    ],
-   "how": "a water record already holds the name"
-  },
-  {
-   "name": "South Fork of Middle River",
-   "reports": 4,
-   "slugs": [
-    "south-fork-middle-river-fl"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.49221,
+     -82.64303
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Bradenton"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "St. Lucie River",
@@ -4908,7 +6336,24 @@
    "slugs": [
     "saint-lucie-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.2493,
+     -80.318
+    ],
+    [
+     27.27584,
+     -80.3168
+    ]
+   ],
+   "towns": [
+    "Port St Lucie",
+    "Port St. Lucie"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Sweetwater Creek",
@@ -4916,7 +6361,34 @@
    "slugs": [
     "sweetwater-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.00052,
+     -82.54604
+    ],
+    [
+     30.478,
+     -81.622
+    ],
+    [
+     28.01186,
+     -82.5752
+    ],
+    [
+     30.45971,
+     -81.61382
+    ]
+   ],
+   "towns": [
+    "Tampa",
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Williamson Creek",
@@ -4924,7 +6396,19 @@
    "slugs": [
     "williamson-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.275,
+     -81.751
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Allen Creek",
@@ -4932,15 +6416,23 @@
    "slugs": [
     "allen-creek-fl"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Allen's Creek",
-   "reports": 3,
-   "slugs": [
-    "allen-creek-fl"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.92043,
+     -82.75542
+    ],
+    [
+     27.93664,
+     -82.72948
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Clearwater"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Bullfrog Creek",
@@ -4948,7 +6440,24 @@
    "slugs": [
     "bullfrog-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.83531,
+     -82.38171
+    ],
+    [
+     27.83524,
+     -82.34137
+    ]
+   ],
+   "towns": [
+    "Gibsonton",
+    "Ruskin"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Cormorant Branch",
@@ -4956,7 +6465,26 @@
    "slugs": [
     "cormorant-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.145,
+     -81.63
+    ],
+    [
+     30.163,
+     -81.626
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Cow Branch Creek",
@@ -4964,7 +6492,19 @@
    "slugs": [
     "cow-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.07145,
+     -82.72501
+    ]
+   ],
+   "towns": [
+    "Palm Harbor"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Craig Creek",
@@ -4972,7 +6512,22 @@
    "slugs": [
     "craig-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.28817,
+     -81.63307
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Crystal River",
@@ -4980,7 +6535,20 @@
    "slugs": [
     "crystal-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.89893,
+     -82.59681
+    ]
+   ],
+   "towns": [
+    "Crystal River",
+    "Crystal Springs"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Cypress Creek Canal",
@@ -4988,7 +6556,19 @@
    "slugs": [
     "cypress-creek-canal-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.21113,
+     -80.12274
+    ]
+   ],
+   "towns": [
+    "Pompano Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Double Branch Creek",
@@ -4996,7 +6576,23 @@
    "slugs": [
     "double-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.05613,
+     -82.62923
+    ],
+    [
+     30.19516,
+     -81.83788
+    ]
+   ],
+   "towns": [
+    "Tampa"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Grand Canal",
@@ -5004,7 +6600,24 @@
    "slugs": [
     "grand-canal-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     26.2855,
+     -80.09271
+    ],
+    [
+     27.27599,
+     -82.55111
+    ]
+   ],
+   "towns": [
+    "Lighthouse Point",
+    "Pompano Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Little Trout River",
@@ -5012,7 +6625,26 @@
    "slugs": [
     "little-trout-river-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.41669,
+     -81.75076
+    ],
+    [
+     30.33053,
+     -81.6572
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Locklin Lake",
@@ -5020,7 +6652,19 @@
    "slugs": [
     "locklin-lake-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.62832,
+     -87.05885
+    ]
+   ],
+   "towns": [
+    "Milton"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Munson Slough",
@@ -5028,15 +6672,27 @@
    "slugs": [
     "munson-slough-fl"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "North Fork of Middle River",
-   "reports": 3,
-   "slugs": [
-    "north-fork-middle-river-fl"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.43278,
+     -84.32744
+    ],
+    [
+     30.42766,
+     -84.29314
+    ],
+    [
+     30.413,
+     -84.317
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Tallahassee"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Oldfield Creek",
@@ -5044,7 +6700,19 @@
    "slugs": [
     "oldfield-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.15955,
+     -81.60465
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Pablo Creek",
@@ -5052,7 +6720,23 @@
    "slugs": [
     "pablo-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.229,
+     -81.507
+    ],
+    [
+     30.27739,
+     -81.52392
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Quarry Creek",
@@ -5060,7 +6744,20 @@
    "slugs": [
     "quarry-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     29.88328,
+     -81.29573
+    ]
+   ],
+   "towns": [
+    "City Of St. Augustine",
+    "St. Augustine"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Rice Creek",
@@ -5069,7 +6766,24 @@
     "rice-creek-fl",
     "rice-creek-riverview-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     29.68762,
+     -81.68193
+    ],
+    [
+     27.84926,
+     -82.31961
+    ]
+   ],
+   "towns": [
+    "Palatka",
+    "Riverview"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Tarpon River",
@@ -5077,7 +6791,16 @@
    "slugs": [
     "tarpon-river-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     26.11082,
+     -80.13125
+    ]
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Wares Creek",
@@ -5085,7 +6808,23 @@
    "slugs": [
     "wares-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.48419,
+     -82.58036
+    ],
+    [
+     27.456,
+     -82.567
+    ]
+   ],
+   "towns": [
+    "Bradenton"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Withlacoochee River",
@@ -5093,15 +6832,29 @@
    "slugs": [
     "withlacoochee-river-fl"
    ],
-   "how": "a water record already holds the name"
-  },
-  {
-   "name": "Allens Creek",
-   "reports": 2,
-   "slugs": [
-    "allen-creek-fl"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.36343,
+     -82.18085
+    ],
+    [
+     29.05328,
+     -82.47106
+    ],
+    [
+     28.48422,
+     -82.65041
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Dade City",
+    "Dunnellon",
+    "Hernando Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Bennett Branch",
@@ -5109,7 +6862,19 @@
    "slugs": [
     "bennett-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.26468,
+     -81.60704
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Boggy Bayou",
@@ -5117,7 +6882,20 @@
    "slugs": [
     "boggy-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.5108,
+     -86.47291
+    ]
+   ],
+   "towns": [
+    "Niceville",
+    "Valparaiso"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Bull Frog Creek",
@@ -5125,7 +6903,24 @@
    "slugs": [
     "bullfrog-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.83531,
+     -82.38171
+    ],
+    [
+     27.83524,
+     -82.34137
+    ]
+   ],
+   "towns": [
+    "Gibsonton",
+    "Ruskin"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Carpenter Creek",
@@ -5133,7 +6928,23 @@
    "slugs": [
     "carpenter-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.46,
+     -87.209
+    ],
+    [
+     30.482,
+     -87.205
+    ]
+   ],
+   "towns": [
+    "Pensacola"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Clam Bayou",
@@ -5141,7 +6952,19 @@
    "slugs": [
     "clam-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.74686,
+     -82.68862
+    ]
+   ],
+   "towns": [
+    "St. Petersburg"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Collins Canal",
@@ -5149,7 +6972,23 @@
    "slugs": [
     "collins-canal-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     25.857,
+     -80.122
+    ],
+    [
+     25.805,
+     -80.128
+    ]
+   ],
+   "towns": [
+    "Miami Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Corklan Branch",
@@ -5157,7 +6996,19 @@
    "slugs": [
     "corklan-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.13008,
+     -81.52775
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Delaney Creek",
@@ -5165,7 +7016,23 @@
    "slugs": [
     "delaney-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.92854,
+     -82.36216
+    ],
+    [
+     27.90883,
+     -82.4129
+    ]
+   ],
+   "towns": [
+    "Tampa"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Dream Lake",
@@ -5173,7 +7040,19 @@
    "slugs": [
     "dream-lake-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.685,
+     -81.513
+    ]
+   ],
+   "towns": [
+    "Apopka"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Eau Gallie River",
@@ -5181,7 +7060,19 @@
    "slugs": [
     "eau-gallie-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.122,
+     -80.636
+    ]
+   ],
+   "towns": [
+    "Melbourne"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Eight Mile Creek",
@@ -5189,7 +7080,23 @@
    "slugs": [
     "eightmile-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.519,
+     -87.303
+    ],
+    [
+     30.643,
+     -87.34
+    ]
+   ],
+   "towns": [
+    "Pensacola"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Fourmile Creek",
@@ -5197,7 +7104,19 @@
    "slugs": [
     "fourmile-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.49507,
+     -86.14219
+    ]
+   ],
+   "towns": [
+    "Freeport"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Frog Creek",
@@ -5205,7 +7124,23 @@
    "slugs": [
     "frog-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.584,
+     -82.477
+    ],
+    [
+     27.57388,
+     -82.50234
+    ]
+   ],
+   "towns": [
+    "Palmetto"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Garnier Bayou",
@@ -5213,7 +7148,19 @@
    "slugs": [
     "garnier-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.43973,
+     -86.61145
+    ]
+   ],
+   "towns": [
+    "Fort Walton Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Grass Lake",
@@ -5221,7 +7168,19 @@
    "slugs": [
     "grass-lake-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.47243,
+     -86.41684
+    ]
+   ],
+   "towns": [
+    "Fort Walton Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Hatchett Creek",
@@ -5229,7 +7188,19 @@
    "slugs": [
     "hatchett-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.09551,
+     -82.42033
+    ]
+   ],
+   "towns": [
+    "North Venice"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Hospital Creek",
@@ -5237,7 +7208,23 @@
    "slugs": [
     "hospital-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     29.91044,
+     -81.31473
+    ],
+    [
+     29.87597,
+     -81.31058
+    ]
+   ],
+   "towns": [
+    "St. Augustine"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Juniper Creek",
@@ -5245,7 +7232,19 @@
    "slugs": [
     "juniper-creek-crestview-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.7259,
+     -86.57714
+    ]
+   ],
+   "towns": [
+    "Crestview"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Little Manatee River",
@@ -5253,7 +7252,23 @@
    "slugs": [
     "little-manatee-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.719,
+     -82.449
+    ],
+    [
+     27.6901,
+     -82.44201
+    ]
+   ],
+   "towns": [
+    "Ruskin"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Long Branch Creek",
@@ -5262,7 +7277,24 @@
     "long-branch-fl",
     "long-branch-largo-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.36361,
+     -81.65114
+    ],
+    [
+     27.9193,
+     -82.71971
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Clearwater"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "McCoy's Creek",
@@ -5270,7 +7302,26 @@
    "slugs": [
     "mccoys-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.31115,
+     -81.7088
+    ],
+    [
+     30.33261,
+     -81.70024
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Mill Cove",
@@ -5278,7 +7329,23 @@
    "slugs": [
     "mill-cove-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.36836,
+     -81.58478
+    ],
+    [
+     30.3765,
+     -81.51719
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Miller Creek",
@@ -5286,7 +7353,23 @@
    "slugs": [
     "miller-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.35318,
+     -81.54267
+    ],
+    [
+     30.30554,
+     -81.6222
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Moore's Creek",
@@ -5294,15 +7377,23 @@
    "slugs": [
     "moore-creek-fl"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Mt. Pleasant Creek",
-   "reports": 2,
-   "slugs": [
-    "mount-pleasant-creek-fl"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.448,
+     -80.366
+    ],
+    [
+     27.45134,
+     -80.32404
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Fort Pierce"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Open Creek",
@@ -5310,7 +7401,19 @@
    "slugs": [
     "open-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.28041,
+     -81.46046
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Perdido Bay",
@@ -5318,7 +7421,23 @@
    "slugs": [
     "perdido-bay-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.347,
+     -87.408
+    ],
+    [
+     30.39432,
+     -87.37879
+    ]
+   ],
+   "towns": [
+    "Pensacola"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Phillippi Creek",
@@ -5326,7 +7445,16 @@
    "slugs": [
     "phillippi-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.32122,
+     -82.49959
+    ]
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Pretty Bayou",
@@ -5334,7 +7462,23 @@
    "slugs": [
     "pretty-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.18984,
+     -85.70242
+    ],
+    [
+     30.19699,
+     -85.67997
+    ]
+   ],
+   "towns": [
+    "Panama City"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Red Bay Branch",
@@ -5342,7 +7486,23 @@
    "slugs": [
     "red-bay-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.35792,
+     -81.59585
+    ],
+    [
+     30.33092,
+     -81.58747
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Red Wash Branch",
@@ -5350,7 +7510,19 @@
    "slugs": [
     "red-wash-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.77594,
+     -86.57805
+    ]
+   ],
+   "towns": [
+    "Crestview"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Rocky Bayou",
@@ -5358,7 +7530,24 @@
    "slugs": [
     "rocky-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.509,
+     -86.447
+    ],
+    [
+     30.494,
+     -86.431
+    ]
+   ],
+   "towns": [
+    "Niceville",
+    "Fort Walton Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "San Sebastian River",
@@ -5366,7 +7555,19 @@
    "slugs": [
     "san-sebastian-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     29.87597,
+     -81.31058
+    ]
+   ],
+   "towns": [
+    "St. Augustine"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Sawgrass Lake",
@@ -5374,7 +7575,24 @@
    "slugs": [
     "sawgrass-lake-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.8659,
+     -82.83194
+    ],
+    [
+     27.83399,
+     -82.66846
+    ]
+   ],
+   "towns": [
+    "Seminole",
+    "St. Petersburg"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Seaton Creek",
@@ -5382,7 +7600,26 @@
    "slugs": [
     "seaton-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.52247,
+     -81.65459
+    ],
+    [
+     30.33046,
+     -81.65718
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Silversmith Creek",
@@ -5390,7 +7627,22 @@
    "slugs": [
     "silversmith-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.3112,
+     -81.57235
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "St John's River",
@@ -5398,7 +7650,38 @@
    "slugs": [
     "saint-johns-river-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.19907,
+     -81.62526
+    ],
+    [
+     30.20861,
+     -81.67982
+    ],
+    [
+     30.246,
+     -81.634
+    ],
+    [
+     30.3382,
+     -81.60254
+    ],
+    [
+     30.28078,
+     -81.77724
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Sykes Creek",
@@ -5406,7 +7689,19 @@
    "slugs": [
     "sykes-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.36827,
+     -80.67302
+    ]
+   ],
+   "towns": [
+    "Merritt Island"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Taylor Creek",
@@ -5414,7 +7709,24 @@
    "slugs": [
     "taylor-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.464,
+     -80.335
+    ],
+    [
+     27.23689,
+     -80.82458
+    ]
+   ],
+   "towns": [
+    "Fort Pierce",
+    "Okeechobee"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Thompson Bayou",
@@ -5422,7 +7734,19 @@
    "slugs": [
     "thompson-bayou-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.536,
+     -87.23
+    ]
+   ],
+   "towns": [
+    "Pensacola"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Anderson Bayou",
@@ -5430,7 +7754,19 @@
    "slugs": [
     "anderson-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.24581,
+     -85.64293
+    ]
+   ],
+   "towns": [
+    "Lynn Haven"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Arlington River",
@@ -5438,7 +7774,19 @@
    "slugs": [
     "arlington-river-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.33072,
+     -81.60144
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Barnett Mill Creek",
@@ -5446,7 +7794,19 @@
    "slugs": [
     "barnett-mill-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.59231,
+     -87.17092
+    ]
+   ],
+   "towns": [
+    "Pace"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Bass Branch",
@@ -5454,7 +7814,19 @@
    "slugs": [
     "bass-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.5108,
+     -86.47291
+    ]
+   ],
+   "towns": [
+    "Niceville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Bear Branch Creek",
@@ -5462,7 +7834,19 @@
    "slugs": [
     "bear-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.90965,
+     -81.84646
+    ]
+   ],
+   "towns": [
+    "City Of Bartow"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Bell Creek",
@@ -5470,7 +7854,19 @@
    "slugs": [
     "bell-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.80695,
+     -82.24107
+    ]
+   ],
+   "towns": [
+    "Dover"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Bens Lake",
@@ -5478,7 +7874,19 @@
    "slugs": [
     "bens-lake-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.45342,
+     -86.54304
+    ]
+   ],
+   "towns": [
+    "Eglin Afb"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Big Bayou",
@@ -5486,7 +7894,19 @@
    "slugs": [
     "big-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.74237,
+     -82.63549
+    ]
+   ],
+   "towns": [
+    "St. Petersburg"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Bishop Creek",
@@ -5494,7 +7914,19 @@
    "slugs": [
     "bishop-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.017,
+     -82.706
+    ]
+   ],
+   "towns": [
+    "Safety Harbor"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Brandy Branch Creek",
@@ -5502,7 +7934,22 @@
    "slugs": [
     "brandy-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.31852,
+     -81.9279
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Bridge Creek",
@@ -5510,7 +7957,19 @@
    "slugs": [
     "bridge-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.39432,
+     -87.37879
+    ]
+   ],
+   "towns": [
+    "Pensacola"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Buffalo Canal",
@@ -5518,7 +7977,19 @@
    "slugs": [
     "buffalo-canal-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.57985,
+     -82.47418
+    ]
+   ],
+   "towns": [
+    "Palmetto"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Butcher Pen Creek",
@@ -5526,7 +7997,19 @@
    "slugs": [
     "butcher-pen-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.25287,
+     -81.74911
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Butterford Waterway",
@@ -5534,7 +8017,19 @@
    "slugs": [
     "butterford-waterway-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     26.92389,
+     -82.225
+    ]
+   ],
+   "towns": [
+    "Port Charlotte"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Cabbage Slough",
@@ -5542,7 +8037,19 @@
    "slugs": [
     "cabbage-slough-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.587,
+     -82.528
+    ]
+   ],
+   "towns": [
+    "Palmetto"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Cedar Creek",
@@ -5550,7 +8057,39 @@
    "slugs": [
     "cedar-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.418,
+     -82.48
+    ]
+   ],
+   "towns": [
+    "Bradenton"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
+   "name": "Cedar Hammock Drainage Canal",
+   "reports": 1,
+   "slugs": [
+    "cedar-hammock-drainage-canal-fl"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     27.448,
+     -82.586
+    ]
+   ],
+   "towns": [
+    "Bradenton"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Charlotte Harbor",
@@ -5558,7 +8097,19 @@
    "slugs": [
     "charlotte-harbor-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.785,
+     -82.025
+    ]
+   ],
+   "towns": [
+    "Punta Gorda"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Clapboard Creek",
@@ -5566,7 +8117,16 @@
    "slugs": [
     "clapboard-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.45775,
+     -81.51962
+    ]
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Clear Lake",
@@ -5574,7 +8134,19 @@
    "slugs": [
     "clear-lake-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.532,
+     -81.405
+    ]
+   ],
+   "towns": [
+    "Orlando"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Cocohatchee River",
@@ -5582,7 +8154,19 @@
    "slugs": [
     "cocohatchee-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.26644,
+     -81.78737
+    ]
+   ],
+   "towns": [
+    "Naples"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Cross Canal",
@@ -5590,7 +8174,19 @@
    "slugs": [
     "cross-canal-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.90761,
+     -82.70356
+    ]
+   ],
+   "towns": [
+    "Clearwater"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Duck Slough",
@@ -5598,7 +8194,19 @@
    "slugs": [
     "duck-slough-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.19966,
+     -82.69437
+    ]
+   ],
+   "towns": [
+    "New Port Richey"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Dupont Lake",
@@ -5606,7 +8214,19 @@
    "slugs": [
     "dupont-lake-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.91985,
+     -81.20967
+    ]
+   ],
+   "towns": [
+    "Osteen"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Eastern Lake",
@@ -5614,7 +8234,19 @@
    "slugs": [
     "eastern-lake-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.31178,
+     -86.08784
+    ]
+   ],
+   "towns": [
+    "Santa Rosa Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Egypt Lake",
@@ -5622,7 +8254,19 @@
    "slugs": [
     "egypt-lake-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.01364,
+     -82.49249
+    ]
+   ],
+   "towns": [
+    "Tampa"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "El Rio Canal",
@@ -5630,7 +8274,19 @@
    "slugs": [
     "el-rio-canal-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     26.445,
+     -80.096
+    ]
+   ],
+   "towns": [
+    "Delray Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Engineers Lake",
@@ -5638,7 +8294,19 @@
    "slugs": [
     "engineers-lake-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.08096,
+     -81.63004
+    ]
+   ],
+   "towns": [
+    "Haines City"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "English Creek",
@@ -5646,7 +8314,19 @@
    "slugs": [
     "english-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.01883,
+     -82.07332
+    ]
+   ],
+   "towns": [
+    "Plant City"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Fenholloway River",
@@ -5654,15 +8334,19 @@
    "slugs": [
     "fenholloway-river-fl"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Flora Branch Creek",
-   "reports": 1,
-   "slugs": [
-    "flora-branch-fl"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.063,
+     -83.529
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Perry"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Forked Creek",
@@ -5670,7 +8354,19 @@
    "slugs": [
     "forked-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     26.99202,
+     -82.37667
+    ]
+   ],
+   "towns": [
+    "Englewood"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Gasparilla Sound",
@@ -5678,7 +8374,19 @@
    "slugs": [
     "gasparilla-sound-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.83459,
+     -82.26228
+    ]
+   ],
+   "towns": [
+    "Port Charlotte"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Gates Creek",
@@ -5686,7 +8394,19 @@
    "slugs": [
     "gates-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.485,
+     -82.427
+    ]
+   ],
+   "towns": [
+    "Bradenton"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Gee Creek",
@@ -5694,7 +8414,19 @@
    "slugs": [
     "gee-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.6952,
+     -81.30483
+    ]
+   ],
+   "towns": [
+    "Winter Springs"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Goodbys Creek",
@@ -5702,7 +8434,30 @@
    "slugs": [
     "goodbys-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.2025,
+     -81.61792
+    ],
+    [
+     30.21818,
+     -81.59183
+    ],
+    [
+     30.2282,
+     -81.60933
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Gottfried Creek",
@@ -5710,7 +8465,19 @@
    "slugs": [
     "gottfried-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     26.94706,
+     -82.34658
+    ]
+   ],
+   "towns": [
+    "Englewood"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Greenfield Creek",
@@ -5718,7 +8485,16 @@
    "slugs": [
     "greenfield-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.32968,
+     -81.45694
+    ]
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Hopkins Creek",
@@ -5726,7 +8502,19 @@
    "slugs": [
     "hopkins-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.31496,
+     -81.41016
+    ]
+   ],
+   "towns": [
+    "Neptune Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Horse Creek",
@@ -5734,7 +8522,19 @@
    "slugs": [
     "horse-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.25073,
+     -81.63065
+    ]
+   ],
+   "towns": [
+    "Davenport"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Indian Bayou",
@@ -5742,7 +8542,19 @@
    "slugs": [
     "indian-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.52641,
+     -87.08718
+    ]
+   ],
+   "towns": [
+    "Pace"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Joe's Bayou",
@@ -5750,7 +8562,19 @@
    "slugs": [
     "joes-bayou-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.41203,
+     -86.49354
+    ]
+   ],
+   "towns": [
+    "Destin"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Jone's Creek",
@@ -5758,7 +8582,30 @@
    "slugs": [
     "jones-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.32834,
+     -81.54006
+    ],
+    [
+     26.934,
+     -80.109
+    ],
+    [
+     30.34716,
+     -81.5422
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Jupiter",
+    "Fruit Cove",
+    "Yulee"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Julington Creek",
@@ -5766,7 +8613,16 @@
    "slugs": [
     "julington-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.1899,
+     -81.55811
+    ]
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "King Branch",
@@ -5774,7 +8630,19 @@
    "slugs": [
     "king-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.7148,
+     -86.54385
+    ]
+   ],
+   "towns": [
+    "Crestview"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Kings Bay",
@@ -5782,7 +8650,19 @@
    "slugs": [
     "kings-bay-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.89893,
+     -82.59681
+    ]
+   ],
+   "towns": [
+    "Crystal River"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Lafayette Creek",
@@ -5790,15 +8670,19 @@
    "slugs": [
     "lafayette-creek-fl"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Lawne Lake",
-   "reports": 1,
-   "slugs": [
-    "lawne-lake-fl"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.49301,
+     -86.12477
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Freeport"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Lemon Bay",
@@ -5806,15 +8690,19 @@
    "slugs": [
     "lemon-bay-fl"
    ],
-   "how": "a water record already holds the name"
-  },
-  {
-   "name": "Little Bullfrog Creek",
-   "reports": 1,
-   "slugs": [
-    "little-bullfrog-creek-fl"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.92447,
+     -82.3592
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Placida"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Little Cedar Creek",
@@ -5822,7 +8710,22 @@
    "slugs": [
     "little-cedar-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.483,
+     -81.64748
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Little Creek",
@@ -5830,7 +8733,19 @@
    "slugs": [
     "little-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.95279,
+     -85.52636
+    ]
+   ],
+   "towns": [
+    "Graceville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Little Hatchet Creek",
@@ -5838,7 +8753,19 @@
    "slugs": [
     "little-hatchet-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     29.67399,
+     -82.30263
+    ]
+   ],
+   "towns": [
+    "Gainesville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Little Sixmile Creek",
@@ -5846,7 +8773,19 @@
    "slugs": [
     "little-sixmile-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.35216,
+     -81.74334
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Longbranch Creek",
@@ -5855,7 +8794,24 @@
     "long-branch-fl",
     "long-branch-largo-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.36361,
+     -81.65114
+    ],
+    [
+     27.9193,
+     -82.71971
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Clearwater"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Lost Creek",
@@ -5863,7 +8819,19 @@
    "slugs": [
     "lost-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.16253,
+     -84.38067
+    ]
+   ],
+   "towns": [
+    "Crawfordville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Lucy Branch Creek",
@@ -5871,15 +8839,19 @@
    "slugs": [
     "lucy-branch-fl"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Mc Coys Creek",
-   "reports": 1,
-   "slugs": [
-    "mccoys-creek-fl"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.15109,
+     -81.75252
+    ]
    ],
-   "how": "a water record already holds the name"
+   "towns": [
+    "Orange Park"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "McCoy Creek",
@@ -5887,7 +8859,19 @@
    "slugs": [
     "mccoy-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.3365,
+     -81.70319
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Miami Canal",
@@ -5895,7 +8879,19 @@
    "slugs": [
     "miami-canal-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     26.69832,
+     -80.80727
+    ]
+   ],
+   "towns": [
+    "Lake Harbor"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Mulatto Bayou",
@@ -5903,15 +8899,19 @@
    "slugs": [
     "mulatto-bayou-fl"
    ],
-   "how": "a water record already holds the name"
-  },
-  {
-   "name": "N Fork of Middle River",
-   "reports": 1,
-   "slugs": [
-    "north-fork-middle-river-fl"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.561,
+     -87.117
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Pace"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "New Rose Creek",
@@ -5919,7 +8919,19 @@
    "slugs": [
     "new-rose-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.26207,
+     -81.64612
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Newcastle Creek",
@@ -5927,7 +8939,19 @@
    "slugs": [
     "newcastle-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.3657,
+     -81.57971
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "North Bay",
@@ -5935,7 +8959,19 @@
    "slugs": [
     "north-bay-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.32425,
+     -85.65642
+    ]
+   ],
+   "towns": [
+    "South Port"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "North Palm Beach Waterway",
@@ -5943,7 +8979,19 @@
    "slugs": [
     "north-palm-beach-waterway-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     26.8136,
+     -80.06961
+    ]
+   ],
+   "towns": [
+    "North Palm Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Ochlockonee River",
@@ -5951,15 +8999,19 @@
    "slugs": [
     "ochlockonee-river-fl"
    ],
-   "how": "a water record already holds the name"
-  },
-  {
-   "name": "Poley Creek",
-   "reports": 1,
-   "slugs": [
-    "poley-creek-fl"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.61467,
+     -84.41422
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Havana"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Riviera Bay",
@@ -5967,7 +9019,19 @@
    "slugs": [
     "riviera-bay-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.85208,
+     -82.63363
+    ]
+   ],
+   "towns": [
+    "St. Petersburg"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Robinson Creek",
@@ -5975,31 +9039,19 @@
    "slugs": [
     "robinson-creek-fl"
    ],
-   "how": "a water record already holds the name"
-  },
-  {
-   "name": "Rushing Branch Creek",
-   "reports": 1,
-   "slugs": [
-    "rushing-branch-fl"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     29.92023,
+     -81.3201
+    ]
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "S Fork of Middle River",
-   "reports": 1,
-   "slugs": [
-    "south-fork-middle-river-fl"
+   "towns": [
+    "St. Augustine"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Saddle Creek",
-   "reports": 1,
-   "slugs": [
-    "saddle-creek-fl"
-   ],
-   "how": "record built from the name"
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Sand Branch Creek",
@@ -6007,7 +9059,19 @@
    "slugs": [
     "sand-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.488,
+     -82.359
+    ]
+   ],
+   "towns": [
+    "Bradenton"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Secret Lake",
@@ -6015,7 +9079,19 @@
    "slugs": [
     "secret-lake-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.6768,
+     -81.32779
+    ]
+   ],
+   "towns": [
+    "Casselberry"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Sherman Creek",
@@ -6023,15 +9099,19 @@
    "slugs": [
     "sherman-creek-fl"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Sherman's Creek",
-   "reports": 1,
-   "slugs": [
-    "sherman-creek-fl"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.36406,
+     -81.40988
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Shoal River",
@@ -6039,7 +9119,19 @@
    "slugs": [
     "shoal-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.7148,
+     -86.54385
+    ]
+   ],
+   "towns": [
+    "Crestview"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Six Mile Creek",
@@ -6047,7 +9139,22 @@
    "slugs": [
     "sixmile-creek-jacksonville-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.37296,
+     -81.83404
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "South Creek",
@@ -6055,7 +9162,16 @@
    "slugs": [
     "south-creek-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.20778,
+     -82.4562
+    ]
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "South Prong Double Branch",
@@ -6063,7 +9179,19 @@
    "slugs": [
     "south-prong-double-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.18498,
+     -81.8383
+    ]
+   ],
+   "towns": [
+    "Orange Park"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Spartman Branch Creek",
@@ -6071,7 +9199,16 @@
    "slugs": [
     "spartman-branch-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     27.9992,
+     -82.14974
+    ]
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "St Lucie River",
@@ -6079,7 +9216,24 @@
    "slugs": [
     "saint-lucie-river-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.2493,
+     -80.318
+    ],
+    [
+     27.27584,
+     -80.3168
+    ]
+   ],
+   "towns": [
+    "Port St Lucie",
+    "Port St. Lucie"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "St. Andrew's Bay",
@@ -6087,7 +9241,31 @@
    "slugs": [
     "saint-andrew-s-bay-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.15715,
+     -85.66404
+    ],
+    [
+     30.17928,
+     -85.72649
+    ],
+    [
+     30.20294,
+     -85.70606
+    ],
+    [
+     30.14291,
+     -85.64833
+    ]
+   ],
+   "towns": [
+    "Panama City"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "St. John's River",
@@ -6095,7 +9273,38 @@
    "slugs": [
     "saint-johns-river-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.19907,
+     -81.62526
+    ],
+    [
+     30.20861,
+     -81.67982
+    ],
+    [
+     30.246,
+     -81.634
+    ],
+    [
+     30.3382,
+     -81.60254
+    ],
+    [
+     30.28078,
+     -81.77724
+    ]
+   ],
+   "towns": [
+    "Jacksonville",
+    "Fruit Cove",
+    "Yulee",
+    "Ponte Vedra Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Stranahan River",
@@ -6103,7 +9312,19 @@
    "slugs": [
     "stranahan-river-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     26.1,
+     -80.112
+    ]
+   ],
+   "towns": [
+    "Fort Lauderdale"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Sumner Lake",
@@ -6111,7 +9332,19 @@
    "slugs": [
     "sumner-lake-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     28.36555,
+     -82.18407
+    ]
+   ],
+   "towns": [
+    "Dade City"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Sunset Lake",
@@ -6119,7 +9352,16 @@
    "slugs": [
     "sunset-lake-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     26.11681,
+     -80.11386
+    ]
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Tiger Pond Creek",
@@ -6127,7 +9369,19 @@
    "slugs": [
     "tiger-pond-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.35942,
+     -81.49008
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Trammel Creek",
@@ -6135,7 +9389,19 @@
    "slugs": [
     "trammel-creek-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.75858,
+     -86.5763
+    ]
+   ],
+   "towns": [
+    "Crestview"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Trout Bayou",
@@ -6143,7 +9409,19 @@
    "slugs": [
     "trout-bayou-fl"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.514,
+     -87.086
+    ]
+   ],
+   "towns": [
+    "Pace"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Trout Lake",
@@ -6151,7 +9429,19 @@
    "slugs": [
     "trout-lake-saint-cloud-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     29.63284,
+     -82.27562
+    ]
+   ],
+   "towns": [
+    "Gainesville"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Ward Lake",
@@ -6159,7 +9449,19 @@
    "slugs": [
     "ward-lake-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     27.418,
+     -82.48
+    ]
+   ],
+   "towns": [
+    "Bradenton"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   },
   {
    "name": "Western Lake",
@@ -6167,7 +9469,19 @@
    "slugs": [
     "western-lake-fl"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.31658,
+     -86.12008
+    ]
+   ],
+   "towns": [
+    "Santa Rosa Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
   }
  ]
 }
