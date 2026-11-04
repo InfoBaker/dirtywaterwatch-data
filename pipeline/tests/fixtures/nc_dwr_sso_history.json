@@ -20,12 +20,12 @@
       "volume": 100,
       "volume_reach_water": 100,
       "waterbody_impacted": "Boone Creek",
-      "volume_determined": "Estimated",
+      "volume_determined": "Lee Placeholder estimated the volume",
       "fish_kill": "0",
       "incident_cause": "Grease",
       "latitude": 36.2,
       "longitude": -81.66,
-      "resolution": "Line cleaned."
+      "resolution": "Line cleaned. Ditch flushed per Robin Placeholder's advice."
      }
     },
     {

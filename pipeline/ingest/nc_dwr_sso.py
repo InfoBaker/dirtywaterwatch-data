@@ -56,8 +56,11 @@ Privacy
   Only named fields are requested. The history layer's facility_owner holds the owner's name, and for a few
   private systems that is an individual's name: it never reaches a record. A public body's name (a city,
   town, county, authority, district, commission, university) is kept as raw._owner_public; any other owner
-  becomes raw._owner_kind "private or not stated". Free text (comments, cause, resolution) passes
-  common.strip_personal (in event()) and build.redact. A fixture test checks both.
+  becomes raw._owner_kind "private or not stated". The narrative fields (deq_comments, dwr_em_43_comments,
+  dwr_resolution_5d; the history layer's resolution and volume_determined) are never requested: they name the staff,
+  officials and residents the writer dealt with in forms neither filter catches ("Reported to <name> at EM"), so
+  raw._withheld says they were left out. The remaining text (addresses, cause, weather) passes common.strip_personal
+  (in event()) and build.redact. A fixture test checks all three.
 
 Cadence: hourly with the refresh (DWR enters reports within about a day of the start; the layer has lagged a
 few days at times).
@@ -95,15 +98,20 @@ NC_BOX = (-84.4, 33.7, -75.3, 36.65)          # lon, lat min / max
 FIELDS = ["objectid", "globalid", "deq_program", "dwr_incident_number", "dwr_permit_with_name", "dwr_regional_office",
           "deq_county", "deq_address", "deq_municipality", "dwr_report_date", "dwr_start_date", "dwr_ongoing",
           "dwr_end_date", "dwr_volume", "dwr_reached_water", "dwr_waterbody", "dwr_unlisted_waterbody",
-          "dwr_volume_waterbody", "dwr_conveyance", "dwr_fish_kill", "dwr_fish_kill_number", "deq_comments",
-          "dwr_em_43_comments", "dwr_report_complete_5d", "dwr_start_date_5d", "dwr_end_date_5d", "dwr_duration_5d",
+          "dwr_volume_waterbody", "dwr_conveyance", "dwr_fish_kill", "dwr_fish_kill_number",
+          "dwr_report_complete_5d", "dwr_start_date_5d", "dwr_end_date_5d", "dwr_duration_5d",
           "dwr_volume_5d", "dwr_reached_waterbody_5d", "dwr_waterbody_5d", "dwr_volume_waterbody_5d", "dwr_fish_kill_5d",
-          "dwr_fish_kill_number_5d", "dwr_cause_5d", "dwr_weather_5d", "dwr_resolution_5d", "deq_latitude",
+          "dwr_fish_kill_number_5d", "dwr_cause_5d", "dwr_weather_5d", "deq_latitude",
           "deq_longitude", "unlisted_waterbody"]
 HIST_FIELDS = ["OBJECTID", "report_date", "start_date", "end_date", "permit_id", "facility_name", "facility_owner",
                "incident_number", "regional_office", "location", "city", "county", "volume", "volume_reach_water",
-               "waterbody_impacted", "volume_determined", "fish_kill", "incident_cause", "latitude", "longitude",
-               "resolution"]
+               "waterbody_impacted", "fish_kill", "incident_cause", "latitude", "longitude"]
+# Narrative fields never requested: the staff's and operators' running notes name the people they called, met or
+# reported to ("Reported to <name> at EM", "the ORC <name> arrived"), which neither strip_personal nor build.redact
+# catches reliably. The record keeps the coded fields (cause, weather, conveyance) and says what was left out.
+WITHHELD = {"deq_comments", "dwr_em_43_comments", "dwr_resolution_5d", "resolution", "volume_determined"}
+WITHHELD_NOTE = ("DWR's and the operator's free-text comments and resolution notes are not reproduced here (they name "
+                 "staff and residents); the source record has them.")
 DATE_FIELDS = ("dwr_report_date", "dwr_start_date", "dwr_end_date", "dwr_start_date_5d", "dwr_end_date_5d",
                "report_date", "start_date", "end_date")
 # a public body as owner: kept by name; anything else (a company, an association, a person) is never named
@@ -289,6 +297,7 @@ def build_record(a: dict, layer: str, fetched_at: str, prev: dict | None, permit
                 source_url=f"{layer}/query?where=globalid%3D%27{gid}%27&outFields=*&f=json")
     raw = safe(a, FIELDS)
     raw["_layer"] = layer
+    raw["_withheld"] = WITHHELD_NOTE
     try:
         return _record(a, base, raw, prev, permits)
     except Exception as e:  # noqa: BLE001 - never drop a record
@@ -398,6 +407,8 @@ def build(rows: list[tuple[str, dict]], fetched_at: str, prev_records: list[dict
         if eid in seen:
             continue
         r.setdefault("raw", {})
+        for k in WITHHELD & set(r["raw"]):               # a record kept from a run before these were withheld
+            r["raw"].pop(k)
         r["raw"]["_missing_from_layer_since"] = r["raw"].get("_missing_from_layer_since") or fetched_at
         records.append(r)
         kept += 1
@@ -420,6 +431,7 @@ def hist_record(a: dict, fetched_at: str, rid: str, permits: dict[str, str], dup
     base = dict(source_id=HIST_ID, source_record_id=rid, fetched_at=fetched_at,
                 source_url=f"{HIST_LAYER}/query?where=OBJECTID%3D{oid}&outFields=*&f=json")
     raw = {k: v for k, v in safe(a, HIST_FIELDS).items() if k != "facility_owner"}
+    raw["_withheld"] = WITHHELD_NOTE
     kind, public = owner_kind(a.get("facility_owner"))
     raw["_owner_kind"] = kind
     if public:
