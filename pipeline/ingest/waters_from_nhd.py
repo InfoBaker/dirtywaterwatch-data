@@ -6,6 +6,7 @@
     python -m ingest.waters_from_nhd --state XX [--state YY ...] --tidy     (offline; tidy_main)
     python -m ingest.waters_from_nhd --names research/<st>/receiving-waters-missing.json --state XX [--add-places]
                                      [--budget-s S] [--max-requests N] [--targets-only]
+    python -m ingest.waters_from_nhd --names research/<st>/receiving-waters-missing.json --state XX --recheck
 
 A state build (--state, 2026-11-04; docs/national-waters.md in the site repository): a state's records are built
 before it goes live, from data/receiving-waters-national.json (scripts/gen_receiving_waters.py: one row per receiving
@@ -43,7 +44,8 @@ with the points and towns the file gives (--add-places, nothing fetched, first w
 state's reports in data/build/events: the points the reports carry and their town fields, and the towns of the
 operators they name). A text that names no public water (a storm-sewer system or MS4, a catch basin or treatment
 works, private property, the open sea, a street, an unnamed or unknown stream, a river basin, a county) gets that
-reason and never a record (report_name_parts); a tributary of a named water gives the named water. A name the status
+reason and never a record (report_name_parts); a tributary of a named water gives the named water, and so does a
+sewershed named for its creek ('Lindsey Creek Basin', CREEK_BASIN; never a river's basin). A name the status
 resolver already places on a record maps to it, nothing built. The others take the name pass (report_name_choices):
 the NHDPlus V2.1 features of that GNIS name in the state (asked thirty spellings to a query, prefetch_names), the one
 nearest each place the reports give (each cluster of points within 2 km; each town within 3 km when no point finds the
@@ -56,6 +58,8 @@ Overpass answers. Rows carry from: "reports" and their report count, are merged 
 state's report rows only (the state build's rows stay exactly), and the run's statistics go under
 stats.state_builds.<ST>.report_names. FILE is rewritten to the names still without a record, each with its reason
 (rows), the names a record now holds in `resolved` (with the slugs), so the next run resumes with what is left.
+--recheck judges the file again with nothing built or fetched and data/waters-nhd.json untouched (after an alias is
+added to data/water-aliases.json, or a rule here changes): names_recheck.
 
 Budgets: --max-requests (network requests; cached answers are free) and --budget-s (seconds) stop the run before a
 request, never inside one (BudgetExhausted); the targets not reached say so, what was built is written (merged, never
@@ -773,6 +777,14 @@ class Target(dict):
     pass
 
 
+def top_towns(towns: Counter, n: int | None = None) -> list[str]:
+    """The towns of a Counter, most counted first and then by name (Counter.most_common keeps the insertion order
+    among equal counts, and the towns of an event come from a set, whose order changes with Python's hash seed: the
+    target rows of data/waters-nhd.json changed between two runs on the same inputs; 2026-11-04 run-time review P3-7)."""
+    out = [k for k, _ in sorted(towns.items(), key=lambda kv: (-kv[1], str(kv[0])))]
+    return out if n is None else out[:n]
+
+
 def collect_targets(existing: dict, events=None, verbose=True, unplaced: list | None = None):
     """(targets, skipped, stats). A target: one water name in one state, with the outfalls and events
     that name it, their points (weighted) and towns. unplaced: a list that receives the events with a waterbody text
@@ -801,7 +813,9 @@ def collect_targets(existing: dict, events=None, verbose=True, unplaced: list | 
             t["points"][(round(float(lon), 5), round(float(lat), 5))] += 1
             if kind == "outfalls":
                 t["outfall_points"][(round(float(lon), 5), round(float(lat), 5))] += 1
-        for tw in town if isinstance(town, (set, list)) else [town]:
+        # an event's towns are a set: added in name order, so the Counter's order does not follow the hash seed
+        tws = sorted(town, key=str) if isinstance(town, set) else town if isinstance(town, list) else [town]
+        for tw in tws:
             tw = str(tw or "").strip()
             if tw and len(tw) <= 40 and len(tw.split()) <= 4 and not re.search(r"\d", tw):
                 t["towns"][tw] += 1
@@ -2915,7 +2929,7 @@ class Run:
         if not rec["name"]:
             rec["name"] = t["name"] or "Unnamed water"
         if rec["name"] == UNNAMED_STREAM:        # no named water downstream: the town it lies in, else the operators'
-            town = next(iter(rec.get("towns") or []), None) or next((x for x, _ in t["towns"].most_common(1)), None)
+            town = next(iter(rec.get("towns") or []), None) or next(iter(top_towns(t["towns"], 1)), None)
             rec["name"] = unnamed_name(None, town)
         rec.update(_targets=[], _weight=0, _slug_towns=Counter(), _key=k)
         same = same_named_existing(self.existing, t["state"], rec["name"])
@@ -2944,7 +2958,7 @@ class Run:
     def new_row(t) -> dict:
         row = {"_key": t["key"], "state": t["state"], "name": t["name"],
                "texts": [x for x, _ in t["texts"].most_common(4)], "outfalls": t["outfalls"], "events": t["events"],
-               "points": len(t["points"]), "towns": [x for x, _ in t["towns"].most_common(4)], "slugs": [],
+               "points": len(t["points"]), "towns": top_towns(t["towns"], 4), "slugs": [],
                "how": [], "reason": None, "_recs": []}
         if t.get("define_by"):                  # a state build's target (the national list)
             row.update(define_by=t["define_by"], defined_by=None, permits=list(t.get("permits") or [])[:12],
@@ -3457,7 +3471,14 @@ def main(argv=None):
     ap.add_argument("--add-places", action="store_true",
                     help="with --names: nothing built or fetched; the file's rows gain the points and towns of the "
                          "state's reports in data/build/events that give each name")
+    ap.add_argument("--recheck", action="store_true",
+                    help="with --names: nothing built or fetched, data/waters-nhd.json untouched: the file is judged "
+                         "again against the water records and aliases on disk (a name an alias or rule now gives to a "
+                         "record moves to resolved; the reasons of names that are no water are refreshed); a name that "
+                         "needs a build keeps the last build's outcome, or waits for the next --names run")
     args = ap.parse_args(argv)
+    if args.recheck and not args.names:
+        ap.error("--recheck needs --names")
     if args.names:
         if args.rebuild or args.osm_only or args.tidy or (args.state and len(args.state) > 1):
             ap.error("--names takes one --state and no --rebuild, --osm-only or --tidy")
@@ -3796,13 +3817,20 @@ STREET_NAME = re.compile(r"^[\w' .-]+?\s+(ct|st|rd|ave|av|dr|ln|blvd|cir|trce|tr
 TRIB_LEAD = re.compile(r"^(an?\s+|the\s+)?(unnamed\s+|unknown\s+|small\s+)?(tributary|tributaries|trib\.?|unt|ut)"
                        r"(\s+(of|to|into)\b)?\s*(the\s+)?", re.I)
 TRIB_ANY = re.compile(r"\b(tributary|tributaries|trib|unt|ut)\b", re.I)
+# a sewershed named for its creek ('Lindsey Creek Basin', 'Dram Branch Basin', 'Allens Creek Water Basin'): it drains to
+# that creek, as a tributary does, so it gives the creek (2026-11-04 report-name review, P3-1). A river's basin ('New
+# River Basin', 'Little River Basin') is a planning basin of many waters and stays refused, as does a basin with no
+# stream word ('Upper Upatoi Basin', 'Starkey Road Basin', 'East Basin').
+CREEK_BASIN = re.compile(r"^(?P<creek>(?:[\w'’.-]+\s+){1,4}?(?:creek|branch|brook|run|bayou|stream))\s+(?:water\s+)?"
+                         r"(?:sub-?)?(?:basin|sewershed)$", re.I)
 REPORT_TOWN_M = 3000        # a water of the name within 3 km of a town the reports give (the name pass's rule)
 
 
 def report_name_parts(text: str) -> tuple[list[str], str | None, bool]:
     """(water names, reason, tributary) for one receiving-water name as a report gives it. A tributary of a named water
     ('Tributary to Proctor Creek', 'UT Eno River', 'Ditch feeding Rocky Creek', 'Bull creek tributary') gives the named
-    water (the tributary has no name of its own and its water reaches that one), tributary True. reason: why the text
+    water (the tributary has no name of its own and its water reaches that one), tributary True; so does a sewershed
+    named for its creek ('Lindsey Creek Basin': CREEK_BASIN), never a river's basin. reason: why the text
     names no public water (storm-sewer systems, catch basins and treatment works, private property, the open sea, street
     names, an unnamed or unknown stream, a kind of water with no name, a river basin), never a record."""
     t = re.sub(r"\s+", " ", str(text or "")).strip()
@@ -3838,6 +3866,9 @@ def report_name_parts(text: str) -> tuple[list[str], str | None, bool]:
     prev = None
     while prev != t:
         prev, t = t, TRIB_LEAD.sub("", t, count=1).strip()
+    cb = CREEK_BASIN.match(t)
+    if cb and not re.fullmatch(r"(unnamed|unknown|unk|the|a|an)\s+.*", cb.group("creek"), re.I):
+        t, tributary = cb.group("creek"), True
     if tributary and re.match(r"^(at|near|behind|by|on|in|off|along|beside|from)\b", t, re.I):
         return [], "an unnamed tributary named by a place, not by the water it joins", False
     if not t or re.fullmatch(r"(unnamed|unknown|unk)?\s*(creek|stream|branch|tributary|pond|lake|ditch|canal|river)?", t, re.I):
@@ -3981,7 +4012,8 @@ def reason_kind(reason: str, multi: bool = False) -> str:
     nearest is 2.2 km away)', '(35.36514, -80.14824)') and, for a text naming several waters, without the water's name."""
     r = re.sub(r"^[^:;(]*?: ", "", reason) if multi else reason
     r = r.split("; ")[0]
-    r = re.sub(r"^(a water record holds (this water but not this spelling|the name)) \([^)]*\)", r"\1", r)  # records
+    r = re.sub(r"^(a water record holds (this water but not this spelling|the name|the water this text names)) "
+               r"\([^)]*\)", r"\1", r)                                                                 # records
     r = re.sub(r"\s*\((?=[^()]*(\d+\.\d|\d{4}-\d\d))[^()]*\)", "", r)       # a distance, a point or a date
     return r.strip()[:120]
 
@@ -4094,7 +4126,7 @@ def collect_name_targets(state: str, rows: list[dict], resolver: S.Resolver, wat
         t["name"] = t["names"].most_common(1)[0][0]
         t["words"] = words(t["name"])
         places = cluster_points(t["points"], n=3, sep_m=NEAR_M)
-        slugs, at = has_record_at(resolver, t["name"], state, places, [x for x, _ in t["towns"].most_common(3)],
+        slugs, at = has_record_at(resolver, t["name"], state, places, top_towns(t["towns"], 3),
                                   per_place=True)
         own = [x for x in slugs if waters is None or holds_name(waters.get(x) or {}, t["name"])]
         if own and all(set(own) & set(k) for k in at):     # every point of the reports finds its record
@@ -4188,7 +4220,7 @@ def report_name_choices(nhd: Nhd, t) -> tuple[list[tuple], str | None, list[dict
     points = [(Point(lon, lat), f"the reports' point ({lat:.5f}, {lon:.5f})", NEAR_M, {"lon": lon, "lat": lat})
               for lon, lat in cluster_points(t["points"], n=6, sep_m=NEAR_M)]
     towns = []
-    for tw, _ in t["towns"].most_common(4):
+    for tw in top_towns(t["towns"], 4):
         g = nhd.towns.outlines(st, [tw])
         if g:
             towns.append((unary_union(g), tw, REPORT_TOWN_M, {"town": tw}))
@@ -4237,7 +4269,7 @@ def resolve_hr_places(nhd: Nhd, t) -> tuple[dict | None, str]:
         return resolve_hr(nhd, t)
     names = sql_names(t)
     where = "UPPER(gnis_name) IN (" + ",".join(f"'{n}'" for n in names) + ")"
-    for tw, _ in t["towns"].most_common(2):
+    for tw in top_towns(t["towns"], 2):
         g = nhd.towns.outlines(t["state"], [tw])
         if not g:
             continue
@@ -4306,6 +4338,8 @@ def names_main(args) -> int:
     targets, done, skipped_reason = collect_name_targets(state, rows, resolver, allw)
     print(f"report names {state}: {len(rows)} names, {len(targets)} waters to build, {len(done)} already a record, "
           f"{len(skipped_reason)} no water", flush=True)
+    if getattr(args, "recheck", False):
+        return names_recheck(path, meta, state, rows, targets, done, skipped_reason, resolver)
     if args.targets_only:
         print_targets(targets, None)
         for (st, text), why in sorted(skipped_reason.items()):
@@ -4452,6 +4486,49 @@ def names_main(args) -> int:
     return 0
 
 
+def names_recheck(path, meta, state, rows, targets, done, skipped_reason, resolver, previous=None) -> int:
+    """--names FILE --recheck: the names file judged again with no build and no network (an alias added to
+    data/water-aliases.json, a rule of report_name_parts changed). A name a record now holds at every point of its
+    reports is resolved as the name pass would resolve it; a name that would need a build keeps the outcome of the last
+    build's row for it in data/waters-nhd.json (previous: those rows), or is marked not reached until the next --names
+    run; the file's last build note is kept under last_build. data/waters-nhd.json is not written."""
+    if previous is None:
+        previous = [r for r in (read_json(OUT) or {}).get("targets") or [] if r.get("from") == REPORT_ROWS
+                    and r.get("state") == state]
+    last = {compact(r["name"]): r for r in previous if r.get("name")}
+    out_rows = []
+    for t, slugs in done:                   # the places the last build could not find it at are kept
+        r = last.get(compact(t["name"])) or {}
+        out_rows.append({"name": t["name"], "from": REPORT_ROWS, "state": state, "slugs": slugs, "reason": None,
+                         "how": ["already a water record: the status resolver places reports of this name on it"],
+                         **({"places_failed": r["places_failed"]} if r.get("places_failed") else {})})
+    kept = waiting = 0
+    for t in targets:
+        r = last.get(compact(t["name"]))
+        if r is not None:
+            out_rows.append({k: r[k] for k in ("name", "from", "state", "slugs", "how", "reason", "defined_by",
+                                               "places_failed") if k in r})
+            kept += 1
+        else:
+            out_rows.append({"name": t["name"], "from": REPORT_ROWS, "state": state, "slugs": [], "how": [],
+                             "reason": f"{NOT_REACHED} (a recheck builds nothing); the next --names run asks NHD"})
+            waiting += 1
+    prev_note = meta.get("build") or {}
+    stats = {"built": now_iso(), "file": str(Path(path).resolve().relative_to(ROOT))
+             if str(Path(path).resolve()).startswith(str(ROOT)) else Path(path).name, "records": 0,
+             "network_requests": 0}
+    rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats,
+                  placed=lambda text, r, slugs: resolver_places(resolver, text, state, r, slugs),
+                  command=f"python -m ingest.waters_from_nhd --names {stats['file']} --state {state} --recheck",
+                  last_build=prev_note.get("last_build") or (prev_note if prev_note.get("command") and "--recheck" not in
+                                                             prev_note["command"] else None))
+    d = read_json(path) or {}
+    print(f"report names {state} (recheck, nothing built): {d.get('resolved_names', 0)} names resolved "
+          f"({d.get('resolved_reports', 0)} reports), {d.get('waters', 0)} still without a record; {len(done)} held by "
+          f"a record, {kept} from the last build, {waiting} waiting for the next --names run")
+    return 0
+
+
 def mirror_answers() -> bool:
     """Whether any Overpass instance answers a trivial query (mirror_order); the OSM fallback is skipped when none does."""
     try:
@@ -4488,6 +4565,9 @@ UNPLACED = {
     "spelling": ("a water record holds this water but not this spelling ({slugs}): a report of it is not placed there "
                  "until the spelling is an alias (data/water-aliases.json)"),
     "guard": "a water record holds the name ({slugs}), but the reports' points lie too far from it to be placed there",
+    "label": ("a water record holds the water this text names ({slugs}), but the status resolver reads the text as a "
+              "watershed or basin label, not a water's name (build/status.py, Watershed labels): its reports are not "
+              "placed there"),
 }
 
 
@@ -4495,8 +4575,9 @@ def resolver_places(resolver, text: str, state: str, row: dict, slugs) -> str | 
     """Why the status resolver does not place a report of this text on one of these records at the places the names
     file gives for it (each point, else each town, else no place): None when it does at one of them (its name, alias
     or stem, kept by the placement guard); "guard" when it reads the name as one of them but the placement guard sets
-    the report aside at every place (the reports' points lie too far from the record); "spelling" when it does not
-    read this text as one of them. A name several records share that the resolver cannot choose among here (no
+    the report aside at every place (the reports' points lie too far from the record); "label" when the whole text is
+    a watershed or basin label to it ('Lindsey Creek Basin', which the names pass gives to Lindsey Creek: CREEK_BASIN);
+    "spelling" when it does not read this text as one of them. A name several records share that the resolver cannot choose among here (no
     outline on this machine, no point) is not held against it when one of them is among the slugs."""
     pts = [(float(lat), float(lon)) for lat, lon in (row.get("points") or [])[:5]]
     towns = [str(x) for x in row.get("towns") or [] if x]
@@ -4515,6 +4596,10 @@ def resolver_places(resolver, text: str, state: str, row: dict, slugs) -> str | 
                 why = "guard"
         elif ambiguous and note and any(x in note for x in want):
             return None
+    if why == "spelling" and hasattr(resolver, "watershed_labels"):
+        rest, labels = resolver.watershed_labels(text, state)
+        if labels and rest is None:         # 'Lindsey Creek Basin': read as a sewershed's label, not a water's name
+            why = "label"
     return why
 
 
@@ -4532,7 +4617,8 @@ def recheck_resolved(meta: dict, state: str, resolver) -> list[dict]:
     return back
 
 
-def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats, placed=None) -> None:
+def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats, placed=None, command=None,
+                  last_build=None) -> None:
     """The names file rewritten to what is still missing: a row whose every water name now has a record moves to
     `resolved` (with the slugs and the row's places); the others stay with their reason (no water, or why each name
     found no record). placed(text, row, slugs): why the status resolver does not place a report of the row's own text
@@ -4582,11 +4668,13 @@ def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats, plac
         if fails:
             out["places_failed"] = fails[:6]
         left.append(out)
-    note = {"date": stats["built"][:10], "command": f"python -m ingest.waters_from_nhd --names {stats['file']} "
-            f"--state {state}", "records_built": stats["records"], "names_resolved": len(resolved),
+    note = {"date": stats["built"][:10], "command": command or f"python -m ingest.waters_from_nhd --names "
+            f"{stats['file']} --state {state}", "records_built": stats["records"], "names_resolved": len(resolved),
             "network_requests": stats["network_requests"]}
     if stats.get("stopped"):
         note["stopped"] = stats["stopped"]
+    if last_build:
+        note["last_build"] = last_build
     write_names_file(path, meta, state, left, resolved, note)
 
 

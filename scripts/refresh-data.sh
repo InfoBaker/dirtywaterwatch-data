@@ -26,6 +26,14 @@ summary() {
 trap 'summary; rmdir "$LOCK" 2>/dev/null' EXIT
 echo "===== $(date -u +%FT%TZ) refresh start"
 make refresh || { echo "make refresh failed: nothing uploaded; the workflow publishes no export and saves no state"; exit 1; }
+# the standing name review (build/name_review.py --standing) reads the events as the export publishes them: its details
+# go to data/build only (saved with the private state, never to git or out/), this log gets counts only (Actions logs
+# are public) and a ::warning:: when new candidate names to review appear; it never blocks the publish, and its
+# failure leaves this script's exit status as it is
+NR_PY="$(pwd)/pipeline/.venv/bin/python"
+[ -x "$NR_PY" ] || NR_PY=python3
+sh scripts/timed.sh name-review sh -c 'cd pipeline && exec "$0" -m build.name_review --standing' "$NR_PY" \
+  || echo "name review failed: not blocking"
 sh scripts/timed.sh tally make tally || echo "source tally failed"
 # the export's blocklist self-check (pipeline/export/build.py enforce_blocklist) found a private name in out/:
 # nothing is uploaded until an export passes it (the mark lists the files)

@@ -65,6 +65,9 @@ def test_the_three_states_files_read_as_rows_most_reports_first(tmp_path):
     ("Unnamed Tributary at Belmont Abbey College", "named by a place"),
     ("Unnamed Tributary of Little River Basin", "basin"),
     ("Starkey Road Basin", "basin"),
+    ("New River Basin", "basin"),                       # a river's basin is a planning basin of many waters
+    ("Upper Upatoi Basin", "basin"),                    # no stream word: not a sewershed named for its creek
+    ("Unnamed Creek Basin", "basin"),
     ("Tributary to Private Pond", "private property"),
     ("123 Main Street", "street"),
 ])
@@ -89,6 +92,11 @@ def test_names_that_are_no_water_get_a_reason_and_no_target(text, why):
     ("Watson Bayou", ["Watson Bayou"], False),
     ("ICW", ["Intracoastal Waterway"], False),
     ("FRENCH BROAD", ["FRENCH BROAD"], False),
+    # a sewershed named for its creek drains to that creek, as a tributary does (2026-11-04 review P3-1)
+    ("Lindsey Creek Basin", ["Lindsey Creek"], True),
+    ("Dram Branch Basin", ["Dram Branch"], True),
+    ("Allens Creek Water Basin", ["Allens Creek"], True),
+    ("Tributary to Weracoba Creek Basin", ["Weracoba Creek"], True),
 ])
 def test_report_names_that_name_a_water(text, expected, trib):
     parts, reason, tributary = N.report_name_parts(text)
@@ -469,3 +477,74 @@ def test_a_name_is_a_record_only_where_every_point_of_its_reports_finds_it():
     assert not any("another name" in x for x in targets[0]["notes"])
     targets, done, _ = N.collect_name_targets("GA", rows[:1], resolver, waters)
     assert targets == [] and [s for _, s in done] == [["butler-creek-ga"]]
+
+
+def test_a_creek_basin_text_the_status_resolver_reads_as_a_label_says_so():
+    """'Lindsey Creek Basin' gives Lindsey Creek to the names pass, but the status resolver reads the whole text as a
+    sewer basin's label (build/status.py, Watershed labels): the row says that, not that an alias is missing."""
+    from build import status as S
+    waters = {"lindsey-creek-ga": {"slug": "lindsey-creek-ga", "name": "Lindsey Creek", "state": "GA"}}
+    r = S.Resolver(waters, [], placement_rules={})
+    row = {"towns": ["Columbus"]}
+    assert N.resolver_places(r, "Lindsey Creek Basin", "GA", row, ["lindsey-creek-ga"]) == "label"
+    assert N.resolver_places(r, "Lindsey Creek", "GA", row, ["lindsey-creek-ga"]) is None
+    assert N.resolver_places(r, "Lindsy Creek", "GA", row, ["lindsey-creek-ga"]) == "spelling"
+    reason = N.UNPLACED["label"].format(slugs="lindsey-creek-ga")
+    assert "basin label" in reason and N.reason_kind(reason).startswith("a water record holds the water this text names,")
+
+
+@pytest.mark.parametrize("slug,state,name,spelling", [
+    ("allen-creek-fl", "FL", "Allen Creek", "Allen's Creek"),
+    ("allen-creek-fl", "FL", "Allen Creek", "Allens Creek"),
+    ("sherman-creek-fl", "FL", "Sherman Creek", "Sherman's Creek"),
+    ("mccoys-creek-fl", "FL", "McCoys Creek", "Mc Coys Creek"),
+    ("lake-lawne-fl", "FL", "Lake Lawne", "Lawne Lake"),
+    ("north-fork-middle-river-fl", "FL", "North Fork Middle River", "North Fork of Middle River"),
+    ("north-fork-middle-river-fl", "FL", "North Fork Middle River", "N Fork of Middle River"),
+    ("south-fork-middle-river-fl", "FL", "South Fork Middle River", "South Fork of Middle River"),
+    ("south-fork-middle-river-fl", "FL", "South Fork Middle River", "S Fork of Middle River"),
+    ("seventeen-mile-river-ga", "GA", "Seventeen Mile River", "17 Mile River"),
+])
+def test_the_reports_spellings_of_these_waters_are_hand_aliases(slug, state, name, spelling):
+    """The 2026-11-04 report-name review's alias candidates (P3-6) are in data/water-aliases.json, and the status
+    resolver reads each spelling as its water."""
+    from build import status as S
+    waters = {slug: {"slug": slug, "name": name, "state": state},
+              "middle-river-fl": {"slug": "middle-river-fl", "name": "Middle River", "state": "FL"}}
+    problems = S.apply_water_aliases(waters, S.DATA_DIR / S.WATER_ALIASES_FILE)     # the file's other slugs are absent
+    assert not [p for p in problems if slug in p]
+    r = S.Resolver(waters, [], placement_rules={})
+    assert r.by_name(spelling, state, None, None)[0] == [slug]
+
+
+def test_a_recheck_resolves_what_a_record_now_holds_and_builds_nothing(tmp_path, monkeypatch):
+    """--names --recheck: no build, no network, data/waters-nhd.json not written; a name a record now holds moves to
+    resolved, a name that needs a build keeps the last build's outcome or waits for the next --names run."""
+    out = tmp_path / "waters-nhd.json"
+    monkeypatch.setattr(N, "OUT", out)
+    path = tmp_path / "missing.json"
+    meta = {"state": "GA", "build": {"date": "2026-11-04", "command": "python -m ingest.waters_from_nhd --names x "
+                                     "--state GA", "records_built": 3, "names_resolved": 1, "network_requests": 9}}
+    rows = [{"name": "17 Mile River", "reports": 1, "points": [[31.5, -82.85]], "_parts": ["17 Mile River"],
+             "reason": "a water record holds this water but not this spelling (seventeen-mile-river-ga): ..."},
+            {"name": "Weracoba Creek Basin", "reports": 1, "towns": ["Columbus"], "_parts": ["Weracoba Creek"],
+             "reason": "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"},
+            {"name": "Dram Branch Basin", "reports": 1, "towns": ["Columbus"], "_parts": ["Dram Branch"]},
+            {"name": "catch basin", "reports": 2, "_parts": []}]
+    done = [(N.Target(name="17 Mile River"), ["seventeen-mile-river-ga"])]
+    targets = [N.Target(name="Weracoba Creek"), N.Target(name="Dram Branch")]
+    previous = [{"state": "GA", "name": "Weracoba Creek", "from": "reports", "slugs": [], "how": [],
+                 "reason": "no NHD flowline or waterbody of that name in GA"}]
+    skipped = {("GA", "catch basin"): "part of a sewer, drainage or treatment works, not a public water"}
+    r = FakeResolver({"17 Mile River": (["seventeen-mile-river-ga"], None, False)})
+    assert N.names_recheck(path, meta, "GA", rows, targets, done, skipped, r, previous=previous) == 0
+    assert not out.exists()
+    d = json.loads(path.read_text())
+    assert [x["name"] for x in d["resolved"]] == ["17 Mile River"]
+    assert d["resolved"][0]["how"] == "a water record already holds the name"
+    left = {x["name"]: x["reason"] for x in d["rows"]}
+    assert left["Weracoba Creek Basin"] == "no NHD flowline or waterbody of that name in GA"
+    assert left["Dram Branch Basin"].startswith("not reached this run (a recheck builds nothing)")
+    assert left["catch basin"].startswith("part of a sewer")
+    assert d["build"]["command"].endswith("--state GA --recheck") and d["build"]["network_requests"] == 0
+    assert d["build"]["last_build"]["records_built"] == 3                  # the last real build is still named

@@ -40789,8 +40789,8 @@
    "towns": [
     "Port Orange",
     "Daytona Beach",
-    "Ormond Beach",
-    "Holly Hill"
+    "Holly Hill",
+    "Ormond Beach"
    ],
    "slugs": [
     "halifax-river-fl"
@@ -41018,9 +41018,9 @@
    "events": 0,
    "points": 3,
    "towns": [
-    "St Augustine",
     "Elkton",
-    "Saint Augustine"
+    "Saint Augustine",
+    "St Augustine"
    ],
    "slugs": [
     "matanzas-river-saint-augustine-fl"
@@ -41175,8 +41175,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Port Charlotte",
-    "Arcadia"
+    "Arcadia",
+    "Port Charlotte"
    ],
    "slugs": [
     "peace-river-fl"
@@ -44962,9 +44962,9 @@
    "points": 3,
    "towns": [
     "Sparta",
-    "Tennille",
+    "Carrollton",
     "Nahunta",
-    "Carrollton"
+    "Tennille"
    ],
    "slugs": [
     "buffalo-creek-sparta-ga",
@@ -45271,8 +45271,8 @@
    "points": 4,
    "towns": [
     "Buford",
-    "Flowery Branch",
-    "Dahlonega"
+    "Dahlonega",
+    "Flowery Branch"
    ],
    "slugs": [
     "lake-lanier-ga"
@@ -45303,8 +45303,8 @@
    "points": 3,
    "towns": [
     "Acworth",
-    "Emerson",
-    "Dallas"
+    "Dallas",
+    "Emerson"
    ],
    "slugs": [
     "pumpkinvine-creek-ga"
@@ -45340,9 +45340,9 @@
    "points": 3,
    "towns": [
     "Newnan",
-    "Sargent",
     "Arnco",
-    "Gainesville"
+    "Gainesville",
+    "Sargent"
    ],
    "slugs": [
     "wahoo-creek-ga"
@@ -45493,8 +45493,8 @@
    "towns": [
     "Cedartown",
     "Cave Spring",
-    "Winder",
-    "Palmetto"
+    "Palmetto",
+    "Winder"
    ],
    "slugs": [
     "cedar-creek-ga",
@@ -45536,8 +45536,8 @@
    "points": 3,
    "towns": [
     "Norcross",
-    "Douglasville",
     "Commerce",
+    "Douglasville",
     "Dublin"
    ],
    "slugs": [
@@ -45743,9 +45743,9 @@
    "points": 3,
    "towns": [
     "Forsyth",
+    "Crawford",
     "Greensboro",
-    "Lafayette",
-    "Crawford"
+    "Lafayette"
    ],
    "slugs": [
     "town-creek-ga",
@@ -45896,9 +45896,9 @@
    "points": 3,
    "towns": [
     "Bowdon",
+    "Hoschton",
     "Locust Grove",
-    "Mcdonough",
-    "Hoschton"
+    "Mcdonough"
    ],
    "slugs": [
     "indian-creek-ga",
@@ -46094,10 +46094,10 @@
    "events": 0,
    "points": 3,
    "towns": [
-    "Watkinsville",
     "Arcade",
-    "Jefferson",
-    "Athens"
+    "Watkinsville",
+    "Athens",
+    "Jefferson"
    ],
    "slugs": [
     "middle-oconee-river-ga"
@@ -46175,8 +46175,8 @@
    "points": 3,
    "towns": [
     "Dublin",
-    "Milledgeville",
-    "Athens"
+    "Athens",
+    "Milledgeville"
    ],
    "slugs": [
     "oconee-river-ga"
@@ -46317,10 +46317,10 @@
    "events": 0,
    "points": 4,
    "towns": [
-    "Jackson",
-    "Villa Rica",
     "Cuthbert",
-    "Mcintyre"
+    "Jackson",
+    "Mcintyre",
+    "Villa Rica"
    ],
    "slugs": [
     "town-branch-ga",
@@ -47571,8 +47571,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Odum",
-    "Arlington"
+    "Arlington",
+    "Odum"
    ],
    "slugs": [
     "boggy-creek-ga"
@@ -48082,8 +48082,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Rockmart",
-    "Aragon"
+    "Aragon",
+    "Rockmart"
    ],
    "slugs": [
     "euharlee-creek-ga"
@@ -48207,8 +48207,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Demorest",
-    "Baldwin"
+    "Baldwin",
+    "Demorest"
    ],
    "slugs": [
     "hazel-creek-ga"
@@ -48498,8 +48498,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Scotland",
-    "Mcrae-Helena"
+    "Mcrae-Helena",
+    "Scotland"
    ],
    "slugs": [
     "little-ocmulgee-river-ga"
@@ -49173,8 +49173,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Vidalia",
-    "Lyons"
+    "Lyons",
+    "Vidalia"
    ],
    "slugs": [
     "swift-creek-ga"
@@ -49338,8 +49338,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Ty Ty",
-    "Omega"
+    "Omega",
+    "Ty Ty"
    ],
    "slugs": [
     "ty-ty-creek-ga"
@@ -49431,8 +49431,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Fort Oglethorpe",
-    "Chickamauga"
+    "Chickamauga",
+    "Fort Oglethorpe"
    ],
    "slugs": [
     "west-chickamauga-creek-ga"
@@ -49497,8 +49497,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Wadley",
-    "Davisboro"
+    "Davisboro",
+    "Wadley"
    ],
    "slugs": [
     "williamson-swamp-creek-ga"
@@ -59001,8 +59001,8 @@
    "towns": [
     "Rockingham",
     "Wadesboro",
-    "Mount Gilead",
-    "Ansonville"
+    "Ansonville",
+    "Mount Gilead"
    ],
    "slugs": [
     "pee-dee-river-nc"
@@ -59095,8 +59095,8 @@
    "points": 3,
    "towns": [
     "Pittsboro",
-    "Graham",
     "Burlington",
+    "Graham",
     "Reidsville"
    ],
    "slugs": [
@@ -59149,9 +59149,9 @@
    "points": 5,
    "towns": [
     "Spring Lake",
+    "Kenly",
     "Princeton",
-    "Sparta",
-    "Kenly"
+    "Sparta"
    ],
    "slugs": [
     "little-river-goldsboro-nc"
@@ -59211,8 +59211,8 @@
    "points": 3,
    "towns": [
     "Midland",
-    "Norwood",
     "Concord",
+    "Norwood",
     "Oakboro"
    ],
    "slugs": [
@@ -59346,8 +59346,8 @@
    "points": 3,
    "towns": [
     "Oxford",
-    "Warrenton",
-    "Enfield"
+    "Enfield",
+    "Warrenton"
    ],
    "slugs": [
     "fishing-creek-nc"
@@ -59594,9 +59594,9 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Lake Lure",
+    "Chimney Rock",
     "Forest City",
-    "Chimney Rock"
+    "Lake Lure"
    ],
    "slugs": [
     "broad-river-nc"
@@ -60133,8 +60133,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Newton",
-    "Maiden"
+    "Maiden",
+    "Newton"
    ],
    "slugs": [
     "clark-creek-nc"
@@ -60175,8 +60175,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Indian Trail",
-    "Hendersonville"
+    "Hendersonville",
+    "Indian Trail"
    ],
    "slugs": [
     "clear-creek-nc"
@@ -60217,8 +60217,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Yanceyville",
-    "Milton"
+    "Milton",
+    "Yanceyville"
    ],
    "slugs": [
     "country-line-creek-nc"
@@ -60336,8 +60336,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Mocksville",
-    "Harmony"
+    "Harmony",
+    "Mocksville"
    ],
    "slugs": [
     "dutchman-creek-mocksville-nc"
@@ -60519,8 +60519,8 @@
    "events": 0,
    "points": 1,
    "towns": [
-    "Sapphire",
-    "Cashiers"
+    "Cashiers",
+    "Sapphire"
    ],
    "slugs": [
     "horsepasture-river-nc"
@@ -60726,8 +60726,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Conover",
-    "Catawba"
+    "Catawba",
+    "Conover"
    ],
    "slugs": [
     "lyle-creek-nc"
@@ -60803,8 +60803,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Conover",
-    "Claremont"
+    "Claremont",
+    "Conover"
    ],
    "slugs": [
     "mclin-creek-nc"
@@ -60952,8 +60952,8 @@
    "events": 0,
    "points": 1,
    "towns": [
-    "Spruce Pine",
-    "Newland"
+    "Newland",
+    "Spruce Pine"
    ],
    "slugs": [
     "north-toe-river-nc"
@@ -61165,8 +61165,8 @@
    "events": 0,
    "points": 1,
    "towns": [
-    "Mooresboro",
-    "Forest City"
+    "Forest City",
+    "Mooresboro"
    ],
    "slugs": [
     "second-broad-river-nc"
@@ -61244,8 +61244,8 @@
    "events": 0,
    "points": 2,
    "towns": [
-    "Trenton",
-    "New Bern"
+    "New Bern",
+    "Trenton"
    ],
    "slugs": [
     "trent-river-nc"
@@ -65696,8 +65696,8 @@
    "events": 3,
    "points": 3,
    "towns": [
-    "Winston-Salem",
-    "Wilmington"
+    "Wilmington",
+    "Winston-Salem"
    ],
    "slugs": [
     "smith-creek-nc"
@@ -66207,8 +66207,8 @@
    "points": 3,
    "towns": [
     "Charlotte",
-    "Raleigh",
     "Garner",
+    "Raleigh",
     "Wake Forest"
    ],
    "slugs": [
@@ -67393,10 +67393,10 @@
    "events": 8,
    "points": 5,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "walnut-creek-nc"
@@ -67922,10 +67922,10 @@
    "events": 6,
    "points": 2,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "mine-creek-nc"
@@ -68051,10 +68051,10 @@
    "events": 5,
    "points": 3,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "big-branch-nc",
@@ -68732,10 +68732,10 @@
    "events": 4,
    "points": 3,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "perry-creek-nc"
@@ -69395,10 +69395,10 @@
    "events": 3,
    "points": 2,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "hare-snipe-creek-nc"
@@ -69515,10 +69515,10 @@
    "events": 3,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "pigeon-house-branch-nc"
@@ -69651,10 +69651,10 @@
    "events": 3,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "southwest-prong-beaverdam-creek-nc"
@@ -69859,8 +69859,8 @@
    "events": 2,
    "points": 2,
    "towns": [
-    "Winston-Salem",
-    "Greensboro"
+    "Greensboro",
+    "Winston-Salem"
    ],
    "slugs": [],
    "how": [],
@@ -70216,10 +70216,10 @@
    "events": 2,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [],
    "how": [],
@@ -71069,10 +71069,10 @@
    "events": 2,
    "points": 2,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [],
    "how": [],
@@ -71422,10 +71422,10 @@
    "events": 2,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [],
    "how": [],
@@ -71750,10 +71750,10 @@
    "events": 2,
    "points": 2,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "sycamore-creek-nc"
@@ -72515,10 +72515,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "bridges-branch-nc"
@@ -72584,10 +72584,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [],
    "how": [],
@@ -72761,10 +72761,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "cemetery-branch-nc"
@@ -73839,10 +73839,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "hatters-branch-nc"
@@ -74593,10 +74593,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "little-brier-creek-nc"
@@ -74707,10 +74707,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [],
    "how": [],
@@ -74775,10 +74775,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "lower-barton-creek-nc"
@@ -74863,10 +74863,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "mahlers-creek-nc"
@@ -74889,10 +74889,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "mango-creek-nc"
@@ -74915,10 +74915,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "marsh-creek-nc"
@@ -75562,10 +75562,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "poplar-creek-nc"
@@ -75700,10 +75700,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [],
    "how": [],
@@ -75787,10 +75787,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "rocky-creek-nc"
@@ -76085,10 +76085,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "simmons-branch-nc"
@@ -76666,10 +76666,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Raleigh",
     "Garner",
-    "Wake Forest",
-    "Knightdale"
+    "Knightdale",
+    "Raleigh",
+    "Wake Forest"
    ],
    "slugs": [
     "wildcat-branch-nc"
@@ -76866,10 +76866,10 @@
    "events": 4,
    "points": 1,
    "towns": [
-    "Marietta",
-    "Smyrna",
+    "Kennesaw",
     "Mableton",
-    "Kennesaw"
+    "Marietta",
+    "Smyrna"
    ],
    "slugs": [
     "butler-creek-kennesaw-ga"
@@ -76896,8 +76896,8 @@
    "events": 6,
    "points": 2,
    "towns": [
-    "Lawrenceville",
     "Buford",
+    "Lawrenceville",
     "Decatur",
     "Tucker"
    ],
@@ -76925,9 +76925,9 @@
    "events": 6,
    "points": 0,
    "towns": [
-    "Lawrenceville",
     "Buford",
-    "Griffin"
+    "Griffin",
+    "Lawrenceville"
    ],
    "slugs": [
     "shoal-creek-ga"
@@ -76980,8 +76980,8 @@
    "events": 4,
    "points": 1,
    "towns": [
-    "Gainesville",
-    "Cumming"
+    "Cumming",
+    "Gainesville"
    ],
    "slugs": [
     "lake-lanier-ga"
@@ -77062,10 +77062,10 @@
    "events": 4,
    "points": 1,
    "towns": [
-    "Marietta",
-    "Smyrna",
+    "Kennesaw",
     "Mableton",
-    "Kennesaw"
+    "Marietta",
+    "Smyrna"
    ],
    "slugs": [
     "noonday-creek-ga"
@@ -77166,8 +77166,8 @@
    "points": 1,
    "towns": [
     "Conyers",
-    "Lawrenceville",
     "Buford",
+    "Lawrenceville",
     "Lilburn"
    ],
    "slugs": [
@@ -77216,8 +77216,8 @@
    "events": 2,
    "points": 1,
    "towns": [
-    "Johns Creek",
     "Alpharetta",
+    "Johns Creek",
     "Roswell"
    ],
    "slugs": [
@@ -77309,8 +77309,8 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Stockbridge",
-    "Mcdonough"
+    "Mcdonough",
+    "Stockbridge"
    ],
    "slugs": [
     "pates-creek-ga"
@@ -77335,9 +77335,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [
     "rubes-creek-ga"
@@ -77456,10 +77456,10 @@
    "events": 51,
    "points": 5,
    "towns": [
-    "Tucker",
+    "Atlanta",
     "Decatur",
     "Stonecrest",
-    "Atlanta"
+    "Tucker"
    ],
    "slugs": [
     "north-fork-peachtree-creek-ga"
@@ -77529,10 +77529,10 @@
    "events": 32,
    "points": 5,
    "towns": [
-    "Tucker",
+    "Atlanta",
     "Decatur",
     "Stonecrest",
-    "Atlanta"
+    "Tucker"
    ],
    "slugs": [
     "south-fork-peachtree-creek-ga"
@@ -77606,8 +77606,8 @@
    "towns": [
     "Atlanta",
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [
     "sugar-creek-gresham-park-ga",
@@ -77636,9 +77636,9 @@
    "points": 5,
    "towns": [
     "Decatur",
-    "Tucker",
+    "Stone Mountain",
     "Stonecrest",
-    "Stone Mountain"
+    "Tucker"
    ],
    "slugs": [
     "snapfinger-creek-ga"
@@ -77662,10 +77662,10 @@
    "events": 15,
    "points": 2,
    "towns": [
-    "Stonecrest",
     "Decatur",
-    "Tucker",
-    "Lithonia"
+    "Lithonia",
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [
     "pole-bridge-creek-ga"
@@ -77750,9 +77750,9 @@
    "events": 10,
    "points": 3,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [
     "nickajack-creek-ga"
@@ -77779,10 +77779,10 @@
    "events": 10,
    "points": 2,
    "towns": [
+    "Athens",
     "Decatur",
-    "Tucker",
     "Stonecrest",
-    "Athens"
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -77827,10 +77827,10 @@
    "events": 9,
    "points": 1,
    "towns": [
+    "Atlanta",
     "Decatur",
-    "Tucker",
     "Stonecrest",
-    "Atlanta"
+    "Tucker"
    ],
    "slugs": [
     "doolittle-creek-ga"
@@ -77868,10 +77868,10 @@
    "events": 9,
    "points": 2,
    "towns": [
+    "Atlanta",
     "Decatur",
-    "Tucker",
     "Stonecrest",
-    "Atlanta"
+    "Tucker"
    ],
    "slugs": [
     "peavine-creek-ga"
@@ -77894,9 +77894,9 @@
    "events": 8,
    "points": 1,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -77940,9 +77940,9 @@
    "events": 8,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
     "Smyrna",
-    "Mableton",
     "Fair Oaks"
    ],
    "slugs": [
@@ -78006,9 +78006,9 @@
    "events": 7,
    "points": 1,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -78060,9 +78060,9 @@
    "events": 7,
    "points": 3,
    "towns": [
+    "Forest Park",
     "Jonesboro",
-    "Morrow",
-    "Forest Park"
+    "Morrow"
    ],
    "slugs": [
     "jester-creek-ga"
@@ -78143,9 +78143,9 @@
    "points": 2,
    "towns": [
     "Decatur",
-    "Tucker",
+    "Stone Mountain",
     "Stonecrest",
-    "Stone Mountain"
+    "Tucker"
    ],
    "slugs": [
     "barbashela-creek-ga"
@@ -78168,8 +78168,8 @@
    "events": 6,
    "points": 1,
    "towns": [
-    "Jonesboro",
-    "Conley"
+    "Conley",
+    "Jonesboro"
    ],
    "slugs": [
     "conley-creek-ga"
@@ -78193,8 +78193,8 @@
    "events": 6,
    "points": 0,
    "towns": [
-    "Johns Creek",
     "Alpharetta",
+    "Johns Creek",
     "Roswell",
     "Sandy Springs"
    ],
@@ -78237,9 +78237,9 @@
    "events": 6,
    "points": 2,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -78263,10 +78263,10 @@
    "events": 5,
    "points": 1,
    "towns": [
-    "Lawrenceville",
     "Buford",
-    "Norcross",
-    "Lilburn"
+    "Lawrenceville",
+    "Lilburn",
+    "Norcross"
    ],
    "slugs": [
     "beaver-ruin-creek-ga"
@@ -78293,9 +78293,9 @@
    "points": 0,
    "towns": [
     "Decatur",
-    "Tucker",
+    "Lithonia",
     "Stonecrest",
-    "Lithonia"
+    "Tucker"
    ],
    "slugs": [
     "honey-creek-ga"
@@ -78329,8 +78329,8 @@
    "events": 5,
    "points": 0,
    "towns": [
-    "Johns Creek",
     "Alpharetta",
+    "Johns Creek",
     "Roswell"
    ],
    "slugs": [
@@ -78364,9 +78364,9 @@
    "events": 5,
    "points": 2,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [
     "little-noonday-creek-ga"
@@ -78393,8 +78393,8 @@
    "events": 5,
    "points": 1,
    "towns": [
-    "Lawrenceville",
     "Buford",
+    "Lawrenceville",
     "Suwanee"
    ],
    "slugs": [
@@ -78428,10 +78428,10 @@
    "events": 5,
    "points": 0,
    "towns": [
-    "Johns Creek",
     "Alpharetta",
-    "Roswell",
-    "Atlanta"
+    "Atlanta",
+    "Johns Creek",
+    "Roswell"
    ],
    "slugs": [],
    "how": [],
@@ -78467,8 +78467,8 @@
    "events": 5,
    "points": 1,
    "towns": [
-    "Jonesboro",
-    "Forest Park"
+    "Forest Park",
+    "Jonesboro"
    ],
    "slugs": [],
    "how": [],
@@ -78489,10 +78489,10 @@
    "events": 3,
    "points": 1,
    "towns": [
-    "Marietta",
-    "Smyrna",
+    "Kennesaw",
     "Mableton",
-    "Kennesaw"
+    "Marietta",
+    "Smyrna"
    ],
    "slugs": [
     "proctor-creek-ga",
@@ -78532,8 +78532,8 @@
    "points": 1,
    "towns": [
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [
     "wolfpack-creek-ga"
@@ -78583,9 +78583,9 @@
    "points": 0,
    "towns": [
     "Decatur",
-    "Tucker",
+    "Dunwoody",
     "Stonecrest",
-    "Dunwoody"
+    "Tucker"
    ],
    "slugs": [
     "ball-mill-creek-ga"
@@ -78643,10 +78643,10 @@
    "events": 4,
    "points": 1,
    "towns": [
+    "Atlanta",
     "Decatur",
-    "Tucker",
     "Stonecrest",
-    "Atlanta"
+    "Tucker"
    ],
    "slugs": [
     "burnt-fork-creek-ga"
@@ -78681,9 +78681,9 @@
    "events": 4,
    "points": 2,
    "towns": [
+    "Mableton",
     "Marietta",
     "Smyrna",
-    "Mableton",
     "Austell"
    ],
    "slugs": [
@@ -78711,8 +78711,8 @@
    "points": 1,
    "towns": [
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [
     "cobbs-creek-ga"
@@ -78765,9 +78765,9 @@
    "events": 4,
    "points": 1,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -78788,10 +78788,10 @@
    "events": 4,
    "points": 2,
    "towns": [
+    "Chamblee",
     "Decatur",
-    "Tucker",
     "Stonecrest",
-    "Chamblee"
+    "Tucker"
    ],
    "slugs": [
     "henderson-mill-creek-ga"
@@ -78821,10 +78821,10 @@
    "events": 4,
    "points": 1,
    "towns": [
-    "Johns Creek",
     "Alpharetta",
-    "Roswell",
-    "Decatur"
+    "Decatur",
+    "Johns Creek",
+    "Roswell"
    ],
    "slugs": [],
    "how": [],
@@ -78868,9 +78868,9 @@
    "events": 4,
    "points": 3,
    "towns": [
-    "Perry",
     "Cleveland",
-    "Kathleen"
+    "Kathleen",
+    "Perry"
    ],
    "slugs": [
     "mossy-creek-ga",
@@ -78902,10 +78902,10 @@
    "events": 4,
    "points": 0,
    "towns": [
+    "Atlanta",
     "Decatur",
-    "Tucker",
     "Stonecrest",
-    "Atlanta"
+    "Tucker"
    ],
    "slugs": [
     "north-lake-ga"
@@ -78943,8 +78943,8 @@
    "points": 0,
    "towns": [
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [
     "panthers-branch-ga"
@@ -78978,9 +78978,9 @@
    "points": 1,
    "towns": [
     "Decatur",
-    "Tucker",
+    "Dunwoody",
     "Stonecrest",
-    "Dunwoody"
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -79077,9 +79077,9 @@
    "events": 4,
    "points": 1,
    "towns": [
+    "Mableton",
     "Marietta",
     "Smyrna",
-    "Mableton",
     "Atlanta"
    ],
    "slugs": [
@@ -79133,9 +79133,9 @@
    "events": 4,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [
     "sope-creek-ga"
@@ -79292,8 +79292,8 @@
    "points": 1,
    "towns": [
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -79334,9 +79334,9 @@
    "points": 1,
    "towns": [
     "Decatur",
-    "Tucker",
+    "Dunwoody",
     "Stonecrest",
-    "Dunwoody"
+    "Tucker"
    ],
    "slugs": [
     "kingsley-lake-ga"
@@ -79400,9 +79400,9 @@
    "points": 1,
    "towns": [
     "Decatur",
-    "Tucker",
+    "Lithonia",
     "Stonecrest",
-    "Lithonia"
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -79427,9 +79427,9 @@
    "events": 3,
    "points": 1,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -79495,8 +79495,8 @@
    "events": 3,
    "points": 0,
    "towns": [
-    "Lawrenceville",
-    "Buford"
+    "Buford",
+    "Lawrenceville"
    ],
    "slugs": [
     "pew-creek-ga"
@@ -79528,10 +79528,10 @@
    "events": 3,
    "points": 1,
    "towns": [
+    "Atlanta",
     "Decatur",
-    "Tucker",
     "Stonecrest",
-    "Atlanta"
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -79578,9 +79578,9 @@
    "events": 3,
    "points": 0,
    "towns": [
-    "Jonesboro",
+    "Atlanta",
     "College Park",
-    "Atlanta"
+    "Jonesboro"
    ],
    "slugs": [
     "sullivan-creek-ga"
@@ -79613,10 +79613,10 @@
    "events": 2,
    "points": 1,
    "towns": [
-    "Marietta",
-    "Smyrna",
+    "Acworth",
     "Mableton",
-    "Acworth"
+    "Marietta",
+    "Smyrna"
    ],
    "slugs": [
     "allatoona-creek-ga"
@@ -79643,8 +79643,8 @@
    "points": 1,
    "towns": [
     "Columbus",
-    "Ft. Benning",
-    "Fort Moore"
+    "Fort Moore",
+    "Ft. Benning"
    ],
    "slugs": [
     "armory-creek-ga"
@@ -79667,8 +79667,8 @@
    "events": 2,
    "points": 0,
    "towns": [
-    "Lawrenceville",
     "Buford",
+    "Lawrenceville",
     "Suwanee"
    ],
    "slugs": [
@@ -79705,10 +79705,10 @@
    "events": 2,
    "points": 2,
    "towns": [
-    "Lawrenceville",
     "Buford",
-    "Snellville",
-    "Grayson"
+    "Grayson",
+    "Lawrenceville",
+    "Snellville"
    ],
    "slugs": [
     "big-haynes-creek-ga"
@@ -79752,10 +79752,10 @@
    "events": 2,
    "points": 0,
    "towns": [
-    "Marietta",
-    "Smyrna",
+    "Austell",
     "Mableton",
-    "Austell"
+    "Marietta",
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -79843,9 +79843,9 @@
    "events": 2,
    "points": 1,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -79995,10 +79995,10 @@
    "events": 2,
    "points": 0,
    "towns": [
-    "Marietta",
-    "Smyrna",
+    "Kennesaw",
     "Mableton",
-    "Kennesaw"
+    "Marietta",
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -80021,9 +80021,9 @@
    "events": 2,
    "points": 1,
    "towns": [
+    "Mableton",
     "Marietta",
     "Smyrna",
-    "Mableton",
     "Kennesaw"
    ],
    "slugs": [],
@@ -80050,9 +80050,9 @@
    "events": 2,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [
     "noses-creek-ga"
@@ -80130,9 +80130,9 @@
    "events": 2,
    "points": 1,
    "towns": [
-    "Tucker",
     "Decatur",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -80172,9 +80172,9 @@
    "events": 2,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -80248,9 +80248,9 @@
    "events": 2,
    "points": 1,
    "towns": [
-    "Lawrenceville",
     "Buford",
-    "Duluth"
+    "Duluth",
+    "Lawrenceville"
    ],
    "slugs": [
     "singleton-creek-ga"
@@ -80330,9 +80330,9 @@
    "events": 2,
    "points": 0,
    "towns": [
-    "Tucker",
     "Decatur",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [
     "stone-mountain-creek-ga"
@@ -80384,10 +80384,10 @@
    "events": 2,
    "points": 0,
    "towns": [
-    "Marietta",
-    "Smyrna",
     "Mableton",
-    "Roswell"
+    "Marietta",
+    "Roswell",
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -80464,9 +80464,9 @@
    "events": 2,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
     "Smyrna",
-    "Mableton",
     "Roswell"
    ],
    "slugs": [
@@ -80529,9 +80529,9 @@
    "points": 0,
    "towns": [
     "Decatur",
-    "Tucker",
+    "Stone Mountain",
     "Stonecrest",
-    "Stone Mountain"
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -80622,8 +80622,8 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Jonesboro",
-    "Ellenwood"
+    "Ellenwood",
+    "Jonesboro"
    ],
    "slugs": [],
    "how": [],
@@ -80647,9 +80647,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -80684,9 +80684,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -80704,9 +80704,9 @@
    "events": 1,
    "points": 1,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -80813,8 +80813,8 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Lawrenceville",
     "Buford",
+    "Lawrenceville",
     "Norcross"
    ],
    "slugs": [
@@ -80838,8 +80838,8 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Lawrenceville",
-    "Buford"
+    "Buford",
+    "Lawrenceville"
    ],
    "slugs": [],
    "how": [],
@@ -80861,9 +80861,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -80881,8 +80881,8 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Johns Creek",
     "Alpharetta",
+    "Johns Creek",
     "Roswell"
    ],
    "slugs": [
@@ -80921,10 +80921,10 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Marietta",
-    "Smyrna",
+    "Acworth",
     "Mableton",
-    "Acworth"
+    "Marietta",
+    "Smyrna"
    ],
    "slugs": [
     "clark-creek-ga"
@@ -80964,9 +80964,9 @@
    "events": 1,
    "points": 1,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -81010,8 +81010,8 @@
    "points": 0,
    "towns": [
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -81066,8 +81066,8 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Lawrenceville",
-    "Buford"
+    "Buford",
+    "Lawrenceville"
    ],
    "slugs": [],
    "how": [],
@@ -81129,8 +81129,8 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Johns Creek",
     "Alpharetta",
+    "Johns Creek",
     "Roswell"
    ],
    "slugs": [],
@@ -81274,8 +81274,8 @@
    "points": 0,
    "towns": [
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -81294,8 +81294,8 @@
    "points": 0,
    "towns": [
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -81372,8 +81372,8 @@
    "points": 0,
    "towns": [
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -81409,8 +81409,8 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Lawrenceville",
-    "Buford"
+    "Buford",
+    "Lawrenceville"
    ],
    "slugs": [
     "ivy-creek-ga"
@@ -81520,8 +81520,8 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Lawrenceville",
-    "Buford"
+    "Buford",
+    "Lawrenceville"
    ],
    "slugs": [
     "level-creek-ga"
@@ -81568,8 +81568,8 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Stockbridge",
-    "Mcdonough"
+    "Mcdonough",
+    "Stockbridge"
    ],
    "slugs": [],
    "how": [],
@@ -81590,9 +81590,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -81710,8 +81710,8 @@
    "points": 0,
    "towns": [
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [
     "lucky-shoals-creek-ga"
@@ -81744,9 +81744,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -81811,9 +81811,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -81848,10 +81848,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Marietta",
-    "Smyrna",
+    "Kennesaw",
     "Mableton",
-    "Kennesaw"
+    "Marietta",
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -81966,10 +81966,10 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Johns Creek",
     "Alpharetta",
-    "Roswell",
-    "Atlanta"
+    "Atlanta",
+    "Johns Creek",
+    "Roswell"
    ],
    "slugs": [],
    "how": [],
@@ -81991,8 +81991,8 @@
    "points": 0,
    "towns": [
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [
     "panthers-branch-ga"
@@ -82028,10 +82028,10 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Marietta",
-    "Smyrna",
+    "Acworth",
     "Mableton",
-    "Acworth"
+    "Marietta",
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -82072,9 +82072,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -82095,9 +82095,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -82151,8 +82151,8 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Johns Creek",
     "Alpharetta",
+    "Johns Creek",
     "Roswell",
     "Sandy Springs"
    ],
@@ -82322,8 +82322,8 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Johns Creek",
     "Alpharetta",
+    "Johns Creek",
     "Roswell"
    ],
    "slugs": [
@@ -82350,9 +82350,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [
     "sewell-mill-creek-ga"
@@ -82409,9 +82409,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -82429,9 +82429,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -82453,8 +82453,8 @@
    "points": 0,
    "towns": [
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -82474,8 +82474,8 @@
    "towns": [
     "Atlanta",
     "Decatur",
-    "Tucker",
-    "Stonecrest"
+    "Stonecrest",
+    "Tucker"
    ],
    "slugs": [],
    "how": [],
@@ -82561,10 +82561,10 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Marietta",
-    "Smyrna",
+    "Kennesaw",
     "Mableton",
-    "Kennesaw"
+    "Marietta",
+    "Smyrna"
    ],
    "slugs": [
     "tate-creek-ga"
@@ -82604,9 +82604,9 @@
    "events": 1,
    "points": 1,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -82691,9 +82691,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -82725,10 +82725,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Marietta",
-    "Smyrna",
+    "Atlanta",
     "Mableton",
-    "Atlanta"
+    "Marietta",
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -82749,9 +82749,9 @@
    "events": 1,
    "points": 0,
    "towns": [
+    "Mableton",
     "Marietta",
-    "Smyrna",
-    "Mableton"
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -82786,10 +82786,10 @@
    "events": 1,
    "points": 0,
    "towns": [
-    "Marietta",
-    "Smyrna",
     "Mableton",
-    "Powder Springs"
+    "Marietta",
+    "Powder Springs",
+    "Smyrna"
    ],
    "slugs": [],
    "how": [],
@@ -82838,9 +82838,9 @@
    "events": 46,
    "points": 5,
    "towns": [
+    "Plant City",
     "Tampa",
-    "Temple Terrace",
-    "Plant City"
+    "Temple Terrace"
    ],
    "slugs": [
     "hillsborough-river-fl"
@@ -82884,10 +82884,10 @@
    "events": 26,
    "points": 5,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "pottsburg-creek-fl"
@@ -82909,10 +82909,10 @@
    "events": 22,
    "points": 5,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "ortega-river-fl"
@@ -82956,8 +82956,8 @@
    "events": 15,
    "points": 5,
    "towns": [
-    "Pensacola",
-    "Pace"
+    "Pace",
+    "Pensacola"
    ],
    "slugs": [
     "escambia-bay-fl"
@@ -82980,9 +82980,9 @@
    "points": 3,
    "towns": [
     "Madeira Beach",
-    "St. Petersburg",
+    "Redington Beach",
     "Seminole",
-    "Redington Beach"
+    "St. Petersburg"
    ],
    "slugs": [
     "boca-ciega-bay-fl"
@@ -83026,10 +83026,10 @@
    "events": 14,
    "points": 5,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "trout-river-fl"
@@ -83051,10 +83051,10 @@
    "events": 12,
    "points": 5,
    "towns": [
-    "Tampa",
-    "Ruskin",
+    "Apollo Beach",
     "Clearwater",
-    "Apollo Beach"
+    "Ruskin",
+    "Tampa"
    ],
    "slugs": [
     "tampa-bay-fl"
@@ -83076,10 +83076,10 @@
    "events": 10,
    "points": 4,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "ribault-river-fl"
@@ -83101,10 +83101,10 @@
    "events": 9,
    "points": 4,
    "towns": [
-    "Clearwater",
-    "Indian Rocks Beach",
     "Belleair",
-    "Belleair Beach"
+    "Belleair Beach",
+    "Clearwater",
+    "Indian Rocks Beach"
    ],
    "slugs": [
     "clearwater-harbor-fl"
@@ -83126,10 +83126,10 @@
    "events": 9,
    "points": 5,
    "towns": [
-    "St. Petersburg",
     "Clearwater",
     "Largo",
-    "Saint Petersburg"
+    "Saint Petersburg",
+    "St. Petersburg"
    ],
    "slugs": [
     "long-bayou-fl"
@@ -83153,10 +83153,10 @@
    "events": 9,
    "points": 2,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "mccoys-creek-fl"
@@ -83178,10 +83178,10 @@
    "events": 8,
    "points": 2,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "christopher-creek-fl"
@@ -83204,10 +83204,10 @@
    "events": 8,
    "points": 3,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "goodbys-creek-fl"
@@ -83252,8 +83252,8 @@
    "events": 7,
    "points": 1,
    "towns": [
-    "Callaway Florida",
     "Callaway",
+    "Callaway Florida",
     "Panama City"
    ],
    "slugs": [
@@ -83277,8 +83277,8 @@
    "points": 5,
    "towns": [
     "Fort Walton Beach",
-    "Santa Rosa Beach",
-    "Miramar Beach"
+    "Miramar Beach",
+    "Santa Rosa Beach"
    ],
    "slugs": [
     "choctawhatchee-bay-fl"
@@ -83322,8 +83322,8 @@
    "events": 7,
    "points": 3,
    "towns": [
-    "Mary Esther",
     "Fort Walton Beach",
+    "Mary Esther",
     "Pensacola"
    ],
    "slugs": [
@@ -83390,8 +83390,8 @@
    "events": 6,
    "points": 5,
    "towns": [
-    "Orlando",
-    "Kissimmee"
+    "Kissimmee",
+    "Orlando"
    ],
    "slugs": [
     "shingle-creek-fl"
@@ -83503,8 +83503,8 @@
    "events": 5,
    "points": 1,
    "towns": [
-    "Largo",
-    "Clearwater"
+    "Clearwater",
+    "Largo"
    ],
    "slugs": [
     "taylor-lake-fl"
@@ -83571,8 +83571,8 @@
    "events": 4,
    "points": 3,
    "towns": [
-    "Pinellas Park",
     "Clearwater",
+    "Pinellas Park",
     "St Petersburg"
    ],
    "slugs": [
@@ -83617,9 +83617,9 @@
    "events": 4,
    "points": 4,
    "towns": [
-    "Tampa",
-    "Jacksonville",
     "Fruit Cove",
+    "Jacksonville",
+    "Tampa",
     "Yulee"
    ],
    "slugs": [
@@ -83642,10 +83642,10 @@
    "events": 3,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "craig-creek-fl"
@@ -83999,8 +83999,8 @@
    "events": 2,
    "points": 2,
    "towns": [
-    "Niceville",
-    "Fort Walton Beach"
+    "Fort Walton Beach",
+    "Niceville"
    ],
    "slugs": [
     "rocky-bayou-fl"
@@ -84767,10 +84767,10 @@
    "events": 57,
    "points": 7,
    "towns": [
-    "St. Petersburg",
     "Delray Beach",
+    "Indian Rocks Beach",
     "Saint Petersburg",
-    "Indian Rocks Beach"
+    "St. Petersburg"
    ],
    "slugs": [],
    "how": [],
@@ -84812,10 +84812,10 @@
    "events": 22,
    "points": 4,
    "towns": [
-    "Largo",
     "Clearwater",
-    "St. Petersburg",
-    "Saint Petersburg"
+    "Largo",
+    "Saint Petersburg",
+    "St. Petersburg"
    ],
    "slugs": [
     "mckay-creek-fl"
@@ -84838,10 +84838,10 @@
    "events": 11,
    "points": 5,
    "towns": [
-    "West Palm Beach",
-    "Seminole",
+    "North Palm Beach",
     "Palm Beach Gardens",
-    "North Palm Beach"
+    "Seminole",
+    "West Palm Beach"
    ],
    "slugs": [],
    "how": [],
@@ -84862,10 +84862,10 @@
    "events": 11,
    "points": 3,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "strawberry-creek-fl"
@@ -84901,9 +84901,9 @@
    "events": 9,
    "points": 3,
    "towns": [
+    "Fruit Cove",
     "Jacksonville",
     "Jupiter",
-    "Fruit Cove",
     "Yulee"
    ],
    "slugs": [
@@ -84934,10 +84934,10 @@
    "events": 9,
    "points": 4,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "little-pottsburg-creek-fl"
@@ -84970,10 +84970,10 @@
    "events": 8,
    "points": 3,
    "towns": [
-    "St. Petersburg",
-    "Saint Petersburg",
     "Kenneth City",
-    "Pinellas Park"
+    "Pinellas Park",
+    "Saint Petersburg",
+    "St. Petersburg"
    ],
    "slugs": [],
    "how": [],
@@ -85118,10 +85118,10 @@
    "events": 6,
    "points": 5,
    "towns": [
-    "Titusville",
-    "Vero Beach",
     "Melbourne",
-    "Melbourne Beach"
+    "Melbourne Beach",
+    "Titusville",
+    "Vero Beach"
    ],
    "slugs": [],
    "how": [],
@@ -85210,10 +85210,10 @@
    "events": 6,
    "points": 3,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "wills-branch-fl"
@@ -85368,10 +85368,10 @@
    "events": 5,
    "points": 2,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "wills-branch-fl"
@@ -85431,10 +85431,10 @@
    "events": 4,
    "points": 2,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "ginhouse-creek-fl"
@@ -85609,10 +85609,10 @@
    "events": 4,
    "points": 3,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "moncrief-creek-fl"
@@ -85753,8 +85753,8 @@
    "events": 4,
    "points": 2,
    "towns": [
-    "Panama City Beach",
-    "Panama City"
+    "Panama City",
+    "Panama City Beach"
    ],
    "slugs": [],
    "how": [],
@@ -85821,8 +85821,8 @@
    "events": 3,
    "points": 2,
    "towns": [
-    "Fort Walton Beach",
-    "Davenport"
+    "Davenport",
+    "Fort Walton Beach"
    ],
    "slugs": [],
    "how": [],
@@ -85863,10 +85863,10 @@
    "events": 3,
    "points": 2,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "cormorant-branch-fl"
@@ -85981,10 +85981,10 @@
    "events": 3,
    "points": 2,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [],
    "how": [],
@@ -86005,10 +86005,10 @@
    "events": 3,
    "points": 2,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "little-trout-river-fl"
@@ -86099,8 +86099,8 @@
    "events": 3,
    "points": 2,
    "towns": [
-    "Jacksonville",
-    "Clearwater"
+    "Clearwater",
+    "Jacksonville"
    ],
    "slugs": [
     "long-branch-fl",
@@ -86229,10 +86229,10 @@
    "events": 3,
    "points": 5,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "saint-johns-river-fl"
@@ -86255,9 +86255,9 @@
    "events": 3,
    "points": 2,
    "towns": [
+    "Clearwater",
     "Seminole",
-    "St. Petersburg",
-    "Clearwater"
+    "St. Petersburg"
    ],
    "slugs": [],
    "how": [],
@@ -86435,10 +86435,10 @@
    "events": 2,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [],
    "how": [],
@@ -87187,10 +87187,10 @@
    "events": 2,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "mount-pleasant-creek-fl"
@@ -87520,10 +87520,10 @@
    "events": 2,
    "points": 2,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "seaton-creek-fl"
@@ -87553,10 +87553,10 @@
    "events": 2,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "silversmith-creek-fl"
@@ -88138,10 +88138,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [],
    "how": [],
@@ -88162,10 +88162,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [],
    "how": [],
@@ -88248,10 +88248,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "brandy-branch-fl"
@@ -89409,10 +89409,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "flora-branch-fl"
@@ -90089,10 +90089,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [],
    "how": [],
@@ -90577,10 +90577,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "little-cedar-creek-fl"
@@ -90722,10 +90722,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [],
    "how": [],
@@ -90930,10 +90930,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [],
    "how": [],
@@ -91659,10 +91659,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "rushing-branch-fl"
@@ -91939,10 +91939,10 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "Jacksonville",
     "Fruit Cove",
-    "Yulee",
-    "Ponte Vedra Beach"
+    "Jacksonville",
+    "Ponte Vedra Beach",
+    "Yulee"
    ],
    "slugs": [
     "sixmile-creek-jacksonville-fl"
@@ -91997,8 +91997,8 @@
    "events": 1,
    "points": 1,
    "towns": [
-    "St. Petersburg",
-    "Saint Petersburg"
+    "Saint Petersburg",
+    "St. Petersburg"
    ],
    "slugs": [],
    "how": [],

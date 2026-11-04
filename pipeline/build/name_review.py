@@ -1,6 +1,7 @@
 """Candidate names of private individuals in quoted source text, for the owner to review.
 
     cd pipeline && .venv/bin/python -m build.name_review
+    cd pipeline && .venv/bin/python -m build.name_review --standing      (the hourly refresh, after the export)
 
 Reads data/build/events/*.json and takes each record as the export publishes it (export.build.
 public_event: personal keys, emails, phones and staff names already scrubbed). Every string in raw and
@@ -15,6 +16,12 @@ place, water, organisation, street or header words, or one after Mr / Mrs / Ms /
                                verdict: null for the owner to decide; "allow" / "block" when the name
                                is already on data/name-allowlist.json / data/build/name-blocklist.json.
   data/build/name-review.md    counts by source, the names removed, the candidates to review.
+
+--standing (scripts/refresh-data.sh, right after the export; 2026-11-04 Florida name-review review, point (e)): the same
+files, and on standard output counts only, never a name (the Actions log of a public repository is public): the
+candidates still to review (not removed by the export, no verdict) and how many of them the previous run's saved
+data/build/name-review.json did not hold, with a GitHub ::warning:: line when there are new ones. It never blocks the
+publish: the refresh goes on whatever it finds or however it fails, and a failure prints the exception's type only.
 
 The owner acts through the lists: a false positive goes into data/name-allowlist.json, a name to
 remove everywhere into data/build/name-blocklist.json; the export applies both. These files are internal
@@ -173,11 +180,62 @@ def markdown(rep: dict, top: int = 150) -> str:
     return "\n".join(lines) + "\n"
 
 
+def to_review(rep: dict | None) -> set[str]:
+    """The candidates of a review still to review (not removed by the export, no verdict), normalised."""
+    return {R._norm(o["candidate"]) for o in (rep or {}).get("candidates") or []
+            if isinstance(o, dict) and o.get("candidate") and not o.get("auto_redact") and o.get("verdict") is None}
+
+
+def standing_lines(previous: dict | None, rep: dict) -> list[str]:
+    """The log lines of a standing review: counts only, and a ::warning:: when candidates to review are new against the
+    previous run's saved review (all of them when none was saved)."""
+    t, now = rep["totals"], to_review(rep)
+    lines = [f"name review: {t['candidates']} candidates in {t['records']} records; {t['auto_redacted_candidates']} "
+             f"removed by the export; {len(now)} to review"]
+    if previous is None:
+        lines[0] += "; no earlier review in the saved state"
+        if now:
+            lines.append(f"::warning::name review: {len(now)} candidate names to review and no earlier review saved; "
+                         f"details in the private state (data/build/name-review.json)")
+        return lines
+    new = now - to_review(previous)
+    lines[0] += f", {len(new)} new since the last run"
+    if new:
+        lines.append(f"::warning::name review: {len(new)} new candidate names to review since the last run "
+                     f"({len(now)} in all); details in the private state (data/build/name-review.json)")
+    return lines
+
+
+def standing(events_dir: Path, out_json: Path = OUT_JSON, out_md: Path = OUT_MD, top: int = 150) -> int:
+    """--standing: the review written under data/build, counts printed, never a name; 1 on a failure (the type of the
+    exception only: its text could quote a record)."""
+    try:
+        try:
+            previous = json.loads(out_json.read_text())
+        except (OSError, ValueError):
+            previous = None
+        rep = review(load(events_dir))
+        write_json(out_json, rep)
+        out_md.write_text(markdown(rep, top))
+        lines = standing_lines(previous if isinstance(previous, dict) else None, rep)
+    except Exception as ex:             # never a traceback in a public log
+        print(f"name review failed ({type(ex).__name__}); the publish is not affected")
+        print(f"::warning::name review failed ({type(ex).__name__}); the publish is not affected")
+        return 1
+    print("\n".join(lines))
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--events-dir", type=Path, default=EVENTS_DIR)
     ap.add_argument("--top", type=int, default=150, help="candidates to list in the markdown summary")
+    ap.add_argument("--standing", action="store_true",
+                    help="the hourly refresh's review: counts only on standard output, a ::warning:: for new candidates "
+                         "to review against the previous saved review, never a name or a traceback")
     a = ap.parse_args(argv)
+    if a.standing:
+        return standing(a.events_dir, top=a.top)
     rep = review(load(a.events_dir))
     write_json(OUT_JSON, rep)
     OUT_MD.write_text(markdown(rep, a.top))
