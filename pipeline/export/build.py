@@ -847,7 +847,7 @@ def public_rain(block: dict) -> dict:
     (each with its pieces and rainfall record). Build notes stay home."""
     if not block or not block.get("enabled"):
         return {"enabled": False, "label": (block or {}).get("label")}
-    keep = ("enabled", "rule", "label", "tail_hours", "notice_suppress_hours", "rainfall", "forecast", "site_flags",
+    keep = ("enabled", "rule", "label", "label_by_basis", "tail_hours", "notice_suppress_hours", "rainfall", "forecast", "site_flags",
             "counts", "permits", "episodes")
     out = {k: block.get(k) for k in keep}
     out["thresholds_built"] = (block.get("thresholds") or {}).get("built")
@@ -1084,7 +1084,9 @@ def active_entries(active_now: dict, by_event: dict, rain_block: dict | None = N
             rain = ep.get("rain") or {}
             pt = rain.get("point") or [None, None]
             active.append({"kind": "rain_likely", "event_id": eid, "event_type": None, "status": None,
-                           "label": status_mod.RULES["rain_likely"][1], "state": ep.get("state"),
+                           # "Discharge possible: ..." where only the site's default amount applies (trigger_basis)
+                           "label": ep.get("label") or status_mod.RULES["rain_likely"][1],
+                           "trigger_basis": ep.get("trigger_basis"), "state": ep.get("state"),
                            "started_at": ep.get("start"), "ended_at": None, "until": ep.get("end"),
                            "water_slugs": sorted({r["water"] for r in rs if r.get("water")}),
                            "discharger_name": ep.get("discharger_name"), "discharger_id": ep.get("discharger_id"),
@@ -1407,7 +1409,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                "red_rule": w.get("red_rule"), "yellow_rule": w.get("yellow_rule"), "rule_applied": w.get("rule_applied"),
                "reaches": [{"key": k, **{f: (st.get("reaches") or {}).get(k, {}).get(f)
                                          for f in ("status", "river", "permit", "outfall", "length_km", "cut_reason", "active",
-                                                   "rain_likely")}}
+                                                   "rain_likely", "rain_trigger_basis")}}
                            for k in w.get("reaches") or []],
                # radar rainfall over the permittees discharging here, their thresholds, the forecast
                # (build/rain_likely.py); null when no CSO permittee discharges to this water
@@ -1447,7 +1449,10 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
             "stale": w["stale"], "stale_since": min((s["last_ok_at"] for s in w["stale_sources"] if s.get("last_ok_at")), default=None),
             "fixture_only": w.get("fixture_only", False), "extra": bool(rec.get("extra")),
             # the colour comes from "Discharge likely: heavy rain, no report received" (its own legend entry)
-            "rain_likely": bool(w["reasons"]) and w["reasons"][0]["rule"] == "rain_likely"}})
+            "rain_likely": bool(w["reasons"]) and w["reasons"][0]["rule"] == "rain_likely",
+            # which amount set it (operator, state, default: "Discharge possible" for the default), else absent
+            **({"rain_trigger_basis": w["reasons"][0].get("trigger_basis")}
+               if w["reasons"] and w["reasons"][0]["rule"] == "rain_likely" else {})}})
     # waters.json is the index: per-water event ids and outfalls are in waters/<slug>.json
     index_rows = [{**{k: v for k, v in r.items() if k not in ("events", "outfalls", "provisional_outfalls")},
                    "outfall_count": len(r["outfalls"])}
@@ -1650,6 +1655,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         "active_events": len(active),
         "csv_files": csv_files,
         "rain_likely": {"enabled": bool(rain_block.get("enabled")), "label": status_mod.RULES["rain_likely"][1],
+                        "label_by_basis": rain_block.get("label_by_basis"),
                         "rules_ref": "rain_likely", "file": "rain.json",
                         "rainfall_valid_time": (rain_block.get("rainfall") or {}).get("valid_time"),
                         "rainfall_stale": (rain_block.get("rainfall") or {}).get("stale"),

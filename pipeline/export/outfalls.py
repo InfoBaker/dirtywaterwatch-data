@@ -14,7 +14,8 @@ its outfalls with it), every outfall with coordinates or a water record, with or
    the water: geometry+name, geometry, name_only, none), rain}
 
 `rain` is null or the operator's "discharge likely" row of out/rain.json: {status ("likely" | "suppressed" |
-"below" | "no_reading"), rain_24h_in, threshold_in, threshold_kind, valid_time, episode}; only on open combined
+"below" | "no_reading"), rain_24h_in, threshold_in, threshold_kind, trigger_basis ("operator" | "state" | "default"),
+valid_time, episode}; only on open combined
 sewer outfalls (closed, plant and "reported" outfalls never drive the caution).
 
 Provisional places from the overflow reports (data/build/outfalls-reported.json, docs/national-outfalls.md: kind
@@ -45,7 +46,7 @@ from common import (BUILD_DIR, DATA_DIR, OUT_DIR, PROVISIONAL_FIELDS, discharger
 
 COORD_DIGITS = 5                    # about 1 m, as the export's other files
 MARK_FIELDS = ("status", "days", "events", "month", "received_at", "label", "event_id")
-RAIN_FIELDS = ("status", "rain_24h_in", "threshold_in", "threshold_kind", "valid_time", "episode")
+RAIN_FIELDS = ("status", "rain_24h_in", "threshold_in", "threshold_kind", "trigger_basis", "valid_time", "episode")
 SOURCE_BY_KIND = {"cso": "echo", "plant": "epa-icis-npdes"}   # a row without its own source_id
 
 
@@ -89,7 +90,8 @@ def permit_index(dischargers: list[dict]) -> dict[str, str]:
 def rain_of(permit_row: dict | None) -> dict | None:
     if not isinstance(permit_row, dict):
         return None
-    return {k: permit_row.get(k) for k in RAIN_FIELDS}
+    from build.rain_likely import basis_of          # a rain.json written before the basis was carried: worked out
+    return {**{k: permit_row.get(k) for k in RAIN_FIELDS}, "trigger_basis": basis_of(permit_row)}
 
 
 def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | None = None, canon=None,

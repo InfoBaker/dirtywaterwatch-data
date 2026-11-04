@@ -174,6 +174,7 @@ def test_out_outfalls_rows_follow_the_contract_with_or_without_a_water_record_an
                          "permittee", "state", "lat", "lon", "receiving_water", "water_slugs", "water_match", "rain"]
     assert tri["discharger_id"] == "pa-pa0023736" and tri["water_slugs"] == ["susquehanna-river-pa"]
     assert tri["rain"] == {"status": "likely", "rain_24h_in": 1.3, "threshold_in": 0.1, "threshold_kind": "site_default",
+                           "trigger_basis": "default",
                            "valid_time": "2026-11-03T20:00:00Z", "episode": "rain_likely:PA0023736:20261103T16Z"}
     assert by[("PA0023736", "003")]["water_slugs"] == [] and by[("PA0023736", "003")]["lat"] == 41.9   # still exported
     assert by[("PA0023736", "101")]["outfall_kind"] == "plant" and by[("PA0023736", "101")]["rain"] is None

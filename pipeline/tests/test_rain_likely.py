@@ -340,3 +340,164 @@ def test_history_aligns_hours_and_fills_the_implied_earlier_windows():
     arr2 = h2["permits"][PERMIT]
     assert arr2[-1] == 0.5 and arr2[-3] == 0.4 and arr2[-2] is None and arr2[-27] == 0.6   # shifted by 2 hours
     assert arr2[-25] == 0.4                                     # an empty implied window is filled
+
+
+# ---------------------------------------------------------------- the label follows the trigger's basis
+
+POSSIBLE = "Discharge possible: heavy rain, no report received"
+LIKELY = "Discharge likely: heavy rain, no report received"
+STATE_RULES = {**RAIN_RULES, "rain_likely": {**RAIN_RULES["rain_likely"], "fallback": {
+    **RAIN_RULES["rain_likely"]["fallback"],
+    "by_state": {**RAIN_RULES["rain_likely"]["fallback"]["by_state"],
+                 "MA": {"inches": 0.3, "basis": "a published trigger", "source": "the state"}}}}}
+
+
+def _basis_world(case: str):
+    """The same storm at the same permittee, its amount from its own history, its state's trigger or the default."""
+    w = rain_world(values=wet(range(0, 6)), threshold=None if case != "operator" else 0.3)
+    if case == "state":
+        w["rules"] = STATE_RULES
+    return w
+
+
+@pytest.mark.parametrize("case,label,kind", [("operator", LIKELY, "operator_history"), ("state", LIKELY, "state"),
+                                             ("default", POSSIBLE, "site_default")])
+def test_the_label_follows_the_basis_of_the_amount(case, label, kind):
+    st, _ = S.build(now=NOW, write=False, **_basis_world(case))
+    pond, river = st["waters"]["other-pond-ma"], st["waters"]["test-river-ma"]
+    r = pond["reasons"][0]
+    # the colour, the rule id and the tail do not change; the label and the basis follow the amount
+    assert pond["status"] == "yellow" and r["rule"] == "rain_likely" and r["status"] == "yellow"
+    assert r["rule_applied"]["tail_hours"] == 48 and r["rule_applied"]["trigger_basis"] == case
+    assert r["label"] == label and r["trigger_basis"] == case and r["short"].startswith(label)
+    assert r["rain"]["trigger_basis"] == case and r["rain"]["label"] == label and r["rain"]["threshold_kind"] == kind
+    assert ("(this site's default)" in r["short"]) is (case == "default")
+    assert pond["reason_short"].startswith(label) and river["reasons"][0]["trigger_basis"] == case
+    assert pond["rain"]["trigger_basis"] == case and pond["rain"]["label"] == label
+    assert pond["rain"]["permits"][0]["trigger_basis"] == case
+    blk = st["rain_likely"]
+    assert blk["permits"][PERMIT]["trigger_basis"] == case and blk["permits"][PERMIT]["label"] == label
+    ep = next(iter(blk["episodes"].values()))
+    assert ep["trigger_basis"] == case and ep["label"] == label
+    assert blk["label_by_basis"] == {"operator": LIKELY, "state": LIKELY, "default": POSSIBLE}
+    assert st["reaches"]["MA0101613-13"]["rain_trigger_basis"] == case
+    assert st["rules"]["rain_likely"]["label"] == LIKELY                   # the rule's own label stays
+    assert st["rules"]["rain_likely"]["label_by_basis"]["default"] == POSSIBLE
+
+
+def test_threshold_for_names_the_basis_and_a_state_entry_can_apply_the_default():
+    rules = {**RAIN_RULES, "rain_likely": {**RAIN_RULES["rain_likely"], "fallback": {
+        **RAIN_RULES["rain_likely"]["fallback"], "by_state": {
+            "RI": {"inches": 0.5, "basis": "RIDEM", "source": "ridem"},
+            "MD": {"inches": 0.1, "basis": "this site's stricter default", "source": "mde", "trigger_basis": "default"}}}}}
+    assert RL.threshold_for("RI0100315", "RI", {}, rules)["trigger_basis"] == "state"
+    assert RL.threshold_for("CT0100056", "CT", {}, rules)["trigger_basis"] == "default"
+    md = RL.threshold_for("MD0021598", "MD", {}, rules)
+    assert md["trigger_basis"] == "default" and md["kind"] == "state" and md["rule"] == "rain_likely.fallback.by_state.MD"
+    assert RL.threshold_for(PERMIT, "MA", rain_input({})["thresholds"], rules)["trigger_basis"] == "operator"
+    # the operator's own history wins over its state's entry, whatever that entry's basis
+    assert RL.threshold_for(PERMIT, "MA", rain_input({})["thresholds"], STATE_RULES)["trigger_basis"] == "operator"
+    md_state = {**rules, "rain_likely": {**rules["rain_likely"], "fallback": {**rules["rain_likely"]["fallback"], "by_state": {
+        "MA": {"inches": 0.1, "basis": "the site's default", "source": "s", "trigger_basis": "default"}}}}}
+    assert RL.threshold_for(PERMIT, "MA", rain_input({})["thresholds"], md_state)["trigger_basis"] == "operator"
+    assert RL.label_for("default", rules) == POSSIBLE and RL.label_for("state", rules) == LIKELY
+    assert RL.label_for("operator", rules) == LIKELY and RL.label_for(None, rules) == LIKELY
+    assert RL.strongest_basis(["default", "state"]) == "state" and RL.strongest_basis(["default"]) == "default"
+    assert RL.strongest_basis([]) is None
+
+
+def test_a_water_with_a_likely_and_a_possible_operator_reads_likely():
+    w = _basis_world("operator")
+    rain = w["rain"]
+    other = "MA0100552"
+    rain["rainfall"]["permits"][other] = {**rain["rainfall"]["permits"][PERMIT], "name": "Other Sewer"}
+    rain["history"]["permits"][other] = list(rain["history"]["permits"][PERMIT])
+    st, _ = S.build(now=NOW, write=False, **w)
+    pond = st["waters"]["other-pond-ma"]
+    assert {r["trigger_basis"] for r in pond["reasons"]} == {"operator", "default"}
+    assert pond["rain"]["trigger_bases"] == ["operator", "default"] and pond["rain"]["trigger_basis"] == "operator"
+    assert pond["rain"]["label"] == LIKELY
+
+
+def test_a_mixed_water_lists_its_strongest_rain_caution_first():
+    """reasons[0] sets the water's reason_short, the overlay's rain_trigger_basis and the page's "About this status"
+    line: with an operator's own amount and the site default meeting on one water, all read "likely" as the badge
+    and the water's rain context do (review 2026-11-04, P2-1)."""
+    w = _basis_world("operator")
+    rain = w["rain"]
+    other = "MA0100552"                                 # no history: the default; its permit sorts first
+    rain["rainfall"]["permits"][other] = {**rain["rainfall"]["permits"][PERMIT], "name": "Other Sewer"}
+    rain["history"]["permits"][other] = list(rain["history"]["permits"][PERMIT])
+    st, _ = S.build(now=NOW, write=False, **w)
+    pond = st["waters"]["other-pond-ma"]
+    assert [r["trigger_basis"] for r in pond["reasons"]] == ["operator", "default"]
+    assert pond["reason_short"].startswith(LIKELY) and pond["rain"]["trigger_basis"] == "operator"
+    # the order is the only change: colour, rule and windows as before
+    assert {(r["status"], r["rule"]) for r in pond["reasons"]} == {("yellow", "rain_likely")}
+
+
+def test_the_export_carries_the_basis_and_the_label():
+    st, _ = S.build(now=NOW, write=False, **_basis_world("default"))
+    active_now = {}
+    for slug, w in st["waters"].items():
+        for r in w["reasons"]:
+            active_now.setdefault(r["event_id"], []).append({"water": slug, "status": r["status"], "rule": r["rule"],
+                                                             "from": r["from"], "until": r["until"],
+                                                             "rule_applied": r["rule_applied"], "rain": r.get("rain"),
+                                                             "trigger_basis": r.get("trigger_basis")})
+    rows = X.publicize(X.active_entries(active_now, {}, st["rain_likely"]))
+    assert rows[0]["label"] == POSSIBLE and rows[0]["trigger_basis"] == "default"
+    assert rows[0]["rain"]["trigger_basis"] == "default" and rows[0]["reasons"][0]["trigger_basis"] == "default"
+    pub = X.publicize(X.public_rain(st["rain_likely"]))
+    assert pub["label_by_basis"]["default"] == POSSIBLE
+    assert pub["permits"][PERMIT]["trigger_basis"] == "default" and pub["permits"][PERMIT]["label"] == POSSIBLE
+    assert {e["trigger_basis"] for e in pub["episodes"].values()} == {"default"}
+    assert X.internal_wording(pub) == []
+    from export import outfalls as XO
+    assert XO.rain_of(pub["permits"][PERMIT])["trigger_basis"] == "default"
+
+
+def test_coverage_says_possible_where_only_the_default_applies():
+    row = {"threshold_basis": "published", "threshold_in": 0.1, "rainfall_read": "grid"}
+    cov = RL.caution_coverage({"enabled": True, "rainfall": {"read": "grid"}, "permits": {
+        "MI0022802": {**row, "state": "MI", "threshold_kind": "site_default", "trigger_basis": "default", "waters": ["a-mi"]},
+        "MD0021598": {**row, "state": "MD", "threshold_kind": "state", "trigger_basis": "default", "waters": ["b-md"]},
+        "MA0101613": {**row, "state": "MA", "threshold_basis": "history", "threshold_in": 0.23, "waters": ["c-ma"]},
+        "MA0100552": {**row, "state": "MA", "threshold_kind": "site_default", "trigger_basis": "default", "waters": ["d-ma"]},
+        "RI0100315": {**row, "state": "RI", "threshold_in": 0.5, "threshold_kind": "state", "trigger_basis": "state",
+                      "waters": ["e-ri"]}}})
+    assert cov["MI"]["sentence"].startswith('The "discharge possible" caution covers 1 combined sewer operator')
+    assert "this site's default amount of 0.1 in" in cov["MI"]["sentence"] and cov["MI"]["trigger_bases"] == ["default"]
+    assert cov["MD"]["sentence"].startswith('The "discharge possible" caution') and cov["MD"]["threshold_kind"] == "site_default"
+    assert cov["MA"]["sentence"].startswith('The "discharge likely" or "discharge possible" caution covers 2')
+    assert cov["MA"]["trigger_bases"] == ["operator", "default"]
+    assert cov["RI"]["sentence"].startswith('The "discharge likely" caution') and "published amount of 0.5 in" in cov["RI"]["sentence"]
+
+
+def test_rules_json_labels_by_basis_and_states_the_defaults_cost_with_its_sources():
+    rl = json.loads((DATA_DIR / "rules.json").read_text())["rain_likely"]
+    assert rl["label"] == LIKELY
+    assert rl["label_by_basis"] == {"operator": LIKELY, "state": LIKELY, "default": POSSIBLE}
+    assert RL.labels(json.loads((DATA_DIR / "rules.json").read_text())) == rl["label_by_basis"]
+    assert "discharge possible" in rl["doc"] and "discharge likely" in rl["doc"] and "0.1 inch" in rl["doc"]
+    assert "discharge possible" in rl["label_by_basis_rationale"]
+    d = rl["fallback"]["default"]
+    assert d["inches"] == 0.1 and d["trigger_basis"] == "default"
+    cost = d["cost_rationale"]
+    for figure in ("July 2022 to October 2026", "2001 to October 2026", "about 3 percent", "1 percent",
+                   "96 to 97 percent", "about half", "from 50 to 34 percent", "nine overflows in ten"):
+        assert figure in cost, figure
+    # which record each figure rests on (review 2026-11-04, P3-1): the under-0.1-inch shares are the operators' own rain
+    # figures, the 96 to 97 percent and the quiet days are radar, and the 50 to 34 percent cut is Massachusetts only
+    assert "By the operators' own rain figures, overflows that began with less than 0.1 inch" in cost
+    assert "by radar, the 0.1 inch default would have flagged 96 to 97 percent" in cost
+    assert "In Massachusetts, the operators' own amounts cut those quiet days from 50 to 34 percent" in cost
+    for src in ("MassDEP Sewage Notification Data System", "Verified Data Reports", "Michigan EGLE", "MiEnviro",
+                "NOAA MRMS"):
+        assert src in d["cost_source"], src
+    by = rl["fallback"]["by_state"]
+    assert by["MD"]["trigger_basis"] == "default" and by["DC"]["trigger_basis"] == "default"
+    assert all(by[s].get("trigger_basis") in (None, "state") for s in ("RI", "ME", "NY"))
+    from export.build import INTERNAL_WORDING
+    for text in (rl["doc"], rl["label_by_basis_rationale"], cost, d["cost_source"]):
+        assert not INTERNAL_WORDING.search(text)

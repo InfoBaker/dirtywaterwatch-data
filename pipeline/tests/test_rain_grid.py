@@ -457,6 +457,7 @@ def test_coverage_names_the_grid_for_radar_states_and_leaves_new_jersey_as_it_wa
     assert "against the published amount of 0.5 in" in md["sentence"]
     assert pa["covered"] and "1 of the 2" in pa["sentence"] and pa["sources"] == [RL.SOURCE_ID]
     assert "threshold_in" not in ma and "own threshold (or a published one)" in ma["sentence"]
-    assert set(nj) == {"covered", "methods", "permits", "waters", "sources", "cso_permits", "sentence"}
+    assert set(nj) == {"covered", "methods", "permits", "waters", "sources", "cso_permits", "sentence", "trigger_bases"}
+    assert nj["trigger_bases"] == ["operator"] and md["trigger_bases"] == ["state"] and ma["trigger_bases"] == ["operator", "state"]
     assert nj["methods"] == ["site_flag"] and "njcsonotifications.com" in nj["sentence"]
     assert not va["covered"] and va["sentence"].startswith('No "discharge likely" caution here')
