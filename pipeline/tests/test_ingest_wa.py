@@ -60,20 +60,46 @@ def test_ecology_sso_keeps_its_times_operator_volume_and_named_water():
     assert "globalid" in r["source_url"] and r["raw"]["report_url"].endswith("id=1")
 
 
-def test_ecology_report_without_an_end_is_ongoing_and_never_given_one():
+def test_ecology_report_without_an_end_is_unknown_and_never_given_one():
+    """Review 2026-11-04: the layer has no status field and posts the end once known, so a blank end is an end not yet
+    posted: status unknown, the 14-day caution (plan §2), never red as if Ecology said the spill goes on."""
+    from datetime import datetime, timedelta
+    from build import status as S
     recs, _ = eco()
     r = recs["aaaaaaaa-0000-4000-8000-000000000002"]
-    assert r["status"] == "ongoing" and r["ended_at"] is None
-    assert "once known" in r["raw"]["_end_basis"]
+    assert r["status"] == "unknown" and r["ended_at"] is None
+    assert "once known" in r["raw"]["_end_basis"] and "not that the spill goes on" in r["raw"]["_end_basis"]
     assert r["raw"]["reached_water"] is False                    # a backup into a home: kept, not placed
     assert r["volume_gal"] is None and r["volume_text"] is None
+    r = {**r, "event_type": "sso"}
+    start = datetime.fromisoformat(r["started_at"])
+    ivs = S._event_intervals(r, "WA", start + timedelta(days=1), None, S.load_rules())
+    assert ivs[0]["rule"] == "no_end" and ivs[0]["end"] == start + timedelta(days=14)
+    assert not any(iv["rule"] == "ongoing" for iv in ivs)
+
+
+def test_ecology_report_with_final_figures_but_no_end_is_ended_without_an_end():
+    rows, _ = E.load_file(str(FIX / "wa_ecology_spills.json"))
+    rows[1] = {**rows[1], "final_event_duration_hours": "1.5 hours", "final_total_event_volume": "50 gallons"}
+    recs, _ = eco(rows=rows)
+    r = recs["aaaaaaaa-0000-4000-8000-000000000002"]
+    assert r["status"] == "ended" and r["ended_at"] is None and "final duration or volume" in r["raw"]["_end_basis"]
 
 
 def test_ecology_backup_into_a_home_loses_the_house_number():
+    from build import status as S
     recs, _ = eco()
     r = recs["aaaaaaaa-0000-4000-8000-000000000002"]
     assert r["outfall_name"] == "[house number removed] Example St, Seattle"
     assert "448" not in json.dumps(r)
+    assert S.no_water_flag(r) == "the report names no water, only 'Backup into private residence'"
+
+
+def test_ecology_a_home_named_in_the_location_also_loses_the_house_number():
+    rows, _ = E.load_file(str(FIX / "wa_ecology_spills.json"))
+    a = {**rows[3], "location": "512 Sample Ln (private residence)", "potentially_impacted_area": "Ground"}
+    assert E.safe_row(a)["location"] == "[house number removed] Sample Ln (private residence)"
+    assert E.safe_row({**a, "location": "512 Sample Ln"})["location"] == "512 Sample Ln"   # no home said: a site
 
 
 def test_ecology_types_from_spill_type_and_level_of_treatment():
@@ -84,11 +110,20 @@ def test_ecology_types_from_spill_type_and_level_of_treatment():
     assert recs["aaaaaaaa-0000-4000-8000-000000000005"]["event_type"] == "cso"           # Other: DWCSO
 
 
-def test_ecology_end_before_start_is_not_used_and_did_not_reach_is_kept_unplaced():
+def test_ecology_end_before_start_is_published_not_used_and_did_not_reach_is_kept_unplaced():
+    """Plan §2 "Published end not used": the end stays as Ecology published it and the status build sets it aside
+    (end_not_used on every interval, which the pages explain)."""
+    from datetime import datetime, timedelta
+    from build import status as S
     recs, _ = eco()
     r = recs["aaaaaaaa-0000-4000-8000-000000000004"]
-    assert r["status"] == "unknown" and r["ended_at"] is None and r["raw"]["_end_not_used"]
+    assert r["status"] == "ended" and r["ended_at"] == r["raw"]["_end_not_used"] and r["ended_at"] < r["started_at"]
+    assert S.end_not_credible(r) and "before started_at" in S.end_not_credible(r)
+    start = datetime.fromisoformat(r["started_at"])
+    ivs = S.event_intervals(r, "WA", start + timedelta(days=1), None, S.load_rules())
+    assert ivs and all(iv.get("end_not_used") for iv in ivs) and ivs[0]["rule"] == "no_end"
     assert r["raw"]["reached_water"] is False and r["waterbody_text"] is None
+    assert S.no_water_flag(r) == "the report says the sewage did not reach surface water"
     assert r["volume_gal"] is None and r["volume_text"] == "200 (unit not stated)"
 
 
@@ -204,6 +239,9 @@ def test_kc_status_file_outfalls_replace_epas_closed_rows_and_a_placeholder_poin
     b = rows[("WA0029181", "003")]
     assert b["outfall_name"] == "Ballard" and b["coords_from"] == "operator status file" and b["lat"] == 47.663916
     assert b["supersedes"]["outfall_status"] == "CLS" and b["outfall_kind"] == "cso"
+    # EPA's permit-level text ("Duwamish Waterway" for Ballard, on Salmon Bay) is kept for reference, never the tie
+    assert "receiving_water_echo" not in b and "water_slug" not in b
+    assert b["supersedes"]["receiving_water_echo"] == "Duwamish Waterway"
     assert doc["not_placed"] == [{"npdes_permit": "WA0031682", "outfall": "026", "why": "the status file gives a "
                                   "placeholder point and EPA lists no point for this outfall"}]
     assert leaks(doc) == []

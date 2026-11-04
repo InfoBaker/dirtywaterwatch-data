@@ -30,9 +30,9 @@ What is requested (privacy)
   0,0 (checked 2026-11-04).
   permitee is a coded value of Ecology's facility names (data/reference/wa-ecology-facility-permits.json lists them;
   none is a person). location and potentially_impacted_area are typed by the operator: common.scrub_text runs on
-  both (e-mails, phones, staff names after a title, a house number tied to a residence), and when the report says
-  the sewage went into a home (a private residence, a basement, a private property) every street address's house
-  number in the location is removed (common.strip_house_numbers): Ecology mostly writes a hundred block, but not
+  both (e-mails, phones, staff names after a title, a house number tied to a residence), and when the report (its area or
+  its location) says the sewage went into a home (a private residence, a basement, a private property) every street
+  address's house number in the location is removed (common.strip_house_numbers): Ecology mostly writes a hundred block, but not
   always. Every string then passes common.strip_personal (in event()) and build.redact runs over the records last.
   tests/test_ingest_wa.py proves the withheld narrative and the placeholder details never reach a record.
 
@@ -43,10 +43,14 @@ Record rules
     time_precision "minute". reported_at and published_at are null: the layer gives neither Ecology's receipt nor
     its posting time; raw._first_seen_at is our clock. source_updated_at is null (the layer's last edit time is the
     whole table's, kept in meta.layer_last_edit_at).
-  - Status: an end at or after the start -> ended at that end. No end -> ongoing with no end: the statute lists the
-    end "once known", so a report without one has no known end (raw._end_basis); the status build gives it 7 days
-    of red, then "end not confirmed" to day 30. An end before the start is not used (status unknown,
-    raw._end_not_used). A start more than a day after the read is not used (raw._start_not_used).
+  - Status (the layer has no status field): an end at or after the start -> ended at that end. No end, but a final
+    duration or volume posted (RCW 90.48.636(2), after the spill concludes) -> ended with no end. No end and no final
+    figures -> unknown: the end is posted "once known", so a blank end says it is not posted yet, not that the
+    spill goes on (most such reports are weeks old; review 2026-11-04). The status build gives either the 14-day
+    caution from the start (unresolved.unknown_status_yellow_days), then "end not confirmed" to day 30. An end
+    before the start stays as published with status ended (raw._end_not_used): the status build does not use it
+    (status.end_not_credible) and the pages say so. A start more than a day after the read is not used
+    (raw._start_not_used).
     final_event_duration_hours is free text ("about 0.5 hours", "est. 24 hours"): kept in raw, never turned into an
     end.
   - Type (event_type, from Ecology's "Spill type" and "Level of treatment"):
@@ -185,7 +189,8 @@ def safe_row(a: dict) -> dict:
     for k in FREE_TEXT:
         if isinstance(out.get(k), str):
             out[k] = scrub_text(out[k])
-    if isinstance(out.get("location"), str) and HOME_RE.search(str(out.get("potentially_impacted_area") or "")):
+    if isinstance(out.get("location"), str) and (HOME_RE.search(str(out.get("potentially_impacted_area") or ""))
+                                                  or HOME_RE.search(out["location"])):
         out["location"] = strip_house_numbers(out["location"])
     return out
 
@@ -264,7 +269,7 @@ def reached(area: str) -> tuple[bool | None, list[str], str]:
     if STORM_RE.search(t):
         return None, [], "the report names a storm drain, ditch or MS4 and no water"
     if NO_WATER_RE.search(t):
-        return False, [], "the report names only a building, structure, the ground or a road"
+        return False, [], f"the report names no water, only '{t[:60]}'"
     return None, [], "the report's area names no water"
 
 
@@ -282,6 +287,13 @@ def volume(a: dict) -> tuple[float | None, str | None, str]:
             return float(m.group(1).replace(",", "")), text, flag
         return None, f"{text} (unit not stated)", flag
     return None, text, flag
+
+
+def final_posted(a: dict) -> bool:
+    """Whether Ecology has posted a final duration or volume (RCW 90.48.636(2): the final information follows the
+    spill's conclusion)."""
+    return any(clean(a.get(k)) and not UNKNOWN_RE.match(clean(a.get(k)))
+               for k in ("final_event_duration_hours", "final_total_event_volume"))
 
 
 def facility_permits() -> dict:
@@ -312,19 +324,27 @@ def to_record(a: dict, fetched_at: str, facilities: dict, operators: dict, prev:
         start = None
     if start and (start.hour, start.minute) == (0, 0):
         notes["_start_at_midnight"] = "the start is typed as midnight: it may be a date given without a time"
-    status, ended = "ongoing", None
+    status, ended = "unknown", None
     if end and start and end < start:
+        # kept as published: the status build does not use it (status.end_not_credible) and the pages say why
+        # (docs/plan.md §2, "Published end not used")
+        status, ended = "ended", iso(end)
         notes["_end_not_used"] = iso(end)
+        notes["_end_basis"] = "Ecology's End Date & Time, which lies before the start: published, not used"
         problems.append("the end is before the start: not used")
-        status = "unknown"
     elif end:
         status, ended = "ended", iso(end)
         notes["_end_basis"] = "Ecology's End Date & Time"
         if end > fetch_dt:
             notes["_end_after_fetch"] = True
+    elif final_posted(a):
+        status = "ended"
+        notes["_end_basis"] = ("no end on the list, but Ecology has posted the final duration or volume, which RCW "
+                               "90.48.636(2) adds after the spill concludes: ended, its end not posted (not invented)")
     else:
-        notes["_end_basis"] = ("no end on the list: the statute asks for the end once known, so none is known yet "
-                               "(not an end the site invented)")
+        notes["_end_basis"] = ("no end on the list and no status field: Ecology posts the end once known "
+                               "(RCW 90.48.636(1)), so a blank end says the end is not yet posted, not that the spill "
+                               "goes on; status unknown (not an end the site invented)")
     et, basis = classify(a)
     notes["_type_basis"] = basis
     if et == "unknown":
@@ -347,7 +367,7 @@ def to_record(a: dict, fetched_at: str, facilities: dict, operators: dict, prev:
     if changed:
         revisions.append({"seen_at": fetched_at, "before": changed})
     raw = {"row": a, "potentially_impacted_area": a.get("potentially_impacted_area"), "reached_water": rw,
-           "_water_basis": why, "_first_seen_at": first_seen, "report_url": a.get("link_to_5_day_report"),
+           "_water_basis": why, **({"_no_water_reason": why} if rw is False else {}), "_first_seen_at": first_seen, "report_url": a.get("link_to_5_day_report"),
            "erts_number": clean(a.get("erts_number")) or None, "county": a.get("county"),
            "duration_text": a.get("final_event_duration_hours"), "continuous": a.get("was_the_spill_continuous"),
            "_time_basis": "epoch milliseconds in UTC (the form's storage), written in Pacific time", **notes}
