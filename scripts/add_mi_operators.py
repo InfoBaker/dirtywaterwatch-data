@@ -279,6 +279,10 @@ def main(argv) -> int:
                        verified=r.get("verified") or "inferred")
         if p is None:
             row["npdes_permit"], row["npdes_permits"] = None, []
+        if kind == "cso_closed_or_none":
+            row["notification_channel"] = ("None: not a sewer system (a general permit for a petroleum or remediation "
+                                           "site that EPA's CSO inventory lists).")
+            row["notification_feed_machine_readable"] = False
         add(row)
         k = key(owner or fac)
         if k and kind != "cso_closed_or_none":
