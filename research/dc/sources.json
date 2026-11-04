@@ -62,7 +62,7 @@
   "history": "Paginated archive; page 25 reaches July 2024. Deeper pages not fetched.",
   "license": "Site terms not reviewed; press releases are public statements. The Sanitary Sewer Dashboard page carries a data disclaimer (see dc-dcwater-sso-csv).",
   "legal_basis": "No statute or permit clause requires a press release. Permit DC0021199 Part III.B.1.h (Public Notification) covers lights, website, signs and pamphlets for CSOs.",
-  "status": "candidate",
+  "status": "used",
   "status_reason": "The only place DC Water announces large SSOs to the public, but prose HTML with no feed; scrape the list page daily and parse titles containing overflow/SSO/sewage.",
   "verified": "fetched",
   "checked": "2026-11-02",
