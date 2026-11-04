@@ -317,7 +317,7 @@ def test_a_named_owner_or_resident_of_the_land_reached_is_cut_and_a_body_kept():
     ("landImpacted", "Driveway of 6201 Sample Lake", "6201", "Driveway of [house number removed] Sample Lake"),
     ("landImpacted", "Ditch at 7705 traveling east to the lake between residences 7603 Sampleton and 7601 Sampleton",
      "7603", "between residences [house number removed] Sampleton"),
-    ("landImpacted", "The yard at 15147 M-28 and the creek bank to the west", "15147", "yard at [house number removed] M-28"),
+    ("landImpacted", "The yard at 12345 M-28 and the creek bank to the west", "12345", "yard at [house number removed] M-28"),
     ("landImpacted", "area adjacent to manhole(10033 Sample) and lower area", "10033", "manhole([house number removed] Sample)"),
     ("featureDescription", "Manhole located in yard of 17176 Example Ave, Sampleton MI", "17176", "yard of [house number removed]"),
     ("featureDescription", "Private property located at 915 Westexample and the curb", "915", "at [house number removed]"),
