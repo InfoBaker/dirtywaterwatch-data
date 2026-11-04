@@ -312,6 +312,38 @@
     "notes": "(b)(1): \"In the event of a discharge of 1,000 gallons or more of untreated wastewater to the surface waters of the State, issue a press release to all print and electronic news media that provide general coverage in the county where the discharge occurred ... The owner or operator shall issue the press release within 24 hours after the owner or operator has determined that the discharge has reached the surface waters of the State.\" (b)(2): for 15,000 gallons or more \"publish a notice of the discharge in a newspaper having general circulation in the county ... and in each county downstream ... significantly affected\", captioned \"NOTICE OF DISCHARGE OF UNTREATED SEWAGE\", within 10 days after the Secretary approves the form. Raw: raw/gs-143-215.1C.html"
   },
   {
+    "id": "nc-law-gs-143-215-1c-a",
+    "name": "N.C. Gen. Stat. 143-215.1C(a) Report to Wastewater System Customers",
+    "jurisdiction": "NC",
+    "operator": "North Carolina General Assembly",
+    "operator_type": "state",
+    "role": "law",
+    "event_types": [],
+    "waters_covered": null,
+    "water_slugs": [],
+    "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_143/GS_143-215.1C.html",
+    "access": [
+      "html"
+    ],
+    "access_detail": null,
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": "G.S. 143-215.1C(a) (S.L. 1999-329, s. 8.1)",
+    "status": "used",
+    "status_reason": "A law-named public channel: municipal or domestic collection and treatment works with an average annual flow over 200,000 gallons a day give their users or customers and the Department a yearly performance report, within 60 days after the calendar or fiscal year. Register rows per operator (ids ending -annual-report, made by scripts/add_register_rows.py); no web posting is required.",
+    "verified": "fetched",
+    "checked": "2026-11-04",
+    "notes": "(a): \"The owner or operator of any wastewater collection or treatment works, the operation of which is primarily to collect or treat municipal or domestic wastewater and for which a permit is issued under this Part and having an average annual flow greater than 200,000 gallons per day, shall provide to the users or customers of the collection system or treatment works and to the Department an annual report that summarizes the performance of the collection system or treatment works and the extent to which the collection system or treatment works has violated the permit or federal or State laws, regulations, or rules related to the protection of water quality. The report shall be prepared on either a calendar or fiscal year basis and shall be provided no later than 60 days after the end of the calendar or fiscal year.\" Fetched from ncleg.gov on 2026-11-04 with the project user agent (HTTP 200)."
+  },
+  {
     "id": "nc-law-15a-ncac-18a-3400",
     "name": "15A NCAC 18A .3400 Coastal Recreational Waters Monitoring, Evaluation and Notification",
     "jurisdiction": "NC",

@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1207 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1208 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -25,10 +25,10 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | md | 11 | 8 | 15 | 11 | 4 | 49 |
 | va | 16 | 17 | 28 | 7 | 1 | 69 |
 | dc | 21 | 9 | 26 | 12 | 5 | 73 |
-| nc | 8 | 1 | 6 | 1 | 0 | 16 |
+| nc | 9 | 1 | 6 | 1 | 0 | 17 |
 | ga | 3 | 4 | 4 | 1 | 0 | 12 |
 | fl | 5 | 0 | 5 | 1 | 0 | 11 |
-| **all** | **396** | **243** | **333** | **174** | **61** | **1207** |
+| **all** | **397** | **243** | **333** | **174** | **61** | **1208** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1273,7 +1273,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `dc-doee-hab` | DOEE harmful algal bloom (cyanobacteria) advisories | unreachable | search_only | advisories | No DC HAB advisory programme found (search_only). |
 | `dc-hillrag-dashboard-article` | HillRAG 'New Dashboard Lets Residents Check River Conditions in Real Time' (2026-06-05) | unreachable | search_only | news | Timeout; superseded by the dashboard source. |
 
-## nc: North Carolina (16)
+## nc: North Carolina (17)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -1284,6 +1284,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nc-fish-kill-algal-bloom` | NC DEQ Fish Kills and Algal Blooms public reports (Fish_Kill_Algal_Bloom_Public_View) | used | fetched | advisories | Archive of algal bloom and fish kill reports, 2020 to 2026-03-10 (1,364 rows; 1,011 include a bloom). No longer edited: the current reports are nc-dwr-algal-bloom-reports. Built: nc_algal_blooms.py --backfill. |
 | `nc-law-15a-ncac-18a-3400` | 15A NCAC 18A .3400 Coastal Recreational Waters Monitoring, Evaluation and Notification | used | fetched | law | The coastal advisory rules: pending and full swimming advisories from bacteria results (.3403), and advisories with signs for waters impacted by a wastewater spill and at storm-water discharges (.3404). No set number of hours after a spill. |
 | `nc-law-gs-143-215-1c` | N.C. Gen. Stat. 143-215.1C(b) Publication of Notice of Discharge of Untreated Wastewater | used | fetched | law | The public-notice duty: press release within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more. |
+| `nc-law-gs-143-215-1c-a` | N.C. Gen. Stat. 143-215.1C(a) Report to Wastewater System Customers | used | fetched | law | A law-named public channel: municipal or domestic collection and treatment works with an average annual flow over 200,000 gallons a day give their users or customers and the Department a yearly performance report, within 60 days after the calendar or fiscal year. Register rows per operator (ids ending -annual-report, made by scripts/add_register_rows.py); no web posting is required. |
 | `nc-rwq-advisories` | NC DEQ Recreational Water Quality program: swimming advisory status layer (RWQ_Advisory_EXTERNAL) | used | fetched | advisories | Coastal (ocean and sound) monitoring stations with current Status (No Alert / Pending Swimming Advisory / Advisory / Precautionary). Built: pipeline/ingest/nc_rwq_advisories.py (snapshot spells; 225 stations on 2026-11-04). |
 | `nc-wnc-rec-monitoring` | NC DEQ Western NC Recreational Water Quality Monitoring Program (E. coli results) | candidate | fetched | monitoring | Inland river E. coli results (2,298 rows; fields Station_ID, SampleDate, Ecoli, Lat, Long). Also published to Swim Guide. |
 | `nc-bims-public-portal` | NC DEQ BIMS Public Incident Portal | watch | search_only | events | Incident lookup by permit or incident number; the ArcGIS layers are easier. Not fetched. |
