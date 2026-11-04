@@ -142,6 +142,17 @@ def test_register_rows_cover_every_cso_permittee_with_its_duties():
     for suffix, bar in (("cso-public-notification", "no_web_page"), ("cso-signs", "signs_only"),
                         ("health-department-notice", "no_web_page")):
         assert by[f"{chi}-{suffix}"]["barrier"] == bar and by[f"{chi}-{suffix}"]["basis_kind"] in ("law", "permit")
+    # every duty of 40 CFR 122.38 by its own paragraph (review 2026-11-04: signs are (a)(1), the health department
+    # (a)(2), the public (a)(3) with the 7-day update, the annual notice (b), which had no row)
+    gl = [o["id"] for o in ops if o["kind"] == "cso" and "40 CFR 122.38" in (o.get("notification_channel") or "")]
+    assert len(gl) == 43
+    for oid in gl:
+        assert by[f"{oid}-cso-signs"]["legal_basis"].startswith("40 CFR 122.38(a)(1):")
+        assert by[f"{oid}-health-department-notice"]["legal_basis"].startswith("40 CFR 122.38(a)(2)(i):")
+        assert "122.38(a)(3)(iii)" in by[f"{oid}-cso-public-notification"]["legal_basis"]
+        ann = by[f"{oid}-cso-annual-notice"]
+        assert ann["legal_basis"].startswith("40 CFR 122.38(b):") and ann["basis_kind"] == "law"
+        assert ann["barrier"] == "not_verified" and ann["publishes"] == "documents"
     pekin = next(o for o in ops if o["npdes_permit"] == "IL0034495")["id"]
     assert by[f"{pekin}-cso-public-notification"]["barrier"] == "not_verified" and f"{pekin}-cso-signs" not in by
     syn = by["il-mwrd-cso-synopsis-report"]

@@ -22,8 +22,11 @@ The law (research/il/report.md §2.1 in the site repository; profile research/il
 
 Rows
   - Per CSO operator (kind cso in data/dischargers.json):
-      Great Lakes permittees: <id>-cso-public-notification (MWRD's e-mail and text alerts, email_only, the sign-up),
-      <id>-cso-signs (signs_only) and <id>-health-department-notice (no web page).
+      Great Lakes permittees: <id>-cso-public-notification (MWRD's e-mail and text alerts, email_only, the sign-up;
+      the 7-day update of the electronic notice goes the same way), <id>-cso-signs (signs_only),
+      <id>-health-department-notice (no web page) and <id>-cso-annual-notice (40 CFR 122.38(b); where it is posted was
+      not searched). Citations by paragraph from the eCFR text (fetched again 2026-11-04): signs (a)(1), the health
+      department (a)(2), the public (a)(3), the annual notice (b).
       Other CSO permittees: <id>-cso-public-notification (permit, not searched; Arlington Heights' plan page and
       Bloomington-Normal's notice document are rows of their own where found).
   - Agency and voluntary rows: AGENCY below.
@@ -56,12 +59,19 @@ Q_GL = ('40 CFR 122.38(a)(3)(i): "As soon as possible, but no later than four (4
         'modeling or other means that a CSO discharge has occurred, the Great Lakes Basin CSO permittee shall provide '
         'public notification of CSO discharges. The Great Lakes Basin CSO permittee shall provide public notification of '
         'CSO discharges electronically, such as by text, email, social media alerts to subscribers or by posting a notice '
-        'on its public access website"; MWRD permits IL0028053 and IL0028061, Special Condition 13.14 (public '
-        'notification program; permit text not read)')
-Q_SIGNS = ("40 CFR 122.38(a)(2): the Great Lakes Basin CSO permittee posts signage at its CSO outfalls and at public "
-           "access areas potentially affected by its discharges")
-Q_HEALTH = ("40 CFR 122.38(a)(3)(ii): notice to the local public health department, and other affected entities, "
-            "within 4 hours of becoming aware of a CSO discharge")
+        'on its public access website"; 40 CFR 122.38(a)(3)(iii): within 7 days after becoming aware that the '
+        'discharge has ended, the permittee updates the electronic notice with the volume and the approximate end '
+        'time; MWRD permits IL0028053 and IL0028061, Special Condition 13.14 (public notification program; permit '
+        'text not read)')
+Q_SIGNS = ("40 CFR 122.38(a)(1): the Great Lakes Basin CSO permittee ensures adequate signage, where feasible, at its "
+           "CSO discharge points and at potentially impacted public access areas")
+Q_HEALTH = ("40 CFR 122.38(a)(2)(i): initial notice to the local public health department and other potentially "
+            "affected public entities within 4 hours of becoming aware of a CSO discharge; (a)(2)(ii): the volume and "
+            "the approximate end time within 7 days after it ends")
+Q_ANNUAL = ("40 CFR 122.38(b): \"by May 1 of each calendar year (or an alternative date specified by the Director), any "
+            "permittees authorized to discharge a CSO to the Great Lakes Basin shall make available to the public an "
+            "annual notice describing the CSO discharges from its discharge point(s) that occurred in the previous "
+            "calendar year\"")
 Q_NMC = ("NPDES permit public notification condition for combined sewer overflows (Nine Minimum Controls no. 8, EPA's "
          "CSO Control Policy, 59 FR 18688); the Illinois permit texts were not read")
 Q_SSO = ("NPDES permit standard conditions (40 CFR 122.41(l)(6)): report to Illinois EPA within 24 hours (Illinois EPA "
@@ -261,6 +271,14 @@ def operator_rows(dis: list[dict]) -> list[dict]:
                 noun="Health department notice", sources=["il-law-40cfr122-38"],
                 note=(f"No web form: {name}'s notice of each CSO discharge to the local public health department within "
                       "4 hours; the rule does not require the department to publish it. No web channel found."))))
+            rows.append(finish(base(
+                id=f"{oid}-cso-annual-notice", operator_id=oid, name=name, permit=permit,
+                channel_kind="operator_page", urls=[], method=None, legal_basis=Q_ANNUAL, basis_kind="law",
+                monitored=False, unmonitored_reason="other", publishes="documents", records=False,
+                noun="Annual CSO notice", sources=["il-law-40cfr122-38"],
+                note=(f"No URL known (not searched): {name}'s annual notice of the previous year's CSO discharges, due "
+                      "by May 1 and to be made available to the public; where it is posted was not searched. "
+                      "(research/il/report.md §2.1)"))))
         else:
             own = OWN_PAGES.get(permit)
             if own and not own.get("monitored"):
