@@ -1,0 +1,273 @@
+"""Michigan's history from 2001 (pipeline/ingest/mi_egle_mienviro.py --backfill): spans a year at a time, each saved
+to the archive as it arrives, a time budget that a later --backfill resumes from, a 4xx answer that stops the backfill
+against transient failures that are named and asked again, meta.backfill, and the privacy of the archived rows.
+The service is faked from the name-free fixture tests/fixtures/mi_mienviro_list.json (its placeholders must never
+reach a record or the archive).
+Run from pipeline/: python -m pytest tests/test_ingest_mi_backfill.py -q
+"""
+from __future__ import annotations
+
+import json
+from datetime import date
+from pathlib import Path
+
+import pytest
+import requests
+
+import common
+from ingest import mi_egle_mienviro as M
+
+FIX = Path(__file__).resolve().parent / "fixtures"
+TODAY = date(2026, 11, 4)
+PERMITS = {"MI0099001": "mi-sampleton", "3112A-0999": "mi-sample-charter-township", "MI0099004": "mi-sample-bay"}
+PLACEHOLDERS = ["Pat Example", "517-555-0123", "pat.example@example.com", "Inspector Sample", "Robin Placeholder",
+                "Lee Placeholder", "448 Example St", "Behind the house", "6517", "cleaned the manhole",
+                "1234567890123456789"]
+
+
+def fixture_rows():
+    return json.loads((FIX / "mi_mienviro_list.json").read_text())["queryResults"]
+
+
+def year_rows(year: int, n: int = 3) -> list[dict]:
+    """Completed reports of an older year, shaped as the list gives them (the fixture's completed rows, the year
+    moved, new submission ids); the first keeps the fixture's personal placeholders."""
+    done = [r for r in fixture_rows() if r["reportStatusId"] == "COMPLETE" and r["eventStartDate"].startswith("2026")]
+    out = []
+    for i, r in enumerate((done * 3)[:n]):
+        r = dict(r)
+        for k in ("eventStartDate", "eventEndDate", "submissionReceivedDate"):
+            if r.get(k):
+                r[k] = f"{year}{r[k][4:]}"
+        r["submissionId"] = f"-7{year}{i:04d}"
+        out.append(r)
+    return out
+
+
+def old_shape_row(year: int) -> dict:
+    """An older report with the fields the list leaves empty in early years, a permit typed another way, and a field
+    the service sent that was not asked for (a contact): only the asked fields are kept."""
+    return {"submissionId": f"-8{year}", "sectionNumber": 1, "submissionReceivedDate": f"{year}-03-02T00:00:00",
+            "responsiblePartyName": "Village of Sample", "siteName": None, "permitNumber": "MI-0099001",
+            "countyDescription": "Sample", "reportStatusId": "COMPLETE", "reportStatusDescription": "Complete",
+            "dischargeType": None, "dischargeQuality": "Raw Sewage", "dischargeVolume": None,
+            "dischargeVolumeNumeric": None, "eventStartDate": f"{year}-03-01T00:00:00", "eventEndDate": None,
+            "featureNumber": None, "featureDescription": None, "receivingWater": "Sample River",
+            "landImpacted": None, "contactName": "Pat Example", "contactPhone": "517-555-0123"}
+
+
+class Resp:
+    def __init__(self, rows, code=200):
+        self.rows, self.status_code = rows, code
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            raise requests.HTTPError(f"{self.status_code}", response=self)
+
+    def json(self):
+        return {"queryResults": self.rows, "hasResultsRemaining": False}
+
+
+class Service:
+    """The list service: open reports from the fixture, completed ones by start year; fail[span] = an exception or an
+    HTTP code to answer for that span's request (once, or always when sticky)."""
+
+    def __init__(self, by_year: dict[int, list[dict]], fail: dict | None = None, sticky: bool = False):
+        self.by_year, self.fail, self.sticky, self.asked = by_year, dict(fail or {}), sticky, []
+
+    def get(self, url, params=None, timeout=None):
+        flt = json.loads(params["queryParams"])["filter"][0]
+        if flt.get("reportStatusId") == "IN_PROCESS":
+            return Resp([r for r in fixture_rows() if r["reportStatusId"] == "IN_PROCESS"])
+        if "submissionId" in flt:
+            return Resp([])
+        lo, hi = flt.get("eventStartDateMin"), flt.get("eventStartDateMax")
+        if lo and hi and (date.fromisoformat(hi) - date.fromisoformat(lo)).days < 100:   # the hourly 60-day read
+            return Resp([])
+        span = (lo[:4] if lo and hi else "later" if lo else "before")
+        self.asked.append(span)
+        if span in self.fail:
+            f = self.fail[span] if self.sticky else self.fail.pop(span)
+            if isinstance(f, int):
+                return Resp([], f)
+            raise f
+        if span in ("later", "before"):
+            return Resp([])
+        return Resp(list(self.by_year.get(int(span), [])))
+
+
+@pytest.fixture
+def env(tmp_path, monkeypatch):
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path / "events")
+    monkeypatch.setattr(M, "STATE_FILE", tmp_path / "state.json")
+    monkeypatch.setattr(M, "ARCHIVE_DIR", tmp_path / "archive")
+    monkeypatch.setattr(M, "permit_index", lambda rows=None: dict(PERMITS))
+    monkeypatch.setattr(M, "save_raw", lambda sid, content, ext: _raw(tmp_path, content))
+    monkeypatch.setattr(M, "ROOT", tmp_path)
+    monkeypatch.setattr(M, "BACKFILL_PAUSE_S", 0)
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    return tmp_path
+
+
+def _raw(tmp_path, content):
+    p = tmp_path / "raw" / f"{len(list((tmp_path / 'raw').glob('*'))) if (tmp_path / 'raw').exists() else 0}.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(content)
+    return p
+
+
+def run(env, monkeypatch, service, *args) -> dict:
+    monkeypatch.setattr(M.requests, "Session", lambda: _Sess(service))
+    monkeypatch.setattr(M, "datetime", _Clock)
+    assert M.main(list(args)) == 0
+    return json.loads((env / "events" / f"{M.SOURCE_ID}.json").read_text())
+
+
+class _Sess:
+    def __init__(self, service):
+        self.service, self.headers = service, {}
+
+    def get(self, *a, **k):
+        return self.service.get(*a, **k)
+
+
+class _Clock(M.datetime):
+    @classmethod
+    def now(cls, tz=None):
+        return M.datetime(2026, 11, 4, 12, 0, tzinfo=tz)
+
+
+def strings(o):
+    if isinstance(o, dict):
+        for k, v in o.items():
+            yield str(k)
+            yield from strings(v)
+    elif isinstance(o, list):
+        for v in o:
+            yield from strings(v)
+    elif isinstance(o, str):
+        yield o
+
+
+def leaks(obj):
+    text = "\n".join(strings(obj))
+    return [p for p in PLACEHOLDERS if p in text]
+
+
+HISTORY = {y: year_rows(y, 2) for y in range(2001, 2027)}
+
+
+def test_the_backfill_starts_in_2001_and_asks_for_the_typed_years_before_and_after():
+    assert M.BACKFILL_FROM == 2001
+    spans = M.backfill_spans(M.BACKFILL_FROM, TODAY)
+    names = [n for n, _, _ in spans]
+    assert names[0] == "2001" and names[-2] == "2026" and names[-1] == "later" and len(names) == 27
+    assert spans[-1][2] is None
+    spans = M.backfill_spans(1999, TODAY)
+    assert [n for n, _, _ in spans][:3] == ["before-1999", "1999", "2000"] and spans[0][1] is None
+    assert [n for n, _, _ in M.backfill_spans(2024, TODAY)] == ["2024", "2025", "2026", "later"]
+
+
+def test_a_backfill_from_2001_reads_every_year_saves_each_and_names_its_range_in_meta(env, monkeypatch):
+    svc = Service(HISTORY)
+    d = run(env, monkeypatch, svc, "--backfill")
+    b = d["meta"]["backfill"]
+    assert b["from"] == 2001 and b["complete"] and b["covered_from"] == 2001 and b["failed"] == []
+    assert len(b["read_now"]) == 27 and b["rows"] == 52 and b["rows_by_span"]["2003"] == 2
+    assert b["records_by_start_year"]["2001"] == 2 and b["records_by_start_year"]["2014"] == 2
+    assert (env / "archive" / "2001.json").exists() and (env / "archive" / "later.json").exists()
+    assert "every report read since January 2001" in d["meta"]["left_out_note"]
+    years = {r["started_at"][:4] for r in d["records"] if r.get("started_at")}
+    assert {"2001", "2013", "2026"} <= years
+    # the raw page of the run holds the current answer only; the history is in the archive
+    raw = json.loads((env / M.ROOT / d["meta"]["raw_path"]).read_text())
+    assert all(not r["eventStartDate"].startswith("2001") for r in raw["rows"])
+
+
+def test_a_second_backfill_asks_only_for_this_year_and_the_last_and_keeps_the_rest_from_the_archive(env, monkeypatch):
+    run(env, monkeypatch, Service(HISTORY), "--backfill")
+    svc = Service(HISTORY)
+    d = run(env, monkeypatch, svc, "--backfill")
+    assert svc.asked == ["2025", "2026", "later"]
+    b = d["meta"]["backfill"]
+    assert len(b["from_archive"]) == 24 and b["rows"] == 52 and b["complete"]
+    svc = Service(HISTORY)
+    run(env, monkeypatch, svc, "--backfill", "--refetch")
+    assert len(svc.asked) == 27
+
+
+def test_from_narrows_the_backfill(env, monkeypatch):
+    svc = Service(HISTORY)
+    d = run(env, monkeypatch, svc, "--backfill", "--from", "2024")
+    assert svc.asked == ["2024", "2025", "2026", "later"]
+    assert d["meta"]["backfill"]["covered_from"] == 2024
+    assert "since January 2024" in d["meta"]["left_out_note"]
+
+
+def test_a_backfill_out_of_time_stops_asking_names_the_rest_and_the_next_one_resumes(env, monkeypatch):
+    ticks = iter([0] + [0] * 6 + [M.BACKFILL_BUDGET_S + 1] * 200)
+    monkeypatch.setattr(M, "clock", lambda: next(ticks))
+    svc = Service(HISTORY)
+    d = run(env, monkeypatch, svc, "--backfill")
+    b = d["meta"]["backfill"]
+    assert b["read_now"] == ["2001", "2002", "2003", "2004", "2005", "2006"] and not b["complete"]
+    assert b["not_requested"][0] == "2007" and b["covered_from"] is None
+    assert any("not requested; run --backfill again" in e for e in d["meta"]["lookup_errors"])
+    assert "since January" not in d["meta"]["left_out_note"]
+    assert {r["started_at"][:4] for r in d["records"] if r.get("started_at")} >= {"2001", "2005"}
+    monkeypatch.setattr(M, "clock", lambda: 0)
+    svc = Service(HISTORY)
+    d = run(env, monkeypatch, svc, "--backfill")
+    assert svc.asked[0] == "2007" and "2001" not in svc.asked and d["meta"]["backfill"]["complete"]
+    assert d["meta"]["backfill"]["covered_from"] == 2001
+
+
+def test_a_timeout_or_5xx_is_named_and_asked_again_and_the_next_year_is_still_read(env, monkeypatch):
+    svc = Service(HISTORY, {"2004": requests.ReadTimeout("read timed out"), "2010": 503})
+    d = run(env, monkeypatch, svc, "--backfill")
+    b = d["meta"]["backfill"]
+    assert b["failed"] == ["2004", "2010"] and "2005" in b["read_now"] and "2011" in b["read_now"]
+    assert not b["complete"] and b["covered_from"] == 2011
+    errs = d["meta"]["lookup_errors"]
+    assert any("2004 not read: ReadTimeout" in e for e in errs) and any("2010 not read: HTTPError" in e for e in errs)
+    assert not (env / "archive" / "2004.json").exists()
+    svc = Service(HISTORY)
+    d = run(env, monkeypatch, svc, "--backfill")
+    assert svc.asked == ["2004", "2010", "2025", "2026", "later"] and d["meta"]["backfill"]["complete"]
+
+
+def test_a_4xx_answer_stops_the_backfill_and_three_transient_failures_in_a_row_stop_it_too(env, monkeypatch):
+    svc = Service(HISTORY, {"2003": 404})
+    d = run(env, monkeypatch, svc, "--backfill")
+    assert svc.asked == ["2001", "2002", "2003"]
+    assert any("HTTP 404" in e for e in d["meta"]["lookup_errors"]) and d["meta"]["backfill"]["failed"] == ["2003"]
+    assert d["ok"] and {r["started_at"][:4] for r in d["records"] if r.get("started_at")} >= {"2001", "2002"}
+    svc = Service(HISTORY, {y: requests.ConnectionError("reset") for y in ("2003", "2004", "2005", "2006")})
+    d = run(env, monkeypatch, svc, "--backfill")
+    assert svc.asked == ["2003", "2004", "2005"]
+    assert any("3 failures in a row" in e for e in d["meta"]["lookup_errors"])
+
+
+def test_an_hourly_run_after_the_backfill_keeps_the_history_and_meta_and_never_reads_the_archive(env, monkeypatch):
+    run(env, monkeypatch, Service(HISTORY), "--backfill")
+    monkeypatch.setattr(M, "read_archive", lambda name: pytest.fail("the hourly run read the archive"))
+    svc = Service(HISTORY)
+    d = run(env, monkeypatch, svc)
+    assert svc.asked == []
+    assert d["meta"]["backfill"]["complete"] and d["meta"]["backfill"]["covered_from"] == 2001
+    assert sum(1 for r in d["records"] if (r.get("started_at") or "").startswith("2001")) == 2
+
+
+def test_older_shapes_and_personal_details_never_reach_the_archive_or_a_record(env, monkeypatch):
+    by_year = {**HISTORY, 2002: HISTORY[2002] + [old_shape_row(2002)]}
+    by_year[2003] = [{**r, "responsiblePartyName": "Pat Example", "siteName": "Pat Example"} for r in year_rows(2003, 1)]
+    d = run(env, monkeypatch, Service(by_year), "--backfill")
+    assert leaks(d) == []
+    for p in (env / "archive").glob("*.json"):
+        a = json.loads(p.read_text())
+        assert leaks(a) == [] and all(set(r) <= set(M.FIELDS) for r in a["rows"]), p.name
+    old = next(r for r in d["records"] if r["source_record_id"] == "-82002-1")
+    assert old["npdes_permit"] == "MI0099001" and old["event_type"] == "sso" and old["status"] == "ended"
+    assert old["ended_at"] is None and old["started_at"].startswith("2002-03-01")
+    assert "contactName" not in old["raw"]
