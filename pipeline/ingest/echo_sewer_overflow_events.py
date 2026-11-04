@@ -1,4 +1,5 @@
-"""EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC and Georgia.
+"""EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC, Georgia and
+Illinois.
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -88,11 +89,30 @@ Georgia (permits GA...; research/ga/report.md section 2.2; the state is not live
   The state's own list (ingest/ga_epd_spills.py, run after this module) is the public record where both describe a
   spill: it takes the end from the EPA record and marks that record duplicate_of its own, in this module's file.
 
+Illinois (permits IL...; research/il/report.md section 2.2; not live until data/rules.json says so)
+  Illinois permittees file their overflow and bypass reports through EPA's NeT-SewerOverflow, so this dataset is the
+  statewide record (2026-11-03 extract: 1,687 current IL rows from 267 permits since 2024-10-01; 772 kept, 915 dropped,
+  most of them SSOs into basements or onto land). It does not hold Chicago's, MWRD's or the suburban general-permit
+  CSO reports, which reach the public only through MWRD (ingest/il_mwrd_possible_cso.py, il_mwrd_lake_reversals.py).
+  Three Illinois habits are handled here, for IL permits only, so the live states' records are unchanged:
+  - Time zone (docs/decisions.md, National expansion item 6: the permit's state zone, labelled): the file's times carry
+    no zone and Illinois keeps Central time, which the status build would otherwise read as Eastern. STATE_TZ gives
+    the zone; a time is written with its offset (a fall-back hour that happens twice is read as the first) and
+    raw.timezone_note says so. A date-only time (an extreme-event report's period) stays a date.
+  - Receiving-water texts that name none: 'LAWN', 'We do not expect any overflows', 'None, opposite side of ... Levee',
+    and a plant's own lagoon ('City of ... Lagoon', a bypass from the plant to its lagoon) are read as no water
+    (STATE_NO_WATER["IL"]).
+  - Free text: the description, the 'Other' structure, cause, action and impact texts carry street addresses of
+    breaks and manholes ('Force main break at <number> <street> Ct.', 'behind <number> <street> Rd.'). For the states
+    in FREE_TEXT_STATES every such field goes through the same scrub as Michigan's list (mi_egle_mienviro.free_text:
+    emails, phones, staff names, an owner's or resident's name, every house number). The point stays: it is the
+    event's own (no Illinois point is shared by many reports of one permit except at a CSO outfall or a plant).
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
 
-Run from pipeline/:  python -m ingest.echo_sewer_overflow_events
+Run from pipeline/:  python -m ingest.echo_sewer_overflow_events [--file saved.zip]
 """
 from __future__ import annotations
 
@@ -117,7 +137,13 @@ from common import (BUILD_DIR, DATA_DIR, HEADERS, ROOT, event, now_iso, read_jso
 SOURCE_ID = "echo-sewer-overflow"
 URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "IL"}
+# states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
+STATE_TZ = {"IL": "America/Chicago"}
+# states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
+FREE_TEXT_STATES = {"IL"}
+FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
+                    "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
 # states whose reports mostly carry the permit's point rather than the event's (module docstring, Georgia)
 REPEATED_POINT_STATES = {"GA"}
 REPEATED_POINT_MIN = 5
@@ -136,7 +162,10 @@ NO_WATER_TEXT = re.compile(r"^\s*(none|n/?a|no water ?body|no discharge.*|no dir
 # Georgia reports' own ways of saying no water was reached (dry land, misspelt "not applicable", a basement), read
 # only for GA permits so the live states' rows are untouched
 STATE_NO_WATER = {"GA": re.compile(r"^\s*((?:n/?a\s+)?dry\s*land(?:\s+spill)?|n[o0][a-z]?t?\s+ap+l?i?c\w*|non\s+applicable|"
-                                   r"bu\w*ding\s+basement|did\s*n\S*\s+discharge\b.*)\s*\.?\s*$", re.I)}
+                                   r"bu\w*ding\s+basement|did\s*n\S*\s+discharge\b.*)\s*\.?\s*$", re.I),
+                  # Illinois: a lawn, an expectation of none, "None, <where>", the plant's own lagoon
+                  "IL": re.compile(r"^\s*(lawn|grass|yard|we do not expect\b.*|none\s*[,;:-].*|"
+                                   r"(?:[\w.' -]+\s)?lagoons?)\s*\.?\s*$", re.I)}
 
 
 def no_water(w: str, state: str | None = None) -> bool:
@@ -365,6 +394,35 @@ def naive(ts: str | None) -> str | None:
         return None
 
 
+def zoned(ts: str | None, state: str) -> str | None:
+    """A naive time of a STATE_TZ state with its zone's offset ('2026-07-04T19:26:00-05:00'); a date or a time of
+    another state as it is. A fall-back hour that happens twice is read as the first (fold 0)."""
+    tz = STATE_TZ.get(state)
+    if not ts or not tz or "T" not in ts:
+        return ts
+    dt = datetime.fromisoformat(ts)
+    if dt.tzinfo is not None:
+        return ts
+    from zoneinfo import ZoneInfo
+    return dt.replace(tzinfo=ZoneInfo(tz)).isoformat()
+
+
+def tz_note(state: str) -> str:
+    tz = STATE_TZ.get(state)
+    return (f"ECHO gives event times without a timezone; read as {tz}, the permit's state's zone (a fall-back hour "
+            "that happens twice is read as the first)") if tz else TZ_NOTE
+
+
+def scrub_free_text(d: dict, keys) -> dict:
+    """The free-text values of d under keys through the Michigan list's scrub (owners' names, house numbers, emails,
+    phones, staff names); d changed in place and returned."""
+    from ingest.mi_egle_mienviro import free_text
+    for k in keys:
+        if isinstance(d.get(k), str) and d[k].strip():
+            d[k] = free_text(d[k])
+    return d
+
+
 def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
     types, rws, imps = by_event(tables.get("types")), by_event(tables.get("waters")), by_event(tables.get("impacts"))
     causes, acts, treat = by_event(tables.get("causes")), by_event(tables.get("actions")), by_event(tables.get("treatment"))
@@ -385,6 +443,11 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         ok, reason = reached_water(ev, t_codes, w_names, i_rows, state)
         why[(state, "kept" if ok else "dropped", reason)] += 1
         srid = f"{permit}:{ev['program_report_form_set_id']}:{ev['sewer_overflow_bypass_event_id_ext'] or '0'}"
+        if state in FREE_TEXT_STATES:
+            ev = scrub_free_text(dict(ev), FREE_TEXT_FIELDS)
+            for rows_ in (i_rows, causes.get(k, []), acts.get(k, [])):
+                for x in rows_:
+                    scrub_free_text(x, [c for c in x if c.endswith("_other_text")])
         if not ok:
             dropped.append({"source_record_id": srid, "permit": permit, "reason": reason,
                             "type": t_codes, "structure": ev.get("sewer_overflow_structure_type_desc"),
@@ -403,6 +466,7 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         if not start:
             perr = (perr + "; " if perr else "") + "no start time"
             precision = None
+        start, end = zoned(start, state), zoned(end, state)
         vol = ev.get("sewer_overflow_bypass_discharge_volume_gallons")
         try:
             vol_gal = int(round(float(vol))) if vol not in (None, "") else None
@@ -457,7 +521,7 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                           for t in treat.get(k, [])],
             "collection_system_name": sysrow.get("collection_system_name"),
             "percent_collection_system_css": sysrow.get("percent_collection_system_css"),
-            "reached_water_rule": reason, "timezone_note": TZ_NOTE, "report_version": ev.get("program_report_form_id"),
+            "reached_water_rule": reason, "timezone_note": tz_note(state), "report_version": ev.get("program_report_form_id"),
         })
         if w_aliases:
             raw["receiving_water_aliases"] = w_aliases
@@ -517,9 +581,25 @@ def write_failed(records: list[dict], error: str, meta: dict) -> Path:
     return path
 
 
+def read_zip(path: Path) -> tuple[dict[str, list[dict]], dict]:
+    """Tables from a saved copy of the ZIP (--file: tests and replays; nothing fetched or saved)."""
+    zf = zipfile.ZipFile(path)
+    names = {Path(n).name: n for n in zf.namelist()}
+    if TABLES["events"] not in names:
+        raise RuntimeError(f"{path}: no {TABLES['events']} in the ZIP")
+    zi = zf.getinfo(names[TABLES["events"]])
+    info = {"url": URL, "via": f"file {Path(path).name}", "last_modified": None, "raw_saved": None,
+            "extract_date": datetime(*zi.date_time).date().isoformat()}
+    tables = {k: list(csv.DictReader(io.TextIOWrapper(zf.open(names[v]), encoding="utf-8-sig")))
+              for k, v in TABLES.items() if v in names}
+    return tables, info
+
+
 def main(argv=None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    path = Path(argv[argv.index("--file") + 1]) if "--file" in argv else None
     try:
-        tables, info = fetch()
+        tables, info = read_zip(path) if path else fetch()
     except RuntimeError as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
