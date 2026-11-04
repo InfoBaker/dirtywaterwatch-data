@@ -179,3 +179,44 @@ def test_number_ranges_with_units_are_not_phone_numbers():
         assert scrub_text(t) == t and strip_personal({"note": t}) == {"note": t}, t
     for t in ("call 410-555-0199", "or 555-0199 after hours", "(410) 555-0199", "410.555.0199"):
         assert "[phone removed]" in scrub_text(t), t
+
+
+# ---------------------------------------------------------------- a person's name as the discharger (re-check R8)
+
+def test_a_discharger_name_that_is_only_a_persons_name_is_removed_and_the_permit_stays():
+    for name in ("Pat Example", "PAT EXAMPLE", "pat example", "Pat Q. Example"):
+        r = common.event(source_id="x-test", source_record_id="1", discharger_name=name, npdes_permit="XX0000001",
+                         discharger_id=name.lower().replace(".", "").replace(" ", "-"))
+        assert r["discharger_name"] == "[name removed]", name
+        assert r["npdes_permit"] == "XX0000001" and r["discharger_id"] == "XX0000001", name
+        assert "example" not in json.dumps(r).lower(), name
+    # an operator's own id that does not carry the name stays
+    r = common.event(source_id="x-test", source_record_id="2", discharger_name="Pat Example", discharger_id="op-17")
+    assert r["discharger_name"] == "[name removed]" and r["discharger_id"] == "op-17"
+
+
+def test_operator_names_are_not_taken_for_a_persons_name():
+    for name in ("Robert T Savely WRF", "Kelly Twp Muni Auth", "William E Dunn WRF", "Martha Elementary",
+                 "Glen Echo Resort", "Calvin PWA", "Pat Example Utilities", "Town of Example", "Example Water Authority",
+                 "[name removed]", "", None):
+        r = common.event(source_id="x-test", source_record_id="3", discharger_name=name)
+        assert r["discharger_name"] == name, name
+
+
+def test_a_persons_name_from_an_owner_field_or_set_after_the_record_is_removed(tmp_path):
+    """The generic runner's reviewed owner field (the reviewed_fields gate admits it) and a module that sets
+    discharger_name after common.event: both reach the events file without the name."""
+    from ingest.generic import csv_json, runner
+    b = {"platform": "csv", "url": "https://example.invalid/reports.csv", "time_zone": "America/Chicago",
+         "safe_fields": ["report_id", "start", "kind", "owner"], "reviewed_fields": {"owner": "test: a private system"},
+         "record": {"source_record_id": "report_id", "started_at": "start", "discharger_name": "owner",
+                    "npdes_permit": {"const": "XX0000002"},
+                    "event_type": {"field": "kind", "map": {"CSO": "cso"}}}}
+    text = "Report ID,Start,Kind,Owner\nP1,10/02/2026 14:30,CSO,Pat Example\n"
+    r = runner.build("x-owner", b, csv_json.parse(b, text.encode()), "2026-11-04T12:00:00Z", [])[0][0]
+    assert r["discharger_name"] == "[name removed]" and r["npdes_permit"] == "XX0000002"
+    rec = common.event(source_id="x-late", source_record_id="1", npdes_permit="XX0000003")
+    rec["discharger_name"] = "Pat Example"
+    p = common.write_events("x-late", [rec], path=tmp_path / "x-late.json")
+    out = json.loads(p.read_text())["records"][0]
+    assert out["discharger_name"] == "[name removed]" and out["npdes_permit"] == "XX0000003"
