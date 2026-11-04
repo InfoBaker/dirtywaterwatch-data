@@ -2,8 +2,8 @@
  "about": "Receiving-water names in Georgia's spill reports (EPD's daily list, postings of 2026-06-01, 2026-10-01, 2026-10-15, 2026-10-30, 2026-11-02 and 2026-11-03, and EPA's Sewer Overflow and Bypass Event reports for GA permits, extract of 2026-11-03) that data/receiving-waters-national.json does not hold for GA, by name as typed (case and punctuation ignored). Spelling variants of a held water (Polebridge Creek, Sugar Crek, Ocmuglee) are listed as typed so an alias can be added.",
  "checked": "2026-11-04",
  "state": "GA",
- "waters": 138,
- "reports": 266,
+ "waters": 148,
+ "reports": 296,
  "by_kind": {
   "named water": 73,
   "tributary of a named water": 45,
@@ -12,6 +12,7 @@
  "by_reason": {
   "no NHD flowline or waterbody of that name in GA": 79,
   "1 NHD water of that name in GA, none within reach of the reports' places": 14,
+  "a water record holds the name, but the reports' points lie too far from it to be placed there": 8,
   "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 7,
   "a storm-sewer system (MS4), not a named water": 7,
   "an unnamed or unknown stream: the report names no water": 5,
@@ -21,6 +22,7 @@
   "3 NHD waters of that name in GA, none within reach of the reports' places": 2,
   "a kind of water with no name": 2,
   "part of a sewer, drainage or treatment works, not a public water": 2,
+  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 2,
   "not a water name": 1,
   "a street name, not a water": 1,
   "14 NHD waters of that name in GA, none within reach of the reports' places": 1,
@@ -32,14 +34,14 @@
   "22 NHD waters of that name in GA, none within reach of the reports' places": 1,
   "24 NHD waters of that name in GA, none within reach of the reports' places": 1
  },
- "resolved_names": 164,
- "resolved_reports": 570,
+ "resolved_names": 154,
+ "resolved_reports": 540,
  "build": {
   "date": "2026-11-04",
   "command": "python -m ingest.waters_from_nhd --names research/ga/receiving-waters-missing.json --state GA",
   "records_built": 0,
-  "names_resolved": 3,
-  "network_requests": 16
+  "names_resolved": 0,
+  "network_requests": 0
  },
  "rows": [
   {
@@ -129,6 +131,45 @@
    ]
   },
   {
+   "name": "Doolittle Creek",
+   "reports": 9,
+   "points": [
+    [
+     33.66478,
+     -84.21842
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "doolittle-creek-ga"
+   ],
+   "reason": "a water record holds the name (doolittle-creek-ga), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -84.21842,
+     "lat": 33.66478,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.66478, -84.21842) (the nearest is 5.8 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 9.1 km away)"
+    },
+    {
+     "town": "Stonecrest",
+     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 6.9 km away)"
+    }
+   ]
+  },
+  {
    "name": "Tributary to Laurel Creek",
    "reports": 8,
    "seen_in": [
@@ -196,6 +237,34 @@
     "ga-epd-spills"
    ],
    "reason": "a storm-sewer system, not a named water"
+  },
+  {
+   "name": "Roaring Branch",
+   "reports": 6,
+   "points": [
+    [
+     32.40206,
+     -84.95571
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "roaring-branch-ga"
+   ],
+   "reason": "a water record holds the name (roaring-branch-ga), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -84.95571,
+     "lat": 32.40206,
+     "reason": "no NHD water of that name within 2 km of the reports' point (32.40206, -84.95571) (the nearest is 13.3 km away)"
+    }
+   ]
   },
   {
    "name": "MS4 stormwater system",
@@ -339,6 +408,41 @@
     "ga-epd-spills"
    ],
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Burnt Fork Creek",
+   "reports": 4,
+   "points": [
+    [
+     33.66478,
+     -84.21842
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "burnt-fork-creek-ga"
+   ],
+   "reason": "a water record holds the name (burnt-fork-creek-ga), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -84.21842,
+     "lat": 33.66478,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.66478, -84.21842) (the nearest is 17.2 km away)"
+    },
+    {
+     "town": "Stonecrest",
+     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 13.7 km away)"
+    }
+   ]
   },
   {
    "name": "Favor Creek",
@@ -626,6 +730,49 @@
    ]
   },
   {
+   "name": "Kingsley Lake",
+   "reports": 3,
+   "points": [
+    [
+     33.66478,
+     -84.21842
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Dunwoody"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "kingsley-lake-ga"
+   ],
+   "reason": "a water record holds the name (kingsley-lake-ga), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -84.21842,
+     "lat": 33.66478,
+     "reason": "no NHD water of that name within 2 km of the reports' point (33.66478, -84.21842) (the nearest is 32.1 km away)"
+    },
+    {
+     "town": "Decatur",
+     "reason": "no NHD water of that name within 3 km of Decatur (the nearest is 17.2 km away)"
+    },
+    {
+     "town": "Tucker",
+     "reason": "no NHD water of that name within 3 km of Tucker (the nearest is 9.1 km away)"
+    },
+    {
+     "town": "Stonecrest",
+     "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 26.7 km away)"
+    }
+   ]
+  },
+  {
    "name": "Lower Rocky Creek",
    "reports": 3,
    "seen_in": [
@@ -782,6 +929,42 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
    "parts": [
     "Favor Creek"
+   ]
+  },
+  {
+   "name": "Tributary to Proctor Creek",
+   "reports": 3,
+   "points": [
+    [
+     34.05777,
+     -84.59693
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Kennesaw"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "proctor-creek-ga",
+    "proctor-creek-acworth-ga"
+   ],
+   "reason": "a water record holds the name (proctor-creek-ga, proctor-creek-acworth-ga), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -84.59693,
+     "lat": 34.05777,
+     "reason": "no NHD water of that name within 2 km of the reports' point (34.05777, -84.59693) (the nearest is 2.8 km away)"
+    },
+    {
+     "town": "Marietta",
+     "reason": "no NHD water of that name within 3 km of Marietta (the nearest is 4.7 km away)"
+    }
    ]
   },
   {
@@ -1417,6 +1600,27 @@
    "reason": "part of a sewer, drainage or treatment works, not a public water"
   },
   {
+   "name": "17 Mile River",
+   "reports": 1,
+   "points": [
+    [
+     31.50086,
+     -82.82389
+    ]
+   ],
+   "towns": [
+    "Douglas"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "seventeen-mile-river-ga"
+   ],
+   "reason": "a water record holds this water but not this spelling (seventeen-mile-river-ga): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
+  },
+  {
    "name": "Airport Creek",
    "reports": 1,
    "seen_in": [
@@ -1531,6 +1735,43 @@
    "reason": "no NHD flowline or waterbody of that name in GA; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
+   "name": "Cauley Creek",
+   "reports": 1,
+   "points": [
+    [
+     34.00248,
+     -84.39051
+    ]
+   ],
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ],
+   "records": [
+    "cauley-creek-ga"
+   ],
+   "reason": "a water record holds the name (cauley-creek-ga), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -84.39051,
+     "lat": 34.00248,
+     "reason": "no NHD water of that name within 2 km of the reports' point (34.00248, -84.39051) (the nearest is 21.9 km away)"
+    },
+    {
+     "town": "Alpharetta",
+     "reason": "no NHD water of that name within 3 km of Alpharetta (the nearest is 4.0 km away)"
+    },
+    {
+     "town": "Roswell",
+     "reason": "no NHD water of that name within 3 km of Roswell (the nearest is 10.4 km away)"
+    }
+   ]
+  },
+  {
    "name": "Cobb Creek",
    "reports": 1,
    "seen_in": [
@@ -1559,6 +1800,35 @@
     {
      "town": "Stonecrest",
      "reason": "no NHD water of that name within 3 km of Stonecrest (the nearest is 49.6 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Dark Entry Creek",
+   "reports": 1,
+   "points": [
+    [
+     30.75799,
+     -81.53817
+    ]
+   ],
+   "towns": [
+    "Saint Marys",
+    "St. Marys"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "dark-entry-creek-ga"
+   ],
+   "reason": "a water record holds the name (dark-entry-creek-ga), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -81.53817,
+     "lat": 30.75799,
+     "reason": "no NHD water of that name within 2 km of the reports' point (30.75799, -81.53817) (the nearest is 4.2 km away)"
     }
    ]
   },
@@ -3089,6 +3359,27 @@
    ]
   },
   {
+   "name": "Unnamed tributary to 17 Mile River",
+   "reports": 1,
+   "points": [
+    [
+     31.50086,
+     -82.82389
+    ]
+   ],
+   "towns": [
+    "Douglas"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "seventeen-mile-river-ga"
+   ],
+   "reason": "a water record holds this water but not this spelling (seventeen-mile-river-ga): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
+  },
+  {
    "name": "Upper Upatoi Basin",
    "reports": 1,
    "seen_in": [
@@ -3243,6 +3534,34 @@
      "reason": "no NHD water of that name within 3 km of Buford (the nearest is 25.9 km away)"
     }
    ]
+  },
+  {
+   "name": "unnamed tributary to Rice Creek",
+   "reports": 1,
+   "points": [
+    [
+     34.27731,
+     -83.11961
+    ]
+   ],
+   "towns": [
+    "Royston"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ],
+   "records": [
+    "rice-creek-royston-ga"
+   ],
+   "reason": "a water record holds the name (rice-creek-royston-ga), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -83.11961,
+     "lat": 34.27731,
+     "reason": "no NHD water of that name within 2 km of the reports' point (34.27731, -83.11961) (the nearest is 3.8 km away)"
+    }
+   ]
   }
  ],
  "resolved": [
@@ -3252,7 +3571,39 @@
    "slugs": [
     "north-fork-peachtree-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.66478,
+     -84.21842
+    ],
+    [
+     33.86707,
+     -84.28934
+    ],
+    [
+     33.85893,
+     -84.31504
+    ],
+    [
+     33.88665,
+     -84.29761
+    ],
+    [
+     33.90418,
+     -84.21993
+    ]
+   ],
+   "towns": [
+    "Tucker",
+    "Decatur",
+    "Stonecrest",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Peachtree Creek",
@@ -3260,7 +3611,36 @@
    "slugs": [
     "peachtree-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.82332,
+     -84.45692
+    ],
+    [
+     33.76874,
+     -84.42512
+    ],
+    [
+     33.81016,
+     -84.41935
+    ],
+    [
+     33.81553,
+     -84.39527
+    ],
+    [
+     33.78811,
+     -84.41855
+    ]
+   ],
+   "towns": [
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "South Fork Peachtree Creek",
@@ -3268,7 +3648,39 @@
    "slugs": [
     "south-fork-peachtree-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.79137,
+     -84.27943
+    ],
+    [
+     33.83106,
+     -84.24624
+    ],
+    [
+     33.80665,
+     -84.29906
+    ],
+    [
+     33.8267,
+     -84.20178
+    ],
+    [
+     33.66478,
+     -84.21842
+    ]
+   ],
+   "towns": [
+    "Tucker",
+    "Decatur",
+    "Stonecrest",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Snapfinger Creek",
@@ -3276,7 +3688,39 @@
    "slugs": [
     "snapfinger-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.79967,
+     -84.23307
+    ],
+    [
+     33.67555,
+     -84.21106
+    ],
+    [
+     33.7403,
+     -84.19714
+    ],
+    [
+     33.69769,
+     -84.19308
+    ],
+    [
+     33.74988,
+     -84.22804
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Stone Mountain"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Chattahoochee River Tributary",
@@ -3284,7 +3728,28 @@
    "slugs": [
     "chattahoochee-river-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     32.52046,
+     -84.9717
+    ],
+    [
+     32.40206,
+     -84.95571
+    ],
+    [
+     32.53297,
+     -84.99868
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Pole Bridge Creek",
@@ -3292,7 +3757,27 @@
    "slugs": [
     "pole-bridge-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.70516,
+     -84.14263
+    ],
+    [
+     33.67749,
+     -84.15256
+    ]
+   ],
+   "towns": [
+    "Stonecrest",
+    "Decatur",
+    "Tucker",
+    "Lithonia"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Sugar Creek",
@@ -3301,7 +3786,27 @@
     "sugar-creek-gresham-park-ga",
     "sugar-creek-valdosta-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.72328,
+     -84.31953
+    ],
+    [
+     30.85128,
+     -83.31486
+    ]
+   ],
+   "towns": [
+    "Atlanta",
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Bull creek tributary",
@@ -3309,7 +3814,28 @@
    "slugs": [
     "bull-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.40206,
+     -84.95571
+    ],
+    [
+     32.44274,
+     -84.93646
+    ],
+    [
+     32.52399,
+     -84.8912
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Raes Creek",
@@ -3317,7 +3843,28 @@
    "slugs": [
     "raes-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.48623,
+     -82.01046
+    ],
+    [
+     33.49036,
+     -82.09314
+    ],
+    [
+     33.48575,
+     -82.0464
+    ]
+   ],
+   "towns": [
+    "Augusta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Sandy Creek",
@@ -3325,15 +3872,28 @@
    "slugs": [
     "sandy-creek-ga"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Doolittle Creek",
-   "reports": 9,
-   "slugs": [
-    "doolittle-creek-ga"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.76236,
+     -84.51431
+    ],
+    [
+     33.77921,
+     -84.49689
+    ],
+    [
+     33.75013,
+     -84.38852
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Peavine Creek",
@@ -3341,7 +3901,27 @@
    "slugs": [
     "peavine-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.79185,
+     -84.32039
+    ],
+    [
+     33.78002,
+     -84.29774
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Jester Creek",
@@ -3349,7 +3929,30 @@
    "slugs": [
     "jester-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.57102,
+     -84.35098
+    ],
+    [
+     33.53576,
+     -84.37058
+    ],
+    [
+     33.58412,
+     -84.36959
+    ]
+   ],
+   "towns": [
+    "Jonesboro",
+    "Morrow",
+    "Forest Park"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Nickajack Creek",
@@ -3357,7 +3960,26 @@
    "slugs": [
     "nickajack-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.90264,
+     -84.54337
+    ],
+    [
+     33.83343,
+     -84.49959
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Olley Creek",
@@ -3365,7 +3987,17 @@
    "slugs": [
     "olley-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Fair Oaks"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Barbashela Creek",
@@ -3373,7 +4005,27 @@
    "slugs": [
     "barbashela-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.75674,
+     -84.16876
+    ],
+    [
+     33.78393,
+     -84.19539
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Stone Mountain"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Conley Creek",
@@ -3381,7 +4033,21 @@
    "slugs": [
     "conley-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.63636,
+     -84.32501
+    ]
+   ],
+   "towns": [
+    "Jonesboro",
+    "Conley"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Heiferhorn Creek Tributary",
@@ -3389,7 +4055,20 @@
    "slugs": [
     "heiferhorn-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.56183,
+     -84.96652
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Lindsey Creek",
@@ -3397,15 +4076,20 @@
    "slugs": [
     "lindsey-creek-ga"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Roaring Branch",
-   "reports": 6,
-   "slugs": [
-    "roaring-branch-ga"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.47399,
+     -84.94204
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Honey Creek",
@@ -3413,7 +4097,17 @@
    "slugs": [
     "honey-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Lithonia"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary of Beaver Ruin Creek",
@@ -3421,7 +4115,23 @@
    "slugs": [
     "beaver-ruin-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.9143,
+     -84.10874
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Norcross",
+    "Lilburn"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary of Little Suwanee Creek",
@@ -3429,7 +4139,22 @@
    "slugs": [
     "little-suwanee-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.02939,
+     -84.035
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Suwanee"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Wolfpack Creek",
@@ -3437,7 +4162,22 @@
    "slugs": [
     "wolfpack-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.78002,
+     -84.29774
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Ball Mill Creek",
@@ -3445,7 +4185,17 @@
    "slugs": [
     "ball-mill-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Dunwoody"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Bull Creek",
@@ -3453,15 +4203,24 @@
    "slugs": [
     "bull-creek-ga"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Burnt Fork Creek",
-   "reports": 4,
-   "slugs": [
-    "burnt-fork-creek-ga"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.47395,
+     -84.92019
+    ],
+    [
+     32.40206,
+     -84.95571
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Cobbs Creek",
@@ -3469,7 +4228,22 @@
    "slugs": [
     "cobbs-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.73349,
+     -84.24723
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Cooper Creek",
@@ -3477,7 +4251,24 @@
    "slugs": [
     "cooper-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.50354,
+     -84.92809
+    ],
+    [
+     32.40206,
+     -84.95571
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Ditch feeding Rocky Creek",
@@ -3485,7 +4276,20 @@
    "slugs": [
     "rocky-creek-macon-bibb-county-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.82045,
+     -83.67167
+    ]
+   ],
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Good Water Creek",
@@ -3493,7 +4297,20 @@
    "slugs": [
     "good-water-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.85947,
+     -83.94895
+    ]
+   ],
+   "towns": [
+    "Thomasville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "HENDERSON MILL CREEK",
@@ -3501,7 +4318,27 @@
    "slugs": [
     "henderson-mill-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.66478,
+     -84.21842
+    ],
+    [
+     33.86598,
+     -84.25779
+    ]
+   ],
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Chamblee"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Jackson Creek",
@@ -3509,7 +4346,23 @@
    "slugs": [
     "jackson-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.89609,
+     -84.1391
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Decatur",
+    "Tucker"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Mossy Creek",
@@ -3518,7 +4371,30 @@
     "mossy-creek-ga",
     "mossy-creek-cleveland-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.43926,
+     -83.71722
+    ],
+    [
+     32.48956,
+     -83.66291
+    ],
+    [
+     34.57146,
+     -83.76174
+    ]
+   ],
+   "towns": [
+    "Perry",
+    "Cleveland",
+    "Kathleen"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "North Lake",
@@ -3526,7 +4402,17 @@
    "slugs": [
     "north-lake-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Panthers Branch",
@@ -3534,7 +4420,16 @@
    "slugs": [
     "panthers-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Phinizy Ditch",
@@ -3542,7 +4437,20 @@
    "slugs": [
     "phinizy-ditch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.39744,
+     -81.97543
+    ]
+   ],
+   "towns": [
+    "Augusta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Pye Lake Tributary",
@@ -3550,7 +4458,14 @@
    "slugs": [
     "pye-lake-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Fayetteville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary of Johns Creek",
@@ -3558,7 +4473,16 @@
    "slugs": [
     "johns-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary of Long Island Creek",
@@ -3566,7 +4490,17 @@
    "slugs": [
     "long-island-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell",
+    "Sandy Springs"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Almand Creek",
@@ -3574,15 +4508,44 @@
    "slugs": [
     "almand-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.62787,
+     -84.03243
+    ]
+   ],
+   "towns": [
+    "Conyers"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Butler Creek",
    "reports": 4,
    "slugs": [
-    "butler-creek-ga"
+    "butler-creek-kennesaw-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.02007,
+     -84.61912
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Kennesaw"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Chattahoochee River",
@@ -3590,7 +4553,23 @@
    "slugs": [
     "chattahoochee-river-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.76063,
+     -84.56844
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Austell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Little Noonday Creek",
@@ -3598,7 +4577,26 @@
    "slugs": [
     "little-noonday-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.00917,
+     -84.52353
+    ],
+    [
+     34.05755,
+     -84.53139
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Noonday Creek",
@@ -3606,7 +4604,23 @@
    "slugs": [
     "noonday-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.02756,
+     -84.59415
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Kennesaw"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Sugar Creek",
@@ -3615,7 +4629,14 @@
     "sugar-creek-gresham-park-ga",
     "sugar-creek-valdosta-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Eastman"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary of Silver Creek",
@@ -3623,7 +4644,19 @@
    "slugs": [
     "silver-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.22712,
+     -85.16796
+    ]
+   ],
+   "towns": [
+    "Rome"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "tributary of Little River",
@@ -3631,7 +4664,20 @@
    "slugs": [
     "little-river-social-circle-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.65183,
+     -83.69962
+    ]
+   ],
+   "towns": [
+    "Social Circle"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "un-named tributary to Suwanee Creek",
@@ -3639,15 +4685,20 @@
    "slugs": [
     "suwanee-creek-ga"
    ],
-   "how": "a water record already holds the name"
-  },
-  {
-   "name": "Kingsley Lake",
-   "reports": 3,
-   "slugs": [
-    "kingsley-lake-ga"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.10053,
+     -84.01083
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Buford"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Nash Creek",
@@ -3655,7 +4706,14 @@
    "slugs": [
     "nash-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Fayetteville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Proctor",
@@ -3663,7 +4721,20 @@
    "slugs": [
     "proctor-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.76217,
+     -84.42697
+    ]
+   ],
+   "towns": [
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Springfield Canal",
@@ -3671,7 +4742,20 @@
    "slugs": [
     "springfield-canal-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.08009,
+     -81.10291
+    ]
+   ],
+   "towns": [
+    "Savannah"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Sullivan Creek",
@@ -3679,7 +4763,16 @@
    "slugs": [
     "sullivan-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Jonesboro",
+    "College Park",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Buttermilk Creek",
@@ -3687,15 +4780,27 @@
    "slugs": [
     "buttermilk-creek-ga"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Tributary to Proctor Creek",
-   "reports": 3,
-   "slugs": [
-    "proctor-creek-acworth-ga"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.82232,
+     -84.60484
+    ],
+    [
+     33.85886,
+     -84.59755
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Austell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Rottenwood Creek",
@@ -3703,7 +4808,23 @@
    "slugs": [
     "rottenwood-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.8929,
+     -84.46959
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Sope Creek",
@@ -3711,7 +4832,16 @@
    "slugs": [
     "sope-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary of Shoal Creek",
@@ -3719,7 +4849,15 @@
    "slugs": [
     "shoal-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Lawrenceville",
+    "Buford"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary to Shoal Creek",
@@ -3727,7 +4865,13 @@
    "slugs": [
     "shoal-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Griffin"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Anneewakee Creek",
@@ -3735,7 +4879,14 @@
    "slugs": [
     "anneewakee-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Douglasville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Armory Creek",
@@ -3743,7 +4894,22 @@
    "slugs": [
     "armory-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.37229,
+     -84.92269
+    ]
+   ],
+   "towns": [
+    "Columbus",
+    "Ft. Benning",
+    "Fort Moore"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Bowman Branch",
@@ -3751,7 +4917,13 @@
    "slugs": [
     "bowman-branch-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Butler Creek Tributary",
@@ -3759,7 +4931,20 @@
    "slugs": [
     "butler-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.39487,
+     -81.97529
+    ]
+   ],
+   "towns": [
+    "Augusta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Ditch feeding Bowman Branch",
@@ -3767,7 +4952,14 @@
    "slugs": [
     "bowman-branch-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Eastanollee",
@@ -3775,7 +4967,20 @@
    "slugs": [
     "eastanollee-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.54325,
+     -83.29969
+    ]
+   ],
+   "towns": [
+    "Toccoa"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Flatrock Creek tributary",
@@ -3783,7 +4988,14 @@
    "slugs": [
     "flatrock-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Lake Tobesofkee",
@@ -3791,7 +5003,14 @@
    "slugs": [
     "lake-tobesofkee-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Little Bear Creek",
@@ -3799,7 +5018,14 @@
    "slugs": [
     "little-bear-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Douglasville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Little Tallapoosa River",
@@ -3807,7 +5033,13 @@
    "slugs": [
     "little-tallapoosa-river-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Carrollton"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Long Island Creek",
@@ -3815,7 +5047,17 @@
    "slugs": [
     "long-island-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell",
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Nickajack Creek",
@@ -3823,7 +5065,16 @@
    "slugs": [
     "nickajack-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Peachtree",
@@ -3831,7 +5082,20 @@
    "slugs": [
     "peachtree-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.81,
+     -84.43663
+    ]
+   ],
+   "towns": [
+    "Atlanta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Pew Creek",
@@ -3839,7 +5103,15 @@
    "slugs": [
     "pew-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Lawrenceville",
+    "Buford"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Rock Creek",
@@ -3847,7 +5119,25 @@
    "slugs": [
     "rock-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.86598,
+     -83.78436
+    ],
+    [
+     33.51777,
+     -82.0268
+    ]
+   ],
+   "towns": [
+    "Augusta",
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Seventeen Mile River",
@@ -3855,7 +5145,20 @@
    "slugs": [
     "seventeen-mile-river-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     31.50086,
+     -82.82389
+    ]
+   ],
+   "towns": [
+    "Douglas"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Sloans Creek",
@@ -3863,7 +5166,20 @@
    "slugs": [
     "sloans-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     31.15987,
+     -83.81019
+    ]
+   ],
+   "towns": [
+    "Moultrie"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Stone Mountain Creek",
@@ -3871,7 +5187,16 @@
    "slugs": [
     "stone-mountain-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Tucker",
+    "Decatur",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Swamp Creek",
@@ -3879,7 +5204,20 @@
    "slugs": [
     "swamp-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.49016,
+     -84.36982
+    ]
+   ],
+   "towns": [
+    "Jonesboro"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "TRIBUTARY TO YELLOW RIVER",
@@ -3887,7 +5225,14 @@
    "slugs": [
     "yellow-river-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Conyers"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Trib of Cooper Creek",
@@ -3895,7 +5240,20 @@
    "slugs": [
     "cooper-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.53028,
+     -84.91904
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary of Big Creek",
@@ -3903,7 +5261,22 @@
    "slugs": [
     "big-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.0282,
+     -84.33222
+    ]
+   ],
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary of Chattahoochee river",
@@ -3911,7 +5284,17 @@
    "slugs": [
     "chattahoochee-river-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell",
+    "Sandy Spring"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Allatoona Creek",
@@ -3919,7 +5302,23 @@
    "slugs": [
     "allatoona-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.02107,
+     -84.71683
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Acworth"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Noses Creek",
@@ -3927,7 +5326,16 @@
    "slugs": [
     "noses-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Un-named tributary to Lake Lanier",
@@ -3935,7 +5343,21 @@
    "slugs": [
     "lake-lanier-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.19608,
+     -84.18656
+    ]
+   ],
+   "towns": [
+    "Gainesville",
+    "Cumming"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary of Bennett Creek",
@@ -3943,7 +5365,16 @@
    "slugs": [
     "bennett-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Suwanee"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary of Big Haynes Creek",
@@ -3951,7 +5382,27 @@
    "slugs": [
     "big-haynes-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.80962,
+     -84.00228
+    ],
+    [
+     33.89609,
+     -83.97259
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Snellville",
+    "Grayson"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary of Chattahoochee River",
@@ -3959,7 +5410,27 @@
    "slugs": [
     "chattahoochee-river-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.02143,
+     -84.13173
+    ],
+    [
+     34.00773,
+     -84.177
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Duluth",
+    "Suwanee"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary of Jackson Creek",
@@ -3967,7 +5438,22 @@
    "slugs": [
     "jackson-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.8839,
+     -84.16846
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Lilburn"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary to Lake Lanier",
@@ -3975,15 +5461,21 @@
    "slugs": [
     "lake-lanier-ga"
    ],
-   "how": "a water record already holds the name"
-  },
-  {
-   "name": "17 Mile River",
-   "reports": 1,
-   "slugs": [
-    "seventeen-mile-river-ga"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.19608,
+     -84.18656
+    ]
    ],
-   "how": "a water record already holds the name"
+   "towns": [
+    "Gainesville",
+    "Cumming"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Bear Creek - headwaters",
@@ -3991,7 +5483,20 @@
    "slugs": [
     "bear-creek-lavonia-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.42183,
+     -83.12027
+    ]
+   ],
+   "towns": [
+    "Lavonia"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Boar Tusk Branch.",
@@ -3999,7 +5504,14 @@
    "slugs": [
     "boar-tusk-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Conyers"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Bromolow Creek",
@@ -4007,7 +5519,22 @@
    "slugs": [
     "bromolow-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.93088,
+     -84.13416
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Norcross"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Buttermilk Creek",
@@ -4015,15 +5542,15 @@
    "slugs": [
     "buttermilk-creek-ga"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Cauley Creek",
-   "reports": 1,
-   "slugs": [
-    "cauley-creek-ga"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
    ],
-   "how": "record built from the name"
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Chattahoochee River Trib.",
@@ -4031,7 +5558,28 @@
    "slugs": [
     "chattahoochee-river-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     32.52046,
+     -84.9717
+    ],
+    [
+     32.40206,
+     -84.95571
+    ],
+    [
+     32.53297,
+     -84.99868
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Cooks Creek",
@@ -4039,7 +5587,20 @@
    "slugs": [
     "cooks-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.04622,
+     -83.92047
+    ]
+   ],
+   "towns": [
+    "Forsyth"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Cooper Creek Tributary",
@@ -4047,15 +5608,20 @@
    "slugs": [
     "cooper-creek-ga"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Dark Entry Creek",
-   "reports": 1,
-   "slugs": [
-    "dark-entry-creek-ga"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.50117,
+     -84.92658
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Ditch feeding Vineville Branch",
@@ -4063,7 +5629,20 @@
    "slugs": [
     "vineville-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.84007,
+     -83.64828
+    ]
+   ],
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Ditch feeding Walnut Creek",
@@ -4071,7 +5650,13 @@
    "slugs": [
     "walnut-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Gum Swamp Creek",
@@ -4079,7 +5664,13 @@
    "slugs": [
     "gum-swamp-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Eastman"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Ison Branch",
@@ -4087,7 +5678,19 @@
    "slugs": [
     "ison-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.18843,
+     -84.22433
+    ]
+   ],
+   "towns": [
+    "Griffin"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Johns Creek",
@@ -4095,7 +5698,15 @@
    "slugs": [
     "johns-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "LUCKY SHOALS CREEK",
@@ -4103,7 +5714,15 @@
    "slugs": [
     "lucky-shoals-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Lake Erma",
@@ -4111,7 +5730,20 @@
    "slugs": [
     "lake-erma-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.44685,
+     -84.2619
+    ]
+   ],
+   "towns": [
+    "Hampton",
+    "Mcdonough"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Level Creek",
@@ -4119,7 +5751,14 @@
    "slugs": [
     "level-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Lawrenceville",
+    "Buford"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Little Noonday Creek",
@@ -4127,7 +5766,15 @@
    "slugs": [
     "little-noonday-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Mill Branch",
@@ -4135,7 +5782,14 @@
    "slugs": [
     "mill-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Mill Branch Creek",
@@ -4143,7 +5797,13 @@
    "slugs": [
     "mill-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Mill Branch Tributary",
@@ -4151,7 +5811,14 @@
    "slugs": [
     "mill-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Olley Creek",
@@ -4159,7 +5826,16 @@
    "slugs": [
     "olley-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "One MIle Branch",
@@ -4167,7 +5843,19 @@
    "slugs": [
     "onemile-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     30.83511,
+     -83.35808
+    ]
+   ],
+   "towns": [
+    "Valdosta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Panthers Branch Creek",
@@ -4175,7 +5863,16 @@
    "slugs": [
     "panthers-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Decatur",
+    "Tucker",
+    "Stonecrest"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Pates Creek Tributary",
@@ -4183,7 +5880,20 @@
    "slugs": [
     "pates-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.48614,
+     -84.23315
+    ]
+   ],
+   "towns": [
+    "Stockbridge",
+    "Mcdonough"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Phinizy Swamp",
@@ -4191,7 +5901,14 @@
    "slugs": [
     "phinizy-swamp-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Augusta"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Polebridge Creek",
@@ -4199,7 +5916,27 @@
    "slugs": [
     "pole-bridge-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.70516,
+     -84.14263
+    ],
+    [
+     33.67749,
+     -84.15256
+    ]
+   ],
+   "towns": [
+    "Stonecrest",
+    "Decatur",
+    "Tucker",
+    "Lithonia"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Roaring Branch Creek",
@@ -4207,7 +5944,14 @@
    "slugs": [
     "roaring-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Roaring Branch Tributary",
@@ -4215,7 +5959,13 @@
    "slugs": [
     "roaring-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Rotten Wood Creek",
@@ -4223,7 +5973,15 @@
    "slugs": [
     "rottenwood-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Rum Creek",
@@ -4231,7 +5989,14 @@
    "slugs": [
     "rum-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Jonesboro"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "ST. Marys",
@@ -4239,7 +6004,19 @@
    "slugs": [
     "saint-marys-river-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     30.75799,
+     -81.53817
+    ]
+   ],
+   "towns": [
+    "Saint Marys"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Sabbath Creek",
@@ -4247,7 +6024,20 @@
    "slugs": [
     "sabbath-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.87697,
+     -83.6981
+    ]
+   ],
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Singleton Creek",
@@ -4255,7 +6045,22 @@
    "slugs": [
     "singleton-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.9944,
+     -84.10775
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Duluth"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Snapping Shoals",
@@ -4263,7 +6068,13 @@
    "slugs": [
     "snapping-shoals-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Conyers"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Sope Creek",
@@ -4271,7 +6082,15 @@
    "slugs": [
     "sope-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Standing Boy Creek tributary",
@@ -4279,7 +6098,14 @@
    "slugs": [
     "standing-boy-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Trib Heiferhorn Creek",
@@ -4287,7 +6113,14 @@
    "slugs": [
     "heiferhorn-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Trib Lindsey Creek",
@@ -4295,7 +6128,14 @@
    "slugs": [
     "lindsey-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Trib of Bull Creek",
@@ -4303,7 +6143,14 @@
    "slugs": [
     "bull-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Trib of Tiger Creek",
@@ -4311,7 +6158,14 @@
    "slugs": [
     "tiger-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Trib of Upatoi Creek",
@@ -4319,7 +6173,20 @@
    "slugs": [
     "upatoi-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.388,
+     -84.93412
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary D to Little Anneewakee Creek",
@@ -4327,7 +6194,20 @@
    "slugs": [
     "little-anneewakee-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.73859,
+     -84.70726
+    ]
+   ],
+   "towns": [
+    "Douglasville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary Nickajack Creek",
@@ -4335,7 +6215,22 @@
    "slugs": [
     "nickajack-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.84559,
+     -84.56
+    ]
+   ],
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary of Seven Branch",
@@ -4343,7 +6238,22 @@
    "slugs": [
     "seven-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.0162,
+     -84.29578
+    ]
+   ],
+   "towns": [
+    "Johns Creek",
+    "Alpharetta",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary of Upatoi Creek",
@@ -4351,7 +6261,20 @@
    "slugs": [
     "upatoi-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     32.388,
+     -84.93412
+    ]
+   ],
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Bettys Branch",
@@ -4359,7 +6282,13 @@
    "slugs": [
     "bettys-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Evans"
+   ],
+   "places_from": [
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Clark Creek",
@@ -4367,7 +6296,17 @@
    "slugs": [
     "clark-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Acworth"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Ison Branch",
@@ -4375,7 +6314,20 @@
    "slugs": [
     "ison-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.18843,
+     -84.22433
+    ]
+   ],
+   "towns": [
+    "Griffin"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Rubes Creek",
@@ -4383,7 +6335,16 @@
    "slugs": [
     "rubes-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Sewell Mill Creek",
@@ -4391,7 +6352,16 @@
    "slugs": [
     "sewell-mill-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Tate Creek",
@@ -4399,7 +6369,17 @@
    "slugs": [
     "tate-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Kennesaw"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Upatoi Creek",
@@ -4407,7 +6387,14 @@
    "slugs": [
     "upatoi-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Tributary to Willeo Creek",
@@ -4415,7 +6402,15 @@
    "slugs": [
     "willeo-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Unnamed Tributary of Pew Creek",
@@ -4423,7 +6418,15 @@
    "slugs": [
     "pew-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Lawrenceville",
+    "Buford"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary to Chattahoochee River",
@@ -4431,7 +6434,20 @@
    "slugs": [
     "chattahoochee-river-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.73663,
+     -84.5911
+    ]
+   ],
+   "towns": [
+    "Douglasville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed Tributary to Flat Branch",
@@ -4439,7 +6455,19 @@
    "slugs": [
     "flat-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     31.271,
+     -83.48031
+    ]
+   ],
+   "towns": [
+    "Lenox"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Unnamed tributary Little Red Bluff Creek",
@@ -4447,7 +6475,13 @@
    "slugs": [
     "little-red-bluff-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Pearson"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Unnamed tributary of Proctor Creek",
@@ -4463,15 +6497,16 @@
    "slugs": [
     "singleton-creek-ga"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Unnamed tributary to 17 Mile River",
-   "reports": 1,
-   "slugs": [
-    "seventeen-mile-river-ga"
+   "how": "record built from the name",
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Duluth"
    ],
-   "how": "a water record already holds the name"
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed tributary to Proctor Creek",
@@ -4479,7 +6514,20 @@
    "slugs": [
     "proctor-creek-acworth-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.0446,
+     -84.6571
+    ]
+   ],
+   "towns": [
+    "Kennesaw"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Unnamed trributary to Little Red Bluff Creek",
@@ -4487,7 +6535,13 @@
    "slugs": [
     "little-red-bluff-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Pearson"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Upatoi Creek Tributary",
@@ -4495,7 +6549,13 @@
    "slugs": [
     "upatoi-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Columbus"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "Vineville Branch",
@@ -4503,7 +6563,14 @@
    "slugs": [
     "vineville-branch-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Macon"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "Willeo Creek",
@@ -4511,7 +6578,17 @@
    "slugs": [
     "willeo-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Marietta",
+    "Smyrna",
+    "Mableton",
+    "Roswell"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "tributary to little red bluff creek",
@@ -4519,7 +6596,14 @@
    "slugs": [
     "little-red-bluff-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Pearson"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "unamed tributary of Little Haynes Creek",
@@ -4527,7 +6611,19 @@
    "slugs": [
     "little-haynes-creek-ga"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.84525,
+     -83.88558
+    ]
+   ],
+   "towns": [
+    "Loganville"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "unamed tributary of yellow river",
@@ -4535,7 +6631,22 @@
    "slugs": [
     "yellow-river-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.87998,
+     -84.0688
+    ]
+   ],
+   "towns": [
+    "Lawrenceville",
+    "Buford",
+    "Lilburn"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   },
   {
    "name": "unnamed trib to little red bluff creek",
@@ -4543,7 +6654,13 @@
    "slugs": [
     "little-red-bluff-creek-ga"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "towns": [
+    "Pearson"
+   ],
+   "places_from": [
+    "echo-sewer-overflow"
+   ]
   },
   {
    "name": "unnamed tributary of ivy creek",
@@ -4551,15 +6668,21 @@
    "slugs": [
     "ivy-creek-ga"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "unnamed tributary to Rice Creek",
-   "reports": 1,
-   "slugs": [
-    "rice-creek-royston-ga"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.07537,
+     -83.95758
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Lawrenceville",
+    "Buford"
+   ],
+   "places_from": [
+    "echo-sewer-overflow",
+    "ga-epd-spills"
+   ]
   }
  ]
 }

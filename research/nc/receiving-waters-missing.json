@@ -2,30 +2,35 @@
  "about": "Receiving waters named by the NC DWR sanitary sewer overflow layers (2022 to date) that data/receiving-waters-national.json does not hold for North Carolina (no name, NHD GNIS name or spelling seen matches, parentheticals ignored). Reports the source says did not reach surface water, duplicates and placeholders (unknown, storm drain, ditch) are left out. stream_index is DWR's own index for the stream where the 2026 layer gives one; points are report locations (DWR's geocode of the address), up to three. One name can be several streams in different places (the points show where); stream_index is the one DWR gives on a 2026 report of that name.",
  "generated": "2026-11-04",
  "state": "NC",
- "waters": 116,
- "reports": 175,
+ "waters": 128,
+ "reports": 190,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in NC": 65,
+  "no NHD flowline or waterbody of that name in NC": 66,
   "1 NHD water of that name in NC, none within reach of the reports' places": 21,
-  "2 NHD waters of that name in NC, none within reach of the reports' places": 8,
+  "2 NHD waters of that name in NC, none within reach of the reports' places": 9,
   "private property, not a public water": 7,
+  "a water record holds the name, but the reports' points lie too far from it to be placed there": 6,
   "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 4,
   "an unnamed tributary named by a place, not by the water it joins": 2,
   "4 NHD waters of that name in NC, none within reach of the reports' places": 2,
   "part of a sewer, drainage or treatment works, not a public water": 2,
   "an unnamed or unknown stream: the report names no water": 2,
   "6 NHD waters of that name in NC, none within reach of the reports' places": 1,
+  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 1,
+  "14 NHD waters of that name in NC, none within reach of the reports' places": 1,
   "no water name": 1,
-  "not a water name": 1
+  "12 NHD waters of that name in NC, none within reach of the reports' places": 1,
+  "10 NHD waters of that name in NC, none within reach of the reports' places": 1,
+  "7 NHD waters of that name in NC, none within reach of the reports' places": 1
  },
- "resolved_names": 420,
- "resolved_reports": 1407,
+ "resolved_names": 408,
+ "resolved_reports": 1392,
  "build": {
   "date": "2026-11-04",
   "command": "python -m ingest.waters_from_nhd --names research/nc/receiving-waters-missing.json --state NC",
   "records_built": 0,
   "names_resolved": 0,
-  "network_requests": 17
+  "network_requests": 0
  },
  "rows": [
   {
@@ -731,6 +736,74 @@
    "reason": "private property, not a public water"
   },
   {
+   "name": "Stevens Creek",
+   "reports": 2,
+   "points": [
+    [
+     35.118729,
+     -80.668314
+    ],
+    [
+     35.277873,
+     -80.872144
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ],
+   "records": [
+    "stevens-creek-nc"
+   ],
+   "reason": "a water record holds the name (stevens-creek-nc), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -80.66831,
+     "lat": 35.11873,
+     "reason": "no NHD water of that name within 2 km of the reports' point (35.11873, -80.66831) (the nearest is 2.6 km away)"
+    },
+    {
+     "lon": -80.87214,
+     "lat": 35.27787,
+     "reason": "no NHD water of that name within 2 km of the reports' point (35.27787, -80.87214) (the nearest is 23.6 km away)"
+    },
+    {
+     "town": "Charlotte",
+     "reason": "no NHD water of that name within 3 km of Charlotte (the nearest is 4.2 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Torrence Branch",
+   "reports": 2,
+   "points": [
+    [
+     35.054505,
+     -81.029214
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ],
+   "records": [
+    "torrence-branch-nc"
+   ],
+   "reason": "a water record holds the name (torrence-branch-nc), but the reports' points lie too far from it to be placed there"
+  },
+  {
+   "name": "Unnamed tributary to Redbud Creek",
+   "reports": 2,
+   "points": [
+    [
+     36.326889,
+     -78.441251
+    ]
+   ],
+   "records": [
+    "red-bud-creek-nc"
+   ],
+   "reason": "a water record holds this water but not this spelling (red-bud-creek-nc): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
+  },
+  {
    "name": "private pond",
    "reports": 2,
    "stream_index": null,
@@ -964,6 +1037,24 @@
    "reason": "no NHD flowline or waterbody of that name in NC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "Buck branch",
+   "reports": 1,
+   "points": [
+    [
+     34.926384,
+     -78.729841
+    ]
+   ],
+   "reason": "14 NHD waters of that name in NC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -78.72984,
+     "lat": 34.92638,
+     "reason": "no NHD water of that name within 2 km of the reports' point (34.92638, -78.72984) (the nearest is 82.5 km away)"
+    }
+   ]
+  },
+  {
    "name": "Buffalo Branch",
    "reports": 1,
    "stream_index": null,
@@ -1063,6 +1154,30 @@
     "nc-dwr-sso-2022-2025"
    ],
    "reason": "no NHD flowline or waterbody of that name in NC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "College Branch (Institute Branch)",
+   "reports": 1,
+   "points": [
+    [
+     36.549179,
+     -77.115196
+    ]
+   ],
+   "towns": [
+    "Murfreesboro"
+   ],
+   "records": [
+    "college-branch-nc"
+   ],
+   "reason": "a water record holds the name (college-branch-nc), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -77.1152,
+     "lat": 36.54918,
+     "reason": "no NHD water of that name within 2 km of the reports' point (36.54918, -77.11520) (the nearest is 12.6 km away)"
+    }
+   ]
   },
   {
    "name": "Community Retention Pond",
@@ -1358,6 +1473,30 @@
    "reason": "no NHD flowline or waterbody of that name in NC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "Irvins Creek (McEwen Lake)",
+   "reports": 1,
+   "points": [
+    [
+     35.291174,
+     -80.879402
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ],
+   "records": [
+    "irvins-creek-nc"
+   ],
+   "reason": "a water record holds the name (irvins-creek-nc), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -80.8794,
+     "lat": 35.29117,
+     "reason": "no NHD water of that name within 2 km of the reports' point (35.29117, -80.87940) (the nearest is 20.0 km away)"
+    }
+   ]
+  },
+  {
    "name": "Isothermal Community College pond",
    "reports": 1,
    "stream_index": null,
@@ -1508,7 +1647,7 @@
    "sources": [
     "nc-dwr-sso-2022-2025"
    ],
-   "reason": "not a water name"
+   "reason": "no NHD flowline or waterbody of that name in NC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
    "name": "Jumping Run Branch",
@@ -1654,6 +1793,45 @@
     "Knightdale"
    ],
    "reason": "no NHD flowline or waterbody of that name in NC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
+  },
+  {
+   "name": "Lower Barton Creek",
+   "reports": 1,
+   "points": [
+    [
+     35.828181,
+     -78.632306
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ],
+   "records": [
+    "lower-barton-creek-nc"
+   ],
+   "reason": "a water record holds the name (lower-barton-creek-nc), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -78.63231,
+     "lat": 35.82818,
+     "reason": "no NHD water of that name within 2 km of the reports' point (35.82818, -78.63231) (the nearest is 11.5 km away)"
+    },
+    {
+     "town": "Garner",
+     "reason": "no NHD water of that name within 3 km of Garner (the nearest is 20.6 km away)"
+    },
+    {
+     "town": "Wake Forest",
+     "reason": "no NHD water of that name within 3 km of Wake Forest (the nearest is 6.8 km away)"
+    },
+    {
+     "town": "Knightdale",
+     "reason": "no NHD water of that name within 3 km of Knightdale (the nearest is 18.5 km away)"
+    }
+   ]
   },
   {
    "name": "McCoy's Creek",
@@ -2061,6 +2239,30 @@
    "reason": "no NHD flowline or waterbody of that name in NC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
   },
   {
+   "name": "Ross Swamp",
+   "reports": 1,
+   "points": [
+    [
+     35.559825,
+     -77.05996
+    ]
+   ],
+   "towns": [
+    "Everetts"
+   ],
+   "records": [
+    "ross-swamp-nc"
+   ],
+   "reason": "a water record holds the name (ross-swamp-nc), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -77.05996,
+     "lat": 35.55982,
+     "reason": "no NHD water of that name within 2 km of the reports' point (35.55982, -77.05996) (the nearest is 32.6 km away)"
+    }
+   ]
+  },
+  {
    "name": "Royal Park Branch",
    "reports": 1,
    "stream_index": null,
@@ -2280,6 +2482,48 @@
      "lon": -81.6837,
      "lat": 35.25213,
      "reason": "no NHD water of that name within 2 km of the reports' point (35.25213, -81.68370) (the nearest is 84.0 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Dry Creek",
+   "reports": 1,
+   "points": [
+    [
+     35.952077,
+     -79.008294
+    ]
+   ],
+   "reason": "12 NHD waters of that name in NC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Dry Creek"
+   ],
+   "places_failed": [
+    {
+     "lon": -79.00829,
+     "lat": 35.95208,
+     "reason": "no NHD water of that name within 2 km of the reports' point (35.95208, -79.00829) (the nearest is 23.0 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Unnamed tributary to Haw Creek",
+   "reports": 1,
+   "points": [
+    [
+     36.204435,
+     -79.238433
+    ]
+   ],
+   "reason": "2 NHD waters of that name in NC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "Haw Creek"
+   ],
+   "places_failed": [
+    {
+     "lon": -79.23843,
+     "lat": 36.20443,
+     "reason": "no NHD water of that name within 2 km of the reports' point (36.20443, -79.23843) (the nearest is 14.3 km away)"
     }
    ]
   },
@@ -2657,6 +2901,45 @@
    ]
   },
   {
+   "name": "White Oak Creek (Austin Pond)",
+   "reports": 1,
+   "points": [
+    [
+     35.641035,
+     -78.510992
+    ]
+   ],
+   "reason": "10 NHD waters of that name in NC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "parts": [
+    "White Oak Creek"
+   ],
+   "places_failed": [
+    {
+     "lon": -78.51099,
+     "lat": 35.64104,
+     "reason": "no NHD water of that name within 2 km of the reports' point (35.64104, -78.51099) (the nearest is 33.0 km away)"
+    }
+   ]
+  },
+  {
+   "name": "black creek",
+   "reports": 1,
+   "points": [
+    [
+     35.323208,
+     -78.662827
+    ]
+   ],
+   "reason": "7 NHD waters of that name in NC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04",
+   "places_failed": [
+    {
+     "lon": -78.66283,
+     "lat": 35.32321,
+     "reason": "no NHD water of that name within 2 km of the reports' point (35.32321, -78.66283) (the nearest is 17.2 km away)"
+    }
+   ]
+  },
+  {
    "name": "hardins pond (private)",
    "reports": 1,
    "stream_index": null,
@@ -2745,16 +3028,46 @@
    "slugs": [
     "mountain-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.365135,
+     -80.148244
+    ],
+    [
+     35.349435,
+     -80.165743
+    ]
+   ]
   },
   {
    "name": "Brier Creek",
    "reports": 26,
    "slugs": [
     "brier-creek-nc",
-    "brier-creek-charlotte-nc"
+    "brier-creek-raleigh-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.233037,
+     -80.774899
+    ],
+    [
+     35.870169,
+     -78.802372
+    ],
+    [
+     35.194374,
+     -80.802279
+    ]
+   ],
+   "towns": [
+    "Charlotte",
+    "Raleigh",
+    "Garner",
+    "Wake Forest"
+   ]
   },
   {
    "name": "Irish Buffalo Creek",
@@ -2762,7 +3075,21 @@
    "slugs": [
     "irish-buffalo-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.397013,
+     -80.578404
+    ],
+    [
+     35.478855,
+     -80.630091
+    ]
+   ],
+   "towns": [
+    "Concord",
+    "Kannapolis"
+   ]
   },
   {
    "name": "Peters Creek",
@@ -2770,7 +3097,20 @@
    "slugs": [
     "peters-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.125681,
+     -80.318747
+    ],
+    [
+     36.090216,
+     -80.255351
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Stewart Creek",
@@ -2779,7 +3119,24 @@
     "stewart-creek-nc",
     "stewart-creek-coats-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.280933,
+     -80.860591
+    ],
+    [
+     35.398152,
+     -78.664316
+    ],
+    [
+     35.258877,
+     -80.855073
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Vestal Creek",
@@ -2787,7 +3144,20 @@
    "slugs": [
     "vestal-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.667875,
+     -79.81009
+    ],
+    [
+     35.695154,
+     -79.790585
+    ]
+   ],
+   "towns": [
+    "Asheboro"
+   ]
   },
   {
    "name": "Cedar Fork Creek",
@@ -2795,7 +3165,20 @@
    "slugs": [
     "cedar-fork-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.71506,
+     -79.836804
+    ],
+    [
+     35.698849,
+     -79.822374
+    ]
+   ],
+   "towns": [
+    "Asheboro"
+   ]
   },
   {
    "name": "Penwood Branch",
@@ -2803,7 +3186,20 @@
    "slugs": [
     "penwood-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.707945,
+     -79.80559
+    ],
+    [
+     35.736908,
+     -79.786043
+    ]
+   ],
+   "towns": [
+    "Asheboro"
+   ]
   },
   {
    "name": "Brushy Fork",
@@ -2811,7 +3207,20 @@
    "slugs": [
     "brushy-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.123966,
+     -80.228003
+    ],
+    [
+     36.074159,
+     -80.211761
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "McMullen Creek",
@@ -2819,7 +3228,20 @@
    "slugs": [
     "mcmullen-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.161263,
+     -80.808678
+    ],
+    [
+     35.093802,
+     -80.858159
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Hanks Branch",
@@ -2827,7 +3249,13 @@
    "slugs": [
     "hanks-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.896131,
+     -80.100837
+    ]
+   ]
   },
   {
    "name": "Stonecutter Creek",
@@ -2835,7 +3263,13 @@
    "slugs": [
     "stonecutter-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.346103,
+     -81.946428
+    ]
+   ]
   },
   {
    "name": "Thorntons Creek",
@@ -2843,7 +3277,13 @@
    "slugs": [
     "thorntons-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.406629,
+     -78.680635
+    ]
+   ]
   },
   {
    "name": "Black River (Little Black River) (Popes Lake, Rhodes Pond)",
@@ -2851,7 +3291,20 @@
    "slugs": [
     "black-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.3232,
+     -78.662822
+    ],
+    [
+     35.320177,
+     -78.754187
+    ]
+   ],
+   "towns": [
+    "Angier"
+   ]
   },
   {
    "name": "Fourmile Creek",
@@ -2859,7 +3312,20 @@
    "slugs": [
     "fourmile-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.093357,
+     -80.778749
+    ],
+    [
+     35.112402,
+     -80.71857
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Frye Creek",
@@ -2867,7 +3333,16 @@
    "slugs": [
     "frye-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.745188,
+     -81.360117
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "Meadow Branch",
@@ -2875,7 +3350,17 @@
    "slugs": [
     "meadow-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.641032,
+     -79.013649
+    ],
+    [
+     34.64091,
+     -78.987263
+    ]
+   ]
   },
   {
    "name": "Brush Creek",
@@ -2883,7 +3368,20 @@
    "slugs": [
     "brush-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.111537,
+     -79.957845
+    ],
+    [
+     36.134163,
+     -79.926012
+    ]
+   ],
+   "towns": [
+    "Greensboro"
+   ]
   },
   {
    "name": "Third Fork Creek",
@@ -2891,7 +3389,24 @@
    "slugs": [
     "third-fork-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.974692,
+     -78.932135
+    ],
+    [
+     35.959297,
+     -78.912904
+    ],
+    [
+     35.977032,
+     -78.895103
+    ]
+   ],
+   "towns": [
+    "Durham"
+   ]
   },
   {
    "name": "Unnamed Tributary to Cold Water Creek (Lake Concord)",
@@ -2899,7 +3414,16 @@
    "slugs": [
     "cold-water-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.485281,
+     -80.611686
+    ]
+   ],
+   "towns": [
+    "Kannapolis"
+   ]
   },
   {
    "name": "Elkin Creek (River)",
@@ -2907,7 +3431,17 @@
    "slugs": [
     "elkin-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.244321,
+     -80.860279
+    ],
+    [
+     36.265297,
+     -80.857547
+    ]
+   ]
   },
   {
    "name": "Payne Creek",
@@ -2915,7 +3449,13 @@
    "slugs": [
     "payne-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.951269,
+     -80.017891
+    ]
+   ]
   },
   {
    "name": "Second Creek",
@@ -2923,7 +3463,13 @@
    "slugs": [
     "second-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.546899,
+     -80.409719
+    ]
+   ]
   },
   {
    "name": "Bracketts Creek",
@@ -2931,7 +3477,17 @@
    "slugs": [
     "bracketts-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.315617,
+     -81.863975
+    ],
+    [
+     35.344551,
+     -81.893715
+    ]
+   ]
   },
   {
    "name": "Campbell Creek",
@@ -2939,7 +3495,20 @@
    "slugs": [
     "campbell-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.103603,
+     -80.792422
+    ],
+    [
+     35.21844,
+     -80.728371
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Chockoyotte Creek",
@@ -2947,7 +3516,17 @@
    "slugs": [
     "chockoyotte-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.430562,
+     -77.60751
+    ],
+    [
+     36.459076,
+     -77.666308
+    ]
+   ]
   },
   {
    "name": "Cold Water Creek",
@@ -2955,7 +3534,22 @@
    "slugs": [
     "cold-water-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.536068,
+     -80.607443
+    ],
+    [
+     35.453142,
+     -80.586468
+    ]
+   ],
+   "towns": [
+    "Concord",
+    "Kannapolis",
+    "Landis"
+   ]
   },
   {
    "name": "Horsepen Creek",
@@ -2963,7 +3557,24 @@
    "slugs": [
     "horsepen-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.098349,
+     -79.818909
+    ],
+    [
+     36.092118,
+     -79.977191
+    ],
+    [
+     36.083277,
+     -79.910141
+    ]
+   ],
+   "towns": [
+    "Greensboro"
+   ]
   },
   {
    "name": "Mingo Swamp",
@@ -2971,7 +3582,13 @@
    "slugs": [
     "mingo-swamp-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.299907,
+     -78.586144
+    ]
+   ]
   },
   {
    "name": "Swannanoa River",
@@ -2979,7 +3596,20 @@
    "slugs": [
     "swannanoa-river-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.596395,
+     -82.416055
+    ],
+    [
+     35.578224,
+     -82.509777
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Wash Creek",
@@ -2987,7 +3617,13 @@
    "slugs": [
     "wash-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.313354,
+     -82.475646
+    ]
+   ]
   },
   {
    "name": "West Fork Deep River (Oak Hollow Reservoir)",
@@ -2995,7 +3631,17 @@
    "slugs": [
     "west-fork-deep-river-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.049006,
+     -79.985395
+    ],
+    [
+     35.995431,
+     -79.996921
+    ]
+   ]
   },
   {
    "name": "Cowlick Branch",
@@ -3003,7 +3649,17 @@
    "slugs": [
     "cowlick-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.942328,
+     -77.779149
+    ],
+    [
+     35.959679,
+     -77.768437
+    ]
+   ]
   },
   {
    "name": "Glade Creek",
@@ -3011,7 +3667,21 @@
    "slugs": [
     "glade-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.92194,
+     -81.184388
+    ],
+    [
+     35.914871,
+     -81.130579
+    ],
+    [
+     35.906532,
+     -81.169661
+    ]
+   ]
   },
   {
    "name": "Haw Branch",
@@ -3019,7 +3689,13 @@
    "slugs": [
     "haw-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.141642,
+     -80.656304
+    ]
+   ]
   },
   {
    "name": "Hickory Creek",
@@ -3027,7 +3703,17 @@
    "slugs": [
     "hickory-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.309624,
+     -81.52139
+    ],
+    [
+     35.286813,
+     -81.532417
+    ]
+   ]
   },
   {
    "name": "Kenneth Creek",
@@ -3035,7 +3721,17 @@
    "slugs": [
     "kenneth-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.584807,
+     -78.803065
+    ],
+    [
+     35.580177,
+     -78.776976
+    ]
+   ]
   },
   {
    "name": "Lampley Branch",
@@ -3043,7 +3739,16 @@
    "slugs": [
     "lampley-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.961634,
+     -80.084718
+    ]
+   ],
+   "towns": [
+    "Wadesboro"
+   ]
   },
   {
    "name": "Little Long Creek",
@@ -3052,7 +3757,17 @@
     "little-long-creek-nc",
     "little-long-creek-albemarle-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.320086,
+     -81.175914
+    ],
+    [
+     35.360586,
+     -80.204099
+    ]
+   ]
   },
   {
    "name": "Paw Creek",
@@ -3060,7 +3775,20 @@
    "slugs": [
     "paw-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.256546,
+     -80.9604
+    ],
+    [
+     35.264223,
+     -80.917245
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Red Bud Creek",
@@ -3068,7 +3796,17 @@
    "slugs": [
     "red-bud-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.317952,
+     -78.43329
+    ],
+    [
+     36.30281,
+     -78.45591
+    ]
+   ]
   },
   {
    "name": "Threemile Branch",
@@ -3076,7 +3814,25 @@
    "slugs": [
     "threemile-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.411094,
+     -80.573463
+    ],
+    [
+     35.486603,
+     -80.623475
+    ],
+    [
+     35.463992,
+     -80.589316
+    ]
+   ],
+   "towns": [
+    "Concord",
+    "Kannapolis"
+   ]
   },
   {
    "name": "Bolin Creek",
@@ -3084,7 +3840,13 @@
    "slugs": [
     "bolin-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.915294,
+     -79.056915
+    ]
+   ]
   },
   {
    "name": "East Fork Deep River",
@@ -3092,7 +3854,16 @@
    "slugs": [
     "east-fork-deep-river-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.082113,
+     -79.952772
+    ]
+   ],
+   "towns": [
+    "Greensboro"
+   ]
   },
   {
    "name": "Leak Fork",
@@ -3100,7 +3871,20 @@
    "slugs": [
     "leak-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.159081,
+     -80.26699
+    ],
+    [
+     36.14676,
+     -80.232075
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "McDeeds Creek",
@@ -3108,7 +3892,16 @@
    "slugs": [
     "mcdeeds-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.179356,
+     -79.396996
+    ]
+   ],
+   "towns": [
+    "Southern Pines"
+   ]
   },
   {
    "name": "Michael Branch",
@@ -3116,7 +3909,13 @@
    "slugs": [
     "michael-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.825836,
+     -80.272759
+    ]
+   ]
   },
   {
    "name": "Reeds Creek",
@@ -3124,7 +3923,13 @@
    "slugs": [
     "reeds-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.587695,
+     -80.826844
+    ]
+   ]
   },
   {
    "name": "Taggart Creek (Taggard Creek)",
@@ -3132,7 +3937,20 @@
    "slugs": [
     "taggart-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.197287,
+     -80.923196
+    ],
+    [
+     35.2309,
+     -80.90524
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Abbotts Creek",
@@ -3140,7 +3958,16 @@
    "slugs": [
     "abbotts-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.095688,
+     -80.071466
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Blounts Creek",
@@ -3148,7 +3975,20 @@
    "slugs": [
     "blounts-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.045478,
+     -78.891431
+    ],
+    [
+     35.028207,
+     -78.927525
+    ]
+   ],
+   "towns": [
+    "Fayetteville"
+   ]
   },
   {
    "name": "Covenant Branch",
@@ -3156,7 +3996,13 @@
    "slugs": [
     "covenant-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.49743,
+     -79.693691
+    ]
+   ]
   },
   {
    "name": "Jimmys Creek",
@@ -3164,7 +4010,13 @@
    "slugs": [
     "jimmys-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.873228,
+     -80.132715
+    ]
+   ]
   },
   {
    "name": "Kennedy Mill Creek",
@@ -3172,7 +4024,13 @@
    "slugs": [
     "kennedy-mill-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.934458,
+     -80.043825
+    ]
+   ]
   },
   {
    "name": "Kerners Mill Creek",
@@ -3180,7 +4038,24 @@
    "slugs": [
     "kerners-mill-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.123702,
+     -80.061054
+    ],
+    [
+     36.106106,
+     -80.089047
+    ],
+    [
+     36.125391,
+     -80.098462
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Reed Creek",
@@ -3189,7 +4064,20 @@
     "reed-creek-nc",
     "reed-creek-ramseur-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.616078,
+     -82.542623
+    ],
+    [
+     35.743276,
+     -79.636947
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Shallotte River",
@@ -3197,7 +4085,20 @@
    "slugs": [
     "shallotte-river-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.965352,
+     -78.380919
+    ],
+    [
+     33.92694,
+     -78.47388
+    ]
+   ],
+   "towns": [
+    "Shallotte"
+   ]
   },
   {
    "name": "Swearing Creek",
@@ -3205,7 +4106,21 @@
    "slugs": [
     "swearing-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.820837,
+     -80.260982
+    ],
+    [
+     35.85134,
+     -80.263658
+    ],
+    [
+     35.786949,
+     -80.292775
+    ]
+   ]
   },
   {
    "name": "West Branch Rocky River",
@@ -3213,7 +4128,16 @@
    "slugs": [
     "west-branch-rocky-river-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.543403,
+     -80.814191
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Bear Creek",
@@ -3221,7 +4145,17 @@
    "slugs": [
     "bear-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.859518,
+     -80.576283
+    ],
+    [
+     35.841584,
+     -80.593517
+    ]
+   ]
   },
   {
    "name": "Bearskin Creek",
@@ -3229,7 +4163,21 @@
    "slugs": [
     "bearskin-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.981237,
+     -80.545056
+    ],
+    [
+     34.96806,
+     -80.504753
+    ],
+    [
+     35.000865,
+     -80.530106
+    ]
+   ]
   },
   {
    "name": "Beason Creek",
@@ -3237,7 +4185,17 @@
    "slugs": [
     "beason-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.22924,
+     -81.370318
+    ],
+    [
+     35.235864,
+     -81.394357
+    ]
+   ]
   },
   {
    "name": "Beaver Creek (Beaver Creek Pond)",
@@ -3246,7 +4204,25 @@
     "beaver-creek-nc",
     "beaver-creek-west-jefferson-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.043741,
+     -78.978785
+    ],
+    [
+     35.13271,
+     -78.99383
+    ],
+    [
+     35.085408,
+     -78.967377
+    ]
+   ],
+   "towns": [
+    "Fayetteville",
+    "Fort Bragg"
+   ]
   },
   {
    "name": "Big Marsh Swamp (Marsh Swamp) (Lake McNeill, Odom Pond)",
@@ -3254,7 +4230,17 @@
    "slugs": [
     "big-marsh-swamp-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.807789,
+     -78.981172
+    ],
+    [
+     34.867236,
+     -79.049928
+    ]
+   ]
   },
   {
    "name": "Cold Water Creek (Lake Fisher)",
@@ -3262,7 +4248,16 @@
    "slugs": [
     "cold-water-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.511082,
+     -80.607735
+    ]
+   ],
+   "towns": [
+    "Kannapolis"
+   ]
   },
   {
    "name": "Cripple Creek",
@@ -3270,7 +4265,16 @@
    "slugs": [
     "cripple-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.7431,
+     -81.334218
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "Dry Creek",
@@ -3278,7 +4282,17 @@
    "slugs": [
     "dry-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.535953,
+     -79.640287
+    ],
+    [
+     36.529263,
+     -79.673733
+    ]
+   ]
   },
   {
    "name": "Fiddlers Creek",
@@ -3286,7 +4300,24 @@
    "slugs": [
     "fiddlers-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.083573,
+     -80.117511
+    ],
+    [
+     36.053937,
+     -80.183792
+    ],
+    [
+     36.081999,
+     -80.143817
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Hewletts Creek",
@@ -3294,7 +4325,16 @@
    "slugs": [
     "hewletts-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.186896,
+     -77.862652
+    ]
+   ],
+   "towns": [
+    "Wilmington"
+   ]
   },
   {
    "name": "Howard Creek (Propst Creek)",
@@ -3302,7 +4342,20 @@
    "slugs": [
     "howard-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.773001,
+     -81.586165
+    ],
+    [
+     35.759221,
+     -81.606768
+    ]
+   ],
+   "towns": [
+    "Drexel"
+   ]
   },
   {
    "name": "Little Gunpowder Creek",
@@ -3310,7 +4363,13 @@
    "slugs": [
     "little-gunpowder-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.842293,
+     -81.499635
+    ]
+   ]
   },
   {
    "name": "Little Lick Creek",
@@ -3318,7 +4377,24 @@
    "slugs": [
     "little-lick-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.994393,
+     -78.85094
+    ],
+    [
+     36.003357,
+     -78.8265
+    ],
+    [
+     35.982565,
+     -78.805426
+    ]
+   ],
+   "towns": [
+    "Durham"
+   ]
   },
   {
    "name": "Long Branch",
@@ -3327,7 +4403,24 @@
     "long-branch-nc",
     "long-branch-fallston-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.372808,
+     -77.979654
+    ],
+    [
+     36.03978,
+     -79.935413
+    ],
+    [
+     35.305362,
+     -81.918059
+    ]
+   ],
+   "towns": [
+    "Fallston"
+   ]
   },
   {
    "name": "Melchor Branch",
@@ -3335,7 +4428,13 @@
    "slugs": [
     "melchor-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.368443,
+     -80.193056
+    ]
+   ]
   },
   {
    "name": "Mine Creek",
@@ -3343,7 +4442,23 @@
    "slugs": [
     "mine-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.84474,
+     -78.661741
+    ],
+    [
+     35.875483,
+     -78.627628
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Steele Creek",
@@ -3351,7 +4466,16 @@
    "slugs": [
     "steele-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.119413,
+     -80.95414
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Toby Creek",
@@ -3359,7 +4483,20 @@
    "slugs": [
     "toby-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.295561,
+     -80.741138
+    ],
+    [
+     35.275338,
+     -80.756879
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Walnut Creek",
@@ -3367,7 +4504,27 @@
    "slugs": [
     "walnut-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.784367,
+     -78.757135
+    ],
+    [
+     35.765757,
+     -78.626165
+    ],
+    [
+     35.766801,
+     -78.597185
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Big Branch",
@@ -3376,7 +4533,27 @@
     "big-branch-nc",
     "big-branch-raleigh-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.69931,
+     -78.542816
+    ],
+    [
+     35.83944,
+     -78.632802
+    ],
+    [
+     35.859131,
+     -78.625805
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Drowning Creek",
@@ -3384,7 +4561,13 @@
    "slugs": [
     "drowning-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.738756,
+     -81.421833
+    ]
+   ]
   },
   {
    "name": "Grants Creek",
@@ -3392,7 +4575,21 @@
    "slugs": [
     "grants-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.686853,
+     -80.501777
+    ],
+    [
+     35.690103,
+     -80.454654
+    ],
+    [
+     35.672913,
+     -80.479877
+    ]
+   ]
   },
   {
    "name": "Grassy Creek",
@@ -3401,7 +4598,20 @@
     "grassy-creek-nc",
     "grassy-creek-rural-hall-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.894426,
+     -82.064811
+    ],
+    [
+     36.236629,
+     -80.297024
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Little Cokey Swamp",
@@ -3409,7 +4619,13 @@
    "slugs": [
     "little-cokey-swamp-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.921574,
+     -77.786406
+    ]
+   ]
   },
   {
    "name": "Reedy Fork",
@@ -3417,7 +4633,25 @@
    "slugs": [
     "reedy-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.174555,
+     -79.730114
+    ],
+    [
+     36.171108,
+     -79.698833
+    ],
+    [
+     36.112581,
+     -80.043399
+    ]
+   ],
+   "towns": [
+    "Winston-Salem",
+    "Greensboro"
+   ]
   },
   {
    "name": "Toisnot Swamp",
@@ -3425,7 +4659,17 @@
    "slugs": [
     "toisnot-swamp-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.75151,
+     -77.925843
+    ],
+    [
+     35.721117,
+     -77.882211
+    ]
+   ]
   },
   {
    "name": "Big Creek",
@@ -3433,7 +4677,13 @@
    "slugs": [
     "big-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.29255,
+     -78.493763
+    ]
+   ]
   },
   {
    "name": "Bledsoe Creek",
@@ -3441,7 +4691,17 @@
    "slugs": [
     "bledsoe-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.475996,
+     -81.108418
+    ],
+    [
+     36.499058,
+     -81.118647
+    ]
+   ]
   },
   {
    "name": "Boone Creek",
@@ -3449,7 +4709,13 @@
    "slugs": [
     "boone-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.210708,
+     -81.675869
+    ]
+   ]
   },
   {
    "name": "Browns Creek (Cross Pond)",
@@ -3457,7 +4723,17 @@
    "slugs": [
     "browns-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.615629,
+     -78.624911
+    ],
+    [
+     34.627269,
+     -78.602408
+    ]
+   ]
   },
   {
    "name": "Brush Fork",
@@ -3465,7 +4741,16 @@
    "slugs": [
     "brush-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.963104,
+     -80.053492
+    ]
+   ],
+   "towns": [
+    "Wadesboro"
+   ]
   },
   {
    "name": "Brushy Fork Branch",
@@ -3473,7 +4758,20 @@
    "slugs": [
     "brushy-fork-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.118494,
+     -80.219786
+    ],
+    [
+     36.136202,
+     -80.233189
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Cline Creek",
@@ -3481,7 +4779,13 @@
    "slugs": [
     "cline-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.710792,
+     -81.245649
+    ]
+   ]
   },
   {
    "name": "East Belews Creek",
@@ -3489,7 +4793,16 @@
    "slugs": [
     "east-belews-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.136656,
+     -80.062794
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "East Fork Twelvemile Creek",
@@ -3497,7 +4810,17 @@
    "slugs": [
     "east-fork-twelvemile-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.96326,
+     -80.735396
+    ],
+    [
+     35.033264,
+     -80.657046
+    ]
+   ]
   },
   {
    "name": "Goose Creek",
@@ -3505,7 +4828,24 @@
    "slugs": [
     "goose-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.989128,
+     -78.886566
+    ],
+    [
+     35.112463,
+     -80.634518
+    ],
+    [
+     35.134392,
+     -80.619791
+    ]
+   ],
+   "towns": [
+    "Durham"
+   ]
   },
   {
    "name": "Grindle Creek",
@@ -3513,7 +4853,17 @@
    "slugs": [
     "grindle-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.734851,
+     -77.358402
+    ],
+    [
+     35.794998,
+     -77.374868
+    ]
+   ]
   },
   {
    "name": "Gum Branch",
@@ -3521,7 +4871,16 @@
    "slugs": [
     "gum-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.2989,
+     -80.929238
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Hildebran Creek (Anthony Creek)",
@@ -3529,7 +4888,17 @@
    "slugs": [
     "hildebran-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.653787,
+     -81.236532
+    ],
+    [
+     35.664264,
+     -81.218102
+    ]
+   ]
   },
   {
    "name": "Hollands Creek",
@@ -3537,7 +4906,17 @@
    "slugs": [
     "hollands-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.379468,
+     -81.915525
+    ],
+    [
+     35.364645,
+     -81.901764
+    ]
+   ]
   },
   {
    "name": "Hunts Fork",
@@ -3545,7 +4924,13 @@
    "slugs": [
     "hunts-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.911694,
+     -80.079965
+    ]
+   ]
   },
   {
    "name": "Joes Branch",
@@ -3553,7 +4938,17 @@
    "slugs": [
     "joes-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.995662,
+     -80.489895
+    ],
+    [
+     34.864937,
+     -76.904172
+    ]
+   ]
   },
   {
    "name": "Lake Waccamaw",
@@ -3561,7 +4956,17 @@
    "slugs": [
     "lake-waccamaw-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.28884,
+     -78.471398
+    ],
+    [
+     34.317141,
+     -78.524195
+    ]
+   ]
   },
   {
    "name": "Lowery Mill Creek",
@@ -3569,7 +4974,20 @@
    "slugs": [
     "lowery-mill-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.110421,
+     -80.169647
+    ],
+    [
+     36.142004,
+     -80.162148
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "McKee Creek",
@@ -3577,7 +4995,20 @@
    "slugs": [
     "mckee-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.220843,
+     -80.672693
+    ],
+    [
+     35.234333,
+     -80.650469
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Picture Creek",
@@ -3585,7 +5016,17 @@
    "slugs": [
     "picture-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.144279,
+     -78.757349
+    ],
+    [
+     36.104454,
+     -78.780884
+    ]
+   ]
   },
   {
    "name": "Reems Creek",
@@ -3593,7 +5034,24 @@
    "slugs": [
     "reems-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.687524,
+     -82.593711
+    ],
+    [
+     35.684172,
+     -82.567395
+    ],
+    [
+     35.690606,
+     -82.532532
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Reynolds Creek",
@@ -3601,7 +5059,20 @@
    "slugs": [
     "reynolds-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.093411,
+     -80.392064
+    ],
+    [
+     35.367688,
+     -81.936812
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Shoe Heel Creek (Big Shoe Heel Creek)(Maxton Pond)",
@@ -3609,7 +5080,13 @@
    "slugs": [
     "shoe-heel-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.537237,
+     -79.296755
+    ]
+   ]
   },
   {
    "name": "Sixmile Creek",
@@ -3617,7 +5094,20 @@
    "slugs": [
     "sixmile-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.013303,
+     -80.833226
+    ],
+    [
+     35.046265,
+     -80.781868
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Smith River",
@@ -3625,7 +5115,17 @@
    "slugs": [
     "smith-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     36.518373,
+     -79.770614
+    ],
+    [
+     36.48471,
+     -79.751539
+    ]
+   ]
   },
   {
    "name": "Snow Creek",
@@ -3633,7 +5133,20 @@
    "slugs": [
     "snow-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.787771,
+     -81.285736
+    ],
+    [
+     35.76618,
+     -81.282762
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "Stirewalt Creek",
@@ -3641,7 +5154,13 @@
    "slugs": [
     "stirewalt-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.92017,
+     -81.168921
+    ]
+   ]
   },
   {
    "name": "Sweeten Creek (Busbee Reservoir)",
@@ -3649,7 +5168,16 @@
    "slugs": [
     "sweeten-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.546286,
+     -82.516984
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Torrence Creek",
@@ -3657,7 +5185,16 @@
    "slugs": [
     "torrence-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.38715,
+     -80.845526
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Uwharrie River",
@@ -3665,7 +5202,25 @@
    "slugs": [
     "uwharrie-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.920764,
+     -80.02107
+    ],
+    [
+     35.127217,
+     -79.999746
+    ],
+    [
+     35.904233,
+     -80.007428
+    ]
+   ],
+   "towns": [
+    "Archdale",
+    "Trinity"
+   ]
   },
   {
    "name": "Walker Branch",
@@ -3673,7 +5228,20 @@
    "slugs": [
     "walker-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.107963,
+     -80.968097
+    ],
+    [
+     35.099271,
+     -80.9969
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Beaver Creek",
@@ -3682,7 +5250,17 @@
     "beaver-creek-nc",
     "beaver-creek-west-jefferson-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.380214,
+     -81.487292
+    ],
+    [
+     36.374969,
+     -81.46456
+    ]
+   ]
   },
   {
    "name": "Big Beaver Island Creek",
@@ -3690,7 +5268,20 @@
    "slugs": [
     "big-beaver-island-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.399917,
+     -79.976374
+    ],
+    [
+     36.55117,
+     -80.45158
+    ]
+   ],
+   "towns": [
+    "Madison"
+   ]
   },
   {
    "name": "Black Creek",
@@ -3698,7 +5289,17 @@
    "slugs": [
     "black-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.796006,
+     -78.78695
+    ],
+    [
+     35.598303,
+     -78.754456
+    ]
+   ]
   },
   {
    "name": "Boulding Branch",
@@ -3706,7 +5307,21 @@
    "slugs": [
     "boulding-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.995492,
+     -79.992052
+    ],
+    [
+     35.977839,
+     -79.981428
+    ],
+    [
+     35.967112,
+     -80.009226
+    ]
+   ]
   },
   {
    "name": "Boyds Creek",
@@ -3714,7 +5329,20 @@
    "slugs": [
     "boyds-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.063703,
+     -79.419946
+    ],
+    [
+     36.117806,
+     -79.358872
+    ]
+   ],
+   "towns": [
+    "Green Level"
+   ]
   },
   {
    "name": "Brown Branch",
@@ -3722,7 +5350,16 @@
    "slugs": [
     "brown-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.528733,
+     -82.527206
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Burton Branch",
@@ -3730,7 +5367,20 @@
    "slugs": [
     "burton-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.489096,
+     -79.770265
+    ],
+    [
+     35.28174,
+     -81.135805
+    ]
+   ],
+   "towns": [
+    "Ranlo"
+   ]
   },
   {
    "name": "Cabin Creek",
@@ -3738,7 +5388,20 @@
    "slugs": [
     "cabin-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.311316,
+     -79.739486
+    ],
+    [
+     35.431301,
+     -79.59046
+    ]
+   ],
+   "towns": [
+    "Candor"
+   ]
   },
   {
    "name": "Clarke Creek",
@@ -3746,7 +5409,16 @@
    "slugs": [
     "clarke-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.412202,
+     -80.759797
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Cokey Swamp",
@@ -3754,7 +5426,20 @@
    "slugs": [
     "cokey-swamp-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.87336,
+     -77.827865
+    ],
+    [
+     35.921775,
+     -77.786999
+    ]
+   ],
+   "towns": [
+    "Sharpsburg"
+   ]
   },
   {
    "name": "Cotton Mill Branch",
@@ -3762,7 +5447,13 @@
    "slugs": [
     "cotton-mill-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.61355,
+     -79.015968
+    ]
+   ]
   },
   {
    "name": "Fites Creek",
@@ -3770,7 +5461,13 @@
    "slugs": [
     "fites-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.276912,
+     -81.041059
+    ]
+   ]
   },
   {
    "name": "Floyds Creek",
@@ -3778,7 +5475,13 @@
    "slugs": [
     "floyds-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.328684,
+     -81.916571
+    ]
+   ]
   },
   {
    "name": "Gum Branch Canal",
@@ -3786,7 +5489,13 @@
    "slugs": [
     "gum-branch-canal-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.608069,
+     -79.022444
+    ]
+   ]
   },
   {
    "name": "Hare Snipe Creek",
@@ -3794,7 +5503,23 @@
    "slugs": [
     "hare-snipe-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.852152,
+     -78.691833
+    ],
+    [
+     35.901622,
+     -78.708445
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Johnson Creek",
@@ -3802,7 +5527,20 @@
    "slugs": [
     "johnson-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     36.006344,
+     -80.382132
+    ],
+    [
+     35.429192,
+     -80.990272
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Lick Branch",
@@ -3811,7 +5549,20 @@
     "lick-branch-nc",
     "lick-branch-monroe-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.980266,
+     -80.362481
+    ],
+    [
+     35.013913,
+     -80.564002
+    ]
+   ],
+   "towns": [
+    "Marshville"
+   ]
   },
   {
    "name": "Little Alamance Creek (Gant Lake, Mays Lake) (Alamance County)",
@@ -3820,7 +5571,17 @@
     "little-alamance-creek-nc",
     "little-alamance-creek-pleasant-garden-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.070911,
+     -79.435229
+    ],
+    [
+     36.095957,
+     -79.451576
+    ]
+   ]
   },
   {
    "name": "Little Ledge Creek",
@@ -3828,7 +5589,13 @@
    "slugs": [
     "little-ledge-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.11534,
+     -78.725857
+    ]
+   ]
   },
   {
    "name": "North Hamby Creek",
@@ -3836,7 +5603,17 @@
    "slugs": [
     "north-hamby-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.876745,
+     -80.080213
+    ],
+    [
+     35.885259,
+     -80.057889
+    ]
+   ]
   },
   {
    "name": "Nutbush Creek (Including Nutbush Creek Arm of John H. Kerr Reservoir below normal pool elevation)",
@@ -3844,7 +5621,17 @@
    "slugs": [
     "nutbush-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     36.33304,
+     -78.386751
+    ],
+    [
+     36.350081,
+     -78.410105
+    ]
+   ]
   },
   {
    "name": "Perry Creek",
@@ -3852,7 +5639,23 @@
    "slugs": [
     "perry-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.876898,
+     -78.586853
+    ],
+    [
+     35.873989,
+     -78.557436
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Pigeon House Branch",
@@ -3860,7 +5663,19 @@
    "slugs": [
     "pigeon-house-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.803062,
+     -78.632811
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Price Mill Creek",
@@ -3868,7 +5683,17 @@
    "slugs": [
     "price-mill-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.004852,
+     -80.688263
+    ],
+    [
+     35.035668,
+     -80.673746
+    ]
+   ]
   },
   {
    "name": "Saw Pit Swamp",
@@ -3876,7 +5701,13 @@
    "slugs": [
     "saw-pit-swamp-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.926931,
+     -78.474249
+    ]
+   ]
   },
   {
    "name": "Second Creek (North Second Creek)",
@@ -3884,7 +5715,17 @@
    "slugs": [
     "second-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.565883,
+     -80.416955
+    ],
+    [
+     35.54387,
+     -80.395434
+    ]
+   ]
   },
   {
    "name": "Smith Creek",
@@ -3892,7 +5733,25 @@
    "slugs": [
     "smith-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.98502,
+     -80.440191
+    ],
+    [
+     34.263198,
+     -77.892782
+    ],
+    [
+     36.118431,
+     -80.068943
+    ]
+   ],
+   "towns": [
+    "Winston-Salem",
+    "Wilmington"
+   ]
   },
   {
    "name": "South Fork Muddy Creek",
@@ -3900,7 +5759,20 @@
    "slugs": [
     "south-fork-muddy-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.017882,
+     -80.256587
+    ],
+    [
+     36.040972,
+     -80.248387
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Southwest Prong Beaverdam Creek",
@@ -3908,7 +5780,19 @@
    "slugs": [
     "southwest-prong-beaverdam-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.797617,
+     -78.682504
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Southwest Prong Slocum Creek",
@@ -3916,7 +5800,13 @@
    "slugs": [
     "southwest-prong-slocum-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.896753,
+     -76.921709
+    ]
+   ]
   },
   {
    "name": "Studman Branch",
@@ -3924,7 +5814,16 @@
    "slugs": [
     "studman-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.085528,
+     -81.027225
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Toisnot Swamp (Toisnot Reservoir)",
@@ -3932,7 +5831,13 @@
    "slugs": [
     "toisnot-swamp-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.753522,
+     -77.916988
+    ]
+   ]
   },
   {
    "name": "Unnamed Tributary to Cold Water Creek",
@@ -3940,7 +5845,16 @@
    "slugs": [
     "cold-water-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.464095,
+     -80.605377
+    ]
+   ],
+   "towns": [
+    "Kannapolis"
+   ]
   },
   {
    "name": "Woodward Branch (Charles Branch)",
@@ -3948,7 +5862,16 @@
    "slugs": [
     "woodward-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.995879,
+     -78.377337
+    ]
+   ],
+   "towns": [
+    "Shallotte"
+   ]
   },
   {
    "name": "Abernethy Creek",
@@ -3956,7 +5879,17 @@
    "slugs": [
     "abernethy-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.279568,
+     -81.301716
+    ],
+    [
+     35.275302,
+     -81.272565
+    ]
+   ]
   },
   {
    "name": "Afton Run",
@@ -3964,7 +5897,16 @@
    "slugs": [
     "afton-run-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.435628,
+     -80.676225
+    ]
+   ],
+   "towns": [
+    "Kannapolis"
+   ]
   },
   {
    "name": "Basal Creek [(Bass Lake, (Mills Pond)]",
@@ -3972,7 +5914,17 @@
    "slugs": [
     "basal-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.619109,
+     -78.810581
+    ],
+    [
+     35.600138,
+     -78.819459
+    ]
+   ]
   },
   {
    "name": "Big Buffalo Creek",
@@ -3980,7 +5932,13 @@
    "slugs": [
     "big-buffalo-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.487998,
+     -79.188367
+    ]
+   ]
   },
   {
    "name": "Bloomery Swamp",
@@ -3988,7 +5946,13 @@
    "slugs": [
     "bloomery-swamp-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.717848,
+     -77.952828
+    ]
+   ]
   },
   {
    "name": "Bolin Creek (Hogan Lake)",
@@ -3996,7 +5960,13 @@
    "slugs": [
     "bolin-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.930209,
+     -79.080741
+    ]
+   ]
   },
   {
    "name": "Brandy Creek",
@@ -4004,7 +5974,13 @@
    "slugs": [
     "brandy-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.041878,
+     -78.48714
+    ]
+   ]
   },
   {
    "name": "Branson Creek (Branson Lake)",
@@ -4012,7 +5988,16 @@
    "slugs": [
     "branson-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.050742,
+     -78.935462
+    ]
+   ],
+   "towns": [
+    "Fayetteville"
+   ]
   },
   {
    "name": "Brooks Creek (Branch)",
@@ -4020,7 +6005,13 @@
    "slugs": [
     "brooks-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.784272,
+     -79.223623
+    ]
+   ]
   },
   {
    "name": "Brown Creek",
@@ -4028,7 +6019,13 @@
    "slugs": [
     "brown-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.001681,
+     -80.188649
+    ]
+   ]
   },
   {
    "name": "Brushy Creek",
@@ -4036,7 +6033,13 @@
    "slugs": [
     "brushy-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.303133,
+     -81.578813
+    ]
+   ]
   },
   {
    "name": "Buckhead Creek (Buckland Creek)",
@@ -4044,7 +6047,16 @@
    "slugs": [
     "buckhead-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.074413,
+     -78.959507
+    ]
+   ],
+   "towns": [
+    "Fayetteville"
+   ]
   },
   {
    "name": "Burke Creek",
@@ -4052,7 +6064,16 @@
    "slugs": [
     "burke-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.065016,
+     -80.295696
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Camp Creek (Grass Creek)",
@@ -4060,7 +6081,13 @@
    "slugs": [
     "camp-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.280168,
+     -80.847925
+    ]
+   ]
   },
   {
    "name": "Canie Creek",
@@ -4068,7 +6095,16 @@
    "slugs": [
     "canie-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.56636,
+     -82.624342
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Carrs Creek",
@@ -4076,7 +6112,16 @@
    "slugs": [
     "carrs-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.444241,
+     -79.117263
+    ]
+   ],
+   "towns": [
+    "Sanford"
+   ]
   },
   {
    "name": "Carvers Creek (Cypress Lake)",
@@ -4084,7 +6129,16 @@
    "slugs": [
     "carvers-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.159022,
+     -78.871586
+    ]
+   ],
+   "towns": [
+    "Fayetteville"
+   ]
   },
   {
    "name": "Cherry Run",
@@ -4092,7 +6146,17 @@
    "slugs": [
     "cherry-run-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.570438,
+     -77.080494
+    ],
+    [
+     35.565503,
+     -77.039084
+    ]
+   ]
   },
   {
    "name": "Church Creek",
@@ -4100,7 +6164,13 @@
    "slugs": [
     "church-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.605467,
+     -80.435367
+    ]
+   ]
   },
   {
    "name": "Clarks Creek",
@@ -4108,7 +6178,17 @@
    "slugs": [
     "clarks-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.47474,
+     -81.257379
+    ],
+    [
+     35.211411,
+     -80.042918
+    ]
+   ]
   },
   {
    "name": "Coles Branch",
@@ -4116,7 +6196,17 @@
    "slugs": [
     "coles-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.804605,
+     -78.817204
+    ],
+    [
+     35.792051,
+     -78.800076
+    ]
+   ]
   },
   {
    "name": "Crane Creek",
@@ -4124,7 +6214,13 @@
    "slugs": [
     "crane-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.619383,
+     -80.447237
+    ]
+   ]
   },
   {
    "name": "Curl Tail Creek",
@@ -4132,7 +6228,13 @@
    "slugs": [
     "curl-tail-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.472312,
+     -80.251538
+    ]
+   ]
   },
   {
    "name": "Dingle Creek",
@@ -4140,7 +6242,16 @@
    "slugs": [
     "dingle-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.506143,
+     -82.526184
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Doby Creek",
@@ -4148,7 +6259,16 @@
    "slugs": [
     "doby-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.289297,
+     -80.775529
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Double Branch",
@@ -4156,7 +6276,13 @@
    "slugs": [
     "double-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.737267,
+     -81.577186
+    ]
+   ]
   },
   {
    "name": "Dutchmans Creek",
@@ -4164,7 +6290,17 @@
    "slugs": [
     "dutchmans-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.301276,
+     -81.006214
+    ],
+    [
+     35.338995,
+     -81.014576
+    ]
+   ]
   },
   {
    "name": "East Buies Creek",
@@ -4172,7 +6308,17 @@
    "slugs": [
     "east-buies-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.418102,
+     -78.890333
+    ],
+    [
+     35.409234,
+     -78.729947
+    ]
+   ]
   },
   {
    "name": "East Prong Slocum Creek",
@@ -4180,7 +6326,13 @@
    "slugs": [
     "east-prong-slocum-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.87558,
+     -76.90345
+    ]
+   ]
   },
   {
    "name": "Flat Creek",
@@ -4188,7 +6340,16 @@
    "slugs": [
     "flat-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.624767,
+     -82.317923
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Forest Lake",
@@ -4196,7 +6357,13 @@
    "slugs": [
     "forest-lake-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.355278,
+     -81.891741
+    ]
+   ]
   },
   {
    "name": "Four Mile Branch (Bass Pond)",
@@ -4204,7 +6371,16 @@
    "slugs": [
     "fourmile-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.52102,
+     -82.536075
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Gabriels Creek",
@@ -4212,7 +6388,16 @@
    "slugs": [
     "gabriels-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.740368,
+     -79.76331
+    ]
+   ],
+   "towns": [
+    "Asheboro"
+   ]
   },
   {
    "name": "Gashes Creek (Cedar Mountain Lake)",
@@ -4220,7 +6405,16 @@
    "slugs": [
     "gashes-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.55503,
+     -82.48968
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Geitner Branch",
@@ -4228,7 +6422,20 @@
    "slugs": [
     "geitner-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.720325,
+     -81.362754
+    ],
+    [
+     35.725929,
+     -81.341597
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "Henderson Creek",
@@ -4236,7 +6443,13 @@
    "slugs": [
     "henderson-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.351605,
+     -82.368636
+    ]
+   ]
   },
   {
    "name": "Hominy Creek",
@@ -4244,7 +6457,20 @@
    "slugs": [
     "hominy-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.543781,
+     -82.637532
+    ],
+    [
+     35.57233,
+     -82.599358
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Hoyle Creek",
@@ -4253,7 +6479,17 @@
     "hoyle-creek-nc",
     "hoyle-creek-dallas-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.749475,
+     -81.529974
+    ],
+    [
+     35.337899,
+     -81.133739
+    ]
+   ]
   },
   {
    "name": "Jenkins Branch",
@@ -4261,7 +6497,13 @@
    "slugs": [
     "jenkins-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.402608,
+     -83.455087
+    ]
+   ]
   },
   {
    "name": "Joes Fork",
@@ -4269,7 +6511,13 @@
    "slugs": [
     "joes-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.208504,
+     -79.461086
+    ]
+   ]
   },
   {
    "name": "Jordan Creek",
@@ -4277,7 +6525,13 @@
    "slugs": [
     "jordan-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.316277,
+     -78.587067
+    ]
+   ]
   },
   {
    "name": "Lee Creek",
@@ -4285,7 +6539,16 @@
    "slugs": [
     "lee-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.620461,
+     -82.62446
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Little Alamance Creek (Guilford County)",
@@ -4294,7 +6557,20 @@
     "little-alamance-creek-nc",
     "little-alamance-creek-pleasant-garden-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.05078,
+     -79.606575
+    ],
+    [
+     35.987175,
+     -79.749599
+    ]
+   ],
+   "towns": [
+    "Greensboro"
+   ]
   },
   {
    "name": "Little Cawcaw Swamp",
@@ -4302,7 +6578,17 @@
    "slugs": [
     "little-cawcaw-swamp-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.939567,
+     -78.567737
+    ],
+    [
+     33.941682,
+     -78.53805
+    ]
+   ]
   },
   {
    "name": "Little Crabtree Creek",
@@ -4310,7 +6596,13 @@
    "slugs": [
     "little-crabtree-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.916263,
+     -82.2831
+    ]
+   ]
   },
   {
    "name": "Little Hope Creek",
@@ -4318,7 +6610,16 @@
    "slugs": [
     "little-hope-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.173359,
+     -80.875417
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Little Rockfish Creek",
@@ -4326,7 +6627,20 @@
    "slugs": [
     "little-rockfish-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.017281,
+     -79.017815
+    ],
+    [
+     34.994118,
+     -79.029343
+    ]
+   ],
+   "towns": [
+    "Fayetteville"
+   ]
   },
   {
    "name": "Long Shoal Creek",
@@ -4334,7 +6648,16 @@
    "slugs": [
     "long-shoal-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.790249,
+     -81.251867
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "McGill Creek",
@@ -4342,7 +6665,13 @@
    "slugs": [
     "mcgill-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.24112,
+     -81.333247
+    ]
+   ]
   },
   {
    "name": "Miller Branch (Bolicks Dry Branch)",
@@ -4350,7 +6679,16 @@
    "slugs": [
     "miller-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.699193,
+     -81.281018
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "Mitchell Branch",
@@ -4358,7 +6696,17 @@
    "slugs": [
     "mitchell-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.587921,
+     -77.070897
+    ],
+    [
+     35.586005,
+     -77.09606
+    ]
+   ]
   },
   {
    "name": "New Years Creek",
@@ -4366,7 +6714,13 @@
    "slugs": [
     "new-years-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.132245,
+     -81.681191
+    ]
+   ]
   },
   {
    "name": "Overcup Creek",
@@ -4374,7 +6728,13 @@
    "slugs": [
     "overcup-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.839602,
+     -79.032893
+    ]
+   ]
   },
   {
    "name": "PIGEON RIVER",
@@ -4382,7 +6742,20 @@
    "slugs": [
     "pigeon-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.523948,
+     -82.841364
+    ],
+    [
+     35.54206,
+     -82.928575
+    ]
+   ],
+   "towns": [
+    "Canton"
+   ]
   },
   {
    "name": "Patterson Creek",
@@ -4390,7 +6763,13 @@
    "slugs": [
     "patterson-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.484033,
+     -79.212326
+    ]
+   ]
   },
   {
    "name": "Pinner Creek (Morgan Lake)",
@@ -4398,7 +6777,16 @@
    "slugs": [
     "pinner-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.452602,
+     -82.497902
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Potts Creek (Pilot Branch)",
@@ -4406,7 +6794,17 @@
    "slugs": [
     "potts-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.242848,
+     -81.352076
+    ],
+    [
+     35.260659,
+     -81.422459
+    ]
+   ]
   },
   {
    "name": "Rat Spring Branch",
@@ -4414,7 +6812,13 @@
    "slugs": [
     "rat-spring-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.801876,
+     -80.265692
+    ]
+   ]
   },
   {
    "name": "Reddicks Creek",
@@ -4422,7 +6826,13 @@
    "slugs": [
     "reddicks-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.014814,
+     -79.885022
+    ]
+   ]
   },
   {
    "name": "Ross Creek (Lake Kenilworth)",
@@ -4430,7 +6840,20 @@
    "slugs": [
     "ross-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.614422,
+     -82.522674
+    ],
+    [
+     35.585605,
+     -82.533258
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Runyon Creek",
@@ -4438,7 +6861,13 @@
    "slugs": [
     "runyon-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.548101,
+     -77.033432
+    ]
+   ]
   },
   {
    "name": "Shady Branch",
@@ -4446,7 +6875,13 @@
    "slugs": [
     "shady-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.575623,
+     -81.211568
+    ]
+   ]
   },
   {
    "name": "Sides Branch",
@@ -4454,7 +6889,20 @@
    "slugs": [
     "sides-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.06417,
+     -80.348076
+    ],
+    [
+     36.032616,
+     -80.276315
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Silver Creek",
@@ -4462,15 +6910,13 @@
    "slugs": [
     "silver-creek-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Stevens Creek",
-   "reports": 2,
-   "slugs": [
-    "stevens-creek-nc"
-   ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.73359,
+     -81.707723
+    ]
+   ]
   },
   {
    "name": "Stirrup Iron Creek",
@@ -4478,7 +6924,17 @@
    "slugs": [
     "stirrup-iron-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.910981,
+     -78.847798
+    ],
+    [
+     35.937147,
+     -78.825785
+    ]
+   ]
   },
   {
    "name": "Stoney Creek",
@@ -4486,7 +6942,13 @@
    "slugs": [
     "stoney-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.367894,
+     -77.9639
+    ]
+   ]
   },
   {
    "name": "Sycamore Creek (Big Lake)",
@@ -4494,7 +6956,23 @@
    "slugs": [
     "sycamore-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.927248,
+     -78.75362
+    ],
+    [
+     35.896211,
+     -78.765147
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Tank Creek (McDuffie Cr.) (McFayden Pond)",
@@ -4502,7 +6980,21 @@
    "slugs": [
     "tank-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.065953,
+     -78.993828
+    ],
+    [
+     35.145395,
+     -78.990055
+    ]
+   ],
+   "towns": [
+    "Fayetteville",
+    "Fort Bragg"
+   ]
   },
   {
    "name": "Toisnot Swamp (Silver Lake, Lake Wilson)",
@@ -4510,15 +7002,17 @@
    "slugs": [
     "toisnot-swamp-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Torrence Branch",
-   "reports": 2,
-   "slugs": [
-    "torrence-branch-nc"
-   ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.735355,
+     -77.90238
+    ],
+    [
+     35.668117,
+     -77.839023
+    ]
+   ]
   },
   {
    "name": "Unnamed tributary to Little Gunpowder Creek",
@@ -4526,15 +7020,13 @@
    "slugs": [
     "little-gunpowder-creek-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Unnamed tributary to Redbud Creek",
-   "reports": 2,
-   "slugs": [
-    "red-bud-creek-nc"
-   ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.842834,
+     -81.499244
+    ]
+   ]
   },
   {
    "name": "Wagner Branch",
@@ -4542,7 +7034,16 @@
    "slugs": [
     "wagner-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.686908,
+     -82.593819
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "West Buies Creek",
@@ -4550,7 +7051,16 @@
    "slugs": [
     "west-buies-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.458702,
+     -78.749726
+    ]
+   ],
+   "towns": [
+    "Angier"
+   ]
   },
   {
    "name": "Yadkin Branch (Adkin Branch)",
@@ -4558,7 +7068,13 @@
    "slugs": [
     "yadkin-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.249802,
+     -77.561355
+    ]
+   ]
   },
   {
    "name": "Zacks Fork Creek",
@@ -4566,7 +7082,13 @@
    "slugs": [
     "zacks-fork-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.91626,
+     -81.532136
+    ]
+   ]
   },
   {
    "name": "(North) Fowler Creek",
@@ -4574,7 +7096,13 @@
    "slugs": [
     "fowler-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.09966,
+     -83.088399
+    ]
+   ]
   },
   {
    "name": "Anderson Creek",
@@ -4582,7 +7110,16 @@
    "slugs": [
     "anderson-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.254556,
+     -80.500069
+    ]
+   ],
+   "towns": [
+    "Concord"
+   ]
   },
   {
    "name": "Bachelor Branch",
@@ -4590,7 +7127,13 @@
    "slugs": [
     "bachelor-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.793705,
+     -78.877451
+    ]
+   ]
   },
   {
    "name": "Bailey Fork",
@@ -4598,7 +7141,13 @@
    "slugs": [
     "bailey-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.720416,
+     -81.697194
+    ]
+   ]
   },
   {
    "name": "Baker Creek",
@@ -4606,7 +7155,16 @@
    "slugs": [
     "baker-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.879424,
+     -82.344336
+    ]
+   ],
+   "towns": [
+    "Burnsville"
+   ]
   },
   {
    "name": "Barger Branch",
@@ -4614,7 +7172,16 @@
    "slugs": [
     "barger-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.706022,
+     -81.336321
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "Bell Swamp",
@@ -4622,7 +7189,13 @@
    "slugs": [
     "bell-swamp-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.122114,
+     -78.089774
+    ]
+   ]
   },
   {
    "name": "Bill Moore Creek (Enka Lake)",
@@ -4630,7 +7203,16 @@
    "slugs": [
     "bill-moore-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.533422,
+     -82.651847
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Billy Branch",
@@ -4638,7 +7220,13 @@
    "slugs": [
     "billy-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.803197,
+     -81.434565
+    ]
+   ]
   },
   {
    "name": "Bishop Branch",
@@ -4646,7 +7234,13 @@
    "slugs": [
     "bishop-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.180425,
+     -78.095997
+    ]
+   ]
   },
   {
    "name": "Blanket Creek",
@@ -4654,7 +7248,16 @@
    "slugs": [
     "blanket-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.049626,
+     -80.38715
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Blanket Creek (Lasater Lake)",
@@ -4662,7 +7265,16 @@
    "slugs": [
     "blanket-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.039942,
+     -80.411549
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Bones Creek",
@@ -4670,7 +7282,16 @@
    "slugs": [
     "bones-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.031015,
+     -79.040448
+    ]
+   ],
+   "towns": [
+    "Fayetteville"
+   ]
   },
   {
    "name": "Bradley Creek",
@@ -4678,7 +7299,16 @@
    "slugs": [
     "bradley-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.234774,
+     -77.92424
+    ]
+   ],
+   "towns": [
+    "Wilmington"
+   ]
   },
   {
    "name": "Bridges Branch",
@@ -4686,7 +7316,19 @@
    "slugs": [
     "bridges-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.796518,
+     -78.610981
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Brittian Branch",
@@ -4694,7 +7336,13 @@
    "slugs": [
     "brittian-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.09757,
+     -84.021642
+    ]
+   ]
   },
   {
    "name": "Buck Branch",
@@ -4702,15 +7350,19 @@
    "slugs": [
     "buck-branch-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Buck branch",
-   "reports": 1,
-   "slugs": [
-    "buck-branch-nc"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.707851,
+     -78.634004
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Burnt House Branch",
@@ -4718,7 +7370,16 @@
    "slugs": [
     "burnt-house-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.747426,
+     -77.410385
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ]
   },
   {
    "name": "Caldwell Station Creek",
@@ -4726,7 +7387,16 @@
    "slugs": [
     "caldwell-station-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.453065,
+     -80.857154
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Carson Creek",
@@ -4734,7 +7404,16 @@
    "slugs": [
     "carson-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.148312,
+     -82.715069
+    ]
+   ],
+   "towns": [
+    "Transylvania County"
+   ]
   },
   {
    "name": "Cary Branch",
@@ -4742,7 +7421,13 @@
    "slugs": [
     "cary-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.617993,
+     -78.879989
+    ]
+   ]
   },
   {
    "name": "Cates Creek",
@@ -4750,7 +7435,13 @@
    "slugs": [
     "cates-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.068895,
+     -79.08521
+    ]
+   ]
   },
   {
    "name": "Cemetery Branch",
@@ -4758,7 +7449,19 @@
    "slugs": [
     "cemetery-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.796015,
+     -78.625332
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Charles Creek",
@@ -4766,7 +7469,13 @@
    "slugs": [
     "charles-creek-elizabeth-city-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     36.293553,
+     -76.250223
+    ]
+   ]
   },
   {
    "name": "Clark Branch",
@@ -4774,7 +7483,13 @@
    "slugs": [
     "clark-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.042617,
+     -78.235524
+    ]
+   ]
   },
   {
    "name": "Coffey Creek",
@@ -4782,7 +7497,16 @@
    "slugs": [
     "coffey-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.17229,
+     -80.958531
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Coley Branch",
@@ -4790,15 +7514,13 @@
    "slugs": [
     "coley-branch-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "College Branch (Institute Branch)",
-   "reports": 1,
-   "slugs": [
-    "college-branch-nc"
-   ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.371094,
+     -80.212539
+    ]
+   ]
   },
   {
    "name": "Compass Creek",
@@ -4806,7 +7528,13 @@
    "slugs": [
     "compass-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.998872,
+     -77.788823
+    ]
+   ]
   },
   {
    "name": "Cope Creek",
@@ -4814,7 +7542,13 @@
    "slugs": [
     "cope-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.373053,
+     -83.198125
+    ]
+   ]
   },
   {
    "name": "Copper Mine Branch",
@@ -4822,7 +7556,13 @@
    "slugs": [
     "copper-mine-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.326854,
+     -81.855936
+    ]
+   ]
   },
   {
    "name": "Cornelius Creek",
@@ -4830,7 +7570,13 @@
    "slugs": [
     "cornelius-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.625597,
+     -80.82445
+    ]
+   ]
   },
   {
    "name": "Cottage Creek",
@@ -4838,7 +7584,13 @@
    "slugs": [
     "cottage-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     33.927607,
+     -78.025972
+    ]
+   ]
   },
   {
    "name": "Cove Creek",
@@ -4846,7 +7598,13 @@
    "slugs": [
     "cove-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.24451,
+     -82.33553
+    ]
+   ]
   },
   {
    "name": "Crawford Branch",
@@ -4854,7 +7612,13 @@
    "slugs": [
     "crawford-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.175198,
+     -83.390489
+    ]
+   ]
   },
   {
    "name": "Crooked Run Creek",
@@ -4862,7 +7626,16 @@
    "slugs": [
     "crooked-run-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.266041,
+     -80.398516
+    ]
+   ],
+   "towns": [
+    "King"
+   ]
   },
   {
    "name": "Cross Creek (Big Cross Creek)",
@@ -4870,7 +7643,16 @@
    "slugs": [
     "cross-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.107578,
+     -78.90696
+    ]
+   ],
+   "towns": [
+    "Fayetteville"
+   ]
   },
   {
    "name": "Cub Creek",
@@ -4878,7 +7660,13 @@
    "slugs": [
     "cub-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.851746,
+     -79.023788
+    ]
+   ]
   },
   {
    "name": "Dairy Branch",
@@ -4886,7 +7674,16 @@
    "slugs": [
     "dairy-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.197607,
+     -80.852672
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Devils Fork",
@@ -4894,7 +7691,13 @@
    "slugs": [
     "devils-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.34859,
+     -82.379845
+    ]
+   ]
   },
   {
    "name": "Dollar Branch (Marsh Branch)",
@@ -4902,7 +7705,13 @@
    "slugs": [
     "dollar-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.987068,
+     -78.321312
+    ]
+   ]
   },
   {
    "name": "Dry Fork",
@@ -4910,7 +7719,13 @@
    "slugs": [
     "dry-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.017389,
+     -80.597349
+    ]
+   ]
   },
   {
    "name": "Edwards Branch",
@@ -4918,7 +7733,16 @@
    "slugs": [
     "edwards-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.196427,
+     -80.776407
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Elisha Creek",
@@ -4926,7 +7750,13 @@
    "slugs": [
     "elisha-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.925128,
+     -80.588527
+    ]
+   ]
   },
   {
    "name": "FRENCH BROAD",
@@ -4934,7 +7764,13 @@
    "slugs": [
     "french-broad-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.223489,
+     -82.727631
+    ]
+   ]
   },
   {
    "name": "Fan Branch",
@@ -4942,7 +7778,13 @@
    "slugs": [
     "fan-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.869534,
+     -79.080661
+    ]
+   ]
   },
   {
    "name": "Fiddlers Run",
@@ -4950,7 +7792,13 @@
    "slugs": [
     "fiddlers-run-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.727687,
+     -81.664232
+    ]
+   ]
   },
   {
    "name": "Fishers Branch",
@@ -4958,7 +7806,16 @@
    "slugs": [
     "fishers-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.104031,
+     -80.147502
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Flattop Creek",
@@ -4966,7 +7823,13 @@
    "slugs": [
     "flattop-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.13545,
+     -81.84587
+    ]
+   ]
   },
   {
    "name": "Fox Creek",
@@ -4974,7 +7837,13 @@
    "slugs": [
     "fox-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.093179,
+     -78.293534
+    ]
+   ]
   },
   {
    "name": "Fuda Creek",
@@ -4982,7 +7851,16 @@
    "slugs": [
     "fuda-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.296074,
+     -80.660259
+    ]
+   ],
+   "towns": [
+    "Harrisburg"
+   ]
   },
   {
    "name": "Gash Creek",
@@ -4990,7 +7868,13 @@
    "slugs": [
     "gash-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.315865,
+     -82.597518
+    ]
+   ]
   },
   {
    "name": "Gill Branch",
@@ -4998,7 +7882,16 @@
    "slugs": [
     "gill-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.704532,
+     -82.564441
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Goose Branch",
@@ -5006,7 +7899,13 @@
    "slugs": [
     "goose-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.974735,
+     -77.827235
+    ]
+   ]
   },
   {
    "name": "Goulds Fork",
@@ -5014,7 +7913,16 @@
    "slugs": [
     "goulds-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.990515,
+     -80.09241
+    ]
+   ],
+   "towns": [
+    "Wadesboro"
+   ]
   },
   {
    "name": "Grassy Branch",
@@ -5022,7 +7930,16 @@
    "slugs": [
     "grassy-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.594244,
+     -82.478408
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Graveyard Creek (Crystal Falls Creek)",
@@ -5030,7 +7947,13 @@
    "slugs": [
     "graveyard-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.895717,
+     -82.069056
+    ]
+   ]
   },
   {
    "name": "Grays Creek",
@@ -5038,7 +7961,16 @@
    "slugs": [
     "grays-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.925805,
+     -78.918354
+    ]
+   ],
+   "towns": [
+    "Fayetteville"
+   ]
   },
   {
    "name": "Greenfield Creek",
@@ -5046,7 +7978,16 @@
    "slugs": [
     "greenfield-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.212167,
+     -77.946904
+    ]
+   ],
+   "towns": [
+    "Wilmington"
+   ]
   },
   {
    "name": "Gregory Creek",
@@ -5054,7 +7995,13 @@
    "slugs": [
     "gregory-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.793709,
+     -80.921453
+    ]
+   ]
   },
   {
    "name": "Gum Creek",
@@ -5062,7 +8009,13 @@
    "slugs": [
     "gum-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.070605,
+     -79.490858
+    ]
+   ]
   },
   {
    "name": "Gum Log Canal",
@@ -5070,7 +8023,13 @@
    "slugs": [
     "gum-log-canal-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.083927,
+     -78.835369
+    ]
+   ]
   },
   {
    "name": "Halls Creek",
@@ -5078,7 +8037,13 @@
    "slugs": [
     "halls-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.687151,
+     -77.146981
+    ]
+   ]
   },
   {
    "name": "Hatters Branch",
@@ -5086,7 +8051,19 @@
    "slugs": [
     "hatters-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.963915,
+     -78.500322
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Haw Creek",
@@ -5094,7 +8071,16 @@
    "slugs": [
     "haw-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.585561,
+     -82.509842
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Hiatt Branch",
@@ -5102,7 +8088,13 @@
    "slugs": [
     "hiatt-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.00908,
+     -80.021549
+    ]
+   ]
   },
   {
    "name": "Hicks Creek",
@@ -5110,7 +8102,16 @@
    "slugs": [
     "hicks-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.719219,
+     -80.899317
+    ]
+   ],
+   "towns": [
+    "Troutman"
+   ]
   },
   {
    "name": "Hogans Creek",
@@ -5118,7 +8119,13 @@
    "slugs": [
     "hogans-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.36263,
+     -79.94533
+    ]
+   ]
   },
   {
    "name": "Horseford Creek",
@@ -5126,7 +8133,16 @@
    "slugs": [
     "horseford-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.752851,
+     -81.364009
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "House Creek",
@@ -5134,7 +8150,13 @@
    "slugs": [
     "house-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.800363,
+     -78.70436
+    ]
+   ]
   },
   {
    "name": "Hughes Branch",
@@ -5142,15 +8164,13 @@
    "slugs": [
     "hughes-branch-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Irvins Creek (McEwen Lake)",
-   "reports": 1,
-   "slugs": [
-    "irvins-creek-nc"
-   ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.416289,
+     -83.448844
+    ]
+   ]
   },
   {
    "name": "Jack Smith Creek",
@@ -5158,7 +8178,13 @@
    "slugs": [
     "jack-smith-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.114585,
+     -77.062289
+    ]
+   ]
   },
   {
    "name": "Jacks Creek",
@@ -5166,7 +8192,13 @@
    "slugs": [
     "jacks-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.544541,
+     -77.053248
+    ]
+   ]
   },
   {
    "name": "Jennies Gut (Gum Pond Run)",
@@ -5174,7 +8206,13 @@
    "slugs": [
     "jennies-gut-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.191052,
+     -76.475025
+    ]
+   ]
   },
   {
    "name": "Jumping Run Creek",
@@ -5182,7 +8220,13 @@
    "slugs": [
     "jumping-run-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.198028,
+     -78.987906
+    ]
+   ]
   },
   {
    "name": "Kennedy Creek",
@@ -5190,7 +8234,13 @@
    "slugs": [
     "kennedy-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.559755,
+     -77.072665
+    ]
+   ]
   },
   {
    "name": "Kit Creek",
@@ -5198,7 +8248,13 @@
    "slugs": [
     "kit-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.8656,
+     -78.86297
+    ]
+   ]
   },
   {
    "name": "Knobbs Creek",
@@ -5206,7 +8262,13 @@
    "slugs": [
     "knobbs-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     36.322718,
+     -76.223218
+    ]
+   ]
   },
   {
    "name": "Knox Creek",
@@ -5214,7 +8276,16 @@
    "slugs": [
     "knox-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.496397,
+     -80.884608
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "LITTLE TENNESSEE RIVER (Including the backwaters of Lake Emory)",
@@ -5222,7 +8293,13 @@
    "slugs": [
     "little-tennessee-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.18479,
+     -83.36774
+    ]
+   ]
   },
   {
    "name": "Lake Hickory",
@@ -5230,7 +8307,16 @@
    "slugs": [
     "lake-hickory-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.804979,
+     -81.312066
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "Lake Norman",
@@ -5238,7 +8324,16 @@
    "slugs": [
     "lake-norman-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.487664,
+     -80.887189
+    ]
+   ],
+   "towns": [
+    "Mecklenburg County"
+   ]
   },
   {
    "name": "Leak Creek",
@@ -5246,7 +8341,16 @@
    "slugs": [
     "leak-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.000303,
+     -80.228927
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Ledbetter Branch",
@@ -5254,7 +8358,13 @@
    "slugs": [
     "ledbetter-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.002963,
+     -80.207759
+    ]
+   ]
   },
   {
    "name": "Ledge Creek",
@@ -5262,7 +8372,13 @@
    "slugs": [
     "ledge-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.115344,
+     -78.725858
+    ]
+   ]
   },
   {
    "name": "Little Brier Creek",
@@ -5270,7 +8386,19 @@
    "slugs": [
     "little-brier-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.890324,
+     -78.799167
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Little Cross Creek",
@@ -5278,7 +8406,16 @@
    "slugs": [
     "little-cross-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.088139,
+     -78.943867
+    ]
+   ],
+   "towns": [
+    "Fayetteville"
+   ]
   },
   {
    "name": "Little Northeast Creek",
@@ -5286,7 +8423,13 @@
    "slugs": [
     "little-northeast-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.764675,
+     -77.301878
+    ]
+   ]
   },
   {
    "name": "Little Piney Branch",
@@ -5294,7 +8437,16 @@
    "slugs": [
     "little-piney-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.644256,
+     -82.306978
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Little Troublesome Creek",
@@ -5302,7 +8454,13 @@
    "slugs": [
     "little-troublesome-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.32813,
+     -79.671469
+    ]
+   ]
   },
   {
    "name": "Lockwoods Folly River",
@@ -5310,7 +8468,13 @@
    "slugs": [
     "lockwoods-folly-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.047301,
+     -78.176566
+    ]
+   ]
   },
   {
    "name": "Longview Creek",
@@ -5318,7 +8482,16 @@
    "slugs": [
     "longview-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.723737,
+     -81.365817
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "Lovills Creek (Lovell Creek)",
@@ -5326,15 +8499,13 @@
    "slugs": [
     "lovills-creek-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Lower Barton Creek",
-   "reports": 1,
-   "slugs": [
-    "lower-barton-creek-nc"
-   ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.476784,
+     -80.61264
+    ]
+   ]
   },
   {
    "name": "Lynn Branch (Meadows Creek) (Lochmere Lake)",
@@ -5342,7 +8513,13 @@
    "slugs": [
     "lynn-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.77289,
+     -78.777901
+    ]
+   ]
   },
   {
    "name": "Mahlers Creek",
@@ -5350,7 +8527,19 @@
    "slugs": [
     "mahlers-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.661623,
+     -78.599402
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Mango Creek",
@@ -5358,7 +8547,19 @@
    "slugs": [
     "mango-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.790327,
+     -78.483355
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Maple Creek",
@@ -5366,7 +8567,13 @@
    "slugs": [
     "maple-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.971126,
+     -77.892112
+    ]
+   ]
   },
   {
    "name": "Maple Creek (28-66)",
@@ -5374,7 +8581,13 @@
    "slugs": [
     "maple-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.944929,
+     -77.835659
+    ]
+   ]
   },
   {
    "name": "Marsh Creek",
@@ -5382,7 +8595,19 @@
    "slugs": [
     "marsh-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.797856,
+     -78.589175
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "McDowell Branch",
@@ -5390,7 +8615,13 @@
    "slugs": [
     "mcdowell-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.138115,
+     -83.39739
+    ]
+   ]
   },
   {
    "name": "McIntyre Creek",
@@ -5398,7 +8629,16 @@
    "slugs": [
     "mcintyre-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.316091,
+     -80.873972
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Micol Creek",
@@ -5406,7 +8646,13 @@
    "slugs": [
     "micol-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.740242,
+     -81.555921
+    ]
+   ]
   },
   {
    "name": "Mills Creek",
@@ -5414,7 +8660,13 @@
    "slugs": [
     "mills-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.324148,
+     -80.150216
+    ]
+   ]
   },
   {
    "name": "Muddy Fork",
@@ -5422,7 +8674,13 @@
    "slugs": [
     "muddy-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.927697,
+     -81.182102
+    ]
+   ]
   },
   {
    "name": "Mulberry Creek",
@@ -5430,7 +8688,13 @@
    "slugs": [
     "mulberry-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.188018,
+     -81.113904
+    ]
+   ]
   },
   {
    "name": "Mundy Creek",
@@ -5438,7 +8702,13 @@
    "slugs": [
     "mundy-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.542826,
+     -81.035899
+    ]
+   ]
   },
   {
    "name": "NEW RIVER",
@@ -5446,7 +8716,16 @@
    "slugs": [
     "new-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.752438,
+     -77.361548
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ]
   },
   {
    "name": "Neills Creek (Neals Creek)",
@@ -5454,7 +8733,16 @@
    "slugs": [
     "neills-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.533689,
+     -78.763403
+    ]
+   ],
+   "towns": [
+    "Angier"
+   ]
   },
   {
    "name": "Nicks Creek",
@@ -5462,7 +8750,16 @@
    "slugs": [
     "nicks-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.25353,
+     -79.41279
+    ]
+   ],
+   "towns": [
+    "Carthage"
+   ]
   },
   {
    "name": "Nicks Creek (Von Canon Lake)",
@@ -5470,7 +8767,16 @@
    "slugs": [
     "nicks-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.25231,
+     -79.411924
+    ]
+   ],
+   "towns": [
+    "Southern Pines"
+   ]
   },
   {
    "name": "North Fork Swannanoa River (Burnett Reservoir)",
@@ -5478,7 +8784,16 @@
    "slugs": [
     "north-fork-swannanoa-river-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.624997,
+     -82.355427
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Oak Hollow Lake",
@@ -5486,7 +8801,13 @@
    "slugs": [
     "oak-hollow-lake-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     36.03686,
+     -80.014255
+    ]
+   ]
   },
   {
    "name": "PAMLICO RIVER",
@@ -5494,7 +8815,13 @@
    "slugs": [
     "pamlico-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.540348,
+     -77.063058
+    ]
+   ]
   },
   {
    "name": "Pages Creek",
@@ -5502,7 +8829,16 @@
    "slugs": [
     "pages-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.277507,
+     -77.802931
+    ]
+   ],
+   "towns": [
+    "Wilmington"
+   ]
   },
   {
    "name": "Panther Creek",
@@ -5510,7 +8846,13 @@
    "slugs": [
     "panther-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.817588,
+     -78.914889
+    ]
+   ]
   },
   {
    "name": "Perry Creek (Greshams Lake)",
@@ -5518,7 +8860,19 @@
    "slugs": [
     "perry-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.884638,
+     -78.621156
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Phils Creek",
@@ -5526,7 +8880,13 @@
    "slugs": [
     "phils-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.922194,
+     -79.126968
+    ]
+   ]
   },
   {
    "name": "Phipps Creek",
@@ -5534,7 +8894,16 @@
    "slugs": [
     "phipps-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.878243,
+     -82.347723
+    ]
+   ],
+   "towns": [
+    "Burnsville"
+   ]
   },
   {
    "name": "Pierce Creek",
@@ -5542,7 +8911,13 @@
    "slugs": [
     "pierce-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.984277,
+     -78.595898
+    ]
+   ]
   },
   {
    "name": "Plum Branch",
@@ -5550,7 +8925,13 @@
    "slugs": [
     "plum-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.598283,
+     -78.564328
+    ]
+   ]
   },
   {
    "name": "Pokeberry Creek",
@@ -5558,7 +8939,18 @@
    "slugs": [
     "pokeberry-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.821638,
+     -79.106462
+    ]
+   ],
+   "towns": [
+    "Chapel Hill",
+    "Jacksonville",
+    "Pender County"
+   ]
   },
   {
    "name": "Polly Gully Creek",
@@ -5566,7 +8958,13 @@
    "slugs": [
     "polly-gully-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.948306,
+     -78.121476
+    ]
+   ]
   },
   {
    "name": "Poplar Branch",
@@ -5574,7 +8972,13 @@
    "slugs": [
     "poplar-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.245379,
+     -81.646697
+    ]
+   ]
   },
   {
    "name": "Poplar Creek",
@@ -5582,7 +8986,19 @@
    "slugs": [
     "poplar-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.730488,
+     -78.479626
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Purgatory Branch",
@@ -5590,7 +9006,13 @@
    "slugs": [
     "purgatory-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.529019,
+     -79.233738
+    ]
+   ]
   },
   {
    "name": "Queen Creek",
@@ -5598,7 +9020,13 @@
    "slugs": [
     "queen-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.687152,
+     -77.146979
+    ]
+   ]
   },
   {
    "name": "Ramah Creek",
@@ -5606,7 +9034,16 @@
    "slugs": [
     "ramah-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.447736,
+     -80.828783
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "Reedy Fork (including Lake Brandt and Lake Townsend below normal operating levels)",
@@ -5614,7 +9051,10 @@
    "slugs": [
     "reedy-fork-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "towns": [
+    "Greensboro"
+   ]
   },
   {
    "name": "Robertson Creek",
@@ -5622,7 +9062,13 @@
    "slugs": [
     "robertson-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.11883,
+     -78.683244
+    ]
+   ]
   },
   {
    "name": "Rock Creek",
@@ -5630,7 +9076,16 @@
    "slugs": [
     "rock-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.838387,
+     -81.307961
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "Rocky Creek",
@@ -5638,7 +9093,19 @@
    "slugs": [
     "rocky-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.827533,
+     -78.559808
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Rone Branch (Rhone Branch)",
@@ -5646,15 +9113,13 @@
    "slugs": [
     "rone-branch-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Ross Swamp",
-   "reports": 1,
-   "slugs": [
-    "ross-swamp-nc"
-   ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.915955,
+     -80.746607
+    ]
+   ]
   },
   {
    "name": "Saddletree Swamp",
@@ -5662,7 +9127,13 @@
    "slugs": [
     "saddletree-swamp-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.678588,
+     -79.01417
+    ]
+   ]
   },
   {
    "name": "Sandy Run Branch",
@@ -5670,7 +9141,16 @@
    "slugs": [
     "sandy-run-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.759066,
+     -77.413088
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ]
   },
   {
    "name": "Scales Creek",
@@ -5678,7 +9158,16 @@
    "slugs": [
     "scales-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.754517,
+     -77.397174
+    ]
+   ],
+   "towns": [
+    "Jacksonville"
+   ]
   },
   {
    "name": "Schoolhouse Branch",
@@ -5686,7 +9175,13 @@
    "slugs": [
     "schoolhouse-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.611632,
+     -77.418887
+    ]
+   ]
   },
   {
    "name": "Service Creek (Servis Creek)",
@@ -5694,7 +9189,13 @@
    "slugs": [
     "service-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.097614,
+     -79.401254
+    ]
+   ]
   },
   {
    "name": "Sevenmile Creek",
@@ -5702,7 +9203,13 @@
    "slugs": [
     "sevenmile-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.089874,
+     -79.1163
+    ]
+   ]
   },
   {
    "name": "Sharron Creek (Grissett Swamp)",
@@ -5710,7 +9217,16 @@
    "slugs": [
     "sharron-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     33.979794,
+     -78.364953
+    ]
+   ],
+   "towns": [
+    "Shallotte"
+   ]
   },
   {
    "name": "Shaw Creek",
@@ -5718,7 +9234,16 @@
    "slugs": [
     "shaw-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.342026,
+     -82.548324
+    ]
+   ],
+   "towns": [
+    "Henderson County"
+   ]
   },
   {
    "name": "Simmons Branch",
@@ -5726,7 +9251,19 @@
    "slugs": [
     "simmons-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.781871,
+     -78.720126
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Skunk Creek",
@@ -5734,7 +9271,13 @@
    "slugs": [
     "skunk-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.45948,
+     -79.189289
+    ]
+   ]
   },
   {
    "name": "Slocum Creek",
@@ -5742,7 +9285,13 @@
    "slugs": [
     "slocum-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.8885,
+     -76.910738
+    ]
+   ]
   },
   {
    "name": "Smith Mill Creek",
@@ -5750,7 +9299,16 @@
    "slugs": [
     "smith-mill-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.591385,
+     -82.5828
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "South Prong West Branch Rocky River",
@@ -5758,7 +9316,16 @@
    "slugs": [
     "south-prong-west-branch-rocky-river-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.487703,
+     -80.849331
+    ]
+   ],
+   "towns": [
+    "Charlotte"
+   ]
   },
   {
    "name": "South River",
@@ -5766,7 +9333,13 @@
    "slugs": [
     "south-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.19295,
+     -78.644943
+    ]
+   ]
   },
   {
    "name": "Stony Run",
@@ -5774,7 +9347,13 @@
    "slugs": [
     "stony-run-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.232655,
+     -80.320055
+    ]
+   ]
   },
   {
    "name": "Stormdrain to UT of Island Creek",
@@ -5782,7 +9361,16 @@
    "slugs": [
     "island-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.252607,
+     -80.409414
+    ]
+   ],
+   "towns": [
+    "Locust"
+   ]
   },
   {
    "name": "Strouds Creek",
@@ -5790,7 +9378,13 @@
    "slugs": [
     "strouds-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.087867,
+     -79.070247
+    ]
+   ]
   },
   {
    "name": "Sturgeon Creek",
@@ -5798,7 +9392,13 @@
    "slugs": [
     "sturgeon-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.230754,
+     -78.056374
+    ]
+   ]
   },
   {
    "name": "Suck Branch",
@@ -5806,7 +9406,13 @@
    "slugs": [
     "suck-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.379523,
+     -79.889211
+    ]
+   ]
   },
   {
    "name": "Tackett Branch",
@@ -5814,7 +9420,13 @@
    "slugs": [
     "tackett-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.506046,
+     -79.761352
+    ]
+   ]
   },
   {
    "name": "Tar Branch",
@@ -5822,7 +9434,16 @@
    "slugs": [
     "tar-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.090415,
+     -80.247968
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "Taylors Creek",
@@ -5830,7 +9451,13 @@
    "slugs": [
     "taylors-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.10693,
+     -78.465608
+    ]
+   ]
   },
   {
    "name": "Thunder Swamp",
@@ -5838,7 +9465,13 @@
    "slugs": [
     "thunder-swamp-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.196292,
+     -78.077231
+    ]
+   ]
   },
   {
    "name": "Tributary of hunting creek",
@@ -5846,7 +9479,13 @@
    "slugs": [
     "hunting-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.707913,
+     -81.693405
+    ]
+   ]
   },
   {
    "name": "Tributary to Nutbush Creek",
@@ -5854,7 +9493,13 @@
    "slugs": [
     "nutbush-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     36.337833,
+     -78.403887
+    ]
+   ]
   },
   {
    "name": "UT Eno River",
@@ -5862,7 +9507,16 @@
    "slugs": [
     "eno-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     36.029331,
+     -78.98427
+    ]
+   ],
+   "towns": [
+    "Durham"
+   ]
   },
   {
    "name": "UT tributary of Ellerbe Creek",
@@ -5870,7 +9524,16 @@
    "slugs": [
     "ellerbe-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     36.023563,
+     -78.813211
+    ]
+   ],
+   "towns": [
+    "Durham"
+   ]
   },
   {
    "name": "Unknown Tributary to Swannanoa River",
@@ -5878,7 +9541,16 @@
    "slugs": [
     "swannanoa-river-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.593466,
+     -82.424736
+    ]
+   ],
+   "towns": [
+    "Asheville"
+   ]
   },
   {
    "name": "Unnamed Trib to Black River",
@@ -5886,7 +9558,16 @@
    "slugs": [
     "black-river-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.511552,
+     -78.740321
+    ]
+   ],
+   "towns": [
+    "Angier"
+   ]
   },
   {
    "name": "Unnamed Tributary to Lake Rhodhiss",
@@ -5894,7 +9575,13 @@
    "slugs": [
     "lake-rhodhiss-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.793837,
+     -81.438592
+    ]
+   ]
   },
   {
    "name": "Unnamed tributary that runs to Lake Hickory",
@@ -5902,7 +9589,16 @@
    "slugs": [
     "lake-hickory-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.789895,
+     -81.320225
+    ]
+   ],
+   "towns": [
+    "Hickory"
+   ]
   },
   {
    "name": "Unnamed tributary to Bolin Creek",
@@ -5910,15 +9606,13 @@
    "slugs": [
     "bolin-creek-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Unnamed tributary to Dry Creek",
-   "reports": 1,
-   "slugs": [
-    "dry-creek-nc"
-   ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.928802,
+     -79.036059
+    ]
+   ]
   },
   {
    "name": "Unnamed tributary to East Fork Deep River",
@@ -5926,7 +9620,13 @@
    "slugs": [
     "east-fork-deep-river-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.031721,
+     -79.970104
+    ]
+   ]
   },
   {
    "name": "Unnamed tributary to Edwards Branch",
@@ -5934,15 +9634,13 @@
    "slugs": [
     "edwards-branch-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "Unnamed tributary to Haw Creek",
-   "reports": 1,
-   "slugs": [
-    "haw-creek-nc"
-   ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.198169,
+     -80.787786
+    ]
+   ]
   },
   {
    "name": "Unnamed tributary to Hodges Mill Creek",
@@ -5950,7 +9648,13 @@
    "slugs": [
     "hodges-mill-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.852264,
+     -78.49802
+    ]
+   ]
   },
   {
    "name": "Unnamed tributary to Kit Creek",
@@ -5958,7 +9662,13 @@
    "slugs": [
     "kit-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.838288,
+     -78.859917
+    ]
+   ]
   },
   {
    "name": "Unnamed tributary to Laurel Creek",
@@ -5966,7 +9676,13 @@
    "slugs": [
     "laurel-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.964351,
+     -78.725327
+    ]
+   ]
   },
   {
    "name": "Unnamed tributary to Michael Branch",
@@ -5974,7 +9690,13 @@
    "slugs": [
     "michael-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.828358,
+     -80.263272
+    ]
+   ]
   },
   {
    "name": "Unnamed tributary to Red Bud Creek",
@@ -5982,7 +9704,13 @@
    "slugs": [
     "red-bud-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.310047,
+     -78.4146
+    ]
+   ]
   },
   {
    "name": "Unnamed tributary to Tackett Branch",
@@ -5990,7 +9718,13 @@
    "slugs": [
     "tackett-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.518373,
+     -79.770614
+    ]
+   ]
   },
   {
    "name": "WATAUGA RIVER",
@@ -5998,7 +9732,16 @@
    "slugs": [
     "watauga-river-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.154262,
+     -81.775621
+    ]
+   ],
+   "towns": [
+    "Banner Elk"
+   ]
   },
   {
    "name": "Walnut Creek (Lake Johnson)",
@@ -6006,7 +9749,19 @@
    "slugs": [
     "walnut-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.760687,
+     -78.729734
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Walnut Creek (Lake Raleigh)",
@@ -6014,7 +9769,19 @@
    "slugs": [
     "walnut-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.75926,
+     -78.663071
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Warner Creek",
@@ -6022,7 +9789,13 @@
    "slugs": [
     "warner-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.356524,
+     -79.900922
+    ]
+   ]
   },
   {
    "name": "Weathers Creek",
@@ -6030,7 +9803,16 @@
    "slugs": [
     "weathers-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.657317,
+     -80.833141
+    ]
+   ],
+   "towns": [
+    "Troutman"
+   ]
   },
   {
    "name": "West Belews Creek (Little Belews Creek)",
@@ -6038,7 +9820,16 @@
    "slugs": [
     "west-belews-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.177756,
+     -80.146092
+    ]
+   ],
+   "towns": [
+    "Winston-Salem"
+   ]
   },
   {
    "name": "West Fork Deep River",
@@ -6046,7 +9837,13 @@
    "slugs": [
     "west-fork-deep-river-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.037456,
+     -79.983144
+    ]
+   ]
   },
   {
    "name": "West Fork Twelvemile Creek",
@@ -6054,7 +9851,13 @@
    "slugs": [
     "west-fork-twelvemile-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     34.986024,
+     -80.766344
+    ]
+   ]
   },
   {
    "name": "White Oak Creek",
@@ -6062,15 +9865,13 @@
    "slugs": [
     "white-oak-creek-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "White Oak Creek (Austin Pond)",
-   "reports": 1,
-   "slugs": [
-    "white-oak-creek-nc"
-   ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.661551,
+     -78.886001
+    ]
+   ]
   },
   {
    "name": "Wildcat Branch",
@@ -6078,7 +9879,19 @@
    "slugs": [
     "wildcat-branch-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.732095,
+     -78.626111
+    ]
+   ],
+   "towns": [
+    "Raleigh",
+    "Garner",
+    "Wake Forest",
+    "Knightdale"
+   ]
   },
   {
    "name": "Wilson Creek",
@@ -6086,7 +9899,13 @@
    "slugs": [
     "wilson-creek-nc"
    ],
-   "how": "a water record already holds the name"
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     35.776053,
+     -81.706451
+    ]
+   ]
   },
   {
    "name": "Wolf Island Creek",
@@ -6094,7 +9913,13 @@
    "slugs": [
     "wolf-island-creek-nc"
    ],
-   "how": "record built from the name"
+   "how": "record built from the name",
+   "points": [
+    [
+     36.363239,
+     -79.695883
+    ]
+   ]
   },
   {
    "name": "Wolfpit Branch (previously called Briar Branch)",
@@ -6102,15 +9927,16 @@
    "slugs": [
     "wolfpit-branch-nc"
    ],
-   "how": "record built from the name"
-  },
-  {
-   "name": "black creek",
-   "reports": 1,
-   "slugs": [
-    "black-creek-nc"
+   "how": "record built from the name",
+   "points": [
+    [
+     35.59937,
+     -82.340603
+    ]
    ],
-   "how": "record built from the name"
+   "towns": [
+    "Asheville"
+   ]
   }
  ]
 }
