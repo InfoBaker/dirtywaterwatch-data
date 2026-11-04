@@ -40,6 +40,7 @@ AREA_TITLES = {
     "md": "Maryland",
     "va": "Virginia",
     "dc": "District of Columbia",
+    "nc": "North Carolina",
 }
 
 HEADER = """# Source checklist

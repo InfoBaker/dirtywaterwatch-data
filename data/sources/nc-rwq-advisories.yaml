@@ -1,0 +1,30 @@
+id: "nc-rwq-advisories"
+name: "NC DEQ Recreational Water Quality program: swimming advisory status layer (RWQ_Advisory_EXTERNAL)"
+url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/RWQ_Advisory_EXTERNAL/FeatureServer/1"
+homepage: "https://www.deq.nc.gov/about/divisions/marine-fisheries/shellfish-sanitation-and-recreational-water-quality/recreational-water-quality"
+kind: "arcgis"
+level: "state"
+# Feed row: the source id written by pipeline/ingest/nc_rwq_advisories.py (data/build/events/nc-rwq-advisories.json),
+#   a snapshot of the current station status turned into advisory spells.
+# Notes (research/nc, status used, verified fetched, checked 2026-11-04): Coastal (ocean and sound)
+#   monitoring stations with current Status (No Alert / Pending Swimming Advisory / Advisory /
+#   Precautionary). Built: pipeline/ingest/nc_rwq_advisories.py (snapshot spells; 225 stations on
+#   2026-11-04).
+# Research notes: 225 stations on 2026-11-03: 216 No Alert, 8 Precautionary, 1 Advisory. The program
+#   also issues sewage-spill swimming advisories by press release (search only). Related layer
+#   PUBLICVIEWRecreationWaterQualityDatabase (229 stations). Checked 2026-11-04: the station Data
+#   links (xapps.ncdenr.org/mf/beaches/smplData.do) answer 404; the layer's last data edit was
+#   2026-09-03, so the 1 Advisory and 8 Precautionary stations had not been re-confirmed since then.
+#   Precautionary is the storm-water discharge area advisory of .3404(c).
+cadence: "daily"
+license: "none stated"
+attribution: "NC DEQ Division of Marine Fisheries, Recreational Water Quality"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "rain_advisory"]
+states: ["NC"]
+access: ["arcgis"]
+access_detail: null
+machine_readable: true
+legal_basis: "15A NCAC 18A .3400 (.3403 bacteria advisories; .3404 point-source, wastewater spill and storm-water advisories)"
+checked: "2026-11-04"
