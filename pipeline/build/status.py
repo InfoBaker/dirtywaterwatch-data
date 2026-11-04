@@ -2522,7 +2522,10 @@ def source_profile(sid: str, reg: dict, recs: list[dict], fixture: bool, meta: d
 
 def source_health(sid: str, f: dict, reg: dict, now: datetime) -> dict:
     reg_cad = cadence_hours(reg.get("cadence"))
-    cad = reg_cad if reg_cad is not None else default_cadence(sid)
+    # an events file written once from a layer that no longer changes (meta.frozen: a --backfill of an archive)
+    # has no expected cadence: it is never stale for its age, only for a failed read
+    frozen = bool((f.get("meta") or {}).get("frozen"))
+    cad = None if frozen else reg_cad if reg_cad is not None else default_cadence(sid)
     last_ok = parse_time(f.get("last_ok_at"))
     reasons = []
     if not f.get("fixture"):
@@ -2534,7 +2537,8 @@ def source_health(sid: str, f: dict, reg: dict, now: datetime) -> dict:
             reasons.append(f"last good fetch {iso(last_ok)} is older than the expected cadence ({cad:g} h)")
     return {"source_id": sid, "ok": f.get("ok"), "error": f.get("error"), "fetched_at": f.get("fetched_at"),
             "last_ok_at": f.get("last_ok_at"), "count": f.get("records"), "fixture": f.get("fixture"),
-            "expected_cadence_hours": cad, "cadence_from": "registry" if reg_cad is not None else "default",
+            "expected_cadence_hours": cad,
+            "cadence_from": "frozen" if frozen else "registry" if reg_cad is not None else "default",
             "registry_ids": reg.get("ids") or [],
             "stale": bool(reasons), "stale_reason": "; ".join(reasons) or None}
 

@@ -5,7 +5,7 @@ homepage: "https://www.deq.nc.gov/about/divisions/water-resources/water-quality-
 kind: "arcgis"
 level: "state"
 # Feed row: written once by pipeline/ingest/nc_dwr_sso.py --backfill (data/build/events/nc-dwr-sso-2022-2025.json).
-#   A frozen layer: its cadence never makes it stale.
+#   A frozen layer: the events file carries meta.frozen, so it is never stale for its age (build/status.py).
 # Notes (research/nc, status used, verified fetched, checked 2026-11-04): History for back-fill
 #   (3,208 events). Frozen (lastEditDate 2026-03-09). Built: nc_dwr_sso.py --backfill.
 # Access detail (research, quoted):
