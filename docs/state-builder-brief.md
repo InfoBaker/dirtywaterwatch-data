@@ -66,9 +66,18 @@ Read this whole file first. Then the files it names. You get no other context be
 5. **Outfalls**: state outfall layers that improve on EPA's rows go into `data/outfalls-<st>.json` in the
    registry row shape (`data/outfalls-mid-atlantic.json`), each row citing its layer; EPA's row for the same
    permit and outfall is kept and marked `superseded_by`. Do not touch `data/outfalls-us.json`.
-6. **Waters**: do not build water records yourself (a structural agent is making the state-aware NHD build).
-   Instead write `data/build/` nothing; list in your final message the receiving-water names your feed uses
-   that `data/receiving-waters-national.json` lacks for your state.
+6. **Waters**: do not build water records yourself. The water batch for the state is a workflow:
+   `gh workflow run state-build.yml -f state=XX` (steps `waters ties` by default; `obl-check` first checks the
+   state's openboatlaunch extract) runs `ingest.waters_from_nhd --state XX` within a budget and
+   `ingest.outfall_waters --state XX`, keeps the NHD answers in the saved raw caches so the next dispatch resumes,
+   and opens a pull request `batch/<xx>-<date>` with the changed registry files for review; dispatch it again until
+   the pull request's table shows every target with a record or a reason. It shares the hourly refresh's queue,
+   which holds one waiting run: dispatch only when no run of either workflow is queued or waiting
+   (`gh run list --workflow refresh.yml --status queued`, the same for `state-build.yml`, and `--status pending`),
+   wait for your run to finish before the next, and treat a run shown as cancelled before it started as replaced:
+   dispatch it again later. Never dispatch two batches at once. `python scripts/state_batch.py plan
+   --state XX` prints the commands without running them. List in your final message the receiving-water names your
+   feed uses that `data/receiving-waters-national.json` lacks for your state (`research/<st>/receiving-waters-missing.json`).
 7. **Do not add the state to `data/rules.json` `live_states`.** The coordinator does that after the checklist.
 8. **A short public-voice paragraph** for the state page's "Data and its limits" (what the law requires, what
    each feed gives and does not, what is not published, known problems) in `research/<st>/state-text.md`:
