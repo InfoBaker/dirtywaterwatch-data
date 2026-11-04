@@ -1,7 +1,39 @@
 """Water records from NHDPlus V2.1 for every receiving water that has none (data/waters-nhd.json).
 
     python -m ingest.waters_from_nhd [--offline] [--refresh] [--limit N] [--targets-only] [--no-osm]
-                                     [--osm-max N] [--osm-only] [--rebuild]
+                                     [--osm-max N] [--osm-only] [--rebuild] [--budget-s S] [--max-requests N]
+    python -m ingest.waters_from_nhd --state XX [--state YY ...] [--budget-s S] [--max-requests N] [--targets-only]
+
+A state build (--state, 2026-11-04; docs/national-waters.md in the site repository): a state's records are built
+before it goes live, from data/receiving-waters-national.json (scripts/gen_receiving_waters.py: one row per receiving
+water per state, with its operators, outfalls, up to three points, EPA's NHD reach codes and NHDPlus ids, and
+define_by) instead of the outfall files and reports below. Targets are every row without a water record on file (a
+'record' row whose slug no water file on disk holds, an openboatlaunch slug whose extract is not here, is built as a
+reach or point row and says so in its notes) and every unnamed outfall, in the order reach, point, name, unnamed.
+EPA's receiving-water text is read by national_parts (path notation 'X CRK/Y CRK/Z RIVER' names X; Florida's class and
+WBID tags, river-basin tails, counties, roads and land-application systems are not waters and become the row's
+stated reason in `skipped`). A reach row takes the NHDPlus V2.1 feature of each GNIS id on its reach codes and NHDPlus
+ids that carries the row's name, every flowline of that id in the state (or the waterbody polygon for a lake, pond,
+reservoir or bay name), with no snapping (resolve_reach; the codes and ids are asked in batches, reach_index). When
+EPA's reaches carry another name (a plant indexed by its fence to the stream there: most of North Carolina's rows),
+the name pass runs next (the GNIS feature of that name nearest the operators' towns, no NLDI request), then the
+points. A point row snaps its points (NLDI), a name row takes the name pass, then the other places of a name, the OSM
+fallback and the state's hand records as below. An unnamed outfall takes the flowline of its own NHDPlus id or reach
+code, else the flowline NLDI snaps its point to: a named flowline gives that water's record, an unnamed one a record of
+that flowline alone named for the first named water downstream ('Unnamed tributary to X', resolve_unnamed, NLDI
+navigation). Records for states not yet live go into the same data/waters-nhd.json (the export and every public output
+keep to rules.json live_states); the write merges into the file: every other state's records, target rows, skipped
+texts and problems stay, and the run's statistics go under stats.state_builds.<ST>. Target rows of a state build
+carry define_by (the national list's), defined_by (how the record was found), permits, reach_slugs ({EPA id: slug},
+read by ingest.outfall_waters --state) and, for an unnamed outfall, outfall_ref. Then
+`python -m ingest.outfall_waters --state XX` ties every outfall row of the state to its record or a reason.
+
+Budgets: --max-requests (network requests; cached answers are free) and --budget-s (seconds) stop the run before a
+request, never inside one (BudgetExhausted); the targets not reached say so, what was built is written (merged, never
+dropping a record), and the next run resumes from the cached responses. NLDI requests keep to USGS's limit of 3,600 an
+hour per address across runs (data/raw/nhd-waters/nldi-requests.json): a request over it waits, or stops the run when
+the wait passes --budget-s. The national list puts four in five named waters on EPA reach codes, so a state needs NLDI
+only for its point rows and unnamed outfalls.
 
 Targets: every outfall in data/outfalls-ne.json, data/outfalls-mid-atlantic.json and the state layers
 (data/build/ma-cso-outfalls.json, me-cso-outfalls.json, nj-cso-outfalls.json) whose water_slug is
@@ -118,6 +150,10 @@ TIGER_PLACES = [f"{TIGER}/25/query", f"{TIGER}/26/query"]   # incorporated place
 # where county subdivisions are election or magisterial districts ("10, Lonaconing", "C-01"), towns are
 # the Census places instead
 PLACE_STATES = {"MD", "VA", "DC", "DE", "WV", "NC", "KY", "TN"}
+# states whose county subdivisions are Census county divisions (statistical areas named for a county seat, not towns):
+# towns are the Census places there too (a state build, --state, 2026-11-04; none of these is live)
+PLACE_STATES |= {"AL", "AZ", "CA", "CO", "FL", "GA", "HI", "ID", "MT", "NV", "NM", "OK", "OR", "SC", "TX", "UT", "WA", "WY",
+                 "PR", "AK"}
 CACHE_DIR = RAW_DIR / "nhd-waters"
 OUT = DATA_DIR / "waters-nhd.json"
 PAUSE_S = 0.5
@@ -128,8 +164,13 @@ SAME_WATER_M = 300         # an NHD water this close to a same-named record is t
 REMAINDER_MIN_KM = 1.0
 MAX_POINTS = 3
 SIMPLIFY_M = 10.0
-FIPS = {"CT": "09", "MA": "25", "ME": "23", "NH": "33", "NJ": "34", "NY": "36", "PA": "42", "RI": "44",
-        "VT": "50", "DE": "10", "MD": "24", "DC": "11", "VA": "51"}
+FIPS = {"AL": "01", "AK": "02", "AZ": "04", "AR": "05", "CA": "06", "CO": "08", "CT": "09", "DE": "10", "DC": "11",
+        "FL": "12", "GA": "13", "HI": "15", "ID": "16", "IL": "17", "IN": "18", "IA": "19", "KS": "20", "KY": "21",
+        "LA": "22", "ME": "23", "MD": "24", "MA": "25", "MI": "26", "MN": "27", "MS": "28", "MO": "29", "MT": "30",
+        "NE": "31", "NV": "32", "NH": "33", "NJ": "34", "NM": "35", "NY": "36", "NC": "37", "ND": "38", "OH": "39",
+        "OK": "40", "OR": "41", "PA": "42", "RI": "44", "SC": "45", "SD": "46", "TN": "47", "TX": "48", "UT": "49",
+        "VT": "50", "VA": "51", "WA": "53", "WV": "54", "WI": "55", "WY": "56", "AS": "60", "GU": "66", "MP": "69",
+        "PR": "72", "VI": "78"}
 FL_FIELDS = "comid,gnis_id,gnis_name,reachcode,fcode,ftype,wbareacomid,wbarea_ftype,streamorder,lengthkm"
 WB_FIELDS = "comid,gnis_id,gnis_name,reachcode,fcode,ftype,areasqkm"
 LAKE_FTYPES = {390: "lake", 436: "reservoir", 493: "bay", 466: "pond"}
@@ -331,14 +372,71 @@ def sql_names(t: dict) -> list[str]:
 
 # ---------------------------------------------------------------- HTTP (cached, polite)
 
+NLDI_PER_HOUR = 3600         # USGS: 3,600 NLDI requests an hour per address
+NLDI_LOG = CACHE_DIR / "nldi-requests.json"     # the times of this address's NLDI requests in the last hour
+
+
+class BudgetExhausted(Exception):
+    """The run's request budget (--max-requests) or time budget (--budget-s) is used: the run stops cleanly, writes
+    what it has, and the next run resumes from the cached responses."""
+
+
 class Http:
-    def __init__(self, refresh: bool = False, offline: bool = False):
+    """Cached, polite GETs. max_requests: at most this many network requests in the run; deadline (time.monotonic())
+    after which no network request is started; both raise BudgetExhausted before a request, never in the middle of
+    one. NLDI requests (kinds starting with 'nldi') keep to NLDI_PER_HOUR in any hour, across runs (NLDI_LOG): a
+    request that would exceed it waits for the oldest to age out, or stops the run when the wait passes the deadline."""
+
+    def __init__(self, refresh: bool = False, offline: bool = False, max_requests: int | None = None,
+                 deadline: float | None = None, nldi_log=None, nldi_per_hour: int = NLDI_PER_HOUR):
         self.refresh, self.offline = refresh, offline
         self.session = requests.Session()
         self.last = 0.0
         self.fetched = Counter()
         self.cached = Counter()
         self.failed = Counter()
+        self.max_requests, self.deadline = max_requests, deadline
+        self.requests = 0                   # network requests started this run (retries included)
+        self.nldi_log = NLDI_LOG if nldi_log is None else nldi_log
+        self.nldi_per_hour = nldi_per_hour
+        self._nldi_times = None
+
+    def _nldi_recent(self) -> list[float]:
+        if self._nldi_times is None:
+            try:
+                self._nldi_times = [float(x) for x in json.loads(self.nldi_log.read_text())]
+            except (OSError, ValueError, TypeError):
+                self._nldi_times = []
+        now = time.time()
+        self._nldi_times = [x for x in self._nldi_times if now - x < 3600]
+        return self._nldi_times
+
+    def _nldi_note(self) -> None:
+        self._nldi_times.append(time.time())
+        try:
+            self.nldi_log.parent.mkdir(parents=True, exist_ok=True)
+            self.nldi_log.write_text(json.dumps([round(x, 1) for x in self._nldi_times]))
+        except OSError:
+            pass
+
+    def spend(self, kind: str) -> None:
+        """Count one network request against the budgets (BudgetExhausted when none is left)."""
+        if self.max_requests is not None and self.requests >= self.max_requests:
+            raise BudgetExhausted(f"--max-requests {self.max_requests} used")
+        if self.deadline is not None and time.monotonic() >= self.deadline:
+            raise BudgetExhausted("--budget-s used")
+        if kind.startswith("nldi"):
+            recent = self._nldi_recent()
+            if len(recent) >= self.nldi_per_hour:
+                wait = 3600 - (time.time() - recent[-self.nldi_per_hour]) + 1
+                if self.deadline is not None and time.monotonic() + wait >= self.deadline:
+                    raise BudgetExhausted(f"the NLDI limit ({self.nldi_per_hour} requests an hour) is reached and "
+                                          f"the wait ({wait:.0f} s) passes --budget-s")
+                print(f"  NLDI: {self.nldi_per_hour} requests in the last hour; waiting {wait:.0f} s", flush=True)
+                time.sleep(max(0.0, wait))
+                self._nldi_recent()
+            self._nldi_note()
+        self.requests += 1
 
     @staticmethod
     def path(kind: str, url: str, params: dict):
@@ -356,6 +454,7 @@ class Http:
         if self.offline:
             return None
         for attempt in range(attempts):
+            self.spend(kind)
             wait = PAUSE_S - (time.time() - self.last)
             if wait > 0:
                 time.sleep(wait)
@@ -435,9 +534,11 @@ def arcgis(http: Http, kind: str, layer: int, *, service: str = EPA_NHD, **param
 # ---------------------------------------------------------------- states and towns
 
 def read_state_outlines(codes) -> dict:
-    """Census cartographic state outlines (openboatlaunch's cb_2023_us_state_500k.zip), read without
-    pyshp: shapefile polygons (outer rings clockwise, holes counter-clockwise) and the dbf's STUSPS."""
-    z = zipfile.ZipFile(WX.STATES_ZIP)
+    """Census cartographic state outlines (cb_2023_us_state_500k.zip, the Census Bureau's 2023 1:500,000 file:
+    data/raw/census/, else the sibling openboatlaunch copy, else downloaded once from
+    https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_state_500k.zip; waters_extra.states_zip()), read
+    without pyshp: shapefile polygons (outer rings clockwise, holes counter-clockwise) and the dbf's STUSPS."""
+    z = zipfile.ZipFile(WX.states_zip())
     stem = "cb_2023_us_state_500k"
     shp, dbf = z.read(f"{stem}.shp"), z.read(f"{stem}.dbf")
     nrec = struct.unpack("<I", dbf[4:8])[0]
@@ -704,11 +805,231 @@ def collect_targets(existing: dict, events=None, verbose=True):
 def print_targets(targets, limit=None):
     print(f"\n{'st':2} {'name':42} {'outfalls':>8} {'events':>7} {'points':>6}  towns")
     for t in targets[:limit]:
-        name = t["name"] or f"(site) {next(iter(t['texts']))}"
+        name = t["name"] or (f"(unnamed outfall) {' '.join(str(x) for x in t['outfall_ref'])}" if t.get("outfall_ref")
+                             else f"(site) {next(iter(t['texts']), '')}")
         print(f"{t['state']:2} {name[:42]:42} {t['outfalls']:8} {t['events']:7} {len(t['points']):6}  "
               f"{', '.join(x for x, _ in t['towns'].most_common(3))}")
     print(f"{len(targets)} targets: {sum(t['outfalls'] for t in targets)} outfall rows, "
           f"{sum(t['events'] for t in targets)} event names")
+
+
+# ---------------------------------------------------------------- a state build (--state): the national target list
+
+NATIONAL = DATA_DIR / "receiving-waters-national.json"
+DEFINE_ORDER = {"reach": 0, "point": 1, "name": 2, "unnamed": 3}
+# texts in EPA's receiving-water field that name a county, a town or a land-application system, not a water
+# (Georgia's permits: 'BANKS COUNTY', 'CHATHAM COUNTY LAS', 'CITY OF REIDSVILLE'); checked on the segment that would
+# name the receiving water
+NATIONAL_NOT_WATER = [
+    (re.compile(r"\b(county|counties|co|parish)\b(?!\s+(creek|river|branch|lake|line|ditch|canal|pond|run))", re.I),
+     "a county name in EPA's receiving-water field, not a water"),
+    (re.compile(r"\b(las|land\s+application|spray\s*field|percolation|infiltration|reuse)\b", re.I),
+     "a land-application system, not a surface water"),
+    (re.compile(r"^\s*(city|town|village)\s+of\b", re.I), "a town name in EPA's receiving-water field, not a water"),
+    (re.compile(r"\b(hwy|highway|road|rd|route|rte|street)\b", re.I), "a road in EPA's receiving-water field, not a water"),
+]
+# a river basin named after the water ('PANTHER CRK/UPPER OCMULGEE RV BASIN', 'PALMETTO CREEK TRIB - Chattahoochee
+# Basin'): cut off; a segment that is only a basin ('SUWANNEE RIVER BASIN') names no water
+BASIN_TAIL = re.compile(r"\s*[-_]*\s*(\b[\w.']+\s+){0,3}?(river\s+|rvr\s+|rv\s+|r\.?\s+)?(basin|bsn)\b.*$", re.I)
+# Florida's waterbody ids and classes ('Old Tampa Bay Class II Marine WBID 1558H'), Georgia's river-basin tails
+# ('... TO OGEECHEE RB', '-SAV RB')
+NATIONAL_TAGS = [
+    re.compile(r"\bclass\s+(i{1,3}|iv|v|1|2|3)\b(\s+(predominately|predominantly))?"
+               r"(\s+(marine|fresh|freshwater|estuary)(\s+waters?)?)?(\s+brackish)?", re.I),
+    re.compile(r"\bcl\s+\d\b", re.I),
+    re.compile(r"\bwbids?(\b|(?=\d))(\s*[\w-]+)?(\s+[a-z]\d?\b)?", re.I),
+    re.compile(r"\b\d{3,5}[a-z]{0,2}\d?\b", re.I),
+    re.compile(r"-\w+\s+rb\s*$|\s+rb\s*$", re.I),
+    re.compile(r"^\s*\d{3}\s*-\s*", re.I),                  # an outfall number in front ('002-UNNAMED TRIB TO FLINT')
+    re.compile(r"^\s*(discharges?d?|outfall|flows?)\s+(to|into)\s+", re.I),
+    re.compile(r"^\s*tidal\s+", re.I),
+    re.compile(r"\b(estuary)\b(?=\s*$)", re.I),
+    re.compile(r"\b(etc)\b\.?", re.I),
+]
+NATIONAL_WORD_FIX = [(re.compile(r"(?<=[a-z])crk\b", re.I), " Creek"),
+                     (re.compile(r"\bRV\b|\bRVR\b", re.I), "River"), (re.compile(r"\bCRK\b|\bCR\b|\bCK\b", re.I), "Creek"),
+                     (re.compile(r"\bBR\b", re.I), "Branch"), (re.compile(r"\bR\b(?=\s*($|,|and\b))", re.I), "River"),
+                     (re.compile(r"\bO\b(?=\s*($|,))", re.I), "Ocean"), (re.compile(r"\bLK\b\.?", re.I), "Lake"),
+                     (re.compile(r"\bWtwy\b", re.I), "Waterway"), (re.compile(r"\bICWW\b", re.I), "Intracoastal Waterway"),
+                     (re.compile(r"\bEst\b", re.I), "Estuary"), (re.compile(r"\bCannal\b", re.I), "Canal")]
+UNNAMED_SEG = re.compile(r"\b(unnamed|un-named|unnam|trib|tributary|tri|unt|ut)\b", re.I)
+
+
+def national_parts(text: str) -> tuple[list[str], str | None]:
+    """(water names, reason): the waters a national row's receiving-water text names. EPA's text for the states not yet
+    built carries path notation ('BOGGY CRK/SPRING CRK/FLINT RIVER', 'GROVE CRK TRIB/S. FORK/BROAD RIVER-SAV RB': the
+    first water receives the discharge, the rest are where it flows; an unnamed tributary's segment hands on to the
+    water it joins), Florida's class and waterbody-id tags, river-basin tails, and counties, roads or land-application
+    systems in place of a water; lists ('X and Y', 'X, Y') name several receiving waters. A name with no kind word
+    ('CHATTAHOOCHEE') is kept when it is a word of five letters or more ('abc', 'temp' are not). reason: why the text
+    names no water (None when it names one)."""
+    t = re.sub(r"\s+", " ", str(text or "")).strip()
+    t = re.sub(r"\[?\(.*?\)\]?", " ", t)
+    t = re.sub(r"\s*\[?\(.*$", "", t).strip()           # a parenthesis EPA's field cut off
+    t = re.sub(r"^.*?\barm\s+of\s+(the\s+)?", "", t, flags=re.I)     # an arm of a lake is the lake
+    reason = None
+    for seg in re.split(r"\s*[/\\]\s*", t):
+        cut = BASIN_TAIL.sub("", seg)
+        if not cut.strip():
+            reason = reason or "a river basin in EPA's receiving-water field, not a water"
+            break
+        why = next((w for rx, w in NATIONAL_NOT_WATER if rx.search(cut)
+                    and not (w.startswith("a road") and has_kind(words(cut)))), None)
+        if why:
+            reason = reason or why
+            break
+        for rx in NATIONAL_TAGS:
+            cut = rx.sub(" , ", cut)        # a tag ends a name ('Black Cr Class III Fresh WBID 2213I St Johns R')
+        for rx, rep in NATIONAL_WORD_FIX:
+            cut = rx.sub(rep, cut)
+        cut = re.sub(r"\s+", " ", cut).strip(" ,.-")
+        parts = []
+        for p in re.split(r"\s*(?:&|;|\+|,|\band\b)\s*", cut, flags=re.I):
+            p = trim_part(p)
+            if not p or not_water(p) or re.fullmatch(r"(n/?a|na|etc)", p, re.I) or UNNAMED_SEG.fullmatch(p.strip()):
+                continue
+            if not has_kind(words(p)) and (len(compact(p)) < 5 or UNNAMED_SEG.search(p)):
+                continue
+            parts.append(p)
+        if parts:
+            return list(dict.fromkeys(parts)), None
+        reason = reason or not_water(cut) or "no water name"
+        if not UNNAMED_SEG.search(seg):
+            break                   # only an unnamed tributary's segment hands on to the next
+    return [], reason or "no water name"
+
+
+def national_rows(states, path=None) -> dict:
+    """{state: the national list's block for it} (data/receiving-waters-national.json)."""
+    d = read_json(path or NATIONAL) or {}
+    return {st: (d.get("states") or {}).get(st) or {"waters": [], "unnamed_outfalls": []} for st in states}
+
+
+def registry_towns(states) -> dict:
+    """{permit: Counter(city)} from the registry rows of these states (outfalls-us, outfalls-plants-us, outfalls-<st>):
+    the national list gives the operators, the rows give their towns (the name pass picks the water nearest them)."""
+    out = defaultdict(Counter)
+    paths = [DATA_DIR / "outfalls-us.json", DATA_DIR / "outfalls-plants-us.json"]
+    paths += [DATA_DIR / f"outfalls-{st.lower()}.json" for st in states]
+    for p in paths:
+        d = read_json(p) or {} if p.exists() else {}
+        for r in (d.get("outfalls") if isinstance(d, dict) else d) or []:
+            if (r.get("state") or "").upper() in states and r.get("npdes_permit") and r.get("city"):
+                out[r["npdes_permit"]][str(r["city"]).title()] += 1
+    return out
+
+
+def collect_state_targets(states, existing: dict, national: dict | None = None, towns_by_permit: dict | None = None):
+    """(targets, skipped_reason, stats) for a state build: every row of the national list for these states without a
+    water record on file (define_by reach | point | name; a 'record' row whose slug no water file on disk holds, an
+    openboatlaunch slug whose extract is not here, is built as its reach or point row would be and says so), and
+    every unnamed outfall, as targets in the order reach, point, name, unnamed (most outfalls first within each).
+    A target is one water name in one state with the national row's reach codes, NHDPlus ids, points, operators and
+    their towns; an unnamed outfall is a target of its own (refs: its permit and outfall)."""
+    national = national_rows(states) if national is None else national
+    towns_by_permit = registry_towns(states) if towns_by_permit is None else towns_by_permit
+    targets, skipped_reason, stats = {}, {}, Counter()
+    for st in states:
+        block = national.get(st) or {}
+        for w in block.get("waters") or []:
+            stats["national rows"] += 1
+            how = w.get("define_by")
+            note = None
+            if how == "record":
+                if w.get("water_slug") in existing:
+                    stats["rows with a record"] += 1
+                    continue
+                how = "reach" if (w.get("reach_ids") or w.get("nhdplus_ids")) else "point" if w.get("points") else "name"
+                note = (f"the registry's slug {w.get('water_slug')} is no water record on file (openboatlaunch's "
+                        f"extract for {st} is not here): defined by {how}")
+            parts, why = national_parts(w.get("name") or "")
+            if not parts:
+                for alt in w.get("names_seen") or []:
+                    parts, _ = national_parts(alt)
+                    if parts:
+                        break
+            if not parts:
+                skipped_reason[(st, w.get("name") or "")] = why
+                stats[f"rows naming no water: {why}"] += 1
+                continue
+            permits = [o.get("permit") for o in w.get("operators") or [] if o.get("permit")]
+            n_out = sum((w.get("outfalls") or {}).values()) or 1
+            for part in parts:
+                ws = words(part)
+                key = (st, compact(ws))
+                t = targets.get(key)
+                if t is None:
+                    t = targets[key] = Target(state=st, key=f"{st}:{key[1]}", names=Counter(), texts=Counter(),
+                                              outfalls=0, events=0, points=Counter(), towns=Counter(), sources=Counter(),
+                                              point_mode=False, refs=[], outfall_points=Counter(), define_by=how,
+                                              reach_ids=[], nhdplus_ids=[], permits=[], national=[], notes=[])
+                elif DEFINE_ORDER.get(how, 9) < DEFINE_ORDER.get(t["define_by"], 9):
+                    t["define_by"] = how
+                t["names"][part] += n_out
+                t["texts"][w.get("name") or part] += n_out
+                t["outfalls"] += n_out
+                for lat, lon in w.get("points") or []:
+                    p = (round(float(lon), 5), round(float(lat), 5))
+                    t["points"][p] += 1
+                    t["outfall_points"][p] += 1
+                for x in w.get("reach_ids") or []:
+                    if x not in t["reach_ids"]:
+                        t["reach_ids"].append(str(x))
+                for x in w.get("nhdplus_ids") or []:
+                    if x not in t["nhdplus_ids"]:
+                        t["nhdplus_ids"].append(str(x))
+                for p in permits:
+                    if p not in t["permits"]:
+                        t["permits"].append(p)
+                    for tw, n in (towns_by_permit.get(p) or {}).items():
+                        t["towns"][tw] += n
+                t["sources"]["national"] += 1
+                t["national"].append(w.get("name"))
+                if note:
+                    t["notes"].append(note)
+                if len(t["refs"]) < 5:
+                    t["refs"].append(f"national:{st}:{w.get('key') or w.get('name')}")
+                stats[f"targets by {how}"] += 1
+        for u in block.get("unnamed_outfalls") or []:
+            stats["unnamed outfalls"] += 1
+            if u.get("water_slug") and u["water_slug"] in existing:
+                continue
+            ids = [str(x) for x in (u.get("nhdplus_id"), ) if x]
+            codes = [str(x) for x in (u.get("reach_id"), ) if x]
+            has_pt = u.get("lat") is not None and u.get("lon") is not None
+            ref = f"{u.get('permit')}:{u.get('outfall')}"
+            if not ids and not codes and not has_pt:
+                skipped_reason[(st, f"unnamed outfall {ref}")] = ("no receiving-water name, no point and no NHD reach in "
+                                                                  "EPA's records for this outfall")
+                stats["unnamed outfalls with no point and no reach"] += 1
+                continue
+            t = Target(state=st, key=f"{st}:outfall:{ref}", names=Counter(), texts=Counter(), outfalls=1, events=0,
+                       points=Counter(), towns=Counter(), sources=Counter(national=1), point_mode=False,
+                       refs=[f"national:{st}:outfall:{ref}"], outfall_points=Counter(), define_by="unnamed",
+                       reach_ids=codes, nhdplus_ids=ids, permits=[u.get("permit")] if u.get("permit") else [],
+                       national=[], notes=[], outfall_ref=[u.get("permit"), u.get("outfall")])
+            if has_pt:
+                p = (round(float(u["lon"]), 5), round(float(u["lat"]), 5))
+                t["points"][p] += 1
+                t["outfall_points"][p] += 1
+            for tw, n in (towns_by_permit.get(u.get("permit")) or {}).items():
+                t["towns"][tw] += n
+            targets[("unnamed", st, ref)] = t
+            stats["targets by unnamed"] += 1
+    out = []
+    for t in targets.values():
+        if t["names"]:
+            t["name"] = t["names"].most_common(1)[0][0]
+            t["words"] = words(t["name"])
+        else:
+            t["name"], t["words"] = None, []
+        out.append(t)
+    out.sort(key=lambda t: (DEFINE_ORDER.get(t["define_by"], 9), -t["outfalls"], t["key"]))
+    return out, skipped_reason, stats
+
+
+def unnamed_name(downstream: str | None) -> str:
+    return f"Unnamed tributary to {downstream}" if downstream else "Unnamed stream"
 
 
 # ---------------------------------------------------------------- resolving a target to an NHD feature
@@ -922,6 +1243,182 @@ def resolve_name_only(nhd: Nhd, t) -> tuple[dict | None, str]:
     return None, f"{len(groups)} NHD waters of that name in {t['state']} and no town to choose one"
 
 
+# ---------------------------------------------------------------- a state build: EPA's reach codes and NHDPlus ids
+
+NLDI_NAV = "https://api.water.usgs.gov/nldi/linked-data/comid/{comid}/navigation/DM/flowlines"
+REACH_FIELDS = "comid,gnis_id,gnis_name,reachcode,fcode,ftype,wbareacomid,wbarea_ftype,streamorder,hydroseq"
+REACH_BATCH = 100
+DOWNSTREAM_KM = 50          # how far down an unnamed flowline the first named water is looked for
+
+
+def reach_index(nhd: "Nhd", codes, comids) -> dict:
+    """{("code", reachcode): [flowline attributes], ("comid", comid): [flowline or waterbody attributes]} for EPA's NHD
+    reach codes and NHDPlus ids (NHDPlus V2.1 network flowlines, layer 2; an id that is no network flowline is asked of
+    the waterbodies, layer 4). Attributes only, in batches of REACH_BATCH (sorted, so a rerun asks the same batches and
+    reads them from the cache)."""
+    out: dict = defaultdict(list)
+    codes = sorted({str(c) for c in codes if c and re.fullmatch(r"\d{14}", str(c))})
+    ids = sorted({int(c) for c in comids if c and str(c).isdigit()})
+    seen = set()
+    for i in range(0, len(codes), REACH_BATCH):
+        part = codes[i:i + REACH_BATCH]
+        for f in arcgis(nhd.http, "reach2", 2, where="reachcode IN (" + ",".join(f"'{c}'" for c in part) + ")",
+                        outFields=REACH_FIELDS, returnGeometry="false"):
+            out[("code", str(f.get("reachcode")))].append(f)
+            if f.get("comid"):
+                out[("comid", int(f["comid"]))].append(f)
+                seen.add(int(f["comid"]))
+    left = [c for c in ids if c not in seen]
+    for i in range(0, len(left), REACH_BATCH):
+        part = left[i:i + REACH_BATCH]
+        for f in arcgis(nhd.http, "reach2", 2, where=f"comid IN ({','.join(str(c) for c in part)})",
+                        outFields=REACH_FIELDS, returnGeometry="false"):
+            out[("comid", int(f["comid"]))].append(f)
+            seen.add(int(f["comid"]))
+    left = [c for c in left if c not in seen]
+    for i in range(0, len(left), REACH_BATCH):
+        part = left[i:i + REACH_BATCH]
+        for f in arcgis(nhd.http, "reach4", 4, where=f"comid IN ({','.join(str(c) for c in part)})",
+                        outFields=WB_FIELDS, returnGeometry="false"):
+            out[("comid", int(f["comid"]))].append({**f, "_wb": True})
+    return dict(out)
+
+
+def target_reach_features(t, index: dict) -> list[dict]:
+    """The flowlines (and waterbodies) of a target's EPA reach codes and NHDPlus ids, once each."""
+    feats, seen = [], set()
+    keys = [("comid", int(c)) for c in t.get("nhdplus_ids") or [] if str(c).isdigit()]
+    keys += [("code", str(c)) for c in t.get("reach_ids") or []]
+    for k in keys:
+        for f in index.get(k) or []:
+            fk = (bool(f.get("_wb")), f.get("comid"))
+            if fk not in seen:
+                seen.add(fk)
+                feats.append(f)
+    return feats
+
+
+def epa_ids_of(f: dict) -> list[str]:
+    return [x for x in (str(f.get("comid") or ""), str(f.get("reachcode") or "")) if x]
+
+
+def resolve_reach(nhd: "Nhd", t, index: dict) -> tuple[list, str | None]:
+    """([(feature key, choice, how, EPA ids)], reason): the NHDPlus features of the GNIS ids on EPA's reach codes and
+    NHDPlus ids for the target that carry its name (no snapping; define_by 'reach'). A lake, pond, reservoir or bay name
+    takes the waterbody the reach's artificial path runs through; a reach of another name (EPA indexes an outfall on a
+    small tributary to it, under the permit's name of the larger water) is left to the point or name pass."""
+    feats = target_reach_features(t, index)
+    if not feats:
+        return [], "EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies"
+    tw = t["words"]
+    area = wants_area(t)
+    lines: dict = defaultdict(lambda: {"f": None, "score": 0.0, "ids": []})
+    wbs: dict = defaultdict(lambda: {"f": None, "score": 0.0, "ids": []})
+    for f in feats:
+        if f.get("_wb"):
+            sc = name_score(tw, f.get("gnis_name"))
+            if sc >= 0.8:
+                g = wbs[f.get("gnis_id") or f"comid{f['comid']}"]
+                g["f"], g["score"] = g["f"] or f, max(g["score"], sc)
+                g["ids"] += epa_ids_of(f)
+            continue
+        if f.get("gnis_id"):
+            sc = name_score(tw, f.get("gnis_name"))
+            if sc >= 0.7:
+                g = lines[f["gnis_id"]]
+                g["f"], g["score"] = g["f"] or f, max(g["score"], sc)
+                g["ids"] += epa_ids_of(f)
+        if area and f.get("wbareacomid") and f.get("wbarea_ftype") in LAKE_FTYPES:
+            for w in nhd.by_comid(4, f["wbareacomid"]):
+                sc = name_score(tw, w.get("gnis_name"))
+                if sc >= 0.8:
+                    g = wbs[w.get("gnis_id") or f"comid{w['comid']}"]
+                    g["f"], g["score"] = g["f"] or w, max(g["score"], sc)
+                    g["ids"] += epa_ids_of(f)
+    out = []
+    if wbs and (area or not lines):
+        for gid, g in wbs.items():
+            f = g["f"]
+            c = {"type": "wb", "comid": f["comid"], "gnis_id": f.get("gnis_id"), "gnis_name": f.get("gnis_name"),
+                 "ftype": f.get("ftype")}
+            out.append((feature_key(t["state"], c), c, f"EPA's NHD reach/NHDPlus id {', '.join(sorted(set(g['ids']))[:4])}: "
+                        f"waterbody '{f.get('gnis_name')}' ({'GNIS ' + str(f['gnis_id']) if f.get('gnis_id') else 'COMID ' + str(f['comid'])}); "
+                        f"no snapping", sorted(set(g["ids"]))))
+        return out, None
+    if lines:
+        best = max(g["score"] for g in lines.values())
+        floor = 0.8 if best >= 0.8 else 0.7          # the qualifier-less name only when nothing better is on the reaches
+        for gid, g in sorted(lines.items()):
+            if g["score"] < floor:
+                continue
+            f = g["f"]
+            c = {"type": "line", "gnis_id": gid, "gnis_name": f["gnis_name"], "comid": f["comid"]}
+            out.append((feature_key(t["state"], c), c, f"EPA's NHD reach/NHDPlus id {', '.join(sorted(set(g['ids']))[:4])}: "
+                        f"GNIS '{f['gnis_name']}' ({gid}); no snapping", sorted(set(g["ids"]))))
+        return out, None
+    names = sorted({f.get("gnis_name") for f in feats if f.get("gnis_name")})
+    return [], ("EPA's reaches for it are " + (f"named {', '.join(names[:5])}, not '{t['name']}'" if names
+                                               else "unnamed in NHDPlus V2.1"))
+
+
+def downstream_name(nhd: "Nhd", comid: int) -> tuple[str | None, str | None]:
+    """(GNIS name, GNIS id) of the first named NHDPlus flowline downstream of a COMID (NLDI downstream-main navigation
+    up to DOWNSTREAM_KM, then the flowlines' names and hydrologic sequence from the MapServer, upstream first)."""
+    d = nhd.http.get("nldi-nav", NLDI_NAV.format(comid=int(comid)), {"distance": str(DOWNSTREAM_KM)}, attempts=3)
+    ids = []
+    for f in (d or {}).get("features") or []:
+        c = (f.get("properties") or {}).get("nhdplus_comid")
+        if c and str(c).isdigit() and int(c) != int(comid):
+            ids.append(int(c))
+    if not ids:
+        return None, None
+    fs = []
+    for i in range(0, len(ids), REACH_BATCH):
+        fs += arcgis(nhd.http, "reach2", 2, where=f"comid IN ({','.join(str(c) for c in ids[i:i + REACH_BATCH])})",
+                     outFields=REACH_FIELDS, returnGeometry="false")
+    fs.sort(key=lambda f: -(f.get("hydroseq") or 0))          # hydroseq falls downstream
+    for f in fs:
+        if f.get("gnis_name"):
+            return f["gnis_name"], f.get("gnis_id")
+    return None, None
+
+
+def resolve_unnamed(nhd: "Nhd", t, index: dict) -> tuple[list, str | None]:
+    """([(feature key, choice, how, EPA ids)], reason) for an outfall whose permit names no water: the NHDPlus flowline
+    of its EPA NHDPlus id or reach code (no snapping), else the flowline NLDI snaps its point to (comid/position); a named
+    flowline gives that water's record, an unnamed one a record of that flowline alone, named for the first named water
+    downstream ('Unnamed tributary to X')."""
+    feats = [f for f in target_reach_features(t, index) if not f.get("_wb")]
+    how = None
+    if feats:
+        f = feats[0]
+        how = f"EPA's NHD reach/NHDPlus id {', '.join(epa_ids_of(f))}"
+    elif t["points"]:
+        lon, lat = next(iter(t["points"]))
+        h = nhd.nldi(lon, lat)
+        if not h:
+            return [], "NLDI snapped the outfall's point to no NHDPlus flowline"
+        if h["snap_m"] > NEAR_M:
+            return [], f"the outfall's point lies {h['snap_m']} m from the NHDPlus flowline of its catchment"
+        got = nhd.by_comid(2, h["comid"])
+        if not got:
+            return [], f"NLDI's COMID {h['comid']} is no NHDPlus V2.1 network flowline"
+        f = got[0]
+        how = f"NLDI {h['via']} COMID {h['comid']} ({h['snap_m']} m)"
+    else:
+        return [], "no receiving-water name, no point and no NHD reach in EPA's records for this outfall"
+    if f.get("gnis_id"):
+        c = {"type": "line", "gnis_id": f["gnis_id"], "gnis_name": f["gnis_name"], "comid": f["comid"]}
+        return [(feature_key(t["state"], c), c, f"{how}: GNIS '{f['gnis_name']}' ({f['gnis_id']})", epa_ids_of(f))], None
+    down, down_id = downstream_name(nhd, int(f["comid"]))
+    c = {"type": "comid-line", "comid": int(f["comid"]), "gnis_id": None, "gnis_name": unnamed_name(down),
+         "downstream": down, "downstream_gnis_id": down_id}
+    return [(("line", t["state"], f"comid{int(f['comid'])}"), c,
+             f"{how}: an unnamed NHDPlus flowline" + (f", tributary to {down} (NLDI downstream)" if down else
+                                                     " with no named water within 50 km downstream"),
+             epa_ids_of(f))], None
+
+
 # ---------------------------------------------------------------- building records
 
 def kind_of(name: str, typ: str, ftype=None, fcodes=(), order=0) -> str:
@@ -971,6 +1468,8 @@ def to_geom_area(features, state, states: States):
 
 
 def feature_key(state, choice) -> tuple:
+    if choice["type"] == "comid-line":
+        return ("line", state, f"comid{int(choice['comid'])}")
     if choice["type"] == "line":
         return ("line", state, choice["gnis_id"])
     return ("wb", state, choice.get("gnis_id") or f"comid{choice['comid']}")
@@ -978,7 +1477,19 @@ def feature_key(state, choice) -> tuple:
 
 def build_feature(nhd: Nhd, state: str, choice: dict) -> dict | None:
     """A record without slug: geometry, name, kind, towns, comids."""
-    if choice["type"] == "line":
+    if choice["type"] == "comid-line":         # an unnamed flowline at an outfall (a state build's unnamed outfalls)
+        fs = nhd.by_comid(2, choice["comid"])
+        geom = to_geom_line(fs, state, nhd.states)
+        if geom is None or geom.is_empty:
+            return None
+        fcodes = sorted({f.get("fcode") for f in fs if f.get("fcode")})
+        kind = "canal" if any(336 <= (c or 0) // 100 <= 336 for c in fcodes) else "stream"
+        size = {"length_km": round(WX.length_km(geom), 2), "area_km2": None}
+        note = (f"NHDPlus V2.1: the unnamed network flowline COMID {choice['comid']}"
+                + (f", upstream of {choice['downstream']} (GNIS {choice.get('downstream_gnis_id')}, the first named water "
+                   f"downstream by NLDI navigation)" if choice.get("downstream") else "")
+                + ", cut to the state and simplified to ~10 m")
+    elif choice["type"] == "line":
         fs = nhd.lines_by_gnis(state, choice["gnis_id"])
         geom = to_geom_line(fs, state, nhd.states)
         if geom is None or geom.is_empty:
@@ -1333,13 +1844,16 @@ def describe_write(info: dict) -> str:
 
 
 def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None, keep=(),
-                 final: bool = False, rebuild: bool = False) -> dict:
+                 final: bool = False, rebuild: bool = False, scope_states=None) -> dict:
     """Write OUT, merged into the file on disk (merge_waters, merge_targets when partial): a checkpoint
     (final=False) or a partial final write (--limit) never drops a record. The final write of a full run
     (final=True) with fewer records than the file holds still merges (nothing is dropped) and notes it in
     stats.write.warning; rebuild replaces the file with this run's records. Returns what was done
     ({"mode": "merge" | "rebuild", existing_records, run_records, replaced, added, kept, dropped, written}).
-    keep: rows already in public form (an --osm-only run keeps the last full run's records)."""
+    keep: rows already in public form (an --osm-only run keeps the last full run's records).
+    scope_states: a state build (--state): the run covers only these states, so the file's target rows, skipped texts and
+    problems of every other state stay (this run's rows over them), the file's partial flag and statistics stay, and
+    stats (when final) is this run's statistics per state, written under stats.state_builds.<ST>."""
     done = [r for r in recs if r.get("slug")]
     run_rows = list(keep) + [public_record(r) for r in done]
     try:
@@ -1354,7 +1868,7 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
     # leaving names for the next run) merges like any other: the file never loses a record. It is noted in
     # the summary (stats.write.warning) rather than refused; only --rebuild drops records, on purpose.
     warning = None
-    if final and not partial and not rebuild and len(run_rows) < len(old_rows):
+    if final and not partial and not rebuild and not scope_states and len(run_rows) < len(old_rows):
         warning = (f"this run resolved {len(run_rows)} records and the file holds {len(old_rows)}; the "
                    f"{len(old_rows) - len(run_rows)} not resolved this run were kept from the file (failed requests, "
                    f"the OSM time budget, or changed targets); --rebuild replaces the file with this run's records")
@@ -1366,7 +1880,18 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
     if warning:
         info["warning"] = warning
         print(f"  note: {warning}", flush=True)
-    if final:
+    targets_rows = merge_targets(prev.get("targets") or [], targets_out) if partial and not replace else targets_out
+    if scope_states:
+        builds = dict((prev.get("stats") or {}).get("state_builds") or {})
+        if final:
+            for st, v in (stats or {}).items():
+                builds[st] = {**v, "write": info}
+        stats = {**(prev.get("stats") or {}), "state_builds": dict(sorted(builds.items()))}
+        partial = bool(prev.get("partial"))
+        targets_rows = merge_targets(prev.get("targets") or [], targets_out)
+        skipped = list({(r.get("state"), r.get("text")): r for r in list(prev.get("skipped") or []) + list(skipped)}.values())
+        problems = list(dict.fromkeys(list(prev.get("problems") or []) + list(problems)))
+    elif final:
         stats = {**(stats or {}), "write": info}
     elif stats is None:
         stats = prev.get("stats") or {}       # a checkpoint keeps the last full run's statistics
@@ -1384,7 +1909,7 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
         "stats": stats or {},
         "problems": list(problems),
         "skipped": skipped,
-        "targets": merge_targets(prev.get("targets") or [], targets_out) if partial and not replace else targets_out,
+        "targets": targets_rows,
         "waters": rows,
     })
     return info
@@ -1890,6 +2415,9 @@ class Run:
         self.osm_remaining = []
         self.osm_states = {}
         self.last_written = 0
+        self.reach_index = {}                   # a state build: EPA's reach codes and NHDPlus ids (reach_index())
+        self.only_states = None                 # a state build: its states (hand records of other states not rebuilt)
+        self.stopped = None                     # why the run stopped early (BudgetExhausted), if it did
 
     def attach(self, rec, row, t, how):
         rec["_targets"].append(row)
@@ -1932,10 +2460,20 @@ class Run:
 
     @staticmethod
     def new_row(t) -> dict:
-        return {"_key": t["key"], "state": t["state"], "name": t["name"],
-                "texts": [x for x, _ in t["texts"].most_common(4)], "outfalls": t["outfalls"], "events": t["events"],
-                "points": len(t["points"]), "towns": [x for x, _ in t["towns"].most_common(4)], "slugs": [],
-                "how": [], "reason": None, "_recs": []}
+        row = {"_key": t["key"], "state": t["state"], "name": t["name"],
+               "texts": [x for x, _ in t["texts"].most_common(4)], "outfalls": t["outfalls"], "events": t["events"],
+               "points": len(t["points"]), "towns": [x for x, _ in t["towns"].most_common(4)], "slugs": [],
+               "how": [], "reason": None, "_recs": []}
+        if t.get("define_by"):                  # a state build's target (the national list)
+            row.update(define_by=t["define_by"], defined_by=None, permits=list(t.get("permits") or [])[:12],
+                       _epa=[])
+            if t.get("notes"):
+                row["notes"] = list(dict.fromkeys(t["notes"]))
+            if t.get("outfall_ref"):
+                row["outfall_ref"] = list(t["outfall_ref"])
+            if not t["name"]:
+                row["texts"] = [f"unnamed outfall {t['outfall_ref'][0]} {t['outfall_ref'][1]}"] if t.get("outfall_ref") else []
+        return row
 
     def hand_pass(self, targets):
         """The HAND records, each attached to the targets that carry its name (or an alias)."""
@@ -1944,6 +2482,8 @@ class Run:
             for n in [t["name"] or ""] + list(t["names"]):
                 by_key[(t["state"], compact(n))].append((t, row))
         for spec in HAND:
+            if getattr(self, "only_states", None) and spec["state"] not in self.only_states:
+                continue                # a state build rebuilds only its own states' hand records
             auto = [(k, r) for k, r in self.feats.items() if not r.get("_existing") and
                     k[0] != "hand" and r["state"] == spec["state"] and S.norm_name(r["name"]) == S.norm_name(spec["name"])]
             same = same_named_existing(self.existing, spec["state"], spec["name"])
@@ -2004,7 +2544,38 @@ class Run:
         row = self.new_row(t)
         self.rows.append(row)
         choices = []
-        if t["points"]:
+        by = t.get("define_by")
+        epa = {}                                # feature key -> EPA ids that named it (a state build's reach_slugs)
+        reach_note = None
+        if by == "unnamed":
+            found, reason = resolve_unnamed(nhd, t, self.reach_index)
+            for k, c, how, ids in found:
+                choices.append((k, c, how))
+                epa[k] = ids
+            row["reason"] = reason
+            if found:
+                row["defined_by"] = "unnamed"
+        elif by == "reach":
+            found, reach_note = resolve_reach(nhd, t, self.reach_index)
+            for k, c, how, ids in found:
+                choices.append((k, c, how))
+                epa[k] = ids
+            if found:
+                row["defined_by"] = "reach"
+        if not choices and by == "reach" and t["name"] and t["points"] and t["towns"]:
+            # a state build: EPA's reaches name another water (a treatment plant indexed by its fence to the small
+            # stream there while the permit names the river it reaches: 171 of North Carolina's 183 reach rows): the
+            # GNIS feature of the name nearest the operators' towns first, which costs no NLDI request; the points
+            # only when that finds none or cannot choose
+            c, how = resolve_name_only(nhd, t)
+            if c is not None:
+                choices.append((feature_key(t["state"], c), c, how))
+                row["defined_by"] = "name"
+            else:
+                reach_note = f"{reach_note}; {how}"
+        if choices or by == "unnamed":
+            pass
+        elif t["points"]:
             seen = set()
             row["_tried"] = cluster_points(t["points"])
             fails = []
@@ -2028,6 +2599,23 @@ class Run:
                 choices.append((feature_key(t["state"], c), c, how))
         else:
             row["reason"] = "a site with no point"
+        if by and by != "unnamed" and not row.get("defined_by") and choices:
+            row["defined_by"] = "point" if t["points"] else "name"
+        if by and by != "unnamed" and not choices and t["name"] and t["points"] and not (by == "reach" and t["towns"]):
+            # a state build: EPA's reaches and the points name another water (a plant indexed to the small stream
+            # by its fence, the permit naming the river it reaches): the GNIS feature of the name nearest the
+            # operators' towns, as for a row with a name only
+            c, how = resolve_name_only(nhd, t)
+            if c is not None:
+                choices.append((feature_key(t["state"], c), c, f"{how} (the points found no water of that name "
+                                                               f"within 2 km: {row['reason']})"))
+                row["defined_by"] = "name"
+            else:
+                row["reason"] = f"{row['reason']}; {how}" if row["reason"] else how
+        if reach_note and not choices:
+            row["reason"] = f"{reach_note}; {row['reason']}" if row["reason"] else reach_note
+        elif reach_note:
+            row.setdefault("notes", []).append(f"{reach_note}: defined by {row['defined_by']}")
         for k, c, how in choices:
             if k not in self.feats:
                 rec = self.new_record(k, c, t, row)
@@ -2038,8 +2626,12 @@ class Run:
             if rec.get("_existing"):
                 row["slugs"].append(rec["_existing"])
                 row["how"].append(f"{how}; the same water as existing record {rec['_existing']}")
+                if k in epa:
+                    row["_epa"].append((epa[k], rec))
                 continue
             self.attach(rec, row, t, how)
+            if k in epa:
+                row["_epa"].append((epa[k], rec))
         a = self.args
         if not row["how"] and t["name"] and t["points"] and not a.no_osm and has_kind(t["words"]):
             if generic_name(t["name"]):
@@ -2048,6 +2640,22 @@ class Run:
                 self.osm_queue.append((t, row))
         if row["how"]:
             row["reason"] = None
+
+    def not_reached(self, t) -> dict:
+        row = self.new_row(t)
+        row["reason"] = f"not reached this run ({self.stopped}); the next run resumes"
+        self.rows.append(row)
+        return row
+
+    def stop(self, t, ex) -> None:
+        """The budget ran out while resolving t: the run stops starting requests; t's row says so."""
+        self.stopped = str(ex)
+        print(f"  stopped: {ex}", flush=True)
+        row = self.rows[-1] if self.rows and self.rows[-1]["_key"] == t["key"] else None
+        if row is None:
+            self.not_reached(t)
+        elif not row["how"]:
+            row["reason"] = f"not reached this run ({self.stopped}); the next run resumes"
 
     def place_geoms(self, row) -> list:
         geoms = [r["_geom"] for r in row["_recs"] if r.get("_geom") is not None]
@@ -2105,6 +2713,8 @@ class Run:
             done += 1
             try:
                 c, how = resolve_point(self.nhd, t, lon, lat)
+            except BudgetExhausted as ex:       # the run's budget: this place and the rest wait for the next run
+                c, how = None, f"not tried this run ({ex})"
             except Exception as ex:             # one bad place must not stop the run
                 c, how = None, f"build error ({type(ex).__name__}: {ex})"
             if c is None:
@@ -2249,7 +2859,8 @@ class Run:
             self.last_written = len(built)
             assign_slugs(built, self.existing, getattr(self, "previous", None), getattr(self, "kept_rows", None))
             try:
-                info = write_output(built, finish_rows(self.rows), skipped_list(self.skipped_reason), [], partial=True)
+                info = write_output(built, finish_rows(self.rows), skipped_list(self.skipped_reason), [], partial=True,
+                                    scope_states=getattr(self, "only_states", None))
             except WriteRefused as ex:      # an unreadable file: not overwritten; the next checkpoint tries again
                 print(f"[{i}/{n}] checkpoint not written: {ex}", flush=True)
                 return
@@ -2281,7 +2892,18 @@ def main(argv=None):
     ap.add_argument("--rebuild", action="store_true",
                     help="let the final write replace data/waters-nhd.json with this run's records even when that "
                          "is fewer than the file holds (default: merged into it, and refused when fewer)")
+    ap.add_argument("--state", action="append", metavar="XX",
+                    help="a state build (repeatable): the targets are the national list's rows for these states "
+                         "(data/receiving-waters-national.json), live or not; see the module docstring")
+    ap.add_argument("--budget-s", type=float, help="stop starting network requests after this many seconds; what is "
+                                                   "built is written and the next run resumes from the cache")
+    ap.add_argument("--max-requests", type=int, help="at most this many network requests in the run (cached answers "
+                                                     "are free); the run then stops cleanly and the next one resumes")
     args = ap.parse_args(argv)
+    if args.state:
+        if args.rebuild or args.osm_only:
+            ap.error("--state merges into data/waters-nhd.json: no --rebuild or --osm-only")
+        return state_main(args)
     if args.rebuild and args.limit:
         ap.error("--rebuild with --limit would replace the file with the records of the first N targets")
     if args.osm_only:
@@ -2298,7 +2920,8 @@ def main(argv=None):
             print(f"skipped {n:6}  {k}")
         return 0
 
-    http = Http(args.refresh, args.offline)
+    http = Http(args.refresh, args.offline, max_requests=args.max_requests,
+                deadline=time.monotonic() + args.budget_s if args.budget_s else None)
     states = States()
     towns = Towns(http)
     nhd = Nhd(http, states, towns)
@@ -2307,8 +2930,13 @@ def main(argv=None):
     run = Run(nhd, states, towns, existing, args, http, skipped_reason)
     todo = targets[:args.limit] if args.limit else targets
     for i, t in enumerate(todo, 1):
+        if run.stopped:
+            run.not_reached(t)
+            continue
         try:
             run.resolve(t)
+        except BudgetExhausted as ex:
+            run.stop(t, ex)
         except Exception as ex:      # one bad feature must not stop the run
             import traceback
             traceback.print_exc()
@@ -2355,9 +2983,11 @@ def main(argv=None):
                  "events_unplaced_with_text_after": ev_eval["after"]["unplaced_with_text"],
                  "other_places": run.place_stats,
                  "requests": dict(http.fetched), "cached": dict(http.cached), "failed": dict(http.failed)}
+    if run.stopped:
+        stats_out["stopped"] = run.stopped
     try:
-        info = write_output(recs, rows, skipped_list(skipped_reason), problems, partial=bool(args.limit),
-                            stats=stats_out, final=True, rebuild=args.rebuild)
+        info = write_output(recs, rows, skipped_list(skipped_reason), problems, partial=bool(args.limit or run.stopped),
+                            stats=stats_out, final=True, rebuild=args.rebuild and not run.stopped)
     except WriteRefused as ex:
         print(f"\nNOT WRITTEN: {ex}")
         for p in problems[:40]:
@@ -2376,6 +3006,120 @@ def main(argv=None):
     for p in problems[:40]:
         print("PROBLEM", p)
     return 0                       # problems are listed above and kept in stats; the file was written
+
+
+def state_stats(states, targets, rows, recs, tstats, http, run) -> dict:
+    """Per state: targets by define_by, records built by how they were defined, targets failed with their reasons."""
+    out = {}
+    for st in states:
+        t_st = [t for t in targets if t["state"] == st]
+        r_st = [r for r in rows if r["state"] == st]
+        built = [r for r in recs if r["state"] == st]
+        by_rec = Counter()
+        for r in built:
+            ways = {row.get("defined_by") for row in r.get("_targets") or [] if row.get("defined_by")}
+            by_rec[sorted(ways, key=lambda w: DEFINE_ORDER.get(w, 9))[0] if ways else ("hand" if r.get("hand") else
+                                                                                          r.get("source") or "other")] += 1
+        failed = [r for r in r_st if not r["slugs"]]
+        out[st] = {"built": now_iso(), "targets": len(t_st),
+                   "targets_by_define_by": dict(Counter(t["define_by"] for t in t_st)),
+                   "targets_mapped": sum(1 for r in r_st if r["slugs"]),
+                   "targets_mapped_by": dict(Counter(r.get("defined_by") or "existing record" for r in r_st if r["slugs"])),
+                   "targets_failed": len(failed),
+                   "failed_reasons": dict(Counter(re.sub(r"\s*\(.*", "", r["reason"] or "no reason")[:120]
+                                                  for r in failed).most_common(15)),
+                   "records": len(built), "records_by_define_by": dict(by_rec),
+                   "records_by_kind": dict(Counter(r["kind"] for r in built)),
+                   "no_water": dict(Counter(why for (s_, _), why in run.skipped_reason.items() if s_ == st))}
+    shared = {"requests": dict(http.fetched), "network_requests": http.requests, "cached": dict(http.cached),
+              "failed": dict(http.failed), "stopped": run.stopped, "other_places": run.place_stats}
+    for v in out.values():
+        v["run"] = shared
+    return out
+
+
+def state_main(args) -> int:
+    """--state XX [--state YY]: a state build from the national target list (module docstring, "A state build")."""
+    states = sorted({s.upper() for s in args.state})
+    bad = [s for s in states if s not in FIPS]
+    if bad:
+        print(f"unknown state code {', '.join(bad)}")
+        return 2
+    existing = existing_waters()
+    S._STATES = S.derive_states(existing, S.load_rules(), live_only=False) | set(states)
+    S._GEOM_CACHE.clear()
+    targets, skipped_reason, tstats = collect_state_targets(states, existing)
+    print(f"state build {', '.join(states)}: {dict(tstats)}")
+    print_targets(targets, None if args.targets_only else 40)
+    if args.targets_only:
+        for (st, text), why in sorted(skipped_reason.items()):
+            print(f"no water {st}  {text[:50]:50}  {why}")
+        return 0
+    http = Http(args.refresh, args.offline, max_requests=args.max_requests,
+                deadline=time.monotonic() + args.budget_s if args.budget_s else None)
+    shapes = States()
+    towns = Towns(http)
+    nhd = Nhd(http, shapes, towns)
+    nhd.use_hydrolocation = args.hydrolocation
+    run = Run(nhd, shapes, towns, existing, args, http, skipped_reason)
+    run.only_states = set(states)
+    try:
+        for st in states:
+            towns.load(st)
+        run.reach_index = reach_index(nhd, [c for t in targets for c in t.get("reach_ids") or []],
+                                      [c for t in targets for c in t.get("nhdplus_ids") or []])
+        print(f"EPA reach index: {len(run.reach_index)} keys", flush=True)
+    except BudgetExhausted as ex:
+        run.stopped = str(ex)
+    todo = targets[:args.limit] if args.limit else targets
+    for i, t in enumerate(todo, 1):
+        if run.stopped:
+            run.not_reached(t)
+            continue
+        try:
+            run.resolve(t)
+        except BudgetExhausted as ex:
+            run.stop(t, ex)
+        except Exception as ex:      # one bad feature must not stop the run
+            import traceback
+            traceback.print_exc()
+            run.problems.append(f"{t['key']}: {type(ex).__name__}: {ex}")
+            row = run.rows[-1] if run.rows and run.rows[-1]["_key"] == t["key"] else None
+            if row is not None and not row["how"]:
+                row["reason"] = row["reason"] or f"build error ({type(ex).__name__}: {ex})"
+        run.checkpoint(i, len(todo))
+    pairs = [(t, r) for t, r in zip(todo, run.rows)]
+    if not run.stopped:
+        run.place_pass([(t, r) for t, r in pairs if t["name"]])
+        if not args.no_osm:
+            run.osm_state_pass()
+        run.hand_pass(pairs)
+    else:
+        for t, row in run.osm_queue:
+            row["reason"] = f"{row['reason']}; OSM fallback not tried ({run.stopped})"
+    recs = [r for r in run.feats.values() if not r.get("_existing")]
+    for r in recs:
+        if not r["towns"]:
+            r["towns"] = sorted(x for x, n in r["_slug_towns"].most_common(3) if n)
+            r["towns_from"] = "the Census places of the outfalls' points"
+    assign_slugs(recs, existing, run.previous, run.kept_rows)
+    problems = run.problems + validate(recs, shapes)
+    problems += [f"slug {r['slug']} collides with an existing record" for r in recs if r["slug"] in existing]
+    rows = finish_rows(run.rows)
+    problems += [f"target {r['state']} {r['name']}: neither mapped nor given a reason" for r in rows
+                 if not r["slugs"] and not r["reason"]]
+    stats_out = state_stats(states, todo, rows, recs, tstats, http, run)
+    try:
+        info = write_output(recs, rows, skipped_list(skipped_reason), problems, partial=True, stats=stats_out,
+                            final=True, scope_states=set(states))
+    except WriteRefused as ex:
+        print(f"\nNOT WRITTEN: {ex}")
+        return 1
+    print(f"\n{len(recs)} records -> {shown(OUT)}: {describe_write(info)}")
+    print(json.dumps(stats_out, indent=1))
+    for p in problems[:40]:
+        print("PROBLEM", p)
+    return 0
 
 
 NHD_FAILED = re.compile(r"no NHD flowline or waterbody of that name|has no GNIS name in NHDPlus")
@@ -2477,11 +3221,22 @@ def town_display(t) -> str:
 
 
 def finish_rows(rows):
+    """Target rows in the file's form. A state build's row also carries reach_slugs: {EPA reach code or NHDPlus id:
+    slug} for the features its reach codes and ids named (ingest.outfall_waters ties an outfall by its own reach)."""
     out = []
     for r in rows:
         recs = r.get("_recs") or []
         slugs = list(dict.fromkeys(r["slugs"] + [x["slug"] for x in recs if x.get("slug")]))
-        out.append({k: v for k, v in {**r, "slugs": slugs}.items() if not k.startswith("_")})
+        row = {k: v for k, v in {**r, "slugs": slugs}.items() if not k.startswith("_")}
+        reach = {}
+        for ids, rec in r.get("_epa") or []:
+            s = rec.get("slug") or rec.get("_existing")
+            if s:
+                for x in ids:
+                    reach.setdefault(x, s)
+        if reach:
+            row["reach_slugs"] = dict(sorted(reach.items()))
+        out.append(row)
     return out
 
 

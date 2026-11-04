@@ -1,7 +1,7 @@
 """Every registered outfall's water record: data/outfalls-ne.json and data/outfalls-mid-atlantic.json (a registry
 helper, not a feed: run by hand after ingest.waters_from_nhd; it writes no events file).
 
-    python -m ingest.outfall_waters [--dry-run] [--offline]
+    python -m ingest.outfall_waters [--dry-run] [--offline] [--plants] [--state XX ...]
 
 Owner, 2026-11-03: every registered outfall must have a water record. scripts/match_outfalls.py gave each outfall
 of EPA's CSO inventory the openboatlaunch water within 400 m of EPA's point, or the only same-named one in the
@@ -55,6 +55,15 @@ record, a name whose record the guard rejected) is written to data/build/outfall
 state (docs/reviews/2026-11-03-outfalls-without-water.md).
 
 The registry files are written only when something changed, atomically, in their own format (indent 1, ASCII).
+
+A state build (`--state XX`, 2026-11-04; after `ingest.waters_from_nhd --state XX`): every row of that state in
+data/outfalls-us.json (CSO rows: the steps above), data/outfalls-plants-us.json (plant rows: the plant steps below) and
+any data/outfalls-<st>.json, live or not, in place. Two steps are added for these rows: "reach", the record the NHD
+builder made from the outfall's own EPA NHDPlus id or reach code (data/waters-nhd.json target rows' reach_slugs; not
+when the text names another water), after the name steps; and, for an outfall whose permit names no water, the
+record the builder made at that outfall (its reach, or its point snapped by NLDI; the target row's outfall_ref).
+match_outfalls' matches are kept only where their slug is an openboatlaunch record. The counts and the rows left
+without a record are written to data/build/outfall-waters-<st>.json.
 
 Plant outfalls (`--plants`, 2026-11-03): the same pass over the live states' rows of data/outfalls-plants-us.json
 (status.states(); scripts/match_outfalls.py --plants has given them its geometry+name match first; see there and
@@ -168,20 +177,30 @@ def why_not_a_name(text: str) -> str | None:
 
 
 class Matcher:
-    def __init__(self, offline: bool = False):
+    def __init__(self, offline: bool = False, states=None):
+        """states: a state build (--state): these states are placed as if live (derive_states(live_only=False))."""
         self.waters = S.load_waters()
         S._STATES = S.derive_states(self.waters, S.load_rules())
+        if states:
+            S._STATES = S.derive_states(self.waters, S.load_rules(), live_only=False) | set(states)
         S._GEOM_CACHE.clear()
         self.resolver = S.make_resolver(self.waters)
         self.dis_waters = S.load_discharger_waters()
         self.dis_towns = S.load_discharger_towns()
         nhd = read_json(DATA_DIR / "waters-nhd.json") or {}
         self.targets = {}
+        self.reach_slugs = {}           # a state build's targets: EPA reach code or NHDPlus id -> the record it named
+        self.outfall_slugs = {}         # a state build's unnamed outfalls: (permit, outfall) -> (slug, how)
         for t in nhd.get("targets") or []:
             if t.get("name"):
                 self.targets[(t["state"], N.compact(t["name"]))] = t
             for x in t.get("texts") or []:
                 self.targets.setdefault((t["state"], N.compact(x)), t)
+            for k, v in (t.get("reach_slugs") or {}).items():
+                self.reach_slugs.setdefault(str(k), v)
+            if t.get("outfall_ref") and t.get("slugs"):
+                ref = (t["outfall_ref"][0], str(t["outfall_ref"][1]))
+                self.outfall_slugs[ref] = (t["slugs"][0], "; ".join(x for x in t.get("how") or [] if x)[:200])
         self.states = N.States()
         self.offline = offline
         self.towns = N.Towns(N.Http(offline=offline))       # Census county subdivisions (cached TIGERweb answers)
@@ -323,6 +342,52 @@ class Matcher:
                 return s, f"the NHD builder's water for '{p}' at these outfalls ({how})"
         return None, None
 
+    def by_reach(self, o: dict, text: str):
+        """A state build's step: the record the NHD builder made from this outfall's own EPA reach (its NHDPlus id or
+        reach code, data/waters-nhd.json targets' reach_slugs), when the receiving-water text does not name another
+        water."""
+        for x in (o.get("nhdplus_id"), o.get("reach_id")):
+            s = self.reach_slugs.get(str(x)) if x else None
+            s = self.canon(s) if s else None
+            if not s or s not in self.waters or self.waters[s].get("state") != o.get("state"):
+                continue
+            if text and not why_not_a_name(text) and S.names_disagree(text, self.waters[s].get("name")):
+                continue
+            return s, f"the NHD builder's record for the outfall's own NHD reach {x} (EPA), no snapping"
+        return None, None
+
+    def by_builder_permit(self, o: dict, text: str):
+        """A state build's step: the record the NHD builder made for this receiving water for this very permit (the
+        target row's permits; its record was chosen by EPA's reach, or by the name nearest the operators' towns, or at
+        their points). EPA's treatment-plant points are often the facility's, kilometres from the water the permit
+        names, so the placement guard's distance check is not applied here; the note gives the distance."""
+        st, permit = o.get("state"), o.get("npdes_permit")
+        keys = [N.compact(text)] + [N.compact(p) for p in N.national_parts(text)[0]]
+        for k in keys:
+            t = self.targets.get((st, k))
+            if not t or not t.get("define_by") or permit not in (t.get("permits") or []) or not t.get("slugs"):
+                continue
+            cands = [self.canon(x) for x in t["slugs"] if self.canon(x) in self.waters]
+            if not cands:
+                continue
+            ds = sorted(((self.dist(x, o.get("lat"), o.get("lon")) or 0), x) for x in cands)
+            d, slug = ds[0]
+            how = "; ".join(x for x in t.get("how") or [] if x)[:200]
+            return slug, (f"its receiving water '{text}': the NHD builder's record for it for this permit ({how})"
+                          + (f"; EPA's point is {m(d) / 1000:.1f} km from it" if o.get("lat") is not None and d > TIGHT_M else ""))
+        return None, None
+
+    def by_outfall_ref(self, o: dict):
+        """A state build's step for an outfall whose permit names no water: the NHD builder's record for this outfall
+        (its reach or its point snapped by NLDI; data/waters-nhd.json targets' outfall_ref)."""
+        hit = self.outfall_slugs.get((o.get("npdes_permit"), str(o.get("outfall"))))
+        if not hit:
+            return None, None
+        s = self.canon(hit[0])
+        if s not in self.waters:
+            return None, None
+        return s, f"no receiving-water name; the NHD builder's water for this outfall ({hit[1]})"
+
     def by_permit_waters(self, o: dict):
         """Step 3: the permit's listed receiving waters (research), the one within TIGHT_M of the point."""
         dw = self.dis_waters.get(o.get("npdes_permit"))
@@ -433,10 +498,16 @@ class Matcher:
         lat, lon = o.get("lat"), o.get("lon")
         not_name = why_not_a_name(text)
         if text and not not_name:
-            for step, fn in (("name", self.by_name), ("NHD builder", self.by_nhd_target)):
+            for step, fn in (("name", self.by_name), ("NHD builder", self.by_nhd_target), ("reach", self.by_reach),
+                             ("NHD builder for the permit", self.by_builder_permit)):
                 s, how = fn(o, text)
                 if s:
                     return {"slug": s, "how": how, "step": step}
+        if not text or not_name:
+            for step, fn in (("reach", lambda x: self.by_reach(x, text)), ("NHD builder", self.by_outfall_ref)):
+                s, how = fn(o)
+                if s:
+                    return {"slug": s, "how": f"{not_name}; {how}" if not_name else how, "step": step}
         s, how = self.by_permit_waters(o) if (not text or not_name) else (None, None)
         if s:
             return {"slug": s, "how": f"{not_name}; {how}" if not_name else how, "step": "permit's receiving water"}
@@ -542,6 +613,16 @@ def match_plant(mt: "Matcher", o: dict, flags: dict | None = None) -> dict:
             s, how = fn(o, text)
             if s:
                 return {"slug": s, "how": how, "step": step}
+    s, how = mt.by_reach(o, text) if hasattr(mt, "by_reach") else (None, None)
+    if s:
+        return {"slug": s, "how": how, "step": "reach"}
+    s, how = mt.by_builder_permit(o, text) if named and hasattr(mt, "by_builder_permit") else (None, None)
+    if s:
+        return {"slug": s, "how": how, "step": "NHD builder for the permit"}
+    if not named and hasattr(mt, "by_outfall_ref"):
+        s, how = mt.by_outfall_ref(o)
+        if s:
+            return {"slug": s, "how": f"{not_name}; {how}" if not_name else how, "step": "NHD builder"}
     if gnis_ok and not (named and S.norm_name(gnis) == S.norm_name(text)):
         reach = o.get("reach_id") or "?"
         for fn in (mt.by_name, mt.by_nhd_target):
@@ -681,6 +762,61 @@ def names_another_water(o: dict, waters: dict) -> bool:
     return not any(f" {n} " in f" {rn} " or f" {rn} " in f" {n} " for n in names if n)
 
 
+def match_cso_row(mt: Matcher, name: str, o: dict, shared: Counter, diag: list, counts) -> None:
+    """One CSO registry row (run(), run_state()): match_outfalls' match kept or re-matched, the result written in place."""
+    st = o.get("state")
+    if is_matchers(o) and mt.canon(o["water_slug"]) in mt.waters:
+        slug0 = mt.canon(o["water_slug"])
+        if names_another_water(o, mt.waters):
+            why = "a name-only match to a water of another name"
+        elif o.get("match") == "name_only" and o.get("lat") is not None and not mt.guard_ok(slug0, o, text_of(o))[0]:
+            why = (f"a name-only match to a same-named water the placement guard rejects at EPA's point "
+                   f"({mt.guard_ok(slug0, o, text_of(o))[1]})")
+        else:
+            why = None
+        if why:
+            o["replaced_match"] = {"water_slug": o["water_slug"], "water_name": o.get("water_name"),
+                                   "match": o.get("match"), "by": BY_MATCHER, "why": why}
+        else:
+            o["water_match"] = note_for_matcher_row(o, mt.waters)
+            o["water_matched_by"] = BY_MATCHER
+            o.pop("no_water_reason", None)
+            counts[st]["matched by match_outfalls.py"] += 1
+            return
+    if st in N.OTHER_BUILDER and o.get("water_slug"):
+        return
+    # a row this pass matched before: start again from ECHO's own values
+    if o.get("coords_problem") and o.get("echo_lat") is not None:
+        o["lat"], o["lon"] = o.pop("echo_lat"), o.pop("echo_lon")
+        o.pop("coords_problem", None)
+    o["water_slug"] = None
+    flags = mt.diagnose(o, shared)
+    res = mt.match(o, flags)
+    apply(o, res, mt)
+    rm = o.get("replaced_match")
+    if rm:
+        o["water_match"] += (f"; replaces scripts/match_outfalls.py's match by name alone to {rm.get('water_name')} "
+                             f"({rm['water_slug']}): {rm['why']}")
+        if not o.get("water_slug"):
+            o["no_water_reason"] = o["water_match"][len("none: "):]
+        flags["wrong_name_match"] = True
+    counts[st]["re-matched (match_outfalls.py's name-only match was another water)" if rm else
+               "without a water from match_outfalls.py"] += 1
+    counts[st]["now with a record" if res.get("slug") else "still without a record"] += 1
+    for k, v in flags.items():
+        if v:
+            counts[st][f"flag: {k}"] += 1
+    step = res.get("step") or "none"
+    counts[st][f"step: {step}"] += 1
+    diag.append({"file": name, "state": st, "permit": o["npdes_permit"], "outfall": o["outfall"],
+                 "permittee": o.get("permittee"), "city": o.get("city"), "receiving_water": text_of(o) or None,
+                 "lat": o.get("lat") if o.get("lat") is not None else o.get("echo_lat"),
+                 "lon": o.get("lon") if o.get("lon") is not None else o.get("echo_lon"),
+                 "flags": [k for k, v in flags.items() if v], "step": step, "water_slug": o["water_slug"],
+                 "source": mt.source_of(o["water_slug"]) if o["water_slug"] else None,
+                 "water_match": o["water_match"], "coords_problem": o.get("coords_problem")})
+
+
 def run(dry_run: bool = False, offline: bool = False) -> dict:
     mt = Matcher(offline=offline)
     docs = {}
@@ -694,57 +830,7 @@ def run(dry_run: bool = False, offline: bool = False) -> dict:
             shared[(o["npdes_permit"], round(o["echo_lat"], 4), round(o["echo_lon"], 4))] += 1
     diag, counts = [], defaultdict(Counter)
     for name, o in rows:
-        st = o.get("state")
-        if is_matchers(o) and mt.canon(o["water_slug"]) in mt.waters:
-            slug0 = mt.canon(o["water_slug"])
-            if names_another_water(o, mt.waters):
-                why = "a name-only match to a water of another name"
-            elif o.get("match") == "name_only" and o.get("lat") is not None and not mt.guard_ok(slug0, o, text_of(o))[0]:
-                why = (f"a name-only match to a same-named water the placement guard rejects at EPA's point "
-                       f"({mt.guard_ok(slug0, o, text_of(o))[1]})")
-            else:
-                why = None
-            if why:
-                o["replaced_match"] = {"water_slug": o["water_slug"], "water_name": o.get("water_name"),
-                                       "match": o.get("match"), "by": BY_MATCHER, "why": why}
-            else:
-                o["water_match"] = note_for_matcher_row(o, mt.waters)
-                o["water_matched_by"] = BY_MATCHER
-                o.pop("no_water_reason", None)
-                counts[st]["matched by match_outfalls.py"] += 1
-                continue
-        if st in N.OTHER_BUILDER and o.get("water_slug"):
-            continue
-        # a row this pass matched before: start again from ECHO's own values
-        if o.get("coords_problem") and o.get("echo_lat") is not None:
-            o["lat"], o["lon"] = o.pop("echo_lat"), o.pop("echo_lon")
-            o.pop("coords_problem", None)
-        o["water_slug"] = None
-        flags = mt.diagnose(o, shared)
-        res = mt.match(o, flags)
-        apply(o, res, mt)
-        rm = o.get("replaced_match")
-        if rm:
-            o["water_match"] += (f"; replaces scripts/match_outfalls.py's match by name alone to {rm.get('water_name')} "
-                                 f"({rm['water_slug']}): {rm['why']}")
-            if not o.get("water_slug"):
-                o["no_water_reason"] = o["water_match"][len("none: "):]
-            flags["wrong_name_match"] = True
-        counts[st]["re-matched (match_outfalls.py's name-only match was another water)" if rm else
-                   "without a water from match_outfalls.py"] += 1
-        counts[st]["now with a record" if res.get("slug") else "still without a record"] += 1
-        for k, v in flags.items():
-            if v:
-                counts[st][f"flag: {k}"] += 1
-        step = res.get("step") or "none"
-        counts[st][f"step: {step}"] += 1
-        diag.append({"file": name, "state": st, "permit": o["npdes_permit"], "outfall": o["outfall"],
-                     "permittee": o.get("permittee"), "city": o.get("city"), "receiving_water": text_of(o) or None,
-                     "lat": o.get("lat") if o.get("lat") is not None else o.get("echo_lat"),
-                     "lon": o.get("lon") if o.get("lon") is not None else o.get("echo_lon"),
-                     "flags": [k for k, v in flags.items() if v], "step": step, "water_slug": o["water_slug"],
-                     "source": mt.source_of(o["water_slug"]) if o["water_slug"] else None,
-                     "water_match": o["water_match"], "coords_problem": o.get("coords_problem")})
+        match_cso_row(mt, name, o, shared, diag, counts)
     changed = []
     if not dry_run:
         for name in FILES:
@@ -763,6 +849,56 @@ def run(dry_run: bool = False, offline: bool = False) -> dict:
     return summary
 
 
+def match_plant_row(mt: Matcher, o: dict, counts, diag: list, state_build: bool = False) -> None:
+    """One plant row (run_plants(), run_state()): the match fields written in place. state_build: as match_cso_row."""
+    st = o.get("state")
+    counts[st]["plant rows"] += 1
+    slug0 = mt.canon(o["water_slug"]) if o.get("water_slug") else None
+    mine = bool(slug0 and slug0 in mt.waters and str(o.get("water_matched_by") or "").startswith("scripts/match_outfalls")
+                and (not state_build or mt.source_of(slug0) == "openboatlaunch"))
+    if mine and o.get("match") in ("geometry+name", "geometry"):
+        counts[st]["kept: match_outfalls.py " + o["match"]] += 1
+        return
+    v = plant_view(o)
+    v["water_slug"] = None
+    res = match_plant(mt, v, mt.diagnose(v, Counter()))
+    if mine:                    # a name-only match from match_outfalls.py: kept only for the water it names
+        if res.get("slug") and mt.canon(res["slug"]) == slug0:
+            counts[st]["kept: match_outfalls.py name_only"] += 1
+            return
+        why = "a record of the receiving water's own name was found by the name steps"
+        if not res.get("slug"):
+            if same_water(o, mt.waters[slug0]):
+                counts[st]["kept: match_outfalls.py name_only"] += 1
+                return
+            d0 = o.get("distance_m")
+            why = (f"{o.get('water_name')} ({o['water_slug']}"
+                   + (f", {d0 / 1000:.1f} km from the point" if d0 is not None else "") + f") is not the water the permit "
+                   f"('{text_of(o) or 'none given'}') and the NHDPlus reach ('{gnis_of(o) or 'none'}') name, and no record of "
+                   f"that water was found")
+            res = {"slug": None, "reason": "; ".join([why, res["reason"]])}
+        o["replaced_match"] = {"water_slug": o["water_slug"], "water_name": o.get("water_name"), "match": o.get("match"),
+                               "by": str(o.get("water_matched_by")), "why": why}
+        counts[st]["name_only match replaced" if res.get("slug") else "name_only match set aside (another water)"] += 1
+    apply(v, res, mt)
+    for f in PLANT_FIELDS:
+        o[f] = v[f]
+    o.pop("no_water_reason", None)
+    if v.get("no_water_reason"):
+        o["no_water_reason"] = v["no_water_reason"]
+    if o.get("replaced_match"):
+        o["water_match"] += (f"; replaces scripts/match_outfalls.py's match by name alone to "
+                             f"{o['replaced_match'].get('water_name')} ({o['replaced_match']['water_slug']})")
+    step = res.get("step") or "none"
+    counts[st]["step: " + step] += 1
+    counts[st]["now with a record" if res.get("slug") else "still without a record"] += 1
+    if not res.get("slug"):
+        diag.append({"state": st, "permit": o["npdes_permit"], "outfall": o.get("outfall"), "permittee": o.get("permittee"),
+                     "receiving_water": text_of(o) or None, "reach_id": o.get("reach_id"),
+                     "reach_gnis_name": o.get("reach_gnis_name"), "coords_from": o.get("coords_from"),
+                     "reason": o["no_water_reason"]})
+
+
 def run_plants(dry_run: bool = False, offline: bool = False) -> dict:
     """The plant rows of the live states (module docstring, "Plant outfalls")."""
     mt = Matcher(offline=offline)
@@ -774,50 +910,7 @@ def run_plants(dry_run: bool = False, offline: bool = False) -> dict:
         st = o.get("state")
         if st not in live or o.get("outfall_kind", "plant") != "plant":
             continue
-        counts[st]["plant rows"] += 1
-        slug0 = mt.canon(o["water_slug"]) if o.get("water_slug") else None
-        mine = bool(slug0 and slug0 in mt.waters and str(o.get("water_matched_by") or "").startswith("scripts/match_outfalls"))
-        if mine and o.get("match") in ("geometry+name", "geometry"):
-            counts[st]["kept: match_outfalls.py " + o["match"]] += 1
-            continue
-        v = plant_view(o)
-        v["water_slug"] = None
-        res = match_plant(mt, v, mt.diagnose(v, Counter()))
-        if mine:                    # a name-only match from match_outfalls.py: kept only for the water it names
-            if res.get("slug") and mt.canon(res["slug"]) == slug0:
-                counts[st]["kept: match_outfalls.py name_only"] += 1
-                continue
-            why = "a record of the receiving water's own name was found by the name steps"
-            if not res.get("slug"):
-                if same_water(o, mt.waters[slug0]):
-                    counts[st]["kept: match_outfalls.py name_only"] += 1
-                    continue
-                d0 = o.get("distance_m")
-                why = (f"{o.get('water_name')} ({o['water_slug']}"
-                       + (f", {d0 / 1000:.1f} km from the point" if d0 is not None else "") + f") is not the water the permit "
-                       f"('{text_of(o) or 'none given'}') and the NHDPlus reach ('{gnis_of(o) or 'none'}') name, and no record of "
-                       f"that water was found")
-                res = {"slug": None, "reason": "; ".join([why, res["reason"]])}
-            o["replaced_match"] = {"water_slug": o["water_slug"], "water_name": o.get("water_name"), "match": o.get("match"),
-                                   "by": str(o.get("water_matched_by")), "why": why}
-            counts[st]["name_only match replaced" if res.get("slug") else "name_only match set aside (another water)"] += 1
-        apply(v, res, mt)
-        for f in PLANT_FIELDS:
-            o[f] = v[f]
-        o.pop("no_water_reason", None)
-        if v.get("no_water_reason"):
-            o["no_water_reason"] = v["no_water_reason"]
-        if o.get("replaced_match"):
-            o["water_match"] += (f"; replaces scripts/match_outfalls.py's match by name alone to "
-                                 f"{o['replaced_match'].get('water_name')} ({o['replaced_match']['water_slug']})")
-        step = res.get("step") or "none"
-        counts[st]["step: " + step] += 1
-        counts[st]["now with a record" if res.get("slug") else "still without a record"] += 1
-        if not res.get("slug"):
-            diag.append({"state": st, "permit": o["npdes_permit"], "outfall": o.get("outfall"), "permittee": o.get("permittee"),
-                         "receiving_water": text_of(o) or None, "reach_id": o.get("reach_id"),
-                         "reach_gnis_name": o.get("reach_gnis_name"), "coords_from": o.get("coords_from"),
-                         "reason": o["no_water_reason"]})
+        match_plant_row(mt, o, counts, diag)
     unrec = defaultdict(lambda: {"outfalls": 0, "permits": set(), "reach_ids": Counter(), "receiving_waters": Counter()})
     for d in diag:                  # the waters that have no record, for the NHD water-record builder
         text, gnis = d["receiving_water"], d["reach_gnis_name"]
@@ -852,21 +945,84 @@ def run_plants(dry_run: bool = False, offline: bool = False) -> dict:
     return summary
 
 
+STATE_FILES = ("outfalls-us.json", PLANTS_FILE)      # the national rows a state build ties, with any outfalls-<st>.json
+
+
+def state_summary_path(states) -> "Path":
+    return BUILD_DIR / f"outfall-waters-{'-'.join(s.lower() for s in sorted(states))}.json"
+
+
+def run_state(states, dry_run: bool = False, offline: bool = False) -> dict:
+    """--state XX: every outfall row of these states (data/outfalls-us.json, data/outfalls-plants-us.json and any
+    data/outfalls-<st>.json) tied to its water record or given a stated reason, in place, with the same steps as the CSO
+    and plant passes (the CSO rows by Matcher.match, the plant rows by match_plant), plus the state build's own: the
+    NHD builder's record for the outfall's own EPA reach (Matcher.by_reach) and, for an outfall whose permit names no
+    water, the record the builder made at it (Matcher.by_outfall_ref). match_outfalls' matches are kept only where
+    their slug is an openboatlaunch record. Rows of other states are not touched."""
+    states = sorted({x.upper() for x in states})
+    mt = Matcher(offline=offline, states=states)
+    names = list(STATE_FILES) + [f"outfalls-{st.lower()}.json" for st in states
+                                 if (DATA_DIR / f"outfalls-{st.lower()}.json").exists()]
+    docs = {n: json.loads((DATA_DIR / n).read_text()) for n in names}
+    counts, diag = defaultdict(Counter), []
+    cso = [(n, o) for n in names if n != PLANTS_FILE for o in docs[n]["outfalls"] if (o.get("state") or "").upper() in states]
+    shared = Counter((o["npdes_permit"], round(o["lat"], 4), round(o["lon"], 4)) for _, o in cso
+                     if o.get("lat") is not None and o.get("lon") is not None)
+    for n, o in cso:
+        counts[o["state"]][f"rows in {n}"] += 1
+        match_cso_row(mt, n, o, shared, diag, counts, state_build=True)
+    for o in docs[PLANTS_FILE]["outfalls"]:
+        if (o.get("state") or "").upper() in states:
+            counts[o["state"]][f"rows in {PLANTS_FILE}"] += 1
+            match_plant_row(mt, o, counts, diag, state_build=True)
+    for n, o in cso + [(PLANTS_FILE, o) for o in docs[PLANTS_FILE]["outfalls"] if (o.get("state") or "").upper() in states]:
+        counts[o["state"]]["tied to a record" if o.get("water_slug") else "with a stated reason"] += 1
+    changed = []
+    if not dry_run:
+        for n in names:
+            path = DATA_DIR / n
+            old = path.read_text()
+            if n == PLANTS_FILE:
+                write_plants(path, docs[n])
+            else:
+                new = json.dumps(docs[n], indent=1)
+                if new != old:
+                    tmp = path.with_suffix(path.suffix + ".tmp")
+                    tmp.write_text(new)
+                    tmp.replace(path)
+            if path.read_text() != old:
+                changed.append(n)
+    summary = {"built": now_iso(), "states": states, "files_written": changed, "dry_run": dry_run,
+               "counts": {st: dict(sorted(c.items())) for st, c in sorted(counts.items())}, "outfalls": diag}
+    if not dry_run:
+        out = state_summary_path(states)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(summary, indent=1))
+    return summary
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--dry-run", action="store_true", help="print the counts, write nothing")
     ap.add_argument("--offline", action="store_true", help="use only cached responses")
     ap.add_argument("--plants", action="store_true",
                     help="the live states' rows of data/outfalls-plants-us.json instead of the two CSO files")
+    ap.add_argument("--state", action="append", metavar="XX",
+                    help="a state build (repeatable): every outfall row of the state in data/outfalls-us.json, "
+                         "data/outfalls-plants-us.json and data/outfalls-<st>.json, after ingest.waters_from_nhd --state")
     args = ap.parse_args(argv)
-    summary = (run_plants if args.plants else run)(args.dry_run, args.offline)
+    if args.state:
+        summary = run_state(args.state, args.dry_run, args.offline)
+    else:
+        summary = (run_plants if args.plants else run)(args.dry_run, args.offline)
     tot = Counter()
     for st, c in summary["counts"].items():
         tot.update(c)
         print(f"{st}: " + ", ".join(f"{k} {v}" for k, v in c.items()))
     print("ALL: " + ", ".join(f"{k} {v}" for k, v in sorted(tot.items())))
     print(f"written: {', '.join(summary['files_written']) or 'nothing'}"
-          + (f"; diagnosis in {N.shown(PLANTS_SUMMARY if args.plants else SUMMARY)}" if not args.dry_run else " (dry run)"))
+          + (f"; diagnosis in {N.shown(state_summary_path(args.state) if args.state else PLANTS_SUMMARY if args.plants else SUMMARY)}"
+             if not args.dry_run else " (dry run)"))
     return 0
 
 

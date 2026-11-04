@@ -140,9 +140,17 @@ def test_a_name_and_town_match_far_from_a_differently_named_record_is_refused():
 
 # ---------------------------------------------------------------- the file
 
+def built_states() -> set[str]:
+    """States a state build has tied (ingest.outfall_waters --state; data/waters-nhd.json stats.state_builds): their
+    rows carry the match fields before the state goes live (every public output still keeps to live_states)."""
+    d = json.loads((PLANTS.parent / "waters-nhd.json").read_text())
+    return set(((d.get("stats") or {}).get("state_builds") or {}))
+
+
 def test_every_live_state_plant_row_has_its_match_fields_and_the_others_have_none(plants):
+    built = built_states()
     for r in plants["outfalls"]:
-        if r["state"] in LIVE:
+        if r["state"] in LIVE or r["state"] in built:
             assert MATCH_FIELDS <= set(r), (r["npdes_permit"], r.get("outfall"))
             assert bool(r["water_slug"]) == (r["match"] != "none") == ("no_water_reason" not in r)
             assert r["water_matched_by"].startswith(("scripts/match_outfalls.py", "ingest.outfall_waters"))
