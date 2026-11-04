@@ -165,6 +165,15 @@ def test_a_name_nhdplus_does_not_carry_says_so():
     assert choices == [] and reason == "no NHD flowline or waterbody of that name in NC"
 
 
+def test_a_name_away_from_the_reports_places_goes_to_the_high_resolution_flowlines():
+    t = name_target("Mill Creek", points=[(-76.0, 34.5)])
+    _, reason, _ = N.report_name_choices(fake_nhd(None), t)
+    assert "none within reach" in reason and N.wants_hr(reason)
+    assert N.wants_hr("no NHD flowline or waterbody of that name in NC")
+    assert not N.wants_hr("3 NHD waters of that name in NC and the reports give no place to choose one")
+    assert not N.wants_hr(None)
+
+
 def test_names_are_asked_thirty_spellings_to_a_query(monkeypatch):
     calls = []
 
