@@ -9,7 +9,7 @@ Neither renames anything: the mapping is a proposal (docs/legal-forms.md) applie
 open state branches have merged. The check (check_legal_forms) returns warnings:
   - a value neither on the list nor mapped (unmapped);
   - a private form on a row whose name reads as a public body, or a public form on a row whose name reads as a company
-    or association (the North Carolina review's P2-1: a public district filed as a privately owned facility).
+    or association (a public district once filed as a privately owned facility).
 A row with no legal_form is not warned about (most rows have none yet). `--strict` exits 1 when a value is unmapped;
 without it the exit is 0 whatever the warnings.
 """

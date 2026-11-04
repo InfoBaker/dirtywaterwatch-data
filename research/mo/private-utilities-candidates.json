@@ -6,7 +6,7 @@
    "source": "fed-echo-npdes-discharge-points",
    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
    "file_date": "2026-11-01",
-   "fetched_at": "2026-11-04T05:35:00Z"
+   "fetched_at": "2026-11-04T05:35:49Z"
   },
   {
    "source": "fed-echo-npdes-discharge-points",
@@ -16,28 +16,28 @@
   }
  ],
  "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
- "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
  "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
  "counts": {
-  "candidates": 282,
+  "candidates": 279,
   "already_in_registry": 0,
   "in_research": 0,
   "in_plant_outfall_registry": 21,
   "single_residence": 1,
   "industrial_with_sewage_code": 2,
-  "permittee_name_removed": 64,
+  "permittee_name_removed": 67,
   "by_legal_form_proposed": {
    "business or industrial": 78,
    "campground or resort": 8,
    "facility (permittee not named)": 1,
    "homeowners' association": 35,
-   "institution": 10,
+   "institution": 7,
    "investor-owned utility": 75,
    "mobile-home park": 28,
    "not stated by the names": 46,
    "private club": 1
   },
-  "public_by_name": 28
+  "public_by_name": 31
  },
  "candidates": [
   {
@@ -59,7 +59,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -103,7 +103,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -146,7 +146,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -193,7 +193,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -236,7 +236,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -278,7 +278,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -320,7 +320,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -361,7 +361,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -402,7 +402,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -444,7 +444,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -486,7 +486,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -529,7 +529,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -572,7 +572,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -619,7 +619,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -660,7 +660,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -686,7 +686,7 @@
    "npdes_permit": "MO0045578",
    "state": "MO",
    "facility": "MOBILE VILLAGE MHP",
-   "permittee_as_recorded": "Burnam Family Company, L.P.",
+   "permittee_as_recorded": "[name removed]",
    "county": "BOONE",
    "city": "COLUMBIA",
    "system_kind": null,
@@ -701,7 +701,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -743,7 +743,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -788,7 +788,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -829,7 +829,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -871,7 +871,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -912,7 +912,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -953,7 +953,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -994,7 +994,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -1035,7 +1035,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1076,7 +1076,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -1117,7 +1117,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1159,7 +1159,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1200,7 +1200,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1241,7 +1241,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -1282,7 +1282,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -1324,7 +1324,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -1365,7 +1365,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1406,7 +1406,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -1448,7 +1448,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1489,7 +1489,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -1530,7 +1530,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1572,7 +1572,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1613,7 +1613,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -1654,7 +1654,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1695,7 +1695,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -1736,7 +1736,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1778,7 +1778,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -1819,7 +1819,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1861,7 +1861,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -1906,7 +1906,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -1947,7 +1947,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -1988,7 +1988,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -2029,7 +2029,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2071,7 +2071,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2112,7 +2112,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2153,7 +2153,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -2195,7 +2195,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -2237,7 +2237,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -2280,7 +2280,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2321,7 +2321,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -2348,48 +2348,6 @@
    "echo_url": "https://echo.epa.gov/effluent-charts#MO0098132"
   },
   {
-   "npdes_permit": "MO0098621",
-   "state": "MO",
-   "facility": "OREARVILLE R-IV SCHOOL WWTF",
-   "permittee_as_recorded": "Orearville R-IV School",
-   "county": "SALINE",
-   "city": "SLATER",
-   "system_kind": null,
-   "sewage_basis": [
-    "SIC 4952 (sewerage systems)"
-   ],
-   "legal_form_proposed": "institution",
-   "ownership": {
-    "basis": "EPA facility type Privately Owned Facility",
-    "facility_type": "Privately Owned Facility",
-    "facility_type_code": "POF",
-    "source": "fed-echo-npdes-discharge-points",
-    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
-    "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
-   },
-   "permit_type": "NPD",
-   "permit_status": "ADC",
-   "permit_components": [],
-   "sic_codes": [
-    "4952",
-    "8211"
-   ],
-   "naics_codes": [],
-   "design_flow_mgd": null,
-   "major_minor": "Minor",
-   "permit_effective": "2022-03-01",
-   "permit_expiration": "2026-09-30",
-   "receiving_waters_echo": [
-    "TRIBUTARY TO ROCK CREEK"
-   ],
-   "external_outfalls": 1,
-   "in_plant_registry": false,
-   "registry_row": null,
-   "research_row": null,
-   "echo_url": "https://echo.epa.gov/effluent-charts#MO0098621"
-  },
-  {
    "npdes_permit": "MO0098680",
    "state": "MO",
    "facility": "SK AND M WATER AND SEWER COMPANY WWTP",
@@ -2408,7 +2366,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -2451,7 +2409,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2492,7 +2450,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -2533,7 +2491,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2574,7 +2532,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -2616,7 +2574,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -2658,7 +2616,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2701,7 +2659,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2727,8 +2685,8 @@
   {
    "npdes_permit": "MO0101311",
    "state": "MO",
-   "facility": "RILEY SPENCE PROPERTIES NO. 3 WWTF",
-   "permittee_as_recorded": "Riley Spence Properties No. 3 LLC",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
    "county": "CRAWFORD",
    "city": "CUBA",
    "system_kind": null,
@@ -2743,7 +2701,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2785,7 +2743,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -2826,7 +2784,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -2868,7 +2826,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2910,7 +2868,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -2951,7 +2909,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -2992,7 +2950,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -3034,7 +2992,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3077,7 +3035,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -3123,7 +3081,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3164,7 +3122,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3207,7 +3165,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -3251,7 +3209,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3292,7 +3250,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3333,7 +3291,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3374,7 +3332,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3416,7 +3374,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3460,7 +3418,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3502,7 +3460,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -3545,7 +3503,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -3568,47 +3526,6 @@
    "echo_url": "https://echo.epa.gov/effluent-charts#MO0109142"
   },
   {
-   "npdes_permit": "MO0109576",
-   "state": "MO",
-   "facility": "BRADLEYVILLE R-1 SCHOOL WWTP",
-   "permittee_as_recorded": "Bradleyville R-1 School",
-   "county": "TANEY",
-   "city": "BRADLEYVILLE",
-   "system_kind": null,
-   "sewage_basis": [
-    "SIC 4952 (sewerage systems)"
-   ],
-   "legal_form_proposed": "institution",
-   "ownership": {
-    "basis": "EPA facility type Privately Owned Facility",
-    "facility_type": "Privately Owned Facility",
-    "facility_type_code": "POF",
-    "source": "fed-echo-npdes-discharge-points",
-    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
-    "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
-   },
-   "permit_type": "NPD",
-   "permit_status": "EFF",
-   "permit_components": [],
-   "sic_codes": [
-    "4952"
-   ],
-   "naics_codes": [],
-   "design_flow_mgd": null,
-   "major_minor": "Minor",
-   "permit_effective": "2025-08-01",
-   "permit_expiration": "2030-07-31",
-   "receiving_waters_echo": [
-    "TRIBUTARY TO L. BEAVER CR."
-   ],
-   "external_outfalls": 1,
-   "in_plant_registry": false,
-   "registry_row": null,
-   "research_row": null,
-   "echo_url": "https://echo.epa.gov/effluent-charts#MO0109576"
-  },
-  {
    "npdes_permit": "MO0109827",
    "state": "MO",
    "facility": "EMERY TRUCK PLAZA",
@@ -3627,7 +3544,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3672,7 +3589,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -3714,7 +3631,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3756,7 +3673,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3797,7 +3714,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3838,7 +3755,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -3879,7 +3796,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -3921,7 +3838,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -3963,7 +3880,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4005,7 +3922,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4046,7 +3963,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4088,7 +4005,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -4133,7 +4050,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4174,7 +4091,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4215,7 +4132,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4256,7 +4173,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4297,7 +4214,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -4338,7 +4255,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -4380,7 +4297,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4422,7 +4339,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -4463,7 +4380,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -4504,7 +4421,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -4553,7 +4470,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4594,7 +4511,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4635,7 +4552,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -4676,7 +4593,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -4720,7 +4637,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4761,7 +4678,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4807,7 +4724,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4848,7 +4765,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -4889,7 +4806,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -4941,7 +4858,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -4991,7 +4908,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5032,7 +4949,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -5087,7 +5004,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -5136,7 +5053,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5177,7 +5094,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5218,7 +5135,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -5259,7 +5176,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -5300,7 +5217,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5341,7 +5258,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -5382,7 +5299,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -5426,7 +5343,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5467,7 +5384,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5508,7 +5425,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5549,7 +5466,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -5591,7 +5508,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -5632,7 +5549,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -5673,7 +5590,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5715,7 +5632,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5759,7 +5676,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5800,7 +5717,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5842,7 +5759,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -5885,7 +5802,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -5926,7 +5843,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -5967,7 +5884,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6009,7 +5926,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6054,7 +5971,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6095,7 +6012,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -6136,7 +6053,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -6183,7 +6100,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6224,7 +6141,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6269,7 +6186,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6312,7 +6229,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6353,7 +6270,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6394,7 +6311,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -6438,7 +6355,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6480,7 +6397,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -6522,7 +6439,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6565,7 +6482,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6607,7 +6524,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6649,7 +6566,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -6676,8 +6593,8 @@
   {
    "npdes_permit": "MO0124362",
    "state": "MO",
-   "facility": "H CRANE, LLC",
-   "permittee_as_recorded": "H Crane, LLC",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
    "county": "MARION",
    "city": "HANNIBAL",
    "system_kind": null,
@@ -6692,7 +6609,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6733,7 +6650,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6774,7 +6691,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -6817,7 +6734,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6858,7 +6775,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6900,7 +6817,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -6942,7 +6859,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -6983,7 +6900,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -7024,7 +6941,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -7051,8 +6968,8 @@
    "state": "MO",
    "facility": "[name removed]",
    "permittee_as_recorded": "[name removed]",
-   "county": "WRIGHT COUNTY",
-   "city": "MANSFIELD",
+   "county": null,
+   "city": null,
    "system_kind": "single residence",
    "sewage_basis": [
     "SIC 4952 (sewerage systems)"
@@ -7065,7 +6982,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -7079,9 +6996,7 @@
    "major_minor": "Minor",
    "permit_effective": "2023-07-01",
    "permit_expiration": "2025-03-31",
-   "receiving_waters_echo": [
-    "TRIBUTARY TO WOLF CREEK"
-   ],
+   "receiving_waters_echo": [],
    "external_outfalls": 1,
    "in_plant_registry": false,
    "registry_row": null,
@@ -7107,7 +7022,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7130,48 +7045,6 @@
    "echo_url": "https://echo.epa.gov/effluent-charts#MO0126063"
   },
   {
-   "npdes_permit": "MO0126667",
-   "state": "MO",
-   "facility": "CLIMAX SPRINGS R-4 SCHOOL",
-   "permittee_as_recorded": "Climax Springs R-4 School",
-   "county": "CAMDEN",
-   "city": "CLIMAX SPRINGS",
-   "system_kind": null,
-   "sewage_basis": [
-    "SIC 4952 (sewerage systems)"
-   ],
-   "legal_form_proposed": "institution",
-   "ownership": {
-    "basis": "EPA facility type Privately Owned Facility",
-    "facility_type": "Privately Owned Facility",
-    "facility_type_code": "POF",
-    "source": "fed-echo-npdes-discharge-points",
-    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
-    "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
-   },
-   "permit_type": "NPD",
-   "permit_status": "EFF",
-   "permit_components": [],
-   "sic_codes": [
-    "4952",
-    "8211"
-   ],
-   "naics_codes": [],
-   "design_flow_mgd": null,
-   "major_minor": "Minor",
-   "permit_effective": "2022-04-01",
-   "permit_expiration": "2027-03-31",
-   "receiving_waters_echo": [
-    "TRIBUTARY TO RAINY CREEK"
-   ],
-   "external_outfalls": 2,
-   "in_plant_registry": false,
-   "registry_row": null,
-   "research_row": null,
-   "echo_url": "https://echo.epa.gov/effluent-charts#MO0126667"
-  },
-  {
    "npdes_permit": "MO0126870",
    "state": "MO",
    "facility": "BRANDY STATION SUBDIVISION",
@@ -7190,7 +7063,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7231,7 +7104,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7272,7 +7145,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7313,7 +7186,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7354,7 +7227,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7395,7 +7268,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -7436,7 +7309,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7477,7 +7350,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7518,7 +7391,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7559,7 +7432,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7600,7 +7473,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7641,7 +7514,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -7682,7 +7555,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7723,7 +7596,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7764,7 +7637,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7806,7 +7679,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7849,7 +7722,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7891,7 +7764,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -7932,7 +7805,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -7974,7 +7847,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8020,7 +7893,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8064,7 +7937,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8106,7 +7979,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8149,7 +8022,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8190,7 +8063,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -8232,7 +8105,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8274,7 +8147,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8317,7 +8190,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8359,7 +8232,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8400,7 +8273,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8442,7 +8315,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8483,7 +8356,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -8526,7 +8399,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -8567,7 +8440,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8609,7 +8482,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8650,7 +8523,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8692,7 +8565,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8733,7 +8606,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -8774,7 +8647,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8815,7 +8688,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8857,7 +8730,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8899,7 +8772,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -8940,7 +8813,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -8981,7 +8854,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -9023,7 +8896,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9064,7 +8937,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -9105,7 +8978,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9146,7 +9019,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -9188,7 +9061,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9229,7 +9102,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -9271,7 +9144,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9315,7 +9188,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9356,7 +9229,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9398,7 +9271,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9439,7 +9312,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9480,7 +9353,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -9521,7 +9394,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9562,7 +9435,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9603,7 +9476,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9644,7 +9517,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9686,7 +9559,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9730,7 +9603,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -9756,7 +9629,7 @@
   {
    "npdes_permit": "MO0135551",
    "state": "MO",
-   "facility": "RENAE ALDEIN WWTP",
+   "facility": "[name removed]",
    "permittee_as_recorded": "Shade Tree Property LLC",
    "county": "LINCOLN",
    "city": "TROY",
@@ -9772,7 +9645,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9813,7 +9686,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9855,7 +9728,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9902,7 +9775,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -9946,7 +9819,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -9987,7 +9860,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10030,7 +9903,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10073,7 +9946,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -10115,7 +9988,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10157,7 +10030,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10198,7 +10071,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10240,7 +10113,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -10282,7 +10155,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -10326,7 +10199,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -10368,7 +10241,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -10409,7 +10282,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -10450,7 +10323,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10491,7 +10364,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10532,7 +10405,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10573,7 +10446,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -10614,7 +10487,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10655,7 +10528,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10696,7 +10569,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -10742,7 +10615,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -10784,7 +10657,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10825,7 +10698,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10866,7 +10739,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -10907,7 +10780,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -10948,7 +10821,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -10989,7 +10862,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11030,7 +10903,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -11071,7 +10944,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11112,7 +10985,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -11153,7 +11026,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11194,7 +11067,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11235,7 +11108,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11276,7 +11149,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11317,7 +11190,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11358,7 +11231,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11399,7 +11272,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11440,7 +11313,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11481,7 +11354,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11522,7 +11395,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11563,7 +11436,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11605,7 +11478,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11648,7 +11521,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11689,7 +11562,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11730,7 +11603,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11771,7 +11644,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11812,7 +11685,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11853,7 +11726,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11896,7 +11769,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -11938,7 +11811,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -11979,7 +11852,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12020,7 +11893,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12064,7 +11937,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -12107,7 +11980,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -12149,7 +12022,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12190,7 +12063,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12231,7 +12104,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -12254,6 +12127,89 @@
    "echo_url": "https://echo.epa.gov/effluent-charts#MO0098019"
   },
   {
+   "npdes_permit": "MO0098621",
+   "state": "MO",
+   "facility": "OREARVILLE R-IV SCHOOL WWTF",
+   "permittee_as_recorded": "Orearville R-IV School",
+   "county": "SALINE",
+   "city": "SLATER",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-03-01",
+   "permit_expiration": "2026-09-30",
+   "receiving_waters_echo": [
+    "TRIBUTARY TO ROCK CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#MO0098621"
+  },
+  {
+   "npdes_permit": "MO0109576",
+   "state": "MO",
+   "facility": "BRADLEYVILLE R-1 SCHOOL WWTP",
+   "permittee_as_recorded": "Bradleyville R-1 School",
+   "county": "TANEY",
+   "city": "BRADLEYVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2025-08-01",
+   "permit_expiration": "2030-07-31",
+   "receiving_waters_echo": [
+    "TRIBUTARY TO L. BEAVER CR."
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#MO0109576"
+  },
+  {
    "npdes_permit": "MO0113450",
    "state": "MO",
    "facility": "OLSON ACRES, NORTH CASS SEWER DISTRICT",
@@ -12272,7 +12228,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EXP",
@@ -12314,7 +12270,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12359,7 +12315,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12389,7 +12345,7 @@
    "npdes_permit": "MO0116611",
    "state": "MO",
    "facility": "BLOOMSDALE ELEMENTARY SCHOOL WWTF",
-   "permittee_as_recorded": "[name removed]",
+   "permittee_as_recorded": "Ste. Genevieve School District R-II",
    "county": "SAINTE GENEVIEVE",
    "city": "BLOOMSDALE",
    "system_kind": null,
@@ -12404,7 +12360,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12446,7 +12402,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12488,7 +12444,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -12529,7 +12485,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12570,7 +12526,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12614,7 +12570,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12657,7 +12613,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12699,7 +12655,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12743,7 +12699,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -12766,6 +12722,48 @@
    "echo_url": "https://echo.epa.gov/effluent-charts#MO0126535"
   },
   {
+   "npdes_permit": "MO0126667",
+   "state": "MO",
+   "facility": "CLIMAX SPRINGS R-4 SCHOOL",
+   "permittee_as_recorded": "Climax Springs R-4 School",
+   "county": "CAMDEN",
+   "city": "CLIMAX SPRINGS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "8211"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-04-01",
+   "permit_expiration": "2027-03-31",
+   "receiving_waters_echo": [
+    "TRIBUTARY TO RAINY CREEK"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#MO0126667"
+  },
+  {
    "npdes_permit": "MO0126799",
    "state": "MO",
    "facility": "[name removed]",
@@ -12784,7 +12782,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -12827,7 +12825,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12869,7 +12867,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12911,7 +12909,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12953,7 +12951,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",
@@ -12996,7 +12994,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "ADC",
@@ -13037,7 +13035,7 @@
     "source": "fed-echo-npdes-discharge-points",
     "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
     "file_date": "2026-11-01",
-    "fetched_at": "2026-11-04T05:35:00Z"
+    "fetched_at": "2026-11-04T05:35:49Z"
    },
    "permit_type": "NPD",
    "permit_status": "EFF",

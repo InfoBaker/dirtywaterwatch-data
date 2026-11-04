@@ -26,12 +26,14 @@ Rule (a permit is a candidate when all hold)
     component POTW; a permit whose components are all stormwater is left out;
   - the permittee is not a public body: EPA's facility type is Privately Owned Facility (POF), Corporation (COR) or
     Non-Government (NON) and the names do not read as a public body; or the type is Mixed Ownership, blank or unknown
-    and the names read as a private body (owner_reading: the permittee first, a corporate form before a public word).
+    and the names read as a private body (owner_reading: a public body's own words in the permittee first, such as
+    "Board of Education", "Dept of", a school district or "Co" for County; then a corporate form before a public word).
     A permit EPA types private whose name reads as a public body (a municipal utility district, a county, a tribe, a
-    school district) is listed apart in public_by_name, for the builder to check against the permit: a public body
-    filed as private was the one error of the North Carolina build.
+    school district), and any permit whose permittee reads as both a public body and a company, is listed apart in
+    public_by_name, for the builder to check against the permit: a public body filed as private is the error to avoid.
 
 Privacy: these files are public. No address, ZIP or coordinate is copied (a small system's point is often a home).
+A single-residence system keeps its permit and state only: no name, city, county or receiving water.
 A name (facility or permittee) is kept only when it reads as a body: it has an organisation word (common.OPERATOR_WORDS
 or ORG_WORDS) and is not a person's name by common.scrub_discharger; any other becomes "[name removed]" with the permit
 kept. A single-residence system (SRSTP, SFTF, a street address as its name ...) has both names removed. A receiving
@@ -184,9 +186,20 @@ def person_like(text: str) -> bool:
     if not w or not all(re.fullmatch(r"[a-z'’-]+", x) for x in w):
         return False
     core = [x for x in w if len(x) > 1 and x not in SUFFIXES and x not in FUNCTION_WORDS]
-    if not 2 <= len(core) <= 4 or any(x in redact.WATER_WORDS or x in redact.STATES for x in core):
+    if not 2 <= len(core) <= 4 or any(x in redact.WATER_WORDS or x in redact.STATES or x in PLACE_LEADS
+                                      or (x in redact.KILL and x not in SURNAME_PLACE_WORDS) for x in core):
         return False
-    return core[0] in redact.FIRST_NAMES or core[1] in redact.FIRST_NAMES
+    names = redact.FIRST_NAMES | GIVEN_EXTRA
+    return core[0] in names or core[1] in names
+
+
+# given names the shared list (build.redact.FIRST_NAMES) lacks, seen leading permittee names; never a word that is
+# also a common noun or place (Ivy, Pearl, Ruby, Penny)
+GIVEN_EXTRA = set("""
+bessie bettye bubba butch chet cletus clyde dolly edna hattie irma jeb jethro leona lola lottie luella lula
+mattie maude mavis mikey minnie myrtle nettie ollie ora orville renae riley roxie sadie sid thelma tillie velma
+waylon winnie zelda
+""".split())
 
 
 PART_RE = re.compile(r"\s+-\s+|\s*[;()]\s*")             # parts of a name that stand alone: dropped one by one
@@ -234,7 +247,112 @@ def public_name(v) -> str | None:
                     if w and w.lower() not in FUNCTION_WORDS and not words_of(w) & (OPERATOR_WORDS | ORG_WORDS))
     if rest and person_like(rest):
         return NAME_REMOVED
+    # "Quill Family LP", "Quill Family Trust", "Quill Trust": a family's or a person's own vehicle
+    if family_vehicle(s) or personal_trust(s):
+        return NAME_REMOVED
+    # "Bill Quill Inc, Wild Bills No 4", "J T Quill & Sons", "Quill J T MHP": a person's name leading a part of the
+    # name, whatever follows it (the check above sees only short names)
+    if any(leading_person(seg) for seg in LEAD_SPLIT_RE.split(s) if seg):
+        return NAME_REMOVED
     return s
+
+
+LEAD_SPLIT_RE = re.compile(r"\s+-\s+|\s*[,;()/]\s*|\s+(?:and|&)\s+", re.I)
+# words that end the leading run of a name: a body's, a place's or a street's word, a business word
+BUSINESS_WORDS = {"operating", "operations", "group", "global", "international", "intl", "partnership", "rental",
+                  "rentals", "investment", "investments", "ventures", "capital", "equities", "leasing", "trucking",
+                  "trucklines", "health", "healthcare", "hb", "jewish", "christian", "catholic", "baptist",
+                  "methodist", "lutheran", "presbyterian", "evangelical", "evan", "evang", "episcopal", "formerly", "aka",
+                  "fka"}
+# place words that are also surnames ("Thomas Park", "Mary Hall"): a person's name still
+SURNAME_PLACE_WORDS = {"park", "hall", "mill", "mills", "bridge", "church", "court", "banks", "branch", "marsh", "row",
+                       "tower", "towers", "farm", "farms", "garden", "gardens", "shore", "bay", "point", "way", "lane",
+                       "isle", "pier", "dam", "neck", "brook", "ford", "field", "wood", "hill", "rink", "bank", "plaza",
+                       "path", "ward", "chamber", "square", "store", "inn", "golf", "mall", "center", "centre", "alley",
+                       "market", "tunnel", "wharf", "landing", "office", "terrace", "estates", "manor", "gardens"}
+# words a place's name starts with ("San Jo", "La Sara", "Ville Marie", "Mt Pleasant"): never a given name's company
+PLACE_LEADS = {"san", "santa", "santo", "la", "las", "los", "el", "le", "les", "de", "del", "du", "ville", "st",
+               "ste", "saint", "mt", "mount", "ft", "fort", "port", "lake", "new", "old", "north", "south", "east",
+               "west", "northeast", "northwest", "southeast", "southwest", "central", "upper", "lower", "camp"}
+NSEW = {"n", "s", "e", "w"}
+DOTTED_INITIALS_RE = re.compile(r"(?:[a-z]\.\s?){1,3}", re.I)
+INITIAL_RE = re.compile(r"[a-z]\.?|(?:[a-z]\.){2,3}", re.I)       # "J", "J.", "J.T." (never "PA", "NB", "LA")
+
+
+def _breaks(tok: str) -> bool:
+    from build import redact
+    lw = words_of(tok)
+    return (not lw or bool(lw & (OPERATOR_WORDS | ORG_WORDS | BUSINESS_WORDS | redact.KILL | redact.WATER_WORDS))
+            or bool(re.search(r"\d", tok)) or tok.lower() in FUNCTION_WORDS or tok.lower().strip(".") in
+            {"us", "u.s", "usa"} or bool(PRIVATE_RE.fullmatch(tok.strip(".,'’"))
+                                          or CORPORATE_RE.fullmatch(tok.strip(",'’"))))
+
+
+def leading_person(seg: str) -> bool:
+    """The words a part of a name starts with, up to its first body, place, street or business word, read as a
+    person's name: a common given name first or second ("Bill Quill" Inc, "Carl Quill" Farms), or initials and one
+    other word ("J T Quill" & Sons, "W.Y. Quill" LLC, "Quill J T" MHP; N, S, E, W alone are directions)."""
+    run = []
+    for t in clean(seg).split(" "):
+        if not t:
+            break
+        bare = t.strip(",'’")
+        corporate = PRIVATE_RE.fullmatch(bare.strip(".")) or CORPORATE_RE.fullmatch(bare)
+        if corporate or bare.lower().replace(".", "") in {"us", "usa"} or (run and run[-1].strip(".").lower() == "u"
+                                                                             and bare.strip(".").lower() == "s") or (
+                not DOTTED_INITIALS_RE.fullmatch(bare) and _breaks(t)):
+            break
+        run.append(t)
+    if len(run) < 2:
+        return False
+    if person_like(" ".join(run[:2])) or (len(run) >= 3 and person_like(" ".join(run[:3]))):
+        return True
+    if len(run) > 3:
+        return False
+    def letters(toks):              # how many initials the words are, or 0 when one is not an initial
+        if not toks or not all(INITIAL_RE.fullmatch(t) for t in toks):
+            return 0
+        n = sum(len(t.replace(".", "")) for t in toks)
+        return 0 if n == 1 and toks[0].lower().strip(".") in NSEW else n
+
+    def word_ok(t):
+        return len(t.strip(".")) > 2 and not INITIAL_RE.fullmatch(t) and t.lower() not in PLACE_LEADS
+
+    # "J T Quill", "W.Y. Quill" (initials first); "Quill J T" MHP (EPA's order: two initials, and a word after them,
+    # so a cut-off "Sawgrass P" or a "Rafter A" brand is not read as a person)
+    followed = len(clean(seg).split(" ")) > len(run)
+    return bool((letters(run[:-1]) and word_ok(run[-1]))
+                or (word_ok(run[0]) and letters(run[1:]) >= 2 and followed))
+
+
+FAMILY_RE = re.compile(r"^\s*(?:the\s+)?((?:[a-z'’.-]+\s+){1,2})family\s+(?:([a-z'’.-]+)\s+)?(trust|l\.?\s?l?\.?\s?p\.?|"
+                       r"ltd|limited|partnership|partners|company|co|llc|l\.l\.c\.?|inc|holdings|investments|"
+                       r"properties|farms?|enterprises)\b", re.I)
+TRUST_RE = re.compile(r"\btrust\b", re.I)
+TRUST_WORDS = {"trust", "family", "revocable", "irrevocable", "living", "the", "of", "and", "dated", "dtd", "u", "a"}
+
+
+def family_vehicle(s: str) -> bool:
+    """"Quill Family LP", "Quill Family Houston LLC", "Quill Family Trust": a family's own company or trust. Not a
+    family campground or village ("Example Family Campground LLC")."""
+    m = FAMILY_RE.search(s)
+    if not m:
+        return False
+    lead, mid = m.group(1).split(), m.group(2)
+    if any(_breaks(w) for w in lead):
+        return False
+    if mid and CORPORATE_RE.fullmatch(mid):           # "Quill Family Ltd Partnership"
+        return True
+    return not (mid and (_breaks(mid) or any(rx.search(mid) for _, rx in LEGAL_FORM_HINTS[:5])))
+
+
+def personal_trust(s: str) -> bool:
+    """A trust with no body's or place's word beside it ("Quill Trust", "Maranthony Trust") is a person's trust; an
+    environmental response trust at a facility keeps its name."""
+    if not TRUST_RE.search(s):
+        return False
+    others = [w for w in words_of(s) if w not in TRUST_WORDS and not CORPORATE_RE.fullmatch(w)]
+    return not any(_breaks(w) for w in others)
 
 
 CORPORATE_RE = re.compile(
@@ -243,13 +361,46 @@ CORPORATE_RE = re.compile(
     r"water supply corp\w*)\b\.?", re.I)
 
 
+# "Fulton Co-Cauley Crk", "Colbert Co BOE", "Geauga Co Comm Dept", "Crawford Co. Jr/Sr High": "Co" for County, not
+# Company (never after a business word: "Example Water Co-Sunrise", "Example Banking Co.")
+COUNTY_CO_RE = re.compile(
+    r"\b(?!(?:sewer|sewage|water|utility|utilities|wastewater|oil|gas|power|light|electric|development|dev|product|"
+    r"products|banking|bank|supply|construction|realty|land|service|services|operating|fabrication|paper|chemical|"
+    r"chemicals|manufacturing|mfg|lumber|coal|mining|investment|investments|ranch|cattle|trucking|sand|gravel|stone|"
+    r"brick|ice|fuel|farm|farms|dairy|feed|seed|grain|telephone|mobile|home|homes|park|sons|brothers|bros|and|&)\b)"
+    r"([a-z]+)\s+co\b\.?(?=\s*(?:[-/]|boe\b|board\b|bd\b|bos\b|comm\w*\b|dept\b|jr\b|sr\b|high\b|"
+    r"school\b|sch\w*\b))", re.I)
+SCHOOL_CORP_RE = re.compile(r"\bschool\s+corp(?:oration)?\b\.?|\bcommunity\s+schools?\s+corp(?:oration)?\b\.?",
+                            re.I)              # Indiana's public school corporations
+# a public body's own words, read in the permittee before its corporate form: a permittee with both is listed for a
+# check (public_by_name), never filed as private
+STRONG_PUBLIC_RE = re.compile(
+    r"\b(city|town|village|borough|township|county)\s+of\b|\bboard\s+of\s+(education|supervisors|commissioners|"
+    r"trustees)\b|\bboe\b|\b(dept\.?|department)\s+of\b|\bunified\s+gov|\bcounty\s+comm|\bschool\s+(district|dist|"
+    r"board)\b|\br-?\s?[ivx0-9]+\s+school|\b(water|sewer|light|power|utilities|utility|public\s+works|"
+    r"water\s+resources|wastewater)\s+(?:&\s+\w+\s+)?(dept|department)\b", re.I)
+
+
+def public_words(name: str) -> str:
+    """The name with "Co" for County and a school corporation spelled as a public body reads."""
+    return SCHOOL_CORP_RE.sub("school district", COUNTY_CO_RE.sub(lambda m: m.group(1) + " County", clean(name)))
+
+
 def owner_reading(facility, permittee) -> str | None:
-    """How the names read: "private", "public" or None. The permittee (EPA's permit name) first, then the facility;
-    in each, a corporate or association form (CORPORATE_RE: Inc, LLC, Co, Association ...) reads private before a
-    public word does ("Deer Trails Water District, LLC", "PA Amer Water Co" at "Exeter Twp STP"), then a public body's
-    words (PUBLIC_RE), then a private body's (PRIVATE_RE)."""
-    for name in (permittee, facility):
-        n = clean(name)
+    """How the names read: "private", "public", "mixed" or None. A public body's own words in the permittee (EPA's
+    permit name: "Board of Education", "Dept of", "City of", a school district, "Unified Govt") read public, or
+    "mixed" beside a corporate form; a permittee with no corporate form at a facility named by such words reads
+    public. Otherwise the permittee first, then the facility; in each, a corporate or association form (CORPORATE_RE:
+    Inc, LLC, Co, Association ...) reads private before a public word does ("Deer Trails Water District, LLC",
+    "PA Amer Water Co" at "Exeter Twp STP"), then a public body's words (PUBLIC_RE), then a private body's
+    (PRIVATE_RE). "Co" before a public body's word is County ("Fulton Co-Cauley Crk")."""
+    p, f = public_words(permittee), public_words(facility)
+    p_corp = bool(p and CORPORATE_RE.search(p))
+    if p and STRONG_PUBLIC_RE.search(p):
+        return "mixed" if p_corp else "public"
+    if f and not p_corp and STRONG_PUBLIC_RE.search(f) and not CORPORATE_RE.search(f):
+        return "public"
+    for n in (p, f):
         if not n:
             continue
         if CORPORATE_RE.search(n):
@@ -412,10 +563,14 @@ def classify(e: dict) -> tuple[str | None, str]:
     if typed_private:
         if reading == "public":
             return "public_by_name", f"EPA facility type {desc or code}; the name reads as a public body"
+        if reading == "mixed":
+            return "public_by_name", f"EPA facility type {desc or code}; the name reads as a public body and a company"
         return "private", f"EPA facility type {desc or code}"
     if name_check:
         if reading == "private":
             return "private", f"EPA facility type {desc or 'blank'}; the name reads as a private body"
+        if reading == "mixed":
+            return "public_by_name", f"EPA facility type {desc or 'blank'}; the name reads as a public body and a company"
         return None, f"EPA facility type {desc or 'blank'}; the name does not read as a private body"
     return None, "public owner type"
 
@@ -448,13 +603,15 @@ def candidate(e: dict, basis: str, src: dict, registry: dict, research: dict, in
     permittee = NAME_REMOVED if residence else public_name(e["permit_name"])
     from build import redact
     waters = [w for w in e["waters"] if not (redact.person_shaped(w) or redact.person_shaped(w.title()))]
+    if residence:              # a home: the permit and the state only (its city, county and stream point to it)
+        waters = []
     row = {
         "npdes_permit": e["permit"],
         "state": e["state"],
         "facility": facility,
         "permittee_as_recorded": permittee,
-        "county": e["county"],
-        "city": e["city"],
+        "county": None if residence else e["county"],
+        "city": None if residence else e["city"],
         "system_kind": "single residence" if residence else ("industrial permit with a sewage code"
                                                               if industrial(e) else None),
         "sewage_basis": sewage_basis(e),
@@ -528,7 +685,7 @@ def gap_reason(e: dict) -> str:
     if "POTW" in comps:
         return "POTW component with a private owner type: already in the outfall registry"
     if code not in PRIVATE_TYPES:
-        return "owner type mixed or blank, the name reads private"
+        return "owner type mixed or blank, the names decide"
     exact = (len(e["sic"]) == 1 and e["sic"][0] in SEWAGE_CODES) or (len(e["naics"]) == 1 and e["naics"][0] in SEWAGE_CODES)
     return "in the 2,359 (one sewage code)" if exact else "several codes, one of them sewage (missed by the comma split)"
 
@@ -540,8 +697,9 @@ RULE = ("An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a 
         "EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a "
         "public body, or a mixed, blank or unknown type with names that read as a private body.")
 PRIVACY = ("No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; "
-           "any other, and every name of a single-residence system, is \"[name removed]\" with the permit kept. The "
-           "permittee of record is taken from the state's permit documents, never an individual's name.")
+           "any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and "
+           "state only: no name, city, county or receiving water. The permittee of record is taken from the state's "
+           "permit documents, never an individual's name.")
 FOR_BUILDER = ("Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its "
                "legal form from the state's permit documents (legal_form_proposed is a hint from the names), group "
                "permits of one permittee, and file the register rows the state's law gives private operators. A permit "
@@ -601,8 +759,9 @@ def main(argv=None) -> int:
         stream, file_date = open_icis(path)
         with stream:
             icis = read_icis(stream)
-        fetched = a.fetched_at or datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).strftime(
-            "%Y-%m-%dT%H:%M:%SZ")
+        stamp = path.parent / "fetched_at.txt"          # written beside the download when it was fetched
+        fetched = a.fetched_at or (stamp.read_text().strip() if stamp.exists() else None) or datetime.fromtimestamp(
+            path.stat().st_mtime, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         icis_src = {"source": SOURCE_ID, "url": SOURCE_URL, "file_date": file_date or path.parent.name,
                     "fetched_at": fetched}
     else:
