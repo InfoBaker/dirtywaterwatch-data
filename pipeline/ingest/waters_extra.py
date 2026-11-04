@@ -60,7 +60,40 @@ from common import DATA_DIR, HEADERS, RAW_DIR, ROOT, now_iso, read_json, write_j
 OVERPASS = "https://overpass-api.de/api/interpreter"
 CACHE_DIR = RAW_DIR / "osm-waters"
 OUT = DATA_DIR / "waters-extra.json"
-STATES_ZIP = ROOT.parent / "openboatlaunch" / "data" / "raw" / "cb_2023_us_state_500k.zip"
+# Census Bureau cartographic boundary file, states, 1:500,000, 2023 (public domain):
+# https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_state_500k.zip. Looked for in data/raw/census/ (git-ignored),
+# then in the sibling openboatlaunch project's data/raw/; when neither has it, downloaded once into data/raw/census/
+# (states_zip()). Until 2026-11-04 only the sibling path was read, which a GitHub Actions runner does not have.
+STATES_ZIP_NAME = "cb_2023_us_state_500k.zip"
+STATES_ZIP_URL = f"https://www2.census.gov/geo/tiger/GENZ2023/shp/{STATES_ZIP_NAME}"
+CENSUS_ZIP = RAW_DIR / "census" / STATES_ZIP_NAME
+SIBLING_ZIP = ROOT.parent / "openboatlaunch" / "data" / "raw" / STATES_ZIP_NAME
+STATES_ZIP = SIBLING_ZIP          # kept for older callers; read the outlines through states_zip()
+
+
+def states_zip(candidates=None, download: bool = True, url: str = STATES_ZIP_URL, dest=None, session=None) -> Path:
+    """The Census state outlines zip: the first of candidates (data/raw/census/, then the sibling openboatlaunch
+    path) that exists; otherwise the public file downloaded once from the Census Bureau into dest (data/raw/census/),
+    written atomically and checked to be a zip. FileNotFoundError when it is nowhere and download is False."""
+    import requests
+    cands = [Path(c) for c in (candidates if candidates is not None else (CENSUS_ZIP, SIBLING_ZIP))]
+    for c in cands:
+        if c.is_file():
+            return c
+    dest = Path(dest) if dest is not None else CENSUS_ZIP
+    if not download:
+        raise FileNotFoundError(f"{STATES_ZIP_NAME}: not in {', '.join(str(c) for c in cands)}")
+    print(f"  Census state outlines: downloading {url} -> {dest}", flush=True)
+    r = (session or requests).get(url, headers=HEADERS, timeout=300)
+    r.raise_for_status()
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    tmp = dest.with_suffix(".zip.tmp")
+    tmp.write_bytes(r.content)
+    if not zipfile.is_zipfile(tmp):
+        tmp.unlink()
+        raise ValueError(f"{url} did not answer with a zip file")
+    tmp.replace(dest)
+    return dest
 NE = ("MA", "CT", "RI", "NH", "VT", "ME", "NY")
 LINE_KINDS = {"river", "stream", "canal"}
 LINE_WATERWAYS = {"river", "stream", "canal", "drain", "ditch", "tidal_channel", "brook", "culvert"}
@@ -270,11 +303,12 @@ def make_slug(spec: dict, state: str, ne: list[dict]) -> str:
 
 
 class States:
-    """Census 1:500,000 state outlines (shoreline-clipped), read from openboatlaunch's cached zip."""
+    """Census 1:500,000 state outlines (shoreline-clipped), from states_zip() (data/raw/census/, the sibling
+    openboatlaunch copy, or the Census Bureau's file downloaded once)."""
 
     def __init__(self):
         import shapefile
-        z = zipfile.ZipFile(STATES_ZIP)
+        z = zipfile.ZipFile(states_zip())
         stem = "cb_2023_us_state_500k"
         r = shapefile.Reader(shp=io.BytesIO(z.read(f"{stem}.shp")), dbf=io.BytesIO(z.read(f"{stem}.dbf")))
         self.shapes = {}
