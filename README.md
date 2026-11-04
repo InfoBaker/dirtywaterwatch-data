@@ -59,8 +59,8 @@ openboatlaunch's water records and their outlines come from the private state ob
 pipeline reads them, by both workflows; neither ever saves it. With it in R2 no step needs the openboatlaunch checkout
 or OpenStreetMap from a particular machine: the `extract` step writes a state's `data/waters-<st>.json` from it
 (`ingest.obl_waters`, dated from the snapshot's `meta.json`), the `waters`, `osm` and `ties` steps measure against
-its outlines, and the `osm` step gives OpenStreetMap's Overpass pass up to 20 minutes (`osm_budget`; GitHub's
-runners reach Overpass), resumed by the next dispatch. A new openboatlaunch snapshot is uploaded the same way it was
+its outlines, and the `osm` step gives OpenStreetMap's Overpass pass up to 20 minutes (`osm_budget`, with `budget_s` at most 3,780 s
+together; GitHub's runners reach Overpass), resumed by the next dispatch. A new openboatlaunch snapshot is uploaded the same way it was
 first (on a machine with the openboatlaunch checkout, from the site repository's folder so `worker/` has wrangler;
 wrangler uploads up to 300 MiB, and the batch refuses an extract without `meta.json`'s date):
 

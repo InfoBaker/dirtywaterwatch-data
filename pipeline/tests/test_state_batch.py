@@ -468,13 +468,13 @@ def test_plan_dry_run_shows_the_outline_path(capsys):
 
 
 def obl_fixture(tmp_path: Path, meta: bool = True) -> Path:
-    """Three fake openboatlaunch records (two in NC, one in GA) packed as the Mac packs them, restored as the workflow
+    """Three fake openboatlaunch records (two in NC, one in GA) packed as the upload packs them, restored as the workflow
     restores them; returns <tmp>/openboatlaunch/out/water."""
     sp_spec = importlib.util.spec_from_file_location("state_paths", ROOT / "scripts" / "state_paths.py")
     SP = importlib.util.module_from_spec(sp_spec)
     sys.modules["state_paths"] = SP
     sp_spec.loader.exec_module(SP)
-    src = tmp_path / "mac" / "out"
+    src = tmp_path / "obl-src" / "out"
     (src / "water").mkdir(parents=True)
     line = {"type": "LineString", "coordinates": [[-79.30, 35.90], [-79.20, 35.95], [-79.10, 36.00]]}
     poly = {"type": "Polygon", "coordinates": [[[-78.70, 35.70], [-78.68, 35.70], [-78.68, 35.72], [-78.70, 35.70]]]}
@@ -604,3 +604,87 @@ def test_extract_never_overwrites_a_regional_water_file(tmp_path):
         B.plan("NE", "extract", py=PY, root=root)
     assert B.plan("NE", "waters", py=PY, root=root).cmds                 # the other steps are not affected
     assert B.plan("NC", "extract", py=PY, root=root).cmds[0].step == "extract"   # NC's own extract is replaced
+
+
+# ---------------------------------------------------------------- review 2026-11-04 (eng/obl-in-state)
+
+def test_plan_osm_with_budget_s_keeps_the_old_worst_case():
+    """budget_s and osm_budget together stay within the batch's worst case before the osm step (3,600 + 180 s), so
+    the job is not cancelled at the workflow's 120 minutes with nothing saved."""
+    with pytest.raises(B.Refused, match="osm_budget 1200 together"):
+        B.plan("FL", "osm ties", budget_s=3600, osm_budget=1200, py=PY)
+    p = B.plan("FL", "osm ties", budget_s=2580, osm_budget=1200, py=PY)
+    assert "--osm-budget" in p.cmds[0].argv
+    assert B.plan("FL", "osm ties", py=PY).cmds                        # the defaults (1500 and 1200) are within it
+    assert B.plan("FL", "waters ties", budget_s=3600, osm_budget=1200, py=PY).cmds   # no osm step: the module's 180
+
+
+def test_steps_resolve_the_restored_outlines_from_pipeline(tmp_path):
+    """The batch names the outlines' folder relative to pipeline/ (../../openboatlaunch/out/water): from the steps'
+    cwd that is the folder state_paths.py unpack-obl restores beside the checkout, and build/status.py reads it."""
+    import os
+    root = repo(tmp_path)
+    water = obl_fixture(tmp_path)
+    (root / "pipeline").mkdir()
+    p = B.plan("NC", "ties", py=PY, root=root)
+    env = p.cmds[0].env
+    assert env == {"OBL_WATER_DIR": "../../openboatlaunch/out/water"} and p.cmds[0].cwd == "pipeline"
+    assert (root / p.cmds[0].cwd / env["OBL_WATER_DIR"]).resolve() == water.resolve()
+    sp = sys.modules["state_paths"]
+    assert sp.OBL_OUT.parent.parent == ROOT.parent                    # the real checkout's sibling, as in the runner
+    code = ("from build import status as S;g=S.water_geometry('lake-wheeler-nc');"
+            "print(S.OBL_WATER_DIR.resolve(), g.geom_type if g is not None else None)")
+    py = str(ROOT / "pipeline/.venv/bin/python") if (ROOT / "pipeline/.venv").exists() else sys.executable
+    base = {k: v for k, v in os.environ.items() if k != "OBL_WATER_DIR"}
+    r = subprocess.run([py, "-c", code], cwd=root / "pipeline", text=True, capture_output=True,
+                       env={**base, **env, "PYTHONPATH": str(ROOT / "pipeline")})
+    assert r.stdout.strip() == f"{water.resolve()} Polygon", r.stderr
+
+
+def test_hourly_default_is_the_folder_unpack_obl_restores():
+    """The hourly refresh sets no OBL_WATER_DIR: build/status.py's default (from its own file, not the cwd) is
+    state_paths.py's OBL_OUT/water, where the refresh restores the object."""
+    import os
+    sp_spec = importlib.util.spec_from_file_location("state_paths", ROOT / "scripts" / "state_paths.py")
+    SP = importlib.util.module_from_spec(sp_spec)
+    sys.modules["state_paths"] = SP
+    sp_spec.loader.exec_module(SP)
+    py = str(ROOT / "pipeline/.venv/bin/python") if (ROOT / "pipeline/.venv").exists() else sys.executable
+    base = {k: v for k, v in os.environ.items() if k != "OBL_WATER_DIR"}
+    for cwd in (ROOT, ROOT / "pipeline"):
+        r = subprocess.run([py, "-c", "import sys;sys.path.insert(0,'pipeline');sys.path.insert(0,'.');"
+                            "from build import status as S;print(S.OBL_WATER_DIR)"], cwd=cwd, text=True,
+                           capture_output=True, env=base)
+        assert r.stdout.strip() == str(SP.OBL_OUT / "water"), r.stderr
+
+
+@pytest.mark.parametrize("snapshot", ["none", "partial"])
+def test_extract_refuses_a_snapshot_without_the_state_and_keeps_the_file(tmp_path, snapshot, capsys):
+    """A snapshot with no NC record, or far fewer than the extract on file, would empty or cut data/waters-nc.json:
+    the extract refuses before writing and the steps after it are not run."""
+    root = repo(tmp_path)
+    write(root, "data/waters-nc.json", {"state": "NC", "source": "openboatlaunch out/water snapshot 2026-11-02",
+                                        "waters": [{"slug": f"w{i}-nc", "state": "NC"} for i in range(5)]})
+    water = obl_fixture(tmp_path)
+    for f in water.glob("*-nc.json"):
+        if snapshot == "none" or f.name.startswith("haw"):
+            f.unlink()
+    before = (root / "data/waters-nc.json").read_text()
+    p = B.plan("NC", "extract ties", py=sys.executable, root=root)
+    p.cmds[1] = B.Cmd("ties", fake_step("print('never')"))
+    assert B.run(p, tmp_path / "out", root=root) == 1
+    s = json.loads((tmp_path / "out" / "summary.json").read_text())
+    assert s["not_run"] == ["ties"]
+    assert ("holds no NC water record" if snapshot == "none" else "1 NC water files") in s["results"][0]["counts"][0]
+    assert (root / "data/waters-nc.json").read_text() == before
+    assert "never" not in capsys.readouterr().out
+
+
+def test_obl_check_refuses_another_states_file(tmp_path):
+    """Nebraska's obl-check never reads New England's data/waters-ne.json as Nebraska's extract."""
+    root = repo(tmp_path)
+    write(root, "data/receiving-waters-national.json", {"states": {"NE": {"waters": []}}})
+    write(root, "data/waters-ne.json", {"source": "openboatlaunch out/water snapshot 2026-11-01",
+                                        "waters": [{"slug": "charles-river-ma", "state": "MA"}]})
+    ok, lines = B.obl_check("NE", root)
+    assert not ok and "not NE's openboatlaunch extract" in lines[0]
