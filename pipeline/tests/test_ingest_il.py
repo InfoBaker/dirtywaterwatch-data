@@ -268,3 +268,36 @@ def test_beachguard_replay_from_saved_files(tmp_path):
     out = tmp_path / "ev.json"
     assert B.main(["--rss", str(BG / "rss.xml"), "--detail-dir", str(BG), "--out", str(out)]) == 0
     assert json.loads(out.read_text())["count"] == 3
+
+
+def test_beachguard_an_advisory_the_feed_still_lists_stays_in_effect_however_old_its_start():
+    """Review 2026-11-04: each poll that lists an advisory re-confirms it (source_updated_at), so the status build's
+    14-day ageing counts from the last listing, not from a start two months back."""
+    from datetime import UTC, datetime
+    from build import status as S
+    from ingest import il_idph_beachguard as B
+    state = {}
+    recs, _ = B.run(state, (BG / "rss.xml").read_bytes(), _bg_details(), "2026-11-04T12:00:00Z")
+    c = {r["source_record_id"]: r for r in recs}["467-20260901T0800"]
+    assert c["source_updated_at"] == "2026-11-04T12:00:00Z"
+    now = datetime(2026, 11, 4, 13, tzinfo=UTC)
+    ivs = S.event_intervals(c, "IL", now)
+    live = [iv for iv in ivs if iv["rule"] == "advisory_active"]
+    assert live and S.parse_time(live[0]["end"]) > now        # before the fix it ended 2026-09-15: aged out
+
+
+def test_beachguard_an_empty_feed_lifts_nothing_until_the_next_poll_is_empty_too():
+    from ingest import il_idph_beachguard as B
+    state = {}
+    rss = (BG / "rss.xml").read_text()
+    empty = re.sub(r"<item>.*</item>", "", rss, flags=re.S)
+    B.run(state, rss, _bg_details(), "2026-11-04T12:00:00Z")
+    recs, meta = B.run(state, empty, _bg_details(), "2026-11-04T13:00:00Z")
+    assert meta["poll"]["lifted"] == 0 and meta["poll"]["held"] == 3
+    assert all(r["status"] == "advisory_active" for r in recs)
+    recs, meta = B.run(state, rss, _bg_details(), "2026-11-04T14:00:00Z")     # back: nothing was lifted
+    assert meta["poll"]["lifted"] == 0 and all(r["status"] == "advisory_active" for r in recs)
+    B.run(state, empty, _bg_details(), "2026-11-04T15:00:00Z")
+    recs, meta = B.run(state, empty, _bg_details(), "2026-11-04T16:00:00Z")   # empty twice: lifted at the first
+    c = {r["source_record_id"]: r for r in recs}["467-20260901T0800"]
+    assert meta["poll"]["lifted"] == 3 and c["status"] == "advisory_lifted" and c["ended_at"] == "2026-11-04T15:00:00Z"
