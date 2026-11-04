@@ -336,7 +336,8 @@ def relationship_code(v) -> str | None:
 def safe_attributes(a: dict) -> dict:
     """The attributes this module keeps: the safe fields only, the relationship as a code, the text scrubbed."""
     out = {k: a.get(k) for k in SAFE_FIELDS if k in a}
-    out["_filer"] = relationship_code(a.get(RELATIONSHIP_FIELD))
+    # a saved page already holds the code (the relationship itself is never saved)
+    out["_filer"] = relationship_code(a.get(RELATIONSHIP_FIELD)) if RELATIONSHIP_FIELD in a else a.get("_filer")
     for k in ("INCIDENT_REPORT", "INCIDENT_NAME", "FACILITY_NAME"):
         if isinstance(out.get(k), str):
             out[k] = scrub(out[k]) if k == "INCIDENT_REPORT" else scrub_text(out[k])
@@ -510,9 +511,9 @@ WATER_KINDS = (r"Creek|River|Bay|Bayou|Canal|Lake|Lagoon|Waterway|Sound|Harbor|H
                r"Springs?|Estuary|Gulf\s+of\s+(?:Mexico|America)|Atlantic\s+Ocean|Ocean|Basin|Marsh|Cove|Pass")
 WATER_NAME = re.compile(
     rf"(?i:\b(?:into|to|reached|entered|entering|impacted|impacting|affected|affecting|toward|towards|in|of)\s+(?:the\s+)?)"
-    rf"((?:(?:[A-Z][\w'.-]*|[A-Z]-?\d+|St\.?|of|the)\s+){{0,4}}(?:{WATER_KINDS})\b(?:\s+(?:[A-Z][\w'.-]*|[A-Z]-?\d+)){{0,2}}"
-    rf"|(?:Lake|Canal)\s+[A-Z][\w'-]+(?:\s+[A-Z][\w'-]+)?|(?:Intracoastal(?:\s+Waterway)?|ICW)\b|C-\d+[A-Z]?\s+Canal|Canal\s+C-\d+[A-Z]?)")
-NOT_WATER_AFTER = re.compile(r"^\s*(?:Rd|Road|Dr|Drive|Blvd|Boulevard|Ave|Avenue|St|Street|Ln|Lane|Way|Ct|Court|Cir|Circle|Pkwy|"
+    rf"((?:(?:[A-Z][\w'.-]*|[A-Z]-?\d+|St\.?|of|the)\s+){{0,4}}(?:{WATER_KINDS})\b(?:\s+[A-Z]-?\d+[A-Z]?)?"
+    rf"|(?:Lake|Canal)\s+[A-Z][\w'-]+|(?:Intracoastal(?:\s+Waterway)?|ICW)\b|C-\d+[A-Z]?\s+Canal|Canal\s+C-\d+[A-Z]?)")
+NOT_WATER_AFTER = re.compile(r"^\s*(?:Beach|Rd|Road|Dr|Drive|Blvd|Boulevard|Ave|Avenue|St|Street|Ln|Lane|Way|Ct|Court|Cir|Circle|Pkwy|"
                              r"Parkway|Hwy|Highway|Trl|Trail|Pl|Place|Ter|Terrace|Estates|Apartments|Subdivision|"
                              r"Elementary|School|Park|WRF|WWTP|WWTF|AWT|Plant|Utilities|Utility|Lift|Pump|HOA|Village|"
                              r"Golf|Club|Mall|Plaza|Center|Condos?|Community|Regional|Water\s+Reclamation)\b")
@@ -528,9 +529,8 @@ def water_names(text: str) -> list[str]:
         if NOT_WATER_AFTER.match(tail) or NOT_WATER_NAME.search(name):
             continue
         name = re.sub(r"^(?:the|of)\s+", "", name, flags=re.I)
-        if name.split()[0].lower() in ("creek", "river", "bay", "canal", "lake", "branch", "run", "basin", "pass", "cove"):
-            if len(name.split()) == 1:
-                continue
+        if len(name.split()) == 1 and re.fullmatch(rf"(?:{WATER_KINDS})", name, re.I):
+            continue                          # "the bayou", "the harbor": a kind of water, not a name
         if not re.match(r"[A-Z]|ICW|Intracoastal", name):
             continue
         if name not in out:
@@ -824,7 +824,7 @@ def main(argv=None) -> int:
         if args.file:
             d = json.loads(Path(args.file).read_text())
             pages = d.get("pages") or [d]
-            features = [f.get("attributes") or {} for p in pages for f in p.get("features") or []]
+            features = [f.get("attributes", f) or {} for p in pages for f in p.get("features") or []]   # saved pages: plain rows
         else:
             sess = requests.Session()
             sess.headers.update(HEADERS)
