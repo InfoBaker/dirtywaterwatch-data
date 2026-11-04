@@ -150,10 +150,10 @@
   "history": "Event dates back to 4/1/2016 in this app; an older app (apps.mwrd.org/CSO/CSOEventSynopsisSelectD.aspx) holds 2014 to 5/14/2016.",
   "license": "No terms stated on the page.",
   "legal_basis": "NPDES permits IL0028053, IL0028088, IL0028061 CSO special conditions; 40 CFR 122.38",
-  "status": "candidate",
-  "status_reason": "Best Chicago-area CSO source: per-outfall open and close times with the waterway reach, for the outfalls SOBE does not cover. Only monitored tide gates appear (273 of 441 outfalls in the MWRD points layer are monitored). Session-bound export needs a careful scraper.",
+  "status": "watch",
+  "status_reason": "Per-outfall open and close times for Cook County since 2016, but reached only through a form, a session and a report viewer: by the standing rule on bot walls and polling forms it is not read by an automated session; the request to MWRD is a download or feed of the same table (register row il-mwrd-cso-synopsis-report).",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-04",
   "notes": "7/4/2026 report has 24 outfall rows. The monitored set includes City of Chicago and suburban outfalls tied to TARP drop shafts."
  },
  {
@@ -204,10 +204,10 @@
   "history": "None (current state only; the Archive layer is not public).",
   "license": "None stated.",
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Fast \"today\" signal for Cook County; must be polled and snapshotted. Empty when dry, so its emptiness cannot be told apart from an outage without the event-date list.",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/il_mwrd_possible_cso.py: each outfall on the map becomes an unconfirmed CSO record for that day (start the layer's edit time, no end invented); empty when no activity is shown.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-04",
   "notes": "App disclaimer quoted: \"Not all CSO outfalls are equipped with monitoring equipment. Therefore, other CSOs may have occurred that are not reflected on the above map. Regardless of CSO activity, the Chicago Area Waterways may contain disease-causing bacteria at any time. Therefore, swimming, canoeing, or other activities where immersion in water is possible should be avoided and is not recommended, particularly during and immediately following rainfall.\""
  },
  {
@@ -330,10 +330,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Rare but the only events that put combined sewage into Lake Michigan beaches; table is annual-ish PDF.",
+  "status": "used",
+  "status_reason": "Read by pipeline/ingest/il_mwrd_lake_reversals.py: 36 reversals since 1985 (57 records, one per structure, days only, million gallons); the last on 2023-07-02/03.",
   "verified": "search_only",
-  "checked": "2026-11-03",
+  "checked": "2026-11-04",
   "notes": ""
  },
  {
@@ -685,10 +685,10 @@
   "history": "BeachDetail pages hold sample history (not fetched).",
   "license": "None stated.",
   "legal_basis": "Illinois Swimming Facility Act; BEACH Act for Lake Michigan",
-  "status": "candidate",
-  "status_reason": "Statewide beach advisory feed with RSS; stale rows mean start dates must be shown, not assumed current.",
+  "status": "used",
+  "status_reason": "Read by pipeline/ingest/il_idph_beachguard.py: the RSS list of advisories in effect plus each listed beach's page for its start date, issuer and point; lifted when the list stops showing it.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-04",
   "notes": ""
  },
  {
@@ -746,10 +746,10 @@
   "history": "2006 to 2026",
   "license": "Socrata metadata licence field empty; City of Chicago Data Portal terms apply.",
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Machine-readable Lake Michigan bacteria near CSO-affected waters; swim advisory status itself is on the Park District site (not traced).",
+  "status": "watch",
+  "status_reason": "Bacteria results, not advisories: monitored for changes (register row il-chicago-beach-lab-data); the Park District's swim status was not traced.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-04",
   "notes": ""
  },
  {

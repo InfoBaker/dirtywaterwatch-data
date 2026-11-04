@@ -1,0 +1,30 @@
+id: "il-mwrd-cso-points"
+name: "MWRD CSO Points (outfall layer, Cook County)"
+url: "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0"
+homepage: "https://mwrd.org/community-action/you-can-help-prevent-flooding-and-protect-water-quality/combined-sewer-overflow-notification"
+kind: "arcgis"
+level: "utility"
+# Registry row: scripts/add_il_mwrd_outfalls.py writes data/outfalls-il.json from this layer (434 outfall rows on
+#   2026-11-04, 291 paired with EPA's inventory rows, which they replace in the registry).
+# Notes (research/il, status used, verified fetched, checked 2026-11-03): Better than the EPA
+#   inventory for Cook County: 441 outfalls from 51 owners (Chicago 214, MWRD 51, Evanston 16,
+#   Maywood 13), 273 monitored and 168 unmonitored, with the TARP drop-shaft key that joins the
+#   synopsis report.
+# Access detail (research, quoted): Public FeatureServer; 441 points; dataLastEditDate 2026-06-29.
+#   Sample in raw/mwrd-cso-points-sample.json.
+# Can fill: coordinates, waterbody
+# Cannot fill: npdes outfall number
+# Waters: Cook County combined sewer area
+# Research notes: No NPDES outfall number; match to EPA inventory by location.
+cadence: "edited 2026-06-29"
+license: "None stated."
+attribution: "Metropolitan Water Reclamation District of Greater Chicago"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["IL"]
+access: ["arcgis"]
+access_detail: "Public FeatureServer; 441 points; dataLastEditDate 2026-06-29. Sample in raw/mwrd-cso-points-sample.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-03"

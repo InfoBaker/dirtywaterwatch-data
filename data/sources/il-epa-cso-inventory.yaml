@@ -1,0 +1,22 @@
+id: "il-epa-cso-inventory"
+name: "EPA National CSO Inventory, Illinois rows (federal seed)"
+url: "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"
+homepage: "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"
+kind: "csv"
+level: "federal"
+# Notes (research/il, status used, verified fetched, checked 2026-11-03): Baseline outfall list;
+#   MWRD CSO Points is better for Cook County.
+# Access detail (research, quoted): Loaded as data/outfalls-us.json; research/il/federal-seed.json:
+#   120 permits, 691 open outfalls.
+cadence: null
+license: "none stated"
+attribution: "U.S. EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["IL"]
+access: ["csv"]
+access_detail: "Loaded as data/outfalls-us.json; research/il/federal-seed.json: 120 permits, 691 open outfalls."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-03"
