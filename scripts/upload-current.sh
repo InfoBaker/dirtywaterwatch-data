@@ -6,10 +6,14 @@
 # The reaches per state (out/reaches/<st>.geojson, pipeline/export/build.py write_reach_state_files) go up after the
 # national files: only the files out/reaches/index.json lists, each named reaches/<two lowercase letters>.geojson,
 # at most REACH_STATE_MAX of them, then the index last, so the index never names a file that is not in R2. A bad
-# or missing index puts no state file; a state file that fails to upload keeps the old index in place.
+# index puts no state file; a state file that fails to upload keeps the old index in place.
+# Every file is tried (a failure does not stop the rest); the exit code is 1 when any file was missing from out/
+# or could not be put after the retries, so scripts/refresh-data.sh reports that the live files were not all
+# replaced. No index at all (an export from before the reaches per state) is not a failure.
 set -eu
 cd "$(dirname "$0")/.."
 REACH_STATE_MAX=64
+failed=""
 put() {   # put <path under out/>: every file goes through this one check (present) and the same retries
   f="$1"
   [ -f "out/$f" ] || { echo "not in out/: $f"; return 1; }
@@ -22,9 +26,7 @@ put() {   # put <path under out/>: every file goes through this one check (prese
 }
 python3 -I scripts/export-outfalls.py || echo "outfalls export failed"
 for f in outfalls.json meta.json waters.json active.json rules.json overlays.geojson reaches.geojson advisory-points.geojson launches.geojson history.json events-index.json sources.json dischargers.json; do
-  if [ -f "out/$f" ]; then
-    put "$f" || true
-  fi
+  put "$f" || failed="$failed $f"
 done
 # the reaches per state: the explicit list is the index's, checked and bounded before anything is put
 if [ -f out/reaches/index.json ]; then
@@ -44,16 +46,19 @@ if len(files) > cap or len(set(files)) != len(files):
 print(" ".join(files))
 PY
   ); then
-    failed=""
+    state_failed=""
     for f in $states; do
-      put "$f" || failed="$failed $f"
+      put "$f" || state_failed="$state_failed $f"
     done
-    if [ -z "$failed" ]; then
-      put reaches/index.json || true
+    if [ -z "$state_failed" ]; then
+      put reaches/index.json || failed="$failed reaches/index.json"
     else
-      echo "reaches per state: not uploaded:$failed; current/reaches/index.json left as it was"
+      echo "reaches per state: not uploaded:$state_failed; current/reaches/index.json left as it was"
+      failed="$failed$state_failed"
     fi
   else
     echo "reaches per state: nothing uploaded (the index did not pass the check)"
+    failed="$failed reaches/index.json"
   fi
 fi
+[ -z "$failed" ] || { echo "upload-current: not uploaded:$failed"; exit 1; }
