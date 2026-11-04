@@ -373,10 +373,18 @@ def strip_house_numbers(v: str, street_word_only: bool = False) -> str:
                   rf"(?={re.escape(HOUSE_NUMBER_REMOVED)})", "", v)
 
 
+# a closing signature: "Very respectfully, Pat Example, P.G. Hydrogeologist" (an agency report's sign-off, 2026-11-04)
+_CLOSING = r"(?i:very respectfully|respectfully yours|respectfully|sincerely yours|sincerely|best regards|kind regards|warm regards|regards|thank you|thanks|cordially)"
+_SIGNED_NAME = r"(?:[A-Z][a-z]+(?:[-'’][A-Z]?[a-z]+)*|[A-Z]\.)(?:\s+(?:[A-Z][a-z]+(?:[-'’][A-Z]?[a-z]+)*|[A-Z]\.)){1,3}"
+CLOSING_NAME_RE = re.compile(rf"(\b{_CLOSING}[,.!]?\s*(?:\n|\r\n)?\s*){_SIGNED_NAME}(?=\s*(?:,|\.|\n|$|\s+(?:P\.?G\.?|P\.?E\.?|Ph\.?D\.?|M\.?S\.?|M\.?P\.?H\.?|CPM|REHS)\b))")
+
+
 def scrub_names(v: str) -> str:
-    """Staff names after "Inspector" / "Investigator", and in "contact <Name> at", become [name removed]."""
+    """Staff names after "Inspector" / "Investigator", in "contact <Name> at", and in a closing signature
+    ("Very respectfully, <Name>, P.G.") become [name removed]."""
     v = TITLE_NAME_RE.sub(r"\1\2[name removed]", v)
-    return CONTACT_NAME_RE.sub(r"\1\2[name removed]", v)
+    v = CONTACT_NAME_RE.sub(r"\1\2[name removed]", v)
+    return CLOSING_NAME_RE.sub(r"\1[name removed]", v)
 
 
 def has_repo_path(v) -> bool:
