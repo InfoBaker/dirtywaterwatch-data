@@ -4,10 +4,11 @@ url: "https://echo.epa.gov/tools/data-downloads"
 homepage: "https://echo.epa.gov/tools/data-downloads"
 kind: "csv"
 level: "federal"
-# Notes (research/ga, status candidate, verified inferred, checked 2026-11-03): 1,232 events from 90
-#   GA permits on 2026-11-03 (coordinator count). GA permittees file through EPD GEOS; the events
-#   reach EPA. Likely carries start/end times and volumes; use for history and to fill end times the
-#   EPD list lacks.
+# Notes (research/ga, status used, verified inferred, checked 2026-11-04): 1,232 events from 90 GA
+#   permits on 2026-11-03 (coordinator count). GA permittees file through EPD GEOS; the events reach
+#   EPA. Likely carries start/end times and volumes; use for history and to fill end times the EPD
+#   list lacks. Built: Georgia is one of the states of pipeline/ingest/echo_sewer_overflow_events.py
+#   (feed echo-sewer-overflow, registry fed-echo-sewer-overflow-bypass-events).
 # Access detail (research, quoted): current_sewer_overflow_and_collection_systems_tables.zip (daily
 #   ZIP from ECHO); not re-downloaded here.
 cadence: null
@@ -21,4 +22,4 @@ access: ["csv"]
 access_detail: "current_sewer_overflow_and_collection_systems_tables.zip (daily ZIP from ECHO); not re-downloaded here."
 machine_readable: true
 legal_basis: null
-checked: "2026-11-03"
+checked: "2026-11-04"
