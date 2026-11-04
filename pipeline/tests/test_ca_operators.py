@@ -67,3 +67,27 @@ def test_the_name_pass_unites_an_invalid_outline_without_failing():
     good = Polygon([(3, 3), (4, 3), (4, 4), (3, 3)])
     u = W.safe_union([bow, good])
     assert u.is_valid and u.area > 0
+
+
+def test_waters_named_in_spill_reports_are_not_the_operators_receiving_waters():
+    """Review 2026-11-04 P2-2: an earlier spill's water listed as the operator's receiving water placed a later report
+    that names no water there (status.Resolver.by_registry's single listed water). They are spill_report_waters."""
+    pl = {"CA0099001": [{"receiving_water_echo": "Sample River"}]}
+    rows = [{"id": "ca-sample", "state": "CA", "npdes_permits": ["2SSO99001", "CA0099001"], "aliases": ["ca-sample"],
+             "receiving_waters": ["Sample Creek", "Sample River"]},
+            {"id": "ca-other", "state": "CA", "npdes_permits": ["2SSO99002"], "aliases": ["ca-research-other"],
+             "receiving_waters": ["Research Bay", "Sample Lake"]},
+            {"id": "md-x", "state": "MD", "npdes_permits": [], "receiving_waters": ["Sample Creek"]}]
+    research = {"ca-research-other": {"receiving_waters": ["Research Bay"]}}
+    assert A.split_spill_waters(rows, pl, research) == 2
+    assert rows[0]["receiving_waters"] == ["Sample River"] and rows[0]["spill_report_waters"] == ["Sample Creek"]
+    assert list(rows[0]).index("spill_report_waters") == list(rows[0]).index("receiving_waters") + 1
+    assert rows[1]["receiving_waters"] == ["Research Bay"] and rows[1]["spill_report_waters"] == ["Sample Lake"]
+    assert rows[2] == {"id": "md-x", "state": "MD", "npdes_permits": [], "receiving_waters": ["Sample Creek"]}
+    assert A.split_spill_waters(rows, pl, research) == 0                      # idempotent
+    dis = json.loads((ROOT / "data" / "dischargers.json").read_text())
+    ca = [r for r in dis if r.get("state") == "CA"]
+    if ca:
+        plants = A.plants()
+        res = {r["id"]: r for r in json.loads(A.RESEARCH.read_text())}
+        assert [r["id"] for r in ca if set(r["receiving_waters"]) - A.permit_waters(r, plants, res)] == []

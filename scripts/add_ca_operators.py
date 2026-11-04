@@ -28,8 +28,11 @@ Rules
   - legal_form (form()) from the name, on the controlled list (docs/legal-forms.md); null when the name does not say.
   - notification_channel: the law (HSC 5411.5, Water Code 13271, the General Order's CIWQS reports published nightly);
     a plant operator with no enrollment is told apart: its spills do not reach the CIWQS file.
-  - receiving_waters: EPA's receiving waters for the plant permits, and the waters the operator's Category 1 spill
-    reports name (the CIWQS events file), most named first.
+  - receiving_waters: the receiving waters of the operator's permits only (EPA's for the plant permits, the research
+    rows'). The waters the operator's Category 1 spill reports name (the CIWQS events file, most named first) are
+    spill_report_waters, kept apart: the status build places a report that names no water on the operator's single
+    listed receiving water (build/status.Resolver.by_registry), and an earlier spill's water is no evidence for the
+    next one (review 2026-11-04 P2-2). `--split-spill-waters` moves them out of the rows already written.
   - Idempotent: rows with an id or a permit already held are not added again. New rows go after the last California row
     (at the end while there is none).
 Writes data/dischargers.json (indent 1) and prints counts.
@@ -312,18 +315,58 @@ def cso_rows() -> dict[str, list[dict]]:
 
 
 def base_row(rid, name, kind, permits, towns, waters, notes, legal_form=None, short=None, outfalls_source=None,
-             outfall_count=None, verified="fetched", channel=LAW, machine=True):
+             outfall_count=None, verified="fetched", channel=LAW, machine=True, spill_waters=None):
     return {"id": rid, "name": name, "short_name": short or name, "legal_form": legal_form, "state": "CA",
             "kind": kind, "npdes_permit": permits[0] if permits else None, "npdes_permits": list(permits),
-            "receiving_waters": waters, "water_slugs": [], "outfall_count": outfall_count,
+            "receiving_waters": waters, "spill_report_waters": list(spill_waters or []), "water_slugs": [],
+            "outfall_count": outfall_count,
             "outfalls_source": outfalls_source, "notification_channel": channel,
             "notification_feed_machine_readable": machine, "notification_signup_url": None,
             "towns": towns, "notes": notes, "verified": verified, "checked": TODAY, "aliases": [rid],
             "source_areas": ["ca"]}
 
 
+def permit_waters(row: dict, pl: dict[str, list[dict]], research: dict[str, dict]) -> set[str]:
+    """The receiving waters a row's permits name: EPA's for its plant permits, the research rows' it was built from."""
+    out = {r["receiving_water_echo"] for p in row.get("npdes_permits") or [] for r in pl.get(str(p).upper(), [])
+           if r.get("receiving_water_echo")}
+    for rid in row.get("aliases") or []:
+        out.update((research.get(rid) or {}).get("receiving_waters") or [])
+    return out
+
+
+def split_spill_waters(dis: list[dict], pl: dict[str, list[dict]], research: dict[str, dict]) -> int:
+    """California rows: receiving_waters keeps the waters the permits name; the others (named in the operator's spill
+    reports) move to spill_report_waters. Returns the number of rows changed."""
+    n = 0
+    for r in dis:
+        if r.get("state") != "CA" or "spill_report_waters" in r and not r.get("receiving_waters"):
+            continue
+        own = permit_waters(r, pl, research)
+        keep = [w for w in r.get("receiving_waters") or [] if w in own]
+        moved = [w for w in r.get("receiving_waters") or [] if w not in own]
+        before = (list(r.get("receiving_waters") or []), r.get("spill_report_waters"))
+        spill = list(dict.fromkeys((r.get("spill_report_waters") or []) + moved))
+        items = [(k, v) for k, v in r.items() if k != "spill_report_waters"]
+        r.clear()
+        for k, v in items:
+            r[k] = keep if k == "receiving_waters" else v
+            if k == "receiving_waters":
+                r["spill_report_waters"] = spill
+        n += (keep, spill) != before
+    return n
+
+
 def main(argv) -> int:
     dry = "--dry-run" in argv
+    if "--split-spill-waters" in argv:
+        dis = json.loads(DIS.read_text())
+        research = {r["id"]: r for r in json.loads(RESEARCH.read_text())}
+        n = split_spill_waters(dis, plants(), research)
+        print(f"{n} California rows: spill-report waters moved out of receiving_waters")
+        if not dry:
+            DIS.write_text(json.dumps(dis, indent=1, ensure_ascii=False) + "\n")
+        return 0
     dis = json.loads(DIS.read_text())
     have_ids = {d["id"] for d in dis}
     held = {str(p).strip().upper() for d in dis for p in [d.get("npdes_permit"), *(d.get("npdes_permits") or [])] if p}
@@ -379,7 +422,7 @@ def main(argv) -> int:
         rid = f"ca-{slug(k)}"
         if rid in have_ids:
             rid = f"ca-{slug(k)}-{wdids[0].lower()}"
-        row = base_row(rid, a["name"], "sso", wdids, towns, wdid_waters(wdids), notes, legal_form=lf)
+        row = base_row(rid, a["name"], "sso", wdids, towns, [], notes, legal_form=lf, spill_waters=wdid_waters(wdids))
         rows[k] = row
         counts["agency rows"] += 1
 
@@ -401,7 +444,7 @@ def main(argv) -> int:
             if r.get("towns"):
                 row["towns"] = [t for t in r["towns"] if not t.endswith(" County")] or row["towns"]
             if r.get("receiving_waters") and not row["receiving_waters"]:
-                row["receiving_waters"] = r["receiving_waters"]
+                row["receiving_waters"] = list(r["receiving_waters"])
             if r.get("kind") == "cso":
                 row["kind"] = "cso"
                 p = r["npdes_permit"]

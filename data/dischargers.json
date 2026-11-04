@@ -140410,6 +140410,7 @@
    "9SSO11438"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -140439,6 +140440,7 @@
    "6SSO11123"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -140468,6 +140470,7 @@
    "5SSO10781"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -140496,7 +140499,8 @@
   "npdes_permits": [
    "4SSO11366"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Madea Creek"
   ],
   "water_slugs": [],
@@ -140531,10 +140535,12 @@
    "CA0038474"
   ],
   "receiving_waters": [
+   "San Francisco Bay"
+  ],
+  "spill_report_waters": [
    "San Leandro Bay",
    "South Shore Beach",
-   "SF Bay",
-   "San Francisco Bay"
+   "SF Bay"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -140567,6 +140573,7 @@
    "2SSO18112"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -140597,8 +140604,10 @@
    "CA0038491"
   ],
   "receiving_waters": [
-   "Cerrito Creek",
    "San Francisco Bay"
+  ],
+  "spill_report_waters": [
+   "Cerrito Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -140630,7 +140639,8 @@
   "npdes_permits": [
    "4SSO10362"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Rio Hondo/LA River",
    "Laguna Wash / La River"
   ],
@@ -140665,6 +140675,7 @@
    "2SSO10089"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -140694,6 +140705,7 @@
    "6SSO11101"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -140723,6 +140735,7 @@
    "2SSO10090"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -140755,6 +140768,7 @@
   "receiving_waters": [
    "Pit River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -140786,6 +140800,7 @@
    "5SSO10863"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -140821,6 +140836,7 @@
    "5SSO11460"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -140851,9 +140867,11 @@
    "CA0038768"
   ],
   "receiving_waters": [
-   "American Canyon Creek",
    "North Slough (Napa River)",
    "Constructed Freshwater Wetlands"
+  ],
+  "spill_report_waters": [
+   "American Canyon Creek"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -140885,7 +140903,8 @@
   "npdes_permits": [
    "8SSO10542"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Santa Ana River"
   ],
   "water_slugs": [],
@@ -140922,6 +140941,7 @@
   "receiving_waters": [
    "Sacramento River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -140956,6 +140976,7 @@
   "receiving_waters": [
    "Angels Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -140987,6 +141008,7 @@
    "5SSO10890"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141017,7 +141039,8 @@
   "npdes_permits": [
    "6SSO11489"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Mojave River (dry riverbed)"
   ],
   "water_slugs": [],
@@ -141049,6 +141072,7 @@
    "5SSO20010"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141078,6 +141102,7 @@
    "4SSO10363"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141108,12 +141133,14 @@
    "CA0022713"
   ],
   "receiving_waters": [
-   "Janes Creek",
    "Humboldt Bay",
-   "Fickle Hill Creek",
-   "Brackish Marsh",
    "Arcata Marsh Wildlife Sanctuary",
    "Brackish Marsh, Humboldt Bay"
+  ],
+  "spill_report_waters": [
+   "Janes Creek",
+   "Fickle Hill Creek",
+   "Brackish Marsh"
   ],
   "water_slugs": [],
   "outfall_count": 3,
@@ -141146,6 +141173,7 @@
    "5SSO11217"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141175,6 +141203,7 @@
    "6SSO11493"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141204,6 +141233,7 @@
    "8SSO11753"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141233,6 +141263,7 @@
    "3SSO10255"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141263,7 +141294,8 @@
   "npdes_permits": [
    "4SSO10364"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Coyote Creek and San Gabriel River"
   ],
   "water_slugs": [],
@@ -141297,6 +141329,7 @@
    "5SSO11218"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141328,6 +141361,7 @@
    "3SSO10222"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141364,6 +141398,7 @@
    "SAN JOAQUIN RIVER",
    "Peck/Atwater Drain"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -141396,8 +141431,10 @@
    "CAC448871"
   ],
   "receiving_waters": [
-   "Auburn Ravine Creek",
    "Auburn Ravine"
+  ],
+  "spill_report_waters": [
+   "Auburn Ravine Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -141430,6 +141467,7 @@
    "5SSO10870"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141462,6 +141500,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -141493,6 +141532,7 @@
    "5SSO11219"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141524,6 +141564,7 @@
    "3SSO10223"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141555,6 +141596,7 @@
   "receiving_waters": [
    "Pacific Ocean (via San Luis Obispo Bay)"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -141586,6 +141628,7 @@
    "4SSO20071"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141617,6 +141660,7 @@
    "5SSO20091"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141648,6 +141692,7 @@
    "4SSO10366"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141679,6 +141724,7 @@
    "7SSO20023"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141709,7 +141755,8 @@
   "npdes_permits": [
    "6SSO11126"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Mojave River"
   ],
   "water_slugs": [],
@@ -141743,6 +141790,7 @@
    "2SSO10093"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141772,6 +141820,7 @@
    "5SSO10718"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141804,6 +141853,7 @@
   "receiving_waters": [
    "Bloods Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -141834,9 +141884,11 @@
    "CA0105376"
   ],
   "receiving_waters": [
-   "N/A dry wash line.",
-   "Noble Creek",
    "Cooper's Creek"
+  ],
+  "spill_report_waters": [
+   "N/A dry wash line.",
+   "Noble Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -141869,6 +141921,7 @@
    "5SSO10786"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141898,6 +141951,7 @@
    "4SSO10368"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141929,6 +141983,7 @@
    "4SSO10369"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -141959,7 +142014,8 @@
   "npdes_permits": [
    "2SSO10094"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Laurel Creek",
    "Belmont Creek"
   ],
@@ -141995,9 +142051,11 @@
    "CA0038091"
   ],
   "receiving_waters": [
-   "Carquinez Straits",
-   "Sulphur Springs Creek",
    "Carquinez Strait"
+  ],
+  "spill_report_waters": [
+   "Carquinez Straits",
+   "Sulphur Springs Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -142031,8 +142089,10 @@
    "CA0038466"
   ],
   "receiving_waters": [
-   "Strawberry Creek",
    "San Francisco Bay"
+  ],
+  "spill_report_waters": [
+   "Strawberry Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -142065,6 +142125,7 @@
    "4SSO10370"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142096,6 +142157,7 @@
    "8SSO10608"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142125,6 +142187,7 @@
    "8SSO10544"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142154,6 +142217,7 @@
    "8SSO20050"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142185,6 +142249,7 @@
    "6SSO20060"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142214,6 +142279,7 @@
    "6SSO11128"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142246,6 +142312,7 @@
   "receiving_waters": [
    "LATERAL K REC.DIST#833"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -142277,6 +142344,7 @@
    "6SSO11131"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142308,6 +142376,7 @@
    "1SSO11752"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142340,6 +142409,7 @@
    "7SSO10509"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142371,6 +142441,7 @@
    "1SSO10003"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142400,6 +142471,7 @@
    "2SSO11509"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142429,6 +142501,7 @@
    "6SSO11132"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142458,6 +142531,7 @@
    "7SSO20013"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142487,6 +142561,7 @@
    "4SSO10371"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142521,6 +142596,7 @@
   "receiving_waters": [
    "New River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -142551,7 +142627,8 @@
   "npdes_permits": [
    "8SSO10545"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Coyote Creek Watershed"
   ],
   "water_slugs": [],
@@ -142588,6 +142665,7 @@
   "receiving_waters": [
    "Marsh Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -142619,6 +142697,7 @@
    "6SSO11102"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142648,6 +142727,7 @@
    "2SSO10097"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142678,7 +142758,8 @@
   "npdes_permits": [
    "1SSO11441"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Willits creek"
   ],
   "water_slugs": [],
@@ -142709,7 +142790,8 @@
   "npdes_permits": [
    "3SSO10231"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Zaca Creek"
   ],
   "water_slugs": [],
@@ -142743,6 +142825,7 @@
    "8SSO10546"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142773,7 +142856,8 @@
   "npdes_permits": [
    "9SSO10700"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Buena Creek"
   ],
   "water_slugs": [],
@@ -142807,6 +142891,7 @@
   "receiving_waters": [
    "UNNAMED TRIBUTARY TO JACKSON CREEK"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -142839,9 +142924,11 @@
    "CA0055531"
   ],
   "receiving_waters": [
-   "Burbank Western Channel",
-   "Lockheed Channel",
    "Burbank WesternChannel"
+  ],
+  "spill_report_waters": [
+   "Burbank Western Channel",
+   "Lockheed Channel"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -142874,6 +142961,7 @@
    "2SSO10098"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -142902,7 +142990,8 @@
   "npdes_permits": [
    "2SSO10099"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Mills Creek",
    "Easton Creek",
    "San Francisco Bay"
@@ -142940,6 +143029,7 @@
   "receiving_waters": [
    "Lower San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
@@ -142971,6 +143061,7 @@
    "5SSO10791"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143000,6 +143091,7 @@
    "5SSO10879"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143029,6 +143121,7 @@
    "CA0104841"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143060,6 +143153,7 @@
    "3SSO10233"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143088,7 +143182,8 @@
   "npdes_permits": [
    "4SSO11447"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Las Virgenes Creek",
    "Bell Creek Cold Creek - Malibu Creek, Los Angeles River",
    "Los Angeles River"
@@ -143133,8 +143228,10 @@
    "CA0085278"
   ],
   "receiving_waters": [
-   "Lake Tulloch",
    "Collierville Powerhouse Effluent Channel"
+  ],
+  "spill_report_waters": [
+   "Lake Tulloch"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -143167,6 +143264,7 @@
   "receiving_waters": [
    "Jurisdictional Wetlands"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -143201,6 +143299,7 @@
   "receiving_waters": [
    "New River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -143232,6 +143331,7 @@
    "3SSO20048"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143261,6 +143361,7 @@
    "6SSO11135"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143331,10 +143432,12 @@
   ],
   "receiving_waters": [
    "Chorro Creek",
-   "American River",
-   "Los Gatos Creek",
    "Deuel Drain",
    "Dixie Drain 1-C, New River"
+  ],
+  "spill_report_waters": [
+   "American River",
+   "Los Gatos Creek"
   ],
   "water_slugs": [],
   "outfall_count": 3,
@@ -143393,6 +143496,7 @@
   "receiving_waters": [
    "Waddell Creek (East Branch)"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -143422,6 +143526,7 @@
    "3SSO10235"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143451,6 +143556,7 @@
    "4SSO10351"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143480,6 +143586,7 @@
    "3SSO11512"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143510,8 +143617,10 @@
    "CA0105015"
   ],
   "receiving_waters": [
-   "IID G-Drain",
    "G  DRAIN"
+  ],
+  "spill_report_waters": [
+   "IID G-Drain"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -143547,6 +143656,7 @@
   "receiving_waters": [
    "Napa River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -143578,6 +143688,7 @@
    "1SSO10004"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143608,8 +143719,10 @@
    "CA0053597"
   ],
   "receiving_waters": [
-   "Revlon Slough",
    "Conejo Creek"
+  ],
+  "spill_report_waters": [
+   "Revlon Slough"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -143640,6 +143753,7 @@
    "3SSO10239"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143669,6 +143783,7 @@
    "4SSO10361"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143697,7 +143812,8 @@
   "npdes_permits": [
    "9SSO11209"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "unnamed tributary to Agua Hedionda Creek"
   ],
   "water_slugs": [],
@@ -143730,10 +143846,12 @@
    "CA0047996"
   ],
   "receiving_waters": [
+   "Pacific Ocean (Carmel Bay)"
+  ],
+  "spill_report_waters": [
    "Hatton creek",
    "Pescadero creek drainage system",
-   "Pacific Ocean, Carmel Bay",
-   "Pacific Ocean (Carmel Bay)"
+   "Pacific Ocean, Carmel Bay"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -143767,6 +143885,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -143795,7 +143914,8 @@
   "npdes_permits": [
    "4SSO10374"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Dominguez Channel Watershed",
    "Dominguez Channel",
    "Wilmington channel"
@@ -143831,6 +143951,7 @@
    "5SSO11279"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143860,6 +143981,7 @@
    "2SSO10103"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143889,6 +144011,7 @@
    "3SSO20022"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143921,6 +144044,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -143950,6 +144074,7 @@
    "2SSO10104"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -143980,6 +144105,9 @@
    "CA0037648"
   ],
   "receiving_waters": [
+   "Suisun Bay"
+  ],
+  "spill_report_waters": [
    "Lauterwasser Creek",
    "San Pablo Creek, San Pablo Reservoir",
    "Las Trampas Creek",
@@ -143987,8 +144115,7 @@
    "Tice Creek",
    "San Pablo Creek",
    "Arroyo del Hombre Creek",
-   "Lauterwausser Creek",
-   "Suisun Bay"
+   "Lauterwausser Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -144021,6 +144148,7 @@
   "receiving_waters": [
    "Central San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -144052,6 +144180,7 @@
    "5SSO10721"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144082,7 +144211,8 @@
   "npdes_permits": [
    "4SSO10375"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Pacific Ocean",
    "San Gabriel River"
   ],
@@ -144117,6 +144247,7 @@
    "4SSO11406"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144149,6 +144280,7 @@
   "receiving_waters": [
    "Lake Almanor"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -144179,8 +144311,10 @@
    "CA0079081"
   ],
   "receiving_waters": [
-   "California Park Lake.",
    "Sacramento River"
+  ],
+  "spill_report_waters": [
+   "California Park Lake."
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -144213,6 +144347,7 @@
    "8SSO20032"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144244,6 +144379,7 @@
    "8SSO10551"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144275,6 +144411,7 @@
    "5SSO11280"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144305,7 +144442,8 @@
   "npdes_permits": [
    "9SSO10646"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Poggy Canyon Channel"
   ],
   "water_slugs": [],
@@ -144341,6 +144479,7 @@
   "receiving_waters": [
    "Lower San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -144371,7 +144510,8 @@
   "npdes_permits": [
    "4SSO10376"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Chino Creek (460)"
   ],
   "water_slugs": [],
@@ -144405,6 +144545,7 @@
    "2SSO18102"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144436,6 +144577,7 @@
    "5SSO20031"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144468,6 +144610,7 @@
   "receiving_waters": [
    "Russian River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -144503,6 +144646,7 @@
    "Fancher Creek",
    "Diversion Channel from Big to Little Dry Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -144537,6 +144681,7 @@
   "receiving_waters": [
    "Choachella Valley Storm Water Channel"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -144567,8 +144712,10 @@
    "CA0104973"
   ],
   "receiving_waters": [
-   "Whitewater River",
    "Coachella Valley Storm Water Channel"
+  ],
+  "spill_report_waters": [
+   "Whitewater River"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -144599,6 +144746,7 @@
    "5SSO20068"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144633,6 +144781,7 @@
   "receiving_waters": [
    "Tributary to Smuthers Ravine"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -144666,6 +144815,7 @@
   "receiving_waters": [
    "HUMBOLDT BAY/WHITE S"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -144697,6 +144847,7 @@
    "2SSO10117"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144727,8 +144878,10 @@
    "CA0105236"
   ],
   "receiving_waters": [
-   "Santa Ana River",
    "Santa Ana River, Reach 4"
+  ],
+  "spill_report_waters": [
+   "Santa Ana River"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -144763,6 +144916,7 @@
   "receiving_waters": [
    "Reach 4 of Santa Ana River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -144797,6 +144951,7 @@
   "receiving_waters": [
    "Unnamed Tributary to Powell Slough"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -144828,6 +144983,7 @@
    "4SSO10377"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144857,6 +145013,7 @@
    "4SSO10378"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144887,7 +145044,8 @@
   "npdes_permits": [
    "2SSO10109"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Pine Creek"
   ],
   "water_slugs": [],
@@ -144921,6 +145079,7 @@
    "2SSO20069"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144950,6 +145109,7 @@
    "5SSO20066"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -144984,6 +145144,7 @@
   "receiving_waters": [
    "Sacramento River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -145017,9 +145178,11 @@
    "CA8000395"
   ],
   "receiving_waters": [
-   "Temescal Wash/Creek",
    "Butterfield Drain",
    "Temescal Creek, Reach 2"
+  ],
+  "spill_report_waters": [
+   "Temescal Wash/Creek"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -145052,10 +145215,12 @@
    "9SSO10647"
   ],
   "receiving_waters": [
-   "San Diego Bay and Embarcadero Marina",
    "Pacific Ocean",
-   "Glorietta Bay",
    "San Diego Bay"
+  ],
+  "spill_report_waters": [
+   "San Diego Bay and Embarcadero Marina",
+   "Glorietta Bay"
   ],
   "water_slugs": [],
   "outfall_count": null,
@@ -145087,7 +145252,8 @@
   "npdes_permits": [
    "8SSO10566"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Santa Ana River (City SD, OC Channel D03, & OC Channel D04)",
    "Captured in catch basin",
    "OC County Storm Drain system Channel D03",
@@ -145123,6 +145289,7 @@
    "1SSO10012"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145163,7 +145330,8 @@
    "5SSO11305",
    "5SSO11446"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Musick Creek",
    "Temporary Storm Basin",
    "White Fox Creek"
@@ -145196,7 +145364,8 @@
   "npdes_permits": [
    "3SSO18100"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Morro Bay Estuary"
   ],
   "water_slugs": [],
@@ -145228,6 +145397,7 @@
    "2SSO10123"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145260,6 +145430,7 @@
   "receiving_waters": [
    "Grist Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -145289,6 +145460,7 @@
    "4SSO10379"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145323,6 +145495,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -145351,7 +145524,8 @@
   "npdes_permits": [
    "4SSO10444"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Storm Drain",
    "Verdugo Wash"
   ],
@@ -145384,6 +145558,7 @@
    "6SSO11139"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145417,6 +145592,7 @@
   "receiving_waters": [
    "Carquinez Strait"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -145446,6 +145622,7 @@
    "5SSO10719"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145475,6 +145652,7 @@
    "4SSO10353"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145504,6 +145682,7 @@
    "2SSO10101"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145533,6 +145712,7 @@
    "5SSO10720"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145562,6 +145742,7 @@
    "8SSO10548"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145590,7 +145771,8 @@
   "npdes_permits": [
    "1SSO11173"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Gannon Slough"
   ],
   "water_slugs": [],
@@ -145622,6 +145804,7 @@
    "4SSO10354"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145651,6 +145834,7 @@
    "4SSO20016"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145680,6 +145864,7 @@
    "4SSO10356"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145709,6 +145894,7 @@
    "5SSO20001"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145738,6 +145924,7 @@
    "8SSO20000"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145767,7 +145954,8 @@
    "9SSO10692",
    "9SSO20073"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Alvarado Creek"
   ],
   "water_slugs": [],
@@ -145798,7 +145986,8 @@
   "npdes_permits": [
    "2SSO11174"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "coyote creek"
   ],
   "water_slugs": [],
@@ -145830,6 +146019,7 @@
    "9SSO10645"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145859,6 +146049,7 @@
    "1SSO10069"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145888,6 +146079,7 @@
    "5SSO10760"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145917,6 +146109,7 @@
    "8SSO11383"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145946,6 +146139,7 @@
    "4SSO10380"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -145977,6 +146171,7 @@
    "3SSO10261"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146005,7 +146200,8 @@
   "npdes_permits": [
    "4SSO10381"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Ballona Creek"
   ],
   "water_slugs": [],
@@ -146036,7 +146232,8 @@
   "npdes_permits": [
    "2SSO10125"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Calabazas Creek"
   ],
   "water_slugs": [],
@@ -146070,6 +146267,7 @@
   "receiving_waters": [
    "Sand Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -146101,6 +146299,7 @@
    "5SSO10731"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146130,6 +146329,7 @@
    "3SSO10262"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146159,6 +146359,7 @@
    "8SSO10552"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146190,6 +146391,7 @@
    "3SSO10263"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146220,9 +146422,11 @@
    "CA0079049"
   ],
   "receiving_waters": [
-   "Wildhorse agricultural buffer channel",
    "Willow Slough Bypass",
    "Conaway Ranch Toe Drain"
+  ],
+  "spill_report_waters": [
+   "Wildhorse agricultural buffer channel"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -146255,6 +146459,7 @@
    "9SSO10648"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146285,7 +146490,8 @@
   "npdes_permits": [
    "1SSO10023"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "unnamed slough",
    "Elk Creek and Pacific Ocean"
   ],
@@ -146318,6 +146524,7 @@
    "5SSO11223"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146349,6 +146556,7 @@
    "5SSO20033"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146381,6 +146589,7 @@
   "receiving_waters": [
    "New York Slough"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -146410,6 +146619,7 @@
    "5SSO11492"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146439,6 +146649,7 @@
    "5SSO20063"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146468,6 +146679,7 @@
    "6SSO11140"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146497,6 +146709,7 @@
    "7SSO11440"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146525,7 +146738,8 @@
   "npdes_permits": [
    "4SSO10382"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Gabriel River",
    "Brea Creek - Coyote Creek / San Gabriel River",
    "San Jose Creek - Thompson Creek to U/S San Gabriel River",
@@ -146562,6 +146776,7 @@
    "5SSO11224"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146595,6 +146810,7 @@
   "receiving_waters": [
    "Old River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -146626,6 +146842,7 @@
    "5SSO10931"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146660,6 +146877,7 @@
   "receiving_waters": [
    "South Yuba River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -146689,6 +146907,7 @@
    "1SSO10024"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146720,6 +146939,7 @@
    "5SSO11284"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146751,6 +146971,7 @@
    "4SSO10383"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146784,6 +147005,7 @@
   "receiving_waters": [
    "RUSSIAN RIVER"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -146814,7 +147036,8 @@
   "npdes_permits": [
    "4SSO10384"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Los Angeles River"
   ],
   "water_slugs": [],
@@ -146850,6 +147073,7 @@
   "receiving_waters": [
    "Lower San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -146881,6 +147105,7 @@
    "2SSO10128"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146913,6 +147138,7 @@
   "receiving_waters": [
    "Sacramento River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -146944,6 +147170,7 @@
    "5SSO11225"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -146975,6 +147202,7 @@
   "receiving_waters": [
    "Lower San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -147009,6 +147237,7 @@
    "5SSO11020"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147040,6 +147269,7 @@
   "receiving_waters": [
    "Central San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows)",
@@ -147075,6 +147305,7 @@
    "Oakland Inner Harbor",
    "East Creek Slough"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows)",
@@ -147113,6 +147344,7 @@
   "receiving_waters": [
    "LOWER SAN FRANCISCO BAY"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -147142,6 +147374,7 @@
    "9SSO20059"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147171,6 +147404,7 @@
    "5SSO10733"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147199,7 +147433,8 @@
   "npdes_permits": [
    "8SSO18109"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Newport Back Bay"
   ],
   "water_slugs": [],
@@ -147231,6 +147466,7 @@
    "5SSO20058"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147259,7 +147495,8 @@
   "npdes_permits": [
    "2SSO10129"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Francisquito Creek"
   ],
   "water_slugs": [],
@@ -147290,7 +147527,8 @@
   "npdes_permits": [
    "8SSO10569"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "East Twin Creek Channel that connects to the Santa Ana River",
    "Storm drain leads to Wash"
   ],
@@ -147325,9 +147563,11 @@
    "CA8000188"
   ],
   "receiving_waters": [
-   "Tucalota Creek",
-   "Sycamore Creek",
    "Temescal Creek"
+  ],
+  "spill_report_waters": [
+   "Tucalota Creek",
+   "Sycamore Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -147358,6 +147598,7 @@
    "6SSO11143"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147387,6 +147628,7 @@
    "8SSO11502"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147415,7 +147657,8 @@
   "npdes_permits": [
    "9SSO10649"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Diego River"
   ],
   "water_slugs": [],
@@ -147452,6 +147695,7 @@
   "receiving_waters": [
    "Central Main Drain (tributary to the Alamo River)"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -147489,6 +147733,11 @@
    "CAC433255"
   ],
   "receiving_waters": [
+   "CARSON CREEK",
+   "Carson Creek",
+   "DEER CREEK"
+  ],
+  "spill_report_waters": [
    "Folsom Lake",
    "Unnamed creek",
    "unnamed dry tributary to Deer Creek",
@@ -147496,10 +147745,7 @@
    "Unnamed dry creek leading to Holiday Lake",
    "Green Springs Creek",
    "Unnamed drainage channel",
-   "New York Creek",
-   "CARSON CREEK",
-   "Carson Creek",
-   "DEER CREEK"
+   "New York Creek"
   ],
   "water_slugs": [],
   "outfall_count": 3,
@@ -147530,6 +147776,7 @@
    "4SSO10385"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147562,9 +147809,11 @@
    "CA0047953"
   ],
   "receiving_waters": [
-   "Franklin Creek",
    "Salinas River",
    "Huerhuero Creek"
+  ],
+  "spill_report_waters": [
+   "Franklin Creek"
   ],
   "water_slugs": [],
   "outfall_count": 4,
@@ -147597,6 +147846,7 @@
    "4SSO10386"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147629,6 +147879,7 @@
    "9SSO10570"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147661,14 +147912,16 @@
    "CA8000027"
   ],
   "receiving_waters": [
+   "Temescal Creek, Gunerson Pond",
+   "Lake Elsinore",
+   "Lee Lake, Temescal Creek"
+  ],
+  "spill_report_waters": [
    "Canyon Lake",
    "retention basin",
    "Canyon lake",
    "canyon lake",
-   "Storm drain",
-   "Temescal Creek, Gunerson Pond",
-   "Lake Elsinore",
-   "Lee Lake, Temescal Creek"
+   "Storm drain"
   ],
   "water_slugs": [],
   "outfall_count": 4,
@@ -147699,6 +147952,7 @@
    "3SSO11426"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147728,6 +147982,7 @@
    "9SSO20065"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147760,6 +148015,7 @@
   "receiving_waters": [
    "San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -147793,6 +148049,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -147823,7 +148080,8 @@
   "npdes_permits": [
    "9SSO10650"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Ultimately the Ocean"
   ],
   "water_slugs": [],
@@ -147857,6 +148115,7 @@
    "5SSO10944"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147890,10 +148149,12 @@
    "CA0108944"
   ],
   "receiving_waters": [
-   "Escondido Creek",
-   "Reidy Creek",
    "Pacific Ocean",
    "PACIFIC OCEAN"
+  ],
+  "spill_report_waters": [
+   "Escondido Creek",
+   "Reidy Creek"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -147926,6 +148187,7 @@
    "5SSO10945"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147955,6 +148217,7 @@
    "1SSO10025"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -147987,9 +148250,11 @@
    "CA0024449"
   ],
   "receiving_waters": [
-   "Palco Marsh",
-   "Martin Slough/Creek",
    "Humboldt Bay"
+  ],
+  "spill_report_waters": [
+   "Palco Marsh",
+   "Martin Slough/Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -148021,7 +148286,8 @@
   "npdes_permits": [
    "5SSO11226"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Brick Yard Storm Basin"
   ],
   "water_slugs": [],
@@ -148055,6 +148321,7 @@
    "9SSO10666"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148083,7 +148350,8 @@
   "npdes_permits": [
    "2SSO10134"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Unnamed tributary to Ledgewood Creek"
   ],
   "water_slugs": [],
@@ -148123,6 +148391,7 @@
    "Duck Pond 2",
    "Ledgewood Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 5,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -148153,8 +148422,10 @@
    "CA0108031"
   ],
   "receiving_waters": [
-   "Fallbrook Creek",
    "Pacific Ocean"
+  ],
+  "spill_report_waters": [
+   "Fallbrook Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -148185,6 +148456,7 @@
    "5SSO11227"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148219,6 +148491,7 @@
   "receiving_waters": [
    "Francis Creek, Salt River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -148250,6 +148523,7 @@
    "1SSO10100"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148279,6 +148553,7 @@
    "4SSO11540"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148310,6 +148585,7 @@
    "5SSO11285"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148340,7 +148616,8 @@
   "npdes_permits": [
    "5SSO10893"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Willow Creek",
    "Gold Creek",
    "Alder Creek",
@@ -148378,6 +148655,7 @@
    "8SSO11477"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148412,6 +148690,7 @@
   "receiving_waters": [
    "Jones Creek, tributary to Green Valley Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -148441,6 +148720,7 @@
    "1SSO11467"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148472,6 +148752,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -148503,6 +148784,7 @@
    "1SSO10030"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148535,13 +148817,15 @@
    "CA0022730"
   ],
   "receiving_waters": [
+   "Strongs Creek",
+   "Percolation Ponds/Eel River"
+  ],
+  "spill_report_waters": [
    "Rohner Creek, Strongs Creek, Eel River",
    "Rohner Creek",
    "Rohner Creek, then Eel River",
    "Rohner creek and Eel river.",
-   "Rohner creek then into the eel river.",
-   "Strongs Creek",
-   "Percolation Ponds/Eel River"
+   "Rohner creek then into the eel river."
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -148573,7 +148857,8 @@
   "npdes_permits": [
    "2SSO10135"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Foster City Lagoon and San Francisco Bay",
    "Foster City Lagoon",
    "Foster City Lagoon and Bay"
@@ -148607,6 +148892,7 @@
    "8SSO10572"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148638,6 +148924,7 @@
    "5SSO11286"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148667,6 +148954,7 @@
    "3SSO10267"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148696,6 +148984,7 @@
    "5SSO11202"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148727,6 +149016,7 @@
    "8SSO20044"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148763,6 +149053,7 @@
    "Skunk Creek",
    "Laguna Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -148794,6 +149085,7 @@
    "1SSO20026"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148823,6 +149115,7 @@
    "8SSO10574"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148852,6 +149145,7 @@
    "4SSO10387"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148882,7 +149176,8 @@
   "npdes_permits": [
    "5SSO10869"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Knickerbocker Creek"
   ],
   "water_slugs": [],
@@ -148914,6 +149209,7 @@
    "5SSO10815"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -148942,7 +149238,8 @@
   "npdes_permits": [
    "3SSO10340"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Princevalle storm channel"
   ],
   "water_slugs": [],
@@ -148975,7 +149272,8 @@
   "npdes_permits": [
    "4SSO10388"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Los Angeles River",
    "L.A. River",
    "Verdugo Wash",
@@ -149011,7 +149309,8 @@
   "npdes_permits": [
    "4SSO10389"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Gabriel River",
    "Big Dalton Wash, Walnut Creek Channel, San Gabriel River",
    "Big Dalton DB to Walnut Creek, San Gabriel River"
@@ -149047,6 +149346,7 @@
    "3SSO20045"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149079,6 +149379,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -149107,7 +149408,8 @@
   "npdes_permits": [
    "3SSO11465"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Goleta Slough Management Area D"
   ],
   "water_slugs": [],
@@ -149139,6 +149441,7 @@
    "3SSO20074"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149170,6 +149473,7 @@
    "5SSO11228"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149199,6 +149503,7 @@
    "2SSO10138"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149228,7 +149533,8 @@
    "5SSO10958",
    "CAC446876"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Wolf Creek",
    "Peabody Creek, Condon Park Pond."
   ],
@@ -149267,6 +149573,7 @@
    "Storage Ponds",
    "Astacadero Creek, Tributary to Russian River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -149296,6 +149603,7 @@
    "5SSO20028"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149325,6 +149633,7 @@
    "3SSO10272"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149356,6 +149665,7 @@
    "5SSO10820"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149390,6 +149700,7 @@
   "receiving_waters": [
    "MIDDLE FORK FEATHER RIVER"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -149420,6 +149731,7 @@
    "CA0085162"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -149448,7 +149760,8 @@
   "npdes_permits": [
    "5SSO10961"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Pine Mountain Lake"
   ],
   "water_slugs": [],
@@ -149480,6 +149793,7 @@
    "3SSO10249"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149510,7 +149824,8 @@
   "npdes_permits": [
    "3SSO10250"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Santa Maria River"
   ],
   "water_slugs": [],
@@ -149543,7 +149858,8 @@
   "npdes_permits": [
    "1SSO10035"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Pacific Ocean"
   ],
   "water_slugs": [],
@@ -149575,6 +149891,7 @@
    "5SSO11300"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149606,6 +149923,7 @@
    "2SSO10139"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149637,6 +149955,7 @@
    "5SSO11229"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149666,6 +149985,7 @@
    "1SSO10036"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149694,7 +150014,8 @@
   "npdes_permits": [
    "4SSO10390"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Coyote Creek - San Gabriel River"
   ],
   "water_slugs": [],
@@ -149728,6 +150049,7 @@
    "4SSO10391"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149759,6 +150081,7 @@
    "2SSO10140"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149791,9 +150114,11 @@
    "CA0025135"
   ],
   "receiving_waters": [
-   "Foss Creek, Russian River",
-   "Russian River",
    "Basalt Pond"
+  ],
+  "spill_report_waters": [
+   "Foss Creek, Russian River",
+   "Russian River"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -149829,6 +150154,7 @@
   "receiving_waters": [
    "Central Drain 3-D No.1"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -149858,6 +150184,7 @@
    "6SSO11506"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149886,7 +150213,8 @@
   "npdes_permits": [
    "8SSO11418"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Riverside County Flood Control Channel in Hemet CA."
   ],
   "water_slugs": [],
@@ -149920,6 +150248,7 @@
    "2SSO10141"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -149952,8 +150281,10 @@
    "CA0048941"
   ],
   "receiving_waters": [
-   "Lake Nacimiento",
    "Unnamed drainage tributary to Nacimiento River"
+  ],
+  "spill_report_waters": [
+   "Lake Nacimiento"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -149984,6 +150315,7 @@
    "6SSO18106"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150013,6 +150345,7 @@
    "4SSO10392"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150044,6 +150377,7 @@
    "6SSO11427"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150075,6 +150409,7 @@
    "7SSO18114"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150104,6 +150439,7 @@
    "4SSO11439"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150135,6 +150471,7 @@
    "5SSO10967"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150164,6 +150501,7 @@
    "5SSO20003"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150193,6 +150531,7 @@
    "6SSO11147"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150222,6 +150561,7 @@
    "3SSO11408"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150255,6 +150595,7 @@
   "receiving_waters": [
    "Pear Drain"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -150286,6 +150627,7 @@
    "8SSO10577"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150314,7 +150656,8 @@
   "npdes_permits": [
    "2SSO10143"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Reed Creek"
   ],
   "water_slugs": [],
@@ -150346,6 +150689,7 @@
    "1SSO10038"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150375,6 +150719,7 @@
    "5SSO10968"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150405,7 +150750,8 @@
   "npdes_permits": [
    "1SSO11419"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Humboldt Bay/ Pacific ocean",
    "Humboldt Bay",
    "Eureka Slough",
@@ -150441,6 +150787,7 @@
    "1SSO10068"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150472,6 +150819,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -150503,6 +150851,7 @@
    "8SSO10578"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150534,6 +150883,7 @@
    "4SSO10393"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150565,6 +150915,7 @@
    "5SSO11302"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150596,6 +150947,7 @@
    "8SSO20055"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150628,6 +150980,7 @@
   "receiving_waters": [
    "Dolson Drain"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -150658,7 +151011,8 @@
   "npdes_permits": [
    "9SSO10651"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Pond 20"
   ],
   "water_slugs": [],
@@ -150694,6 +151048,7 @@
   "receiving_waters": [
    "SALTON SEA"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -150725,6 +151080,7 @@
    "7SSO20070"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150755,6 +151111,7 @@
    "7SSO20087"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150783,7 +151140,8 @@
   "npdes_permits": [
    "4SSO10394"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Jose Creek-Thompson Creek to U/S San Gabriel River",
    "San Jose Creek and San Gabriel River"
   ],
@@ -150818,6 +151176,7 @@
    "4SSO10395"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150857,6 +151216,7 @@
    "Cucamonga Creek",
    "Chino Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 6,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -150886,6 +151246,7 @@
    "6SSO11150"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150915,6 +151276,7 @@
    "5SSO10894"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -150949,6 +151311,7 @@
   "receiving_waters": [
    "San Joaquin River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -150983,14 +151346,16 @@
    "CA8000326"
   ],
   "receiving_waters": [
-   "Shady Canyon Wetland Area",
-   "Peters Canyon Channel",
-   "San Diego Creek, Sand Canyon Wash",
    "San Diego Creek",
    "Rattlesnake Reservoir",
    "Sand Canyon Reservoir",
    "Syphon Reservoir",
    "San Joaquin Freshwater Marsh"
+  ],
+  "spill_report_waters": [
+   "Shady Canyon Wetland Area",
+   "Peters Canyon Channel",
+   "San Diego Creek, Sand Canyon Wash"
   ],
   "water_slugs": [],
   "outfall_count": 5,
@@ -151020,7 +151385,8 @@
   "npdes_permits": [
    "4SSO10396"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Gabriel River"
   ],
   "water_slugs": [],
@@ -151054,6 +151420,7 @@
    "5SSO10971"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151085,6 +151452,7 @@
    "5SSO20029"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151117,6 +151485,7 @@
   "receiving_waters": [
    "Jackson Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -151148,6 +151517,7 @@
    "5SSO11303"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151179,6 +151549,7 @@
   "receiving_waters": [
    "Willow Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -151209,7 +151580,8 @@
   "npdes_permits": [
    "6SSO11151"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Reversed Creek"
   ],
   "water_slugs": [],
@@ -151241,6 +151613,7 @@
    "8SSO10582"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151270,6 +151643,7 @@
    "5SSO20086"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151304,7 +151678,8 @@
    "5SSO11602",
    "5SSO11603"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Sandy Creek"
   ],
   "water_slugs": [],
@@ -151337,6 +151712,7 @@
    "5SSO11231"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151366,6 +151742,7 @@
    "5SSO11234"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151395,6 +151772,7 @@
    "5SSO11409"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151424,6 +151802,7 @@
    "3SSO10278"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151455,6 +151834,7 @@
    "5SSO10975"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151484,6 +151864,7 @@
    "5SSO10976"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151512,7 +151893,8 @@
   "npdes_permits": [
    "4SSO10397"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Los Angeles River",
    "Verdugo Wash - LA River"
   ],
@@ -151555,6 +151937,10 @@
    "CA0059099"
   ],
   "receiving_waters": [
+   "Marie Canyon Creek",
+   "Unnamed Canyon West of Marie Canyon Creek"
+  ],
+  "spill_report_waters": [
    "Los Angeles River",
    "Ballona Creek",
    "San Gabriel River",
@@ -151562,9 +151948,7 @@
    "Malibu Beach",
    "Zuma Canyon - Frontal Pacific Ocean",
    "Coyote Creek, Rio Hondo and San Gabriel River",
-   "Coyote Creek, San Gabriel River",
-   "Marie Canyon Creek",
-   "Unnamed Canyon West of Marie Canyon Creek"
+   "Coyote Creek, San Gabriel River"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -151595,7 +151979,8 @@
   "npdes_permits": [
    "8SSO10583"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Gabriel River"
   ],
   "water_slugs": [],
@@ -151629,6 +152014,7 @@
    "4SSO10398"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151659,7 +152045,8 @@
   "npdes_permits": [
    "9SSO10652"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "University Channel several miles upstream of Chollas Creek"
   ],
   "water_slugs": [],
@@ -151692,7 +152079,8 @@
   "npdes_permits": [
    "4SSO10399"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "La Mirada Creek / Coyote Creek / San Gabriel River",
    "Coyote Creek / San Gabriel River",
    "La Mirada Creek / Coyote Creek"
@@ -151728,6 +152116,7 @@
    "8SSO20056"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151759,6 +152148,7 @@
    "4SSO10400"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151798,12 +152188,14 @@
   "receiving_waters": [
    "Pacific Ocean",
    "Ballona Creek",
+   "Los Angeles Outer Harbor",
+   "Los Angeles River"
+  ],
+  "spill_report_waters": [
    "The Los Aneles River, which flows to the pacific ocean",
    "The Los Aneles River",
    "Los Angeles River.",
-   "Dominguez Channel",
-   "Los Angeles Outer Harbor",
-   "Los Angeles River"
+   "Dominguez Channel"
   ],
   "water_slugs": [],
   "outfall_count": 5,
@@ -151837,6 +152229,7 @@
    "4SSO10401"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151881,18 +152274,20 @@
    "CA0054313"
   ],
   "receiving_waters": [
-   "Colorado Lagoon, Alamitos Bay, Pacific Ocean",
-   "Dominguez Channel, Los Angeles Harbor, Pacific Ocean",
    "Coyote Creek",
-   "Coyote Creek, San Gabriel River, Pacific Ocean",
-   "Rio Hondo River, Los Angeles River, Pacific Ocean",
-   "Los Cerritos Channel, Pacific Ocean",
-   "Alhambra Wash",
-   "Los Angeles River, Pacific Ocean",
    "South Fork San Jose Creek",
    "San Gabriel River",
    "Zone 1 Ditch",
    "Rio Hondo"
+  ],
+  "spill_report_waters": [
+   "Colorado Lagoon, Alamitos Bay, Pacific Ocean",
+   "Dominguez Channel, Los Angeles Harbor, Pacific Ocean",
+   "Coyote Creek, San Gabriel River, Pacific Ocean",
+   "Rio Hondo River, Los Angeles River, Pacific Ocean",
+   "Los Cerritos Channel, Pacific Ocean",
+   "Alhambra Wash",
+   "Los Angeles River, Pacific Ocean"
   ],
   "water_slugs": [],
   "outfall_count": 20,
@@ -151923,7 +152318,8 @@
   "npdes_permits": [
    "9SSO10653"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Pacific Ocean - Anita Street beach",
    "Laguna Canyon Creek",
    "Pacific Ocean"
@@ -151959,6 +152355,7 @@
    "3SSO10279"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -151987,7 +152384,8 @@
   "npdes_permits": [
    "6SSO11152"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Grass Valley Lake"
   ],
   "water_slugs": [],
@@ -152019,6 +152417,7 @@
    "5SSO10981"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152051,7 +152450,8 @@
    "5SSO11015",
    "5SSO11055"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Clear Lake",
    "unnamed seasonal stream and Cache Creek",
    "Cache Creek",
@@ -152089,6 +152489,7 @@
    "8SSO10585"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152117,7 +152518,8 @@
   "npdes_permits": [
    "5SSO10827"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Lake Oroville"
   ],
   "water_slugs": [],
@@ -152149,6 +152551,7 @@
    "1SSO10041"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152177,7 +152580,8 @@
   "npdes_permits": [
    "5SSO10896"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Forbes Creek"
   ],
   "water_slugs": [],
@@ -152210,7 +152614,8 @@
   "npdes_permits": [
    "4SSO10402"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Los Cerritos Channel & Alamitos Bay"
   ],
   "water_slugs": [],
@@ -152244,6 +152649,7 @@
    "5SSO10738"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152273,6 +152679,7 @@
    "6SSO11136"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152305,9 +152712,11 @@
    "CA0037851"
   ],
   "receiving_waters": [
-   "Gallinas Creek",
-   "Gallinas Creek Canal",
    "Miller Creek"
+  ],
+  "spill_report_waters": [
+   "Gallinas Creek",
+   "Gallinas Creek Canal"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -152339,10 +152748,12 @@
    "CA0056014"
   ],
   "receiving_waters": [
-   "ARROYO CALABASAS",
    "Malibu Creek",
    "Las Virgenes Creek (tributary to Malibu Creek)",
    "Arroyo Calabasas Creek"
+  ],
+  "spill_report_waters": [
+   "ARROYO CALABASAS"
   ],
   "water_slugs": [],
   "outfall_count": 4,
@@ -152377,6 +152788,7 @@
   "receiving_waters": [
    "San Joaquin River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -152408,6 +152820,7 @@
    "5SSO11306"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152437,6 +152850,7 @@
    "4SSO10403"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152468,6 +152882,7 @@
    "2SSO11445"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152497,6 +152912,7 @@
    "5SSO20019"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152526,6 +152942,7 @@
    "6SSO11108"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152557,6 +152974,7 @@
   "receiving_waters": [
    "Reach 2 of Temescal Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -152588,6 +153006,7 @@
    "6SSO20014"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152617,6 +153036,7 @@
    "5SSO11235"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152646,6 +153066,7 @@
    "9SSO10654"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152677,6 +153098,7 @@
    "9SSO11210"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152709,6 +153131,7 @@
   "receiving_waters": [
    "Auburn Ravine Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -152744,6 +153167,7 @@
    "Feather River",
    "Feather River via ponds"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -152773,6 +153197,7 @@
    "5SSO10989"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152805,6 +153230,7 @@
   "receiving_waters": [
    "RD 777 Lateral Drain No. 2"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -152836,6 +153262,7 @@
    "2SSO10148"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152870,6 +153297,7 @@
    "San Lorenzo Creek",
    "Alamo Canal"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
@@ -152901,6 +153329,7 @@
    "5SSO11309"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152932,6 +153361,7 @@
    "5SSO10991"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -152963,9 +153393,11 @@
    "CAC429451"
   ],
   "receiving_waters": [
-   "Lodi Lake",
    "DREDGER CUT - WHITE SLOUGH",
    "Dredger Cut"
+  ],
+  "spill_report_waters": [
+   "Lodi Lake"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -153001,6 +153433,7 @@
   "receiving_waters": [
    "Wetland Tributary to Eel River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -153030,6 +153463,7 @@
    "8SSO10554"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153061,6 +153495,7 @@
    "4SSO10404"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153095,6 +153530,7 @@
   "receiving_waters": [
    "San Miguelito Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -153126,6 +153562,7 @@
    "5SSO20052"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153155,6 +153592,7 @@
    "6SSO11155"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153183,7 +153621,8 @@
   "npdes_permits": [
    "4SSO11423"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Bayshore Beach",
    "Marina Bay",
    "San Pedro Bay.",
@@ -153222,6 +153661,7 @@
    "3SSO10285"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153251,6 +153691,7 @@
    "2SSO10110"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153282,6 +153723,7 @@
    "CA0064670"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 4,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 4 rows)",
@@ -153313,6 +153755,7 @@
    "5SSO11310"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153342,6 +153785,7 @@
    "5SSO10741"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153371,6 +153815,7 @@
    "5SSO10798"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153402,6 +153847,7 @@
    "4SSO10407"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153435,6 +153881,7 @@
   "receiving_waters": [
    "Gumview Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -153466,6 +153913,7 @@
    "5SSO20051"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153503,7 +153951,8 @@
    "5SSO11319",
    "5SSO11320"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Slide Creek"
   ],
   "water_slugs": [],
@@ -153537,6 +153986,7 @@
   "receiving_waters": [
    "CENTRAL CANAL"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -153568,6 +154018,7 @@
    "5SSO10742"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153597,6 +154048,7 @@
    "6SSO11157"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153626,6 +154078,7 @@
    "4SSO10408"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153657,6 +154110,7 @@
    "1SSO10043"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153689,6 +154143,7 @@
   "receiving_waters": [
    "San Joaquin River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -153720,6 +154175,7 @@
    "5SSO20017"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153751,6 +154207,7 @@
    "2SSO18111"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153780,7 +154237,8 @@
    "2SSO10151",
    "2SSO10152"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Richardson Bay"
   ],
   "water_slugs": [],
@@ -153812,6 +154270,7 @@
    "3SSO10287"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -153843,6 +154302,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -153875,7 +154335,8 @@
    "5SSO11324",
    "5SSO11326"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "West Creek"
   ],
   "water_slugs": [],
@@ -153912,6 +154373,7 @@
    "Mariposa Creek",
    "MARIPOSA CREEK"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -153940,7 +154402,8 @@
   "npdes_permits": [
    "6SSO11109"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Markleeville Creek"
   ],
   "water_slugs": [],
@@ -153972,6 +154435,7 @@
    "5SSO10994"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154005,6 +154469,7 @@
   "receiving_waters": [
    "LURLINE CREEK"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -154036,6 +154501,7 @@
    "4SSO10409"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154069,6 +154535,7 @@
   "receiving_waters": [
    "WILDCAT DRAIN (IMPERIAL VALLEY)"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -154100,6 +154567,7 @@
    "5SSO20049"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154134,6 +154602,7 @@
   "receiving_waters": [
    "Mad River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -154166,6 +154635,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -154195,6 +154665,7 @@
    "1SSO11555"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154226,6 +154697,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -154257,6 +154729,7 @@
    "5SSO20004"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154291,6 +154764,7 @@
   "receiving_waters": [
    "Hartley Slough"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -154321,7 +154795,8 @@
   "npdes_permits": [
    "8SSO10588"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Stormwater catch basin which conveys to Pacific ocean.",
    "Storm drain system"
   ],
@@ -154353,7 +154828,8 @@
   "npdes_permits": [
    "2SSO10154"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Arroyo Corte Madera del Presidio",
    "Arroyo Corte Madera de Presidio",
    "Old Mill Creek"
@@ -154388,7 +154864,8 @@
   "npdes_permits": [
    "2SSO10155"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Millbrae Creek"
   ],
   "water_slugs": [],
@@ -154424,6 +154901,7 @@
   "receiving_waters": [
    "Lower San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -154455,6 +154933,7 @@
    "2SSO10156"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154486,6 +154965,7 @@
    "1SSO10047"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154515,6 +154995,7 @@
    "3SSO10289"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154546,6 +155027,7 @@
    "7SSO20067"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154576,8 +155058,10 @@
    "CA0079103"
   ],
   "receiving_waters": [
-   "Dry Creek (Tuolumne River tributary)",
    "San Joaquin River"
+  ],
+  "spill_report_waters": [
+   "Dry Creek (Tuolumne River tributary)"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -154610,6 +155094,7 @@
    "6SSO11158"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154639,6 +155124,7 @@
    "5SSO11002"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154668,6 +155154,7 @@
    "4SSO10410"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154699,6 +155186,7 @@
    "2SSO10157"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154728,6 +155216,7 @@
    "8SSO20042"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154759,6 +155248,7 @@
    "4SSO10411"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154791,8 +155281,10 @@
    "CA0047899"
   ],
   "receiving_waters": [
-   "Oak Creek & Pacific Ocean (Miramar Beach)",
    "Pacific Ocean"
+  ],
+  "spill_report_waters": [
+   "Oak Creek & Pacific Ocean (Miramar Beach)"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -154822,7 +155314,8 @@
   "npdes_permits": [
    "3SSO11524"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Pacific Ocean",
    "Unnamed dry ephemeral creek",
    "Un-named ephemeral creek",
@@ -154861,6 +155354,7 @@
    "3SSO18092"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154890,6 +155384,7 @@
    "3SSO10293"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154922,6 +155417,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -154951,6 +155447,7 @@
    "4SSO10412"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -154981,7 +155478,8 @@
   "npdes_permits": [
    "3SSO10332"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Anderson Lake"
   ],
   "water_slugs": [],
@@ -155018,6 +155516,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -155051,6 +155550,7 @@
   "receiving_waters": [
    "PACIFIC OCEAN"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -155081,7 +155581,8 @@
   "npdes_permits": [
    "9SSO10678"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Drainage Channel leading to Oso Creek",
    "Sulphur Creek, Aliso Creek, Pacific Ocean",
    "Salt Creek, Pacific Ocean"
@@ -155118,6 +155619,7 @@
   "receiving_waters": [
    "Old River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -155146,7 +155648,8 @@
   "npdes_permits": [
    "2SSO10111"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Stevens Creek"
   ],
   "water_slugs": [],
@@ -155181,9 +155684,11 @@
    "CA0078051"
   ],
   "receiving_waters": [
-   "Tributary of cold creek.",
-   "Tributary to Lake Siskiyou",
    "Sacramento River"
+  ],
+  "spill_report_waters": [
+   "Tributary of cold creek.",
+   "Tributary to Lake Siskiyou"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -155217,9 +155722,11 @@
    "CA0037770"
   ],
   "receiving_waters": [
-   "Vine Hill Creek",
-   "Suisun Bay",
    "Peyton Slough"
+  ],
+  "spill_report_waters": [
+   "Vine Hill Creek",
+   "Suisun Bay"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -155250,6 +155757,7 @@
    "5SSO11007"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155279,6 +155787,7 @@
    "9SSO11213"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155308,6 +155817,7 @@
    "5SSO11008"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155337,6 +155847,7 @@
    "2SSO11651"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155367,8 +155878,10 @@
    "CA0037575"
   ],
   "receiving_waters": [
-   "The Napa River",
    "Napa River"
+  ],
+  "spill_report_waters": [
+   "The Napa River"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -155399,6 +155912,7 @@
    "9SSO10655"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155428,6 +155942,7 @@
    "2SSO10160"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155457,6 +155972,7 @@
    "7SSO20021"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155491,6 +156007,7 @@
   "receiving_waters": [
    "Deer Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -155524,7 +156041,8 @@
    "5SSO11022",
    "5SSO11497"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Lake Wildwood"
   ],
   "water_slugs": [],
@@ -155566,6 +156084,7 @@
    "GAS CANYON CREEK",
    "Gas Canyon Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 6,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 6 rows)",
@@ -155603,6 +156122,7 @@
   "receiving_waters": [
    "Santa Clara River (Reach 5)"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -155632,6 +156152,7 @@
    "5SSO10725"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155662,7 +156183,8 @@
   "npdes_permits": [
    "8SSO10590"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Newport Harbor",
    "Pacific Ocean",
    "Upper Back Bay",
@@ -155701,6 +156223,7 @@
   "receiving_waters": [
    "R  Drain to Salton Sea"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -155733,6 +156256,7 @@
    "3SSO10298"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155762,6 +156286,7 @@
    "8SSO10556"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155793,6 +156318,7 @@
    "1SSO10052"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155822,6 +156348,7 @@
    "5SSO10750"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155854,6 +156381,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -155882,7 +156410,8 @@
   "npdes_permits": [
    "6SSO11110"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Lake Tahoe"
   ],
   "water_slugs": [],
@@ -155914,6 +156443,7 @@
    "6SSO11111"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155943,6 +156473,7 @@
    "4SSO20072"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -155975,10 +156506,12 @@
    "CA0037958"
   ],
   "receiving_waters": [
+   "San Pablo Bay"
+  ],
+  "spill_report_waters": [
    "a private pond located on a horse ranch",
    "Vinyeard creek.",
-   "unknow drainage/creek, tributary to Novato Creek.",
-   "San Pablo Bay"
+   "unknow drainage/creek, tributary to Novato Creek."
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -156009,6 +156542,7 @@
    "5SSO11017"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156041,15 +156575,17 @@
    "CA0038512"
   ],
   "receiving_waters": [
+   "Lake Merritt",
+   "SAN FRANCISCO BAY"
+  ],
+  "spill_report_waters": [
    "Lion creek, Arroyo Viejo creek, and Damon Slough",
    "Sausal Creek",
    "Temescal Creek",
    "Arroyo Viejo Creek",
    "Wildwood and Trestle Glen Creek",
    "14th Avenue, San Antonio creek to Estuary.",
-   "Lake Merritt",
-   "54th avenue,Peralta, Courtland, Seminary Creek",
-   "SAN FRANCISCO BAY"
+   "54th avenue,Peralta, Courtland, Seminary Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -156083,6 +156619,7 @@
    "3SSO10254"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156113,10 +156650,12 @@
    "CA0107433"
   ],
   "receiving_waters": [
+   "Pacific Ocean"
+  ],
+  "spill_report_waters": [
    "Dry creek / canyon",
    "Loma Alta Creek",
-   "Pilgrim Creek",
-   "Pacific Ocean"
+   "Pilgrim Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -156150,8 +156689,10 @@
    "CA0053961"
   ],
   "receiving_waters": [
-   "Ventura River and Pacific Ocean",
    "Ventura River"
+  ],
+  "spill_report_waters": [
+   "Ventura River and Pacific Ocean"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -156185,6 +156726,7 @@
   "receiving_waters": [
    "Western Pacific Interceptor Drainage Canal (WPIC)"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -156213,7 +156755,8 @@
   "npdes_permits": [
    "9SSO10644"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Unnamed Creek"
   ],
   "water_slugs": [],
@@ -156245,6 +156788,7 @@
    "6SSO11114"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156274,6 +156818,7 @@
    "8SSO11382"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156304,7 +156849,8 @@
   "npdes_permits": [
    "8SSO10591"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Santa Ana River",
    "Santa Ana RIver"
   ],
@@ -156339,6 +156885,7 @@
    "8SSO10640"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156370,6 +156917,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
@@ -156401,6 +156949,7 @@
    "5SSO11531"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156432,6 +156981,7 @@
    "5SSO11421"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156462,7 +157012,8 @@
   "npdes_permits": [
    "2SSO10163"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Alameda County Flood Control Channel",
    "Alameda County Flood Control Improved Channel",
    "Alameda County SD Channel"
@@ -156498,6 +157049,7 @@
   "receiving_waters": [
    "Lower San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
@@ -156529,6 +157081,7 @@
    "5SSO10752"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156558,6 +157111,7 @@
    "5SSO10799"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156591,6 +157145,7 @@
   "receiving_waters": [
    "FEATHER RIVER"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -156622,6 +157177,7 @@
    "9SSO10679"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156652,9 +157208,11 @@
    "CA0054097"
   ],
   "receiving_waters": [
-   "Patterson Road Drain and Channel Islands Harbor",
-   "Ormond lagoon waterway",
    "Pacific Ocean"
+  ],
+  "spill_report_waters": [
+   "Patterson Road Drain and Channel Islands Harbor",
+   "Ormond lagoon waterway"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -156686,7 +157244,8 @@
   "npdes_permits": [
    "3SSO11609"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Monterey Bay",
    "Pacific Ocean"
   ],
@@ -156722,8 +157281,10 @@
    "CA0038776"
   ],
   "receiving_waters": [
-   "Brooks Creek",
    "Calera Creek"
+  ],
+  "spill_report_waters": [
+   "Brooks Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -156757,7 +157318,9 @@
    "CA0107492"
   ],
   "receiving_waters": [
-   "Sycamore Creek",
+   "Sycamore Creek"
+  ],
+  "spill_report_waters": [
    "Broadway Channel to Forrester Creek"
   ],
   "water_slugs": [],
@@ -156788,7 +157351,8 @@
   "npdes_permits": [
    "3SSO18097"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Unnamed tributary to Carneros Creek.",
    "Pajaro River and Pacific Ocean"
   ],
@@ -156821,6 +157385,7 @@
    "7SSO10536"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156852,6 +157417,7 @@
    "6SSO11137"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156883,6 +157449,7 @@
    "1SSO11475"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -156917,6 +157484,7 @@
    "Matadero Creek",
    "Harbor Marsh"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -156947,7 +157515,8 @@
   "npdes_permits": [
    "4SSO10414"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Manhattan Beach-Frontal Santa Monica Bay Watershed",
    "Agua Amarga Canyon, Santa Monica Bay."
   ],
@@ -156982,6 +157551,7 @@
    "4SSO10415"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157013,6 +157583,7 @@
    "4SSO10416"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157044,6 +157615,7 @@
    "5SSO11021"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157075,6 +157647,7 @@
    "8SSO10592"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157104,6 +157677,7 @@
    "9SSO10681"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157132,7 +157706,8 @@
   "npdes_permits": [
    "3SSO11422"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Seal Rock Creek"
   ],
   "water_slugs": [],
@@ -157166,6 +157741,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -157197,6 +157773,7 @@
    "8SSO10557"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157231,6 +157808,7 @@
   "receiving_waters": [
    "Petaluma River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -157264,6 +157842,7 @@
   "receiving_waters": [
    "COARSE GOLD CREEK"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -157295,6 +157874,7 @@
    "4SSO10417"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157327,8 +157907,10 @@
    "CA0038504"
   ],
   "receiving_waters": [
-   "Indian Gulch Creek",
    "San Francisco Bay"
+  ],
+  "spill_report_waters": [
+   "Indian Gulch Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -157361,6 +157943,7 @@
    "5SSO11656"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157390,6 +157973,7 @@
    "5SSO11428"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157422,6 +158006,7 @@
   "receiving_waters": [
    "San Pablo Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -157456,6 +158041,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -157487,6 +158073,7 @@
    "2SSO10113"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157518,6 +158105,7 @@
    "5SSO20057"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157547,6 +158135,7 @@
    "8SSO10593"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157583,7 +158172,8 @@
    "5SSO11363",
    "6SSO11517"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Linda Creek"
   ],
   "water_slugs": [],
@@ -157616,6 +158206,7 @@
    "5SSO20096"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157647,6 +158238,7 @@
   "receiving_waters": [
    "ROCK CREEK"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
@@ -157679,7 +158271,9 @@
    "CAC439621"
   ],
   "receiving_waters": [
-   "Hangtown Creek",
+   "Hangtown Creek"
+  ],
+  "spill_report_waters": [
    "cedar ravine creek",
    "Cedar Ravine Creek.",
    "Hang Town Creek",
@@ -157720,6 +158314,7 @@
   "receiving_waters": [
    "SAN JOAQUIN RIVER"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -157749,6 +158344,7 @@
    "2SSO10167"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157779,7 +158375,8 @@
   "npdes_permits": [
    "5SSO10842"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Plumas Pines Golf Resort Irrigation Pond"
   ],
   "water_slugs": [],
@@ -157811,6 +158408,7 @@
    "5SSO11033"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157842,6 +158440,7 @@
    "1SSO10053"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157872,7 +158471,8 @@
   "npdes_permits": [
    "4SSO10418"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Thompson Wash, Thompson Creek, San Gabriel River Watershed.",
    "Chino Creek Channel, Santa Ana River, Prado Dam."
   ],
@@ -157907,6 +158507,7 @@
    "5SSO20012"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157936,6 +158537,7 @@
    "4SSO20095"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -157966,7 +158568,8 @@
   "npdes_permits": [
    "2SSO11430"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Oakland Estuary"
   ],
   "water_slugs": [],
@@ -157997,7 +158600,8 @@
   "npdes_permits": [
    "2SSO11507"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Francisco Bay"
   ],
   "water_slugs": [],
@@ -158029,6 +158633,7 @@
    "5SSO20008"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158063,6 +158668,7 @@
   "receiving_waters": [
    "Middle Fork, Feather River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -158094,6 +158700,7 @@
    "9SSO10656"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158128,6 +158735,7 @@
   "receiving_waters": [
    "Spanish Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -158157,6 +158765,7 @@
    "9SSO10687"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158187,6 +158796,7 @@
    "9SSO10698"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158216,6 +158826,7 @@
    "9SSO10699"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158245,6 +158856,7 @@
    "5SSO11487"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158274,7 +158886,8 @@
    "4SSO10420",
    "4SSO18098"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Pacific Ocean",
    "Dominguez Channel and Los Angeles Harbor watershed.",
    "Santa Monica Bay and Pacific Ocean",
@@ -158315,6 +158928,7 @@
    "9SSO10696"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158345,7 +158959,9 @@
    "CA0078891"
   ],
   "receiving_waters": [
-   "Sacramento River",
+   "Sacramento River"
+  ],
+  "spill_report_waters": [
    "Reeds Creek and Sacramento River",
    "Reeds Creek",
    "unnamed drainage channel."
@@ -158383,12 +158999,14 @@
    "CA0082589"
   ],
   "receiving_waters": [
+   "Sacramento River"
+  ],
+  "spill_report_waters": [
    "Clover Creek",
    "Secondary channel to Oregon Gulch",
    "Churn Creek",
    "Little Churn Creek",
-   "Sacramento river via Clear Creek",
-   "Sacramento River"
+   "Sacramento river via Clear Creek"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -158421,6 +159039,7 @@
    "8SSO10558"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158451,7 +159070,8 @@
   "npdes_permits": [
    "4SSO10421"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Santa Monica Bay/King Harbor Marina",
    "Santa Monica Bay"
   ],
@@ -158489,6 +159109,7 @@
   "receiving_waters": [
    "South Fork Eel River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -158517,7 +159138,8 @@
   "npdes_permits": [
    "2SSO10168"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Redwood Creek"
   ],
   "water_slugs": [],
@@ -158548,7 +159170,8 @@
   "npdes_permits": [
    "5SSO10757"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Kings River"
   ],
   "water_slugs": [],
@@ -158584,6 +159207,7 @@
   "receiving_waters": [
    "South Fork of Putah Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -158615,6 +159239,7 @@
    "1SSO11652"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158647,6 +159272,7 @@
   "receiving_waters": [
    "Santa Ana River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -158677,7 +159303,8 @@
   "npdes_permits": [
    "2SSO10169"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Richardson Bay"
   ],
   "water_slugs": [],
@@ -158708,7 +159335,8 @@
   "npdes_permits": [
    "2SSO10170"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "SF Bay",
    "San Francisco Bay",
    "Castro Creek",
@@ -158745,6 +159373,7 @@
    "6SSO14497"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158776,6 +159405,7 @@
    "9SSO18116"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158808,6 +159438,7 @@
   "receiving_waters": [
    "SACRAMENTO RIVER"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -158838,9 +159469,11 @@
    "CA0022748"
   ],
   "receiving_waters": [
-   "Eel River",
    "LOWER EEL RIVER",
    "LAND DISPOSAL AT IRRIGATION SITE / GROUNDWATER"
+  ],
+  "spill_report_waters": [
+   "Eel River"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -158877,6 +159510,7 @@
   "receiving_waters": [
    "Sacramento River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -158908,6 +159542,7 @@
    "5SSO10900"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158939,6 +159574,7 @@
    "5SSO10964"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -158970,6 +159606,7 @@
   "receiving_waters": [
    "unnamed tributary of Sanford Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -159001,6 +159638,7 @@
    "5SSO11039"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159029,7 +159667,8 @@
   "npdes_permits": [
    "5SSO11040"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Stanislaus River"
   ],
   "water_slugs": [],
@@ -159063,6 +159702,7 @@
    "5SSO20025"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159093,13 +159733,15 @@
    "CA0105350"
   ],
   "receiving_waters": [
+   "Reach 3 of Santa Ana River"
+  ],
+  "spill_report_waters": [
    "Santa Ana River",
    "Hole Lake",
    "Storm drain",
    "Springbrook Wash",
    "Arlington Valley Channel",
-   "Unnamed wash",
-   "Reach 3 of Santa Ana River"
+   "Unnamed wash"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -159132,6 +159774,7 @@
    "7SSO20061"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159161,6 +159804,7 @@
    "7SSO10530"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159191,8 +159835,10 @@
    "CA0037826"
   ],
   "receiving_waters": [
-   "Rodeo Creek and San pablo bay",
    "San Pablo Bay"
+  ],
+  "spill_report_waters": [
+   "Rodeo Creek and San pablo bay"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -159223,6 +159869,7 @@
    "1SSO10016"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159253,7 +159900,8 @@
   "npdes_permits": [
    "4SSO10423"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Manhattan Beach-Frontal Santa Monica Bay Watershed"
   ],
   "water_slugs": [],
@@ -159287,6 +159935,7 @@
    "5SSO20075"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159316,6 +159965,7 @@
    "6SSO11165"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159344,7 +159994,8 @@
   "npdes_permits": [
    "4SSO10424"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Alhambra Wash-Rio Hondo Channel and Los Angeles River"
   ],
   "water_slugs": [],
@@ -159381,9 +160032,11 @@
    "CAC432817"
   ],
   "receiving_waters": [
-   "Dry Creek",
    "PLEASANT GROVE CREEK",
    "DRY CREEK"
+  ],
+  "spill_report_waters": [
+   "Dry Creek"
   ],
   "water_slugs": [],
   "outfall_count": 3,
@@ -159415,7 +160068,8 @@
   "npdes_permits": [
    "2SSO10172"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Corte Madera Creek",
    "Corta Madera Creek",
    "Sleepy Hollow Creek",
@@ -159450,6 +160104,7 @@
    "8SSO10596"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159478,7 +160133,8 @@
   "npdes_permits": [
    "8SSO11424"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Santa ana river"
   ],
   "water_slugs": [],
@@ -159510,6 +160166,7 @@
    "8SSO10597"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159542,6 +160199,7 @@
    "Effluent storage pond",
    "Russian River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
@@ -159574,6 +160232,7 @@
    "5SSO11604"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159603,6 +160262,7 @@
    "5SSO11679"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159632,6 +160292,7 @@
    "5SSO11657"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159665,6 +160326,7 @@
   "receiving_waters": [
    "Sacramento River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 6,
   "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json via research/ca/federal-seed.json)",
@@ -159697,6 +160359,7 @@
    "5SSO11047"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159726,7 +160389,8 @@
    "3SSO10314",
    "3SSO11522"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Santa Rita Creek"
   ],
   "water_slugs": [],
@@ -159760,6 +160424,7 @@
    "3SSO10315"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159789,6 +160454,7 @@
    "7SSO10538"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159819,8 +160485,10 @@
    "CA0079464"
   ],
   "receiving_waters": [
-   "San Andreas Creek",
    "North Fork Calaveras River"
+  ],
+  "spill_report_waters": [
+   "San Andreas Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -159851,6 +160519,7 @@
    "3SSO10316"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159880,6 +160549,7 @@
    "8SSO11606"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159912,6 +160582,7 @@
   "receiving_waters": [
    "Santa Ana River, Reach 5"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -159944,6 +160615,7 @@
    "8SSO20076"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -159973,6 +160645,7 @@
    "8SSO10611"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160016,7 +160689,8 @@
    "8SSO18108",
    "8SSO20090"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Lytle Creek"
   ],
   "water_slugs": [],
@@ -160047,7 +160721,8 @@
   "npdes_permits": [
    "2SSO10176"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "El Zanjon Creek"
   ],
   "water_slugs": [],
@@ -160080,7 +160755,8 @@
   "npdes_permits": [
    "2SSO10177"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Pulgas Creek",
    "Brittan Creek"
   ],
@@ -160115,6 +160791,7 @@
    "9SSO10691"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160147,7 +160824,8 @@
    "9SSO10673",
    "9SSO10689"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Alpine Creek",
    "Chocolate Creek",
    "Sweetwater River"
@@ -160184,6 +160862,10 @@
    "CA0109398"
   ],
   "receiving_waters": [
+   "Pacific Ocean",
+   "Miramar Reservoir"
+  ],
+  "spill_report_waters": [
    "SAN DIEGO RIVER",
    "CHOLLAS CREEK",
    "MISSION BAY",
@@ -160191,9 +160873,7 @@
    "PACIFIC OCEAN",
    "Unnamed Creek",
    "UNNAMED CREEK",
-   "Chollas Creek",
-   "Pacific Ocean",
-   "Miramar Reservoir"
+   "Chollas Creek"
   ],
   "water_slugs": [],
   "outfall_count": 3,
@@ -160226,7 +160906,8 @@
   "npdes_permits": [
    "4SSO10425"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Jose Creek, Walnut Creek, and San Gabriel River",
    "Walnut Creek and San Gabriel River",
    "Walnut Creek/San Gabriel River",
@@ -160265,6 +160946,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -160296,6 +160978,7 @@
    "4SSO10426"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160327,6 +161010,7 @@
    "2SSO11610"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160356,6 +161040,7 @@
    "CA0038318"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 13,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 13 rows)",
@@ -160386,7 +161071,8 @@
   "npdes_permits": [
    "4SSO10427"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Rubio Wash"
   ],
   "water_slugs": [],
@@ -160420,6 +161106,7 @@
    "8SSO10562"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160451,6 +161138,7 @@
    "5SSO11338"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160489,6 +161177,7 @@
    "5SSO11486"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160519,12 +161208,14 @@
   ],
   "receiving_waters": [
    "Guadalupe River",
+   "Coyote Creek"
+  ],
+  "spill_report_waters": [
    "San Tomas Aquino Creek",
    "Lower Silver Creek",
    "Ross Creek",
    "Ruby Creek",
    "Thompson Creek",
-   "Coyote Creek",
    "Greystone Creek"
   ],
   "water_slugs": [],
@@ -160560,6 +161251,7 @@
   "receiving_waters": [
    "Artesian Slough"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -160594,6 +161286,7 @@
   "receiving_waters": [
    "SAN BENITO RIVER"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -160626,8 +161319,10 @@
    "CA0038881"
   ],
   "receiving_waters": [
-   "San Francisco Bay",
    "Lower San Francisco Bay"
+  ],
+  "spill_report_waters": [
+   "San Francisco Bay"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -160660,6 +161355,7 @@
    "3SSO10226"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160689,6 +161385,7 @@
    "3SSO10308"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160719,10 +161416,12 @@
    "CA0049224"
   ],
   "receiving_waters": [
+   "San Luis Obispo Creek"
+  ],
+  "spill_report_waters": [
    "San Luis Creek",
    "Alrita Creek",
-   "Carla Creek",
-   "San Luis Obispo Creek"
+   "Carla Creek"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -160758,7 +161457,8 @@
    "3SSO10301",
    "3SSO11534"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Lake Nacimiento"
   ],
   "water_slugs": [],
@@ -160790,6 +161490,7 @@
    "5SSO20030"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160819,6 +161520,7 @@
    "4SSO10428"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160850,7 +161552,8 @@
    "2SSO10183",
    "CA0037541"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San francisco bay",
    "Borel Creek",
    "San Mateo Creek",
@@ -160897,7 +161600,8 @@
    "2SSO10230",
    "2SSO11539"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Francisco Bay",
    "Easton Creek",
    "Redwood Creek",
@@ -160932,6 +161636,7 @@
    "3SSO10321"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160961,6 +161666,7 @@
    "3SSO11608"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -160989,7 +161695,8 @@
   "npdes_permits": [
    "2SSO10184"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Rafael Creek",
    "Glenwood Creek",
    "Erwin Creek",
@@ -161027,6 +161734,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -161056,6 +161764,7 @@
    "2SSO11605"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161085,6 +161794,7 @@
    "5SSO11342"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161115,7 +161825,8 @@
   "npdes_permits": [
    "2SSO10185"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Francisco Bay",
    "High Canal, Corte Madera Creek, San Francisco Bay"
   ],
@@ -161152,6 +161863,7 @@
    "Central San Francisco Bay",
    "Raccoon Strait in Central San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 4,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 4 rows)",
@@ -161183,6 +161895,7 @@
    "8SSO10602"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161214,6 +161927,7 @@
    "8SSO10603"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161244,11 +161958,13 @@
    "CA0048143"
   ],
   "receiving_waters": [
+   "Pacific Ocean"
+  ],
+  "spill_report_waters": [
    "Mission Creek",
    "Sycamore Creek",
    "Mission Creek Watershed",
-   "Mission Creek Water Shed",
-   "Pacific Ocean"
+   "Mission Creek Water Shed"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -161281,6 +161997,7 @@
    "3SSO10260"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161310,6 +162027,7 @@
    "2SSO10187"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161340,7 +162058,8 @@
   "npdes_permits": [
    "4SSO10429"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Santa Clara River"
   ],
   "water_slugs": [],
@@ -161375,9 +162094,11 @@
    "CA0048194"
   ],
   "receiving_waters": [
-   "Arana Creek",
-   "Hagemann Gulch Creek",
    "Pacific Ocean (Monterey Bay)"
+  ],
+  "spill_report_waters": [
+   "Arana Creek",
+   "Hagemann Gulch Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -161409,7 +162130,8 @@
   "npdes_permits": [
    "3SSO10324"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Borregas Creek Gulch",
    "Monterey Bay"
   ],
@@ -161442,6 +162164,7 @@
    "3SSO10323"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161470,7 +162193,8 @@
   "npdes_permits": [
    "3SSO10326"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Boulder Creek"
   ],
   "water_slugs": [],
@@ -161502,6 +162226,7 @@
    "3SSO10312"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161530,7 +162255,8 @@
   "npdes_permits": [
    "4SSO10430"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Gabriel River",
    "Coyote Creek / San Gabriel River"
   ],
@@ -161565,6 +162291,7 @@
    "3SSO10329"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161593,7 +162320,8 @@
   "npdes_permits": [
    "9SSO10697"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Horno Basin"
   ],
   "water_slugs": [],
@@ -161625,6 +162353,7 @@
    "3SSO11469"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161655,7 +162384,8 @@
   "npdes_permits": [
    "4SSO10431"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "If spill somehow reaches water it would be Ballona Creek"
   ],
   "water_slugs": [],
@@ -161689,6 +162419,7 @@
    "5SSO11343"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161718,6 +162449,7 @@
    "4SSO10486"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161750,11 +162482,13 @@
    "CA0022764"
   ],
   "receiving_waters": [
+   "Santa Rosa Creek",
+   "Laguna de Santa Rosa"
+  ],
+  "spill_report_waters": [
    "College Creek",
    "Oakmont Creek",
-   "Santa Rosa Creek",
-   "Austin Creek",
-   "Laguna de Santa Rosa"
+   "Austin Creek"
   ],
   "water_slugs": [],
   "outfall_count": 5,
@@ -161787,6 +162521,7 @@
    "9SSO11546"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -161818,6 +162553,7 @@
   "receiving_waters": [
    "ZANJA DE COTA CREEK"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -161848,7 +162584,8 @@
   "npdes_permits": [
    "3SSO20011"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Sanja Cota Creek"
   ],
   "water_slugs": [],
@@ -161882,15 +162619,17 @@
    "CA0077682"
   ],
   "receiving_waters": [
+   "American River",
+   "Sacramento River"
+  ],
+  "spill_report_waters": [
    "Morrison Creek",
    "Strong Ranch Slough",
-   "American River",
    "Chicken Ranch Slough",
    "Brooktree Creek",
    "Strawberry Creek",
    "Arcade Creek",
-   "Elder Creek",
-   "Sacramento River"
+   "Elder Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -161921,7 +162660,8 @@
   "npdes_permits": [
    "2SSO10114"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Richardson Bay"
   ],
   "water_slugs": [],
@@ -161954,7 +162694,8 @@
   "npdes_permits": [
    "2SSO10189"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Richardson Bay",
    "Richardson bay"
   ],
@@ -161989,6 +162730,7 @@
   "receiving_waters": [
    "Central San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
@@ -162020,6 +162762,7 @@
    "1SSO20085"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162050,8 +162793,10 @@
    "CA0048828"
   ],
   "receiving_waters": [
-   "Sidestream of Bean Creek",
    "Pacific Ocean (Monterey Bay National Marine Sanct)"
+  ],
+  "spill_report_waters": [
+   "Sidestream of Bean Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -162082,6 +162827,7 @@
    "8SSO10604"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162113,6 +162859,7 @@
    "3SSO10334"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162141,7 +162888,8 @@
   "npdes_permits": [
    "1SSO10017"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Calder Creek"
   ],
   "water_slugs": [],
@@ -162178,6 +162926,7 @@
   "receiving_waters": [
    "NEW RIVER"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -162207,6 +162956,7 @@
    "5SSO11466"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162239,6 +162989,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -162271,6 +163022,7 @@
   "receiving_waters": [
    "Raccoon Strait in Central San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -162300,6 +163052,7 @@
    "5SSO10838"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162338,6 +163091,7 @@
    "Pacific Ocean",
    "San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 37,
   "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json)",
@@ -162373,6 +163127,7 @@
    "5SSO10726"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162406,6 +163161,7 @@
   "receiving_waters": [
    "Cottonwood Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -162436,7 +163192,8 @@
   "npdes_permits": [
    "5SSO10782"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "unknown drainage ditch"
   ],
   "water_slugs": [],
@@ -162467,7 +163224,8 @@
   "npdes_permits": [
    "5SSO10806"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "cottonwood creek"
   ],
   "water_slugs": [],
@@ -162499,6 +163257,7 @@
    "5SSO10839"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162531,6 +163290,7 @@
   "receiving_waters": [
    "Churn Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -162562,6 +163322,7 @@
    "5SSO10850"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162591,6 +163352,7 @@
    "5SSO11503"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162620,6 +163382,7 @@
    "4SSO10432"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162654,6 +163417,7 @@
   "receiving_waters": [
    "Lower San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -162684,8 +163448,10 @@
    "CA0055221"
   ],
   "receiving_waters": [
-   "Arroyo Simi Flood Control Channel",
    "Arroyo Simi"
+  ],
+  "spill_report_waters": [
+   "Arroyo Simi Flood Control Channel"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -162718,6 +163484,7 @@
    "5SSO11344"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162747,6 +163514,7 @@
    "9SSO11172"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162778,6 +163546,7 @@
    "3SSO10335"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162809,6 +163578,7 @@
    "3SSO10336"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162848,14 +163618,16 @@
    "CA0023051"
   ],
   "receiving_waters": [
+   "RUSSIAN/DUTCH BILL C"
+  ],
+  "spill_report_waters": [
    "Russian River",
    "Fryer Creek",
    "SONOMA CREEK",
    "Fife Creek",
    "Sonoma Creek",
    "Pequeno Creek",
-   "Nathanson Creek",
-   "RUSSIAN/DUTCH BILL C"
+   "Nathanson Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -162886,6 +163658,7 @@
    "2SSO18096"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162922,6 +163695,7 @@
    "Napa-Sonoma Salt Marsh Restoration Area",
    "Pond 7A"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 6,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 6 rows)",
@@ -162953,6 +163727,7 @@
    "9SSO10703"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -162984,6 +163759,7 @@
   "receiving_waters": [
    "Pajaro River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -163014,7 +163790,8 @@
   "npdes_permits": [
    "4SSO10434"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Rio Hondo Channel"
   ],
   "water_slugs": [],
@@ -163048,6 +163825,7 @@
    "4SSO20053"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163082,6 +163860,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
@@ -163114,6 +163893,7 @@
    "1SSO10070"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163142,7 +163922,8 @@
   "npdes_permits": [
    "4SSO10436"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Los Angeles River"
   ],
   "water_slugs": [],
@@ -163175,7 +163956,8 @@
   "npdes_permits": [
    "5SSO11054"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Tributary to Antelope Creek",
    "Unnamed tributary of Antelope Creek",
    "Pleasant Grove Creek",
@@ -163210,7 +163992,8 @@
   "npdes_permits": [
    "2SSO10115"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Colma Creek"
   ],
   "water_slugs": [],
@@ -163246,6 +164029,7 @@
   "receiving_waters": [
    "Lower San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -163277,6 +164061,7 @@
    "3SSO10337"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163308,6 +164093,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -163338,7 +164124,8 @@
   "npdes_permits": [
    "6SSO11113"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Fallen Leaf Lake"
   ],
   "water_slugs": [],
@@ -163370,6 +164157,7 @@
    "6SSO11538"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163399,6 +164187,7 @@
    "5SSO11247"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163429,8 +164218,10 @@
    "CA0038016"
   ],
   "receiving_waters": [
-   "Sulphur Creek to Napa River",
    "Napa River"
+  ],
+  "spill_report_waters": [
+   "Sulphur Creek to Napa River"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -163468,6 +164259,7 @@
    "CHANAC CREEK",
    "0"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 5,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -163498,6 +164290,7 @@
    "5SSO20007"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163527,6 +164320,7 @@
    "8SSO10605"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163558,6 +164352,7 @@
    "5SSO10000"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163588,8 +164383,10 @@
    "CA0038482"
   ],
   "receiving_waters": [
-   "ACTIVE STORM DRAIN",
    "San Francisco Bay"
+  ],
+  "spill_report_waters": [
+   "ACTIVE STORM DRAIN"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -163621,14 +164418,16 @@
    "CA0079138"
   ],
   "receiving_waters": [
+   "San Joaquin River"
+  ],
+  "spill_report_waters": [
    "Mosher Slough",
    "5 Mile Slough",
    "Smiths Canal",
    "Calaveras River",
    "Mormon Slough",
    "Yosemite Lake and Smiths Canal",
-   "White Slough",
-   "San Joaquin River"
+   "White Slough"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -163659,6 +164458,7 @@
    "5SSO18100"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163688,6 +164488,7 @@
    "6SSO11115"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163717,6 +164518,7 @@
    "5SSO11248"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163746,6 +164548,7 @@
    "5SSO11249"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163775,6 +164578,7 @@
    "2SSO10199"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163807,6 +164611,7 @@
   "receiving_waters": [
    "Pacific Ocean, Santa Barbara Channel"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -163837,6 +164642,7 @@
    "3SSO20088"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163869,6 +164675,7 @@
   "receiving_waters": [
    "Moffett Channel"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -163901,6 +164708,7 @@
    "CAC449378"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -163931,8 +164739,10 @@
    "CA0102695"
   ],
   "receiving_waters": [
-   "Susan River",
    "Jensen Slough"
+  ],
+  "spill_report_waters": [
+   "Susan River"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -163964,6 +164774,7 @@
    "5SSO11041"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -163992,7 +164803,8 @@
   "npdes_permits": [
    "5SSO11061"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Sutter Creek"
   ],
   "water_slugs": [],
@@ -164026,6 +164838,7 @@
    "CA0084280"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164057,6 +164870,7 @@
    "5SSO10940"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164088,6 +164902,7 @@
    "6SSO11118"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164117,6 +164932,7 @@
    "6SSO11119"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164146,6 +164962,7 @@
    "2SSO10202"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164175,6 +164992,7 @@
    "5SSO10764"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164206,6 +165024,7 @@
    "5SSO10833"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164237,6 +165056,7 @@
   "receiving_waters": [
    "South Fork Battle Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -164268,6 +165088,7 @@
    "5SSO10765"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164297,6 +165118,7 @@
    "8SSO10621"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164325,7 +165147,8 @@
   "npdes_permits": [
    "4SSO10437"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Rio Hondo Channel, and eventually to Los Angeles River",
    "Eaton Wash, Rio Hondo, Los Angeles River, Pacific Ocean"
   ],
@@ -164360,6 +165183,7 @@
    "3SSO10288"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164389,6 +165213,7 @@
    "5SSO18117"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164418,6 +165243,7 @@
    "5SSO10857"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164448,13 +165274,15 @@
    "CA0056294"
   ],
   "receiving_waters": [
+   "North Fork Arroyo Conejo"
+  ],
+  "spill_report_waters": [
    "Arroyo Conejo Creek.",
    "Olsen Channel and Arroyo Conejo Creek.",
    "North Fork Arroyo Conejo Creek.",
    "South Branch Arroyo Conejo",
    "Lang Creek and Arroyo Conejo",
-   "Waverly Channel",
-   "North Fork Arroyo Conejo"
+   "Waverly Channel"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -164487,6 +165315,7 @@
    "5SSO11251"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164516,6 +165345,7 @@
    "2SSO11680"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164544,7 +165374,8 @@
   "npdes_permits": [
    "4SSO10439"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Pacific Ocean"
   ],
   "water_slugs": [],
@@ -164578,6 +165409,7 @@
    "5SSO10929"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164606,7 +165438,8 @@
   "npdes_permits": [
    "2SSO10142"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Mateo Creek"
   ],
   "water_slugs": [],
@@ -164637,7 +165470,8 @@
   "npdes_permits": [
    "2SSO10149"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Drainage ditch"
   ],
   "water_slugs": [],
@@ -164672,6 +165506,7 @@
    "EEL RIVER",
    "Eel River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 10,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 10 rows)",
@@ -164702,7 +165537,8 @@
   "npdes_permits": [
    "9SSO10707"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Aliso Creek"
   ],
   "water_slugs": [],
@@ -164737,6 +165573,7 @@
   "receiving_waters": [
    "Old River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -164768,6 +165605,7 @@
    "5SSO20064"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164796,7 +165634,8 @@
   "npdes_permits": [
    "2SSO18110"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Francisco Bay",
    "SF Bay"
   ],
@@ -164829,6 +165668,7 @@
    "3SSO10341"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164858,6 +165698,7 @@
    "1SSO11611"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164886,7 +165727,8 @@
   "npdes_permits": [
    "4SSO10497"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Lake Sherwood lake"
   ],
   "water_slugs": [],
@@ -164917,7 +165759,8 @@
   "npdes_permits": [
    "6SSO11120"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Donner Creek",
    "No official name of Retention Basin next to spill site."
   ],
@@ -164950,6 +165793,7 @@
    "5SSO10713"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -164988,6 +165832,7 @@
    "5SSO20041"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165020,6 +165865,7 @@
   "receiving_waters": [
    "LOST R/T.I.D. 44-B-1"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -165050,7 +165896,8 @@
   "npdes_permits": [
    "5SSO11068"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Turnback Creek"
   ],
   "water_slugs": [],
@@ -165082,7 +165929,8 @@
    "5SSO10746",
    "5SSO10771"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Don Pedro Reservoir",
    "Sonora Creek",
    "Lake Don Pedro",
@@ -165123,6 +165971,7 @@
    "San Joaquin River",
    "Delta-Mendota Canal"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -165154,6 +166003,7 @@
    "5SSO10772"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165183,6 +166033,7 @@
    "1SSO11490"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165215,6 +166066,7 @@
    "Merced River (via percolation)",
    "Merced River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
@@ -165248,6 +166100,7 @@
   "receiving_waters": [
    "Central San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
@@ -165281,6 +166134,7 @@
   "receiving_waters": [
    "Unnamed Tributary to the New River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -165313,7 +166167,8 @@
    "2SSO18100",
    "2SSO18101"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Strawberry Creek",
    "Strawberry Creek, North Fork"
   ],
@@ -165346,6 +166201,7 @@
    "5SSO11071"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165375,6 +166231,7 @@
    "5SSO11463"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165403,7 +166260,8 @@
   "npdes_permits": [
    "8SSO10630"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Diego Creek"
   ],
   "water_slugs": [],
@@ -165435,6 +166293,7 @@
    "5SSO11453"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165463,7 +166322,8 @@
   "npdes_permits": [
    "4SSO10498"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Ballona Creek",
    "Ballona Water Creek"
   ],
@@ -165496,6 +166356,7 @@
    "5SSO10773"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165525,6 +166386,7 @@
    "8SSO10539"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165554,6 +166416,7 @@
    "9SSO10709"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165582,7 +166445,8 @@
   "npdes_permits": [
    "3SSO10343"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Devereux Slough"
   ],
   "water_slugs": [],
@@ -165614,6 +166478,7 @@
    "3SSO10344"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165647,6 +166512,7 @@
   "receiving_waters": [
    "Russian River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -165681,6 +166547,7 @@
   "receiving_waters": [
    "Old Alameda Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -165714,6 +166581,7 @@
    "ORCHARD CREEK",
    "Orchard Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
@@ -165747,6 +166615,7 @@
   "receiving_waters": [
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -165777,7 +166646,8 @@
   "npdes_permits": [
    "8SSO10564"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Upland Basin - no channel/ocean discharge"
   ],
   "water_slugs": [],
@@ -165811,6 +166681,7 @@
    "5SSO11012"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165840,6 +166711,7 @@
    "6SSO11112"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165868,7 +166740,8 @@
   "npdes_permits": [
    "2SSO11533"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "San Francisquito Creek"
   ],
   "water_slugs": [],
@@ -165904,7 +166777,8 @@
    "5SSO11099",
    "5SSO11355"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Merced River",
    "South Fork of the Merced River"
   ],
@@ -165937,6 +166811,7 @@
    "4SSO10445"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -165965,7 +166840,8 @@
   "npdes_permits": [
    "9SSO10710"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Storm drain ultimately leads to Pacific Ocean",
    "Pilgrim Creek",
    "Pacific Ocean",
@@ -166002,6 +166878,7 @@
    "9SSO11384"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166033,6 +166910,7 @@
    "9SSO20094"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166062,6 +166940,7 @@
    "2SSO10207"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166091,6 +166970,7 @@
    "6SSO20043"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166120,6 +167000,7 @@
    "6SSO11106"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166150,6 +167031,7 @@
    "5SSO11070"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166179,6 +167061,7 @@
    "6SSO11142"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166211,6 +167094,7 @@
    "5SSO11677"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166241,6 +167125,7 @@
    "5SSO10837"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166273,6 +167158,7 @@
    "Tijuana River",
    "Pacific Ocean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
@@ -166306,10 +167192,12 @@
    "CA0077691"
   ],
   "receiving_waters": [
+   "Old Alamo Creek"
+  ],
+  "spill_report_waters": [
    "Ulatis Creek",
    "Alamo Creek",
-   "Storm Detention Area: Pine Basin 1",
-   "Old Alamo Creek"
+   "Storm Detention Area: Pine Basin 1"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -166341,7 +167229,8 @@
   "npdes_permits": [
    "9SSO10676"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "MS4 and or San Marcos Creek",
    "Unnamed Creek",
    "San Marcos Creek",
@@ -166377,9 +167266,11 @@
    "CA0037699"
   ],
   "receiving_waters": [
-   "Mare Island Strait",
    "Carquinez Strait",
    "Mare Island Strait, tributary to Carquinez Strait"
+  ],
+  "spill_report_waters": [
+   "Mare Island Strait"
   ],
   "water_slugs": [],
   "outfall_count": 2,
@@ -166411,6 +167302,7 @@
    "9SSO11203"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166443,6 +167335,7 @@
   "receiving_waters": [
    "Coachella Valley Storm Water Channel"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -166472,6 +167365,7 @@
    "5SSO11074"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166501,6 +167395,7 @@
    "3SSO10345"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166535,6 +167430,7 @@
    "Santa Clara River Estuary via Wildlife Ponds",
    "PacificOcean"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -166570,7 +167466,8 @@
    "4SSO11371",
    "4SSO11375"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Arroyo Las Posas"
   ],
   "water_slugs": [],
@@ -166602,6 +167499,7 @@
    "4SSO10487"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166631,6 +167529,7 @@
    "4SSO10440"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166662,6 +167561,7 @@
    "2SSO10203"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166692,8 +167592,10 @@
    "CA0102822"
   ],
   "receiving_waters": [
-   "Mojabe River",
    "Mojave River"
+  ],
+  "spill_report_waters": [
+   "Mojabe River"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -166724,6 +167626,7 @@
    "6SSO11425"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166755,6 +167658,7 @@
    "8SSO10635"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166789,6 +167693,7 @@
   "receiving_waters": [
    "MILL CREEK"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -166819,7 +167724,8 @@
   "npdes_permits": [
    "9SSO10660"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Buena Vista Creek"
   ],
   "water_slugs": [],
@@ -166851,6 +167757,7 @@
    "5SSO10785"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166880,6 +167787,7 @@
    "5SSO11077"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166909,6 +167817,7 @@
    "4SSO10441"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166940,6 +167849,7 @@
    "5SSO10776"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -166973,6 +167883,7 @@
   "receiving_waters": [
    "San Gabriel River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows)",
@@ -167004,6 +167915,7 @@
    "5SSO11080"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167036,8 +167948,10 @@
    "CA0048216"
   ],
   "receiving_waters": [
-   "Struve Slough",
    "Pacific Ocean"
+  ],
+  "spill_report_waters": [
+   "Struve Slough"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -167070,6 +167984,7 @@
    "1SSO10078"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167099,6 +168014,7 @@
    "1SSO10079"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167130,6 +168046,7 @@
    "1SSO20062"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167159,6 +168076,7 @@
    "2SSO10215"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167190,6 +168108,7 @@
   "receiving_waters": [
    "Central San Francisco Bay"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 5,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 5 rows)",
@@ -167220,7 +168139,8 @@
   "npdes_permits": [
    "2SSO10216"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Rheem Creek",
    "San Pablo Creek",
    "Hilltop Lake",
@@ -167257,6 +168177,7 @@
    "4SSO10442"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167287,7 +168208,8 @@
   "npdes_permits": [
    "4SSO11368"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Ballona Creek",
    "Ballona Creek, Santa Monica Bay",
    "Ballona Creek, and Santa Monica Bay",
@@ -167324,6 +168246,7 @@
    "5SSO11082"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167354,7 +168277,8 @@
   "npdes_permits": [
    "2SSO10217"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Ross Creek",
    "Los Gatos Creek",
    "Short Creek",
@@ -167388,7 +168312,8 @@
   "npdes_permits": [
    "2SSO10665"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Colma Creek/San Francisco Bay"
   ],
   "water_slugs": [],
@@ -167419,7 +168344,8 @@
   "npdes_permits": [
    "8SSO10637"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Mockingbird Canyon Wash",
    "Heacock Channel"
   ],
@@ -167455,6 +168381,7 @@
   "receiving_waters": [
    "Reach 3 of the Santa Ana River"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -167483,7 +168410,8 @@
   "npdes_permits": [
    "4SSO11407"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Lake Lindero"
   ],
   "water_slugs": [],
@@ -167520,6 +168448,7 @@
   "receiving_waters": [
    "Trifolium Drain No. 6"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -167551,6 +168480,7 @@
    "1SSO10081"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167580,6 +168510,7 @@
    "5SSO11458"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167611,6 +168542,7 @@
    "9SSO10712"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167639,7 +168571,8 @@
   "npdes_permits": [
    "4SSO10443"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Coyote Creek"
   ],
   "water_slugs": [],
@@ -167678,6 +168611,7 @@
    "SALT CREEK",
    "Salt Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -167710,8 +168644,10 @@
    "CA0023060"
   ],
   "receiving_waters": [
-   "Baechtel Creek",
    "Outlet Creek"
+  ],
+  "spill_report_waters": [
+   "Baechtel Creek"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -167745,6 +168681,7 @@
    "CAC447786"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -167779,6 +168716,7 @@
   "receiving_waters": [
    "Mark West Creek"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -167808,6 +168746,7 @@
    "5SSO11092"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167839,6 +168778,7 @@
    "5SSO11215"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167868,6 +168808,7 @@
    "5SSO11093"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167897,6 +168838,7 @@
    "5SSO10729"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167931,6 +168873,7 @@
   "receiving_waters": [
    "Tule Canal"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -167962,6 +168905,7 @@
    "2SSO10218"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -167991,6 +168935,7 @@
    "5SSO11267"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -168020,6 +168965,7 @@
    "5SSO20002"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -168048,7 +168994,8 @@
   "npdes_permits": [
    "8SSO10641"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Santa Ana River",
    "storm drain"
   ],
@@ -168082,8 +169029,10 @@
    "CA0038121"
   ],
   "receiving_waters": [
-   "beard ditch",
    "Napa River"
+  ],
+  "spill_report_waters": [
+   "beard ditch"
   ],
   "water_slugs": [],
   "outfall_count": 1,
@@ -168113,7 +169062,8 @@
   "npdes_permits": [
    "1SSO10086"
   ],
-  "receiving_waters": [
+  "receiving_waters": [],
+  "spill_report_waters": [
    "Little Humbug Creek"
   ],
   "water_slugs": [],
@@ -168153,6 +169103,7 @@
    "Feather River via disposal ponds",
    "Feather River via direct discharge"
   ],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json)",
@@ -168182,6 +169133,7 @@
    "5SSO11437"
   ],
   "receiving_waters": [],
+  "spill_report_waters": [],
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
@@ -168212,8 +169164,10 @@
    "CA0105619"
   ],
   "receiving_waters": [
-   "unnamed wash",
    "San Timoteo Creek"
+  ],
+  "spill_report_waters": [
+   "unnamed wash"
   ],
   "water_slugs": [],
   "outfall_count": 2,
