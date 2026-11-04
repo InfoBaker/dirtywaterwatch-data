@@ -318,6 +318,10 @@ def test_an_answer_of_exactly_top_rows_is_read_as_cut_short_and_the_year_halved(
     ("Robin Placeholder`s back yard", "Robin Placeholder", "back yard"),
     ("rear of Lee Placeholder's property near the ditch", "Lee Placeholder", "property near the ditch"),
     ("Mr. Placeholder’s lawn", "Placeholder", "lawn"),
+    ("Robin Placeholder's Back Yard", "Robin Placeholder", "Back Yard"),          # review 2026-11-04: any case
+    ("Robin Placeholder's backyard", "Robin Placeholder", "backyard"),
+    ("ROBIN PLACEHOLDER'S BACK YARD", "ROBIN PLACEHOLDER", "BACK YARD"),
+    ("SAMPLE TOWNSHIP'S PROPERTY", None, "SAMPLE TOWNSHIP'S PROPERTY"),
     ("Sample Township's park lot", None, "Sample Township's park lot"),
     ("Resident's basement", None, "Resident's basement"),
     ("Homeowner's lawn", None, "Homeowner's lawn"),

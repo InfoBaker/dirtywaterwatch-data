@@ -418,11 +418,12 @@ NUMBER_WORD_BEFORE = re.compile(
 
 
 # a person's name as the owner of the land, in the possessive: "<given> <surname>'s back yard" (a 2019 report types
-# the apostrophe as a backtick); two or three capitalised words, or one after Mr / Mrs / Ms / Dr
+# the apostrophe as a backtick); two or three capitalised words, or one after Mr / Mrs / Ms / Dr; the land's word in
+# any case and spelling ("Back Yard", "backyard", "BACK YARD": review 2026-11-04)
 OWNER_POSSESSIVE = re.compile(
     r"((?:(?:Mr|Mrs|Ms|Miss|Dr)\.?[ ]{1,2}[A-Z][\w.-]*)|(?:[A-Z][\w.-]*(?:[ ]{1,2}[A-Z][\w.-]*){1,2}))"
-    r"(?:'|`|\u2019)s(?=[ ]{1,2}(?:(?:back|front|side|rear)[ ]{1,2})?(?i:yard|home|house|property|residence|"
-    r"driveway|basement|lawn|lot|farm|field|garage|land|cottage|cabin)\b)")
+    r"(?:'|`|\u2019)[sS](?=[ ]{1,2}(?i:(?:(?:back|front|side|rear)[ ]{0,2})?(?:yard|home|house|property|residence|"
+    r"driveway|basement|lawn|lot|farm|field|garage|land|cottage|cabin)\b))")
 
 
 def cut_owner_names(v: str) -> str:
