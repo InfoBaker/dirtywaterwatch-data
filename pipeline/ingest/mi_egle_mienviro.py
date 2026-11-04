@@ -91,7 +91,8 @@ Record rules
 Reading
   Each run reads every IN_PROCESS report (about 330) and every COMPLETE report whose start lies in the last 60 days,
   then asks by submissionId for up to LOOKUP_MAX reports read as in process before that are in neither answer (one
-  completed after a start more than 60 days back); a submission the service no longer lists keeps its record with
+  completed after a start more than 60 days back; within LOOKUP_BUDGET_S seconds, and none after a timeout, so a slow
+  service cannot hold the hourly run); a submission the service no longer lists keeps its record with
   raw._missing_from_list_since. An answer of no open reports at all is an outage (ok false, the records kept).
   `--backfill [--from YEAR]` reads COMPLETE reports a year at a time from YEAR (default 2025) to this year, plus starts
   typed beyond next year; the list holds about 2,000 reports a year back to 2001 (2013-2026 checked on 2026-11-04).
@@ -139,6 +140,9 @@ WITHHELD_NOTE = ("The list's narrative fields (location description, discharge d
                  "residents' addresses. The source record has them.")
 COMPLETE_DAYS = 60
 LOOKUP_MAX = 40
+LOOKUP_BUDGET_S = 180          # the lookups of one hourly run stop after this; a timeout stops them at once
+LOOKUP_READ_TIMEOUT_S = 60
+clock = time.monotonic
 TOP = 5000
 BACKFILL_FROM = 2025
 MI_TZ_NOTE = "Times as EGLE's list gives them, with their UTC offsets."
@@ -656,10 +660,10 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], permits: 
 
 # ---------------------------------------------------------------- fetching
 
-def query(sess: requests.Session, flt: dict, top: int = TOP) -> list[dict]:
+def query(sess: requests.Session, flt: dict, top: int = TOP, read_timeout: float = 300) -> list[dict]:
     params = {"queryParams": json.dumps({"filter": [flt], "top": top}, separators=(",", ":")),
               "includeMetadataInResponse": "false", "responseFields": ",".join(FIELDS)}
-    r = sess.get(LIST_URL, params=params, timeout=(20, 300))
+    r = sess.get(LIST_URL, params=params, timeout=(20, read_timeout))
     r.raise_for_status()
     d = r.json()
     if not isinstance(d, dict) or not isinstance(d.get("queryResults"), list):
@@ -712,9 +716,16 @@ def lookups(sess, prev_records: list[dict], read_keys: set[str], state: dict, fe
     checked = state.setdefault("lookups", {})
     order = sorted(want, key=lambda s: checked.get(s, ""))[:LOOKUP_MAX]
     rows, gone, errors = [], set(), []
+    t0 = clock()
     for sid in order:
+        if clock() - t0 > LOOKUP_BUDGET_S:
+            errors.append(f"lookups stopped after {LOOKUP_BUDGET_S} s; the rest wait for the next run")
+            break
         try:
-            got = query(sess, {"submissionId": sid}, top=50)
+            got = query(sess, {"submissionId": sid}, top=50, read_timeout=LOOKUP_READ_TIMEOUT_S)
+        except (requests.Timeout, requests.ConnectionError) as e:
+            errors.append(f"submission {sid}: {type(e).__name__}; lookups stopped for this run")
+            break                         # a service that does not answer is not asked 40 more times
         except Exception as e:  # noqa: BLE001
             errors.append(f"submission {sid}: {type(e).__name__}")
             continue

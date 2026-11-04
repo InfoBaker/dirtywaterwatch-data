@@ -350,3 +350,37 @@ def test_activated_sludge_is_partially_treated_sewage_and_stays_a_record():
 def test_the_left_out_note_names_the_span_the_counts_cover():
     assert M.left_scope({"backfill": {"from": 2025}}) == "every report read since January 2025"
     assert M.left_scope({}).startswith("the reports read so far")
+
+
+def test_the_lookups_stop_at_a_timeout_and_within_their_budget(monkeypatch):
+    """A service that times out is not asked 40 more times (40 x 300 s would hold the hourly run for hours)."""
+    import requests
+    prev = [{"raw": {"submissionId": f"-9{i}", "sectionNumber": 1, "reportStatusId": "IN_PROCESS"}} for i in range(10)]
+    calls = []
+
+    class Slow:
+        def get(self, url, params=None, timeout=None):
+            calls.append(timeout)
+            raise requests.Timeout("read timed out")
+
+    rows, gone, errors = M.lookups(Slow(), prev, set(), {}, FETCHED)
+    assert len(calls) == 1 and calls[0][1] == M.LOOKUP_READ_TIMEOUT_S and rows == [] and gone == set()
+    assert "stopped" in errors[-1]
+    t = iter([0, 0, 0, M.LOOKUP_BUDGET_S + 1] + [M.LOOKUP_BUDGET_S + 1] * 20)
+    monkeypatch.setattr(M, "clock", lambda: next(t))
+    calls.clear()
+
+    class Empty:
+        def get(self, url, params=None, timeout=None):
+            calls.append(1)
+
+            class R:
+                def raise_for_status(self):
+                    pass
+
+                def json(self):
+                    return {"queryResults": [], "hasResultsRemaining": False}
+            return R()
+
+    rows, gone, errors = M.lookups(Empty(), prev, set(), {}, FETCHED)
+    assert len(calls) == 2 and "stopped after" in errors[-1]
