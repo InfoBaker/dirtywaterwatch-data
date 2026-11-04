@@ -34,7 +34,7 @@ on:
         required: true
         type: string
       steps:
-        description: "Steps, space-separated, from: extract obl-check registry waters osm ties (run in that order)"
+        description: "Steps, space-separated, from: extract obl-check registry waters osm names ties (run in that order)"
         required: false
         default: 'waters ties'
         type: string

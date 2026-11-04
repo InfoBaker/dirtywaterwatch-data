@@ -7,6 +7,9 @@
   "Allen's Creek",
   "Allens Creek"
  ],
+ "barbashela-creek-ga": [
+  "Babashela Creek"
+ ],
  "caloosahatchee-river-fl": [
   "CALOOSAHATCHIE River",
   "CALOOSAHATCHIE RV"
@@ -18,7 +21,8 @@
   "Charles River Basin"
  ],
  "chattahoochee-river-ga": [
-  "CHATTAHOOCHEE RV"
+  "CHATTAHOOCHEE RV",
+  "Chattachoochee"
  ],
  "chatuge-lake-ga": [
   "Lake Chatuge",
@@ -44,6 +48,9 @@
  "gloucester-harbor-ma": [
   "Gloucester Inner Harbor"
  ],
+ "intrenchment-creek-ga": [
+  "Intreachment Creek"
+ ],
  "jones-falls-md": [
   "Jones Fall"
  ],
@@ -62,6 +69,15 @@
  ],
  "lake-lawne-fl": [
   "Lawne Lake"
+ ],
+ "lake-tobesofkee-ga": [
+  "Lake Tobesofke"
+ ],
+ "lindsey-creek-ga": [
+  "Lindsay Creek"
+ ],
+ "little-cotton-indian-creek-ga": [
+  "Litle Cotton Indian Creek"
  ],
  "long-island-sound-ct": [
   "Norwalk Harbor",
@@ -83,6 +99,12 @@
  "middle-river-rouge-mi": [
   "Middle Rouge River"
  ],
+ "mossy-creek-cleveland-ga": [
+  "Mossey Creek"
+ ],
+ "mossy-creek-ga": [
+  "Mossey Creek"
+ ],
  "naugatuck-river-ct": [
   "Naugatuct River"
  ],
@@ -95,6 +117,9 @@
  "north-fork-middle-river-fl": [
   "North Fork of Middle River",
   "N Fork of Middle River"
+ ],
+ "north-fork-peachtree-creek-ga": [
+  "North Fork Peachtree"
  ],
  "northwest-branch-anacostia-river-md": [
   "Northwest Branch"
@@ -128,6 +153,9 @@
   "Pequannock River",
   "Pequonneck River"
  ],
+ "pipe-makers-canal-ga": [
+  "Pipemakers Canal"
+ ],
  "richard-b-russell-lake-ga": [
   "Richard B. Russell Reservoir"
  ],
@@ -153,6 +181,24 @@
  "south-fork-middle-river-fl": [
   "South Fork of Middle River",
   "S Fork of Middle River"
+ ],
+ "south-fork-peachtree-creek-ga": [
+  "South Fork Peachtree Crek"
+ ],
+ "south-river-ga": [
+  "SOUTHRIVER"
+ ],
+ "spirit-creek-ga": [
+  "Spirt Creek"
+ ],
+ "sugar-creek-ga": [
+  "Sugar Crek"
+ ],
+ "sugar-creek-gresham-park-ga": [
+  "Sugar Crek"
+ ],
+ "sugar-creek-valdosta-ga": [
+  "Sugar Crek"
  ],
  "tittabawassee-river-mi": [
   "Tittabawasee River"

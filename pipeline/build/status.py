@@ -843,6 +843,26 @@ def norm_town(t) -> str:
     return re.sub(r"\s+(town|city)$", "", re.sub(r"\s+", " ", t).strip())
 
 
+# A consolidated city-county as the Census names its county subdivision ('Augusta-Richmond County consolidated
+# government (balance)', 'Athens-Clarke County unified government (balance)', 'Macon-Bibb County',
+# 'Louisville/Jefferson County metro government (balance)'): the city's own name, which the operator registry and the
+# reports give ('Augusta'), is the same town (2026-11-04 GA final audit P1-1: Augusta Utilities' Butler Creek reports
+# could not choose between the Butler Creek at Augusta and the one at Kennesaw)
+CONSOLIDATED_TOWN = re.compile(r"^(?P<seat>[a-z][a-z .']*?)\s*[-/]\s*[a-z][a-z .']*?\s+county\b", re.I)
+
+
+def water_town_keys(towns) -> set[str]:
+    """norm_town of each of a water record's towns, and the city's own name for a consolidated city-county."""
+    out = set()
+    for t in towns or []:
+        out.add(norm_town(t))
+        m = CONSOLIDATED_TOWN.match(str(t or "").strip())
+        if m:
+            out.add(norm_town(m.group("seat")))
+    out.discard("")
+    return out
+
+
 def discharger_rows() -> list[dict]:
     """The operator registry's rows (data/dischargers.json)."""
     d = read_json(DATA_DIR / "dischargers.json") or {}
@@ -1506,7 +1526,7 @@ class Resolver:
                 continue
             near = self.nearest(slugs, lat, lon)
             towns = self.event_towns(ev or {})
-            by_town = [x for x in slugs if towns & {norm_town(tw) for tw in self.waters[x].get("towns") or []}]
+            by_town = [x for x in slugs if towns & water_town_keys(self.waters[x].get("towns"))]
             if near and (near[0] <= NAME_MATCH_M or len(by_town) != 1 or not PLACE_STEPS["relaxed_guard"]):
                 out.append(near[1])
                 continue
@@ -1566,8 +1586,7 @@ class Resolver:
     def town_conflict(self, ev: dict, slug: str) -> str | None:
         """When the report's towns are known (counties left out) and none is among the water's towns."""
         et = {t.replace(" ", "") for t in self.event_towns(ev) if not re.search(r"\bcounty\b", t)}
-        wt = {norm_town(t).replace(" ", "") for t in self.waters[slug].get("towns") or []}
-        wt.discard("")
+        wt = {t.replace(" ", "") for t in water_town_keys(self.waters[slug].get("towns"))}
         if et and wt and not et & wt:
             return (f"the report's town ({', '.join(sorted(et)[:3])}) is not among the water's towns "
                     f"({', '.join((self.waters[slug].get('towns') or [])[:4])})")
