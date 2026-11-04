@@ -957,3 +957,16 @@ def test_a_month_or_year_record_for_a_period_not_yet_over_has_no_time_problem(mo
            time_precision="year", fetched_at=iso(NOW - H))
     for e in (m, y):
         assert S.end_not_credible(e, NOW, BOUND_RULES) is None and S.time_problem(e, NOW, BOUND_RULES) is None
+
+
+def test_a_planned_window_of_some_weeks_keeps_the_authoritys_end():
+    """A notice of a planned bypass from today to three weeks on (notification pages read the window from the text)
+    is the authority's own window: red to its end, not the site's caution until the read comes within the bound.
+    The bound in data/rules.json catches a mistyped year, not a window of some weeks."""
+    rules = json.loads((S.DATA_DIR / "rules.json").read_text())
+    start = NOW - 2 * H
+    e = ev(status="ended", event_type="bypass", started_at=iso(start), ended_at=iso(start + timedelta(days=21)),
+           time_precision="minute", fetched_at=iso(NOW - H))
+    ivs = S.event_intervals(e, "PA", NOW, None, rules)
+    assert ivs[0]["rule"] == "discharge" and not any("end_not_used" in iv for iv in ivs)
+    assert S.end_not_credible({**e, "ended_at": "2036-08-10T11:00:00+00:00"}, NOW, rules)
