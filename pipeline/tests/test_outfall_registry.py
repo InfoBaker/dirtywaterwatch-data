@@ -300,15 +300,16 @@ TWELVE = {"CT", "MA", "ME", "NH", "RI", "VT", "NJ", "NY", "PA", "MD", "VA", "DC"
 
 def test_the_live_states_are_the_rules_list_exactly(tmp_path, monkeypatch):
     rules = json.loads((common.DATA_DIR / "rules.json").read_text())
-    assert len(rules["live_states"]) == 12 and set(rules["live_states"]) == TWELVE
-    assert set(common.live_states()) == TWELVE
+    LIVE = set(rules["live_states"])                                 # the one list (NC joined on 2026-11-04)
+    assert TWELVE <= LIVE and len(LIVE) == len(rules["live_states"]) and "OH" not in LIVE
+    assert set(common.live_states()) == LIVE
     monkeypatch.setattr(S, "_STATES", None)
-    assert S.states() == TWELVE
+    assert S.states() == LIVE
     from build import reaches as R
-    assert R.live_states() == TWELVE
-    assert RF.radar_states() == TWELVE
+    assert R.live_states() == LIVE
+    assert RF.radar_states() == LIVE
     waters = {"ohio-river-oh": {"state": "OH"}, "mill-river-ma": {"state": "MA"}}
-    assert S.derive_states(waters, rules) == TWELVE                  # a water record opens no state
+    assert S.derive_states(waters, rules) == LIVE                    # a water record opens no state
     assert "OH" in S.derive_states(waters, rules, live_only=False)    # a tool working beyond the live states
     assert S.derive_states(waters, {"red": {"by_state": {"CT": {}}}}) == {"OH", "MA", "CT"}   # rules without the list
     assert common.rules_live_states({"live_states": ["ma", "XX1", 3, "Oh"]}) == {"MA", "OH"}
