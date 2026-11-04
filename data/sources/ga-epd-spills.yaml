@@ -10,8 +10,8 @@ level: "state"
 # Cadence (pipeline/ingest/ga_epd_spills.py docstring): each business day, about one business day of
 #   latency. The workbook is a rolling 30-day list with no row id: history is built from the dated
 #   postings (older dated files stay at the same URL pattern); rows that leave the window are kept.
-# Backfill (python -m ingest.ga_epd_spills --backfill; once, by hand or a one-off dispatched workflow, never in the
-#   hourly run): every dated posting EPD still serves (on 2026-11-04, every business day from 2025-10-09; earlier
+# Backfill (python -m ingest.ga_epd_spills --backfill; once, by hand or in a dispatched refresh with the backfill input
+#   "ga_epd_spills", never in the scheduled hourly run): every dated posting EPD still serves (on 2026-11-04, every business day from 2025-10-09; earlier
 #   days answer 404), so spills that began from 2025-09-09. Same 13 columns (ten files add EPD's
 #   point, used; the 2026-10-13 file an end date, kept in raw, not used), day precision, no time. The
 #   postings are applied oldest first from no records (--rebuild), so a backfilled row and the daily feed's row are
