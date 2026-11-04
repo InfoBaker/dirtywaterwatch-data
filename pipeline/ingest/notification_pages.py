@@ -9,11 +9,16 @@ Why (owner, 2026-11-03)
   them show a status. This module watches them all: whether each page answers, whether it changed and when,
   whether it shows a current status, and any dated overflow notice that appears on it.
 
-The register: data/notice-channels.json
+The register: data/notice-channels.json, or per state data/notice-channels/<st>.json
   {about, schema_version, schema: {fields, enums, rules}, channels: [row, ...]}: one row per public-notice
   channel per operator or agency in any state (SCHEMA below; validate_register() is the validator, run by
   tests/test_notice_channels.py). Rows are sorted by (state, id) so builders working on different states
   merge cleanly. `basis_kind` says why the channel is public: "law", "permit" or "voluntary".
+  Per state (docs/national-approach.md §4.2): data/notice-channels/<st>.json {about, schema_version, state,
+  channels} holds that state's rows sorted by id, the same schema, and data/notice-channels/_schema.json the
+  schema block. load_register() reads either layout (both at once: the rows of both, and validate_layout() fails);
+  validate_layout() runs validate_register() on each file and checks ids across files, the file names and that
+  every row is in its state's file. `--split` writes the per-state files from the single file and removes it.
 
 Fetching
   Each distinct URL of the monitored rows is fetched once a run (rows sharing a URL share the fetch: New
@@ -56,6 +61,7 @@ Page health (data/build/notice-pages/health.json; out/coverage.json states.<ST>.
   Per operator and permit (`operators`): the most telling of its channels' lines (ROLLUP_ORDER).
 
 Run from pipeline/:  python -m ingest.notification_pages [--state NJ] [--validate] [--write-schema] [--no-fetch]
+                     python -m ingest.notification_pages --split     (once: the single file -> per state)
 Cadence: every refresh (hourly); a row's `every_hours` spaces out a slow page.
 """
 from __future__ import annotations
@@ -76,6 +82,9 @@ from common import (BROWSER_HEADERS, BUILD_DIR, DATA_DIR, HEADERS, ROOT, event, 
 
 SOURCE_ID = "notification-pages"
 REGISTER = DATA_DIR / "notice-channels.json"
+REGISTER_DIR = DATA_DIR / "notice-channels"          # the per-state layout: <st>.json and _schema.json
+SCHEMA_FILE = "_schema.json"
+STATE_FILE = re.compile(r"^([a-z]{2})\.json$")
 STORE = BUILD_DIR / "notice-pages"
 PAGES_DIR = STORE / "pages"
 HEALTH = STORE / "health.json"
@@ -372,11 +381,11 @@ def barrier_for(r: dict) -> tuple[str | None, str | None]:
     return None, f"the register does not say what keeps it off the web: {low[:120]}"
 
 
-def apply_barriers(path: Path = REGISTER) -> dict:
-    """Write barrier (and barrier_review) on every row of the register, with the current schema block; returns
-    {barrier or 'review': rows}."""
+def apply_barriers(path: Path | None = None) -> dict:
+    """Write barrier (and barrier_review) on every row of the register, with the current schema block, in the layout
+    it has (path: the single file or the per-state folder; default: data/); returns {barrier or 'review': rows}."""
     from collections import Counter
-    doc = read_json(path, None) or {}
+    doc = load_register(path)
     counts = Counter()
     for r in doc.get("channels") or []:
         bar, review = barrier_for(r)
@@ -386,27 +395,193 @@ def apply_barriers(path: Path = REGISTER) -> dict:
         else:
             r.pop("barrier_review", None)
         counts[bar or ("review" if review else "none")] += 1
-    chans = sorted(doc.get("channels") or [], key=lambda r: (str(r.get("state")), str(r.get("id"))))
-    out = {"about": ABOUT, "schema_version": 1, "schema": SCHEMA, "channels": chans}
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
-    tmp.replace(path)
+    save_register(doc.get("channels") or [], path)
     return dict(counts)
 
 
-def load_register(path: Path = REGISTER) -> dict:
-    return read_json(path, None) or {"about": ABOUT, "schema_version": 1, "schema": SCHEMA, "channels": []}
+# ---------------------------------------------------------------- the two layouts
+
+def _key(r) -> tuple[str, str]:
+    return (str(r.get("state")), str(r.get("id"))) if isinstance(r, dict) else ("", "")
 
 
-def write_schema(path: Path = REGISTER) -> dict:
-    """The register file with the current schema block, keeping its channels (sorted by state, id)."""
-    doc = read_json(path, None) or {}
-    chans = sorted(doc.get("channels") or [], key=lambda r: (str(r.get("state")), str(r.get("id"))))
-    out = {"about": ABOUT, "schema_version": 1, "schema": SCHEMA, "channels": chans}
+def _dump(path: Path, obj) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
+    tmp.write_text(json.dumps(obj, indent=1, ensure_ascii=False) + "\n")
     tmp.replace(path)
-    return out
+
+
+def _where(path: Path | None) -> tuple[Path | None, Path | None]:
+    """(single file, per-state folder) to read or write: a given file or folder alone, else both under data/."""
+    if path is None:
+        return REGISTER, REGISTER_DIR
+    path = Path(path)
+    return (None, path) if path.is_dir() or path.suffix != ".json" else (path, None)
+
+
+def register_layout(path: Path | None = None) -> str:
+    """"single" (data/notice-channels.json), "per_state" (data/notice-channels/<st>.json), "both" or "none"."""
+    single, folder = _where(path)
+    has_single = single is not None and single.exists()
+    has_folder = folder is not None and folder.is_dir() and any(folder.glob("*.json"))
+    return {(True, True): "both", (True, False): "single", (False, True): "per_state"}.get((has_single, has_folder), "none")
+
+
+def state_files(folder: Path = REGISTER_DIR) -> list[Path]:
+    """The register files of the per-state folder (every *.json but the schema file), sorted by name."""
+    return sorted(p for p in Path(folder).glob("*.json") if p.name != SCHEMA_FILE) if Path(folder).is_dir() else []
+
+
+def state_doc(state: str, rows: list[dict]) -> dict:
+    """One state's register file: its rows sorted by id."""
+    return {"about": ABOUT, "schema_version": 1, "state": state.upper(), "channels": sorted(rows, key=_key)}
+
+
+def load_register(path: Path | None = None) -> dict:
+    """The register in either layout, as one document {about, schema_version, schema, channels} with the rows sorted
+    by (state, id). path: the single file or the per-state folder (default: whichever data/ has; with both, the rows
+    of both, which validate_layout() reports). The single file is returned as written. ValueError when a file is not
+    JSON (the monitor tries again next refresh)."""
+    single, folder = _where(path)
+    layout = register_layout(path)
+    if layout == "single":
+        return read_json(single, None) or {"about": ABOUT, "schema_version": 1, "schema": SCHEMA, "channels": []}
+    if layout == "none":
+        return {"about": ABOUT, "schema_version": 1, "schema": SCHEMA, "channels": []}
+    rows, files = [], {}
+    if layout == "both":
+        rows += list((read_json(single, None) or {}).get("channels") or [])
+        files[single.name] = len(rows)
+    for f in state_files(folder):
+        chans = (read_json(f, None) or {}).get("channels") or []
+        files[f"{folder.name}/{f.name}"] = len(chans)
+        rows += list(chans)
+    schema = (read_json(folder / SCHEMA_FILE, None) or {}).get("schema") if (folder / SCHEMA_FILE).exists() else None
+    return {"about": ABOUT, "schema_version": 1, "schema": schema or SCHEMA, "channels": sorted(rows, key=_key),
+            "layout": layout, "files": files}
+
+
+def save_register(channels: list[dict], path: Path | None = None) -> str:
+    """Write the rows in the layout the register has (a new register: the per-state folder when it is the path given,
+    else the single file), with the current schema block; per state, a state left without rows loses its file.
+    Returns the layout. ValueError with both layouts present (merge them first) or a row without a state code."""
+    single, folder = _where(path)
+    layout = register_layout(path)
+    if layout == "both":
+        raise ValueError("both data/notice-channels.json and data/notice-channels/ exist: merge them first")
+    if layout == "per_state" or (layout == "none" and single is None):
+        by: dict[str, list] = {}
+        for r in channels:
+            st = r.get("state") if isinstance(r, dict) else None
+            if not (isinstance(st, str) and st in STATE_CODES):
+                raise ValueError(f"row {r.get('id') if isinstance(r, dict) else r!r}: state {st!r} is not a postal code")
+            by.setdefault(st, []).append(r)
+        for st, rows in by.items():
+            _dump(folder / f"{st.lower()}.json", state_doc(st, rows))
+        _dump(folder / SCHEMA_FILE, {"about": ABOUT, "schema_version": 1, "schema": SCHEMA,
+                                     "layout": "one file per state, <st>.json {about, schema_version, state, channels}"})
+        for f in state_files(folder):
+            m = STATE_FILE.match(f.name)
+            if m and m.group(1).upper() not in by:
+                f.unlink()
+        return "per_state"
+    _dump(single, {"about": ABOUT, "schema_version": 1, "schema": SCHEMA, "channels": sorted(channels, key=_key)})
+    return "single"
+
+
+def write_schema(path: Path | None = None) -> dict:
+    """The register with the current schema block, keeping its channels (sorted by state, id), in its layout."""
+    doc = load_register(path)
+    save_register(doc.get("channels") or [], path)
+    return load_register(path)
+
+
+def validate_layout(path: Path | None = None, dischargers: list[dict] | None = None, root: Path | None = None) -> list[str]:
+    """Every problem with the register in whichever layout it has (empty: valid): the single file through
+    validate_register(); per state, validate_register() on each file (its errors prefixed with the file), plus the
+    file names (<st>.json, lower case, a postal code), every row in its own state's file, the file's `state`, and
+    ids unique across files. Both layouts at once is an error (and both are checked)."""
+    single, folder = _where(path)
+    layout = register_layout(path)
+    if layout in ("single", "none"):
+        doc = load_register(path)
+        return validate_register(doc, dischargers, root)
+    errs: list[str] = []
+    seen: dict[str, str] = {}
+    parts: list[tuple[str, object, str | None]] = []
+    if layout == "both":
+        errs.append(f"both {single.name} and {folder.name}/ exist: one layout only (run --split on the single file, "
+                    f"or move its rows into the state files)")
+        try:
+            parts.append((single.name, read_json(single, None), None))
+        except ValueError as e:
+            errs.append(f"{single.name}: not JSON ({e})")
+    for f in state_files(folder):
+        name = f"{folder.name}/{f.name}"
+        m = STATE_FILE.match(f.name)
+        if not m or m.group(1).upper() not in STATE_CODES:
+            errs.append(f"{name}: a state file is named <st>.json with a lower-case postal code")
+            continue
+        try:
+            parts.append((name, read_json(f, None), m.group(1).upper()))
+        except ValueError as e:
+            errs.append(f"{name}: not JSON ({e})")
+    for name, doc, st in parts:
+        errs += [f"{name}: {e}" for e in validate_register(doc, dischargers, root)]
+        if not isinstance(doc, dict) or not isinstance(doc.get("channels"), list):
+            continue
+        if st is not None and doc.get("state") != st:
+            errs.append(f"{name}: state is {doc.get('state')!r}, not {st!r}")
+        for i, r in enumerate(doc["channels"]):
+            if not isinstance(r, dict):
+                continue
+            if st is not None and r.get("state") != st:
+                errs.append(f"{name}: channels[{i}] ({r.get('id')}): state {r.get('state')!r} belongs in "
+                            f"{str(r.get('state')).lower()}.json")
+            rid = r.get("id")
+            if isinstance(rid, str):
+                if rid in seen and seen[rid] != name:
+                    errs.append(f"{name}: channels[{i}] ({rid}): duplicate id, also in {seen[rid]}")
+                seen.setdefault(rid, name)
+    return errs
+
+
+def split_register(path: Path | None = None, folder: Path | None = None) -> dict:
+    """The single file (default data/notice-channels.json) written as data/notice-channels/<st>.json, each state's
+    rows sorted by id, and _schema.json; the rows read back from the folder must equal the file's (else the folder is
+    removed and nothing changes); then the single file is removed. Returns {state: rows}. ValueError, with nothing
+    written, when the folder already has files, the single file is missing or not a register, or a row has no
+    state code."""
+    import shutil
+    single = Path(path) if path is not None else REGISTER
+    folder = Path(folder) if folder is not None else single.with_suffix("")
+    if not single.exists():
+        raise ValueError(f"{single.name} does not exist: nothing to split")
+    if folder.exists() and any(folder.iterdir()):
+        raise ValueError(f"{folder.name}/ already has files: the register is split (or half split); nothing written")
+    doc = read_json(single, None)
+    if not isinstance(doc, dict) or not isinstance(doc.get("channels"), list):
+        raise ValueError(f"{single.name} is not a register (an object with a 'channels' list)")
+    rows = doc["channels"]
+    bad = [r.get("id") if isinstance(r, dict) else repr(r) for r in rows
+           if not (isinstance(r, dict) and isinstance(r.get("state"), str) and r["state"] in STATE_CODES)]
+    if bad:
+        raise ValueError(f"{len(bad)} row(s) without a state code, so with no file to go to: {bad[:5]}")
+    folder.mkdir(parents=True, exist_ok=True)
+    try:
+        save_register(rows, folder)
+        back = load_register(folder)["channels"]
+        if sorted(rows, key=lambda r: json.dumps(r, sort_keys=True)) != sorted(back, key=lambda r: json.dumps(r, sort_keys=True)):
+            raise ValueError("the per-state files do not read back as the single file's rows")
+    except Exception:
+        shutil.rmtree(folder, ignore_errors=True)
+        raise
+    single.unlink()
+    out: dict[str, int] = {}
+    for r in rows:
+        out[r["state"]] = out.get(r["state"], 0) + 1
+    return dict(sorted(out.items()))
 
 
 # ---------------------------------------------------------------- text extraction
@@ -1099,26 +1274,50 @@ def main(argv=None) -> int:
     ap.add_argument("--write-schema", action="store_true", help="write the schema block into the register and stop")
     ap.add_argument("--barriers", action="store_true", help="write each row's barrier into the register and stop")
     ap.add_argument("--no-fetch", action="store_true", help="rebuild health from the snapshots without fetching")
+    ap.add_argument("--split", action="store_true",
+                    help="write data/notice-channels/<st>.json from data/notice-channels.json, remove it, and stop")
+    ap.add_argument("--register", type=Path, default=None,
+                    help="the register to use: the single file or the per-state folder (default: whichever data/ has)")
     a = ap.parse_args(argv)
-    if a.write_schema:
-        doc = write_schema()
-        print(f"{REGISTER}: schema written, {len(doc['channels'])} channels kept")
-        return 0
-    if a.barriers:
-        print(f"{REGISTER}: barriers written: {apply_barriers()}")
+    where = a.register
+    shown = where or f"{REGISTER.name} | {REGISTER_DIR.name}/"
+    if a.split:
+        try:
+            counts = split_register(where, None)
+        except ValueError as e:
+            print(f"{SOURCE_ID}: not split: {e}", file=sys.stderr)
+            return 1
+        folder = (Path(where) if where else REGISTER).with_suffix("")
+        print(f"{folder}: {sum(counts.values())} channels in {len(counts)} state files "
+              f"({', '.join(f'{k} {v}' for k, v in counts.items())}); the single file is removed")
+        errs = validate_layout(folder, read_json(DATA_DIR / "dischargers.json", []), ROOT)
+        if errs:
+            print(f"{SOURCE_ID}: the split register has {len(errs)} problem(s) (as the single file had):\n  "
+                  + "\n  ".join(errs[:40]), file=sys.stderr)
         return 0
     try:
-        doc = load_register()
+        if a.write_schema:
+            doc = write_schema(where)
+            print(f"{shown}: schema written ({register_layout(where)}), {len(doc['channels'])} channels kept")
+            return 0
+        if a.barriers:
+            print(f"{shown}: barriers written ({register_layout(where)}): {apply_barriers(where)}")
+            return 0
+    except ValueError as e:
+        print(f"{SOURCE_ID}: nothing written: {e}", file=sys.stderr)
+        return 1
+    try:
+        doc = load_register(where)
     except (OSError, ValueError) as e:                     # another builder mid-write: try again next refresh
         print(f"{SOURCE_ID}: the register could not be read ({e}); nothing fetched", file=sys.stderr)
         return 1
-    errs = validate_register(doc, read_json(DATA_DIR / "dischargers.json", []), ROOT)
+    errs = validate_layout(where, read_json(DATA_DIR / "dischargers.json", []), ROOT)
     if errs:
         print(f"{SOURCE_ID}: the register has {len(errs)} problem(s):\n  " + "\n  ".join(errs[:40]), file=sys.stderr)
         if a.validate:
             return 1
     if a.validate:
-        print(f"{REGISTER}: valid, {len(doc['channels'])} channels")
+        print(f"{shown}: valid ({register_layout(where)}), {len(doc['channels'])} channels")
         return 0
     bad = {r.get("id") for r in doc["channels"] if isinstance(r, dict) and validate_register(
         {"schema_version": 1, "channels": [r]})}

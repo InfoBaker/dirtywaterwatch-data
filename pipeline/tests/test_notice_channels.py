@@ -1,5 +1,6 @@
-"""data/notice-channels.json: the public-notice channel register (schema and validator in
-ingest/notification_pages.py). The real file must validate; the validator must catch each kind of mistake."""
+"""data/notice-channels.json (or per state data/notice-channels/<st>.json): the public-notice channel register
+(schema and validator in ingest/notification_pages.py). The real register must validate; the validator must catch each
+kind of mistake."""
 import copy
 
 import pytest
@@ -9,12 +10,12 @@ from pathlib import Path
 from ingest import notification_pages as M
 
 ROOT = Path(__file__).resolve().parents[2]
-DOC = json.loads((ROOT / "data" / "notice-channels.json").read_text())
+DOC = M.load_register()          # data/notice-channels.json or data/notice-channels/<st>.json, whichever is there
 DIS = json.loads((ROOT / "data" / "dischargers.json").read_text())
 
 
 def test_the_register_validates():
-    errs = M.validate_register(DOC, DIS, ROOT)
+    errs = M.validate_layout(None, DIS, ROOT)
     assert errs == [], "\n".join(errs)
     assert DOC["schema"]["enums"] == M.ENUMS and set(DOC["schema"]["fields"]) == set(M.REQUIRED)
 

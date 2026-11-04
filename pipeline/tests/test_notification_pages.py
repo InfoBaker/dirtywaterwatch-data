@@ -207,7 +207,7 @@ def test_health_wording_for_each_state_of_a_page():
 def test_new_jersey_seeds_stand_as_first_snapshots(tmp_path):
     if not (ROOT / "research" / "nj" / "raw").exists():
         pytest.skip("research/nj/raw/ (git-ignored seed copies) is not on this clone")
-    doc = json.loads((ROOT / "data" / "notice-channels.json").read_text())
+    doc = M.load_register()
     nj = [r for r in doc["channels"] if r["state"] == "NJ"]
     out = M.run(nj, now=datetime(2026, 11, 3, 13, tzinfo=UTC), save=False, fetch_pages=False, store=tmp_path)
     by = {o["operator_id"]: o for o in out["health"]["states"]["NJ"]["operators"] if o["operator_id"]}

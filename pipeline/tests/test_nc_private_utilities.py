@@ -139,7 +139,8 @@ def test_the_unresolved_file_lists_every_report_without_a_permit_with_its_reason
 
 
 def test_the_statewide_notice_rows_cover_private_and_industrial_operators():
-    reg = json.loads((DATA_DIR / "notice-channels.json").read_text())["channels"]
+    from ingest.notification_pages import load_register
+    reg = load_register()["channels"]           # either layout of the register
     rows = {r["id"]: r for r in reg}
     for rid in ("nc-operator-press-release", "nc-operator-newspaper-notice"):
         r = rows[rid]
