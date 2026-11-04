@@ -1893,9 +1893,15 @@ class Resolver:
         out = self._resolve(ev)
         if text_over_flag(ev):
             # the water comes from the notice's text against its form's flag: the placement says so (TEXT_OVER_FLAG)
-            basis = str((ev.get("raw") or {}).get("_reached_water_basis") or TEXT_OVER_FLAG_NOTE)
+            raw = ev.get("raw") or {}
+            basis = str(raw.get("_reached_water_basis") or TEXT_OVER_FLAG_NOTE)
             out["text_over_flag"] = basis
-            out["note"] = "; ".join(x for x in (basis, out.get("note")) if x)
+            # the words of the notice that place it, quoted (cite everything): 'its description says "may have
+            # entered the nearby Example Bayou"; its form answered ...'
+            words = str(raw.get("_reached_water_words") or "").strip()
+            said = (f"the notice's description says \"{words}\"; " + basis.split("; ", 1)[1]
+                    if words and "; " in basis else basis)
+            out["note"] = "; ".join(x for x in (said, out.get("note")) if x)
         return out
 
     def _resolve(self, ev: dict) -> dict:
@@ -2081,7 +2087,7 @@ def _iv(ev, start, end, rule, red=None, yellow=None):
 # site's caution only: what would be red (in progress, ongoing, an authority's window) is yellow, rule text_caution,
 # since no authority advice applies to a water the authority's form says was not reached.
 TEXT_OVER_FLAG = "text"
-TEXT_OVER_FLAG_NOTE = "the notice's text names the water; the form's flag said no water was reached"
+TEXT_OVER_FLAG_NOTE = "the notice's description names this water; its form answered \"Waterbodies Impacted: N\""
 
 
 def text_over_flag(ev: dict) -> bool:
