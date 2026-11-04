@@ -295,20 +295,22 @@ def test_provisional_rows_as_the_report_step_writes_them(tmp_path):
 
 # ---------------------------------------------------------------- the live states: data/rules.json live_states
 
-TWELVE = {"CT", "MA", "ME", "NH", "RI", "VT", "NJ", "NY", "PA", "MD", "VA", "DC"}
+TWELVE = {"CT", "MA", "ME", "NH", "RI", "VT", "NJ", "NY", "PA", "MD", "VA", "DC"}   # the first twelve; the list grows
 
 
 def test_the_live_states_are_the_rules_list_exactly(tmp_path, monkeypatch):
     rules = json.loads((common.DATA_DIR / "rules.json").read_text())
-    assert len(rules["live_states"]) == 12 and set(rules["live_states"]) == TWELVE
-    assert set(common.live_states()) == TWELVE
+    live = set(rules["live_states"])              # the list is the contract: states join it as they go live
+    assert len(rules["live_states"]) == len(live) >= 12 and TWELVE <= live
+    assert all(isinstance(s, str) and len(s) == 2 and s.isupper() for s in live)
+    assert set(common.live_states()) == live
     monkeypatch.setattr(S, "_STATES", None)
-    assert S.states() == TWELVE
+    assert S.states() == live
     from build import reaches as R
-    assert R.live_states() == TWELVE
-    assert RF.radar_states() == TWELVE
+    assert R.live_states() == live
+    assert RF.radar_states() == live
     waters = {"ohio-river-oh": {"state": "OH"}, "mill-river-ma": {"state": "MA"}}
-    assert S.derive_states(waters, rules) == TWELVE                  # a water record opens no state
+    assert S.derive_states(waters, rules) == live                    # a water record opens no state
     assert "OH" in S.derive_states(waters, rules, live_only=False)    # a tool working beyond the live states
     assert S.derive_states(waters, {"red": {"by_state": {"CT": {}}}}) == {"OH", "MA", "CT"}   # rules without the list
     assert common.rules_live_states({"live_states": ["ma", "XX1", 3, "Oh"]}) == {"MA", "OH"}
