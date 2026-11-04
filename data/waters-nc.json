@@ -1,0 +1,6245 @@
+{
+ "state": "NC",
+ "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "count": 251,
+ "waters": [
+  {
+   "slug": "after-bay-reservoir-nc",
+   "name": "After Bay Reservoir",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Semora"
+   ],
+   "bbox": [
+    -79.04633,
+    36.50555,
+    -78.99703,
+    36.53042
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.397,
+   "launches": [
+    "hyco-afterbay-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "albemarle-sound-nc",
+   "name": "Albemarle Sound",
+   "kind": "sound",
+   "state": "NC",
+   "towns": [
+    "Edenton",
+    "Hertford",
+    "Pea Ridge",
+    "Skinnersville"
+   ],
+   "bbox": [
+    -76.70026,
+    35.91877,
+    -75.6698,
+    36.16488
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1139.102,
+   "launches": [
+    "midway-drive-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "alligator-river-nc",
+   "name": "Alligator River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Columbia",
+    "East Lake Landing",
+    "Fort Landing"
+   ],
+   "bbox": [
+    -76.28395,
+    35.57618,
+    -76.04648,
+    35.70278
+   ],
+   "wikidata": "Q4062639",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "frying-pan-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "apalachia-lake-nc",
+   "name": "Apalachia Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Murphy"
+   ],
+   "bbox": [
+    -84.29578,
+    35.13943,
+    -84.17765,
+    35.17913
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.985,
+   "launches": [
+    "apalachia-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "apex-community-lake-nc",
+   "name": "Apex Community Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Apex"
+   ],
+   "bbox": [
+    -78.82521,
+    35.74707,
+    -78.81566,
+    35.75237
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.146,
+   "launches": [
+    "apex-community-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ararat-river-nc",
+   "name": "Ararat River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Mount Airy",
+    "Pilot Mountain"
+   ],
+   "bbox": [
+    -80.61142,
+    36.28539,
+    -80.52007,
+    36.56305
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.128,
+   "launches": [
+    "nc-268-ararat-river-access-nc",
+    "h-b-rowe-park-access-nc",
+    "luck-stone-nc",
+    "tharrington-park-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "areneuse-creek-nc",
+   "name": "Areneuse Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Elizabeth City"
+   ],
+   "bbox": [
+    -76.13296,
+    36.29289,
+    -76.08062,
+    36.30719
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "treasure-point-community-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ashbee-harbor-nc",
+   "name": "Ashbee Harbor",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Manteo"
+   ],
+   "bbox": [
+    -75.68142,
+    35.87058,
+    -75.66316,
+    35.88419
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "roanoke-island-visitor-information-center-and-rest-area-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "atlantic-intracoastal-waterway-nc",
+   "name": "Atlantic Intracoastal Waterway",
+   "kind": "canal",
+   "state": "NC",
+   "towns": [
+    "Bear Creek",
+    "Cedar Point",
+    "Chadwick Acres",
+    "Hubert",
+    "Kings Landing",
+    "Sneads Ferry",
+    "Surf City",
+    "Treasure Cove",
+    "Wrightsville"
+   ],
+   "bbox": [
+    -77.89006,
+    34.05898,
+    -76.67336,
+    34.75955
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "gordon-s-myers-at-cedar-point-nc",
+    "shell-rock-landing-nc",
+    "surf-city-nc",
+    "wrightsville-beach-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "back-creek-nc",
+   "name": "Back Creek",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Knotts Island"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dike-gate-boat-ramp-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "badin-lake-nc",
+   "name": "Badin Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Badin",
+    "New London",
+    "Pine Haven",
+    "Whitney"
+   ],
+   "bbox": [
+    -80.17705,
+    35.40791,
+    -80.06255,
+    35.51183
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 21.346,
+   "launches": [
+    "badin-lake-boat-ramp-nc",
+    "circle-drive-nc",
+    "cove-boat-launch-nc",
+    "lakemont-nc"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://ncdenr.maps.arcgis.com/apps/dashboards/7543be4dc8194e6e9c215079d976e716",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021, 2022 and 2026.",
+     "date": "2026-06-13",
+     "years": [
+      "2021",
+      "2022",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "bald-head-creek-nc",
+   "name": "Bald Head Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Bald Head Island"
+   ],
+   "bbox": [
+    -77.99847,
+    33.85217,
+    -77.96287,
+    33.87705
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.379,
+   "launches": [
+    "village-creek-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-lake-nc",
+   "name": "Bear Creek Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Tuckasegee"
+   ],
+   "bbox": [
+    -83.07282,
+    35.21985,
+    -83.02042,
+    35.24959
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.639,
+   "launches": [
+    "bear-creek-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-nc",
+   "name": "Bear Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Hubert"
+   ],
+   "bbox": [
+    -77.20126,
+    34.61811,
+    -77.19294,
+    34.62662
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.19,
+   "launches": [
+    "willis-landing-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaufort-inlet-nc",
+   "name": "Beaufort Inlet",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Beaufort",
+    "Morehead City"
+   ],
+   "bbox": [
+    -76.74961,
+    34.57511,
+    -76.61947,
+    34.79984
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 46.45,
+   "launches": [
+    "chonch-s-point-access-nc",
+    "beaufort-inlet-boat-launch-near-beaufort-nc-4",
+    "west-beaufort-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "belews-lake-nc",
+   "name": "Belews Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Belews Creek",
+    "Pine Hall"
+   ],
+   "bbox": [
+    -80.09357,
+    36.20913,
+    -80.00593,
+    36.3239
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 14.039,
+   "launches": [
+    "pine-hall-nc",
+    "piney-bluff-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bennett-mill-pond-nc",
+   "name": "Bennett Mill Pond",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Valhalla"
+   ],
+   "bbox": [
+    -76.66655,
+    36.13944,
+    -76.65913,
+    36.15459
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.373,
+   "launches": [
+    "bennetts-millpond-nc"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-08-21",
+     "years": [
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "bennetts-creek-nc",
+   "name": "Bennetts Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Gatesville"
+   ],
+   "bbox": [
+    -76.75269,
+    36.29989,
+    -76.62777,
+    36.44334
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bennetts-creek-town-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-alamance-creek-nc",
+   "name": "Big Alamance Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Graham",
+    "Swepsonville"
+   ],
+   "bbox": [
+    -79.74862,
+    35.95226,
+    -79.36542,
+    36.05037
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.377,
+   "launches": [
+    "great-alamance-creek-paddle-access-nc",
+    "swepsonville-river-park-lower-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-flatty-creek-nc",
+   "name": "Big Flatty Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Elizabeth City"
+   ],
+   "bbox": [
+    -76.1571,
+    36.13223,
+    -76.10966,
+    36.1626
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.393,
+   "launches": [
+    "big-flatty-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-swamp-nc",
+   "name": "Big Swamp",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Lumberton"
+   ],
+   "bbox": [
+    -78.94236,
+    34.45412,
+    -78.84345,
+    34.60012
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lennons-bridge-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "black-river-nc",
+   "name": "Black River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Ivanhoe",
+    "Kelly",
+    "Long Bluff Landing",
+    "Rowan"
+   ],
+   "bbox": [
+    -78.31186,
+    34.33648,
+    -78.04435,
+    34.78963
+   ],
+   "wikidata": "Q4921632",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hunts-bluff-nc",
+    "ivanhoe-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blewett-falls-lake-nc",
+   "name": "Blewett Falls Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Ellerbe",
+    "Lilesville"
+   ],
+   "bbox": [
+    -79.91727,
+    34.9793,
+    -79.87153,
+    35.06532
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.07,
+   "launches": [
+    "grassy-island-nc",
+    "pee-dee-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blounts-creek-nc",
+   "name": "Blounts Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Chocowinity",
+    "Cotton Patch Landing"
+   ],
+   "bbox": [
+    -77.00646,
+    35.34482,
+    -76.94859,
+    35.46261
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.006,
+   "launches": [
+    "blounts-creek-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blue-creek-nc",
+   "name": "Blue Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Jacksonville"
+   ],
+   "bbox": [
+    -77.52939,
+    34.75636,
+    -77.44776,
+    34.7863
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "oakhurst-nature-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "boathouse-creek-nc",
+   "name": "Boathouse Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Cape Carteret",
+    "Cedar Point"
+   ],
+   "bbox": [
+    -77.08879,
+    34.68907,
+    -77.07755,
+    34.69094
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "boathouse-creek-walking-trails-park-nc",
+    "cedar-point-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bogue-inlet-nc",
+   "name": "Bogue Inlet",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Swansboro"
+   ],
+   "bbox": [
+    -77.14158,
+    34.63114,
+    -77.0841,
+    34.68915
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 13.618,
+   "launches": [
+    "bicentenntial-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bogue-sound-nc",
+   "name": "Bogue Sound",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Atlantic Beach",
+    "Broad Creek",
+    "Cape Carteret",
+    "Country Club Point",
+    "Emerald Isle",
+    "Indian Beach",
+    "Morehead City",
+    "Newport",
+    "Pine Knoll Shores",
+    "Point Emerald Villas"
+   ],
+   "bbox": [
+    -77.10956,
+    34.64055,
+    -76.69483,
+    34.72915
+   ],
+   "wikidata": "Q4937828",
+   "charted": true,
+   "area_km2": 89.332,
+   "launches": [
+    "emerald-isle-nc",
+    "morehead-city-nc",
+    "park-street-nc",
+    "pelican-drive-dock-nc",
+    "south-10th-st-nc",
+    "south-11th-street-water-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bond-lake-nc",
+   "name": "Bond Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Cary"
+   ],
+   "bbox": [
+    -78.82907,
+    35.77402,
+    -78.82334,
+    35.78239
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.163,
+   "launches": [
+    "bond-lake-boat-launch-near-cary-nc-2"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-04-12",
+     "years": [
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "boney-mill-pond-nc",
+   "name": "Boney Mill Pond",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Wallace"
+   ],
+   "bbox": [
+    -77.98187,
+    34.741,
+    -77.97841,
+    34.74869
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.097,
+   "launches": [
+    "boney-mill-pond-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brice-creek-nc",
+   "name": "Brice Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "New Bern"
+   ],
+   "bbox": [
+    -77.07087,
+    35.00832,
+    -77.01175,
+    35.07723
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "brices-creek-boat-launch-nc",
+    "brice-creek-carry-in-access-near-new-bern-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "broad-river-nc",
+   "name": "Broad River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Mooresboro",
+    "Rutherfordton"
+   ],
+   "bbox": [
+    -82.29153,
+    35.0267,
+    -81.48823,
+    35.54956
+   ],
+   "wikidata": "Q921949",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "broad-river-boat-launch-nc",
+    "grays-bridge-access-nc",
+    "us-hwy-221-nc",
+    "us-hwy-221a-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "broughton-pond-nc",
+   "name": "Broughton Pond",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Morganton"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "broughton-pond-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brunswick-river-nc",
+   "name": "Brunswick River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Belville",
+    "Clairmont"
+   ],
+   "bbox": [
+    -77.9903,
+    34.17931,
+    -77.95841,
+    34.25909
+   ],
+   "wikidata": "Q4979534",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "belville-riverwalk-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "buffalo-creek-nc",
+   "name": "Buffalo Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Knightdale"
+   ],
+   "bbox": [
+    -78.42476,
+    35.58836,
+    -78.19744,
+    35.85214
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "buffalo-creek-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "calderwood-lake-nc",
+   "name": "Calderwood Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Tapoco"
+   ],
+   "bbox": [
+    -83.98088,
+    35.44768,
+    -83.93663,
+    35.50251
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.078,
+   "launches": [
+    "magazine-branch-take-out-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "calf-gully-creek-nc",
+   "name": "Calf Gully Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Oak Island"
+   ],
+   "bbox": [
+    -78.06735,
+    33.9342,
+    -78.05622,
+    33.94156
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bill-smith-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "camerons-lake-nc",
+   "name": "Camerons Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Marston"
+   ],
+   "bbox": [
+    -79.54998,
+    34.98826,
+    -79.54273,
+    34.99528
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.131,
+   "launches": [
+    "kinney-cameron-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cape-fear-river-nc",
+   "name": "Cape Fear River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Council",
+    "Duart",
+    "Elizabethtown",
+    "Erwin",
+    "Fayetteville",
+    "Kure Beach",
+    "Leland",
+    "Lillington",
+    "Moncure",
+    "Riegelwood",
+    "Tar Heel",
+    "Wilmington"
+   ],
+   "bbox": [
+    -79.05257,
+    33.88409,
+    -77.93276,
+    35.596
+   ],
+   "wikidata": "Q1034421",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "avents-ferry-bridge-nc",
+    "dram-tree-park-nc",
+    "elwells-ferry-nc",
+    "fayetteville-nc",
+    "lillington-nc",
+    "lock-and-dam-1-nc",
+    "lock-and-dam-2-nc",
+    "tar-heel-nc",
+    "tory-hole-nc",
+    "william-o-huske-lock-and-dam-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cashie-river-nc",
+   "name": "Cashie River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Windsor"
+   ],
+   "bbox": [
+    -77.24786,
+    35.90172,
+    -76.73225,
+    36.19022
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cashie-river-boat-launch-near-windsor-nc",
+    "cashie-wetlands-walk-nc",
+    "hoggard-mill-access-nc",
+    "sans-souci-ferry-nc",
+    "windsor-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "catawba-river-nc",
+   "name": "Catawba River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Glen Alpine",
+    "Morganton",
+    "Mount Holly",
+    "Stanley",
+    "Taylorsville"
+   ],
+   "bbox": [
+    -82.28473,
+    35.1487,
+    -80.92443,
+    35.84789
+   ],
+   "wikidata": "Q1050460",
+   "charted": false,
+   "area_km2": 1.881,
+   "launches": [
+    "bridgewater-nc",
+    "highway-73-nc",
+    "north-bend-nc",
+    "watermill-boat-ramp-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "catfish-lake-nc",
+   "name": "Catfish Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "New Bern"
+   ],
+   "bbox": [
+    -77.11775,
+    34.92355,
+    -77.08815,
+    34.9434
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.538,
+   "launches": [
+    "catfish-lake-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-bay-nc",
+   "name": "Cedar Bay",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Coinjock",
+    "Currituck"
+   ],
+   "bbox": [
+    -76.00132,
+    36.35998,
+    -75.92619,
+    36.43329
+   ],
+   "wikidata": "Q34759797",
+   "charted": true,
+   "area_km2": 22.266,
+   "launches": [
+    "coinjock-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-cliff-lake-nc",
+   "name": "Cedar Cliff Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Tuckasegee"
+   ],
+   "bbox": [
+    -83.10003,
+    35.24245,
+    -83.07539,
+    35.25698
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.416,
+   "launches": [
+    "cedar-cliff-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "charles-creek-elizabeth-city-nc",
+   "name": "Charles Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Elizabeth City"
+   ],
+   "bbox": [
+    -76.22326,
+    36.28243,
+    -76.21678,
+    36.29758
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "college-park-nc",
+    "waterfront-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chatuge-lake-nc",
+   "name": "Chatuge Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Elf",
+    "Hayesville"
+   ],
+   "bbox": [
+    -83.82575,
+    34.91839,
+    -83.71381,
+    35.03756
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 23.669,
+   "launches": [
+    "chatuge-dam-reservation-nc",
+    "chatuge-lake-boat-launch-nc",
+    "jackrabbit-nc",
+    "ledfords-chapel-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cheoah-river-nc",
+   "name": "Cheoah River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Robbinsville",
+    "Tapoco"
+   ],
+   "bbox": [
+    -83.93995,
+    35.32737,
+    -83.80197,
+    35.44868
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "7th-inning-stretch-boating-site-nc",
+    "blue-hole-access-nc",
+    "cheoah-river-boat-launch-near-robbinsville-nc",
+    "cheoah-river-boat-launch-near-tapoco-nc",
+    "cheoah-river-mile-5-1-nc",
+    "santeetlah-dam-put-in-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chowan-river-nc",
+   "name": "Chowan River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Arrowhead Beach",
+    "Colerain",
+    "Edenton",
+    "Gates",
+    "Gatesville",
+    "Tyner",
+    "Winton"
+   ],
+   "bbox": [
+    -76.95042,
+    36.0175,
+    -76.67162,
+    36.544
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cannons-ferry-nc",
+    "edenhouse-bridge-nc",
+    "gatesville-nc",
+    "gatlington-landing-nc",
+    "shoups-landing-nc",
+    "tunis-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conaby-creek-nc",
+   "name": "Conaby Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Plymouth"
+   ],
+   "bbox": [
+    -76.74965,
+    35.82906,
+    -76.68411,
+    35.92492
+   ],
+   "wikidata": "Q56514886",
+   "charted": true,
+   "area_km2": 0.819,
+   "launches": [
+    "bear-track-landing-conaby-creek-nc",
+    "conaby-creek-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "contentnea-creek-nc",
+   "name": "Contentnea Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Grifton",
+    "Hookerton",
+    "Snow Hill",
+    "Stantonsburg"
+   ],
+   "bbox": [
+    -78.1234,
+    35.33972,
+    -77.3907,
+    35.71612
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "grifton-nc",
+    "hookerton-nc",
+    "snow-hill-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cooper-creek-nc",
+   "name": "Cooper Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Ela"
+   ],
+   "bbox": [
+    -83.39414,
+    35.45247,
+    -83.35195,
+    35.54234
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cooper-creek-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "core-sound-nc",
+   "name": "Core Sound",
+   "kind": "sound",
+   "state": "NC",
+   "towns": [
+    "Atlantic",
+    "Davis",
+    "Harkers Island",
+    "Marshallberg",
+    "Sealevel",
+    "Stacy",
+    "Straits"
+   ],
+   "bbox": [
+    -76.622,
+    34.67481,
+    -76.15191,
+    34.99903
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 202.51,
+   "launches": [
+    "oyster-creek-nc",
+    "straits-landing-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cottage-creek-nc",
+   "name": "Cottage Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Southport"
+   ],
+   "bbox": [
+    -78.03337,
+    33.91631,
+    -78.02742,
+    33.93141
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cottage-creek-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "country-line-creek-nc",
+   "name": "Country Line Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Yanceyville"
+   ],
+   "bbox": [
+    -79.55411,
+    36.29545,
+    -79.19542,
+    36.54521
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "s-r-farmer-lake-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crappie-lake-nc",
+   "name": "Crappie Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Hoffman"
+   ],
+   "bbox": [
+    -79.57047,
+    35.05088,
+    -79.56751,
+    35.05636
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.066,
+   "launches": [
+    "crappie-lake-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crawford-lake-nc",
+   "name": "Crawford Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Laurel Hill"
+   ],
+   "bbox": [
+    -79.57842,
+    34.89271,
+    -79.5666,
+    34.89538
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.112,
+   "launches": [
+    "crawford-lake-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "croatan-sound-nc",
+   "name": "Croatan Sound",
+   "kind": "sound",
+   "state": "NC",
+   "towns": [
+    "Manns Harbor",
+    "Manteo"
+   ],
+   "bbox": [
+    -75.8072,
+    35.79604,
+    -75.64082,
+    35.95523
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 100.276,
+   "launches": [
+    "bowsertown-road-nc",
+    "manns-harbor-nc",
+    "weir-point-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crooked-creek-nc",
+   "name": "Crooked Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Elizabeth City"
+   ],
+   "bbox": [
+    -76.02631,
+    36.30959,
+    -76.00213,
+    36.3175
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "garrington-island-road-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "currituck-sound-nc",
+   "name": "Currituck Sound",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Corolla",
+    "Corys",
+    "Currituck",
+    "Duck",
+    "Harbinger",
+    "Kitty Hawk",
+    "Knotts Island",
+    "Osprey",
+    "Poplar Branch",
+    "Southern Shores",
+    "Waterlily"
+   ],
+   "bbox": [
+    -76.06214,
+    36.08046,
+    -75.74282,
+    36.60016
+   ],
+   "wikidata": "Q4251480",
+   "charted": true,
+   "area_km2": 341.868,
+   "launches": [
+    "currituck-sound-boat-launch-near-kitty-hawk-nc-2",
+    "duck-boardwalk-kayak-launch-nc",
+    "live-oak-point-boat-launch-nc",
+    "office-boat-launch-nc",
+    "poplar-branch-nc",
+    "whalehead-club-heritage-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dan-river-nc",
+   "name": "Dan River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Danbury",
+    "Eden",
+    "Madison",
+    "Milton",
+    "Walnut Cove",
+    "Wentworth",
+    "Westfield"
+   ],
+   "bbox": [
+    -80.45056,
+    36.3018,
+    -78.74852,
+    36.78222
+   ],
+   "wikidata": "Q1159151",
+   "charted": false,
+   "area_km2": 6.949,
+   "launches": [
+    "dan-river-carry-in-access-nc",
+    "draper-landing-nc",
+    "hanging-rock-dan-river-access-nc",
+    "hart-s-nc",
+    "hemlock-golf-course-river-access-nc",
+    "jacobs-creek-river-access-nc",
+    "jessup-mill-nc",
+    "leaksville-nc",
+    "leaksville-landing-access-nc",
+    "milton-nc",
+    "moratock-park-access-nc",
+    "pitzer-road-public-fishing-area-nc",
+    "settles-bridge-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dawson-creek-nc",
+   "name": "Dawson Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Cash Corner Number 2",
+    "Janeiro",
+    "Oriental"
+   ],
+   "bbox": [
+    -76.81794,
+    34.99201,
+    -76.75427,
+    35.0333
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dawson-creek-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "deep-river-nc",
+   "name": "Deep River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Randleman",
+    "Sanford"
+   ],
+   "bbox": [
+    -79.94846,
+    35.45646,
+    -79.05257,
+    35.99713
+   ],
+   "wikidata": "Q5250264",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "us-hwy-15-501-lee-county-nc",
+    "us-hwy-421-lee-county-nc",
+    "worthville-road-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dismal-swamp-canal-nc",
+   "name": "Dismal Swamp Canal",
+   "kind": "canal",
+   "state": "NC",
+   "towns": [
+    "South Mills"
+   ],
+   "bbox": [
+    -76.38898,
+    36.38885,
+    -76.28541,
+    36.74606
+   ],
+   "wikidata": "Q2936090",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dismal-swamp-state-park-and-welcome-center-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "duck-pond-creek-nc",
+   "name": "Duck Pond Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Kitty Hawk"
+   ],
+   "bbox": [
+    -75.72014,
+    36.05135,
+    -75.71285,
+    36.07364
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "sandy-run-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dutchman-creek-nc",
+   "name": "Dutchman Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Southport"
+   ],
+   "bbox": [
+    -78.0587,
+    33.91998,
+    -78.03131,
+    33.9731
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "oak-island-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-lake-nc",
+   "name": "East Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Manns Harbor"
+   ],
+   "bbox": [
+    -75.825,
+    35.92171,
+    -75.81002,
+    35.93229
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.664,
+   "launches": [
+    "mashoes-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "eno-river-nc",
+   "name": "Eno River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Durham"
+   ],
+   "bbox": [
+    -79.15819,
+    36.04188,
+    -78.81261,
+    36.12849
+   ],
+   "wikidata": "Q2913438",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "eno-river-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "etheridge-pond-nc",
+   "name": "Etheridge Pond",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Tarboro"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "etheridge-pond-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "falls-lake-nc",
+   "name": "Falls Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Creedmoor",
+    "Durham",
+    "Raleigh",
+    "Wake Forest"
+   ],
+   "bbox": [
+    -78.80589,
+    35.92928,
+    -78.57302,
+    36.10287
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 40.112,
+   "launches": [
+    "falls-lake-carry-in-access-nc",
+    "hickory-hill-nc",
+    "ledge-rock-nc",
+    "upper-bartons-creek-nc"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/CitizenProblems/FeatureServer/0/378/attachments/116",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2018 and 2021.",
+     "date": "2021-12-07",
+     "years": [
+      "2018",
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "falls-reservoir-nc",
+   "name": "Falls Reservoir",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Badin"
+   ],
+   "bbox": [
+    -80.09565,
+    35.39218,
+    -80.07504,
+    35.41941
+   ],
+   "wikidata": "Q5432488",
+   "charted": false,
+   "area_km2": 0.782,
+   "launches": [
+    "falls-reservoir-boat-launch-near-badin-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "first-broad-river-nc",
+   "name": "First Broad River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Lawndale",
+    "Shelby"
+   ],
+   "bbox": [
+    -81.79359,
+    35.19294,
+    -81.54308,
+    35.53238
+   ],
+   "wikidata": "Q5452567",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "delight-road-access-nc",
+    "nc-hwy-10-nc",
+    "shelby-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fisher-river-nc",
+   "name": "Fisher River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Dobson",
+    "Mount Airy"
+   ],
+   "bbox": [
+    -80.87763,
+    36.2668,
+    -80.67459,
+    36.56322
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.639,
+   "launches": [
+    "bray-ford-access-nc",
+    "old-highway-601-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fly-rod-lake-nc",
+   "name": "Fly Rod Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Whispering Pines"
+   ],
+   "bbox": [
+    -79.39491,
+    35.25768,
+    -79.39147,
+    35.2609
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.028,
+   "launches": [
+    "fly-rod-lake-boat-ramp-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fontana-lake-nc",
+   "name": "Fontana Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Almond",
+    "Bryson City",
+    "Carson Mill",
+    "Robbinsville"
+   ],
+   "bbox": [
+    -83.80977,
+    35.33467,
+    -83.5052,
+    35.48456
+   ],
+   "wikidata": "Q5465129",
+   "charted": false,
+   "area_km2": 36.006,
+   "launches": [
+    "cable-cove-nc",
+    "flat-branch-nc",
+    "lemmons-branch-nc",
+    "tsali-nc"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017.",
+     "date": "2017-08-02",
+     "years": [
+      "2017"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "forbes-bay-nc",
+   "name": "Forbes Bay",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Elizabeth City"
+   ],
+   "bbox": [
+    -76.20383,
+    36.28608,
+    -76.19762,
+    36.2907
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "causeway-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "french-broad-river-nc",
+   "name": "French Broad River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Asheville",
+    "Barnard",
+    "Bent Creek",
+    "Brevard",
+    "Craggy",
+    "Fletcher",
+    "Hendersonville",
+    "Horse Shoe",
+    "Hot Springs",
+    "Marshall",
+    "Pisgah Forest",
+    "Rosman"
+   ],
+   "bbox": [
+    -82.91965,
+    35.13539,
+    -82.52772,
+    35.94499
+   ],
+   "wikidata": "Q478303",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "alexander-river-park-access-nc",
+    "french-broad-river-greenway-access-asheville-nc",
+    "bent-creek-river-park-access-nc",
+    "blantyre-river-access-nc",
+    "champion-park-access-nc",
+    "craven-street-bridge-nc",
+    "french-broad-river-greenway-access-nc",
+    "glen-bridge-river-access-nc",
+    "hap-simpson-river-access-nc",
+    "hominy-creek-river-access-nc",
+    "horse-shoe-nc",
+    "ledges-whitewater-park-access-nc",
+    "murray-branch-boat-launch-nc",
+    "penrose-nc",
+    "pisgah-forest-access-nc",
+    "silver-line-park-river-access-nc",
+    "stackhouse-boat-launch-nc",
+    "westfeldt-park-nc",
+    "woodfin-park-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "great-lake-nc",
+   "name": "Great Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Maysville"
+   ],
+   "bbox": [
+    -77.06187,
+    34.84909,
+    -77.01885,
+    34.88685
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 10.424,
+   "launches": [
+    "great-lake-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "green-river-nc",
+   "name": "Green River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Saluda"
+   ],
+   "bbox": [
+    -82.39937,
+    35.23337,
+    -81.96956,
+    35.34489
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-rock-access-nc",
+    "fishtop-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "greens-creek-nc",
+   "name": "Greens Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Oriental"
+   ],
+   "bbox": [
+    -76.75549,
+    35.00048,
+    -76.67533,
+    35.04449
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "oriental-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gum-neck-creek-nc",
+   "name": "Gum Neck Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Columbia"
+   ],
+   "bbox": [
+    -76.11782,
+    35.69085,
+    -76.10979,
+    35.69726
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "gum-neck-landing-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "halls-creek-nc",
+   "name": "Halls Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Elizabeth City"
+   ],
+   "bbox": [
+    -76.28558,
+    36.2162,
+    -76.26895,
+    36.25613
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "halls-creek-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hamlet-city-lake-nc",
+   "name": "Hamlet City Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Hamlet"
+   ],
+   "bbox": [
+    -79.69289,
+    34.88293,
+    -79.68291,
+    34.88928
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.184,
+   "launches": [
+    "hamlet-city-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hancock-creek-nc",
+   "name": "Hancock Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Havelock"
+   ],
+   "bbox": [
+    -76.8675,
+    34.85109,
+    -76.84627,
+    34.93594
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.56,
+   "launches": [
+    "percy-berry-nc",
+    "percy-berry-boating-access-area-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harris-lake-nc",
+   "name": "Harris Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Holly Springs",
+    "New Hill"
+   ],
+   "bbox": [
+    -78.9886,
+    35.56653,
+    -78.89819,
+    35.64994
+   ],
+   "wikidata": "Q1586205",
+   "charted": false,
+   "area_km2": 15.326,
+   "launches": [
+    "cross-point-landing-nc",
+    "harris-lake-park-nc",
+    "hollemans-crossing-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "haw-river-nc",
+   "name": "Haw River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Burlington",
+    "Bynum",
+    "Carrboro",
+    "Glencoe",
+    "Graham",
+    "Haw River",
+    "Ossipee",
+    "Pittsboro",
+    "Reidsville",
+    "Swepsonville",
+    "Terrells"
+   ],
+   "bbox": [
+    -80.03726,
+    35.596,
+    -79.05052,
+    36.27631
+   ],
+   "wikidata": "Q14707960",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "altamahaw-paddle-access-nc",
+    "altamahaw-paddle-access-ossipee-nc",
+    "brooks-bridge-paddle-access-nc",
+    "glencoe-paddle-access-nc",
+    "graham-paddle-access-nc",
+    "great-bend-park-paddle-access-nc",
+    "red-slide-park-paddle-access-nc",
+    "saxapahaw-mill-race-access-nc",
+    "shallow-ford-paddle-access-nc",
+    "swepsonville-river-park-upper-access-nc",
+    "union-bridge-paddle-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "high-point-lake-nc",
+   "name": "High Point Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Jamestown"
+   ],
+   "bbox": [
+    -79.96092,
+    35.99447,
+    -79.93599,
+    36.02375
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.997,
+   "launches": [
+    "high-point-city-lake-park-nc"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025.",
+     "date": "2025-06-01",
+     "years": [
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "high-rock-game-land-pond-nc",
+   "name": "High Rock Game Land Pond",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Yanceyville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "high-rock-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "high-rock-lake-nc",
+   "name": "High Rock Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Bending Brook",
+    "Salisbury",
+    "Southmont",
+    "Yadkin"
+   ],
+   "bbox": [
+    -80.40442,
+    35.58558,
+    -80.16805,
+    35.75037
+   ],
+   "wikidata": "Q1436627",
+   "charted": false,
+   "area_km2": 46.184,
+   "launches": [
+    "dutch-second-nc",
+    "york-hill-yadkin-river-access-nc"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024.",
+     "date": "2024-07-01",
+     "years": [
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "hinson-lake-nc",
+   "name": "Hinson Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Rockingham"
+   ],
+   "bbox": [
+    -79.75025,
+    34.9367,
+    -79.73873,
+    34.93942
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.165,
+   "launches": [
+    "hinson-lake-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hiwassee-lake-nc",
+   "name": "Hiwassee Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Hiwassee Village",
+    "Murphy",
+    "Ogreeta"
+   ],
+   "bbox": [
+    -84.20273,
+    35.0385,
+    -84.02307,
+    35.186
+   ],
+   "wikidata": "Q122609903",
+   "charted": false,
+   "area_km2": 19.494,
+   "launches": [
+    "grape-creek-nc",
+    "hanging-dog-nc",
+    "hiwassee-lake-boat-launch-near-murphy-nc-2",
+    "hiwassee-lake-boat-launch-near-murphy-nc",
+    "payne-street-slipway-nc",
+    "ramsey-bluff-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hiwassee-river-nc",
+   "name": "Hiwassee River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Hayesville",
+    "Murphy"
+   ],
+   "bbox": [
+    -84.34355,
+    34.93628,
+    -83.75549,
+    35.18547
+   ],
+   "wikidata": "Q3138706",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hayesville-access-nc",
+    "hiwassee-street-slipway-nc",
+    "mission-trailrace-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "holly-shelter-creek-nc",
+   "name": "Holly Shelter Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Burgaw"
+   ],
+   "bbox": [
+    -77.82895,
+    34.58852,
+    -77.64005,
+    34.67709
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "shelter-creek-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hydeland-canal-nc",
+   "name": "Hydeland Canal",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Swan Quarter"
+   ],
+   "bbox": [
+    -76.21784,
+    35.39768,
+    -76.2096,
+    35.41944
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hydeland-canal-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "indian-camp-lake-nc",
+   "name": "Indian Camp Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Hoffman"
+   ],
+   "bbox": [
+    -79.57517,
+    35.01037,
+    -79.57191,
+    35.01186
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.017,
+   "launches": [
+    "indian-camp-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "indian-valley-paddle-access-nc",
+   "name": "Indian Valley Paddle Access",
+   "kind": "canal",
+   "state": "NC",
+   "towns": [
+    "Burlington"
+   ],
+   "bbox": [
+    -79.44538,
+    36.13639,
+    -79.44534,
+    36.13653
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "indian-valley-paddle-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "indiantown-creek-nc",
+   "name": "Indiantown Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Indiantown"
+   ],
+   "bbox": [
+    -76.12497,
+    36.34618,
+    -76.04562,
+    36.36029
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "indiantown-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "intracoastal-waterway-calabash-nc",
+   "name": "Intracoastal Waterway",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Calabash",
+    "Holden Beach",
+    "Ocean Isle Beach",
+    "Seaside",
+    "Shallotte",
+    "Sunset Beach"
+   ],
+   "bbox": [
+    -78.66752,
+    33.84217,
+    -78.32097,
+    33.97827
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 14.185,
+   "launches": [
+    "bricklanding-road-nc",
+    "holden-beach-nc",
+    "ocean-isle-beach-nc",
+    "sunset-beach-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "intracoastal-waterway-nc",
+   "name": "Intracoastal Waterway",
+   "kind": "canal",
+   "state": "NC",
+   "towns": [
+    "Holly Ridge"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "turkey-creek-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jackson-training-school-lake-nc",
+   "name": "Jackson Training School Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Concord"
+   ],
+   "bbox": [
+    -80.62089,
+    35.36376,
+    -80.61693,
+    35.36532
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.032,
+   "launches": [
+    "frank-liske-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "johns-river-nc",
+   "name": "Johns River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Adako",
+    "Morganton"
+   ],
+   "bbox": [
+    -81.73337,
+    35.77863,
+    -81.65214,
+    36.11927
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "corpening-bridge-access-area-nc",
+    "johns-river-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-creek-nc",
+   "name": "Johnson Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Stanley"
+   ],
+   "bbox": [
+    -81.00851,
+    35.38187,
+    -80.98167,
+    35.43015
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lucia-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jordan-lake-nc",
+   "name": "Jordan Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Apex",
+    "Bells",
+    "Chapel Hill",
+    "Farrington",
+    "Pittsboro",
+    "Seaforth",
+    "Wilsonville"
+   ],
+   "bbox": [
+    -79.10467,
+    35.64128,
+    -78.94857,
+    35.86986
+   ],
+   "wikidata": "Q6276690",
+   "charted": false,
+   "area_km2": 51.451,
+   "launches": [
+    "farrington-point-nc",
+    "jordan-lake-boat-launch-near-pittsboro-nc-5",
+    "robeson-creek-boat-ramp-nc",
+    "jordan-lake-boat-launch-near-wilsonville-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kernersville-lake-nc",
+   "name": "Kernersville Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Kernersville"
+   ],
+   "bbox": [
+    -80.1076,
+    36.14884,
+    -80.09964,
+    36.15493
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.176,
+   "launches": [
+    "kernersville-lake-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kerr-lake-buggs-island-lake-nc",
+   "name": "Kerr Lake;Buggs Island Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Henderson",
+    "Keats",
+    "Manson",
+    "Middleburg",
+    "Norlina",
+    "Stovall",
+    "Woodworth"
+   ],
+   "bbox": [
+    -78.75093,
+    36.3847,
+    -78.26784,
+    36.73305
+   ],
+   "wikidata": "Q1700320",
+   "charted": false,
+   "area_km2": 170.808,
+   "launches": [
+    "county-line-nc",
+    "flemingtown-landing-nc",
+    "kerr-lake-buggs-island-lake-boat-launch-near-stovall-nc",
+    "henderson-point-nc",
+    "henderson-point-park-east-boat-ramp-nc",
+    "henderson-point-park-west-boat-ramp-nc",
+    "hibernia-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kitty-creek-nc",
+   "name": "Kitty Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Engelhard"
+   ],
+   "bbox": [
+    -75.99785,
+    35.51192,
+    -75.98534,
+    35.51829
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "engelhard-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kitty-hawk-bay-nc",
+   "name": "Kitty Hawk Bay",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Kill Devil Hills"
+   ],
+   "bbox": [
+    -75.73381,
+    36.01417,
+    -75.68743,
+    36.06029
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 9.265,
+   "launches": [
+    "avalon-beach-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "knobbs-creek-nc",
+   "name": "Knobbs Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Elizabeth City"
+   ],
+   "bbox": [
+    -76.30203,
+    36.30514,
+    -76.20896,
+    36.35514
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "knobbs-creek-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "knotts-island-bay-nc",
+   "name": "Knotts Island Bay",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Knotts Island"
+   ],
+   "bbox": [
+    -75.91104,
+    36.48362,
+    -75.88147,
+    36.51265
+   ],
+   "wikidata": "Q49381881",
+   "charted": true,
+   "area_km2": 5.593,
+   "launches": [
+    "brumley-road-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-adger-nc",
+   "name": "Lake Adger",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Sunny View"
+   ],
+   "bbox": [
+    -82.23552,
+    35.32636,
+    -82.18713,
+    35.34852
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.408,
+   "launches": [
+    "lake-adger-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-ben-johnson-nc",
+   "name": "Lake Ben Johnson",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Hillsborough"
+   ],
+   "bbox": [
+    -79.13138,
+    36.07004,
+    -79.13023,
+    36.07126
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.007,
+   "launches": [
+    "lake-ben-johnson-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-brandt-nc",
+   "name": "Lake Brandt",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Greensboro"
+   ],
+   "bbox": [
+    -79.88819,
+    36.14545,
+    -79.83714,
+    36.17729
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.918,
+   "launches": [
+    "lake-brandt-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cammack-nc",
+   "name": "Lake Cammack",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Burlington"
+   ],
+   "bbox": [
+    -79.44493,
+    36.17737,
+    -79.39366,
+    36.23305
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.795,
+   "launches": [
+    "lake-cammack-boat-launch-near-burlington-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-crabtree-nc",
+   "name": "Lake Crabtree",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Morrisville"
+   ],
+   "bbox": [
+    -78.80944,
+    35.83036,
+    -78.78301,
+    35.84733
+   ],
+   "wikidata": "Q6475526",
+   "charted": false,
+   "area_km2": 1.705,
+   "launches": [
+    "lake-crabtree-boat-launch-nc"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-06-02",
+     "years": [
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-devin-nc",
+   "name": "Lake Devin",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Oxford"
+   ],
+   "bbox": [
+    -78.63424,
+    36.29949,
+    -78.61817,
+    36.30855
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.391,
+   "launches": [
+    "lake-devin-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-gaston-nc",
+   "name": "Lake Gaston",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Elams",
+    "Henrico",
+    "Littleton",
+    "Roanoke Rapids",
+    "Warrenton"
+   ],
+   "bbox": [
+    -78.3007,
+    36.464,
+    -77.80995,
+    36.62421
+   ],
+   "wikidata": "Q732199",
+   "charted": false,
+   "area_km2": 71.909,
+   "launches": [
+    "hawtree-creek-nc",
+    "henrico-nc",
+    "salmons-landing-nc",
+    "summit-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-glenville-nc",
+   "name": "Lake Glenville",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Cullowhee"
+   ],
+   "bbox": [
+    -83.17702,
+    35.13674,
+    -83.12195,
+    35.19809
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.136,
+   "launches": [
+    "pine-creek-nc",
+    "powerhouse-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hampton-nc",
+   "name": "Lake Hampton",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Yadkinville"
+   ],
+   "bbox": [
+    -80.75141,
+    36.12569,
+    -80.73,
+    36.13853
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.573,
+   "launches": [
+    "lake-hampton-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hickory-nc",
+   "name": "Lake Hickory",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Claremont",
+    "Granite Falls",
+    "Hickory",
+    "Northlakes",
+    "Rhodhiss",
+    "Taylorsville"
+   ],
+   "bbox": [
+    -81.43799,
+    35.75501,
+    -81.19229,
+    35.83389
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 14.266,
+   "launches": [
+    "dusty-ridge-nc",
+    "geitner-park-boat-ramp-nc",
+    "gunpowder-nc",
+    "lovelady-nc",
+    "oxford-nc",
+    "wittenburg-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-higgins-nc",
+   "name": "Lake Higgins",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Summerfield"
+   ],
+   "bbox": [
+    -79.90217,
+    36.14785,
+    -79.87895,
+    36.171
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.831,
+   "launches": [
+    "lake-higgins-marina-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-james-nc",
+   "name": "Lake James",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Marion",
+    "Nebo"
+   ],
+   "bbox": [
+    -81.99982,
+    35.71393,
+    -81.82004,
+    35.79624
+   ],
+   "wikidata": "Q1485910",
+   "charted": false,
+   "area_km2": 23.476,
+   "launches": [
+    "black-bear-nc",
+    "canal-bridge-boat-ramp-nc",
+    "hidden-cove-boat-ramp-nc",
+    "linville-river-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-johnson-nc",
+   "name": "Lake Johnson",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Raleigh"
+   ],
+   "bbox": [
+    -78.72307,
+    35.75603,
+    -78.70465,
+    35.76802
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.547,
+   "launches": [
+    "lake-johnson-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-julian-nc",
+   "name": "Lake Julian",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Arden"
+   ],
+   "bbox": [
+    -82.54733,
+    35.46285,
+    -82.52372,
+    35.48363
+   ],
+   "wikidata": "Q34899233",
+   "charted": false,
+   "area_km2": 1.137,
+   "launches": [
+    "lake-julian-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lucas-nc",
+   "name": "Lake Lucas",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Asheboro"
+   ],
+   "bbox": [
+    -79.88034,
+    35.7351,
+    -79.85278,
+    35.75007
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.857,
+   "launches": [
+    "lake-lucas-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mackintosh-nc",
+   "name": "Lake Mackintosh",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Burlington",
+    "Whitsett"
+   ],
+   "bbox": [
+    -79.60122,
+    36.01835,
+    -79.5014,
+    36.06005
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.301,
+   "launches": [
+    "lake-mackintosh-boat-launch-nc",
+    "lake-mackintosh-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mattamuskeet-nc",
+   "name": "Lake Mattamuskeet",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Swan Quarter"
+   ],
+   "bbox": [
+    -76.3167,
+    35.44795,
+    -76.0644,
+    35.56299
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 150.852,
+   "launches": [
+    "lake-mattamuskeet-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-michael-nc",
+   "name": "Lake Michael",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Mebane"
+   ],
+   "bbox": [
+    -79.25048,
+    36.10201,
+    -79.23939,
+    36.10839
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.179,
+   "launches": [
+    "lake-michael-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-norman-nc",
+   "name": "Lake Norman",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Catawba",
+    "Cornelius",
+    "Davidson",
+    "Denver",
+    "East Monbo",
+    "Huntersville",
+    "Lake Norman of Catawba",
+    "Long Island",
+    "Mooresville"
+   ],
+   "bbox": [
+    -81.0921,
+    35.42733,
+    -80.8444,
+    35.75743
+   ],
+   "wikidata": "Q1801020",
+   "charted": false,
+   "area_km2": 118.017,
+   "launches": [
+    "beatties-ford-nc",
+    "hager-creek-nc",
+    "little-creek-nc",
+    "long-island-nc",
+    "mccrary-creek-nc",
+    "pinnacle-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-phelps-nc",
+   "name": "Lake Phelps",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Galilee Mission",
+    "Roper"
+   ],
+   "bbox": [
+    -76.52588,
+    35.73366,
+    -76.40119,
+    35.80359
+   ],
+   "wikidata": "Q6477356",
+   "charted": false,
+   "area_km2": 59.678,
+   "launches": [
+    "cypress-point-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-powhatan-nc",
+   "name": "Lake Powhatan",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Asheville"
+   ],
+   "bbox": [
+    -82.62791,
+    35.48177,
+    -82.62372,
+    35.48379
+   ],
+   "wikidata": "Q34900735",
+   "charted": false,
+   "area_km2": 0.044,
+   "launches": [
+    "lake-powhatan-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-raleigh-nc",
+   "name": "Lake Raleigh",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Raleigh"
+   ],
+   "bbox": [
+    -78.68713,
+    35.76274,
+    -78.67662,
+    35.76797
+   ],
+   "wikidata": "Q34900773",
+   "charted": false,
+   "area_km2": 0.256,
+   "launches": [
+    "lake-raleigh-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-rhodhiss-nc",
+   "name": "Lake Rhodhiss",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Connellys Springs",
+    "Granite Falls",
+    "Morganton",
+    "Valdese"
+   ],
+   "bbox": [
+    -81.65368,
+    35.76637,
+    -81.43589,
+    35.79199
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.855,
+   "launches": [
+    "castle-bridge-nc",
+    "conley-creek-nc",
+    "huffman-bridge-access-nc",
+    "rhodhiss-boat-launch-nc",
+    "lake-rhodhiss-boat-launch-near-valdese-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-rim-nc",
+   "name": "Lake Rim",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Fayetteville"
+   ],
+   "bbox": [
+    -79.04755,
+    35.03103,
+    -79.03592,
+    35.04328
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.271,
+   "launches": [
+    "lake-rim-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-santeetlah-nc",
+   "name": "Lake Santeetlah",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Lake Santeetlah",
+    "Robbinsville"
+   ],
+   "bbox": [
+    -83.91035,
+    35.3135,
+    -83.80535,
+    35.37922
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.884,
+   "launches": [
+    "avey-creek-nc",
+    "cheoah-point-nc",
+    "ranger-station-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-sutton-nc",
+   "name": "Lake Sutton",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Wilmington"
+   ],
+   "bbox": [
+    -78.01192,
+    34.28623,
+    -77.99034,
+    34.31807
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.006,
+   "launches": [
+    "sutton-lake-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-tillery-nc",
+   "name": "Lake Tillery",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Albemarle",
+    "Badin",
+    "Mount Gilead",
+    "Norwood"
+   ],
+   "bbox": [
+    -80.12848,
+    35.20539,
+    -80.04414,
+    35.39608
+   ],
+   "wikidata": "Q6478042",
+   "charted": false,
+   "area_km2": 18.741,
+   "launches": [
+    "lillys-bridge-nc",
+    "morrow-mountain-access-nc",
+    "norwood-nc",
+    "stony-mountain-nc",
+    "swift-island-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-townsend-nc",
+   "name": "Lake Townsend",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Brown Summit"
+   ],
+   "bbox": [
+    -79.8169,
+    36.15967,
+    -79.73171,
+    36.21116
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.457,
+   "launches": [
+    "lake-townsend-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-waccamaw-nc",
+   "name": "Lake Waccamaw",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Lake Waccamaw"
+   ],
+   "bbox": [
+    -78.55272,
+    34.25671,
+    -78.46807,
+    34.31708
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 32.556,
+   "launches": [
+    "lake-waccamaw-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-wheeler-nc",
+   "name": "Lake Wheeler",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Raleigh"
+   ],
+   "bbox": [
+    -78.73328,
+    35.68507,
+    -78.69402,
+    35.70582
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.102,
+   "launches": [
+    "lake-wheeler-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-wylie-nc",
+   "name": "Lake Wylie",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Belmont",
+    "Catawba Colony",
+    "Pineville"
+   ],
+   "bbox": [
+    -81.11229,
+    35.01249,
+    -80.98269,
+    35.25014
+   ],
+   "wikidata": "Q1794421",
+   "charted": false,
+   "area_km2": 35.876,
+   "launches": [
+    "south-point-nc"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021, 2022 and 2025.",
+     "date": "2025-11-01",
+     "years": [
+      "2021",
+      "2022",
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lewis-creek-nc",
+   "name": "Lewis Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Lola"
+   ],
+   "bbox": [
+    -76.29378,
+    34.95,
+    -76.27981,
+    34.95669
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.223,
+   "launches": [
+    "lola-boat-ramp-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lick-creek-nc",
+   "name": "Lick Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Sanford"
+   ],
+   "bbox": [
+    -79.12861,
+    35.46475,
+    -79.12421,
+    35.50015
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "san-lee-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-river-nc",
+   "name": "Little River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Candor"
+   ],
+   "bbox": [
+    -79.93596,
+    35.09436,
+    -79.78227,
+    35.67789
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "troy-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-river-woodville-nc",
+   "name": "Little River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Woodville"
+   ],
+   "bbox": [
+    -76.39216,
+    36.11416,
+    -76.18238,
+    36.28892
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "county-line-boat-ramp-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-tennessee-river-nc",
+   "name": "Little Tennessee River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Bryson City",
+    "Fontana Dam",
+    "Fontana Village",
+    "Franklin",
+    "Prentiss",
+    "Riverside"
+   ],
+   "bbox": [
+    -83.96519,
+    34.97216,
+    -83.36725,
+    35.46662
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brush-creek-access-nc",
+    "lake-emory-nc",
+    "lewellyn-branch-nc",
+    "painter-branch-access-nc",
+    "rattlesnake-creek-access-nc",
+    "sawmill-creek-access-nc",
+    "tellico-creek-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lockwoods-folly-river-nc",
+   "name": "Lockwoods Folly River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Bolivia",
+    "Dixon Landing"
+   ],
+   "bbox": [
+    -78.27234,
+    33.91965,
+    -78.17728,
+    34.06768
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "sunset-harbor-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "log-pond-creek-nc",
+   "name": "Log Pond Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Vandemere"
+   ],
+   "bbox": [
+    -76.66788,
+    35.18495,
+    -76.65837,
+    35.18843
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "vandemere-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-bay-nc",
+   "name": "Long Bay",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Holden Beach",
+    "Oak Island"
+   ],
+   "bbox": [
+    -79.18026,
+    33.21037,
+    -77.95947,
+    33.91473
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2869.866,
+   "launches": [
+    "bridgeview-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-lake-nc",
+   "name": "Long Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Albemarle"
+   ],
+   "bbox": [
+    -80.23796,
+    35.34933,
+    -80.22536,
+    35.35944
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.278,
+   "launches": [
+    "albemarle-city-lake-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lookout-shoals-lake-nc",
+   "name": "Lookout Shoals Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Catawba",
+    "Statesville"
+   ],
+   "bbox": [
+    -81.1248,
+    35.75659,
+    -81.07891,
+    35.7899
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.892,
+   "launches": [
+    "lookout-shoals-boat-launch-nc",
+    "sharon-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lumber-river-nc",
+   "name": "Lumber River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Boardman",
+    "Fair Bluff",
+    "Lumberton",
+    "Orrum",
+    "Wagram"
+   ],
+   "bbox": [
+    -79.36603,
+    34.29933,
+    -78.92742,
+    34.96177
+   ],
+   "wikidata": "Q3267277",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "boardman-nc",
+    "fair-bluff-nc",
+    "high-hill-nc",
+    "mcneils-bridge-nc",
+    "wagram-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "masonboro-sound-nc",
+   "name": "Masonboro Sound",
+   "kind": "sound",
+   "state": "NC",
+   "towns": [
+    "Wilmington"
+   ],
+   "bbox": [
+    -77.87576,
+    34.11544,
+    -77.82758,
+    34.1744
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.661,
+   "launches": [
+    "trails-end-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mayo-reservoir-nc",
+   "name": "Mayo Reservoir",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Roxboro"
+   ],
+   "bbox": [
+    -78.89951,
+    36.43961,
+    -78.85174,
+    36.53662
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.489,
+   "launches": [
+    "mayo-park-nc",
+    "triple-springs-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mayo-river-nc",
+   "name": "Mayo River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Madison",
+    "Mayodan"
+   ],
+   "bbox": [
+    -79.99702,
+    36.39001,
+    -79.93502,
+    36.54048
+   ],
+   "wikidata": "Q6797547",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mayodan-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mckinney-lake-nc",
+   "name": "McKinney Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Hoffman"
+   ],
+   "bbox": [
+    -79.62755,
+    35.00477,
+    -79.61117,
+    35.00965
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.25,
+   "launches": [
+    "mckinney-lake-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "meherrin-river-nc",
+   "name": "Meherrin River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Como"
+   ],
+   "bbox": [
+    -77.34847,
+    36.43153,
+    -76.94677,
+    36.55773
+   ],
+   "wikidata": "Q6809486",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "murfreesboro-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "merchants-millpond-nc",
+   "name": "Merchants Millpond",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Eason Crossroads"
+   ],
+   "bbox": [
+    -76.70125,
+    36.42077,
+    -76.67017,
+    36.43718
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.282,
+   "launches": [
+    "gates-merchants-millpond-main-entrance-nc",
+    "merchants-millpond-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "merkle-hammock-creek-nc",
+   "name": "Merkle Hammock Creek",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Atlantic"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "thorofare-boat-ramp-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mill-creek-leland-nc",
+   "name": "Mill Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Leland"
+   ],
+   "bbox": [
+    -78.03771,
+    34.24523,
+    -78.01064,
+    34.25776
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cypress-cove-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "milltail-creek-nc",
+   "name": "Milltail Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Manns Harbor"
+   ],
+   "bbox": [
+    -75.9773,
+    35.77391,
+    -75.85497,
+    35.84514
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "buffalo-city-canoe-kayak-access-nc",
+    "milltail-creek-canoe-kayak-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mountain-island-lake-nc",
+   "name": "Mountain Island Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Huntersville",
+    "Mount Holly"
+   ],
+   "bbox": [
+    -80.99642,
+    35.3339,
+    -80.91079,
+    35.38276
+   ],
+   "wikidata": "Q6925014",
+   "charted": false,
+   "area_km2": 7.371,
+   "launches": [
+    "neck-road-nc",
+    "riverbend-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "muddy-creek-nc",
+   "name": "Muddy Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Morganton"
+   ],
+   "bbox": [
+    -81.86583,
+    35.6964,
+    -81.84614,
+    35.71361
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "muddy-creek-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nantahala-lake-nc",
+   "name": "Nantahala Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Aquone",
+    "Topton"
+   ],
+   "bbox": [
+    -83.69766,
+    35.15547,
+    -83.63838,
+    35.19952
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.15,
+   "launches": [
+    "choga-road-nc",
+    "rocky-branch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nantahala-river-nc",
+   "name": "Nantahala River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Beechertown",
+    "Hewitt",
+    "Robbinsville",
+    "Talc Mountain",
+    "Topton",
+    "Wesser"
+   ],
+   "bbox": [
+    -83.68193,
+    35.01821,
+    -83.50487,
+    35.38137
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.688,
+   "launches": [
+    "nantahala-river-boat-launch-near-hewitt-nc",
+    "nantahala-river-beaching-area-obsv-deck-nc",
+    "nantahala-river-beechertown-commercial-a-nc",
+    "nantahala-river-commercial-public-take-nc",
+    "nantahala-river-launch-site-nc",
+    "nantahala-river-silver-mine-take-out-3-nc",
+    "upper-nantahala-river-mile-16-7-nc",
+    "upper-nantahala-river-white-oak-creek-nc",
+    "nantahala-river-boat-launch-near-beechertown-nc-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "neuse-river-nc",
+   "name": "Neuse River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Bridgeton",
+    "Goldsboro",
+    "Grifton",
+    "Janeiro",
+    "Kingston",
+    "Kinston",
+    "Knightdale",
+    "La Grange",
+    "Minnesott Beach",
+    "New Bern",
+    "Oriental",
+    "Princeton"
+   ],
+   "bbox": [
+    -78.81261,
+    34.94876,
+    -76.49681,
+    36.09584
+   ],
+   "wikidata": "Q1606944",
+   "charted": true,
+   "area_km2": 5.497,
+   "launches": [
+    "bridgeton-nc",
+    "cliffs-of-the-neusse-canoe-launch-nc",
+    "cow-pen-landing-nc",
+    "coxs-ferry-nc",
+    "goldsboro-nc",
+    "kinston-nc",
+    "maple-cypress-nc",
+    "neuseway-nature-park-nc",
+    "poole-road-canoe-launch-nc",
+    "prices-landing-nc",
+    "richardsons-bridge-nc",
+    "seven-springs-nc",
+    "smithfield-nc",
+    "spring-garden-nc",
+    "state-park-canoe-tie-uo-nc",
+    "stevens-mill-nc",
+    "union-street-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "new-river-nc",
+   "name": "New River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Jacksonville",
+    "Piney Green",
+    "Sneads Ferry"
+   ],
+   "bbox": [
+    -77.68023,
+    34.55423,
+    -77.35232,
+    34.97813
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "jacksonville-landing-nc",
+    "sneads-ferry-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "new-river-sparta-nc",
+   "name": "New River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Sparta"
+   ],
+   "bbox": [
+    -81.35488,
+    36.54609,
+    -81.085,
+    36.58188
+   ],
+   "wikidata": "Q952823",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "farmers-fish-camp-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "newbegun-creek-nc",
+   "name": "Newbegun Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Old Weeksville"
+   ],
+   "bbox": [
+    -76.21339,
+    36.20519,
+    -76.0956,
+    36.25145
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "sawmill-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "newbold-pond-nc",
+   "name": "Newbold Pond",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Tarboro"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "newbold-pond-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "newport-river-nc",
+   "name": "Newport River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Morehead City",
+    "Newport"
+   ],
+   "bbox": [
+    -76.90999,
+    34.78272,
+    -76.87878,
+    34.79311
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "newport-nc",
+    "newport-river-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nolichucky-river-nc",
+   "name": "Nolichucky River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Green Mountain"
+   ],
+   "bbox": [
+    -82.41813,
+    36.02897,
+    -82.32739,
+    36.08456
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "poplar-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-new-river-nc",
+   "name": "North Fork New River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Lansing"
+   ],
+   "bbox": [
+    -81.69219,
+    36.33302,
+    -81.35187,
+    36.55037
+   ],
+   "wikidata": "Q7055414",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "crumpler-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-toe-river-nc",
+   "name": "North Toe River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Green Mountain",
+    "Penland",
+    "Spruce Pine"
+   ],
+   "bbox": [
+    -82.32739,
+    35.90025,
+    -81.88662,
+    36.12943
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "penland-access-nc",
+    "red-hill-access-nc",
+    "spruce-pine-riverside-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "northeast-cape-fear-river-nc",
+   "name": "Northeast Cape Fear River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Burgaw",
+    "Castle Hayne",
+    "Chinquapin",
+    "Kenansville",
+    "Wallace"
+   ],
+   "bbox": [
+    -78.05145,
+    34.24009,
+    -77.811,
+    35.19401
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "castle-hayne-nc",
+    "chinquapin-nc",
+    "holly-shelter-nc",
+    "kenansville-nc",
+    "riverside-park-nc",
+    "sawpit-landing-nc",
+    "waynes-landing-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nottely-river-nc",
+   "name": "Nottely River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Murphy"
+   ],
+   "bbox": [
+    -84.1463,
+    34.98312,
+    -84.07061,
+    35.09109
+   ],
+   "wikidata": "Q7063559",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "little-ranger-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oak-hollow-lake-nc",
+   "name": "Oak Hollow Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "High Point"
+   ],
+   "bbox": [
+    -80.01989,
+    35.9945,
+    -79.97842,
+    36.04733
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.703,
+   "launches": [
+    "oak-hollow-lake-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oconaluftee-river-nc",
+   "name": "Oconaluftee River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Whittier"
+   ],
+   "bbox": [
+    -83.3841,
+    35.44515,
+    -83.29701,
+    35.58781
+   ],
+   "wikidata": "Q85790238",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bryson-trailrace-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "old-millpond-nc",
+   "name": "Old Millpond",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Granite Falls"
+   ],
+   "bbox": [
+    -81.42124,
+    35.80054,
+    -81.40743,
+    35.81616
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.287,
+   "launches": [
+    "knox-landing-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "onslow-bay-nc",
+   "name": "Onslow Bay",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "North Topsail Beach",
+    "Shell Bank"
+   ],
+   "bbox": [
+    -77.95928,
+    33.74128,
+    -76.52869,
+    34.69723
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3644.302,
+   "launches": [
+    "north-topsail-beach-town-park-canoe-launch-nc",
+    "rodney-knowles-memorial-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pamlico-river-nc",
+   "name": "Pamlico River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Aurora",
+    "Belhaven",
+    "Camp Hardee",
+    "Camp Leach",
+    "Hobucken",
+    "Spring Creek",
+    "Washington",
+    "Washington Park"
+   ],
+   "bbox": [
+    -77.0857,
+    35.24496,
+    -76.47583,
+    35.55644
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 290.112,
+   "launches": [
+    "havens-garden-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pamlico-sound-nc",
+   "name": "Pamlico Sound",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Avon",
+    "Buxton",
+    "Cedar Island",
+    "Engelhard",
+    "Frisco",
+    "Hatteras",
+    "Manteo",
+    "Ocracoke",
+    "Rodanthe",
+    "Salvo",
+    "Scranton",
+    "South Rodanthe"
+   ],
+   "bbox": [
+    -76.61262,
+    34.90362,
+    -75.46723,
+    35.79687
+   ],
+   "wikidata": "Q2033236",
+   "charted": true,
+   "area_km2": 4082.961,
+   "launches": [
+    "cedar-island-nc",
+    "kelly-n-davis-nc",
+    "new-inlet-boat-ramp-nc",
+    "ocracoke-boat-ramp-nc",
+    "oregon-inlet-fishing-center-boat-ramp-nc",
+    "outfall-canal-nc",
+    "pamlico-sound-boat-launch-near-manteo-nc",
+    "rodanthe-nc",
+    "rose-bay-nc",
+    "stumpy-point-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pantego-creek-nc",
+   "name": "Pantego Creek",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Belhaven"
+   ],
+   "bbox": [
+    -76.70071,
+    35.52616,
+    -76.60966,
+    35.60985
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.529,
+   "launches": [
+    "belhaven-nc"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2016.",
+     "date": "2016-08-02",
+     "years": [
+      "2016"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "parch-corn-bay-nc",
+   "name": "Parch Corn Bay",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Bayboro"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "parch-corn-bay-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pasquotank-river-nc",
+   "name": "Pasquotank River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Camden",
+    "Elizabeth City Beach",
+    "Texas"
+   ],
+   "bbox": [
+    -76.44354,
+    36.17645,
+    -76.03203,
+    36.4717
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "milltown-road-river-access-nc",
+    "sawyers-creek-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pee-dee-river-nc",
+   "name": "Pee Dee River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Ansonville",
+    "Mount Gilead",
+    "Rockingham",
+    "Wadesboro"
+   ],
+   "bbox": [
+    -80.09784,
+    34.7969,
+    -79.84888,
+    35.38016
+   ],
+   "wikidata": "Q2061230",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blewetts-grave-nc",
+    "clarks-creek-nc",
+    "diggs-nc",
+    "pee-dee-river-boat-launch-nc",
+    "red-hill-nc",
+    "rockingham-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pembroke-creek-edenton-nc",
+   "name": "Pembroke Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Edenton"
+   ],
+   "bbox": [
+    -76.606,
+    36.05337,
+    -76.57976,
+    36.08833
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "queen-anne-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pembroke-creek-nc",
+   "name": "Pembroke Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Edenton"
+   ],
+   "bbox": [
+    -76.65006,
+    36.05457,
+    -76.61668,
+    36.06947
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "pembroke-creek-boat-launch-near-edenton-nc-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "perquimans-river-nc",
+   "name": "Perquimans River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Belvidere",
+    "Hertford",
+    "Winfall"
+   ],
+   "bbox": [
+    -76.54833,
+    36.10376,
+    -76.29265,
+    36.32414
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "belvidere-launch-access-nc",
+    "hertford-nc",
+    "missing-mill-park-nc",
+    "perquimans-nc",
+    "town-hall-access-nc",
+    "winfall-landing-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pond-1-nc",
+   "name": "Pond #1",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Greensboro"
+   ],
+   "bbox": [
+    -79.73595,
+    35.94981,
+    -79.73196,
+    35.95365
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.059,
+   "launches": [
+    "hagan-stone-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "price-lake-nc",
+   "name": "Price Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Blowing Rock"
+   ],
+   "bbox": [
+    -81.73978,
+    36.13175,
+    -81.73121,
+    36.13951
+   ],
+   "wikidata": "Q34916078",
+   "charted": false,
+   "area_km2": 0.176,
+   "launches": [
+    "price-lake-boat-rentals-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pungo-river-nc",
+   "name": "Pungo River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Belhaven",
+    "Makleyville"
+   ],
+   "bbox": [
+    -76.63109,
+    35.35871,
+    -76.43021,
+    35.63065
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 109.283,
+   "launches": [
+    "wrights-creek-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "quaker-creek-reservoir-nc",
+   "name": "Quaker Creek Reservoir",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Mebane"
+   ],
+   "bbox": [
+    -79.33249,
+    36.09791,
+    -79.28059,
+    36.1483
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.685,
+   "launches": [
+    "graham-mebane-lake-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "queens-creek-lake-nc",
+   "name": "Queens Creek Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Topton"
+   ],
+   "bbox": [
+    -83.65716,
+    35.27551,
+    -83.64839,
+    35.2821
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.078,
+   "launches": [
+    "queens-creek-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "raccoon-creek-nc",
+   "name": "Raccoon Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Bayboro"
+   ],
+   "bbox": [
+    -76.75556,
+    35.14966,
+    -76.72596,
+    35.15999
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "raccoon-creek-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rhodes-pond-nc",
+   "name": "Rhodes Pond",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Dunn"
+   ],
+   "bbox": [
+    -78.65839,
+    35.22505,
+    -78.64662,
+    35.23677
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.71,
+   "launches": [
+    "rhodes-pond-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rice-creek-nc",
+   "name": "Rice Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Winnabow"
+   ],
+   "bbox": [
+    -78.07246,
+    34.12353,
+    -78.05429,
+    34.16338
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rices-creek-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "river-park-north-ponds-nc",
+   "name": "River Park North Ponds",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Greenville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "river-park-north-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "roanoke-rapids-lake-nc",
+   "name": "Roanoke Rapids Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Gaston",
+    "Roanoke Rapids"
+   ],
+   "bbox": [
+    -77.81149,
+    36.46152,
+    -77.67191,
+    36.50857
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 16.24,
+   "launches": [
+    "fifth-street-landing-nc",
+    "thelma-nc",
+    "vultare-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "roanoke-river-nc",
+   "name": "Roanoke River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Gaston",
+    "Halifax",
+    "Hamilton",
+    "Jackson",
+    "Jamesville",
+    "Lewiston Woodville",
+    "Plymouth",
+    "Scotland Neck",
+    "Weldon",
+    "Williamston"
+   ],
+   "bbox": [
+    -78.15211,
+    35.81293,
+    -76.69394,
+    36.57031
+   ],
+   "wikidata": "Q1584933",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "astoria-landing-nc",
+    "edwards-ferry-nc",
+    "gaston-nc",
+    "hamilton-nc",
+    "lewiston-woodville-nc",
+    "nc-hwy-45-bridge-nc",
+    "odom-nc",
+    "roanoke-river-boat-launch-near-plymouth-nc",
+    "plymouth-water-street-nc",
+    "weldon-nc",
+    "williamston-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "roanoke-sound-nc",
+   "name": "Roanoke Sound",
+   "kind": "sound",
+   "state": "NC",
+   "towns": [
+    "Manteo",
+    "Nags Head"
+   ],
+   "bbox": [
+    -75.72313,
+    35.81596,
+    -75.57116,
+    35.98476
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 64.853,
+   "launches": [
+    "harvey-sound-access-nc",
+    "roanoke-sound-carry-in-access-nc",
+    "washington-baum-bridge-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "roaring-fork-nc",
+   "name": "Roaring Fork",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Hot Springs"
+   ],
+   "bbox": [
+    -82.96149,
+    35.79795,
+    -82.89496,
+    35.82225
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "roaring-fork-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rose-bay-canal-nc",
+   "name": "Rose Bay Canal",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Swan Quarter"
+   ],
+   "bbox": [
+    -76.34664,
+    35.47521,
+    -76.30606,
+    35.47732
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rose-bay-canal-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salem-lake-nc",
+   "name": "Salem Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Winston-Salem"
+   ],
+   "bbox": [
+    -80.19319,
+    36.09103,
+    -80.15881,
+    36.11272
+   ],
+   "wikidata": "Q34921210",
+   "charted": false,
+   "area_km2": 1.035,
+   "launches": [
+    "salem-lake-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salters-creek-nc",
+   "name": "Salters Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Sealevel"
+   ],
+   "bbox": [
+    -76.425,
+    34.88669,
+    -76.40001,
+    34.91959
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.232,
+   "launches": [
+    "salters-creek-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "scotland-lake-nc",
+   "name": "Scotland Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Marston"
+   ],
+   "bbox": [
+    -79.51845,
+    34.99295,
+    -79.51638,
+    34.99952
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.057,
+   "launches": [
+    "scotland-lake-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "scuppernong-river-nc",
+   "name": "Scuppernong River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Columbia",
+    "Creswell"
+   ],
+   "bbox": [
+    -76.44173,
+    35.85171,
+    -76.25496,
+    35.94172
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "columbia-nc",
+    "creswell-nc",
+    "scuppernong-kayak-canoe-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sellers-manufacturing-company-lake-nc",
+   "name": "Sellers Manufacturing Company Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Burlington"
+   ],
+   "bbox": [
+    -79.33787,
+    35.94736,
+    -79.32446,
+    35.96694
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.451,
+   "launches": [
+    "saxapahaw-lake-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shad-cove-nc",
+   "name": "Shad Cove",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "New Bern"
+   ],
+   "bbox": [
+    -77.08079,
+    35.15526,
+    -77.07745,
+    35.15817
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "martin-marietta-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shadow-lake-nc",
+   "name": "Shadow Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Whispering Pines"
+   ],
+   "bbox": [
+    -79.36627,
+    35.25528,
+    -79.35683,
+    35.26096
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.093,
+   "launches": [
+    "shadow-lake-boat-ramp-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shallowbag-bay-nc",
+   "name": "Shallowbag Bay",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Manteo"
+   ],
+   "bbox": [
+    -75.6698,
+    35.89686,
+    -75.64765,
+    35.91938
+   ],
+   "wikidata": "Q49391702",
+   "charted": true,
+   "area_km2": 2.495,
+   "launches": [
+    "shallowbag-bay-boat-launch-nc",
+    "roanoke-island-festival-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shingle-landing-creek-nc",
+   "name": "Shingle Landing Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Moyock"
+   ],
+   "bbox": [
+    -76.19186,
+    36.51765,
+    -76.15444,
+    36.54014
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "shingle-landing-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "smith-creek-nc",
+   "name": "Smith Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Aurora"
+   ],
+   "bbox": [
+    -76.63901,
+    35.25779,
+    -76.62939,
+    35.28342
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "smiths-creek-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "smith-river-nc",
+   "name": "Smith River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Eden"
+   ],
+   "bbox": [
+    -79.77155,
+    36.48074,
+    -79.75005,
+    36.54604
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "island-ford-river-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "snows-cut-nc",
+   "name": "Snows Cut",
+   "kind": "canal",
+   "state": "NC",
+   "towns": [
+    "Carolina Beach"
+   ],
+   "bbox": [
+    -77.93949,
+    34.02426,
+    -77.89006,
+    34.05898
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "snows-cut-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-creek-nc",
+   "name": "South Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Aurora"
+   ],
+   "bbox": [
+    -76.79301,
+    35.25349,
+    -76.65429,
+    35.38609
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 10.179,
+   "launches": [
+    "aurora-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-new-river-nc",
+   "name": "South Fork New River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Boone",
+    "Jefferson",
+    "New River Heights",
+    "Todd",
+    "Wagoner",
+    "West Jefferson"
+   ],
+   "bbox": [
+    -81.65604,
+    36.20457,
+    -81.32264,
+    36.55266
+   ],
+   "wikidata": "Q7567290",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "boone-access-nc",
+    "green-valley-access-nc",
+    "hartzog-ford-access-nc",
+    "south-fork-new-river-boat-launch-near-obids-nc",
+    "pine-run-access-nc",
+    "sheets-bridge-new-river-access-nc",
+    "todd-nc",
+    "todd-island-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-river-nc",
+   "name": "South River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Garland",
+    "Ivanhoe"
+   ],
+   "bbox": [
+    -78.67229,
+    34.58117,
+    -78.26933,
+    35.20792
+   ],
+   "wikidata": "Q7568323",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ennis-bridge-nc",
+    "sloans-bridge-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-toe-river-nc",
+   "name": "South Toe River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Burnsville"
+   ],
+   "bbox": [
+    -82.25036,
+    35.71106,
+    -82.17233,
+    35.94358
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "yancey-county-toe-river-campground-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-yadkin-river-nc",
+   "name": "South Yadkin River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Cooleemee",
+    "Salisbury"
+   ],
+   "bbox": [
+    -81.15636,
+    35.74516,
+    -80.45989,
+    36.03516
+   ],
+   "wikidata": "Q7568976",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cooleemee-nc",
+    "cooleemee-falls-portage-nc-2",
+    "crowther-nc",
+    "us-601-river-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "southwest-prong-slocum-creek-nc",
+   "name": "Southwest Prong Slocum Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Havelock"
+   ],
+   "bbox": [
+    -76.98989,
+    34.83571,
+    -76.91988,
+    34.89562
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "slocum-creek-nc",
+    "slocum-creek-waterfront-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "spring-valley-lake-nc",
+   "name": "Spring Valley Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Whispering Pines"
+   ],
+   "bbox": [
+    -79.39583,
+    35.24865,
+    -79.38054,
+    35.25963
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.329,
+   "launches": [
+    "spring-valley-lake-boat-ramp-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stiles-branch-nc",
+   "name": "Stiles Branch",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Almond"
+   ],
+   "bbox": [
+    -83.56511,
+    35.35725,
+    -83.53973,
+    35.37412
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "finger-lakes-kayak-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stony-creek-reservoir-nc",
+   "name": "Stony Creek Reservoir",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Burlington"
+   ],
+   "bbox": [
+    -79.41379,
+    36.12749,
+    -79.40494,
+    36.15046
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.367,
+   "launches": [
+    "stoney-creek-lake-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stump-sound-nc",
+   "name": "Stump Sound",
+   "kind": "sound",
+   "state": "NC",
+   "towns": [
+    "Holly Ridge",
+    "North Topsail Beach"
+   ],
+   "bbox": [
+    -77.56823,
+    34.42352,
+    -77.40216,
+    34.51362
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 14.147,
+   "launches": [
+    "west-onslow-beach-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swift-creek-nc",
+   "name": "Swift Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "New Bern"
+   ],
+   "bbox": [
+    -77.42952,
+    35.19128,
+    -77.08417,
+    35.56107
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cool-springs-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tanasee-creek-lake-nc",
+   "name": "Tanasee Creek Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Tuckasegee"
+   ],
+   "bbox": [
+    -83.00344,
+    35.20935,
+    -82.98598,
+    35.21629
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.144,
+   "launches": [
+    "tanasee-creek-lake-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tar-river-nc",
+   "name": "Tar River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Battleboro",
+    "Falkland",
+    "Greenville",
+    "Oxford",
+    "Rocky Mount",
+    "Tarboro"
+   ],
+   "bbox": [
+    -78.8451,
+    35.5512,
+    -77.08472,
+    36.41501
+   ],
+   "wikidata": "Q841725",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "battle-park-nc",
+    "bells-bridge-nc",
+    "dunbar-bridge-nc",
+    "falkland-nc",
+    "greenville-nc",
+    "tar-river-boat-launch-nc",
+    "old-sparta-nc",
+    "sunset-park-nc",
+    "wilton-slopes-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "taylor-creek-nc",
+   "name": "Taylor Creek",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Beaufort"
+   ],
+   "bbox": [
+    -76.67278,
+    34.70635,
+    -76.61688,
+    34.71915
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.842,
+   "launches": [
+    "beaufort-nc",
+    "fisherman-s-park-nc",
+    "orange-street-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "thagard-lake-nc",
+   "name": "Thagard Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Whispering Pines"
+   ],
+   "bbox": [
+    -79.38665,
+    35.26107,
+    -79.35912,
+    35.26869
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.752,
+   "launches": [
+    "thagard-lake-boat-ramp-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "the-basin-nc",
+   "name": "The Basin",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Kure Beach"
+   ],
+   "bbox": [
+    -77.94962,
+    33.94586,
+    -77.92342,
+    33.96058
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.674,
+   "launches": [
+    "federal-point-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tillets-cove-nc",
+   "name": "Tillets Cove",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Kitty Hawk"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "tillets-cove-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "topsail-sound-nc",
+   "name": "Topsail Sound",
+   "kind": "sound",
+   "state": "NC",
+   "towns": [
+    "Hampstead",
+    "Kings Landing",
+    "Surf City",
+    "Topsail Beach"
+   ],
+   "bbox": [
+    -77.74167,
+    34.29832,
+    -77.5533,
+    34.43824
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 21.869,
+   "launches": [
+    "hampstead-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tranters-creek-nc",
+   "name": "Tranters Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Washington"
+   ],
+   "bbox": [
+    -77.30402,
+    35.55266,
+    -77.08472,
+    35.79373
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "masons-landing-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "trent-river-nc",
+   "name": "Trent River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "New Bern",
+    "Pollocksville",
+    "River Bend",
+    "Trent Woods",
+    "Trenton"
+   ],
+   "bbox": [
+    -77.74032,
+    35.00672,
+    -77.02262,
+    35.11348
+   ],
+   "wikidata": "Q15681349",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "new-bern-boat-launch-nc-2",
+    "neuse-river-gateway-nc",
+    "pollocksville-nc",
+    "river-bend-kayak-canoe-launch-nc",
+    "trenton-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tuckasegee-river-cullowhee-nc",
+   "name": "Tuckasegee River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Cullowhee",
+    "Dillsboro",
+    "East Laport",
+    "Tuckasegee",
+    "Webster",
+    "Whittier"
+   ],
+   "bbox": [
+    -83.40078,
+    35.21055,
+    -83.00866,
+    35.45265
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "barkers-creek-nc",
+    "c-j-harris-nc",
+    "tuckasegee-river-boat-launch-near-east-laport-nc",
+    "lena-davis-river-access-cullowhee-nc",
+    "shook-cove-put-in-nc",
+    "shook-cove-take-out-nc",
+    "whittier-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tuckasegee-river-nc",
+   "name": "Tuckasegee River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Bryson City"
+   ],
+   "bbox": [
+    -83.52207,
+    35.42119,
+    -83.43232,
+    35.4526
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "old-288-nc",
+    "tuckasegee-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tuckertown-reservoir-nc",
+   "name": "Tuckertown Reservoir",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Denton",
+    "Newsom",
+    "Richfield"
+   ],
+   "bbox": [
+    -80.23588,
+    35.48386,
+    -80.16701,
+    35.60077
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.397,
+   "launches": [
+    "bringle-ferry-nc",
+    "flat-creek-nc"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://ncdenr.maps.arcgis.com/apps/dashboards/7543be4dc8194e6e9c215079d976e716",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021.",
+     "date": "2021-08-02",
+     "years": [
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tull-creek-nc",
+   "name": "Tull Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Currituck"
+   ],
+   "bbox": [
+    -76.09857,
+    36.46084,
+    -76.05212,
+    36.49997
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "poyners-road-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upchurch-lake-nc",
+   "name": "Upchurch Lake",
+   "kind": "lake",
+   "state": "NC",
+   "towns": [
+    "Raeford"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "upchurch-lake-carry-in-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upper-broad-creek-nc",
+   "name": "Upper Broad Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Fairfield Harbour",
+    "Reelsboro"
+   ],
+   "bbox": [
+    -76.98735,
+    35.03824,
+    -76.90531,
+    35.23657
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.155,
+   "launches": [
+    "lees-landing-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "uwharrie-river-nc",
+   "name": "Uwharrie River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Troy"
+   ],
+   "bbox": [
+    -80.0591,
+    35.38016,
+    -79.95117,
+    35.91329
+   ],
+   "wikidata": "Q7903980",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "low-water-bridge-access-nc",
+    "nc-hwy-109-nc",
+    "uwarrie-river-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "w-kerr-scott-reservoir-nc",
+   "name": "W. Kerr Scott Reservoir",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Wilkesboro"
+   ],
+   "bbox": [
+    -81.30217,
+    36.09032,
+    -81.22664,
+    36.13576
+   ],
+   "wikidata": "Q18159088",
+   "charted": false,
+   "area_km2": 4.605,
+   "launches": [
+    "bandits-roost-boat-ramp-nc",
+    "w-kerr-scott-reservoir-boat-launch-near-wilkesboro-nc-4",
+    "w-kerr-scott-reservoir-boat-launch-near-wilkesboro-nc-2",
+    "fort-hamby-park-boat-ramp-nc",
+    "keowee-boat-ramp-nc",
+    "smitheys-creek-boat-ramp-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "waccamaw-river-nc",
+   "name": "Waccamaw River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Ash",
+    "New Britton"
+   ],
+   "bbox": [
+    -78.65175,
+    33.94313,
+    -78.52215,
+    34.2609
+   ],
+   "wikidata": "Q7958732",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pireway-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-fork-tuckasegee-river-nc",
+   "name": "West Fork Tuckasegee River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Tuckasegee"
+   ],
+   "bbox": [
+    -83.16562,
+    35.19497,
+    -83.12058,
+    35.2682
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tuckasegee-powerhouse-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wharf-bay-nc",
+   "name": "Wharf Bay",
+   "kind": "bay",
+   "state": "NC",
+   "towns": [
+    "Goose Creek"
+   ],
+   "bbox": [
+    -76.07187,
+    36.22705,
+    -76.04918,
+    36.23748
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "one-mill-landing-park-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "whisper-lake-nc",
+   "name": "Whisper Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Whispering Pines"
+   ],
+   "bbox": [
+    -79.35685,
+    35.24866,
+    -79.35349,
+    35.25573
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.131,
+   "launches": [
+    "whisper-lake-boat-ramp-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "white-oak-river-nc",
+   "name": "White Oak River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Cape Carteret",
+    "Maysville"
+   ],
+   "bbox": [
+    -77.36582,
+    34.78059,
+    -77.16599,
+    34.93835
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dixon-fields-canoe-launch-nc",
+    "haywood-landing-nc",
+    "long-point-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wiccacon-river-nc",
+   "name": "Wiccacon River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Harrellsville"
+   ],
+   "bbox": [
+    -76.90574,
+    36.30158,
+    -76.75418,
+    36.34977
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.229,
+   "launches": [
+    "harrellsville-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilson-creek-nc",
+   "name": "Wilson Creek",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Collettsville"
+   ],
+   "bbox": [
+    -81.80828,
+    35.88168,
+    -81.70898,
+    36.10534
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wilson-creek-access-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wolf-creek-lake-nc",
+   "name": "Wolf Creek Lake",
+   "kind": "reservoir",
+   "state": "NC",
+   "towns": [
+    "Tuckasegee"
+   ],
+   "bbox": [
+    -83.00166,
+    35.21904,
+    -82.98356,
+    35.24301
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.623,
+   "launches": [
+    "wolf-creek-boat-launch-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wolf-creek-nc",
+   "name": "Wolf Creek",
+   "kind": "stream",
+   "state": "NC",
+   "towns": [
+    "Tuckasegee"
+   ],
+   "bbox": [
+    -83.0172,
+    35.21938,
+    -82.95893,
+    35.30617
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "balsam-lake-nc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yadkin-river-nc",
+   "name": "Yadkin River",
+   "kind": "river",
+   "state": "NC",
+   "towns": [
+    "Adley",
+    "Bermuda Run",
+    "Boonville",
+    "Clemmons",
+    "East Bend",
+    "Elkin",
+    "Ferguson",
+    "Fort Defiance",
+    "Jonesville",
+    "Lewisville",
+    "Mocksville",
+    "North Wilkesboro"
+   ],
+   "bbox": [
+    -81.63333,
+    35.38016,
+    -80.05789,
+    36.28712
+   ],
+   "wikidata": "Q1520726",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "boone-s-cave-access-nc",
+    "burch-station-access-nc",
+    "concord-church-nc",
+    "crater-park-nc",
+    "donnaha-park-nc",
+    "double-bluff-nc",
+    "huntsville-access-nc",
+    "marley-ford-canoe-launch-nc",
+    "moravian-creek-access-nc",
+    "old-u-s-421-river-park-access-nc",
+    "roaring-river-nc",
+    "ronda-access-nc",
+    "smoot-park-access-nc",
+    "smoot-park-access-north-wilkesboro-nc",
+    "tailwater-access-nc",
+    "tanglewood-yadkin-river-access-nc",
+    "us-64-river-access-nc",
+    "yadkin-shore-access-nc",
+    "yadkin-valley-community-park-access-nc"
+   ],
+   "advisories": []
+  }
+ ]
+}
