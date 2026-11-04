@@ -1246,9 +1246,122 @@ def census_lake_outline(slug: str, waters: dict, land: dict | None):
     return g
 
 
-def lake_outline(slug: str, waters: dict, land: dict | None) -> tuple:
-    """(outline, where from): the record's own (openboatlaunch's file or inline), else census_lake_outline."""
+_OCEAN: dict = {}
+OCEAN_OFFSHORE_M = 1_000        # a stretch of the state's water boundary this far from land is its offshore line
+
+
+def ocean_outline(lon: float, lat: float, state: str, land: dict | None, shore: dict):
+    """The state's coastal waters around a point on an open-ocean record (build/shoreline.py, reach.shoreline.oceans):
+    the TIGER/Line state polygon (tiger_states: its boundary runs out to the state's offshore line, 3 nautical miles on
+    the Atlantic and 9 on Florida's Gulf coast) less the land of the cartographic outlines, within a box that the walk
+    cannot leave (each_way_km plus gap_km and snap_km around the point), opened by ocean_open_m (eroded and grown back:
+    an inlet, pass or channel narrower than twice that is closed, so the walk follows the open coast and does not turn
+    into the lagoon or bay behind it), keeping only the pieces that reach the state's offshore line (a lagoon cut off by
+    the opening does not). None without the Census files, or when no such water lies near the point."""
+    key = (state, round(lon, 3), round(lat, 3), SH.rule({"reach": {"shoreline": shore}}).get("ocean_open_m"))
+    if key in _OCEAN:
+        return _OCEAN[key]
+    import math
+    import shapely
+    from shapely.geometry import MultiPolygon, box
+    from shapely.ops import unary_union
+    g = None
+    try:
+        poly = tiger_states().get(str(state).upper()) if land else None
+    except Exception:           # no TIGER file this run: no outline, and the stretch is rebuilt next run
+        poly = None
+    if poly is not None:
+        r = SH.rule({"reach": {"shoreline": shore}})
+        reach_km = float(r["each_way_km"]) + float(r["gap_km"]) + float(r["snap_km"]) + 2.0
+        dlat = reach_km / 110.574
+        dlon = reach_km / (111.320 * math.cos(math.radians(lat)))
+        region = box(lon - dlon, lat - dlat, lon + dlon, lat + dlat)
+        near = unary_union([x for x in land.values() if x.intersects(region)]) if land else None
+        water = poly.intersection(region)
+        if near is not None and not near.is_empty:
+            water = water.difference(near)
+        if not water.is_empty:
+            k = (111_320.0 * math.cos(math.radians(lat)), 110_574.0)
+            wm = shapely.transform(water, lambda xy: xy * k)
+            op = float(r.get("ocean_open_m") or 0)
+            opened = wm.buffer(-op).buffer(op) if op > 0 else wm
+            opened = opened.intersection(wm)          # the opening never adds water
+            # the state's offshore line: its polygon's boundary inside the box, away from land
+            pm = shapely.transform(poly.intersection(region), lambda xy: xy * k)
+            nm = shapely.transform(near, lambda xy: xy * k) if near is not None and not near.is_empty else None
+            off = pm.boundary
+            if nm is not None:
+                off = off.difference(nm.buffer(OCEAN_OFFSHORE_M))
+            rm = shapely.transform(region, lambda xy: xy * k).boundary.buffer(1.0)
+            off = off.difference(rm)                  # the box's own edges are not the offshore line
+            parts = [x for x in getattr(opened, "geoms", [opened]) if x.geom_type == "Polygon" and not x.is_empty
+                     and not off.is_empty and x.distance(off) < 50]
+            if parts:
+                gm = parts[0] if len(parts) == 1 else MultiPolygon(parts)
+                g = shapely.transform(gm, lambda xy: xy / k)
+    _OCEAN[key] = g
+    return g
+
+
+# the waters an ocean stretch runs along besides the ocean (review of 2026-11-04, P2-1): the opening closes an inlet or
+# pass narrower than twice ocean_open_m, but a bay or sound that opens more widely to the sea (St. Joseph Bay, St. Joseph
+# Sound, Biscayne Bay beyond Key Biscayne) is part of the open water and the walk follows its shore; a reach belongs to
+# every water it runs through, so such a record is one of the stretch's waters (its page shows the report) when this
+# much of the stretch lies in it or within ALONG_TOL_M of it. A record with no outline here is not found (the hourly run
+# restores openboatlaunch's outlines); a lagoon behind a barrier island wider than ALONG_TOL_M is not reached.
+ALONG_KINDS = {"bay", "sound", "lake", "lagoon"}
+ALONG_TOL_M = 150
+ALONG_MIN_KM = 1.0
+
+
+def ocean_waters_along(segs: list[dict], waters: dict, ocean_slug: str, shore: dict, states: list[str]) -> list[str]:
+    """The bay, sound or lake records of the stretch's states (not an ocean record) that ALONG_MIN_KM or more of the
+    stretch's segments run in or along (within ALONG_TOL_M of the record's outline), by length along the stretch."""
+    import shapely
+    from shapely.geometry import LineString, box
     from build.status import water_geometry
+    lines = [LineString(s["coords"]) for s in segs if len(s.get("coords") or []) >= 2]
+    if not lines:
+        return []
+    xs = [x for ln in lines for x, _ in ln.coords]
+    ys = [y for ln in lines for _, y in ln.coords]
+    lat0 = (min(ys) + max(ys)) / 2
+    k = (111_320.0 * math.cos(math.radians(lat0)), 110_574.0)
+    pad = 0.01
+    area = box(min(xs) - pad, min(ys) - pad, max(xs) + pad, max(ys) + pad)
+    lm = [shapely.transform(ln, lambda xy: xy * k) for ln in lines]
+    want = {str(x).upper() for x in states}
+    found = []
+    for slug, w in sorted(waters.items()):
+        if slug == ocean_slug or w.get("kind") not in ALONG_KINDS or SH.is_ocean(w, shore):
+            continue
+        if want and str(w.get("state") or "").upper() not in want:
+            continue
+        bb = w.get("bbox")
+        if bb and not box(*bb).intersects(area):
+            continue
+        g = water_geometry(slug, waters)
+        if g is None or not g.intersects(area):
+            continue
+        gm = shapely.transform(g.intersection(area), lambda xy: xy * k).buffer(ALONG_TOL_M)
+        km = sum(ln.intersection(gm).length for ln in lm) / 1000
+        if km >= ALONG_MIN_KM:
+            found.append((-km, slug))
+    return [s for _, s in sorted(found)]
+
+
+def lake_outline(slug: str, waters: dict, land: dict | None, point: tuple | None = None, shore: dict | None = None) -> tuple:
+    """(outline, where from): the record's own (openboatlaunch's file or inline), else census_lake_outline. An
+    open-ocean record (reach.shoreline.oceans) is walked on the state's coastal waters at the point (ocean_outline,
+    "census_ocean"), never on its own outline (the ocean, not the shore); with no point it has none."""
+    from build.status import water_geometry
+    shore = shore_rule() if shore is None else shore
+    w = waters.get(slug) or {}
+    if slug and SH.is_ocean(w, shore):
+        if point is None:
+            return None, None
+        g = ocean_outline(point[0], point[1], str(w.get("state") or "").upper(), land, shore)
+        return g, ("census_ocean" if g is not None else None)
     g = water_geometry(slug, waters) if slug else None
     if g is not None:
         return g, "record"
@@ -1258,7 +1371,7 @@ def lake_outline(slug: str, waters: dict, land: dict | None) -> tuple:
 
 def shore_sig(shore: dict) -> str:
     """The rule values a cached stretch was built with: a change rebuilds every stretch."""
-    return "|".join(str(shore.get(k)) for k in ("each_way_km", "shore_m", "gap_km", "snap_km"))
+    return "|".join(str(shore.get(k)) for k in ("each_way_km", "shore_m", "gap_km", "snap_km", "ocean_open_m"))
 
 
 def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> dict:
@@ -1276,9 +1389,14 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
     entry = SH.shoreline_entry(w, shore)
     rec["river"] = (entry or {}).get("name") or w.get("name")
     rec["lake"] = rec["river"]
-    g, outline = lake_outline(slug, waters, land)
+    rec["ocean"] = bool((entry or {}).get("ocean"))
+    if rec["ocean"] and c.get("lat") is None:
+        rec["error"] = "no point to start from"
+        return rec
+    g, outline = lake_outline(slug, waters, land, (c["lon"], c["lat"]) if c.get("lat") is not None else None, shore)
     if g is None or c.get("lat") is None:
-        rec["error"] = "no outline for the lake record" if g is None else "no point to start from"
+        rec["error"] = ("no outline for the lake record" if not rec["ocean"] else
+                        "no coastal waters of the state near the point") if g is None else "no point to start from"
         return rec
     rec["outline"] = outline        # "census": the state's waters in the lake from the Census files (no record outline)
     near = None
@@ -1324,6 +1442,8 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
     lake_recs = SH.lake_waters(slug, states, waters, shore)
     for n_slug in onto:          # the other lake's records too (Lake Michigan's, from a Lake Huron outfall)
         lake_recs += [x for x in SH.lake_waters(n_slug, states, waters, shore) if x not in lake_recs]
+    if rec["ocean"] and segs:    # a bay or sound the ocean stretch runs along (ALONG_KINDS: its mouth is wider than the
+        lake_recs += [x for x in ocean_waters_along(segs, waters, slug, shore, states) if x not in lake_recs]   # opening)
     rec.update(segments=segs, stops=stops, cut_reason=SH.MODEL if segs else "no_trace",
                length_km=round(sum(e["km_from_outfall"] for e in stops), 3), snap_m=r["snap_m"], states=states,
                waters=lake_recs, error=None if segs else "the shore has no length at the point")
@@ -1344,7 +1464,7 @@ def onward_record(pt, km: float, walked: list, waters: dict, shore: dict, land: 
         bb = w2.get("bbox")
         if bb and not (bb[0] - pad <= lon <= bb[2] + pad and bb[1] - pad <= lat <= bb[3] + pad):
             continue
-        g2, _ = lake_outline(s2, waters, land)
+        g2, _ = lake_outline(s2, waters, land, shore=shore)        # an ocean record has none without a point
         if g2 is None or g2 is g0 or (g2.bounds == g0.bounds and abs(g2.area - g0.area) < 1e-9):
             continue
         if g2.boundary.distance(probe) > pad:

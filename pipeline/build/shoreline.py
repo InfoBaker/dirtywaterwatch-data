@@ -26,6 +26,16 @@ which the hourly run does not have) is walked on its state's waters in the lake:
 cartographic land). Where a stretch ends on another shoreline lake record (the next state's, or Lake Michigan beyond
 NHD's line in the Straits of Mackinac), build/reaches.py goes on along that record's shore (onward()).
 
+The open ocean (reach.shoreline.oceans; Florida's go-live gates, 2026-11-04): a report on the Atlantic Ocean or the Gulf of
+Mexico (Gulf of America) colours a stretch of the state's ocean shore at its point, never the ocean. An ocean record's
+own outline is the ocean, not the state's shore, so the walk is on the state's coastal waters near the point
+(build/reaches.py ocean_outline: the TIGER/Line state polygon, which reaches 3 nautical miles out on the Atlantic and 9 on
+Florida's Gulf coast, less the cartographic land, opened by ocean_open_m so that an inlet or pass narrower than twice
+that is closed and the walk follows the open coast, not the lagoon behind a barrier island), and only the part of
+those waters that reaches the state's offshore line. A bay or sound that opens wider than that to the sea is part of
+those waters, and the walk follows its shore: build/reaches.py ocean_waters_along adds the records it runs along to the
+stretch's waters. The distance and its evidence are in the rule's ocean rationale.
+
 Pure geometry: no network. Coordinates are lon/lat; the work is in a local equirectangular projection (metres).
 """
 from __future__ import annotations
@@ -35,8 +45,12 @@ import math
 import numpy as np
 
 KINDS = {"lake", "reservoir"}
+# the open ocean (data/rules.json reach.shoreline.oceans, 2026-11-04: Florida's Atlantic Ocean and Gulf records): an
+# ocean record is kept as a bay or sound by openboatlaunch ("Atlantic Ocean", kind bay), so these kinds qualify too,
+# but only for a record the rule's ocean entries name (by wikidata or by one of the entry's names, exactly)
+OCEAN_KINDS = {"bay", "sound", "sea", "ocean", "lake", "reservoir"}
 DEFAULTS = {"each_way_km": 20.0, "shore_m": 500.0, "gap_km": 3.0, "snap_km": 5.0, "name_min_area_km2": 100.0,
-            "min_area_km2": None, "lakes": []}
+            "min_area_km2": None, "lakes": [], "oceans": [], "ocean_open_m": 1000.0}
 STATE_NEAR_M = 2_000          # a stretch point this close to a state's land touches that state
 MODEL = "shoreline"
 STOP_LIMIT = "shoreline_limit"     # the walk reached each_way_km
@@ -60,7 +74,16 @@ def _norm(s) -> str:
 def shoreline_entry(w: dict | None, r: dict) -> dict | None:
     """The rule's lake entry this water record is ({name, ...}), a synthetic {"name": <its name>} when only
     min_area_km2 makes it one, or None: not a shoreline lake."""
-    if not w or w.get("kind") not in KINDS:
+    if not w:
+        return None
+    if w.get("kind") in OCEAN_KINDS:
+        for e in r.get("oceans") or []:
+            names = {_norm(x) for x in [e.get("name"), *(e.get("names") or [])] if x}
+            if e.get("states") and str(w.get("state") or "").upper() not in {str(x).upper() for x in e["states"]}:
+                continue            # the entry lists the states it is applied in (the others keep today's handling)
+            if (e.get("wikidata") and w.get("wikidata") == e["wikidata"]) or _norm(w.get("name")) in names:
+                return {**e, "ocean": True}
+    if w.get("kind") not in KINDS:
         return None
     area = w.get("area_km2")
     area = float(area) if isinstance(area, (int, float)) else None
@@ -79,6 +102,11 @@ def shoreline_entry(w: dict | None, r: dict) -> dict | None:
 
 def is_shoreline(w: dict | None, r: dict) -> bool:
     return shoreline_entry(w, r) is not None
+
+
+def is_ocean(w: dict | None, r: dict) -> bool:
+    """Whether the record is one of the rule's open-ocean waters (reach.shoreline.oceans)."""
+    return bool((shoreline_entry(w, r) or {}).get("ocean"))
 
 
 def shoreline_slugs(waters: dict, r: dict) -> set[str]:
@@ -219,7 +247,7 @@ def stretch(lon: float, lat: float, lake_geom, land=None, each_way_km: float = 2
                     best = (float(d[i]), cm, int(i), a[i] + (b[i] - a[i]) * t[i], shore)
                 break
     if best is None:
-        raise NoShore(f"no shore of the lake within {snap_km:g} km of the point")
+        raise NoShore(f"no shore of the water within {snap_km:g} km of the point")
     snap_m, cm, i, q, shore = best
     ring_m = float(np.hypot(*np.diff(cm, axis=0).T).sum())
     limit = min(each_way_km * 1000, ring_m / 2)

@@ -7,6 +7,65 @@
   "Allen's Creek",
   "Allens Creek"
  ],
+ "atlantic-icw-lake-worth-lagoon-fl": [
+  "Lake Worth Lagoon"
+ ],
+ "atlantic-intercoastal-waterway-fl": [
+  "Intracoastal Waterway",
+  "Intracoastal",
+  "Intercoastal Waterway",
+  "Intercoastal",
+  "ICW"
+ ],
+ "atlantic-intracoastal-waterway-boca-raton-fl": [
+  "Intracoastal Waterway",
+  "Intracoastal",
+  "Intercoastal Waterway",
+  "Intercoastal",
+  "ICW"
+ ],
+ "atlantic-intracoastal-waterway-fl": [
+  "Intracoastal Waterway",
+  "Intracoastal",
+  "Intercoastal Waterway",
+  "Intercoastal",
+  "ICW"
+ ],
+ "atlantic-intracoastal-waterway-hollywood-fl": [
+  "Intracoastal Waterway",
+  "Intracoastal",
+  "Intercoastal Waterway",
+  "Intercoastal",
+  "ICW"
+ ],
+ "atlantic-intracoastal-waterway-jupiter-fl": [
+  "Intracoastal Waterway",
+  "Intracoastal",
+  "Intercoastal Waterway",
+  "Intercoastal",
+  "ICW"
+ ],
+ "atlantic-intracoastal-waterway-palm-coast-fl": [
+  "Intracoastal Waterway",
+  "Intracoastal",
+  "Intercoastal Waterway",
+  "Intercoastal",
+  "ICW"
+ ],
+ "atlantic-intracoastal-waterway-ponte-vedra-fl": [
+  "Intracoastal Waterway",
+  "Intracoastal",
+  "Intercoastal Waterway",
+  "Intercoastal",
+  "ICW"
+ ],
+ "atlantic-intracoastal-waterway-stuart-fl": [
+  "Intracoastal Waterway",
+  "Intracoastal",
+  "Intercoastal Waterway",
+  "Intercoastal",
+  "ICW"
+ ],
  "barbashela-creek-ga": [
   "Babashela Creek"
  ],
@@ -45,8 +104,38 @@
  "ellicott-creek-ny": [
   "Ellicott Crk"
  ],
+ "fannin-bayou-fl": [
+  "Fanning Bayou"
+ ],
  "gloucester-harbor-ma": [
   "Gloucester Inner Harbor"
+ ],
+ "gulf-intracoastal-waterway-fl": [
+  "Intracoastal Waterway",
+  "Intracoastal",
+  "Intercoastal Waterway",
+  "Intercoastal",
+  "ICW"
+ ],
+ "gulf-intracoastal-waterway-indian-rocks-beach-fl": [
+  "Intracoastal Waterway",
+  "Intracoastal",
+  "Intercoastal Waterway",
+  "Intercoastal",
+  "ICW"
+ ],
+ "gulf-intracoastal-waterway-wewahitchka-fl": [
+  "Intracoastal Waterway",
+  "Intracoastal",
+  "Intercoastal Waterway",
+  "Intercoastal",
+  "ICW"
+ ],
+ "gulf-of-america-fl": [
+  "Gulf of Mexico"
+ ],
+ "halifax-river-fl": [
+  "Halifax Intracoastal Waterway"
  ],
  "huron-river-mi": [
   "HURON"
@@ -146,6 +235,9 @@
   "OCMULGEE RV",
   "Ocmuglee River"
  ],
+ "old-tampa-bay-fl": [
+  "Upper Tampa Bay"
+ ],
  "ottauquechee-river-vt": [
   "Ottaquechee River"
  ],
@@ -161,6 +253,10 @@
  ],
  "pipe-makers-canal-ga": [
   "Pipemakers Canal"
+ ],
+ "posten-bayou-fl": [
+  "Poste Bayou",
+  "Posted Bayou"
  ],
  "richard-b-russell-lake-ga": [
   "Richard B. Russell Reservoir"
@@ -179,6 +275,9 @@
  "saint-johns-river-fl": [
   "Lower St Johns River",
   "Lower Saint Johns River"
+ ],
+ "saint-joseph-bay-fl": [
+  "St. Joe Bay"
  ],
  "savannah-river-ga": [
   "SAVANNAH RV"
@@ -216,6 +315,9 @@
  ],
  "sugar-creek-valdosta-ga": [
   "Sugar Crek"
+ ],
+ "the-narrows-fl": [
+  "Narrows Waterway"
  ],
  "tittabawassee-river-mi": [
   "Tittabawasee River"
