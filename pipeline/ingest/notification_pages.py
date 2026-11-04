@@ -551,33 +551,51 @@ def split_register(path: Path | None = None, folder: Path | None = None) -> dict
     """The single file (default data/notice-channels.json) written as data/notice-channels/<st>.json, each state's
     rows sorted by id, and _schema.json; the rows read back from the folder must equal the file's (else the folder is
     removed and nothing changes); then the single file is removed. Returns {state: rows}. ValueError, with nothing
-    written, when the folder already has files, the single file is missing or not a register, or a row has no
-    state code."""
+    written, when the folder already has files (unless they hold exactly this file's rows: a split that stopped
+    before removing the single file is then finished), the single file is missing or not a register, or a row has
+    no state code."""
     import shutil
     single = Path(path) if path is not None else REGISTER
     folder = Path(folder) if folder is not None else single.with_suffix("")
     if not single.exists():
         raise ValueError(f"{single.name} does not exist: nothing to split")
-    if folder.exists() and any(folder.iterdir()):
-        raise ValueError(f"{folder.name}/ already has files: the register is split (or half split); nothing written")
     doc = read_json(single, None)
     if not isinstance(doc, dict) or not isinstance(doc.get("channels"), list):
         raise ValueError(f"{single.name} is not a register (an object with a 'channels' list)")
     rows = doc["channels"]
+    if folder.exists() and any(folder.iterdir()):
+        # a split that stopped between writing the folder and removing the single file (the single file is never
+        # removed first): when the folder holds exactly the file's rows, finish it; anything else is left alone
+        try:
+            back = load_register(folder)["channels"]
+        except (OSError, ValueError):
+            back = None
+        if back is not None and _same_rows(rows, back):
+            single.unlink()
+            return _counts(rows)
+        raise ValueError(f"{folder.name}/ already has files that are not this file's rows: nothing written")
     bad = [r.get("id") if isinstance(r, dict) else repr(r) for r in rows
            if not (isinstance(r, dict) and isinstance(r.get("state"), str) and r["state"] in STATE_CODES)]
     if bad:
         raise ValueError(f"{len(bad)} row(s) without a state code, so with no file to go to: {bad[:5]}")
     folder.mkdir(parents=True, exist_ok=True)
-    try:
+    try:    # the state files first, read back and compared; the single file goes only after that
         save_register(rows, folder)
-        back = load_register(folder)["channels"]
-        if sorted(rows, key=lambda r: json.dumps(r, sort_keys=True)) != sorted(back, key=lambda r: json.dumps(r, sort_keys=True)):
+        if not _same_rows(rows, load_register(folder)["channels"]):
             raise ValueError("the per-state files do not read back as the single file's rows")
     except Exception:
         shutil.rmtree(folder, ignore_errors=True)
         raise
     single.unlink()
+    return _counts(rows)
+
+
+def _same_rows(a: list, b: list) -> bool:
+    key = lambda r: json.dumps(r, sort_keys=True)   # noqa: E731
+    return sorted(a, key=key) == sorted(b, key=key)
+
+
+def _counts(rows: list[dict]) -> dict[str, int]:
     out: dict[str, int] = {}
     for r in rows:
         out[r["state"]] = out.get(r["state"], 0) + 1
