@@ -46,7 +46,8 @@ works, private property, the open sea, a street, an unnamed or unknown stream, a
 reason and never a record (report_name_parts); a tributary of a named water gives the named water. A name the status
 resolver already places on a record maps to it, nothing built. The others take the name pass (report_name_choices):
 the NHDPlus V2.1 features of that GNIS name in the state (asked thirty spellings to a query, prefetch_names), the one
-nearest each place the reports give (each cluster of points within 2 km, else each town within 3 km), so every place
+nearest each place the reports give (each cluster of points within 2 km; each town within 3 km when no point finds the
+name), so every place
 of a name gets its own record; with no place, a name found once in the state. A feature already a record in this file
 maps to it; a feature openboatlaunch already holds maps to that record (new_record: the outline, else the bounding box
 and towns of the tidy, same_water_by_box). A name NHDPlus V2.1 does not carry, or carries only away from the reports'
@@ -3950,7 +3951,8 @@ def prefetch_names(nhd: Nhd, state: str, targets: list, layer: int, attr: str) -
 def report_name_choices(nhd: Nhd, t) -> tuple[list[tuple], str | None, list[dict]]:
     """([(feature key, choice, how)], reason when none, places that found none): the NHDPlus V2.1 features of the
     target's name in the state (prefetch_names), the one nearest each place the reports give: each cluster of their
-    points (a feature within 2 km, NEAR_M), else each town (crossing it or within 3 km); a place two features of the
+    points (a feature within 2 km, NEAR_M), and when no point finds one, each town (crossing it or within 3 km: EPA's
+    overflow reports may give the plant's point, while the town is the overflow's); a place two features of the
     name lie equally near chooses neither. With no place, a name found once in the state is taken."""
     st = t["state"]
     groups = defaultdict(list)
@@ -3974,21 +3976,28 @@ def report_name_choices(nhd: Nhd, t) -> tuple[list[tuple], str | None, list[dict
                 "ftype": f.get("ftype")}
     geoms = {k: unary_union([f["_geom"] for f in fs if f["_geom"] is not None]) for k, fs in groups.items()}
     several = f" ({len(groups)} waters of that name in {st})" if len(groups) > 1 else ""
-    places = [(Point(lon, lat), f"the reports' point ({lat:.5f}, {lon:.5f})", NEAR_M, {"lon": lon, "lat": lat})
+    points = [(Point(lon, lat), f"the reports' point ({lat:.5f}, {lon:.5f})", NEAR_M, {"lon": lon, "lat": lat})
               for lon, lat in cluster_points(t["points"], n=6, sep_m=NEAR_M)]
-    if not places:
-        for tw, _ in t["towns"].most_common(4):
-            g = nhd.towns.outlines(st, [tw])
-            if g:
-                places.append((unary_union(g), tw, REPORT_TOWN_M, {"town": tw}))
-    if not places:
+    towns = []
+    for tw, _ in t["towns"].most_common(4):
+        g = nhd.towns.outlines(st, [tw])
+        if g:
+            towns.append((unary_union(g), tw, REPORT_TOWN_M, {"town": tw}))
+    if not points and not towns:
         if len(groups) == 1:
             k = next(iter(groups))
             return [(feature_key(st, pick(k)), pick(k), f"the only NHD water of that name in {st} (the reports give "
                                                          f"no place)")], None, []
         return [], f"{len(groups)} NHD waters of that name in {st} and the reports give no place to choose one", []
     chosen, failed = {}, []
-    for g, label, lim, where in places:
+    # the points first; the towns only when no point finds the name (a report's point may be the operator's plant, as
+    # EPA's overflow reports give it, while its town is where the overflow was)
+    for place in points + [None] + towns:
+        if place is None:
+            if chosen:
+                break
+            continue
+        g, label, lim, where = place
         scored = sorted((0.0 if G.intersects(g) else geom_dist_m(G, g), k) for k, G in geoms.items())
         d0, k0 = scored[0]
         if d0 <= lim and (len(scored) == 1 or scored[1][0] > d0 or d0 == 0):

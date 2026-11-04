@@ -151,6 +151,12 @@ def test_with_no_point_the_town_chooses_and_with_no_place_only_a_single_name_is_
     t = name_target("Mill Creek", towns=["Kenly"])
     choices, _, _ = N.report_name_choices(fake_nhd(None, {"Kenly": town}), t)
     assert [k for k, _, _ in choices] == [("line", "NC", "2")] and "crossing Kenly" in choices[0][2]
+    t = name_target("Mill Creek", points=[(-76.0, 34.5)], towns=["Kenly"])      # the point finds none: the town does
+    choices, _, failed = N.report_name_choices(fake_nhd(None, {"Kenly": town}), t)
+    assert [k for k, _, _ in choices] == [("line", "NC", "2")] and len(failed) == 1
+    t = name_target("Mill Creek", points=[(-80.005, 35.05)], towns=["Kenly"])  # the point finds one: the town not asked
+    choices, _, _ = N.report_name_choices(fake_nhd(None, {"Kenly": town}), t)
+    assert [k for k, _, _ in choices] == [("line", "NC", "1")]
     t = name_target("Mill Creek")
     choices, reason, _ = N.report_name_choices(fake_nhd(None), t)
     assert choices == [] and "3 NHD waters of that name in NC and the reports give no place" in reason
