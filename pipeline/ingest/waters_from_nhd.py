@@ -3707,7 +3707,10 @@ def state_stats(states, targets, rows, recs, tstats, http, run) -> dict:
                    "records_by_kind": dict(Counter(r["kind"] for r in built)),
                    "no_water": dict(Counter(why for (s_, _), why in run.skipped_reason.items() if s_ == st))}
     shared = {"requests": dict(http.fetched), "network_requests": http.requests, "cached": dict(http.cached),
-              "failed": dict(http.failed), "stopped": run.stopped, "other_places": run.place_stats}
+              "failed": dict(http.failed), "stopped": run.stopped, "other_places": run.place_stats,
+              # the OpenStreetMap pass (osm_state_pass): per state its queries and answers, and the names it left
+              "osm": {"by_state": dict(getattr(run, "osm_states", {}) or {}),
+                      "left_for_next_run": len(getattr(run, "osm_remaining", []) or [])}}
     for v in out.values():
         v["run"] = shared
     return out

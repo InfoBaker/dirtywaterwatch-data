@@ -2,9 +2,18 @@ name: State water batch
 # The per-state batch of docs/national-approach.md §4.3 (site repository): a state's receiving-water records from NHD
 # and its outfalls tied to them, run on demand, never inside the hourly refresh. Dispatch only:
 #   gh workflow run state-build.yml -f state=NC -f steps="waters ties" -f budget_s=1500 -f max_requests=1000
-# The steps are scripts/state_batch.py's (its docstring says what each runs): obl-check, registry, waters, ties.
-# `reaches` is not offered: build/reaches.py has no state scope yet. `registry` needs EPA's CSO inventory and an
-# openboatlaunch snapshot, which this runner does not have, so it is refused here with that reason.
+#   gh workflow run state-build.yml -f state=MI -f steps="extract obl-check waters ties"
+#   gh workflow run state-build.yml -f state=FL -f steps="osm ties" -f osm_budget=1200
+# The steps are scripts/state_batch.py's (its docstring says what each runs): extract, obl-check, registry, waters,
+# osm, ties. openboatlaunch's water records and outlines come from R2 state/obl-water.tar.gz (packed once on a machine
+# with the openboatlaunch checkout; docs/state-builder-brief.md has the command), restored read only into
+# ../openboatlaunch/out, where the pipeline reads them: `extract` writes the state's data/waters-<st>.json from them,
+# and `waters`, `osm` and `ties` measure against their outlines (OBL_WATER_DIR). Not in R2: a warning (extract then
+# refuses and ties without an outline are held, as before); there but not fetched or not readable: the batch stops.
+# `osm` is the waters step with OpenStreetMap's pass given osm_budget seconds (up to 20 minutes; Overpass answers
+# GitHub's runners), resumed by the next dispatch from the cached answers.
+# `reaches` is not offered: build/reaches.py has no state scope yet. `registry` needs EPA's CSO inventory, which this
+# runner does not have, so it is refused here with that reason.
 # It takes the refresh's concurrency group, so it never runs beside a refresh: it waits for a running one, and the
 # hourly refresh waits for it. GitHub keeps one waiting run per group and cancels the older waiting one when another
 # queues, whichever workflow it belongs to: a batch still waiting when a refresh queues is replaced by it (dispatch
@@ -25,7 +34,7 @@ on:
         required: true
         type: string
       steps:
-        description: "Steps, space-separated, from: obl-check registry waters ties (run in that order)"
+        description: "Steps, space-separated, from: extract obl-check registry waters osm ties (run in that order)"
         required: false
         default: 'waters ties'
         type: string
@@ -38,6 +47,11 @@ on:
         description: "Network requests the NHD pass may make (cached answers are free; 1 to 20000)"
         required: false
         default: '1000'
+        type: string
+      osm_budget:
+        description: "Seconds the osm step's OpenStreetMap pass may spend on Overpass (60 to 1200; with budget_s at most 3780 together)"
+        required: false
+        default: '1200'
         type: string
 
 concurrency:
@@ -61,6 +75,7 @@ jobs:
       STEPS: ${{ inputs.steps }}
       BUDGET_S: ${{ inputs.budget_s }}
       MAX_REQUESTS: ${{ inputs.max_requests }}
+      OSM_BUDGET: ${{ inputs.osm_budget }}
       OUT: data/build/batch/out
     steps:
       - name: Secrets present
@@ -77,7 +92,7 @@ jobs:
       - name: Check the inputs (and print the commands the steps will run)
         run: |
           pipeline/.venv/bin/python scripts/state_batch.py plan --state "$STATE" --steps "$STEPS" \
-            --budget-s "$BUDGET_S" --max-requests "$MAX_REQUESTS"
+            --budget-s "$BUDGET_S" --max-requests "$MAX_REQUESTS" --osm-budget "$OSM_BUDGET"
           echo "BATCH_DATE=$(date -u +%F)" >> "$GITHUB_ENV"
       - run: npm install -g wrangler@4
       - name: Restore pipeline state from R2 (read only here)
@@ -92,6 +107,22 @@ jobs:
             echo "::error::state/build.tar.gz is in R2 but could not be fetched"; exit 1
           fi
           find data/build -name '._*' -delete 2>/dev/null || true
+      - name: Restore openboatlaunch's water records and outlines from R2 (state/obl-water.tar.gz; read only, never saved)
+        run: |
+          # into ../openboatlaunch/out (water/<slug>.json and meta.json only: scripts/state_paths.py unpack-obl), where
+          # ingest.obl_waters and build/status.py's outlines read them. Before the raw caches, so a batch stopped here
+          # never saves them. Not in R2: a warning; there but not fetched or not readable: the batch stops, since its
+          # ties would be measured without the outlines.
+          rc=0; python3 -I scripts/state_paths.py fetch state/obl-water.tar.gz obl-water.tar.gz || rc=$?
+          if [ "$rc" = 0 ]; then
+            python3 -I scripts/state_paths.py unpack-obl obl-water.tar.gz \
+              || { echo "::error::state/obl-water.tar.gz is in R2 but could not be read; the batch stops"; exit 1; }
+          elif [ "$rc" = 3 ]; then
+            echo "::warning::state/obl-water.tar.gz is not in R2 yet: no openboatlaunch records or outlines this run (extract refuses; a tie that needs an outline is held)"
+          else
+            echo "::error::state/obl-water.tar.gz is in R2 but could not be fetched; the batch stops"; exit 1
+          fi
+          rm -f obl-water.tar.gz
       - name: Restore the raw caches from R2
         id: restore_raw
         run: |
@@ -109,7 +140,7 @@ jobs:
         id: batch
         run: |
           pipeline/.venv/bin/python scripts/state_batch.py run --state "$STATE" --steps "$STEPS" \
-            --budget-s "$BUDGET_S" --max-requests "$MAX_REQUESTS" --out "$OUT"
+            --budget-s "$BUDGET_S" --max-requests "$MAX_REQUESTS" --osm-budget "$OSM_BUDGET" --out "$OUT"
       - name: Save the raw caches to R2 (unless cancelled; the next dispatch resumes from them)
         # only after the restore ran: a run that never restored them, or could not fetch them, never saves over them
         if: ${{ !cancelled() && steps.restore_raw.outcome == 'success' && steps.restore_raw.outputs.keep != '1' }}
