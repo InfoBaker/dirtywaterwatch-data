@@ -129,3 +129,56 @@ def test_the_checklist_refresh_replaces_one_area_in_place():
     for area in ("nc", "ga", "fl"):
         research = json.loads((ROOT / "research" / area / "sources.json").read_text())
         assert [r for r in checklist if r["area"] == area] == [{**G.scrub_row(r), "area": area} for r in research]
+
+
+# ---------------------------------------------------------------- nc-notice and ga-notice: a row per operator per duty
+
+STATEWIDE = [dict(OLD_ROW, id=i, operator_id=None, agency="Operators", name="Operators", note="Printed only.",
+                  barrier="print_only") for i in ("nc-operator-press-release", "nc-operator-newspaper-notice")] + [
+    dict(OLD_ROW, id=i, state="GA", operator_id=None, agency="Operators", name="Operators", note="Printed only.",
+         barrier="print_only") for i in ("ga-legal-organ-notice", "ga-media-notice", "ga-local-health-departments",
+                                         "ga-spill-signs", "ga-downstream-water-suppliers")]
+OWN_PAGE = dict(OLD_ROW, id="nc-big-news", channel_kind="news_page", urls=["https://example.org/news"], method="html",
+                legal_basis="G.S. 143-215.1C(b)(1): press release", monitored=True, unmonitored_reason=None,
+                barrier=None, note=None)
+
+
+def test_the_duty_rows_replace_the_statewide_rows_one_per_operator_and_duty(tmp_path):
+    paths = _files(tmp_path, sorted(STATEWIDE + [OWN_PAGE], key=lambda r: (r["state"], r["id"])))
+    rep = ARR.run(["nc-notice", "ga-notice"], **paths)
+    doc = json.loads(paths["register"].read_text())
+    rows = {r["id"]: r for r in doc["channels"]}
+    assert rep["nc-notice"]["removed"] == ["nc-operator-newspaper-notice", "nc-operator-press-release"]
+    assert len(rep["ga-notice"]["removed"]) == 4 and "ga-downstream-water-suppliers" in rows   # EPD's duty too: kept
+    nc_ops = [o["id"] for o in FIX_DIS if o["state"] == "NC"]
+    assert {f"{o}-{s}" for o in nc_ops for s in ("press-release", "newspaper-notice")} <= set(rows)
+    assert rows["nc-mill-press-release"]["legal_basis"].startswith("G.S. 143-215.1C(c)(1)")
+    assert "UNTREATED WASTE\"" in rows["nc-mill-newspaper-notice"]["legal_basis"]
+    assert "UNTREATED SEWAGE\"" in rows["nc-big-newspaper-notice"]["legal_basis"]
+    assert "the row nc-big-news" in rows["nc-big-press-release"]["note"]           # its own web page is named
+    assert "nc-big-news" not in rows["nc-sewers-only-press-release"]["note"]
+    want = {"ga-x-legal-organ-notice": "print_only", "ga-x-media-notice": "print_only",
+            "ga-x-health-department": "no_web_page", "ga-x-spill-signs": "signs_only"}
+    assert {k: rows[k]["barrier"] for k in want} == want
+    assert '"the legal organ of the County where the incident occurred' in rows["ga-x-legal-organ-notice"]["legal_basis"]
+    assert rows["ga-x-legal-organ-notice"]["sources"] == ["ga-rule-391-3-6-05", "ga-law-ocgs-12-5-30-1"]
+    for r in rows.values():
+        if r["id"] in want or r["id"].endswith(("-press-release", "-newspaper-notice")):
+            assert r["basis_kind"] == "law" and r["urls"] == [] and r["unmonitored_reason"] == "other"
+            assert r["note"].startswith("No web form") and r["records"] is False and r["operator_id"]
+            assert (r["barrier"], r.get("barrier_review")) == NP.barrier_for(r)
+    assert NP.validate_register(doc, FIX_DIS) == []
+    before = paths["register"].read_text()
+    ARR.run(["nc-notice", "ga-notice"], **paths)
+    assert paths["register"].read_text() == before
+
+
+def test_every_georgia_operator_has_its_four_duty_rows_and_the_statewide_rows_are_gone():
+    for op in DIS:
+        if op["state"] == "GA":
+            for suffix in ("legal-organ-notice", "media-notice", "health-department", "spill-signs"):
+                r = BY_ID[f"{op['id']}-{suffix}"]
+                assert r["operator_id"] == op["id"] and r["legal_basis"].startswith("Ga. Comp. R. & Regs. 391-3-6-.05(3)")
+    for gone in ARR.GA_REPLACES + ARR.NC_REPLACES:
+        assert gone not in BY_ID
+    assert BY_ID["ga-downstream-water-suppliers"]["operator_id"] is None
