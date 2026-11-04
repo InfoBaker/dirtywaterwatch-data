@@ -4,6 +4,7 @@ the tables are built here in EPA's layout with invented values; addresses and na
 import csv
 import io
 import json
+import re
 import zipfile
 from pathlib import Path
 
@@ -218,3 +219,52 @@ def test_a_reversal_table_without_its_header_fails_the_run(tmp_path):
     out = tmp_path / "ev.json"
     assert R.main(["--text", str(t), "--out", str(out)]) == 1
     assert json.loads(out.read_text())["ok"] is False
+
+
+# ---------------------------------------------------------------- IDPH BeachGuard
+
+BG = FIX / "il_idph_beachguard"
+
+
+def _bg_details():
+    from ingest import il_idph_beachguard as B
+    return {p.stem: B.parse_detail(p.read_text()) for p in BG.glob("*.html")}
+
+
+def test_beachguard_items_and_pages_become_dated_advisories():
+    from ingest import il_idph_beachguard as B
+    state = {}
+    recs, meta = B.run(state, (BG / "rss.xml").read_bytes(), _bg_details(), "2026-11-04T12:00:00Z")
+    by = {r["source_record_id"]: r for r in recs}
+    c = by["467-20260901T0800"]
+    assert c["event_type"] == "beach_closure" and c["status"] == "advisory_active"
+    assert c["started_at"] == "2026-09-01T08:00:00-05:00" and c["time_precision"] == "minute"
+    assert c["waterbody_text"] == "Deep Lake" and (c["lat"], c["lon"]) == (42.41633, -88.06466)
+    assert c["authority"].startswith("Lake County Health Department") and c["published_at"] is None
+    a = by["273-20260904T0800"]
+    assert a["event_type"] == "beach_advisory" and a["raw"]["advisory_type"] == "Contamination Advisory"
+    o = by["247-nostart"]                                   # the page shows none: kept, undated, said so
+    assert o["started_at"] is None and o["raw"]["closure_kind"].startswith("closed by") and "showed no advisory" in o["raw"]["start_basis"]
+    assert o["waterbody_text"] is None                       # a bare "Lake" names no water
+    blob = json.dumps(recs) + json.dumps(state)
+    assert "Jane" not in blob and "555-0199" not in blob and "jdoe@" not in blob and "555-0100" not in blob
+
+
+def test_beachguard_advisory_lifts_when_the_feed_stops_listing_it():
+    from ingest import il_idph_beachguard as B
+    state = {}
+    rss = (BG / "rss.xml").read_text()
+    B.run(state, rss, _bg_details(), "2026-11-04T12:00:00Z")
+    fewer = re.sub(r"<item><title>Closure - Deep Lake.*?</item>", "", rss)
+    recs, meta = B.run(state, fewer, _bg_details(), "2026-11-04T13:00:00Z")
+    c = {r["source_record_id"]: r for r in recs}["467-20260901T0800"]
+    assert c["status"] == "advisory_lifted" and c["ended_at"] == "2026-11-04T13:00:00Z"
+    assert c["raw"]["lift_observed_between"] == ["2026-11-04T12:00:00Z", "2026-11-04T13:00:00Z"]
+    assert meta["poll"]["lifted"] == 1
+
+
+def test_beachguard_replay_from_saved_files(tmp_path):
+    from ingest import il_idph_beachguard as B
+    out = tmp_path / "ev.json"
+    assert B.main(["--rss", str(BG / "rss.xml"), "--detail-dir", str(BG), "--out", str(out)]) == 0
+    assert json.loads(out.read_text())["count"] == 3
