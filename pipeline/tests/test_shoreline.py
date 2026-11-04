@@ -511,6 +511,20 @@ def test_a_great_lake_record_without_an_outline_takes_its_states_waters_from_the
     S._GEOM_CACHE.clear()
 
 
+def test_every_sizeable_piece_of_the_states_waters_is_kept_not_only_the_largest(monkeypatch):
+    # a state's waters in the lake's box: the lake's part and a bigger connected lake beyond a strip of land
+    waters = _census(monkeypatch)
+    monkeypatch.setattr(R, "tiger_states", lambda: {"PA": box(-81.0, 41.0, -79.76, 42.3)})
+    land = {"PA": box(-81.0, 41.5, -79.76, 42.0).difference(box(-80.9, 41.55, -79.8, 41.97))}      # the bigger piece
+    waters["lake-erie-pa"]["bbox"] = [-80.5, 41.55, -79.5, 42.5]
+    g, _ = R.lake_outline("lake-erie-pa", waters, land)
+    assert g.geom_type == "MultiPolygon" and len(g.geoms) == 2
+    c = {"key": f"{PERMIT}-001", "permit": PERMIT, "outfall": "001", "water_slug": "lake-erie-pa", "lat": 41.999,
+         "lon": -79.9, "state": "PA", "outfall_kind": "cso", "model": "shoreline"}
+    rec = R.shoreline_record(c, waters, SHORE, land)
+    assert rec["error"] is None and rec["snap_m"] < 200
+
+
 def test_without_the_census_boundaries_a_lake_with_no_outline_gets_no_stretch_this_run(monkeypatch):
     waters = _census(monkeypatch)
     monkeypatch.setattr(R, "tiger_states", lambda: (_ for _ in ()).throw(OSError("offline")))
