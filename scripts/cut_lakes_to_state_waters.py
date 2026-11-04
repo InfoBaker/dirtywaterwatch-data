@@ -40,12 +40,8 @@ def tiger_zip(download: bool = True) -> Path:
     cartographic file's members by default, which the TIGER zip does not hold)."""
     from ingest import waters_extra as WX
     dest = WX.RAW_DIR / "census" / TIGER_NAME
-    members = WX.STATES_ZIP_MEMBERS
-    WX.STATES_ZIP_MEMBERS = (f"{TIGER_STEM}.shp", f"{TIGER_STEM}.dbf")
-    try:
-        return WX.states_zip(candidates=[dest], download=download, url=TIGER_URL, dest=dest)
-    finally:
-        WX.STATES_ZIP_MEMBERS = members
+    return WX.states_zip(candidates=[dest], download=download, url=TIGER_URL, dest=dest,
+                         members=(f"{TIGER_STEM}.shp", f"{TIGER_STEM}.dbf"))
 
 
 def cut_record(w: dict, state_shape, states_bbox) -> dict | None:

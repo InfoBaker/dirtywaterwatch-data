@@ -73,11 +73,13 @@ STATES_ZIP_MEMBERS = ("cb_2023_us_state_500k.shp", "cb_2023_us_state_500k.dbf") 
 STATES_ZIP_MAX_BYTES = 64 << 20   # the 2023 file is 3.2 MB (SHA-256 4a9b4f5c...7432 on 2026-11-04); a larger answer is not it
 
 
-def states_zip(candidates=None, download: bool = True, url: str = STATES_ZIP_URL, dest=None, session=None) -> Path:
+def states_zip(candidates=None, download: bool = True, url: str = STATES_ZIP_URL, dest=None, session=None,
+               members=STATES_ZIP_MEMBERS) -> Path:
     """The Census state outlines zip: the first of candidates (data/raw/census/, then the sibling openboatlaunch
     path) that exists; otherwise the public file downloaded once from the Census Bureau into dest (data/raw/census/),
     written atomically, at most STATES_ZIP_MAX_BYTES, and checked to be a sound zip holding the .shp and .dbf
-    (otherwise nothing is kept and the error is raised: the caller fails closed). FileNotFoundError when it is nowhere and download is False."""
+    (members: another Census state file's, such as TIGER/Line's tl_2023_us_state; otherwise nothing is kept and the
+    error is raised: the caller fails closed). FileNotFoundError when it is nowhere and download is False."""
     import requests
     cands = [Path(c) for c in (candidates if candidates is not None else (CENSUS_ZIP, SIBLING_ZIP))]
     for c in cands:
@@ -102,7 +104,7 @@ def states_zip(candidates=None, download: bool = True, url: str = STATES_ZIP_URL
         if not zipfile.is_zipfile(tmp):
             raise ValueError(f"{url} did not answer with a zip file")
         with zipfile.ZipFile(tmp) as z:
-            missing = [m for m in STATES_ZIP_MEMBERS if m not in z.namelist()]
+            missing = [m for m in members if m not in z.namelist()]
             bad = z.testzip()
         if missing or bad:
             raise ValueError(f"{url}: the zip lacks {', '.join(missing)}" if missing else f"{url}: {bad} is corrupt")

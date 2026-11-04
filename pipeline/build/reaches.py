@@ -15,7 +15,10 @@ data/build/ma-cso-outfalls.json (MassDEP layer; water from the registry row of t
 outfall, else the nearest water within 400 m) and data/build/me-cso-outfalls.json (Maine DEP layer,
 closed outfalls left out). An outfall whose water record is a river, stream or canal, or which has no
 water record yet, is traced; one matched to a bay, sound, lake or pond is not (not_river), nor one
-whose coordinates the registry flags (coords_problem). NBC pins are covered by the ECHO rows of
+whose coordinates the registry flags (coords_problem). An outfall on a shoreline lake (the Great Lakes,
+data/rules.json reach.shoreline; build/shoreline.py) is not traced with NLDI: its point gets a modeled stretch of
+shoreline, built here without a request (run_shorelines, plant outfalls included), cached beside the traces with
+model "shoreline". NBC pins are covered by the ECHO rows of
 RI0100315 / RI0100072. A cached trace of an outfall the registry now lists as closed (and no state
 layer lists as open) is moved to data/build/reaches/retired/, so the rain caution never uses it.
 
@@ -72,6 +75,7 @@ from datetime import UTC, datetime, timedelta
 import requests
 
 import common
+from build import shoreline as SH
 from common import BUILD_DIR, DATA_DIR, HEADERS, now_iso, read_json, write_json
 
 NLDI = "https://api.water.usgs.gov/nldi/linked-data"
@@ -228,6 +232,11 @@ def load_rules() -> dict:
 
 def cap_km(rules: dict | None = None) -> float:
     return float(((rules or load_rules()).get("reach") or {}).get("cap_km") or 40)
+
+
+def shore_rule(rules: dict | None = None) -> dict:
+    """data/rules.json reach.shoreline with its defaults (build/shoreline.py rule)."""
+    return SH.rule(rules if rules is not None else load_rules())
 
 
 # ---------------------------------------------------------------- geometry helpers
@@ -456,20 +465,23 @@ def reported_outfalls(days: int = REPORTED_DAYS) -> set:
 
 def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None = None, live: set | None = None,
                        skipped: dict | None = None, reported: set | None = None,
-                       plants: bool | None = None) -> list[dict]:
+                       plants: bool | None = None, shore: dict | None = None) -> list[dict]:
     """The outfalls to trace (module docstring). `skipped` (if given) receives {key: {permit, outfall,
     state, kind, status, why}} for registry outfalls in live states that are not traced: closed,
     coords_problem, not_river (its water record is a bay, sound, lake or pond), no_location. An outfall
     the registry lists as closed but a recent report names (`reported`, reported_outfalls()) is traced:
     it is open in fact (Vermont reports discharges from outfalls ECHO lists as closed). Treatment-plant
     outfalls (outfall_kind "plant") are traced only with plants=True (TRACE_PLANTS; --plants), else
-    listed as plant_deferred."""
+    listed as plant_deferred. An outfall on a shoreline lake (shore: data/rules.json reach.shoreline) is a
+    candidate with model "shoreline" (a stretch built from its point, plants included); without a point it is
+    no_location."""
     from build.status import Resolver, load_waters, oid_key
     waters = waters if waters is not None else load_waters()
     registry = registry if registry is not None else registry_outfalls()
     live = {str(s).upper() for s in (live if live is not None else live_states())}
     reported = reported if reported is not None else reported_outfalls()
     plants = TRACE_PLANTS if plants is None else plants
+    shore = shore_rule() if shore is None else shore
     skip: dict[str, dict] = {}
     by_po: dict[tuple, dict] = {}
     for o in registry:
@@ -482,7 +494,12 @@ def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None =
             return
         k = reach_key(permit, outfall)
         who = {"permit": permit, "outfall": str(outfall), "state": permit[:2].upper(), "kind": "cso"}
-        if slug and slug in waters and waters[slug].get("kind") not in RIVER_KINDS:
+        lake = bool(slug and slug in waters and SH.is_shoreline(waters[slug], shore))
+        if lake and lat is None:
+            skip.setdefault(k, {**who, "why": "no_location", "note": "no coordinates: a shoreline stretch starts at "
+                                                                     "the outfall's point"})
+            return
+        if slug and slug in waters and waters[slug].get("kind") not in RIVER_KINDS and not lake:
             skip.setdefault(k, {**who, "why": "not_river", "note": f"its water record ({slug}) is a {waters[slug].get('kind')}"})
             return
         slug = slug if slug in waters else None             # no water record yet: the trace still runs
@@ -494,6 +511,8 @@ def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None =
         rec = out.setdefault(k, {"key": k, "permit": permit, "outfall": str(outfall), "water_slug": slug,
                                  "lat": lat, "lon": lon, "name": name, "sources": []})
         rec["sources"].append(src)
+        if lake and rec["water_slug"] in (None, slug):
+            rec["model"] = SH.MODEL
         if src != "echo" and lat is not None:      # state layers are surveyed points; prefer them
             rec["lat"], rec["lon"] = lat, lon
         if rec["water_slug"] is None and slug:
@@ -520,7 +539,7 @@ def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None =
         if st not in live:
             continue
         base = {"permit": permit, "outfall": str(oid), "state": st, "kind": outfall_kind(o)}
-        if base["kind"] == "plant" and not plants:
+        if base["kind"] == "plant" and not plants and not SH.is_shoreline(waters.get(o.get("water_slug")), shore):
             skip[k] = {**base, "why": "plant_deferred", "note": "treatment-plant outfall: traced with --plants"}
             continue
         ok = oid_key(oid)
@@ -847,7 +866,7 @@ def event_points() -> list[dict]:
         key = "pt-" + hashlib.sha1(n["event_id"].encode()).hexdigest()[:12]
         out.append({"key": key, "permit": n.get("permit"), "outfall": None, "water_slug": n.get("water_slug"),
                     "lat": n["lat"], "lon": n["lon"], "name": None, "sources": ["event-point"],
-                    "event_ids": [n["event_id"]]})
+                    "event_ids": [n["event_id"]], **({"model": n["model"]} if n.get("model") else {})})
     return out
 
 
@@ -896,7 +915,7 @@ def plan(cands: list[dict], cached: dict[str, dict], now: datetime) -> tuple[lis
             if not d or not fresh_rec(d, now):
                 todo.append(((0, 0, ""), c))
             continue
-        if not d or moved(c, d):
+        if not d or moved(c, d) or d.get("model") == SH.MODEL:     # a shoreline stretch whose water is now a river
             todo.append(((1, kind, ""), c))
             continue
         if not fresh_rec(d, now):
@@ -915,11 +934,11 @@ def fresh_rec(d: dict, now: datetime) -> bool:
 
 
 def outcome(d: dict | None) -> str:
-    """A cached record's public-facing state: traced, tidal_at_outfall, lake_at_outfall or no_trace."""
+    """A cached record's public-facing state: traced, shoreline, tidal_at_outfall, lake_at_outfall or no_trace."""
     if not d:
         return "pending"
     if d.get("segments"):
-        return "traced"
+        return "shoreline" if d.get("model") == SH.MODEL else "traced"
     if d.get("cut_reason") in ("tidal_at_outfall", "lake_at_outfall"):
         return d["cut_reason"]
     return "no_trace"
@@ -1002,7 +1021,9 @@ def write_index(cands: list[dict], skipped: dict[str, dict], cached: dict[str, d
     if run:
         runs = (runs + [run])[-RUNS_KEPT:]
     out = {"built": now_iso(), "live_states": sorted(live),
-           "statuses": {"traced": "a modeled downstream reach", "tidal_at_outfall": "NHDPlus marks the outfall's "
+           "statuses": {"traced": "a modeled downstream reach",
+                        "shoreline": "a modeled shoreline stretch on a shoreline lake (data/rules.json reach.shoreline)",
+                        "tidal_at_outfall": "NHDPlus marks the outfall's "
                         "flowline tidal, estuary or coastline: no reach", "lake_at_outfall": "the outfall's flowline is "
                         "in a lake or reservoir: no reach", "no_trace": "NLDI gave no flowlines (retried later)",
                         "pending": "not traced yet (a later run)", "closed": "closed outfall: not traced",
@@ -1159,6 +1180,232 @@ def flow_for(reach: dict, gauges: dict, latest: dict, now: datetime | None = Non
             "flow_basis": note}
 
 
+# ---------------------------------------------------------------- shoreline stretches (build/shoreline.py)
+
+_LAND: dict | None = None
+
+
+def land_outlines() -> dict:
+    """{state: land} from the Census Bureau's 2023 1:500,000 state outlines (data/raw/census/, else the sibling
+    openboatlaunch copy, else downloaded once: ingest/waters_extra.states_zip). Raises when it cannot be had."""
+    global _LAND
+    if _LAND is None:
+        from ingest import waters_from_nhd as N
+        _LAND = N.read_state_outlines(None)
+    return _LAND
+
+
+TIGER_STEM = "tl_2023_us_state"
+TIGER_URL = f"https://www2.census.gov/geo/tiger/TIGER2023/STATE/{TIGER_STEM}.zip"
+_TIGER: dict = {}
+_CENSUS_LAKES: dict = {}
+CENSUS_PIECE_KM2 = 1.0          # smaller pieces of a state's waters (slivers along the shore) are left out
+
+
+def tiger_states() -> dict:
+    """{state: polygon} from the Census Bureau's TIGER/Line 2023 state boundaries (tl_2023_us_state.zip, public
+    domain: data/raw/census/, downloaded once, about 10 MB), which run through the Great Lakes along the state and
+    international lines. Raises when it cannot be had."""
+    if not _TIGER:
+        from ingest import waters_extra as WX
+        from ingest import waters_from_nhd as N
+        dest = WX.RAW_DIR / "census" / f"{TIGER_STEM}.zip"
+        z = WX.states_zip(candidates=[dest], url=TIGER_URL, dest=dest, members=(f"{TIGER_STEM}.shp", f"{TIGER_STEM}.dbf"))
+        _TIGER.update(N.read_state_outlines(None, zip_path=z, stem=TIGER_STEM))
+    return _TIGER
+
+
+def census_lake_outline(slug: str, waters: dict, land: dict | None):
+    """The outline of a shoreline lake record that carries none (openboatlaunch's Great Lakes records keep theirs in
+    openboatlaunch's files, which the hourly run does not have): the record's state's waters in the lake, the TIGER/Line
+    state polygon (tiger_states) less the land of the cartographic outlines (cb_2023_us_state_500k, which end at the
+    shore), within the record's box: its pieces of CENSUS_PIECE_KM2 or more (Michigan's waters in Lake Erie's box are
+    Lake Erie's, the Detroit River's and Lake St. Clair's: the largest piece is not always the lake's own). None without
+    the record's box or the Census files."""
+    if slug in _CENSUS_LAKES:
+        return _CENSUS_LAKES[slug]
+    from shapely.geometry import box
+    from shapely.ops import unary_union
+    w = waters.get(slug) or {}
+    st, bb, g = str(w.get("state") or "").upper(), w.get("bbox"), None
+    if land and bb and len(bb) == 4:
+        try:
+            poly = tiger_states().get(st)
+        except Exception:           # no TIGER file this run: no outline, and the stretch is rebuilt next run
+            poly = None
+        if poly is not None:
+            region = box(*bb).buffer(0.05)
+            near = unary_union([x for x in land.values() if x.intersects(region)])
+            water = poly.intersection(region).difference(near)
+            from shapely.geometry import MultiPolygon
+            from ingest import waters_extra as WX
+            parts = [p for p in getattr(water, "geoms", [water]) if p.geom_type == "Polygon" and not p.is_empty
+                     and WX.area_km2(p) >= CENSUS_PIECE_KM2]
+            g = (parts[0] if len(parts) == 1 else MultiPolygon(parts)) if parts else None
+    _CENSUS_LAKES[slug] = g
+    return g
+
+
+def lake_outline(slug: str, waters: dict, land: dict | None) -> tuple:
+    """(outline, where from): the record's own (openboatlaunch's file or inline), else census_lake_outline."""
+    from build.status import water_geometry
+    g = water_geometry(slug, waters) if slug else None
+    if g is not None:
+        return g, "record"
+    g = census_lake_outline(slug, waters, land) if slug else None
+    return g, ("census" if g is not None else None)
+
+
+def shore_sig(shore: dict) -> str:
+    """The rule values a cached stretch was built with: a change rebuilds every stretch."""
+    return "|".join(str(shore.get(k)) for k in ("each_way_km", "shore_m", "gap_km", "snap_km"))
+
+
+def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> dict:
+    """One outfall's (or report point's) shoreline stretch as a reach record: two segments from the point on the
+    shore, one each way (km_start 0), the lake as its water, the same lake's records in the other states it
+    touches, and those states. A point too far from the shore, or a lake with no outline, is a no_trace record."""
+    from shapely.geometry import box
+    from shapely.ops import unary_union
+    each = float(shore["each_way_km"])
+    rec = {**c, "fetched_at": now_iso(), "model": SH.MODEL, "method": SH.MODEL, "navigation": None, "cap_km": each,
+           "each_way_km": each, "rule_sig": shore_sig(shore), "npdes_id": None, "start_comid": None, "segments": [],
+           "cut_reason": "no_trace", "length_km": 0.0, "error": None}
+    slug = c.get("water_slug")
+    w = waters.get(slug) or {}
+    entry = SH.shoreline_entry(w, shore)
+    rec["river"] = (entry or {}).get("name") or w.get("name")
+    rec["lake"] = rec["river"]
+    g, outline = lake_outline(slug, waters, land)
+    if g is None or c.get("lat") is None:
+        rec["error"] = "no outline for the lake record" if g is None else "no point to start from"
+        return rec
+    rec["outline"] = outline        # "census": the state's waters in the lake from the Census files (no record outline)
+    near = None
+    if land is not None:
+        bb = box(*g.bounds).buffer(0.5)
+        near = {st: x for st, x in land.items() if x.intersects(bb)}
+    try:
+        r = SH.stretch(c["lon"], c["lat"], g, unary_union(list(near.values())) if near else None, each,
+                       float(shore["shore_m"]), float(shore["gap_km"]), float(shore["snap_km"]), land_states=near)
+    except SH.NoShore as e:
+        rec["error"] = str(e)
+        return rec
+    own = str(c.get("state") or (c.get("permit") or "")[:2] or w.get("state") or "").upper()
+    found = set(r["states"]) | ({own} if own else set())
+    segs, stops, onto = [], [], []
+    walked = [side["coords"] for side in r["sides"] if len(side["coords"]) >= 2]
+    for side in r["sides"]:
+        if len(side["coords"]) < 2:
+            continue
+        segs.append({"comid": None, "km_start": 0.0, "km_end": side["km"], "gnis_name": rec["river"],
+                     "coords": side["coords"]})
+        end = {"coords": side["coords"][-1], "km_from_outfall": side["km"], "cut_reason": side["stop"]}
+        # the shore goes on in another record of the lake (the next state's, or Lake Michigan beyond the Straits):
+        # the stretch goes on along it to the same total distance (a reach belongs to every water it runs through)
+        hops, done_slugs = 0, {slug}
+        while end["cut_reason"] == SH.STOP_END and end["km_from_outfall"] < each - 0.05 and hops < 3:
+            nxt = onward_record(end["coords"], each - end["km_from_outfall"], walked, waters, shore, land, done_slugs, g)
+            if nxt is None:
+                break
+            n_slug, part = nxt
+            hops += 1
+            done_slugs.add(n_slug)
+            onto.append(n_slug)
+            found |= set(part["states"])
+            walked.append(part["coords"])
+            km0 = end["km_from_outfall"]
+            segs.append({"comid": None, "km_start": km0, "km_end": round(km0 + part["km"], 3),
+                         "gnis_name": rec["river"], "coords": part["coords"], "water_slug": n_slug})
+            end = {"coords": part["coords"][-1], "km_from_outfall": round(km0 + part["km"], 3),
+                   "cut_reason": part["stop"]}
+        stops.append(end)
+    states = sorted(found)
+    lake_recs = SH.lake_waters(slug, states, waters, shore)
+    for n_slug in onto:          # the other lake's records too (Lake Michigan's, from a Lake Huron outfall)
+        lake_recs += [x for x in SH.lake_waters(n_slug, states, waters, shore) if x not in lake_recs]
+    rec.update(segments=segs, stops=stops, cut_reason=SH.MODEL if segs else "no_trace",
+               length_km=round(sum(e["km_from_outfall"] for e in stops), 3), snap_m=r["snap_m"], states=states,
+               waters=lake_recs, error=None if segs else "the shore has no length at the point")
+    return rec
+
+
+def onward_record(pt, km: float, walked: list, waters: dict, shore: dict, land: dict | None, skip: set, g0):
+    """(slug, side) of the shoreline lake record whose shore a stretch ending at pt continues on (build/shoreline.py
+    onward), or None. A record with the same outline as one already walked (New York's and Pennsylvania's Lake
+    Erie share one) is not another shore."""
+    from shapely.geometry import Point, box
+    from shapely.ops import unary_union
+    lon, lat = float(pt[0]), float(pt[1])
+    probe = Point(lon, lat)
+    pad = SH.ONWARD_M / 111_000 * 2
+    for s2 in sorted(SH.shoreline_slugs(waters, shore) - skip):
+        w2 = waters.get(s2) or {}
+        bb = w2.get("bbox")
+        if bb and not (bb[0] - pad <= lon <= bb[2] + pad and bb[1] - pad <= lat <= bb[3] + pad):
+            continue
+        g2, _ = lake_outline(s2, waters, land)
+        if g2 is None or g2 is g0 or (g2.bounds == g0.bounds and abs(g2.area - g0.area) < 1e-9):
+            continue
+        if g2.boundary.distance(probe) > pad:
+            continue
+        near = None
+        if land is not None:
+            b2 = box(lon - 1, lat - 1, lon + 1, lat + 1)
+            near = {st: x for st, x in land.items() if x.intersects(b2)}
+        part = SH.onward(lon, lat, g2, unary_union(list(near.values())) if near else None, km, walked,
+                         float(shore["shore_m"]), float(shore["gap_km"]), land_states=near)
+        if part is not None:
+            return s2, part
+    return None
+
+
+def run_shorelines(cands: list[dict], waters: dict, shore: dict, force: bool = False, log=print,
+                   land: dict | None = None) -> dict:
+    """Build the due shoreline stretches (no request): never built, moved, built with other rule values or another
+    water, a cached river trace, one that got no stretch (no outline for the lake record yet, or the point too far
+    from its shore: rebuilt every run, since a stretch costs no request and an outline added to the records must take
+    effect at once, not after CACHE_DAYS), or older than CACHE_DAYS. Without the Census outlines nothing is built this
+    run (and nothing cached as a failure). Returns counts."""
+    now = datetime.now(UTC)
+    cached = load_reaches()
+    sig = shore_sig(shore)
+    due, touched = [], 0
+    for c in cands:
+        d = cached.get(c["key"])
+        if (force or not d or d.get("model") != SH.MODEL or moved(c, d) or d.get("rule_sig") != sig
+                or d.get("water_slug") != c.get("water_slug") or not d.get("segments") or not fresh_rec(d, now)):
+            due.append(c)
+        elif any(c.get(f) != d.get(f) for f in META_FIELDS if f in c):
+            d.update({f: c[f] for f in META_FIELDS if f in c})
+            write_json(REACH_DIR / f"{c['key']}.json", d)
+            touched += 1
+    out = {"due": len(due), "built": 0, "no_trace": 0, "metadata_updates": touched}
+    if not due:
+        return out
+    if land is None:
+        try:
+            land = land_outlines()
+        except Exception as e:      # the stretches wait for a run that has the outlines
+            log(f"reaches: {len(due)} shoreline stretches due, not built: Census state outlines unavailable "
+                f"({type(e).__name__}: {e})"[:300])
+            out["stopped"] = "Census state outlines unavailable"
+            return out
+    REACH_DIR.mkdir(parents=True, exist_ok=True)
+    for c in due:
+        try:
+            rec = shoreline_record(c, waters, shore, land)
+        except Exception as e:      # one bad outline never stops the reach build; the record says why
+            rec = {**c, "fetched_at": now_iso(), "model": SH.MODEL, "method": SH.MODEL, "segments": [],
+                   "cut_reason": "no_trace", "length_km": 0.0, "rule_sig": sig,
+                   "error": f"shoreline stretch failed: {type(e).__name__}: {e}"[:300]}
+            log(f"reaches: shoreline stretch {c['key']} failed ({type(e).__name__}: {e})"[:300])
+        write_json(REACH_DIR / f"{c['key']}.json", rec)
+        out["built" if rec["segments"] else "no_trace"] += 1
+    log(f"reaches: shoreline stretches {out}")
+    return out
+
+
 # ---------------------------------------------------------------- main
 
 def run_traces(cands: list[dict], cap: float, budget: Budget, force: bool = False,
@@ -1246,22 +1493,35 @@ def main() -> int:
                 REACH_DIR.mkdir(parents=True, exist_ok=True)
                 live = live_states()
                 skipped: dict[str, dict] = {}
-                cands = candidate_outfalls(live=live, skipped=skipped, plants=a.plants or None)
+                shore = shore_rule()
+                from build.status import load_waters
+                waters = load_waters()
+                cands = candidate_outfalls(waters=waters, live=live, skipped=skipped, plants=a.plants or None,
+                                           shore=shore)
                 log = lambda m: print(m, flush=True)       # noqa: E731
                 if a.outfall:
                     permit, oid = a.outfall.split(":", 1)
                     one = [c for c in cands if c["key"] == reach_key(permit, oid)] or [
                         {"key": reach_key(permit, oid), "permit": permit, "outfall": oid, "water_slug": None,
                          "lat": None, "lon": None, "name": None, "sources": ["cli"]}]
-                    run, _ = run_traces(one, cap, Budget(0, 0, a.reserve), force=True, log=log)
+                    lake = [c for c in one if c.get("model") == SH.MODEL]
+                    if lake:
+                        run = run_shorelines(lake, waters, shore, force=True, log=log)
+                    else:
+                        run, _ = run_traces(one, cap, Budget(0, 0, a.reserve), force=True, log=log)
                 else:
                     retired = retire_closed(skipped, cands)
                     if retired:
                         print(f"reaches: {len(retired)} cached traces of closed outfalls moved to {RETIRED_DIR.name}/: "
                               f"{', '.join(retired[:10])}{' ...' if len(retired) > 10 else ''}", flush=True)
-                    run, cached = run_traces(cands + event_points(), cap,
+                    pts = event_points()
+                    lake = [c for c in cands + pts if c.get("model") == SH.MODEL]
+                    shore_run = run_shorelines(lake, waters, shore, log=log)
+                    run, cached = run_traces([c for c in cands + pts if c.get("model") != SH.MODEL], cap,
                                              Budget(a.requests, a.seconds, a.reserve, a.limit), log=log)
                     run["retired"] = len(retired)
+                    run["shoreline"] = shore_run
+                    cached = load_reaches()
                     idx = write_index(cands, skipped, cached, live, run)
                     print(f"reaches: outfalls in live states {idx['counts']['total']}", flush=True)
                 build_gauges()

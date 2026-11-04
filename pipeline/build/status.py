@@ -50,6 +50,7 @@ from zoneinfo import ZoneInfo
 
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharger_alias_map, load_outfall_registry,
                     now_iso, read_json, rules_live_states, write_json)
+from build import shoreline as SH
 from build.redact import REDACTED, person_shaped
 
 LOCAL = ZoneInfo("America/New_York")
@@ -188,6 +189,14 @@ LEGEND = {"r": "red: advisory in effect", "y": "yellow: caution",
           "B": "algal bloom advisory, no sewage status"}
 RIVER_KINDS = {"river", "stream", "canal"}
 NO_FILL_KINDS = RIVER_KINDS | {"bay", "sound"}     # coloured by reaches / markers, never filled whole
+# Shoreline lakes (the Great Lakes: data/rules.json reach.shoreline, build/shoreline.py; decision of 2026-11-04): never
+# filled whole either. A report from an outfall (or with a point) on one colours its modeled shoreline stretch, a reach
+# record with model "shoreline", which carries the report like a river reach: the lake lists the report and takes its
+# status (placement "reach"), the map draws the stretch and the lake's outline only (fill false, stretch_model).
+# A report on one with no stretch is listed and counted (placement "shoreline_unmodeled") and colours no shore.
+SHORE_STATUS_BASIS = "modeled shoreline stretches at the outfalls; the lake is not coloured whole"
+SHORE_SUMMARY = "affected along a modeled shoreline stretch"
+_SHORE_REACHES: set[str] = set()       # the reach keys of this build's shoreline stretches (where())
 REACH_WATER_M = 500                                 # a reach segment lies on a river water within this
 
 # Advisory windows (owner decision 2026-11-02) live in data/rules.json: red hours by state (the
@@ -2401,12 +2410,18 @@ def index_reaches(reaches: dict) -> dict:
 _REACH_WATERS: dict[str, list[str]] = {}
 
 
+class _NoTravel(Exception):
+    """A shoreline stretch has no travel time (no flow along a lake shore)."""
+
+
 def reach_waters(reach: dict, waters: dict) -> list[str]:
     """River water records a reach runs along: a segment's midpoint within REACH_WATER_M of the
     water's geometry (openboatlaunch or waters-extra) and, when the NHDPlus flowline is named, the
     same name (so a Connecticut River reach passing the Westfield's mouth does not flag the
     Westfield: tributaries upstream of their mouth are never on the reach)."""
     key = reach["key"]
+    if reach.get("model") == SH.MODEL:      # a shoreline stretch: its lake and the same lake's records it reaches
+        return [s for s in (reach.get("waters") or [reach.get("water_slug")]) if s in waters]
     if key in _REACH_WATERS:
         return _REACH_WATERS[key]
     from shapely.geometry import Point
@@ -2598,10 +2613,14 @@ def since_of(intervals, now: datetime, color: str) -> datetime | None:
 
 PLACEMENT_TEXT = {"reach": " · on a modeled downstream reach", "named": " · named in the notice",
                   "tidal": " · tidal or estuary: movement not modeled",
-                  "unmodeled": " · downstream path not modeled"}
+                  "unmodeled": " · downstream path not modeled",
+                  "shoreline_unmodeled": " · lake shore: stretch not modeled"}
+SHORE_PLACEMENT_TEXT = " · on a modeled shoreline stretch"
 
 
 def where(iv: dict) -> str:
+    if iv.get("placement") == "reach" and iv.get("reach") in _SHORE_REACHES:
+        return SHORE_PLACEMENT_TEXT
     return PLACEMENT_TEXT.get(iv.get("placement") or "", "")
 
 
@@ -2772,6 +2791,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     if reaches is None:
         from build import reaches as reaches_mod
         reaches = reaches_mod.load_reaches()
+    shore = SH.rule(rules)
+    shore_slugs = SH.shoreline_slugs(waters, shore)      # the Great Lakes records: a stretch, never a whole-lake fill
+    _SHORE_REACHES.clear()
+    _SHORE_REACHES.update(k for k, r in (reaches or {}).items() if r.get("model") == SH.MODEL)
     if flows is None:
         from build import reaches as reaches_mod
         flows = (read_json(reaches_mod.GAUGES_BY_RIVER) or {}, read_json(reaches_mod.GAUGES_LATEST) or {})
@@ -2859,7 +2882,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         coarse = ev.get("time_precision") in COARSE_PRECISION     # a monthly or annual total: never a reach
         found = event_reaches(ev, pl, reach_index) if is_discharge and not pl.get("no_receiving_water") \
             and not future and not coarse else []
-        river_slugs = [x for x in pl["water_slugs"] if waters[x].get("kind") in RIVER_KINDS]
+        # rivers, and the shoreline lakes, whose stretches carry a report as a river reach does
+        river_slugs = [x for x in pl["water_slugs"] if waters[x].get("kind") in RIVER_KINDS or x in shore_slugs]
         # the river waters each reach carries: all of the record's (its own outfall or point), or the water of the
         # one registry outfall it starts at (a report naming several outfalls: one reach per outfall)
         carry = [(r, list(river_slugs) if s is None else [x for x in river_slugs if x == s]) for r, s in found]
@@ -2880,7 +2904,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             if slug in carried:
                 continue                       # a reach carries it (below)
             tag = None
-            if is_discharge and slug in river_slugs:
+            if is_discharge and slug in shore_slugs:
+                tag = "shoreline_unmodeled"
+            elif is_discharge and slug in river_slugs:
                 cut = [r for r, c in carry if slug in c]
                 tag = "tidal" if any(r.get("cut_reason") in ("tidal_at_outfall", "lake_at_outfall") for r in cut) \
                     else "unmodeled"
@@ -2892,8 +2918,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                 intervals[slug].append(iv)
         if (is_discharge and live and not future and not coarse and river_slugs and not reach and ev.get("lat") is not None
                 and (parse_time(ev.get("started_at")) or now) > now - timedelta(days=30)):
-            needs_reach.append({"event_id": eid, "lat": ev["lat"], "lon": ev["lon"], "water_slug": river_slugs[0],
-                                "permit": ev.get("npdes_permit")})
+            first = next((x for x in river_slugs if x not in shore_slugs), river_slugs[0])     # a river first
+            needs_reach.append({"event_id": eid, "lat": ev["lat"], "lon": ev["lon"], "water_slug": first,
+                                "permit": ev.get("npdes_permit"),
+                                **({"model": SH.MODEL} if first in shore_slugs else {})})
         if modeled and live:
             done = set()                # one record colours a water once, however many of its reaches run along it
             for reach, carries in modeled:
@@ -3129,11 +3157,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             "status_by_category": by_cat,
             "headline": {"category": head, "status": by_cat[head],
                          "label": None if head == "sewage" else CATEGORY_LABEL[head]},
-            "fill": kind not in NO_FILL_KINDS,
+            "fill": kind not in NO_FILL_KINDS and slug not in shore_slugs,
             "status_basis": ("modeled reaches" if kind in RIVER_KINDS else
                              "markers only: tidal or estuary, movement not modeled" if kind in ("bay", "sound")
-                             else "whole water"),
-            "summary": "part of this water is on a modeled reach" if on_reach_now else None,
+                             else SHORE_STATUS_BASIS if slug in shore_slugs else "whole water"),
+            "summary": (SHORE_SUMMARY if slug in shore_slugs else "part of this water is on a modeled reach")
+            if on_reach_now else None,
+            **({"stretch_model": SH.MODEL} if slug in shore_slugs else {}),
             "reaches": sorted(reaches_on_water.get(slug, [])),
             "unresolved_events": sorted({r["event_id"] for r in reasons if r["rule"] in ("unresolved", "end_never_reported")}),
             "reasons": reasons, "events": ev_ids, "covered_by": sorted(covered[slug]),
@@ -3163,7 +3193,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             "status": color, "events": sorted(set(reach_events[key])),
                             "active": sorted({iv["event_id"] for iv in act
                                               if iv["color"] != "grey" and iv["rule"] != "rain_likely"}),
-                            "rain_likely": sorted({iv["event_id"] for iv in act if iv["rule"] == "rain_likely"})}
+                            "rain_likely": sorted({iv["event_id"] for iv in act if iv["rule"] == "rain_likely"}),
+                            **({"model": SH.MODEL, "states": r.get("states") or [], "waters": r.get("waters") or []}
+                               if r.get("model") == SH.MODEL else {})}
         reach_strips[key] = paint(ivs, h0, h_end, n_hours)
         reach_hist[key] = [[iso(iv["start"]), iso(iv["end"]), iv["color"], iv["rule"], iv["event_id"], "sewage"]
                            for iv in sorted(ivs, key=lambda x: x["start"]) if iv["end"] is None or iv["end"] > h0]
@@ -3174,8 +3206,16 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if by_event:
             from build import reaches as reaches_mod
             try:        # a travel estimate never stops the status build
+                if r.get("model") == SH.MODEL:      # a lake shore: no flow, no travel time
+                    raise _NoTravel()
                 flow = reaches_mod.flow_for(r, gauges, latest, now)
                 band = reaches_mod.travel(r["segments"], flow["q_ratio"])
+            except _NoTravel:
+                flow = {"q_ratio": 1.0, "gauge": None, "gauge_name": None, "flow_cfs": None, "flow_time": None,
+                        "gauge_km": None, "flow_basis": None}
+                band = [{"hours_typical_start": None, "hours_typical": None, "hours_fast_start": None,
+                         "hours_fast": None, "hours_leading_edge": None, "velocity_peak_ms": None,
+                         "velocity_max_ms": None} for _ in r["segments"]]
             except Exception as e:
                 problems.append(f"reach {key}: travel time unavailable ({type(e).__name__}: {e})"[:300])
                 flow = {"q_ratio": 1.0, "gauge": None, "gauge_name": None, "flow_cfs": None, "flow_time": None,

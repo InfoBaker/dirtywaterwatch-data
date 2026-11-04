@@ -23445,14 +23445,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110001568704",
    "lat": 42.902222,
    "lon": -78.901667,
-   "water_slug": "lake-erie-ny",
-   "water_name": "Lake Erie",
-   "water_kind": "lake",
-   "distance_m": 0,
+   "water_slug": "black-rock-canal-ny",
+   "water_name": "Black Rock Canal",
+   "water_kind": "canal",
+   "distance_m": 265,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Lake Erie (lake-erie-ny), the nearest openboatlaunch water within 400 m; the receiving water ('Black Rock Canal') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "permit's receiving water ('Black Rock Canal'): Black Rock Canal (black-rock-canal-ny, NHD record), 265 m from EPA's point; the canal carries the water north to the Niagara River, so the outfall is traced downstream; replaces scripts/match_outfalls.py's match by distance to Lake Erie (lake-erie-ny), whose outline takes in the canal's entrance",
+   "water_matched_by": "by hand (2026-11-04)",
+   "replaced_match": {
+    "water_slug": "lake-erie-ny",
+    "water_name": "Lake Erie",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the point lies inside openboatlaunch's Lake Erie outline at the canal's entrance; the receiving water the permit names is the canal"
+   }
   },
   {
    "npdes_permit": "NY0028410",

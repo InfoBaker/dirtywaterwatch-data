@@ -31,7 +31,12 @@ Files:
   reaches.geojson    modeled downstream reaches (build/reaches.py): one feature per active event x
                      reach segment (km from the outfall, arrival hours typical / fast / leading
                      edge, gauge, flow, label per downstream-approach.md section 4) plus a stop
-                     marker where the model stops (tidal, lake, 40 km cap)
+                     marker where the model stops (tidal, lake, 40 km cap). On the Great Lakes
+                     (data/rules.json reach.shoreline) a reach is a shoreline stretch (model "shoreline"):
+                     a segment each way along the shore from the outfall, no arrival times, a stop marker
+                     at each end (cut_reason shoreline_limit or shoreline_end), properties.states and
+                     waters (the lake's records in the states it touches); the lake itself is drawn as an
+                     outline (overlays display "outline", stretch_model "shoreline")
   reach-paths.geojson every traced outfall path with its status now (replay with history.json reaches)
   reaches/<st>.geojson the same per live state (write_reach_state_files): the traced paths (feature "path"), the
                      active segments and stop markers of every reach that touches the state, each with
@@ -160,6 +165,19 @@ STOP_TEXT = {
                               "for the next stretch, so we cannot say how the water moves beyond this point.",
 }
 LINE_TEXT = "Modeled downstream path (estimate, not verified by sampling)."
+# shoreline stretches on the Great Lakes (build/shoreline.py; data/rules.json reach.shoreline): their own wording
+SHORE_STOP_TEXT = {
+    "shoreline_limit": "The modeled shoreline stretch stops here ({each:g} km along the shore from the outfall): the "
+                       "distance is this site's estimate from published studies of Great Lakes overflows, not a sign "
+                       "the water is clean beyond this point.",
+    "shoreline_end": "The modeled shoreline stretch stops here, where the mapped shore of this lake ends. "
+                     "Contamination can travel beyond this point.",
+}
+SHORE_LINE_TEXT = "Modeled shoreline stretch (estimate, not verified by sampling)."
+SHORE_LABEL = ("Modeled stretch of {lake} shore at {where_from}. Wind-driven currents along the shore can carry sewage "
+               "either way, so this stretch runs up to {each:g} km each way from that point, a distance this site "
+               "estimates from published studies of Great Lakes overflows. This is an estimate, not a measurement of "
+               "bacteria. The shore is not necessarily unsafe here, and the rest of the lake is not necessarily safe.")
 
 
 def reach_waters(st: dict) -> dict[str, list[str]]:
@@ -186,6 +204,9 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
         if not r or not r.get("segments"):
             continue
         e = by_event.get(a["event_id"]) or {}
+        if r.get("model") == SHORELINE:
+            feats.extend(shore_event_features(a, r, e, waters_by_reach))
+            continue
         start = status_mod.parse_time(e.get("started_at"))
         start_txt = start.astimezone(status_mod.LOCAL).strftime("%b %-d %H:%M") if start else "an unknown time"
         flow_txt = (f"at the river flow measured at {a.get('gauge_name') or a.get('gauge')} ({a['flow_cfs']:g} cfs) "
@@ -243,8 +264,55 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
                                      and not (status_by_reach.get(key) or {}).get("active"),
                                      "segments_km": [[sg["km_start"], sg["km_end"]] for sg in r["segments"]],
                                      "stop_label": STOP_TEXT.get(r.get("cut_reason"), "").format(cap=cap),
-                                     "line_text": LINE_TEXT}})
+                                     "line_text": LINE_TEXT, **shore_path_props(r)}})
     return feats, paths
+
+
+SHORELINE = "shoreline"
+
+
+def shore_path_props(r: dict) -> dict:
+    """The path properties of a shoreline stretch that differ from a river trace's (none for a river trace)."""
+    if r.get("model") != SHORELINE:
+        return {}
+    each = float(r.get("each_way_km") or r.get("cap_km") or 0)
+    return {"model": SHORELINE, "states": list(r.get("states") or []), "lake": r.get("lake") or r.get("river"),
+            "each_way_km": each, "line_text": SHORE_LINE_TEXT,
+            "stops": [{"coordinates": s["coords"], "km_from_outfall": s.get("km_from_outfall"),
+                       "cut_reason": s.get("cut_reason"),
+                       "label": SHORE_STOP_TEXT.get(s.get("cut_reason"), "").format(each=each)}
+                      for s in r.get("stops") or []],
+            "stop_label": "; ".join(dict.fromkeys(SHORE_STOP_TEXT.get(s.get("cut_reason"), "").format(each=each)
+                                                  for s in r.get("stops") or [])) or None}
+
+
+def shore_event_features(a: dict, r: dict, e: dict, waters_by_reach: dict) -> list:
+    """An active event's features on a shoreline stretch: one segment per side of the outfall (no travel time: a
+    lake shore has no flow to time) and a stop marker at each end, with the lake's states."""
+    each = float(r.get("each_way_km") or r.get("cap_km") or 0)
+    where_from = f"outfall {r['outfall']}" if r.get("outfall") else "the reported location"
+    lake = r.get("lake") or r.get("river") or "the lake"
+    label = SHORE_LABEL.format(lake=lake, where_from=where_from, each=each)
+    common_props = {"category": "sewage", "event_id": a["event_id"], "reach": a["reach"], "status": a["status"],
+                    "model": SHORELINE, "states": list(r.get("states") or []),
+                    "waters": waters_by_reach.get(a["reach"]) or list(r.get("waters") or [r.get("water_slug")])}
+    out = []
+    for sg in r["segments"]:
+        out.append({"type": "Feature", "geometry": {"type": "LineString", "coordinates": sg["coords"]},
+                    "properties": {**common_props, "feature": "segment", "rule": a["rule"], "short": a["short"],
+                                   "outfall": r.get("outfall"), "permit": r.get("permit"), "river": lake,
+                                   "comid": None, "km_from_outfall": sg["km_end"], "km_start": sg["km_start"],
+                                   "arrival_hours_typical": None, "arrival_hours_fast": None,
+                                   "arrival_hours_leading_edge": None, "reached_fast": None, "reached_typical": None,
+                                   "hours_since_start": a["hours_since_start"], "gauge": None, "flow_cfs": None,
+                                   "flow_time": None, "flow_basis": None, "cut_reason": r.get("cut_reason"),
+                                   "line_text": SHORE_LINE_TEXT, "label": label, "fixture": bool(e.get("fixture"))}})
+    for s in r.get("stops") or []:
+        out.append({"type": "Feature", "geometry": {"type": "Point", "coordinates": s["coords"]},
+                    "properties": {**common_props, "feature": "stop", "cut_reason": s.get("cut_reason"),
+                                   "km_from_outfall": s.get("km_from_outfall"),
+                                   "label": SHORE_STOP_TEXT.get(s.get("cut_reason"), "").format(each=each)}})
+    return out
 
 
 # ---------------------------------------------------------------- the reaches per state
@@ -267,6 +335,8 @@ def reach_states(rec: dict | None, waters: list[str], state_of) -> list[str]:
         own = str(rec.get("permit") or "")[:2].upper()
     head = [own] if STATE_CODE.fullmatch(own) else []
     rest = {state_of(s) for s in waters or [] if s} - {None, ""} - set(head)
+    # a shoreline stretch names the states whose shore it runs along (build/shoreline.py), with or without a record
+    rest |= {str(x).upper() for x in rec.get("states") or [] if STATE_CODE.fullmatch(str(x).upper())} - set(head)
     return head + sorted(rest)
 
 
@@ -1244,6 +1314,9 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                "provisional_outfalls": provisional(outfalls_by_water.get(slug, [])),
                "launches": rec.get("launches") or [],
                "extra": bool(rec.get("extra")), "fill": w.get("fill", True), "status_basis": w.get("status_basis"),
+               # "shoreline" on the Great Lakes (data/rules.json reach.shoreline): the lake is drawn as an outline and
+               # its reports colour the shoreline stretches in reaches.geojson (model "shoreline"), never the lake
+               **({"stretch_model": w["stretch_model"]} if w.get("stretch_model") else {}),
                "slug_aliases": rec.get("slug_aliases") or [],      # older slugs of this record (waters_from_nhd)
                "summary": w.get("summary"), "unresolved_events": w.get("unresolved_events") or [],
                # docs/plan.md §2.z: each category's status now and the headline (sewage first)
@@ -1286,6 +1359,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
             "status_by_category": w.get("status_by_category"),
             "headline_status": (w.get("headline") or {}).get("status"),
             "display": "fill" if w.get("fill", True) else "outline", "summary": w.get("summary"),
+            **({"stretch_model": w["stretch_model"]} if w.get("stretch_model") else {}),
             "since": w["since"], "reason_short": w["reason_short"], "event_count": len(w["events"]),
             "stale": w["stale"], "stale_since": min((s["last_ok_at"] for s in w["stale_sources"] if s.get("last_ok_at")), default=None),
             "fixture_only": w.get("fixture_only", False), "extra": bool(rec.get("extra")),
