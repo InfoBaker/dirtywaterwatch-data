@@ -3444,7 +3444,9 @@ def tidy_main(states, path=None, aliases_path=None) -> int:
     actions += named
     builds = dict((new.get("stats") or {}).get("state_builds") or {})
     for st in states:
-        mine = [a for a in actions if a["to"].endswith(f"-{st.lower()}")]
+        # a later pass adds to the earlier ones' actions (the counts are of all of them)
+        prev = (builds.get(st) or {}).get("existing_duplicates") or {}
+        mine = list(prev.get("actions") or []) + [a for a in actions if a["to"].endswith(f"-{st.lower()}")]
         builds[st] = {**(builds.get(st) or {}), "existing_duplicates": {
             "date": now_iso()[:10], "dropped": sum(a["action"] == "dropped" for a in mine),
             "renamed": sum(a["action"] == "renamed" for a in mine),

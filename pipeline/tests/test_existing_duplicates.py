@@ -145,6 +145,9 @@ def test_tidy_main_writes_the_file_and_the_hand_aliases(fixture_doc, monkeypatch
     assert out["stats"]["state_builds"]["NC"]["existing_duplicates"]["dropped"] == 2
     assert out["stats"]["state_builds"]["NC"]["existing_duplicates"]["renamed"] == 1
     assert json.loads(apath.read_text()) == {"charles-river-ma": ["Charles River Basin"], "neuse-river-nc": ["Neuse", "NEUSE RV"]}
+    assert N.tidy_main(["NC"], path=path, aliases_path=apath) == 0             # a second pass: nothing new, nothing lost
+    again = json.loads(path.read_text())["stats"]["state_builds"]["NC"]["existing_duplicates"]
+    assert again["dropped"] == 2 and again["renamed"] == 1 and len(again["actions"]) == 3
 
 
 # ---------------------------------------------------------------- outfall ties to a record with no outline here
