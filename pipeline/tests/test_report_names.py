@@ -408,11 +408,11 @@ def test_the_status_resolver_must_place_a_resolved_spelling_on_its_record():
                                              "matanzas-river-saint-augustine-fl); no point", True),
                       "Long Branch": (["far-away-nc"], None, False)})
     row = {"points": [[27.92, -82.75]], "towns": ["Clearwater"]}
-    assert N.resolver_places(r, "Allen Creek", "FL", row, ["allen-creek-fl"])
-    assert not N.resolver_places(r, "Allen's Creek", "FL", row, ["allen-creek-fl"])          # no alias: unplaced
-    assert not N.resolver_places(r, "South Fork of Middle River", "FL", row, ["south-fork-middle-river-fl"])
-    assert N.resolver_places(r, "Matanzas River", "FL", row, ["matanzas-river-saint-augustine-fl"])
-    assert not N.resolver_places(r, "Long Branch", "NC", row, ["far-away-nc"])               # set aside by the guard
+    assert N.resolver_places(r, "Allen Creek", "FL", row, ["allen-creek-fl"]) is None
+    assert N.resolver_places(r, "Allen's Creek", "FL", row, ["allen-creek-fl"]) == "spelling"      # no alias: unplaced
+    assert N.resolver_places(r, "South Fork of Middle River", "FL", row, ["south-fork-middle-river-fl"]) == "spelling"
+    assert N.resolver_places(r, "Matanzas River", "FL", row, ["matanzas-river-saint-augustine-fl"]) is None
+    assert N.resolver_places(r, "Long Branch", "NC", row, ["far-away-nc"]) == "guard"          # set aside by the guard
 
 
 def test_a_resolved_name_the_resolver_does_not_place_stays_with_its_record_named(tmp_path):
@@ -428,7 +428,7 @@ def test_a_resolved_name_the_resolver_does_not_place_stays_with_its_record_named
     stats = {"built": "2026-11-04T07:00:00Z", "file": "research/fl/receiving-waters-missing.json", "records": 1,
              "network_requests": 0}
     N.rewrite_names(path, {"state": "FL"}, "FL", rows, out_rows, {}, stats,
-                    placed=lambda text, r, slugs: "'" not in text)
+                    placed=lambda text, r, slugs: "spelling" if "'" in text else None)
     d = json.loads(path.read_text())
     assert [r["name"] for r in d["resolved"]] == ["Allen Creek"]
     res = d["resolved"][0]
@@ -450,3 +450,22 @@ def test_resolved_names_no_longer_placed_are_asked_again():
     back = N.recheck_resolved(meta, "FL", r)
     assert [x["name"] for x in meta["resolved"]] == ["Allen Creek"]
     assert back == [{"name": "Lawne Lake", "reports": 1, "points": [[28.569, -81.442]], "towns": ["Apopka"]}]
+
+
+def test_a_name_is_a_record_only_where_every_point_of_its_reports_finds_it():
+    waters = {"butler-creek-ga": {"name": "Butler Creek", "state": "GA", "aliases": []}}
+
+    def by_name(name, st, lat, lon, ev):
+        return ["butler-creek-ga"], None, False
+
+    def guard(slugs, ev):           # the record lies at Augusta: a report at Kennesaw is set aside
+        return ([], [("butler-creek-ga", "name match too far")]) if ev["lon"] < -84 else (slugs, [])
+    resolver = SimpleNamespace(by_name=by_name, guard=guard)
+    rows = [{"name": "Butler Creek Tributary", "reports": 2, "points": [[33.39487, -81.97529]]},
+            {"name": "Tributary to Butler Creek", "reports": 4, "points": [[34.02007, -84.61912]]}]
+    targets, done, _ = N.collect_name_targets("GA", rows, resolver, waters)
+    assert done == [] and [t["name"] for t in targets] == ["Butler Creek"]
+    assert "holds the name at some of the reports' points, not at all of them" in targets[0]["notes"][-1]
+    assert not any("another name" in x for x in targets[0]["notes"])
+    targets, done, _ = N.collect_name_targets("GA", rows[:1], resolver, waters)
+    assert targets == [] and [s for _, s in done] == [["butler-creek-ga"]]

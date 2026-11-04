@@ -3867,7 +3867,7 @@ def reason_kind(reason: str, multi: bool = False) -> str:
     nearest is 2.2 km away)', '(35.36514, -80.14824)') and, for a text naming several waters, without the water's name."""
     r = re.sub(r"^[^:;(]*?: ", "", reason) if multi else reason
     r = r.split("; ")[0]
-    r = re.sub(r"^(a water record holds this water but not this spelling) \([^)]*\)", r"\1", r)   # the records
+    r = re.sub(r"^(a water record holds (this water but not this spelling|the name)) \([^)]*\)", r"\1", r)  # records
     r = re.sub(r"\s*\((?=[^()]*(\d+\.\d|\d{4}-\d\d))[^()]*\)", "", r)       # a distance, a point or a date
     return r.strip()[:120]
 
@@ -3907,19 +3907,24 @@ def write_names_file(path, meta: dict, state: str, rows: list[dict], resolved: l
     write_json(path, doc)
 
 
-def has_record_at(resolver: S.Resolver, name: str, state: str, places: list[tuple], towns: list[str]) -> list[str]:
+def has_record_at(resolver: S.Resolver, name: str, state: str, places: list[tuple], towns: list[str],
+                  per_place: bool = False):
     """The water records the status resolver gives a report of this name in the state (the name, an alias or a stem,
-    kept by the placement guard) at the reports' places: each point, else each town, else with no place."""
+    kept by the placement guard) at the reports' places: each point, else each town, else with no place. per_place:
+    ([slugs], [the slugs kept at each point]) instead, so a name whose reports lie at several places is a record only
+    where each of them is (2026-11-04 review: 'Tributary to Butler Creek' at Kennesaw was counted as resolved by the
+    Butler Creek at Augusta that another spelling's point found)."""
     tries = [(lat, lon, towns[0] if towns else "") for lon, lat in places[:3]] or \
             [(None, None, tw) for tw in towns[:3]] or [(None, None, "")]
-    out = []
+    out, at = [], []
     for lat, lon, tw in tries:
         ev = {"lat": lat, "lon": lon, "raw": {"state": state, "town": tw}, "waterbody_text": name}
         slugs, _, _ = resolver.by_name(name, state, lat, lon, ev)
-        if slugs:
-            kept, _ = resolver.guard(slugs, ev)
-            out += [s for s in kept if s not in out]
-    return out
+        kept = resolver.guard(slugs, ev)[0] if slugs else []
+        out += [s for s in kept if s not in out]
+        if lat is not None:
+            at.append(list(kept))
+    return (out, at) if per_place else out
 
 
 def holds_name(rec: dict, name: str) -> bool:
@@ -3975,13 +3980,18 @@ def collect_name_targets(state: str, rows: list[dict], resolver: S.Resolver, wat
         t["name"] = t["names"].most_common(1)[0][0]
         t["words"] = words(t["name"])
         places = cluster_points(t["points"], n=3, sep_m=NEAR_M)
-        slugs = has_record_at(resolver, t["name"], state, places, [x for x, _ in t["towns"].most_common(3)])
+        slugs, at = has_record_at(resolver, t["name"], state, places, [x for x, _ in t["towns"].most_common(3)],
+                                  per_place=True)
         own = [x for x in slugs if waters is None or holds_name(waters.get(x) or {}, t["name"])]
-        if own:
+        if own and all(set(own) & set(k) for k in at):     # every point of the reports finds its record
             done.append((t, own))
             continue
-        if slugs:
-            t["notes"].append(f"the status resolver gives the name to {', '.join(slugs)} (another name): the name's own "
+        if own:
+            t["notes"].append(f"{', '.join(own)} holds the name at some of the reports' points, not at all of them: "
+                              f"the name pass looks at each")
+        other = [x for x in slugs if x not in own]
+        if other:
+            t["notes"].append(f"the status resolver gives the name to {', '.join(other)} (another name): the name's own "
                               f"water is built")
         out.append(t)
     out.sort(key=lambda t: (-t["events"], t["key"]))
@@ -4360,30 +4370,38 @@ def names_stats(state, path, rows, targets, done, out_rows, recs, skipped_reason
 
 
 PLACE_KEYS = ("points", "towns", "places_from")
-UNREAD_SPELLING = ("a water record holds this water but not this spelling ({slugs}): a report of it is not placed there "
-                   "until the spelling is an alias (data/water-aliases.json)")
+UNPLACED = {
+    "spelling": ("a water record holds this water but not this spelling ({slugs}): a report of it is not placed there "
+                 "until the spelling is an alias (data/water-aliases.json)"),
+    "guard": "a water record holds the name ({slugs}), but the reports' points lie too far from it to be placed there",
+}
 
 
-def resolver_places(resolver, text: str, state: str, row: dict, slugs) -> bool:
-    """Whether the status resolver places a report of this text, at the places the names file gives for it (each
-    point, else each town, else no place), on one of these records: its name, alias or stem, kept by the placement
-    guard. A name several records share that the resolver cannot choose among here (no outline on this machine, no
-    point) is not held against it when one of them is among the slugs."""
+def resolver_places(resolver, text: str, state: str, row: dict, slugs) -> str | None:
+    """Why the status resolver does not place a report of this text on one of these records at the places the names
+    file gives for it (each point, else each town, else no place): None when it does at one of them (its name, alias
+    or stem, kept by the placement guard); "guard" when it reads the name as one of them but the placement guard sets
+    the report aside at every place (the reports' points lie too far from the record); "spelling" when it does not
+    read this text as one of them. A name several records share that the resolver cannot choose among here (no
+    outline on this machine, no point) is not held against it when one of them is among the slugs."""
     pts = [(float(lat), float(lon)) for lat, lon in (row.get("points") or [])[:5]]
     towns = [str(x) for x in row.get("towns") or [] if x]
     tries = [(lat, lon, towns[0] if towns else "") for lat, lon in pts] or [(None, None, tw) for tw in towns[:3]] \
         or [(None, None, "")]
     want = set(slugs)
+    why = "spelling"
     for lat, lon, tw in tries:
         ev = {"lat": lat, "lon": lon, "raw": {"state": state, "town": tw}, "waterbody_text": text}
         got, note, ambiguous = resolver.by_name(text, state, lat, lon, ev)
         if got:
             kept, _ = resolver.guard(got, ev)
             if want & set(kept):
-                return True
+                return None
+            if want & set(got):
+                why = "guard"
         elif ambiguous and note and any(x in note for x in want):
-            return True
-    return False
+            return None
+    return why
 
 
 def recheck_resolved(meta: dict, state: str, resolver) -> list[dict]:
@@ -4392,7 +4410,7 @@ def recheck_resolved(meta: dict, state: str, resolver) -> list[dict]:
     places. An entry written before resolved names kept their places is checked with no place."""
     keep, back = [], []
     for r in meta.get("resolved") or []:
-        if resolver_places(resolver, r["name"], state, r, r.get("slugs") or []):
+        if resolver_places(resolver, r["name"], state, r, r.get("slugs") or []) is None:
             keep.append(r)
         else:
             back.append({k: v for k, v in r.items() if k not in ("slugs", "how", "places_failed")})
@@ -4403,10 +4421,11 @@ def recheck_resolved(meta: dict, state: str, resolver) -> list[dict]:
 def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats, placed=None) -> None:
     """The names file rewritten to what is still missing: a row whose every water name now has a record moves to
     `resolved` (with the slugs and the row's places); the others stay with their reason (no water, or why each name
-    found no record). placed(text, row, slugs): whether the status resolver places a report of the row's own text on
-    those records (resolver_places); a row it does not stays, its `records` named, with the reason that its spelling
-    needs an alias (2026-11-04 review: "Allen's Creek", "17 Mile River" and "South Fork of Middle River" were listed
-    as resolved while their reports went unplaced or to the Middle River)."""
+    found no record). placed(text, row, slugs): why the status resolver does not place a report of the row's own text
+    on those records (resolver_places: None when it does); a row it does not stays, its `records` named, with the
+    reason: its spelling needs an alias, or its points lie beyond the placement guard (2026-11-04 review: "Allen's
+    Creek", "17 Mile River" and "South Fork of Middle River" were listed as resolved while their reports went unplaced
+    or to the Middle River, and records chosen by a town 12 to 30 km from the reports' points place none of them)."""
     by_name = {}
     for r in out_rows:
         if r.get("from") == REPORT_ROWS:
@@ -4423,8 +4442,9 @@ def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats, plac
         if all(x is not None and x["slugs"] for x in trs):
             slugs = list(dict.fromkeys(s for x in trs for s in x["slugs"]))
             fails = [f for x in trs for f in x.get("places_failed") or []]
-            if placed is not None and not placed(r["name"], r, slugs):
-                left.append({**base, "records": slugs, "reason": UNREAD_SPELLING.format(slugs=", ".join(slugs)),
+            unplaced = placed(r["name"], r, slugs) if placed is not None else None
+            if unplaced:
+                left.append({**base, "records": slugs, "reason": UNPLACED[unplaced].format(slugs=", ".join(slugs)),
                              **({"places_failed": fails[:6]} if fails else {})})
                 continue
             resolved.append({"name": r["name"], "reports": r["reports"], "slugs": slugs,
