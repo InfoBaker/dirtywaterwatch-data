@@ -3270,6 +3270,15 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         # the status card: every reason that sets a colour first, sewage before beach before bloom (the headline is
         # the strongest sewage status), strictest and newest first within each (docs/plan.md §2.z)
         reasons.sort(key=lambda r: precedence(r.get("category"), r["status"]))
+        # several operators' rain cautions on one water: the strongest basis first (an operator's own amount, then a
+        # state's trigger, then this site's default) in the places those reasons already hold, so reasons[0], the
+        # reason_short, the overlay's rain_trigger_basis and the page's first line read as the water's rain context
+        # and badge do (rain_likely.strongest_basis); every other reason keeps its place
+        at = [i for i, r in enumerate(reasons) if r["rule"] == "rain_likely"]
+        if len(at) > 1:
+            rank = {b: n for n, b in enumerate(rain_mod.TRIGGER_BASES)}
+            for i, r in zip(at, sorted((reasons[i] for i in at), key=lambda r: rank.get(r.get("trigger_basis"), len(rank)))):
+                reasons[i] = r
         by_cat = {c: "grey" for c in CATEGORIES}
         for r in reasons:
             c = r.get("category") or "sewage"
