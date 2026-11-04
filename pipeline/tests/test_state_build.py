@@ -464,3 +464,20 @@ def test_a_bay_drawn_by_its_coastline_is_a_bay_not_a_stream():
     assert N.kind_of("Bay River", "line", fcodes=[46006]) == "river"
     w = {r["slug"]: r for r in json.loads((Path(__file__).resolve().parents[2] / "data" / "waters-nhd.json").read_text())["waters"]}
     assert {w[s]["kind"] for s in ("budd-inlet-wa", "padilla-bay-wa", "possession-sound-wa")} == {"bay"}
+
+
+def test_an_artificial_path_at_the_point_does_not_contradict_the_inventorys_name():
+    """Review 2026-11-04 WA: King County's outfall 027B ('Elliot Bay/Puget Sound') was said to lie on 'Unnamed stream
+    near Seattle', which is Elliott Bay's coastline: the name and the point do not disagree."""
+    mt = seattle_matcher({})
+    mt.waters["unnamed-stream-near-seattle-23989539-wa"] = {"state": "WA", "name": "Unnamed stream near Seattle",
+                                                            "nhd_fcodes": [56600]}
+    mt.resolver = SimpleNamespace(canon=lambda s: s,
+                                  by_point=lambda lat, lon, st: (147, "unnamed-stream-near-seattle-23989539-wa"))
+    for f in ("by_name", "by_nhd_target", "by_reach", "by_builder_permit", "by_point"):
+        setattr(mt, f, lambda o, text: (None, None))
+    mt.by_name_and_town = lambda o, text: (None, None)
+    mt.reason = lambda o, text, not_name: mt._conflict or "no record"
+    o = {"state": "WA", "npdes_permit": "WA0029181", "outfall": "027B", "lat": 47.6, "lon": -122.34,
+         "receiving_water_echo": "Elliot Bay/Puget Sound"}
+    assert mt.match(o, {})["reason"] == "no record" and mt._conflict is None

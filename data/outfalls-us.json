@@ -138112,9 +138112,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Unnamed stream near Seattle (147 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Unnamed stream near Seattle (147 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138434,9 +138434,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "none: EPA's point lies on Unnamed tributary to Duwamish Waterway (107 m), not on a water named 'Wapato Creek': the inventory's name and point disagree; the record of that name was set aside by the placement guard: wapato-creek-wa, name match too far (35.4 km; limit 10.1 km: the stream record's extent (8.1 km) plus 2 km); the NHD builder's record for 'Wapato Creek' for this permit, wapato-creek-wa, is 35.4 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
+   "water_match": "none: the record of that name was set aside by the placement guard: wapato-creek-wa, name match too far (35.4 km; limit 10.1 km: the stream record's extent (8.1 km) plus 2 km); the NHD builder's record for 'Wapato Creek' for this permit, wapato-creek-wa, is 35.4 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Unnamed tributary to Duwamish Waterway (107 m), not on a water named 'Wapato Creek': the inventory's name and point disagree; the record of that name was set aside by the placement guard: wapato-creek-wa, name match too far (35.4 km; limit 10.1 km: the stream record's extent (8.1 km) plus 2 km); the NHD builder's record for 'Wapato Creek' for this permit, wapato-creek-wa, is 35.4 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched"
+   "no_water_reason": "the record of that name was set aside by the placement guard: wapato-creek-wa, name match too far (35.4 km; limit 10.1 km: the stream record's extent (8.1 km) plus 2 km); the NHD builder's record for 'Wapato Creek' for this permit, wapato-creek-wa, is 35.4 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138733,10 +138733,10 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "none: EPA's point lies on Unnamed tributary to Duwamish Waterway (41 m), not on a water named 'Green River': the inventory's name and point disagree; the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
+   "water_match": "none: the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 2,
-   "no_water_reason": "EPA's point lies on Unnamed tributary to Duwamish Waterway (41 m), not on a water named 'Green River': the inventory's name and point disagree; the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched"
+   "no_water_reason": "the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched"
   },
   {
    "npdes_permit": "WA0029181",
@@ -138764,10 +138764,10 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "water_match": "none: EPA's point lies on Unnamed tributary to Duwamish Waterway (41 m), not on a water named 'Green River': the inventory's name and point disagree; the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
+   "water_match": "none: the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 2,
-   "no_water_reason": "EPA's point lies on Unnamed tributary to Duwamish Waterway (41 m), not on a water named 'Green River': the inventory's name and point disagree; the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched"
+   "no_water_reason": "the record of that name was set aside by the placement guard: green-river-wa, name match too far (6.6 km) and the report's town (seattle) is not among the water's towns (Auburn, Kent, Lake Holm, Lake Morton-Berrydale); the NHD builder's record for 'Green River' for this permit, green-river-wa, is 6.6 km from EPA's point and does not reach the permittee's town (seattle): likely another water of that name, not matched"
   },
   {
    "npdes_permit": "WA0029181",
@@ -140916,9 +140916,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Unnamed stream near Seattle (28 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Unnamed stream near Seattle (28 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run"
   },
   {
    "npdes_permit": "WA0031682",
@@ -140976,9 +140976,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Unnamed stream near Seattle (31 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Unnamed stream near Seattle (31 m), not on a water named 'Elliot Bay': the inventory's name and point disagree; NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD flowline or waterbody of that name in the state; NHD high resolution not asked this run (budget); the map service (OpenStreetMap) could not be reached on 2026-11-04: left for the next run"
   },
   {
    "npdes_permit": "WA0031682",
