@@ -76,7 +76,7 @@ def ms_iso(v) -> str | None:
     if v in (None, ""):
         return None
     try:
-        return datetime.fromtimestamp(float(v) / 1000, UTC).astimezone(TZ).isoformat()
+        return datetime.fromtimestamp(float(v) / 1000, UTC).astimezone(TZ).isoformat(timespec="seconds")
     except (TypeError, ValueError, OverflowError, OSError):
         return None
 

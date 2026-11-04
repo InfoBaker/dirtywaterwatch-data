@@ -131,7 +131,7 @@ def local(ms) -> datetime | None:
 
 
 def iso(dt: datetime | None) -> str | None:
-    return dt.isoformat() if dt else None
+    return dt.isoformat(timespec="seconds") if dt else None
 
 
 def fnum(v):
