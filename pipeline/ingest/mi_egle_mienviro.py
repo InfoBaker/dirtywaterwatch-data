@@ -417,14 +417,29 @@ NUMBER_WORD_BEFORE = re.compile(
     r"[ #.-]{0,3}$")
 
 
+# a person's name as the owner of the land, in the possessive: "<given> <surname>'s back yard" (a 2019 report types
+# the apostrophe as a backtick); two or three capitalised words, or one after Mr / Mrs / Ms / Dr
+OWNER_POSSESSIVE = re.compile(
+    r"((?:(?:Mr|Mrs|Ms|Miss|Dr)\.?[ ]{1,2}[A-Z][\w.-]*)|(?:[A-Z][\w.-]*(?:[ ]{1,2}[A-Z][\w.-]*){1,2}))"
+    r"(?:'|`|\u2019)s(?=[ ]{1,2}(?:(?:back|front|side|rear)[ ]{1,2})?(?i:yard|home|house|property|residence|"
+    r"driveway|basement|lawn|lot|farm|field|garage|land|cottage|cabin)\b)")
+
+
 def cut_owner_names(v: str) -> str:
-    """'property owned by <given> <surname> at ...' -> 'property owned by [name removed] at ...' (a body stays)."""
+    """'property owned by <given> <surname> at ...' -> 'property owned by [name removed] at ...', and
+    "<given> <surname>'s back yard" -> "[name removed]'s back yard" (a body stays)."""
+    def body(name):
+        return _site_words(name) or re.search(r"(?i)\b(llc|inc|corp|company|co|ltd|lp)\b", name)
+
     def one(m):
         name = m.group(2)
-        if _site_words(name) or re.search(r"(?i)\b(llc|inc|corp|company|co|ltd|lp)\b", name):
+        if body(name):
             return m.group(0)
         return m.group(0)[:m.start(2) - m.start(0)] + NAME_REMOVED
-    return OWNER_CUE.sub(one, v)
+
+    def poss(m):
+        return m.group(0) if body(m.group(1)) else NAME_REMOVED + m.group(0)[len(m.group(1)):]
+    return OWNER_POSSESSIVE.sub(poss, OWNER_CUE.sub(one, v))
 
 
 def cut_address_numbers(v: str) -> str:
@@ -625,9 +640,13 @@ def link_copies(records: list[dict]) -> int:
 
 
 def build(rows: list[dict], fetched_at: str, prev_records: list[dict], permits: dict[str, str] | None = None,
-          missing: set[str] | None = None, left_state: dict | None = None) -> tuple[list[dict], dict]:
+          missing: set[str] | None = None, left_state: dict | None = None,
+          carry_completed: bool = False) -> tuple[list[dict], dict]:
     """rows: the list's rows read this run. Returns (records, stats); earlier records not read again are rebuilt
-    from their raw fields and kept. missing: keys the service no longer lists (looked up and not found)."""
+    from their raw fields and kept. missing: keys the service no longer lists (looked up and not found).
+    carry_completed: an earlier record of a report EGLE lists as completed that this run did not read is kept as
+    saved, not rebuilt (the hourly run with the history on file; main() allows it only while the rules that built
+    the saved records are unchanged, build_stamp)."""
     permits = permit_index() if permits is None else permits
     missing = missing or set()
     left_state = left_state if left_state is not None else {}
@@ -648,13 +667,19 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], permits: 
             continue
         left_state.pop(key, None)
         records.append(rec)
-    kept = 0
+    kept = carried = 0
     for eid, r in prev.items():
         if eid in seen:
             continue
         raw = r.get("raw") or {}
         row = {k: raw.get(k) for k in FIELDS if k in raw}
         key = row_key(row)
+        if (carry_completed and key and key not in missing and isinstance(r.get("raw"), dict)
+                and clean(raw.get("reportStatusId")).upper() == "COMPLETE"):
+            records.append(r)                   # a completed report not read again: as saved (same rules)
+            kept += 1
+            carried += 1
+            continue
         rec = build_record(row, r.get("fetched_at") or fetched_at, r, permits) if key else r
         if isinstance(rec, tuple):
             left_state[key] = rec[1]
@@ -671,7 +696,7 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], permits: 
         kept += 1
     dups = link_copies(records)
     records.sort(key=lambda r: (r.get("started_at") or r.get("reported_at") or "", r["event_id"]), reverse=True)
-    stats = {"rows_read": len(seen), "kept_from_earlier_runs": kept, "copies": dups,
+    stats = {"rows_read": len(seen), "kept_from_earlier_runs": kept, "kept_as_saved": carried, "copies": dups,
              "by_status": dict(Counter(r["status"] for r in records)),
              "by_type": dict(Counter(r["event_type"] for r in records)),
              "by_report_status": dict(Counter(clean((r.get("raw") or {}).get("reportStatusId")) for r in records)),
@@ -692,8 +717,10 @@ def query(sess: requests.Session, flt: dict, top: int = TOP, read_timeout: float
     d = r.json()
     if not isinstance(d, dict) or not isinstance(d.get("queryResults"), list):
         raise RuntimeError(f"unexpected answer: {str(d)[:200]}")
-    if d.get("hasResultsRemaining"):
-        raise OverflowError(f"more than {top} rows for {flt}")
+    # the service stops at `top` rows and does not always say so: 2006 answered exactly 5,000 rows (February to May)
+    # with hasResultsRemaining false on 2026-11-04, so a full answer is read as cut short too
+    if d.get("hasResultsRemaining") or len(d["queryResults"]) >= top:
+        raise OverflowError(f"{top} rows or more for {flt}")
     return [safe_row(x) for x in d["queryResults"] if isinstance(x, dict)]
 
 
@@ -893,6 +920,18 @@ def left_scope(state: dict) -> str:
             "the reports read so far (open reports and those completed in the last 60 days at first)")
 
 
+def build_stamp(permits: dict[str, str]) -> str:
+    """What the saved records were built under: this module, common.py and build/redact.py as files, the permit
+    index and the name lists. A change to any of them makes the next run rebuild every record (once)."""
+    from build import redact
+    h = hashlib.sha256()
+    for f in (Path(__file__), Path(sys.modules["common"].__file__), Path(redact.__file__),
+              DATA_DIR / "name-allowlist.json", BUILD_DIR / "name-blocklist.json"):
+        h.update(f.read_bytes() if f.exists() else b"-")
+    h.update(json.dumps(sorted(permits.items())).encode())
+    return h.hexdigest()
+
+
 def main(argv=None) -> int:
     from build import redact
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
@@ -936,9 +975,22 @@ def main(argv=None) -> int:
             state.update(sha256=sha, raw_path=raw_path, saved_at=fetched_at)
     left_state = state.setdefault("left_out", {})
     permits = permit_index()
+    # the hourly run keeps the completed reports it did not read as saved while the rules are unchanged (with the
+    # history from 2001 on file, rebuilding some 50,000 records every hour took minutes); a backfill, a --file run
+    # or a change of rules rebuilds every record
+    stamp = build_stamp(permits)
+    carry = not args.backfill and not args.file and state.get("build_stamp") == stamp
     # the current answer first: a report read now wins over its archived copy (build keeps the first row of a key)
-    records, stats = build(rows + history, fetched_at, prev, permits, missing, left_state)
-    records = redact.redact_events(records)
+    records, stats = build(rows + history, fetched_at, prev, permits, missing, left_state, carry_completed=carry)
+    saved = {id(r) for r in prev}
+    rebuilt = [i for i, r in enumerate(records) if id(r) not in saved]
+    if len(rebuilt) == len(records):
+        records = redact.redact_events(records)
+    else:                                       # the records kept as saved were redacted when they were built
+        redactor = redact.redactor_for(records)
+        for i in rebuilt:
+            records[i] = redactor.event(records[i])
+    state["build_stamp"] = stamp
     state["fetched_at"] = fetched_at
     if summary is not None:
         state["backfill"] = {**summary, "at": fetched_at,

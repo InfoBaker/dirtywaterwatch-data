@@ -271,3 +271,62 @@ def test_older_shapes_and_personal_details_never_reach_the_archive_or_a_record(e
     assert old["npdes_permit"] == "MI0099001" and old["event_type"] == "sso" and old["status"] == "ended"
     assert old["ended_at"] is None and old["started_at"].startswith("2002-03-01")
     assert "contactName" not in old["raw"]
+
+
+def test_the_hourly_run_keeps_completed_history_as_saved_and_rebuilds_it_when_the_rules_change(env, monkeypatch):
+    """With the history on file the hourly run rebuilds only what it read (and open reports); a completed report it
+    did not read is kept as saved, unless the module, the permit index or the name lists changed (build_stamp)."""
+    run(env, monkeypatch, Service(HISTORY), "--backfill")
+    before = json.loads((env / "events" / f"{M.SOURCE_ID}.json").read_text())["records"]
+    built = []
+    real = M.build_record
+    monkeypatch.setattr(M, "build_record", lambda row, *a, **k: built.append(M.row_key(row)) or real(row, *a, **k))
+    d = run(env, monkeypatch, Service(HISTORY))
+    assert d["meta"]["kept_as_saved"] == 52 and len(built) == d["meta"]["rows_read"] < 10
+    after = {r["event_id"]: r for r in d["records"]}
+    for r in before:
+        if r["raw"]["reportStatusId"] == "COMPLETE" and r["started_at"] and r["started_at"] < "2026-01-01":
+            assert after[r["event_id"]] == r
+    built.clear()
+    monkeypatch.setattr(M, "permit_index", lambda rows=None: {**PERMITS, "MI0099009": "mi-another"})
+    d = run(env, monkeypatch, Service(HISTORY))
+    assert d["meta"]["kept_as_saved"] == 0 and len(built) >= d["count"]
+    built.clear()
+    d = run(env, monkeypatch, Service(HISTORY))
+    assert d["meta"]["kept_as_saved"] == 52 and leaks(d) == []
+
+
+def test_an_answer_of_exactly_top_rows_is_read_as_cut_short_and_the_year_halved(monkeypatch):
+    """2006 answered exactly 5,000 rows, February to May, with hasResultsRemaining false: the year is halved."""
+    asked = []
+
+    class Sess:
+        def get(self, url, params=None, timeout=None):
+            flt = json.loads(params["queryParams"])["filter"][0]
+            asked.append(flt)
+            a, b = date.fromisoformat(flt["eventStartDateMin"]), date.fromisoformat(flt["eventStartDateMax"])
+            n = 4 if (b - a).days > 200 else 2
+            return Resp([{"submissionId": f"-6{len(asked)}{i}", "sectionNumber": 1} for i in range(n)])
+
+    monkeypatch.setattr(M, "TOP", 4)
+    monkeypatch.setattr(M.query, "__defaults__", (4, 300))
+    got = M.query_window(Sess(), "COMPLETE", date(2006, 1, 1), date(2007, 1, 1))
+    assert len(asked) == 3 and len(got) == 4
+
+
+@pytest.mark.parametrize("given,gone,kept", [
+    ("Robin Placeholder`s back yard", "Robin Placeholder", "back yard"),
+    ("rear of Lee Placeholder's property near the ditch", "Lee Placeholder", "property near the ditch"),
+    ("Mr. Placeholder’s lawn", "Placeholder", "lawn"),
+    ("Sample Township's park lot", None, "Sample Township's park lot"),
+    ("Resident's basement", None, "Resident's basement"),
+    ("Homeowner's lawn", None, "Homeowner's lawn"),
+])
+def test_a_landowners_name_in_the_possessive_is_cut(given, gone, kept):
+    """An older report names the land as "<given> <surname>`s back yard" (a backtick for the apostrophe)."""
+    out = M.free_text(given)
+    assert kept in out
+    if gone:
+        assert gone not in out and M.NAME_REMOVED in out
+    else:
+        assert out == given
