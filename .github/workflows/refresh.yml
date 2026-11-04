@@ -6,11 +6,11 @@ name: Refresh data
 # that folder is restored from R2 state/build.tar.gz at the start and saved back at the end. Raw fetches stay on
 # the runner (they can carry personal fields and are never committed).
 # Needs the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets (R2 edit) and, for the model steps,
-# OPENROUTER_API_KEY (without it they run rules-only). Until the secrets exist, the schedule stays commented out.
+# OPENROUTER_API_KEY (without it they run rules-only).
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: '7 * * * *'
+  schedule:
+    - cron: '7 * * * *'   # hourly, off the hour (enabled 2026-11-04 after run 3 restored the seeded state and uploaded)
 
 concurrency:
   group: refresh
@@ -44,6 +44,7 @@ jobs:
       - name: Restore pipeline state from R2
         run: |
           wrangler r2 object get dirtywaterwatch-data/state/build.tar.gz --file build.tar.gz --remote && tar -xzf build.tar.gz || echo "no state yet"
+          find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
       - name: Refresh (feeds, status, reaches, charts, export, tally, R2 current/)
         run: sh scripts/refresh-data.sh
       - name: Save pipeline state to R2
