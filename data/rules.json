@@ -256,7 +256,26 @@
    "lake_or_reservoir",
    "cap_km"
   ],
-  "source": "U.S. Geological Survey, Network-Linked Data Index (NLDI) and the NHDPlus Version 2 river network; Jobson (1996), U.S. Geological Survey Water-Resources Investigations Report 96-4013"
+  "source": "U.S. Geological Survey, Network-Linked Data Index (NLDI) and the NHDPlus Version 2 river network; Jobson (1996), U.S. Geological Survey Water-Resources Investigations Report 96-4013",
+  "shoreline": {
+   "doc": "The Great Lakes are shown like rivers, not coloured whole: a report from an outfall on one of these lakes colours a modeled stretch of shoreline at the outfall, and the lake's outline stays grey. The report still counts on the lake's page.",
+   "lakes": [
+    {"name": "Lake Superior", "wikidata": "Q1066", "gnis_id": "1618946"},
+    {"name": "Lake Michigan", "wikidata": "Q1169", "gnis_id": "1623080"},
+    {"name": "Lake Huron", "wikidata": "Q1383", "gnis_id": "1624619"},
+    {"name": "Lake Erie", "wikidata": "Q5492", "gnis_id": "1075813"},
+    {"name": "Lake Ontario", "wikidata": "Q1062"}
+   ],
+   "name_min_area_km2": 100,
+   "min_area_km2": null,
+   "each_way_km": 40,
+   "shore_m": 500,
+   "gap_km": 3,
+   "snap_km": 5,
+   "rationale": "On the Great Lakes a sewage report is shown along the shore at its outfall, not as a colour over the whole lake. We draw the shoreline up to 40 kilometres each way from the outfall: the same 40 kilometres we use as the limit of a river estimate, in both directions, because currents along a lake shore can run either way with the wind. We know of no study that measures how far sewage spreads along a Great Lakes shore after an overflow, so this distance is our choice, not a measured value, and it may change. The stretch keeps the report's own advisory period, or our 96-hour lake caution after the reported end. Contamination can reach beyond the stretch, and the rest of the lake is not shown as clean.",
+   "source": "Distance: the 40-kilometre limit of this site's river estimates, applied each way along the shore; no measured lake-shore distance was found. Duration: the report's advisory period, or the 96-hour lake caution (Environment Agency (England), report SC250004/R (2026); Korajkic et al. (2019)). Shoreline: the lake's outline where it meets land in the U.S. Census Bureau's 2023 cartographic state outlines (cb_2023_us_state_500k).",
+   "_internal_doc": "build/shoreline.py. A lake record is a shoreline lake when its wikidata or gnis_id is listed, or its name is listed and its area is at least name_min_area_km2 (a 0.7 km2 New York pond is also named Lake Superior), or (min_area_km2 set) any lake or reservoir at least that large. min_area_km2 is null: the other lakes over 1,000 km2 in the records (Lake Champlain VT and NY, live, 1,181 km2; Lake Okeechobee FL, 1,229 km2; Pamlico Sound NC, recorded as a lake, 4,083 km2) keep today's whole-water behaviour until that is decided. each_way_km: the river cap applied both ways, a default awaiting confirmation (the science summary has no lake-shore distance; there is no bay stretch model to reuse: bays and sounds are markers only). shore_m: a lake edge within this of land is shore; gap_km: a run of edges away from land longer than this ends the walk (a state or international line, an NHD tile edge); shorter runs (a river mouth, a breakwall) are walked across. snap_km: an outfall farther than this from the shore gets no stretch."
+  }
  },
  "placement": {
   "doc": "How a report is linked to a water when it does not say exactly where the sewage went.",
