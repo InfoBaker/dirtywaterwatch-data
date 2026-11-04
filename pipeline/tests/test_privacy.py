@@ -299,3 +299,17 @@ def test_export_removes_a_residence_number_from_the_free_text_fields_too():
     assert out["outfall_name"] == "MH 12 about 100 feet from back of home at [house number removed] Example Court"
     assert out["waterbody_text"] == "Example Branch, a waterway behind the private residence at [house number removed] Example Rd."
     assert "124" not in json.dumps(out["raw"])
+
+
+def test_a_closing_signature_name_is_scrubbed_and_place_names_in_text_stay():
+    """An agency report's sign-off (2026-11-04, a bloom report): the name after a closing is removed, the credentials
+    and office stay; a closing followed by a sentence, or a water name in running text, is untouched."""
+    from common import scrub_text
+    v = "The bloom had dispersed by the second visit. Very respectfully, Pat Example, P.G. Hydrogeologist, Mooresville Regional Office"
+    out = scrub_text(v)
+    assert "Pat Example" not in out and "[name removed], P.G. Hydrogeologist, Mooresville Regional Office" in out
+    v2 = "Sampled at Lake Example today.\nSincerely,\nChris Q. Placeholder\nEnvironmental Specialist"
+    out2 = scrub_text(v2)
+    assert "Chris Q. Placeholder" not in out2 and "Lake Example" in out2 and "Environmental Specialist" in out2
+    assert scrub_text("Thank you for the report. The creek was clear.") == "Thank you for the report. The creek was clear."
+    assert scrub_text("Regards to the crew; Mill Creek was turbid.") == "Regards to the crew; Mill Creek was turbid."
