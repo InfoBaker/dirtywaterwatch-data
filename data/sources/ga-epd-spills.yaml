@@ -10,7 +10,8 @@ level: "state"
 # Cadence (pipeline/ingest/ga_epd_spills.py docstring): each business day, about one business day of
 #   latency. The workbook is a rolling 30-day list with no row id: history is built from the dated
 #   postings (older dated files stay at the same URL pattern); rows that leave the window are kept.
-#   Rows of the same permit and day as an EPA Sewer Overflow and Bypass Event report are duplicate_of it.
+#   Where a row and an EPA Sewer Overflow and Bypass Event report of the same permit and day are one spill, the
+#   EPA report is duplicate_of the row, which takes EPA's end; any doubt leaves them unpaired (module docstring).
 cadence: "daily"
 license: "None stated."
 attribution: "Georgia Environmental Protection Division"
