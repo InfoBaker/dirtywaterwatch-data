@@ -112794,7 +112794,7 @@
   "id": "nc-a-and-d-water-service",
   "name": "A&D Water Service Inc",
   "state": "NC",
-  "legal_form": "private utility",
+  "legal_form": "investor-owned utility",
   "kind": "sso",
   "npdes_permit": "WQCSD0368",
   "npdes_permits": [
@@ -112827,7 +112827,7 @@
   "id": "nc-aqua-north-carolina",
   "name": "Aqua North Carolina Inc",
   "state": "NC",
-  "legal_form": "private utility",
+  "legal_form": "investor-owned utility",
   "kind": "sso",
   "npdes_permit": "WQCS00147",
   "npdes_permits": [
@@ -112884,7 +112884,7 @@
   "id": "nc-birch-and-held",
   "name": "Birch and Held LLC",
   "state": "NC",
-  "legal_form": "private company",
+  "legal_form": "business or industrial",
   "kind": "sso",
   "npdes_permit": "WQCSD0548",
   "npdes_permits": [
@@ -112917,7 +112917,7 @@
   "id": "nc-burt-s-bees",
   "name": "Burt's Bees Inc",
   "state": "NC",
-  "legal_form": "industrial facility",
+  "legal_form": "business or industrial",
   "kind": "sso",
   "npdes_permit": "WQCSD0636",
   "npdes_permits": [
@@ -112948,7 +112948,7 @@
   "id": "nc-carolina-trace-utilities",
   "name": "Carolina Trace Utilities Inc",
   "state": "NC",
-  "legal_form": "private utility",
+  "legal_form": "investor-owned utility",
   "kind": "sso",
   "npdes_permit": "WQCS00217",
   "npdes_permits": [
@@ -113016,7 +113016,7 @@
   "id": "nc-carolina-water-service-of-north-carolina",
   "name": "Carolina Water Service Inc of North Carolina",
   "state": "NC",
-  "legal_form": "private utility",
+  "legal_form": "investor-owned utility",
   "kind": "sso",
   "npdes_permit": "WQCS00162",
   "npdes_permits": [
@@ -113059,7 +113059,7 @@
   "id": "nc-currituck-water-and-sewer",
   "name": "Currituck Water and Sewer LLC",
   "state": "NC",
-  "legal_form": "private utility",
+  "legal_form": "investor-owned utility",
   "kind": "sso",
   "npdes_permit": "WQCSD0176",
   "npdes_permits": [
@@ -113157,7 +113157,7 @@
   "id": "nc-hillco",
   "name": "Hillco Ltd",
   "state": "NC",
-  "legal_form": "private company",
+  "legal_form": "business or industrial",
   "kind": "sso",
   "npdes_permit": "WQCSD0700",
   "npdes_permits": [
@@ -113188,7 +113188,7 @@
   "id": "nc-keyzer-catering",
   "name": "Keyzer Catering LLC",
   "state": "NC",
-  "legal_form": "private company",
+  "legal_form": "business or industrial",
   "kind": "plant",
   "npdes_permit": "NC0036919",
   "npdes_permits": [
@@ -113221,7 +113221,7 @@
   "id": "nc-lake-creek-corporation",
   "name": "Lake Creek Corporation",
   "state": "NC",
-  "legal_form": "private company",
+  "legal_form": "business or industrial",
   "kind": "sso",
   "npdes_permit": "WQCSD0103",
   "npdes_permits": [
@@ -113252,7 +113252,7 @@
   "id": "nc-mill-ridge-property-owners-association",
   "name": "Mill Ridge Property Owners Association",
   "state": "NC",
-  "legal_form": "owners' association",
+  "legal_form": "homeowners' association",
   "kind": "sso",
   "npdes_permit": "WQCSD0234",
   "npdes_permits": [
@@ -113319,7 +113319,7 @@
   "id": "nc-old-north-state-water-company",
   "name": "Old North State Water Company",
   "state": "NC",
-  "legal_form": "private utility",
+  "legal_form": "investor-owned utility",
   "kind": "sso",
   "npdes_permit": "WQCS00372",
   "npdes_permits": [
@@ -113357,7 +113357,7 @@
   "id": "nc-old-north-utility-services",
   "name": "Old North Utility Services Inc",
   "state": "NC",
-  "legal_form": "private utility",
+  "legal_form": "investor-owned utility",
   "kind": "sso",
   "npdes_permit": "WQCS00029",
   "npdes_permits": [
@@ -113392,7 +113392,7 @@
   "id": "nc-pcs-phosphate-company",
   "name": "PCS Phosphate Company Inc",
   "state": "NC",
-  "legal_form": "industrial facility",
+  "legal_form": "business or industrial",
   "kind": "sso",
   "npdes_permit": "WQCSD0691",
   "npdes_permits": [
@@ -113454,7 +113454,7 @@
   "id": "nc-transylvania-utilities",
   "name": "Transylvania Utilities Inc",
   "state": "NC",
-  "legal_form": "private utility",
+  "legal_form": "investor-owned utility",
   "kind": "sso",
   "npdes_permit": "WQCS00219",
   "npdes_permits": [
@@ -113529,7 +113529,7 @@
    "ga"
   ],
   "short_name": "Atlanta Watershed Management",
-  "legal_form": "municipal",
+  "legal_form": "city",
   "website": "https://atlantawatershed.org/"
  },
  {
@@ -113566,7 +113566,7 @@
    "ga"
   ],
   "short_name": "Columbus Water Works",
-  "legal_form": "municipal",
+  "legal_form": "city",
   "website": "https://www.cwwga.org/"
  },
  {
@@ -113601,7 +113601,7 @@
    "ga"
   ],
   "short_name": "Albany Utilities",
-  "legal_form": "municipal"
+  "legal_form": "city"
  },
  {
   "id": "ga-dekalb-dwm",
@@ -113640,7 +113640,7 @@
    "ga"
   ],
   "short_name": "DeKalb County Watershed Management",
-  "legal_form": "municipal"
+  "legal_form": "county"
  },
  {
   "id": "ga-augusta-utilities",
@@ -113674,7 +113674,7 @@
    "ga"
   ],
   "short_name": "Augusta Utilities",
-  "legal_form": "municipal"
+  "legal_form": "city"
  },
  {
   "id": "ga-cobb-county",
@@ -113709,7 +113709,7 @@
    "ga"
   ],
   "short_name": "Cobb County Water System",
-  "legal_form": "municipal"
+  "legal_form": "county"
  },
  {
   "id": "ga-gwinnett-county",
@@ -113743,7 +113743,7 @@
    "ga"
   ],
   "short_name": "Gwinnett County Water Resources",
-  "legal_form": "municipal"
+  "legal_form": "county"
  },
  {
   "id": "ga-fulton-county",
@@ -113778,7 +113778,7 @@
    "ga"
   ],
   "short_name": "Fulton County Public Works",
-  "legal_form": "municipal"
+  "legal_form": "county"
  },
  {
   "id": "ga-macon-water-authority",
@@ -133879,7 +133879,7 @@
   "id": "fl-miami-dade-wasd",
   "name": "Miami-Dade Water and Sewer Department",
   "short_name": "Miami-Dade WASD",
-  "legal_form": "county department",
+  "legal_form": "county",
   "state": "FL",
   "kind": "sso",
   "npdes_permit": "FL0024805",
@@ -133915,7 +133915,7 @@
   "id": "fl-jea",
   "name": "JEA (Jacksonville)",
   "short_name": "JEA",
-  "legal_form": "municipal utility",
+  "legal_form": "authority",
   "state": "FL",
   "kind": "sso",
   "npdes_permit": "FL0026000",
@@ -134123,7 +134123,7 @@
   "id": "fl-fort-pierce-ua",
   "name": "Fort Pierce Utilities Authority",
   "short_name": "FPUA",
-  "legal_form": "utility authority",
+  "legal_form": "authority",
   "state": "FL",
   "kind": "sso",
   "npdes_permit": "FL0027278",
@@ -135204,7 +135204,7 @@
    "federal"
   ],
   "short_name": "HILLSBOROUGH COUNTY DALE MABRY AWWTF",
-  "legal_form": "county department"
+  "legal_form": "county"
  },
  {
   "id": "fl-fl0021326",
@@ -135411,7 +135411,7 @@
    "federal"
   ],
   "short_name": "SOUTH COUNTY REGIONAL AWWTP",
-  "legal_form": "county department"
+  "legal_form": "county"
  },
  {
   "id": "fl-fl0027812",
@@ -135988,7 +135988,7 @@
    "federal"
   ],
   "short_name": "PALM BEACH COUNTY SOUTHERN REGION WATER RECLAMATION FACILITY",
-  "legal_form": "county department"
+  "legal_form": "county"
  },
  {
   "id": "fl-fl0022853",
@@ -136698,7 +136698,7 @@
    "federal"
   ],
   "short_name": "CHARLOTTE COUNTY UTILITIES - EASTPORT WWTP",
-  "legal_form": "county department"
+  "legal_form": "county"
  },
  {
   "id": "fl-fl0027669",
@@ -136970,7 +136970,7 @@
    "federal"
   ],
   "short_name": "COLLIER COUNTY SOUTH COUNTY WRF",
-  "legal_form": "county department"
+  "legal_form": "county"
  },
  {
   "id": "fl-fl0040398",
@@ -137547,7 +137547,7 @@
    "federal"
   ],
   "short_name": "MARTIN COUNTY TROPICAL FARMS WWTF",
-  "legal_form": "county department"
+  "legal_form": "county"
  },
  {
   "id": "fl-fl0039829",
@@ -137581,7 +137581,7 @@
    "federal"
   ],
   "short_name": "LEE COUNTY UTILITIES - FIESTA VILLAGE",
-  "legal_form": "village"
+  "legal_form": "county"
  },
  {
   "id": "fl-fl0043834",
@@ -138262,7 +138262,7 @@
    "federal"
   ],
   "short_name": "MANATEE COUNTY MASTER REUSE SYSTEM",
-  "legal_form": "county department"
+  "legal_form": "county"
  },
  {
   "id": "fl-fla043192",
@@ -138294,7 +138294,7 @@
    "federal"
   ],
   "short_name": "MARTIN COUNTY UTILITIES NORTH WWTF",
-  "legal_form": "county department"
+  "legal_form": "county"
  },
  {
   "id": "fl-fl0127272",
@@ -138328,7 +138328,7 @@
    "federal"
   ],
   "short_name": "PASCO COUNTY UTILITIES - MASTER REUSE SYSTEM",
-  "legal_form": "county department"
+  "legal_form": "county"
  },
  {
   "id": "fl-fl0020125",
@@ -139044,7 +139044,7 @@
    "federal"
   ],
   "short_name": "SEACOAST UTILITIES AUTHORITY PGA REGIONAL WWTF",
-  "legal_form": "utility authority"
+  "legal_form": "authority"
  },
  {
   "id": "fl-fl0029033",
