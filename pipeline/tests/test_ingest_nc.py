@@ -251,3 +251,21 @@ def test_bloom_archive_skips_reporter_fields_and_points_at_the_current_copy():
                                        ("BothFKAB", True), ("Fish Kill", False), ("FishKill", False), (None, False)])
 def test_bloom_kinds(kind, want):
     assert B.is_bloom(kind) is want
+
+
+def test_a_frozen_backfill_file_is_never_stale_but_a_live_feed_is():
+    """The history and archive layers are read once (--backfill): their events files carry meta.frozen and must
+    not flag the state's waters "Source not updating" a day later (their registry cadence does not parse)."""
+    from datetime import UTC, datetime
+
+    from build import status
+    now = datetime(2026, 11, 4, tzinfo=UTC)
+    reg = {"cadence": None}
+    frozen = status.source_health(S.HIST_ID, {"ok": True, "last_ok_at": "2026-01-01T00:00:00Z",
+                                              "meta": {"frozen": True}}, reg, now)
+    assert frozen["stale"] is False and frozen["expected_cadence_hours"] is None and frozen["cadence_from"] == "frozen"
+    live = status.source_health(S.SOURCE_ID, {"ok": True, "last_ok_at": "2026-11-02T00:00:00Z", "meta": {}}, reg, now)
+    assert live["stale"] is True
+    failed = status.source_health(S.HIST_ID, {"ok": False, "error": "x", "last_ok_at": "2026-01-01T00:00:00Z",
+                                              "meta": {"frozen": True}}, reg, now)
+    assert failed["stale"] is True                       # a failed read is still reported
