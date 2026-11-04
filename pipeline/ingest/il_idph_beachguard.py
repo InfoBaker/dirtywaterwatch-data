@@ -18,11 +18,14 @@ Records
     and beach_advisory for a contamination advisory or any other type (the type kept in raw.advisory_type).
     status advisory_active while the feed lists it; started_at the page's start date (America/Chicago, minute; a
     start more than a year old is kept as published: the list holds some advisories years old, raw.age_note);
-    published_at and reported_at null (not published).
+    published_at and reported_at null (not published); source_updated_at the last poll at which the feed listed it
+    (the list is IDPH's statement of what is in effect, so each listing re-confirms the advisory: the status build
+    ages an advisory out only 14 days after its last confirmation, never 14 days after a start months back).
   - When the feed stops listing a beach, its record becomes advisory_lifted with ended_at the first poll that did not
     list it (time_precision of the end: poll; raw.lift_observed_between). The feed is the authority's list of what is
     in effect, so leaving it is the lift as published; the lift time itself is not published. A failed fetch lifts
-    nothing.
+    nothing, and a feed that empties at once lifts its advisories only when the next poll is empty too (dated at the
+    first empty poll).
   - waterbody_text the water the title names (none for a bare "Lake" or "Pond"); the page's point (coord_source
     source); authority the issuer the page names.
   Privacy: the feed and the page name agencies and beaches; the comment is free text: a name after a contact cue
@@ -57,6 +60,7 @@ TZ = ZoneInfo("America/Chicago")
 DETAIL_MAX = 40
 DETAIL_EVERY_H = 20
 DETAIL_BUDGET_S = 120
+EMPTY_POLLS_TO_LIFT = 2      # an empty feed lifts the open advisories only on the second empty poll in a row
 CREDIT = "Illinois Department of Public Health, Illinois BeachGuard System"
 GENERIC_WATER = re.compile(r"^(lake|pond|beach|river|reservoir|quarry)$", re.I)
 
@@ -131,6 +135,17 @@ def apply(state: dict, items: list[dict], details: dict[str, dict], now: str) ->
     """Open, keep and lift advisories for one poll; returns counts."""
     recs, open_ = state.setdefault("records", {}), state.setdefault("open", {})
     counts = {"opened": 0, "kept": 0, "lifted": 0}
+    if not items and open_:
+        # a feed that drops from some advisories to none at once may be a glitch, not every lift at once: the
+        # advisories are lifted only when the next poll is empty too, at the first empty poll (EMPTY_POLLS_TO_LIFT)
+        first = state.setdefault("empty_since", now)
+        state["empty_polls"] = state.get("empty_polls", 0) + 1
+        if state["empty_polls"] < EMPTY_POLLS_TO_LIFT:
+            counts["held"] = len(open_)
+            return counts
+        now = first
+    state.pop("empty_since", None)
+    state.pop("empty_polls", None)
     listed = set()
     for it in items:
         bid = it["beach_id"]
@@ -189,6 +204,7 @@ def to_record(key: str, r: dict) -> dict:
         outfall_name=None, waterbody_text=None if not water or GENERIC_WATER.match(water) else water,
         lat=d.get("lat"), lon=d.get("lon"), coord_source="source" if d.get("lat") is not None else None,
         started_at=r.get("start"), ended_at=lifted, time_precision=r.get("precision") or "poll",
+        source_updated_at=r["last_listed_at"],   # the last poll at which IDPH's list of advisories in effect showed it
         authority=(f"{d['issued_by']} (Illinois BeachGuard System)" if d.get("issued_by") else CREDIT),
         advice_text=f"{typ}: {it.get('beach') or ''}".strip(": ") or None,
         source_url=DETAIL_URL.format(id=r["beach_id"]), raw=raw)
