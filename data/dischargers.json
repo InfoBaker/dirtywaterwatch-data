@@ -142247,8 +142247,8 @@
   "water_slugs": [],
   "outfall_count": 10,
   "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 10 open, 0 closed",
-  "notification_channel": "Notice to EGLE, the local health departments and a daily newspaper immediately and not more than 24 hours after the discharge begins, and a report at its end (MCL 324.3112a(1)); EGLE posts each notice on the MiEnviro CSO/SSO List (MCL 324.3112a(2)): https://mienviro.michigan.gov/ncore/external/overflow/list. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": true,
+  "notification_channel": "None: not a sewer system (a general permit for a petroleum or remediation site that EPA's CSO inventory lists).",
+  "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Marshall"
@@ -142280,8 +142280,8 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
-  "notification_channel": "Notice to EGLE, the local health departments and a daily newspaper immediately and not more than 24 hours after the discharge begins, and a report at its end (MCL 324.3112a(1)); EGLE posts each notice on the MiEnviro CSO/SSO List (MCL 324.3112a(2)): https://mienviro.michigan.gov/ncore/external/overflow/list. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": true,
+  "notification_channel": "None: not a sewer system (a general permit for a petroleum or remediation site that EPA's CSO inventory lists).",
+  "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Saint Ignace"
@@ -142313,8 +142313,8 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
-  "notification_channel": "Notice to EGLE, the local health departments and a daily newspaper immediately and not more than 24 hours after the discharge begins, and a report at its end (MCL 324.3112a(1)); EGLE posts each notice on the MiEnviro CSO/SSO List (MCL 324.3112a(2)): https://mienviro.michigan.gov/ncore/external/overflow/list. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": true,
+  "notification_channel": "None: not a sewer system (a general permit for a petroleum or remediation site that EPA's CSO inventory lists).",
+  "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Mount Pleasant"
@@ -142346,8 +142346,8 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
-  "notification_channel": "Notice to EGLE, the local health departments and a daily newspaper immediately and not more than 24 hours after the discharge begins, and a report at its end (MCL 324.3112a(1)); EGLE posts each notice on the MiEnviro CSO/SSO List (MCL 324.3112a(2)): https://mienviro.michigan.gov/ncore/external/overflow/list. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": true,
+  "notification_channel": "None: not a sewer system (a general permit for a petroleum or remediation site that EPA's CSO inventory lists).",
+  "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Sterling Heights"
