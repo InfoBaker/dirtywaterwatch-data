@@ -1,0 +1,89 @@
+portal_waterBody,water_slug,confidence,note
+CONNECTICUT R.,connecticut-river-ma,high,Springfield/Holyoke/Chicopee/Montague CSOs
+CONNECTICUT RIVER,connecticut-river-ma,high,
+DINGLE BK TO CONNECTICUT R.,connecticut-river-ma,medium,Holyoke HOL023 via Dingle Brook
+POWER CANAL CONNECTICUT RIVER,connecticut-river-ma,medium,Holyoke canal system
+CHICOPEE R.,chicopee-river-ma,medium,record lists only Wilbraham as town but its bbox runs west to -72.62275 (the confluence) so it spans Springfield SPR034-037 and Chicopee CHI26-CHI40
+CHICOPEE RIVER,chicopee-river-ma,medium,same
+WILLIMANSETT BK,,none,Chicopee CHI42 (Roberts Pond) - no slug
+MILL R.,,none,Springfield Mill River - no slug (mill-river-ma is Norfolk)
+MILL RIVER,,none,check permittee; mill-river-ma is Norfolk
+WESTFIELD RIVER,westfield-river-ma,high,
+WEST BRANCH WESTFIELD RIVER,,none,no slug for the West Branch
+MERRIMACK RIVER,merrimack-river-ma,high,Lowell/Lawrence/Haverhill
+MERIMACK RIVER,merrimack-river-ma,high,misspelling in Lowell records
+CONCORD RIVER,concord-river-ma,high,Lowell
+BEAVER BROOK,,none,Lowell's Beaver Brook; beaver-brook-ma is Westford (different stream)
+LITTLE RIVER,,none,Haverhill Little River - no slug
+SPICKETT HARBOR,,none,GLSD/Lawrence - no MA Spicket slug (spicket-river-nh exists)
+CHARLES RIVER,charles-river-ma,high,
+CHARLES RIVER BASIN,charles-river-ma,high,
+MYSTIC RIVER,mystic-river-ma,high,
+ALEWIFE BROOK,,none,tributary of Mystic - no slug
+CHELSEA RIVER,,none,Chelsea Creek - no slug
+LITTLE MYSTIC CHANNEL,,none,Boston Harbor - no slug
+BOSTON INNER HARBOR,,none,no Boston Harbor slug
+FORT POINT CHANNEL,,none,no slug
+RESERVED CHANNEL,,none,no slug
+MUDDY RIVER,,none,no slug
+DORCHESTER BAY,dorchester-bay-ma,high,
+MASSACHUSETTS BAY,massachusetts-bay-ma,medium,large water; use outfall point
+LYNN HARBOR,lynn-harbor-ma,high,
+NAHANT BAY,nahant-bay-ma,high,
+SAUGUS RIVER,saugus-river-ma,high,
+GLOUCESTER HARBOR,gloucester-harbor-ma,high,
+INNER HARBOR,gloucester-harbor-ma,medium,Gloucester CSO records
+HARBOR COVE,gloucester-harbor-ma,medium,Gloucester
+SALEM SOUND,,none,no slug (salem-harbor-ma is nearby)
+SANDY BAY,sandy-bay-ma,high,Rockport
+MANCHESTER BAY,,none,no slug
+TAUNTON RIVER,taunton-river-ma,high,Fall River/Taunton
+MOUNT HOPE BAY,,none,no MA slug
+QUEQUECHAN RIVER,,none,Fall River - no slug
+QUECUECHAN RIVER,,none,spelling variant
+ACUSHNET RIVER,acushnet-river-ma,high,New Bedford
+INNER NEW BEDFORD HARBOR,new-bedford-harbor-ma,high,
+OUTER NEW BEDFORD HARBOR,new-bedford-harbor-ma,medium,could be buzzards-bay-ma
+CLARK COVE,clarks-cove-ma,high,New Bedford
+BUZZARDS BAY,buzzards-bay-ma,high,
+NASHUA RIVER,nashua-river-ma,medium,Fitchburg CSOs are on the North Nashua; slug towns are downstream
+NORTH NASHUA RIVER,,none,no slug
+SOUTH BRANCH NASHUA RIVER,,none,no slug
+ABANDONED FALULAH CANAL,,none,Fitchburg
+BIRCH BROOK @ HEYWOOD ST,,none,Fitchburg
+PUNCH BROOK CULVERT @ MAIN ST.,,none,Fitchburg
+BLACKSTONE RIVER,blackstone-river-ma,high,
+MILL BROOK TO BLACKSTONE RIVER,blackstone-river-ma,low,Worcester CSO via Mill Brook
+ASSABET RIVER,assabet-river-ma,high,SSO/partially treated reports
+SUDBURY RIVER,sudbury-river-ma,high,
+DEERFIELD RIVER,deerfield-river-ma,high,
+MILLERS RIVER,millers-river-ma,high,
+HOOSIC RIVER,hoosic-river-ma,high,
+HOUSATONIC RIVER,housatonic-river-ma,high,
+FRENCH RIVER,french-river-ma,high,
+QUINEBAUG RIVER,quinebaug-river-ma,medium,
+QUABOAG RIVER,quaboag-river-ma,high,
+WARE RIVER,ware-river-ma,high,
+AGAWAM RIVER,agawam-river-ma,high,Wareham
+PLYMOUTH HARBOR,plymouth-harbor-ma,high,
+COHASSET COVE,cohasset-harbor-ma,medium,
+TOWN RIVER,town-river-ma,medium,Bridgewater
+WEST RIVER,west-river-ma,medium,Upton
+TEN MILE RIVER,,none,Attleboro/North Attleborough - no slug
+THREE MILE RIVER,,none,no slug
+NEMASKET RIVER,,none,no slug
+OTTER RIVER,,none,no slug
+MUMFORD RIVER,,none,no slug
+WILLIAMS RIVER,,none,no slug
+CRANBERRY RIVER,,none,no slug
+CADY BROOK,,none,no slug
+FRENCH STREAM,,none,no slug
+LAMPSON BROOK,,none,no slug
+FORGET-ME-NOT BROOK,,none,no slug
+GREENWOOD CREEK,,none,no slug
+SALISBURY PLAIN RIVER,,none,no slug
+TIDAL CREEK TO HERRING RIVER,,none,ambiguous Herring River
+UNNAMED BROOK,,none,
+UNNAMED TIDAL CREEK,,none,
+UNNAMED TRIBUTARY,,none,
+Other,,none,read waterBodyDescription (free text)
