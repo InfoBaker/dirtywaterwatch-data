@@ -101,3 +101,33 @@ def test_michigan_spellings_in_the_reports_reach_their_own_records(text, slug):
     from build import status as S
     R = S.Resolver(S.load_waters(), [], {}, {})
     assert R.by_name(text, "MI", None, None)[0] == [slug]
+
+
+def test_a_lake_running_into_other_states_waters_is_cut_to_the_states_own():
+    """scripts/cut_lakes_to_state_waters.py: a lake record with more than 1 km2 beyond the state's TIGER polygon (a
+    Great Lake) keeps only the state's part; one inside it is left alone."""
+    from shapely.geometry import box, mapping
+    C = load("cut_lakes_to_state_waters")
+    state = box(0, 0, 1, 1)                                   # about 111 km a side
+    lake = {"slug": "x-lake", "kind": "lake", "state": "XX", "geometry": mapping(box(0.5, 0.2, 1.5, 0.8)),
+            "bbox": [0.5, 0.2, 1.5, 0.8], "area_km2": 7400.0, "note": "NHDPlus V2.1 waterbody, cut to the state, simplified to ~10 m",
+            "towns": ["A"]}
+    pond = {**lake, "slug": "y-pond", "geometry": mapping(box(0.1, 0.1, 0.2, 0.2)), "bbox": [0.1, 0.1, 0.2, 0.2]}
+    doc = {"waters": [lake, pond], "problems": ["x-lake: geometry (0.5, 0.2, 1.5, 0.8) outside XX bbox"]}
+    rep = C.run("XX", doc=doc, state_shape=state)
+    assert [c[0] for c in rep["changed"]] == ["x-lake"] and rep["problems"] == []
+    got = doc["waters"][0]
+    assert got["bbox"][2] <= 1.0 + 1e-6 and got["area_km2"] < 3700 and got["towns"] == ["A"]
+    assert "TIGER" in got["note"] and "cut to the state," not in got["note"]
+    assert doc["waters"][1] is pond
+
+
+def test_michigans_great_lakes_records_hold_michigans_waters_only():
+    w = {x["slug"]: x for x in json.loads((DATA_DIR / "waters-nhd.json").read_text())["waters"]}
+    box_mi = (-90.42, 41.69, -82.12, 48.31)                   # Michigan's TIGER box, waters included
+    for slug, most in (("lake-michigan-mi", 40000), ("lake-superior-mi", 30000), ("lake-huron-mi", 25000),
+                       ("lake-erie-mi", 1000)):
+        b = w[slug]["bbox"]
+        assert b[0] >= box_mi[0] - 0.01 and b[1] >= box_mi[1] - 0.01 and b[2] <= box_mi[2] + 0.01 and b[3] <= box_mi[3] + 0.01, slug
+        assert w[slug]["area_km2"] < most, slug               # not the whole lake (Michigan 57,137 km2 before)
+    assert not [p for p in json.loads((DATA_DIR / "waters-nhd.json").read_text())["problems"] if "outside MI" in p]
