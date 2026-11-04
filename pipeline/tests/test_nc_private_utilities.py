@@ -142,7 +142,8 @@ def test_every_operator_private_or_industrial_has_its_own_notice_rows():
     """G.S. 143-215.1C binds every owner or operator: a press-release and a newspaper row per operator
     (scripts/add_register_rows.py, part nc-notice), (c) for an industrial system; the statewide rows they replaced
     are gone."""
-    reg = json.loads((DATA_DIR / "notice-channels.json").read_text())["channels"]
+    from ingest.notification_pages import load_register
+    reg = load_register()["channels"]           # either layout of the register
     rows = {r["id"]: r for r in reg}
     assert "nc-operator-press-release" not in rows and "nc-operator-newspaper-notice" not in rows
     for op in REGISTRY:

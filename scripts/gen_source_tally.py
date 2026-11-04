@@ -12,8 +12,8 @@ Inputs (all under --root, default the project):
   data/sources/*.yaml             the source registry (enabled, role, states, cadence, registry_ids)
   out/sources.json                feed health (last_ok_at, stale, count)
   out/coverage.json               per-state grade and sentence, per-feed precision, cadence, 12-month records
-  data/notice-channels.json       the public-notice channel register (else data/notice-channels.draft.json; if
-                                  neither exists the section says so)
+  data/notice-channels.json       the public-notice channel register, or per state data/notice-channels/<st>.json
+                                  (else data/notice-channels.draft.json; if none exists the section says so)
   docs/owner-signups.md, docs/subscriptions.md, docs/decisions.md   where an owner item is linked from
   out/waters.json, data/waters-*.json, data/outfalls-*.json (the outfall registry), out/events.json,
   data/build/status.json          the water-record block (are the water bodies identified?)
@@ -504,13 +504,25 @@ def monitor_health(inp: Inputs) -> dict[str, dict]:
 
 
 def register_rows(inp: Inputs) -> tuple[list[dict], str | None]:
-    """The notice-channel register (data/notice-channels.json: {channels: [...]}; schema in
-    pipeline/ingest/notification_pages.py), normalised: [{id, states, operator, channel, url, monitored, reason, unlock,
-    last_state, feed}]. Other shapes (a bare list, rows keyed by state, a monitor dict) are read too."""
+    """The notice-channel register (data/notice-channels.json: {channels: [...]}, or per state
+    data/notice-channels/<st>.json, the same rows; schema in pipeline/ingest/notification_pages.py), normalised:
+    [{id, states, operator, channel, url, monitored, reason, unlock, last_state, feed}]. Other shapes (a bare list, rows
+    keyed by state, a monitor dict) are read too."""
     src = None
     data = None
+    per_state = sorted(p.name for p in inp.path("data/notice-channels").glob("[a-z][a-z].json")) \
+        if inp.path("data/notice-channels").is_dir() else []
+    if per_state:
+        rows: list = []
+        if inp.path("data/notice-channels.json").exists():     # both layouts (mid-split): every row, as the monitor reads
+            rows += (inp.json("data/notice-channels.json", {}, required=False) or {}).get("channels") or []
+        for name in per_state:
+            rows += (inp.json(f"data/notice-channels/{name}", {}, required=False) or {}).get("channels") or []
+        data = {"channels": rows}
+        src = "data/notice-channels/<st>.json" + (" and data/notice-channels.json"
+                                                  if inp.path("data/notice-channels.json").exists() else "")
     for rel in ("data/notice-channels.json", "data/notice-channels.draft.json"):
-        if inp.path(rel).exists():
+        if data is None and inp.path(rel).exists():
             data = inp.json(rel, None, required=False)
             src = rel
             break
