@@ -1,0 +1,24 @@
+id: "swsc-springfieldalerts"
+name: "Springfield Water & Sewer Commission CSO public advisory notices (springfieldalerts.com)"
+url: "https://springfieldalerts.com/"
+homepage: "https://springfieldalerts.com/"
+kind: "html"
+level: "utility"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): Verbatim 48-hour
+#   'Avoid contact' text; affected waters Connecticut River, Chicopee, Mill River.
+# Access detail (research, quoted): Raw copy:
+#   research/science/raw/dl-adv/springfieldalerts-cso-alerts.html (fetched 2026-11-01 by the
+#   advisory sub-researcher; text read by the lead).
+# Can fill: advice_text
+cadence: null
+license: "none stated"
+attribution: "Springfield Water and Sewer Commission"
+enabled: true
+role: "advisories"
+event_types: ["cso"]
+states: ["MA"]
+access: ["html"]
+access_detail: "Raw copy: research/science/raw/dl-adv/springfieldalerts-cso-alerts.html (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

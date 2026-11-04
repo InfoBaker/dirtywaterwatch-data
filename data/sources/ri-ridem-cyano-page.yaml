@@ -1,0 +1,22 @@
+id: "ri-ridem-cyano-page"
+name: "RIDEM Cyanobacteria (Blue-Green Algae) page, reports and historic advisories"
+url: "https://dem.ri.gov/environmental-protection-bureau/water-resources/research-monitoring/cyanobacteria-blue-green-algae"
+homepage: "https://dem.ri.gov/environmental-protection-bureau/water-resources/research-monitoring/cyanobacteria-blue-green-algae"
+kind: "csv"
+level: "state"
+# Notes (research/ri, status used, verified fetched, checked 2026-11-01): Monitoring schedule (2026:
+#   weeks of May 18 to Oct 19), routinely monitored list, annual reports 2011-2025, historic XLSX
+#   and Airtable list.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "DEM site disclaimer (https://dem.ri.gov/disclaimer): \"The compiled information presented on this WWW site is considered public information and may be distributed or copied. However, use of appropriate byline/photo/image credits is requested.\""
+attribution: "RIDEM"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["RI"]
+access: ["html", "pdf", "csv"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

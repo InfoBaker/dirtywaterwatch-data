@@ -1,0 +1,41 @@
+id: "dc-echo-sobe-dc0021199"
+name: "EPA ECHO Sewer Overflow/Bypass Event data, DC Water permit DC0021199"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Notes (research/dc, status used, verified fetched, checked 2026-11-02): Best structured DC event
+#   source: coordinates, times, volumes, receiving water, revisions. Add 'DC' to STATES in the
+#   existing ingest; review the PI rows (location in MD, permit DC).
+# Access detail (research, quoted): Same national ZIPs the pipeline already ingests
+#   (pipeline/ingest/echo_sewer_overflow_events.py, STATES set excludes DC today). Used the federal
+#   agent's copy of the all-versions ZIP (extract dated 2026-10-30): 184 DC rows, 140 current;
+#   joined child tables into raw/echo-sobe-dc0021199-joined.json.
+# Can fill: source_record_id, event_type, started_at, ended_at, reported_at, coordinates, waterbody,
+#   location_text, volume, units, estimate_flag, material, revision_history (all-versions ZIP),
+#   raw_record
+# Cannot fill: published_at (extract date only); advice_text; valid_until; timezone (naive times)
+# Waters: DC Water collection system incl. the Potomac Interceptor in MD/VA; receiving water is free
+#   text (e.g. 'Potomac River', 'Broad Branch', 'soapstone', 'Rock Creek ') (openboatlaunch slugs:
+#   potomac-river-dc, anacostia-river-dc, rock-creek-dc, oxon-run-dc, watts-branch-dc,
+#   hickey-run-dc, pope-branch-dc, broad-branch-dc)
+# History: DC rows from 2023-03-31 to 2026-09-26 in the 2026-10-30 extract (29 in 2023, 29 in 2024,
+#   46 in 2025, 34 in 2026, current versions).
+# Research notes: Of 140 current rows, 33 name a receiving water (31 of them in 2025-2026); 50 are
+#   basement backups. Missing: the 2025-08-16 Anacostia Force Main SSO announced by DC Water.
+#   Receiving-water text needs a DC alias table (soapstone, Soapstone Stream, Hickory Run, Watts
+#   Branch Creek, '@PARK RD @PINEY BRANCH PKY NW'). Two CSO-outfall rows (2025-12-01 CSO 024 DWO,
+#   2026-04-15 Canal Rd) contradict the CSO monthly reports' 'no dry weather combined sewer
+#   overflow' lines.
+cadence: "ECHO refreshes daily. DC lag from event end to report received: median 4 days, 90th percentile 16 days, max 79 (permit: 5-day written report); the PI collapse row was revised until 2026-04-16 (volume 217 -> 242,000,000 gal)."
+license: "EPA public data; ECHO data downloads, no licence restriction stated."
+attribution: "US EPA (data reported by DC Water)"
+enabled: true
+role: "events"
+event_types: ["sso", "cso"]
+states: ["DC"]
+access: ["csv"]
+access_detail: "Same national ZIPs the pipeline already ingests (pipeline/ingest/echo_sewer_overflow_events.py, STATES set excludes DC today). Used the federal agent's copy of the all-versions ZIP (extract dated 2026-10-30): 184 DC rows, 140 current; joined child tables into raw/echo-sobe-dc0021199-joined.json."
+machine_readable: true
+legal_basis: "40 CFR 122.41(l)(6) 24-hour/5-day noncompliance reporting; permit DC0021199 Part II 'Twenty-Four Hour Reporting'; 40 CFR part 127 eReporting."
+checked: "2026-11-02"

@@ -1,0 +1,161 @@
+{
+  "state": "NC",
+  "name": "North Carolina",
+  "region": "southeast",
+  "epa_region": 4,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "yes",
+    "summary": "The owner or operator of a municipal or domestic wastewater system must send a press release to all news media covering the county within 24 hours of determining that 1,000 gallons or more of untreated wastewater reached surface waters, and publish a newspaper notice for 15,000 gallons or more. The state itself posts every reportable SSO on a public map.",
+    "citations": [
+      {
+        "cite": "N.C. Gen. Stat. 143-215.1C(b)(1)",
+        "title": "Publication of Notice of Discharge of Untreated Wastewater",
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_143/GS_143-215.1C.html",
+        "quote": "In the event of a discharge of 1,000 gallons or more of untreated wastewater to the surface waters of the State, issue a press release to all print and electronic news media that provide general coverage in the county where the discharge occurred setting out the details of the discharge. The owner or operator shall issue the press release within 24 hours after the owner or operator has determined that the discharge has reached the surface waters of the State.",
+        "who": "owner or operator of a municipal or domestic wastewater collection or treatment works",
+        "channel": "press release to print and electronic news media",
+        "deadline": "24 hours after determining the discharge reached surface waters",
+        "threshold": "1,000 gallons or more of untreated wastewater to surface waters",
+        "verified": "fetched"
+      },
+      {
+        "cite": "N.C. Gen. Stat. 143-215.1C(b)(2)",
+        "title": "Newspaper notice",
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_143/GS_143-215.1C.html",
+        "quote": "In the event of a discharge of 15,000 gallons or more of untreated wastewater to the surface waters of the State, publish a notice of the discharge in a newspaper having general circulation in the county in which the discharge occurs and in each county downstream from the point of discharge that is significantly affected by the discharge. ... The notice shall be captioned \"NOTICE OF DISCHARGE OF UNTREATED SEWAGE\".",
+        "who": "owner or operator",
+        "channel": "newspaper legal notice in the county and significantly affected downstream counties",
+        "deadline": "within 10 days after the Secretary approves form, content and newspapers",
+        "threshold": "15,000 gallons or more to surface waters",
+        "verified": "fetched"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "verbal report to the DWR regional office as soon as possible, no more than 24 hours after first knowledge; CS-SSO written 5-day report",
+      "cite": "NPDES and collection-system permit conditions; DEQ SSO information page"
+    },
+    "cso_permit_notice_clause": {
+      "permit": null,
+      "quote": "No CSO permits in North Carolina.",
+      "deadline": null,
+      "verified": "fetched"
+    },
+    "bills_and_cases": [
+      "S.L. 2013 (S.B. 729) shortened the press-release deadline from 48 to 24 hours (DEQ page; bill PDF not re-fetched)."
+    ]
+  },
+  "erule": {
+    "system": "state",
+    "sobe_events_2026_11_03": null,
+    "public_output_url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0",
+    "notes": "NC uses its own Survey123-based intake (Report_an_SSO_Public_View) and BIMS; EPA's SOBE extract has only a handful of NC rows (count not separately taken)."
+  },
+  "statewide_feed": {
+    "exists": true,
+    "source_ids": [
+      "nc-dwr-sso-2026",
+      "nc-dwr-sso-2022-2025"
+    ],
+    "precision": "event",
+    "machine_readable": true,
+    "format": "arcgis",
+    "latency": "median 16 hours from start to DWR report; layer entry lag of a few days seen (last edit 2026-10-30 on 2026-11-03)",
+    "history": "September 2022 to date (two layers)",
+    "coordinates": "all",
+    "receiving_water": "named with NC stream index; some unlisted",
+    "start_end": "start and end date-times (24-hour and 5-day versions)",
+    "volume": true,
+    "stable_id": true,
+    "license": "No licence; disclaimer: \"These data cannot be construed to be a legal document.\"",
+    "notes": "globalid is stable within the 2026 layer; the layer is year-scoped, so a new layer may appear in January 2027."
+  },
+  "cso": {
+    "permits": 0,
+    "open_outfalls": 0,
+    "operators_with_web_channel": 0,
+    "operators_checked": 0,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "No CSOs in North Carolina."
+  },
+  "sso": {
+    "location_source": "nc-dwr-sso-2026 (point per event)",
+    "feeds": [
+      "nc-dwr-sso-2026",
+      "nc-dwr-sso-2022-2025"
+    ],
+    "notes": "About 50 to 75 reportable SSOs a month; Charlotte Water files the most."
+  },
+  "beaches": {
+    "program": "NC DEQ Division of Marine Fisheries Recreational Water Quality program (coastal ocean and sound); DWR Western NC inland E. coli program",
+    "source_ids": [
+      "nc-rwq-advisories",
+      "nc-wnc-rec-monitoring"
+    ],
+    "machine_readable": true,
+    "scope": "all",
+    "notes": "Coastal status layer (No Alert / Precautionary / Advisory) and inland results layer, both public ArcGIS."
+  },
+  "habs": {
+    "program": "NC DWR algal bloom and fish kill reports",
+    "source_ids": [
+      "nc-fish-kill-algal-bloom"
+    ],
+    "machine_readable": true,
+    "notes": "Reports, not advisories."
+  },
+  "advisories": {
+    "health_department_pages": [],
+    "watershed_groups": [
+      "Swim Guide affiliates (WNC program, coastal riverkeepers): not checked one by one"
+    ],
+    "swim_guide": true
+  },
+  "outfalls": {
+    "state_layer": null,
+    "cso_inventory_gap": "none (no CSOs)",
+    "sso_points": "state_table"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Catawba River and Lake Wylie (SC)",
+      "Yadkin-Pee Dee River (SC)",
+      "Roanoke River and Kerr Lake (VA)",
+      "Chowan River (VA)",
+      "French Broad River (TN)"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "print_only",
+      "what": "The 15,000-gallon notice is a newspaper legal notice; the 1,000-gallon notice is a press release to media with no web posting required.",
+      "fix_level": "legislative",
+      "note": "The state map makes the events public anyway, but not the operator's notice text or whether it was sent."
+    },
+    {
+      "kind": "records_request",
+      "what": "Press releases and media lists are kept for one year and given \"to any person upon request\".",
+      "fix_level": "legislative",
+      "note": ""
+    }
+  ],
+  "subscriptions": [],
+  "readiness": {
+    "tier": "A",
+    "expected_grade": "Dated reports",
+    "first_feed": "nc-dwr-sso-2026",
+    "effort": "small",
+    "rationale": "One public ArcGIS layer with event start/end, volume, volume to water, receiving water, coordinates and a 5-day revision; history layer back to Sept 2022. Plus a machine-readable coastal advisory layer.",
+    "order_hint": 1
+  },
+  "owner_questions": [
+    "Accept DWR map entry lag (a few days at times) or also scrape operator press releases for speed?",
+    "Treat the yearly layer roll-over (new layer each January) as an ingester watch item?"
+  ],
+  "surprise": "North Carolina already publishes every reportable sewer overflow since 2022 as a public ArcGIS layer with coordinates, start and end times, volume reaching water and the named stream: the best SSO feed of the five states, better than many Northeast states."
+}

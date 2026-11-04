@@ -1,0 +1,53 @@
+[
+ {
+  "id": "gu-gwa",
+  "name": "Guam Waterworks Authority",
+  "state": "GU",
+  "kind": "sso",
+  "npdes_permit": "GU0020087 (Agana/Hagatna STP); GU0020141 (Northern District STP); GU0020222 (Agat STP); GU0020273 (Umatac-Merizo); GU0020095 (Baza Gardens)",
+  "receiving_waters": [
+   "Philippine Sea",
+   "Agana Bay",
+   "Toguan River and Bay",
+   "Togcha River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "none found (website has no spill notices; social accounts not searched); reports to Guam EPA and EPA under court order",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hagatna",
+   "Dededo",
+   "Agat",
+   "Merizo",
+   "Yona"
+  ],
+  "notes": "Collection systems registered in SOBE but no events filed.",
+  "verified": "fetched",
+  "checked": "2026-11-04"
+ },
+ {
+  "id": "gu-navy-apra",
+  "name": "U.S. Navy, Apra Harbor wastewater system (Naval Base Guam)",
+  "state": "GU",
+  "kind": "sso",
+  "npdes_permit": "GU0110019",
+  "receiving_waters": [
+   "Inner Apra Harbor",
+   "Outer Apra Harbor",
+   "Talisay River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "SOBE (EPA eRule) only",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Santa Rita (Apra Harbor)"
+  ],
+  "notes": "17 SOBE 'Reportable Spill Notification' events, 2024-04 to 2026-09.",
+  "verified": "fetched",
+  "checked": "2026-11-04"
+ }
+]

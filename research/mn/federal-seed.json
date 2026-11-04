@@ -1,0 +1,569 @@
+{
+ "state": "MN",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "MN0046744",
+   "permittee": "MINNEAPOLIS DEPT PUBLIC WORKS",
+   "city": "MINNEAPOLIS",
+   "open_outfalls": 0,
+   "closed_outfalls": 7,
+   "receiving_waters": [
+    "Minnehaha Creek",
+    "Mississippi River"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 0,
+ "plant_permits": 661,
+ "plant_permits_major": 78,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "MN0020117",
+   "permittee": "Central Iron Range Sanitary Sewer District",
+   "city": "CHISHOLM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0020133",
+   "permittee": "Montevideo WWTP",
+   "city": "MONTEVIDEO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MN0020141",
+   "permittee": "Luverne city of",
+   "city": "LUVERNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0020150",
+   "permittee": "New Prague WWTP",
+   "city": "NEW PRAGUE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MN0020192",
+   "permittee": "permit holder in DETROIT LAKES (EPA permit name is a person; name withheld)",
+   "city": "DETROIT LAKES",
+   "major": "Major",
+   "status": "EXP",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "MN0020222",
+   "permittee": "Saint Michael city of",
+   "city": "SAINT MICHAEL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0020257",
+   "permittee": "North Koochiching Area Sanitary District",
+   "city": "INTERNATIONAL FALLS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0020290",
+   "permittee": "Melrose city of",
+   "city": "MELROSE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0020362",
+   "permittee": "Cambridge city of",
+   "city": "CAMBRIDGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0020401",
+   "permittee": "Redwood Falls city of",
+   "city": "REDWOOD FALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0020508",
+   "permittee": "Ely city of",
+   "city": "ELY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0020567",
+   "permittee": "Monticello city of",
+   "city": "MONTICELLO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0020664",
+   "permittee": "Lake City city of",
+   "city": "LAKE CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0020681",
+   "permittee": "Stewartville city of",
+   "city": "STEWARTVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0020761",
+   "permittee": "Little Falls city of",
+   "city": "LITTLE FALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0020788",
+   "permittee": "Elk River city of",
+   "city": "ELK RIVER",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0020796",
+   "permittee": "Waseca city of",
+   "city": "WASECA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0021423",
+   "permittee": "Crookston city of",
+   "city": "CROOKSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0021431",
+   "permittee": "CITY OF THIEF RIVER FALLS",
+   "city": "THIEF RIVER FALLS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MN0021814",
+   "permittee": "East Grand Forks WWTP",
+   "city": "EAST GRAND FORKS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0022080",
+   "permittee": "Grand Rapids city of",
+   "city": "GRAND RAPIDS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0022179",
+   "permittee": "Marshall city of",
+   "city": "MARSHALL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0022217",
+   "permittee": "Windom city of",
+   "city": "WINDOM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0022233",
+   "permittee": "Glencoe city of",
+   "city": "GLENCOE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MN0022250",
+   "permittee": "Two Harbors city of",
+   "city": "TWO HARBORS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0022462",
+   "permittee": "Bemidji city of",
+   "city": "BEMIDJI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MN0022535",
+   "permittee": "Saint Peter city of",
+   "city": "SAINT PETER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0022683",
+   "permittee": "Austin city of",
+   "city": "AUSTIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0023094",
+   "permittee": "Cold Spring city of",
+   "city": "COLD SPRING",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0023973",
+   "permittee": "Litchfield city of",
+   "city": "LITCHFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0024040",
+   "permittee": "Madelia city of",
+   "city": "MADELIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0024368",
+   "permittee": "City of Northfield",
+   "city": "NORTHFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0024538",
+   "permittee": "Princeton city of",
+   "city": "PRINCETON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0024571",
+   "permittee": "Red Wing city of",
+   "city": "RED WING",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0024619",
+   "permittee": "Rochester city of",
+   "city": "ROCHESTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0024759",
+   "permittee": "Saint James city of",
+   "city": "SAINT JAMES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0025259",
+   "permittee": "Willmar city of",
+   "city": "WILLMAR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0025267",
+   "permittee": "Winnebago city of",
+   "city": "WINNEBAGO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0025330",
+   "permittee": "Zumbrota city of",
+   "city": "ZUMBROTA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0025488",
+   "permittee": "METROPOLITAN COUNCIL-ROSEMOUNT",
+   "city": "ROSEMOUNT",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0025666",
+   "permittee": "Becker city of",
+   "city": "BECKER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0029629",
+   "permittee": "Metropolitan Council",
+   "city": "ROGERS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0029815",
+   "permittee": "Metropolitan Council",
+   "city": "SAINT PAUL",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0029882",
+   "permittee": "Metropolitan Council",
+   "city": "SHAKOPEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0029904",
+   "permittee": "Metropolitan Council",
+   "city": "COTTAGE GROVE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0029955",
+   "permittee": "Metropolitan Council",
+   "city": "HASTINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0029998",
+   "permittee": "Metropolitan Council",
+   "city": "OAK PARK HEIGHTS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0030007",
+   "permittee": "Metropolitan Council",
+   "city": "EAGAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0030066",
+   "permittee": "New Ulm city of",
+   "city": "NEW ULM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0030112",
+   "permittee": "Fairmont city of",
+   "city": "FAIRMONT",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0030121",
+   "permittee": "Faribault city of",
+   "city": "FARIBAULT",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0030147",
+   "permittee": "City of Winona",
+   "city": "WINONA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MN0030163",
+   "permittee": "Virginia city of",
+   "city": "VIRGINIA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0030171",
+   "permittee": "Mankato city of",
+   "city": "MANKATO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0030643",
+   "permittee": "Hibbing city of",
+   "city": "HIBBING",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0031178",
+   "permittee": "Swift Pork Company",
+   "city": "WORTHINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0031186",
+   "permittee": "Worthington city of",
+   "city": "WORTHINGTON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0040649",
+   "permittee": "Buffalo city of",
+   "city": "BUFFALO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0040738",
+   "permittee": "Alexandria Lake Area Sanitary District",
+   "city": "ALEXANDRIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0040878",
+   "permittee": "City of St Cloud",
+   "city": "SAINT CLOUD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0041092",
+   "permittee": "Albert Lea city of",
+   "city": "ALBERT LEA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0045845",
+   "permittee": "Metropolitan Council",
+   "city": "FARMINGTON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0046868",
+   "permittee": "Whitewater River WWTP",
+   "city": "SAINT CHARLES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0049069",
+   "permittee": "Moorhead City of",
+   "city": "MOORHEAD",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0049328",
+   "permittee": "Brainerd Public Utilities",
+   "city": "BAXTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0049786",
+   "permittee": "Western Lake Superior Sanitary District (WLSSD)",
+   "city": "DULUTH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0050628",
+   "permittee": "Fergus Falls city of",
+   "city": "FERGUS FALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0050725",
+   "permittee": "Kasson city of",
+   "city": "KASSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0051250",
+   "permittee": "Delano city of",
+   "city": "DELANO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0051284",
+   "permittee": "Owatonna city of",
+   "city": "OWATONNA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MN0055361",
+   "permittee": "Plainview-Elgin Sanitary District",
+   "city": "PLAINVIEW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0055808",
+   "permittee": "Chisago Lakes Joint STC",
+   "city": "CHISAGO CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0055832",
+   "permittee": "Hutchinson city of",
+   "city": "HUTCHINSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0064190",
+   "permittee": "Otsego city of",
+   "city": "OTSEGO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0066079",
+   "permittee": "Long Prairie city of",
+   "city": "LONG PRAIRIE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MN0066966",
+   "permittee": "Annandale/Maple Lake/Howard Lake Wastewater Commission",
+   "city": "MAPLE LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MN0068195",
+   "permittee": "Le Sueur city of",
+   "city": "LE SUEUR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MN0070629",
+   "permittee": "Metropolitan Council",
+   "city": "SAINT PAUL",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

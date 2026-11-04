@@ -1,0 +1,62 @@
+id: "ct-deep-performance-dashboard-zoho"
+name: "CT DEEP Performance Dashboard - CSO and SSO/bypass reports (QScend QAlert data in Zoho Analytics open views)"
+url: "https://deepct.qscend.mygovcenter.com/cms/cms?id=1"
+homepage: "https://deepct.qscend.mygovcenter.com/cms/cms?id=1"
+kind: "api"
+level: "state"
+# Notes (research/ct, status used, verified fetched, checked 2026-11-01): The only live statewide
+#   feed of CSO, SSO and permitted-bypass reports filed under CGS 22a-424a since 2021-12-01;
+#   replayable with plain HTTP (no login).
+# Access detail (research, quoted): Dashboard page embeds two Zoho open views: (1) Current and
+#   Historical View
+#   https://analytics.momixpc.com/open-view/1914724000008473798/fbd70741d20fe0dd8ee7024ad195cdd2
+#   (tabs CSO DATA VIEW: dashboard OBJID 1914724000008473800, report 1914724000016996268, config
+#   1914724000016996460; SSO DATA VIEW: 1914724000008473805 / 1914724000016996336 /
+#   1914724000016996432); (2) Open CSO and SSO Bypasses by Location
+#   https://analytics.momixpc.com/open-view/1914724000008479691/098b4e3f6b2b1adf6b60df5935c7f00a
+#   (map charts: Open SSO OBJID 1914724000008473985 CONOBJID 1914724000008479708 CONFIGID
+#   1914724000017086109; Open CSO 1914724000008473922 / 1914724000008479693 / 1914724000016996757).
+#   Replay: GET the open-view URL to receive cookie CSRF_TOKEN; then POST
+#   https://analytics.momixpc.com/ZDBTableDataAction.ma?ZDBACTION=GENERATETABULARVIEW&OBJID=<report>&CONFIGASXML=true&OBJTYPE=Report&privatelink=<key>&CONOBJID=<dashboard>&FROMDASHBOARD=true&FROMNEWDASHBOARD=true&DASHEDITMODE=false&CONFIGID=<config>&SHOWVMFILTERS=false&APPLYDASHVMFILTERS=true&ENABLEALLUSERFILTERS=true&CHANGESLIDERBOUNDS=false&SUBREQUEST=XMLHTTP&_ZVER_=101
+#   with headers X-ZCSRF-TOKEN: ZDB_CSRF_TOKEN=<cookie>, X-Requested-With: XMLHttpRequest,
+#   ZReports-Current-Org: 683495554, Content-type: text/xml and body <DBSVRequest><dcdet
+#   cinfo='false'><zrtlv cr='R TQUARTER,' dcr='x' aot='ABSDATECATEGORICAL' op='PF' st='100'
+#   lbl='Timeline Filter' isDashCr='true'/></dcdet><tvc cinfo='false'
+#   jt='1'><tvf></tvf></tvc></DBSVRequest>. Timeline tokens verified: 'R TMONTH,', 'R TQUARTER,', 'R
+#   TYEAR,' (Today/This Week exist in UI). Response JSON: reportColNameDetails, dataColOrder,
+#   dataText (rows), navigInfo [start,pageSize,total,...]. Max 200 rows per response; paging
+#   parameter not found. Map chart: POST
+#   ZAChartView.ve?CHARTVIEWACTION=CHARTVIEW&...&FIRSTTIMELOADING=true with <zadata> body returns
+#   lat/long (4 dp), status, start date, start time, reach waterbody, end date, municipality.
+# Can fill: source_record_id (Request ID), event_type (CSO vs SSO view; Incident Type),
+#   source_status (Open/Closed), started_at (date + free-text time), ended_at, waterbody (free text;
+#   often null in 2026 CSO rows), location_text (Address, CSO Group Name), coordinates (map chart
+#   only, 4 dp), material (Type of Bypass), volume/units (free text), estimate_flag (how
+#   determined), raw_record
+# Cannot fill: reported_at / published_at (no submission timestamp exposed); source_updated_at;
+#   outfall id for most 2026 CSO rows; advice_text; valid_until; revision_history (only latest
+#   state; 2 h vs 5-day reports appear as separate rows); timezone (implicit Eastern)
+# Waters: statewide; free-text receiving water per report (openboatlaunch slugs:
+#   connecticut-river-ct, long-island-sound-ct, shetucket-river-norwich-ct, thames-river-ct,
+#   quinnipiac-river-hamden-ct, mill-river-ct, housatonic-river-ct, norwalk-river-ct)
+# History: 2021-12-01 onward in the dashboard; 2016-07 to 2021-11 in the AGOL archive layers; annual
+#   xlsx reports for 2021-2025.
+# Research notes: Data caveats quoted from DEEP: 'Data quality, especially volumes, is not checked
+#   by DEEP.' 'Multiple notifications may be sent for the same discharge'. Status 'Open' is
+#   unreliable: 29 SSOs showed Open on 2026-11-01 including events from 2024-09-04 (East Windsor)
+#   and 2024-12 (Stonington). In 2026 rows, CSO Group Name and Receiving Waterbody are null for MDC,
+#   Norwich, Bridgeport West and GNH (only Bridgeport East populated) - a regression vs 2022-2025
+#   rows. Times are free text with typos ("11:45 AM'", "10:30AM"). Some SSO rows have Reporting
+#   Utility 'null'. The dashboard calls itself 'Bypass / CSO Live Map' on the DEEP CSO page.
+cadence: "Operators must file within 2 h and update daily (CGS 22a-424a(c)(2)); rows appear as filed (QAlert -> Zoho sync latency not measured). 4,142 CSO rows and 2,275 SSO rows from 2021-12-01 to 2026-11-01; 2026 YTD: 723 CSO, 393 SSO; Q4 2026 to date: 45 CSO, 17 SSO."
+license: "No terms of use found on the dashboard; footer links 'Terms of Use | Privacy Statement' point to wilco.org (Williamson County TX) template pages - vendor boilerplate, not DEEP terms. Zoho Analytics page carries no licence."
+attribution: "CT DEEP (vendor QScend Technologies; Zoho Analytics white-label analytics.momixpc.com)"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass"]
+states: ["CT"]
+access: ["html", "api", "map_only"]
+access_detail: "Dashboard page embeds two Zoho open views: (1) Current and Historical View https://analytics.momixpc.com/open-view/1914724000008473798/fbd70741d20fe0dd8ee7024ad195cdd2 (tabs CSO DATA VIEW: dashboard OBJID 1914724000008473800, report 1914724000016996268, config 1914724000016996460; SSO DATA VIEW: 1914724000008473805 / 1914724000016996336 / 1914724000016996432); (2) Open CSO and SSO Bypasses by Location https://analytics.momixpc.com/open-view/1914724000008479691/098b4e3f6b2b1adf6b60df5935c7f00a (map charts: Open SSO OBJID 1914724000008473985 CONOBJID 1914724000008479708 CONFIGID 1914724000017086109; Open CSO 1914724000008473922 / 1914724000008479693 / 1914724000016996757). Replay: GET the open-view URL to receive cookie CSRF_TOKEN; then POST https://analytics.momixpc.com/ZDBTableDataAction.ma?ZDBACTION=GENERATETABULARVIEW&OBJID=<report>&CONFIGASXML=true&OBJTYPE=Report&privatelink=<key>&CONOBJID=<dashboard>&FROMDASHBOARD=true&FROMNEWDASHBOARD=true&DASHEDITMODE=false&CONFIGID=<config>&SHOWVMFILTERS=false&APPLYDASHVMFILTERS=true&ENABLEALLUSERFILTERS=true&CHANGESLIDERBOUNDS=false&SUBREQUEST=XMLHTTP&_ZVER_=101 with headers X-ZCSRF-TOKEN: ZDB_CSRF_TOKEN=<cookie>, X-Requested-With: XMLHttpRequest, ZReports-Current-Org: 683495554, Content-type: text/xml and body <DBSVRequest><dcdet cinfo='false'><zrtlv cr='R TQUARTER,' dcr='x' aot='ABSDATECATEGORICAL' op='PF' st='100' lbl='Timeline Filter' isDashCr='true'/></dcdet><tvc cinfo='false' jt='1'><tvf></tvf></tvc></DBSVRequest>. Timeline tokens verified: 'R TMONTH,', 'R TQUARTER,', 'R TYEAR,' (Today/This Week exist in UI). Response JSON: reportColNameDetails, dataColOrder, dataText (rows), navigInfo [start,pageSize,total,...]. Max 200 rows per response; paging parameter not found. Map chart: POST ZAChartView.ve?CHARTVIEWACTION=CHARTVIEW&...&FIRSTTIMELOADING=true with <zadata> body returns lat/long (4 dp), status, start date, start time, reach waterbody, end date, municipality."
+machine_readable: true
+legal_basis: "CGS 22a-424a (P.A. 12-11, 18-97, 21-42)"
+checked: "2026-11-01"

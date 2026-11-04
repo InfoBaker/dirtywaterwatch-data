@@ -1,0 +1,1528 @@
+{
+ "state": "MI",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "MI0020303",
+   "permittee": "CHEBOYGAN WWTP",
+   "city": "CHEBOYGAN",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Cheboygan River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0020681",
+   "permittee": "MORENCI WWSL",
+   "city": "MORENCI",
+   "open_outfalls": 13,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "BEAN CREEK AND SILVER CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "MI0021083",
+   "permittee": "CROSWELL WWTP",
+   "city": "CROSWELL",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Black River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0021270",
+   "permittee": "YALE WWSL",
+   "city": "YALE",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MIG580325"
+   ]
+  },
+  {
+   "npdes_permit": "MI0021440",
+   "permittee": "WAKEFIELD WWSL",
+   "city": "WAKEFIELD",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Planter Creek"
+   ]
+  },
+  {
+   "npdes_permit": "MI0021733",
+   "permittee": "CAPAC WWSL",
+   "city": "CAPAC",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "LEMON DRAIN"
+   ]
+  },
+  {
+   "npdes_permit": "MI0022284",
+   "permittee": "BAY CITY WWTP",
+   "city": "BAY CITY",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SAGINAW RIVER",
+    "Saginaw River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0022802",
+   "permittee": "GLWA WRRF",
+   "city": "DETROIT",
+   "open_outfalls": 9,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Conner Creek",
+    "Detroit River",
+    "Rouge River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0022853",
+   "permittee": "EAST LANSING WRRF",
+   "city": "EAST LANSING",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Red Cedar River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0022918",
+   "permittee": "ESSEXVILLE CSO RTB",
+   "city": "ESSEXVILLE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Saginaw River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0023001",
+   "permittee": "GLADWIN WWTP",
+   "city": "GLADWIN",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Cedar River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0023205",
+   "permittee": "IRON MOUNTAIN-KINGSFORD WWTP",
+   "city": "KINGSFORD",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Menominee River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0023400",
+   "permittee": "LANSING WWTP",
+   "city": "LANSING",
+   "open_outfalls": 20,
+   "closed_outfalls": 19,
+   "receiving_waters": [
+    "Grand River",
+    "Red Cedar River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0023515",
+   "permittee": "MANISTIQUE WWTP",
+   "city": "MANISTIQUE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Manistique River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0023647",
+   "permittee": "MT CLEMENS WWTP",
+   "city": "MOUNT CLEMENS",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Clinton River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0023701",
+   "permittee": "NILES WWTP",
+   "city": "NILES",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "St. Joseph River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0023833",
+   "permittee": "PORT HURON WWTP",
+   "city": "PORT HURON",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Black River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0023973",
+   "permittee": "SAGINAW TWP WWTP",
+   "city": "SAGINAW",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Tittabawassee River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0024058",
+   "permittee": "SAULT STE MARIE WWTP",
+   "city": "SAULT STE MARIE",
+   "open_outfalls": 0,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "Edison Power Canal",
+    "St. Mary's River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0025453",
+   "permittee": "MARTIN RTB",
+   "city": "SAINT CLAIR SHORES",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Lake St. Clair"
+   ]
+  },
+  {
+   "npdes_permit": "MI0025461",
+   "permittee": "CITY OF BLOOMFIELD HILLS",
+   "city": "BLOOMFIELD HILLS",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ROUGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0025500",
+   "permittee": "MILK RIVER CSO RTB",
+   "city": "GROSSE POINTE WOODS",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Milk River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0025534",
+   "permittee": "BIRMINGHAM CSO RTB",
+   "city": "BIRMINGHAM",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Rouge River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0025542",
+   "permittee": "DEARBORN CSO",
+   "city": "DEARBORN",
+   "open_outfalls": 9,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "Lower Rouge River",
+    "Rogue River",
+    "Rouge River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0025577",
+   "permittee": "SAGINAW WWTP",
+   "city": "SAGINAW",
+   "open_outfalls": 7,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Saginaw River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0025585",
+   "permittee": "CHAPATON RTB",
+   "city": "SAINT CLAIR SHORES",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Chapaton Canal"
+   ]
+  },
+  {
+   "npdes_permit": "MI0026069",
+   "permittee": "GRAND RAPIDS WRRF",
+   "city": "GRAND RAPIDS",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Grand River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0026077",
+   "permittee": "GROSSE POINTE FARMS",
+   "city": "GROSSE POINTE FARMS",
+   "open_outfalls": 7,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "LAKE ST. CLAIR"
+   ]
+  },
+  {
+   "npdes_permit": "MI0026085",
+   "permittee": "GROSSE POINTE SHORES CSO",
+   "city": "GROSSE POINTE SHORES",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "COMBINED SEWAGE TO LK.ST.CLAIR ONLY"
+   ]
+  },
+  {
+   "npdes_permit": "MI0026115",
+   "permittee": "GEORGE W KUHN DR DIST CSO RTB",
+   "city": "MADISON HEIGHTS",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Red Run Drain"
+   ]
+  },
+  {
+   "npdes_permit": "MI0026735",
+   "permittee": "ST JOSEPH CSO",
+   "city": "ST. JOSEPH",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "St. Joseph River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0028525",
+   "permittee": "ECORSE CSO",
+   "city": "ECORSE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "DETROIT RIVER-CICOTTE AVE/HIGHSTRET"
+   ]
+  },
+  {
+   "npdes_permit": "MI0028819",
+   "permittee": "RIVER ROUGE CSO RTB",
+   "city": "RIVER ROUGE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Rouge River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0035696",
+   "permittee": "BELLEVILLE CSO",
+   "city": "BELLEVILLE",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "BELLEVILLE LAKE"
+   ]
+  },
+  {
+   "npdes_permit": "MI0036072",
+   "permittee": "SOUTHGATE-WYANDOTTE CSO RTF",
+   "city": "WYANDOTTE",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Trenton Channel of the Detroit River",
+    "Trenton Channel via the Pine St Pump Station"
+   ]
+  },
+  {
+   "npdes_permit": "MI0037273",
+   "permittee": "GROSSE POINTE PARK CSO",
+   "city": "GROSSE POINTE PARK",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "FOX CREEK-DETROIT RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0037427",
+   "permittee": "OAKLAND CO-ACACIA PARK CSO RTB",
+   "city": "BEVERLY HILLS",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Rouge River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0037621",
+   "permittee": "OAKLAND CO DPW-FARM EVERGR CSO",
+   "city": "FARMINGTON HILLS",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ROUGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0043982",
+   "permittee": "NORTH HOUGHTON CO W&SA CSO",
+   "city": "CALUMET",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "St. Louis Creek",
+    "unnamed drainage to Hammell Creek"
+   ]
+  },
+  {
+   "npdes_permit": "MI0048046",
+   "permittee": "BLOOMFIELD VILLAGE CSO RTB",
+   "city": "BIRMINGHAM",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "unnamed tributary of the Rouge River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0048879",
+   "permittee": "CITY OF CRYSTAL FALLS",
+   "city": "CRYSTAL FALLS",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "PAINT RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051462",
+   "permittee": "WAYNE CO/INKSTER/DRBRN HTS CSO",
+   "city": "INKSTER",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Lower Rouge River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051471",
+   "permittee": "WAYNE CO/INKSTER CSO",
+   "city": "INKSTER",
+   "open_outfalls": 4,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Lower Rouge River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051489",
+   "permittee": "WAYNE CO/DEARBORN HEIGHTS CSO",
+   "city": "DEARBORN HEIGHTS",
+   "open_outfalls": 4,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Lower Rouge River",
+    "Middle Rouge River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051497",
+   "permittee": "CITY OF WESTLAND",
+   "city": "WESTLAND",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MIDDLE ROUGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051501",
+   "permittee": "CITY OF WESTLAND",
+   "city": "WESTLAND",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "LOWER ROUGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051535",
+   "permittee": "WAYNE CO/RDFRD/LIVONIA CSO",
+   "city": "REDFORD TOWNSHIP",
+   "open_outfalls": 8,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Upper Rouge River"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051543",
+   "permittee": "CITY OF GARDEN CITY",
+   "city": "GARDEN CITY",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MIDDLE ROUGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051551",
+   "permittee": "WAYNE CO-LIVONIA CSO",
+   "city": "WESTLAND",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MIDDLE ROUGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051560",
+   "permittee": "WAYNE CO-LIVONIA/WESTLAND CSO",
+   "city": "WESTLAND",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MIDDLE ROUGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051802",
+   "permittee": "LIVONIA CSO",
+   "city": "WESTLAND",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MIDDLE ROUGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051811",
+   "permittee": "DEARBORN HEIGHTS CSO",
+   "city": "DEARBORN HEIGHTS",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "MIDDLE ROUGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051829",
+   "permittee": "REDFORD TWP CSO",
+   "city": "REDFORD",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Ashcroft-Sherwood Drain"
+   ]
+  },
+  {
+   "npdes_permit": "MI0051837",
+   "permittee": "INKSTER/DEARBORN HEIGHTS CSO",
+   "city": "INKSTER",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "LOWER ROUGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MI0054356",
+   "permittee": "DEARBORN CSO DEWATERING",
+   "city": "DEARBORN",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ROUGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "MIG081156",
+   "permittee": "ENBRIDGE LINE 6B-MARSHALL",
+   "city": "MARSHALL",
+   "open_outfalls": 10,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Kalamazoo River"
+   ]
+  },
+  {
+   "npdes_permit": "MIG081159",
+   "permittee": "ENBRIDGE ENERGY-ST IGNACE",
+   "city": "SAINT IGNACE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Lake Michigan"
+   ]
+  },
+  {
+   "npdes_permit": "MIG081161",
+   "permittee": "MRP PROPERTIES CO-MT PLEASANT",
+   "city": "MOUNT PLEASANT",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Chippewa River"
+   ]
+  },
+  {
+   "npdes_permit": "MIG081165",
+   "permittee": "SPEEDWAY 8860-STERLING HTS",
+   "city": "STERLING HEIGHTS",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Clinton River"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 163,
+ "plant_permits": 437,
+ "plant_permits_major": 131,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "MI0020061",
+   "permittee": "Portage Lake Water and Sewage Authority",
+   "city": "HOUGHTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020117",
+   "permittee": "Coldwater Board of Public Utilities",
+   "city": "COLDWATER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0020125",
+   "permittee": "Gogebic-Iron Wastewater Authority",
+   "city": "IRONWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020176",
+   "permittee": "City of Clare",
+   "city": "CLARE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020184",
+   "permittee": "Village of Holly",
+   "city": "HOLLY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0020257",
+   "permittee": "City of Cadillac",
+   "city": "CADILLAC",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020265",
+   "permittee": "City of Alma",
+   "city": "ALMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020273",
+   "permittee": "City of South Lyon",
+   "city": "SOUTH LYON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020281",
+   "permittee": "City of Flushing",
+   "city": "FLUSHING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020303",
+   "permittee": "City of Cheboygan",
+   "city": "CHEBOYGAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0020311",
+   "permittee": "City of Lowell",
+   "city": "LOWELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020320",
+   "permittee": "South Haven Area Water-Sewer Authority",
+   "city": "SOUTH HAVEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020362",
+   "permittee": "City of Manistee",
+   "city": "MANISTEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020389",
+   "permittee": "Southwater Municipal Utility Authority",
+   "city": "ALGONAC",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020397",
+   "permittee": "City of Greenville",
+   "city": "GREENVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020401",
+   "permittee": "Village of Dundee WWTP",
+   "city": "DUNDEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020435",
+   "permittee": "City of Mason",
+   "city": "MASON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020451",
+   "permittee": "City of Sturgis WWTP",
+   "city": "STURGIS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0020460",
+   "permittee": "City of Lapeer",
+   "city": "LAPEER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020478",
+   "permittee": "Village of Sparta",
+   "city": "SPARTA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020494",
+   "permittee": "City of Plainwell",
+   "city": "PLAINWELL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0020524",
+   "permittee": "City of Zeeland",
+   "city": "ZEELAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0020532",
+   "permittee": "City of Allegan",
+   "city": "ALLEGAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020583",
+   "permittee": "City of Tecumseh",
+   "city": "TECUMSEH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020591",
+   "permittee": "City of St. Clair",
+   "city": "ST. CLAIR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0020656",
+   "permittee": "City of Marysville",
+   "city": "MARYSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020699",
+   "permittee": "City of St. Ignace",
+   "city": "ST. IGNACE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0020737",
+   "permittee": "City of Chelsea",
+   "city": "CHELSEA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0020761",
+   "permittee": "Monroe County Drain Commissioner",
+   "city": "ERIE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020788",
+   "permittee": "City of Charlotte",
+   "city": "CHARLOTTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020800",
+   "permittee": "City of Grand Ledge",
+   "city": "GRAND LEDGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020851",
+   "permittee": "City of Belding",
+   "city": "BELDING",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0020877",
+   "permittee": "City of Brighton",
+   "city": "BRIGHTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0020893",
+   "permittee": "City of Marine City",
+   "city": "MARINE CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0020991",
+   "permittee": "City of Three Rivers",
+   "city": "THREE RIVERS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0021008",
+   "permittee": "Southern Clinton County Municipal Utilities Authority",
+   "city": "DEWITT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0021041",
+   "permittee": "Ionia Regional Utilities Authority",
+   "city": "IONIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0021091",
+   "permittee": "Tawas Utilities Authority",
+   "city": "EAST TAWAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0021113",
+   "permittee": "City of Howell",
+   "city": "HOWELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0021156",
+   "permittee": "Wayne County Dept of Public Services, Env Services Group",
+   "city": "WYANDOTTE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0021164",
+   "permittee": "City of Trenton",
+   "city": "TRENTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0021181",
+   "permittee": "City of Rockwood",
+   "city": "ROCKWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0021245",
+   "permittee": "Grand Haven-Spring Lake Sewer Authority",
+   "city": "GRAND HAVEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0021334",
+   "permittee": "City of Ludington",
+   "city": "LUDINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0021555",
+   "permittee": "City of St. Louis",
+   "city": "ST. LOUIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0021571",
+   "permittee": "City of Milan",
+   "city": "MILAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0021679",
+   "permittee": "Village of Romeo",
+   "city": "ROMEO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0021695",
+   "permittee": "Village of Blissfield",
+   "city": "BLISSFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022136",
+   "permittee": "Hillsdale Board of Public Utilities",
+   "city": "HILLSDALE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0022152",
+   "permittee": "City of Adrian",
+   "city": "ADRIAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022161",
+   "permittee": "City of Albion",
+   "city": "ALBION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022195",
+   "permittee": "City of Alpena",
+   "city": "ALPENA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0022217",
+   "permittee": "City of Ann Arbor",
+   "city": "ANN ARBOR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0022276",
+   "permittee": "City of Battle Creek",
+   "city": "BATTLE CREEK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0022284",
+   "permittee": "City of Bay City",
+   "city": "BAY CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0022322",
+   "permittee": "Benton Harbor-St. Joseph Joint Board of Commissioners",
+   "city": "SAINT JOSEPH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022381",
+   "permittee": "City of Big Rapids",
+   "city": "BIG RAPIDS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022446",
+   "permittee": "Bridgeport Charter Township",
+   "city": "SAGINAW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022489",
+   "permittee": "Buchanan WWTP",
+   "city": "BUCHANAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022497",
+   "permittee": "Buena Vista Charter Township",
+   "city": "SAGINAW",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0022594",
+   "permittee": "Village of Cass City",
+   "city": "CASS CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022730",
+   "permittee": "City of Coopersville",
+   "city": "COOPERSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0022781",
+   "permittee": "Delhi Charter Township",
+   "city": "HOLT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022799",
+   "permittee": "Delta Township Utility Department",
+   "city": "LANSING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022802",
+   "permittee": "City of Detroit Water and Sewerage Department and Great Lakes Water Authority",
+   "city": "DETROIT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022837",
+   "permittee": "City of Dowagiac",
+   "city": "DOWAGIAC",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022845",
+   "permittee": "St. Clair River Sewer Authority WWTP",
+   "city": "EAST CHINA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022853",
+   "permittee": "City of East Lansing",
+   "city": "EAST LANSING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022861",
+   "permittee": "City of Eaton Rapids",
+   "city": "EATON RAPIDS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022926",
+   "permittee": "City of Flint",
+   "city": "FLINT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0022942",
+   "permittee": "CITY OF FRANKENMUTH",
+   "city": "FRANKENMUTH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0022977",
+   "permittee": "Genesee County Drain Commissioner",
+   "city": "MONTROSE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0022993",
+   "permittee": "Genesee County Division of Water & Waste Services",
+   "city": "LINDEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023027",
+   "permittee": "City of Grandville",
+   "city": "JENISON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0023108",
+   "permittee": "City of Holland",
+   "city": "HOLLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023205",
+   "permittee": "Iron Mountain/Kingsford Joint Sewage Authority",
+   "city": "KINGSFORD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0023256",
+   "permittee": "City of Jackson",
+   "city": "JACKSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023299",
+   "permittee": "City of Kalamazoo",
+   "city": "KALAMAZOO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023400",
+   "permittee": "City of Lansing",
+   "city": "LANSING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023515",
+   "permittee": "City of Manistique",
+   "city": "MANISTIQUE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0023531",
+   "permittee": "City of Marquette",
+   "city": "MARQUETTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023540",
+   "permittee": "City of Marshall",
+   "city": "MARSHALL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023582",
+   "permittee": "City of Midland",
+   "city": "MIDLAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0023604",
+   "permittee": "Village of Milford",
+   "city": "MILFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023647",
+   "permittee": "City of Mount Clemens",
+   "city": "MOUNT CLEMENS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0023655",
+   "permittee": "MT PLEASANT WWTP",
+   "city": "MOUNT PLEASANT",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MI0023680",
+   "permittee": "City of New Baltimore",
+   "city": "NEW BALTIMORE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023701",
+   "permittee": "NILES WWTP",
+   "city": "NILES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0023710",
+   "permittee": "Northfield Township",
+   "city": "WHITMORE LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023752",
+   "permittee": "City of Owosso",
+   "city": "OWOSSO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0023779",
+   "permittee": "Paw Paw Lake Area Wastewater Plant",
+   "city": "COLOMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023787",
+   "permittee": "City of Petoskey",
+   "city": "PETOSKEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023825",
+   "permittee": "Clinton River Water Resources Recovery Facility Drainage District",
+   "city": "PONTIAC",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023833",
+   "permittee": "City of Port Huron",
+   "city": "PORT HURON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0023973",
+   "permittee": "Saginaw Charter Township",
+   "city": "SAGINAW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0024023",
+   "permittee": "City of Saline",
+   "city": "SALINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0024058",
+   "permittee": "City of Sault Ste. Marie",
+   "city": "SAULT STE MARIE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0024287",
+   "permittee": "Oakland County Water Resources Commissioner's Office",
+   "city": "NOVI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0024295",
+   "permittee": "City of Warren",
+   "city": "WARREN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0024384",
+   "permittee": "City of Wixom",
+   "city": "WIXOM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0024392",
+   "permittee": "City of Wyoming Clean Water Plant",
+   "city": "WYOMING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0025071",
+   "permittee": "Charter Township of Commerce",
+   "city": "COMMERCE TOWNSHIP",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0025381",
+   "permittee": "City of Escanaba",
+   "city": "ESCANABA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0025577",
+   "permittee": "City of Saginaw",
+   "city": "SAGINAW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0025631",
+   "permittee": "City of Menominee",
+   "city": "MENOMINEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0026069",
+   "permittee": "City of Grand Rapids",
+   "city": "GRAND RAPIDS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0026191",
+   "permittee": "Grosse Ile Township",
+   "city": "GROSSE ILE TOWNSHIP",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0026468",
+   "permittee": "City of St. Johns",
+   "city": "ST JOHNS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0026751",
+   "permittee": "City of Mackinac Island",
+   "city": "MACKINAC ISLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0027391",
+   "permittee": "Muskegon County Board of Public Works",
+   "city": "MUSKEGON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0027481",
+   "permittee": "City of Traverse City",
+   "city": "TRAVERSE CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0027987",
+   "permittee": "GRSD Sewer Authority",
+   "city": "NEW BUFFALO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0028401",
+   "permittee": "City of Monroe",
+   "city": "MONROE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0042439",
+   "permittee": "Bay County Department of Water and Sewer",
+   "city": "BAY CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0042676",
+   "permittee": "Ypsilanti Community Utilities Authority",
+   "city": "YPSILANTI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0042978",
+   "permittee": "Lakewood Wastewater Authority",
+   "city": "LAKE ODESSA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0043281",
+   "permittee": "West Iron County Sewer Authority",
+   "city": "CASPIAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0043800",
+   "permittee": "South Huron Valley Utility Authority",
+   "city": "ROCKWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0044423",
+   "permittee": "Ishpeming Area Joint Wastewater Authority Board",
+   "city": "ISHPEMING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0045942",
+   "permittee": "Leoni Township",
+   "city": "JACKSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0053856",
+   "permittee": "ANN ARBOR MS4",
+   "city": "ANN ARBOR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0053864",
+   "permittee": "FLINT MS4",
+   "city": "FLINT",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "MI0055654",
+   "permittee": "Genoa-Oceola Sewer & Water Authority",
+   "city": "HOWELL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0055808",
+   "permittee": "UNION TOWNSHIP WWTP",
+   "city": "MOUNT PLEASANT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0056324",
+   "permittee": "Kalamazoo Lake Sewer & Water Authority",
+   "city": "SAUGATUCK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0057419",
+   "permittee": "North Kent Sewer Authority",
+   "city": "GRAND RAPIDS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0057676",
+   "permittee": "City of Gladstone",
+   "city": "GLADSTONE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0057679",
+   "permittee": "Allendale Charter Township",
+   "city": "ALLENDALE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MI0057737",
+   "permittee": "City of Charlevoix",
+   "city": "CHARLEVOIX",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0057776",
+   "permittee": "Kinross Charter Township",
+   "city": "KINROSS CHARTER TOWNSHIP",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MI0057813",
+   "permittee": "City of Rogers City",
+   "city": "ROGERS CITY",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

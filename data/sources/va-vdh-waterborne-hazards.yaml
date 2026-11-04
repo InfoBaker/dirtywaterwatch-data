@@ -1,0 +1,24 @@
+id: "va-vdh-waterborne-hazards"
+name: "VDH Waterborne Hazards Control pages (beach monitoring, local beaches, 2025 season review)"
+url: "https://www.vdh.virginia.gov/waterborne-hazards-control/beach-monitoring/"
+homepage: "https://www.vdh.virginia.gov/waterborne-hazards-control/beach-monitoring/"
+kind: "html"
+level: "state"
+# Notes (research/va, status used, verified fetched, checked 2026-11-02): Program description and
+#   advice wording.
+# Access detail (research, quoted): Fetched. 'Bacteria levels in beach water are monitored at 49
+#   public beaches during the swimming season (May-September).' Advice includes 'Avoid swimming for
+#   a few days after heavy rainfall'. 2025 review is a Tableau dashboard (updated Feb 5, 2026).
+#   Data-by-year page returned 404.
+cadence: null
+license: "none stated"
+attribution: "Virginia Department of Health"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["VA"]
+access: ["html"]
+access_detail: "Fetched. 'Bacteria levels in beach water are monitored at 49 public beaches during the swimming season (May-September).' Advice includes 'Avoid swimming for a few days after heavy rainfall'. 2025 review is a Tableau dashboard (updated Feb 5, 2026). Data-by-year page returned 404."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

@@ -1,0 +1,22 @@
+id: "us-cdc-oceans-lakes-rivers"
+name: "CDC How to Safely Visit Oceans, Lakes, and Rivers"
+url: "https://www.cdc.gov/healthy-swimming/safety/how-to-safely-visit-oceans-lakes-and-rivers.html"
+homepage: "https://www.cdc.gov/healthy-swimming/safety/how-to-safely-visit-oceans-lakes-and-rivers.html"
+kind: "html"
+level: "federal"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): Heavy rain, pipes,
+#   swallowing, wounds, immunocompromised advice; updated 2024-05-15.
+# Access detail (research, quoted): none recorded
+# Waters: n/a (science/guidance)
+cadence: null
+license: "public domain (U.S. federal government work); no licence line on page"
+attribution: "Centers for Disease Control and Prevention"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["US"]
+access: ["html"]
+access_detail: ""
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

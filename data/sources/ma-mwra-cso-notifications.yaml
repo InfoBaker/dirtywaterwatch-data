@@ -1,0 +1,27 @@
+id: "ma-mwra-cso-notifications"
+name: "MWRA CSO discharge notifications (web, email, text via Everbridge)"
+url: "https://www.mwra.com/node/5699"
+homepage: "https://www.mwra.com/node/5699"
+kind: "html"
+level: "utility"
+# Notes (research/ma, status candidate, verified search_only, checked 2026-11-01): Official MWRA
+#   channel; not fetched.
+# Access detail (research, quoted): Search results only: page titled 'MWRA Combined Sewer Overflow
+#   (CSO) Notifications'; notices posted online and sent by email and text; Everbridge sign-up
+#   https://www.mwra.com/updates/everbridge/join.html; a public notification report PDF
+#   (mwra.com/media/file/082925-publicnotificationrpt). A CRWA permit comment says fewer than 500
+#   people subscribe.
+# Waters: MWRA outfalls on the Charles, Mystic, Alewife, Fort Point Channel, Boston Harbor
+#   (openboatlaunch slugs: charles-river-ma, mystic-river-ma)
+cadence: null
+license: "none stated"
+attribution: "Massachusetts Water Resources Authority"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["MA"]
+access: ["html", "email"]
+access_detail: "Search results only: page titled 'MWRA Combined Sewer Overflow (CSO) Notifications'; notices posted online and sent by email and text; Everbridge sign-up https://www.mwra.com/updates/everbridge/join.html; a public notification report PDF (mwra.com/media/file/082925-publicnotificationrpt). A CRWA permit comment says fewer than 500 people subscribe."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

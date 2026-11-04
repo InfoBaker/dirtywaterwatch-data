@@ -1,0 +1,32 @@
+id: "md-bwb-baltimore-water-watch"
+name: "Blue Water Baltimore (Baltimore Harbor Waterkeeper) Baltimore Water Watch readings"
+url: "https://baltimorewaterwatch.org/"
+homepage: "https://baltimorewaterwatch.org/"
+kind: "arcgis"
+level: "nonprofit"
+# Notes (research/md, status candidate, verified fetched, checked 2026-11-02): Public,
+#   machine-readable bacteria near Baltimore outfalls; bacteria_units is null (enterococci MPN/100
+#   mL assumed, needs confirmation from BWB).
+# Access detail (research, quoted): Dashboard 'Current Conditions'
+#   (8e41582b3c674873bd3786145b031764) -> public FeatureServer
+#   https://services7.arcgis.com/c8xL4vl5qpC34Rk7/arcgis/rest/services/Readings/FeatureServer/0
+#   (8,594 readings, 2013-04-02 to 2026-10-28). Bacteria web map filters latest_reading = 'Latest
+#   Sample'. Sample saved raw/bww-readings-latest.json.
+# Can fill: monitoring context (sample time, value, coordinates)
+# Cannot fill: discharge events; advisories
+# Waters: 60 stations in the Patapsco watershed incl. 8 harbor rapid-bacteria sites (openboatlaunch
+#   slugs: patapsco-river-md, northwest-harbor-md, middle-branch-patapsco-river-md, curtis-creek-md,
+#   back-river-md)
+# History: 2013 onward
+cadence: "Rapid bacteria results 'within 24-36 hours' (BWB release); harbor sites sampled into late October 2026."
+license: "No licence on the item (licenseInfo empty)."
+attribution: "Blue Water Baltimore"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["MD"]
+access: ["arcgis", "html"]
+access_detail: "Dashboard 'Current Conditions' (8e41582b3c674873bd3786145b031764) -> public FeatureServer https://services7.arcgis.com/c8xL4vl5qpC34Rk7/arcgis/rest/services/Readings/FeatureServer/0 (8,594 readings, 2013-04-02 to 2026-10-28). Bacteria web map filters latest_reading = 'Latest Sample'. Sample saved raw/bww-readings-latest.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

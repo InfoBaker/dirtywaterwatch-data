@@ -1,0 +1,28 @@
+id: "ct-deep-state-swimming-wq-report"
+name: "DEEP State Swimming Water Quality Report (21 state park swim areas)"
+url: "https://ctparks.com/water-quality-report"
+homepage: "https://ctparks.com/water-quality-report"
+kind: "html"
+level: "state"
+# Notes (research/ct, status candidate, verified fetched, checked 2026-11-01): Status table for 4
+#   shoreline and 17 lake/pond state swim areas, Mon-Fri updates Memorial Day-Labor Day; HTML only;
+#   'CLOSED FOR SEASON' now.
+# Access detail (research, quoted): portal.ct.gov/DEEP/State-Parks/Recreation-Information/State-Swimming-Area-Water-Quality-Report
+#   redirects here; hotline 866-CT-PARKS (866-287-2757).
+# Can fill: authority, advice_text (status), waterbody
+# Cannot fill: sample values; dates; valid_until
+# Research notes: Map state parks to slugs: Squantz Pond, Lake Waramaug, Gardner Lake, Hopeville
+#   Pond, Quaddick, Green Falls Pond (green-fall-pond-ct), Burr Pond, Mount Tom Pond, Pattaconk;
+#   shoreline beaches to long-island-sound-ct.
+cadence: "weekly sampling, Mon-Fri status updates in season"
+license: "none stated"
+attribution: "CT DEEP (ctparks.com)"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["CT"]
+access: ["html", "phone"]
+access_detail: "portal.ct.gov/DEEP/State-Parks/Recreation-Information/State-Swimming-Area-Water-Quality-Report redirects here; hotline 866-CT-PARKS (866-287-2757)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

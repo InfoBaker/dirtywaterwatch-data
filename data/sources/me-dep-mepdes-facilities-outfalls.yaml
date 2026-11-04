@@ -1,0 +1,25 @@
+id: "me-dep-mepdes-facilities-outfalls"
+name: "Maine DEP MEPDES facility (layer 0) and outfall (layer 1) points"
+url: "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer"
+homepage: "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer"
+kind: "arcgis"
+level: "state"
+# Notes (research/me, status candidate, verified fetched, checked 2026-11-01): Locations for the
+#   ~180 municipal treatment plants that report bypasses/SSOs to DEP; useful only if SSO/bypass
+#   records become obtainable.
+# Access detail (research, quoted): Layer 0 Facility: 500 rows (180 with MUNICIPAL_WWTF='YES');
+#   fields incl. NEPDES_LICENSE_ID, LICENSED_FLOW, WATERBODY, HUC8. Layer 1 Outfalls: 1,149 rows;
+#   CLASS values TREATED, UNTREATED, MINOR, OTHER, MONITORING WELL.
+# Can fill: coordinates of POTW outfalls (for bypass events), waterbody
+cadence: null
+license: "MapServer copyrightText: 'Maine DEP DWQ and Maine DEP GIS Unit'; outfall item licenseInfo empty."
+attribution: "Maine DEP GIS Unit"
+enabled: true
+role: "outfalls"
+event_types: ["bypass", "sso"]
+states: ["ME"]
+access: ["arcgis"]
+access_detail: "Layer 0 Facility: 500 rows (180 with MUNICIPAL_WWTF='YES'); fields incl. NEPDES_LICENSE_ID, LICENSED_FLOW, WATERBODY, HUC8. Layer 1 Outfalls: 1,149 rows; CLASS values TREATED, UNTREATED, MINOR, OTHER, MONITORING WELL."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

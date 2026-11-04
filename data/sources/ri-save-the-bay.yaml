@@ -1,0 +1,22 @@
+id: "ri-save-the-bay"
+name: "Save The Bay (Baykeeper statements; weekly Upper Bay bacteria sampling reported to RIDOH)"
+url: "https://savebay.org/category/water-quality/"
+homepage: "https://savebay.org/category/water-quality/"
+kind: "html"
+level: "nonprofit"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Its bacteria data
+#   reach the public through the RIDOH volunteer sheet; site has statements (e.g., 2026-05-05 on the
+#   East Providence spill), no data feed or alert list.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "none stated"
+attribution: "Save The Bay"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["RI"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

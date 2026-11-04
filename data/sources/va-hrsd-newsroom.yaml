@@ -1,0 +1,34 @@
+id: "va-hrsd-newsroom"
+name: "HRSD Newsroom news releases (incident releases for major spills)"
+url: "https://www.hrsd.com/newsroom"
+homepage: "https://www.hrsd.com/newsroom"
+kind: "html"
+level: "utility"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): HRSD posts no SSO
+#   list; major incidents only. Scrape the newsroom index for incident words; use PReP for the rest.
+# Access detail (research, quoted): Fetched. 298 dated items listed for 2025-2026, almost all
+#   construction notices and traffic advisories. Spill releases are ad hoc: 2026-08-04 'HRSD Crews
+#   Address Pipeline Failure on Douglas Avenue Near Rolfe Terrace in Portsmouth' with updates Aug 5,
+#   6, 7 ('The total spill volume was estimated to be approximately 3.1 million gallons'). Email:
+#   https://www.hrsd.com/subscriptions (HRSD News / Project News by locality; captcha; no SSO
+#   topic). Report a Spill page is for the public to report.
+# Can fill: started_at (text), volume (text), advice_text, published_at (release date)
+# Cannot fill: machine-readable fields; routine SSOs (not announced)
+# Waters: Hampton Roads, Middle Peninsula, Eastern Shore (openboatlaunch slugs: elizabeth-river-va,
+#   james-river-va, york-river-va, chesapeake-bay-va)
+# Research notes: HRSD permits: VA0081230 Army Base, VA0081248 Atlantic, VA0081256 Boat Harbor,
+#   VA0081264 Chesapeake-Elizabeth, VA0081272 James River, VA0081281 Virginia Initiative, VA0081299
+#   Nansemond, VA0081302 Williamsburg, VA0081311 York River, plus small plants (ECHO). PReP has 34
+#   sewage reports since 2025 naming HRSD.
+cadence: "Same evening for major failures (Aug 4 release 'this evening'; DEQ: media advisory about 9:45 p.m.)."
+license: "none stated"
+attribution: "Hampton Roads Sanitation District"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["VA"]
+access: ["html", "email", "social"]
+access_detail: "Fetched. 298 dated items listed for 2025-2026, almost all construction notices and traffic advisories. Spill releases are ad hoc: 2026-08-04 'HRSD Crews Address Pipeline Failure on Douglas Avenue Near Rolfe Terrace in Portsmouth' with updates Aug 5, 6, 7 ('The total spill volume was estimated to be approximately 3.1 million gallons'). Email: https://www.hrsd.com/subscriptions (HRSD News / Project News by locality; captcha; no SSO topic). Report a Spill page is for the public to report."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

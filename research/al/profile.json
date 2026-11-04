@@ -1,0 +1,182 @@
+{
+  "state": "AL",
+  "name": "Alabama",
+  "region": "gulf",
+  "epa_region": 4,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "yes",
+    "summary": "Every NPDES permittee must report a notifiable SSO (one that reaches surface water or may endanger health) to ADEM, the public, the county health department and affected water systems \"as soon as possible\"; ADEM requires the report within 24 hours and a 5-day follow-up in AEPACS. The rule sets no channel or content for the public notice; ADEM itself posts every report on a public map and layer.",
+    "citations": [
+      {
+        "cite": "Ala. Admin. Code r. 335-6-6-.12(l)6.(v)",
+        "title": "Immediate notification",
+        "url": "https://static1.squarespace.com/static/5f887cbf23d461114a0cf95f/t/5f8f8172a0491a14cad1a507/1603240315476/Petition.3.7.17.pdf",
+        "quote": "The permittee shall report to the Director, the public, the county health department, and any other affected entity such as public water systems, as soon as possible upon becoming aware of any notifiable sanitary sewer overflow.",
+        "who": "every NPDES permittee",
+        "channel": "not specified",
+        "deadline": "as soon as possible; ADEM form: \"Immediate notification shall be provided within 24 hours of becoming aware of the event\"",
+        "threshold": "notifiable SSO: reaches a surface water of the State or may imminently and substantially endanger human health (r. 335-6-6-.02(hh))",
+        "verified": "fetched"
+      },
+      {
+        "cite": "ADEM AEPACS NPDES SSO Event Reporting Form v1.5, General Instructions",
+        "title": "SSO reporting form",
+        "url": "https://rivierautilities.com/pdf/4807-al0049042-003-01-25-2025-sso-aepacs-sso-00211633.1.pdf",
+        "quote": "Immediate notification shall be provided within 24 hours of becoming aware of the event. ... The follow-up report shall be submitted within five days of becoming aware of the SSO event using the Department's AEPACS system.",
+        "who": "permittee",
+        "channel": "SSO Hotline (334) 274-4200 or AEPACS",
+        "deadline": "24 hours; 5 days written",
+        "threshold": "notifiable SSO",
+        "verified": "fetched"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "24 hours (hotline or AEPACS); 5-day follow-up in AEPACS",
+      "cite": "Ala. Admin. Code r. 335-6-6-.12(l)6.; AEPACS SSO form"
+    },
+    "cso_permit_notice_clause": {
+      "permit": null,
+      "quote": "No CSO permits in Alabama.",
+      "deadline": null,
+      "verified": "fetched"
+    },
+    "bills_and_cases": [
+      "2017 petition by Alabama Rivers Alliance and eight riverkeepers to set a minimum public-notice standard; a 2018 petition for a 12-hour window was denied by the Environmental Management Commission (Sierra Club Alabama, 2018). ADEM instead launched the opt-in email list (May 2017) and the map.",
+      "Jefferson County released from its 1996 EPA sewer consent decree in October 2024."
+    ]
+  },
+  "erule": {
+    "system": "state",
+    "sobe_events_2026_11_03": 0,
+    "public_output_url": "https://gis.adem.alabama.gov/arcgis/rest/services/SSOs_ALL_OB_ID/MapServer/0",
+    "notes": "AEPACS (state electronic system) takes the 24-hour and 5-day reports; ADEM publishes them on ArcGIS at once. No Alabama rows in EPA SOBE."
+  },
+  "statewide_feed": {
+    "exists": true,
+    "source_ids": [
+      "al-adem-sso-history",
+      "al-adem-sso-map-live"
+    ],
+    "precision": "event",
+    "machine_readable": true,
+    "format": "arcgis",
+    "latency": "minutes (a report filed 2026-11-03 1:40 PM was in both layers that afternoon)",
+    "history": "2012-05-11 to date (14,750 rows)",
+    "coordinates": "all",
+    "receiving_water": "free text (often \"Ground Absorbed\" or \"Storm Drain(named creek)\")",
+    "start_end": "start and stop date-times plus ongoing flag",
+    "volume": true,
+    "stable_id": true,
+    "license": "No licence or terms shown.",
+    "notes": "History layer cannot page by offset; page by object_id. Volume is a string, often a range, sometimes truncated in the history layer."
+  },
+  "cso": {
+    "permits": 0,
+    "open_outfalls": 0,
+    "operators_with_web_channel": 0,
+    "operators_checked": 0,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "No CSOs in Alabama."
+  },
+  "sso": {
+    "location_source": "al-adem-sso-history (point per report)",
+    "feeds": [
+      "al-adem-sso-history",
+      "al-adem-sso-map-live"
+    ],
+    "notes": "About 1,250 reports a year; Prichard, Jefferson County, MAWSS and Baldwin County Sewer Service file the most."
+  },
+  "beaches": {
+    "program": "ADEM / ADPH Coastal Alabama Beach Monitoring (BEACH Act)",
+    "source_ids": [
+      "al-adem-beach-monitoring"
+    ],
+    "machine_readable": true,
+    "scope": "coastal",
+    "notes": "30 stations with a last-sample date and an Advisory code on a public ArcGIS layer; code values to decode."
+  },
+  "habs": {
+    "program": "none found",
+    "source_ids": [
+      "al-hab-none"
+    ],
+    "machine_readable": false,
+    "notes": "No freshwater cyanobacteria advisory program found."
+  },
+  "advisories": {
+    "health_department_pages": [
+      "Jefferson County no-contact advisories (GovDelivery)"
+    ],
+    "watershed_groups": [
+      "Mobile Baykeeper SWIM (Swim Guide)",
+      "Black Warrior Riverkeeper",
+      "Coosa Riverkeeper",
+      "Cahaba Riverkeeper",
+      "Tennessee Riverkeeper",
+      "Choctawhatchee Riverkeeper",
+      "Alabama Rivers Alliance"
+    ],
+    "swim_guide": true
+  },
+  "outfalls": {
+    "state_layer": "https://gis.adem.alabama.gov/arcgis/rest/services/Outfall_Map_Data/MapServer",
+    "cso_inventory_gap": "none (no CSOs)",
+    "sso_points": "state_table"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Chattahoochee River and Lake Eufaula / Walter F. George (GA)",
+      "Tennessee River (TN, MS)",
+      "Tombigbee River (MS)",
+      "Perdido River and Bay (FL)",
+      "Coosa River and Weiss Lake (GA)",
+      "Mobile Bay to the Gulf"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "no_web",
+      "what": "The rule names the public as a recipient but sets no channel, content or deadline for the public notice.",
+      "fix_level": "legislative",
+      "note": "ADEM's map and layer fill the gap for dated events; the operator's own notice may still be absent."
+    },
+    {
+      "kind": "email_only",
+      "what": "ADEM county email alerts and Jefferson County Everbridge alerts need sign-up.",
+      "fix_level": "owner",
+      "note": "Same events are on the layer."
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "ADEM SSO email notification (by county)",
+      "url": "https://adem.alabama.gov/",
+      "what": "email per SSO report in chosen counties"
+    },
+    {
+      "name": "Jefferson County Everbridge overflow alerts",
+      "url": "https://www.jccal.org/",
+      "what": "alerts for Jefferson County overflows"
+    }
+  ],
+  "readiness": {
+    "tier": "A",
+    "expected_grade": "Dated reports",
+    "first_feed": "al-adem-sso-history",
+    "effort": "small",
+    "rationale": "One public ArcGIS layer with every SSO report since 2012, coordinates, start/stop, volume, receiving water text and a versioned report id, updated within minutes; a second layer adds received time and cause for the last 10 days. Coastal beach advisories are also on ArcGIS.",
+    "order_hint": 1
+  },
+  "owner_questions": [
+    "Treat volume ranges (\"250,000 < gallons <= 500,000\") as their upper bound, as ADEM does, or show the range?",
+    "Many reports say \"Ground Absorbed\": show events that did not reach water, or only those naming a stream?",
+    "Subscribe to ADEM county email alerts as a cross-check?"
+  ],
+  "surprise": "Alabama, whose rule sets no public-notice standard, publishes every sewer overflow report since 2012 on a public ArcGIS layer within minutes of filing: one of the best statewide SSO feeds in the country."
+}

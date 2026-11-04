@@ -1,0 +1,23 @@
+id: "iem-iemre-mrms-daily"
+name: "Iowa Environmental Mesonet reanalysis: daily MRMS rainfall at a point"
+url: "https://mesonet.agron.iastate.edu/iemre/multiday/2025-01-01/2025-12-31/42.10/-72.59/json"
+homepage: "https://mesonet.agron.iastate.edu/iemre/"
+kind: "api"
+level: "academic"
+# Notes (pipeline/build/rain_thresholds.py, 2026-11-02): daily MRMS totals (mrms_precip_in) at each
+#   Massachusetts CSO permittee's outfall centroid since 2022, one request per point per year
+#   (cached in data/raw/iem-iemre/, the current year refreshed daily). Used only to describe
+#   rainfall on days without a discharge notice and to compare the radar with the permittees' own
+#   reported rainfall; the thresholds themselves come from the permittees' reports.
+cadence: "daily"
+license: "Iowa Environmental Mesonet, Iowa State University; free public access, attribution requested"
+attribution: "Iowa Environmental Mesonet (Iowa State University), from NOAA MRMS"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["US"]
+access: ["api"]
+access_detail: "iemre/multiday/{date1}/{date2}/{lat}/{lon}/json -> data[] {date, mrms_precip_in, prism_precip_in, daily_precip_in, ...}; per-year requests (a multi-year range returned no MRMS values)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

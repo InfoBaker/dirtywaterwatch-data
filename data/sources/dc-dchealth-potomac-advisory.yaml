@@ -1,0 +1,31 @@
+id: "dc-dchealth-potomac-advisory"
+name: "DC Health 'Potomac Sewer Line Collapse Update' (recreational advisory)"
+url: "https://dchealth.dc.gov/page/potomac-sewer-line-collapse-update"
+homepage: "https://dchealth.dc.gov/page/potomac-sewer-line-collapse-update"
+kind: "html"
+level: "state"
+# Notes (research/dc, status used, verified fetched, checked 2026-11-02): The only DC recreational
+#   advisory in 2025-2026; event in events.json.
+# Access detail (research, quoted): Fetched. Updates dated 2026-02-20 ('As of February 18, 2026 ...
+#   the District advises avoiding contact with Potomac River water, and residents should keep
+#   children and pets away from the river') and 2026-03-02 (advisory lifted 'effective immediately';
+#   'Swimming remains legally prohibited.'). Original issue date not shown.
+# Can fill: advice_text, authority, ended_at (lift), published_at
+# Cannot fill: started_at (issue date missing); coordinates
+# Waters: District portion of the Potomac River (openboatlaunch slugs: potomac-river-dc)
+# Research notes: Mayor's release 2026-03-02: lifted after E. coli 'remained within typical range
+#   for the District's rivers for the past 21 days (since the last overflow)'. DOEE release
+#   2026-02-27 had said: 'At 21 days (since the last overflow) ... DC Health is expected to lift the
+#   advisory on March 2.'
+cadence: "Ad hoc"
+license: "none stated"
+attribution: "DC Department of Health (DC Health)"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["DC"]
+access: ["html"]
+access_detail: "Fetched. Updates dated 2026-02-20 ('As of February 18, 2026 ... the District advises avoiding contact with Potomac River water, and residents should keep children and pets away from the river') and 2026-03-02 (advisory lifted 'effective immediately'; 'Swimming remains legally prohibited.'). Original issue date not shown."
+machine_readable: false
+legal_basis: "DC Health public-health authority; no notification rule cited."
+checked: "2026-11-02"

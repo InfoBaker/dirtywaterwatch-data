@@ -1,0 +1,21 @@
+id: "ma-deerfield-rwa"
+name: "Deerfield River Watershed Association (samples via CRC Is It Clean)"
+url: null
+homepage: null
+kind: null
+level: "nonprofit"
+# Notes (research/ma, status candidate, verified inferred, checked 2026-11-01): Not checked
+#   separately; CRC lab partners appear on isitclean.us.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "none stated"
+attribution: "DRWA"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["MA"]
+access: []
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

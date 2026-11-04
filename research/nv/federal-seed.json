@@ -1,0 +1,66 @@
+{
+ "state": "NV",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 18,
+ "plant_permits_major": 8,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "NV0020061",
+   "permittee": "CITY OF FALLON",
+   "city": "FALLON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NV0020133",
+   "permittee": "CITY OF LAS VEGAS",
+   "city": "LAS VEGAS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NV0020150",
+   "permittee": "TRUCKEE MEADOWS WATER RECLAMATION FACILITY",
+   "city": "RENO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NV0020168",
+   "permittee": "RENO, CITY OF",
+   "city": "RENO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "NV0021261",
+   "permittee": "CLARK COUNTY WATER RECLAMATION DISTRICT",
+   "city": "LAS VEGAS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NV0021563",
+   "permittee": "CLARK COUNTY WATER RECLAMATION DISTRICT",
+   "city": "LAUGHLIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NV0022098",
+   "permittee": "CITY OF HENDERSON",
+   "city": "HENDERSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NV0023647",
+   "permittee": "CITY OF NORTH LAS VEGAS",
+   "city": "UNINCORPORATED CLARK COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

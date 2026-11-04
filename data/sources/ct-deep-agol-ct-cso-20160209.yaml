@@ -1,0 +1,28 @@
+id: "ct-deep-agol-ct-cso-20160209"
+name: "CT DEEP CT_CSO_20160209 (2016 CSO locations; feeds the DEEP CSO Right-to-Know instant app)"
+url: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CT_CSO_20160209/FeatureServer/1"
+homepage: "https://ctdeep.maps.arcgis.com/apps/instant/basic/index.html?appid=b756e9b986074347854e78352f125826"
+kind: "arcgis"
+level: "state"
+# Notes (research/ct, status candidate, verified fetched, checked 2026-11-01): 151 regulator points
+#   with receiving water; 2016 vintage; superseded in part by ICIS/EPA layers but has finer Hartford
+#   receiving-water text.
+# Access detail (research, quoted): Layers 0 overview polygons (6 towns), 1 CSO Location (151
+#   points: Hartford 69, New Haven 33, Bridgeport 32, Norwich 14, Hamden 1, Norwalk 1, Waterbury 1),
+#   2 Municipality. Embedded app:
+#   https://ctdeep.maps.arcgis.com/apps/instant/basic/index.html?appid=b756e9b986074347854e78352f125826
+#   ('CT DEEP Sewage Right To Know CSO and CSO Group Locations').
+# Can fill: coordinates, waterbody
+# Research notes: Includes regulators, not only outfalls (EPA notes DEEP's map includes regulators).
+cadence: "static, 2016"
+license: "copyrightText 'CT DEEP'"
+attribution: "CT DEEP"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["CT"]
+access: ["arcgis", "api", "map_only"]
+access_detail: "Layers 0 overview polygons (6 towns), 1 CSO Location (151 points: Hartford 69, New Haven 33, Bridgeport 32, Norwich 14, Hamden 1, Norwalk 1, Waterbury 1), 2 Municipality. Embedded app: https://ctdeep.maps.arcgis.com/apps/instant/basic/index.html?appid=b756e9b986074347854e78352f125826 ('CT DEEP Sewage Right To Know CSO and CSO Group Locations')."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

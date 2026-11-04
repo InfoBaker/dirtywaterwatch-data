@@ -1,0 +1,51 @@
+id: "vt-dec-sewage-overflow-incident-reports"
+name: "VT DEC sewer overflow and release Incident Reports (New/pending, Reviewed, and Wet Weather CSO tables) on the Sewage Overflows report page"
+url: "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+homepage: "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+kind: "html"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Gives start, end,
+#   volume, outfall and waterbody for every reported VT overflow since 2016, back to 2007 for other
+#   incidents; best structured source in either state.
+# Access detail (research, quoted): Same page and POST as the alerts. Three tables:
+#   body_GridViewSewageOverflowsUnOfficial ('NEW INCIDENT REPORTS Pending review from DEC Wastewater
+#   staff'; links to nFormSewageOverflow.aspx?S=<submission no.>), body_GridViewSewageOverflowsOther
+#   ('INCIDENT REPORTS Reviewed by DEC Wastewater staff'), body_GridViewSewageOverflowsAuthorized
+#   ('WET WEATHER COMBINED SEWER OVERFLOWS INCIDENT REPORTS Reviewed by DEC Wastewater staff'). Each
+#   reviewed row links to UpdateFacilityIncident.aspx?F=<facility id>&FI=<incident id>&option=view
+#   (detail page, no login) and updateFacility.aspx?F=<id>&option=view (facility page with plant
+#   lat/long). Facility id F joins to the ANR Waste Water Facilities GIS layer FacilityID.
+# Can fill: source_record_id (ID / Submission Number), event_type (Nature of Incident: 'Authorized
+#   Wet Weather CSO Overflow', 'Discharged untreated sewage', 'Discharged partially treated ...
+#   effluent', 'Other'), source_status (pending vs reviewed table; nForm 'Current Status'),
+#   started_at, ended_at, timezone (implicit America/New_York), waterbody, location_text, material
+#   (Nature of Incident), volume, units (gallons), estimate_flag (field is 'Estimated'; 2016-2024
+#   rows often give a range bucket such as '>10,000 to 100,000 gallons'), authority, source_url,
+#   raw_record, jurisdiction
+# Cannot fill: coordinates (outfall; only plant lat/long on facility page); reported_at (submission
+#   time not shown on reviewed rows); source_updated_at; advice_text; valid_until; revision_history
+#   (amendments overwrite)
+# Waters: statewide (openboatlaunch slugs: lake-champlain-vt, winooski-river-vt, otter-creek-vt,
+#   stevens-brook-vt, passumpsic-river-vt, connecticut-river-vt, missisquoi-river-vt,
+#   lac-memphremagog-vt)
+# History: DEC: 'There is no data available prior to January 1, 2007.' 2007 range returned 45
+#   incident rows; CSO table populated from 2016. Per-year counts (CSO reports / other reports):
+#   2016 117/30, 2019 213/71, 2023 112/90, 2024 206/65, 2025 172/55, 2026 (to Nov 1) 115/33. Archive
+#   = same page with an older date range.
+# Research notes: Volume is free text: exact numbers, comma-formatted strings ('105,000 gallons'),
+#   range buckets through 2024, and occasional junk ('.0425', 'CSO is still flowing, volume i').
+#   Contact Person and Caller fields carry staff names and, on pending nForm pages, a phone number:
+#   drop them. 2025 CSO reports came only from Rutland (69), St Johnsbury (48), Montpelier (35),
+#   Vergennes (8), Middlebury (7), St Albans City (3), Burlington Main (2).
+cadence: "Law: report to DEC and local health officer within 12 hours of discovery; end time and volume amended within three business days if unknown. Reviewed rows appear after DEC staff review (days to weeks; some pending rows from 12/28/2025 were still 'In Review' on 11/01/2026)."
+license: "Page footer: \"Copyright © 2025 State of Vermont. All rights reserved\" with links to Accessibility Policy and Privacy Policy. No data licence stated on the WWInventory pages. (Public record under 10 V.S.A. § 1295; ANR open data elsewhere is under the Vermont Open Geodata Policy v1.1.)"
+attribution: "Vermont Department of Environmental Conservation, Wastewater Program"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass", "partially_treated", "other"]
+states: ["VT"]
+access: ["html", "email"]
+access_detail: "Same page and POST as the alerts. Three tables: body_GridViewSewageOverflowsUnOfficial ('NEW INCIDENT REPORTS Pending review from DEC Wastewater staff'; links to nFormSewageOverflow.aspx?S=<submission no.>), body_GridViewSewageOverflowsOther ('INCIDENT REPORTS Reviewed by DEC Wastewater staff'), body_GridViewSewageOverflowsAuthorized ('WET WEATHER COMBINED SEWER OVERFLOWS INCIDENT REPORTS Reviewed by DEC Wastewater staff'). Each reviewed row links to UpdateFacilityIncident.aspx?F=<facility id>&FI=<incident id>&option=view (detail page, no login) and updateFacility.aspx?F=<id>&option=view (facility page with plant lat/long). Facility id F joins to the ANR Waste Water Facilities GIS layer FacilityID."
+machine_readable: false
+legal_basis: "10 V.S.A. § 1295(c)"
+checked: "2026-11-01"

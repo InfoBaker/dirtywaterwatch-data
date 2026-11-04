@@ -1,0 +1,22 @@
+id: "dc-potomacinterceptor-dc-gov"
+name: "potomacinterceptor.dc.gov (DC Government Hub site for the PI response)"
+url: "https://potomacinterceptor.dc.gov/"
+homepage: "https://potomacinterceptor.dc.gov/"
+kind: "arcgis"
+level: "state"
+# Notes (research/dc, status used, verified fetched, checked 2026-11-02): Pointer to the feature
+#   service above.
+# Access detail (research, quoted): ArcGIS Hub app ff589f6c46284ca7b6e32b885b33eae5 (owner: a DCGIS
+#   account), modified 2026-07; front end for the sample service.
+cadence: null
+license: "none stated"
+attribution: "DC Government (DCGIS/DOEE)"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["DC"]
+access: ["html", "arcgis"]
+access_detail: "ArcGIS Hub app ff589f6c46284ca7b6e32b885b33eae5 (owner: a DCGIS account), modified 2026-07; front end for the sample service."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

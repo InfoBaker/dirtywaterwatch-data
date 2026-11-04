@@ -1,0 +1,2292 @@
+{
+ "state": "RI",
+ "source": "openboatlaunch out/water snapshot 2026-11-01",
+ "count": 88,
+ "waters": [
+  {
+   "slug": "100-acre-cove-ri",
+   "name": "100 Acre Cove",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Barrington"
+   ],
+   "bbox": [
+    -71.32411,
+    41.7367,
+    -71.29442,
+    41.78049
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.521,
+   "launches": [
+    "walker-farm-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "allen-harbor-ri",
+   "name": "Allen Harbor",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "East Greenwich",
+    "North Kingstown"
+   ],
+   "bbox": [
+    -71.42023,
+    41.61766,
+    -71.40153,
+    41.62669
+   ],
+   "wikidata": "Q49372188",
+   "charted": true,
+   "area_km2": 0.549,
+   "launches": [
+    "allen-harbor-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "alton-pond-ri",
+   "name": "Alton Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Alton"
+   ],
+   "bbox": [
+    -71.72253,
+    41.43789,
+    -71.71453,
+    41.44629
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.15,
+   "launches": [
+    "alton-pond-landing-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "asa-pond-ri",
+   "name": "Asa Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "South Kingstown"
+   ],
+   "bbox": [
+    -71.51597,
+    41.4577,
+    -71.51105,
+    41.46151
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.099,
+   "launches": [
+    "asa-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ashville-pond-ri",
+   "name": "Ashville Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Rockville"
+   ],
+   "bbox": [
+    -71.76055,
+    41.49934,
+    -71.75111,
+    41.5024
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.131,
+   "launches": [
+    "ashville-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "barbers-pond-ri",
+   "name": "Barbers Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "West Kingston"
+   ],
+   "bbox": [
+    -71.56703,
+    41.49875,
+    -71.56299,
+    41.50531
+   ],
+   "wikidata": "Q49299057",
+   "charted": false,
+   "area_km2": 0.113,
+   "launches": [
+    "barber-pond-carry-in-access-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020.",
+     "date": "2020-11-02",
+     "years": [
+      "2020"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "barrington-river-ri",
+   "name": "Barrington River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Barrington"
+   ],
+   "bbox": [
+    -71.32847,
+    41.73258,
+    -71.28989,
+    41.78069
+   ],
+   "wikidata": "Q4863684",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "barrington-river-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beach-pond-ri",
+   "name": "Beach Pond",
+   "kind": "reservoir",
+   "state": "RI",
+   "towns": [
+    "West Greenwich"
+   ],
+   "bbox": [
+    -71.81757,
+    41.5689,
+    -71.77832,
+    41.58396
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.648,
+   "launches": [
+    "beach-pond-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-river-ri",
+   "name": "Beaver River",
+   "kind": "stream",
+   "state": "RI",
+   "towns": [
+    "Richmond"
+   ],
+   "bbox": [
+    -71.64668,
+    41.44763,
+    -71.62261,
+    41.57562
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beaver-river-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "belleville-pond-ri",
+   "name": "Belleville Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "North Kingstown"
+   ],
+   "bbox": [
+    -71.48542,
+    41.55807,
+    -71.47258,
+    41.56952
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.5,
+   "launches": [
+    "bellville-pond-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-river-ri",
+   "name": "Big River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "West Greenwich"
+   ],
+   "bbox": [
+    -71.62251,
+    41.6207,
+    -71.61145,
+    41.66522
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-river-weaver-hill-rd-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "billington-cove-ri",
+   "name": "Billington Cove",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "Wakefield"
+   ],
+   "bbox": [
+    -71.50441,
+    41.41871,
+    -71.50014,
+    41.42259
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.08,
+   "launches": [
+    "pond-st-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blackstone-river-ri",
+   "name": "Blackstone River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Central Falls",
+    "Manville",
+    "Woonsocket"
+   ],
+   "bbox": [
+    -71.55495,
+    41.87643,
+    -71.38029,
+    42.01837
+   ],
+   "wikidata": "Q880926",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "albion-river-access-ri",
+    "central-falls-landing-ri",
+    "cold-spring-park-ri",
+    "manville-ri",
+    "river-island-park-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "block-island-sound-ri",
+   "name": "Block Island Sound",
+   "kind": "sound",
+   "state": "RI",
+   "towns": [
+    "New Shoreham"
+   ],
+   "bbox": [
+    -72.19765,
+    41.01561,
+    -71.475,
+    41.37697
+   ],
+   "wikidata": "Q4927148",
+   "charted": true,
+   "area_km2": 1401.966,
+   "launches": [
+    "hand-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bowdish-reservoir-ri",
+   "name": "Bowdish Reservoir",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Glocester"
+   ],
+   "bbox": [
+    -71.78019,
+    41.91645,
+    -71.75844,
+    41.92703
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.977,
+   "launches": [
+    "bowdish-reservoir-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "branch-river-ri",
+   "name": "Branch River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Forestdale"
+   ],
+   "bbox": [
+    -71.64599,
+    41.95423,
+    -71.55032,
+    42.00928
+   ],
+   "wikidata": "Q49863688",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "branch-river-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "breakheart-pond-ri",
+   "name": "Breakheart Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "West Greenwich"
+   ],
+   "bbox": [
+    -71.70378,
+    41.59543,
+    -71.6985,
+    41.60268
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.185,
+   "launches": [
+    "breakhart-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brickyard-pond-ri",
+   "name": "Brickyard Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "Barrington"
+   ],
+   "bbox": [
+    -71.32647,
+    41.73155,
+    -71.31386,
+    41.73733
+   ],
+   "wikidata": "Q49700110",
+   "charted": false,
+   "area_km2": 0.429,
+   "launches": [
+    "brickyard-pond-boat-launch-ri",
+    "brickyard-pond-carry-in-access-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "http://dem.ri.gov/programs/water/quality/surface-water/cyanobacteria.php",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021 and 2026.",
+     "date": "2026-08-21",
+     "years": [
+      "2021",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "bristol-narrows-ri",
+   "name": "Bristol Narrows",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Bristol"
+   ],
+   "bbox": [
+    -71.24696,
+    41.69574,
+    -71.2408,
+    41.70392
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.211,
+   "launches": [
+    "bristol-narrows-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "browning-mill-pond-ri",
+   "name": "Browning Mill Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Richmond"
+   ],
+   "bbox": [
+    -71.69297,
+    41.55574,
+    -71.68552,
+    41.56152
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.206,
+   "launches": [
+    "browning-mill-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "capwell-mill-pond-ri",
+   "name": "Capwell Mill Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "West Greenwich"
+   ],
+   "bbox": [
+    -71.60764,
+    41.6419,
+    -71.59604,
+    41.64543
+   ],
+   "wikidata": "Q49700186",
+   "charted": false,
+   "area_km2": 0.087,
+   "launches": [
+    "big-river-burnt-saw-mill-rd-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "carbuncle-pond-ri",
+   "name": "Carbuncle Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "Greene"
+   ],
+   "bbox": [
+    -71.7768,
+    41.69313,
+    -71.76875,
+    41.70014
+   ],
+   "wikidata": "Q49300267",
+   "charted": false,
+   "area_km2": 0.191,
+   "launches": [
+    "carbuncle-pond-boat-launch-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019.",
+     "date": "2019-11-02",
+     "years": [
+      "2019"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "carr-pond-ri",
+   "name": "Carr Pond",
+   "kind": "reservoir",
+   "state": "RI",
+   "towns": [
+    "North Kingstown"
+   ],
+   "bbox": [
+    -71.45434,
+    41.52045,
+    -71.44409,
+    41.52596
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.219,
+   "launches": [
+    "gilbert-stuart-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024.",
+     "date": "2024-10-01",
+     "years": [
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "chapman-pond-ri",
+   "name": "Chapman Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Westerly"
+   ],
+   "bbox": [
+    -71.80139,
+    41.37589,
+    -71.78832,
+    41.38442
+   ],
+   "wikidata": "Q49300451",
+   "charted": false,
+   "area_km2": 0.746,
+   "launches": [
+    "chapman-pond-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chipuxet-river-ri",
+   "name": "Chipuxet River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "West Kingston"
+   ],
+   "bbox": [
+    -71.56896,
+    41.45015,
+    -71.5468,
+    41.48742
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "taylors-landing-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clarkville-pond-ri",
+   "name": "Clarkville Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Glocester"
+   ],
+   "bbox": [
+    -71.78974,
+    41.92136,
+    -71.78638,
+    41.92522
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.055,
+   "launches": [
+    "clarkville-pond-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-passage-ri",
+   "name": "East Passage",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Jamestown",
+    "Newport"
+   ],
+   "bbox": [
+    -71.39884,
+    41.44256,
+    -71.30316,
+    41.57266
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 46.479,
+   "launches": [
+    "fort-wetherill-ri",
+    "jamestown-ri",
+    "kings-park-ri",
+    "washington-st-ri",
+    "willow-street-boat-ramp-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "flat-river-reservoir-ri",
+   "name": "Flat River Reservoir",
+   "kind": "reservoir",
+   "state": "RI",
+   "towns": [
+    "West Greenwich"
+   ],
+   "bbox": [
+    -71.64795,
+    41.66525,
+    -71.59393,
+    41.71805
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.765,
+   "launches": [
+    "zeke-s-bridge-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021, 2022 and 2025.",
+     "date": "2025-11-01",
+     "years": [
+      "2021",
+      "2022",
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "fogland-ri",
+   "name": "Fogland",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "Tiverton"
+   ],
+   "bbox": null,
+   "wikidata": "Q49377521",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "fogland-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fox-hill-pond-ri",
+   "name": "Fox Hill Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Jamestown"
+   ],
+   "bbox": [
+    -71.39808,
+    41.48821,
+    -71.39437,
+    41.4922
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.043,
+   "launches": [
+    "fort-getty-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "georgiaville-pond-ri",
+   "name": "Georgiaville Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Smithfield"
+   ],
+   "bbox": [
+    -71.51818,
+    41.88859,
+    -71.5065,
+    41.90183
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.402,
+   "launches": [
+    "georgiaville-pond-boat-launch-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "http://dem.ri.gov/programs/water/quality/surface-water/cyanobacteria.php",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020 to 2026.",
+     "date": "2026-09-14",
+     "years": [
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "gorton-pond-ri",
+   "name": "Gorton Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "Warwick"
+   ],
+   "bbox": [
+    -71.46257,
+    41.70277,
+    -71.4547,
+    41.70759
+   ],
+   "wikidata": "Q35701771",
+   "charted": false,
+   "area_km2": 0.221,
+   "launches": [
+    "gorton-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "great-salt-pond-ri",
+   "name": "Great Salt Pond",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "New Shoreham"
+   ],
+   "bbox": [
+    -71.58987,
+    41.18073,
+    -71.56935,
+    41.2034
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.368,
+   "launches": [
+    "great-salt-pond-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "greenwich-cove-ri",
+   "name": "Greenwich Cove",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "East Greenwich"
+   ],
+   "bbox": [
+    -71.45654,
+    41.64691,
+    -71.4402,
+    41.66642
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.807,
+   "launches": [
+    "crompton-arc-ri",
+    "goddard-park-ri",
+    "long-street-boat-ramp-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hope-pond-ri",
+   "name": "Hope Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Hope"
+   ],
+   "bbox": [
+    -71.57233,
+    41.73106,
+    -71.56402,
+    41.73817
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.115,
+   "launches": [
+    "pawtuxet-river-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hopkins-mills-pond-ri",
+   "name": "Hopkins Mills Pond",
+   "kind": "reservoir",
+   "state": "RI",
+   "towns": [
+    "South Foster"
+   ],
+   "bbox": [
+    -71.7115,
+    41.82403,
+    -71.70766,
+    41.82672
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.035,
+   "launches": [
+    "hopkins-mill-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "indian-lake-ri",
+   "name": "Indian Lake",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Narragansett"
+   ],
+   "bbox": [
+    -71.47556,
+    41.47314,
+    -71.46138,
+    41.4879
+   ],
+   "wikidata": "Q7357777",
+   "charted": false,
+   "area_km2": 1.092,
+   "launches": [
+    "indian-lake-boat-launch-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-12-22",
+     "years": [
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "john-l-curran-upper-reservoir-ri",
+   "name": "John L Curran Upper Reservoir",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Fiskeville"
+   ],
+   "bbox": [
+    -71.55112,
+    41.75076,
+    -71.54684,
+    41.75458
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.117,
+   "launches": [
+    "jl-curran-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/d5780051f06f4c1b906bb692ccd7309a",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019 to 2025.",
+     "date": "2025-10-22",
+     "years": [
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "keech-pond-ri",
+   "name": "Keech Pond",
+   "kind": "reservoir",
+   "state": "RI",
+   "towns": [
+    "Glocester"
+   ],
+   "bbox": [
+    -71.69679,
+    41.87213,
+    -71.68433,
+    41.88721
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.552,
+   "launches": [
+    "keech-pond-boat-launch-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024.",
+     "date": "2024-10-01",
+     "years": [
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-tiogue-ri",
+   "name": "Lake Tiogue",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Tiogue"
+   ],
+   "bbox": [
+    -71.55692,
+    41.66874,
+    -71.54419,
+    41.68493
+   ],
+   "wikidata": "Q49702951",
+   "charted": false,
+   "area_km2": 0.923,
+   "launches": [
+    "tiogue-lake-north-glen-drive-ri",
+    "tiogue-lake-boat-launch-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "http://dem.ri.gov/programs/water/quality/surface-water/cyanobacteria.php",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021 to 2023, 2025 and 2026.",
+     "date": "2026-09-18",
+     "years": [
+      "2021",
+      "2022",
+      "2023",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-washington-ri",
+   "name": "Lake Washington",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Glocester"
+   ],
+   "bbox": [
+    -71.75991,
+    41.91307,
+    -71.75316,
+    41.91936
+   ],
+   "wikidata": "Q6478419",
+   "charted": false,
+   "area_km2": 0.178,
+   "launches": [
+    "lake-washington-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "locustville-pond-ri",
+   "name": "Locustville Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Hope Valley"
+   ],
+   "bbox": [
+    -71.72935,
+    41.50842,
+    -71.71314,
+    41.52307
+   ],
+   "wikidata": "Q49304500",
+   "charted": false,
+   "area_km2": 0.338,
+   "launches": [
+    "locustville-pond-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mashapaug-pond-ri",
+   "name": "Mashapaug Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "Cranston"
+   ],
+   "bbox": [
+    -71.43572,
+    41.78912,
+    -71.42944,
+    41.79986
+   ],
+   "wikidata": "Q85846577",
+   "charted": false,
+   "area_km2": 0.306,
+   "launches": [
+    "j-t-owens-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017 and 2019 to 2025.",
+     "date": "2025-12-01",
+     "years": [
+      "2017",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "meadow-brook-pond-ri",
+   "name": "Meadow Brook Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "Wood River Junction"
+   ],
+   "bbox": [
+    -71.69192,
+    41.43783,
+    -71.68926,
+    41.44396
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.08,
+   "launches": [
+    "meadow-brook-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "moscow-brook-ri",
+   "name": "Moscow Brook",
+   "kind": "stream",
+   "state": "RI",
+   "towns": [
+    "Rockville"
+   ],
+   "bbox": [
+    -71.78789,
+    41.51373,
+    -71.73427,
+    41.5274
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "moscow-pond-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "narragansett-bay-ri",
+   "name": "Narragansett Bay",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "Barrington",
+    "Bristol",
+    "Cranston",
+    "East Greenwich",
+    "East Providence",
+    "Newport",
+    "North Kingstown",
+    "Pawtuxet",
+    "Portsmouth",
+    "Providence",
+    "Warren",
+    "Warwick"
+   ],
+   "bbox": [
+    -71.45822,
+    41.44754,
+    -71.13216,
+    41.8273
+   ],
+   "wikidata": "Q1241943",
+   "charted": true,
+   "area_km2": 331.703,
+   "launches": [
+    "annawanscutt-ri",
+    "burnett-road-boat-ramp-ri",
+    "collier-park-ramp-ri",
+    "colt-park-ri",
+    "conimicut-point-carry-in-access-ri",
+    "fort-adams-ri",
+    "seekonk-river-boat-launch-ri",
+    "haines-park-ri",
+    "independence-park-ri",
+    "latham-ave-park-ri",
+    "longmeadow-carry-in-access-ri",
+    "pleasant-st-ri",
+    "priscilla-avenue-boat-ramp-ri",
+    "sabin-point-ri",
+    "salters-grove-ri",
+    "san-miguel-drive-boat-ramp-ri",
+    "shawomet-avenue-boat-ramp-ri",
+    "sherman-ave-ri",
+    "smith-street-ri",
+    "state-street-ri",
+    "sunrise-drive-boat-ramp-ri",
+    "wilson-park-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "narrow-river-ri",
+   "name": "Narrow River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Narragansett"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "narrow-river-boat-launch-ri",
+    "narrow-river-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ninigret-pond-ri",
+   "name": "Ninigret Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "Charlestown"
+   ],
+   "bbox": [
+    -71.69876,
+    41.34334,
+    -71.62614,
+    41.38133
+   ],
+   "wikidata": "Q7358712",
+   "charted": true,
+   "area_km2": 6.456,
+   "launches": [
+    "charlestown-ri",
+    "charlestown-breachway-ri",
+    "ninigret-pond-boat-launch-ri",
+    "ninigret-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "olney-pond-ri",
+   "name": "Olney Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "Central Falls"
+   ],
+   "bbox": [
+    -71.43852,
+    41.88663,
+    -71.42644,
+    41.89679
+   ],
+   "wikidata": "Q49702231",
+   "charted": false,
+   "area_km2": 0.563,
+   "launches": [
+    "olney-pond-boat-launch-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025.",
+     "date": "2025-11-01",
+     "years": [
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "pascoag-reservoir-ri",
+   "name": "Pascoag Reservoir",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Glocester",
+    "Pascoag"
+   ],
+   "bbox": [
+    -71.71897,
+    41.92269,
+    -71.70245,
+    41.95188
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.324,
+   "launches": [
+    "echo-lake-ri",
+    "union-pond-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "passeonkquis-cove-ri",
+   "name": "Passeonkquis Cove",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "Warwick"
+   ],
+   "bbox": [
+    -71.39081,
+    41.74453,
+    -71.3826,
+    41.74784
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.094,
+   "launches": [
+    "passeonkquis-cove-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pawcatuck-river-ri",
+   "name": "Pawcatuck River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Bradford",
+    "Kenyon",
+    "Westerly",
+    "Wood River Junction"
+   ],
+   "bbox": [
+    -71.85984,
+    41.32036,
+    -71.59025,
+    41.46108
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "biscuit-city-ri",
+    "bradford-ri",
+    "main-street-ri",
+    "richmond-landing-ri",
+    "white-rock-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pawtucket-river-ri",
+   "name": "Pawtucket River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Pawtucket"
+   ],
+   "bbox": [
+    -71.38432,
+    41.85743,
+    -71.37689,
+    41.87643
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "old-state-pier-ri",
+    "town-landing-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pawtuxet-river-ri",
+   "name": "Pawtuxet River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Cranston",
+    "Pawtuxet"
+   ],
+   "bbox": [
+    -71.51043,
+    41.71519,
+    -71.3763,
+    41.76818
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "aborn-street-boat-ramp-ri",
+    "pawtuxet-village-park-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "point-judith-pond-ri",
+   "name": "Point Judith Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Galilee",
+    "Jerusalem",
+    "Narragansett",
+    "Snug Harbor",
+    "Wakefield"
+   ],
+   "bbox": [
+    -71.52602,
+    41.37483,
+    -71.48974,
+    41.43008
+   ],
+   "wikidata": "Q7208059",
+   "charted": true,
+   "area_km2": 6.347,
+   "launches": [
+    "galilee-ri",
+    "gooseberry-rd-ri",
+    "marina-park-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "potowomut-pond-ri",
+   "name": "Potowomut Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "Potowomut"
+   ],
+   "bbox": [
+    -71.4582,
+    41.6301,
+    -71.45339,
+    41.63631
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.071,
+   "launches": [
+    "potowomut-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "providence-river-ri",
+   "name": "Providence River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Providence"
+   ],
+   "bbox": [
+    -71.40991,
+    41.72244,
+    -71.34545,
+    41.82664
+   ],
+   "wikidata": "Q7252469",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "corliss-landing-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "quonochontaug-breachway-ri",
+   "name": "Quonochontaug Breachway",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Quonochontaug"
+   ],
+   "bbox": [
+    -71.72323,
+    41.33073,
+    -71.71758,
+    41.33663
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.038,
+   "launches": [
+    "quonochontaug-breachway-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rhode-island-sound-ri",
+   "name": "Rhode Island Sound",
+   "kind": "sound",
+   "state": "RI",
+   "towns": [
+    "Narragansett",
+    "Newport"
+   ],
+   "bbox": [
+    -71.57821,
+    41.15328,
+    -70.8,
+    41.50925
+   ],
+   "wikidata": "Q2148190",
+   "charted": true,
+   "area_km2": 1569.996,
+   "launches": [
+    "kings-beach-ri",
+    "monahan-s-dock-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "roaring-brook-ri",
+   "name": "Roaring Brook",
+   "kind": "stream",
+   "state": "RI",
+   "towns": [
+    "Richmond"
+   ],
+   "bbox": [
+    -71.70622,
+    41.54937,
+    -71.6643,
+    41.59648
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "roaring-brook-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sachem-pond-ri",
+   "name": "Sachem Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "New Shoreham"
+   ],
+   "bbox": [
+    -71.57357,
+    41.21904,
+    -71.56562,
+    41.22487
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.344,
+   "launches": [
+    "corn-neck-road-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "http://dem.ri.gov/programs/water/quality/surface-water/cyanobacteria.php",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021.",
+     "date": "2021-11-02",
+     "years": [
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "sakonnet-harbor-ri",
+   "name": "Sakonnet Harbor",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "Little Compton"
+   ],
+   "bbox": [
+    -71.1964,
+    41.46358,
+    -71.19195,
+    41.46851
+   ],
+   "wikidata": "Q49390560",
+   "charted": true,
+   "area_km2": 0.131,
+   "launches": [
+    "sakonnet-point-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sakonnet-river-ri",
+   "name": "Sakonnet River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Newport",
+    "Portsmouth",
+    "Tiverton"
+   ],
+   "bbox": [
+    -71.24779,
+    41.4621,
+    -71.18935,
+    41.65766
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 56.601,
+   "launches": [
+    "sakonnet-bridge-boat-ramp-ri",
+    "seapowet-ri",
+    "stone-bridge-boat-ri",
+    "third-beach-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "seekonk-river-ri",
+   "name": "Seekonk River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "East Providence"
+   ],
+   "bbox": [
+    -71.39748,
+    41.81034,
+    -71.37374,
+    41.85743
+   ],
+   "wikidata": "Q7445810",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bold-point-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shippee-saw-mill-pond-ri",
+   "name": "Shippee Saw Mill Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "North Foster"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "shippee-saw-mill-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "silver-spring-lake-ri",
+   "name": "Silver Spring Lake",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "North Kingstown"
+   ],
+   "bbox": [
+    -71.47479,
+    41.53535,
+    -71.46928,
+    41.54096
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.069,
+   "launches": [
+    "silver-spring-lake-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "simmons-pond-ri",
+   "name": "Simmons Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Little Compton"
+   ],
+   "bbox": [
+    -71.15066,
+    41.53647,
+    -71.14647,
+    41.54308
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.141,
+   "launches": [
+    "cold-brook-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "smith-and-sayles-reservoir-ri",
+   "name": "Smith and Sayles Reservoir",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Glocester"
+   ],
+   "bbox": [
+    -71.68878,
+    41.88424,
+    -71.6733,
+    41.903
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.698,
+   "launches": [
+    "smith-sayles-reservoir-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/d5780051f06f4c1b906bb692ccd7309a",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024 and 2025.",
+     "date": "2025-10-22",
+     "years": [
+      "2024",
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "spring-lake-ri",
+   "name": "Spring Lake",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Burrillville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "spring-lake-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stafford-pond-ri",
+   "name": "Stafford Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "Tiverton"
+   ],
+   "bbox": [
+    -71.1649,
+    41.62709,
+    -71.14796,
+    41.65496
+   ],
+   "wikidata": "Q49311492",
+   "charted": false,
+   "area_km2": 1.976,
+   "launches": [
+    "stafford-pond-boat-launch-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020 and 2022.",
+     "date": "2022-10-18",
+     "years": [
+      "2020",
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "stillhouse-cove-ri",
+   "name": "Stillhouse Cove",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "Pawtuxet"
+   ],
+   "bbox": [
+    -71.38971,
+    41.76763,
+    -71.38367,
+    41.77198
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.186,
+   "launches": [
+    "stillhouse-cove-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stillwater-reservoir-ri",
+   "name": "Stillwater Reservoir",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Smithfield"
+   ],
+   "bbox": [
+    -71.55472,
+    41.89851,
+    -71.54001,
+    41.91861
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.907,
+   "launches": [
+    "stump-pond-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tarbox-pond-ri",
+   "name": "Tarbox Pond",
+   "kind": "reservoir",
+   "state": "RI",
+   "towns": [
+    "Exeter"
+   ],
+   "bbox": [
+    -71.57366,
+    41.63296,
+    -71.56609,
+    41.63702
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.098,
+   "launches": [
+    "tarbox-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tarkiln-pond-ri",
+   "name": "Tarkiln Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "North Smithfield"
+   ],
+   "bbox": [
+    -71.59816,
+    41.96231,
+    -71.59014,
+    41.96517
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.089,
+   "launches": [
+    "tarkiln-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tillinghast-pond-ri",
+   "name": "Tillinghast Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "West Greenwich"
+   ],
+   "bbox": [
+    -71.75899,
+    41.64465,
+    -71.75249,
+    41.65177
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.172,
+   "launches": [
+    "tillinghast-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tucker-pond-ri",
+   "name": "Tucker Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "South Kingstown"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tucker-pond-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upper-slatersville-reservoir-ri",
+   "name": "Upper Slatersville Reservoir",
+   "kind": "reservoir",
+   "state": "RI",
+   "towns": [
+    "Harrisville",
+    "Slatersville"
+   ],
+   "bbox": [
+    -71.67984,
+    41.95331,
+    -71.55702,
+    41.99967
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.407,
+   "launches": [
+    "harrisville-ri",
+    "mill-pond-ri",
+    "slatersville-reservoir-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wakefield-pond-ri",
+   "name": "Wakefield Pond",
+   "kind": "reservoir",
+   "state": "RI",
+   "towns": [
+    "Burrillville"
+   ],
+   "bbox": [
+    -71.79853,
+    41.96017,
+    -71.78638,
+    41.97037
+   ],
+   "wikidata": "Q49703080",
+   "charted": false,
+   "area_km2": 0.35,
+   "launches": [
+    "wakefield-pond-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wallum-lake-ri",
+   "name": "Wallum Lake",
+   "kind": "reservoir",
+   "state": "RI",
+   "towns": [
+    "Burrillville"
+   ],
+   "bbox": [
+    -71.77512,
+    41.99382,
+    -71.76201,
+    42.02161
+   ],
+   "wikidata": "Q7357772",
+   "charted": false,
+   "area_km2": 1.321,
+   "launches": [
+    "wallum-lake-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "warren-river-ri",
+   "name": "Warren River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Warren"
+   ],
+   "bbox": [
+    -71.29737,
+    41.70368,
+    -71.28745,
+    41.73258
+   ],
+   "wikidata": "Q7970451",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "town-dock-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "warwick-cove-ri",
+   "name": "Warwick Cove",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "Warwick"
+   ],
+   "bbox": [
+    -71.39709,
+    41.68287,
+    -71.38118,
+    41.69966
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.613,
+   "launches": [
+    "oakland-beach-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "watchaug-pond-ri",
+   "name": "Watchaug Pond",
+   "kind": "pond",
+   "state": "RI",
+   "towns": [
+    "Charlestown"
+   ],
+   "bbox": [
+    -71.70537,
+    41.37431,
+    -71.67894,
+    41.39326
+   ],
+   "wikidata": "Q7348593",
+   "charted": false,
+   "area_km2": 2.331,
+   "launches": [
+    "barton-c-hurley-landing-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "http://dem.ri.gov/programs/water/quality/surface-water/cyanobacteria.php",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-06-15",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "weaver-cove-ri",
+   "name": "Weaver Cove",
+   "kind": "bay",
+   "state": "RI",
+   "towns": [
+    "Middletown"
+   ],
+   "bbox": [
+    -71.29241,
+    41.5718,
+    -71.28453,
+    41.58411
+   ],
+   "wikidata": "Q49394838",
+   "charted": true,
+   "area_km2": 0.683,
+   "launches": [
+    "weaver-cove-boat-launch-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-passage-ri",
+   "name": "West Passage",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Saunderstown"
+   ],
+   "bbox": [
+    -71.43593,
+    41.44616,
+    -71.37121,
+    41.57664
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 37.056,
+   "launches": [
+    "south-ferry-rd-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "willett-pond-ri",
+   "name": "Willett Pond",
+   "kind": "reservoir",
+   "state": "RI",
+   "towns": [
+    "East Providence"
+   ],
+   "bbox": [
+    -71.35719,
+    41.77554,
+    -71.3545,
+    41.78058
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.029,
+   "launches": [
+    "willet-pond-carry-in-access-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilson-reservoir-ri",
+   "name": "Wilson Reservoir",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "Burrillville"
+   ],
+   "bbox": [
+    -71.73728,
+    41.96568,
+    -71.72206,
+    41.97347
+   ],
+   "wikidata": "Q49703220",
+   "charted": false,
+   "area_km2": 0.472,
+   "launches": [
+    "wilson-reservoir-boat-launch-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "http://dem.ri.gov/programs/water/quality/surface-water/cyanobacteria.php",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025 and 2026.",
+     "date": "2026-07-02",
+     "years": [
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "wood-river-ri",
+   "name": "Wood River",
+   "kind": "river",
+   "state": "RI",
+   "towns": [
+    "Hope Valley",
+    "Richmond",
+    "West Greenwich",
+    "Wyoming"
+   ],
+   "bbox": [
+    -71.81846,
+    41.42828,
+    -71.68725,
+    41.64446
+   ],
+   "wikidata": "Q8032259",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "barberville-ri",
+    "dow-field-ri",
+    "high-banks-ri",
+    "switch-rd-ri",
+    "tefft-ri",
+    "wood-river-rte-165-ri",
+    "wyoming-dam-ri"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "worden-pond-ri",
+   "name": "Worden Pond",
+   "kind": "lake",
+   "state": "RI",
+   "towns": [
+    "South Kingstown"
+   ],
+   "bbox": [
+    -71.59284,
+    41.4285,
+    -71.55779,
+    41.4506
+   ],
+   "wikidata": "Q38250829",
+   "charted": false,
+   "area_km2": 4.452,
+   "launches": [
+    "worden-pond-boat-launch-ri"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "http://dem.ri.gov/programs/water/quality/surface-water/cyanobacteria.php",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021 and 2023 to 2026.",
+     "date": "2026-06-18",
+     "years": [
+      "2021",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,214 @@
+[
+ {
+  "id": "mt-billings",
+  "name": "City of Billings",
+  "state": "MT",
+  "kind": "sso",
+  "npdes_permit": "MT0022586",
+  "receiving_waters": [
+   "Yellowstone River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found (search only).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Billings"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mt-missoula",
+  "name": "City of Missoula",
+  "state": "MT",
+  "kind": "sso",
+  "npdes_permit": "MT0022594",
+  "receiving_waters": [
+   "Clark Fork River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "None found (search only).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Missoula"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mt-great-falls",
+  "name": "City of Great Falls",
+  "state": "MT",
+  "kind": "sso",
+  "npdes_permit": "MT0021920",
+  "receiving_waters": [
+   "Missouri River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Great Falls"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mt-bozeman",
+  "name": "City of Bozeman",
+  "state": "MT",
+  "kind": "sso",
+  "npdes_permit": "MT0022608",
+  "receiving_waters": [
+   "East Gallatin River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bozeman"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mt-helena",
+  "name": "City of Helena",
+  "state": "MT",
+  "kind": "sso",
+  "npdes_permit": "MT0022641",
+  "receiving_waters": [
+   "Prickly Pear Creek",
+   "Lake Helena"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Helena"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mt-kalispell",
+  "name": "City of Kalispell",
+  "state": "MT",
+  "kind": "sso",
+  "npdes_permit": "MT0021938",
+  "receiving_waters": [
+   "Ashley Creek",
+   "Flathead River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kalispell"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mt-whitefish",
+  "name": "City of Whitefish",
+  "state": "MT",
+  "kind": "sso",
+  "npdes_permit": "MT0020184",
+  "receiving_waters": [
+   "Whitefish River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Whitefish"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mt-livingston",
+  "name": "City of Livingston",
+  "state": "MT",
+  "kind": "sso",
+  "npdes_permit": "MT0020435",
+  "receiving_waters": [
+   "Yellowstone River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Livingston"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mt-havre",
+  "name": "City of Havre",
+  "state": "MT",
+  "kind": "sso",
+  "npdes_permit": "MT0022535",
+  "receiving_waters": [
+   "Milk River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Havre"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mt-butte-silver-bow",
+  "name": "Butte-Silver Bow City and County",
+  "state": "MT",
+  "kind": "sso",
+  "npdes_permit": "MT0022012",
+  "receiving_waters": [
+   "Silver Bow Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Butte"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ }
+]

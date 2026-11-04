@@ -1,0 +1,30 @@
+id: "me-dep-cyano-bloom-reports"
+name: "Maine DEP cyanobacteria bloom reports (Survey123 results layer) and Maine Cyanobacteria Dashboard"
+url: "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/arcgis/rest/services/survey123_20bc958a745244c2a4c2bbf74b3c00cc_results/FeatureServer/0"
+homepage: "https://maine.maps.arcgis.com/apps/dashboards/311801d1c2534e11a44d6446854165e3"
+kind: "arcgis"
+level: "state"
+# Notes (research/me, status candidate, verified fetched, checked 2026-11-01): Used by
+#   openboatlaunch; relevant only as HAB context, not sewage.
+# Access detail (research, quoted): 321 reports; data last edited 2026-10-26. Dashboard
+#   https://maine.maps.arcgis.com/apps/dashboards/311801d1c2534e11a44d6446854165e3; report form
+#   https://survey123.arcgis.com/share/20bc958a745244c2a4c2bbf74b3c00cc.
+# Can fill: started_at (date_observed), waterbody, source_status (Prelim/Confirmed), coordinates,
+#   source_record_id
+# Cannot fill: ended_at; advice_text
+# Research notes: PRIVACY: the public layer exposes observer_name and email; drop those fields. DEP
+#   thresholds: nuisance bloom at Secchi 2 m or less, 'HAB when water clarity is less than 1 meter'.
+#   DEP issues no lake advisories; it asks the public to report blooms (BloomReport.DEP@maine.gov,
+#   207-287-7688).
+cadence: "As reports arrive; DEP staff set report_status."
+license: "Item licenseInfo empty (per sibling project)."
+attribution: "Maine DEP Lakes Program"
+enabled: true
+role: "advisories"
+event_types: ["hab"]
+states: ["ME"]
+access: ["arcgis", "map_only"]
+access_detail: "321 reports; data last edited 2026-10-26. Dashboard https://maine.maps.arcgis.com/apps/dashboards/311801d1c2534e11a44d6446854165e3; report form https://survey123.arcgis.com/share/20bc958a745244c2a4c2bbf74b3c00cc."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

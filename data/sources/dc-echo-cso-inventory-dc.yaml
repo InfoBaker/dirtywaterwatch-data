@@ -1,0 +1,26 @@
+id: "dc-echo-cso-inventory-dc"
+name: "EPA ECHO national CSO inventory, DC rows (ALL_CSO_DOWNLOADS.csv)"
+url: "https://echo.epa.gov/tools/data-downloads/cso-inventory-download-summary"
+homepage: "https://echo.epa.gov/tools/data-downloads/cso-inventory-download-summary"
+kind: "csv"
+level: "federal"
+# Notes (research/dc, status used, verified fetched, checked 2026-11-02): Outfall IDs, coordinates,
+#   receiving waters (Rock Creek 29 incl. separated, Anacostia 15, Potomac 11, plus 019 mis-tagged
+#   'Potomac River').
+# Access detail (research, quoted): Federal agent's copy; 56 DC rows, all DC0021199; extracted to
+#   raw/echo-cso-inventory-dc.json.
+# Research notes: All 56 points fall inside the DC boundary polygon. Includes separated outfalls
+#   (006, 031, 037, 053, 057, 058, 059) and the tunnel overflows 003A (Blue Plains Tunnel at JBAB)
+#   and 019A.
+cadence: null
+license: "none stated"
+attribution: "US EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["DC"]
+access: ["csv"]
+access_detail: "Federal agent's copy; 56 DC rows, all DC0021199; extracted to raw/echo-cso-inventory-dc.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

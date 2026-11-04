@@ -1,0 +1,246 @@
+[
+  {
+    "id": "al-prichard-wwsb",
+    "name": "Water Works and Sewer Board of the City of Prichard",
+    "state": "AL",
+    "kind": "sso",
+    "npdes_permit": "AL0055204",
+    "receiving_waters": [
+      "Eight Mile Creek",
+      "Chickasaw Creek",
+      "Threemile Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "ADEM SSO layer only found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Prichard"
+    ],
+    "notes": "145 SSO rows since 2025 in the ADEM history layer, the most of any permittee.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "al-jefferson-county",
+    "name": "Jefferson County Commission Environmental Services (Village Creek, Valley Creek, Cahaba, Five Mile Creek, Turkey Creek and other WWTPs)",
+    "state": "AL",
+    "kind": "sso",
+    "npdes_permit": "AL0023655; AL0026913; AL0023647",
+    "receiving_waters": [
+      "Village Creek",
+      "Valley Creek",
+      "Cahaba River",
+      "Five Mile Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Everbridge opt-in alerts (since 2021); GovDelivery advisories; ADEM layer",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Birmingham",
+      "Jefferson County"
+    ],
+    "notes": "Released from the 1996 EPA consent decree in October 2024. Over 160 SSO rows since 2025 across three permits.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "al-mawss",
+    "name": "Mobile Area Water and Sewer System",
+    "state": "AL",
+    "kind": "sso",
+    "npdes_permit": "AL0023086",
+    "receiving_waters": [
+      "Dog River",
+      "Halls Mill Creek",
+      "Eslava Creek",
+      "Threemile Creek",
+      "Mobile River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "News posts on mawss.com per overflow; ADEM layer",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Mobile"
+    ],
+    "notes": "59 SSO rows since 2025.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "al-baldwin-county-sewer-service",
+    "name": "Baldwin County Sewer Service, LLC",
+    "state": "AL",
+    "kind": "sso",
+    "npdes_permit": "AL0042234; ALSI9902013",
+    "receiving_waters": [
+      "Mobile Bay tributaries"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "ADEM layer only found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Spanish Fort",
+      "Baldwin County"
+    ],
+    "notes": "Private utility; about 90 rows since 2025.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "al-littleville",
+    "name": "Town of Littleville",
+    "state": "AL",
+    "kind": "sso",
+    "npdes_permit": "AL0056278",
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Littleville"
+    ],
+    "notes": "56 rows since 2025.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "al-phenix-city",
+    "name": "Phenix City Department of Public Utilities",
+    "state": "AL",
+    "kind": "sso",
+    "npdes_permit": "AL0022209",
+    "receiving_waters": [
+      "Chattahoochee River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Phenix City"
+    ],
+    "notes": "49 rows since 2025; shares the Chattahoochee with Columbus, Georgia.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "al-tuscaloosa",
+    "name": "City of Tuscaloosa",
+    "state": "AL",
+    "kind": "sso",
+    "npdes_permit": "AL0022713",
+    "receiving_waters": [
+      "Black Warrior River",
+      "Cypress Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Tuscaloosa"
+    ],
+    "notes": "42 rows since 2025.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "al-decatur-utilities",
+    "name": "Decatur Utilities",
+    "state": "AL",
+    "kind": "sso",
+    "npdes_permit": "AL0048593",
+    "receiving_waters": [
+      "Tennessee River (Wheeler Lake)"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Decatur"
+    ],
+    "notes": "38 rows since 2025.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "al-daphne-utilities",
+    "name": "Utilities Board of the City of Daphne",
+    "state": "AL",
+    "kind": "sso",
+    "npdes_permit": "AL0027561",
+    "receiving_waters": [
+      "Mobile Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Sewer Overflow Response Plan names media and ADEM notice; no web list found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Daphne"
+    ],
+    "notes": "32 rows since 2025.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "al-huntsville",
+    "name": "City of Huntsville Water Pollution Control",
+    "state": "AL",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Indian Creek",
+      "Huntsville Spring Branch",
+      "Tennessee River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Huntsville"
+    ],
+    "notes": "Largest city; permits not separated here.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "al-montgomery-wwsb",
+    "name": "Montgomery Water Works and Sanitary Sewer Board",
+    "state": "AL",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Alabama River",
+      "Catoma Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Montgomery"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  }
+]

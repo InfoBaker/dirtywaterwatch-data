@@ -1,0 +1,230 @@
+[
+ {
+  "id": "wi-superior-sewage-disposal-system",
+  "name": "SUPERIOR SEWAGE DISPOSAL SYSTEM",
+  "state": "WI",
+  "kind": "cso",
+  "npdes_permit": "WI0025593",
+  "receiving_waters": [
+   "Nemadji River",
+   "St. Louis Bay of Lake Superior",
+   "Superior Bay"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "none found (search); news coverage only",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Superior"
+  ],
+  "notes": "Great Lakes Basin (St. Louis Bay, Lake Superior): 40 CFR 122.38 applies.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wi-milwaukee-metro-sew-dist-combi",
+  "name": "Milwaukee Metropolitan Sewerage District (combined sewer system, Milwaukee and Shorewood)",
+  "state": "WI",
+  "kind": "cso",
+  "npdes_permit": "WI0036820",
+  "receiving_waters": [
+   "Burnham's Canal",
+   "Kinnickinnic River",
+   "Lake Michigan",
+   "Lincoln Creek",
+   "Menomonee River",
+   "Milwaukee River",
+   "South Menomonee Canal"
+  ],
+  "water_slugs": [],
+  "outfall_count": 114,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 114 open, 0 closed; MMSD CSO Public Notification Plan (2018) tables 1.2-1.8, 115 outfalls",
+  "notification_channel": "Storm Update news posts with volume and the 5-day letter (about 5 days after); live year-to-date \"Gallons Overflowed\" counter on the rain/facility page; CSO impacted-waters ArcGIS map; Water Drop Alert SMS (pre-storm only). No same-day public overflow notice found on the web.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Milwaukee",
+   "Shorewood"
+  ],
+  "notes": "Great Lakes Basin: 40 CFR 122.38 4-hour notice. 2025 overflow total 5,140 million gallons; 2026 to April 2,714 million gallons.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wi-mmsd-sso",
+  "name": "Milwaukee Metropolitan Sewerage District (separate-sewer area SSOs)",
+  "state": "WI",
+  "kind": "sso",
+  "npdes_permit": "WI0036820",
+  "receiving_waters": [
+   "Milwaukee River",
+   "Menomonee River",
+   "Kinnickinnic River",
+   "Root River",
+   "Lake Michigan"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Storm Update posts list SSO volume with CSO volume (e.g. 8/9/25 'Combined Sewer Overflow and Sanitary Sewer Overflow: 5.14 billion gallons').",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "28 member communities"
+  ],
+  "notes": "Permit number for the SSO points inferred to be the same MMSD permit; not checked.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wi-fremont-sso",
+  "name": "Fremont-Orihula-Wolf River Joint Sewerage Commission",
+  "state": "WI",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "https://villageoffremontwi.gov/news-and-notices/23-06-08-fremont-orihula-wolf-river-joint-sewerage-commission-sanitary-sewer-overflow-public-notice",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fremont"
+  ],
+  "notes": "SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wi-hortonville-sso",
+  "name": "Village of Hortonville",
+  "state": "WI",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "https://hortonvillewi.org/news-and-notices/sso-overflow",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hortonville"
+  ],
+  "notes": "SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wi-fox-crossing-sso",
+  "name": "Village of Fox Crossing",
+  "state": "WI",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "https://foxcrossingwi.gov/?p=5247",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fox Crossing"
+  ],
+  "notes": "SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wi-menomonie-sso",
+  "name": "City of Menomonie",
+  "state": "WI",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "https://www.menomonie-wi.gov/DocumentCenter/View/2691/12126-Press-Release-Shorewood-Lift-Station-PDF",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Menomonie"
+  ],
+  "notes": "SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wi-stoughton-sso",
+  "name": "Stoughton Utilities",
+  "state": "WI",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "https://www.stoughtonutilities.com/documents/newsreleases/2019-12-04-notification_of_sani.pdf",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Stoughton"
+  ],
+  "notes": "SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wi-oconomowoc-sso",
+  "name": "Oconomowoc Utilities",
+  "state": "WI",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "https://www.ofmu.org/press-release-regarding-sanitary-sewer-overflow-along-munsert-avenue",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oconomowoc"
+  ],
+  "notes": "SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wi-fennimore-sso",
+  "name": "City of Fennimore",
+  "state": "WI",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "https://fennimore.com/wp-content/uploads/2024/07/SSO-HWY-61-Plant.pdf",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fennimore"
+  ],
+  "notes": "SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wi-greenville-sso",
+  "name": "Town of Greenville",
+  "state": "WI",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "https://townofgreenville.com/news_detail_T6_R74.php",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Greenville"
+  ],
+  "notes": "SSO public notice found on the web (news item or PDF), citing NR 210.21(5).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ }
+]

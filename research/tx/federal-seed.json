@@ -1,0 +1,4112 @@
+{
+ "state": "TX",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 1809,
+ "plant_permits_major": 586,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "TX0005380",
+   "permittee": "GULF COAST AUTHORITY",
+   "city": "PASADENA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020109",
+   "permittee": "BAYTOWN, CITY OF",
+   "city": "BAYTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020117",
+   "permittee": "BAYTOWN, CITY OF",
+   "city": "BAYTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020354",
+   "permittee": "UPPER TRINITY REGIONAL WATER DISTRICT",
+   "city": "LEWISVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020389",
+   "permittee": "ROBSTOWN, CITY OF",
+   "city": "ROBSTOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0020401",
+   "permittee": "INGLESIDE, CITY OF",
+   "city": "INGLESIDE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020443",
+   "permittee": "TAYLOR, CITY OF",
+   "city": "TAYLOR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020460",
+   "permittee": "TRINITY BAY CONSERVATION DISTRICT",
+   "city": "WINNIE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020478",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020591",
+   "permittee": "COMMERCE, CITY OF",
+   "city": "COMMERCE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020613",
+   "permittee": "BELLAIRE, CITY OF",
+   "city": "BELLAIRE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020711",
+   "permittee": "FLOWER MOUND, TOWN OF",
+   "city": "FLOWER MOUND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020788",
+   "permittee": "HARRIS COUNTY WCID 133",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0020800",
+   "permittee": "GREENWOOD UTILITY DISTRICT",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0021237",
+   "permittee": "FALLBROOK UTILITY DISTRICT",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0021253",
+   "permittee": "SUNBELT FWSD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0021288",
+   "permittee": "WHARTON, CITY OF",
+   "city": "WHARTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0021369",
+   "permittee": "BACLIFF MUD",
+   "city": "BACLIFF",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0021393",
+   "permittee": "MINEOLA, CITY OF",
+   "city": "MINEOLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0021458",
+   "permittee": "FORT BEND COUNTY WCID 2",
+   "city": "STAFFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0021474",
+   "permittee": "EL CAMPO, CITY OF",
+   "city": "EL CAMPO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0021512",
+   "permittee": "WEST MEMORIAL MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0021547",
+   "permittee": "MERCEDES, CITY OF",
+   "city": "MERCEDES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0021725",
+   "permittee": "MARLIN, CITY OF",
+   "city": "FALLS COUNTY",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0021784",
+   "permittee": "MARSHALL, CITY OF",
+   "city": "MARSHALL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0021814",
+   "permittee": "BONHAM, CITY OF",
+   "city": "BONHAM",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0022080",
+   "permittee": "MONTGOMERY CO MUD 8",
+   "city": "CONROE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022152",
+   "permittee": "ROCKPORT, CITY OF",
+   "city": "ROCKPORT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0022217",
+   "permittee": "LONGVIEW, CITY OF",
+   "city": "LONGVIEW",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0022241",
+   "permittee": "NORTH TEXAS MWD",
+   "city": "ROCKWALL COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022250",
+   "permittee": "CITY OF SEABROOK",
+   "city": "SEABROOK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0022268",
+   "permittee": "CONROE, CITY OF",
+   "city": "CONROE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022357",
+   "permittee": "GAINESVILLE, CITY OF",
+   "city": "GAINESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022365",
+   "permittee": "SEGUIN, CITY OF",
+   "city": "SEGUIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022373",
+   "permittee": "HUNTSVILLE, CITY OF",
+   "city": "HUNTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022381",
+   "permittee": "TOMBALL, CITY OF",
+   "city": "TOMBALL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022403",
+   "permittee": "SANGER, CITY OF",
+   "city": "SANGER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022438",
+   "permittee": "GLADEWATER, CITY OF",
+   "city": "GLADEWATER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0022454",
+   "permittee": "LAMPASAS, CITY OF",
+   "city": "LAMPASAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022527",
+   "permittee": "TERRELL, CITY OF",
+   "city": "TERRELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022543",
+   "permittee": "CLEAR LAKE CITY WATER AUTHORITY",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022594",
+   "permittee": "PLEASANTON, CITY OF",
+   "city": "PLEASANTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022616",
+   "permittee": "BRYAN, CITY OF",
+   "city": "BRYAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022667",
+   "permittee": "GEORGETOWN, CITY OF",
+   "city": "GEORGETOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022756",
+   "permittee": "HARRIS COUNTY WCID 21",
+   "city": "CHANNELVIEW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022799",
+   "permittee": "LA PORTE, CITY OF",
+   "city": "LA PORTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022802",
+   "permittee": "TRINITY RIVER AUTHORITY OF TEXAS",
+   "city": "DALLAS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0022811",
+   "permittee": "TRINITY RIVER AUTHORITY OF TEXAS",
+   "city": "CITY OF FERRIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022853",
+   "permittee": "HARRIS COUNTY FWSD NO. 61",
+   "city": "CYPRESS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022926",
+   "permittee": "PORT NECHES, CITY OF",
+   "city": "GROVES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0022985",
+   "permittee": "ALPINE, CITY OF",
+   "city": "ALPINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023001",
+   "permittee": "VERNON, CITY OF",
+   "city": "VERNON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023094",
+   "permittee": "UVALDE, CITY OF",
+   "city": "UVALDE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0023108",
+   "permittee": "HILLSBORO, CITY OF",
+   "city": "HILLSBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023116",
+   "permittee": "AZLE, CITY OF",
+   "city": "AZLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023230",
+   "permittee": "NEWPORT MUD",
+   "city": "CROSBY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023272",
+   "permittee": "CELINA, CITY OF",
+   "city": "CELINA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023311",
+   "permittee": "HARRIS COUNTY WCID 1",
+   "city": "HIGHLANDS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023418",
+   "permittee": "KINGSVILLE, CITY OF",
+   "city": "KINGSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023621",
+   "permittee": "LAGUNA MADRE WATER DISTRICT",
+   "city": "PORT ISABEL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023639",
+   "permittee": "LAGUNA MADRE WATER DISTRICT",
+   "city": "SOUTH PADRE ISLAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0023647",
+   "permittee": "LAGUNA MADRE WATER DISTRICT",
+   "city": "PORT ISABEL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0023655",
+   "permittee": "GALVESTON COUNTY WATER CONTROL AND IMPROVEMENT DISTRICT 1",
+   "city": "DICKINSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023671",
+   "permittee": "GALVESTON COUNTY WATER AND IMPROVEMENT DISTRICT  8",
+   "city": "GALVESTON COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023736",
+   "permittee": "SILSBEE, CITY OF",
+   "city": "SILSBEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023779",
+   "permittee": "MINERAL WELLS, CITY OF",
+   "city": "PARKER COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023795",
+   "permittee": "ORANGE COUNTY WCID 1",
+   "city": "VIDOR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023833",
+   "permittee": "NASSAU BAY, CITY OF",
+   "city": "NASSAU BAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023841",
+   "permittee": "WEST UNIVERSITY PLACE, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0023868",
+   "permittee": "LOCKHART, CITY OF AND GUADALUPE-BLANCO RIVER AUTHORITY",
+   "city": "LOCKHART",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023914",
+   "permittee": "MCGREGOR, CITY OF",
+   "city": "MCGREGOR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023931",
+   "permittee": "NORTH TEXAS MWD",
+   "city": "RICHARDSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023949",
+   "permittee": "TEXAS CITY, CITY OF",
+   "city": "TEXAS CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0023973",
+   "permittee": "ABILENE, CITY OF",
+   "city": "ABILENE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024082",
+   "permittee": "SAN ANTONIO RIVER AUTHORITY",
+   "city": "SAN ANTONIO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024112",
+   "permittee": "EDINBURG, CITY OF",
+   "city": "EDINBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0024163",
+   "permittee": "LIVINGSTON, CITY OF",
+   "city": "LIVINGSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024228",
+   "permittee": "STEPHENVILLE, CITY OF",
+   "city": "STEPHENVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024244",
+   "permittee": "CUERO, CITY OF",
+   "city": "CUERO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024252",
+   "permittee": "EDNA, CITY OF",
+   "city": "EDNA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024287",
+   "permittee": "NUECES COUNTY WCID  4",
+   "city": "PORT ARANSAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024309",
+   "permittee": "LUFKIN, CITY OF",
+   "city": "LUFKIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0024325",
+   "permittee": "SHERMAN, CITY OF",
+   "city": "SHERMAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0024368",
+   "permittee": "JASPER, CITY OF",
+   "city": "JASPER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024465",
+   "permittee": "BOERNE, CITY OF",
+   "city": "BOERNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024473",
+   "permittee": "HARKER HEIGHTS, CITY OF",
+   "city": "HARKER HEIGHTS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024490",
+   "permittee": "ROSENBERG, CITY OF",
+   "city": "ROSENBERG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024546",
+   "permittee": "RAYMONDVILLE, CITY OF",
+   "city": "RAYMONDVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024554",
+   "permittee": "ALVIN, CITY OF",
+   "city": "ALVIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024589",
+   "permittee": "WEBSTER, CITY OF",
+   "city": "WEBSTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024597",
+   "permittee": "BELL COUNTY WATER CONTROL & IMPROVEMENT DISTRICT NO 1",
+   "city": "KILLEEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024635",
+   "permittee": "GRAHAM, CITY OF",
+   "city": "GRAHAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024660",
+   "permittee": "DONNA, CITY OF",
+   "city": "DONNA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0024678",
+   "permittee": "GARLAND, CITY OF",
+   "city": "GARLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024686",
+   "permittee": "GARLAND, CITY OF",
+   "city": "GARLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024759",
+   "permittee": "SOUTHERN MONTGOMERY COUNTY MUD",
+   "city": "MONTGOMERY COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024872",
+   "permittee": "DIBOLL, CITY OF",
+   "city": "DIBOLL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024911",
+   "permittee": "DECATUR, CITY OF",
+   "city": "DECATUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0024953",
+   "permittee": "GATESVILLE, CITY OF",
+   "city": "GATESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025011",
+   "permittee": "TRINITY RIVER AUTHORITY OF TEXAS",
+   "city": "MIDLOTHIAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025054",
+   "permittee": "SEALY, CITY OF",
+   "city": "SEALY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025062",
+   "permittee": "HARRIS COUNTY FWSD 51",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025071",
+   "permittee": "BRYAN, CITY OF",
+   "city": "BRYAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025186",
+   "permittee": "VICTORIA, CITY OF",
+   "city": "VICTORIA COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025321",
+   "permittee": "DEER PARK, CITY OF",
+   "city": "DEER PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025364",
+   "permittee": "ATHENS, CITY OF",
+   "city": "ATHENS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025372",
+   "permittee": "ATHENS, CITY OF",
+   "city": "ATHENS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025437",
+   "permittee": "PITTSBURG, CITY OF",
+   "city": "PITTSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025453",
+   "permittee": "PALESTINE, CITY OF",
+   "city": "PALESTINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025461",
+   "permittee": "LAREDO, CITY OF",
+   "city": "LAREDO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025470",
+   "permittee": "BRENHAM, CITY OF",
+   "city": "BRENHAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025500",
+   "permittee": "BRIDGE CITY, CITY OF",
+   "city": "BRIDGE CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0025526",
+   "permittee": "RICHMOND, CITY OF (THE)",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0025569",
+   "permittee": "GILMER, CITY OF",
+   "city": "GILMER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0025577",
+   "permittee": "HUTTO, CITY OF",
+   "city": "HUTTO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0025682",
+   "permittee": "ARANSAS PASS, CITY OF",
+   "city": "ARANSAS PASS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025747",
+   "permittee": "KATY, CITY OF",
+   "city": "KATY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025798",
+   "permittee": "LAKE JACKSON, CITY OF",
+   "city": "LAKE JACKSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025801",
+   "permittee": "AMARILLO, CITY OF",
+   "city": "AMARILLO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025810",
+   "permittee": "AMARILLO, CITY OF",
+   "city": "AMARILLO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025828",
+   "permittee": "WOODVILLE, CITY OF",
+   "city": "WOODVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0025879",
+   "permittee": "HEARNE, CITY OF",
+   "city": "HEARNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0026018",
+   "permittee": "NEW BOSTON, CITY OF",
+   "city": "NEW BOSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0026182",
+   "permittee": "WEST COLUMBIA, CITY OF",
+   "city": "WEST COLUMBIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0026221",
+   "permittee": "SPRING CREEK UTILITY DISTRICT",
+   "city": "SPRING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0026395",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0026433",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0026476",
+   "permittee": "NEDERLAND, CITY OF",
+   "city": "NEDERLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0026506",
+   "permittee": "WACO, CITY OF",
+   "city": "WACO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0026531",
+   "permittee": "WHITE OAK, CITY OF",
+   "city": "WHITE OAK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0026557",
+   "permittee": "KILGORE, CITY OF",
+   "city": "KILGORE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0026751",
+   "permittee": "EL PASO WATER UTILITIES PUBLIC SERVICE BOARD",
+   "city": "EL PASO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0026956",
+   "permittee": "BURKBURNETT, CITY OF",
+   "city": "BURKBURNETT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0027120",
+   "permittee": "ALEDO, CITY OF",
+   "city": "ALEDO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0027197",
+   "permittee": "ROCKDALE, CITY OF",
+   "city": "ROCKDALE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0027201",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0027243",
+   "permittee": "GONZALES, CITY OF",
+   "city": "GONZALES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0027324",
+   "permittee": "EMERALD FOREST UTILITY DISTRICT",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0027537",
+   "permittee": "WAXAHACHIE, CITY OF",
+   "city": "WAXAHACHIE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0027618",
+   "permittee": "PAMPA, CITY OF",
+   "city": "PAMPA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0027774",
+   "permittee": "KENEDY, CITY OF",
+   "city": "KENEDY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0027791",
+   "permittee": "GALVESTON, CITY OF",
+   "city": "GALVESTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0027910",
+   "permittee": "PARIS, CITY OF",
+   "city": "PARIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0031577",
+   "permittee": "TEXAS DEPARTMENT OF CRIMINAL JUSTICE",
+   "city": "ANDERSON COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0032018",
+   "permittee": "CITY OF GRAPEVINE",
+   "city": "GRAPEVINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0032344",
+   "permittee": "ATLANTA, CITY OF",
+   "city": "ATLANTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0032361",
+   "permittee": "CARTHAGE, CITY OF",
+   "city": "CARTHAGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0032484",
+   "permittee": "EAST TEXAS MUD OF SMITH COUNTY",
+   "city": "TYLER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0032671",
+   "permittee": "BASTROP, CITY OF",
+   "city": "BASTROP",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0032719",
+   "permittee": "PEARSALL, CITY OF",
+   "city": "PEARSALL",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0032735",
+   "permittee": "PEARLAND, CITY OF",
+   "city": "PEARLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0032743",
+   "permittee": "PEARLAND, CITY OF",
+   "city": "PEARLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0033243",
+   "permittee": "HARRIS COUNTY WCID NO.109",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0033332",
+   "permittee": "FREEPORT, CITY OF",
+   "city": "FREEPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0034002",
+   "permittee": "ALICE, CITY OF",
+   "city": "ALICE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0034207",
+   "permittee": "AUSTIN,CITY OF",
+   "city": "AUSTIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0034312",
+   "permittee": "BRADY, CITY OF",
+   "city": "BRADY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0034401",
+   "permittee": "HUMBLE, CITY OF",
+   "city": "HUMBLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0034428",
+   "permittee": "HARRIS COUNTY WCID 84",
+   "city": "CHANNELVIEW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0034436",
+   "permittee": "CLUTE, CITY OF",
+   "city": "RICHWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0034461",
+   "permittee": "BAY CITY, CITY OF",
+   "city": "BAY CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0034886",
+   "permittee": "HOUSTON CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0034916",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0034924",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0035009",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0035017",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0035106",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0035220",
+   "permittee": "QUAIL VALLEY UD",
+   "city": "MISSOURI CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0046621",
+   "permittee": "JACKRABBIT ROAD PUBLIC UTILITY DISTRICT",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0046639",
+   "permittee": "BAMMEL UTILITY DISTRICT",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0046663",
+   "permittee": "MEADOWHILL REGIONAL MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0046680",
+   "permittee": "TIMBER LANE UD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0046710",
+   "permittee": "HARRIS COUNTY WCID 116",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0046728",
+   "permittee": "TRESCHWIG JOINT POWERS BOARD",
+   "city": "HARRIS COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0046761",
+   "permittee": "PONDEROSA JOINT POWERS AGENCY",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0046817",
+   "permittee": "KLEINWOOD JOINT POWERS BOARD",
+   "city": "HARRIS COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0046833",
+   "permittee": "LAKE FOREST PLANT ADVISORY COUNCIL",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0046841",
+   "permittee": "CHARTERWOOD MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0046981",
+   "permittee": "AUSTIN, CITY OF",
+   "city": "AUSTIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0046990",
+   "permittee": "BEAUMONT, CITY OF",
+   "city": "BEAUMONT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047007",
+   "permittee": "BEEVILLE, CITY OF",
+   "city": "BEEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047023",
+   "permittee": "BIG SPRING, CITY OF",
+   "city": "BIG SPRING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047031",
+   "permittee": "BORGER, CITY OF",
+   "city": "BORGER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047040",
+   "permittee": "BROWNWOOD, CITY OF",
+   "city": "BROWNWOOD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047058",
+   "permittee": "CORPUS CHRISTI, CITY OF",
+   "city": "CORPUS CHRISTI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047066",
+   "permittee": "CORPUS CHRISTI, CITY OF",
+   "city": "CORPUS CHRISTI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047074",
+   "permittee": "CORPUS CHRISTI, CITY OF",
+   "city": "CORPUS CHRISTI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047082",
+   "permittee": "CORPUS CHRISTI, CITY OF",
+   "city": "CORPUS CHRISTI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047104",
+   "permittee": "CORPUS CHRISTI, CITY OF",
+   "city": "CORPUS CHRISTI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047121",
+   "permittee": "CORPUS CHRISTI, CITY OF",
+   "city": "CORPUS CHRISTI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047155",
+   "permittee": "CLEBURNE, CITY OF",
+   "city": "CLEBURNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047163",
+   "permittee": "COLLEGE STATION, CITY OF",
+   "city": "COLLEGE STATION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047180",
+   "permittee": "DENTON, CITY OF",
+   "city": "DENTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047198",
+   "permittee": "DEL RIO, CITY OF",
+   "city": "DEL RIO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047210",
+   "permittee": "DENISON, CITY OF",
+   "city": "DENISON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047228",
+   "permittee": "DENISON, CITY OF",
+   "city": "DENISON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047261",
+   "permittee": "ENNIS, CITY OF",
+   "city": "ENNIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047295",
+   "permittee": "FORT WORTH, CITY OF",
+   "city": "ARLINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047309",
+   "permittee": "GALVESTON, CITY OF",
+   "city": "GALVESTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047333",
+   "permittee": "KERRVILLE, CITY OF",
+   "city": "KERRVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0047414",
+   "permittee": "MINERAL WELLS, CITY OF",
+   "city": "MINERAL WELLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047431",
+   "permittee": "NORTH TEXAS MWD",
+   "city": "MESQUITE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047449",
+   "permittee": "MCALLEN, CITY OF",
+   "city": "MCALLEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047457",
+   "permittee": "MEMORIAL VILLAGES WATER AUTHORITY",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047511",
+   "permittee": "PORT ARTHUR, CITY OF",
+   "city": "PORT ARTHUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047562",
+   "permittee": "PORT LAVACA, CITY OF",
+   "city": "PORT LAVACA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047571",
+   "permittee": "PLAINVIEW, CITY OF",
+   "city": "PLAINVIEW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047589",
+   "permittee": "PORT ARTHUR, CITY OF",
+   "city": "PORT ARTHUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047651",
+   "permittee": "TEMPLE, CITY OF",
+   "city": "TEMPLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047686",
+   "permittee": "WICHITA FALLS, CITY OF",
+   "city": "WICHITA FALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047724",
+   "permittee": "WEATHERFORD, CITY OF",
+   "city": "WEATHERFORD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047830",
+   "permittee": "DALLAS, CITY OF",
+   "city": "DALLAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047848",
+   "permittee": "DALLAS, CITY OF",
+   "city": "DALLAS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047881",
+   "permittee": "PASADENA, CITY OF",
+   "city": "PASADENA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0047899",
+   "permittee": "SNYDER, CITY OF",
+   "city": "SNYDER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047911",
+   "permittee": "NORTH TEXAS MWD",
+   "city": "PLANO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047929",
+   "permittee": "HARLINGEN WATERWORKS SYSTEM, CITY OF",
+   "city": "HARLINGEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047937",
+   "permittee": "HARLINGEN, CITY OF",
+   "city": "HARLINGEN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0047945",
+   "permittee": "SAN MARCOS, CITY OF",
+   "city": "SAN MARCOS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0047988",
+   "permittee": "TYLER, CITY OF",
+   "city": "TYLER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0047996",
+   "permittee": "TYLER, CITY OF",
+   "city": "TYLER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0052591",
+   "permittee": "GULF COAST AUTHORITY",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0052639",
+   "permittee": "SAN ANTONIO WATER SYSTEM",
+   "city": "SAN ANTONIO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0052647",
+   "permittee": "SAN ANTONIO WATER SYSTEM",
+   "city": "SAN ANTONIO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0052779",
+   "permittee": "HENDERSON CITY OF",
+   "city": "HENDERSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0052787",
+   "permittee": "WESLACO, CITY OF",
+   "city": "WESLACO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0052892",
+   "permittee": "LEWISVILLE, CITY OF",
+   "city": "LEWISVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0052906",
+   "permittee": "HARRIS COUNTY MUD 102",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0052922",
+   "permittee": "IOWA PARK, CITY OF",
+   "city": "IOWA PARK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0052931",
+   "permittee": "LINDALE, CITY OF",
+   "city": "LINDALE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0052990",
+   "permittee": "MEXIA, CITY OF",
+   "city": "MEXIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0053074",
+   "permittee": "SAN ANTONIO RIVER AUTHORITY",
+   "city": "SAN ANTONIO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0053112",
+   "permittee": "THE COLONY, CITY OF",
+   "city": "THE COLONY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0053317",
+   "permittee": "MONT BELVIEU, CITY OF",
+   "city": "MONT BELVIEU",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0053325",
+   "permittee": "REID ROAD MUNICIPAL UTILITY DISTRICT 1",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0053392",
+   "permittee": "CRYSTAL CITY, CITY OF",
+   "city": "CRYSTAL CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0053643",
+   "permittee": "BLUE RIDGE WEST MUD",
+   "city": "FORT BEND COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0053783",
+   "permittee": "TOWN OF LITTLE ELM",
+   "city": "LITTLE ELM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0053830",
+   "permittee": "DEL RIO, CITY OF",
+   "city": "DEL RIO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0053872",
+   "permittee": "MEADOWS PLACE, CITY OF",
+   "city": "FORT BEND COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0053970",
+   "permittee": "JACINTO CITY, CITY OF",
+   "city": "JACINTO CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0054151",
+   "permittee": "CROSBY MUD",
+   "city": "CROSBY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0054186",
+   "permittee": "SAN JACINTO RIVER AUTHORITY",
+   "city": "CONROE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0054399",
+   "permittee": "RUSK, CITY OF",
+   "city": "RUSK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0054658",
+   "permittee": "WINNSBORO CITY OF",
+   "city": "WINNSBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0054810",
+   "permittee": "ORANGE COUNTY WCID NO. 2",
+   "city": "WEST ORANGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0055123",
+   "permittee": "NACOGDOCHES, CITY OF",
+   "city": "NACOGDOCHES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0055166",
+   "permittee": "CNP UTILITY DISTRICT",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0055310",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0055433",
+   "permittee": "PORTLAND, CITY OF",
+   "city": "PORTLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0055484",
+   "permittee": "PUBLIC UTILITIES BOARD OF THE CITY OF BROWNSVILLE TEXAS",
+   "city": "BROWNSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0055611",
+   "permittee": "GREENVILLE, CITY OF",
+   "city": "GREENVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0055689",
+   "permittee": "SAN ANTONIO WATER SYSTEM",
+   "city": "SAN ANTONIO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0055735",
+   "permittee": "TROPHY CLUB MUD 1",
+   "city": "ROANOKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0056316",
+   "permittee": "ANGLETON, CITY OF",
+   "city": "ANGLETON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0056421",
+   "permittee": "PECAN GROVE MUD",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0056481",
+   "permittee": "CHELFORD CITY MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0056537",
+   "permittee": "HARRIS COUNTY MUD 26",
+   "city": "HUMBLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0056588",
+   "permittee": "AUBREY, CITY OF",
+   "city": "AUBREY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0056731",
+   "permittee": "CORSICANA, CITY OF",
+   "city": "CORSICANA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0057029",
+   "permittee": "WHITE OAK BAYOU JOINT POWERS BOARD",
+   "city": "JERSEY VILLAGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0057185",
+   "permittee": "GALENA PARK, CITY OF",
+   "city": "GALENA PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0057207",
+   "permittee": "DALHART, CITY OF",
+   "city": "HARTLEY COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0057304",
+   "permittee": "SOUTH HOUSTON, CITY OF",
+   "city": "SOUTH HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0057347",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0057436",
+   "permittee": "GUADALUPE-BLANCO RIVER AUTHORITY+",
+   "city": "BUDA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0057592",
+   "permittee": "SAN JUAN, CITY OF",
+   "city": "SAN JUAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0057622",
+   "permittee": "ALAMO, CITY OF",
+   "city": "ALAMO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0057801",
+   "permittee": "LAREDO, CITY OF",
+   "city": "LAREDO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0057843",
+   "permittee": "GULF COAST AUTHORITY",
+   "city": "GALVESTON COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0058114",
+   "permittee": "SUGAR LAND, CITY OF",
+   "city": "SUGAR LAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0058378",
+   "permittee": "TEMPLE, CITY OF AND BELTON, CITY OF",
+   "city": "BELL COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0058386",
+   "permittee": "HIDALGO, CITY OF",
+   "city": "HIDALGO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0058408",
+   "permittee": "WILLIAMSBURG REGIONAL SEWAGE AUTHORITY",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0058530",
+   "permittee": "HARRIS COUNTY MUD 1",
+   "city": "HARRIS COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0058548",
+   "permittee": "NORTHAMPTON MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0058955",
+   "permittee": "SULPHUR SPRINGS CITY OF",
+   "city": "SULPHUR SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0058963",
+   "permittee": "HARRIS COUNTY MUD 109",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0062031",
+   "permittee": "HARRIS COUNTY MUD 70",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0062201",
+   "permittee": "HOUSTON, CITY OF (SIMS BAYOU)",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0062219",
+   "permittee": "PHARR, CITY OF",
+   "city": "PHARR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0062243",
+   "permittee": "HITCHCOCK, CITY OF",
+   "city": "HITCHCOCK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0062995",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0063002",
+   "permittee": "HOUSTON CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0063011",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0063029",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0063037",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0063045",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0063053",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0063061",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0063070",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0064734",
+   "permittee": "LANGHAM CREEK UTILITY DISTRICT",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0065013",
+   "permittee": "EL PASO COUNTY WCID NO. 4",
+   "city": "EL PASO COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0065307",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0066125",
+   "permittee": "GALVESTON, CITY OF",
+   "city": "GALVESTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0066583",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0067873",
+   "permittee": "COPPERAS COVE, CITY OF",
+   "city": "COPPERAS COVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0067881",
+   "permittee": "NEW BRAUNFELS UTILITIES",
+   "city": "NEW BRAUNFELS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0068764",
+   "permittee": "RIO GRANDE CITY, CITY OF",
+   "city": "RIO GRANDE CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0069469",
+   "permittee": "MONTGOMERY COUNTY UD NO. 3 AND MONTGOMERY COUNTY UD NO.4",
+   "city": "MONTGOMERY COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0069728",
+   "permittee": "GULF COAST AUTHORITY",
+   "city": "CITY OF FRIENDSWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0069736",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0069841",
+   "permittee": "COPPERAS COVE, CITY OF",
+   "city": "COPPERAS COVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0069850",
+   "permittee": "COPPERAS COVE, CITY OF",
+   "city": "COPPERAS COVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0070017",
+   "permittee": "MISSION, CITY OF",
+   "city": "EDINBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0070211",
+   "permittee": "ZAPATA COUNTY",
+   "city": "ZAPATA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0070831",
+   "permittee": "CROCKETT, CITY OF",
+   "city": "HOUSTON COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0070939",
+   "permittee": "NEW BRAUNFELS UTILITIES",
+   "city": "NEW BRAUNFELS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0070971",
+   "permittee": "HARRIS COUNTY MUD 105",
+   "city": "KATY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0071340",
+   "permittee": "PUBLIC UTILITIES BOARD OF THE CITY OF BROWNSVILLE, TEXAS",
+   "city": "BROWNSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0071382",
+   "permittee": "SUNBELT FRESH WSD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0071528",
+   "permittee": "HARRIS COUNTY MUD 82",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0071625",
+   "permittee": "CASTLEWOOD MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0071790",
+   "permittee": "NAVASOTA, CITY OF",
+   "city": "NAVASOTA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0071889",
+   "permittee": "AUSTIN, CITY OF",
+   "city": "DEL VALLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0071978",
+   "permittee": "SAN LEON MUD",
+   "city": "SAN LEON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0072150",
+   "permittee": "BRIDGESTONE MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0072354",
+   "permittee": "FAULKEY GULLY MUD",
+   "city": "TOMBALL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0072567",
+   "permittee": "NORTH PARK PUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0072702",
+   "permittee": "MAGNOLIA, CITY OF",
+   "city": "MAGNOLIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0072770",
+   "permittee": "WHITEHOUSE, CITY OF",
+   "city": "WHITEHOUSE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0072800",
+   "permittee": "ODESSA, CITY OF",
+   "city": "MIDLAND COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0072834",
+   "permittee": "BAYTOWN, CITY OF",
+   "city": "BAYTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0072893",
+   "permittee": "HARRIS COUNTY MUD 150",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0072974",
+   "permittee": "HUNTSVILLE, CITY OF",
+   "city": "HUNTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0073423",
+   "permittee": "ORANGE, CITY OF",
+   "city": "ORANGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0073946",
+   "permittee": "ELGIN, CITY OF",
+   "city": "ELGIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0074004",
+   "permittee": "MEMORIAL MUD",
+   "city": "HARRIS COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0074021",
+   "permittee": "TRAIL OF THE LAKES MUD",
+   "city": "HUMBLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0074136",
+   "permittee": "HARRIS COUNTY MUD NO 33",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0074233",
+   "permittee": "FORT BEND COUNTY MUD 23",
+   "city": "FRESNO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0074284",
+   "permittee": "LIBERTY, CITY OF",
+   "city": "LIBERTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0074403",
+   "permittee": "HARRIS COUNTY MUD 71",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0074446",
+   "permittee": "HARRIS COUNTY MUD 49",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0074896",
+   "permittee": "HARRIS COUNTY MUD 157",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0075159",
+   "permittee": "NORTHWEST HARRIS COUNTY MUD 10",
+   "city": "CYPRESS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0075167",
+   "permittee": "CITY OF LEANDER+",
+   "city": "ROUND ROCK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0075221",
+   "permittee": "NORTHWEST HARRIS COUNTY MUD NO. 9",
+   "city": "HARRIS COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0075388",
+   "permittee": "TEXAS DEPARTMENT OF CRIMINAL JUSTICE",
+   "city": "ANDERSON COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0075795",
+   "permittee": "NORTHWEST HARRIS COUNTY MUD 15",
+   "city": "TOMBALL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0075884",
+   "permittee": "HARRIS COUNTY MUD 208",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0076481",
+   "permittee": "HARRIS COUNTY WCID 110",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0076660",
+   "permittee": "MAYDE CREEK MUD",
+   "city": "CITY OF HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0076856",
+   "permittee": "HARRIS COUNTY MUD NO 24",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0076953",
+   "permittee": "CENTER, CITY OF",
+   "city": "CENTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0077178",
+   "permittee": "FORT BEND COUNTY MUD 25",
+   "city": "SUGAR LAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0077232",
+   "permittee": "CIBOLO CREEK MUNICIPAL AUTHORITY",
+   "city": "BEXAR COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0077801",
+   "permittee": "SAN ANTONIO WATER SYSTEM",
+   "city": "SAN ANTONIO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0078263",
+   "permittee": "RAYFORD ROAD MUNICIPAL UTILITY DISTRICT",
+   "city": "OAK RIDGE NORTH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0078433",
+   "permittee": "HARRIS COUNTY MUD 368",
+   "city": "TOMBALL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0078441",
+   "permittee": "GALVESTON COUNTY WCID 12",
+   "city": "KEMAH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0078565",
+   "permittee": "NORTH TEXAS MWD",
+   "city": "ROCKWALL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0078751",
+   "permittee": "FORT BEND COUNTY MUD 30",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0078964",
+   "permittee": "RENN ROAD MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0079146",
+   "permittee": "HARRIS COUNTY MUD 170",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0079391",
+   "permittee": "KAUFMAN, CITY OF",
+   "city": "KAUFMAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0079821",
+   "permittee": "NW HARRIS CO MUD NO. 21, 22, 23",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0081337",
+   "permittee": "NORTHWEST HARRIS COUNTY MUD 20",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0082317",
+   "permittee": "WEST HARRIS COUNTY MUD 10",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0083500",
+   "permittee": "HARRIS COUNTY MUD 127",
+   "city": "KATY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0083712",
+   "permittee": "HARRIS COUNTY MUD NO  189",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0084042",
+   "permittee": "PORTER MUD",
+   "city": "PORTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0084425",
+   "permittee": "BEECHNUT MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0084557",
+   "permittee": "WICHITA FALLS, CITY OF",
+   "city": "WICHITA FALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0084638",
+   "permittee": "NEW CANEY MUD",
+   "city": "NEW CANEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0084875",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0085316",
+   "permittee": "LAREDO, CITY OF",
+   "city": "LAREDO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0085413",
+   "permittee": "HARRIS COUNTY MUD 200",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0085448",
+   "permittee": "FORT BEND COUNTY MUD 34",
+   "city": "FORT BEND COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0085588",
+   "permittee": "CHIMNEY HILL MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0085618",
+   "permittee": "LEAGUE CITY, CITY OF",
+   "city": "LEAGUE CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0085740",
+   "permittee": "CEDAR PARK, CITY OF",
+   "city": "CEDAR PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0086045",
+   "permittee": "HORIZON REGIONAL MUD",
+   "city": "EL PASO COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0086118",
+   "permittee": "BRAZORIA COUNTY MUD  3",
+   "city": "PEARLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0087149",
+   "permittee": "EL PASO WATER UTILITIES PUBLIC SERVICE BOARD",
+   "city": "EL PASO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0087271",
+   "permittee": "NORTH MISSION GLEN MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0087751",
+   "permittee": "HONDO, CITY OF",
+   "city": "HONDO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0088153",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0088170",
+   "permittee": "NEW BRAUNFELS UTILITIES",
+   "city": "NEW BRAUNFELS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0088501",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "PORTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0088633",
+   "permittee": "NORTH TEXAS MWD",
+   "city": "LUCAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0088838",
+   "permittee": "HARRIS COUNTY MUD 196",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0089184",
+   "permittee": "HARRIS COUNTY MUD 221",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0089346",
+   "permittee": "NOTTINGHAM COUNTRY MUD",
+   "city": "KATY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0091219",
+   "permittee": "ALICE, CITY OF",
+   "city": "ALICE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0091243",
+   "permittee": "LOS FRESNOS, CITY OF",
+   "city": "LOS FRESNOS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0091715",
+   "permittee": "SAN JACINTO RIVER AUTHORITY",
+   "city": "WOODLAND LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0091804",
+   "permittee": "HARRIS COUNTY FWSD 61",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0091910",
+   "permittee": "HENDERSON, CITY OF (NORTHSIDE)",
+   "city": "HENDERSON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0092151",
+   "permittee": "LEANDER, CITY OF",
+   "city": "LEANDER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0092789",
+   "permittee": "TEXAS DEPARTMENT OF CRIMINAL JUSTICE",
+   "city": "HUNTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0092801",
+   "permittee": "LUMBERTON MUD",
+   "city": "LUMBERTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0092991",
+   "permittee": "HARRIS COUNTY MUNICIPAL UTILITY DISTRICT 285",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0093068",
+   "permittee": "MISSOURI CITY, CITY OF",
+   "city": "FORT BEND COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0093106",
+   "permittee": "MCALLEN, CITY OF",
+   "city": "MCALLEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0093262",
+   "permittee": "COLLEGE STATION, CITY OF",
+   "city": "COLLEGE STATION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0093564",
+   "permittee": "SHENANDOAH,CITY OF",
+   "city": "SHENANDOAH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0094307",
+   "permittee": "HARRIS COUNTY MUD 167",
+   "city": "KATY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0094927",
+   "permittee": "PFLUGERVILLE, CITY OF",
+   "city": "PFLUGERVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0095184",
+   "permittee": "MANOR, CITY OF",
+   "city": "MANOR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0095583",
+   "permittee": "SAN ANTONIO RIVER AUTHORITY",
+   "city": "CONVERSE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0096172",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0096881",
+   "permittee": "SUGAR LAND, CITY OF",
+   "city": "SUGAR LAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0098191",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0098914",
+   "permittee": "ROSENBERG CITY OF",
+   "city": "ROSENBERG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0098957",
+   "permittee": "CINCO MUD 1",
+   "city": "KATY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0099112",
+   "permittee": "CANTON, CITY OF",
+   "city": "CANTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0099287",
+   "permittee": "TEXARKANA, CITY OF",
+   "city": "TEXARKANA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0099511",
+   "permittee": "FORT BEND COUNTY WCID 2",
+   "city": "STAFFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0100161",
+   "permittee": "HARRIS COUNTY MUD 155",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0100170",
+   "permittee": "DAYTON, CITY OF",
+   "city": "DAYTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0100587",
+   "permittee": "JACKSONVILLE, CITY OF",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0101052",
+   "permittee": "FULSHEAR, CITY OF",
+   "city": "FULSHEAR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0101281",
+   "permittee": "GEORGETOWN, CITY OF",
+   "city": "GEORGETOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0101371",
+   "permittee": "REMINGTON MUD 1",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0101605",
+   "permittee": "EL PASO WATER UTILITIES PUBLIC SERVICE BOARD",
+   "city": "EL PASO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0101800",
+   "permittee": "TEXARKANA, CITY OF",
+   "city": "TEXARKANA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0101915",
+   "permittee": "SUGAR LAND, CITY OF",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0101940",
+   "permittee": "LEANDER, CITY OF+",
+   "city": "ROUND ROCK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0102938",
+   "permittee": "BELL COUNTY WATER CONTROL & IMPROVEMENT DISTRICT NO 1",
+   "city": "KILLEEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0103501",
+   "permittee": "NORTH TEXAS MWD",
+   "city": "DENTON COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0103535",
+   "permittee": "SEGUIN, CITY OF",
+   "city": "SEGUIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0103667",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0103721",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HUMBLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0104345",
+   "permittee": "TRINITY RIVER AUTHORITY OF TEXAS",
+   "city": "RED OAK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0104558",
+   "permittee": "GODLEY, CITY OF",
+   "city": "GODLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0104957",
+   "permittee": "TRINITY RIVER AUTHORITY OF TEXAS",
+   "city": "DENTON COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0104965",
+   "permittee": "HARRIS COUNTY MUD NO. 344",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0105058",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0105171",
+   "permittee": "MOUNT PLEASANT, CITY OF",
+   "city": "MOUNT PLEASANT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0105210",
+   "permittee": "GRANBURY, CITY OF",
+   "city": "GRANBURY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0105376",
+   "permittee": "HARRIS COUNTY MUD NO. 358",
+   "city": "CYPRESS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0106071",
+   "permittee": "LUBBOCK, CITY OF",
+   "city": "LUBBOCK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0107492",
+   "permittee": "EAGLE PASS WATER WORKS SYSTEM, CITY OF",
+   "city": "EAGLE PASS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0108146",
+   "permittee": "TEXAS A & M UNIVERSITY",
+   "city": "COLLEGE STATION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0111201",
+   "permittee": "PRAIRIE VIEW A&M UNIVERSITY",
+   "city": "PRAIRIE VIEW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0111325",
+   "permittee": "BOWIE, CITY OF",
+   "city": "BOWIE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0111791",
+   "permittee": "GATESVILLE, CITY OF",
+   "city": "CORYELL COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0111872",
+   "permittee": "SUGAR LAND,CITY OF",
+   "city": "SUGAR LAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0111937",
+   "permittee": "WEST HARRIS COUNTY MUD 11",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0112941",
+   "permittee": "PFLUGERVILLE, CITY OF",
+   "city": "AUSTIN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0113026",
+   "permittee": "GULF COAST AUTHORITY",
+   "city": "ODESSA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0113131",
+   "permittee": "HOUSTON, CITY OF",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0113565",
+   "permittee": "GUADALUPE-BLANCO RIVER AUTHORITY/LOCKHART, CITY OF",
+   "city": "CALDWELL COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0113859",
+   "permittee": "BEEVILLE, CITY OF",
+   "city": "BEEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0114006",
+   "permittee": "GEORGETOWN, CITY OF",
+   "city": "GEORGETOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0114821",
+   "permittee": "LA MARQUE, CITY OF",
+   "city": "LA MARQUE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0114839",
+   "permittee": "MAURICEVILLE MUNICIPAL UTILITY DISTRICT",
+   "city": "MAURICEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0114855",
+   "permittee": "MISSOURI CITY, CITY OF",
+   "city": "MISSOURI CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0115169",
+   "permittee": "TEXAS DEPARTMENT OF CRIMINAL JUSTICE",
+   "city": "BRAZORIA COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0115177",
+   "permittee": "RICHMOND, CITY OF",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0115983",
+   "permittee": "HARRIS COUNTY MUD 383",
+   "city": "HARRIS COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0116009",
+   "permittee": "HARRIS COUNTY MUD NO. 365",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0116386",
+   "permittee": "FORT BEND COUNTY MUD NO.118",
+   "city": "FORT BEND COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0116394",
+   "permittee": "WESLACO, CITY OF",
+   "city": "WESLACO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0116572",
+   "permittee": "HUNTSVILLE, CITY OF",
+   "city": "HUNTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0116581",
+   "permittee": "PEARLAND, CITY OF",
+   "city": "PEARLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0117501",
+   "permittee": "PEARLAND, CITY OF",
+   "city": "PEARLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0117528",
+   "permittee": "PASADENA, CITY OF",
+   "city": "PASADENA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0117544",
+   "permittee": "ROMA,CITY OF",
+   "city": "ROMA-LOS SAENZ",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0117595",
+   "permittee": "TOMBALL, CITY OF",
+   "city": "TOMBALL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0117960",
+   "permittee": "GROVES, CITY OF",
+   "city": "PORT ARTHUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0117978",
+   "permittee": "KINGSVILLE, CITY OF",
+   "city": "KINGSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0118346",
+   "permittee": "SWEETWATER, CITY OF",
+   "city": "SWEETWATER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0118371",
+   "permittee": "HUNTER'S GLEN MUD",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0118397",
+   "permittee": "MANVEL, CITY OF",
+   "city": "MANVEL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0118443",
+   "permittee": "WEBB COUNTY",
+   "city": "WEBB COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0119466",
+   "permittee": "KYLE, CITY OF",
+   "city": "KYLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0122840",
+   "permittee": "WILBARGER CREEK MUD 2",
+   "city": "MANOR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0123561",
+   "permittee": "NORTH TEXAS MUNICIPAL WATER DISTRICT",
+   "city": "WYLIE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0123633",
+   "permittee": "BRAZORIA COUNTY MUD 21",
+   "city": "BRAZORIA COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0123749",
+   "permittee": "GRAND MISSION MUD  1",
+   "city": "KATY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0123781",
+   "permittee": "UPPER TRINITY REGIONAL WATER DISTRICT",
+   "city": "LEWISVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0123901",
+   "permittee": "NORTH TEXAS MUNICIPAL WATER DISTRICT",
+   "city": "DENTON COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0124745",
+   "permittee": "UPPER TRINITY REGIONAL WATER DISTRICT",
+   "city": "LEWISVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0124800",
+   "permittee": "AUSTIN, CITY OF",
+   "city": "MANOR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0124851",
+   "permittee": "CINCO SOUTHWEST MUD 1",
+   "city": "KATY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0124907",
+   "permittee": "HARRIS COUNTY MUD 387",
+   "city": "HARRIS COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0125172",
+   "permittee": "UPPER TRINITY RGEGIONAL WATER DISTRICT",
+   "city": "LEWISVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0125377",
+   "permittee": "BELL COUNTY WATER CONTROL & IMPROVEMENT DISTRICT NO 1",
+   "city": "KILLEEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0125555",
+   "permittee": "FORT BEND COUNTY MUD 142",
+   "city": "FORT BEND COUNTY",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0125598",
+   "permittee": "AGUA SPECIAL UTILITY DISTRICT",
+   "city": "SULLIVAN CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0125971",
+   "permittee": "SAN BENITO,CITY OF",
+   "city": "SAN BENITO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0126004",
+   "permittee": "FORT BEND COUNTY MUD 146",
+   "city": "FORT BEND COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126098",
+   "permittee": "RIVERBEND WATER RESOURCES DISTRICT",
+   "city": "NEW BOSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0126110",
+   "permittee": "NORTH TEXAS MUNICIPAL WATER DISTRICT",
+   "city": "ROCKWALL COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126161",
+   "permittee": "HARRIS COUNTY MUD 418",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126179",
+   "permittee": "ALVARADO, CITY OF",
+   "city": "ALVARADO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126195",
+   "permittee": "LIBERTY HILL, CITY OF",
+   "city": "WILLIAMSON COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126543",
+   "permittee": "BAYTOWN, CITY OF",
+   "city": "BAYTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126624",
+   "permittee": "FORT BEND COUNTY MUD 133",
+   "city": "FORT BEND COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126675",
+   "permittee": "FORT BEND COUNTY MUD 58",
+   "city": "FORT BEND COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126705",
+   "permittee": "BASTROP, CITY OF",
+   "city": "BASTROP",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0126756",
+   "permittee": "HARRIS COUNTY MUD 412",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126764",
+   "permittee": "FORT BEND COUNTY MUD 151",
+   "city": "FORT BEND COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126926",
+   "permittee": "LAREDO, CITY OF",
+   "city": "LAREDO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126951",
+   "permittee": "IOWA COLONY, CITY OF",
+   "city": "ROSHARON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0126977",
+   "permittee": "GALVESTON, CITY OF",
+   "city": "GALVESTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0127124",
+   "permittee": "HARRIS COUNTY MUD 278",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0127337",
+   "permittee": "LA JOYA, CITY OF",
+   "city": "LA JOYA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0127388",
+   "permittee": "HARRIS COUNTY MUD 165",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0127698",
+   "permittee": "JARRELL, CITY OF",
+   "city": "JARRELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0127752",
+   "permittee": "MONTGOMERY COUNTY MUD 99",
+   "city": "CONROE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0127876",
+   "permittee": "SIENNA REGIONAL MUD",
+   "city": "MISSOURI CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0127981",
+   "permittee": "GENERATION PARK MANAGEMENT DISTRICT",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0128112",
+   "permittee": "LA FERIA, CITY OF",
+   "city": "LA FERIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0128163",
+   "permittee": "BRAZORIA COUNTY MUD 40",
+   "city": "BRAZORIA COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0128171",
+   "permittee": "PFLUGERVILLE, CITY OF",
+   "city": "PFLUGERVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0128210",
+   "permittee": "NORTHWEST HARRIS COUNTY MUD 5",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0128295",
+   "permittee": "MONTGOMERY COUNTY MUD 119",
+   "city": "MONTGOMERY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0128554",
+   "permittee": "BRYAN, CITY OF",
+   "city": "BRYAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0128589",
+   "permittee": "EAGLE PASS WATER WORKS SYSTEM CITY OF",
+   "city": "EAGLE PASS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0129011",
+   "permittee": "LAMESA, CITY OF",
+   "city": "LAMESA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0129119",
+   "permittee": "FULSHEAR CITY OF",
+   "city": "FULSHEAR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0129135",
+   "permittee": "SANGER, CITY OF",
+   "city": "SANGER",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0129194",
+   "permittee": "FORT BEND COUNTY MUD NO 5",
+   "city": "FORT BEND COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0129216",
+   "permittee": "FORT BEND COUNTY MUD 188",
+   "city": "FULSHEAR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0129267",
+   "permittee": "FORT BEND COUNTY MUD 50",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0129437",
+   "permittee": "WACO, CITY OF",
+   "city": "LORENA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0129470",
+   "permittee": "BRAZORIA COUNTY MUD 55",
+   "city": "BRAZORIA COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0129666",
+   "permittee": "HARRIS COUNTY MUD 400",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0129861",
+   "permittee": "SAN ANTONIO RIVER AUTHORITY",
+   "city": "SAN ANTONIO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0129925",
+   "permittee": "RICHMOND, CITY OF",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0129950",
+   "permittee": "AUSTIN, CITY OF",
+   "city": "MANOR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0131831",
+   "permittee": "BOERNE, CITY OF",
+   "city": "BOERNE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0132179",
+   "permittee": "PFLUGERVILLE, CITY OF",
+   "city": "MANOR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0132217",
+   "permittee": "FORT BEND COUNTY MUD 25",
+   "city": "SUGAR LAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0132233",
+   "permittee": "GEORGETOWN, CITY OF",
+   "city": "GEORGETOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0132276",
+   "permittee": "WESTON MUD",
+   "city": "KATY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0132471",
+   "permittee": "HARRIS CID NO 18",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0132560",
+   "permittee": "FREDERICKSBURG, CITY OF",
+   "city": "FREDERICKSBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0132691",
+   "permittee": "ROLLING V RANCH WCID 3 OF WISE COUNTY",
+   "city": "RHOME",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0132802",
+   "permittee": "DONNA, CITY OF",
+   "city": "DONNA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0132829",
+   "permittee": "VICTORIA, CITY OF",
+   "city": "VICTORIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0132926",
+   "permittee": "HUTTO, CITY OF",
+   "city": "HUTTO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0132969",
+   "permittee": "LIBERTY HILL CITY OF",
+   "city": "LIBERTY HILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0133043",
+   "permittee": "LEAGUE CITY, CITY OF",
+   "city": "LEAGUE CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0133248",
+   "permittee": "NEW BRAUNFELS UTILITIES",
+   "city": "NEW BRAUNFELS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0133841",
+   "permittee": "AGUA SUD",
+   "city": "PALMVIEW",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TX0134384",
+   "permittee": "LAREDO, CITY OF",
+   "city": "LAREDO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0134813",
+   "permittee": "PASADENA, CITY OF",
+   "city": "PASADENA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0135054",
+   "permittee": "LUBBOCK, CITY OF",
+   "city": "LUBBOCK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0135143",
+   "permittee": "HARRIS COUNTY MUD 495",
+   "city": "HARRIS COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0135461",
+   "permittee": "HARRIS COUNTY MUD 171",
+   "city": "KATY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0135470",
+   "permittee": "SAN BENITO, CITY OF",
+   "city": "SAN BENITO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0135526",
+   "permittee": "DUMAS, CITY OF",
+   "city": "MOORE COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0135879",
+   "permittee": "FORT BEND COUNTY MUD 142",
+   "city": "FULSHEAR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0136131",
+   "permittee": "CIBOLO CREEK MUNICIPAL AUTHORITY",
+   "city": "CITY OF SCHERTZ",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0136352",
+   "permittee": "GREEN VALLEY SPECIAL UTILITY DISTRICT",
+   "city": "SEGUIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0136409",
+   "permittee": "NEW BOSTON, CITY OF",
+   "city": "NEW BOSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0136611",
+   "permittee": "HARRIS COUNTY MUD 165",
+   "city": "CYPRESS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0137332",
+   "permittee": "JOSEPHINE, CITY OF",
+   "city": "CITY OF JOSEPHINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0137464",
+   "permittee": "MUSTANG SUD",
+   "city": "AUBREY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0137642",
+   "permittee": "WESTON, CITY OF",
+   "city": "WESTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0137693",
+   "permittee": "TOWN OF PECOS CITY",
+   "city": "REEVES COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0137952",
+   "permittee": "SEABROOK, CITY OF",
+   "city": "CITY OF SEABROOK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0138011",
+   "permittee": "MONTGOMERY COUNTY MUNICIPAL UTILITY DISTRICT 157",
+   "city": "CONROE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0138274",
+   "permittee": "CONROE, CITY OF",
+   "city": "CONROE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0138444",
+   "permittee": "FORT WORTH, CITY OF",
+   "city": "CITY OF FORT WORTH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0138517",
+   "permittee": "MIDLAND, CITY OF",
+   "city": "MIDLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0138584",
+   "permittee": "NORTH TEXAS MUNICIPAL WATER DISTRICT",
+   "city": "NEW HOPE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0138614",
+   "permittee": "HILLTOP RANCH PARTNERS LLC+",
+   "city": "HOWE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0139556",
+   "permittee": "GRANBURY, CITY OF",
+   "city": "GRANBURY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0140481",
+   "permittee": "KERRVILLE, CITY OF",
+   "city": "KERRVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0140619",
+   "permittee": "HOOD COUNTY GRANBURY MUD NO 1",
+   "city": "GRANBURY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TX0140635",
+   "permittee": "BRYAN, CITY OF",
+   "city": "BRYAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0141267",
+   "permittee": "FORT BEND COUNTY MUD 162",
+   "city": "ROSENBERG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0141291",
+   "permittee": "HARRIS COUNT Y MUD 418",
+   "city": "CYPRESS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0141461",
+   "permittee": "FORT BEND COUNTY MUD 222",
+   "city": "FULSHEAR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0141526",
+   "permittee": "CTX MANAGEMENT HOLDINGS LLC",
+   "city": "CEDAR CREEK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0141534",
+   "permittee": "SAN ANGELO, CITY OF",
+   "city": "SAN ANGELO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0141585",
+   "permittee": "HENDERSON, CITY OF",
+   "city": "HENDERSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0141721",
+   "permittee": "ANNA, CITY OF",
+   "city": "ANNA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0141763",
+   "permittee": "HENDERSON, CITY OF",
+   "city": "HENDERSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0142018",
+   "permittee": "CELINA, CITY OF",
+   "city": "CELINA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0142701",
+   "permittee": "ASTRO ROSENBERG LP",
+   "city": "KENDLETON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0142913",
+   "permittee": "SAINT-TROPEZ LAGUNA AZURE LLC",
+   "city": "HOUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0143189",
+   "permittee": "CLEVELAND, CITY OF",
+   "city": "CLEVELAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0143502",
+   "permittee": "DENTON 1000 LAND LP",
+   "city": "KRUM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0143821",
+   "permittee": "AUDUBON MANAGEMENT DISTRICT",
+   "city": "MAGNOLIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0144371",
+   "permittee": "MAGNOLIA M3 RANCH LP",
+   "city": "MAGNOLIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0144860",
+   "permittee": "QUADVEST LP",
+   "city": "HARRIS COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0144975",
+   "permittee": "CELINA, CITY OF",
+   "city": "CITY OF VAN ALSTYNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TX0145645",
+   "permittee": "RIVER RANCH MUD 1",
+   "city": "DAYTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TXS002001",
+   "permittee": "WACO, CITY OF & TEXAS DEPARTME",
+   "city": "WACO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TXS002101",
+   "permittee": "TEXAS DEPARTMENT OF TRANSPORTATION",
+   "city": "AUSTIN",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

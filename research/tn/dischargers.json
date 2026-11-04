@@ -1,0 +1,200 @@
+[
+ {
+  "id": "tn-nashville-tn0020575",
+  "name": "Metro Water Services, Nashville (Central WWTP and combined sewer system)",
+  "state": "TN",
+  "kind": "cso",
+  "npdes_permit": "TN0020575",
+  "receiving_waters": [
+   "Cumberland River",
+   "Cumberland River-Browns Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 6 open, 0 closed",
+  "notification_channel": "none found for CSOs; SSOs and releases appear in the TDEC Events Report (819 rows); Clean Water Nashville map of CSO locations; affected residents contacted (press quote)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nashville"
+  ],
+  "notes": "TDEC table: 819 rows for TN0020575 (SSO wet 370, release dry 231, SSO dry 142, release wet 76), latest 2026-10-20; no CSO events.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "tn-clarksville-tn0020656",
+  "name": "Clarksville Gas and Water (Clarksville WWTP)",
+  "state": "TN",
+  "kind": "cso",
+  "npdes_permit": "TN0020656",
+  "receiving_waters": [
+   "Cumberland River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 3 open, 0 closed",
+  "notification_channel": "TDEC Events Report (908 rows, latest 2026-08-31); own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clarksville"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "tn-chattanooga-tn0024210",
+  "name": "City of Chattanooga (Moccasin Bend WWTP and combined sewer system)",
+  "state": "TN",
+  "kind": "cso",
+  "npdes_permit": "TN0024210",
+  "receiving_waters": [
+   "Chattanooga Creek",
+   "Tennessee River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 8 open, 0 closed",
+  "notification_channel": "Consent decree quarterly reports with SSO tables (register.chattanooga.gov); TDEC Events Report (439 rows, latest 2026-10-23)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chattanooga"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "tn-metro-water-dry-creek",
+  "name": "Metro Water Services, Dry Creek WRF",
+  "state": "TN",
+  "kind": "sso",
+  "npdes_permit": "TN0020648",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "TDEC Events Report (142 rows)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nashville"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "tn-metro-water-whites-creek",
+  "name": "Metro Water Services, second Nashville permit (Whites Creek WRF assumed)",
+  "state": "TN",
+  "kind": "sso",
+  "npdes_permit": "TN0024970",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "TDEC Events Report (281 rows)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Nashville"
+  ],
+  "notes": "Plant name inferred, not checked.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "tn-portland",
+  "name": "City of Portland",
+  "state": "TN",
+  "kind": "sso",
+  "npdes_permit": "TN0021865",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "TDEC Events Report (1,099 rows, most of any permittee)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Portland"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "tn-hamilton-wwta",
+  "name": "Hamilton County Water & Wastewater Treatment Authority (WWTA)",
+  "state": "TN",
+  "kind": "sso",
+  "npdes_permit": "TN0021211",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "TDEC Events Report (872 rows across permits incl. SOP-89044); consent decree quarterly reports",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hamilton County"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "tn-kub",
+  "name": "Knoxville Utilities Board (KUB)",
+  "state": "TN",
+  "kind": "sso",
+  "npdes_permit": "TN0023582",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "TDEC Events Report (357 rows over 4 permits); KUB consent decree terminated 2022; no public overflow page found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Knoxville"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "tn-manchester",
+  "name": "City of Manchester",
+  "state": "TN",
+  "kind": "sso",
+  "npdes_permit": "TN0025038",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "TDEC Events Report (390 rows)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Manchester"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "tn-memphis",
+  "name": "City of Memphis (M.C. Stiles and T.E. Maxson WWTPs)",
+  "state": "TN",
+  "kind": "sso",
+  "npdes_permit": "TN0020711",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "none found; no rows in the TDEC Events Report for TN0020711 or TN0020729",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Memphis"
+  ],
+  "notes": "Also TN0020729. Largest city in the state is missing from the statewide table; consent decree (2012) reporting not checked.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ }
+]

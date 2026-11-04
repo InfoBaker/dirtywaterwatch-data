@@ -1,0 +1,27 @@
+id: "pa-doh-habs-dashboard"
+name: "PA Department of Health Harmful Algal Blooms dashboard and layer (HABS2018_2021_FIXED)"
+url: "https://www.pa.gov/agencies/health/programs/environmental-health/habs-dashboard"
+homepage: "https://www.pa.gov/agencies/health/programs/environmental-health/habs-dashboard"
+kind: "arcgis"
+level: "state"
+# Notes (research/pa, status candidate, verified fetched, checked 2026-11-02): Statewide, current,
+#   queryable HAB advisory levels with coordinates and waterbody names; good for lake pages.
+# Access detail (research, quoted): Dashboard 9b653809b2724ff299dc1b5b3d1c546b -> web map
+#   a50db3360b044a68ad467c74fd43e38b -> public FeatureServer
+#   https://services1.arcgis.com/Nifc7wlHaBPig3Q3/arcgis/rest/services/HABS2018_2021_FIXED/FeatureServer/0
+#   : 3,230 samples 2018-2026, latest sample 2026-10-27; Response_Level 'No HAB issue detected' /
+#   'Advisory (Yellow)' / 'Avoid Contact (Red)'. 2026: 349 yellow, 26 red.
+# Research notes: DEP's own HAB page (dep.pa.gov/Business/Water/HABs) is linked from county pages;
+#   DEP hosts were unreachable.
+cadence: null
+license: "No licence text on the dashboard item."
+attribution: "Pennsylvania Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["PA"]
+access: ["arcgis"]
+access_detail: "Dashboard 9b653809b2724ff299dc1b5b3d1c546b -> web map a50db3360b044a68ad467c74fd43e38b -> public FeatureServer https://services1.arcgis.com/Nifc7wlHaBPig3Q3/arcgis/rest/services/HABS2018_2021_FIXED/FeatureServer/0 : 3,230 samples 2018-2026, latest sample 2026-10-27; Response_Level 'No HAB issue detected' / 'Advisory (Yellow)' / 'Avoid Contact (Red)'. 2026: 349 yellow, 26 red."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

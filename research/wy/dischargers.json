@@ -1,0 +1,192 @@
+[
+ {
+  "id": "wy-cheyenne",
+  "name": "Cheyenne Board of Public Utilities",
+  "state": "WY",
+  "kind": "sso",
+  "npdes_permit": "WY0022381",
+  "receiving_waters": [
+   "Crow Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cheyenne"
+  ],
+  "notes": "Second major permit WY0022934 (also Cheyenne BOPU).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wy-casper",
+  "name": "City of Casper",
+  "state": "WY",
+  "kind": "sso",
+  "npdes_permit": "WY0021920",
+  "receiving_waters": [
+   "North Platte River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Casper"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wy-laramie",
+  "name": "City of Laramie",
+  "state": "WY",
+  "kind": "sso",
+  "npdes_permit": "WY0022209",
+  "receiving_waters": [
+   "Laramie River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Laramie"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wy-gillette",
+  "name": "City of Gillette",
+  "state": "WY",
+  "kind": "sso",
+  "npdes_permit": "WY0020125",
+  "receiving_waters": [
+   "Donkey Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gillette"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wy-rock-springs",
+  "name": "City of Rock Springs",
+  "state": "WY",
+  "kind": "sso",
+  "npdes_permit": "WY0022357",
+  "receiving_waters": [
+   "Bitter Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rock Springs"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wy-sheridan",
+  "name": "City of Sheridan",
+  "state": "WY",
+  "kind": "sso",
+  "npdes_permit": "WY0020010",
+  "receiving_waters": [
+   "Goose Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sheridan"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wy-jackson",
+  "name": "Town of Jackson",
+  "state": "WY",
+  "kind": "sso",
+  "npdes_permit": "WY0021458",
+  "receiving_waters": [
+   "Flat Creek",
+   "Snake River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Jackson"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wy-riverton",
+  "name": "City of Riverton",
+  "state": "WY",
+  "kind": "sso",
+  "npdes_permit": "WY0020672",
+  "receiving_waters": [
+   "Wind River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Riverton"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "wy-evanston",
+  "name": "City of Evanston",
+  "state": "WY",
+  "kind": "sso",
+  "npdes_permit": "WY0020095",
+  "receiving_waters": [
+   "Bear River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not searched.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Evanston"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ }
+]

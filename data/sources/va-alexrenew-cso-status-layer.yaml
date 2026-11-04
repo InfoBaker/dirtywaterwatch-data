@@ -1,0 +1,32 @@
+id: "va-alexrenew-cso-status-layer"
+name: "AlexRenew 'Outfall Overflow Status' ArcGIS layer (Public Notification System for Alexandria CSOs)"
+url: "https://services8.arcgis.com/gPxDs3sbKpglnSk7/arcgis/rest/services/Outfall_Overflow_Status_view/FeatureServer/0"
+homepage: "https://www.alexrenew.com/combined-sewer-overflow-status"
+kind: "arcgis"
+level: "utility"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Clean, token-free
+#   status feed; low event volume now that RiverRenew is in service (July 1, 2026).
+# Access detail (research, quoted): Public FeatureServer view, 4 features.
+#   query?where=1%3D1&outFields=*&f=json works without a token. Web map
+#   2ade5eef62f14c85b77bf762d55e978b ('If an overflow event occurred in past 24 hours, the outfall
+#   indicator will turn red, otherwise it will remain green.'). dataLastEditDate 2026-10-21. On
+#   2026-11-02 all four 'Normal'; last events: CSO 019 and 020 2026-01-01 14:13-20:26 UTC; CSO
+#   021/022 placeholders 2026-01-01 06:00-06:01 UTC.
+# Can fill: started_at (last event), ended_at (last event), source_status, coordinates,
+#   location_text, source_updated_at (editingInfo.dataLastEditDate)
+# Cannot fill: volume; history (one row per outfall, overwritten)
+# Waters: Potomac River (Oronoco Bay), Hunting Creek, Hooffs Run (openboatlaunch slugs:
+#   potomac-river-va)
+# History: Only the latest event per outfall; poll and store changes.
+cadence: "Near real time during events (24-hour red window)."
+license: "Item licenseInfo: 'The geographic data layers produced by AlexRenew and any associated maps and applications are provided as a public resource... AlexRenew makes no warranties ... and the data should not be construed or used as a legal description.'"
+attribution: "Alexandria Renew Enterprises (AlexRenew)"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["VA"]
+access: ["arcgis"]
+access_detail: "Public FeatureServer view, 4 features. query?where=1%3D1&outFields=*&f=json works without a token. Web map 2ade5eef62f14c85b77bf762d55e978b ('If an overflow event occurred in past 24 hours, the outfall indicator will turn red, otherwise it will remain green.'). dataLastEditDate 2026-10-21. On 2026-11-02 all four 'Normal'; last events: CSO 019 and 020 2026-01-01 14:13-20:26 UTC; CSO 021/022 placeholders 2026-01-01 06:00-06:01 UTC."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

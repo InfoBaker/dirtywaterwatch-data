@@ -1,0 +1,29 @@
+id: "ct-crc-is-it-clean"
+name: "Is It Clean? (Connecticut River Conservancy) - E. coli results and 'likely condition' map"
+url: "https://www.isitclean.us/"
+homepage: "https://www.isitclean.us/"
+kind: "html"
+level: "nonprofit"
+# Notes (research/ct, status candidate, verified fetched, checked 2026-11-01): 63+ CT sites seen
+#   (Farmington, Scantic, Still/Mad rivers, CT River docks at East Hartford, Glastonbury, Haddam,
+#   Windsor Meadows); site data embedded in Webflow HTML as data-* attributes; recommended by DEEP's
+#   2026 rainfall release.
+# Access detail (research, quoted): connecticutriver.us redirects here. Each site element carries
+#   data-slug, data-latitude, data-longtitude [sic], data-date, data-quality (latest E. coli),
+#   data-state, data-town, data-waterbody, data-watershed, data-organization; paginated with Webflow
+#   params (?663469da_page=N, ?95be2d77_page=N).
+# Can fill: monitoring sample value/date at site (not events)
+# Research notes: Community/MA agents may also cover; this is the best CT river bacteria source near
+#   MDC outfalls (East Hartford Great River Park dock).
+cadence: "weekly in season (Apr-Sep newsletter)"
+license: "not checked (Privacy, Security, and Terms page exists)"
+attribution: "Connecticut River Conservancy with FRWA, Scantic River Watershed Assn and others"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["CT"]
+access: ["html"]
+access_detail: "connecticutriver.us redirects here. Each site element carries data-slug, data-latitude, data-longtitude [sic], data-date, data-quality (latest E. coli), data-state, data-town, data-waterbody, data-watershed, data-organization; paginated with Webflow params (?663469da_page=N, ?95be2d77_page=N)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

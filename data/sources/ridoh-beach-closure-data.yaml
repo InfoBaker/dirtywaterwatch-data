@@ -1,0 +1,25 @@
+id: "ridoh-beach-closure-data"
+name: "RIDOH Beach Closure Data page"
+url: "https://health.ri.gov/data/beach-closure-data"
+homepage: "https://health.ri.gov/data/beach-closure-data"
+kind: "html"
+level: "state"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): States 60 cfu/100 ml
+#   closure basis for salt and fresh water; links Beach Viewer map (http://arcg.is/0SaKyX) and
+#   prior-years Google Sheet.
+# Access detail (research, quoted): Built-in browser (curl/WebFetch 403). Redirect from
+#   /data/beaches/.
+# Research notes: Data feed itself is for advisory agents. Not an event source; fills no event
+#   fields directly (provides criteria/definitions for context text).
+cadence: null
+license: "none stated"
+attribution: "Rhode Island Department of Health"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["RI"]
+access: ["html"]
+access_detail: "Built-in browser (curl/WebFetch 403). Redirect from /data/beaches/."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

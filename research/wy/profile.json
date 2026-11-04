@@ -1,0 +1,158 @@
+{
+ "state": "WY",
+ "name": "Wyoming",
+ "region": "mountain",
+ "epa_region": 8,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "none",
+  "summary": "No Wyoming statute, rule or guidance found that requires public notice of a sewage overflow. Collection-system owners report SSOs to WDEQ verbally within 24 hours and in writing within five days; WDEQ's spill and complaint database is staff-only.",
+  "citations": [
+   {
+    "cite": "WDEQ WYPDES Sanitary Sewer Overflows guidance",
+    "title": "SSO reporting",
+    "url": "https://deq.wyoming.gov/water-quality/wypdes/sanitary-sewer-overflows/",
+    "quote": "Reporting of the SSO should occur verbally within 24 hours of becoming aware of the event.",
+    "who": "owners or operators of wastewater collection systems and treatment works",
+    "channel": "WDEQ by phone (regulator only)",
+    "deadline": "24 hours verbal; written within five days",
+    "threshold": "any SSO",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours verbal, 5 days written",
+   "cite": "WDEQ SSO guidance; WYPDES permit standard conditions (not read)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "Water Quality Rules Chapter 4 revised (filed 2026-01-12); oil and hazardous substances only (search only)."
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "No Wyoming rows in SOBE."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": "none",
+  "receiving_water": "none",
+  "start_end": "none",
+  "volume": false,
+  "stable_id": false,
+  "license": null,
+  "notes": "No public list of reported overflows or spills that include sewage found."
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 0,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No CSOs."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [],
+  "notes": "SSO reports go to the state agency only."
+ },
+ "beaches": {
+  "program": "None found",
+  "source_ids": [
+   "wy-beach-ecoli"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": ""
+ },
+ "habs": {
+  "program": "WDEQ/WDH Harmful Cyanobacterial Bloom advisories (bloom and toxin)",
+  "source_ids": [
+   "wy-deq-hcb-current",
+   "wy-deq-hcb-advisories-layer",
+   "wy-wdh-hcb"
+  ],
+  "machine_readable": true,
+  "notes": "Historical layer machine-readable to 2025; current year in Story Map and email bulletins."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "Wyoming Department of Health"
+  ],
+  "watershed_groups": [],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Snake River (ID)",
+   "Green River and Flaming Gorge Reservoir (UT)",
+   "North Platte River (NE)",
+   "Yellowstone and Bighorn rivers (MT)",
+   "Bear River (UT, ID)",
+   "Belle Fourche and Cheyenne rivers (SD)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "login",
+   "what": "WDEQ spill/incident and complaint search requires a staff login",
+   "fix_level": "agency",
+   "note": "Ask WDEQ for a public view."
+  },
+  {
+   "kind": "phone_only",
+   "what": "SSOs reported verbally to WDEQ; no public duty",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "email_only",
+   "what": "Current-year HCB advisories published as GovDelivery bulletins and Story Map text, not a live layer",
+   "fix_level": "agency",
+   "note": ""
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "WDEQ HCB updates (GovDelivery)",
+   "url": "https://public.govdelivery.com/accounts/WYDEQ/subscriber/new?topic_id=WYDEQ_42",
+   "what": "Bloom and toxin advisory bulletins"
+  }
+ ],
+ "readiness": {
+  "tier": "D",
+  "expected_grade": "No public reports",
+  "first_feed": null,
+  "effort": "small",
+  "rationale": "No overflow feed, no SOBE rows, no CSOs, no public duty; the spill database is login-only. HCB advisories are the only live water-risk source.",
+  "order_hint": 6
+ },
+ "owner_questions": [
+  "Subscribe to WDEQ HCB GovDelivery bulletins?",
+  "Ask WDEQ to open a public view of deqspills incidents (SSOs included?)."
+ ],
+ "surprise": "Wyoming built a modern spills app with incident search, but every search route is behind a staff login; the public can only file reports, not read them."
+}

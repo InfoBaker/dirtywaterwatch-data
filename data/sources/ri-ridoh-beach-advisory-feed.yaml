@@ -1,0 +1,26 @@
+id: "ri-ridoh-beach-advisory-feed"
+name: "RIDOH Beach Advisories feed page (ridoh-feed-beaches)"
+url: "https://health.ri.gov/ridoh-feed-beaches"
+homepage: "https://health.ri.gov/ridoh-feed-beaches"
+kind: "html"
+level: "state"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Gives publication
+#   times the sheet lacks; blocked for servers.
+# Access detail (research, quoted): Drupal list of dated advisory items (25 per page). No RSS of its
+#   own (/ridoh-feed-beaches.xml 404). Cloudflare challenge blocks curl/WebFetch; readable in
+#   browser.
+# Can fill: published_at (to the minute), advice_text, waterbody
+# Cannot fill: coordinates; bacteria values
+# History: season items
+cadence: "same day as decision"
+license: "RI.gov policies"
+attribution: "RIDOH"
+enabled: true
+role: "advisories"
+event_types: ["beach_closure"]
+states: ["RI"]
+access: ["html"]
+access_detail: "Drupal list of dated advisory items (25 per page). No RSS of its own (/ridoh-feed-beaches.xml 404). Cloudflare challenge blocks curl/WebFetch; readable in browser."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

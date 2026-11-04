@@ -1,0 +1,24 @@
+id: "nh-exeter-cso-sso-page"
+name: "Exeter Combined Sewer & Sanitary Sewer Overflows page"
+url: "https://www.exeternh.gov/publicworks/combined-sewer-sanitary-sewer-overflows"
+homepage: "https://www.exeternh.gov/publicworks/combined-sewer-sanitary-sewer-overflows"
+kind: "html"
+level: "municipal"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): no reason recorded
+# Access detail (research, quoted): Drupal page with three lists: bypass prose, CSO table, SSO table
+# Can fill: started_at, ended_at (sometimes), volume, units, location_text, event_type, raw_record
+# Cannot fill: coordinates; published_at
+# Waters: Clemson Pond, Squamscott River, Little River (openboatlaunch slugs: squamscott-river-nh)
+# History: 2016 to 2026-09
+cadence: "ad hoc"
+license: "none stated"
+attribution: "Town of Exeter DPW"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass"]
+states: ["NH"]
+access: ["html"]
+access_detail: "Drupal page with three lists: bypass prose, CSO table, SSO table"
+machine_readable: false
+legal_basis: "NH0100871 Parts I.B.2 and I.H.3.g"
+checked: "2026-11-01"

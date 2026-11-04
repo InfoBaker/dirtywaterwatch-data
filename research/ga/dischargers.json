@@ -1,0 +1,274 @@
+[
+  {
+    "id": "ga-ga0036838",
+    "name": "Columbus Water Works (Columbus CSO)",
+    "state": "GA",
+    "kind": "cso",
+    "npdes_permit": "GA0036838",
+    "receiving_waters": [
+      "Chattahoochee River"
+    ],
+    "water_slugs": [],
+    "outfall_count": 12,
+    "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json)",
+    "notification_channel": "not found by search; EPD daily spreadsheet carries Columbus Water Works spills (permits GA0020516 etc.).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Columbus"
+    ],
+    "notes": "Seeded from federal-seed.json.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ga-ga0036854",
+    "name": "Albany, City Of (Albany CSO)",
+    "state": "GA",
+    "kind": "cso",
+    "npdes_permit": "GA0036854",
+    "receiving_waters": [
+      "Flint River"
+    ],
+    "water_slugs": [],
+    "outfall_count": 9,
+    "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json)",
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Albany"
+    ],
+    "notes": "Seeded from federal-seed.json.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ga-ga0037168",
+    "name": "Atlanta, City Of (East Area CSS)",
+    "state": "GA",
+    "kind": "cso",
+    "npdes_permit": "GA0037168",
+    "receiving_waters": [
+      "Intrenchment Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": 2,
+    "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json)",
+    "notification_channel": "Permit requires signage at site, downstream access points and the city website (EPD 2015 release); no web page found on atlantawatershed.org. EPD daily spreadsheet lists CSO dry-weather rows.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Atlanta"
+    ],
+    "notes": "Seeded from federal-seed.json.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ga-ga0038644",
+    "name": "Atlanta, City Of (West Area CSO)",
+    "state": "GA",
+    "kind": "cso",
+    "npdes_permit": "GA0038644",
+    "receiving_waters": [
+      "Chattahoochee River",
+      "Clear Creek",
+      "Proctor Creek",
+      "Tanyard Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": 4,
+    "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json)",
+    "notification_channel": "As GA0037168.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Atlanta"
+    ],
+    "notes": "Seeded from federal-seed.json.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ga-atlanta-dwm",
+    "name": "City of Atlanta Department of Watershed Management (R.M. Clayton, Utoy Creek and South River WRCs)",
+    "state": "GA",
+    "kind": "sso",
+    "npdes_permit": "GA0039012",
+    "receiving_waters": [
+      "Chattahoochee River",
+      "Peachtree Creek",
+      "Utoy Creek",
+      "Camp Creek",
+      "Nancy Creek",
+      "South River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Media advisories and press releases at atlantawatershed.org; NotifyATL alerts; no spill list found.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Atlanta"
+    ],
+    "notes": "9 rows in the 2026-11-03 EPD 30-day list. Consent decree utility.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ga-dekalb-dwm",
+    "name": "DeKalb County Department of Watershed Management (Snapfinger Creek AWWTF and Pole Bridge)",
+    "state": "GA",
+    "kind": "sso",
+    "npdes_permit": "GA0024147",
+    "receiving_waters": [
+      "South Fork Peachtree Creek",
+      "Peavine Creek",
+      "Sugar Creek",
+      "Snapfinger Creek",
+      "South River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Consent decree quarterly reports (PDF) on dekalbcountyga.gov; not checked for a spill page.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Decatur",
+      "Tucker",
+      "Stonecrest"
+    ],
+    "notes": "17 rows in the 30-day list (most of any permit).",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ga-columbus-water-works",
+    "name": "Columbus Water Works (South Columbus WRF; also CSO permit GA0036838)",
+    "state": "GA",
+    "kind": "sso",
+    "npdes_permit": "GA0020516",
+    "receiving_waters": [
+      "Chattahoochee River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Columbus"
+    ],
+    "notes": "7 rows in the 30-day list.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ga-augusta-utilities",
+    "name": "Augusta Utilities (J.B. Messerly WPCP)",
+    "state": "GA",
+    "kind": "sso",
+    "npdes_permit": "GA0037621",
+    "receiving_waters": [
+      "Savannah River",
+      "Butler Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Augusta"
+    ],
+    "notes": "6 rows in the 30-day list. Augusta has no CSO permit in the EPA inventory.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ga-cobb-county",
+    "name": "Cobb County Water System (R.L. Sutton WRF and others)",
+    "state": "GA",
+    "kind": "sso",
+    "npdes_permit": "GA0026140",
+    "receiving_waters": [
+      "Chattahoochee River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Posts a PDF notice per major spill (e.g. Paces Ferry Drive 3899 Major, 2024) on cobbcounty.org (search only).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Marietta",
+      "Smyrna",
+      "Mableton"
+    ],
+    "notes": "",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ga-gwinnett-county",
+    "name": "Gwinnett County Department of Water Resources (F. Wayne Hill WRF)",
+    "state": "GA",
+    "kind": "sso",
+    "npdes_permit": "GA0038130",
+    "receiving_waters": [
+      "Yellow River",
+      "Pew Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Lawrenceville"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ga-fulton-county",
+    "name": "Fulton County Department of Public Works (Big Creek WRF and others)",
+    "state": "GA",
+    "kind": "sso",
+    "npdes_permit": "GA0024333",
+    "receiving_waters": [
+      "Chattahoochee River",
+      "Cauley Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Johns Creek",
+      "Alpharetta"
+    ],
+    "notes": "88,700 gallons to Cauley Creek on 2026-10-03.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ga-macon-water-authority",
+    "name": "Macon Water Authority (Lower Poplar WRF)",
+    "state": "GA",
+    "kind": "sso",
+    "npdes_permit": "GA0024538",
+    "receiving_waters": [
+      "Ocmulgee River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Macon"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  }
+]

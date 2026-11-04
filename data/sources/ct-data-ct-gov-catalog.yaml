@@ -1,0 +1,21 @@
+id: "ct-data-ct-gov-catalog"
+name: "data.ct.gov (Socrata) catalog search"
+url: "https://data.ct.gov/"
+homepage: "https://data.ct.gov/"
+kind: "api"
+level: "state"
+# Notes (research/ct, status used, verified fetched, checked 2026-11-01): Only the DEEP
+#   spill-incident datasets and shellfish layers are relevant; no CSO/beach datasets.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "none stated"
+attribution: "State of Connecticut"
+enabled: true
+role: "events"
+event_types: []
+states: ["CT"]
+access: ["api"]
+access_detail: null
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

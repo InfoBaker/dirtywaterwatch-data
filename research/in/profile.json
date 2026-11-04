@@ -1,0 +1,225 @@
+{
+ "state": "IN",
+ "name": "Indiana",
+ "region": "great-lakes",
+ "epa_region": 5,
+ "npdes_authority": "state",
+ "great_lakes_basin": "part",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "partial",
+  "summary": "Every Indiana CSO community must notify the affected public, people who asked in response to its annual March newspaper notice, local health departments and drinking-water intakes within 10 river miles downstream whenever a CSO is occurring or imminent, in a manner agreed with the recipient, and post warning signs; no web channel or deadline is set. Great Lakes basin CSO permittees also owe the 4-hour notice of 40 CFR 122.38 (327 IAC 5-2.2). SSOs and bypasses are reported only to IDEM.",
+  "citations": [
+   {
+    "cite": "327 IAC 5-2.1-5",
+    "title": "CSO notification: who and when",
+    "url": "https://www.law.cornell.edu/regulations/indiana/327-IAC-5-2.1-5",
+    "quote": "Notification must be provided whenever information from a reliable source indicates that: (1) a discharge or discharges from one (1) or more combined sewer overflow outfalls is occurring; or (2) a discharge or discharges from one (1) or more combined sewer overflow outfalls is imminent based on predicted or actual precipitation or a related event.",
+    "who": "CSO community",
+    "channel": "affected public; persons who request it; local health departments; drinking water suppliers with intakes within 10 river miles downstream",
+    "deadline": null,
+    "threshold": "any CSO discharge occurring or imminent",
+    "verified": "fetched"
+   },
+   {
+    "cite": "327 IAC 5-2.1-6",
+    "title": "Community notification methods",
+    "url": "https://www.law.cornell.edu/regulations/indiana/327-IAC-5-2.1-6",
+    "quote": "Provide public notice in a newspaper of general circulation in March of each year to allow the following to request receipt of CSO notification ... Provide notification to those ... who request receipt of CSO notification ... in a manner that is mutually agreeable to the recipient and the CSO community.",
+    "who": "CSO community",
+    "channel": "annual newspaper notice; then email/phone/other as agreed; prominent signs at access points",
+    "deadline": null,
+    "threshold": "CSO occurring or imminent",
+    "verified": "fetched"
+   },
+   {
+    "cite": "327 IAC 5-2.2-1",
+    "title": "Great Lakes Basin CSO public notification",
+    "url": "https://www.law.cornell.edu/regulations/indiana/327-IAC-5-2.2-1",
+    "quote": "The requirements of this rule and 40 CFR 122.38 apply to a permittee authorized to discharge a combined sewer overflow to the Great Lakes Basin.",
+    "who": "CSO permittees in the Lake Michigan and Lake Erie basins",
+    "channel": "per public notification plan",
+    "deadline": "4 hours (40 CFR 122.38)",
+    "threshold": "authorized and unauthorized CSO outfalls",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "to IDEM on State Form 48373 (Bypass/Overflow Incident Report); timing per permit standard conditions (not verified)",
+   "cite": "NPDES permit standard conditions; IDEM bypass/overflow reporting page"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "IN0023183",
+   "quote": "Citizens issues CSO warnings by email when a quarter-inch or more of rain is forecast, as mandated by its consent decree (Citizens 2018 post; permit text not fetched)",
+   "deadline": "before or at the event (forecast-based)",
+   "verified": "search_only"
+  },
+  "bills_and_cases": [
+   "SB 449 (2023) 'Regulation of combined sewer overflows' passed the Senate, then House committee (search only); no 2025-2026 notification bill found."
+  ]
+ },
+ "erule": {
+  "system": "EPA NeT (in transition)",
+  "sobe_events_2026_11_03": null,
+  "public_output_url": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
+  "notes": "IDEM page: 'stay tuned ... a new way to report sanitary sewer overflows through U.S. EPA's NeT-Sewer Overflow system.' The national brief counts a handful of Indiana SOBE rows; exact count not taken."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [
+   "in-echo-dmr-cso",
+   "in-echo-sobe"
+  ],
+  "precision": "monthly",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "2 to 7 weeks (DMR)",
+  "history": null,
+  "coordinates": "via outfall join",
+  "receiving_water": "via outfall layer",
+  "start_end": "none (monthly counts)",
+  "volume": null,
+  "stable_id": true,
+  "license": "EPA public data",
+  "notes": "No state event list. Monthly CSO DMRs (required by 327 IAC 5-2.1-7) are the statewide signal; SOBE will add SSOs if IDEM completes its move to NeT-SewerOverflow."
+ },
+ "cso": {
+  "permits": 138,
+  "open_outfalls": 671,
+  "operators_with_web_channel": 3,
+  "operators_checked": 15,
+  "state_outfall_layer": "in-idem-cso-outfall-layer",
+  "dmr_monthly_counts": "yes",
+  "notification_practice": "Opt-in notice by email or phone to people who answer an annual March newspaper notice, plus signs. Public web traces only at LaPorte (status page), Waterloo and Goshen (posts). Indianapolis sends forecast-based email warnings; South Bend and Hammond email on request; Fort Wayne, Mishawaka, Kendallville and Speedway pages blocked scripted access."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [
+   "in-echo-sobe"
+  ],
+  "notes": "SSOs reported to IDEM on State Form 48373; Highland posts its forms as PDFs."
+ },
+ "beaches": {
+  "program": "IDEM Lake Michigan Beach Monitoring and Notification Program (BeachAlert, Power Apps portal); 235 cfu/100 mL single-sample threshold",
+  "source_ids": [
+   "in-idem-beachalert",
+   "in-swim-guide-indiana"
+  ],
+  "machine_readable": false,
+  "scope": "great-lakes",
+  "notes": "Inland beaches: state parks via DNR and the IDEM algae dashboard."
+ },
+ "habs": {
+  "program": "IDEM Blue-Green Algae dashboard with DNR, IDOH and BOAH",
+  "source_ids": [
+   "in-idem-cyanobacteria",
+   "in-dnr-advisories-closings"
+  ],
+  "machine_readable": true,
+  "notes": "ArcGIS layer, 1,717 samples 2010 to 2026-09-14."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "Lake, Porter and LaPorte county beach managers via BeachAlert"
+  ],
+  "watershed_groups": [],
+  "swim_guide": true
+ },
+ "outfalls": {
+  "state_layer": "in-idem-cso-outfall-layer",
+  "cso_inventory_gap": "IDEM layer has 981 outfalls (578 active, 85 active but discharge prohibited, 318 inactive) on 89 permits with non-inactive outfalls; EPA seed has 671 open on 138 permits",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Lake Michigan (IL, MI, WI)",
+   "Ohio River (KY, OH, IL)",
+   "Wabash River (IL)",
+   "St. Joseph River (MI)",
+   "Maumee River (OH)",
+   "Grand Calumet and Little Calumet rivers (IL)",
+   "Great Miami and Whitewater rivers (OH)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "email_only",
+   "what": "CSO notice goes by email/phone to people who opted in after a March newspaper notice; no public web record required",
+   "fix_level": "legislative",
+   "note": "327 IAC 5-2.1-6; amend to require web posting."
+  },
+  {
+   "kind": "print_only",
+   "what": "Annual invitation to request notices is a newspaper notice",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "bot_wall",
+   "what": "Fort Wayne, Mishawaka, Kendallville, Speedway and South Bend sites return HTTP 403 to scripted requests",
+   "fix_level": "engineering",
+   "note": "South Bend readable with WebFetch; Fort Wayne not."
+  },
+  {
+   "kind": "login",
+   "what": "BeachAlert beach list and alerts need sign-in (Access Indiana); data behind Power Apps entity grid",
+   "fix_level": "agency",
+   "note": "Swim Guide mirrors."
+  },
+  {
+   "kind": "no_web",
+   "what": "SSO/bypass reports go only to IDEM on paper/email form",
+   "fix_level": "agency",
+   "note": "Move to NeT-SewerOverflow pending."
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "Citizens Energy Group CSO email warnings (Indianapolis)",
+   "url": "https://blog.citizensenergygroup.com/csowarnings",
+   "what": "Forecast-based CSO warnings naming affected waterways; sign-up route not found, ask Citizens"
+  },
+  {
+   "name": "South Bend CSO email notifications",
+   "url": "https://southbendin.gov/department/public-works/utilities-division/waste-water/",
+   "what": "Sign up by phone 574.277.8515"
+  },
+  {
+   "name": "Hammond Sanitary District CSO email notifications",
+   "url": "https://www.hammondsd.com/cso-notification-plan/",
+   "what": "Request by postal mail"
+  },
+  {
+   "name": "Speedway CSO notifications",
+   "url": "https://www.speedwayin.gov/node/1301",
+   "what": "Email on request or phone"
+  },
+  {
+   "name": "IDEM BeachAlert alerts",
+   "url": "https://portal.idem.in.gov/BeachAlert/alerts/",
+   "what": "Email or text alerts for Lake Michigan beach advisories; needs an Access Indiana account"
+  },
+  {
+   "name": "IDEM subscriber center",
+   "url": "https://cloud.subscription.in.gov/signup?depid=546006747",
+   "what": "IDEM email topics (CSO program page link); topics not checked"
+  }
+ ],
+ "readiness": {
+  "tier": "C",
+  "expected_grade": "Monthly totals only",
+  "first_feed": "in-echo-dmr-cso",
+  "effort": "medium",
+  "rationale": "No statewide event list and the rule needs no web posting. A few small operators post dated events (LaPorte, Waterloo, Goshen), but the large systems notify by email on request or block scripted access. Build on the IDEM outfall layer, ECHO monthly CSO DMRs and the rain caution; email subscriptions (Citizens, South Bend, Hammond) could lift Indiana to B.",
+  "order_hint": 4
+ },
+ "owner_questions": [
+  "Subscribe to the Citizens, South Bend, Hammond and Speedway CSO emails? This needs the owner to phone or mail requests, and Citizens' route is unknown.",
+  "Can forecast-based 'imminent CSO' emails (Indianapolis) be shown at all? They are warnings, not reports of a discharge.",
+  "Use IDEM's outfall layer instead of EPA's inventory for Indiana (981 vs 671 open)?",
+  "Create an Access Indiana account for BeachAlert alerts, or rely on Swim Guide?"
+ ],
+ "surprise": "Indiana's rule makes CSO notice opt-in: each CSO community invites requests through a March newspaper ad and then notifies requesters 'in a manner that is mutually agreeable'. Indianapolis (131 open outfalls) sends email warnings when rain is forecast rather than when an overflow is measured, so the state's biggest CSO system leaves no public web record of events."
+}

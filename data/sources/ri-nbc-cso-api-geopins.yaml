@@ -1,0 +1,23 @@
+id: "ri-nbc-cso-api-geopins"
+name: "NBC service-area polygon (GeoJSON)"
+url: "https://cso-api.narrabay.com/geopins"
+homepage: "https://cso-api.narrabay.com/geopins"
+kind: "api"
+level: "utility"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Context layer for the
+#   map; 'count' 217 meaning unknown.
+# Access detail (research, quoted): GET, no auth, GeoJSON FeatureCollection 'RegionPoly' (2.7 KB).
+# Can fill: jurisdiction
+# Cannot fill: events
+cadence: "static"
+license: "none stated"
+attribution: "Narragansett Bay Commission"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["RI"]
+access: ["api"]
+access_detail: "GET, no auth, GeoJSON FeatureCollection 'RegionPoly' (2.7 KB)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

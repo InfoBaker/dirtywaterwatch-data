@@ -1,0 +1,31 @@
+id: "va-lynchburg-cso-alerts"
+name: "Lynchburg CSO Alert System (Lynchburg Alerts, Everbridge) and CSO page"
+url: "https://www.lynchburgva.gov/513/Combined-Sewer-Overflow-System-CSO"
+homepage: "https://www.lynchburgva.gov/513/Combined-Sewer-Overflow-System-CSO"
+kind: "html"
+level: "municipal"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Lynchburg's only
+#   event channel; owner must subscribe (account required).
+# Access detail (research, quoted): Fetched. 'When a CSO occurs at one of our monitored overflow
+#   points into the James River, this system will send you a text message and/or email to alert you
+#   of the overflow. Thirty hours after the overflow ends, a second alert will be sent to notify you
+#   of the CSO event's end.' Sign-up via /626/Lynchburg-Alerts (Everbridge member portal
+#   https://member.everbridge.net/453003085611478/login). 'closed or is working to close 115 of the
+#   132 original overflow points'. No public archive of alerts found.
+# Can fill: started_at (alert time), ended_at (second alert minus 30 h), valid_until (30 h after
+#   end)
+# Cannot fill: volume; outfall detail (unknown); history
+# Waters: James River and Blackwater Creek, Fishing Creek tributaries (openboatlaunch slugs:
+#   james-river-va)
+cadence: "Real time by text/email."
+license: "none stated"
+attribution: "City of Lynchburg Water Resources"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["VA"]
+access: ["email", "social", "html"]
+access_detail: "Fetched. 'When a CSO occurs at one of our monitored overflow points into the James River, this system will send you a text message and/or email to alert you of the overflow. Thirty hours after the overflow ends, a second alert will be sent to notify you of the CSO event's end.' Sign-up via /626/Lynchburg-Alerts (Everbridge member portal https://member.everbridge.net/453003085611478/login). 'closed or is working to close 115 of the 132 original overflow points'. No public archive of alerts found."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

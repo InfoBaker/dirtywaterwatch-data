@@ -1,0 +1,30 @@
+id: "vt-burlington-newsflash-publicworks"
+name: "Burlington News Flash, Public Works category"
+url: "https://www.burlingtonvt.gov/m/newsflash?cat=8"
+homepage: "https://www.burlingtonvt.gov/m/newsflash?cat=8"
+kind: "rss"
+level: "municipal"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Narrative
+#   supplement; routine CSOs are not posted here
+# Access detail (research, quoted): CivicPlus. Articles at /CivicAlerts.aspx?AID=n. RSS
+#   https://www.burlingtonvt.gov/RSSFeed.aspx?ModID=1&CID=Public-Works-8 returned empty; the
+#   All-newsflash.xml feed carries only the ~7 newest items. The HTML list keeps history.
+# Can fill: source_record_id, published_at, location_text, advice_text, valid_until, source_url,
+#   revision_history
+# Cannot fill: volume; coordinates; ended_at (unstructured)
+# Waters: Lake Champlain, Winooski River (Burlington) (openboatlaunch slugs: lake-champlain-vt,
+#   winooski-river-vt)
+# History: articles back to at least 2026; older Drupal node URLs 404
+# Research notes: June 11, 2026 East Plant item: AID 3842
+cadence: "ad hoc, mainly plant discharges that close beaches"
+license: "none stated"
+attribution: "City of Burlington DPW"
+enabled: true
+role: "events"
+event_types: ["bypass", "cso"]
+states: ["VT"]
+access: ["html", "rss"]
+access_detail: "CivicPlus. Articles at /CivicAlerts.aspx?AID=n. RSS https://www.burlingtonvt.gov/RSSFeed.aspx?ModID=1&CID=Public-Works-8 returned empty; the All-newsflash.xml feed carries only the ~7 newest items. The HTML list keeps history."
+machine_readable: true
+legal_basis: "10 V.S.A. 1295; CSO Rule 34-404"
+checked: "2026-11-01"

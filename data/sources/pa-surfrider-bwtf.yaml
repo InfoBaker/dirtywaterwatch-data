@@ -1,0 +1,34 @@
+id: "pa-surfrider-bwtf"
+name: "Surfrider Foundation Blue Water Task Force data portal"
+url: "https://bwtf.surfrider.org/"
+homepage: "https://bwtf.surfrider.org/"
+kind: "api"
+level: "nonprofit"
+# Notes (research/community, status candidate, verified fetched, checked 2026-11-01): Public
+#   machine-readable CSV with coordinates, collection time and publication time as separate fields.
+#   Covers Narragansett Bay sites near Providence CSOs (Fields Point, Bold Point Park, Gaspee Point,
+#   Stillhouse Cove, Rocky Point).
+# Access detail (research, quoted): Fetched public CSV, no auth:
+#   https://mmvk4falrj.execute-api.us-west-2.amazonaws.com/v1/annual?year=2026 (all labs, one row
+#   per sample). The app itself uses an AWS AppSync GraphQL API (API key) at
+#   esvbxbhkmzgh5ojw3g2hvsx7du.appsync-api.us-west-2.amazonaws.com. Sample saved:
+#   raw/aggregators/bwtf-annual-2025-sample-ne.csv
+# Cannot fill: discharge fields (sampling)
+# Waters: National; New England labs RI (URI; Narragansett Bay and south coast), NH (Seacoast), ME;
+#   no MA or CT rows in 2025 or 2026 (openboatlaunch slugs: narragansett-bay-ri,
+#   providence-river-ri, hampton-harbor-nh)
+# History: Annual endpoint by year (2025: 10,186 rows nationally; 2026: 8,876 rows)
+# Research notes: 2026 New England rows: RI 211, NH 53, ME 9. Ask Surfrider for terms before
+#   ingesting. Field 'collection date' shows 'Invalid Date'; use 'stored collectionTime'.
+cadence: "Chapter dependent (weekly to monthly). Latest 2026 collection 2026-10-31, latest publication 2026-11-01T18:26Z. Lag can be long: one RI sample collected 2025-12-21 was published 2026-02-23."
+license: "none found on portal (not checked beyond the app)"
+attribution: "Surfrider Foundation (chapter labs)"
+enabled: true
+role: "monitoring"
+event_types: ["sample"]
+states: ["US"]
+access: ["csv", "api"]
+access_detail: "Fetched public CSV, no auth: https://mmvk4falrj.execute-api.us-west-2.amazonaws.com/v1/annual?year=2026 (all labs, one row per sample). The app itself uses an AWS AppSync GraphQL API (API key) at esvbxbhkmzgh5ojw3g2hvsx7du.appsync-api.us-west-2.amazonaws.com. Sample saved: raw/aggregators/bwtf-annual-2025-sample-ne.csv"
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

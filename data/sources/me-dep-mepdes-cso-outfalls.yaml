@@ -1,0 +1,33 @@
+id: "me-dep-mepdes-cso-outfalls"
+name: "Maine DEP MEPDES CSO outfall layer (Maine GeoLibrary / gis.maine.gov)"
+url: "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2"
+homepage: "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2"
+kind: "arcgis"
+level: "state"
+# Notes (research/me, status used, verified fetched, checked 2026-11-01): Authoritative outfall
+#   coordinates keyed by permit + outfall number; reconcile STATUS against the latest Status Report
+#   list.
+# Access detail (research, quoted): ArcGIS REST MapServer layer 2 'CSO'; query
+#   ?where=1%3D1&outFields=*&f=json returned 266 features (no paging needed). ArcGIS Online item
+#   e5b08d6285234c3f87f11036b9ba9a4a 'MaineDEP CSO' points to it; hub dataset
+#   geolibrary-maine.opendata.arcgis.com/datasets/mainedep-cso.
+# Can fill: coordinates (GPS, 'WITHIN 5M' mapping grade), geometry (outfall point), waterbody,
+#   source_record_id (MASTERID = permit + outfall)
+# Cannot fill: any event field
+# Waters: all licensed CSO outfalls, active and closed (266 rows; 111 STATUS='ACTIVE')
+# History: Collected 1998-2001 under DEP contracts; closed outfalls retained with COMMENT (e.g.
+#   'CLOSED JANUARY 2017').
+# Research notes: Some ACTIVE='Y' rows have STATUS='CLOSED' (12). Milford appears as ME0001678 here
+#   but ME0102695 in DEP report tables.
+cadence: "Service text: 'All location data was quality checked by MEDEP MEPDES Inspectors and GIS Unit staff in 2018. Updates will occur as necessary.' Item modified 2025-10-16, but STATUS still reflects end of 2023 (111 active): GAUD CSO008 (closed 2024), KSTD CSO003/005 (2024) and Old Town CSO003/004 (2025) still show ACTIVE."
+license: "ArcGIS item licenseInfo: 'No limitations'; accessInformation: 'Maine DEP GIS Unit'; MapServer copyrightText: 'Maine DEP DWQ and Maine DEP GIS Unit'."
+attribution: "Maine DEP GIS Unit"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["ME"]
+access: ["arcgis"]
+access_detail: "ArcGIS REST MapServer layer 2 'CSO'; query ?where=1%3D1&outFields=*&f=json returned 266 features (no paging needed). ArcGIS Online item e5b08d6285234c3f87f11036b9ba9a4a 'MaineDEP CSO' points to it; hub dataset geolibrary-maine.opendata.arcgis.com/datasets/mainedep-cso."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

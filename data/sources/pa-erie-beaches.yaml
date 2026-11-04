@@ -1,0 +1,25 @@
+id: "pa-erie-beaches"
+name: "Erie County Department of Health beach and HAB advisory map (Google My Maps KML)"
+url: "https://eriecountypa.gov/departments/health/services-and-programs/health-and-wellness/beach-water-testing-results/"
+homepage: "https://eriecountypa.gov/departments/health/services-and-programs/health-and-wellness/beach-water-testing-results/"
+kind: "api"
+level: "municipal"
+# Feed row: the source id written by the ingester pipeline/ingest/pa_habs_beaches.py
+#   (data/build/events/pa-erie-beaches.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/pa_habs_beaches.py docstring): Daily (the HAB layer is updated twice a
+#   week; beaches are sampled twice a week in season, late May to Labor Day). One module writes both
+#   pa-doh-habs and pa-erie-beaches.
+cadence: "daily"
+license: "None stated."
+attribution: "Erie County Department of Health"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure"]
+states: ["PA"]
+registry_ids: ["pa-erie-county-beach-mymaps"]
+access: ["html", "api"]
+access_detail: "Page embeds Google My Maps mid=1B6FxSFxIGXX5z3R9mgjn3YHEck1ru5GM; KML export https://www.google.com/maps/d/kml?mid=1B6FxSFxIGXX5z3R9mgjn3YHEck1ru5GM&forcekml=1 fetched: 11 beach placemarks (Presque Isle beaches 1-11, Barracks, Mill Road, Freeport) with 'Current Status' text and 30 HAB sites ('Below all thresholds' / 'Exceeds dog safety thresholds'). Each beach links a Google Sheet of results 2015-present (CSV export works: /export?format=csv)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

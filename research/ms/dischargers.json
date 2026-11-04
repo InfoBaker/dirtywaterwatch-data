@@ -1,0 +1,206 @@
+[
+  {
+    "id": "ms-jackson-jxn",
+    "name": "City of Jackson sewer system (JXN Water interim manager): Savanna Street and Trahon/Big Creek WWTPs",
+    "state": "MS",
+    "kind": "sso",
+    "npdes_permit": "MS0024295; MS0044059",
+    "receiving_waters": [
+      "Pearl River",
+      "Town Creek",
+      "Lynch Creek",
+      "Hanging Moss Creek",
+      "Eubanks Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Quarterly court status reports; news releases and signs for significant overflows (SORP, per press); no dashboard found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Jackson"
+    ],
+    "notes": "89 SOBE events (78 + 11), the second most in the state. Federal consent decree 2013; interim stipulated order 2023.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ms-jcua",
+    "name": "Jackson County Utility Authority (POTW 1C Ocean Springs, 6C Escatawpa, 7C Pascagoula and others)",
+    "state": "MS",
+    "kind": "sso",
+    "npdes_permit": "MS0045446; MS0021521; MS0020249",
+    "receiving_waters": [
+      "Ocean Springs inner harbor",
+      "Davis Bayou",
+      "Fort Bayou",
+      "Pascagoula River",
+      "Escatawpa River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Ocean Springs",
+      "Pascagoula",
+      "Moss Point",
+      "Gautier"
+    ],
+    "notes": "MS0045446 has 88 SOBE events, the most in Mississippi; coastal waters near beach stations.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ms-meridian",
+    "name": "Meridian POTW",
+    "state": "MS",
+    "kind": "sso",
+    "npdes_permit": "MS0020117",
+    "receiving_waters": [
+      "Sowashee Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Meridian"
+    ],
+    "notes": "33 SOBE events.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ms-vicksburg",
+    "name": "Vicksburg POTW",
+    "state": "MS",
+    "kind": "sso",
+    "npdes_permit": "MS0022381",
+    "receiving_waters": [
+      "Mississippi River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Vicksburg"
+    ],
+    "notes": "21 SOBE events.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ms-greenville",
+    "name": "Greenville POTW",
+    "state": "MS",
+    "kind": "sso",
+    "npdes_permit": "MS0020184",
+    "receiving_waters": [
+      "Mississippi River",
+      "Lake Ferguson"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Greenville"
+    ],
+    "notes": "14 SOBE events.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ms-dcrua-olive-branch",
+    "name": "DeSoto County Regional Utility Authority, Olive Branch POTW",
+    "state": "MS",
+    "kind": "sso",
+    "npdes_permit": "MS0029513",
+    "receiving_waters": [
+      "Coldwater River basin"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Olive Branch"
+    ],
+    "notes": "8 SOBE events.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ms-laurel",
+    "name": "Laurel POTW No. 1",
+    "state": "MS",
+    "kind": "sso",
+    "npdes_permit": "MS0024163",
+    "receiving_waters": [
+      "Tallahala Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Laurel"
+    ],
+    "notes": "8 SOBE events.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ms-harrison-county-wwsd",
+    "name": "Harrison County Utility Authority (Gulfport, Biloxi, Long Beach plants)",
+    "state": "MS",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Mississippi Sound",
+      "Biloxi Bay",
+      "Bernard Bayou"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Gulfport",
+      "Biloxi"
+    ],
+    "notes": "Coastal; near beach stations. Permits not matched to SOBE here.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ms-tunica",
+    "name": "Tunica County Utility District",
+    "state": "MS",
+    "kind": "sso",
+    "npdes_permit": "MS0048691",
+    "receiving_waters": [
+      "Mississippi River floodplain"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Robinsonville"
+    ],
+    "notes": "Latest SOBE event (2026-10-27, 20,000 gallons).",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  }
+]

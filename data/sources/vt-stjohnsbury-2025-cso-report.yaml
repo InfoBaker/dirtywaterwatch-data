@@ -1,0 +1,25 @@
+id: "vt-stjohnsbury-2025-cso-report"
+name: "St. Johnsbury 2025 CSO Annual Report"
+url: "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1290/3-1290.2025CSOAnnualReport.20260306.pdf"
+homepage: "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1290/3-1290.2025CSOAnnualReport.20260306.pdf"
+kind: "pdf"
+level: "municipal"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): no reason recorded
+# Access detail (research, quoted): Per-structure appendix with photos
+# Can fill: history
+# Cannot fill: coordinates
+# Waters: Passumpsic, Sleepers (openboatlaunch slugs: passumpsic-river-vt)
+# History: 2013+
+# Research notes: Town site stjvt.com has no CSO content (rejected)
+cadence: "annual"
+license: "none stated"
+attribution: "Town of St. Johnsbury"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["VT"]
+access: ["pdf"]
+access_detail: "Per-structure appendix with photos"
+machine_readable: false
+legal_basis: "1272 Order 2022"
+checked: "2026-11-01"

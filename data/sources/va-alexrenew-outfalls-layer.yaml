@@ -1,0 +1,22 @@
+id: "va-alexrenew-outfalls-layer"
+name: "AlexRenew 'Combined Sewer Outfalls' layer (2026 Service Area Map)"
+url: "https://services8.arcgis.com/gPxDs3sbKpglnSk7/arcgis/rest/services/2026_Service_Area_Map_WFL1/FeatureServer/0"
+homepage: "https://services8.arcgis.com/gPxDs3sbKpglnSk7/arcgis/rest/services/2026_Service_Area_Map_WFL1/FeatureServer/0"
+kind: "arcgis"
+level: "utility"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Operator outfall
+#   points.
+# Access detail (research, quoted): 5 points: CSO 019 – Potomac River (Pendleton), CSO 020 – Hunting
+#   Creek (Royal), CSO 021 and CSO 003 (King & West) – Hooffs Run, CSO 022 – Hooffs Run.
+cadence: null
+license: "none stated"
+attribution: "Alexandria Renew Enterprises"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["VA"]
+access: ["arcgis"]
+access_detail: "5 points: CSO 019 – Potomac River (Pendleton), CSO 020 – Hunting Creek (Royal), CSO 021 and CSO 003 (King & West) – Hooffs Run, CSO 022 – Hooffs Run."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

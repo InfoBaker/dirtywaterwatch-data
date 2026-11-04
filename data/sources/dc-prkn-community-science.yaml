@@ -1,0 +1,22 @@
+id: "dc-prkn-community-science"
+name: "Potomac Riverkeeper Network community science E. coli monitoring and Swim Guide listings"
+url: "https://potomacriverkeepernetwork.org/the-community-science-water-quality-monitoring/"
+homepage: "https://potomacriverkeepernetwork.org/the-community-science-water-quality-monitoring/"
+kind: "html"
+level: "nonprofit"
+# Notes (research/dc, status candidate, verified fetched, checked 2026-11-02): Use through CMC.
+# Access detail (research, quoted): Fetched. Volunteers sample 'weekly on Wednesdays' May-September
+#   at 50+ sites and 'report the results every Friday'; posted to the Chesapeake Data Explorer
+#   (CMC), Swim Guide (affiliates/potomac-riverkeeper-network) and social media.
+cadence: null
+license: "none stated"
+attribution: "Potomac Riverkeeper Network"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["DC"]
+access: ["html", "social"]
+access_detail: "Fetched. Volunteers sample 'weekly on Wednesdays' May-September at 50+ sites and 'report the results every Friday'; posted to the Chesapeake Data Explorer (CMC), Swim Guide (affiliates/potomac-riverkeeper-network) and social media."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

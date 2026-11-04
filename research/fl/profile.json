@@ -1,0 +1,167 @@
+{
+  "state": "FL",
+  "name": "Florida",
+  "region": "southeast",
+  "epa_region": 4,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "yes",
+    "summary": "Any facility with a pollution release reportable to the State Watch Office must also give DEP a notice within 24 hours of discovery; DEP must post it publicly within 24 hours and email it to county subscribers. The duty falls on DEP to publish, not on the operator to tell the public directly.",
+    "citations": [
+      {
+        "cite": "Fla. Stat. 403.077(2)(a)",
+        "title": "Public notification of pollution",
+        "url": "https://www.flsenate.gov/Laws/Statutes/2025/403.077",
+        "quote": "provide to the department information reported to the State Watch Office within the Division of Emergency Management ... within 24 hours after the owner's or operator's discovery of such reportable pollution release",
+        "who": "owner or operator of the installation",
+        "channel": "notice to DEP (online form or email)",
+        "deadline": "24 hours after discovery",
+        "threshold": "any release reportable to the State Watch Office (wastewater: 1,000 gallons or more, or any that may endanger health or the environment, per DEP guidance)",
+        "verified": "fetched"
+      },
+      {
+        "cite": "Fla. Stat. 403.077(3)(a)-(b)",
+        "title": "Department publication",
+        "url": "https://www.flsenate.gov/Laws/Statutes/2025/403.077",
+        "quote": "publish ... on a public website within 24 hours after receipt; electronic mailing list with regional lists by county or district",
+        "who": "Florida DEP",
+        "channel": "DEP website; email list",
+        "deadline": "24 hours after receipt",
+        "threshold": "every notice received",
+        "verified": "fetched"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "State Watch Office within 24 hours for SSOs of 1,000 gallons or more; DEP district within 24 hours for smaller; written follow-up per permit",
+      "cite": "F.A.C. 62-604.550, 62-620.610(20) (rule text not read; DEP guidance)"
+    },
+    "cso_permit_notice_clause": {
+      "permit": null,
+      "quote": "No CSO permits in Florida.",
+      "deadline": null,
+      "verified": "fetched"
+    },
+    "bills_and_cases": [
+      "Clean Waterways Act, ch. 2020-158, amended 403.077 (s. 26). Later bills not searched."
+    ]
+  },
+  "erule": {
+    "system": "state",
+    "sobe_events_2026_11_03": 0,
+    "public_output_url": "https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer",
+    "notes": "Florida is not in EPA's SOBE extract; spills go to the State Watch Office and PNP."
+  },
+  "statewide_feed": {
+    "exists": true,
+    "source_ids": [
+      "fl-dep-pnp-arcgis"
+    ],
+    "precision": "event",
+    "machine_readable": true,
+    "format": "arcgis",
+    "latency": "hours after submission; median 1.5 days from release date",
+    "history": "July 2017 to date (16,571 notices, all types)",
+    "coordinates": "all",
+    "receiving_water": "Y/N flag only; name sometimes in free text",
+    "start_end": "start date (no time) and end date; ongoing flag",
+    "volume": true,
+    "stable_id": true,
+    "license": "none stated",
+    "notes": "Volume and water are inside a templated free-text field. Personal names in reporter/contact fields and in 'Agencies Notified' text: request only safe fields and redact."
+  },
+  "cso": {
+    "permits": 0,
+    "open_outfalls": 0,
+    "operators_with_web_channel": 0,
+    "operators_checked": 0,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "No CSOs in Florida."
+  },
+  "sso": {
+    "location_source": "fl-dep-pnp-arcgis (point per notice)",
+    "feeds": [
+      "fl-dep-pnp-arcgis",
+      "fl-dep-wastewater-historical-spills"
+    ],
+    "notes": "About 80 untreated-wastewater notices a month (more in storms)."
+  },
+  "beaches": {
+    "program": "Florida Department of Health Healthy Beaches (coastal enterococci, weekly) plus county DOH health advisories after sewage spills",
+    "source_ids": [
+      "fl-doh-healthy-beaches"
+    ],
+    "machine_readable": false,
+    "scope": "coastal",
+    "notes": "Sampling points are an ArcGIS layer; results and advisory status are script-loaded on FDOH pages, endpoint not traced."
+  },
+  "habs": {
+    "program": "Florida DEP algal bloom sampling (Algal Bloom Sampling Status dashboard); DOH bloom health alerts",
+    "source_ids": [
+      "fl-dep-algal-bloom"
+    ],
+    "machine_readable": true,
+    "notes": "Daily-edited public layer."
+  },
+  "advisories": {
+    "health_department_pages": [
+      "County DOH offices (e.g. Broward, Miami-Dade, Pinellas) issue sewage-spill no-contact advisories: not checked"
+    ],
+    "watershed_groups": [
+      "WWALS (Suwannee basin)"
+    ],
+    "swim_guide": false
+  },
+  "outfalls": {
+    "state_layer": null,
+    "cso_inventory_gap": "none (no CSOs)",
+    "sso_points": "state_table"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Suwannee River and Withlacoochee River (GA)",
+      "St. Marys River (GA)",
+      "Chattahoochee, Flint and Apalachicola (GA, AL)",
+      "Perdido River (AL)"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "licence",
+      "what": "No licence stated on the PNP feed",
+      "fix_level": "agency",
+      "note": "Public agency data; credit DEP."
+    },
+    {
+      "kind": "image_only",
+      "what": "Waterbody named only as Y/N; volume often blank in the 24-hour notice",
+      "fix_level": "agency",
+      "note": "Template could require the receiving water name."
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "Florida DEP Public Notice of Pollution email (by county)",
+      "url": "http://prodenv.dep.state.fl.us/DepPNP/reports/addSubscriber",
+      "what": "each notice for the chosen counties; cross-check only"
+    }
+  ],
+  "readiness": {
+    "tier": "A",
+    "expected_grade": "Dated reports",
+    "first_feed": "fl-dep-pnp-arcgis",
+    "effort": "medium",
+    "rationale": "Statewide ArcGIS feed with points and report times since 2017, but mixed pollution types, templated free text to parse, date-only start, no water name, and personal data to strip.",
+    "order_hint": 2
+  },
+  "owner_questions": [
+    "The PNP text names agency staff and reporters: confirm the ingester drops reporter/contact fields and the 'Agencies Notified' text entirely.",
+    "Include treated or reclaimed-water discharges (e.g. Fort Pierce diluted effluent to the Indian River Lagoon) as events, or SSO and untreated only?",
+    "Show citizen-complaint PNP rows (no facility) or drop them?"
+  ],
+  "surprise": "Florida's sewage notices sit in a general 'pollution' feed that also carries every fuel spill and citizen complaint, and its records publish agency staff names and phone numbers in plain text; the water body is only a yes/no flag."
+}

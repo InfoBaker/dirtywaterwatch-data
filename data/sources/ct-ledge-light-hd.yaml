@@ -1,0 +1,23 @@
+id: "ct-ledge-light-hd"
+name: "Ledge Light Health District beach and shellfish postings (East Lyme, Groton, Ledyard, New London, Old Lyme, Stonington, Waterford)"
+url: "https://llhd.org/"
+homepage: "https://llhd.org/"
+kind: "html"
+level: "municipal"
+# Notes (research/ct, status candidate, verified search_only, checked 2026-11-01): Weekly beach
+#   sampling in season; advisories posted on district site; shellfish area status page; exact URLs
+#   not fetched.
+# Access detail (research, quoted): none recorded
+# Research notes: llhd.org returned HTTP 522 (origin down) on 2026-11-01.
+cadence: null
+license: "none stated"
+attribution: "Ledge Light Health District"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["CT"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

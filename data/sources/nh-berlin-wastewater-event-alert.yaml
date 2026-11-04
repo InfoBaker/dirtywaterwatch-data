@@ -1,0 +1,25 @@
+id: "nh-berlin-wastewater-event-alert"
+name: "Berlin Notify Me 'Wastewater Event Alert'"
+url: "https://www.berlinnh.gov/list.aspx"
+homepage: "https://www.berlinnh.gov/list.aspx"
+kind: "email"
+level: "municipal"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Requires
+#   subscribing
+# Access detail (research, quoted): CivicPlus News Flash mid 239; no public RSS or posts;
+#   All-newsflash RSS https://www.berlinnh.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml contained
+#   no wastewater items
+# Waters: Androscoggin River (openboatlaunch slugs: androscoggin-river-nh)
+# History: none public
+cadence: "unknown"
+license: "none stated"
+attribution: "City of Berlin"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NH"]
+access: ["email"]
+access_detail: "CivicPlus News Flash mid 239; no public RSS or posts; All-newsflash RSS https://www.berlinnh.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml contained no wastewater items"
+machine_readable: false
+legal_basis: "NH0100013"
+checked: "2026-11-01"

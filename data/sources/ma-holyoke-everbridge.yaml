@@ -1,0 +1,25 @@
+id: "ma-holyoke-everbridge"
+name: "Holyoke Emergency Notification System (Everbridge, incl. CSO)"
+url: "https://www.holyoke.org/emergency-notification-system/"
+homepage: "https://www.holyoke.org/emergency-notification-system/"
+kind: "email"
+level: "municipal"
+# Notes (research/ma, status candidate, verified fetched, checked 2026-11-01): Likely the only
+#   channel still carrying Holyoke notice text in 2026; owner should subscribe
+# Access detail (research, quoted): Sign-up https://member.everbridge.net/453003085611624/new (not
+#   subscribed). Page: 'To receive critical alerts and updates, including CSO notifications'
+# Can fill: published_at, started_at (as stated)
+# Cannot fill: coordinates
+# Waters: Connecticut River (openboatlaunch slugs: connecticut-river-ma)
+cadence: "per event"
+license: "none stated"
+attribution: "City of Holyoke"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["MA"]
+access: ["email", "phone"]
+access_detail: "Sign-up https://member.everbridge.net/453003085611624/new (not subscribed). Page: 'To receive critical alerts and updates, including CSO notifications'"
+machine_readable: false
+legal_basis: "314 CMR 16.00"
+checked: "2026-11-01"

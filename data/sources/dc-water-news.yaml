@@ -1,0 +1,25 @@
+id: "dc-water-news"
+name: "DC Water news releases and public notices (sewer overflow notices)"
+url: "https://www.dcwater.com/about-dc-water/media/news"
+homepage: "https://www.dcwater.com/about-dc-water/media/news"
+kind: "html"
+level: "utility"
+# Feed row: the source id written by the ingester pipeline/ingest/dc_water_news.py
+#   (data/build/events/dc-water-news.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/dc_water_news.py meta): ad hoc; large overflows get a notice the same day
+#   or next morning; no RSS. Written as daily: make ingest polls the list on every refresh, and a
+#   notice can come at any hour, so a day without a successful fetch is the signal worth flagging.
+cadence: "daily"
+license: "Site terms not reviewed; press releases are public statements."
+attribution: "District of Columbia Water and Sewer Authority (DC Water)"
+enabled: true
+role: "events"
+event_types: ["sso", "cso"]
+states: ["DC"]
+registry_ids: ["dc-dcwater-news-notices"]
+access: ["html"]
+access_detail: "HTML list, 10 items per page, ?page=N (0-based); each item has date ('16  August,  2025'), title, teaser and link /about-dc-water/media/news/<slug>. Fetched pages 0-25 (312 items, back to July 2024) into raw/dcwater-news-index-p0-25.json and 18 notice pages into raw/notices/. No RSS: /rss.xml, /news/rss and /about-dc-water/media/news/rss.xml all 404. Email delivery of news releases via the Everbridge sign-up (see dc-dcwater-everbridge-alerts)."
+machine_readable: false
+legal_basis: "No statute or permit clause requires a press release. Permit DC0021199 Part III.B.1.h (Public Notification) covers lights, website, signs and pamphlets for CSOs."
+checked: "2026-11-02"

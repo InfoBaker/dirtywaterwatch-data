@@ -1,0 +1,22 @@
+id: "ct-deep-cyanobacteria-page"
+name: "DEEP Cyanobacteria Blooms page"
+url: "https://portal.ct.gov/DEEP/Water/Water-Quality/Blue-Green-Algae-Blooms"
+homepage: "https://portal.ct.gov/DEEP/Water/Water-Quality/Blue-Green-Algae-Blooms"
+kind: "html"
+level: "state"
+# Notes (research/ct, status used, verified fetched, checked 2026-11-01): Explains state-beach HAB
+#   closures (via Swimming WQ Report), reporting via bloomWatch or deep.algalblooms@ct.gov; links CT
+#   bloomWatch map.
+# Access detail (research, quoted): none recorded
+cadence: "Content last revised August 11, 2026"
+license: "none stated"
+attribution: "CT DEEP"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["CT"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

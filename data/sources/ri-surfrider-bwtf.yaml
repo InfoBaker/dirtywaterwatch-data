@@ -1,0 +1,25 @@
+id: "ri-surfrider-bwtf"
+name: "Surfrider RI Blue Water Task Force"
+url: "https://ri.surfrider.org/programs/blue-water-task-force"
+homepage: "https://ri.surfrider.org/programs/blue-water-task-force"
+kind: "api"
+level: "nonprofit"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Machine-readable
+#   latest results for surf beaches; confirm API terms with Surfrider before use (national agent may
+#   cover).
+# Access detail (research, quoted): Page widget calls Surfrider's AWS AppSync GraphQL (getLab query:
+#   locations, latestSample, rateExceedsBAV, limits) with a public x-api-key embedded in page JS;
+#   not called. Reports at https://bwtf.surfrider.org/report/<lab>/<location>. Lab: URI Watershed
+#   Watch.
+cadence: null
+license: "none stated"
+attribution: "Surfrider Foundation RI Chapter"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["RI"]
+access: ["html", "api"]
+access_detail: "Page widget calls Surfrider's AWS AppSync GraphQL (getLab query: locations, latestSample, rateExceedsBAV, limits) with a public x-api-key embedded in page JS; not called. Reports at https://bwtf.surfrider.org/report/<lab>/<location>. Lab: URI Watershed Watch."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,206 @@
+{
+  "state": "GA",
+  "name": "Georgia",
+  "region": "southeast",
+  "epa_region": 4,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "yes",
+    "summary": "A publicly owned treatment works that spills raw sewage to state waters must tell television, radio and print media within 24 hours, tell the local health department immediately, and immediately post signs at the spill and at public access points downstream for at least seven days; a major spill (over 10,000 gallons) also needs a county legal-organ notice within 7 days and notice to downstream water suppliers within 24 hours. EPD posts a daily 30-day list.",
+    "citations": [
+      {
+        "cite": "Ga. Comp. R. & Regs. 391-3-6-.05(3)(e)",
+        "title": "Emergency Actions: media notice",
+        "url": "https://www.law.cornell.edu/regulations/georgia/Ga-Comp-R-Regs-R-391-3-6-.05",
+        "quote": "The owner of a POTW responsible for a spill or a major spill shall report the incident to the local media (television, radio and print media) within 24 hours of becoming aware of the incident. The report shall include at a minimum the following: 1. Date of the spill or major spill; 2. Location and cause of spill or major spill; 3. Estimated volume discharged and name of receiving waters; 4. Corrective action taken",
+        "who": "owner of the POTW",
+        "channel": "television, radio and print media",
+        "deadline": "24 hours",
+        "threshold": "any spill of raw sewage to waters of the State",
+        "verified": "fetched"
+      },
+      {
+        "cite": "Ga. Comp. R. & Regs. 391-3-6-.05(3)(g)",
+        "title": "Emergency Actions: signs",
+        "url": "https://www.law.cornell.edu/regulations/georgia/Ga-Comp-R-Regs-R-391-3-6-.05",
+        "quote": "The owner of a POTW responsible for a spill or a major spill shall immediately post a notice as close as possible to where the spill or major spill occurred and where the spill or major spill entered State waters. ... The owner shall also post additional notices of the spill or major spill along the portions of the waterway affected by the incident (i.e. at bridge crossings, trails, boat ramps, recreational areas, and other points of public access to the affected waterway). These notices shall remain in place for a minimum of seven days after the spill or major spill has ceased.",
+        "who": "owner of the POTW",
+        "channel": "signs at the spill, where it entered State waters, and at bridges, trails, boat ramps and other public access points on the affected waterway, for at least seven days after it ceases",
+        "deadline": "immediately",
+        "threshold": "any spill",
+        "verified": "fetched"
+      },
+      {
+        "cite": "Ga. Comp. R. & Regs. 391-3-6-.05(3)(b),(d); O.C.G.A. 12-5-30.1",
+        "title": "Major spills: legal organ and downstream notice",
+        "url": "https://www.law.cornell.edu/regulations/georgia/Ga-Comp-R-Regs-R-391-3-6-.05",
+        "quote": "(b) The owner of a POTW responsible for a major spill shall publish a notice of the major spill in the legal organ of the County where the incident occurred. The notice shall be published within seven days after the date of the major spill. ... (d) The Division and the owner of a POTW will provide notice of a major spill within 24- hours of becoming aware of the major spill to every county, municipality or other public agency whose public water supply is within a distance of 20 miles downstream",
+        "who": "owner of the POTW and EPD",
+        "channel": "county legal organ; direct notice to downstream water suppliers",
+        "deadline": "7 days (legal organ); 24 hours (downstream)",
+        "threshold": "major spill: over 10,000 gallons or causing a water-quality violation",
+        "verified": "fetched"
+      },
+      {
+        "cite": "Ga. Comp. R. & Regs. 391-3-6-.05(3)(f)",
+        "title": "Local health department",
+        "url": "https://www.law.cornell.edu/regulations/georgia/Ga-Comp-R-Regs-R-391-3-6-.05",
+        "quote": "The owner of a POTW responsible for a spill or a major spill shall immediately report the incident to the local health department(s) for the area affected by the incident.",
+        "who": "owner of the POTW",
+        "channel": "local health department",
+        "deadline": "immediately",
+        "threshold": "any spill",
+        "verified": "fetched"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "immediately in person or by telephone (now GEOS 24-hour e-report); written 5-day report",
+      "cite": "391-3-6-.05(3)(a)"
+    },
+    "cso_permit_notice_clause": {
+      "permit": "GA0038644",
+      "quote": "If an overflow event occurs, the city is required to promptly report details of that overflow with signage at the site, at public access points downstream and on the city's website. (EPD news release on the 2015 Atlanta CSO permits; permit text not read)",
+      "deadline": "promptly",
+      "verified": "fetched"
+    },
+    "bills_and_cases": [
+      "Flint Riverkeeper and SELC 60-day notice of intent to sue the City of Atlanta (July 2026) over spills to the Flint River headwaters (search only).",
+      "Atlanta and DeKalb remain under sewer consent decrees."
+    ]
+  },
+  "erule": {
+    "system": "state",
+    "sobe_events_2026_11_03": 1232,
+    "public_output_url": "https://epd.georgia.gov/sewage-spills-report",
+    "notes": "Permittees file 24-hour and 5-day reports in EPD's GEOS (login); 1,232 events from 90 GA permits reach EPA's SOBE extract."
+  },
+  "statewide_feed": {
+    "exists": true,
+    "source_ids": [
+      "ga-epd-sewage-spills-report",
+      "ga-epd-spills-map-layer",
+      "ga-epa-sobe"
+    ],
+    "precision": "daily",
+    "machine_readable": true,
+    "format": "csv",
+    "latency": "about one business day",
+    "history": "rolling 30 days (build history by daily snapshot; WWALS archive since Dec 2018; SOBE for EPA-held rows)",
+    "coordinates": "some",
+    "receiving_water": "free text plus river basin",
+    "start_end": "start date only",
+    "volume": true,
+    "stable_id": false,
+    "license": "none stated",
+    "notes": "Format is an .xlsx workbook served as XLS at a dated URL; the ArcGIS StoryMap layer adds points but has null dates."
+  },
+  "cso": {
+    "permits": 4,
+    "open_outfalls": 27,
+    "operators_with_web_channel": 0,
+    "operators_checked": 3,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "Atlanta's permits require signs and website posting; no web page was found. Columbus and Albany not found or not searched. CSO dry-weather rows appear in the EPD daily list."
+  },
+  "sso": {
+    "location_source": "ga-epd-spills-map-layer (points); SOBE",
+    "feeds": [
+      "ga-epd-sewage-spills-report",
+      "ga-epa-sobe"
+    ],
+    "notes": "About 60 spills a month; DeKalb County and Atlanta lead."
+  },
+  "beaches": {
+    "program": "Georgia DNR Coastal Resources Division Healthy Beaches with the Coastal Health District (coastal enterococci)",
+    "source_ids": [
+      "ga-dnr-healthy-beaches"
+    ],
+    "machine_readable": false,
+    "scope": "coastal",
+    "notes": "Map with advisories; endpoint not traced. Inland lakes not monitored statewide (not confirmed)."
+  },
+  "habs": {
+    "program": "unknown",
+    "source_ids": [
+      "ga-epd-hab"
+    ],
+    "machine_readable": false,
+    "notes": "No statewide bloom feed found."
+  },
+  "advisories": {
+    "health_department_pages": [
+      "Coastal Health District beach advisories (search only)"
+    ],
+    "watershed_groups": [
+      "WWALS Watershed Coalition",
+      "Chattahoochee Riverkeeper (BacteriALERT with USGS, not checked)",
+      "Flint Riverkeeper"
+    ],
+    "swim_guide": true
+  },
+  "outfalls": {
+    "state_layer": null,
+    "cso_inventory_gap": "unknown",
+    "sso_points": "state_table"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Chattahoochee River and Lake Seminole (AL, FL)",
+      "Savannah River (SC)",
+      "Suwannee and Withlacoochee (FL)",
+      "St. Marys River (FL)",
+      "Tennessee basin streams (TN, NC)"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "print_only",
+      "what": "Major-spill notice is a county legal-organ (newspaper) notice",
+      "fix_level": "legislative",
+      "note": ""
+    },
+    {
+      "kind": "sign_only",
+      "what": "Signs at the spill site for seven days",
+      "fix_level": "legislative",
+      "note": "Not visible online."
+    },
+    {
+      "kind": "login",
+      "what": "GEOS e-reports (24-hour and 5-day detail, end times) are behind a login",
+      "fix_level": "agency",
+      "note": "Partly offset by SOBE."
+    },
+    {
+      "kind": "no_web",
+      "what": "Atlanta's CSO website posting required by permit was not found",
+      "fix_level": "operator",
+      "note": ""
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "NotifyATL (City of Atlanta alerts)",
+      "url": "https://atlantawatershed.org/prepare-for-emergencies/",
+      "what": "city emergency alerts; whether it carries spill or CSO notices is unknown"
+    }
+  ],
+  "readiness": {
+    "tier": "A",
+    "expected_grade": "Dated reports",
+    "first_feed": "ga-epd-sewage-spills-report",
+    "effort": "medium",
+    "rationale": "Statewide daily list, machine-readable, day precision, with permit, gallons and waterway; join points from the map layer; fill end times and history from SOBE. No stable id and a rolling window mean a snapshot state machine.",
+    "order_hint": 3
+  },
+  "owner_questions": [
+    "Use WWALS's daily HTML archive (with credit) to back-fill 2018 to date, or start from today plus SOBE?",
+    "Ask EPD to add a row id and end date to the daily file?"
+  ],
+  "surprise": "Georgia has a 'post a sign at the spill for seven days' rule for every POTW spill and a daily statewide spreadsheet, yet the permit-required Atlanta CSO web notices could not be found; the federal SOBE extract holds more Georgia detail than the state's own public list."
+}

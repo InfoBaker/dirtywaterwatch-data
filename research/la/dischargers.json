@@ -1,0 +1,185 @@
+[
+  {
+    "id": "la-swbno",
+    "name": "Sewerage and Water Board of New Orleans (East Bank and West Bank WWTPs)",
+    "state": "LA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Mississippi River",
+      "Lake Pontchartrain",
+      "Bayou Bienvenue",
+      "Industrial Canal"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Consent-decree quarterly reports; press releases (not searched in depth)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "New Orleans"
+    ],
+    "notes": "Under EPA consent decree since 1998.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "la-baton-rouge",
+    "name": "City of Baton Rouge / Parish of East Baton Rouge (North, Central, South WWTPs)",
+    "state": "LA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Mississippi River",
+      "Bayou Manchac",
+      "Ward Creek",
+      "Comite River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "none found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Baton Rouge"
+    ],
+    "notes": "Sewer consent decree 2002, modified 2012-2013.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "la-jefferson-parish",
+    "name": "Jefferson Parish Sewerage Department",
+    "state": "LA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Lake Pontchartrain",
+      "Mississippi River",
+      "Bayou Segnette"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Metairie",
+      "Kenner",
+      "Marrero"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "la-shreveport",
+    "name": "City of Shreveport (Lucas and North Regional WWTPs)",
+    "state": "LA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Red River",
+      "Cross Bayou"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Shreveport"
+    ],
+    "notes": "EPA sewer consent decree 2014 (not re-checked).",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "la-lafayette-lus",
+    "name": "Lafayette Utilities System",
+    "state": "LA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Vermilion River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Lafayette"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "la-st-tammany",
+    "name": "St. Tammany Parish and north-shore utilities",
+    "state": "LA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Lake Pontchartrain",
+      "Tchefuncte River",
+      "Bogue Falaya"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Mandeville",
+      "Slidell",
+      "Covington"
+    ],
+    "notes": "North-shore beaches are in the LDH program.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "la-shell-geismar-cso",
+    "name": "Shell Chemical LP Geismar Plant (industrial combined outfall)",
+    "state": "LA",
+    "kind": "other",
+    "npdes_permit": "LA0005754",
+    "receiving_waters": [
+      "Mississippi River"
+    ],
+    "water_slugs": [],
+    "outfall_count": 1,
+    "outfalls_source": "data/outfalls-us.json",
+    "notification_channel": "none (industrial)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Geismar"
+    ],
+    "notes": "Listed in the EPA CSO inventory; industrial, not sewage.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "la-lacc-westlake-cso",
+    "name": "LACC, LLC US Ethylene & Derivatives Plant (industrial combined outfall)",
+    "state": "LA",
+    "kind": "other",
+    "npdes_permit": "LA0127268",
+    "receiving_waters": [
+      "Maple Fork-Bayou D'Inde"
+    ],
+    "water_slugs": [],
+    "outfall_count": 1,
+    "outfalls_source": "data/outfalls-us.json",
+    "notification_channel": "none (industrial)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Westlake"
+    ],
+    "notes": "Listed in the EPA CSO inventory; industrial, not sewage.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  }
+]

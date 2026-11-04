@@ -1,0 +1,27 @@
+id: "pa-alcosan-news-advisories"
+name: "ALCOSAN news posts for non-routine discharges (e.g. 2026-03-06 plant power outage)"
+url: "https://www.alcosan.org/news-and-events/featured-news/news/2026/03/07/advisory-issued-following-power-outage-and-river-discharge"
+homepage: "https://www.alcosan.org/news-and-events/featured-news"
+kind: "html"
+level: "utility"
+# Notes (research/pa, status candidate, verified fetched, checked 2026-11-02): Off-season and
+#   non-CSO discharges appear only as news posts; poll the ALCOSAN news listing.
+# Access detail (research, quoted): Fetched. Posted 'March 6, 2026, at 11:00 PM': full plant power
+#   outage 'between 6 – 8 p.m.', wet well overflowed to the river; advice to limit contact for 48
+#   hours; PADEP and partner agencies notified. No volume. Outside the SOAK season, so it is not in
+#   the SOAK log.
+# Can fill: event_type, started_at (approx.), advice_text, valid_until (48 h), published_at,
+#   authority
+# Cannot fill: volume; coordinates; ended_at (exact)
+cadence: null
+license: "none stated"
+attribution: "ALCOSAN"
+enabled: true
+role: "events"
+event_types: ["bypass", "sso"]
+states: ["PA"]
+access: ["html"]
+access_detail: "Fetched. Posted 'March 6, 2026, at 11:00 PM': full plant power outage 'between 6 – 8 p.m.', wet well overflowed to the river; advice to limit contact for 48 hours; PADEP and partner agencies notified. No volume. Outside the SOAK season, so it is not in the SOAK log."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

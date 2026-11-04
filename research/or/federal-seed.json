@@ -1,0 +1,358 @@
+{
+ "state": "OR",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "OR0026361",
+   "permittee": "CORVALLIS STP",
+   "city": "CORVALLIS",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Willamette Run"
+   ]
+  },
+  {
+   "npdes_permit": "OR0026905",
+   "permittee": "COLUMBIA BOULEVARD STP",
+   "city": "PORTLAND",
+   "open_outfalls": 36,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Columbia Slough",
+    "Willamette River"
+   ]
+  },
+  {
+   "npdes_permit": "OR0027561",
+   "permittee": "ASTORIA STP",
+   "city": "ASTORIA",
+   "open_outfalls": 38,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Columbia River",
+    "Youngs Bay"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 78,
+ "plant_permits": 163,
+ "plant_permits_major": 45,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "OR0020001",
+   "permittee": "WOODBURN, CITY OF",
+   "city": "WOODBURN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020168",
+   "permittee": "CLEAN WATER SERVICES",
+   "city": "FOREST GROVE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020214",
+   "permittee": "CANBY, CITY OF",
+   "city": "CANBY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020346",
+   "permittee": "SWEET HOME, CITY OF",
+   "city": "SWEET HOME",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020354",
+   "permittee": "BROOKINGS, CITY OF",
+   "city": "BROOKINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020401",
+   "permittee": "SEASIDE, CITY OF",
+   "city": "SEASIDE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020427",
+   "permittee": "STAYTON, CITY OF",
+   "city": "STAYTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020460",
+   "permittee": "LA GRANDE, CITY OF",
+   "city": "LA GRANDE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020478",
+   "permittee": "LINCOLN CITY, CITY OF",
+   "city": "LINCOLN CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020524",
+   "permittee": "TROUTDALE, CITY OF",
+   "city": "TROUTDALE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020559",
+   "permittee": "COTTAGE GROVE, CITY OF",
+   "city": "COTTAGE GROVE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OR0020621",
+   "permittee": "ONTARIO, CITY OF",
+   "city": "ONTARIO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020656",
+   "permittee": "SILVERTON, CITY OF",
+   "city": "SILVERTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020664",
+   "permittee": "TILLAMOOK, CITY OF",
+   "city": "TILLAMOOK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020699",
+   "permittee": "BAKER CITY, CITY OF",
+   "city": "BAKER CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020737",
+   "permittee": "DALLAS, CITY OF",
+   "city": "DALLAS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020761",
+   "permittee": "HERMISTON, CITY OF",
+   "city": "HERMISTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020788",
+   "permittee": "HOOD RIVER, CITY OF",
+   "city": "HOOD RIVER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020818",
+   "permittee": "LEBANON, CITY OF",
+   "city": "LEBANON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0020885",
+   "permittee": "THE DALLES, CITY OF",
+   "city": "THE DALLES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0022764",
+   "permittee": "WILSONVILLE, CITY OF",
+   "city": "WILSONVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0023345",
+   "permittee": "CLEAN WATER SERVICES",
+   "city": "HILLSBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0023361",
+   "permittee": "NORTH BEND, CITY OF",
+   "city": "NORTH BEND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0023574",
+   "permittee": "COOS BAY, CITY OF",
+   "city": "COOS BAY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0023582",
+   "permittee": "COOS BAY, CITY OF",
+   "city": "COOS BAY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0023876",
+   "permittee": "SOUTH SUBURBAN SANITARY DISTRICT",
+   "city": "KLAMATH FALLS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0026131",
+   "permittee": "GRESHAM, CITY OF",
+   "city": "PORTLAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0026140",
+   "permittee": "OAK LODGE WATER SERVICES DISTRICT",
+   "city": "MILWAUKIE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0026221",
+   "permittee": "Water Environment Services",
+   "city": "MILWAUKIE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0026255",
+   "permittee": "ASHLAND, CITY OF",
+   "city": "ASHLAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0026263",
+   "permittee": "MEDFORD, CITY OF",
+   "city": "CENTRAL POINT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0026301",
+   "permittee": "KLAMATH FALLS, CITY OF",
+   "city": "KLAMATH FALLS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0026395",
+   "permittee": "PENDLETON, CITY OF",
+   "city": "PENDLETON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0026409",
+   "permittee": "SALEM, CITY OF",
+   "city": "SALEM",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0026891",
+   "permittee": "PORTLAND, CITY OF",
+   "city": "PORTLAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0028118",
+   "permittee": "CLEAN WATER SERVICES",
+   "city": "TIGARD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0028801",
+   "permittee": "ALBANY-MILLERSBURG WATER RECLAMATION FACILITY",
+   "city": "ALBANY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0028843",
+   "permittee": "GRANTS PASS, CITY OF",
+   "city": "GRANTS PASS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0029777",
+   "permittee": "CLEAN WATER SERVICES",
+   "city": "HILLSBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0031224",
+   "permittee": "METROPOLITAN WASTEWATER MANAGEMENT COMMISSION",
+   "city": "EUGENE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0031259",
+   "permittee": "Water Environment Services",
+   "city": "OREGON CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OR0031356",
+   "permittee": "ROSEBURG URBAN SANITARY AUTHORITY",
+   "city": "ROSEBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0032352",
+   "permittee": "NEWBERG, CITY OF",
+   "city": "NEWBERG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0034002",
+   "permittee": "MCMINNVILLE, CITY OF",
+   "city": "MCMINNVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OR0044571",
+   "permittee": "NEWPORT, CITY OF",
+   "city": "NEWPORT",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

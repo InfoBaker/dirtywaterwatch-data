@@ -1,0 +1,141 @@
+[
+  {
+    "id": "de-de0020320",
+    "name": "City of Wilmington (Regional WWTP and combined sewer system)",
+    "state": "DE",
+    "kind": "cso",
+    "npdes_permit": "DE0020320",
+    "receiving_waters": [
+      "Brandywine Creek",
+      "Christina River",
+      "Shellpot Creek",
+      "Little Mill Creek",
+      "Silverbrook Run",
+      "Delaware River"
+    ],
+    "water_slugs": [],
+    "outfall_count": 41,
+    "outfalls_source": "EPA National CSO Inventory (41 open); City CSO_Locations layer 45 structures (42 active): https://services.arcgis.com/hQ3wdpbjO3fPf612/arcgis/rest/services/CSO_Locations/FeatureServer/0",
+    "notification_channel": "Signs at each CSO; cso.wilmingtonde.gov explainer; no overflow status or list found. CSOs in compliance with the permit are exempt from DERNS reporting.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Wilmington"
+    ],
+    "notes": "Regional plant also treats New Castle County flows. Permit notification clause not read.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "de-new-castle-county",
+    "name": "New Castle County Department of Public Works (sewer)",
+    "state": "DE",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Christina River",
+      "Red Clay Creek",
+      "White Clay Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched; DERNS for releases of 10,000 gallons or more",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Newark",
+      "New Castle"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "de-kent-county",
+    "name": "Kent County Levy Court Wastewater (Kent County Regional Resource Recovery Facility)",
+    "state": "DE",
+    "kind": "sso",
+    "npdes_permit": "DE0020338",
+    "receiving_waters": [
+      "Murderkill River",
+      "Delaware Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DERNS (sewage release near Kent County pump station #3, Dover, 2026-10-23)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Dover",
+      "Frederica"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "de-city-of-dover",
+    "name": "City of Dover Public Works (collection system)",
+    "state": "DE",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "St. Jones River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DERNS",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Dover"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "de-sussex-county",
+    "name": "Sussex County Engineering (wastewater)",
+    "state": "DE",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Inland Bays",
+      "Rehoboth Bay",
+      "Indian River Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Georgetown",
+      "Lewes"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "de-millsboro",
+    "name": "Town of Millsboro wastewater",
+    "state": "DE",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Indian River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DNREC press release and shellfish closure after a wastewater release (search only)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Millsboro"
+    ],
+    "notes": "",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  }
+]

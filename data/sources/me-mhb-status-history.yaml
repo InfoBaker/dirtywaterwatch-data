@@ -1,0 +1,30 @@
+id: "me-mhb-status-history"
+name: "Maine Healthy Beaches beach advisory status history (per beach HTML)"
+url: "https://apps.web.maine.gov/online/healthy_beaches/public/beach-status-history.html?beach=East%20End%20Beach"
+homepage: "https://apps.web.maine.gov/online/healthy_beaches/public/beach-status-history.html?beach=East%20End%20Beach"
+kind: "html"
+level: "state"
+# Notes (research/me, status candidate, verified fetched, checked 2026-11-01): Gives advisory end
+#   times the live feed lacks; scrape per beach.
+# Access detail (research, quoted): Server-rendered table per beach (?beach= name; the no-parameter
+#   URL returns HTTP 400). No CSV/XML export (status-table.csv and beach-status-history.csv return
+#   404). All 66 beaches fetched (raw/mhb-hist/, parsed to raw/mhb-hist-all.json: 226 rows
+#   2024-2026).
+# Can fill: event_type, started_at, ended_at, advice_text, source_status
+# Cannot fill: cause; volume; discharger
+# History: 2024 to present in this portal (2024: 65 elevated-bacteria and 33 rainfall advisories;
+#   2025: 32 and 12, plus 1 closure; 2026: 34 and 48, plus 1 closure).
+# Research notes: Comments never cite sewage or CSOs; the two closures were a gasoline spill
+#   (Mothers Beach, 2026-07-14) and a blank-comment closure (Willard Beach, 2025-08-23).
+cadence: "Updated as advisories are posted and lifted."
+license: "maine.gov: 'Neither the State of Maine, nor any agency, officer, or employee of the State of Maine warrants the accuracy, reliability or timeliness of any information published on the Maine.gov website ... Any person or entity that relies on any information obtained from this system does so at their own risk.' (https://www.maine.gov/portal/policies/disclaimer.html). No reuse licence stated."
+attribution: "Maine DEP, Maine Healthy Beaches Program"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure"]
+states: ["ME"]
+access: ["html"]
+access_detail: "Server-rendered table per beach (?beach= name; the no-parameter URL returns HTTP 400). No CSV/XML export (status-table.csv and beach-status-history.csv return 404). All 66 beaches fetched (raw/mhb-hist/, parsed to raw/mhb-hist-all.json: 226 rows 2024-2026)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,153 @@
+{
+  "state": "AR",
+  "name": "Arkansas",
+  "region": "gulf",
+  "epa_region": 6,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "unknown",
+    "summary": "Permittees must notify DEQ within 24 hours of any SSO, bypass, upset or unpermitted discharge and file a 5-day written report, through online forms that feed a public search. No statewide duty to notify the public was found; Little Rock's settlement-based response plan and some consent orders require signs and public notification.",
+    "citations": [
+      {
+        "cite": "Arkansas DEQ Reported Noncompliance Incident Data page (NPDES permit Part II conditions)",
+        "title": "24 Hour Online Overflow Reporting",
+        "url": "https://adeq.state.ar.us/water/enforcement/sso/data.aspx",
+        "quote": "Permittees are required to report any instances of noncompliance that may endanger human health or the environment to DEQ's Water Quality Enforcement. Notification must be made within 24 hours of becoming aware of the circumstances, and in most cases, an additional 5-Day Written Report is required for the following occurrences: ... Any Sanitary Sewer Overflow (SSO), no matter how small",
+        "who": "permittee",
+        "channel": "DEQ online forms or email",
+        "deadline": "24 hours; 5-day written report",
+        "threshold": "any SSO, unanticipated bypass, upset, or unpermitted discharge",
+        "verified": "fetched"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "24 hours; 5-day written report",
+      "cite": "NPDES permit Part II; DEQ incident page"
+    },
+    "cso_permit_notice_clause": {
+      "permit": null,
+      "quote": "No CSO permits in Arkansas.",
+      "deadline": null,
+      "verified": "fetched"
+    },
+    "bills_and_cases": [
+      "Little Rock: Sierra Club settlement (2004 era) requiring an SSO Response Plan with signage and public notification; final compliance certified 2023.",
+      "Fort Smith sewer consent decree (2015; not re-checked).",
+      "Bills of 2025 on overflow notice: not searched."
+    ]
+  },
+  "erule": {
+    "system": "state",
+    "sobe_events_2026_11_03": 0,
+    "public_output_url": "https://adeq.state.ar.us/water/enforcement/sso/data.aspx",
+    "notes": "DEQ's own online 24-hour forms feed a public incident search; no SOBE rows."
+  },
+  "statewide_feed": {
+    "exists": true,
+    "source_ids": [
+      "ar-deq-overflow-incidents",
+      "ar-deq-sso-access-db"
+    ],
+    "precision": "daily",
+    "machine_readable": false,
+    "format": "html",
+    "latency": "about one day (page states data current as of the fetch date; a 10/29 report present on 11/03)",
+    "history": "Access snapshot from at least 2014 to 2025-08; web search current",
+    "coordinates": "none",
+    "receiving_water": "none (impact class: reached waters / public land / private property; location text)",
+    "start_end": "start and stop dates",
+    "volume": true,
+    "stable_id": true,
+    "license": "None shown.",
+    "notes": "HTML POST search by date range (month-sized queries work; a year with all types returned 0); export links to Text/Excel/PDF. The Access ZIP lags (2025-08-13)."
+  },
+  "cso": {
+    "permits": 0,
+    "open_outfalls": 0,
+    "operators_with_web_channel": 0,
+    "operators_checked": 0,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "No CSOs in Arkansas."
+  },
+  "sso": {
+    "location_source": "none with coordinates; location text (address, manhole or lift-station name) and permit",
+    "feeds": [
+      "ar-deq-overflow-incidents"
+    ],
+    "notes": "About 40 SSOs a month (41 in October 2026)."
+  },
+  "beaches": {
+    "program": "none found",
+    "source_ids": [
+      "ar-beaches"
+    ],
+    "machine_readable": false,
+    "scope": "inland",
+    "notes": "No bacteria beach program found."
+  },
+  "habs": {
+    "program": "DEQ Harmful Algal Bloom advisories (HTML current table, archive, news releases)",
+    "source_ids": [
+      "ar-deq-hab-advisories"
+    ],
+    "machine_readable": false,
+    "notes": "Active May to October; several lake advisories in 2026."
+  },
+  "advisories": {
+    "health_department_pages": [],
+    "watershed_groups": [
+      "Arkansas Canoe Club / Buffalo River groups (not checked)",
+      "Illinois River Watershed Partnership"
+    ],
+    "swim_guide": false
+  },
+  "outfalls": {
+    "state_layer": null,
+    "cso_inventory_gap": "none (no CSOs)",
+    "sso_points": "none"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Arkansas River (OK)",
+      "Illinois River (OK)",
+      "Red River (TX, OK, LA)",
+      "Mississippi River (TN, MS)",
+      "White River and Bull Shoals / Norfork lakes (MO)",
+      "Ouachita River (LA)"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "no_web",
+      "what": "No statewide duty to tell the public; notice depends on settlements and consent orders.",
+      "fix_level": "legislative",
+      "note": ""
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "Arkansas DEQ email lists",
+      "url": "https://www.adeq.state.ar.us/poa/pi/emaillists.aspx",
+      "what": "general DEQ lists (news releases, including HAB advisories)"
+    }
+  ],
+  "readiness": {
+    "tier": "B",
+    "expected_grade": "Dated reports",
+    "first_feed": "ar-deq-overflow-incidents",
+    "effort": "medium",
+    "rationale": "Statewide dated reports exist and are current to about a day, with volume, impact and cause, but only through an HTML POST search (paged, no API) and without coordinates or receiving water; the bulk Access file is stale. A polite weekly-window poller and geocoding make it usable.",
+    "order_hint": 3
+  },
+  "owner_questions": [
+    "Is polling the DEQ incident search (an HTML POST form, a read-only query) acceptable, or ask DEQ for an export first?",
+    "Place SSOs at the permit's plant when no address geocodes?",
+    "Show HAB advisories from the DEQ table (no coordinates; lake-level)?"
+  ],
+  "surprise": "Arkansas reports are filed on DEQ web forms and appear in a public search the next day, including spills that never reached water, with a 'Public Notification' tick in the action taken: a near-real-time statewide list that nobody advertises."
+}

@@ -1,0 +1,21 @@
+id: "epa-r1-cso-outfalls-2022-ct"
+name: "EPA Region 1 CSO Outfall Locations 2022 (CT subset)"
+url: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1"
+homepage: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1"
+kind: "arcgis"
+level: "federal"
+# Notes (research/ct, status used, verified fetched, checked 2026-11-01): Cross-check of active CT
+#   CSO outfalls: 90 outfalls in 5 permits (Bridgeport East 6, West 24, GNH 11, MDC 38, Norwich 11).
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "none stated"
+attribution: "US EPA Region 1"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["CT"]
+access: ["arcgis", "api"]
+access_detail: null
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

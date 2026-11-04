@@ -1,0 +1,150 @@
+{
+ "state": "MT",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 197,
+ "plant_permits_major": 20,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "MT0020001",
+   "permittee": "CITY OF MILES CITY",
+   "city": "MILES CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0020028",
+   "permittee": "CITY OF HAMILTON",
+   "city": "HAMILTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MT0020044",
+   "permittee": "CITY OF LEWISTOWN",
+   "city": "LEWISTOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0020184",
+   "permittee": "CITY OF WHITEFISH",
+   "city": "WHITEFISH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0020311",
+   "permittee": "CITY OF LAUREL",
+   "city": "LAUREL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0020397",
+   "permittee": "BIGFORK COUNTY WATER AND SEWER",
+   "city": "BIGFORK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0020435",
+   "permittee": "CITY OF LIVINGSTON",
+   "city": "LIVINGSTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0020478",
+   "permittee": "CITY OF RED LODGE",
+   "city": "RED LODGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MT0020494",
+   "permittee": "CITY OF LIBBY",
+   "city": "LIBBY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0021628",
+   "permittee": "CITY OF GLENDIVE",
+   "city": "GLENDIVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MT0021920",
+   "permittee": "CITY OF GREAT FALLS",
+   "city": "GREAT FALLS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0021938",
+   "permittee": "CITY OF KALISPELL",
+   "city": "KALISPELL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0022012",
+   "permittee": "BUTTE SILVER BOW CITY AND COUNTY",
+   "city": "BUTTE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0022535",
+   "permittee": "CITY OF HAVRE",
+   "city": "HAVRE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0022586",
+   "permittee": "CITY OF BILLINGS",
+   "city": "BILLINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0022594",
+   "permittee": "CITY OF MISSOULA",
+   "city": "MISSOULA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0022608",
+   "permittee": "CITY OF BOZEMAN",
+   "city": "BOZEMAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0022616",
+   "permittee": "CITY OF DEER LODGE",
+   "city": "DEER LODGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0022641",
+   "permittee": "CITY OF HELENA",
+   "city": "HELENA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "MT0030759",
+   "permittee": "City of Hardin Wastewater Treatment Facility",
+   "city": "HARDIN",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

@@ -1,0 +1,589 @@
+[
+ {
+  "event_id": "nj-2026-08-22-manasquan-preemptive-swim-ban",
+  "source_id": "nj-ccmp-beach-api",
+  "source_record_id": "MC1036 and MC1096 incidents 08/22/2026",
+  "event_type": "beach closure (preemptive), source coded 'CSO'",
+  "source_status": "CLOSURE / OTHER / CSO / PREEMPT, '[Day #1] - N/A'; ended next day",
+  "discharger": "Not identified. NJDEP (quoted by FOX 29 via the New York Post): 'last week's heavy rain triggered sewer overflows that carried the syringes onto the beach.' Manasquan has no CSO outfalls; the nearest NJ CSOs are in the NY-NJ harbor and Raritan areas (inferred).",
+  "npdes_permit": null,
+  "started_at": "2026-08-22 (date only; syringes found Saturday)",
+  "ended_at": "2026-08-23 (reopened early Sunday after two high tides, per FOX 29)",
+  "timezone": "America/New_York",
+  "reported_at": null,
+  "published_at": "FOX 29 2026-08-24 14:28 EDT; News 12 NJ 2026-08-22",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-02",
+  "waterbody": "Atlantic Ocean at Manasquan (East Main; Inlet Surfing Beach, Riverside Dr.)",
+  "water_slugs": [],
+  "location_text": "Manasquan Borough, Monmouth County; stations MC1036 East Main and MC1096 Inlet Surfing Beach",
+  "coordinates": {
+   "lat": 40.111342,
+   "lon": -74.032377,
+   "source": "NJ beach API station MC1036",
+   "precision": "beach station point"
+  },
+  "material": "household/home-health syringes and trash; NJDEP said not regulated medical waste (News 12 headline)",
+  "volume": null,
+  "units": null,
+  "estimate_flag": null,
+  "authority": "Manasquan Borough / NJDEP; NJ beach program record",
+  "advice_text": "Swimming prohibited; sand and boardwalk open (news).",
+  "valid_until": null,
+  "geometry": "beach station points",
+  "source_url": "https://beachapi.njdep.rutgers.edu/api/public/data/download/incident/?downloadType=incident&program=&county=&municipality=&locationType=&stationType=&beachId=&lha=&startDate=2026-01-01&endDate=2026-12-31",
+  "raw_record": {
+   "Program_Name": "Cooperative Coastal Monitoring Program",
+   "Station_Name": "MC1036",
+   "Beach_Name": "East Main",
+   "Incident_Start_Date": "08/22/2026",
+   "Incident_End_Date": "08/23/2026",
+   "Location_Type_Name": "Ocean",
+   "Beach_Act_Type_Name": "CLOSURE",
+   "Beach_Reason_Type_Name": "OTHER",
+   "Beach_Source_Type_Name": "CSO",
+   "Beach_Source_Type_Desc": "Combined Sewer Overflow",
+   "Beach_Indicator_Type_Name": "PREEMPT",
+   "Incident_Additional_Comments": "[Day #1] - N/A"
+  },
+  "revision_history": [
+   {
+    "date": "2026-08-24",
+    "what": "Next bacteria samples: MC1036 and MC1096 Enterococcus 5 CFU/100mL with remark K (below detection, inferred) at 07:14 and 07:00"
+   }
+  ],
+  "jurisdiction": "NJ",
+  "source_health": "ok",
+  "coverage_note": "Only 2 of 610 NJ beach incidents in 2025-2026 are coded CSO. No water sample on the closure day (preemptive).",
+  "notices_traced": [
+   {
+    "notice": "NJ beach API incident rows (CSO, PREEMPT)",
+    "url": "https://beachapi.njdep.rutgers.edu/api/public/data/download/incident/?downloadType=incident&program=&county=&municipality=&locationType=&stationType=&beachId=&lha=&startDate=2026-01-01&endDate=2026-12-31"
+   },
+   {
+    "notice": "FOX 29, 'Dozens of syringes found at NJ beach prompted temporary swimming ban', 2026-08-24",
+    "url": "https://www.fox29.com/news/dozens-syringes-found-nj-beach-prompted-temporary-swimming-ban"
+   },
+   {
+    "notice": "News 12 NJ, 2026-08-22 and follow-up 'NJ DEP reports home health care syringes, not medical waste, washed up on Manasquan Beach'",
+    "url": "https://newjersey.news12.com/2026/08/22/swimming-prohibited-at-manasquan-beach-after-more-than-60-syringes-wash-ashore/3QZa6ylUBcqZOGVUlLaQNo"
+   },
+   {
+    "notice": "centraljersey.com 2026-08-25 (403 to fetch; title only)",
+    "url": "https://centraljersey.com/2026/08/25/manasquan-beach-syringes-swimming-ban-sewer-overflow/"
+   }
+  ],
+  "known_vs_inferred": "Known: state record codes a one-day preemptive closure with source 'Combined Sewer Overflow'; NJDEP attributed debris to rain-driven sewer overflows. Inferred: which system overflowed (not stated)."
+ },
+ {
+  "event_id": "nj-2026-07-06-belmar-l-street-closure",
+  "source_id": "nj-ccmp-beach-api",
+  "source_record_id": "MC0031 incidents 07/06/2026 (CONTAM_ADV) and 07/07/2026 (CLOSURE)",
+  "event_type": "beach advisory then closure (elevated Enterococcus)",
+  "source_status": "CONTAM_ADV 07/06-07/07 'First result that triggered an incident'; CLOSURE 07/07-07/08 'Incident continues; Text to be updated.'",
+  "discharger": "Not identified in the record (source UNKNOWN). Belmar's sanitary lines near the Shark River have a history of leaks (older news, search only).",
+  "npdes_permit": null,
+  "started_at": "2026-07-06 08:40 (sample)",
+  "ended_at": "2026-07-08 (incident end date; reopening not traced)",
+  "timezone": "America/New_York",
+  "reported_at": null,
+  "published_at": "WBJB 2026-07-09 08:14 EDT",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-02",
+  "waterbody": "Shark River (L Street river beach)",
+  "water_slugs": [
+   "shark-river-nj",
+   "south-arm-nj"
+  ],
+  "location_text": "L Street Beach, Belmar Borough, Monmouth County (station MC0031; brackets MC0031E1, MC0031W1)",
+  "coordinates": {
+   "lat": 40.1785728309,
+   "lon": -74.0337028887,
+   "source": "NJ beach API",
+   "precision": "beach station point"
+  },
+  "material": "Enterococcus (indicator)",
+  "volume": "155 CFU/100mL (07-06 08:40); 1000 with remark L at 07-07 11:28-11:32 (primary and both brackets)",
+  "units": "CFU/100mL",
+  "estimate_flag": null,
+  "authority": "NJDEP CCMP / Monmouth County Health Department",
+  "advice_text": "WBJB: closures 'followed heavy rain and flooding. Officials say stormwater runoff likely carried contamination into local waterways.'",
+  "valid_until": null,
+  "geometry": "beach station point",
+  "source_url": "https://beachapi.njdep.rutgers.edu/api/public/data/download/waterQuality?downloadType=water-quality&program=&county=&municipality=&locationType=&stationType=&beachId=&lha=&startDate=2026-07-06&endDate=2026-07-07",
+  "raw_record": {
+   "Station_Name": "MC0031",
+   "Result_Date": "07/07/2026",
+   "Result_Time": "11:30",
+   "Result_Measure": "1000",
+   "Units_Name": "CFU/100mL",
+   "Result_Type_Name": "Enterococcus",
+   "Remark_Code_Name": "L"
+  },
+  "revision_history": [],
+  "jurisdiction": "NJ",
+  "source_health": "ok",
+  "coverage_note": "Same day closures: Sea Girt The Terrace (MC1067), Atlantic Highlands Highlands Rec Center (MC0049), Long Beach Twp Stockton (OC0073). WBJB names Highlands 'Snug Harbor' (station naming differs).",
+  "notices_traced": [
+   {
+    "notice": "NJ beach API incidents and water-quality rows",
+    "url": "https://beachapi.njdep.rutgers.edu/api/public/data/download/incident/?downloadType=incident&program=&county=&municipality=&locationType=&stationType=&beachId=&lha=&startDate=2026-01-01&endDate=2026-12-31"
+   },
+   {
+    "notice": "WBJB, 'Several Monmouth County Beaches Closed Due to Bacteria Levels', 2026-07-09",
+    "url": "https://www.wbjb.org/local-news/2026-07-09/several-monmouth-county-beaches-closed-due-to-bacteria-levels"
+   }
+  ],
+  "known_vs_inferred": "Known: sample values and closure dates. Not known: the source; the state record says UNKNOWN. Do not call this a sewage event."
+ },
+ {
+  "event_id": "nj-2026-06-15-beesleys-point-advisory-closure",
+  "source_id": "nj-ccmp-beach-api",
+  "source_record_id": "CC0093 incidents 06/15/2026 (CONTAM_ADV) and 06/16/2026 (CLOSURE)",
+  "event_type": "beach advisory then closure (elevated Enterococcus)",
+  "source_status": "CLOSURE 06/16-06/17 'Incident continues; Text to be updated.'",
+  "discharger": null,
+  "npdes_permit": null,
+  "started_at": "2026-06-15 06:05 (sample, 212 CFU/100mL)",
+  "ended_at": "2026-06-17 (incident end date)",
+  "timezone": "America/New_York",
+  "reported_at": null,
+  "published_at": "Patch 2026-06-17 13:39 EDT (lists Beesley's Point under advisory)",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-02",
+  "waterbody": "Great Egg Harbor Bay at Beesley's Point",
+  "water_slugs": [
+   "great-egg-harbor-bay-nj"
+  ],
+  "location_text": "Beesley's Point Beach, Upper Township, Cape May County (CC0093; brackets CC1349S East, CC1350S West)",
+  "coordinates": {
+   "lat": 39.287664,
+   "lon": -74.626353,
+   "source": "NJ beach API",
+   "precision": "beach station point"
+  },
+  "material": "Enterococcus (indicator)",
+  "volume": "212 (06-15 primary); retest 06-16: primary 48, East bracket 34, West bracket 114",
+  "units": "CFU/100mL",
+  "estimate_flag": null,
+  "authority": "NJDEP CCMP / Cape May County Health Department",
+  "advice_text": "Patch quoting NJDEP: 'Typically, advisories do not lead to beach closings'; ban applies 'until the sample results fall below 104 colonies.'",
+  "valid_until": null,
+  "geometry": "beach station point",
+  "source_url": "https://beachapi.njdep.rutgers.edu/api/public/data/download/waterQuality?downloadType=water-quality&program=&county=&municipality=&locationType=&stationType=&beachId=&lha=&startDate=2026-06-15&endDate=2026-06-18",
+  "raw_record": {
+   "Station_Name": "CC0093",
+   "Incident_Start_Date": "06/16/2026",
+   "Incident_End_Date": "06/17/2026",
+   "Beach_Act_Type_Name": "CLOSURE",
+   "Beach_Reason_Type_Name": "ELEV_BACT",
+   "Beach_Source_Type_Name": "UNKNOWN",
+   "Beach_Indicator_Type_Name": "ENTERO"
+  },
+  "revision_history": [],
+  "jurisdiction": "NJ",
+  "source_health": "ok",
+  "coverage_note": "Part of a 10-beach advisory round (Patch): Long Branch Imperial House 105 and Elberon 465, Sea Girt Baltimore 250, Belmar L Street, Point Pleasant Maxson and River Ave, Seaside Park 5th Ave, Avalon 57th St, Atlantic Highlands. Only Beesley's Point became a closure (the West bracket stayed over 104 on retest - inferred reason).",
+  "notices_traced": [
+   {
+    "notice": "NJ beach API incidents + water quality",
+    "url": "https://beachapi.njdep.rutgers.edu/api/public/data/download/incident/?downloadType=incident&program=&county=&municipality=&locationType=&stationType=&beachId=&lha=&startDate=2026-01-01&endDate=2026-12-31"
+   },
+   {
+    "notice": "Patch, 'High Fecal Bacteria At 10 NJ Beaches Sparks Swim Advisories', 2026-06-17",
+    "url": "https://patch.com/new-jersey/across-nj/high-fecal-bacteria-10-nj-beaches-sparks-swim-advisories"
+   }
+  ],
+  "known_vs_inferred": "Known: values and actions. Source UNKNOWN in the record. Event time (sample 06-15) differs from publication (06-16/17)."
+ },
+ {
+  "event_id": "nj-2025-05-newark-002a-cso-days",
+  "source_id": "nj-echo-effluent-dmr-cso",
+  "source_record_id": "NJ0108758-002-81381-31-MAY-25",
+  "event_type": "cso (monthly DMR: count of calendar days with a discharge at one outfall)",
+  "source_status": "DMR value received; 'MO TOTAL'",
+  "discharger": "City of Newark",
+  "npdes_permit": "NJ0108758",
+  "started_at": "2025-05 (month only; individual events not given)",
+  "ended_at": null,
+  "timezone": "America/New_York",
+  "reported_at": "13-OCT-25",
+  "published_at": "ECHO ICIS-NPDES extract 2026-10-30",
+  "source_updated_at": "2026-10-30 (ICIS-NPDES extract date)",
+  "fetched_at": "2026-11-02",
+  "waterbody": "Passaic River",
+  "water_slugs": [
+   "passaic-river-nj"
+  ],
+  "location_text": "Verona Avenue, Newark (DSN 002A)",
+  "coordinates": {
+   "lat": 40.77652109,
+   "lon": -74.15125558,
+   "source": "NJDEP CSO outfall layer (CSO_ID NJ0108758-002A)",
+   "precision": "outfall point"
+  },
+  "material": "combined sewage and stormwater (CSO)",
+  "volume": "12 days with discharge",
+  "units": "days per month (unit 'd')",
+  "estimate_flag": "Most NJ permittees report modeled values (permit Part IV.A.1.c; Elizabeth: 'using modeling data'); method for this permittee not stated in the DMR",
+  "authority": "City of Newark",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "outfall point",
+  "source_url": "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?p_id=NJ0108758&start_date=01/01/2025&end_date=10/31/2026&parameter_code=81381&output=JSON",
+  "raw_record": {
+   "PermFeatureNmbr": "002",
+   "ParameterCode": "81381",
+   "ParameterDesc": "Duration of discharge",
+   "MonitoringPeriodEndDate": "31-MAY-25",
+   "StatisticalBaseDesc": "MO TOTAL",
+   "DMRValueNmbr": "12",
+   "DMRUnitDesc": "d",
+   "ValueReceivedDate": "13-OCT-25",
+   "DMRDueDate": "26-JUN-25"
+  },
+  "revision_history": [],
+  "jurisdiction": "NJ",
+  "source_health": "late: DMR received 13-OCT-25, 109 days after the 26-JUN-25 due date (Jan-Apr 2025 DMRs carried 'DMR, Monitor Only - Overdue' violations)",
+  "coverage_note": "Monthly aggregate only; no start/end times, no volume. Permit: 'report Duration of Discharge on the MRF for each CSO outfall as a whole day for any calendar day when a discharge occurs.' In May 2025, 17 of Newark's 18 outfalls reported discharge days (1-12).",
+  "notices_traced": [
+   {
+    "what": "Real-time public notice at the time",
+    "found": "Newark is on the NJ CSO Group outlook, which only shows rainfall-based 'likely' status and keeps no history; no Newark notice found."
+   }
+  ],
+  "known_vs_inferred": "Known: the permittee reported this many discharge days for the month. Not known: which days, how long, how much."
+ },
+ {
+  "event_id": "nj-2025-07-jcmua-016a-cso-days",
+  "source_id": "nj-echo-effluent-dmr-cso",
+  "source_record_id": "NJ0108723-016-81381-31-JUL-25",
+  "event_type": "cso (monthly DMR: count of calendar days with a discharge at one outfall)",
+  "source_status": "DMR value received; 'MO TOTAL'",
+  "discharger": "Jersey City Municipal Utilities Authority",
+  "npdes_permit": "NJ0108723",
+  "started_at": "2025-07 (month only; individual events not given)",
+  "ended_at": null,
+  "timezone": "America/New_York",
+  "reported_at": "27-AUG-25",
+  "published_at": "ECHO ICIS-NPDES extract 2026-10-30",
+  "source_updated_at": "2026-10-30 (ICIS-NPDES extract date)",
+  "fetched_at": "2026-11-02",
+  "waterbody": "Hudson River (Upper NY Bay side)",
+  "water_slugs": [
+   "hudson-river-nj"
+  ],
+  "location_text": "Claremont/Carteret, Jersey City (DSN 016A)",
+  "coordinates": {
+   "lat": 40.69638739,
+   "lon": -74.05099932,
+   "source": "NJDEP CSO outfall layer (CSO_ID NJ0108723-016A)",
+   "precision": "outfall point"
+  },
+  "material": "combined sewage and stormwater (CSO)",
+  "volume": "10 days with discharge",
+  "units": "days per month (unit 'd')",
+  "estimate_flag": "Most NJ permittees report modeled values (permit Part IV.A.1.c; Elizabeth: 'using modeling data'); method for this permittee not stated in the DMR",
+  "authority": "Jersey City Municipal Utilities Authority",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "outfall point",
+  "source_url": "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?p_id=NJ0108723&start_date=01/01/2025&end_date=10/31/2026&parameter_code=81381&output=JSON",
+  "raw_record": {
+   "PermFeatureNmbr": "016",
+   "ParameterCode": "81381",
+   "ParameterDesc": "Duration of discharge",
+   "MonitoringPeriodEndDate": "31-JUL-25",
+   "StatisticalBaseDesc": "MO TOTAL",
+   "DMRValueNmbr": "10",
+   "DMRUnitDesc": "d",
+   "ValueReceivedDate": "27-AUG-25",
+   "DMRDueDate": "26-AUG-25"
+  },
+  "revision_history": [],
+  "jurisdiction": "NJ",
+  "source_health": "ok (received 1 day after due)",
+  "coverage_note": "Monthly aggregate only; no start/end times, no volume. Permit: 'report Duration of Discharge on the MRF for each CSO outfall as a whole day for any calendar day when a discharge occurs.' All 21 JCMUA outfalls reported 1-10 discharge days in July 2025.",
+  "notices_traced": [
+   {
+    "what": "Real-time public notice at the time",
+    "found": "JCMUA relies on the NJ CSO Group outlook (no history kept). July 2025 includes the 2025-07-14 storm (up to ~7 in. of rain in parts of NJ per news) but the DMR cannot say which days."
+   }
+  ],
+  "known_vs_inferred": "Known: the permittee reported this many discharge days for the month. Not known: which days, how long, how much."
+ },
+ {
+  "event_id": "nj-2025-07-camden-034a-cso-days",
+  "source_id": "nj-echo-effluent-dmr-cso",
+  "source_record_id": "NJ0108812-034-81381-31-JUL-25",
+  "event_type": "cso (monthly DMR: count of calendar days with a discharge at one outfall)",
+  "source_status": "DMR value received; 'MO TOTAL'",
+  "discharger": "City of Camden",
+  "npdes_permit": "NJ0108812",
+  "started_at": "2025-07 (month only; individual events not given)",
+  "ended_at": null,
+  "timezone": "America/New_York",
+  "reported_at": "18-AUG-25",
+  "published_at": "ECHO ICIS-NPDES extract 2026-10-30",
+  "source_updated_at": "2026-10-30 (ICIS-NPDES extract date)",
+  "fetched_at": "2026-11-02",
+  "waterbody": "Cooper River",
+  "water_slugs": [
+   "cooper-river-nj"
+  ],
+  "location_text": "River Road @ R.R. Crossing (Reg. 22A), Camden (DSN 034A)",
+  "coordinates": {
+   "lat": 39.94529238,
+   "lon": -75.10397981,
+   "source": "NJDEP CSO outfall layer (CSO_ID NJ0108812-034A)",
+   "precision": "outfall point"
+  },
+  "material": "combined sewage and stormwater (CSO)",
+  "volume": "14 days with discharge",
+  "units": "days per month (unit 'd')",
+  "estimate_flag": "Most NJ permittees report modeled values (permit Part IV.A.1.c; Elizabeth: 'using modeling data'); method for this permittee not stated in the DMR",
+  "authority": "City of Camden",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "outfall point",
+  "source_url": "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?p_id=NJ0108812&start_date=01/01/2025&end_date=10/31/2026&parameter_code=81381&output=JSON",
+  "raw_record": {
+   "PermFeatureNmbr": "034",
+   "ParameterCode": "81381",
+   "ParameterDesc": "Duration of discharge",
+   "MonitoringPeriodEndDate": "31-JUL-25",
+   "StatisticalBaseDesc": "MO TOTAL",
+   "DMRValueNmbr": "14",
+   "DMRUnitDesc": "d",
+   "ValueReceivedDate": "18-AUG-25",
+   "DMRDueDate": "26-AUG-25"
+  },
+  "revision_history": [],
+  "jurisdiction": "NJ",
+  "source_health": "ok (ECHO REST answered; DMR on time)",
+  "coverage_note": "Monthly aggregate only; no start/end times, no volume. Permit: 'report Duration of Discharge on the MRF for each CSO outfall as a whole day for any calendar day when a discharge occurs.' 22 of 22 Camden City outfalls reported 4-14 discharge days in July 2025; 9 outfalls discharge to the Cooper River.",
+  "notices_traced": [
+   {
+    "what": "Real-time public notice at the time",
+    "found": "No Camden City public notice channel found; CCMUA's status page covers only its own outfall 040A and showed CLOSED with no history. The Cooper River is a rowing/paddling water (cooper-river-lake-nj upstream)."
+   }
+  ],
+  "known_vs_inferred": "Known: the permittee reported this many discharge days for the month. Not known: which days, how long, how much."
+ },
+ {
+  "event_id": "nj-2026-07-nhsa-adams-002a-cso-days",
+  "source_id": "nj-echo-effluent-dmr-cso",
+  "source_record_id": "NJ0026085-002-81381-31-JUL-26",
+  "event_type": "cso (monthly DMR: count of calendar days with a discharge at one outfall)",
+  "source_status": "DMR value received; 'MO TOTAL'",
+  "discharger": "North Hudson Sewerage Authority - Adams Street WWTP",
+  "npdes_permit": "NJ0026085",
+  "started_at": "2026-07 (month only; individual events not given)",
+  "ended_at": null,
+  "timezone": "America/New_York",
+  "reported_at": "20-AUG-26",
+  "published_at": "ECHO ICIS-NPDES extract 2026-10-30",
+  "source_updated_at": "2026-10-30 (ICIS-NPDES extract date)",
+  "fetched_at": "2026-11-02",
+  "waterbody": "Hudson River",
+  "water_slugs": [
+   "hudson-river-nj",
+   "harsimus-cove-nj"
+  ],
+  "location_text": "Observer Highway & Court Street, Jersey City/Hoboken line (DSN 002A)",
+  "coordinates": {
+   "lat": 40.73409285,
+   "lon": -74.02899422,
+   "source": "NJDEP CSO outfall layer (CSO_ID NJ0026085-002A)",
+   "precision": "outfall point"
+  },
+  "material": "combined sewage and stormwater (CSO)",
+  "volume": "10 days with discharge",
+  "units": "days per month (unit 'd')",
+  "estimate_flag": "Most NJ permittees report modeled values (permit Part IV.A.1.c; Elizabeth: 'using modeling data'); method for this permittee not stated in the DMR",
+  "authority": "North Hudson Sewerage Authority - Adams Street WWTP",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "outfall point",
+  "source_url": "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?p_id=NJ0026085&start_date=01/01/2025&end_date=10/31/2026&parameter_code=81381&output=JSON",
+  "raw_record": {
+   "PermFeatureNmbr": "002",
+   "ParameterCode": "81381",
+   "ParameterDesc": "Duration of discharge",
+   "MonitoringPeriodEndDate": "31-JUL-26",
+   "StatisticalBaseDesc": "MO TOTAL",
+   "DMRValueNmbr": "10",
+   "DMRUnitDesc": "d",
+   "ValueReceivedDate": "20-AUG-26",
+   "DMRDueDate": "26-AUG-26"
+  },
+  "revision_history": [],
+  "jurisdiction": "NJ",
+  "source_health": "ok (ECHO REST answered; DMR on time)",
+  "coverage_note": "Monthly aggregate only; no start/end times, no volume. Permit: 'report Duration of Discharge on the MRF for each CSO outfall as a whole day for any calendar day when a discharge occurs.'",
+  "notices_traced": [
+   {
+    "what": "Real-time public notice at the time",
+    "found": "NHSA's sensor-based Waterbody Advisory map should have shown each event in real time; its link returned 404 on 2026-11-02, so no contemporaneous notice could be traced."
+   }
+  ],
+  "known_vs_inferred": "Known: the permittee reported this many discharge days for the month. Not known: which days, how long, how much."
+ },
+ {
+  "event_id": "nj-2026-07-paterson-027a-cso-days",
+  "source_id": "nj-echo-effluent-dmr-cso",
+  "source_record_id": "NJ0108880-027-81381-31-JUL-26",
+  "event_type": "cso (monthly DMR: count of calendar days with a discharge at one outfall)",
+  "source_status": "DMR value received; 'MO TOTAL'",
+  "discharger": "City of Paterson",
+  "npdes_permit": "NJ0108880",
+  "started_at": "2026-07 (month only; individual events not given)",
+  "ended_at": null,
+  "timezone": "America/New_York",
+  "reported_at": "13-AUG-26",
+  "published_at": "ECHO ICIS-NPDES extract 2026-10-30",
+  "source_updated_at": "2026-10-30 (ICIS-NPDES extract date)",
+  "fetched_at": "2026-11-02",
+  "waterbody": "Passaic River",
+  "water_slugs": [
+   "passaic-river-nj"
+  ],
+  "location_text": "Market Street, Paterson (DSN 027A)",
+  "coordinates": {
+   "lat": 40.90246174,
+   "lon": -74.13409104,
+   "source": "NJDEP CSO outfall layer (CSO_ID NJ0108880-027A)",
+   "precision": "outfall point"
+  },
+  "material": "combined sewage and stormwater (CSO)",
+  "volume": "11 days with discharge",
+  "units": "days per month (unit 'd')",
+  "estimate_flag": "Most NJ permittees report modeled values (permit Part IV.A.1.c; Elizabeth: 'using modeling data'); method for this permittee not stated in the DMR",
+  "authority": "City of Paterson",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "outfall point",
+  "source_url": "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?p_id=NJ0108880&start_date=01/01/2025&end_date=10/31/2026&parameter_code=81381&output=JSON",
+  "raw_record": {
+   "PermFeatureNmbr": "027",
+   "ParameterCode": "81381",
+   "ParameterDesc": "Duration of discharge",
+   "MonitoringPeriodEndDate": "31-JUL-26",
+   "StatisticalBaseDesc": "MO TOTAL",
+   "DMRValueNmbr": "11",
+   "DMRUnitDesc": "d",
+   "ValueReceivedDate": "13-AUG-26",
+   "DMRDueDate": "26-AUG-26"
+  },
+  "revision_history": [],
+  "jurisdiction": "NJ",
+  "source_health": "ok (ECHO REST answered; DMR on time)",
+  "coverage_note": "Monthly aggregate only; no start/end times, no volume. Permit: 'report Duration of Discharge on the MRF for each CSO outfall as a whole day for any calendar day when a discharge occurs.' 23 Paterson outfalls reported 2-11 discharge days in July 2026.",
+  "notices_traced": [
+   {
+    "what": "Real-time public notice at the time",
+    "found": "Paterson relies on the NJ CSO Group outlook; no history kept, so the outlook state on those days cannot be retrieved."
+   }
+  ],
+  "known_vs_inferred": "Known: the permittee reported this many discharge days for the month. Not known: which days, how long, how much."
+ },
+ {
+  "event_id": "nj-2026-07-gloucester-001a-cso-days",
+  "source_id": "nj-echo-effluent-dmr-cso",
+  "source_record_id": "NJ0108847-001-81381-31-JUL-26",
+  "event_type": "cso (monthly DMR: count of calendar days with a discharge at one outfall)",
+  "source_status": "DMR value received; 'MO TOTAL'",
+  "discharger": "Gloucester City",
+  "npdes_permit": "NJ0108847",
+  "started_at": "2026-07 (month only; individual events not given)",
+  "ended_at": null,
+  "timezone": "America/New_York",
+  "reported_at": "03-AUG-26",
+  "published_at": "ECHO ICIS-NPDES extract 2026-10-30",
+  "source_updated_at": "2026-10-30 (ICIS-NPDES extract date)",
+  "fetched_at": "2026-11-02",
+  "waterbody": "Delaware River",
+  "water_slugs": [
+   "delaware-river-nj"
+  ],
+  "location_text": "Charles Street, Gloucester City (DSN 001A)",
+  "coordinates": {
+   "lat": 39.89089295,
+   "lon": -75.12925215,
+   "source": "NJDEP CSO outfall layer (CSO_ID NJ0108847-001A)",
+   "precision": "outfall point"
+  },
+  "material": "combined sewage and stormwater (CSO)",
+  "volume": "7 days with discharge",
+  "units": "days per month (unit 'd')",
+  "estimate_flag": "Most NJ permittees report modeled values (permit Part IV.A.1.c; Elizabeth: 'using modeling data'); method for this permittee not stated in the DMR",
+  "authority": "Gloucester City",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "outfall point",
+  "source_url": "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?p_id=NJ0108847&start_date=01/01/2025&end_date=10/31/2026&parameter_code=81381&output=JSON",
+  "raw_record": {
+   "PermFeatureNmbr": "001",
+   "ParameterCode": "81381",
+   "ParameterDesc": "Duration of discharge",
+   "MonitoringPeriodEndDate": "31-JUL-26",
+   "StatisticalBaseDesc": "MO TOTAL",
+   "DMRValueNmbr": "7",
+   "DMRUnitDesc": "d",
+   "ValueReceivedDate": "03-AUG-26",
+   "DMRDueDate": "26-AUG-26"
+  },
+  "revision_history": [],
+  "jurisdiction": "NJ",
+  "source_health": "ok (received 3 days after month end, 23 days early)",
+  "coverage_note": "Monthly aggregate only; no start/end times, no volume. Permit: 'report Duration of Discharge on the MRF for each CSO outfall as a whole day for any calendar day when a discharge occurs.' All 7 Gloucester City outfalls reported 6-7 discharge days in July 2026.",
+  "notices_traced": [
+   {
+    "what": "Real-time public notice at the time",
+    "found": "No Gloucester City public notice channel found; not on the NJ CSO Group outlook."
+   }
+  ],
+  "known_vs_inferred": "Known: the permittee reported this many discharge days for the month. Not known: which days, how long, how much."
+ },
+ {
+  "event_id": "nj-2026-05-31-barnegat-pinewood-estates-sewage-release",
+  "source_id": "nj-njdep-hotline-warndep (via OPRA, reported by nj-news-local)",
+  "source_record_id": null,
+  "event_type": "sso (private collection system; release to land)",
+  "source_status": "DEP intake record: 'unpermitted discharge affecting land'",
+  "discharger": "Pinewood Estates mobile home community (RHP), Barnegat Township",
+  "npdes_permit": null,
+  "started_at": "2026-05-31 (as reported by the caller)",
+  "ended_at": null,
+  "timezone": "America/New_York",
+  "reported_at": "2026-06-03 (DEP complaint received)",
+  "published_at": "Jersey Shore Online 2026-10-30 (Stephanie A. Faughnan)",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-02",
+  "waterbody": "None reported (land). A branch of Mill Creek toward Barnegat Bay runs behind the home; not reported affected.",
+  "water_slugs": [],
+  "location_text": "116 Oak Drive, Pinewood Estates, Barnegat Township, Ocean County",
+  "coordinates": null,
+  "material": "raw sewage ('continuous and uncontained liquid release')",
+  "volume": null,
+  "units": null,
+  "estimate_flag": null,
+  "authority": "NJDEP (intake record)",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": null,
+  "source_url": "https://www.jerseyshoreonline.com/southern-ocean/sewage-overflow-impacts-mobile-home/",
+  "raw_record": null,
+  "revision_history": [],
+  "jurisdiction": "NJ",
+  "source_health": "no public feed",
+  "coverage_note": "Shows the NJ SSO gap: the record exists only in DEP's hotline system and surfaced five months later through OPRA and a news story.",
+  "notices_traced": [
+   {
+    "notice": "Jersey Shore Online, 'Sewage Overflow Impacts Mobile Home', 2026-10-30",
+    "url": "https://www.jerseyshoreonline.com/southern-ocean/sewage-overflow-impacts-mobile-home/"
+   }
+  ],
+  "known_vs_inferred": "Known: DEP classified the caller's report as raw sewage affecting land. The article notes this is an intake record, not an inspection finding. Not a water event."
+ }
+]

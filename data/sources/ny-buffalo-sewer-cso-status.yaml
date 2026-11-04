@@ -1,0 +1,29 @@
+id: "ny-buffalo-sewer-cso-status"
+name: "Buffalo Sewer Authority 'Real-Time Sewer Overflow Status' (CSOPublicNotification_ReadOnly)"
+url: "https://maps.buffalosewer.org/server/rest/services/BSA_Website/CSOPublicNotification_ReadOnly/FeatureServer/0"
+homepage: "https://maps.buffalosewer.org/server/rest/services/BSA_Website/CSOPublicNotification_ReadOnly/FeatureServer/0"
+kind: "arcgis"
+level: "utility"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): Per-outfall
+#   coordinates and risk level; a forecast-risk product, not discharge reports (site: information
+#   'is based on a computer model and may not represent real-time activity').
+# Access detail (research, quoted): Dashboard on buffalosewer.org (#CSO_Map) -> opsdashboard
+#   21cfab668a6a48f7af850f69a9a84557 -> webmap 1a912d631bce45b78cd45b6c022ea3db -> layer above. 52
+#   points, query?where=1=1&outFields=*&outSR=4326&f=json works without auth.
+# Can fill: coordinates (outfall), waterbody, advice_text (risk/message)
+# Cannot fill: actual discharge times or volumes; timestamps (no update time field)
+# Waters: 52 BSA CSO outfalls (Niagara River, Black Rock Canal, Buffalo River, Scajaquada Creek,
+#   Cazenovia Creek, Buffalo Harbor, Cornelius Creek)
+# History: none
+cadence: "model/forecast driven; the Message on 2026-11-01 still described an Oct 27 forecast, so updates lag or are event-triggered"
+license: "none stated"
+attribution: "Buffalo Sewer Authority"
+enabled: true
+role: "advisories"
+event_types: ["cso"]
+states: ["NY"]
+access: ["arcgis", "map_only"]
+access_detail: "Dashboard on buffalosewer.org (#CSO_Map) -> opsdashboard 21cfab668a6a48f7af850f69a9a84557 -> webmap 1a912d631bce45b78cd45b6c022ea3db -> layer above. 52 points, query?where=1=1&outFields=*&outSR=4326&f=json works without auth."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

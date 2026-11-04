@@ -1,0 +1,27 @@
+id: "md-baltimore-health-sso"
+name: "Baltimore City Health Department Sanitary Sewer Overflows page"
+url: "https://www.baltimorecity.gov/health/our-work/environmental-health/sanitary-sewer-overflows-sso"
+homepage: "https://www.baltimorecity.gov/health/our-work/environmental-health/sanitary-sewer-overflows-sso"
+kind: "html"
+level: "municipal"
+# Notes (research/md, status used, verified fetched, checked 2026-11-02): Source of the standing
+#   advice text for City streams.
+# Access detail (research, quoted): Fetched (page dated 11/29/2023, updated 09/30/2024). Standing
+#   advice; no event list.
+# Research notes: Quote: 'The Health Department warns all residents and visitors that contact with
+#   any stream or waterway in the city should be avoided due to potential contaminants. There should
+#   be no swimming or wading in the waterways.' Also: DPW 'depending on the flow volume will report
+#   the overflow to the Maryland Department of the Environment (MDE) and the Baltimore City Health
+#   Department (BCHD).'
+cadence: null
+license: "none stated"
+attribution: "Baltimore City Health Department"
+enabled: true
+role: "advisories"
+event_types: ["sso"]
+states: ["MD"]
+access: ["html"]
+access_detail: "Fetched (page dated 11/29/2023, updated 09/30/2024). Standing advice; no event list."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

@@ -1,0 +1,661 @@
+[
+ {
+  "id": "wi-mmsd-storm-updates",
+  "name": "MMSD Storm Update news posts (per-event overflow volume, 5-day letter to WDNR)",
+  "jurisdiction": "WI",
+  "operator": "Milwaukee Metropolitan Sewerage District",
+  "operator_type": "utility",
+  "role": "events",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": "Milwaukee, Menomonee and Kinnickinnic Rivers, Milwaukee harbor and Lake Michigan; MMSD separate-sewer area",
+  "water_slugs": [],
+  "url": "https://www.mmsd.com/about-us/news/storm-update-august-1st-2026",
+  "access": [
+   "html"
+  ],
+  "access_detail": "News post per event under /about-us/news/; fetched raw/mmsd-storm-update-2026-08-01.html. No RSS (/about-us/news/rss 404). Posts link a \"5-day letter\" PDF and the CSO impacted-waters map.",
+  "machine_readable": false,
+  "sample_record": {
+   "title": "MMSD Storm Update August 1st, 2026",
+   "posted": "08/06/26 09:00:am",
+   "text": "MMSD is reporting the following information ( see 5-day letter ) to the Wisconsin Department of Natural Resources regarding a combined sewer overflow that took place on August 1, 2026. Overflow Volume: 8/1/26 - Overflow volume of 96 million gallons."
+  },
+  "fields": [
+   "title",
+   "posted date",
+   "event date",
+   "overflow type",
+   "volume (million gallons)",
+   "5-day letter link"
+  ],
+  "fills_event_fields": [
+   "event_type",
+   "started_at (date only)",
+   "published_at",
+   "volume",
+   "units",
+   "authority",
+   "source_url"
+  ],
+  "cannot_fill": [
+   "ended_at",
+   "coordinates",
+   "outfall ids",
+   "waterbody (map only)"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Posted with the 5-day letter: the 2026-08-01 overflow was posted 2026-08-06.",
+  "history": "Posts back to at least 2006 (search); 2026 had 2,714 million gallons through April (2026OverflowVolumesVertical042426.pdf).",
+  "license": "None stated; site copyright MMSD.",
+  "legal_basis": "40 CFR 122.38; NR 210.21; WPDES permit WI0036820",
+  "status": "candidate",
+  "status_reason": "Dated, event-level public record for the state's largest CSO system, but HTML posts about 5 days after the event with no outfall detail.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": "Annual overflow volumes 1994-2026 in raw/mmsd-2026-overflow-volumes.txt (2025: 5,140 MG; 2024: 357 MG)."
+ },
+ {
+  "id": "wi-mmsd-rain-facility-page",
+  "name": "MMSD Milwaukee Rain & Facility Information page (live year-to-date gallons overflowed)",
+  "jurisdiction": "WI",
+  "operator": "Milwaukee Metropolitan Sewerage District",
+  "operator_type": "utility",
+  "role": "events",
+  "event_types": [
+   "cso",
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.mmsd.com/about-us/milwaukee-rain-facility-information",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Fetched: \"2026 MMSD VOLUME TREATED Gallons Treated: 36,135,000,000 Gallons Overflowed: 2,810,937,528 ... This page is automatically updated. The data have not been verified and may contain errors.\"",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [
+   "gallons treated YTD",
+   "gallons overflowed YTD",
+   "percent treated"
+  ],
+  "fills_event_fields": [
+   "volume (annual running total)"
+  ],
+  "cannot_fill": [
+   "started_at",
+   "location"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Automatically updated",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "A change in \"Gallons Overflowed\" is a same-day signal that an overflow is under way; snapshot it.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-mmsd-cso-impacted-waters",
+  "name": "MMSD CSO impacted waters map (potentially impacted waterways and public access locations)",
+  "jurisdiction": "WI",
+  "operator": "Milwaukee Metropolitan Sewerage District",
+  "operator_type": "utility",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.mmsd.com/about-us/milwaukee-rain-facility-information/cso-impacted-waters",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "Web map 3754385c3db148b88ae45adf7bacc2cd; layers https://services1.arcgis.com/SuEt4jqH31FZKNYY/arcgis/rest/services/CSO_Impacted_Waterways/FeatureServer/0 (polygon) and CSO_Impacted_Locations/FeatureServer/0 (points: Name, Type e.g. \"Kiwanis Landing\",\"Boat Launch\"); edited 2023-03-28.",
+  "machine_readable": true,
+  "sample_record": {
+   "Name": "Kiwanis Landing",
+   "Type": "Boat Launch"
+  },
+  "fields": [
+   "OBJECTID",
+   "Name",
+   "Type"
+  ],
+  "fills_event_fields": [
+   "geometry (official affected area)"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "The operator's own affected-area polygon under 40 CFR 122.38(c); usable as the official affected area for every MMSD CSO.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-mmsd-cso-notification-plan",
+  "name": "MMSD Combined Sewer Overflow Public Notification Plan (July 16, 2018)",
+  "jurisdiction": "WI",
+  "operator": "Milwaukee Metropolitan Sewerage District",
+  "operator_type": "utility",
+  "role": "law",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.mmsd.com/application/files/1116/4553/8883/MMSD_CSO_Public_Notification_Plan_web.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Downloaded (4.7 MB; text layer kept as raw/mmsd-cso-pn-plan.txt, PDF not kept). Only pages 1-2 have a text layer; sections 6 Notice to Governments and 7 Public Notice are images and were not read.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Says \"The combined sewer service area has 115 combined sewer overflow outfalls\" discharging to seven waterways, and that the plan responds to 40 CFR 122.38.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-mmsd-water-drop-alert",
+  "name": "MMSD Water Drop Alert (text WATERDROP to 414-296-4422)",
+  "jurisdiction": "WI",
+  "operator": "Milwaukee Metropolitan Sewerage District",
+  "operator_type": "utility",
+  "role": "social",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://mmsd.com/what-you-can-do/water-drop-alert",
+  "access": [
+   "phone",
+   "social"
+  ],
+  "access_detail": "SMS sign-up; MMSD says alerts are also shared on social media and the rain/facility page.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "A pre-storm \"use less water\" alert, not an overflow notice; useful as a lead indicator only.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-law-nr-210-21",
+  "name": "Wis. Admin. Code NR 210.21 sanitary sewer and treatment facility overflows (reporting and public notification)",
+  "jurisdiction": "WI",
+  "operator": "Wisconsin Legislature / WDNR",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/200/210/iv/21",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "docs.legis.wisconsin.gov reset the connection (curl) and returned 503 (WebFetch) on 2026-11-03; text taken from WDNR form instructions and search snippets.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "NR 210.21(4), (5); NR 210.23(4)(f)",
+  "status": "used",
+  "status_reason": "Public notice duty for every SSO and TFO, \"promptly\", by the \"most effective and efficient communications available in the community\"; no web channel or deadline in hours.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-wdnr-sso-form-instructions",
+  "name": "WDNR SSO/TFO report form 3400-184 and instructions (Switchboard)",
+  "jurisdiction": "WI",
+  "operator": "Wisconsin Department of Natural Resources",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Wastewater/WW_SSOFormInstructions.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Downloaded raw/ssoform-instructions.pdf. Quotes: \"Initial notification to the Department is required within 24 hours of the event.\" \"All overflows (SSOs & TFOs) are required to be public noticed according to s. NR 210.21(5), Wis. Adm. Code. Notification shall occur according to a facility's emergency response plan in their CMOM and occur promptly after any overflow event. The notification level should correlate to the extent of risk to the public. At a minimum, if an overflow is to a surface water, a daily newspaper of general circulation shall be notified.\" Report within 5 business days through Switchboard.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "The form records the public-notice date and method, so WDNR holds the data; it is not published.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-wdnr-sso-report-page",
+  "name": "WDNR Sanitary Sewer Overflow reporting page",
+  "jurisdiction": "WI",
+  "operator": "Wisconsin Department of Natural Resources",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://dnr.wisconsin.gov/topic/Wastewater/SSOreport.html",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Fetched; no public list, map or download of reported overflows.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "Submission instructions only; Switchboard is a permittee login. No WDNR public overflow data found.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-epa-sobe",
+  "name": "EPA SOBE event tables, Wisconsin permits",
+  "jurisdiction": "WI",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "sso",
+   "cso",
+   "bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "0 Wisconsin event rows on 2026-11-03; 14 Wisconsin collection-system rows.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "Wisconsin permittees report through WDNR Switchboard; nothing reaches EPA's event tables.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-law-40cfr122-38",
+  "name": "40 CFR 122.38 (Great Lakes Basin CSO notice) for MMSD and Superior",
+  "jurisdiction": "WI",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "law",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.ecfr.gov/current/title-40/chapter-I/subchapter-D/part-122/subpart-B/section-122.38",
+  "access": [
+   "html"
+  ],
+  "access_detail": "raw/ecfr-122-38.xml",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Both Wisconsin CSO permits discharge to the Great Lakes Basin (Lake Michigan; St. Louis Bay of Lake Superior): 4-hour electronic public notice.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-superior-cso",
+  "name": "City of Superior Sewage Disposal System CSO notification",
+  "jurisdiction": "WI",
+  "operator": "City of Superior",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": null,
+  "access": [
+   "html"
+  ],
+  "access_detail": "Web search found no City notice page; WPR/KSTP report overflows at Superior and Ashland in news.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "No public channel found for a Great Lakes CSO permittee that owes a 4-hour notice; needs a direct look at the City site and social accounts.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-municipal-sso-notices",
+  "name": "Municipal SSO public notices on city websites (Fremont-Orihula-Wolf River, Hortonville, Fox Crossing, Menomonie, Stoughton Utilities, Oconomowoc Utilities, Fennimore, Town of Greenville)",
+  "jurisdiction": "WI",
+  "operator": "Wisconsin municipalities",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://villageoffremontwi.gov/news-and-notices/23-06-08-fremont-orihula-wolf-river-joint-sewerage-commission-sanitary-sewer-overflow-public-notice",
+  "access": [
+   "html",
+   "pdf"
+  ],
+  "access_detail": "Found by search; each posts a news item or PDF press release citing NR 210.21(5).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Proves notices exist on the web, scattered across hundreds of municipal sites; not worth individual ingesters.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-wdnr-beach-health",
+  "name": "WDNR Wisconsin Beach Health: advisories map layer and Beach Advisory Reports",
+  "jurisdiction": "WI",
+  "operator": "Wisconsin Department of Natural Resources",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "beach_advisory",
+   "beach_closure",
+   "beach_monitoring"
+  ],
+  "waters_covered": "Great Lakes (BEACH Act) and inland beaches in the Beach Health system",
+  "water_slugs": [],
+  "url": "https://dnrmaps.wi.gov/arcgis2/rest/services/OGW_Beach_Monitoring/BEACH_MONITORING_LOCATIONS/MapServer/1",
+  "access": [
+   "arcgis",
+   "html"
+  ],
+  "access_detail": "Public MapServer layer, 441 beach points; off season all \"No Data Available\". Reports app https://apps.dnr.wi.gov/beachhealth/ (county/beach drop-downs, ASP.NET).",
+  "machine_readable": true,
+  "sample_record": {
+   "DNR_SWIMS_ID": "10012681",
+   "OGW_BEACH_NAME_TEXT": "Lakeview Park Beach",
+   "STATUS": "Closed for season",
+   "BEACH_ACTION": "End",
+   "MAP_STATUS": "No Data Available",
+   "ISSUED": "08-SEP-26 - 08-SEP-26"
+  },
+  "fields": [
+   "DNR_SWIMS_ID",
+   "BEACH_SEQ_NO",
+   "OGW_BEACH_NAME_TEXT",
+   "STATUS",
+   "BEACH_ACTION",
+   "MAP_STATUS",
+   "ISSUED",
+   "STATIONNAME",
+   "SAMPLEDATE",
+   "ECOLIPRONAME",
+   "ECOLIVALUE",
+   "WATERTEMP"
+  ],
+  "fills_event_fields": [
+   "event_type",
+   "started_at/ended_at (ISSUED range)",
+   "coordinates",
+   "advice_text (STATUS)",
+   "source_record_id"
+  ],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "Daily in season (sampling 5 days a week at high-priority Lake Michigan beaches per Swim Guide pages)",
+  "history": "Current state only in the layer; reports app holds history.",
+  "license": "None stated.",
+  "legal_basis": "BEACH Act; NR 102 recreational criteria",
+  "status": "candidate",
+  "status_reason": "Machine-readable statewide beach status with E. coli value and dates.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-milwaukee-riverkeeper-swim-guide",
+  "name": "Milwaukee Riverkeeper on Swim Guide (beach and river bacteria)",
+  "jurisdiction": "WI",
+  "operator": "Milwaukee Riverkeeper",
+  "operator_type": "nonprofit",
+  "role": "monitoring",
+  "event_types": [
+   "beach_monitoring"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.theswimguide.org/beach/665",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Search only: Riverkeeper copies the state Beach Health results to Swim Guide.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Mirror of the state data; no API.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-hab-program",
+  "name": "Wisconsin harmful algal bloom information (WDNR and DHS)",
+  "jurisdiction": "WI",
+  "operator": "WDNR / Wisconsin Department of Health Services",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "hab"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.dhs.wisconsin.gov/water/bg-algae/index.htm",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Not fetched; MMSD links DHS publication P-03767 on sewage illness.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "No statewide bloom advisory feed known; not traced in this round.",
+  "verified": "inferred",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-epa-cso-inventory",
+  "name": "EPA National CSO Inventory, Wisconsin rows",
+  "jurisdiction": "WI",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "federal-seed.json: WI0036820 MMSD 114 open; WI0025593 Superior 3 open.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Baseline. MMSD's plan says 115 outfalls.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "wi-echo-dmr-cso",
+  "name": "ECHO DMR CSO parameters for MMSD and Superior",
+  "jurisdiction": "WI",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/",
+  "access": [
+   "api"
+  ],
+  "access_detail": "Not queried.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Monthly fallback, unknown.",
+  "verified": "inferred",
+  "checked": "2026-11-03",
+  "notes": ""
+ }
+]

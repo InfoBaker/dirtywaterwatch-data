@@ -1,0 +1,641 @@
+{
+ "state": "WA",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "WA0020257",
+   "permittee": "ANACORTES WWTP",
+   "city": "ANACORTES",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "WA0023973",
+   "permittee": "PORT ANGELES STP",
+   "city": "PORT ANGELES",
+   "open_outfalls": 0,
+   "closed_outfalls": 9,
+   "receiving_waters": [
+    "Discovery Bay-Strait of Juan De Fuca",
+    "Ennis Creek-Frontal Port Angeles Harbor",
+    "Peabody Creek and then to Port Angeles Harbor",
+    "Port Angeles Harbor"
+   ]
+  },
+  {
+   "npdes_permit": "WA0024074",
+   "permittee": "MT VERNON WWTP",
+   "city": "MOUNT VERNON",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "Skagit River"
+   ]
+  },
+  {
+   "npdes_permit": "WA0024473",
+   "permittee": "SPOKANE RIVERSIDE PARK WATER RECLAMATION FACILITY",
+   "city": "SPOKANE",
+   "open_outfalls": 2,
+   "closed_outfalls": 27,
+   "receiving_waters": [
+    "Hangman Creek",
+    "Spokane River",
+    "Spokane River (South Bank)"
+   ]
+  },
+  {
+   "npdes_permit": "WA0024490",
+   "permittee": "EVERETT WATER POLLUTION CONTROL FACILITY",
+   "city": "EVERETT",
+   "open_outfalls": 0,
+   "closed_outfalls": 13,
+   "receiving_waters": [
+    "Port Gardner Bay",
+    "Snohomish River"
+   ]
+  },
+  {
+   "npdes_permit": "WA0029181",
+   "permittee": "KING COUNTY WEST POINT WWTP",
+   "city": "SEATTLE",
+   "open_outfalls": 4,
+   "closed_outfalls": 44,
+   "receiving_waters": [
+    "Boeing Creek",
+    "Duwamish River",
+    "Duwamish Waterway",
+    "Elliot Bay/Puget Sound",
+    "Green River",
+    "Lake Washington-Sammamish River",
+    "Miller Creek-Frontal East Passage",
+    "Pipers Creek",
+    "Puget Sound",
+    "Salmon Creek",
+    "Shell Creek-Frontal Puget Sound",
+    "Wapato Creek"
+   ]
+  },
+  {
+   "npdes_permit": "WA0029289",
+   "permittee": "BREMERTON STP",
+   "city": "BREMERTON",
+   "open_outfalls": 2,
+   "closed_outfalls": 13,
+   "receiving_waters": [
+    "Port Orchard Bay",
+    "Port Washington Narrows",
+    "Sinclair Inlet"
+   ]
+  },
+  {
+   "npdes_permit": "WA0029548",
+   "permittee": "SNOHOMISH STP",
+   "city": "SNOHOMISH",
+   "open_outfalls": 2,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Snohomish River"
+   ]
+  },
+  {
+   "npdes_permit": "WA0031682",
+   "permittee": "SEATTLE CSO",
+   "city": "SEATTLE",
+   "open_outfalls": 0,
+   "closed_outfalls": 86,
+   "receiving_waters": [
+    "Elliot Bay",
+    "Lake Washington",
+    "Salmon Bay Waterway"
+   ]
+  },
+  {
+   "npdes_permit": "WA0037061",
+   "permittee": "LOTT BUDD INLET WATER RECLAMATION FACILITY",
+   "city": "OLYMPIA",
+   "open_outfalls": 1,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Budd Inlet (Inner)"
+   ]
+  },
+  {
+   "npdes_permit": "WAG994562",
+   "permittee": "PORT ANGELES STP - PSNGP",
+   "city": "PORT ANGELES",
+   "open_outfalls": 0,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "Discovery Bay-Strait of Juan De Fuca",
+    "Ennis Creek-Frontal Port Angeles Harbor"
+   ]
+  },
+  {
+   "npdes_permit": "WAR304893",
+   "permittee": "SOUND TRANSIT E130 IDS EAST LINK",
+   "city": "BELLEVUE",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Lake Washington"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 11,
+ "plant_permits": 261,
+ "plant_permits_major": 70,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "WA0020150",
+   "permittee": "BURLINGTON CITY",
+   "city": "BURLINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020257",
+   "permittee": "City of Anacortes",
+   "city": "ANACORTES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020290",
+   "permittee": "STANWOOD CITY",
+   "city": "STANWOOD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020346",
+   "permittee": "West Sound Utility District",
+   "city": "PORT ORCHARD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020419",
+   "permittee": "City of Richland",
+   "city": "RICHLAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020486",
+   "permittee": "MONROE CITY",
+   "city": "MONROE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020567",
+   "permittee": "City of Oak Harbor",
+   "city": "OAK HARBOR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020575",
+   "permittee": "City of Enumclaw",
+   "city": "ENUMCLAW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0020800",
+   "permittee": "City of Prosser",
+   "city": "PROSSER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020826",
+   "permittee": "Alderwood Water & Wastewater District",
+   "city": "EDMONDS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020842",
+   "permittee": "CITY OF CHENEY",
+   "city": "CHENEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020893",
+   "permittee": "Lake Stevens Sewer District",
+   "city": "LAKE STEVENS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020907",
+   "permittee": "City of Bainbridge Island",
+   "city": "BAINBRIDGE ISLAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020915",
+   "permittee": "City of Hoquiam",
+   "city": "HOQUIAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0020958",
+   "permittee": "Midway Sewer District",
+   "city": "DES MOINES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020982",
+   "permittee": "City of Centralia",
+   "city": "CENTRALIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0020991",
+   "permittee": "City of Sunnyside",
+   "city": "SUNNYSIDE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0021105",
+   "permittee": "City of Chehalis",
+   "city": "CHEHALIS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0021954",
+   "permittee": "AMERICAN WATER MILITARY SERVICES - JBLM",
+   "city": "FT LEWIS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0022403",
+   "permittee": "Snoqualmie Wastewater & Water Reclamation Facility",
+   "city": "SNOQUALMIE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0022454",
+   "permittee": "City of Ferndale",
+   "city": "FERNDALE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0022497",
+   "permittee": "City of Marysville",
+   "city": "MARYSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0022560",
+   "permittee": "ARLINGTON CITY",
+   "city": "ARLINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0022578",
+   "permittee": "LYNDEN CITY OF",
+   "city": "LYNDEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0022624",
+   "permittee": "Lakehaven Water and Sewer District",
+   "city": "FEDERAL WAY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0022641",
+   "permittee": "BLAINE CITY OF",
+   "city": "BLAINE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0022764",
+   "permittee": "Southwest Suburban Sewer District",
+   "city": "NORMANDY PARK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0022772",
+   "permittee": "Southwest Suburban Sewer District",
+   "city": "BURIEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0023345",
+   "permittee": "City of Shelton",
+   "city": "SHELTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0023353",
+   "permittee": "City of Sumner",
+   "city": "SUMNER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0023396",
+   "permittee": "MUKILTEO WATER & WASTEWATER DISTRICT",
+   "city": "MUKILTEO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0023451",
+   "permittee": "Lakehaven Water and Sewer District",
+   "city": "DES MOINES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0023744",
+   "permittee": "City of Bellingham Public Works",
+   "city": "BELLINGHAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0023752",
+   "permittee": "City of Sedro-Woolley",
+   "city": "SEDRO-WOOLLEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0023949",
+   "permittee": "City of Wenatchee",
+   "city": "WENATCHEE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0023957",
+   "permittee": "GIG HARBOR CITY",
+   "city": "GIG HARBOR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0023973",
+   "permittee": "City of Port Angeles",
+   "city": "PORT ANGELES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0024023",
+   "permittee": "Yakima Regional POTW",
+   "city": "YAKIMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0024031",
+   "permittee": "City of Lynnwood",
+   "city": "EDMONDS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0024058",
+   "permittee": "City of Edmonds",
+   "city": "EDMONDS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0024074",
+   "permittee": "City of Mount Vernon Public Works",
+   "city": "MOUNT VERNON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0024341",
+   "permittee": "City of Ellensburg",
+   "city": "ELLENSBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0024350",
+   "permittee": "City of Vancouver",
+   "city": "VANCOUVER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0024368",
+   "permittee": "City of Vancouver",
+   "city": "VANCOUVER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0024473",
+   "permittee": "City of Spokane",
+   "city": "SPOKANE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0024490",
+   "permittee": "City of Everett",
+   "city": "EVERETT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0024627",
+   "permittee": "Jacobs",
+   "city": "WALLA WALLA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0029181",
+   "permittee": "King County Dept of Natural Resources and Parks",
+   "city": "SEATTLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0029289",
+   "permittee": "City of Bremerton",
+   "city": "BREMERTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0029351",
+   "permittee": "City of North Bend",
+   "city": "NORTH BEND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0029513",
+   "permittee": "City of Duvall",
+   "city": "DUVALL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0029548",
+   "permittee": "City of Snohomish",
+   "city": "SNOHOMISH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0029556",
+   "permittee": "Birch Bay Water & Sewer District",
+   "city": "BLAINE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0029581",
+   "permittee": "King County Dept of Natural Resources and Parks",
+   "city": "RENTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0030520",
+   "permittee": "Kitsap County Dept Public Works",
+   "city": "POULSBO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0032247",
+   "permittee": "King County Dept of Natural Resources and Parks",
+   "city": "WOODINVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0037061",
+   "permittee": "LOTT Clean Water Alliance",
+   "city": "OLYMPIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0037087",
+   "permittee": "City of Tacoma",
+   "city": "TACOMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0037168",
+   "permittee": "PUYALLUP STP",
+   "city": "PUYALLUP",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0037192",
+   "permittee": "City of Aberdeen",
+   "city": "ABERDEEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0037214",
+   "permittee": "City of Tacoma",
+   "city": "TACOMA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0037788",
+   "permittee": "Three Rivers Regional Wastewater Authority",
+   "city": "LONGVIEW",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0039624",
+   "permittee": "Pierce County Public Works",
+   "city": "UNIVERSITY PLACE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0044652",
+   "permittee": "City of Pullman",
+   "city": "PULLMAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0044784",
+   "permittee": "City of Kennewick POTW",
+   "city": "KENNEWICK",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "WA0044962",
+   "permittee": "City of Pasco",
+   "city": "PASCO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0045144",
+   "permittee": "Liberty Lake Sewer & Water District",
+   "city": "LIBERTY LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0050229",
+   "permittee": "WAPATO, CITY OF",
+   "city": "WAPATO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WA0052205",
+   "permittee": "City of Grandview",
+   "city": "GRANDVIEW",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WA0093317",
+   "permittee": "SCRWRF",
+   "city": "SPOKANE",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

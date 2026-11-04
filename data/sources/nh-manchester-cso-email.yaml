@@ -1,0 +1,26 @@
+id: "nh-manchester-cso-email"
+name: "Manchester 'CSO Discharge Notification' email newsletter"
+url: "https://www.manchesternh.gov/Residents/e-Services/Email-Notifications"
+homepage: "https://www.manchesternh.gov/Residents/e-Services/Email-Notifications"
+kind: "email"
+level: "municipal"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Requires
+#   subscribing; MRWC says the email 'links to a map'
+# Access detail (research, quoted): DNN opt-in form; checkbox 'CSO Discharge Notification'. Not
+#   subscribed.
+# Can fill: event_type, published_at
+# Cannot fill: coordinates; volume
+# Waters: Manchester CSOs (openboatlaunch slugs: merrimack-river-nh, piscataquog-river-nh)
+# History: none
+cadence: "per event (presumed same text as web posts)"
+license: "none stated"
+attribution: "City of Manchester"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NH"]
+access: ["email"]
+access_detail: "DNN opt-in form; checkbox 'CSO Discharge Notification'. Not subscribed."
+machine_readable: false
+legal_basis: "Consent Decree paragraph 19"
+checked: "2026-11-01"

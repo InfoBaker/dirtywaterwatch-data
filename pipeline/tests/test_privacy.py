@@ -1,0 +1,170 @@
+"""Personal data and pipeline notes stay out of the public record: staff-name keys and staff names in
+free text (strip_personal / scrub_text), notes naming repository files moved from raw to the events
+file's meta by the Rhode Island ingesters, and the export's second pass over events files written
+before a rule existed. Run from pipeline/: python -m pytest tests -q
+"""
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+import common  # noqa: E402
+from export import build as X  # noqa: E402
+from ingest import ri_echo_dfr as D  # noqa: E402
+from ingest import ri_nbc as N  # noqa: E402
+
+
+def strings(o):
+    if isinstance(o, dict):
+        for v in o.values():
+            yield from strings(v)
+    elif isinstance(o, list):
+        for v in o:
+            yield from strings(v)
+    elif isinstance(o, str):
+        yield o
+
+
+# ---------------------------------------------------------------- keys
+
+def test_strip_personal_drops_staff_keys_in_any_spelling():
+    out = common.strip_personal({
+        "inspector": "Eddy", "Inspector Name": "Eddy", "investigator": "Wood", "INVESTIGATOR_EMAIL": "x",
+        "signed_by": "Tom Watson", "Signed By": "Tom Watson", "submitted_by_name": "Ann Lee", "SubmittedBy": "Ann",
+        "assigned_to": "Inspector Simoes", "reviewed-by": "R", "approved_by": "A", "certified_by": "C", "signature": "N. S.",
+        "details": [{"investigator_name": "Ortiz", "step": "landlord called"}],
+        # kinds and identifiers, not people; and the water a record names
+        "inspector_id": "17", "inspection_type": "routine", "investigation": "closed",
+        "Name of Receiving Water": "Charles River", "reporterClass": "Permittee"})
+    assert out == {"details": [{"step": "landlord called"}], "inspector_id": "17", "inspection_type": "routine",
+                   "investigation": "closed", "Name of Receiving Water": "Charles River", "reporterClass": "Permittee"}
+
+
+# ---------------------------------------------------------------- free text
+
+def test_staff_names_in_free_text_are_scrubbed():
+    s = common.scrub_text
+    assert s("•\tCase was assigned to Inspector Eddy on 11/18/2025.•\tInspector Eddy spoke with the landlord") == \
+        "•\tCase was assigned to Inspector [name removed] on 11/18/2025.•\tInspector [name removed] spoke with the landlord"
+    assert s("Case was assigned to Inspector Tom Watson on 03/12/2025") == "Case was assigned to Inspector [name removed] on 03/12/2025"
+    assert s("DPH said they sent Inspector Harvey, who contacted landlord") == "DPH said they sent Inspector [name removed], who contacted landlord"
+    assert s("Investigator J. Smith visited") == "Investigator [name removed] visited"
+    assert s("Please contact Jane Doe at 413-555-1212 or contact Mr. Brown at the plant.") == \
+        "Please contact [name removed] at [phone removed] or contact [name removed] at the plant."
+    assert s("Contacted Bob at 9:45") == "Contacted [name removed] at 9:45"
+
+
+def test_name_scrub_leaves_ordinary_wording_alone():
+    for t in ("The DH Inspector conducted re-inspection on November 3", "The inspector got in touch with the landlord",
+              "Inspector General report", "Avoid contact with these water bodies for 48 hours after the discharge",
+              "Chlorine Contact Tank at the plant", "lagoon flowed into the Contact Chamber at 3 am",
+              "Property owner contact WPCA 12:20 p.m.", "Contacted DEEP by phone at 9:45 a.m.",
+              "contact Customer Service at the city", "DPH contacted Jacobs to investigate"):
+        assert common.scrub_text(t) == t, t
+
+
+def test_strip_personal_scrubs_names_at_any_depth():
+    out = common.strip_personal({"How incident was resolved": "Inspector Wood spoke with the landlord",
+                                 "steps": [{"note": "contact Ann Lee at the town hall"}]})
+    assert out == {"How incident was resolved": "Inspector [name removed] spoke with the landlord",
+                   "steps": [{"note": "contact [name removed] at the town hall"}]}
+
+
+# ---------------------------------------------------------------- repository paths
+
+def test_repo_paths_are_told_from_source_text():
+    assert common.has_repo_path("first receiving water in research/ri/dischargers.json")
+    assert common.has_repo_path("research/ri/raw/nbc-outfalls-from-api.csv (inferred from site names and coordinates)")
+    assert common.has_repo_path("ECHO outfall registry (data/outfalls-ne.json)")
+    assert common.has_repo_path("cached in data/raw/ri-nbc/")
+    for t in ("Because there is no flow data/pump speed data, the City reported the maximum",
+              "https://www.ri.gov/data/press/release.pdf", "20240404_Cessation_SSO_Pearl_St.pdf", "in/out/of service", 42, None):
+        assert not common.has_repo_path(t), t
+
+
+def test_path_notes_move_from_raw_to_meta():
+    recs = [{"event_id": "x:1", "raw": {"keep": "ECHO says 3 days", "water_basis": "first receiving water in research/ri/dischargers.json",
+                                        "placement": {"basis": "research/ri/raw/a.csv", "by": "Wilson Reservoir"},
+                                        "list": ["ok", "data/outfalls-ne.json"]}},
+            {"event_id": "x:2", "raw": {"keep": 1}}]
+    meta = common.path_notes_to_meta(recs, {"records": 2})
+    assert recs[0]["raw"] == {"keep": "ECHO says 3 days", "placement": {"by": "Wilson Reservoir"}, "list": ["ok"]}
+    assert meta == {"records": 2, "internal_notes": {"x:1": {
+        "water_basis": "first receiving water in research/ri/dischargers.json",
+        "placement.basis": "research/ri/raw/a.csv", "list[1]": "data/outfalls-ne.json"}}}
+    assert recs[1]["raw"] == {"keep": 1}
+
+
+# ---------------------------------------------------------------- Rhode Island ingesters
+
+PERMIT = "RI0100999"
+DFR = {"Results": {
+    "Message": "Success",
+    "SystemExtractDates": {"Dates": [{"EPASystem": "ICIS-NPDES", "SystemExtractDate": "10/30/2026"}]},
+    "SBEEventTotals": {"Sources": []},
+    "CWASECompliance": {"Header": {"Qtr1Start": "07/01/2026", "Qtr1End": "09/30/2026"},
+                        "Sources": [{"Violations": [
+                            {"ViolationDesc": "Bypass of treatment unit", "NPDESViolationId": "v1", "SourceID": "s1",
+                             "Agency": "State", "Qtr1Value": "08/03/2026"},
+                            {"ViolationDesc": "Dry weather SSO", "NPDESViolationId": "v2", "SourceID": "s1",
+                             "Agency": "State", "Qtr1Value": "08/10/2026 - 08/11/2026"}]}]}}}
+
+
+def test_ri_echo_dfr_writes_no_file_paths_into_raw(tmp_path, monkeypatch):
+    raw_dir, ev_dir, data_dir = tmp_path / "raw", tmp_path / "events", tmp_path / "data"
+    (raw_dir / D.SOURCE_ID).mkdir(parents=True)
+    (raw_dir / D.SOURCE_ID / f"20261101T000000Z.{PERMIT}.json").write_text(json.dumps(DFR))
+    ev_dir.mkdir()
+    data_dir.mkdir()
+    (data_dir / "outfalls-ne.json").write_text(json.dumps({"outfalls": []}))
+    # a record from an earlier run that ECHO no longer lists, written when raw still carried the path
+    old = common.event(source_id=D.SOURCE_ID, source_record_id="old", event_type="bypass", status="ended",
+                       npdes_permit=PERMIT, raw={"water_basis": "bypass at the treatment plant; plant receiving water: "
+                                                                "first receiving water in research/ri/dischargers.json"})
+    (ev_dir / f"{D.SOURCE_ID}.json").write_text(json.dumps({"records": [old]}))
+    monkeypatch.setattr(D, "RAW_DIR", raw_dir)
+    monkeypatch.setattr(D, "EVENTS_DIR", ev_dir)
+    monkeypatch.setattr(D, "DATA_DIR", data_dir)
+    monkeypatch.setattr(common, "EVENTS_DIR", ev_dir)
+    monkeypatch.setattr(D, "permits", lambda: [{"npdes_permit": PERMIT, "id": "ri-test", "name": "Test WWTF",
+                                                "water_slugs": ["test-river-ri"], "receiving_waters": ["Test River"]}])
+    assert D.main(["--from-raw"]) == 0
+    out = json.loads((ev_dir / f"{D.SOURCE_ID}.json").read_text())
+    recs = {r["source_record_id"]: r for r in out["records"]}
+    assert set(recs) == {"v1", "v2", "old"}
+    for r in out["records"]:
+        assert not [t for t in strings(r["raw"]) if common.has_repo_path(t)], r["raw"]
+    assert recs["v1"]["water_slugs"] == ["test-river-ri"]
+    assert recs["v1"]["raw"]["water_basis"] == ("bypass at the treatment plant; plant receiving water: "
+                                                "the discharger's first listed receiving water")
+    assert out["meta"]["water_basis_files"] == D.WATER_BASIS_FILES
+    assert out["meta"]["internal_notes"] == {old["event_id"]: {"water_basis": old["raw"]["water_basis"]}}
+
+
+def test_ri_nbc_record_raw_names_no_files():
+    info = {"system": next(iter(N.DISCHARGERS)), "code": "OF-035", "site": "Moshassuck River at Charles St",
+            "placement": {"inferred_names": ["Moshassuck River"], "nearest_waters_m": []},
+            "waterbody_text": "Moshassuck River", "water_slugs": [], "water_match": "none"}
+    rec = N.to_record("OF-035|2026-11-01T10:00", {"info": info, "state": "ongoing", "started_at": "2026-11-01T10:00:00-04:00",
+                                                  "first_seen_at": "2026-11-01T14:05:00Z", "pins_raw": {"SITE_ID": 35}})
+    assert rec["raw"]["water_placement"]["basis"] == "inferred from the outfall's site name and coordinates"
+    assert rec["raw"]["water_placement"]["inferred_names"] == ["Moshassuck River"]
+    assert not [t for t in strings(rec["raw"]) if common.has_repo_path(t)]
+    assert str(N.OUTFALL_CSV.relative_to(N.ROOT)) == "research/ri/raw/nbc-outfalls-from-api.csv"   # named in meta instead
+
+
+# ---------------------------------------------------------------- export
+
+def test_export_scrubs_events_written_under_older_rules():
+    e = {"event_id": "ct-deep-annual:1", "outfall_name": "Outfall 004 (Inspector Eddy)", "advice_text": "Avoid contact for 48 hours",
+         "raw": {"How incident was resolved": "Case was assigned to Inspector Eddy on 04/11/2025.", "inspector": "Eddy",
+                 "_water": {"via": "ECHO outfall registry (data/outfalls-ne.json)", "slug": "x"}}}
+    out = X.public_event(e)
+    assert out["raw"] == {"How incident was resolved": "Case was assigned to Inspector [name removed] on 04/11/2025.",
+                          "_water": {"slug": "x"}}
+    assert out["outfall_name"] == "Outfall 004 (Inspector [name removed])"
+    assert out["advice_text"] == "Avoid contact for 48 hours"
+    assert e["raw"]["inspector"] == "Eddy"                       # the input is not changed

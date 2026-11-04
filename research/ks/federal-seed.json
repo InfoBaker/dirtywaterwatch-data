@@ -1,0 +1,445 @@
+{
+ "state": "KS",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "KS0038563",
+   "permittee": "KANSAS CITY (PLANT NO. 1) WWTP (KAW POINT)",
+   "city": "KANSAS CITY",
+   "open_outfalls": 48,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "(No Waterbody)",
+    "Jersey Creek",
+    "Kansas River",
+    "Mattoon Creek",
+    "Missouri River"
+   ]
+  },
+  {
+   "npdes_permit": "KS0039128",
+   "permittee": "ATCHISON, CITY OF (WWTP)",
+   "city": "ATCHISON",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Missouri R (1024001111)",
+    "White Clay Cr (1024001131)"
+   ]
+  },
+  {
+   "npdes_permit": "KS0042722",
+   "permittee": "TOPEKA (OAKLAND) WASTEWATER PLANT (WWTP)",
+   "city": "TOPEKA",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Kansas River"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 60,
+ "plant_permits": 475,
+ "plant_permits_major": 57,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "KS0034011",
+   "permittee": "JUNCTION CITY, CITY OF",
+   "city": "JUNCTION CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0036188",
+   "permittee": "HUTCHINSON, CITY OF",
+   "city": "HUTCHINSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0036196",
+   "permittee": "MCPHERSON WASTEWATER PLANT",
+   "city": "MCPHERSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0036366",
+   "permittee": "LEAVENWORTH, CITY OF",
+   "city": "LEAVENWORTH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0036714",
+   "permittee": "MANHATTAN, CITY OF",
+   "city": "MANHATTAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0038474",
+   "permittee": "SALINA, CITY OF",
+   "city": "SALINA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0038491",
+   "permittee": "GREAT BEND, CITY OF",
+   "city": "GREAT BEND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0038563",
+   "permittee": "UNIFIED GOV OF KC/WY CNTY",
+   "city": "KANSAS CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0038644",
+   "permittee": "LAWRENCE, CITY OF",
+   "city": "LAWRENCE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0038954",
+   "permittee": "PITTSBURG, CITY OF",
+   "city": "PITTSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0038962",
+   "permittee": "GARDEN CITY, CITY OF",
+   "city": "GARDEN CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0039128",
+   "permittee": "ATCHISON, CITY OF",
+   "city": "ATCHISON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0042714",
+   "permittee": "TOPEKA NORTH WASTEWATER PLANT (WWTP)",
+   "city": "TOPEKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0042722",
+   "permittee": "TOPEKA, CITY OF",
+   "city": "TOPEKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0043036",
+   "permittee": "WICHITA, CITY OF",
+   "city": "WICHITA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0044831",
+   "permittee": "ARKANSAS, CITY OF",
+   "city": "ARKANSAS CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0045802",
+   "permittee": "OLATHE HAROLD STREET WWTF",
+   "city": "OLATHE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0046728",
+   "permittee": "EMPORIA, CITY OF",
+   "city": "EMPORIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0050377",
+   "permittee": "DERBY, CITY OF",
+   "city": "DERBY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0050733",
+   "permittee": "COFFEYVILLE, CITY OF",
+   "city": "COFFEYVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0051926",
+   "permittee": "WINFIELD, CITY OF",
+   "city": "WINFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0055492",
+   "permittee": "JOCO NELSON COMPLEX WASTEWATER PLANT",
+   "city": "MISSION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0080195",
+   "permittee": "UNIFIED GOV OF KC/WY CNTY",
+   "city": "KANSAS CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0080837",
+   "permittee": "CHANUTE, CITY OF",
+   "city": "CHANUTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0080870",
+   "permittee": "LIBERAL WASTEWATER PLANT",
+   "city": "LIBERAL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KS0081299",
+   "permittee": "OLATHE, CITY OF (CEDAR CREEK)",
+   "city": "OLATHE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0081647",
+   "permittee": "LANSING. CITY OF",
+   "city": "LANSING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0081973",
+   "permittee": "WICHITA FOUR MILE CRK WWTP",
+   "city": "WICHITA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "KS0082881",
+   "permittee": "BONNER SPRINGS, CITY OF",
+   "city": "BONNER SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0088269",
+   "permittee": "JOHNSON COUNTY WASTEWATER",
+   "city": "SHAWNEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0089176",
+   "permittee": "CHISHOLM CK UTILITY AUTHORITY",
+   "city": "PARK CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0092738",
+   "permittee": "JOHNSON COUNTY WASTEWATER BLUE RIVER #1",
+   "city": "OVERLAND PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0094561",
+   "permittee": "AUGUSTA, CITY OF",
+   "city": "AUGUSTA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0095486",
+   "permittee": "INDEPENDENCE, CITY OF",
+   "city": "INDEPENDENCE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0095605",
+   "permittee": "GARDNER, CITY OF",
+   "city": "GARDNER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0095681",
+   "permittee": "WICHITA, CITY OF",
+   "city": "WICHITA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0095923",
+   "permittee": "FORT SCOTT, CITY OF",
+   "city": "FORT SCOTT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0097489",
+   "permittee": "WICHITA #5-MID CONTINENT AIRPORT",
+   "city": "WICHITA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0097535",
+   "permittee": "OTTAWA, CITY OF",
+   "city": "OTTAWA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0097560",
+   "permittee": "PARSONS, CITY OF",
+   "city": "PARSONS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0097667",
+   "permittee": "EL DORADO, CITY OF",
+   "city": "EL DORADO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0098418",
+   "permittee": "MULVANE, CITY OF",
+   "city": "MULVANE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0098647",
+   "permittee": "ABILENE, CITY OF",
+   "city": "ABILENE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0098752",
+   "permittee": "LARNED, CITY OF",
+   "city": "LARNED",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0099031",
+   "permittee": "LAWRENCE, CITY OF (WAKARUSA)",
+   "city": "LAWRENCE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0099571",
+   "permittee": "WELLINGTON, CITY OF",
+   "city": "WELLINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0099759",
+   "permittee": "FORT RILEY MILITARY BASE - CAMP FUNSTON",
+   "city": "FORT RILEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0100374",
+   "permittee": "EDGERTON, CITY OF",
+   "city": "EDGERTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0100528",
+   "permittee": "NEWTON, CITY OF",
+   "city": "NEWTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0100790",
+   "permittee": "WICHITA - FOUR MILE CREEK",
+   "city": "WICHITA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0100820",
+   "permittee": "HAYS, CITY OF",
+   "city": "HAYS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0100854",
+   "permittee": "JOHNSON COUNTY WASTEWATER",
+   "city": "LEAWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0100986",
+   "permittee": "LIBERAL, CITY OF",
+   "city": "LIBERAL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0101516",
+   "permittee": "UNIFIED GOVT WYANDOTTE CO/KCK",
+   "city": "KANSAS CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0117731",
+   "permittee": "SHERWOOD IMPROVEMENT DISTRICT (WWTP)",
+   "city": "TOPEKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0119601",
+   "permittee": "JOHNSON COUNTY WASTEWATER",
+   "city": "OVERLAND PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "KS0200022",
+   "permittee": "PITTSBURG, CITY OF (NEW WWTP)",
+   "city": "PITTSBURG",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

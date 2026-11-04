@@ -1,0 +1,31 @@
+id: "vt-doh-cyanobacteria-tracker-current"
+name: "VT Dept of Health Cyanobacteria Tracker - Current Approved Reports (ArcGIS view)"
+url: "https://services.arcgis.com/YKJ5JtnaPQ2jDbX8/arcgis/rest/services/Cyanobacteria_Current_Approved_Reports_View/FeatureServer/0"
+homepage: "https://services.arcgis.com/YKJ5JtnaPQ2jDbX8/arcgis/rest/services/Cyanobacteria_Current_Approved_Reports_View/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Clean, public,
+#   machine-readable HAB status per site.
+# Access detail (research, quoted): Public FeatureServer (org YKJ5JtnaPQ2jDbX8, owner
+#   AHS_Production) behind Experience 194da900279747efa8cee01b57fb23e6 embedded on
+#   healthvermont.gov. 126 features (latest report per site) on 2026-11-01; dataLastEditDate
+#   2026-10-31.
+# Can fill: source_record_id (GlobalID), event_type (cyanobacteria), source_status (StatusWeb:
+#   Generally Safe / Low Alert / High Alert), reported_at (ReportDate), waterbody, location_text,
+#   coordinates (site point), authority
+# Cannot fill: ended_at; valid_until; volume; advice_text (on page, not in data)
+# Waters: Lake Champlain and monitored inland lakes (VT and some NY shore sites) (openboatlaunch
+#   slugs: lake-champlain-vt, lac-memphremagog-vt, lake-carmi-vt, seymour-lake-vt)
+# History: Current view only; see all-reports view and season summaries.
+cadence: "Weekly site observations early June to early October; reports reviewed before posting. Page: 'Test site observations and samples are collected once each week. Conditions can and do change.'"
+license: "Item licenseInfo and accessInformation null; tracker page states no terms."
+attribution: "Vermont Department of Health (with VT DEC and Lake Champlain Committee)"
+enabled: true
+role: "advisories"
+event_types: ["cyanobacteria"]
+states: ["VT"]
+access: ["arcgis", "map_only"]
+access_detail: "Public FeatureServer (org YKJ5JtnaPQ2jDbX8, owner AHS_Production) behind Experience 194da900279747efa8cee01b57fb23e6 embedded on healthvermont.gov. 126 features (latest report per site) on 2026-11-01; dataLastEditDate 2026-10-31."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

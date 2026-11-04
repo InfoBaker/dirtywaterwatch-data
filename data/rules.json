@@ -1,0 +1,288 @@
+{
+ "version": "2026-11-03g",
+ "live_states": ["CT", "MA", "ME", "NH", "RI", "VT", "NJ", "NY", "PA", "MD", "VA", "DC"],
+ "_live_states_doc": "The states and the District this site publishes: the one list of live states (2026-11-03g). build/status.py states() returns exactly this list; every public output (state pages, waters, the map's outfalls, the radar reads, coverage, the CSV downloads, the source tally) keeps to it, so water records and registry rows built nationally for other states sit in data/ without reaching the site. A state goes live by being added here, after docs/collection-checklist.md.",
+ "red": {
+  "doc": "Red covers reported ongoing discharges, post-discharge periods used by this site, and official advisories. The source and clock for each period are listed below. by_discharger entries (keyed by discharger id) take precedence over the state row.",
+  "by_state": {
+   "MA": {
+    "hours": 48,
+    "clock": "end_of_discharge",
+    "basis": "Massachusetts requires notices to tell people to avoid contact for 48 hours after a discharge stops. This site counts those 48 hours from the reported end.",
+    "source": "314 CMR 16.04(10)(g), Massachusetts sewage notification regulations"
+   },
+   "VT": {
+    "hours": 48,
+    "clock": "end_of_discharge",
+    "basis": "Vermont requires discharge signs to remain for 48 hours after an untreated discharge stops. This site uses that period for its status. Read Vermont DEC's notice for activity-specific advice.",
+    "source": "10 V.S.A. § 1295(e), Vermont"
+   },
+   "CT": {
+    "hours": 48,
+    "clock": "end_of_discharge",
+    "basis": "Connecticut DEEP's July 7, 2026 guidance describes increased risk during rain and for 48–72 hours afterward on the Connecticut River and Long Island Sound. This site uses 48 hours after a reported discharge ends. That clock is a site interpretation, not the clock in DEEP's guidance.",
+    "source": "Connecticut Department of Energy and Environmental Protection (DEEP), guidance of July 7, 2026"
+   },
+   "RI": {
+    "hours": 48,
+    "clock": "end_of_discharge",
+    "basis": "Narragansett Bay Commission describes increased risks during rain and for up to 48 hours after a sewage discharge. This site uses 48 hours after the reported end. This is local guidance, not a statewide swimming rule.",
+    "source": "Narragansett Bay Commission, CSO Alarm Map"
+   },
+   "NH": {
+    "hours": 72,
+    "clock": "end_of_discharge",
+    "basis": "New Hampshire's law applies special water-use criteria during combined sewer discharges and for up to three days after they stop. This site uses 72 hours after the reported end.",
+    "source": "N.H. RSA 485-A:8, III"
+   },
+   "ME": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "The Maine sources reviewed here do not set a general post-discharge period. This site marks reported ongoing discharges and applies its own caution after they end. Official rainfall advisories follow separate rules.",
+    "source": "Maine Healthy Beaches program; Maine Department of Environmental Protection"
+   },
+   "NY": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "New York's sewage notification rules do not supply a general post-discharge period in the sources reviewed here. Where New York City DEP gives an advisory end time, we use it.",
+    "source": "New York Sewage Pollution Right to Know Act; New York City Department of Environmental Protection (DEP)"
+   },
+   "NJ": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "New Jersey sets no public notice period: CSO permits (Part IV.F.8) require outfall signs reading \"Warning, possible sewage overflows during and following wet weather. Contact with water may also cause illness.\", leaflets, a yearly mailing and a notification website; sanitary overflows and bypasses are reported to the DEP Hotline only (N.J.A.C. 7:14A-6.10)",
+    "source": "N.J.A.C. 7:14A-6.10 and 7:14A-11.12; NJPDES CSO permit NJ0108812 (Camden City, 2024)"
+   },
+   "PA": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Pennsylvania sets no public notice period: operators report to DEP within 4 hours and in writing within 5 days (25 Pa. Code § 92a.41(b)) and notify known downstream users \"if reasonably possible\" (§ 91.33); CSO public notification is a permit control with no deadline; Erie alone falls under the federal Great Lakes rule (40 CFR 122.38: public notice within 4 hours)",
+    "source": "25 Pa. Code §§ 91.33, 92a.41, 92a.47; 40 CFR 122.38"
+   },
+   "MD": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Maryland sets no fixed public advisory period: a public advisory stays in effect until the local health department finds that sampling of the receiving water has returned to normal or prior background levels (COMAR 26.08.10.08D). Operators must report an overflow or plant bypass to MDE and the local health department within 24 hours and notify the public within 24 hours when it reaches shellfish, drinking-water, bathing-beach or recreation waters (Env. § 9-331.1; COMAR 26.08.10.03 and .08A). Local practice: Anne Arundel County closes affected waters for about a week after a sewage spill; MDE advises avoiding swimming within 48 hours of heavy rain",
+    "source": "Md. Code, Environment § 9-331.1; COMAR 26.08.10.03, .08A and .08D; Anne Arundel County Department of Health closings and advisories; MDE Healthy Beaches"
+   },
+   "VA": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Virginia law places no public notice duty on the discharger: an overflow must be reported to DEQ or the local emergency services office within 24 hours (Va. Code § 62.1-44.5 B; 9VAC25-31-190 L 6 and 7), and DEQ passes the report to the Department of Health, the media and its email and social lists only when VDH or DEQ finds a risk to health or water use, with no deadline (§ 62.1-44.19:6 B). Where an operator publishes its own post-overflow period it is applied under that operator's name",
+    "source": "Va. Code § 62.1-44.5 B and § 62.1-44.19:6 B; 9VAC25-31-190; DEQ report HD7 (2021)"
+   },
+   "DC": {
+    "hours": 24,
+    "clock": "end_of_discharge",
+    "basis": "DC Water's permit requires a warning light on the Anacostia and on the Potomac: one colour while a combined sewer overflow is occurring and a second colour for 24 hours after it has stopped (NPDES permit DC0021199, Part III.B.1.h.i); DC Water's own page adds that after rain over one inch the effects can last up to three days. This site uses 24 hours from the end of the overflow, the permit's light period. No District law requires public notice of overflows, and swimming in the Potomac, the Anacostia and Rock Creek is prohibited by regulation (21 DCMR 1108.1)",
+    "source": "NPDES permit DC0021199 (EPA Region 3), Part III.B.1.h; DC Water combined sewer system page; 21 DCMR 1108.1"
+   }
+  },
+  "by_discharger": {
+   "pa-alcosan": {
+    "hours": 48,
+    "clock": "end_of_discharge",
+    "basis": "ALCOSAN's advisory log: \"Overflows have ceased; Waterways may still be impaired.\" stands until 48 hours after overflows end (the Allegheny County Health Department cancels its alerts 24 to 36 hours after)",
+    "source": "ALCOSAN sewer overflow advisories; Allegheny County Health Department FAQ"
+   },
+   "va-richmond-dpu": {
+    "hours": 48,
+    "clock": "end_of_discharge",
+    "basis": "Richmond's combined sewer overflow map marks each outfall red for 48 hours after an overflow (legend: \"in the last 48 hours\")",
+    "source": "City of Richmond Department of Public Utilities CSO notification map"
+   },
+   "va-alexrenew": {
+    "hours": 24,
+    "clock": "end_of_discharge",
+    "basis": "AlexRenew's CSO status layer shows an outfall red when an overflow occurred in the past 24 hours",
+    "source": "AlexRenew combined sewer overflow status map"
+   },
+   "va-lynchburg-water-resources": {
+    "hours": 30,
+    "clock": "end_of_discharge",
+    "basis": "Lynchburg sends a second CSO alert thirty hours after an overflow ends",
+    "source": "Lynchburg Alerts (Department of Water Resources CSO notifications)"
+   }
+  }
+ },
+ "yellow": {
+  "doc": "DirtyWaterWatch sets these caution periods using the studies listed below. Periods count from the reported discharge end, not from the end of the red period.",
+  "default_hours": 72,
+  "default_rationale": "We use 72 hours after the reported discharge end as our standard caution period. The cited studies describe bacteria or illness after rain and sewage exposure in other settings. They do not establish when a particular New England water becomes safe. Local conditions can extend contamination beyond this period.",
+  "by_event_type": {
+   "cso": {
+    "hours": 72,
+    "rationale": "Combined sewer discharges contain sewage and rainwater. EPA documents high bacteria levels in these discharges. We use a caution period of 72 hours after the reported end; the reported volume does not establish bacteria levels at a particular spot.",
+    "source": "U.S. EPA, Report to Congress on Impacts and Control of Combined Sewer Overflows and Sanitary Sewer Overflows (2004)"
+   },
+   "sso": {
+    "hours": 72,
+    "rationale": "Sanitary sewer discharges can contain concentrated sewage. We use a caution period of 72 hours after the reported end. Smaller reported volumes do not establish lower risk at a particular spot.",
+    "source": "U.S. EPA, Report to Congress on Impacts and Control of Combined Sewer Overflows and Sanitary Sewer Overflows (2004)"
+   },
+   "bypass": {
+    "hours": 72,
+    "rationale": "Wastewater can skip different treatment steps during a bypass. Reports do not always state which steps were skipped. We use a caution period of 72 hours after the reported end.",
+    "source": "U.S. EPA, Report to Congress on Impacts and Control of Combined Sewer Overflows and Sanitary Sewer Overflows (2004)"
+   },
+   "plant_bypass": {
+    "hours": 72,
+    "rationale": "A treatment plant bypass skips one or more treatment steps. We use a caution period of 72 hours after the reported end.",
+    "source": "U.S. EPA, Report to Congress on Impacts and Control of Combined Sewer Overflows and Sanitary Sewer Overflows (2004)"
+   },
+   "blended": {
+    "hours": 72,
+    "rationale": "Blended discharges mix wastewater that skipped some treatment with treated wastewater. Treatment details vary. This rule uses 72 hours after the reported end.",
+    "source": "U.S. EPA, Report to Congress on Impacts and Control of Combined Sewer Overflows and Sanitary Sewer Overflows (2004)"
+   },
+   "beach_advisory": {
+    "hours": null,
+    "rationale": "We use the authority's advisory status. DirtyWaterWatch does not decide when a beach reopens.",
+    "source": "The issuing health department's notice"
+   },
+   "beach_closure": {
+    "hours": null,
+    "rationale": "We use the authority's closure status. Read its notice for the location, dates and restrictions.",
+    "source": "The issuing health department's notice"
+   },
+   "rain_advisory": {
+    "hours": null,
+    "rationale": "We use the rainfall advisory and period stated by the issuing authority. The notice explains when its clock starts.",
+    "source": "Maine Healthy Beaches program; New York City DEP"
+   },
+   "hab_advisory": {
+    "hours": null,
+    "rationale": "We list the authority's advisory and the date it was last confirmed. An old or missing update does not mean the advisory was lifted.",
+    "source": "Vermont Department of Health, Cyanobacteria Tracker; other issuing authorities"
+   },
+   "shellfish_closure": {
+    "hours": null,
+    "rationale": "We use shellfish closure notices from the Rhode Island Department of Environmental Management (DEM) and the Maine Department of Marine Resources (DMR). These restrict shellfish harvesting; they are not automatically swimming advisories.",
+    "source": "Rhode Island DEM; Maine DMR"
+   },
+   "annual_total": {
+    "hours": null,
+    "rationale": "Monthly and yearly totals appear in history charts. They do not set a current status.",
+    "source": "DirtyWaterWatch status rules"
+   },
+   "unknown": {
+    "hours": 72,
+    "rationale": "A notice we cannot fully read is shown with caution when it appears to report a discharge. Check the original notice for details.",
+    "source": "DirtyWaterWatch status rules"
+   }
+  },
+  "by_water_kind": {
+   "lake": {
+    "hours": 96,
+    "rationale": "We use 96 hours after the reported discharge end for lakes. The cited research shows that bacteria can persist in still water and sediment. This is a site caution period, not a measured recovery time.",
+    "source": "Environment Agency (England), report SC250004/R (2026); Korajkic et al. (2019)"
+   },
+   "pond": {
+    "hours": 96,
+    "rationale": "We use 96 hours after the reported discharge end for ponds. Bacteria can persist in still water and sediment. This is a site caution period, not a measured recovery time.",
+    "source": "Environment Agency (England), report SC250004/R (2026); Korajkic et al. (2019)"
+   },
+   "reservoir": {
+    "hours": 96,
+    "rationale": "We use 96 hours after the reported discharge end for reservoirs. Bacteria can persist in still water and sediment. This is a site caution period, not a measured recovery time.",
+    "source": "Environment Agency (England), report SC250004/R (2026); Korajkic et al. (2019)"
+   }
+  },
+  "by_water": {
+   "_example": {
+    "enabled": false,
+    "hours": 72,
+    "rationale": "Example of a water-specific window with its evidence; not enabled.",
+    "source": ""
+   }
+  },
+  "conditions": {
+   "doc": "Cold water and cloudy water can help bacteria persist. We show these conditions as context; they do not change the caution period. Flow can move and dilute a discharge, but does not establish water quality.",
+   "cold_water_c": 15,
+   "turbid_ntu": 200,
+   "source": "Kay et al. (2005); Korajkic et al. (2019); Jobson (1996)"
+  },
+  "default_source": "Ackerman and Weisberg (2003); Arnold et al. (2017); Boehm et al. (2018); EU Bathing Water Directive, short-term pollution; N.H. RSA 485-A:8, III"
+ },
+ "principle": "We err on the side of safety. When reports leave important details unclear, we show the uncertainty and explain the rule we use.",
+ "unresolved": {
+  "doc": "These records have no confirmed end time in the sources we track.",
+  "ongoing_red_days": 7,
+  "ongoing_red_rationale": "A report marked ongoing stays red until an end is found or 7 days pass. After 7 days we label the end unconfirmed rather than assume the discharge continues.",
+  "unresolved_yellow_days": 30,
+  "unresolved_yellow_rationale": "From day 7 to day 30, the map marks the end as unconfirmed. After day 30, the record remains flagged on its report and water pages.",
+  "unknown_status_yellow_days": 14,
+  "unknown_status_rationale": "A discharge record with unclear status shows caution for 14 days after its report time. It then follows the rule for unconfirmed records.",
+  "end_assumed_rationale": "A report with no end is shown as unresolved for 30 days after it began; after that this site assumes the discharge ended and the record says the end was never reported."
+ },
+ "reach": {
+  "cap_km": 40,
+  "cap_rationale": "We estimate downstream stretches to tidal water, the first lake or a maximum of 40 kilometres. A ring marks where the estimate stops. Contamination can travel beyond that point.",
+  "stop_at": [
+   "tidal",
+   "lake_or_reservoir",
+   "cap_km"
+  ],
+  "source": "U.S. Geological Survey, Network-Linked Data Index (NLDI) and the NHDPlus Version 2 river network; Jobson (1996), U.S. Geological Survey Water-Resources Investigations Report 96-4013"
+ },
+ "placement": {
+  "doc": "How a report is linked to a water when it does not say exactly where the sewage went.",
+  "no_outfall_all_waters": true,
+  "no_outfall_all_waters_basis": "When a combined sewer overflow report does not say which outfall discharged, we show it on every water that the operator's permitted outfalls discharge to, because any of them could have been affected.",
+  "_no_outfall_all_waters_status": "Site default of 2026-11-03, pending the owner's confirmation (docs/decisions.md)."
+ },
+ "rain_likely": {
+  "doc": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount at which that system has discharged before, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow: discharge likely, no report received. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+  "enabled": true,
+  "label": "Discharge likely: heavy rain, no report received",
+  "percentile": 10,
+  "min_discharge_days": 10,
+  "threshold_rationale": "The amount is the 10th percentile of the rainfall the operator itself reported on the days it discharged: nine discharge days in ten had more rain. It is computed for each operator with at least 10 such days in its Massachusetts sewage notification reports since July 2022; operators without that history use a published rule below.",
+  "threshold_source": "MassDEP Sewage Notification Data System, via the EEA Data Portal (Verified Data Reports, rainfall reported by each permittee)",
+  "compare": "The NOAA MRMS radar-only rainfall estimate for the 24 hours to the latest hour, read every hour at each outfall from the radar grid.",
+  "tail_hours": 48,
+  "tail_rationale": "The caution lasts 48 hours after the 24-hour rainfall total falls back below the amount, as Massachusetts advises avoiding contact during rainstorms and for 48 hours after they end.",
+  "tail_source": "Massachusetts 314 CMR 16.09(4)",
+  "notice_suppress_hours": 24,
+  "notice_suppress_rationale": "A discharge notice from the operator that began in the last 24 hours takes over: the waters it names follow the advisory rules above.",
+  "rainfall_stale_hours": 3,
+  "fallback": {
+   "default": {
+    "inches": 0.1,
+    "basis": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+    "source": "This site's methods page"
+   },
+   "by_state": {
+    "RI": {
+     "inches": 0.5,
+     "basis": "Rhode Island closes shellfish areas in Narragansett Bay after 0.5 inch of rain",
+     "source": "Rhode Island DEM shellfish program, rainfall closures"
+    },
+    "ME": {
+     "inches": 1.0,
+     "basis": "Maine Healthy Beaches issues rainfall advisories after 1 inch or more of rain in 24 hours",
+     "source": "Maine Healthy Beaches program (Maine DEP)"
+    },
+    "NY": {
+     "inches": 0.1,
+     "basis": "New York lets operators issue combined sewer advisories from rainfall data or models; New York City's waterbody advisory model uses a rainfall threshold of 0.1 inch on most of its waters",
+     "source": "6 NYCRR 750-2.7(b)(2)(iii); New York City Department of Environmental Protection, Waterbody Advisory System"
+    },
+    "MD": {
+     "inches": 0.1,
+     "basis": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+     "source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories"
+    },
+    "DC": {
+     "inches": 0.1,
+     "basis": "District and county agencies recommend not swimming for 48 hours after half an inch of rain, as Anacostia Riverkeeper publishes their advice; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+     "source": "Anacostia Riverkeeper, Swim Guide listings for the District of Columbia"
+    }
+   }
+  },
+  "rainfall_source": "NOAA National Weather Service, Multi-Radar Multi-Sensor (MRMS) radar-only precipitation estimate, 1 km",
+  "forecast_source": "NOAA National Weather Service gridpoint forecast (api.weather.gov), quantitative precipitation, next 24 hours",
+  "source": "Permittees' own reports (MassDEP Sewage Notification Data System); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
+ },
+ "_internal_doc": "Advisory windows the status computation applies (docs/plan.md section 2). Owner decision 2026-11-02: 72 hours is the site default for the yellow caution, overridable by event type, water kind and water body, each with its rationale, so the rule can be adjusted and explained. Hours count from the reported end of the discharge (ended_at); while a discharge is ongoing it is red. Resolution order for yellow: by_water > by_water_kind > by_event_type > default. Every override must carry a rationale and a source. Public wording (2026-11-02d, from the public-copy review docs/reviews/2026-11-02-copy-review.md): principle, every doc, basis, rationale and *_rationale string and every source is printed on the site exactly as written here (out/rules.json is the site's only copy of the rule text), so they stay in the public voice: no owner, project or file references, citations in source. A rationale that states a number of hours, days or kilometres must match the number beside it (pipeline/tests/test_public_export.py checks). The evidence behind each number is in research/science/report.md; the rain-likely design (per-outfall rainfall thresholds from permittee notices, RIDEM and NYC DEP rules, MRMS radar) is in docs/plan.md section 2 and docs/source-checklist.md. Keys starting with an underscore are internal and are stripped from the public export (out/rules.json)."
+}

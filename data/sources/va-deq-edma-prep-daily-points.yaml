@@ -1,0 +1,30 @@
+id: "va-deq-edma-prep-daily-points"
+name: "DEQ EDMA layer 175 'PReP Reports (Daily)' (points)"
+url: "https://gisdata.deq.virginia.gov/arcgis/rest/services/public/EDMA/MapServer/175"
+homepage: "https://gisdata.deq.virginia.gov/arcgis/rest/services/public/EDMA/MapServer/175"
+kind: "arcgis"
+level: "state"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Only DEQ source of a
+#   point per PReP report; join on id to the API record.
+# Access detail (research, quoted): Point layer (also public/PrepReports/MapServer/1). 33,266
+#   features since 2019-05-29. Query by PRP_REPORT_ID (string): where=PRP_REPORT_ID IN ('324738')
+#   &outSR=4326. REFERENCE_POINT 'PG' (geocoded). Fetched four sample points.
+# Can fill: coordinates (geocoded site address, not the outfall), source_record_id, started_at,
+#   reported_at, source_status
+# Cannot fill: waterbody; volume; event_type
+# Waters: statewide
+# History: 2019-05-29 onward
+# Research notes: Epoch here equals local wall-clock labelled as UTC (different from the export
+#   table's +5 h). Points are geocoded site addresses with precision unknown.
+cadence: "Daily"
+license: "EDMA service description: 'By viewing and using this data for any purpose, you agree to DEQ's Terms of Use'"
+attribution: "Virginia Department of Environmental Quality"
+enabled: true
+role: "events"
+event_types: ["sso", "cso"]
+states: ["VA"]
+access: ["arcgis"]
+access_detail: "Point layer (also public/PrepReports/MapServer/1). 33,266 features since 2019-05-29. Query by PRP_REPORT_ID (string): where=PRP_REPORT_ID IN ('324738') &outSR=4326. REFERENCE_POINT 'PG' (geocoded). Fetched four sample points."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

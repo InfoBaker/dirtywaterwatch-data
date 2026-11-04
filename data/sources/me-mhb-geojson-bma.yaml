@@ -1,0 +1,38 @@
+id: "me-mhb-geojson-bma"
+name: "Maine Healthy Beaches live status GeoJSON, beach management areas (mapdata_bma.geojson)"
+url: "https://apps.web.maine.gov/online/healthy_beaches/mapdata_bma.geojson"
+homepage: "https://apps.web.maine.gov/online/healthy_beaches/mapdata_bma.geojson"
+kind: "api"
+level: "state"
+# Notes (research/me, status candidate, verified fetched, checked 2026-11-01): Best machine-readable
+#   live Maine feed found: statewide, no key, current advisory per beach plus latest result per
+#   site. Undocumented endpoint (could change without notice).
+# Access detail (research, quoted): Plain GET, no auth, GeoJSON FeatureCollection (67 features, one
+#   empty), ~65 KB, Cache-Control no-cache. Found inside the MHB ArcGIS web map
+#   3733e3ddc4a44607996d08e9c498b404 used by the portal's embedded map. Fetched 2026-11-01
+#   (off-season: all 'No Active Advisory').
+# Can fill: event_type (Elevated Bacteria / Precautionary Rainfall / Closure), source_status,
+#   started_at (Advisory Start Date), advice_text (Public Comment), authority (Management Entity),
+#   coordinates (beach point), source_record_id (Database Beach ID / EPA Beach ID), source_url
+# Cannot fill: ended_at (current state only; use status history); cause / discharger; volume;
+#   valid_until
+# Waters: 66 coastal saltwater beach management areas, Kittery to Acadia (openboatlaunch slugs:
+#   casco-bay-me, saco-bay-me, biddeford-pool-me, frenchman-bay-me, bigelow-bight-me,
+#   york-harbor-me, penobscot-bay-me, west-penobscot-bay-me, rockland-harbor-me)
+# History: Current state only.
+# Research notes: Advisory types and colours from the web map: Elevated Bacteria (orange),
+#   Precautionary Rainfall (yellow), Closure (red), No Active Advisory. Dates are RFC-1123 strings
+#   in GMT (e.g. 'Wed, 02 Sep 2026 13:30:00 GMT' = 09:30 EDT, matching the CSV). Result strings keep
+#   the '<' qualifier ('<10').
+cadence: "Live; changes when a management entity posts or lifts an advisory. Results 'typically available the following day'. Season Memorial Day to Labor Day."
+license: "maine.gov: 'Neither the State of Maine, nor any agency, officer, or employee of the State of Maine warrants the accuracy, reliability or timeliness of any information published on the Maine.gov website ... Any person or entity that relies on any information obtained from this system does so at their own risk.' (https://www.maine.gov/portal/policies/disclaimer.html). No reuse licence stated. Portal: 'This is a public resource provided by the Maine Department of Environmental Protection'. Disclaimer: 'Swim at your own risk. Water quality can change unexpectedly. Information on this site may not reflect current water quality conditions.'"
+attribution: "Maine DEP, Maine Healthy Beaches Program (with towns/state parks as management entities)"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure"]
+states: ["ME"]
+access: ["api"]
+access_detail: "Plain GET, no auth, GeoJSON FeatureCollection (67 features, one empty), ~65 KB, Cache-Control no-cache. Found inside the MHB ArcGIS web map 3733e3ddc4a44607996d08e9c498b404 used by the portal's embedded map. Fetched 2026-11-01 (off-season: all 'No Active Advisory')."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

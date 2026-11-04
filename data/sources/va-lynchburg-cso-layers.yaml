@@ -1,0 +1,24 @@
+id: "va-lynchburg-cso-layers"
+name: "Lynchburg 'CSO Locations' map layers (CSO - Discharge Locations; CSO - Overflow Manhole)"
+url: "https://cityoflynchburg.maps.arcgis.com/apps/webappviewer/index.html?id=0fb6dc4e5aef434cb92305f4bb3aa15e"
+homepage: "https://cityoflynchburg.maps.arcgis.com/apps/webappviewer/index.html?id=0fb6dc4e5aef434cb92305f4bb3aa15e"
+kind: "arcgis"
+level: "municipal"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Operator outfall
+#   points to pair with ECHO's 17 Lynchburg CSO rows.
+# Access detail (research, quoted): Web map 4d89e739e45b4b6d8dffd41c1a4ad61e; layers
+#   https://utility.arcgis.com/usrsvcs/servers/62329509147e4d049cca02c02233c595/rest/services/WaterResources/SanitarySewer_UN/MapServer/344
+#   (18 overflow manholes, overflowmhid PS-011...PS-133) and /345 (15 discharge locations, Label
+#   '62','66','116','11','14,33,34',...). Public via proxy.
+cadence: null
+license: "none stated"
+attribution: "City of Lynchburg"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["VA"]
+access: ["arcgis"]
+access_detail: "Web map 4d89e739e45b4b6d8dffd41c1a4ad61e; layers https://utility.arcgis.com/usrsvcs/servers/62329509147e4d049cca02c02233c595/rest/services/WaterResources/SanitarySewer_UN/MapServer/344 (18 overflow manholes, overflowmhid PS-011...PS-133) and /345 (15 discharge locations, Label '62','66','116','11','14,33,34',...). Public via proxy."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

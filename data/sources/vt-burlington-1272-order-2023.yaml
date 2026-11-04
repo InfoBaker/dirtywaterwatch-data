@@ -1,0 +1,27 @@
+id: "vt-burlington-1272-order-2023"
+name: "Burlington Main/North/East CSO 1272 Order (2023-05-19)"
+url: "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1331/3-1331.CSO.1272Order.20230519.pdf"
+homepage: "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1331/3-1331.CSO.1272Order.20230519.pdf"
+kind: "pdf"
+level: "state"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): S/N IDs
+# Access detail (research, quoted): none recorded
+# Can fill: location_text
+# Cannot fill: coordinates
+# Waters: Lake Champlain, Winooski (openboatlaunch slugs: lake-champlain-vt, winooski-river-vt)
+# Research notes: Northfield order:
+#   https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1158/3-1158.CSO.1272Order.20220419.pdf;
+#   Enosburg order:
+#   https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1234/3-1234.CSO.1272Order.20250828.pdf
+cadence: ""
+license: "none stated"
+attribution: "VT DEC"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["VT"]
+access: ["pdf"]
+access_detail: ""
+machine_readable: false
+legal_basis: "10 V.S.A. 1272"
+checked: "2026-11-01"

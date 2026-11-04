@@ -1,0 +1,33 @@
+id: "ny-opendata-cso-outfalls-ephi-ffu6"
+name: "Open Data NY 'Combined Sewer Overflows (CSOs): Beginning 2013' (ephi-ffu6) and map view i8hd-rmbi"
+url: "https://data.ny.gov/d/ephi-ffu6"
+homepage: "https://data.ny.gov/d/ephi-ffu6"
+kind: "api"
+level: "state"
+# Notes (research/ny, status used, verified fetched, checked 2026-11-01): Only machine-readable
+#   statewide CSO outfall table with coordinates and outfall ids; stale (2015) so outfall counts
+#   differ from DEC's 2025 report (911 rows vs ~784 outfalls). Use for geometry and join keys, flag
+#   stale.
+# Access detail (research, quoted): SODA: https://data.ny.gov/resource/ephi-ffu6.json?$limit=2000
+#   (911 rows fetched, saved raw/ephi-ffu6-all.json). Metadata:
+#   https://data.ny.gov/api/views/ephi-ffu6.json. Map view: https://data.ny.gov/d/i8hd-rmbi.
+# Can fill: coordinates (outfall point), geometry (outfall point), waterbody, authority
+# Cannot fill: any event field
+# Waters: statewide CSO outfalls (openboatlaunch slugs: lake-champlain-vt, long-island-sound-ct)
+# History: snapshot
+# Research notes: 46 owners / 61 permits in the table; includes closed systems (Lewiston, Tupper
+#   Lake, Clayton, Potsdam, Rockaway, Oakwood Beach). Typos in receiving water names ('Hudson
+#   Ruver', 'Genesse River'). Only NYC rows carry link_to_real_time_information (old nyc.gov
+#   waterbody advisory URL).
+cadence: "Posting Frequency 'As needed'; rowsUpdatedAt 2020-11-11; every row data_as_of 2015"
+license: "No licence field (license: None). Disclaimer quoted: 'The accuracy of the CSO outfall locations and data is based on the information provided by the permitted facilities... The user must be aware of data conditions and bear responsibility for the appropriate use of the information...' Open Data NY terms of use apply (https://data.ny.gov/download/77gx-ii52/application/pdf, not fetched)."
+attribution: "NYS DEC Division of Water, Bureau of Water Compliance"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["NY"]
+access: ["api", "csv"]
+access_detail: "SODA: https://data.ny.gov/resource/ephi-ffu6.json?$limit=2000 (911 rows fetched, saved raw/ephi-ffu6-all.json). Metadata: https://data.ny.gov/api/views/ephi-ffu6.json. Map view: https://data.ny.gov/d/i8hd-rmbi."
+machine_readable: true
+legal_basis: "SPDES permits; CSO BMP 13"
+checked: "2026-11-01"

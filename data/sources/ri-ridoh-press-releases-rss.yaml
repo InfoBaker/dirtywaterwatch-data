@@ -1,0 +1,23 @@
+id: "ri-ridoh-press-releases-rss"
+name: "RIDOH press releases RSS"
+url: "https://health.ri.gov/press-releases.xml"
+homepage: "https://health.ri.gov/press-releases.xml"
+kind: "rss"
+level: "state"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Joint RIDOH/DEM cyano
+#   and some beach releases; Cloudflare.
+# Access detail (research, quoted): RSS 2.0, 10 items; also https://health.ri.gov/rss.xml.
+#   Cloudflare-protected. Old https://www.ri.gov/rss/8/pressrelease.rss is a stub pointing to
+#   health.ri.gov.
+cadence: null
+license: "RI.gov policies"
+attribution: "RIDOH"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["RI"]
+access: ["rss"]
+access_detail: "RSS 2.0, 10 items; also https://health.ri.gov/rss.xml. Cloudflare-protected. Old https://www.ri.gov/rss/8/pressrelease.rss is a stub pointing to health.ri.gov."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

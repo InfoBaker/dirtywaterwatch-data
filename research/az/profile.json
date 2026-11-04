@@ -1,0 +1,176 @@
+{
+ "state": "AZ",
+ "name": "Arizona",
+ "region": "southwest",
+ "epa_region": 9,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "partial",
+  "summary": "Collection-system permittees must report a release that is an 'imminent and substantial threat' (over 2,000 gallons, or over 50 gallons reaching a stream, public area or street) to ADEQ within 24 hours and in writing within five business days. The only public duty is a warning sign at a location with more than three reportable releases in 12 months.",
+  "citations": [
+   {
+    "cite": "A.A.C. R18-9-C305(F)(1)(a)",
+    "title": "2.05 General Permit: CMOM of a sewage collection system, reporting",
+    "url": "https://www.law.cornell.edu/regulations/arizona/Ariz-Admin-Code-SS-R18-9-C305",
+    "quote": "A permittee shall report to the Department, by telephone, facsimile, or on the applicable notification form on the Department's Internet web site, any release that is an imminent and substantial threat to public health or the environment as soon as practical, but no later than 24 hours of becoming aware of the release.",
+    "who": "collection-system permittee",
+    "channel": "ADEQ (phone, fax, web form)",
+    "deadline": "24 hours; written report within five business days",
+    "threshold": "'imminent and substantial threat': over 2,000 gallons, or 50 to 2,000 gallons reaching a public area, street, perennial stream, intermittent stream in flow, waterbody, building, or within 100 feet of a school or well",
+    "verified": "fetched"
+   },
+   {
+    "cite": "A.A.C. R18-9-C305(G)",
+    "title": "Public notice (signs)",
+    "url": "https://www.law.cornell.edu/regulations/arizona/Ariz-Admin-Code-SS-R18-9-C305",
+    "quote": "Post a notice, in a format approved by the Department, at any location where there were more than three reportable releases under subsection (F)(2)(a) from the sewage collection system during any 12-month period ... Post the notice at a place where the public is likely to come in contact with the release",
+    "who": "collection-system permittee",
+    "channel": "posted sign",
+    "deadline": "none stated; kept up until 12 months without a release",
+    "threshold": "more than three reportable releases at one location in 12 months",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours (phone to Spill Line 602-771-2330 or web form); five business days written (myDEQ)",
+   "cite": "A.A.C. R18-9-C305(F); AZPDES permit standard conditions (40 CFR 122.41(l)(6) incorporated)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "Phoenix 91st Ave permit: EPA response to comments (archive) said ADEQ's CMOM program is 'not a substitute for the direct and specific reporting requirements' in the permit (search only).",
+   "No 2025-2026 Arizona bill on public sewage-spill notice found (search only)."
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 288,
+  "public_output_url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "notes": "Permittees file five-day reports in ADEQ myDEQ; the reports reach EPA ICIS and appear in ECHO SOBE (288 events, 42 permits, 2019-09 to 2026-10-28). 83 Arizona collection systems registered in collection_system_permits.csv."
+ },
+ "statewide_feed": {
+  "exists": true,
+  "source_ids": [
+   "az-epa-sobe"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "median 3 days from start to receipt (90th percentile 10 days), then next daily ECHO file",
+  "history": "2019-09 to date",
+  "coordinates": "285 of 288 rows",
+  "receiving_water": "rarely (mostly blank; some ADEQ assessment-unit codes)",
+  "start_end": "start and end datetime, duration",
+  "volume": true,
+  "stable_id": true,
+  "license": "EPA public data, no restriction stated",
+  "notes": "Volume on 44 of 288 rows. Timestamps carry no zone. Tucson (Pima County) absent."
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 1,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No CSOs. SSOs reach the public only through EPA SOBE; Pima County has only a service-request portal."
+ },
+ "sso": {
+  "location_source": "EPA SOBE lat/lon per event",
+  "feeds": [
+   "az-epa-sobe"
+  ],
+  "notes": "Descriptions give a street address or an internal asset id (Manhole ID, Pipe ID)."
+ },
+ "beaches": {
+  "program": "No state beach monitoring program found; lake managers test voluntarily",
+  "source_ids": [
+   "az-tempe-town-lake"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": "Tempe Town Lake and Lake Pleasant E. coli not reached."
+ },
+ "habs": {
+  "program": "ADEQ AZHABs reporting and 'Currently Reported' list; NPS and county advisories on the Colorado River lakes",
+  "source_ids": [
+   "az-adeq-reported-habs",
+   "az-nps-lake-mead-habs",
+   "az-mohave-county-health-habs"
+  ],
+  "machine_readable": false,
+  "notes": "azdeq.gov is bot-walled to scripts."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "https://www.mohave.gov/news-notices/"
+  ],
+  "watershed_groups": [],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "eRule"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Colorado River (NV, CA, UT, Mexico)",
+   "Lake Mead and Lake Mohave (NV)",
+   "Lake Powell (UT)",
+   "Lake Havasu (CA)",
+   "Gila River (NM)",
+   "San Juan River (NM, UT, Navajo Nation)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "bot_wall",
+   "what": "azdeq.gov and static.azdeq.gov return HTTP 403 to scripted fetches",
+   "fix_level": "engineering",
+   "note": "Browser fetch or ask ADEQ for an allowlist."
+  },
+  {
+   "kind": "sign_only",
+   "what": "The only public duty is a sign after more than three releases at one location in a year",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "no_web",
+   "what": "APP-only collection systems (no AZPDES permit) report to ADEQ under R18-9-C305 but nothing is published",
+   "fix_level": "agency",
+   "note": ""
+  },
+  {
+   "kind": "login",
+   "what": "myDEQ (the reporting portal) is account-only",
+   "fix_level": "agency",
+   "note": "Public output exists only via EPA SOBE."
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "A",
+  "expected_grade": "Dated reports, delayed",
+  "first_feed": "az-epa-sobe",
+  "effort": "small",
+  "rationale": "EPA SOBE carries every AZPDES SSO and bypass report with start, end and coordinates, a few days late; the national SOBE ingester covers it. Tucson missing and receiving water rarely named (trace from the point).",
+  "order_hint": 1
+ },
+ "owner_questions": [
+  "SOBE timestamps carry no zone: confirm with EPA whether they are local or Eastern before showing times.",
+  "Most AZ SSOs land on streets and dry washes: show them at the point only, or colour the downstream reach of an ephemeral wash?",
+  "Ask ADEQ for the APP-only (non-AZPDES) collection-system release reports, which are not public?",
+  "Pima County (Tucson) has no SOBE rows: records request?"
+ ],
+ "surprise": "Arizona's overflow reports are already public, point by point with start and end times, but only through EPA's national file; the state's own site blocks scripts, and Tucson, the second-largest system, has no rows at all."
+}

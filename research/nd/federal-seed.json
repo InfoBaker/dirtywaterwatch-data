@@ -1,0 +1,158 @@
+{
+ "state": "ND",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 399,
+ "plant_permits_major": 21,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "ND0000094",
+   "permittee": "American Crystal Sugar Company",
+   "city": "DRAYTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0000299",
+   "permittee": "Great River Energy",
+   "city": "STANTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ND0000370",
+   "permittee": "Minnkota Power Cooperative Inc",
+   "city": "CENTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0020320",
+   "permittee": "Wahpeton City Of",
+   "city": "WAHPETON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0020486",
+   "permittee": "Minot Air Force Base",
+   "city": "MINOT AFB",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0020559",
+   "permittee": "Valley City City Of",
+   "city": "VALLEY CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0020621",
+   "permittee": "United States Air Force GF",
+   "city": "GRAND FORKS AFB",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0020681",
+   "permittee": "Devils Lake City Of",
+   "city": "DEVILS LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0021202",
+   "permittee": "Grafton City Of",
+   "city": "GRAFTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0021211",
+   "permittee": "Beulah City Of",
+   "city": "BEULAH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0022349",
+   "permittee": "Williston City Of",
+   "city": "WILLISTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0022616",
+   "permittee": "West Fargo City Of",
+   "city": "WEST FARGO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0022861",
+   "permittee": "permit holder in MANDAN (EPA permit name is a person; name withheld)",
+   "city": "MANDAN",
+   "major": "Major",
+   "status": "EFF",
+   "permittee_note": "contact name removed from EPA permit name"
+  },
+  {
+   "npdes_permit": "ND0022870",
+   "permittee": "City of Fargo",
+   "city": "FARGO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0022888",
+   "permittee": "Grand Forks City Of",
+   "city": "GRAND FORKS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0022896",
+   "permittee": "Minot City Of",
+   "city": "MINOT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0023175",
+   "permittee": "City of Dickinson",
+   "city": "DICKINSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0023370",
+   "permittee": "Jamestown City Of",
+   "city": "JAMESTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0023434",
+   "permittee": "Bismarck City Public Works",
+   "city": "BISMARCK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0024279",
+   "permittee": "American Crystal Sugar Company",
+   "city": "HILLSBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ND0024368",
+   "permittee": "Minn Dak Farmers Cooperative",
+   "city": "WAHPETON",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

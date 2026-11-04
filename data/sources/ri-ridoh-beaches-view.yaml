@@ -1,0 +1,28 @@
+id: "ri-ridoh-beaches-view"
+name: "RIDOHGIS_Beaches_View feature service (Beach Viewer 2026)"
+url: "https://services1.arcgis.com/dkWT1XL4nglP5MLP/arcgis/rest/services/RIDOHGIS_Beaches_View/FeatureServer"
+homepage: "https://experience.arcgis.com/experience/aafbf78f6991453e9b22c60395aa3f55"
+kind: "arcgis"
+level: "state"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Use for beach
+#   locations and IDs; Status semantics conflict (renderer: 3 = 'Closed for Swimming'; Beach Viewer
+#   filter: 3 = 'Not Monitored') and DateMod stops in 2017.
+# Access detail (research, quoted): Layers 0 RIDOH_Beaches (306 points, Status 1/3/4), 1
+#   BeachExtents (307 polygons); tables 2 LabDataEntry (40,896 results 2001-08-08 to 2018-08-30), 3
+#   BEACH_LINKS, 4 Conditions (5,584), 5 MasterList (293). Viewer:
+#   https://experience.arcgis.com/experience/aafbf78f6991453e9b22c60395aa3f55
+# Can fill: coordinates (beach point/extent), waterbody (beach name)
+# Cannot fill: current closures reliably; recent bacteria results
+# History: lab results 2001-2018
+cadence: "Point layer data edited 2026-09-10; tables last edited 2026-05-05; lab data stop in 2018."
+license: "none stated on items ('OPEN' on the 2017 web map)"
+attribution: "RIDOH"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["RI"]
+access: ["arcgis"]
+access_detail: "Layers 0 RIDOH_Beaches (306 points, Status 1/3/4), 1 BeachExtents (307 polygons); tables 2 LabDataEntry (40,896 results 2001-08-08 to 2018-08-30), 3 BEACH_LINKS, 4 Conditions (5,584), 5 MasterList (293). Viewer: https://experience.arcgis.com/experience/aafbf78f6991453e9b22c60395aa3f55"
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

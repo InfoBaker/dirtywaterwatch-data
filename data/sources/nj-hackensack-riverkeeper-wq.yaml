@@ -1,0 +1,24 @@
+id: "nj-hackensack-riverkeeper-wq"
+name: "Hackensack Riverkeeper water quality monitoring with the Interstate Environmental Commission (weekly, 6 public access sites)"
+url: "https://www.hackensackriverkeeper.org/water-quality-blog"
+homepage: "https://www.hackensackriverkeeper.org/water-quality-blog"
+kind: "html"
+level: "nonprofit"
+# Notes (research/nj, status candidate, verified fetched, checked 2026-11-02): Real bacteria data
+#   near Hackensack and Ridgefield Park CSOs; HTML only; ask for a data feed or Swim Guide listing.
+# Access detail (research, quoted): Blog page fetched; links to yearly result pages
+#   /2026-wqt-results, /2025-wqt-results ... /2020-water-quality (Squarespace HTML; not parsed).
+# Waters: Hackensack River and Overpeck Creek, Ridgefield Park southward (six non-swimming public
+#   access sites) (openboatlaunch slugs: hackensack-river-nj, overpeck-creek-nj)
+cadence: "Weekly on Thursdays, May-September, since 2020; lab analysis by IEC."
+license: "none stated"
+attribution: "Hackensack Riverkeeper"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["NJ"]
+access: ["html"]
+access_detail: "Blog page fetched; links to yearly result pages /2026-wqt-results, /2025-wqt-results ... /2020-water-quality (Squarespace HTML; not parsed)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

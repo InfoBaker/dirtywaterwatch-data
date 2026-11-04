@@ -1,0 +1,890 @@
+{
+ "state": "TN",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "TN0020575",
+   "permittee": "NASHVILLE CENTRAL STP",
+   "city": "NASHVILLE",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Cumberland River",
+    "Cumberland River-Browns Creek"
+   ]
+  },
+  {
+   "npdes_permit": "TN0020656",
+   "permittee": "CLARKSVILLE GAS AND WATER DBA CLARKSVILLE WASTEWATER TREATMENT PLANT",
+   "city": "CLARKSVILLE",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Cumberland River"
+   ]
+  },
+  {
+   "npdes_permit": "TN0024210",
+   "permittee": "CHATTANOOGA - MOCCASIN BEND WWTP & COMBINED SEWER SYSTEM",
+   "city": "CHATTANOOGA",
+   "open_outfalls": 8,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Chattanooga Creek",
+    "Tennessee River"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 17,
+ "plant_permits": 399,
+ "plant_permits_major": 121,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "TN0020052",
+   "permittee": "City of Sweetwater",
+   "city": "SWEETWATER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020079",
+   "permittee": "City of Maryville",
+   "city": "MARYVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020095",
+   "permittee": "City of Kingsport",
+   "city": "KINGSPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020117",
+   "permittee": "City of Gatlinburg",
+   "city": "GATLINBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020141",
+   "permittee": "Gallatin Public Utilities",
+   "city": "GALLATIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020478",
+   "permittee": "City of Dayton",
+   "city": "DAYTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020494",
+   "permittee": "Lenoir City Utilities Board",
+   "city": "LENOIR CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020508",
+   "permittee": "City of Decherd",
+   "city": "DECHERD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020541",
+   "permittee": "Town of Smyrna",
+   "city": "SMYRNA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020575",
+   "permittee": "Metro Water Services - Nashville Central STP",
+   "city": "NASHVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TN0020613",
+   "permittee": "City of McKenzie",
+   "city": "MC KENZIE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020648",
+   "permittee": "Metro Water Services (DRY CREEK STP)",
+   "city": "NASHVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TN0020656",
+   "permittee": "City of Clarksville",
+   "city": "CLARKSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020672",
+   "permittee": "Town of Rogersville",
+   "city": "ROGERSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020702",
+   "permittee": "City of Newport",
+   "city": "NEWPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020711",
+   "permittee": "City of Memphis",
+   "city": "MEMPHIS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TN0020729",
+   "permittee": "City of Memphis",
+   "city": "MEMPHIS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TN0020877",
+   "permittee": "City of Lafayette",
+   "city": "LAFAYETTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0020982",
+   "permittee": "City of Covington",
+   "city": "COVINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021067",
+   "permittee": "City of Millington",
+   "city": "MILLINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021199",
+   "permittee": "Jefferson City",
+   "city": "JEFFERSON CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021229",
+   "permittee": "Town of Greeneville",
+   "city": "GREENEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021237",
+   "permittee": "City of Pigeon Forge",
+   "city": "PIGEON FORGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021253",
+   "permittee": "City of Church Hill",
+   "city": "CHURCH HILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021261",
+   "permittee": "Town of Spring City",
+   "city": "SPRING CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021296",
+   "permittee": "CH2M HILL Constructors, Inc.",
+   "city": "FORT CAMPBELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021580",
+   "permittee": "City of Union City",
+   "city": "UNION CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021687",
+   "permittee": "City of Pulaski",
+   "city": "PULASKI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021814",
+   "permittee": "Fayetteville Public Utilities (FPU)",
+   "city": "FAYETTEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021822",
+   "permittee": "Knoxville Utilities Board (KUB)",
+   "city": "KNOXVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021857",
+   "permittee": "Winchester Utility System",
+   "city": "WINCHESTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021865",
+   "permittee": "City of Portland",
+   "city": "PORTLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0021873",
+   "permittee": "Town of Livingston",
+   "city": "LIVINGSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0022551",
+   "permittee": "Lawrenceburg Utility Systems",
+   "city": "LAWRENCEBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0022586",
+   "permittee": "City of Murfreesboro",
+   "city": "MURFREESBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0022888",
+   "permittee": "City of Lewisburg",
+   "city": "LEWISBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0023001",
+   "permittee": "Erwin Utilities Authority",
+   "city": "ERWIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TN0023353",
+   "permittee": "First Utility District of Knox County",
+   "city": "FARRAGUT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0023469",
+   "permittee": "Tullahoma Utilities Authority",
+   "city": "TULLAHOMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0023477",
+   "permittee": "City of Dyersburg",
+   "city": "DYERSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0023507",
+   "permittee": "Morristown Utilities Commission",
+   "city": "MORRISTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0023515",
+   "permittee": "City of Elizabethton",
+   "city": "ELIZABETHTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0023531",
+   "permittee": "Joint Sewerage System",
+   "city": "BLUFF CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0023574",
+   "permittee": "Knoxville Utilities Board (KUB)",
+   "city": "KNOXVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0023582",
+   "permittee": "Knoxville Utilities Board (KUB)",
+   "city": "KNOXVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0023591",
+   "permittee": "City of McMinnville",
+   "city": "MCMINNVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024121",
+   "permittee": "Cleveland Utilities Authority (CUA)",
+   "city": "CLEVELAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024155",
+   "permittee": "City of Oak Ridge",
+   "city": "OAK RIDGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024180",
+   "permittee": "Shelbyville Power, Water & Sewerage System",
+   "city": "SHELBYVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024198",
+   "permittee": "City of Cookeville",
+   "city": "COOKEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024201",
+   "permittee": "Athens Utilities Board (AUB)",
+   "city": "ATHENS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024210",
+   "permittee": "City of Chattanooga",
+   "city": "CHATTANOOGA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TN0024236",
+   "permittee": "Johnson City",
+   "city": "JOHNSON CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TN0024244",
+   "permittee": "Johnson City",
+   "city": "JOHNSON CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TN0024295",
+   "permittee": "City of South Pittsburg",
+   "city": "SOUTH PITTSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024341",
+   "permittee": "City of Lexington, Utilities Division",
+   "city": "LEXINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024473",
+   "permittee": "Roane County",
+   "city": "ROCKWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024813",
+   "permittee": "Jackson Energy Authority (JEA)",
+   "city": "JACKSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024945",
+   "permittee": "Town of Mountain City",
+   "city": "MOUNTAIN CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024961",
+   "permittee": "City of Springfield",
+   "city": "SPRINGFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0024970",
+   "permittee": "Metro Water Services",
+   "city": "NASHVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TN0024996",
+   "permittee": "City of Crossville",
+   "city": "CROSSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0025038",
+   "permittee": "City of Manchester",
+   "city": "MANCHESTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0025437",
+   "permittee": "City of Harriman",
+   "city": "HARRIMAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0026158",
+   "permittee": "Rockwood Water Sewer and Gas (RWSG)",
+   "city": "ROCKWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0026247",
+   "permittee": "City of Bells",
+   "city": "BELLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0026506",
+   "permittee": "Clinton Utilities Board",
+   "city": "CLINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0026590",
+   "permittee": "Town of Whiteville",
+   "city": "WHITEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0028754",
+   "permittee": "City of Lebanon",
+   "city": "LEBANON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0028789",
+   "permittee": "City of Johnson City",
+   "city": "GRAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0028827",
+   "permittee": "City of Franklin",
+   "city": "FRANKLIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0056103",
+   "permittee": "City of Columbia",
+   "city": "COLUMBIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0057291",
+   "permittee": "Town of Halls",
+   "city": "HALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0057461",
+   "permittee": "Town of Collierville",
+   "city": "COLLIERVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0058181",
+   "permittee": "Loudon Utilities Board",
+   "city": "LOUDON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0058238",
+   "permittee": "Tellico Area Services System",
+   "city": "VONORE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0059404",
+   "permittee": "City of White House",
+   "city": "WHITE HOUSE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0060020",
+   "permittee": "WEST KNOX UD-KARNS BEAV CR STP",
+   "city": "KNOXVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "TN0061166",
+   "permittee": "City of Sparta",
+   "city": "SPARTA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0061271",
+   "permittee": "Paris Board of Public Utilities",
+   "city": "PARIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0061565",
+   "permittee": "City of Savannah",
+   "city": "SAVANNAH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0061701",
+   "permittee": "City of Kingston",
+   "city": "KINGSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0061743",
+   "permittee": "Knoxville Utilities Board (KUB)",
+   "city": "KNOXVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0062111",
+   "permittee": "Town of Newbern",
+   "city": "NEWBERN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0062308",
+   "permittee": "Town of Selmer",
+   "city": "SELMER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0062367",
+   "permittee": "Brownsville Energy Authority",
+   "city": "BROWNSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0062375",
+   "permittee": "Milan Public Utilities Authority",
+   "city": "MILAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0062499",
+   "permittee": "City of Munford",
+   "city": "MUNFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0062545",
+   "permittee": "City of Martin",
+   "city": "MARTIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0062588",
+   "permittee": "Humboldt Utilities Authority",
+   "city": "HUMBOLDT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0062634",
+   "permittee": "City of Jamestown",
+   "city": "JAMESTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0063771",
+   "permittee": "City of Etowah",
+   "city": "ETOWAH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0063959",
+   "permittee": "City of Sevierville",
+   "city": "SEVIERVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0064092",
+   "permittee": "Town of Rossville",
+   "city": "ROSSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0064688",
+   "permittee": "Town of Monterey",
+   "city": "MONTEREY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0065358",
+   "permittee": "City of Smithville",
+   "city": "SMITHVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0066800",
+   "permittee": "City of Bartlett",
+   "city": "BARTLETT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0066958",
+   "permittee": "Water Authority of Dickson County",
+   "city": "DICKSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0067539",
+   "permittee": "Athens Utilities Board (AUB)",
+   "city": "ATHENS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0068187",
+   "permittee": "Morristown Utilities Commission",
+   "city": "MORRISTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0074543",
+   "permittee": "COLLIERVILLE NORTHWEST STP",
+   "city": "COLLIERVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "TN0074748",
+   "permittee": "Harpeth Valley Utility District",
+   "city": "NASHVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0075078",
+   "permittee": "Brownsville Energy Authority",
+   "city": "BROWNSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0075868",
+   "permittee": "City of Spring Hill",
+   "city": "SPRING HILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0075876",
+   "permittee": "Jackson Energy Authority (JEA)",
+   "city": "JACKSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0077836",
+   "permittee": "Town of Oakland",
+   "city": "OAKLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0077917",
+   "permittee": "City of Bolivar",
+   "city": "BOLIVAR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0078191",
+   "permittee": "City of Ripley",
+   "city": "RIPLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0078255",
+   "permittee": "City of Lakeland",
+   "city": "LAKELAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0078271",
+   "permittee": "Trenton Light and Water",
+   "city": "TRENTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0078603",
+   "permittee": "Town of Arlington",
+   "city": "ARLINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0078808",
+   "permittee": "City of Waverly",
+   "city": "WAVERLY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0078841",
+   "permittee": "Town of Collierville",
+   "city": "COLLIERVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0078905",
+   "permittee": "Hallsdale Powell Utility District",
+   "city": "POWELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0080021",
+   "permittee": "Lafollette Utilities Board",
+   "city": "LAFOLLETTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0080721",
+   "permittee": "West Knox Utility District (WKUD)",
+   "city": "KNOXVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0080764",
+   "permittee": "City of Piperton",
+   "city": "PIPERTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0081132",
+   "permittee": "City of Pigeon Forge",
+   "city": "PIGEON FORGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0081175",
+   "permittee": "Town of Jonesborough",
+   "city": "JONESBOROUGH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0081906",
+   "permittee": "Megasite Authority of West Tennessee",
+   "city": "STANTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "TN0082252",
+   "permittee": "Town of Ashland City",
+   "city": "ASHLAND CITY",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

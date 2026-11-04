@@ -1,0 +1,44 @@
+id: "nj-njcso-group-interim-outlook"
+name: "NJ CSO Group 'Combined Sewer Overflow Notification System (interim)' (njcsonotifications.com)"
+url: "https://njcsonotifications.com/"
+homepage: "https://njcsonotifications.com/"
+kind: "api"
+level: "utility"
+# Notes (research/nj, status candidate, verified fetched, checked 2026-11-02): The only shared,
+#   machine-readable NJ CSO status feed. But it is a rainfall model per municipality, labelled
+#   interim, and its predecessor was down for part of 2026 (Elizabeth's Aug 1 2026 progress report:
+#   'The website is currently down.'). Usable as a 'CSO likely' advisory layer, never as a confirmed
+#   discharge.
+# Access detail (research, quoted): Server-rendered page plus undocumented JSON: GET
+#   https://njcsonotifications.com/?handler=Status (no auth; JSON; page polls it every 300 s per its
+#   live-status-settings). Same JSON is embedded in the page as <script id='permittee-status-data'>.
+#   Old URL https://njcso.hdrgateway.com/ now shows 'This site has moved' and redirects after 15 s.
+#   A 'past conditions' view is mentioned on /About but no query parameter was found (asOf=, at=,
+#   date= ignored). Fetched 2026-11-02 17:53 UTC: 0 of 15 'likely'.
+# Can fill: source_status (alertLevelLabel), source_updated_at (lastUpdatedLabel, local time label
+#   without year), authority (permittee name + permit), source_health (isStale), jurisdiction
+# Cannot fill: started_at/ended_at of an actual discharge; waterbody; coordinates; volume; outfall
+#   id; material; advice_text
+# Waters: 15 CSO permits: East Newark, Fort Lee, Bayonne, Elizabeth, Hackensack, Newark, Paterson,
+#   Perth Amboy, Jersey City MUA, North Bergen MUA Central and Woodcliff, Guttenberg, Harrison,
+#   Kearny, Ridgefield Park. Status is per permittee (whole municipality), not per outfall or water.
+#   (openboatlaunch slugs: passaic-river-nj, hackensack-river-nj, newark-bay-nj, hudson-river-nj,
+#   overpeck-creek-nj, raritan-river-nj)
+# History: No archive found. Must be polled and stored by us.
+# Research notes: Labels: 'CSO event unlikely' (alertLevel 1); other levels not observed on a dry
+#   day. About page: 'a CSO event is reported as becoming more likely, and then as likely to be
+#   occurring.' Times are Eastern. Not covered: NHSA (Hoboken etc.), Camden City, Gloucester City,
+#   CCMUA, Trenton. Raw: raw/njcsonotif-home.html, raw/njcsonotif-about.html,
+#   raw/njcso-status-20261102.json.
+cadence: "Hourly precipitation (Iowa Environmental Mesonet gridded estimates for a representative point per permittee); page re-polls every 5 min. The site says permittees are marked as having no current data if the update is more than a couple of hours old."
+license: "No terms found on the site. Footer: '© 2026 NJ Combined Sewer Overflow Notification System'. Site says: 'This site indicates when an overflow is likely, not that one has occurred.' and 'is not a substitute for official notifications from a permit holder or from the New Jersey Department of Environmental Protection.'"
+attribution: "NJ CSO Group (permittees coordinated by Passaic Valley Sewerage Commission; site does not name its operator or developer)"
+enabled: true
+role: "advisories"
+event_types: ["cso_likely"]
+states: ["NJ"]
+access: ["html", "api"]
+access_detail: "Server-rendered page plus undocumented JSON: GET https://njcsonotifications.com/?handler=Status (no auth; JSON; page polls it every 300 s per its live-status-settings). Same JSON is embedded in the page as <script id='permittee-status-data'>. Old URL https://njcso.hdrgateway.com/ now shows 'This site has moved' and redirects after 15 s. A 'past conditions' view is mentioned on /About but no query parameter was found (asOf=, at=, date= ignored). Fetched 2026-11-02 17:53 UTC: 0 of 15 'likely'."
+machine_readable: true
+legal_basis: "NJPDES CSO permits Part IV.F.8.b.iii: 'The permittee shall maintain on a daily basis a CSO Notification System website to inform interested citizens of CSO discharges that are occurring or have occurred.'"
+checked: "2026-11-02"

@@ -1,0 +1,174 @@
+{
+ "state": "MO",
+ "name": "Missouri",
+ "region": "plains",
+ "epa_region": 7,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "none",
+  "summary": "Every permitted wastewater facility must report SSOs and bypasses to DNR within 24 hours through MoGEM; no duty to tell the public was found and DNR publishes nothing. Public notice is consent-decree or utility practice (signs).",
+  "citations": [
+   {
+    "cite": "Missouri DNR sewer overflow guidance (permit standard conditions)",
+    "title": "Sanitary Sewer Overflows",
+    "url": "https://dnr.mo.gov/water/business-industry-other-entities/permits-certification-engineering-fees/wastewater/sewer-overflows",
+    "quote": "All permitted wastewater treatment facilities must report SSOs or bypasses from their treatment works or collection system to the department within 24 hours of discovering the event.",
+    "who": "permittee",
+    "channel": "MoGEM online portal",
+    "deadline": "24 hours",
+    "threshold": "any SSO or bypass",
+    "verified": "fetched"
+   },
+   {
+    "cite": "RSMo 640.080 (search only)",
+    "title": "State park beach bacteria standard",
+    "url": "https://law.counselstack.com/statute/mo/640/640.080",
+    "quote": "If beaches exceed the GM standard established in subsection 1 of this section, the department of natural resources shall post the beach with signs that state \"Swimming is Not Recommended\".",
+    "who": "DNR",
+    "channel": "signs at state park beaches",
+    "deadline": null,
+    "threshold": "geometric mean 190 E. coli/100 mL (per search)",
+    "verified": "search_only"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours",
+   "cite": "DNR guidance; permit standard conditions (10 CSR 20 not fetched)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "MO0025151",
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "MSD St. Louis consent decree (2011, Project Clear).",
+   "Kansas City consent decree (2010, Smart Sewer).",
+   "No 2025-2026 bill on sewage public notice found (search only)."
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "MoGEM; no public output; no MO rows in SOBE."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": null,
+  "receiving_water": null,
+  "start_end": null,
+  "volume": null,
+  "stable_id": null,
+  "license": null,
+  "notes": "MoGEM reports are not published; records by Sunshine Law request."
+ },
+ "cso": {
+  "permits": 8,
+  "open_outfalls": 108,
+  "operators_with_web_channel": 0,
+  "operators_checked": 2,
+  "state_outfall_layer": "https://gis.dnr.mo.gov/host/rest/services/waste/NPDES_WasteWaterOutfalls/MapServer/1",
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "Signs at outfalls (MSD, KC Water); press releases for some large SSOs (KC Water); MSD site behind a bot wall."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [],
+  "notes": "KC Water press releases name street addresses."
+ },
+ "beaches": {
+  "program": "Missouri DNR weekly E. coli sampling at state park beaches (Memorial Day to Labor Day), signs and online status, email sign-up",
+  "source_ids": [
+   "mo-dnr-beach-status"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": "HAB closures handled separately (Pomme de Terre)."
+ },
+ "habs": {
+  "program": "Missouri DNR HAB reports map",
+  "source_ids": [
+   "mo-dnr-hab-map"
+  ],
+  "machine_readable": false,
+  "notes": "Map service not resolved."
+ },
+ "advisories": {
+  "health_department_pages": [],
+  "watershed_groups": [
+   "Missouri Coalition for the Environment (not checked)",
+   "Missouri Stream Team (not checked)"
+  ],
+  "swim_guide": true
+ },
+ "outfalls": {
+  "state_layer": "https://gis.dnr.mo.gov/host/rest/services/waste/NPDES_WasteWaterOutfalls/MapServer/1",
+  "cso_inventory_gap": "large: MSD Lemay 120 CSO outfalls in the state layer vs 0 open in EPA; MSD Bissell Point CSOs in neither; KC Blue River 80 in EPA but not flagged in the state layer",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Mississippi River (IL, KY, TN, AR)",
+   "Missouri River (KS, NE, IA)",
+   "Des Moines River (IA)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "MoGEM overflow reports not published",
+   "fix_level": "agency",
+   "note": "DNR could publish its MoGEM table as Tennessee does."
+  },
+  {
+   "kind": "bot_wall",
+   "what": "msdprojectclear.org (MSD St. Louis) and kcsmartsewer.us block automated access",
+   "fix_level": "engineering",
+   "note": ""
+  },
+  {
+   "kind": "sign_only",
+   "what": "CSO notice is by outfall signs",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "records_request",
+   "what": "Overflow reports via Sunshine Law request",
+   "fix_level": "agency",
+   "note": ""
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "Missouri DNR GovDelivery",
+   "url": "https://public.govdelivery.com/accounts/MODNR/subscriber/new",
+   "what": "beach status and other DNR topics"
+  }
+ ],
+ "readiness": {
+  "tier": "C",
+  "expected_grade": "Monthly totals only",
+  "first_feed": "mo-dnr-npdes-outfalls",
+  "effort": "medium",
+  "rationale": "No public event data: MoGEM is closed, MSD's site is bot-walled and KC Water only posts occasional press releases. The state outfall layer is valuable because it puts MSD's 120 Lemay CSOs on the map; Bissell Point still needs locating. Beaches (state parks) are the only dated advisories.",
+  "order_hint": 5
+ },
+ "owner_questions": [
+  "Request MSD St. Louis's CSO outfall list (Bissell Point) and ask whether it has a notification page behind the bot wall?",
+  "Ask Missouri DNR whether MoGEM SSO data can be published (Tennessee is the model)?",
+  "Subscribe to Missouri DNR beach status email?"
+ ],
+ "surprise": "The EPA national CSO inventory shows St. Louis MSD, one of the largest combined systems in the country, with zero open CSO outfalls; Missouri's own layer has 120 for Lemay alone, and Bissell Point's are in neither."
+}

@@ -1,0 +1,1752 @@
+[
+ {
+  "id": "co-co0000005",
+  "name": "Lower Fountain Metro Sewage Disposal Dist",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0000005",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fountain"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0020290",
+  "name": "Estes Park Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0020290",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Estes Park"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0020320",
+  "name": "Windsor Town of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0020320",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Windsor"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0020451",
+  "name": "Frisco Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0020451",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Frisco"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0020478",
+  "name": "Boxelder Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0020478",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fort Collins"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0020508",
+  "name": "EVANS, CITY OF",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0020508",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Weld County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0020532",
+  "name": "Fountain Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0020532",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fountain"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0020699",
+  "name": "Granby Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0020699",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Grand County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0020737",
+  "name": "South Fort Collins Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0020737",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fort Collins"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0020826",
+  "name": "Silverthorne Dillon Joint Sewer Authority",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0020826",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Silverthorne"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0020834",
+  "name": "Steamboat Springs City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0020834",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Steamboat Springs"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0021067",
+  "name": "Widefield Water and Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0021067",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Widefield"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0021164",
+  "name": "Leadville Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0021164",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Leadville"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0021245",
+  "name": "Brush City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0021245",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Brush"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0021261",
+  "name": "La Junta City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0021261",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "La Junta"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0021440",
+  "name": "Fort Lupton City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0021440",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fort Lupton"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0021539",
+  "name": "Upper Blue Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0021539",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Summit County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0021547",
+  "name": "Brighton City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0021547",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Brighton"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0021580",
+  "name": "ST. VRAIN SANITATION DISTRICT",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0021580",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Frederick"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0021598",
+  "name": "Copper Mountain Consolidated Metropolitan District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0021598",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Copper Mountain"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0023078",
+  "name": "Louisville City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0023078",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Louisville"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0023086",
+  "name": "Snowmass Water and Saniation Dist",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0023086",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Snowmass Village"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0023124",
+  "name": "Lafayette City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0023124",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Boulder County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0023132",
+  "name": "Monte Vista  City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0023132",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rio Grande County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0023671",
+  "name": "Lamar City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0023671",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lamar"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0023850",
+  "name": "Rocky Ford City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0023850",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rocky Ford"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0024082",
+  "name": "Durango City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0024082",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Durango"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0024147",
+  "name": "Boulder City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0024147",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Boulder"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0024171",
+  "name": "Westminster City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0024171",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westminster"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0024392",
+  "name": "Security Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0024392",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fountain"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0024431",
+  "name": "Eagle River Water & Sanitation Dist",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0024431",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Eagle County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0026247",
+  "name": "Sterling City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0026247",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sterling"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0026387",
+  "name": "Aspen Consolidated Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0026387",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Aspen"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0026409",
+  "name": "Broomfield City and County",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0026409",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Adams County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0026425",
+  "name": "Fort Collins City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0026425",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fort Collins"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0026611",
+  "name": "Aurora City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0026611",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Aurora"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0026638",
+  "name": "Metro Water Recovery",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0026638",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (news search only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Denver"
+  ],
+  "notes": "Major permit.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0026646",
+  "name": "Pueblo City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0026646",
+  "receiving_waters": [
+   "Arkansas River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "city notice and CDPHE/CPW press releases for the August 2026 Arkansas River spill (news)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pueblo"
+  ],
+  "notes": "Major permit.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0026662",
+  "name": "South Adams County WSD",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0026662",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Henderson"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0026671",
+  "name": "Longmont City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0026671",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Longmont"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0026701",
+  "name": "Loveland City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0026701",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Loveland"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0026735",
+  "name": "Colorado Springs Utilities",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0026735",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (news search only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Colorado Springs"
+  ],
+  "notes": "Major permit.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0027171",
+  "name": "Mt Crested Butte Water and Sanitation Dist",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0027171",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mount Crested Butte"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0027545",
+  "name": "Cortez Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0027545",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cortez"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0029955",
+  "name": "Summit County Government",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0029955",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Summit County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0031232",
+  "name": "Trinidad City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0031232",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Trinidad"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0031755",
+  "name": "Pagosa Area Water and San Dist",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0031755",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pagosa Springs"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0031844",
+  "name": "Upper Thompson Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0031844",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Estes Park"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0033791",
+  "name": "Clifton Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0033791",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clifton"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0036757",
+  "name": "Northglenn City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0036757",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Brighton"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0036927",
+  "name": "Monte Vista City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0036927",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rio Grande County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0037311",
+  "name": "Eagle River Water & San District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0037311",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Eagle County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0037681",
+  "name": "Three Lakes Water and Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0037681",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Grand Lake"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0037966",
+  "name": "Centennial Water and San Dist",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0037966",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Highlands Ranch"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0038547",
+  "name": "Plum Creek Water Reclamation Authority",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0038547",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Castle Rock"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0039624",
+  "name": "Montrose City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0039624",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Montrose County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0039641",
+  "name": "Delta City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0039641",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Delta County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0039748",
+  "name": "Fremont Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0039748",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fremont County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0039900",
+  "name": "Cripple Creek City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0039900",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cripple Creek"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0040037",
+  "name": "Craig  City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0040037",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Craig"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0040053",
+  "name": "Mesa Co Grand Junction City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0040053",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Grand Junction"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0040142",
+  "name": "Fraser Town of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0040142",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fraser"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0040258",
+  "name": "Greeley City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0040258",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Greeley"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0040291",
+  "name": "Stonegate Village Metropolitan District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0040291",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Parker"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0040339",
+  "name": "Salida City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0040339",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Salida"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0040681",
+  "name": "Arapahoe County Water and Wastewater Authority",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0040681",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Centennial"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0040789",
+  "name": "Pueblo West Metropolitan District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0040789",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pueblo County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0041092",
+  "name": "Pinery Water and Wastewater Dist",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0041092",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Parker"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0041530",
+  "name": "Gunnison City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0041530",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gunnison"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0041700",
+  "name": "St Vrain Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0041700",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "City Of Longmont"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0041840",
+  "name": "Telluride Town of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0041840",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "San Miguel County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0042030",
+  "name": "Donala Water and Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0042030",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Colorado Springs"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0043010",
+  "name": "Superior Metropolitan District No 1",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0043010",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Superior"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0044458",
+  "name": "Alamosa City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0044458",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Alamosa County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0044849",
+  "name": "Fort Morgan City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0044849",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Morgan County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0045420",
+  "name": "Upper Blue Sanitation Dist",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0045420",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Summit County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0045748",
+  "name": "Buena Vista Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0045748",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Buena Vista"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0046507",
+  "name": "Parker Water and Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0046507",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Parker"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0046663",
+  "name": "Berthoud Town of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0046663",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Berthoud"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0046761",
+  "name": "Black Hawk/Central City Sanitation District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0046761",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gilpin County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0046850",
+  "name": "Colorado Springs Utilities",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0046850",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (news search only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Colorado Springs"
+  ],
+  "notes": "Major permit.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0047091",
+  "name": "Woodmen Hills Metropolitan District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0047091",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "El Paso County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0047198",
+  "name": "Lochbuie Town of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0047198",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Weld County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0047287",
+  "name": "Evans City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0047287",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Weld County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0047627",
+  "name": "Fort Collins City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0047627",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fort Collins"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0048151",
+  "name": "Rifle City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0048151",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rifle"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0048241",
+  "name": "Eagle Town of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0048241",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Eagle County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0048445",
+  "name": "Erie Town of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0048445",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Weld County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0048852",
+  "name": "Glenwood Springs City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0048852",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Garfield County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0048854",
+  "name": "Fruita City of",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0048854",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fruita"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-co0048959",
+  "name": "Metro Water Recovery",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "CO0048959",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (news search only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Brighton"
+  ],
+  "notes": "Major permit.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "co-cox048348",
+  "name": "Cherokee Metro District",
+  "state": "CO",
+  "kind": "sso",
+  "npdes_permit": "COX048348",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Colorado Springs"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ }
+]

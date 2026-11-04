@@ -1,0 +1,6967 @@
+{
+ "state": "VA",
+ "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "count": 285,
+ "waters": [
+  {
+   "slug": "aarons-creek-va",
+   "name": "Aarons Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Pools Mill"
+   ],
+   "bbox": [
+    -78.74253,
+    36.53684,
+    -78.68918,
+    36.68291
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "aaron-s-creek-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "accokeek-creek-va",
+   "name": "Accokeek Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Stafford"
+   ],
+   "bbox": [
+    -77.386,
+    38.34682,
+    -77.29789,
+    38.3862
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.431,
+   "launches": [
+    "crows-nest-nap-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "adams-creek-va",
+   "name": "Adams Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Signpine"
+   ],
+   "bbox": [
+    -76.69466,
+    37.42616,
+    -76.66355,
+    37.44385
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.463,
+   "launches": [
+    "adams-creek-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "airfield-pond-va",
+   "name": "Airfield Pond",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Manry"
+   ],
+   "bbox": [
+    -77.0417,
+    36.9034,
+    -77.02708,
+    36.91298
+   ],
+   "wikidata": "Q49699816",
+   "charted": false,
+   "area_km2": 0.457,
+   "launches": [
+    "airfield-pond-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "amelia-lake-va",
+   "name": "Amelia Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Powhatan"
+   ],
+   "bbox": [
+    -77.92576,
+    37.45672,
+    -77.91854,
+    37.47164
+   ],
+   "wikidata": "Q49699837",
+   "charted": false,
+   "area_km2": 0.374,
+   "launches": [
+    "amelia-lake-wma-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "appomattox-river-va",
+   "name": "Appomattox River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Colonial Heights",
+    "Farmville",
+    "Hopewell",
+    "Matoaca",
+    "Petersburg"
+   ],
+   "bbox": [
+    -78.82756,
+    37.21683,
+    -77.27634,
+    37.49805
+   ],
+   "wikidata": "Q621682",
+   "charted": true,
+   "area_km2": 1.047,
+   "launches": [
+    "appamatuck-park-va",
+    "appomattox-river-boat-launch-near-petersburg-va-2",
+    "appomattox-river-carry-in-access-va",
+    "appomattox-river-regional-park-va",
+    "appomattox-riverside-ferndale-park-va",
+    "hopewell-city-marina-boat-launch-va",
+    "patton-park-va",
+    "pocahontas-island-va",
+    "appomattox-river-boat-launch-near-petersburg-va-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "aquia-creek-va",
+   "name": "Aquia Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Aquia Harbour",
+    "Stafford",
+    "Widewater Beach"
+   ],
+   "bbox": [
+    -77.55574,
+    38.36555,
+    -77.24556,
+    38.49745
+   ],
+   "wikidata": "Q4782878",
+   "charted": true,
+   "area_km2": 7.145,
+   "launches": [
+    "aquia-creek-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ashville-bridge-creek-va",
+   "name": "Ashville Bridge Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -75.98723,
+    36.71458,
+    -75.96885,
+    36.75762
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lotus-garden-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "assateague-channel-va",
+   "name": "Assateague Channel",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Black Point Landing",
+    "Chincoteague"
+   ],
+   "bbox": [
+    -75.38865,
+    37.8941,
+    -75.30057,
+    37.98969
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 11.946,
+   "launches": [
+    "chincoteague-memorial-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "atlantic-ocean-va",
+   "name": "Atlantic Ocean",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "little-island-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "back-bay-va",
+   "name": "Back Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -75.99192,
+    36.56191,
+    -75.92523,
+    36.63144
+   ],
+   "wikidata": "Q49373184",
+   "charted": true,
+   "area_km2": 32.0,
+   "launches": [
+    "back-bay-boat-launch-va",
+    "virginia-beach-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "back-creek-va",
+   "name": "Back Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "York"
+   ],
+   "bbox": [
+    -76.45279,
+    37.19789,
+    -76.41572,
+    37.20882
+   ],
+   "wikidata": "Q49844003",
+   "charted": true,
+   "area_km2": 0.842,
+   "launches": [
+    "back-creek-boat-launch-near-seaford-va-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "back-river-va",
+   "name": "Back River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Hampton",
+    "Poquoson"
+   ],
+   "bbox": [
+    -76.39605,
+    37.04568,
+    -76.14995,
+    37.15493
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 17.344,
+   "launches": [
+    "armory-s-wharf-landing-va",
+    "back-river-boat-launch-near-poquoson-va-3",
+    "fox-hill-va",
+    "back-river-boat-launch-near-hampton-va",
+    "gosnold-s-hope-park-va",
+    "grundlen-park-va",
+    "back-river-boat-launch-near-poquoson-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "banister-river-va",
+   "name": "Banister River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Halifax",
+    "Leda",
+    "Meadville",
+    "Scottsburg",
+    "South Boston"
+   ],
+   "bbox": [
+    -79.56926,
+    36.69889,
+    -78.79416,
+    36.93024
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cowford-bridge-access-va",
+    "halifax-dam-va",
+    "king-s-bridge-landing-banister-river-gateway-project-va",
+    "leda-road-va",
+    "meadville-access-va",
+    "terry-s-bridge-va",
+    "wolf-trap-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "barbours-creek-va",
+   "name": "Barbours Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "New Castle"
+   ],
+   "bbox": [
+    -80.12269,
+    37.53011,
+    -80.03696,
+    37.63531
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "barbours-creek-route-611-put-in-va",
+    "barbours-creek-route-617-bridge-take-out-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bark-camp-lake-va",
+   "name": "Bark Camp Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Coeburn"
+   ],
+   "bbox": [
+    -82.53508,
+    36.86337,
+    -82.51978,
+    36.87028
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.183,
+   "launches": [
+    "bark-camp-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-lake-va",
+   "name": "Bear Creek Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Cumberland"
+   ],
+   "bbox": [
+    -78.27688,
+    37.52423,
+    -78.2671,
+    37.53246
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.153,
+   "launches": [
+    "bear-creek-state-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-creek-resevoir-va",
+   "name": "Beaver Creek Resevoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Crozet"
+   ],
+   "bbox": [
+    -78.67071,
+    38.06999,
+    -78.65164,
+    38.08566
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.416,
+   "launches": [
+    "beaver-creek-lake-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaverdam-swamp-reservoir-va",
+   "name": "Beaverdam Swamp Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Gloucester"
+   ],
+   "bbox": [
+    -76.56512,
+    37.43903,
+    -76.52537,
+    37.47835
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.436,
+   "launches": [
+    "beaverdam-park-fary-s-mill-entrance-va",
+    "beaverdam-swamp-reservoir-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bells-mill-creek-elizabeth-river-va",
+   "name": "Bells Mill Creek/Elizabeth River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Chesapeake"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "a-place-for-girls-nellie-hayse-site-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "belmont-bay-va",
+   "name": "Belmont Bay",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Woodbridge"
+   ],
+   "bbox": [
+    -77.23009,
+    38.63763,
+    -77.19173,
+    38.65846
+   ],
+   "wikidata": "Q4884330",
+   "charted": true,
+   "area_km2": 5.241,
+   "launches": [
+    "belmont-bay-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bennett-creek-va",
+   "name": "Bennett Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.49907,
+    36.80069,
+    -76.47873,
+    36.88783
+   ],
+   "wikidata": "Q4889681",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bennett-s-creek-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-bethel-reservoir-va",
+   "name": "Big Bethel Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Hampton"
+   ],
+   "bbox": [
+    -76.45537,
+    37.08982,
+    -76.42523,
+    37.09925
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.549,
+   "launches": [
+    "big-bethel-reservoir-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blackwater-river-hickman-va",
+   "name": "Blackwater River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Hickman",
+    "Rocky Mount"
+   ],
+   "bbox": [
+    -80.02652,
+    37.01783,
+    -79.59838,
+    37.07225
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.913,
+   "launches": [
+    "blue-bend-water-access-va",
+    "brubaker-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blackwater-river-va",
+   "name": "Blackwater River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Franklin",
+    "Isle of Wight",
+    "Southampton"
+   ],
+   "bbox": [
+    -77.14375,
+    36.544,
+    -76.81494,
+    37.10418
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blackwater-bridge-va",
+    "blackwater-park-va",
+    "joyner-s-bridge-va",
+    "south-quay-rd-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bonum-creek-va",
+   "name": "Bonum Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Narrow Beach"
+   ],
+   "bbox": [
+    -76.59657,
+    38.07706,
+    -76.58083,
+    38.09602
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.509,
+   "launches": [
+    "bonums-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bradford-bay-va",
+   "name": "Bradford Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Wachapreague"
+   ],
+   "bbox": [
+    -75.70284,
+    37.57147,
+    -75.65939,
+    37.59927
+   ],
+   "wikidata": "Q49374109",
+   "charted": true,
+   "area_km2": 6.659,
+   "launches": [
+    "wachapreague-harbor-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "branson-cove-va",
+   "name": "Branson Cove",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Coles Point"
+   ],
+   "bbox": [
+    -76.63517,
+    38.14126,
+    -76.63251,
+    38.14288
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.019,
+   "launches": [
+    "coles-point-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "briery-creek-lake-va",
+   "name": "Briery Creek Lake",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Hampden Sydney"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "briery-creek-boat-launch-va",
+    "rte-701-landing-briery-creek-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "broad-bay-va",
+   "name": "Broad Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -76.06064,
+    36.88717,
+    -76.0178,
+    36.90684
+   ],
+   "wikidata": "Q49374149",
+   "charted": true,
+   "area_km2": 3.034,
+   "launches": [
+    "broad-bay-boat-launch-near-virginia-beach-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "browns-bay-va",
+   "name": "Browns Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Gloucester"
+   ],
+   "bbox": [
+    -76.41264,
+    37.28655,
+    -76.38656,
+    37.30646
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.238,
+   "launches": [
+    "guinea-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brunswick-county-lake-va",
+   "name": "Brunswick County Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Lawrenceville"
+   ],
+   "bbox": [
+    -77.74914,
+    36.78141,
+    -77.72747,
+    36.79914
+   ],
+   "wikidata": "Q49700122",
+   "charted": false,
+   "area_km2": 0.609,
+   "launches": [
+    "brunswick-lake-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bullpasture-river-va",
+   "name": "Bullpasture River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Williamsville"
+   ],
+   "bbox": [
+    -79.59112,
+    38.18918,
+    -79.43993,
+    38.45845
+   ],
+   "wikidata": "Q4997018",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bullpasture-route-614-bridge-take-out-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "burke-lake-va",
+   "name": "Burke Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Burke"
+   ],
+   "bbox": [
+    -77.30883,
+    38.75462,
+    -77.2932,
+    38.77071
+   ],
+   "wikidata": "Q4998945",
+   "charted": false,
+   "area_km2": 0.811,
+   "launches": [
+    "lake-burke-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "burton-lake-va",
+   "name": "Burton Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Andersons Mill"
+   ],
+   "bbox": [
+    -79.5377,
+    36.85976,
+    -79.53233,
+    36.8734
+   ],
+   "wikidata": "Q49700156",
+   "charted": false,
+   "area_km2": 0.264,
+   "launches": [
+    "lake-burton-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "butler-lake-va",
+   "name": "Butler Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.57378,
+    36.86487,
+    -76.56637,
+    36.87038
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.164,
+   "launches": [
+    "butler-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cape-charles-harbor-va",
+   "name": "Cape Charles Harbor",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Cape Charles"
+   ],
+   "bbox": [
+    -76.02797,
+    37.26276,
+    -76.01423,
+    37.26683
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.288,
+   "launches": [
+    "cape-charles-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "carol-pond-va",
+   "name": "Carol Pond",
+   "kind": "pond",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -75.99159,
+    36.58839,
+    -75.9849,
+    36.59288
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.107,
+   "launches": [
+    "princess-anne-wma-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "carrollton-branch-va",
+   "name": "Carrollton Branch",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Isle of Wight"
+   ],
+   "bbox": [
+    -76.56801,
+    36.94503,
+    -76.55607,
+    36.96224
+   ],
+   "wikidata": "Q49873747",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "carrollton-branch-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "catoctin-creek-va",
+   "name": "Catoctin Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Leesburg"
+   ],
+   "bbox": [
+    -77.62145,
+    39.20969,
+    -77.54454,
+    39.27742
+   ],
+   "wikidata": "Q5053819",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "point-of-rocks-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-star-tannery-va",
+   "name": "Cedar Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Star Tannery",
+    "Strasburg"
+   ],
+   "bbox": [
+    -78.60333,
+    38.9452,
+    -78.30973,
+    39.10341
+   ],
+   "wikidata": "Q5056615",
+   "charted": false,
+   "area_km2": 0.144,
+   "launches": [
+    "cedar-creek-route-11-bridge-va",
+    "cedar-creek-route-48-bridge-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-va",
+   "name": "Cedar Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.56621,
+    36.83697,
+    -76.55285,
+    36.85572
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "rainbow-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chandlers-millpond-va",
+   "name": "Chandlers Millpond",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Montross"
+   ],
+   "bbox": [
+    -76.84683,
+    38.09783,
+    -76.83764,
+    38.10735
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.164,
+   "launches": [
+    "chandlers-mill-pond-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ches-bay-va",
+   "name": "Ches Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Kiptopeke"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "kiptopeke-state-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chesapeake-bay-va",
+   "name": "Chesapeake Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Hampton",
+    "Kiptopeke",
+    "Norfolk",
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -76.40667,
+    36.90876,
+    -75.89282,
+    38.4
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3491.732,
+   "launches": [
+    "buckroe-beach-park-va",
+    "community-beach-park-va",
+    "first-landing-state-park-va",
+    "first-landing-state-park-virginia-beach-va",
+    "ocean-view-beach-park-va",
+    "sarah-constant-beach-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chesconessex-creek-va",
+   "name": "Chesconessex Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Schooner Bay",
+    "South Chesconessex"
+   ],
+   "bbox": [
+    -75.78103,
+    37.73802,
+    -75.75496,
+    37.76025
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.989,
+   "launches": [
+    "schooner-bay-landing-va",
+    "south-chesconessex-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chickahominy-river-va",
+   "name": "Chickahominy River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Claybank Landing",
+    "Highland Springs",
+    "James City",
+    "Toano",
+    "West Point",
+    "Williamsburg"
+   ],
+   "bbox": [
+    -77.62415,
+    37.21678,
+    -76.8562,
+    37.71037
+   ],
+   "wikidata": "Q1072150",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "chickahominy-river-boat-launch-near-toano-va-2",
+    "chickahominy-river-boat-launch-near-highland-springs-va",
+    "gordon-creek-boat-launch-va",
+    "chickahominy-riverside-park-va",
+    "chickahominy-wma-morris-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chincoteague-bay-va",
+   "name": "Chincoteague Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Greenbackville",
+    "Horntown"
+   ],
+   "bbox": [
+    -75.43802,
+    37.9375,
+    -75.15842,
+    38.29467
+   ],
+   "wikidata": "Q5100322",
+   "charted": true,
+   "area_km2": 270.479,
+   "launches": [
+    "greenbackville-harbor-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chincoteague-channel-va",
+   "name": "Chincoteague Channel",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Chincoteague"
+   ],
+   "bbox": [
+    -75.44739,
+    37.88335,
+    -75.37084,
+    37.94024
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.721,
+   "launches": [
+    "chincoteague-harbor-va",
+    "chincoteague-town-dock-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chrisman-lake-va",
+   "name": "Chrisman Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Hampton"
+   ],
+   "bbox": [
+    -76.43149,
+    37.06374,
+    -76.42922,
+    37.06714
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.049,
+   "launches": [
+    "sandy-bottom-nature-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "claytor-lake-va",
+   "name": "Claytor Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Draper",
+    "Dublin",
+    "Pulaski",
+    "Radford"
+   ],
+   "bbox": [
+    -80.7494,
+    36.96543,
+    -80.58382,
+    37.08343
+   ],
+   "wikidata": "Q5130389",
+   "charted": false,
+   "area_km2": 15.454,
+   "launches": [
+    "claytor-lake-state-park-va",
+    "dublin-va",
+    "harry-dehaven-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clinch-river-va",
+   "name": "Clinch River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Artrip",
+    "Blackford",
+    "Burtons Ford",
+    "Carterton",
+    "Clinchport",
+    "Dungannon",
+    "Flat Rock",
+    "Lebanon",
+    "Nash Ford",
+    "Saint Paul"
+   ],
+   "bbox": [
+    -83.19023,
+    36.52227,
+    -81.49385,
+    37.13559
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.17,
+   "launches": [
+    "blackford-bridge-va",
+    "burton-s-ford-va",
+    "carterton-va",
+    "clinch-river-state-park-access-va",
+    "clinchport-va",
+    "dungannon-va",
+    "nash-s-ford-va",
+    "old-castlewood-va",
+    "puckett-s-hole-va",
+    "rexrena-copper-creek-va",
+    "st-paul-va",
+    "state-line-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coan-river-va",
+   "name": "Coan River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Bundick",
+    "Coan",
+    "Heathsville",
+    "Lewisetta",
+    "Nokomis"
+   ],
+   "bbox": [
+    -76.48703,
+    37.93224,
+    -76.38421,
+    38.03359
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.7,
+   "launches": [
+    "forrest-landing-va",
+    "rowes-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cockrell-creek-va",
+   "name": "Cockrell Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Reedville"
+   ],
+   "bbox": [
+    -76.29487,
+    37.81244,
+    -76.27955,
+    37.85935
+   ],
+   "wikidata": "Q49882014",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "shell-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "college-creek-va",
+   "name": "College Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Williamsburg"
+   ],
+   "bbox": [
+    -76.7165,
+    37.21909,
+    -76.69368,
+    37.25747
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "college-landing-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "colliers-creek-va",
+   "name": "Colliers Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Collierstown"
+   ],
+   "bbox": [
+    -79.60213,
+    37.75661,
+    -79.54303,
+    37.83618
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "colliers-creek-route-770-near-collierstown-pres-church-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conner-lake-va",
+   "name": "Conner Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Providence"
+   ],
+   "bbox": [
+    -78.80694,
+    36.91472,
+    -78.798,
+    36.92608
+   ],
+   "wikidata": "Q49700343",
+   "charted": false,
+   "area_km2": 0.388,
+   "launches": [
+    "lake-connor-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cowpasture-river-va",
+   "name": "Cowpasture River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Clifton Forge",
+    "Iron Gate"
+   ],
+   "bbox": [
+    -79.77593,
+    37.77493,
+    -79.39907,
+    38.39694
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.121,
+   "launches": [
+    "cowpasture-river-boat-launch-va",
+    "evans-tract-river-access-va",
+    "sharon-park-va",
+    "walton-tract-boating-hand-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crane-lake-va",
+   "name": "Crane Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.58091,
+    36.86955,
+    -76.5727,
+    36.8801
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.218,
+   "launches": [
+    "crane-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cranes-creek-va",
+   "name": "Cranes Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Sandy Point"
+   ],
+   "bbox": [
+    -76.3317,
+    37.8085,
+    -76.30786,
+    37.82211
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cranes-creek-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-lake-va",
+   "name": "Crystal Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.57131,
+    36.86049,
+    -76.56711,
+    36.86536
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.072,
+   "launches": [
+    "crystal-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "currioman-bay-va",
+   "name": "Currioman Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Currioman Landing"
+   ],
+   "bbox": [
+    -76.77543,
+    38.14233,
+    -76.73932,
+    38.16672
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.705,
+   "launches": [
+    "currioman-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "curtis-park-lake-va",
+   "name": "Curtis Park Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Fredericksburg"
+   ],
+   "bbox": [
+    -77.57433,
+    38.43158,
+    -77.5593,
+    38.43919
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.349,
+   "launches": [
+    "lake-curtis-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cuttoff-creek-va",
+   "name": "Cuttoff Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Modest Town"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "kegotank-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cypress-creek-va",
+   "name": "Cypress Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Smithfield"
+   ],
+   "bbox": [
+    -76.6218,
+    36.90154,
+    -76.58913,
+    36.98311
+   ],
+   "wikidata": "Q105091193",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "clontz-park-pier-trails-and-river-viewing-va",
+    "cypress-creek-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dan-river-va",
+   "name": "Dan River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Danville",
+    "Milton",
+    "South Boston"
+   ],
+   "bbox": [
+    -80.45808,
+    36.39492,
+    -78.6449,
+    36.78401
+   ],
+   "wikidata": "Q1159151",
+   "charted": false,
+   "area_km2": 6.949,
+   "launches": [
+    "abreu-grogan-park-va",
+    "andrew-lester-access-at-leggett-s-bottom-va",
+    "anglers-park-va",
+    "camillia-williams-park-va",
+    "riverwalk-trail-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "deep-creek-chesapeake-va",
+   "name": "Deep Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Chesapeake"
+   ],
+   "bbox": [
+    -76.36732,
+    36.74607,
+    -76.29554,
+    36.76289
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "deep-creek-lock-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "diascund-creek-reservoir-va",
+   "name": "Diascund Creek Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "James City"
+   ],
+   "bbox": [
+    -76.94764,
+    37.42412,
+    -76.86872,
+    37.46059
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.732,
+   "launches": [
+    "diascund-reservoir-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dismal-swamp-canal-va",
+   "name": "Dismal Swamp Canal",
+   "kind": "canal",
+   "state": "VA",
+   "towns": [
+    "Chesapeake"
+   ],
+   "bbox": [
+    -76.38898,
+    36.44004,
+    -76.32441,
+    36.74675
+   ],
+   "wikidata": "Q2936090",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "ballahack-boat-ramp-va",
+    "dismal-swamp-canal-trail-south-va",
+    "rest-stop-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "douthat-lake-va",
+   "name": "Douthat Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Clifton Forge"
+   ],
+   "bbox": [
+    -79.805,
+    37.90285,
+    -79.7959,
+    37.90916
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.181,
+   "launches": [
+    "douthat-state-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-river-va",
+   "name": "East River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Mathews"
+   ],
+   "bbox": [
+    -76.37832,
+    37.36285,
+    -76.3225,
+    37.4547
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 8.524,
+   "launches": [
+    "town-point-va",
+    "williams-warf-landing-project-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "eastern-branch-of-elizabeth-river-va",
+   "name": "Eastern Branch of Elizabeth River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Norfolk"
+   ],
+   "bbox": [
+    -76.29316,
+    36.825,
+    -76.21105,
+    36.85658
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.984,
+   "launches": [
+    "harbor-park-launch-va",
+    "poplar-hall-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "edgewater-haven-va",
+   "name": "Edgewater Haven",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Norfolk"
+   ],
+   "bbox": null,
+   "wikidata": "Q49376924",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "larchmont-kayak-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "elizabeth-river-va",
+   "name": "Elizabeth River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Norfolk",
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -76.36604,
+    36.83807,
+    -76.28692,
+    36.95585
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 18.794,
+   "launches": [
+    "carolanne-park-kayak-launch-va",
+    "plum-point-kayak-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "elkhorn-lake-va",
+   "name": "Elkhorn Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Staunton"
+   ],
+   "bbox": [
+    -79.23242,
+    38.3265,
+    -79.22351,
+    38.33127
+   ],
+   "wikidata": "Q49700639",
+   "charted": false,
+   "area_km2": 0.207,
+   "launches": [
+    "elkhorn-lake-boat-launch-near-staunton-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "emporia-reservoir-va",
+   "name": "Emporia Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Emporia"
+   ],
+   "bbox": [
+    -77.58113,
+    36.69359,
+    -77.55789,
+    36.70152
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.383,
+   "launches": [
+    "emporia-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "farnham-creek-va",
+   "name": "Farnham Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Ivondale"
+   ],
+   "bbox": [
+    -76.70322,
+    37.80693,
+    -76.58954,
+    37.87612
+   ],
+   "wikidata": "Q49909069",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "farnham-creek-boat-launch-va",
+    "laurel-grove-hand-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fingers-lake-va",
+   "name": "Fingers Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.57752,
+    36.87592,
+    -76.57058,
+    36.87919
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.057,
+   "launches": [
+    "fingers-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fluvanna-ruritan-lake-va",
+   "name": "Fluvanna Ruritan Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Lake Monticello"
+   ],
+   "bbox": [
+    -78.38885,
+    37.889,
+    -78.37184,
+    37.8954
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.179,
+   "launches": [
+    "ruritan-lake-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "folly-creek-va",
+   "name": "Folly Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Accomac"
+   ],
+   "bbox": [
+    -75.66491,
+    37.68394,
+    -75.5974,
+    37.71657
+   ],
+   "wikidata": "Q49914443",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "folly-creek-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "four-mile-creek-va",
+   "name": "Four Mile Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Varina"
+   ],
+   "bbox": [
+    -77.30359,
+    37.40668,
+    -77.29849,
+    37.42093
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "four-mile-creek-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "four-mile-run-va",
+   "name": "Four Mile Run",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Alexandria"
+   ],
+   "bbox": [
+    -77.16733,
+    38.82971,
+    -77.02858,
+    38.89173
+   ],
+   "wikidata": "Q5475341",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "four-mile-run-boat-launch-va",
+    "four-mile-run-park-trail-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gardy-s-millpond-va",
+   "name": "Gardy's Millpond",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Kinsale"
+   ],
+   "bbox": [
+    -76.6151,
+    37.99507,
+    -76.6018,
+    38.0031
+   ],
+   "wikidata": "Q5522654",
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "gardy-s-mill-pond-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gargathy-creek-va",
+   "name": "Gargathy Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Bloxom",
+    "Parksley"
+   ],
+   "bbox": [
+    -75.56818,
+    37.77078,
+    -75.53813,
+    37.7993
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dix-s-gargathy-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "germantown-lake-va",
+   "name": "Germantown Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Bealeton"
+   ],
+   "bbox": [
+    -77.73343,
+    38.61464,
+    -77.7227,
+    38.62678
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.418,
+   "launches": [
+    "germantown-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gooney-run-va",
+   "name": "Gooney Run",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Front Royal"
+   ],
+   "bbox": [
+    -78.25774,
+    38.76578,
+    -78.22809,
+    38.87245
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "gooney-run-route-340-bridge-va",
+    "gooney-run-route-622-649-intersection-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "goose-creek-va",
+   "name": "Goose Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Lansdowne",
+    "Leesburg"
+   ],
+   "bbox": [
+    -78.07139,
+    38.90297,
+    -77.47466,
+    39.10137
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.17,
+   "launches": [
+    "keep-loudoun-beautiful-park-va",
+    "kephart-bridge-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grays-creek-va",
+   "name": "Grays Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Surry"
+   ],
+   "bbox": [
+    -76.91137,
+    37.15888,
+    -76.77927,
+    37.20236
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "grey-s-creek-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "great-creek-va",
+   "name": "Great Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Lawrenceville"
+   ],
+   "bbox": [
+    -78.04152,
+    36.71567,
+    -77.79016,
+    36.91556
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "great-creek-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "great-wicomico-river-va",
+   "name": "Great Wicomico River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Blackwells",
+    "Burgess",
+    "Fleeton"
+   ],
+   "bbox": [
+    -76.45311,
+    37.75185,
+    -76.18641,
+    37.89518
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 23.397,
+   "launches": [
+    "coopers-va",
+    "great-wicomico-river-boat-launch-near-blackwells-va",
+    "great-wicomico-river-boat-launch-near-fleeton-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "greenvale-creek-va",
+   "name": "Greenvale Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Mollusk"
+   ],
+   "bbox": [
+    -76.55085,
+    37.72622,
+    -76.54638,
+    37.73519
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "greenvale-creek-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "guilford-creek-va",
+   "name": "Guilford Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Bloxom"
+   ],
+   "bbox": [
+    -75.67862,
+    37.83124,
+    -75.65188,
+    37.86117
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.3,
+   "launches": [
+    "guilford-creek-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gunston-cove-va",
+   "name": "Gunston Cove",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Lorton",
+    "Mason Neck",
+    "Woodbridge"
+   ],
+   "bbox": [
+    -77.17432,
+    38.657,
+    -77.13248,
+    38.68589
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.185,
+   "launches": [
+    "pohick-bay-regional-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hampton-river-va",
+   "name": "Hampton River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Hampton"
+   ],
+   "bbox": [
+    -76.34287,
+    37.00773,
+    -76.32719,
+    37.05254
+   ],
+   "wikidata": "Q5646275",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "mill-point-park-va",
+    "sunset-creek-boat-ramp-va",
+    "the-docks-at-downtown-hampton-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hampton-roads-va",
+   "name": "Hampton Roads",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Newport News"
+   ],
+   "bbox": [
+    -76.49562,
+    36.89637,
+    -76.29701,
+    37.0031
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 102.362,
+   "launches": [
+    "peterson-yacht-basin-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hardware-river-va",
+   "name": "Hardware River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Scottsville"
+   ],
+   "bbox": [
+    -78.55116,
+    37.73788,
+    -78.40243,
+    37.91713
+   ],
+   "wikidata": "Q14712482",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hardware-river-rt-6-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harrison-lake-va",
+   "name": "Harrison Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Hopewell"
+   ],
+   "bbox": [
+    -77.18701,
+    37.34396,
+    -77.1754,
+    37.3494
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.231,
+   "launches": [
+    "harrison-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harwoods-mill-resevoir-va",
+   "name": "Harwoods Mill Resevoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Newport News"
+   ],
+   "bbox": [
+    -76.48301,
+    37.1343,
+    -76.45798,
+    37.1638
+   ],
+   "wikidata": "Q1587961",
+   "charted": false,
+   "area_km2": 0.908,
+   "launches": [
+    "harwoods-mill-resevoir-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hidden-valley-lake-va",
+   "name": "Hidden Valley Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Lebanon"
+   ],
+   "bbox": [
+    -82.08643,
+    36.84325,
+    -82.07249,
+    36.85035
+   ],
+   "wikidata": "Q49701079",
+   "charted": false,
+   "area_km2": 0.225,
+   "launches": [
+    "hidden-valley-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hoffler-creek-va",
+   "name": "Hoffler Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Newport News",
+    "Portsmouth"
+   ],
+   "bbox": [
+    -76.40788,
+    36.87794,
+    -76.40405,
+    36.9392
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "hoffler-creek-wildlife-preserve-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "holliday-lake-va",
+   "name": "Holliday Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Appomattox"
+   ],
+   "bbox": [
+    -78.64204,
+    37.38805,
+    -78.63262,
+    37.40407
+   ],
+   "wikidata": "Q49701110",
+   "charted": false,
+   "area_km2": 0.445,
+   "launches": [
+    "holliday-lake-state-park-va"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017.",
+     "date": "2017-08-02",
+     "years": [
+      "2017"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "horn-harbor-va",
+   "name": "Horn Harbor",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "New Point",
+    "Peary"
+   ],
+   "bbox": [
+    -76.31739,
+    37.33683,
+    -76.25831,
+    37.37566
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.72,
+   "launches": [
+    "doctor-s-creek-landing-va",
+    "horn-harbor-carry-in-access-near-peary-va",
+    "horn-harbor-carry-in-access-near-peary-va-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horsepen-creek-lake-va",
+   "name": "Horsepen Creek Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Buckingham"
+   ],
+   "bbox": [
+    -78.55653,
+    37.50323,
+    -78.55294,
+    37.51075
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.084,
+   "launches": [
+    "horsepen-lake-wma-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hoskins-creek-va",
+   "name": "Hoskins Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Tappahannock"
+   ],
+   "bbox": [
+    -76.99543,
+    37.90639,
+    -76.84284,
+    37.93277
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.404,
+   "launches": [
+    "hoskin-s-creek-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hungry-mother-lake-va",
+   "name": "Hungry Mother Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Marion"
+   ],
+   "bbox": [
+    -81.52588,
+    36.86924,
+    -81.51274,
+    36.88854
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.376,
+   "launches": [
+    "hungry-mother-state-park-va",
+    "hungry-mother-state-park-marion-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hunting-run-reservoir-va",
+   "name": "Hunting Run Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Fredericksburg"
+   ],
+   "bbox": [
+    -77.66412,
+    38.32604,
+    -77.63425,
+    38.35589
+   ],
+   "wikidata": "Q48990191",
+   "charted": false,
+   "area_km2": 1.655,
+   "launches": [
+    "hunting-run-reservoir-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hyco-river-va",
+   "name": "Hyco River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "South Boston"
+   ],
+   "bbox": [
+    -78.99715,
+    36.52242,
+    -78.73015,
+    36.68402
+   ],
+   "wikidata": "Q5953426",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hyco-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "irish-creek-va",
+   "name": "Irish Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Blacksburg",
+    "Buena Vista"
+   ],
+   "bbox": [
+    -79.31556,
+    37.79481,
+    -79.14879,
+    37.85882
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "irish-creek-across-from-cemetary-va",
+    "irish-creek-route-608-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jackson-river-va",
+   "name": "Jackson River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Clearwater Park",
+    "Clifton Forge",
+    "Covington",
+    "Falling Spring",
+    "Intervale",
+    "Kincaid",
+    "Low Moor",
+    "Mallow"
+   ],
+   "bbox": [
+    -80.00919,
+    37.75312,
+    -79.62583,
+    38.4359
+   ],
+   "wikidata": "Q6117354",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clifton-forge-va",
+    "covington-access-va",
+    "dry-run-va",
+    "fort-young-park-va",
+    "gathright-dam-va",
+    "indian-draft-hand-launch-boating-site-va",
+    "intervale-park-and-river-access-va",
+    "island-ford-ii-va",
+    "johnson-spring-boat-launch-va",
+    "low-moor-va",
+    "main-street-park-va",
+    "petticoat-junction-hand-launch-va",
+    "smith-bridge-hand-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "james-river-va",
+   "name": "James River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Alpine",
+    "Arcadia",
+    "Bent Creek",
+    "Big Island",
+    "Bremo Bluff",
+    "Buchanan",
+    "Cartersville",
+    "Charles City",
+    "Chester",
+    "Columbia",
+    "Eagle Rock",
+    "Elon"
+   ],
+   "bbox": [
+    -79.85402,
+    36.89602,
+    -76.29441,
+    37.79758
+   ],
+   "wikidata": "Q422487",
+   "charted": true,
+   "area_km2": 502.156,
+   "launches": [
+    "14th-street-mayo-island-va",
+    "alpine-public-access-va",
+    "ancarrow-s-landing-va",
+    "arcadia-va",
+    "belle-isle-va",
+    "bents-creek-va",
+    "buchanan-va",
+    "cartersville-va",
+    "chapel-island-great-shiplock-park-public-access-va",
+    "chippokes-plantation-state-park-va",
+    "city-park-va",
+    "columbia-va",
+    "craig-creek-va",
+    "deep-bottom-boat-ramp-henrico-co-va",
+    "dutch-gap-va",
+    "dutch-gap-conservation-area-va",
+    "floodwall-va",
+    "glasgow-va",
+    "glen-wilton-park-va",
+    "hardware-river-va",
+    "hilton-pier-and-ravine-va",
+    "horseshoe-bend-va",
+    "howardsville-va",
+    "huguenot-bridge-va",
+    "james-river-boat-launch-near-newport-news-va-2",
+    "irongate-va",
+    "james-river-boat-launch-near-goochland-va",
+    "james-river-boat-launch-near-goochland-va-2",
+    "james-river-boat-launch-near-goochland-va-3",
+    "james-river-boat-launch-near-hampton-va-2",
+    "james-river-boat-launch-near-norwood-va",
+    "james-river-carry-in-access-near-hampton-va",
+    "james-river-carry-in-access-near-hopewell-va",
+    "james-river-carry-in-access-near-hopewell-va-2",
+    "james-river-carry-in-access-near-lynchburg-va-2",
+    "james-river-carry-in-access-near-lynchburg-va",
+    "james-river-state-park-boat-ramp-va",
+    "james-river-state-park-canoe-in-soft-launch-va",
+    "jamestown-beach-event-park-va",
+    "jamestown-festival-park-va",
+    "joshua-falls-va",
+    "lawnes-creek-va",
+    "leeward-municipal-marina-va",
+    "lewis-park-wilcox-wharf-va",
+    "maidens-beaumont-va",
+    "midway-va",
+    "reusens-reservoir-boat-launch-va",
+    "new-canton-va",
+    "osborne-va",
+    "powhatan-state-park-va",
+    "reed-creek-landing-va",
+    "reedy-creek-boat-launch-va",
+    "robious-park-va",
+    "robious-landing-park-va",
+    "scottsville-va",
+    "snowden-va",
+    "springwood-va",
+    "tredegar-boat-ramp-va",
+    "tucker-park-at-maidens-crossing-va",
+    "james-river-boat-launch-near-baileys-beach-va",
+    "watkins-va",
+    "west-view-va",
+    "wingina-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jennings-creek-va",
+   "name": "Jennings Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Munford"
+   ],
+   "bbox": [
+    -79.63365,
+    37.45208,
+    -79.591,
+    37.54871
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "jenning-s-creek-route-614-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "john-w-flannagan-reservoir-va",
+   "name": "John W. Flannagan Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Clintwood",
+    "Haysi"
+   ],
+   "bbox": [
+    -82.44372,
+    37.16671,
+    -82.34147,
+    37.24367
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.043,
+   "launches": [
+    "cranesnest-boat-ramp-va",
+    "lower-twin-boat-ramp-va",
+    "pound-river-campground-boat-ramp-va",
+    "spillway-ramp-va"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019.",
+     "date": "2019-08-02",
+     "years": [
+      "2019"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "johns-creek-va",
+   "name": "Johns Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "New Castle"
+   ],
+   "bbox": [
+    -80.3822,
+    37.4229,
+    -80.10234,
+    37.51418
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "john-s-creek-route-311-bridge-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jones-creek-va",
+   "name": "Jones Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Isle of Wight",
+    "Rescue"
+   ],
+   "bbox": [
+    -76.5847,
+    36.94158,
+    -76.56244,
+    37.00458
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "jones-creek-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jones-pond-va",
+   "name": "Jones Pond",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "King George"
+   ],
+   "bbox": [
+    -77.14189,
+    38.3638,
+    -77.12992,
+    38.36741
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.22,
+   "launches": [
+    "caledon-state-park-soft-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kerr-lake-buggs-island-lake-va",
+   "name": "Kerr Lake;Buggs Island Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Boydton",
+    "Carters Point",
+    "Clarksville",
+    "Cusco Willa",
+    "Fairview Acres",
+    "Fleming Corner",
+    "Phillis",
+    "Ponderosa",
+    "Wilson Fork"
+   ],
+   "bbox": [
+    -78.75093,
+    36.3847,
+    -78.26784,
+    36.73305
+   ],
+   "wikidata": "Q1700320",
+   "charted": false,
+   "area_km2": 170.808,
+   "launches": [
+    "kerr-lake-buggs-island-lake-boat-launch-near-clarksville-va-3",
+    "bluestone-creek-landing-va",
+    "buffalo-landing-va",
+    "kerr-lake-buggs-island-lake-boat-launch-near-carters-point-va",
+    "butshers-creek-skipwith-road-va",
+    "clarksville-marina-va",
+    "clarksville-municipal-dock-va",
+    "eagle-point-boat-ramp-va",
+    "eagle-point-landing-va",
+    "kerr-lake-buggs-island-lake-boat-launch-near-cusco-willa-va-2",
+    "eastland-creek-landing-va",
+    "grassy-creek-park-va",
+    "island-creek-park-va",
+    "island-creek-park-boat-ramp-va",
+    "kerr-lake-buggs-island-lake-boat-launch-near-ponderosa-va",
+    "kerr-lake-buggs-island-lake-boat-launch-near-clarksville-va",
+    "kerr-lake-buggs-island-lake-boat-launch-near-clarksville-va-2",
+    "kerr-lake-buggs-island-lake-boat-launch-near-clarksville-va-4",
+    "longwood-boat-ramp-va",
+    "longwood-park-va",
+    "kerr-lake-buggs-island-lake-boat-launch-near-phillis-va-2",
+    "kerr-lake-buggs-island-lake-boat-launch-near-cusco-willa-va",
+    "main-boat-ramp-va",
+    "occoneechee-state-park-va",
+    "palmer-point-boat-ramp-va",
+    "rudd-s-creek-campground-boat-ramp-va",
+    "rudd-s-creek-day-use-boat-ramp-va",
+    "staunton-river-state-park-va",
+    "staunton-view-park-va",
+    "staunton-view-park-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kerr-lake-va",
+   "name": "Kerr Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Boydton"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rudd-s-creek-day-use-area-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "knitting-mill-creek-va",
+   "name": "Knitting Mill Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Norfolk"
+   ],
+   "bbox": [
+    -76.29485,
+    36.88327,
+    -76.29118,
+    36.89042
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.079,
+   "launches": [
+    "highland-park-veterans-kayak-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lafayette-river-elizabeth-river-va",
+   "name": "Lafayette River/Elizabeth River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Norfolk"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "norfolk-boat-launch-va-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lafayette-river-va",
+   "name": "Lafayette River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Norfolk"
+   ],
+   "bbox": [
+    -76.33568,
+    36.86517,
+    -76.25895,
+    36.9079
+   ],
+   "wikidata": "Q6471507",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "barraud-park-va",
+    "la-valette-boat-ramp-and-pier-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-albemarle-va",
+   "name": "Lake Albemarle",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Crozet"
+   ],
+   "bbox": [
+    -78.63254,
+    38.08807,
+    -78.62513,
+    38.09571
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.147,
+   "launches": [
+    "lake-albemarle-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-anna-va",
+   "name": "Lake Anna",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Belmont",
+    "Bumpass",
+    "Centreville",
+    "Dan",
+    "Glenora",
+    "Levy",
+    "Lewiston",
+    "Louisa",
+    "Mineral",
+    "Plum Tree",
+    "White Owl Landing"
+   ],
+   "bbox": [
+    -77.97611,
+    37.97734,
+    -77.7067,
+    38.16822
+   ],
+   "wikidata": "Q6474784",
+   "charted": false,
+   "area_km2": 49.521,
+   "launches": [
+    "lake-anna-boat-launch-near-white-owl-landing-va"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2018 to 2022.",
+     "date": "2022-10-02",
+     "years": [
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-brittle-va",
+   "name": "Lake Brittle",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "New Baltimore"
+   ],
+   "bbox": [
+    -77.70114,
+    38.74788,
+    -77.68989,
+    38.75551
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.279,
+   "launches": [
+    "lake-brittle-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-burnt-mills-va",
+   "name": "Lake Burnt Mills",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.67117,
+    36.83745,
+    -76.62628,
+    36.87218
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.939,
+   "launches": [
+    "lake-burnt-mills-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-chesdin-va",
+   "name": "Lake Chesdin",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Chesterfield",
+    "Petersburg",
+    "Sutherland"
+   ],
+   "bbox": [
+    -77.68873,
+    37.21951,
+    -77.52391,
+    37.30541
+   ],
+   "wikidata": "Q6475311",
+   "charted": false,
+   "area_km2": 9.57,
+   "launches": [
+    "lake-chesdin-boat-launch-va",
+    "lake-chesdin-boat-launch-near-chesterfield-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cohoon-va",
+   "name": "Lake Cohoon",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.66152,
+    36.74808,
+    -76.62572,
+    36.77012
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.224,
+   "launches": [
+    "lake-meade-and-cahoon-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-culpeper-va",
+   "name": "Lake Culpeper",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Culpeper"
+   ],
+   "bbox": [
+    -78.04622,
+    38.4558,
+    -78.01759,
+    38.47421
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.922,
+   "launches": [
+    "lake-culpeper-boat-launch-near-culpeper-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-drummond-va",
+   "name": "Lake Drummond",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.48992,
+    36.58408,
+    -76.44654,
+    36.6237
+   ],
+   "wikidata": "Q383500",
+   "charted": false,
+   "area_km2": 12.28,
+   "launches": [
+    "interior-ditch-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-frederick-va",
+   "name": "Lake Frederick",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Stephens City"
+   ],
+   "bbox": [
+    -78.16581,
+    39.04229,
+    -78.15148,
+    39.06142
+   ],
+   "wikidata": "Q56290730",
+   "charted": false,
+   "area_km2": 0.428,
+   "launches": [
+    "lake-frederick-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-gaston-va",
+   "name": "Lake Gaston",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Beechwood",
+    "Bracey",
+    "Castle Heights",
+    "Gasburg"
+   ],
+   "bbox": [
+    -78.3007,
+    36.464,
+    -77.80995,
+    36.62421
+   ],
+   "wikidata": "Q732199",
+   "charted": false,
+   "area_km2": 71.909,
+   "launches": [
+    "lake-gaston-boat-launch-near-castle-heights-va",
+    "pea-hill-va",
+    "poplar-creek-va",
+    "steel-bridge-va",
+    "tailrace-park-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-gordon-va",
+   "name": "Lake Gordon",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Lombardy Grove"
+   ],
+   "bbox": [
+    -78.21704,
+    36.68819,
+    -78.20625,
+    36.70541
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.403,
+   "launches": [
+    "lake-gordon-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-keokee-va",
+   "name": "Lake Keokee",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Keokee"
+   ],
+   "bbox": [
+    -82.86687,
+    36.84523,
+    -82.85235,
+    36.85474
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.347,
+   "launches": [
+    "lake-keokee-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lee-va",
+   "name": "Lake Lee",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Blackstone"
+   ],
+   "bbox": [
+    -77.9851,
+    37.14457,
+    -77.97571,
+    37.16719
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.681,
+   "launches": [
+    "nottoway-county-lake-va"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022.",
+     "date": "2022-10-02",
+     "years": [
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-madison-va",
+   "name": "Lake Madison",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "King George"
+   ],
+   "bbox": [
+    -77.21796,
+    38.27109,
+    -77.21435,
+    38.27369
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.033,
+   "launches": [
+    "lake-madison-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-monroe-va",
+   "name": "Lake Monroe",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "King George"
+   ],
+   "bbox": [
+    -77.20848,
+    38.26872,
+    -77.19981,
+    38.27417
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.096,
+   "launches": [
+    "lake-monroe-boat-launch-king-george-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-moomaw-va",
+   "name": "Lake Moomaw",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Covington",
+    "Hot Springs",
+    "Kincaid"
+   ],
+   "bbox": [
+    -80.00583,
+    37.92596,
+    -79.89953,
+    38.02952
+   ],
+   "wikidata": "Q6476990",
+   "charted": false,
+   "area_km2": 9.463,
+   "launches": [
+    "lake-moomaw-boat-launch-va",
+    "coles-point-boat-launch-va",
+    "fortney-branch-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mooney-va",
+   "name": "Lake Mooney",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Fredericksburg"
+   ],
+   "bbox": [
+    -77.5605,
+    38.3342,
+    -77.53588,
+    38.36297
+   ],
+   "wikidata": "Q85775654",
+   "charted": false,
+   "area_km2": 1.927,
+   "launches": [
+    "rocky-pen-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-orange-va",
+   "name": "Lake Orange",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Orange"
+   ],
+   "bbox": [
+    -78.02897,
+    38.22021,
+    -78.00891,
+    38.23411
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.482,
+   "launches": [
+    "lake-orange-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-prince-va",
+   "name": "Lake Prince",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.68951,
+    36.79109,
+    -76.61739,
+    36.82114
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.963,
+   "launches": [
+    "lake-prince-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-rudee-va",
+   "name": "Lake Rudee",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -75.98913,
+    36.81919,
+    -75.97215,
+    36.8332
+   ],
+   "wikidata": "Q49382516",
+   "charted": true,
+   "area_km2": 0.373,
+   "launches": [
+    "owls-creek-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-shenandoah-va",
+   "name": "Lake Shenandoah",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Massanetta Springs"
+   ],
+   "bbox": [
+    -78.84184,
+    38.37873,
+    -78.83261,
+    38.38413
+   ],
+   "wikidata": "Q49701587",
+   "charted": false,
+   "area_km2": 0.139,
+   "launches": [
+    "lake-shenandoah-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-smith-va",
+   "name": "Lake Smith",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -76.17017,
+    36.87105,
+    -76.14067,
+    36.89399
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.822,
+   "launches": [
+    "lake-smith-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-whitehurst-va",
+   "name": "Lake Whitehurst",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Norfolk"
+   ],
+   "bbox": [
+    -76.20939,
+    36.89962,
+    -76.1826,
+    36.91369
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.119,
+   "launches": [
+    "lake-whitehurst-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "laurel-bed-lake-va",
+   "name": "Laurel Bed Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Richlands"
+   ],
+   "bbox": [
+    -81.8153,
+    36.95402,
+    -81.78825,
+    36.97012
+   ],
+   "wikidata": "Q49701639",
+   "charted": false,
+   "area_km2": 1.342,
+   "launches": [
+    "laurel-bed-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lee-hall-reservoir-upper-basin-va",
+   "name": "Lee Hall Reservoir - upper basin",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Newport News",
+    "Yorktown"
+   ],
+   "bbox": [
+    -76.55764,
+    37.18017,
+    -76.52802,
+    37.19065
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.743,
+   "launches": [
+    "lee-hall-reservoir-upper-basin-boat-launch-va",
+    "newport-news-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "leesville-lake-va",
+   "name": "Leesville Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Altavista",
+    "Eagle Pointe Shores",
+    "Gretna"
+   ],
+   "bbox": [
+    -79.53572,
+    36.98448,
+    -79.39088,
+    37.0936
+   ],
+   "wikidata": "Q7348242",
+   "charted": false,
+   "area_km2": 10.341,
+   "launches": [
+    "leesville-dam-va",
+    "myer-s-creek-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "linkhorn-bay-va",
+   "name": "Linkhorn Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -76.02102,
+    36.85268,
+    -75.98382,
+    36.89038
+   ],
+   "wikidata": "Q49383008",
+   "charted": true,
+   "area_km2": 3.105,
+   "launches": [
+    "birdneck-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-creek-reservoir-va",
+   "name": "Little Creek Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "James City"
+   ],
+   "bbox": [
+    -76.8534,
+    37.34946,
+    -76.80755,
+    37.38214
+   ],
+   "wikidata": "Q49701699",
+   "charted": true,
+   "area_km2": 3.368,
+   "launches": [
+    "little-creek-reservoir-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-creek-va",
+   "name": "Little Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Norfolk"
+   ],
+   "bbox": [
+    -76.23103,
+    36.91889,
+    -76.19152,
+    36.93478
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.667,
+   "launches": [
+    "east-ocean-view-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lodge-creek-va",
+   "name": "Lodge Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Lodge"
+   ],
+   "bbox": [
+    -76.55153,
+    37.97605,
+    -76.52599,
+    38.00677
+   ],
+   "wikidata": "Q49949454",
+   "charted": true,
+   "area_km2": 1.479,
+   "launches": [
+    "lodge-creek-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "london-bridge-creek-va",
+   "name": "London Bridge Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -76.08228,
+    36.80356,
+    -76.0571,
+    36.8415
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hutton-circle-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lovill-s-creek-lake-va",
+   "name": "Lovill's Creek Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Cana"
+   ],
+   "bbox": [
+    -80.64927,
+    36.57977,
+    -80.64139,
+    36.58928
+   ],
+   "wikidata": "Q22073404",
+   "charted": false,
+   "area_km2": 0.15,
+   "launches": [
+    "lovill-s-creek-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-machodoc-creek-va",
+   "name": "Lower Machodoc Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Coles Point"
+   ],
+   "bbox": [
+    -76.67629,
+    38.09283,
+    -76.63212,
+    38.15144
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.724,
+   "launches": [
+    "branson-cove-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-powhatan-lake-va",
+   "name": "Lower Powhatan Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Smiths Crossroads"
+   ],
+   "bbox": [
+    -78.0034,
+    37.57514,
+    -77.99377,
+    37.5782
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.124,
+   "launches": [
+    "lower-powhatan-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lynhaven-river-va",
+   "name": "Lynhaven River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -76.09206,
+    36.8987,
+    -76.08669,
+    36.90788
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lynnhaven-boat-ramp-beach-facility-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mattaponi-river-va",
+   "name": "Mattaponi River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Aylett",
+    "Bowling Green",
+    "King and Queen Court House",
+    "Milford",
+    "Walkerton",
+    "West Point"
+   ],
+   "bbox": [
+    -77.43577,
+    37.51759,
+    -76.77713,
+    38.11317
+   ],
+   "wikidata": "Q1641271",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "chain-ferry-landing-va",
+    "mattaponi-river-boat-launch-near-aylett-va-2",
+    "mattaponi-river-carry-in-access-va",
+    "melrose-va",
+    "milford-va",
+    "mattaponi-river-boat-launch-near-walkerton-va",
+    "waterfence-va",
+    "west-point-va",
+    "wright-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "maury-river-va",
+   "name": "Maury River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Buena Vista",
+    "Glasgow",
+    "Lexington"
+   ],
+   "bbox": [
+    -79.46005,
+    37.62322,
+    -79.35807,
+    37.94929
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.774,
+   "launches": [
+    "glen-maury-park-va",
+    "maury-river-boat-launch-va",
+    "locher-va",
+    "vmi-rte-60-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "meherrin-river-va",
+   "name": "Meherrin River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Emporia"
+   ],
+   "bbox": [
+    -78.27562,
+    36.52219,
+    -77.16217,
+    36.82112
+   ],
+   "wikidata": "Q6809486",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "farmers-market-va",
+    "meherrin-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "meredith-branch-va",
+   "name": "Meredith Branch",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Glen Allen"
+   ],
+   "bbox": [
+    -77.54905,
+    37.66507,
+    -77.54778,
+    37.67055
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sprinfiled-rd-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "messongo-creek-va",
+   "name": "Messongo Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Hallwood",
+    "Saxis"
+   ],
+   "bbox": [
+    -75.71302,
+    37.88885,
+    -75.64476,
+    37.91453
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.407,
+   "launches": [
+    "hammock-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "middle-grounds-va",
+   "name": "Middle Grounds",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Gwynn"
+   ],
+   "bbox": [
+    -76.31036,
+    37.48787,
+    -76.28955,
+    37.50067
+   ],
+   "wikidata": "Q49385036",
+   "charted": true,
+   "area_km2": 0.948,
+   "launches": [
+    "middle-grounds-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "milford-haven-va",
+   "name": "Milford Haven",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Gwynn"
+   ],
+   "bbox": [
+    -76.3109,
+    37.4697,
+    -76.26499,
+    37.49571
+   ],
+   "wikidata": "Q49385107",
+   "charted": true,
+   "area_km2": 3.732,
+   "launches": [
+    "middle-grounds-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mill-creek-gala-va",
+   "name": "Mill Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Gala"
+   ],
+   "bbox": [
+    -79.81599,
+    37.67168,
+    -79.73391,
+    37.69337
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mill-creek-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mill-creek-reservoir-va",
+   "name": "Mill Creek Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Amherst"
+   ],
+   "bbox": [
+    -79.09323,
+    37.65887,
+    -79.07253,
+    37.67352
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.717,
+   "launches": [
+    "mill-creek-boat-launch-va"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024.",
+     "date": "2024-09-01",
+     "years": [
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "mill-creek-va",
+   "name": "Mill Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Hampton"
+   ],
+   "bbox": [
+    -76.31796,
+    37.01268,
+    -76.30472,
+    37.02533
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "fort-monroe-launch-va",
+    "mill-creek-dock-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mill-run-va",
+   "name": "Mill Run",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Williamsville"
+   ],
+   "bbox": [
+    -79.6111,
+    38.20359,
+    -79.59118,
+    38.21753
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bullpasture-river-public-access-of-route-678-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mobjack-bay-va",
+   "name": "Mobjack Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Gloucester",
+    "Maryus",
+    "Motorun",
+    "Susan"
+   ],
+   "bbox": [
+    -76.4131,
+    37.25417,
+    -76.2764,
+    37.37017
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 80.493,
+   "launches": [
+    "maundy-creek-va",
+    "mobjack-bay-carry-in-access-near-motorun-va",
+    "mobjack-bay-carry-in-access-near-motorun-va-2",
+    "mobjack-bay-carry-in-access-near-susan-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "monroe-creek-va",
+   "name": "Monroe Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Colonial Beach"
+   ],
+   "bbox": [
+    -76.97296,
+    38.22913,
+    -76.96121,
+    38.24888
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.269,
+   "launches": [
+    "colonial-beach-landing-va",
+    "monroe-creek-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "morattico-creek-va",
+   "name": "Morattico Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Simonson"
+   ],
+   "bbox": [
+    -76.65707,
+    37.79219,
+    -76.63315,
+    37.82166
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.736,
+   "launches": [
+    "simonson-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "morris-creek-va",
+   "name": "Morris Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Claremont",
+    "Williamsburg"
+   ],
+   "bbox": [
+    -76.99192,
+    37.27638,
+    -76.88294,
+    37.3449
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "morris-creek-boat-launch-va",
+    "rte-623-morris-creek-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mount-landing-creek-va",
+   "name": "Mount Landing Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Tappahannock"
+   ],
+   "bbox": [
+    -77.00578,
+    37.94714,
+    -76.86576,
+    37.97812
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "hutchinson-canoe-launch-site-floating-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mountain-run-lake-va",
+   "name": "Mountain Run Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Culpeper"
+   ],
+   "bbox": [
+    -78.07904,
+    38.47353,
+    -78.06532,
+    38.48069
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.283,
+   "launches": [
+    "mountain-run-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nansemond-river-va",
+   "name": "Nansemond River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.58878,
+    36.73924,
+    -76.43154,
+    36.93619
+   ],
+   "wikidata": "Q4312891",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "constant-s-wharf-park-va",
+    "sleepy-hole-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nanzatico-bay-va",
+   "name": "Nanzatico Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "King George"
+   ],
+   "bbox": [
+    -77.13349,
+    38.15765,
+    -77.11749,
+    38.17092
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.977,
+   "launches": [
+    "lands-end-wildlife-mngmt-area-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nassawadox-creek-va",
+   "name": "Nassawadox Creek",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Bayford"
+   ],
+   "bbox": [
+    -75.96266,
+    37.4545,
+    -75.88428,
+    37.52854
+   ],
+   "wikidata": "Q49927606",
+   "charted": true,
+   "area_km2": 9.804,
+   "launches": [
+    "bayford-landing-va",
+    "fox-hill-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "neabsco-creek-va",
+   "name": "Neabsco Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Leesylvania"
+   ],
+   "bbox": [
+    -77.40098,
+    38.59543,
+    -77.24256,
+    38.66943
+   ],
+   "wikidata": "Q6983956",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "neabsco-creek-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nelson-lake-va",
+   "name": "Nelson Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Arrington"
+   ],
+   "bbox": [
+    -78.88814,
+    37.68552,
+    -78.88019,
+    37.69362
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.156,
+   "launches": [
+    "lake-nelson-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "new-river-va",
+   "name": "New River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Allisonia",
+    "Austinville",
+    "Berton",
+    "Bluff City",
+    "Bridle Creek",
+    "Buck",
+    "Byllesby",
+    "Draper",
+    "Eggleston",
+    "Fosters Falls",
+    "Galax",
+    "Glen Lyn"
+   ],
+   "bbox": [
+    -81.36278,
+    36.55547,
+    -80.47743,
+    37.64221
+   ],
+   "wikidata": "Q952823",
+   "charted": false,
+   "area_km2": 16.694,
+   "launches": [
+    "allisonia-va",
+    "austinville-va",
+    "baywood-va",
+    "new-river-boat-launch-near-radford-va-2",
+    "bissett-park-landing-2-va",
+    "bluff-city-va",
+    "bridle-creek-va",
+    "byllesby-pool-va",
+    "claytor-dam-va",
+    "glen-lyn-park-boat-ramp-va",
+    "independence-va",
+    "ingles-landing-va",
+    "ivanhoe-va",
+    "lurich-road-boat-landing-va",
+    "mouth-of-wilson-va",
+    "narrows-va",
+    "new-river-trail-state-park-va",
+    "new-river-trail-state-park-fosters-falls-va",
+    "new-river-trail-state-park-va-2",
+    "new-river-trail-state-park-ivanhoe-va",
+    "new-river-trail-state-park-buck-va",
+    "new-river-trail-state-park-va-3",
+    "new-river-trail-state-park-grayson-va",
+    "new-river-trail-state-park-va-4",
+    "oldtown-va",
+    "peppers-ferry-va",
+    "rich-creek-va",
+    "riverside-va",
+    "riverview-park-va",
+    "rt-100-water-access-va",
+    "snidow-park-pembroke-va",
+    "whitethorne-va",
+    "whitt-riverbend-boat-landing-va",
+    "whitt-riverbend-va",
+    "wolf-creek-route-614-bridge-va",
+    "wolf-creek-route-666-bridge-va",
+    "wylie-falls-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "newmarket-creek-va",
+   "name": "Newmarket Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Hampton"
+   ],
+   "bbox": [
+    -76.44398,
+    37.01299,
+    -76.3627,
+    37.04718
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.403,
+   "launches": [
+    "air-power-park-va",
+    "bluebird-gap-farm-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-anna-river-va",
+   "name": "North Anna River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Doswell"
+   ],
+   "bbox": [
+    -78.09329,
+    37.80325,
+    -77.40719,
+    38.15148
+   ],
+   "wikidata": "Q3344100",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "north-anna-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-bay-va",
+   "name": "North Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -75.97117,
+    36.70309,
+    -75.93883,
+    36.71758
+   ],
+   "wikidata": "Q49386643",
+   "charted": true,
+   "area_km2": 3.29,
+   "launches": [
+    "horn-point-kayak-canoe-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-creek-va",
+   "name": "North Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Bedford"
+   ],
+   "bbox": [
+    -79.61573,
+    37.52479,
+    -79.51132,
+    37.54485
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "north-creek-put-in-national-forest-parking-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-blackwater-river-va",
+   "name": "North Fork Blackwater River",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Cave Spring"
+   ],
+   "bbox": [
+    -80.07559,
+    37.02502,
+    -80.02612,
+    37.16304
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blackwater-river-north-fork-rt-643-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-holston-river-va",
+   "name": "North Fork Holston River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Mendota",
+    "Saltville"
+   ],
+   "bbox": [
+    -82.61795,
+    36.54858,
+    -81.27281,
+    37.06324
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clinch-mountain-va",
+    "saltville-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-of-pound-lake-va",
+   "name": "North Fork of Pound Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Pound"
+   ],
+   "bbox": [
+    -82.65787,
+    37.10952,
+    -82.62929,
+    37.12549
+   ],
+   "wikidata": "Q7055418",
+   "charted": false,
+   "area_km2": 0.42,
+   "launches": [
+    "north-fork-of-pound-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-shenandoah-river-va",
+   "name": "North Fork Shenandoah River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Front Royal",
+    "Hawkinstown",
+    "Locust Grove",
+    "Meems",
+    "Strasburg",
+    "Waterlick",
+    "Willow Grove",
+    "Woodstock"
+   ],
+   "bbox": [
+    -78.94047,
+    38.61967,
+    -78.18791,
+    38.98733
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "catletts-ford-landing-va",
+    "chapmans-va",
+    "deer-rapids-va",
+    "meems-bottom-va",
+    "north-fork-shenandoah-river-carry-in-access-near-hawkinstown-va",
+    "north-fork-shenandoah-river-carry-in-access-near-meems-va",
+    "riverton-va",
+    "north-fork-shenandoah-river-boat-launch-near-woodstock-va-4",
+    "north-fork-shenandoah-river-boat-launch-near-woodstock-va-3",
+    "strasburg-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-landing-river-va",
+   "name": "North Landing River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Chesapeake",
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -76.13084,
+    36.45045,
+    -75.96471,
+    36.79547
+   ],
+   "wikidata": "Q7055916",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "munden-point-park-va",
+    "pungo-ferry-landing-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-river-gloucester-va",
+   "name": "North River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Gloucester"
+   ],
+   "bbox": [
+    -76.47088,
+    37.36929,
+    -76.35416,
+    37.47408
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 20.918,
+   "launches": [
+    "north-river-carry-in-access-near-gloucester-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-river-va",
+   "name": "North River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Bridgewater"
+   ],
+   "bbox": [
+    -79.28546,
+    38.27849,
+    -78.80766,
+    38.44179
+   ],
+   "wikidata": "Q7056518",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "north-river-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "northwest-river-va",
+   "name": "Northwest River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Chesapeake"
+   ],
+   "bbox": [
+    -76.34525,
+    36.5113,
+    -76.07655,
+    36.61624
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.861,
+   "launches": [
+    "northwest-river-boat-launch-va",
+    "indian-creek-launch-va",
+    "northwest-river-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nottoway-river-va",
+   "name": "Nottoway River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Jarratt",
+    "Rivers Edge",
+    "Southampton",
+    "Sussex"
+   ],
+   "bbox": [
+    -78.32176,
+    36.54344,
+    -76.91574,
+    37.11991
+   ],
+   "wikidata": "Q7063766",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "carey-s-bridge-va",
+    "general-vaughan-bridge-va",
+    "hercules-va",
+    "jarratt-va",
+    "peter-s-bridge-va",
+    "purdy-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nottoway-river-victoria-va",
+   "name": "Nottoway River",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Victoria"
+   ],
+   "bbox": [
+    -78.22972,
+    37.01026,
+    -77.99973,
+    37.09699
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.757,
+   "launches": [
+    "the-falls-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "occohannock-creek-va",
+   "name": "Occohannock Creek",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Davis Wharf"
+   ],
+   "bbox": [
+    -75.93829,
+    37.53318,
+    -75.81828,
+    37.5746
+   ],
+   "wikidata": "Q49925995",
+   "charted": true,
+   "area_km2": 7.841,
+   "launches": [
+    "occohannock-creek-boat-launch-near-davis-wharf-va-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "occoquan-bay-va",
+   "name": "Occoquan Bay",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Woodbridge"
+   ],
+   "bbox": [
+    -77.27374,
+    38.59321,
+    -77.20209,
+    38.64296
+   ],
+   "wikidata": "Q49386898",
+   "charted": true,
+   "area_km2": 14.179,
+   "launches": [
+    "leesylvania-state-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "occoquan-reservoir-va",
+   "name": "Occoquan Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Lake Ridge",
+    "Manassas Park"
+   ],
+   "bbox": [
+    -77.4121,
+    38.68212,
+    -77.27626,
+    38.75243
+   ],
+   "wikidata": "Q7075727",
+   "charted": false,
+   "area_km2": 5.331,
+   "launches": [
+    "fountainhead-park-boat-launch-va",
+    "lake-ridge-marina-va",
+    "occoquan-reservoir-boat-launch-near-lake-ridge-va-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "occoquan-river-va",
+   "name": "Occoquan River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Manassas",
+    "Occoquan",
+    "Woodbridge"
+   ],
+   "bbox": [
+    -77.48872,
+    38.59204,
+    -77.20406,
+    38.73208
+   ],
+   "wikidata": "Q13846448",
+   "charted": true,
+   "area_km2": 0.374,
+   "launches": [
+    "occoquan-ada-kayak-public-access-va",
+    "occoquan-regional-park-boat-launch-va",
+    "occoquan-river-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "onancock-creek-va",
+   "name": "Onancock Creek",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Onancock"
+   ],
+   "bbox": [
+    -75.83784,
+    37.70143,
+    -75.74709,
+    37.74059
+   ],
+   "wikidata": "Q49926024",
+   "charted": true,
+   "area_km2": 7.337,
+   "launches": [
+    "onancock-town-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oyster-bay-va",
+   "name": "Oyster Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Chincoteague"
+   ],
+   "bbox": null,
+   "wikidata": "Q49387305",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "fir-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oyster-harbor-va",
+   "name": "Oyster Harbor",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Oyster"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "oyster-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pagan-river-va",
+   "name": "Pagan River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Smithfield"
+   ],
+   "bbox": [
+    -76.68012,
+    36.98298,
+    -76.51858,
+    37.05131
+   ],
+   "wikidata": "Q7124174",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "pagan-river-boat-launch-near-smithfield-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pamunkey-river-va",
+   "name": "Pamunkey River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Hanover",
+    "New Kent",
+    "Putneys Mill",
+    "West Point"
+   ],
+   "bbox": [
+    -77.40719,
+    37.51362,
+    -76.79218,
+    37.80593
+   ],
+   "wikidata": "Q2054792",
+   "charted": true,
+   "area_km2": 16.066,
+   "launches": [
+    "beach-park-va",
+    "lester-manor-va",
+    "little-page-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "paradise-creek-va",
+   "name": "Paradise Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Portsmouth"
+   ],
+   "bbox": [
+    -76.31709,
+    36.79861,
+    -76.2919,
+    36.80973
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "paradise-creek-nature-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "park-lake-va",
+   "name": "Park Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Chesterfield"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pocohontas-state-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "parker-creek-va",
+   "name": "Parker Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Accomac",
+    "Onancock"
+   ],
+   "bbox": [
+    -75.63052,
+    37.72273,
+    -75.59966,
+    37.73287
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "parker-creek-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "parting-creek-va",
+   "name": "Parting Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Willis Wharf"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "willis-wharf-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "passage-creek-va",
+   "name": "Passage Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Buckton",
+    "Strasburg"
+   ],
+   "bbox": [
+    -78.36418,
+    38.8943,
+    -78.26597,
+    38.97713
+   ],
+   "wikidata": "Q16983392",
+   "charted": false,
+   "area_km2": 0.152,
+   "launches": [
+    "passage-creek-elizabeth-furnance-rec-area-va",
+    "passage-creekroute-55-bridge-o-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "perrin-river-va",
+   "name": "Perrin River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Gloucester"
+   ],
+   "bbox": [
+    -76.4376,
+    37.26265,
+    -76.42191,
+    37.2729
+   ],
+   "wikidata": "Q7169634",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "perrin-wharf-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "philpott-lake-va",
+   "name": "Philpott Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Bassett",
+    "Dodson",
+    "Ferrum"
+   ],
+   "bbox": [
+    -80.13235,
+    36.76501,
+    -80.02692,
+    36.86789
+   ],
+   "wikidata": "Q7186307",
+   "charted": false,
+   "area_km2": 10.688,
+   "launches": [
+    "bowens-creek-boat-ramp-va",
+    "fairy-stone-state-park-va",
+    "goose-point-boat-ramp-va",
+    "horseshoe-point-boat-ramp-va",
+    "philpott-lake-boat-launch-va",
+    "philpott-park-boat-ramp-va",
+    "runnet-bag-boat-ramp-va",
+    "ryans-branch-boat-ramp-va",
+    "salthouse-branch-north-boat-ramp-va",
+    "salthouse-branch-south-boat-ramp-va",
+    "twin-ridge-park-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "piankatank-river-va",
+   "name": "Piankatank River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Deltaville",
+    "Gloucester",
+    "Hallieford",
+    "Piankatank Shores",
+    "Stampers",
+    "Thousand Trails Chesapeake Bay RV Resort"
+   ],
+   "bbox": [
+    -76.5832,
+    37.47946,
+    -76.24271,
+    37.58377
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 50.952,
+   "launches": [
+    "deep-point-va",
+    "piankatank-river-carry-in-access-near-deltaville-va",
+    "piankatank-river-carry-in-access-near-hallieford-va",
+    "roane-point-landing-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pigg-river-va",
+   "name": "Pigg River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Rocky Mount"
+   ],
+   "bbox": [
+    -80.14168,
+    36.8758,
+    -79.4815,
+    37.00585
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.447,
+   "launches": [
+    "lynch-memorial-park-va",
+    "waid-recreation-area-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "piney-river-va",
+   "name": "Piney River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Alhambra",
+    "Woodson"
+   ],
+   "bbox": [
+    -79.11792,
+    37.67641,
+    -78.96689,
+    37.79028
+   ],
+   "wikidata": "Q7195635",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "piney-river-1-4-mile-down-from-put-in-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pitts-creek-va",
+   "name": "Pitts Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Shelltown"
+   ],
+   "bbox": [
+    -75.63089,
+    37.97886,
+    -75.55316,
+    38.00502
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "pocomoke-river-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pleasure-house-creek-va",
+   "name": "Pleasure House Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -76.11183,
+    36.8964,
+    -76.09825,
+    36.90714
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.321,
+   "launches": [
+    "pleasure-house-point-natural-area-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pocomoke-river-va",
+   "name": "Pocomoke River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Shelltown"
+   ],
+   "bbox": [
+    -76.14761,
+    37.89667,
+    -75.57042,
+    38.07886
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.855,
+   "launches": [
+    "pocomoke-river-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pocomoke-sound-va",
+   "name": "Pocomoke Sound",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Bloxom",
+    "Deep Creek",
+    "Hopkins",
+    "Sanford",
+    "Saxis"
+   ],
+   "bbox": [
+    -75.9054,
+    37.73386,
+    -75.62853,
+    37.98917
+   ],
+   "wikidata": "Q7206510",
+   "charted": true,
+   "area_km2": 326.133,
+   "launches": [
+    "deep-creek-landing-va",
+    "guards-shore-launching-ramp-va",
+    "johnson-s-wharf-va",
+    "saxis-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "poquoson-river-va",
+   "name": "Poquoson River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Poquoson",
+    "York"
+   ],
+   "bbox": [
+    -76.49872,
+    37.12576,
+    -76.33402,
+    37.19602
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 16.75,
+   "launches": [
+    "poquoson-river-boat-launch-near-poquoson-va",
+    "poquoson-river-boat-launch-near-poquoson-va-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "poropotank-river-va",
+   "name": "Poropotank River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Gloucester"
+   ],
+   "bbox": [
+    -76.68636,
+    37.45264,
+    -76.64085,
+    37.49541
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.943,
+   "launches": [
+    "miller-s-landing-va",
+    "tanyard-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "potomac-river-va",
+   "name": "Potomac River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Alexandria",
+    "Arlington",
+    "Colonial Beach",
+    "Fairview Beach",
+    "Great Falls",
+    "Leesburg",
+    "Lewisetta",
+    "Loudoun Heights",
+    "Mason Neck",
+    "McLean",
+    "Stafford",
+    "Sugarland Run"
+   ],
+   "bbox": [
+    -77.727,
+    37.87065,
+    -76.16186,
+    39.32652
+   ],
+   "wikidata": "Q179444",
+   "charted": true,
+   "area_km2": 12.535,
+   "launches": [
+    "potomac-river-boat-launch-near-sugarland-run-va",
+    "balls-bluff-regional-park-va",
+    "belle-haven-boat-launch-alexandria-va",
+    "broad-run-boat-launch-va",
+    "edwards-landing-park-va",
+    "ferry-farms-george-washington-s-birth-place-va",
+    "george-washington-mem-pkwy-va",
+    "gravelly-point-boat-launch-va",
+    "great-falls-park-va",
+    "stafford-carry-in-access-va",
+    "potomac-wayside-va",
+    "conn-s-creek-boat-launch-va",
+    "scotts-run-nature-preserve-va",
+    "tarara-vineyard-va",
+    "torpedo-factory-dock-va",
+    "potomac-river-boat-launch-near-leesburg-va",
+    "westmoreland-state-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "potts-creek-va",
+   "name": "Potts Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Covington",
+    "New Castle"
+   ],
+   "bbox": [
+    -80.37974,
+    37.51853,
+    -79.99593,
+    37.75884
+   ],
+   "wikidata": "Q35272900",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "potts-creeekroute-18-east-of-paint-bank-va",
+    "potts-creek-just-prior-to-jackson-river-rt-18-bridge-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "powell-creek-va",
+   "name": "Powell Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Hopewell"
+   ],
+   "bbox": [
+    -77.17142,
+    37.17591,
+    -77.14481,
+    37.30287
+   ],
+   "wikidata": "Q21197139",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "powell-creek-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "powell-river-va",
+   "name": "Powell River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Jonesville",
+    "Pennington Gap",
+    "Wilson Hill"
+   ],
+   "bbox": [
+    -83.55449,
+    36.50527,
+    -82.63004,
+    36.98951
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beech-grove-va",
+    "flanary-bridge-va",
+    "poteet-ferry-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "powells-creek-va",
+   "name": "Powells Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Dumfries"
+   ],
+   "bbox": [
+    -77.41151,
+    38.55368,
+    -77.24578,
+    38.64437
+   ],
+   "wikidata": "Q105438376",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "powells-creek-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "powhatan-creek-va",
+   "name": "Powhatan Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "James City",
+    "Williamsburg"
+   ],
+   "bbox": [
+    -76.78972,
+    37.21133,
+    -76.75754,
+    37.29371
+   ],
+   "wikidata": "Q49926110",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "powhatan-creek-boat-launch-near-williamsburg-va-2",
+    "powhatan-creek-carry-in-access-va",
+    "powhatan-creek-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "powhatan-lakes-va",
+   "name": "Powhatan Lakes",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Smiths Crossroads"
+   ],
+   "bbox": [
+    -77.99259,
+    37.57485,
+    -77.98321,
+    37.57923
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.122,
+   "launches": [
+    "upper-powhatan-lake-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "prince-edward-lake-va",
+   "name": "Prince Edward Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Burkeville",
+    "Crewe"
+   ],
+   "bbox": [
+    -78.27602,
+    37.16875,
+    -78.2702,
+    37.175
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.105,
+   "launches": [
+    "twin-lakes-state-park-va"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017.",
+     "date": "2017-10-02",
+     "years": [
+      "2017"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "pungoteague-creek-va",
+   "name": "Pungoteague Creek",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Harborton"
+   ],
+   "bbox": [
+    -75.86579,
+    37.65407,
+    -75.78417,
+    37.68048
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.014,
+   "launches": [
+    "harborton-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "queen-s-creek-va",
+   "name": "Queen's Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "York"
+   ],
+   "bbox": [
+    -76.7014,
+    37.29224,
+    -76.58232,
+    37.30506
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "new-quarter-park-va",
+    "queen-s-creek-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rapidan-river-va",
+   "name": "Rapidan River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Dunavant",
+    "Fredericksburg"
+   ],
+   "bbox": [
+    -78.41922,
+    38.23006,
+    -77.61737,
+    38.4913
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "elys-ford-va",
+    "hunting-run-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rappahannock-river-va",
+   "name": "Rappahannock River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Bealeton",
+    "Boer",
+    "Bushy",
+    "Colonial Beach",
+    "Deltaville",
+    "Fredericksburg",
+    "King George",
+    "Naylors",
+    "Port Royal",
+    "Remington",
+    "Richardsville",
+    "Singerly"
+   ],
+   "bbox": [
+    -78.1235,
+    37.55521,
+    -76.28219,
+    38.87344
+   ],
+   "wikidata": "Q1333499",
+   "charted": true,
+   "area_km2": 366.086,
+   "launches": [
+    "belle-isle-state-park-va",
+    "carter-s-wharf-va",
+    "city-docks-va",
+    "hopyard-landing-va",
+    "kelly-s-ford-va",
+    "mill-creek-va",
+    "mill-stone-va",
+    "motts-va",
+    "old-mill-park-va",
+    "port-royal-va",
+    "port-royal-canoe-kayak-landing-va",
+    "prince-street-public-landing-va",
+    "rappahannock-river-carry-in-access-va",
+    "rappahannock-river-carry-in-access-near-remington-va",
+    "rappahannock-river-carry-in-access-near-warrenton-va",
+    "roger-s-ford-boat-ramp-va",
+    "stafford-county-boat-ramp-va",
+    "walking-tour-riverside-park-va",
+    "wilmont-boat-landing-va",
+    "windmill-point-va",
+    "windmill-point-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "red-bank-creek-va",
+   "name": "Red Bank Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Red Bank"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "red-bank-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "relic-river-james-river-va",
+   "name": "Relic River/James River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Chester"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "relic-river-james-river-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rivanna-river-va",
+   "name": "Rivanna River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Charlottesville",
+    "Crafton",
+    "Milton",
+    "Palmyra"
+   ],
+   "bbox": [
+    -78.46079,
+    37.75006,
+    -78.16284,
+    38.07403
+   ],
+   "wikidata": "Q7336992",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "crofton-va",
+    "rivanna-river-boat-launch-near-charlottesville-va-3",
+    "lewis-clarke-exploratory-center-va",
+    "palmyra-va",
+    "rivanna-river-boat-launch-near-charlottesville-va",
+    "roadside-access-near-shadwell-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "roanoke-river-va",
+   "name": "Roanoke River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Roanoke"
+   ],
+   "bbox": [
+    -80.21381,
+    36.53276,
+    -78.014,
+    37.28655
+   ],
+   "wikidata": "Q1584933",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rutrough-canoe-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rock-creek-va",
+   "name": "Rock Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Chesapeake"
+   ],
+   "bbox": [
+    -76.2572,
+    36.71961,
+    -76.25246,
+    36.72471
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.087,
+   "launches": [
+    "bells-mill-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rural-retreat-lake-va",
+   "name": "Rural Retreat Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Rural Retreat"
+   ],
+   "bbox": [
+    -81.29391,
+    36.86374,
+    -81.27324,
+    36.86885
+   ],
+   "wikidata": "Q49702542",
+   "charted": false,
+   "area_km2": 0.325,
+   "launches": [
+    "rural-retreat-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "russell-fork-va",
+   "name": "Russell Fork",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Breaks",
+    "Haysi"
+   ],
+   "bbox": [
+    -82.33183,
+    37.24339,
+    -82.29151,
+    37.30073
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "breaks-interstate-park-va",
+    "garden-hole-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sandy-river-reservoir-va",
+   "name": "Sandy River Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Farmville"
+   ],
+   "bbox": [
+    -78.32591,
+    37.21674,
+    -78.29267,
+    37.26039
+   ],
+   "wikidata": "Q7417448",
+   "charted": false,
+   "area_km2": 2.691,
+   "launches": [
+    "sandy-river-reservoir-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "severn-river-va",
+   "name": "Severn River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Gloucester",
+    "Gloucester Point"
+   ],
+   "bbox": [
+    -76.49726,
+    37.27835,
+    -76.39058,
+    37.34783
+   ],
+   "wikidata": "Q7457938",
+   "charted": true,
+   "area_km2": 14.245,
+   "launches": [
+    "brays-point-landing-va",
+    "cherry-point-landing-va",
+    "glass-point-landing-va",
+    "john-s-point-landing-va",
+    "severn-landing-va",
+    "severn-river-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shelly-bay-va",
+   "name": "Shelly Bay",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Chincoteague"
+   ],
+   "bbox": [
+    -75.4357,
+    37.91723,
+    -75.40233,
+    37.93777
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.6,
+   "launches": [
+    "queens-sound-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shenandoah-river-va",
+   "name": "Shenandoah River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Berrys",
+    "Berryville",
+    "Front Royal",
+    "Shenandoah Farms",
+    "Shenandoah Shores"
+   ],
+   "bbox": [
+    -78.18859,
+    38.94432,
+    -77.7915,
+    39.26164
+   ],
+   "wikidata": "Q777907",
+   "charted": false,
+   "area_km2": 2.443,
+   "launches": [
+    "berry-s-va",
+    "castleman-s-ferry-va",
+    "front-royal-golf-club-boat-landing-va",
+    "lockes-va",
+    "morgan-s-ford-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "slate-river-lake-va",
+   "name": "Slate River Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Appomattox"
+   ],
+   "bbox": [
+    -78.6468,
+    37.45769,
+    -78.64036,
+    37.46515
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.124,
+   "launches": [
+    "slate-river-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "smith-mountain-lake-va",
+   "name": "Smith Mountain Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Crafts Point",
+    "Eagles Roost",
+    "Foxsport",
+    "Gretna",
+    "Gross Point",
+    "Hardy Ford",
+    "Moneta",
+    "North Shore",
+    "Pelican Point",
+    "Penhook",
+    "Westlake Corner"
+   ],
+   "bbox": [
+    -79.84786,
+    36.99592,
+    -79.52031,
+    37.23686
+   ],
+   "wikidata": "Q7332083",
+   "charted": false,
+   "area_km2": 74.34,
+   "launches": [
+    "anthony-ford-va",
+    "franklin-co-park-va",
+    "hales-ford-va",
+    "hardy-ford-va",
+    "oak-grove-va",
+    "penhook-va",
+    "scruggs-va",
+    "smith-mountain-lake-boat-launch-near-north-shore-va-5",
+    "vdot-webster-road-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "smith-river-va",
+   "name": "Smith River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Bassett",
+    "Fieldale",
+    "Martinsville",
+    "Stanleytown"
+   ],
+   "bbox": [
+    -80.35157,
+    36.53318,
+    -79.7356,
+    36.85184
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bassett-trent-hill-drive-va",
+    "doe-run-dupont-road-va",
+    "fieldale-trail-river-road-va",
+    "frith-road-va",
+    "marrowbone-creek-kayak-and-canoe-access-va",
+    "mitchell-bridge-kayak-and-canoe-access-va",
+    "philpott-dam-stoneybrook-road-va",
+    "smith-river-sports-complex-canoe-access-va",
+    "south-martinsville-tensbury-road-va",
+    "stanleytown-trent-hill-drive-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-anna-river-va",
+   "name": "South Anna River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Ashland"
+   ],
+   "bbox": [
+    -78.21895,
+    37.74636,
+    -77.40719,
+    38.16827
+   ],
+   "wikidata": "Q7565992",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ground-squirrel-bridge-va",
+    "patrick-henry-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-rivanna-reservoir-va",
+   "name": "South Fork Rivanna Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Hollymead",
+    "Rio"
+   ],
+   "bbox": [
+    -78.51461,
+    38.09069,
+    -78.46757,
+    38.12996
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.138,
+   "launches": [
+    "s-fork-rivanna-resrvoir-va",
+    "south-fork-rivanna-reservoir-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-rivanna-river-va",
+   "name": "South Fork Rivanna River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Hollymead"
+   ],
+   "bbox": [
+    -78.46798,
+    38.07403,
+    -78.43985,
+    38.10476
+   ],
+   "wikidata": "Q118353124",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-fork-rivanna-river-water-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-shenandoah-river-va",
+   "name": "South Fork Shenandoah River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Alma",
+    "Bentonville",
+    "Elkton",
+    "Front Royal",
+    "Goods Mill",
+    "Island Ford",
+    "Lick Bottom Hollow",
+    "Luray",
+    "Newport",
+    "Port Republic",
+    "Rileyville",
+    "Shenandoah"
+   ],
+   "bbox": [
+    -78.80766,
+    38.29633,
+    -78.18791,
+    38.94432
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "alma-va",
+    "andy-guest-shenandoah-state-park-va",
+    "batzell-boat-launch-va",
+    "bealers-ferry-boat-launch-va",
+    "bentonville-va",
+    "elkton-va",
+    "fosters-va",
+    "front-royal-va",
+    "grove-hill-va",
+    "inskeep-va",
+    "island-ford-va",
+    "karo-va",
+    "massanutten-va",
+    "moody-boat-launch-va",
+    "newport-va",
+    "port-republic-va",
+    "river-trail-access-site-1-shenandoah-river-sp-va",
+    "river-trail-access-site-2-shenandoah-river-sp-va",
+    "river-trail-access-site-2-shenandoah-river-sp-front-royal-va",
+    "river-trail-access-site-2-shenandoah-river-sp-va-2",
+    "shenandoah-riverside-va",
+    "simpson-s-va",
+    "white-house-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-holston-lake-va",
+   "name": "South Holston Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Abingdon",
+    "Bristol",
+    "Parks Mill"
+   ],
+   "bbox": [
+    -82.10561,
+    36.48574,
+    -81.90269,
+    36.65459
+   ],
+   "wikidata": "Q7334967",
+   "charted": false,
+   "area_km2": 27.248,
+   "launches": [
+    "avens-va",
+    "washington-county-park-va",
+    "whitaker-hollow-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-river-va",
+   "name": "South River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Dooms",
+    "Grottoes",
+    "Waynesboro"
+   ],
+   "bbox": [
+    -79.20824,
+    37.96212,
+    -78.80766,
+    38.29633
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "basic-park-va",
+    "grottoes-park-va",
+    "north-park-boat-ramp-va",
+    "ridgeview-park-va",
+    "rife-park-boat-ramp-va",
+    "south-river-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "southern-branch-elizabeth-river-va",
+   "name": "Southern Branch Elizabeth River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Chesapeake"
+   ],
+   "bbox": [
+    -76.3128,
+    36.72236,
+    -76.22875,
+    36.84274
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.841,
+   "launches": [
+    "elizabeth-river-va",
+    "southern-branch-elizabeth-river-boat-launch-near-chesapeake-va-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "southern-lakes-va",
+   "name": "Southern Lakes",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.56903,
+    36.84682,
+    -76.56398,
+    36.85358
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.06,
+   "launches": [
+    "southern-lakes-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "speights-run-reservoir-va",
+   "name": "Speights Run Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.65763,
+    36.70684,
+    -76.62768,
+    36.72075
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.508,
+   "launches": [
+    "lake-speight-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "staunton-river-roanoke-river-va",
+   "name": "Staunton River / Roanoke River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Altavista",
+    "Brookneal",
+    "Browntown",
+    "Clarkton",
+    "Clover",
+    "Cove",
+    "Leesville",
+    "Long Island"
+   ],
+   "bbox": [
+    -79.40213,
+    36.69232,
+    -78.6449,
+    37.13724
+   ],
+   "wikidata": "Q1584933",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "alta-vista-va",
+    "brookneal-va",
+    "clarkton-bridge-va",
+    "clover-va",
+    "dalton-s-landing-canoe-launch-va",
+    "long-island-va",
+    "watkins-bridge-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stonehouse-lake-va",
+   "name": "Stonehouse Lake",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Fancy Hill"
+   ],
+   "bbox": [
+    -79.12645,
+    37.67215,
+    -79.11281,
+    37.67835
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.146,
+   "launches": [
+    "stone-house-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stumpy-lake-va",
+   "name": "Stumpy Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -76.16908,
+    36.7562,
+    -76.14151,
+    36.77594
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.029,
+   "launches": [
+    "stumpy-lake-natural-area-north-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swift-creek-va",
+   "name": "Swift Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Colonial Heights"
+   ],
+   "bbox": [
+    -77.64715,
+    37.27085,
+    -77.36801,
+    37.41614
+   ],
+   "wikidata": "Q7656022",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "white-bank-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "switzer-lake-va",
+   "name": "Switzer Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Bridgewater"
+   ],
+   "bbox": [
+    -79.14884,
+    38.56068,
+    -79.13709,
+    38.57325
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.405,
+   "launches": [
+    "switzer-lake-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "thalia-creek-lynnhaven-river-va",
+   "name": "Thalia Creek/Lynnhaven River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "thalia-creek-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "the-ol-swimming-hole-va",
+   "name": "The Ol' Swimming Hole",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Natural Bridge Station"
+   ],
+   "bbox": [
+    -79.48819,
+    37.61395,
+    -79.48713,
+    37.61464
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.005,
+   "launches": [
+    "glenwood-canoe-portal-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "thrasher-lake-va",
+   "name": "Thrasher Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Sandidges"
+   ],
+   "bbox": [
+    -79.14121,
+    37.67037,
+    -79.13601,
+    37.67508
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.117,
+   "launches": [
+    "thrashers-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "timberneck-creek-va",
+   "name": "Timberneck Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Gloucester"
+   ],
+   "bbox": [
+    -76.5387,
+    37.28623,
+    -76.53003,
+    37.31384
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "williams-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tinker-creek-va",
+   "name": "Tinker Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Vinton"
+   ],
+   "bbox": [
+    -79.98154,
+    37.26612,
+    -79.90403,
+    37.44608
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tinker-creek-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "totuskey-creek-va",
+   "name": "Totuskey Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Warsaw"
+   ],
+   "bbox": [
+    -76.75478,
+    37.85495,
+    -76.56161,
+    37.93275
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.633,
+   "launches": [
+    "totuskey-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upshur-bay-va",
+   "name": "Upshur Bay",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Quinby"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "quinby-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "urbanna-creek-va",
+   "name": "Urbanna Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Urbanna"
+   ],
+   "bbox": [
+    -76.59942,
+    37.61698,
+    -76.56553,
+    37.64204
+   ],
+   "wikidata": "Q49928339",
+   "charted": true,
+   "area_km2": 1.18,
+   "launches": [
+    "saluda-va",
+    "urbanna-creek-boat-launch-near-urbanna-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "virginia-inside-passage-va",
+   "name": "Virginia Inside Passage",
+   "kind": "canal",
+   "state": "VA",
+   "towns": [
+    "Cape Charles"
+   ],
+   "bbox": [
+    -75.9833,
+    37.11478,
+    -75.91871,
+    37.14791
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "eastern-shore-nwr-va",
+    "virginia-inside-passage-carry-in-access-va",
+    "wise-point-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "waller-mill-reservoir-va",
+   "name": "Waller Mill Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Williamsburg"
+   ],
+   "bbox": [
+    -76.7213,
+    37.29711,
+    -76.69471,
+    37.31662
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.73,
+   "launches": [
+    "waller-mill-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ware-river-va",
+   "name": "Ware River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Gloucester"
+   ],
+   "bbox": [
+    -76.51855,
+    37.33413,
+    -76.40203,
+    37.42296
+   ],
+   "wikidata": "Q7969254",
+   "charted": true,
+   "area_km2": 19.156,
+   "launches": [
+    "payne-s-landing-va",
+    "warehouse-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "warwick-river-va",
+   "name": "Warwick River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Newport News",
+    "Yorktown"
+   ],
+   "bbox": [
+    -76.58623,
+    37.02743,
+    -76.52119,
+    37.19566
+   ],
+   "wikidata": "Q7971177",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "warwick-river-boat-launch-near-yorktown-va",
+    "warwick-river-boat-launch-near-yorktown-va-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wayne-creek-va",
+   "name": "Wayne Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Norfolk"
+   ],
+   "bbox": [
+    -76.26984,
+    36.88385,
+    -76.24615,
+    36.89794
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lakewood-park-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-neck-creek-va",
+   "name": "West Neck Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Virginia Beach"
+   ],
+   "bbox": [
+    -76.07722,
+    36.68213,
+    -76.0323,
+    36.80356
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dozier-bridge-canoe-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-point-creek-va",
+   "name": "West Point Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "West Point"
+   ],
+   "bbox": [
+    -76.81451,
+    37.53539,
+    -76.78911,
+    37.56077
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "13th-street-kayak-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "western-branch-elizabeth-river-va",
+   "name": "Western Branch Elizabeth River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Portsmouth"
+   ],
+   "bbox": [
+    -76.4348,
+    36.78887,
+    -76.32833,
+    36.8686
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.998,
+   "launches": [
+    "western-branch-elizabeth-river-boat-launch-near-portsmouth-va-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "western-branch-reservoir-va",
+   "name": "Western Branch Reservoir",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.62934,
+    36.79168,
+    -76.58156,
+    36.8402
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.588,
+   "launches": [
+    "western-branch-boat-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "white-house-cove-va",
+   "name": "White House Cove",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Poquoson"
+   ],
+   "bbox": [
+    -76.38852,
+    37.13309,
+    -76.37278,
+    37.14632
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.391,
+   "launches": [
+    "ren-s-road-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "whites-creek-va",
+   "name": "Whites Creek",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Diggs"
+   ],
+   "bbox": [
+    -76.26454,
+    37.43651,
+    -76.25224,
+    37.45656
+   ],
+   "wikidata": "Q49395119",
+   "charted": true,
+   "area_km2": 0.682,
+   "launches": [
+    "whites-creek-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilck-s-lake-va",
+   "name": "Wilck's Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Farmville"
+   ],
+   "bbox": [
+    -78.4199,
+    37.3024,
+    -78.40856,
+    37.30592
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.135,
+   "launches": [
+    "wilck-s-lake-boat-ramp-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilcox-lake-va",
+   "name": "Wilcox Lake",
+   "kind": "reservoir",
+   "state": "VA",
+   "towns": [
+    "Petersburg"
+   ],
+   "bbox": [
+    -77.40713,
+    37.19294,
+    -77.40215,
+    37.20208
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.075,
+   "launches": [
+    "wilcox-lake-carry-in-access-va"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019.",
+     "date": "2019-10-02",
+     "years": [
+      "2019"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "willoughby-bay-va",
+   "name": "Willoughby Bay",
+   "kind": "lake",
+   "state": "VA",
+   "towns": [
+    "Hampton",
+    "Norfolk"
+   ],
+   "bbox": [
+    -76.32189,
+    36.94315,
+    -76.2645,
+    36.96623
+   ],
+   "wikidata": "Q49395215",
+   "charted": true,
+   "area_km2": 5.841,
+   "launches": [
+    "captain-s-quarters-park-va",
+    "willoughby-bay-boat-launch-near-hampton-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wills-cove-va",
+   "name": "Wills Cove",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Suffolk"
+   ],
+   "bbox": [
+    -76.51821,
+    36.84568,
+    -76.50963,
+    36.8523
+   ],
+   "wikidata": "Q49395256",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "wills-cove-carry-in-access-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilna-creek-va",
+   "name": "Wilna Creek",
+   "kind": "stream",
+   "state": "VA",
+   "towns": [
+    "Tappahannock"
+   ],
+   "bbox": [
+    -76.90036,
+    38.01317,
+    -76.89194,
+    38.01608
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "wilna-pond-launch-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "winter-harbor-va",
+   "name": "Winter Harbor",
+   "kind": "bay",
+   "state": "VA",
+   "towns": [
+    "Onemo",
+    "Sarah",
+    "Winter Harbor Haven"
+   ],
+   "bbox": [
+    -76.28948,
+    37.37025,
+    -76.24749,
+    37.4079
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.64,
+   "launches": [
+    "winter-harbor-carry-in-access-near-onemo-va",
+    "winter-harbor-carry-in-access-near-winter-harbor-haven-va",
+    "winter-harbor-landing-old-mill-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wormley-creek-va",
+   "name": "Wormley Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "York"
+   ],
+   "bbox": [
+    -76.47705,
+    37.20097,
+    -76.46627,
+    37.21479
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.419,
+   "launches": [
+    "old-wormley-creek-landing-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "york-river-va",
+   "name": "York River",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Capahosic",
+    "Gloucester",
+    "Gloucester Point",
+    "Hermitage",
+    "James City",
+    "Perrin",
+    "York",
+    "Yorktown"
+   ],
+   "bbox": [
+    -76.79218,
+    37.20071,
+    -76.32571,
+    37.51759
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 99.121,
+   "launches": [
+    "cappahosic-beach-boat-landing-va",
+    "field-s-landing-va",
+    "gloucester-point-va",
+    "machicomoco-state-park-va",
+    "oliver-landing-va",
+    "riverwalk-landing-and-fishing-pier-va",
+    "york-river-carry-in-access-va",
+    "york-river-state-park-va",
+    "yorktown-beach-and-fishing-pier-va"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "young-creek-va",
+   "name": "Young Creek",
+   "kind": "river",
+   "state": "VA",
+   "towns": [
+    "Parksley"
+   ],
+   "bbox": [
+    -75.69829,
+    37.81987,
+    -75.67914,
+    37.83634
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.673,
+   "launches": [
+    "young-creek-landing-va"
+   ],
+   "advisories": []
+  }
+ ]
+}

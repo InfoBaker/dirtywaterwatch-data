@@ -1,0 +1,46 @@
+id: "ny-dec-sprtk-page-recent-alerts"
+name: "DEC Sewage Pollution Right to Know page, 'Recent NY-Alert Notifications' view"
+url: "https://dec.ny.gov/environmental-protection/water/water-quality/sewage-pollution-right-to-know"
+homepage: "https://dec.ny.gov/environmental-protection/water/water-quality/sewage-pollution-right-to-know"
+kind: "html"
+level: "state"
+# Notes (research/ny, status candidate, verified fetched, checked 2026-11-01): The only public,
+#   no-login web surface carrying full SPRTK alert text in near real time; scrape-able but fragile
+#   and without ids.
+# Access detail (research, quoted): Server-rendered Drupal view (class c-view--sewage-notification)
+#   inside the SPRTK page; each row = <li class='c-view__row'> with a headline span, <time
+#   datetime='UTC ISO'> and the full NY-Alert message text. No JSON:API (/jsonapi 404), no view RSS,
+#   no node links per alert. Fetched 2026-11-01: 1 row (Warwick SD#1 UPDATE issued 10-31-2026
+#   20:59). Wayback snapshots (2025-10-14, 2025-10-15, 2026-01-09, 2026-01-19, 2026-04-17,
+#   2026-05-15) show 1-15 rows each, so the view lists a rolling recent window (page text says
+#   'within the last 7 days'; observed counts suggest a shorter window or row cap). Scraping is
+#   possible; page is behind a bot check for some clients (Wayback captured 403 pages several
+#   times).
+# Can fill: source_status (INITIAL/UPDATE/ENDED from headline), started_at, reported_at (Issued),
+#   published_at (time datetime), waterbody (free text), location_text, material (treated state),
+#   volume, units, estimate_flag, authority (issuer), jurisdiction, raw_record
+# Cannot fill: source_record_id (no alert id); ended_at (only as start+duration text, often
+#   'unknown'/'Ongoing'); coordinates; outfall id (only sometimes in location details, e.g. 'Kelsey
+#   CSO', 'Regulator 013A', 'SSO #005'); advice_text; valid_until; revision linkage (no shared id
+#   between initial, update and ended)
+# Waters: statewide; receiving water as typed by the notifier (openboatlaunch slugs:
+#   lake-champlain-vt, long-island-sound-ct)
+# History: rolling window only; older alerts only via Wayback snapshots or DEC Excel workbooks
+# Research notes: Compared with the DEC workbook: the headline prefix (UPDATE:/ENDED:) is not
+#   reliable; Close and Update notices from several notifiers (Kenmore, Onondaga County, Erie
+#   County, Washington County) appear with no prefix. The <time> element matched NY-Alert air time
+#   for most notices but ran exactly 1 h late for some (Auburn, Skaneateles, April 2026). The page
+#   view is a copy of NY-Alert public messages; notices flagged 'does not reach surface water' are
+#   not sent to the public (manual).
+cadence: "rows appear when notifiers file in NY-Alert; observed DEC view time equals NY-Alert 'Issued' time within seconds (some notifiers' Issued is 1 h behind during DST). Legal deadline: public within 4 h of discovery."
+license: "No licence statement on the page; DEC site 'Website and Usage Policies' apply (not quoted; https://dec.ny.gov/about/website-usage-and-policies). Data caveats on page: 'Data quality is not checked by DEC.'"
+attribution: "NYS Department of Environmental Conservation"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass", "partially_treated"]
+states: ["NY"]
+access: ["html"]
+access_detail: "Server-rendered Drupal view (class c-view--sewage-notification) inside the SPRTK page; each row = <li class='c-view__row'> with a headline span, <time datetime='UTC ISO'> and the full NY-Alert message text. No JSON:API (/jsonapi 404), no view RSS, no node links per alert. Fetched 2026-11-01: 1 row (Warwick SD#1 UPDATE issued 10-31-2026 20:59). Wayback snapshots (2025-10-14, 2025-10-15, 2026-01-09, 2026-01-19, 2026-04-17, 2026-05-15) show 1-15 rows each, so the view lists a rolling recent window (page text says 'within the last 7 days'; observed counts suggest a shorter window or row cap). Scraping is possible; page is behind a bot check for some clients (Wayback captured 403 pages several times)."
+machine_readable: false
+legal_basis: "ECL 17-0826-a; 6 NYCRR 750-2.7"
+checked: "2026-11-01"

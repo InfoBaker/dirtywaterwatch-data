@@ -1,0 +1,142 @@
+{
+ "state": "GU",
+ "name": "Guam",
+ "region": "territories",
+ "epa_region": 9,
+ "npdes_authority": "epa",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-04",
+ "law": {
+  "public_notice_duty": "unknown",
+  "summary": "EPA Region 9 issues the permits. No Guam statute or rule requiring operators to tell the public of a spill was found; Guam EPA posts beach advisories and, rarely, special advisories after bypasses. GWA reports spills to Guam EPA and EPA under a federal court order.",
+  "citations": [
+   {
+    "cite": "22 GAR ch. 5",
+    "title": "Guam Water Quality Standards",
+    "url": "https://col.guamcourts.gov/sites/default/files/22gar05.pdf",
+    "quote": null,
+    "who": "Guam EPA",
+    "channel": "beach advisories",
+    "deadline": null,
+    "threshold": "recreational bacteria standard",
+    "verified": "search_only"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours oral, 5 days written (EPA permit standard condition)",
+   "cite": "40 CFR 122.41(l)(6)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "US v. Guam Waterworks Authority (D. Guam): stipulated order and 2011 court order (search_only)"
+  ]
+ },
+ "erule": {
+  "system": "epa",
+  "sobe_events_2026_11_03": 17,
+  "public_output_url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "notes": "All 17 are the Navy's Apra Harbor system (GU0110019), not Guam Waterworks as assumed; GWA's five systems are registered with no events."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [
+   "gu-epa-sobe"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "median 3 days",
+  "history": "2024-04 to 2026-09",
+  "coordinates": "all",
+  "receiving_water": "some",
+  "start_end": "start and end",
+  "volume": true,
+  "stable_id": true,
+  "license": "US federal data",
+  "notes": "Covers one federal system only; not island-wide."
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 1,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No combined sewers."
+ },
+ "sso": {
+  "location_source": "gu-epa-sobe",
+  "feeds": [
+   "gu-epa-sobe"
+  ],
+  "notes": "Navy system only."
+ },
+ "beaches": {
+  "program": "Guam EPA Beach Watch (BEACH Act), 43 beaches weekly",
+  "source_ids": [
+   "gu-gepa-beach-status"
+  ],
+  "machine_readable": true,
+  "scope": "coastal",
+  "notes": "ArcGIS layer unreachable from here."
+ },
+ "habs": {
+  "program": "none found",
+  "source_ids": [],
+  "machine_readable": false,
+  "notes": ""
+ },
+ "advisories": {
+  "health_department_pages": [],
+  "watershed_groups": [],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "eRule"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": []
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "GWA spill reports go to regulators only",
+   "fix_level": "operator",
+   "note": ""
+  },
+  {
+   "kind": "bot_wall",
+   "what": "Guam EPA GIS server reset or 503 from this machine",
+   "fix_level": "engineering",
+   "note": "may be an outage or geo-block"
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "Guam EPA beach report contact",
+   "url": "https://epa.guam.gov/current-beach-report/",
+   "what": "Beach report questions; no list found"
+  }
+ ],
+ "readiness": {
+  "tier": "B",
+  "expected_grade": "Dated reports, delayed",
+  "first_feed": "gu-gepa-beach-status",
+  "effort": "small",
+  "rationale": "Weekly official beach advisories in an ArcGIS layer (once reachable) plus the Navy's SOBE events; nothing from the island's main utility.",
+  "order_hint": 4
+ },
+ "owner_questions": [
+  "Retry the Guam EPA GIS server from the GitHub Actions runner before deciding the first feed?"
+ ],
+ "surprise": "Guam's 17 SOBE events are the Navy's Apra Harbor wharves, not Guam Waterworks; the utility serving most of the island has filed no overflow reports with EPA's tool."
+}

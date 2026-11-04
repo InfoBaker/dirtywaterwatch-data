@@ -1,0 +1,33 @@
+id: "pa-mrwc-water-quality-dashboards"
+name: "MRWC volunteer bacteria monitoring dashboards (Merrimack main stem)"
+url: "https://merrimack.org/water-quality-monitoring-program/"
+homepage: "https://merrimack.org/water-quality-monitoring-program/"
+kind: "arcgis"
+level: "nonprofit"
+# Notes (research/community, status candidate, verified fetched, checked 2026-11-01): Only regular
+#   bacteria sampling on the Merrimack main stem from one organisation; the dashboards' feature
+#   layers are probably queryable. Probe the ArcGIS org next and ask MRWC about reuse.
+# Access detail (research, quoted): Program page fetched. ArcGIS dashboards
+#   https://merrimackriver.maps.arcgis.com/apps/dashboards/0401c85576b44f6c93a20d4c182a5e38 and
+#   .../3d6cee5113d4435e83ef53df83419992 ; underlying feature layers not yet probed. Annual report
+#   PDF
+#   https://merrimack.org/wp-content/uploads/2025/10/MRWC_2024_Water_Quality_Report_for-Digital.pdf
+# Cannot fill: all discharge fields (sampling, not events)
+# Waters: 13 main-stem sites Manchester NH to Newburyport/Salisbury MA (openboatlaunch slugs:
+#   merrimack-river-ma, merrimack-river-nh)
+# History: Dashboards: data since 2021
+# Research notes: Categorises results as 'safe' or 'unsafe' for recreation; no numeric thresholds on
+#   the page. Older report links all point to the 2024 PDF. Funded by MassBays NEP under EPA grant
+#   00A01085-0.
+cadence: "Twice monthly spring to fall, monthly in winter; posting lag not stated"
+license: "none stated"
+attribution: "Merrimack River Watershed Council"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["MA", "NH"]
+access: ["html", "arcgis"]
+access_detail: "Program page fetched. ArcGIS dashboards https://merrimackriver.maps.arcgis.com/apps/dashboards/0401c85576b44f6c93a20d4c182a5e38 and .../3d6cee5113d4435e83ef53df83419992 ; underlying feature layers not yet probed. Annual report PDF https://merrimack.org/wp-content/uploads/2025/10/MRWC_2024_Water_Quality_Report_for-Digital.pdf"
+machine_readable: null
+legal_basis: null
+checked: "2026-11-01"

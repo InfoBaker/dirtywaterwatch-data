@@ -1,0 +1,23 @@
+id: "nhdes-advisories-page"
+name: "NHDES Advisories page"
+url: "https://www.des.nh.gov/advisories"
+homepage: "https://www.des.nh.gov/advisories"
+kind: "html"
+level: "state"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): Latency statement.
+# Access detail (research, quoted): none recorded
+# Research notes: 'When fecal bacteria or cyanobacteria counts at designated public beaches are
+#   higher than the state standards, an advisory is issued to notify the public, approximately 24
+#   hours after sampling.' No sewage overflow advisories listed.
+cadence: null
+license: "none stated"
+attribution: "NHDES"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["NH"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

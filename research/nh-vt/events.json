@@ -1,0 +1,270 @@
+[
+ {
+  "event_id": "vt-2026-10-13-stjohnsbury-cso06-cso14",
+  "date": "2026-10-13",
+  "state": "VT",
+  "discharger": "St Johnsbury (WWTF facility F=15, NPDES VT0100579)",
+  "outfall": "CSO-06 (Bay Street, south of CVPS) and CSO-14 (Mill Street)",
+  "receiving_water": "Passumpsic River",
+  "water_slugs": [
+   "passumpsic-river-vt"
+  ],
+  "event_type": "cso",
+  "started_at": "2026-10-13T22:55-04:00",
+  "ended_at": "2026-10-14T01:15-04:00",
+  "volume": "75,236 gal (CSO-06) + 43,895 gal (CSO-14)",
+  "units": "gallons",
+  "notice_urls": [
+   "https://anrweb.vt.gov/DEC/WWInventory/UpdateFacilityIncident.aspx?F=15&FI=7105&option=view",
+   "https://anrweb.vt.gov/DEC/WWInventory/UpdateFacilityIncident.aspx?F=15&FI=7106&option=view",
+   "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+  ],
+  "how_reported": "Public alert ID 4298 entered 10/14/2026 9:41:15 AM (both outfalls in one alert); DEC-reviewed 'Authorized Wet Weather CSO Overflow' incident reports 7105 and 7106 (nForm HQS-9Z3H-AB97G, HQS-9Z6K-CD9SZ).",
+  "news": null,
+  "test_value": "Alert posted ~10.8 h after the reported start and ~8.4 h after the reported end; discovery time is not published, so a missed 1-hour deadline cannot be asserted. One alert maps to two incident rows. Slug caveat: passumpsic-river-vt is recorded with town Barnet (downstream of St. Johnsbury).",
+  "verified": "fetched"
+ },
+ {
+  "event_id": "vt-2026-07-28-burlington-main",
+  "date": "2026-07-28",
+  "state": "VT",
+  "discharger": "Burlington Main WWTF (F=47, VT0100153)",
+  "outfall": "Main WWTF outfall (treated, partially disinfected combined sewer overflow)",
+  "receiving_water": "Lake Champlain",
+  "water_slugs": [
+   "lake-champlain-vt"
+  ],
+  "event_type": "partially_treated",
+  "started_at": "2026-07-28T16:28-04:00",
+  "ended_at": "2026-07-28T17:30-04:00",
+  "volume": "857,200",
+  "units": "gallons",
+  "notice_urls": [
+   "https://anrweb.vt.gov/DEC/WWInventory/UpdateFacilityIncident.aspx?F=47&FI=7086&option=view",
+   "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx",
+   "https://www.wcax.com/2026/07/30/heavy-rain-creates-wastewater-plant-issue-closing-burlington-beaches/"
+  ],
+  "how_reported": "Public alert ID 4277 entered 7/28/2026 6:31:57 PM ('Burlington Main Plant', Lake Champlain); reviewed incident 7086, Nature 'Other', Point of discharge 'WWTF outfall'; city news flash and signs per WCAX.",
+  "news": "WCAX 2026-07-29 8:56 PM: Blanchard Beach, Oakledge Cove, Blodgett Access Area, Coast Guard ramp and Perkins Pier closed until 5:30 p.m. Thursday.",
+  "test_value": "Treated-but-under-disinfected CSO flow coded 'Other' rather than CSO; beach closures come from the city, not DEC; alert ~2 h after start.",
+  "verified": "fetched"
+ },
+ {
+  "event_id": "vt-2026-06-10-montpelier-cso001",
+  "date": "2026-06-10",
+  "state": "VT",
+  "discharger": "Montpelier WWTF (F=9, VT0100196)",
+  "outfall": "CSO 001 Taylor St. Bridge (also CSO 003 Bailey Ave 99,395 gal, CSO 007 10 Main St siphon 171,762 gal to North Branch, CSO 023 1,534 gal)",
+  "receiving_water": "Winooski River (and North Branch)",
+  "water_slugs": [
+   "winooski-river-vt"
+  ],
+  "event_type": "cso",
+  "started_at": "2026-06-10T17:40-04:00",
+  "ended_at": "2026-06-11T02:45-04:00",
+  "volume": "881,661 (CSO 001)",
+  "units": "gallons",
+  "notice_urls": [
+   "https://anrweb.vt.gov/DEC/WWInventory/UpdateFacilityIncident.aspx?F=9&FI=7022&option=view",
+   "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+  ],
+  "how_reported": "Public alert ID 4248 entered 6/11/2026 6:11:50 AM naming CSO 001, 003, 007, 023; reviewed CSO incident reports 7022-7024, 7026.",
+  "news": null,
+  "test_value": "Alert ~12.5 h after reported start and ~3.5 h after end; overnight event. Winooski slug's towns are Bolton/Burlington/Colchester (downstream).",
+  "verified": "fetched"
+ },
+ {
+  "event_id": "vt-2026-04-16-vergennes-cso002",
+  "date": "2026-04-16",
+  "state": "VT",
+  "discharger": "Vergennes WWTF (F=59, VT0100404)",
+  "outfall": "CSO#002 MacDonough Dr. Pump Station ('below the falls')",
+  "receiving_water": "Otter Creek",
+  "water_slugs": [
+   "otter-creek-vt"
+  ],
+  "event_type": "cso",
+  "started_at": "2026-04-16T21:00-04:00",
+  "ended_at": "2026-04-17T10:30-04:00",
+  "volume": "814,400",
+  "units": "gallons",
+  "notice_urls": [
+   "https://anrweb.vt.gov/DEC/WWInventory/UpdateFacilityIncident.aspx?F=59&FI=6986&option=view",
+   "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+  ],
+  "how_reported": "Public alerts 4227 (9:33:06 PM), 4228 (9:35:10 PM) and 4229 (10:32:54 PM, manhole 114 on South Water St) on 4/16/2026; reviewed CSO incident 6986.",
+  "news": null,
+  "test_value": "Prompt alert (~33 min); three alerts for one incident report plus a separate manhole location; EPA R1 layer names the receiving water 'Potash Brook' for VT0100404 outfall 002 while DEC says Otter Creek.",
+  "verified": "fetched"
+ },
+ {
+  "event_id": "vt-2025-09-25-rutland-cso1-5",
+  "date": "2025-09-25",
+  "state": "VT",
+  "discharger": "Rutland City WWTF (F=54, VT0100871)",
+  "outfall": "CSO #1 Calvary Cemetery (407,378 gal to Otter Creek); CSO #2 Home Plate (56,600), CSO #3/#4 Third Base (109,200), CSO #5 West Street Siphon (62,400) to East Creek",
+  "receiving_water": "Otter Creek; East Creek",
+  "water_slugs": [
+   "otter-creek-vt",
+   "east-creek-vt"
+  ],
+  "event_type": "cso",
+  "started_at": "2025-09-25T18:37-04:00",
+  "ended_at": "2025-09-25T20:31-04:00",
+  "volume": "635,578 total",
+  "units": "gallons",
+  "notice_urls": [
+   "https://anrweb.vt.gov/DEC/WWInventory/UpdateFacilityIncident.aspx?F=54&FI=6904&option=view",
+   "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+  ],
+  "how_reported": "Public alert 4175 entered 9/25/2025 4:24:11 PM (CSO 1-4) and 4176 entered 9/26/2025 7:37:16 AM (CSO 5); reviewed CSO incidents 6903-6906.",
+  "news": null,
+  "test_value": "First alert timestamp precedes every reported start time by 2+ hours (pre-emptive alert or time-entry error); second alert arrives the next morning after the overflow ended. East Creek slug (east-creek-vt) is in Orwell, a different East Creek: do NOT attach. Otter Creek slug is fine.",
+  "verified": "fetched"
+ },
+ {
+  "event_id": "vt-2026-10-23-hartford-wrj-partial",
+  "date": "2026-10-23",
+  "state": "VT",
+  "discharger": "Hartford - White River Junction WWTF (F=24)",
+  "outfall": "WWTF outfall (UV system maintenance)",
+  "receiving_water": "Connecticut River",
+  "water_slugs": [
+   "connecticut-river-vt"
+  ],
+  "event_type": "partially_treated",
+  "started_at": "2026-10-23T07:00-04:00",
+  "ended_at": null,
+  "volume": "450,000 (as of report)",
+  "units": "gallons",
+  "notice_urls": [
+   "https://anrweb.vt.gov/DEC/WWInventory/nFormSewageOverflow.aspx?S=HQS-H6FX-2GH8F",
+   "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"
+  ],
+  "how_reported": "Public alert 4299 entered 10/23/2026 2:31:22 PM; NEW incident report pending DEC review (nForm status 'In Review'), end date blank.",
+  "news": null,
+  "test_value": "Open-ended, unreviewed record: must be re-fetched until end time and volume are amended (3 business days rule) and the row moves to the reviewed table; partially treated effluent, not raw sewage.",
+  "verified": "fetched"
+ },
+ {
+  "event_id": "nh-2026-08-03-nashua-cso",
+  "date": "2026-08-03",
+  "state": "NH",
+  "discharger": "City of Nashua Wastewater (NH0100170)",
+  "outfall": "CSO 003, 004, 005, 014 (Merrimack River); 006, 007, 008, 009 (Nashua River)",
+  "receiving_water": "Merrimack River; Nashua River",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "nashua-river-nh"
+  ],
+  "event_type": "cso",
+  "started_at": "2026-08-03 (date only)",
+  "ended_at": null,
+  "volume": "~23.3 MG total (014 10.300 MG/190 min; 006 6.466/190; 007 3.196/135; 005 1.888/145; 004 1.041/175; 003 0.208/190; 008 0.166/35; 009 0.007/45)",
+  "units": "million gallons",
+  "notice_urls": [
+   "https://www.nashuanh.gov/DocumentCenter/View/11049",
+   "https://www.nashuanh.gov/392/Wastewater-Department"
+  ],
+  "how_reported": "Monthly 'History of CSO Occurrences' PDF (date, per-outfall flow MG and duration min); live banner on Wastewater page (not observed; stays 48 h after the end).",
+  "news": null,
+  "test_value": "Date-only events with duration but no start/end clock time; volume in MG; nine outfalls across two rivers.",
+  "verified": "fetched"
+ },
+ {
+  "event_id": "nh-2026-10-11-manchester-activation",
+  "date": "2026-10-11",
+  "state": "NH",
+  "discharger": "City of Manchester EPD (NH0100447)",
+  "outfall": "not stated",
+  "receiving_water": "Merrimack River / Piscataquog River (implied)",
+  "water_slugs": [
+   "merrimack-river-nh",
+   "piscataquog-river-nh"
+  ],
+  "event_type": "cso",
+  "started_at": null,
+  "ended_at": null,
+  "volume": null,
+  "units": null,
+  "notice_urls": [
+   "https://www.manchesternh.gov/Departments/Sewer-and-Stormwater/CSO/CSO-Discharge-Notification",
+   "https://www.manchesternh.gov/csomap"
+  ],
+  "how_reported": "Web notice 'City Of Manchester CSO Notification - Activation' published 10/11/2026 9:21 PM; 'No Activations for 12 Hours' published 10/12/2026 1:53 PM; next Activation 10/12/2026 3:04 PM (same text by email list). Vendor map with per-outfall times is token-gated.",
+  "news": null,
+  "test_value": "City-wide on/off notices with no outfall, time or volume; only ~10 latest posts visible, so must be snapshotted; published_at is the only time field.",
+  "verified": "fetched"
+ },
+ {
+  "event_id": "nh-2025-05-10-portsmouth-cso10a",
+  "date": "2025-05-10",
+  "state": "NH",
+  "discharger": "City of Portsmouth, Peirce Island WWTF (NH0100234)",
+  "outfall": "CSO 10A (Parrott Ave)",
+  "receiving_water": "South Mill Pond (tidal) to Piscataqua River",
+  "water_slugs": [
+   "piscataqua-river-nh"
+  ],
+  "event_type": "cso",
+  "started_at": "2025-05-10 (date only)",
+  "ended_at": null,
+  "volume": "0.055",
+  "units": "million gallons",
+  "notice_urls": [
+   "https://files.portsmouthnh.gov/files/ww/2025_5_CSO_NH0100234_1A.pdf",
+   "https://www.portsmouthnh.gov/publicworks/wastewater/combined-sewer-overflows-cso"
+  ],
+  "how_reported": "Monthly memo PDF (scanned): 'CSO 10A 05/10/2025 Volume = 0.055 MG Rain = 1.140 Inches Duration = 4.45 Hours'; monthly table on the city page; automated emails to Mailchimp subscribers (not observed).",
+  "news": null,
+  "test_value": "Only 2025 Portsmouth event; scanned PDF needs OCR; memo headers mislabeled.",
+  "verified": "fetched"
+ },
+ {
+  "event_id": "nh-2026-09-17-exeter-outfall001",
+  "date": "2026-09-17",
+  "state": "NH",
+  "discharger": "Town of Exeter WWTP (NH0100871)",
+  "outfall": "Outfall 001 (non-disinfected discharge, power outage)",
+  "receiving_water": "Squamscott River",
+  "water_slugs": [
+   "squamscott-river-nh"
+  ],
+  "event_type": "bypass",
+  "started_at": "2026-09-17T23:46-04:00",
+  "ended_at": null,
+  "volume": "488",
+  "units": "gallons",
+  "notice_urls": [
+   "https://www.exeternh.gov/publicworks/combined-sewer-sanitary-sewer-overflows"
+  ],
+  "how_reported": "Dated prose entry on the town's CSO/SSO page (2-minute duration).",
+  "news": null,
+  "test_value": "Small non-disinfection bypass, prose not table; tidal estuary feeding Great Bay.",
+  "verified": "fetched"
+ },
+ {
+  "event_id": "ma-2026-06-haverhill-spill-nh-response",
+  "date": "2026-06-30",
+  "state": "MA (NH response)",
+  "discharger": "Haverhill, MA wastewater system (MA discharger)",
+  "outfall": "not stated",
+  "receiving_water": "Merrimack River (MA reach); NH coastal beaches monitored",
+  "water_slugs": [
+   "hampton-harbor-nh"
+  ],
+  "event_type": "sso",
+  "started_at": null,
+  "ended_at": null,
+  "volume": null,
+  "units": null,
+  "notice_urls": [
+   "https://www.des.nh.gov/news-and-media/nhdes-statement-haverhill-ma-sewage-spill",
+   "https://www.nhpr.org/environment/2026-06-30/sewage-spill-merrimack-river-haverhill-mass-nh-beaches-safety-testing"
+  ],
+  "how_reported": "NHDES press statement 2026-06-30: increased testing of NH coastal beaches; 'no advisories issued and all New Hampshire coastal beaches are open'; refers public to the Healthy Swimming Mapper.",
+  "news": "NHPR 2026-06-30 (search_only).",
+  "test_value": "Cross-border: an MA event produces an NH agency statement but no NH advisory; must not be shown as an NH discharge or as an NH beach closure.",
+  "verified": "fetched"
+ }
+]

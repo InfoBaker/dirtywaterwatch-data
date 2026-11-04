@@ -1,0 +1,216 @@
+[
+ {
+  "id": "ia-spencer-city-of-stp",
+  "name": "SPENCER, CITY OF STP",
+  "state": "IA",
+  "kind": "cso",
+  "npdes_permit": "IA0021059",
+  "receiving_waters": [
+   "LITTLE SIOUX RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Spencer"
+  ],
+  "notes": "SOBE: 0 events. Iowa public notice only if DNR decides one is necessary (567 IAC 63.6(3)c).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ia-muscatine-city-of-stp",
+  "name": "MUSCATINE CITY OF STP",
+  "state": "IA",
+  "kind": "cso",
+  "npdes_permit": "IA0023434",
+  "receiving_waters": [
+   "MISSISSIPPI RIVER FROM THE WAPSIPINICON TO THE IOW"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Muscatine"
+  ],
+  "notes": "SOBE: 0 events. Iowa public notice only if DNR decides one is necessary (567 IAC 63.6(3)c).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ia-fort-madison-city-of-stp",
+  "name": "FORT MADISON CITY OF STP",
+  "state": "IA",
+  "kind": "cso",
+  "npdes_permit": "IA0027219",
+  "receiving_waters": [
+   "MISSISSIPPI RIVER NEAR FORT MADISON"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 3 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fort Madison"
+  ],
+  "notes": "SOBE: 0 events. Iowa public notice only if DNR decides one is necessary (567 IAC 63.6(3)c).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ia-clinton-city-of-stp",
+  "name": "CLINTON CITY OF STP",
+  "state": "IA",
+  "kind": "cso",
+  "npdes_permit": "IA0035947",
+  "receiving_waters": [
+   "MISSISSIPPI RIVER NEAR CLINTON"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 8 closed",
+  "notification_channel": "none found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clinton"
+  ],
+  "notes": "SOBE: 0 events. Iowa public notice only if DNR decides one is necessary (567 IAC 63.6(3)c).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ia-keokuk-city-of-stp",
+  "name": "KEOKUK CITY OF STP",
+  "state": "IA",
+  "kind": "cso",
+  "npdes_permit": "IA0042609",
+  "receiving_waters": [
+   "MISSISSIPPI RIVER NEAR FORT MADISON"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 8 closed",
+  "notification_channel": "Iowa DNR news release 2026-08-04 (bypass through a CSO outfall upstream of the Mississippi Drive boat ramp); no city channel found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Keokuk"
+  ],
+  "notes": "SOBE: 0 events. Iowa public notice only if DNR decides one is necessary (567 IAC 63.6(3)c).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ia-burlington-city-of-stp",
+  "name": "BURLINGTON CITY OF STP",
+  "state": "IA",
+  "kind": "cso",
+  "npdes_permit": "IA0043079",
+  "receiving_waters": [
+   "FLINT RIVER",
+   "Mississippi River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 3 closed",
+  "notification_channel": "none found (trade press on a 2-million-gallon Mississippi discharge)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Burlington"
+  ],
+  "notes": "SOBE: 0 events. Iowa public notice only if DNR decides one is necessary (567 IAC 63.6(3)c).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ia-des-moines-metropolitan-wrf",
+  "name": "DES MOINES METROPOLITAN WRF",
+  "state": "IA",
+  "kind": "cso",
+  "npdes_permit": "IA0044130",
+  "receiving_waters": [
+   "DES MOINES RIVER BELOW THE EAST FORK DES MOINES",
+   "DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST",
+   "NORTH RACCOON RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 20 closed",
+  "notification_channel": "Final CSO eliminated 2025 per press; EPA inventory still lists 3 open outfalls",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Des Moines"
+  ],
+  "notes": "SOBE: 0 events. Iowa public notice only if DNR decides one is necessary (567 IAC 63.6(3)c).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ia-wapello-city-of-stp",
+  "name": "WAPELLO CITY OF STP",
+  "state": "IA",
+  "kind": "cso",
+  "npdes_permit": "IA0047961",
+  "receiving_waters": [
+   "IOWA RIVER BELOW NORTH LIBERTY"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wapello"
+  ],
+  "notes": "SOBE: 0 events. Iowa public notice only if DNR decides one is necessary (567 IAC 63.6(3)c).",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ia-ottumwa-city-of-stp",
+  "name": "OTTUMWA CITY OF STP",
+  "state": "IA",
+  "kind": "cso",
+  "npdes_permit": "IA0058611",
+  "receiving_waters": [
+   "DES MOINES RIVER BELOW WHITEBREAST CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 9 open, 3 closed",
+  "notification_channel": "City Water Pollution Control page describes sewer separation; no overflow notices found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ottumwa"
+  ],
+  "notes": "SOBE: 0 events. Iowa public notice only if DNR decides one is necessary (567 IAC 63.6(3)c).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ia-waterloo",
+  "name": "City of Waterloo Water Reclamation",
+  "state": "IA",
+  "kind": "sso+bypass",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Cedar River (inferred)",
+   "Black Hawk Creek (inferred)"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "https://www.ci.waterloo.ia.us/departments/waste_management/sso_and_bypass_public_notification.php",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Waterloo"
+  ],
+  "notes": "17 events listed 2025-10-23 to 2026-10-01 with volume, duration, sign number; no receiving water.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ }
+]

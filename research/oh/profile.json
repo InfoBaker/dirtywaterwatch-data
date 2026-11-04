@@ -1,0 +1,207 @@
+{
+ "state": "OH",
+ "name": "Ohio",
+ "region": "great-lakes",
+ "epa_region": 5,
+ "npdes_authority": "state",
+ "great_lakes_basin": "part",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "partial",
+  "summary": "Ohio has no statute or rule requiring operators to tell the public about sewage discharges in general. Ohio EPA's permit rule requires permanent signs at every outfall and, for major dischargers near drinking-water intakes, notice to the water supplier as soon as practicable; operators report SSOs and bypasses to Ohio EPA within 24 hours. Lake Erie basin CSO permittees owe the federal 4-hour public notice (40 CFR 122.38); Ohio River basin CSO communities notify under their permits and consent decrees.",
+  "citations": [
+   {
+    "cite": "OAC 3745-33-08(A)(12)",
+    "title": "Permanent outfall signs",
+    "url": "https://codes.ohio.gov/assets/laws/administrative-code/authenticated/3745/0/33/3745-33-08_20251031.pdf",
+    "quote": "At each outfall authorized under the NPDES permit. Outfalls covered by this provision include, but are not limited to, discharges of process wastewater, non-contact cooling water, sewage or discharges from remediation sites, and bypass or combined sewer overflow discharges.",
+    "who": "permittee",
+    "channel": "permanent sign at the outfall",
+    "deadline": null,
+    "threshold": "outfalls accessible to the public by land or by recreational use",
+    "verified": "fetched"
+   },
+   {
+    "cite": "OAC 3745-33-08(F)(1)",
+    "title": "Notification to public water supply operators",
+    "url": "https://codes.ohio.gov/assets/laws/administrative-code/authenticated/3745/0/33/3745-33-08_20251031.pdf",
+    "quote": "will require the permittee to notify the public water supply operator as soon as practicable after a discharge begins that results from a spill, sanitary sewer overflow, bypass, upset, or combined sewer overflow that is reasonably expected to waters of the state",
+    "who": "major dischargers within 3,000 ft of a lake intake or 10 river miles upstream of an intake",
+    "channel": "public water supply operator (per notification plan)",
+    "deadline": "as soon as practicable",
+    "threshold": "major dischargers near intakes",
+    "verified": "fetched"
+   },
+   {
+    "cite": "40 CFR 122.38",
+    "title": "Great Lakes CSO public notification",
+    "url": "https://www.law.cornell.edu/cfr/text/40/122.38",
+    "quote": "initial notification ... as soon as possible but no later than four hours after becoming aware",
+    "who": "CSO permittees in the Lake Erie basin (42 on EPA's Ohio list)",
+    "channel": "per public notification plan (websites, maps, health departments)",
+    "deadline": "4 hours",
+    "threshold": "CSO discharges",
+    "verified": "inferred"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours from discovery (email or phone), SSO 5-day follow-up form; annual SSO report in STREAMS",
+   "cite": "Ohio NPDES permit Part III standard conditions; 40 CFR 122.41(l)(6) (search only)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "OH0027740",
+   "quote": "The public will be notified within four hours of a documented CSO event. (City of Toledo CSO page; permit text not fetched)",
+   "deadline": "4 hours",
+   "verified": "fetched"
+  },
+  "bills_and_cases": [
+   "No Ohio sewage-notification bill found in the 136th General Assembly (search only)."
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "Ohio takes 24-hour SSO/bypass notices by email or phone and annual SSO reports in STREAMS (eBiz); no public event output found. Ohio EPA's emergency-response spills layer is separate."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [
+   "oh-epa-spills-opendata"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "arcgis",
+  "latency": "daily",
+  "history": "2017 to date",
+  "coordinates": "all",
+  "receiving_water": "mostly NULL",
+  "start_end": "reported date only",
+  "volume": true,
+  "stable_id": true,
+  "license": "Credit 'Office of Emergency Response, Ohio Environmental Protection Agency'; no licence statement",
+  "notes": "No statewide overflow list. The Ohio EPA spills layer is statewide and daily but holds only incidents called in to the emergency hotline: 100 sewage rows in 2026 to date, no operator name, no start or end. Treat as a supplementary SSO signal."
+ },
+ "cso": {
+  "permits": 89,
+  "open_outfalls": 1032,
+  "operators_with_web_channel": 8,
+  "operators_checked": 12,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "Per operator. Lake Erie basin (42 operators listed by EPA): websites and annual notices, live maps at NEORSD, Akron, Lakewood and Clyde, event tables or PDFs at Bowling Green, Lima, Toledo. Ohio River basin: MSD Cincinnati Power BI map (hourly), Columbus overflow map (403 to us). Many small villages show only a homepage."
+ },
+ "sso": {
+  "location_source": "oh-epa-spills-opendata (points for incidents called in to Ohio EPA)",
+  "feeds": [
+   "oh-epa-spills-opendata"
+  ],
+  "notes": "SSOs are reported to Ohio EPA by email/phone; only those called to the emergency line appear publicly. Annual SSO reports are municipal PDFs."
+ },
+ "beaches": {
+  "program": "Ohio Department of Health BeachGuard (bathing beach program with local health districts and ODNR)",
+  "source_ids": [
+   "oh-odh-beachguard"
+  ],
+  "machine_readable": true,
+  "scope": "all",
+  "notes": "JSON advisories with coordinates; bacteria and HAB advisory types."
+ },
+ "habs": {
+  "program": "Ohio EPA/ODH/ODNR HAB response; recreational HAB advisories posted in BeachGuard",
+  "source_ids": [
+   "oh-odh-beachguard",
+   "oh-epa-hab-program"
+  ],
+  "machine_readable": true,
+  "notes": "ohioalgaeinfo.com redirected to a 404 on 2026-11-03."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "Local health districts post beach advisories through BeachGuard"
+  ],
+  "watershed_groups": [],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "unknown",
+  "sso_points": "state_table"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Lake Erie (MI, PA, NY, Ontario)",
+   "Ohio River (PA, WV, KY, IN)",
+   "Maumee River (IN)",
+   "Mahoning River (PA)",
+   "Great Miami and Whitewater rivers (IN)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "No statewide public record of SSO, bypass or CSO reports; 24-hour reports go to Ohio EPA by email or phone",
+   "fix_level": "legislative",
+   "note": "No Ohio statute requires public notice or state posting."
+  },
+  {
+   "kind": "map_only",
+   "what": "MSD Cincinnati CSO Activity Map is a Power BI embed (no data access); Lakewood and Clyde maps have no documented data feed",
+   "fix_level": "operator",
+   "note": "Ask for the underlying layer."
+  },
+  {
+   "kind": "bot_wall",
+   "what": "columbus.gov returned HTTP 403 to scripted requests",
+   "fix_level": "engineering",
+   "note": "Retry with WebFetch or a browser; ask the city."
+  },
+  {
+   "kind": "print_only",
+   "what": "Van Wert's CSO annual report 'available for inspection at the City Wastewater Treatment Plant ... Not available electronically.'",
+   "fix_level": "operator",
+   "note": ""
+  },
+  {
+   "kind": "no_web",
+   "what": "Many small Lake Erie basin CSO villages list only a homepage on EPA's page",
+   "fix_level": "operator",
+   "note": "40 CFR 122.38 compliance question."
+  },
+  {
+   "kind": "licence",
+   "what": "NEORSD map item: 'for display purposes only ... expressly disclaims any liability'",
+   "fix_level": "owner",
+   "note": "Display terms, not a reuse ban; credit and quote."
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "Lorain County Emergency Alerting System (linked from Elyria CSO page)",
+   "url": "https://www.cityofelyria.org/department/office-of-safety-services/lorain-county-emergency-alerting-system/",
+   "what": "County alert system; whether it carries CSO alerts not confirmed"
+  },
+  {
+   "name": "ODH BeachGuard advisory notifications",
+   "url": "https://publicapps.odh.ohio.gov/beachguardpublic/",
+   "what": "Advisory email sign-up implied by app code (acceptadvisorynotifications); not confirmed"
+  }
+ ],
+ "readiness": {
+  "tier": "B",
+  "expected_grade": "Dated reports",
+  "first_feed": "oh-neorsd-cso-notification-map",
+  "effort": "large",
+  "rationale": "No statewide overflow list. Dated, machine-readable reports exist for the biggest Lake Erie systems (NEORSD and Akron live ArcGIS layers; Bowling Green table; Toledo and Lima PDFs), so the state needs several small ingesters with snapshot state machines; elsewhere it falls back to outfalls, the rain caution and, for SSOs, the Ohio EPA spills layer.",
+  "order_hint": 3
+ },
+ "owner_questions": [
+  "Accept a per-operator Ohio build (NEORSD and Akron first), with the rest of the state shown as outfalls and the rain caution?",
+  "Use the Ohio EPA spills layer as a supplementary SSO source though it lacks operator names and end times?",
+  "Ask MSD Cincinnati for the data behind its Power BI map (Ohio's largest CSO count)?",
+  "Treat NEORSD's modeled (unmetered) outfalls as reported, or only metered ones?"
+ ],
+ "surprise": "Ohio has the most open CSO outfalls in the country, but no law requires anyone to tell the public about an overflow outside the Lake Erie basin. Cincinnati's sewer district (199 open outfalls in EPA's inventory) publishes only a Power BI picture, while Cleveland's NEORSD publishes a clean hourly ArcGIS layer."
+}

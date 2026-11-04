@@ -1,0 +1,33 @@
+id: "me-dep-cso-activity-volumes-filings"
+name: "Permittee annual 'CSO Activity and Volumes' spreadsheets filed with DEP (per event, per outfall)"
+url: "https://www.maine.gov/dep/water/cso/CSO%20Activity%20%26%20Volumes%20template.xlsx"
+homepage: "https://www.maine.gov/dep/water/cso/index.html"
+kind: "csv"
+level: "state"
+# Notes (research/me, status candidate, verified fetched, checked 2026-11-01): Best available
+#   event-level history for Maine, but only by records request; dates without times; arrives once a
+#   year.
+# Access detail (research, quoted): Template downloaded (raw/cso-activity-template.xlsx). Filled-in
+#   filings are not posted online; obtainable by Maine Freedom of Access Act (FOAA, 1 M.R.S. s.400
+#   et seq.) request to DEP. CBEP holds Portland 2015-2019 files obtained by email from PWD:
+#   https://github.com/CBEP-SoCB-Details/Casco_Bay_CSOs/tree/master/Original_Data/Portland_Data
+# Can fill: started_at (date only), ended_at (date only), source_record_id (outfall+event), volume,
+#   units, estimate_flag (block test vs metered), waterbody (via outfall)
+# Cannot fill: time of day; published_at (not published); advice_text; coordinates (join to GIS by
+#   CSO no.)
+# History: Program since early 1990s; DEP holds filings.
+# Research notes: Instructions say 'Discharge events lasting more than one day should show total
+#   volume discharged for each day.' Owner decision: whether to file a FOAA request for all 32
+#   permittees' 2023-2025 filings.
+cadence: "Annual, due March 1 for the prior year."
+license: "none stated"
+attribution: "Maine DEP (filed by each CSO permittee)"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["ME"]
+access: ["csv"]
+access_detail: "Template downloaded (raw/cso-activity-template.xlsx). Filled-in filings are not posted online; obtainable by Maine Freedom of Access Act (FOAA, 1 M.R.S. s.400 et seq.) request to DEP. CBEP holds Portland 2015-2019 files obtained by email from PWD: https://github.com/CBEP-SoCB-Details/Casco_Bay_CSOs/tree/master/Original_Data/Portland_Data"
+machine_readable: false
+legal_basis: "06-096 CMR Ch. 570 s.6 and s.7(F); MEPDES CSO special conditions"
+checked: "2026-11-01"

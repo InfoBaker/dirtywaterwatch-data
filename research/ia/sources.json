@@ -1,0 +1,493 @@
+[
+ {
+  "id": "ia-law-iac-567-63-6",
+  "name": "Iowa Admin. Code 567-63.6(455B) Bypasses and upsets (incl. public notices)",
+  "jurisdiction": "IA",
+  "operator": "Iowa Department of Natural Resources / Iowa Legislature",
+  "operator_type": "state",
+  "role": "law",
+  "event_types": [
+   "bypass",
+   "sso",
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.legis.iowa.gov/docs/iac/rule/05-14-2025.567.63.6.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Fetched raw/iac-567-63-6.pdf (ARC 9205C, IAB 5/14/25, effective 6/18/25).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "567 IAC 63.6; Iowa Code 455B",
+  "status": "used",
+  "status_reason": "Regulator report by phone within 24 hours, written report within 5 days; a public notice only if DNR decides one is necessary.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": "63.6(3) Notification of unanticipated bypass or upset and public notices (PNs). In the event that a bypass or upset occurs without prior notice having been provided pursuant to 63.6(2) or as a result of mechanical failure or acts beyond the control of the owner or operator, the owner or operator of the treatment facility or collection system shall notify the department by telephone as soon as possible but not later than 24 hours after the onset or discovery. ... c. Upon notification, the department shall determine if a PN for an unanticipated bypass is necessary. If the department determines that a PN is necessary, the owner or operator of the treatment facility or the collection system shall prepare a PN. 63.6(1): \"Bypasses from any portion of a treatment facility or from a sanitary sewer collection system designed to carry only sewage are prohibited.\""
+ },
+ {
+  "id": "ia-dnr-news-releases",
+  "name": "Iowa DNR news releases on wastewater bypasses and discharges",
+  "jurisdiction": "IA",
+  "operator": "Iowa Department of Natural Resources",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "bypass",
+   "sso",
+   "cso"
+  ],
+  "waters_covered": "statewide, events DNR chooses to announce",
+  "water_slugs": [],
+  "url": "https://www.iowadnr.gov/newsroom/news-releases",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Drupal list of dated releases (/news-release/YYYY-MM-DD/slug), 13 on the first page on 2026-11-03; no RSS found (/rss.xml and /news-releases/rss.xml 404). Sample: raw/ia-dnr-news-keokuk-2026-08-04.html. Older releases under /advisories/ (e.g. 2024-08-01 \"heavy rains lead wastewater bypasses central and southern iowa\").",
+  "machine_readable": false,
+  "sample_record": {
+   "date": "2026-08-04",
+   "title": "Wastewater discharge in Keokuk reaches Mississippi River",
+   "text": "The wastewater is being discharged through a combined sewer outfall into the Mississippi River, located east of the wastewater treatment plant. This outfall is situated upstream from the public boat ramp along Mississippi Drive. It is unknown how much wastewater has been discharged at this time. ... Downstream recreational users should take caution and avoid the area at this time."
+  },
+  "fields": [
+   "date",
+   "title",
+   "body (location, waterbody, cause, advice)"
+  ],
+  "fills_event_fields": [
+   "published_at",
+   "waterbody",
+   "location_text",
+   "advice_text",
+   "authority",
+   "event_type"
+  ],
+  "cannot_fill": [
+   "started_at (often vague)",
+   "ended_at",
+   "volume",
+   "coordinates"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Event-driven, at DNR's discretion; Keokuk notice came about a week after the bypass began.",
+  "history": "Releases tagged bypass/sewage back to 2016 (search).",
+  "license": "State of Iowa site policies; not quoted.",
+  "legal_basis": "567 IAC 63.6(3)c",
+  "status": "candidate",
+  "status_reason": "The only statewide, dated public channel for bypasses, but discretionary and sparse; needs a list poller and a keyword filter.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ia-dnr-focomp-spills",
+  "name": "Iowa DNR Field Office Compliance database: Spill Search",
+  "jurisdiction": "IA",
+  "operator": "Iowa Department of Natural Resources",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "spill",
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://programs.iowadnr.gov/focomp/Search/Spills",
+  "access": [
+   "html",
+   "csv"
+  ],
+  "access_detail": "Public search (anti-forgery token + cookie) POST /focomp/Search/SpillSearch; export endpoint /focomp/Search/SpillSearchExport. Material filter has \"Municipal wastewater\" (2786), \"Wastewater (domestic)\" (2110). 2024-01-01 to 2026-11-03: 2 municipal wastewater and 5 domestic wastewater spills (e.g. 2024-08-28 Des Moines River & Kenyon Road, Webster County, 400,000 gallons; 2024-09-18 Nashua STP, 16,000 gallons). October 2026: 27 spills, none sewage.",
+  "machine_readable": true,
+  "sample_record": {
+   "SpillNumber": "082824-MRN-1736",
+   "location": "Des Moines River & Kenyon Road",
+   "county": "Webster",
+   "received": "8/28/2024",
+   "status": "Closed",
+   "completed": "3/20/2025",
+   "material": "Wastewater (domestic)",
+   "quantity": "400000 Gallons"
+  },
+  "fields": [
+   "Spill Number",
+   "Spill Location",
+   "County",
+   "Responsible Party",
+   "Staff",
+   "Received Date",
+   "Status",
+   "Completed Date",
+   "Material",
+   "Quantity"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "reported_at",
+   "location_text",
+   "volume",
+   "authority"
+  ],
+  "cannot_fill": [
+   "started_at",
+   "ended_at",
+   "coordinates (map endpoint not tested)"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Entered by field staff; records since about 2009.",
+  "history": "~2009 to date",
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Sewage bypasses are mostly not filed as spills (7 sewage rows in three years); staff names appear in results and must never be stored.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": "Results include a staff-name column; drop it on ingest. Name-free extract of the 2024-2026 sewage rows: raw/ia-spillsearch-sewage-sanitized.csv."
+ },
+ {
+  "id": "ia-epa-sobe",
+  "name": "EPA SOBE event tables, Iowa permits",
+  "jurisdiction": "IA",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "0 Iowa event rows; 2 Iowa collection-system rows on 2026-11-03.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "Nothing from Iowa yet.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ia-waterloo-sso-notices",
+  "name": "City of Waterloo SSO and Bypass Public Notification page",
+  "jurisdiction": "IA",
+  "operator": "City of Waterloo",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.ci.waterloo.ia.us/departments/waste_management/sso_and_bypass_public_notification.php",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Fetched via WebFetch: 17 events 2025-10-23 to 2026-10-01 (13 wet-weather bypass pumping events on 2026-10-01) with date/time, location, estimated volume, duration, sample taken, warning sign number, disinfection and cause; no receiving water.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [
+   "started_at",
+   "location_text",
+   "volume",
+   "event_type"
+  ],
+  "cannot_fill": [
+   "waterbody",
+   "coordinates",
+   "ended_at (duration sometimes)"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "A model municipal notice page with one row per event; HTML only.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": "Page: \"the city is required to notify the public of a Sanitary Sewer Overflow (SSO) or Bypass event.\""
+ },
+ {
+  "id": "ia-aquia-beaches",
+  "name": "Iowa DNR AQuIA beach monitoring (weekly E. coli and microcystin, advisories)",
+  "jurisdiction": "IA",
+  "operator": "Iowa Department of Natural Resources",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "beach_advisory",
+   "beach_monitoring",
+   "hab"
+  ],
+  "waters_covered": "State park beaches (about 40) and county/city beaches",
+  "water_slugs": [],
+  "url": "https://programs.iowadnr.gov/aquia/beaches",
+  "access": [
+   "api",
+   "csv"
+  ],
+  "access_detail": "JSON API /aquia/api/v1/beaches/weekly_results/state?week=all and /countycity?week=all (empty [] off season); CSV /aquia/Programs/DownloadBeachResults/State with header siteID,name,beachClassification,owner,sampleDate,week,eColi,eColi5wGeomean,microcystin,status,comments; /aquia/api/v1/beaches/reference/statuses. Site pages /aquia/Sites/{siteID}.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [
+   "siteID",
+   "name",
+   "beachClassification",
+   "owner",
+   "sampleDate",
+   "week",
+   "eColi",
+   "eColi5wGeomean",
+   "microcystin",
+   "status",
+   "comments"
+  ],
+  "fills_event_fields": [
+   "started_at (sampleDate)",
+   "advice_text (status)",
+   "source_record_id (siteID+week)"
+  ],
+  "cannot_fill": [
+   "coordinates (site pages)"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Updated Fridays, Memorial Day to Labor Day; hotline 515-725-3434.",
+  "history": "Historic results on site pages.",
+  "license": "None stated.",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Clean JSON/CSV with both E. coli and microcystin; thresholds 235 CFU/100 mL and 8 ug/L.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ia-wwpie-permits",
+  "name": "Iowa DNR Wastewater Permit Information Exchange (WWPIE)",
+  "jurisdiction": "IA",
+  "operator": "Iowa Department of Natural Resources",
+  "operator_type": "state",
+  "role": "permits",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://catalog.data.gov/dataset/wastewater-permit-information-exchange",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Search only: active individual NPDES permits.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Permit text source for CSO notice clauses; not read.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ia-legis-cso-communities",
+  "name": "Iowa legislative document listing the nine combined-sewer communities",
+  "jurisdiction": "IA",
+  "operator": "Iowa Legislature",
+  "operator_type": "state",
+  "role": "permits",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.legis.iowa.gov/docs/publications/SD/8193.pdf",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "Search only: \"the following nine communities in Iowa have combined sewers: Des Moines, Clinton, Burlington, Wapello, Fort Madison, Keokuk, Ottumwa, Muscatine and Spencer.\"",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Matches the EPA seed exactly.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ia-des-moines-wra-cso-elimination",
+  "name": "Des Moines WRA / City of Des Moines final CSO elimination (2025)",
+  "jurisdiction": "IA",
+  "operator": "Des Moines Metropolitan Wastewater Reclamation Authority",
+  "operator_type": "utility",
+  "role": "news",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://undergroundinfrastructure.com/news/2025/may/des-moines-iowa-eliminates-final-combined-sewer-overflow-into-des-moines-river",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Search only: final CSO connection completed 2025; EPA inventory still shows 3 open outfalls on IA0044130.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Inventory likely stale for Des Moines; confirm before showing open outfalls.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ia-iowa-environmental-council-beach-recaps",
+  "name": "Iowa Environmental Council beach season recaps",
+  "jurisdiction": "IA",
+  "operator": "Iowa Environmental Council",
+  "operator_type": "nonprofit",
+  "role": "prior_art",
+  "event_types": [
+   "beach_advisory"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.iaenvironment.org/blog/iowa-environmental-voice/beach-advisories-hit-an-alltime-high-2025-monitoring-recapped",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Search only: 2025 season 158 E. coli and 12 microcystin advisories at about 40 beaches.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Annual summaries; context.",
+  "verified": "search_only",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ia-epa-cso-inventory",
+  "name": "EPA National CSO Inventory, Iowa rows",
+  "jurisdiction": "IA",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "outfalls",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "9 permits, 39 open outfalls (federal-seed.json).",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Baseline outfalls.",
+  "verified": "fetched",
+  "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "ia-echo-dmr-cso",
+  "name": "ECHO DMR CSO parameters for Iowa CSO permits",
+  "jurisdiction": "IA",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/",
+  "access": [
+   "api"
+  ],
+  "access_detail": "Not queried.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Possible monthly fallback for the nine CSO cities; unknown.",
+  "verified": "inferred",
+  "checked": "2026-11-03",
+  "notes": ""
+ }
+]

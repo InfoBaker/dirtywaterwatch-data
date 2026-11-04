@@ -1,0 +1,171 @@
+{
+ "state": "TN",
+ "name": "Tennessee",
+ "region": "ohio-valley",
+ "epa_region": 4,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "none",
+  "summary": "Permittees must report any release that could threaten health or the environment to TDEC within 24 hours and in writing within five days; SSOs are prohibited outright. No duty to tell the public was found; TDEC itself publishes the reports in its Events Report table.",
+  "citations": [
+   {
+    "cite": "Tenn. Comp. R. & Regs. 0400-40-05-.07(2)(o)",
+    "title": "Twenty-four hour reporting",
+    "url": "https://www.law.cornell.edu/regulations/tennessee/Tenn-Comp-R-Regs-0400-40-05-.07",
+    "quote": "In the case of any noncompliance, or any release (whether or not caused by improper operation and maintenance), which could cause a threat to human health or the environment, the permittee shall: 1. Report the noncompliance or release to the Commissioner within 24 hours from the time the permittee becomes aware of the circumstances.",
+    "who": "permittee",
+    "channel": "MyTDEC Forms (electronic)",
+    "deadline": "24 hours; written report within five days",
+    "threshold": "any release which could cause a threat to human health or the environment",
+    "verified": "fetched"
+   },
+   {
+    "cite": "Tenn. Comp. R. & Regs. 0400-40-05-.07(2)(n)1",
+    "title": "SSO prohibition",
+    "url": "https://www.law.cornell.edu/regulations/tennessee/Tenn-Comp-R-Regs-0400-40-05-.07",
+    "quote": "For publicly owned treatment works (POTW) or domestic wastewater treatment plants, sanitary sewer overflows, including dry-weather overflows and wet weather overflows, are prohibited.",
+    "who": "POTW",
+    "channel": null,
+    "deadline": null,
+    "threshold": null,
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours; written within 5 days",
+   "cite": "0400-40-05-.07(2)(o)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "TN0020575",
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "Nashville Metro consent decree (2009, Clean Water Nashville); Tennessee Riverkeeper suit over Nashville overflows (2019-2020, search only).",
+   "Chattanooga consent decree 1:12-cv-00245 (2013).",
+   "KUB consent decree terminated 2022.",
+   "No 2025-2026 bill on public notice found (search only)."
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": "https://dataviewers.tdec.tn.gov/dataviewers/f?p=2005:34140",
+  "notes": "MyTDEC Forms; TDEC's own Events Report is the public output. Not in EPA SOBE."
+ },
+ "statewide_feed": {
+  "exists": true,
+  "source_ids": [
+   "tn-tdec-events-report"
+  ],
+  "precision": "daily",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "about 5 days (newest event 10/29 on 11/03)",
+  "history": "2020-2021 onboarding to date (12,857 rows)",
+  "coordinates": "none in the table; the Events Map page has points (APEX AJAX, untested)",
+  "receiving_water": "none",
+  "start_end": "start date; end date and duration (end often blank)",
+  "volume": true,
+  "stable_id": false,
+  "license": "no licence; disclaimer 'informational purposes only and should not be used to determine compliance'",
+  "notes": "No CSO events (permitted discharges); Memphis absent."
+ },
+ "cso": {
+  "permits": 3,
+  "open_outfalls": 17,
+  "operators_with_web_channel": 0,
+  "operators_checked": 3,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No CSO event notice found for Nashville, Chattanooga or Clarksville; CSOs are permitted and not in the TDEC table."
+ },
+ "sso": {
+  "location_source": "TDEC Events Report addresses (geocodable); Events Map points",
+  "feeds": [
+   "tn-tdec-events-report"
+  ],
+  "notes": "Addresses are street addresses of the overflow, sometimes with trailing spaces."
+ },
+ "beaches": {
+  "program": "No state beach monitoring program found; TDEC water-contact advisories; TVA and Corps manage reservoir beaches",
+  "source_ids": [
+   "tn-tdec-bacteriological-advisories"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": "Corps beaches (Cordell Hull, Center Hill) closed by press release."
+ },
+ "habs": {
+  "program": "TDEC HAB response program (dashboard, Survey123 layer, story map)",
+  "source_ids": [
+   "tn-tdec-hab-advisory-status"
+  ],
+  "machine_readable": true,
+  "notes": "Public layer exposes reporters' contact details; use advisory fields only."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "https://www.tn.gov/content/tn/environment/program-areas/wr-water-resources/watershed-stewardship/bacteriological-and-fishing-advisories.html"
+  ],
+  "watershed_groups": [
+   "Harpeth Conservancy",
+   "Tennessee Riverkeeper"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "unknown (3 permits, 17 outfalls in EPA inventory)",
+  "sso_points": "state_table"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Cumberland River (KY)",
+   "Tennessee River (AL, MS, KY)",
+   "Mississippi River (AR, MO, KY)",
+   "Clinch and Holston (VA)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "No public notice duty; operators do not post CSO events",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "bot_wall",
+   "what": "tn.gov pages return 403 to curl (WebFetch works); the APEX viewer needs a session cookie",
+   "fix_level": "engineering",
+   "note": ""
+  },
+  {
+   "kind": "licence",
+   "what": "Events Report disclaimer: informational only, not for compliance",
+   "fix_level": "owner",
+   "note": "Quote it; it does not forbid reuse."
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "A",
+  "expected_grade": "Dated reports, delayed",
+  "first_feed": "tn-tdec-events-report",
+  "effort": "small",
+  "rationale": "One public CSV of every SSO, release and bypass since 2020, refreshed with about a five-day lag. Day precision, no receiving water (trace from geocoded address), no CSO events, Memphis missing.",
+  "order_hint": 1
+ },
+ "owner_questions": [
+  "Day-precision events: show them as dated events (yellow 72 hours from the start date) or mark them like the monthly reports?",
+  "Geocode the event address to place SSOs (no coordinates in the CSV) or scrape the Events Map points?",
+  "Raise with TDEC that its public HAB layer exposes reporters' phone numbers and emails?",
+  "Memphis has no rows: ask TDEC or the city?"
+ ],
+ "surprise": "Tennessee publishes all 12,857 sewer overflow and release reports since 2020 as a one-click CSV, yet the state's biggest city, Memphis, has no rows, and CSOs (Nashville, Chattanooga) never appear because they are permitted discharges."
+}

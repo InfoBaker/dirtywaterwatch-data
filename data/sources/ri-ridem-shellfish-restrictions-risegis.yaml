@@ -1,0 +1,27 @@
+id: "ri-ridem-shellfish-restrictions-risegis"
+name: "RIDEM Shellfish Harvest Restrictions feature service (June 2026)"
+url: "https://risegis.ri.gov/hosting/rest/services/RIDEM/Shellfish_Harvest_Restrictions_FS/FeatureServer/0"
+homepage: "https://ridemgis.maps.arcgis.com/apps/webappviewer/index.html?id=110a7a4aec914a3492117e9848fe67da"
+kind: "arcgis"
+level: "state"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Polygons for
+#   conditional areas let a closure notice be drawn; status itself is not in the layer.
+# Access detail (research, quoted): Layers: 0 Shellfishing Restriction Areas (June 2026) 117
+#   polygons; 2 Marina no-harvest; 5 Tag areas; 6 Range markers; 7 Shellfish Water Quality
+#   Monitoring (328 stations). Behind web app
+#   https://ridemgis.maps.arcgis.com/apps/webappviewer/index.html?id=110a7a4aec914a3492117e9848fe67da
+# Can fill: geometry (official affected area, by classification)
+# Cannot fill: current open/closed status of conditional areas; events
+# History: annual versions
+cadence: "annual (May/June notice)"
+license: "none stated on item (RIGIS_ADMIN)"
+attribution: "RIDEM / RIGIS"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["RI"]
+access: ["arcgis"]
+access_detail: "Layers: 0 Shellfishing Restriction Areas (June 2026) 117 polygons; 2 Marina no-harvest; 5 Tag areas; 6 Range markers; 7 Shellfish Water Quality Monitoring (328 stations). Behind web app https://ridemgis.maps.arcgis.com/apps/webappviewer/index.html?id=110a7a4aec914a3492117e9848fe67da"
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

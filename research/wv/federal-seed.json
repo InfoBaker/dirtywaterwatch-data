@@ -1,0 +1,1063 @@
+{
+ "state": "WV",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "WV0020028",
+   "permittee": "ELKINS CITY OF",
+   "city": "ELKINS",
+   "open_outfalls": 14,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "Craven Run/Leading Creek/Tygart Valley River/Monog",
+    "Tygart Valley River/Monongahela River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0020109",
+   "permittee": "TOWN OF WEST UNION",
+   "city": "WEST UNION",
+   "open_outfalls": 1,
+   "closed_outfalls": 6,
+   "receiving_waters": [
+    "Unnamed Tributary/Middle Island Creek"
+   ]
+  },
+  {
+   "npdes_permit": "WV0020125",
+   "permittee": "CITY OF CAMERON",
+   "city": "CAMERON",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "GRAVE CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "WV0020141",
+   "permittee": "CITY OF MCMECHEN",
+   "city": "MCMECHEN",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0020150",
+   "permittee": "TOWN OF MOOREFIELD",
+   "city": "MOOREFIELD",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "S Fk/South Branch Potomac"
+   ]
+  },
+  {
+   "npdes_permit": "WV0020273",
+   "permittee": "FOLLANSBEE CITY OF",
+   "city": "FOLLANSBEE",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0020621",
+   "permittee": "CITY OF MONTGOMERY",
+   "city": "MONTGOMERY",
+   "open_outfalls": 4,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Kanawha River",
+    "Morris Creek"
+   ]
+  },
+  {
+   "npdes_permit": "WV0020648",
+   "permittee": "CITY OF BENWOOD",
+   "city": "BENWOOD",
+   "open_outfalls": 7,
+   "closed_outfalls": 6,
+   "receiving_waters": [
+    "Boggs Run of Ohio River",
+    "Boggs Run/Ohio River",
+    "McMechen's Run/Ohio River",
+    "Ohio",
+    "Ohio River",
+    "UNT/Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0020681",
+   "permittee": "CITY OF MULLENS SANITERY BOARD",
+   "city": "MULLENS",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Guyandotte River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0021741",
+   "permittee": "CITY OF SMITHERS",
+   "city": "SMITHERS",
+   "open_outfalls": 3,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Kanawha River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0021750",
+   "permittee": "TOWN OF MARMET",
+   "city": "MARMET",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "KANAWHA RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0021792",
+   "permittee": "CITY OF PETERSBURG",
+   "city": "PETERSBURG",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Lunice Creek of South Potomac River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0021814",
+   "permittee": "CITY OF SISTERSVILLE",
+   "city": "SISTERSVILLE",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0021822",
+   "permittee": "CITY OF GRAFTON",
+   "city": "GRAFTON",
+   "open_outfalls": 15,
+   "closed_outfalls": 24,
+   "receiving_waters": [
+    "Three Fork Creek/Tygart Valley River/ Monongahela",
+    "Three Fork Creek/Tygart Valley River/Monongahela R",
+    "Tygart River Valley/Monongahela River",
+    "Tygart Valley River/ Monongahela River",
+    "Tygart Valley River/Monongahela River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0021857",
+   "permittee": "PHILIPPI WWTP",
+   "city": "PHILIPPI",
+   "open_outfalls": 0,
+   "closed_outfalls": 13,
+   "receiving_waters": [
+    "TYGART RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0021865",
+   "permittee": "TWON OF FARMINGTON",
+   "city": "FARMINGTON",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Buffalo Creek/Monongahela River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0021881",
+   "permittee": "CITY OF KINGWOOD",
+   "city": "KINGWOOD",
+   "open_outfalls": 3,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "CHEAT RIVER",
+    "Green Run/Cheat River",
+    "MORGAN RUN/CHEAT RIVER",
+    "Morgan Run/Cheat River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0022004",
+   "permittee": "RICHWOOD CITY OF",
+   "city": "RICHWOOD",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Cherry River/Gauley River/Kanawha River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0022039",
+   "permittee": "POINT PLEASANT WASTEWATER TREATMENT PLANT",
+   "city": "POINT PLEASANT",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "KANAWHA",
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0022063",
+   "permittee": "CITY OF PARSONS",
+   "city": "PARSONS",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SHAVERS FORK"
+   ]
+  },
+  {
+   "npdes_permit": "WV0022080",
+   "permittee": "BETHANY SANITATION BOARD",
+   "city": "BETHANY",
+   "open_outfalls": 1,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "BUFFALO CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "WV0022314",
+   "permittee": "FAYETTEVILLE WTTP",
+   "city": "FAYETTEVILLE",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MARR BRANCH"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023094",
+   "permittee": "PRINCETON SANITARY BOARD",
+   "city": "PRINCETON",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Brush Creek/Bluestone River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023116",
+   "permittee": "SOUTH CHARLESTON WASTE TREATMENT WORKS (SCWTW)",
+   "city": "SOUTH CHARLESTON",
+   "open_outfalls": 25,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "KANAWHA RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023124",
+   "permittee": "MORGANTOWN WWTP",
+   "city": "STAR CITY",
+   "open_outfalls": 40,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MONONGAHELA RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023159",
+   "permittee": "HUNTINGTON SANITARY BOARD",
+   "city": "HUNTINGTON",
+   "open_outfalls": 22,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "Fourpole Creek",
+    "Guyandotte River",
+    "Krout Creek of Twelvepole Creek",
+    "OHIO RIVER",
+    "Ohio River",
+    "Pat's Branch"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023167",
+   "permittee": "CITY OF MARTINSBURG WWTP",
+   "city": "MARTINSBURG",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Tuscarora Creek/Opequon Creek/Potomac River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023175",
+   "permittee": "CITY OF ST. ALBANS MUNICIPAL UTILITY COMMISSION",
+   "city": "ST. ALBANS",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Kanawha River/Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023183",
+   "permittee": "CITY OF BECKLEY",
+   "city": "BECKLEY",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "PINEY CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023205",
+   "permittee": "THE SANITARY BOARD OF THE CITY OF CHARLESTON",
+   "city": "CHARLESTON",
+   "open_outfalls": 55,
+   "closed_outfalls": 6,
+   "receiving_waters": [
+    "Coal Hollow/Davis Ck/Kanawha",
+    "Elk River/Kanawha River",
+    "Elk River/Kanawha/Ohio",
+    "Joplin Branch/Kanawha River",
+    "KANAWHA RIVER",
+    "Kanawha River",
+    "Rays Br/Davis Ck/Kanawha",
+    "Sugarcamp Ck/Davis Ck/Kanawha",
+    "Two mile Creek/Kanawha",
+    "UNT/Lick Branch/Kanawha",
+    "UT/Kanawha",
+    "Woodward Br/Two mile Ck/Kanawha"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023213",
+   "permittee": "PARKERSBURG UTILITY BOARD",
+   "city": "PARKERSBURG",
+   "open_outfalls": 17,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023230",
+   "permittee": "CITY OF WHEELING - WATER POLLUTION CONTROL DIVISION",
+   "city": "WHEELING",
+   "open_outfalls": 40,
+   "closed_outfalls": 130,
+   "receiving_waters": [
+    "Cadillac and Packard Avenue",
+    "Caldwell Rn/Ohio",
+    "Caldwell Run/Ohio",
+    "Caldwell Run/Ohio River",
+    "Fink Street and S Front Streets",
+    "Little Wheeling Creek/Ohio",
+    "Long Rn/Wheeling Ck/Ohio",
+    "Long Run/Wheeling Ck/Ohio",
+    "Long Run/Wheeling Creek/Ohio",
+    "Ohio",
+    "Ohio River",
+    "Wheeling Ck/Ohio",
+    "Wheeling Creek/Ohio"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023264",
+   "permittee": "CITY OF MOUNDSVILLE",
+   "city": "MOUNDSVILLE",
+   "open_outfalls": 4,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Middle Grave Creek/Grave Creek/Ohio River",
+    "OHIO RIVER",
+    "Parr Run/Little Grave Creek/Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023299",
+   "permittee": "NITRO WWTP",
+   "city": "NITRO",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Armour Creek/Kanawha River/Ohio River",
+    "Kanawha River/Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023302",
+   "permittee": "CLARKSBURG SANITARY BOARD",
+   "city": "CLARKSBURG",
+   "open_outfalls": 55,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "WEST FORK RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0023353",
+   "permittee": "CITY OF FAIRMONT",
+   "city": "FAIRMONT",
+   "open_outfalls": 33,
+   "closed_outfalls": 16,
+   "receiving_waters": [
+    "MONONGAHELA RIVER",
+    "Monongahela River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0024392",
+   "permittee": "CITY OF KEYSER",
+   "city": "KEYSER",
+   "open_outfalls": 1,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "NORTH BRANCH OF POTOMAC RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0024449",
+   "permittee": "CITY OF WESTOVER",
+   "city": "WESTOVER",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Monogahela",
+    "Monongahela"
+   ]
+  },
+  {
+   "npdes_permit": "WV0024473",
+   "permittee": "TOWN OF MARLINTON",
+   "city": "MARLINTON",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Knapps Creek"
+   ]
+  },
+  {
+   "npdes_permit": "WV0024562",
+   "permittee": "TOWN OF WAYNE",
+   "city": "WAYNE",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "TWELVEPOLE CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "WV0024589",
+   "permittee": "CITY OF WELCH",
+   "city": "HEMPHILL",
+   "open_outfalls": 2,
+   "closed_outfalls": 24,
+   "receiving_waters": [
+    "Browns Creek/Tug Fork/Big Sandy River",
+    "Elkhorn Creek/Tug Fork/Big Sandy River",
+    "Tug Fork/Big Sandy River",
+    "Tug Fork/Big Sandy River/Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0024732",
+   "permittee": "CITY OF HINTON",
+   "city": "HINTON",
+   "open_outfalls": 4,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "New River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0024848",
+   "permittee": "TOWN OF DAVIS",
+   "city": "DAVIS",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "BLACKWATER RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0024856",
+   "permittee": "CITY OF THOMAS",
+   "city": "THOMAS",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "NORTH FORK/BLACKWATER RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0025461",
+   "permittee": "BRIDGEPORT WASTEWATER TREATMENT PLANT",
+   "city": "BRIDGEPORT",
+   "open_outfalls": 10,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Ann Run / West Fork River / Monongahela River",
+    "Simpson Creek / West Fork River / Monongahela Rive"
+   ]
+  },
+  {
+   "npdes_permit": "WV0026832",
+   "permittee": "WELLSBURG CITY OF",
+   "city": "WELLSBURG",
+   "open_outfalls": 4,
+   "closed_outfalls": 6,
+   "receiving_waters": [
+    "OHIO RIVER",
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0027324",
+   "permittee": "TOWN OF MONONGAH",
+   "city": "MONONGAH",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "WEST FORK RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0027472",
+   "permittee": "NEW MARTINSVILLE",
+   "city": "NEW MARTINSVILLE",
+   "open_outfalls": 8,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "Fishing Creek/Ohio River",
+    "OHIO RIVER",
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0028088",
+   "permittee": "WESTON SAITARY BOARD",
+   "city": "WESTON",
+   "open_outfalls": 5,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Stonecoal Creek",
+    "West Fork River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0028118",
+   "permittee": "CITY OF DUNBAR SANITARY BOARD",
+   "city": "DUNBAR WV",
+   "open_outfalls": 17,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Aarons Branch/Kanawha River/Ohio River",
+    "Finney Branch/Kanawha River/Ohio River",
+    "Kanawha River/Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0029289",
+   "permittee": "BELINGTON CITY OF",
+   "city": "BELINGTON",
+   "open_outfalls": 3,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "TYGART VALLEY RIVER/Monongahela River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0032336",
+   "permittee": "CITY OF BUCKHANNON",
+   "city": "BUCKHANNON",
+   "open_outfalls": 4,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Buckhannon River/Tygart Vallery River/Monongahela",
+    "Buckhannon River/Tygart Valley River/Monongahela R",
+    "Jawbone Run/Buckhannon River/Tygart Vallery River/"
+   ]
+  },
+  {
+   "npdes_permit": "WV0033821",
+   "permittee": "CITY OF LOGAN",
+   "city": "LOGAN",
+   "open_outfalls": 7,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "GUYANDOTTE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0035637",
+   "permittee": "TOWN OF CEDAR GROVE",
+   "city": "CEDAR GROVE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "KANAWHA RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0035912",
+   "permittee": "CITY OF KENOVA",
+   "city": "KENOVA",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Big Sandy",
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0035939",
+   "permittee": "BOONE COUNTY PSD",
+   "city": "DANVILLE",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "COAL RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0054500",
+   "permittee": "CITY OF SHINNSTON",
+   "city": "SHINNSTON",
+   "open_outfalls": 10,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "WEST FORK RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0081434",
+   "permittee": "TOWN OF BARRACKVILLE",
+   "city": "BARRACKVILLE",
+   "open_outfalls": 4,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "Buffalo Creek/Monongahela River"
+   ]
+  },
+  {
+   "npdes_permit": "WV0084042",
+   "permittee": "FLATWOODS-CANOE RUN PUBLIC SERVICE DISTRICT",
+   "city": "GASSAWAY, WEST VIRGINIA",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ELK RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "WV0084310",
+   "permittee": "GREATER PAW PAW SANITARY DISTRICT",
+   "city": "RIVESVILLE",
+   "open_outfalls": 8,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Paw Paw Creek"
+   ]
+  },
+  {
+   "npdes_permit": "WV0100901",
+   "permittee": "TOWN OF NUTTER FORT",
+   "city": "NUTTER FORT",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Elk Creek"
+   ]
+  },
+  {
+   "npdes_permit": "WV0105279",
+   "permittee": "PIEDMONT CITY OF",
+   "city": "PIEDMONT",
+   "open_outfalls": 7,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "North Branch of Potomac River"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 511,
+ "plant_permits": 602,
+ "plant_permits_major": 53,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "WV0020028",
+   "permittee": "ELKINS, CITY OF",
+   "city": "ELKINS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0020273",
+   "permittee": "FOLLANSBEE, CITY OF",
+   "city": "FOLLANSBEE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WV0020281",
+   "permittee": "OAK HILL, CITY OF",
+   "city": "OAK HILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0020630",
+   "permittee": "SUMMERSVILLE, CITY OF",
+   "city": "SUMMERSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0021792",
+   "permittee": "PETERSBURG, CITY OF",
+   "city": "PETERSBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WV0021822",
+   "permittee": "GRAFTON, CITY OF",
+   "city": "GRAFTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0022349",
+   "permittee": "CHARLES TOWN, CITY OF",
+   "city": "CHARLES TOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WV0023094",
+   "permittee": "PRINCETON, CITY OF",
+   "city": "PRINCETON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023108",
+   "permittee": "WEIRTON, CITY OF",
+   "city": "WEIRTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023116",
+   "permittee": "SOUTH CHARLESTON SANITARY BOARD",
+   "city": "SOUTH CHARLESTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023124",
+   "permittee": "MORGANTOWN, CITY OF",
+   "city": "STAR CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023141",
+   "permittee": "BLUEFIELD SANITARY BOARD",
+   "city": "BLUEFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023159",
+   "permittee": "HUNTINGTON, CITY OF",
+   "city": "HUNTINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023167",
+   "permittee": "MARTINSBURG, CITY OF",
+   "city": "MARTINSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023175",
+   "permittee": "SAINT ALBANS, CITY OF",
+   "city": "ST. ALBANS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023183",
+   "permittee": "BECKLEY, CITY OF",
+   "city": "BECKLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023205",
+   "permittee": "SANITARY BOARD OF THE CITY OF CHARLESTON",
+   "city": "CHARLESTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023213",
+   "permittee": "PARKERSBURG UTILITY BOARD",
+   "city": "PARKERSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023230",
+   "permittee": "WHEELING, CITY OF, WATER POLLUTION CONTROL DIVISION",
+   "city": "WHEELING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023264",
+   "permittee": "MOUNDSVILLE, CITY OF",
+   "city": "MOUNDSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023299",
+   "permittee": "WEST VIRGINIA AMERICAN WATER",
+   "city": "NITRO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023302",
+   "permittee": "CLARKSBURG SANITARY BD",
+   "city": "CLARKSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0023353",
+   "permittee": "FAIRMONT, CITY OF",
+   "city": "FAIRMONT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0024236",
+   "permittee": "RONCEVERTE, CITY OF",
+   "city": "RONCEVERTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0024392",
+   "permittee": "KEYSER, CITY OF",
+   "city": "KEYSER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0024589",
+   "permittee": "WELCH, CITY OF",
+   "city": "HEMPHILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0025461",
+   "permittee": "BRIDGEPORT, CITY OF",
+   "city": "BRIDGEPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0025925",
+   "permittee": "BRADLEY PSD",
+   "city": "BRADLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0026271",
+   "permittee": "WILLIAMSON, CITY OF",
+   "city": "WILLIAMSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0026832",
+   "permittee": "WELLSBURG, CITY OF",
+   "city": "WELLSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0027472",
+   "permittee": "NEW MARTINSVILLE, CITY OF",
+   "city": "NEW MARTINSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0027707",
+   "permittee": "WARM SPRINGS PSD",
+   "city": "BERKELEY SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0027740",
+   "permittee": "NORTH BECKLEY PSD",
+   "city": "BECKLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0028088",
+   "permittee": "WESTON SANITARY BOARD",
+   "city": "WESTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0028118",
+   "permittee": "DUNBAR, CITY OF",
+   "city": "DUNBAR WV",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0028151",
+   "permittee": "HURRICANE, CITY OF",
+   "city": "HURRICANE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0032336",
+   "permittee": "BUCKHANNON, CITY OF",
+   "city": "BUCKHANNON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0032590",
+   "permittee": "LUBECK PSD",
+   "city": "WASHINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0034991",
+   "permittee": "KANAWHA FALLS PSD",
+   "city": "DEEPWATER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WV0037486",
+   "permittee": "UNION PSD",
+   "city": "NITRO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0038776",
+   "permittee": "KANAWHA PSD",
+   "city": "CHEYLAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0040525",
+   "permittee": "GREENBRIER COUNTY PSD NO. 2",
+   "city": "RAINELLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0045543",
+   "permittee": "RIPLEY, CITY OF",
+   "city": "RIPLEY, WV",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0050610",
+   "permittee": "MALDEN PSD",
+   "city": "CHARLESTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0080403",
+   "permittee": "SHADY SPRING PSD",
+   "city": "GLEN MORGAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0080900",
+   "permittee": "ELK VALLEY PSD",
+   "city": "ELKVIEW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0082309",
+   "permittee": "CRAB ORCHARD MACARTHUR PSD",
+   "city": "MACARTHUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0082627",
+   "permittee": "GREEN VALLEY-GLENWOOD PSD",
+   "city": "PRINCETON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0082759",
+   "permittee": "BERKELEY COUNTY PSSD",
+   "city": "MARTINSBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "WV0084000",
+   "permittee": "WHITE SULPHUR SPRINGS, CITY OF",
+   "city": "WHITE SULPHUR SPRINGS, WV 24986",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0084450",
+   "permittee": "SALT ROCK SEWER PSD",
+   "city": "ONA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0105171",
+   "permittee": "LOGAN COUNTY PSD",
+   "city": "PEACH CREEK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "WV0106038",
+   "permittee": "MOOREFIELD/HARDY COUNTY WASTEWATER AUTHORITY",
+   "city": "MOOREFIELD",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

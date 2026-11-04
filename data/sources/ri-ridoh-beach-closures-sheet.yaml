@@ -1,0 +1,32 @@
+id: "ri-ridoh-beach-closures-sheet"
+name: "RIDOH 2026 beach advisories (closures) - Google Sheet behind health.ri.gov/beaches"
+url: "https://docs.google.com/spreadsheets/d/1KXdH37xHUPrjJSEkryquPQ2GaP-R_9Gl5NkZrUnAjjU/gviz/tq?tqx=out:csv&gid=828265472"
+homepage: "https://docs.google.com/spreadsheets/d/1KXdH37xHUPrjJSEkryquPQ2GaP-R_9Gl5NkZrUnAjjU/gviz/tq?tqx=out:csv&gid=828265472"
+kind: "csv"
+level: "state"
+# Notes (research/ri, status used, verified fetched, checked 2026-11-01): The actual source of
+#   RIDOH's closure list, reachable without Cloudflare; best beach feed.
+# Access detail (research, quoted): The beaches page draws its table with Google Visualization from
+#   spreadsheet key 1KXdH37xHUPrjJSEkryquPQ2GaP-R_9Gl5NkZrUnAjjU gid=828265472 (range A:E). gviz
+#   CSV/JSON works with no auth. Other tabs: gid 6 (2026 with FW/SW), gid 29002208 (history
+#   2000-present, 1,097 rows), gid 1 (closure days and rainfall by year), gid 1824999970 (notes).
+# Can fill: waterbody/location_text (Beach, City/Town), started_at (Closed On, date), ended_at
+#   (Re-Opened), source_status (open row = still closed), authority
+# Cannot fill: cause; bacteria value; coordinates (join to RIDOHGIS_Beaches_View by name); times
+# Waters: Licensed salt and fresh beaches (openboatlaunch slugs: narragansett-bay-ri,
+#   sakonnet-river-ri, warren-river-ri, greenwich-cove-ri)
+# History: 2000-present in gid 29002208 (2025 rows lack reopen dates).
+# Research notes: Sheet is an informal back end; RIDOH could change key or sharing at any time.
+#   Cyanobacteria closures are mixed in with '(Cyanobacteria Advisory)' in the name.
+cadence: "Edited by RIDOH when advisories are issued/lifted during the season (Memorial Day to Labor Day; 2026 monitoring ended per feed 2026-09-23). Typing errors present (e.g., 'Wawick', reopen '8/7/2027')."
+license: "none stated (Google Sheet published for the web page); RI.gov policies apply to health.ri.gov."
+attribution: "RI Department of Health Beach Monitoring Program"
+enabled: true
+role: "advisories"
+event_types: ["beach_closure", "cyanobacteria_advisory"]
+states: ["RI"]
+access: ["csv", "html"]
+access_detail: "The beaches page draws its table with Google Visualization from spreadsheet key 1KXdH37xHUPrjJSEkryquPQ2GaP-R_9Gl5NkZrUnAjjU gid=828265472 (range A:E). gviz CSV/JSON works with no auth. Other tabs: gid 6 (2026 with FW/SW), gid 29002208 (history 2000-present, 1,097 rows), gid 1 (closure days and rainfall by year), gid 1824999970 (notes)."
+machine_readable: true
+legal_basis: "216-RICR-50-10-3 § 3.4.11(B) (60 cfu/100 ml BAV)"
+checked: "2026-11-01"

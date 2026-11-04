@@ -1,0 +1,257 @@
+{
+ "state": "NE",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "NE0133680",
+   "permittee": "OMAHA COMBINED SEWER OVERFLOWS",
+   "city": "OMAHA",
+   "open_outfalls": 25,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Blood Creek to Big Papillion Creek",
+    "Cole Creek",
+    "Little Papillion Creek",
+    "Missouri River",
+    "Outfall channel to Missouri River",
+    "Outfall channel to Missouri River."
+   ]
+  }
+ ],
+ "cso_open_outfalls": 25,
+ "plant_permits": 323,
+ "plant_permits_major": 33,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "NE0020915",
+   "permittee": "Beatrice WWTF",
+   "city": "BEATRICE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0021121",
+   "permittee": "PLATTSMOUTH WWTF",
+   "city": "PLATTSMOUTH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NE0021148",
+   "permittee": "FALLS CITY WWTF",
+   "city": "FALLS CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0021245",
+   "permittee": "NEBRASKA CITY WWTF",
+   "city": "NEBRASKA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0021482",
+   "permittee": "Blair WWTF",
+   "city": "BLAIR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0021504",
+   "permittee": "MCCOOK WWTF",
+   "city": "MCCOOK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0023876",
+   "permittee": "Seward WWTF",
+   "city": "SEWARD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NE0023884",
+   "permittee": "SIDNEY WWTF",
+   "city": "SIDNEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0024384",
+   "permittee": "FAIRBURY WWTF",
+   "city": "FAIRBURY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0024406",
+   "permittee": "WAVERLY WWTF",
+   "city": "WAVERLY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0027260",
+   "permittee": "BROKEN BOW WWTF",
+   "city": "BROKEN BOW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0027936",
+   "permittee": "GERING WWTF",
+   "city": "GERING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0029297",
+   "permittee": "Gibbon WWTF",
+   "city": "GIBBON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NE0030911",
+   "permittee": "TECUMSEH WWTF",
+   "city": "TECUMSEH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0031381",
+   "permittee": "Fremont WWTF",
+   "city": "FREMONT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0031810",
+   "permittee": "AURORA WWTF",
+   "city": "AURORA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0032891",
+   "permittee": "North Platte WWTF",
+   "city": "NORTH PLATTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0033421",
+   "permittee": "NORFOLK WWTF",
+   "city": "NORFOLK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0034304",
+   "permittee": "Crete WWTF",
+   "city": "CRETE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0035025",
+   "permittee": "Columbus WWTF",
+   "city": "COLUMBUS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0036307",
+   "permittee": "BELLEVUE WWTF #1",
+   "city": "BELLEVUE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "NE0036315",
+   "permittee": "SCOTTSBLUFF WWTF",
+   "city": "SCOTTSBLUFF",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0036358",
+   "permittee": "OMAHA MISSOURI RIVER WWTF",
+   "city": "OMAHA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0036820",
+   "permittee": "Lincoln Theresa Street Water Resource Recovery Facility",
+   "city": "LINCOLN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0038946",
+   "permittee": "Hastings Pollution Control",
+   "city": "HASTINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0040045",
+   "permittee": "Ogallala WWTF",
+   "city": "OGALLALA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0040932",
+   "permittee": "YORK WWTF",
+   "city": "YORK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0042668",
+   "permittee": "LEXINGTON WWTF",
+   "city": "LEXINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0043702",
+   "permittee": "Grand Island WWTF",
+   "city": "GRAND ISLAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "NE0052647",
+   "permittee": "KEARNEY WWTF",
+   "city": "KEARNEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0112488",
+   "permittee": "Lincoln Northeast Water Resource Recovery Facility",
+   "city": "LINCOLN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0112810",
+   "permittee": "OMAHA PAPILLION CREEK WWTF",
+   "city": "OMAHA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "NE0139904",
+   "permittee": "City of South Sioux City",
+   "city": "SOUTH SIOUX CITY",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

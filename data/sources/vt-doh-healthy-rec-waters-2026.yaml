@@ -1,0 +1,24 @@
+id: "vt-doh-healthy-rec-waters-2026"
+name: "Vermont Department of Health, Healthy Recreational Waters Guidance (April 2026)"
+url: "https://www.healthvermont.gov/sites/default/files/document/env-rw-healthy-recreational-waters-guidance.pdf"
+homepage: "https://www.healthvermont.gov/sites/default/files/document/env-rw-healthy-recreational-waters-guidance.pdf"
+kind: "pdf"
+level: "state"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): 235 guidance value;
+#   rain notice >½ inch for ≥24 h; 'A result below the guidance does not necessarily mean that the
+#   water is 100% safe.'; results '18 to 24 hours after sampling'.
+# Access detail (research, quoted): Raw copy
+#   research/science/raw/dl-nne/vt-doh/env-rw-healthy-recreational-waters-guidance.pdf (downloaded
+#   2026-11-01 by NNE sub-researcher; text read by lead)
+cadence: null
+license: "none stated"
+attribution: "Vermont Department of Health"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["VT"]
+access: ["pdf"]
+access_detail: "Raw copy research/science/raw/dl-nne/vt-doh/env-rw-healthy-recreational-waters-guidance.pdf (downloaded 2026-11-01 by NNE sub-researcher; text read by lead)"
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

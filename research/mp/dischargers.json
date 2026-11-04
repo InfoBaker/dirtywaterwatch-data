@@ -1,0 +1,24 @@
+[
+ {
+  "id": "mp-cuc",
+  "name": "Commonwealth Utilities Corporation (Sadog Tasi and Agingan plants, Saipan)",
+  "state": "MP",
+  "kind": "sso",
+  "npdes_permit": "MP0020010 (Sadog Tasi); MP0020028 (Agingan)",
+  "receiving_waters": [
+   "Tanapag Harbor",
+   "Philippine Sea"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "none found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Saipan"
+  ],
+  "notes": "Collection systems registered in SOBE (20,000 and 18,400 people), no events. MP0020371 Managaha Island plant (Dept of Public Lands) also registered.",
+  "verified": "search_only",
+  "checked": "2026-11-04"
+ }
+]

@@ -1,0 +1,24 @@
+id: "umass-wrrc-2010-rapid-response"
+name: "Schoen 2010, Rapid Response Water Quality Monitoring and Public Awareness – Final Report (UMass WRRC for PVPC, Tri-State CT River Targeted Watershed Initiative)"
+url: "https://relicensing.greatriverhydro.com/wp-content/uploads/simple-file-list/Public-Information-Library/Supporting-Study-Reports-and-Documents/Geology-and-Soils_Water-Resources_River-Basin-Description/Schoen-2010-Rapid-Response-Water-Quality.pdf"
+homepage: "https://relicensing.greatriverhydro.com/wp-content/uploads/simple-file-list/Public-Information-Library/Supporting-Study-Reports-and-Documents/Geology-and-Soils_Water-Resources_River-Basin-Description/Schoen-2010-Rapid-Response-Water-Quality.pdf"
+kind: "pdf"
+level: "academic"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): Only Connecticut
+#   River study found with wet/dry exceedance rates for Holyoke–Chicopee–Springfield; 2008–2009
+#   data.
+# Access detail (research, quoted): none recorded
+# Waters: n/a (science/guidance) (openboatlaunch slugs: connecticut-river-ma, connecticut-river-nh)
+# History: 2008–2009 seasons
+cadence: null
+license: "none stated"
+attribution: "University of Massachusetts Water Resources Research Center"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["MA", "NH", "VT"]
+access: ["pdf"]
+access_detail: ""
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

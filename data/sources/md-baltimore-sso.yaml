@@ -1,0 +1,24 @@
+id: "md-baltimore-sso"
+name: "Baltimore City DPW Sewer Overflow Map (SSO_Points2 map service)"
+url: "https://experience.arcgis.com/experience/f064b1b0addd4017ac179f1652e182e0"
+homepage: "https://www.baltimorecity.gov/publicworks/interactive-maps"
+kind: "api"
+level: "municipal"
+# Feed row: the source id written by the ingester pipeline/ingest/md_baltimore_sso.py
+#   (data/build/events/md-baltimore-sso.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/md_baltimore_sso.py docstring): hourly (a record started at 12:20 was on
+#   the layer the same day); the layer keeps about four months, so the events file keeps the history.
+cadence: "1 hour"
+license: "None stated (copyrightText empty; the interactive-maps page links terms not read)."
+attribution: "Baltimore City Department of Public Works"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["MD"]
+registry_ids: ["md-baltimore-dpw-sso-map"]
+access: ["arcgis"]
+access_detail: "https://dpwdata.baltimorecity.gov/pubgis/rest/services/Public/SSO_Points2/MapServer/0/query?where=1%3D1&outFields=*&f=json (no auth). Date fields hold local wall-clock time stored as UTC."
+machine_readable: true
+legal_basis: "COMAR 26.08.10; Modified Consent Decree (Civil Action JFM-02-1524)"
+checked: "2026-11-02"

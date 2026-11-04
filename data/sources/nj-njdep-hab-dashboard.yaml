@@ -1,0 +1,38 @@
+id: "nj-njdep-hab-dashboard"
+name: "NJDEP Harmful Algal Bloom (HAB) Dashboard and its public feature service 'NJDEP_Production_HAB_Sampling_2021_public'"
+url: "https://www.arcgis.com/home/item.html?id=49190166531d4e5a811c9a91e4a41677"
+homepage: "https://www.arcgis.com/home/item.html?id=49190166531d4e5a811c9a91e4a41677"
+kind: "arcgis"
+level: "state"
+# Notes (research/nj, status candidate, verified fetched, checked 2026-11-02): Clean ArcGIS feed
+#   with tiers and coordinates; secondary to sewage but in scope as an advisory layer.
+# Access detail (research, quoted): Dashboard item 49190166531d4e5a811c9a91e4a41677 -> web map
+#   2d2c6469bba143bf9b3487170c9904aa -> layer 'HAB Alert Level' =
+#   https://services1.arcgis.com/QWdNfRs7lkPq4g4Q/arcgis/rest/services/NJDEP_Production_HAB_Sampling_2021_public/FeatureServer/0
+#   (HAB_sample_table, points, no auth). Query used: where=sitevisitdate>=date
+#   '2026-06-01'&orderByFields=sitevisitdate DESC. Also a mobile dashboard
+#   (7b91233096fc4b9ea5ef2de1a2280359) and an older public view
+#   (NJDEP_Production_HAB_Sampling_public).
+# Can fill: event_type (advisorytier), started_at (sitevisitdate), source_updated_at (EditDate),
+#   published_at (advistorytrigdt, inferred), coordinates, waterbody, jurisdiction
+# Cannot fill: ended_at (tier changes are new rows); advice_text (tiers only)
+# Waters: Freshwater lakes and reservoirs statewide, sampled in response to reports (2,304 site
+#   visits 2020-04-29 to 2026-10-28) (openboatlaunch slugs: manasquan-reservoir-nj,
+#   spruce-run-reservoir-nj, lake-hopatcong-nj, swartswood-lake-nj)
+# History: 2020-04-29 onward in this layer; 2019 locations layer separate.
+# Research notes: Raw: raw/hab/. Related NJDEP items: HAB Coastal Monitoring Sites (mapsdep
+#   Environmental_mon_water MapServer/37 and results table /38), Phytoplankton Monitoring Network,
+#   aircraft chlorophyll/phycocyanin pages used by njbeaches.org
+#   (njdep.rutgers.edu/aircraft/action_one_latest.php).
+cadence: "Rows added within 1-2 days of sampling in season (e.g. visit 10-27, edit 10-29). Since 2026-06-01: 289 visits; tiers HAB Not Present 180, Advisory 55, Watch 51, Warning 2, Danger 1."
+license: "Item terms: 'This map is provided for information purposes only and is not monitored 24/7 for accuracy and currency.' plus the NJDEP Data Distribution Agreement (data 'provided, as is'; 'may not be reproduced or redistributed without all the metadata provided'; products 'will credit the NJDEP's Geographic Information System')."
+attribution: "NJDEP Division of Water Monitoring, Standards and Pesticide Control (HAB program)"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["NJ"]
+access: ["arcgis"]
+access_detail: "Dashboard item 49190166531d4e5a811c9a91e4a41677 -> web map 2d2c6469bba143bf9b3487170c9904aa -> layer 'HAB Alert Level' = https://services1.arcgis.com/QWdNfRs7lkPq4g4Q/arcgis/rest/services/NJDEP_Production_HAB_Sampling_2021_public/FeatureServer/0 (HAB_sample_table, points, no auth). Query used: where=sitevisitdate>=date '2026-06-01'&orderByFields=sitevisitdate DESC. Also a mobile dashboard (7b91233096fc4b9ea5ef2de1a2280359) and an older public view (NJDEP_Production_HAB_Sampling_public)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

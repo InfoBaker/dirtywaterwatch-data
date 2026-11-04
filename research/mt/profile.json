@@ -1,0 +1,164 @@
+{
+ "state": "MT",
+ "name": "Montana",
+ "region": "mountain",
+ "epa_region": 8,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "none",
+  "summary": "No Montana statute, rule or permit clause found that requires public notice of a sewage overflow. Permittees report to DEQ orally within 24 hours and in writing within five days on DEQ's SSO form; the reports stay with DEQ.",
+  "citations": [
+   {
+    "cite": "MPDES permit MT0020168 Part II.I",
+    "title": "Twenty-four Hour Notice of Noncompliance Reporting",
+    "url": "https://deq.mt.gov/files/Water/WPB/MPDES/MMPermits/MT0020168PER.pdf",
+    "quote": "The permittee shall report any serious incident of noncompliance affecting the environment as soon as possible, but no later than twenty-four (24) hours from the time the permittee first became aware of the circumstances.",
+    "who": "permittee",
+    "channel": "Water Protection Bureau or Disaster and Emergency Services (regulator only)",
+    "deadline": "24 hours oral; 5 days written",
+    "threshold": "noncompliance which may seriously endanger health or the environment; unanticipated bypass",
+    "verified": "fetched"
+   },
+   {
+    "cite": "ARM 17.30.1342(12)(f)(i)",
+    "title": "Five-day written report (named on DEQ's SSO form)",
+    "url": "https://deq.mt.gov/files/Water/Forms/SanitarySewerOverflow.pdf",
+    "quote": "The submittal of this form will fulfill the five day written report requirement for your permit and Administrative Rules of Montana (ARM) 17.30.1342(12)(f)(i)",
+    "who": "municipalities with an SSO",
+    "channel": "DEQ only",
+    "deadline": "5 days after the 24-hour oral report",
+    "threshold": "any SSO",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours oral, 5 days written",
+   "cite": "ARM 17.30.1342(12)(f); MPDES permit Part II.I"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "None found (search only)."
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "No Montana rows in SOBE; DEQ's own paper/PDF SSO form."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": "none",
+  "receiving_water": "none",
+  "start_end": "none",
+  "volume": false,
+  "stable_id": false,
+  "license": null,
+  "notes": "No public list of reported overflows or spills that include sewage found."
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 0,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No CSOs."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [],
+  "notes": "SSO reports go to the state agency only."
+ },
+ "beaches": {
+  "program": "None found",
+  "source_ids": [
+   "mt-beach-ecoli"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": ""
+ },
+ "habs": {
+  "program": "DPHHS/DEQ HAB reports and advisories map (HAB.mt.gov)",
+  "source_ids": [
+   "mt-hab-map",
+   "mt-deq-hab-storymap"
+  ],
+  "machine_readable": false,
+  "notes": "Service behind the map not traced."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "County health departments (not searched)"
+  ],
+  "watershed_groups": [
+   "Clark Fork Coalition (not searched)"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Missouri River (ND)",
+   "Yellowstone River (WY, ND)",
+   "Kootenai River and Lake Koocanusa (ID, British Columbia)",
+   "Flathead River (British Columbia)",
+   "Clark Fork (ID)",
+   "Bighorn River and Bighorn Lake (WY)",
+   "Milk River (Alberta, Saskatchewan)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "No public notice duty; SSO reports go to DEQ on a form and are not published",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "records_request",
+   "what": "SSO event forms obtainable only by records request (DEQ records coordinator)",
+   "fix_level": "agency",
+   "note": ""
+  },
+  {
+   "kind": "image_only",
+   "what": "Some permits (Missoula MT0022594) are scanned images",
+   "fix_level": "agency",
+   "note": ""
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "D",
+  "expected_grade": "No public reports",
+  "first_feed": null,
+  "effort": "small",
+  "rationale": "No overflow feed, no SOBE rows, no CSOs, no public notice duty. Outfalls, the rain caution, HAB map link and the plain statement only.",
+  "order_hint": 6
+ },
+ "owner_questions": [
+  "Records request to Montana DEQ for SSO event forms (they carry coordinates, volume and receiving water)?"
+ ],
+ "surprise": "Montana's SSO form asks for everything a public feed would need (lat/long, receiving water, start and end), yet none of it is published."
+}

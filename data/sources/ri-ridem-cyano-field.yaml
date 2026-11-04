@@ -1,0 +1,22 @@
+id: "ri-ridem-cyano-field"
+name: "RIDEM cyanobacteria field inspections and sample results (Survey123 layer)"
+url: "https://services1.arcgis.com/HAt3zp2GOzn12Lxk/arcgis/rest/services/service_7411369b745f4933b4c151ff6e7b4970/FeatureServer/0"
+homepage: "https://services1.arcgis.com/HAt3zp2GOzn12Lxk/arcgis/rest/services/service_7411369b745f4933b4c151ff6e7b4970/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Supporting
+#   observations behind advisories.
+# Access detail (research, quoted): 1,349 records; dataLastEditDate 2026-10-30. Includes observer
+#   names (personal data - drop on ingest).
+cadence: "biweekly May-Oct plus responses"
+license: "none stated"
+attribution: "RIDEM"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["RI"]
+access: ["arcgis"]
+access_detail: "1,349 records; dataLastEditDate 2026-10-30. Includes observer names (personal data - drop on ingest)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

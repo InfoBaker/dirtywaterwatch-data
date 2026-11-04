@@ -1,0 +1,175 @@
+[
+ {
+  "id": "nv-nv0020061",
+  "name": "CITY OF FALLON",
+  "state": "NV",
+  "kind": "sso",
+  "npdes_permit": "NV0020061",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fallon"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nv-nv0020133",
+  "name": "CITY OF LAS VEGAS",
+  "state": "NV",
+  "kind": "sso",
+  "npdes_permit": "NV0020133",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Las Vegas"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nv-nv0020150",
+  "name": "TRUCKEE MEADOWS WATER RECLAMATION FACILITY",
+  "state": "NV",
+  "kind": "sso",
+  "npdes_permit": "NV0020150",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (searched Reno, Sparks, Clark County in news only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Reno"
+  ],
+  "notes": "Major permit.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nv-nv0020168",
+  "name": "RENO, CITY OF",
+  "state": "NV",
+  "kind": "sso",
+  "npdes_permit": "NV0020168",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (searched Reno, Sparks, Clark County in news only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Reno"
+  ],
+  "notes": "Major permit.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nv-nv0021261",
+  "name": "CLARK COUNTY WATER RECLAMATION DISTRICT",
+  "state": "NV",
+  "kind": "sso",
+  "npdes_permit": "NV0021261",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "none found (searched Reno, Sparks, Clark County in news only)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Las Vegas"
+  ],
+  "notes": "Major permit.",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nv-nv0021563",
+  "name": "CLARK COUNTY WATER RECLAMATION DISTRICT",
+  "state": "NV",
+  "kind": "sso",
+  "npdes_permit": "NV0021563",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Laughlin"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nv-nv0022098",
+  "name": "CITY OF HENDERSON",
+  "state": "NV",
+  "kind": "sso",
+  "npdes_permit": "NV0022098",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Henderson"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nv-nv0023647",
+  "name": "CITY OF NORTH LAS VEGAS",
+  "state": "NV",
+  "kind": "sso",
+  "npdes_permit": "NV0023647",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA ICIS-NPDES permitted features",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Unincorporated Clark County"
+  ],
+  "notes": "Major permit.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "nv-sparks-collection",
+  "name": "City of Sparks sewer collection system",
+  "state": "NV",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Truckee River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "none; 2022 spill not reported to NDEP (NDEP notice of violation, per news)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sparks"
+  ],
+  "notes": "Shares the Truckee Meadows Water Reclamation Facility with Reno (NV0020150).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ }
+]

@@ -1,0 +1,282 @@
+{
+ "state": "PR",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "PR0021555",
+   "permittee": "PRASA PUERTO NUEVO WWTP",
+   "city": "SAN JUAN",
+   "open_outfalls": 12,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Martin Pena Channel",
+    "Puerto Nuevo River",
+    "San Juan Bay"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 12,
+ "plant_permits": 53,
+ "plant_permits_major": 37,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "PR0020427",
+   "permittee": "PRASA CIALES",
+   "city": "CIALES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0020451",
+   "permittee": "PRASA COROZAL",
+   "city": "COROZAL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0020460",
+   "permittee": "PRASA DORADO",
+   "city": "DORADO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0020486",
+   "permittee": "PRASA GUANICA",
+   "city": "GUANICA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0020575",
+   "permittee": "PRASA LAJAS",
+   "city": "LAJAS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0020656",
+   "permittee": "PRASA MAUNABO",
+   "city": "MAUNABO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0020711",
+   "permittee": "PRASA MOROVIS",
+   "city": "MOROVIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0020753",
+   "permittee": "PRASA PATILLAS",
+   "city": "PATILLAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0020818",
+   "permittee": "PRASA SAN GERMAN",
+   "city": "SAN GERMAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0020834",
+   "permittee": "PRASA SAN LORENZO",
+   "city": "SAN LORENZO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0020869",
+   "permittee": "PRASA TOA ALTA",
+   "city": "TOA ALTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0020923",
+   "permittee": "PRASA VEGA ALTA",
+   "city": "VEGA ALTA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0021237",
+   "permittee": "PRASA BARCELONETA",
+   "city": "BARCELONETA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0021555",
+   "permittee": "PRASA PUERTO NUEVO",
+   "city": "SAN JUAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0021563",
+   "permittee": "PRASA PONCE STP",
+   "city": "PONCE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0021661",
+   "permittee": "PRASA YAUCO STP",
+   "city": "YAUCO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0021679",
+   "permittee": "PRASA VEGA BAJA STP",
+   "city": "VEGA BAJA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0021717",
+   "permittee": "PRASA YABUCOA STP",
+   "city": "YABUCOA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0022250",
+   "permittee": "PRASA ISABELA",
+   "city": "ISABELA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0023710",
+   "permittee": "PRASA ARECIBO RWWTP",
+   "city": "ARECIBO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0023728",
+   "permittee": "PRASA BAYAMON",
+   "city": "CATANO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0023736",
+   "permittee": "PRASA AGUADILLA RWWTP",
+   "city": "AGUADILLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0023744",
+   "permittee": "PRASA CAMUY-HATILLO WWTP",
+   "city": "CAMUY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0023752",
+   "permittee": "PRASA CAROLINA RWWTP",
+   "city": "SAN JUAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0023761",
+   "permittee": "PRASA SANTA ISABEL",
+   "city": "SANTA ISABEL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0023795",
+   "permittee": "PRASA MAYAGUEZ WWTP",
+   "city": "MAYAGUEZ",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0025356",
+   "permittee": "PRASA CAYEY RWWTP",
+   "city": "BO.RINCON OF CIDRA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0025399",
+   "permittee": "PRASA HUMACAO WWTP",
+   "city": "BO. RIO ABAJO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0025445",
+   "permittee": "PRASA GUAYAMA REGIONAL WWTP",
+   "city": "GUAYAMA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0025461",
+   "permittee": "PRASA AIBONITO WWTP",
+   "city": "AIBONITO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0025551",
+   "permittee": "PRASA SAN SEBASTIAN NEW WWTP",
+   "city": "SAN SEBASTIAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0025658",
+   "permittee": "PRASA COMERIO WASTE WATER TREA",
+   "city": "COMERIO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0025879",
+   "permittee": "PRASA LARES WWTP",
+   "city": "LARES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0025976",
+   "permittee": "PRASA CAGUAS WWTP",
+   "city": "CAGUAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0026484",
+   "permittee": "PRASA FAJARDO NUEVA WWTP",
+   "city": "FAJARDO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "PR0026531",
+   "permittee": "PRASA JAYUYA NUEVA WWTP",
+   "city": "JAYUYA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "PR0026603",
+   "permittee": "PRASA Utuado New WWTP",
+   "city": "UTUADO",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

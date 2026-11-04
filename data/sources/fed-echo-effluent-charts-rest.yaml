@@ -1,0 +1,42 @@
+id: "fed-echo-effluent-charts-rest"
+name: "ECHO Effluent Charts REST services (per-permit DMR data incl. monthly CSO event counts, duration, volume per outfall)"
+url: "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?output=JSON&p_id=MA0101630&parameter_code=51484&start_date=01/01/2025&end_date=10/31/2026"
+homepage: "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?output=JSON&p_id=MA0101630&parameter_code=51484&start_date=01/01/2025&end_date=10/31/2026"
+kind: "api"
+level: "federal"
+# Notes (research/federal, status candidate, verified fetched, checked 2026-11-01): Authoritative
+#   monthly record of CSO activations per outfall for the three Connecticut River cities that
+#   started this project; use for history and to cross-check community notices, not for real time.
+# Access detail (research, quoted): GET JSON, no key. get_summary_chart lists features/parameters;
+#   get_effluent_chart returns DMR rows; download_effluent_chart returns CSV. Swagger:
+#   https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=EFF. Parameter codes: 51484 Number
+#   of Events, 81381 Duration of discharge, 82220 Flow, total. Scanned 130 NE CSO permits 2026-11-01
+#   (raw/eff_summary/).
+# Can fill: monthly count of discharges per outfall (not individual events), volume (monthly total
+#   or daily max, check StatisticalBaseDesc), duration (hours per month), reported_at
+#   (ValueReceivedDate), source_record_id (DMRValueId)
+# Cannot fill: started_at; ended_at of individual events; advice_text
+# Waters: Any NPDES permit; CSO-specific DMR lines exist for Springfield MA0101613 (23 outfalls),
+#   Chicopee MA0101508 (event counts; volume/duration NODI Q), Holyoke MA0101630 (10), East
+#   Fitchburg MA0100986 (8), GLSD MA0100447 (5), Gloucester MA0100625 (4), Montague MA0100137 (1
+#   aggregated), Portsmouth NH0100234 (3), Berlin NH0100013 (1), Exeter NH0100871 (1), Chelsea
+#   MA0101877 (flow). None for CT, ME, VT, RI, BWSC, Cambridge, Somerville, Lowell, Haverhill, New
+#   Bedford, Fall River; Manchester and Nashua due under 2025 permits but not yet in ICIS.
+#   (openboatlaunch slugs: connecticut-river-ma, chicopee-river-ma, merrimack-river-ma,
+#   piscataqua-river-nh, androscoggin-river-nh)
+# History: Back to the permit's DMR start (2021 for Springfield; 2024 for Holyoke new limit set)
+# Research notes: Springfield flow values are coded 'DAILY MX' in ICIS though the permit asks for
+#   monthly totals; confirm semantics before display. NODI C = No Discharge; NODI Q = Not
+#   Quantifiable.
+cadence: "Monthly DMR due the 15th of the following month; Holyoke Sept 2026 values received 15-Oct-26; ECHO refreshes weekly. Latency 2–7 weeks after the activity."
+license: "EPA Standard Open Data License: \"Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain and is not subject to domestic copyright protection under 17 U.S.C. § 105.\" https://edg.epa.gov/EPA_Data_License.html ECHO swagger 'license': 'U.S. Public Domain License'. ECHO About the Data: \"The information contained in ECHO is made available to the public\" with no warranty of \"accuracy, completeness, or currency\"; \"ECHO is not designed for large scale data transfers or robotic queries.\" https://echo.epa.gov/resources/echo-data/about-the-data"
+attribution: "US EPA OECA (ICIS-NPDES DMRs)"
+enabled: true
+role: "monitoring"
+event_types: ["cso"]
+states: ["US"]
+access: ["api", "csv"]
+access_detail: "GET JSON, no key. get_summary_chart lists features/parameters; get_effluent_chart returns DMR rows; download_effluent_chart returns CSV. Swagger: https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=EFF. Parameter codes: 51484 Number of Events, 81381 Duration of discharge, 82220 Flow, total. Scanned 130 NE CSO permits 2026-11-01 (raw/eff_summary/)."
+machine_readable: true
+legal_basis: "40 CFR 122.41(l)(4); permit Part I CSO reporting conditions (Region 1 permits since ~2022 require monthly CSO DMRs)"
+checked: "2026-11-01"

@@ -1,0 +1,1973 @@
+[
+ {
+  "id": "oh-upper-sandusky-wwtp-oh0020001",
+  "name": "UPPER SANDUSKY WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020001",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 3 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.uppersanduskyoh.com/wastewater; annual notice/report: https://www.uppersanduskyoh.com/cso-reports-2023",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Upper Sandusky"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-monroeville-wwtp-oh0020095",
+  "name": "MONROEVILLE WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020095",
+  "receiving_waters": [
+   "West Branch Huron River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.monroevilleohio.com/; annual notice/report: https://www.monroevilleohio.com/water-and-wastewater-department",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Monroeville"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-north-baltimore-wastewater-treatment-plant-oh0020117",
+  "name": "NORTH BALTIMORE WASTEWATER TREATMENT PLANT",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020117",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 2 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.northbaltimore.org/water-sewer-department/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "North Baltimore"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-bradford-wastewater-treatment-plant-oh0020192",
+  "name": "BRADFORD WASTEWATER TREATMENT PLANT",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020192",
+  "receiving_waters": [
+   "Ballinger Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 2 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bradford"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-toronto-wwtp-oh0020214",
+  "name": "TORONTO WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020214",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 5 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Toronto"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-paulding-wwtp-oh0020338",
+  "name": "PAULDING WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020338",
+  "receiving_waters": [
+   "Flat Rock Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 3 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.villageofpaulding.com/water-wastewater",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Paulding"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-milford-city-wwtp-oh0020451",
+  "name": "MILFORD CITY WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020451",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 2 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Milford"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-village-of-greenwich-wastewater-treatment-works-oh0020486",
+  "name": "VILLAGE OF GREENWICH WASTEWATER TREATMENT WORKS",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020486",
+  "receiving_waters": [
+   "Ditch to Branch of Vermilion River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 6 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://villageofgreenwich.com/wastewater/; annual notice/report: https://villageofgreenwich.com/wastewater/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Greenwich"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-swanton-wrrf-oh0020524",
+  "name": "SWANTON WRRF",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020524",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 9 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.villageofswantonohio.com/press-room",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Swanton"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-caldwell-wwtp-oh0020559",
+  "name": "CALDWELL WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020559",
+  "receiving_waters": [
+   "West Fork Duck Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 18 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Caldwell"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-village-of-woodville-oh0020591",
+  "name": "VILLAGE OF WOODVILLE",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020591",
+  "receiving_waters": [
+   "Portage River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 17 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Woodville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-new-boston-wwtp-oh0020613",
+  "name": "NEW BOSTON WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020613",
+  "receiving_waters": [
+   "Munn Run",
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "New Boston"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-crestline-wwtp-oh0020664",
+  "name": "CRESTLINE WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020664",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Crestline"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-village-of-leipsic-wastewater-treatment-works-oh0020826",
+  "name": "VILLAGE OF LEIPSIC WASTEWATER TREATMENT WORKS",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020826",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Leipsic"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-bluffton-wwtp-oh0020851",
+  "name": "BLUFFTON WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020851",
+  "receiving_waters": [
+   "Riley Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 2 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bluffton"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-napoleon-wastewater-treatment-plant-oh0020893",
+  "name": "NAPOLEON WASTEWATER TREATMENT PLANT",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020893",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 1 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.napoleonohio.com/departments/waste-water-treatment; annual notice/report: https://www.napoleonohio.com/application/files/4317/1406/0105/Annual_CSO_Public_Notification_Report_2023.pdf",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Napoleon"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-arcanum-wwtp-oh0020940",
+  "name": "ARCANUM WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020940",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 14 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Arcanum"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-village-of-delta-wastewater-treatment-plant-oh0020974",
+  "name": "VILLAGE OF DELTA WASTEWATER TREATMENT PLANT",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0020974",
+  "receiving_waters": [
+   "Bad Creek",
+   "Pigeon Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 5 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.villageofdelta.org/1205/Wastewater-Treatment-Plant",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Delta"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-perrysburg-wwtp-oh0021008",
+  "name": "PERRYSBURG WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0021008",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.perrysburgoh.gov/224/Water-Pollution-Control",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Perrysburg"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-hamler-wwtp-oh0021105",
+  "name": "HAMLER WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0021105",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 6 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hamler"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-village-of-pandora-oh0021148",
+  "name": "VILLAGE OF PANDORA",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0021148",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 7 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pandora"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-payne-wwtp-oh0021326",
+  "name": "PAYNE WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0021326",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): http://www.villageofpayne.com/water-sewer-street/; annual notice/report: https://www.villageofpayne.com/water-sewer-street/annual-cso/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Payne"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-mcconnelsville-sewer-treatment-plant-oh0021466",
+  "name": "MCCONNELSVILLE SEWER TREATMENT PLANT",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0021466",
+  "receiving_waters": [
+   "Muskingum River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 9 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mcconnelsville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-pomeroy-wwtp-oh0021725",
+  "name": "POMEROY WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0021725",
+  "receiving_waters": [
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 10 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pomeroy"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-montpelier-wwtp-oh0021831",
+  "name": "MONTPELIER WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0021831",
+  "receiving_waters": [
+   "Saint Joseph River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "Website listed by EPA (not fetched): http://montpelieroh.net/waste-water-cso/; annual notice/report: https://montpelieroh.net/waste-water-cso/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Montpelier"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-newton-falls-wpc-oh0022110",
+  "name": "NEWTON FALLS WPC",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0022110",
+  "receiving_waters": [
+   "Mahoning River",
+   "West Branch Mahoning River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 23,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 23 open, 3 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Newton Falls"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-deshler-wwtp-oh0022471",
+  "name": "DESHLER WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0022471",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 6 closed",
+  "notification_channel": "No website listed by EPA",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Deshler"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-village-of-green-springs-oh0022578",
+  "name": "VILLAGE OF GREEN SPRINGS",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0022578",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Green Springs"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-ohio-city-wwtp-oh0023396",
+  "name": "OHIO CITY WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0023396",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 2 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ohio City"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-wauseon-water-reclamation-plant-oh0023400",
+  "name": "WAUSEON WATER RECLAMATION PLANT",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0023400",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 2 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.cityofwauseon.com/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wauseon"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-akron-water-reclamation-facility-oh0023833",
+  "name": "AKRON WATER RECLAMATION FACILITY",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0023833",
+  "receiving_waters": [
+   "Little Cuyahoga River",
+   "Ohio Canal Enclosure",
+   "SS to Little Cuyahoga River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 28,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 28 open, 13 closed",
+  "notification_channel": "Live ArcGIS overflow status map with per-site and daily-total PDFs: https://www.akronwaterwaysrenewed.com/overflow-status ; service https://agis.akronohio.gov/server/rest/services/City_of_Akron_CSO_Notifications/MapServer/0",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Akron"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-shawnee-ii-wwtp-oh0023850",
+  "name": "SHAWNEE II WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0023850",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 5 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lima"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-ansonia-wwtp-oh0023884",
+  "name": "ANSONIA WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0023884",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 10 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ansonia"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-avon-lake-wpcf-oh0023981",
+  "name": "AVON LAKE WPCF",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0023981",
+  "receiving_waters": [
+   "Heider Ditch-Frontal Lake Erie"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 9 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://avonlakewater.org/about-us/about-the-avon-lake-water-reclamation-facility/; annual notice/report: https://avonlakewater.org/about-us/about-the-avon-lake-water-reclamation-facility/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Avon Lake"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-bowling-green-oh0024139",
+  "name": "BOWLING GREEN",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0024139",
+  "receiving_waters": [
+   "North Branch Portage River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "HTML table of CSO events with begin/end and volume: https://gis.bgohio.org/cso_events/dbo_cso_events_list.php",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bowling Green"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-clyde-wwtp-oh0024686",
+  "name": "CLYDE WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0024686",
+  "receiving_waters": [
+   "Raccoon Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 2 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Clyde"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-jackson-pike-water-resource-recovery-facility-oh0024732",
+  "name": "JACKSON PIKE WATER RESOURCE RECOVERY FACILITY",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0024732",
+  "receiving_waters": [
+   "Olentangy River",
+   "Scioto River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 30,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 30 open, 4 closed",
+  "notification_channel": "Sewer Overflow FAQs page with overflow map link (HTTP 403 to curl): https://www.columbus.gov/Services/Public-Utilities/About-Public-Utilities/The-Division-of-Sewage-Drainage/Wastewater-Treatment/Sewer-Overflow-Discharge-Information-SSOCSO/Sewer-Overflow-FAQs",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Columbus"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-southerly-wastewater-treatment-plant-oh0024741",
+  "name": "SOUTHERLY WASTEWATER TREATMENT PLANT",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0024741",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Columbus"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-village-of-columbus-grove-wwtp-oh0024759",
+  "name": "VILLAGE OF COLUMBUS GROVE WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0024759",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.columbusgrove.org/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Columbus Grove"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-defiance-wwtp-oh0024899",
+  "name": "DEFIANCE WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0024899",
+  "receiving_waters": [
+   "Auglaize River",
+   "Eagle Creek-Auglaize River",
+   "Maumee River",
+   "Preston Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 28,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 28 open, 16 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Defiance"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-delphos-wwtp-oh0024929",
+  "name": "DELPHOS WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0024929",
+  "receiving_waters": [
+   "Jennings Creek",
+   "West Jennings Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.cityofdelphos.com/wastewater-plant",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Delphos"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-elyria-wwtp-oh0025003",
+  "name": "ELYRIA WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0025003",
+  "receiving_waters": [
+   "Black River",
+   "East Branch Black River",
+   "West Branch Black River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 33,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 33 open, 1 closed",
+  "notification_channel": "CSO page with annual reports and notification plan https://www.cityofelyria.org/department/wastewater/combined-sewer-overflow/ ; Lorain County Emergency Alerting System link; no event list seen",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Elyria"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-village-of-fayette-wwtp-oh0025127",
+  "name": "VILLAGE OF FAYETTE WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0025127",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 19 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.villageoffayette.com/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fayette"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-findlay-water-pollution-control-center-oh0025135",
+  "name": "CITY OF FINDLAY WATER POLLUTION CONTROL CENTER",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0025135",
+  "receiving_waters": [
+   "Drainage Ditch"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 10 open, 14 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.findlayohio.gov/government/city-departments/sewer-water-pollution-control",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Findlay"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-forest-wwtp-oh0025151",
+  "name": "FOREST WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0025151",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.villageofforest.com/c/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Forest"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-village-of-fort-recovery-oh0025160",
+  "name": "VILLAGE OF FORT RECOVERY",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0025160",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fort Recovery"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-fremont-water-reclamation-center-oh0025291",
+  "name": "FREMONT WATER RECLAMATION CENTER",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0025291",
+  "receiving_waters": [
+   "Sandusky River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 10 open, 4 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.fremontohio.org/departments/water-reclamation-center/; annual notice/report: https://www.fremontohio.org/departments/water-reclamation-center/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fremont"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-girard-wwtp-oh0025364",
+  "name": "GIRARD WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0025364",
+  "receiving_waters": [
+   "Little Squaw Creek",
+   "Mahoning River",
+   "Squaw Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 3 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Girard"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-muddy-creek-wastewater-treatment-plant-oh0025470",
+  "name": "MUDDY CREEK WASTEWATER TREATMENT PLANT",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0025470",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cincinnati"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-hicksville-wwtp-oh0025771",
+  "name": "HICKSVILLE WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0025771",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 1 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://villageofhicksville.com/utility-department/wastewater-treatment-plant/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hicksville"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-ironton-wwtp-oh0025852",
+  "name": "IRONTON WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0025852",
+  "receiving_waters": [
+   "Ohio River",
+   "Storms Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 1 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ironton"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-lakewood-wwtp-oh0026018",
+  "name": "LAKEWOOD WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0026018",
+  "receiving_waters": [
+   "Lake Erie",
+   "Outfall 001/Lake Erie",
+   "Rocky River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 8 open, 2 closed",
+  "notification_channel": "CSO Notification System map https://cso.lakewoodoh.gov/ (status per site; data endpoint not traced)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lakewood"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-lancaster-wpcf-oh0026026",
+  "name": "LANCASTER WPCF",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0026026",
+  "receiving_waters": [
+   "Baldwin Run",
+   "Fetters Run",
+   "Hocking River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 9 open, 22 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lancaster"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-lima-wwtp-oh0026069",
+  "name": "LIMA WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0026069",
+  "receiving_waters": [
+   "Dug Run-Ottawa River",
+   "Ottawa River",
+   "Pike Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 20,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 20 open, 0 closed",
+  "notification_channel": "4-hour and 7-day supplemental CSO notifications as dated PDFs: https://www.limaohio.gov/410/Combined-Sewer-Overflow-Activity-Report",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lima"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-mccomb-village-wwtp-oh0026263",
+  "name": "MCCOMB VILLAGE WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0026263",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 2 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mccomb"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-marion-div-of-water-pollution-control-oh0026352",
+  "name": "CITY OF MARION, DIV OF WATER POLLUTION CONTROL",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0026352",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Marion"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-middleport-wwtp-oh0026514",
+  "name": "MIDDLEPORT WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0026514",
+  "receiving_waters": [
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 11 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Middleport"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-middletown-wwtp-oh0026522",
+  "name": "MIDDLETOWN WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0026522",
+  "receiving_waters": [
+   "Browns Run-Great Miami River",
+   "Great Miami River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 8 open, 0 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Middletown"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-mingo-junction-stp-oh0026565",
+  "name": "MINGO JUNCTION STP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0026565",
+  "receiving_waters": [
+   "Ohio River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 1 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mingo Junction"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-newark-wastewater-treatment-plant-oh0026671",
+  "name": "CITY OF NEWARK WASTEWATER TREATMENT PLANT",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0026671",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 19,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 19 open, 9 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Newark"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-oak-harbor-wwtp-oh0026841",
+  "name": "OAK HARBOR WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0026841",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 3 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.oakharbor.oh.us/departments/wastewater_treatment_plant/index.php; annual notice/report: https://webgen1files1.revize.com/oakharboroh/2023%20CSO%20Report.pdf",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oak Harbor"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-portsmouth-lawson-run-wwtp-oh0027197",
+  "name": "PORTSMOUTH LAWSON RUN WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0027197",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 10 open, 0 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Portsmouth"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-sandusky-wpc-oh0027332",
+  "name": "CITY OF SANDUSKY WPC",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0027332",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 14,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 14 open, 1 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.cityofsandusky.com/government/department/public_works/sewer/index.php",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sandusky"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-springfield-wwtp-oh0027481",
+  "name": "CITY OF SPRINGFIELD WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0027481",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 55,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 55 open, 6 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Springfield"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-steubenville-wwtp-oh0027511",
+  "name": "STEUBENVILLE WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0027511",
+  "receiving_waters": [
+   "Ohio River",
+   "Wells Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 15,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 15 open, 2 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Steubenville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-toledo-bay-view-park-wwtp-oh0027740",
+  "name": "TOLEDO BAY VIEW PARK WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0027740",
+  "receiving_waters": [
+   "Detwiler Ditch-Frontal Lake Erie",
+   "Maumee River",
+   "Ottawa River",
+   "Otter Creek",
+   "Swan Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 26,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 26 open, 8 closed",
+  "notification_channel": "Status line plus dated CSO report PDFs: https://toledo.oh.gov/residents/water/quality/combined-sewer-overflows-csos ('The public will be notified within four hours of a documented CSO event.')",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Toledo"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-van-wert-wwtp-oh0027910",
+  "name": "VAN WERT WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0027910",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 1 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://vanwert.org/wastewater-collection/; annual notice/report: The CSO Annual Report is available for inspection at the Van Wert City Wastewater Treatment Plant located at 7998 US127 North, Van Wert, Ohio 45891. Not available electronically.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Van Wert"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-wapakoneta-wrf-oh0027952",
+  "name": "CITY OF WAPAKONETA WRF",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0027952",
+  "receiving_waters": [
+   "Auglaize River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.wapakoneta.net/page/water-treatment-department",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wapakoneta"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-warren-wpcf-oh0027987",
+  "name": "WARREN WPCF",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0027987",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Warren"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-willard-wpcp-oh0028118",
+  "name": "WILLARD WPCP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0028118",
+  "receiving_waters": [
+   "Holliday Lake"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.willardohio.gov/water-pollution-control.html; annual notice/report: https://www.willardohio.gov/uploads/1/4/4/5/144541287/cso_pnp_annual_report_2023_pdf_2-27-24.pdf",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Willard"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-woodsfield-wastewater-treatment-plant-oh0028177",
+  "name": "WOODSFIELD WASTEWATER TREATMENT PLANT",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0028177",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Woodsfield"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-wooster-water-resource-recoveryfacility-oh0028185",
+  "name": "CITY OF WOOSTER-WATER RESOURCE RECOVERYFACILITY",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0028185",
+  "receiving_waters": [
+   "Apple Creek",
+   "Christmas Run"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wooster"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-youngstown-wwtp-oh0028223",
+  "name": "YOUNGSTOWN WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0028223",
+  "receiving_waters": [
+   "Crab Creek",
+   "Dry Run Creek",
+   "Mahoning River",
+   "Mill Creek",
+   "Sugar Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 101,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 101 open, 7 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Youngstown"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-zanesville-wwtp-oh0028240",
+  "name": "ZANESVILLE WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0028240",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 12 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Zanesville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-gibsonburg-wwtp-oh0029122",
+  "name": "GIBSONBURG WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0029122",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://gibsonburgohio.org/wastewater-treatment-plant/",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gibsonburg"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-euclid-wwtp-oh0031062",
+  "name": "CITY OF EUCLID WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0031062",
+  "receiving_waters": [
+   "City of Euclid-Frontal Lake Erie",
+   "Doan Brook-Frontal Lake Erie",
+   "Euclid Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 17,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 17 open, 3 closed",
+  "notification_channel": "Notification plan page https://www.cityofeuclid.gov/combined-sewer-overflow-public-notification (no event list seen)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Euclid"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-northeast-ohio-regional-sd-oh0043991",
+  "name": "NORTHEAST OHIO REGIONAL SD",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0043991",
+  "receiving_waters": [
+   "Lake Erie",
+   "Cuyahoga River",
+   "Big Creek",
+   "Mill Creek",
+   "Euclid Creek",
+   "Doan Brook"
+  ],
+  "water_slugs": [],
+  "outfall_count": 122,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 122 open, 11 closed",
+  "notification_channel": "Live ArcGIS CSO alerts map (24 metered + 88 other outfalls; last overflow start/end/volume per outfall, hourly): https://www.neorsd.org/cso-alerts-map-and-status-of-outfalls/ ; service https://utility.arcgis.com/usrsvcs/servers/d1477ea79422426b90560e015ce2bad9/rest/services/Public/CSONotificationApp_PROD/MapServer",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Cleveland"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-dunkirk-wwtp-oh0048321",
+  "name": "DUNKIRK WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0048321",
+  "receiving_waters": [
+   "Shallow Run Ditch"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 6 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dunkirk"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-eastern-ohio-regional-ww-authority-oh0049999",
+  "name": "EASTERN OHIO REGIONAL WW AUTHORITY",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0049999",
+  "receiving_waters": [
+   "McMahon Creek",
+   "Ohio River",
+   "Pinch Run",
+   "Wheeling Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 32,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 32 open, 15 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bellaire"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-norwalk-wwtp-oh0052604",
+  "name": "CITY OF NORWALK WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0052604",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 2 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.norwalkoh.com/wastewater-treatment; annual notice/report: https://www.norwalkoh.com/wastewater-treatment",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Norwalk"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-fostoria-wwtp-oh0052744",
+  "name": "FOSTORIA WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0052744",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 23,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 23 open, 2 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://fostoriaohio.gov/; annual notice/report: https://acrobat.adobe.com/id/urn:aaid:sc:US:8558ea35-fd60-40f3-9498-46593dfe07dd",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fostoria"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-port-clinton-wastewater-treatment-plant-oh0052876",
+  "name": "PORT CLINTON WASTEWATER TREATMENT PLANT",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0052876",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.portclinton.com/services__/wastewater_treatment_plant.php",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Port Clinton"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-bucyrus-wwtp-oh0052922",
+  "name": "BUCYRUS WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0052922",
+  "receiving_waters": [
+   "Sandusky River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 22,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 22 open, 0 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.cityofbucyrusoh.us/; annual notice/report: https://www.cityofbucyrusoh.us/sites/default/files/2024-04/2023_cso_annual_report.docx",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bucyrus"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-tiffin-water-pollution-control-center-oh0052949",
+  "name": "TIFFIN WATER POLLUTION CONTROL CENTER",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0052949",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 33,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 33 open, 1 closed",
+  "notification_channel": "Website listed by EPA (not fetched): https://www.tiffinohio.gov/departments/wpcc",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Tiffin"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-metamora-wwtp-oh0058408",
+  "name": "METAMORA WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0058408",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Metamora"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-luckey-wwtp-oh0058971",
+  "name": "LUCKEY WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0058971",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 4 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Luckey"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-village-of-malta-oh0094528",
+  "name": "VILLAGE OF MALTA",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0094528",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 6 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Malta"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-cincinnati-galbraith-road-msd-site-oh0105457",
+  "name": "CINCINNATI GALBRAITH ROAD MSD SITE (MSD of Greater Cincinnati CSO permit as listed in EPA inventory)",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0105457",
+  "receiving_waters": [
+   "Bloody Run",
+   "Cilley Creek",
+   "Clough Creek",
+   "Clough Creek Tributary",
+   "Compton Creek",
+   "Duck Creek",
+   "Duck Creek Tributary",
+   "Kings Run",
+   "Little Duck Creek",
+   "Little Miami River",
+   "Ludlow Creek",
+   "Ludlow Run",
+   "Mill Creek",
+   "Mill Creek Tributary",
+   "Muddy Creek",
+   "Ohio River",
+   "Rapid Run",
+   "South Branch Mill Creek",
+   "West Branch Mill Creek",
+   "West Fork",
+   "West Fork Tributary",
+   "West branch Mill Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 199,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 199 open, 9 closed",
+  "notification_channel": "CSO Activity Map, Power BI embed, hourly, outfalls active now or within 72 hours: https://msdgc.org/programs/cso-notification-program/ (not machine-readable)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cincinnati"
+  ],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-lisbon-wwtp-oh0126268",
+  "name": "LISBON WWTP",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0126268",
+  "receiving_waters": [
+   "Middle Fork Little Beaver Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 2 closed",
+  "notification_channel": "not searched (outside EPA's Lake Erie list; NMC #8 notification per permit)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lisbon"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-clyde-oh0024868",
+  "name": "Clyde",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0024868",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Not in EPA CSO inventory extract for this state; listed on EPA's Great Lakes CSO page",
+  "notification_channel": "CSO Notification System https://cso.clydeohio.org/ (map; endpoint not traced)",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-defiance-oh0024889",
+  "name": "Defiance",
+  "state": "OH",
+  "kind": "cso",
+  "npdes_permit": "OH0024889",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Not in EPA CSO inventory extract for this state; listed on EPA's Great Lakes CSO page",
+  "notification_channel": "Website listed by EPA (not fetched): https://cityofdefiance.com/296/Combined-Sewer-Overflows-CSO; annual notice/report: https://cityofdefiance.com/296/Combined-Sewer-Overflows-CSO",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-dayton",
+  "name": "City of Dayton",
+  "state": "OH",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Annual SSO report PDF only",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dayton"
+  ],
+  "notes": "Annual SSO report PDF 2025-2026 (search only).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-montgomery-county-environmental-services",
+  "name": "Montgomery County Environmental Services",
+  "state": "OH",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Annual SSO report PDF only",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dayton area"
+  ],
+  "notes": "Document center SSO report (search only).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-wooster",
+  "name": "City of Wooster",
+  "state": "OH",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Annual SSO report PDF only",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wooster"
+  ],
+  "notes": "2024 SSO annual report PDF (search only).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-city-of-willoughby",
+  "name": "City of Willoughby",
+  "state": "OH",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Annual SSO report PDF only",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Willoughby"
+  ],
+  "notes": "SSO annual report PDFs (search only).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "oh-village-of-middlefield",
+  "name": "Village of Middlefield",
+  "state": "OH",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Annual SSO report PDF only",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Middlefield"
+  ],
+  "notes": "2025 annual SSO report with notice (search only).",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ }
+]

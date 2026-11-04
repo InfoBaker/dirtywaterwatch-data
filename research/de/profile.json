@@ -1,0 +1,180 @@
+{
+  "state": "DE",
+  "name": "Delaware",
+  "region": "mid-atlantic",
+  "epa_region": 3,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "partial",
+    "summary": "Anyone causing an environmental release, which includes sewage of 10,000 gallons or more, must report it to DNREC at once; DNREC must post it on its website within one business day and notify local legislators and registered neighbours within 12 hours. The duty to publish is DNREC's; operators have no public-notice duty in statute, and permitted discharges (including CSOs within the permit) are exempt.",
+    "citations": [
+      {
+        "cite": "7 Del. C. 6028(a)",
+        "title": "Report of discharge of pollutant or air contaminant",
+        "url": "https://delcode.delaware.gov/title7/c060/sc02/index.html",
+        "quote": "shall report such an incident to the Department as soon as the person has knowledge of said environmental release ... This information shall be made available to the public by posting on the Department's internet web site no later than 1 business day after the release is reported. Discharges in compliance with a validly issued state permit or in compliance with other state and federal regulations are exempt from the reporting requirement.",
+        "who": "person causing the release; DNREC posts",
+        "channel": "DNREC website (DERNS)",
+        "deadline": "report as soon as known; posting within 1 business day",
+        "threshold": "reportable quantity; sewage 10,000 gallons or more (6002(20))",
+        "verified": "fetched"
+      },
+      {
+        "cite": "7 Del. C. 6014(b)",
+        "title": "Central unified notification system",
+        "url": "https://delcode.delaware.gov/title7/c060/sc02/index.html",
+        "quote": "That system shall be designed in a such a manner as to ensure the notification, within 12 hours after the Department is informed of an environmental release, of: (1) The State Representative and State Senator in whose district the release occurred; (2) Any community or civic group ... within 5 miles ... (3) Any individual who lives within 5 miles of the reporting facility and who has identified himself or herself to the Department",
+        "who": "DNREC",
+        "channel": "DERNS email, fax or phone to registered subscribers",
+        "deadline": "12 hours",
+        "threshold": "environmental release",
+        "verified": "fetched"
+      },
+      {
+        "cite": "7 Del. C. 6002(20)",
+        "title": "Environmental release (definition)",
+        "url": "https://delcode.delaware.gov/title7/c060/sc02/index.html",
+        "quote": "any spillage, leakage, emission, discharge or delivery into the air or waters or on or into the lands of this State of any sewage of 10,000 gallons or more",
+        "who": null,
+        "channel": null,
+        "deadline": null,
+        "threshold": "sewage 10,000 gallons or more",
+        "verified": "fetched"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "as soon as the person has knowledge, in person or by telephone to the DNREC number; NPDES 24 hours / 5 days for permittees",
+      "cite": "7 Del. C. 6028(a); 40 CFR 122.41(l)(6) as adopted"
+    },
+    "cso_permit_notice_clause": {
+      "permit": "DE0020320",
+      "quote": null,
+      "deadline": null,
+      "verified": "inferred"
+    },
+    "bills_and_cases": [
+      "Not searched."
+    ]
+  },
+  "erule": {
+    "system": "unknown",
+    "sobe_events_2026_11_03": 0,
+    "public_output_url": null,
+    "notes": "No DE rows in SOBE."
+  },
+  "statewide_feed": {
+    "exists": true,
+    "source_ids": [
+      "de-dnrec-derns-recent-releases"
+    ],
+    "precision": "event",
+    "machine_readable": false,
+    "format": "html",
+    "latency": "within 1 business day (statute); same-day rows seen",
+    "history": "about 17,756 releases (start not checked)",
+    "coordinates": "none",
+    "receiving_water": "none (location text)",
+    "start_end": "release time only",
+    "volume": null,
+    "stable_id": true,
+    "license": "none stated",
+    "notes": "All substances mixed; filter Substance Released for sewage or wastewater. Only sewage of 10,000 gallons or more must be reported; CSOs within the permit are exempt."
+  },
+  "cso": {
+    "permits": 1,
+    "open_outfalls": 41,
+    "operators_with_web_channel": 0,
+    "operators_checked": 1,
+    "state_outfall_layer": "https://services.arcgis.com/hQ3wdpbjO3fPf612/arcgis/rest/services/CSO_Locations/FeatureServer/0 (city layer, 45 structures)",
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "Signs at each outfall; no event notice found."
+  },
+  "sso": {
+    "location_source": null,
+    "feeds": [
+      "de-dnrec-derns-recent-releases"
+    ],
+    "notes": "Only releases of 10,000 gallons or more."
+  },
+  "beaches": {
+    "program": "DNREC Recreational Water Program (ocean, bay and inland beaches)",
+    "source_ids": [
+      "de-dnrec-recreational-water"
+    ],
+    "machine_readable": true,
+    "scope": "all",
+    "notes": "Coded CurrentAdvisory; off season on 2026-11-03."
+  },
+  "habs": {
+    "program": "unknown",
+    "source_ids": [
+      "de-dnrec-hab"
+    ],
+    "machine_readable": false,
+    "notes": ""
+  },
+  "advisories": {
+    "health_department_pages": [],
+    "watershed_groups": [
+      "Delaware Nature Society, Christina Conservancy (not checked)"
+    ],
+    "swim_guide": false
+  },
+  "outfalls": {
+    "state_layer": "Wilmington CSO_Locations (city)",
+    "cso_inventory_gap": "city layer has 45 structures vs 41 in EPA inventory",
+    "sso_points": "none"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Delaware River and Delaware Bay (PA, NJ)",
+      "Brandywine Creek and Christina River (PA)",
+      "Chesapeake and Delaware Canal; Nanticoke River (MD)"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "no_web",
+      "what": "Wilmington CSO events: signs only, no web notice; permitted CSOs exempt from DERNS",
+      "fix_level": "legislative",
+      "note": "A CSO notice duty (like NJ, PA or NY right-to-know) would close it."
+    },
+    {
+      "kind": "login",
+      "what": "DERNS alerts need a registered account",
+      "fix_level": "owner",
+      "note": "The Recent Releases page is public without login."
+    },
+    {
+      "kind": "no_web",
+      "what": "Sewage releases under 10,000 gallons are not posted",
+      "fix_level": "legislative",
+      "note": ""
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "DERNS release notifications",
+      "url": "https://derns.dnrec.delaware.gov/",
+      "what": "email, fax or phone notice of releases (registration with an account); our scraper of the public list makes it optional"
+    }
+  ],
+  "readiness": {
+    "tier": "B",
+    "expected_grade": "Dated reports",
+    "first_feed": "de-dnrec-derns-recent-releases",
+    "effort": "small",
+    "rationale": "Statewide dated list of releases (sewage of 10,000 gallons or more), public HTML with release ids, needs a postback scraper and filtering; no coordinates or water names. CSOs: outfalls only (city layer) plus rain caution and DMR if available.",
+    "order_hint": 4
+  },
+  "owner_questions": [
+    "Accept DERNS as the SSO source knowing it only holds sewage of 10,000 gallons or more and nothing for permitted CSOs?",
+    "Register a DERNS account for alerts (owner sign-up) or rely on scraping the public list?",
+    "Use the Wilmington city CSO layer (45 structures) over the EPA inventory points?"
+  ],
+  "surprise": "Delaware's general environmental-release statute makes DNREC post sewage spills of 10,000 gallons or more within a business day, but Wilmington's 41 CSO outfalls, the state's only CSOs, are exempt as permitted discharges and are announced only by fixed signs."
+}

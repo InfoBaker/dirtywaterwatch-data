@@ -1,0 +1,23 @@
+id: "ct-deep-rain-2026"
+name: "CT DEEP release: water quality impacts following heavy rainfall (2026-07-07)"
+url: "https://portal.ct.gov/deep/news-releases/news-releases---2026/deep-reminds-residents-about-water-quality-impacts-water-safety-following-heavy-rainfall-events"
+homepage: "https://portal.ct.gov/deep/news-releases/news-releases---2026/deep-reminds-residents-about-water-quality-impacts-water-safety-following-heavy-rainfall-events"
+kind: "html"
+level: "state"
+# Notes (research/hydrography, status used, verified fetched, checked 2026-11-01): State wording for
+#   rain-related risk window.
+# Access detail (research, quoted): 'During and within 48-72 hrs of rain events, the Connecticut
+#   River and the Long Island Sound may see elevated health risk.' Names Chicopee, Holyoke,
+#   Springfield and Hartford MDC CSOs. No inch threshold.
+cadence: null
+license: "none stated"
+attribution: "CT DEEP"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["CT"]
+access: ["html"]
+access_detail: "'During and within 48-72 hrs of rain events, the Connecticut River and the Long Island Sound may see elevated health risk.' Names Chicopee, Holyoke, Springfield and Hartford MDC CSOs. No inch threshold."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

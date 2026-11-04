@@ -1,0 +1,26 @@
+[
+ {
+  "id": "as-aspa",
+  "name": "American Samoa Power Authority (Utulei and Tafuna plants and collection systems)",
+  "state": "AS",
+  "kind": "sso",
+  "npdes_permit": "AS0020001 (Utulei, EXP); AS0020010 (Tafuna, ADC)",
+  "receiving_waters": [
+   "Pago Pago Harbor",
+   "Vai Cove, South Pacific Ocean"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "none found",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pago Pago",
+   "Tafuna",
+   "Utulei"
+  ],
+  "notes": "Collection systems registered in SOBE (13,000 and 12,000 people), no events.",
+  "verified": "search_only",
+  "checked": "2026-11-04"
+ }
+]

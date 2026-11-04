@@ -1,0 +1,33 @@
+id: "md-baltimore-dpw-bypass-lights"
+name: "Baltimore City bypass warning light notifications (Back River and Patapsco WWTPs)"
+url: "https://www.baltimorecity.gov/publicworks/water-system-in-the-city/wastewater-about/wastewater-treatment-consent-decree-program"
+homepage: "https://www.baltimorecity.gov/publicworks/water-system-in-the-city/wastewater-about/wastewater-treatment-consent-decree-program"
+kind: "arcgis"
+level: "municipal"
+# Notes (research/md, status candidate, verified fetched, checked 2026-11-02): Owner should
+#   subscribe; poll the RSS and the INCIDENT_ACTIVE flag to catch bypasses hours before the MDE
+#   table. Page says residents 'can now sign up'; DPW and MDE were revising the light process in
+#   2026.
+# Access detail (research, quoted): Email sign-up (GovDelivery):
+#   https://public.govdelivery.com/accounts/MDBALT/subscriber/new?topic_id=MDBALT_1350 (not
+#   subscribed). Topic RSS https://public.govdelivery.com/topics/MDBALT_1350/feed.rss returned a
+#   valid empty channel titled 'WWTP Bypass Light Notification System - Recent Updates' on
+#   2026-11-02. Map: Mandatory Compliance Notification app 69346d3115704a218d3b94b8f4800e5e ->
+#   FeatureServer
+#   https://services1.arcgis.com/1EZ7DqkhGiNWRyiL/arcgis/rest/services/WWTFS_w_IMPACT_AREAS/FeatureServer/3
+#   (6 impact rings, 0.5/1/2 miles, field INCIDENT_ACTIVE 'No' for both plants; last edited
+#   2026-09).
+# Can fill: source_status (light on/off), geometry (impact rings), published_at (email)
+# Cannot fill: volume; cause; history (flag is overwritten)
+cadence: "Real time when the light is switched; MDE community-meeting material says lights stay on 24 hours after a bypass (search_only)."
+license: "none stated"
+attribution: "Baltimore City Department of Public Works"
+enabled: true
+role: "events"
+event_types: ["bypass"]
+states: ["MD"]
+access: ["email", "rss", "arcgis"]
+access_detail: "Email sign-up (GovDelivery): https://public.govdelivery.com/accounts/MDBALT/subscriber/new?topic_id=MDBALT_1350 (not subscribed). Topic RSS https://public.govdelivery.com/topics/MDBALT_1350/feed.rss returned a valid empty channel titled 'WWTP Bypass Light Notification System - Recent Updates' on 2026-11-02. Map: Mandatory Compliance Notification app 69346d3115704a218d3b94b8f4800e5e -> FeatureServer https://services1.arcgis.com/1EZ7DqkhGiNWRyiL/arcgis/rest/services/WWTFS_w_IMPACT_AREAS/FeatureServer/3 (6 impact rings, 0.5/1/2 miles, field INCIDENT_ACTIVE 'No' for both plants; last edited 2026-09)."
+machine_readable: true
+legal_basis: "2023 consent decree among Baltimore City, MDE and Blue Water Baltimore (Back River and Patapsco WWTP permits)"
+checked: "2026-11-02"

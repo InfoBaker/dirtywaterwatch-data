@@ -1,0 +1,26 @@
+id: "fed-wqp-organizations-ne-bacteria"
+name: "Water Quality Portal organizations submitting E. coli/enterococci in New England since 2024 (legacy Organization service)"
+url: "https://www.waterqualitydata.us/data/Organization/search?statecode=US%3A25&statecode=US%3A09&statecode=US%3A44&statecode=US%3A33&statecode=US%3A50&statecode=US%3A23&characteristicName=Escherichia%20coli&characteristicName=Enterococcus&characteristicName=Enterococci&startDateLo=01-01-2024&mimeType=csv"
+homepage: "https://www.waterqualitydata.us/data/Organization/search?statecode=US%3A25&statecode=US%3A09&statecode=US%3A44&statecode=US%3A33&statecode=US%3A50&statecode=US%3A23&characteristicName=Escherichia%20coli&characteristicName=Enterococcus&characteristicName=Enterococci&startDateLo=01-01-2024&mimeType=csv"
+kind: "api"
+level: "federal"
+# Notes (research/federal, status used, verified fetched, checked 2026-11-01): Lists which programs
+#   feed bacteria data federally; legacy profile excludes USGS data added after 2024-03-11.
+# Access detail (research, quoted): 25 organizations: USGS-CT, USGS-MA, CT_DEP01_WQX, RIDEM, 21RIBCH
+#   (RI DOH beaches), STS (Save the Sound), NRWA_WQX, 21MEBCH (Maine DEP beaches), HARBORWATCH_WQX,
+#   CONNRIVERCONSERVANCY, FRWA, 11113300 (NHDES BEACH), CT_NERR, CRWA, CUSH, AMRW (Mystic),
+#   MERRIMACK_RIVER_WATERSHED_WQX, IRWA, HORSLEYWITTEN_WQX, SSCW, OARS, 1CTDPHBM (CT DPH),
+#   ASHCREEKCONSERVATIONASSOC, 21MABCH (MA DPH beaches), AQUINNAH_WQX. No Vermont organization;
+#   MassDEP absent.
+cadence: null
+license: "as WQP"
+attribution: "USGS / US EPA / NWQMC"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["US"]
+access: ["api", "csv"]
+access_detail: "25 organizations: USGS-CT, USGS-MA, CT_DEP01_WQX, RIDEM, 21RIBCH (RI DOH beaches), STS (Save the Sound), NRWA_WQX, 21MEBCH (Maine DEP beaches), HARBORWATCH_WQX, CONNRIVERCONSERVANCY, FRWA, 11113300 (NHDES BEACH), CT_NERR, CRWA, CUSH, AMRW (Mystic), MERRIMACK_RIVER_WATERSHED_WQX, IRWA, HORSLEYWITTEN_WQX, SSCW, OARS, 1CTDPHBM (CT DPH), ASHCREEKCONSERVATIONASSOC, 21MABCH (MA DPH beaches), AQUINNAH_WQX. No Vermont organization; MassDEP absent."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

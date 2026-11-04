@@ -1,0 +1,31 @@
+{
+ "state": "GU",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 6,
+ "plant_permits_major": 3,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "GU0020087",
+   "permittee": "GUAM WATERWORKS AUTHORITY",
+   "city": "HAGATNA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "GU0020141",
+   "permittee": "GUAM WATERWORKS AUTHORITY",
+   "city": "DEDEDO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "GU0020222",
+   "permittee": "GUAM WATERWORKS AUTHORITY",
+   "city": "AGAT",
+   "major": "Major",
+   "status": "EXP"
+  }
+ ]
+}

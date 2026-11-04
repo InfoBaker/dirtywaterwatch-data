@@ -1,0 +1,39 @@
+id: "va-richmond-emnet-cso-map"
+name: "City of Richmond public CSO map (Xylem/EmNet BLU-X 'CSO Map Notification Web Application')"
+url: "https://apps.emnet.net/richmond-pub-map-app/?city=47&config=5c0cacee-7e95-4eea-922d-c736c83eb4b9"
+homepage: "https://apps.emnet.net/richmond-pub-map-app/?city=47&config=5c0cacee-7e95-4eea-922d-c736c83eb4b9"
+kind: "api"
+level: "municipal"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Richmond's only
+#   near-real-time public CSO channel. Polling it means calling the vendor API with the app's
+#   embedded token; the owner must decide whether that is acceptable or ask DPU/Xylem for access.
+# Access detail (research, quoted): React app; reads
+#   https://restapi.emnet.net/api/tables/{visualizations/47/?uuid=...,
+#   analysis-configurations/47/?analysis-type=2, inodes/47/,
+#   analysis-results/47/?analysis-configuration-id=257..281&created-on=<UTC now>} with a 'Token'
+#   header whose value is embedded in the public bundle (not used directly here). Site list read
+#   from the page's own state in the browser pane on 2026-11-02 20:43 EST: 25 sites, all
+#   'monitored', all 'Normal' (no overflow in the last 48 h); 'last' = latest cso_last_occurrence.
+#   Saved raw/richmond/emnet/sites-2026-11-02.json.
+# Can fill: started_at (only the last occurrence per outfall), coordinates (outfall point from the
+#   operator), source_status (Overflow*/Normal*/No Data), valid_until (48-hour red window),
+#   location_text (CSO number), timezone
+# Cannot fill: ended_at; volume; history (only the last event per site); advice_text
+# Waters: James River, Gillies Creek, Almond Creek, canals in Richmond (25 monitored outfalls)
+#   (openboatlaunch slugs: james-river-va)
+# History: None in the map; monthly XLSX gives history.
+# Research notes: Richmond page: '* CSO overflow email notifications are no longer provided, as the
+#   interactive map provides that data.' CSO 14 is labelled 'CSO 14 Overflow Depth'. Three sites
+#   (CSO 18, 19, 33) show no recorded last event.
+cadence: "Sensor-driven; the app polls on a timer (WRIC 2022: every five minutes). Legend: 'Monitored Site (Overflow*)' ... '*in the last 48 hours'."
+license: "No terms on the app. City page: map provided 'as is' (no licence text found)."
+attribution: "City of Richmond Department of Public Utilities"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["VA"]
+access: ["map_only", "api"]
+access_detail: "React app; reads https://restapi.emnet.net/api/tables/{visualizations/47/?uuid=..., analysis-configurations/47/?analysis-type=2, inodes/47/, analysis-results/47/?analysis-configuration-id=257..281&created-on=<UTC now>} with a 'Token' header whose value is embedded in the public bundle (not used directly here). Site list read from the page's own state in the browser pane on 2026-11-02 20:43 EST: 25 sites, all 'monitored', all 'Normal' (no overflow in the last 48 h); 'last' = latest cso_last_occurrence. Saved raw/richmond/emnet/sites-2026-11-02.json."
+machine_readable: true
+legal_basis: "VPDES permit VA0063177 Part III public notification (signs and website) plus 2020 Acts ch. 634 program"
+checked: "2026-11-02"

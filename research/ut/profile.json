@@ -1,0 +1,171 @@
+{
+ "state": "UT",
+ "name": "Utah",
+ "region": "mountain",
+ "epa_region": 8,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "none",
+  "summary": "Sewer systems must report a Class 1 (significant) SSO to the Division of Water Quality orally within 24 hours and in writing within five days; Class 2 SSOs go only in the annual report. No duty to tell the public was found; local health departments issue water advisories.",
+  "citations": [
+   {
+    "cite": "Utah Admin. Code R317-801-4(4.1)",
+    "title": "General Permit SSO Reporting Requirements",
+    "url": "https://www.law.cornell.edu/regulations/utah/Utah-Admin-Code-R317-801-4",
+    "quote": "(1) A Class 1 SSO shall be reported orally within 24 hrs and with a written report submitted to the DWQ within five calendar days. Class 1 SSO's shall be included in the annual USMP report. (2) Class 2 SSOs shall be reported on an annual basis in the USMP annual report.",
+    "who": "USMP general permittee (sewer system owner)",
+    "channel": "DWQ (oral, then written)",
+    "deadline": "24 hours oral; five calendar days written; annual report by April 15",
+    "threshold": "Class 1 SSO",
+    "verified": "fetched"
+   },
+   {
+    "cite": "Utah Admin. Code R317-801-1(13)",
+    "title": "Definition of Class 1 SSO",
+    "url": "https://www.law.cornell.edu/regulations/utah/Utah-Admin-Code-R317-801-1",
+    "quote": "\"Class 1 SSO\" (Significant SSO) means a SSO or backup that is not caused by a private lateral obstruction or problem that: (a) effects more than five private structures; (b) affects one or more public, commercial or industrial structure(s); (c) may result in a public health risk to the general public; (d) has a spill volume that exceeds 5,000 gallons, excluding those in single private structures; or (e) discharges to Waters of the state.",
+    "who": null,
+    "channel": null,
+    "deadline": null,
+    "threshold": "any SSO reaching waters of the state is Class 1",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours oral; five calendar days written",
+   "cite": "R317-801-4"
+  },
+  "cso_permit_notice_clause": {
+   "permit": null,
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "No 2025-2026 Utah bill on public sewage-spill notice found (search only)."
+  ]
+ },
+ "erule": {
+  "system": "unknown",
+  "sobe_events_2026_11_03": 1,
+  "public_output_url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "notes": "188 Utah collection systems are registered in EPA's collection_system_permits.csv, but only one event (Timpanogos, 2026-08) is in SOBE. Whether Utah reports flow to EPA or stay in a DWQ system was not established."
+ },
+ "statewide_feed": {
+  "exists": true,
+  "source_ids": [
+   "ut-deq-environmental-incidents"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "arcgis",
+  "latency": "about one day (newest 2026-11-02 on 2026-11-03)",
+  "history": "1995 to date; 18 to 33 sewage rows a year",
+  "coordinates": "all rows (approximate)",
+  "receiving_water": "free text in summary only",
+  "start_end": "discovery date and hour; no end",
+  "volume": false,
+  "stable_id": true,
+  "license": "none stated",
+  "notes": "Partial coverage: only incidents called in to the DEQ spill hotline (DERR); most Class 1 SSOs reported to DWQ are not in it. Volume only in free text."
+ },
+ "cso": {
+  "permits": 0,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 0,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No CSOs."
+ },
+ "sso": {
+  "location_source": "DEQ Environmental Incidents points",
+  "feeds": [
+   "ut-deq-environmental-incidents",
+   "ut-epa-sobe"
+  ],
+  "notes": "Sewage rows mix utility SSOs with dumping complaints; filter on title and summary."
+ },
+ "beaches": {
+  "program": "DWQ recreational water monitoring (E. coli and HABs) with local health department advisories",
+  "source_ids": [
+   "ut-dwq-recreational-advisories"
+  ],
+  "machine_readable": true,
+  "scope": "inland",
+  "notes": "Warning E coli at 8 sites on 2026-11-03."
+ },
+ "habs": {
+  "program": "DWQ HAB program; advisories by local health departments; habs.utah.gov map",
+  "source_ids": [
+   "ut-dwq-recreational-advisories",
+   "ut-slco-jordan-river-algae",
+   "ut-nps-zion-cyanobacteria"
+  ],
+  "machine_readable": true,
+  "notes": "Same layer as E. coli advisories."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "https://deq.utah.gov/water-quality/recreational-water-quality-home"
+  ],
+  "watershed_groups": [
+   "Utah Water Watch (USU Extension)"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none (no CSOs)",
+  "sso_points": "state_table"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Lake Powell and the Colorado River (AZ)",
+   "Green River (CO, WY)",
+   "Bear Lake and Bear River (ID, WY)",
+   "San Juan River (NM, CO, Navajo Nation)",
+   "Virgin River (AZ, NV)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "Class 1 SSO reports go to DWQ by phone and letter and are not published",
+   "fix_level": "agency",
+   "note": "Ask DWQ to publish them, or to route them into the Environmental Incidents layer."
+  },
+  {
+   "kind": "no_web",
+   "what": "No public notice duty for SSOs",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "bot_wall",
+   "what": "habs.utah.gov returns 403 to scripts; eqspillsps.deq.utah.gov has an expired certificate",
+   "fix_level": "engineering",
+   "note": "Use the ArcGIS layers directly."
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "A",
+  "expected_grade": "Dated reports",
+  "first_feed": "ut-deq-environmental-incidents",
+  "effort": "small",
+  "rationale": "A public ArcGIS layer of spill-hotline incidents with dates, points and next-day updates; sewage rows need a text filter and cover only what is called in to DERR, so coverage is partial. HAB and E. coli advisories are a second machine-readable layer.",
+  "order_hint": 2
+ },
+ "owner_questions": [
+  "The Environmental Incidents layer holds only hotline calls (about 20 to 30 sewage rows a year): accept it as Utah's dated feed with a coverage note, or treat Utah as partial?",
+  "Free-text filtering: include private dumping and RV sewage complaints, or only utility releases?",
+  "Ask DWQ for Class 1 SSO reports (records request) to measure what the layer misses?",
+  "Incident summaries name staff and private addresses: show only title, date, county and point?"
+ ],
+ "surprise": "Utah's spill hotline log is a public ArcGIS layer updated within a day, with a point and a PDF for every incident since 1995, yet the Class 1 SSOs that sewer districts must phone in to the Division of Water Quality mostly never reach it."
+}

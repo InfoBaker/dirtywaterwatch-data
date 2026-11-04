@@ -1,0 +1,21 @@
+id: "ct-harbor-watch"
+name: "Harbor Watch (Earthplace) bacteria monitoring, Fairfield County"
+url: "https://waterqualitydata.us/provider/STORET/HARBORWATCH_WQX/"
+homepage: "https://waterqualitydata.us/provider/STORET/HARBORWATCH_WQX/"
+kind: "api"
+level: "nonprofit"
+# Notes (research/ct, status candidate, verified search_only, checked 2026-11-01): Annual Fairfield
+#   County River Report; raw data in EPA WQP under provider HARBORWATCH_WQX.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "none stated"
+attribution: "Earthplace Harbor Watch"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["CT"]
+access: ["api", "pdf"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,26 @@
+id: "vt-dec-overflow-alert-subscriptions"
+name: "WSMD Notification Subscription System (email/text alerts for public alerts, incident reports, unpermitted discharges)"
+url: "https://anrweb.vt.gov/DEC/WWInventory/Subscriptions.aspx"
+homepage: "https://anrweb.vt.gov/DEC/WWInventory/Subscriptions.aspx"
+kind: "email"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Owner should
+#   subscribe statewide to get push notice as a scrape trigger and as a check on latency.
+# Access detail (research, quoted): Login page (Email Address + Password). Page: 'Subscribe here to
+#   receive email or text notifications when new public alerts, sewer overflow and release incident
+#   reports, or unpermitted discharges are reported.' Not subscribed (brief forbids). Help:
+#   ANR.WSMD@vermont.gov.
+# Waters: statewide or by drainage basin (per 2016 press coverage)
+# Research notes: Requires creating an account (email + password); owner action.
+cadence: "Push on submission (inferred from page text)."
+license: "none stated"
+attribution: "VT DEC Watershed Management Division"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass", "other"]
+states: ["VT"]
+access: ["email"]
+access_detail: "Login page (Email Address + Password). Page: 'Subscribe here to receive email or text notifications when new public alerts, sewer overflow and release incident reports, or unpermitted discharges are reported.' Not subscribed (brief forbids). Help: ANR.WSMD@vermont.gov."
+machine_readable: false
+legal_basis: "10 V.S.A. § 1295"
+checked: "2026-11-01"

@@ -1,0 +1,587 @@
+[
+  {
+    "id": "ri-nbc-fields-point",
+    "name": "Narragansett Bay Commission - Field's Point WWTF and associated CSOs",
+    "state": "RI",
+    "kind": "cso",
+    "npdes_permit": "RI0100315",
+    "receiving_waters": [
+      "Providence River",
+      "Woonasquatucket River",
+      "Moshassuck River",
+      "West River",
+      "Seekonk River"
+    ],
+    "water_slugs": [
+      "providence-river-ri",
+      "seekonk-river-ri",
+      "narragansett-bay-ri"
+    ],
+    "outfall_count": 35,
+    "outfalls_source": "https://cso-api.narrabay.com/pins (OF 004-067 with lat/long); RIGIS https://services2.arcgis.com/S8zZg9pg23JUEexQ/arcgis/rest/services/UTILITY_NBC_Sewer_Overflows_spf/FeatureServer/0",
+    "notification_channel": "NBC CSO Alarm Map, https://www.narrabay.com/programs-and-initiatives/combined-sewer-overflow-cso/cso-alarm-map/ (JSON: https://cso-api.narrabay.com/pins and /dryoverflows). Red dot = overflow in last 24 h, orange = last 48 h. No email/text sign-up found. 'Report an overflow' email IMSupport@narrabay.com. 2017 permit required 'a system to provide web-based notification to the public on CSO occurrences'.",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Providence",
+      "North Providence",
+      "Johnston",
+      "Cranston (part)",
+      "Lincoln (part)"
+    ],
+    "notes": "35 CSO outfalls with coordinates in the NBC API for the Field's Point system (plus plant outfall OF 002 FP, one abandoned site and a test site); 9 of them say 'No data available' (no live alarm). NBC states 64 active CSO pipes district-wide. Phase I tunnel (2008) captures flow from 12 FP-area CSOs. Permit administratively continued (expired 2022-11-30 per ECHO/RISE). Receiving-water assignment per outfall is inferred from site names and coordinates (see raw/nbc-outfalls-from-api.csv). Woonasquatucket, Moshassuck and West rivers have no openboatlaunch slug.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-nbc-bucklin-point",
+    "name": "Narragansett Bay Commission - Bucklin Point WWTF and associated CSOs",
+    "state": "RI",
+    "kind": "cso",
+    "npdes_permit": "RI0100072",
+    "receiving_waters": [
+      "Blackstone River",
+      "Seekonk River",
+      "Moshassuck River",
+      "Bucklin Brook"
+    ],
+    "water_slugs": [
+      "blackstone-river-ri",
+      "pawtucket-river-ri",
+      "seekonk-river-ri"
+    ],
+    "outfall_count": 25,
+    "outfalls_source": "https://cso-api.narrabay.com/pins (OF 101-107, 201-220); RIGIS UTILITY_NBC_Sewer_Overflows_spf",
+    "notification_channel": "NBC CSO Alarm Map, https://www.narrabay.com/programs-and-initiatives/combined-sewer-overflow-cso/cso-alarm-map/ (JSON: https://cso-api.narrabay.com/pins and /dryoverflows). Same map as Field's Point. Dry-weather CSOs also appear in EPA ECHO as violations.",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Pawtucket",
+      "Central Falls",
+      "Cumberland",
+      "Lincoln (part)",
+      "East Providence (part)",
+      "Smithfield (part)"
+    ],
+    "notes": "25 CSO outfalls in the API for this system (1 without live data: OF 211). Phase III (RestoredWaters RI) Pawtucket Tunnel (2.2 mi to Bucklin Point) excavated by Feb 2024; in-service date not confirmed. ECHO 2026: dry-weather CSO 08/17/2026 and 10/05-06/2026, dry-weather bypass 03/23/2026; annual sewer-event total 2 events / 506,410 gal. Pawtucket and Central Falls own their local combined sewers but the CSO outfalls are permitted to NBC.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-newport-wpcf",
+    "name": "City of Newport Utilities - Water Pollution Control (WPCF and two CSO treatment facilities)",
+    "state": "RI",
+    "kind": "cso",
+    "npdes_permit": "RI0100293",
+    "receiving_waters": [
+      "Newport Harbor",
+      "East Passage (Narragansett Bay)"
+    ],
+    "water_slugs": [
+      "east-passage-ri",
+      "narragansett-bay-ri"
+    ],
+    "outfall_count": 2,
+    "outfalls_source": "https://utilities.newportri.gov/wp-content/uploads/2025/07/Sewer-System-Overview-Map.pdf (map; not machine-readable); FAQ: Wellington Ave CSO outfall 'north east of the Ida Lewis Rock'; Washington Street CSO outfall 'east of the north end of Goat Island'",
+    "notification_channel": "Red flag raised at the CSO facility when an overflow starts, kept up 'until 24 hours after the overflow stops'; red flag also at the Harbormaster's Building. CSO events reported to RIDEM and EPA. 'Summary of CSO Events since 2001' PDF linked from the CSO FAQ. City emergency alert system for general utility notices (not CSO-specific). Live harbor sondes on NexSens WQData LIVE (https://www.wqdatalive.com/public/2461, unreachable on check).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Newport",
+      "Middletown (sewered flow)"
+    ],
+    "notes": "Two CSO facilities (Wellington Avenue CSO Treatment Facility, Washington Street CSO Treatment Facility) disinfect overflow before discharge. Consent Decree with EPA and RIDEM. Permit administratively continued (expired 2020-05-31). ECHO: wet-weather bypass 03/06/2026 (83,456 gal 2026 total); 2024 1,134,900 gal.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-east-providence-wpcf",
+    "name": "East Providence Wastewater Treatment Facility (City of East Providence)",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100048",
+    "receiving_waters": [
+      "Providence River",
+      "Watchemoket Cove"
+    ],
+    "water_slugs": [
+      "providence-river-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "East Providence"
+    ],
+    "notes": "May 4, 2026 force-main break: ~800,000 gal to Watchemoket Cove/Providence River; DEM press release next day closed shellfish Area 16E. ECHO 2024: 4 bypass events, 174,000 gal. ecoRI reports ~30,000 ft of 'critically defective' pipe.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-bristol-wwtf",
+    "name": "Bristol Wastewater Treatment Facility (Town of Bristol)",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100005",
+    "receiving_waters": [
+      "Bristol Harbor (Narragansett Bay)",
+      "Mount Hope Bay (pump station overflows)",
+      "Kickemuit River (historic)"
+    ],
+    "water_slugs": [
+      "narragansett-bay-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Bristol"
+    ],
+    "notes": "Most frequent reporter in ECHO: 2024 8 events/6,032 gal; 2025 1/40 gal; 2026 7/22,684 gal (dry SSO to waters 04/24/2026; wet SSOs 03/06, 03/23, 09/13/2026). Mt. Hope Pump Station spills closed Mount Hope Bay shellfishing in Oct 2023 (11,250 gal) and Apr 2026 (~5,000 gal). Receiving water of plant inferred (NBEP lists 'Narragansett Bay').",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-warren-wwtf",
+    "name": "Warren Wastewater Treatment Facility (Town of Warren)",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100056",
+    "receiving_waters": [
+      "Warren River"
+    ],
+    "water_slugs": [
+      "warren-river-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Warren"
+    ],
+    "notes": "ECHO: dry-weather bypass 05/08/2025, 66,000 gal.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-west-warwick-wwtf",
+    "name": "West Warwick Regional Wastewater Treatment Facility",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100153",
+    "receiving_waters": [
+      "Pawtuxet River"
+    ],
+    "water_slugs": [
+      "pawtuxet-river-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "West Warwick",
+      "Coventry",
+      "Warwick (part)"
+    ],
+    "notes": "ECHO: dry-weather bypasses 05/02/2025, 03/13-18/2026, 04/10/2026; totals 1,346,417 gal (2025) and 2,948,333 gal (2026); repeated 'Failure to submit noncompliance report' flags. No public notice found.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-warwick-wwtf",
+    "name": "Warwick Wastewater Treatment Facility (Warwick Sewer Authority)",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100234",
+    "receiving_waters": [
+      "Pawtuxet River"
+    ],
+    "water_slugs": [
+      "pawtuxet-river-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Warwick"
+    ],
+    "notes": "No 2024-2026 sewer-event totals in ECHO. Historic SSOs: Sept 2022 24-inch line rupture to Warwick Pond (~161,600 gal) extended Upper Bay shellfish closure; Aug 2022 Buckeye Brook overflow (~300,000 gal). Permit administratively continued.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-cranston-wpcf",
+    "name": "Cranston Water Pollution Control Facility (operated by Veolia)",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100013",
+    "receiving_waters": [
+      "Pawtuxet River"
+    ],
+    "water_slugs": [
+      "pawtuxet-river-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Cranston"
+    ],
+    "notes": "No 2024-2026 sewer-event totals in ECHO.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-woonsocket-wwtf",
+    "name": "Woonsocket Regional Wastewater Treatment Facility",
+    "state": "RI",
+    "kind": "bypass",
+    "npdes_permit": "RI0100111",
+    "receiving_waters": [
+      "Blackstone River"
+    ],
+    "water_slugs": [
+      "blackstone-river-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Woonsocket",
+      "North Smithfield (part)",
+      "Bellingham/Blackstone MA (regional flow, inferred)"
+    ],
+    "notes": "ECHO 2025: 3 events, 1,875,200 gal (dry-weather bypasses 01/01/2025 and 07/01/2025). AG/DEM lawsuit March 2023 over partially treated discharges Nov 2021-Mar 2023; DEM no-contact advisory on the Blackstone lifted 2023-03-15.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-east-greenwich-wwtf",
+    "name": "East Greenwich Wastewater Treatment Facility",
+    "state": "RI",
+    "kind": "bypass",
+    "npdes_permit": "RI0100030",
+    "receiving_waters": [
+      "Greenwich Cove"
+    ],
+    "water_slugs": [
+      "greenwich-cove-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "East Greenwich"
+    ],
+    "notes": "ECHO: dry bypass 10/05-06/2025; two wet bypasses 03/17/2026; totals 32,623 gal (2025), 35,669 gal (2026). Receiving water inferred from plant location.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-burrillville-wwtf",
+    "name": "Burrillville Wastewater Treatment Facility",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100455",
+    "receiving_waters": [
+      "Clear River (Blackstone basin)"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Burrillville"
+    ],
+    "notes": "No ECHO sewer-event totals 2024-2026. Receiving water inferred (NBEP lists Blackstone River basin).",
+    "verified": "inferred",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-smithfield-wwtp",
+    "name": "Smithfield Wastewater Treatment Plant (Veolia)",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100251",
+    "receiving_waters": [
+      "Woonasquatucket River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Smithfield"
+    ],
+    "notes": "NBEP lists receiving water 'Woonasquatucket River'. No ECHO sewer-event totals 2024-2026.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-jamestown-wwtf",
+    "name": "Jamestown Wastewater Treatment Facility",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100366",
+    "receiving_waters": [
+      "East Passage (Narragansett Bay)"
+    ],
+    "water_slugs": [
+      "east-passage-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Jamestown"
+    ],
+    "notes": "Taylor Point. No ECHO sewer-event totals 2024-2026. Receiving water inferred.",
+    "verified": "inferred",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-quonset-wwtf",
+    "name": "Quonset Point Wastewater Treatment Facility (Quonset Development Corporation)",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100404",
+    "receiving_waters": [
+      "Narragansett Bay (West Passage side, inferred)"
+    ],
+    "water_slugs": [
+      "west-passage-ri",
+      "narragansett-bay-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "North Kingstown"
+    ],
+    "notes": "No ECHO sewer-event totals 2024-2026.",
+    "verified": "inferred",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-scarborough-wwtf",
+    "name": "Scarborough Wastewater Treatment Facility (Town of Narragansett)",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100188",
+    "receiving_waters": [
+      "Rhode Island Sound (ocean outfall, inferred)"
+    ],
+    "water_slugs": [
+      "rhode-island-sound-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Narragansett"
+    ],
+    "notes": "NBEP lists 'Narragansett Bay'. No ECHO sewer-event totals 2024-2026.",
+    "verified": "inferred",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-south-kingstown-wwtf",
+    "name": "South Kingstown Regional Wastewater Treatment Facility",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100374",
+    "receiving_waters": [
+      "Rhode Island Sound (ocean outfall, inferred)"
+    ],
+    "water_slugs": [
+      "rhode-island-sound-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "South Kingstown",
+      "Narragansett (part)"
+    ],
+    "notes": "ECHO: wet bypass 05/16/2024 (0 gal reported).",
+    "verified": "inferred",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-westerly-wwtf",
+    "name": "Westerly Wastewater Treatment Facility",
+    "state": "RI",
+    "kind": "bypass",
+    "npdes_permit": "RI0100064",
+    "receiving_waters": [
+      "Pawcatuck River"
+    ],
+    "water_slugs": [
+      "pawcatuck-river-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Westerly"
+    ],
+    "notes": "ECHO 2024: 7 wet-weather bypasses, 7,673,700 gal (March-June 2024).",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-new-shoreham-wpcf",
+    "name": "New Shoreham Water Pollution Control Facility (Block Island)",
+    "state": "RI",
+    "kind": "sso",
+    "npdes_permit": "RI0100196",
+    "receiving_waters": [
+      "Block Island Sound (inferred)"
+    ],
+    "water_slugs": [
+      "block-island-sound-ri"
+    ],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "New Shoreham"
+    ],
+    "notes": "No ECHO sewer-event totals 2024-2026.",
+    "verified": "inferred",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-zambarano-wwcs",
+    "name": "Dr. U.E. Zambarano Memorial Hospital wastewater system",
+    "state": "RI",
+    "kind": "bypass",
+    "npdes_permit": "RI0100129",
+    "receiving_waters": [
+      "unknown (Blackstone basin per NBEP)"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "RIDEM RISE GIS 'Waste Water Treatment Facility Discharge' layer https://risegis.ri.gov/hosting/rest/services/RIDEM/Regulated_Facilities/FeatureServer/24 (plant points only; collection-system overflow points are not published)",
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Burrillville (Pascoag)"
+    ],
+    "notes": "ECHO: dry-weather bypass 03/13-16/2026, 231,280 gal.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-pawtucket-collection",
+    "name": "City of Pawtucket local sewers (combined; CSO outfalls permitted to NBC)",
+    "state": "RI",
+    "kind": "collection_system",
+    "npdes_permit": null,
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Pawtucket"
+    ],
+    "notes": "Pawtucket owns local combined sewers tributary to NBC's Bucklin Point system; CSO outfalls OF 201-220 are NBC's and appear on the NBC map. City has only an MS4 permit (RIR040024) in the RIPDES list. No city overflow notice channel found.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-central-falls-collection",
+    "name": "City of Central Falls local sewers (combined; CSO outfalls permitted to NBC)",
+    "state": "RI",
+    "kind": "collection_system",
+    "npdes_permit": null,
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Central Falls"
+    ],
+    "notes": "CSO outfalls OF 101-107 are NBC's (Bucklin Point system). NBC Phase II built a constructed-wetlands CSO facility in Central Falls. City has an MS4 permit only (RIR040041). No city channel found.",
+    "verified": "fetched",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-middletown-collection",
+    "name": "Town of Middletown collection system (to Newport WPCF)",
+    "state": "RI",
+    "kind": "collection_system",
+    "npdes_permit": null,
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Middletown"
+    ],
+    "notes": "Tributary to Newport WPCF; SSOs would be reported under RI0100293 or by the town. Not verified.",
+    "verified": "inferred",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-north-kingstown-collection",
+    "name": "North Kingstown collection system (to Quonset WWTF)",
+    "state": "RI",
+    "kind": "collection_system",
+    "npdes_permit": null,
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "North Kingstown"
+    ],
+    "notes": "Inferred tributary arrangement; not verified.",
+    "verified": "inferred",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": "ri-nbc-member-towns-collection",
+    "name": "Local collection systems tributary to NBC (Providence, North Providence, Johnston, Lincoln, Cumberland, East Providence part, Cranston part, Smithfield part)",
+    "state": "RI",
+    "kind": "collection_system",
+    "npdes_permit": null,
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "No public notification channel found. Operator must report SSOs/bypasses to RIDEM verbally (as soon as possible, within 24 h) and electronically via EPA NeT-SewerOverflow within 5 calendar days; those reports surface later in EPA ECHO detailed facility reports. Public hears only if DEM closes shellfish areas (hotline 401-222-2900, Constant Contact email list, dem.ri.gov/shellfish, sometimes a press release) or RIDOH/DEM issue a contact advisory.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Providence",
+      "North Providence",
+      "Johnston",
+      "Lincoln",
+      "Cumberland"
+    ],
+    "notes": "Municipal sewers feed NBC interceptors; SSOs in these local systems are reported to RIDEM by the municipality or NBC. No public channels found.",
+    "verified": "inferred",
+    "checked": "2026-11-01"
+  }
+]

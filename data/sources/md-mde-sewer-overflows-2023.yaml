@@ -1,0 +1,57 @@
+id: "md-mde-sewer-overflows-2023"
+name: "MDE Reported Sewer Overflows (New for 2023), Maryland Open Data Portal"
+url: "https://opendata.maryland.gov/dataset/Reported-Sewer-Overflows-New-for-2023-/stgj-u72u/data"
+homepage: "https://mde.maryland.gov/programs/water/Compliance/Pages/ReportedSewerOverflow.aspx"
+kind: "api"
+level: "state"
+# Notes (research/md, status used, verified fetched, checked 2026-11-02): The only statewide, daily,
+#   machine-readable event table; covers CSO, SSO, plant bypass and unauthorized discharges with
+#   NPDES number and volume. Build against it first.
+# Access detail (research, quoted): SODA API, no key needed for light use:
+#   https://opendata.maryland.gov/resource/stgj-u72u.json?$order=start_date DESC&$limit=50 ; CSV
+#   export https://opendata.maryland.gov/api/views/stgj-u72u/rows.csv?accessType=DOWNLOAD ; metadata
+#   https://opendata.maryland.gov/api/views/stgj-u72u.json. Fetched 2026-11-02: 3,539 rows,
+#   start_date 2023-01-04 to 2026-11-01. SSO 2,743, CSO 535, Bypass 145, Unauthorized Discharge 116.
+#   Rows per year 2023 723, 2024 1,003, 2025 1,026, 2026 (to 1 Nov) 787. Raw: raw/soda-new-*.json,
+#   raw/socrata-stgj-u72u-meta.json.
+# Can fill: event_type, started_at, ended_at (derived from duration), timezone (implied
+#   America/New_York), waterbody (free text), location_text, coordinates (41% of rows), material
+#   (implied by type), volume, units (gallons, implied), authority (owner_name), jurisdiction,
+#   source_updated_at (rowsUpdatedAt), raw_record
+# Cannot fill: source_record_id (the id column is a row number re-assigned on every reload);
+#   reported_at; published_at; advice_text; valid_until; ended_at when duration blank;
+#   revision_history; geometry other than a point; estimate_flag (not a field; the description says
+#   volumes may be estimates)
+# Waters: statewide; free-text receiving water per row (openboatlaunch slugs: patapsco-river-md,
+#   middle-branch-patapsco-river-md, northwest-harbor-md, back-river-md, bear-creek-md,
+#   jones-creek-md, potomac-river-md, north-branch-potomac-river-md, anacostia-river-md,
+#   piscataway-creek-md, bush-river-md, mill-creek-md, wicomico-river-mt-vernon-md,
+#   cambridge-creek-md, choptank-river-md, severn-river-md, magothy-river-md, patuxent-river-md)
+# History: This table: overflows from February 2023 onward (description says 'February 10th, 2023,
+#   onward'; min start_date 2023-01-04). Earlier records 2005-01 to 2023-01 in the frozen dataset
+#   md-mde-sewer-overflows-2005-2023.
+# Research notes: Quality notes from 2025-2026 rows: (1) `id` is a sort-order number (id 1 = newest)
+#   re-issued each reload, and the Socrata system :id is regenerated too (all rows share one
+#   :created_at). Dedupe on npdes_no+start_date+start_time+overflow_address. (2) Duplicate rows for
+#   one event exist (e.g. 2025-01-24 Jones Falls 4,191,760 gal twice; 2025-07-10 Gwynns Falls
+#   400,225/400,125). (3) lat/long sometimes swapped (2025-02-13 Deepdene Rd lat -76.6342) and
+#   overflow_longitude is typed text. (4) receiving_water is free text: 'none', 'storm drain',
+#   'Gwynns Falls is about 500 feet away'; 923 rows null/none/N/A/unknown. (5) discharge_volume can
+#   be an early figure that the operator later revises (Baltimore DPW layer shows 17,520 gal where
+#   MDE shows 11,000 for 500 W University Pkwy 2026-10-27). (6) False alarms stay in: WSSC's
+#   2026-10-26 Westbard Ave report is stamped NON-REPORTABLE (0 gal) but the MDE row remains. (7) A
+#   2026-10-11 Perryville row repeats cause text naming 'Tropical Storm Isaias' (a 2020 storm), i.e.
+#   copied text. (8) 455 rows since 2025-01-01 are 10,000 gal or more. penalty_id present on 558
+#   rows.
+cadence: "Metadata 'Update Frequency: Daily'; the MDE web page says 'currently updated monthly'. Observed: rowsUpdatedAt 2026-11-02 15:55:53 UTC and every row's :created_at = 2026-11-02T15:55:47Z (full table replaced), newest row an SSO starting 2026-11-01 07:00, so latency about one day after the event. Legal: 24-hour report to MDE, 5-day written report."
+license: "Socrata metadata: license 'Public Domain' (licenseId PUBLIC_DOMAIN); attribution 'Maryland Department of the Environment'."
+attribution: "Maryland Department of the Environment (published on opendata.maryland.gov, Socrata)"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass"]
+states: ["MD"]
+access: ["api", "csv", "json"]
+access_detail: "SODA API, no key needed for light use: https://opendata.maryland.gov/resource/stgj-u72u.json?$order=start_date DESC&$limit=50 ; CSV export https://opendata.maryland.gov/api/views/stgj-u72u/rows.csv?accessType=DOWNLOAD ; metadata https://opendata.maryland.gov/api/views/stgj-u72u.json. Fetched 2026-11-02: 3,539 rows, start_date 2023-01-04 to 2026-11-01. SSO 2,743, CSO 535, Bypass 145, Unauthorized Discharge 116. Rows per year 2023 723, 2024 1,003, 2025 1,026, 2026 (to 1 Nov) 787. Raw: raw/soda-new-*.json, raw/socrata-stgj-u72u-meta.json."
+machine_readable: true
+legal_basis: "Environment Article § 9-331.1; COMAR 26.08.10.03-.05"
+checked: "2026-11-02"

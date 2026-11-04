@@ -1,0 +1,30 @@
+id: "epa-r1-cso-outfall-locations-2022"
+name: "EPA Region 1 'R1 Combined Sewer Outfall (CSO) Locations, 2022' (NH and VT rows)"
+url: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1"
+homepage: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1"
+kind: "arcgis"
+level: "federal"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Best single list
+#   of active NH CSO outfalls with coordinates and receiving water; VT rows carry NPDES IDs that the
+#   ANR layer lacks.
+# Access detail (research, quoted): Layer 1. query?where=NPDES_ID LIKE 'NH%' OR NPDES_ID LIKE 'VT%'
+#   returned 78 rows (raw/epa-r1-cso-nhvt.json). dataLastEditDate 2023-01-03.
+# Can fill: geometry (outfall point), coordinates
+# Waters: NH: 29 outfalls (Manchester 15, Nashua 9, Portsmouth 3, Berlin 1, Exeter 1); VT: 49
+#   outfalls in 13 permits (openboatlaunch slugs: merrimack-river-nh, piscataquog-river-nh,
+#   nashua-river-nh, piscataqua-river-nh, androscoggin-river-nh, squamscott-river-nh,
+#   winooski-river-vt, lake-champlain-vt, otter-creek-vt, stevens-brook-vt, passumpsic-river-vt,
+#   missisquoi-river-vt, lac-memphremagog-vt, connecticut-river-vt)
+# Research notes: Probably also covered by the federal agent; NH/VT rows recorded here.
+cadence: null
+license: "copyrightText \"CT: CT DEEP; ME: MEDEP; MA: MassDEP, EPA; NH: EPA; RI: Narragansett Bay Commission; VT Open Geodata Portal\". NH rows: \"Active CSO outfalls collected from NH NPDES permits. EPA made corrections based upon updated information available in EPA's files.\" VT rows from the VT Open Geodata Portal stormwater/wastewater infrastructure layer."
+attribution: "US EPA Region 1"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["NH", "VT"]
+access: ["arcgis"]
+access_detail: "Layer 1. query?where=NPDES_ID LIKE 'NH%' OR NPDES_ID LIKE 'VT%' returned 78 rows (raw/epa-r1-cso-nhvt.json). dataLastEditDate 2023-01-03."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

@@ -1,0 +1,1307 @@
+{
+ "state": "GA",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "GA0036838",
+   "permittee": "COLUMBUS WATER WORKS (COLUMBUS CSO)",
+   "city": "COLUMBUS",
+   "open_outfalls": 12,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Chattahoochee River"
+   ]
+  },
+  {
+   "npdes_permit": "GA0036854",
+   "permittee": "ALBANY, CITY OF (ALBANY CSO)",
+   "city": "ALBANY",
+   "open_outfalls": 9,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Flint River"
+   ]
+  },
+  {
+   "npdes_permit": "GA0037168",
+   "permittee": "ATLANTA, CITY OF (EAST AREA CSS)",
+   "city": "ATLANTA",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Intrenchment Creek"
+   ]
+  },
+  {
+   "npdes_permit": "GA0038644",
+   "permittee": "ATLANTA, CITY OF (WEST AREA CSO)",
+   "city": "ATLANTA",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Chattahoochee River",
+    "Clear Creek",
+    "Proctor Creek",
+    "Tanyard Creek"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 27,
+ "plant_permits": 692,
+ "plant_permits_major": 179,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "GA0000060",
+   "permittee": "RABUN APPAREL INC.",
+   "city": "RABUN GAP",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "GA0020052",
+   "permittee": "City of West Point",
+   "city": "WEST POINT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020061",
+   "permittee": "City of Tybee Island",
+   "city": "TYBEE ISLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020079",
+   "permittee": "City of Thomaston",
+   "city": "THOMASTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020168",
+   "permittee": "Gainesville, City of",
+   "city": "GAINESVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0020214",
+   "permittee": "City of Griffin",
+   "city": "GRIFFIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020222",
+   "permittee": "City of Valdosta",
+   "city": "VALDOSTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0020320",
+   "permittee": "City of Hampton",
+   "city": "HAMPTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0020338",
+   "permittee": "City of Hawkinsville",
+   "city": "HAWKINSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0020427",
+   "permittee": "City of Savannah",
+   "city": "SAVANNAH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0020443",
+   "permittee": "City of Savannah",
+   "city": "SAVANNAH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020478",
+   "permittee": "Walker Co. Water & Sewerage Authority",
+   "city": "CHICKAMAUGA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020486",
+   "permittee": "City of Montezuma",
+   "city": "MONTEZUMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020508",
+   "permittee": "Jekyll Island State Park Authority",
+   "city": "JEKYLL ISLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020516",
+   "permittee": "Columbus Water Works",
+   "city": "COLUMBUS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020575",
+   "permittee": "Clayton County Water Authority",
+   "city": "REX",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020788",
+   "permittee": "City of Loganville",
+   "city": "LOGANVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020923",
+   "permittee": "Rabun County Water & Sewer Authority (RCWSA)",
+   "city": "CLAYTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0020966",
+   "permittee": "City of Waycross",
+   "city": "WAYCROSS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0020974",
+   "permittee": "City of Thomson",
+   "city": "THOMSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0020982",
+   "permittee": "Tallapoosa, City of",
+   "city": "TALLAPOOSA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "GA0021041",
+   "permittee": "City of Barnesville",
+   "city": "BARNESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0021156",
+   "permittee": "Gainesville, City of",
+   "city": "GAINESVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0021326",
+   "permittee": "Dawson, City of",
+   "city": "DAWSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0021334",
+   "permittee": "City of Perry",
+   "city": "PERRY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0021369",
+   "permittee": "Ellijay-Gilmer County Water & Sewerage Authority",
+   "city": "ELLIJAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0021385",
+   "permittee": "City of Sylvania",
+   "city": "SYLVANIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0021423",
+   "permittee": "Newnan Utilities",
+   "city": "NEWNAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0021504",
+   "permittee": "City of Cornelia",
+   "city": "CORNELIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0021521",
+   "permittee": "Brunswick-Glynn County Joint Water and Sewer Commission",
+   "city": "SAINT SIMONS ISLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0021610",
+   "permittee": "Rockdale County",
+   "city": "CONYERS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0021725",
+   "permittee": "Unified Government of Athens-Clarke County",
+   "city": "ATHENS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0021733",
+   "permittee": "Unified Government of Athens-Clarke County",
+   "city": "ATHENS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0021814",
+   "permittee": "City of Toccoa",
+   "city": "TOCCOA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0021857",
+   "permittee": "Wrens, City of",
+   "city": "WRENS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0023108",
+   "permittee": "City of Statesboro",
+   "city": "STATESBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0023132",
+   "permittee": "City of Jefferson",
+   "city": "JEFFERSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0023167",
+   "permittee": "City of Buford",
+   "city": "BUFORD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0023337",
+   "permittee": "City of Stockbridge",
+   "city": "STOCKBRIDGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0023949",
+   "permittee": "City of McDonough",
+   "city": "MCDONOUGH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0023973",
+   "permittee": "GWINNETT CO NO BUSINESS CR",
+   "city": "SNELLVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "GA0024074",
+   "permittee": "City of Cedartown",
+   "city": "CEDARTOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0024082",
+   "permittee": "City of Thomasville",
+   "city": "THOMASVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0024091",
+   "permittee": "City of Cartersville",
+   "city": "CARTERSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0024112",
+   "permittee": "City of Rome",
+   "city": "ROME",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0024147",
+   "permittee": "DeKalb County",
+   "city": "DECATUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0024333",
+   "permittee": "Fulton County",
+   "city": "ROSWELL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0024341",
+   "permittee": "City of Rome",
+   "city": "ROME",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0024431",
+   "permittee": "Douglas, City of",
+   "city": "DOUGLAS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0024503",
+   "permittee": "Gum Creek WPCP",
+   "city": "CORDELE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0024538",
+   "permittee": "Macon Water Authority",
+   "city": "MACON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0024546",
+   "permittee": "Macon Water Authority",
+   "city": "MACON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0024660",
+   "permittee": "City of Moultrie",
+   "city": "MOULTRIE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0024678",
+   "permittee": "Bainbridge, City of",
+   "city": "BAINBRIDGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0024911",
+   "permittee": "City of Adel",
+   "city": "ADEL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0024988",
+   "permittee": "Cobb County Water System",
+   "city": "KENNESAW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0025313",
+   "permittee": "Brunswick-Glynn County Joint Water & Sewer Commission",
+   "city": "BRUNSWICK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0025348",
+   "permittee": "Savannah (City of)",
+   "city": "SAVANNAH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0025381",
+   "permittee": "Fulton County Department of Public Works",
+   "city": "ATLANTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0025488",
+   "permittee": "City of Vidalia",
+   "city": "VIDALIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0025569",
+   "permittee": "City of Dublin",
+   "city": "DUBLIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0025585",
+   "permittee": "Blakely, City of",
+   "city": "BLAKELY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0025607",
+   "permittee": "Town of Trion",
+   "city": "TRION",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0025674",
+   "permittee": "Canton, City of",
+   "city": "CANTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0025704",
+   "permittee": "City of Summerville",
+   "city": "SUMMERVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0025712",
+   "permittee": "City of LaFayette",
+   "city": "LAFAYETTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0025771",
+   "permittee": "City of Cairo",
+   "city": "CAIRO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0025852",
+   "permittee": "Ashburn, City of",
+   "city": "ASHBURN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0026000",
+   "permittee": "City of Jesup",
+   "city": "JESUP",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0026042",
+   "permittee": "City of Rockmart",
+   "city": "ROCKMART",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0026077",
+   "permittee": "Dahlonega, City of",
+   "city": "DAHLONEGA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0026123",
+   "permittee": "City of Donalsonville",
+   "city": "DONALSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0026140",
+   "permittee": "Cobb County Water System",
+   "city": "SMYRNA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0026158",
+   "permittee": "Cobb County Water System",
+   "city": "AUSTELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0026247",
+   "permittee": "Commerce, City of",
+   "city": "COMMERCE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0026263",
+   "permittee": "City of Woodstock",
+   "city": "WOODSTOCK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0026433",
+   "permittee": "Gwinnett County Board of Commissioners",
+   "city": "NORCROSS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0026638",
+   "permittee": "City of Leesburg",
+   "city": "LEESBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0026816",
+   "permittee": "DeKalb County",
+   "city": "LITHONIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0027162",
+   "permittee": "City of Villa Rica",
+   "city": "VILLA RICA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0030121",
+   "permittee": "City of Thomaston",
+   "city": "THOMASTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0030325",
+   "permittee": "Sandy Run Creek WPCP",
+   "city": "WARNER ROBINS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0030333",
+   "permittee": "Calhoun, City of",
+   "city": "CALHOUN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0030341",
+   "permittee": "DOUGLASVILLE SOUTHSIDE WPCP",
+   "city": "DOUGLASVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "GA0030732",
+   "permittee": "GWINNETT CO JACKSON CR",
+   "city": "LILBURN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "GA0030775",
+   "permittee": "City of Milledgeville",
+   "city": "MILLEDGEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0030791",
+   "permittee": "City of Griffin",
+   "city": "GRIFFIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0031038",
+   "permittee": "Garden City",
+   "city": "GARDEN CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0031046",
+   "permittee": "Fort Valley Utility Commission",
+   "city": "FORT VALLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0031101",
+   "permittee": "City of Washington",
+   "city": "WASHINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0031721",
+   "permittee": "Newnan Utilities",
+   "city": "NEWNAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0031801",
+   "permittee": "Forsyth (City of)",
+   "city": "FORSYTH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0031984",
+   "permittee": "Columbia County Water Utility",
+   "city": "GROVETOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0031992",
+   "permittee": "Columbia County Water Utility",
+   "city": "MARTINEZ",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0032051",
+   "permittee": "City of Sandersville",
+   "city": "SANDERSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0032107",
+   "permittee": "City of Cochran",
+   "city": "COCHRAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0032492",
+   "permittee": "City of Chatsworth",
+   "city": "CHATSWORTH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0032841",
+   "permittee": "GWINNETT CO BEAVER/SWEETWATER",
+   "city": "LAWRENCEVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "GA0033235",
+   "permittee": "Valdosta, City of",
+   "city": "VALDOSTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0033251",
+   "permittee": "Fulton County Department of Public Works",
+   "city": "WOODSTOCK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0033511",
+   "permittee": "Decatur County Industrial Airpark",
+   "city": "BAINBRIDGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0034584",
+   "permittee": "Unified Government of Athens-Clarke County",
+   "city": "ATHENS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0035777",
+   "permittee": "Peachtree City Water and Sewerage Authority",
+   "city": "PEACHTREE CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0035807",
+   "permittee": "City of Fayetteville",
+   "city": "FAYETTEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0036765",
+   "permittee": "City of Hazlehurst",
+   "city": "HAZLEHURST",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0036951",
+   "permittee": "City of LaGrange",
+   "city": "LAGRANGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0037168",
+   "permittee": "Atlanta, City of",
+   "city": "ATLANTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0037222",
+   "permittee": "City of Albany, Georgia",
+   "city": "ALBANY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0037583",
+   "permittee": "City of Blue Ridge",
+   "city": "BLUE RIDGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0037621",
+   "permittee": "City of Augusta",
+   "city": "AUGUSTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0037648",
+   "permittee": "City of Richmond Hill",
+   "city": "RICHMOND HILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0037796",
+   "permittee": "Ocmulgee River WPCP",
+   "city": "WARNER ROBINS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0037800",
+   "permittee": "City of Kingsland",
+   "city": "KINGSLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0037982",
+   "permittee": "City of Glennville",
+   "city": "GLENNVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038130",
+   "permittee": "Gwinnett County Board of Commissioners",
+   "city": "BUFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038326",
+   "permittee": "Savannah (City of)",
+   "city": "SAVANNAH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0038369",
+   "permittee": "Clayton County Water Authority",
+   "city": "HAMPTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038423",
+   "permittee": "Clayton County Water Authority",
+   "city": "JONESBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0038440",
+   "permittee": "FULTON CO-CAULEY CRK",
+   "city": "DULUTH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0038466",
+   "permittee": "City of Waynesboro",
+   "city": "WAYNESBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0038555",
+   "permittee": "Cherokee County Water & Sewerage Authority (CCWSA)",
+   "city": "WOODSTOCK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0038661",
+   "permittee": "City of Lavonia",
+   "city": "LAVONIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0038695",
+   "permittee": "Forsyth County Department of Water & Sewer",
+   "city": "CUMMING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038709",
+   "permittee": "Douglasville - Douglas County Water and Sewer Authority",
+   "city": "DOUGLASVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0038725",
+   "permittee": "City Of Baxley",
+   "city": "BAXLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038741",
+   "permittee": "Madison, City of",
+   "city": "MADISON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038776",
+   "permittee": "City of Winder",
+   "city": "WINDER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038814",
+   "permittee": "City of Port Wentworth",
+   "city": "PORT WENTWORTH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0038822",
+   "permittee": "Coweta County Water & Sewerage Authority",
+   "city": "NEWNAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038831",
+   "permittee": "Fulton County Department of Public Works",
+   "city": "ALPHARETTA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038849",
+   "permittee": "City of Locust Grove",
+   "city": "LOCUST GROVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038857",
+   "permittee": "Town of Braselton",
+   "city": "BRASELTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038865",
+   "permittee": "Paulding County Board of Commissioners",
+   "city": "HIRAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038938",
+   "permittee": "Brunswick-Glynn Joint Water and Sewer Commission",
+   "city": "BRUNSWICK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0038954",
+   "permittee": "Forsyth County Department of Water & Sewer",
+   "city": "SUWANEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0039012",
+   "permittee": "City of Atlanta",
+   "city": "ATLANTA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0039021",
+   "permittee": "Paulding County Water System",
+   "city": "ACWORTH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0039047",
+   "permittee": "Saint Marys (City of)",
+   "city": "SAINT MARYS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0039225",
+   "permittee": "City of Swainsboro",
+   "city": "SWAINSBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0039241",
+   "permittee": "City of Dallas",
+   "city": "DALLAS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0039314",
+   "permittee": "Barrow County Board of Commissioners",
+   "city": "BETHLEHEM",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0039365",
+   "permittee": "City of Nashville",
+   "city": "NASHVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0046019",
+   "permittee": "City of Cumming",
+   "city": "CUMMING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0046027",
+   "permittee": "City of Hawkinsville",
+   "city": "HAWKINSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0046035",
+   "permittee": "City of Adairsville",
+   "city": "ADAIRSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0046418",
+   "permittee": "City of Savannah",
+   "city": "SAVANNAH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0046442",
+   "permittee": "City of Rincon",
+   "city": "RINCON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0046451",
+   "permittee": "Cherokee County Water & Sewerage Authority",
+   "city": "WOODSTOCK",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "GA0046485",
+   "permittee": "City of Eastman",
+   "city": "EASTMAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0046655",
+   "permittee": "Peachtree City Water and Sewerage Authority",
+   "city": "PEACHTREE CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0046761",
+   "permittee": "Cobb County Water System",
+   "city": "KENNESAW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0047066",
+   "permittee": "City of Pooler",
+   "city": "POOLER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0047147",
+   "permittee": "Augusta, City of",
+   "city": "AUGUSTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0047171",
+   "permittee": "City of Monroe",
+   "city": "MONROE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0047180",
+   "permittee": "City of Hinesville",
+   "city": "FORT STEWART",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0047201",
+   "permittee": "Douglasville-Douglas County Water & Sewer Authority",
+   "city": "DOUGLASVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0047236",
+   "permittee": "Fitzgerald Water, Light & Bond Commission",
+   "city": "FITZGERALD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0047627",
+   "permittee": "GWINNETT CO.- JACKS CRK",
+   "city": "SNELLVILL",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "GA0047678",
+   "permittee": "Rockdale County Department of Water Resources",
+   "city": "CONYERS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0047767",
+   "permittee": "City of Americus",
+   "city": "AMERICUS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0047775",
+   "permittee": "Columbia County Water Utility",
+   "city": "EVANS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0047911",
+   "permittee": "Gwinnett County DWR",
+   "city": "LILBURN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0048470",
+   "permittee": "City of Tifton",
+   "city": "TIFTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0050211",
+   "permittee": "Oconee County Board of Commissioners",
+   "city": "WATKINSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0050218",
+   "permittee": "City of Hogansville",
+   "city": "HOGANSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0050238",
+   "permittee": "Forsyth County",
+   "city": "SUWANEE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0050241",
+   "permittee": "Henry County Water Authority",
+   "city": "MCDONOUGH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0050243",
+   "permittee": "City of Louisville",
+   "city": "LOUISVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0050246",
+   "permittee": "City of Grovetown",
+   "city": "GROVETOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0050251",
+   "permittee": "City of Wrightsville",
+   "city": "WRIGHTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0050258",
+   "permittee": "Rockdale County Department of Water Resources",
+   "city": "CONYERS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0050281",
+   "permittee": "Chatsworth Water Works Commission",
+   "city": "CHATSWORTH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0050293",
+   "permittee": "Bartow County Water Department",
+   "city": "KINGSTON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "GA0050298",
+   "permittee": "City of Senoia",
+   "city": "SENOIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0050301",
+   "permittee": "Hinesville, City of",
+   "city": "HINESVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0050304",
+   "permittee": "Newton County Water & Sewerage Authority",
+   "city": "COVINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "GA0050316",
+   "permittee": "Henry County Water Authority",
+   "city": "MCDONOUGH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0050326",
+   "permittee": "Bryan County Board of Commissioners",
+   "city": "PEMBROKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "GA0050330",
+   "permittee": "City of Jefferson",
+   "city": "JEFFERSON",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

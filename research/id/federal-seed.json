@@ -1,0 +1,220 @@
+{
+ "state": "ID",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 121,
+ "plant_permits_major": 30,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "ID0000663",
+   "permittee": "BURLEY, CITY OF",
+   "city": "BURLEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020044",
+   "permittee": "BLACKFOOT, CITY OF",
+   "city": "BLACKFOOT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020095",
+   "permittee": "BURLEY, CITY OF",
+   "city": "BURLEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020133",
+   "permittee": "EASTERN IDAHO REGIONAL SEWER DISTRICT",
+   "city": "SHELLEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020168",
+   "permittee": "JEROME, CITY OF",
+   "city": "JEROME",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020192",
+   "permittee": "MERIDIAN, CITY OF",
+   "city": "MERIDIAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020214",
+   "permittee": "PRESTON, CITY OF",
+   "city": "PRESTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020231",
+   "permittee": "PAYETTE LAKES RECREATIONAL WATER AND SEWER DISTRICT - MCCALL WWTP",
+   "city": "MCCALL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020281",
+   "permittee": "CITY OF KETCHUM",
+   "city": "KETCHUM",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020290",
+   "permittee": "WEISER, CITY OF",
+   "city": "WEISER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020303",
+   "permittee": "HAILEY, CITY OF",
+   "city": "HAILEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020443",
+   "permittee": "BOISE, CITY OF",
+   "city": "BOISE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ID0020672",
+   "permittee": "PAYETTE, CITY OF",
+   "city": "PAYETTE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020818",
+   "permittee": "SODA SPRINGS WWTP, CITY OF",
+   "city": "SODA SPRINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0020842",
+   "permittee": "SANDPOINT, CITY OF",
+   "city": "SANDPOINT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0021261",
+   "permittee": "IDAHO FALLS, CITY OF",
+   "city": "IDAHO FALLS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0021270",
+   "permittee": "TWIN FALLS, CITY OF",
+   "city": "TWIN FALLS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0021300",
+   "permittee": "SOUTH FORK COEUR D ALENE RIVER SEWER DISTRICT",
+   "city": "SMELTERVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0021491",
+   "permittee": "MOSCOW, CITY OF",
+   "city": "MOSCOW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ID0021504",
+   "permittee": "CALDWELL, CITY OF",
+   "city": "CALDWELL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0021784",
+   "permittee": "POCATELLO, CITY OF",
+   "city": "POCATELLO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0022055",
+   "permittee": "LEWISTON, CITY OF",
+   "city": "LEWISTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0022063",
+   "permittee": "NAMPA, CITY OF",
+   "city": "NAMPA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0022853",
+   "permittee": "COEUR D ALENE, CITY OF",
+   "city": "COEUR D'ALENE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ID0023591",
+   "permittee": "STAR SEWER AND WATER DISTRICT",
+   "city": "STAR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "ID0023817",
+   "permittee": "REXBURG, CITY OF",
+   "city": "REXBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ID0023981",
+   "permittee": "BOISE, CITY OF",
+   "city": "BOISE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ID0025852",
+   "permittee": "POST FALLS, CITY OF",
+   "city": "POST FALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ID0026590",
+   "permittee": "HAYDEN AREA REGIONAL SEWER BOARD",
+   "city": "HAYDEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "ID0028355",
+   "permittee": "KUNA, CITY OF",
+   "city": "KUNA",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

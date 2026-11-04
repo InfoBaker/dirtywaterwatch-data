@@ -1,0 +1,860 @@
+{
+ "state": "IA",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "IA0021059",
+   "permittee": "SPENCER, CITY OF STP",
+   "city": "SPENCER",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "LITTLE SIOUX RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IA0023434",
+   "permittee": "MUSCATINE CITY OF STP",
+   "city": "MUSCATINE",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER FROM THE WAPSIPINICON TO THE IOW"
+   ]
+  },
+  {
+   "npdes_permit": "IA0027219",
+   "permittee": "FORT MADISON CITY OF STP",
+   "city": "FORT MADISON",
+   "open_outfalls": 7,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER NEAR FORT MADISON"
+   ]
+  },
+  {
+   "npdes_permit": "IA0035947",
+   "permittee": "CLINTON CITY OF STP",
+   "city": "CLINTON",
+   "open_outfalls": 7,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER NEAR CLINTON"
+   ]
+  },
+  {
+   "npdes_permit": "IA0042609",
+   "permittee": "KEOKUK CITY OF STP",
+   "city": "KEOKUK",
+   "open_outfalls": 1,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER NEAR FORT MADISON"
+   ]
+  },
+  {
+   "npdes_permit": "IA0043079",
+   "permittee": "BURLINGTON CITY OF STP",
+   "city": "BURLINGTON",
+   "open_outfalls": 3,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "FLINT RIVER",
+    "Mississippi River"
+   ]
+  },
+  {
+   "npdes_permit": "IA0044130",
+   "permittee": "DES MOINES METROPOLITAN WRF",
+   "city": "DES MOINES",
+   "open_outfalls": 3,
+   "closed_outfalls": 20,
+   "receiving_waters": [
+    "DES MOINES RIVER BELOW THE EAST FORK DES MOINES",
+    "DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST",
+    "NORTH RACCOON RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IA0047961",
+   "permittee": "WAPELLO CITY OF STP",
+   "city": "WAPELLO",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "IOWA RIVER BELOW NORTH LIBERTY"
+   ]
+  },
+  {
+   "npdes_permit": "IA0058611",
+   "permittee": "OTTUMWA CITY OF STP",
+   "city": "OTTUMWA",
+   "open_outfalls": 9,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "DES MOINES RIVER BELOW WHITEBREAST CREEK"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 39,
+ "plant_permits": 826,
+ "plant_permits_major": 108,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "IA0020788",
+   "permittee": "CITY OF CORALVILLE",
+   "city": "CORALVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0021059",
+   "permittee": "City of Spencer",
+   "city": "SPENCER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0021300",
+   "permittee": "CITY OF JEFFERSON",
+   "city": "JEFFERSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0021334",
+   "permittee": "CITY OF CRESCO",
+   "city": "CRESCO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0021342",
+   "permittee": "CITY OF HARLAN",
+   "city": "HARLAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0021369",
+   "permittee": "CITY OF GREENFIELD",
+   "city": "GREENFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0021377",
+   "permittee": "CITY OF CARROLL",
+   "city": "CARROLL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0021563",
+   "permittee": "CITY OF FOREST CITY",
+   "city": "FOREST CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0021580",
+   "permittee": "CITY OF EMMETSBURG",
+   "city": "EMMETSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0021946",
+   "permittee": "GLENWOOD MUNICIPAL UTILITIES",
+   "city": "GLENWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0021997",
+   "permittee": "CITY OF MITCHELLVILLE",
+   "city": "MITCHELLVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0022004",
+   "permittee": "CITY OF EVANSDALE",
+   "city": "EVANSDALE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0022012",
+   "permittee": "CITY OF LECLAIRE",
+   "city": "LE CLAIRE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0022039",
+   "permittee": "CITY OF CHARLES CITY",
+   "city": "CHARLES CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0022055",
+   "permittee": "CITY OF ALGONA",
+   "city": "ALGONA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0023302",
+   "permittee": "DENISON MUNICIPAL UTILITIES",
+   "city": "DENISON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0023345",
+   "permittee": "CITY OF DYERSVILLE",
+   "city": "DYERSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0023434",
+   "permittee": "CITY OF MUSCATINE",
+   "city": "MUSCATINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0023442",
+   "permittee": "CITY OF IOWA FALLS",
+   "city": "IOWA FALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0023710",
+   "permittee": "CITY OF MOUNT VERNON",
+   "city": "MOUNT VERNON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0023744",
+   "permittee": "CITY OF ESTHERVILLE",
+   "city": "ESTHERVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0024481",
+   "permittee": "CITY OF MAQUOKETA",
+   "city": "MAQUOKETA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0024511",
+   "permittee": "CITY OF GRUNDY CENTER",
+   "city": "GRUNDY CENTER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0024554",
+   "permittee": "CITY OF CARLISLE",
+   "city": "CARLISLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0025895",
+   "permittee": "CITY OF ANAMOSA",
+   "city": "ANAMOSA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0025933",
+   "permittee": "CITY OF ELDORA",
+   "city": "ELDORA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0026034",
+   "permittee": "CITY OF MONTICELLO",
+   "city": "MONTICELLO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0027219",
+   "permittee": "CITY OF FORT MADISON",
+   "city": "FORT MADISON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0027472",
+   "permittee": "CITY OF CENTERVILLE",
+   "city": "CENTERVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0027669",
+   "permittee": "CITY OF INDIANOLA",
+   "city": "INDIANOLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0027723",
+   "permittee": "CITY OF NEWTON",
+   "city": "NEWTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0027740",
+   "permittee": "CITY OF CASCADE",
+   "city": "CASCADE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0028525",
+   "permittee": "CITY OF NEW HAMPTON",
+   "city": "NEW HAMPTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0028924",
+   "permittee": "CITY OF CHARITON",
+   "city": "CHARITON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0029025",
+   "permittee": "CITY OF ATLANTIC",
+   "city": "ATLANTIC",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0030945",
+   "permittee": "CITY OF CLARION",
+   "city": "CLARION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0031186",
+   "permittee": "CITY OF GRINNELL",
+   "city": "GRINNELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0031691",
+   "permittee": "CITY OF WEST LIBERTY",
+   "city": "WEST LIBERTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0031704",
+   "permittee": "CITY OF NEVADA",
+   "city": "NEVADA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0032328",
+   "permittee": "CITY OF SHENANDOAH",
+   "city": "SHENANDOAH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0032344",
+   "permittee": "CITY OF OELWEIN",
+   "city": "OELWEIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0032379",
+   "permittee": "CITY OF PERRY",
+   "city": "PERRY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0032433",
+   "permittee": "CITY OF WASHINGTON",
+   "city": "WASHINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0032484",
+   "permittee": "CITY OF STORM LAKE",
+   "city": "STORM LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0032662",
+   "permittee": "CITY OF SHELDON",
+   "city": "SHELDON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0032727",
+   "permittee": "CITY OF TIPTON (WEST)",
+   "city": "TIPTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0032751",
+   "permittee": "CITY OF ORANGE CITY",
+   "city": "ORANGE CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0032794",
+   "permittee": "CITY OF WAUKEE",
+   "city": "WAUKEE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "IA0032905",
+   "permittee": "CITY OF NORTH LIBERTY",
+   "city": "NORTH LIBERTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0032956",
+   "permittee": "CITY OF OSAGE",
+   "city": "OSAGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0033081",
+   "permittee": "CITY OF WAUKON",
+   "city": "WAUKON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0033103",
+   "permittee": "CITY OF TOLEDO",
+   "city": "TOLEDO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0033138",
+   "permittee": "CITY OF ROCKWELL CITY",
+   "city": "ROCKWELL CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0033197",
+   "permittee": "CITY OF WAVERLY",
+   "city": "WAVERLY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0033669",
+   "permittee": "CITY OF WEST BURLINGTON",
+   "city": "WEST BURLINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0033731",
+   "permittee": "CITY OF SIOUX CENTER",
+   "city": "SIOUX CENTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0034291",
+   "permittee": "CITY OF WINTERSET",
+   "city": "WINTERSET",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0034380",
+   "permittee": "CITY OF EAGLE GROVE",
+   "city": "EAGLE GROVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0035076",
+   "permittee": "CITY OF FAIRFIELD",
+   "city": "FAIRFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0035190",
+   "permittee": "CITY OF CLARINDA",
+   "city": "CLARINDA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0035220",
+   "permittee": "CITY OF DECORAH",
+   "city": "DECORAH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0035238",
+   "permittee": "CITY OF CRESTON",
+   "city": "CRESTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0035271",
+   "permittee": "CITY OF DEWITT",
+   "city": "DE WITT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0035319",
+   "permittee": "CITY OF DALLAS CENTER",
+   "city": "DALLAS CENTER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0035866",
+   "permittee": "CITY OF KNOXVILLE",
+   "city": "KNOXVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0035891",
+   "permittee": "CITY OF VINTON",
+   "city": "VINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0035939",
+   "permittee": "City of Grimes",
+   "city": "GRIMES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0035947",
+   "permittee": "CITY OF CLINTON",
+   "city": "CLINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0035955",
+   "permittee": "CITY OF AMES",
+   "city": "AMES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0036471",
+   "permittee": "CITY OF HAMPTON",
+   "city": "HAMPTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0036510",
+   "permittee": "CITY OF INDEPENDENCE",
+   "city": "INDEPENDENCE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0036536",
+   "permittee": "CITY OF LE MARS",
+   "city": "LE MARS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0036625",
+   "permittee": "CITY OF WEBSTER CITY",
+   "city": "WEBSTER CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0036633",
+   "permittee": "CITY OF CEDAR FALLS",
+   "city": "CEDAR FALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0036641",
+   "permittee": "CITY OF COUNCIL BLUFFS",
+   "city": "COUNCIL BLUFFS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0038521",
+   "permittee": "CITY OF OSKALOOSA",
+   "city": "OSKALOOSA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0038539",
+   "permittee": "CITY OF OSKALOOSA",
+   "city": "OSKALOOSA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0038610",
+   "permittee": "CITY OF MARSHALLTOWN",
+   "city": "MARSHALLTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0040266",
+   "permittee": "CITY OF RED OAK",
+   "city": "RED OAK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0041815",
+   "permittee": "CITY OF OSCEOLA",
+   "city": "OSCEOLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0041904",
+   "permittee": "CITY OF OGDEN",
+   "city": "OGDEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0041921",
+   "permittee": "CITY OF ADEL",
+   "city": "ADEL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0042609",
+   "permittee": "CITY OF KEOKUK",
+   "city": "KEOKUK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0042641",
+   "permittee": "CITY OF CEDAR RAPIDS",
+   "city": "CEDAR RAPIDS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0042650",
+   "permittee": "CITY OF WATERLOO",
+   "city": "WATERLOO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0043052",
+   "permittee": "CITY OF DAVENPORT",
+   "city": "DAVENPORT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0043079",
+   "permittee": "CITY OF BURLINGTON",
+   "city": "BURLINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0043095",
+   "permittee": "CITY OF SIOUX CITY",
+   "city": "SIOUX CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0043681",
+   "permittee": "CITY OF TAMA",
+   "city": "TAMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0043869",
+   "permittee": "CITY OF PELLA",
+   "city": "PELLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0044130",
+   "permittee": "DES MOINES METROPOLITAN WRA",
+   "city": "DES MOINES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0044458",
+   "permittee": "CITY OF DUBUQUE",
+   "city": "DUBUQUE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0044849",
+   "permittee": "CITY OF FORT DODGE",
+   "city": "FORT DODGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0047791",
+   "permittee": "CITY OF HUMBOLDT",
+   "city": "HUMBOLDT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0047961",
+   "permittee": "CITY OF WAPELLO",
+   "city": "WAPELLO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0047970",
+   "permittee": "CITY OF MOUNT PLEASANT",
+   "city": "MOUNT PLEASANT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0053405",
+   "permittee": "CITY OF INDIANOLA",
+   "city": "INDIANOLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0053648",
+   "permittee": "CITY OF NEVADA",
+   "city": "NEVADA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0057169",
+   "permittee": "CITY OF MASON CITY",
+   "city": "MASON CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0058076",
+   "permittee": "CITY OF BOONE",
+   "city": "BOONE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0058441",
+   "permittee": "CLEAR LAKE SANITARY DISTRICT",
+   "city": "CLEAR LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0058611",
+   "permittee": "CITY OF OTTUMWA",
+   "city": "OTTUMWA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0059005",
+   "permittee": "CITY OF CHEROKEE",
+   "city": "CHEROKEE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0059765",
+   "permittee": "IOWA GREAT LAKES SANITARY DISTRICT",
+   "city": "MILFORD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IA0061891",
+   "permittee": "CITY OF WALCOTT",
+   "city": "WALCOTT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0063231",
+   "permittee": "CITY OF ELDRIDGE",
+   "city": "ELDRIDGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0070866",
+   "permittee": "CITY OF IOWA CITY",
+   "city": "IOWA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IA0075302",
+   "permittee": "CITY OF JESUP",
+   "city": "JESUP",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

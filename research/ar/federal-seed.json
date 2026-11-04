@@ -1,0 +1,556 @@
+{
+ "state": "AR",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 401,
+ "plant_permits_major": 78,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "AR0020010",
+   "permittee": "Fayetteville, City of - Paul R. Noland Wastewater Treatment Facility",
+   "city": "FAYETTEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0020087",
+   "permittee": "Forrest City, City of",
+   "city": "FORREST CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0020273",
+   "permittee": "Siloam Springs, City of",
+   "city": "SILOAM SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0020303",
+   "permittee": "North Little Rock Wastewater Utility - Faulkner Lake Plant",
+   "city": "NORTH LITTLE ROCK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0020320",
+   "permittee": "North Little Rock Wastewater Utility-Five Mile Creek Wastewater Treatment Plant",
+   "city": "NORTH LITTLE ROCK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0020605",
+   "permittee": "Arkadelphia, City of",
+   "city": "ARKADELPHIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0020702",
+   "permittee": "Batesville Water Utilities - Batesville Wastewater Treatment Plant",
+   "city": "BATESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0021211",
+   "permittee": "Mountain Home, City of - Wastewater Treatment Plant",
+   "city": "MOUNTAIN HOME",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0021466",
+   "permittee": "Alma, City of",
+   "city": "ALMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0021482",
+   "permittee": "VAN BUREN, CITY OF-MAIN PLANT",
+   "city": "VAN BUREN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0021580",
+   "permittee": "Osceola, City of",
+   "city": "OSCEOLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0021601",
+   "permittee": "SEARCY BOARD OF PUBLIC UTILITIES",
+   "city": "SEARCY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0021661",
+   "permittee": "CABOT WATER & WASTEWATER COMMISSION",
+   "city": "CABOT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0021733",
+   "permittee": "DEQUEEN, CITY OF",
+   "city": "DE QUEEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0021741",
+   "permittee": "Green Forest, City of - Green Forest WWTP",
+   "city": "GREEN FOREST",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0021750",
+   "permittee": "Fort Smith, City of-Massard Water Reclamation Facility",
+   "city": "BARLING",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0021768",
+   "permittee": "Russellville Water & Sewer System, City Corporation - Pollution Control Facility",
+   "city": "RUSSELLVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0021776",
+   "permittee": "NASHVILLE, CITY OF",
+   "city": "NASHVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0021792",
+   "permittee": "Berryville, City of- Berryville Wastewater Treatment Plant",
+   "city": "BERRYVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0021806",
+   "permittee": "Little Rock Water Reclamation Authority-Adams Field Water Reclamation Facility",
+   "city": "LITTLE ROCK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0021822",
+   "permittee": "MONTICELLO, CITY OF-WEST PLANT",
+   "city": "MONTICELLO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0021831",
+   "permittee": "MONTICELLO, CITY OF - EAST PLANT",
+   "city": "MONTICELLO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0021903",
+   "permittee": "Wynne Water Utilities - City of Wynne WWTP",
+   "city": "WYNNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0021971",
+   "permittee": "Marion, City of",
+   "city": "MARION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0022004",
+   "permittee": "Huntsville, City of - Huntsville Wastewater Facility",
+   "city": "HUNTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0022021",
+   "permittee": "Helena-West Helena, City of",
+   "city": "WEST HELENA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0022039",
+   "permittee": "West Memphis Utilities - West Memphis Wastewater Treatment Facility",
+   "city": "WEST MEMPHIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0022063",
+   "permittee": "Springdale Water and Sewer Commission - Springdale Wastewater Treatment Facility",
+   "city": "SPRINGDALE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0022098",
+   "permittee": "Prairie Grove Water & Waste Water Utilities, City of - Prairie Grove WWTP",
+   "city": "PRAIRIE GROVE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0022101",
+   "permittee": "Beebe, City of  - Beebe Wastewater Treatment Facility",
+   "city": "BEEBE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0022187",
+   "permittee": "Clarksville Connected Utilities - Pollution Control Facility",
+   "city": "CLARKSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0022250",
+   "permittee": "Dermott, City of-South Pond",
+   "city": "DERMOTT",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AR0022292",
+   "permittee": "DECATUR, CITY OF",
+   "city": "DECATUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0022365",
+   "permittee": "Camden Water Utilities",
+   "city": "CAMDEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0022381",
+   "permittee": "Heber Springs Water & Sewer Commission d/b/a Heber Springs Water Department",
+   "city": "HEBER SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0022403",
+   "permittee": "Bentonville, City of",
+   "city": "BENTONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0022454",
+   "permittee": "Greenwood, City of",
+   "city": "GREENWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0022578",
+   "permittee": "Blytheville, City of - South Treatment Facility",
+   "city": "BLYTHEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0033278",
+   "permittee": "Fort Smith, City of - P Street Water Reclamation Facility",
+   "city": "FORT SMITH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0033316",
+   "permittee": "Pine Bluff Wastewater Utility",
+   "city": "PINE BLUFF",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0033359",
+   "permittee": "CONWAY, CITY OF-STONE DAM CREE",
+   "city": "CONWAY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0033626",
+   "permittee": "North Little Rock Wastewater Utility- Maumelle Water Management",
+   "city": "MAUMELLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0033723",
+   "permittee": "El Dorado, City of - South Plant",
+   "city": "EL DORADO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0033766",
+   "permittee": "Paragould Light and Water Commission",
+   "city": "PARAGOULD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0033880",
+   "permittee": "Hot Springs, City of - Regional Wastewater Treatment Plant",
+   "city": "HOT SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0033936",
+   "permittee": "El Dorado, City of - North Plant",
+   "city": "EL DORADO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0033987",
+   "permittee": "Dumas, City of",
+   "city": "DUMAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0034002",
+   "permittee": "Bryant , City of -Wastewater Treatment Plant",
+   "city": "BRYANT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0034126",
+   "permittee": "Malvern, City Of",
+   "city": "MALVERN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0034321",
+   "permittee": "Harrison, City of",
+   "city": "HARRISON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0034380",
+   "permittee": "Stuttgart, City of",
+   "city": "STUTTGART",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0035602",
+   "permittee": "Trumann, City of",
+   "city": "TRUMANN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0036498",
+   "permittee": "Benton Utilities",
+   "city": "BENTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0036692",
+   "permittee": "Mena, City of - Mena Wastewater Treatment Plan",
+   "city": "MENA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0037044",
+   "permittee": "Newport, City of",
+   "city": "NEWPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0037176",
+   "permittee": "Sherwood, City of - North Facility",
+   "city": "SHERWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0037907",
+   "permittee": "Jonesboro, City Water and Light Plant of the City of - Westside WWTP",
+   "city": "JONESBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0038288",
+   "permittee": "North Little Rock Wastewater Utility - White Oak Bayou",
+   "city": "NORTH LITTLE ROCK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0038466",
+   "permittee": "Hope, City of - Bois D'Arc WWTP",
+   "city": "HOPE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0040177",
+   "permittee": "Little Rock Water Reclamation Authority",
+   "city": "LITTLE ROCK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0040967",
+   "permittee": "Van Buren Municipal Utilities, City of -- Van Buren North Treatment Plant",
+   "city": "VAN BUREN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0041335",
+   "permittee": "Jacksonville Wastewater Utility - J. Albert Regional Treatment Facility",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0042951",
+   "permittee": "Ashdown, City of",
+   "city": "ASHDOWN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AR0043389",
+   "permittee": "Helena, City of - Helena Municipal Water and Sewer System",
+   "city": "HELENA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0043397",
+   "permittee": "ROGERS, CITY OF",
+   "city": "ROGERS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0043401",
+   "permittee": "Jonesboro, City Water & Light Plant Of The City Of - Eastside WWTP",
+   "city": "JONESBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0043427",
+   "permittee": "Warren Water and Sewer",
+   "city": "WARREN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0043613",
+   "permittee": "MAGNOLIA, CITY OF-BIG CREEK WWTP",
+   "city": "MAGNOLIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0046566",
+   "permittee": "Walnut Ridge, City of - Walnut Ridge WWTP",
+   "city": "WALNUT RIDGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0047279",
+   "permittee": "Conway Corporation - Tucker Creek WWTP",
+   "city": "CONWAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0047554",
+   "permittee": "WARD, CITY OF",
+   "city": "WARD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0048747",
+   "permittee": "Clinton, City of-West Wastewater Treatment Facility",
+   "city": "CLINTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0048801",
+   "permittee": "BARLING, CITY OF",
+   "city": "BARLING",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0048836",
+   "permittee": "CLINTON, CITY OF-EAST WWTF",
+   "city": "CLINTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0050024",
+   "permittee": "Northwest Arkansas Conservation Authority - Regional WWTF",
+   "city": "BENTONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0050288",
+   "permittee": "Fayetteville, City of - West Side Wastewater Treatment Facility",
+   "city": "FAYETTEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "AR0050849",
+   "permittee": "LITTLE ROCK WATER RECLAMATION AUTHORITY",
+   "city": "LITTLE ROCK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "AR0051951",
+   "permittee": "Conway Corporation - Tupelo Bay Wastewater Treatment Plant",
+   "city": "CONWAY",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

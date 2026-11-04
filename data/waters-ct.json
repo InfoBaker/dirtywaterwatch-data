@@ -1,0 +1,3526 @@
+{
+ "state": "CT",
+ "source": "openboatlaunch out/water snapshot 2026-11-01",
+ "count": 151,
+ "waters": [
+  {
+   "slug": "amos-lake-ct",
+   "name": "Amos Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Preston"
+   ],
+   "bbox": [
+    -71.98103,
+    41.51104,
+    -71.9716,
+    41.52285
+   ],
+   "wikidata": "Q31810436",
+   "charted": false,
+   "area_km2": 0.45,
+   "launches": [
+    "amos-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ash-creek-ct",
+   "name": "Ash Creek",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Fairfield"
+   ],
+   "bbox": [
+    -73.24208,
+    41.14296,
+    -73.22337,
+    41.16792
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.478,
+   "launches": [
+    "ash-creek-open-space-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "avery-pond-ct",
+   "name": "Avery Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Preston"
+   ],
+   "bbox": [
+    -71.98176,
+    41.49007,
+    -71.97582,
+    41.49563
+   ],
+   "wikidata": "Q31810437",
+   "charted": false,
+   "area_km2": 0.189,
+   "launches": [
+    "avery-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "babcock-pond-ct",
+   "name": "Babcock Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Colchester"
+   ],
+   "bbox": [
+    -72.40108,
+    41.53283,
+    -72.39184,
+    41.55125
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.521,
+   "launches": [
+    "babcock-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "back-river-ct",
+   "name": "Back River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Old Lyme"
+   ],
+   "bbox": [
+    -72.34979,
+    41.28252,
+    -72.32323,
+    41.3022
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "great-island-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ball-pond-ct",
+   "name": "Ball Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "New Fairfield"
+   ],
+   "bbox": [
+    -73.52676,
+    41.45749,
+    -73.5199,
+    41.46783
+   ],
+   "wikidata": "Q31810439",
+   "charted": false,
+   "area_km2": 0.344,
+   "launches": [
+    "ball-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bantam-lake-ct",
+   "name": "Bantam Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Litchfield",
+    "Morris"
+   ],
+   "bbox": [
+    -73.23425,
+    41.68598,
+    -73.20423,
+    41.71785
+   ],
+   "wikidata": "Q18148874",
+   "charted": false,
+   "area_km2": 3.935,
+   "launches": [
+    "bantam-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bashan-lake-ct",
+   "name": "Bashan Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "East Haddam"
+   ],
+   "bbox": [
+    -72.42454,
+    41.48335,
+    -72.40302,
+    41.49926
+   ],
+   "wikidata": "Q31810445",
+   "charted": false,
+   "area_km2": 1.073,
+   "launches": [
+    "bashan-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "batterson-park-pond-ct",
+   "name": "Batterson Park Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Farmington"
+   ],
+   "bbox": [
+    -72.79405,
+    41.70586,
+    -72.78058,
+    41.71599
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.63,
+   "launches": [
+    "batterson-park-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beach-pond-ct",
+   "name": "Beach Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Voluntown"
+   ],
+   "bbox": [
+    -71.81757,
+    41.5689,
+    -71.77832,
+    41.58396
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.648,
+   "launches": [
+    "beach-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beamon-creek-ct",
+   "name": "Beamon Creek",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Old Saybrook"
+   ],
+   "bbox": [
+    -72.38051,
+    41.26803,
+    -72.37208,
+    41.27184
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "south-cove-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bebee-cove-ct",
+   "name": "Bebee Cove",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Groton",
+    "Mystic"
+   ],
+   "bbox": [
+    -71.99257,
+    41.3289,
+    -71.98417,
+    41.33772
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.436,
+   "launches": [
+    "spicer-memorial-park-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beseck-lake-ct",
+   "name": "Beseck Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Middlefield"
+   ],
+   "bbox": [
+    -72.7356,
+    41.50805,
+    -72.72722,
+    41.52096
+   ],
+   "wikidata": "Q6474974",
+   "charted": false,
+   "area_km2": 0.483,
+   "launches": [
+    "beseck-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bibbins-pond-ct",
+   "name": "Bibbins Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Windham"
+   ],
+   "bbox": [
+    -72.1263,
+    41.73033,
+    -72.12485,
+    41.73384
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.036,
+   "launches": [
+    "beaver-brook-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bigelow-pond-ct",
+   "name": "Bigelow Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Union"
+   ],
+   "bbox": [
+    -72.13239,
+    41.99175,
+    -72.12582,
+    41.99816
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.103,
+   "launches": [
+    "bigelow-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "billings-lake-ct",
+   "name": "Billings Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "North Stonington"
+   ],
+   "bbox": [
+    -71.87901,
+    41.50232,
+    -71.87026,
+    41.51289
+   ],
+   "wikidata": "Q31810462",
+   "charted": false,
+   "area_km2": 0.407,
+   "launches": [
+    "billings-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "birge-pond-ct",
+   "name": "Birge Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Bristol"
+   ],
+   "bbox": [
+    -72.95067,
+    41.68829,
+    -72.94819,
+    41.69254
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.043,
+   "launches": [
+    "birge-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "black-pond-ct",
+   "name": "Black Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Middlefield"
+   ],
+   "bbox": [
+    -72.75235,
+    41.51971,
+    -72.7421,
+    41.52749
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.299,
+   "launches": [
+    "black-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "black-pond-woodstock-ct",
+   "name": "Black Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Woodstock"
+   ],
+   "bbox": [
+    -72.07449,
+    41.96716,
+    -72.06544,
+    41.97275
+   ],
+   "wikidata": "Q32842987",
+   "charted": false,
+   "area_km2": 0.29,
+   "launches": [
+    "black-pond-boat-launch-woodstock-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blue-lake-ct",
+   "name": "Blue Lake",
+   "kind": "pond",
+   "state": "CT",
+   "towns": [
+    "North Stonington"
+   ],
+   "bbox": [
+    -71.90015,
+    41.5051,
+    -71.89102,
+    41.51132
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.206,
+   "launches": [
+    "anderson-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "branford-harbor-ct",
+   "name": "Branford Harbor",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Branford"
+   ],
+   "bbox": [
+    -72.83355,
+    41.2512,
+    -72.81732,
+    41.2591
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.558,
+   "launches": [
+    "branford-river-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "branford-river-ct",
+   "name": "Branford River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Branford"
+   ],
+   "bbox": [
+    -72.80523,
+    41.27498,
+    -72.76191,
+    41.34059
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "branford-high-school-car-top-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bridgeport-harbor-ct",
+   "name": "Bridgeport Harbor",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Bridgeport"
+   ],
+   "bbox": [
+    -73.18657,
+    41.14844,
+    -73.13731,
+    41.17522
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.945,
+   "launches": [
+    "newfield-avenue-boat-ramp-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "burr-pond-ct",
+   "name": "Burr Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Torrington"
+   ],
+   "bbox": [
+    -73.1025,
+    41.86515,
+    -73.09317,
+    41.87448
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.338,
+   "launches": [
+    "burr-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-ct",
+   "name": "Cedar Creek",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Bridgeport"
+   ],
+   "bbox": [
+    -73.21812,
+    41.15291,
+    -73.2007,
+    41.16686
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.31,
+   "launches": [
+    "brewster-street-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-lake-ct",
+   "name": "Cedar Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Chester"
+   ],
+   "bbox": [
+    -72.50295,
+    41.39732,
+    -72.49626,
+    41.40579
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.293,
+   "launches": [
+    "cedar-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chapman-mill-pond-ct",
+   "name": "Chapman Mill Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Westbrook"
+   ],
+   "bbox": [
+    -72.49879,
+    41.29424,
+    -72.49449,
+    41.30379
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.114,
+   "launches": [
+    "menunketesuck-wildlife-management-area-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cockenoe-harbor-ct",
+   "name": "Cockenoe Harbor",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Norwalk"
+   ],
+   "bbox": [
+    -73.39847,
+    41.06685,
+    -73.35471,
+    41.10216
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.511,
+   "launches": [
+    "calf-pasture-beach-ct",
+    "canfield-crossing-subdivision-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "colebrook-river-lake-ct",
+   "name": "Colebrook River Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Colebrook"
+   ],
+   "bbox": [
+    -73.06172,
+    42.0046,
+    -73.03631,
+    42.06127
+   ],
+   "wikidata": "Q34881110",
+   "charted": false,
+   "area_km2": 3.051,
+   "launches": [
+    "colebrook-river-lake-boat-launch-ct",
+    "colebrook-river-lake-boat-launch-near-colebrook-ct-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "connecticut-river-ct",
+   "name": "Connecticut River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Chester",
+    "Cromwell",
+    "Deep River",
+    "East Haddam",
+    "East Hartford",
+    "Enfield",
+    "Gildersleeve",
+    "Haddam",
+    "Hartford",
+    "Lyme",
+    "Middletown",
+    "Old Lyme"
+   ],
+   "bbox": [
+    -72.66538,
+    41.27156,
+    -72.33266,
+    42.07219
+   ],
+   "wikidata": "Q379648",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "baldwin-bridge-boat-launch-ct",
+    "bissell-bridge-boat-launch-connecticut-river-ct",
+    "brockway-ferry-landing-ct",
+    "deep-river-town-dock-ct",
+    "ely-s-ferry-landing-ct",
+    "haddam-meadows-boat-launch-connecticut-river-ct",
+    "hadlyme-ferry-boat-launch-connecticut-river-ct",
+    "kings-island-boat-launch-connecticut-river-ct",
+    "old-lyme-ferry-road-launch-site-and-dock-ct",
+    "parkers-point-boat-launch-ct",
+    "pilgrim-landing-ct",
+    "smith-neck-town-landing-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cove-harbor-ct",
+   "name": "Cove Harbor",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Darien",
+    "Stamford"
+   ],
+   "bbox": [
+    -73.50803,
+    41.03636,
+    -73.48911,
+    41.04926
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.246,
+   "launches": [
+    "weed-beach-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coventry-lake-ct",
+   "name": "Coventry Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Coventry"
+   ],
+   "bbox": [
+    -72.33533,
+    41.76522,
+    -72.30732,
+    41.78356
+   ],
+   "wikidata": "Q31810847",
+   "charted": false,
+   "area_km2": 1.568,
+   "launches": [
+    "coventry-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-lake-ct",
+   "name": "Crystal Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Ellington"
+   ],
+   "bbox": [
+    -72.3796,
+    41.93167,
+    -72.36797,
+    41.94512
+   ],
+   "wikidata": "Q34718814",
+   "charted": false,
+   "area_km2": 0.817,
+   "launches": [
+    "crystal-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-lake-middletown-ct",
+   "name": "Crystal Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Middletown"
+   ],
+   "bbox": [
+    -72.64038,
+    41.51584,
+    -72.63689,
+    41.52532
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.131,
+   "launches": [
+    "crystal-lake-boat-launch-middletown-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dodge-pond-ct",
+   "name": "Dodge Pond",
+   "kind": "pond",
+   "state": "CT",
+   "towns": [
+    "East Lyme"
+   ],
+   "bbox": [
+    -72.20266,
+    41.32519,
+    -72.19604,
+    41.33033
+   ],
+   "wikidata": "Q31810498",
+   "charted": false,
+   "area_km2": 0.139,
+   "launches": [
+    "dodge-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dog-pond-ct",
+   "name": "Dog Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Goshen"
+   ],
+   "bbox": [
+    -73.24308,
+    41.81044,
+    -73.23549,
+    41.81788
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.271,
+   "launches": [
+    "dog-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dooley-pond-ct",
+   "name": "Dooley Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Middletown"
+   ],
+   "bbox": [
+    -72.67003,
+    41.50766,
+    -72.6662,
+    41.51461
+   ],
+   "wikidata": "Q34883957",
+   "charted": false,
+   "area_km2": 0.107,
+   "launches": [
+    "dooley-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "eagleville-lake-ct",
+   "name": "Eagleville Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Coventry"
+   ],
+   "bbox": [
+    -72.28956,
+    41.78448,
+    -72.28042,
+    41.79272
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.22,
+   "launches": [
+    "eagleville-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-river-ct",
+   "name": "East River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Guilford"
+   ],
+   "bbox": [
+    -72.68519,
+    41.26999,
+    -72.6441,
+    41.32741
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "east-river-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "falls-river-ct",
+   "name": "Falls River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Essex"
+   ],
+   "bbox": [
+    -72.49771,
+    41.3301,
+    -72.37934,
+    41.36797
+   ],
+   "wikidata": "Q5432491",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bushnell-park-ct",
+    "essex-town-dock-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "farmington-river-ct",
+   "name": "Farmington River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Avon",
+    "Collinsville",
+    "Farmington",
+    "River Glen",
+    "Tariffville",
+    "Weatogue",
+    "Windsor"
+   ],
+   "bbox": [
+    -72.95826,
+    41.71993,
+    -72.63132,
+    41.91764
+   ],
+   "wikidata": "Q3066962",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "farmington-river-boat-launch-avon-ct",
+    "farmington-river-boat-launch-windsor-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fishers-island-sound-ct",
+   "name": "Fishers Island Sound",
+   "kind": "sound",
+   "state": "CT",
+   "towns": [
+    "Groton"
+   ],
+   "bbox": [
+    -72.06462,
+    41.24995,
+    -71.85479,
+    41.34252
+   ],
+   "wikidata": "Q31812973",
+   "charted": true,
+   "area_km2": 65.88,
+   "launches": [
+    "bayberry-lane-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fourmile-river-ct",
+   "name": "Fourmile River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Old Lyme",
+    "Point O'Woods"
+   ],
+   "bbox": [
+    -72.27115,
+    41.29945,
+    -72.24879,
+    41.41953
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "four-mile-river-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gardner-lake-ct",
+   "name": "Gardner Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Heilwield Corner",
+    "Norwich",
+    "Salem"
+   ],
+   "bbox": [
+    -72.23544,
+    41.50137,
+    -72.21716,
+    41.52629
+   ],
+   "wikidata": "Q5522606",
+   "charted": false,
+   "area_km2": 2.182,
+   "launches": [
+    "gardner-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "glasgo-pond-ct",
+   "name": "Glasgo Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Griswold"
+   ],
+   "bbox": [
+    -71.88898,
+    41.55186,
+    -71.87034,
+    41.5674
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.431,
+   "launches": [
+    "glasgo-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gorton-pond-ct",
+   "name": "Gorton Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "East Lyme"
+   ],
+   "bbox": [
+    -72.21435,
+    41.33615,
+    -72.20725,
+    41.34909
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.212,
+   "launches": [
+    "gorton-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "green-fall-pond-ct",
+   "name": "Green Fall Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Voluntown"
+   ],
+   "bbox": [
+    -71.81253,
+    41.52839,
+    -71.80603,
+    41.53662
+   ],
+   "wikidata": "Q31810545",
+   "charted": false,
+   "area_km2": 0.194,
+   "launches": [
+    "green-falls-reservoir-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "guilford-harbor-ct",
+   "name": "Guilford Harbor",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Guilford"
+   ],
+   "bbox": [
+    -72.67948,
+    41.25811,
+    -72.65818,
+    41.27261
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.284,
+   "launches": [
+    "sluice-creek-car-top-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "halls-pond-ct",
+   "name": "Halls Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Eastford"
+   ],
+   "bbox": [
+    -72.1142,
+    41.83679,
+    -72.10669,
+    41.84511
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.324,
+   "launches": [
+    "halls-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hammock-river-ct",
+   "name": "Hammock River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Clinton"
+   ],
+   "bbox": [
+    -72.52067,
+    41.26494,
+    -72.50278,
+    41.27059
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.091,
+   "launches": [
+    "clinton-town-beach-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hampton-reservoir-ct",
+   "name": "Hampton Reservoir",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Hampton"
+   ],
+   "bbox": [
+    -72.06313,
+    41.82284,
+    -72.05589,
+    41.82989
+   ],
+   "wikidata": "Q34888767",
+   "charted": false,
+   "area_km2": 0.249,
+   "launches": [
+    "hampton-reservoir-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hatch-pond-ct",
+   "name": "Hatch Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Kent"
+   ],
+   "bbox": [
+    -73.48313,
+    41.68011,
+    -73.47298,
+    41.68891
+   ],
+   "wikidata": "Q31810561",
+   "charted": false,
+   "area_km2": 0.279,
+   "launches": [
+    "hatch-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "higganum-reservoir-ct",
+   "name": "Higganum Reservoir",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Haddam"
+   ],
+   "bbox": [
+    -72.56038,
+    41.48284,
+    -72.55838,
+    41.49347
+   ],
+   "wikidata": "Q60763934",
+   "charted": false,
+   "area_km2": 0.109,
+   "launches": [
+    "higganum-reservoir-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "highland-lake-ct",
+   "name": "Highland Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Winchester"
+   ],
+   "bbox": [
+    -73.09892,
+    41.88889,
+    -73.07845,
+    41.92293
+   ],
+   "wikidata": "Q30611948",
+   "charted": false,
+   "area_km2": 1.882,
+   "launches": [
+    "highland-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "holbrook-pond-ct",
+   "name": "Holbrook Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Hebron"
+   ],
+   "bbox": [
+    -72.37845,
+    41.67322,
+    -72.37248,
+    41.68171
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.3,
+   "launches": [
+    "holbrook-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hopeville-pond-ct",
+   "name": "Hopeville Pond",
+   "kind": "pond",
+   "state": "CT",
+   "towns": [
+    "Griswold"
+   ],
+   "bbox": [
+    -71.94133,
+    41.58641,
+    -71.92046,
+    41.61068
+   ],
+   "wikidata": "Q34890567",
+   "charted": false,
+   "area_km2": 0.637,
+   "launches": [
+    "hopeville-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horse-pond-ct",
+   "name": "Horse Pond",
+   "kind": "pond",
+   "state": "CT",
+   "towns": [
+    "Salem"
+   ],
+   "bbox": [
+    -72.25318,
+    41.46076,
+    -72.24875,
+    41.46285
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.056,
+   "launches": [
+    "horse-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "housatonic-river-ct",
+   "name": "Housatonic River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Gaylordsville",
+    "Milford",
+    "New Milford",
+    "North Canaan",
+    "Pine Rock Park",
+    "Shelton",
+    "Stratford"
+   ],
+   "bbox": [
+    -73.51339,
+    41.16833,
+    -73.06521,
+    42.05027
+   ],
+   "wikidata": "Q1631368",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "birdseye-street-boat-launch-ct",
+    "caswell-cove-water-access-area-ct",
+    "charles-wheeler-wildlife-management-area-ct",
+    "housatonic-river-boat-launch-ct",
+    "sunnyside-boat-ramp-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "howells-pond-ct",
+   "name": "Howells Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Hartland"
+   ],
+   "bbox": [
+    -72.99469,
+    42.02119,
+    -72.99122,
+    42.02466
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.059,
+   "launches": [
+    "howells-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "indian-river-ct",
+   "name": "Indian River",
+   "kind": "stream",
+   "state": "CT",
+   "towns": [
+    "Clinton"
+   ],
+   "bbox": [
+    -72.55568,
+    41.27839,
+    -72.52223,
+    41.34133
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "clinton-landing-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jordan-mill-pond-ct",
+   "name": "Jordan Mill Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Waterford"
+   ],
+   "bbox": [
+    -72.14129,
+    41.33845,
+    -72.13969,
+    41.34016
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.008,
+   "launches": [
+    "jordan-mill-park-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "joshua-cove-ct",
+   "name": "Joshua Cove",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Guilford"
+   ],
+   "bbox": [
+    -72.72056,
+    41.24868,
+    -72.69756,
+    41.26579
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.118,
+   "launches": [
+    "great-harbor-wildlife-management-area-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "keeny-cove-ct",
+   "name": "Keeny Cove",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Waterford"
+   ],
+   "bbox": [
+    -72.18182,
+    41.3479,
+    -72.17678,
+    41.35291
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.143,
+   "launches": [
+    "kiddie-beach-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-candlewood-ct",
+   "name": "Lake Candlewood",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Candlewood Point",
+    "Candlewood Shores",
+    "Danbury",
+    "Knollcrest",
+    "New Fairfield",
+    "Sherman"
+   ],
+   "bbox": [
+    -73.49307,
+    41.42309,
+    -73.42377,
+    41.57837
+   ],
+   "wikidata": "Q5032008",
+   "charted": false,
+   "area_km2": 21.3,
+   "launches": [
+    "candlewood-lake-lattins-cove-boat-launch-ct",
+    "candlewood-lake-squantz-cove-boat-launch-ct"
+   ],
+   "advisories": [
+    {
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels are established in this water (Connecticut DEEP). Clean, drain and dry your boat, trailer and gear before you leave the launch, and do not carry water, plants or live bait to another lake.",
+     "url": "https://portal.ct.gov/deep/fishing/general-information/fishing-tournaments",
+     "checked": "2026-10-15"
+    }
+   ]
+  },
+  {
+   "slug": "lake-hayward-ct",
+   "name": "Lake Hayward",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "East Haddam"
+   ],
+   "bbox": [
+    -72.33514,
+    41.50939,
+    -72.32446,
+    41.53153
+   ],
+   "wikidata": "Q6476123",
+   "charted": false,
+   "area_km2": 0.73,
+   "launches": [
+    "hayward-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-housatonic-ct",
+   "name": "Lake Housatonic",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Shelton"
+   ],
+   "bbox": [
+    -73.15793,
+    41.32427,
+    -73.10149,
+    41.37778
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.301,
+   "launches": [
+    "lake-housatonic-boat-launch-ct"
+   ],
+   "advisories": [
+    {
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels are established in this water (Connecticut DEEP). Clean, drain and dry your boat, trailer and gear before you leave the launch, and do not carry water, plants or live bait to another lake.",
+     "url": "https://portal.ct.gov/deep/fishing/general-information/fishing-tournaments",
+     "checked": "2026-10-15"
+    }
+   ]
+  },
+  {
+   "slug": "lake-kenosia-ct",
+   "name": "Lake Kenosia",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Danbury",
+    "Mill Plain"
+   ],
+   "bbox": [
+    -73.5086,
+    41.3818,
+    -73.49756,
+    41.38792
+   ],
+   "wikidata": "Q31810660",
+   "charted": false,
+   "area_km2": 0.241,
+   "launches": [
+    "lake-kenosia-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lillinonah-ct",
+   "name": "Lake Lillinonah",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Bridgewater",
+    "Brookfield",
+    "Lanesville",
+    "Newtown",
+    "Roxbury Falls"
+   ],
+   "bbox": [
+    -73.40675,
+    41.44421,
+    -73.29409,
+    41.54226
+   ],
+   "wikidata": "Q6476633",
+   "charted": false,
+   "area_km2": 6.476,
+   "launches": [
+    "lake-lillinonah-pond-brook-boat-launch-ct",
+    "lake-lillinonah-boat-launch-ct"
+   ],
+   "advisories": [
+    {
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels are established in this water (Connecticut DEEP). Clean, drain and dry your boat, trailer and gear before you leave the launch, and do not carry water, plants or live bait to another lake.",
+     "url": "https://portal.ct.gov/deep/fishing/general-information/fishing-tournaments",
+     "checked": "2026-10-15"
+    }
+   ]
+  },
+  {
+   "slug": "lake-naraneka-ct",
+   "name": "Lake Naraneka",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Ridgefield"
+   ],
+   "bbox": [
+    -73.51057,
+    41.32066,
+    -73.50341,
+    41.32608
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "pierrepont-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-of-isles-ct",
+   "name": "Lake of Isles",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "North Stonington"
+   ],
+   "bbox": [
+    -71.95021,
+    41.47828,
+    -71.94237,
+    41.49097
+   ],
+   "wikidata": "Q31810692",
+   "charted": false,
+   "area_km2": 0.374,
+   "launches": [
+    "lake-of-isles-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-pocotopaug-ct",
+   "name": "Lake Pocotopaug",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "East Hampton"
+   ],
+   "bbox": [
+    -72.51188,
+    41.58512,
+    -72.49185,
+    41.60337
+   ],
+   "wikidata": "Q34915492",
+   "charted": false,
+   "area_km2": 2.099,
+   "launches": [
+    "lake-pocotopaug-boat-launch-ct"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2015.",
+     "date": "2015-09-02",
+     "years": [
+      "2015"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-waramaug-ct",
+   "name": "Lake Waramaug",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Kent",
+    "New Preston"
+   ],
+   "bbox": [
+    -73.38364,
+    41.68269,
+    -73.34428,
+    41.70963
+   ],
+   "wikidata": "Q20657142",
+   "charted": false,
+   "area_km2": 2.704,
+   "launches": [
+    "waramaug-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-winchester-ct",
+   "name": "Lake Winchester",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Winchester"
+   ],
+   "bbox": [
+    -73.16281,
+    41.9078,
+    -73.14865,
+    41.9269
+   ],
+   "wikidata": "Q34901956",
+   "charted": false,
+   "area_km2": 1.059,
+   "launches": [
+    "winchester-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-wintergreen-ct",
+   "name": "Lake Wintergreen",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Hamden"
+   ],
+   "bbox": [
+    -72.97013,
+    41.3512,
+    -72.96537,
+    41.36006
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.185,
+   "launches": [
+    "wintergreen-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-zoar-ct",
+   "name": "Lake Zoar",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Lakeside",
+    "Riverside",
+    "Southbury",
+    "Stevenson"
+   ],
+   "bbox": [
+    -73.29591,
+    41.38159,
+    -73.17101,
+    41.45353
+   ],
+   "wikidata": "Q6478599",
+   "charted": false,
+   "area_km2": 3.895,
+   "launches": [
+    "lake-zoar-boat-launch-ct"
+   ],
+   "advisories": [
+    {
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels are established in this water (Connecticut DEEP). Clean, drain and dry your boat, trailer and gear before you leave the launch, and do not carry water, plants or live bait to another lake.",
+     "url": "https://portal.ct.gov/deep/fishing/general-information/fishing-tournaments",
+     "checked": "2026-10-15"
+    }
+   ]
+  },
+  {
+   "slug": "lantern-hill-pond-ct",
+   "name": "Lantern Hill Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Ledyard"
+   ],
+   "bbox": [
+    -71.95103,
+    41.45702,
+    -71.94624,
+    41.46123
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.106,
+   "launches": [
+    "lantern-hill-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "leonard-pond-ct",
+   "name": "Leonard Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Kent"
+   ],
+   "bbox": [
+    -73.47638,
+    41.70323,
+    -73.47297,
+    41.70818
+   ],
+   "wikidata": "Q31810730",
+   "charted": false,
+   "area_km2": 0.105,
+   "launches": [
+    "leonard-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lieutenant-river-ct",
+   "name": "Lieutenant River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Old Lyme"
+   ],
+   "bbox": [
+    -72.34941,
+    41.307,
+    -72.32833,
+    41.34499
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.089,
+   "launches": [
+    "lieutenant-river-carry-in-access-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-narragansett-bay-ct",
+   "name": "Little Narragansett Bay",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Stonington"
+   ],
+   "bbox": [
+    -71.90537,
+    41.30705,
+    -71.84681,
+    41.34081
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 10.109,
+   "launches": [
+    "barn-island-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-pond-ct",
+   "name": "Little Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Thompson"
+   ],
+   "bbox": [
+    -71.84388,
+    42.01065,
+    -71.83781,
+    42.01814
+   ],
+   "wikidata": "Q31810739",
+   "charted": false,
+   "area_km2": 0.277,
+   "launches": [
+    "little-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-island-sound-ct",
+   "name": "Long Island Sound",
+   "kind": "sound",
+   "state": "CT",
+   "towns": [
+    "Bridgeport",
+    "Clinton",
+    "Cornfield Park",
+    "Darien",
+    "East Haven",
+    "Giants Neck",
+    "Guilford",
+    "Lordship",
+    "Madison",
+    "Milford",
+    "Morris Cove",
+    "New Haven"
+   ],
+   "bbox": [
+    -73.80933,
+    40.77114,
+    -72.03828,
+    41.32187
+   ],
+   "wikidata": "Q867460",
+   "charted": true,
+   "area_km2": 2921.689,
+   "launches": [
+    "altschuler-beach-ct",
+    "bradley-point-park-ct",
+    "city-boat-ramp-ct",
+    "clinton-town-boat-ramp-ct",
+    "compo-beach-and-marina-ct",
+    "dawson-avenue-beach-abbott-park-ct",
+    "dock-road-boat-launch-ct",
+    "gray-s-creek-boat-launch-ct",
+    "east-wharf-beach-ct",
+    "guilford-town-marina-ct",
+    "hammonasset-beach-boat-launch-ct",
+    "jacob-s-beach-ct",
+    "lighthouse-point-park-ct",
+    "long-beach-ct",
+    "morse-beach-ct",
+    "pear-tree-point-beach-park-ct",
+    "pleasure-beach-ct",
+    "savin-rock-conference-center-water-access-ct",
+    "seaside-park-ct",
+    "shell-beach-ct",
+    "sherwood-island-state-park-ct",
+    "silver-sands-state-park-ct",
+    "south-street-beach-ct",
+    "surf-club-ct",
+    "waterford-beach-park-ct",
+    "west-wharf-beach-ct",
+    "white-sands-beach-ct"
+   ],
+   "advisories": [],
+   "aliases": [
+    "Norwalk Harbor",
+    "Indian Harbor"
+   ]
+  },
+  {
+   "slug": "long-pond-ct",
+   "name": "Long Pond",
+   "kind": "pond",
+   "state": "CT",
+   "towns": [
+    "North Stonington"
+   ],
+   "bbox": [
+    -71.95167,
+    41.43722,
+    -71.94334,
+    41.45322
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.359,
+   "launches": [
+    "long-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-bolton-lake-ct",
+   "name": "Lower Bolton Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Bolton"
+   ],
+   "bbox": [
+    -72.43831,
+    41.79587,
+    -72.4256,
+    41.80844
+   ],
+   "wikidata": "Q32844834",
+   "charted": false,
+   "area_km2": 0.75,
+   "launches": [
+    "bolton-lake-lower-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mamanasco-pond-ct",
+   "name": "Mamanasco Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Ridgefield"
+   ],
+   "bbox": [
+    -73.53383,
+    41.31539,
+    -73.52093,
+    41.32493
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.373,
+   "launches": [
+    "mamanasco-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mansfield-hollow-lake-ct",
+   "name": "Mansfield Hollow Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Mansfield"
+   ],
+   "bbox": [
+    -72.18921,
+    41.74784,
+    -72.16127,
+    41.77941
+   ],
+   "wikidata": "Q6751654",
+   "charted": false,
+   "area_km2": 2.055,
+   "launches": [
+    "mansfield-hollow-dam-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mashapaug-pond-ct",
+   "name": "Mashapaug Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Union"
+   ],
+   "bbox": [
+    -72.14034,
+    42.00492,
+    -72.12561,
+    42.02957
+   ],
+   "wikidata": "Q6783081",
+   "charted": false,
+   "area_km2": 1.238,
+   "launches": [
+    "mashapaug-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "menunketesuck-river-ct",
+   "name": "Menunketesuck River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Westbrook"
+   ],
+   "bbox": [
+    -72.55328,
+    41.28114,
+    -72.47387,
+    41.39522
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "kirtland-landing-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "messerschmidt-pond-ct",
+   "name": "Messerschmidt Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Westbrook"
+   ],
+   "bbox": [
+    -72.49397,
+    41.33634,
+    -72.48326,
+    41.34437
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.326,
+   "launches": [
+    "messerschmidt-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "middle-cove-ct",
+   "name": "Middle Cove",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Essex"
+   ],
+   "bbox": [
+    -72.39191,
+    41.34812,
+    -72.38603,
+    41.35127
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.116,
+   "launches": [
+    "alt-water-access-area-ct",
+    "essex-town-park-ct",
+    "mack-lane-water-access-area-ct",
+    "nott-lane-open-space-ct",
+    "scholes-lane-water-access-area-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "milford-harbor-ct",
+   "name": "Milford Harbor",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Milford"
+   ],
+   "bbox": [
+    -73.0576,
+    41.21288,
+    -73.05238,
+    41.22238
+   ],
+   "wikidata": "Q31813361",
+   "charted": true,
+   "area_km2": 0.159,
+   "launches": [
+    "milford-municipal-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mill-cove-ct",
+   "name": "Mill Cove",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Ledyard"
+   ],
+   "bbox": [
+    -72.09071,
+    41.41224,
+    -72.08472,
+    41.41703
+   ],
+   "wikidata": "Q31813362",
+   "charted": true,
+   "area_km2": 0.093,
+   "launches": [
+    "erickson-park-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mill-river-ct",
+   "name": "Mill River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "New Haven"
+   ],
+   "bbox": [
+    -72.91928,
+    41.2995,
+    -72.88415,
+    41.49935
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "east-rock-park-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mill-river-fairfield-ct",
+   "name": "Mill River",
+   "kind": "stream",
+   "state": "CT",
+   "towns": [
+    "Fairfield"
+   ],
+   "bbox": [
+    -73.27543,
+    41.13942,
+    -73.27229,
+    41.15371
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "perry-s-mill-ponds-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mohawk-pond-ct",
+   "name": "Mohawk Pond",
+   "kind": "pond",
+   "state": "CT",
+   "towns": [
+    "Cornwall"
+   ],
+   "bbox": [
+    -73.29444,
+    41.80976,
+    -73.29087,
+    41.81291
+   ],
+   "wikidata": "Q31810766",
+   "charted": false,
+   "area_km2": 0.075,
+   "launches": [
+    "mohawk-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mono-pond-ct",
+   "name": "Mono Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Columbia"
+   ],
+   "bbox": [
+    -72.31685,
+    41.66354,
+    -72.30935,
+    41.67945
+   ],
+   "wikidata": "Q34908072",
+   "charted": false,
+   "area_km2": 0.406,
+   "launches": [
+    "mono-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "moodus-reservoir-ct",
+   "name": "Moodus Reservoir",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "East Haddam"
+   ],
+   "bbox": [
+    -72.42664,
+    41.49715,
+    -72.38404,
+    41.51744
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.865,
+   "launches": [
+    "moodus-reservoir-lower-boat-launch-ct",
+    "moodus-reservoir-upper-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "morey-pond-ct",
+   "name": "Morey Pond",
+   "kind": "pond",
+   "state": "CT",
+   "towns": [
+    "Union"
+   ],
+   "bbox": [
+    -72.19514,
+    41.9615,
+    -72.19103,
+    41.96744
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.068,
+   "launches": [
+    "morey-pond-boat-lauch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mount-tom-pond-ct",
+   "name": "Mount Tom Pond",
+   "kind": "pond",
+   "state": "CT",
+   "towns": [
+    "Litchfield"
+   ],
+   "bbox": [
+    -73.28211,
+    41.69712,
+    -73.27415,
+    41.70417
+   ],
+   "wikidata": "Q31810772",
+   "charted": false,
+   "area_km2": 0.234,
+   "launches": [
+    "mount-tom-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mudge-pond-ct",
+   "name": "Mudge Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Sharon"
+   ],
+   "bbox": [
+    -73.48071,
+    41.89469,
+    -73.46868,
+    41.91029
+   ],
+   "wikidata": "Q31810778",
+   "charted": false,
+   "area_km2": 0.876,
+   "launches": [
+    "mudge-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mystic-harbor-ct",
+   "name": "Mystic Harbor",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Groton",
+    "Mystic"
+   ],
+   "bbox": [
+    -71.98793,
+    41.32129,
+    -71.95299,
+    41.35786
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.528,
+   "launches": [
+    "main-street-dock-and-beach-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mystic-river-ct",
+   "name": "Mystic River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Groton",
+    "Mystic",
+    "Stonington"
+   ],
+   "bbox": [
+    -71.97229,
+    41.34825,
+    -71.95763,
+    41.39295
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.231,
+   "launches": [
+    "admiral-cove-subdivision-ct",
+    "isham-street-boat-launch-ct",
+    "mystic-river-boat-launch-ct",
+    "mystic-river-dinghy-dock-and-viewing-area-ct",
+    "park-place-water-access-ct",
+    "steamboat-wharf-ct",
+    "water-street-public-dock-and-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "new-london-harbor-ct",
+   "name": "New London Harbor",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "New London"
+   ],
+   "bbox": [
+    -72.10272,
+    41.31855,
+    -72.07301,
+    41.4
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.868,
+   "launches": [
+    "city-pier-and-waterfront-park-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "niantic-bay-ct",
+   "name": "Niantic Bay",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "East Lyme"
+   ],
+   "bbox": [
+    -72.20494,
+    41.2879,
+    -72.16826,
+    41.3243
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.232,
+   "launches": [
+    "grand-street-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "niantic-river-ct",
+   "name": "Niantic River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "East Lyme",
+    "Waterford"
+   ],
+   "bbox": [
+    -72.19681,
+    41.32241,
+    -72.17649,
+    41.3711
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cini-memorial-park-ct",
+    "niantic-river-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-cove-ct",
+   "name": "North Cove",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Old Saybrook"
+   ],
+   "bbox": [
+    -72.36899,
+    41.28466,
+    -72.35508,
+    41.2979
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.703,
+   "launches": [
+    "old-saybrook-town-dock-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-cove-essex-ct",
+   "name": "North Cove",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Essex"
+   ],
+   "bbox": [
+    -72.39779,
+    41.35232,
+    -72.38054,
+    41.37372
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.025,
+   "launches": [
+    "little-point-street-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-farms-reservoir-ct",
+   "name": "North Farms Reservoir",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Wallingford"
+   ],
+   "bbox": [
+    -72.78348,
+    41.48362,
+    -72.77593,
+    41.49033
+   ],
+   "wikidata": "Q34911275",
+   "charted": false,
+   "area_km2": 0.279,
+   "launches": [
+    "north-farms-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "norwalk-river-ct",
+   "name": "Norwalk River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Norwalk"
+   ],
+   "bbox": [
+    -73.47191,
+    41.09512,
+    -73.40947,
+    41.32435
+   ],
+   "wikidata": "Q7060790",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "veteran-s-memorial-park-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "norwich-pond-ct",
+   "name": "Norwich Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Lyme"
+   ],
+   "bbox": [
+    -72.30456,
+    41.38364,
+    -72.2995,
+    41.38864
+   ],
+   "wikidata": "Q31810790",
+   "charted": false,
+   "area_km2": 0.126,
+   "launches": [
+    "norwich-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pachaug-pond-ct",
+   "name": "Pachaug Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Griswold"
+   ],
+   "bbox": [
+    -71.93449,
+    41.54557,
+    -71.889,
+    41.58483
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.445,
+   "launches": [
+    "pachaug-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pachaug-river-ct",
+   "name": "Pachaug River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Jewett City",
+    "Voluntown"
+   ],
+   "bbox": [
+    -71.98667,
+    41.55472,
+    -71.81748,
+    41.61061
+   ],
+   "wikidata": "Q7121989",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beachdale-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "palers-cove-ct",
+   "name": "Palers Cove",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Groton"
+   ],
+   "bbox": [
+    -72.01043,
+    41.32057,
+    -72.00098,
+    41.33182
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.296,
+   "launches": [
+    "tanglewood-park-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "park-pond-ct",
+   "name": "Park Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Winchester"
+   ],
+   "bbox": [
+    -73.15536,
+    41.89053,
+    -73.14451,
+    41.89958
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.323,
+   "launches": [
+    "park-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "park-river-ct",
+   "name": "Park River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Hartford"
+   ],
+   "bbox": [
+    -72.66468,
+    41.75982,
+    -72.66243,
+    41.76012
+   ],
+   "wikidata": "Q7137972",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "park-river-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pattaconk-reservoir-ct",
+   "name": "Pattaconk Reservoir",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Chester"
+   ],
+   "bbox": [
+    -72.53391,
+    41.40835,
+    -72.52404,
+    41.41534
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.216,
+   "launches": [
+    "pattaconk-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pattagansett-lake-ct",
+   "name": "Pattagansett Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "East Lyme"
+   ],
+   "bbox": [
+    -72.23702,
+    41.36654,
+    -72.22635,
+    41.379
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.494,
+   "launches": [
+    "pattagansett-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pawcatuck-river-ct",
+   "name": "Pawcatuck River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Stonington"
+   ],
+   "bbox": [
+    -71.85984,
+    41.32036,
+    -71.74941,
+    41.41992
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "donahue-park-formerly-pawcatuck-park-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pickerel-lake-ct",
+   "name": "Pickerel Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Colchester"
+   ],
+   "bbox": [
+    -72.42497,
+    41.52433,
+    -72.41797,
+    41.53713
+   ],
+   "wikidata": "Q31810802",
+   "charted": false,
+   "area_km2": 0.367,
+   "launches": [
+    "pickerel-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pine-acres-lake-ct",
+   "name": "Pine Acres Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Hampton"
+   ],
+   "bbox": [
+    -72.0883,
+    41.7749,
+    -72.07764,
+    41.79444
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.684,
+   "launches": [
+    "pine-acres-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "poquetanuck-cove-ct",
+   "name": "Poquetanuck Cove",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Ledyard"
+   ],
+   "bbox": [
+    -72.06158,
+    41.47096,
+    -72.04218,
+    41.48913
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.557,
+   "launches": [
+    "poquetanuck-cove-car-top-boat-launch-ct",
+    "william-r-haase-iv-memorial-canoe-kayak-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "poquonock-river-ct",
+   "name": "Poquonock River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Groton"
+   ],
+   "bbox": [
+    -72.0544,
+    41.31999,
+    -72.03445,
+    41.37212
+   ],
+   "wikidata": "Q35264227",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bluff-point-boat-launch-ct",
+    "peruzzotti-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "powers-lake-ct",
+   "name": "Powers Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "East Lyme"
+   ],
+   "bbox": [
+    -72.25679,
+    41.3871,
+    -72.24108,
+    41.40001
+   ],
+   "wikidata": "Q34915935",
+   "charted": false,
+   "area_km2": 0.581,
+   "launches": [
+    "powers-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pratt-creek-ct",
+   "name": "Pratt Creek",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Deep River"
+   ],
+   "bbox": [
+    -72.42804,
+    41.37922,
+    -72.42234,
+    41.38899
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.088,
+   "launches": [
+    "pratt-cove-carry-in-access-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "quaddick-reservoir-ct",
+   "name": "Quaddick Reservoir",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Thompson"
+   ],
+   "bbox": [
+    -71.82959,
+    41.93941,
+    -71.81372,
+    41.96943
+   ],
+   "wikidata": "Q18157069",
+   "charted": false,
+   "area_km2": 1.415,
+   "launches": [
+    "quaddick-reservoir-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "quinebaug-pond-ct",
+   "name": "Quinebaug Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Killingly"
+   ],
+   "bbox": [
+    -71.88993,
+    41.76859,
+    -71.88576,
+    41.78014
+   ],
+   "wikidata": "Q31810813",
+   "charted": false,
+   "area_km2": 0.301,
+   "launches": [
+    "quinebaug-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "quinnipiac-river-hamden-ct",
+   "name": "Quinnipiac River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Hamden",
+    "Milldale",
+    "New Haven",
+    "North Haven"
+   ],
+   "bbox": [
+    -72.90576,
+    41.29799,
+    -72.81418,
+    41.69502
+   ],
+   "wikidata": "Q3414549",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "clifton-street-boat-launch-ct",
+    "quinnipiac-river-public-access-ct",
+    "quinnipiac-river-water-access-area-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "quonnipaug-lake-ct",
+   "name": "Quonnipaug Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Guilford"
+   ],
+   "bbox": [
+    -72.70581,
+    41.38018,
+    -72.69522,
+    41.399
+   ],
+   "wikidata": "Q31810814",
+   "charted": false,
+   "area_km2": 0.424,
+   "launches": [
+    "quonnipaug-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rainbow-reservoir-ct",
+   "name": "Rainbow Reservoir",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Spoonville",
+    "Windsor"
+   ],
+   "bbox": [
+    -72.7552,
+    41.88995,
+    -72.69361,
+    41.91628
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.034,
+   "launches": [
+    "rainbow-reservoir-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rogers-lake-ct",
+   "name": "Rogers Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Old Lyme"
+   ],
+   "bbox": [
+    -72.31472,
+    41.34933,
+    -72.29465,
+    41.36785
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.138,
+   "launches": [
+    "rogers-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ross-pond-ct",
+   "name": "Ross Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Killingly"
+   ],
+   "bbox": [
+    -71.86342,
+    41.76691,
+    -71.8621,
+    41.76957
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.031,
+   "launches": [
+    "ross-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salmon-river-ct",
+   "name": "Salmon River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "East Haddam",
+    "Haddam"
+   ],
+   "bbox": [
+    -72.4887,
+    41.46471,
+    -72.42245,
+    41.57939
+   ],
+   "wikidata": "Q7405530",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "salmon-river-boat-launch-connecticut-river-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saugatuck-river-ct",
+   "name": "Saugatuck River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Westport"
+   ],
+   "bbox": [
+    -73.47799,
+    41.10884,
+    -73.34384,
+    41.35495
+   ],
+   "wikidata": "Q7427199",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "saugatuck-river-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sherwood-millpond-ct",
+   "name": "Sherwood Millpond",
+   "kind": "pond",
+   "state": "CT",
+   "towns": [
+    "Westport"
+   ],
+   "bbox": [
+    -73.34587,
+    41.11274,
+    -73.33293,
+    41.12279
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.402,
+   "launches": [
+    "hillspoint-road-open-space-ct",
+    "mill-pond-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shetucket-river-norwich-ct",
+   "name": "Shetucket River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Norwich",
+    "South Windham",
+    "Willimantic"
+   ],
+   "bbox": [
+    -72.1929,
+    41.52044,
+    -72.04109,
+    41.71289
+   ],
+   "wikidata": "Q7495683",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "greeneville-dam-fishing-area-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "silver-lake-ct",
+   "name": "Silver Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Berlin"
+   ],
+   "bbox": [
+    -72.77996,
+    41.57357,
+    -72.76629,
+    41.58697
+   ],
+   "wikidata": "Q139595734",
+   "charted": false,
+   "area_km2": 0.583,
+   "launches": [
+    "silver-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "squantz-pond-ct",
+   "name": "Squantz Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "New Fairfield"
+   ],
+   "bbox": [
+    -73.4865,
+    41.51003,
+    -73.47056,
+    41.54078
+   ],
+   "wikidata": "Q114289334",
+   "charted": false,
+   "area_km2": 1.133,
+   "launches": [
+    "squantz-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stamford-harbor-ct",
+   "name": "Stamford Harbor",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Stamford"
+   ],
+   "bbox": [
+    -73.55736,
+    41.01493,
+    -73.52886,
+    41.0488
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.619,
+   "launches": [
+    "john-j-boccuzzi-park-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stillwater-pond-ct",
+   "name": "Stillwater Pond",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Torrington"
+   ],
+   "bbox": [
+    -73.15729,
+    41.83364,
+    -73.14728,
+    41.85185
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.407,
+   "launches": [
+    "stillwater-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "thames-river-ct",
+   "name": "Thames River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Gales Ferry",
+    "Groton",
+    "Ledyard",
+    "Montville",
+    "New London"
+   ],
+   "bbox": [
+    -72.09722,
+    41.30904,
+    -72.07002,
+    41.52044
+   ],
+   "wikidata": "Q3246856",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "ke-streeter-boat-launch-thames-river-ct",
+    "stoddard-hill-boat-launch-ct",
+    "thames-river-boat-launch-ct",
+    "town-of-montville-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tyler-lake-ct",
+   "name": "Tyler Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Goshen"
+   ],
+   "bbox": [
+    -73.26764,
+    41.83084,
+    -73.25519,
+    41.84419
+   ],
+   "wikidata": "Q34931690",
+   "charted": false,
+   "area_km2": 0.841,
+   "launches": [
+    "tyler-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "uncas-pond-ct",
+   "name": "Uncas Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Lyme"
+   ],
+   "bbox": [
+    -72.32224,
+    41.3711,
+    -72.30943,
+    41.37889
+   ],
+   "wikidata": "Q31810842",
+   "charted": false,
+   "area_km2": 0.304,
+   "launches": [
+    "uncas-pond-hog-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upper-ansonia-reservoir-ct",
+   "name": "Upper Ansonia Reservoir",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Shelton"
+   ],
+   "bbox": [
+    -73.07482,
+    41.32213,
+    -73.06853,
+    41.32621
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.126,
+   "launches": [
+    "upper-ansonia-reservoir-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upper-bolton-lake-ct",
+   "name": "Upper Bolton Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Vernon"
+   ],
+   "bbox": [
+    -72.42291,
+    41.81962,
+    -72.41506,
+    41.82735
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.212,
+   "launches": [
+    "bolton-lake-upper-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "washining-lake-ct",
+   "name": "Washining Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Salisbury"
+   ],
+   "bbox": [
+    -73.3936,
+    42.02029,
+    -73.37274,
+    42.03843
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.351,
+   "launches": [
+    "twin-lakes-boat-launch-ct"
+   ],
+   "advisories": [
+    {
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels are established in this water (Connecticut DEEP). Clean, drain and dry your boat, trailer and gear before you leave the launch, and do not carry water, plants or live bait to another lake.",
+     "note": "East Twin Lake (Lake Washining), Salisbury: where zebra mussels were first found in Connecticut in 1998.",
+     "url": "https://portal.ct.gov/deep/fishing/general-information/fishing-tournaments",
+     "checked": "2026-10-15"
+    }
+   ]
+  },
+  {
+   "slug": "wequetequock-cove-ct",
+   "name": "Wequetequock Cove",
+   "kind": "bay",
+   "state": "CT",
+   "towns": [
+    "Stonington"
+   ],
+   "bbox": [
+    -71.88975,
+    41.33749,
+    -71.87786,
+    41.35989
+   ],
+   "wikidata": "Q7983119",
+   "charted": true,
+   "area_km2": 0.693,
+   "launches": [
+    "saltwater-farm-vineyard-car-top-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-hill-pond-ct",
+   "name": "West Hill Pond",
+   "kind": "pond",
+   "state": "CT",
+   "towns": [
+    "Barkhamsted",
+    "Winsted"
+   ],
+   "bbox": [
+    -73.04671,
+    41.87338,
+    -73.03456,
+    41.89046
+   ],
+   "wikidata": "Q35448392",
+   "charted": false,
+   "area_km2": 1.002,
+   "launches": [
+    "west-hill-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-side-pond-ct",
+   "name": "West Side Pond",
+   "kind": "pond",
+   "state": "CT",
+   "towns": [
+    "Goshen"
+   ],
+   "bbox": [
+    -73.25968,
+    41.85221,
+    -73.25353,
+    41.857
+   ],
+   "wikidata": "Q34934983",
+   "charted": false,
+   "area_km2": 0.162,
+   "launches": [
+    "west-side-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-thompson-lake-ct",
+   "name": "West Thompson Lake",
+   "kind": "reservoir",
+   "state": "CT",
+   "towns": [
+    "Thompson"
+   ],
+   "bbox": [
+    -71.91472,
+    41.94531,
+    -71.89683,
+    41.96679
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.912,
+   "launches": [
+    "west-thompson-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wood-creek-pond-ct",
+   "name": "Wood Creek Pond",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "Norfolk"
+   ],
+   "bbox": [
+    -73.19707,
+    42.0182,
+    -73.18945,
+    42.03646
+   ],
+   "wikidata": "Q31810857",
+   "charted": false,
+   "area_km2": 0.619,
+   "launches": [
+    "wood-creek-pond-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wyassup-lake-ct",
+   "name": "Wyassup Lake",
+   "kind": "lake",
+   "state": "CT",
+   "towns": [
+    "North Stonington"
+   ],
+   "bbox": [
+    -71.87749,
+    41.48532,
+    -71.86852,
+    41.49335
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.425,
+   "launches": [
+    "wyassup-lake-boat-launch-ct"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yantic-river-ct",
+   "name": "Yantic River",
+   "kind": "river",
+   "state": "CT",
+   "towns": [
+    "Norwich"
+   ],
+   "bbox": [
+    -72.24283,
+    41.52044,
+    -72.07847,
+    41.57959
+   ],
+   "wikidata": "Q8048984",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "howard-t-brown-park-ct"
+   ],
+   "advisories": []
+  }
+ ]
+}

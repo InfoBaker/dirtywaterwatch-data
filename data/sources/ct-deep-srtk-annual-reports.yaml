@@ -1,0 +1,32 @@
+id: "ct-deep-srtk-annual-reports"
+name: "CT DEEP Sewage Right-to-Know annual reports (xlsx event reports + PDF overview), 2022-2026"
+url: "https://portal.ct.gov/-/media/deep/water/municipal_wastewater/srtk-annual-report/2026-cso-bypass.xlsx"
+homepage: "https://portal.ct.gov/-/media/deep/water/municipal_wastewater/srtk-annual-report/2026-cso-bypass.xlsx"
+kind: "csv"
+level: "state"
+# Notes (research/ct, status used, verified fetched, checked 2026-11-01): Annual per-event
+#   spreadsheets (CSO by utility tab; SSO by town tab) are the cleanest closed-record history with
+#   volumes converted to numbers.
+# Access detail (research, quoted): xlsx per year: <year>-annual-report.xlsx (93 KB; CSO SUMMARY,
+#   SSO SUMMARY, REACHED WATER SUMMARY), <year>-cso-bypass.xlsx (81 KB; tabs BPT, GNHWPCA, MDC,
+#   NORWALK, NORWICH, WATERBURY), <year>-sso-bypass.xlsx (4.4 MB; not downloaded). Last-Modified
+#   2026-02-25.
+# Can fill: source_record_id, started_at, ended_at, waterbody, location_text, volume (numeric
+#   'converted for counting')
+# Cannot fill: coordinates; reported_at
+# History: 2021 data (2022 report) onward
+# Research notes: 2025 totals: 517 CSO reports, 198 overflow days, 608,265,317 gal (the PDF text
+#   says 1,608,265,317 - a typo; the xlsx and PDF chart say 608 MG); 361 SSO/permitted-bypass events
+#   842,005,195 gal; 1.418 billion gal reached 63 waters.
+cadence: "annual, due February 1 (CGS 22a-424a(c)(5))"
+license: "none stated on the page or item (checked)"
+attribution: "CT DEEP"
+enabled: true
+role: "events"
+event_types: []
+states: ["CT"]
+access: ["csv", "pdf"]
+access_detail: "xlsx per year: <year>-annual-report.xlsx (93 KB; CSO SUMMARY, SSO SUMMARY, REACHED WATER SUMMARY), <year>-cso-bypass.xlsx (81 KB; tabs BPT, GNHWPCA, MDC, NORWALK, NORWICH, WATERBURY), <year>-sso-bypass.xlsx (4.4 MB; not downloaded). Last-Modified 2026-02-25."
+machine_readable: true
+legal_basis: "CGS 22a-424a(c)(5)"
+checked: "2026-11-01"

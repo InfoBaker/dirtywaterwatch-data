@@ -1,0 +1,25 @@
+id: "vt-newport-2025-cso-report"
+name: "Newport 2025 CSO Annual Report"
+url: "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1241/3-1241.2025CSOAnnualReport.20260626.pdf"
+homepage: "https://anrweb.vt.gov/PubDocs/DEC/WSMD/Wastewater/permits/3-1241/3-1241.2025CSOAnnualReport.20260626.pdf"
+kind: "pdf"
+level: "municipal"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): Outfall coordinates
+# Access detail (research, quoted): Table 1 gives lat/long for 6 outfalls
+# Can fill: coordinates, location_text
+# Cannot fill: events (none in 2025)
+# Waters: Lake Memphremagog, Clyde River (openboatlaunch slugs: lac-memphremagog-vt, clyde-river-vt)
+# History: 2019+
+# Research notes: newportvermont.org: no overflow channel
+cadence: "annual"
+license: "none stated"
+attribution: "City of Newport"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["VT"]
+access: ["pdf"]
+access_detail: "Table 1 gives lat/long for 6 outfalls"
+machine_readable: false
+legal_basis: "1272 Order 2022"
+checked: "2026-11-01"

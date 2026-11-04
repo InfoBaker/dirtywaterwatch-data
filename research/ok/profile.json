@@ -1,0 +1,145 @@
+{
+  "state": "OK",
+  "name": "Oklahoma",
+  "region": "gulf",
+  "epa_region": 6,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "unknown",
+    "summary": "OPDES permits require reporting overflows and bypasses to DEQ (the federal 24-hour / 5-day condition, inferred). No duty to notify the public was found in the OAC 252:606 outline or by search; the relevant subchapters were not read in full.",
+    "citations": [
+      {
+        "cite": "OAC 252:606 (OPDES Standards)",
+        "title": "Subchapter 6 Point Source Discharges; Subchapter 11 Tests and Reports",
+        "url": "https://www.law.cornell.edu/regulations/oklahoma/title-252/chapter-606",
+        "quote": "(outline only; no section titled on overflows or public notice)",
+        "who": "permittee",
+        "channel": "DEQ",
+        "deadline": "24 hours oral, 5 days written (inferred from the federal condition)",
+        "threshold": "any overflow or bypass (inferred)",
+        "verified": "inferred"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "24 hours oral, 5 days written (inferred)",
+      "cite": "OAC 252:606 incorporating 40 CFR 122.41(l)(6) (inferred)"
+    },
+    "cso_permit_notice_clause": {
+      "permit": null,
+      "quote": "No CSO permits in Oklahoma.",
+      "deadline": null,
+      "verified": "fetched"
+    },
+    "bills_and_cases": [
+      "Not searched in depth; no 2025-2026 overflow-notice bill found."
+    ]
+  },
+  "erule": {
+    "system": "unknown",
+    "sobe_events_2026_11_03": 0,
+    "public_output_url": null,
+    "notes": "No Oklahoma rows in SOBE; DEQ's own intake not found."
+  },
+  "statewide_feed": {
+    "exists": false,
+    "source_ids": [],
+    "precision": "none",
+    "machine_readable": false,
+    "format": "none",
+    "latency": null,
+    "history": null,
+    "coordinates": "none",
+    "receiving_water": "none",
+    "start_end": "none",
+    "volume": false,
+    "stable_id": false,
+    "license": null,
+    "notes": "No DEQ overflow list, map, dataset or GIS layer found; the DEQ ArcGIS server has discharger points but no events."
+  },
+  "cso": {
+    "permits": 0,
+    "open_outfalls": 0,
+    "operators_with_web_channel": 0,
+    "operators_checked": 0,
+    "state_outfall_layer": "https://gis.deq.ok.gov/server/rest/services/WaterQWeb/MapServer/4",
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "No CSOs in Oklahoma."
+  },
+  "sso": {
+    "location_source": null,
+    "feeds": [],
+    "notes": "None found."
+  },
+  "beaches": {
+    "program": "none found",
+    "source_ids": [
+      "ok-beaches"
+    ],
+    "machine_readable": false,
+    "scope": "inland",
+    "notes": ""
+  },
+  "habs": {
+    "program": "Oklahoma Tourism and Recreation Department lake algae status (Check My OK Lake) under 74 O.S. 2301; Corps of Engineers Tulsa District lake advisories",
+    "source_ids": [
+      "ok-otrd-checkmyoklake",
+      "ok-usace-tulsa-hab"
+    ],
+    "machine_readable": false,
+    "notes": "Site unreachable on the day (503 / TLS)."
+  },
+  "advisories": {
+    "health_department_pages": [],
+    "watershed_groups": [
+      "Blue Thumb (Oklahoma Conservation Commission)",
+      "Grand River Dam Authority",
+      "Save the Illinois River"
+    ],
+    "swim_guide": false
+  },
+  "outfalls": {
+    "state_layer": "https://gis.deq.ok.gov/server/rest/services/WaterQWeb/MapServer/4",
+    "cso_inventory_gap": "none (no CSOs)",
+    "sso_points": "none"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Lake Texoma and the Red River (TX)",
+      "Illinois River and Lake Tenkiller (AR upstream)",
+      "Arkansas River (KS, AR)",
+      "Grand Lake / Neosho River (KS, MO)"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "no_web",
+      "what": "No public-notice duty found and no public list of overflow reports; reports exist only in DEQ files.",
+      "fix_level": "legislative",
+      "note": ""
+    },
+    {
+      "kind": "records_request",
+      "what": "Overflow reports would need an Oklahoma Open Records Act request to DEQ.",
+      "fix_level": "agency",
+      "note": ""
+    }
+  ],
+  "subscriptions": [],
+  "readiness": {
+    "tier": "D",
+    "expected_grade": "No public reports",
+    "first_feed": null,
+    "effort": "small",
+    "rationale": "No statewide overflow feed, no SOBE rows, no CSOs and no city overflow pages found. Show plant outfalls, the rain caution and the plain statement; add lake algae advisories once Check My OK Lake can be reached.",
+    "order_hint": 6
+  },
+  "owner_questions": [
+    "File an Open Records Act request with DEQ for SSO reports to document the barrier?",
+    "Use Corps of Engineers lake algae advisories for Oklahoma reservoirs?"
+  ],
+  "surprise": "Oklahoma's DEQ publishes a rich ArcGIS server (dischargers, drinking-water intakes, 303(d) waters) but nothing at all on sewer overflows, and its own OPDES rule outline has no overflow section."
+}

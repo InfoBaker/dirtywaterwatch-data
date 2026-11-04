@@ -1,0 +1,29 @@
+[
+ {
+  "id": "vi-viwma",
+  "name": "Virgin Islands Waste Management Authority (VIWMA)",
+  "state": "VI",
+  "kind": "sso",
+  "npdes_permit": "VI0020036 (Anguilla, St. Croix); VI0020044 (Red Point, St. Thomas); VI0002003 (Mangrove Lagoon); VI0020133; VI0039811; VI0039977; VI0040266; VI0040835",
+  "receiving_waters": [
+   "Caribbean Sea",
+   "Krauss Lagoon",
+   "Vessup Bay",
+   "Hull Bay",
+   "Fish Bay"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Press releases via local news and social accounts; SOBE for 3 permits",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "St. Croix",
+   "St. Thomas",
+   "St. John"
+  ],
+  "notes": "14 SOBE events (2024-11 to 2026-06). Plant permits mostly expired (EXP) in ICIS.",
+  "verified": "search_only",
+  "checked": "2026-11-04"
+ }
+]

@@ -1,0 +1,34 @@
+id: "ct-deep-agol-bypass-reporting-archive"
+name: "CT DEEP Bypass_Reporting_Archive_deepgis (SSO/bypass events 2016-07 to 2021-11)"
+url: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/Bypass_Reporting_Archive_deepgis/FeatureServer/0"
+homepage: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/Bypass_Reporting_Archive_deepgis/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/ct, status candidate, verified fetched, checked 2026-11-01): Clean historical
+#   archive with point geometry; frozen 2021-12-02; useful for backfill and outfall/location priors,
+#   not live.
+# Access detail (research, quoted): ArcGIS REST query, no auth; item
+#   514791073462433696fdc2c62f5bb51a; layer deepgis.WPLR.BYPASS_ARCHIVE; maxRecordCount 1000;
+#   spatial ref 2234 (use outSR=4326). Fetched 4 records (personal fields excluded).
+# Can fill: source_record_id, event_type, started_at, ended_at, reported_at (CreationDate),
+#   source_updated_at (EditDate), waterbody, location_text, coordinates (geometry), material, volume
+#   (binned ranges), estimate_flag
+# Cannot fill: advice_text; valid_until; outfall id
+# Waters: statewide
+# History: 2,956 records, START_DATETIME 2016-07-05 to 2021-11-30
+# Research notes: The LATITUDE/LONGITUDE attribute columns hold a constant default (41.12598367,
+#   -73.39137436) in many rows - use the feature geometry. Contains reporter USER_NAME, EMAIL,
+#   PHONE_NUMBER: strip before storing. The sibling project rejected it for boating (archive,
+#   personal data).
+cadence: "frozen; dataLastEditDate 2021-12-02"
+license: "none stated on the page or item (checked)"
+attribution: "CT DEEP"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["CT"]
+access: ["arcgis", "api"]
+access_detail: "ArcGIS REST query, no auth; item 514791073462433696fdc2c62f5bb51a; layer deepgis.WPLR.BYPASS_ARCHIVE; maxRecordCount 1000; spatial ref 2234 (use outSR=4326). Fetched 4 records (personal fields excluded)."
+machine_readable: true
+legal_basis: "CGS 22a-424a (P.A. 12-11, 18-97, 21-42)"
+checked: "2026-11-01"

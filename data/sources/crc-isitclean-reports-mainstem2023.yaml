@@ -1,0 +1,23 @@
+id: "crc-isitclean-reports-mainstem2023"
+name: "Is It Clean? interactive report, mainstem 2023 (reports.isitclean.us)"
+url: "https://reports.isitclean.us/posts/mainstem2023.html"
+homepage: "https://reports.isitclean.us/posts/mainstem2023.html"
+kind: "html"
+level: "nonprofit"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): 13 MA + 8 CT weekly
+#   sites; thresholds only in charts; no download link seen.
+# Access detail (research, quoted): none recorded
+# Waters: n/a (science/guidance) (openboatlaunch slugs: connecticut-river-ma, connecticut-river-ct,
+#   connecticut-river-nh)
+cadence: null
+license: "none stated"
+attribution: "Connecticut River Conservancy"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["MA", "CT", "VT"]
+access: ["html"]
+access_detail: ""
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

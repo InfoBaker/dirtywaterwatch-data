@@ -1,0 +1,31 @@
+id: "vt-fpr-state-parks-swim-water-status"
+name: "Vermont State Parks swim water results (Current Status of Vermont State Parks Recreational Water)"
+url: "https://anrweb.vt.gov/FPR/SwimWater/PublicReport.aspx"
+homepage: "https://anrweb.vt.gov/FPR/SwimWater/PublicReport.aspx"
+kind: "pdf"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Only state-run E.
+#   coli beach status in VT; PDF parse needed; no dates in output.
+# Access detail (research, quoted): URL returns a generated PDF (not HTML). Columns: Region, Park,
+#   Water Body, Status, Note. Legend: OPEN 'The area meets criteria suitable for swimming.' ALERT
+#   'category 2 Blue Green Algae Bloom.' CLOSED 'exceeded the criteria making it unsuitable for
+#   swimming.' Saved raw/vt-fpr-swimwater-public.pdf.
+# Can fill: source_status, waterbody, location_text, authority
+# Cannot fill: reported_at (no sample date in PDF); coordinates; valid_until
+# Waters: ~40 state park beaches (Lake Champlain, Carmi, Bomoseen, Dunmore, St. Catherine, Waterbury
+#   Res., etc.) (openboatlaunch slugs: lake-champlain-vt, lake-carmi-vt, lake-bomoseen-vt,
+#   lake-dunmore-vt, lake-saint-catherine-vt, waterbury-reservoir-vt, lake-elmore-vt,
+#   crystal-lake-vt, lake-groton-vt, maidstone-lake-vt, adams-reservoir-vt, lake-shaftsbury-vt,
+#   silver-lake-vt)
+cadence: "'We test water weekly at all Vermont State Park swimming areas during the operating season'; testing 'ends no later than September 30'. On 2026-11-01 every site read Open (stale, off-season)."
+license: "none stated"
+attribution: "VT Department of Forests, Parks and Recreation"
+enabled: true
+role: "advisories"
+event_types: ["bacteria", "cyanobacteria"]
+states: ["VT"]
+access: ["pdf"]
+access_detail: "URL returns a generated PDF (not HTML). Columns: Region, Park, Water Body, Status, Note. Legend: OPEN 'The area meets criteria suitable for swimming.' ALERT 'category 2 Blue Green Algae Bloom.' CLOSED 'exceeded the criteria making it unsuitable for swimming.' Saved raw/vt-fpr-swimwater-public.pdf."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

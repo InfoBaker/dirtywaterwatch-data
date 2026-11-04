@@ -1,0 +1,92 @@
+[
+ {
+  "id": "ks-kansas-city-ks0038563",
+  "name": "Unified Government of Wyandotte County/Kansas City, Kansas (Kaw Point Plant No. 1 and combined system)",
+  "state": "KS",
+  "kind": "cso",
+  "npdes_permit": "KS0038563",
+  "receiving_waters": [
+   "Missouri River",
+   "Kansas River",
+   "Jersey Creek",
+   "Mattoon Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 48,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 48 open, 0 closed",
+  "notification_channel": "none found (consent decree 2013; Collection System Release Response Plan not public)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Kansas City"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ks-atchison-ks0039128",
+  "name": "ATCHISON, CITY OF (WWTP)",
+  "state": "KS",
+  "kind": "cso",
+  "npdes_permit": "KS0039128",
+  "receiving_waters": [
+   "Missouri R (1024001111)",
+   "White Clay Cr (1024001131)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 6 open, 0 closed",
+  "notification_channel": "not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Atchison"
+  ],
+  "notes": "Operator channel not searched individually in this round; state-level searches found none.",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ks-topeka-ks0042722",
+  "name": "City of Topeka (Oakland WWTP and combined system)",
+  "state": "KS",
+  "kind": "cso",
+  "npdes_permit": "KS0042722",
+  "receiving_waters": [
+   "Kansas River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json, 2026-10-31): 6 open, 0 closed",
+  "notification_channel": "Stream advisories posted as city news (topeka.org/news) and press releases for some SSOs; none for a 2025 Oakland plant overflow",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Topeka"
+  ],
+  "notes": "",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "ks-leavenworth",
+  "name": "City of Leavenworth (Water Pollution Control)",
+  "state": "KS",
+  "kind": "sso",
+  "npdes_permit": "KS0036366",
+  "receiving_waters": [
+   "Missouri River",
+   "Three Mile Creek",
+   "Five Mile Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Per-event SSO web pages and annual Sanitary Sewer Overflow Transparency Reports (leavenworthks.gov/publicworks), 2017 to date",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Leavenworth"
+  ],
+  "notes": "Named by the coordinator as a CSO city; not a CSO permit in the EPA inventory (major plant permit KS0036366). Site blocks curl (403).",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ }
+]

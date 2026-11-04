@@ -1,0 +1,33 @@
+id: "nj-njdep-cso-outfalls-arcgis"
+name: "NJDEP 'NJPDES Combined Sewer Overflow (CSO)' outfall points (Utilities MapServer layer 0; NJGIN 'Util_NJPDES_CSO', Edition 20230327)"
+url: "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/0"
+homepage: "https://www.nj.gov/dep/gis/digidownload/metadata/html/Util_NJPDES_CSO.html"
+kind: "arcgis"
+level: "state"
+# Notes (research/nj, status used, verified fetched, checked 2026-11-02): Authoritative outfall list
+#   with coordinates, DSNs and receiving waters; joins to ECHO DMRs by permit+DSN.
+# Access detail (research, quoted): GET
+#   .../MapServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&f=json (no auth;
+#   maxRecordCount 2000). All 211 fetched (raw/cso-outfalls-all.json). Metadata page
+#   https://www.nj.gov/dep/gis/digidownload/metadata/html/Util_NJPDES_CSO.html returned 403 to curl.
+# Can fill: coordinates (outfall point, source NJDEP, precision: surveyed point), geometry (outfall
+#   point), waterbody, location_text, authority, source_record_id (CSO_ID)
+# Cannot fill: any event times or volumes
+# Waters: 211 points, 21 permittees statewide (openboatlaunch slugs: passaic-river-nj,
+#   hackensack-river-nj, hudson-river-nj, newark-bay-nj, delaware-river-nj, cooper-river-nj,
+#   raritan-river-nj, overpeck-creek-nj)
+# Research notes: CSO_STAT: Active 207, Sealed 4 (Bayonne 2, Harrison 1, NHSA River Road 1). EPA
+#   ECHO CSO inventory lists 225 NJ CSO permit features (difference to reconcile). Per-permit
+#   summary in raw/cso-outfalls-by-permit.json.
+cadence: "LAST_EDIT range 2022-06-27 to 2023-03-27; static."
+license: "NJDEP GIS data are distributed under the NJDEP Data Distribution Agreement (quoted from the HAB dashboard item; same agreement applies to NJDEP GIS data): 'Digital data received from the NJDEP may not be reproduced or redistributed without all the metadata provided.' and maps/publications 'will credit the NJDEP's Geographic Information System...'"
+attribution: "NJDEP Division of Water Quality / Bureau of GIS"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["NJ"]
+access: ["arcgis"]
+access_detail: "GET .../MapServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&f=json (no auth; maxRecordCount 2000). All 211 fetched (raw/cso-outfalls-all.json). Metadata page https://www.nj.gov/dep/gis/digidownload/metadata/html/Util_NJPDES_CSO.html returned 403 to curl."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

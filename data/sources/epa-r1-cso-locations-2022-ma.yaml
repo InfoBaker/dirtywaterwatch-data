@@ -1,0 +1,26 @@
+id: "epa-r1-cso-locations-2022-ma"
+name: "EPA Region 1 Combined Sewer Outfall (CSO) Locations, 2022 (MA subset)"
+url: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1"
+homepage: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1"
+kind: "arcgis"
+level: "federal"
+# Notes (research/ma, status candidate, verified fetched, checked 2026-11-01): Cross-check only;
+#   MassDEP layer is newer (193 vs 194; Holyoke 12 vs 11). Federal agent owns it.
+# Access detail (research, quoted): Layer 1 (not 0). where=NPDES_ID LIKE 'MA%' count 194; fields
+#   OBJECTID_1, OBJECTID, FACILITY_N, OUTFALL_NA, NPDES_ID, OUTFALL_ID, LOCATION, DATA_SOURC,
+#   LATITUDE, LONGITUDE, WATERBODY, STATUS (STATUS null for all MA rows).
+# Can fill: coordinates
+# Waters: New England; 194 MA outfalls
+# History: 2022 snapshot.
+cadence: "Static; last edit 2023-01-03."
+license: "Not checked (federal)."
+attribution: "US EPA Region 1"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["MA"]
+access: ["arcgis"]
+access_detail: "Layer 1 (not 0). where=NPDES_ID LIKE 'MA%' count 194; fields OBJECTID_1, OBJECTID, FACILITY_N, OUTFALL_NA, NPDES_ID, OUTFALL_ID, LOCATION, DATA_SOURC, LATITUDE, LONGITUDE, WATERBODY, STATUS (STATUS null for all MA rows)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

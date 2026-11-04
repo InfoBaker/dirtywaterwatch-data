@@ -1,0 +1,24 @@
+id: "nh-nashua-notify-me"
+name: "Nashua Notify Me 'Wastewater Department' list"
+url: "https://www.nashuanh.gov/list.aspx"
+homepage: "https://www.nashuanh.gov/list.aspx"
+kind: "email"
+level: "municipal"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Not CSO-specific;
+#   requires subscribing
+# Access detail (research, quoted): CivicPlus News Flash mid 338; no public RSS category listed in
+#   https://www.nashuanh.gov/rss.aspx
+# Waters: Nashua (openboatlaunch slugs: merrimack-river-nh, nashua-river-nh)
+# Research notes: The CSO opt-in channel required by the permit is due by 2027-02-01
+cadence: "unknown"
+license: "none stated"
+attribution: "City of Nashua"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["NH"]
+access: ["email"]
+access_detail: "CivicPlus News Flash mid 338; no public RSS category listed in https://www.nashuanh.gov/rss.aspx"
+machine_readable: false
+legal_basis: ""
+checked: "2026-11-01"

@@ -1,0 +1,853 @@
+[
+ {
+  "id": "ma-springfield-wsc",
+  "name": "Springfield Water and Sewer Commission",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0101613",
+  "receiving_waters": [
+   "CHICOPEE R.",
+   "CONNECTICUT R.",
+   "CONNECTICUT RIVER",
+   "MILL R."
+  ],
+  "water_slugs": [
+   "chicopee-river-ma",
+   "connecticut-river-ma"
+  ],
+  "outfall_count": 24,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0101613%27&outFields=*&f=json",
+  "notification_channel": "springfieldalerts.com/Suez (SWSC advisory site, operated with Veolia): email list via Constant Contact 'CSO Notification - Public' (sign-up on the site; not subscribed); live CSO map by Aquasight/ADS embedded at springfieldalerts.com/Suez/index.php/cso-alerts/ (5-minute poll, last 48-56 h only; vendor API needs an X-Dreamfactory-API-Key embedded in the page JS, not used); per-outfall estimate table at /index.php/cso-public-advisory-notice/; SSO and blending pages are blank templates. waterandsewer.org/education/csos/ (24 outfalls). SWSC general alerts via Everbridge (member.everbridge.net/311578402488474/new). MassDEP portal PN reports usually next morning (median 18 h from start, Jul-Oct 2026).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Springfield",
+   "Agawam",
+   "West Springfield",
+   "Longmeadow",
+   "East Longmeadow",
+   "Ludlow",
+   "Wilbraham"
+  ],
+  "notes": "Permit MA0101613 (final 2020, EPA Region 1: https://www3.epa.gov/region1/npdes/permits/2020/finalma0101613permit.pdf) superseded and terminated the separate 2009 CSO permit MA0103331 (EPA fact sheet/exhibit seen in search). 24 outfalls in the MassDEP layer incl. SPR042 'Springfield WWTP bypass at Bondi's Island' (the Springfield Regional WWTF is on Bondi's Island in Agawam), recorded by MassDEP as 'CSO - UnTreated' and the largest single source (35.5 M gal on 2026-08-03). 2024 total 292 M gal (MassDEP annual report). Portal: 2,982 rows, latest event 2026-10-16. Portal summary 2026-11-01: rows=2982, PN rows=1449, latest PN incident=2026-10-16T00:00:00, latest PN submitted=2026-10-19T08:44:36.837, verified rows=1533, latest verified incident=2026-09-27T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-holyoke",
+  "name": "City of Holyoke (Water Pollution Control / DPW; Veolia contract operator)",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0101630",
+  "receiving_waters": [
+   "CONNECTICUT R.",
+   "DINGLE BK TO CONNECTICUT R.",
+   "HOLYOKE CANAL SYSTEM TO THE CONNECTICUT RIVER"
+  ],
+  "water_slugs": [
+   "connecticut-river-ma"
+  ],
+  "outfall_count": 11,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0101630%27&outFields=*&f=json",
+  "notification_channel": "Everbridge 'Emergency Notification System' incl. CSO notifications (sign-up member.everbridge.net/453003085611624/new; not subscribed). Until 2026-01-12 each email was copied to a holyoke.org page ('CSO Notification <date>'), readable as JSON via https://www.holyoke.org/wp-json/wp/v2/pages?search=CSO (72 matches, ~59 notices 2023-11 to 2026-01). Live CSO map by Flow Assessment Services (appservices.flowassessment.com/mapserver/cso_map.html?project=Holyoke; ArcGIS layer services6.arcgis.com/nOqGex1yAd2hthaE/.../Holyoke_MA/FeatureServer/0 returns '499 Token Required'); shows last activation start/end and 'Prelim' gallons per outfall with lat/lon. MassDEP portal PNs: none April-December 2025; resumed 2026 (Feb-Mar 2026 back-filed 2026-06-04); median 39 h from start in Jul-Oct 2026.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Holyoke"
+  ],
+  "notes": "Permit MA0101630 (EPA 2016: https://www3.epa.gov/region1/npdes/permits/2016/finalma0101630permit.pdf). 11 outfalls in the MassDEP layer (one decommissioned since 2022). HOL09 Berkshire St is reported as 'CSO - Treated'. Notices name one outfall with a 3-year-average volume and a time labelled 'EST' all year. 2024 total 205 M gal. Portal: 1,654 rows; latest verified data 2026-05-31 (behind). 23-day dry-weather discharge at HOL021 River Terrace in March 2026 with no portal PN (see events.json). Portal summary 2026-11-01: rows=1654, PN rows=401, latest PN incident=2026-10-16T00:00:00, latest PN submitted=2026-10-19T08:30:24.443, verified rows=1253, latest verified incident=2026-05-31T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-chicopee",
+  "name": "City of Chicopee (Water Pollution Control)",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0101508",
+  "receiving_waters": [
+   "CHICOPEE R.",
+   "CONNECTICUT R.",
+   "WILLIMANSETT BK"
+  ],
+  "water_slugs": [
+   "chicopee-river-ma",
+   "connecticut-river-ma"
+  ],
+  "outfall_count": 15,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0101508%27&outFields=*&f=json",
+  "notification_channel": "Chicopee 'Combined Sewer Overflow Public Notification' page https://www.chicopeema.gov/936/Combined-Sewer-Overflow-Public-Notificat: English/Spanish check-box PDF notices (start, duration and volume often 'unknown'); page says it is updated within 18 hours on business days, but the newest notice is 2025-07-27. Email list only by emailing the project supervisor (not done). Older PDFs at /1051/CSO-Data-2022-2024; 'Unauthorized Discharge Notifications' page lists 6 dry-weather/unauthorized discharges 2022-2023. MassDEP portal PNs filed 4-7 days after events; no portal records Aug-Oct 2026.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chicopee"
+  ],
+  "notes": "Permit MA0101508 (EPA 2012: https://www3.epa.gov/region1/npdes/permits/2012/finalma0101508permit.pdf; notices print 'MA010508'). 15 outfalls in the MassDEP layer (Connecticut R., Chicopee R., Willimansett Brook) plus WWTP/CSO treatment facility outfall '010' (partially treated - blended). 2024 total 75 M gal. Portal: 1,187 rows; latest event 2026-07-22; no record for 2026-08-03 when Springfield discharged 145 M gal (inferred reporting gap). Portal summary 2026-11-01: rows=1187, PN rows=604, latest PN incident=2026-07-22T00:00:00, latest PN submitted=2026-07-29T12:46:45.11, verified rows=581, latest verified incident=2026-07-22T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-montague",
+  "name": "Town of Montague (Water Pollution Control Facility, Turners Falls)",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0100137",
+  "receiving_waters": [
+   "CONNECTICUT R.",
+   "CONNECTICUT RIVER"
+  ],
+  "water_slugs": [
+   "connecticut-river-ma"
+  ],
+  "outfall_count": 2,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0100137%27&outFields=*&f=json",
+  "notification_channel": "Not verified. The same Aquasight/ADS CSO app that serves Springfield also lists a Montague community (events sub-agent). Town permit page montague-ma.gov/p/299 (search result). MassDEP portal: 252 rows, latest 2026-08-03.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Montague",
+   "Gill"
+  ],
+  "notes": "2 outfalls on the Connecticut River (Turners Falls). Upstream of Holyoke and the Oxbow. Portal summary 2026-11-01: rows=252, PN rows=129, latest PN incident=2026-08-03T00:00:00, latest PN submitted=2026-08-03T11:47:19.14, verified rows=123, latest verified incident=2026-08-03T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-mwra",
+  "name": "Massachusetts Water Resources Authority",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0103284",
+  "receiving_waters": [
+   "CHARLES RIVER",
+   "CHARLES RIVER BASIN",
+   "FORT POINT CHANNEL",
+   "LITTLE RIVER",
+   "MYSTIC RIVER"
+  ],
+  "water_slugs": [
+   "charles-river-ma",
+   "mystic-river-ma"
+  ],
+  "outfall_count": 10,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0103284%27&outFields=*&f=json",
+  "notification_channel": "MWRA CSO Notifications page https://www.mwra.com/node/5699 (notices posted online and sent by email and text); sign-up via Everbridge https://www.mwra.com/updates/everbridge/join.html (per MyRWA guide; not subscribed). MassDEP portal: 584 rows, latest 2026-10-11; median 9.9 h start-to-portal.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Boston",
+   "Cambridge",
+   "Somerville",
+   "Chelsea",
+   "and 39 other member communities"
+  ],
+  "notes": "10 outfalls in the MassDEP layer (Charles River Basin, Mystic, Alewife area, Fort Point Channel, Little River in Lynn/Somerville area). EPA permit page linked from the layer: https://www.epa.gov/npdes-permits/epas-permit-massachusetts-water-resources-authority-mwra-outfall#permit. CSO variances for Lower Charles/Charles Basin and Alewife Brook/Upper Mystic. 2024 total 2,271 M gal (largely partially treated at Deer Island). Portal summary 2026-11-01: rows=584, PN rows=296, latest PN incident=2026-10-11T00:00:00, latest PN submitted=2026-10-12T11:58:23.61, verified rows=281, latest verified incident=2026-09-28T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-bwsc",
+  "name": "Boston Water and Sewer Commission",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0101192",
+  "receiving_waters": [
+   "BOSTON INNER HARBOR",
+   "CHELSEA RIVER",
+   "DORCHESTER BAY",
+   "FORT POINT CHANNEL",
+   "LITTLE MYSTIC CHANNEL",
+   "MUDDY RIVER",
+   "MYSTIC RIVER",
+   "RESERVED CHANNEL"
+  ],
+  "water_slugs": [
+   "dorchester-bay-ma",
+   "mystic-river-ma"
+  ],
+  "outfall_count": 27,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0101192%27&outFields=*&f=json",
+  "notification_channel": "BWSC CSO notification sign-up form https://www.bwsc.org/form/sign-up-for-cso-notifications-fo (choose 'Request CSO Notification'); final CSO Public Notification Plan https://www.bwsc.org/sites/default/files/2023-01/BWSC%20CSO%20Final%20PubNotPlan_0.pdf; Aquasight/ADS live map lists a Boston community; Boston Public Health Commission posts 'Combined Sewer Overflow Health Alerts'. MassDEP portal: 601 rows, latest 2026-10-11.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Boston"
+  ],
+  "notes": "27 outfalls in the MassDEP layer (Boston Inner Harbor, Chelsea River, Dorchester Bay, Fort Point Channel, Little Mystic Channel, Muddy River, Mystic River, Reserved Channel). Permit PDF https://www3.epa.gov/region1/npdes/permits/2003/bostonwspermit.pdf (2003). Portal summary 2026-11-01: rows=601, PN rows=274, latest PN incident=2026-10-11T00:00:00, latest PN submitted=2026-10-13T08:22:21.233, verified rows=327, latest verified incident=2026-09-28T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-cambridge",
+  "name": "City of Cambridge DPW",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0101974",
+  "receiving_waters": [
+   "ALEWIFE BROOK",
+   "CHARLES RIVER",
+   "CHARLES RIVER BASIN"
+  ],
+  "water_slugs": [
+   "charles-river-ma"
+  ],
+  "outfall_count": 7,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0101974%27&outFields=*&f=json",
+  "notification_channel": "Cambridge email list 'Combined Sewer Overflow Alerts' at https://www.cambridgema.gov/Subscribe; CSO report page https://www.cambridgema.gov/csoReport. MassDEP portal: 251 rows, latest 2026-10-11.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cambridge"
+  ],
+  "notes": "7 outfalls (Alewife Brook, Charles River, Charles River Basin). Permit https://www3.epa.gov/region1/npdes/permits/2009/finalma0101974permit.pdf. Portal summary 2026-11-01: rows=251, PN rows=111, latest PN incident=2026-10-11T00:00:00, latest PN submitted=2026-10-13T10:10:18.207, verified rows=129, latest verified incident=2026-07-29T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-somerville",
+  "name": "City of Somerville DPW",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0101982",
+  "receiving_waters": [
+   "ALEWIFE BROOK",
+   "MYSTIC RIVER"
+  ],
+  "water_slugs": [
+   "mystic-river-ma"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0101982%27&outFields=*&f=json",
+  "notification_channel": "Somerville https://www.somervillema.gov/cso ('Subscribe to Somerville CSO and SSO Activation & Discharge Notifications'); Aquasight/ADS map lists a Somerville community. MassDEP portal: 131 rows, latest 2026-10-11.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Somerville"
+  ],
+  "notes": "1 outfall to Alewife Brook (as SOMERVILLE in the MassDEP layer), listed twice in the MassDEP layer (under MA0101982 and MA0103284). Portal summary 2026-11-01: rows=131, PN rows=56, latest PN incident=2026-10-11T00:00:00, latest PN submitted=2026-10-12T12:06:39.127, verified rows=56, latest verified incident=2026-09-27T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-chelsea",
+  "name": "City of Chelsea",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0101877",
+  "receiving_waters": [
+   "CHELSEA RIVER",
+   "MYSTIC RIVER"
+  ],
+  "water_slugs": [
+   "mystic-river-ma"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0101877%27&outFields=*&f=json",
+  "notification_channel": "Chelsea Constant Contact sign-up https://lp.constantcontactpages.com/su/FrwP28o (per MyRWA 2023 guide). MassDEP portal: 90 rows, latest 2026-10-11.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chelsea"
+  ],
+  "notes": "3 outfalls (Chelsea River, Mystic River). Permit https://www3.epa.gov/region1/npdes/permits/2013/finalma0101877permit.pdf. Portal summary 2026-11-01: rows=90, PN rows=44, latest PN incident=2026-10-11T00:00:00, latest PN submitted=2026-10-20T18:34:19.83, verified rows=46, latest verified incident=2026-10-11T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-lowell",
+  "name": "Lowell Regional Wastewater Utility",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0100633",
+  "receiving_waters": [
+   "BEAVER BROOK",
+   "CONCORD RIVER",
+   "MERIMACK RIVER",
+   "MERRIMACK RIVER"
+  ],
+  "water_slugs": [
+   "concord-river-ma",
+   "merrimack-river-ma"
+  ],
+  "outfall_count": 9,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0100633%27&outFields=*&f=json",
+  "notification_channel": "Lowell CSO page https://www.lowellma.gov/1287/Combined-Sewer-Overflows-CSO with sign-up (per MRWC page): three emails per event (start, end, volume follow-up). MassDEP portal: 1,425 rows, latest 2026-10-16; median 6.6 h.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lowell",
+   "Chelmsford",
+   "Dracut",
+   "Tewksbury",
+   "Tyngsborough"
+  ],
+  "notes": "9 outfalls (Merrimack River, Concord River, Beaver Brook) plus WWTP outfall 035 (blended). Permit https://www3.epa.gov/region1/npdes/permits/2019/finalma0100633permit.pdf. 2024 total 1,239 M gal. Portal summary 2026-11-01: rows=1425, PN rows=751, latest PN incident=2026-10-16T00:00:00, latest PN submitted=2026-10-16T14:04:14.157, verified rows=674, latest verified incident=2026-09-27T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-glsd",
+  "name": "Greater Lawrence Sanitary District",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0100447",
+  "receiving_waters": [
+   "MERRIMACK RIVER",
+   "SPICKETT HARBOR"
+  ],
+  "water_slugs": [
+   "merrimack-river-ma"
+  ],
+  "outfall_count": 5,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0100447%27&outFields=*&f=json",
+  "notification_channel": "GLSD Everbridge sign-up https://member.everbridge.net/355009111785667/login (per MRWC page): emails at start and end, volume reported days later. MassDEP portal: 218 rows, latest 2026-07-30; median 2.9 h start-to-portal.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lawrence",
+   "Methuen",
+   "Andover",
+   "North Andover",
+   "Dracut"
+  ],
+  "notes": "5 outfalls (Merrimack River, Spickett Harbor). Permit https://www3.epa.gov/region1/npdes/permits/2019/finalma0100447permit.pdf. Portal summary 2026-11-01: rows=218, PN rows=87, latest PN incident=2026-07-30T00:00:00, latest PN submitted=2026-07-30T06:20:35.16, verified rows=86, latest verified incident=2026-07-30T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-haverhill",
+  "name": "City of Haverhill Wastewater Department",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0101621",
+  "receiving_waters": [
+   "LITTLE RIVER",
+   "MERRIMACK RIVER"
+  ],
+  "water_slugs": [
+   "merrimack-river-ma"
+  ],
+  "outfall_count": 13,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0101621%27&outFields=*&f=json",
+  "notification_channel": "Haverhill CSO public notification page with real-time map https://www.haverhillma.gov/living-here/waterwastewater-services/wastewater/wastewater-collection-system/cso-public-notification/ (per MRWC page); email sign-up by writing to the city contact named there; one email per event linking to a map with start, end and volume (MRWC). Aquasight app also lists Haverhill. MassDEP portal: 984 rows.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Haverhill",
+   "Groveland"
+  ],
+  "notes": "13 outfalls (Merrimack River, Little River). Permit https://www3.epa.gov/region1/npdes/permits/2019/finalma0101621permit.pdf. Portal summary 2026-11-01: rows=984, PN rows=492, latest PN incident=2026-10-16T00:00:00, latest PN submitted=2026-10-19T07:18:05.433, verified rows=488, latest verified incident=2026-09-27T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-lynn-wsc",
+  "name": "Lynn Water and Sewer Commission",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0100552",
+  "receiving_waters": [
+   "LYNN HARBOR",
+   "NAHANT BAY",
+   "SAUGUS RIVER"
+  ],
+  "water_slugs": [
+   "lynn-harbor-ma",
+   "nahant-bay-ma",
+   "saugus-river-ma"
+  ],
+  "outfall_count": 4,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0100552%27&outFields=*&f=json",
+  "notification_channel": "Not verified. MassDEP portal: 583 rows, latest 2026-10-14. DCR posted Kings Beach and Lynn Shore Beach 'Precautionary - CSO/SSO event' on 2026-07-01 (DPH/DCR layer).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lynn",
+   "Saugus",
+   "Swampscott",
+   "Nahant"
+  ],
+  "notes": "4 outfalls (Lynn Harbor, Nahant Bay, Saugus River). Permit https://www3.epa.gov/region1/npdes/permits/2007/finalma0100552permit.pdf. Portal summary 2026-11-01: rows=583, PN rows=299, latest PN incident=2026-10-14T00:00:00, latest PN submitted=2026-10-14T08:41:20.317, verified rows=276, latest verified incident=2026-09-27T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-gloucester",
+  "name": "City of Gloucester",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0100625",
+  "receiving_waters": [
+   "HARBOR COVE",
+   "INNER HARBOR"
+  ],
+  "water_slugs": [
+   "gloucester-harbor-ma"
+  ],
+  "outfall_count": 3,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0100625%27&outFields=*&f=json",
+  "notification_channel": "Not verified. MassDEP portal: 85 rows, latest PN 2026-05-03, latest verified 2025-08-11 (behind).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gloucester",
+   "Essex",
+   "Rockport"
+  ],
+  "notes": "3 outfalls (Gloucester Inner Harbor, Harbor Cove). Layer permit link is a 2010 draft fact sheet on gloucester-ma.gov. Portal summary 2026-11-01: rows=85, PN rows=32, latest PN incident=2026-05-03T00:00:00, latest PN submitted=2026-05-05T12:20:44.24, verified rows=27, latest verified incident=2025-08-11T15:40:37. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-fall-river",
+  "name": "City of Fall River (Sewer Commission)",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0100382",
+  "receiving_waters": [
+   "MOUNT HOPE BAY",
+   "QUECUECHAN RIVER",
+   "QUEQUECHAN RIVER",
+   "TAUNTON RIVER"
+  ],
+  "water_slugs": [
+   "taunton-river-ma"
+  ],
+  "outfall_count": 18,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0100382%27&outFields=*&f=json",
+  "notification_channel": "Not verified. MassDEP portal: 3,277 rows, latest 2026-10-11; median 6.2 h start-to-portal.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fall River"
+  ],
+  "notes": "18 outfalls (Taunton River, Mount Hope Bay, Quequechan River). Permit https://www3.epa.gov/region1/npdes/permits/2000/fallriverpermit.pdf. 2024 total 1,012 M gal. Portal summary 2026-11-01: rows=3277, PN rows=1643, latest PN incident=2026-10-11T00:00:00, latest PN submitted=2026-10-12T07:25:26.917, verified rows=1634, latest verified incident=2026-09-26T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-new-bedford",
+  "name": "City of New Bedford DPI",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0100781",
+  "receiving_waters": [
+   "ACUSHNET RIVER",
+   "CLARK COVE",
+   "INNER NEW BEDFORD HARBOR",
+   "OUTER NEW BEDFORD HARBOR"
+  ],
+  "water_slugs": [
+   "acushnet-river-ma",
+   "clarks-cove-ma",
+   "new-bedford-harbor-ma"
+  ],
+  "outfall_count": 27,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0100781%27&outFields=*&f=json",
+  "notification_channel": "New Bedford DPI Wastewater Division CSO sign-up and overflow monitoring links (per city health page and an EPA document; links not retrieved). NB Alert is a separate general emergency system. MassDEP portal: 3,761 rows, latest 2026-10-17; median 6.1 h.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "New Bedford",
+   "Acushnet",
+   "Dartmouth"
+  ],
+  "notes": "27 outfalls (Acushnet River, Clarks Cove, Inner and Outer New Bedford Harbor). Permit https://www3.epa.gov/region1/npdes/permits/2008/finalma0100781permit.pdf. 2024 total 606 M gal. Portal summary 2026-11-01: rows=3761, PN rows=1888, latest PN incident=2026-10-17T00:00:00, latest PN submitted=2026-10-17T13:02:09.457, verified rows=1873, latest verified incident=2026-09-28T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-taunton",
+  "name": "City of Taunton",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0100897",
+  "receiving_waters": [
+   "TAUNTON RIVER"
+  ],
+  "water_slugs": [
+   "taunton-river-ma"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0100897%27&outFields=*&f=json",
+  "notification_channel": "Not verified. MassDEP portal: 47 rows, latest 2024-04-11 (no records since).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Taunton",
+   "Raynham",
+   "Dighton",
+   "Norton"
+  ],
+  "notes": "1 outfall (Taunton River). Permit https://www3.epa.gov/region1/npdes/permits/2015/finalma0100897permit.pdf. Portal summary 2026-11-01: rows=47, PN rows=9, latest PN incident=2024-04-07T15:38:43, latest PN submitted=2024-04-07T15:43:38.53, verified rows=11, latest verified incident=2024-04-11T10:53:36. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-fitchburg",
+  "name": "City of Fitchburg",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0100986",
+  "receiving_waters": [
+   "ABANDONED FALULAH CANAL",
+   "BIRCH BROOK @ HEYWOOD ST",
+   "NASHUA RIVER",
+   "PUNCH BK CULVERT @ BOULDER DR VIA PUTNAM ST TO NASHUA R.",
+   "PUNCH BK CULVERT @ MAIN ST TO NASHUA R.",
+   "PUNCH BK CULVERT@BOULDER ST VIA MAIN ST TO NASHUA R."
+  ],
+  "water_slugs": [
+   "nashua-river-ma"
+  ],
+  "outfall_count": 11,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0100986%27&outFields=*&f=json",
+  "notification_channel": "Not verified. MassDEP portal: 601 rows; latest PN 2026-05-14 but verified data to 2026-10-11 (PN gap since May 2026).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fitchburg",
+   "Lunenburg",
+   "Westminster"
+  ],
+  "notes": "11 outfalls (North Nashua River and culverted tributaries). Permit https://www3.epa.gov/region1/npdes/permits/2010/finalma0100986permit.pdf. Portal summary 2026-11-01: rows=601, PN rows=248, latest PN incident=2026-05-14T00:00:00, latest PN submitted=2026-05-26T07:38:16.38, verified rows=353, latest verified incident=2026-10-11T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-worcester",
+  "name": "City of Worcester (Quinsigamond Avenue CSO treatment facility)",
+  "state": "MA",
+  "kind": "cso",
+  "npdes_permit": "MA0102997",
+  "receiving_waters": [
+   "MILL BROOK TO BLACKSTONE RIVER"
+  ],
+  "water_slugs": [
+   "blackstone-river-ma"
+  ],
+  "outfall_count": 1,
+  "outfalls_source": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0102997%27&outFields=*&f=json",
+  "notification_channel": "Not verified. MassDEP portal: 170 rows, latest 2026-10-11; events typed 'CSO - Treated'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Worcester"
+  ],
+  "notes": "1 outfall (Mill Brook to Blackstone River). Permit https://www3.epa.gov/region1/npdes/permits/2005/finalma0102997permit.pdf. Upper Blackstone Clean Water (MA0102369) is a separate non-CSO permittee that reports blended discharges. Portal summary 2026-11-01: rows=170, PN rows=88, latest PN incident=2026-10-11T00:00:00, latest PN submitted=2026-10-11T20:23:27.663, verified rows=82, latest verified incident=2026-08-07T00:00:00. Every CSO event should also appear in the MassDEP portal (https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/).",
+  "verified": "search_only",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-billerica-wwtf",
+  "name": "Billerica Wastewater Treatment Facility",
+  "state": "MA",
+  "kind": "partially_treated",
+  "npdes_permit": "MA0101711",
+  "receiving_waters": [
+   "Concord River"
+  ],
+  "water_slugs": [
+   "concord-river-ma"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Billerica"
+  ],
+  "notes": "190 portal rows (123 blended, 62 partially treated - other, pump station failures); verified volume in sample 396 M gal; latest 2025-04-03. Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-attleboro-wwtf",
+  "name": "Attleboro Wastewater Treatment Facility",
+  "state": "MA",
+  "kind": "partially_treated",
+  "npdes_permit": "MA0100595",
+  "receiving_waters": [
+   "Ten Mile River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Attleboro"
+  ],
+  "notes": "169 portal rows, nearly all 'Partially Treated - Other' to the Ten Mile River (no slug); verified volume about 1.09 billion gal; latest 2026-03-17. Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-revere",
+  "name": "City of Revere",
+  "state": "MA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Belle Isle Inlet",
+   "Pines River",
+   "Broad Sound"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Revere"
+  ],
+  "notes": "58 portal rows, mostly 'SSO - System Surcharging Under High Flow Conditions'; latest 2025-05-22. Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-braintree",
+  "name": "Town of Braintree",
+  "state": "MA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Monatiquot River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Braintree"
+  ],
+  "notes": "37 portal rows (surcharging SSOs); latest 2025-07-10. Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-amesbury-wpap",
+  "name": "Amesbury Water Pollution Abatement Plant",
+  "state": "MA",
+  "kind": "sso",
+  "npdes_permit": "MA0101745",
+  "receiving_waters": [
+   "Powwow River",
+   "Back River"
+  ],
+  "water_slugs": [
+   "powwow-river-ma"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Amesbury"
+  ],
+  "notes": "35 portal rows (surcharging and pump-station SSOs); latest 2026-01-28. Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-greenfield-wpcf",
+  "name": "Greenfield Water Pollution Control Facility",
+  "state": "MA",
+  "kind": "sso",
+  "npdes_permit": "MA0101214",
+  "receiving_waters": [
+   "Green River",
+   "Deerfield River"
+  ],
+  "water_slugs": [
+   "deerfield-river-ma"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Greenfield"
+  ],
+  "notes": "14 portal rows; latest 2026-05-17. Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-rockland-wwtf",
+  "name": "Rockland Wastewater Treatment Facility",
+  "state": "MA",
+  "kind": "partially_treated",
+  "npdes_permit": "MA0101923",
+  "receiving_waters": [
+   "French Stream"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rockland"
+  ],
+  "notes": "13 portal rows (blended); latest 2024-04-07. Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-upper-blackstone",
+  "name": "Upper Blackstone Clean Water (Upper Blackstone Water Pollution Abatement District)",
+  "state": "MA",
+  "kind": "partially_treated",
+  "npdes_permit": "MA0102369",
+  "receiving_waters": [
+   "Blackstone River"
+  ],
+  "water_slugs": [
+   "blackstone-river-ma"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Worcester",
+   "Auburn",
+   "Holden",
+   "Millbury",
+   "Paxton",
+   "Rutland",
+   "West Boylston"
+  ],
+  "notes": "9 portal rows (blended), 58.2 M gal verified; latest 2024-01-10. Towns from general knowledge (not verified). Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-south-essex-sd",
+  "name": "South Essex Sewerage District",
+  "state": "MA",
+  "kind": "sso",
+  "npdes_permit": "MA0100501",
+  "receiving_waters": [
+   "Salem Sound",
+   "Salem Harbor"
+  ],
+  "water_slugs": [
+   "salem-harbor-ma"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Salem",
+   "Beverly",
+   "Danvers",
+   "Marblehead",
+   "Peabody"
+  ],
+  "notes": "8 portal rows; latest 2024-01-10. Towns from general knowledge (not verified). Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-west-springfield-dpw",
+  "name": "West Springfield Department of Public Works",
+  "state": "MA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Westfield River",
+   "Paucatuck Brook",
+   "Connecticut River"
+  ],
+  "water_slugs": [
+   "westfield-river-ma",
+   "connecticut-river-ma"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "West Springfield"
+  ],
+  "notes": "5 portal rows (surcharging SSOs); latest 2024-01-12. West Springfield also relays SWSC/Chicopee notices by Nixle. Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-amherst-wwtp",
+  "name": "Amherst Wastewater Treatment Plant",
+  "state": "MA",
+  "kind": "sso",
+  "npdes_permit": "MA0100218",
+  "receiving_waters": [
+   "Mill River (Amherst)",
+   "Connecticut River"
+  ],
+  "water_slugs": [
+   "connecticut-river-ma"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Amherst"
+  ],
+  "notes": "4 portal rows; latest 2023-09-29. Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-easthampton-wwtp",
+  "name": "Easthampton Wastewater Treatment Plant",
+  "state": "MA",
+  "kind": "partially_treated",
+  "npdes_permit": "MA0101478",
+  "receiving_waters": [
+   "Connecticut River"
+  ],
+  "water_slugs": [
+   "connecticut-river-ma"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Easthampton"
+  ],
+  "notes": "1 portal row (50 gal, 2023-05-10). Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-agawam-dpw",
+  "name": "Agawam Department of Public Works",
+  "state": "MA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Westfield River"
+  ],
+  "water_slugs": [
+   "westfield-river-ma"
+  ],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Agawam"
+  ],
+  "notes": "1 portal row (pump station failure, 2022-06-30, lat/lon 42.0871, -72.6156). Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ },
+ {
+  "id": "ma-longmeadow-dpw",
+  "name": "Longmeadow Department of Public Works",
+  "state": "MA",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [
+   "Other"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Not verified; per 314 CMR 16.06(3) each non-CSO system files an SSO Public Notification Plan and must post advisories on its website and email/text subscribers for reportable events. Events appear in the MassDEP portal as permiteeClass 'Non-CSO'.",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Longmeadow"
+  ],
+  "notes": "1 portal row (pump station failure, 2025-01-22). Source: MassDEP portal Non-CSO rows (662 rows from 50 systems, fetched 2026-11-01; summary in raw/portal/sso-permittee-summary.txt).",
+  "verified": "fetched",
+  "checked": "2026-11-01"
+ }
+]

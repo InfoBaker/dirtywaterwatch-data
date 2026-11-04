@@ -1,0 +1,148 @@
+{
+  "state": "HI",
+  "name": "Hawaii",
+  "region": "alaska-hawaii",
+  "epa_region": 9,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "partial",
+    "summary": "Wastewater owners must report spills, overflows and discharges to the DOH Clean Water Branch (HAR 11-62 Appendix B); the Department then posts a public advisory with signs and on its eha-cloud portal and keeps it until cancelled. No operator duty to tell the public directly was confirmed.",
+    "citations": [
+      {
+        "cite": "HAR 11-62 Appendix B s.9",
+        "title": "Responses for wastewater spills, overflows and discharges",
+        "url": "https://regulations.justia.com/states/hawaii/title-11/subtitle-1/chapter-62/appendix-b",
+        "quote": null,
+        "who": "owner or agent of the wastewater system",
+        "channel": "DOH Clean Water Branch",
+        "deadline": "not read (news reports describe 'immediately')",
+        "threshold": "spills, overflows and discharges",
+        "verified": "search_only"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "immediately by phone per practice; written report (deadline not read)",
+      "cite": "HAR 11-62 Appendix B; HAR 11-55 NPDES standard conditions"
+    },
+    "cso_permit_notice_clause": {
+      "permit": null,
+      "quote": null,
+      "deadline": null,
+      "verified": "inferred"
+    },
+    "bills_and_cases": [
+      "Honolulu wastewater global consent decree (2010; search_only)"
+    ]
+  },
+  "erule": {
+    "system": "state",
+    "sobe_events_2026_11_03": 0,
+    "public_output_url": "https://eha-cloud.doh.hawaii.gov/cwb/",
+    "notes": "No Hawaii permittees in SOBE."
+  },
+  "statewide_feed": {
+    "exists": true,
+    "source_ids": [
+      "hi-doh-cwb-events-api"
+    ],
+    "precision": "event",
+    "machine_readable": true,
+    "format": "json",
+    "latency": "minutes to hours (DOH posts the advisory when notified)",
+    "history": "2023-01 to date in the API's newest 500; 1,898 events in total",
+    "coordinates": "none",
+    "receiving_water": "free text (title, locationName, 'Affected waters')",
+    "start_end": "advisory posted and closed dates; spill start/end only in text",
+    "volume": true,
+    "stable_id": true,
+    "license": null,
+    "notes": "Accept: application/json is required; staff emails in createdBy/updatedBy must be dropped."
+  },
+  "cso": {
+    "permits": 0,
+    "open_outfalls": 0,
+    "operators_with_web_channel": 0,
+    "operators_checked": 0,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "No combined sewers."
+  },
+  "sso": {
+    "location_source": null,
+    "feeds": [
+      "hi-doh-cwb-events-api"
+    ],
+    "notes": "Locations are text; geocode the 'Location:' line or the title."
+  },
+  "beaches": {
+    "program": "DOH Clean Water Branch beach monitoring (BEACH Act)",
+    "source_ids": [
+      "hi-doh-cwb-events-api"
+    ],
+    "machine_readable": true,
+    "scope": "coastal",
+    "notes": "Beach Advisory, Beach Notification and Brown Water Advisory are in the same API."
+  },
+  "habs": {
+    "program": "none found",
+    "source_ids": [],
+    "machine_readable": false,
+    "notes": "Freshwater HABs are not a significant program in Hawaii; leptospirosis advice is attached to stream advisories."
+  },
+  "advisories": {
+    "health_department_pages": [
+      "DOH CWB eha-cloud portal"
+    ],
+    "watershed_groups": [
+      "Surfrider Blue Water Task Force"
+    ],
+    "swim_guide": true
+  },
+  "outfalls": {
+    "state_layer": null,
+    "cso_inventory_gap": "none (no CSOs)",
+    "sso_points": "none"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": []
+  },
+  "barriers": [
+    {
+      "kind": "licence",
+      "what": "No terms stated for the undocumented CWB API",
+      "fix_level": "agency",
+      "note": "Ask DOH for permission or documentation."
+    },
+    {
+      "kind": "no_web",
+      "what": "Operator-side public notice not required; DOH is the only channel",
+      "fix_level": "legislative",
+      "note": ""
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "DOH Clean Water Branch advisory email notifications",
+      "url": "https://eha-cloud.doh.hawaii.gov/cwb/",
+      "what": "Beach advisories, brown water advisories and sewage spills, filterable by island"
+    }
+  ],
+  "readiness": {
+    "tier": "A",
+    "expected_grade": "Dated reports",
+    "first_feed": "hi-doh-cwb-events-api",
+    "effort": "small",
+    "rationale": "One statewide JSON endpoint with the authority's own sewage-spill advisories, posted and closed dates and advice; geocoding of text locations is the only real work.",
+    "order_hint": 1
+  },
+  "owner_questions": [
+    "Brown Water Advisories (rain runoff, 280 of 500 events) are not sewage reports: show them as a separate advisory category, or only as rain context?",
+    "Geocode text locations (no coordinates in the API) by rules, with a model only to classify, never to place?",
+    "Subscribe to the DOH CWB email notifications?"
+  ],
+  "surprise": "Hawaii, with no CSOs and no SOBE data, has the cleanest feed in the region: the Health Department's own spill and beach advisories as JSON from one public endpoint, open and closed, posted within minutes."
+}

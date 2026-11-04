@@ -1,0 +1,32 @@
+id: "ri-ridem-cyano-advisories"
+name: "RIDEM/RIDOH cyanobacteria advisories layer (dashboard)"
+url: "https://services1.arcgis.com/HAt3zp2GOzn12Lxk/arcgis/rest/services/Cyanobacteria_Advisories_WFL1/FeatureServer/0"
+homepage: "https://www.arcgis.com/apps/dashboards/d5780051f06f4c1b906bb692ccd7309a"
+kind: "arcgis"
+level: "state"
+# Notes (research/ri, status used, verified fetched, checked 2026-11-01): Clean, current,
+#   machine-readable advisory feed.
+# Access detail (research, quoted): query?where=F2024_Advis='C'&outFields=*&f=json. Dashboard
+#   https://www.arcgis.com/apps/dashboards/d5780051f06f4c1b906bb692ccd7309a (also
+#   dem.ri.gov/bluegreen). Coded domain F2024_Advis: N No Advisory, C Current Advisory, P Previous
+#   Advisory; Town coded 1-39.
+# Can fill: waterbody, started_at (AdvisoryPo), ended_at (AdvisoryL), source_status, source_url
+#   (MoreInfo press release), coordinates (point)
+# Cannot fill: advice_text (in linked release); toxin values (see field layer)
+# Waters: Fresh waters statewide (46 records; 8 current on 2026-11-01)
+# History: Records back to 2024 in layer; all advisories since 2011 in an Airtable view embedded on
+#   the DEM page and an XLSX (RIDEM Historic Cyanobacteria Advisories).
+# Research notes: Current on check: Slack Reservoir, Almy Pond,
+#   Cunliff/Edgewood/Roosevelt/Pleasure/Willow lakes (Roger Williams Park), Wenscott Reservoir.
+cadence: "Edited when advisories are posted/lifted; dataLastEditDate 2026-10-29."
+license: "none stated on item; DEM site disclaimer applies"
+attribution: "RIDEM Office of Water Resources with RIDOH"
+enabled: true
+role: "advisories"
+event_types: ["cyanobacteria_advisory"]
+states: ["RI"]
+access: ["arcgis"]
+access_detail: "query?where=F2024_Advis='C'&outFields=*&f=json. Dashboard https://www.arcgis.com/apps/dashboards/d5780051f06f4c1b906bb692ccd7309a (also dem.ri.gov/bluegreen). Coded domain F2024_Advis: N No Advisory, C Current Advisory, P Previous Advisory; Town coded 1-39."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

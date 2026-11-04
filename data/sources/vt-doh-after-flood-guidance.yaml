@@ -1,0 +1,22 @@
+id: "vt-doh-after-flood-guidance"
+name: "Vermont Department of Health after-flood recreational water guidance"
+url: "https://HealthVermont.Gov/sites/default/files/document/env-after-flood-recreational-water-guidance-english.pdf"
+homepage: "https://HealthVermont.Gov/sites/default/files/document/env-after-flood-recreational-water-guidance-english.pdf"
+kind: "pdf"
+level: "state"
+# Notes (research/science, status candidate, verified search_only, checked 2026-11-01): Search
+#   snippet: 'at least 48 hours following heavy rains, and longer if it has flooded'.
+# Access detail (research, quoted): none recorded
+# Can fill: advice_text
+cadence: null
+license: "none stated"
+attribution: "Vermont Department of Health"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["VT"]
+access: ["pdf"]
+access_detail: ""
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

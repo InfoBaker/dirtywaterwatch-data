@@ -1,0 +1,32 @@
+id: "iow-npdes-reach-indexed"
+name: "EPA reach-indexed NPDES outfalls (Internet of Water / geoconnex features server; NLDI 'npdes' source)"
+url: "https://features.internetofwater.dev/collections/NPDES"
+homepage: "https://features.internetofwater.dev/collections/NPDES"
+kind: "api"
+level: "nonprofit"
+# Notes (research/hydrography, status used, verified fetched, checked 2026-11-01): Gives
+#   outfall-level COMID and reach measure for SWSC (MA0101613xxx), Holyoke (MA0101630xxx), Chicopee
+#   (MA0101508xxx).
+# Access detail (research, quoted): OGC API Features:
+#   /collections/NPDES/items?bbox=minx,miny,maxx,maxy&f=json&limit=1000 ; /items/{permit+outfall}.
+#   Also via NLDI /linked-data/npdes/{id}. Collection cites HydroShare resource
+#   495b65e56e994289baaa5feeb401358e NPDES_pts.gpkg as data source.
+# Can fill: coordinates (snapped, approximate), geometry (outfall point), source_record_id (outfall
+#   id)
+# Cannot fill: started_at; ended_at; volume; receiving water name; active/inactive status; bank side
+# Waters: national; 466 points in the Springfield/Holyoke/Chicopee bbox (openboatlaunch slugs:
+#   connecticut-river-ma, chicopee-river-ma)
+# Research notes: Missing SWSC 001 and 015A/015B (404). MA0103331 present at 42.09982,-72.59612;
+#   identity to be confirmed by state agent.
+cadence: "snapshot; vintage not stated"
+license: "Not stated on collection; EPA source data public domain"
+attribution: "Internet of Water Coalition / geoconnex, from EPA data"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["US"]
+access: ["api"]
+access_detail: "OGC API Features: /collections/NPDES/items?bbox=minx,miny,maxx,maxy&f=json&limit=1000 ; /items/{permit+outfall}. Also via NLDI /linked-data/npdes/{id}. Collection cites HydroShare resource 495b65e56e994289baaa5feeb401358e NPDES_pts.gpkg as data source."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

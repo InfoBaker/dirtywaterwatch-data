@@ -1,0 +1,23 @@
+id: "va-alexrenew-cso"
+name: "AlexRenew Outfall Overflow Status (Alexandria combined sewer outfalls)"
+url: "https://services8.arcgis.com/gPxDs3sbKpglnSk7/arcgis/rest/services/Outfall_Overflow_Status_view/FeatureServer/0"
+homepage: "https://www.alexrenew.com/combined-sewer-overflow-status"
+kind: "arcgis"
+level: "utility"
+# Feed row: the source id written by the ingester pipeline/ingest/va_alexrenew_cso.py
+#   (data/build/events/va-alexrenew-cso.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/va_alexrenew_cso.py docstring): every 15 minutes (24-hour red window).
+cadence: "15 minutes"
+license: "ArcGIS item: 'The geographic data layers produced by AlexRenew and any associated maps and applications are provided as a public resource... AlexRenew makes no warranties'."
+attribution: "Alexandria Renew Enterprises (AlexRenew)"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["VA"]
+registry_ids: ["va-alexrenew-cso-status-layer"]
+access: ["arcgis"]
+access_detail: "Public FeatureServer view, 4 points (CSO 019-022): status 0/1, status_text, timestamp_start/_end (UTC epoch ms), CSO_Name; query?where=1=1&outFields=*&outSR=4326&f=json, no token. One row per outfall, overwritten: the ingester keeps a state file and stores each new overflow start as an event."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

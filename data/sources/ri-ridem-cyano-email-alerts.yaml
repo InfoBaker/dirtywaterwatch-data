@@ -1,0 +1,21 @@
+id: "ri-ridem-cyano-email-alerts"
+name: "RIDEM cyanobacteria email alerts (Constant Contact)"
+url: "https://lp.constantcontactpages.com/sl/2Y3SFbb"
+homepage: "https://lp.constantcontactpages.com/sl/2Y3SFbb"
+kind: "email"
+level: "state"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Owner may subscribe;
+#   layer already gives the same data.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "DEM site disclaimer (https://dem.ri.gov/disclaimer): \"The compiled information presented on this WWW site is considered public information and may be distributed or copied. However, use of appropriate byline/photo/image credits is requested.\""
+attribution: "RIDEM"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["RI"]
+access: ["email"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

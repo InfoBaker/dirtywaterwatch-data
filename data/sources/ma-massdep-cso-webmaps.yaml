@@ -1,0 +1,24 @@
+id: "ma-massdep-cso-webmaps"
+name: "MassDEP CSO outfall web map and 'CSOs and Beach/Boat Access' web map"
+url: "https://mass-eoeea.maps.arcgis.com/apps/webappviewer/index.html?id=08c0019270254f0095a0806b155abcde"
+homepage: "https://mass-eoeea.maps.arcgis.com/apps/webappviewer/index.html?id=08c0019270254f0095a0806b155abcde"
+kind: "arcgis"
+level: "state"
+# Notes (research/ma, status used, verified fetched, checked 2026-11-01): Shows DEP's own pairing of
+#   outfalls with boat and beach access; the layers behind it are recorded separately.
+# Access detail (research, quoted): Two Web AppBuilder apps (08c00192... and 1dde2a22...). The
+#   second overlays CSOs with DMF shellfish areas, MA boat ramps, MA beach points and OFBA access
+#   points; all layers are on services1.arcgis.com/7iJyYTjCtKsZS1LR.
+# Waters: statewide
+cadence: "Items modified 2024-06-03."
+license: "App 1dde2a22: 'This draft application and dataset is currently under development. It may not be complete, and may contain errors, omissions and other inaccuracies; it is subject to change for any reason.'"
+attribution: "MassDEP GIS Program"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["MA"]
+access: ["map_only", "arcgis"]
+access_detail: "Two Web AppBuilder apps (08c00192... and 1dde2a22...). The second overlays CSOs with DMF shellfish areas, MA boat ramps, MA beach points and OFBA access points; all layers are on services1.arcgis.com/7iJyYTjCtKsZS1LR."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

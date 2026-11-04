@@ -1,0 +1,1389 @@
+[
+ {
+  "event_id": "dc-dcwater-2025-04-01-cso028-water-st",
+  "source_id": "dc-echo-sobe-dc0021199",
+  "source_record_id": "DC0021199:59:3318",
+  "event_type": "cso",
+  "source_status": "ended",
+  "started_at": "2025-04-01T02:30",
+  "ended_at": "2025-04-01T04:00",
+  "timezone": "America/New_York (implied; neither source gives a zone)",
+  "reported_at": "2025-04-04",
+  "published_at": "ECHO extract 2026-10-30",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-01 (federal agent's copy of the ECHO all-versions ZIP; extract dated 2026-10-30)",
+  "waterbody": "Potomac River",
+  "water_slugs": [
+   "potomac-river-dc"
+  ],
+  "water_slugs_status": "proposed (no openboatlaunch DC records; see research/dc/waters-dc.json)",
+  "location_text": "CSO occurred at 3700 Water Street NW, near the manhole by CSO 028",
+  "coordinates": [
+   38.904314,
+   -77.070918
+  ],
+  "coordinates_source": "SOBE latitude/longitude",
+  "coordinates_precision": "reported point",
+  "material": "combined sewage and stormwater",
+  "volume": 61000,
+  "units": "gallons",
+  "estimate_flag": "estimated (Best Professional Judgement)",
+  "authority": "EPA ECHO Sewer Overflow and Bypass Event report (reported to regulators)",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "point (event location, not the outfall)",
+  "source_url": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
+  "raw_record": [
+   {
+    "program_report_form_set_id": "59",
+    "sewer_overflow_bypass_event_key": "3318",
+    "sewer_overflow_bypass_description_text": "CSO occurred at 3700 Water Street NW, near the manhole by CSO 028",
+    "sewer_overflow_structure_type_desc": "Manhole",
+    "sewer_overflow_structure_type_code_other_text": "",
+    "permitted_feature_identifier": "",
+    "latitude_measure": "38.904314",
+    "longitude_measure": "-77.070918",
+    "sewer_overflow_bypass_start_datetime": "2025-04-01 02:30:00",
+    "sewer_overflow_bypass_end_datetime": "2025-04-01 04:00:00",
+    "sewer_overflow_bypass_discharge_volume_gallons": "61000.00",
+    "discharge_quantification_method_desc": "Best Professional Judgement",
+    "receiving_water": [
+     "Potomac River"
+    ],
+    "type": [
+     "CSO"
+    ],
+    "cause": [
+     "Other Cause in Sewer Collection System - Not Elsewhere Specified (Failure of welds pm the manhole cover)"
+    ],
+    "impact": [
+     "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)",
+     "Other (UNKNOWN)",
+     "Odors"
+    ],
+    "report_received_date": "2025-04-04",
+    "current_report_form_flag": "Y",
+    "replaced_date": ""
+   }
+  ],
+  "revision_history": null,
+  "jurisdiction": "DC",
+  "source_health": "ok",
+  "coverage_note": "Wet weather (0.07-0.11 in. at four CSS gauges on 2025-04-01, Q2 2025 CSO report). Cause: 'Failure of welds pm the manhole cover'. Impacts include 'Sewage on Land Surface with Potential Human Exposure'.",
+  "notes": "Traced: no DC Water news release in April 2025 (news index pages 20-21 checked); the only DC Water public record is the Q2 2025 quarterly model table (CSO 028: 20 overflows, 4.30 MG for the quarter). The April 2025 monthly report says 'There was no dry weather combined sewer overflow reported during April 2025', consistent since it rained."
+ },
+ {
+  "event_id": "dc-dcwater-2025-07-20-anacostia-force-main-sso",
+  "source_id": "dc-dcwater-news-notices",
+  "source_record_id": "DC0021199:72:3954",
+  "event_type": "sso",
+  "source_status": "ended",
+  "started_at": "2025-07-20T20:02",
+  "ended_at": "2025-07-21T15:00",
+  "timezone": "America/New_York (implied; neither source gives a zone)",
+  "reported_at": "2025-07-25",
+  "published_at": "2025-07-21",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-02T20:45:00Z",
+  "waterbody": "Anacostia River",
+  "water_slugs": [
+   "anacostia-river-dc"
+  ],
+  "water_slugs_status": "proposed (no openboatlaunch DC records; see research/dc/waters-dc.json)",
+  "location_text": "Anacostia Ave NE and Ponds St NE, entrance to Kenilworth Aquatic Gardens (108-inch Anacostia Force Main collapse)",
+  "coordinates": [
+   38.909689,
+   -76.942016
+  ],
+  "coordinates_source": "SOBE latitude/longitude",
+  "coordinates_precision": "reported point",
+  "material": "diluted untreated wastewater",
+  "volume": 6200,
+  "units": "gallons",
+  "estimate_flag": "estimated (Best Professional Judgement)",
+  "authority": "DC Water",
+  "advice_text": "If people come in contact with the untreated overflow ... Leave the area immediately. Wash exposed skin thoroughly with soap and clean water. ... Report exposure to DC Water at (202) 612-3400.",
+  "valid_until": null,
+  "geometry": "point",
+  "source_url": "https://www.dcwater.com/about-dc-water/media/news/public-notice-dc-water-advises-public-sewer-overflow-northeast-dc",
+  "raw_record": {
+   "notice": {
+    "date": "July 21, 2025",
+    "title": "PUBLIC NOTICE: DC Water Advises Public of Sewer Overflow in Northeast DC",
+    "volume_text": "approximately 6,200 gallons of sewer overflows so far",
+    "update_line": "*Updated 5:30PM to reflect the initial traffic advisory issued 7/20/25 at which time the wastewater was contained; and the overflow did not begin until today."
+   },
+   "sobe": [
+    {
+     "program_report_form_set_id": "72",
+     "sewer_overflow_bypass_event_key": "3954",
+     "sewer_overflow_bypass_description_text": "SSO AT ANACOSTIA AVE NE & POND STREET NE",
+     "sewer_overflow_structure_type_desc": "Broken Pipe",
+     "sewer_overflow_structure_type_code_other_text": "",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.909689",
+     "longitude_measure": "-76.942016",
+     "sewer_overflow_bypass_start_datetime": "2025-07-20 20:02:00",
+     "sewer_overflow_bypass_end_datetime": "2025-07-21 15:00:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "6200.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Anacostia River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Odors",
+      "Other (UNKNOWN)",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)"
+     ],
+     "report_received_date": "2025-07-25",
+     "current_report_form_flag": "Y",
+     "replaced_date": ""
+    }
+   ]
+  },
+  "revision_history": [
+   {
+    "at": "2025-07-20",
+    "what": "Traffic advisory: road closed for sewer main repair on Anacostia Ave NE (wastewater said to be contained)"
+   },
+   {
+    "at": "2025-07-21",
+    "what": "Public notice of the SSO; updated 5:30 PM"
+   },
+   {
+    "at": "2025-07-27",
+    "what": "Joint DC Water/WSSC proactive notice of a possible controlled overflow at WSSC's Anacostia WWPS into Beaverdam Creek and the Anacostia; signs to urge avoiding these waterways 'for up to 30 days' if it happens"
+   },
+   {
+    "at": "2025-07-28",
+    "what": "Update: controlled overflow 'NOT IMMINENT'"
+   },
+   {
+    "at": "2025-07-31",
+    "what": "DC Water and WSSC monitoring forecast heavy rain (title only)"
+   },
+   {
+    "at": "2025-09-10",
+    "what": "Repairs complete on the Anacostia Force Main"
+   }
+  ],
+  "jurisdiction": "DC",
+  "source_health": "ok",
+  "coverage_note": "The notice says the overflow began on July 21 ('did not begin until today'); EPA SOBE starts it 2025-07-20 20:02. Times disagree; both kept.",
+  "notes": "Notice and federal report agree on 6,200 gallons. The planned WSSC overflow was announced but no notice of it happening was found."
+ },
+ {
+  "event_id": "dc-dcwater-2025-08-16-anacostia-force-main-sso",
+  "source_id": "dc-dcwater-news-notices",
+  "source_record_id": null,
+  "event_type": "sso",
+  "source_status": "ended (clean-up same day)",
+  "started_at": "2025-08-16T01:40",
+  "ended_at": null,
+  "timezone": "America/New_York (implied; neither source gives a zone)",
+  "reported_at": null,
+  "published_at": "2025-08-16",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-02T20:45:00Z",
+  "waterbody": "Anacostia River (via a storm drain inlet)",
+  "water_slugs": [
+   "anacostia-river-dc"
+  ],
+  "water_slugs_status": "proposed (no openboatlaunch DC records; see research/dc/waters-dc.json)",
+  "location_text": "Anacostia Avenue and Ponds Street NE, open repair site on the Anacostia Force Main",
+  "coordinates": null,
+  "coordinates_source": null,
+  "coordinates_precision": null,
+  "material": "wastewater",
+  "volume": 6200,
+  "units": "gallons",
+  "estimate_flag": "estimated ('about the same – 6,200 gallons')",
+  "authority": "DC Water",
+  "advice_text": "Leave the area immediately. Wash exposed skin thoroughly with soap and clean water. Disinfect any affected areas or items. Do not consume food or water that may have been exposed. Seek medical attention if symptoms occur. Report exposure to DC Water at (202) 612-3400.",
+  "valid_until": null,
+  "geometry": "none (no coordinates in the notice; same site as the 2025-07-20 event)",
+  "source_url": "https://www.dcwater.com/about-dc-water/media/news/dc-water-advises-public-unexpected-sewer-overflow-anacostia-force-main",
+  "raw_record": {
+   "date": "August 16, 2025",
+   "title": "DC Water Advises Public of Unexpected Sewer Overflow from Anacostia Force Main Under Repair",
+   "text": "At approximately 1:40 a.m. the sewer line experienced a short-term, unexpected surge in flow that exceeded the capacity. Wastewater from the open repair site overflowed into the streets at Anacostia Avenue and Ponds Street Northeast and into a nearby storm drain inlet which leads to the Anacostia River."
+  },
+  "revision_history": null,
+  "jurisdiction": "DC",
+  "source_health": "ok",
+  "coverage_note": "Not in the EPA SOBE extract of 2026-10-30 (no DC0021199 row on 2025-08-16): a notice-only event.",
+  "notes": "Shows the federal data can miss an event the utility announced."
+ },
+ {
+  "event_id": "dc-dcwater-2025-12-01-cso024-dwo",
+  "source_id": "dc-echo-sobe-dc0021199",
+  "source_record_id": "DC0021199:90:5300",
+  "event_type": "dwo",
+  "source_status": "ended",
+  "started_at": "2025-12-01T13:28",
+  "ended_at": "2025-12-01T13:45",
+  "timezone": "America/New_York (implied; neither source gives a zone)",
+  "reported_at": "2025-12-19 (first version 2025-12-08)",
+  "published_at": "ECHO extract 2026-10-30",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-01 (federal agent's copy of the ECHO all-versions ZIP; extract dated 2026-10-30)",
+  "waterbody": "Potomac River (SOBE says 'ROCK CREEK'; CSO 024 at 30th and K St NW discharges to the Potomac per the ECHO inventory)",
+  "water_slugs": [
+   "potomac-river-dc"
+  ],
+  "water_slugs_status": "proposed (no openboatlaunch DC records; see research/dc/waters-dc.json)",
+  "location_text": "DWO AT CSO 024 (30th and K Street NW)",
+  "coordinates": [
+   38.90139,
+   -77.059448
+  ],
+  "coordinates_source": "SOBE latitude/longitude",
+  "coordinates_precision": "reported point",
+  "material": "combined sewage (dry weather overflow)",
+  "volume": 100,
+  "units": "gallons",
+  "estimate_flag": "estimated (Best Professional Judgement)",
+  "authority": "EPA ECHO Sewer Overflow and Bypass Event report (reported to regulators)",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "outfall point CSO 024",
+  "source_url": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
+  "raw_record": [
+   {
+    "program_report_form_set_id": "90",
+    "sewer_overflow_bypass_event_key": "5241",
+    "sewer_overflow_bypass_description_text": "DWO AT CSO 024",
+    "sewer_overflow_structure_type_desc": "CSO Outfall",
+    "sewer_overflow_structure_type_code_other_text": "",
+    "permitted_feature_identifier": "024",
+    "latitude_measure": "38.901390",
+    "longitude_measure": "-77.059448",
+    "sewer_overflow_bypass_start_datetime": "2025-12-01 13:28:00",
+    "sewer_overflow_bypass_end_datetime": "2025-12-01 13:45:00",
+    "sewer_overflow_bypass_discharge_volume_gallons": "100.00",
+    "discharge_quantification_method_desc": "Best Professional Judgement",
+    "receiving_water": [
+     "ROCK CREEK"
+    ],
+    "type": [
+     "CSO"
+    ],
+    "cause": [
+     "Other Cause in Sewer Collection System - Not Elsewhere Specified (REMOVED MOVED STOP LOGS AT CSO24)"
+    ],
+    "impact": [
+     "Other (n/a)"
+    ],
+    "report_received_date": "2025-12-08",
+    "current_report_form_flag": "N",
+    "replaced_date": "2025-12-19"
+   },
+   {
+    "program_report_form_set_id": "90",
+    "sewer_overflow_bypass_event_key": "5300",
+    "sewer_overflow_bypass_description_text": "DWO AT CSO 024",
+    "sewer_overflow_structure_type_desc": "CSO Outfall",
+    "sewer_overflow_structure_type_code_other_text": "",
+    "permitted_feature_identifier": "024",
+    "latitude_measure": "38.901390",
+    "longitude_measure": "-77.059448",
+    "sewer_overflow_bypass_start_datetime": "2025-12-01 13:28:00",
+    "sewer_overflow_bypass_end_datetime": "2025-12-01 13:45:00",
+    "sewer_overflow_bypass_discharge_volume_gallons": "100.00",
+    "discharge_quantification_method_desc": "Best Professional Judgement",
+    "receiving_water": [
+     "ROCK CREEK"
+    ],
+    "type": [
+     "CSO"
+    ],
+    "cause": [
+     "Other Cause in Sewer Collection System - Not Elsewhere Specified (REMOVED MOVED STOP LOGS AT CSO24)"
+    ],
+    "impact": [
+     "Other (n/a)"
+    ],
+    "report_received_date": "2025-12-19",
+    "current_report_form_flag": "Y",
+    "replaced_date": ""
+   }
+  ],
+  "revision_history": [
+   {
+    "at": "2025-12-08",
+    "what": "first report (current_report_form_flag N)"
+   },
+   {
+    "at": "2025-12-19",
+    "what": "resubmitted; current"
+   }
+  ],
+  "jurisdiction": "DC",
+  "source_health": "ok",
+  "coverage_note": "Cause: 'REMOVED MOVED STOP LOGS AT CSO24'. Permit: DWOs are prohibited and 'shall be reported to DDOE and EPA Region III within 24 hours'.",
+  "notes": "Traced: DC Water's December 2025 monthly CSO report (Q4 2025 PDF) says 'There was no dry weather combined sewer overflow reported during December 2025.' No news release. The two DC Water records disagree."
+ },
+ {
+  "event_id": "dc-dcwater-2025-12-06-broad-branch-sso",
+  "source_id": "dc-echo-sobe-dc0021199",
+  "source_record_id": "DC0021199:92:5313",
+  "event_type": "sso",
+  "source_status": "ended",
+  "started_at": "2025-12-06T18:00",
+  "ended_at": "2025-12-07T17:00",
+  "timezone": "America/New_York (implied; neither source gives a zone)",
+  "reported_at": "2025-12-28 (first version 2025-12-19 without end time)",
+  "published_at": "ECHO extract 2026-10-30",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-01 (federal agent's copy of the ECHO all-versions ZIP; extract dated 2026-10-30)",
+  "waterbody": "Broad Branch (tributary of Rock Creek)",
+  "water_slugs": [
+   "broad-branch-dc",
+   "rock-creek-dc"
+  ],
+  "water_slugs_status": "proposed (no openboatlaunch DC records; see research/dc/waters-dc.json)",
+  "location_text": "SSO AT PARK RD NEAR 3900 LEGATION ST NW",
+  "coordinates": [
+   38.961918,
+   -77.077384
+  ],
+  "coordinates_source": "SOBE latitude/longitude",
+  "coordinates_precision": "reported point",
+  "material": "sanitary sewage",
+  "volume": 23000,
+  "units": "gallons",
+  "estimate_flag": "estimated (Best Professional Judgement)",
+  "authority": "EPA ECHO Sewer Overflow and Bypass Event report (reported to regulators)",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "point",
+  "source_url": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
+  "raw_record": [
+   {
+    "program_report_form_set_id": "92",
+    "sewer_overflow_bypass_event_key": "5297",
+    "sewer_overflow_bypass_description_text": "SSO AT PARK RD NEAR 3900 LEGATION ST NW",
+    "sewer_overflow_structure_type_desc": "Broken Pipe",
+    "sewer_overflow_structure_type_code_other_text": "",
+    "permitted_feature_identifier": "",
+    "latitude_measure": "38.961918",
+    "longitude_measure": "-77.077384",
+    "sewer_overflow_bypass_start_datetime": "2025-12-06 18:00:00",
+    "sewer_overflow_bypass_end_datetime": "",
+    "sewer_overflow_bypass_discharge_volume_gallons": "23000.00",
+    "discharge_quantification_method_desc": "Best Professional Judgement",
+    "receiving_water": [
+     "Broad Branch"
+    ],
+    "type": [
+     "SSO"
+    ],
+    "cause": [
+     "Broken Pipe - Aging Infrastructure"
+    ],
+    "impact": [
+     "Other (UNKNOWN)",
+     "Odors"
+    ],
+    "report_received_date": "2025-12-19",
+    "current_report_form_flag": "N",
+    "replaced_date": "2025-12-28"
+   },
+   {
+    "program_report_form_set_id": "92",
+    "sewer_overflow_bypass_event_key": "5313",
+    "sewer_overflow_bypass_description_text": "SSO AT PARK RD NEAR 3900 LEGATION ST NW",
+    "sewer_overflow_structure_type_desc": "Broken Pipe",
+    "sewer_overflow_structure_type_code_other_text": "",
+    "permitted_feature_identifier": "",
+    "latitude_measure": "38.961918",
+    "longitude_measure": "-77.077384",
+    "sewer_overflow_bypass_start_datetime": "2025-12-06 18:00:00",
+    "sewer_overflow_bypass_end_datetime": "2025-12-07 17:00:00",
+    "sewer_overflow_bypass_discharge_volume_gallons": "23000.00",
+    "discharge_quantification_method_desc": "Best Professional Judgement",
+    "receiving_water": [
+     "Broad Branch"
+    ],
+    "type": [
+     "SSO"
+    ],
+    "cause": [
+     "Broken Pipe - Aging Infrastructure"
+    ],
+    "impact": [
+     "Other (UNKNOWN)",
+     "Odors"
+    ],
+    "report_received_date": "2025-12-28",
+    "current_report_form_flag": "Y",
+    "replaced_date": ""
+   }
+  ],
+  "revision_history": [
+   {
+    "at": "2025-12-19",
+    "what": "first report, no end time"
+   },
+   {
+    "at": "2025-12-28",
+    "what": "end time 2025-12-07 17:00 added; current"
+   }
+  ],
+  "jurisdiction": "DC",
+  "source_health": "ok",
+  "coverage_note": "Cause: 'Broken Pipe - Aging Infrastructure'. Largest 2025 SSO to a named stream apart from the force main.",
+  "notes": "Traced: no DC Water news release (December 2025 index pages checked) and not in the DC Water SSO open-data CSV (which jumps from 2025-10-20 to 2026-01-20). Federal report only."
+ },
+ {
+  "event_id": "dc-dcwater-2026-01-19-potomac-interceptor-collapse",
+  "source_id": "dc-dcwater-news-notices",
+  "source_record_id": "DC0021199:97:7365",
+  "event_type": "sso",
+  "source_status": "ended (overflows to river stopped; last river overflow 2026-02-09; flow restored 2026-03-14)",
+  "started_at": "2026-01-19T17:03",
+  "ended_at": "2026-01-27T10:10",
+  "timezone": "America/New_York (implied; neither source gives a zone)",
+  "reported_at": "2026-04-16 (current version; first version 2026-01-20)",
+  "published_at": "2026-01-19",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-02T20:45:00Z",
+  "waterbody": "Potomac River (overflow in Montgomery County MD at Lock 10, C&O Canal NHP; flows downstream into DC)",
+  "water_slugs": [
+   "potomac-river-md",
+   "potomac-river-dc"
+  ],
+  "water_slugs_status": "proposed (no openboatlaunch DC records; see research/dc/waters-dc.json)",
+  "location_text": "Potomac Interceptor along Clara Barton Parkway just east of the I-495 interchange (SOBE: 8310 Clara Barton Parkway, PI site MH 17 and MH 16)",
+  "coordinates": [
+   38.949607,
+   -77.127348
+  ],
+  "coordinates_source": "SOBE latitude/longitude",
+  "coordinates_precision": "reported point (in Maryland)",
+  "material": "untreated wastewater",
+  "volume": 242000000,
+  "units": "gallons",
+  "estimate_flag": "estimated (Best Professional Judgement); DC Water release 2026-02-06: 'approximately 243 million gallons', 'approximately 194 million gallons' in the first five days",
+  "authority": "DC Water",
+  "advice_text": "The overflow is expected to reach the Potomac River. ... If people come in contact with the untreated overflow ... Leave the area immediately. Wash exposed skin thoroughly with soap and clean water.",
+  "valid_until": null,
+  "geometry": "point (collapse site); affected reach Potomac River downstream through DC",
+  "source_url": "https://www.dcwater.com/about-dc-water/media/news/dc-water-investigating-sanitary-sewer-overflow-potomac-interceptor",
+  "raw_record": {
+   "notice": {
+    "date": "January 19, 2026",
+    "title": "DC Water Investigating Sanitary Sewer Overflow from Potomac Interceptor in Maryland",
+    "text": "Flow was observed coming out of the PI this evening ... The overflow is expected to reach the Potomac River."
+   },
+   "sobe": [
+    {
+     "program_report_form_set_id": "97",
+     "sewer_overflow_bypass_event_key": "7365",
+     "sewer_overflow_bypass_description_text": "SSO AT 8310 Clara Barton Parkway (PI site  MH 17 and MH 16)",
+     "sewer_overflow_structure_type_desc": "Broken Pipe",
+     "sewer_overflow_structure_type_code_other_text": "",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-01-19 17:03:00",
+     "sewer_overflow_bypass_end_datetime": "2026-01-27 10:10:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "242000000.00",
+     "discharge_quantification_method_desc": "Modeling",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Other (UNKNOWN)",
+      "Odors",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)"
+     ],
+     "report_received_date": "2026-04-16",
+     "current_report_form_flag": "Y",
+     "replaced_date": ""
+    },
+    {
+     "program_report_form_set_id": "97",
+     "sewer_overflow_bypass_event_key": "5540",
+     "sewer_overflow_bypass_description_text": "SSO AT 8310 Clara Barton Parkway (PI site  MH 17 and MH 16)",
+     "sewer_overflow_structure_type_desc": "Broken Pipe",
+     "sewer_overflow_structure_type_code_other_text": "",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-01-19 22:03:00",
+     "sewer_overflow_bypass_end_datetime": "",
+     "sewer_overflow_bypass_discharge_volume_gallons": "",
+     "discharge_quantification_method_desc": "Modeling",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Odors",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)"
+     ],
+     "report_received_date": "2026-01-20",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-04-16"
+    },
+    {
+     "program_report_form_set_id": "97",
+     "sewer_overflow_bypass_event_key": "5605",
+     "sewer_overflow_bypass_description_text": "SSO AT 8310 Clara Barton Parkway (PI site  MH 17 and MH 16)",
+     "sewer_overflow_structure_type_desc": "Broken Pipe",
+     "sewer_overflow_structure_type_code_other_text": "",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-01-19 22:03:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-27 15:10:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "217.00",
+     "discharge_quantification_method_desc": "Modeling",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Odors",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)"
+     ],
+     "report_received_date": "2026-02-03",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-04-16"
+    },
+    {
+     "program_report_form_set_id": "97",
+     "sewer_overflow_bypass_event_key": "5613",
+     "sewer_overflow_bypass_description_text": "SSO AT 8310 Clara Barton Parkway (PI site  MH 17 and MH 16)",
+     "sewer_overflow_structure_type_desc": "Broken Pipe",
+     "sewer_overflow_structure_type_code_other_text": "",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-01-19 22:03:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-27 15:10:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "",
+     "discharge_quantification_method_desc": "Modeling",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Other (UNKNOWN)",
+      "Odors",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)"
+     ],
+     "report_received_date": "2026-02-03",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-04-16"
+    },
+    {
+     "program_report_form_set_id": "97",
+     "sewer_overflow_bypass_event_key": "6057",
+     "sewer_overflow_bypass_description_text": "SSO AT 8310 Clara Barton Parkway (PI site  MH 17 and MH 16)",
+     "sewer_overflow_structure_type_desc": "Broken Pipe",
+     "sewer_overflow_structure_type_code_other_text": "",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-01-19 22:03:00",
+     "sewer_overflow_bypass_end_datetime": "2026-01-27 15:10:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "",
+     "discharge_quantification_method_desc": "Modeling",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Odors",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)",
+      "Other (UNKNOWN)"
+     ],
+     "report_received_date": "2026-02-12",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-04-16"
+    }
+   ],
+   "dcwater_sso_csv": {
+    "PremiseNo": "3135548",
+    "Date Reported": "2026-01-20 00:44:24.6070000",
+    "SpillVolInGal": "833333",
+    "Location": "@CLARA BARTON PKY @MARYLAND LINE NW"
+   }
+  },
+  "revision_history": [
+   {
+    "at": "2026-01-19",
+    "what": "notice: investigating SSO"
+   },
+   {
+    "at": "2026-01-20",
+    "what": "SOBE first version (no volume); DC Water CSV 833,333 gal"
+   },
+   {
+    "at": "2026-01-24",
+    "what": "bypass activated"
+   },
+   {
+    "at": "2026-01-29",
+    "what": "first 24 hours with no overflow"
+   },
+   {
+    "at": "2026-02-03",
+    "what": "SOBE version: end 2026-02-27 15:10 (sic), volume 217"
+   },
+   {
+    "at": "2026-02-06",
+    "what": "release: ~243 million gallons; ~194 million in first five days"
+   },
+   {
+    "at": "2026-02-12",
+    "what": "SOBE version: end 2026-01-27 15:10"
+   },
+   {
+    "at": "2026-04-16",
+    "what": "SOBE current: start 17:03, end 2026-01-27 10:10, 242,000,000 gal"
+   },
+   {
+    "at": "2026-10-07",
+    "what": "release: 'no evidence of lasting harm'"
+   }
+  ],
+  "jurisdiction": "DC",
+  "source_health": "ok",
+  "coverage_note": "Reported under the DC permit although the overflow point is in Maryland; Maryland and Virginia issued their own advisories. Subsequent smaller overflows (Feb 1-10) are separate SOBE rows.",
+  "notes": "The DC Water news list carries 59 releases on the collapse, bypass and repair between 2026-01-19 and 2026-03-14 (near-daily)."
+ },
+ {
+  "event_id": "dc-dchealth-2026-potomac-recreational-advisory",
+  "source_id": "dc-dchealth-potomac-advisory",
+  "source_record_id": null,
+  "event_type": "advisory",
+  "source_status": "lifted 2026-03-02",
+  "started_at": null,
+  "ended_at": "2026-03-02",
+  "timezone": "America/New_York (implied; neither source gives a zone)",
+  "reported_at": null,
+  "published_at": "2026-02-20 (earliest dated update on the page: 'As of February 18, 2026')",
+  "source_updated_at": "2026-03-02",
+  "fetched_at": "2026-11-02T20:45:00Z",
+  "waterbody": "Potomac River (District portion)",
+  "water_slugs": [
+   "potomac-river-dc"
+  ],
+  "water_slugs_status": "proposed (no openboatlaunch DC records; see research/dc/waters-dc.json)",
+  "location_text": "District of Columbia portion of the Potomac River",
+  "coordinates": null,
+  "coordinates_source": null,
+  "coordinates_precision": null,
+  "material": null,
+  "volume": null,
+  "units": null,
+  "estimate_flag": null,
+  "authority": "DC Department of Health (DC Health)",
+  "advice_text": "the District advises avoiding contact with Potomac River water, and residents should keep children and pets away from the river.",
+  "valid_until": "2026-03-02",
+  "geometry": "official affected area: the District portion of the Potomac",
+  "source_url": "https://dchealth.dc.gov/page/potomac-sewer-line-collapse-update",
+  "raw_record": {
+   "update_2026-02-20": "As of February 18, 2026 Drinking water remains safe and has not been impacted by the sewage release. However, the District advises avoiding contact with Potomac River water, and residents should keep children and pets away from the river.",
+   "update_2026-03-02": "The District Department of Health (DC Health) has lifted the recreational advisory for the Potomac River in Washington, DC, effective immediately. ... Swimming remains legally prohibited."
+  },
+  "revision_history": [
+   {
+    "at": "2026-02-27",
+    "what": "DOEE release: 'At 21 days (since the last overflow) ... DC Health is expected to lift the advisory on March 2.'"
+   },
+   {
+    "at": "2026-03-02",
+    "what": "Lifted (DC Health page; Mayor's release)"
+   }
+  ],
+  "jurisdiction": "DC",
+  "source_health": "ok",
+  "coverage_note": "Original issue date not found on DC Health, DOEE or mayor.dc.gov pages; the Mayor's release says only that it 'was issued following the January 19, 2026 collapse'. Virginia's VDH advisory ran 2026-02-13 to 2026-03-17 (search).",
+  "notes": "Lift criterion: E. coli within typical range for 21 days since the last overflow, using 410 MPN/100 mL."
+ },
+ {
+  "event_id": "dc-dcwater-2026-02-03-potomac-interceptor-overflows",
+  "source_id": "dc-echo-sobe-dc0021199",
+  "source_record_id": "DC0021199:98",
+  "event_type": "sso",
+  "source_status": "ended",
+  "started_at": "2026-02-02T21:25",
+  "ended_at": "2026-02-03T03:45",
+  "timezone": "America/New_York (implied; neither source gives a zone)",
+  "reported_at": "2026-03-03 (current versions; first versions 2026-02-06 and 2026-02-23)",
+  "published_at": "2026-02-03 (DC Water update)",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-02T20:45:00Z",
+  "waterbody": "Potomac River (at the PI collapse site, Maryland)",
+  "water_slugs": [
+   "potomac-river-md",
+   "potomac-river-dc"
+  ],
+  "water_slugs_status": "proposed (no openboatlaunch DC records; see research/dc/waters-dc.json)",
+  "location_text": "SSO at 8310 Clara Barton Parkway (PI Site MH 17)",
+  "coordinates": [
+   38.949607,
+   -77.127348
+  ],
+  "coordinates_source": "SOBE",
+  "coordinates_precision": "reported point (in Maryland)",
+  "material": "untreated wastewater",
+  "volume": 602734,
+  "units": "gallons (sum of three current SOBE rows: 19,400 + 291,667 + 291,667)",
+  "estimate_flag": "estimated (Best Professional Judgement)",
+  "authority": "DC Water",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "point",
+  "source_url": "https://www.dcwater.com/about-dc-water/media/news/update-potomac-interceptor-overflow-february-3-2026",
+  "raw_record": {
+   "notice": {
+    "date": "February 3, 2026",
+    "text": "increased flow from groundwater infiltration attributed to snowmelt, along with periodic clogging of the bypass pumps, at times, resulted in minor overflows near the collapse site. ... some minor overflows have entered the creek bed adjacent to the site. While these overflows are limited, it is possible that small amounts of wastewater may have reached the river."
+   },
+   "sobe_all_versions": [
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "5991",
+     "sewer_overflow_bypass_description_text": "SSO at 8310 Clara Barton Parkway (PI Site MH 17) ",
+     "sewer_overflow_structure_type_desc": "Other",
+     "sewer_overflow_structure_type_code_other_text": "“Broken pipe; rags & debris clogged bypass pumps",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-01 21:30:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-01 21:36:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "100.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)",
+      "Other (UNKNOWN)",
+      "Odors"
+     ],
+     "report_received_date": "2026-02-06",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-03-03"
+    },
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "7367",
+     "sewer_overflow_bypass_description_text": "SSO at 8310 Clara Barton Parkway (PI Site MH 17) ",
+     "sewer_overflow_structure_type_desc": "Other",
+     "sewer_overflow_structure_type_code_other_text": "“Broken pipe; rags & debris clogged bypass pumps",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-01 21:30:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-01 21:36:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "29167.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Odors",
+      "Other (UNKNOWN)",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)"
+     ],
+     "report_received_date": "2026-04-16",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-03-03"
+    },
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "5992",
+     "sewer_overflow_bypass_description_text": "SSO at 8310 Clara Barton Parkway (PI Site MH 17)",
+     "sewer_overflow_structure_type_desc": "Other",
+     "sewer_overflow_structure_type_code_other_text": "“Broken pipe; rags & debris clogged bypass pumps",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-02 16:25:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-02 22:45:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "1000.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Odors",
+      "Other (UNKNOWN)",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)"
+     ],
+     "report_received_date": "2026-02-06",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-03-03"
+    },
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "6161",
+     "sewer_overflow_bypass_description_text": "SSO at 8310 Clara Barton Parkway (PI Site MH 17)",
+     "sewer_overflow_structure_type_desc": "Other",
+     "sewer_overflow_structure_type_code_other_text": "“Broken pipe; rags & debris clogged bypass pumps",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-02 21:25:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-03 03:45:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "1000.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Other (UNKNOWN)",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)",
+      "Odors"
+     ],
+     "report_received_date": "2026-02-23",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-03-03"
+    },
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "6163",
+     "sewer_overflow_bypass_description_text": "SSO at 8310 Clara Barton Parkway (PI Site MH 17)",
+     "sewer_overflow_structure_type_desc": "Other",
+     "sewer_overflow_structure_type_code_other_text": "“Broken pipe; rags & debris clogged bypass pumps",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-02 21:25:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-03 03:45:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "1000.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Odors",
+      "Other (UNKNOWN)",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)"
+     ],
+     "report_received_date": "2026-02-23",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-03-03"
+    },
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "6464",
+     "sewer_overflow_bypass_description_text": "SSO at 8310 Clara Barton Parkway (PI Site MH 17)",
+     "sewer_overflow_structure_type_desc": "Other",
+     "sewer_overflow_structure_type_code_other_text": "“Broken pipe; rags & debris clogged bypass pumps",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-02 21:25:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-02 21:29:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "19400.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Other (UNKNOWN)",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)",
+      "Odors"
+     ],
+     "report_received_date": "2026-03-03",
+     "current_report_form_flag": "Y",
+     "replaced_date": ""
+    },
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "6162",
+     "sewer_overflow_bypass_description_text": " SSO at 8310 Clara Barton Parkway (PI Site MH 17) \t",
+     "sewer_overflow_structure_type_desc": "Broken Pipe",
+     "sewer_overflow_structure_type_code_other_text": "",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-03 00:30:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-03 01:00:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "291.70",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Other"
+     ],
+     "impact": [
+      "Other (Odors and Sewage on Land Surface with Potential Human Exposure )"
+     ],
+     "report_received_date": "2026-02-23",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-03-03"
+    },
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "6164",
+     "sewer_overflow_bypass_description_text": " SSO at 8310 Clara Barton Parkway (PI Site MH 17) \t",
+     "sewer_overflow_structure_type_desc": "Broken Pipe",
+     "sewer_overflow_structure_type_code_other_text": "",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-03 00:30:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-03 01:00:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "291.70",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Other"
+     ],
+     "impact": [
+      "Other (Odors and Sewage on Land Surface with Potential Human Exposure )"
+     ],
+     "report_received_date": "2026-02-23",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-03-03"
+    },
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "6465",
+     "sewer_overflow_bypass_description_text": " SSO at 8310 Clara Barton Parkway (PI Site MH 17) \t",
+     "sewer_overflow_structure_type_desc": "Broken Pipe",
+     "sewer_overflow_structure_type_code_other_text": "",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-03 00:30:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-03 01:00:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "291667.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Other"
+     ],
+     "impact": [
+      "Other (Odors and Sewage on Land Surface with Potential Human Exposure )"
+     ],
+     "report_received_date": "2026-03-03",
+     "current_report_form_flag": "Y",
+     "replaced_date": ""
+    },
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "5990",
+     "sewer_overflow_bypass_description_text": "SSO AT 8310 Clara Barton Parkway (PI Site MH 17)",
+     "sewer_overflow_structure_type_desc": "Other",
+     "sewer_overflow_structure_type_code_other_text": "“Broken pipe; rags & debris clogged bypass pumps",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-03 02:30:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-03 03:00:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "291667.00",
+     "discharge_quantification_method_desc": "Other",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Broken Pipe - Aging Infrastructure"
+     ],
+     "impact": [
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)",
+      "Odors",
+      "Other (UNKNOWN)"
+     ],
+     "report_received_date": "2026-02-06",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-03-03"
+    },
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "6165",
+     "sewer_overflow_bypass_description_text": "SSO at 8310 Clara Barton Parkway (PI Site MH 17)",
+     "sewer_overflow_structure_type_desc": "Broken Pipe",
+     "sewer_overflow_structure_type_code_other_text": "",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-03 03:15:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-03 03:45:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "291.70",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Other Cause in Sewer Collection System - Not Elsewhere Specified (Broken Pipe)"
+     ],
+     "impact": [
+      "Other (UNKNOWN.)"
+     ],
+     "report_received_date": "2026-02-23",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-03-03"
+    },
+    {
+     "program_report_form_set_id": "98",
+     "sewer_overflow_bypass_event_key": "6466",
+     "sewer_overflow_bypass_description_text": "SSO at 8310 Clara Barton Parkway (PI Site MH 17)",
+     "sewer_overflow_structure_type_desc": "Broken Pipe",
+     "sewer_overflow_structure_type_code_other_text": "",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-03 03:15:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-03 03:45:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "291667.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Other Cause in Sewer Collection System - Not Elsewhere Specified (Broken Pipe)"
+     ],
+     "impact": [
+      "Other (UNKNOWN.)"
+     ],
+     "report_received_date": "2026-03-03",
+     "current_report_form_flag": "Y",
+     "replaced_date": ""
+    }
+   ]
+  },
+  "revision_history": [
+   {
+    "at": "2026-02-06",
+    "what": "SOBE first versions: 100; 1,000; 291,667 gal (one row)"
+   },
+   {
+    "at": "2026-02-23",
+    "what": "versions with 291.70 gal per row"
+   },
+   {
+    "at": "2026-03-03",
+    "what": "current versions: 19,400; 291,667; 291,667 gal (x1000 from the 2026-02-23 figures)"
+   },
+   {
+    "at": "2026-04-16",
+    "what": "a 2026-02-01 row revised to 29,167 gal (not current)"
+   }
+  ],
+  "jurisdiction": "DC",
+  "source_health": "ok",
+  "coverage_note": "Public wording 'minor overflows' and 'small amounts' versus about 600,000 gallons in the federal report a month later.",
+  "notes": "Good test case for revision_history: the same row moved by a factor of 1,000."
+ },
+ {
+  "event_id": "dc-dcwater-2026-02-09-potomac-interceptor-significant-overflow",
+  "source_id": "dc-dcwater-news-notices",
+  "source_record_id": "DC0021199:101:6072",
+  "event_type": "sso",
+  "source_status": "ended",
+  "started_at": "2026-02-09T01:30",
+  "ended_at": "2026-02-09T02:25",
+  "timezone": "America/New_York (implied; neither source gives a zone)",
+  "reported_at": "2026-02-13",
+  "published_at": "2026-02-09",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-02T20:45:00Z",
+  "waterbody": "Potomac River (at the PI collapse site, Maryland)",
+  "water_slugs": [
+   "potomac-river-md",
+   "potomac-river-dc"
+  ],
+  "water_slugs_status": "proposed (no openboatlaunch DC records; see research/dc/waters-dc.json)",
+  "location_text": "SSO at 8310 Clara Barton Parkway (bypass pumps offline for cleaning)",
+  "coordinates": [
+   38.949607,
+   -77.127348
+  ],
+  "coordinates_source": "SOBE",
+  "coordinates_precision": "reported point (in Maryland)",
+  "material": "untreated wastewater",
+  "volume": 534772,
+  "units": "gallons",
+  "estimate_flag": "estimated; notice: 'preliminary estimates indicate several hundred thousand gallons'",
+  "authority": "DC Water",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "point",
+  "source_url": "https://www.dcwater.com/about-dc-water/media/news/update-potomac-interceptor-collapse-february-9",
+  "raw_record": {
+   "notice_feb9": "Despite these efforts, a significant overflow occurred late Sunday. The amount is still being calculated, but preliminary estimates indicate several hundred thousand gallons of wastewater overflowed.",
+   "notice_feb10": "A limited overflow occurred at the collapse site ... estimated to be less than 5,000 gallons - was contained on-site and did not enter the Potomac River.",
+   "sobe": [
+    {
+     "program_report_form_set_id": "101",
+     "sewer_overflow_bypass_event_key": "6071",
+     "sewer_overflow_bypass_description_text": "SSO AT 8310 Clara Barton Parkway",
+     "sewer_overflow_structure_type_desc": "Other",
+     "sewer_overflow_structure_type_code_other_text": "Pipe failure bypass pumping operation clogged.",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-08 23:00:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-09 00:00:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "3600.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Other Cause in Sewer Collection System - Not Elsewhere Specified (Pipe failure bypass pumping operation, pumps offline for cleaning clogs/debris)"
+     ],
+     "impact": [
+      "Odors",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)"
+     ],
+     "report_received_date": "2026-02-13",
+     "current_report_form_flag": "Y",
+     "replaced_date": ""
+    },
+    {
+     "program_report_form_set_id": "101",
+     "sewer_overflow_bypass_event_key": "6072",
+     "sewer_overflow_bypass_description_text": "SSO at 8310 Clara Barton Parkway",
+     "sewer_overflow_structure_type_desc": "Other",
+     "sewer_overflow_structure_type_code_other_text": "Pipe failure bypass pumping operation clogged.",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-09 01:30:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-09 02:25:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "534772.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [
+      "Potomac River"
+     ],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Other Cause in Sewer Collection System - Not Elsewhere Specified (Pipe failure bypass pumping operation, pumps offline for cleaning clogs/debris)"
+     ],
+     "impact": [
+      "Odors",
+      "Other (Unknown)",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)"
+     ],
+     "report_received_date": "2026-02-13",
+     "current_report_form_flag": "Y",
+     "replaced_date": ""
+    },
+    {
+     "program_report_form_set_id": "101",
+     "sewer_overflow_bypass_event_key": "6070",
+     "sewer_overflow_bypass_description_text": "SSO AT 8310 Clara Barton Parkway (PI Site MH 17)",
+     "sewer_overflow_structure_type_desc": "Other",
+     "sewer_overflow_structure_type_code_other_text": "failure bypass pumping cleaning clogs",
+     "permitted_feature_identifier": "",
+     "latitude_measure": "38.949607",
+     "longitude_measure": "-77.127348",
+     "sewer_overflow_bypass_start_datetime": "2026-02-10 01:30:00",
+     "sewer_overflow_bypass_end_datetime": "2026-02-10 02:00:00",
+     "sewer_overflow_bypass_discharge_volume_gallons": "1800.00",
+     "discharge_quantification_method_desc": "Best Professional Judgement",
+     "receiving_water": [],
+     "type": [
+      "SSO"
+     ],
+     "cause": [
+      "Other Cause in Sewer Collection System - Not Elsewhere Specified (Pipe failure bypass pumping operation, pumps offline for cleaning clogs/debris)"
+     ],
+     "impact": [
+      "Odors",
+      "Other (UNKNOWN)",
+      "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)"
+     ],
+     "report_received_date": "2026-02-13",
+     "current_report_form_flag": "N",
+     "replaced_date": "2026-02-13"
+    }
+   ]
+  },
+  "revision_history": [
+   {
+    "at": "2026-02-09",
+    "what": "notice: significant overflow late Sunday (Feb 8), amount being calculated"
+   },
+   {
+    "at": "2026-02-10",
+    "what": "notice: separate <5,000 gal overflow contained on site"
+   },
+   {
+    "at": "2026-02-13",
+    "what": "SOBE: 534,772 gal to the Potomac 01:30-02:25 on Feb 9; 3,600 gal 23:00-24:00 Feb 8 with no water named"
+   }
+  ],
+  "jurisdiction": "DC",
+  "source_health": "ok",
+  "coverage_note": "DOEE and DC Water later counted 2026-02-09 as the last overflow to reach the river; the DC Health lift on 2026-03-02 rests on 21 days from it.",
+  "notes": "The notice says 'late Sunday' (Feb 8); SOBE times it 01:30 Monday Feb 9."
+ },
+ {
+  "event_id": "dc-dcwater-2026-04-15-canal-rd-foxhall-cso-structure",
+  "source_id": "dc-echo-sobe-dc0021199",
+  "source_record_id": "DC0021199:106:7434",
+  "event_type": "dwo",
+  "source_status": "ended",
+  "started_at": "2026-04-15T22:13",
+  "ended_at": "2026-04-17T03:45",
+  "timezone": "America/New_York (implied; neither source gives a zone)",
+  "reported_at": "2026-04-20",
+  "published_at": "ECHO extract 2026-10-30",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-01 (federal agent's copy of the ECHO all-versions ZIP; extract dated 2026-10-30)",
+  "waterbody": "Potomac River",
+  "water_slugs": [
+   "potomac-river-dc"
+  ],
+  "water_slugs_status": "proposed (no openboatlaunch DC records; see research/dc/waters-dc.json)",
+  "location_text": "'SSO at @CANAL RD @FOXHALL RD NW' (SOBE type CSO, structure 'CSO Outfall'; regulator 46 'Canal Rd, 1000ft. east of Foxhall Rd, NW' on the CSO 029 system)",
+  "coordinates": [
+   38.906002,
+   -77.079155
+  ],
+  "coordinates_source": "SOBE",
+  "coordinates_precision": "reported point",
+  "material": "combined sewage",
+  "volume": 14766.7,
+  "units": "gallons",
+  "estimate_flag": "estimated (Best Professional Judgement)",
+  "authority": "EPA ECHO Sewer Overflow and Bypass Event report (reported to regulators)",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "point",
+  "source_url": "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary",
+  "raw_record": [
+   {
+    "program_report_form_set_id": "106",
+    "sewer_overflow_bypass_event_key": "7434",
+    "sewer_overflow_bypass_description_text": "SSO at @CANAL RD @FOXHALL RD NW",
+    "sewer_overflow_structure_type_desc": "CSO Outfall",
+    "sewer_overflow_structure_type_code_other_text": "",
+    "permitted_feature_identifier": "",
+    "latitude_measure": "38.906002",
+    "longitude_measure": "-77.079155",
+    "sewer_overflow_bypass_start_datetime": "2026-04-15 22:13:00",
+    "sewer_overflow_bypass_end_datetime": "2026-04-17 03:45:00",
+    "sewer_overflow_bypass_discharge_volume_gallons": "14766.70",
+    "discharge_quantification_method_desc": "Best Professional Judgement",
+    "receiving_water": [
+     "Potomac River"
+    ],
+    "type": [
+     "CSO"
+    ],
+    "cause": [
+     "Blockage - Tree Roots"
+    ],
+    "impact": [
+     "Sewage on Land Surface with Potential Human Exposure (caused by problem in sewer collection system, not private lateral)",
+     "Odors",
+     "Other (UNKNOWN)"
+    ],
+    "report_received_date": "2026-04-20",
+    "current_report_form_flag": "Y",
+    "replaced_date": ""
+   }
+  ],
+  "revision_history": null,
+  "jurisdiction": "DC",
+  "source_health": "ok",
+  "coverage_note": "Cause 'Blockage - Tree Roots'. Rainfall 0.00 in. at all five gauges on 2026-04-15, 16 and 17 (Q2 2026 CSO report), so a dry-weather overflow in substance.",
+  "notes": "Traced: the April 2026 monthly CSO report says 'There was no dry weather combined sewer overflow reported during April 2026.' No news release. event_type 'dwo' is our reading; the source says type CSO."
+ }
+]

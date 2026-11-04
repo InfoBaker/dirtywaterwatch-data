@@ -1,0 +1,23 @@
+id: "nhdes-healthy-swimming-email-alerts"
+name: "NHDES Healthy Swimming waterbody-specific email notifications (Constant Contact)"
+url: "https://lp.constantcontactpages.com/su/pHPCXq8/healthyswimming"
+homepage: "https://lp.constantcontactpages.com/su/pHPCXq8/healthyswimming"
+kind: "email"
+level: "state"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Owner should
+#   subscribe as a trigger/check.
+# Access detail (research, quoted): Sign-up form linked from the Public Beaches page: 'sign up for
+#   waterbody-specific email to get notified when a cyanobacteria warning or watch has been put in
+#   place on your favorite waterbody.' Not subscribed.
+cadence: null
+license: "none stated"
+attribution: "NHDES"
+enabled: true
+role: "advisories"
+event_types: ["cyanobacteria", "bacteria"]
+states: ["NH"]
+access: ["email"]
+access_detail: "Sign-up form linked from the Public Beaches page: 'sign up for waterbody-specific email to get notified when a cyanobacteria warning or watch has been put in place on your favorite waterbody.' Not subscribed."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

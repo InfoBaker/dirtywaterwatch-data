@@ -1,0 +1,206 @@
+[
+  {
+    "id": "sc-charleston-water-system",
+    "name": "Charleston Water System",
+    "state": "SC",
+    "kind": "sso",
+    "npdes_permit": "SC0021229",
+    "receiving_waters": [
+      "Ashley River",
+      "Cooper River",
+      "Charleston Harbor",
+      "Church Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "Press releases; West Ashley sign-up alerts required by Feb 2026 settlement (status unknown); 843-727-6800.",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Charleston",
+      "West Ashley",
+      "North Charleston"
+    ],
+    "notes": "SELC counted at least 176 overflows since 2015 in its 2024 notice letter.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "sc-north-charleston-sewer",
+    "name": "North Charleston Sewer District",
+    "state": "SC",
+    "kind": "sso",
+    "npdes_permit": "SC0024783",
+    "receiving_waters": [
+      "Cooper River",
+      "Charleston Harbor"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "North Charleston"
+    ],
+    "notes": "Major plant permit from federal-seed.json.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "sc-florence",
+    "name": "City of Florence Utilities",
+    "state": "SC",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Jeffries Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "News posts and PDF press releases per overflow of 5,000 gallons or more (cityofflorencesc.gov).",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Florence"
+    ],
+    "notes": "",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "sc-columbia",
+    "name": "City of Columbia (Metro WWTP and collection system)",
+    "state": "SC",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Congaree River",
+      "Broad River",
+      "Saluda River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Columbia"
+    ],
+    "notes": "Under a federal consent decree (2014).",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "sc-rewa",
+    "name": "Renewable Water Resources (ReWa), Greenville",
+    "state": "SC",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Reedy River",
+      "Saluda River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Greenville"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "sc-spartanburg-water",
+    "name": "Spartanburg Water / Sanitary Sewer District",
+    "state": "SC",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Lawsons Fork Creek",
+      "Tyger River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Spartanburg"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "sc-mount-pleasant-waterworks",
+    "name": "Mount Pleasant Waterworks",
+    "state": "SC",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Charleston Harbor",
+      "Shem Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Mount Pleasant"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "sc-bjwsa",
+    "name": "Beaufort-Jasper Water and Sewer Authority",
+    "state": "SC",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Broad River",
+      "Port Royal Sound"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Beaufort",
+      "Bluffton"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "sc-grand-strand",
+    "name": "Grand Strand Water and Sewer Authority",
+    "state": "SC",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Waccamaw River",
+      "Atlantic Intracoastal Waterway"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Conway",
+      "Myrtle Beach area"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  }
+]

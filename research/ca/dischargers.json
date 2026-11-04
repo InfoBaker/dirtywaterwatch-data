@@ -1,0 +1,314 @@
+[
+  {
+    "id": "ca-sfpuc-southeast-northpoint-bayside",
+    "name": "San Francisco Public Utilities Commission: Southeast WPCP, North Point WWF and Bayside wet-weather facilities",
+    "state": "CA",
+    "kind": "cso",
+    "npdes_permit": "CA0037664",
+    "receiving_waters": [
+      "San Francisco Bay (Central Basin, Islais Creek, Mission Creek, Yosemite Creek, Candlestick Cove, Marina)",
+      "Pacific Ocean"
+    ],
+    "water_slugs": [],
+    "outfall_count": 29,
+    "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json via research/ca/federal-seed.json)",
+    "notification_channel": "SFPUC beach map flag 'Combined Sewer Discharge has occurred within the last 24-72 hours' (webapps.sfpuc.org/sapps/beachesandbay.html; JSON at infrastructure.sfwater.org/lims.asmx/getBeaches); signs at beaches; hotline 1-877-SFBEACH; email alerts offered",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "San Francisco"
+    ],
+    "notes": "SFPUC also files SSO spill reports to CIWQS (WDID 2SSO10193): 62 Category 2, 23 monthly Category 3, 1 Category 1 since 2023. EPA and the US sued the City over CSO discharges (search_only).",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-sfpuc-oceanside",
+    "name": "San Francisco Public Utilities Commission: Oceanside WPCP and Westside wet-weather system",
+    "state": "CA",
+    "kind": "cso",
+    "npdes_permit": "CA0037681",
+    "receiving_waters": [
+      "Pacific Ocean"
+    ],
+    "water_slugs": [],
+    "outfall_count": 7,
+    "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json via research/ca/federal-seed.json)",
+    "notification_channel": "Same SFPUC beach map and signs (Ocean Beach stations)",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "San Francisco"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-sfpuc-bayside-cso",
+    "name": "San Francisco Public Utilities Commission: Bayside CSO (EPA inventory permit record)",
+    "state": "CA",
+    "kind": "cso",
+    "npdes_permit": "CA0038610",
+    "receiving_waters": [
+      "San Francisco Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": 1,
+    "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json via research/ca/federal-seed.json)",
+    "notification_channel": "Same SFPUC beach map",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "San Francisco"
+    ],
+    "notes": "Seed permittee label 'NPD MAJ-BAYSIDE CSO'; probably an inventory artefact of CA0037664.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-sacramento-css",
+    "name": "City of Sacramento Department of Utilities: Combined Wastewater Collection and Treatment System",
+    "state": "CA",
+    "kind": "cso",
+    "npdes_permit": "CA0079111",
+    "receiving_waters": [
+      "Sacramento River"
+    ],
+    "water_slugs": [],
+    "outfall_count": 6,
+    "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json via research/ca/federal-seed.json)",
+    "notification_channel": "Permit R5-2026-0003 requires public notice per its Spill Emergency Response Plan and Plan of Operations and phone/email to downstream drinking-water agencies (2 hours to Freeport/SCWA); no public web channel found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Sacramento"
+    ],
+    "notes": "'Outflows' (to streets) and CSOs (to the river). City also files SSO reports (WDID 5SSO10901: 4 Cat 1, 4 Cat 2, 33 Cat 3).",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-oakland-dpw",
+    "name": "City of Oakland Public Works",
+    "state": "CA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "San Francisco Bay",
+      "Lake Merritt",
+      "Oakland estuary creeks"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "CIWQS spill points (LATITUDE/LONGITUDE) in Cat1-2-3-Spills.txt",
+    "notification_channel": "CIWQS statewide spill file (WDID 2SSO11204); own web notice not searched",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Oakland"
+    ],
+    "notes": "Counts from Cat1-2-3-Spills.txt fetched 2026-11-03 (2023-06 to 2026-10): 108 Category 1, 12 Category 2, 109 monthly Category 3 since 2023: the most Category 1 spills in the state. Receiving waters are typical, inferred from location.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-sasd",
+    "name": "Sacramento Area Sewer District",
+    "state": "CA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "American River",
+      "Sacramento River",
+      "local creeks"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "CIWQS spill points (LATITUDE/LONGITUDE) in Cat1-2-3-Spills.txt",
+    "notification_channel": "CIWQS statewide spill file (WDID 5SSO10912 / 5SSO11045); own web notice not searched",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Sacramento County"
+    ],
+    "notes": "Counts from Cat1-2-3-Spills.txt fetched 2026-11-03 (2023-06 to 2026-10): 87 Category 1, 7 Category 2, 52 Category 3 (merged record) plus 14 Category 1 (older record). Receiving waters are typical, inferred from location.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-san-jose",
+    "name": "City of San Jose Environmental Services",
+    "state": "CA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Guadalupe River",
+      "Coyote Creek",
+      "South San Francisco Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "CIWQS spill points (LATITUDE/LONGITUDE) in Cat1-2-3-Spills.txt",
+    "notification_channel": "CIWQS statewide spill file (WDID 2SSO10179); own web notice not searched",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "San Jose"
+    ],
+    "notes": "Counts from Cat1-2-3-Spills.txt fetched 2026-11-03 (2023-06 to 2026-10): 36 Category 1, 5 Category 2, 45 Category 3. Receiving waters are typical, inferred from location.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-la-sanitation",
+    "name": "City of Los Angeles LA Sanitation and Environment (Bureau of Sanitation)",
+    "state": "CA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Los Angeles River",
+      "Ballona Creek",
+      "Santa Monica Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "CIWQS spill points (LATITUDE/LONGITUDE) in Cat1-2-3-Spills.txt",
+    "notification_channel": "CIWQS statewide spill file (WDID 4SSO10450 and others); own web notice not searched",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Los Angeles"
+    ],
+    "notes": "Counts from Cat1-2-3-Spills.txt fetched 2026-11-03 (2023-06 to 2026-10): 13 Category 1, 15 Category 2, 155 Category 3. Receiving waters are typical, inferred from location.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-lacsd",
+    "name": "Los Angeles County Sanitation Districts",
+    "state": "CA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Los Angeles River",
+      "San Gabriel River",
+      "Pacific Ocean"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "CIWQS spill points (LATITUDE/LONGITUDE) in Cat1-2-3-Spills.txt",
+    "notification_channel": "CIWQS statewide spill file (WDID 4SSO11388 and others); own web notice not searched",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Los Angeles County"
+    ],
+    "notes": "Counts from Cat1-2-3-Spills.txt fetched 2026-11-03 (2023-06 to 2026-10): 23 Category 1, 9 Category 2, 8 Category 3. Receiving waters are typical, inferred from location.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-la-county-dpw",
+    "name": "Los Angeles County Public Works (Consolidated Sewer Maintenance District)",
+    "state": "CA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Los Angeles County storm channels to the Pacific"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "CIWQS spill points (LATITUDE/LONGITUDE) in Cat1-2-3-Spills.txt",
+    "notification_channel": "CIWQS statewide spill file (WDID 4SSO10496 and others); own web notice not searched",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Los Angeles County"
+    ],
+    "notes": "Counts from Cat1-2-3-Spills.txt fetched 2026-11-03 (2023-06 to 2026-10): 33 Category 1, 2 Category 2, 17 Category 3. Receiving waters are typical, inferred from location.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-san-diego-pud",
+    "name": "City of San Diego Public Utilities Department",
+    "state": "CA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "San Diego Bay",
+      "Mission Bay",
+      "Pacific Ocean",
+      "San Diego River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "CIWQS spill points (LATITUDE/LONGITUDE) in Cat1-2-3-Spills.txt",
+    "notification_channel": "CIWQS statewide spill file (WDID 9SSO10658); own web notice not searched",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "San Diego"
+    ],
+    "notes": "Counts from Cat1-2-3-Spills.txt fetched 2026-11-03 (2023-06 to 2026-10): about 45 Category 1, 17 Category 2, 81 Category 3 (two agency-name spellings). Receiving waters are typical, inferred from location.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-long-beach",
+    "name": "Long Beach Utilities Department",
+    "state": "CA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Los Angeles River",
+      "San Pedro Bay"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "CIWQS spill points (LATITUDE/LONGITUDE) in Cat1-2-3-Spills.txt",
+    "notification_channel": "CIWQS statewide spill file (WDID 4SSO11423); own web notice not searched",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Long Beach"
+    ],
+    "notes": "Counts from Cat1-2-3-Spills.txt fetched 2026-11-03 (2023-06 to 2026-10): 7 Category 1, 7 Category 2, 25 Category 3; a 29,000-gallon spill on 2026-10-30 with 14,000 gallons to surface water. Receiving waters are typical, inferred from location.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-coronado",
+    "name": "City of Coronado",
+    "state": "CA",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "San Diego Bay",
+      "Pacific Ocean"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "CIWQS spill points (LATITUDE/LONGITUDE) in Cat1-2-3-Spills.txt",
+    "notification_channel": "CIWQS statewide spill file (WDID 9SSO10647); own web notice not searched",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Coronado"
+    ],
+    "notes": "Counts from Cat1-2-3-Spills.txt fetched 2026-11-03 (2023-06 to 2026-10): 17 Category 1. Receiving waters are typical, inferred from location.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ca-usibwc-south-bay",
+    "name": "US Section, International Boundary and Water Commission: South Bay International WWTP and Tijuana River canyon collectors (transboundary flows from Mexico)",
+    "state": "CA",
+    "kind": "bypass",
+    "npdes_permit": "CA0108928",
+    "receiving_waters": [
+      "Tijuana River",
+      "Pacific Ocean"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "USIBWC listserv alerts (search_only); San Diego Water Board events table (weekly HTML); San Diego County closures",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "San Diego",
+      "Imperial Beach"
+    ],
+    "notes": "Shared water with Mexico; 'Other - Tijuana River Associated' is a Beach Watch closure cause (404 closures). NPDES number from memory of the South Bay plant permit: verify.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  }
+]

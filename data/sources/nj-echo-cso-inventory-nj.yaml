@@ -1,0 +1,23 @@
+id: "nj-echo-cso-inventory-nj"
+name: "EPA ECHO National CSO Inventory - New Jersey rows"
+url: "https://echo.epa.gov/tools/data-downloads/cso-inventory-summary"
+homepage: "https://echo.epa.gov/tools/data-downloads/cso-inventory-summary"
+kind: "csv"
+level: "federal"
+# Notes (research/nj, status candidate, verified fetched, checked 2026-11-02): Cross-check for the
+#   NJDEP layer (225 vs 211 points); links each outfall to ECHO DMRs.
+# Access detail (research, quoted): Used the federal agent's copy
+#   (research/federal/raw/cso_inventory/ALL_CSO_DOWNLOADS.csv, file dated 2026-10-31): 225 rows with
+#   STATE_CODE NJ (permit features with PF_CHARACTER CSO, PF_LAT/PF_LON, PF_STATE_WATERBODY_NAME).
+cadence: null
+license: "none stated"
+attribution: "US EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["NJ"]
+access: ["csv"]
+access_detail: "Used the federal agent's copy (research/federal/raw/cso_inventory/ALL_CSO_DOWNLOADS.csv, file dated 2026-10-31): 225 rows with STATE_CODE NJ (permit features with PF_CHARACTER CSO, PF_LAT/PF_LON, PF_STATE_WATERBODY_NAME)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

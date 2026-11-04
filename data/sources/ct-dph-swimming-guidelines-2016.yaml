@@ -1,0 +1,26 @@
+id: "ct-dph-swimming-guidelines-2016"
+name: "CT DPH/DEEP Guidelines for Monitoring Swimming Water and Closure Protocol (March 2016) - DPH copy"
+url: "https://portal.ct.gov/-/media/Departments-and-Agencies/DPH/dph/environmental_health/BEACH/Guidelines-for-Monitoring-Swimming-Water-and-Closure-Protocol-March-2016.pdf?la=en"
+homepage: "https://portal.ct.gov/-/media/Departments-and-Agencies/DPH/dph/environmental_health/BEACH/Guidelines-for-Monitoring-Swimming-Water-and-Closure-Protocol-March-2016.pdf?la=en"
+kind: "pdf"
+level: "state"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): Beach numbers
+#   (235/126 E. coli; 104/35 enterococci), closure protocol, sewage-bypass and rainfall language;
+#   RCSA 19a-36-B61 appendix.
+# Access detail (research, quoted): curl download; text via PDFKit.
+# History: First published May 1989; 'fourth major revision'; sanitary water quality section
+#   'Effective May 20, 2002'.
+# Research notes: Not an event source; fills no event fields directly (provides criteria/definitions
+#   for context text).
+cadence: null
+license: "none stated"
+attribution: "Connecticut Department of Public Health and Connecticut Department of Energy and Environmental Protection"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["CT"]
+access: ["pdf"]
+access_detail: "curl download; text via PDFKit."
+machine_readable: false
+legal_basis: "RCSA 19a-36-B61 (public swimming areas); referenced by RCSA 22a-426-9 Table 2 note 4"
+checked: "2026-11-01"

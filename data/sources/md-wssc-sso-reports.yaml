@@ -1,0 +1,34 @@
+id: "md-wssc-sso-reports"
+name: "WSSC Water Sanitary Sewer Overflow Reports (PDF per event)"
+url: "https://www.wsscwater.com/ssoreports"
+homepage: "https://www.wsscwater.com/ssoreports"
+kind: "html"
+level: "utility"
+# Notes (research/md, status candidate, verified fetched, checked 2026-11-02): Richest per-event
+#   documents in Maryland (call time to MDE, signs posted) but PDF-only; use to enrich WSSC rows
+#   from the MDE table, not as the primary feed.
+# Access detail (research, quoted): Drupal view with month/year filters (?year=609 is 2026, 608 is
+#   2025; ?page=N, 10 per page). 68 PDFs listed for 2026, 81 for 2025. PDF names are the event date
+#   (e.g. /sites/default/files/2026-10/2026.10.18.pdf, suffix -a/-b, '- NR' for non-reportable).
+#   Three PDFs read (raw/wssc-*.pdf).
+# Can fill: source_record_id, started_at, ended_at, reported_at (call to MDE), waterbody,
+#   location_text, volume, estimate_flag, authority, geometry (none; manhole id only), source_status
+#   (non-reportable stamp)
+# Cannot fill: coordinates; advice_text (beyond signs posted); valid_until
+# Waters: Montgomery and Prince George's counties (openboatlaunch slugs: anacostia-river-md,
+#   piscataway-creek-md, potomac-river-md, patuxent-river-md, western-branch-patuxent-river-md)
+# History: Year filter back to 2000.
+# Research notes: The 2026-10-26 Westbard Ave report is watermarked 'NON-REPORTABLE' (groundwater
+#   from a construction pump) while the MDE table still holds a 0-gallon row for it.
+cadence: "Page: 'Overflow reports are posted to WSSC Water's website within 10 days of the overflow event.' Observed: 2026-10-18 event, PDF created 2026-10-20."
+license: "No terms read."
+attribution: "WSSC Water"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["MD"]
+access: ["html", "pdf"]
+access_detail: "Drupal view with month/year filters (?year=609 is 2026, 608 is 2025; ?page=N, 10 per page). 68 PDFs listed for 2026, 81 for 2025. PDF names are the event date (e.g. /sites/default/files/2026-10/2026.10.18.pdf, suffix -a/-b, '- NR' for non-reportable). Three PDFs read (raw/wssc-*.pdf)."
+machine_readable: false
+legal_basis: "COMAR 26.08.10.05 (5-day written report)"
+checked: "2026-11-02"

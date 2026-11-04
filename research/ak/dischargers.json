@@ -1,0 +1,129 @@
+[
+  {
+    "id": "ak-juneau-douglas",
+    "name": "City and Borough of Juneau: Juneau-Douglas wastewater treatment facility",
+    "state": "AK",
+    "kind": "cso",
+    "npdes_permit": "AK0023213",
+    "receiving_waters": [
+      "Gastineau Channel"
+    ],
+    "water_slugs": [],
+    "outfall_count": 3,
+    "outfalls_source": "EPA National CSO Inventory (research/ak/federal-seed.json)",
+    "notification_channel": "none found (search)",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Juneau",
+      "Douglas"
+    ],
+    "notes": "Seed permittee string carries a staff name; omitted here. Juneau also holds AK0022951 (Mendenhall).",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ak-apsc-taps",
+    "name": "Alyeska Pipeline Service Company: Trans-Alaska Pipeline System (inventory record)",
+    "state": "AK",
+    "kind": "cso",
+    "npdes_permit": "AKG320002",
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": 1,
+    "outfalls_source": "EPA National CSO Inventory (research/ak/federal-seed.json)",
+    "notification_channel": "n/a",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "North Pole"
+    ],
+    "notes": "A general permit for pipeline facilities; almost certainly an inventory artefact, not a combined sewer.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ak-awwu-anchorage",
+    "name": "Anchorage Water and Wastewater Utility (Asplund WPCF and collection system)",
+    "state": "AK",
+    "kind": "sso",
+    "npdes_permit": "AK0022551",
+    "receiving_waters": [
+      "Cook Inlet",
+      "Fish Creek",
+      "Chester Creek",
+      "Ship Creek",
+      "Campbell Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "EPA SOBE event coordinates",
+    "notification_channel": "EPA eRule SOBE (43 events 2023-06 to 2026-10); no public web notices found",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Anchorage"
+    ],
+    "notes": "Also Eagle River (AK0022543) and Girdwood (AK0047856) plants.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ak-ketchikan",
+    "name": "City of Ketchikan",
+    "state": "AK",
+    "kind": "sso",
+    "npdes_permit": "AK0021440",
+    "receiving_waters": [
+      "Tongass Narrows"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "EPA SOBE event coordinates",
+    "notification_channel": "EPA eRule SOBE (2 events)",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Ketchikan"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ak-denali-np",
+    "name": "National Park Service: Denali National Park (Riley Creek area)",
+    "state": "AK",
+    "kind": "sso",
+    "npdes_permit": "AK0053775",
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": "EPA SOBE event coordinates",
+    "notification_channel": "EPA eRule SOBE (1 event 2026-08-03)",
+    "notification_feed_machine_readable": true,
+    "towns": [
+      "Denali Park"
+    ],
+    "notes": "",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ak-fairbanks-ghu",
+    "name": "Golden Heart Utilities (Fairbanks)",
+    "state": "AK",
+    "kind": "sso",
+    "npdes_permit": "AK0023451",
+    "receiving_waters": [
+      "Chena River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Fairbanks"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  }
+]

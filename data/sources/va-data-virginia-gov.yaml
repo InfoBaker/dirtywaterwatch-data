@@ -1,0 +1,24 @@
+id: "va-data-virginia-gov"
+name: "data.virginia.gov (Virginia Open Data Portal) DEQ listings"
+url: "https://data.virginia.gov/dataset/prep-report-export-all"
+homepage: "https://data.virginia.gov/dataset/prep-report-export-all"
+kind: "api"
+level: "state"
+# Notes (research/va, status used, verified fetched, checked 2026-11-02): Catalog confirms the
+#   GeoHub datasets; no extra data.
+# Access detail (research, quoted): CKAN API package_search: 'prep-report-export-all',
+#   'prep-reports1', 'pollution-response-and-prevention-datasets',
+#   'virginia-pollutant-discharge-elimination-system-vpdes-permit-outfalls' (harvested from DEQ
+#   GeoHub 2026-10-28; license_id null). No 'sewer overflow' datasets.
+cadence: null
+license: "none stated"
+attribution: "Commonwealth of Virginia"
+enabled: true
+role: "events"
+event_types: []
+states: ["VA"]
+access: ["api", "csv"]
+access_detail: "CKAN API package_search: 'prep-report-export-all', 'prep-reports1', 'pollution-response-and-prevention-datasets', 'virginia-pollutant-discharge-elimination-system-vpdes-permit-outfalls' (harvested from DEQ GeoHub 2026-10-28; license_id null). No 'sewer overflow' datasets."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

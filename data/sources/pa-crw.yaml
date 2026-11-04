@@ -1,0 +1,25 @@
+id: "pa-crw"
+name: "Capital Region Water (Harrisburg) Combined Sewer Overflow Advisory Status page and Community Outreach App"
+url: "https://capitalregionwater.com/resources/cso/"
+homepage: "https://capitalregionwater.com/resources/cso/"
+kind: "arcgis"
+level: "utility"
+# Feed row: the source id written by the ingester pipeline/ingest/pa_crw.py
+#   (data/build/events/pa-crw.json). It describes the same source as the research row(s) in
+#   registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/pa_crw.py docstring): A stub that fetches nothing: CRW's app licence bars
+#   redistribution without written permission, so the module records the restriction in meta and
+#   writes no records. It states no cadence.
+cadence: "Daily inspection of all 58 outfalls (all 58 InspDate 2026-11-01 11:00 UTC at fetch); 10 sites real-time. Alarm layer editingInfo lastEditDate 2024-09-17 (may not track live updates; unconfirmed)."
+license: "App licence: 'Unless otherwise stated, the data may not be redistributed, republished, or used for commercial purposes without prior written permission from CRW.' Attribution: 'Source: Capital Region Water – Combined Sewer Overflow Community Outreach App.' Also says the app is not intended for 'Emergency response or public notification'."
+attribution: "Capital Region Water"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["PA"]
+registry_ids: ["pa-crw-cso-advisory-status"]
+access: ["arcgis", "map_only"]
+access_detail: "Page embeds ArcGIS Experience ba86654906604d5eb09fda7ba0db6186 -> web map f3903b485ffb4b84af0cd9f7810fa922 with layers: (1) 'CSO Map Notifications - previous 24 hrs - Inspection' https://cityworks.capitalregionwater.com/cityworks_prod/gis/1/1517/rest/services/cw/FeatureServer/3 (58 rows; InspTemplateName encodes the status, e.g. 'Daily CSO Default 1' = green); (2) 'Dry Weather CSO Map Notifications' .../gis/1/1514/.../FeatureServer/3 (0 rows at fetch); (3) 'Sewer Overflow Alarms' https://arcgis.capitalregionwater.com/server/rest/services/Hosted/Sewer_Overflow_Alarms/FeatureServer/0 (10 monitored outfalls: name, alarm, alarmtype in 'No Overflow Activity' / 'Wet Weather Overflow Activity' / 'Dry Weather Overflow Activity'). All public, no auth."
+machine_readable: true
+legal_basis: "NPDES PA0027197; 2015 partial consent decree (Civil Action 1:15-cv-00291), Public Notification Plan filed 2023-09-22."
+checked: "2026-11-02"

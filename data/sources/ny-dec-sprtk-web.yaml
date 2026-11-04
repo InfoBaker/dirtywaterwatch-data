@@ -1,0 +1,26 @@
+id: "ny-dec-sprtk-web"
+name: "DEC Sewage Pollution Right to Know page, 'Recent NY-Alert Notifications' view"
+url: "https://dec.ny.gov/environmental-protection/water/water-quality/sewage-pollution-right-to-know"
+homepage: "https://dec.ny.gov/environmental-protection/water/water-quality/sewage-pollution-right-to-know"
+kind: "html"
+level: "state"
+# Feed row: the source id written by the ingester pipeline/ingest/ny_sprtk_web.py
+#   (data/build/events/ny-dec-sprtk-web.json). It describes the same source as the research row(s)
+#   in registry_ids, whose files hold the research notes, access detail and fill lists.
+# Cadence (pipeline/ingest/ny_sprtk_web.py docstring): A rolling window of 1-15 rows per capture;
+#   polling every 15-30 minutes misses little. Written as 1 hour: the refresh runs every 30 minutes
+#   (scripts/org.dirtywaterwatch.refresh.plist), so a shorter threshold would read as overdue
+#   between runs.
+cadence: "1 hour"
+license: "No licence statement on the page; DEC site 'Website and Usage Policies' apply (not quoted; https://dec.ny.gov/about/website-usage-and-policies). Data caveats on page: 'Data quality is not checked by DEC.'"
+attribution: "NYS Department of Environmental Conservation"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass", "partially_treated"]
+states: ["NY"]
+registry_ids: ["ny-dec-sprtk-page-recent-alerts"]
+access: ["html"]
+access_detail: "Server-rendered Drupal view (class c-view--sewage-notification) inside the SPRTK page; each row = <li class='c-view__row'> with a headline span, <time datetime='UTC ISO'> and the full NY-Alert message text. No JSON:API (/jsonapi 404), no view RSS, no node links per alert. Fetched 2026-11-01: 1 row (Warwick SD#1 UPDATE issued 10-31-2026 20:59). Wayback snapshots (2025-10-14, 2025-10-15, 2026-01-09, 2026-01-19, 2026-04-17, 2026-05-15) show 1-15 rows each, so the view lists a rolling recent window (page text says 'within the last 7 days'; observed counts suggest a shorter window or row cap). Scraping is possible; page is behind a bot check for some clients (Wayback captured 403 pages several times)."
+machine_readable: false
+legal_basis: "ECL 17-0826-a; 6 NYCRR 750-2.7"
+checked: "2026-11-01"

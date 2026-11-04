@@ -1,0 +1,22 @@
+id: "dc-mayor-advisory-lift-release"
+name: "Mayor's release: Department of Health Lifts Potomac River Recreational Advisory (2026-03-02)"
+url: "https://mayor.dc.gov/release/department-health-lifts-potomac-river-recreational-advisory-washington-dc"
+homepage: "https://mayor.dc.gov/release/department-health-lifts-potomac-river-recreational-advisory-washington-dc"
+kind: "html"
+level: "state"
+# Notes (research/dc, status used, verified fetched, checked 2026-11-02): Lift date and criterion.
+# Access detail (research, quoted): Fetched (raw/mayor-lifts-advisory.html). States the advisory was
+#   issued after the 2026-01-19 collapse; 410 MPN/100 mL used as the standard; 21 days since last
+#   overflow.
+cadence: null
+license: "none stated"
+attribution: "Executive Office of the Mayor"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["DC"]
+access: ["html"]
+access_detail: "Fetched (raw/mayor-lifts-advisory.html). States the advisory was issued after the 2026-01-19 collapse; 410 MPN/100 mL used as the standard; 21 days since last overflow."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

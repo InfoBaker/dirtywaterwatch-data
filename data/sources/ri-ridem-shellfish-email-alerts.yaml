@@ -1,0 +1,24 @@
+id: "ri-ridem-shellfish-email-alerts"
+name: "RIDEM shellfish closure email alerts (Constant Contact)"
+url: "https://lp.constantcontactpages.com/sl/vXQmyK9"
+homepage: "https://lp.constantcontactpages.com/sl/vXQmyK9"
+kind: "email"
+level: "state"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Owner should
+#   subscribe; the only push channel that names sewage-release closures (e.g., Bristol April 2026,
+#   not press-released).
+# Access detail (research, quoted): Sign-up form (not submitted). Said to carry 'closures of
+#   Conditional Areas and emergency closures (harmful alga blooms, sewage releases, etc).' Older
+#   lists: RishellfishOWR-subscribe@listserve.ri.gov.
+cadence: null
+license: "DEM site disclaimer (https://dem.ri.gov/disclaimer): \"The compiled information presented on this WWW site is considered public information and may be distributed or copied. However, use of appropriate byline/photo/image credits is requested.\""
+attribution: "RIDEM"
+enabled: true
+role: "advisories"
+event_types: ["shellfish_closure"]
+states: ["RI"]
+access: ["email"]
+access_detail: "Sign-up form (not submitted). Said to carry 'closures of Conditional Areas and emergency closures (harmful alga blooms, sewage releases, etc).' Older lists: RishellfishOWR-subscribe@listserve.ri.gov."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

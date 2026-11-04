@@ -1,0 +1,581 @@
+[
+ {
+  "event_id": "va-hrsd-douglas-ave-2026-08-04",
+  "source_id": "va-deq-prep-api",
+  "source_record_id": "PReP 324738 (duplicate 324765); SSORS 106791; VDEM-2026-08-04-0016; NRC 1469821, 1469813",
+  "event_type": "sso",
+  "source_status": "Under Investigation (PReP, as of 2026-11-02)",
+  "started_at": "2026-08-04T18:00",
+  "ended_at": "2026-08-05T07:38",
+  "timezone": "America/New_York (implied; sources give no zone)",
+  "reported_at": "2026-08-04T17:38",
+  "published_at": "2026-08-04 (HRSD release 'this evening'; DEQ: media advisory about 9:45 p.m.)",
+  "source_updated_at": "2026-08-18T08:37:45",
+  "fetched_at": "2026-11-03T01:51:23Z",
+  "waterbody": "Hull Creek (Western Branch Elizabeth River) and portions of the Elizabeth River",
+  "water_slugs": [
+   "western-branch-elizabeth-river-va",
+   "elizabeth-river-va"
+  ],
+  "location_text": "30-inch HRSD force main, Douglas Avenue near Rolfe Terrace, Port Norfolk, Portsmouth",
+  "coordinates": [
+   -76.34028391112167,
+   36.850855261839584
+  ],
+  "coordinates_source": "DEQ EDMA layer 175 (geocoded site address of PReP 324738)",
+  "coordinates_precision": "address geocode",
+  "material": "untreated sewage (force main)",
+  "volume": 3137500,
+  "units": "gallons",
+  "estimate_flag": true,
+  "authority": "Hampton Roads Sanitation District; DEQ Tidewater Regional Office; Portsmouth Health Department (VDH)",
+  "advice_text": "Portsmouth Health Department advised residents 'to avoid recreational water activities in Hull Creek, such as swimming, wading, tubing, or kayaking, where full-body submersion is more likely to occur. Boating activities where full-body submersion is not likely to occur (motor boating, flatwater canoeing or kayaking, and fishing) may continue with proper caution'",
+  "valid_until": "2026-08-17 (VDH lifted the Hull Creek advisory)",
+  "geometry": "advisory area 'extends throughout the Western Branch of the Elizabeth River' (PDF map on DEQ page; not digitised)",
+  "source_url": "https://portal.deq.virginia.gov/prep/api/prepReports/324738?expand=prepStatusCode,prepReportSewages",
+  "raw_record": {
+   "prep_324738": {
+    "incidentDateTime": "2026-08-04T19:16:57",
+    "receivedDateTime": "2026-08-04T21:30:58",
+    "receptorWaterbodyId": "Hull Creek",
+    "receptorEstimateHigh": 3137500.0,
+    "duration_h": 14.0,
+    "correctiveAction (excerpt)": "Flows dropped dramatically through the night and officially stopped on the morning of August 5 at approximately 7:38 am."
+   },
+   "prep_324765": {
+    "incidentDateTime": "2026-08-04T16:00:00",
+    "receivedDateTime": "2026-08-04T17:38:00",
+    "otherWaterbodyDesc": "Elizabeth River"
+   },
+   "hrsd_2026-08-07": "The total spill volume was estimated to be approximately 3.1 million gallons.",
+   "deq_topic_page": "The estimated amount of sewage released is 3,150,000 gallons",
+   "vdh_2026-08-05": "An estimated 3 million gallons were released."
+  },
+  "revision_history": [
+   {
+    "at": "2026-08-04 evening",
+    "source": "HRSD release",
+    "text": "30-inch force main failed this evening; Douglas Avenue closed"
+   },
+   {
+    "at": "2026-08-05",
+    "source": "VDH",
+    "text": "advisory issued; 'An estimated 3 million gallons'"
+   },
+   {
+    "at": "2026-08-05",
+    "source": "DEQ page",
+    "text": "flow stopped 'by about 5 a.m. this morning'; 3,150,000 gallons"
+   },
+   {
+    "at": "2026-08-07",
+    "source": "HRSD final update",
+    "text": "repairs complete; approximately 3.1 million gallons"
+   },
+   {
+    "at": "2026-08-17",
+    "source": "VDH",
+    "text": "advisory lifted"
+   },
+   {
+    "at": "2026-08-17/18",
+    "source": "PReP",
+    "text": "sewage sub-records added (3,137,500 gal, 14 h); record modified 2026-08-18"
+   }
+  ],
+  "jurisdiction": "VA",
+  "source_health": "ok",
+  "coverage_note": "Traced through HRSD news releases (Aug 4, 5, 6, 7), DEQ topic page, two PReP records and two VDH releases. Routine HRSD SSOs get none of these.",
+  "notes": "Start time differs by source: PReP 324765 16:00, PReP 324738 19:16:57, DEQ page 'approximately 6 p.m.'. End differs: DEQ 'about 5 a.m.', HRSD report in PReP 'approximately 7:38 am'. Volume 3.0 / 3.1 / 3.1375 / 3.15 million gallons by source."
+ },
+ {
+  "event_id": "va-dcwater-potomac-interceptor-2026-01-19",
+  "source_id": "va-vdh-news-advisory-feed",
+  "source_record_id": null,
+  "event_type": "sso",
+  "source_status": "advisory lifted 2026-03-17",
+  "started_at": "2026-01-19",
+  "ended_at": "2026-02-09",
+  "timezone": "America/New_York (implied; sources give no zone)",
+  "reported_at": null,
+  "published_at": "2026-02-13 (VDH advisory); DEQ sampling began 2026-02-17",
+  "source_updated_at": "2026-08-11 (DEQ page last update)",
+  "fetched_at": "2026-11-03T02:00:00Z",
+  "waterbody": "Potomac River (Virginia shoreline from the American Legion Memorial Bridge (I-495) to the Governor Harry W. Nice Memorial Bridge (US 301))",
+  "water_slugs": [
+   "potomac-river-va"
+  ],
+  "location_text": "DC Water Potomac Interceptor collapse in Montgomery County, MD (C&O Canal near Cabin John); discharge to the Potomac upstream of Virginia waters",
+  "coordinates": null,
+  "coordinates_source": null,
+  "coordinates_precision": null,
+  "material": "untreated sewage",
+  "volume": 243500000,
+  "units": "gallons",
+  "estimate_flag": true,
+  "authority": "DC Water (discharger); Virginia Department of Health (advisory); DEQ (sampling)",
+  "advice_text": "VDH advised 'Virginia residents to avoid recreational water activities in the Potomac River, such as swimming, wading, tubing, white-water canoeing or kayaking, where full-body submersion is more likely to occur.' Advisory area 'extends for 72.5 miles from the American Legion Memorial Bridge (I-495) in Fairfax County to the Governor Harry W. Nice Memorial Bridge (Route 301) in King George County.'",
+  "valid_until": "2026-03-17 (Chain Bridge to US 301 lifted 2026-03-05; I-495 to Chain Bridge lifted 2026-03-17)",
+  "geometry": "advisory reach I-495 to US 301 (text only)",
+  "source_url": "https://www.vdh.virginia.gov/news/public-relations-contacts/2026-regional-news-releases/vdh-issues-recreational-water-advisory-for-the-potomac-river/",
+  "raw_record": {
+   "vdh_issue_2026-02-13": "The advisory is being issued out of an abundance of caution due to a sewage spill in the Potomac River that occurred January 19, and subsequent reports of a sewage discharge February 7.",
+   "deq_page": "Total loads (below) were calculated based on the total sewage overflow amount estimated by DC Water at 243,500,000 gallons.",
+   "deq_page_icprb": "elevated fecal bacteria concentrations ... will decline to near background levels ... over approximately 10 days from the end of the discharge on Feb. 9."
+  },
+  "revision_history": [
+   {
+    "at": "2026-02-13",
+    "text": "VDH advisory issued"
+   },
+   {
+    "at": "2026-03-05",
+    "text": "partially lifted (Chain Bridge to US 301)"
+   },
+   {
+    "at": "2026-03-16",
+    "text": "DEQ ends special sampling"
+   },
+   {
+    "at": "2026-03-17",
+    "text": "VDH lifts remaining advisory"
+   },
+   {
+    "at": "2026-08-11",
+    "text": "DEQ: no evidence of persistent contamination in Virginia waters; weekly sampling ended"
+   }
+  ],
+  "jurisdiction": "VA",
+  "source_health": "ok",
+  "coverage_note": "Discharger is out of state (DC/MD); Virginia's record is VDH's advisory and DEQ's sampling. No PReP record checked. DC and MD agents hold the discharge-side sources.",
+  "notes": "Virginia advisory started 25 days after the collapse."
+ },
+ {
+  "event_id": "va-hopewell-bailey-bay-2026-07-14",
+  "source_id": "va-deq-prep-api",
+  "source_record_id": "PReP 324390",
+  "event_type": "sso",
+  "source_status": "Closed (PReP 2026-07-24)",
+  "started_at": "2026-07-14T06:00",
+  "ended_at": "2026-07-21T12:00",
+  "timezone": "America/New_York (implied; sources give no zone)",
+  "reported_at": "2026-07-14T12:15",
+  "published_at": "2026-07-16 (VDH advisory)",
+  "source_updated_at": "2026-07-24T16:41:53",
+  "fetched_at": "2026-11-03T01:52:28Z",
+  "waterbody": "Cattail Creek to Bailey Creek and Bailey Bay (James River)",
+  "water_slugs": [
+   "james-river-va"
+  ],
+  "location_text": "Force main near the end of South First Avenue / First Street Pump Station, Hopewell (1401 South First Avenue)",
+  "coordinates": null,
+  "coordinates_source": null,
+  "coordinates_precision": null,
+  "material": "untreated domestic sewage",
+  "volume": 1500000,
+  "units": "gallons",
+  "estimate_flag": true,
+  "authority": "City of Hopewell (Hopewell Water Renewal); DEQ Piedmont Regional Office; VDH",
+  "advice_text": "VDH: avoid 'swimming, wading, tubing, white-water canoeing or kayaking, where full-body submersion is more likely to occur' in Bailey Bay; 'The advisory area for Bailey Bay extends from City Point in the City of Hopewell to Jordan Point in Prince George County.'",
+  "valid_until": "2026-07-23 (VDH lifted)",
+  "geometry": "advisory reach City Point to Jordan Point (PNG map)",
+  "source_url": "https://portal.deq.virginia.gov/prep/api/prepReports/324390?expand=prepStatusCode,prepReportSewages",
+  "raw_record": {
+   "incidentComment (excerpt)": "caused by a 2–3 inch hole in an underground force main, resulting in a discharge into a swampy area of Cattail Creek ... The force main was repaired on July 21, 2026 and the discharge ceased.",
+   "duration_h": 174.0,
+   "dischargeVolume": 1500000,
+   "vdh_2026-07-16": "estimated at 400,000 to 500,000 gallons per day",
+   "deq_page": "stopped the sewage leak at approximately 12:00 p.m. (noon)"
+  },
+  "revision_history": [
+   {
+    "at": "2026-07-14",
+    "text": "reported to DEQ"
+   },
+   {
+    "at": "2026-07-16",
+    "text": "VDH advisory; release 'estimated at 400,000 to 500,000 gallons per day'"
+   },
+   {
+    "at": "2026-07-21",
+    "text": "DEQ: leak stopped about noon; 1.5 million gallons"
+   },
+   {
+    "at": "2026-07-23",
+    "text": "VDH lifted; 'repairs were successfully completed on Tuesday, July 22'"
+   },
+   {
+    "at": "2026-07-24",
+    "text": "PReP closed"
+   }
+  ],
+  "jurisdiction": "VA",
+  "source_health": "ok",
+  "coverage_note": "Traced through PReP, the DEQ 'South First Avenue Sewer Main Failure' page and two VDH releases.",
+  "notes": "VDH's lift says repairs finished 'Tuesday, July 22'; July 21, 2026 was the Tuesday and DEQ and PReP say July 21."
+ },
+ {
+  "event_id": "va-hopewell-wwtp-2025-07-11",
+  "source_id": "va-deq-prep-api",
+  "source_record_id": "PReP 319760 (also 319743); VDEM 2025-07-12-0041",
+  "event_type": "bypass",
+  "source_status": "Closed (PReP 2025-07-16)",
+  "started_at": "2025-07-11T23:00",
+  "ended_at": "2025-07-12T15:30",
+  "timezone": "America/New_York (implied; sources give no zone)",
+  "reported_at": "2025-07-12T07:30",
+  "published_at": "2025-07-12 (Crater Health District advisory)",
+  "source_updated_at": "2025-07-16T08:28:20",
+  "fetched_at": "2026-11-03T01:52:29Z",
+  "waterbody": "Gravelly Run to the James River",
+  "water_slugs": [
+   "james-river-va"
+  ],
+  "location_text": "Hopewell Water Renewal headworks, 231 Hummel Ross Rd, Hopewell",
+  "coordinates": null,
+  "coordinates_source": null,
+  "coordinates_precision": null,
+  "material": "untreated domestic wastewater",
+  "volume": 1382000,
+  "units": "gallons",
+  "estimate_flag": true,
+  "authority": "City of Hopewell (Hopewell Water Renewal); DEQ; VDH Crater Health District",
+  "advice_text": "Crater Health District: recreational swimming advisory 'for the Gravelly Run and sections of the James River from the Old City Point Waterfront Park in Hopewell extending downstream to the Berkley'; 'Activities that result in limited contact such wading in the water to launch a boat, kayaking, canoeing, may continue with proper caution.'",
+  "valid_until": "2025-07-18 (advisory lifted)",
+  "geometry": "advisory reach City Point to Berkeley (text)",
+  "source_url": "https://portal.deq.virginia.gov/prep/api/prepReports/319760?expand=prepStatusCode,prepReportSewages",
+  "raw_record": {
+   "incidentComment (excerpt)": "power loss at the domestic headworks blinded the channels ... This caused 50,000-100,000 gallons per hour of domestic wastewater to overflow into the Gravely Run Creek",
+   "duration_h": 15.5,
+   "dischargeVolume_319760": 1382000,
+   "dischargeVolume_319743": 1198650,
+   "vdh_lift": "The overflow was stopped at approximately 3:30 p.m. Saturday, July 12"
+  },
+  "revision_history": [
+   {
+    "at": "2025-07-12",
+    "text": "VDH: 'an estimated million gallons'"
+   },
+   {
+    "at": "2025-07-14",
+    "text": "PReP 319743 closed (1,198,650 gal)"
+   },
+   {
+    "at": "2025-07-16",
+    "text": "PReP 319760 closed (1,382,000 gal)"
+   },
+   {
+    "at": "2025-07-18",
+    "text": "VDH lifted"
+   }
+  ],
+  "jurisdiction": "VA",
+  "source_health": "ok",
+  "coverage_note": "Two PReP records for one event with different volumes.",
+  "notes": "PReP comment says '2300 7/12'; the incident field says 2025-07-11T23:00 and VDH says 'around midnight' on July 11."
+ },
+ {
+  "event_id": "va-tappahannock-wwtp-2025-07-08",
+  "source_id": "va-deq-prep-api",
+  "source_record_id": "PReP 319799",
+  "event_type": "bypass",
+  "source_status": "Closed (PReP 2025-07-16)",
+  "started_at": "2025-07-08T20:00",
+  "ended_at": "2025-07-10T13:30",
+  "timezone": "America/New_York (implied; sources give no zone)",
+  "reported_at": "2025-07-09T16:24",
+  "published_at": "2025-07-10 (Three Rivers Health District advisory)",
+  "source_updated_at": "2025-07-16T14:52:24",
+  "fetched_at": "2026-11-03T01:52:30Z",
+  "waterbody": "Hoskins Creek and the Rappahannock River (Downing Bridge to Wares Wharf)",
+  "water_slugs": [
+   "hoskins-creek-va",
+   "rappahannock-river-va"
+  ],
+  "location_text": "Town of Tappahannock WWTP, 400 Mill Dr, Tappahannock (UV disinfection failure after lightning)",
+  "coordinates": null,
+  "coordinates_source": null,
+  "coordinates_precision": null,
+  "material": "partially treated wastewater (not disinfected)",
+  "volume": 725166,
+  "units": "gallons",
+  "estimate_flag": true,
+  "authority": "Town of Tappahannock; DEQ; VDH Three Rivers Health District",
+  "advice_text": "Three Rivers Health District: avoid 'activities in the advisory area that will result in prolonged contact such as swimming or stand-up paddle boarding (SUPing) and prevent pets from swimming. Activities that result in limited contact such wading in the water to launch a boat, kayaking, canoeing, may continue with proper caution.'",
+  "valid_until": "2025-07-16 (lifted after DEQ sampling on July 14)",
+  "geometry": "Downing Bridge to Wares Wharf (text)",
+  "source_url": "https://portal.deq.virginia.gov/prep/api/prepReports/319799?expand=prepStatusCode,prepReportSewages",
+  "raw_record": {
+   "incidentComment (excerpt)": "equipment failure that occurred on Tuesday July 8th, 2025, at 20:00hrs (8:00p.m.) to our Trojan U.V Disinfection System",
+   "duration_h": 28.0,
+   "dischargeVolume": 725166,
+   "correctiveAction (excerpt)": "July 10th, 2025, at 13:30hrs a drip system was set up for Sodium Hypo chloride to disinfect the Final Effluent"
+  },
+  "revision_history": [
+   {
+    "at": "2025-07-10",
+    "text": "VDH: 'approximately 400,000 gallons of partially treated sewage'"
+   },
+   {
+    "at": "2025-07-16",
+    "text": "VDH lift: 'approximately 725,000 gallons ... between late July 8 and July 12'"
+   },
+   {
+    "at": "2025-07-16",
+    "text": "PReP closed with 725,166 gal"
+   }
+  ],
+  "jurisdiction": "VA",
+  "source_health": "ok",
+  "coverage_note": "Volume nearly doubled between the advisory and the lift.",
+  "notes": "ended_at uses the chlorination start (13:30 July 10); VDH says the incident ran to July 12; 28 h duration in PReP."
+ },
+ {
+  "event_id": "va-dickenson-psa-mcclure-2026-04-09",
+  "source_id": "va-deq-prep-api",
+  "source_record_id": "PReP 323110",
+  "event_type": "sso",
+  "source_status": "Closed (PReP 2026-04-15)",
+  "started_at": "2026-04-09T10:58",
+  "ended_at": "2026-04-10",
+  "timezone": "America/New_York (implied; sources give no zone)",
+  "reported_at": "2026-04-09T09:53",
+  "published_at": "2026-04-10 (VDH advisory)",
+  "source_updated_at": "2026-04-15T08:23:13",
+  "fetched_at": "2026-11-03T01:52:31Z",
+  "waterbody": "Unnamed tributary to the McClure River (McClure River to the Russell Fork at Haysi)",
+  "water_slugs": [
+   "russell-fork-va"
+  ],
+  "location_text": "Manhole near 717 Centennial Heights Road, Haysi (Dickenson County PSA, Haysi WWTP system)",
+  "coordinates": null,
+  "coordinates_source": null,
+  "coordinates_precision": null,
+  "material": "untreated sewage",
+  "volume": 24900,
+  "units": "gallons",
+  "estimate_flag": true,
+  "authority": "Dickenson County PSA; DEQ Southwest Regional Office; VDH",
+  "advice_text": "VDH: avoid recreational water activities 'where full-body submersion is more likely to occur'; area 'from the McClure River in front of Electric Hardwoods on Dickenson Hwy to the bridge over the Russell Fork River on State Route 63 Big Ridge Rd.'",
+  "valid_until": "2026-04-14 (VDH lifted; kept 'through the weekend' to allow dilution)",
+  "geometry": "text reach",
+  "source_url": "https://portal.deq.virginia.gov/prep/api/prepReports/323110?expand=prepStatusCode,prepReportSewages",
+  "raw_record": {
+   "incidentComment (excerpt)": "a manhole was found overflowing near 717 Centenial Heights Road, Haysi. PSA staff investigated and found a clogged surge tank",
+   "closureComment": "Repairs were made and the overflow ended on April 10, 2026",
+   "receptorEstimateHigh": 24900,
+   "vdh_lift": "The volume of sewage released from the spill was unknown."
+  },
+  "revision_history": [
+   {
+    "at": "2026-04-10",
+    "text": "VDH advisory"
+   },
+   {
+    "at": "2026-04-14",
+    "text": "VDH lift: repair 'the afternoon of Friday April 14'; 'volume ... unknown'"
+   },
+   {
+    "at": "2026-04-15",
+    "text": "PReP closed: overflow ended April 10; 24,900 gal"
+   }
+  ],
+  "jurisdiction": "VA",
+  "source_health": "ok",
+  "coverage_note": "McClure River has no openboatlaunch record; Russell Fork (downstream) does.",
+  "notes": "PReP received time precedes incident time. VDH's 'Friday April 14' cannot be right (April 14, 2026 was a Tuesday); PReP says the overflow ended April 10 (a Friday)."
+ },
+ {
+  "event_id": "va-richmond-cso06-2026-07-19",
+  "source_id": "va-richmond-monthly-cso-xlsx",
+  "source_record_id": "47_CSOReports2026_Jul2026 sheet CSO_06-Events row 2026Jul19",
+  "event_type": "cso",
+  "source_status": "reported (monthly report)",
+  "started_at": "2026-07-19T18:40",
+  "ended_at": "2026-07-28T22:25",
+  "timezone": "America/New_York (implied; sources give no zone)",
+  "reported_at": null,
+  "published_at": "2026-08 (file folder sites/default/files/2026-08/)",
+  "source_updated_at": null,
+  "fetched_at": "2026-11-03T01:44:51Z",
+  "waterbody": "James River",
+  "water_slugs": [
+   "james-river-va"
+  ],
+  "location_text": "Richmond CSO 006 (James River), one of 25 monitored outfalls",
+  "coordinates": [
+   -77.4318069699,
+   37.5310440576
+  ],
+  "coordinates_source": "Richmond EmNet map site 'CSO 6'",
+  "coordinates_precision": "outfall point",
+  "material": "combined sewage and stormwater",
+  "volume": 226,
+  "units": "million gallons",
+  "estimate_flag": true,
+  "authority": "City of Richmond Department of Public Utilities",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "outfall point",
+  "source_url": "https://rva.gov/sites/default/files/2026-08/47_CSOReports2026_Jul2026_CSO_Report_Public_rtswmm%20%281%29.xlsx",
+  "raw_record": {
+   "start (Excel serial)": "46222.77777777778",
+   "end (Excel serial)": "46231.93402777778",
+   "Rainfall, in": "5.05",
+   "Observed Overflow Volume, mg": "226",
+   "overflow_duration_hours": "41",
+   "sheet_note": "Activations are defined by CSO volumes > 0.01 MG and an interevent time of 72 hours",
+   "month_total": "287.0 MG Overflow Observed"
+  },
+  "revision_history": null,
+  "jurisdiction": "VA",
+  "source_health": "ok",
+  "coverage_note": "Monthly report only; the live map keeps just the latest event per outfall (CSO 6 last event on 2026-11-02 was 2026-08-16 23:05).",
+  "notes": "Most of July's 287 MG came from this one outfall. The 'end' closes a 72-hour activation window, so the 41 overflow hours are spread inside it. Time zone not stated in the file."
+ },
+ {
+  "event_id": "va-alexrenew-cso019-2026-01-01",
+  "source_id": "va-alexrenew-cso-status-layer",
+  "source_record_id": "Outfall_Overflow_Status_view OBJECTID 2 (CSO 019); OBJECTID 3 (CSO 020)",
+  "event_type": "cso",
+  "source_status": "Normal (as of 2026-11-02; last event shown)",
+  "started_at": "2026-01-01T09:13:42",
+  "ended_at": "2026-01-01T15:26:13",
+  "timezone": "UTC in the layer (14:13:42Z-20:26:13Z), shown here as America/New_York",
+  "reported_at": null,
+  "published_at": null,
+  "source_updated_at": "2026-10-21 (layer dataLastEditDate)",
+  "fetched_at": "2026-11-03T01:45:41Z",
+  "waterbody": "Potomac River (Oronoco Bay) at CSO 019; Hunting Creek at CSO 020 (same times)",
+  "water_slugs": [
+   "potomac-river-va"
+  ],
+  "location_text": "CSO 019 - Potomac River (Pendleton St); CSO 020 - Hunting Creek (Royal St), Alexandria",
+  "coordinates": [
+   -77.038972,
+   38.809917
+  ],
+  "coordinates_source": "ECHO CSO inventory VA0025160 outfall 019",
+  "coordinates_precision": "outfall point",
+  "material": "combined sewage and stormwater",
+  "volume": null,
+  "units": null,
+  "estimate_flag": null,
+  "authority": "Alexandria Renew Enterprises",
+  "advice_text": null,
+  "valid_until": "2026-01-02T15:26 (24-hour red window on the map; inferred)",
+  "geometry": "outfall points",
+  "source_url": "https://services8.arcgis.com/gPxDs3sbKpglnSk7/arcgis/rest/services/Outfall_Overflow_Status_view/FeatureServer/0/query?where=1%3D1&outFields=*&f=json",
+  "raw_record": {
+   "CSO_Name": "CSO 019 - Potomac River",
+   "status_text": "Normal",
+   "status": 0,
+   "timestamp_start": 1767276822000,
+   "timestamp_end": 1767299173000
+  },
+  "revision_history": null,
+  "jurisdiction": "VA",
+  "source_health": "ok",
+  "coverage_note": "Layer keeps only the latest event per outfall; the RiverRenew tunnel went into service 2026-07-01, so this may be the last pre-tunnel overflow shown.",
+  "notes": "Epoch values decoded as UTC (2026-01-01T14:13:42Z to 20:26:13Z). CSO 021/022 carry placeholder times 06:00-06:01Z the same day. Not cross-checked against AlexRenew emails (not subscribed) or PReP."
+ },
+ {
+  "event_id": "va-henrico-meredith-branch-2026-10-29",
+  "source_id": "va-deq-prep-api",
+  "source_record_id": "PReP 326056",
+  "event_type": "sso",
+  "source_status": "Under Investigation in the export layer (2026-11-02 21:49 local); closed in the API (incidentClosureDate 2026-11-02T12:28:07)",
+  "started_at": "2026-10-29T20:45",
+  "ended_at": "2026-10-29T22:00",
+  "timezone": "America/New_York (implied; sources give no zone)",
+  "reported_at": "2026-10-30T12:42",
+  "published_at": null,
+  "source_updated_at": "2026-11-02T12:28:07",
+  "fetched_at": "2026-11-03T01:58:00Z",
+  "waterbody": "Meredith Branch",
+  "water_slugs": [
+   "meredith-branch-va"
+  ],
+  "location_text": "Manhole SMH#405NW017 on a 10-inch gravity sewer at 9319 Dolmen Road, Glen Allen (Henrico County)",
+  "coordinates": [
+   -77.55111274926566,
+   37.657713427791265
+  ],
+  "coordinates_source": "DEQ EDMA layer 175 (geocoded address)",
+  "coordinates_precision": "address geocode",
+  "material": "untreated sewage (grease blockage)",
+  "volume": 1125,
+  "units": "gallons",
+  "estimate_flag": true,
+  "authority": "Henrico County Department of Public Utilities; DEQ Piedmont Regional Office",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": "point",
+  "source_url": "https://portal.deq.virginia.gov/prep/api/prepReports/326056?expand=prepStatusCode,prepReportSewages",
+  "raw_record": {
+   "incidentComment (excerpt)": "The spill entered Meredith Branch Creek. County staff were able to unblock the sewer main and the overflow officially ceased at approximately 10:00 PM on October 29, 2026 for a total of 75 mins. The estimated discharge volume was approximately 15 gpm for a total of 1125 gallons.",
+   "original_report": "Date Reported: 10/30/2026 Time: 12:40 PM ... Additional details will be provided in a letter within 5 days."
+  },
+  "revision_history": [
+   {
+    "at": "2026-10-30T12:42",
+    "text": "PReP received"
+   },
+   {
+    "at": "2026-11-02T12:28",
+    "text": "closure date set in PReP (export layer still 'Under Investigation' that evening)"
+   }
+  ],
+  "jurisdiction": "VA",
+  "source_health": "ok",
+  "coverage_note": "A routine small SSO: in PReP only. Henrico's SSO map layer has a point per work order but no date.",
+  "notes": "Reported about 16 hours after it ended; within the 24-hour rule counted from discovery."
+ },
+ {
+  "event_id": "va-lynchburg-cso-2025-07-14",
+  "source_id": "va-deq-prep-api",
+  "source_record_id": "PReP 319811",
+  "event_type": "cso",
+  "source_status": "Closed (PReP 2025-07-16): 'Permitted - 5 Day Letter received.'",
+  "started_at": "2025-07-14",
+  "ended_at": null,
+  "timezone": "America/New_York (implied; sources give no zone)",
+  "reported_at": "2025-07-15T15:31",
+  "published_at": null,
+  "source_updated_at": "2025-07-16T09:37:11",
+  "fetched_at": "2026-11-03T01:58:00Z",
+  "waterbody": "James River",
+  "water_slugs": [
+   "james-river-va"
+  ],
+  "location_text": "City of Lynchburg combined sewer system (outfall not named)",
+  "coordinates": null,
+  "coordinates_source": null,
+  "coordinates_precision": null,
+  "material": "combined sewage and stormwater",
+  "volume": null,
+  "units": "gallons",
+  "estimate_flag": null,
+  "authority": "City of Lynchburg Water Resources; DEQ Blue Ridge Regional Office",
+  "advice_text": null,
+  "valid_until": null,
+  "geometry": null,
+  "source_url": "https://portal.deq.virginia.gov/prep/api/prepReports/319811?expand=prepStatusCode,prepReportSewages",
+  "raw_record": {
+   "siteName": "CSO - City of Lynchburg",
+   "incidentComment": "CSO - City of Lynchburg.",
+   "prepReportSewages": {
+    "dischargeUnknown": "Y",
+    "conditionsWet": "Y",
+    "precipitationAmount": 1.9
+   },
+   "receptorEstimateLow": 1.0,
+   "receptorEstimateHigh": -1.0
+  },
+  "revision_history": null,
+  "jurisdiction": "VA",
+  "source_health": "ok",
+  "coverage_note": "One of only three CSO-named PReP records since 2024; Lynchburg's text/email alerts for the same event are not archived publicly.",
+  "notes": "Date-only start; volume unknown (-1 sentinel). 1.9 inches of rain recorded. Same storm week as the Hopewell and Tappahannock events."
+ }
+]

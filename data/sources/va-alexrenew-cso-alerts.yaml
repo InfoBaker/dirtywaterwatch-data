@@ -1,0 +1,24 @@
+id: "va-alexrenew-cso-alerts"
+name: "AlexRenew CSO email alerts (Real Magnet form) and CSO Tracking page"
+url: "https://alexrenew.com/our-work/cso-tracking/alerts"
+homepage: "https://alexrenew.com/our-work/cso-tracking/alerts"
+kind: "html"
+level: "utility"
+# Notes (research/va, status candidate, verified fetched, checked 2026-11-02): Owner should
+#   subscribe; emails would confirm event times and wording.
+# Access detail (research, quoted): alexrenew.com answers 403 to curl/WebFetch; read in the browser
+#   pane. 'Sign up to receive email alerts when a combined sewer overflow occurs.' Form iframe
+#   https://are.realmagnet.land/cso-alerts (not submitted). CSO Tracking page shows annual dashboard
+#   (captured/overflowed/rainfall) and '20 overflow events prevented' (2026).
+cadence: null
+license: "none stated"
+attribution: "Alexandria Renew Enterprises"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["VA"]
+access: ["email", "html"]
+access_detail: "alexrenew.com answers 403 to curl/WebFetch; read in the browser pane. 'Sign up to receive email alerts when a combined sewer overflow occurs.' Form iframe https://are.realmagnet.land/cso-alerts (not submitted). CSO Tracking page shows annual dashboard (captured/overflowed/rainfall) and '20 overflow events prevented' (2026)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

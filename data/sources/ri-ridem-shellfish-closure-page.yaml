@@ -1,0 +1,32 @@
+id: "ri-ridem-shellfish-closure-page"
+name: "RIDEM Pollution-Related Conditional Area and Emergency Shellfish Closures (status table)"
+url: "https://dem.ri.gov/shellfish"
+homepage: "https://dem.ri.gov/shellfish"
+kind: "html"
+level: "state"
+# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Official
+#   affected-area advisories that include sewage-triggered emergency closures; scraping is blocked
+#   by Cloudflare, so the email list is the practical feed.
+# Access detail (research, quoted): HTML table Location / Status / Scheduled to Reopen with
+#   'Updated' date and rain totals (TF Green, Taunton, Westerly). Cloudflare challenge blocks
+#   curl/WebFetch (403); readable in a real browser.
+# Can fill: source_status, valid_until (Scheduled to Reopen), source_updated_at, authority, official
+#   affected area (by area code)
+# Cannot fill: cause per closure (only in press releases/emails); volume; outfall
+# Waters: Conditional areas 1A, 16E, 8A/8C, 17, 5, 10PJ-N/E and emergency closures anywhere
+#   (openboatlaunch slugs: narragansett-bay-ri, providence-river-ri, point-judith-pond-ri)
+# History: none on page
+# Research notes: Rain triggers (DEM 2025-05-15): Lower Providence River and Greenwich Bay close 6
+#   days after 0.5-1.2 in. in 24 h, 7 days above 1.2 in.
+cadence: "Updated after each closure/reopening (last update 10/19/2026)."
+license: "DEM site disclaimer (https://dem.ri.gov/disclaimer): \"The compiled information presented on this WWW site is considered public information and may be distributed or copied. However, use of appropriate byline/photo/image credits is requested.\""
+attribution: "RIDEM Office of Water Resources"
+enabled: true
+role: "advisories"
+event_types: ["shellfish_closure (rain, CSO, SSO, HAB)"]
+states: ["RI"]
+access: ["html", "phone", "email"]
+access_detail: "HTML table Location / Status / Scheduled to Reopen with 'Updated' date and rain totals (TF Green, Taunton, Westerly). Cloudflare challenge blocks curl/WebFetch (403); readable in a real browser."
+machine_readable: false
+legal_basis: "R.I. Gen. Laws § 20-8.1-3"
+checked: "2026-11-01"

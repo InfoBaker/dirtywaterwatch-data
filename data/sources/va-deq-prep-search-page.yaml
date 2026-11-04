@@ -1,0 +1,25 @@
+id: "va-deq-prep-search-page"
+name: "DEQ Pollution Data and Reporting page (PReP search, online report form, terms)"
+url: "https://www.deq.virginia.gov/land-waste/pollution-response/pollution-data-and-reporting"
+homepage: "https://www.deq.virginia.gov/land-waste/pollution-response/pollution-data-and-reporting"
+kind: "html"
+level: "state"
+# Notes (research/va, status used, verified fetched, checked 2026-11-02): Source of the public terms
+#   and attribution statement for PReP data; emergency line now 804-750-8845 (2025 copy said
+#   1-800-468-8892).
+# Access detail (research, quoted): www.deq.virginia.gov answers 403 to curl and WebFetch (bot
+#   wall); read in a browser and via Wayback copy 2025-08-15
+#   (raw/wb-...pollution-data-and-reporting.html). Page moved from /our-programs/pollution-response/
+#   to /land-waste/pollution-response/ in 2026.
+cadence: null
+license: "none stated"
+attribution: "Virginia Department of Environmental Quality"
+enabled: true
+role: "events"
+event_types: []
+states: ["VA"]
+access: ["html"]
+access_detail: "www.deq.virginia.gov answers 403 to curl and WebFetch (bot wall); read in a browser and via Wayback copy 2025-08-15 (raw/wb-...pollution-data-and-reporting.html). Page moved from /our-programs/pollution-response/ to /land-waste/pollution-response/ in 2026."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

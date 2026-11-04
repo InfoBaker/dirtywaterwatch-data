@@ -1,0 +1,4 @@
+requests>=2.32
+pyyaml>=6
+shapely>=2
+pytest>=8

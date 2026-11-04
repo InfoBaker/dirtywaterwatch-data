@@ -1,0 +1,24 @@
+id: "md-aahealth-water-quality-report"
+name: "Anne Arundel County Department of Health Recreational Water Quality Report (beach enterococci results)"
+url: "https://www.aahealth.org/environmental-health/recreational-water-quality/water-quality-report"
+homepage: "https://www.aahealth.org/environmental-health/recreational-water-quality/water-quality-report"
+kind: "html"
+level: "municipal"
+# Notes (research/md, status candidate, verified fetched, checked 2026-11-02): Monitoring context
+#   for advisories; HTML scrape.
+# Access detail (research, quoted): Fetched (raw/aah-wqr.html): tables by river (Chesapeake Bay,
+#   Magothy, Patapsco, Rhode, Severn, South, Stoney Creek, Weems Creek, West) with Location, Date
+#   Sample Taken, Frequency, Enterococci Count, EPA Acceptable Level (104). Archive at
+#   /water-quality-archives?page=N.
+cadence: "Memorial Day to Labor Day; weekly/biweekly/monthly per beach."
+license: "none stated"
+attribution: "Anne Arundel County Department of Health"
+enabled: true
+role: "monitoring"
+event_types: ["beach_monitoring"]
+states: ["MD"]
+access: ["html"]
+access_detail: "Fetched (raw/aah-wqr.html): tables by river (Chesapeake Bay, Magothy, Patapsco, Rhode, Severn, South, Stoney Creek, Weems Creek, West) with Location, Date Sample Taken, Frequency, Enterococci Count, EPA Acceptable Level (104). Archive at /water-quality-archives?page=N."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

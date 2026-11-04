@@ -1,0 +1,23 @@
+id: "nhdes-hab-program-page"
+name: "NHDES Cyanobacteria Harmful Algal Blooms page"
+url: "https://www.des.nh.gov/water/healthy-swimming/harmful-algal-blooms"
+homepage: "https://www.des.nh.gov/water/healthy-swimming/harmful-algal-blooms"
+kind: "html"
+level: "state"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): Programme description.
+# Access detail (research, quoted): none recorded
+# Research notes: 'NHDES tracks cyanobacteria bloom reports on our Healthy Swimming Mapper,
+#   representing a static point in time.' 'NHDES does not close waterbodies but does recommend
+#   avoiding swimming in water in the vicinity of a bloom.'
+cadence: null
+license: "none stated"
+attribution: "NHDES"
+enabled: true
+role: "advisories"
+event_types: ["cyanobacteria"]
+states: ["NH"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

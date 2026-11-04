@@ -1,0 +1,43 @@
+id: "fed-echo-national-cso-inventory"
+name: "EPA National Combined Sewer Overflow Inventory (ECHO download ALL_CSO_downloads.zip)"
+url: "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"
+homepage: "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"
+kind: "csv"
+level: "federal"
+# Notes (research/federal, status candidate, verified fetched, checked 2026-11-01): Best federal
+#   list of CSO outfall locations with permit IDs, outfall numbers and NHD reach codes for all six
+#   New England states; EPA says ~90% complete (Sept 2023). Use as the outfall backbone and
+#   reconcile with state lists.
+# Access detail (research, quoted): Direct ZIP (about 300 KB) containing ALL_CSO_DOWNLOADS.csv (4.2
+#   MB). No auth. Fetched 2026-11-01; file inside dated 2026-10-31. Data element dictionary:
+#   https://echo.epa.gov/tools/data-downloads/cso-inventory-summary. Raw copy:
+#   research/federal/raw/cso_inventory/.
+# Can fill: geometry (outfall point), coordinates (source ICIS, precision as entered by state),
+#   waterbody (state name or NHD auto name), location_text (PERM_FEATURE_TEXT), authority
+#   (permitting state/EPA), jurisdiction, source_record_id (NPDESID_PFID)
+# Cannot fill: started_at; ended_at; volume; reported_at; advice_text; event_type of any actual
+#   discharge
+# Waters: All US CSO outfalls in ICIS-NPDES plus some closed CSOs kept outside ICIS; 9,458 rows
+#   nationally, 812 rows in New England (618 active CSO/TCS outfalls on 80 permits after dropping
+#   closed) (openboatlaunch slugs: connecticut-river-ma, chicopee-river-ma, merrimack-river-ma,
+#   merrimack-river-nh, charles-river-ma, mystic-river-ma, taunton-river-ma, penobscot-river-me,
+#   kennebec-river-me, androscoggin-river-me, saco-river-me, providence-river-ri, seekonk-river-ri,
+#   lake-champlain-vt, winooski-river-vt, connecticut-river-ct, connecticut-river-vt)
+# History: Current snapshot only; first published May 2023. Closed outfalls kept with PF_CHARACTER
+#   CLS.
+# Research notes: PF_CHARACTER codes: CSO = untreated CSO, TCS = treated CSO, CLS = closed CSO.
+#   Receiving-water names blank for many MA/NH rows (use PF_STATE_AUTO_NAME). RI collection-system
+#   records (RISS…) duplicate NBC outfalls. Springfield outfalls sit under MA0101613; MA0103331 is a
+#   stale record. Counts include a stray Rust-Oleum (MAG250958) row and co-permittee records (MAC…).
+cadence: "Updated weekly from ICIS-NPDES (\"These data are updated weekly by EPA Regions and states\"). Not an event feed."
+license: "EPA Standard Open Data License: \"Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain and is not subject to domestic copyright protection under 17 U.S.C. § 105.\" https://edg.epa.gov/EPA_Data_License.html ECHO swagger 'license': 'U.S. Public Domain License'. ECHO About the Data: \"The information contained in ECHO is made available to the public\" with no warranty of \"accuracy, completeness, or currency\"; \"ECHO is not designed for large scale data transfers or robotic queries.\" https://echo.epa.gov/resources/echo-data/about-the-data"
+attribution: "US EPA Office of Enforcement and Compliance Assurance (ECHO) / Office of Wastewater Management"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["US"]
+access: ["csv"]
+access_detail: "Direct ZIP (about 300 KB) containing ALL_CSO_DOWNLOADS.csv (4.2 MB). No auth. Fetched 2026-11-01; file inside dated 2026-10-31. Data element dictionary: https://echo.epa.gov/tools/data-downloads/cso-inventory-summary. Raw copy: research/federal/raw/cso_inventory/."
+machine_readable: true
+legal_basis: "NPDES permits under CWA 402; ICIS-NPDES data entry required of authorized states under 40 CFR part 127"
+checked: "2026-11-01"

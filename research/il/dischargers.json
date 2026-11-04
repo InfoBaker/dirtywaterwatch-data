@@ -1,0 +1,2809 @@
+[
+ {
+  "id": "il-oregon-stp-city-of",
+  "name": "OREGON STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0020184",
+  "receiving_waters": [
+   "ROCK RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oregon"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-litchfield-stp",
+  "name": "LITCHFIELD STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0020621",
+  "receiving_waters": [
+   "UNMD TRIB OF WEST FK OF SHOAL CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Litchfield"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 4 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-fox-metro-wrd-stp",
+  "name": "FOX METRO WRD STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0020818",
+  "receiving_waters": [
+   "FOX RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Aurora"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 6 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-morris-main-stp",
+  "name": "MORRIS - MAIN STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021113",
+  "receiving_waters": [
+   "ILLINOIS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 2 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Morris"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 5 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-monmouth-main-stp",
+  "name": "MONMOUTH MAIN STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021253",
+  "receiving_waters": [
+   "UNNAMED TRIBUTARY OF MARKHAM CREEK",
+   "UNNAMED TRIBUTARY TO MARKHAM CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Monmouth"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-greater-peoria-sanitary-and-sewage-district",
+  "name": "GREATER PEORIA SANITARY AND SEWAGE DISTRICT",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021288",
+  "receiving_waters": [
+   "ILLINOIS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Peoria"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 11 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-paris-stp-city-of",
+  "name": "PARIS STP, CITY OF ",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021377",
+  "receiving_waters": [
+   "SUGAR CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Paris"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-hartford-cso-outfall-village-of",
+  "name": "HARTFORD CSO OUTFALL, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021423",
+  "receiving_waters": [
+   "MISSISSIPPI RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hartford"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-leroy-stp-city-of",
+  "name": "LEROY STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021563",
+  "receiving_waters": [
+   "UNNAMED TRIBUTARY OF NORTH FORK CREEK",
+   "UNNAMED TRIBUTARY OF NORTH FORK SALT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Leroy, Township Of"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-fairbury-stp-city-of",
+  "name": "FAIRBURY STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021601",
+  "receiving_waters": [
+   "INDIAN CREEK",
+   "Indian Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 9 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Fairbury"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-charleston-stp-city-of",
+  "name": "CHARLESTON STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021644",
+  "receiving_waters": [
+   "CASSELL CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Charleston"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 3 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-jacksonville-stp-city-of",
+  "name": "JACKSONVILLE STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021661",
+  "receiving_waters": [
+   "MAUVAIS TERRE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Jacksonville"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-toluca-sewage-treatment-plant-city-of",
+  "name": "TOLUCA SEWAGE TREATMENT PLANT, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021695",
+  "receiving_waters": [
+   "NORTH BRANCH OF CROW CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Toluca"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 1 events, 1 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-rankin-stp-village-of",
+  "name": "RANKIN STP, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021709",
+  "receiving_waters": [
+   "Roadside Ditch"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rankin"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-wenona-stp-city-of",
+  "name": "WENONA STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021792",
+  "receiving_waters": [
+   "Unnamed Tributary to Sandy Creek STP"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wenona"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-belleville-stp-1-city-of",
+  "name": "BELLEVILLE STP #1, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021873",
+  "receiving_waters": [
+   "RICHLAND CREEK",
+   "Richland Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 11 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Belleville"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 56 events, 53 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-shelbyville-stp-city-of",
+  "name": "SHELBYVILLE STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021890",
+  "receiving_waters": [
+   "KASKASKIA RIVER",
+   "UNNAMED TRIBUTARY TO ROBINSON CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Shelbyville"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 2 events, 2 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-sangamon-county-water-reclamation-district",
+  "name": "SANGAMON COUNTY WATER RECLAMATION DISTRICT ",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021971",
+  "receiving_waters": [
+   "SUGAR CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Springfield"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 35 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-spring-creek-stp",
+  "name": "SPRING CREEK STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0021989",
+  "receiving_waters": [
+   "SANGAMON RIVER",
+   "Spring Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 1 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Springfield"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 18 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-streator-stp-city-of",
+  "name": "STREATOR STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0022004",
+  "receiving_waters": [
+   "COAL RUN CREEK",
+   "PRAIRIE CREEK",
+   "PUMPKIN CREEK",
+   "VERMILION RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 16,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 16 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Streator"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-watseka-sewage-treatment-plant",
+  "name": "WATSEKA SEWAGE TREATMENT PLANT",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0022161",
+  "receiving_waters": [
+   "IROQUOIS RIVER",
+   "Iroquois River",
+   "Sugar Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 6 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Watseka"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-momence-stp-city-of",
+  "name": "MOMENCE STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0022179",
+  "receiving_waters": [
+   "KANKAKEE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Momence"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-georgetown-stp-city-of",
+  "name": "GEORGETOWN STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0022322",
+  "receiving_waters": [
+   "ELLIS BRANCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Georgetown"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 8 events, 8 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-granville-stp-village-of",
+  "name": "GRANVILLE STP, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0022331",
+  "receiving_waters": [
+   "Allforks Creek",
+   "UNNAMED TRIB OF ALLFORKS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 1 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Granville"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-farmer-city-stp-city-of",
+  "name": "FARMER CITY STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0022462",
+  "receiving_waters": [
+   "SALT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Farmer City"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-gwa-cso-stormwater-facility",
+  "name": "GWA CSO STORMWATER FACILITY",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0022471",
+  "receiving_waters": [
+   "EAST BRANCH DUPAGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lombard"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-joliet-eastside-stp-city-of",
+  "name": "JOLIET EASTSIDE STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0022519",
+  "receiving_waters": [
+   "DES PLAINES RIVER",
+   "DesPlaines River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 3 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Joliet"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 2 events, 1 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-carlinville-stp",
+  "name": "CARLINVILLE STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0022675",
+  "receiving_waters": [
+   "BRIAR CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Carlinville"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 38 events, 36 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-galesburg-sanitary-district-stp",
+  "name": "GALESBURG SANITARY DISTRICT STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0023141",
+  "receiving_waters": [
+   "CEDAR CREEK & COURT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 33,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 33 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Galesburg"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 1 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-milford-stp-village-of",
+  "name": "MILFORD STP, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0023272",
+  "receiving_waters": [
+   "SUGAR CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 1 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Milford"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-gibson-city-wpcf-city-of",
+  "name": "GIBSON CITY WPCF, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0023281",
+  "receiving_waters": [
+   "DRUMMER CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gibson City"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 1 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-havana-stp-city-of",
+  "name": "HAVANA STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0023388",
+  "receiving_waters": [
+   "ILLINOIS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Havana"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-cairo-stp-city-of",
+  "name": "CAIRO STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0023825",
+  "receiving_waters": [
+   "OHIO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cairo"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 1 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-oglesby-stp-city-of",
+  "name": "OGLESBY STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0024996",
+  "receiving_waters": [
+   "Ravine Tributary to Vermillion River",
+   "VERMILION RIVER",
+   "Vermillion River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 2 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Oglesby"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-beardstown-sanitary-district-stp",
+  "name": "BEARDSTOWN SANITARY DISTRICT STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0025135",
+  "receiving_waters": [
+   "ILLINOIS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Beardstown"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 12 events, 12 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-a-j-larocca-wastewater-treatment-facility",
+  "name": "A.J. LAROCCA WASTEWATER TREATMENT FACILITY",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0027367",
+  "receiving_waters": [
+   "SALT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Addison"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 3 events, 3 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-alton-stp-city-of",
+  "name": "ALTON STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0027464",
+  "receiving_waters": [
+   "MISSISSIPPI RIVER",
+   "Mississippi River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 2 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Alton"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 29 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-bloomington-normal-wrd-west-stp",
+  "name": "BLOOMINGTON NORMAL WRD -WEST STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0027731",
+  "receiving_waters": [
+   "SUGAR CREEK",
+   "SUGAR CREEK (SANGAMON BASIN)",
+   "Sugar Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 4 closed",
+  "notification_channel": "Bloomington-Normal WRD CSO public notification (search only; channel not traced).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bloomington"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-canton-west-stp-city-of",
+  "name": "CANTON WEST STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0027839",
+  "receiving_waters": [
+   "BIG CREEK",
+   "Unnamed Tributary to Canton Lake"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 1 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Canton"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 1 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-mwrdgc-stickney-wrp",
+  "name": "MWRDGC STICKNEY WRP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0028053",
+  "receiving_waters": [
+   "CHICAGO SANITARY AND SHIP CANAL"
+  ],
+  "water_slugs": [],
+  "outfall_count": 15,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 15 open, 0 closed",
+  "notification_channel": "MWRD: Smart911 email/SMS alerts; Possible CSO Events ArcGIS layer; CSO Event Synopsis Report (apps.mwrd.org/csoreports) with per-outfall open/close times; Lake Michigan reversal table.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Chicago"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-mwrdgc-calumet-wrp",
+  "name": "MWRDGC CALUMET WRP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0028061",
+  "receiving_waters": [
+   "LITTLE CALUMET RIVER",
+   "Midlothian Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 9 open, 4 closed",
+  "notification_channel": "MWRD: Smart911 email/SMS alerts; Possible CSO Events ArcGIS layer; CSO Event Synopsis Report (apps.mwrd.org/csoreports) with per-outfall open/close times; Lake Michigan reversal table.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Chicago"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 4 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-mwrdgc-lemont-wrp",
+  "name": "MWRDGC LEMONT WRP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0028070",
+  "receiving_waters": [
+   "CHICAGO SANITARY & SHIP CANAL"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Chicago"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-mwrdgc-terrence-j-o-brien-wtr-reclamation-plant",
+  "name": "MWRDGC TERRENCE J O'BRIEN WTR RECLAMATION PLANT",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0028088",
+  "receiving_waters": [
+   "NORTH SHORE CHANNEL"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 9 open, 0 closed",
+  "notification_channel": "MWRD: Smart911 email/SMS alerts; Possible CSO Events ArcGIS layer; CSO Event Synopsis Report (apps.mwrd.org/csoreports) with per-outfall open/close times; Lake Michigan reversal table.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Chicago"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-cowden-stp",
+  "name": "COWDEN STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0028231",
+  "receiving_waters": [
+   "UNNAMED TRIBUTARY OF THE KASKASKIA RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cowden"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-sanitary-district-of-decatur-main-stp",
+  "name": "SANITARY DISTRICT OF DECATUR MAIN STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0028321",
+  "receiving_waters": [
+   "SANGAMON RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 11,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 11 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Decatur"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 1 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-metro-east-facility-sanitary-district",
+  "name": "METRO EAST FACILITY SANITARY DISTRICT",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0028592",
+  "receiving_waters": [
+   "MISSISSIPPI RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "East Saint Louis"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 5 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-effingham-stp",
+  "name": "EFFINGHAM STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0028622",
+  "receiving_waters": [
+   "UNNAMED TRIB OF SALT CREEK",
+   "Unnamed Tributary of Little Wabash River",
+   "Unnamed Tributary of Salt Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 2 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Effingham"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-fox-river-wrd-albin-d-pagorski-wrf",
+  "name": "FOX RIVER WRD - ALBIN D PAGORSKI WRF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0028657",
+  "receiving_waters": [
+   "FOX RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Elgin"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 2 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-lasalle-south-stp-city-of",
+  "name": "LASALLE SOUTH STP, CITY OF ",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0029424",
+  "receiving_waters": [
+   "ILLINOIS RIVER",
+   "Little Vermillion River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 1 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "La Salle"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 1 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-lincoln-stp-city-of",
+  "name": "LINCOLN STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0029564",
+  "receiving_waters": [
+   "SALT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lincoln"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 4 events, 4 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-mason-city-stp",
+  "name": "MASON CITY STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0029815",
+  "receiving_waters": [
+   "UNNAMED TRIB OF SALT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mason City"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-mattoon-stp-city-of",
+  "name": "MATTOON STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0029831",
+  "receiving_waters": [
+   "KICKAPOO CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mattoon"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-metropolis-stp-city-of",
+  "name": "METROPOLIS STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0029874",
+  "receiving_waters": [
+   "KIDD CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Metropolis"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 19 events, 19 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-morton-sewage-treatment-plant-no-2",
+  "name": "MORTON SEWAGE TREATMENT PLANT NO 2",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0030015",
+  "receiving_waters": [
+   "PRAIRIE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Morton"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-ottawa-wwtp-city-of",
+  "name": "OTTAWA WWTP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0030384",
+  "receiving_waters": [
+   "FOX RIVER",
+   "Fox River",
+   "ILLINOIS RIVER",
+   "Illinois River",
+   "LLINOIS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 13,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 13 open, 3 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ottawa"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-pontiac-wwtp-city-of",
+  "name": "PONTIAC WWTP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0030457",
+  "receiving_waters": [
+   "VERMILLION RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pontiac"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-quincy-stp-city-of",
+  "name": "QUINCY STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0030503",
+  "receiving_waters": [
+   "CURTIS CREEK",
+   "MISSISSIPPI RIVER",
+   "QUINCY BAY",
+   "WHIPPLE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Quincy"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 11 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-peru-stp-1-city-of",
+  "name": "PERU - STP #1, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0030660",
+  "receiving_waters": [
+   "EAST RAVINE",
+   "ILLINOIS RIVER",
+   "ILLINOIS-MICHIGAN CANAL",
+   "WEST RAVINE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 23,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 23 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Peru"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-rock-island-main-stp-city-of",
+  "name": "ROCK ISLAND MAIN STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0030783",
+  "receiving_waters": [
+   "MISSISSIPPI RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Rock Island"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 11 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-spring-valley-stp-city-of",
+  "name": "SPRING VALLEY STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0031216",
+  "receiving_waters": [
+   "DITCH TO SPRING CREEK TO ILLINOIS RIVER",
+   "ILLINOIS RIVER",
+   "Illinois River",
+   "SPRING CREEK TO ILLINOIS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 8 open, 1 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Spring Valley"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-christian-county-wrd-stp",
+  "name": "CHRISTIAN COUNTY WRD STP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0031356",
+  "receiving_waters": [
+   "PANTHER CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Taylorville"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 4 events, 4 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-wood-river-stp-city-of",
+  "name": "WOOD RIVER STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0031852",
+  "receiving_waters": [
+   "MISSISSIPPI RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wood River"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 72 events, 71 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-bureau-junction-stp-village-of",
+  "name": "BUREAU JUNCTION STP, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0033120",
+  "receiving_waters": [
+   "UNNAMED TRIB OF SPRING LAKE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bureau Junction"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-east-st-louis-combined-sewer-city-of",
+  "name": "EAST ST LOUIS COMBINED SEWER, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0033472",
+  "receiving_waters": [
+   "MISSISSIPPI RIVER AND FRANK HOLTEN STATE PK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "East Saint Louis"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-illinois-american-water-company-granite-city-wwtp",
+  "name": "ILLINOIS AMERICAN WATER COMPANY - GRANITE CITY WWTP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0033481",
+  "receiving_waters": [
+   "CHAIN OF ROCKS CANAL"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Granite City"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 42 events, 1 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-villa-park-wet-weather-stp-village-of",
+  "name": "VILLA PARK WET WEATHER STP, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0033618",
+  "receiving_waters": [
+   "SALT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Villa Park"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 8 events, 4 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-pekin-stp-1",
+  "name": "PEKIN STP #1",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0034495",
+  "receiving_waters": [
+   "ILLINOIS RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Pekin"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 116 events, 115 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-casey-northeast-stp-city-of",
+  "name": "CASEY - NORTHEAST STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0035084",
+  "receiving_waters": [
+   "UNNAMED TRIB OF QUARRY BRANCH CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Casey"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 3 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-peoria-csos-city-of",
+  "name": "PEORIA CSOS, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0037800",
+  "receiving_waters": [
+   "ILLINOIS RIVER AND PEORIA LAKE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 23,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 23 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Peoria"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 3 events, 3 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-minonk-stp-city-of",
+  "name": "MINONK STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0037818",
+  "receiving_waters": [
+   "LONG POINT CREEK TO VERMILLION RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Minonk"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 1 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-combined-sewer-overflow",
+  "name": "COMBINED SEWER OVERFLOW ",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0039551",
+  "receiving_waters": [
+   "I & M Canal",
+   "IL & MICH CANAL CHICAGO SANITARY AND SHIP CANAL"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 1 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lemont"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-prophetstown-stp-city-of",
+  "name": "PROPHETSTOWN STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0043061",
+  "receiving_waters": [
+   "ROCK RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Prophetstown"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-chicago-cso-city-of",
+  "name": "CHICAGO CSO, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0045012",
+  "receiving_waters": [
+   "CALUMET SAG CHANNEL",
+   "CHICAGO RIVER",
+   "DES PLAINES RIVER",
+   "LITTLE CALUMET RIVER",
+   "NORTH BRANCH CANAL",
+   "NORTH BRANCH CHICAGO RIVER",
+   "NORTH SHORE CHANNEL",
+   "SANITARY & SHIP CANAL",
+   "SO FORK OF SO BRANCH CHICAGO RIVER",
+   "SOUTH BRANCH CHICAGO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 178,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 178 open, 8 closed; MWRD CSO Points layer has 214 City of Chicago outfalls with coordinates",
+  "notification_channel": "MWRD CSO alerts and the MWRD CSO Event Synopsis Report (City outfalls on TARP drop shafts); City warning-light pilot at four boat launches announced 2025, not confirmed live. chicago.gov CSO page 403.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Chicago"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-combined-sewer-overflows",
+  "name": "COMBINED SEWER OVERFLOWS",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0045039",
+  "receiving_waters": [
+   "FLAGG CREEK",
+   "SALT CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Western Springs"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-mwrdgc-james-kirie-wrp",
+  "name": "MWRDGC- JAMES KIRIE WRP",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0047741",
+  "receiving_waters": [
+   "HIGGINS CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD: Smart911 email/SMS alerts; Possible CSO Events ArcGIS layer; CSO Event Synopsis Report (apps.mwrd.org/csoreports) with per-outfall open/close times; Lake Michigan reversal table.",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Des Plaines"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 1 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-aurora-city-of",
+  "name": "AURORA, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0048518",
+  "receiving_waters": [
+   "FOX RIVER AND INDIAN CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 16,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 16 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Aurora"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 16 events, 3 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-combined-sewer-overflows",
+  "name": "COMBINED SEWER OVERFLOWS",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0052400",
+  "receiving_waters": [
+   "FEEHANVILLE DITCH",
+   "WELLER CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mount Prospect"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-sauget-abrtf",
+  "name": "SAUGET-ABRTF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0065145",
+  "receiving_waters": [
+   "MISSISSIPPI RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sauget"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 2 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-combined-sewer-overflows",
+  "name": "COMBINED SEWER OVERFLOWS",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0066818",
+  "receiving_waters": [
+   "FLAG CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Hinsdale"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-marshall-stp-city-of",
+  "name": "MARSHALL STP, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0068365",
+  "receiving_waters": [
+   "LITTLE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "none found in SOBE; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Marshall"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-elgin-city-of",
+  "name": "ELGIN, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0070505",
+  "receiving_waters": [
+   "FOX RIVER",
+   "Fox River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 10 open, 2 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Elgin"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 2 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-bloomington-csos",
+  "name": "BLOOMINGTON CSOS",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0072001",
+  "receiving_waters": [
+   "Goose Creek",
+   "SUGAR CREEK COUNTRY CLUB BRANCH, GOOSE CREEK",
+   "Sugar Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 4 closed",
+  "notification_channel": "EPA SOBE rows only (no own channel searched)",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bloomington"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 4 events, 0 CSO-typed. Not in the Great Lakes Basin list; notice per permit (NMC #8). ",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-golf-csos-village-of",
+  "name": "GOLF CSOS, VILLAGE OF ",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0072389",
+  "receiving_waters": [
+   "WEST FORK NORTH CHICAGO RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Golf"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-phoenix-csos-village-of",
+  "name": "PHOENIX CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "IL0072834",
+  "receiving_waters": [
+   "LITTLE CALUMET RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Phoenix"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-evanston-csos-city-of",
+  "name": "EVANSTON CSOS, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580002",
+  "receiving_waters": [
+   "CONTACT WATERS IN THE SURBURAN CHICAGO AREAS",
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 13,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 13 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Evanston"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-melrose-park-csos-village-of",
+  "name": "MELROSE PARK CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580003",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Melrose Park"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-lyons-csos-village-of",
+  "name": "LYONS CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580004",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lyons"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-morton-grove-csos-village-of",
+  "name": "MORTON GROVE CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580005",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Morton Grove"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-arlington-heights-csos-village-of",
+  "name": "ARLINGTON HEIGHTS CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580006",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Arlington Heights"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-riverdale-csos-village-of",
+  "name": "RIVERDALE CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580007",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Riverdale"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-lagrange-park-csos-village-of",
+  "name": "LAGRANGE PARK CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580008",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "La Grange Park"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-la-grange-csos-village-of",
+  "name": "LA GRANGE CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580009",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "La Grange"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-south-holland-csos-village-of",
+  "name": "SOUTH HOLLAND CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580010",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "South Holland"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-dixmoor-csos",
+  "name": "DIXMOOR CSOS",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580011",
+  "receiving_waters": [
+   "East Arm Little Calumet River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dixmoor"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-wilmette-csos-village-of",
+  "name": "WILMETTE CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580012",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Wilmette"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-schiller-park-village-of",
+  "name": "SCHILLER PARK, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580013",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Schiller Park"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-park-ridge-csos-city-of",
+  "name": "PARK RIDGE CSOS, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580014",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Park Ridge"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-riverside-csos-village-of",
+  "name": "RIVERSIDE CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580015",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Riverside Plaza Shopping Center"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-calumet-park-csos-village-of",
+  "name": "CALUMET PARK CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580016",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Calumet Park"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-dolton",
+  "name": "DOLTON",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580017",
+  "receiving_waters": [
+   "LITTLE CALUMET RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dolton"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-burnham-csos-village-of",
+  "name": "BURNHAM CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580018",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Burnham"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-forest-park-csos-village-of",
+  "name": "FOREST PARK CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580019",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Forest Park"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-harvey-csos-city",
+  "name": "HARVEY CSOS, CITY",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580020",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Harvey"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-river-grove-csos-village-of",
+  "name": "RIVER GROVE CSOS,  VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580021",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "River Grove"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-maywood-csos-village-of",
+  "name": "MAYWOOD CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580022",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 8 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Maywood"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-stickney-csos-village-of",
+  "name": "STICKNEY CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580023",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Stickney"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-river-forest-csos-village-of",
+  "name": "RIVER FOREST CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580024",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "River Forest"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-calumet-city-csos",
+  "name": "CALUMET CITY CSOS",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580025",
+  "receiving_waters": [
+   "GRAND AND LITTLE CALUMENT RIVER",
+   "GRAND AND LITTLE CALUMET RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Calumet City"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-des-plaines-csos-village-of",
+  "name": "DES PLAINES CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580026",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Des Plaines"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-lansing-csos-village-of",
+  "name": "LANSING CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580027",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lansing"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-markham-csos-city-of",
+  "name": "MARKHAM CSOS, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580028",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Markham"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-franklin-park-csos",
+  "name": "FRANKLIN PARK CSOS",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580029",
+  "receiving_waters": [
+   "DESPLAINES RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Franklin Park"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-north-riverside-csos",
+  "name": "NORTH RIVERSIDE CSOS",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580030",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "North Riverside"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-blue-island-csos-city-of",
+  "name": "BLUE ISLAND CSOS, CITY OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580031",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Blue Island"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-brookfield-csos-village-of",
+  "name": "BROOKFIELD CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580032",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 6 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Brookfield"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-summit-csos-village-of",
+  "name": "SUMMIT CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580033",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Summit Square Shopping Center"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-lincolnwood-csos-village-of",
+  "name": "LINCOLNWOOD CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580034",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Lincolnwood"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-niles-csos-village-of",
+  "name": "NILES CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580035",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 10 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Niles"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 1 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-skokie-village-of",
+  "name": "SKOKIE, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580036",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Skokie"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-posen-csos-village-of",
+  "name": "POSEN CSOS, VILLAGE OF",
+  "state": "IL",
+  "kind": "cso",
+  "npdes_permit": "ILM580037",
+  "receiving_waters": [
+   "SUBURBAN CHICAGO AREAS"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "MWRD CSO alerts (email/SMS via Smart911) and the MWRD Possible CSO Events map cover TARP-connected outfalls; no own event page found (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City plans point to MWRD).",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Posen"
+  ],
+  "notes": "SOBE (2024-10 to 2026-11-02): 0 events, 0 CSO-typed. In the Great Lakes Basin list (40 CFR 122.38, 4-hour public notice). ",
+  "verified": "search_only",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-marion-wrf-city-of-sso",
+  "name": "MARION WRF, CITY OF",
+  "state": "IL",
+  "kind": "sso",
+  "npdes_permit": "IL0029734",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 92 events {'SSO': 92}, last start 2026-08-06 15:00:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-four-rivers-sanitation-authority-stp-sso",
+  "name": "FOUR RIVERS SANITATION AUTHORITY STP",
+  "state": "IL",
+  "kind": "sso",
+  "npdes_permit": "IL0027201",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 64 events {'SSO': 64}, last start 2026-10-18 16:30:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-lawrenceville-stp-city-of-sso",
+  "name": "LAWRENCEVILLE STP, CITY OF",
+  "state": "IL",
+  "kind": "sso+bypass",
+  "npdes_permit": "IL0029467",
+  "receiving_waters": [
+   "City of Lawrenceville Lagoon",
+   "Embarras River",
+   "Embarrass River",
+   "Small creek tributary to the Embarras River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 56 events {'SSO': 54, 'BYP': 2}, last start 2026-10-28 15:45:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-duquoin-stp-city-of-sso",
+  "name": "DUQUOIN STP, CITY OF",
+  "state": "IL",
+  "kind": "sso+bypass",
+  "npdes_permit": "IL0028517",
+  "receiving_waters": [
+   "Little Muddy River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 32 events {'SSO': 31, 'BYP': 1}, last start 2026-09-07 14:26:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-mount-carmel-stp-city-of-sso",
+  "name": "MOUNT CARMEL STP, CITY OF",
+  "state": "IL",
+  "kind": "sso",
+  "npdes_permit": "IL0030023",
+  "receiving_waters": [
+   "Creek north of road leads to Wabash River ",
+   "Ditch flows towards Wabash River",
+   "Ditch leading to the Wabash River",
+   "Unnamed ditch that runs to Wabash River"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 25 events {'SSO': 25}, last start 2026-10-22 02:30:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-illinois-american-water-rosiclare-wwtp-sso",
+  "name": "ILLINOIS AMERICAN WATER - ROSICLARE WWTP",
+  "state": "IL",
+  "kind": "sso",
+  "npdes_permit": "IL0034207",
+  "receiving_waters": [
+   "Unnamed tributary to Ohio River",
+   "Willow Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 23 events {'SSO': 23}, last start 2026-07-27 08:08:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-illinois-american-water-jerseyville-stp-sso",
+  "name": "ILLINOIS AMERICAN WATER - JERSEYVILLE STP",
+  "state": "IL",
+  "kind": "sso+bypass",
+  "npdes_permit": "IL0024465",
+  "receiving_waters": [
+   "An unnamed tributary to DeArcy Branch",
+   "De Archy Branch",
+   "Phils Creek",
+   "Unnamed Tributary to Phil's Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 23 events {'BYP': 7, 'SSO': 16}, last start 2026-07-25 13:00:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-aqua-illinois-university-park-wwtf-sso",
+  "name": "AQUA ILLINOIS - UNIVERSITY PARK WWTF",
+  "state": "IL",
+  "kind": "sso",
+  "npdes_permit": "IL0024473",
+  "receiving_waters": [
+   "Deer Creek",
+   "Thorn Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 21 events {'SSO': 21}, last start 2026-09-10 15:45:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-lebanon-stp-city-of-sso",
+  "name": "LEBANON STP, CITY OF",
+  "state": "IL",
+  "kind": "sso",
+  "npdes_permit": "IL0029483",
+  "receiving_waters": [
+   "Little Silver Creek",
+   "little silver creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 21 events {'SSO': 21}, last start 2026-04-28 05:00:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-flagg-creek-wrd-mcelwain-stp-sso",
+  "name": "FLAGG CREEK WRD - MCELWAIN STP",
+  "state": "IL",
+  "kind": "sso",
+  "npdes_permit": "IL0022586",
+  "receiving_waters": [
+   "Salt Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 20 events {'SSO': 20}, last start 2026-08-01 18:00:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-mt-vernon-stp-city-of-sso",
+  "name": "MT. VERNON STP, CITY OF",
+  "state": "IL",
+  "kind": "sso",
+  "npdes_permit": "IL0027341",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 19 events {'SSO': 19}, last start 2026-03-05 12:00:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "il-cambridge-stp-village-of-sso",
+  "name": "CAMBRIDGE STP, VILLAGE OF",
+  "state": "IL",
+  "kind": "sso",
+  "npdes_permit": "IL0061255",
+  "receiving_waters": [
+   "Camp Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "EPA SOBE event coordinates (every row has latitude/longitude)",
+  "notification_channel": "EPA SOBE rows only; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [],
+  "notes": "SOBE 19 events {'SSO': 19}, last start 2026-08-16 04:00:00.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ }
+]

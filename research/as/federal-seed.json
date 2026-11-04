@@ -1,0 +1,24 @@
+{
+ "state": "AS",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 2,
+ "plant_permits_major": 2,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "AS0020001",
+   "permittee": "AMERICAN SAMOA POWER AUTHORITY UTULEI SEWAGE TREATMENT PLANT",
+   "city": "PAGO PAGO",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "AS0020010",
+   "permittee": "AMERICAN SAMOA POWER AUTHORITY TAFUNA SEWAGE TREATMENT PLANT",
+   "city": "PAGO PAGO",
+   "major": "Major",
+   "status": "ADC"
+  }
+ ]
+}

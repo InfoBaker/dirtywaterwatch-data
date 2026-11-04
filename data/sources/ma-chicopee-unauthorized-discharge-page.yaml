@@ -1,0 +1,25 @@
+id: "ma-chicopee-unauthorized-discharge-page"
+name: "Chicopee Unauthorized Discharge Notifications page"
+url: "https://www.chicopeema.gov/931/Unauthorized-Discharge-Notifications-Pag"
+homepage: "https://www.chicopeema.gov/931/Unauthorized-Discharge-Notifications-Pag"
+kind: "html"
+level: "municipal"
+# Notes (research/ma, status candidate, verified fetched, checked 2026-11-01): Only source found for
+#   Chicopee dry-weather discharges
+# Access detail (research, quoted): Static list, 6 incidents 4/16/2022-3/30/2023
+# Can fill: started_at, ended_at (computed), volume, location_text, waterbody
+# Cannot fill: coordinates; advice_text
+# Waters: Connecticut and Chicopee Rivers (openboatlaunch slugs: connecticut-river-ma)
+# History: 2022-04 to 2023-03
+cadence: "No entries after 2023"
+license: "none stated"
+attribution: "City of Chicopee"
+enabled: true
+role: "events"
+event_types: ["other", "cso"]
+states: ["MA"]
+access: ["html"]
+access_detail: "Static list, 6 incidents 4/16/2022-3/30/2023"
+machine_readable: false
+legal_basis: "NPDES permit effective 2/1/2022 (as stated)"
+checked: "2026-11-01"

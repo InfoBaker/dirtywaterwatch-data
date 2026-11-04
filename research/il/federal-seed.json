@@ -1,0 +1,2755 @@
+{
+ "state": "IL",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "IL0020184",
+   "permittee": "OREGON STP, CITY OF",
+   "city": "OREGON",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ROCK RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0020621",
+   "permittee": "LITCHFIELD STP",
+   "city": "LITCHFIELD",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "UNMD TRIB OF WEST FK OF SHOAL CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0020818",
+   "permittee": "FOX METRO WRD STP",
+   "city": "AURORA",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "FOX RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021113",
+   "permittee": "MORRIS - MAIN STP",
+   "city": "MORRIS",
+   "open_outfalls": 4,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "ILLINOIS RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021253",
+   "permittee": "MONMOUTH MAIN STP",
+   "city": "MONMOUTH",
+   "open_outfalls": 7,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "UNNAMED TRIBUTARY OF MARKHAM CREEK",
+    "UNNAMED TRIBUTARY TO MARKHAM CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021288",
+   "permittee": "GREATER PEORIA SANITARY AND SEWAGE DISTRICT",
+   "city": "PEORIA",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ILLINOIS RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021377",
+   "permittee": "PARIS STP, CITY OF ",
+   "city": "PARIS",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUGAR CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021423",
+   "permittee": "HARTFORD CSO OUTFALL, VILLAGE OF",
+   "city": "HARTFORD",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021563",
+   "permittee": "LEROY STP, CITY OF",
+   "city": "LEROY, TOWNSHIP OF",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "UNNAMED TRIBUTARY OF NORTH FORK CREEK",
+    "UNNAMED TRIBUTARY OF NORTH FORK SALT CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021601",
+   "permittee": "FAIRBURY STP, CITY OF",
+   "city": "FAIRBURY",
+   "open_outfalls": 3,
+   "closed_outfalls": 9,
+   "receiving_waters": [
+    "INDIAN CREEK",
+    "Indian Creek"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021644",
+   "permittee": "CHARLESTON STP, CITY OF",
+   "city": "CHARLESTON",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "CASSELL CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021661",
+   "permittee": "JACKSONVILLE STP, CITY OF",
+   "city": "JACKSONVILLE",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MAUVAIS TERRE CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021695",
+   "permittee": "TOLUCA SEWAGE TREATMENT PLANT, CITY OF",
+   "city": "TOLUCA",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "NORTH BRANCH OF CROW CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021709",
+   "permittee": "RANKIN STP, VILLAGE OF",
+   "city": "RANKIN",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Roadside Ditch"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021792",
+   "permittee": "WENONA STP, CITY OF",
+   "city": "WENONA",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Unnamed Tributary to Sandy Creek STP"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021873",
+   "permittee": "BELLEVILLE STP #1, CITY OF",
+   "city": "BELLEVILLE",
+   "open_outfalls": 2,
+   "closed_outfalls": 11,
+   "receiving_waters": [
+    "RICHLAND CREEK",
+    "Richland Creek"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021890",
+   "permittee": "SHELBYVILLE STP, CITY OF",
+   "city": "SHELBYVILLE",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "KASKASKIA RIVER",
+    "UNNAMED TRIBUTARY TO ROBINSON CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021971",
+   "permittee": "SANGAMON COUNTY WATER RECLAMATION DISTRICT ",
+   "city": "SPRINGFIELD",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUGAR CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0021989",
+   "permittee": "SPRING CREEK STP",
+   "city": "SPRINGFIELD",
+   "open_outfalls": 6,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "SANGAMON RIVER",
+    "Spring Creek"
+   ]
+  },
+  {
+   "npdes_permit": "IL0022004",
+   "permittee": "STREATOR STP, CITY OF",
+   "city": "STREATOR",
+   "open_outfalls": 16,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "COAL RUN CREEK",
+    "PRAIRIE CREEK",
+    "PUMPKIN CREEK",
+    "VERMILION RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0022161",
+   "permittee": "WATSEKA SEWAGE TREATMENT PLANT",
+   "city": "WATSEKA",
+   "open_outfalls": 1,
+   "closed_outfalls": 6,
+   "receiving_waters": [
+    "IROQUOIS RIVER",
+    "Iroquois River",
+    "Sugar Creek"
+   ]
+  },
+  {
+   "npdes_permit": "IL0022179",
+   "permittee": "MOMENCE STP, CITY OF",
+   "city": "MOMENCE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "KANKAKEE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0022322",
+   "permittee": "GEORGETOWN STP, CITY OF",
+   "city": "GEORGETOWN",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ELLIS BRANCH"
+   ]
+  },
+  {
+   "npdes_permit": "IL0022331",
+   "permittee": "GRANVILLE STP, VILLAGE OF",
+   "city": "GRANVILLE",
+   "open_outfalls": 3,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Allforks Creek",
+    "UNNAMED TRIB OF ALLFORKS"
+   ]
+  },
+  {
+   "npdes_permit": "IL0022462",
+   "permittee": "FARMER CITY STP, CITY OF",
+   "city": "FARMER CITY",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SALT CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0022471",
+   "permittee": "GWA CSO STORMWATER FACILITY",
+   "city": "LOMBARD",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "EAST BRANCH DUPAGE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0022519",
+   "permittee": "JOLIET EASTSIDE STP, CITY OF",
+   "city": "JOLIET",
+   "open_outfalls": 7,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "DES PLAINES RIVER",
+    "DesPlaines River"
+   ]
+  },
+  {
+   "npdes_permit": "IL0022675",
+   "permittee": "CARLINVILLE STP",
+   "city": "CARLINVILLE",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "BRIAR CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0023141",
+   "permittee": "GALESBURG SANITARY DISTRICT STP",
+   "city": "GALESBURG",
+   "open_outfalls": 33,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "CEDAR CREEK & COURT CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0023272",
+   "permittee": "MILFORD STP, VILLAGE OF",
+   "city": "MILFORD",
+   "open_outfalls": 3,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "SUGAR CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0023281",
+   "permittee": "GIBSON CITY WPCF, CITY OF",
+   "city": "GIBSON CITY",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "DRUMMER CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0023388",
+   "permittee": "HAVANA STP, CITY OF",
+   "city": "HAVANA",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ILLINOIS RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0023825",
+   "permittee": "CAIRO STP, CITY OF",
+   "city": "CAIRO",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0024996",
+   "permittee": "OGLESBY STP, CITY OF",
+   "city": "OGLESBY",
+   "open_outfalls": 5,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Ravine Tributary to Vermillion River",
+    "VERMILION RIVER",
+    "Vermillion River"
+   ]
+  },
+  {
+   "npdes_permit": "IL0025135",
+   "permittee": "BEARDSTOWN SANITARY DISTRICT STP",
+   "city": "BEARDSTOWN",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ILLINOIS RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0027367",
+   "permittee": "A.J. LAROCCA WASTEWATER TREATMENT FACILITY",
+   "city": "ADDISON",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SALT CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0027464",
+   "permittee": "ALTON STP, CITY OF",
+   "city": "ALTON",
+   "open_outfalls": 4,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER",
+    "Mississippi River"
+   ]
+  },
+  {
+   "npdes_permit": "IL0027731",
+   "permittee": "BLOOMINGTON NORMAL WRD -WEST STP",
+   "city": "BLOOMINGTON",
+   "open_outfalls": 6,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "SUGAR CREEK",
+    "SUGAR CREEK (SANGAMON BASIN)",
+    "Sugar Creek"
+   ]
+  },
+  {
+   "npdes_permit": "IL0027839",
+   "permittee": "CANTON WEST STP, CITY OF",
+   "city": "CANTON",
+   "open_outfalls": 3,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "BIG CREEK",
+    "Unnamed Tributary to Canton Lake"
+   ]
+  },
+  {
+   "npdes_permit": "IL0028053",
+   "permittee": "MWRDGC STICKNEY WRP",
+   "city": "CHICAGO",
+   "open_outfalls": 15,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "CHICAGO SANITARY AND SHIP CANAL"
+   ]
+  },
+  {
+   "npdes_permit": "IL0028061",
+   "permittee": "MWRDGC CALUMET WRP",
+   "city": "CHICAGO",
+   "open_outfalls": 9,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "LITTLE CALUMET RIVER",
+    "Midlothian Creek"
+   ]
+  },
+  {
+   "npdes_permit": "IL0028070",
+   "permittee": "MWRDGC LEMONT WRP",
+   "city": "CHICAGO",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "CHICAGO SANITARY & SHIP CANAL"
+   ]
+  },
+  {
+   "npdes_permit": "IL0028088",
+   "permittee": "MWRDGC TERRENCE J O'BRIEN WTR RECLAMATION PLANT",
+   "city": "CHICAGO",
+   "open_outfalls": 9,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "NORTH SHORE CHANNEL"
+   ]
+  },
+  {
+   "npdes_permit": "IL0028231",
+   "permittee": "COWDEN STP",
+   "city": "COWDEN",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "UNNAMED TRIBUTARY OF THE KASKASKIA RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0028321",
+   "permittee": "SANITARY DISTRICT OF DECATUR MAIN STP",
+   "city": "DECATUR",
+   "open_outfalls": 11,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SANGAMON RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0028592",
+   "permittee": "METRO EAST FACILITY SANITARY DISTRICT",
+   "city": "EAST SAINT LOUIS",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0028622",
+   "permittee": "EFFINGHAM STP",
+   "city": "EFFINGHAM",
+   "open_outfalls": 2,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "UNNAMED TRIB OF SALT CREEK",
+    "Unnamed Tributary of Little Wabash River",
+    "Unnamed Tributary of Salt Creek"
+   ]
+  },
+  {
+   "npdes_permit": "IL0028657",
+   "permittee": "FOX RIVER WRD - ALBIN D PAGORSKI WRF",
+   "city": "ELGIN",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "FOX RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0029424",
+   "permittee": "LASALLE SOUTH STP, CITY OF ",
+   "city": "LA SALLE",
+   "open_outfalls": 4,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "ILLINOIS RIVER",
+    "Little Vermillion River"
+   ]
+  },
+  {
+   "npdes_permit": "IL0029564",
+   "permittee": "LINCOLN STP, CITY OF",
+   "city": "LINCOLN",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SALT CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0029815",
+   "permittee": "MASON CITY STP",
+   "city": "MASON CITY",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "UNNAMED TRIB OF SALT CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0029831",
+   "permittee": "MATTOON STP, CITY OF",
+   "city": "MATTOON",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "KICKAPOO CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0029874",
+   "permittee": "METROPOLIS STP, CITY OF",
+   "city": "METROPOLIS",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "KIDD CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0030015",
+   "permittee": "MORTON SEWAGE TREATMENT PLANT NO 2",
+   "city": "MORTON",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "PRAIRIE CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0030384",
+   "permittee": "OTTAWA WWTP, CITY OF",
+   "city": "OTTAWA",
+   "open_outfalls": 13,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "FOX RIVER",
+    "Fox River",
+    "ILLINOIS RIVER",
+    "Illinois River",
+    "LLINOIS RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0030457",
+   "permittee": "PONTIAC WWTP, CITY OF",
+   "city": "PONTIAC",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "VERMILLION RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0030503",
+   "permittee": "QUINCY STP, CITY OF",
+   "city": "QUINCY",
+   "open_outfalls": 7,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "CURTIS CREEK",
+    "MISSISSIPPI RIVER",
+    "QUINCY BAY",
+    "WHIPPLE CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0030660",
+   "permittee": "PERU - STP #1, CITY OF",
+   "city": "PERU",
+   "open_outfalls": 23,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "EAST RAVINE",
+    "ILLINOIS RIVER",
+    "ILLINOIS-MICHIGAN CANAL",
+    "WEST RAVINE"
+   ]
+  },
+  {
+   "npdes_permit": "IL0030783",
+   "permittee": "ROCK ISLAND MAIN STP, CITY OF",
+   "city": "ROCK ISLAND",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0031216",
+   "permittee": "SPRING VALLEY STP, CITY OF",
+   "city": "SPRING VALLEY",
+   "open_outfalls": 8,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "DITCH TO SPRING CREEK TO ILLINOIS RIVER",
+    "ILLINOIS RIVER",
+    "Illinois River",
+    "SPRING CREEK TO ILLINOIS RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0031356",
+   "permittee": "CHRISTIAN COUNTY WRD STP",
+   "city": "TAYLORVILLE",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "PANTHER CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0031852",
+   "permittee": "WOOD RIVER STP, CITY OF",
+   "city": "WOOD RIVER",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0033120",
+   "permittee": "BUREAU JUNCTION STP, VILLAGE OF",
+   "city": "BUREAU JUNCTION",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "UNNAMED TRIB OF SPRING LAKE"
+   ]
+  },
+  {
+   "npdes_permit": "IL0033472",
+   "permittee": "EAST ST LOUIS COMBINED SEWER, CITY OF",
+   "city": "EAST SAINT LOUIS",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER AND FRANK HOLTEN STATE PK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0033481",
+   "permittee": "ILLINOIS AMERICAN WATER COMPANY - GRANITE CITY WWTP",
+   "city": "GRANITE CITY",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "CHAIN OF ROCKS CANAL"
+   ]
+  },
+  {
+   "npdes_permit": "IL0033618",
+   "permittee": "VILLA PARK WET WEATHER STP, VILLAGE OF",
+   "city": "VILLA PARK",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SALT CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0034495",
+   "permittee": "PEKIN STP #1",
+   "city": "PEKIN",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ILLINOIS RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0035084",
+   "permittee": "CASEY - NORTHEAST STP, CITY OF",
+   "city": "CASEY",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "UNNAMED TRIB OF QUARRY BRANCH CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0037800",
+   "permittee": "PEORIA CSOS, CITY OF",
+   "city": "PEORIA",
+   "open_outfalls": 23,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ILLINOIS RIVER AND PEORIA LAKE"
+   ]
+  },
+  {
+   "npdes_permit": "IL0037818",
+   "permittee": "MINONK STP, CITY OF",
+   "city": "MINONK",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "LONG POINT CREEK TO VERMILLION RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0039551",
+   "permittee": "COMBINED SEWER OVERFLOW ",
+   "city": "LEMONT",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "I & M Canal",
+    "IL & MICH CANAL CHICAGO SANITARY AND SHIP CANAL"
+   ]
+  },
+  {
+   "npdes_permit": "IL0043061",
+   "permittee": "PROPHETSTOWN STP, CITY OF",
+   "city": "PROPHETSTOWN",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ROCK RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0045012",
+   "permittee": "CHICAGO CSO, CITY OF",
+   "city": "CHICAGO",
+   "open_outfalls": 178,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "CALUMET SAG CHANNEL",
+    "CHICAGO RIVER",
+    "DES PLAINES RIVER",
+    "LITTLE CALUMET RIVER",
+    "NORTH BRANCH CANAL",
+    "NORTH BRANCH CHICAGO RIVER",
+    "NORTH SHORE CHANNEL",
+    "SANITARY & SHIP CANAL",
+    "SO FORK OF SO BRANCH CHICAGO RIVER",
+    "SOUTH BRANCH CHICAGO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0045039",
+   "permittee": "COMBINED SEWER OVERFLOWS",
+   "city": "WESTERN SPRINGS",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "FLAGG CREEK",
+    "SALT CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0047741",
+   "permittee": "MWRDGC- JAMES KIRIE WRP",
+   "city": "DES PLAINES",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "HIGGINS CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0048518",
+   "permittee": "AURORA, CITY OF",
+   "city": "AURORA",
+   "open_outfalls": 16,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "FOX RIVER AND INDIAN CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0052400",
+   "permittee": "COMBINED SEWER OVERFLOWS",
+   "city": "MOUNT PROSPECT",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "FEEHANVILLE DITCH",
+    "WELLER CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0065145",
+   "permittee": "SAUGET-ABRTF",
+   "city": "SAUGET",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0066818",
+   "permittee": "COMBINED SEWER OVERFLOWS",
+   "city": "HINSDALE",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "FLAG CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0068365",
+   "permittee": "MARSHALL STP, CITY OF",
+   "city": "MARSHALL",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "LITTLE CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IL0070505",
+   "permittee": "ELGIN, CITY OF",
+   "city": "ELGIN",
+   "open_outfalls": 10,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "FOX RIVER",
+    "Fox River"
+   ]
+  },
+  {
+   "npdes_permit": "IL0072001",
+   "permittee": "BLOOMINGTON CSOS",
+   "city": "BLOOMINGTON",
+   "open_outfalls": 2,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "Goose Creek",
+    "SUGAR CREEK COUNTRY CLUB BRANCH, GOOSE CREEK",
+    "Sugar Creek"
+   ]
+  },
+  {
+   "npdes_permit": "IL0072389",
+   "permittee": "GOLF CSOS, VILLAGE OF ",
+   "city": "GOLF",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "WEST FORK NORTH CHICAGO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IL0072834",
+   "permittee": "PHOENIX CSOS, VILLAGE OF",
+   "city": "PHOENIX",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "LITTLE CALUMET RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580002",
+   "permittee": "EVANSTON CSOS, CITY OF",
+   "city": "EVANSTON",
+   "open_outfalls": 13,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "CONTACT WATERS IN THE SURBURAN CHICAGO AREAS",
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580003",
+   "permittee": "MELROSE PARK CSOS, VILLAGE OF",
+   "city": "MELROSE PARK",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580004",
+   "permittee": "LYONS CSOS, VILLAGE OF",
+   "city": "LYONS",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580005",
+   "permittee": "MORTON GROVE CSOS, VILLAGE OF",
+   "city": "MORTON GROVE",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580006",
+   "permittee": "ARLINGTON HEIGHTS CSOS, VILLAGE OF",
+   "city": "ARLINGTON HEIGHTS",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580007",
+   "permittee": "RIVERDALE CSOS, VILLAGE OF",
+   "city": "RIVERDALE",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580008",
+   "permittee": "LAGRANGE PARK CSOS, VILLAGE OF",
+   "city": "LA GRANGE PARK",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580009",
+   "permittee": "LA GRANGE CSOS, VILLAGE OF",
+   "city": "LA GRANGE",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580010",
+   "permittee": "SOUTH HOLLAND CSOS, VILLAGE OF",
+   "city": "SOUTH HOLLAND",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580011",
+   "permittee": "DIXMOOR CSOS",
+   "city": "DIXMOOR",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "East Arm Little Calumet River"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580012",
+   "permittee": "WILMETTE CSOS, VILLAGE OF",
+   "city": "WILMETTE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580013",
+   "permittee": "SCHILLER PARK, VILLAGE OF",
+   "city": "SCHILLER PARK",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580014",
+   "permittee": "PARK RIDGE CSOS, CITY OF",
+   "city": "PARK RIDGE",
+   "open_outfalls": 7,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580015",
+   "permittee": "RIVERSIDE CSOS, VILLAGE OF",
+   "city": "RIVERSIDE PLAZA SHOPPING CENTER",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580016",
+   "permittee": "CALUMET PARK CSOS, VILLAGE OF",
+   "city": "CALUMET PARK",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580017",
+   "permittee": "DOLTON",
+   "city": "DOLTON",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "LITTLE CALUMET RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580018",
+   "permittee": "BURNHAM CSOS, VILLAGE OF",
+   "city": "BURNHAM",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580019",
+   "permittee": "FOREST PARK CSOS, VILLAGE OF",
+   "city": "FOREST PARK",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580020",
+   "permittee": "HARVEY CSOS, CITY",
+   "city": "HARVEY",
+   "open_outfalls": 7,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580021",
+   "permittee": "RIVER GROVE CSOS,  VILLAGE OF",
+   "city": "RIVER GROVE",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580022",
+   "permittee": "MAYWOOD CSOS, VILLAGE OF",
+   "city": "MAYWOOD",
+   "open_outfalls": 8,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580023",
+   "permittee": "STICKNEY CSOS, VILLAGE OF",
+   "city": "STICKNEY",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580024",
+   "permittee": "RIVER FOREST CSOS, VILLAGE OF",
+   "city": "RIVER FOREST",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580025",
+   "permittee": "CALUMET CITY CSOS",
+   "city": "CALUMET CITY",
+   "open_outfalls": 7,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "GRAND AND LITTLE CALUMENT RIVER",
+    "GRAND AND LITTLE CALUMET RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580026",
+   "permittee": "DES PLAINES CSOS, VILLAGE OF",
+   "city": "DES PLAINES",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580027",
+   "permittee": "LANSING CSOS, VILLAGE OF",
+   "city": "LANSING",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580028",
+   "permittee": "MARKHAM CSOS, CITY OF",
+   "city": "MARKHAM",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580029",
+   "permittee": "FRANKLIN PARK CSOS",
+   "city": "FRANKLIN PARK",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "DESPLAINES RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580030",
+   "permittee": "NORTH RIVERSIDE CSOS",
+   "city": "NORTH RIVERSIDE",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580031",
+   "permittee": "BLUE ISLAND CSOS, CITY OF",
+   "city": "BLUE ISLAND",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580032",
+   "permittee": "BROOKFIELD CSOS, VILLAGE OF",
+   "city": "BROOKFIELD",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580033",
+   "permittee": "SUMMIT CSOS, VILLAGE OF",
+   "city": "SUMMIT SQUARE SHOPPING CENTER",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580034",
+   "permittee": "LINCOLNWOOD CSOS, VILLAGE OF",
+   "city": "LINCOLNWOOD",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580035",
+   "permittee": "NILES CSOS, VILLAGE OF",
+   "city": "NILES",
+   "open_outfalls": 10,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580036",
+   "permittee": "SKOKIE, VILLAGE OF",
+   "city": "SKOKIE",
+   "open_outfalls": 5,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  },
+  {
+   "npdes_permit": "ILM580037",
+   "permittee": "POSEN CSOS, VILLAGE OF",
+   "city": "POSEN",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "SUBURBAN CHICAGO AREAS"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 691,
+ "plant_permits": 865,
+ "plant_permits_major": 213,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "IL0020052",
+   "permittee": "PLANO, CITY OF",
+   "city": "PLANO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0020061",
+   "permittee": "WOOD DALE, CITY OF",
+   "city": "WOOD DALE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020087",
+   "permittee": "GENEVA, CITY OF",
+   "city": "GENEVA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020109",
+   "permittee": "WAUCONDA, VILLAGE OF",
+   "city": "WAUCONDA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0020117",
+   "permittee": "HARVARD, CITY OF",
+   "city": "HARVARD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0020214",
+   "permittee": "MILAN, VILLAGE OF",
+   "city": "MILAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020222",
+   "permittee": "MANHATTAN, VILLAGE OF",
+   "city": "MANHATTAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020273",
+   "permittee": "FLORA, CITY OF",
+   "city": "FLORA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0020281",
+   "permittee": "HAMPSHIRE, VILLAGE OF",
+   "city": "HAMPSHIRE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020354",
+   "permittee": "ANTIOCH, VILLAGE OF",
+   "city": "ANTIOCH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0020516",
+   "permittee": "CARY, VILLAGE OF",
+   "city": "CARY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020532",
+   "permittee": "FRANKFORT, VILLAGE OF",
+   "city": "FRANKFORT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020559",
+   "permittee": "NEW LENOX, VILLAGE OF",
+   "city": "NEW LENOX",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020575",
+   "permittee": "PRINCETON, CITY OF",
+   "city": "PRINCETON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020583",
+   "permittee": "FOX RIVER GROVE, VILLAGE OF",
+   "city": "FOX RIVER GROVE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020621",
+   "permittee": "LITCHFIELD, CITY OF",
+   "city": "LITCHFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020729",
+   "permittee": "MARENGO, CITY OF",
+   "city": "MARENGO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020788",
+   "permittee": "DANVILLE SANITARY DISTRICT",
+   "city": "DANVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020796",
+   "permittee": "LINDENHURST SANITARY DISTRICT",
+   "city": "LINDENHURST",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020818",
+   "permittee": "FOX METRO WATER RECLAMATION DISTRICT",
+   "city": "AURORA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0020958",
+   "permittee": "FOX LAKE, VILLAGE OF",
+   "city": "FOX LAKE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021059",
+   "permittee": "MARSEILLES, CITY OF",
+   "city": "MARSEILLES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021067",
+   "permittee": "MCHENRY, CITY OF",
+   "city": "MCHENRY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021083",
+   "permittee": "CASEYVILLE TOWNSHIP",
+   "city": "O'FALLON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021113",
+   "permittee": "MORRIS, CITY OF",
+   "city": "MORRIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021121",
+   "permittee": "CREST HILL, CITY OF",
+   "city": "CREST HILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021130",
+   "permittee": "BLOOMINGDALE, VILLAGE OF",
+   "city": "BLOOMINGDALE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021156",
+   "permittee": "SOUTH BELOIT, CITY OF",
+   "city": "SOUTH BELOIT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021181",
+   "permittee": "SWANSEA, VILLAGE OF",
+   "city": "SWANSEA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021237",
+   "permittee": "CREVE COEUR, VILLAGE OF",
+   "city": "CREVE COEUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021261",
+   "permittee": "LOCKPORT, CITY OF",
+   "city": "LOCKPORT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021288",
+   "permittee": "GREATER PEORIA SANITARY AND SEWAGE DISTRICT",
+   "city": "PEORIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021377",
+   "permittee": "PARIS, CITY OF",
+   "city": "PARIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021547",
+   "permittee": "GLENBARD WASTEWATER AUTHORITY",
+   "city": "GLEN ELLYN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021598",
+   "permittee": "BARRINGTON, VILLAGE OF",
+   "city": "BARRINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021636",
+   "permittee": "O'FALLON, CITY OF",
+   "city": "O'FALLON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021644",
+   "permittee": "CHARLESTON, CITY OF",
+   "city": "CHARLESTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021661",
+   "permittee": "JACKSONVILLE, CITY OF",
+   "city": "JACKSONVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021733",
+   "permittee": "LAKE IN THE HILLS SANITARY DISTRICT",
+   "city": "LAKE IN THE HILLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021784",
+   "permittee": "KANKAKEE RIVER METROPOLITAN AGENCY",
+   "city": "KANKAKEE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021814",
+   "permittee": "GENESEO, CITY OF",
+   "city": "GENESEO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021849",
+   "permittee": "BENSENVILLE, VILLAGE OF",
+   "city": "BENSENVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0021873",
+   "permittee": "BELLEVILLE, CITY OF",
+   "city": "BELLEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021971",
+   "permittee": "SANGAMON COUNTY WATER RECLAMATION DISTRICT",
+   "city": "SPRINGFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0021989",
+   "permittee": "SANGAMON COUNTY WATER REC DISTRICT",
+   "city": "SPRINGFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0022004",
+   "permittee": "STREATOR. CITY OF",
+   "city": "STREATOR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0022055",
+   "permittee": "LAKE COUNTY PUBLIC WORKS DEPARTMENT",
+   "city": "BUFFALO GROVE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0022071",
+   "permittee": "LAKE COUNTY PUBLIC WORKS DEPARTMENT",
+   "city": "VERNON HILLS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0022128",
+   "permittee": "RANTOUL, VILLAGE OF",
+   "city": "RANTOUL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0022161",
+   "permittee": "WATSEKA, CITY OF",
+   "city": "WATSEKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0022179",
+   "permittee": "MOMENCE, CITY OF",
+   "city": "MOMENCE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0022314",
+   "permittee": "PANA, CITY OF",
+   "city": "PANA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0022365",
+   "permittee": "BENTON, CITY OF",
+   "city": "BENTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0022501",
+   "permittee": "MUNDELEIN, VILLAGE OF",
+   "city": "LIBERTYVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0022543",
+   "permittee": "BATAVIA, CITY OF",
+   "city": "BATAVIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0022586",
+   "permittee": "FLAGG CREEK WATER RECLAMATION DISTRICT",
+   "city": "BURR RIDGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0022675",
+   "permittee": "CARLINVILLE, CITY OF",
+   "city": "CARLINVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0022705",
+   "permittee": "ST CHARLES. CITY OF",
+   "city": "SAINT CHARLES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0023027",
+   "permittee": "KISHWAUKEE WATER RECLAMATION DISTRICT",
+   "city": "DEKALB",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0023141",
+   "permittee": "GALESBURG SANITARY DISTRICT",
+   "city": "GALESBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0023221",
+   "permittee": "MENDOTA, CITY OF",
+   "city": "MENDOTA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0023248",
+   "permittee": "MURPHYSBORO, CITY OF",
+   "city": "MURPHYSBORO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0023264",
+   "permittee": "SALEM, CITY OF",
+   "city": "SALEM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0023329",
+   "permittee": "ALGONQUIN, VILLAGE OF",
+   "city": "ALGONQUIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0023469",
+   "permittee": "WEST CHICAGO/WINFIELD WASTEWATER AUTHORITY",
+   "city": "WEST CHICAGO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0023574",
+   "permittee": "VANDALIA, CITY OF",
+   "city": "VANDALIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0023591",
+   "permittee": "FREEPORT, CITY OF",
+   "city": "FREEPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0023612",
+   "permittee": "CLINTON SANITARY DISTRICT",
+   "city": "CLINTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0023825",
+   "permittee": "CAIRO, CITY OF",
+   "city": "CAIRO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0024201",
+   "permittee": "MOKENA, VILLAGE OF",
+   "city": "MOKENA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0024465",
+   "permittee": "ILLINOIS AMERICAN WATER",
+   "city": "JERSEYVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0024830",
+   "permittee": "HOOPESTON, CITY OF",
+   "city": "HOOPESTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0025089",
+   "permittee": "AQUA ILLINOIS",
+   "city": "MANTENO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0025135",
+   "permittee": "BEARDSTOWN SANITARY DISTRICT",
+   "city": "BEARDSTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0025143",
+   "permittee": "COLUMBIA, CITY OF",
+   "city": "COLUMBIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0025232",
+   "permittee": "STOOKEY TOWNSHIP",
+   "city": "BELLEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0026085",
+   "permittee": "WILMINGTON, CITY OF",
+   "city": "WILMINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0026280",
+   "permittee": "ITASCA, VILLAGE OF",
+   "city": "ITASCA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0026298",
+   "permittee": "GREENVILLE, CITY OF",
+   "city": "GREENVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0026310",
+   "permittee": "EDWARDSVILLE, CITY OF",
+   "city": "EDWARDSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0026352",
+   "permittee": "CAROL STREAM, VILLAGE OF",
+   "city": "CAROL STREAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0026450",
+   "permittee": "DIXON, CITY OF",
+   "city": "DIXON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0026514",
+   "permittee": "ROCK FALLS STP",
+   "city": "ROCK FALLS",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "IL0027201",
+   "permittee": "FOUR RIVERS SANITATION AUTHORITY",
+   "city": "ROCKFORD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027341",
+   "permittee": "MOUNT VERNON, CITY OF",
+   "city": "MOUNT VERNON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027367",
+   "permittee": "ADDISON, VILLAGE OF",
+   "city": "ADDISON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0027464",
+   "permittee": "ILLINOIS AMERICAN WATER",
+   "city": "ALTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027618",
+   "permittee": "BARTLETT, VILLAGE OF",
+   "city": "BARTLETT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027685",
+   "permittee": "BELVIDERE, CITY OF",
+   "city": "BELVIDERE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027723",
+   "permittee": "THORN CREEK BASIN SD",
+   "city": "CHICAGO HEIGHTS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027731",
+   "permittee": "BLOOMINGTON NORMAL WATER RECLAMATION DISTRICT",
+   "city": "BLOOMINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027839",
+   "permittee": "CANTON, CITY OF",
+   "city": "CANTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027871",
+   "permittee": "CARBONDALE, CITY OF",
+   "city": "CARBONDALE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027898",
+   "permittee": "CARBONDALE, CITY OF",
+   "city": "CARBONDALE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027910",
+   "permittee": "CARMI, CITY OF",
+   "city": "CARMI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027944",
+   "permittee": "CARPENTERSVILLE, VILLAGE OF",
+   "city": "CARPENTERSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0027979",
+   "permittee": "CENTRALIA, CITY OF",
+   "city": "CENTRALIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0028053",
+   "permittee": "METRO WATER RECLAMATION DISTRICT OF GREATER CHICAGO",
+   "city": "CHICAGO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028061",
+   "permittee": "METRO WATER RECLAMATION DISTRICT OF GREATER CHICAGO",
+   "city": "CHICAGO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028070",
+   "permittee": "METRO WATER RECLAMATION DISTRIC OF GREATER CHICAGO",
+   "city": "CHICAGO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028088",
+   "permittee": "METRO WATER RECLAMATION DISTRICT OF GREATER CHICAGO",
+   "city": "CHICAGO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028215",
+   "permittee": "COLLINSVILLE, CITY OF",
+   "city": "COLLINSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028282",
+   "permittee": "CRYSTAL LAKE, CITY OF",
+   "city": "CRYSTAL LAKE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028321",
+   "permittee": "SANITARY DISTRICT OF DECATUR",
+   "city": "DECATUR",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028347",
+   "permittee": "DEERFIELD, VILLAGE OF",
+   "city": "DEERFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028380",
+   "permittee": "DOWNERS GROVE SANITARY DISTRICT",
+   "city": "DOWNERS GROVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0028517",
+   "permittee": "DUQUOIN, CITY OF",
+   "city": "DU QUOIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0028541",
+   "permittee": "EAST DUNDEE, VILLAGE OF",
+   "city": "EAST DUNDEE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028550",
+   "permittee": "EAST MOLINE, CITY OF",
+   "city": "EAST MOLINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0028576",
+   "permittee": "EAST PEORIA, CITY OF",
+   "city": "EAST PEORIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0028622",
+   "permittee": "EFFINGHAM, CITY OF",
+   "city": "EFFINGHAM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0028657",
+   "permittee": "FOX RIVER WATER RECLAMATION DISTRICT",
+   "city": "ELGIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028665",
+   "permittee": "FOX RIVER WATER RECLAMATION DISTRICT",
+   "city": "ELGIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028746",
+   "permittee": "ELMHURST, CITY OF",
+   "city": "ELMHURST",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0028967",
+   "permittee": "GLENDALE HEIGHTS, VILLAGE OF",
+   "city": "GLENDALE HEIGHTS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0029149",
+   "permittee": "HARRISBURG, CITY OF",
+   "city": "HARRISBURG",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0029165",
+   "permittee": "HERRIN, CITY OF",
+   "city": "HERRIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0029173",
+   "permittee": "HIGHLAND, CITY OF",
+   "city": "HIGHLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0029203",
+   "permittee": "HILLSBORO, CITY OF",
+   "city": "HILLSBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0029238",
+   "permittee": "HUNTLEY, VILLAGE OF",
+   "city": "HUNTLEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0029343",
+   "permittee": "KEWANEE, CITY OF",
+   "city": "KEWANEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0029424",
+   "permittee": "LASALLE, CITY OF",
+   "city": "LA SALLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0029467",
+   "permittee": "LAWRENCEVILLE, CITY OF",
+   "city": "LAWRENCEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0029530",
+   "permittee": "LIBERTYVILLE, VILLAGE OF",
+   "city": "LIBERTYVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0029564",
+   "permittee": "LINCOLN, CITY OF",
+   "city": "LINCOLN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0029611",
+   "permittee": "LOCKPORT, CITY OF",
+   "city": "LOCKPORT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0029688",
+   "permittee": "MACOMB, CITY OF",
+   "city": "MACOMB",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0029734",
+   "permittee": "MARION, CITY OF",
+   "city": "MARION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0029831",
+   "permittee": "MATTOON, CITY OF",
+   "city": "MATTOON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0029874",
+   "permittee": "METROPOLIS, CITY OF",
+   "city": "METROPOLIS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0029939",
+   "permittee": "MOLINE, CITY OF",
+   "city": "MOLINE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0029947",
+   "permittee": "MOLINE, CITY OF",
+   "city": "MOLINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0029980",
+   "permittee": "MONTICELLO, CITY OF",
+   "city": "MONTICELLO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0030015",
+   "permittee": "MORTON, VILLAGE OF",
+   "city": "MORTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0030023",
+   "permittee": "MOUNT CARMEL, CITY OF",
+   "city": "MOUNT CARMEL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0030171",
+   "permittee": "NORTH SHORE WATER RECLAMATION DISTRICT",
+   "city": "HIGHLAND PARK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0030244",
+   "permittee": "NORTH SHORE WATER RECLAMATION DISTRICT",
+   "city": "WAUKEGAN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0030384",
+   "permittee": "OTTAWA, CITY OF",
+   "city": "OTTAWA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0030457",
+   "permittee": "PONTIAC, CITY OF",
+   "city": "PONTIAC",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0030503",
+   "permittee": "QUINCY, CITY OF",
+   "city": "QUINCY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0030660",
+   "permittee": "PERU, CITY OF",
+   "city": "PERU",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0030686",
+   "permittee": "PITTSFIELD, CITY OF",
+   "city": "PITTSFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0030732",
+   "permittee": "ROBINSON, CITY OF",
+   "city": "ROBINSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0030741",
+   "permittee": "ROCHELLE, CITY OF",
+   "city": "ROCHELLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0030783",
+   "permittee": "ROCK ISLAND, CITY OF",
+   "city": "ROCK ISLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0030813",
+   "permittee": "ROSELLE, VILLAGE OF",
+   "city": "ROSELLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0030953",
+   "permittee": "SALT CREEK SANITARY DISTRICT",
+   "city": "VILLA PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0030970",
+   "permittee": "SANDWICH, CITY OF",
+   "city": "SANDWICH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0031216",
+   "permittee": "SPRING VALLEY, CITY OF",
+   "city": "SPRING VALLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0031291",
+   "permittee": "SYCAMORE, CITY OF",
+   "city": "SYCAMORE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0031356",
+   "permittee": "CHRISTIAN COUNTY WRD",
+   "city": "TAYLORVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0031488",
+   "permittee": "TROY, CITY OF",
+   "city": "TROY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0031500",
+   "permittee": "URBANA & CHAMPAIGN SANITARY DISTRICT",
+   "city": "URBANA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0031526",
+   "permittee": "URBANA-CHAMPAIGN SANITARY DISTRICT",
+   "city": "CHAMPAIGN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0031704",
+   "permittee": "WEST FRANKFORT, CITY OF",
+   "city": "WEST FRANKFORT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0031739",
+   "permittee": "WEST BRANCH WATER RECLAMATION DISTRICT",
+   "city": "WHEATON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0031844",
+   "permittee": "DUPAGE COUNTY DEPARTMENT OF PUBLIC WORKS",
+   "city": "WOODRIDGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0031852",
+   "permittee": "WOOD RIVER, CITY OF",
+   "city": "WOOD RIVER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0031861",
+   "permittee": "WOODSTOCK, CITY OF",
+   "city": "WOODSTOCK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0031933",
+   "permittee": "NORTHERN MORAINE WW RECLAMATION DIST",
+   "city": "ISLAND LAKE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0032689",
+   "permittee": "BOLINGBROOK, VILLAGE OF",
+   "city": "BOLINGBROOK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0032735",
+   "permittee": "BOLINGBROOK, VILLAGE OF",
+   "city": "BOLINGBROOK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0033481",
+   "permittee": "ILLINOIS AMERICAN WATER COMPANY",
+   "city": "GRANITE CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0033553",
+   "permittee": "JOLIET, CITY OF",
+   "city": "JOLIET",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0033812",
+   "permittee": "ADDISON, VILLAGE OF",
+   "city": "ADDISON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0034061",
+   "permittee": "NAPERVILLE, CITY OF",
+   "city": "NAPERVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0034274",
+   "permittee": "WOOD DALE, CITY OF",
+   "city": "WOOD DALE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0034282",
+   "permittee": "WOODSTOCK, CITY OF",
+   "city": "WOODSTOCK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0034479",
+   "permittee": "HANOVER PARK, VILLAGE OF",
+   "city": "HANOVER PARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0034495",
+   "permittee": "PEKIN, CITY OF",
+   "city": "PEKIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0035092",
+   "permittee": "NORTH SHORE WATER RECLAMATION DISTRICT",
+   "city": "GURNEE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0035891",
+   "permittee": "FOX RIVER WATER RECLAMATION DISTRICT",
+   "city": "ELGIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0036137",
+   "permittee": "METRO WATER RECLAMATION DISTRICT OF GREATER CHICAGO",
+   "city": "HANOVER PARK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0036218",
+   "permittee": "MONMOUTH, CITY OF",
+   "city": "MONMOUTH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0036340",
+   "permittee": "METROPOLITAN WATER RECLAMATION DISTRICT OF GREATER CHICAGO",
+   "city": "CHICAGO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0036382",
+   "permittee": "ROCK ISLAND, CITY OF",
+   "city": "ROCK ISLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0036412",
+   "permittee": "YORKVILLE-BRISTOL SANITARY DISTRICT",
+   "city": "YORKVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0036421",
+   "permittee": "ILLINOIS AMERICAN WATER-GODFREY WASTEWATER",
+   "city": "GODFREY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0042412",
+   "permittee": "WASHINGTON, CITY OF",
+   "city": "WASHINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0045403",
+   "permittee": "FRANKFORT NORTH STP",
+   "city": "WILL COUNTY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0046213",
+   "permittee": "EAST PEORIA, CITY OF",
+   "city": "EAST PEORIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0047741",
+   "permittee": "METROPOLITAN WATER RECLAMATION DISTRICT OF GREATER CHICAGO",
+   "city": "DES PLAINES",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "IL0048232",
+   "permittee": "ST. CLAIR TOWNSHIP",
+   "city": "BELLEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0048526",
+   "permittee": "ROMEOVILLE, VILLAGE OF",
+   "city": "ROMEOVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0048721",
+   "permittee": "ROSELLE, VILLAGE OF",
+   "city": "ROSELLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0048755",
+   "permittee": "OLNEY, CITY OF",
+   "city": "OLNEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0053457",
+   "permittee": "CRYSTAL LAKE, CITY OF",
+   "city": "CRYSTAL LAKE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0054992",
+   "permittee": "BRAIDWOOD, CITY OF",
+   "city": "BRAIDWOOD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0055913",
+   "permittee": "MINOOKA, VILLAGE OF",
+   "city": "MINOOKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0059757",
+   "permittee": "COLONA, CITY OF",
+   "city": "COLONA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0060569",
+   "permittee": "STERLING, CITY OF",
+   "city": "STERLING",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0062260",
+   "permittee": "ELBURN, VILLAGE OF",
+   "city": "ELBURN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0064998",
+   "permittee": "CREST HILL, CITY OF",
+   "city": "CREST HILL",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0065145",
+   "permittee": "SAUGET, VILLAGE OF",
+   "city": "SAUGET",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0065188",
+   "permittee": "DUPAGE COUNTY PUBLIC WORKS",
+   "city": "BURR RIDGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0066257",
+   "permittee": "MCHENRY, CITY OF",
+   "city": "MCHENRY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0068764",
+   "permittee": "GILBERTS, VILLAGE OF",
+   "city": "GILBERTS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0069744",
+   "permittee": "BOLINGBROOK, VILLAGE OF",
+   "city": "BOLINGBROOK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0070688",
+   "permittee": "HUNTLEY, VILLAGE OF",
+   "city": "HUNTLEY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0071366",
+   "permittee": "LAKE COUNTY DEPARTMENT OF PUBLIC WORKS",
+   "city": "OLD MILL CREEK",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0071447",
+   "permittee": "POPLAR GROVE, VILLAGE OF",
+   "city": "POPLAR GROVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0072192",
+   "permittee": "FRANKFORT, VILLAGE OF",
+   "city": "FRANKFORT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0072931",
+   "permittee": "CHESTER, CITY OF",
+   "city": "CHESTER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0073504",
+   "permittee": "BLOOMINGTON-NORMAL WATER RECLAMATION DISTRICT",
+   "city": "HEYWORTH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0074373",
+   "permittee": "PLAINFIELD, VILLAGE OF",
+   "city": "PLAINFIELD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0075191",
+   "permittee": "GALENA, CITY OF",
+   "city": "GALENA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0075507",
+   "permittee": "PERU, CITY OF",
+   "city": "PERU",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0076414",
+   "permittee": "JOLIET, CITY OF",
+   "city": "CITY OF JOLIET",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0077551",
+   "permittee": "WATERLOO, CITY OF",
+   "city": "WATERLOO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0077836",
+   "permittee": "WONDER LAKE, VILLAGE OF",
+   "city": "WONDER LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0078301",
+   "permittee": "ROCK FALLS, CITY OF",
+   "city": "ROCK FALLS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IL0079073",
+   "permittee": "VILLAGE OF ITASCA",
+   "city": "ITASCA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IL0080228",
+   "permittee": "NEW LENOX, VILLAGE OF",
+   "city": "NEW LENOX",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

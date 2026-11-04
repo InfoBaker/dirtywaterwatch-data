@@ -1,0 +1,31 @@
+id: "md-epa-echo-cso-inventory"
+name: "EPA ECHO CSO inventory (ALL_CSO_DOWNLOADS), Maryland rows"
+url: "https://echo.epa.gov/tools/data-downloads/cso-inventory-summary"
+homepage: "https://echo.epa.gov/tools/data-downloads/cso-inventory-summary"
+kind: "csv"
+level: "federal"
+# Notes (research/md, status used, verified fetched, checked 2026-11-02): Only list of Maryland CSO
+#   outfalls found; coordinates missing (Cumberland, most of LaVale), duplicated (Frostburg: 15
+#   outfalls at one point) or wrong (Allegany County 002/003 plot in Prince George's County).
+# Access detail (research, quoted): Reused the federal agent's national download
+#   (research/federal/raw/cso_inventory/ALL_CSO_DOWNLOADS.csv, dated 2026-10-31). Maryland: 41 CSO
+#   features on 7 permits: MD0021598 Cumberland 11 (ADC), MD0067423 Frostburg 15 (EXP), MD0067547
+#   LaVale 4 (EXP), MD0067407 Allegany County 3 (EXP), MD0067384 Westernport 1 (EXP), MD0021636
+#   Cambridge 5 (EFF), MD0021571 Salisbury 2 (EFF).
+# Can fill: outfall ids, coordinates (partial)
+# Cannot fill: events
+# Research notes: ECHO REST get_facilities with p_st=MD&p_pcomp=CSO returned QueryRows 0 on
+#   2026-11-02 (raw/echo-md-cso-facilities.json): Maryland CSO permits are not flagged with the CSO
+#   component in ICIS.
+cadence: null
+license: "none stated"
+attribution: "U.S. EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["MD"]
+access: ["csv"]
+access_detail: "Reused the federal agent's national download (research/federal/raw/cso_inventory/ALL_CSO_DOWNLOADS.csv, dated 2026-10-31). Maryland: 41 CSO features on 7 permits: MD0021598 Cumberland 11 (ADC), MD0067423 Frostburg 15 (EXP), MD0067547 LaVale 4 (EXP), MD0067407 Allegany County 3 (EXP), MD0067384 Westernport 1 (EXP), MD0021636 Cambridge 5 (EFF), MD0021571 Salisbury 2 (EFF)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

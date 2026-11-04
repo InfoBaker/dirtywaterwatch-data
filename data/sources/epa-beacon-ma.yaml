@@ -1,0 +1,21 @@
+id: "epa-beacon-ma"
+name: "EPA BEACON 2.0 (MA beach notification data reported by DPH)"
+url: "https://beacon.epa.gov/ords/beacon2/f?p=BEACON2:12"
+homepage: "https://beacon.epa.gov/ords/beacon2/f?p=BEACON2:12"
+kind: "html"
+level: "federal"
+# Notes (research/ma, status candidate, verified search_only, checked 2026-11-01): Possible
+#   machine-friendlier beach history for MA; left to federal agent.
+# Access detail (research, quoted): Not fetched here; federal agent's area.
+cadence: null
+license: "none stated"
+attribution: "US EPA"
+enabled: true
+role: "advisories"
+event_types: ["beach_closure"]
+states: ["MA"]
+access: ["html"]
+access_detail: "Not fetched here; federal agent's area."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

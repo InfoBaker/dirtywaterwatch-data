@@ -1,0 +1,160 @@
+{
+  "state": "WA",
+  "name": "Washington",
+  "region": "pacific",
+  "epa_region": 10,
+  "npdes_authority": "mixed",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "yes",
+    "summary": "Since 2025 (RCW 90.48.636) Ecology itself must publish every sewage spill reported under an individual water quality permit on a public website, with volume, treatment level, start, end once known and the area potentially affected; the site was due by 2026-07-01 and Ecology aims to post within five working days. Operators report to Ecology under their permits; CSO public notice (signs, King County's status map) comes from permits.",
+    "citations": [
+      {
+        "cite": "RCW 90.48.636(1)",
+        "title": "Sewage spills - Website - Notices",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=90.48.636",
+        "quote": "By July 1, 2026, the department must develop and publish a public-facing website that includes, but is not limited to, notices of the locations where sewage spills occur that are reported to the department under individual water quality permits for discharges that contain sewage. The department must post on the website notice of the reported sewage spill.",
+        "who": "Department of Ecology",
+        "channel": "public website",
+        "deadline": "none in statute; Ecology's stated goal is five working days after the facility's report",
+        "threshold": "any sewage spill reported under an individual permit (RCW 90.48.632: 'untreated or undertreated wastewater that does not meet permit requirements', including combined sewers)",
+        "verified": "fetched"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "per permit (typically 24 hours oral, 5 days written under the permit's noncompliance notification)",
+      "cite": "Individual NPDES permits; Ecology publication ECY070-81 Initial Non-Compliance Notification (search_only)"
+    },
+    "cso_permit_notice_clause": {
+      "permit": "WA0029181 (King County West Point)",
+      "quote": null,
+      "deadline": "not read; practice: status map updated every 10 minutes and signs at outfalls",
+      "verified": "inferred"
+    },
+    "bills_and_cases": [
+      "HB 1670 / SB 5450 (2025), enacted as 2025 c 315: Sewage Spill Right to Know; a notification (email) system, map format and annual report were dropped from the final bill (search_only)"
+    ]
+  },
+  "erule": {
+    "system": "mixed",
+    "sobe_events_2026_11_03": 36,
+    "public_output_url": "https://ecology.wa.gov/water-shorelines/water-quality/wastewater/sewage-spills",
+    "notes": "The 36 SOBE events are JBLM (WA0021954, EPA-issued federal-facility permit, 33) and Puyallup (WA0037168, 3), not King County. State permittees report to Ecology, which publishes under RCW 90.48.636."
+  },
+  "statewide_feed": {
+    "exists": true,
+    "source_ids": [
+      "wa-ecology-sewage-spills"
+    ],
+    "precision": "event",
+    "machine_readable": null,
+    "format": "arcgis",
+    "latency": "goal within five working days of the facility's report",
+    "history": "unknown (site due 2026-07-01)",
+    "coordinates": "unknown",
+    "receiving_water": "area potentially impacted; waters impacted after conclusion",
+    "start_end": "start, and end once known",
+    "volume": true,
+    "stable_id": null,
+    "license": "Ecology disclaimer: 'provided as it has been reported. It has not been independently verified by Ecology.'",
+    "notes": "Table is an embedded ArcGIS Experience on gis.ecology.wa.gov; the portal returned HTTP 403 (Azure WAF) to scripts, so fields were not seen. Ask Ecology for the feature service or an export."
+  },
+  "cso": {
+    "permits": 12,
+    "open_outfalls": 11,
+    "operators_with_web_channel": 3,
+    "operators_checked": 3,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "King County and Seattle share one status map and CSV (125 outfalls, every 10 minutes, 'Stay out of the water ... for 48 hours'); Spokane has a real-time page listing each overflow's start time for 48 hours; others not searched. EPA's inventory undercounts: Seattle's 86 outfalls flagged closed are live in the status file."
+  },
+  "sso": {
+    "location_source": "Ecology sewage spill list (locations); EPA SOBE coordinates for JBLM",
+    "feeds": [
+      "wa-ecology-sewage-spills",
+      "wa-epa-sobe"
+    ],
+    "notes": "Ecology reports about 300 sewage spills a year (search)."
+  },
+  "beaches": {
+    "program": "Washington BEACH program (Ecology and DOH), local health departments issue advisories",
+    "source_ids": [
+      "wa-beach-program",
+      "wa-doh-shellfish-closures"
+    ],
+    "machine_readable": false,
+    "scope": "all",
+    "notes": "Status map and DOH shellfish safety map; service URLs not found in the time box."
+  },
+  "habs": {
+    "program": "Ecology freshwater algae program (Washington State Toxic Algae)",
+    "source_ids": [
+      "wa-ecology-freshwater-algae"
+    ],
+    "machine_readable": false,
+    "notes": "Not fetched."
+  },
+  "advisories": {
+    "health_department_pages": [
+      "DOH Shellfish Safety Map",
+      "Public Health - Seattle & King County beach advisories"
+    ],
+    "watershed_groups": [
+      "Puget Soundkeeper",
+      "Spokane Riverkeeper"
+    ],
+    "swim_guide": true
+  },
+  "outfalls": {
+    "state_layer": null,
+    "cso_inventory_gap": "Seattle's 89 outfalls live in the King County status file vs 0 open in EPA's inventory; King County 36 vs 4 open",
+    "sso_points": "state_table"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Columbia River (OR)",
+      "Spokane River (ID)",
+      "Snake River (ID, OR)",
+      "Puget Sound / Salish Sea and Boundary Bay (British Columbia)",
+      "Lake Osoyoos (BC)"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "bot_wall",
+      "what": "Ecology's GIS portal (Azure WAF) refuses scripted access to the sewage spill table; Spokane's CSO page is behind Incapsula",
+      "fix_level": "agency",
+      "note": "Ask Ecology and Spokane for a feed URL or allow-listing; do not circumvent."
+    },
+    {
+      "kind": "no_web",
+      "what": "RCW 90.48.636 sets no posting deadline and the email notification system was cut from the bill",
+      "fix_level": "legislative",
+      "note": ""
+    },
+    {
+      "kind": "sign_only",
+      "what": "CSO warning signs at outfalls outside Seattle/Spokane",
+      "fix_level": "operator",
+      "note": ""
+    }
+  ],
+  "subscriptions": [],
+  "readiness": {
+    "tier": "A",
+    "expected_grade": "Dated reports, delayed",
+    "first_feed": "wa-kc-cso-status-csv",
+    "effort": "medium",
+    "rationale": "Two feeds: the King County/Seattle CSO status CSV (open, every 10 minutes, outfall points) can be built now; Ecology's statutory statewide spill list is dated event data but needs Ecology to give a machine-readable endpoint (WAF). Spokane needs a feed agreement.",
+    "order_hint": 2
+  },
+  "owner_questions": [
+    "Contact Ecology for the sewage spill feature service URL or an export (the portal blocks scripts).",
+    "Contact the City of Spokane about scripted access to CSOUpdate.",
+    "EPA's inventory marks Seattle's 86 CSO outfalls closed; override with the King County status file's 89 live DSNs?"
+  ],
+  "surprise": "Washington passed a 2025 law making Ecology itself publish every permitted facility's sewage spill online (live since mid-2026), and Seattle's 89 CSO outfalls that EPA lists as closed report live status every 10 minutes in a plain King County CSV."
+}

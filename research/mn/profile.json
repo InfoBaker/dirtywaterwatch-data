@@ -1,0 +1,183 @@
+{
+ "state": "MN",
+ "name": "Minnesota",
+ "region": "great-lakes",
+ "epa_region": 5,
+ "npdes_authority": "state",
+ "great_lakes_basin": "part",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "yes",
+  "summary": "Every publicly owned treatment works and domestic sewer owner must report any discharge to the state 'immediately' (Duty Officer) and then 'promptly' tell potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means (in person, phone, radio, social media or web page), and post signs at impacted public use areas. MPCA guidance (October 2026) extends this to public places within 25 miles downstream and asks for an end-of-release notice. No web posting is required and nothing is collected publicly.",
+  "citations": [
+   {
+    "cite": "Minn. Stat. 115.061(a)",
+    "title": "Duty to notify; avoiding water pollution",
+    "url": "https://www.revisor.mn.gov/statutes/cite/115.061",
+    "quote": "it is the duty of every person to notify the agency immediately of the discharge, accidental or otherwise, of any substance or material under its control which, if not recovered, may cause pollution of waters of the state",
+    "who": "every person",
+    "channel": "MPCA via the Minnesota Duty Officer",
+    "deadline": "immediately",
+    "threshold": "any discharge that may pollute waters of the state",
+    "verified": "fetched"
+   },
+   {
+    "cite": "Minn. Stat. 115.061(c) (2023 c 60; 2026 c 79)",
+    "title": "Notice to downstream users and the public",
+    "url": "https://www.revisor.mn.gov/statutes/cite/115.061",
+    "quote": "(c) Promptly after notifying the agency of a discharge under paragraph (a), a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must provide notice of the discharge to potentially impacted downstream users, including the public, Tribal governments, and drinking water facilities. Notice must be made using the most efficient communications system available to the facility owner such as in person, telephone call, radio, social media, web page, or another expedited form. In addition, signage must be posted at all impacted public use areas within the same jurisdiction or notification must be provided to the entity that has jurisdiction over any impacted public use areas. A notice under this paragraph must include the date and time of the discharge, a description of the material released, a warning of the potential public health risk, and the permittee's contact information.",
+    "who": "publicly owned treatment works; publicly or privately owned domestic sewer system owner",
+    "channel": "in person, telephone, radio, social media, web page or other expedited form; signs at impacted public use areas",
+    "deadline": "promptly after notifying the agency",
+    "threshold": "any discharge reported under (a)",
+    "verified": "fetched"
+   },
+   {
+    "cite": "MPCA wq-wwprm1-43 (October 2026)",
+    "title": "Public Notification of Wastewater Releases",
+    "url": "https://www.pca.state.mn.us/sites/default/files/wq-wwprm1-43.pdf",
+    "quote": "Any location within 25 miles downstream of the release which the public could encounter the receiving water affected by the spill/release. ... Notification should also be given when the release has ended.",
+    "who": "facility owner",
+    "channel": "most efficient means",
+    "deadline": "promptly",
+    "threshold": "any release or bypass",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "immediately, by phone to the Minnesota Duty Officer (800-422-0798)",
+   "cite": "Minn. Stat. 115.061(a); NPDES/SDS permit conditions"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "MN0046744",
+   "quote": "Not read; Minnesota has no open CSO outfalls (EPA inventory: 7 closed).",
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "2023 c 60 art 3 s 5 added the public-notice paragraph (c).",
+   "2026 c 79 (H.F. 4224) amended (c) to name downstream users, Tribal governments and drinking water facilities.",
+   "2009 U.S. v. City of Duluth and WLSSD consent decree on SSOs (later terminated)."
+  ]
+ },
+ "erule": {
+  "system": "state (MPCA; Duty Officer for initial reports)",
+  "sobe_events_2026_11_03": 1,
+  "public_output_url": null,
+  "notes": "The single SOBE row is an EPA-issued tribal permit (Bois Forte). MPCA's eRule overflow system and any public output were not identified."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": "none",
+  "receiving_water": null,
+  "start_end": null,
+  "volume": false,
+  "stable_id": false,
+  "license": null,
+  "notes": "Duty Officer reports (over 3,000 incidents a year of all kinds) are not published; MPCA compiled municipal releases once for a 2017 legislative commission."
+ },
+ "cso": {
+  "permits": 1,
+  "open_outfalls": 0,
+  "operators_with_web_channel": 0,
+  "operators_checked": 1,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "No open CSOs."
+ },
+ "sso": {
+  "location_source": "WLSSD overflow points layer (Duluth region); EPA SOBE for tribal permits",
+  "feeds": [
+   "mn-wlssd-overflows"
+  ],
+  "notes": "Elsewhere SSO notices go by phone, radio, social media or signs under 115.061(c)."
+ },
+ "beaches": {
+  "program": "MDH Minnesota Lake Superior Beach Monitoring Program (BEACH Act, mnbeaches.org); inland beaches by local health departments and cities",
+  "source_ids": [
+   "mn-mdh-lake-superior-beaches"
+  ],
+  "machine_readable": false,
+  "scope": "great-lakes",
+  "notes": "mnbeaches.org format not checked."
+ },
+ "habs": {
+  "program": "MPCA bloom information; no statewide advisory feed found",
+  "source_ids": [
+   "mn-mpca-hab"
+  ],
+  "machine_readable": false,
+  "notes": "Not traced."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "https://www.health.state.mn.us/communities/environment/recreation/beaches/monitoring.html"
+  ],
+  "watershed_groups": [],
+  "swim_guide": true
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none",
+  "sso_points": "city_maps"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Lake Superior and St. Louis River (WI, Ontario)",
+   "Mississippi River (WI, IA)",
+   "St. Croix River (WI)",
+   "Red River of the North (ND, Manitoba)",
+   "Rainy River and Lake of the Woods (Ontario)",
+   "Minnesota River / Big Stone Lake (SD)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "phone_only",
+   "what": "Every release is reported by phone to the Minnesota Duty Officer; the reports are not published.",
+   "fix_level": "agency",
+   "note": "Ask MPCA/DPS for a public release log."
+  },
+  {
+   "kind": "no_web",
+   "what": "115.061(c) allows notice in person, by phone, radio or signs; a web posting is optional.",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "sign_only",
+   "what": "Signs at impacted public use areas are the only durable notice for many releases.",
+   "fix_level": "legislative",
+   "note": ""
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "City of Duluth press release subscriptions",
+   "url": "https://duluthmn.gov/web-subscriptions/",
+   "what": "City press releases, including sewer overflows"
+  }
+ ],
+ "readiness": {
+  "tier": "B",
+  "expected_grade": "Dated reports",
+  "first_feed": "mn-wlssd-overflows",
+  "effort": "small",
+  "rationale": "No statewide feed and no CSOs. The law requires public notice of every sewage release but allows non-web channels, and the Duty Officer log is not public. One operator, WLSSD (Duluth region, Lake Superior), publishes a machine-readable ArcGIS layer of releases with date, type, amount and point, updated the same day. Outside the Duluth region the grade is 'No public reports'.",
+  "order_hint": 3
+ },
+ "owner_questions": [
+  "Ask MPCA or the Duty Officer program for a public log of wastewater releases (they compiled one for the Legislature in 2017)?",
+  "Show WLSSD releases marked StateWaters 'No' (ground or basement only) or only 'Yes' and blank?",
+  "Look for Metropolitan Council (MCES) release notices before listing Minnesota?"
+ ],
+ "surprise": "Minnesota has one of the strongest public-notice laws in the region (every release, every sewer owner, downstream within 25 miles, signs, an end notice, amended again in 2026), yet no statewide record exists; the Duluth regional district quietly runs the only open layer, back to 2005."
+}

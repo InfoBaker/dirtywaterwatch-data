@@ -1,0 +1,24 @@
+id: "mwra-cso-notification-plan"
+name: "MWRA final CSO public notification plan"
+url: null
+homepage: null
+kind: "html"
+level: "utility"
+# Notes (research/science, status candidate, verified fetched, checked 2026-11-01): Downloaded, not
+#   read in detail by the lead.
+# Access detail (research, quoted): Raw copy:
+#   research/science/raw/dl-adv/mwra-final_cso_notif_plan.txt (fetched 2026-11-01 by the advisory
+#   sub-researcher; text read by the lead).
+# Can fill: advice_text
+cadence: null
+license: "none stated"
+attribution: "Massachusetts Water Resources Authority"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["MA"]
+access: ["html"]
+access_detail: "Raw copy: research/science/raw/dl-adv/mwra-final_cso_notif_plan.txt (fetched 2026-11-01 by the advisory sub-researcher; text read by the lead)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

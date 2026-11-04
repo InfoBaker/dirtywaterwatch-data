@@ -1,0 +1,4141 @@
+{
+ "state": "NJ",
+ "source": "openboatlaunch out/water snapshot 2026-11-01",
+ "count": 164,
+ "waters": [
+  {
+   "slug": "absecon-creek-nj",
+   "name": "Absecon Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Absecon"
+   ],
+   "bbox": [
+    -74.52068,
+    39.42059,
+    -74.48099,
+    39.43047
+   ],
+   "wikidata": "Q34638457",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "absecon-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "allamuchy-pond-nj",
+   "name": "Allamuchy Pond",
+   "kind": "pond",
+   "state": "NJ",
+   "towns": [
+    "Allamuchy"
+   ],
+   "bbox": [
+    -74.81922,
+    40.90876,
+    -74.81028,
+    40.91426
+   ],
+   "wikidata": "Q34640927",
+   "charted": false,
+   "area_km2": 0.195,
+   "launches": [
+    "allamuchy-pond-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "alloway-creek-nj",
+   "name": "Alloway Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Quinton Township"
+   ],
+   "bbox": [
+    -75.5294,
+    39.49728,
+    -75.25074,
+    39.60077
+   ],
+   "wikidata": "Q4733240",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "alloway-creek-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "alloway-lake-nj",
+   "name": "Alloway Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Alloway Township"
+   ],
+   "bbox": [
+    -75.36086,
+    39.56113,
+    -75.3436,
+    39.57833
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.543,
+   "launches": [
+    "alloway-lake-boat-launch-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://njdep.maps.arcgis.com/apps/dashboards/49190166531d4e5a811c9a91e4a41677",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020 and 2022.",
+     "date": "2022-06-23",
+     "years": [
+      "2020",
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "assiscunk-creek-nj",
+   "name": "Assiscunk Creek",
+   "kind": "stream",
+   "state": "NJ",
+   "towns": [
+    "Burlington"
+   ],
+   "bbox": [
+    -74.85045,
+    40.07098,
+    -74.80035,
+    40.08286
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "burlington-city-municipal-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "assunpink-lake-nj",
+   "name": "Assunpink Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Cooleys Corner",
+    "Roosevelt"
+   ],
+   "bbox": [
+    -74.52413,
+    40.21381,
+    -74.49641,
+    40.2235
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.962,
+   "launches": [
+    "assunpink-wildlife-management-area-boat-ramp-cooleys-corner-nj",
+    "assunpink-wildlife-management-area-cartop-launch-cooleys-corner-nj",
+    "assunpink-wildlife-management-area-cartop-launch-roosevelt-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://njdep.maps.arcgis.com/apps/webappviewer/index.html?id=561a697f0b594258a4b2e7f2d23e30b7",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023 to 2026.",
+     "date": "2026-09-01",
+     "years": [
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "atlantic-highlands-yacht-harbor-nj",
+   "name": "Atlantic Highlands Yacht Harbor",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Atlantic Highlands"
+   ],
+   "bbox": null,
+   "wikidata": "Q34646101",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "atlantic-highlands-yacht-harbor-boat-launch-near-atlantic-highlands-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "atsion-lake-nj",
+   "name": "Atsion Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Atsion"
+   ],
+   "bbox": [
+    -74.75096,
+    39.73869,
+    -74.7265,
+    39.74388
+   ],
+   "wikidata": "Q6474859",
+   "charted": false,
+   "area_km2": 0.392,
+   "launches": [
+    "atsion-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "back-o-th-sound-nj",
+   "name": "Back o'th' Sound",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Avalon"
+   ],
+   "bbox": null,
+   "wikidata": "Q34647673",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "57th-street-boat-launch-nj",
+    "back-o-th-sound-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "baremore-quarters-nj",
+   "name": "Baremore Quarters",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Brigantine"
+   ],
+   "bbox": null,
+   "wikidata": "Q34650750",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "5th-street-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "barnegat-bay-nj",
+   "name": "Barnegat Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Barnegat Beach",
+    "Barnegat Light",
+    "Barnegat Light Borough",
+    "Bayville",
+    "Beachwood",
+    "Brick Township",
+    "Island Heights",
+    "Lavallette",
+    "Mantoloking",
+    "Ocean Gate",
+    "Pine Beach",
+    "Seaside Heights"
+   ],
+   "bbox": [
+    -74.33748,
+    39.50607,
+    -74.04771,
+    40.06418
+   ],
+   "wikidata": "Q2879596",
+   "charted": true,
+   "area_km2": 239.558,
+   "launches": [
+    "barnegat-bay-boat-launch-near-barnegat-light-nj",
+    "barnegat-bay-boat-launch-near-seaside-heights-borough-nj",
+    "barnegat-bay-carry-in-access-nj",
+    "berkeley-township-municipal-ramp-nj",
+    "lavallette-municipal-ramp-nj",
+    "mantoloking-public-boat-launch-nj",
+    "pine-beach-municipal-boat-launch-nj",
+    "public-access-on-mill-creek-toms-river-nj",
+    "barnegat-bay-boat-launch-near-beachwood-nj",
+    "seaside-park-municipal-boat-ramp-nj",
+    "toms-river-boat-ramp-nj",
+    "winter-anchorage-canoe-kayak-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bass-river-nj",
+   "name": "Bass River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Bass River Township"
+   ],
+   "bbox": [
+    -74.45212,
+    39.55893,
+    -74.44045,
+    39.61532
+   ],
+   "wikidata": "Q2561009",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "new-gretna-public-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "batsto-lake-nj",
+   "name": "Batsto Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Batsto"
+   ],
+   "bbox": [
+    -74.65458,
+    39.64343,
+    -74.64956,
+    39.66382
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.275,
+   "launches": [
+    "batsto-lake-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "batsto-river-nj",
+   "name": "Batsto River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Hammonton"
+   ],
+   "bbox": [
+    -74.68041,
+    39.62579,
+    -74.63402,
+    39.83441
+   ],
+   "wikidata": "Q4869649",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "batsto-river-carry-in-access-nj",
+    "hampton-furnace-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-timber-creek-nj",
+   "name": "Big Timber Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Bellmawr",
+    "Brooklawn Borough"
+   ],
+   "bbox": [
+    -75.13954,
+    39.83692,
+    -75.08333,
+    39.88797
+   ],
+   "wikidata": "Q4906550",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "big-timber-creek-boat-launch-near-brooklawn-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blackberry-bay-nj",
+   "name": "Blackberry Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Oceanport"
+   ],
+   "bbox": [
+    -74.01669,
+    40.32238,
+    -74.00689,
+    40.32821
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.195,
+   "launches": [
+    "blackberry-bay-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blacks-creek-nj",
+   "name": "Blacks Creek",
+   "kind": "stream",
+   "state": "NJ",
+   "towns": [
+    "Bordentown"
+   ],
+   "bbox": [
+    -74.7201,
+    40.09717,
+    -74.61945,
+    40.1486
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bordentown-municipal-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blossom-cove-nj",
+   "name": "Blossom Cove",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Fair Haven"
+   ],
+   "bbox": [
+    -74.07116,
+    40.35871,
+    -74.06656,
+    40.36293
+   ],
+   "wikidata": "Q49373929",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "fair-haven-municipal-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bostwick-lake-nj",
+   "name": "Bostwick Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Beals Mill"
+   ],
+   "bbox": [
+    -75.27459,
+    39.52836,
+    -75.26519,
+    39.53501
+   ],
+   "wikidata": "Q34878544",
+   "charted": false,
+   "area_km2": 0.151,
+   "launches": [
+    "bostwick-lake-boat-launch-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025.",
+     "date": "2025-12-01",
+     "years": [
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "branchport-creek-nj",
+   "name": "Branchport Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Long Branch"
+   ],
+   "bbox": [
+    -74.00833,
+    40.3069,
+    -73.99557,
+    40.33738
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "branchport-creek-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bridge-creek-nj",
+   "name": "Bridge Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Elizabeth"
+   ],
+   "bbox": [
+    -74.18474,
+    40.62996,
+    -74.1821,
+    40.64541
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bridge-creek-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "canistear-reservoir-nj",
+   "name": "Canistear Reservoir",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Vernon Township"
+   ],
+   "bbox": [
+    -74.49426,
+    41.10997,
+    -74.47509,
+    41.1334
+   ],
+   "wikidata": "Q34693680",
+   "charted": false,
+   "area_km2": 1.29,
+   "launches": [
+    "canistear-reservoir-boat-launch-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019 and 2020.",
+     "date": "2020-02-02",
+     "years": [
+      "2019",
+      "2020"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "cape-may-harbor-nj",
+   "name": "Cape May Harbor",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Cape May"
+   ],
+   "bbox": [
+    -74.90648,
+    38.94497,
+    -74.87094,
+    38.95913
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.103,
+   "launches": [
+    "cape-may-harbor-boat-launch-near-cape-may-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-lawrence-township-nj",
+   "name": "Cedar Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Lawrence Township"
+   ],
+   "bbox": [
+    -75.25335,
+    39.29804,
+    -75.20363,
+    39.33607
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "new-sweden-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-nj",
+   "name": "Cedar Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Berkeley Township",
+    "Dover Forge",
+    "Toms River"
+   ],
+   "bbox": [
+    -74.31689,
+    39.86732,
+    -74.1312,
+    39.91286
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cedar-creek-canoe-launch-nj",
+    "cedar-creek-carry-in-access-near-dover-forge-nj",
+    "cedar-creek-carry-in-access-near-toms-river-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-lake-cedarville-nj",
+   "name": "Cedar Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Cedarville"
+   ],
+   "bbox": [
+    -75.20358,
+    39.3349,
+    -75.19667,
+    39.33712
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.086,
+   "launches": [
+    "cedar-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-lake-nj",
+   "name": "Cedar Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Cedar Lake"
+   ],
+   "bbox": [
+    -74.90631,
+    39.58238,
+    -74.90155,
+    39.58601
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.044,
+   "launches": [
+    "cedar-lake-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cohansey-river-nj",
+   "name": "Cohansey River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Bridgeton",
+    "Fairfield Township",
+    "Greenwich Pier",
+    "Greenwich Township"
+   ],
+   "bbox": [
+    -75.36626,
+    39.34558,
+    -75.2257,
+    39.56419
+   ],
+   "wikidata": "Q5141301",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cohansey-river-boat-launch-near-bridgeton-nj",
+    "cohansey-river-boat-launch-near-greenwich-township-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cooper-river-lake-nj",
+   "name": "Cooper River Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Collingswood"
+   ],
+   "bbox": [
+    -75.0897,
+    39.91796,
+    -75.04242,
+    39.93198
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.795,
+   "launches": [
+    "cooper-river-lake-boat-launch-near-collingswood-nj-2"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025.",
+     "date": "2025-11-01",
+     "years": [
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "cooper-river-nj",
+   "name": "Cooper River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Camden"
+   ],
+   "bbox": [
+    -75.11039,
+    39.82286,
+    -74.97067,
+    39.95846
+   ],
+   "wikidata": "Q5167805",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cooper-river-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "corson-inlet-nj",
+   "name": "Corson Inlet",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Woodbine"
+   ],
+   "bbox": [
+    -74.65587,
+    39.19995,
+    -74.62502,
+    39.2168
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.265,
+   "launches": [
+    "corson-inlet-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cranberry-lake-nj",
+   "name": "Cranberry Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Cranberry Lake"
+   ],
+   "bbox": [
+    -74.75205,
+    40.93963,
+    -74.73671,
+    40.95635
+   ],
+   "wikidata": "Q34715337",
+   "charted": false,
+   "area_km2": 0.777,
+   "launches": [
+    "cranberry-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "davidsons-millpond-nj",
+   "name": "Davidsons Millpond",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "South Brunswick"
+   ],
+   "bbox": [
+    -74.51564,
+    40.40096,
+    -74.49832,
+    40.41241
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.141,
+   "launches": [
+    "davidsons-millpond-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "davis-millpond-nj",
+   "name": "Davis Millpond",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Stow Creek Township"
+   ],
+   "bbox": [
+    -75.36662,
+    39.42319,
+    -75.35812,
+    39.42841
+   ],
+   "wikidata": "Q34882718",
+   "charted": false,
+   "area_km2": 0.122,
+   "launches": [
+    "davis-millpond-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "delaware-and-raritan-canal-nj",
+   "name": "Delaware and Raritan Canal",
+   "kind": "canal",
+   "state": "NJ",
+   "towns": [
+    "Lambertville",
+    "Millstone",
+    "Raven Rock"
+   ],
+   "bbox": [
+    -75.04655,
+    40.22293,
+    -74.43411,
+    40.55886
+   ],
+   "wikidata": "Q2131731",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "colonial-park-boat-launch-nj",
+    "delaware-and-raritan-canal-carry-in-access-nj",
+    "lambertville-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "delaware-lake-nj",
+   "name": "Delaware Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Knowlton"
+   ],
+   "bbox": [
+    -75.06882,
+    40.91744,
+    -75.0634,
+    40.92222
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.156,
+   "launches": [
+    "delaware-lake-boat-launch-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020 and 2023 to 2025.",
+     "date": "2025-04-01",
+     "years": [
+      "2020",
+      "2023",
+      "2024",
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "delaware-river-nj",
+   "name": "Delaware River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Belvidere",
+    "Blairstown",
+    "Calno",
+    "Camden",
+    "Dunnfield",
+    "Florence",
+    "Frenchtown",
+    "Hainesville",
+    "Holland",
+    "Hopewell",
+    "Montague Township",
+    "Pahaquarry"
+   ],
+   "bbox": [
+    -75.58796,
+    39.42947,
+    -74.69544,
+    41.3578
+   ],
+   "wikidata": "Q143762",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "belvidere-boat-ramp-nj",
+    "byram-boat-launch-nj",
+    "cadoo-access-hand-launch-nj",
+    "delaware-river-boat-launch-near-trenton-nj",
+    "delaware-river-boat-launch-nj",
+    "fisherman-s-eddy-river-access-nj",
+    "delaware-river-boat-launch-near-florence-township-nj",
+    "holland-church-access-nj",
+    "kingwood-boat-launch-nj",
+    "kittatinny-point-boat-launch-nj",
+    "kittatinny-point-hand-launch-nj",
+    "namanock-access-hand-launch-nj",
+    "phillipsburg-boat-ramp-nj",
+    "poxono-access-boat-launch-nj",
+    "delaware-river-boat-launch-near-camden-nj",
+    "ramsaysburg-cartop-boat-launch-nj",
+    "riegelsville-boat-ramp-nj",
+    "worthington-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dennis-creek-nj",
+   "name": "Dennis Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Dennisville"
+   ],
+   "bbox": [
+    -74.89404,
+    39.16421,
+    -74.80279,
+    39.18793
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dennis-creek-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "doctors-creek-nj",
+   "name": "Doctors Creek",
+   "kind": "stream",
+   "state": "NJ",
+   "towns": [
+    "Millstone Township"
+   ],
+   "bbox": [
+    -74.46348,
+    40.16421,
+    -74.44386,
+    40.17808
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "doctors-creek-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "double-creek-wide-place-nj",
+   "name": "Double Creek Wide Place",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Barnegat",
+    "Barnegat Township"
+   ],
+   "bbox": null,
+   "wikidata": "Q49376467",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "barnegat-township-municipal-dock-nj",
+    "double-creek-wide-place-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-creek-pond-nj",
+   "name": "East Creek Pond",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Eldora"
+   ],
+   "bbox": [
+    -74.88684,
+    39.22193,
+    -74.88041,
+    39.23405
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.274,
+   "launches": [
+    "east-creek-pond-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "edwards-run-nj",
+   "name": "Edwards Run",
+   "kind": "stream",
+   "state": "NJ",
+   "towns": [
+    "East Greenwich Township"
+   ],
+   "bbox": [
+    -75.20951,
+    39.73902,
+    -75.16436,
+    39.80629
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "edwards-run-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "elmer-lake-nj",
+   "name": "Elmer Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Elmer"
+   ],
+   "bbox": [
+    -75.16712,
+    39.58891,
+    -75.16269,
+    39.59728
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.17,
+   "launches": [
+    "elmer-lake-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://njdep.maps.arcgis.com/apps/webappviewer/index.html?id=561a697f0b594258a4b2e7f2d23e30b7",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019, 2025 and 2026.",
+     "date": "2026-03-01",
+     "years": [
+      "2019",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "frankford-creek-nj",
+   "name": "Frankford Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Pennsauken"
+   ],
+   "bbox": [
+    -75.07073,
+    39.98316,
+    -75.06759,
+    39.98515
+   ],
+   "wikidata": "Q16891405",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "pennsauken-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ghost-lake-nj",
+   "name": "Ghost Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Hackettstown"
+   ],
+   "bbox": [
+    -74.8974,
+    40.92074,
+    -74.89299,
+    40.92467
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.074,
+   "launches": [
+    "ghost-lake-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gibson-creek-nj",
+   "name": "Gibson Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Scull Landing"
+   ],
+   "bbox": [
+    -74.72617,
+    39.34601,
+    -74.71116,
+    39.3595
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.129,
+   "launches": [
+    "tuckahoe-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grassy-sound-nj",
+   "name": "Grassy Sound",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "North Wildwood"
+   ],
+   "bbox": [
+    -74.83003,
+    39.01123,
+    -74.81273,
+    39.02302
+   ],
+   "wikidata": "Q34767657",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "north-wildwood-bayfront-park-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "great-egg-harbor-bay-nj",
+   "name": "Great Egg Harbor Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Beesley's Point",
+    "Ocean City",
+    "Somers Point"
+   ],
+   "bbox": [
+    -74.637,
+    39.28248,
+    -74.58399,
+    39.30805
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 8.064,
+   "launches": [
+    "great-egg-harbor-bay-boat-launch-near-ocean-city-nj-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "great-egg-harbor-nj",
+   "name": "Great Egg Harbor",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Somers Point"
+   ],
+   "bbox": [
+    -74.67643,
+    39.2684,
+    -74.54777,
+    39.34094
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 10.76,
+   "launches": [
+    "great-egg-harbor-boat-launch-near-somers-point-nj-4"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "great-egg-harbor-river-penny-pot-nj",
+   "name": "Great Egg Harbor River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Penny Pot"
+   ],
+   "bbox": [
+    -74.93748,
+    39.48218,
+    -74.74925,
+    39.70154
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "great-egg-harbor-river-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "great-gorge-lake-nj",
+   "name": "Great Gorge Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "McAfee"
+   ],
+   "bbox": [
+    -74.52522,
+    41.16025,
+    -74.51672,
+    41.16328
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.077,
+   "launches": [
+    "hamburg-mountain-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "green-turtle-pond-nj",
+   "name": "Green Turtle Pond",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "West Milford"
+   ],
+   "bbox": [
+    -74.33132,
+    41.14242,
+    -74.32772,
+    41.15039
+   ],
+   "wikidata": "Q35702589",
+   "charted": false,
+   "area_km2": 0.184,
+   "launches": [
+    "green-turtle-pond-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hackensack-river-nj",
+   "name": "Hackensack River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Carlstadt",
+    "Jersey City",
+    "Little Ferry",
+    "Oradell",
+    "Secaucus"
+   ],
+   "bbox": [
+    -74.1155,
+    40.71152,
+    -73.96644,
+    41.07926
+   ],
+   "wikidata": "Q3125487",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "secaucus-carry-in-access-nj",
+    "hackensack-river-boat-launch-near-secaucus-nj-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hackensack-river-river-edge-borough-nj",
+   "name": "Hackensack River",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "River Edge Borough"
+   ],
+   "bbox": [
+    -74.03358,
+    40.91451,
+    -74.02839,
+    40.93613
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.122,
+   "launches": [
+    "hackensack-river-boat-launch-near-river-edge-borough-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harrisville-pond-nj",
+   "name": "Harrisville Pond",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Harrisville"
+   ],
+   "bbox": [
+    -74.52439,
+    39.66382,
+    -74.51736,
+    39.67631
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.224,
+   "launches": [
+    "harrisville-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harsimus-cove-nj",
+   "name": "Harsimus Cove",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Hoboken"
+   ],
+   "bbox": null,
+   "wikidata": "Q34679403",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "harsimus-cove-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "helmetta-pond-nj",
+   "name": "Helmetta Pond",
+   "kind": "pond",
+   "state": "NJ",
+   "towns": [
+    "Helmetta"
+   ],
+   "bbox": [
+    -74.43199,
+    40.37605,
+    -74.42482,
+    40.3844
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.159,
+   "launches": [
+    "helmetta-pond-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "highland-lake-nj",
+   "name": "Highland Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Highland Lakes"
+   ],
+   "bbox": [
+    -74.47072,
+    41.15594,
+    -74.45722,
+    41.18084
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.323,
+   "launches": [
+    "highland-lake-boat-launch-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 and 2023.",
+     "date": "2023-12-07",
+     "years": [
+      "2022",
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "horse-foot-cove-nj",
+   "name": "Horse Foot Cove",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Beach Haven"
+   ],
+   "bbox": null,
+   "wikidata": "Q49379882",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "great-bay-boulevard-wildlife-management-area-boat-ramp-beach-haven-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hudson-river-nj",
+   "name": "Hudson River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Alpine"
+   ],
+   "bbox": [
+    -74.02907,
+    40.69994,
+    -73.88916,
+    41.04345
+   ],
+   "wikidata": "Q3140",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "fort-lee-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jefferson-lake-nj",
+   "name": "Jefferson Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Hopatcong"
+   ],
+   "bbox": [
+    -74.73922,
+    40.92487,
+    -74.73066,
+    40.92912
+   ],
+   "wikidata": "Q34892445",
+   "charted": false,
+   "area_km2": 0.192,
+   "launches": [
+    "jefferson-lake-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jerry-creek-nj",
+   "name": "Jerry Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Port Republic"
+   ],
+   "bbox": [
+    -74.51253,
+    39.55955,
+    -74.49929,
+    39.56337
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "jerry-creek-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "keyport-harbor-nj",
+   "name": "Keyport Harbor",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Keyport"
+   ],
+   "bbox": [
+    -74.21771,
+    40.433,
+    -74.18655,
+    40.45111
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.206,
+   "launches": [
+    "richard-w-bergen-jr-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-absegami-nj",
+   "name": "Lake Absegami",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Little Egg Harbor Township"
+   ],
+   "bbox": [
+    -74.43276,
+    39.62197,
+    -74.42237,
+    39.62914
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.206,
+   "launches": [
+    "lake-absegami-boat-launch-nj",
+    "lake-absegami-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-aeroflex-nj",
+   "name": "Lake Aeroflex",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Andover Township"
+   ],
+   "bbox": [
+    -74.73715,
+    41.01055,
+    -74.7248,
+    41.026
+   ],
+   "wikidata": "Q34910961",
+   "charted": false,
+   "area_km2": 0.458,
+   "launches": [
+    "lake-aeroflex-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hopatcong-nj",
+   "name": "Lake Hopatcong",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Hopatcong",
+    "Landing",
+    "Shore Hills"
+   ],
+   "bbox": [
+    -74.66466,
+    40.90464,
+    -74.60663,
+    40.98873
+   ],
+   "wikidata": "Q6476209",
+   "charted": false,
+   "area_km2": 9.725,
+   "launches": [
+    "hopatcong-state-park-boat-launch-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://njdep.maps.arcgis.com/apps/webappviewer/index.html?id=561a697f0b594258a4b2e7f2d23e30b7",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2018 to 2026.",
+     "date": "2026-09-01",
+     "years": [
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-horicon-nj",
+   "name": "Lake Horicon",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Lakehurst"
+   ],
+   "bbox": [
+    -74.32972,
+    40.00514,
+    -74.31863,
+    40.01064
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.229,
+   "launches": [
+    "lake-horicon-boat-launch-near-lakehurst-nj-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lefferts-nj",
+   "name": "Lake Lefferts",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Matawan"
+   ],
+   "bbox": [
+    -74.25085,
+    40.40298,
+    -74.23217,
+    40.41576
+   ],
+   "wikidata": "Q6476600",
+   "charted": false,
+   "area_km2": 0.3,
+   "launches": [
+    "lake-lefferts-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-nummy-nj",
+   "name": "Lake Nummy",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Woodbine"
+   ],
+   "bbox": [
+    -74.85845,
+    39.24407,
+    -74.84986,
+    39.24918
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.098,
+   "launches": [
+    "lake-nummy-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-surprise-nj",
+   "name": "Lake Surprise",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Mountainside"
+   ],
+   "bbox": [
+    -74.37977,
+    40.68537,
+    -74.36163,
+    40.69873
+   ],
+   "wikidata": "Q6477911",
+   "charted": false,
+   "area_km2": 0.111,
+   "launches": [
+    "lake-surprise-boat-launch-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020.",
+     "date": "2020-09-30",
+     "years": [
+      "2020"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lakes-bay-nj",
+   "name": "Lakes Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Pleasantville"
+   ],
+   "bbox": [
+    -74.52615,
+    39.36969,
+    -74.49778,
+    39.38388
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.609,
+   "launches": [
+    "lakes-bay-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lebanon-lake-nj",
+   "name": "Lebanon Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Lebanon Lake Estates"
+   ],
+   "bbox": [
+    -74.56757,
+    39.89944,
+    -74.55627,
+    39.90695
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.315,
+   "launches": [
+    "lebanon-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lily-lake-nj",
+   "name": "Lily Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Smithville"
+   ],
+   "bbox": [
+    -74.46229,
+    39.46669,
+    -74.45545,
+    39.46859
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.086,
+   "launches": [
+    "lily-lake-kayak-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-basin-nj",
+   "name": "Little Basin",
+   "kind": "canal",
+   "state": "NJ",
+   "towns": [
+    "Jersey City"
+   ],
+   "bbox": [
+    -74.03818,
+    40.71167,
+    -74.03479,
+    40.71246
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.011,
+   "launches": [
+    "little-basin-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-egg-harbor-nj",
+   "name": "Little Egg Harbor",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Beach Haven",
+    "Long Beach Township",
+    "Manahawkin",
+    "Tuckerton"
+   ],
+   "bbox": [
+    -74.34189,
+    39.51176,
+    -74.18653,
+    39.64833
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 70.916,
+   "launches": [
+    "beach-haven-municipal-boat-ramp-nj",
+    "cedar-run-dock-road-boat-launch-nj",
+    "great-bay-boulevard-wildlife-management-area-cartop-launch-nj",
+    "little-egg-harbor-boat-launch-near-long-beach-township-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-flat-brook-nj",
+   "name": "Little Flat Brook",
+   "kind": "stream",
+   "state": "NJ",
+   "towns": [
+    "Hainesville"
+   ],
+   "bbox": [
+    -74.84703,
+    41.18902,
+    -74.77867,
+    41.2743
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hainesville-pond-cartop-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-swartswood-lake-nj",
+   "name": "Little Swartswood Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Hampton Township"
+   ],
+   "bbox": [
+    -74.82106,
+    41.08151,
+    -74.81044,
+    41.08857
+   ],
+   "wikidata": "Q34903465",
+   "charted": false,
+   "area_km2": 0.361,
+   "launches": [
+    "little-swartswood-lake-boat-launch-nj",
+    "little-swartswood-lake-carry-in-access-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://njdep.maps.arcgis.com/apps/dashboards/49190166531d4e5a811c9a91e4a41677",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2018 and 2021.",
+     "date": "2021-08-10",
+     "years": [
+      "2018",
+      "2021"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ludlam-bay-nj",
+   "name": "Ludlam Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Sea Isle",
+    "Sea Isle City"
+   ],
+   "bbox": [
+    -74.71181,
+    39.16651,
+    -74.67729,
+    39.18647
+   ],
+   "wikidata": "Q49383945",
+   "charted": true,
+   "area_km2": 4.047,
+   "launches": [
+    "ludlam-bay-carry-in-access-near-sea-isle-city-nj",
+    "ludlam-bay-carry-in-access-near-sea-isle-city-nj-2",
+    "sea-isle-city-municipal-marina-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "manahassett-creek-nj",
+   "name": "Manahassett Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Monmouth Beach"
+   ],
+   "bbox": [
+    -73.99686,
+    40.32152,
+    -73.98422,
+    40.32951
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "monmouth-beach-municipal-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "manahawkin-bay-nj",
+   "name": "Manahawkin Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Ship Bottom",
+    "Surf City"
+   ],
+   "bbox": [
+    -74.21805,
+    39.63949,
+    -74.13531,
+    39.71392
+   ],
+   "wikidata": "Q6746755",
+   "charted": true,
+   "area_km2": 20.066,
+   "launches": [
+    "cbi-kayak-canoe-landing-nj",
+    "ship-bottom-municipal-boat-ramp-nj",
+    "manahawkin-bay-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "manasquan-reservoir-nj",
+   "name": "Manasquan Reservoir",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Howell Township",
+    "Oak Glen"
+   ],
+   "bbox": [
+    -74.22718,
+    40.16964,
+    -74.19323,
+    40.18643
+   ],
+   "wikidata": "Q6747008",
+   "charted": false,
+   "area_km2": 2.812,
+   "launches": [
+    "manasquan-reservoir-boat-launch-near-oak-glen-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://njdep.maps.arcgis.com/apps/webappviewer/index.html?id=561a697f0b594258a4b2e7f2d23e30b7",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019 to 2026.",
+     "date": "2026-09-01",
+     "years": [
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "manasquan-river-nj",
+   "name": "Manasquan River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Allenwood",
+    "Point Pleasant",
+    "Wall"
+   ],
+   "bbox": [
+    -74.345,
+    40.08967,
+    -74.03755,
+    40.21398
+   ],
+   "wikidata": "Q6747009",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "manasquan-river-wildlife-management-area-cartop-launch-nj",
+    "point-pleasant-municipal-boat-ramp-nj",
+    "wall-township-municipal-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "maple-lake-nj",
+   "name": "Maple Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Weymouth Township"
+   ],
+   "bbox": [
+    -74.7869,
+    39.40551,
+    -74.77589,
+    39.41097
+   ],
+   "wikidata": "Q34905738",
+   "charted": false,
+   "area_km2": 0.127,
+   "launches": [
+    "maple-lake-wildlife-management-area-boat-ramp-weymouth-township-nj",
+    "maple-lake-wildlife-management-area-cartop-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "marlu-lake-nj",
+   "name": "Marlu Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Holmdel Township"
+   ],
+   "bbox": [
+    -74.15899,
+    40.33416,
+    -74.15347,
+    40.34085
+   ],
+   "wikidata": "Q34693737",
+   "charted": false,
+   "area_km2": 0.075,
+   "launches": [
+    "marlu-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "maskells-millpond-nj",
+   "name": "Maskells Millpond",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Maskells Mill"
+   ],
+   "bbox": [
+    -75.40076,
+    39.48658,
+    -75.39093,
+    39.49628
+   ],
+   "wikidata": "Q34906167",
+   "charted": false,
+   "area_km2": 0.135,
+   "launches": [
+    "maskells-mills-pond-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "maurice-river-nj",
+   "name": "Maurice River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Maurice River Township",
+    "Millville",
+    "Trenton"
+   ],
+   "bbox": [
+    -75.05427,
+    39.20839,
+    -74.97832,
+    39.40126
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "heislerville-wildlife-management-area-boat-ramp-nj",
+    "maurice-river-boat-launch-nj",
+    "public-access-at-route-670-mauricetown-road-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "menantico-ponds-nj",
+   "name": "Menantico Ponds",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Menantico"
+   ],
+   "bbox": [
+    -74.99836,
+    39.36664,
+    -74.99258,
+    39.37745
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.19,
+   "launches": [
+    "menantico-ponds-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mercer-lake-nj",
+   "name": "Mercer Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "West Windsor"
+   ],
+   "bbox": [
+    -74.66264,
+    40.25817,
+    -74.61761,
+    40.27394
+   ],
+   "wikidata": "Q14705740",
+   "charted": false,
+   "area_km2": 1.177,
+   "launches": [
+    "mercer-lake-boat-launch-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://njdep.maps.arcgis.com/apps/dashboards/49190166531d4e5a811c9a91e4a41677",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2021 and 2022.",
+     "date": "2022-08-16",
+     "years": [
+      "2021",
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "mill-brook-nj",
+   "name": "Mill Brook",
+   "kind": "stream",
+   "state": "NJ",
+   "towns": [
+    "Edison"
+   ],
+   "bbox": [
+    -74.3841,
+    40.48693,
+    -74.35234,
+    40.53494
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "edison-boat-basin-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "monksville-reservoir-nj",
+   "name": "Monksville Reservoir",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Hewitt",
+    "Ringwood"
+   ],
+   "bbox": [
+    -74.31924,
+    41.11814,
+    -74.29562,
+    41.14501
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.067,
+   "launches": [
+    "cartop-launch-nj",
+    "north-boat-launch-at-monksville-nj",
+    "south-boat-launch-at-monksville-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019 and 2023.",
+     "date": "2023-10-01",
+     "years": [
+      "2019",
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "mott-creek-nj",
+   "name": "Mott Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Smithville"
+   ],
+   "bbox": [
+    -74.44629,
+    39.51829,
+    -74.41158,
+    39.53513
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "mott-creek-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "muddy-run-nj",
+   "name": "Muddy Run",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Centerton",
+    "Vineland"
+   ],
+   "bbox": [
+    -75.17605,
+    39.4575,
+    -75.08322,
+    39.61772
+   ],
+   "wikidata": "Q2306263",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "2nd-landing-canoe-launch-nj",
+    "heppners-field-canoe-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mullica-river-nj",
+   "name": "Mullica River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Atsion",
+    "Clarks Landing",
+    "Green Bank",
+    "Hammonton",
+    "Mullica Township",
+    "Pleasant Mills"
+   ],
+   "bbox": [
+    -74.80504,
+    39.53684,
+    -74.40162,
+    39.78188
+   ],
+   "wikidata": "Q6934231",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "clarks-landing-nj",
+    "crowley-s-landing-boat-launch-nj",
+    "mullica-river-carry-in-access-near-atsion-nj",
+    "mullica-river-carry-in-access-near-mullica-township-nj",
+    "mullica-river-carry-in-access-near-pleasant-mills-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "newark-bay-nj",
+   "name": "Newark Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Bayonne"
+   ],
+   "bbox": [
+    -74.17423,
+    40.6447,
+    -74.10182,
+    40.70657
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 12.223,
+   "launches": [
+    "bayonne-municipal-launching-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "normandy-harbor-nj",
+   "name": "Normandy Harbor",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Toms River Township"
+   ],
+   "bbox": null,
+   "wikidata": "Q49386542",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "normandy-harbor-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-basin-nj",
+   "name": "North Basin",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Stone Harbor"
+   ],
+   "bbox": [
+    -74.75548,
+    39.06327,
+    -74.75302,
+    39.06454
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.015,
+   "launches": [
+    "north-basin-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-branch-creek-nj",
+   "name": "North Branch Creek",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Mount Holly Township"
+   ],
+   "bbox": [
+    -74.79228,
+    39.98803,
+    -74.77541,
+    39.99359
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.069,
+   "launches": [
+    "north-branch-creek-boat-launch-near-mount-holly-township-nj",
+    "north-branch-creek-boat-launch-near-mount-holly-township-nj-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-branch-forked-river-nj",
+   "name": "North Branch Forked River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Forked River"
+   ],
+   "bbox": [
+    -74.20983,
+    39.82626,
+    -74.1743,
+    39.85107
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "forked-river-public-access-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oswego-lake-nj",
+   "name": "Oswego Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Penn Place"
+   ],
+   "bbox": [
+    -74.4927,
+    39.72934,
+    -74.47689,
+    39.73884
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.461,
+   "launches": [
+    "oswego-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "overpeck-creek-nj",
+   "name": "Overpeck Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Palisades Park"
+   ],
+   "bbox": [
+    -74.03063,
+    40.83869,
+    -73.9938,
+    40.87416
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "overpeck-creek-boat-launch-near-palisades-park-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oyster-creek-nj",
+   "name": "Oyster Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Ocean Township",
+    "Waretown"
+   ],
+   "bbox": [
+    -74.20489,
+    39.80947,
+    -74.1707,
+    39.8116
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "oyster-creek-carry-in-access-nj",
+    "oyster-creek-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oyster-creek-oyster-creek-nj",
+   "name": "Oyster Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Oyster Creek"
+   ],
+   "bbox": [
+    -74.44236,
+    39.504,
+    -74.40891,
+    39.50925
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "oyster-creek-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pakim-pond-nj",
+   "name": "Pakim Pond",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Chatsworth"
+   ],
+   "bbox": [
+    -74.53287,
+    39.87892,
+    -74.53042,
+    39.88108
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.018,
+   "launches": [
+    "pakim-pond-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "parker-cove-nj",
+   "name": "Parker Cove",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Little Egg Harbor"
+   ],
+   "bbox": [
+    -74.29231,
+    39.60395,
+    -74.26595,
+    39.61409
+   ],
+   "wikidata": "Q49387520",
+   "charted": true,
+   "area_km2": 1.198,
+   "launches": [
+    "parkertown-municipal-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "parkers-creek-nj",
+   "name": "Parkers Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Oceanport"
+   ],
+   "bbox": [
+    -74.05441,
+    40.31293,
+    -74.01954,
+    40.32488
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "parkers-creek-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "parvin-lake-nj",
+   "name": "Parvin Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Vineland"
+   ],
+   "bbox": [
+    -75.14405,
+    39.50464,
+    -75.12784,
+    39.51353
+   ],
+   "wikidata": "Q34913660",
+   "charted": false,
+   "area_km2": 0.361,
+   "launches": [
+    "parvin-lake-boat-launch-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://njdep.maps.arcgis.com/apps/webappviewer/index.html?id=561a697f0b594258a4b2e7f2d23e30b7",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 and 2024 to 2026.",
+     "date": "2026-09-01",
+     "years": [
+      "2022",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "passaic-river-nj",
+   "name": "Passaic River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Chatham",
+    "Kearny",
+    "Little Falls",
+    "Long Hill Township",
+    "Newark",
+    "Nutley",
+    "Wallington"
+   ],
+   "bbox": [
+    -74.57161,
+    40.64952,
+    -74.10728,
+    40.94164
+   ],
+   "wikidata": "Q2055835",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "fisherman-s-lot-nj",
+    "frank-a-vincent-marina-nj",
+    "nutley-municipal-ramp-nj",
+    "suchorsky-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "patcong-creek-nj",
+   "name": "Patcong Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Linwood",
+    "Somers Point"
+   ],
+   "bbox": [
+    -74.63205,
+    39.29805,
+    -74.57618,
+    39.39575
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "patcong-creek-boat-launch-near-linwood-nj-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "paulins-kill-lake-nj",
+   "name": "Paulins Kill Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Hampton Township"
+   ],
+   "bbox": [
+    -74.82706,
+    41.05159,
+    -74.77936,
+    41.08474
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.748,
+   "launches": [
+    "paulinskill-river-wildlife-management-area-cartop-launch-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://njdep.maps.arcgis.com/apps/webappviewer/index.html?id=561a697f0b594258a4b2e7f2d23e30b7",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-01",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "pemberton-lake-nj",
+   "name": "Pemberton Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Magnolia"
+   ],
+   "bbox": [
+    -74.67206,
+    39.9544,
+    -74.66368,
+    39.95979
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.179,
+   "launches": [
+    "pemberton-lake-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017, 2019 to 2021 and 2023 to 2025.",
+     "date": "2025-12-01",
+     "years": [
+      "2017",
+      "2019",
+      "2020",
+      "2021",
+      "2023",
+      "2024",
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "pequannock-river-nj",
+   "name": "Pequannock River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Pequannock Township",
+    "Pompton Lakes",
+    "Riverdale"
+   ],
+   "bbox": [
+    -74.51657,
+    40.97149,
+    -74.28175,
+    41.15059
+   ],
+   "wikidata": "Q7166559",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pequannock-river-boat-launch-nj",
+    "pequannock-river-carry-in-access-near-pompton-lakes-nj",
+    "pequannock-river-carry-in-access-near-pequannock-township-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "perrineville-lake-nj",
+   "name": "Perrineville Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Perrineville"
+   ],
+   "bbox": [
+    -74.43936,
+    40.22306,
+    -74.43476,
+    40.22717
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.063,
+   "launches": [
+    "perrineville-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pleasure-bay-nj",
+   "name": "Pleasure Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Monmouth Beach",
+    "Oceanport Borough"
+   ],
+   "bbox": [
+    -74.00302,
+    40.32765,
+    -73.99,
+    40.33633
+   ],
+   "wikidata": "Q49388165",
+   "charted": true,
+   "area_km2": 0.487,
+   "launches": [
+    "pleasure-bay-boat-launch-nj",
+    "pleasure-bay-boat-launch-oceanport-borough-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "point-pleasant-canal-nj",
+   "name": "Point Pleasant Canal",
+   "kind": "canal",
+   "state": "NJ",
+   "towns": [
+    "Point Pleasant"
+   ],
+   "bbox": [
+    -74.06879,
+    40.06487,
+    -74.05095,
+    40.09086
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "point-pleasant-municipal-ramp-nj",
+    "point-pleasant-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pomphrey-pond-nj",
+   "name": "Pomphrey Pond",
+   "kind": "pond",
+   "state": "NJ",
+   "towns": [
+    "Rumson"
+   ],
+   "bbox": [
+    -74.00364,
+    40.37527,
+    -74.00275,
+    40.37595
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.002,
+   "launches": [
+    "municipal-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pompton-lake-nj",
+   "name": "Pompton Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Pompton Lakes"
+   ],
+   "bbox": [
+    -74.2826,
+    40.99192,
+    -74.26611,
+    41.0162
+   ],
+   "wikidata": "Q14705850",
+   "charted": false,
+   "area_km2": 0.748,
+   "launches": [
+    "pompton-lake-boat-launch-near-pompton-lakes-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://njdep.maps.arcgis.com/apps/dashboards/49190166531d4e5a811c9a91e4a41677",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020 and 2022.",
+     "date": "2022-08-11",
+     "years": [
+      "2020",
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "potash-lake-nj",
+   "name": "Potash Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Oakland"
+   ],
+   "bbox": [
+    -74.26134,
+    41.01918,
+    -74.25755,
+    41.0232
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.091,
+   "launches": [
+    "potash-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "prospertown-lake-nj",
+   "name": "Prospertown Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Upper Freehold Township"
+   ],
+   "bbox": [
+    -74.46053,
+    40.12924,
+    -74.43952,
+    40.1387
+   ],
+   "wikidata": "Q7250920",
+   "charted": false,
+   "area_km2": 0.439,
+   "launches": [
+    "prospertown-lake-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rainbow-lake-nj",
+   "name": "Rainbow Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Vineland"
+   ],
+   "bbox": [
+    -75.12044,
+    39.48749,
+    -75.10949,
+    39.49613
+   ],
+   "wikidata": "Q34918017",
+   "charted": false,
+   "area_km2": 0.297,
+   "launches": [
+    "rainbow-lake-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022.",
+     "date": "2022-10-02",
+     "years": [
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ramapo-river-nj",
+   "name": "Ramapo River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Pompton Lakes"
+   ],
+   "bbox": [
+    -74.28178,
+    40.97088,
+    -74.15569,
+    41.15773
+   ],
+   "wikidata": "Q7289019",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ramapo-river-carry-in-access-near-pompton-lakes-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "raritan-river-nj",
+   "name": "Raritan River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Bound Brook",
+    "Highland Park",
+    "New Brunswick",
+    "Perth Amboy",
+    "Sayerville",
+    "Sayreville Borough"
+   ],
+   "bbox": [
+    -74.68741,
+    40.47146,
+    -74.27065,
+    40.56466
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "raritan-river-boat-launch-near-highland-park-nj",
+    "raritan-river-boat-launch-near-new-brunswick-nj-2",
+    "raritan-river-boat-launch-nj",
+    "riverside-park-boat-launch-nj",
+    "raritan-river-boat-launch-near-sayreville-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rising-sun-lake-nj",
+   "name": "Rising Sun Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Roosevelt"
+   ],
+   "bbox": [
+    -74.46759,
+    40.2016,
+    -74.4584,
+    40.20714
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.156,
+   "launches": [
+    "assunpink-wildlife-management-area-boat-ramp-roosevelt-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rose-cove-nj",
+   "name": "Rose Cove",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Little Egg Harbor Township"
+   ],
+   "bbox": [
+    -74.30088,
+    39.60314,
+    -74.29329,
+    39.60593
+   ],
+   "wikidata": "Q49390077",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "parkertown-run-dock-road-kayak-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rosedale-lake-nj",
+   "name": "Rosedale Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Hopewell Township"
+   ],
+   "bbox": [
+    -74.75868,
+    40.32536,
+    -74.75352,
+    40.33274
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.117,
+   "launches": [
+    "rosedale-lake-carry-in-access-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://njdep.maps.arcgis.com/apps/webappviewer/index.html?id=561a697f0b594258a4b2e7f2d23e30b7",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019 to 2022, 2025 and 2026.",
+     "date": "2026-09-01",
+     "years": [
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "round-valley-reservoir-nj",
+   "name": "Round Valley Reservoir",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Lebanon"
+   ],
+   "bbox": [
+    -74.85583,
+    40.60038,
+    -74.8008,
+    40.63268
+   ],
+   "wikidata": "Q7332454",
+   "charted": false,
+   "area_km2": 8.927,
+   "launches": [
+    "round-valley-reservoir-boat-launch-near-lebanon-nj",
+    "round-valley-reservoir-boat-launch-near-lebanon-nj-2"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-11-14",
+     "years": [
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "salem-river-nj",
+   "name": "Salem River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Mannington Township",
+    "Pennsville",
+    "Salem"
+   ],
+   "bbox": [
+    -75.51262,
+    39.56915,
+    -75.22563,
+    39.6775
+   ],
+   "wikidata": "Q7404168",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "salem-public-ramp-pse-g-nj",
+    "salem-river-boat-launch-near-salem-nj",
+    "salem-river-boat-launch-near-salem-nj-2",
+    "salem-river-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sandy-hook-bay-nj",
+   "name": "Sandy Hook Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Fort Hancock",
+    "Leonardo"
+   ],
+   "bbox": [
+    -74.06675,
+    40.41389,
+    -73.99279,
+    40.47059
+   ],
+   "wikidata": "Q49391033",
+   "charted": true,
+   "area_km2": 22.147,
+   "launches": [
+    "sandy-hook-bay-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saw-mill-creek-nj",
+   "name": "Saw Mill Creek",
+   "kind": "stream",
+   "state": "NJ",
+   "towns": [
+    "Secaucus"
+   ],
+   "bbox": [
+    -74.05413,
+    40.79182,
+    -74.04127,
+    40.80753
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "saw-mill-creek-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sawmill-pond-nj",
+   "name": "Sawmill Pond",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Wantage Township"
+   ],
+   "bbox": [
+    -74.68946,
+    41.29294,
+    -74.68553,
+    41.29754
+   ],
+   "wikidata": "Q34922157",
+   "charted": false,
+   "area_km2": 0.083,
+   "launches": [
+    "sawmill-pond-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "schellenger-creek-nj",
+   "name": "Schellenger Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Cape May"
+   ],
+   "bbox": [
+    -74.91264,
+    38.94749,
+    -74.90676,
+    38.94985
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.05,
+   "launches": [
+    "spicers-creek-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shark-river-nj",
+   "name": "Shark River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Belmar"
+   ],
+   "bbox": [
+    -74.06513,
+    40.18011,
+    -74.00772,
+    40.19683
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "shark-river-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shaws-mill-pond-nj",
+   "name": "Shaws Mill Pond",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Shaws Mill"
+   ],
+   "bbox": [
+    -75.15702,
+    39.31202,
+    -75.15074,
+    39.31918
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.112,
+   "launches": [
+    "millville-wildlife-management-area-boat-ramp-nj",
+    "millville-wildlife-management-area-boat-ramp-shaws-mill-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shelter-island-bay-nj",
+   "name": "Shelter Island Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Ventnor"
+   ],
+   "bbox": [
+    -74.51347,
+    39.35083,
+    -74.49996,
+    39.36513
+   ],
+   "wikidata": "Q49391848",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "shelter-island-bay-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shepherd-lake-nj",
+   "name": "Shepherd Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Ringwood"
+   ],
+   "bbox": [
+    -74.23186,
+    41.13504,
+    -74.22138,
+    41.14002
+   ],
+   "wikidata": "Q49310375",
+   "charted": false,
+   "area_km2": 0.299,
+   "launches": [
+    "shepherd-lake-boat-launch-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019.",
+     "date": "2019-11-02",
+     "years": [
+      "2019"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "sheppards-millpond-nj",
+   "name": "Sheppards Millpond",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Greenwich Township"
+   ],
+   "bbox": [
+    -75.32196,
+    39.41155,
+    -75.31345,
+    39.41874
+   ],
+   "wikidata": "Q34923152",
+   "charted": false,
+   "area_km2": 0.211,
+   "launches": [
+    "sheppards-millpond-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-arm-nj",
+   "name": "South Arm",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Belmar",
+    "Neptune City Borough"
+   ],
+   "bbox": null,
+   "wikidata": "Q49392520",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "south-arm-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-branch-rancocas-creek-nj",
+   "name": "South Branch Rancocas Creek",
+   "kind": "stream",
+   "state": "NJ",
+   "towns": [
+    "Hainesport Township",
+    "Westampton"
+   ],
+   "bbox": [
+    -74.86127,
+    39.91682,
+    -74.69079,
+    39.99651
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "south-branch-rancocas-creek-boat-launch-nj",
+    "south-branch-rancocas-creek-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "spruce-run-reservoir-nj",
+   "name": "Spruce Run Reservoir",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Clinton",
+    "Union"
+   ],
+   "bbox": [
+    -74.9619,
+    40.63804,
+    -74.91259,
+    40.6738
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.361,
+   "launches": [
+    "clinton-wildlife-management-area-cartop-launch-nj",
+    "spruce-run-reservoir-boat-launch-nj",
+    "spruce-run-reservoir-carry-in-access-near-union-nj",
+    "spruce-run-reservoir-carry-in-access-near-union-nj-2"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2018 to 2025.",
+     "date": "2025-12-01",
+     "years": [
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "steelman-bay-nj",
+   "name": "Steelman Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Linwood"
+   ],
+   "bbox": [
+    -74.57635,
+    39.31702,
+    -74.57168,
+    39.3235
+   ],
+   "wikidata": "Q49392950",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "seaview-dock-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "steeny-kill-lake-nj",
+   "name": "Steeny Kill Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Wantage Township"
+   ],
+   "bbox": [
+    -74.67848,
+    41.31436,
+    -74.67274,
+    41.32161
+   ],
+   "wikidata": "Q34928095",
+   "charted": false,
+   "area_km2": 0.149,
+   "launches": [
+    "steenykill-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stephen-lake-nj",
+   "name": "Stephen Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Estellville"
+   ],
+   "bbox": [
+    -74.75603,
+    39.39255,
+    -74.74816,
+    39.39737
+   ],
+   "wikidata": "Q7608970",
+   "charted": false,
+   "area_km2": 0.109,
+   "launches": [
+    "maple-lake-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stewart-lake-nj",
+   "name": "Stewart Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Woodbury"
+   ],
+   "bbox": [
+    -75.14428,
+    39.83285,
+    -75.13611,
+    39.8421
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.098,
+   "launches": [
+    "stewart-lake-boat-launch-near-woodbury-nj-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stone-tavern-lake-nj",
+   "name": "Stone Tavern Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Roosevelt"
+   ],
+   "bbox": [
+    -74.48705,
+    40.1946,
+    -74.4767,
+    40.20184
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.212,
+   "launches": [
+    "assunpink-wildlife-management-area-boat-ramp-nj",
+    "assunpink-wildlife-management-area-cartop-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stony-brook-nj",
+   "name": "Stony Brook",
+   "kind": "stream",
+   "state": "NJ",
+   "towns": [
+    "Snydertown"
+   ],
+   "bbox": [
+    -74.84124,
+    40.30762,
+    -74.65178,
+    40.39937
+   ],
+   "wikidata": "Q7619491",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "amwell-lake-cartop-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stow-creek-nj",
+   "name": "Stow Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Greenwich Township",
+    "Lower Alloways Creek Township",
+    "Stow Creek Landing",
+    "Stowe Creek"
+   ],
+   "bbox": [
+    -75.41981,
+    39.38067,
+    -75.35825,
+    39.46832
+   ],
+   "wikidata": "Q2246624",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "stow-creek-boat-launch-near-greenwich-township-nj",
+    "stow-creek-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "strathmere-bay-nj",
+   "name": "Strathmere Bay",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Strathmere",
+    "Upper Township"
+   ],
+   "bbox": null,
+   "wikidata": "Q49393091",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "public-access-on-whale-creek-nj",
+    "strathmere-bay-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "success-lake-nj",
+   "name": "Success Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Jackson Township"
+   ],
+   "bbox": [
+    -74.404,
+    40.05698,
+    -74.39171,
+    40.06045
+   ],
+   "wikidata": "Q22060922",
+   "charted": false,
+   "area_km2": 0.223,
+   "launches": [
+    "colliers-mills-wildlife-management-area-cartop-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swartswood-lake-nj",
+   "name": "Swartswood Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Hampton Township"
+   ],
+   "bbox": [
+    -74.85346,
+    41.05947,
+    -74.82078,
+    41.08277
+   ],
+   "wikidata": "Q22060925",
+   "charted": false,
+   "area_km2": 2.107,
+   "launches": [
+    "swartswood-campground-boat-launch-nj",
+    "swartswood-entrance-boat-launch-nj",
+    "swartswood-lake-boat-launch-near-hampton-township-nj",
+    "swartswood-lake-boat-launch-near-hampton-township-nj-2",
+    "swartswood-lake-carry-in-access-nj"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017 to 2021, 2024 and 2025.",
+     "date": "2025-08-01",
+     "years": [
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2024",
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "swayze-mill-pond-nj",
+   "name": "Swayze Mill Pond",
+   "kind": "pond",
+   "state": "NJ",
+   "towns": [
+    "Swayzes Mills"
+   ],
+   "bbox": [
+    -74.99633,
+    40.88694,
+    -74.98892,
+    40.89219
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.158,
+   "launches": [
+    "swayze-mill-pond-boat-launch-near-swayzes-mills-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swimming-river-nj",
+   "name": "Swimming River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Middletown Township"
+   ],
+   "bbox": [
+    -74.10925,
+    40.3229,
+    -74.07922,
+    40.35269
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "swimming-river-boat-launch-near-red-bank-nj-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tuckahoe-river-nj",
+   "name": "Tuckahoe River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Corbin City"
+   ],
+   "bbox": [
+    -74.8649,
+    39.28867,
+    -74.63287,
+    39.38081
+   ],
+   "wikidata": "Q7851028",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "corbin-city-boat-ramp-nj",
+    "tuckahoe-wildlife-management-area-boat-ramp-corbin-city-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tulpehocken-creek-nj",
+   "name": "Tulpehocken Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Washington Township"
+   ],
+   "bbox": [
+    -74.618,
+    39.71344,
+    -74.56337,
+    39.77384
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tulpehocken-creek-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "twin-lakes-nj",
+   "name": "Twin Lakes",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Andover Township"
+   ],
+   "bbox": [
+    -74.74973,
+    41.01275,
+    -74.74521,
+    41.01791
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.089,
+   "launches": [
+    "twin-lakes-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "union-lake-nj",
+   "name": "Union Lake",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Millville"
+   ],
+   "bbox": [
+    -75.07237,
+    39.40028,
+    -75.0503,
+    39.44803
+   ],
+   "wikidata": "Q34932122",
+   "charted": false,
+   "area_km2": 3.468,
+   "launches": [
+    "union-lake-wildlife-management-area-boat-ramp-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wading-river-nj",
+   "name": "Wading River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Charcoal Landing"
+   ],
+   "bbox": [
+    -74.52821,
+    39.55681,
+    -74.47477,
+    39.65817
+   ],
+   "wikidata": "Q7959283",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "wading-river-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wallkill-river-nj",
+   "name": "Wallkill River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Wantage Township"
+   ],
+   "bbox": [
+    -74.64346,
+    41.03291,
+    -74.47398,
+    41.31882
+   ],
+   "wikidata": "Q2543032",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bassetts-bridge-fishing-canoe-access-nj",
+    "route-565-canoe-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "waterloo-lakes-nj",
+   "name": "Waterloo Lakes",
+   "kind": "reservoir",
+   "state": "NJ",
+   "towns": [
+    "Waterloo"
+   ],
+   "bbox": [
+    -74.75466,
+    40.91417,
+    -74.7408,
+    40.92029
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.127,
+   "launches": [
+    "waterloo-cartop-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "watson-creek-nj",
+   "name": "Watson Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Manasquan Borough",
+    "Point Pleasant Beach"
+   ],
+   "bbox": [
+    -74.045,
+    40.11138,
+    -74.03675,
+    40.114
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.063,
+   "launches": [
+    "watson-creek-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wawayanda-lake-nj",
+   "name": "Wawayanda Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Wawayanda"
+   ],
+   "bbox": [
+    -74.44172,
+    41.17076,
+    -74.42274,
+    41.18997
+   ],
+   "wikidata": "Q27889637",
+   "charted": false,
+   "area_km2": 1.011,
+   "launches": [
+    "wawayanda-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "weehawken-cove-nj",
+   "name": "Weehawken Cove",
+   "kind": "bay",
+   "state": "NJ",
+   "towns": [
+    "Hoboken"
+   ],
+   "bbox": [
+    -74.02717,
+    40.75428,
+    -74.02003,
+    40.75823
+   ],
+   "wikidata": "Q7979376",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "weehawken-cove-boat-launch-near-hoboken-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-branch-wading-river-nj",
+   "name": "West Branch Wading River",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Maxwell",
+    "Washington Township"
+   ],
+   "bbox": [
+    -74.56337,
+    39.65817,
+    -74.52627,
+    39.81478
+   ],
+   "wikidata": "Q2392018",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "west-branch-wading-river-carry-in-access-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-creek-nj",
+   "name": "West Creek",
+   "kind": "river",
+   "state": "NJ",
+   "towns": [
+    "Delmont"
+   ],
+   "bbox": [
+    -74.92634,
+    39.19502,
+    -74.91264,
+    39.22704
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "public-access-on-west-creek-at-route-47-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "westecunk-creek-nj",
+   "name": "Westecunk Creek",
+   "kind": "stream",
+   "state": "NJ",
+   "towns": [
+    "Eagleswood Township",
+    "Stafford Forge"
+   ],
+   "bbox": [
+    -74.32037,
+    39.61669,
+    -74.25432,
+    39.66664
+   ],
+   "wikidata": "Q7987337",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "stafford-forge-wildlife-management-area-boat-ramp-nj",
+    "westecunk-creek-boat-launch-nj"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilson-lake-nj",
+   "name": "Wilson Lake",
+   "kind": "lake",
+   "state": "NJ",
+   "towns": [
+    "Clayton"
+   ],
+   "bbox": [
+    -75.05114,
+    39.65595,
+    -75.04318,
+    39.66725
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.239,
+   "launches": [
+    "wilson-lake-boat-launch-nj"
+   ],
+   "advisories": []
+  }
+ ]
+}

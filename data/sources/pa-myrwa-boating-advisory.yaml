@@ -1,0 +1,36 @@
+id: "pa-myrwa-boating-advisory"
+name: "Mystic River Watershed Association daily Boating Advisory (recflag API)"
+url: "https://mysticriver.org/boatingadvisory"
+homepage: "https://mysticriver.org/boatingadvisory"
+kind: "api"
+level: "nonprofit"
+# Notes (research/community, status candidate, verified fetched, checked 2026-11-01): Small, clean
+#   JSON with explicit status types including 'unknown' and a plain-language reason. Ingestible for
+#   two Mystic waters; also a good status vocabulary.
+# Access detail (research, quoted): Fetched GET https://myrwa-api.org/api/recflag/predictions/ (no
+#   auth): per site {name, site{name, description, latitude, longitude}, current{timestamp,
+#   timestamp_local, prob, exceedance, predictors, flags, status{type,label,reason}}, history[7
+#   days]}. Map script https://myrwa-api.org/api/recflag/static/map/build.js. Twitter @SafeMystic.
+# Can fill: advice_text, valid_until (rest of day), source_updated_at, coordinates
+# Cannot fill: discharge start/end; volume; outfall
+# Waters: Mystic River at Rt 16, Malden River at Rt 16, Upper Mystic Lake (Shannon Beach)
+#   (openboatlaunch slugs: mystic-river-ma, upper-mystic-lake-ma)
+# History: 7 days in API
+# Research notes: Status types: good / advisory / uncertain / unknown (CSS shows
+#   recflag-status-good/advisory/uncertain/unknown). Page definitions: Good (boating probably safe),
+#   Advisory (E. coli exceedances likely or bloom over state guideline), Uncertain (possible bloom),
+#   Not Available ('missing data or a system error'). Model built from 80 samples 2015-2016. CSOs
+#   are not a model input. MyRWA: 'In general MyRWA recommends not recreating on the water for 48
+#   hours after heavy rainfall.' No Malden River slug in openboatlaunch.
+cadence: "Daily prediction at about 5 AM, 'valid for the rest of the day'"
+license: "none stated"
+attribution: "Mystic River Watershed Association"
+enabled: true
+role: "advisories"
+event_types: ["model_bacteria", "hab"]
+states: ["MA"]
+access: ["html", "api", "social"]
+access_detail: "Fetched GET https://myrwa-api.org/api/recflag/predictions/ (no auth): per site {name, site{name, description, latitude, longitude}, current{timestamp, timestamp_local, prob, exceedance, predictors, flags, status{type,label,reason}}, history[7 days]}. Map script https://myrwa-api.org/api/recflag/static/map/build.js. Twitter @SafeMystic."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

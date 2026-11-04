@@ -1,0 +1,42 @@
+id: "me-dep-cso-status-report"
+name: "Maine DEP Maine Combined Sewer Overflow Status Report (annual; latest = 2025 report, June 2026)"
+url: "https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf"
+homepage: "https://www.maine.gov/dep/water/cso/index.html"
+kind: "pdf"
+level: "state"
+# Notes (research/me, status used, verified fetched, checked 2026-11-01): The only official
+#   per-permittee discharge record that is public. Annual granularity only.
+# Access detail (research, quoted): PDF (35 pp); text extracted with macOS PDFKit
+#   (raw/me-cso-2025-status-report.txt). Prior reports listed at
+#   https://www.maine.gov/dep/publications/reports/index.html (2017-2024 fetched list; 2024 report
+#   also downloaded). Several charts and the Level of Treatment and by-watershed tables are images.
+# Can fill: source_record_id (permittee+year), waterbody (named, per permittee), volume (annual),
+#   units, authority, published_at, source_url, jurisdiction
+# Cannot fill: started_at; ended_at; per-outfall volume; coordinates; advice_text; valid_until
+# Waters: all 32 CSO permits, 10 watersheds (openboatlaunch slugs: androscoggin-river-me,
+#   kennebec-river-me, penobscot-river-me, saco-river-me, casco-bay-me, fore-river-me,
+#   presumpscot-river-me, machias-river-me, saint-croix-river-me, saint-john-river-me,
+#   frenchman-bay-me, penobscot-bay-me, kenduskeag-stream-me, souadabscook-stream-me,
+#   rockland-harbor-me, passagassawakeag-river-me, stillwater-river-me, sagadahoc-river-me)
+# History: Status reports back to 2015 on the DEP reports index (older in 'Status of Licensed
+#   Discharges' reports to 2009); tables carry 1987-1988 and 2011-2025 (1989-2010 omitted 'for
+#   legibility').
+# Research notes: 2025: 32 permittees in 29 communities; 106 outfalls, 112 regulators; 152.8 MG
+#   statewide (record low; drought, 38.74 in. rain); 143 event-days (record low). 2024: 108
+#   outfalls, 532.5 MG, 254 (later 252) event-days; one beach closure due to CSO (East End Beach,
+#   Portland); 13 beach areas potentially impacted. An 'overflow event is any calendar day on which
+#   one or more CSO locations within a community experience a discharge.' DEP: 'Stating with
+#   certainty that specific CSO events are solely responsible for specific closures is more
+#   difficult and is beyond the scope of this report.'
+cadence: "Annual; 2025 report dated June 30, 2026 (DEP index 6/30/2026); 2024 report 7/10/2025; 2023 report 6/18/2024. Latency 6-18 months after the discharges."
+license: "maine.gov: 'Neither the State of Maine, nor any agency, officer, or employee of the State of Maine warrants the accuracy, reliability or timeliness of any information published on the Maine.gov website ... Any person or entity that relies on any information obtained from this system does so at their own risk.' (https://www.maine.gov/portal/policies/disclaimer.html). No reuse licence stated."
+attribution: "Maine Department of Environmental Protection"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["ME"]
+access: ["pdf"]
+access_detail: "PDF (35 pp); text extracted with macOS PDFKit (raw/me-cso-2025-status-report.txt). Prior reports listed at https://www.maine.gov/dep/publications/reports/index.html (2017-2024 fetched list; 2024 report also downloaded). Several charts and the Level of Treatment and by-watershed tables are images."
+machine_readable: false
+legal_basis: "Compiled from permittee filings under 06-096 CMR Ch. 570 s.6-7; not itself required by statute."
+checked: "2026-11-01"

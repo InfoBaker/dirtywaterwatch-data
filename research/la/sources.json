@@ -1,0 +1,401 @@
+[
+  {
+    "id": "la-ldeq-edms",
+    "name": "LDEQ Electronic Document Management System (EDMS)",
+    "jurisdiction": "LA",
+    "operator": "Louisiana Department of Environmental Quality",
+    "operator_type": "state",
+    "role": "events",
+    "event_types": [
+      "sso",
+      "bypass",
+      "unauthorized_discharge"
+    ],
+    "waters_covered": "per facility (AI number)",
+    "water_slugs": [],
+    "url": "https://edms.deq.louisiana.gov/edmsv2",
+    "access": [
+      "html",
+      "pdf"
+    ],
+    "access_detail": "Public document search (Kendo JavaScript app; the old querydef.aspx URL redirects to /edmsv2). Noncompliance reports and SPOC written unauthorized-discharge notification reports are filed per facility; whether sewer overflow reports are indexed by type was not confirmed. No list, map or API of overflows.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [
+      "raw_record"
+    ],
+    "cannot_fill": [
+      "all structured fields without parsing PDFs"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "unknown; documents scanned after filing",
+    "history": "decades (per facility)",
+    "license": "unknown",
+    "legal_basis": "LAC 33:I Chapter 39; LPDES permit conditions",
+    "status": "watch",
+    "status_reason": "Only public trace of overflow reports found; needs a per-facility PDF crawl to test.",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": "Page shell fetched; a document search was not run."
+  },
+  {
+    "id": "la-ldeq-spoc",
+    "name": "LDEQ Single Point of Contact (SPOC) incident reporting",
+    "jurisdiction": "LA",
+    "operator": "Louisiana Department of Environmental Quality",
+    "operator_type": "state",
+    "role": "law",
+    "event_types": [
+      "unauthorized_discharge"
+    ],
+    "waters_covered": "statewide",
+    "water_slugs": [],
+    "url": "https://www.deq.louisiana.gov/page/single-point-of-contact",
+    "access": [
+      "html",
+      "phone"
+    ],
+    "access_detail": "Phone line (M-F 8:00-4:30) and an online incident form (internet.deq.louisiana.gov ... INCIDENT-REPORTING-SPILL-INCIDENT-RELEASE). Emergencies go to the State Police hotline; written \"UNAUTHORIZED DISCHARGE NOTIFICATION REPORT\" within 7 calendar days (LAC 33:I.3925). No public output of incidents found.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "n/a",
+    "history": "n/a",
+    "license": "n/a",
+    "legal_basis": "LAC 33:I.3915, 3917, 3925",
+    "status": "used",
+    "status_reason": "Regulator-report route; no public list.",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "la-lac-33-i-ch39",
+    "name": "LAC 33:I Chapter 39, Notification Regulations and Procedures for Unauthorized Discharges",
+    "jurisdiction": "LA",
+    "operator": "Louisiana Department of Environmental Quality",
+    "operator_type": "state",
+    "role": "law",
+    "event_types": [
+      "unauthorized_discharge"
+    ],
+    "waters_covered": "statewide",
+    "water_slugs": [],
+    "url": "https://regulations.justia.com/states/louisiana/title-33/part-i/subpart-2/chapter-39/subchapter-d/section-i-3925",
+    "access": [
+      "html"
+    ],
+    "access_detail": "Emergency discharges: Louisiana State Police hotline promptly (no later than 1 hour per the rule as commonly summarized; not re-read); non-emergency over a reportable quantity: LDEQ within 24 hours; written report within 7 calendar days. Search snippets indicate a definition excluding material in domestic sewage; whether sewer overflows fall under Chapter 39 or only under LPDES permit conditions is unconfirmed.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "n/a",
+    "history": "n/a",
+    "license": "n/a",
+    "legal_basis": "LAC 33:I.3901-3931",
+    "status": "used",
+    "status_reason": "Regulator duty only; no public-notice duty found.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "la-epa-sobe",
+    "name": "EPA SOBE (eRule) extract, Louisiana rows",
+    "jurisdiction": "LA",
+    "operator": "US EPA",
+    "operator_type": "federal",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "n/a",
+    "water_slugs": [],
+    "url": "https://echo.epa.gov/tools/data-downloads",
+    "access": [
+      "csv"
+    ],
+    "access_detail": "0 Louisiana rows on 2026-11-03.",
+    "machine_readable": true,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "daily",
+    "history": "n/a",
+    "license": "public domain",
+    "legal_basis": "40 CFR 127",
+    "status": "rejected",
+    "status_reason": "No Louisiana rows; LDEQ uses its own reporting.",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "la-ldh-beach-monitoring",
+    "name": "Louisiana Department of Health Beach Monitoring Program",
+    "jurisdiction": "LA",
+    "operator": "Louisiana Department of Health, Office of Public Health, Bureau of Sanitarian Services",
+    "operator_type": "state",
+    "role": "advisories",
+    "event_types": [
+      "beach_advisory"
+    ],
+    "waters_covered": "23 coastal beach sites (Gulf beaches, Cameron to Grand Isle; Lake Pontchartrain north shore)",
+    "water_slugs": [],
+    "url": "https://www.ldh.la.gov/bureau-of-sanitarian-services/beach-monitoring-program",
+    "access": [
+      "html",
+      "pdf"
+    ],
+    "access_detail": "HTTP 403 to both WebFetch and curl on 2026-11-03 (bot protection); not retried. Per search snippets: enterococci sampling at 23 sites; advisories issued weekly every Thursday from May 1 to October 31; media advisory and a swim-advisory sign when high; annual report PDF (LA2025_AnnualBeachReport_Final.pdf) with a 2026 risk table. Data also reach Swim Guide.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [
+      "source_status",
+      "advice_text"
+    ],
+    "cannot_fill": [
+      "coordinates (not seen)"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "weekly (Thursday) May to October",
+    "history": "annual reports",
+    "license": "unknown",
+    "legal_basis": "BEACH Act",
+    "status": "unreachable",
+    "status_reason": "403 from this machine; owner or a browser fetch needed to see the advisory table format.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "la-ldh-hab-advisories",
+    "name": "LDH algal bloom advisories (news releases)",
+    "jurisdiction": "LA",
+    "operator": "Louisiana Department of Health",
+    "operator_type": "state",
+    "role": "advisories",
+    "event_types": [
+      "hab"
+    ],
+    "waters_covered": "Lake Pontchartrain and others, ad hoc",
+    "water_slugs": [],
+    "url": "https://www.ldh.la.gov/news/5177",
+    "access": [
+      "html"
+    ],
+    "access_detail": "Ad hoc news releases (e.g. Lake Pontchartrain 2019, 2021), partly based on LDEQ information. No standing list found.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [
+      "advice_text",
+      "waterbody"
+    ],
+    "cannot_fill": [
+      "coordinates"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "ad hoc",
+    "history": "2019 on",
+    "license": "unknown",
+    "legal_basis": null,
+    "status": "watch",
+    "status_reason": "Ad hoc only.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "la-pontchartrain-conservancy",
+    "name": "Pontchartrain Conservancy (formerly Lake Pontchartrain Basin Foundation) weekly bacteria monitoring (Swim Guide affiliate)",
+    "jurisdiction": "LA",
+    "operator": "Pontchartrain Conservancy",
+    "operator_type": "nonprofit",
+    "role": "monitoring",
+    "event_types": [
+      "bacteria"
+    ],
+    "waters_covered": "about ten recreational sites around Lake Pontchartrain",
+    "water_slugs": [],
+    "url": "https://www.theswimguide.org/affiliates/pontchartrain-conservancy/",
+    "access": [
+      "html"
+    ],
+    "access_detail": "Weekly sampling posted to Swim Guide; program since 2001.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [
+      "source_updated_at"
+    ],
+    "cannot_fill": [
+      "event fields"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "weekly in season",
+    "history": "2001 on",
+    "license": "Swim Guide terms",
+    "legal_basis": null,
+    "status": "watch",
+    "status_reason": "Swim Guide data by agreement.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "la-swbno-consent-decree",
+    "name": "Sewerage and Water Board of New Orleans consent decree (Civil Action 93-3212, E.D. La.) quarterly reports",
+    "jurisdiction": "LA",
+    "operator": "Sewerage and Water Board of New Orleans",
+    "operator_type": "utility",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "New Orleans (Lake Pontchartrain, Mississippi River, Bayou St. John via pumping)",
+    "water_slugs": [],
+    "url": "https://swbno.org/docs_consentdecree.asp",
+    "access": [
+      "pdf"
+    ],
+    "access_detail": "1998 decree, modified 2010, 2013, 2014 (Third Modified Consent Decree); Paragraph 61 quarterly reports (2008 seen); Sewer Overflow Action Plan and public outreach program. No per-event public SSO list found.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "quarterly",
+    "history": "2008 on (site)",
+    "license": "unknown",
+    "legal_basis": "Consent decree",
+    "status": "watch",
+    "status_reason": "Possible totals; no event list.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "la-baton-rouge-consent-decree",
+    "name": "City of Baton Rouge / East Baton Rouge Parish sewer consent decree (2002, modified 2012-2013)",
+    "jurisdiction": "LA",
+    "operator": "City of Baton Rouge and Parish of East Baton Rouge",
+    "operator_type": "municipal",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "Baton Rouge (Bayou Manchac, Ward Creek, Comite River, Mississippi River)",
+    "water_slugs": [],
+    "url": "https://www.epa.gov/enforcement/city-baton-rouge-and-east-baton-rough-parish-louisiana-sewer-overflow-settlement",
+    "access": [
+      "pdf"
+    ],
+    "access_detail": "Section X SSO Response Plan (Exhibit A) in the decree; public notification terms not read. No city overflow page found.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": "Consent decree",
+    "status": "watch",
+    "status_reason": "Notice terms unread.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "la-ldeq-uas-incidents",
+    "name": "LDEQ_UAS_Incident_Report_View_Layer (ArcGIS Online)",
+    "jurisdiction": "LA",
+    "operator": "Louisiana Department of Environmental Quality",
+    "operator_type": "state",
+    "role": "events",
+    "event_types": [
+      "other"
+    ],
+    "waters_covered": "drone incident flights",
+    "water_slugs": [],
+    "url": "https://services1.arcgis.com/9rICeNyq0Isx42vD/arcgis/rest/services/LDEQ_UAS_Incident_Report_View_Layer/FeatureServer",
+    "access": [
+      "arcgis"
+    ],
+    "access_detail": "Found by ArcGIS Online search; appears to be LDEQ drone (UAS) incident survey records, not overflow reports. Not queried.",
+    "machine_readable": true,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": true,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": null,
+    "status": "rejected",
+    "status_reason": "Not an overflow feed (by title); verify if time allows.",
+    "verified": "search_only",
+    "checked": "2026-11-03",
+    "notes": ""
+  },
+  {
+    "id": "la-industrial-cso-permits",
+    "name": "EPA CSO inventory rows for Louisiana (industrial)",
+    "jurisdiction": "LA",
+    "operator": "US EPA",
+    "operator_type": "federal",
+    "role": "outfalls",
+    "event_types": [
+      "cso"
+    ],
+    "waters_covered": "Mississippi River at Geismar; Bayou D'Inde at Westlake",
+    "water_slugs": [],
+    "url": "https://echo.epa.gov/",
+    "access": [
+      "csv"
+    ],
+    "access_detail": "The two Louisiana CSO permits in the seed are chemical plants (Shell Chemical Geismar LA0005754; LACC Westlake ethylene plant LA0127268), one open outfall each: combined process and storm water, not municipal sewage.",
+    "machine_readable": true,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [
+      "coordinates"
+    ],
+    "cannot_fill": [],
+    "has_coordinates": true,
+    "has_outfall_ids": true,
+    "cadence": "weekly",
+    "history": "n/a",
+    "license": "public domain",
+    "legal_basis": null,
+    "status": "rejected",
+    "status_reason": "Not sewage CSOs; exclude from sewage CSO counts or label as industrial.",
+    "verified": "fetched",
+    "checked": "2026-11-03",
+    "notes": ""
+  }
+]

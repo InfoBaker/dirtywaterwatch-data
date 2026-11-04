@@ -1,0 +1,7941 @@
+{
+ "state": "PA",
+ "source": "openboatlaunch out/water snapshot 2026-11-01",
+ "count": 279,
+ "waters": [
+  {
+   "slug": "acme-lake-pa",
+   "name": "Acme Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Mount Pleasant Township"
+   ],
+   "bbox": [
+    -79.42954,
+    40.11355,
+    -79.42395,
+    40.12104
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.098,
+   "launches": [
+    "acme-dam-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "allegheny-reservoir-pa",
+   "name": "Allegheny Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Elijah",
+    "Elk Township",
+    "Glade Township",
+    "Hamilton Township",
+    "Kinzua Heights",
+    "Mead Township",
+    "Warren",
+    "Wetmore"
+   ],
+   "bbox": [
+    -79.00425,
+    41.77013,
+    -78.81002,
+    42.1114
+   ],
+   "wikidata": "Q4731332",
+   "charted": false,
+   "area_km2": 50.093,
+   "launches": [
+    "allegheny-reservoir-boat-launch-near-wetmore-pa",
+    "big-rock-canoe-launch-pa",
+    "dew-drop-pa",
+    "dunkle-corners-boat-launch-pa",
+    "elijah-pa",
+    "kiasutha-recreational-area-pa",
+    "kinzua-wolf-run-pa",
+    "red-bridge-recreation-area-pa",
+    "roper-hollow-pa",
+    "sugar-bay-dispersed-area-pa",
+    "webbs-ferry-pa",
+    "willow-bay-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "allegheny-river-pa",
+   "name": "Allegheny River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Aspinwall",
+    "Blawnox",
+    "Brokenstraw Township",
+    "Cheswick",
+    "City of Pittsburgh",
+    "City of Warren",
+    "Conewengo Township",
+    "Cosmus",
+    "East Brady",
+    "Emlenton Boro",
+    "Ewing",
+    "Foxburg"
+   ],
+   "bbox": [
+    -80.01712,
+    40.44301,
+    -77.87307,
+    42.16429
+   ],
+   "wikidata": "Q686021",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "6th-street-clemente-pa",
+    "allegheny-valley-conservancy-access-pa",
+    "allegheny-wild-scenic-river-complex-boat-lau-pa",
+    "blawnox-launch-site-pa",
+    "bonnie-brae-pa",
+    "brady-s-bend-pa",
+    "buckaloons-pa",
+    "clifford-betts-park-pa",
+    "deer-creek-pa",
+    "emlenton-pa",
+    "fisherman-s-cove-pa",
+    "fort-run-park-canoe-kayak-launch-pa",
+    "franklin-pa",
+    "allegheny-river-boat-launch-near-franklin-pa",
+    "freeport-access-pa",
+    "freeport-public-ramp-pa",
+    "kinzua-tailwaters-pa",
+    "kittanning-pa",
+    "lawrenceville-40th-street-bridge-pa",
+    "millvale-boat-launch-pa",
+    "millvale-riverfront-park-pa",
+    "allegheny-river-carry-in-access-pa",
+    "o-hara-chapel-harbor-pa",
+    "oakmont-public-access-pa",
+    "oil-city-pa",
+    "parker-city-pa",
+    "point-park-pa",
+    "rachel-carson-park-pa",
+    "sharpsburg-riverfront-park-pa",
+    "springdale-pa",
+    "starbrick-pa",
+    "tarentum-pa",
+    "templeton-pa",
+    "tidioute-borough-pa",
+    "tionesta-pa",
+    "verona-pa",
+    "verona-lauch-pa",
+    "west-hickory-access-pa",
+    "wood-st-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "apalachin-creek-pa",
+   "name": "Apalachin Creek",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Apolacon Township"
+   ],
+   "bbox": [
+    -76.16725,
+    41.93966,
+    -76.06876,
+    42.06351
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "state-game-lands-140-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bald-eagle-creek-pa",
+   "name": "Bald Eagle Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Bald Eagle Township",
+    "Boggs Township",
+    "Lock Haven",
+    "Milesburg",
+    "Milesburg Boro"
+   ],
+   "bbox": [
+    -78.11931,
+    40.75046,
+    -77.39962,
+    41.13593
+   ],
+   "wikidata": "Q4850297",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bald-eagle-pa",
+    "milesburg-community-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bearwallow-pond-pa",
+   "name": "Bearwallow Pond",
+   "kind": "pond",
+   "state": "PA",
+   "towns": [
+    "Fox Township"
+   ],
+   "bbox": [
+    -76.7468,
+    41.50892,
+    -76.74351,
+    41.51407
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.087,
+   "launches": [
+    "bear-wallow-swamp-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-meadows-lake-pa",
+   "name": "Beaver Meadows Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Marienville"
+   ],
+   "bbox": [
+    -79.11256,
+    41.51962,
+    -79.09863,
+    41.52264
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.162,
+   "launches": [
+    "beaver-meadow-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-river-pa",
+   "name": "Beaver River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Bridgewater",
+    "New Brighton Boro",
+    "Wayne Township"
+   ],
+   "bbox": [
+    -80.37955,
+    40.69508,
+    -80.28794,
+    40.95694
+   ],
+   "wikidata": "Q813500",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bevington-boat-access-pa",
+    "bridgewater-landings-marina-pa-2",
+    "new-brighton-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-run-pa",
+   "name": "Beaver Run",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Elgin"
+   ],
+   "bbox": [
+    -79.78862,
+    41.89156,
+    -79.737,
+    41.94836
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beaver-run-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaverdam-reservior-pa",
+   "name": "Beaverdam Reservior",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Summerhill"
+   ],
+   "bbox": [
+    -78.66221,
+    40.30779,
+    -78.63779,
+    40.32782
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.536,
+   "launches": [
+    "beaverdam-run-reservoir-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beechwood-lake-pa",
+   "name": "Beechwood Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Clymer Township"
+   ],
+   "bbox": [
+    -77.52078,
+    41.8471,
+    -77.50881,
+    41.85466
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.31,
+   "launches": [
+    "beechwood-lake-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "belmont-lake-pa",
+   "name": "Belmont Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Mount Pleasant"
+   ],
+   "bbox": [
+    -75.44973,
+    41.76817,
+    -75.43609,
+    41.78631
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.698,
+   "launches": [
+    "belmont-lake-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-09-01",
+     "years": [
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "beltzville-lake-pa",
+   "name": "Beltzville Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Towanmensing"
+   ],
+   "bbox": [
+    -75.64018,
+    40.84843,
+    -75.53774,
+    40.88811
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.936,
+   "launches": [
+    "pine-run-pa",
+    "preachers-camp-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023 and 2026.",
+     "date": "2026-09-03",
+     "years": [
+      "2023",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "bennett-branch-sinnemahoning-creek-pa",
+   "name": "Bennett Branch Sinnemahoning Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Benezette Township",
+    "Driftwood Borough",
+    "Gibson Township",
+    "Jay Township"
+   ],
+   "bbox": [
+    -78.66066,
+    41.14961,
+    -78.13307,
+    41.36178
+   ],
+   "wikidata": "Q18148437",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "benezette-pa",
+    "bennet-branch-forest-pa",
+    "blakeslee-recreation-area-pa",
+    "hicks-run-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bessemer-lake-pa",
+   "name": "Bessemer Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "North Beaver Township"
+   ],
+   "bbox": [
+    -80.49781,
+    40.97857,
+    -80.4947,
+    40.98224
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.058,
+   "launches": [
+    "bessemer-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "black-moshannon-lake-pa",
+   "name": "Black Moshannon Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Rush Township"
+   ],
+   "bbox": [
+    -78.07071,
+    40.89165,
+    -78.04383,
+    40.91916
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.757,
+   "launches": [
+    "mooring-area-1-pa",
+    "mooring-area-2-pa",
+    "mooring-area-3-pa",
+    "mooring-area-4-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blacklick-creek-pa",
+   "name": "Blacklick Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Burrell Township"
+   ],
+   "bbox": [
+    -79.30139,
+    40.44984,
+    -78.92402,
+    40.48744
+   ],
+   "wikidata": "Q4923097",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "barnett-canoe-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blue-marsh-lake-pa",
+   "name": "Blue Marsh Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Bern Township",
+    "Bernville",
+    "Lower Heidleburg Township",
+    "Penn Township"
+   ],
+   "bbox": [
+    -76.11824,
+    40.36505,
+    -76.02942,
+    40.43156
+   ],
+   "wikidata": "Q4929407",
+   "charted": false,
+   "area_km2": 4.34,
+   "launches": [
+    "dry-brooks-boat-launch-pa",
+    "sheidy-road-pa",
+    "state-hill-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023 to 2026.",
+     "date": "2026-08-03",
+     "years": [
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "bradys-lake-pa",
+   "name": "Bradys Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Coolbaugh Township"
+   ],
+   "bbox": [
+    -75.53294,
+    41.16247,
+    -75.52239,
+    41.19418
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.872,
+   "launches": [
+    "brady-s-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "briar-creek-reservoir-pa",
+   "name": "Briar Creek Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Briar Creek Township"
+   ],
+   "bbox": [
+    -76.29061,
+    41.06503,
+    -76.28041,
+    41.06826
+   ],
+   "wikidata": "Q19874008",
+   "charted": false,
+   "area_km2": 0.209,
+   "launches": [
+    "briar-creek-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-17",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "bridgeport-reservoir-pa",
+   "name": "Bridgeport Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Mount Pleasant"
+   ],
+   "bbox": [
+    -79.52844,
+    40.12208,
+    -79.51666,
+    40.13255
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.207,
+   "launches": [
+    "bridgeport-carry-in-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "canadohta-lake-pa",
+   "name": "Canadohta Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Bloomfield Township",
+    "Bloonfield Township"
+   ],
+   "bbox": [
+    -79.84285,
+    41.80561,
+    -79.83286,
+    41.82346
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.725,
+   "launches": [
+    "canadohta-lake-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2001) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2001-10-16"
+    }
+   ]
+  },
+  {
+   "slug": "canoe-lake-pa",
+   "name": "Canoe Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Frankstown Township"
+   ],
+   "bbox": [
+    -78.28711,
+    40.47706,
+    -78.27048,
+    40.48828
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.638,
+   "launches": [
+    "canoe-creek-state-park-launch-1-pa",
+    "canoe-creek-state-park-launch-2-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-09-01",
+     "years": [
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "canonsburg-lake-pa",
+   "name": "Canonsburg Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Peters Township"
+   ],
+   "bbox": [
+    -80.13953,
+    40.26196,
+    -80.13033,
+    40.27379
+   ],
+   "wikidata": "Q5033413",
+   "charted": false,
+   "area_km2": 0.261,
+   "launches": [
+    "canonsburg-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "casselman-river-pa",
+   "name": "Casselman River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Markleton"
+   ],
+   "bbox": [
+    -79.36538,
+    39.6685,
+    -79.03321,
+    39.91358
+   ],
+   "wikidata": "Q5049302",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "markleton-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chambers-lake-pa",
+   "name": "Chambers Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "West Caln Township"
+   ],
+   "bbox": [
+    -75.86333,
+    40.02806,
+    -75.84842,
+    40.03629
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.363,
+   "launches": [
+    "chambers-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chapman-lake-pa",
+   "name": "Chapman Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Pleasant Township"
+   ],
+   "bbox": [
+    -79.18146,
+    41.74688,
+    -79.17124,
+    41.75525
+   ],
+   "wikidata": "Q5073298",
+   "charted": false,
+   "area_km2": 0.232,
+   "launches": [
+    "chapman-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chemung-river-pa",
+   "name": "Chemung River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Athens"
+   ],
+   "bbox": [
+    -76.80966,
+    41.92096,
+    -76.51499,
+    42.08753
+   ],
+   "wikidata": "Q900828",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tozer-s-landing-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "children-s-lake-pa",
+   "name": "Children's Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "S. Middleton Township"
+   ],
+   "bbox": [
+    -77.12816,
+    40.14726,
+    -77.12491,
+    40.14989
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.024,
+   "launches": [
+    "childrens-lake-b-l-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clarion-river-pa",
+   "name": "Clarion River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Barnett Township",
+    "Beaver",
+    "Belltown",
+    "Clarion",
+    "Clarion Boro",
+    "Clarion Township",
+    "Heath Township",
+    "Licking",
+    "Mill Creek Township",
+    "Millstone Township",
+    "Richland",
+    "Ridgway Borough"
+   ],
+   "bbox": [
+    -79.67585,
+    41.11686,
+    -78.67112,
+    41.49133
+   ],
+   "wikidata": "Q5127032",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "322-bridge-access-pa",
+    "alum-rock-access-point-pa",
+    "arroyo-canoe-launch-pa",
+    "barnett-canoe-launch-barnett-township-pa",
+    "callensburg-access-pa",
+    "clear-creek-canoe-launch-pa",
+    "clear-creek-state-park-pa",
+    "cook-forest-canoe-launch-pa",
+    "cooksburg-canoe-launch-pa",
+    "dear-creek-access-pa",
+    "gravel-lick-canoe-launch-pa",
+    "hallton-canoe-launch-sgl-28-pa",
+    "irwin-run-canoe-launch-pa",
+    "mill-creek-boat-launch-pa",
+    "millstone-canoe-launch-pa",
+    "robin-island-canoe-launch-pa",
+    "toby-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clear-lake-pa",
+   "name": "Clear Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Spartansburg"
+   ],
+   "bbox": [
+    -79.69431,
+    41.82495,
+    -79.6836,
+    41.8379
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.45,
+   "launches": [
+    "clear-lake-carry-in-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cloe-lake-pa",
+   "name": "Cloe Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Bell Township"
+   ],
+   "bbox": [
+    -78.91282,
+    40.94804,
+    -78.9052,
+    40.9509
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.105,
+   "launches": [
+    "cloe-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cocalico-creek-pa",
+   "name": "Cocalico Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Ephrata"
+   ],
+   "bbox": [
+    -76.23743,
+    40.11496,
+    -76.12812,
+    40.31168
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "autumn-hills-park-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "codorus-creek-pa",
+   "name": "Codorus Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "York"
+   ],
+   "bbox": [
+    -76.87314,
+    39.86875,
+    -76.64463,
+    40.05813
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "codorus-boat-ramp-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "colver-reservoir-pa",
+   "name": "Colver Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Barr"
+   ],
+   "bbox": [
+    -78.78203,
+    40.56692,
+    -78.76888,
+    40.57182
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.271,
+   "launches": [
+    "vetera-dam-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "colyer-lake-pa",
+   "name": "Colyer Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Potter Township"
+   ],
+   "bbox": [
+    -77.68616,
+    40.77059,
+    -77.67855,
+    40.77814
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.3,
+   "launches": [
+    "colyer-north-pa",
+    "colyer-south-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conemaugh-river-lake-pa",
+   "name": "Conemaugh River Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Conemaugh Township",
+    "Derry Township"
+   ],
+   "bbox": [
+    -79.36823,
+    40.45133,
+    -79.2972,
+    40.47978
+   ],
+   "wikidata": "Q49700339",
+   "charted": false,
+   "area_km2": 2.736,
+   "launches": [
+    "bow-ridge-ada-use-only-pa",
+    "upper-conemaugh-river-lake-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conemaugh-river-pa",
+   "name": "Conemaugh River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Blairsville",
+    "Burrell Township",
+    "Conemaugh Township",
+    "Fairfield",
+    "Johnstown",
+    "New Florence",
+    "Robinson",
+    "Saltsburg",
+    "St Clair",
+    "St. Clair"
+   ],
+   "bbox": [
+    -79.45398,
+    40.3319,
+    -78.92447,
+    40.48903
+   ],
+   "wikidata": "Q1124709",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bairdstown-bridge-pa",
+    "saltsburg-boro-pa",
+    "seward-fifth-street-river-access-pa",
+    "tunnelview-access-conemaugh-dam-pa",
+    "wyotech-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conestoga-river-pa",
+   "name": "Conestoga River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Conestoga Township",
+    "Lancaster City",
+    "Lancaster Township",
+    "Manheim Township",
+    "Millersville Boro",
+    "Rockhill",
+    "Safe Harbor",
+    "Slackwater",
+    "West Earl Township",
+    "West Lampeter Township"
+   ],
+   "bbox": [
+    -76.3875,
+    39.92239,
+    -75.88025,
+    40.15515
+   ],
+   "wikidata": "Q5159535",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "conestoga-drive-north-pa",
+    "conestoga-drive-conestoga-greenway-pa",
+    "conestoga-pines-park-pa",
+    "conestoga-river-boat-launch-near-rockhill-pa",
+    "conestoga-river-boat-launch-near-slackwater-pa",
+    "creek-drive-south-pa",
+    "perelman-park-paper-mill-road-pa",
+    "river-road-conestoga-township-pa",
+    "rockford-road-1-pa",
+    "rockford-road-2-pa",
+    "stone-quarry-road-park-pa",
+    "windolph-landing-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conewago-creek-pa",
+   "name": "Conewago Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Butler Township",
+    "York Haven"
+   ],
+   "bbox": [
+    -77.30299,
+    39.8925,
+    -76.70491,
+    40.11355
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "closed-conewago-boat-launch-pa",
+    "conewago-creek-zeigler-mill-road-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conewango-creek-pa",
+   "name": "Conewango Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Akeley",
+    "Pine Grove",
+    "Russell",
+    "Warren"
+   ],
+   "bbox": [
+    -79.15219,
+    41.84047,
+    -79.12861,
+    42.00502
+   ],
+   "wikidata": "Q5159565",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "front-street-pa",
+    "larimer-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conneaut-lake-pa",
+   "name": "Conneaut Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Sadsbury",
+    "Sodsbury",
+    "Summit"
+   ],
+   "bbox": [
+    -80.31649,
+    41.60329,
+    -80.29112,
+    41.64107
+   ],
+   "wikidata": "Q5161352",
+   "charted": false,
+   "area_km2": 3.914,
+   "launches": [
+    "conneaut-lake-boat-launch-pa",
+    "fireman-s-beach-pa",
+    "n-1st-st-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023, 2025 and 2026.",
+     "date": "2026-08-05",
+     "years": [
+      "2023",
+      "2025",
+      "2026"
+     ]
+    },
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2012) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2012-07-10"
+    }
+   ]
+  },
+  {
+   "slug": "conneaut-outlet-pa",
+   "name": "Conneaut Outlet",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Meadville",
+    "Vernon Township"
+   ],
+   "bbox": [
+    -80.3002,
+    41.53551,
+    -80.10341,
+    41.60339
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "duck-farm-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "connoquenessing-creek-pa",
+   "name": "Connoquenessing Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Harmony"
+   ],
+   "bbox": [
+    -80.32231,
+    40.77579,
+    -79.82855,
+    40.98849
+   ],
+   "wikidata": "Q1126389",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "harmony-boro-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conococheague-creek-pa",
+   "name": "Conococheague Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Antrim",
+    "Chambersburg Borough"
+   ],
+   "bbox": [
+    -77.84813,
+    39.65764,
+    -77.58421,
+    39.97915
+   ],
+   "wikidata": "Q5162113",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "conococheague-creek-boat-launch-pa",
+    "martin-s-mill-bridge-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conodoguinet-creek-pa",
+   "name": "Conodoguinet Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Camp Hill Borough",
+    "East PennsBoro Township",
+    "Hampden Township",
+    "Mechanicsburg",
+    "Middlesex Township",
+    "North Middleton",
+    "North Middleton Township",
+    "Silver Spring",
+    "Silver Spring Township",
+    "West Pennsboro",
+    "Wormelysburg"
+   ],
+   "bbox": [
+    -77.80727,
+    40.03148,
+    -76.90806,
+    40.2775
+   ],
+   "wikidata": "Q5162127",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "acri-meadow-park-pa",
+    "adams-ricci-community-park-pa",
+    "cave-hill-nature-center-take-out-only-pa",
+    "conodoguinet-youth-park-pa",
+    "creek-road-kayak-launch-pa",
+    "creekview-park-pa",
+    "good-hope-pa",
+    "heishman-s-mill-portage-pa",
+    "hidden-creek-park-pa",
+    "letort-falls-park-pa",
+    "north-middleton-park-pa",
+    "oyster-mill-park-pa",
+    "pine-hill-arboretum-pa",
+    "ridley-park-pa",
+    "rupley-park-pa",
+    "scott-farm-work-center-appalachian-trail-pa",
+    "siebert-park-pa",
+    "west-fairview-park-pa",
+    "westover-commons-area-pa",
+    "willow-mill-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conowingo-reservoir-pa",
+   "name": "Conowingo Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Holtwood",
+    "Peach Bottom Township"
+   ],
+   "bbox": [
+    -76.34086,
+    39.65618,
+    -76.17009,
+    39.8276
+   ],
+   "wikidata": "Q34881359",
+   "charted": false,
+   "area_km2": 34.321,
+   "launches": [
+    "cold-cabin-park-pa"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2014) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2014-09-24"
+    }
+   ]
+  },
+  {
+   "slug": "cowanesque-lake-pa",
+   "name": "Cowanesque Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Lawrence Township",
+    "Tompkins"
+   ],
+   "bbox": [
+    -77.24122,
+    41.96782,
+    -77.15061,
+    41.98964
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.279,
+   "launches": [
+    "south-shore-pa",
+    "cowanesque-lake-boat-launch-pa",
+    "tompkins-campground-pa"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2010) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2010-08-10"
+    }
+   ]
+  },
+  {
+   "slug": "cowans-gap-lake-pa",
+   "name": "Cowans Gap Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Ayr Township",
+    "Cowans Village"
+   ],
+   "bbox": [
+    -77.92817,
+    39.99435,
+    -77.92244,
+    40.00184
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.169,
+   "launches": [
+    "cowans-gap-lake-ramp-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cowanshannock-creek-pa",
+   "name": "Cowanshannock Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Rayburn Township"
+   ],
+   "bbox": [
+    -79.50832,
+    40.79295,
+    -79.26409,
+    40.85108
+   ],
+   "wikidata": "Q5179467",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cowanshannock-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cranberry-glade-lake-pa",
+   "name": "Cranberry Glade Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Lower Turkeyfoot Township"
+   ],
+   "bbox": [
+    -79.37974,
+    39.90492,
+    -79.36951,
+    39.91512
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.326,
+   "launches": [
+    "cranberry-glade-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crooked-creek-lake-pa",
+   "name": "Crooked Creek Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Bethel Township",
+    "Burrell Township"
+   ],
+   "bbox": [
+    -79.51784,
+    40.70111,
+    -79.49455,
+    40.71699
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.103,
+   "launches": [
+    "crooked-creek-lake-boat-launch-pa",
+    "robb-s-fording-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crooked-creek-pa",
+   "name": "Crooked Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Bethel Township",
+    "Manor Township"
+   ],
+   "bbox": [
+    -79.56018,
+    40.62489,
+    -79.04718,
+    40.74965
+   ],
+   "wikidata": "Q5187791",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "crooked-creek-outflow-pa",
+    "rosston-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cross-creek-lake-pa",
+   "name": "Cross Creek Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Cross Creek Township",
+    "Hopewell",
+    "West Middletown"
+   ],
+   "bbox": [
+    -80.42112,
+    40.24677,
+    -80.38069,
+    40.25982
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.994,
+   "launches": [
+    "cross-creek-county-park-boat-launch-pa",
+    "cross-creek-park-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022.",
+     "date": "2022-11-02",
+     "years": [
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "curwensville-lake-pa",
+   "name": "Curwensville Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Pine Township"
+   ],
+   "bbox": [
+    -78.55796,
+    40.92954,
+    -78.52229,
+    40.95614
+   ],
+   "wikidata": "Q5196127",
+   "charted": false,
+   "area_km2": 2.688,
+   "launches": [
+    "curwensville-lake-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2023) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2023-05-14"
+    }
+   ]
+  },
+  {
+   "slug": "cussewago-creek-pa",
+   "name": "Cussewago Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Vernon Township"
+   ],
+   "bbox": [
+    -80.24632,
+    41.63882,
+    -80.16194,
+    41.89794
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cussewago-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "darby-creek-pa",
+   "name": "Darby Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Ridley Park",
+    "Ridley Township"
+   ],
+   "bbox": [
+    -75.4426,
+    39.8569,
+    -75.25476,
+    40.03182
+   ],
+   "wikidata": "Q5222259",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "ridley-township-marina-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "deep-creek-lake-pa",
+   "name": "Deep Creek Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Green Lane"
+   ],
+   "bbox": [
+    -75.49324,
+    40.33187,
+    -75.48334,
+    40.33742
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.093,
+   "launches": [
+    "deep-creek-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "delaware-canal-pa",
+   "name": "Delaware Canal",
+   "kind": "canal",
+   "state": "PA",
+   "towns": [
+    "Erwinna",
+    "Morrisville",
+    "Raubsville",
+    "Taylorsville",
+    "Upper Makefield"
+   ],
+   "bbox": [
+    -75.20472,
+    40.10354,
+    -74.77685,
+    40.68827
+   ],
+   "wikidata": "Q7163672",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ferry-road-canal-access-east-pa",
+    "ferry-road-canal-access-west-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "delaware-river-pa",
+   "name": "Delaware River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Bensalem Township",
+    "Bridgeton Township",
+    "Bristol",
+    "Bristol Township",
+    "Buckingham",
+    "Chester City",
+    "City of Easton",
+    "City of Philadelphia",
+    "Damascus",
+    "Darby",
+    "Delaware Township",
+    "Dingman Township"
+   ],
+   "bbox": [
+    -75.58796,
+    39.56316,
+    -74.68811,
+    41.9388
+   ],
+   "wikidata": "Q143762",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "airport-park-pa",
+    "buckingham-access-pa",
+    "bushkill-access-boat-launch-pa",
+    "bushkill-access-hand-launch-pa",
+    "callicoon-pa-access-pa",
+    "damascus-access-pa",
+    "darbytown-access-pa",
+    "delaware-canal-state-park-primitive-pa",
+    "dingmans-access-boat-launch-pa",
+    "dingmans-access-hand-launch-pa",
+    "durham-furnace-lock-21-dcnr-access-pa",
+    "easton-launch-scott-park-pa",
+    "easton-municipal-access-pa",
+    "eddyside-river-rest-stop-pool-park-pa",
+    "eshback-access-pa",
+    "flower-street-chester-city-boat-ramp-pa",
+    "fort-mifflin-pa",
+    "frankford-arsenal-pa",
+    "frost-hollow-pa",
+    "giving-pond-access-pa",
+    "hal-h-clark-boat-launch-pa",
+    "lackawaxen-access-pa",
+    "linden-avenue-pa",
+    "lynn-island-lock-20-dcnr-access-pa",
+    "martins-creek-access-area-pa",
+    "matamoras-access-pa",
+    "milford-beach-boat-launch-pa",
+    "milford-beach-hand-launch-pa",
+    "morrisville-pa",
+    "mount-jack-county-park-rest-stop-pa",
+    "neshaminy-state-park-marina-pa",
+    "neshaminy-state-park-river-pa",
+    "pennsbury-manor-access-pa",
+    "pennypack-park-access-pa",
+    "portland-footbridge-access-pa",
+    "reigelsville-pa",
+    "sandts-eddy-pa",
+    "shehawken-access-pa",
+    "smithfield-beach-boat-launch-pa",
+    "smithfield-beach-hand-launch-pa",
+    "station-avenue-pa",
+    "stockport-access-pa",
+    "tacony-boat-launch-pa",
+    "theodore-roosevelt-recreation-access-area-pa",
+    "tinicum-park-pa",
+    "upper-black-eddy-pa",
+    "virginia-forrest-recreation-area-pa",
+    "welcome-park-pa",
+    "wy-hit-tuk-park-access-pa",
+    "yardley-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "donegal-lake-pa",
+   "name": "Donegal Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Donegal Township"
+   ],
+   "bbox": [
+    -79.37196,
+    40.13185,
+    -79.3666,
+    40.14624
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.34,
+   "launches": [
+    "lake-donegal-1-pa",
+    "lake-donegal-2-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "driftwood-branch-sinnemahoning-creek-pa",
+   "name": "Driftwood Branch Sinnemahoning Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Driftwood Borough",
+    "Emporium Boro",
+    "Lumber Township",
+    "Shippen Township"
+   ],
+   "bbox": [
+    -78.46446,
+    41.33642,
+    -78.1254,
+    41.5959
+   ],
+   "wikidata": "Q18149549",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "emporium-pa",
+    "front-street-park-shippen-township-pa",
+    "sterling-run-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "duck-harbor-pond-pa",
+   "name": "Duck Harbor Pond",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Hilltown",
+    "Lebanon/Damascus"
+   ],
+   "bbox": [
+    -75.22174,
+    41.74796,
+    -75.19499,
+    41.7588
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.842,
+   "launches": [
+    "duck-harbor-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "duman-lake-pa",
+   "name": "Duman Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Blacklick Township"
+   ],
+   "bbox": [
+    -78.83755,
+    40.56925,
+    -78.83125,
+    40.57224
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.079,
+   "launches": [
+    "duman-dam-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dunlap-creek-lake-pa",
+   "name": "Dunlap Creek Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Menallen Township",
+    "Shamrock"
+   ],
+   "bbox": [
+    -79.80495,
+    39.92143,
+    -79.79533,
+    39.9274
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "dunlap-creek-lake-boat-launch-pa",
+    "dunlap-lake-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dutch-fork-lake-pa",
+   "name": "Dutch Fork Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Donegal"
+   ],
+   "bbox": [
+    -80.47424,
+    40.13013,
+    -80.46521,
+    40.14591
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.292,
+   "launches": [
+    "dutch-fork-lake-east-side-pa",
+    "dutch-fork-lake-west-side-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024 to 2026.",
+     "date": "2026-08-10",
+     "years": [
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "east-bangor-lake-pa",
+   "name": "East Bangor Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "EAST BANGOR"
+   ],
+   "bbox": [
+    -75.18711,
+    40.88221,
+    -75.15642,
+    40.89309
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.593,
+   "launches": [
+    "east-bangor-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-branch-brandywine-creek-pa",
+   "name": "East Branch Brandywine Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "East Bradford"
+   ],
+   "bbox": [
+    -75.88628,
+    39.92252,
+    -75.63623,
+    40.11805
+   ],
+   "wikidata": "Q5327903",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "stroud-preserve-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-branch-clarion-river-pa",
+   "name": "East Branch Clarion River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Jones",
+    "Jones Township"
+   ],
+   "bbox": [
+    -78.67905,
+    41.49133,
+    -78.50981,
+    41.68034
+   ],
+   "wikidata": "Q49899849",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bendigo-state-park-canoe-launch-pa",
+    "kilgus-road-canoe-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-branch-lake-pa",
+   "name": "East Branch Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Jones Township"
+   ],
+   "bbox": [
+    -78.59598,
+    41.55826,
+    -78.53073,
+    41.6252
+   ],
+   "wikidata": "Q5327905",
+   "charted": false,
+   "area_km2": 4.764,
+   "launches": [
+    "east-branch-boat-launch-pa",
+    "instanter-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "edinboro-lake-pa",
+   "name": "Edinboro Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Edinboro Boro"
+   ],
+   "bbox": [
+    -80.14461,
+    41.87324,
+    -80.12825,
+    41.89565
+   ],
+   "wikidata": "Q19461536",
+   "charted": false,
+   "area_km2": 1.172,
+   "launches": [
+    "lakeside-boat-ramp-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023 and 2025.",
+     "date": "2025-09-01",
+     "years": [
+      "2023",
+      "2025"
+     ]
+    },
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2009) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2009-06-22"
+    }
+   ]
+  },
+  {
+   "slug": "elk-creek-pa",
+   "name": "Elk Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Lake City",
+    "Sterrettania"
+   ],
+   "bbox": [
+    -80.37482,
+    41.96944,
+    -80.04744,
+    42.02402
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sterrettania-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fairmount-pool-pa",
+   "name": "Fairmount Pool",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Philadelphia"
+   ],
+   "bbox": [
+    -75.22015,
+    39.96681,
+    -75.18459,
+    40.02242
+   ],
+   "wikidata": "Q141594155",
+   "charted": true,
+   "area_km2": 1.274,
+   "launches": [
+    "mlk-dr-launch-black-rd-pa",
+    "st-josephs-boathouse-launch-south-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fairview-lake-pa",
+   "name": "Fairview Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Palmyra"
+   ],
+   "bbox": [
+    -75.19422,
+    41.3929,
+    -75.1793,
+    41.40354
+   ],
+   "wikidata": "Q5430829",
+   "charted": false,
+   "area_km2": 0.779,
+   "launches": [
+    "fairview-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "faylor-lake-pa",
+   "name": "Faylor Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Spring"
+   ],
+   "bbox": [
+    -77.22804,
+    40.75436,
+    -77.21309,
+    40.76536
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.498,
+   "launches": [
+    "faylor-lake-boat-launch-pa",
+    "faylor-lake-boat-launch-spring-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fishing-creek-marysville-pa",
+   "name": "Fishing Creek",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Marysville"
+   ],
+   "bbox": [
+    -77.04556,
+    40.32142,
+    -76.9217,
+    40.33916
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fishing-creek-boat-launch-near-marysville-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fishing-creek-pa",
+   "name": "Fishing Creek",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Benton Township"
+   ],
+   "bbox": [
+    -76.47772,
+    40.97596,
+    -76.3548,
+    41.27566
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fishing-creek-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fords-lake-pa",
+   "name": "Fords Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Newton Township"
+   ],
+   "bbox": [
+    -75.76786,
+    41.49002,
+    -75.75623,
+    41.49768
+   ],
+   "wikidata": "Q5468104",
+   "charted": false,
+   "area_km2": 0.255,
+   "launches": [
+    "fords-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "foster-joseph-sayers-lake-pa",
+   "name": "Foster Joseph Sayers Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Howard Township",
+    "Liberty Township",
+    "Mount Eagle"
+   ],
+   "bbox": [
+    -77.70471,
+    40.98706,
+    -77.60712,
+    41.04968
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.44,
+   "launches": [
+    "bald-eagle-launch-pa",
+    "hunter-run-east-pa",
+    "lower-green-s-run-pa",
+    "marina-launch-pa",
+    "upper-green-s-run-pa",
+    "winter-summer-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 and 2023.",
+     "date": "2023-09-01",
+     "years": [
+      "2022",
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "frances-slocum-lake-pa",
+   "name": "Frances Slocum Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Kingston Township"
+   ],
+   "bbox": [
+    -75.89885,
+    41.32948,
+    -75.88357,
+    41.34322
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.648,
+   "launches": [
+    "campground-boat-launch-pa",
+    "carverston-road-francis-slocum-state-park-pa",
+    "day-use-francis-slocum-state-park-pa",
+    "francis-slocum-state-park-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-08-12",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "francis-e-walter-reservoir-pa",
+   "name": "Francis E Walter Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Bear Creek",
+    "Penn Lake Park"
+   ],
+   "bbox": [
+    -75.7228,
+    41.1116,
+    -75.64916,
+    41.14631
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.567,
+   "launches": [
+    "francis-e-walter-reservoir-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "french-creek-pa",
+   "name": "French Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Cambridge Springs",
+    "Cambridge Springs Boro",
+    "Cambridge Township",
+    "Cochranton",
+    "Kerrtown",
+    "Le Boeuf",
+    "Meadville",
+    "Union Township",
+    "Utica",
+    "Westmead",
+    "Woodcock"
+   ],
+   "bbox": [
+    -80.17959,
+    41.39156,
+    -79.56269,
+    42.15853
+   ],
+   "wikidata": "Q3087451",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bicentennial-park-pa",
+    "cambridge-landing-pa",
+    "cambridge-springs-pa",
+    "cochranton-access-pa",
+    "conneautee-creek-pa",
+    "meadville-pa",
+    "saegertown-pa",
+    "shaws-landing-pa",
+    "utica-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "george-b-stevenson-reservoir-pa",
+   "name": "George B. Stevenson Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Grove Township"
+   ],
+   "bbox": [
+    -78.03233,
+    41.40853,
+    -78.01782,
+    41.42888
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.567,
+   "launches": [
+    "sinnemahoning-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "giving-pond-pa",
+   "name": "Giving Pond",
+   "kind": "pond",
+   "state": "PA",
+   "towns": [
+    "Jugtown"
+   ],
+   "bbox": [
+    -75.07385,
+    40.5298,
+    -75.06835,
+    40.53784
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.211,
+   "launches": [
+    "giving-pond-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-08-11",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "glade-dam-lake-pa",
+   "name": "Glade Dam Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Cherry Township"
+   ],
+   "bbox": [
+    -79.8966,
+    41.047,
+    -79.87854,
+    41.0626
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.735,
+   "launches": [
+    "christie-bridge-pa",
+    "kurtz-ditch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "glade-run-lake-pa",
+   "name": "Glade Run Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Middlesex"
+   ],
+   "bbox": [
+    -79.90481,
+    40.71006,
+    -79.89295,
+    40.71666
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.19,
+   "launches": [
+    "glade-run-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "glendale-lake-pa",
+   "name": "Glendale Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Coalport",
+    "Dean",
+    "White Township"
+   ],
+   "bbox": [
+    -78.58237,
+    40.64491,
+    -78.52176,
+    40.6976
+   ],
+   "wikidata": "Q49700867",
+   "charted": false,
+   "area_km2": 6.51,
+   "launches": [
+    "beaver-dam-pa",
+    "beaver-valley-pa",
+    "crooked-run-pa",
+    "main-marina-pa",
+    "mckee-s-run-pa",
+    "motorboat-mooring-pa",
+    "sailboat-launch-pa",
+    "turtle-cove-pa",
+    "unnamed-white-township-pa",
+    "weyerough-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gouldsboro-lake-pa",
+   "name": "Gouldsboro Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Coolbaugh Township"
+   ],
+   "bbox": [
+    -75.45945,
+    41.21917,
+    -75.45033,
+    41.23977
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.052,
+   "launches": [
+    "gouldsboro-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gravel-pit-pond-pa",
+   "name": "Gravel Pit Pond",
+   "kind": "pond",
+   "state": "PA",
+   "towns": [
+    "Fairview Township"
+   ],
+   "bbox": [
+    -80.28226,
+    42.02964,
+    -80.27829,
+    42.03151
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.041,
+   "launches": [
+    "fairview-gravel-pit-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "green-lane-reservoir-pa",
+   "name": "Green Lane Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Pennsburg"
+   ],
+   "bbox": [
+    -75.51995,
+    40.34097,
+    -75.47829,
+    40.38822
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.032,
+   "launches": [
+    "green-lane-reservoir-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hamilton-lake-pa",
+   "name": "Hamilton Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Charleston Township"
+   ],
+   "bbox": [
+    -77.26582,
+    41.73351,
+    -77.25802,
+    41.73945
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.154,
+   "launches": [
+    "hamilton-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hamlin-lake-pa",
+   "name": "Hamlin Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Smethport Boro"
+   ],
+   "bbox": [
+    -78.45077,
+    41.80514,
+    -78.44206,
+    41.80847
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.082,
+   "launches": [
+    "hamlin-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hammond-lake-pa",
+   "name": "Hammond Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Hammond",
+    "Middlebury Township",
+    "Tioga",
+    "Tioga Township"
+   ],
+   "bbox": [
+    -77.19427,
+    41.88092,
+    -77.14123,
+    41.90183
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.759,
+   "launches": [
+    "campers-launch-pa",
+    "ives-run-pa",
+    "ives-run-old-day-use-east-boat-ramp-pa",
+    "hammond-lake-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024 to 2026.",
+     "date": "2026-09-27",
+     "years": [
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "harbor-acres-lake-pa",
+   "name": "Harbor Acres Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Washington Township"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "harbor-acres-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harris-pond-pa",
+   "name": "Harris Pond",
+   "kind": "pond",
+   "state": "PA",
+   "towns": [
+    "Ross Township"
+   ],
+   "bbox": [
+    -76.13451,
+    41.29244,
+    -76.12892,
+    41.29776
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.154,
+   "launches": [
+    "harris-pond-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harveys-lake-pa",
+   "name": "Harveys Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Harveys Lake",
+    "Harveys Lake Boro"
+   ],
+   "bbox": [
+    -76.05801,
+    41.34914,
+    -76.02562,
+    41.38098
+   ],
+   "wikidata": "Q19904178",
+   "charted": false,
+   "area_km2": 2.575,
+   "launches": [
+    "harveys-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hidden-lake-pa",
+   "name": "Hidden Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Marshalls Creek",
+    "Middle Smithfield Township"
+   ],
+   "bbox": [
+    -75.05466,
+    41.04935,
+    -75.04349,
+    41.05542
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.14,
+   "launches": [
+    "hidden-lake-carry-in-access-pa",
+    "hidden-lake-hand-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "high-point-lake-pa",
+   "name": "High Point Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Elk Lick Township"
+   ],
+   "bbox": [
+    -79.2374,
+    39.77362,
+    -79.19951,
+    39.78395
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.315,
+   "launches": [
+    "north-access-closed-pa",
+    "high-point-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hills-creek-lake-pa",
+   "name": "Hills Creek Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Charleston Township",
+    "Mansfield"
+   ],
+   "bbox": [
+    -77.20485,
+    41.80252,
+    -77.19143,
+    41.81593
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.509,
+   "launches": [
+    "hills-creek-lake-boat-launch-pa",
+    "hills-creek-lake-boat-launch-charleston-township-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 to 2024 and 2026.",
+     "date": "2026-08-12",
+     "years": [
+      "2022",
+      "2023",
+      "2024",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "hinckston-run-reservoir-pa",
+   "name": "Hinckston Run Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "East Taylor",
+    "Johnstown"
+   ],
+   "bbox": [
+    -78.88913,
+    40.37346,
+    -78.87924,
+    40.38724
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.407,
+   "launches": [
+    "hinckston-run-reservoir-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hopewell-lake-pa",
+   "name": "Hopewell Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Elverson",
+    "Union Township"
+   ],
+   "bbox": [
+    -75.78958,
+    40.19822,
+    -75.77789,
+    40.20561
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.276,
+   "launches": [
+    "hopewell-lake-french-creek-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "howard-eaton-reservoir-pa",
+   "name": "Howard Eaton Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Northeast Township"
+   ],
+   "bbox": [
+    -79.78527,
+    42.14594,
+    -79.76664,
+    42.15902
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.014,
+   "launches": [
+    "eaton-reservoir-pa",
+    "eaton-reservoir-northeast-township-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hunter-run-cove-pa",
+   "name": "Hunter Run Cove",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Liberty Township"
+   ],
+   "bbox": [
+    -77.63993,
+    41.03837,
+    -77.62045,
+    41.05214
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.67,
+   "launches": [
+    "hunter-run-west-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hunters-lake-pa",
+   "name": "Hunters Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Shrewsburg Township"
+   ],
+   "bbox": [
+    -76.62655,
+    41.37674,
+    -76.61459,
+    41.38991
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.443,
+   "launches": [
+    "hunters-lake-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025.",
+     "date": "2025-08-01",
+     "years": [
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "janesville-lake-pa",
+   "name": "Janesville Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Smithmills"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "janesville-carry-in-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "juniata-river-pa",
+   "name": "Juniata River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Brady Township",
+    "Bratton",
+    "Delaware Township",
+    "Fermanaugh Township",
+    "Granville",
+    "Granville Township",
+    "Greenwood Township",
+    "Greenwood Twp.",
+    "Howe",
+    "HoweTownship",
+    "Huntingdon",
+    "Lewistown Boro"
+   ],
+   "bbox": [
+    -78.06804,
+    40.36034,
+    -77.0119,
+    40.61023
+   ],
+   "wikidata": "Q476488",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "amity-hall-pa",
+    "dcnr-forestry-shawmut-access-pa",
+    "granville-pa",
+    "greenwood-access-area-pa",
+    "howe-twp-park-pa",
+    "juniata-river-boat-launch-pa",
+    "lewistown-narrows-pa",
+    "lewistown-victory-park-pa",
+    "mapleton-riverside-park-access-pa",
+    "mcveytown-pa",
+    "mcveytown-boat-launch-pa",
+    "mifflin-fire-dept-access-pa",
+    "mifflintown-pa",
+    "mifflintown-boro-access-pa",
+    "millerstown-pa",
+    "mount-union-riverside-park-boat-launch-pa",
+    "muskrat-springs-pa",
+    "newton-hamilton-pa",
+    "portstown-park-pa",
+    "smithfield-riverside-park-pa",
+    "thompsontown-access-pa",
+    "walker-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kahle-lake-pa",
+   "name": "Kahle Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Richland Township",
+    "Salem Township"
+   ],
+   "bbox": [
+    -79.66264,
+    41.23118,
+    -79.63684,
+    41.23896
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.86,
+   "launches": [
+    "kahle-lake-clarion-access-pa",
+    "kahle-lake-venango-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kettle-creek-lake-pa",
+   "name": "Kettle Creek Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Leidy Township"
+   ],
+   "bbox": [
+    -77.93487,
+    41.35974,
+    -77.92274,
+    41.38638
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.656,
+   "launches": [
+    "kettle-creek-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "keystone-lake-pa",
+   "name": "Keystone Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Derry Township",
+    "Latrobe"
+   ],
+   "bbox": [
+    -79.39095,
+    40.37183,
+    -79.37442,
+    40.37546
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.226,
+   "launches": [
+    "keystone-lake-boat-launch-pa",
+    "keystone-state-park-lake-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kiskiminetas-river-pa",
+   "name": "Kiskiminetas River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Allegheny",
+    "Avonmore",
+    "East Vandergrift",
+    "Freeport",
+    "Gilpin",
+    "Hyde Park",
+    "Kiskiminetas Junction",
+    "Kiskiminetas Township",
+    "Vandergrift Boro"
+   ],
+   "bbox": [
+    -79.66965,
+    40.48584,
+    -79.44895,
+    40.67921
+   ],
+   "wikidata": "Q6416767",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "avonmore-canoe-launch-pa",
+    "east-vandergrift-pa",
+    "hyde-park-pa",
+    "rivers-edge-pa",
+    "roaring-run-watershed-assoc-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kyle-lake-pa",
+   "name": "Kyle Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Washington Township"
+   ],
+   "bbox": [
+    -78.85578,
+    41.15011,
+    -78.8376,
+    41.15926
+   ],
+   "wikidata": "Q49701349",
+   "charted": false,
+   "area_km2": 0.545,
+   "launches": [
+    "kyle-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lackawanna-lake-pa",
+   "name": "Lackawanna Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Benton Township",
+    "North Abington Township"
+   ],
+   "bbox": [
+    -75.71904,
+    41.55344,
+    -75.6968,
+    41.58072
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.84,
+   "launches": [
+    "bullhead-bay-pa",
+    "south-shore-north-abington-township-pa",
+    "warming-hut-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 and 2023.",
+     "date": "2023-09-01",
+     "years": [
+      "2022",
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lackawanna-river-pa",
+   "name": "Lackawanna River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Dickson City",
+    "Dunmore",
+    "Mayfeild Township"
+   ],
+   "bbox": [
+    -75.79436,
+    41.34036,
+    -75.45673,
+    41.69761
+   ],
+   "wikidata": "Q6468697",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bernard-seminski-memorial-park-parking-pa",
+    "dickson-city-riverfront-park-pa",
+    "mayfield-lackawanna-river-heritage-trail-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lackawaxen-river-pa",
+   "name": "Lackawaxen River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Hawley",
+    "Honesdale",
+    "Texas",
+    "Texas Township"
+   ],
+   "bbox": [
+    -75.37884,
+    41.45763,
+    -74.98547,
+    41.67781
+   ],
+   "wikidata": "Q6468715",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "indian-orchard-river-access-pa",
+    "industrial-point-river-access-pa",
+    "white-mills-river-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-aldred-pa",
+   "name": "Lake Aldred",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Holtwood",
+    "Safe Harbor"
+   ],
+   "bbox": [
+    -76.3968,
+    39.82558,
+    -76.33037,
+    39.92514
+   ],
+   "wikidata": "Q123529367",
+   "charted": false,
+   "area_km2": 10.439,
+   "launches": [
+    "holtwood-dam-portage-takeout-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-arthur-pa",
+   "name": "Lake Arthur",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Brady",
+    "Brady Township",
+    "Franklin",
+    "Franklin Township",
+    "Muddy Creek",
+    "Muddy Creek Township",
+    "Portersville",
+    "Worth",
+    "Worth Township"
+   ],
+   "bbox": [
+    -80.13053,
+    40.91782,
+    -80.00968,
+    40.97399
+   ],
+   "wikidata": "Q35093255",
+   "charted": false,
+   "area_km2": 11.656,
+   "launches": [
+    "528-pa",
+    "bear-run-pa",
+    "big-run-pa",
+    "burton-road-pa",
+    "church-pa",
+    "crescent-bay-boat-rental-pa",
+    "davis-hollow-boat-launch-pa",
+    "davis-hollow-marina-pa",
+    "mcdanels-pa",
+    "muddy-creek-pa",
+    "nealy-s-point-pa",
+    "old-route-422-pa",
+    "pleasant-valley-pa",
+    "portersville-bay-pa",
+    "shannon-run-pa",
+    "upper-528-pa",
+    "watt-s-bay-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-augusta-pa",
+   "name": "Lake Augusta",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Northumberland Boro",
+    "Sunbury",
+    "Sunbury Boro",
+    "Upper Augusta"
+   ],
+   "bbox": [
+    -76.8123,
+    40.84977,
+    -76.79325,
+    40.8834
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.279,
+   "launches": [
+    "point-of-northumberland-pa",
+    "shikellamy-state-park-pa",
+    "shikellamy-state-park-north-access-pa",
+    "shikellamy-state-park-south-pa",
+    "sunbury-boro-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-chillisquauqe-pa",
+   "name": "Lake Chillisquauqe",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Anthony Township"
+   ],
+   "bbox": [
+    -76.66757,
+    41.10147,
+    -76.65031,
+    41.11442
+   ],
+   "wikidata": "Q17484989",
+   "charted": false,
+   "area_km2": 0.719,
+   "launches": [
+    "montour-preserve-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023, 2024 and 2026.",
+     "date": "2026-09-24",
+     "years": [
+      "2023",
+      "2024",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-clarke-pa",
+   "name": "Lake Clarke",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Columbia",
+    "Lower Windsor Township",
+    "Wrightsville"
+   ],
+   "bbox": [
+    -76.52277,
+    39.91436,
+    -76.38978,
+    40.02919
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 27.023,
+   "launches": [
+    "blue-rock-pa",
+    "lemon-street-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-erie-pa",
+   "name": "Lake Erie",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "City of Erie",
+    "Erie",
+    "Fairview Township",
+    "Girard Township",
+    "Harborcreek",
+    "Harborcreek Township",
+    "Lawrence Park",
+    "Lawrence Park Township",
+    "North East",
+    "North East Township",
+    "Northeast Township",
+    "Springfied Township"
+   ],
+   "bbox": [
+    -83.47871,
+    41.38072,
+    -78.84648,
+    42.90584
+   ],
+   "wikidata": "Q5492",
+   "charted": true,
+   "area_km2": 26067.843,
+   "launches": [
+    "bay-harbor-public-ramp-pa",
+    "chestnut-street-boat-ramp-pa",
+    "east-avenue-boat-ramp-pa",
+    "elk-creek-pa",
+    "lampe-marina-pa",
+    "lawrence-park-boat-ramp-pwc-only-pa",
+    "new-lagoon-pa",
+    "niagra-launch-pa",
+    "northeast-pa",
+    "old-lagoon-pa",
+    "raccoon-park-pa",
+    "sassafras-pier-parking-pa",
+    "shades-beach-pa",
+    "shades-beach-boat-ramp-pa",
+    "vista-launch-pa",
+    "walnut-creek-pa",
+    "west-pier-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-francis-pa",
+   "name": "Lake Francis",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Dennison"
+   ],
+   "bbox": [
+    -75.88481,
+    41.08675,
+    -75.88134,
+    41.08916
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.036,
+   "launches": [
+    "lake-francis-carry-in-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-galena-pa",
+   "name": "Lake Galena",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Doylestown",
+    "New Britian Township"
+   ],
+   "bbox": [
+    -75.20496,
+    40.31541,
+    -75.16765,
+    40.33953
+   ],
+   "wikidata": "Q7348152",
+   "charted": false,
+   "area_km2": 1.475,
+   "launches": [
+    "peace-valley-park-pa",
+    "peace-valley-park-24-hour-pa",
+    "peace-valley-park-sailor-s-point-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 to 2025.",
+     "date": "2025-10-01",
+     "years": [
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-gordon-pa",
+   "name": "Lake Gordon",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Cumberland Valley"
+   ],
+   "bbox": [
+    -78.69196,
+    39.74754,
+    -78.66413,
+    39.76397
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.517,
+   "launches": [
+    "gordon-lake-boat-access-pa",
+    "gordon-lake-boat-access-cumberland-valley-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-greeley-pa",
+   "name": "Lake Greeley",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Lackawaxen"
+   ],
+   "bbox": [
+    -75.03295,
+    41.40706,
+    -75.01726,
+    41.41611
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.264,
+   "launches": [
+    "greeley-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-jean-pa",
+   "name": "Lake Jean",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Colley Township"
+   ],
+   "bbox": [
+    -76.30332,
+    41.33495,
+    -76.27642,
+    41.34858
+   ],
+   "wikidata": "Q21197022",
+   "charted": false,
+   "area_km2": 1.011,
+   "launches": [
+    "ricketts-glen-state-park-trailhead-parking-pa",
+    "ricketts-glen-state-park-visitor-center-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-keystone-pa",
+   "name": "Lake Keystone",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Plumcreek",
+    "Plumcreek Township"
+   ],
+   "bbox": [
+    -79.30979,
+    40.72736,
+    -79.24679,
+    40.7686
+   ],
+   "wikidata": "Q6398476",
+   "charted": false,
+   "area_km2": 3.506,
+   "launches": [
+    "atwood-pa",
+    "numine-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-koon-pa",
+   "name": "Lake Koon",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Cumberland Valley"
+   ],
+   "bbox": [
+    -78.66512,
+    39.76308,
+    -78.64986,
+    39.79151
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.954,
+   "launches": [
+    "koon-lake-boat-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-loch-lomond-pa",
+   "name": "Lake Loch Lomond",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Delaware Township"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "loch-lomond-carry-in-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-luxembourg-pa",
+   "name": "Lake Luxembourg",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Middletown Township"
+   ],
+   "bbox": [
+    -74.92167,
+    40.19613,
+    -74.90098,
+    40.21632
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.673,
+   "launches": [
+    "core-creek-park-pa",
+    "core-creek-park-24-hour-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 to 2026.",
+     "date": "2026-07-28",
+     "years": [
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-marburg-pa",
+   "name": "Lake Marburg",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Heidelberg",
+    "Heidleberg",
+    "Penn",
+    "West Manheim"
+   ],
+   "bbox": [
+    -76.9386,
+    39.77086,
+    -76.87974,
+    39.81124
+   ],
+   "wikidata": "Q49701509",
+   "charted": false,
+   "area_km2": 4.628,
+   "launches": [
+    "codorus-state-park-black-rock-bridge-pa",
+    "codorus-state-park-hidden-cove-pa",
+    "codorus-state-park-main-launch-pa",
+    "codorus-state-park-mooring-cove-pa",
+    "codorus-state-park-smith-station-road-pa",
+    "codorus-state-park-wonder-cove-pa",
+    "marina-area-codorus-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-minisink-pa",
+   "name": "Lake Minisink",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Porter Township"
+   ],
+   "bbox": [
+    -75.05609,
+    41.21411,
+    -75.0501,
+    41.2178
+   ],
+   "wikidata": "Q49303804",
+   "charted": false,
+   "area_km2": 0.143,
+   "launches": [
+    "lake-minisink-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-nessmuk-pa",
+   "name": "Lake Nessmuk",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Delmar Township"
+   ],
+   "bbox": [
+    -77.2947,
+    41.72632,
+    -77.28852,
+    41.73289
+   ],
+   "wikidata": "Q49701531",
+   "charted": false,
+   "area_km2": 0.231,
+   "launches": [
+    "nessmuk-lake-lake-under-drawdown-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-nockamixon-pa",
+   "name": "Lake Nockamixon",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Bedminster Township",
+    "Haycock Township",
+    "Nockamixon Township",
+    "Weisel"
+   ],
+   "bbox": [
+    -75.27171,
+    40.41427,
+    -75.1799,
+    40.49993
+   ],
+   "wikidata": "Q7346998",
+   "charted": false,
+   "area_km2": 5.847,
+   "launches": [
+    "haycock-pa",
+    "main-marina-haycock-township-pa",
+    "three-mile-run-pa",
+    "tohickon-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-perez-pa",
+   "name": "Lake Perez",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Barree Township"
+   ],
+   "bbox": [
+    -77.91919,
+    40.65853,
+    -77.90816,
+    40.66732
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.287,
+   "launches": [
+    "stone-valley-lake-pa",
+    "stone-valley-lake-barree-township-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-pleasant-pa",
+   "name": "Lake Pleasant",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Venango",
+    "Venango Township"
+   ],
+   "bbox": [
+    -79.90138,
+    42.00068,
+    -79.89449,
+    42.0075
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.269,
+   "launches": [
+    "lake-pleasant-carry-in-access-pa",
+    "lake-pleasant-parking-and-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-redman-pa",
+   "name": "Lake Redman",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Jacobus",
+    "Jacobus Boro"
+   ],
+   "bbox": [
+    -76.71424,
+    39.8758,
+    -76.68391,
+    39.9001
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.974,
+   "launches": [
+    "lake-redman-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-rowena-pa",
+   "name": "Lake Rowena",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Ebensburg",
+    "Ebensburg Boro"
+   ],
+   "bbox": [
+    -78.71736,
+    40.47928,
+    -78.71262,
+    40.48232
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.054,
+   "launches": [
+    "lake-rowena-boat-launch-pa",
+    "lake-rowena-boat-launch-ebensburg-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-somerset-pa",
+   "name": "Lake Somerset",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Somerset"
+   ],
+   "bbox": [
+    -79.06937,
+    40.01934,
+    -79.05631,
+    40.04086
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.935,
+   "launches": [
+    "lake-somerset-boat-launch-pa",
+    "lake-somerset-boat-launch-pa-2"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025 and 2026.",
+     "date": "2026-08-04",
+     "years": [
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-towhee-pa",
+   "name": "Lake Towhee",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Richland Township"
+   ],
+   "bbox": [
+    -75.26818,
+    40.47479,
+    -75.26306,
+    40.48337
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.201,
+   "launches": [
+    "lake-towhee-carry-in-access-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-07-15",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-wallenpaupack-pa",
+   "name": "Lake Wallenpaupack",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Greene",
+    "Ledgedale",
+    "Palmyra",
+    "Paupack",
+    "Wilsonville"
+   ],
+   "bbox": [
+    -75.31971,
+    41.36097,
+    -75.17607,
+    41.46272
+   ],
+   "wikidata": "Q6478396",
+   "charted": false,
+   "area_km2": 22.109,
+   "launches": [
+    "caffrey-rec-area-capri-pa",
+    "ironwood-point-pa",
+    "ledged-dale-pa",
+    "wallenpaupack-lake-access-pa",
+    "wilsonville-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024 to 2026.",
+     "date": "2026-07-06",
+     "years": [
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-wilhelm-pa",
+   "name": "Lake Wilhelm",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Deer Creek Township",
+    "M.K. Goddard State Park",
+    "Sheakleyville"
+   ],
+   "bbox": [
+    -80.19249,
+    41.3684,
+    -80.08247,
+    41.4598
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.689,
+   "launches": [
+    "lake-wilhelm-old-launch-1-pa",
+    "launch-1-pa",
+    "launch-2-pa",
+    "launch-3-pa",
+    "launch-4-pa",
+    "long-boom-gamelands-270-pa",
+    "marina-pa",
+    "marina-point-pa",
+    "sheakleyville-road-gamelands-270-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023 to 2025.",
+     "date": "2025-10-02",
+     "years": [
+      "2023",
+      "2024",
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-williams-pa",
+   "name": "Lake Williams",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Jacobus Boro"
+   ],
+   "bbox": [
+    -76.72992,
+    39.8867,
+    -76.71376,
+    39.90021
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.694,
+   "launches": [
+    "lake-williams-lake-under-drawdown-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-winola-pa",
+   "name": "Lake Winola",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Overville Township"
+   ],
+   "bbox": [
+    -75.85747,
+    41.50876,
+    -75.8403,
+    41.51794
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.743,
+   "launches": [
+    "lake-winola-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025 and 2026.",
+     "date": "2026-09-22",
+     "years": [
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "laurel-hill-lake-pa",
+   "name": "Laurel Hill Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Trent"
+   ],
+   "bbox": [
+    -79.23897,
+    39.99376,
+    -79.23119,
+    40.00794
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.222,
+   "launches": [
+    "laurel-hill-lake-boat-launch-pa",
+    "laurel-hill-lake-boat-launch-trent-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "laurel-lake-pa",
+   "name": "Laurel Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Cooke Township"
+   ],
+   "bbox": [
+    -77.27252,
+    40.03732,
+    -77.26662,
+    40.04127
+   ],
+   "wikidata": "Q6499892",
+   "charted": false,
+   "area_km2": 0.091,
+   "launches": [
+    "laurel-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "leaser-lake-pa",
+   "name": "Leaser Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Lynn Township"
+   ],
+   "bbox": [
+    -75.8407,
+    40.66764,
+    -75.82869,
+    40.68083
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.443,
+   "launches": [
+    "leaser-lake-north-ramp-pa",
+    "leaser-lake-south-ramp-pa",
+    "west-shore-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "leboeuf-lake-pa",
+   "name": "Leboeuf Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Waterford Boro"
+   ],
+   "bbox": [
+    -79.99217,
+    41.93047,
+    -79.98224,
+    41.93639
+   ],
+   "wikidata": "Q21197028",
+   "charted": false,
+   "area_km2": 0.298,
+   "launches": [
+    "lake-leboeuf-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lehigh-river-pa",
+   "name": "Lehigh River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Allentown",
+    "Bethlehem City",
+    "Bethlehem Township",
+    "Bridgeport",
+    "Cementon",
+    "City of Easton",
+    "East Penn",
+    "East Penn Township",
+    "Easton",
+    "Jim Thorpe Boro",
+    "Lehigh Township",
+    "Lehighton Boro"
+   ],
+   "bbox": [
+    -75.77198,
+    40.59783,
+    -75.20359,
+    41.28628
+   ],
+   "wikidata": "Q1298091",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bowmanstown-pa",
+    "canal-park-pa",
+    "canal-street-park-pa",
+    "catasauqua-pa",
+    "dunbar-s-beach-pa",
+    "east-penn-boat-launch-pa",
+    "easton-launch-pa",
+    "glen-onoko-boat-ramp-pa",
+    "hugh-moore-park-pa",
+    "jim-thorpe-pa",
+    "kimmett-s-lock-pa",
+    "laurys-station-pa",
+    "lehigh-gap-access-pa",
+    "lehigh-river-easton-access-pa",
+    "north-catasauqua-pa",
+    "parryville-pohopoco-mouth-pa",
+    "rockport-pa",
+    "route-33-access-pa",
+    "sand-island-access-pa",
+    "treichlers-bridge-pa",
+    "walnutport-pa",
+    "white-haven-pa",
+    "wilson-avenue-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "letterkenny-reservoir-pa",
+   "name": "Letterkenny Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Lurgan Township"
+   ],
+   "bbox": [
+    -77.69971,
+    40.1073,
+    -77.68819,
+    40.1158
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.207,
+   "launches": [
+    "letterkenny-reservoir-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "levittown-lake-pa",
+   "name": "Levittown Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Tullytown Boro"
+   ],
+   "bbox": [
+    -74.82094,
+    40.14706,
+    -74.81614,
+    40.15053
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.096,
+   "launches": [
+    "levittown-lake-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024.",
+     "date": "2024-10-01",
+     "years": [
+      "2024"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lily-lake-pa",
+   "name": "Lily Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Slocum Conygham"
+   ],
+   "bbox": [
+    -76.09138,
+    41.13803,
+    -76.06956,
+    41.14562
+   ],
+   "wikidata": "Q21197048",
+   "charted": false,
+   "area_km2": 0.645,
+   "launches": [
+    "lily-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lions-lake-pa",
+   "name": "Lions Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "North Lebanon"
+   ],
+   "bbox": [
+    -76.45562,
+    40.35709,
+    -76.4498,
+    40.35935
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.042,
+   "launches": [
+    "lions-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-beaver-creek-pa",
+   "name": "Little Beaver Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Ohioville Borough"
+   ],
+   "bbox": [
+    -80.57342,
+    40.6409,
+    -80.51199,
+    40.72082
+   ],
+   "wikidata": "Q1865574",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "ohioville-borough-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-buffalo-lake-pa",
+   "name": "Little Buffalo Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Juniata Township"
+   ],
+   "bbox": [
+    -77.19276,
+    40.45064,
+    -77.17254,
+    40.45681
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.338,
+   "launches": [
+    "access-1-pa",
+    "access-2-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-juniata-river-pa",
+   "name": "Little Juniata River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Porter",
+    "Porter Township",
+    "Tyrone"
+   ],
+   "bbox": [
+    -78.38171,
+    40.53031,
+    -78.06753,
+    40.66969
+   ],
+   "wikidata": "Q6650566",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "little-juniata-r-natural-area-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-mud-pond-pa",
+   "name": "Little Mud Pond",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Porter Township"
+   ],
+   "bbox": [
+    -75.04115,
+    41.39204,
+    -75.0396,
+    41.3931
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.006,
+   "launches": [
+    "little-mud-pond-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-pine-lake-pa",
+   "name": "Little Pine Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Waterville"
+   ],
+   "bbox": [
+    -77.35747,
+    41.35589,
+    -77.35237,
+    41.3677
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.247,
+   "launches": [
+    "little-pine-creek-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-schuylkill-river-pa",
+   "name": "Little Schuylkill River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "New Ringgoldl",
+    "Tamaqua",
+    "Walker"
+   ],
+   "bbox": [
+    -76.03447,
+    40.57862,
+    -75.94535,
+    40.86537
+   ],
+   "wikidata": "Q6651871",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tamaqua-unimproved-pa",
+    "tamaqua-dam-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-sugar-creek-pa",
+   "name": "Little Sugar Creek",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Randolf"
+   ],
+   "bbox": [
+    -79.92032,
+    41.61492,
+    -79.91748,
+    41.61953
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "game-land-69-pond-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-toby-creek-pa",
+   "name": "Little Toby Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Brockway",
+    "Brockway Boro"
+   ],
+   "bbox": [
+    -78.8407,
+    41.23769,
+    -78.6585,
+    41.36647
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "little-toby-creek-boat-launch-pa",
+    "little-toby-creek-boat-launch-brockway-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "locust-lake-pa",
+   "name": "Locust Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Ryan Township"
+   ],
+   "bbox": [
+    -76.12789,
+    40.78065,
+    -76.12018,
+    40.78432
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.194,
+   "launches": [
+    "locust-lake-boat-launch-pa",
+    "locust-lake-boat-launch-ryan-township-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-arm-reservoir-pa",
+   "name": "Long Arm Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "West Manheim"
+   ],
+   "bbox": [
+    -77.00079,
+    39.73306,
+    -76.9833,
+    39.75466
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.921,
+   "launches": [
+    "long-arm-dam-lawrence-b-sheppard-reservoir-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "long-pine-run-reservoir-pa",
+   "name": "Long Pine Run Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Franklin Towship"
+   ],
+   "bbox": [
+    -77.4559,
+    39.93531,
+    -77.44368,
+    39.94993
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.6,
+   "launches": [
+    "long-pine-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-08-24",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "long-pond-pa",
+   "name": "Long Pond",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Clinton"
+   ],
+   "bbox": [
+    -75.348,
+    41.65937,
+    -75.33899,
+    41.66996
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.327,
+   "launches": [
+    "lake-alden-long-pond-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-lake-pa",
+   "name": "Lower Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Greene"
+   ],
+   "bbox": [
+    -75.2354,
+    41.31079,
+    -75.21399,
+    41.32034
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.572,
+   "launches": [
+    "bear-wallow-road-observation-station-pa",
+    "beechwood-area-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-woods-pond-pa",
+   "name": "Lower Woods Pond",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Lebanon"
+   ],
+   "bbox": [
+    -75.27599,
+    41.73594,
+    -75.26842,
+    41.74868
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.381,
+   "launches": [
+    "lower-woods-pond-under-drawdown-ramp-closed-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "loyalhanna-creek-pa",
+   "name": "Loyalhanna Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "City of Latrobe",
+    "Derry Township",
+    "Derry township",
+    "Ligonier Township",
+    "Loyalhanna",
+    "NEW ALEXANDRIA",
+    "Salem Township",
+    "Unity Township"
+   ],
+   "bbox": [
+    -79.4701,
+    40.14033,
+    -79.21979,
+    40.48584
+   ],
+   "wikidata": "Q6694452",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "alexandria-launch-pa",
+    "cardinal-park-pa",
+    "christopher-s-road-pa",
+    "inflow-cartop-pa",
+    "kingston-pa",
+    "legion-keener-park-pa",
+    "mannitto-pa",
+    "oasis-bridge-pa",
+    "salem-access-pa",
+    "sanderson-pa",
+    "tailwater-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "loyalhanna-lake-pa",
+   "name": "Loyalhanna Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Loyalhanna Township"
+   ],
+   "bbox": [
+    -79.45851,
+    40.41809,
+    -79.43439,
+    40.4574
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.438,
+   "launches": [
+    "bush-recreational-area-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "loyalsock-creek-pa",
+   "name": "Loyalsock Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Colley Township"
+   ],
+   "bbox": [
+    -76.93998,
+    41.23132,
+    -76.2762,
+    41.49351
+   ],
+   "wikidata": "Q3264432",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pgc-shumans-lake-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lyman-run-lake-pa",
+   "name": "Lyman Run Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "West Branch Township"
+   ],
+   "bbox": [
+    -77.77385,
+    41.72198,
+    -77.76056,
+    41.72509
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.168,
+   "launches": [
+    "lyman-run-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mahoning-creek-lake-pa",
+   "name": "Mahoning Creek Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Wayne Township"
+   ],
+   "bbox": [
+    -79.27778,
+    40.91462,
+    -79.24397,
+    40.93051
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.692,
+   "launches": [
+    "sportsmans-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025.",
+     "date": "2025-09-01",
+     "years": [
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "mahoning-creek-lake-redbank-township-pa",
+   "name": "Mahoning Creek Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Redbank Township"
+   ],
+   "bbox": [
+    -79.24866,
+    40.90657,
+    -79.21864,
+    40.92925
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.514,
+   "launches": [
+    "milton-loop-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "maiden-creek-pa",
+   "name": "Maiden Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Perry Township"
+   ],
+   "bbox": [
+    -75.94941,
+    40.42295,
+    -75.85526,
+    40.62636
+   ],
+   "wikidata": "Q6735365",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "maiden-creek-carry-in-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "marquette-lake-pa",
+   "name": "Marquette Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "East Hanover Township"
+   ],
+   "bbox": [
+    -76.59992,
+    40.43289,
+    -76.59609,
+    40.43604
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.062,
+   "launches": [
+    "marquette-lake-carry-in-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "marsh-creek-reservoir-pa",
+   "name": "Marsh Creek Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Milford Mills",
+    "Upper Uwchlan Township"
+   ],
+   "bbox": [
+    -75.73449,
+    40.05494,
+    -75.70847,
+    40.0889
+   ],
+   "wikidata": "Q49701887",
+   "charted": false,
+   "area_km2": 2.022,
+   "launches": [
+    "lot-a-main-east-side-pa",
+    "west-side-lyndell-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-11-01",
+     "years": [
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "mauch-chunk-lake-pa",
+   "name": "Mauch Chunk Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Jim Thorpe Boro",
+    "Summit Hill Boro"
+   ],
+   "bbox": [
+    -75.83985,
+    40.82437,
+    -75.79449,
+    40.84656
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.399,
+   "launches": [
+    "launch-ramp-a-pa",
+    "launch-ramp-b-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mcwilliams-reservoir-pa",
+   "name": "McWilliams Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Mount Carmel"
+   ],
+   "bbox": [
+    -76.4203,
+    40.82999,
+    -76.3913,
+    40.83619
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.734,
+   "launches": [
+    "mcwilliams-reservoir-carry-in-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "meadow-grounds-lake-pa",
+   "name": "Meadow Grounds Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Todd Township"
+   ],
+   "bbox": [
+    -78.0595,
+    39.9047,
+    -78.04956,
+    39.92712
+   ],
+   "wikidata": "Q15252579",
+   "charted": false,
+   "area_km2": 0.809,
+   "launches": [
+    "meadow-grounds-lake-under-drawdown-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "memorial-lake-pa",
+   "name": "Memorial Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "East Hanover",
+    "East Hanover Township"
+   ],
+   "bbox": [
+    -76.60515,
+    40.41624,
+    -76.59135,
+    40.42243
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.34,
+   "launches": [
+    "church-road-pa",
+    "day-use-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "middle-creek-reservoir-pa",
+   "name": "Middle Creek Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Clay Township"
+   ],
+   "bbox": [
+    -76.24741,
+    40.26636,
+    -76.22088,
+    40.28135
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.453,
+   "launches": [
+    "middle-creek-lake-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025 and 2026.",
+     "date": "2026-09-30",
+     "years": [
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "middletown-reservoir-pa",
+   "name": "Middletown Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Londonderry"
+   ],
+   "bbox": [
+    -76.68898,
+    40.20836,
+    -76.68596,
+    40.21126
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.034,
+   "launches": [
+    "middletown-reservoir-carry-in-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "miller-pond-pa",
+   "name": "Miller Pond",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Mount Pleasant"
+   ],
+   "bbox": [
+    -75.35798,
+    41.7183,
+    -75.35134,
+    41.7271
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.245,
+   "launches": [
+    "miller-pond-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "minsi-lake-pa",
+   "name": "Minsi Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Upper Mt Bethel Township",
+    "Upper Mt. Bethel"
+   ],
+   "bbox": [
+    -75.1781,
+    40.91151,
+    -75.16458,
+    40.91915
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.456,
+   "launches": [
+    "minsi-lake-access-pa",
+    "minsi-lake-boat-launch-pa",
+    "minsi-lake-boat-launch-upper-mt-bethel-township-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "monongahela-river-pa",
+   "name": "Monongahela River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Borough of Masontown",
+    "Braddock Boro",
+    "Brownsville",
+    "Bunola",
+    "California",
+    "Centerville",
+    "Centerville Boro",
+    "Charleroi",
+    "City of Monongahela",
+    "City of Pittsburgh",
+    "Dunkard Township",
+    "East Bethlehem Township"
+   ],
+   "bbox": [
+    -80.01712,
+    39.62285,
+    -79.83638,
+    40.44301
+   ],
+   "wikidata": "Q643780",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "4th-street-pa",
+    "boat-docks-pa",
+    "braddock-public-ramp-pa",
+    "brownsville-riverside-wharf-park-pa",
+    "california-access-pa",
+    "east-fredricktown-pa",
+    "elizabeth-access-pa",
+    "glassport-riverfront-park-pa",
+    "glassworks-pa",
+    "isabella-pa",
+    "magic-city-riverfront-park-boat-launch-pa",
+    "masontown-riverside-recreation-pa",
+    "monessan-access-pa",
+    "monongahela-closed-indefinitely-for-repairs-pa",
+    "monongahela-wharf-pa",
+    "monongehela-aquatorium-pa",
+    "new-geneva-pa",
+    "nine-mile-run-pa",
+    "point-marion-pa",
+    "rice-s-landing-pa",
+    "southside-riverfront-park-pa",
+    "southside-riverfront-park-2-pa",
+    "speers-landing-pa",
+    "sunnyside-gallatin-pa",
+    "west-brownsville-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "moon-lake-pa",
+   "name": "Moon Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Plymouth"
+   ],
+   "bbox": [
+    -76.05079,
+    41.25087,
+    -76.04566,
+    41.25719
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.198,
+   "launches": [
+    "moon-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mountain-mud-pond-pa",
+   "name": "Mountain Mud Pond",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Carbondale",
+    "Greenfield Township"
+   ],
+   "bbox": [
+    -75.53729,
+    41.58917,
+    -75.53011,
+    41.59202
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.131,
+   "launches": [
+    "merli-sarnoski-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023.",
+     "date": "2023-07-01",
+     "years": [
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "muckinipattis-creek-pa",
+   "name": "Muckinipattis Creek",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Norwood Borough"
+   ],
+   "bbox": [
+    -75.31465,
+    39.88086,
+    -75.28452,
+    39.92439
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "historic-morton-boat-launch-closed-in-winter-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mud-lake-pa",
+   "name": "Mud Lake",
+   "kind": "pond",
+   "state": "PA",
+   "towns": [
+    "West Fallowfield Township"
+   ],
+   "bbox": [
+    -80.37009,
+    41.55264,
+    -80.36641,
+    41.55541
+   ],
+   "wikidata": "Q22093439",
+   "charted": false,
+   "area_km2": 0.071,
+   "launches": [
+    "hartstown-swamp-sgl-214-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mud-pond-pa",
+   "name": "Mud Pond",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Lemon Township"
+   ],
+   "bbox": [
+    -75.95093,
+    41.5981,
+    -75.94145,
+    41.60829
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.286,
+   "launches": [
+    "stevens-lake-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "neshaminy-creek-pa",
+   "name": "Neshaminy Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Croydon",
+    "Middletown",
+    "Warwick Township"
+   ],
+   "bbox": [
+    -75.20452,
+    40.07028,
+    -74.89835,
+    40.29241
+   ],
+   "wikidata": "Q16895740",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dark-hollow-park-pa",
+    "periwinkle-park-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "neshannock-creek-pa",
+   "name": "Neshannock Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Mayville",
+    "New Castle",
+    "Painter Hill"
+   ],
+   "bbox": [
+    -80.35441,
+    40.99274,
+    -80.22138,
+    41.22409
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "neshannock-creek-boat-launch-near-mayville-pa",
+    "neshannock-creek-boat-launch-near-new-castle-pa",
+    "neshannock-creek-boat-launch-near-painter-hill-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-branch-of-the-little-conemaugh-river-pa",
+   "name": "North Branch of the Little Conemaugh River",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Munster"
+   ],
+   "bbox": [
+    -78.69071,
+    40.43581,
+    -78.67614,
+    40.47007
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wilmore-north-spinner-road-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-branch-of-the-little-conemaugh-river-summerhill-pa",
+   "name": "North Branch of the Little Conemaugh River",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Summerhill"
+   ],
+   "bbox": [
+    -78.72191,
+    40.3836,
+    -78.688,
+    40.40891
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wilmore-south-law-road-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-branch-susquehanna-river-athens-pa",
+   "name": "North Branch Susquehanna River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Athens"
+   ],
+   "bbox": [
+    -76.51458,
+    41.95098,
+    -76.50954,
+    41.95719
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "susquehanna-st-bridge-s-river-st-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-branch-susquehanna-river-pa",
+   "name": "North Branch Susquehanna River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Hanover",
+    "Plymouth"
+   ],
+   "bbox": [
+    -75.94038,
+    41.23777,
+    -75.93034,
+    41.23893
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hanover-township-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-park-lake-pa",
+   "name": "North Park Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "McCandless",
+    "McCandless Township"
+   ],
+   "bbox": [
+    -80.01043,
+    40.59278,
+    -79.99689,
+    40.60535
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.253,
+   "launches": [
+    "north-park-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "octoraro-lake-pa",
+   "name": "Octoraro Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Colerain Township"
+   ],
+   "bbox": [
+    -76.07152,
+    39.79685,
+    -76.0263,
+    39.82931
+   ],
+   "wikidata": "Q49702212",
+   "charted": false,
+   "area_km2": 2.039,
+   "launches": [
+    "octoraro-carry-in-access-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 to 2026.",
+     "date": "2026-09-21",
+     "years": [
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ohio-river-pa",
+   "name": "Ohio River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Bellevue",
+    "Bridgewater",
+    "Glen Osborne",
+    "Kilbuck Township",
+    "Leetsdale Boro",
+    "Monaca",
+    "Osborne",
+    "Pittsburgh",
+    "Robinson Township",
+    "Rochester Boro",
+    "Sewickley",
+    "Sewickley Boro"
+   ],
+   "bbox": [
+    -80.6667,
+    40.44301,
+    -80.01712,
+    40.69668
+   ],
+   "wikidata": "Q4915",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "b-l-marina-pa",
+    "bridgewater-crossing-pa",
+    "chestnut-street-pa",
+    "chestnut-street-boat-ramp-sewickley-pa",
+    "heinz-field-pa",
+    "kilbuck-access-pa",
+    "leetsdale-pa",
+    "monaca-access-pa",
+    "rochester-pa",
+    "sewickley-pa",
+    "sewickley-point-pa",
+    "westhall-street-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oil-creek-pa",
+   "name": "Oil Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Oil City",
+    "Petroleum Center"
+   ],
+   "bbox": [
+    -79.91281,
+    41.43039,
+    -79.6414,
+    41.84732
+   ],
+   "wikidata": "Q7081320",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "oil-creek-memorial-landing-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "opossum-lake-pa",
+   "name": "Opossum Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Lower Frankford Township",
+    "Plainfield"
+   ],
+   "bbox": [
+    -77.28443,
+    40.22534,
+    -77.27427,
+    40.23793
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.203,
+   "launches": [
+    "opossum-lake-bl-1-pa",
+    "opossum-lake-bl-2-pa",
+    "opossum-lake-bl-3-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 and 2023.",
+     "date": "2023-11-01",
+     "years": [
+      "2022",
+      "2023"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "pa-478-reservoir-pa",
+   "name": "PA-478 Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Windsor Township"
+   ],
+   "bbox": [
+    -75.97042,
+    40.55691,
+    -75.95949,
+    40.56143
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.139,
+   "launches": [
+    "kaercher-creek-pa",
+    "kaercher-creek-lake-fishing-access-1-pa",
+    "kaercher-creek-lake-fishing-access-2-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pa-656-reservoir-pa",
+   "name": "PA-656 Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Bullskin Township",
+    "Hammondville"
+   ],
+   "bbox": [
+    -79.53421,
+    40.11011,
+    -79.52064,
+    40.11705
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.386,
+   "launches": [
+    "jacobs-creek-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "parker-lake-pa",
+   "name": "Parker Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Huston Township"
+   ],
+   "bbox": [
+    -78.51191,
+    41.19339,
+    -78.50679,
+    41.19813
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.077,
+   "launches": [
+    "parker-dam-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pecks-pond-pa",
+   "name": "Pecks Pond",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Blooming Grove Township",
+    "Porter Township"
+   ],
+   "bbox": [
+    -75.09319,
+    41.28088,
+    -75.07065,
+    41.30958
+   ],
+   "wikidata": "Q49702296",
+   "charted": false,
+   "area_km2": 1.594,
+   "launches": [
+    "old-route-402-access-pa",
+    "pecks-pond-picnic-area-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "penn-roosevelt-lake-pa",
+   "name": "Penn-Roosevelt Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Harris Township"
+   ],
+   "bbox": [
+    -77.70172,
+    40.72625,
+    -77.70112,
+    40.72676
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.002,
+   "launches": [
+    "penn-roosevelt-carry-in-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "penn-s-creek-pa",
+   "name": "Penn's Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Coburn",
+    "Hains Township"
+   ],
+   "bbox": [
+    -77.60975,
+    40.74677,
+    -76.85415,
+    40.88341
+   ],
+   "wikidata": "Q7163491",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ingleby-pa",
+    "penn-s-creek-boat-launch-pa",
+    "poe-paddy-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pequea-creek-pa",
+   "name": "Pequea Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Martic Township"
+   ],
+   "bbox": [
+    -76.37029,
+    39.88684,
+    -75.91927,
+    40.08158
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pequea-creek-campground-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "perkiomen-creek-pa",
+   "name": "Perkiomen Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Arcola",
+    "Collegeville",
+    "Schwenksville"
+   ],
+   "bbox": [
+    -75.60056,
+    40.11909,
+    -75.44188,
+    40.47167
+   ],
+   "wikidata": "Q7169082",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "meadow-park-boat-launch-pa",
+    "welakamike-creekside-park-boat-ramp-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pinchot-lake-pa",
+   "name": "Pinchot Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Warrington"
+   ],
+   "bbox": [
+    -76.9118,
+    40.06203,
+    -76.87038,
+    40.09166
+   ],
+   "wikidata": "Q49702324",
+   "charted": false,
+   "area_km2": 1.48,
+   "launches": [
+    "pinchot-state-park-boat-mooring-1-pa",
+    "pinchot-state-park-boat-mooring-2-pa",
+    "pinchot-state-park-boat-mooring-3-pa",
+    "pinchot-state-park-campground-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 to 2024 and 2026.",
+     "date": "2026-09-08",
+     "years": [
+      "2022",
+      "2023",
+      "2024",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "pine-creek-pa",
+   "name": "Pine Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Avis",
+    "Brown",
+    "Brown Township",
+    "Jersey Mills",
+    "Mchenry",
+    "Morris Township",
+    "Ramsey",
+    "Shippen Township",
+    "Slate Run",
+    "Tiadaghton",
+    "Watson"
+   ],
+   "bbox": [
+    -77.82655,
+    41.17128,
+    -77.26804,
+    41.85699
+   ],
+   "wikidata": "Q7195104",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ansonia-pa",
+    "black-walnut-bottom-pa",
+    "blackwell-pa",
+    "bonnell-flats-pa",
+    "clark-farm-pa",
+    "gamble-run-pa",
+    "hamilton-bottom-pa",
+    "pine-creek-boat-launch-near-jersey-mills-pa",
+    "pine-creek-carry-in-access-pa",
+    "rattlesnake-rock-pa",
+    "ross-run-pa",
+    "slate-run-pa",
+    "tiadaghton-pa",
+    "pine-creek-boat-launch-near-slate-run-pa",
+    "torbert-canoe-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pipers-run-pa",
+   "name": "Pipers Run",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Hopewell"
+   ],
+   "bbox": [
+    -78.35267,
+    40.0773,
+    -78.29399,
+    40.1001
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cypher-bridge-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "poe-lake-pa",
+   "name": "Poe Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Penn Township"
+   ],
+   "bbox": [
+    -77.47568,
+    40.81974,
+    -77.46874,
+    40.82361
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.088,
+   "launches": [
+    "poe-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "promised-land-lake-pa",
+   "name": "Promised Land Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Green Township",
+    "Greene Township",
+    "Palymyra Township"
+   ],
+   "bbox": [
+    -75.20996,
+    41.29732,
+    -75.18537,
+    41.31999
+   ],
+   "wikidata": "Q49702384",
+   "charted": false,
+   "area_km2": 1.848,
+   "launches": [
+    "burley-inlet-boat-mooring-no-3-pa",
+    "main-beach-and-picnic-area-pa",
+    "ridgefield-point-boat-mooring-no-2-pa",
+    "snow-shanty-boat-mooring-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "prompton-lake-pa",
+   "name": "Prompton Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Clinton"
+   ],
+   "bbox": [
+    -75.34542,
+    41.59026,
+    -75.327,
+    41.62869
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.159,
+   "launches": [
+    "prompton-dam-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-08",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "pymatuning-reservoir-pa",
+   "name": "Pymatuning Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Conneaut Township",
+    "Espyville",
+    "North Shenango",
+    "Turnersville"
+   ],
+   "bbox": [
+    -80.54155,
+    41.49698,
+    -80.42929,
+    41.68164
+   ],
+   "wikidata": "Q2119614",
+   "charted": false,
+   "area_km2": 57.743,
+   "launches": [
+    "41-bay-pa",
+    "alcatraz-pa",
+    "bennetts-bay-pa",
+    "causeway-livery-pa",
+    "fries-road-pa",
+    "gum-bay-pa",
+    "jamestown-livery-pa",
+    "jonestown-livery-pa",
+    "linesville-marina-pa",
+    "manning-pa",
+    "orchard-pa",
+    "red-cross-pa",
+    "snodgrass-pa",
+    "tuttle-allottment-pa",
+    "tuttle-camp-pa",
+    "wilson-road-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "quaker-lake-pa",
+   "name": "Quaker Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Silver Lake Township"
+   ],
+   "bbox": [
+    -75.92928,
+    41.97385,
+    -75.91368,
+    41.98076
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.516,
+   "launches": [
+    "quaker-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "raccoon-state-park-s-lake-on-traverse-run-pa",
+   "name": "Raccoon State Park's Lake on Traverse Run",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Hanover/ Independance Township",
+    "Hopewell Township"
+   ],
+   "bbox": [
+    -80.40778,
+    40.50219,
+    -80.38542,
+    40.50946
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.311,
+   "launches": [
+    "raccoon-state-park-pa",
+    "raccoon-state-park-s-lake-on-traverse-run-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "raystown-branch-juniata-river-pa",
+   "name": "Raystown Branch Juniata River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Bedford",
+    "Broad Top",
+    "East Providence",
+    "East Providence Township",
+    "Juniata Township",
+    "Liberty",
+    "Napier",
+    "Snake Spring",
+    "West Providence"
+   ],
+   "bbox": [
+    -78.88142,
+    39.91585,
+    -77.97247,
+    40.45514
+   ],
+   "wikidata": "Q7299385",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "breezewood-access-pa",
+    "corbin-s-island-pa",
+    "cypher-roller-rink-pa",
+    "everett-ball-fields-pa",
+    "everett-flood-control-levee-pa",
+    "fort-bedford-museum-pa",
+    "herline-bridge-pa",
+    "point-access-pa",
+    "ritchey-bridge-pa",
+    "saxton-vfw-park-pa",
+    "warriors-path-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "raystown-lake-pa",
+   "name": "Raystown Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Dudley",
+    "Hopewell",
+    "Hopewell Township",
+    "Juniata Township",
+    "Lincoln Township",
+    "Penn Township"
+   ],
+   "bbox": [
+    -78.23964,
+    40.22971,
+    -77.99794,
+    40.44281
+   ],
+   "wikidata": "Q7299389",
+   "charted": false,
+   "area_km2": 32.445,
+   "launches": [
+    "aitch-pa",
+    "james-creek-pa",
+    "seven-points-pa",
+    "shy-beaver-pa",
+    "snyder-s-run-pa",
+    "tatman-run-pa",
+    "weaver-s-falls-pa"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2021) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2021-03-11"
+    }
+   ]
+  },
+  {
+   "slug": "redbank-creek-pa",
+   "name": "Redbank Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Brookville Boro",
+    "Hawthorn",
+    "Summerville"
+   ],
+   "bbox": [
+    -79.55108,
+    40.96849,
+    -79.07797,
+    41.15909
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brookville-boro-pa",
+    "redbank-creek-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rose-valley-lake-pa",
+   "name": "Rose Valley Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Gamble Township"
+   ],
+   "bbox": [
+    -77.00005,
+    41.37882,
+    -76.97943,
+    41.39922
+   ],
+   "wikidata": "Q7348400",
+   "charted": false,
+   "area_km2": 1.542,
+   "launches": [
+    "rose-valley-lake-boat-launch-pa",
+    "rose-valley-lake-boat-launch-gamble-township-pa",
+    "rose-valley-lake-boat-launch-pa-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "schuylkill-river-pa",
+   "name": "Schuylkill River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Auburn",
+    "Bern",
+    "City of Reading",
+    "Conshohocken",
+    "Douglass Township",
+    "East Coventry Township",
+    "Exeter Township",
+    "Hamburg",
+    "Leesport Boro",
+    "Limerick Township",
+    "Lower Merion Township",
+    "Monocacy"
+   ],
+   "bbox": [
+    -76.19072,
+    39.87901,
+    -75.17937,
+    40.77526
+   ],
+   "wikidata": "Q605122",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "auburn-dam-pa",
+    "auburn-rt-987-landing-pa",
+    "bartram-s-garden-pa",
+    "bartram-s-garden-dock-community-boathouse-pa",
+    "betzwood-pa",
+    "east-falls-river-landing-pa",
+    "east-park-canoe-house-ramp-pa",
+    "felix-dam-park-pa",
+    "five-locks-access-pa",
+    "flat-rock-park-pa",
+    "ganshahawny-park-landing-pa",
+    "gibraltar-unimproved-landing-pa",
+    "hamburg-landing-pa",
+    "jackson-s-landing-pa",
+    "jim-dietrich-park-water-trail-landing-pa",
+    "leesport-pa",
+    "limerick-township-pa",
+    "mont-clare-pa",
+    "norristown-riverfront-park-pa",
+    "peter-yarnell-park-landing-pa",
+    "phoenixville-pa",
+    "port-clinton-landing-pa",
+    "pottstown-riverfront-park-pa",
+    "reading-riverfront-park-pa",
+    "reeser-s-landing-boat-launch-pa",
+    "schuylkill-haven-landing-pa",
+    "south-pottstown-pa",
+    "spring-city-pa",
+    "spring-city-boat-ramp-pa",
+    "stoudt-s-ferry-bridge-landing-pa",
+    "tow-path-park-pa",
+    "union-township-landing-pa",
+    "upper-schuylkill-valley-park-pa",
+    "walnut-street-landing-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "scotts-run-lake-pa",
+   "name": "Scotts Run Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Birdsboro",
+    "Union Township"
+   ],
+   "bbox": [
+    -75.80255,
+    40.20879,
+    -75.79647,
+    40.21299
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.082,
+   "launches": [
+    "scott-s-run-lake-french-creek-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shaggers-inn-pond-pa",
+   "name": "Shaggers Inn Pond",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Goshen Township"
+   ],
+   "bbox": [
+    -78.42193,
+    41.20047,
+    -78.41666,
+    41.20386
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.111,
+   "launches": [
+    "shaegers-inn-pond-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shawnee-lake-pa",
+   "name": "Shawnee Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Napier",
+    "Schellsburg"
+   ],
+   "bbox": [
+    -78.64993,
+    40.02602,
+    -78.61778,
+    40.04546
+   ],
+   "wikidata": "Q49702629",
+   "charted": false,
+   "area_km2": 1.689,
+   "launches": [
+    "2-picnic-area-access-pa",
+    "colvin-access-pa",
+    "kegg-run-launch-area-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shenango-river-lake-pa",
+   "name": "Shenango River Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Clark",
+    "Clark Boro",
+    "Hermitage",
+    "Pymatuning",
+    "South Pymatuning"
+   ],
+   "bbox": [
+    -80.50981,
+    41.26392,
+    -80.33581,
+    41.34267
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.967,
+   "launches": [
+    "clark-recreation-area-pa",
+    "golden-run-pa",
+    "hartford-access-pa",
+    "mahaney-access-pa",
+    "parkers-landing-pa",
+    "r-c-marina-pa",
+    "rt-18-access-pa",
+    "rt-846-access-pa",
+    "shenango-recreation-area-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2015, 2023 and 2026.",
+     "date": "2026-08-05",
+     "years": [
+      "2015",
+      "2023",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "shenango-river-pa",
+   "name": "Shenango River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Delaware Twp",
+    "Greene Twp",
+    "Greenville Borough",
+    "Hempfield Twp",
+    "Jefferson",
+    "Neshannock",
+    "New Castle",
+    "Pulaski",
+    "Pymatuning Twp",
+    "Sharon",
+    "Sharpsville",
+    "South Shenango Twp"
+   ],
+   "bbox": [
+    -80.52049,
+    40.95694,
+    -80.3175,
+    41.64832
+   ],
+   "wikidata": "Q1288110",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-bend-pa",
+    "elm-st-boat-launch-pa",
+    "fishing-pier-pa",
+    "greenvlle-riverside-park-pa",
+    "halfway-road-pa",
+    "kidd-s-mill-covered-bridge-park-pa",
+    "mcquiston-boat-access-area-pa",
+    "millennium-access-boat-launch-pa",
+    "new-hamburg-pa",
+    "pymatuning-state-park-launch-pa",
+    "state-game-lands-150-canoe-kayak-put-in-pa",
+    "west-middlesex-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shohola-marsh-reservoir-pa",
+   "name": "Shohola Marsh Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Blooming Grove"
+   ],
+   "bbox": [
+    -75.00975,
+    41.3585,
+    -74.9681,
+    41.39107
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.118,
+   "launches": [
+    "shohola-boat-ramp-first-launch-pa",
+    "shohola-boat-ramp-second-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sinnemahoning-creek-pa",
+   "name": "Sinnemahoning Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "East Keating Township",
+    "Grove Township"
+   ],
+   "bbox": [
+    -78.13307,
+    41.25639,
+    -77.90171,
+    41.33642
+   ],
+   "wikidata": "Q15694931",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sinnemahoning-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "skippack-creek-pa",
+   "name": "Skippack Creek",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Lower Providence"
+   ],
+   "bbox": [
+    -75.44741,
+    40.14905,
+    -75.30805,
+    40.30172
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "harry-f-hoy-memorial-park-fishing-pier-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "slippery-rock-creek-pa",
+   "name": "Slippery Rock Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Perry Township",
+    "Slippery Rock Township",
+    "Worth Township"
+   ],
+   "bbox": [
+    -80.25715,
+    40.85784,
+    -79.84272,
+    41.11228
+   ],
+   "wikidata": "Q1774078",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kids-trout-derby-access-pa",
+    "mcconnells-mill-pa",
+    "west-park-road-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sones-pond-pa",
+   "name": "Sones Pond",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Forks"
+   ],
+   "bbox": [
+    -76.51626,
+    41.47138,
+    -76.51388,
+    41.47502
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.058,
+   "launches": [
+    "sones-pond-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-tenmile-creek-pa",
+   "name": "South Fork Tenmile Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Franklin",
+    "Morgan"
+   ],
+   "bbox": [
+    -80.34094,
+    39.8739,
+    -80.03976,
+    39.97518
+   ],
+   "wikidata": "Q85802276",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "188-soccer-fields-launch-pa",
+    "beagle-club-road-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "speedwell-forge-lake-pa",
+   "name": "Speedwell Forge Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Elizabeth Township"
+   ],
+   "bbox": [
+    -76.33088,
+    40.20319,
+    -76.30623,
+    40.21345
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.398,
+   "launches": [
+    "speedwell-forge-lake-may-not-be-usable-pa",
+    "speedwell-forge-lake-may-not-be-usable-elizabeth-township-pa",
+    "speedwell-forge-lake-may-not-be-usable-pa-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "spring-creek-pa",
+   "name": "Spring Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Boggs"
+   ],
+   "bbox": [
+    -77.83829,
+    40.77657,
+    -77.70633,
+    40.94298
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "spring-creek-west-penn-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "spruce-creek-pa",
+   "name": "Spruce Creek",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Franklin Township"
+   ],
+   "bbox": [
+    -78.13605,
+    40.60835,
+    -77.96918,
+    40.70978
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "spruce-creek-franklinville-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stephen-foster-lake-pa",
+   "name": "Stephen Foster Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "West Burlington Township"
+   ],
+   "bbox": [
+    -76.66933,
+    41.79923,
+    -76.65686,
+    41.80754
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.268,
+   "launches": [
+    "mt-pisgah-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stillwater-lake-pa",
+   "name": "Stillwater Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Clifford"
+   ],
+   "bbox": [
+    -75.48888,
+    41.69754,
+    -75.4832,
+    41.71168
+   ],
+   "wikidata": "Q49702791",
+   "charted": false,
+   "area_km2": 0.344,
+   "launches": [
+    "stillwater-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stonycreek-river-pa",
+   "name": "Stonycreek River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Conemaugh",
+    "Johnstown",
+    "Westmont"
+   ],
+   "bbox": [
+    -78.95323,
+    39.92481,
+    -78.8809,
+    40.3319
+   ],
+   "wikidata": "Q16250006",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "greenhouse-park-pa",
+    "inclined-plane-riverside-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stover-s-lake-pa",
+   "name": "Stover's Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Lebanon"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "stover-s-dam-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "straight-run-lake-pa",
+   "name": "Straight Run Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Banks Township"
+   ],
+   "bbox": [
+    -78.88787,
+    40.86007,
+    -78.88326,
+    40.86916
+   ],
+   "wikidata": "Q49702814",
+   "charted": false,
+   "area_km2": 0.209,
+   "launches": [
+    "hemlock-lake-closed-pa",
+    "hemlock-lake-closed-banks-township-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "struble-lake-pa",
+   "name": "Struble Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Honey Brook Township"
+   ],
+   "bbox": [
+    -75.87201,
+    40.10779,
+    -75.85733,
+    40.11673
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.63,
+   "launches": [
+    "struble-lake-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2023 to 2026.",
+     "date": "2026-08-03",
+     "years": [
+      "2023",
+      "2024",
+      "2025",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "stump-pond-pa",
+   "name": "Stump Pond",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Lakeside"
+   ],
+   "bbox": [
+    -75.6666,
+    41.85699,
+    -75.66094,
+    41.86123
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.065,
+   "launches": [
+    "stump-pond-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sugar-lake-pa",
+   "name": "Sugar Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Wayne Township"
+   ],
+   "bbox": [
+    -79.94912,
+    41.56201,
+    -79.94038,
+    41.57077
+   ],
+   "wikidata": "Q49312164",
+   "charted": false,
+   "area_km2": 0.414,
+   "launches": [
+    "sugar-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "susquehanna-and-tidewater-canal-pa",
+   "name": "Susquehanna and Tidewater Canal",
+   "kind": "canal",
+   "state": "PA",
+   "towns": [
+    "Wrightsville Boro"
+   ],
+   "bbox": [
+    -76.52663,
+    40.02311,
+    -76.52411,
+    40.02569
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wrightsville-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "susquehanna-river-pa",
+   "name": "Susquehanna River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Asylum",
+    "Athens Township",
+    "Berwick",
+    "Berwick Boro",
+    "Bloomsburg",
+    "Buffalo Township",
+    "Chapman",
+    "City of Wilkesbarre",
+    "Columbia Boro",
+    "Conoy Township",
+    "Danville",
+    "Dauphin Boro"
+   ],
+   "bbox": [
+    -77.0239,
+    39.70245,
+    -75.41414,
+    42.31471
+   ],
+   "wikidata": "Q27538",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "apple-tree-road-pa",
+    "bloomsburg-pa",
+    "bloomsburg-town-park-pa",
+    "canal-park-plymouth-pa",
+    "city-island-pa",
+    "city-island-new-pa",
+    "clemson-island-pa",
+    "columbia-park-pa",
+    "columbia-river-park-pa",
+    "commons-park-pa",
+    "conoy-picnic-area-pa",
+    "crary-park-boat-launch-pa",
+    "danville-pa",
+    "dauphin-boro-pa",
+    "decatur-street-parking-pa",
+    "east-side-memorial-riverfront-park-pa",
+    "espy-park-pa",
+    "falmouth-pa",
+    "fort-hunter-access-pa",
+    "fort-hunter-park-boat-launch-pa",
+    "french-azilum-boat-launch-pa",
+    "front-street-park-pa",
+    "goldsboro-pa",
+    "great-bend-pa",
+    "great-bend-boro-access-pa",
+    "great-bend-twp-hallstead-pa",
+    "haldeman-island-pa",
+    "halifax-access-pa",
+    "halifax-boro-pa",
+    "hellam-township-pa",
+    "holtwood-recreation-area-pa",
+    "homets-ferry-left-pa",
+    "homets-ferry-right-old-mill-park-pa",
+    "honey-pot-primitive-rest-stop-access-pa",
+    "hoovers-island-pa",
+    "hunlock-township-pa",
+    "interstate-81-bridge-pa",
+    "isle-of-que-pa",
+    "laceyville-pa",
+    "larnard-hornbrook-park-pa",
+    "litchfield-township-pa",
+    "lock-12-historic-area-pa",
+    "locust-street-pa",
+    "mahantango-pa",
+    "marietta-chickies-rock-county-park-pa",
+    "marysville-boro-pa",
+    "marysville-boro-schrauder-park-pa",
+    "meshoppen-pa",
+    "mifflinville-pa",
+    "millersburg-pa",
+    "montgomery-ferry-pa",
+    "montgomery-park-pa",
+    "muddy-creek-lower-chanceford-township-pa",
+    "nesbit-park-pa",
+    "new-market-pa",
+    "northumberland-municipal-access-pa",
+    "oakland-access-pa",
+    "otter-creek-campground-pa",
+    "pa-game-commission-sgl-237-pa",
+    "pfbc-liverpool-access-pa",
+    "port-treverton-pa",
+    "riverfront-pa",
+    "riverfront-park-boat-launch-pa",
+    "riverview-park-pa",
+    "shady-nook-pa",
+    "shickshinny-pa",
+    "steelton-boat-launch-pa",
+    "sunbury-pa",
+    "susquehanna-depot-pa",
+    "fishing-creek-boat-launch-pa",
+    "susquehanna-river-boat-launch-near-halifax-pa-2",
+    "susquehanna-river-boat-launch-near-hoban-heights-pa",
+    "barger-s-run-boat-launch-pa",
+    "susquehanna-river-boat-launch-near-meshoppen-pa",
+    "susquehanna-river-boat-launch-near-millersburg-pa",
+    "susquehanna-river-boat-launch-near-millersburg-pa-2",
+    "susquehanna-river-boat-launch-near-new-buffalo-pa",
+    "susquehanna-river-boat-launch-near-shickshinny-pa",
+    "susquehanna-river-carry-in-access-near-west-falls-pa",
+    "susquehanna-river-carry-in-access-near-wyoming-pa",
+    "sweigarts-island-sgl-258-pa",
+    "terrytown-pa",
+    "test-track-park-pa",
+    "towanda-riverside-park-w-pa",
+    "tunkhannock-pa",
+    "tunkhannock-park-pa",
+    "ulster-pa",
+    "union-township-pa",
+    "west-fairview-pa",
+    "west-falls-pa",
+    "wormleysburg-pa",
+    "wysox-pa",
+    "wysox-township-access-pa",
+    "york-furnace-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swatara-creek-pa",
+   "name": "Swatara Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Derry",
+    "Derry Township",
+    "East Hanover",
+    "Hummelstown",
+    "Jonestown",
+    "Lower Swatara",
+    "Middletown Boro",
+    "North Londonderry",
+    "Ono",
+    "Pine Grove",
+    "South Hanover",
+    "Swatara"
+   ],
+   "bbox": [
+    -76.73721,
+    40.18047,
+    -76.33395,
+    40.68572
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "access-at-keller-fields-pa",
+    "boathouse-park-pa",
+    "clifton-bridge-pa",
+    "hanover-street-bridge-pa",
+    "hummel-nature-trail-pa",
+    "jonestown-launch-pa",
+    "lickdale-trailhead-pa",
+    "middletown-pa",
+    "pine-grove-pa",
+    "route-22-wm-penn-highway-pa",
+    "swatara-creek-boat-launch-pa",
+    "swatara-park-pa",
+    "swatara-state-park-pa",
+    "swatara-state-park-pa-2",
+    "swatara-state-park-sand-siding-road-pa",
+    "swatara-state-park-swopes-valley-road-pa",
+    "swatara-watershed-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sweet-arrow-lake-pa",
+   "name": "Sweet Arrow Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Pine Grove Township"
+   ],
+   "bbox": [
+    -76.37148,
+    40.56967,
+    -76.35338,
+    40.57715
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.295,
+   "launches": [
+    "sweet-arrow-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sylvan-lake-pa",
+   "name": "Sylvan Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Ross Township"
+   ],
+   "bbox": [
+    -76.15997,
+    41.25221,
+    -76.15138,
+    41.26289
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.517,
+   "launches": [
+    "sylvan-lake-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2024 and 2026.",
+     "date": "2026-08-06",
+     "years": [
+      "2024",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tamarack-lake-pa",
+   "name": "Tamarack Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Eastmead Township",
+    "Westmead Township"
+   ],
+   "bbox": [
+    -80.12022,
+    41.57884,
+    -80.07402,
+    41.61502
+   ],
+   "wikidata": "Q49702885",
+   "charted": false,
+   "area_km2": 2.411,
+   "launches": [
+    "access-1-westmead-township-pa",
+    "access-2-westmead-township-pa",
+    "access-3-pa",
+    "access-5-pa",
+    "access-6-pa",
+    "north-dam-access-pa",
+    "springs-road-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022 and 2026.",
+     "date": "2026-08-05",
+     "years": [
+      "2022",
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tenmile-creek-pa",
+   "name": "Tenmile Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "East Bethlehem Township",
+    "Jefferson Township"
+   ],
+   "bbox": [
+    -80.33006,
+    39.97424,
+    -79.99776,
+    40.1024
+   ],
+   "wikidata": "Q28186797",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "ten-mile-creek-county-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tioga-reservoir-pa",
+   "name": "Tioga Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Tioga Township"
+   ],
+   "bbox": [
+    -77.14327,
+    41.84924,
+    -77.10906,
+    41.89823
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.076,
+   "launches": [
+    "lambs-creek-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tionesta-lake-pa",
+   "name": "Tionesta Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Green Township",
+    "Tionesta Township"
+   ],
+   "bbox": [
+    -79.44766,
+    41.46902,
+    -79.38267,
+    41.48817
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.172,
+   "launches": [
+    "nebraska-pa",
+    "tionesta-dam-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tobyhanna-lake-pa",
+   "name": "Tobyhanna Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Coolbaugh Township"
+   ],
+   "bbox": [
+    -75.41416,
+    41.19763,
+    -75.39954,
+    41.21353
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.647,
+   "launches": [
+    "tobyhanna-lake-boat-launch-pa",
+    "tobyhanna-state-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tohickon-creek-pa",
+   "name": "Tohickon Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Point Pleasant",
+    "Tinicum"
+   ],
+   "bbox": [
+    -75.3634,
+    40.42115,
+    -75.06044,
+    40.50029
+   ],
+   "wikidata": "Q7813269",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tohickon-creek-boat-launch-near-tinicum-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "trout-run-pa",
+   "name": "Trout Run",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Fairview Township"
+   ],
+   "bbox": [
+    -80.27915,
+    42.0197,
+    -80.21785,
+    42.05913
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "avonia-beach-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tulpehocken-creek-pa",
+   "name": "Tulpehocken Creek",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Jackson"
+   ],
+   "bbox": [
+    -76.38607,
+    40.34455,
+    -75.95022,
+    40.4267
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lakeside-quarry-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tuscarora-lake-pa",
+   "name": "Tuscarora Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Rush Township"
+   ],
+   "bbox": [
+    -76.03143,
+    40.7993,
+    -76.00741,
+    40.80629
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.396,
+   "launches": [
+    "tuscarora-lake-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022.",
+     "date": "2022-08-16",
+     "years": [
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "two-mile-run-reservoir-pa",
+   "name": "Two Mile Run Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Oakland",
+    "Oakland Township"
+   ],
+   "bbox": [
+    -79.77529,
+    41.4657,
+    -79.76566,
+    41.48406
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.582,
+   "launches": [
+    "justus-lake-pa",
+    "justus-lake-two-mile-run-county-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "union-city-reservoir-pa",
+   "name": "Union City Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Union City"
+   ],
+   "bbox": [
+    -79.81661,
+    41.91296,
+    -79.81109,
+    41.91989
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.144,
+   "launches": [
+    "union-city-reservoir-carry-in-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upper-owl-creek-reservoir-pa",
+   "name": "Upper Owl Creek Reservoir",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Tamaqua"
+   ],
+   "bbox": [
+    -75.92428,
+    40.79543,
+    -75.91145,
+    40.80225
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.289,
+   "launches": [
+    "owl-creek-reservoir-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upper-woods-pond-pa",
+   "name": "Upper Woods Pond",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Lebanon"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "upper-woods-pond-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "virgin-run-lake-pa",
+   "name": "Virgin Run Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Perry Township"
+   ],
+   "bbox": [
+    -79.72763,
+    40.03558,
+    -79.72009,
+    40.04095
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.121,
+   "launches": [
+    "virgin-run-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "walker-lake-pa",
+   "name": "Walker Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Adams"
+   ],
+   "bbox": [
+    -77.19741,
+    40.79598,
+    -77.16072,
+    40.81184
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.951,
+   "launches": [
+    "walker-lake-boat-launch-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-09-10",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "west-branch-clarion-river-pa",
+   "name": "West Branch Clarion River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Johnsonburg",
+    "Jones Township"
+   ],
+   "bbox": [
+    -78.694,
+    41.49102,
+    -78.67578,
+    41.62608
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "johnsonburg-access-pa",
+    "wilcox-canoe-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-branch-delaware-river-pa",
+   "name": "West Branch Delaware River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Buckingham"
+   ],
+   "bbox": [
+    -75.42327,
+    41.9388,
+    -75.27889,
+    42.07986
+   ],
+   "wikidata": "Q14951265",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "balls-eddy-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-branch-schuylkill-river-pa",
+   "name": "West Branch Schuylkill River",
+   "kind": "stream",
+   "state": "PA",
+   "towns": [
+    "Pottsville"
+   ],
+   "bbox": [
+    -76.29256,
+    40.6296,
+    -76.1803,
+    40.7227
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "terry-reilly-memorial-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-branch-susquehanna-river-pa",
+   "name": "West Branch Susquehanna River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Bell Township",
+    "Burnside Township",
+    "Chapman Township",
+    "Cherry Tree Boro",
+    "Clearfield",
+    "Clearfield Boro",
+    "Clinton Township",
+    "Cooper Township",
+    "Curwensville Boro",
+    "Duboistown",
+    "East Keating Township",
+    "Girard Township"
+   ],
+   "bbox": [
+    -78.80855,
+    40.59149,
+    -76.79691,
+    41.34443
+   ],
+   "wikidata": "Q7984552",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "closed-muncy-unsafe-water-conditions-pa",
+    "cherry-tree-borough-pa",
+    "chillisquaque-pa",
+    "deer-creek-girard-township-pa",
+    "fifth-street-river-access-pa",
+    "great-stream-commons-pa",
+    "greevy-pa",
+    "hyner-pa",
+    "irvin-park-borough-pa",
+    "jersey-shore-boat-club-pa",
+    "karthaus-pa",
+    "keating-mountain-pa",
+    "linden-access-pa",
+    "lock-haven-pa",
+    "lower-witmer-park-borough-access-pa",
+    "milton-state-park-pa",
+    "montgomery-pa",
+    "montoursville-pa",
+    "north-bend-pa",
+    "pine-creek-pa",
+    "pineknotter-point-pa",
+    "st-george-st-pa",
+    "susquehanna-state-park-pa",
+    "unnamed-pa",
+    "watsontown-pa",
+    "watsontown-borough-pa",
+    "west-branch-susquehanna-river-boat-launch-near-watsontown-pa",
+    "winfield-access-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-branch-tionesta-creek-pa",
+   "name": "West Branch Tionesta Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Sheffield Township"
+   ],
+   "bbox": [
+    -79.227,
+    41.67626,
+    -79.02947,
+    41.77366
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sheffield-boro-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "whipple-lake-pa",
+   "name": "Whipple Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Jackson Township"
+   ],
+   "bbox": [
+    -77.86626,
+    40.68309,
+    -77.86147,
+    40.68864
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.065,
+   "launches": [
+    "whipple-lake-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "white-deer-lake-pa",
+   "name": "White Deer Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Blooming Grove"
+   ],
+   "bbox": [
+    -75.13361,
+    41.40131,
+    -75.12859,
+    41.40862
+   ],
+   "wikidata": "Q49315772",
+   "charted": false,
+   "area_km2": 0.193,
+   "launches": [
+    "white-deer-boat-ramp-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2026.",
+     "date": "2026-08-13",
+     "years": [
+      "2026"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "white-oak-pond-pa",
+   "name": "White Oak Pond",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Clinton"
+   ],
+   "bbox": [
+    -75.39258,
+    41.64275,
+    -75.37657,
+    41.65634
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.807,
+   "launches": [
+    "white-oak-pond-boat-launch-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilmore-lake-pa",
+   "name": "Wilmore Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Munster",
+    "Portage"
+   ],
+   "bbox": [
+    -78.69265,
+    40.40862,
+    -78.68378,
+    40.44076
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.663,
+   "launches": [
+    "wilmore-dam-pa",
+    "wilmore-east-patrick-road-pa"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.arcgis.com/apps/dashboards/9b653809b2724ff299dc1b5b3d1c546b",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2025.",
+     "date": "2025-10-01",
+     "years": [
+      "2025"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "woodcock-creek-lake-pa",
+   "name": "Woodcock Creek Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Woodcock Township"
+   ],
+   "bbox": [
+    -80.10173,
+    41.69027,
+    -80.06587,
+    41.70234
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.342,
+   "launches": [
+    "woodcock-lake-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wyalusing-creek-pa",
+   "name": "Wyalusing Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Wyalusing"
+   ],
+   "bbox": [
+    -76.2678,
+    41.66063,
+    -75.90941,
+    41.83009
+   ],
+   "wikidata": "Q8039443",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wyalusing-creekside-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yellow-breeches-creek-pa",
+   "name": "Yellow Breeches Creek",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Lower Allen Township",
+    "New Cumberland",
+    "New Cumberland Borough",
+    "South Middleton Township",
+    "Upper Allen Township"
+   ],
+   "bbox": [
+    -77.32894,
+    40.10422,
+    -76.85624,
+    40.22752
+   ],
+   "wikidata": "Q8051681",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beacon-hill-emer-take-out-pa",
+    "creekwood-park-pa",
+    "lower-allen-township-authority-pa",
+    "lower-allen-township-community-park-pa",
+    "mccormick-park-pa",
+    "new-cumberland-boro-park-take-out-only-pa",
+    "simpson-park-pa",
+    "south-middleton-township-park-pa",
+    "wittlinger-preserve-pa",
+    "yellow-breeches-creek-boat-launch-near-new-cumberland-pa",
+    "yellow-breeches-park-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yellow-creek-lake-pa",
+   "name": "Yellow Creek Lake",
+   "kind": "lake",
+   "state": "PA",
+   "towns": [
+    "Brush Valley",
+    "Indiana"
+   ],
+   "bbox": [
+    -79.05386,
+    40.5685,
+    -79.00338,
+    40.59114
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.79,
+   "launches": [
+    "grampaps-cove-boat-launch-pa",
+    "yellow-creek-state-park-pa",
+    "yellow-creek-state-park-brush-valley-pa",
+    "yellow-creek-state-park-pa-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "youghiogheny-river-lake-pa",
+   "name": "Youghiogheny River Lake",
+   "kind": "reservoir",
+   "state": "PA",
+   "towns": [
+    "Addison",
+    "COE",
+    "Confluence",
+    "Henry Clay"
+   ],
+   "bbox": [
+    -79.41633,
+    39.68078,
+    -79.34605,
+    39.79856
+   ],
+   "wikidata": "Q7348452",
+   "charted": false,
+   "area_km2": 11.126,
+   "launches": [
+    "breast-access-pa",
+    "jockey-hollow-pa",
+    "outflow-pa",
+    "somerfield-north-pa",
+    "somerfield-south-pa",
+    "tubs-run-pa"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "youghiogheny-river-pa",
+   "name": "Youghiogheny River",
+   "kind": "river",
+   "state": "PA",
+   "towns": [
+    "Boston",
+    "Buena Vista",
+    "City of McKeesport",
+    "Connellsville",
+    "Coulterville",
+    "Dawson",
+    "Fuller",
+    "Huston",
+    "Layton",
+    "McKeesport",
+    "Ohiopyle",
+    "Perryopolis"
+   ],
+   "bbox": [
+    -79.87073,
+    39.68109,
+    -79.35598,
+    40.35569
+   ],
+   "wikidata": "Q1470734",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "boston-park-pa",
+    "cedar-creek-park-access-pa",
+    "connellsville-pa",
+    "loop-take-out-pa",
+    "lower-yough-put-in-pa",
+    "mckees-point-marina-pa",
+    "mckeesport-access-pa",
+    "middle-yough-ramcat-pa",
+    "middle-yough-take-out-pa",
+    "perry-township-pa",
+    "smithton-beach-pa",
+    "sutersville-borough-rec-park-pa",
+    "west-newton-public-launch-pa"
+   ],
+   "advisories": []
+  }
+ ]
+}

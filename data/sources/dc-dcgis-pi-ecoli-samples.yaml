@@ -1,0 +1,31 @@
+id: "dc-dcgis-pi-ecoli-samples"
+name: "Potomac Interceptor E. coli Sample Results (DCGIS ArcGIS feature service, all agencies)"
+url: "https://services.arcgis.com/neT9SoYxizqTHZPH/arcgis/rest/services/PI_Spill_Sampling_Sites_with_all_samples/FeatureServer/0"
+homepage: "https://services.arcgis.com/neT9SoYxizqTHZPH/arcgis/rest/services/PI_Spill_Sampling_Sites_with_all_samples/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/dc, status candidate, verified fetched, checked 2026-11-02): Machine-readable
+#   incident monitoring across five agencies; good for the 2026 collapse event page; static now.
+# Access detail (research, quoted): No key. query?where=1%3D1&outFields=*&f=json; 2,602 rows. By
+#   Source: DC Water 1,860 (2026-01-29 to 2026-09-10, max 730,000), DOEE 418 (2026-02-10 to
+#   2026-09-15), Potomac River Keeper w/UMD 118 (2026-01-23 to 2026-05-18, max 1,732,900), MDE 123
+#   (to 2026-07-29), VADEQ 83 (to 2026-03-18). Companion layer 'PI Spill Sampling Sites with most
+#   recent sample'. Front end: https://potomacinterceptor.dc.gov (Hub) and an Experience dashboard
+#   6dd70844de2a435486bfc00328573436.
+# Can fill: coordinates, started_at (sample time), source_record_id
+# Cannot fill: advice_text; valid_until
+# Waters: Potomac River from the collapse site to Daingerfield Island / 14th St Bridge; DC, MD, VA
+#   sites (openboatlaunch slugs: potomac-river-dc, potomac-river-md, potomac-river-va)
+# History: 2026-01-23 to 2026-09-15.
+cadence: "Daily during the incident; last DOEE row 2026-09-15."
+license: "Not stated on the service."
+attribution: "DC Office of the Chief Technology Officer / DCGIS for DOEE"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["DC"]
+access: ["arcgis"]
+access_detail: "No key. query?where=1%3D1&outFields=*&f=json; 2,602 rows. By Source: DC Water 1,860 (2026-01-29 to 2026-09-10, max 730,000), DOEE 418 (2026-02-10 to 2026-09-15), Potomac River Keeper w/UMD 118 (2026-01-23 to 2026-05-18, max 1,732,900), MDE 123 (to 2026-07-29), VADEQ 83 (to 2026-03-18). Companion layer 'PI Spill Sampling Sites with most recent sample'. Front end: https://potomacinterceptor.dc.gov (Hub) and an Experience dashboard 6dd70844de2a435486bfc00328573436."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

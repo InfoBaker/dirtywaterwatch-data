@@ -1,0 +1,2351 @@
+{
+ "state": "OH",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "OH0020001",
+   "permittee": "UPPER SANDUSKY WWTP",
+   "city": "UPPER SANDUSKY",
+   "open_outfalls": 5,
+   "closed_outfalls": 3,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0020095",
+   "permittee": "MONROEVILLE WWTP",
+   "city": "MONROEVILLE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "West Branch Huron River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0020117",
+   "permittee": "NORTH BALTIMORE WASTEWATER TREATMENT PLANT",
+   "city": "NORTH BALTIMORE",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0020192",
+   "permittee": "BRADFORD WASTEWATER TREATMENT PLANT",
+   "city": "BRADFORD",
+   "open_outfalls": 7,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Ballinger Run"
+   ]
+  },
+  {
+   "npdes_permit": "OH0020214",
+   "permittee": "TORONTO WWTP",
+   "city": "TORONTO",
+   "open_outfalls": 0,
+   "closed_outfalls": 5,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0020338",
+   "permittee": "PAULDING WWTP",
+   "city": "PAULDING",
+   "open_outfalls": 0,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "Flat Rock Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0020451",
+   "permittee": "MILFORD CITY WWTP",
+   "city": "MILFORD",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0020486",
+   "permittee": "VILLAGE OF GREENWICH WASTEWATER TREATMENT WORKS",
+   "city": "GREENWICH",
+   "open_outfalls": 4,
+   "closed_outfalls": 6,
+   "receiving_waters": [
+    "Ditch to Branch of Vermilion River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0020524",
+   "permittee": "SWANTON WRRF",
+   "city": "SWANTON",
+   "open_outfalls": 9,
+   "closed_outfalls": 0,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0020559",
+   "permittee": "CALDWELL WWTP",
+   "city": "CALDWELL",
+   "open_outfalls": 4,
+   "closed_outfalls": 18,
+   "receiving_waters": [
+    "West Fork Duck Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0020591",
+   "permittee": "VILLAGE OF WOODVILLE",
+   "city": "WOODVILLE",
+   "open_outfalls": 0,
+   "closed_outfalls": 17,
+   "receiving_waters": [
+    "Portage River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0020613",
+   "permittee": "NEW BOSTON WWTP",
+   "city": "NEW BOSTON",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Munn Run",
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0020664",
+   "permittee": "CRESTLINE WWTP",
+   "city": "CRESTLINE",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0020826",
+   "permittee": "VILLAGE OF LEIPSIC WASTEWATER TREATMENT WORKS",
+   "city": "LEIPSIC",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0020851",
+   "permittee": "BLUFFTON WWTP",
+   "city": "BLUFFTON",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Riley Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0020893",
+   "permittee": "NAPOLEON WASTEWATER TREATMENT PLANT",
+   "city": "NAPOLEON",
+   "open_outfalls": 4,
+   "closed_outfalls": 1,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0020940",
+   "permittee": "ARCANUM WWTP",
+   "city": "ARCANUM",
+   "open_outfalls": 0,
+   "closed_outfalls": 14,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0020974",
+   "permittee": "VILLAGE OF DELTA WASTEWATER TREATMENT PLANT",
+   "city": "DELTA",
+   "open_outfalls": 4,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "Bad Creek",
+    "Pigeon Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0021008",
+   "permittee": "PERRYSBURG WWTP",
+   "city": "PERRYSBURG",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0021105",
+   "permittee": "HAMLER WWTP",
+   "city": "HAMLER",
+   "open_outfalls": 0,
+   "closed_outfalls": 6,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0021148",
+   "permittee": "VILLAGE OF PANDORA",
+   "city": "PANDORA",
+   "open_outfalls": 0,
+   "closed_outfalls": 7,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0021326",
+   "permittee": "PAYNE WWTP",
+   "city": "PAYNE",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0021466",
+   "permittee": "MCCONNELSVILLE SEWER TREATMENT PLANT",
+   "city": "MCCONNELSVILLE",
+   "open_outfalls": 2,
+   "closed_outfalls": 9,
+   "receiving_waters": [
+    "Muskingum River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0021725",
+   "permittee": "POMEROY WWTP",
+   "city": "POMEROY",
+   "open_outfalls": 3,
+   "closed_outfalls": 10,
+   "receiving_waters": [
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0021831",
+   "permittee": "MONTPELIER WWTP",
+   "city": "MONTPELIER",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Saint Joseph River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0022110",
+   "permittee": "NEWTON FALLS WPC",
+   "city": "NEWTON FALLS",
+   "open_outfalls": 23,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "Mahoning River",
+    "West Branch Mahoning River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0022471",
+   "permittee": "DESHLER WWTP",
+   "city": "DESHLER",
+   "open_outfalls": 1,
+   "closed_outfalls": 6,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0022578",
+   "permittee": "VILLAGE OF GREEN SPRINGS",
+   "city": "GREEN SPRINGS",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0023396",
+   "permittee": "OHIO CITY WWTP",
+   "city": "OHIO CITY",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0023400",
+   "permittee": "WAUSEON WATER RECLAMATION PLANT",
+   "city": "WAUSEON",
+   "open_outfalls": 3,
+   "closed_outfalls": 2,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0023833",
+   "permittee": "AKRON WATER RECLAMATION FACILITY",
+   "city": "AKRON",
+   "open_outfalls": 28,
+   "closed_outfalls": 13,
+   "receiving_waters": [
+    "Little Cuyahoga River",
+    "Ohio Canal Enclosure",
+    "SS to Little Cuyahoga River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0023850",
+   "permittee": "SHAWNEE II WWTP",
+   "city": "LIMA",
+   "open_outfalls": 0,
+   "closed_outfalls": 5,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0023884",
+   "permittee": "ANSONIA WWTP",
+   "city": "ANSONIA",
+   "open_outfalls": 0,
+   "closed_outfalls": 10,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0023981",
+   "permittee": "AVON LAKE WPCF",
+   "city": "AVON LAKE",
+   "open_outfalls": 1,
+   "closed_outfalls": 9,
+   "receiving_waters": [
+    "Heider Ditch-Frontal Lake Erie"
+   ]
+  },
+  {
+   "npdes_permit": "OH0024139",
+   "permittee": "BOWLING GREEN",
+   "city": "BOWLING GREEN",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "North Branch Portage River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0024686",
+   "permittee": "CLYDE WWTP",
+   "city": "CLYDE",
+   "open_outfalls": 1,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Raccoon Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0024732",
+   "permittee": "JACKSON PIKE WATER RESOURCE RECOVERY FACILITY",
+   "city": "COLUMBUS",
+   "open_outfalls": 30,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "Olentangy River",
+    "Scioto River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0024741",
+   "permittee": "SOUTHERLY WASTEWATER TREATMENT PLANT",
+   "city": "COLUMBUS",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0024759",
+   "permittee": "VILLAGE OF COLUMBUS GROVE WWTP",
+   "city": "COLUMBUS GROVE",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0024899",
+   "permittee": "DEFIANCE WWTP",
+   "city": "DEFIANCE",
+   "open_outfalls": 28,
+   "closed_outfalls": 16,
+   "receiving_waters": [
+    "Auglaize River",
+    "Eagle Creek-Auglaize River",
+    "Maumee River",
+    "Preston Run"
+   ]
+  },
+  {
+   "npdes_permit": "OH0024929",
+   "permittee": "DELPHOS WWTP",
+   "city": "DELPHOS",
+   "open_outfalls": 7,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Jennings Creek",
+    "West Jennings Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0025003",
+   "permittee": "ELYRIA WWTP",
+   "city": "ELYRIA",
+   "open_outfalls": 33,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Black River",
+    "East Branch Black River",
+    "West Branch Black River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0025127",
+   "permittee": "VILLAGE OF FAYETTE WWTP",
+   "city": "FAYETTE",
+   "open_outfalls": 0,
+   "closed_outfalls": 19,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0025135",
+   "permittee": "CITY OF FINDLAY WATER POLLUTION CONTROL CENTER",
+   "city": "FINDLAY",
+   "open_outfalls": 10,
+   "closed_outfalls": 14,
+   "receiving_waters": [
+    "Drainage Ditch"
+   ]
+  },
+  {
+   "npdes_permit": "OH0025151",
+   "permittee": "FOREST WWTP",
+   "city": "FOREST",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0025160",
+   "permittee": "VILLAGE OF FORT RECOVERY",
+   "city": "FORT RECOVERY",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0025291",
+   "permittee": "FREMONT WATER RECLAMATION CENTER",
+   "city": "FREMONT",
+   "open_outfalls": 10,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "Sandusky River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0025364",
+   "permittee": "GIRARD WWTP",
+   "city": "GIRARD",
+   "open_outfalls": 1,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "Little Squaw Creek",
+    "Mahoning River",
+    "Squaw Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0025470",
+   "permittee": "MUDDY CREEK WASTEWATER TREATMENT PLANT",
+   "city": "CINCINNATI",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0025771",
+   "permittee": "HICKSVILLE WWTP",
+   "city": "HICKSVILLE",
+   "open_outfalls": 5,
+   "closed_outfalls": 1,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0025852",
+   "permittee": "IRONTON WWTP",
+   "city": "IRONTON",
+   "open_outfalls": 4,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Ohio River",
+    "Storms Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0026018",
+   "permittee": "LAKEWOOD WWTP",
+   "city": "LAKEWOOD",
+   "open_outfalls": 8,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Lake Erie",
+    "Outfall 001/Lake Erie",
+    "Rocky River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0026026",
+   "permittee": "LANCASTER WPCF",
+   "city": "LANCASTER",
+   "open_outfalls": 9,
+   "closed_outfalls": 22,
+   "receiving_waters": [
+    "Baldwin Run",
+    "Fetters Run",
+    "Hocking River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0026069",
+   "permittee": "LIMA WWTP",
+   "city": "LIMA",
+   "open_outfalls": 20,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Dug Run-Ottawa River",
+    "Ottawa River",
+    "Pike Run"
+   ]
+  },
+  {
+   "npdes_permit": "OH0026263",
+   "permittee": "MCCOMB VILLAGE WWTP",
+   "city": "MCCOMB",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0026352",
+   "permittee": "CITY OF MARION, DIV OF WATER POLLUTION CONTROL",
+   "city": "MARION",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0026514",
+   "permittee": "MIDDLEPORT WWTP",
+   "city": "MIDDLEPORT",
+   "open_outfalls": 2,
+   "closed_outfalls": 11,
+   "receiving_waters": [
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0026522",
+   "permittee": "MIDDLETOWN WWTP",
+   "city": "MIDDLETOWN",
+   "open_outfalls": 8,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Browns Run-Great Miami River",
+    "Great Miami River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0026565",
+   "permittee": "MINGO JUNCTION STP",
+   "city": "MINGO JUNCTION",
+   "open_outfalls": 6,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0026671",
+   "permittee": "CITY OF NEWARK WASTEWATER TREATMENT PLANT",
+   "city": "NEWARK",
+   "open_outfalls": 19,
+   "closed_outfalls": 9,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0026841",
+   "permittee": "OAK HARBOR WWTP",
+   "city": "OAK HARBOR",
+   "open_outfalls": 6,
+   "closed_outfalls": 3,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0027197",
+   "permittee": "PORTSMOUTH LAWSON RUN WWTP",
+   "city": "PORTSMOUTH",
+   "open_outfalls": 10,
+   "closed_outfalls": 0,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0027332",
+   "permittee": "CITY OF SANDUSKY WPC",
+   "city": "SANDUSKY",
+   "open_outfalls": 14,
+   "closed_outfalls": 1,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0027481",
+   "permittee": "CITY OF SPRINGFIELD WWTP",
+   "city": "SPRINGFIELD",
+   "open_outfalls": 55,
+   "closed_outfalls": 6,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0027511",
+   "permittee": "STEUBENVILLE WWTP",
+   "city": "STEUBENVILLE",
+   "open_outfalls": 15,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Ohio River",
+    "Wells Run"
+   ]
+  },
+  {
+   "npdes_permit": "OH0027740",
+   "permittee": "TOLEDO BAY VIEW PARK WWTP",
+   "city": "TOLEDO",
+   "open_outfalls": 26,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "Detwiler Ditch-Frontal Lake Erie",
+    "Maumee River",
+    "Ottawa River",
+    "Otter Creek",
+    "Swan Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0027910",
+   "permittee": "VAN WERT WWTP",
+   "city": "VAN WERT",
+   "open_outfalls": 5,
+   "closed_outfalls": 1,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0027952",
+   "permittee": "CITY OF WAPAKONETA WRF",
+   "city": "WAPAKONETA",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Auglaize River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0027987",
+   "permittee": "WARREN WPCF",
+   "city": "WARREN",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0028118",
+   "permittee": "WILLARD WPCP",
+   "city": "WILLARD",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Holliday Lake"
+   ]
+  },
+  {
+   "npdes_permit": "OH0028177",
+   "permittee": "WOODSFIELD WASTEWATER TREATMENT PLANT",
+   "city": "WOODSFIELD",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0028185",
+   "permittee": "CITY OF WOOSTER-WATER RESOURCE RECOVERYFACILITY",
+   "city": "WOOSTER",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Apple Creek",
+    "Christmas Run"
+   ]
+  },
+  {
+   "npdes_permit": "OH0028223",
+   "permittee": "YOUNGSTOWN WWTP",
+   "city": "YOUNGSTOWN",
+   "open_outfalls": 101,
+   "closed_outfalls": 7,
+   "receiving_waters": [
+    "Crab Creek",
+    "Dry Run Creek",
+    "Mahoning River",
+    "Mill Creek",
+    "Sugar Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0028240",
+   "permittee": "ZANESVILLE WWTP",
+   "city": "ZANESVILLE",
+   "open_outfalls": 7,
+   "closed_outfalls": 12,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0029122",
+   "permittee": "GIBSONBURG WWTP",
+   "city": "GIBSONBURG",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0031062",
+   "permittee": "CITY OF EUCLID WWTP",
+   "city": "EUCLID",
+   "open_outfalls": 17,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "City of Euclid-Frontal Lake Erie",
+    "Doan Brook-Frontal Lake Erie",
+    "Euclid Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0043991",
+   "permittee": "NORTHEAST OHIO REGIONAL SD",
+   "city": "CLEVELAND",
+   "open_outfalls": 122,
+   "closed_outfalls": 11,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0048321",
+   "permittee": "DUNKIRK WWTP",
+   "city": "DUNKIRK",
+   "open_outfalls": 0,
+   "closed_outfalls": 6,
+   "receiving_waters": [
+    "Shallow Run Ditch"
+   ]
+  },
+  {
+   "npdes_permit": "OH0049999",
+   "permittee": "EASTERN OHIO REGIONAL WW AUTHORITY",
+   "city": "BELLAIRE",
+   "open_outfalls": 32,
+   "closed_outfalls": 15,
+   "receiving_waters": [
+    "McMahon Creek",
+    "Ohio River",
+    "Pinch Run",
+    "Wheeling Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0052604",
+   "permittee": "CITY OF NORWALK WWTP",
+   "city": "NORWALK",
+   "open_outfalls": 3,
+   "closed_outfalls": 2,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0052744",
+   "permittee": "FOSTORIA WWTP",
+   "city": "FOSTORIA",
+   "open_outfalls": 23,
+   "closed_outfalls": 2,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0052876",
+   "permittee": "PORT CLINTON WASTEWATER TREATMENT PLANT",
+   "city": "PORT CLINTON",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0052922",
+   "permittee": "BUCYRUS WWTP",
+   "city": "BUCYRUS",
+   "open_outfalls": 22,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Sandusky River"
+   ]
+  },
+  {
+   "npdes_permit": "OH0052949",
+   "permittee": "TIFFIN WATER POLLUTION CONTROL CENTER",
+   "city": "TIFFIN",
+   "open_outfalls": 33,
+   "closed_outfalls": 1,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0058408",
+   "permittee": "METAMORA WWTP",
+   "city": "METAMORA",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0058971",
+   "permittee": "LUCKEY WWTP",
+   "city": "LUCKEY",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0094528",
+   "permittee": "VILLAGE OF MALTA",
+   "city": "MALTA",
+   "open_outfalls": 4,
+   "closed_outfalls": 6,
+   "receiving_waters": []
+  },
+  {
+   "npdes_permit": "OH0105457",
+   "permittee": "CINCINNATI GALBRAITH ROAD MSD SITE",
+   "city": "CINCINNATI",
+   "open_outfalls": 199,
+   "closed_outfalls": 9,
+   "receiving_waters": [
+    "Bloody Run",
+    "Cilley Creek",
+    "Clough Creek",
+    "Clough Creek Tributary",
+    "Compton Creek",
+    "Duck Creek",
+    "Duck Creek Tributary",
+    "Kings Run",
+    "Little Duck Creek",
+    "Little Miami River",
+    "Ludlow Creek",
+    "Ludlow Run",
+    "Mill Creek",
+    "Mill Creek Tributary",
+    "Muddy Creek",
+    "Ohio River",
+    "Rapid Run",
+    "South Branch Mill Creek",
+    "West Branch Mill Creek",
+    "West Fork",
+    "West Fork Tributary",
+    "West branch Mill Creek"
+   ]
+  },
+  {
+   "npdes_permit": "OH0126268",
+   "permittee": "LISBON WWTP",
+   "city": "LISBON",
+   "open_outfalls": 7,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Middle Fork Little Beaver Creek"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 1032,
+ "plant_permits": 1279,
+ "plant_permits_major": 212,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "OH0020001",
+   "permittee": "City of Upper Sandusky",
+   "city": "UPPER SANDUSKY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0020079",
+   "permittee": "Twin City Water & SD",
+   "city": "UHRICHSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020109",
+   "permittee": "City of Geneva WWTP",
+   "city": "GENEVA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020125",
+   "permittee": "Erie County Commissioners",
+   "city": "HURON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0020133",
+   "permittee": "City of West Carrollton",
+   "city": "WEST CARROLLTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0020257",
+   "permittee": "Village of Lexington WWTP",
+   "city": "LEXINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020320",
+   "permittee": "City of Celina",
+   "city": "CELINA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020371",
+   "permittee": "City of Orrville WWTP",
+   "city": "ORRVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020389",
+   "permittee": "Hillsboro, City of",
+   "city": "HILLSBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020419",
+   "permittee": "Hamilton Co Brd of Comm Metropolitan SD",
+   "city": "LOVELAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020427",
+   "permittee": "Oberlin City of",
+   "city": "OBERLIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0020451",
+   "permittee": "City of Milford",
+   "city": "MILFORD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0020478",
+   "permittee": "Gallipolis, City of",
+   "city": "GALLIPOLIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020494",
+   "permittee": "City of Mason",
+   "city": "MASON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0020516",
+   "permittee": "Massillon WWTP",
+   "city": "MASSILLON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020532",
+   "permittee": "City of Bryan",
+   "city": "BRYAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020605",
+   "permittee": "Brookville, City of",
+   "city": "BROOKVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020621",
+   "permittee": "Belpre Wastewater Treatment Plant",
+   "city": "BELPRE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020664",
+   "permittee": "City of Crestline",
+   "city": "CRESTLINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020672",
+   "permittee": "City of Bellevue Water Pollution Control Facility",
+   "city": "BELLEVUE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020796",
+   "permittee": "Village of Archbold Wastewater Treatment Plant",
+   "city": "ARCHBOLD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020834",
+   "permittee": "City of Jackson",
+   "city": "JACKSON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0020851",
+   "permittee": "Bluffton WWTP",
+   "city": "BLUFFTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020893",
+   "permittee": "Napoleon Wastewater Treatment Plant",
+   "city": "NAPOLEON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0020907",
+   "permittee": "Eaton, City of",
+   "city": "EATON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0021008",
+   "permittee": "Perrysburg, City of",
+   "city": "PERRYSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0021059",
+   "permittee": "Lebanon City of",
+   "city": "LEBANON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0021083",
+   "permittee": "Greenfield, Village of",
+   "city": "GREENFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0021300",
+   "permittee": "Georgetown, Village of",
+   "city": "GEORGETOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0021415",
+   "permittee": "St Marys WWTP",
+   "city": "ST MARYS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0021440",
+   "permittee": "City of Harrison",
+   "city": "HARRISON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0021628",
+   "permittee": "Amherst, City of",
+   "city": "AMHERST",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0021644",
+   "permittee": "Union, City of",
+   "city": "UNION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0021776",
+   "permittee": "Village of Columbiana",
+   "city": "COLUMBIANA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0021784",
+   "permittee": "East Palestine, City of",
+   "city": "EAST PALESTINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0021814",
+   "permittee": "Village of South Point",
+   "city": "SOUTH POINT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0021857",
+   "permittee": "Village of West Milton",
+   "city": "UNION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0022110",
+   "permittee": "City of Newton Falls",
+   "city": "NEWTON FALLS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0022659",
+   "permittee": "Chardon City of",
+   "city": "CHARDON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0023221",
+   "permittee": "City of Ravenna",
+   "city": "RAVENNA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023353",
+   "permittee": "Waverly Wastewater Treatment Plant",
+   "city": "WAVERLY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023388",
+   "permittee": "City of Logan",
+   "city": "LOGAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023400",
+   "permittee": "Wauseon Water Reclamation Plant",
+   "city": "WAUSEON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023507",
+   "permittee": "City of Wellston North Wastewater Treatment Plant",
+   "city": "WELLSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023540",
+   "permittee": "City of Shelby WWTP",
+   "city": "SHELBY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023612",
+   "permittee": "City of Vermilion WPCF",
+   "city": "VERMILION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023779",
+   "permittee": "City of London",
+   "city": "LONDON",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0023833",
+   "permittee": "Akron Water Reclamation Facility",
+   "city": "AKRON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023841",
+   "permittee": "Allen Co Commissioners",
+   "city": "LIMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023850",
+   "permittee": "Shawnee II WWTP",
+   "city": "LIMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023868",
+   "permittee": "City of Alliance",
+   "city": "ALLIANCE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023906",
+   "permittee": "Ashland WWTP",
+   "city": "ASHLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023914",
+   "permittee": "Ashtabula WPCP",
+   "city": "ASHTABULA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023931",
+   "permittee": "City of Athens",
+   "city": "ATHENS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0023981",
+   "permittee": "Avon Lake Regional Water",
+   "city": "AVON LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024007",
+   "permittee": "Barberton WPCF",
+   "city": "BARBERTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024015",
+   "permittee": "Barnesville WWTP",
+   "city": "BARNESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024040",
+   "permittee": "Bedford Wastewater Treatment Plant",
+   "city": "BEDFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024058",
+   "permittee": "City of Bedford Heights Water Reclamation Plant",
+   "city": "BEDFORD HEIGHTS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024066",
+   "permittee": "Bellefontaine, City of",
+   "city": "BELLEFONTAINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024139",
+   "permittee": "Bowling Green, City of",
+   "city": "BOWLING GREEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024309",
+   "permittee": "Cambridge City of",
+   "city": "CAMBRIDGE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0024325",
+   "permittee": "Mahoning County Commissioners",
+   "city": "CAMPBELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024333",
+   "permittee": "Village of Canal Winchester",
+   "city": "CANAL WINCHESTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024350",
+   "permittee": "Canton City Of",
+   "city": "CANTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024406",
+   "permittee": "Chillicothe WWTP - Easterly",
+   "city": "CHILLICOTHE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024465",
+   "permittee": "Circleville WWTP",
+   "city": "CIRCLEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024643",
+   "permittee": "NEORSD Easterly Wastewater Treatment Plant",
+   "city": "CLEVELAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024651",
+   "permittee": "NEORSD Southerly Wastewater Treatment Center",
+   "city": "CUYAHOGA HTS.",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024660",
+   "permittee": "NEORSD Westerly Wastewater Treatment Center",
+   "city": "CLEVELAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024686",
+   "permittee": "Clyde, City Of",
+   "city": "CLYDE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024732",
+   "permittee": "City of Columbus, Sewerage & Drainage",
+   "city": "COLUMBUS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024741",
+   "permittee": "Southerly Wastewater Treatment Plant",
+   "city": "COLUMBUS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024767",
+   "permittee": "City of Conneaut WWTP",
+   "city": "CONNEAUT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024775",
+   "permittee": "Coshocton, City of",
+   "city": "COSHOCTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024881",
+   "permittee": "Dayton, City of",
+   "city": "DAYTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024899",
+   "permittee": "City of Defiance",
+   "city": "DEFIANCE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024911",
+   "permittee": "Delaware, City of",
+   "city": "DELAWARE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024929",
+   "permittee": "Delphos, City of",
+   "city": "DELPHOS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0024945",
+   "permittee": "City of Dover",
+   "city": "DOVER",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0024970",
+   "permittee": "East Liverpool WWTP",
+   "city": "EAST LIVERPOOL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025003",
+   "permittee": "Elyria City of",
+   "city": "ELYRIA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0025011",
+   "permittee": "Englewood, City of",
+   "city": "ENGLEWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025062",
+   "permittee": "Fairborn, City of",
+   "city": "FAIRBORN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025071",
+   "permittee": "Fairfield, City of",
+   "city": "FAIRFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025135",
+   "permittee": "City of Findlay Water Pollution Control Center",
+   "city": "FINDLAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025275",
+   "permittee": "Veolia Water N America Oper Serv",
+   "city": "FRANKLIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025291",
+   "permittee": "Fremont Water Reclamation Center",
+   "city": "FREMONT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025313",
+   "permittee": "Galion, City of",
+   "city": "GALION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025364",
+   "permittee": "Girard, City of",
+   "city": "GIRARD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025372",
+   "permittee": "Grafton Village of",
+   "city": "GRAFTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025381",
+   "permittee": "Beavercreek WRRF",
+   "city": "BEAVERCREEK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025429",
+   "permittee": "City of Greenville",
+   "city": "GREENVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025445",
+   "permittee": "City of Hamilton",
+   "city": "HAMILTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025453",
+   "permittee": "Little Miami Wastewater Treatment Plant",
+   "city": "CINCINNATI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025461",
+   "permittee": "Hamilton Co Bd of Comm",
+   "city": "CINCINNATI",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0025470",
+   "permittee": "Muddy Creek Wastewater Treatment Plant",
+   "city": "CINCINNATI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025488",
+   "permittee": "Hamilton Co Brd of Comm Metropolitan SD",
+   "city": "CINCINNATI",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0025763",
+   "permittee": "Heath, City of",
+   "city": "HEATH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025771",
+   "permittee": "Hicksville WWTP",
+   "city": "HICKSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0025810",
+   "permittee": "Hubbard City of",
+   "city": "HUBBARD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025852",
+   "permittee": "City of Ironton",
+   "city": "IRONTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0025917",
+   "permittee": "City of Kent",
+   "city": "KENT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0025925",
+   "permittee": "City of Kenton WWTP",
+   "city": "KENTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026018",
+   "permittee": "Lakewood, City of",
+   "city": "LAKEWOOD",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0026026",
+   "permittee": "Lancaster, City of Municipal Bldg",
+   "city": "LANCASTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026069",
+   "permittee": "Lima, City of",
+   "city": "LIMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026093",
+   "permittee": "City Of Lorain",
+   "city": "LORAIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026182",
+   "permittee": "Louisville City of",
+   "city": "LOUISVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026328",
+   "permittee": "City of Mansfield WWTP",
+   "city": "MANSFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026344",
+   "permittee": "City of Marietta Wastewater Treatment Plant",
+   "city": "MARIETTA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026352",
+   "permittee": "City of Marion, Div of Water Pollution Control",
+   "city": "MARION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026492",
+   "permittee": "City of Miamisburg",
+   "city": "MIAMISBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026522",
+   "permittee": "City of Middletown",
+   "city": "MIDDLETOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026573",
+   "permittee": "Minster, Village of",
+   "city": "MINSTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026590",
+   "permittee": "Eastern Regional Water Reclamation Facility",
+   "city": "KETTERING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026638",
+   "permittee": "Montgomery Co Brd of Comm",
+   "city": "WEST CARROLLTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026662",
+   "permittee": "City of Mount Vernon",
+   "city": "MOUNT VERNON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026671",
+   "permittee": "City of Newark Wastewater Treatment Plant",
+   "city": "NEWARK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026689",
+   "permittee": "Village of Newcomerstown",
+   "city": "NEWCOMERSTOWN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0026727",
+   "permittee": "New Philadelphia, City of",
+   "city": "NEW PHILADELPHIA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0026743",
+   "permittee": "Niles, City of",
+   "city": "NILES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026778",
+   "permittee": "North Olmsted WWTP",
+   "city": "NORTH OLMSTED",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026794",
+   "permittee": "North Royalton WWTP 'A'",
+   "city": "NORTH ROYALTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026921",
+   "permittee": "Ottawa Wastewater Treatment Plant",
+   "city": "OTTAWA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026930",
+   "permittee": "City of Oxford",
+   "city": "OXFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0026948",
+   "permittee": "Painesville City Of",
+   "city": "PAINESVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0027049",
+   "permittee": "Piqua, City Of",
+   "city": "PIQUA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027197",
+   "permittee": "Portsmouth Lawson Run WWTP",
+   "city": "PORTSMOUTH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027324",
+   "permittee": "Salem, City of",
+   "city": "SALEM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027332",
+   "permittee": "City of Sandusky WPC",
+   "city": "SANDUSKY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027421",
+   "permittee": "Sidney, City of",
+   "city": "SIDNEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027430",
+   "permittee": "City of Solon Water Reclamation Facility",
+   "city": "SOLON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027472",
+   "permittee": "Springboro Wastewater Treatment Facility",
+   "city": "SPRINGBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027481",
+   "permittee": "City of Springfield WWTP",
+   "city": "SPRINGFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027511",
+   "permittee": "Steubenville, City of",
+   "city": "STEUBENVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0027600",
+   "permittee": "Struthers, City",
+   "city": "STRUTHERS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027740",
+   "permittee": "City of Toledo",
+   "city": "TOLEDO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027758",
+   "permittee": "Troy, City of",
+   "city": "TROY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027863",
+   "permittee": "City of Twinsburg WWTP",
+   "city": "TWINSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027880",
+   "permittee": "Urbana, City of",
+   "city": "URBANA",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0027910",
+   "permittee": "Van Wert WWTP",
+   "city": "VAN WERT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027936",
+   "permittee": "City of Wadsworth",
+   "city": "WADSWORTH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0027952",
+   "permittee": "City of Wapakoneta WRF",
+   "city": "WAPAKONETA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0027987",
+   "permittee": "City of Warren",
+   "city": "WARREN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0028002",
+   "permittee": "Washington Court House SD",
+   "city": "WASHINGTON COURT HOUSE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0028118",
+   "permittee": "Willard, City of",
+   "city": "WILLARD",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0028126",
+   "permittee": "Willoughby-Eastlake Water Pollution Control Center",
+   "city": "EASTLAKE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0028134",
+   "permittee": "Wilmington City of",
+   "city": "WILMINGTON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0028185",
+   "permittee": "City of Wooster-Water Resource RecoveryFacility",
+   "city": "WOOSTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0028193",
+   "permittee": "City of Xenia-Ford Road WWTP",
+   "city": "XENIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0028207",
+   "permittee": "City of Xenia - Glady Run WWTP",
+   "city": "XENIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0028223",
+   "permittee": "Youngstown, City of",
+   "city": "YOUNGSTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0028240",
+   "permittee": "Zanesville WWTP",
+   "city": "ZANESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0030503",
+   "permittee": "City of Rocky River",
+   "city": "ROCKY RIVER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0031062",
+   "permittee": "City of Euclid WWTP",
+   "city": "EUCLID",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0031119",
+   "permittee": "Pickerington Wastewater Treatment Plant",
+   "city": "PICKERINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0034223",
+   "permittee": "Lucas Co Commissioners",
+   "city": "WATERVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0036013",
+   "permittee": "Aqua Ohio Water Co. Inc. - Huber Ridge WWTP",
+   "city": "WESTERVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0036021",
+   "permittee": "Aqua Ohio Water Co. Inc. - Blacklick WWTP",
+   "city": "COLUMBUS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0036285",
+   "permittee": "Trumbull Co Brookfield SD 1 & 2 STP",
+   "city": "MASURY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0036641",
+   "permittee": "Logan County Commissioners",
+   "city": "RUSSELLS POINT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0036790",
+   "permittee": "Lake Co Comm",
+   "city": "MADISON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0037249",
+   "permittee": "Boardman WWTP",
+   "city": "YOUNGSTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0037338",
+   "permittee": "American II Wastewater Treatment Plant",
+   "city": "LIMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0038717",
+   "permittee": "Portage County Commissioners",
+   "city": "KENT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0039098",
+   "permittee": "Buckeye Lake WWTP",
+   "city": "BUCKEYE LAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0040592",
+   "permittee": "Sugarcreek WRRF",
+   "city": "SPRING VALLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0040983",
+   "permittee": "Hamilton Co Brd of Comm Metropolitan SD",
+   "city": "CINCINNATI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0043401",
+   "permittee": "Trumbull County Sanitary Engineer",
+   "city": "WARREN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0043494",
+   "permittee": "Geauga Co Dept Water Resources",
+   "city": "BAINBRIDGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0043559",
+   "permittee": "Lake Co Comm",
+   "city": "MENTOR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0043567",
+   "permittee": "Medina County SD 500 Liverpool WWTP",
+   "city": "VALLEY CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0044512",
+   "permittee": "North Ridgeville City",
+   "city": "SHEFFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0045721",
+   "permittee": "Mahoning County Commissioners",
+   "city": "MINERAL RIDGE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0045748",
+   "permittee": "Medina County Sewer District No. 300",
+   "city": "HINCKLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0048089",
+   "permittee": "Clermont Co Water Resources Dept",
+   "city": "LOVELAND",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0049361",
+   "permittee": "Nine Mile Creek WWTP",
+   "city": "CINCINNATI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0049379",
+   "permittee": "Clermont Co Water Resources Dept",
+   "city": "MILFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0049387",
+   "permittee": "Middle East Fork WWTP",
+   "city": "BATAVIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0049417",
+   "permittee": "Butler County Water and Sewer Department",
+   "city": "HAMILTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0049646",
+   "permittee": "Tri Cities North Regional WW Authority",
+   "city": "DAYTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0049794",
+   "permittee": "Clark Co Brd of Comm",
+   "city": "MEDWAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0049999",
+   "permittee": "Eastern Ohio Regional Wastewater Auth",
+   "city": "BELLAIRE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0050016",
+   "permittee": "Wheelersburg WWTP SD No 2",
+   "city": "WHEELERSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0052604",
+   "permittee": "City of Norwalk WWTP",
+   "city": "NORWALK",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0052744",
+   "permittee": "Fostoria WWTP",
+   "city": "FOSTORIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0052876",
+   "permittee": "Port Clinton Wastewater Treatment Plant",
+   "city": "PORT CLINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0052914",
+   "permittee": "Oregon Wastewater Treatment Plant",
+   "city": "OREGON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0052922",
+   "permittee": "City of Bucyrus",
+   "city": "BUCYRUS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0052949",
+   "permittee": "Tiffin Water Pollution Control Center",
+   "city": "TIFFIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0053082",
+   "permittee": "Erie Co Dept of Environmental Services",
+   "city": "HURON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0053660",
+   "permittee": "Ottawa Co Regional Water",
+   "city": "PORT CLINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0054224",
+   "permittee": "Dept. of Rehabilitation and Corrections",
+   "city": "ORIENT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0054305",
+   "permittee": "Fairfield Co Utilities",
+   "city": "PICKERINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0054399",
+   "permittee": "Olentangy Environmental Control Center",
+   "city": "DELAWARE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0058157",
+   "permittee": "Marion Co Sanitary Eng",
+   "city": "MARION",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0064009",
+   "permittee": "Summit County Environmental Services",
+   "city": "STOW",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0064017",
+   "permittee": "Summit County Environmental Services",
+   "city": "AKRON",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "OH0071692",
+   "permittee": "Warren Co Brd of Comm",
+   "city": "MAINEVILLE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0072087",
+   "permittee": "Butler County Water and Sewer Department",
+   "city": "WEST CHESTER",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0076490",
+   "permittee": "Chillicothe Correctional Institute Wastewater Plnt",
+   "city": "CHILLICOTHE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0089672",
+   "permittee": "Philip Q Maiorana WWTP",
+   "city": "LORAIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0090131",
+   "permittee": "Streetsboro-Hudson Regional WWTP",
+   "city": "STREETSBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0094684",
+   "permittee": "Aqua Ohio - Union Rome WWTP",
+   "city": "CHESAPEAKE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0098043",
+   "permittee": "Aurora Westerly WWTP",
+   "city": "AURORA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0102857",
+   "permittee": "Rittman, City of",
+   "city": "RITTMAN",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "OH0113964",
+   "permittee": "Southwest Licking Env Control Facility",
+   "city": "HEBRON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0121380",
+   "permittee": "Alum Creek Water Reclamation Facility",
+   "city": "LEWIS CENTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0136247",
+   "permittee": "Lower Scioto Water Reclamation Facility",
+   "city": "DELAWARE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0136271",
+   "permittee": "Marysville Water Reclamation Facility",
+   "city": "MARYSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "OH0136603",
+   "permittee": "City of Lancaster WPC Dept",
+   "city": "LANCASTER",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

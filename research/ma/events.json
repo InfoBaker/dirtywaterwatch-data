@@ -1,0 +1,528 @@
+[
+ {
+  "event_ref": "spfld-2026-08-03",
+  "date_start": "2026-08-03T01:35",
+  "date_end": "2026-08-03T~10:01 (computed: SPR042 start 03:00 + verified duration 7 h 01 min)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "Springfield Water and Sewer Commission",
+  "npdes_permit": "MA0101613",
+  "outfall": "22 CSO outfalls incl. SPR042 Springfield WWTP bypass at Bondi's Island (35,484,627 gal), SPR019 Mill/Orange/Locust Sts (34,034,193), SPR016 York St (16,878,000), SPR012 Worthington St (16,167,000), SPR013 Bridge St (15,988,000)",
+  "receiving_water": "Connecticut River; Mill River; Chicopee River",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "cso",
+  "volume": "145,300,461 (sum of 22 MassDEP Verified Data Reports for CSO; plus a separate 200,000 gal SSO the same morning)",
+  "units": "gallons",
+  "notice_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/8e8d6584-83e7-4343-ac5f-2d12dde2499c",
+  "portal_records": [
+   {
+    "label": "SPR042 Public Notification Report 26016970, Initial-Ceased, submitted 2026-08-03T12:00",
+    "incidentId": "8e8d6584-83e7-4343-ac5f-2d12dde2499c",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/8e8d6584-83e7-4343-ac5f-2d12dde2499c",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=8e8d6584-83e7-4343-ac5f-2d12dde2499c"
+   },
+   {
+    "label": "SPR042 Verified Data Report 26017463, 35,484,627 gal, 7 h 01 min, 4.50 in rain, submitted 2026-09-08",
+    "incidentId": "62423949-2de5-4f32-9252-7588b7aeae43",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/62423949-2de5-4f32-9252-7588b7aeae43",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=62423949-2de5-4f32-9252-7588b7aeae43"
+   },
+   {
+    "label": "SPR010 Initial-Ongoing 26017000 submitted 2026-08-03T15:44",
+    "incidentId": "c31ce5aa-4301-4076-a65b-21d6b2b95cc8",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/c31ce5aa-4301-4076-a65b-21d6b2b95cc8",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=c31ce5aa-4301-4076-a65b-21d6b2b95cc8"
+   },
+   {
+    "label": "SPR010 Ceased update 26017000-1 submitted 2026-08-04T09:30",
+    "incidentId": "cbdbb84e-54fa-49a1-a9eb-a31b128b6361",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/cbdbb84e-54fa-49a1-a9eb-a31b128b6361",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=cbdbb84e-54fa-49a1-a9eb-a31b128b6361"
+   }
+  ],
+  "news_urls": [],
+  "how_reported": "SWSC email list and Aquasight live map (not captured for this date); MassDEP Public Notification Reports filed 2026-08-03 11:59-15:44 (about 9-14 h after start), one Ceased update 8/4 09:30; Verified Data Reports filed 2026-09-08. Each PN carries an attached .eml titled 'CSO Public Advisory - Notice Aviso de aviso público de CSO'.",
+  "advisory_duration": "48 hours after the discharge ceases (required advisory text, 314 CMR 16.04(10)(g))",
+  "affected_places": [
+   "Springfield riverfront",
+   "Bondi's Island (Agawam)",
+   "Mill River",
+   "Chicopee River (Indian Orchard)",
+   "downstream: Agawam, West Springfield, Longmeadow, Enfield/Suffield CT"
+  ],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Largest Pioneer Valley event in the portal for 2025-2026. Holyoke filed 10 PN records for 8/3 (on 8/4 ~12:00). Chicopee has no portal record for this date (inferred reporting gap, not proof of no discharge). No news article found (events sub-agent)."
+ },
+ {
+  "event_ref": "spfld-2026-08-03-sso",
+  "date_start": "2026-08-03T06:00",
+  "date_end": "2026-08-03T~08:30 (computed, 2 h 30 min)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "Springfield Water and Sewer Commission",
+  "npdes_permit": "MA0101613",
+  "outfall": null,
+  "receiving_water": "'Other' with description 'Chicopee River'",
+  "water_slug": "chicopee-river-ma",
+  "event_type": "sso",
+  "volume": "200,000",
+  "units": "gallons",
+  "notice_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/9df9b3bf-a686-4a52-8c04-e738de7478a8",
+  "portal_records": [
+   {
+    "label": "PN 26017104 'SSO – System Surcharging Under High Flow Conditions', submitted 2026-08-05T15:16 (~57 h after start)",
+    "incidentId": "9df9b3bf-a686-4a52-8c04-e738de7478a8",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/9df9b3bf-a686-4a52-8c04-e738de7478a8",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=9df9b3bf-a686-4a52-8c04-e738de7478a8"
+   },
+   {
+    "label": "VDR 26017474, 200,000 gal, 2 h 30 min, submitted 2026-09-08",
+    "incidentId": "861cea41-a729-46bf-93b0-9473116edfc4",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/861cea41-a729-46bf-93b0-9473116edfc4",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=861cea41-a729-46bf-93b0-9473116edfc4"
+   }
+  ],
+  "news_urls": [],
+  "how_reported": "MassDEP portal only (attachment '20260805 IOPS SSO Form - Complete.pdf'); springfieldalerts.com SSO page is a blank template.",
+  "advisory_duration": null,
+  "affected_places": [],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Test case for SSO handling and for a 'waterBody: Other' record with free-text waterBodyDescription."
+ },
+ {
+  "event_ref": "spfld-2026-07-28",
+  "date_start": "2026-07-28T12:45",
+  "date_end": "2026-07-28T~20:34 (computed: SPR042 14:50 + 5 h 44 min)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "Springfield Water and Sewer Commission",
+  "npdes_permit": "MA0101613",
+  "outfall": "15 outfalls incl. SPR042 Bondi's Island bypass (21,147,429), SPR010 Clinton St (9,515,000; 11 h), SPR016 York St (4,081,000)",
+  "receiving_water": "Connecticut River; Mill River",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "cso",
+  "volume": "43,969,616 (MassDEP verified)",
+  "units": "gallons",
+  "notice_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/966e5ec1-e9a3-42e6-beb3-46e90d808174",
+  "portal_records": [
+   {
+    "label": "SPR042 PN Initial-Ceased submitted 2026-07-29T09:14",
+    "incidentId": "966e5ec1-e9a3-42e6-beb3-46e90d808174",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/966e5ec1-e9a3-42e6-beb3-46e90d808174",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=966e5ec1-e9a3-42e6-beb3-46e90d808174"
+   },
+   {
+    "label": "SPR042 VDR 21,147,429 gal, 5 h 44 min, submitted 2026-08-06",
+    "incidentId": "82fc346f-2098-4663-88ef-e579d1c1cba5",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/82fc346f-2098-4663-88ef-e579d1c1cba5",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=82fc346f-2098-4663-88ef-e579d1c1cba5"
+   }
+  ],
+  "news_urls": [
+   "https://www.westernmassnews.com/2026/07/29/millions-gallons-sewage-stormwater-flow-into-connecticut-river-after-heavy-rain/"
+  ],
+  "how_reported": "SWSC email/map; MassDEP PNs filed next morning 2026-07-29 09:09-09:30; SWSC communications manager quoted by Western Mass News.",
+  "advisory_duration": null,
+  "affected_places": [],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "News (7/29) gave 4,350,000 gal at Bondi's 'around midday'; verified figure 21.1 M. Shows why news figures must not be used as volumes."
+ },
+ {
+  "event_ref": "spfld-2026-07-21",
+  "date_start": "2026-07-21T15:25",
+  "date_end": "2026-07-21T~17:30 (computed)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "Springfield Water and Sewer Commission",
+  "npdes_permit": "MA0101613",
+  "outfall": "18 outfalls incl. SPR042 (5,645,728), SPR019 Mill R. (2,858,683), SPR013 (1,390,000), SPR010 (1,297,000)",
+  "receiving_water": "Connecticut River; Mill River; Chicopee River",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "cso",
+  "volume": "14,727,459 (MassDEP verified)",
+  "units": "gallons",
+  "notice_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/b83cc204-836f-4836-b109-ff9a04b30b32",
+  "portal_records": [
+   {
+    "label": "SPR042 PN submitted 2026-07-22T08:10",
+    "incidentId": "b83cc204-836f-4836-b109-ff9a04b30b32",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/b83cc204-836f-4836-b109-ff9a04b30b32",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=b83cc204-836f-4836-b109-ff9a04b30b32"
+   },
+   {
+    "label": "SPR042 VDR 5,645,728 gal",
+    "incidentId": "c19173ae-36c9-4683-81fb-0838a1a51658",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/c19173ae-36c9-4683-81fb-0838a1a51658",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=c19173ae-36c9-4683-81fb-0838a1a51658"
+   }
+  ],
+  "news_urls": [
+   "https://www.westernmassnews.com/2026/07/24/after-tuesday-rain-sewage-overflow-fouls-connecticut-river/",
+   "https://groups.google.com/g/ctnewswire/c/eWAwrVcTuz0"
+  ],
+  "how_reported": "SWSC email/map; MassDEP PNs 2026-07-22 08:10-08:30; boaters reported it (Western Mass News quotes the Pioneer Valley Riverfront Club director and a Springfield Yacht & Canoe Club member); CT Rep. Zawistowski release 7/27.",
+  "advisory_duration": null,
+  "affected_places": [
+   "Springfield riverfront",
+   "Pioneer Valley Riverfront Club",
+   "Springfield Yacht and Canoe Club docks"
+  ],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "CT legislator cited 13.5 M gal from Bondi's; verified 5.65 M. Chicopee 0.43 M dated 7/22 (PN filed 7/29)."
+ },
+ {
+  "event_ref": "spfld-2026-07-07",
+  "date_start": "2026-07-07T05:05",
+  "date_end": "2026-07-07T~10:05 (computed: SPR012 05:10 + 4 h 55 min)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "Springfield Water and Sewer Commission",
+  "npdes_permit": "MA0101613",
+  "outfall": "10 outfalls incl. SPR042 (6,324,975; 1 h 46 min), SPR010 (1,678,000), SPR012 (962,000)",
+  "receiving_water": "Connecticut River; Mill River",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "cso",
+  "volume": "10,516,975 (MassDEP verified)",
+  "units": "gallons",
+  "notice_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/deeca33b-8118-403c-8e16-06ca1baba263",
+  "portal_records": [
+   {
+    "label": "SPR042 Initial-Ongoing submitted 2026-07-07T11:29",
+    "incidentId": "deeca33b-8118-403c-8e16-06ca1baba263",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/deeca33b-8118-403c-8e16-06ca1baba263",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=deeca33b-8118-403c-8e16-06ca1baba263"
+   },
+   {
+    "label": "SPR042 Ceased submitted 2026-07-07T14:52",
+    "incidentId": "3d3c3238-e421-4287-8b7f-69a7a0a17aa8",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/3d3c3238-e421-4287-8b7f-69a7a0a17aa8",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=3d3c3238-e421-4287-8b7f-69a7a0a17aa8"
+   },
+   {
+    "label": "SPR042 VDR 6,324,975 gal",
+    "incidentId": "8d3f424b-d2ea-40de-b0d4-b0b0679c5e61",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/8d3f424b-d2ea-40de-b0d4-b0b0679c5e61",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=8d3f424b-d2ea-40de-b0d4-b0b0679c5e61"
+   }
+  ],
+  "news_urls": [
+   "https://www.westernmassnews.com/2026/07/10/after-6m-gallon-sewage-spill-springfield-officials-say-infrastructure-work-is-ongoing/"
+  ],
+  "how_reported": "SWSC alerts (springfieldalerts.com); MassDEP Initial-Ongoing filed same morning 11:27-11:37 and Ceased updates 14:49-14:58 the same day: the cleanest start/update/end sequence found.",
+  "advisory_duration": "'at least two days' (Western Mass News, officials)",
+  "affected_places": [],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Use as the reference test case for the Initial-Ongoing -> Ceased parent/child pattern."
+ },
+ {
+  "event_ref": "spfld-2026-06-30",
+  "date_start": "2026-06-30T19:15",
+  "date_end": "2026-06-30T~21:05 (computed)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "Springfield Water and Sewer Commission",
+  "npdes_permit": "MA0101613",
+  "outfall": "8 outfalls incl. SPR010 (634,000), SPR013 (307,000), SPR012 (275,000), SPR042 (8,102)",
+  "receiving_water": "Connecticut River; Mill River; Chicopee River",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "cso",
+  "volume": "1,389,102 (MassDEP verified); West Springfield announced 'over 6,070,480+ gallons'",
+  "units": "gallons",
+  "notice_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/b3d236d3-0984-4c3f-99ff-1372a15d55bf",
+  "portal_records": [
+   {
+    "label": "SPR010 PN submitted 2026-07-01T07:23",
+    "incidentId": "b3d236d3-0984-4c3f-99ff-1372a15d55bf",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/b3d236d3-0984-4c3f-99ff-1372a15d55bf",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=b3d236d3-0984-4c3f-99ff-1372a15d55bf"
+   },
+   {
+    "label": "SPR010 VDR 634,000 gal",
+    "incidentId": "3905a0ad-72c9-4359-947b-b1b2605e8941",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/3905a0ad-72c9-4359-947b-b1b2605e8941",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=3905a0ad-72c9-4359-947b-b1b2605e8941"
+   }
+  ],
+  "news_urls": [
+   "https://www.wwlp.com/news/local-news/hampden-county/springfield-plants-sewer-overflows-lead-to-river-contamination/amp/",
+   "https://groups.google.com/g/ctnewswire/c/Xw41E7e-qLk"
+  ],
+  "how_reported": "SWSC email/map; MassDEP PNs 2026-07-01 07:23-07:38; Town of West Springfield announcement 7/2 (WWLP) and Nixle alert (search snippet only).",
+  "advisory_duration": "48 hours (WWLP, citing health officials)",
+  "affected_places": [
+   "West Springfield",
+   "Springfield"
+  ],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Announced figure is about 4x the verified total; likely a sum of per-outfall 3-year-average estimates (inferred)."
+ },
+ {
+  "event_ref": "hol-2025-07-27",
+  "date_start": "2025-07-27T07:00 (MassDEP verified, HOL018)",
+  "date_end": "2025-07-27T~09:32 (computed: HOL09 08:42 + 50 min)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "City of Holyoke",
+  "npdes_permit": "MA0101630",
+  "outfall": "9 outfalls (verified); the public notice names only CSO 009",
+  "receiving_water": "Connecticut River",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "cso",
+  "volume": "1,957,554 verified (669,554 untreated + 1,288,000 'CSO – Treated' at HOL09); notice estimate for CSO 009: 5,246,440",
+  "units": "gallons",
+  "notice_url": "https://www.holyoke.org/cso-notification-july-28-2025/",
+  "portal_records": [
+   {
+    "label": "HOL09 VDR 1,288,000 gal 'CSO – Treated' submitted 2025-08-14",
+    "incidentId": "7832c76f-d512-415e-9e44-69e779e6cfc6",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/7832c76f-d512-415e-9e44-69e779e6cfc6",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=7832c76f-d512-415e-9e44-69e779e6cfc6"
+   },
+   {
+    "label": "HOL018 VDR 520,822 gal submitted 2025-08-13",
+    "incidentId": "1f3e6790-66c3-44a0-a180-e4321d4f84af",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/1f3e6790-66c3-44a0-a180-e4321d4f84af",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=1f3e6790-66c3-44a0-a180-e4321d4f84af"
+   }
+  ],
+  "news_urls": [
+   "https://www.westernmassnews.com/2025/08/11/officials-call-epa-stop-dumping-sewage-connecticut-river/",
+   "https://ctmirror.org/2025/09/11/western-mass-sewage-ct-river/"
+  ],
+  "how_reported": "Everbridge email copied to a holyoke.org page posted 2025-07-28 09:33 ('07/27/25 13:15:00 EST', 'Ceased'). No MassDEP Public Notification Report (Holyoke filed none April-December 2025). A fishermen's video from Suffield CT circulated; CT legislators wrote to EPA.",
+  "advisory_duration": "48 hours after the discharge ceases (notice)",
+  "affected_places": [
+   "Springfield",
+   "West Springfield",
+   "Agawam",
+   "Longmeadow",
+   "Chicopee",
+   "South Hadley",
+   "Suffield CT",
+   "Enfield CT"
+  ],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "News reported 7+ M gal; Holyoke said about 5 M was treated. Test case for notice-vs-verified mismatch and for the 'CSO – Treated' type."
+ },
+ {
+  "event_ref": "chi-2025-07-27",
+  "date_start": "2025-07-27 (time 'unknown' in notice; portal 00:00)",
+  "date_end": null,
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "City of Chicopee",
+  "npdes_permit": "MA0101508 (notice prints 'MA010508')",
+  "outfall": "Ticked: CSO 003, 005, 007, 009, 024 (Connecticut R.); 027, 032, 034 (Chicopee R.)",
+  "receiving_water": "Connecticut River; Chicopee River",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "cso",
+  "volume": "Notice: 'Approximate volume is unknown.' Verified (filed 2026-02-03): 1,368,648 incl. CHI03 820,320",
+  "units": "gallons",
+  "notice_url": "https://www.chicopeema.gov/DocumentCenter/View/20986",
+  "portal_records": [
+   {
+    "label": "CHI03 PN submitted 2025-07-31 (4 days later)",
+    "incidentId": "71867ad7-0d81-472e-af68-6adb9369510c",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/71867ad7-0d81-472e-af68-6adb9369510c",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=71867ad7-0d81-472e-af68-6adb9369510c"
+   },
+   {
+    "label": "CHI03 VDR 820,320 gal, 2 h 15 min, submitted 2026-02-03",
+    "incidentId": "b4dd4e25-4445-44ac-9b5d-5dc26bfd465b",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/b4dd4e25-4445-44ac-9b5d-5dc26bfd465b",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=b4dd4e25-4445-44ac-9b5d-5dc26bfd465b"
+   }
+  ],
+  "news_urls": [],
+  "how_reported": "English/Spanish check-box PDF on chicopeema.gov (still the newest notice on 2026-11-01); email only to people who ask the project supervisor; MassDEP PN 4 days later; verified data 6 months later.",
+  "advisory_duration": "48 hours after the discharge or overflow ceases (notice)",
+  "affected_places": [
+   "Chicopee",
+   "Holyoke",
+   "Springfield",
+   "West Springfield",
+   "Longmeadow",
+   "Agawam"
+  ],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Start, duration, volume and cessation all 'unknown' in the notice. Test case for a notice with no times."
+ },
+ {
+  "event_ref": "hol-2025-05-31",
+  "date_start": "2025-05-31T02:55 (earliest verified start)",
+  "date_end": "2025-06-01 (HOL018 03:00 + 20 h 10 min = ~23:10 on 5/31; longest outfall row 20 h 45 min)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "City of Holyoke",
+  "npdes_permit": "MA0101630",
+  "outfall": "10 outfalls incl. HOL09 Berkshire St (three rows 19,241,000 / 9,632,000 / 4,359,000), HOL018 Walnut St (2,427,101; 20 h 10 min)",
+  "receiving_water": "Connecticut River (HOL023 via Dingle Brook)",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "cso",
+  "volume": "37,323,972 (MassDEP verified, 13 rows)",
+  "units": "gallons",
+  "notice_url": "https://www.holyoke.org/cso-notification-may-31-2025/",
+  "portal_records": [
+   {
+    "label": "HOL018 VDR 2,427,101 gal, 20 h 10 min, submitted 2025-06-16",
+    "incidentId": "210a103f-c3ec-4e30-b689-7b4f993f4f88",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/210a103f-c3ec-4e30-b689-7b4f993f4f88",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=210a103f-c3ec-4e30-b689-7b4f993f4f88"
+   },
+   {
+    "label": "HOL09 VDR 19,241,000 gal",
+    "incidentId": "f3b72cfe-bf3b-4d5d-aff4-764b6d09d736",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/f3b72cfe-bf3b-4d5d-aff4-764b6d09d736",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=f3b72cfe-bf3b-4d5d-aff4-764b6d09d736"
+   }
+  ],
+  "news_urls": [],
+  "how_reported": "holyoke.org notice page posted 2025-06-02 11:39 (Monday after a Saturday event; content not read); no MassDEP Public Notification Report; verified data filed 2025-06-16. Same day Springfield 39.1 M (PNs filed 6/2-6/6) and Chicopee 10.9 M (PNs filed 6/4 with time 00:00).",
+  "advisory_duration": "48 hours after the discharge ceases (standard notice text)",
+  "affected_places": [],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Three cities, one storm, three very different reporting trails: good multi-permittee test case."
+ },
+ {
+  "event_ref": "hol-2026-03-08-dry-weather",
+  "date_start": "2026-03-08T08:35",
+  "date_end": "2026-03-31T~20:17 (computed: 567 h 42 min for HOL021; the SSO row 564 h 42 min)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "City of Holyoke",
+  "npdes_permit": "MA0101630",
+  "outfall": "HOL021 River Terrace (CSO – UnTreated) and an SSO 'System Surcharging Under High Flow Conditions' to 'CT River'",
+  "receiving_water": "Connecticut River",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "cso",
+  "volume": "8,006,334 on each of the two verified rows (same figure; likely the same flow reported twice, inferred)",
+  "units": "gallons",
+  "notice_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/46693beb-084e-4d55-9a20-a0cc55df2638",
+  "portal_records": [
+   {
+    "label": "HOL021 VDR 26016040, 567 h 42 min, rainfall 0.02 in, submitted 2026-04-17",
+    "incidentId": "46693beb-084e-4d55-9a20-a0cc55df2638",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/46693beb-084e-4d55-9a20-a0cc55df2638",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=46693beb-084e-4d55-9a20-a0cc55df2638"
+   },
+   {
+    "label": "SSO VDR 26016048, 564 h 42 min, submitted 2026-04-23",
+    "incidentId": "4cf78794-ddfd-41a0-9a2a-7573afca3d18",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/4cf78794-ddfd-41a0-9a2a-7573afca3d18",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=4cf78794-ddfd-41a0-9a2a-7573afca3d18"
+   }
+  ],
+  "news_urls": [],
+  "how_reported": "No Public Notification Report for 3/8 in the portal; Holyoke back-filed other February-March 2026 PNs on 2026-06-04. The verified record self-certifies 'y' to every notification question. No holyoke.org notice page after 2026-01-12. Holyoke posted a 'River Terrace CSO-21 Sewer System Separation' project page on 2026-06-30.",
+  "advisory_duration": null,
+  "affected_places": [],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "A 23-day discharge in dry weather (0.02 in rain): the kind of event a swimmer or rower most needs to know about. Treat as a data-quality test case; do not state a cause."
+ },
+ {
+  "event_ref": "spfld-hol-2026-10-16",
+  "date_start": "2026-10-16T07:05 (Holyoke map) / 09:20 (Springfield SPR012)",
+  "date_end": "2026-10-16T19:40 (Holyoke CSO 018, map)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "Springfield Water and Sewer Commission; City of Holyoke",
+  "npdes_permit": "MA0101613; MA0101630",
+  "outfall": "Springfield: SPR010, SPR012 (Initial-Ongoing) and 8 more incl. SPR016, SPR045, SPR042; Holyoke: HOL018 Walnut St, HOL08, HOL09 (treated)",
+  "receiving_water": "Connecticut River; Mill River",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "cso",
+  "volume": "Holyoke map 'Prelim' 335,452 (CSO 018 + 008); no verified data yet",
+  "units": "gallons",
+  "notice_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/4aa7117a-8043-4542-9ab4-540ac003b289",
+  "portal_records": [
+   {
+    "label": "SPR012 Initial-Ongoing 26017854 submitted 2026-10-16T15:28",
+    "incidentId": "4aa7117a-8043-4542-9ab4-540ac003b289",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/4aa7117a-8043-4542-9ab4-540ac003b289",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=4aa7117a-8043-4542-9ab4-540ac003b289"
+   },
+   {
+    "label": "SPR012 Ceased 26017854-1 submitted 2026-10-19T08:37",
+    "incidentId": "b8f17ceb-2f5c-4983-b19f-2bf55f2cca83",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/b8f17ceb-2f5c-4983-b19f-2bf55f2cca83",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=b8f17ceb-2f5c-4983-b19f-2bf55f2cca83"
+   },
+   {
+    "label": "HOL018 PN submitted 2026-10-19T08:26",
+    "incidentId": "a8bf4ded-7af5-426a-baf1-7cf5498393a5",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/a8bf4ded-7af5-426a-baf1-7cf5498393a5",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=a8bf4ded-7af5-426a-baf1-7cf5498393a5"
+   }
+  ],
+  "news_urls": [],
+  "how_reported": "Friday event: Springfield filed two Initial-Ongoing PNs the same afternoon and the rest, with Ceased updates, on Monday 10/19 ~08:40; Holyoke's PNs on Monday 10/19 08:26-08:30; Holyoke Flow Assessment map showed start/end/prelim gallons.",
+  "advisory_duration": null,
+  "affected_places": [],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Most recent Pioneer Valley event at checking time; weekend-lag test case."
+ },
+ {
+  "event_ref": "spfld-2025-03-05",
+  "date_start": "2025-03-05T19:35",
+  "date_end": "2025-03-06T~09:00 (computed)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "Springfield Water and Sewer Commission",
+  "npdes_permit": "MA0101613",
+  "outfall": "~19 outfalls incl. SPR042 Bondi's Island bypass (26,168,897 + 11,338,897), SPR016 York St (14,468,000)",
+  "receiving_water": "Connecticut River; Mill River; Chicopee River",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "cso",
+  "volume": "68,848,794 (MassDEP verified, 3/5 + 3/6)",
+  "units": "gallons",
+  "notice_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/afdc322b-a8b5-45f5-a25a-63569bcc3539",
+  "portal_records": [
+   {
+    "label": "SPR042 PN dated 3/6, submitted 2025-03-06T07:38",
+    "incidentId": "afdc322b-a8b5-45f5-a25a-63569bcc3539",
+    "details_url": "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/details/afdc322b-a8b5-45f5-a25a-63569bcc3539",
+    "api_url": "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/Incident/GetIncidentById?id=afdc322b-a8b5-45f5-a25a-63569bcc3539"
+   }
+  ],
+  "news_urls": [
+   "https://nixle.us/G5L99"
+  ],
+  "how_reported": "SWSC email/map; MassDEP PNs for 3/6 outfalls filed 3/6 07:32-13:04 but PNs dated 3/5 show submittedDate 2025-04-10 (events sub-agent); West Springfield Nixle advisory 3/6 (search snippet; link now 404).",
+  "advisory_duration": null,
+  "affected_places": [],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "Largest Springfield event of 2025 (events sub-agent's reading of the API)."
+ },
+ {
+  "event_ref": "chi-2023-07-08-blended",
+  "date_start": "2023-07-08T18:45",
+  "date_end": "2023-07-18T~11:15 (computed, 232 h 30 min)",
+  "timezone": "America/New_York (assumed; source gives local clock time without zone)",
+  "discharger": "City of Chicopee",
+  "npdes_permit": "MA0101508",
+  "outfall": "010 Chicopee CSO bypass treatment facility (portal location 'Other')",
+  "receiving_water": "Connecticut River",
+  "water_slug": "connecticut-river-ma",
+  "event_type": "partially_treated",
+  "volume": "94,900,000 (MassDEP verified, 'Partially Treated – Blended')",
+  "units": "gallons",
+  "notice_url": "https://chicopeema.gov/DocumentCenter/View/17110",
+  "portal_records": [],
+  "news_urls": [
+   "https://www.westernmassnews.com/2023/07/17/concerns-arise-raw-sewage-overflows-ct-river-due-flooding/"
+  ],
+  "how_reported": "MassDEP Initial-Ongoing filed 2023-07-12 15:01 (~92 h after start) with Ongoing updates 7/13 (x2), 7/14, 7/17; Chicopee per-date PDF notices with start, duration and volume 'unknown'; residents complained of lack of information (WMN).",
+  "advisory_duration": "48 hours after the discharge or overflow ceases (notice)",
+  "affected_places": [
+   "Chicopee",
+   "Holyoke",
+   "Springfield",
+   "West Springfield",
+   "Longmeadow",
+   "Agawam"
+  ],
+  "verified": "fetched",
+  "checked": "2026-11-01",
+  "notes": "July 2023 floods; multi-day partially treated discharge with Ongoing updates (events sub-agent)."
+ }
+]

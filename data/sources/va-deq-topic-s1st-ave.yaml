@@ -1,0 +1,24 @@
+id: "va-deq-topic-s1st-ave"
+name: "DEQ topic page 'South First Avenue Sewer Main Failure' (Hopewell, 2026-07-14)"
+url: "https://www.deq.virginia.gov/news-info/shortcuts/topics-of-interest/s-1st-ave-sewer-main-failure"
+homepage: "https://www.deq.virginia.gov/news-info/shortcuts/topics-of-interest/s-1st-ave-sewer-main-failure"
+kind: "html"
+level: "state"
+# Notes (research/va, status used, verified fetched, checked 2026-11-02): Event trace for
+#   va-hopewell-bailey-bay-2026-07-14.
+# Access detail (research, quoted): Browser read: break 'July 14, 2026 at approximately 6 a.m.';
+#   leak stopped 'approximately 12:00 p.m. (noon)' Tuesday July 21; total 1.5 million gallons.
+# Waters: Cattail Creek, Bailey Creek, Bailey Bay (James River) (openboatlaunch slugs:
+#   james-river-va)
+cadence: null
+license: "none stated"
+attribution: "Virginia Department of Environmental Quality"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["VA"]
+access: ["html"]
+access_detail: "Browser read: break 'July 14, 2026 at approximately 6 a.m.'; leak stopped 'approximately 12:00 p.m. (noon)' Tuesday July 21; total 1.5 million gallons."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

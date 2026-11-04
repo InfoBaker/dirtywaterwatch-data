@@ -1,0 +1,23 @@
+id: "ct-dph-hab-guidance-2023"
+name: "CT DPH/DEEP Guidance to Local Health Departments for Blue-Green Algae Blooms in Recreational Freshwaters (May 2023)"
+url: "https://portal.ct.gov/-/media/dph/ehdw/blue-green-algae-blooms/guidance-to-lhd-for-blue-green-algaeblooms.pdf"
+homepage: "https://portal.ct.gov/-/media/dph/ehdw/blue-green-algae-blooms/guidance-to-lhd-for-blue-green-algaeblooms.pdf"
+kind: "pdf"
+level: "state"
+# Notes (research/science, status used, verified fetched, checked 2026-11-01): CT HAB categories and
+#   cell-count/toxin values.
+# Access detail (research, quoted): curl download; text via PDFKit.
+# Research notes: Not an event source; fills no event fields directly (provides criteria/definitions
+#   for context text).
+cadence: null
+license: "none stated"
+attribution: "Connecticut Department of Public Health and Connecticut Department of Energy and Environmental Protection"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["CT"]
+access: ["pdf"]
+access_detail: "curl download; text via PDFKit."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

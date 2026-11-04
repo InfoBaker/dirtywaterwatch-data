@@ -1,0 +1,158 @@
+{
+ "state": "PR",
+ "name": "Puerto Rico",
+ "region": "territories",
+ "epa_region": 2,
+ "npdes_authority": "epa",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-04",
+ "law": {
+  "public_notice_duty": "partial",
+  "summary": "No Puerto Rico statute found that makes PRASA tell the public of a spill. The Puerto Nuevo CSO permit requires a public notification process with no deadline, and the 2023 consent-decree modification adds web posting of CSO discharges and estimated volume. SSOs and bypasses are reported to EPA (eRule) and DRNA only.",
+  "citations": [
+   {
+    "cite": "NPDES PR0021555 (2021), CSO Permit Conditions, NMC 8",
+    "title": "Public notification",
+    "url": "https://www.epa.gov/system/files/documents/2021-09/final-npdes-permit-puerto-nuevo-rwwtp-2021.pdf",
+    "quote": "The permittee shall implement a public notification process to inform citizens of when and where CSOs occur. The process must include (a) a mechanism to alert persons of the occurrence of CSOs and (b) a system to determine the nature and duration of conditions that are potentially harmful for users of receiving waters due to CSOs.",
+    "who": "PRASA",
+    "channel": "not specified",
+    "deadline": "none stated",
+    "threshold": "any CSO",
+    "verified": "fetched"
+   },
+   {
+    "cite": "US v. PRASA, 3:15-cv-02283 (D.P.R.), 2023 modification (EPA Region 2 public notice)",
+    "title": "Puerto Nuevo sanitary sewer specific requirements",
+    "url": "https://www.epa.gov/system/files/documents/2023-07/Regional%20Public%20Notice%20on%20PRASA%20CD%20mod%207-5-2023_2.pdf",
+    "quote": "Requerimientos adicionales relacionados con la comunicación al público, a través de la web de la AAA, con información concerniente a las descargas de desbordes ... procedentes de los puntos de descarga de alcantarillado combinado permitidos y el volumen estimado de dichos desbordamientos que llegan a un cuerpo de agua.",
+    "who": "PRASA",
+    "channel": "PRASA website",
+    "deadline": "not read",
+    "threshold": "permitted CSO discharges, Puerto Nuevo",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours oral, 5 days written (40 CFR 122.41(l)(6)); electronic via NeT-SewerOverflow",
+   "cite": "40 CFR 122.41; 40 CFR 127"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "PR0021555",
+   "quote": "The permittee shall implement a public notification process to inform citizens of when and where CSOs occur.",
+   "deadline": "none",
+   "verified": "fetched"
+  },
+  "bills_and_cases": [
+   "US v. PRASA, 3:15-cv-02283 (D.P.R.), consent decree 2016, modification lodged 2023-07",
+   "R. del S. 310 (2025-09-22), investigation proposing standardized weekly public incident reports"
+  ]
+ },
+ "erule": {
+  "system": "epa",
+  "sobe_events_2026_11_03": 924,
+  "public_output_url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "notes": "PRASA files through EPA NeT-SewerOverflow; 45 permits, 2025-04-03 to 2026-10-31; SSO 847, BYP 77, no CSO-typed rows; all rows have coordinates; median 2 days start to receipt."
+ },
+ "statewide_feed": {
+  "exists": true,
+  "source_ids": [
+   "pr-epa-sobe"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "median 2 days from start to EPA receipt, plus the daily ECHO rebuild",
+  "history": "2025-04 to date",
+  "coordinates": "all",
+  "receiving_water": "free text (separate table), inconsistent",
+  "start_end": "start and end datetimes",
+  "volume": true,
+  "stable_id": true,
+  "license": "US federal data, no restriction stated",
+  "notes": "Event key plus permit and event_id_ext is stable."
+ },
+ "cso": {
+  "permits": 1,
+  "open_outfalls": 12,
+  "operators_with_web_channel": 0,
+  "operators_checked": 1,
+  "state_outfall_layer": "pr-prasa-cso-data",
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "Locations map, precautions and a public reporting form; no event postings found. Collection system 30 percent combined (SOBE collection-system table)."
+ },
+ "sso": {
+  "location_source": "pr-epa-sobe",
+  "feeds": [
+   "pr-epa-sobe"
+  ],
+  "notes": "Every SOBE row carries a point."
+ },
+ "beaches": {
+  "program": "DRNA Programa de Monitoría de Playas y Notificación Pública (BEACH Act)",
+  "source_ids": [
+   "pr-drna-beach-notices"
+  ],
+  "machine_readable": true,
+  "scope": "coastal",
+  "notes": "Weekly list of failing beaches only (BAV 70 enterococci/100 mL); WordPress REST JSON."
+ },
+ "habs": {
+  "program": "none found",
+  "source_ids": [],
+  "machine_readable": false,
+  "notes": "Not searched beyond the beach program."
+ },
+ "advisories": {
+  "health_department_pages": [],
+  "watershed_groups": [
+   "San Juan Bay Estuary Program",
+   "Surfrider Blue Water Task Force"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": "pr-prasa-cso-data",
+  "cso_inventory_gap": "none (12 of 12)",
+  "sso_points": "eRule"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": []
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "No PRASA event postings for CSOs despite the permit and the 2023 decree modification",
+   "fix_level": "operator",
+   "note": "EPA Region 2 enforces the decree."
+  },
+  {
+   "kind": "no_web",
+   "what": "No statutory public notice duty for SSOs and bypasses",
+   "fix_level": "legislative",
+   "note": "R. del S. 310 proposes weekly public incident reports."
+  },
+  {
+   "kind": "licence",
+   "what": "No terms stated on DRNA's WordPress API",
+   "fix_level": "agency",
+   "note": ""
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "A",
+  "expected_grade": "Dated reports, delayed",
+  "first_feed": "pr-epa-sobe",
+  "effort": "small",
+  "rationale": "The national SOBE ingester covers PRASA island-wide with points; add the DRNA weekly beach JSON as an advisory feed and the 12 PRASA CSO points.",
+  "order_hint": 1
+ },
+ "owner_questions": [
+  "SOBE text and water names are in Spanish (and mixed): show them as filed, or translate type labels only?",
+  "DRNA lists only failing beaches each week: show unlisted beaches as grey (no report), not as passing?"
+ ],
+ "surprise": "Puerto Rico has the third-largest SOBE record in the country, after Illinois and Georgia (924 events in 18 months, all with points), while its CSO system, the one the consent decree says must be posted on the web, has no event record anywhere public."
+}

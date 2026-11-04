@@ -1,0 +1,141 @@
+{
+  "state": "AK",
+  "name": "Alaska",
+  "region": "alaska-hawaii",
+  "epa_region": 10,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "unknown",
+    "summary": "Wastewater operators must give DEC emergency notice of overflows and spills that threaten public health or water quality (18 AAC 72.940) and file 5-day noncompliance reports under APDES permits; no duty to tell the public was found.",
+    "citations": [
+      {
+        "cite": "18 AAC 72.940",
+        "title": "Emergency notice",
+        "url": "https://regulations.justia.com/states/alaska/title-18/chapter-72/article-7/section-18-aac-72-940",
+        "quote": "an accident, spill, or other event that results in inadequate treatment in violation of permit conditions, or threatens public health or water quality ... a sludge carry-over, washout, or overflow",
+        "who": "owner or operator of a wastewater system",
+        "channel": "DEC",
+        "deadline": "not read",
+        "threshold": "as quoted",
+        "verified": "search_only"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "emergency notice (deadline not read); 5-day written noncompliance report (SOBE rows say '5-day reporting for noncompliance that may endanger health or the environment')",
+      "cite": "18 AAC 72.940; APDES permits"
+    },
+    "cso_permit_notice_clause": {
+      "permit": "AK0023213",
+      "quote": null,
+      "deadline": null,
+      "verified": "inferred"
+    },
+    "bills_and_cases": []
+  },
+  "erule": {
+    "system": "epa",
+    "sobe_events_2026_11_03": 46,
+    "public_output_url": "https://echo.epa.gov/",
+    "notes": "Alaska permittees file through EPA's NeT-SewerOverflow: Anchorage 43, Ketchikan 2, Denali NP 1. Median one day from start to receipt."
+  },
+  "statewide_feed": {
+    "exists": false,
+    "source_ids": [
+      "ak-epa-sobe"
+    ],
+    "precision": "event",
+    "machine_readable": true,
+    "format": "csv",
+    "latency": "days (median 1 day to EPA receipt, then the daily ECHO extract)",
+    "history": "2023-06 to date",
+    "coordinates": "all",
+    "receiving_water": "free text in a side table",
+    "start_end": "start and end",
+    "volume": true,
+    "stable_id": true,
+    "license": "US government work",
+    "notes": "Federal fallback only; no state list found (DEC spill database is bot-walled and covers oil and hazardous substances)."
+  },
+  "cso": {
+    "permits": 2,
+    "open_outfalls": 4,
+    "operators_with_web_channel": 0,
+    "operators_checked": 1,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "No public notice found for Juneau's 3 CSO outfalls; the second CSO permit (Alyeska pipeline) is an inventory artefact."
+  },
+  "sso": {
+    "location_source": "EPA SOBE coordinates",
+    "feeds": [
+      "ak-epa-sobe"
+    ],
+    "notes": "Anchorage reports most; half are basement backups."
+  },
+  "beaches": {
+    "program": "Alaska DEC Beach Program (small, seasonal)",
+    "source_ids": [
+      "ak-dec-beach-program"
+    ],
+    "machine_readable": false,
+    "scope": "coastal",
+    "notes": "Not fetched."
+  },
+  "habs": {
+    "program": "AHAB network / DEC shellfish PSP",
+    "source_ids": [
+      "ak-ahab"
+    ],
+    "machine_readable": false,
+    "notes": "Marine biotoxins; not fetched."
+  },
+  "advisories": {
+    "health_department_pages": [],
+    "watershed_groups": [],
+    "swim_guide": false
+  },
+  "outfalls": {
+    "state_layer": null,
+    "cso_inventory_gap": "unknown",
+    "sso_points": "eRule"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Yukon River (Yukon, Canada)",
+      "Taku and Stikine Rivers (British Columbia)",
+      "Portland Canal (BC)"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "bot_wall",
+      "what": "DEC spill database (DataDome) and Justia/LII copies of 18 AAC refused scripted reads",
+      "fix_level": "agency",
+      "note": "Ask DEC for an export."
+    },
+    {
+      "kind": "no_web",
+      "what": "No public notice duty or operator web notices found",
+      "fix_level": "legislative",
+      "note": ""
+    }
+  ],
+  "subscriptions": [],
+  "readiness": {
+    "tier": "C",
+    "expected_grade": "Dated reports, delayed",
+    "first_feed": "ak-epa-sobe",
+    "effort": "small",
+    "rationale": "Only the federal SOBE extract: Anchorage's SSOs with points and times, a few days late. Juneau's CSOs get outfalls, the rain caution and the statement.",
+    "order_hint": 4
+  },
+  "owner_questions": [
+    "Show SOBE-only states with SOBE events as 'Dated reports, delayed' even though no state channel exists?",
+    "Ask Alaska DEC whether sewage spills are in the PPR spill database and whether an export is available."
+  ],
+  "surprise": "Alaska's only overflow data is EPA's: Anchorage files every SSO electronically within about a day, while Juneau, the state's one CSO city, has no public channel at all."
+}

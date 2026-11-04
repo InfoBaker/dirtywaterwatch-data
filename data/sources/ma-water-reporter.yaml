@@ -1,0 +1,21 @@
+id: "ma-water-reporter"
+name: "Water Reporter / WQX submissions by MA groups"
+url: null
+homepage: null
+kind: null
+level: "other"
+# Notes (research/ma, status candidate, verified inferred, checked 2026-11-01): Not checked this
+#   run; Water Quality Portal belongs to the federal agent.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "none stated"
+attribution: "various"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["MA"]
+access: []
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

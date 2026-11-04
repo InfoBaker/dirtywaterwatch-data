@@ -1,0 +1,193 @@
+{
+ "state": "WI",
+ "name": "Wisconsin",
+ "region": "great-lakes",
+ "epa_region": 5,
+ "npdes_authority": "state",
+ "great_lakes_basin": "part",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "yes",
+  "summary": "Every sanitary sewer and treatment facility overflow must be publicly noticed 'promptly' under NR 210.21(5), by the communications the operator's emergency response plan names; WDNR says at minimum a daily newspaper must be told when the overflow reaches surface water. No web posting or hour deadline. The two CSO permittees (MMSD, Superior) are in the Great Lakes Basin and owe electronic public notice within 4 hours under 40 CFR 122.38.",
+  "citations": [
+   {
+    "cite": "Wis. Admin. Code NR 210.21(5)",
+    "title": "Public notification",
+    "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/200/210/iv/21",
+    "quote": "(per search snippets) a permittee shall notify the public promptly following any overflow event, using the most effective and efficient communications available in the community, in accordance with its emergency response plan under NR 210.23(4)(f)",
+    "who": "permittee (POTW or private domestic collection system owner)",
+    "channel": "per emergency response plan; WDNR minimum: daily newspaper",
+    "deadline": "promptly",
+    "threshold": "all SSOs and treatment facility overflows",
+    "verified": "search_only"
+   },
+   {
+    "cite": "WDNR form 3400-184 instructions",
+    "title": "Sanitary Sewage Overflow Notification Summary Report instructions",
+    "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Wastewater/WW_SSOFormInstructions.pdf",
+    "quote": "All overflows (SSOs & TFOs) are required to be public noticed according to s. NR 210.21(5), Wis. Adm. Code. Notification shall occur according to a facility's emergency response plan in their CMOM and occur promptly after any overflow event. The notification level should correlate to the extent of risk to the public. At a minimum, if an overflow is to a surface water, a daily newspaper of general circulation shall be notified.",
+    "who": "permittee",
+    "channel": "newspaper at minimum; website, signs",
+    "deadline": "promptly",
+    "threshold": "all overflows",
+    "verified": "fetched"
+   },
+   {
+    "cite": "40 CFR 122.38(a)(3)",
+    "title": "Great Lakes Basin CSO public notification",
+    "url": "https://www.ecfr.gov/current/title-40/chapter-I/subchapter-D/part-122/subpart-B/section-122.38",
+    "quote": "As soon as possible, but no later than four (4) hours after becoming aware by monitoring, modeling or other means that a CSO discharge has occurred, the Great Lakes Basin CSO permittee shall provide public notification of CSO discharges ... electronically",
+    "who": "MMSD; City of Superior",
+    "channel": "text, email, social media or website; signs",
+    "deadline": "4 hours",
+    "threshold": "any CSO",
+    "verified": "fetched"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours to WDNR; written form 3400-184 within 5 business days via Switchboard",
+   "cite": "NR 210.21(4); WPDES standard conditions"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "WI0036820",
+   "quote": "Permit not read. MMSD's 2018 CSO Public Notification Plan: 'The District already notifies the public and other governmental agencies of combined sewer overflows. The District is preparing this plan now in response to new federal regulations, 40 CFR 122.38'. Its Public Notice section (7) is image-only and was not read.",
+   "deadline": "4 hours (40 CFR 122.38)",
+   "verified": "search_only"
+  },
+  "bills_and_cases": [
+   "NR 210 public-notice wording was modified by Clearinghouse Rule CR 12-027 (2012); no 2025-2026 bill found (search only)."
+  ]
+ },
+ "erule": {
+  "system": "state (WDNR Switchboard)",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": null,
+  "notes": "Form 3400-184 is filed electronically in Switchboard; no public output and nothing in EPA SOBE."
+ },
+ "statewide_feed": {
+  "exists": false,
+  "source_ids": [],
+  "precision": "none",
+  "machine_readable": false,
+  "format": "none",
+  "latency": null,
+  "history": null,
+  "coordinates": "none",
+  "receiving_water": null,
+  "start_end": null,
+  "volume": false,
+  "stable_id": false,
+  "license": null,
+  "notes": "WDNR collects each overflow with its public-notice date and method but publishes nothing; a records request or a data-sharing ask is the route."
+ },
+ "cso": {
+  "permits": 2,
+  "open_outfalls": 117,
+  "operators_with_web_channel": 1,
+  "operators_checked": 2,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "MMSD posts a Storm Update with the volume about five days after each event (with the 5-day letter to WDNR), keeps a live year-to-date overflow counter and publishes the impacted-waters map. Superior: no web notice found."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [],
+  "notes": "Municipal SSO notices are scattered news items and PDFs on city sites."
+ },
+ "beaches": {
+  "program": "WDNR Wisconsin Beach Health (Great Lakes BEACH Act beaches and inland beaches in the system)",
+  "source_ids": [
+   "wi-wdnr-beach-health",
+   "wi-milwaukee-riverkeeper-swim-guide"
+  ],
+  "machine_readable": true,
+  "scope": "all",
+  "notes": "Public ArcGIS layer with status, issued range and latest E. coli value."
+ },
+ "habs": {
+  "program": "No statewide bloom advisory feed found; DHS information pages",
+  "source_ids": [
+   "wi-hab-program"
+  ],
+  "machine_readable": false,
+  "notes": "Not traced."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "https://www.dhs.wisconsin.gov/publications/p03767.pdf"
+  ],
+  "watershed_groups": [
+   "Milwaukee Riverkeeper"
+  ],
+  "swim_guide": true
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "none",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Lake Michigan (IL, IN, MI)",
+   "Lake Superior and St. Louis River (MN, MI, Ontario)",
+   "Mississippi River (MN, IA, IL)",
+   "St. Croix River (MN)",
+   "Menominee River (MI)",
+   "Fox and Des Plaines Rivers (IL)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "login",
+   "what": "WDNR holds every SSO/TFO report, including the public-notice date and method, in Switchboard, which is permittee-only.",
+   "fix_level": "agency",
+   "note": "Ask WDNR for a public extract or to join EPA SOBE."
+  },
+  {
+   "kind": "print_only",
+   "what": "NR 210.21(5) is met at minimum by telling a daily newspaper; no web posting is required.",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "no_web",
+   "what": "City of Superior (Great Lakes CSO permittee) has no web notice found.",
+   "fix_level": "operator",
+   "note": "Search only."
+  },
+  {
+   "kind": "image_only",
+   "what": "MMSD's CSO Public Notification Plan sections on notice are scanned images.",
+   "fix_level": "operator",
+   "note": ""
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "MMSD Water Drop Alert (SMS)",
+   "url": "https://mmsd.com/what-you-can-do/water-drop-alert",
+   "what": "Pre-storm water-use alerts; text WATERDROP to 414-296-4422"
+  },
+  {
+   "name": "MMSD Blue Notes newsletter",
+   "url": "https://www.mmsd.com/about-us/blue-notes-newsletter/newsletter-signup",
+   "what": "Quarterly newsletter; not an overflow channel"
+  }
+ ],
+ "readiness": {
+  "tier": "B",
+  "expected_grade": "Dated reports, delayed",
+  "first_feed": "wi-mmsd-storm-updates",
+  "effort": "medium",
+  "rationale": "Dated reports exist for Milwaukee (MMSD Storm Update posts about 5 days after, plus a live year-to-date overflow counter that can be snapshotted for same-day detection), and the impacted-waters polygon is ready. Statewide, SSOs are noticed in newspapers and scattered municipal pages; WDNR's Switchboard data is not public and nothing reaches EPA SOBE, so most of the state would read 'No public reports'.",
+  "order_hint": 3
+ },
+ "owner_questions": [
+  "Ask WDNR for a public extract of form 3400-184 SSO/TFO reports (they hold date, location, volume, receiving water and public-notice method)?",
+  "Treat a rise in MMSD's 'Gallons Overflowed' counter as an event start (operator data, unverified by MMSD's own note), or wait for the Storm Update?",
+  "Look harder for the City of Superior's 4-hour notice channel (social media) before going live?"
+ ],
+ "surprise": "Wisconsin's rule requires public notice of every sewer overflow, and WDNR's form records how each notice was given, yet the state publishes none of it: the only dated public record found is MMSD's own news post, issued with its 5-day letter."
+}

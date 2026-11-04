@@ -1,0 +1,25 @@
+id: "boston-bphc-cyanobacteria-advisories"
+name: "Boston Public Health Commission Charles River cyanobacteria advisories (boston.gov news)"
+url: "https://www.boston.gov/news/lifted-health-advisory-expanded-cyanobacteria-algae-bloom-advisory-charles-river-lower-basin"
+homepage: "https://www.boston.gov/news/lifted-health-advisory-expanded-cyanobacteria-algae-bloom-advisory-charles-river-lower-basin"
+kind: "html"
+level: "municipal"
+# Notes (research/ma, status candidate, verified fetched, checked 2026-11-01): Clear start/lift
+#   dates and area text for the Charles; HTML only.
+# Access detail (research, quoted): Fetched one news page: issued August 27, 2026, lifted September
+#   22, 2026, last updated September 27, 2026. Lifting rule quoted from DPH: two rounds of samples a
+#   week apart below 70,000 cells/mL.
+# Waters: Charles River Lower Basin (openboatlaunch slugs: charles-river-ma)
+# History: boston.gov news archive.
+cadence: "Event-driven news posts."
+license: "Not checked."
+attribution: "Boston Public Health Commission"
+enabled: true
+role: "advisories"
+event_types: ["cyanobacteria"]
+states: ["MA"]
+access: ["html"]
+access_detail: "Fetched one news page: issued August 27, 2026, lifted September 22, 2026, last updated September 27, 2026. Lifting rule quoted from DPH: two rounds of samples a week apart below 70,000 cells/mL."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"

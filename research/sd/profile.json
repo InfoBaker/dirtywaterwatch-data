@@ -1,0 +1,159 @@
+{
+ "state": "SD",
+ "name": "South Dakota",
+ "region": "plains",
+ "epa_region": 8,
+ "npdes_authority": "state",
+ "great_lakes_basin": "no",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "unknown",
+  "summary": "No statute or rule found that requires public notice of a sewage overflow. Permittees report overflows to DANR (24 hours oral, 5 days written under standard permit conditions) and, since the eRule, file the written report through EPA's NeT-SewerOverflow, which makes South Dakota one of the few states whose overflow reports are public in EPA's daily extract. The general spill rule (ARSD 74:34:01) covers regulated substances, not sewage.",
+  "citations": [
+   {
+    "cite": "ARSD 74:34:01:05; SDCL 34A-12",
+    "title": "Spill reporting (regulated substances)",
+    "url": "https://danr.sd.gov/Agriculture/Inspection/Spills/default.aspx",
+    "quote": "Suspected Discharges must be reported to DANR within 24 Hours.",
+    "who": "responsible party",
+    "channel": "DANR by phone; State Radio after hours",
+    "deadline": "immediately; suspected discharges within 24 hours",
+    "threshold": "discharge threatening waters of the state, over 25 gallons, sheen, etc.",
+    "verified": "fetched"
+   },
+   {
+    "cite": "40 CFR 127 (eRule Phase 2)",
+    "title": "Electronic sewer overflow and bypass event reports",
+    "url": "https://danr.sd.gov/OfficeOfWater/SurfaceWaterQuality/swdpermitting/Ereporting.aspx",
+    "quote": null,
+    "who": "NPDES (SWD) permittees",
+    "channel": "EPA NeT-SewerOverflow (public via ECHO SOBE extract)",
+    "deadline": "5-day written report",
+    "threshold": "overflows and bypasses",
+    "verified": "inferred"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "24 hours oral, 5 days written (standard permit conditions; SD permit text not read)",
+   "cite": "40 CFR 122.41(l)(6) as adopted in SD surface water discharge permits (inferred)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "SD0027481",
+   "quote": null,
+   "deadline": null,
+   "verified": "inferred"
+  },
+  "bills_and_cases": [
+   "None found (search only)."
+  ]
+ },
+ "erule": {
+  "system": "epa",
+  "sobe_events_2026_11_03": 207,
+  "public_output_url": "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip",
+  "notes": "207 events from 56 permits, start dates 2023 to 2026-11-02; all with coordinates."
+ },
+ "statewide_feed": {
+  "exists": true,
+  "source_ids": [
+   "sd-epa-sobe"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "start to receipt median 5 days (10% same day; 10% over 48 days); extract daily",
+  "history": "April 2023 to date",
+  "coordinates": "all",
+  "receiving_water": "free text, 74 of 207 events",
+  "start_end": "start and end date-times",
+  "volume": true,
+  "stable_id": true,
+  "license": "EPA public data",
+  "notes": "Federal feed already ingested for other states by pipeline/ingest/echo_sewer_overflow_events.py."
+ },
+ "cso": {
+  "permits": 2,
+  "open_outfalls": 3,
+  "operators_with_web_channel": 0,
+  "operators_checked": 2,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "no",
+  "notification_practice": "Lead (2 outfalls, Gold Run Creek) and Lead-Deadwood (1, Whitewood Creek); no web notice found. Lead's CSO events appear in SOBE."
+ },
+ "sso": {
+  "location_source": "sd-epa-sobe (coordinates on every report)",
+  "feeds": [
+   "sd-epa-sobe"
+  ],
+  "notes": "Basement backups and plant-site spills are included; filter by receiving water and structure type."
+ },
+ "beaches": {
+  "program": "No statewide beach bacteria program found",
+  "source_ids": [
+   "sd-beach-ecoli"
+  ],
+  "machine_readable": false,
+  "scope": "inland",
+  "notes": "search only"
+ },
+ "habs": {
+  "program": "DANR shoreline microcystin monitoring and HAB advisories (8 ug/L)",
+  "source_ids": [
+   "sd-danr-hab-2026-samples",
+   "sd-danr-hab-advisories"
+  ],
+  "machine_readable": true,
+  "notes": "2026 samples public as ArcGIS; 2026 advisories only in press releases."
+ },
+ "advisories": {
+  "health_department_pages": [],
+  "watershed_groups": [
+   "Friends of the Big Sioux River"
+  ],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "unknown",
+  "sso_points": "eRule"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Missouri River, Lake Oahe (ND), Lewis and Clark Lake (NE)",
+   "Big Sioux River (IA, MN)",
+   "Big Stone Lake and Minnesota River headwaters (MN)",
+   "Bois de Sioux River (MN, ND)",
+   "Belle Fourche and Cheyenne rivers (WY)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "no_web",
+   "what": "No public notice duty and no operator web notices found; SOBE is the only public trace",
+   "fix_level": "legislative",
+   "note": ""
+  },
+  {
+   "kind": "no_web",
+   "what": "SOBE rows are 5-day written reports, so events surface days to weeks late",
+   "fix_level": "agency",
+   "note": "A 24-hour public posting would need a state or operator channel."
+  }
+ ],
+ "subscriptions": [],
+ "readiness": {
+  "tier": "A",
+  "expected_grade": "Dated reports, delayed",
+  "first_feed": "sd-epa-sobe",
+  "effort": "small",
+  "rationale": "EPA's daily SOBE extract carries event-level SD reports with start, end, coordinates and volume; the ingester exists. Delay is the 5-day written report path.",
+  "order_hint": 1
+ },
+ "owner_questions": [
+  "Accept SOBE (5-day reports, median 5 days late) as South Dakota's event feed and label it 'Dated reports, delayed'?",
+  "Show basement backups and on-plant spills with no receiving water, or only events that reached water?"
+ ],
+ "surprise": "South Dakota, with no public-notice law and two tiny CSO towns, has one of the best event feeds in the country because its small-town permittees file every overflow through EPA's NeT tool: 207 events with coordinates."
+}

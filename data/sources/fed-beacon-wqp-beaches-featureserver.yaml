@@ -1,0 +1,27 @@
+id: "fed-beacon-wqp-beaches-featureserver"
+name: "BEACON map layers 'WQP_Beaches' (beach lines, monitoring stations, states, counties, tribal areas)"
+url: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/WQP_Beaches/FeatureServer/1"
+homepage: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/WQP_Beaches/FeatureServer/1"
+kind: "arcgis"
+level: "federal"
+# Notes (research/federal, status candidate, verified fetched, checked 2026-11-01): Beach geometries
+#   and IDs for every New England BEACH Act beach; join key for BEACON history and WQP stations.
+# Access detail (research, quoted): Layer 0 Monitoring Stations (org_id, mloc_id from WQP), 1 Beach
+#   Lines, 2 Tribal Areas, 3 Counties, 4 States. Item 8dfbb311f686466b8b7f6b7b8edd43ea (found in
+#   BEACON map JS). Item says layers are "not intended to be used in isolation".
+# Can fill: geometry (official beach line), waterbody context, source_record_id (beach_id) for
+#   joining BEACON actions
+# Cannot fill: current advisory status (status = 0 for all NE beaches)
+# Waters: 8,448 beach lines nationally; NE: MA 647, RI 130, ME 104, CT 78, NH 17 (year 2025)
+cadence: "Annual (data last edited 2026-08-04)"
+license: "Item licenseInfo 'NA'; accessInformation 'US EPA'. EPA Standard Open Data License: \"Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain and is not subject to domestic copyright protection under 17 U.S.C. § 105.\" https://edg.epa.gov/EPA_Data_License.html"
+attribution: "US EPA Office of Water (ArcGIS owner skocher_EPA2)"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory"]
+states: ["CT", "MA", "ME", "NH", "RI"]
+access: ["arcgis"]
+access_detail: "Layer 0 Monitoring Stations (org_id, mloc_id from WQP), 1 Beach Lines, 2 Tribal Areas, 3 Counties, 4 States. Item 8dfbb311f686466b8b7f6b7b8edd43ea (found in BEACON map JS). Item says layers are \"not intended to be used in isolation\"."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

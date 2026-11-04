@@ -1,0 +1,23 @@
+id: "dc-dcgis-css-layers"
+name: "DC GIS Combined Sewer System Area (layer 31) and Combined Sewer Sewershed (layer 19)"
+url: "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Environment_Stormwater_Management_WebMercator/MapServer"
+homepage: "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Environment_Stormwater_Management_WebMercator/MapServer"
+kind: "arcgis"
+level: "state"
+# Notes (research/dc, status candidate, verified fetched, checked 2026-11-02): Sewershed polygons
+#   for 'what drains here' context; outfall points come from DC Water's AGOL layer.
+# Access detail (research, quoted): Layer list fetched; layers 31 and 19 are polygons (sewersheds),
+#   not outfall points. There is no CSO outfall point layer on DC Open Data; layer 68 is MS4 storm
+#   outfalls.
+cadence: null
+license: "none stated"
+attribution: "DC OCTO / DCGIS"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["DC"]
+access: ["arcgis"]
+access_detail: "Layer list fetched; layers 31 and 19 are polygons (sewersheds), not outfall points. There is no CSO outfall point layer on DC Open Data; layer 68 is MS4 storm outfalls."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-02"

@@ -1,0 +1,37 @@
+id: "dc-dcwater-news-notices"
+name: "DC Water news releases and public notices (sewer overflow notices)"
+url: "https://www.dcwater.com/about-dc-water/media/news"
+homepage: "https://www.dcwater.com/about-dc-water/media/news"
+kind: "html"
+level: "utility"
+# Notes (research/dc, status candidate, verified fetched, checked 2026-11-02): The only place DC
+#   Water announces large SSOs to the public, but prose HTML with no feed; scrape the list page
+#   daily and parse titles containing overflow/SSO/sewage.
+# Access detail (research, quoted): HTML list, 10 items per page, ?page=N (0-based); each item has
+#   date ('16 August, 2025'), title, teaser and link /about-dc-water/media/news/<slug>. Fetched
+#   pages 0-25 (312 items, back to July 2024) into raw/dcwater-news-index-p0-25.json and 18 notice
+#   pages into raw/notices/. No RSS: /rss.xml, /news/rss and /about-dc-water/media/news/rss.xml all
+#   404. Email delivery of news releases via the Everbridge sign-up (see
+#   dc-dcwater-everbridge-alerts).
+# Can fill: published_at, event_type (from text), location_text, waterbody (from text), volume
+#   (sometimes, prose), advice_text, authority, source_url, revision_history (via follow-up releases
+#   and '*Updated' lines)
+# Cannot fill: coordinates; started_at as structured value; ended_at as structured value;
+#   source_record_id; source_updated_at
+# Waters: District-wide plus DC Water's Potomac Interceptor in MD and VA; named receiving waters per
+#   notice (openboatlaunch slugs: potomac-river-dc, anacostia-river-dc)
+# History: Paginated archive; page 25 reaches July 2024. Deeper pages not fetched.
+# Research notes: Titles to match: 'Sanitary Sewer Overflow', 'Sewer Overflow', 'Potomac
+#   Interceptor', 'Force Main'. Mixed in with traffic advisories and corporate news.
+cadence: "Ad hoc. Major SSOs get a notice the same day or next morning (Potomac Interceptor collapse: notice dated 2026-01-19, the evening it was found; Anacostia Force Main: traffic advisory 2025-07-20, overflow notice 2025-07-21; second force-main SSO at 01:40 2025-08-16 noticed the same day). Small SSOs to creeks and CSOs get no news release. No legal deadline for public notice found."
+license: "Site terms not reviewed; press releases are public statements. The Sanitary Sewer Dashboard page carries a data disclaimer (see dc-dcwater-sso-csv)."
+attribution: "District of Columbia Water and Sewer Authority (DC Water)"
+enabled: true
+role: "events"
+event_types: ["sso", "cso"]
+states: ["DC"]
+access: ["html", "email"]
+access_detail: "HTML list, 10 items per page, ?page=N (0-based); each item has date ('16  August,  2025'), title, teaser and link /about-dc-water/media/news/<slug>. Fetched pages 0-25 (312 items, back to July 2024) into raw/dcwater-news-index-p0-25.json and 18 notice pages into raw/notices/. No RSS: /rss.xml, /news/rss and /about-dc-water/media/news/rss.xml all 404. Email delivery of news releases via the Everbridge sign-up (see dc-dcwater-everbridge-alerts)."
+machine_readable: false
+legal_basis: "No statute or permit clause requires a press release. Permit DC0021199 Part III.B.1.h (Public Notification) covers lights, website, signs and pamphlets for CSOs."
+checked: "2026-11-02"

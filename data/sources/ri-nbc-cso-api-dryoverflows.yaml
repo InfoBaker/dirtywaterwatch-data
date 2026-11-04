@@ -1,0 +1,31 @@
+id: "ri-nbc-cso-api-dryoverflows"
+name: "NBC 'Verified Overflow Events in the last 30 Days' (JSON)"
+url: "https://cso-api.narrabay.com/dryoverflows"
+homepage: "https://cso-api.narrabay.com/dryoverflows"
+kind: "api"
+level: "utility"
+# Notes (research/ri, status used, verified fetched, checked 2026-11-01): Gives verified start/end
+#   times that /pins drops after 48 h.
+# Access detail (research, quoted): GET, no auth, JSON array; rendered as the table 'Verified
+#   Overflow Events in the last 30 Days' on the CSO Alarm Map page. On 2026-11-01 it held one row
+#   (OF 220, 2026-10-05). The endpoint name suggests dry-weather overflows; ECHO classifies the same
+#   event as a dry-weather CSO.
+# Can fill: started_at, ended_at, reported_at (DATE_VERIFIED), location_text (SITE_NAME),
+#   source_status (verified)
+# Cannot fill: volume; coordinates (join to /pins by site name); waterbody
+# Waters: NBC CSO outfalls (openboatlaunch slugs: providence-river-ri, seekonk-river-ri,
+#   blackstone-river-ri)
+# History: 30 days only.
+# Research notes: Dates are SQL-Server-style strings ('Oct 5 2026 8:50PM'), no timezone.
+cadence: "Rows appear after NBC verification (here ~9 h after the event ended); rolling 30-day window."
+license: "none stated"
+attribution: "Narragansett Bay Commission"
+enabled: true
+role: "events"
+event_types: ["cso", "dry_weather_overflow"]
+states: ["RI"]
+access: ["api", "html"]
+access_detail: "GET, no auth, JSON array; rendered as the table 'Verified Overflow Events in the last 30 Days' on the CSO Alarm Map page. On 2026-11-01 it held one row (OF 220, 2026-10-05). The endpoint name suggests dry-weather overflows; ECHO classifies the same event as a dry-weather CSO."
+machine_readable: true
+legal_basis: "As above."
+checked: "2026-11-01"

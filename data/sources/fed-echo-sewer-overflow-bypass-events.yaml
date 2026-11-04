@@ -1,0 +1,42 @@
+id: "fed-echo-sewer-overflow-bypass-events"
+name: "ECHO NPDES Sewer Overflow and Bypass Event Dataset (eRule Phase 2, current versions)"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+kind: "csv"
+level: "federal"
+# Notes (research/federal, status candidate, verified fetched, checked 2026-11-01): Only federal
+#   machine-readable sewage event feed. Covers NH (EPA permits) and RI well, MA barely, CT/VT/ME not
+#   at all. Mostly SSOs and noncompliance; routine permitted wet-weather CSOs are not reported here
+#   in New England. Includes basement backups that never reach a water: filter on structure type and
+#   receiving water.
+# Access detail (research, quoted): ZIP (~1.1 MB) of 8 CSVs + ERD PDF; no auth. Tables:
+#   collection_system_permits, sewer_overflow_bypass_report_events (parent), _causes,
+#   _corrective_actions, _impacts, _receiving_waters, _types, sewer_overflow_treatment_codes.
+#   Summary: https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary. The
+#   per-permit HTML view (https://echo.epa.gov/sewer-overflow-report?id=…) redirected to an EPA
+#   login page from here. Raw copy: research/federal/raw/sobe_current/.
+# Can fill: event_id/source_record_id (sewer_overflow_bypass_event_key), event_type (types table:
+#   CSO/SSO/Bypass), started_at, ended_at, reported_at (program_report_received_date, date only),
+#   coordinates (latitude/longitude_measure, event location), volume (gallons), units, estimate_flag
+#   (discharge_quantification_method), waterbody (receiving_waters table, often empty),
+#   location_text (description), raw_record, jurisdiction
+# Cannot fill: timezone (not stated); published_at; advice_text; valid_until; official affected area
+# Waters: Only permittees whose authority shares eRule Phase 2 data: 5,654 events nationally; New
+#   England has NH 184 (EPA-issued permits via NeT), RI 244 (RIDEM), MA 16 (MWRA and MA0100218),
+#   CT/VT/ME 0 (2026-10-29 file)
+# History: "The majority of data collection began in March 2025, and also includes historical
+#   events"; NE events back to 2019-2022 for NH.
+# Research notes: Impacts include 'No observable impacts' (3,475 of 6,185 rows nationally). Volume
+#   quantification is often best professional judgement. Event times carry no timezone.
+cadence: "\"The data are refreshed daily.\" Lag from event start to received date in NE: median 2–3 days, 90th percentile 6–7 days (NH, MA), 38 days (RI). Legal basis is the 24-hour oral / 5-day written noncompliance report, not public notice."
+license: "EPA Standard Open Data License: \"Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain and is not subject to domestic copyright protection under 17 U.S.C. § 105.\" https://edg.epa.gov/EPA_Data_License.html ECHO swagger 'license': 'U.S. Public Domain License'. ECHO About the Data: \"The information contained in ECHO is made available to the public\" with no warranty of \"accuracy, completeness, or currency\"; \"ECHO is not designed for large scale data transfers or robotic queries.\" https://echo.epa.gov/resources/echo-data/about-the-data"
+attribution: "US EPA OECA (ICIS-NPDES)"
+enabled: true
+role: "events"
+event_types: ["sso", "cso", "bypass"]
+states: ["US"]
+access: ["csv"]
+access_detail: "ZIP (~1.1 MB) of 8 CSVs + ERD PDF; no auth. Tables: collection_system_permits, sewer_overflow_bypass_report_events (parent), _causes, _corrective_actions, _impacts, _receiving_waters, _types, sewer_overflow_treatment_codes. Summary: https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary. The per-permit HTML view (https://echo.epa.gov/sewer-overflow-report?id=…) redirected to an EPA login page from here. Raw copy: research/federal/raw/sobe_current/."
+machine_readable: true
+legal_basis: "40 CFR 122.41(l)(6)-(7), 122.41(m)(3); 40 CFR part 127 (Sewer Overflow/Bypass Event Reports, deadline Dec 21, 2025; ME and VT approved alternative deadline Dec 21, 2028)"
+checked: "2026-11-01"

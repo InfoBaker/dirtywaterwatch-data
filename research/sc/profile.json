@@ -1,0 +1,158 @@
+{
+  "state": "SC",
+  "name": "South Carolina",
+  "region": "southeast",
+  "epa_region": 4,
+  "npdes_authority": "state",
+  "great_lakes_basin": "no",
+  "checked": "2026-11-03",
+  "law": {
+    "public_notice_duty": "yes",
+    "summary": "A wastewater utility must give public notice within 24 hours of discovering a spill of 5,000 gallons or more of untreated or partially treated sewage, but the law names no channel; if the utility does not, DES must. Spills from natural disasters, third parties or acts of God are excluded.",
+    "citations": [
+      {
+        "cite": "S.C. Code 48-1-95(E)",
+        "title": "Wastewater utilities; procedures for significant spills",
+        "url": "https://www.scstatehouse.gov/code/t48c001.php",
+        "quote": "The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery. ... Where the responsible wastewater utility does not provide this notice ... the department shall provide public notice of the significant spill.",
+        "who": "wastewater utility; DES as fallback",
+        "channel": "not specified (utilities use press releases and web posts)",
+        "deadline": "24 hours after discovery",
+        "threshold": "5,000 gallons or more net, untreated or partially treated domestic sewage; excludes natural disasters, third-party acts, acts of God",
+        "verified": "fetched"
+      }
+    ],
+    "regulator_report": {
+      "deadline": "verbal within 24 hours for significant spills; written within 5 days; any SSO reaching water, or over about 500 gallons, is reportable",
+      "cite": "S.C. Code 48-1-95(B); DES SSO policy (since 1998)"
+    },
+    "cso_permit_notice_clause": {
+      "permit": null,
+      "quote": "No CSO permits in South Carolina.",
+      "deadline": null,
+      "verified": "fetched"
+    },
+    "bills_and_cases": [
+      "2026 Act No. 146 (agency renamed DHEC to DES).",
+      "Charleston Waterkeeper v. Charleston Water System settlement (Feb 2026): West Ashley overflow alert sign-up and quarterly public reports."
+    ]
+  },
+  "erule": {
+    "system": "unknown",
+    "sobe_events_2026_11_03": 0,
+    "public_output_url": null,
+    "notes": "No SC rows in SOBE; DES SSO form is mailed or faxed per its web page; ePermitting status unknown."
+  },
+  "statewide_feed": {
+    "exists": false,
+    "source_ids": [],
+    "precision": "none",
+    "machine_readable": false,
+    "format": "none",
+    "latency": null,
+    "history": null,
+    "coordinates": "none",
+    "receiving_water": "unknown",
+    "start_end": "unknown",
+    "volume": null,
+    "stable_id": null,
+    "license": null,
+    "notes": "DES receives about 600 SSO reports a year but publishes no list, map or table."
+  },
+  "cso": {
+    "permits": 0,
+    "open_outfalls": 0,
+    "operators_with_web_channel": 0,
+    "operators_checked": 0,
+    "state_outfall_layer": null,
+    "dmr_monthly_counts": "unknown",
+    "notification_practice": "No CSOs."
+  },
+  "sso": {
+    "location_source": null,
+    "feeds": [
+      "sc-florence-sso-notices"
+    ],
+    "notes": "Only operator press releases (Florence; Charleston Water by media)."
+  },
+  "beaches": {
+    "program": "SC DES Beach Monitoring (coastal, May 1 to Oct 1; long-term advisories year round) and freshwater swimming-advisory sites",
+    "source_ids": [
+      "sc-des-beach-monitoring",
+      "sc-des-freshwater-swim-advisories"
+    ],
+    "machine_readable": true,
+    "scope": "all",
+    "notes": "Current status only; snapshot to keep history."
+  },
+  "habs": {
+    "program": "unknown",
+    "source_ids": [
+      "sc-des-hab"
+    ],
+    "machine_readable": false,
+    "notes": "Not found."
+  },
+  "advisories": {
+    "health_department_pages": [],
+    "watershed_groups": [
+      "Charleston Waterkeeper (Swim Guide)",
+      "Congaree Riverkeeper (not checked)"
+    ],
+    "swim_guide": true
+  },
+  "outfalls": {
+    "state_layer": null,
+    "cso_inventory_gap": "none (no CSOs)",
+    "sso_points": "city_maps"
+  },
+  "waters": {
+    "openboatlaunch_extract": false,
+    "nhd_needed": true,
+    "shared_waters": [
+      "Savannah River and Lake Hartwell, Lake Thurmond (GA)",
+      "Catawba River and Lake Wylie (NC)",
+      "Pee Dee River (NC)"
+    ]
+  },
+  "barriers": [
+    {
+      "kind": "no_web",
+      "what": "Law requires public notice within 24 hours but names no channel and no web posting; DES publishes no SSO list",
+      "fix_level": "legislative",
+      "note": "A statewide posting duty (like NC's map or FL's PNP) would fix it; DES could also publish its existing database (agency)."
+    },
+    {
+      "kind": "records_request",
+      "what": "DES SSO report records reachable only by FOIA",
+      "fix_level": "agency",
+      "note": ""
+    },
+    {
+      "kind": "email_only",
+      "what": "Charleston West Ashley overflow alerts are sign-up only (if live)",
+      "fix_level": "owner",
+      "note": ""
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "Charleston Water System West Ashley overflow alerts",
+      "url": "https://www.charlestonwater.com/",
+      "what": "overflow alerts under the 2026 settlement (status and URL unconfirmed)"
+    }
+  ],
+  "readiness": {
+    "tier": "C",
+    "expected_grade": "No public reports",
+    "first_feed": "sc-des-beach-monitoring",
+    "effort": "small",
+    "rationale": "No statewide event source and no SOBE rows; a few operators post press releases (Florence). Beaches are machine-readable. Show outfalls (plant), the rain caution and the plain statement; add operator scrapers later.",
+    "order_hint": 5
+  },
+  "owner_questions": [
+    "File a South Carolina FOIA request for DES's SSO report records (about 600 a year) to get history and test a monthly bulk route?",
+    "Build small ingesters for Florence and Charleston Water notices, or wait for a statewide source?"
+  ],
+  "surprise": "South Carolina's law demands public notice of big spills within 24 hours but lets each utility pick the channel, and excuses spills caused by 'acts of God' (storms), so the largest storm overflows need no notice at all."
+}

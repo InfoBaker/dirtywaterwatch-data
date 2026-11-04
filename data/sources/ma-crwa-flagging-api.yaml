@@ -1,0 +1,34 @@
+id: "ma-crwa-flagging-api"
+name: "Charles River Watershed Association Flagging Program and Public Flagging API"
+url: "https://crwa-flagging.herokuapp.com/api/v1/model"
+homepage: "https://crwa-flagging.herokuapp.com/api/v1/model"
+kind: "api"
+level: "nonprofit"
+# Notes (research/ma, status candidate, verified fetched, checked 2026-11-01): Best ready-made
+#   advisory feed in MA: red flags downstream of any Lower Basin CSO in the past 48 hours, during
+#   cyanobacteria blooms, or when modelled E. coli exceeds the standard.
+# Access detail (research, quoted): Open JSON, no key: /api/v1/model (hourly E. coli predictions per
+#   reach with 'safe' boolean, model_version, time_returned) and /api/v1/boathouses (boathouse,
+#   latitude, longitude, reach, safe, overridden, reason). Swagger docs linked from /api. Email
+#   alerts (crwa.org) and Twitter @crwaflagging. Saved raw/watershed/crwa-model.json (trimmed),
+#   crwa-boathouses.json.
+# Can fill: advisories: authority, coordinates (boathouse), started_at/valid time (UTC), advice
+#   (safe flag), reason (override text, e.g. CSO or cyanobacteria)
+# Cannot fill: discharge volumes
+# Waters: Lower Charles River Basin, model reaches 2-5, boathouses (openboatlaunch slugs:
+#   charles-river-ma)
+# History: API returns the latest 24 hours; history via model inputs endpoints (not read).
+# Research notes: Quote: 'If any Combined Sewer Overflow (CSO) discharges took place in the past 48
+#   hours in the Lower Basin, red flags will be flown downstream of the CSO discharge point.'
+cadence: "Hourly model; flags shown in boating season only. On 2026-11-01 the site said the database had not updated in at least 24 hours and it was not boating season."
+license: "'the CRWA allows open access to its Public Flagging API' (API page)."
+attribution: "Charles River Watershed Association (site built by Code for Boston)"
+enabled: true
+role: "advisories"
+event_types: ["bacteria_model", "cso", "cyanobacteria"]
+states: ["MA"]
+access: ["api", "html", "email", "social"]
+access_detail: "Open JSON, no key: /api/v1/model (hourly E. coli predictions per reach with 'safe' boolean, model_version, time_returned) and /api/v1/boathouses (boathouse, latitude, longitude, reach, safe, overridden, reason). Swagger docs linked from /api. Email alerts (crwa.org) and Twitter @crwaflagging. Saved raw/watershed/crwa-model.json (trimmed), crwa-boathouses.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

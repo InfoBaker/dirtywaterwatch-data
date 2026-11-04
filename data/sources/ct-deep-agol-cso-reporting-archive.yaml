@@ -1,0 +1,29 @@
+id: "ct-deep-agol-cso-reporting-archive"
+name: "CT DEEP CSO_Reporting_Archive_deepgis (CSO events 2016-07 to 2021-11)"
+url: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_Reporting_Archive_deepgis/FeatureServer/0"
+homepage: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_Reporting_Archive_deepgis/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/ct, status candidate, verified fetched, checked 2026-11-01): Historical CSO
+#   archive by regulator group with geometry; frozen; backfill only.
+# Access detail (research, quoted): ArcGIS REST query; item 852dc40fdac24ddb888da84096662e58; 3,986
+#   records; dataLastEditDate 2024-03-03 (edits) but events end 2021-11-26.
+# Can fill: started_at, ended_at, waterbody, location_text (regulator list), coordinates, volume
+#   (binned)
+# Cannot fill: reported_at (CreationDate null); advice_text
+# History: 3,986 records; min START_FLOW_DATETIME is a bad value (year ~175x); real range 2016-07 to
+#   2021-11-26
+# Research notes: Personal fields present (strip). Constant default lat/long attribute; use
+#   geometry.
+cadence: "frozen"
+license: "none stated on the page or item (checked)"
+attribution: "CT DEEP"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["CT"]
+access: ["arcgis", "api"]
+access_detail: "ArcGIS REST query; item 852dc40fdac24ddb888da84096662e58; 3,986 records; dataLastEditDate 2024-03-03 (edits) but events end 2021-11-26."
+machine_readable: true
+legal_basis: "CGS 22a-424a (P.A. 12-11, 18-97, 21-42)"
+checked: "2026-11-01"

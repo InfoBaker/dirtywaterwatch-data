@@ -1,0 +1,787 @@
+{
+ "state": "LA",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "LA0005754",
+   "permittee": "SHELL CHEMICAL LP- GEISMAR PLANT",
+   "city": "GEISMAR",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "MISSISSIPPI RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "LA0127268",
+   "permittee": "LACC, LLC US - ETHYLENE & DERIVATIVES PLANT",
+   "city": "WESTLAKE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "Maple Fork-Bayou D'Inde"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 2,
+ "plant_permits": 424,
+ "plant_permits_major": 108,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "LA0006289",
+   "permittee": "City of Franklin",
+   "city": "FRANKLIN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0020109",
+   "permittee": "CITY OF BASTROP - WEST POND",
+   "city": "BASTROP",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0020257",
+   "permittee": "TOWN OF BUNKIE",
+   "city": "BUNKIE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0020443",
+   "permittee": "BASTROP, CITY OF (MAIN PLANT)",
+   "city": "BASTROP",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0020541",
+   "permittee": "Port Allen City of - WWTP",
+   "city": "PORT ALLEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0020559",
+   "permittee": "RAYVILLE, TOWN OF",
+   "city": "RAYVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0020613",
+   "permittee": "Broussard City of - Cote Gelee Wetland Wastewater Assimilation Project",
+   "city": "BROUSSARD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0020630",
+   "permittee": "Ferriday Town of - Town of Ferriday WWTP",
+   "city": "FERRIDAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0020648",
+   "permittee": "City of Plaquemine- South Wastewater Treatment Plant",
+   "city": "PLAQUEMINE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0032131",
+   "permittee": "St. Charles Parish Council - Luling Oxidation Pond",
+   "city": "LULING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0032328",
+   "permittee": "City of Hammond- South Slough Wetland Wastewater Assimilation Project",
+   "city": "HAMMOND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0032794",
+   "permittee": "Vidalia, City of- Wastewater Treatment Plant",
+   "city": "VIDALIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0032948",
+   "permittee": "City of Thibodaux- Wastewater Treatment Facility",
+   "city": "THIBODAUX",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0033014",
+   "permittee": "City of Breaux Bridge",
+   "city": "BREAUX BRIDGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0033227",
+   "permittee": "City of Springhill",
+   "city": "SPRINGHILL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0033260",
+   "permittee": "Town of Jena",
+   "city": "JENA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0033430",
+   "permittee": "OAKDALE, CITY OF",
+   "city": "OAKDALE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0033464",
+   "permittee": "Pineville City of - City of Pineville WWTP",
+   "city": "PINEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0036323",
+   "permittee": "City of Ruston- Northside Wastewater Treatment Plant",
+   "city": "RUSTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0036340",
+   "permittee": "City of Lake Charles - WWT Plant A",
+   "city": "LAKE CHARLES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0036366",
+   "permittee": "CITY OF LAKE CHARLES- WWTP B,C",
+   "city": "LAKE CHARLES",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0036374",
+   "permittee": "Lafayette Consolidated Government - South WWTP",
+   "city": "LAFAYETTE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0036382",
+   "permittee": "Lafayette Consolidated Government - East WWTP",
+   "city": "LAFAYETTE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0036391",
+   "permittee": "Lafayette Consolidated Government - Northeast Wastewater Treatment Plant",
+   "city": "LAFAYETTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0036404",
+   "permittee": "Opelousas City of - Candy Street WWTF",
+   "city": "OPELOUSAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0036412",
+   "permittee": "E BATON ROUGE CITY-PAR (SOUTH)",
+   "city": "BATON ROUGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0036421",
+   "permittee": "BATON ROUGE PH CENTRAL STP",
+   "city": "BATON ROUGE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "LA0036439",
+   "permittee": "E BATON ROUGE CITY-PAR (NORTH)",
+   "city": "SCOTLANDVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0038059",
+   "permittee": "City of Westwego- Wastewater Treatment Plant",
+   "city": "WESTWEGO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0038091",
+   "permittee": "Sewerage & Water Board of New Orleans - East Bank STP",
+   "city": "NEW ORLEANS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0038105",
+   "permittee": "Sewerage and Water Board of New Orleans- West Bank STP",
+   "city": "NEW ORLEANS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0038130",
+   "permittee": "City of Minden",
+   "city": "MINDEN",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0038288",
+   "permittee": "City of Mandeville",
+   "city": "MANDEVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0038407",
+   "permittee": "Deridder City of - WWTP & Beneficial Use Area",
+   "city": "DE RIDDER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0038431",
+   "permittee": "Town of Amite City- Amite City STP",
+   "city": "AMITE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0038521",
+   "permittee": "Town of Homer- Wastewater Treatment Plant",
+   "city": "HOMER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0038555",
+   "permittee": "City of New Roads- Wastewater Treatment Plant",
+   "city": "NEW ROADS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0038709",
+   "permittee": "CITY OF DEQUINCY",
+   "city": "DEQUINCY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0038741",
+   "permittee": "City of Monroe",
+   "city": "MONROE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0038814",
+   "permittee": "City of Ville Platte",
+   "city": "VILLE PLATTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0038822",
+   "permittee": "Grambling City of - Grambling Regional WWTP",
+   "city": "GRAMBLING",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0039055",
+   "permittee": "Rayne City of - WWTP",
+   "city": "RAYNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0039748",
+   "permittee": "CITY OF ABBEVILLE",
+   "city": "ABBEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0039802",
+   "permittee": "Town of Delhi",
+   "city": "DELHI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0040177",
+   "permittee": "St Bernard Parish Government - Munster WWTP",
+   "city": "MERAUX",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0040193",
+   "permittee": "City of Jeanerette",
+   "city": "JEANERETTE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0040207",
+   "permittee": "Terrebonne Parish Consolidated Government - North Wastewater Treatment Plant",
+   "city": "HOUMA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0040274",
+   "permittee": "TERREBONNE PH-HOUMA-SOUTH",
+   "city": "HOUMA",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0040941",
+   "permittee": "St Martinville City of - STP",
+   "city": "ST. MARTINVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0040975",
+   "permittee": "ST BERNARD PARISH GOVT",
+   "city": "CHALMETTE",
+   "major": "Major",
+   "status": "EXP"
+  },
+  {
+   "npdes_permit": "LA0041009",
+   "permittee": "Alexandria City of - City of Alexandria WWTP",
+   "city": "ALEXANDRIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0041254",
+   "permittee": "Crowley City of",
+   "city": "CROWLEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0041262",
+   "permittee": "City of Gretna- Wastewater Treatment Plant",
+   "city": "GRETNA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0041386",
+   "permittee": "Haughton Town of - Wastewater Treatment Facility",
+   "city": "HAUGHTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0041394",
+   "permittee": "City of Shreveport- Lucas WWTP",
+   "city": "SHREVEPORT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0041751",
+   "permittee": "Eunice City of - WWTP",
+   "city": "EUNICE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0041769",
+   "permittee": "City of Jennings WWTP",
+   "city": "JENNINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0042048",
+   "permittee": "Jefferson Parish Department of Sewerage- Marrero WWTP",
+   "city": "MARRERO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0042064",
+   "permittee": "Jefferson Parish Department of Sewerage - Bridge City WWTP",
+   "city": "BRIDGE CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0042081",
+   "permittee": "Jefferson Parish Dept of Sewerage - Harvey STP",
+   "city": "HARVEY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0042188",
+   "permittee": "City of Shreveport- North Regional  WWTP",
+   "city": "SHREVEPORT",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0042561",
+   "permittee": "Lafayette Consolidated Government - Ambassador Caffery WWTP",
+   "city": "LAFAYETTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0043575",
+   "permittee": "City of Leesville",
+   "city": "LEESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0043915",
+   "permittee": "Winnfield City of - WWTP",
+   "city": "WINNFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0043931",
+   "permittee": "Donaldsonville City of - Donaldsonville WWTF",
+   "city": "PAINCOURTVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0043940",
+   "permittee": "Harahan City of - City of Harahan WWTP",
+   "city": "HARAHAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0043982",
+   "permittee": "City of West Monroe- Wastewater Treatment Facility",
+   "city": "WEST MONROE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0044032",
+   "permittee": "Plaquemines Parish Government - Belle Chasse STP",
+   "city": "BELLE CHASSE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0044041",
+   "permittee": "Plaquemines Parish Government- Buras WWTP",
+   "city": "BURAS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0044059",
+   "permittee": "Plaquemines Parish Government- Port Sulphur WWTP",
+   "city": "PORT SULPHUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0044695",
+   "permittee": "Ponchatoula City of - City of Ponchatoula Wastewater Treatment Facility",
+   "city": "PONCHATOULA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0045144",
+   "permittee": "Marksville City of - City of Marksville Sewage Treatment Plant",
+   "city": "MARKSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0045730",
+   "permittee": "City of Denham Springs",
+   "city": "DENHAM SPRINGS",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0046515",
+   "permittee": "City of Bogalusa- WWTP",
+   "city": "BOGALUSA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0047180",
+   "permittee": "Slidell City of - Terrace Avenue WWTP",
+   "city": "SLIDELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0048941",
+   "permittee": "St Tammany Parish Government - Department of Utilities - Cross Gates WWTP",
+   "city": "SLIDELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0051217",
+   "permittee": "LADPSC - Louisiana State Penitentiary - Angola",
+   "city": "ANGOLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0053716",
+   "permittee": "BOSSIER CITY",
+   "city": "BOSSIER CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0055328",
+   "permittee": "City of Youngsville",
+   "city": "YOUNGSVILLE",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0059951",
+   "permittee": "Walker City of - Walker Wastewater Treatment Plant",
+   "city": "WALKER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0064092",
+   "permittee": "St John the Baptist Parish - Woodland Drive STP",
+   "city": "LAPLACE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0065251",
+   "permittee": "Sewerage District #1 of Iberia Parish & City of New Iberia- Tete Bayou WWTP",
+   "city": "NEW IBERIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0065978",
+   "permittee": "BOSSIER CITY DEPT OF PUB UTILI",
+   "city": "BOSSIER CITY",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0065986",
+   "permittee": "Morgan City City of - City of Morgan City Wastewater Treatment Plant",
+   "city": "MORGAN CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0066621",
+   "permittee": "Town of Vinton- Treatment Plant",
+   "city": "VINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0066630",
+   "permittee": "Jefferson Parish Department of Sewerage- East Bank WWTP",
+   "city": "JEFFERSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0066800",
+   "permittee": "City of Kenner",
+   "city": "KENNER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0067083",
+   "permittee": "City of Sulphur- WWTP",
+   "city": "SULPHUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0067784",
+   "permittee": "Livingston Parish Sewer District #1 & #2 - Lockhart POTW",
+   "city": "DENHAM SPRINGS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0068381",
+   "permittee": "St Mary Parish Wards 5&8 Joint Sewer Commission - Regional Sewerage Treatment Fa",
+   "city": "PATTERSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0069868",
+   "permittee": "St. John the Baptist Parish - River Road Treatment Plant",
+   "city": "LAPLACE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0070904",
+   "permittee": "SABINE PARISH POLICE JURY",
+   "city": "MANY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0073521",
+   "permittee": "St. Charles Parish Council - Hahnville STP",
+   "city": "HAHNVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0073539",
+   "permittee": "St. Charles Parish Wastewater Dept--Destrehan WWTP",
+   "city": "DESTREHAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0079596",
+   "permittee": "St. John the Baptist Parish - Garyville WWTP",
+   "city": "GARYVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0084336",
+   "permittee": "Covington City of - Covington Sewerage Treatment Facility",
+   "city": "COVINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0086576",
+   "permittee": "City of Tallulah- Wastewater Treatment Plant",
+   "city": "TALLULAH",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "LA0095222",
+   "permittee": "City of Natchitoches",
+   "city": "NATCHITOCHES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0109576",
+   "permittee": "CITY OF GONZALES - WASTEWATER TREATMENT FACILITY",
+   "city": "GONZALES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0118770",
+   "permittee": "LAKE CHARLES, CITY OF- STP",
+   "city": "LAKE CHARLES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0120154",
+   "permittee": "St. Tammany Parish Government - Castine Regional Sewage Treatment Plant",
+   "city": "MANDEVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0120201",
+   "permittee": "NEW IBERIA, CITY OF",
+   "city": "NEW IBERIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0120235",
+   "permittee": "ST. TAMMANY PARISH GOVERNMENT",
+   "city": "MADISONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0122611",
+   "permittee": "SEWERAGE DISTRICT NO.1 OF TANGIPAHOA PARISH",
+   "city": "PONCHATOULA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0126152",
+   "permittee": "Consolidated Waterworks/Sewerage District #1 - Parish of Bossier",
+   "city": "BOSSIER CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0127097",
+   "permittee": "ST JOHN THE BAPTIST PARISH",
+   "city": "RESERVE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0127208",
+   "permittee": "Thibodaux City of - North Thibodaux WWTP",
+   "city": "THIBODAUX",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "LA0127649",
+   "permittee": "CITY OF CARENCRO - CARENCRO WWTP",
+   "city": "CARENCRO",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

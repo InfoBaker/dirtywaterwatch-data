@@ -1,0 +1,211 @@
+{
+ "state": "MI",
+ "name": "Michigan",
+ "region": "great-lakes",
+ "epa_region": 5,
+ "npdes_authority": "state",
+ "great_lakes_basin": "yes",
+ "checked": "2026-11-03",
+ "law": {
+  "public_notice_duty": "yes",
+  "summary": "Every sewer system operator must notify EGLE, local health departments and daily newspapers immediately and within 24 hours of any untreated or partially treated sewage discharge, and EGLE must promptly post each notification on its website (the MiEnviro CSO/SSO list). Operators must test affected waters for E. coli. Great Lakes basin CSO permittees also owe a 4-hour public notice under 40 CFR 122.38, which GLWA gives through the same state list.",
+  "citations": [
+   {
+    "cite": "MCL 324.3112a(1)",
+    "title": "Notice of discharge of untreated or partially treated sewage",
+    "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-324-3112a",
+    "quote": "the person responsible for the sewer system shall immediately, but not more than 24 hours after the discharge begins, notify the department; local health departments ...; a daily newspaper of general circulation in the county or counties in which a municipality notified pursuant to subsection (4) is located; and a daily newspaper of general circulation in the county in which the discharge occurred or is occurring",
+    "who": "person responsible for the sewer system",
+    "channel": "EGLE; local health departments; daily newspapers",
+    "deadline": "immediately, not more than 24 hours after the discharge begins; written report at the conclusion",
+    "threshold": "any untreated or partially treated sewage discharged directly or indirectly onto land or into waters of the state",
+    "verified": "fetched"
+   },
+   {
+    "cite": "MCL 324.3112a(2)",
+    "title": "State website posting",
+    "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-324-3112a",
+    "quote": "Upon being notified of a discharge under subsection (1), the department shall promptly post the notification on its website.",
+    "who": "EGLE",
+    "channel": "EGLE website (MiEnviro CSO/SSO list)",
+    "deadline": "promptly",
+    "threshold": "every notification under (1)",
+    "verified": "fetched"
+   },
+   {
+    "cite": "MCL 324.3112a(3)",
+    "title": "E. coli testing",
+    "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-324-3112a",
+    "quote": "Each time a discharge to surface waters occurs under subsection (1), the person responsible for the sewer system shall test the affected waters for E. coli to assess the risk to the public health",
+    "who": "person responsible for the sewer system",
+    "channel": "results to county health departments and EGLE",
+    "deadline": null,
+    "threshold": "each discharge to surface waters; up to 10 tests; waivable by the health department",
+    "verified": "fetched"
+   },
+   {
+    "cite": "40 CFR 122.38",
+    "title": "Great Lakes CSO public notification",
+    "url": "https://www.law.cornell.edu/cfr/text/40/122.38",
+    "quote": "initial notification ... as soon as possible but no later than four hours after becoming aware",
+    "who": "CSO permittees in the Great Lakes Basin",
+    "channel": "per each permittee's public notification plan (GLWA: MiEnviro)",
+    "deadline": "4 hours",
+    "threshold": "CSO discharges",
+    "verified": "inferred"
+   }
+  ],
+  "regulator_report": {
+   "deadline": "immediately, not more than 24 hours after the discharge begins (by telephone or as EGLE requires); written report at the conclusion of the discharge",
+   "cite": "MCL 324.3112a(1)(a)-(b)"
+  },
+  "cso_permit_notice_clause": {
+   "permit": "MI0022802",
+   "quote": "Within four hours of becoming aware of a CSO discharge, GLWA will provide public notification through the Michigan Department of Environmental Quality's (MEDQ) MiWaters System.",
+   "deadline": "4 hours; supplemental update within 7 days after the discharge ended",
+   "verified": "fetched"
+  },
+  "bills_and_cases": [
+   "HB 4427 (2025-2026) 'Brown Alert': passed House 10/30/2025, in Senate Local Government committee since 11/05/2025 (fetched)",
+   "HB 4365 and HB 4035 (2025-2026): sewage discharge reporting and penalties, in committee (search only)"
+  ]
+ },
+ "erule": {
+  "system": "state",
+  "sobe_events_2026_11_03": 0,
+  "public_output_url": "https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notes": "Michigan collects SSO/CSO/RTB reports in MiEnviro (formerly MiWaters, Windsor Solutions nCORE); the public list is the state's output. No Michigan rows in EPA's SOBE extract."
+ },
+ "statewide_feed": {
+  "exists": true,
+  "source_ids": [
+   "mi-egle-mienviro-cso-sso-list"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "json",
+  "latency": "posted when the operator submits; start-to-submission median 20.7 h (10% under 1.4 h, 10% over 134 h) in the 332 open reports on 2026-11-03",
+  "history": "records back to 2001",
+  "coordinates": "none (join to EPA inventory by permit and feature number)",
+  "receiving_water": "free text, often empty until the report is completed",
+  "start_end": "start and end (end often equals start until completed)",
+  "volume": true,
+  "stable_id": true,
+  "license": "No licence statement found; 'Copyright 2026 State of Michigan' footer",
+  "notes": "Undocumented JSON service behind the public page (GET /ncore/ss/ssolist?queryParams=...). Filter by reportStatusId and eventStartDateMin; unfiltered queries time out. Includes RTB (treated CSO) discharges and SSOs."
+ },
+ "cso": {
+  "permits": 59,
+  "open_outfalls": 163,
+  "operators_with_web_channel": 59,
+  "operators_checked": 1,
+  "state_outfall_layer": null,
+  "dmr_monthly_counts": "unknown",
+  "notification_practice": "Statutory: every discharge goes on EGLE's MiEnviro list; Great Lakes CSO permittees name that list as their 4-hour channel (GLWA plan read; others assumed). 27 of 40 EPA-listed Great Lakes operators also name a website (not fetched)."
+ },
+ "sso": {
+  "location_source": null,
+  "feeds": [
+   "mi-egle-mienviro-cso-sso-list"
+  ],
+  "notes": "SSOs are in the same list (state ids like 3112a-0707), with free-text location in dischargeDescription; no coordinates."
+ },
+ "beaches": {
+  "program": "EGLE BeachGuard (MiEnviro nSITE), results entered by local health departments; E. coli 300/100 mL daily geometric mean or 130/100 mL 30-day",
+  "source_ids": [
+   "mi-egle-beachguard",
+   "mi-egle-mienviro-subscriptions"
+  ],
+  "machine_readable": true,
+  "scope": "all",
+  "notes": "Public JSON gives current status colour per site; advisory detail needs login."
+ },
+ "habs": {
+  "program": "EGLE/MDHHS HAB reports map and reporting form (Michigan.gov/HABs)",
+  "source_ids": [
+   "mi-egle-hab-reports-map"
+  ],
+  "machine_readable": false,
+  "notes": "Map layer not traced (search only)."
+ },
+ "advisories": {
+  "health_department_pages": [
+   "Local health departments post beach advisories into BeachGuard; county pages not searched"
+  ],
+  "watershed_groups": [],
+  "swim_guide": false
+ },
+ "outfalls": {
+  "state_layer": null,
+  "cso_inventory_gap": "unknown",
+  "sso_points": "none"
+ },
+ "waters": {
+  "openboatlaunch_extract": false,
+  "nhd_needed": true,
+  "shared_waters": [
+   "Lake Erie (OH, PA, NY, Ontario)",
+   "Lake Huron (Ontario)",
+   "Lake Michigan (WI, IL, IN)",
+   "Lake Superior (WI, MN, Ontario)",
+   "Lake St. Clair and the St. Clair and Detroit rivers (Ontario)",
+   "St. Marys River (Ontario)",
+   "St. Joseph River (IN)",
+   "Menominee River (WI)"
+  ]
+ },
+ "barriers": [
+  {
+   "kind": "print_only",
+   "what": "Statute's public channel is a daily newspaper notice; the web posting is EGLE's, not the operator's",
+   "fix_level": "legislative",
+   "note": "MCL 324.3112a(1); offset by (2) state posting."
+  },
+  {
+   "kind": "licence",
+   "what": "No terms or licence on the MiEnviro list or its JSON service; service is undocumented",
+   "fix_level": "agency",
+   "note": "Ask EGLE to confirm reuse and a stable API."
+  },
+  {
+   "kind": "no_web",
+   "what": "No coordinates in the list; receiving water often blank on first notice",
+   "fix_level": "agency",
+   "note": "Engineering workaround: join permit + featureNumber to EPA inventory."
+  },
+  {
+   "kind": "email_only",
+   "what": "No public overflow alert subscription; only beach advisories",
+   "fix_level": "agency",
+   "note": ""
+  },
+  {
+   "kind": "login",
+   "what": "BeachGuard advisory and sample detail endpoints need a MiEnviro login",
+   "fix_level": "agency",
+   "note": "Public status colour only."
+  }
+ ],
+ "subscriptions": [
+  {
+   "name": "MiEnviro beach advisory email subscription",
+   "url": "https://mienviro.michigan.gov/ncore/external/home",
+   "what": "Emails for beach advisories by beach site or county (route ExternalUserSubscriptionsSignUp; exact URL inferred)"
+  }
+ ],
+ "readiness": {
+  "tier": "A",
+  "expected_grade": "Dated reports",
+  "first_feed": "mi-egle-mienviro-cso-sso-list",
+  "effort": "medium",
+  "rationale": "Statewide event-level JSON with start, end, volume, permit and outfall feature number, posted within about a day by statute. Work: a poller with two status passes (IN_PROCESS and recently COMPLETE), revision tracking as reports complete, and an outfall join for points.",
+  "order_hint": 1
+ },
+ "owner_questions": [
+  "Build on MiEnviro's undocumented JSON service now, or first ask EGLE to confirm reuse terms and a stable endpoint?",
+  "Show IN_PROCESS reports (start only, no volume or end) as hatched 'end not confirmed' events? The rules say yes; confirm.",
+  "Sign up for MiEnviro beach advisory emails (no overflow alerts exist)?",
+  "Include RTB (treated) discharges as their own category or as CSO?"
+ ],
+ "surprise": "Michigan's statute makes the state itself post every sewage discharge notice on its website, and Detroit's GLWA names that state list as its 4-hour federal public notice, so a single state JSON list carries CSO, SSO and treated-basin discharges for the whole state."
+}

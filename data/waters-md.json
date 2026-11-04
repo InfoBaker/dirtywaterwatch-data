@@ -1,0 +1,5591 @@
+{
+ "state": "MD",
+ "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "count": 229,
+ "waters": [
+  {
+   "slug": "acton-cove-md",
+   "name": "Acton Cove",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Annapolis"
+   ],
+   "bbox": [
+    -76.494,
+    38.97335,
+    -76.49057,
+    38.97528
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.03,
+   "launches": [
+    "acton-cove-park-md",
+    "market-st-wharf-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "adkins-pond-md",
+   "name": "Adkins Pond",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Powellville"
+   ],
+   "bbox": [
+    -75.37767,
+    38.33077,
+    -75.37322,
+    38.33555
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.039,
+   "launches": [
+    "adkins-mill-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "allen-pond-md",
+   "name": "Allen Pond",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Bowie"
+   ],
+   "bbox": [
+    -76.74259,
+    38.93242,
+    -76.73784,
+    38.93447
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.039,
+   "launches": [
+    "allen-pond-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "anacostia-river-md",
+   "name": "Anacostia River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Bladensburg"
+   ],
+   "bbox": [
+    -76.94428,
+    38.91701,
+    -76.93872,
+    38.94248
+   ],
+   "wikidata": "Q483607",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bladensburg-waterfront-park-boat-ramp-md",
+    "bladensburg-waterfront-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "antietam-creek-md",
+   "name": "Antietam Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Boonsboro",
+    "Hagerstown",
+    "Keedysville",
+    "Sharpsburg"
+   ],
+   "bbox": [
+    -77.74749,
+    39.41642,
+    -77.58027,
+    39.7288
+   ],
+   "wikidata": "Q575145",
+   "charted": false,
+   "area_km2": 0.59,
+   "launches": [
+    "antietam-creek-aqueduct-md",
+    "devil-s-backbone-park-md",
+    "kiwanis-park-soft-access-md",
+    "molly-s-hole-at-antietam-national-battlefield-md",
+    "rose-s-mill-park-soft-access-md",
+    "shepherdstown-pike-bridge-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "assawoman-bay-md",
+   "name": "Assawoman Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Ocean City"
+   ],
+   "bbox": [
+    -75.13401,
+    38.3856,
+    -75.05505,
+    38.47276
+   ],
+   "wikidata": "Q4808611",
+   "charted": true,
+   "area_km2": 24.998,
+   "launches": [
+    "64th-street-boat-ramp-ocean-city-md",
+    "caribbean-drive-boat-ramp-md",
+    "northside-park-md"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2018.",
+     "date": "2018-04-02",
+     "years": [
+      "2018"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "back-creek-md",
+   "name": "Back Creek",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Annapolis",
+    "Eastport"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "annapolis-maritime-museum-md",
+    "ellen-o-moyer-nature-park-at-back-creek-md",
+    "sixth-street-pocket-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "back-river-md",
+   "name": "Back River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Baltimore",
+    "Dundalk",
+    "Edgemere",
+    "Essex",
+    "North Point Village"
+   ],
+   "bbox": [
+    -76.51178,
+    39.17597,
+    -76.2902,
+    39.31174
+   ],
+   "wikidata": "Q4839144",
+   "charted": true,
+   "area_km2": 16.583,
+   "launches": [
+    "cox-s-point-park-md",
+    "edgemere-senior-center-and-park-md",
+    "rocky-point-park-north-md",
+    "rocky-point-park-south-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "balls-creek-md",
+   "name": "Balls Creek",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Bozman"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "neavitt-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "barren-creek-md",
+   "name": "Barren Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Mardela Springs"
+   ],
+   "bbox": [
+    -75.815,
+    38.44737,
+    -75.67689,
+    38.46666
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "mardela-springs-boat-ramp-md",
+    "mardela-springs-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-md",
+   "name": "Bear Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Baltimore"
+   ],
+   "bbox": [
+    -76.52659,
+    39.21432,
+    -76.47693,
+    39.27322
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "fleming-community-center-and-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaverdam-creek-md",
+   "name": "Beaverdam Creek",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Church Creek"
+   ],
+   "bbox": [
+    -76.29199,
+    38.41426,
+    -76.21566,
+    38.46776
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.948,
+   "launches": [
+    "smithville-bridge-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-pipe-creek-md",
+   "name": "Big Pipe Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Taneytown"
+   ],
+   "bbox": [
+    -77.27052,
+    39.60082,
+    -76.90628,
+    39.69813
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hapes-mill-road-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-pool-lake-md",
+   "name": "Big Pool Lake",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Big Pool"
+   ],
+   "bbox": [
+    -78.02184,
+    39.60592,
+    -78.00574,
+    39.62676
+   ],
+   "wikidata": "Q51288903",
+   "charted": false,
+   "area_km2": 0.389,
+   "launches": [
+    "fort-frederick-state-park-big-pool-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bird-river-md",
+   "name": "Bird River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Bowleys Quarters",
+    "Joppa",
+    "Joppatowne",
+    "Middle River"
+   ],
+   "bbox": [
+    -76.42173,
+    39.30185,
+    -76.28865,
+    39.41206
+   ],
+   "wikidata": "Q4915891",
+   "charted": true,
+   "area_km2": 44.717,
+   "launches": [
+    "dundee-creek-marina-at-gunpowder-falls-state-park-md",
+    "dundee-creek-soft-access-gunpowder-falls-state-park-md",
+    "mariner-point-park-boat-ramp-md",
+    "mariner-point-park-soft-access-north-md",
+    "mariner-point-park-soft-access-south-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blackwalnut-cove-md",
+   "name": "Blackwalnut Cove",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Tilghman"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bar-neck-landing-md",
+    "black-walnut-cove-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blackwater-river-md",
+   "name": "Blackwater River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Cambridge",
+    "Church Creek",
+    "Elliott",
+    "Shorters Wharf"
+   ],
+   "bbox": [
+    -76.2476,
+    38.34314,
+    -75.99312,
+    38.50214
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 24.838,
+   "launches": [
+    "blackwater-national-wildlife-refuge-md",
+    "shorter-s-wharf-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blairs-valley-lake-md",
+   "name": "Blairs Valley Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Clear Spring"
+   ],
+   "bbox": [
+    -77.94558,
+    39.69607,
+    -77.94112,
+    39.70227
+   ],
+   "wikidata": "Q32843286",
+   "charted": false,
+   "area_km2": 0.104,
+   "launches": [
+    "indian-springs-wma-blairs-valley-lake-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blue-point-branch-md",
+   "name": "Blue Point Branch",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Vienna"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blue-point-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bohemia-river-md",
+   "name": "Bohemia River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Chesapeake City",
+    "Hack Point",
+    "Two Rivers"
+   ],
+   "bbox": [
+    -75.94516,
+    39.43946,
+    -75.78223,
+    39.48942
+   ],
+   "wikidata": "Q4938074",
+   "charted": true,
+   "area_km2": 12.109,
+   "launches": [
+    "bohemia-river-bridge-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "breton-bay-md",
+   "name": "Breton Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Compton",
+    "Leonardtown"
+   ],
+   "bbox": [
+    -76.70157,
+    38.24127,
+    -76.62222,
+    38.29523
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 13.022,
+   "launches": [
+    "abell-s-wharf-boat-ramp-md",
+    "abell-s-wharf-soft-access-md",
+    "camp-calvert-landing-md",
+    "leonardtown-wharf-public-park-soft-access-md",
+    "newtowne-neck-state-park-paddle-in-campsite-east-md",
+    "newtowne-neck-state-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "broad-creek-md",
+   "name": "Broad Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Darlington"
+   ],
+   "bbox": [
+    -76.41285,
+    39.66065,
+    -76.2256,
+    39.71836
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.21,
+   "launches": [
+    "broad-creek-public-landing-boat-ramp-md",
+    "broad-creek-public-landing-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "broad-creek-st-michaels-md",
+   "name": "Broad Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "St. Michaels"
+   ],
+   "bbox": [
+    -76.2905,
+    38.69766,
+    -76.18316,
+    38.80719
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 25.565,
+   "launches": [
+    "west-chew-street-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "broadford-lake-md",
+   "name": "Broadford Lake",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Oakland"
+   ],
+   "bbox": [
+    -79.3752,
+    39.40733,
+    -79.35866,
+    39.42334
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.553,
+   "launches": [
+    "broadford-recreational-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brooks-creek-md",
+   "name": "Brooks Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Cambridge"
+   ],
+   "bbox": [
+    -76.27497,
+    38.54523,
+    -76.25948,
+    38.57711
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.108,
+   "launches": [
+    "ragged-point-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bullneck-creek-md",
+   "name": "Bullneck Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Baltimore",
+    "Dundalk"
+   ],
+   "bbox": [
+    -76.50857,
+    39.24517,
+    -76.49378,
+    39.25628
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.433,
+   "launches": [
+    "chesterwood-park-md",
+    "concrete-homes-park-md",
+    "merritt-point-park-boat-ramp-md",
+    "merritt-point-park-soft-access-md",
+    "watersedge-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bush-river-md",
+   "name": "Bush River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Edgewood",
+    "Riverside"
+   ],
+   "bbox": [
+    -76.28704,
+    39.33842,
+    -76.21548,
+    39.47853
+   ],
+   "wikidata": "Q5001405",
+   "charted": true,
+   "area_km2": 28.199,
+   "launches": [
+    "willoughby-beach-public-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cambridge-creek-md",
+   "name": "Cambridge Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Cambridge"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "trenton-street-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cash-lake-md",
+   "name": "Cash Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Bowie"
+   ],
+   "bbox": [
+    -76.7962,
+    39.02677,
+    -76.78749,
+    39.03297
+   ],
+   "wikidata": "Q32854156",
+   "charted": false,
+   "area_km2": 0.215,
+   "launches": [
+    "cash-lake-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "catoctin-creek-md",
+   "name": "Catoctin Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Point of Rocks"
+   ],
+   "bbox": [
+    -77.62145,
+    39.20969,
+    -77.54454,
+    39.27742
+   ],
+   "wikidata": "Q5053819",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mckimmey-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "centennial-lake-md",
+   "name": "Centennial Lake",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Ellicott City"
+   ],
+   "bbox": [
+    -76.8683,
+    39.24006,
+    -76.85216,
+    39.24512
+   ],
+   "wikidata": "Q7351785",
+   "charted": false,
+   "area_km2": 0.212,
+   "launches": [
+    "centennial-lake-boat-launch-md"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.cbsnews.com/baltimore/news/access-to-centennial-lake-in-ellicott-city-suspended-due-to-algae-bloom/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2022.",
+     "date": "2022-07-02",
+     "years": [
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "chapel-cove-md",
+   "name": "Chapel Cove",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Taylors Island"
+   ],
+   "bbox": [
+    -76.30594,
+    38.47166,
+    -76.29613,
+    38.48455
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.177,
+   "launches": [
+    "taylors-island-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chesapeake-and-delaware-canal-md",
+   "name": "Chesapeake and Delaware Canal",
+   "kind": "canal",
+   "state": "MD",
+   "towns": [
+    "Chesapeake City",
+    "Dans"
+   ],
+   "bbox": [
+    -75.89343,
+    39.5114,
+    -75.71325,
+    39.54393
+   ],
+   "wikidata": "Q5092885",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "chesapeake-city-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chesapeake-and-ohio-canal-md",
+   "name": "Chesapeake and Ohio Canal",
+   "kind": "canal",
+   "state": "MD",
+   "towns": [
+    "Darnestown",
+    "Potomac",
+    "Tobytown"
+   ],
+   "bbox": [
+    -77.32882,
+    38.9052,
+    -77.07908,
+    39.06716
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.073,
+   "launches": [
+    "anglers-inn-canal-md",
+    "aqueduct-lock-20-canal-md",
+    "pennyfield-lock-md",
+    "pennyfield-lock-canal-md",
+    "swains-lock-canal-md",
+    "violettes-lock-lock-23-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chesapeake-bay-lexington-md",
+   "name": "Chesapeake Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Lexington",
+    "Scotland"
+   ],
+   "bbox": [
+    -76.40575,
+    37.575,
+    -75.89282,
+    38.4
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1634.233,
+   "launches": [
+    "elms-beach-park-md",
+    "point-lookout-state-park-pet-beach-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chesapeake-bay-md",
+   "name": "Chesapeake Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Annapolis",
+    "Bay View Estates",
+    "Chesapeake Beach",
+    "Dundalk",
+    "Edgemere",
+    "Edgewater",
+    "Havre de Grace",
+    "Hazelmoor",
+    "Kenwood Beach",
+    "Mayo",
+    "Middle River",
+    "North Beach"
+   ],
+   "bbox": [
+    -76.53407,
+    38.48845,
+    -75.98041,
+    39.55242
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1391.447,
+   "launches": [
+    "allen-s-lane-md",
+    "beverly-triton-beach-soft-access-md",
+    "breezy-point-beach-and-campground-md",
+    "chesapeake-bay-boat-launch-near-havre-de-grace-md-2",
+    "city-yacht-basin-havre-de-grace-md",
+    "downs-park-bay-side-beach-soft-access-md",
+    "elk-neck-state-park-north-east-beach-area-md",
+    "gratitude-md",
+    "ingleside-recreation-area-md",
+    "jack-creek-park-md",
+    "matapeake-fishing-pier-and-boat-ramp-md",
+    "mayo-beach-park-soft-access-md",
+    "north-beach-public-beach-md",
+    "north-point-black-marsh-md",
+    "rock-hall-beach-ferry-park-md",
+    "sandy-point-east-beach-md",
+    "sandy-point-soft-access-md",
+    "terrapin-nature-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chester-river-md",
+   "name": "Chester River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Chestertown",
+    "Crumpton",
+    "Grasonville",
+    "McKinleyville",
+    "Millington",
+    "Rock Hall",
+    "Rolphs"
+   ],
+   "bbox": [
+    -76.32734,
+    38.96646,
+    -75.83476,
+    39.26191
+   ],
+   "wikidata": "Q5093696",
+   "charted": true,
+   "area_km2": 124.54,
+   "launches": [
+    "bogles-wharf-md",
+    "buckingham-wharf-md",
+    "chester-river-boat-launch-near-chestertown-md",
+    "chestertown-md",
+    "cliff-city-md",
+    "crumpton-landing-md",
+    "jackson-creek-landing-md",
+    "long-cove-md",
+    "millington-waterfront-park-md",
+    "quaker-neck-md",
+    "shadding-reach-md",
+    "wilmer-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chicamacomico-river-md",
+   "name": "Chicamacomico River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Vienna"
+   ],
+   "bbox": [
+    -75.9801,
+    38.42332,
+    -75.87588,
+    38.55696
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.121,
+   "launches": [
+    "new-bridge-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chincoteague-bay-md",
+   "name": "Chincoteague Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Girdletree",
+    "Mason Landing",
+    "Public Landing",
+    "Snow Hill",
+    "Stockton"
+   ],
+   "bbox": [
+    -75.43802,
+    37.9375,
+    -75.15842,
+    38.29467
+   ],
+   "wikidata": "Q5100322",
+   "charted": true,
+   "area_km2": 270.479,
+   "launches": [
+    "chincoteague-bay-boat-launch-md",
+    "george-island-landing-md",
+    "mason-landing-md",
+    "public-landing-soft-access-md",
+    "taylors-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "choptank-river-md",
+   "name": "Choptank River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Cambridge",
+    "Denton",
+    "Greensboro",
+    "Harmony",
+    "Kingston",
+    "Lyford Landing",
+    "Preston",
+    "Secretary",
+    "Trappe"
+   ],
+   "bbox": [
+    -76.39617,
+    38.49079,
+    -75.72953,
+    39.07207
+   ],
+   "wikidata": "Q773991",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "choptank-marina-md",
+    "christian-park-soft-access-md",
+    "crouse-memorial-park-md",
+    "franklin-street-md",
+    "ganey-s-wharf-boat-ramp-md",
+    "ganey-s-wharf-soft-access-md",
+    "gilpin-point-landing-md",
+    "great-marsh-park-boat-ramp-md",
+    "great-marsh-park-soft-access-md",
+    "greensboro-boat-ramp-md",
+    "kingston-landing-md",
+    "sailwinds-visitor-center-soft-access-md",
+    "two-johns-landing-md",
+    "windy-hill-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "church-creek-md",
+   "name": "Church Creek",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Edgewater"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "homeport-farm-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clopper-lake-md",
+   "name": "Clopper Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Gaithersburg"
+   ],
+   "bbox": [
+    -77.25792,
+    39.13892,
+    -77.2403,
+    39.14561
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.341,
+   "launches": [
+    "seneca-creek-state-park-clopper-lake-md"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019.",
+     "date": "2019-09-02",
+     "years": [
+      "2019"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "college-creek-md",
+   "name": "College Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Annapolis"
+   ],
+   "bbox": [
+    -76.50175,
+    38.9804,
+    -76.48612,
+    38.98693
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.237,
+   "launches": [
+    "robert-eades-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "conowingo-creek-md",
+   "name": "Conowingo Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Conowingo Mobile Home Park"
+   ],
+   "bbox": [
+    -76.20638,
+    39.67979,
+    -76.16548,
+    39.86142
+   ],
+   "wikidata": "Q5162366",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "conowingo-creek-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cornfield-harbor-md",
+   "name": "Cornfield Harbor",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Scotland"
+   ],
+   "bbox": [
+    -76.35327,
+    38.03791,
+    -76.32209,
+    38.06141
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.216,
+   "launches": [
+    "point-lookout-state-park-swimming-beach-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cuckold-creek-md",
+   "name": "Cuckold Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Hollywood",
+    "Solomons"
+   ],
+   "bbox": [
+    -76.53574,
+    38.33517,
+    -76.48651,
+    38.35868
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.498,
+   "launches": [
+    "clarkes-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cummings-creek-md",
+   "name": "Cummings Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Wittman"
+   ],
+   "bbox": [
+    -76.30507,
+    38.78345,
+    -76.2938,
+    38.79322
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.314,
+   "launches": [
+    "cummings-creek-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "curtis-creek-md",
+   "name": "Curtis Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Brooklyn Park",
+    "Curtis Bay",
+    "Glen Burnie"
+   ],
+   "bbox": [
+    -76.58612,
+    39.1834,
+    -76.5401,
+    39.22818
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.241,
+   "launches": [
+    "solleys-cove-park-boat-ramp-md",
+    "solleys-cove-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dames-quarter-creek-md",
+   "name": "Dames Quarter Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Dames Quarter"
+   ],
+   "bbox": [
+    -75.88533,
+    38.18597,
+    -75.87748,
+    38.20027
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.447,
+   "launches": [
+    "dames-quarter-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dark-head-creek-md",
+   "name": "Dark Head Creek",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Middle River"
+   ],
+   "bbox": [
+    -76.4314,
+    39.31669,
+    -76.42346,
+    39.32468
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.197,
+   "launches": [
+    "wilson-point-park-md"
+   ],
+   "advisories": [
+    {
+     "source": "usgs-nas-dreissenid-mussels",
+     "source_name": "USGS Nonindigenous Aquatic Species database",
+     "url": "https://nas.er.usgs.gov/queries/SpeciesList.aspx?group=Mollusks-Bivalves",
+     "checked": "2026-10-20",
+     "kind": "invasive",
+     "title": "Zebra mussels",
+     "text": "Zebra mussels (latest report 2015) reported in this water (USGS Nonindigenous Aquatic Species database). Clean, drain and dry your boat, trailer and gear before you leave, and do not move water, plants or live bait to another water.",
+     "species": [
+      "zebra mussels"
+     ],
+     "date": "2015-08-18"
+    }
+   ]
+  },
+  {
+   "slug": "deal-island-impoundment-md",
+   "name": "Deal Island Impoundment",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Dames Quarter"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "deal-island-wma-boat-ramp-impoundment-north-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "deep-creek-lake-md",
+   "name": "Deep Creek Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Deer Park",
+    "McHenry",
+    "Oakland",
+    "Swanton",
+    "Thayerville"
+   ],
+   "bbox": [
+    -79.39239,
+    39.44844,
+    -79.2496,
+    39.55942
+   ],
+   "wikidata": "Q14213258",
+   "charted": false,
+   "area_km2": 15.295,
+   "launches": [
+    "deep-creek-lake-state-park-boat-ramp-md",
+    "deep-creek-lake-state-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "deep-creek-md",
+   "name": "Deep Creek",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Shady Side"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "franklin-point-state-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "deer-creek-md",
+   "name": "Deer Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Forest Hill",
+    "Jarrettsville",
+    "Pylesville",
+    "Street"
+   ],
+   "bbox": [
+    -76.63349,
+    39.59785,
+    -76.1466,
+    39.74261
+   ],
+   "wikidata": "Q5250705",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "benjamin-s-bridge-canoe-kayak-launch-md",
+    "eden-mill-nature-cnter-park-soft-access-md",
+    "rocks-state-park-ma-pa-soft-access-md",
+    "rocks-state-park-rapid-s-soft-access-md",
+    "walters-mill-canoe-kayak-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dogwood-harbor-md",
+   "name": "Dogwood Harbor",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Tilghman"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dogwood-harbor-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "double-pipe-creek-md",
+   "name": "Double Pipe Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Detour"
+   ],
+   "bbox": [
+    -77.29109,
+    39.60082,
+    -77.26978,
+    39.60759
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "double-pipe-creek-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dundee-creek-md",
+   "name": "Dundee Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Baltimore"
+   ],
+   "bbox": [
+    -76.37276,
+    39.34054,
+    -76.34922,
+    39.35939
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.282,
+   "launches": [
+    "marshy-point-nature-center-and-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "east-fork-langford-creek-md",
+   "name": "East Fork Langford Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Chestertown"
+   ],
+   "bbox": [
+    -76.16705,
+    39.12149,
+    -76.1125,
+    39.18615
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.353,
+   "launches": [
+    "broadneck-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "eastern-bay-md",
+   "name": "Eastern Bay",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Claiborne",
+    "Grasonville",
+    "Prospect Bay",
+    "Sherwood",
+    "Stevensville",
+    "Wittman"
+   ],
+   "bbox": [
+    -76.38088,
+    38.7207,
+    -76.18446,
+    38.9483
+   ],
+   "wikidata": "Q5330010",
+   "charted": true,
+   "area_km2": 165.205,
+   "launches": [
+    "bayshore-road-md",
+    "cabin-creek-landing-md",
+    "claiborne-landing-md",
+    "eastern-bay-boat-launch-near-sherwood-md",
+    "romancoke-fishing-pier-and-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "elk-river-md",
+   "name": "Elk River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Earleville",
+    "Elk Haven",
+    "Elkton",
+    "Havre de Grace",
+    "Hollywood Beach",
+    "North East",
+    "Oldfield Acres",
+    "Pembray",
+    "Saint Johns Vista",
+    "White Crystal Beach"
+   ],
+   "bbox": [
+    -76.00821,
+    39.42861,
+    -75.81729,
+    39.594
+   ],
+   "wikidata": "Q5364100",
+   "charted": true,
+   "area_km2": 33.859,
+   "launches": [
+    "elk-neck-state-park-rogues-harbor-md",
+    "elk-river-park-md",
+    "stemmers-run-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fairlee-creek-md",
+   "name": "Fairlee Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Chestertown",
+    "Georgetown"
+   ],
+   "bbox": [
+    -76.21283,
+    39.23126,
+    -76.1699,
+    39.26956
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.378,
+   "launches": [
+    "fairlee-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "farm-creek-md",
+   "name": "Farm Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Toddville"
+   ],
+   "bbox": [
+    -76.09968,
+    38.30445,
+    -76.05659,
+    38.33239
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "toddville-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fishing-bay-md",
+   "name": "Fishing Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Straits",
+    "Waterview"
+   ],
+   "bbox": [
+    -76.06137,
+    38.1756,
+    -75.81271,
+    38.37476
+   ],
+   "wikidata": "Q5455002",
+   "charted": true,
+   "area_km2": 148.302,
+   "launches": [
+    "crocheron-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fishing-creek-chesapeake-beach-md",
+   "name": "Fishing Creek",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Chesapeake Beach"
+   ],
+   "bbox": [
+    -76.56201,
+    38.6665,
+    -76.53275,
+    38.6923
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.431,
+   "launches": [
+    "chesapeake-beach-boat-ramps-east-md",
+    "chesapeake-beach-boat-ramps-west-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fishing-creek-md",
+   "name": "Fishing Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Fishing Creek"
+   ],
+   "bbox": [
+    -76.23633,
+    38.34472,
+    -76.22755,
+    38.35283
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.197,
+   "launches": [
+    "tylers-cove-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "forrest-landing-cove-md",
+   "name": "Forrest Landing Cove",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Hollywood"
+   ],
+   "bbox": [
+    -76.53566,
+    38.35029,
+    -76.52034,
+    38.35839
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.23,
+   "launches": [
+    "forrest-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fox-harbor-md",
+   "name": "Fox Harbor",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Ridge"
+   ],
+   "bbox": [
+    -76.39474,
+    38.1192,
+    -76.38226,
+    38.12442
+   ],
+   "wikidata": "Q49377636",
+   "charted": true,
+   "area_km2": 0.222,
+   "launches": [
+    "fox-harbor-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "freeman-creek-md",
+   "name": "Freeman Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Glencoe"
+   ],
+   "bbox": [
+    -75.9539,
+    39.35014,
+    -75.93886,
+    39.3657
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.478,
+   "launches": [
+    "freeman-creek-boat-launch-near-glencoe-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gilbert-run-lake-md",
+   "name": "Gilbert Run Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Charlotte Hall"
+   ],
+   "bbox": [
+    -76.8592,
+    38.48654,
+    -76.85291,
+    38.49679
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.211,
+   "launches": [
+    "gilbert-run-park-boat-ramp-md",
+    "gilbert-run-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "goodhands-creek-md",
+   "name": "Goodhands Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Chester"
+   ],
+   "bbox": [
+    -76.26597,
+    38.95877,
+    -76.25869,
+    38.96514
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.165,
+   "launches": [
+    "goodhands-creek-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "goose-creek-md",
+   "name": "Goose Creek",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Westover"
+   ],
+   "bbox": null,
+   "wikidata": "Q49378209",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "rumbley-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grace-creek-md",
+   "name": "Grace Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Saint Michaels"
+   ],
+   "bbox": [
+    -76.26862,
+    38.74854,
+    -76.25263,
+    38.76293
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.921,
+   "launches": [
+    "grace-creek-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grammers-cove-md",
+   "name": "Grammers Cove",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Mackall"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "grammers-cove-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "granary-creek-md",
+   "name": "Granary Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Queenstown"
+   ],
+   "bbox": [
+    -76.14514,
+    38.88123,
+    -76.13651,
+    38.89203
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.226,
+   "launches": [
+    "wye-island-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grays-inn-creek-md",
+   "name": "Grays Inn Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Rock Hall"
+   ],
+   "bbox": [
+    -76.2283,
+    39.07379,
+    -76.18171,
+    39.14008
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.782,
+   "launches": [
+    "gray-s-inn-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "great-seneca-creek-md",
+   "name": "Great Seneca Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Darnestown",
+    "Gaithersburg"
+   ],
+   "bbox": [
+    -77.33599,
+    39.12447,
+    -77.1733,
+    39.28077
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "great-seneca-creek-boat-launch-md",
+    "seneca-creek-state-park-riffle-ford-road-creek-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "greenbrier-lake-md",
+   "name": "Greenbrier Lake",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Boonsboro"
+   ],
+   "bbox": [
+    -77.62123,
+    39.53565,
+    -77.61591,
+    39.54161
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.118,
+   "launches": [
+    "greenbrier-state-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gunpowder-river-md",
+   "name": "Gunpowder River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Chase"
+   ],
+   "bbox": [
+    -76.37752,
+    39.30222,
+    -76.28859,
+    39.4132
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 38.452,
+   "launches": [
+    "hammerman-day-use-area-gunpowder-falls-state-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harness-creek-md",
+   "name": "Harness Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Annapolis"
+   ],
+   "bbox": [
+    -76.51515,
+    38.93172,
+    -76.50527,
+    38.94219
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.34,
+   "launches": [
+    "quiet-waters-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harris-creek-md",
+   "name": "Harris Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Sherwood"
+   ],
+   "bbox": [
+    -76.32648,
+    38.72635,
+    -76.25667,
+    38.81906
+   ],
+   "wikidata": "Q16980284",
+   "charted": true,
+   "area_km2": 13.605,
+   "launches": [
+    "sherwood-pier-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hawk-cove-md",
+   "name": "Hawk Cove",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Dundalk",
+    "Kingsville",
+    "Middle River"
+   ],
+   "bbox": [
+    -76.40513,
+    39.2477,
+    -76.35523,
+    39.28043
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 8.548,
+   "launches": [
+    "hart-miller-island-state-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "herring-bay-md",
+   "name": "Herring Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Rose Haven"
+   ],
+   "bbox": [
+    -76.56051,
+    38.72706,
+    -76.5274,
+    38.77804
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 10.178,
+   "launches": [
+    "rose-haven-memorial-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "herring-creek-md",
+   "name": "Herring Creek",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Tall Timbers"
+   ],
+   "bbox": null,
+   "wikidata": "Q49379417",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "tall-timbers-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "herrington-manor-recreation-area-reservoir-md",
+   "name": "Herrington Manor Recreation Area Reservoir",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Oakland"
+   ],
+   "bbox": [
+    -79.4622,
+    39.45304,
+    -79.45231,
+    39.45826
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.18,
+   "launches": [
+    "herrington-manor-state-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "herringtown-creek-md",
+   "name": "Herringtown Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Rock Hall"
+   ],
+   "bbox": [
+    -76.21395,
+    39.10726,
+    -76.20226,
+    39.12103
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.33,
+   "launches": [
+    "harrington-md",
+    "skinner-s-neck-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "honga-river-md",
+   "name": "Honga River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Fishing Creek",
+    "Wingate"
+   ],
+   "bbox": [
+    -76.23834,
+    38.20952,
+    -76.07066,
+    38.39548
+   ],
+   "wikidata": "Q16892371",
+   "charted": true,
+   "area_km2": 96.9,
+   "launches": [
+    "hoopersville-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hunting-creek-lake-md",
+   "name": "Hunting Creek Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Thurmont"
+   ],
+   "bbox": [
+    -77.46451,
+    39.62257,
+    -77.45576,
+    39.62898
+   ],
+   "wikidata": "Q47468905",
+   "charted": false,
+   "area_km2": 0.179,
+   "launches": [
+    "cunningham-falls-state-park-md"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2019 and 2020.",
+     "date": "2020-09-30",
+     "years": [
+      "2019",
+      "2020"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "hunting-creek-md",
+   "name": "Hunting Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Preston"
+   ],
+   "bbox": [
+    -75.94873,
+    38.67453,
+    -75.89974,
+    38.69559
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "hunting-creek-bridge-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "indian-creek-md",
+   "name": "Indian Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Vienna"
+   ],
+   "bbox": [
+    -75.98814,
+    38.34528,
+    -75.93518,
+    38.39385
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "island-creek-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "insley-cove-md",
+   "name": "Insley Cove",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Wingate"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kirwins-wharf-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "island-pond-md",
+   "name": "Island Pond",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Cambridge"
+   ],
+   "bbox": [
+    -75.95117,
+    38.38892,
+    -75.89445,
+    38.42489
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.268,
+   "launches": [
+    "island-pond-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "isle-of-wight-bay-md",
+   "name": "Isle of Wight Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Bishopville",
+    "Ocean City",
+    "Ocean Pines"
+   ],
+   "bbox": [
+    -75.16767,
+    38.32594,
+    -75.06826,
+    38.39018
+   ],
+   "wikidata": "Q6084084",
+   "charted": true,
+   "area_km2": 21.616,
+   "launches": [
+    "gum-point-landing-md",
+    "homer-gudelsky-park-md",
+    "isle-of-wight-park-soft-access-md"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2018.",
+     "date": "2018-04-02",
+     "years": [
+      "2018"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "jenkins-creek-md",
+   "name": "Jenkins Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Crisfield"
+   ],
+   "bbox": [
+    -75.86436,
+    37.95157,
+    -75.84092,
+    37.96585
+   ],
+   "wikidata": "Q49380676",
+   "charted": true,
+   "area_km2": 0.816,
+   "launches": [
+    "jenkins-creek-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jennings-randolph-lake-md",
+   "name": "Jennings Randolph Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Kitzmiller"
+   ],
+   "bbox": [
+    -79.16274,
+    39.4025,
+    -79.11871,
+    39.43597
+   ],
+   "wikidata": "Q6179058",
+   "charted": false,
+   "area_km2": 3.604,
+   "launches": [
+    "jennings-randolph-lake-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-pond-md",
+   "name": "Johnson Pond",
+   "kind": "pond",
+   "state": "MD",
+   "towns": [
+    "Salisbury"
+   ],
+   "bbox": [
+    -75.6031,
+    38.37192,
+    -75.58894,
+    38.39578
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.442,
+   "launches": [
+    "rose-street-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jones-creek-md",
+   "name": "Jones Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Edgemere"
+   ],
+   "bbox": [
+    -76.45854,
+    39.22723,
+    -76.44974,
+    39.2296
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.065,
+   "launches": [
+    "sparrows-point-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "joseph-stewart-s-canal-md",
+   "name": "Joseph Stewart's Canal",
+   "kind": "canal",
+   "state": "MD",
+   "towns": [
+    "Taylors Island"
+   ],
+   "bbox": [
+    -76.26462,
+    38.47851,
+    -76.26114,
+    38.48988
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.022,
+   "launches": [
+    "parsons-creek-ditch-access-point-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kings-creek-md",
+   "name": "Kings Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Providence"
+   ],
+   "bbox": [
+    -76.02375,
+    38.77445,
+    -75.96798,
+    38.79736
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.436,
+   "launches": [
+    "kings-creek-preserve-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "la-trappe-creek-md",
+   "name": "La Trappe Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Trappe"
+   ],
+   "bbox": [
+    -76.11905,
+    38.62659,
+    -76.07766,
+    38.66018
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "trappe-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-conoy-md",
+   "name": "Lake Conoy",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Scotland"
+   ],
+   "bbox": [
+    -76.35563,
+    38.05028,
+    -76.32494,
+    38.06519
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.228,
+   "launches": [
+    "point-lookout-state-park-green-s-loop-paddle-in-campsites-md",
+    "point-lookout-state-park-marshland-nature-center-md",
+    "point-lookout-state-park-camp-store-md",
+    "point-lookout-state-park-boat-ramps-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-habeeb-md",
+   "name": "Lake Habeeb",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Flintstone",
+    "Pleasant Valley"
+   ],
+   "bbox": [
+    -78.66324,
+    39.69674,
+    -78.6409,
+    39.71544
+   ],
+   "wikidata": "Q6476069",
+   "charted": false,
+   "area_km2": 0.843,
+   "launches": [
+    "rocky-gap-state-park-boat-ramp-md",
+    "rocky-gap-state-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-needwood-md",
+   "name": "Lake Needwood",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Redland",
+    "Rockville"
+   ],
+   "bbox": [
+    -77.13197,
+    39.11433,
+    -77.12718,
+    39.12944
+   ],
+   "wikidata": "Q6477078",
+   "charted": false,
+   "area_km2": 0.302,
+   "launches": [
+    "rock-creek-regional-park-at-lake-needwood-md"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.epa.gov/habs",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2017.",
+     "date": "2017-08-02",
+     "years": [
+      "2017"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "lake-roland-md",
+   "name": "Lake Roland",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Baltimore"
+   ],
+   "bbox": [
+    -76.64611,
+    39.37855,
+    -76.63822,
+    39.39045
+   ],
+   "wikidata": "Q6477540",
+   "charted": false,
+   "area_km2": 0.193,
+   "launches": [
+    "robert-e-lee-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "langrells-creek-nanticoke-river-md",
+   "name": "Langrells Creek/Nanticoke River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Vienna"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "langrells-creek-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "leeds-creek-md",
+   "name": "Leeds Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Easton"
+   ],
+   "bbox": [
+    -76.19686,
+    38.7959,
+    -76.15886,
+    38.82807
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.644,
+   "launches": [
+    "tunis-mills-bridge-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "leonard-pond-md",
+   "name": "Leonard Pond",
+   "kind": "pond",
+   "state": "MD",
+   "towns": [
+    "Salisbury"
+   ],
+   "bbox": [
+    -75.56524,
+    38.42194,
+    -75.55012,
+    38.4337
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.195,
+   "launches": [
+    "leonards-mill-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "liberty-reservoir-md",
+   "name": "Liberty Reservoir",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Eldersburg",
+    "Shervettes Corner"
+   ],
+   "bbox": [
+    -76.95299,
+    39.37666,
+    -76.86261,
+    39.49848
+   ],
+   "wikidata": "Q6541929",
+   "charted": false,
+   "area_km2": 11.963,
+   "launches": [
+    "liberty-reservoir-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "licking-creek-md",
+   "name": "Licking Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Big Pool"
+   ],
+   "bbox": [
+    -78.08689,
+    39.64906,
+    -78.02519,
+    39.73035
+   ],
+   "wikidata": "Q6543481",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "camp-harding-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-annemessex-river-md",
+   "name": "Little Annemessex River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Crisfield"
+   ],
+   "bbox": [
+    -75.89993,
+    37.95006,
+    -75.84758,
+    38.00956
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 9.701,
+   "launches": [
+    "little-boat-harbor-md",
+    "somers-cove-md",
+    "wellington-beach-and-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-blackwater-river-md",
+   "name": "Little Blackwater River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Cambridge"
+   ],
+   "bbox": [
+    -76.09975,
+    38.42114,
+    -76.0333,
+    38.52179
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.152,
+   "launches": [
+    "key-wallace-drive-soft-access-md",
+    "little-blackwater-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-creek-md",
+   "name": "Little Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Chester"
+   ],
+   "bbox": [
+    -76.28591,
+    38.93527,
+    -76.27826,
+    38.94208
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.097,
+   "launches": [
+    "little-creek-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-elk-creek-md",
+   "name": "Little Elk Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Elkton Landing"
+   ],
+   "bbox": [
+    -75.93239,
+    39.59321,
+    -75.84073,
+    39.75819
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.058,
+   "launches": [
+    "little-elk-creek-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-queenstown-creek-md",
+   "name": "Little Queenstown Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Queenstown"
+   ],
+   "bbox": [
+    -76.16535,
+    38.98577,
+    -76.15827,
+    38.99587
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.236,
+   "launches": [
+    "queenstown-dock-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-seneca-lake-md",
+   "name": "Little Seneca Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Boyds"
+   ],
+   "bbox": [
+    -77.31869,
+    39.18336,
+    -77.28364,
+    39.2095
+   ],
+   "wikidata": "Q6651884",
+   "charted": false,
+   "area_km2": 1.856,
+   "launches": [
+    "black-hill-regional-park-boat-ramp-md",
+    "black-hill-regional-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "loch-raven-reservoir-md",
+   "name": "Loch Raven Reservoir",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Timonium"
+   ],
+   "bbox": [
+    -76.61957,
+    39.42792,
+    -76.53678,
+    39.49583
+   ],
+   "wikidata": "Q6665000",
+   "charted": false,
+   "area_km2": 8.637,
+   "launches": [
+    "loch-raven-fishing-center-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lock-7-md",
+   "name": "Lock 7",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Glen Echo"
+   ],
+   "bbox": [
+    -77.1392,
+    38.9644,
+    -77.13885,
+    38.96467
+   ],
+   "wikidata": "Q34864147",
+   "charted": false,
+   "area_km2": 0.0,
+   "launches": [
+    "lock-7-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "locust-cove-md",
+   "name": "Locust Cove",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Pasadena"
+   ],
+   "bbox": [
+    -76.44487,
+    39.11268,
+    -76.43962,
+    39.11934
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.074,
+   "launches": [
+    "downs-park-locust-cove-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "madison-bay-md",
+   "name": "Madison Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Madison"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "madison-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "magothy-river-md",
+   "name": "Magothy River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Arcadia",
+    "Arnold",
+    "Chelsea Beach",
+    "Crystal Beach",
+    "Cypress Creek",
+    "Eagle Hill",
+    "Indian Village",
+    "Magothy Estates",
+    "Pasadena",
+    "Severna Park",
+    "Tree Tops"
+   ],
+   "bbox": [
+    -76.59607,
+    39.04324,
+    -76.42198,
+    39.12031
+   ],
+   "wikidata": "Q6732381",
+   "charted": true,
+   "area_km2": 22.034,
+   "launches": [
+    "beachwood-park-md",
+    "spriggs-farm-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mallows-bay-md",
+   "name": "Mallows Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Nanjemoy"
+   ],
+   "bbox": [
+    -77.27201,
+    38.46421,
+    -77.26512,
+    38.47796
+   ],
+   "wikidata": "Q6744306",
+   "charted": true,
+   "area_km2": 0.47,
+   "launches": [
+    "mallows-bay-boat-ramp-md",
+    "mallows-bay-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "manokin-river-md",
+   "name": "Manokin River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Princess Anne"
+   ],
+   "bbox": [
+    -75.78974,
+    38.15012,
+    -75.69084,
+    38.21606
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "manokin-river-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "marshy-creek-md",
+   "name": "Marshy Creek",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Grasonville",
+    "Kent Narrows"
+   ],
+   "bbox": [
+    -76.24105,
+    38.94999,
+    -76.21312,
+    38.96536
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.482,
+   "launches": [
+    "chesapeake-bay-environmental-center-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "marshyhope-creek-md",
+   "name": "Marshyhope Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Brookview",
+    "Federalsburg"
+   ],
+   "bbox": [
+    -75.8252,
+    38.524,
+    -75.75379,
+    38.71874
+   ],
+   "wikidata": "Q14692151",
+   "charted": true,
+   "area_km2": 2.056,
+   "launches": [
+    "federalsburg-vfw-boat-ramp-md",
+    "northwest-fork-dock-park-md",
+    "recreation-park-and-marina-boat-ramp-md",
+    "recreation-park-and-marina-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mattawoman-creek-accokeek-md",
+   "name": "Mattawoman Creek",
+   "kind": "stream",
+   "state": "MD",
+   "towns": [
+    "Accokeek"
+   ],
+   "bbox": [
+    -77.11995,
+    38.57718,
+    -76.83059,
+    38.66485
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mason-springs-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mattawoman-creek-md",
+   "name": "Mattawoman Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Indian Head",
+    "Marbury"
+   ],
+   "bbox": [
+    -77.22134,
+    38.55303,
+    -77.13303,
+    38.59699
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.08,
+   "launches": [
+    "mattingly-park-slavin-s-dock-boat-ramp-md",
+    "mattingly-park-slavin-s-dock-soft-access-md",
+    "smallwood-state-park-soft-access-md",
+    "sweden-point-marina-smallwood-state-park-boat-ramps-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mccreadys-creek-md",
+   "name": "McCreadys Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Vienna"
+   ],
+   "bbox": [
+    -76.00548,
+    38.29971,
+    -75.99491,
+    38.30587
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.046,
+   "launches": [
+    "elliott-s-island-boat-ramp-mccready-s-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mcintosh-run-md",
+   "name": "McIntosh Run",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Leonardtown"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "port-of-leonardtown-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mezick-pond-md",
+   "name": "Mezick Pond",
+   "kind": "pond",
+   "state": "MD",
+   "towns": [
+    "Annapolis"
+   ],
+   "bbox": [
+    -76.4065,
+    39.0087,
+    -76.40077,
+    39.01567
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.151,
+   "launches": [
+    "sandy-point-state-park-boat-ramps-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "middle-branch-patapsco-river-md",
+   "name": "Middle Branch Patapsco River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Baltimore"
+   ],
+   "bbox": [
+    -76.63101,
+    39.25521,
+    -76.61526,
+    39.27411
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.319,
+   "launches": [
+    "middle-branch-park-boat-ramps-broening-md",
+    "middle-branch-park-soft-access-east-md",
+    "middle-branch-park-soft-access-west-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "middle-river-md",
+   "name": "Middle River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Middle River"
+   ],
+   "bbox": [
+    -76.44736,
+    39.29,
+    -76.38386,
+    39.3327
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.872,
+   "launches": [
+    "hawthorne-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "miles-river-md",
+   "name": "Miles River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Easton",
+    "Saint Michaels",
+    "St. Michaels"
+   ],
+   "bbox": [
+    -76.22562,
+    38.7533,
+    -76.09731,
+    38.8503
+   ],
+   "wikidata": "Q6851527",
+   "charted": true,
+   "area_km2": 18.172,
+   "launches": [
+    "miles-river-bridge-landing-md",
+    "st-michaels-boat-ramp-north-md",
+    "st-michaels-boat-ramp-south-md",
+    "villa-road-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mill-creek-md",
+   "name": "Mill Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Perryville"
+   ],
+   "bbox": [
+    -76.05755,
+    39.54736,
+    -76.04484,
+    39.5571
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.472,
+   "launches": [
+    "perryville-community-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mill-stream-branch-md",
+   "name": "Mill Stream Branch",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Centreville"
+   ],
+   "bbox": [
+    -76.07801,
+    39.01706,
+    -76.04841,
+    39.05642
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.022,
+   "launches": [
+    "centreville-landing-md",
+    "centreville-wharf-and-soft-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mitchell-pond-3-md",
+   "name": "Mitchell Pond #3",
+   "kind": "pond",
+   "state": "MD",
+   "towns": [
+    "Salisbury"
+   ],
+   "bbox": [
+    -75.61339,
+    38.36409,
+    -75.61166,
+    38.36735
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.019,
+   "launches": [
+    "waterside-community-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "monocacy-river-md",
+   "name": "Monocacy River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Buckeystown",
+    "Dickerson",
+    "Frederick",
+    "Rocky Ridge",
+    "Thurmont",
+    "Walkersville"
+   ],
+   "bbox": [
+    -77.45589,
+    39.22286,
+    -77.21455,
+    39.71999
+   ],
+   "wikidata": "Q1118332",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "buckeystown-community-park-md",
+    "creagerstown-park-md",
+    "devilbiss-bridge-md",
+    "gambrill-mill-soft-launch-at-monocacy-national-battlefield-md",
+    "monocacy-aqueduct-md",
+    "monocacy-boat-ramp-md",
+    "park-mills-boat-ramp-md",
+    "pinecliff-park-md",
+    "riverside-park-md",
+    "rocky-ridge-maryland-rt-77-bridge-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "morgan-creek-md",
+   "name": "Morgan Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Chestertown"
+   ],
+   "bbox": [
+    -76.04602,
+    39.22636,
+    -75.96061,
+    39.31161
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.673,
+   "launches": [
+    "morgnec-md",
+    "riley-s-mill-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "muddy-hole-creek-md",
+   "name": "Muddy Hole Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Tyaskin"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ellis-bay-wildlife-management-area-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "myrtle-grove-lake-md",
+   "name": "Myrtle Grove Lake",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "LaPlata"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "myrtle-grove-wildlife-management-area-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nan-cove-md",
+   "name": "Nan Cove",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Broomes Island"
+   ],
+   "bbox": [
+    -76.55447,
+    38.42225,
+    -76.54811,
+    38.42582
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.09,
+   "launches": [
+    "nan-s-cove-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nanjemoy-creek-md",
+   "name": "Nanjemoy Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Nanjemoy"
+   ],
+   "bbox": [
+    -77.1979,
+    38.39314,
+    -77.11053,
+    38.4534
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "friendship-landing-boat-ramp-md",
+    "friendship-landing-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nanticoke-river-md",
+   "name": "Nanticoke River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Bivalve",
+    "Nanticoke",
+    "Sharptown",
+    "Vienna"
+   ],
+   "bbox": [
+    -76.20319,
+    38.05895,
+    -75.58971,
+    38.64405
+   ],
+   "wikidata": "Q2720679",
+   "charted": true,
+   "area_km2": 26.272,
+   "launches": [
+    "bivalve-wharf-md",
+    "cedar-hill-marina-and-park-boat-ramp-md",
+    "cedar-hill-marina-and-park-soft-access-md",
+    "cherry-beach-boat-ramp-md",
+    "cherry-beach-soft-access-md",
+    "cove-road-beach-md",
+    "nanticoke-harbor-boat-ramps-md",
+    "nanticoke-harbor-soft-access-md",
+    "roaring-point-park-md",
+    "vienna-waterfront-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nassawango-creek-md",
+   "name": "Nassawango Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Snow Hill"
+   ],
+   "bbox": [
+    -75.46764,
+    38.15949,
+    -75.42208,
+    38.20566
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.007,
+   "launches": [
+    "red-house-road-bridge-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "neale-sound-md",
+   "name": "Neale Sound",
+   "kind": "sound",
+   "state": "MD",
+   "towns": [
+    "Cobb Island",
+    "Newburg"
+   ],
+   "bbox": [
+    -76.88597,
+    38.27047,
+    -76.86558,
+    38.2819
+   ],
+   "wikidata": "Q49386195",
+   "charted": true,
+   "area_km2": 0.361,
+   "launches": [
+    "southern-park-and-pier-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "new-germany-lake-md",
+   "name": "New Germany Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Grantsville"
+   ],
+   "bbox": [
+    -79.12268,
+    39.63277,
+    -79.11924,
+    39.63704
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.039,
+   "launches": [
+    "new-germany-state-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-branch-potomac-river-md",
+   "name": "North Branch Potomac River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Cumberland",
+    "Rawlings",
+    "Spring Gap",
+    "Westernport"
+   ],
+   "bbox": [
+    -79.49401,
+    39.20173,
+    -78.58694,
+    39.64869
+   ],
+   "wikidata": "Q14006686",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "allegany-county-fairgrounds-boat-access-md",
+    "eugene-mason-sports-complex-boat-access-md",
+    "gary-yoder-soft-access-formerly-black-oak-bottom-md",
+    "mccoole-soft-access-md",
+    "potomac-river-industrial-park-boat-ramp-md",
+    "spring-gap-md",
+    "westernport-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-east-river-md",
+   "name": "North East River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Charlestown",
+    "Chestnut Point",
+    "North East",
+    "Red Point"
+   ],
+   "bbox": [
+    -76.00712,
+    39.529,
+    -75.9434,
+    39.59931
+   ],
+   "wikidata": "Q15262509",
+   "charted": true,
+   "area_km2": 15.974,
+   "launches": [
+    "charlestown-public-boat-ramp-md",
+    "charlestown-wharf-soft-access-md",
+    "north-east-community-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "northwest-harbor-md",
+   "name": "Northwest Harbor",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Baltimore"
+   ],
+   "bbox": [
+    -76.61189,
+    39.25919,
+    -76.56873,
+    39.28662
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.445,
+   "launches": [
+    "boston-street-pier-park-md",
+    "canton-waterfront-park-md"
+   ],
+   "advisories": [],
+   "aliases": [
+    "NW Harbor"
+   ]
+  },
+  {
+   "slug": "oak-creek-md",
+   "name": "Oak Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Newcomb"
+   ],
+   "bbox": [
+    -76.17984,
+    38.74228,
+    -76.16785,
+    38.75374
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.349,
+   "launches": [
+    "oak-creek-landing-boat-ramp-md",
+    "oak-creek-landing-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "octoraro-creek-md",
+   "name": "Octoraro Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Conowingo"
+   ],
+   "bbox": [
+    -76.15968,
+    39.65083,
+    -76.06263,
+    39.76557
+   ],
+   "wikidata": "Q15263410",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "conowingo-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "otter-point-creek-md",
+   "name": "Otter Point Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Abingdon",
+    "Edgewood"
+   ],
+   "bbox": [
+    -76.28457,
+    39.43567,
+    -76.24966,
+    39.45106
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.433,
+   "launches": [
+    "flying-point-park-md",
+    "otter-creek-roadside-md",
+    "otter-point-creek-soft-access-md",
+    "otter-point-landing-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "parish-creek-md",
+   "name": "Parish Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Shady Side"
+   ],
+   "bbox": [
+    -76.51468,
+    38.84175,
+    -76.50084,
+    38.84756
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.257,
+   "launches": [
+    "discovery-village-boat-ramp-md",
+    "discovery-village-soft-access-md",
+    "shady-side-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "passerdyke-creek-md",
+   "name": "Passerdyke Creek",
+   "kind": "stream",
+   "state": "MD",
+   "towns": [
+    "Eden"
+   ],
+   "bbox": [
+    -75.6876,
+    38.28538,
+    -75.62287,
+    38.30273
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "douglas-nichols-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "patapsco-river-md",
+   "name": "Patapsco River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Baltimore",
+    "Brooklyn",
+    "Dundalk",
+    "Edgemere",
+    "Ellicott City",
+    "North Point Village",
+    "Pasadena",
+    "Rockwood Beach",
+    "Turner Station"
+   ],
+   "bbox": [
+    -76.88244,
+    39.14311,
+    -76.32477,
+    39.34992
+   ],
+   "wikidata": "Q2748733",
+   "charted": true,
+   "area_km2": 62.336,
+   "launches": [
+    "daniels-area-soft-access-md",
+    "fort-armistead-md",
+    "fort-howard-park-md",
+    "fort-smallwood-park-boat-ramps-md",
+    "fort-smallwood-park-soft-access-md",
+    "inverness-park-md",
+    "masonville-cove-soft-access-md",
+    "patapsco-river-boat-launch-near-dundalk-md-3",
+    "southwest-area-park-md",
+    "turner-station-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "patuxent-river-md",
+   "name": "Patuxent River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Benedict",
+    "Bowie",
+    "Brandywine",
+    "California",
+    "Davidsonville",
+    "Eagle Harbor",
+    "Harwood",
+    "Hollywood",
+    "Huntingtown",
+    "Lothian",
+    "Mechanicsville",
+    "Owings"
+   ],
+   "bbox": [
+    -77.18696,
+    38.29162,
+    -76.29807,
+    39.347
+   ],
+   "wikidata": "Q432641",
+   "charted": true,
+   "area_km2": 94.871,
+   "launches": [
+    "benedict-community-park-md",
+    "cedar-haven-fishing-area-md",
+    "clyde-watson-boating-area-md",
+    "davidsonville-park-soft-access-md",
+    "governor-bridge-natural-area-gardner-canoe-launch-md",
+    "greenwell-state-park-md",
+    "hallowing-point-boat-ramps-md",
+    "hallowing-point-soft-access-md",
+    "jackson-s-landing-boat-ramp-md",
+    "jackson-s-landing-soft-access-md",
+    "jefferson-patterson-park-and-museum-soft-access-south-md",
+    "jefferson-patterson-park-and-museum-soft-access-north-md",
+    "kings-landing-park-md",
+    "lower-marlboro-wharf-soft-access-md",
+    "myrtle-point-park-soft-launch-md",
+    "patuxent-river-carry-in-access-md",
+    "patuxent-river-wetlands-park-wayson-s-canoe-kayak-md",
+    "patuxent-riverkeeper-center-in-nottingham-md",
+    "queen-anne-canoe-launch-md",
+    "selby-s-landing-md",
+    "snow-hill-waterfront-park-soft-access-md",
+    "solomons-boat-ramps-md",
+    "solomons-soft-access-md",
+    "wooten-s-landing-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pickering-creek-md",
+   "name": "Pickering Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Easton"
+   ],
+   "bbox": [
+    -76.1264,
+    38.85727,
+    -76.10421,
+    38.87521
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.587,
+   "launches": [
+    "pickering-creek-audubon-center-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "piney-point-creek-md",
+   "name": "Piney Point Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Piney Point"
+   ],
+   "bbox": [
+    -76.53177,
+    38.13673,
+    -76.51564,
+    38.14556
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.372,
+   "launches": [
+    "piney-point-museum-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "piney-run-reservoir-md",
+   "name": "Piney Run Reservoir",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Sykesville"
+   ],
+   "bbox": [
+    -76.99612,
+    39.3851,
+    -76.97443,
+    39.4091
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.177,
+   "launches": [
+    "piney-run-park-boat-ramps-md",
+    "piney-run-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "piscataway-creek-md",
+   "name": "Piscataway Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Accokeek",
+    "Fort Washington"
+   ],
+   "bbox": [
+    -77.04509,
+    38.69141,
+    -76.8379,
+    38.79353
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.274,
+   "launches": [
+    "fort-washington-marina-md",
+    "piscataway-park-farmington-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pocomoke-river-md",
+   "name": "Pocomoke River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Marion Station",
+    "Pocomoke",
+    "Pocomoke City",
+    "Rehobeth",
+    "Snow Hill"
+   ],
+   "bbox": [
+    -76.14761,
+    37.89667,
+    -75.30857,
+    38.45926
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.855,
+   "launches": [
+    "byrd-park-east-md",
+    "byrd-park-west-md",
+    "byrd-park-soft-access-md",
+    "cedar-hall-wharf-md",
+    "milburn-landing-soft-access-md",
+    "pocomoke-city-laurel-st-boat-ramp-md",
+    "pocomoke-state-forest-mattaponi-creek-soft-access-md",
+    "pocomoke-state-park-milburn-landing-md",
+    "pocomoke-state-park-shad-landing-md",
+    "rehobeth-md",
+    "shelltown-md",
+    "sturgis-park-soft-access-md",
+    "winter-quarters-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pocomoke-sound-md",
+   "name": "Pocomoke Sound",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Marion Station"
+   ],
+   "bbox": [
+    -75.9054,
+    37.73386,
+    -75.62853,
+    37.98917
+   ],
+   "wikidata": "Q7206510",
+   "charted": true,
+   "area_km2": 326.133,
+   "launches": [
+    "rumbly-point-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pokata-creek-md",
+   "name": "Pokata Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Vienna"
+   ],
+   "bbox": [
+    -75.94186,
+    38.34735,
+    -75.89952,
+    38.36395
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "green-s-island-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "port-tobacco-river-md",
+   "name": "Port Tobacco River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Port Tobacco"
+   ],
+   "bbox": [
+    -77.03855,
+    38.39711,
+    -77.00661,
+    38.51492
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "chapel-point-state-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "potomac-river-md",
+   "name": "Potomac River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Accokeek",
+    "Antietam",
+    "Big Pool",
+    "Brunswick",
+    "Bryans Road",
+    "Clear Spring",
+    "Colton's Point",
+    "Coltons Point",
+    "Dickerson",
+    "Ernstville",
+    "Four Locks",
+    "Hancock"
+   ],
+   "bbox": [
+    -78.58694,
+    37.87065,
+    -76.16186,
+    39.69715
+   ],
+   "wikidata": "Q179444",
+   "charted": true,
+   "area_km2": 12.535,
+   "launches": [
+    "accokeek-foundation-boat-dock-md",
+    "accokeek-foundation-soft-access-md",
+    "anglers-inn-river-md",
+    "antietam-creek-campground-md",
+    "aqueduct-lock-20-river-md",
+    "bond-s-landing-green-ridge-state-forest-md",
+    "brunswick-family-campground-md",
+    "brunswick-boat-ramp-md",
+    "cohill-station-md",
+    "dam-3-boat-launch-md",
+    "dargan-bend-md",
+    "dickerson-conservation-park-md",
+    "edwards-ferry-md",
+    "fifteen-mile-creek-md",
+    "fort-frederick-state-park-soft-launch-md",
+    "four-locks-md",
+    "lime-kiln-md",
+    "little-tonoloway-hancock-md",
+    "lock-29-lander-md",
+    "lock-33-east-md",
+    "lock-33-west-md",
+    "lock-34-md",
+    "lock-38-md",
+    "marshall-hall-md",
+    "mccoys-ferry-md",
+    "mcmahons-mill-md",
+    "noland-s-ferry-md",
+    "point-of-rocks-md",
+    "potomac-river-boat-launch-near-antietam-md",
+    "potomac-river-boat-launch-near-potomac-woodlands-md",
+    "potomac-river-boat-launch-near-sandy-hook-md",
+    "potomac-river-boat-launch-near-sharpsburg-md",
+    "snyders-landing-md",
+    "st-clement-s-island-museum-md",
+    "st-clement-s-island-state-park-md",
+    "swains-lock-river-md",
+    "sycamore-landing-md",
+    "taylors-landing-east-md",
+    "taylors-landing-west-md",
+    "whites-ferry-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "potomac-river-reservoir-md",
+   "name": "Potomac River Reservoir",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Sharpsburg"
+   ],
+   "bbox": [
+    -77.84772,
+    39.49326,
+    -77.82663,
+    39.51245
+   ],
+   "wikidata": "Q34915864",
+   "charted": false,
+   "area_km2": 0.636,
+   "launches": [
+    "big-slackwater-md",
+    "dam-4-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "potomac-river-reservoir-williamsport-md",
+   "name": "Potomac River Reservoir",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Williamsport"
+   ],
+   "bbox": [
+    -77.83196,
+    39.59497,
+    -77.82808,
+    39.60202
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.148,
+   "launches": [
+    "williamsport-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "prettyboy-reservoir-md",
+   "name": "Prettyboy Reservoir",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Hampstead"
+   ],
+   "bbox": [
+    -76.77815,
+    39.61552,
+    -76.70688,
+    39.68292
+   ],
+   "wikidata": "Q7242310",
+   "charted": false,
+   "area_km2": 6.033,
+   "launches": [
+    "prettyboy-reservoir-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "prospect-bay-md",
+   "name": "Prospect Bay",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Chester",
+    "Kent Narrows"
+   ],
+   "bbox": [
+    -76.26312,
+    38.92439,
+    -76.2282,
+    38.97112
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.347,
+   "launches": [
+    "kent-narrows-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "raccoon-creek-md",
+   "name": "Raccoon Creek",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Elliott"
+   ],
+   "bbox": [
+    -76.10022,
+    38.35011,
+    -76.04352,
+    38.36537
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.354,
+   "launches": [
+    "liner-s-road-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "recreation-lake-one-md",
+   "name": "Recreation Lake One",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Queen Anne"
+   ],
+   "bbox": [
+    -75.9453,
+    38.9669,
+    -75.94006,
+    38.96978
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.086,
+   "launches": [
+    "tuckahoe-state-park-boat-ramp-md",
+    "tuckahoe-state-park-soft-access-east-md",
+    "tuckahoe-state-park-soft-access-west-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rhode-river-md",
+   "name": "Rhode River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Edgewater",
+    "Mayo"
+   ],
+   "bbox": [
+    -76.56276,
+    38.86301,
+    -76.51022,
+    38.90356
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.9,
+   "launches": [
+    "carr-s-wharf-md",
+    "rhode-river-boat-launch-near-mayo-md-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rock-hall-harbor-md",
+   "name": "Rock Hall Harbor",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Rock Hall"
+   ],
+   "bbox": [
+    -76.25037,
+    39.13008,
+    -76.23929,
+    39.13539
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.275,
+   "launches": [
+    "bayside-landing-park-md",
+    "green-lane-md",
+    "sharp-street-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rocky-gorge-reservoir-md",
+   "name": "Rocky Gorge Reservoir",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Laurel",
+    "Silver Spring"
+   ],
+   "bbox": [
+    -76.96434,
+    39.11532,
+    -76.87376,
+    39.14738
+   ],
+   "wikidata": "Q7350741",
+   "charted": false,
+   "area_km2": 2.62,
+   "launches": [
+    "brown-s-bridge-recreation-area-md",
+    "scott-s-cove-recreation-area-md",
+    "supplee-lane-recreation-area-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saint-catherine-sound-md",
+   "name": "Saint Catherine Sound",
+   "kind": "sound",
+   "state": "MD",
+   "towns": [
+    "Avenue"
+   ],
+   "bbox": [
+    -76.80079,
+    38.23228,
+    -76.77525,
+    38.25159
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.818,
+   "launches": [
+    "river-springs-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saint-celments-bay-md",
+   "name": "Saint Celments Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Compton"
+   ],
+   "bbox": null,
+   "wikidata": "Q49390458",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "saint-celments-bay-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saint-clements-bay-md",
+   "name": "Saint Clements Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Compton"
+   ],
+   "bbox": [
+    -76.74984,
+    38.23681,
+    -76.69869,
+    38.31747
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 11.884,
+   "launches": [
+    "newtowne-neck-state-park-paddle-in-campsite-west-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saint-george-creek-md",
+   "name": "Saint George Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Piney Point"
+   ],
+   "bbox": [
+    -76.52661,
+    38.11811,
+    -76.46623,
+    38.17176
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 6.601,
+   "launches": [
+    "piney-point-recreation-area-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saint-martin-river-md",
+   "name": "Saint Martin River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Bishopville",
+    "Ocean Pines"
+   ],
+   "bbox": [
+    -75.20277,
+    38.38902,
+    -75.10856,
+    38.44428
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 7.716,
+   "launches": [
+    "shell-mill-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saint-mary-s-lake-md",
+   "name": "Saint Mary's Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Leonardtown"
+   ],
+   "bbox": [
+    -76.56147,
+    38.25041,
+    -76.53255,
+    38.2637
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.877,
+   "launches": [
+    "st-mary-s-lake-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sassafras-river-md",
+   "name": "Sassafras River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Beachwood Glen",
+    "Betterton",
+    "Fredericktown",
+    "Galena",
+    "Georgetown",
+    "Glencoe",
+    "Indian Acres",
+    "Kentmore Park",
+    "Mount Harmon"
+   ],
+   "bbox": [
+    -76.11029,
+    39.34587,
+    -75.75951,
+    39.39487
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 30.308,
+   "launches": [
+    "betterton-beach-and-public-landing-md",
+    "foxhole-landing-md",
+    "fredericktown-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "savage-river-reservoir-md",
+   "name": "Savage River Reservoir",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Bloomington",
+    "Swanton"
+   ],
+   "bbox": [
+    -79.15459,
+    39.50578,
+    -79.13125,
+    39.54424
+   ],
+   "wikidata": "Q7361749",
+   "charted": false,
+   "area_km2": 1.37,
+   "launches": [
+    "big-run-state-park-boat-ramp-md",
+    "dry-run-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "scheides-cove-md",
+   "name": "Scheides Cove",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Ulmstead Estates"
+   ],
+   "bbox": [
+    -76.48031,
+    39.05948,
+    -76.47825,
+    39.06159
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "scheides-cove-carry-in-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "schumaker-pond-md",
+   "name": "Schumaker Pond",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Salisbury"
+   ],
+   "bbox": [
+    -75.57274,
+    38.34547,
+    -75.55814,
+    38.35295
+   ],
+   "wikidata": "Q34922313",
+   "charted": false,
+   "area_km2": 0.17,
+   "launches": [
+    "schumaker-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "seneca-creek-md",
+   "name": "Seneca Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Darnestown",
+    "Gaithersburg",
+    "Poolesville"
+   ],
+   "bbox": [
+    -77.34351,
+    39.06532,
+    -77.32932,
+    39.14383
+   ],
+   "wikidata": "Q7450289",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "berryville-road-soft-access-md",
+    "seneca-creek-landing-boat-ramp-md",
+    "seneca-creek-landing-soft-access-md",
+    "seneca-creek-state-park-rt-28-parking-lot-creek-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "severn-river-md",
+   "name": "Severn River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Annapolis",
+    "Arden on the Severn",
+    "Arnold",
+    "Bluff Point",
+    "Eastport",
+    "Epping Forest",
+    "Palisades on the Severn",
+    "Rivendell",
+    "Severn Grove",
+    "Severna Park",
+    "Whitneys Landing",
+    "Winchester-on-the-Severn"
+   ],
+   "bbox": [
+    -76.61858,
+    38.94048,
+    -76.45425,
+    39.08417
+   ],
+   "wikidata": "Q4321264",
+   "charted": true,
+   "area_km2": 26.6,
+   "launches": [
+    "elktonia-carr-s-beach-md",
+    "jonas-green-park-md",
+    "severn-avenue-pocket-park-md",
+    "severn-river-boat-launch-near-arden-on-the-severn-md-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shipping-creek-md",
+   "name": "Shipping Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Stevensville"
+   ],
+   "bbox": [
+    -76.3488,
+    38.9058,
+    -76.32368,
+    38.92934
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.061,
+   "launches": [
+    "shipping-creek-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shipyard-creek-md",
+   "name": "Shipyard Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Rock Hall"
+   ],
+   "bbox": [
+    -76.19685,
+    39.15729,
+    -76.1829,
+    39.18995
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.423,
+   "launches": [
+    "shipyard-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sinepuxent-bay-md",
+   "name": "Sinepuxent Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Berlin",
+    "Genezer Estates",
+    "Ocean City",
+    "Snug Harbor"
+   ],
+   "bbox": [
+    -75.1925,
+    38.18365,
+    -75.09701,
+    38.32646
+   ],
+   "wikidata": "Q7522421",
+   "charted": true,
+   "area_km2": 24.835,
+   "launches": [
+    "assateague-bayside-drive-kayak-md",
+    "assateague-old-ferry-landing-md",
+    "assateague-state-park-md",
+    "south-point-md",
+    "west-ocean-city-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "skipton-creek-md",
+   "name": "Skipton Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Cordova"
+   ],
+   "bbox": [
+    -76.10189,
+    38.88142,
+    -76.06165,
+    38.89293
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.952,
+   "launches": [
+    "skipton-creek-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "smith-creek-md",
+   "name": "Smith Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "St. Ingoes"
+   ],
+   "bbox": [
+    -76.42005,
+    38.10699,
+    -76.40248,
+    38.14301
+   ],
+   "wikidata": "Q49392337",
+   "charted": true,
+   "area_km2": 2.026,
+   "launches": [
+    "st-inigoes-landing-md",
+    "st-inigoes-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "smithville-lake-md",
+   "name": "Smithville Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Federalsburg"
+   ],
+   "bbox": [
+    -75.7382,
+    38.77384,
+    -75.72879,
+    38.78865
+   ],
+   "wikidata": "Q34924423",
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "smithville-lake-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "southeast-creek-md",
+   "name": "Southeast Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Church Hill"
+   ],
+   "bbox": [
+    -76.05034,
+    39.1318,
+    -75.97615,
+    39.16306
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.98,
+   "launches": [
+    "southeast-creek-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "spa-creek-md",
+   "name": "Spa Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Annapolis",
+    "Eastport"
+   ],
+   "bbox": [
+    -76.50713,
+    38.9652,
+    -76.48005,
+    38.97773
+   ],
+   "wikidata": "Q35327687",
+   "charted": true,
+   "area_km2": 0.601,
+   "launches": [
+    "amos-garrett-waterfront-park-md",
+    "barbara-neustadt-park-md",
+    "cheston-avenue-park-md",
+    "fifth-street-pocket-park-md",
+    "first-street-pocket-park-md",
+    "leon-wolfe-park-md",
+    "shipwright-st-dinghy-dock-md",
+    "southgate-wharf-dinghy-dock-md",
+    "taney-ave-wharf-md",
+    "thompson-street-park-md",
+    "truxtun-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "st-marys-river-md",
+   "name": "St Marys River",
+   "kind": "stream",
+   "state": "MD",
+   "towns": [
+    "Great Mills"
+   ],
+   "bbox": [
+    -76.55095,
+    38.23082,
+    -76.49066,
+    38.32253
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "great-mills-canoe-kayak-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stevenson-s-pond-md",
+   "name": "Stevenson's Pond",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Pocomoke City"
+   ],
+   "bbox": [
+    -75.56781,
+    38.07922,
+    -75.56564,
+    38.08166
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.021,
+   "launches": [
+    "stevenson-pond-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "still-pond-creek-md",
+   "name": "Still Pond Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Kinnairds Point",
+    "Worton"
+   ],
+   "bbox": [
+    -76.13234,
+    39.31757,
+    -76.0852,
+    39.33427
+   ],
+   "wikidata": "Q35390083",
+   "charted": true,
+   "area_km2": 1.9,
+   "launches": [
+    "still-pond-station-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stony-creek-md",
+   "name": "Stony Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Greenland Beach",
+    "Pasadena"
+   ],
+   "bbox": [
+    -76.56063,
+    39.14229,
+    -76.51148,
+    39.17251
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.607,
+   "launches": [
+    "green-haven-wharf-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "susquehanna-river-md",
+   "name": "Susquehanna River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Darlington",
+    "Havre de Grace",
+    "Perryville",
+    "Port Deposit",
+    "Whiteford"
+   ],
+   "bbox": [
+    -76.3368,
+    39.54231,
+    -76.07502,
+    39.82312
+   ],
+   "wikidata": "Q27538",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "fisherman-s-park-shuresville-landing-md",
+    "frank-j-hutchins-park-md",
+    "glen-cove-md",
+    "line-bridge-landing-md",
+    "perryville-boat-ramp-md",
+    "port-deposit-north-marina-park-md",
+    "port-deposit-south-marina-park-md",
+    "susquehanna-state-park-lapidum-md",
+    "water-street-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tangier-sound-md",
+   "name": "Tangier Sound",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Champ",
+    "Crisfield",
+    "Deal Island",
+    "Ewell",
+    "Marion Station",
+    "Tylerton",
+    "Westover"
+   ],
+   "bbox": [
+    -76.05646,
+    37.77655,
+    -75.73542,
+    38.21911
+   ],
+   "wikidata": "Q7682972",
+   "charted": true,
+   "area_km2": 570.46,
+   "launches": [
+    "coulbourn-creek-md",
+    "deal-island-md",
+    "deal-island-wma-boat-ramp-big-sound-creek-md",
+    "deal-island-wma-boat-ramp-impoundment-south-md",
+    "ewell-md",
+    "janes-island-state-park-boat-ramp-md",
+    "janes-island-state-park-soft-access-md",
+    "raccoon-point-recreation-area-md",
+    "saint-peters-creek-md",
+    "tangier-sound-boat-launch-md",
+    "tylerton-md",
+    "wenona-harbor-public-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "the-haven-md",
+   "name": "The Haven",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Rock Hall"
+   ],
+   "bbox": [
+    -76.25374,
+    39.13994,
+    -76.24335,
+    39.1542
+   ],
+   "wikidata": "Q49393708",
+   "charted": true,
+   "area_km2": 0.544,
+   "launches": [
+    "spring-cove-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "thompson-creek-md",
+   "name": "Thompson Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Stevensville"
+   ],
+   "bbox": [
+    -76.32245,
+    38.94948,
+    -76.31025,
+    38.97649
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.894,
+   "launches": [
+    "thompson-creek-landing-boat-ramp-md",
+    "thompson-creek-landing-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tilghman-creek-md",
+   "name": "Tilghman Creek",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "St. Michaels"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "tilghman-creek-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tonoloway-creek-md",
+   "name": "Tonoloway Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Hancock"
+   ],
+   "bbox": [
+    -78.15891,
+    39.69293,
+    -78.14025,
+    39.75156
+   ],
+   "wikidata": "Q7821616",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tonoloway-creek-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "town-creek-md",
+   "name": "Town Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Oxford"
+   ],
+   "bbox": [
+    -76.17158,
+    38.68446,
+    -76.15844,
+    38.69827
+   ],
+   "wikidata": "Q7829938",
+   "charted": true,
+   "area_km2": 0.541,
+   "launches": [
+    "oxford-boat-ramp-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "transquaking-river-md",
+   "name": "Transquaking River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Cambridge"
+   ],
+   "bbox": [
+    -76.03346,
+    38.19765,
+    -75.96614,
+    38.52026
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bestpitch-ferry-boat-ramp-md",
+    "transquaking-river-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tred-avon-river-md",
+   "name": "Tred Avon River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Easton",
+    "Royal Oak"
+   ],
+   "bbox": [
+    -76.2042,
+    38.64491,
+    -76.07652,
+    38.76835
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 14.977,
+   "launches": [
+    "bellevue-landing-md",
+    "easton-point-landing-md",
+    "easton-point-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "triadelphia-reservoir-md",
+   "name": "Triadelphia Reservoir",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Brookeville",
+    "Dayton"
+   ],
+   "bbox": [
+    -77.05255,
+    39.19167,
+    -76.99337,
+    39.24927
+   ],
+   "wikidata": "Q7350748",
+   "charted": false,
+   "area_km2": 3.266,
+   "launches": [
+    "big-branch-recreation-area-at-triadelphia-lake-md",
+    "greenbridge-recreation-area-md",
+    "pig-tail-recreation-area-at-triadelphia-reservoir-lake-md",
+    "triadelphia-recreation-area-md"
+   ],
+   "advisories": [
+    {
+     "source": "epa-freshwater-hab-reports",
+     "source_name": "state reports compiled by U.S. EPA",
+     "url": "https://www.mymcmedia.org/officials-warn-visitors-to-avoid-triadelphia-reservoir-due-to-algae-contamination/",
+     "checked": "2026-10-20",
+     "kind": "algae_history",
+     "title": "Past algal blooms",
+     "text": "Harmful algal blooms reported on this water (state reports compiled by U.S. EPA): 2020 and 2022.",
+     "date": "2022-07-02",
+     "years": [
+      "2020",
+      "2022"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "tuckahoe-creek-md",
+   "name": "Tuckahoe Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Cordova",
+    "Denton",
+    "Easton",
+    "Hillsboro"
+   ],
+   "bbox": [
+    -75.95322,
+    38.81232,
+    -75.89596,
+    38.98901
+   ],
+   "wikidata": "Q7851024",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "covey-s-landing-md",
+    "hillsboro-boat-ramp-md",
+    "new-bridge-easton-md",
+    "reese-landing-md",
+    "stoney-point-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "turner-s-creek-md",
+   "name": "Turner's Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Kennedyville"
+   ],
+   "bbox": [
+    -75.99037,
+    39.33988,
+    -75.96823,
+    39.35992
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.02,
+   "launches": [
+    "turner-s-creek-boat-launch-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "unicorn-lake-md",
+   "name": "Unicorn Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Millington"
+   ],
+   "bbox": [
+    -75.85975,
+    39.23721,
+    -75.85355,
+    39.2478
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.194,
+   "launches": [
+    "unicorn-millpond-lake-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "urieville-community-lake-md",
+   "name": "Urieville Community Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Worton"
+   ],
+   "bbox": [
+    -76.02769,
+    39.27921,
+    -76.02044,
+    39.29208
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.133,
+   "launches": [
+    "urieville-lake-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wades-bay-md",
+   "name": "Wades Bay",
+   "kind": "bay",
+   "state": "MD",
+   "towns": [
+    "Nanjemoy"
+   ],
+   "bbox": [
+    -77.26575,
+    38.42411,
+    -77.25664,
+    38.44129
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.916,
+   "launches": [
+    "nanjemoy-wildlife-mgmt-area-formerly-purse-state-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wallace-creek-md",
+   "name": "Wallace Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Church Creek"
+   ],
+   "bbox": [
+    -76.21148,
+    38.36855,
+    -76.2,
+    38.39001
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.533,
+   "launches": [
+    "golden-hill-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "warehouse-creek-md",
+   "name": "Warehouse Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Stevensville"
+   ],
+   "bbox": [
+    -76.34507,
+    38.9351,
+    -76.31525,
+    38.95689
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.691,
+   "launches": [
+    "warehouse-creek-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "warton-creek-md",
+   "name": "Warton Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Buck Neck Landing",
+    "Great Oak Manor"
+   ],
+   "bbox": [
+    -76.18116,
+    39.26721,
+    -76.14409,
+    39.29901
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.947,
+   "launches": [
+    "warton-creek-boat-launch-near-buck-neck-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "warwick-river-md",
+   "name": "Warwick River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Secretary"
+   ],
+   "bbox": [
+    -75.98106,
+    38.6013,
+    -75.95076,
+    38.61234
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "secretary-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "watts-creek-md",
+   "name": "Watts Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Denton"
+   ],
+   "bbox": [
+    -75.84652,
+    38.85299,
+    -75.75309,
+    38.88734
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "martinak-state-park-boat-ramp-md",
+    "martinak-state-park-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "weems-creek-md",
+   "name": "Weems Creek",
+   "kind": "lake",
+   "state": "MD",
+   "towns": [
+    "Annapolis"
+   ],
+   "bbox": [
+    -76.52468,
+    38.98828,
+    -76.5006,
+    39.001
+   ],
+   "wikidata": "Q34851233",
+   "charted": true,
+   "area_km2": 0.507,
+   "launches": [
+    "tucker-street-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-river-md",
+   "name": "West River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Galesville"
+   ],
+   "bbox": [
+    -76.55453,
+    38.82296,
+    -76.49666,
+    38.87298
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 9.237,
+   "launches": [
+    "galesville-wharf-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "western-branch-patuxent-river-md",
+   "name": "Western Branch Patuxent River",
+   "kind": "stream",
+   "state": "MD",
+   "towns": [
+    "Upper Marlboro"
+   ],
+   "bbox": [
+    -76.82035,
+    38.78422,
+    -76.7121,
+    38.9234
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "iron-pot-landing-md",
+    "mount-calvert-historical-archaeological-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wetipquin-creek-md",
+   "name": "Wetipquin Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Tyaskin"
+   ],
+   "bbox": [
+    -75.89366,
+    38.32083,
+    -75.81656,
+    38.3357
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.463,
+   "launches": [
+    "tyaskin-park-md",
+    "wetipquin-park-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "whites-neck-creek-md",
+   "name": "Whites Neck Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Avenue"
+   ],
+   "bbox": [
+    -76.79467,
+    38.25369,
+    -76.78489,
+    38.26954
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.332,
+   "launches": [
+    "paul-ellis-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wicomico-river-md",
+   "name": "Wicomico River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Bushwood",
+    "Chaptico",
+    "Longview Beach",
+    "Maddox",
+    "Newburg"
+   ],
+   "bbox": [
+    -76.93959,
+    38.22503,
+    -76.80194,
+    38.41963
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 21.106,
+   "launches": [
+    "bushwood-wharf-boat-ramp-md",
+    "chaptico-wharf-md",
+    "hatton-creek-md",
+    "wicomico-shores-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wicomico-river-mt-vernon-md",
+   "name": "Wicomico River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Mt Vernon",
+    "Princess Anne",
+    "Salisbury",
+    "Tyaskin"
+   ],
+   "bbox": [
+    -75.87209,
+    38.22669,
+    -75.6042,
+    38.36482
+   ],
+   "wikidata": "Q7998475",
+   "charted": true,
+   "area_km2": 12.137,
+   "launches": [
+    "clara-road-md",
+    "drawbridge-road-md",
+    "port-of-salisbury-marina-md",
+    "riverside-boat-ramps-md",
+    "the-riverwalk-canal-walk-park-md",
+    "webster-s-cove-md",
+    "whitehaven-soft-access-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "worton-creek-md",
+   "name": "Worton Creek",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Worton"
+   ],
+   "bbox": [
+    -76.1752,
+    39.2687,
+    -76.15794,
+    39.2944
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.262,
+   "launches": [
+    "green-point-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wye-east-river-md",
+   "name": "Wye East River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Wye Mills"
+   ],
+   "bbox": [
+    -76.20556,
+    38.84624,
+    -76.08032,
+    38.94621
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.131,
+   "launches": [
+    "wye-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wye-mills-community-lake-md",
+   "name": "Wye Mills Community Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Queenstown"
+   ],
+   "bbox": [
+    -76.08042,
+    38.94092,
+    -76.06705,
+    38.95007
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.185,
+   "launches": [
+    "wye-mills-lake-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wye-river-md",
+   "name": "Wye River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Queenstown"
+   ],
+   "bbox": [
+    -76.19947,
+    38.86157,
+    -76.13794,
+    38.99046
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.704,
+   "launches": [
+    "bennett-s-point-landing-md",
+    "bryantown-landing-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "youghiogheny-river-lake-md",
+   "name": "Youghiogheny River Lake",
+   "kind": "reservoir",
+   "state": "MD",
+   "towns": [
+    "Friendsville"
+   ],
+   "bbox": [
+    -79.41633,
+    39.68078,
+    -79.34605,
+    39.79856
+   ],
+   "wikidata": "Q7348452",
+   "charted": false,
+   "area_km2": 11.126,
+   "launches": [
+    "youghiogheny-reservoir-mill-run-recreation-area-md"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "youghiogheny-river-md",
+   "name": "Youghiogheny River",
+   "kind": "river",
+   "state": "MD",
+   "towns": [
+    "Friendsville",
+    "Oakland"
+   ],
+   "bbox": [
+    -79.49904,
+    39.25632,
+    -79.35598,
+    39.7964
+   ],
+   "wikidata": "Q1470734",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "crellin-bridge-soft-access-md",
+    "friendsville-community-town-park-md",
+    "hoyes-run-md",
+    "sang-run-md"
+   ],
+   "advisories": []
+  }
+ ]
+}

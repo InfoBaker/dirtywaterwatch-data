@@ -1,0 +1,23 @@
+id: "pa-wqp-21pabch"
+name: "Water Quality Portal organization 21PABCH (Erie County Department of Health beach E. coli)"
+url: "https://www.waterqualitydata.us/provider/STORET/21PABCH"
+homepage: "https://www.waterqualitydata.us/provider/STORET/21PABCH"
+kind: "api"
+level: "federal"
+# Notes (research/pa, status candidate, verified fetched, checked 2026-11-02): Season-late but
+#   standard history for Presque Isle beaches.
+# Access detail (research, quoted): Fetched
+#   Result/search?organization=21PABCH&startDateLo=01-01-2025: 903 rows, all 'Escherichia coli',
+#   latest 2025-09-23; 2026 not loaded yet.
+cadence: null
+license: "none stated"
+attribution: "EPA/USGS Water Quality Portal"
+enabled: true
+role: "monitoring"
+event_types: ["beach_monitoring"]
+states: ["PA"]
+access: ["api", "csv"]
+access_detail: "Fetched Result/search?organization=21PABCH&startDateLo=01-01-2025: 903 rows, all 'Escherichia coli', latest 2025-09-23; 2026 not loaded yet."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-02"

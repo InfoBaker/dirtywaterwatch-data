@@ -1,0 +1,24 @@
+id: "fed-epa-beach-tech-submitting-data"
+name: "EPA 'Submitting Data to EPA' (eBeaches: WQX monitoring, PRAWN notification, verification tool)"
+url: "https://www.epa.gov/beach-tech/submitting-data-epa"
+homepage: "https://www.epa.gov/beach-tech/submitting-data-epa"
+kind: "html"
+level: "federal"
+# Notes (research/federal, status used, verified fetched, checked 2026-11-01): Explains the data
+#   path and why BEACON lags a season.
+# Access detail (research, quoted): Last updated June 22, 2026. Grantees "are required to submit
+#   beach monitoring (water quality), notification (advisory and closing), and beach location data";
+#   monitoring to WQX (so it reaches the Water Quality Portal), notifications to PRAWN, verified
+#   annually via the Verification Tool (CDX login).
+cadence: null
+license: "EPA Standard Open Data License: \"Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain and is not subject to domestic copyright protection under 17 U.S.C. § 105.\" https://edg.epa.gov/EPA_Data_License.html"
+attribution: "US EPA Office of Water"
+enabled: true
+role: "advisories"
+event_types: []
+states: ["US"]
+access: ["html", "pdf"]
+access_detail: "Last updated June 22, 2026. Grantees \"are required to submit beach monitoring (water quality), notification (advisory and closing), and beach location data\"; monitoring to WQX (so it reaches the Water Quality Portal), notifications to PRAWN, verified annually via the Verification Tool (CDX login)."
+machine_readable: false
+legal_basis: "BEACH Act; grant conditions"
+checked: "2026-11-01"

@@ -1,0 +1,198 @@
+[
+  {
+    "id": "ar-lrwra",
+    "name": "Little Rock Water Reclamation Authority (Adams Field, Fourche Creek WRFs)",
+    "state": "AR",
+    "kind": "sso",
+    "npdes_permit": "AR0021806; AR0021768",
+    "receiving_waters": [
+      "Arkansas River",
+      "Fourche Creek",
+      "Rock Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "SSO Response Plan with signage and public notification (settlement); reporting line; DEQ incident search",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Little Rock"
+    ],
+    "notes": "Permit numbers from the 2014 modification found in search; second permit inferred.",
+    "verified": "search_only",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ar-fort-smith",
+    "name": "City of Fort Smith Utilities (P Street and Massard WWTPs)",
+    "state": "AR",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Arkansas River",
+      "Mill Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Fort Smith"
+    ],
+    "notes": "Under a 2015 EPA/DOJ sewer consent decree (not re-checked).",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ar-fayetteville",
+    "name": "City of Fayetteville (Paul R. Noland and West Side WWTPs)",
+    "state": "AR",
+    "kind": "sso",
+    "npdes_permit": "AR0020010; AR0050288",
+    "receiving_waters": [
+      "White River",
+      "Illinois River tributaries",
+      "Mud Creek"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DEQ incident search only found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Fayetteville"
+    ],
+    "notes": "Appears in the October 2026 search results.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ar-springdale",
+    "name": "Springdale Water Utilities",
+    "state": "AR",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Spring Creek",
+      "Illinois River basin"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Springdale"
+    ],
+    "notes": "Illinois River flows into Oklahoma (shared water).",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ar-benton",
+    "name": "City of Benton",
+    "state": "AR",
+    "kind": "sso",
+    "npdes_permit": "AR0036498",
+    "receiving_waters": [
+      "Saline River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DEQ incident search only found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Benton"
+    ],
+    "notes": "Seen in the October 2026 results.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ar-ward",
+    "name": "City of Ward",
+    "state": "AR",
+    "kind": "sso",
+    "npdes_permit": "AR0047554",
+    "receiving_waters": [],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "DEQ incident search only found",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Ward"
+    ],
+    "notes": "Seen in the October 2026 results.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ar-north-little-rock",
+    "name": "North Little Rock Wastewater Utility",
+    "state": "AR",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Arkansas River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "North Little Rock"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ar-cwl-jonesboro",
+    "name": "City Water and Light, Jonesboro",
+    "state": "AR",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Bayou DeView",
+      "St. Francis basin"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Jonesboro"
+    ],
+    "notes": "",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  },
+  {
+    "id": "ar-hot-springs",
+    "name": "City of Hot Springs",
+    "state": "AR",
+    "kind": "sso",
+    "npdes_permit": null,
+    "receiving_waters": [
+      "Lake Hamilton",
+      "Lake Catherine",
+      "Ouachita River"
+    ],
+    "water_slugs": [],
+    "outfall_count": null,
+    "outfalls_source": null,
+    "notification_channel": "not searched",
+    "notification_feed_machine_readable": false,
+    "towns": [
+      "Hot Springs"
+    ],
+    "notes": "Lake Hamilton had HAB advisories in 2026.",
+    "verified": "inferred",
+    "checked": "2026-11-03"
+  }
+]

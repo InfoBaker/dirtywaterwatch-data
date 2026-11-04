@@ -1,0 +1,22 @@
+id: "me-mhb-geojson-site"
+name: "Maine Healthy Beaches live GeoJSON, sampling sites (mapdata_site.geojson)"
+url: "https://apps.web.maine.gov/online/healthy_beaches/mapdata_site.geojson"
+homepage: "https://apps.web.maine.gov/online/healthy_beaches/mapdata_site.geojson"
+kind: "api"
+level: "state"
+# Notes (research/me, status candidate, verified fetched, checked 2026-11-01): Site coordinates and
+#   latest result; pairs with the BMA feed.
+# Access detail (research, quoted): 85 site features; plain GET.
+# Can fill: coordinates (site), sample result, sampled time
+cadence: "Live; 'Monitoring Frequency' per site ('1 Week', '2 Week')."
+license: "maine.gov: 'Neither the State of Maine, nor any agency, officer, or employee of the State of Maine warrants the accuracy, reliability or timeliness of any information published on the Maine.gov website ... Any person or entity that relies on any information obtained from this system does so at their own risk.' (https://www.maine.gov/portal/policies/disclaimer.html). No reuse licence stated."
+attribution: "Maine DEP, Maine Healthy Beaches Program"
+enabled: true
+role: "monitoring"
+event_types: ["beach_monitoring"]
+states: ["ME"]
+access: ["api"]
+access_detail: "85 site features; plain GET."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

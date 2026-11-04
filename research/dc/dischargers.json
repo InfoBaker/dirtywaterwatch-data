@@ -1,0 +1,42 @@
+[
+ {
+  "id": "dc-dc0021199",
+  "name": "District of Columbia Water and Sewer Authority (DC Water)",
+  "short_name": "DC Water",
+  "legal_form": "authority",
+  "state": "DC",
+  "kind": "cso",
+  "npdes_permit": "DC0021199",
+  "receiving_waters": ["Anacostia River", "Potomac River", "Rock Creek", "Piney Branch", "Broad Branch", "Soapstone Valley stream (NHD unnamed)", "Oxon Run", "Watts Branch", "Hickey Run", "Pope Branch"],
+  "water_slugs": ["anacostia-river-dc", "potomac-river-dc", "rock-creek-dc", "piney-branch-dc", "broad-branch-dc", "oxon-run-dc", "watts-branch-dc", "hickey-run-dc", "pope-branch-dc"],
+  "outfall_count": 48,
+  "outfalls_source": "https://services2.arcgis.com/kZWfT06uhil5hMQO/arcgis/rest/services/CSOSheds_InteractiveMap_CSOOutfalls/FeatureServer/0 (46 points, labels and photos, 2017) and the EPA ECHO national CSO inventory (56 rows for DC0021199 incl. separated outfalls and tunnel overflows 003A and 019A)",
+  "notification_channel": "News releases and public notices at https://www.dcwater.com/about-dc-water/media/news (no RSS; email via the Everbridge sign-up https://www.dcwater.com/customer-center/alerts-and-notifications/dc-water-alert-notification-signups); CSO Event Indicator Lights (one on the Potomac near the mouth of Rock Creek, four on the Anacostia; red during a CSO, yellow for 24 hours after); signs at each CSO outfall; quarterly CSO reports (PDF); 24-hour Command Center 202-612-3400; X @dcwater, Facebook DCWaterSewerAuth, Instagram dc.water",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": "https://member.everbridge.net/index/453003085619269#/signup",
+  "website": "https://www.dcwater.com/",
+  "towns": ["Washington"],
+  "notes": "Only CSO/SSO permittee in DC. EPA Region 3 issues the permit (DC is not NPDES-authorized), so DC Water files SSO/CSO noncompliance reports in EPA eReporting: 140 current SOBE rows 2023-03 to 2026-09. Permit effective 2018-08-26, expired August 2023, administratively continued. Website says 48 potentially active CSO outfalls; the Q2 2026 model table lists 42 active (Anacostia 11, Potomac 8, Rock Creek 23), outfalls 015-018 'consolidated to tunnel system', 006/025/026/031/037/053/057/058 separated. Anacostia River Tunnel System (incl. Northeast Boundary Tunnel, in service 2023) controls the Anacostia; Potomac River Tunnel under construction (TBMs Mary and Emily, 2025-2026); Piney Branch tunnel ground broken 2026. Also owns the Potomac Interceptor (~50 miles from Dulles through Virginia and Maryland to the Potomac Pumping Station), which collapsed on 2026-01-19 at Clara Barton Parkway, Montgomery County MD (~243 million gallons): its overflows are reported under DC0021199 although they happen in Maryland. Collection system population 689,545 (ECHO collection_system_permit), percent CSS field 56. CSO Q3 2026: 154.61 MG total (Potomac 137.83, Rock Creek 11.24, Anacostia 5.54 at CSO 010 O Street pumped overflow). ECHO DFR: https://echo.epa.gov/detailed-facility-report?fid=110029030144.",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ },
+ {
+  "id": "dc-neighbour-wssc-water",
+  "name": "Washington Suburban Sanitary Commission (WSSC Water) — Anacostia Wastewater Pumping Station (cross-border; Maryland agent owns)",
+  "short_name": "WSSC Water",
+  "legal_form": "district",
+  "state": "MD",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": ["Beaverdam Creek", "Anacostia River"],
+  "water_slugs": ["anacostia-river-dc", "anacostia-river-md"],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "WSSC Water news releases (joint notices with DC Water, e.g. 2025-07-27 'Proactive Notification of Possible Controlled Emergency Sewage Overflow into Beaverdam Creek and Anacostia River'; signs 'urging residents to avoid these waterways for up to 30 days')",
+  "notification_feed_machine_readable": false,
+  "towns": ["Capitol Heights"],
+  "notes": "Listed only so the DC Anacostia pages can name the upstream operator whose pumping station (1700 Andalusia Lane, Capitol Heights) sends 60-65 MGD into DC Water's 108-inch Anacostia Force Main and can overflow to Beaverdam Creek at the DC line. Maryland/WSSC have no rows in EPA SOBE. Permit number not looked up (Maryland agent).",
+  "verified": "fetched",
+  "checked": "2026-11-02"
+ }
+]

@@ -1,0 +1,2518 @@
+{
+ "state": "IN",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [
+  {
+   "npdes_permit": "IN0020001",
+   "permittee": "RIDGEVILLE WWTP",
+   "city": "RIDGEVILLE",
+   "open_outfalls": 3,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "MISSISSINEWA RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020044",
+   "permittee": "ALEXANDRIA WWTP",
+   "city": "ALEXANDRIA",
+   "open_outfalls": 1,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "PIPE CR TO W FK WHITE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020095",
+   "permittee": "PORTLAND WWTP",
+   "city": "PORTLAND",
+   "open_outfalls": 12,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "OR/WABASH RIVER/SALAMONIE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020109",
+   "permittee": "GREENFIELD WWTP",
+   "city": "GREENFIELD",
+   "open_outfalls": 0,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "OR/E FK WHITE/BIG BLUE/BRANDYWINE C"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020117",
+   "permittee": "MONTPELIER WWTP",
+   "city": "MONTPELIER",
+   "open_outfalls": 2,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "SALAMONIE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020125",
+   "permittee": "ROYAL CENTER WWTP",
+   "city": "ROYAL CENTER",
+   "open_outfalls": 1,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "FREDRICKS DITCH",
+    "TIPPECANOE R VIA FREDRICKS DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020133",
+   "permittee": "GREENSBURG WWTP",
+   "city": "GREENSBURG",
+   "open_outfalls": 3,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Gas Creek-Sand Creek",
+    "OR/E FK WHITE R/SAND CRK/GAS CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020168",
+   "permittee": "NOBLESVILLE WWTP, CITY OF",
+   "city": "NOBLESVILLE",
+   "open_outfalls": 9,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "OHIO RIVER FROM WHITE RIVER",
+    "OR/WABASH/WHITE/W FK WHITE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020176",
+   "permittee": "MONTICELLO WWTP",
+   "city": "MONTICELLO",
+   "open_outfalls": 7,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "TIPPECANOE R (LAKE FREEMAN)",
+    "TIPPECANOE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020184",
+   "permittee": "EDINBURGH WWTP",
+   "city": "EDINBURGH",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "BIG BLUE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020222",
+   "permittee": "ATTICA MUNICIPAL WWTP",
+   "city": "ATTICA",
+   "open_outfalls": 1,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020231",
+   "permittee": "VEVAY WWTP",
+   "city": "VEVAY",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020346",
+   "permittee": "NEW HAVEN WWTP",
+   "city": "NEW HAVEN",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "MAUMEE R VIA MARTIN DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020362",
+   "permittee": "NORTH MANCHESTER WWTP",
+   "city": "NORTH MANCHESTER",
+   "open_outfalls": 6,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "EEL R (WABASH)"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020427",
+   "permittee": "BREMEN WWTP",
+   "city": "BREMEN",
+   "open_outfalls": 1,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "UM/KANKAKEE R/YELLOW RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020451",
+   "permittee": "NORTH VERNON WWTP",
+   "city": "NORTH VERNON",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "MUSCATATUCK R (VERNON FK)",
+    "VERNON FORK OF MUSCATATUCK RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020478",
+   "permittee": "LAGRANGE WWTP",
+   "city": "LAGRANGE",
+   "open_outfalls": 1,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "PIGEON R VIA FLY CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020516",
+   "permittee": "WINAMAC WWTP",
+   "city": "WINAMAC",
+   "open_outfalls": 1,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "TIPPECANOE R TO WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020567",
+   "permittee": "SOUTH WHITLEY WWTP",
+   "city": "SOUTH WHITLEY",
+   "open_outfalls": 2,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "EEL RIVER",
+    "WABASH RIVER VIA EEL RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020656",
+   "permittee": "KENDALLVILLE WWTP",
+   "city": "KENDALLVILLE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "ELKHART R N BR VIA HENDERSON LAKE"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020664",
+   "permittee": "AVILLA WWTP, TOWN OF",
+   "city": "AVILLA",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "CEDAR CR (LITTLE) VIA UNNAMED DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020672",
+   "permittee": "AUBURN WWTP",
+   "city": "AUBURN",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "CEDAR CR TO ST JOSEPH RIVER",
+    "CEDAR CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020681",
+   "permittee": "LIBERTY WWTP",
+   "city": "LIBERTY",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "UNNAMED TRIB TO SILVER CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020711",
+   "permittee": "WATERLOO WWTP",
+   "city": "WATERLOO",
+   "open_outfalls": 1,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "CEDAR CR TO ST JOSEPH RIVER",
+    "Cedar Creek"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020745",
+   "permittee": "OSSIAN WWTP, TOWN OF",
+   "city": "OSSIAN",
+   "open_outfalls": 0,
+   "closed_outfalls": 6,
+   "receiving_waters": [
+    "OR/WABASH/LITTLE/EIGHT MILE CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020770",
+   "permittee": "MIDDLETOWN WWTP",
+   "city": "MIDDLETOWN",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "FALL CREEK TO W. FORK WHITE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020877",
+   "permittee": "NORTH JUDSON MUNICIPAL WWTP",
+   "city": "NORTH JUDSON",
+   "open_outfalls": 1,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "KANKAKEE R VIA PINE CREEK&UNNAMED T"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020907",
+   "permittee": "ROSSVILLE WWTP",
+   "city": "ROSSVILLE",
+   "open_outfalls": 2,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "ROSSVILLE WWTP",
+    "WILDCAT CR VIA SILVERTHORN DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020940",
+   "permittee": "REMINGTON WWTP",
+   "city": "REMINGTON",
+   "open_outfalls": 0,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "IROQUOIS R VIA CARPENTER CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020958",
+   "permittee": "FORTVILLE WWTP",
+   "city": "FORTVILLE",
+   "open_outfalls": 3,
+   "closed_outfalls": 9,
+   "receiving_waters": [
+    "FALL CR VIA FLAT FORT CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0020991",
+   "permittee": "PLYMOUTH WWTP",
+   "city": "PLYMOUTH",
+   "open_outfalls": 10,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "YELLOW R TO KANKAKEE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021016",
+   "permittee": "TELL CITY WWTP",
+   "city": "TELL CITY",
+   "open_outfalls": 3,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "OHIO RIVER",
+    "OHIO RIVER VIA WINDY CR"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021067",
+   "permittee": "ROCKPORT SOUTH WWTP",
+   "city": "ROCKPORT",
+   "open_outfalls": 1,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021105",
+   "permittee": "FAIRMOUNT WWTP",
+   "city": "FAIRMOUNT",
+   "open_outfalls": 17,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "BACK CREEK",
+    "MISSISSINEWA R VIA BACK CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021181",
+   "permittee": "FRANKLIN WWTP, CITY OF",
+   "city": "FRANKLIN",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "SUGAR CR (E WHITE) VIA YOUNGS CR"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021202",
+   "permittee": "PLAINFIELD NORTH WATER POLLUTION CONTROL FACILITY",
+   "city": "PLAINFIELD",
+   "open_outfalls": 1,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "OR/W FK WHITE R/WHITE LICK CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021211",
+   "permittee": "BRAZIL WWTP",
+   "city": "BRAZIL",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "OR/WHITE/EEL/E FK BIRCH/UNNMD DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021245",
+   "permittee": "BROWNSBURG WWTP",
+   "city": "BROWNSBURG",
+   "open_outfalls": 1,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "OR/W FK WHITE R/WHITE LICK CREEK",
+    "WHITE LICK CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021270",
+   "permittee": "RUSHVILLE WWTP",
+   "city": "RUSHVILLE",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "OR/E FK WHITE RIVER/FLATROCK RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021296",
+   "permittee": "ANGOLA WWTP",
+   "city": "ANGOLA",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "PIGEON CREEK VIA H.D. WOOD DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021342",
+   "permittee": "OXFORD MUNICIPAL WWTP",
+   "city": "OXFORD",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "BROWN DITCH",
+    "UNT TO BROWN DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021369",
+   "permittee": "BERNE WWTP",
+   "city": "BERNE",
+   "open_outfalls": 1,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "Gales Ditch",
+    "ST MARYS R VIA BLUE CR VIA HABEGGER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021385",
+   "permittee": "KNOX MUNICIPAL WWTP",
+   "city": "KNOX",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "UM/KANKAKEE RIVER/YELLOW RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021466",
+   "permittee": "NAPPANEE WWTP, CITY OF",
+   "city": "NAPPANEE",
+   "open_outfalls": 12,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "ARMEY DITCH",
+    "BERLIN COURT DITCH",
+    "TURKEY CR VIA TRIBUTARY"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021474",
+   "permittee": "TIPTON WWTP",
+   "city": "TIPTON",
+   "open_outfalls": 3,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "CICERO CREEK",
+    "CICERO CREEK TO MORSE RESERVOIR",
+    "OR/W FK WHITE RIVER/CICERO CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021512",
+   "permittee": "FARMLAND MUNICIPAL STP",
+   "city": "FARMLAND",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "W FK WHITE R VIA NELSON-OSWALD D"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021628",
+   "permittee": "HARTFORD CITY WWTP",
+   "city": "HARTFORD CITY",
+   "open_outfalls": 16,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "MISSISSINEWA R VIA BIG LICK CR TRIB"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021644",
+   "permittee": "SALEM WWTP",
+   "city": "SALEM",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "OR/WEST FORK OF BLUE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0021652",
+   "permittee": "EATON WWTP",
+   "city": "EATON",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "WABASH RIVER VIA MISSISSINEWA RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022144",
+   "permittee": "ALBION WWTP",
+   "city": "ALBION",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "Muncie Lake-South Branch Elkhart River"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022284",
+   "permittee": "ARGOS WASTEWATER TREATMENT PLANT",
+   "city": "ARGOS",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "YELLOW R/MYERS DITCH/UNNMD DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022411",
+   "permittee": "BLUFFTON WWTP",
+   "city": "BLUFFTON",
+   "open_outfalls": 1,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "WABASH RIVER",
+    "Wabash River"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022420",
+   "permittee": "BOONVILLE MUNICIPAL WWTP",
+   "city": "BOONVILLE",
+   "open_outfalls": 4,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "CYPRESS CR TO OHIO RIVER",
+    "CYPRESS CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022462",
+   "permittee": "BUTLER WWTP",
+   "city": "BUTLER",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "BIG RUN CR TO ST JOSEPH RIVER",
+    "BIG RUN CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022535",
+   "permittee": "CENTERVILLE WWTP",
+   "city": "CENTERVILLE",
+   "open_outfalls": 1,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "NOLANDS FK TO WHITEWATER R (W FK)"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022560",
+   "permittee": "CHESTERFIELD MUNICIPAL WWTP",
+   "city": "CHESTERFIELD",
+   "open_outfalls": 0,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "W FK WHITE R - SRVD BY ANDERSON CSO"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022578",
+   "permittee": "CHESTERTON WWTP",
+   "city": "CHESTERTON",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "LAKE MICHIGAN/E BR LITTLE CALUMET"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022608",
+   "permittee": "CLINTON MUNICIPAL WWTP",
+   "city": "CLINTON",
+   "open_outfalls": 3,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022624",
+   "permittee": "COLUMBIA CITY WWTP",
+   "city": "COLUMBIA CITY",
+   "open_outfalls": 11,
+   "closed_outfalls": 7,
+   "receiving_waters": [
+    "BLUE RIVER",
+    "EEL R (WABASH) VIA BLUE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022683",
+   "permittee": "CROTHERSVILLE WWTP",
+   "city": "CROTHERSVILLE",
+   "open_outfalls": 2,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "MUSCATATUCK R VIA GRASSY CR - NEHRT",
+    "NEHRT (HOMINY) DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022829",
+   "permittee": "EAST CHICAGO SANITARY DISTRICT",
+   "city": "EAST CHICAGO",
+   "open_outfalls": 3,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "GRAND CALUMET RIVER",
+    "INDIANA HARBOR SHIP CANAL"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022934",
+   "permittee": "FRANKFORT WWTP, CITY OF",
+   "city": "FRANKFORT",
+   "open_outfalls": 1,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "WILDCAT CR S FK VIA PRAIRIE CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022969",
+   "permittee": "GARRETT WWTP",
+   "city": "GARRETT",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "GARRETT CITY DITCH FROM GARRETT WWTP"
+   ]
+  },
+  {
+   "npdes_permit": "IN0022977",
+   "permittee": "GARY SANITARY DISTRICT",
+   "city": "GARY",
+   "open_outfalls": 12,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "GRAND CALUMET R & LITTLE CALUMET R"
+   ]
+  },
+  {
+   "npdes_permit": "IN0023060",
+   "permittee": "HAMMOND WASTEWATER FACILITY",
+   "city": "HAMMOND",
+   "open_outfalls": 10,
+   "closed_outfalls": 11,
+   "receiving_waters": [
+    "GRAND CALUMET R TO LAKE MICHIGAN",
+    "GRAND CALUMET RIVER",
+    "SCHOON DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0023132",
+   "permittee": "HUNTINGTON WWTP",
+   "city": "HUNTINGTON",
+   "open_outfalls": 14,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "OHIO RIVER FROM WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0023183",
+   "permittee": "BELMONT & SOUTHPORT ADVANCED WASTEWATER TREATMENT PLANTS",
+   "city": "INDIANAPOLIS",
+   "open_outfalls": 131,
+   "closed_outfalls": 6,
+   "receiving_waters": [
+    "LITTLE BUCK CREEK",
+    "PLEASANT RUN",
+    "W FK WHITE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0023302",
+   "permittee": "JEFFERSONVILLE DOWNTOWN WWTP",
+   "city": "JEFFERSONVILLE",
+   "open_outfalls": 7,
+   "closed_outfalls": 9,
+   "receiving_waters": [
+    "OHIO R IVER",
+    "OHIO R VIA CANE RUN CREEK",
+    "OHIO RIVER",
+    "Ohio River"
+   ]
+  },
+  {
+   "npdes_permit": "IN0023582",
+   "permittee": "LIGONIER WWTP",
+   "city": "LIGONIER",
+   "open_outfalls": 0,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "ELKHART R TO ST JOSEPH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0023604",
+   "permittee": "LOGANSPORT MUNICIPAL WWTP",
+   "city": "LOGANSPORT",
+   "open_outfalls": 14,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "OHIO RIVER/WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0023621",
+   "permittee": "LOWELL WWTP",
+   "city": "LOWELL",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "CEDAR CR TO KANKAKEE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0023736",
+   "permittee": "MARKLE WWTP",
+   "city": "MARKLE",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0023752",
+   "permittee": "MICHIGAN CITY - J. B. GIFFORD WWTP",
+   "city": "MICHIGAN CITY",
+   "open_outfalls": 1,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "TRAIL CR TO LAKE MICHIGAN"
+   ]
+  },
+  {
+   "npdes_permit": "IN0023914",
+   "permittee": "NEW CASTLE WWTP",
+   "city": "NEW CASTLE",
+   "open_outfalls": 8,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "BIG BLUE R TO DRIFTWOOD RIVER",
+    "BIG BLUE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024023",
+   "permittee": "PAOLI MUNICIPAL WWTP",
+   "city": "PAOLI",
+   "open_outfalls": 1,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "LOST RIVER VIA LICK CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024406",
+   "permittee": "REDKEY WWTP",
+   "city": "REDKEY",
+   "open_outfalls": 7,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "MISSISSINEWA R VIA HALFWAY CR-REDKE",
+    "REDKEY RUN"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024414",
+   "permittee": "RENSSELAER WWTP",
+   "city": "RENSSELAER",
+   "open_outfalls": 10,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "IROQUOIS RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024473",
+   "permittee": "SEYMOUR WWTP, CITY OF",
+   "city": "SEYMOUR",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "E FK WHITE R TO WHITE R TO WABASH R"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024520",
+   "permittee": "SOUTH BEND MUNICIPAL WWTP",
+   "city": "SOUTH BEND",
+   "open_outfalls": 35,
+   "closed_outfalls": 12,
+   "receiving_waters": [
+    "ST JOSEPH R",
+    "ST JOSEPH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024554",
+   "permittee": "SULLIVAN WWTP",
+   "city": "SULLIVAN",
+   "open_outfalls": 5,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "BUSSERON CR VIA BUCK CREEK TRIB"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024562",
+   "permittee": "SUMMITVILLE WWTP",
+   "city": "SUMMITVILLE",
+   "open_outfalls": 2,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "OR/W FK WHITE/MUD CR",
+    "OR/W FK WHITE/MUD CR & ILLIFF DRAIN"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024660",
+   "permittee": "ELDEN KUEHL POLLUTION CON FAC",
+   "city": "VALPARAISO",
+   "open_outfalls": 1,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "LT CALUMET R VIA SALT CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024716",
+   "permittee": "VEEDERSBURG MUNICIPAL WWTP",
+   "city": "VEEDERSBURG",
+   "open_outfalls": 0,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "COAL CR TO WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024741",
+   "permittee": "WABASH WWTP",
+   "city": "WABASH",
+   "open_outfalls": 7,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024775",
+   "permittee": "WAKARUSA WWTP",
+   "city": "WAKARUSA",
+   "open_outfalls": 4,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "BAUGO CR VIA WERNTZ DITCH TRIB.",
+    "WERNTZ DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024791",
+   "permittee": "WARREN WWTP",
+   "city": "WARREN",
+   "open_outfalls": 0,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "SALAMONIE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024805",
+   "permittee": "WARSAW #1 WWTP",
+   "city": "WARSAW",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "OR/WABASH/TIPPECANOE/BIG WALNUT CRK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024821",
+   "permittee": "WEST LAFAYETTE WWTP",
+   "city": "WEST LAFAYETTE",
+   "open_outfalls": 4,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0024937",
+   "permittee": "CARTHAGE WWTP",
+   "city": "CARTHAGE",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "BIG BLUE R TO DRIFTWOOD RIVER",
+    "NORTH CARTHAGE CREEK/BIG BLUE R TO DRIFTWOOD RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025232",
+   "permittee": "AKRON WWTP",
+   "city": "AKRON",
+   "open_outfalls": 0,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "TIPPECANOE R VIA CHIPPENWANUCK CR"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025577",
+   "permittee": "LA PORTE WWTP",
+   "city": "LA PORTE",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "KANKAKEE R VIA TRAVIS DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025585",
+   "permittee": "MARION UTILITIES",
+   "city": "MARION",
+   "open_outfalls": 6,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "OR/WABASH R/MISSISSINEWA RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025607",
+   "permittee": "TERRE HAUTE WWTP, CITY OF",
+   "city": "TERRE HAUTE",
+   "open_outfalls": 9,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "OR/WABASH RIVER",
+    "WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025615",
+   "permittee": "RICHMOND WWTP, CITY OF",
+   "city": "RICHMOND",
+   "open_outfalls": 4,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "WHITEWATER R (E FK)"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025631",
+   "permittee": "MUNCIE WATER POLLUTION CONTROL FACILITY",
+   "city": "MUNCIE",
+   "open_outfalls": 11,
+   "closed_outfalls": 19,
+   "receiving_waters": [
+    "OR/WEST FORK OF WHITE RIVER",
+    "WEST FK WHITE RIVER",
+    "White River"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025640",
+   "permittee": "MISHAWAKA WWTP",
+   "city": "MISHAWAKA",
+   "open_outfalls": 16,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "ELLER DITCH",
+    "ST JOSEPH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025658",
+   "permittee": "WASHINGTON WWTP",
+   "city": "WASHINGTON",
+   "open_outfalls": 4,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "HAWKINS CREEK",
+    "OR/W FK WHITE RIVER/HAWKINS CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025666",
+   "permittee": "MADISON WWTP",
+   "city": "MADISON",
+   "open_outfalls": 3,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025674",
+   "permittee": "ELKHART WWTP",
+   "city": "ELKHART",
+   "open_outfalls": 29,
+   "closed_outfalls": 11,
+   "receiving_waters": [
+    "ST JOSEPH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025755",
+   "permittee": "GOSHEN WWTP",
+   "city": "GOSHEN",
+   "open_outfalls": 4,
+   "closed_outfalls": 5,
+   "receiving_waters": [
+    "ELKHART R TO ST JOSEPH RIVER",
+    "ELKHART RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0025763",
+   "permittee": "CROWN POINT WWTP",
+   "city": "CROWN POINT",
+   "open_outfalls": 6,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "BEAVER DAM DITCH",
+    "LM/CLMT-BRNS/DEEP R/MAIN BEAVER DAM"
+   ]
+  },
+  {
+   "npdes_permit": "IN0031020",
+   "permittee": "VINCENNES WWTP",
+   "city": "VINCENNES",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "OR/WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0031950",
+   "permittee": "INDIANAPOLIS - SOUTHPORT WWTP",
+   "city": "INDIANAPOLIS",
+   "open_outfalls": 0,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "W FK WHITE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0032191",
+   "permittee": "FORT WAYNE WWTP",
+   "city": "FORT WAYNE",
+   "open_outfalls": 38,
+   "closed_outfalls": 24,
+   "receiving_waters": [
+    "BALDWIN DITCH",
+    "MAUMEE R TO ST MARYS RIVER",
+    "MAUMEE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0032328",
+   "permittee": "PERU UTILITIES WWTP",
+   "city": "PERU",
+   "open_outfalls": 10,
+   "closed_outfalls": 10,
+   "receiving_waters": [
+    "WABASH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0032336",
+   "permittee": "CONNERSVILLE WWTP, CITY OF",
+   "city": "CONNERSVILLE",
+   "open_outfalls": 3,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "WHITEWATER R (W FK)"
+   ]
+  },
+  {
+   "npdes_permit": "IN0032468",
+   "permittee": "LAFAYETTE WWTP",
+   "city": "LAFAYETTE",
+   "open_outfalls": 11,
+   "closed_outfalls": 7,
+   "receiving_waters": [
+    "OHIO RIVER VIA WABASH RIVER",
+    "OHIO RV VIA WABASH RV VIA UNNAMED DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0032476",
+   "permittee": "ANDERSON WWTP",
+   "city": "ANDERSON",
+   "open_outfalls": 11,
+   "closed_outfalls": 16,
+   "receiving_waters": [
+    "OR/WEST FORK WHITE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0032573",
+   "permittee": "COLUMBUS WWTP, CITY OF",
+   "city": "COLUMBUS",
+   "open_outfalls": 1,
+   "closed_outfalls": 8,
+   "receiving_waters": [
+    "E FK WHITE R TO WHITE R TO WABASH R",
+    "Little Haw Creek-Haw Creek"
+   ]
+  },
+  {
+   "npdes_permit": "IN0032719",
+   "permittee": "ELWOOD WWTP, CITY OF",
+   "city": "ELWOOD",
+   "open_outfalls": 14,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "OR/W FK WHITE/BIG DUCK CREEK",
+    "OR/W FK WHITE/DUCK CREEK",
+    "OR/W FK WHITE/LITTLE DUCK CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0032875",
+   "permittee": "KOKOMO WWTP",
+   "city": "KOKOMO",
+   "open_outfalls": 13,
+   "closed_outfalls": 19,
+   "receiving_waters": [
+    "WILDCAT CR TO WABASH RIVER",
+    "Wildcat Creek"
+   ]
+  },
+  {
+   "npdes_permit": "IN0032956",
+   "permittee": "EVANSVILLE WESTSIDE WWTP",
+   "city": "EVANSVILLE",
+   "open_outfalls": 12,
+   "closed_outfalls": 11,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0032964",
+   "permittee": "CRAWFORDSVILLE WWTP",
+   "city": "CRAWFORDSVILLE",
+   "open_outfalls": 0,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "OR/WABASH RIVER/SUGAR CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0032972",
+   "permittee": "SPEEDWAY WWTP",
+   "city": "SPEEDWAY",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "EAGLE CR TO W FK WHITE RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0033073",
+   "permittee": "EVANSVILLE EASTSIDE WWTP",
+   "city": "EVANSVILLE",
+   "open_outfalls": 7,
+   "closed_outfalls": 11,
+   "receiving_waters": [
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0035696",
+   "permittee": "MOUNT VERNON WWTP",
+   "city": "MOUNT VERNON",
+   "open_outfalls": 2,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "OHIO R VIA UNNAMED DITCH",
+    "OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0037494",
+   "permittee": "GRAHAM CREEK ELEMENTARY SCHOOL",
+   "city": "COMMISKEY",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "GRAHAM CR TO MUSCATATUCK RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0038318",
+   "permittee": "MILFORD WWTP",
+   "city": "MILFORD",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "TURKEY CR TO ELKHART R"
+   ]
+  },
+  {
+   "npdes_permit": "IN0039314",
+   "permittee": "DECATUR WWTP",
+   "city": "DECATUR",
+   "open_outfalls": 2,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "ST MARYS RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0039357",
+   "permittee": "GENEVA WWTP",
+   "city": "GENEVA",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "WABASH RIVER TO OHIO RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "IN0042391",
+   "permittee": "AQUA INDIANA, INC. - MIDWEST FACILITY",
+   "city": "FORT WAYNE",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "GRAHAM MCCULLOCH DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "IN0050903",
+   "permittee": "AURORA COMBINED COLLECTION SYSTEM",
+   "city": "AURORA",
+   "open_outfalls": 3,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "OHIO RIVER",
+    "SOUTH DEARBORN RSD (OHIO RIVER)"
+   ]
+  },
+  {
+   "npdes_permit": "IN0060917",
+   "permittee": "WARSAW WWTP",
+   "city": "WARSAW",
+   "open_outfalls": 1,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "WALNUT CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "IN0064913",
+   "permittee": "CANNELTON WASTEWATER TREATMENT PLANT",
+   "city": "CANNELTON",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "CASTLEBERRY CREEK",
+    "CASTLEBERRY CREEK VIA STORM SEWER"
+   ]
+  },
+  {
+   "npdes_permit": "INM002256",
+   "permittee": "Chesterfield, City of",
+   "city": "Chesterfield",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "Mill Creek"
+   ]
+  },
+  {
+   "npdes_permit": "INM020133",
+   "permittee": "GREENSBURG COMBINED SEWER SYS",
+   "city": "GREENSBURG",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "SAND CREEK VIA GAS CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "INM020346",
+   "permittee": "NEW HAVEN COLLECTION SYSTEM",
+   "city": "NEW HAVEN",
+   "open_outfalls": 3,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "MAUMEE R VIA MARTIN DRAIN & TRIER D",
+    "Martin Ditch"
+   ]
+  },
+  {
+   "npdes_permit": "INM020672",
+   "permittee": "AUBURN COMBINED SEWER SYSTEM",
+   "city": "AUBURN",
+   "open_outfalls": 0,
+   "closed_outfalls": 4,
+   "receiving_waters": [
+    "CEDAR CR AND JOHN DIEHL DRAIN"
+   ]
+  },
+  {
+   "npdes_permit": "INM021270",
+   "permittee": "RUSHVILLE COMBINED SEWER SYS.",
+   "city": "RUSHVILLE",
+   "open_outfalls": 0,
+   "closed_outfalls": 2,
+   "receiving_waters": [
+    "FLATROCK R VIA UNNAMED OXBOW"
+   ]
+  },
+  {
+   "npdes_permit": "INM021342",
+   "permittee": "TOWN OF OXFORD CSS",
+   "city": "OXFORD",
+   "open_outfalls": 0,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "BIG PINE CR VIA BROWN DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "INM022144",
+   "permittee": "ALBION CSO",
+   "city": "ALBION",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "ELKHART R S BR VIA CROFT DITCH"
+   ]
+  },
+  {
+   "npdes_permit": "INM022560",
+   "permittee": "CHESTERFIELD CSS",
+   "city": "CHESTERFIELD",
+   "open_outfalls": 2,
+   "closed_outfalls": 0,
+   "receiving_waters": [
+    "W FK WHITE R VIA MILL CREEK"
+   ]
+  },
+  {
+   "npdes_permit": "INM022578",
+   "permittee": "CHESTERTON COMBINED SEWER SYS",
+   "city": "CHESTERTON",
+   "open_outfalls": 0,
+   "closed_outfalls": 1,
+   "receiving_waters": [
+    "LAKE MICHIGAN/LITTLE CALUMET RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "INM022829",
+   "permittee": "EAST CHICAGO CSS",
+   "city": "EAST CHICAGO",
+   "open_outfalls": 0,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "GRAND CALUMET R & IN HARBOR SHIP CN"
+   ]
+  },
+  {
+   "npdes_permit": "INM024520",
+   "permittee": "SOUTH BEND CSS",
+   "city": "SOUTH BEND",
+   "open_outfalls": 0,
+   "closed_outfalls": 36,
+   "receiving_waters": [
+    "ST. JOSEPH RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "INM024775",
+   "permittee": "WAKARUSA COMBINED SEWER SYSTEM",
+   "city": "WAKARUSA",
+   "open_outfalls": 0,
+   "closed_outfalls": 7,
+   "receiving_waters": [
+    "BAUGO CREEK/WERNTZ DITCH TRIB."
+   ]
+  },
+  {
+   "npdes_permit": "INM025755",
+   "permittee": "GOSHEN COMBINED SEWER SYSTEM",
+   "city": "GOSHEN",
+   "open_outfalls": 0,
+   "closed_outfalls": 6,
+   "receiving_waters": [
+    "ST JOSEPH RIVER VIA ELKHART RIVER"
+   ]
+  },
+  {
+   "npdes_permit": "INM062901",
+   "permittee": "CANNELTON CSS",
+   "city": "CANNELTON",
+   "open_outfalls": 0,
+   "closed_outfalls": 3,
+   "receiving_waters": [
+    "CASTLEBERRY CREEK",
+    "CASTLEBERRY CREEK VIA STORM SEWER"
+   ]
+  }
+ ],
+ "cso_open_outfalls": 671,
+ "plant_permits": 578,
+ "plant_permits_major": 153,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "IN0020044",
+   "permittee": "ALEXANDRIA WWTP",
+   "city": "ALEXANDRIA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020079",
+   "permittee": "DANVILLE WWTP",
+   "city": "DANVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020095",
+   "permittee": "PORTLAND WWTP",
+   "city": "PORTLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020109",
+   "permittee": "GREENFIELD WWTP",
+   "city": "GREENFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020133",
+   "permittee": "GREENSBURG WWTP",
+   "city": "GREENSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020150",
+   "permittee": "YORKTOWN WWTP, TOWN OF",
+   "city": "YORKTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020168",
+   "permittee": "NOBLESVILLE WWTP, CITY OF",
+   "city": "NOBLESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020176",
+   "permittee": "MONTICELLO WWTP",
+   "city": "MONTICELLO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020184",
+   "permittee": "EDINBURGH WWTP",
+   "city": "EDINBURGH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020303",
+   "permittee": "MARTINSVILLE WWTP",
+   "city": "MARTINSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020362",
+   "permittee": "NORTH MANCHESTER WWTP",
+   "city": "NORTH MANCHESTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020397",
+   "permittee": "SCOTTSBURG WWTP",
+   "city": "SCOTTSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020401",
+   "permittee": "PITTSBORO WWTP",
+   "city": "PITTSBORO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020419",
+   "permittee": "SELLERSBURG MUNICIPAL WWTP",
+   "city": "SELLERSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020427",
+   "permittee": "BREMEN WWTP",
+   "city": "BREMEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020435",
+   "permittee": "CHANDLER  WWTP",
+   "city": "CHANDLER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020451",
+   "permittee": "NORTH VERNON WWTP",
+   "city": "NORTH VERNON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020478",
+   "permittee": "LAGRANGE WWTP",
+   "city": "LAGRANGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020508",
+   "permittee": "CHARLESTOWN WASTEWATER TREATMENT PLANT",
+   "city": "CHARLESTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020575",
+   "permittee": "LINTON WWTP, CITY OF",
+   "city": "WEST LINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020605",
+   "permittee": "SANTA CLAUS WWTP, TOWN OF",
+   "city": "SANTA CLAUS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020656",
+   "permittee": "KENDALLVILLE WWTP",
+   "city": "KENDALLVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020672",
+   "permittee": "AUBURN WWTP",
+   "city": "AUBURN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020818",
+   "permittee": "LEBANON WWTP",
+   "city": "LEBANON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020834",
+   "permittee": "JASPER MUNICIPAL WWTP",
+   "city": "JASPER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020893",
+   "permittee": "CORYDON WWTP",
+   "city": "CORYDON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020982",
+   "permittee": "UNION CITY WWTP",
+   "city": "UNION CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0020991",
+   "permittee": "PLYMOUTH WWTP",
+   "city": "PLYMOUTH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021016",
+   "permittee": "TELL CITY MUNICIPAL WWTP",
+   "city": "TELL CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021024",
+   "permittee": "WINCHESTER WWTP",
+   "city": "WINCHESTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021032",
+   "permittee": "GREENCASTLE WWTP",
+   "city": "GREENCASTLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021083",
+   "permittee": "ELLETTSVILLE MUNICIPAL WWTP",
+   "city": "ELLETTSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021172",
+   "permittee": "SYRACUSE WWTP",
+   "city": "SYRACUSE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021181",
+   "permittee": "FRANKLIN WWTP, CITY OF",
+   "city": "FRANKLIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021202",
+   "permittee": "PLAINFIELD NORTH WATER POLLUTION CONTROL",
+   "city": "PLAINFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021211",
+   "permittee": "BRAZIL WWTP, CITY OF",
+   "city": "BRAZIL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021245",
+   "permittee": "BROWNSBURG WWTP",
+   "city": "BROWNSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021270",
+   "permittee": "RUSHVILLE WWTP",
+   "city": "RUSHVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021296",
+   "permittee": "ANGOLA WWTP",
+   "city": "ANGOLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021300",
+   "permittee": "CUMBERLAND WWTP",
+   "city": "CUMBERLAND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021369",
+   "permittee": "BERNE WWTP",
+   "city": "BERNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021377",
+   "permittee": "DELPHI WWTP",
+   "city": "DELPHI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021466",
+   "permittee": "NAPPANEE WWTP, CITY OF",
+   "city": "NAPPANEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021474",
+   "permittee": "TIPTON WWTP",
+   "city": "TIPTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021539",
+   "permittee": "CRANE DIVISION, NAVAL SURFACE WARFARE CENTER",
+   "city": "CRANE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021628",
+   "permittee": "HARTFORD CITY WWTP",
+   "city": "HARTFORD CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021644",
+   "permittee": "SALEM WWTP",
+   "city": "SALEM",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021661",
+   "permittee": "ROCHESTER WASTEWATER TREATMENT PLANT",
+   "city": "ROCHESTER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0021687",
+   "permittee": "OAKLAND CITY WWTP",
+   "city": "OAKLAND CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022314",
+   "permittee": "BARGERSVILLE WWTP",
+   "city": "BARGERSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022411",
+   "permittee": "BLUFFTON WWTP, CITY OF",
+   "city": "BLUFFTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022420",
+   "permittee": "BOONVILLE MUNICIPAL WWTP",
+   "city": "BOONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022462",
+   "permittee": "BUTLER WWTP",
+   "city": "BUTLER",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IN0022497",
+   "permittee": "CARMEL WWTP",
+   "city": "CARMEL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022535",
+   "permittee": "CENTERVILLE WWTP",
+   "city": "CENTERVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022578",
+   "permittee": "CHESTERTON WWTP, TOWN OF",
+   "city": "CHESTERTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022608",
+   "permittee": "CLINTON MUNICIPAL WWTP",
+   "city": "CLINTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022624",
+   "permittee": "COLUMBIA CITY WWTP",
+   "city": "COLUMBIA CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022829",
+   "permittee": "EAST CHICAGO SANITARY DISTRICT WWTP",
+   "city": "EAST CHICAGO",
+   "major": "Major",
+   "status": "ADC"
+  },
+  {
+   "npdes_permit": "IN0022934",
+   "permittee": "FRANKFORT WWTP, CITY OF",
+   "city": "FRANKFORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022951",
+   "permittee": "FRENCH LICK MUNICIPAL WWTP",
+   "city": "WEST BADEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022969",
+   "permittee": "GARRETT WWTP",
+   "city": "GARRETT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022977",
+   "permittee": "GARY SANITARY DISTRICT WWTP",
+   "city": "GARY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0022985",
+   "permittee": "GAS CITY WWTP",
+   "city": "GAS CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023060",
+   "permittee": "HAMMOND SANITARY DISTRICT WWTP",
+   "city": "HAMMOND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023124",
+   "permittee": "HUNTINGBURG WWTP",
+   "city": "HUNTINGBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023132",
+   "permittee": "HUNTINGTON WWTP",
+   "city": "HUNTINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023183",
+   "permittee": "INDIANAPOLIS BELMONT & SOUTHPORT AWTP",
+   "city": "INDIANAPOLIS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023302",
+   "permittee": "JEFFERSONVILLE DOWNTOWN WWTP",
+   "city": "JEFFERSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023582",
+   "permittee": "LIGONIER WASTEWATER TREATMENT PLANT",
+   "city": "LIGONIER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023604",
+   "permittee": "LOGANSPORT WASTEWATER TREATMENT PLANT",
+   "city": "LOGANSPORT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023621",
+   "permittee": "LOWELL WASTEWATER TREATMENT PLANT",
+   "city": "LOWELL",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023752",
+   "permittee": "MICHIGAN CITY - J.B. GIFFORD WWTP",
+   "city": "MICHIGAN CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023825",
+   "permittee": "MOORESVILLE WWTP, TOWN OF",
+   "city": "MOORESVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023884",
+   "permittee": "NEW ALBANY WWTP",
+   "city": "NEW ALBANY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023892",
+   "permittee": "NEWBURGH MUNICIPAL WWTP",
+   "city": "NEWBURGH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023914",
+   "permittee": "NEW CASTLE WWTP",
+   "city": "NEW CASTLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0023965",
+   "permittee": "OAK PARK CONSERVANCY DISTRICT",
+   "city": "JEFFERSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024023",
+   "permittee": "PAOLI MUNICIPAL WWTP",
+   "city": "PAOLI",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024325",
+   "permittee": "PETERSBURG MUNICIPAL WWTP",
+   "city": "PETERSBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024368",
+   "permittee": "PORTAGE WATER RECLAMATION FACILITY",
+   "city": "PORTAGE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024392",
+   "permittee": "PRINCETON  WASTEWATER TREATMENT PLANT",
+   "city": "PRINCETON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024414",
+   "permittee": "RENSSELAER WWTP, CITY OF",
+   "city": "RENSSELAER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024449",
+   "permittee": "ROCKVILLE MUNICIPAL WWTP",
+   "city": "ROCKVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024457",
+   "permittee": "SCHERERVILLE WWTP",
+   "city": "SCHERERVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024473",
+   "permittee": "SEYMOUR WWTP, CITY OF",
+   "city": "SEYMOUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024520",
+   "permittee": "SOUTH BEND MUNICIPAL WWTP",
+   "city": "SOUTH BEND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024538",
+   "permittee": "SOUTH DEARBORN R.S.D.",
+   "city": "LAWRENCEBURG",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024554",
+   "permittee": "SULLIVAN MUNICIPAL WWTP",
+   "city": "SULLIVAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024660",
+   "permittee": "VALPARAISO WWTP",
+   "city": "VALPARAISO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024741",
+   "permittee": "WABASH WWTP",
+   "city": "WABASH",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024821",
+   "permittee": "WEST LAFAYETTE WWTP",
+   "city": "WEST LAFAYETTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024848",
+   "permittee": "WESTVILLE WWTP",
+   "city": "WESTVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0024902",
+   "permittee": "PERU UTILITIES-GRISSOM DIVISION WWTP",
+   "city": "PERU",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025135",
+   "permittee": "AUSTIN WWTP",
+   "city": "AUSTIN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025577",
+   "permittee": "LAPORTE WWTP",
+   "city": "LA PORTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025585",
+   "permittee": "MARION WWTP, CITY OF",
+   "city": "MARION",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025607",
+   "permittee": "TERRE HAUTE WWTP, CITY OF",
+   "city": "TERRE HAUTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025615",
+   "permittee": "RICHMOND WWTP",
+   "city": "RICHMOND",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025623",
+   "permittee": "BEDFORD WASTEWATER TREATMENT PLANT",
+   "city": "BEDFORD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025631",
+   "permittee": "MUNCIE WATER POLLUTION CONTROL FACILITY",
+   "city": "MUNCIE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025640",
+   "permittee": "MISHAWAKA MUNICIPAL WWTP",
+   "city": "MISHAWAKA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025658",
+   "permittee": "WASHINGTON WWTP",
+   "city": "WASHINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025666",
+   "permittee": "MADISON WWTP",
+   "city": "MADISON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025674",
+   "permittee": "ELKHART WWTP",
+   "city": "ELKHART",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025755",
+   "permittee": "GOSHEN  WWTP",
+   "city": "GOSHEN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0025763",
+   "permittee": "CROWN POINT WWTP, CITY OF",
+   "city": "CROWN POINT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0030651",
+   "permittee": "SOUTH HAVEN SEWER WORKS INC WWTP",
+   "city": "VALPARAISO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0031020",
+   "permittee": "VINCENNES WWTP, CITY OF",
+   "city": "VINCENNES",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0031071",
+   "permittee": "IAW - SHERIDAN WWTP",
+   "city": "SHERIDAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0032191",
+   "permittee": "CITY OF FORT WAYNE",
+   "city": "FORT WAYNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0032328",
+   "permittee": "PERU UTILITIES WWTP",
+   "city": "PERU",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0032336",
+   "permittee": "CONNERSVILLE WWTP",
+   "city": "CONNERSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0032476",
+   "permittee": "ANDERSON WWTP",
+   "city": "ANDERSON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0032573",
+   "permittee": "COLUMBUS WWTP, CITY OF",
+   "city": "COLUMBUS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0032719",
+   "permittee": "ELWOOD WWTP, CITY OF",
+   "city": "ELWOOD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0032867",
+   "permittee": "SHELBYVILLE WWTP, CITY OF",
+   "city": "SHELBYVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0032875",
+   "permittee": "KOKOMO WWTP, CITY OF",
+   "city": "KOKOMO",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0032956",
+   "permittee": "EVANSVILLE WEST WWTP",
+   "city": "EVANSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0032964",
+   "permittee": "CRAWFORDSVILLE WWTP, CITY OF",
+   "city": "CRAWFORDSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0032972",
+   "permittee": "SPEEDWAY WWTP",
+   "city": "SPEEDWAY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0033073",
+   "permittee": "EVANSVILLE EAST WWTP",
+   "city": "EVANSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0035378",
+   "permittee": "AQUA INDIANA MAIN ABOITE",
+   "city": "FORT WAYNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0035696",
+   "permittee": "MOUNT VERNON MUNICIPAL WWTP",
+   "city": "MOUNT VERNON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0035718",
+   "permittee": "BLOOMINGTON S (DILLMAN ROAD)",
+   "city": "BLOOMINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0035726",
+   "permittee": "BLOOMINGTON N (BLUCHER POOLE)",
+   "city": "BLOOMINGTON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0036951",
+   "permittee": "ZIONSVILLE WWTP",
+   "city": "ZIONSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0037176",
+   "permittee": "INDIANA AMERICAN WATER COMPANY INC",
+   "city": "CROWN POINT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0038334",
+   "permittee": "COUNTY HOME WWTP",
+   "city": "WEST LAFAYETTE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0039241",
+   "permittee": "LOOGOOTEE WASTEWATER TREATMENT PLANT",
+   "city": "LOOGOOTEE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0039268",
+   "permittee": "BATESVILLE WWTP, CITY OF",
+   "city": "HUNTERSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0039314",
+   "permittee": "DECATUR WWTP",
+   "city": "DECATUR",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0039331",
+   "permittee": "DYER WASTEWATER TREATMENT PLANT",
+   "city": "DYER",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0042366",
+   "permittee": "PRINCE'S LAKES WWTP",
+   "city": "TAYLORSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0042391",
+   "permittee": "AQUA INDIANA INC - MIDWEST WWTP",
+   "city": "FORT WAYNE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0047058",
+   "permittee": "CLARKSVILLE WWTP",
+   "city": "CLARKSVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0049026",
+   "permittee": "FALL CREEK REGIONAL WASTE DISTRICT",
+   "city": "PENDLETON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0051632",
+   "permittee": "WEST CENTRAL CONSERVANCY DISTRICT",
+   "city": "AVON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0054402",
+   "permittee": "WESTERN WAYNE RSD",
+   "city": "CAMBRIDGE CITY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0055484",
+   "permittee": "FISHERS CHEENEY CREEK WWTP",
+   "city": "FISHERS",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0055760",
+   "permittee": "TRICO WATER RESOURCE RECOVERY FACILITY",
+   "city": "BOONE COUNTY",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0057614",
+   "permittee": "HENDRICKS COUNTY RSD",
+   "city": "AVON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0058343",
+   "permittee": "WINFIELD  WWTP",
+   "city": "CROWN POINT",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0059544",
+   "permittee": "CITIZENS OF WESTFIELD LLC WWTP",
+   "city": "WESTFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0060917",
+   "permittee": "WARSAW WWTP",
+   "city": "WARSAW",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0061344",
+   "permittee": "HOBART WASTEWATER TREATMENT PLANT",
+   "city": "HOBART",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0061557",
+   "permittee": "STEUBEN LAKES RWD",
+   "city": "ANGOLA",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0062456",
+   "permittee": "PLAINFIELD SOUTH WWTP, TOWN OF",
+   "city": "PLAINFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0062863",
+   "permittee": "CORYDON #2 SATELLITE",
+   "city": "CORYDON",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0063673",
+   "permittee": "JEFFERSONVILLE NORTH WATER RECLAMATION FACILITY",
+   "city": "JEFFERSONVILLE",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0063983",
+   "permittee": "CHESTERFIELD WWTP",
+   "city": "CHESTERFIELD",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0064211",
+   "permittee": "WHITESTOWN SOUTH WWTP",
+   "city": "WHITESTOWN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "IN0064289",
+   "permittee": "HUNTERTOWN WWTP",
+   "city": "FORT WAYNE",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

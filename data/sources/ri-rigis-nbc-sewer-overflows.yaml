@@ -1,0 +1,22 @@
+id: "ri-rigis-nbc-sewer-overflows"
+name: "RIGIS UTILITY_NBC_Sewer_Overflows_spf (NBC CSO and discharge points)"
+url: "https://services2.arcgis.com/S8zZg9pg23JUEexQ/arcgis/rest/services/UTILITY_NBC_Sewer_Overflows_spf/FeatureServer/0"
+homepage: "https://services2.arcgis.com/S8zZg9pg23JUEexQ/arcgis/rest/services/UTILITY_NBC_Sewer_Overflows_spf/FeatureServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/ri, status used, verified fetched, checked 2026-11-01): Second, independent
+#   outfall location set to cross-check the NBC API.
+# Access detail (research, quoted): 93 points, fields OF_ (outfall number) and STATUS (C 89, A 4: OF
+#   29, 31, 40, 66 - A likely abandoned, inferred). Last edit 2024-11-04.
+cadence: "occasional"
+license: "RIGIS item licence: \"This dataset is provided 'as is.' ... Please acknowledge both RIGIS and the primary producer(s) of this dataset in any derived products.\""
+attribution: "NBC; RIGIS"
+enabled: true
+role: "outfalls"
+event_types: []
+states: ["RI"]
+access: ["arcgis"]
+access_detail: "93 points, fields OF_ (outfall number) and STATUS (C 89, A 4: OF 29, 31, 40, 66 - A likely abandoned, inferred). Last edit 2024-11-04."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

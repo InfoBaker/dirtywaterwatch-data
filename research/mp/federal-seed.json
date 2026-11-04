@@ -1,0 +1,24 @@
+{
+ "state": "MP",
+ "source": "data/outfalls-us.json (EPA National CSO Inventory, 2026-10-31) and data/outfalls-plants-us.json (EPA ICIS-NPDES permitted features)",
+ "cso_permits": [],
+ "cso_open_outfalls": 0,
+ "plant_permits": 3,
+ "plant_permits_major": 2,
+ "major_plant_permits": [
+  {
+   "npdes_permit": "MP0020010",
+   "permittee": "COMMONWEALTH UTILITIES CORP",
+   "city": "SAIPAN",
+   "major": "Major",
+   "status": "EFF"
+  },
+  {
+   "npdes_permit": "MP0020028",
+   "permittee": "COMMONWEALTH UTILITIES CORP",
+   "city": "SAIPAN",
+   "major": "Major",
+   "status": "EFF"
+  }
+ ]
+}

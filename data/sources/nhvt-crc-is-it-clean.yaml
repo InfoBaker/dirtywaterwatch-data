@@ -1,0 +1,30 @@
+id: "nhvt-crc-is-it-clean"
+name: "Connecticut River Conservancy 'Is It Clean?' E. coli map (connecticutriver.us)"
+url: "https://connecticutriver.us/"
+homepage: "https://connecticutriver.us/"
+kind: "html"
+level: "nonprofit"
+# Notes (research/nh-vt, status candidate, verified fetched, checked 2026-11-01): Covers VT/NH
+#   Connecticut tributaries (Black, White, Ottauquechee, Ashuelot) where no state beach data exist;
+#   swim/boat categories map to boating vs swimming exposure.
+# Access detail (research, quoted): connecticutriver.us answers 200; connecticutriver.org timed out.
+#   Site list carries per-site data attributes (value, data-date, data-latitude, data-longtitude
+#   [sic], data-waterbody, data-quality [latest E. coli], data-state, data-town,
+#   data-clean-dry/-wet, data-boat-wet/-dry, data-not-clean-*, data-organization, data-slug). Sample
+#   saved by the failed sub-agent: raw/mon-isitclean-sites-sample.json.
+# Can fill: reported_at (sample date), coordinates, waterbody, raw_record
+# Cannot fill: any discharge field
+# Research notes: Monitoring-group sweep done briefly after the delegated sweep failed; reachability
+#   tested with curl 2026-11-01.
+cadence: "Weekly at many sites in season (press: results ~24 h after sampling); some VT tributary sites stale (e.g. Black River at Mill Road last 2016)."
+license: "none stated"
+attribution: "Connecticut River Conservancy with partner groups (Black River Action Team, White River NRCD, Ottauquechee River Group, Ashuelot River LAC)"
+enabled: true
+role: "monitoring"
+event_types: ["bacteria"]
+states: ["NH", "VT"]
+access: ["html", "map_only"]
+access_detail: "connecticutriver.us answers 200; connecticutriver.org timed out. Site list carries per-site data attributes (value, data-date, data-latitude, data-longtitude [sic], data-waterbody, data-quality [latest E. coli], data-state, data-town, data-clean-dry/-wet, data-boat-wet/-dry, data-not-clean-*, data-organization, data-slug). Sample saved by the failed sub-agent: raw/mon-isitclean-sites-sample.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-01"

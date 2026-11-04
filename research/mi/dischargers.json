@@ -1,0 +1,1463 @@
+[
+ {
+  "id": "mi-cheboygan-wwtp-mi0020303",
+  "name": "CHEBOYGAN WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0020303",
+  "receiving_waters": [
+   "Cheboygan River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Cheboygan"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-morenci-wwsl-mi0020681",
+  "name": "MORENCI WWSL",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0020681",
+  "receiving_waters": [
+   "BEAN CREEK AND SILVER CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 13,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 13 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Morenci"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-croswell-wwtp-mi0021083",
+  "name": "CROSWELL WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0021083",
+  "receiving_waters": [
+   "Black River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Croswell"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-yale-wwsl-mi0021270",
+  "name": "YALE WWSL",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0021270",
+  "receiving_waters": [
+   "MIG580325"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Yale"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-wakefield-wwsl-mi0021440",
+  "name": "WAKEFIELD WWSL",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0021440",
+  "receiving_waters": [
+   "Planter Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Wakefield"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-capac-wwsl-mi0021733",
+  "name": "CAPAC WWSL",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0021733",
+  "receiving_waters": [
+   "LEMON DRAIN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Capac"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-bay-city-wwtp-mi0022284",
+  "name": "BAY CITY WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0022284",
+  "receiving_waters": [
+   "SAGINAW RIVER",
+   "Saginaw River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 5 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.baycitymi.gov/354/Wastewater (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Bay City"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-glwa-wrrf-mi0022802",
+  "name": "GLWA WRRF",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0022802",
+  "receiving_waters": [
+   "Conner Creek",
+   "Detroit River",
+   "Rouge River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 9 open, 0 closed",
+  "notification_channel": "MiEnviro CSO/SSO list within 4 hours (GLWA CSO Public Notification Plan 2018, VI.2), plus email/fax to listed municipalities and health departments; https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Detroit"
+  ],
+  "notes": "Largest Michigan CSO permittee. Initial MiEnviro rows (e.g. HQS-P25H-0AHKY, 2026-10-29) carried no permit number or receiving water.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-east-lansing-wrrf-mi0022853",
+  "name": "EAST LANSING WRRF",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0022853",
+  "receiving_waters": [
+   "Red Cedar River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.cityofeastlansing.com/1984/Combine-Sewer-Overflow (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "East Lansing"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-essexville-cso-rtb-mi0022918",
+  "name": "ESSEXVILLE CSO RTB",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0022918",
+  "receiving_waters": [
+   "Saginaw River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: http://essexville.org/ (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Essexville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-gladwin-wwtp-mi0023001",
+  "name": "GLADWIN WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0023001",
+  "receiving_waters": [
+   "Cedar River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Gladwin"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-iron-mountain-kingsford-wwtp-mi0023205",
+  "name": "IRON MOUNTAIN-KINGSFORD WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0023205",
+  "receiving_waters": [
+   "Menominee River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.kingsfordmi.gov/174/Wastewater (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Kingsford"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-lansing-wwtp-mi0023400",
+  "name": "LANSING WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0023400",
+  "receiving_waters": [
+   "Grand River",
+   "Red Cedar River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 20,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 20 open, 19 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.lansingmi.gov/458/Wet-Weather-Control-Program (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Lansing"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-manistique-wwtp-mi0023515",
+  "name": "MANISTIQUE WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0023515",
+  "receiving_waters": [
+   "Manistique River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Manistique"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-mt-clemens-wwtp-mi0023647",
+  "name": "MT CLEMENS WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0023647",
+  "receiving_waters": [
+   "Clinton River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.cityofmountclemens.com/wastewater (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Mount Clemens"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-niles-wwtp-mi0023701",
+  "name": "NILES WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0023701",
+  "receiving_waters": [
+   "St. Joseph River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: http://www.nilesmi.org/departments_and_divisions/utilities_department/cso_sso_public_notification.php (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Niles"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-port-huron-wwtp-mi0023833",
+  "name": "PORT HURON WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0023833",
+  "receiving_waters": [
+   "Black River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.porthuron.org/government/departments/public_works/divisions/water_filtration_wastewater_treatment.php (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Port Huron"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-saginaw-twp-wwtp-mi0023973",
+  "name": "SAGINAW TWP WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0023973",
+  "receiving_waters": [
+   "Tittabawassee River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.saginawtownship.org/departments/public_services/waste_water.php (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Saginaw"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-sault-ste-marie-wwtp-mi0024058",
+  "name": "SAULT STE MARIE WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0024058",
+  "receiving_waters": [
+   "Edison Power Canal",
+   "St. Mary's River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 5 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Sault Ste Marie"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-martin-rtb-mi0025453",
+  "name": "MARTIN RTB",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0025453",
+  "receiving_waters": [
+   "Lake St. Clair"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Saint Clair Shores"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-city-of-bloomfield-hills-mi0025461",
+  "name": "CITY OF BLOOMFIELD HILLS",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0025461",
+  "receiving_waters": [
+   "ROUGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Bloomfield Hills"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-milk-river-cso-rtb-mi0025500",
+  "name": "MILK RIVER CSO RTB",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0025500",
+  "receiving_waters": [
+   "Milk River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://semsd.org/public-outreach/ (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Grosse Pointe Woods"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-birmingham-cso-rtb-mi0025534",
+  "name": "BIRMINGHAM CSO RTB",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0025534",
+  "receiving_waters": [
+   "Rouge River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.bhamgov.org/about_birmingham/city_departments/engineering_department/sewers.php (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Birmingham"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-dearborn-cso-mi0025542",
+  "name": "DEARBORN CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0025542",
+  "receiving_waters": [
+   "Lower Rouge River",
+   "Rogue River",
+   "Rouge River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 9,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 9 open, 5 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: http://cityofdearborn.org/documents/city-departments/public-works/water-and-sewerage/cso-and-rbt-reporting (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Dearborn"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-saginaw-wwtp-mi0025577",
+  "name": "SAGINAW WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0025577",
+  "receiving_waters": [
+   "Saginaw River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.saginawtownship.org/departments/public_services/waste_water.php (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Saginaw"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-chapaton-rtb-mi0025585",
+  "name": "CHAPATON RTB",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0025585",
+  "receiving_waters": [
+   "Chapaton Canal"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Saint Clair Shores"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-grand-rapids-wrrf-mi0026069",
+  "name": "GRAND RAPIDS WRRF",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0026069",
+  "receiving_waters": [
+   "Grand River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.grandrapidsmi.gov/Government/Departments/Environmental-Services/Wastewater-Treatment (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Grand Rapids"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-grosse-pointe-farms-mi0026077",
+  "name": "GROSSE POINTE FARMS",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0026077",
+  "receiving_waters": [
+   "LAKE ST. CLAIR"
+  ],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 7 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Grosse Pointe Farms"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-grosse-pointe-shores-cso-mi0026085",
+  "name": "GROSSE POINTE SHORES CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0026085",
+  "receiving_waters": [
+   "COMBINED SEWAGE TO LK.ST.CLAIR ONLY"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Grosse Pointe Shores"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-george-w-kuhn-dr-dist-cso-rtb-mi0026115",
+  "name": "GEORGE W KUHN DR DIST CSO RTB",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0026115",
+  "receiving_waters": [
+   "Red Run Drain"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Madison Heights"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-st-joseph-cso-mi0026735",
+  "name": "ST JOSEPH CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0026735",
+  "receiving_waters": [
+   "St. Joseph River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "St. Joseph"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-ecorse-cso-mi0028525",
+  "name": "ECORSE CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0028525",
+  "receiving_waters": [
+   "DETROIT RIVER-CICOTTE AVE/HIGHSTRET"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Ecorse"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-river-rouge-cso-rtb-mi0028819",
+  "name": "RIVER ROUGE CSO RTB",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0028819",
+  "receiving_waters": [
+   "Rouge River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "River Rouge"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-belleville-cso-mi0035696",
+  "name": "BELLEVILLE CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0035696",
+  "receiving_waters": [
+   "BELLEVILLE LAKE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Belleville"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-southgate-wyandotte-cso-rtf-mi0036072",
+  "name": "SOUTHGATE-WYANDOTTE CSO RTF",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0036072",
+  "receiving_waters": [
+   "Trenton Channel of the Detroit River",
+   "Trenton Channel via the Pine St Pump Station"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Wyandotte"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-grosse-pointe-park-cso-mi0037273",
+  "name": "GROSSE POINTE PARK CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0037273",
+  "receiving_waters": [
+   "FOX CREEK-DETROIT RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Grosse Pointe Park"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-oakland-co-acacia-park-cso-rtb-mi0037427",
+  "name": "OAKLAND CO-ACACIA PARK CSO RTB",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0037427",
+  "receiving_waters": [
+   "Rouge River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.oakgov.com/government/water-resources-commissioner/wastewater (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Beverly Hills"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-oakland-co-dpw-farm-evergr-cso-mi0037621",
+  "name": "OAKLAND CO DPW-FARM EVERGR CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0037621",
+  "receiving_waters": [
+   "ROUGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Farmington Hills"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-north-houghton-co-w-sa-cso-mi0043982",
+  "name": "NORTH HOUGHTON CO W&SA CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0043982",
+  "receiving_waters": [
+   "St. Louis Creek",
+   "unnamed drainage to Hammell Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Calumet"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-bloomfield-village-cso-rtb-mi0048046",
+  "name": "BLOOMFIELD VILLAGE CSO RTB",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0048046",
+  "receiving_waters": [
+   "unnamed tributary of the Rouge River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.bloomfieldtwp.org/publicworks/water-and-sewer/ (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Birmingham"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-city-of-crystal-falls-mi0048879",
+  "name": "CITY OF CRYSTAL FALLS",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0048879",
+  "receiving_waters": [
+   "PAINT RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Crystal Falls"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-wayne-co-inkster-drbrn-hts-cso-mi0051462",
+  "name": "WAYNE CO/INKSTER/DRBRN HTS CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051462",
+  "receiving_waters": [
+   "Lower Rouge River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.waynecounty.com/departments/environmental/home.aspx (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Inkster"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-wayne-co-inkster-cso-mi0051471",
+  "name": "WAYNE CO/INKSTER CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051471",
+  "receiving_waters": [
+   "Lower Rouge River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 1 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.waynecounty.com/departments/environmental/home.aspx (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Inkster"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-wayne-co-dearborn-heights-cso-mi0051489",
+  "name": "WAYNE CO/DEARBORN HEIGHTS CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051489",
+  "receiving_waters": [
+   "Lower Rouge River",
+   "Middle Rouge River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 1 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.waynecounty.com/departments/environmental/home.aspx (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Dearborn Heights"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-city-of-westland-mi0051497",
+  "name": "CITY OF WESTLAND",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051497",
+  "receiving_waters": [
+   "MIDDLE ROUGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westland"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-city-of-westland-mi0051501",
+  "name": "CITY OF WESTLAND",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051501",
+  "receiving_waters": [
+   "LOWER ROUGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westland"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-wayne-co-rdfrd-livonia-cso-mi0051535",
+  "name": "WAYNE CO/RDFRD/LIVONIA CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051535",
+  "receiving_waters": [
+   "Upper Rouge River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 8,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 8 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.waynecounty.com/departments/environmental/home.aspx (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Redford Township"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-city-of-garden-city-mi0051543",
+  "name": "CITY OF GARDEN CITY",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051543",
+  "receiving_waters": [
+   "MIDDLE ROUGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 2 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Garden City"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-wayne-co-livonia-cso-mi0051551",
+  "name": "WAYNE CO-LIVONIA CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051551",
+  "receiving_waters": [
+   "MIDDLE ROUGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 3 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westland"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-wayne-co-livonia-westland-cso-mi0051560",
+  "name": "WAYNE CO-LIVONIA/WESTLAND CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051560",
+  "receiving_waters": [
+   "MIDDLE ROUGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westland"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-livonia-cso-mi0051802",
+  "name": "LIVONIA CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051802",
+  "receiving_waters": [
+   "MIDDLE ROUGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Westland"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-dearborn-heights-cso-mi0051811",
+  "name": "DEARBORN HEIGHTS CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051811",
+  "receiving_waters": [
+   "MIDDLE ROUGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 0,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 0 open, 1 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dearborn Heights"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-redford-twp-cso-mi0051829",
+  "name": "REDFORD TWP CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051829",
+  "receiving_waters": [
+   "Ashcroft-Sherwood Drain"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Redford"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-inkster-dearborn-heights-cso-mi0051837",
+  "name": "INKSTER/DEARBORN HEIGHTS CSO",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0051837",
+  "receiving_waters": [
+   "LOWER ROUGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.cityofinkster.com/284/Water-Sewer-Division (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Inkster"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-dearborn-cso-dewatering-mi0054356",
+  "name": "DEARBORN CSO DEWATERING",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0054356",
+  "receiving_waters": [
+   "ROUGE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 4 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Dearborn"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-enbridge-line-6b-marshall-mig081156",
+  "name": "ENBRIDGE LINE 6B-MARSHALL",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MIG081156",
+  "receiving_waters": [
+   "Kalamazoo River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 10,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 10 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Marshall"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-enbridge-energy-st-ignace-mig081159",
+  "name": "ENBRIDGE ENERGY-ST IGNACE",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MIG081159",
+  "receiving_waters": [
+   "Lake Michigan"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Saint Ignace"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-mrp-properties-co-mt-pleasant-mig081161",
+  "name": "MRP PROPERTIES CO-MT PLEASANT",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MIG081161",
+  "receiving_waters": [
+   "Chippewa River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Mount Pleasant"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-speedway-8860-sterling-hts-mig081165",
+  "name": "SPEEDWAY 8860-STERLING HTS",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MIG081165",
+  "receiving_waters": [
+   "Clinton River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA National CSO Inventory (data/outfalls-us.json): 1 open, 0 closed",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own channel not searched",
+  "notification_feed_machine_readable": false,
+  "towns": [
+   "Sterling Heights"
+  ],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-chapaton-rtb-mi10025585",
+  "name": "Chapaton RTB",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI10025585",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Not in EPA CSO inventory extract for this state; listed on EPA's Great Lakes CSO page",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-croswell-wwtp-mi10021083",
+  "name": "Croswell WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI10021083",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Not in EPA CSO inventory extract for this state; listed on EPA's Great Lakes CSO page",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-dundee-wwtp-mi0020401",
+  "name": "Dundee WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0020401",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Not in EPA CSO inventory extract for this state; listed on EPA's Great Lakes CSO page",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-manistee-wwtp-mi0020362",
+  "name": "Manistee WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0020362",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Not in EPA CSO inventory extract for this state; listed on EPA's Great Lakes CSO page",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.manisteemi.gov/191/Combined-Sewer-Overflow (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-marysville-wwtp-mi0020656",
+  "name": "Marysville WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0020656",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Not in EPA CSO inventory extract for this state; listed on EPA's Great Lakes CSO page",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.cityofmarysvillemi.com/departments/public_service/department_of_public_works/index.php (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-menominee-wwtp-mi0025631",
+  "name": "Menominee WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0025631",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Not in EPA CSO inventory extract for this state; listed on EPA's Great Lakes CSO page",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-norway-wwtp-mi0020214",
+  "name": "Norway WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0020214",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Not in EPA CSO inventory extract for this state; listed on EPA's Great Lakes CSO page",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list; own website listed by EPA: https://www.norwaymi.gov/departments/norway_public_utilities/wastewater_department.php (not fetched)",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-st-clair-wwtp-mi0020591",
+  "name": "St. Clair WWTP",
+  "state": "MI",
+  "kind": "cso",
+  "npdes_permit": "MI0020591",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": "Not in EPA CSO inventory extract for this state; listed on EPA's Great Lakes CSO page",
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [],
+  "notes": "",
+  "verified": "inferred",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-oakland-county-water-resources-commissioner-s-office-sanitary-systems",
+  "name": "Oakland County Water Resources Commissioner's Office (sanitary systems)",
+  "state": "MI",
+  "kind": "sso",
+  "npdes_permit": null,
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Novi"
+  ],
+  "notes": "SSO row 2026-11-02 (Novi CM) seen in MiEnviro list.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-bath-charter-township",
+  "name": "Bath Charter Township",
+  "state": "MI",
+  "kind": "sso",
+  "npdes_permit": "3112a-0707",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Bath"
+  ],
+  "notes": "Force main break SSO 2026-10-30 seen in MiEnviro list.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-city-of-traverse-city",
+  "name": "City of Traverse City",
+  "state": "MI",
+  "kind": "sso",
+  "npdes_permit": "3112a-0890",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Traverse City"
+  ],
+  "notes": "Manhole SSO 2026-10-30 seen in MiEnviro list.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ },
+ {
+  "id": "mi-city-of-kalamazoo",
+  "name": "City of Kalamazoo",
+  "state": "MI",
+  "kind": "sso",
+  "npdes_permit": "3112a-0546",
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "EGLE MiEnviro CSO/SSO list, statutory state posting under MCL 324.3112a(2): https://mienviro.michigan.gov/ncore/external/overflow/list",
+  "notification_feed_machine_readable": true,
+  "towns": [
+   "Kalamazoo"
+  ],
+  "notes": "Completed SSO 2026-10-05 (300 gal) seen in MiEnviro list.",
+  "verified": "fetched",
+  "checked": "2026-11-03"
+ }
+]

@@ -1,0 +1,21 @@
+id: "nhdes-data-and-mapping-page"
+name: "NHDES Data and Mapping page (Geodata Portal, OneStop Data Mapper, EMD)"
+url: "https://www.des.nh.gov/resource-center/data-and-mapping"
+homepage: "https://www.des.nh.gov/resource-center/data-and-mapping"
+kind: "html"
+level: "state"
+# Notes (research/nh-vt, status used, verified fetched, checked 2026-11-01): Index of NHDES data
+#   tools; no overflow tool listed.
+# Access detail (research, quoted): none recorded
+cadence: null
+license: "none stated"
+attribution: "NHDES"
+enabled: true
+role: "monitoring"
+event_types: []
+states: ["NH"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-01"
