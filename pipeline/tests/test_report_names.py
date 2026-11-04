@@ -285,7 +285,7 @@ def test_the_file_keeps_the_names_still_missing_with_their_reasons(tmp_path):
     assert d["rows"][1]["towns"] == ["Lawrenceville"] and d["rows"][1]["places_failed"][0]["town"] == "Lawrenceville"
     assert d["rows"][2]["reason"] == "a storm-sewer system (MS4), not a named water"
     assert d["resolved"] == [{"name": "Mountain Creek", "reports": 35, "slugs": ["mountain-creek-nc"],
-                              "how": "record built from the name"}]
+                              "how": "record built from the name", "points": [[35.36, -80.14]]}]
     assert d["resolved_names"] == 1 and d["build"]["records_built"] == 1 and "--names" in d["build"]["command"]
     assert all("_parts" not in r for r in d["rows"])
 
@@ -323,3 +323,130 @@ def test_a_towns_name_with_no_water_of_that_name_says_so():
     t = name_target("Coral Springs", points=[(-78.0, 35.55)])
     _, reason, _ = N.report_name_choices(fake_nhd(None, {"Coral Springs": town}), t)
     assert reason.startswith("the name of a town (Coral Springs)") and not N.wants_hr(reason)
+
+
+# ---------------------------------------------------------------- 2026-11-04 review
+
+def test_a_lake_name_either_way_round_is_the_same_existing_record(monkeypatch):
+    existing = {"lake-lawne-fl": {"slug": "lake-lawne-fl", "name": "Lake Lawne", "state": "FL", "kind": "lake",
+                                  "towns": ["Orlando"], "bbox": [-81.44262, 28.55758, -81.43216, 28.56999]},
+                "lawne-creek-fl": {"slug": "lawne-creek-fl", "name": "Lawne Creek", "state": "FL"}}
+    assert N.same_named_existing(existing, "FL", "Lawne Lake") == ["lake-lawne-fl"]
+    assert N.same_named_existing(existing, "FL", "Lake Lawne") == ["lake-lawne-fl"]
+    assert N.same_named_existing(existing, "GA", "Lawne Lake") == []
+    assert N.same_named_existing(existing, "FL", "Lawne Pond") == []
+    # the report name's record: GNIS's 'Lawne Lake' over openboatlaunch's Lake Lawne (no outline on this machine)
+    poly = box(-81.44255, 28.55767, -81.43336, 28.56987)
+    monkeypatch.setattr(N, "build_feature", lambda nhd, st, c: {
+        "name": "Lawne Lake", "state": "FL", "_geom": poly, "towns": ["Orlando", "Pine Hills"], "length_km": None,
+        "area_km2": 0.623, "note": "x", "aliases": []})
+    monkeypatch.setattr(N.S, "water_geometry", lambda slug, waters: None)
+    run = SimpleNamespace(nhd=None, existing=existing)
+    t = N.Target(state="FL", name="Lawne Lake", words=N.words("Lawne Lake"), points=Counter({(-81.442, 28.569): 1}),
+                 towns=Counter())
+    rec = N.Run.new_record(run, ("wb", "FL", "285401"), {"type": "wb"}, t, {"reason": None})
+    assert rec == {"_existing": "lake-lawne-fl"}
+
+
+def slug_rec(name, towns, slug_towns, weight, gnis):
+    return {"name": name, "state": "NC", "towns": towns, "_slug_towns": Counter(slug_towns), "_weight": weight,
+            "gnis_id": gnis, "comids": [int(gnis)]}
+
+
+def test_a_slugs_town_is_one_the_record_reaches_not_the_first_town_of_the_whole_name():
+    listed = {"Charlotte": 0, "Raleigh": 0, "Garner": 0, "Wake Forest": 0}      # the reports' towns, the whole name
+    charlotte = slug_rec("Brier Creek", ["Charlotte"], {**listed, "Charlotte": 14}, 14, "1")
+    raleigh = slug_rec("Brier Creek", ["Cary", "Raleigh"], listed, 12, "2")       # its point lies in no Census place
+    nowhere = slug_rec("Brier Creek", [], listed, 1, "3")
+    N.assign_slugs([charlotte, raleigh, nowhere], {})
+    assert charlotte["slug"] == "brier-creek-nc"
+    assert raleigh["slug"] == "brier-creek-raleigh-nc"         # a listed town it reaches, not Charlotte
+    assert nowhere["slug"] == "brier-creek-charlotte-nc"       # nothing better known: a listed town still
+    assert N.slug_towns(slug_rec("X Creek", ["Cary"], {"Apex": 3, "Durham": 0}, 3, "4")) == ["Apex", "Cary", "Durham"]
+
+
+def test_two_waters_of_the_name_crossing_a_town_choose_neither():
+    town = box(-80.1, 35.0, -77.9, 35.6)                    # crosses Mill Creek 1 and Mill Creek 2
+    t = name_target("Mill Creek", towns=["Big Town"])
+    choices, reason, failed = N.report_name_choices(fake_nhd(None, {"Big Town": town}), t)
+    assert choices == [] and "none within reach" in reason
+    assert failed == [{"town": "Big Town", "reason": "two NHD waters of that name lie equally near Big Town"}]
+
+
+@pytest.mark.parametrize("text,expected", [
+    ("Ocean Breeze Waterway", ["Ocean Breeze Waterway"]),
+    ("Ocean Pond", ["Ocean Pond"]),
+    ("Cedar Hammock Drainage Canal", ["Cedar Hammock Drainage Canal"]),
+    ("Johnson Drainage Ditch", ["Johnson Drainage Ditch"]),
+    ("Atlantic Ocean", []),
+    ("ocean", []),
+    ("Ocean water", []),
+    ("ocean side beach", []),
+    ("Drainage canal", []),
+    ("storm drainage ditch", []),
+    ("Nearby creek", []),
+])
+def test_a_water_named_with_ocean_or_drainage_in_it_is_still_a_name(text, expected):
+    assert N.report_name_parts(text)[0] == expected
+
+
+class FakeResolver:
+    def __init__(self, answers):
+        self.answers = answers
+
+    def by_name(self, text, st, lat, lon, ev):
+        return self.answers.get(text, ([], None, False))
+
+    def guard(self, slugs, ev):
+        return [s for s in slugs if s != "far-away-nc"], []
+
+
+def test_the_status_resolver_must_place_a_resolved_spelling_on_its_record():
+    r = FakeResolver({"Allen Creek": (["allen-creek-fl"], None, False),
+                      "South Fork of Middle River": (["middle-river-fl"], None, False),
+                      "Matanzas River": ([], "'matanzas river' names 2 waters in FL (matanzas-river-fl, "
+                                             "matanzas-river-saint-augustine-fl); no point", True),
+                      "Long Branch": (["far-away-nc"], None, False)})
+    row = {"points": [[27.92, -82.75]], "towns": ["Clearwater"]}
+    assert N.resolver_places(r, "Allen Creek", "FL", row, ["allen-creek-fl"])
+    assert not N.resolver_places(r, "Allen's Creek", "FL", row, ["allen-creek-fl"])          # no alias: unplaced
+    assert not N.resolver_places(r, "South Fork of Middle River", "FL", row, ["south-fork-middle-river-fl"])
+    assert N.resolver_places(r, "Matanzas River", "FL", row, ["matanzas-river-saint-augustine-fl"])
+    assert not N.resolver_places(r, "Long Branch", "NC", row, ["far-away-nc"])               # set aside by the guard
+
+
+def test_a_resolved_name_the_resolver_does_not_place_stays_with_its_record_named(tmp_path):
+    path = tmp_path / "missing.json"
+    rows = [{"name": "Allen Creek", "reports": 3, "points": [[27.92, -82.75]], "towns": ["Clearwater"],
+             "_parts": ["Allen Creek"]},
+            {"name": "Allen's Creek", "reports": 2, "points": [[27.93, -82.73]], "_parts": ["Allen's Creek"]}]
+    out_rows = [{"name": "Allen Creek", "from": "reports", "slugs": ["allen-creek-fl"], "defined_by": "name",
+                 "how": ["GNIS name in FL, 922 m from the reports' point"],
+                 "places_failed": [{"town": "Tampa", "reason": "no NHD water of that name within 3 km of Tampa"}]},
+                {"name": "Allen's Creek", "from": "reports", "slugs": ["allen-creek-fl"], "defined_by": "name",
+                 "how": ["GNIS name in FL, 938 m from the reports' point; the same NHD feature as record allen-creek-fl"]}]
+    stats = {"built": "2026-11-04T07:00:00Z", "file": "research/fl/receiving-waters-missing.json", "records": 1,
+             "network_requests": 0}
+    N.rewrite_names(path, {"state": "FL"}, "FL", rows, out_rows, {}, stats,
+                    placed=lambda text, r, slugs: "'" not in text)
+    d = json.loads(path.read_text())
+    assert [r["name"] for r in d["resolved"]] == ["Allen Creek"]
+    res = d["resolved"][0]
+    assert res["points"] == [[27.92, -82.75]] and res["towns"] == ["Clearwater"]          # its places are kept
+    assert res["places_failed"][0]["town"] == "Tampa"
+    left = d["rows"][0]
+    assert left["name"] == "Allen's Creek" and left["records"] == ["allen-creek-fl"]
+    assert left["reason"].startswith("a water record holds this water but not this spelling (allen-creek-fl): a report")
+    assert d["by_reason"] == {"a water record holds this water but not this spelling: a report of it is not placed "
+                              "there until the spelling is an alias": 1}
+
+
+def test_resolved_names_no_longer_placed_are_asked_again():
+    meta = {"resolved": [{"name": "Allen Creek", "reports": 3, "slugs": ["allen-creek-fl"], "how": "x",
+                          "points": [[27.92, -82.75]]},
+                         {"name": "Lawne Lake", "reports": 1, "slugs": ["lawne-lake-fl"], "how": "x",
+                          "points": [[28.569, -81.442]], "towns": ["Apopka"]}]}
+    r = FakeResolver({"Allen Creek": (["allen-creek-fl"], None, False)})
+    back = N.recheck_resolved(meta, "FL", r)
+    assert [x["name"] for x in meta["resolved"]] == ["Allen Creek"]
+    assert back == [{"name": "Lawne Lake", "reports": 1, "points": [[28.569, -81.442]], "towns": ["Apopka"]}]

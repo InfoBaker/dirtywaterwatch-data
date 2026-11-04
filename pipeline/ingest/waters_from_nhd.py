@@ -1700,13 +1700,32 @@ def TOWNS_FROM(state: str) -> str:
             else "Census 2020 county subdivisions crossed (TIGERweb)")
 
 
-def same_named_existing(existing: dict, state: str, name: str) -> list[str]:
+INVERTIBLE_KIND = ("lake", "bayou")
+
+
+def name_forms(name: str) -> set[str]:
+    """A water's name normalised (status.norm_name), with the lake or bayou word on the other side as well: GNIS's
+    'Lawne Lake' is openboatlaunch's 'Lake Lawne' (2026-11-04 review: a report-name record duplicated it)."""
     n = S.norm_name(name or "")
+    out = {n} if n else set()
+    m = re.fullmatch(rf"({'|'.join(INVERTIBLE_KIND)}) (.+)", n)
+    if m:
+        out.add(f"{m.group(2)} {m.group(1)}")
+    m = re.fullmatch(rf"(.+) ({'|'.join(INVERTIBLE_KIND)})", n)
+    if m:
+        out.add(f"{m.group(2)} {m.group(1)}")
+    return out
+
+
+def same_named_existing(existing: dict, state: str, name: str) -> list[str]:
+    """The existing records of the state that carry the name (their name or an alias, spelling aside, the lake or
+    bayou word on either side: name_forms); the geometry then decides whether one is the same water."""
+    forms = name_forms(name)
     out = []
     for slug, w in existing.items():
         if w.get("state") != state:
             continue
-        if S.norm_name(w.get("name") or "") == n or n in {S.norm_name(a) for a in w.get("aliases") or []}:
+        if ({S.norm_name(w.get("name") or "")} | {S.norm_name(a) for a in w.get("aliases") or []}) & forms:
             out.append(slug)
     return out
 
@@ -1972,6 +1991,20 @@ def previous_rows(path=None) -> list[tuple]:
     return out
 
 
+def slug_towns(r: dict) -> list[str]:
+    """The towns a record's slug may take, in order: the towns of the report points near it (most reports first), the
+    listed towns (operators' or reports' towns, no weight) that the record reaches, the towns it crosses, then the
+    other listed towns. A listed town comes from the whole target, which may name the water in several places
+    (2026-11-04 review: 'brier-creek-charlotte-nc' was the Brier Creek at Raleigh, as the reports' first town was
+    Charlotte's)."""
+    weighted = [x for x, n in r["_slug_towns"].most_common() if n]
+    listed = [x for x, n in r["_slug_towns"].items() if not n]
+    along = list(r.get("towns") or [])
+    keys = {town_key(x) for x in along}
+    reached = [x for x in listed if town_key(x) in keys]
+    return list(dict.fromkeys(weighted + reached + along + listed))
+
+
 def assign_slugs(recs: list[dict], existing: dict, previous: dict | None = None, kept: list | None = None) -> None:
     """Slugs: <name>-<st> for the record of a name with the most reports, <name>-<town>-<st> for the others
     and when the name is already a record of the state. previous ({water_identity: slug}, previous_slugs()):
@@ -2016,7 +2049,7 @@ def assign_slugs(recs: list[dict], existing: dict, previous: dict | None = None,
             if r is first and not exists and base not in taken:
                 slug = base
             else:
-                for tw in [x for x, _ in r["_slug_towns"].most_common()] + list(r["towns"]):
+                for tw in slug_towns(r):
                     s = f"{slugify(r['name'])}-{slugify(tw)}-{state.lower()}"
                     if s not in taken:
                         slug = s
@@ -3701,6 +3734,8 @@ def report_name_parts(text: str) -> tuple[list[str], str | None, bool]:
     parts, why = national_parts(t)
     if not parts and why and why.startswith(("a county", "a road")) and has_kind(words(t)):
         parts = split_names(t, False)       # 'County Home Branch', 'Mill Road Branch': a water's own name
+    if not parts and named_after_all(t, why):
+        parts = [re.sub(r"\s+", " ", re.sub(r"\(.*?\)", " ", t)).strip(" ,.-")]   # 'Ocean Breeze Waterway'
     if not parts:
         if why and why.startswith("a river basin"):
             why = "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name"
@@ -3710,6 +3745,25 @@ def report_name_parts(text: str) -> tuple[list[str], str | None, bool]:
             why = "a short name with no kind of water (creek, river, lake): not looked up"
         return [], (why or "no water name").replace("in EPA's receiving-water field", "in the report"), False
     return parts, None, tributary
+
+
+def named_after_all(text: str, why: str | None) -> bool:
+    """Whether a report's text the national rules refuse still gives a water's own name: 'ocean' in a name that does not
+    end in it ('Ocean Breeze Waterway', 'Ocean Pond'), a word such as 'drainage' beside a proper name and a kind of
+    water ('Cedar Hammock Drainage Canal'). The name pass then builds a record only for a GNIS name of that spelling
+    at the reports' places (2026-11-04 review: both were refused as the open ocean and as no water name)."""
+    ws = [w for w in words(re.sub(r"\(.*?\)", " ", text)) if w not in ("the", "of", "a", "an")]
+    if not why or len(ws) < 2:
+        return False
+    if why.startswith("the open ocean"):
+        rest = [w for w in ws if w != "ocean"]
+        proper = [w for w in rest if w not in TRAILING_JUNK and w not in ("water", "waters")]
+        return ws[-1] != "ocean" and bool(proper) and (has_kind(rest) or len(proper) >= 2) \
+            and not any(w in NON_NAME or w in WETLAND for w in rest)
+    if why == "not a water name":
+        proper = [w for w in ws if w not in NON_NAME and w not in KIND_WORDS and not w.isdigit()]
+        return bool(proper) and has_kind(ws) and not any(w in WETLAND for w in ws)
+    return False
 
 
 def read_names_file(path) -> tuple[dict, list[dict]]:
@@ -3813,6 +3867,7 @@ def reason_kind(reason: str, multi: bool = False) -> str:
     nearest is 2.2 km away)', '(35.36514, -80.14824)') and, for a text naming several waters, without the water's name."""
     r = re.sub(r"^[^:;(]*?: ", "", reason) if multi else reason
     r = r.split("; ")[0]
+    r = re.sub(r"^(a water record holds this water but not this spelling) \([^)]*\)", r"\1", r)   # the records
     r = re.sub(r"\s*\((?=[^()]*(\d+\.\d|\d{4}-\d\d))[^()]*\)", "", r)       # a distance, a point or a date
     return r.strip()[:120]
 
@@ -4030,7 +4085,8 @@ def report_name_choices(nhd: Nhd, t) -> tuple[list[tuple], str | None, list[dict
         g, label, lim, where = place
         scored = sorted((0.0 if G.intersects(g) else geom_dist_m(G, g), k) for k, G in geoms.items())
         d0, k0 = scored[0]
-        if d0 <= lim and (len(scored) == 1 or scored[1][0] > d0 or d0 == 0):
+        # two waters of the name both crossing a town (or both through a point) are equally near: neither is chosen
+        if d0 <= lim and (len(scored) == 1 or scored[1][0] > d0):
             chosen.setdefault(k0, f"GNIS name in {st}, {'crossing' if d0 == 0 else f'{d0:.0f} m from'} {label}{several}")
         elif d0 <= lim:
             failed.append({**where, "reason": f"two NHD waters of that name lie equally near {label}"})
@@ -4119,6 +4175,10 @@ def names_main(args) -> int:
     S._STATES = S.derive_states(existing, S.load_rules(), live_only=False) | {state}
     S._GEOM_CACHE.clear()
     resolver = S.make_resolver(allw)
+    back = recheck_resolved(meta, state, resolver)
+    if back:
+        print(f"report names {state}: {len(back)} resolved names no longer placed on their records, asked again", flush=True)
+        rows = sorted(rows + back, key=lambda r: (-r["reports"], str(r.get("name") or "")))
     targets, done, skipped_reason = collect_name_targets(state, rows, resolver, allw)
     print(f"report names {state}: {len(rows)} names, {len(targets)} waters to build, {len(done)} already a record, "
           f"{len(skipped_reason)} no water", flush=True)
@@ -4257,7 +4317,10 @@ def names_main(args) -> int:
     except WriteRefused as ex:
         print(f"\nNOT WRITTEN: {ex}")
         return 1
-    rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats_out[state])
+    S._GEOM_CACHE.clear()          # the records this run wrote: the status resolver as the hourly run will build it
+    after = S.make_resolver(S.load_waters(include_nhd=True))
+    rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats_out[state],
+                  placed=lambda text, r, slugs: resolver_places(after, text, state, r, slugs))
     print(f"\n{len(recs)} records -> {shown(OUT)}: {describe_write(info)}")
     print(json.dumps(stats_out, indent=1))
     for p in problems[:40]:
@@ -4296,9 +4359,54 @@ def names_stats(state, path, rows, targets, done, out_rows, recs, skipped_reason
             "failed": dict(http.failed), "stopped": run.stopped}
 
 
-def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats) -> None:
+PLACE_KEYS = ("points", "towns", "places_from")
+UNREAD_SPELLING = ("a water record holds this water but not this spelling ({slugs}): a report of it is not placed there "
+                   "until the spelling is an alias (data/water-aliases.json)")
+
+
+def resolver_places(resolver, text: str, state: str, row: dict, slugs) -> bool:
+    """Whether the status resolver places a report of this text, at the places the names file gives for it (each
+    point, else each town, else no place), on one of these records: its name, alias or stem, kept by the placement
+    guard. A name several records share that the resolver cannot choose among here (no outline on this machine, no
+    point) is not held against it when one of them is among the slugs."""
+    pts = [(float(lat), float(lon)) for lat, lon in (row.get("points") or [])[:5]]
+    towns = [str(x) for x in row.get("towns") or [] if x]
+    tries = [(lat, lon, towns[0] if towns else "") for lat, lon in pts] or [(None, None, tw) for tw in towns[:3]] \
+        or [(None, None, "")]
+    want = set(slugs)
+    for lat, lon, tw in tries:
+        ev = {"lat": lat, "lon": lon, "raw": {"state": state, "town": tw}, "waterbody_text": text}
+        got, note, ambiguous = resolver.by_name(text, state, lat, lon, ev)
+        if got:
+            kept, _ = resolver.guard(got, ev)
+            if want & set(kept):
+                return True
+        elif ambiguous and note and any(x in note for x in want):
+            return True
+    return False
+
+
+def recheck_resolved(meta: dict, state: str, resolver) -> list[dict]:
+    """The file's resolved names the status resolver no longer places on their records (a record since dropped by a
+    tidy, an alias since removed), taken out of meta['resolved'] and returned as rows to be asked again with their
+    places. An entry written before resolved names kept their places is checked with no place."""
+    keep, back = [], []
+    for r in meta.get("resolved") or []:
+        if resolver_places(resolver, r["name"], state, r, r.get("slugs") or []):
+            keep.append(r)
+        else:
+            back.append({k: v for k, v in r.items() if k not in ("slugs", "how", "places_failed")})
+    meta["resolved"] = keep
+    return back
+
+
+def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats, placed=None) -> None:
     """The names file rewritten to what is still missing: a row whose every water name now has a record moves to
-    `resolved` (with the slugs); the others stay with their reason (no water, or why each name found no record)."""
+    `resolved` (with the slugs and the row's places); the others stay with their reason (no water, or why each name
+    found no record). placed(text, row, slugs): whether the status resolver places a report of the row's own text on
+    those records (resolver_places); a row it does not stays, its `records` named, with the reason that its spelling
+    needs an alias (2026-11-04 review: "Allen's Creek", "17 Mile River" and "South Fork of Middle River" were listed
+    as resolved while their reports went unplaced or to the Middle River)."""
     by_name = {}
     for r in out_rows:
         if r.get("from") == REPORT_ROWS:
@@ -4306,19 +4414,26 @@ def rewrite_names(path, meta, state, rows, out_rows, skipped_reason, stats) -> N
     left, resolved = [], []
     for r in rows:
         parts = r.pop("_parts", None) or []
-        base = {k: v for k, v in r.items() if k not in ("reason", "places_failed", "parts")}
+        base = {k: v for k, v in r.items() if k not in ("reason", "places_failed", "parts", "records")}
         why = skipped_reason.get((state, r["name"]))
         if not parts:
             left.append({**base, "reason": why or "no water name"})
             continue
         trs = [by_name.get(compact(p)) for p in parts]
         if all(x is not None and x["slugs"] for x in trs):
-            resolved.append({"name": r["name"], "reports": r["reports"],
-                             "slugs": list(dict.fromkeys(s for x in trs for s in x["slugs"])),
+            slugs = list(dict.fromkeys(s for x in trs for s in x["slugs"]))
+            fails = [f for x in trs for f in x.get("places_failed") or []]
+            if placed is not None and not placed(r["name"], r, slugs):
+                left.append({**base, "records": slugs, "reason": UNREAD_SPELLING.format(slugs=", ".join(slugs)),
+                             **({"places_failed": fails[:6]} if fails else {})})
+                continue
+            resolved.append({"name": r["name"], "reports": r["reports"], "slugs": slugs,
                              "how": "; ".join(dict.fromkeys(
                                  ("a water record already holds the name" if (x["how"] or [""])[0].startswith("already")
                                   else "record built from the name" if x.get("defined_by") else "the same water as a "
-                                  "record on file") for x in trs))})
+                                  "record on file") for x in trs)),
+                             **{k: r[k] for k in PLACE_KEYS if r.get(k)},
+                             **({"places_failed": fails[:6]} if fails else {})})
             continue
         bits = []
         for p, x in zip(parts, trs):
