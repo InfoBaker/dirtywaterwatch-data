@@ -219,7 +219,12 @@
   "unresolved_yellow_rationale": "From day 7 to day 30, the map marks the end as unconfirmed. After day 30, the record remains flagged on its report and water pages.",
   "unknown_status_yellow_days": 14,
   "unknown_status_rationale": "A discharge record with unclear status shows caution for 14 days after its report time. It then follows the rule for unconfirmed records.",
-  "end_assumed_rationale": "A report with no end is shown as unresolved for 30 days after it began; after that this site assumes the discharge ended and the record says the end was never reported."
+  "end_assumed_rationale": "A report with no end is shown as unresolved for 30 days after it began; after that this site assumes the discharge ended and the record says the end was never reported.",
+  "day_start_caution": {
+   "sources": ["ga-epd-spills"],
+   "hours": 72,
+   "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
+  }
  },
  "reach": {
   "cap_km": 40,

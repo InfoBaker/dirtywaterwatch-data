@@ -43,6 +43,8 @@ Record rules
   - Times: started_at = the begin date (time_precision day). published_at = the posting date. source_updated_at =
     the workbook's HTTP Last-Modified when given. reported_at null (the list does not say when EPD was told).
     raw._first_seen_posting / _last_seen_posting say which postings showed the row; raw._first_seen_at is our clock.
+    Colour (build/status.py, data/rules.json unresolved.day_start_caution, which lists this source): a row with no end
+    is a caution for 72 hours from the start of its begin day, then unresolved (end not reported) to day 30.
   - Volume: QUANTITY_GALLONS in gallons; blank, or "0" ("A 'zero' in the quantity field indicates the amount of the
     spill has not been determined", EPD's page) -> volume_gal null and volume_text saying so. estimate_flag unknown.
   - Water: WATERWAY_IMPACTED as given in waterbody_text. "Ditch", "Storm Drain", "Basin", "unknown" or blank name no
