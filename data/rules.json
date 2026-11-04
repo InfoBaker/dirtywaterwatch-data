@@ -306,7 +306,15 @@
   "doc": "How a report is linked to a water when it does not say exactly where the sewage went.",
   "no_outfall_all_waters": true,
   "no_outfall_all_waters_basis": "When a combined sewer overflow report does not say which outfall discharged, we show it on every water that the operator's permitted outfalls discharge to, because any of them could have been affected.",
-  "_no_outfall_all_waters_status": "Site default of 2026-11-03, pending the owner's confirmation (docs/decisions.md)."
+  "_no_outfall_all_waters_status": "Site default of 2026-11-03, pending the owner's confirmation (docs/decisions.md).",
+  "text_over_flag": {
+   "sources": [
+    "fl-dep-pnp"
+   ],
+   "rationale": "Some notices say in their description that sewage entered, may have entered or flowed into a named water, while the notice's form answers that no water body was affected. We follow the description, to err on the side of safety: the report is shown on the water its description names, as a caution and never as an advisory, while the discharge is reported as in progress or ongoing (for up to 7 days with no end), and then for our usual caution period after a reported end. A description that says the sewage did not reach the water, or stayed in a drain or on land, keeps the form's answer. The record shows both the form's answer and the description's words.",
+   "source": "Florida Department of Environmental Protection, Public Notice of Pollution: each notice's description and its \"Waterbodies Impacted\" answer.",
+   "_doc": "build/status.py text_over_flag (rule text_caution, rule_applied placement.text_over_flag); ingest/fl_dep_pnp.py text_reached. Owner, 2026-11-04: the text wins over the form's N, with a note. The site's wording reads this entry (site/src/lib/data.ts textCaution); a source listed here shows the rule on /methods once one of its states is live."
+  }
  },
  "rain_likely": {
   "doc": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount at which that system has discharged before, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow: discharge likely, no report received. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
