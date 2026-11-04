@@ -3800,6 +3800,15 @@ def add_places(path, state: str, events_dir=None) -> int:
     return 0
 
 
+def reason_kind(reason: str, multi: bool = False) -> str:
+    """A row's reason as counted in the file's by_reason: the first clause, without the place or the date detail ('(the
+    nearest is 2.2 km away)', '(35.36514, -80.14824)') and, for a text naming several waters, without the water's name."""
+    r = re.sub(r"^[^:;(]*?: ", "", reason) if multi else reason
+    r = r.split("; ")[0]
+    r = re.sub(r"\s*\((?=[^()]*(\d+\.\d|\d{4}-\d\d))[^()]*\)", "", r)       # a distance, a point or a date
+    return r.strip()[:120]
+
+
 def write_names_file(path, meta: dict, state: str, rows: list[dict], resolved: list[dict] | None,
                      run_note: dict | None = None) -> None:
     """The names file in one shape for the three states: the file's own keys, `rows` (the names still without a water
@@ -3821,8 +3830,7 @@ def write_names_file(path, meta: dict, state: str, rows: list[dict], resolved: l
     doc = {**keep, "state": state, "waters": len(rows), "reports": sum(r["reports"] for r in rows)}
     if any(r.get("kind") for r in rows):
         doc["by_kind"] = dict(Counter(r["kind"] for r in rows if r.get("kind")).most_common())
-    reasons = Counter(re.sub(r"\s*\(.*|;.*", "", re.sub(r"^[^:;(]*?: ", "", r["reason"]) if r.get("parts") and
-                             len(r["parts"]) > 1 else r["reason"])[:100] for r in rows if r.get("reason"))
+    reasons = Counter(reason_kind(r["reason"], multi=len(r.get("parts") or []) > 1) for r in rows if r.get("reason"))
     if reasons:
         doc["by_reason"] = dict(reasons.most_common())
     if resolved:
