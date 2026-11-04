@@ -279,3 +279,42 @@ def test_every_example_in_the_documentation_is_a_valid_block():
     assert {b["platform"] for b in examples} == {"socrata", "arcgis", "csv", "json", "rss", "snapshot"}
     for b in examples:
         assert runner.validate_block(b) == [], b["platform"]
+
+
+def test_block_checks_catch_yaml_booleans_foreign_code_and_floating_midnight():
+    b = yaml.safe_load("""
+platform: csv
+url: https://example.invalid/x.csv
+safe_fields: [id, flag]
+record:
+  source_record_id: id
+  status: {field: flag, map: {Yes: ongoing, No: ended}}
+transform: os.system
+""")
+    errs = runner.validate_block(b)
+    assert any("quote it" in e for e in errs) and any("outside the pipeline" in e for e in errs)
+    tz = ZoneInfo(TZ)
+    assert F.parse_datetime("2026-11-01T00:00:00.000", tz)[1] == "day"
+    assert F.parse_datetime("2026-11-01T00:05:00", tz)[1] == "minute"
+    assert F.parse_datetime("2026-11-01T00:00:00Z", tz)[1] == "minute"      # an instant with an offset is a time
+
+
+def test_snapshot_runner_keeps_its_history_between_runs(tmp_path, monkeypatch):
+    from ingest.generic import snapshot
+    from tests.test_generic_parity import CSOCAST_BLOCK, polls
+    src = tmp_path / "sources"
+    src.mkdir()
+    write_source(src, "x-snap", {**CSOCAST_BLOCK, "live": True})
+    monkeypatch.setattr(snapshot, "state_path", lambda sid: tmp_path / "state" / f"{sid}-snapshot.json")
+    out = tmp_path / "events.json"
+    for i, (_, rows) in enumerate(polls()):
+        f = tmp_path / f"poll{i}.json"
+        f.write_text(json.dumps({"features": [{"attributes": r} for r in rows]}))
+        assert runner.run("x-snap", file=str(f), out=str(out), sources_dir=src) == 0
+    d = json.loads(out.read_text())
+    assert d["meta"]["polls_total"] == 5 and d["count"] == 4
+    # a snapshot that lost most of its units is a failed fetch: the records stay
+    f = tmp_path / "short.json"
+    f.write_text(json.dumps({"features": [{"attributes": polls()[0][1][0]}]}))
+    assert runner.run("x-snap", file=str(f), out=str(out), sources_dir=src) == 1
+    assert json.loads(out.read_text())["count"] == 4
