@@ -26,6 +26,10 @@
 #                  January 2025), va_vdh_advisories (VDH issued/lifted releases; `--backfill` pages
 #                  back to 2025); va_waters is a helper ("not a feed"; `python -m ingest.va_waters`
 #                  re-extracts waters-va.json and the VA rows of waters-mid-atlantic.csv)
+#                  North Carolina: nc_dwr_sso (DWR SSO layers, every Sanitary_Sewer_Overflows_since_Jan_<year>
+#                  layer found; `--backfill` once for September 2022 - December 2025), nc_rwq_advisories (DMF
+#                  coastal station status snapshot, advisory spells), nc_algal_blooms (DWR bloom reports;
+#                  `--backfill` once for the 2020 - March 2026 archive layer)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
