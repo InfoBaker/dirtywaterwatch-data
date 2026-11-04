@@ -101,6 +101,12 @@ def test_house_numbers_and_owner_names_never_reach_an_illinois_record():
     # outfall and manhole numbers stay
     assert E.scrub_free_text({"t": "MH 006 between Sample and Example streets; CSO 004"}, ["t"])["t"] == (
         "MH 006 between Sample and Example streets; CSO 004")
+    # review 2026-11-04: a letter o typed for a zero and a range of numbers are house numbers too; dates stay
+    sc = lambda t: E.scrub_free_text({"t": t}, ["t"])["t"]  # noqa: E731
+    assert sc("Manhole near 45o1 24th St") == "Manhole near [house number removed] 24th St"
+    assert sc("611-615 Sample backup") == "[house number removed] Sample backup"
+    assert sc("5oo block of S. Sample") == "500 block of S. Sample"
+    assert sc("6/22-26 Rain event") == "6/22-26 Rain event" and sc("07-28-25") == "07-28-25"
 
 
 def test_a_live_states_free_text_is_left_as_it_was():
