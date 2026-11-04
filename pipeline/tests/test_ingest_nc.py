@@ -19,7 +19,8 @@ FIX = Path(__file__).resolve().parent / "fixtures"
 FETCHED = "2026-11-04T03:00:00Z"
 PERMITS = {"WQCS00002": "nc-raleigh", "WQCS00001": "nc-charlotte-water", "WQCS00006": "nc-greensboro"}
 PLACEHOLDERS = ["Pat Example", "919-555-0123", "pat.example@example.com", "Inspector Sample", "Quill, Pat Q.", "Pat Q.",
-                "Behind my house", "252-555-0199", "12 Example Lane", "448 Example St", "example_account", "back yard"]
+                "Behind my house", "252-555-0199", "12 Example Lane", "448 Example St", "example_account", "back yard",
+                "Robin Placeholder", "Lee Placeholder"]
 
 
 def strings(o):
@@ -100,7 +101,9 @@ def test_no_surface_water_is_kept_with_its_flag_and_an_unnamed_tributary_is_spel
 def test_personal_details_in_comments_never_reach_the_record():
     recs, _ = sso_records()
     r = recs["aaaaaaaa-0000-4000-8000-000000000004"]
-    assert "[phone removed]" in r["raw"]["deq_comments"] and "[email removed]" in r["raw"]["deq_comments"]
+    for k in ("deq_comments", "dwr_em_43_comments", "dwr_resolution_5d"):      # narrative: never requested
+        assert k not in r["raw"]
+    assert "not reproduced" in r["raw"]["_withheld"]
     assert no_placeholder(list(recs.values())) == []
 
 
