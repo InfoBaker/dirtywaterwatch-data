@@ -273,3 +273,18 @@ def test_a_rouge_river_report_whose_town_holds_neither_record_is_not_guessed(mi_
           "discharger_id": "mi-wayne-co-dearborn-heights-cso-mi0051489"}
     r = mi_resolver.resolve(ev)
     assert r["water_slugs"] == [] and r.get("unplaced_reason") == "ambiguous name"
+
+
+def test_a_name_given_to_an_unnamed_record_is_cited_on_the_rows_it_ties():
+    """A hand alias that names an unnamed NHDPlus record ('Lemon Drain' on unnamed-tributary-to-belle-river-mi) is
+    the permit's name for EPA's own reach: each outfall row it ties says so in receiving_water_override's basis,
+    with the reach, so the tie is not read as a name match alone (MI go-live review 2026-11-04)."""
+    aliases = json.loads((DATA_DIR / "water-aliases.json").read_text())
+    named = {s: {a.lower() for a in v} for s, v in aliases.items() if s.startswith("unnamed-") and s.endswith("-mi")}
+    rows = [r for f in ("outfalls-us.json", "outfalls-plants-us.json")
+            for r in json.loads((DATA_DIR / f).read_text())["outfalls"] if r.get("water_slug") in named
+            and str(r.get("receiving_water_echo") or "").lower() in named[r["water_slug"]]]
+    assert len(rows) == 3
+    for r in rows:
+        basis = (r.get("receiving_water_override") or {}).get("basis") or ""
+        assert r["reach_id"] in basis and "COMID" in basis, (r["npdes_permit"], r["outfall"])
