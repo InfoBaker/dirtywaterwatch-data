@@ -37,8 +37,10 @@ Between runs the pipeline's state is kept in object storage as two archives: `da
 snapshots, the reach traces) and the raw caches, the service answers in `data/raw` the code reads back (NHD, NLDI
 and OpenStreetMap answers, the Census state outlines, the rainfall per outfall and a few layers).
 `scripts/state_paths.py` lists those caches with the reason for each; every other raw fetch stays on the runner and
-is never saved. Both are restored at the start and saved only after a run that ended well, and each is capped at
-200 MB.
+is never saved. Both are restored at the start and saved only after a run that ended well; a run that finds the
+`data/build` archive but cannot read it stops before it publishes anything, and one that cannot fetch the raw caches
+runs without them and leaves the stored ones as they are. The raw caches are capped at 200 MB; the `data/build` archive
+warns over 200 MB and is still saved up to the storage upload limit.
 
 A state's water records are built by a separate, on-demand workflow (`.github/workflows/state-build.yml`), never
 inside the hourly run, because a state takes hours of rate-limited requests:
@@ -48,7 +50,8 @@ inside the hourly run, because a state takes hours of rate-limited requests:
 It runs the NHD pass for the state's receiving waters (`ingest.waters_from_nhd --state`) within the budget, ties
 every outfall of the state to its record or a stated reason (`ingest.outfall_waters --state`), saves the raw caches
 so the next dispatch resumes where this one stopped, and opens a pull request (branch `batch/<st>-<date>`) with the
-changed registry files and the counts, for a person to review. It never runs beside the hourly refresh.
+changed registry files and the counts, for a person to review. It never runs beside the hourly refresh: it shares
+its queue, which holds one waiting run, so dispatch one batch at a time and not while a refresh is waiting.
 `scripts/state_batch.py` is the same batch by hand (`plan` prints the commands without running them). The registry
 match (`registry`, `scripts/match_outfalls.py`) needs EPA's CSO inventory and an openboatlaunch snapshot and runs
 where those are; the reach traces have no per-state run yet.
