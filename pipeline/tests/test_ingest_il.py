@@ -155,7 +155,8 @@ def test_possible_cso_layer_rows_become_dated_unconfirmed_records(tmp_path, monk
     assert a["event_type"] == "cso" and a["status"] == "unknown" and a["ended_at"] is None
     assert a["started_at"] == "2026-07-04T21:26:19Z" and a["time_precision"] == "poll"
     assert a["npdes_permit"] == "IL0045012" and a["outfall_id"] == "001" and a["water_slugs"] == ["north-shore-channel-il"]
-    assert a["source_record_id"].endswith(":2026-07-04") and "at or before" in a["raw"]["start_basis"]
+    assert a["source_record_id"].endswith(":2026-07-04") and "at or before" in a["raw"]["start_basis"] \
+        and "observed, not when the overflow began" in a["raw"]["start_basis"]
     w = by["Wilmette Gate"]
     assert w["waterbody_text"] == "Lake Michigan" and w["raw"]["diversion"].startswith("Wilmette")
     c = by["Example St (W)"]   # no edit time: our first poll, said so; no permit known for the owner

@@ -20,8 +20,9 @@ Records (a status snapshot turned into events; pa_phila_csocast.py is the model)
   - One record per outfall per day of activity: an outfall that appears on the layer opens a cso record keyed by the
     outfall (owner, location and reach) and the Central-time day of its edit time. status "unknown": the layer marks
     possible, unconfirmed activity and gives neither a start nor an end. started_at is the layer's edit time for the
-    outfall when it gives one (the time MWRD's system marked it; the overflow began at or before it), else the time this
-    module first saw it; time_precision "poll". ended_at stays null: the nightly reset is not the end of a discharge,
+    outfall when it gives one (the time MWRD's system marked it: an observation time, not the overflow's start, which
+    the map never gives; the overflow began at or before it), else the time this module first saw it; time_precision
+    "poll"; raw.start_basis says so on every record. ended_at stays null: the nightly reset is not the end of a discharge,
     and the layer never says when one ended (the status build then applies its rule for a record with no end).
     raw.edits keeps every edit time seen, raw.first_seen_at and raw.last_seen_at our poll times, and raw.left_layer_at
     the first poll it was gone. A later day's appearance opens a new record.
@@ -193,8 +194,11 @@ def to_record(key: str, ev: dict, reg: list[dict]) -> dict:
     start = ev["edits"][0] if ev["edits"] else ev["first_seen_at"]
     raw = {"layer": {k: v for k, v in a.items() if not k.startswith("_")}, "first_seen_at": ev["first_seen_at"],
            "last_seen_at": ev["last_seen_at"], "edits": ev["edits"], "day": ev["day"],
-           "start_basis": ("the layer's edit time for the outfall: the overflow began at or before it" if ev["edits"]
-                           else "the first poll that saw the outfall on the layer: the overflow began at or before it"),
+           "start_basis": ("the time MWRD's map marked the outfall (the layer's edit time): when the activity was "
+                           "observed, not when the overflow began, which the map does not give; it began at or before "
+                           "this time" if ev["edits"]
+                           else "the first poll that saw the outfall on the layer: when the activity was observed, not "
+                                "when the overflow began, which the map does not give; it began at or before this time"),
            "end_note": "the layer gives no end; leaving it at the nightly reset is not the end of a discharge",
            "edit_time_note": EDIT_NOTE, "status_basis": "possible, unconfirmed activity (MWRD's map)"}
     if ev.get("left_layer_at"):
