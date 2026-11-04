@@ -3,8 +3,11 @@ name: Refresh data
 # charts, export, push the live files to R2 current/ for the site, save the pipeline state, and once a day attach
 # the full dataset to the rolling "latest" release (a dated release on Sundays). Standard hosted runners are free
 # on a public repository. The ingesters keep state between runs (history and snapshot files in data/build), so
-# that folder is restored from R2 state/build.tar.gz at the start and saved back at the end. Raw fetches stay on
-# the runner (they can carry personal fields and are never committed).
+# that folder is restored from R2 state/build.tar.gz at the start and saved back at the end. The answers the code
+# reads back from data/raw (NHD, NLDI and Overpass answers, the Census outlines, IEM rainfall, the RI layers, the DC
+# boundary, the NY workbook, this month's NJ ECHO answers: scripts/state_paths.py lists them with the reasons) are
+# state/raw-cache.tar.gz, restored after it and saved with it. Every other raw fetch stays on the runner (bulk raw
+# saves can carry personal fields and are never saved or committed). Each state object is capped at 200 MB.
 # Needs the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets (R2 edit) and, for the model steps,
 # OPENROUTER_API_KEY (without it they run rules-only).
 on:
@@ -50,6 +53,15 @@ jobs:
         run: |
           wrangler r2 object get dirtywaterwatch-data/state/build.tar.gz --file build.tar.gz --remote && tar -xzf build.tar.gz || echo "no state yet"
           find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
+      - name: Restore the raw caches from R2 (after the build state: the NY workbook entry is named there)
+        run: |
+          # only the listed cache paths are written (scripts/state_paths.py unpack), whatever the tarball holds
+          if wrangler r2 object get dirtywaterwatch-data/state/raw-cache.tar.gz --file raw-cache.tar.gz --remote; then
+            python3 -I scripts/state_paths.py unpack raw-cache.tar.gz \
+              || echo "::warning::the raw cache could not be read; this run starts from the answers it fetches"
+          else
+            echo "no raw cache yet"
+          fi
       - name: Backfill (one-time history loads named in the dispatch input, before the refresh)
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.backfill != ''
         env:
@@ -77,7 +89,18 @@ jobs:
         # (a seed from the owner's machine, or the last good run) with a partial one
         if: success()
         run: |
-          tar -czf build.tar.gz data/build && wrangler r2 object put dirtywaterwatch-data/state/build.tar.gz --file build.tar.gz --remote
+          tar -czf build.tar.gz data/build
+          python3 -I scripts/state_paths.py check-size build.tar.gz
+          wrangler r2 object put dirtywaterwatch-data/state/build.tar.gz --file build.tar.gz --remote
+      - name: Save the raw caches to R2 (state/raw-cache.tar.gz; the same rule)
+        # the cached answers only (scripts/state_paths.py); the next run's waters-nhd target and NLDI's hourly quota
+        # resume from them. Over the cap the save fails with the sizes printed and the build state above still stands;
+        # continue-on-error keeps the dataset release going while that is looked at.
+        if: success()
+        continue-on-error: true
+        run: |
+          python3 -I scripts/state_paths.py pack raw-cache.tar.gz
+          wrangler r2 object put dirtywaterwatch-data/state/raw-cache.tar.gz --file raw-cache.tar.gz --remote
       - name: Dataset release (daily "latest"; dated on Sundays)
         if: github.event_name == 'workflow_dispatch' || (github.event.schedule && startsWith(github.run_started_at, 'T03'))
         env:
