@@ -773,7 +773,8 @@ class Matcher:
             s, how = self.by_name_and_town(o, text)
             d = self.dist(s, lat, lon) if s else None
             near = self.resolver.by_point(lat, lon, o["state"]) if lat is not None else None
-            if near and near[0] <= POINT_M and S.names_disagree(text, self.waters[self.canon(near[1])].get("name")) \
+            if near and near[0] <= POINT_M and not self.line_only(self.canon(near[1])) \
+                    and S.names_disagree(text, self.waters[self.canon(near[1])].get("name")) \
                     and not (d is not None and d > POINT_WRONG_M):
                 # the point lies on another named water and is not a far-off mistake: the name and the point disagree
                 self._conflict = (f"EPA's point lies on {self.waters[self.canon(near[1])]['name']} ({m(near[0])} m), "
