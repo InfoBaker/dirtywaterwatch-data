@@ -131,6 +131,15 @@ def m(d) -> int | None:
     return None if d is None else int(round(d))
 
 
+NO_OUTLINE_NOTE = "; the record's outline was not available to this run: checked by its bounding box and towns"
+
+
+def far(d) -> float:
+    """A distance for ranking: a record with no geometry here (an openboatlaunch record whose out/water file is not on
+    this machine) or no point ranks after every measured one, never as the nearest."""
+    return float("inf") if d is None else d
+
+
 def key(o: dict) -> tuple:
     return (o.get("npdes_permit"), str(o.get("outfall")))
 
@@ -252,7 +261,10 @@ class Matcher:
 
     def reaches_town(self, slug, o: dict) -> bool | None:
         """Whether the water's record reaches the permittee's town (its Census outline, within 1 km; openboatlaunch's
-        town lists name only the towns with launches); None when the town is unknown."""
+        town lists name only the towns with launches); None when the town is unknown. A record whose outline is not on
+        this machine (no_outline: an openboatlaunch record without its out/water file) reaches the town when its town
+        list names it, does not when its bounding box lies more than 1 km from every outline of the town (the box holds
+        the whole water, so this is sure), and is unknown (None) otherwise."""
         outs = self.town_outlines(o)
         if outs is None:
             towns = self.towns_of(o)
@@ -261,8 +273,34 @@ class Matcher:
             return None
         g = S.water_geometry(slug, self.waters)
         if g is None:
-            return bool(self.record_towns(slug) & self.towns_of(o)) or None
+            if self.record_towns(slug) & self.towns_of(o):
+                return True
+            b = self.box_of(slug)
+            if b is not None and all(N.geom_dist_m(b, t) > 1000 for t in outs):
+                return False
+            return None
         return any(N.geom_dist_m(g, t) <= 1000 for t in outs)
+
+    def no_outline(self, slug) -> bool:
+        """Whether the record has no outline here (an openboatlaunch record whose out/water file is not on this
+        machine: a cloud session or a runner without the sibling snapshot). Its distances are then unknown."""
+        return S.water_geometry(slug, self.waters) is None
+
+    def box_of(self, slug):
+        """The record's bounding box as a shapely box, or None."""
+        b = self.waters.get(slug, {}).get("bbox")
+        if not b or len(b) != 4:
+            return None
+        from shapely.geometry import box
+        return box(*b)
+
+    def box_dist(self, slug, lat, lon) -> float | None:
+        """Metres from the point to the record's bounding box: never more than the distance to the water itself, so a
+        box farther than a limit puts the water farther too (used only to set a record aside)."""
+        b = self.box_of(slug)
+        if b is None or lat is None or lon is None:
+            return None
+        return N.dist_m(b, lon, lat)
 
     def source_of(self, slug) -> str:
         w = self.waters[slug]
@@ -274,6 +312,11 @@ class Matcher:
 
     def guard_ok(self, slug, o, text) -> tuple[bool, str | None]:
         kept, aside, _ = self.resolver.guard_detail([slug], self.fake(o, text))
+        if kept and self.no_outline(slug):          # unmeasured here: its bounding box can still put it too far
+            bd = self.box_dist(slug, o.get("lat"), o.get("lon"))
+            limit, basis = self.resolver.name_limit_m(slug)
+            if bd is not None and bd > limit:
+                return False, f"its bounding box is {bd / 1000:.1f} km from the point (limit {limit / 1000:.1f} km: {basis})"
         return bool(kept), (aside[0][1] if aside else None)
 
     def in_state(self, o: dict) -> tuple[bool, float]:
@@ -295,6 +338,16 @@ class Matcher:
             if not slugs:
                 continue
             kept, aside, _ = self.resolver.guard_detail(slugs, self.fake(o, v))
+            if lat is not None:
+                # the guard keeps a record it cannot measure (no outline here): its bounding box, a lower bound, can
+                # still show it is too far
+                for x in [x for x in kept if self.no_outline(x)]:
+                    bd = self.box_dist(x, lat, lon)
+                    limit, basis = self.resolver.name_limit_m(x)
+                    if bd is not None and bd > limit:
+                        kept.remove(x)
+                        aside = list(aside) + [(x, f"its bounding box is {bd / 1000:.1f} km from the point (limit "
+                                                   f"{limit / 1000:.1f} km: {basis})")]
             if lat is None:
                 # no point for the guard: the record must reach the permittee's town (Cumberland's 'Potomac River'
                 # is the North Branch there, not the main stem's record, which begins downstream)
@@ -310,9 +363,10 @@ class Matcher:
             parts = N.split_names(v, False)
             if len(kept) > 1 and len(parts) > 1:
                 # the text names several waters ('Connecticut River and Mascoma River'): the one at the point only
-                near = sorted((self.dist(x, lat, lon), x) for x in kept) if lat is not None else []
-                if near and near[0][0] is not None and near[0][0] <= TIGHT_M and \
-                        (len(near) == 1 or (near[1][0] or 1e12) > 2 * near[0][0]):
+                near = sorted((far(self.dist(x, lat, lon)), x) for x in kept) if lat is not None else []
+                # every record measured: one with no geometry here cannot be ruled out at the point
+                if near and near[-1][0] < float("inf") and near[0][0] <= TIGHT_M and \
+                        (len(near) == 1 or near[1][0] > 2 * near[0][0]):
                     return near[0][1], (f"its receiving water '{text}'{read} names {len(parts)} waters; the one "
                                         f"at the point ({m(near[0][0])} m)")
                 self._several = [x for x in kept]
@@ -324,7 +378,7 @@ class Matcher:
                     n = S.norm_name(self.waters[s].get("name") or "")
                     names = [n] + [S.norm_name(a) for a in self.waters[s].get("aliases") or []]
                     return max((len(x) for x in names if x and f" {x} " in nv), default=0)
-                kept.sort(key=lambda s: (-matched_len(s), self.dist(s, lat, lon) or 0))
+                kept.sort(key=lambda s: (-matched_len(s), far(self.dist(s, lat, lon))))
                 s = kept[0]
                 return s, (f"its receiving water '{text}' by name; it names {len(kept)} records ({', '.join(kept)}), "
                            f"the one with the longest name in the text taken")
@@ -347,7 +401,7 @@ class Matcher:
                     continue
                 ok, _ = self.guard_ok(s, o, text)
                 if ok:
-                    cands.append((self.dist(s, lat, lon) or 0, s))
+                    cands.append((far(self.dist(s, lat, lon)), s))
             if cands:
                 d, s = min(cands)
                 how = "; ".join(x for x in t.get("how") or [] if x)[:200]
@@ -393,13 +447,13 @@ class Matcher:
                 d = self.dist(x, lat, lon)
                 rt = self.reaches_town(x, o)
                 ok = (d is not None and d <= TIGHT_M) or rt is True or (rt is None and d is None)
-                ranked.append((not ok, rt is not True, d if d is not None else 0, x, d, rt))
+                ranked.append((not ok, rt is not True, far(d), x, d, rt))
             ranked.sort(key=lambda r: r[:4])
             bad, _, _, slug, d, rt = ranked[0]
             if bad:
                 towns = ", ".join(sorted(self.towns_of(o))) or "unknown"
-                self._builder_far = (f"the NHD builder's record for '{text}' for this permit, {slug}, is "
-                                     + (f"{m(d) / 1000:.1f} km from EPA's point and " if d is not None else "")
+                self._builder_far = (f"the NHD builder's record for '{text}' for this permit, {slug}, "
+                                     + (f"is {m(d) / 1000:.1f} km from EPA's point and " if d is not None else "")
                                      + (f"does not reach the permittee's town ({towns}): likely another water of that "
                                         f"name, not matched" if rt is False else
                                         f"the permittee's town ({towns}) could not be checked against it: not matched"))
@@ -772,7 +826,9 @@ def apply(o: dict, res: dict, mt: Matcher) -> None:
         o["match"] = ("geometry+name" if named and d is not None and d <= TIGHT_M else
                       "geometry" if d is not None and d <= TIGHT_M else "name_only")
         o["water_match"] = (f"{res['step']}: {res['how']}; {w.get('name')} ({s}, {mt.source_of(s)})"
-                            + (f", {m(d)} m from the point" if d is not None else ", no point"))
+                            + (f", {m(d)} m from the point" if d is not None else
+                               ", no point" if o.get("lat") is None else ", distance not measured")
+                            + (NO_OUTLINE_NOTE if mt.no_outline(s) else ""))
         o["water_matched_by"] = by
         o.pop("no_water_reason", None)
     else:
