@@ -74,6 +74,42 @@ Read this whole file first. Then the files it names. You get no other context be
    each feed gives and does not, what is not published, known problems) in `research/<st>/state-text.md`:
    no file names, no working notes, never "safe" or "clean".
 
+## Private sewer utilities (every state)
+
+Privately owned sewer systems are operators like any other: registry rows, register rows, outfalls and water
+records. North Carolina set the pattern (`scripts/add_nc_operators.py`, `research/nc/private-utilities.json`).
+
+1. **Start from the candidates file**, `research/<st>/private-utilities-candidates.json` (NH and VT:
+   `research/nh-vt/private-utilities-candidates-<st>.json`), made by `scripts/private_utilities.py` from EPA's
+   ICIS-NPDES discharge points: every active individual sewage permit whose permittee is not a public body, with the
+   permit, facility, county, city, EPA's owner type and its date, the permit's SIC/NAICS codes, design flow, receiving
+   waters as EPA names them, and whether the permit is already in the outfall registry (`in_plant_registry`) or held
+   by a row (`registry_row`, `research_row`). `public_by_name` lists permits EPA types private whose name reads as a
+   public body (a municipal utility district, a county, a school district): check each against the permit and file it
+   as a public operator when it is one. A public body filed as private was the one error of the North Carolina build.
+2. **Take the permittee from the state's permit documents** (the permit, its fact sheet, the state's permit search or
+   document repository), not from EPA's name, and cite the document. Group the permits of one permittee into one row.
+   `legal_form_proposed` is a hint from the names; set `legal_form` from the controlled list (`docs/legal-forms.md`;
+   `cd pipeline && python -m ingest.dischargers_schema` warns on anything off the list).
+3. **Never an individual's name.** The candidates file already writes "[name removed]" for a permittee that is a
+   person and for both names of a single-residence system (`system_kind`). When the permit document names a person
+   as permittee, the row names the facility and its `legal_form` is `facility (permittee not named)`; when a person
+   signs for a body (a chairman, a manager), the body is the permittee. Company names that read like surnames
+   (registered companies) are bodies.
+4. **The register.** Read the state's law for who carries the notice duty:
+   - Where the duty binds every owner or operator of a permitted sewer or treatment works (North Carolina,
+     G.S. 143-215.1C), the statewide law rows already cover private operators: say "public or private" in their note,
+     and add an operator row only for a private operator's own channel (a web page, an e-mail list).
+   - Where the duty binds only public systems (a right-to-know law written for publicly owned works) and private
+     operators answer only to their permit (a 24-hour report to the agency, no public notice), add a row for the
+     private operators' channel as the permit gives it (`basis_kind` "permit"), with its barrier (`no_web_page`
+     when the notice goes to the agency only), so the gap is visible.
+5. **Outfalls and waters.** A candidate with `in_plant_registry: false` has no outfall row yet: its outfalls come from
+   the state's permit layer or EPA's discharge points, each with a water record or a stated reason. For a
+   single-residence system, decide with the coordinator before drawing its point (a point there is a home).
+6. **Industrial permits that list sewage treatment** (`system_kind: "industrial permit with a sewage code"`) may treat
+   only their own staff's sewage: file them when the permit shows a sanitary outfall to public water.
+
 ## Your final message to the coordinator
 
 Under 400 words: the branch name and worktree path; what was built, with record counts from a real fetch;
