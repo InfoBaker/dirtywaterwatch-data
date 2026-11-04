@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1168 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1180 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -25,7 +25,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | md | 11 | 8 | 15 | 11 | 4 | 49 |
 | va | 16 | 17 | 28 | 7 | 1 | 69 |
 | dc | 21 | 9 | 26 | 12 | 5 | 73 |
-| **all** | **380** | **238** | **318** | **171** | **61** | **1168** |
+| ga | 3 | 4 | 4 | 1 | 0 | 12 |
+| **all** | **383** | **242** | **322** | **172** | **61** | **1180** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1269,3 +1270,20 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `dc-dcwater-tunnel-status` | DC Water Anacostia River Tunnel / CSO outfall real-time status | unreachable | fetched | events | No public real-time CSO or tunnel status exists; the only real-time signal is the riverside lights. |
 | `dc-doee-hab` | DOEE harmful algal bloom (cyanobacteria) advisories | unreachable | search_only | advisories | No DC HAB advisory programme found (search_only). |
 | `dc-hillrag-dashboard-article` | HillRAG 'New Dashboard Lets Residents Check River Conditions in Real Time' (2026-06-05) | unreachable | search_only | news | Timeout; superseded by the dashboard source. |
+
+## ga: Georgia (12)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ga-atlanta-cso-permits` | Atlanta CSO permits GA0037168 and GA0038644 notification clause (EPD 2015 release) | used | fetched | permits | EPD release (Aug 2015): "If an overflow event occurs, the city is required to promptly report details of that overflow with signage at the site, at public access points downstream and on the city's website." Permit text itself not read; no such page found on atlantawatershed.org. |
+| `ga-law-ocgs-12-5-30-1` | O.C.G.A. 12-5-30.1 Major spills by publicly owned treatment works | used | search_only | law | Statutory base for the legal-organ notice and downstream notice within 20 miles. Text not fetched (search only). |
+| `ga-rule-391-3-6-05` | Ga. Comp. R. & Regs. 391-3-6-.05 Emergency Actions (spills and major spills by POTWs) | used | fetched | law | Public-notice duties: media within 24 hours, sign at the site immediately for at least 7 days, legal organ within 7 days for a major spill, downstream water suppliers within 24 hours. |
+| `ga-epa-sobe` | EPA SOBE (eRule Phase 2) extract, GA rows | candidate | inferred | events | 1,232 events from 90 GA permits on 2026-11-03 (coordinator count). GA permittees file through EPD GEOS; the events reach EPA. Likely carries start/end times and volumes; use for history and to fill end times the EPD list lacks. |
+| `ga-epd-sewage-spills-report` | Georgia EPD "Municipal Sewage Spills Reported to EPD" daily spreadsheet | candidate | fetched | events | Statewide rolling 30-day list of municipal sewage spills, updated each business day, as an Excel file whose URL carries the date. Day precision, permit number, location address, gallons, river basin, waterway impacted. First feed (with daily snapshots to build history). |
+| `ga-epd-spills-map-layer` | Georgia EPD Spills in Georgia StoryMap layer (Spill_Summary_Continuous_Update) | candidate | fetched | events | Public ArcGIS layer behind the "Spills in Georgia" StoryMap (updated weekly): same 30-day rows with LATITUDE/LONGITUDE. BEGIN_DATE was null in all 61 rows on 2026-11-03, so it supplies points only, joined to the spreadsheet. |
+| `ga-wwals-archive` | WWALS Watershed Coalition archive of GA EPD daily spill reports | candidate | search_only | prior_art | Daily HTML copies of the EPD report since Dec 2018 (e.g. pictures/spills/2026-02-02--GA-EPD-Sewage-Spills-Report.html). History source for back-fill, with credit; WWALS pushed EPD to post daily. |
+| `ga-dnr-healthy-beaches` | Georgia DNR Coastal Resources Division Healthy Beaches (with Coastal Health District) | watch | search_only | advisories | Weekly enterococci at Tybee, St. Simons, Jekyll (and others) in season, monthly in winter; a map shows advisories. Advisory = avoid swimming, not closure. Data endpoint not traced; Swim Guide carries GA beaches. |
+| `ga-epd-hab` | Georgia EPD harmful algal bloom information | watch | inferred | advisories | No statewide bloom feed found; not searched in depth. |
+| `ga-flint-riverkeeper-atlanta-notice` | Flint Riverkeeper / SELC notice of intent to sue Atlanta (2026) | watch | search_only | news | Pending Clean Water Act case over spills to the Flint headwaters (60-day notice, July 2026). |
+| `ga-georgia-water-coalition-dirty-dozen` | Georgia Water Coalition "Dirty Dozen" | watch | search_only | prior_art | Annual advocacy report naming problem sites (sewer spills feature often). Context, not events. |
+| `ga-epd-geos` | Georgia EPD GEOS spill and bypass e-reporting | rejected | fetched | events | Login-only intake for permittees (GEOS Spill/Bypass E-Reporting guidance, July 2025). Not a public output. |

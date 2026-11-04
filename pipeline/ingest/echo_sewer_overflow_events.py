@@ -1,4 +1,4 @@
-"""EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York and Washington DC.
+"""EPA ECHO Sewer Overflow and Bypass Event dataset (eRule Phase 2), New England, New York, Washington DC and Georgia.
 
 Source
   https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip
@@ -71,6 +71,20 @@ Washington DC (permit DC0021199, DC Water; research/dc/report.md section 2.3)
     data/outfalls-ne.json only, which has no DC rows, so they are placed by name or point; DC's outfalls
     are in data/outfalls-mid-atlantic.json (scripts/match_outfalls.py).
 
+Georgia (permits GA...; research/ga/report.md section 2.2; the state is not live until data/rules.json says so)
+  Georgia permittees file their 24-hour and 5-day spill reports in EPD's GEOS, and these reach this dataset: 1,232
+  current GA rows from 90 permits in the 2026-11-03 extract, with start and end times and receiving waters but no
+  volume (the volume field is empty on every GA row). Two Georgia habits are handled here:
+  - The receiving-water field often says the spill did not reach a water ('DID NOT ENTER STATE WATERS', 'did not
+    reach waters', misspelt variants): NO_WATER_TEXT reads these as "receiving water stated as none" (dropped, like
+    'none'). No row of another state used these words in that extract.
+  - The point is mostly the permit's own (the plant or the utility's office), not the spill's: in that extract 916 of
+    994 kept GA events share a point with four or more other events of the same permit. For the states in
+    REPEATED_POINT_STATES a point that REPEATED_POINT_MIN or more kept events of one permit share is not used for
+    those events (lat/lon null; raw.reported_point keeps it and raw.point_note says why), unless the event is a
+    bypass (a plant bypass happens at the plant). The live states are not in the set.
+  The state's own list (ingest/ga_epd_spills.py, run after this module) marks its rows duplicate_of these records.
+
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -100,7 +114,10 @@ from common import (BUILD_DIR, DATA_DIR, HEADERS, ROOT, event, now_iso, read_jso
 SOURCE_ID = "echo-sewer-overflow"
 URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA"}
+# states whose reports mostly carry the permit's point rather than the event's (module docstring, Georgia)
+REPEATED_POINT_STATES = {"GA"}
+REPEATED_POINT_MIN = 5
 AUTHORITY = "EPA ECHO Sewer Overflow and Bypass Event report (reported to regulators)"
 SUMMARY_URL = "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
 
@@ -111,7 +128,8 @@ MEASURED = {"Automated Remote Monitoring", "Manual Direct Measurement"}
 ESTIMATED = {"Best Professional Judgement", "Modeling"}
 WATER_IMPACTS = {"AHI", "ALI", "SBC", "BEC", "DWC"}
 BUILDING_TEXT = re.compile(r"basement|bathtub|bathroom|toilet|\bhome\b|\bhouse\b|residential", re.I)
-NO_WATER_TEXT = re.compile(r"^\s*(none|n/?a|no water ?body|no discharge.*|no direct discharge.*|not applicable)\s*\.?\s*$", re.I)
+NO_WATER_TEXT = re.compile(r"^\s*(none|n/?a|no water ?body|no discharge.*|no direct discharge.*|not applicable|"
+                           r"did\s*n\S*\s+(?:enter|reach)\b.*)\s*\.?\s*$", re.I)
 WATER_WORDS = re.compile(r"\b(river|brook|stream|creek|pond|lake|harbou?r|bay|cove|waterway|body of water|"
                          r"storm ?drain|catch basin|wetland|swamp|ocean)\b", re.I)
 OUTFALL_TEXT = re.compile(r"\bcso\b|regulator|outfall", re.I)
@@ -450,8 +468,27 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             source_url=f"https://echo.epa.gov/detailed-facility-report?fid={permit}&sys=ICP",
             raw=raw, parse_error=perr,
         ))
+    repeated_points(kept)
     kept.sort(key=lambda r: (r["started_at"] or "", r["event_id"]), reverse=True)
     return kept, dropped, why
+
+
+def repeated_points(kept: list[dict]) -> int:
+    """For REPEATED_POINT_STATES: a point REPEATED_POINT_MIN or more kept events of one permit share is the permit's
+    location, not the spill's; it is moved to raw.reported_point (bypasses keep it). Returns the events changed."""
+    shared = Counter((r["npdes_permit"], r["lat"], r["lon"]) for r in kept
+                     if r["lat"] is not None and r["npdes_permit"][:2] in REPEATED_POINT_STATES)
+    n = 0
+    for r in kept:
+        k = (r["npdes_permit"], r["lat"], r["lon"])
+        if r["lat"] is None or shared.get(k, 0) < REPEATED_POINT_MIN or r["event_type"] == "bypass":
+            continue
+        r["raw"]["reported_point"] = [r["lat"], r["lon"]]
+        r["raw"]["point_note"] = (f"the same point is given for {shared[k]} reports of this permit: taken as the "
+                                  "permit's location, not the spill's")
+        r["lat"] = r["lon"] = r["coord_source"] = None
+        n += 1
+    return n
 
 
 def write_failed(records: list[dict], error: str, meta: dict) -> Path:
