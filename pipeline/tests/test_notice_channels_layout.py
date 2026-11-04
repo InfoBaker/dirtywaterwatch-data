@@ -89,6 +89,23 @@ def test_split_refuses_and_writes_nothing(tmp_path):
     assert p.exists()
 
 
+def test_a_split_that_stopped_before_removing_the_single_file_is_finished_not_refused(tmp_path):
+    # the state files are written and checked first, the single file removed last: a death in between leaves both
+    # layouts, and the next --split removes the single file when the folder holds exactly its rows
+    p = single(tmp_path)
+    folder = tmp_path / "data" / "notice-channels"
+    M.save_register(ROWS, folder)
+    assert M.register_layout(p) == "single" and folder.is_dir()
+    assert M.split_register(p) == {"NJ": 2, "PA": 2}
+    assert not p.exists() and M.validate_layout(folder, DIS) == []
+    # but not when the folder's rows differ from the file's: the rows the folder lacks would be lost
+    p = single(tmp_path)
+    (folder / "pa.json").unlink()
+    with pytest.raises(ValueError, match="not this file's rows"):
+        M.split_register(p)
+    assert p.exists() and (folder / "nj.json").exists()
+
+
 def write_state(folder: Path, name: str, doc) -> None:
     folder.mkdir(parents=True, exist_ok=True)
     (folder / name).write_text(json.dumps(doc))
