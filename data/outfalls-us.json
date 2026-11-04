@@ -78242,8 +78242,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Detroit River); no NHD flowline or waterbody of that name in the state; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
-   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Detroit River); no NHD flowline or waterbody of that name in the state; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Detroit River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Detroit River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -78467,10 +78467,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110009900704",
    "lat": 43.98129,
    "lon": -84.49582,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "cedar-river-gladwin-mi",
+   "water_name": "Cedar River",
+   "water_kind": "river",
+   "distance_m": 31,
    "alternatives": [
     {
      "slug": "cedar-river-bellaire-mi",
@@ -78481,14 +78481,13 @@
      "name": "Cedar River"
     }
    ],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: the record of that name was set aside by the placement guard: cedar-river-bellaire-mi, name match too far (124.9 km; limit 12.0 km: the river record's extent (12.9 km, counted to 10 km) plus 2 km); the NHD builder's record for 'Cedar River' for this permit, cedar-river-mi, is 353.2 km from EPA's point and does not reach the permittee's town (gladwin): likely another water of that name, not matched",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "the record of that name was set aside by the placement guard: cedar-river-bellaire-mi, name match too far (124.9 km; limit 12.0 km: the river record's extent (12.9 km, counted to 10 km) plus 2 km); the NHD builder's record for 'Cedar River' for this permit, cedar-river-mi, is 353.2 km from EPA's point and does not reach the permittee's town (gladwin): likely another water of that name, not matched"
+   "water_match": "name: its receiving water 'Cedar River' by name; Cedar River (cedar-river-gladwin-mi, NHDPlus V2.1 record), 31 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
    "npdes_permit": "MI0023205",
@@ -79210,7 +79209,7 @@
    "coords_from": "facility",
    "receiving_water_source": null,
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109)); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109); the same water as existing record grand-river-mi); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 9
   },
@@ -79241,7 +79240,7 @@
    "coords_from": "facility",
    "receiving_water_source": null,
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109)); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109); the same water as existing record grand-river-mi); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 9
   },
@@ -79272,7 +79271,7 @@
    "coords_from": "facility",
    "receiving_water_source": null,
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109)); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109); the same water as existing record grand-river-mi); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 9
   },
@@ -79303,7 +79302,7 @@
    "coords_from": "facility",
    "receiving_water_source": null,
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109)); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109); the same water as existing record grand-river-mi); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 9
   },
@@ -79421,7 +79420,7 @@
    "coords_from": "facility",
    "receiving_water_source": null,
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109)); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109); the same water as existing record grand-river-mi); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 9
   },
@@ -79481,7 +79480,7 @@
    "coords_from": "facility",
    "receiving_water_source": null,
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109)); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109); the same water as existing record grand-river-mi); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 9
   },
@@ -79512,7 +79511,7 @@
    "coords_from": "facility",
    "receiving_water_source": null,
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109)); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109); the same water as existing record grand-river-mi); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 9
   },
@@ -79543,7 +79542,7 @@
    "coords_from": "facility",
    "receiving_water_source": null,
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109)); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109); the same water as existing record grand-river-mi); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 9
   },
@@ -79574,7 +79573,7 @@
    "coords_from": "facility",
    "receiving_water_source": null,
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109)); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 12242484 (88 m): GNIS 'Grand River' (627109); the same water as existing record grand-river-mi); Grand River (grand-river-mi, openboatlaunch), 45 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 9
   },
@@ -79776,17 +79775,17 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110064165353",
    "lat": 41.830887,
    "lon": -86.260643,
-   "water_slug": "st-joseph-river-mi",
-   "water_name": "St. Joseph River",
+   "water_slug": "saint-joseph-river-jonesville-mi",
+   "water_name": "Saint Joseph River",
    "water_kind": "river",
-   "distance_m": 50,
+   "distance_m": 31,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'St. Joseph River' by name; St. Joseph River (st-joseph-river-mi, openboatlaunch), 50 m from the point",
+   "water_match": "name: its receiving water 'St. Joseph River' by name; Saint Joseph River (saint-joseph-river-jonesville-mi, NHDPlus V2.1 record), 31 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -81209,17 +81208,17 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110010125239",
    "lat": 42.111974,
    "lon": -86.480248,
-   "water_slug": "st-joseph-river-mi",
-   "water_name": "St. Joseph River",
+   "water_slug": "saint-joseph-river-jonesville-mi",
+   "water_name": "Saint Joseph River",
    "water_kind": "river",
-   "distance_m": 86,
+   "distance_m": 78,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'St. Joseph River' by name; St. Joseph River (st-joseph-river-mi, openboatlaunch), 86 m from the point",
+   "water_match": "name: its receiving water 'St. Joseph River' by name; Saint Joseph River (saint-joseph-river-jonesville-mi, NHDPlus V2.1 record), 78 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 2
   },
@@ -81277,17 +81276,17 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110010125239",
    "lat": 42.11195,
    "lon": -86.48021,
-   "water_slug": "st-joseph-river-mi",
-   "water_name": "St. Joseph River",
+   "water_slug": "saint-joseph-river-jonesville-mi",
+   "water_name": "Saint Joseph River",
    "water_kind": "river",
-   "distance_m": 86,
+   "distance_m": 78,
    "alternatives": [],
    "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "name: its receiving water 'St. Joseph River' by name; St. Joseph River (st-joseph-river-mi, openboatlaunch), 86 m from the point",
+   "water_match": "name: its receiving water 'St. Joseph River' by name; Saint Joseph River (saint-joseph-river-jonesville-mi, NHDPlus V2.1 record), 78 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 2
   },
@@ -81337,20 +81336,19 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006740330",
    "lat": 42.28056,
    "lon": -83.12944,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "river-rouge-detroit-mi",
+   "water_name": "River Rouge",
+   "water_kind": "river",
+   "distance_m": 21,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "coords_note": "EPA's point for this outfall is the same as the facility's point",
-   "water_match": "none: NHD builder: EPA's reaches for it are named River Rouge, Sunken Bridge Drain, not 'Rouge River'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Rouge, River); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "NHD builder: EPA's reaches for it are named River Rouge, Sunken Bridge Drain, not 'Rouge River'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Rouge, River); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "water_match": "point: the water record at the outfall's point (21 m; snapped within 150 m); River Rouge (river-rouge-detroit-mi, NHDPlus V2.1 record), 21 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
    "npdes_permit": "MI0035696",
@@ -81647,8 +81645,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Scales Creek); no NHD flowline or waterbody of that name in the state; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
-   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Scales Creek); no NHD flowline or waterbody of that name in the state; OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Scales Creek); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Scales Creek); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
@@ -81726,10 +81724,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039746852",
    "lat": 46.070833,
    "lon": -88.325,
-   "water_slug": "paint-river-mi",
+   "water_slug": "paint-river-mastodon-mi",
    "water_name": "Paint River",
    "water_kind": "river",
-   "distance_m": 1802,
+   "distance_m": 1787,
    "alternatives": [
     {
      "slug": "paint-river-iron-river-mi",
@@ -81746,7 +81744,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "name: its receiving water 'PAINT RIVER' by name; Paint River (paint-river-mi, openboatlaunch), 1802 m from the point",
+   "water_match": "name: its receiving water 'PAINT RIVER' by name; Paint River (paint-river-mastodon-mi, NHDPlus V2.1 record), 1787 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 2
   },
@@ -81766,10 +81764,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039746852",
    "lat": 46.070833,
    "lon": -88.325,
-   "water_slug": "paint-river-mi",
+   "water_slug": "paint-river-mastodon-mi",
    "water_name": "Paint River",
    "water_kind": "river",
-   "distance_m": 1802,
+   "distance_m": 1787,
    "alternatives": [
     {
      "slug": "paint-river-iron-river-mi",
@@ -81786,7 +81784,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "name: its receiving water 'PAINT RIVER' by name; Paint River (paint-river-mi, openboatlaunch), 1802 m from the point",
+   "water_match": "name: its receiving water 'PAINT RIVER' by name; Paint River (paint-river-mastodon-mi, NHDPlus V2.1 record), 1787 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 2
   },
@@ -82038,19 +82036,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006740018",
    "lat": 42.35717,
    "lon": -83.26617,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "river-rouge-detroit-mi",
+   "water_name": "River Rouge",
+   "water_kind": "river",
+   "distance_m": 15592,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": null,
-   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lower Rouge River, Middle Rouge River) cannot be told apart for this outfall",
-   "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the permit's listed receiving waters (Lower Rouge River, Middle Rouge River) cannot be told apart for this outfall"
+   "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 10850152 (507 m): GNIS 'Rouge, River' (635966)); River Rouge (river-rouge-detroit-mi, NHDPlus V2.1 record), 15592 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-04)"
   },
   {
    "npdes_permit": "MI0051489",
@@ -82228,9 +82225,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "water_match": "none: NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "no_water_reason": "NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points"
   },
   {
    "npdes_permit": "MI0051535",
@@ -82258,9 +82255,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Ashcroft-Sherwood Drain (13 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "water_match": "none: EPA's point lies on Ashcroft-Sherwood Drain (13 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Ashcroft-Sherwood Drain (13 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "no_water_reason": "EPA's point lies on Ashcroft-Sherwood Drain (13 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points"
   },
   {
    "npdes_permit": "MI0051535",
@@ -82288,9 +82285,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "water_match": "none: NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "no_water_reason": "NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points"
   },
   {
    "npdes_permit": "MI0051535",
@@ -82318,9 +82315,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "water_match": "none: NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "no_water_reason": "NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points"
   },
   {
    "npdes_permit": "MI0051535",
@@ -82348,9 +82345,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Bell Branch (67 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "water_match": "none: EPA's point lies on Bell Branch (67 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Bell Branch (67 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "no_water_reason": "EPA's point lies on Bell Branch (67 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points"
   },
   {
    "npdes_permit": "MI0051535",
@@ -82378,9 +82375,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Bell Branch (148 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "water_match": "none: EPA's point lies on Bell Branch (148 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Bell Branch (148 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "no_water_reason": "EPA's point lies on Bell Branch (148 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points"
   },
   {
    "npdes_permit": "MI0051535",
@@ -82408,9 +82405,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Bell Branch (3 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "water_match": "none: EPA's point lies on Bell Branch (3 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Bell Branch (3 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "no_water_reason": "EPA's point lies on Bell Branch (3 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points"
   },
   {
    "npdes_permit": "MI0051535",
@@ -82438,9 +82435,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "none: EPA's point lies on Bell Branch (135 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)",
+   "water_match": "none: EPA's point lies on Bell Branch (135 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_water_reason": "EPA's point lies on Bell Branch (135 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); OSM fallback not tried (the run's time or request limit was reached on 2026-11-04)"
+   "no_water_reason": "EPA's point lies on Bell Branch (135 m), not on a water named 'Upper Rouge River': the inventory's name and point disagree; NHD builder: EPA's reach codes and NHDPlus ids for it are not NHDPlus V2.1 network flowlines or waterbodies; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bell Branch, Upper River Rouge, Wolfrom Drain); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points"
   },
   {
    "npdes_permit": "MI0051543",
@@ -82763,10 +82760,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110042389974",
    "lat": 42.300306,
    "lon": -83.183389,
-   "water_slug": "river-rouge-mi",
+   "water_slug": "river-rouge-detroit-mi",
    "water_name": "River Rouge",
    "water_kind": "river",
-   "distance_m": 586,
+   "distance_m": 4645,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
@@ -82774,7 +82771,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "reach: the NHD builder's record for the outfall's own NHD reach 04090004000014 (EPA), no snapping; River Rouge (river-rouge-mi, openboatlaunch), 586 m from the point",
+   "water_match": "reach: the NHD builder's record for the outfall's own NHD reach 04090004000014 (EPA), no snapping; River Rouge (river-rouge-detroit-mi, NHDPlus V2.1 record), 4645 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 4
   },
@@ -82794,10 +82791,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110042389974",
    "lat": 42.300306,
    "lon": -83.183389,
-   "water_slug": "river-rouge-mi",
+   "water_slug": "river-rouge-detroit-mi",
    "water_name": "River Rouge",
    "water_kind": "river",
-   "distance_m": 586,
+   "distance_m": 4645,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
@@ -82805,7 +82802,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "reach: the NHD builder's record for the outfall's own NHD reach 04090004000014 (EPA), no snapping; River Rouge (river-rouge-mi, openboatlaunch), 586 m from the point",
+   "water_match": "reach: the NHD builder's record for the outfall's own NHD reach 04090004000014 (EPA), no snapping; River Rouge (river-rouge-detroit-mi, NHDPlus V2.1 record), 4645 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 4
   },
@@ -82825,10 +82822,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110042389974",
    "lat": 42.300306,
    "lon": -83.183389,
-   "water_slug": "river-rouge-mi",
+   "water_slug": "river-rouge-detroit-mi",
    "water_name": "River Rouge",
    "water_kind": "river",
-   "distance_m": 586,
+   "distance_m": 4645,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
@@ -82836,7 +82833,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "reach: the NHD builder's record for the outfall's own NHD reach 04090004000014 (EPA), no snapping; River Rouge (river-rouge-mi, openboatlaunch), 586 m from the point",
+   "water_match": "reach: the NHD builder's record for the outfall's own NHD reach 04090004000014 (EPA), no snapping; River Rouge (river-rouge-detroit-mi, NHDPlus V2.1 record), 4645 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 4
   },
@@ -82856,10 +82853,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110042389974",
    "lat": 42.300306,
    "lon": -83.183389,
-   "water_slug": "river-rouge-mi",
+   "water_slug": "river-rouge-detroit-mi",
    "water_name": "River Rouge",
    "water_kind": "river",
-   "distance_m": 586,
+   "distance_m": 4645,
    "alternatives": [],
    "match": "name_only",
    "outfall_kind": "cso",
@@ -82867,7 +82864,7 @@
    "coords_from": "facility",
    "receiving_water_source": "state",
    "coords_note": "EPA's inventory gives no point for this outfall; lat/lon are the facility's point (the treatment plant or the permittee's address), not the outfall's own",
-   "water_match": "reach: the NHD builder's record for the outfall's own NHD reach 04090004000014 (EPA), no snapping; River Rouge (river-rouge-mi, openboatlaunch), 586 m from the point",
+   "water_match": "reach: the NHD builder's record for the outfall's own NHD reach 04090004000014 (EPA), no snapping; River Rouge (river-rouge-detroit-mi, NHDPlus V2.1 record), 4645 m from the point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "point_shared_by": 4
   },
