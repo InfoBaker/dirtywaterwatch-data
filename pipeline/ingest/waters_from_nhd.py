@@ -1852,7 +1852,20 @@ def overlap_with_existing(rec, existing, slugs):
 
 # ---------------------------------------------------------------- an NHD water that is an openboatlaunch record
 
-ALIAS_NOT_A_NAME = re.compile(r"/|\b(to|in|into|basin|and)\b", re.I)
+# a path, a basin or a list of streams ('HURON,HONEY,ALLEN,TRAVER,MILLERCREK', EPA's text for an Ann Arbor permit: a
+# comma between words with no space after it, the MI go-live audit's P3-2), not a name
+ALIAS_NOT_A_NAME = re.compile(r"/|\b(to|in|into|basin|and)\b|\w,\w", re.I)
+# NHD records the tidy keeps although a same-slug openboatlaunch record passes same_water_by_box: {slug: why}. The
+# offline box test reads a record covering a few hundred metres of a river as the river (the feature's own box covers
+# it); where that record is a stub of a long river, dropping the NHD record would leave the river with only the stub.
+# The kept record stays shadowed (status.load_waters keeps openboatlaunch's record of the slug), so the target rows
+# that name it (slugs, reach_slugs) go to its remainder, the NHD record of the rest of the river (covers_part_of the
+# slug, the same GNIS id), when there is one: the outfalls upstream stay on the river, not on the stub.
+KEEP_NHD_RECORD = {
+    "saint-joseph-river-mi": "openboatlaunch's saint-joseph-river-mi is a 0.93 km2 polygon at the mouth; the NHD record "
+                             "is the 256 km river, on which eight plants' outfalls lie 21 to 204 km upstream (MI go-live "
+                             "audit 2026-11-04, P2-5)",
+}
 SAME_BOX_SHARE = 0.5       # this share of the NHD feature inside the record's box (or of the box under the feature's)
 
 
@@ -1937,6 +1950,14 @@ def resolve_existing_duplicates(doc: dict, existing: dict, states, when: str | N
         if w.get("state") not in states or not w.get("geometry") or w.get("covers_part_of"):
             keep.append(w)
             continue
+        if w["slug"] in KEEP_NHD_RECORD:
+            keep.append(w)
+            rest = [r for r in waters if r.get("covers_part_of") == w["slug"] and r.get("state") == w.get("state")
+                    and r.get("gnis_id") and r.get("gnis_id") == w.get("gnis_id")]
+            if w["slug"] in existing and len(rest) == 1:
+                moved[w["slug"]] = (rest[0]["slug"], "kept", f"{KEEP_NHD_RECORD[w['slug']]}; its rows go to "
+                                    f"{rest[0]['slug']}, the NHD record of the rest of the river")
+            continue
         g = shape(w["geometry"])
         same = same_named_existing(existing, w["state"], w.get("name"))
         if w["slug"] in existing and w["slug"] not in same:
@@ -1973,12 +1994,14 @@ def resolve_existing_duplicates(doc: dict, existing: dict, states, when: str | N
             w = {**w, "slug": new}
         keep.append(w)
     actions = []
+    hit = set()
     for t in doc.get("targets") or []:
         if t.get("state") not in states:
             continue
         hits = [x for x in t.get("slugs") or [] if x in moved]
         if not hits:
             continue
+        hit.update(hits)
         t["slugs"] = list(dict.fromkeys(moved[x][0] if x in moved else x for x in t["slugs"]))
         if t.get("reach_slugs"):
             t["reach_slugs"] = {k: moved[v][0] if v in moved else v for k, v in t["reach_slugs"].items()}
@@ -1987,10 +2010,13 @@ def resolve_existing_duplicates(doc: dict, existing: dict, states, when: str | N
             new, act, why = moved[x]
             notes.append(f"{when}: the NHD record {x} was dropped: openboatlaunch's {new} is this water ({why})"
                          if act == "dropped" else
+                         f"{when}: the NHD record {x} is kept, shadowed by openboatlaunch's record of that slug: {why}"
+                         if act == "kept" else
                          f"{when}: the NHD record {x} was renamed {new}: {why}")
         t["notes"] = list(dict.fromkeys(notes))
     for old, (new, act, why) in sorted(moved.items()):
-        actions.append({"slug": old, "action": act, "to": new, "why": why})
+        if act != "kept" or old in hit:          # a kept record whose rows were moved by an earlier pass: nothing done
+            actions.append({"slug": old, "action": act, "to": new, "why": why})
     # a row the build left without a record whose name an existing record now carries (openboatlaunch's extract, or a
     # hand alias in data/water-aliases.json: 'Lake Lanier' at Buford), the only one of that name in the state, and
     # reaching one of the operators' towns by its town list: that record, and the row says so
@@ -3741,6 +3767,7 @@ def tidy_main(states, path=None, aliases_path=None) -> int:
         builds[st] = {**(builds.get(st) or {}), "existing_duplicates": {
             "date": now_iso()[:10], "dropped": sum(a["action"] == "dropped" for a in mine),
             "renamed": sum(a["action"] == "renamed" for a in mine),
+            "kept": sum(a["action"] == "kept" for a in mine),
             "rows_mapped": sum(a["action"] == "mapped" for a in mine),
             "unnamed_named": sum(a["action"] == "named" for a in mine),
             "unnamed_left": [x for x in unnamed_left if x.endswith(f"-{st.lower()}")], "actions": mine}}
@@ -3757,7 +3784,8 @@ def tidy_main(states, path=None, aliases_path=None) -> int:
         print(f"  {a['action']:8} {a['slug'] or 'row ' + repr(a.get('row'))} -> {a['to']}: {a['why']}")
     print(f"{', '.join(states)}: {sum(a['action'] == 'dropped' for a in actions)} NHD records dropped for the "
           f"openboatlaunch record of the same water, {sum(a['action'] == 'renamed' for a in actions)} renamed off an "
-          f"openboatlaunch slug, {sum(a['action'] == 'mapped' for a in actions)} target rows without a record mapped "
+          f"openboatlaunch slug, {sum(a['action'] == 'kept' for a in actions)} kept (KEEP_NHD_RECORD), "
+          f"{sum(a['action'] == 'mapped' for a in actions)} target rows without a record mapped "
           f"to the one now carrying their name; {len(aliases)} records given aliases in {shown(aliases_path)}; "
           f"{voiced} target rows' reasons put in public voice (the detail in reason_detail); "
           f"{len(named)} 'Unnamed stream' records named for their town"
