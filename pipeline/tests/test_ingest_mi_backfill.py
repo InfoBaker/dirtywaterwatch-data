@@ -330,3 +330,51 @@ def test_a_landowners_name_in_the_possessive_is_cut(given, gone, kept):
         assert gone not in out and M.NAME_REMOVED in out
     else:
         assert out == given
+
+
+# ---------------------------------------------------------------- review 2026-11-04: what rebuilds the kept records
+
+def _kept(env, monkeypatch) -> int:
+    return run(env, monkeypatch, Service(HISTORY))["meta"]["kept_as_saved"]
+
+
+def test_a_changed_privacy_rule_file_or_name_list_rebuilds_every_kept_record(env, monkeypatch, tmp_path):
+    """The records kept as saved get a new privacy rule: a change to redact.py, common.py, this module or a name list
+    (data/build/name-blocklist.json, data/name-allowlist.json and the public data/name-blocklist.json the redaction
+    also reads) rebuilds and redacts every record once."""
+    from build import redact
+    data, build_dir = tmp_path / "data", tmp_path / "build"
+    data.mkdir()
+    build_dir.mkdir()
+    monkeypatch.setattr(M, "DATA_DIR", data)
+    monkeypatch.setattr(M, "BUILD_DIR", build_dir)
+    run(env, monkeypatch, Service(HISTORY), "--backfill")
+    assert _kept(env, monkeypatch) == 52
+    for f in (Path(redact.__file__), Path(common.__file__), Path(M.__file__)):
+        copy = tmp_path / f"changed_{f.name}"
+        copy.write_text(f.read_text() + "\n# a new rule\n")
+        mod = {"redact.py": redact, "common.py": common, "mi_egle_mienviro.py": M}[f.name]
+        monkeypatch.setattr(mod, "__file__", str(copy))
+        assert _kept(env, monkeypatch) == 0, f.name
+        assert _kept(env, monkeypatch) == 52, f.name
+    for p in (build_dir / "name-blocklist.json", data / "name-allowlist.json", data / "name-blocklist.json"):
+        p.write_text(json.dumps({"names": ["Robin Placeholder"]}))
+        assert _kept(env, monkeypatch) == 0, p
+        assert _kept(env, monkeypatch) == 52, p
+
+
+def test_the_rules_stamp_is_saved_only_with_the_records_it_built(env, monkeypatch):
+    """A run that changes the rules and stops before its records are written must not leave the new stamp: the next run
+    would keep the old records as saved under rules they were not built with."""
+    run(env, monkeypatch, Service(HISTORY), "--backfill")
+    stamp = json.loads((env / "state.json").read_text())["build_stamp"]
+    monkeypatch.setattr(M, "permit_index", lambda rows=None: {**PERMITS, "MI0099009": "mi-another"})
+
+    def stop(*a, **k):
+        raise KeyboardInterrupt("the runner stopped the job")
+    monkeypatch.setattr(M, "write_events", stop)
+    monkeypatch.setattr(M.requests, "Session", lambda: _Sess(Service(HISTORY)))
+    monkeypatch.setattr(M, "datetime", _Clock)
+    with pytest.raises(KeyboardInterrupt):
+        M.main([])
+    assert json.loads((env / "state.json").read_text())["build_stamp"] == stamp
