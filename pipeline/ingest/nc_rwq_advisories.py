@@ -4,7 +4,7 @@ Source
   NC DEQ Division of Marine Fisheries, Recreational Water Quality program: the public station layer
   https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/RWQ_Advisory_EXTERNAL/FeatureServer/1
   ("Monitoring_Stations"; 225 ocean and sound stations on 2026-11-04), queried as JSON with points in
-  WGS84. Each station has ASN (its station code, e.g. N88), DESCRIPTIO (the site), COUNTY, TIER (1 daily-use,
+  WGS84, the named fields only (FIELDS). Each station has ASN (its station code, e.g. N88), DESCRIPTIO (the site), COUNTY, TIER (1 daily-use,
   2 less used), LOCATION (ocean / sound), EPA_ID and Status, a coded value:
     No Alert          "No Pending Swimming Advisory/Swimming Advisory"
     Pending Swimming Advisory   one sample at or over the limit; a resample decides (15A NCAC 18A .3403(a)(1))
@@ -19,8 +19,12 @@ Snapshot rules (the previous events file is the state)
   - One record per spell of one Status at one station: event_id nc-rwq-advisories:<ASN>:<status code>:<UTC
     stamp of the layer edit that opened it>. Advisory -> beach_advisory, advisory_active (the authority's own
     advisory); Precautionary -> rain_advisory, advisory_active (the storm-water discharge sign); Pending Swimming
-    Advisory -> beach_advisory, status unknown (a sample over the limit awaiting a resample; the status build
-    shows it as an unconfirmed advisory). No Alert is no event: the stations are listed in meta.tracked.
+    Advisory -> beach_advisory, advisory_active (the rule says the Division issues a pending swimming advisory when
+    one sample is at or over the limit, .3403(a)(1) and (b)(1); a resample decides). No Alert is no event: the
+    stations are listed in meta.tracked. A blank Status leaves an open spell open (raw._status_blank_since) and
+    does not re-confirm it.
+  - The dates are this site's observation of the map, not dates the Division publishes (raw._date_basis,
+    raw._end_note say so on every record).
   - started_at is the layer's last data edit (editingInfo.dataLastEditDate) on the run that first saw the
     status: the status was set at or before that edit and has held since; time_precision "poll". When a
     station leaves that status, the record is advisory_lifted with ended_at the
@@ -72,6 +76,14 @@ SIGNS = {
                       "(15A NCAC 18A .3404(c), wet weather sign)"),
 }
 NO_ALERT = "No Alert"
+FIELDS = ["OBJECTID", "STATION", "COUNTY", "TIER", "LATITUDE", "LONGITUDE", "EFFECTIVE", "EPA_ID", "StationID",
+          "GlobalID", "Status", "Data", "ASN", "ASN2", "DESCRIPTIO", "LOCATION"]
+DATE_BASIS = ("Dated by this site from the map: the layer's last change on the run that first showed this status. "
+              "The map gives no issue or lift dates, so this is this site's observation, not an issue date from the "
+              "Division of Marine Fisheries; the advisory may have been issued earlier.")
+END_NOTE = ("Dated by this site from the map: the layer's last change on the run that no longer showed this status "
+            "(the Division changed it at or before then). This is this site's observation, not a lift date from "
+            "the Division of Marine Fisheries.")
 
 
 def ms_iso(v) -> str | None:
@@ -104,7 +116,7 @@ def station_id(a: dict) -> str | None:
 
 
 def fetch(sess: requests.Session) -> tuple[list[dict], dict]:
-    r = sess.get(f"{LAYER}/query", params={"where": "1=1", "outFields": "*", "outSR": 4326, "f": "json",
+    r = sess.get(f"{LAYER}/query", params={"where": "1=1", "outFields": ",".join(FIELDS), "outSR": 4326, "f": "json",
                                             "resultRecordCount": 2000}, timeout=(15, 90))
     r.raise_for_status()
     js = r.json()
@@ -137,6 +149,12 @@ def build(features: list[dict], layer_meta: dict, fetched_at: str, prev_records:
         lat = g.get("y") if g.get("y") is not None else a.get("LATITUDE")
         lon = g.get("x") if g.get("x") is not None else a.get("LONGITUDE")
         cur = open_by_station.get(sid)
+        if not code and cur is not None:                  # a blank status says nothing: the spell stays open
+            cur["fetched_at"] = fetched_at
+            cur["raw"]["_status_blank_since"] = cur["raw"].get("_status_blank_since") or fetched_at
+            continue
+        if cur is not None:
+            cur["raw"].pop("_status_blank_since", None)
         cur_code = ((cur or {}).get("raw") or {}).get("_status_code")
         if cur is not None and cur_code != code:          # the status this record stands for has ended
             close(cur, edited, fetched_at)
@@ -171,9 +189,10 @@ def open_record(a: dict, sid: str, code: str, lat, lon, edited: str | None, fetc
     et, status, label, rule = STATUS.get(code, ("beach_advisory", "unknown", code, None))
     site = clean(a.get("DESCRIPTIO")) or sid
     where = clean(a.get("LOCATION")).lower()
-    raw = {k: v for k, v in a.items() if k not in ("GlobalID_2", "GlobalID_3")}
+    want = {f.lower() for f in FIELDS}
+    raw = {k: v for k, v in a.items() if k.lower() in want}
     raw.update({"_status_code": code, "_status_label": label, "_rule": rule, "_first_seen_at": fetched_at,
-                "_last_seen_at": fetched_at, "_layer": LAYER,
+                "_last_seen_at": fetched_at, "_layer": LAYER, "_date_basis": DATE_BASIS,
                 "_start_basis": ("the layer's last data edit on the run that first saw this status: the status was set "
                                  "at or before then (the layer gives no issue time)")})
     if code not in STATUS:
@@ -203,8 +222,7 @@ def close(rec: dict, edited: str | None, fetched_at: str) -> None:
     rec["status"] = "advisory_lifted"
     rec["fetched_at"] = fetched_at
     rec["raw"]["_lifted_seen_at"] = fetched_at
-    rec["raw"]["_end_note"] = ("the layer's last data edit on the run that no longer showed this status: DEQ changed it "
-                               "at or before then")
+    rec["raw"]["_end_note"] = END_NOTE
 
 
 def main(argv=None) -> int:
