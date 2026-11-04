@@ -82,6 +82,12 @@
     "clock": "end_of_discharge",
     "basis": "North Carolina law sets no period after a sewage discharge during which the water is to be avoided. The operator of the sewer system or treatment plant must issue a press release to the news media covering the county within 24 hours of finding that 1,000 gallons or more of untreated wastewater reached surface waters, and publish a newspaper notice for 15,000 gallons or more (G.S. 143-215.1C(b)); every overflow reaching surface water must also be reported to the Division of Water Resources within 24 hours, and the Division posts these reports on its public map. On the coast, the Division of Marine Fisheries issues a swimming advisory and posts signs at swimming waters affected by a wastewater spill, with no set end (15A NCAC 18A .3404(b)). This site marks reported ongoing discharges and applies its own caution after they end",
     "source": "N.C. Gen. Stat. 143-215.1C(b); NC DEQ Division of Water Resources, Information on Sewer System Overflows; 15A NCAC 18A .3403-.3404"
+   },
+   "GA": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Georgia sets no period after a spill during which the public is told to keep out of the water: the operator of a public sewer system must tell EPD immediately, report each spill of raw sewage to local television, radio and print media within 24 hours and to the local health department immediately, and post signs at the spill and at bridges, trails, boat ramps and other public access points downstream that stay up for at least seven days after the spill ends (Ga. Comp. R. & Regs. 391-3-6-.05(3)). A major spill (over 10,000 gallons) also needs a notice in the county's legal newspaper within seven days and notice to public water suppliers within 20 miles downstream. EPD's daily list gives the day a spill began, not its time or its end",
+    "source": "Ga. Comp. R. & Regs. 391-3-6-.05(3)(a)-(g); O.C.G.A. 12-5-30.1; Georgia EPD Sewage Spills Report"
    }
   },
   "by_discharger": {
@@ -219,7 +225,12 @@
   "unresolved_yellow_rationale": "From day 7 to day 30, the map marks the end as unconfirmed. After day 30, the record remains flagged on its report and water pages.",
   "unknown_status_yellow_days": 14,
   "unknown_status_rationale": "A discharge record with unclear status shows caution for 14 days after its report time. It then follows the rule for unconfirmed records.",
-  "end_assumed_rationale": "A report with no end is shown as unresolved for 30 days after it began; after that this site assumes the discharge ended and the record says the end was never reported."
+  "end_assumed_rationale": "A report with no end is shown as unresolved for 30 days after it began; after that this site assumes the discharge ended and the record says the end was never reported.",
+  "day_start_caution": {
+   "sources": ["ga-epd-spills"],
+   "hours": 72,
+   "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
+  }
  },
  "reach": {
   "cap_km": 40,

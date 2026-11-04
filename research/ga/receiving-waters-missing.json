@@ -1,0 +1,2503 @@
+{
+ "about": "Receiving-water names in Georgia's spill reports (EPD's daily list, postings of 2026-06-01, 2026-10-01, 2026-10-15, 2026-10-30, 2026-11-02 and 2026-11-03, and EPA's Sewer Overflow and Bypass Event reports for GA permits, extract of 2026-11-03) that data/receiving-waters-national.json does not hold for GA, by name as typed (case and punctuation ignored). Spelling variants of a held water (Polebridge Creek, Sugar Crek, Ocmuglee) are listed as typed so an alias can be added.",
+ "checked": "2026-11-04",
+ "count": 302,
+ "by_kind": {
+  "named water": 155,
+  "tributary of a named water": 127,
+  "storm system or not a named water": 20
+ },
+ "names": [
+  {
+   "name": "North Fork Peachtree Creek",
+   "reports": 51,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Peachtree Creek",
+   "reports": 34,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "South Fork Peachtree Creek",
+   "reports": 32,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Snapfinger Creek",
+   "reports": 16,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Unnamed Tributary of Little River Basin",
+   "reports": 15,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Chattahoochee River Tributary",
+   "reports": 14,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Pole Bridge Creek",
+   "reports": 14,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Sugar Creek",
+   "reports": 14,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Bull creek tributary",
+   "reports": 13,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Raes Creek",
+   "reports": 13,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Sandy Creek",
+   "reports": 12,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Shoals Creek",
+   "reports": 10,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Doolittle Creek",
+   "reports": 9,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Peavine Creek",
+   "reports": 9,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Tributary to Laurel Creek",
+   "reports": 8,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Jester Creek",
+   "reports": 7,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "stormwater system",
+   "reports": 7,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Tributary to Nickajack Creek",
+   "reports": 7,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Olley Creek",
+   "reports": 7,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Barbashela Creek",
+   "reports": 6,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Conley Creek",
+   "reports": 6,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Heiferhorn Creek Tributary",
+   "reports": 6,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Lindsey Creek",
+   "reports": 6,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Roaring Branch",
+   "reports": 6,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Honey Creek",
+   "reports": 5,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Morning Creek",
+   "reports": 5,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "MS4 stormwater system",
+   "reports": 5,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Poole Creek",
+   "reports": 5,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Private Pond",
+   "reports": 5,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Unnamed Tributary of Beaver Ruin Creek",
+   "reports": 5,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary of Little Suwanee Creek",
+   "reports": 5,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Wolfpack Creek",
+   "reports": 5,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Ball Mill Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Brooklyn Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Bull Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Burnt Fork Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Cobbs Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Cooper Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Ditch feeding Rocky Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Favor Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Good Water Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Gordon Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "HENDERSON MILL CREEK",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Jackson Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Marsh Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Mossy Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "North Lake",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Panthers Branch",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Perimeter Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Phinizy Ditch",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Pye Lake Tributary",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Springfield Canal (MS4)",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Steam from Beaverdam creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Tributary of Johns Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "tributary of Little River",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary of Long Island Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Almand Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Butler Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Chattahoochee River",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Little Noonday Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Noonday Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Sugar Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "un-named tributary to Suwanee Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "unnamed tributary",
+   "reports": 4,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary of Silver Creek",
+   "reports": 4,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Casey Canal",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Crockett Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Ditch feeding Bowman Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Kingsley Lake",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Lower Rocky Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Lower Snapfinger Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "MS4 system",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Nash Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Ocmuglee",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Proctor",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "South Fork Peavine Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Springfield Canal",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "storm water catch basin",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Sullivan Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Timber Ridge Branch",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Tributary to Buttermilk Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Favor Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Proctor Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Rottenwood Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Sope Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Timber Ridge Branch",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary of Shoal Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary to Shoal Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Utoy",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Weracoba Creek",
+   "reports": 3,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Anneewakee Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Armory Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Big Creek Basin",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Bowman Branch",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Butler Creek Tributary",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "catch basin",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Catch basin in MS4 system",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "City Stormwater system",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Coffee Bluff Canal",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Concord Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Creek in resident's yard.",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Ditch feeding Bowman Branch",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Eastanollee",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Flatrock Creek tributary",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Huey Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "INTREACHMENT CREEK",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Lake Tobesofkee",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Lindsey Creek Basin",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Little Bear Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Little Tallapoosa River",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Long Island Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "New River Basin",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Nickajack Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Palmer Branch",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Panther Ct.",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Peachtree",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Peachtree Branch",
+   "reports": 2,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Pew Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Pipemakers Canal",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Rock Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Seventeen Mile River",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Sloans Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "SOUTH RIVER CREEK",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Stone Mountain Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Stream",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Swamp Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Trail Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Trib of Cooper Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary of Big Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary of Chattahoochee river",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Allatoona Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Mill Creek No. 2",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Noonday Creek Tributary No. 7",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Noses Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Piney Grove Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Sweat Mountain Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "TRIBUTARY TO YELLOW RIVER",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Un-named tributary to Lake Lanier",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unamed",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Unnamed",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary of Bennett Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports",
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary of Big Haynes Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary of Chattahoochee River",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary of Jackson Creek",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary to Lake Lanier",
+   "reports": 2,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "17 Mile River",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Airport Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Babashela Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Bear Creek - headwaters",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Big Cotton Indian Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Bishop Lake Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "BOAK TUSK",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Boar Tusk Branch.",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Bromolow Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Buttermilk Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Camp Bert Adams Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Cauley Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Chattahoochee River Trib.",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Cobb Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Cooks Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Cooper Creek Tributary",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Dark Entry Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Deep Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Ditch feeding Blue Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Ditch feeding Boggy Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Ditch feeding Dillon Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Ditch feeding Vineville Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Ditch feeding Walnut Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Dram Branch Basin",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "East Jester's Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Flint",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Fowler",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Fowler Branch Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Ginger Cake",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "GLENDALE TRIBUTARY",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Gum Swamp Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Harmony Grove Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Henderson Creek Mill",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Intermittent Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Ison Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Johns Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Knollwood Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Lake Erma",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Lake Knickerbocker",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Lake Tobesofke",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Level Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Lindsay Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Little Noonday Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Little Ogeechee Pond",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "LUCKY SHOALS CREEK",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Mill Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Mill Branch Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Mill Branch Tributary",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Mill Creek No 2",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Mimms Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "MS4 ditch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "MS4 stormwater catch basin",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Mulberry Subdivision Drainage Pond",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "No name Creek to Middle Oconee",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "No name Wetland",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Noonday Creek Tributary No. 6",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Oates Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Olley Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "One MIle Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Panthers Branch Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Parker Fairway Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Pates Creek Tributary",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Phinizy Swamp",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Polebridge Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Pond",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "River Ridge Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Roaring Branch Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Roaring Branch Crekk",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Roaring Branch Tributary",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Rotten Wood Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Rum Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Sabbath Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Sandy",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Savage Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Savage Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Singleton Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Skyland Lake",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Smyrna Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Snapping Shoals",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Sope Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "SOUTH FORK PEACHTREE CREK",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "SOUTHRIVER",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Spirt Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "ST. Marys",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Standing Boy Creek tributary",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "stormwater catch basin",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Sugar Crek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Thompson Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Tibutary to Sugar Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Trib Heiferhorn Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Trib Lindsey Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Trib of Bull Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Trib of Tiger Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Trib of Upatoi Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary D to Little Anneewakee Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary Litle Cotton Indian Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary Nickajack Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary of Gingercake",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary of Seven Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary of Upatoi Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary of Utoy Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Bald Ridge Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Bettys Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Bishop Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Blackjack Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Clark Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary  to Clay Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Harmony Grove Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Ison Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Little Allatoona Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "tributary to little red bluff creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Milam Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Morgan Lake",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Noonday Creek Tributary No. 1",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Noonday Creek Tributary No 6",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to North Oconee Riverr",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Pitner Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Private Pond",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Queen Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Rubes Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Sewell Mill Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Soper Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Tate Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Upatoi Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Walden Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Wild Horse Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Tributary to Willeo Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Trickum Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Un-named tributary of Gingercake Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "unamed tributary of Little Haynes Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "unamed tributary of yellow river",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unknown Stream",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  },
+  {
+   "name": "Unnamed Stream",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "unnamed trib. crooked creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "unnamed trib to little red bluff creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed tributary feeding Rooty creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed tributary Little Red Bluff Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary of Brushy Fork Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "unnamed tributary of ivy creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary of Pew Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed tributary of Proctor Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPD list"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed tributary of singleton creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed tributary to 17 Mile River",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary to Chattahoochee River",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary to Flat Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed tributary to Proctor Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "unnamed tributary to Rice Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed Tributary to Town Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Unnamed trributary to Little Red Bluff Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Upatoi Creek Tributary",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Upper Upatoi Basin",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Vineville Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Vinings Branch",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Weracoba Creek Basin",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Weracoba Creek Trib.",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "tributary of a named water"
+  },
+  {
+   "name": "Willeo Creek",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "named water"
+  },
+  {
+   "name": "Wilshire Canal (MS4)",
+   "reports": 1,
+   "seen_in": [
+    "EPA reports"
+   ],
+   "kind": "storm system or not a named water"
+  }
+ ]
+}

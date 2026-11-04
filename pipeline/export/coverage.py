@@ -56,7 +56,7 @@ STATE_NAMES = {
     "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island",
     "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont",
     "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"}
-ABBR = re.compile(r"\b(?:Va|Env|Md|Code|Ann|Stat|Gen|Laws|Rev|Pt|Sec|Art|No|St|Mass|Conn|Me|Vt|Pa|R\.I|N\.Y|N\.J|N\.H|D\.C|"
+ABBR = re.compile(r"\b(?:Va|Ga|Comp|Env|Md|Code|Ann|Stat|Gen|Laws|Rev|Pt|Sec|Art|No|St|Mass|Conn|Me|Vt|Pa|R\.I|N\.Y|N\.J|N\.H|D\.C|"
                   r"U\.S|C\.F\.R|seq|al|e\.g|i\.e)\.$")
 
 
