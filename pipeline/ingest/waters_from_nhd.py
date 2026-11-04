@@ -1647,6 +1647,151 @@ def overlap_with_existing(rec, existing, slugs):
     return None, None
 
 
+# ---------------------------------------------------------------- an NHD water that is an openboatlaunch record
+
+ALIAS_NOT_A_NAME = re.compile(r"/|\b(to|in|into|basin|and)\b", re.I)
+SAME_BOX_SHARE = 0.5       # this share of the NHD feature inside the record's box (or of the box under the feature's)
+
+
+def same_water_by_box(geom, w: dict, towns=()) -> tuple[bool | None, str]:
+    """Whether an NHD feature (geom, its towns) is the water of a same-named record w whose outline is not on this
+    machine (an openboatlaunch record without its out/water file: a cloud session or a runner without the sibling
+    snapshot), by w's bounding box, which holds the whole water: (False, why) when the feature lies more than
+    SAME_WATER_M from the box (sure: another water of that name); (True, why) when it touches the box and either
+    SAME_BOX_SHARE of the feature lies in the box, or that share of the box lies under the feature's own box (a record
+    that covers only a stretch of the river), or the two name a town in common; (None, why) otherwise (left as two
+    records). With the outline on disk overlap_with_existing decides instead."""
+    b = w.get("bbox")
+    if geom is None:
+        return None, "no NHD geometry"
+    if not b or len(b) != 4:
+        common = sorted({town_key(t) for t in towns or []} & {town_key(t) for t in w.get("towns") or []})
+        if common and w.get("kind") not in S.WIDE_KINDS:
+            return True, f"same name; {w.get('slug')} has no bounding box and both name {', '.join(common[:3])}"
+        return None, f"{w.get('slug')} has no bounding box" + ("" if common else " and no town in common")
+    bx = sbox(*b)
+    d = geom_dist_m(geom, bx)
+    if d > SAME_WATER_M:
+        return False, f"the NHD feature lies {d / 1000:.1f} km outside {w.get('slug')}'s bounding box"
+    lat0 = geom.centroid.y
+    gm = to_m_geom(geom, lat0)
+    bm = to_m_geom(bx, lat0)
+    pad = bm.buffer(SAME_WATER_M)
+    if gm.area > 0:
+        share = gm.intersection(pad).area / gm.area
+    else:
+        share = gm.intersection(pad).length / gm.length if gm.length > 0 else 0.0
+    under = to_m_geom(sbox(*geom.bounds), lat0).buffer(SAME_WATER_M)
+    cover = bm.intersection(under).area / bm.area if bm.area > 0 else 0.0
+    common = sorted({town_key(t) for t in towns or []} & {town_key(t) for t in w.get("towns") or []})
+    why = (f"same name; {share:.0%} of the NHD feature lies within {SAME_WATER_M} m of {w.get('slug')}'s bounding box, "
+           f"which the feature's own box covers {cover:.0%} of" + (f"; both name {', '.join(common[:3])}" if common else ""))
+    if share >= SAME_BOX_SHARE or cover >= SAME_BOX_SHARE or common:
+        return True, why
+    return None, why
+
+
+def existing_same_water(geom, towns, existing: dict, slugs) -> tuple[str | None, str | None]:
+    """(slug, why): the same-named existing record (slugs) the NHD feature is, judged by its outline within
+    SAME_WATER_M when on disk, else by its bounding box (same_water_by_box); (None, None) when none is."""
+    for s in slugs:
+        eg = S.water_geometry(s, existing)
+        if eg is not None:
+            d = geom_dist_m(geom, eg)
+            if d <= SAME_WATER_M:
+                return s, f"same name; the NHD feature lies {int(round(d))} m from {s}'s outline"
+            continue
+        same, why = same_water_by_box(geom, existing[s], towns)
+        if same:
+            return s, why
+    return None, None
+
+
+def resolve_existing_duplicates(doc: dict, existing: dict, states, when: str | None = None) -> tuple[dict, list[dict], dict]:
+    """The state build's records that duplicate an openboatlaunch record now on file (2026-11-04: the NC, GA and FL
+    records were built while openboatlaunch's extracts for those states were absent, so 'record' rows and the
+    names openboatlaunch carries were built from NHD). For every record of `states` in doc (data/waters-nhd.json):
+      - a same-named existing record that is the same water (existing_same_water) is the public one: the NHD record
+        is dropped, the target rows' slugs, reach_slugs and the outfall rows of the next outfall_waters run point to
+        the existing slug, each such row says so in `notes`, and the NHD record's name aliases the existing record
+        lacks are returned for data/water-aliases.json;
+      - an NHD record whose slug is an existing record of another water (the NHD record was shadowed: status.load_waters
+        keeps the first record of a slug, openboatlaunch's) takes <name>-<town>-<st> (assign_slugs' rule for the
+        second water of a name), and its target rows follow.
+    Returns (the new doc, the actions, {existing slug: [aliases]}). Nothing is fetched."""
+    states = {x.upper() for x in states}
+    when = when or now_iso()[:10]
+    waters = list(doc.get("waters") or [])
+    taken = set(existing) | {w["slug"] for w in waters if w.get("slug")}
+    moved: dict[str, tuple[str, str, str]] = {}      # NHD slug -> (new slug, action, why)
+    aliases: dict[str, list[str]] = {}
+    keep = []
+    by_slug_rows = defaultdict(list)
+    for t in doc.get("targets") or []:
+        for x in t.get("slugs") or []:
+            by_slug_rows[x].append(t)
+    for w in waters:
+        if w.get("state") not in states or not w.get("geometry") or w.get("covers_part_of"):
+            keep.append(w)
+            continue
+        g = shape(w["geometry"])
+        same = same_named_existing(existing, w["state"], w.get("name"))
+        if w["slug"] in existing and w["slug"] not in same:
+            same.append(w["slug"])
+        s, why = existing_same_water(g, w.get("towns") or [], existing, same)
+        if s:
+            ew = existing[s]
+            have = {S.norm_name(ew.get("name") or "")} | {S.norm_name(a) for a in ew.get("aliases") or []}
+            # a name the NHD record went by (EPA's spelling: 'OCMULGEE RV', 'Ocmuglee River'), not a whole text that
+            # names a path or a basin ('ETOWAH RV/COOSA RV BASIN', 'BRIER CRK TO SAVANNAH RIVER')
+            extra = [a for a in [w.get("name")] + list(w.get("aliases") or [])
+                     if a and S.norm_name(a) not in have and not ALIAS_NOT_A_NAME.search(a)]
+            if extra:
+                aliases[s] = list(dict.fromkeys(aliases.get(s, []) + extra))
+            moved[w["slug"]] = (s, "dropped", why)
+            continue
+        if w["slug"] in existing:
+            towns = list(w.get("towns") or [])
+            for t in by_slug_rows.get(w["slug"], []):
+                towns += [x for x in t.get("towns") or [] if x not in towns]
+            new = None
+            for tw in towns:
+                c = f"{slugify(w['name'])}-{slugify(tw)}-{w['state'].lower()}"
+                if c not in taken:
+                    new = c
+                    break
+            if new is None:
+                new = f"{slugify(w['name'])}-{slugify(str(w.get('gnis_id') or (w.get('comids') or ['x'])[0]))}-{w['state'].lower()}"
+            taken.add(new)
+            _, why = same_water_by_box(g, existing[w["slug"]], w.get("towns") or []) \
+                if S.water_geometry(w["slug"], existing) is None else (None, "its outline lies elsewhere")
+            moved[w["slug"]] = (new, "renamed", f"{w['slug']} is openboatlaunch's record of another {w.get('name')} "
+                                                f"({why})")
+            w = {**w, "slug": new}
+        keep.append(w)
+    actions = []
+    for t in doc.get("targets") or []:
+        if t.get("state") not in states:
+            continue
+        hits = [x for x in t.get("slugs") or [] if x in moved]
+        if not hits:
+            continue
+        t["slugs"] = list(dict.fromkeys(moved[x][0] if x in moved else x for x in t["slugs"]))
+        if t.get("reach_slugs"):
+            t["reach_slugs"] = {k: moved[v][0] if v in moved else v for k, v in t["reach_slugs"].items()}
+        notes = list(t.get("notes") or [])
+        for x in hits:
+            new, act, why = moved[x]
+            notes.append(f"{when}: the NHD record {x} was dropped: openboatlaunch's {new} is this water ({why})"
+                         if act == "dropped" else
+                         f"{when}: the NHD record {x} was renamed {new}: {why}")
+        t["notes"] = list(dict.fromkeys(notes))
+    for old, (new, act, why) in sorted(moved.items()):
+        actions.append({"slug": old, "action": act, "to": new, "why": why})
+    out = {**doc, "waters": sorted(keep, key=lambda r: r.get("slug") or ""), "count": len(keep)}
+    return out, actions, aliases
+
+
 def target_point_towns(t, towns: Towns, geom=None) -> tuple[Counter, int]:
     """(towns of the target's points, number of reports): only the points within NEAR_M of geom
     when given (a target naming two waters of one name gives each its own towns); the listed
@@ -2554,7 +2699,11 @@ class Run:
             return rec
         s, rest = overlap_with_existing(rec, self.existing, same)
         if not s:
-            return rec
+            # a same-named record whose outline is not on this machine (openboatlaunch's out/water absent): its
+            # bounding box decides whether this is that water (same_water_by_box); the remainder cannot be cut
+            unmeasured = [x for x in same if S.water_geometry(x, self.existing) is None]
+            hit, _ = existing_same_water(rec["_geom"], rec.get("towns") or [], self.existing, unmeasured)
+            return {"_existing": hit} if hit else rec
         rest = WX.as_multiline(rest) if (rest is not None and rec["length_km"] is not None) else None
         if rest is None or rest.is_empty or WX.length_km(rest) < REMAINDER_MIN_KM or not t["points"] \
                 or min(dist_m(rest, lon, lat) for lon, lat in t["points"]) > S.NAME_MATCH_M:
@@ -3049,7 +3198,14 @@ def main(argv=None):
                     help="a state build: seconds the NHD high-resolution pass may spend (default 900)")
     ap.add_argument("--max-requests", type=int, help="at most this many network requests in the run (cached answers "
                                                      "are free); the run then stops cleanly and the next one resumes")
+    ap.add_argument("--dedupe-existing", action="store_true",
+                    help="with --state: no build; resolve the state's records that duplicate an openboatlaunch record "
+                         "now on file (resolve_existing_duplicates), offline")
     args = ap.parse_args(argv)
+    if args.dedupe_existing:
+        if not args.state:
+            ap.error("--dedupe-existing needs --state")
+        return dedupe_main(args.state)
     if args.state:
         if args.rebuild or args.osm_only:
             ap.error("--state merges into data/waters-nhd.json: no --rebuild or --osm-only")
@@ -3186,6 +3342,38 @@ def state_stats(states, targets, rows, recs, tstats, http, run) -> dict:
     for v in out.values():
         v["run"] = shared
     return out
+
+
+def dedupe_main(states, path=None, aliases_path=None) -> int:
+    """--state XX --dedupe-existing: resolve_existing_duplicates on data/waters-nhd.json, the aliases into
+    data/water-aliases.json (merged, sorted by slug), the counts under stats.state_builds.<ST>.existing_duplicates."""
+    states = sorted({x.upper() for x in states})
+    path = path or OUT
+    aliases_path = aliases_path or (DATA_DIR / S.WATER_ALIASES_FILE)
+    S._GEOM_CACHE.clear()
+    existing = existing_waters()
+    doc = read_json(path) or {}
+    new, actions, aliases = resolve_existing_duplicates(doc, existing, states)
+    builds = dict((new.get("stats") or {}).get("state_builds") or {})
+    for st in states:
+        mine = [a for a in actions if a["slug"].endswith(f"-{st.lower()}")]
+        builds[st] = {**(builds.get(st) or {}), "existing_duplicates": {
+            "date": now_iso()[:10], "dropped": sum(a["action"] == "dropped" for a in mine),
+            "renamed": sum(a["action"] == "renamed" for a in mine), "actions": mine}}
+    new["stats"] = {**(new.get("stats") or {}), "state_builds": dict(sorted(builds.items()))}
+    if actions:
+        write_json(path, new)
+    if aliases:
+        cur = read_json(aliases_path) or {}
+        for k, v in aliases.items():
+            cur[k] = list(dict.fromkeys(list(cur.get(k) or []) + v))
+        aliases_path.write_text(json.dumps(dict(sorted(cur.items())), indent=1, ensure_ascii=False) + "\n")
+    for a in actions:
+        print(f"  {a['action']:8} {a['slug']} -> {a['to']}: {a['why']}")
+    print(f"{', '.join(states)}: {sum(a['action'] == 'dropped' for a in actions)} NHD records dropped for the "
+          f"openboatlaunch record of the same water, {sum(a['action'] == 'renamed' for a in actions)} renamed off an "
+          f"openboatlaunch slug; {len(aliases)} records given aliases in {shown(aliases_path)}")
+    return 0
 
 
 def state_main(args) -> int:
