@@ -3801,11 +3801,11 @@
    "legal_basis": "NPDES permit GA0036854: CSO public notification, one of the nine minimum controls of the federal CSO Control Policy (59 FR 18688, 1994); permit text not read",
    "basis_kind": "permit",
    "monitored": false,
-   "unmonitored_reason": "none_found",
-   "publishes": "none",
-   "note": "City of Albany: no public CSO overflow notice page found (not searched in depth, 2026-11-03). Its overflows reach the public record through EPD's daily list. (research/ga/report.md §2.3)",
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "note": "No URL known (not searched): City of Albany CSO public notification (2026-11-03). Its overflows reach the public record through EPD's daily list. (research/ga/report.md §2.3)",
    "checked": "2026-11-04",
-   "barrier": "no_web_page"
+   "barrier": "not_verified"
   },
   {
    "id": "ga-atlanta-cso-signs",
