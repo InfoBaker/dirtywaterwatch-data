@@ -378,3 +378,34 @@ def test_the_rules_stamp_is_saved_only_with_the_records_it_built(env, monkeypatc
     with pytest.raises(KeyboardInterrupt):
         M.main([])
     assert json.loads((env / "state.json").read_text())["build_stamp"] == stamp
+
+
+def test_a_year_halved_after_the_budget_is_spent_is_not_asked_further_and_the_next_backfill_reads_it(env, monkeypatch):
+    """The budget bounds the halves of a full year too: 2003 answers TOP rows when the time is nearly spent, so its
+    halves are not asked for; it is named as not requested (not failed), and the next --backfill reads it."""
+    monkeypatch.setattr(M, "TOP", 6)                          # over the fixture's three open reports
+    monkeypatch.setattr(M.query, "__defaults__", (6, 300))
+    t = {"now": 0}
+    monkeypatch.setattr(M, "clock", lambda: t["now"])
+    by_year = {**HISTORY, 2003: year_rows(2003, 6)}
+
+    class Full(Service):
+        def get(self, url, params=None, timeout=None):
+            flt = json.loads(params["queryParams"])["filter"][0]
+            lo, hi = flt.get("eventStartDateMin"), flt.get("eventStartDateMax")
+            if lo and hi and lo.startswith("2003") and (date.fromisoformat(hi) - date.fromisoformat(lo)).days > 300:
+                t["now"] = M.BACKFILL_BUDGET_S + 1             # the full answer comes back after the budget
+            return super().get(url, params, timeout)
+    svc = Full(by_year)
+    d = run(env, monkeypatch, svc, "--backfill")
+    b = d["meta"]["backfill"]
+    assert svc.asked == ["2001", "2002", "2003"]               # no half of 2003, and no later year
+    assert b["not_requested"][0] == "2003" and "2003" not in b["failed"] and not b["complete"]
+    assert not (env / "archive" / "2003.json").exists()
+    t["now"] = 0
+    svc = Service(by_year)
+    monkeypatch.setattr(M, "TOP", 5000)
+    monkeypatch.setattr(M.query, "__defaults__", (5000, 300))
+    d = run(env, monkeypatch, svc, "--backfill")
+    assert svc.asked[0] == "2003" and d["meta"]["backfill"]["complete"]
+    assert d["meta"]["backfill"]["rows_by_span"]["2003"] == 6

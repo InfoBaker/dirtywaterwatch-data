@@ -724,8 +724,14 @@ def query(sess: requests.Session, flt: dict, top: int = TOP, read_timeout: float
     return [safe_row(x) for x in d["queryResults"] if isinstance(x, dict)]
 
 
-def query_window(sess, status: str, start: date, stop: date) -> list[dict]:
-    """COMPLETE (or IN_PROCESS) reports with a start in [start, stop): halved while a window holds more than TOP."""
+class BudgetSpent(Exception):
+    """The backfill's time ran out between the requests of a halved span (BACKFILL_BUDGET_S)."""
+
+
+def query_window(sess, status: str, start: date, stop: date, deadline: float | None = None) -> list[dict]:
+    """COMPLETE (or IN_PROCESS) reports with a start in [start, stop): halved while a window holds more than TOP.
+    deadline (a clock() time): no further half is asked for after it (BudgetSpent), so a span halved at the end of
+    the backfill's budget does not run on past it."""
     flt = {"reportStatusId": status, "eventStartDateMin": start.isoformat(), "eventStartDateMax": stop.isoformat()}
     try:
         return query(sess, flt)
@@ -733,7 +739,12 @@ def query_window(sess, status: str, start: date, stop: date) -> list[dict]:
         mid = start + (stop - start) / 2
         if mid <= start:
             raise
-        return query_window(sess, status, start, mid) + query_window(sess, status, mid, stop)
+        if deadline is not None and clock() > deadline:
+            raise BudgetSpent(f"{start.isoformat()} to {stop.isoformat()} needs halving after the budget") from None
+        first = query_window(sess, status, start, mid, deadline)
+        if deadline is not None and clock() > deadline:
+            raise BudgetSpent(f"{mid.isoformat()} to {stop.isoformat()} not asked for within the budget")
+        return first + query_window(sess, status, mid, stop, deadline)
 
 
 def fetch_current(sess, today: date) -> list[dict]:
@@ -773,9 +784,9 @@ def transient(e: Exception) -> bool:
     return True
 
 
-def fetch_span(sess, start: date | None, stop: date | None) -> list[dict]:
+def fetch_span(sess, start: date | None, stop: date | None, deadline: float | None = None) -> list[dict]:
     if start and stop:
-        return query_window(sess, "COMPLETE", start, stop)
+        return query_window(sess, "COMPLETE", start, stop, deadline)
     flt = {"reportStatusId": "COMPLETE"}
     if start:
         flt["eventStartDateMin"] = start.isoformat()
@@ -813,12 +824,16 @@ def fetch_backfill(sess, today: date, first_year: int, refetch: bool = False, st
             time.sleep(BACKFILL_PAUSE_S)
         at = now_iso()
         try:
-            got = fetch_span(sess, start, stop)
+            got = fetch_span(sess, start, stop, t0 + BACKFILL_BUDGET_S)
         except Exception as e:  # noqa: BLE001
             old = read_archive(name)
             if old is not None:
                 rows += old
                 rows_by_span[name] = len(old)
+            if isinstance(e, BudgetSpent):          # the time ran out inside a halved span: not a failure
+                not_requested.append(name)
+                stopped = stopped or "budget"
+                continue
             if not transient(e):
                 code = getattr(getattr(e, "response", None), "status_code", None)
                 stopped = (f"backfill stopped at {name}: the service answered HTTP {code}; it no longer answers "
