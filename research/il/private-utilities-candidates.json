@@ -1,0 +1,1818 @@
+{
+ "state": "IL",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:49Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 40,
+  "already_in_registry": 0,
+  "in_research": 1,
+  "in_plant_outfall_registry": 6,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 2,
+  "by_legal_form_proposed": {
+   "business or industrial": 2,
+   "campground or resort": 1,
+   "homeowners' association": 7,
+   "institution": 1,
+   "investor-owned utility": 18,
+   "not stated by the names": 11
+  },
+  "public_by_name": 2
+ },
+ "candidates": [
+  {
+   "npdes_permit": "IL0021202",
+   "state": "IL",
+   "facility": "ILLINOIS AMERICAN WATER ANDALUSIA STP",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER",
+   "county": "ROCK ISLAND",
+   "city": "ANDALUSIA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids",
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.826,
+   "major_minor": "Minor",
+   "permit_effective": "2023-08-01",
+   "permit_expiration": "2028-07-31",
+   "receiving_waters_echo": [
+    "MISSISSIPPI RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0021202"
+  },
+  {
+   "npdes_permit": "IL0024473",
+   "state": "IL",
+   "facility": "AQUA ILLINOIS - UNIVERSITY PARK WWTF",
+   "permittee_as_recorded": "AQUA ILLINOIS, INC.",
+   "county": "WILL",
+   "city": "UNIVERSITY PARK",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "institution",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "Biosolids",
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 6.44,
+   "major_minor": "Major",
+   "permit_effective": "2021-05-01",
+   "permit_expiration": "2026-04-30",
+   "receiving_waters_echo": [
+    "DEER CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": "il-aqua-illinois-university-park-wwtf-sso",
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0024473"
+  },
+  {
+   "npdes_permit": "IL0024732",
+   "state": "IL",
+   "facility": "ILLINOIS AMERICAN WATER COMPANY - RIVER GRANGE WRF",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER COMPANY",
+   "county": "KANE",
+   "city": "SAINT CHARLES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0175,
+   "major_minor": "Minor",
+   "permit_effective": "2025-10-01",
+   "permit_expiration": "2030-09-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF THE FOX RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0024732"
+  },
+  {
+   "npdes_permit": "IL0031453",
+   "state": "IL",
+   "facility": "ILLINOIS AMERICAN WATER - TOLONO STP",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER",
+   "county": "CHAMPAIGN",
+   "city": "TOLONO",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids",
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.588,
+   "major_minor": "Minor",
+   "permit_effective": "2021-12-01",
+   "permit_expiration": "2026-11-30",
+   "receiving_waters_echo": [
+    "HACKETT BRANCH"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0031453"
+  },
+  {
+   "npdes_permit": "IL0031798",
+   "state": "IL",
+   "facility": "AQUA ILLINOIS - WILLOWBROOK STP",
+   "permittee_as_recorded": "AQUA ILLINOIS INC",
+   "county": "WILL",
+   "city": "CRETE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 2.34,
+   "major_minor": "Minor",
+   "permit_effective": "2024-04-01",
+   "permit_expiration": "2029-03-31",
+   "receiving_waters_echo": [
+    "KLEMME CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0031798"
+  },
+  {
+   "npdes_permit": "IL0031976",
+   "state": "IL",
+   "facility": "RIDGECREST STP",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER COMPANY",
+   "county": "GRUNDY",
+   "city": "MORRIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.25,
+   "major_minor": "Minor",
+   "permit_effective": "2024-03-01",
+   "permit_expiration": "2029-02-28",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO EAST FORK NETTLE CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0031976"
+  },
+  {
+   "npdes_permit": "IL0031984",
+   "state": "IL",
+   "facility": "IL AMERICAN WTR COMPANY-CHICKASAW HILLS WRF",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER COMPANY",
+   "county": "WILL",
+   "city": "LOCKPORT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 2.41,
+   "major_minor": "Major",
+   "permit_effective": "2020-12-01",
+   "permit_expiration": "2025-11-30",
+   "receiving_waters_echo": [
+    "LONG RUN CREEK"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0031984"
+  },
+  {
+   "npdes_permit": "IL0032760",
+   "state": "IL",
+   "facility": "ILLINOIS AMERICAN WATER COMPANY",
+   "permittee_as_recorded": "ILLINOIS-AMERICAN WATER COMPANY",
+   "county": "DU PAGE",
+   "city": "LEMONT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 2.5,
+   "major_minor": "Major",
+   "permit_effective": "2021-06-01",
+   "permit_expiration": "2026-05-31",
+   "receiving_waters_echo": [
+    "DES PLAINES RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0032760"
+  },
+  {
+   "npdes_permit": "IL0032778",
+   "state": "IL",
+   "facility": "IAW - ARBURY HILLS STP",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER COMPANY",
+   "county": "WILL",
+   "city": "MOKENA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 4.0,
+   "major_minor": "Minor",
+   "permit_effective": "2026-05-01",
+   "permit_expiration": "2031-04-30",
+   "receiving_waters_echo": [
+    "HICKORY CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0032778"
+  },
+  {
+   "npdes_permit": "IL0036030",
+   "state": "IL",
+   "facility": "IAWC - NORTHERN HILLS STP",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER COMPANY",
+   "county": "STEPHENSON",
+   "city": "FREEPORT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.13,
+   "major_minor": "Minor",
+   "permit_effective": "2022-09-01",
+   "permit_expiration": "2027-08-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIB OF PECATONICA R.",
+    "UNNAMED TRIB TO PECATONICA R."
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0036030"
+  },
+  {
+   "npdes_permit": "IL0037036",
+   "state": "IL",
+   "facility": "AQUA AMERICA - ELLWOOD GREENS STP",
+   "permittee_as_recorded": "AQUA AMERICA - ELLWOOD GREENS UTILITY CORP",
+   "county": "DE KALB",
+   "city": "GENOA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.175,
+   "major_minor": "Minor",
+   "permit_effective": "2022-09-01",
+   "permit_expiration": "2027-08-31",
+   "receiving_waters_echo": [
+    "SOUTH BRANCH KISHWAUKEE RIVER",
+    "SOUTH BRANCH OF KISHWAUKEE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0037036"
+  },
+  {
+   "npdes_permit": "IL0045110",
+   "state": "IL",
+   "facility": "LAKE BARRINGTON HOMEOWNERS ASSOCIATION STP",
+   "permittee_as_recorded": "LAKE BARRINGTON HOMEOWNERS ASSOCIATION",
+   "county": "LAKE",
+   "city": "LAKE BARRINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 1.138,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-01",
+   "permit_expiration": "2031-06-30",
+   "receiving_waters_echo": [
+    "FOX RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0045110"
+  },
+  {
+   "npdes_permit": "IL0045381",
+   "state": "IL",
+   "facility": "CAMELOT UTILITIES STP",
+   "permittee_as_recorded": "PRAIRIE PATH WATER COMPANY",
+   "county": "WILL",
+   "city": "JOLIET",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.25,
+   "major_minor": "Minor",
+   "permit_effective": "2025-07-01",
+   "permit_expiration": "2030-06-30",
+   "receiving_waters_echo": [
+    "DUPAGE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0045381"
+  },
+  {
+   "npdes_permit": "IL0045411",
+   "state": "IL",
+   "facility": "ILLINOIS AMERICAN WATER COMPANY - FERSON CREEK STP",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER COMPANY",
+   "county": "KANE",
+   "city": "SAINT CHARLES",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.238,
+   "major_minor": "Minor",
+   "permit_effective": "2024-02-01",
+   "permit_expiration": "2029-01-31",
+   "receiving_waters_echo": [
+    "FERSON CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0045411"
+  },
+  {
+   "npdes_permit": "IL0045527",
+   "state": "IL",
+   "facility": "AQUA ILLINOIS INC - CANDLEWICK LAKE STP",
+   "permittee_as_recorded": "AQUA ILLINOIS INC",
+   "county": "BOONE COUNTY",
+   "city": "BELVIDERE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4939",
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 1.65,
+   "major_minor": "Minor",
+   "permit_effective": "2022-08-01",
+   "permit_expiration": "2027-07-31",
+   "receiving_waters_echo": [
+    "BEAVER CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0045527"
+  },
+  {
+   "npdes_permit": "IL0045543",
+   "state": "IL",
+   "facility": "WOODHAVEN LAKES CAMPGROUND STP",
+   "permittee_as_recorded": "THE WOODHAVEN ASSOCIATION",
+   "county": "LEE",
+   "city": "SUBLETTE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.25,
+   "major_minor": "Minor",
+   "permit_effective": "2022-09-01",
+   "permit_expiration": "2027-08-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIB OF GREEN RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0045543"
+  },
+  {
+   "npdes_permit": "IL0045993",
+   "state": "IL",
+   "facility": "ILLINOIS - AMERICAN WATER COMPANY- DERBY MEADOWS WRF",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER COMPANY",
+   "county": "COOK",
+   "city": "LOCKPORT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 2.655,
+   "major_minor": "Minor",
+   "permit_effective": "2022-01-01",
+   "permit_expiration": "2026-12-31",
+   "receiving_waters_echo": [
+    "LONG RUN CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0045993"
+  },
+  {
+   "npdes_permit": "IL0046221",
+   "state": "IL",
+   "facility": "LILAC BASIN CORP - UNION HILL STP",
+   "permittee_as_recorded": "LILAC BASIN CORP - UNION HILL",
+   "county": "JACKSON",
+   "city": "CARBONDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0145,
+   "major_minor": "Minor",
+   "permit_effective": "2026-06-01",
+   "permit_expiration": "2031-05-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIB OF LITTLE CRAB ORCHARD CREEK WEST"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0046221"
+  },
+  {
+   "npdes_permit": "IL0047384",
+   "state": "IL",
+   "facility": "ILLINOIS AMERICAN WATER-SUNDALE HILLS STP",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER",
+   "county": "TAZEWELL",
+   "city": "WASHINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.688,
+   "major_minor": "Minor",
+   "permit_effective": "2026-06-01",
+   "permit_expiration": "2031-05-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF FARM CREEK"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0047384"
+  },
+  {
+   "npdes_permit": "IL0047406",
+   "state": "IL",
+   "facility": "WASHINGTON ESTATES SUBDIVISION STP",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER - WASHINGTON ESTATES",
+   "county": "TAZEWELL",
+   "city": "WASHINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Mixed Ownership (e.g., Public/Private); the name reads as a private body",
+    "facility_type": "Mixed Ownership (e.g., Public/Private)",
+    "facility_type_code": "MXO",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.3,
+   "major_minor": "Minor",
+   "permit_effective": "2025-02-01",
+   "permit_expiration": "2030-01-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF SOUTH FORK MCKEE CREEK"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0047406"
+  },
+  {
+   "npdes_permit": "IL0050202",
+   "state": "IL",
+   "facility": "AQUA ILLINOIS - PLUM CREEK STP",
+   "permittee_as_recorded": "AQUA ILLINOIS, INC.",
+   "county": "WILL",
+   "city": "CRETE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.75,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "PLUM CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0050202"
+  },
+  {
+   "npdes_permit": "IL0053201",
+   "state": "IL",
+   "facility": "LAKE IROQUOIS SUBDIVISION STP",
+   "permittee_as_recorded": "LAKE IROQUOIS ASSOCIATION",
+   "county": "IROQUOIS",
+   "city": "LODA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.125,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "SPRING CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0053201"
+  },
+  {
+   "npdes_permit": "IL0055841",
+   "state": "IL",
+   "facility": "RANCH OAKS SERVICE ASSOCIATION STP",
+   "permittee_as_recorded": "RANCH OAKS SERVICE ASSOCIATION",
+   "county": "WILL",
+   "city": "CHANNAHON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids",
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.075,
+   "major_minor": "Minor",
+   "permit_effective": "2022-05-01",
+   "permit_expiration": "2027-04-30",
+   "receiving_waters_echo": [
+    "JACKSON CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0055841"
+  },
+  {
+   "npdes_permit": "IL0055981",
+   "state": "IL",
+   "facility": "IL AMERICAN WTR COMPANY-OAK VALLEY WRF",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER COMPANY",
+   "county": "WILL",
+   "city": "LOCKPORT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 3.75,
+   "major_minor": "Major",
+   "permit_effective": "2020-11-01",
+   "permit_expiration": "2025-10-31",
+   "receiving_waters_echo": [
+    "SPRING CREEK"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0055981"
+  },
+  {
+   "npdes_permit": "IL0059391",
+   "state": "IL",
+   "facility": "IAWC- CEDAR BLUFF STP",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER COMPANY",
+   "county": "PEORIA",
+   "city": "DUNLAP",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.175,
+   "major_minor": "Minor",
+   "permit_effective": "2023-04-01",
+   "permit_expiration": "2028-03-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIB OF DICKINSON RUN, UNNAMED TRIB TO DICKINSON RUN",
+    "UNNAMED TRIB TO DICKINSON RUN",
+    "UNNAMED TRIB OF DICKINSON RUN"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0059391"
+  },
+  {
+   "npdes_permit": "IL0061085",
+   "state": "IL",
+   "facility": "IAWC - GALENA TERRITORY STP",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER COMPANY",
+   "county": "JO DAVIESS",
+   "city": "GALENA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Biosolids"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.5,
+   "major_minor": "Minor",
+   "permit_effective": "2025-11-01",
+   "permit_expiration": "2030-10-31",
+   "receiving_waters_echo": [
+    "SMALLPOX CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0061085"
+  },
+  {
+   "npdes_permit": "IL0065072",
+   "state": "IL",
+   "facility": "IAWC - MEDINA STP",
+   "permittee_as_recorded": "ILLINOIS AMERICAN WATER COMPANY",
+   "county": "PEORIA",
+   "city": "DUNLAP",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.33,
+   "major_minor": "Minor",
+   "permit_effective": "2024-09-01",
+   "permit_expiration": "2029-08-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO DICKENSON RUN"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0065072"
+  },
+  {
+   "npdes_permit": "IL0066672",
+   "state": "IL",
+   "facility": "BEYERS LAKE ESTATES SUBDIVISION STP",
+   "permittee_as_recorded": "OAK TERRACE SANITARY SYSTEM INC",
+   "county": "CHRISTIAN",
+   "city": "PANA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.36,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIB OF COAL CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0066672"
+  },
+  {
+   "npdes_permit": "IL0069302",
+   "state": "IL",
+   "facility": "COUNTRY VIEW ESTATES STP",
+   "permittee_as_recorded": "COUNTRY VIEW ESTATES HOMEOWNERS ASSOCIATION",
+   "county": "GRUNDY",
+   "city": "MORRIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.052,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-01",
+   "permit_expiration": "2028-08-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF THE KANKAKEE RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0069302"
+  },
+  {
+   "npdes_permit": "IL0069485",
+   "state": "IL",
+   "facility": "WHITE TIE RIDGE SUBDIVISION",
+   "permittee_as_recorded": "WHITE TIE RIDGE SUBDIVISION",
+   "county": "GRUNDY",
+   "city": "MORRIS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0158,
+   "major_minor": "Minor",
+   "permit_effective": "2021-12-01",
+   "permit_expiration": "2026-11-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO MAZON RIVER, UNNAMED TRIBUTARY TO THE MAZON RIVER",
+    "UNNAMED TRIBUTARY TO THE MAZON RIVER",
+    "UNNAMED TRIBUTARY TO MAZON RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0069485"
+  },
+  {
+   "npdes_permit": "IL0070874",
+   "state": "IL",
+   "facility": "PRAIRIE PATH WATER PORT BARRINGTON SHORES STP",
+   "permittee_as_recorded": "PRAIRIE PATH WATER COMPANY",
+   "county": "LAKE",
+   "city": "BARRINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0504,
+   "major_minor": "Minor",
+   "permit_effective": "2024-10-01",
+   "permit_expiration": "2029-09-30",
+   "receiving_waters_echo": [
+    "FOX RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0070874"
+  },
+  {
+   "npdes_permit": "IL0074080",
+   "state": "IL",
+   "facility": "LAKE SALLATEESKA CAMP - NORTH STP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "PERRY",
+   "city": "PINCKNEYVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "7032"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.007,
+   "major_minor": "Minor",
+   "permit_effective": "2021-08-01",
+   "permit_expiration": "2026-07-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF BEAUCOUP CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0074080"
+  },
+  {
+   "npdes_permit": "IL0074551",
+   "state": "IL",
+   "facility": "SHERWOOD SUBDIVISION STP",
+   "permittee_as_recorded": "SHERWOOD HOMEOWNERS ASSOCIATION",
+   "county": "MCLEAN",
+   "city": "BLOOMINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.016,
+   "major_minor": "Minor",
+   "permit_effective": "2024-05-01",
+   "permit_expiration": "2029-04-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIB TO KICKAPOO CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0074551"
+  },
+  {
+   "npdes_permit": "IL0074560",
+   "state": "IL",
+   "facility": "COYOTE CREEK SUBDIVISION STP",
+   "permittee_as_recorded": "COYOTE CREEK SUBDIVISION",
+   "county": "PEORIA",
+   "city": "BARTONVILLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2024-09-01",
+   "permit_expiration": "2029-08-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO WEST BRANCH LAMARSH CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0074560"
+  },
+  {
+   "npdes_permit": "IL0074861",
+   "state": "IL",
+   "facility": "EASTHAVEN COTTAGES STP",
+   "permittee_as_recorded": "[name removed]",
+   "county": "JACKSON",
+   "city": "CARBONDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0275,
+   "major_minor": "Minor",
+   "permit_effective": "2021-12-01",
+   "permit_expiration": "2026-11-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF BIG MUDDY RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0074861"
+  },
+  {
+   "npdes_permit": "IL0074993",
+   "state": "IL",
+   "facility": "MANORS AT KENSINGTON PARQUE STP",
+   "permittee_as_recorded": "MANORS AT KENSINGTON PARQUE",
+   "county": "MADISON",
+   "city": "SAINT JACOB",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0595,
+   "major_minor": "Minor",
+   "permit_effective": "2025-05-01",
+   "permit_expiration": "2030-04-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIB OF WENDELL BRANCH"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0074993"
+  },
+  {
+   "npdes_permit": "IL0075094",
+   "state": "IL",
+   "facility": "METRO-EAST AIRPARK STP",
+   "permittee_as_recorded": "METRO-EAST AIRPARK PROPERTY OWNERS ASSOCIATION",
+   "county": "MADISON",
+   "city": "SAINT JACOB",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0105,
+   "major_minor": "Minor",
+   "permit_effective": "2024-02-01",
+   "permit_expiration": "2029-01-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY OF SILVER CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0075094"
+  },
+  {
+   "npdes_permit": "IL0075388",
+   "state": "IL",
+   "facility": "CASTLE RIDGE ESTATES STP",
+   "permittee_as_recorded": "CASTLE RIDGE HOMEOWNERS ASSOCIATION",
+   "county": "MADISON",
+   "city": "TROY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0735,
+   "major_minor": "Minor",
+   "permit_effective": "2025-09-01",
+   "permit_expiration": "2030-08-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIBUTARY TO MILL CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0075388"
+  },
+  {
+   "npdes_permit": "IL0075931",
+   "state": "IL",
+   "facility": "WEXFORD HILLS SUBDIVISION HOMEOWNERS ASSOCIATION",
+   "permittee_as_recorded": "WEXFORD HILLS SUBDIVISION HOMEOWNERS ASSOCIATION",
+   "county": "MCLEAN",
+   "city": "BLOOMINGTON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.069,
+   "major_minor": "Minor",
+   "permit_effective": "2022-08-01",
+   "permit_expiration": "2027-07-31",
+   "receiving_waters_echo": [
+    "UNNAMED TRIB TO KICKAPOO CREEK"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0075931"
+  },
+  {
+   "npdes_permit": "IL0075973",
+   "state": "IL",
+   "facility": "OAK CREEK TOWNHOMES WWTF",
+   "permittee_as_recorded": "GLENDENNING CAPITAL INC",
+   "county": "MCHENRY",
+   "city": "JOHNSBURG",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0528,
+   "major_minor": "Minor",
+   "permit_effective": "2021-07-01",
+   "permit_expiration": "2026-06-30",
+   "receiving_waters_echo": [
+    "UNNAMED TRIB OF FOX RIVER"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0075973"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "IL0020800",
+   "state": "IL",
+   "facility": "COMBINED SEWER OVERFLOWS",
+   "permittee_as_recorded": "FOREST VIEW, VILLAGE OF",
+   "county": "COOK",
+   "city": "FOREST VIEW",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2013-02-01",
+   "permit_expiration": "2017-12-31",
+   "receiving_waters_echo": [
+    "CHICAGO SANITARY AND SHIP CANAL"
+   ],
+   "external_outfalls": 0,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0020800"
+  },
+  {
+   "npdes_permit": "IL0042625",
+   "state": "IL",
+   "facility": "LAKE ARISPIE SANITARY DISTRICT STP",
+   "permittee_as_recorded": "LAKE ARISPIE SANITARY DISTRICT",
+   "county": "BUREAU",
+   "city": "PRINCETON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.055,
+   "major_minor": "Minor",
+   "permit_effective": "2023-10-01",
+   "permit_expiration": "2028-09-30",
+   "receiving_waters_echo": [
+    "LITTLE BUREAU CREEK"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#IL0042625"
+  }
+ ]
+}

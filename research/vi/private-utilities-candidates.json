@@ -1,0 +1,463 @@
+{
+ "state": "VI",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:49Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 10,
+  "already_in_registry": 0,
+  "in_research": 0,
+  "in_plant_outfall_registry": 0,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 3,
+  "by_legal_form_proposed": {
+   "homeowners' association": 5,
+   "not stated by the names": 4,
+   "private club": 1
+  },
+  "public_by_name": 0
+ },
+ "candidates": [
+  {
+   "npdes_permit": "VI0039853",
+   "state": "VI",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "COWPET BAY WEST CONDOMINIUMS",
+   "county": "SAINT THOMAS",
+   "city": "ST THOMAS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4941",
+    "4952",
+    "7011"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.036,
+   "major_minor": "Minor",
+   "permit_effective": "2016-05-01",
+   "permit_expiration": "2021-04-30",
+   "receiving_waters_echo": [
+    "CARIBBEAN SEA CLASS B WATER"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#VI0039853"
+  },
+  {
+   "npdes_permit": "VI0039900",
+   "state": "VI",
+   "facility": "COWPET BAY EAST ASSOC",
+   "permittee_as_recorded": "COWPET BAY EAST CONDOMINIUMS",
+   "county": "ST. THOMAS ISLAND",
+   "city": "ST. THOMAS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4941",
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-03-01",
+   "permit_expiration": "2026-02-28",
+   "receiving_waters_echo": [
+    "COWPET BAY"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#VI0039900"
+  },
+  {
+   "npdes_permit": "VI0039934",
+   "state": "VI",
+   "facility": "SAPPHIRE BAY CONDOMINIUMS WEST",
+   "permittee_as_recorded": "SAPPHIRE BAY CONDOMINIUMS WEST",
+   "county": "ST. THOMAS ISLAND",
+   "city": "ST THOMAS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.048,
+   "major_minor": "Minor",
+   "permit_effective": "2016-01-01",
+   "permit_expiration": "2020-12-31",
+   "receiving_waters_echo": [
+    "CARIBBEAN SEA AS CLASS B WATERS"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#VI0039934"
+  },
+  {
+   "npdes_permit": "VI0040151",
+   "state": "VI",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "ST JOHN",
+   "city": "ST. JOHN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "ADC",
+   "permit_components": [],
+   "sic_codes": [
+    "4941",
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.24,
+   "major_minor": "Minor",
+   "permit_effective": "2016-10-01",
+   "permit_expiration": "2021-09-30",
+   "receiving_waters_echo": [
+    "Great Cruz Bay"
+   ],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#VI0040151"
+  },
+  {
+   "npdes_permit": "VI0040444",
+   "state": "VI",
+   "facility": "DOROTHEA BEACH CONDOMINIUMS",
+   "permittee_as_recorded": "DOROTHEA BEACH CONDOMINIUMS",
+   "county": "ST. THOMAS ISLAND",
+   "city": "ST. THOMAS",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.03,
+   "major_minor": "Minor",
+   "permit_effective": "2021-07-01",
+   "permit_expiration": "2026-06-30",
+   "receiving_waters_echo": [
+    "DOROTHEA BAY (ATLANTIC)"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#VI0040444"
+  },
+  {
+   "npdes_permit": "VI0040495",
+   "state": "VI",
+   "facility": "BLUEBEARDS BEACH CLUB & VILLAS",
+   "permittee_as_recorded": "BLUEBEARDS BEACH CLUB and VILLAS",
+   "county": "ST THOMAS",
+   "city": "ST. THOMAS US",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "private club",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "7011"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.08,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-01",
+   "permit_expiration": "2028-08-31",
+   "receiving_waters_echo": [
+    "CARIBBEAN SEA"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#VI0040495"
+  },
+  {
+   "npdes_permit": "VI0050032",
+   "state": "VI",
+   "facility": "COAKLEY BAY CONDOMINIUMS",
+   "permittee_as_recorded": "Coakley Bay Condominiums",
+   "county": "ST. CROIX ISLAND",
+   "city": "CHRISTAINSTED",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "4971",
+    "6531"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2019-12-01",
+   "permit_expiration": "2024-11-30",
+   "receiving_waters_echo": [
+    "COAKLEY BAY"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#VI0050032"
+  },
+  {
+   "npdes_permit": "VI0050245",
+   "state": "VI",
+   "facility": "CARDEN BEACH FACILITIES ASSOCIATION",
+   "permittee_as_recorded": "[name removed]",
+   "county": "ST. CROIX ISLAND",
+   "city": "ST. CROIX",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Corporation",
+    "facility_type": "Corporation",
+    "facility_type_code": "COR",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "SIN",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "6531"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2018-08-01",
+   "permit_expiration": "2023-07-31",
+   "receiving_waters_echo": [
+    "COAKLEY BAY"
+   ],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#VI0050245"
+  },
+  {
+   "npdes_permit": "VI0080055",
+   "state": "VI",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "ST. JOHN ISLAND",
+   "city": "CORAL BAY, ST. JOHN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4952",
+    "4971",
+    "6514"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.006,
+   "major_minor": "Minor",
+   "permit_effective": "2016-10-01",
+   "permit_expiration": "2021-09-30",
+   "receiving_waters_echo": [
+    "CORAL BAY SUBWATERSHED"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#VI0080055"
+  },
+  {
+   "npdes_permit": "VI0080098",
+   "state": "VI",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "Lovango Island Holdings, LLP",
+   "county": "SAINT JOHN",
+   "city": "ST. JOHN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EXP",
+   "permit_components": [],
+   "sic_codes": [
+    "4941",
+    "4952",
+    "4971",
+    "6514",
+    "8641"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2021-08-01",
+   "permit_expiration": "2026-07-31",
+   "receiving_waters_echo": [
+    "CARIBBEAN SEA"
+   ],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#VI0080098"
+  }
+ ],
+ "public_by_name": []
+}

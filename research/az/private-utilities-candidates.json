@@ -1,0 +1,988 @@
+{
+ "state": "AZ",
+ "generated_by": "scripts/private_utilities.py",
+ "sources": [
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+   "file_date": "2026-11-01",
+   "fetched_at": "2026-11-04T05:35:49Z"
+  },
+  {
+   "source": "fed-echo-npdes-discharge-points",
+   "file": "data/outfalls-plants-us.json",
+   "fetched_at": "2026-11-03T21:02:45Z",
+   "note": "the plant permits already in the outfall registry"
+  }
+ ],
+ "rule": "An active (EFF, ADC, EXP) individual (NPD, SIN) NPDES permit that is a sewage permit (SIC 4952 or NAICS 221320 among its codes, or the POTW permit component; not stormwater-only) and whose permittee is not a public body: EPA's facility type Privately Owned Facility, Corporation or Non-Government with names that do not read as a public body, or a mixed, blank or unknown type with names that read as a private body.",
+ "privacy": "No address, ZIP or coordinate is copied. A facility or permittee name is kept only when it reads as a body; any other is \"[name removed]\" with the permit kept. A single-residence system keeps its permit and state only: no name, city, county or receiving water. The permittee of record is taken from the state's permit documents, never an individual's name.",
+ "for_the_builder": "Candidates for operator rows (data/dischargers.json), one per permittee: confirm the permittee and its legal form from the state's permit documents (legal_form_proposed is a hint from the names), group permits of one permittee, and file the register rows the state's law gives private operators. A permit in public_by_name is typed private by EPA but reads as a public body: check it before filing. registry_row or research_row set means the permit is already held.",
+ "counts": {
+  "candidates": 20,
+  "already_in_registry": 0,
+  "in_research": 3,
+  "in_plant_outfall_registry": 1,
+  "single_residence": 0,
+  "industrial_with_sewage_code": 0,
+  "permittee_name_removed": 2,
+  "by_legal_form_proposed": {
+   "business or industrial": 6,
+   "campground or resort": 1,
+   "homeowners' association": 1,
+   "investor-owned utility": 9,
+   "not stated by the names": 3
+  },
+  "public_by_name": 4
+ },
+ "candidates": [
+  {
+   "npdes_permit": "AZ0024015",
+   "state": "AZ",
+   "facility": "VALLE AIRPARK WRF",
+   "permittee_as_recorded": "Valle Airpark, L.L.C.",
+   "county": "COCONINO",
+   "city": "VALLE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.045,
+   "major_minor": "Minor",
+   "permit_effective": "2022-08-19",
+   "permit_expiration": "2027-08-18",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0024015"
+  },
+  {
+   "npdes_permit": "AZ0024139",
+   "state": "AZ",
+   "facility": "MILLER ROAD TREATMENT FACILITY",
+   "permittee_as_recorded": "Epcor Water Arizona Inc.",
+   "county": "MARICOPA",
+   "city": "SCOTTSDALE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 1.5,
+   "major_minor": "Minor",
+   "permit_effective": "2022-12-23",
+   "permit_expiration": "2027-12-22",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0024139"
+  },
+  {
+   "npdes_permit": "AZ0024708",
+   "state": "AZ",
+   "facility": "FLAGSTAFF MEADOWS WWTP",
+   "permittee_as_recorded": "Utility Source, L.L.C",
+   "county": "COCONINO",
+   "city": "BELLEMONT",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.165,
+   "major_minor": "Minor",
+   "permit_effective": "2022-05-27",
+   "permit_expiration": "2027-05-26",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0024708"
+  },
+  {
+   "npdes_permit": "AZ0024741",
+   "state": "AZ",
+   "facility": "BLACK CANYON RANCH RV RESORT WWTP",
+   "permittee_as_recorded": "Black Canyon Ranch Rv Resort Llc",
+   "county": "YAVAPAI",
+   "city": "BLACK CANYON CITY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "campground or resort",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "Pretreatment"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0125,
+   "major_minor": "Minor",
+   "permit_effective": "2021-11-29",
+   "permit_expiration": "2026-11-28",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0024741"
+  },
+  {
+   "npdes_permit": "AZ0024775",
+   "state": "AZ",
+   "facility": "SADDLEBROOKE RANCH WATER RECLAMATION PLANT",
+   "permittee_as_recorded": "Mountain Pass Utility Company",
+   "county": "PINAL",
+   "city": "TUCSON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.249,
+   "major_minor": "Minor",
+   "permit_effective": "2023-06-06",
+   "permit_expiration": "2028-06-05",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0024775"
+  },
+  {
+   "npdes_permit": "AZ0024902",
+   "state": "AZ",
+   "facility": "THE ESTATES @ PINE CANYON - UNIT ONE",
+   "permittee_as_recorded": "[name removed]",
+   "county": "COCONINO",
+   "city": "FLAGSTAFF",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.068,
+   "major_minor": "Minor",
+   "permit_effective": "2024-02-15",
+   "permit_expiration": "2029-02-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0024902"
+  },
+  {
+   "npdes_permit": "AZ0025071",
+   "state": "AZ",
+   "facility": "PALO VERDE UTILITIES CO - WRF",
+   "permittee_as_recorded": "Global Water - Palo Verde Utilities Company, Inc.",
+   "county": "PINAL",
+   "city": "MARICOPA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 9.0,
+   "major_minor": "Major",
+   "permit_effective": "2024-09-10",
+   "permit_expiration": "2029-09-09",
+   "receiving_waters_echo": [],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": "az-az0025071",
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0025071"
+  },
+  {
+   "npdes_permit": "AZ0025429",
+   "state": "AZ",
+   "facility": "ANTHEM WATER CAMPUS WWTP",
+   "permittee_as_recorded": "Epcor Water Arizona Inc.",
+   "county": "MARICOPA",
+   "city": "ANTHEM",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 3.0,
+   "major_minor": "Major",
+   "permit_effective": "2022-06-08",
+   "permit_expiration": "2027-06-07",
+   "receiving_waters_echo": [],
+   "external_outfalls": 2,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0025429"
+  },
+  {
+   "npdes_permit": "AZ0025453",
+   "state": "AZ",
+   "facility": "HASSAYAMPA RANCH WRF",
+   "permittee_as_recorded": "Global Water - Hassayampa Utilities Company, Inc.",
+   "county": "MARICOPA",
+   "city": "TONOPAH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 1.0,
+   "major_minor": "Major",
+   "permit_effective": "2023-12-14",
+   "permit_expiration": "2028-12-13",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0025453"
+  },
+  {
+   "npdes_permit": "AZ0025585",
+   "state": "AZ",
+   "facility": "BALTERRA WATER RECLAMATION FACILITY",
+   "permittee_as_recorded": "Global Water - Hassayampa Utilities Company, Inc.",
+   "county": "MARICOPA",
+   "city": "TONOPAH",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.55,
+   "major_minor": "Minor",
+   "permit_effective": "2023-09-07",
+   "permit_expiration": "2028-09-06",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0025585"
+  },
+  {
+   "npdes_permit": "AZ0025712",
+   "state": "AZ",
+   "facility": "LITCHFIELD PARK SERVICE COMPANY - PALM VALLEY WRF",
+   "permittee_as_recorded": "Liberty Utilities - Litchfield Park Water & Sewer - Corp.",
+   "county": "MARICOPA",
+   "city": "GOODYEAR",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 5.1,
+   "major_minor": "Major",
+   "permit_effective": "2023-12-29",
+   "permit_expiration": "2028-12-28",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": "az-az0025712",
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0025712"
+  },
+  {
+   "npdes_permit": "AZ0025798",
+   "state": "AZ",
+   "facility": "FRITO-LAY - CASA GRANDE FACILITY",
+   "permittee_as_recorded": "Frito-Lay North America Inc",
+   "county": "PINAL",
+   "city": "CASA GRANDE",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.69,
+   "major_minor": "Minor",
+   "permit_effective": "2024-12-23",
+   "permit_expiration": "2029-12-22",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0025798"
+  },
+  {
+   "npdes_permit": "AZ0026204",
+   "state": "AZ",
+   "facility": "PECAN WATER RECLAMATION FACILITY",
+   "permittee_as_recorded": "Epcor Water Arizona Inc.",
+   "county": "PINAL",
+   "city": "SAN TAN VALLEY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 4.0,
+   "major_minor": "Major",
+   "permit_effective": "2025-04-21",
+   "permit_expiration": "2030-04-20",
+   "receiving_waters_echo": [],
+   "external_outfalls": 3,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": "az-az0026204",
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0026204"
+  },
+  {
+   "npdes_permit": "AZ0026221",
+   "state": "AZ",
+   "facility": "FLOREO WATER RECLAMATION FACILITY - WRF - INTERIM PHASE",
+   "permittee_as_recorded": "Trillium Land Company, Llc",
+   "county": "MARICOPA COUNTY",
+   "city": "UNKNOWN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "business or industrial",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.3,
+   "major_minor": "Minor",
+   "permit_effective": "2023-01-05",
+   "permit_expiration": "2028-01-04",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0026221"
+  },
+  {
+   "npdes_permit": "AZ0026425",
+   "state": "AZ",
+   "facility": "SARIVAL WRF",
+   "permittee_as_recorded": "Liberty Utilities - Sub - Corp.",
+   "county": "MARICOPA COUNTY",
+   "city": "GOODYEAR",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 4.4,
+   "major_minor": "Major",
+   "permit_effective": "2023-04-20",
+   "permit_expiration": "2028-04-19",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0026425"
+  },
+  {
+   "npdes_permit": "AZ0026522",
+   "state": "AZ",
+   "facility": "AMERICAN RANCH DWID",
+   "permittee_as_recorded": "American Ranch Dwid",
+   "county": "YAVAPAI",
+   "city": "PRESCOTT",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [],
+   "naics_codes": [],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2023-11-09",
+   "permit_expiration": "2028-11-08",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0026522"
+  },
+  {
+   "npdes_permit": "AZ0026611",
+   "state": "AZ",
+   "facility": "HASSAYAMPA CAMPUS 2 WRF",
+   "permittee_as_recorded": "Global Water - Hassayampa Utilities Company, Inc.",
+   "county": "MARICOPA COUNTY",
+   "city": "UNKNOWN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.12,
+   "major_minor": "Minor",
+   "permit_effective": "2022-01-28",
+   "permit_expiration": "2027-01-27",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0026611"
+  },
+  {
+   "npdes_permit": "AZ0026697",
+   "state": "AZ",
+   "facility": "BISON RANCH WWTP",
+   "permittee_as_recorded": "Bison Ranch Owners Assocation, Inc.",
+   "county": "NAVAJO COUNTY",
+   "city": "OVERGAARD",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "homeowners' association",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.08,
+   "major_minor": "Minor",
+   "permit_effective": "2022-07-21",
+   "permit_expiration": "2027-07-20",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0026697"
+  },
+  {
+   "npdes_permit": "AZ0026816",
+   "state": "AZ",
+   "facility": "GLOBAL WATER - PICACHO COVE UTILITIES COMPANY, INC. WRF#2",
+   "permittee_as_recorded": "Global Water - Palo Verde Utilities Company, Inc.",
+   "county": "MARICOPA COUNTY",
+   "city": "UNKNOWN",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": "investor-owned utility",
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.06,
+   "major_minor": "Minor",
+   "permit_effective": "2022-08-15",
+   "permit_expiration": "2027-08-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0026816"
+  },
+  {
+   "npdes_permit": "NN0021610",
+   "state": "AZ",
+   "facility": "[name removed]",
+   "permittee_as_recorded": "[name removed]",
+   "county": "COCONINO",
+   "city": "CAMERON",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": null,
+   "major_minor": "Minor",
+   "permit_effective": "2022-11-01",
+   "permit_expiration": "2027-10-31",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#NN0021610"
+  }
+ ],
+ "public_by_name": [
+  {
+   "npdes_permit": "AZ0023060",
+   "state": "AZ",
+   "facility": "KINGS RANCH - UNIT II WWTP",
+   "permittee_as_recorded": "Kings Ranch Unit 2 Domestic Wastewater Improvement District",
+   "county": "YAVAPAI",
+   "city": "BLACK CANYON CITY",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.01,
+   "major_minor": "Minor",
+   "permit_effective": "2022-02-23",
+   "permit_expiration": "2027-02-22",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": false,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0023060"
+  },
+  {
+   "npdes_permit": "AZ0023655",
+   "state": "AZ",
+   "facility": "VIRGIN RIVER DWID WWTP",
+   "permittee_as_recorded": "Virgin River Domestic Wastewater Improvement District",
+   "county": "MOHAVE",
+   "city": "LITTLEFIELD",
+   "system_kind": null,
+   "sewage_basis": [
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "8741"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.0366,
+   "major_minor": "Minor",
+   "permit_effective": "2026-07-16",
+   "permit_expiration": "2031-07-15",
+   "receiving_waters_echo": [],
+   "external_outfalls": 0,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0023655"
+  },
+  {
+   "npdes_permit": "AZ0024082",
+   "state": "AZ",
+   "facility": "BIG PARK DOMESTIC WASTEWATER IMPROVEMENT DISTRICT WWTP",
+   "permittee_as_recorded": "Big Park Improvement District",
+   "county": "YAVAPAI",
+   "city": "SEDONA",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.7,
+   "major_minor": "Minor",
+   "permit_effective": "2022-03-15",
+   "permit_expiration": "2027-03-14",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": "az-az0024082",
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0024082"
+  },
+  {
+   "npdes_permit": "AZ0025976",
+   "state": "AZ",
+   "facility": "WICKENBURG RANCH WRF",
+   "permittee_as_recorded": "Town Of Wickenburg",
+   "county": "MARICOPA",
+   "city": "WICKENBURG",
+   "system_kind": null,
+   "sewage_basis": [
+    "SIC 4952 (sewerage systems)",
+    "permit component POTW"
+   ],
+   "legal_form_proposed": null,
+   "ownership": {
+    "basis": "EPA facility type Privately Owned Facility; the name reads as a public body",
+    "facility_type": "Privately Owned Facility",
+    "facility_type_code": "POF",
+    "source": "fed-echo-npdes-discharge-points",
+    "url": "https://echo.epa.gov/files/echodownloads/npdes_outfalls_layer.zip",
+    "file_date": "2026-11-01",
+    "fetched_at": "2026-11-04T05:35:49Z"
+   },
+   "permit_type": "NPD",
+   "permit_status": "EFF",
+   "permit_components": [
+    "POTW"
+   ],
+   "sic_codes": [
+    "4952"
+   ],
+   "naics_codes": [],
+   "design_flow_mgd": 0.365,
+   "major_minor": "Minor",
+   "permit_effective": "2022-02-23",
+   "permit_expiration": "2027-02-22",
+   "receiving_waters_echo": [],
+   "external_outfalls": 1,
+   "in_plant_registry": true,
+   "registry_row": null,
+   "research_row": null,
+   "echo_url": "https://echo.epa.gov/effluent-charts#AZ0025976"
+  }
+ ]
+}
