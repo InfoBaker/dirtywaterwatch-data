@@ -247,6 +247,14 @@ def test_kc_status_file_outfalls_replace_epas_closed_rows_and_a_placeholder_poin
     assert leaks(doc) == []
 
 
+def test_kc_dsn_is_the_permits_outfall_as_epa_writes_it():
+    """Review 2026-11-04: the file writes King County's Denny Way outfalls '027a', '027b' and '044a'; EPA's are 027A,
+    027B and 044A, so the status file's rows did not replace EPA's closed ones."""
+    from ingest.wa_transforms import dsn
+    assert [dsn(x) for x in ("3", "124", "027a", "44a", "027B", "DSN", "", "12ab")] == \
+        ["003", "124", "027A", "044A", "027B", None, None, None]
+
+
 # ---------------------------------------------------------------- EPA's eRule tables (JBLM, Puyallup)
 
 def test_washington_permits_are_read_from_the_epa_tables_under_the_general_rules():
