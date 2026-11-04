@@ -94,12 +94,27 @@ Reading
   completed after a start more than 60 days back; within LOOKUP_BUDGET_S seconds, and none after a timeout, so a slow
   service cannot hold the hourly run); a submission the service no longer lists keeps its record with
   raw._missing_from_list_since. An answer of no open reports at all is an outage (ok false, the records kept).
-  `--backfill [--from YEAR]` reads COMPLETE reports a year at a time from YEAR (default 2025) to this year, plus starts
-  typed beyond next year; the list holds about 2,000 reports a year back to 2001 (2013-2026 checked on 2026-11-04).
   Records kept from earlier runs are rebuilt from their raw fields under the current rules.
 
+History (`--backfill [--from YEAR] [--refetch]`; never in the scheduled hourly run)
+  By hand, or once in a dispatched refresh with the backfill input "mi_egle_mienviro" (.github/workflows/refresh.yml
+  runs --backfill before the refresh; the state is saved to R2 only when the whole run succeeds). Reads every COMPLETE
+  report a year at a time from YEAR (default 2001, the owner's call; the list also holds 1999 and 2000, --from 1999),
+  plus the starts typed after next year (and, from 1999, before 1999: typing errors, kept as reports), about one
+  request every 35 to 40 seconds (the service's own pace; 1.5 to 2.6 MB a year uncompressed). Each year's rows are
+  saved as they arrive (scrubbed as the raw page is) to data/build/archive/mi-egle-mienviro-cso-sso-list/<year>.json,
+  so a run cut short keeps what it read. A year already in the archive is not asked for again, except this year and
+  the last (reports are completed months after they start), unless --refetch. After BACKFILL_BUDGET_S the remaining
+  years are not requested and are named in meta.lookup_errors ("run --backfill again"). An HTTP 4xx answer (other
+  than 429) means the service no longer answers this query: the backfill stops and says so. A timeout, a dropped
+  connection, a 5xx or 429, or an answer that is not the list's JSON is transient: that year is named, not saved,
+  asked for again by the next --backfill, and the next year is tried (after BACKFILL_MAX_FAILURES in a row the
+  backfill stops for this run). Every archived year is applied with the current rows, so a backfill is also a
+  rebuild of the history. meta.backfill gives the range asked, the years read, from the archive, failed and not
+  requested, the rows per year and the records per start year; every later hourly run carries it unchanged.
+
 Cadence: hourly (start to submission: median 20.7 hours in the open reports of 2026-11-03).
-Run from pipeline/:  python -m ingest.mi_egle_mienviro [--file saved.json] [--backfill [--from YEAR]]
+Run from pipeline/:  python -m ingest.mi_egle_mienviro [--file saved.json] [--backfill [--from YEAR] [--refetch]]
 """
 from __future__ import annotations
 
@@ -144,7 +159,16 @@ LOOKUP_BUDGET_S = 180          # the lookups of one hourly run stop after this; 
 LOOKUP_READ_TIMEOUT_S = 60
 clock = time.monotonic
 TOP = 5000
-BACKFILL_FROM = 2025
+BACKFILL_FROM = 2001            # the owner's call of 2026-11-04 (history from 2001); --from 1999 reads the rest
+LIST_FIRST_YEAR = 1999          # the list's first full year as served on 2026-11-04 (1,572 reports of 1999, 2,371
+                                # of 2000; before 1999 only a few starts typed in error, 1919, 1960 ...)
+BACKFILL_BUDGET_S = 40 * 60     # a backfill stops asking for more years after this, so the dispatched refresh (a
+                                # 100-minute job: backfill, then the 20 to 40 minute refresh) ends in time; rerun it
+BACKFILL_PAUSE_S = 2.0          # between two years' requests (each takes the service 30 to 40 s to answer)
+BACKFILL_READ_TIMEOUT_S = 300
+BACKFILL_MAX_FAILURES = 3       # transient failures in a row that stop the backfill for this run
+BACKFILL_REREAD_YEARS = 2       # this year and the last are read again by every backfill (reports complete late)
+ARCHIVE_DIR = BUILD_DIR / "archive" / SOURCE_ID
 MI_TZ_NOTE = "Times as EGLE's list gives them, with their UTC offsets."
 
 # a report that gives no permit is joined to an operator by EGLE's responsible-party name only for these names
@@ -693,13 +717,122 @@ def fetch_current(sess, today: date) -> list[dict]:
     return open_rows + done
 
 
-def fetch_backfill(sess, today: date, first_year: int) -> list[dict]:
-    rows = []
-    for y in range(first_year, today.year + 1):
-        rows += query_window(sess, "COMPLETE", date(y, 1, 1), date(y + 1, 1, 1))
-        time.sleep(1)
-    rows += query(sess, {"reportStatusId": "COMPLETE", "eventStartDateMin": date(today.year + 1, 1, 1).isoformat()})
-    return rows
+def backfill_spans(first_year: int, today: date) -> list[tuple[str, date | None, date | None]]:
+    """(name, start, stop) of each request of a backfill, oldest first: the starts typed before the list's first year
+    (only when the backfill starts there), one span per year to this year, and the starts typed after next year."""
+    first = LIST_FIRST_YEAR
+    spans = [(f"before-{first}", None, date(first, 1, 1))] if first_year <= first else []
+    spans += [(str(y), date(y, 1, 1), date(y + 1, 1, 1)) for y in range(max(first_year, first), today.year + 1)]
+    return spans + [("later", date(today.year + 1, 1, 1), None)]
+
+
+def archive_path(name: str) -> Path:
+    return ARCHIVE_DIR / f"{name}.json"
+
+
+def read_archive(name: str) -> list[dict] | None:
+    d = read_json(archive_path(name))
+    if not isinstance(d, dict) or not isinstance(d.get("rows"), list):
+        return None
+    return [safe_row(x) for x in d["rows"] if isinstance(x, dict)]
+
+
+def transient(e: Exception) -> bool:
+    """A failure worth asking again: a timeout, a dropped connection, a 5xx or 429, or an answer that is not the list's
+    JSON. An HTTP 4xx other than 429 is not (the service no longer answers the query) and stops the backfill."""
+    if isinstance(e, requests.HTTPError):
+        code = getattr(e.response, "status_code", None)
+        return code is None or code >= 500 or code == 429
+    return True
+
+
+def fetch_span(sess, start: date | None, stop: date | None) -> list[dict]:
+    if start and stop:
+        return query_window(sess, "COMPLETE", start, stop)
+    flt = {"reportStatusId": "COMPLETE"}
+    if start:
+        flt["eventStartDateMin"] = start.isoformat()
+    if stop:
+        flt["eventStartDateMax"] = stop.isoformat()
+    return query(sess, flt, read_timeout=BACKFILL_READ_TIMEOUT_S)
+
+
+def fetch_backfill(sess, today: date, first_year: int, refetch: bool = False, state: dict | None = None,
+                   save_state=None) -> tuple[list[dict], dict, list[str]]:
+    """Every COMPLETE report from first_year on, a span at a time (backfill_spans), each saved to the archive as it
+    arrives. Returns (rows of every span in the archive, read now or before; summary for meta.backfill; errors)."""
+    state = state if state is not None else {}
+    spans = backfill_spans(first_year, today)
+    reread = {str(y) for y in range(today.year - BACKFILL_REREAD_YEARS + 1, today.year + 1)} | {"later"}
+    rows, errors = [], []
+    read, archived, failed, not_requested, rows_by_span = [], [], [], [], {}
+    years = state.setdefault("backfill_years", {})
+    t0, fails, stopped = clock(), 0, None
+    for name, start, stop in spans:
+        have = None if refetch or name in reread else read_archive(name)
+        if have is not None:
+            rows += have
+            archived.append(name)
+            rows_by_span[name] = len(have)
+            continue
+        if stopped or clock() - t0 > BACKFILL_BUDGET_S:
+            not_requested.append(name)
+            old = read_archive(name)             # an earlier copy of a year read again: kept until it is read
+            if old is not None:
+                rows += old
+                rows_by_span[name] = len(old)
+            continue
+        if read or failed:
+            time.sleep(BACKFILL_PAUSE_S)
+        at = now_iso()
+        try:
+            got = fetch_span(sess, start, stop)
+        except Exception as e:  # noqa: BLE001
+            old = read_archive(name)
+            if old is not None:
+                rows += old
+                rows_by_span[name] = len(old)
+            if not transient(e):
+                code = getattr(getattr(e, "response", None), "status_code", None)
+                stopped = (f"backfill stopped at {name}: the service answered HTTP {code}; it no longer answers "
+                           "this query (not asked again this run)")
+                errors.append(stopped)
+                failed.append(name)
+                continue
+            failed.append(name)
+            errors.append(f"backfill {name} not read: {type(e).__name__}; asked again by the next --backfill")
+            fails += 1
+            if fails >= BACKFILL_MAX_FAILURES:
+                stopped = f"backfill stopped after {fails} failures in a row; run --backfill again"
+                errors.append(stopped)
+            continue
+        fails = 0
+        got = [scrubbed_row(r) for r in got]
+        write_json(archive_path(name), {"service": LIST_URL, "fields": FIELDS, "span": name,
+                                        "start_min": start.isoformat() if start else None,
+                                        "start_max_exclusive": stop.isoformat() if stop else None,
+                                        "fetched_at": at, "rows": got})
+        years[name] = {"rows": len(got), "fetched_at": at}
+        if save_state:
+            save_state()                         # the archive and the state agree after every year
+        rows += got
+        read.append(name)
+        rows_by_span[name] = len(got)
+    if not_requested:
+        errors.append(f"backfill stopped after {BACKFILL_BUDGET_S // 60} minutes or a failure: {len(not_requested)} "
+                      f"spans from {not_requested[0]} to {not_requested[-1]} not requested; run --backfill again")
+    held = [n for n, _, _ in spans if archive_path(n).exists()]
+    complete = not failed and not not_requested
+    covered = None
+    for n in reversed([n for n, _, _ in spans if n.isdigit()]):    # the first year from which every year to now is held
+        if n not in held:
+            break
+        covered = n
+    summary = {"from": first_year, "to": today.year, "complete": complete,
+               "covered_from": int(covered) if covered else None,
+               "read_now": read, "from_archive": archived, "failed": failed, "not_requested": not_requested,
+               "rows_by_span": rows_by_span, "rows": sum(rows_by_span.values())}
+    return rows, summary, errors
 
 
 def lookups(sess, prev_records: list[dict], read_keys: set[str], state: dict, fetched_at: str
@@ -755,7 +888,8 @@ def load_file(path: str) -> list[dict]:
 def left_scope(state: dict) -> str:
     """The span the left-out counts cover, for the site's sentence ("Of <span>, ...")."""
     b = state.get("backfill") or {}
-    return (f"every report read since January {b['from']}" if b.get("from") else
+    first = b.get("covered_from", b.get("from"))
+    return (f"every report read since January {first}" if first else
             "the reports read so far (open reports and those completed in the last 60 days at first)")
 
 
@@ -765,7 +899,9 @@ def main(argv=None) -> int:
     ap.add_argument("--file", help="read this saved list response (or a list of them) instead of the service")
     ap.add_argument("--backfill", action="store_true", help="also read every COMPLETE report from --from on")
     ap.add_argument("--from", dest="first_year", type=int, default=BACKFILL_FROM,
-                    help=f"first year of the backfill (default {BACKFILL_FROM}; the list goes back to 2001)")
+                    help=f"first year of the backfill (default {BACKFILL_FROM}, the list's first year)")
+    ap.add_argument("--refetch", action="store_true",
+                    help="with --backfill: ask again for years already in the archive")
     args = ap.parse_args(argv)
     fetched_at = now_iso()
     today = datetime.now(UTC).date()
@@ -775,15 +911,18 @@ def main(argv=None) -> int:
     prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
     errors: list[str] = []
     missing: set[str] = set()
+    history, summary = [], None
     try:
         if args.file:
             rows = load_file(args.file)
         else:
             rows = fetch_current(sess, today)
             if args.backfill:
-                rows += fetch_backfill(sess, today, args.first_year)
-            found, missing, errors = lookups(sess, prev, {row_key(r) for r in rows}, state, fetched_at)
+                history, summary, errors = fetch_backfill(sess, today, args.first_year, args.refetch, state,
+                                                          lambda: write_json(STATE_FILE, state))
+            found, missing, more = lookups(sess, prev, {row_key(r) for r in rows + history}, state, fetched_at)
             rows += found
+            errors += more
     except Exception as e:  # noqa: BLE001
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
@@ -797,11 +936,15 @@ def main(argv=None) -> int:
             state.update(sha256=sha, raw_path=raw_path, saved_at=fetched_at)
     left_state = state.setdefault("left_out", {})
     permits = permit_index()
-    records, stats = build(rows, fetched_at, prev, permits, missing, left_state)
+    # the current answer first: a report read now wins over its archived copy (build keeps the first row of a key)
+    records, stats = build(rows + history, fetched_at, prev, permits, missing, left_state)
     records = redact.redact_events(records)
     state["fetched_at"] = fetched_at
-    if args.backfill:
-        state["backfill"] = {"from": args.first_year, "at": fetched_at}
+    if summary is not None:
+        state["backfill"] = {**summary, "at": fetched_at,
+                             "records_by_start_year": dict(sorted(Counter(
+                                 (r.get("started_at") or "no start")[:4] for r in records
+                                 if r.get("source_record_id")).items()))}
     write_json(STATE_FILE, state)
     left = Counter(left_state.values())
     newest = max((r.get("reported_at") or "" for r in records), default="") or None
