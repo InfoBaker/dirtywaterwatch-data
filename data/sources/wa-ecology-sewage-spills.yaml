@@ -26,7 +26,7 @@ level: "state"
 cadence: "1 hour"
 # Ecology: "After we receive the report from the facility, our goal is to publish the information within five working
 #   days." Final information is added after the spill concludes.
-license: "Page disclaimer: 'This information is provided as it has been reported. It has not been independently verified by Ecology. The information is provided for educational, informational, and research purposes.'"
+license: "Ecology's copyright terms (https://ecology.wa.gov/About-us/Accountability-transparency/Our-website/Copyright-information, read 2026-11-04), which cover its linked database and map servers: use of data is permitted 'provided the Washington State Department of Ecology is credited as the data provider and a link is provided to the Ecology data source web page'; commercial and political use is prohibited, including 'any use in a political campaign or lobbying effort'. The page's disclaimer: 'This information is provided as it has been reported. It has not been independently verified by Ecology.'"
 attribution: "Washington State Department of Ecology"
 enabled: true
 role: "events"
