@@ -270,3 +270,12 @@ def test_the_makefile_runs_the_live_generic_sources_after_the_modules():
     ingest = mk.split("\ningest:", 1)[1].split("\n\n", 1)[0]
     assert "ingest.generic --list" in ingest
     assert ingest.index("INGEST_MODULES") < ingest.index("ingest.generic") < ingest.index("for m in $(INGEST_SNAPSHOTS)")
+
+
+def test_every_example_in_the_documentation_is_a_valid_block():
+    import re
+    doc = (Path(__file__).resolve().parents[2] / "docs" / "generic-ingesters.md").read_text()
+    examples = [yaml.safe_load(m)["fetch"] for m in re.findall(r"```yaml\n(.*?)```", doc, re.S)]
+    assert {b["platform"] for b in examples} == {"socrata", "arcgis", "csv", "json", "rss", "snapshot"}
+    for b in examples:
+        assert runner.validate_block(b) == [], b["platform"]
