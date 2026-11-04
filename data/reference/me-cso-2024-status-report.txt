@@ -1,0 +1,1217 @@
+Maine Combined Sewer Overflow
+2024 Status Report
+June 2025
+Kennebec Sanitary Treatment District
+CSO Abatement
+Success Stories
+14th and 15th CSO Permittees
+to Exit the CSO Program
+Paris Utility District
+CSO Abatement Coordinator
+Bureau of Water Quality
+Document No.: DEPLQ0972N-2025
+MAINE DEPARTMENT OF ENVIRONMENTAL PROTECTION
+17 State House Station | Augusta, Maine 04330-0017
+www.maine.gov/dep
+DEP A R T MEN T OF S T A T E O F M A IN E
+EN VIR ON MEN T A L PR OT ECT ION
+GOVERNOR COMMISSIONER
+June 30, 2025
+To: Combined Sewer Overflow (CSO) Permittees
+Subject: 2024 Annual CSO Status Report for the State of Maine
+Attached is a copy of the Maine Combined Sewer Overflow 2024 Status Report. This report
+is being distributed to CSO Permittee contacts, municipal officials, consulting engineers, and
+other interested people. The report documents the efforts and progress that have been made
+by each CSO Permittee to eliminate or abate combined sewer overflows within their system.
+Although 2024 was not as wet as 2023, large rain events did occur again between the
+months of January and March and in December, when the ground is frozen and any rainfall
+runs overland into catch basins and the combined sewer. The frozen ground acts like a force
+multiplier for CSO discharge, with the same size storm producing much higher CSO
+discharge if the storm occurs when the ground is frozen.
+For example, 78.8% of Portland’s CSO discharge for 2024, or 228.8 MG, came because of
+two large rain events in January, five rain events in March and three rain events in
+December, all when the ground was frozen.
+A similar pattern played out in Lewiston (90.3%), LACWA (77.3%), Biddeford (99.0%), South
+Portland (99.9%) and Saco (96.1%), where winter rainfall combined with snowmelt and
+frozen ground conditions generated the vast majority of annual discharge. So, it’s not only
+how large the rain event is, but when it occurs that determines overall discharge.
+There were also exciting developments in 2024, as both Paris Utility District (PUD), which
+serves South Paris and Paris, and the Kennebec Sanitary Treatment District (KSTD),
+which serves Fairfield, Waterville, Benton, Winslow, Oakland, and Vassalboro, achieved the
+necessary level of control to safely exit the CSO program. They are the first two CSO
+permittees to complete their CSO abatement plan and exit the program in over ten years,
+since Sanford left in 2014. Congratulations to the staff of both Districts for many years of
+dedication in removing excess water from their collection systems.
+For a more detailed discussion on the factors which determine whether a CSO permittee is
+ready to exit the CSO program, please see the new section titled Pathway to Exit from the
+CSO Program contained in the Introduction to this year’s report.
+The Department’s CSO website has a downloadable version of the current report as well as
+copies of each report from the last three years. The website also contains links to other State
+and Federal documents that may be of interest. The report and other CSO materials may
+be found at: http://www.maine.gov/dep/water/cso/index.html.
+The report is meant to be a snapshot of the CSO program status in Maine. We welcome any
+comments that you might have to improve the report. Thanks to all of you who haveAUGUSTA BANGOR PORTLAND PRESQUE ISLE
+17 STATE HOUSE STATION 106 HOGAN ROAD, SUITE 6 312 CANCO ROAD 1235 CENTRAL DRIVE, SKYWAY PARK
+AUGUSTA, MAINE 04333-0017 BANGOR, MAINE 04401 PORTLAND, MAINE 04103 PRESQUE ISLE, MAINE 04769
+(207) 287-7688 FAX: (207) 287-7826 (207) 941-4570 FAX: (207) 941-4584 (207) 822-6300 FAX: (207) 822-6303 (207) 764-0477 FAX: (207) 760-3143
+website: www.maine.gov/dep
+DEP A R T MEN T OF S T A T E O F M A IN E
+EN VIR ON MEN T A L PR OT ECT ION
+GOVERNOR COMMISSIONER
+contributed data for this report, and most importantly thank you for your continued efforts to
+eliminate the public health hazard created by CSOs.
+CSO Abatement Coordinator
+Division of Water Quality Management
+Enc.: Maine Combined Sewer Overflow 2024 Status Report
+AUGUSTA BANGOR PORTLAND PRESQUE ISLE
+17 STATE HOUSE STATION 106 HOGAN ROAD, SUITE 6 312 CANCO ROAD 1235 CENTRAL DRIVE, SKYWAY PARK
+AUGUSTA, MAINE 04333-0017 BANGOR, MAINE 04401 PORTLAND, MAINE 04103 PRESQUE ISLE, MAINE 04769
+(207) 287-7688 FAX: (207) 287-7826 (207) 941-4570 FAX: (207) 941-4584 (207) 822-6300 FAX: (207) 822-6303 (207) 764-0477 FAX: (207) 760-3143
+website: www.maine.gov/dep
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+TABLE OF CONTENTS
+Introduction ................................................................................................................................................ 1
+What is a CSS and What are CSOs? ......................................................................................................... 1
+What are the Impacts of CSOs? ............................................................................................................... 3
+What is a CSO Permittee? ......................................................................................................................... 4
+Where Did We Start? ................................................................................................................................. 5
+What is Being Done to Eliminate/Abate CSO Discharges .................................................................. 6
+Where are We Now? .................................................................................................................................. 7
+2024 Status ............................................................................................................................................... 7
+Overall Trends and Consideration ..................................................................................................... 10
+Pathway to Exit from the CSO Program ........................................................................................... 12
+Recognitions .......................................................................................................................................... 13
+FIGURES
+Map of Current CSO Permittees .............................................................................................................. 5
+Map of Former CSO Permittees ............................................................................................................ 13
+TABLES
+Maine Combined Sewer Overflow (CSO) Permittee List ................................................................... 16
+Maine CSO Permittee Flow Data ........................................................................................................... 17
+Maine CSO Permittee Annual Number of CSO Discharge Events .................................................. 18
+Maine CSO Permittee Annual Number of CSO Outfalls ................................................................... 19
+Maine Annual CSO Volume Discharged by Watershed ..................................................................... 28
+Maine CSO Permittee Level of Treatment ........................................................................................... 29
+CHARTS
+Maine – Statewide Combined Sewer Overflow (CSO) Volume Discharged ................................... 20
+Maine – Statewide Combined Sewer Overflow (CSO) Annual Number of Discharge Events..... 21
+Maine – Statewide Combined Sewer Overflow (CSO) Outfalls ........................................................ 22
+Maine – Statewide Combined Sewer Overflow (CSO) Annual Volume Discharged per Inch of
+Precipitation .............................................................................................................................................. 23
+Maine – Yearly CSO Volumes and Precipitation ................................................................................. 24
+Maine 2024 CSO Flow Comparison – Pie Chart ................................................................................. 25
+Maine 2024 CSO Flow Comparison by Permittee – Bar Chart ......................................................... 26
+Maine 2024 CSO Volume Discharged by Watershed – Pie Chart ..................................................... 27
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+Introduction
+The purpose of this annual report is to inform the Combined Sewer Overflow (CSO)
+Permittees and the general public on the status of CSO abatement efforts in the State of Maine.
+The drive to reduce CSO discharge began in the early 1990s with the development of CSO
+Master Plans by 47 Maine CSO Permittees, with DEP approvals of the Master Plans starting in
+1993. As such, the overall CSO abatement effort has been waged for 33 years in Maine. Over
+those three decades, fifteen CSO Permittees have completed their CSO abatement plan,
+conducted post construction monitoring, closed their CSO locations, and exited the CSO
+program. At this point, the remaining 32 CSO Permittees have completed the less difficult CSO
+abatement projects, with the majority of the remaining projects being of a more complex and
+more expensive nature.
+The CSO program compiles information from various documents and reports submitted to the
+Maine Department of Environmental Protection (Department) by the CSO Permittees
+(City/Town/District/Authority) or their consultants on their behalf. The majority of
+information comes from the CSO Master Plans (a.k.a. Long-Term Control Plans), Sewer
+System Evaluation Studies, Inflow/Infiltration Reports, Annual CSO Progress Reports, Annual
+CSO Activity and Volume Reports, and general correspondence.
+At the start of each CSO Permittee’s abatement program, initial flow data was collected to
+estimate the discharge volumes and frequencies, define the scale of the problem, and establish a
+corrective course of action. Since then, CSO flow monitoring plans have continued to improve,
+Permittees have a better understanding of their collection system’s response to wet weather,
+and overall data reliability has increased.
+The CSO program works because it provides an exchange of value between the permittee and
+the regulatory agency. The permittee receives legal protection for what would otherwise be
+prohibited discharges, and in return agrees to keep working on implementing their CSO
+abatement Master Plan with the goal of eliminating CSO activity.
+What is a CSS and What are CSOs?
+▪ Combined Sewer Systems (CSS) are defined as collection systems which carry a
+combination of sanitary wastewater and storm water within the same pipes. They are
+typically older collection systems designed and installed prior to the advent of
+wastewater treatment facilities. Newer collection systems are no longer being designed
+in this manner and no new CSO locations are being licensed.
+▪ Combined Sewer Overflows (CSO) are discharges of untreated wastewater from
+municipal CSSs. CSOs can be considered hydraulic relief points in a CSS which
+discharge to a receiving water during wet weather to protect property and prevent sewer
+backups into people’s basements. CSOs typically consist of two components; a CSO
+Regulator where the untreated wastewater exits the sewer system, and a CSO outfall
+where the wastewater is discharged to the receiving water. Maine Pollution Discharge
+Elimination System (MePDES) permits issued by the State license the CSO outfalls, not
+the CSO regulators. Although uncommon, there can be more than one regulator
+discharging to a given CSO outfall.
+1
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+▪ Difference between a CSO Outfall and a CSO Regulator:
+o CSO Outfall – a licensed pipe or structure that discharges untreated combined
+wastewater from an overwhelmed collection system to the receiving water during
+wet weather events in compliance with requirements of the MePDES permit and
+waste discharge license.
+o CSO Regulator – this is where combined wastewater exits the sewer collection
+system, prior to reaching the wastewater treatment facility (WWTF). Think of it
+as leakage on the way to the WWTF. This happens when flows are high enough
+to exceed a regulator weir elevation thereby diverting that portion of the flow to
+a CSO outfall. CSO regulators are not permitted structures, CSO outfalls are.
+There can be more than one CSO regulator per CSO outfall. For example,
+Portland/PWD currently have 26 CSO regulators for 23 CSO outfalls.
+▪ Large volumes of water entering the CSS through catch basins, old and leaky pipes,
+roof drains, cellar drains, sump pumps, and other sources can cause the capacity of the
+system to be exceeded, resulting in discharges. Most Permittees distinguish between
+inflow and infiltration (I&I) from public sources (catch basins and pipe located within
+the public right of way) and private sources (roof drains, perimeter drains, sump pumps,
+and service pipes located on private property). Abatement of private sources of I&I are
+generally tackled last due to the expensive, difficult, and time consuming nature of the
+work.
+▪ CSO discharges occur mostly during and after rain events and/or snowmelt.
+Depending on the amount of inflow (catch basins, sump pumps, roof drains) and
+infiltration (high groundwater leaking into sewer via cracks, loose joints) entering a CSS,
+flows during wet weather events can be as high as fifty (50) times the normal dry
+weather flows. This ratio of wet weather flow to dry weather flow is referred to as the
+peaking factor. For CSO Permittees in Maine, wet weather peaking factors range from
+about three, for Permittees that have implemented an effective sewer separation
+program, to over ten, for Permittees whose separation efforts have been less effective.
+Peaking factors are an indication of the sensitivity of a CSS to precipitation and also a
+good indicator of how combined the CSS still is.
+▪ CSOs were originally added as hydraulic relief points within the CSS to allow the excess
+flows to be discharged in a controlled manner. These relief points are generally at
+topographic low points, near pump stations and river crossings.
+▪ A CSO discharge is considered a legally allowable discharge under the MePDES permit
+program subject to the following two conditions:
+o The CSO Permittee must be pursuing a DEP approved CSO abatement plan.
+o The abatement plan must be on schedule.
+If either condition is not met, the legal protection for CSO discharge goes away.
+Subsequent discharges are treated as illicit sanitary sewer overflows until the two
+conditions are once again met.
+2
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+▪ Sewer separation projects are designed to separate out the stormwater collection system
+from the wastewater collection system so that the sewers only carry wastewater and all
+stormwater is handled separately. If enough separation work is completed, CSO
+locations are no longer needed and can be permanently closed.
+▪ For CSO permittees who have reached the end of the construction phase for CSO
+abatement and are entering the 5-year post construction monitoring phase (PCMP), the
+DEP will often engage in discussions on converting the last active CSO, which is
+typically located closest to the WWTF, to an Emergency Overflow (EO) to prevent
+flooding at the treatment plant and to protect nearby residences if a 25+ year storm
+rolls through. The EO has to be electronically monitored on a continuous basis with
+any discharge being treated as an illicit discharge and reported as a sanitary sewer
+overflow (SSO), subject to enforcement and fines. In this manner, the sewer collection
+system will still have one hydraulic circuit breaker to prevent flooding when the storms
+are of a 25-year return frequency and above.
+▪ For those not familiar with Sanitary Sewer Overflows (SSO), they are defined as illegal
+discharges subject to DEP fines and enforcement. SSOs can occur for a variety of
+reasons, including pipe blockages, maintenance issues, mechanical failures, and wet
+weather, and can occur at any point in the collection system.
+What are the Impacts of CSOs?
+▪ At the end of 2024, there were 32 Maine CSO Permittees (Towns, Cities, Utility
+Districts, Authorities) located in 29 Maine communities with CSO discharge points in
+their sewer collection systems. At the end of 2024, these Permittees collectively had
+108 individual CSO discharge points (reduced from the original 340). Statewide, three
+CSO locations were permanently closed in 2024 with KSTD closing CSO003 and
+CSO005 and converting them to Emergency Overflows as part of their exit from the
+CSO program and GAUD closing CSO008. Totals for the State at the end of 2024
+include 108 active CSO outfalls and 114 active CSO regulators.
+▪ The frequency of discharges varies greatly amongst Permittees, ranging from seldom, all
+the way to discharging in response to the smallest rainstorms. Dry weather CSO
+discharges are prohibited, as are CSO discharges due to mechanical failure, or
+inadequate operation and maintenance. In addition, no discharges should occur at flow
+rates below the design capacity of the collection system.
+▪ In large communities, tens of millions of gallons per year of untreated combined
+sanitary sewage and storm water may be discharged. In the past five years statewide,
+total annual CSO discharges have ranged from approximately 305 to 745 million
+gallons. For comparison, the estimated volume from 1989, when most CSO abatement
+programs were just starting, was 6.2 billion gallons.
+▪ CSOs discharge untreated combined sewage into ten major watersheds in Maine. The
+watersheds include seven (7) rivers and their tributaries (Androscoggin, Kennebec,
+Machias, Penobscot, St. Croix, St. John, and Saco) and three (3) bays (Casco Bay,
+Frenchman Bay, and Penobscot Bay). The receiving waters vary in size from the
+Atlantic Ocean all the way down to a handful of small streams. The latter are the focus
+of DEP’s effort to eliminate CSO discharge to sensitive receiving waters. Sensitive
+3
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+receiving waters tend to be smaller streams, brooks, or tidal estuaries with low dilution
+factors.
+▪ CSOs have wide variability of impacts depending on discharge volume, frequency, and
+the size and sensitivity of the receiving water. Water quality can be impaired by the
+addition of floatable solids, bacteria, and sometimes industrial pollutants that may be
+present in CSO discharges.
+▪ Potential public health impacts from CSO discharges include the closure of beaches
+and shell fishing areas due to bacterial contamination, and the potential for drinking
+water supplies to be threatened/contaminated.
+▪ Why is CSO abatement important? During wet weather, flows in a CSS can
+hydraulically overload the capacity of the collection system leading to CSOs, SSOs,
+street flooding, back-ups into basements, and treatment facility upsets.
+What is a CSO Permittee?
+▪ CSO Permittee – a Town, City, Sewer District, or regional Wastewater Treatment
+Authority that has active CSO locations in their collection system which must be
+licensed.
+▪ CSO Permittees are authorized to discharge untreated combined sanitary and storm
+waters subject to the conditions and requirements included in the Maine Pollutant
+Discharge Elimination System (MePDES) permit. In simple terms, a CSO Permittee
+receives legal protection for CSO discharges while they work to implement an approved
+CSO Master Plan to abate and eliminate said discharges.
+▪ The Department issues CSO Permittees a wastewater discharge license that requires
+them to implement the Environmental Protection Agency’s (EPA) Nine Minimum
+Control Best Management Practices (BMP) for CSOs and develop, maintain, and
+implement a CSO Master Plan (aka the Long Term Control Plan (LTCP)) to eliminate
+or abate their overflows. These actions are intended to bring them into compliance with
+EPA’s April 19, 1994 CSO Control Policy, the Clean Water Act, and State law (Maine
+DEP Chapter 570).
+▪ Special Conditions in a MePDES permit/Waste Discharge License require all CSO
+Permittees to submit an Annual CSO Progress Report to the Department, by March 1st
+of the following year for the previous calendar year.
+▪ The Annual CSO Progress Report documents each Permittee’s efforts to implement
+CSO abatement in a given year and collects pertinent fiscal and logistical information
+about their CSO abatement program. This information is used to track their CSO
+abatement progress and gather state-wide information on the CSO program and fiscal
+needs.
+4
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+Map Showing the Location of Current CSO Permittees
+Where Did We Start?
+▪ The CSO abatement movement began in 1989 with the publication of the National
+CSO Control Strategy by the EPA.
+▪ At that time, the State of Maine had about 50 CSO Permittees that discharged an
+estimated 6.2 billion gallons of untreated wastewater and storm water into the surface
+waters of the State, primarily during wet weather events.
+▪ At the start of the program in the late 1980s, CSO Permittees reported that over
+1,700 individual CSO discharge events were occurring each year, through approximately
+340 CSO outfall locations (an average of 5 discharge events per CSO location per year).
+▪ On April 19, 1994, EPA issued a national policy statement entitled “Combined Sewer
+Overflow (CSO) Control Policy.” This policy provided guidance to State permitting
+authorities and CSO Permittees on coordinating the planning, selection, and
+implementation of CSO controls that, once implemented, would allow CSO Permittees
+to achieve compliance with the requirements of the Clean Water Act (CWA).
+▪ In February 2000, the Maine Department of Environmental Protection Chapter 570
+Rules, entitled “Combined Sewer Overflow Abatement,” took effect. This chapter
+established procedures for CSO evaluation, preparation of an abatement plan, and set
+5
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+forth minimum controls to reduce CSOs while long-term plans are completed. The
+main difference between Chapter 570 and EPA’s CSO Control Policy is that Chapter
+570 requires Maine CSO permittees to include total elimination/closure of the CSO
+outfall as one of the options that must be evaluated in the Alternatives Analysis. If
+outright closure is technically feasible and not cost prohibitive then DEP supports this
+pathway. Chapter 570 also discussed the conditions under which new sources of
+wastewater could be added to a CSS with active CSOs.
+▪ In December 2000, as part of the Consolidated Appropriations Act for Fiscal Year
+2001 (P.L. 106-554), Congress amended the Clean Water Act (CWA) by adding Section
+402(q), commonly referred to as the Wet Weather Water Quality Act of 2000. Section
+402(q) requires that each permit, order, or decree issued pursuant to the CWA for a
+discharge from a municipal combined sewer system shall conform to the 1994 EPA
+CSO Control Policy.
+What is Being Done to Eliminate/Abate CSO Discharges?
+▪ All of Maine’s CSO Permittees have completed or are currently working on
+implementing their CSO Master Plan, often referred to as a Long-Term Control Plan.
+These documents define the magnitude of the CSO discharges, their impacts on the
+environment, evaluate a range of abatement control alternatives and their financial
+impacts, and recommend a set of CSO controls that will eliminate/abate the CSO
+discharges.
+▪ CSO abatement projects have reduced the discharge of untreated, combined sewage to
+receiving waters for all the CSO Permittees. Fifteen Permittees have eliminated their
+CSO discharges entirely, have left the CSO program, and are no longer licensed to
+discharge untreated combined sewage during wet weather. This includes two permittees
+that left the CSO program in 2024; Kennebec Sanitary Treatment District and Paris
+Utility District.
+▪ Statewide, currently licensed CSO Permittees have reported investing approximately
+$870.8 million in CSO abatement since the program started (Note: this number has
+been adjusted to reflect recent audit). Of the total invested to date, the Maine Clean
+Water State Revolving Fund (CWSRF) has contributed approximately $360.8 million
+(41.4% of total expenditure on CSO abatement by current CSO Permittees).
+▪ Anticipated infrastructure needs of current CSO Permittees over the next five years are
+estimated to be approximately $298.5 million.
+Partially (left) and Fully (right) Restored Site of Force Main Installation under the Kennebec
+River in Winslow at CSO #003
+6
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+Where are We Now?
+2024 Status
+1) 2) 3) 4) 5) 6) In 2024, the 32 currently licensed CSO Permittees reduced the total number of CSO
+discharge locations by three, from 111 to 108, (a complete listing of Maine’s CSO
+Permittees, the number of CSO locations, and the corresponding receiving waters are
+listed on page 16). Two CSOs were closed and converted to Emergency Overflows in
+the community of Waterville by Kennebec Sanitary Treatment District as part of their
+exit from the CSO program, and one CSO was closed in the community of Augusta by
+Greater Augusta Utility District. With the addition of 2024 data, the chart on page 22,
+Maine – Statewide Number of Combined Sewer Overflow Outfalls, shows a
+68.0% reduction in the overall number of CSO locations in Maine since the start of
+Maine’s CSO Abatement Program.
+In 2024, the CSO Permittees reported a total of 254 overflow event-days which is the
+lowest annual total on record for the State, in response to slightly higher than average
+annual rainfall. An overflow event is any calendar day that one or more CSO locations
+within a community experiences a discharge. The table on page 18, Maine CSO
+Permittee Annual Number of CSO Discharge Events, contains a historic listing of
+the annual number of CSO discharge events for each CSO Permittee.
+The maximum number of overflow event days reported in 2024 from a single CSO
+Permittee was forty-eight (48). The average (mean) number of discharge event days per
+year for all Permittees was eight and one half (8.5) event days and the median was five
+(5) event days. Additional information can be found in the table on page 18, Maine
+CSO Permittee Annual Number of CSO Discharge Events.
+Since 1989, the statewide flow weighted average annual precipitation for CSO
+Permittees in Maine has been 47.02 inches. In 2024, the annual precipitation measured
+by CSO Permittees varied significantly from 34.89 inches in Aroostook County to 57.21
+inches in Penobscot County, with a statewide flow weighted average of 48.54 inches.
+Comparatively speaking, 2024 was slightly above average for precipitation in Maine.
+The Maine – Yearly CSO Volumes and Precipitation chart on page 24 compares
+annual CSO discharge volume to annual precipitation. The chart illustrates that CSO
+discharge volumes tend to mirror the annual upward and downward trends in
+precipitation totals, but also shows that the peaks have become less pronounced as the
+CSO abatement effort has progressed. The chart also shows a progressive widening of
+the gap between the annual precipitation trend line and the annual CSO discharge
+volume trend line. This widening gap illustrates that as CSO abatement projects
+continue to be implemented, collection systems are becoming less sensitive to
+precipitation events.
+The CSO volume discharged statewide in 2024 was reported to be approximately
+532.5 million gallons (MG). That level of discharge is similar to 2015 and 2016, but it
+was in response to 48.54 inches of rainfall whereas 2015 and 2016 had 39.07 and 41.94
+inches respectively. This indicates that progress continues to be made.
+7
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+7) 8) The table on page 17, Maine CSO Permittee Flow Data, contains a historic listing of
+the annual overflows from each CSO Permittee. The Maine 2024 CSO Flow
+Comparison pie chart on page 25 and the Maine 2024 CSO Flow Comparison by
+Permittee bar chart on page 26 show graphical comparisons of these overflow
+volumes between the CSO Permittees.
+In 2024 the top five (5) CSO Permittees, ranked by discharge volume, accounted for
+approximately 89.3% of the total CSO volume discharged in the State. The top ten (10)
+CSO Permittees accounted for approximately 95.9% of the total CSO discharge
+volume. The remaining CSO Permittees accounted for 4.1% of the total CSO discharge
+volume. See the Maine 2024 CSO Flow Comparison pie chart on page 25 for a
+graphical comparison of CSO dischargers.
+Construction of the City of Portland’s Back Cove South Storage Tank Project at CSOs
+#017, 018, and 019 (photo credit to Maine Imaging for left side photo)
+9) CSO discharges by the City of Portland and the Portland Water District totaled
+290.2 MG and accounted for approximately 54.5% of Maine’s total CSO discharge
+volume in 2024; see the Maine 2024 CSO Flow Comparison pie chart on page 25.
+We’re happy to report that the Back Cove West Storage Conduit, which officially went
+on line in the spring of 2023, has reduced CSO discharge into Back Cove by over 29
+million gallons. The Back Cove South Storage Facility is scheduled to go into service in
+summer of 2025. If the tank had been on line in 2024, we estimate CSO discharge at
+CSO #017 would have dropped 53.3 MG from 91.57 MG to 38.29 MG, a 58.2%
+reduction. The number of CSO events at CSO #017 would have dropped from 28 to 8.
+10) CSO discharges by the City of Lewiston and Lewiston-Auburn Clean Water Authority
+(LACWA) totaled 91.6 MG in 2024, accounting for 17.2% of the overall statewide CSO
+discharge. LACWA, which contributed 57.9 MG of that total, is currently in the process
+of constructing a 2.1 MG storage tank to reduce CSO discharge from Structure B at the
+LACWA treatment facility. If the tank had been on line in 2024, we estimate CSO
+discharge at LACWA would have been reduced by 15.93 MG and the number of CSO
+events would have decreased substantially from 21 to 5.
+8
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+Construction of New Process Building at the Saco Water Resource Recovery Facility
+(WRRF)
+11) In 2024, the State of Maine saw an intensification of the trend towards more high
+intensity rain events which can overwhelm any combined sewer collection system.
+1 This
+trend of high intensity storms has worked against the progress made by Maine CSO
+communities.
+12) The pie chart on page 27 – Maine 2024 CSO Volume Discharged by Watershed, is
+a graphical representation of the CSO volumes discharged by major watershed. In 2024,
+Casco Bay received approximately 56.9% of the statewide CSO volume discharged,
+followed by the Androscoggin River at 17.4%, the Penobscot River at 15.2%, the
+Kennebec River at 4.8%, the Saco River at 4.6%, and Frenchman Bay at 0.6%.
+Discharges to the St. John River, St. Croix River, Machias River and Penobscot Bay
+account for the remaining ~0.5% of combined sewer overflow volumes.
+13) The table on page 28 – Maine Annual CSO Volume Discharged by Watershed,
+shows the reported CSO discharge volumes for each CSO Permittee grouped by the
+receiving watersheds, both for 2024 and the previous five years.
+14) CSO discharges are well documented contributors to beach and shellfish closures.
+Stating with certainty that specific CSO events are solely responsible for specific
+closures is more difficult and is beyond the scope of this report. In some areas of the
+State, there may be other factors that contribute to a beach or shell fishing area closure.
+These may include but are not necessarily limited to: urban storm water runoff,
+malfunctioning septic systems, domestic and non-domestic animal waste, agricultural
+runoff, and bathers. This Annual Report attempts to identify which beaches and shell
+fishing areas may have been impacted by CSO discharges in 2024.
+15) In 2024, there was one beach closure due to CSO discharge and that again was in
+Portland at East End Beach. There were also potential impacts on thirteen (13) beach
+areas from CSO discharges. They were: Bar Harbor (Town Beach off Town Pier &
+Hulls Cove); Biddeford/Saco (Hills Beach, Biddeford Pool, Middle Beach, Fortunes
+Rock Beach & Camp Ellis); Cape Elizabeth (Cliff House Beach, Casino Beach & Fort
+1 Fernandez, I., S. Birkel, C. Schmitt, J. Simonson, B. Lyon, A. Pershing, E. Stancioff, G. Jacobson, and P. Mayewski. 2020. Maine’s
+Climate Future 2020 Update. Orono, ME: University of Maine. climatechange.umaine.edu/climate-matters/maines-climate-future/
+9
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+Williams Park); Portland (East End Beach); South Portland (Willard Beach); and Calais
+(Red Beach – though not considered a swimming beach).
+16) In 2024 three (3) CSO Permittees reported that shell fishing areas were impacted by
+their CSO discharges (Machias, Calais, and Portland). All three reported shell fishing
+area closures, including eleven in Machias, which were attributed to CSO activity. The
+upgrades to the river crossing and construction of the pump station in Machias were
+completed in early 2025, with pump station startup occurring in late March/early April.
+Early results are promising as Machias has had several significant rain events since
+startup with no CSO events.
+Pump Station and Force Main Under the Machias River in Machias at CSO #002
+Overall Trends and Considerations
+1) 2) 3) The volume and frequency of CSO discharges vary from one wet weather event to the
+next based on existing groundwater levels, frozen or thawed ground, snowmelt,
+saturated soil conditions, and rainfall volume, duration, and intensity.
+To evaluate CSO abatement progress it is best to look for a historical trend in
+reductions, rather than totals from year to year. The chart on page 20, Maine –
+Statewide Combined Sewer Overflow Volume Discharged, illustrates the
+continuing overall downward trend in the CSO volume discharged annually. Since the
+start of the CSO Abatement Program the cumulative reduction in CSO volume
+discharged annually has decreased by approximately 91.3% statewide. Recent progress
+has slowed as Permittees tackle the more difficult abatement projects and the frequency
+of larger and more intense storms has increased.2
+Similarly, the chart on page 21, Maine – Statewide Combined Sewer Overflow
+Annual Number of Discharge Events, shows an overall downward trend in the
+number of overflow event days per year. Since the start of the CSO Abatement
+Program, the cumulative number of overflow event days experienced per year has
+decreased by approximately 85.5% statewide from 1,753 events in 1989 to 254 events in
+2024.
+2 MCC STS. 2020. Scientific Assessment of Climate Change and Its Effects in Maine. A Report by the Scientific and Technical
+Subcommittee (STS) of the Maine Climate Council (MCC). Augusta, Maine. 370 pp.
+10
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+4) 5) 6) CSO abatement progress should not be measured solely by comparing the volumes
+discharged from one year to the next, because the volume discharged is influenced by
+variations in precipitation amounts, intensity and timing, the total area drained by the
+collection system, the rate of snow melt, frozen or thawed ground, and existing
+groundwater levels. Even given the same annual precipitation, it is highly unlikely that
+any two years would result in the same volume of CSO discharges because of the
+complex relationship between these variables.
+Trying to compare CSO abatement progress from year to year is difficult due to the
+varying conditions that influence the volume and frequency of overflows, not the least
+of which is annual precipitation patterns. To partially compensate for the fluctuation in
+annual precipitation patterns, the total volume of untreated combined sewage
+discharged can be unitized by taking into consideration the average annual precipitation
+received by each CSO Permittee. Just divide CSO volume by annual precipitation
+reported in inches to obtain a volume discharged per inch of precipitation. The chart on
+page 23, Maine Combined Sewer Overflows Annual Volume Discharged per Inch
+of Precipitation, illustrates the unitized CSO discharge volume per year. This chart
+shows a continuing downward trend in the volume of combined sewage discharged per
+inch of annual precipitation, despite upticks in 2023 and 2024. Since the start of the
+CSO Abatement Program, overflow volumes have decreased from approximately 128
+million gallons per inch of precipitation to 11.0 million gallons per inch of precipitation,
+a reduction of 91.4%. The reduction in CSO discharge per inch of rain mirrors the
+overall reduction in annual CSO discharge volume achieved statewide since the CSO
+Abatement Program started (91.3%). This analysis is useful as a general indicator of the
+CSO abatement progress that is being accomplished.
+Precipitation and the CSO volume discharged does not have a simple linear
+relationship. Still, generally, as precipitation levels increase, the volume of combined
+sewage being discharged per inch of precipitation would increase, because of the sewers
+finite capacity to capture more storm water. Once the capacity of the combined sewer
+system is reached, any additional rainfall or snowmelt would overflow the already
+inundated system.
+Replacement of Vitrified Clay Pipes and Old Manholes in the City of Belfast
+11
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+7) 8) The susceptibility of a CSO Permittee’s sewer collection system to excessive inflow and
+infiltration (I&I) is dependent on many factors including age and condition of pipe,
+degree of separation, quality of the original installation, how well the system has been
+maintained, etc. Therefore, wet weather conditions and precipitation patterns affect
+individual CSO Permittees differently. Systems with a large number of catch basins or
+roof drains still connected, or with a high percentage of impermeable surfaces, may be
+influenced to a greater degree by the inflow generated by intense summer storms. In
+communities where the sanitary and storm systems are largely separated and inflow is
+not the main challenge, the cause of wet weather discharges might be more infiltration
+based. In these systems a high ground water table, often occurring in the spring, can
+promote infiltration into the collection system via leaky pipes and manholes. Therefore,
+direct comparisons between Permittees regarding their CSO abatement progress could
+be misleading.
+Starting in 2018 the Annual Maine Combined Sewer Overflow Status Report has
+included a new section which summarizes the level of treatment provided by each of
+the thirty-two (32) Maine CSO Permittees. The Maine CSO Permittee Level of
+Treatment summary included on page 29 provides the total annual volume of
+wastewater collected by each of CSO communities, the percentage which receives
+secondary treatment, the percentage which receives only primary treatment (the bypass
+volume, for communities that have a permitted bypass of secondary treatment), and the
+percentage which receives no treatment (CSO volume). The summary is a good
+indication of which CSO Permittees are maximizing the percentage of flows which
+receive secondary treatment, and whether certain systems are overly reliant on their
+bypass of secondary treatment.
+In addition to the CSO storage facilities mentioned previously, Lewiston/Auburn are
+currently constructing 2.1 MG of off-line storage at their LACWA treatment plant. The
+project will also increase the peak flow capacity of LACWA from 32 to 38 MGD. The
+storage tank at LACWA is scheduled to be on line by the end of 2026.
+Pathway to Exit from the CSO Program
+Once a permittee has completed the construction phase of their CSO abatement effort, they
+enter a 3-to-5-year post construction monitoring phase (PCMP) to assess whether they have
+an adequate level of control to safely leave the program or whether they need to do
+additional CSO abatement projects to increase their level of control further.
+From experience, the CSO Group has concluded that an 8-to-10-year period with no CSO
+activity, which equates to controlling a 24-hour storm with an 8-to-10-year return interval, is
+the practical threshold that a permittee should be able to meet to leave the CSO program
+without causing themselves a regulatory burden.
+CSO permittees with only one remaining CSO often transition the CSO to an Emergency
+Overflow (EO) once they’ve obtained an 8-to-10-year level of control. Obtaining this level
+of control before being eligible to transition to an EO is not a statutory requirement, but
+rather a practical consideration to prevent the former CSO permittee from getting into
+regulatory trouble by leaving prematurely without a sufficient level of control.
+9) 12
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+Why are EOs desirable?
+The DEP believes in maintaining at least one hydraulic relief point for a collection system
+of any size as a safeguard in case a large storm rolls through. The EO performs this
+function, protecting critical infrastructure, preventing street flooding, and preventing
+basements from being filled.
+In return for providing permanent hydraulic relief from big storms, the EO must be
+monitored electronically 24/7 year-round with any discharge treated as a prohibited
+discharge subject to 24-hour reporting rules, fines, and enforcement action.
+Map Showing the Location of Former CSO Permittees
+Recognitions
+Yes, there were some bright spots in 2024.
+1) As mentioned previously, Kennebec Sanitary Treatment District (KSTD) and Paris
+Utility District (PUD) completed their CSO abatement programs and exited the CSO
+program in 2024. They are the fourteenth and fifteenth CSO permittees to exit the
+program, and the first since 2014.
+13
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+a. KSTD developed their CSO Master Plan in 2001 and have spent $4.6M closing
+two CSO locations and transitioning three other CSO locations to Emergency
+Overflows to provide permanent hydraulic relief along their 13-mile interceptor.
+Their current level of control is approximately a 25-year storm.
+b. PUD developed their original CSO Master Plan in 1995 and have spent $1.01M
+to eliminate excess water from their collection system. As a result they now have
+a level of control which exceeds a 25-year storm. Their one CSO, located at the
+WWTF, has been converted to an emergency overflow to prevent flooding at the
+plant.
+Congratulations to both utilities on this achievement!
+2) Five Year Award of Merit – Greater Augusta Utility District (GAUD)
+This recognition goes to CSO permittees who exceed expectations over a sustained
+five-year period, whether it be reducing CSO discharge volume, reducing the number
+of annual CSO events, or decreasing the number of CSO outfalls or regulators in the
+system.
+Over the last five years, GAUD has closed nine (9) CSO outfalls and their associated
+regulators and an additional six (6) CSO regulators for a total decrease of fifteen (15)
+regulators. The latter were located on CSO outfalls which have multiple regulators
+where the outfall is still active.
+Over the same five-year period from the beginning of 2020 to the end of 2024, GAUD
+reduced the number of CSO events from twenty-four (24) in 2020 to five (5) in 2024.
+Congratulations to GAUD and staff on sustained excellence in CSO abatement over
+the past five years.
+Shoring and Sheeting for Construction of the New Wet Well at Greater Augusta
+Utility District’s Front Street Pump Station in Augusta
+3) 4) The following two (2) CSO permittees had zero CSO events and thus zero CSO
+discharge: Town of Bucksport and the City of Rockland.
+In 2024, the City of Biddeford (13) and Greater Augusta Utility District (5) had their
+lowest number of CSO events on record. Auburn Sewerage District (2) and the City of
+Gardiner (1) tied their lowest number of CSO events on record.
+14
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+5) 6) 7) 8) 9) CSO permittees that are currently in the Post Construction Monitoring Phase (PCMP)
+of their CSO abatement program include: Town of Bucksport and Town of Cape
+Elizabeth – Ottawa Road
+CSO Permittees nearing the completion of their construction phase of CSO abatement,
+and the start of post construction monitoring, include: City of Belfast, City of Calais.
+We’d also like to recognize those CSO Permittees that treated more than 99% of their
+total flow volume to secondary treatment standards. They include: Bar Harbor, Belfast,
+Machias, Madawaska, Mechanic Falls, and PWD/Westbrook. Congratulations on this
+achievement!
+CSO permittees separated an additional 41 catch basins from their sewer collection
+systems in 2024 with the City of Lewiston leading the way with 18, followed by Bath
+with 8, Biddeford with 7, and Portland with 4.
+Cleaning sewers reestablishes lost capacity and allows for a detailed condition
+assessment of the pipe and manholes. CSO communities cleaned over 315 miles of
+sewer mains in 2024 led by Portland (150 miles), Bangor (46.6 miles) and Madawaska
+(20.6 miles).
+Construction of New Pump Station and Storage Tank at LACWA
+10) Closed circuit TV inspection (CCTV) of sewer mains is one of the best tools available
+to determine pipe condition. In 2024, CSO communities CCTVed 120 miles of sewer
+mains with Lewiston (29.3 miles), Bangor (27.6 miles), and GAUD (17.0 miles) leading
+the charge. I/I investigations were conducted on a total of 90.8 miles of sewers in 2024.
+15
+Maine Department of Environmental Protection Combined Sewer Overflow 2024 Status Report
+Maine Combined Sewer Overflow (CSO)
+Permittee List
+(As of December 31, 2024)
+COMMUNITY/PERMITTEE Outfalls Regulators No. of CSO Outfalls & Receiving Water
+1. AUBURN SEWERAGE DISTRICT ............................... 1 1 1-Androscoggin R.
+2. BANGOR .................................................................... 8 10 5-Kenduskeag Str., 3-Penobscot R.
+3. BAR HARBOR (Hulls Cove) ....................................... 1 1 1-Frenchman Bay
+4. BAR HARBOR (Main Plant) ....................................... 3 3 2-Frenchman Bay, 1-Eddie Brook
+5. BATH ......................................................................... 4 4 4-Kennebec R.
+6. BELFAST .................................................................... 2 2 2-Passagassawakeag R./Belfast Hbr.
+7. BIDDEFORD ............................................................... 7 7 7-Saco R.
+8. BREWER .................................................................... 4 4 3-Penobscot R., 1-Sedgeunkendunk Str.
+9. BUCKSPORT ............................................................... 0 0 SWIRL to Penobscot R.
+10. CALAIS ...................................................................... 3 3 2-St. Croix R., 1-Landing Bk.
+11. CAPE ELIZABETH – Ottawa Road PS (Co-Permittees:
+1 1 1-Atlantic O.
+So. Portland, PWD, & Cape Elizabeth)...........................
+12. GARDINER ................................................................. 1 1 1-Kennebec R.
+13. GREATER AUGUSTA UTILITY DISTRICT (GAUD)
+9 9 9-Kennebec R.
+& Hallowell Sanitary Sewers & CSO…………….......
+14. HAMPDEN ................................................................. 1 1 1-Souadabscook Str.
+15. LEWISTON ................................................................ 8 9 3-Androscoggin R., 1-Goff Bk./Hart Bk.,
+4-Jepson Bk.
+1 1 1-Androscoggin R.
+16. LEWISTON-AUBURN Clean Water Authority
+(LACWA) .................................................................
+17. MACHIAS ................................................................... 2 2 2-Machias R.
+18. MADAWASKA ............................................................ 2 2 2-St. John R.
+19. MECHANIC FALLS SANITARY DISTRICT .................... 2 2 2-Little Androscoggin R.
+20. MILFORD ................................................................. 1 1 1-Penobscot R.
+21. OLD TOWN ................................................................ 3 3 2-Penobscot R., 1-Stillwater R.
+22. ORONO ...................................................................... 1 1 1-Penobscot R.
+23. PORTLAND – CITY .................................................. 7 10 3-Back C., 1-Capisic Bk., 2-Portland Hbr.,
+1-Nason Bk. to Fore R. (marsh)
+24. PORTLAND – PORTLAND WATER DISTRICT (PWD) .. 16 16 5-Back C., 3-Casco B., 4-Fore R.,
+4-Portland Hbr.
+25. RANDOLPH ............................................................... 1 1 1-Kennebec R.
+26. ROCKLAND……………………………………………... 1 1 1-Rockland Hbr.
+27. SACO ......................................................................... 1 1 1-Saco R.
+28. SKOWHEGAN ............................................................. 5 5 5-Kennebec R.
+29. SOUTH PORTLAND ..................................................... 4 4 1-Barberry Ck., 1-Fore R., 1-Calvery P.,
+1-Portland Hbr.
+30. WESTBROOK.............................................................. 5 5 5-Presumpscot R.
+31. WINSLOW ................................................................. 2 2 1-Sebasticook R., 1-Kennebec R.
+32. WINTERPORT SEWERAGE DISTRICT .......................... 1 1 1-Penobscot R.
+TOTAL CSOs 108 114
+32 CSO Permits, permitting 29 CSO Towns/Cities/Districts/Authorities
+Two or more permits in one CSO Town/City
+Two CSO Towns/Cities covered in one permit
+Permittee has entered post-construction monitoring period prior to exiting the CSO program
+CSO Outfall – where wastewater is discharged to the receiving water
+CSO Regulator – where wastewater exits the sanitary sewer system
+Bold = 9 Permittees with sewer system only. Sewers discharge to a POTW controlled by another entity.
+16
+Maine CSO Permittee Flow Data
+Permittee NPDES Permit No. 1987 1988 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024
+Auburn S.D. ME0100005 99,720,000 99,720,000 12,952,500 19,234,856 12,404,500 3,717,000 1,286,000 2,928,519 814,738 1,117,809 1,656,736 997,100 219,600 439,796 286,954 967,864 348,684
+Bangor Bar Harbor
+ME0100781 ME0101214 &
+ME0102466 635,000,000 32,000,000 635,000,000 32,000,000 389,300,000 6,930,405 146,000,000 2,563,669 69,940,000 3,776,092 32,140,000 407,010 87,748,000 1,561,139 40,109,000 2,335,692 48,586,000 277,000 13,310,000 225,200 50,547,000 562,221 96,009,000 2,757,979 58,745,000 971,376 77,720,893 3,816,271 52,468,359 3,141,462 62,551,149 7,478,224 72,999,979
+3,179,664
+Bath ME0100021 600,000,000 600,000,000 12,930,203 10,067,181 12,199,904 3,297,259 4,990,910 2,727,901 1,608,037 1,697,081 3,753,899 2,800,232 2,874,579 1,806,487 1,583,361 3,522,034 2,645,771
+Belfast ME0101532 736,000 736,000 486,919 490,495 0 0 0 0 0 0 305,071 330,905 96,444 264,774 444,090 504,877 207,301
+Biddeford ME0100048 400,000,000 400,000,000 381,853,242 113,907,851 141,198,828 90,581,675 194,302,147 95,830,208 99,492,656 49,504,091 70,814,300 69,451,000 34,644,000 26,649,500 14,543,300 30,003,000 20,631,322
+Brewer ME0100072 750,000,000 750,000,000 227,139,515 140,065,515 435,548 58,310 139,280 465,000 87,374 0 366,687 868,060 76,188 4,235,000 783,656 3,557,124 1,979,681
+Bucksport ME0100111 53,000,000 53,000,000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Calais ME0100129 42,000,000 42,000,000 31,134,915 16,860,000 18,210,000 18,311,206 20,775,288 5,292,778 4,624,354 4,512,300 10,000,030 2,403,000 1,839,927 587,400 3,848,188 2,937,000 1,975,800
+Cape Elizabeth Corinna S.D. ME0102806 ME0100153 5,400,000 40,000,000 5,400,000 40,000,000
+3,955,292 1,072,000 2,735,000 41,000 1,440,000 277,000 251,000 277,000 375,000 432,000 2,000 230,000 3,300 254,900 492,425
+Dover-Foxcroft ME0100501 16,000 16,000
+East Millinocket ME0100196 1,200,000 1,200,000
+Fairfield ME0102393 300,000 300,000 0 0 0 0
+Fort Kent U.D. ME0102369 3,000 3,000
+Gardiner ME0101702 44,000,000 44,000,000 10,453,761 4,655,000 4,455,400 1,287,000 1,950,000 2,299,300 665,000 2,877,000 6,100,000 6,336,000 9,932,000 1,993,000 61,000 18,240,000 2,200,000
+Greater Augusta
+U.D. ME0100013 72,554,000 72,554,000 49,670,000 31,589,000 38,408,000 26,901,000 17,646,000 21,680,000 7,120,000 3,680,000 3,771,000 3,482,000 6,074,000 3,082,000 1,989,200 2,509,450 10,679,193
+Hallowell W.D. -
+2008 GAUD ME0101010 350,000 350,000
+Hampden ME0102512 1,201,000 39,600 500,000 500,000 0 0 0 24,105 151,055 0 1,250,000 1,933,080 244,200 319,902 205,128 117,216 158,730
+Kennebec S.T.D. ME0100854 2,500,000 2,500,000 0 0 135,444 0 0 1,797,554 0 0 324,228 0 0 0 0 0
+Kittery Lewiston ME0100285 ME0100994 350,000 208,900,000 350,000
+208,900,000 113,285,042 78,521,909 90,103,658 32,772,894 21,355,331 30,574,217 25,477,213 12,808,039 18,552,725 21,743,196 22,923,950 8,480,003 20,781,523 83,310,342 33,696,254
+Lewiston-Auburn
+C.W.A. ME0101478 480,000,000 480,000,000 156,986,000 108,278,048 113,380,000 63,567,000 68,569,000 27,838,000 18,694,000 21,856,000 25,735,000 28,518,000 33,659,000 14,531,000 31,190,000 112,566,000 57,861,000
+Lincoln S.D. ME0101796 2,400,000 2,400,000
+Lisbon ME0100307 600,000 600,000
+Livermore Falls ME0100315
+Machias ME0100323 7,000,000 7,000,000 2,791,962 1,180,678 938,330 1,857,988 2,202,444 1,067,647 910,259 203,815 603,687 145,425 100,035 122,833 418,811 291,295 220,129
+Madawaska ME 0101681 3,200,000 3,200,000 1,107,610 1,490,000 377,488 349,400 1,830,563 0 0 1,562,430 3,988,640 8,205,821 10,242 422,838 616,123 423,493 789,394
+Mechanic Falls S.D. ME0100391 18,000,000 18,000,000 9,250,000 5,033,002 9,638,035 3,663,997 1,385,675 1,013,807 927,473 603,528 194,728 616,537 379,608 63,330 131,488 232,081 711,433
+Milford ME0102695 220,000 220,000 52,006 407,151 26,970 0 10,000 25,000 20,000 0 0 29,781 8,638 0 43,153 86,791 46,267
+Milo W.D. ME0100439 10,000 10,000
+Old Town ME0100471 6,300,000 6,300,000 125,000 0 0 0 0 30,000 10,000 0 270,801 61,508 20,698 12,128 7,608 79,695 93,715
+Orono ME0100498 31,000,000 31,000,000 2,416,910 1,260,837 0 0 0 1,320,000 1,461,000 0 1,460,000 698,817 1,192,467 905,504 1,102,236 3,981,896 5,386,128
+Paris U.D. ME 0100951 1,000,000 1,000,000 110,000 0 1,020,000 0 0 0 0 0 0 0 0 0 0 442,000
+Portland & PWD
+City-ME0101435 /
+PWD-ME0102075 1,800,000,000 1,800,000,000 780,188,153 496,288,000 704,319,257 179,403,901 414,421,500 254,663,330 318,359,691 175,675,000 283,612,831 184,453,600 194,468,501 Presque Isle Randolph Rockland ME0100561 ME0102423 ME0100595 27,500,000 10,000,000 47,000,000 27,500,000
+10,000,000 47,000,000 285,719 223,934 988,434 50,054 0 515,240 Saco ME 0101117 176,000,000 176,000,000 924,014 1,372,128 2,964,929 1,100,985 1,739,425 101,183 178,744,981 0 105,695 599,000 0 0 304,000 2,139,000 3,500 0 0 2,675,000 67,300 978,000 1,400 0 0 2,487,000 163,964,790 368,662,200 290,214,400
+8,900 25,700 50,000
+0 0 0
+1,057,000 242,000 1,860,000 4,027,000
+Sanford S.D. ME0100617 4,000,000 4,000,000 0 0 0 0
+Skowhegan South Portland ME0100625 ME0100633 48,000,000 500,000,000 48,000,000 500,000,000 7,550,855 42,095,393 4,757,994 14,906,594 4,238,875 37,134,882 4,746,538 1,858,579 3,861,193 15,531,600 6,786,698 11,161,602 4,168,672 6,240,350 738,844 2,033,229 4,379,019 3,533,710 1,711,809 8,651,990 1,073,711 859,095 252,870 2,511,052 1,742,309 1,561,258 7,928,889 1,191,467 2,448,510
+4,242,992
+Westbrook ME0100846 50,000,000 50,000,000 14,105,989 12,202,000 18,903,485 6,222,000 11,932,000 4,423,000 7,447,100 1,285,000 1,631,000 9,816,000 3,227,000 1,038,000 926,156 4,906,800 7,843,700
+Winslow ME0102628 1,300,000 1,300,000 200,000 63,354 1,327,119 7,070 0 164,549 70,144 237,400 601,045 3,654,519 876,296 193,076 3,196,000 26,473,369 7,361,250
+Winterport S.D. Yarmouth ME0100749 ME0100765 680,000 1,000 680,000 1,000
+0 0 0 0 60,000 90,000 0 0 138,000 0 0 108,000 54,000 96,000 48,000
+Total Annual Discharge Volume (Gallons) Total Annual Discharge Volume (Billion Gallons) corrected as part of this report.
+6,203,441,000 6.20 6,202,279,600 6.20 2,258,781,405 2.26 1,212,991,196 1.21 1,289,260,178 1.29 472,341,866 0.47 874,838,678 0.87 515,981,907 0.52 548,577,356 0.55 294,507,766 0.29 496,772,053 0.50 458,785,859 0.46 359,840,335 0.36 346,742,558 0.35 305,344,353 0.31 745,200,856 0.75 532,538,722
+0.53
+Notes: For legibility, discharge volume data for years 1989-2008 are not shown. Permittees highlighted in gray no longer maintain a CSO permit. Numbers in blue are estimated from LTCP/MP or subsequent high flow. Biddeford CSO volumes 2005-2016 have been adjusted due to under-estimation of flows. On the 2022 and 2023 Annual Reports the data for the years prior to the reporting year were incorrect (the data didn’t match up correctly with the year shown at the top of the chart). This issue has been
+17
+Maine CSO Permittee Annual Number of CSO Discharge Events
+Permittee NPDES Permit No. 1987 1988 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024
+Auburn S.D. ME0100005 80 80 37 11 8 5 5 2 8 2 2 5 4 3 2 5 2
+Bangor Bar Harbor
+ME0100781 ME0101214 &
+ME0102466 53 155 53 155 73 19 54 29 6 13 27 34 6 17 20 28 5 2 21 23 3 7 34 14 16 16 5 8 28 11 18 18
+9 8
+Bath ME0100021 64 64 20 12 23 18 18 8 14 10 14 15 17 14 20 17 11
+Belfast ME0101532 7 7 6 3 0 0 0 1 0 0 2 3 2 3 5 4 1
+Biddeford ME0100048 180 180 28 100 146 77 88 48 57 55 41 45 43 43 40 21 13
+Brewer ME0100072 95 95 50 45 5 3 3 1 2 0 4 4 2 8 7 6 9
+Bucksport Calais ME0100111 ME0100129 53 15 53 15 0 0 8 6 0 0 14 8 14 0 0 6 7 0 0 9 15 0 0 0 0 6 2 2 10 0 0 0
+7 4
+Cape Elizabeth Corinna S.D. ME0102806 ME0100153 5 5 30 30
+12 6 11 2 12 2 6 2 4 2 1 2 4 6 7
+Dover-Foxcroft ME0100501 8 8
+East Millinocket ME0100196 11 11
+Fairfield ME0102393 15 15 0 0 0 0
+Fort Kent U.D. ME0102369 10 10
+Gardiner ME0101702 40 40 12 6 6 3 3 2 2 5 5 5 5 3 1 2 1
+Greater Augusta U.D. Hallowell W.D. - 2008 GAUD ME0100013 ME0101010 80 14 80 14
+32 37 29 22 29 17 17 29 35 26 24 11 14 18 5
+Hampden Kennebec S.T.D. ME0102512 ME0100854 1 3 15 15 1 1 0 0 0 0 1 0 0 1 0 1 1 0 0 0 1 2 1 0 1 2 0 0 2 2 3
+0 0
+Kittery Lewiston ME0100285 ME0100994 7 7
+80 80 68 45 38 27 23 37 35 28 24 27 15 14 14 18 17
+Lewiston-Auburn C.W.A. ME0101478 80 80 44 37 22 32 26 17 17 10 20 19 23 14 22 19 27
+Lincoln S.D. ME0101796 10 10
+Lisbon ME0100307 5 5
+Livermore Falls ME0100315
+Machias ME0100323 15 15 9 7 9 6 13 7 8 7 11 7 5 1 8 11 5
+Madawaska ME 0101681 16 16 17 10 8 3 7 0 0 3 3 2 4 5 9 6 2
+Mechanic Falls S.D. ME0100391 42 42 18 39 28 17 30 17 25 12 12 16 12 6 11 11 18
+Milford ME0102695 8 8 3 2 1 0 1 1 1 0 0 1 2 0 2 2 2
+Milo W.D. ME0100439 3 3
+Old Town ME0100471 25 25 1 0 0 0 0 1 1 0 2 2 3 2 2 3 5
+Orono ME0100498 30 30 3 2 0 0 0 2 4 0 1 2 3 3 3 4 6
+Paris U.D. ME 0100951 5 5 4 0 4 0 0 0 0 0 0 0 0 0 0 1
+Portland & PWD
+City-ME0101435 /
+PWD-ME0102075 100 100 79 88 70 63 75 58 56 38 49 46 41 61 52 37 48
+Presque Isle Randolph Rockland ME0100561 ME0102423 ME0100595 26 23 23 26
+23 23 3 2 2 1 2 0 2 0 0 0 Saco ME 0101117 44 44 10 4 21 15 19 13 12 7 15 6 17 15 Sanford S.D. ME0100617 10 10 0 0 0 0
+Skowhegan South Portland ME0100625 ME0100633 160 23 160 23 23 12 21 13 25 12 36 28 7 9 20 23 2 3 23 21 2 4 2 1 0 0 23 1 1 0 0 21 3 3 1 3 2
+0 0 0
+9 23 14
+16 2 6 4 7 6
+5 5
+Westbrook (PWD) Winslow ME0100846 ME0102628 50 20 50 20 12 16 2 3 13 60 9 1 70 49 0 1 Winterport S.D. Yarmouth ME0100749 ME0100765 8 8 4 4
+0 0 0 0 1 2 0 0 1 0 38 2 6 4 3 2 2 3 1 1 2 3 2 0 3 4 5
+4 5 8
+2 2 2
+Total Number of CSO Discharge Events 1748 606 576 547 439 527 341 372 269 326 322 278 262 295 276 254
+Note: For legibility, discharge event data for years 1989-2008 are not shown. Permittees highlighted in gray no longer maintain a CSO permit. Numbers in blue are estimated from LTCP/MP or other source. On the 2022 and 2023 Annual Reports the data for the years prior to the reporting year were incorrect (the data
+didn’t match up correctly with the year shown at the top of the chart). This issue has been corrected as part of this report.
+18
+1750 
+Permittee NPDES Permit No. Year Unknown 1987 1988 Auburn S.D. ME0100005 11 11 Maine CSO Permittee Annual Number of CSO Outfalls
+2020 2021 2 1 2022 2023 2024
+1 1 1
+2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 11 3 2 3 2 2 1 2 2 2 2 Bangor Bar Harbor
+ME0100781 ME0101214 &
+ME0102466 22 22 5 5 22 7 9 9 9 9 9 9 9 8 8 8 8 8 8 8
+5 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+Bath ME0100021 9 9 9 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+Belfast ME0101532 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+Biddeford ME0100048 16 16 16 10 10 10 8 8 8 8 7 7 7 7 7 7 7 7
+Brewer ME0100072 10 10 10 5 5 4 4 4 4 4 4 4 4 4 4 4 4 4
+Bucksport Calais ME0100111 ME0100129 2 2 5 5 2 1 5 5 1 1 5 5 1 1 5 5 1 1 5 5 0 0 5 5 0 0 5 5 0 0 3 3 0 0
+3 3
+Cape Elizabeth Corinna S.D. ME0102806 ME0100153 1 1 Dover-Foxcroft ME0100501 15
+East Millinocket ME0100196 Fairfield ME0102393 Fort Kent U.D. ME0102369 Gardiner ME0101702 1 1 5 5 5
+15 15 5 5 5
+22 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+3 3 3 2 2 2 0
+6 6 6
+2 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+Greater Augusta U.D. Hallowell W.D. –
+2008 GAUD ME0100013 ME0101010 31 31 31 1 1 1
+22 19 18 18 18 18 18 18 18 18 16 13 10 9
+Hampden Kennebec S.T.D. ME0102512 ME0100854 6 1 5 5 1 1 5 3 1 1 3 3 1 1 3 3 1 1 3 3 1 1 3 3 1 1 2 2 1 1 2 2 2
+1 1
+Kittery Lewiston ME0100285 ME0100994 32 3 3 3
+32 32 20 18 18 16 11 10 8 8 8 8 8 8 8 8 8
+Lewiston-Auburn C.W.A. ME0101478 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+Lincoln S.D. ME0101796 1 1 1
+Lisbon ME0100307 6 6 6
+Livermore Falls ME0100315 5 5 5
+Machias ME0100323 3 3 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+Madawaska ME 0101681 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+Mechanic Falls S.D. ME0100391 4 4 4 3 3 3 2 2 2 2 2 2 2 2 2 2 2 2
+Milford ME0102695 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+Milo W.D. ME0100439 3 3 3
+Old Town ME0100471 4 4 4 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+Orono ME0100498 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+Paris U.D. ME 0100951 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0
+Portland & PWD
+City-ME0101435 /
+PWD-ME0102075 42 42 42 32 32 31 31 31 31 30 30 30 30 29 28 24 23 23
+Presque Isle Randolph Rockland ME0100561 ME0102423 ME0100595 1 1 1
+1 1 8 8 1 1 1 1 1 1 8 1 Saco ME 0101117 9 9 Sanford S.D. ME0100617 3 3 Skowhegan South Portland ME0100625 ME0100633 10 35 10 28 10 28 1 1 4 4 4 4 4 4 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1
+4 2 2 2 3 1 1 1 0
+9 4 5 5 4 4 2 1 1 1
+7 7 6 6 7 7 6 6 7 7 6 6 7 7 6 6 5 5 4 4 5 5 5
+4 4 4
+Westbrook (PWD) Winslow ME0100846 ME0102628 7 7 2 2 7 5 2 2 5 5 2 2 5 5 2 2 5 5 2 3 5 5 3 3 5 5 2 2 5 5 2 2 5 5
+2 2
+Winterport S.D. Yarmouth ME0100749 ME0100765 1 1 2 2 2
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+Total Annual CSO Discharge Outfalls 350 338 338 164 163 159 149 145 143 142 140 133 131 130 123 115 111 108
+Note: For legibility, outfall data for years 1989-2008 are not shown. Permittees highlighted in gray no longer maintain a CSO permit. Numbers in blue are estimated from LTCP/MP or other source. On the 2022 and 2023 Annual Reports the data for the years prior to the reporting year were incorrect (the data didn’t match
+up correctly with the year shown at the top of the chart). This issue has been corrected as part of this report.
+19
+8.0
+7.0
+6.0
+BILLION GALLONS
+5.0
+4.0
+3.0
+2.0
+1.0
+0.0
+MAINE - STATEWIDE
+COMBINED SEWER OVERFLOW (CSO)
+VOLUME DISCHARGED
+CSO Volume
+Best Fit Curve
+6.20 BG
+0.53 BG
+YEAR
+20
+Annual
+Events
+709
+606
+NUMBER OF EVENTS
+MAINE - STATEWIDE
+COMBINED SEWER OVERFLOW (CSO)
+ANNUAL NUMBER OF DISCHARGE EVENTS
+900
+816
+792
+800
+700
+600
+500
+400
+568
+576
+547
+527
+439
+372
+341
+326 322
+300
+269
+278 262
+295 276
+254
+200
+100
+0
+YEAR
+21
+NUMBER OF CSO OUTFALLS
+400
+350
+300
+250
+200
+150
+100
+50
+0
+338 338
+193
+MAINE - STATEWIDE
+COMBINED SEWER OVERFLOW (CSO)
+OUTFALLS
+CSO
+Outfalls
+183 177 171 164
+163 159
+149 145 143 142 140 133 131 130 123 115 111 108
+YEAR
+22
+MG DISCHARGED / INCH OF PRECIPITATION
+180.0
+160.0
+140.0
+120.0
+100.0
+80.0
+60.0
+40.0
+20.0
+0.0
+MAINE - COMBINED SEWER OVERFLOWS
+ANNUAL VOLUME DISCHARGED PER INCH OF
+PRECIPITATION
+149 MG/in
+MG per Inch
+Precipitation
+11.0 MG/in
+YEAR
+23
+VOLUME (BG/YR)
+8.0
+7.0
+6.0
+5.0
+4.0
+3.0
+2.0
+1.0
+0.0
+MAINE - YEARLY CSO VOLUMES AND PRECIPITATION
+70
+Precipitation
+Trend Line
+60
+Extrapolated Flow Data
+50
+40
+30
+Precipitation
+Average Statewide Precipitation
+~47.02 in/yr
+20
+CSO Volume
+10
+CSO Volume Trend Line
+0
+YEAR
+CSO Volume Precipitation Average Precipitation since 1989 CSO Best Fit Curve Precip. Best Fit Curve
+24
+PRECIPITATION (IN/YR)
+MAINE 2024 CSO FLOW COMPARISON
+32 CSO PERMITTEES
+30 DISCHARGERS - 0.53 BILLION GALLONS
+South Portland, 4.24, 0.8%
+Orono, 5.39, 1.0%
+Saco, 4.03, 0.8% Bar Harbor (Town & Hulls
+Cove), 3.18, 0.6%
+Remaining Dischargers,
+14.42, 2.7%
+Two Permittees without
+CSO Discharge in 2024:
+Bucksport
+Rockland
+Winslow, 7.36, 1.4%
+Westbrook (PWD), 7.84,
+1.5%
+Greater Augusta U.D.,
+10.68, 2.0%
+Biddeford, 20.63, 3.9%
+Lewiston, 33.70, 6.3%
+Lewiston-Auburn C.W.A.,
+57.86, 10.9%
+Bangor, 73.00, 13.7%
+Portland (City & PWD),
+290.21, 54.5%
+Remaining 16 Dischargers (Million
+Gallons, Percent of Total):
+Bath: 2.65, 13, 0.50%
+Skowhegan: 2.45, 14, 0.46%
+Gardiner: 2.20, 15, 0.41%
+Brewer: 1.98, 16, 0.37%
+Calais: 1.98, 17, 0.37%
+Madawaska: 0.79, 18, 0.15%
+Mechanic Falls S.D.: 0.71, 19, 0.13%
+Cape Elizabeth: 0.49, 20, 0.09%
+Auburn S.D.: 0.35, 21, 0.07%
+Machias: 0.22, 22, 0.04%
+Belfast: 0.21, 23, 0.04%
+Hampden: 0.16, 24, 0.03%
+Old Town: 0.09, 25, 0.02%
+Randolph: 0.05, 26, 0.01%
+Winterport S.D.: 0.05, 27, 0.01%
+Discharger, Overflow in Million Gallons (MG), Percent of
+25
+YEARLY CSO OVERFLOW VOLUME (MG)
+350
+300
+250
+200
+150
+100
+50
+0
+0.35
+Maine 2024 CSO Flow Comparison by Permittee
+0.53 Billion Gallons
+290.21
+73.00
+57.86
+33.70
+20.63
+10.68
+3.18 2.65 0.21
+1.98 0.00 1.98 0.49 2.20
+0.16
+0.22 0.79 0.71 0.05 0.09 5.39
+0.05 0.00 4.03 2.45 4.24 7.84 7.36
+0.05
+CSO PERMITTEES
+26
+Maine 2024 CSO Volume Discharged by Watershed
+0.53 Billion Gallons
+St. John River
+789,394
+0.1% Machias River
+234,379
+Penobscot Bay
+0.0%
+207,301
+0.0%
+St. Croix River
+1,975,800
+0.4%
+Frenchman Bay
+3,131,926
+0.6%
+Saco River
+24,658,322
+4.6%
+Kennebec River
+25,384,724
+4.8%
+Casco Bay
+302,793,517
+56.9%
+Penobscot River
+80,712,500
+15.2%
+Androscoggin River
+92,617,371
+17.4%
+Receiving Waterbody, Overflow in Million Gallons (MG), Percent of Total
+27
+Androscoggin River
+Casco Bay
+French-
+man
+Bay
+Kennebec River
+Machias
+River
+Penobscot
+Bay
+Penobscot River
+Saco River
+St. Croix
+River
+St. John
+River
+Maine Annual CSO Volume Discharged by Watershed
+Annual Discharge Volume (Gallons)
+Permittee 2019 2020 2021 2022 2023 2024
+Auburn SD 997,100 219,600 439,796 286,954 967,864 348,684
+Lewiston-Auburn CWA 28,518,000 33,659,000 14,531,000 31,190,000 112,566,000 57,861,000
+Lewiston 21,743,196 22,923,950 8,480,003 20,781,523 83,310,342 33,696,254
+Mechanic Falls SD 616,537 379,608 63,330 131,488 232,081 711,433
+Sub Total 51,874,833 57,182,158 23,514,129 52,389,965 197,067,287 92,617,371
+Cape Elizabeth 432,000 2,000 230,000 3,300 254,900 492,425
+Portland-City & PWD South Portland 184,453,600 8,651,990 178,744,981 859,095 194,468,501 2,511,052 163,964,790 1,561,258 368,662,200 1,191,467 290,214,400
+4,242,992
+Westbrook 9,816,000 3,227,000 1,038,000 926,156 4,906,800 7,843,700
+Sub Total 203,353,590 182,833,076 198,247,553 166,455,504 375,015,367 302,793,517
+Bar Harbor 2,757,979 971,376 3,816,271 3,141,462 7,478,224 3,179,664
+Sub Total 2,757,979 971,376 3,816,271 3,141,462 7,478,224 3,179,664
+Bath 2,800,232 2,874,579 1,806,487 1,583,361 3,522,034 2,645,771
+Gardiner 2,877,000 9,932,000 1,993,000 61,000 18,240,000 2,200,000
+Greater Augusta UD Randolph 3,482,000 3,500 6,074,000 67,300 3,082,000 1,400 1,989,200 8,900 2,509,450 25,700 10,679,193
+50,000
+Skowhegan Winslow 1,711,809 3,654,519 1,073,711 876,296 252,870 193,076 1,742,309 3,196,000 7,928,889 26,473,369 2,448,510
+7,361,250
+Sub Total 14,529,060 20,897,886 7,328,833 8,580,770 58,699,442 25,384,724
+Machias 145,425 100,035 122,833 418,811 291,295 220,129
+Sub Total 145,425 Belfast Rockland 0 0 Sub Total Bangor Brewer Bucksport Hampden Milford Old Town 96,009,000 868,060 1,933,080 61,508 100,035 96,444 96,444 122,833 418,811 291,295 330,905 330,905 58,745,000 76,188 244,200 20,698 264,774 444,090 0 0 0 0
+264,774 444,090 77,720,893 4,235,000 52,468,359 783,656 0 0 0 0 319,902 205,128 62,551,149 3,557,124 117,216 220,129
+207,301
+207,301
+0 0 0 43,153 12,128 7,608 504,877 504,877 72,999,979
+1,979,681
+158,730
+46,267
+93,715
+0 0
+86,791 79,695 Orono 698,817 1,192,467 905,504 1,102,236 3,981,896 5,386,128
+Winterport SD 0 0 108,000 54,000 96,000 48,000
+Sub Total 99,570,465 60,278,553 83,301,427 54,664,140 70,469,871 80,712,500
+Biddeford 69,451,000 34,644,000 26,649,500 14,543,300 30,003,000 20,631,322
+Saco 2,675,000 978,000 2,487,000 242,000 1,860,000 4,027,000
+Sub Total 72,126,000 35,622,000 29,136,500 14,785,300 31,863,000 24,658,322
+Calais 2,403,000 1,839,927 587,400 3,848,188 2,937,000 1,975,800
+Sub Total 2,403,000 1,839,927 587,400 3,848,188 2,937,000 1,975,800
+Madawaska 8,205,821 10,242 422,838 616,123 423,493 789,394
+Sub Total 8,205,821 10,242 422,838 616,123 423,493 789,394
+Total Annual Volume 455,297,078 359,831,697 346,742,558 305,344,353 745,200,856 532,538,722
+28
+Maine CSO Permittee Level of Treatment
+2020 Average Annual Rainfall (Inches): 40.88 2021 Average Annual Rainfall (Inches): 44.19 2022 Average Annual Rainfall (Inches): 45.24 2023 Average Annual Rainfall (Inches): 57.31 2024
+Average Annual Rainfall (Inches): 48.54
+Total
+Total
+Total
+Total
+Total
+Volume1,2
+Secondary
+CSO Permittees
+Treatment
+Primary
+Treatment Secondary
+CSO
+Treatment
+Primary
+Treatment Secondary
+Secondary
+CSO
+(MG)
+Bangor & Hampden 2,851.3 96.44% 1.49% 2.07% 2,932.3 96.25% 1.09% 2.66% Bar Harbor 349.9 99.72% 0.28% Bath 728.7 92.89% 6.72% 0.39% Belfast 202.0 99.95% 0.05% Volume1,2
+(MG)
+1.00% 0.11% Volume1,2
+Treatment
+Primary
+Treatment CSO
+(MG)
+3,319.0 96.87% 1.54% 1.59% 3513.0 97.26% 0.95% 1.78% 380.3 99.00% 415.9 99.24% 0.76% 711.4 92.36% 7.39% 0.25% 711.4 95.69% 4.08% 0.22% 231.4 99.89% 227.0 99.80% 0.20% Biddeford 1,011.6 96.58% 3.42% 869.1 96.93% 3.07% 849.6 98.29% 1.71% Volume1,2
+(MG)
+Primary
+Treatment
+Treatment 429.5 98.26% 289.7 99.83% 1084.3 97.23% CSO
+1.74% 0.17% 2.77% Volume1,2
+Secondary
+Treatment
+Primary
+Treatment CSO
+(MG)
+2926.9 95.86% 1.64% 2.50%
+367.5 99.13% 0.87%
+818.4 94.02% 5.55% 0.43% 692.3 93.36% 6.25% 0.38%
+238.8 99.91% 0.09%
+891.4 97.69% 2.31%
+Brewer 680.4 99.99% 0.00% 0.01% 724.7 99.42% 0.00% 0.58% 854.9 99.91% 0.00% 0.09% 845.2 99.58% 0.00% 0.42% 649.5 98.32% 1.37% 0.30%
+Bucksport 107.1 98.19% 1.81% 0.00% 120.5 96.52% 3.48% 0.00% 125.8 96.09% 3.91% 0.00% 137.0 97.75% 2.25% 0.00% 121.3 97.40% 2.60% 0.00%
+Calais 202.2 92.15% 6.94% 0.91% 190.0 96.91% 2.78% 0.31% 235.4 94.98% 3.38% 1.63% 269.6 94.98% 3.93% 1.09% 221.9 95.97% 3.14% 0.89%
+Gardiner &
+Randolph 371.1 95.00% 2.31% 2.69% 349.5 98.98% 0.45% 0.57% 399.4 99.37% 0.61% 0.02% 552.0 95.32% 1.37% 3.31% 432.8 98.97% 0.51% 0.52%
+GAUD & Hallowell 1,650.3 98.22% 1.41% 0.37% 1,311.0 99.22% 0.54% 0.24% 2,213.8 99.26% 0.65% 0.09% 2099.5 98.60% 1.28% 0.12% 1821.6 97.14% 2.28% 0.59%
+KSTD & Winslow3 2,184.0 99.96% 0.04% 2,074.0 99.99% 0.01% 2,262.3 99.86% 0.14% 2623.0 98.99% LACWA, Lewiston &
+Auburn 3,434.3 97.53% 0.82% 1.65% 3,196.0 96.26% 3.01% 0.73% 3,419.2 98.41% 0.06% 1.53% 4256.7 94.81% 0.56% 4.62% Machias 62.7 99.84% 0.16% 65.2 99.81% 0.19% 84.3 99.50% 0.50% 1.01% 92.1 99.68% 2256.8 99.67% 0.33%
+3530.4 97.31% 0.09% 2.60%
+0.32% 78.0 99.72% 0.28%
+Madawaska 123.9 99.99% 0.01% 105.8 99.60% 0.40% 145.4 99.58% 0.42% 140.4 99.70% 0.30% 112.0 99.30% 0.70%
+Mechanic Falls 79.7 99.52% 0.48% 64.0 99.90% 0.10% 70.4 99.81% 0.19% 0.21% Old Town & Milford 448.8 98.95% 1.04% 0.01% 471.8 99.05% 0.95% 0.00% 537.4 99.20% 0.79% 0.01% 579.2 98.61% 1.36% 0.03% Orono 400.1 99.70% 0.30% 419.9 99.78% 0.22% 455.5 99.76% 0.24% 507.4 99.22% 0.78% Paris UD4 110.3 100.00% 0.00% 96.3 100.00% 0.00% 108.2 100.00% 0.00% 134.2 99.67% Portland & PWD5 5,938.0 92.75% 4.24% 3.01% 5,552.8 92.92% 3.58% 3.50% 5,218.8 92.22% 4.64% 3.14% 6360.0 89.19% 5.02% 5.80% Rockland 820.4 84.74% 15.26% 0.00% 868.0 87.31% 12.69% 0.00% 816.1 91.81% 8.19% 0.00% Saco 784.0 99.51% 0.36% 0.12% 800.9 99.18% 0.51% 0.31% 762.3 99.69% 0.28% 0.03% Skowhegan 262.8 95.65% 3.94% 0.41% 223.6 99.47% 0.37% 0.16% 247.0 98.39% 0.91% 0.71% South Portland &
+Cape Elizabeth6 2,001.5 99.81% 0.14% 0.04% 1,909.5 99.48% 0.37% 0.14% 1,967.4 99.87% 0.05% 0.08% Westbrook & PWD 1,115.1 99.71% 0.29% 1,081.8 99.90% 0.10% 1,122.7 99.92% 0.08% 108.9 99.79% 0.33%
+1308.1 99.62% 82.3 99.14% 0.86%
+453.7 97.13% 2.83% 0.03%
+452.8 98.81% 1.19%
+5155.8 88.86% 5.51% 5.63%
+1059.5 93.54% 6.46% 0.00% 940.4 90.66% 9.34% 0.00%
+975.8 98.72% 1.09% 0.19% 819.6 98.25% 1.26% 0.49%
+316.4 96.45% 1.05% 2.51% 281.5 97.93% 1.20% 0.87%
+2277.7 99.57% 0.36% 0.06% 2051.5 98.13% 1.64% 0.23%
+0.38% 1192.7 99.34% 0.66%
+SUM 25,920.2 24,750.0 26,569.1 30,777.5 25,771.7
+MEAN 1,080.0 97.37% 3.32% 0.70% 1,031.2 97.84% 2.66% 0.61% 1,107.0 98.23% 2.08% 0.56% 1,282.4 97.52% 2.23% 1.18% 1,120.5 97.30% 2.83% 0.97%
+MEDIAN 564.6 99.23% 1.65% 0.28% 591.6 99.20% 1.02% 0.23% 624.4 99.32% 0.85% 0.19% 698.8 98.61% 1.32% 0.40% 649.5 98.13% 1.96% 0.59%
+Notes: 1Volume data was obtained from monthly Discharge Monitoring Reports entered and submitted through NetDMR by each Facility
+2Total Volume: Total Volume Taken on by System = Secondary Treatment Volume + Primary Treatment Volume + CSO Volume + SSO Volume (SSO Volumes too small to affect Percentages, therefore not displayed)
+3Although KSTD is no longer in the CSO program as of 2024, it is shown on this chart since Winslow remains a CSO community and treats all of Winslow’s non-CSO flow. All CSO flow in 2024 was in Winslow.
+4As of 2024 Paris is no longer in the CSO program and is no longer being included in the annual totals.
+5Updates were made to treatment volumes and percentages for 2020-2021 for Portland & PWD
+6A calculation error for South Portland & Cape Elizabeth’s 2022 data was corrected. The Sum, Mean, and Median data for 2022 was also corrected.
+29
+Photos on this page are taken from the City of Portland’s 3.5 Millon Gallon Back Cove South
+Storage Tank Project at CSOs #017, 018, and 019 (Photo credit to Maine Imaging for top two
+photos)
+30
