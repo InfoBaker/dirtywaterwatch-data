@@ -37,7 +37,8 @@
 #                  live: false (ports being compared with their modules) are not run.
 #                  Florida: fl_dep_pnp (DEP Public Notice of Pollution, last 30 days; `--backfill` once
 #                  for every notice since 2017), fl_dep_habs (DEP algal bloom visits), fl_doh_beaches
-#                  (Healthy Beaches result pages, one full pass at most every 20 hours)
+#                  (Healthy Beaches result pages: a full pass starts at most every 20 hours and is spread over
+#                  hourly runs, at most 6 minutes of pages a run, resumed where it stopped)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
