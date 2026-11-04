@@ -7,7 +7,10 @@ name: Refresh data
 # reads back from data/raw (NHD, NLDI and Overpass answers, the Census outlines, IEM rainfall, the RI layers, the DC
 # boundary, the NY workbook, this month's NJ ECHO answers: scripts/state_paths.py lists them with the reasons) are
 # state/raw-cache.tar.gz, restored after it and saved with it. Every other raw fetch stays on the runner (bulk raw
-# saves can carry personal fields and are never saved or committed). Each state object is capped at 200 MB
+# saves can carry personal fields and are never saved or committed). openboatlaunch's water records and outlines
+# (state/obl-water.tar.gz, packed once on a machine with the openboatlaunch checkout) are restored read only into
+# ../openboatlaunch/out, where the pipeline reads the outlines (build/status.py), and never saved; a missing or
+# unreadable one is a warning here (the run goes on without the outlines). Each state object is capped at 200 MB
 # (the raw caches are not saved over it; the build state warns over it and is still saved up to wrangler's limit).
 # Needs the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets (R2 edit) and, for the model steps,
 # OPENROUTER_API_KEY (without it they run rules-only).
@@ -63,6 +66,20 @@ jobs:
             echo "::error::state/build.tar.gz is in R2 but could not be fetched; nothing is published or saved this run"; exit 1
           fi
           find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
+      - name: Restore openboatlaunch's water records and outlines from R2 (state/obl-water.tar.gz; read only, never saved)
+        run: |
+          # into ../openboatlaunch/out (water/<slug>.json and meta.json only: scripts/state_paths.py unpack-obl). Never
+          # stops the refresh: without them it runs as it did before the object existed, with no outlines here.
+          rc=0; python3 -I scripts/state_paths.py fetch state/obl-water.tar.gz obl-water.tar.gz || rc=$?
+          if [ "$rc" = 0 ]; then
+            python3 -I scripts/state_paths.py unpack-obl obl-water.tar.gz \
+              || echo "::warning::state/obl-water.tar.gz could not be read; this run goes on without openboatlaunch's outlines"
+          elif [ "$rc" = 3 ]; then
+            echo "::warning::state/obl-water.tar.gz is not in R2 yet; this run goes on without openboatlaunch's outlines"
+          else
+            echo "::warning::state/obl-water.tar.gz could not be fetched; this run goes on without openboatlaunch's outlines"
+          fi
+          rm -f obl-water.tar.gz
       - name: Restore the raw caches from R2 (after the build state, which names the NY workbook entry)
         id: restore_raw
         run: |

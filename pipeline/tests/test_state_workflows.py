@@ -289,3 +289,81 @@ def test_batch_raw_cache_not_fetched_is_kept(tmp_path):
     r = simulate("state-build.yml", tmp, {"FAKE_R2_FAIL_GET": "state/raw-cache.tar.gz"}, event="workflow_dispatch")
     assert not r["failed"], r["log"]
     assert puts(tmp) == [] and (tmp / "publish.done").exists()
+
+
+# ---------------------------------------------------------------- openboatlaunch's object (state/obl-water.tar.gz)
+
+def seed_obl(tmp: Path, corrupt: bool = False) -> None:
+    """The object as the Mac packs it: tar -czf obl-water.tar.gz -C <openboatlaunch>/out water meta.json."""
+    src = tmp / "obl-src"
+    (src / "water").mkdir(parents=True)
+    for slug in ("haw-river-nc", "lake-wheeler-nc", "lake-lanier-ga"):
+        (src / "water" / f"{slug}.json").write_text('{"slug": "%s", "geometry": null}' % slug)
+    (src / "meta.json").write_text('{"built": "2026-11-01"}')
+    obj = tmp / "r2/state/obl-water.tar.gz"
+    with tarfile.open(obj, "w:gz") as tf:
+        tf.add(src / "water", arcname="water")
+        tf.add(src / "meta.json", arcname="meta.json")
+    if corrupt:
+        obj.write_bytes(obj.read_bytes()[:60])
+    shutil.rmtree(src)
+
+
+def restored(tmp_path: Path) -> list[str]:
+    out = tmp_path / "openboatlaunch" / "out"
+    return sorted(str(p.relative_to(out)) for p in out.rglob("*") if p.is_file()) if out.is_dir() else []
+
+
+OBL_FILES = ["meta.json", "water/haw-river-nc.json", "water/lake-lanier-ga.json", "water/lake-wheeler-nc.json"]
+
+
+@pytest.mark.parametrize("workflow,event", [("refresh.yml", "schedule"), ("state-build.yml", "workflow_dispatch")])
+def test_obl_object_restored_beside_the_checkout_and_never_saved(tmp_path, workflow, event):
+    tmp = checkout(tmp_path / "ws")                     # its sibling ../openboatlaunch is tmp_path/openboatlaunch
+    seed(tmp)
+    seed_obl(tmp)
+    before = (tmp / "r2/state/obl-water.tar.gz").read_bytes()
+    r = simulate(workflow, tmp, event=event)
+    assert not r["failed"], r["log"]
+    assert restored(tmp_path) == OBL_FILES
+    assert "put state/obl-water.tar.gz" not in puts(tmp)
+    assert (tmp / "r2/state/obl-water.tar.gz").read_bytes() == before
+    assert not (tmp / "obl-water.tar.gz").exists()
+
+
+@pytest.mark.parametrize("workflow,event", [("refresh.yml", "schedule"), ("state-build.yml", "workflow_dispatch")])
+def test_obl_object_missing_is_a_warning(tmp_path, workflow, event):
+    tmp = checkout(tmp_path / "ws")
+    seed(tmp)
+    r = simulate(workflow, tmp, event=event)
+    assert not r["failed"], r["log"]
+    assert "::warning::state/obl-water.tar.gz is not in R2 yet" in r["log"]
+    assert restored(tmp_path) == []
+
+
+@pytest.mark.parametrize("how", ["corrupt", "fetch"])
+def test_obl_object_unreadable_warns_in_the_refresh(tmp_path, how):
+    tmp = checkout(tmp_path / "ws")
+    seed(tmp)
+    seed_obl(tmp, corrupt=how == "corrupt")
+    env = {"FAKE_R2_FAIL_GET": "state/obl-water.tar.gz"} if how == "fetch" else {}
+    r = simulate("refresh.yml", tmp, env)
+    assert not r["failed"], r["log"]
+    assert "goes on without openboatlaunch's outlines" in r["log"]
+    assert puts(tmp) == ["put state/build.tar.gz", "put state/raw-cache.tar.gz"]
+    assert restored(tmp_path) == []
+
+
+@pytest.mark.parametrize("how", ["corrupt", "fetch"])
+def test_obl_object_unreadable_stops_the_batch_before_it_saves_anything(tmp_path, how):
+    tmp = checkout(tmp_path / "ws")
+    seed(tmp)
+    seed_obl(tmp, corrupt=how == "corrupt")
+    env = {"FAKE_R2_FAIL_GET": "state/obl-water.tar.gz"} if how == "fetch" else {}
+    raw = (tmp / "r2/state/raw-cache.tar.gz").read_bytes()
+    r = simulate("state-build.yml", tmp, env, event="workflow_dispatch")
+    assert r["failed"]
+    assert "::error::state/obl-water.tar.gz is in R2 but could not be" in r["log"]
+    assert not any(n.startswith("Run the steps") or n == "batch" for n in r["ran"])
+    assert puts(tmp) == [] and (tmp / "r2/state/raw-cache.tar.gz").read_bytes() == raw
+    assert not (tmp / "publish.done").exists() and restored(tmp_path) == []
