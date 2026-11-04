@@ -421,8 +421,9 @@ def test_duration_is_elapsed_across_clock_changes_in_the_generic_and_the_module(
 
 def test_date_only_epochs_and_midnight_text_are_day_precision():
     tz = ZoneInfo("America/New_York")
-    assert F.parse_epoch(1793491200000, "epoch_ms", tz) == (F.datetime(2026, 11, 1, tzinfo=tz), "day")
-    assert F.parse_epoch(1793491200000, "epoch_ms_wallclock", tz)[1] == "day"
+    # a date-only field stored as an epoch at midnight, when the block says the field holds dates (midnight: date)
+    assert F.parse_epoch(1793491200000, "epoch_ms", tz, "date") == (F.datetime(2026, 11, 1, tzinfo=tz), "day")
+    assert F.parse_epoch(1793491200000, "epoch_ms_wallclock", tz, "date")[1] == "day"
     assert F.parse_epoch(1793491260000, "epoch_ms", tz)[1] == "minute"
     for t in ("11/01/2026 12:00:00 AM", "11/01/2026 00:00:00", "2026-11-01T00:00:00.000"):
         dt, prec = F.parse_datetime(t, tz)
@@ -594,3 +595,127 @@ def test_a_short_response_fails_and_the_meta_uses_the_published_names(tmp_path, 
 
 def test_honorifics_in_capitals_are_scrubbed():
     assert F.scrub_people("MR. PLACEHOLDER reported it") == "[name removed] reported it"
+
+
+# ---------------------------------------------------------------- phone numbers, midnight, short responses, paging
+
+def test_a_ten_digit_phone_number_before_a_unit_word_is_still_removed():
+    """Only the short form ("500-1000 feet") can be a number range; a ten-digit number followed by "hours", "days",
+    "am" or "pm" is a phone number, in every module's raw (common.strip_personal) as in the generic free text."""
+    from common import scrub_text, strip_personal
+    for t in ("call 410-555-0199 days or 410-555-0100 nights", "Hotline 410-555-0199 hours 8-5",
+              "(410) 555-0199 am", "tel. 410 555 0199 pm", "1-410-555-0199 days"):
+        out = scrub_text(t)
+        assert "0199" not in out and "[phone removed]" in out, (t, out)
+        assert "0199" not in json.dumps(strip_personal({"note": t})), t
+    for t in ("about 500-1000 feet away", "from 830-1030 am", "spilled 100-1500 gallons"):
+        assert scrub_text(t) == t, t
+
+
+def test_an_epoch_at_midnight_is_a_time_unless_the_block_says_the_field_holds_dates():
+    """An overflow that ends at 00:00 is not a date: its end is not moved to the end of the day (no end invented);
+    `midnight: date` reads a date-only field stored as an epoch at midnight as that date."""
+    tz = ZoneInfo("America/New_York")
+    wall_midnight = 1793491200000                      # 2026-11-01 00:00 as wall-clock-stored-as-UTC
+    assert F.parse_epoch(wall_midnight, "epoch_ms_wallclock", tz) == (F.datetime(2026, 11, 1, tzinfo=tz), "minute")
+    assert F.parse_epoch(wall_midnight, "epoch_ms", tz)[1] == "minute"
+    b = {"platform": "json", "url": "https://example.invalid/x.json", "time_zone": "America/New_York",
+         "json": {"records_path": "items"}, "safe_fields": ["id", "start", "end"],
+         "record": {"source_record_id": "id", "event_type": {"const": "sso"},
+                    "started_at": {"field": "start", "parse": "epoch_ms_wallclock"},
+                    "ended_at": {"field": "end", "parse": "epoch_ms_wallclock"}}}
+    rows = [{"id": 1, "start": wall_midnight - 5 * 3_600_000, "end": wall_midnight}]
+    r = runner.build("x-mid", b, rows, FETCHED, [])[0][0]
+    assert (r["ended_at"], r["time_precision"]) == ("2026-11-01T00:00:00-04:00", "minute")
+    assert "date only" not in json.dumps(r["raw"].get("_basis") or {})
+    b2 = {**b, "record": {**b["record"], "ended_at": {"field": "end", "parse": "epoch_ms_wallclock", "midnight": "date"}}}
+    assert not runner.validate_block(b2)
+    r2 = runner.build("x-mid", b2, rows, FETCHED, [])[0][0]
+    assert r2["ended_at"] == "2026-11-02T00:00:00-05:00" and "date only" in r2["raw"]["_basis"]["ended_at"]
+    # text keeps the floating-midnight rule unless the block says the field holds times
+    assert F.parse_datetime("11/01/2026 00:00:00", tz)[1] == "day"
+    assert F.parse_datetime("11/01/2026 00:00:00", tz, midnight="time")[1] == "minute"
+    assert any("midnight" in e for e in runner.validate_block(
+        {**b, "record": {**b["record"], "ended_at": {"field": "end", "parse": "epoch_ms_wallclock", "midnight": "noon"}}}))
+
+
+def test_a_short_response_fails_until_it_persists_and_a_shrunk_snapshot_recovers(tmp_path, monkeypatch):
+    """A response under min_rows_ratio of the last good one fails, and so does the next one (the guard compares with
+    the last good run, not the last run); a short table that persists for short_runs_to_accept runs (3) is accepted,
+    so a source that retires rows, or a snapshot that loses outfalls, never freezes its records for good."""
+    src = tmp_path / "s"
+    src.mkdir()
+    write_source(src, "x-m", {**block(), "live": False})
+    out, saved, short = tmp_path / "out.json", tmp_path / "saved.csv", tmp_path / "short.csv"
+    saved.write_text(CSV)
+    short.write_text("\n".join(CSV.splitlines()[:2]) + "\n")
+    assert runner.run("x-m", file=str(saved), out=str(out), sources_dir=src) == 0
+    for _ in range(2):
+        assert runner.run("x-m", file=str(short), out=str(out), sources_dir=src) == 1
+        d = json.loads(out.read_text())
+        assert d["ok"] is False and d["count"] == 3 and not any(r["raw"].get("_missing_from_source_since")
+                                                                for r in d["records"])
+    assert runner.run("x-m", file=str(short), out=str(out), sources_dir=src) == 0
+    d = json.loads(out.read_text())
+    assert d["ok"] is True and d["meta"]["short_response_accepted"]["short_runs"] == 3
+    assert "short_runs" not in d["meta"]
+    # a snapshot that lost most of its units: two failed runs, then accepted
+    from ingest.generic import snapshot
+    from tests.test_generic_parity import CSOCAST_BLOCK, polls
+    write_source(src, "x-snap", {**CSOCAST_BLOCK, "live": False})
+    monkeypatch.setattr(snapshot, "state_path", lambda sid: tmp_path / "live-state.json")
+    sout = tmp_path / "snap.json"
+    seq = polls()
+    full = tmp_path / "full.json"
+    full.write_text(json.dumps({"features": [{"attributes": r} for r in seq[0][1]]}))
+    assert runner.run("x-snap", file=str(full), out=str(sout), sources_dir=src) == 0
+    one = tmp_path / "one.json"
+    one.write_text(json.dumps({"features": [{"attributes": seq[1][1][0]}]}))
+    assert [runner.run("x-snap", file=str(one), out=str(sout), sources_dir=src) for _ in range(3)] == [1, 1, 0]
+
+
+def test_a_failing_spec_transform_or_regex_keeps_the_record_and_its_key(monkeypatch):
+    """A value spec's own transform (or a replace that names a missing group) that fails on a row costs that field
+    only: the record keeps its other fields and its key, and the error is counted."""
+    from ingest.generic import transforms
+
+    @F.hook
+    def bad_value(v, row, ctx):
+        if row.get("report_id") == "A1":
+            raise ValueError("unexpected text")
+        return v
+    monkeypatch.setattr(transforms, "bad_value", bad_value, raising=False)
+    b = block(max_error_share=1.0, record={**block()["record"],
+                                           "outfall_name": {"field": "notes", "transform": "ingest.generic.transforms.bad_value"},
+                                           "outfall_id": {"field": "water", "regex": "(Mill)", "replace": "\\2"}})
+    recs, stats = build_csv(b)
+    a1 = next(r for r in recs if r["event_id"] == "x-test:A1")
+    assert a1["started_at"] == "2026-10-02T14:30:00-05:00" and a1["event_type"] == "sso" and a1["volume_gal"] == 1200
+    assert a1["outfall_name"] is None and a1["outfall_id"] is None
+    assert "ValueError" in a1["parse_error"] and any("outfall_id" in e for e in a1["raw"]["_hook_errors"])
+    assert stats["hook_errors"] >= 1
+
+
+def test_arcgis_refuses_a_page_out_of_object_id_order():
+    """A server that ignores orderByFields returns pages out of order; the cursor would skip the ids below the page's
+    largest, so the fetch fails instead of returning a short table."""
+    class Unordered:
+        def get(self, url, params=None, timeout=None):
+            import re as _re
+            m = _re.search(r"OBJECTID > (\d+)", (params or {}).get("where", ""))
+            ids = [i for i in (5, 1, 3, 2, 4, 7, 6) if i > (int(m.group(1)) if m else 0)][:3]
+            body = {"features": [{"attributes": {"OBJECTID": i}} for i in ids], "exceededTransferLimit": len(ids) == 3}
+
+            class R:
+                status_code, headers, content = 200, {}, json.dumps(body).encode()
+
+                def raise_for_status(self):
+                    pass
+
+                def json(self):
+                    return body
+            return R()
+    b = {"platform": "arcgis", "url": "https://example.invalid/MapServer/0", "safe_fields": ["OBJECTID"],
+         "page_size": 3, "record": {"source_record_id": "OBJECTID"}}
+    with pytest.raises(RuntimeError, match="order"):
+        arcgis.fetch(b, Unordered())

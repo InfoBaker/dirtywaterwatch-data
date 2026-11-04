@@ -14,7 +14,8 @@ dropped before anything is mapped or written to a record), the free-text fields 
 
 Times (started_at, ended_at, reported_at, published_at, source_updated_at) take a time spec: {field, parse:
 datetime | date | epoch_ms | epoch_s | epoch_ms_wallclock, formats, time (a separate time-of-day field),
-precision}; ended_at may instead be {duration: {days, hours, minutes}} (elapsed time after the start). Naive
+precision, midnight: date | time (whether a value at exactly 00:00 is a date: by default text written as exact
+midnight is a date and an epoch is a time; say midnight: date for a date-only field stored as an epoch)}; ended_at may instead be {duration: {days, hours, minutes}} (elapsed time after the start). Naive
 times are read in the block's time_zone, which every block that reads times names. A time is never invented: what
 the source does not give stays null, and a time outside 1990 to the day after the fetch is not used.
 """
@@ -46,7 +47,7 @@ VALUE_FIELDS = {"source_record_id", "parent_event_id", "discharger_id", "dischar
 SPECIAL_FIELDS = set(TIME_FIELDS) | {"volume"}
 SPEC_KEYS = {"field", "const", "template", "upper", "lower", "regex", "replace", "map", "unmapped", "match", "parse",
              "transform", "formats", "time", "time_formats", "precision", "duration", "otherwise", "unit",
-             "estimate", "text", "bare_number_text"}
+             "estimate", "text", "bare_number_text", "midnight"}
 FILTERS = {"default", "clean", "upper", "lower", "slug", "address", "address_key", "num", "int", "compact", "strftime",
            "day"}
 DATE_FORMATS = ("%m/%d/%Y", "%m/%d/%y", "%Y-%m-%d", "%Y/%m/%d", "%d-%b-%Y", "%b %d, %Y", "%B %d, %Y")
@@ -391,14 +392,14 @@ def wall_note(dt: datetime) -> str | None:
             f"the first, {a.isoformat()}")
 
 
-def parse_datetime(v, tz: ZoneInfo, formats=None) -> tuple[datetime | None, str | None]:
+def parse_datetime(v, tz: ZoneInfo, formats=None, midnight: str | None = None) -> tuple[datetime | None, str | None]:
     """(aware datetime, precision) from a source's text: the block's formats, else ISO 8601, RFC 2822 (RSS) and the
     common US forms. A date with no time of day, or a naive one written as exact midnight ("2026-11-01T00:00:00.000",
-    "11/01/2026 12:00:00 AM"), is precision day."""
+    "11/01/2026 12:00:00 AM"), is precision day, unless midnight is "time" (a field that holds times)."""
     s = clean(v)
     if not s:
         return None, None
-    midnight = bool(MIDNIGHT_TEXT.search(s))
+    midnight = midnight != "time" and bool(MIDNIGHT_TEXT.search(s))
     for fmt in formats or ():
         try:
             dt = datetime.strptime(s, fmt)
@@ -453,9 +454,10 @@ def parse_clock(v, formats=None) -> time | None:
     return None
 
 
-def parse_epoch(v, kind: str, tz: ZoneInfo) -> tuple[datetime | None, str | None]:
-    """(datetime, precision). An epoch at exactly midnight (UTC midnight for epoch_ms / epoch_s, wall midnight for
-    epoch_ms_wallclock) is how date-only fields are stored: the date as written, precision day."""
+def parse_epoch(v, kind: str, tz: ZoneInfo, midnight: str | None = None) -> tuple[datetime | None, str | None]:
+    """(datetime, precision). An epoch is a time, also at 00:00 (an overflow can end at midnight). With midnight
+    "date" (a date-only field stored as an epoch), one at exactly midnight (UTC midnight for epoch_ms / epoch_s,
+    wall midnight for epoch_ms_wallclock) is the date as written, precision day."""
     f = fnum(v)
     if f is None:
         return None, None
@@ -463,7 +465,7 @@ def parse_epoch(v, kind: str, tz: ZoneInfo) -> tuple[datetime | None, str | None
         t = datetime.fromtimestamp(f / (1000 if kind != "epoch_s" else 1), UTC)
     except (OverflowError, OSError, ValueError):
         return None, None
-    if (t.hour, t.minute, t.second, t.microsecond) == (0, 0, 0, 0):
+    if midnight == "date" and (t.hour, t.minute, t.second, t.microsecond) == (0, 0, 0, 0):
         return datetime(t.year, t.month, t.day, tzinfo=tz), "day"
     if kind == "epoch_ms_wallclock":     # local wall-clock time stored as if it were UTC (common on ArcGIS layers)
         return t.replace(tzinfo=None).replace(tzinfo=tz), "minute"
@@ -483,7 +485,7 @@ def time_value(spec, row: dict, rec: dict, ctx: Ctx, notes: dict, target: str) -
             f"{k} {v}" for k, v in spec["duration"].items()) + ")"
         return end, rec.get("time_precision")
     if "const" in spec:
-        return parse_datetime(spec["const"], ctx.tz)
+        return parse_datetime(spec["const"], ctx.tz, midnight=spec.get("midnight"))
     v, used = lookup(spec, row)
     fields = spec.get("field")
     if used and isinstance(fields, list) and used != fields[0]:
@@ -493,13 +495,13 @@ def time_value(spec, row: dict, rec: dict, ctx: Ctx, notes: dict, target: str) -
         return None, None
     notes.setdefault("_time_kinds", set()).add(kind)
     if kind in ("epoch_ms", "epoch_s", "epoch_ms_wallclock"):
-        dt, prec = parse_epoch(v, kind, ctx.tz)
+        dt, prec = parse_epoch(v, kind, ctx.tz, spec.get("midnight"))
     elif kind == "date":
         dt, prec = parse_datetime(v, ctx.tz, spec.get("formats"))
         if dt is not None:
             dt, prec = datetime(dt.year, dt.month, dt.day, tzinfo=dt.tzinfo), "day"
     else:
-        dt, prec = parse_datetime(v, ctx.tz, spec.get("formats"))
+        dt, prec = parse_datetime(v, ctx.tz, spec.get("formats"), spec.get("midnight"))
     if dt is None:
         notes.setdefault("_problems", []).append(f"unreadable {used} {clean(v)!r}")
         return None, None
@@ -649,6 +651,9 @@ def spec_errors(where: str, spec, safe: list, target: str | None = None) -> list
         errs.append(f"{where}: a time is parsed as one of {sorted(TIME_KINDS)}")
     if target is not None and target not in TIME_FIELDS and s.get("parse") in TIME_KINDS:
         errs.append(f"{where}: parse {s['parse']!r} is for times")
+    if s.get("midnight") is not None and (s["midnight"] not in ("date", "time") or (target is not None and target
+                                                                                   not in TIME_FIELDS)):
+        errs.append(f"{where}: midnight is date or time, on a time field")
     if s.get("precision") is not None and s["precision"] not in PRECISIONS:
         errs.append(f"{where}: precision {s['precision']!r} is not one of {sorted(PRECISIONS)}")
     if "duration" in s and (target != "ended_at" or not isinstance(s["duration"], dict) or not s["duration"]
@@ -889,9 +894,23 @@ def decoded_times(row: dict, ctx: Ctx) -> dict:
     return out
 
 
+def _guarded(notes: dict, target: str, default, fn, *args):
+    """fn(*args), or default when it fails on this row: the error is kept in raw._hook_errors (the runner counts it
+    and fails the run when too many rows have one), so one field that cannot be read costs that field only, never
+    the record or its key. A block that cannot run as written (SpecError) still stops the run."""
+    try:
+        return fn(*args)
+    except SpecError:
+        raise
+    except Exception as e:  # noqa: BLE001 - never drop a record
+        notes.setdefault("_hook_errors", []).append(f"record.{target}: {type(e).__name__}: {e}")
+        return default
+
+
 def build_fields(row: dict, ctx: Ctx) -> tuple[dict, dict]:
     """(event fields, raw notes) from one safe row by the block's record map. Times are read before the fields
-    that may name them in a template; status is decided after the times (otherwise: from_end)."""
+    that may name them in a template; status is decided after the times (otherwise: from_end). A field whose spec
+    fails on this row (its transform, a replace naming a missing group) is left empty with the error noted."""
     rmap = ctx.block.get("record") or {}
     notes: dict = {}
     rec: dict = {}
@@ -899,7 +918,7 @@ def build_fields(row: dict, ctx: Ctx) -> tuple[dict, dict]:
     for t in TIME_FIELDS:
         if t not in rmap:
             continue
-        dt, prec = time_value(rmap[t], row, rec, ctx, notes, t)
+        dt, prec = _guarded(notes, t, (None, None), time_value, rmap[t], row, rec, ctx, notes, t)
         if t == "started_at":
             rec["_start_dt"] = dt
             rec["time_precision"] = prec
@@ -918,20 +937,23 @@ def build_fields(row: dict, ctx: Ctx) -> tuple[dict, dict]:
         tzname = getattr(ctx.tz, "key", str(ctx.tz))
         notes["_time_basis"] = " ".join(TIME_BASIS[k].format(tz=tzname) for k in sorted(kinds))
     if "time_precision" in rmap:
-        rec["time_precision"] = value(rmap["time_precision"], row, rec, ctx, notes, "time_precision")
+        rec["time_precision"] = _guarded(notes, "time_precision", rec.get("time_precision"), value,
+                                         rmap["time_precision"], row, rec, ctx, notes, "time_precision")
     for k, spec in rmap.items():
         if k in TIME_FIELDS or k in ("time_precision", "status", "event_type", "volume"):
             continue
-        rec[k] = value(spec, row, rec, ctx, notes, k)
+        rec[k] = _guarded(notes, k, None, value, spec, row, rec, ctx, notes, k)
         if k in ("discharger_name", "authority") and "const" not in norm_spec(spec):
             rec[k] = scrub(rec[k])           # an owner's or filer's name field can hold a private person
     if "volume" in rmap:
-        rec.update(volume_fields(rmap["volume"], row, rec, ctx))
+        rec.update(_guarded(notes, "volume", {"volume_gal": None, "volume_text": None, "estimate_flag": "unknown"},
+                            volume_fields, rmap["volume"], row, rec, ctx))
     # event type: the map's answer, else unknown with the source's label kept
     if "event_type" in rmap:
         s = norm_spec(rmap["event_type"])
         label, _ = lookup(s, row)
-        et = value({**s, "unmapped": None} if "map" in s else s, row, rec, ctx, None, "event_type")
+        et = _guarded(notes, "event_type", None, value, {**s, "unmapped": None} if "map" in s else s, row, rec, ctx,
+                      None, "event_type")
         if et not in EVENT_TYPES:
             notes.setdefault("_problems", []).append(f"unknown event type {clean(label)!r}")
             et = "unknown"
@@ -942,7 +964,7 @@ def build_fields(row: dict, ctx: Ctx) -> tuple[dict, dict]:
     sspec = norm_spec(rmap.get("status", {"otherwise": "from_end"}))
     st = None
     if "map" in sspec or "const" in sspec or "field" in sspec:
-        st = value({**sspec, "unmapped": None}, row, rec, ctx, None, "status")
+        st = _guarded(notes, "status", None, value, {**sspec, "unmapped": None}, row, rec, ctx, None, "status")
     if st not in STATUSES:
         other = sspec.get("otherwise", "from_end")
         st = ("ended" if rec.get("ended_at") else "unknown") if other == "from_end" else other
@@ -973,7 +995,7 @@ def build_fields(row: dict, ctx: Ctx) -> tuple[dict, dict]:
         rec["lat"] = rec["lon"] = None
     # raw notes the block names (decoded codes, each cited beside the record), and the source's times as read
     for key, spec in (ctx.block.get("raw_notes") or {}).items():
-        notes[key] = value(spec, row, rec, ctx)
+        notes[key] = _guarded(notes, f"raw_notes.{key}", None, value, spec, row, rec, ctx)
     if ctx.block.get("decoded_times"):
         notes["_decoded_times"] = decoded_times(row, ctx)
     return rec, notes
