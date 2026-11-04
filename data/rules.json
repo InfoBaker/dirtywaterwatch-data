@@ -276,13 +276,14 @@
   ],
   "source": "U.S. Geological Survey, Network-Linked Data Index (NLDI) and the NHDPlus Version 2 river network; Jobson (1996), U.S. Geological Survey Water-Resources Investigations Report 96-4013",
   "shoreline": {
-   "doc": "The Great Lakes are shown like rivers, not coloured whole: a report from an outfall on one of these lakes colours a modeled stretch of shoreline at the outfall, and the lake's outline stays grey. The report still counts on the lake's page.",
+   "doc": "The Great Lakes and Lake St. Clair are shown like rivers, not coloured whole: a report from an outfall on one of these lakes colours a modeled stretch of shoreline at the outfall, and the lake's outline stays grey. The report still counts on the lake's page.",
    "lakes": [
     {"name": "Lake Superior", "wikidata": "Q1066", "gnis_id": "1618946"},
     {"name": "Lake Michigan", "wikidata": "Q1169", "gnis_id": "1623080"},
     {"name": "Lake Huron", "wikidata": "Q1383", "gnis_id": "1624619"},
     {"name": "Lake Erie", "wikidata": "Q5492", "gnis_id": "1075813"},
-    {"name": "Lake Ontario", "wikidata": "Q1062"}
+    {"name": "Lake Ontario", "wikidata": "Q1062"},
+    {"name": "Lake St. Clair", "wikidata": "Q736707", "rationale": "Lake St. Clair joins Lake Huron to Lake Erie through the St. Clair and Detroit rivers and is part of the same Great Lakes system. It covers about 1,168 square kilometres and is shared with Ontario; a report from one outfall on its shore does not reach the whole lake, so the same shoreline stretch is drawn as on the Great Lakes."}
    ],
    "name_min_area_km2": 100,
    "min_area_km2": null,
