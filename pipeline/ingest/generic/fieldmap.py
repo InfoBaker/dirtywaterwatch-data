@@ -124,6 +124,8 @@ def resolve(dotted: str):
     mod, _, name = str(dotted).rpartition(".")
     if not mod:
         raise SpecError(f"transform {dotted!r} is not a dotted module.function path")
+    if not mod.startswith("ingest."):          # a registry row names pipeline code only
+        raise SpecError(f"transform {dotted!r} is outside the pipeline's ingest package")
     fn = getattr(importlib.import_module(mod), name, None)
     if not callable(fn):
         raise SpecError(f"transform {dotted!r} is not a function")
@@ -341,9 +343,14 @@ def parse_datetime(v, tz: ZoneInfo, formats=None) -> tuple[datetime | None, str 
         d = date.fromisoformat(s)
         return datetime(d.year, d.month, d.day, tzinfo=tz), "day"
     try:
-        return _localize(datetime.fromisoformat(s.replace("Z", "+00:00")), tz), "minute"
+        dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
     except ValueError:
-        pass
+        dt = None
+    if dt is not None:
+        # a floating timestamp at exactly midnight (Socrata's date columns: 2026-11-01T00:00:00.000) is a date
+        if dt.tzinfo is None and re.fullmatch(r"\d{4}-\d{2}-\d{2}T00:00(:00(\.0+)?)?", s):
+            return dt.replace(tzinfo=tz), "day"
+        return _localize(dt, tz), "minute"
     if re.search(r"[A-Za-z]{3},?\s+\d|\d{1,2}\s+[A-Za-z]{3}\s+\d{4}", s):
         try:
             dt = parsedate_to_datetime(s)
@@ -543,6 +550,8 @@ def validate(block: dict, source_id: str = "") -> list[str]:
             for out in s["map"].values():
                 if out not in EVENT_TYPES:
                     errs.append(f"record.event_type maps to {out!r}, not an event type")
+        if isinstance(s.get("map"), dict) and any(isinstance(x, bool) or x is None for x in s["map"]):
+            errs.append(f"record.{k}: a map key reads as true, false or null in YAML (Yes, No, On, Off, ~): quote it")
         if k == "status" and isinstance(s.get("map"), dict):
             for out in s["map"].values():
                 if out not in STATUSES:

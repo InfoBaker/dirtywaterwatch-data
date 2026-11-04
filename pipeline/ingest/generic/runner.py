@@ -264,9 +264,9 @@ def build(source_id: str, block: dict, rows: list[dict], fetched_at: str, prev_r
     sua = mod.source_updated_at(block, platform_meta, tz) if hasattr(mod, "source_updated_at") else None
     ctx = F.Ctx(source_id=source_id, block=block, tz=tz, fetched_at=fetched_at, source_updated_at=sua,
                 extra={"platform_meta": platform_meta or {}, **(extra or {})})
-    if block["platform"] == "snapshot":
-        return mod.build(rows, ctx, extra.get("state") if extra else None)
     kept = [r for r in rows if keep_row(r, block)]
+    if block["platform"] == "snapshot":
+        return mod.build(kept, ctx, extra.get("state") if extra else None)
     safe = [F.safe_row(r, block) for r in kept]
     records = [to_record(r, ctx) for r in safe]
     records, dups = dedupe(records, safe, block)
@@ -339,7 +339,7 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
         snap = importlib.import_module("ingest.generic.snapshot")
         extra["state_path"] = snap.state_path(source_id)
         extra["state"] = read_json(extra["state_path"], {}) or {}
-        if snap.too_few(rows, extra["state"]):
+        if snap.too_few(rows, extra["state"], float((block.get("snapshot") or {}).get("min_units_ratio", 0.5))):
             msg = f"{len(rows)} units in the snapshot (previous {len(extra['state'].get('units') or {})})"
             write_events(source_id, [], ok=False, error=msg, path=path)
             print(f"{source_id}: FAILED {msg}", file=sys.stderr)
