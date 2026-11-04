@@ -1,0 +1,33 @@
+id: "il-idph-beachguard"
+name: "Illinois BeachGuard System (IDPH): advisories and closures, E. coli results"
+url: "https://idph.illinois.gov/envhealth/ilbeaches/public/"
+homepage: "https://idph.illinois.gov/envhealth/ilbeaches/public/"
+kind: "rss"
+level: "state"
+# Feed row: written by pipeline/ingest/il_idph_beachguard.py (data/build/events/il-idph-beachguard.json).
+# Built 2026-11-04: the RSS list of advisories in effect and each listed beach's page (start date, issuer, point);
+#   advisory_lifted at the first poll that no longer lists the beach (the lift time is not published).
+# Notes (research/il, status used, verified fetched, checked 2026-11-04): Read by
+#   pipeline/ingest/il_idph_beachguard.py: the RSS list of advisories in effect plus each listed
+#   beach's page for its start date, issuer and point; lifted when the list stops showing it.
+# Access detail (research, quoted): Home page lists current advisories (10 on 2026-11-03, several
+#   stale, e.g. "Lake - Timber Pointe Outdoor Center ... 5/22/2014"). RSS:
+#   https://idph.illinois.gov/envhealth/ilbeaches/public/RssFeed.aspx (raw/idph-beachguard-rss.xml)
+#   with title "Closure - Deep Lake - Glacier Park" and a BeachDetail.aspx?BeachId= link;
+#   Search.aspx has an export.
+# Can fill: event_type, waterbody, location_text, started_at, authority, source_record_id (BeachId)
+# Cannot fill: coordinates; advice_text; valid_until
+# Waters: 245 public and 222 private licensed beaches incl. Lake Michigan
+# History: BeachDetail pages hold sample history (not fetched).
+cadence: "Entered by county health departments and park districts; Lake County updates Mon-Fri by 10 a.m."
+license: "None stated."
+attribution: "Illinois Department of Public Health"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure"]
+states: ["IL"]
+access: ["html", "rss"]
+access_detail: "Home page lists current advisories (10 on 2026-11-03, several stale, e.g. \"Lake - Timber Pointe Outdoor Center ... 5/22/2014\"). RSS: https://idph.illinois.gov/envhealth/ilbeaches/public/RssFeed.aspx (raw/idph-beachguard-rss.xml) with title \"Closure - Deep Lake - Glacier Park\" and a BeachDetail.aspx?BeachId= link; Search.aspx has an export."
+machine_readable: true
+legal_basis: "Illinois Swimming Facility Act; BEACH Act for Lake Michigan"
+checked: "2026-11-04"

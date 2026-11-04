@@ -58,6 +58,7 @@ STANDINS = {
     "python -m venv": "true",
     "npm install": "true",
     "Backfill": "true",
+    "System tools": "true",
 }
 
 
@@ -165,6 +166,24 @@ def puts(tmp: Path) -> list[str]:
 
 
 # ---------------------------------------------------------------- refresh.yml
+
+def test_refresh_installs_pdftotext_before_the_refresh_and_a_failed_install_never_stops_the_run(tmp_path):
+    """ingest/il_mwrd_lake_reversals.py needs poppler's pdftotext, which the hosted runner may not have."""
+    steps = next(iter(load("refresh.yml")["jobs"].values()))["steps"]
+    names = [s.get("name") or s.get("run", "") for s in steps]
+    i = next(i for i, n in enumerate(names) if n.startswith("System tools"))
+    assert i < next(i for i, n in enumerate(names) if n.startswith("Refresh ("))
+    script = steps[i]["run"]
+    assert "poppler-utils" in script and "|| echo \"::warning::" in script
+    bin_dir = tmp_path / "bin"
+    bin_dir.mkdir()
+    for tool in ("sudo",):                      # an install that fails: the step still succeeds
+        (bin_dir / tool).write_text("#!/bin/sh\nexit 100\n")
+        (bin_dir / tool).chmod(0o755)
+    env = {**os.environ, "PATH": str(bin_dir)}         # no pdftotext on the path; the shell's builtins only
+    p = subprocess.run([shutil.which("bash"), "-e", "-c", script], env=env, text=True, capture_output=True)
+    assert p.returncode == 0 and "::warning::poppler-utils could not be installed" in p.stdout
+
 
 def test_refresh_first_run_with_no_state_objects(tmp_path):
     tmp = checkout(tmp_path)

@@ -1,0 +1,22 @@
+id: "il-iepa-hab-program"
+name: "Illinois EPA Harmful Algal Bloom program and Algal Bloom Dashboard"
+url: "https://epa.illinois.gov/topics/water-quality/monitoring/algal-bloom/2026-harmful-algal-bloom-program.html"
+homepage: "https://epa.illinois.gov/topics/water-quality/monitoring/algal-bloom/2026-harmful-algal-bloom-program.html"
+kind: "html"
+level: "state"
+# Notes (research/il, status candidate, verified search_only, checked 2026-11-03): Statewide bloom
+#   reports; 8 ug/L microcystin recreation threshold per press; dashboard endpoint still to find.
+# Access detail (research, quoted): Program page by year (2016 to 2026); dashboard built from Bloom
+#   Report Form submissions; endpoint not traced.
+cadence: null
+license: "none stated"
+attribution: "Illinois Environmental Protection Agency"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["IL"]
+access: ["html", "map_only"]
+access_detail: "Program page by year (2016 to 2026); dashboard built from Bloom Report Form submissions; endpoint not traced."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"
