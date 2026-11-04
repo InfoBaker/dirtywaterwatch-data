@@ -131,3 +131,14 @@ def test_michigans_great_lakes_records_hold_michigans_waters_only():
         assert b[0] >= box_mi[0] - 0.01 and b[1] >= box_mi[1] - 0.01 and b[2] <= box_mi[2] + 0.01 and b[3] <= box_mi[3] + 0.01, slug
         assert w[slug]["area_km2"] < most, slug               # not the whole lake (Michigan 57,137 km2 before)
     assert not [p for p in json.loads((DATA_DIR / "waters-nhd.json").read_text())["problems"] if "outside MI" in p]
+
+
+def test_the_petroleum_general_permits_outfalls_drive_no_sewage_caution():
+    """EPA's CSO inventory lists four Michigan petroleum and remediation general permits (MIG08...); their 13 outfall
+    rows are outfall_kind "other" with the reason, so the rain-likely caution and the map never read them as combined
+    sewer outfalls (the Kalamazoo River at Marshall, the Chippewa and Clinton Rivers)."""
+    from common import load_outfall_registry
+    from ingest import rainfall
+    rows = [r for r in load_outfall_registry(DATA_DIR) if str(r.get("npdes_permit")).startswith("MIG0811")]
+    assert len(rows) == 13 and all(r["outfall_kind"] == "other" and "petroleum" in r["kind_note"] for r in rows)
+    assert not [o for o in rainfall.cso_outfalls({"MI"}) if str(o["permit"]).startswith("MIG0811")]
