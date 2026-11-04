@@ -168,15 +168,16 @@ LINE_TEXT = "Modeled downstream path (estimate, not verified by sampling)."
 # shoreline stretches on the Great Lakes (build/shoreline.py; data/rules.json reach.shoreline): their own wording
 SHORE_STOP_TEXT = {
     "shoreline_limit": "The modeled shoreline stretch stops here ({each:g} km along the shore from the outfall): the "
-                       "distance is a site choice, not a sign the water is clean beyond this point.",
+                       "distance is this site's estimate from published studies of Great Lakes overflows, not a sign "
+                       "the water is clean beyond this point.",
     "shoreline_end": "The modeled shoreline stretch stops here, where the mapped shore of this lake ends. "
                      "Contamination can travel beyond this point.",
 }
 SHORE_LINE_TEXT = "Modeled shoreline stretch (estimate, not verified by sampling)."
-SHORE_LABEL = ("Modeled stretch of {lake} shore at {where_from}. Lake currents along the shore can carry sewage either "
-               "way, so this stretch runs up to {each:g} km each way from the outfall. This is an estimate, not a "
-               "measurement of bacteria. The shore is not necessarily unsafe here, and the rest of the lake is not "
-               "necessarily safe.")
+SHORE_LABEL = ("Modeled stretch of {lake} shore at {where_from}. Wind-driven currents along the shore can carry sewage "
+               "either way, so this stretch runs up to {each:g} km each way from that point, a distance this site "
+               "estimates from published studies of Great Lakes overflows. This is an estimate, not a measurement of "
+               "bacteria. The shore is not necessarily unsafe here, and the rest of the lake is not necessarily safe.")
 
 
 def reach_waters(st: dict) -> dict[str, list[str]]:

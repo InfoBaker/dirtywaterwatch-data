@@ -1231,26 +1231,82 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
         rec["error"] = str(e)
         return rec
     own = str(c.get("state") or (c.get("permit") or "")[:2] or w.get("state") or "").upper()
-    states = sorted(set(r["states"]) | ({own} if own else set()))
-    segs, stops = [], []
+    found = set(r["states"]) | ({own} if own else set())
+    segs, stops, onto = [], [], []
+    walked = [side["coords"] for side in r["sides"] if len(side["coords"]) >= 2]
     for side in r["sides"]:
         if len(side["coords"]) < 2:
             continue
         segs.append({"comid": None, "km_start": 0.0, "km_end": side["km"], "gnis_name": rec["river"],
                      "coords": side["coords"]})
-        stops.append({"coords": side["coords"][-1], "km_from_outfall": side["km"], "cut_reason": side["stop"]})
+        end = {"coords": side["coords"][-1], "km_from_outfall": side["km"], "cut_reason": side["stop"]}
+        # the shore goes on in another record of the lake (the next state's, or Lake Michigan beyond the Straits):
+        # the stretch goes on along it to the same total distance (a reach belongs to every water it runs through)
+        hops, done_slugs = 0, {slug}
+        while end["cut_reason"] == SH.STOP_END and end["km_from_outfall"] < each - 0.05 and hops < 3:
+            nxt = onward_record(end["coords"], each - end["km_from_outfall"], walked, waters, shore, land, done_slugs, g)
+            if nxt is None:
+                break
+            n_slug, part = nxt
+            hops += 1
+            done_slugs.add(n_slug)
+            onto.append(n_slug)
+            found |= set(part["states"])
+            walked.append(part["coords"])
+            km0 = end["km_from_outfall"]
+            segs.append({"comid": None, "km_start": km0, "km_end": round(km0 + part["km"], 3),
+                         "gnis_name": rec["river"], "coords": part["coords"], "water_slug": n_slug})
+            end = {"coords": part["coords"][-1], "km_from_outfall": round(km0 + part["km"], 3),
+                   "cut_reason": part["stop"]}
+        stops.append(end)
+    states = sorted(found)
+    lake_recs = SH.lake_waters(slug, states, waters, shore)
+    for n_slug in onto:          # the other lake's records too (Lake Michigan's, from a Lake Huron outfall)
+        lake_recs += [x for x in SH.lake_waters(n_slug, states, waters, shore) if x not in lake_recs]
     rec.update(segments=segs, stops=stops, cut_reason=SH.MODEL if segs else "no_trace",
-               length_km=r["length_km"], snap_m=r["snap_m"], states=states,
-               waters=SH.lake_waters(slug, states, waters, shore),
-               error=None if segs else "the shore has no length at the point")
+               length_km=round(sum(e["km_from_outfall"] for e in stops), 3), snap_m=r["snap_m"], states=states,
+               waters=lake_recs, error=None if segs else "the shore has no length at the point")
     return rec
+
+
+def onward_record(pt, km: float, walked: list, waters: dict, shore: dict, land: dict | None, skip: set, g0):
+    """(slug, side) of the shoreline lake record whose shore a stretch ending at pt continues on (build/shoreline.py
+    onward), or None. A record with the same outline as one already walked (New York's and Pennsylvania's Lake
+    Erie share one) is not another shore."""
+    from shapely.geometry import Point, box
+    from shapely.ops import unary_union
+    from build.status import water_geometry
+    lon, lat = float(pt[0]), float(pt[1])
+    probe = Point(lon, lat)
+    pad = SH.ONWARD_M / 111_000 * 2
+    for s2 in sorted(SH.shoreline_slugs(waters, shore) - skip):
+        w2 = waters.get(s2) or {}
+        bb = w2.get("bbox")
+        if bb and not (bb[0] - pad <= lon <= bb[2] + pad and bb[1] - pad <= lat <= bb[3] + pad):
+            continue
+        g2 = water_geometry(s2, waters)
+        if g2 is None or g2 is g0 or (g2.bounds == g0.bounds and abs(g2.area - g0.area) < 1e-9):
+            continue
+        if g2.boundary.distance(probe) > pad:
+            continue
+        near = None
+        if land is not None:
+            b2 = box(lon - 1, lat - 1, lon + 1, lat + 1)
+            near = {st: x for st, x in land.items() if x.intersects(b2)}
+        part = SH.onward(lon, lat, g2, unary_union(list(near.values())) if near else None, km, walked,
+                         float(shore["shore_m"]), float(shore["gap_km"]), land_states=near)
+        if part is not None:
+            return s2, part
+    return None
 
 
 def run_shorelines(cands: list[dict], waters: dict, shore: dict, force: bool = False, log=print,
                    land: dict | None = None) -> dict:
     """Build the due shoreline stretches (no request): never built, moved, built with other rule values or another
-    water, a cached river trace, or older than CACHE_DAYS. Without the Census outlines nothing is built this run
-    (and nothing cached as a failure). Returns counts."""
+    water, a cached river trace, one that got no stretch (no outline for the lake record yet, or the point too far
+    from its shore: rebuilt every run, since a stretch costs no request and an outline added to the records must take
+    effect at once, not after CACHE_DAYS), or older than CACHE_DAYS. Without the Census outlines nothing is built this
+    run (and nothing cached as a failure). Returns counts."""
     now = datetime.now(UTC)
     cached = load_reaches()
     sig = shore_sig(shore)
@@ -1258,7 +1314,7 @@ def run_shorelines(cands: list[dict], waters: dict, shore: dict, force: bool = F
     for c in cands:
         d = cached.get(c["key"])
         if (force or not d or d.get("model") != SH.MODEL or moved(c, d) or d.get("rule_sig") != sig
-                or d.get("water_slug") != c.get("water_slug") or not fresh_rec(d, now)):
+                or d.get("water_slug") != c.get("water_slug") or not d.get("segments") or not fresh_rec(d, now)):
             due.append(c)
         elif any(c.get(f) != d.get(f) for f in META_FIELDS if f in c):
             d.update({f: c[f] for f in META_FIELDS if f in c})
@@ -1277,7 +1333,13 @@ def run_shorelines(cands: list[dict], waters: dict, shore: dict, force: bool = F
             return out
     REACH_DIR.mkdir(parents=True, exist_ok=True)
     for c in due:
-        rec = shoreline_record(c, waters, shore, land)
+        try:
+            rec = shoreline_record(c, waters, shore, land)
+        except Exception as e:      # one bad outline never stops the reach build; the record says why
+            rec = {**c, "fetched_at": now_iso(), "model": SH.MODEL, "method": SH.MODEL, "segments": [],
+                   "cut_reason": "no_trace", "length_km": 0.0, "rule_sig": sig,
+                   "error": f"shoreline stretch failed: {type(e).__name__}: {e}"[:300]}
+            log(f"reaches: shoreline stretch {c['key']} failed ({type(e).__name__}: {e})"[:300])
         write_json(REACH_DIR / f"{c['key']}.json", rec)
         out["built" if rec["segments"] else "no_trace"] += 1
     log(f"reaches: shoreline stretches {out}")

@@ -88,15 +88,21 @@ def test_the_great_lakes_are_shoreline_lakes_by_their_identifiers_and_small_name
 
 def test_the_rule_in_rules_json_has_its_numbers_rationale_and_source():
     r = RULES_FILE["reach"]["shoreline"]
-    assert r["each_way_km"] == RULES_FILE["reach"]["cap_km"] == 40
+    # 20 km each way: the evidence (Milwaukee 2 to 5 km for indicators, 8 km for human markers, the Chicago backflows
+    # along the city's whole shore), not the 40 km river cap applied both ways
+    assert r["each_way_km"] == 20 and RULES_FILE["reach"]["cap_km"] == 40
     assert r["min_area_km2"] is None
     assert [e["name"] for e in r["lakes"]] == ["Lake Superior", "Lake Michigan", "Lake Huron", "Lake Erie",
                                                "Lake Ontario"]
-    assert "not a measured value" in r["rationale"] and "40 kilometres each way" in r["rationale"]
+    assert "20 kilometres each way" in r["rationale"] and "not a measurement" in r["rationale"]
+    assert "both ways" in r["rationale"] and "change direction" in r["rationale"]
+    for cite in ("McLellan", "Newton et al. (2013)", "Weiskerger (2022)", "Great Lakes Environmental Research Laboratory"):
+        assert cite in r["source"]
+    assert "40" not in r["rationale"]
     # the duration it states is the lake caution the stretch takes (a stretch's windows are its lake's)
     hours = RULES_FILE["yellow"]["by_water_kind"]["lake"]["hours"]
     assert f"{hours}-hour lake caution" in r["rationale"] and f"{hours}-hour lake caution" in r["source"]
-    assert "cb_2023_us_state_500k" in r["source"] and "40-kilometre" in r["source"]
+    assert "cb_2023_us_state_500k" in r["source"]
     public = X.public_rules(RULES_FILE)["reach"]["shoreline"]
     assert "_internal_doc" not in public and not X.internal_wording(public)
 
@@ -177,7 +183,7 @@ def test_a_shoreline_record_has_a_segment_each_way_the_lakes_records_and_states(
     rec = shore_rec()
     assert rec["model"] == "shoreline" and rec["cut_reason"] == "shoreline" and rec["error"] is None
     assert [s["km_start"] for s in rec["segments"]] == [0.0, 0.0]
-    assert [s["km_end"] for s in rec["segments"]] == [pytest.approx(40, abs=0.01)] * 2
+    assert [s["km_end"] for s in rec["segments"]] == [pytest.approx(20, abs=0.01)] * 2
     assert rec["states"] == ["NY", "PA"] and rec["waters"] == ["lake-erie-pa", "lake-erie-ny"]
     assert [s["cut_reason"] for s in rec["stops"]] == ["shoreline_limit", "shoreline_limit"]
     assert rec["river"] == rec["lake"] == "Lake Erie" and rec["rule_sig"] == R.shore_sig(SHORE)
@@ -337,7 +343,7 @@ def test_the_export_carries_the_stretch_with_its_states_and_the_river_reach_unch
     seg = lake_f[0]["properties"]
     assert seg["arrival_hours_typical"] is None and seg["gauge"] is None and "Lake Erie shore" in seg["label"]
     assert "downstream" not in seg["label"] and seg["line_text"] == X.SHORE_LINE_TEXT
-    assert lake_f[2]["properties"]["cut_reason"] == "shoreline_limit" and "40 km" in lake_f[2]["properties"]["label"]
+    assert lake_f[2]["properties"]["cut_reason"] == "shoreline_limit" and "20 km" in lake_f[2]["properties"]["label"]
     path = [f for f in paths if f["id"] == f"{PERMIT}-001"][0]["properties"]
     assert path["model"] == "shoreline" and path["states"] == ["NY", "PA"] and len(path["stops"]) == 2
     # the river reach's features are exactly what they are without the shoreline record
@@ -382,3 +388,86 @@ def test_a_report_on_a_river_and_a_great_lake_is_traced_from_its_point_down_the_
                    water_slugs=["lake-erie-pa"])
     st, _ = _build([lake_only], {})
     assert [(n["water_slug"], n.get("model")) for n in st["needs_reach"]] == [("lake-erie-pa", "shoreline")]
+
+
+# ---------------------------------------------------------------- review of 2026-11-04: seams, neighbours, retries
+
+def test_a_seam_between_two_nhd_pieces_of_one_record_is_not_the_end_of_the_shore():
+    # the box lake cut in two at -80.0 (an NHD tile edge on a whole degree): one record, two polygons
+    west = {"type": "Polygon", "coordinates": [[[-80.5, 42.0], [-80.0, 42.0], [-80.0, 42.5], [-80.5, 42.5], [-80.5, 42.0]]]}
+    east = {"type": "Polygon", "coordinates": [[[-80.0, 42.0], [-79.5, 42.0], [-79.5, 42.5], [-80.0, 42.5], [-80.0, 42.0]]]}
+    for g in (west, east):      # the shore in 1 km steps, as the outlines have it
+        ring = g["coordinates"][0]
+        a, b = ring[0], ring[1]
+        g["coordinates"][0] = [[round(a[0] + (b[0] - a[0]) * i / 41, 6), 42.0] for i in range(42)] + ring[2:]
+    two = shape({"type": "MultiPolygon", "coordinates": [west["coordinates"], east["coordinates"]]})
+    land = PA_LAND.union(NY_LAND)
+    r = SH.stretch(-80.05, 41.999, two, land, 20, 500, 3, 5)
+    west_side, east_side = sorted(r["sides"], key=lambda s: s["coords"][-1][0])
+    assert east_side["stop"] == west_side["stop"] == SH.STOP_LIMIT
+    assert east_side["km"] == pytest.approx(20, abs=0.01) and east_side["coords"][-1][0] > -80.0
+    assert all(c[1] == pytest.approx(42.0, abs=1e-6) for c in east_side["coords"])     # never up the seam
+
+
+def test_a_stretch_that_starts_where_the_shore_ends_has_one_side_and_does_not_fail():
+    land = PA_LAND.union(NY_LAND)
+    r = SH.stretch(-80.49999, 41.999, shape(LAKE), land, 20, 500, 3, 5, land_states=LAND)
+    lengths = sorted(s["km"] for s in r["sides"])
+    assert lengths[0] == pytest.approx(0, abs=0.01) and lengths[1] == pytest.approx(20, abs=0.01)
+    assert r["states"] == ["PA"]
+    rec = shore_rec("302", lon=-80.49999)
+    assert rec["cut_reason"] == "shoreline" and rec["error"] is None
+    assert sorted(round(sg["km_end"]) for sg in rec["segments"]) in ([20], [0, 20])
+
+
+def _two_lakes():
+    """'Lake Huron' (east) and 'Lake Michigan' (west), two records meeting on a straight line at -80.0 that runs from
+    the shore out into the water (as NHD divides them in the Straits of Mackinac), both on Pennsylvania's land."""
+    def lake(x0, x1):
+        south = [[round(x0 + (x1 - x0) * i / 41, 6), 42.0] for i in range(42)]
+        return {"type": "Polygon", "coordinates": [south + [[x1, 42.5], [x0, 42.5], [x0, 42.0]]]}
+    return dict([w("lake-michigan-pa", "Lake Michigan", "lake", lake(-80.5, -80.0), area_km2=57000, gnis_id="1623080"),
+                 w("lake-huron-pa", "Lake Huron", "lake", lake(-80.0, -79.5), area_km2=59000, gnis_id="1624619")])
+
+
+def test_a_stretch_that_reaches_another_great_lake_record_goes_on_along_its_shore():
+    waters = _two_lakes()
+    c = {"key": f"{PERMIT}-201", "permit": PERMIT, "outfall": "201", "water_slug": "lake-huron-pa", "lat": 41.999,
+         "lon": -79.95, "state": "PA", "outfall_kind": "cso", "model": "shoreline"}
+    S._GEOM_CACHE.clear()
+    rec = R.shoreline_record(c, waters, SHORE, {"PA": box(-81.0, 41.5, -79.0, 42.0)})
+    assert [s["cut_reason"] for s in rec["stops"]] == ["shoreline_limit", "shoreline_limit"]
+    assert [s["km_from_outfall"] for s in rec["stops"]] == [pytest.approx(20, abs=0.05)] * 2
+    onward = [sg for sg in rec["segments"] if sg.get("water_slug") == "lake-michigan-pa"]
+    assert len(onward) == 1 and onward[0]["km_start"] > 3 and onward[0]["km_end"] == pytest.approx(20, abs=0.05)
+    assert all(x < -80.0 + 1e-6 and y == pytest.approx(42.0, abs=1e-6) for x, y in onward[0]["coords"])
+    assert rec["waters"] == ["lake-huron-pa", "lake-michigan-pa"]
+    assert rec["length_km"] == pytest.approx(40, abs=0.1)
+    # with the other record absent the stretch ends where its own record does
+    S._GEOM_CACHE.clear()
+    alone = R.shoreline_record(c, {"lake-huron-pa": waters["lake-huron-pa"]}, SHORE, {"PA": box(-81.0, 41.5, -79.0, 42.0)})
+    assert [s["cut_reason"] for s in alone["stops"]][1] == "shoreline_end" and alone["waters"] == ["lake-huron-pa"]
+
+
+def test_a_record_with_the_same_outline_is_not_another_shore_to_go_on_along():
+    # New York's and Pennsylvania's Lake Erie records share one outline: a stretch that ends at its edge stays ended
+    rec = shore_rec("301", lon=-80.45)
+    assert rec["stops"][1]["cut_reason"] == "shoreline_end"
+    assert rec["stops"][1]["coords"] == [-80.5, 42.0] and len(rec["segments"]) == 2
+
+
+def test_an_outfall_whose_lake_had_no_outline_gets_its_stretch_as_soon_as_the_outline_is_there(tmp_path, monkeypatch):
+    monkeypatch.setattr(R, "REACH_DIR", tmp_path)
+    no_outline = copy.deepcopy(WATERS)
+    no_outline["lake-erie-pa"].pop("geometry")
+    monkeypatch.setattr(S, "OBL_WATER_DIR", tmp_path / "none")
+    cands = [{"key": f"{PERMIT}-001", "permit": PERMIT, "outfall": "001", "water_slug": "lake-erie-pa",
+              "lat": 41.999, "lon": -80.0, "sources": ["echo"], "state": "PA", "model": "shoreline"}]
+    S._GEOM_CACHE.clear()
+    out = R.run_shorelines(cands, no_outline, SHORE, log=lambda m: None, land=LAND)
+    rec = json.loads((tmp_path / f"{PERMIT}-001.json").read_text())
+    assert out["no_trace"] == 1 and rec["error"] == "no outline for the lake record" and R.outcome(rec) == "no_trace"
+    S._GEOM_CACHE.clear()
+    out = R.run_shorelines(cands, WATERS, SHORE, log=lambda m: None, land=LAND)      # the next run, outline added
+    assert out["due"] == 1 and out["built"] == 1
+    assert R.outcome(json.loads((tmp_path / f"{PERMIT}-001.json").read_text())) == "shoreline"
