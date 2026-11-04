@@ -58,3 +58,12 @@ def test_the_california_rows_hold_each_permit_once_and_name_no_individual():
     sf = next(r for r in rows if r["id"] == "ca-sfpuc")
     assert {"CA0037664", "CA0037681", "2SSO10193", "2SSO10193-C"} <= set(sf["npdes_permits"])
     assert "CA0000018" not in perms                       # a desalination vessel test, not a sewer system
+
+
+def test_the_name_pass_unites_an_invalid_outline_without_failing():
+    from shapely.geometry import Polygon
+    from ingest import waters_from_nhd as W
+    bow = Polygon([(0, 0), (2, 2), (2, 0), (0, 2), (0, 0)])         # self-crossing, as some NHD lake outlines are
+    good = Polygon([(3, 3), (4, 3), (4, 4), (3, 3)])
+    u = W.safe_union([bow, good])
+    assert u.is_valid and u.area > 0
