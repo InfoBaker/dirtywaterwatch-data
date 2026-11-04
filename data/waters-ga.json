@@ -1,0 +1,5532 @@
+{
+ "state": "GA",
+ "source": "openboatlaunch out/water snapshot 2026-11-02",
+ "count": 229,
+ "waters": [
+  {
+   "slug": "abercorn-creek-ga",
+   "name": "Abercorn Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Rincon"
+   ],
+   "bbox": [
+    -81.17806,
+    32.24758,
+    -81.15313,
+    32.26176
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "abercorn-creek-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "alabaha-river-ga",
+   "name": "Alabaha River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Blackshear"
+   ],
+   "bbox": [
+    -82.31996,
+    31.25882,
+    -82.13995,
+    31.37767
+   ],
+   "wikidata": "Q4705144",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "odom-bluff-landing-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "alapaha-river-ga",
+   "name": "Alapaha River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Lake Park",
+    "Lakeland"
+   ],
+   "bbox": [
+    -83.64006,
+    30.53622,
+    -83.0099,
+    32.05735
+   ],
+   "wikidata": "Q2830643",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "berrien-beach-ga",
+    "lakeland-ga",
+    "statenville-sr94-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "allatoona-lake-ga",
+   "name": "Allatoona Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Acworth",
+    "Canton",
+    "Cherokee",
+    "Emerson",
+    "Holly Springs",
+    "Woodstock"
+   ],
+   "bbox": [
+    -84.73579,
+    34.03309,
+    -84.53078,
+    34.23245
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 41.396,
+   "launches": [
+    "bartow-carver-park-ga",
+    "blockhouse-ga",
+    "cherokee-county-park-ga",
+    "cherokee-mills-little-river-ga",
+    "clark-creek-ga",
+    "cooper-branch-ga",
+    "galt-s-ferry-ga",
+    "gatewood-park-ga",
+    "knox-bridge-ga",
+    "macedonia-camp-road-boat-ramp-ga",
+    "mckaskey-creek-ga",
+    "mckinney-campground-ga",
+    "old-hwy-41-ga",
+    "old-hwy-41-3-campground-ga",
+    "old-hwy-41-day-use-area-1-east-boat-ramp-ga",
+    "payne-public-use-area-ga",
+    "red-top-mountain-sp-bethany-bridge-ga",
+    "red-top-mountain-sp-webster-ferry-landing-ga",
+    "stamp-creek-ramp-ga",
+    "sweetwater-day-use-area-ga",
+    "tanyard-creek-ga",
+    "upper-stamp-creek-campground-ga",
+    "victoria-day-use-area-ga",
+    "victoria-day-use-area-acworth-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "allisons-lake-ga",
+   "name": "Allisons Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Gray"
+   ],
+   "bbox": [
+    -83.68804,
+    33.1155,
+    -83.68057,
+    33.12044
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.109,
+   "launches": [
+    "allison-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "altamaha-river-ga",
+   "name": "Altamaha River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Altamaha Park",
+    "Baxley",
+    "Carter's Bight",
+    "Cox",
+    "Davis Landing",
+    "Eason Bluff",
+    "Falling Rocks",
+    "Grays Landing",
+    "Hazlehurst",
+    "Jesup",
+    "Lower Sansavilla",
+    "McNatt Falls"
+   ],
+   "bbox": [
+    -82.54369,
+    31.30331,
+    -81.23442,
+    31.97144
+   ],
+   "wikidata": "Q434188",
+   "charted": true,
+   "area_km2": 2.453,
+   "launches": [
+    "altamaha-regional-park-ga",
+    "big-hammock-wma-ga",
+    "barrington-park-ga",
+    "carter-bight-ga",
+    "deen-s-landing-ga",
+    "eason-bluff-ga",
+    "grays-landing-ga",
+    "j-e-stanfield-big-hammock-wma-ga",
+    "jaycee-landing-ga",
+    "johnston-station-ga",
+    "mcnatt-falls-ga",
+    "morgan-lake-wma-ga",
+    "morris-landing-ga",
+    "oglethorpe-bluff-landing-ga",
+    "penholloway-swamp-cogdon-lake-ga",
+    "state-highway-135-ga",
+    "town-bluff-sr135-ga",
+    "us-highway-1-bridge-ga",
+    "upper-wayne-county-landing-ga",
+    "williamsburg-landing-sansavilla-wma-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "antioch-lake-west-ga",
+   "name": "Antioch Lake West",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Fouche"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rocky-mountain-pfa-antioch-west-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "arties-pond-ga",
+   "name": "Arties Pond",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Dearing"
+   ],
+   "bbox": [
+    -82.42611,
+    33.37786,
+    -82.42357,
+    33.38088
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.039,
+   "launches": [
+    "mcduffie-pfa-clubhouse-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "banks-lake-ga",
+   "name": "Banks Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Lakeland"
+   ],
+   "bbox": [
+    -83.17021,
+    30.98435,
+    -83.07196,
+    31.03818
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 28.183,
+   "launches": [
+    "banks-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "barbour-island-river-ga",
+   "name": "Barbour Island River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Thomas Landing"
+   ],
+   "bbox": [
+    -81.26544,
+    31.55494,
+    -81.22708,
+    31.6266
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.584,
+   "launches": [
+    "barbour-river-landing-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "barnesville-reservoir-ga",
+   "name": "Barnesville Reservoir",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Barnesville"
+   ],
+   "bbox": [
+    -84.13101,
+    33.11595,
+    -84.11086,
+    33.13324
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.604,
+   "launches": [
+    "barnesville-reservoir-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-reservoir-ga",
+   "name": "Bear Creek Reservoir",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Bogart"
+   ],
+   "bbox": [
+    -83.54306,
+    33.98118,
+    -83.51295,
+    33.99744
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.783,
+   "launches": [
+    "bear-creek-reservoir-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "beaverdam-creek-lake-ga",
+   "name": "Beaverdam Creek Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Washington"
+   ],
+   "bbox": [
+    -82.83504,
+    33.72906,
+    -82.82229,
+    33.73479
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "beaverdam-creek-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bennett-lake-ga",
+   "name": "Bennett Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Mansfield"
+   ],
+   "bbox": [
+    -83.72936,
+    33.44498,
+    -83.71932,
+    33.45444
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.248,
+   "launches": [
+    "charlie-elliott-wildlife-center-ga-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-lazer-pfa-lake-ga",
+   "name": "Big Lazer PFA Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Thomaston"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-lazer-pfa-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-metz-lake-ga",
+   "name": "Big Metz Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Claxton"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fort-stewart-big-metz-lake-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-slough-ga",
+   "name": "Big Slough",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Bainbridge"
+   ],
+   "bbox": [
+    -84.55813,
+    30.93143,
+    -84.55024,
+    30.93574
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.018,
+   "launches": [
+    "big-slough-boat-launch-near-bainbridge-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blalock-resoirvoir-ga",
+   "name": "Blalock Resoirvoir",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Stockbridge"
+   ],
+   "bbox": [
+    -84.2944,
+    33.47685,
+    -84.27046,
+    33.49014
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.959,
+   "launches": [
+    "blalock-reservoir-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "bowman-branch-ga",
+   "name": "Bowman Branch",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Macon"
+   ],
+   "bbox": [
+    -83.66687,
+    32.85581,
+    -83.65393,
+    32.86937
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bragg-jam-south-river-access-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brier-creek-ga",
+   "name": "Brier Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Girard",
+    "Hiltonia"
+   ],
+   "bbox": [
+    -82.62942,
+    32.78893,
+    -81.42526,
+    33.46056
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brier-creek-sr73-ga",
+    "ellison-bridge-cr142-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "broad-river-ga",
+   "name": "Broad River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Bell"
+   ],
+   "bbox": [
+    -83.17812,
+    33.95859,
+    -82.56568,
+    34.28775
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "broad-river-sr17-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "brushy-branch-ga",
+   "name": "Brushy Branch",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Melson"
+   ],
+   "bbox": [
+    -85.39593,
+    34.15314,
+    -85.36083,
+    34.16978
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brushy-branch-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cane-creek-structure-number-two-lake-ga",
+   "name": "Cane Creek Structure Number Two Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Woodbury"
+   ],
+   "bbox": [
+    -84.628,
+    32.96099,
+    -84.6131,
+    32.97606
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.486,
+   "launches": [
+    "lake-meriwether-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "canoochee-river-ga",
+   "name": "Canoochee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Claxton",
+    "Daisy"
+   ],
+   "bbox": [
+    -82.20894,
+    31.95734,
+    -81.30847,
+    32.50387
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "canoochee-us280-ga",
+    "state-highway-169-east-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "carters-lake-ga",
+   "name": "Carters Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Carters",
+    "Chatsworth"
+   ],
+   "bbox": [
+    -84.67356,
+    34.58811,
+    -84.60089,
+    34.65415
+   ],
+   "wikidata": "Q5047252",
+   "charted": false,
+   "area_km2": 10.992,
+   "launches": [
+    "dam-site-ga",
+    "doll-mountain-camping-area-ga",
+    "doll-mountain-day-use-area-ga",
+    "ridgeway-ga",
+    "woodring-branch-camping-area-ga",
+    "woodring-branch-day-use-area-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "champney-river-ga",
+   "name": "Champney River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Darien"
+   ],
+   "bbox": [
+    -81.47695,
+    31.33691,
+    -81.44203,
+    31.35611
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.087,
+   "launches": [
+    "champney-river-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chattahoochee-river-ga",
+   "name": "Chattahoochee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Carrollton",
+    "Centralhatchee",
+    "Columbia",
+    "Columbus",
+    "Cusseta",
+    "Donalsonville",
+    "Franklin",
+    "Johns Creek",
+    "Lithia Springs",
+    "Lula",
+    "Peachtree Corners",
+    "Rogers Mill"
+   ],
+   "bbox": [
+    -85.19917,
+    30.71149,
+    -83.61559,
+    34.82209
+   ],
+   "wikidata": "Q1068297",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "abbots-bridge-ga",
+    "below-andrews-dam-ga",
+    "belton-bridge-ga",
+    "bull-sluice-lake-ga",
+    "campellton-road-sr166-154-ga",
+    "chattachoochee-bend-sp-ga",
+    "chattahoochee-hills-ga",
+    "franklin-chattahoochie-boat-ramp-ga",
+    "garrard-landing-park-ga",
+    "hollingsworth-ferry-ga",
+    "island-ford-ga",
+    "johnson-ferry-ga",
+    "jones-bridge-ga",
+    "lake-seminole-wma-desser-tract-ga",
+    "lower-pool-park-ga",
+    "mcginnis-ferry-ga",
+    "medlock-bridge-ga",
+    "morgan-falls-park-ga",
+    "mossy-creek-hand-launch-ga",
+    "paces-mill-ga",
+    "powers-island-kayak-access-ga",
+    "private-ga",
+    "river-bend-park-ga",
+    "roswell-river-landing-boat-launch-ga",
+    "rotary-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chattooga-river-ga",
+   "name": "Chattooga River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Clayton",
+    "Long Bottom Ford"
+   ],
+   "bbox": [
+    -83.35332,
+    34.71598,
+    -83.09834,
+    35.03141
+   ],
+   "wikidata": "Q834880",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "highway-28-put-in-ga",
+    "highway-76-bridge-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chatuge-lake-ga",
+   "name": "Chatuge Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Cedar Cliff",
+    "Hiawassee",
+    "Young Harris"
+   ],
+   "bbox": [
+    -83.82575,
+    34.91839,
+    -83.71381,
+    35.03756
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 23.669,
+   "launches": [
+    "lake-chatuge-boat-ramp-ga",
+    "mayor-s-park-ga",
+    "chatuge-lake-boat-launch-near-hiawassee-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chestatee-river-ga",
+   "name": "Chestatee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Dahlonega"
+   ],
+   "bbox": [
+    -83.99736,
+    34.28493,
+    -83.8691,
+    34.67107
+   ],
+   "wikidata": "Q5093400",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lumpkin-county-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chief-mcintosh-lake-ga",
+   "name": "Chief Mcintosh Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Indian Springs"
+   ],
+   "bbox": [
+    -83.94152,
+    33.2434,
+    -83.92676,
+    33.25126
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.335,
+   "launches": [
+    "indian-springs-sp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clarks-hill-lake-ga",
+   "name": "Clarks Hill Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Bussey",
+    "Chennault",
+    "Clay Hill",
+    "Double Branches",
+    "Dunn Chapel",
+    "Evans",
+    "Gill",
+    "Graball",
+    "Leah",
+    "Leathersville",
+    "Lincolnton",
+    "Lisbon"
+   ],
+   "bbox": [
+    -82.64822,
+    33.57643,
+    -82.18099,
+    34.02519
+   ],
+   "wikidata": "Q6477865",
+   "charted": false,
+   "area_km2": 248.712,
+   "launches": [
+    "amity-ra-ga",
+    "big-hart-park-ga",
+    "bobby-brown-sp-campground-ga",
+    "bobby-brown-sp-day-use-ga",
+    "broad-river-campground-ga",
+    "bussey-point-campground-ga",
+    "chamberlain-ferry-ramp-ga",
+    "cherokee-ra-ga",
+    "clay-hill-campground-ga",
+    "double-branches-ramp-ga",
+    "elijah-clark-sp-campground-1-ga",
+    "elijah-clark-sp-campground-2-ga",
+    "elijah-clark-sp-cabins-ga",
+    "elijah-clark-sp-day-use-ga",
+    "fishing-creek-sr79-ga",
+    "fishing-creek-ramp-ga",
+    "gill-point-ra-ga",
+    "hester-ferry-campground-ga",
+    "clarks-hill-lake-boat-launch-near-thomson-ga",
+    "keg-creek-ramp-ga",
+    "lake-springs-park-ga",
+    "leathersville-ramp-ga",
+    "mistletoe-sp-cabins-ga",
+    "mistletoe-sp-campground-ga",
+    "mistletoe-sp-day-use-ga",
+    "morrahs-north-boat-ramp-ga",
+    "morrahs-ramp-ga",
+    "murry-creek-campground-ga",
+    "murry-creek-hunter-access-boat-ramp-ga",
+    "parkway-ramp-ga",
+    "petersburg-campground-ga",
+    "raysville-campground-ga",
+    "ridge-road-campground-ga",
+    "rousseau-creek-boat-ramp-ga",
+    "state-highway-78-little-river-ga",
+    "wildwood-park-ga",
+    "clarks-hill-lake-boat-launch-near-evans-ga-2",
+    "windfield-campground-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "club-lake-ga",
+   "name": "Club Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Fayetteville"
+   ],
+   "bbox": [
+    -84.38632,
+    33.41051,
+    -84.35248,
+    33.42383
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.875,
+   "launches": [
+    "j-w-smith-reservoir-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coheelee-creek-ga",
+   "name": "Coheelee Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Columbia"
+   ],
+   "bbox": [
+    -85.08737,
+    31.30638,
+    -84.98723,
+    31.35715
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "coheelee-creek-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coosa-river-ga",
+   "name": "Coosa River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Anniedelle",
+    "Rome"
+   ],
+   "bbox": [
+    -85.59216,
+    34.15841,
+    -85.17745,
+    34.25847
+   ],
+   "wikidata": "Q1129913",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "heritage-park-ga",
+    "mayo-lock-and-dam-ga",
+    "old-river-road-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coosawattee-river-ga",
+   "name": "Coosawattee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Calhoun"
+   ],
+   "bbox": [
+    -84.90303,
+    34.53322,
+    -84.4842,
+    34.69141
+   ],
+   "wikidata": "Q5168080",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "highway-225-boat-ramp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cotton-patch-pond-ga",
+   "name": "Cotton Patch Pond",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Altamaha"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cotton-patch-pond-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "county-lake-ga",
+   "name": "County Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Fitzgerald"
+   ],
+   "bbox": [
+    -83.26625,
+    31.68225,
+    -83.26199,
+    31.68847
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.064,
+   "launches": [
+    "lakeview-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "crooked-river-ga",
+   "name": "Crooked River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Elliotts Bluff",
+    "Harrietts Bluff"
+   ],
+   "bbox": [
+    -81.72396,
+    30.82896,
+    -81.48096,
+    30.87466
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "crooked-river-state-park-ga",
+    "harriett-s-bluff-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cutoff-pond-ga",
+   "name": "Cutoff Pond",
+   "kind": "pond",
+   "state": "GA",
+   "towns": [
+    "Bainbridge"
+   ],
+   "bbox": [
+    -84.76856,
+    30.81241,
+    -84.76307,
+    30.81477
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.076,
+   "launches": [
+    "silver-lake-wma-cutoff-pond-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dairy-lake-ga",
+   "name": "Dairy Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Mansfield"
+   ],
+   "bbox": [
+    -83.72496,
+    33.45551,
+    -83.72175,
+    33.45891
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.03,
+   "launches": [
+    "charlie-elliott-wildlife-center-ga-4"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "daisy-pond-ga",
+   "name": "Daisy Pond",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Claxton"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fort-stewart-daisy-pond-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "darien-river-ga",
+   "name": "Darien River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Darien"
+   ],
+   "bbox": [
+    -81.46448,
+    31.34771,
+    -81.33216,
+    31.38719
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "darien-river-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dearing-number-10-lake-ga",
+   "name": "Dearing Number 10 Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Dearing"
+   ],
+   "bbox": [
+    -82.42561,
+    33.38334,
+    -82.42356,
+    33.38665
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.043,
+   "launches": [
+    "mcduffie-pfa-bream-buster-ga",
+    "mcduffie-pfa-bridge-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dearing-number-11-lake-ga",
+   "name": "Dearing Number 11 Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Megahee"
+   ],
+   "bbox": [
+    -82.41788,
+    33.37963,
+    -82.41155,
+    33.38395
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.134,
+   "launches": [
+    "mcduffie-pfa-willow-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dearing-number-12-lake-ga",
+   "name": "Dearing Number 12 Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Megahee"
+   ],
+   "bbox": [
+    -82.41837,
+    33.37835,
+    -82.41633,
+    33.38013
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.022,
+   "launches": [
+    "mcduffie-pfa-rod-bender-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dearing-number-13-lake-ga",
+   "name": "Dearing Number 13 Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Megahee"
+   ],
+   "bbox": [
+    -82.4142,
+    33.38366,
+    -82.41136,
+    33.38617
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.031,
+   "launches": [
+    "mcduffie-pfa-jones-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dearing-number-nine-lake-ga",
+   "name": "Dearing Number Nine Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Dearing"
+   ],
+   "bbox": [
+    -82.42182,
+    33.38688,
+    -82.41862,
+    33.39016
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.047,
+   "launches": [
+    "mcduffie-pfa-beaver-lodge-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "defoor-walters-lake-ga",
+   "name": "Defoor Walters Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Calhoun"
+   ],
+   "bbox": [
+    -84.76122,
+    34.51524,
+    -84.74694,
+    34.52916
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.383,
+   "launches": [
+    "salacoa-creek-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "demeries-creek-ga",
+   "name": "Demeries Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Fancy Hall"
+   ],
+   "bbox": [
+    -81.26655,
+    31.76826,
+    -81.25257,
+    31.79046
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.271,
+   "launches": [
+    "demeries-creek-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dodge-county-pfa-lake-ga",
+   "name": "Dodge County PFA Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Eastman"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dodge-county-pfa-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dogwood-lake-ga",
+   "name": "Dogwood Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Hinesville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fort-stewart-dogwood-lake-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dunns-lake-ga",
+   "name": "Dunns Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Baxley"
+   ],
+   "bbox": [
+    -82.3236,
+    31.80691,
+    -82.31197,
+    31.81084
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.154,
+   "launches": [
+    "dunn-s-lake-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "earle-may-boat-basin-ga",
+   "name": "Earle May Boat Basin",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Bainbridge"
+   ],
+   "bbox": [
+    -84.59793,
+    30.89674,
+    -84.59117,
+    30.90153
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.085,
+   "launches": [
+    "earle-may-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ebenezer-creek-ga",
+   "name": "Ebenezer Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Ebenezer",
+    "Stillwell"
+   ],
+   "bbox": [
+    -81.18422,
+    32.3806,
+    -81.18177,
+    32.38377
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.013,
+   "launches": [
+    "ebenezer-creek-boat-launch-ga",
+    "long-bridge-landing-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "etowah-river-ga",
+   "name": "Etowah River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Ball Ground",
+    "Cartersville",
+    "Dawsonville",
+    "Emerson",
+    "Euharlee",
+    "Hightower",
+    "Kingston",
+    "Rome"
+   ],
+   "bbox": [
+    -85.17745,
+    34.12024,
+    -84.01764,
+    34.6618
+   ],
+   "wikidata": "Q968071",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "city-of-cartersville-leake-mounds-kayak-canoe-launch-ga",
+    "euharlee-road-boat-ramp-ga",
+    "mcgraw-ford-ga",
+    "neels-landing-ga",
+    "old-hardin-bridge-landing-ga",
+    "riverside-park-ga",
+    "state-route-1-loop-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "flat-creek-pfa-lake-ga",
+   "name": "Flat Creek PFA Lake",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Perry"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "flat-creek-pfa-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "flint-river-ga",
+   "name": "Flint River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Albany",
+    "Bainbridge",
+    "Cordele",
+    "Fort Valley",
+    "Francisville",
+    "Lamar",
+    "Molena",
+    "Montezuma",
+    "Newton",
+    "Philema",
+    "River Bend",
+    "Salem"
+   ],
+   "bbox": [
+    -84.87177,
+    30.71149,
+    -83.91947,
+    33.66872
+   ],
+   "wikidata": "Q1428859",
+   "charted": false,
+   "area_km2": 2.467,
+   "launches": [
+    "big-lazer-creek-wma-po-biddy-rd-ga",
+    "flint-river-boat-launch-near-thomaston-ga",
+    "crooks-landing-ga",
+    "george-hooks-sr49-ga",
+    "hwy-128-bridge-ga",
+    "hales-landing-ga",
+    "hwy-36-hand-launch-ga",
+    "hwy-80-3-bridge-ga",
+    "marine-corps-ditch-ga",
+    "meriwether-landing-ga",
+    "newton-sr37-ga",
+    "norman-s-ferry-ga",
+    "punks-landing-ga",
+    "reeves-landing-ga",
+    "sprewell-bluff-east-wma-ga",
+    "state-highway-32-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fort-yargo-lake-ga",
+   "name": "Fort Yargo Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Winder"
+   ],
+   "bbox": [
+    -83.74465,
+    33.95911,
+    -83.72314,
+    33.98032
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.846,
+   "launches": [
+    "fort-yargo-sp-east-ga",
+    "fort-yargo-sp-west-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fox-lake-ga",
+   "name": "Fox Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Mansfield"
+   ],
+   "bbox": [
+    -83.74354,
+    33.43942,
+    -83.72923,
+    33.44618
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.269,
+   "launches": [
+    "charlie-elliott-wildlife-center-mansfield-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "frog-pond-ga",
+   "name": "Frog Pond",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Bainbridge"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "silver-lake-wma-frog-pond-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "george-h-sparks-reservoir-ga",
+   "name": "George H Sparks Reservoir",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Lithia Springs"
+   ],
+   "bbox": [
+    -84.64983,
+    33.75343,
+    -84.62756,
+    33.7671
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.82,
+   "launches": [
+    "sweetwater-creek-sp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gillis-pfa-lower-lake-ga",
+   "name": "Gillis PFA Lower Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Dublin"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hugh-m-gillis-pfa-lower-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gillis-pfa-upper-lake-ga",
+   "name": "Gillis PFA Upper Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Dublin"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hugh-m-gillis-pfa-upper-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "glissons-millpond-ga",
+   "name": "Glissons Millpond",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Camp Olvier"
+   ],
+   "bbox": [
+    -81.82738,
+    32.07252,
+    -81.8225,
+    32.07883
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.181,
+   "launches": [
+    "fort-stewart-glisson-s-mill-pond-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "goat-rock-lake-ga",
+   "name": "Goat Rock Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Columbus"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "goat-rock-marina-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "grand-bay-ga",
+   "name": "Grand Bay",
+   "kind": "bay",
+   "state": "GA",
+   "towns": [
+    "Valdosta"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "grand-bay-wma-ga",
+    "grand-bay-wma-valdosta-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hamburg-millpond-ga",
+   "name": "Hamburg Millpond",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Mitchell"
+   ],
+   "bbox": [
+    -82.79933,
+    33.20534,
+    -82.77719,
+    33.21578
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.62,
+   "launches": [
+    "hamburg-sp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hard-labor-creek-regional-reservoir-ga",
+   "name": "Hard Labor Creek Regional Reservoir",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Monroe"
+   ],
+   "bbox": [
+    -83.67151,
+    33.67267,
+    -83.62843,
+    33.72623
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.472,
+   "launches": [
+    "hard-labor-creek-regional-reservoir-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harris-neck-creek-ga",
+   "name": "Harris Neck Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Thomas Landing"
+   ],
+   "bbox": [
+    -81.28984,
+    31.61022,
+    -81.28089,
+    31.62481
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.172,
+   "launches": [
+    "harris-neck-creek-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "harvel-pond-ga",
+   "name": "Harvel Pond",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Paradise Acres"
+   ],
+   "bbox": [
+    -84.86616,
+    30.79663,
+    -84.85982,
+    30.80275
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.231,
+   "launches": [
+    "seminole-sp-harvel-pond-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "heads-creek-reservoir-ga",
+   "name": "Heads Creek Reservoir",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Rio"
+   ],
+   "bbox": [
+    -84.37604,
+    33.27943,
+    -84.34643,
+    33.29545
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.092,
+   "launches": [
+    "heads-creek-reservoir-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "heath-lake-ga",
+   "name": "Heath Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Rome"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rocky-mountain-pfa-heath-lake-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hickory-log-reservoir-ga",
+   "name": "Hickory Log Reservoir",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Canton"
+   ],
+   "bbox": [
+    -84.49247,
+    34.26703,
+    -84.4619,
+    34.29627
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.554,
+   "launches": [
+    "hickory-log-creek-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "high-falls-lake-ga",
+   "name": "High Falls Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "High Falls"
+   ],
+   "bbox": [
+    -84.04742,
+    33.17897,
+    -84.01557,
+    33.21251
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.044,
+   "launches": [
+    "high-falls-sp-lake-ga",
+    "high-falls-sp-lake-buck-cr-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "holbrook-pond-ga",
+   "name": "Holbrook Pond",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Hinesville"
+   ],
+   "bbox": [
+    -81.55925,
+    31.91152,
+    -81.55491,
+    31.91555
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.086,
+   "launches": [
+    "fort-stewart-holbrook-pond-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hollis-g-lathem-reservoir-ga",
+   "name": "Hollis G Lathem Reservoir",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Mica"
+   ],
+   "bbox": [
+    -84.26366,
+    34.35271,
+    -84.24143,
+    34.37758
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.137,
+   "launches": [
+    "hollis-lathem-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hoover-creek-ga",
+   "name": "Hoover Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Georgetown"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bell-s-landing-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-3-ga",
+   "name": "Horseshoe 3",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Enigma"
+   ],
+   "bbox": [
+    -83.36649,
+    31.39393,
+    -83.36329,
+    31.3978
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.057,
+   "launches": [
+    "paradise-pfa-horseshoe-3-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-4-ga",
+   "name": "Horseshoe 4",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Enigma"
+   ],
+   "bbox": [
+    -83.36379,
+    31.39033,
+    -83.35983,
+    31.39612
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.115,
+   "launches": [
+    "paradise-pfa-horseshoe-4-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-5-ga",
+   "name": "Horseshoe 5",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Enigma"
+   ],
+   "bbox": [
+    -83.36064,
+    31.39149,
+    -83.35603,
+    31.39584
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.1,
+   "launches": [
+    "paradise-pfa-horseshoe-5-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "house-pond-ga",
+   "name": "House Pond",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Bainbridge"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "silver-lake-wma-house-pond-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "houston-lake-ga",
+   "name": "Houston Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Beaver Creek"
+   ],
+   "bbox": [
+    -83.69171,
+    32.49972,
+    -83.66606,
+    32.50982
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.555,
+   "launches": [
+    "houston-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jackson-lake-ga",
+   "name": "Jackson Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Flovilla",
+    "Long Acres",
+    "Saddle Acres"
+   ],
+   "bbox": [
+    -83.92072,
+    33.31857,
+    -83.8148,
+    33.43865
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 12.549,
+   "launches": [
+    "lloyd-shoals-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "javors-lucas-lake-ga",
+   "name": "Javors Lucas Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Macon"
+   ],
+   "bbox": [
+    -83.66377,
+    32.89965,
+    -83.64221,
+    32.92639
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.025,
+   "launches": [
+    "javors-lucas-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jekyll-creek-ga",
+   "name": "Jekyll Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Brunswick"
+   ],
+   "bbox": [
+    -81.44098,
+    31.00119,
+    -81.41662,
+    31.10914
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "jekyll-island-boat-ramp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jerico-river-ga",
+   "name": "Jerico River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Richmond Hill"
+   ],
+   "bbox": [
+    -81.36649,
+    31.81358,
+    -81.31785,
+    31.84728
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.98,
+   "launches": [
+    "richmond-hill-wma-egypt-island-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "john-tanner-state-park-lake-a-ga",
+   "name": "John Tanner State Park Lake A",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Mount Zion"
+   ],
+   "bbox": [
+    -85.17158,
+    33.59915,
+    -85.16723,
+    33.6025
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.058,
+   "launches": [
+    "john-tanner-sp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "jones-creek-ga",
+   "name": "Jones Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Midway"
+   ],
+   "bbox": [
+    -81.28815,
+    31.72555,
+    -81.25347,
+    31.74888
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.658,
+   "launches": [
+    "liberty-county-regional-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kinchafoonee-creek-ga",
+   "name": "Kinchafoonee Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Albany",
+    "Bottsford",
+    "Leesburg",
+    "Smithville"
+   ],
+   "bbox": [
+    -84.59591,
+    31.60773,
+    -84.14623,
+    32.33573
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bottsford-sr45-ga",
+    "kinchafoonee-creek-at-sr3-bypass-ga",
+    "sutton-s-landing-park-ga",
+    "wallace-bins-sr118-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lafayette-city-resevoir-ga",
+   "name": "LaFayette City Resevoir",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "LaFayette"
+   ],
+   "bbox": [
+    -85.26959,
+    34.72276,
+    -85.2531,
+    34.74885
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.812,
+   "launches": [
+    "queen-city-lake-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-acworth-ga",
+   "name": "Lake Acworth",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Acworth"
+   ],
+   "bbox": [
+    -84.69378,
+    34.04646,
+    -84.66274,
+    34.06266
+   ],
+   "wikidata": "Q6474665",
+   "charted": false,
+   "area_km2": 1.106,
+   "launches": [
+    "acworth-beach-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-beaver-ga",
+   "name": "Lake Beaver",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Enigma"
+   ],
+   "bbox": [
+    -83.35879,
+    31.38758,
+    -83.35564,
+    31.38978
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.052,
+   "launches": [
+    "paradise-pfa-lake-beaver-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-blackshear-ga",
+   "name": "Lake Blackshear",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Cordele",
+    "Flintside",
+    "Warwick"
+   ],
+   "bbox": [
+    -83.97388,
+    31.83691,
+    -83.89286,
+    32.04606
+   ],
+   "wikidata": "Q1800865",
+   "charted": false,
+   "area_km2": 27.198,
+   "launches": [
+    "georgia-veterans-sp-middle-ga",
+    "georgia-veterans-sp-north-ga",
+    "georgia-veterans-sp-south-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-blue-ridge-ga",
+   "name": "Lake Blue Ridge",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Greens Mill",
+    "Morganton"
+   ],
+   "bbox": [
+    -84.29787,
+    34.79727,
+    -84.23423,
+    34.88546
+   ],
+   "wikidata": "Q6474997",
+   "charted": false,
+   "area_km2": 11.414,
+   "launches": [
+    "lake-blue-ridge-rec-area-ga",
+    "lakewood-landing-ga",
+    "morganton-point-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-bobben-ga",
+   "name": "Lake Bobben",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Enigma"
+   ],
+   "bbox": [
+    -83.35697,
+    31.40295,
+    -83.35147,
+    31.41052
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.218,
+   "launches": [
+    "paradise-pfa-lake-bobben-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-buncombe-ga",
+   "name": "Lake Buncombe",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Crawfordville"
+   ],
+   "bbox": [
+    -82.90628,
+    33.56824,
+    -82.90156,
+    33.57121
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.049,
+   "launches": [
+    "a-h-stephens-sp-lake-buncombe-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-burton-ga",
+   "name": "Lake Burton",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Batesville",
+    "Clayton"
+   ],
+   "bbox": [
+    -83.58765,
+    34.79205,
+    -83.51489,
+    34.88858
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.374,
+   "launches": [
+    "moccasin-creek-ga",
+    "murray-cove-ga",
+    "tallulah-river-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-carroll-ga",
+   "name": "Lake Carroll",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Carrollton"
+   ],
+   "bbox": [
+    -85.06429,
+    33.58926,
+    -85.04558,
+    33.59945
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.619,
+   "launches": [
+    "lake-carroll-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-chapman-ga",
+   "name": "Lake Chapman",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Athens"
+   ],
+   "bbox": [
+    -83.3921,
+    34.02512,
+    -83.37507,
+    34.04541
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.754,
+   "launches": [
+    "lake-chapman-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cherokee-ga",
+   "name": "Lake Cherokee",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Thomasville"
+   ],
+   "bbox": [
+    -83.96177,
+    30.83579,
+    -83.95928,
+    30.84082
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.057,
+   "launches": [
+    "cherokee-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-conasauga-ga",
+   "name": "Lake Conasauga",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Chatsworth"
+   ],
+   "bbox": [
+    -84.65322,
+    34.85765,
+    -84.64796,
+    34.86158
+   ],
+   "wikidata": "Q6475442",
+   "charted": false,
+   "area_km2": 0.068,
+   "launches": [
+    "lake-conasauga-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-harding-ga",
+   "name": "Lake Harding",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "West Point"
+   ],
+   "bbox": [
+    -85.20049,
+    32.6563,
+    -85.065,
+    32.77001
+   ],
+   "wikidata": "Q6476087",
+   "charted": false,
+   "area_km2": 17.994,
+   "launches": [
+    "blanton-creek-park-ga",
+    "idle-hour-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hartwell-ga",
+   "name": "Lake Hartwell",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Hartwell",
+    "Lavonia",
+    "Reed Creek",
+    "Toccoa"
+   ],
+   "bbox": [
+    -83.2826,
+    34.33757,
+    -82.65743,
+    34.76073
+   ],
+   "wikidata": "Q1800945",
+   "charted": false,
+   "area_km2": 200.643,
+   "launches": [
+    "big-oaks-recreation-area-ga",
+    "bruce-creek-ga",
+    "carters-ferry-ga",
+    "cleveland-access-ga",
+    "crawfords-ferry-ga",
+    "duncan-branch-ga",
+    "elrod-ferry-ga",
+    "franklin-county-boat-ramp-ga",
+    "gum-branch-ga",
+    "hart-sp-campground-ga",
+    "hart-sp-day-use-ga",
+    "jenkins-ferry-ga",
+    "long-point-recreation-area-ga",
+    "mary-ann-branch-ga",
+    "milltown-campground-ga",
+    "new-prospect-ga",
+    "payne-creek-campground-ga",
+    "paynes-creek-ga",
+    "poplar-springs-ga",
+    "powderbag-creek-ga",
+    "reed-creek-ga",
+    "rock-springs-ga",
+    "spring-branch-ga",
+    "stephens-county-park-ga",
+    "tugalo-sp-campground-ga",
+    "tugalo-state-park-ga",
+    "watsadler-campground-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-horton-ga",
+   "name": "Lake Horton",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Woolsey Woods"
+   ],
+   "bbox": [
+    -84.44144,
+    33.31716,
+    -84.40831,
+    33.35272
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.9,
+   "launches": [
+    "lake-horton-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-irma-ga",
+   "name": "Lake Irma",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Lakeland"
+   ],
+   "bbox": [
+    -83.07905,
+    31.04223,
+    -83.07396,
+    31.04428
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.043,
+   "launches": [
+    "lake-irma-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-juliette-ga",
+   "name": "Lake Juliette",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Forsyth"
+   ],
+   "bbox": [
+    -83.86249,
+    33.02447,
+    -83.75191,
+    33.08627
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 14.766,
+   "launches": [
+    "dames-ferry-park-ga",
+    "holly-grove-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-kedron-ga",
+   "name": "Lake Kedron",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Peachtree City"
+   ],
+   "bbox": [
+    -84.59091,
+    33.42306,
+    -84.56936,
+    33.43998
+   ],
+   "wikidata": "Q14686694",
+   "charted": false,
+   "area_km2": 0.832,
+   "launches": [
+    "lake-kedron-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-kolomoki-ga",
+   "name": "Lake Kolomoki",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Blakely"
+   ],
+   "bbox": [
+    -84.93536,
+    31.46343,
+    -84.92482,
+    31.47049
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.143,
+   "launches": [
+    "kolomoki-mounds-sp-kolomoki-lake-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lanier-ga",
+   "name": "Lake Lanier",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Balus Creek",
+    "Buford",
+    "Cameron Point",
+    "Cumming",
+    "Dawsonville",
+    "Flowery Branch",
+    "Gainesville",
+    "Gay Lan",
+    "Lake Forest",
+    "Loch Arbor",
+    "Looper Lake",
+    "Lula"
+   ],
+   "bbox": [
+    -84.1211,
+    34.14627,
+    -83.68924,
+    34.43986
+   ],
+   "wikidata": "Q3295796",
+   "charted": false,
+   "area_km2": 140.924,
+   "launches": [
+    "bald-ridge-creek-ga",
+    "balus-creek-park-ga",
+    "big-creek-ga",
+    "bolding-mill-park-ga",
+    "burton-mill-ga",
+    "charleston-park-ga",
+    "clarks-bridge-park-ga",
+    "don-carter-sp-1-ga",
+    "don-carter-sp-2-ga",
+    "duckett-mill-park-ga",
+    "gwinnett-park-boat-ramp-ga",
+    "holly-park-ga",
+    "keith-s-bridge-ga",
+    "lanier-harbor-ga",
+    "lanier-park-ga",
+    "lake-lanier-boat-launch-near-sugar-hill-ga",
+    "lanier-point-pk-ga",
+    "laurel-park-ga",
+    "little-hall-park-ga",
+    "little-ridge-park-ga",
+    "little-river-park-ga",
+    "long-hollow-park-ga",
+    "lula-bridge-wma-south-ga",
+    "lula-west-boat-ramp-ga",
+    "mary-alice-park-ga",
+    "mountain-view-park-ga",
+    "nix-bridge-park-ga",
+    "old-federal-ga",
+    "old-federal-day-use-ga",
+    "old-federal-day-use-west-boat-ramp-ga",
+    "river-forks-ga",
+    "robinson-park-ga",
+    "sardis-creek-park-ga",
+    "sawnee-campground-ga",
+    "shady-grove-park-ga",
+    "shoal-creek-park-ga",
+    "simpson-park-ga",
+    "six-mile-creek-park-ga",
+    "thompson-bridge-park-ga",
+    "thompson-creek-park-ga",
+    "tidwell-park-ga",
+    "toto-creek-park-ga",
+    "two-mile-creek-park-ga",
+    "van-pugh-north-ga",
+    "van-pugh-south-ga",
+    "vanns-tavern-ga",
+    "vanns-tavern-closed-boat-ramp-ga",
+    "wahoo-creek-park-ga",
+    "war-hill-park-ga",
+    "young-deer-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lindsay-grace-ga",
+   "name": "Lake Lindsay Grace",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Jesup"
+   ],
+   "bbox": [
+    -82.05368,
+    31.56595,
+    -82.0365,
+    31.58821
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.565,
+   "launches": [
+    "lake-lindsay-grace-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-longleaf-ga",
+   "name": "Lake Longleaf",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Daisy"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "evans-county-pfa-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mayer-ga",
+   "name": "Lake Mayer",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Cresthill"
+   ],
+   "bbox": [
+    -81.08992,
+    31.99089,
+    -81.08445,
+    31.99698
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.163,
+   "launches": [
+    "lake-mayer-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mayers-ga",
+   "name": "Lake Mayers",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Baxley"
+   ],
+   "bbox": [
+    -82.4871,
+    31.78169,
+    -82.46976,
+    31.80125
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.559,
+   "launches": [
+    "lake-mayers-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mcintosh-ga",
+   "name": "Lake McIntosh",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Peachtree City"
+   ],
+   "bbox": [
+    -84.6082,
+    33.35506,
+    -84.58328,
+    33.38819
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.118,
+   "launches": [
+    "lake-mcintosh-boat-ramp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-oconee-ga",
+   "name": "Lake Oconee",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Carey",
+    "Crooked Creek",
+    "Glades Cross-Roads",
+    "Lake Oconee",
+    "Liberty",
+    "Parks Mill",
+    "Swords"
+   ],
+   "bbox": [
+    -83.35814,
+    33.34375,
+    -83.13871,
+    33.66538
+   ],
+   "wikidata": "Q6477167",
+   "charted": false,
+   "area_km2": 63.618,
+   "launches": [
+    "armour-bridge-ga",
+    "double-branches-ga",
+    "lawrence-shoals-ga",
+    "long-shoals-ga",
+    "old-salem-ga",
+    "parks-ferry-ga",
+    "redlands-wma-redlands-recreation-area-ga",
+    "sugar-creek-ga",
+    "swords-recreation-area-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-oliver-ga",
+   "name": "Lake Oliver",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Columbus"
+   ],
+   "bbox": [
+    -85.08496,
+    32.51455,
+    -84.99106,
+    32.60954
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.491,
+   "launches": [
+    "lake-oliver-marina-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-olmstead-ga",
+   "name": "Lake Olmstead",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Augusta"
+   ],
+   "bbox": [
+    -82.01353,
+    33.49104,
+    -81.99812,
+    33.49935
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.28,
+   "launches": [
+    "lake-olmstead-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-paradise-ga",
+   "name": "Lake Paradise",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Enigma"
+   ],
+   "bbox": [
+    -83.36103,
+    31.41205,
+    -83.35649,
+    31.41728
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.171,
+   "launches": [
+    "paradise-pfa-lake-paradise-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-patrick-ga",
+   "name": "Lake Patrick",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Enigma"
+   ],
+   "bbox": [
+    -83.36591,
+    31.39901,
+    -83.35553,
+    31.41119
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.407,
+   "launches": [
+    "paradise-pfa-lake-patrick-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-peachtree-ga",
+   "name": "Lake Peachtree",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Peachtree City"
+   ],
+   "bbox": [
+    -84.58104,
+    33.38454,
+    -84.56751,
+    33.40614
+   ],
+   "wikidata": "Q34900567",
+   "charted": false,
+   "area_km2": 0.847,
+   "launches": [
+    "battery-way-boat-ramp-ga",
+    "drake-field-kayak-launch-ga",
+    "lake-peachtree-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-rabun-ga",
+   "name": "Lake Rabun",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Clayton",
+    "Tallulah Falls"
+   ],
+   "bbox": [
+    -83.48902,
+    34.74087,
+    -83.41587,
+    34.77458
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.679,
+   "launches": [
+    "hall-s-marina-ga",
+    "lake-rabun-beach-rec-area-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-russell-enigma-ga",
+   "name": "Lake Russell",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Enigma"
+   ],
+   "bbox": [
+    -83.36123,
+    31.38297,
+    -83.35628,
+    31.38748
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.102,
+   "launches": [
+    "paradise-pfa-lake-russell-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-russell-ga",
+   "name": "Lake Russell",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Cornelia"
+   ],
+   "bbox": [
+    -83.50058,
+    34.48515,
+    -83.48502,
+    34.4975
+   ],
+   "wikidata": "Q34900911",
+   "charted": false,
+   "area_km2": 0.327,
+   "launches": [
+    "lake-russell-boat-launch-ga",
+    "lake-russell-boat-launch-and-beach-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-rutledge-ga",
+   "name": "Lake Rutledge",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Rutledge"
+   ],
+   "bbox": [
+    -83.59692,
+    33.63792,
+    -83.57842,
+    33.65656
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.851,
+   "launches": [
+    "hard-labor-creek-sp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-seed-ga",
+   "name": "Lake Seed",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Clayton"
+   ],
+   "bbox": [
+    -83.52324,
+    34.75166,
+    -83.50066,
+    34.79016
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.704,
+   "launches": [
+    "lake-seed-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-seminole-bainbridge-ga",
+   "name": "Lake Seminole",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Bainbridge",
+    "Fairchild",
+    "Paradise Acres",
+    "Recovery",
+    "Reynoldsville"
+   ],
+   "bbox": [
+    -84.88055,
+    30.81025,
+    -84.84079,
+    30.84819
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.603,
+   "launches": [
+    "fairchild-s-park-ga",
+    "lake-seminole-wma-ten-mile-still-ga",
+    "ralph-king-sr253-ga",
+    "ray-s-lake-landing-ga",
+    "reynoldsville-park-ga",
+    "seminole-sp-lake-seminole-ga",
+    "spring-creek-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-seminole-ga",
+   "name": "Lake Seminole",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Bainbridge",
+    "Fairchild",
+    "Jinks",
+    "Paradise Acres"
+   ],
+   "bbox": [
+    -84.94308,
+    30.70631,
+    -84.6606,
+    30.87315
+   ],
+   "wikidata": "Q3215219",
+   "charted": false,
+   "area_km2": 50.198,
+   "launches": [
+    "chattahoochee-park-ga",
+    "cumming-s-landing-ga",
+    "cypress-pond-boat-ramp-ga",
+    "east-bank-campground-ga",
+    "faceville-landing-ga",
+    "lake-seminole-wma-fairchild-tract-ga",
+    "lake-seminole-wma-ranger-station-ga",
+    "river-junction-landing-ga",
+    "sealy-s-point-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-sinclair-ga",
+   "name": "Lake Sinclair",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Crooked Creek",
+    "Eatonton",
+    "Milledgeville",
+    "Oconee Springs"
+   ],
+   "bbox": [
+    -83.43295,
+    33.13885,
+    -83.10172,
+    33.35112
+   ],
+   "wikidata": "Q6477788",
+   "charted": false,
+   "area_km2": 47.97,
+   "launches": [
+    "cosbys-landing-ga",
+    "dennis-station-access-area-1-ga",
+    "dennis-station-access-area-2-ga",
+    "lake-sinclair-recreational-area-ga",
+    "oconee-springs-park-ga",
+    "rocky-creek-ga",
+    "seabrook-road-ga",
+    "upper-sinclair-sr16-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-tobesofkee-ga",
+   "name": "Lake Tobesofkee",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Bolingbroke",
+    "Christophers Cove",
+    "Pineworth by the Lake",
+    "Sofkee Estates"
+   ],
+   "bbox": [
+    -83.84055,
+    32.81787,
+    -83.76418,
+    32.86142
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.564,
+   "launches": [
+    "arrowhead-park-ga",
+    "claystone-park-ga",
+    "tobesofkee-rec-area-duck-pond-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-winfield-scott-ga",
+   "name": "Lake Winfield Scott",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Blairsville"
+   ],
+   "bbox": [
+    -83.97586,
+    34.73745,
+    -83.97095,
+    34.74091
+   ],
+   "wikidata": "Q3215280",
+   "charted": false,
+   "area_km2": 0.064,
+   "launches": [
+    "lake-winfield-scott-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-worth-ga",
+   "name": "Lake Worth",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Albany",
+    "Catalina Beach Estates",
+    "Lakeside"
+   ],
+   "bbox": [
+    -84.1767,
+    31.60183,
+    -84.01537,
+    31.65424
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.011,
+   "launches": [
+    "cox-landing-park-ga",
+    "lake-worth-boat-launch-ga",
+    "turner-landing-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-yohola-ga",
+   "name": "Lake Yohola",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Blakely"
+   ],
+   "bbox": [
+    -84.92041,
+    31.46062,
+    -84.90876,
+    31.46488
+   ],
+   "wikidata": "Q34902068",
+   "charted": false,
+   "area_km2": 0.116,
+   "launches": [
+    "kolomoki-mounds-sp-lake-yohola-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "laura-s-walker-lake-ga",
+   "name": "Laura S Walker Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Waycross"
+   ],
+   "bbox": [
+    -82.22537,
+    31.13549,
+    -82.20954,
+    31.14607
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.36,
+   "launches": [
+    "laura-s-walker-sp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lazaretto-creek-ga",
+   "name": "Lazaretto Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Tybee Island",
+    "Wilmington Island"
+   ],
+   "bbox": [
+    -80.92652,
+    31.98709,
+    -80.88199,
+    32.018
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.135,
+   "launches": [
+    "lazaretto-creek-marina-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lazer-creek-ga",
+   "name": "Lazer Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Thomaston"
+   ],
+   "bbox": [
+    -84.6994,
+    32.73709,
+    -84.4009,
+    32.84795
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lazer-creek-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-ocmulgee-lake-ga",
+   "name": "Little Ocmulgee Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "McRae-Helena"
+   ],
+   "bbox": [
+    -82.90561,
+    32.08545,
+    -82.89303,
+    32.10467
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.854,
+   "launches": [
+    "little-ocmulgee-sp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-ogeechee-river-ga",
+   "name": "Little Ogeechee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Coffee Bluff",
+    "Georgetown"
+   ],
+   "bbox": [
+    -81.32795,
+    31.87131,
+    -81.07573,
+    32.11471
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "coffee-bluff-marina-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-ohoopee-river-ga",
+   "name": "Little Ohoopee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Swainsboro"
+   ],
+   "bbox": [
+    -82.74001,
+    32.45344,
+    -82.40514,
+    32.91231
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hall-s-bridge-ga",
+    "ohoopee-dunes-ramp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-river-ga",
+   "name": "Little River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Barney",
+    "Burney Hill",
+    "Sparks",
+    "Valdosta"
+   ],
+   "bbox": [
+    -83.63659,
+    30.84709,
+    -83.34646,
+    31.55516
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cook-county-landing-sr76-ga",
+    "little-river-boat-launch-ga",
+    "reed-bingham-sp-east-ga",
+    "troupeville-landing-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-satilla-river-blackshear-ga",
+   "name": "Little Satilla River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Blackshear"
+   ],
+   "bbox": [
+    -82.05755,
+    31.29839,
+    -81.89267,
+    31.45462
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "zirkle-landing-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-satilla-river-ga",
+   "name": "Little Satilla River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Brunswick"
+   ],
+   "bbox": [
+    -81.66811,
+    31.01599,
+    -81.43865,
+    31.13097
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "spring-bluff-us-17-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "louis-scott-stell-lake-ga",
+   "name": "Louis Scott Stell Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Georgetown"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "louis-scott-stell-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-lake-ga",
+   "name": "Lower Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Summerville"
+   ],
+   "bbox": [
+    -85.34642,
+    34.43853,
+    -85.3383,
+    34.44137
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.102,
+   "launches": [
+    "james-h-floyd-sp-lower-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lower-williams-lake-ga",
+   "name": "Lower Williams Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Covington"
+   ],
+   "bbox": [
+    -83.82903,
+    33.64765,
+    -83.7961,
+    33.69599
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.98,
+   "launches": [
+    "lake-varner-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mackay-river-ga",
+   "name": "Mackay River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "St. Simons"
+   ],
+   "bbox": [
+    -81.43459,
+    31.12814,
+    -81.38394,
+    31.30211
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "mackay-river-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "magnolia-springs-state-park-lake-ga",
+   "name": "Magnolia Springs State Park Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Perkins"
+   ],
+   "bbox": [
+    -81.95571,
+    32.88336,
+    -81.95214,
+    32.89088
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.12,
+   "launches": [
+    "magnolia-springs-sp-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "margery-lake-ga",
+   "name": "Margery Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Mansfield"
+   ],
+   "bbox": [
+    -83.73748,
+    33.45246,
+    -83.72903,
+    33.4576
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.149,
+   "launches": [
+    "charlie-elliott-wildlife-center-ga-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "medway-river-ga",
+   "name": "Medway River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Sunbury"
+   ],
+   "bbox": [
+    -81.27851,
+    31.7075,
+    -81.16107,
+    31.77416
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 14.731,
+   "launches": [
+    "sunbury-crab-co-restaurant-marina-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "middle-oconee-river-ga",
+   "name": "Middle Oconee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Athens"
+   ],
+   "bbox": [
+    -83.65568,
+    33.87485,
+    -83.34944,
+    34.15961
+   ],
+   "wikidata": "Q131549923",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ben-burton-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "miller-creek-lake-ga",
+   "name": "Miller Creek Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Gray"
+   ],
+   "bbox": [
+    -83.50315,
+    33.11782,
+    -83.49863,
+    33.12026
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.036,
+   "launches": [
+    "miller-creek-lake-recreation-area-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "murrays-lake-ga",
+   "name": "Murrays Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Doogan"
+   ],
+   "bbox": [
+    -84.66929,
+    34.94002,
+    -84.66708,
+    34.94211
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.018,
+   "launches": [
+    "murray-s-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-oconee-river-ga",
+   "name": "North Oconee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Athens",
+    "Whitehall"
+   ],
+   "bbox": [
+    -83.75643,
+    33.87752,
+    -83.34704,
+    34.38647
+   ],
+   "wikidata": "Q131549765",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "north-oconee-river-boat-launch-whitehall-ga",
+    "north-oconee-river-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-river-ga",
+   "name": "North River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Ridgeville"
+   ],
+   "bbox": [
+    -81.38489,
+    31.39205,
+    -81.31149,
+    31.41512
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "blue-n-hall-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "north-river-saint-marys-ga",
+   "name": "North River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Saint Marys"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "north-river-city-of-st-marys-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nottely-lake-ga",
+   "name": "Nottely Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Bethlehem",
+    "Blairsville",
+    "Canal Lake",
+    "Ivylog",
+    "Notalee Orchards",
+    "Thomas Mill"
+   ],
+   "bbox": [
+    -84.11573,
+    34.86001,
+    -83.98116,
+    34.96157
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.435,
+   "launches": [
+    "canal-lake-ga",
+    "deavertown-boat-ramp-ga",
+    "jacks-creek-ga",
+    "nottely-lake-boat-launch-near-ivylog-ga",
+    "poteete-creek-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ochlockonee-river-ga",
+   "name": "Ochlockonee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Cairo",
+    "Dawesville"
+   ],
+   "bbox": [
+    -84.32495,
+    30.61729,
+    -83.80043,
+    31.4221
+   ],
+   "wikidata": "Q3348721",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hadley-ferry-bridge-ga",
+    "state-highway-93-ga",
+    "us-hwy-19-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ocmulgee-pfa-lake-ga",
+   "name": "Ocmulgee PFA Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Hawkinsville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ocmulgee-pfa-wma-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ocmulgee-river-ga",
+   "name": "Ocmulgee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Abbeville",
+    "Berner",
+    "Bonaire",
+    "Cochran",
+    "Eastman",
+    "Fitzgerald",
+    "Flovilla",
+    "Hawkinsville",
+    "Hazlehurst",
+    "Jacksonville",
+    "Juliette",
+    "Lumber City"
+   ],
+   "bbox": [
+    -83.8633,
+    31.77418,
+    -82.54369,
+    33.36828
+   ],
+   "wikidata": "Q846627",
+   "charted": false,
+   "area_km2": 1.81,
+   "launches": [
+    "barr-s-bluff-landing-ga",
+    "ben-hill-county-landing-ga",
+    "bond-swamp-ramp-ga",
+    "bullards-landing-ga",
+    "burkett-s-ferry-landing-ga",
+    "coffee-county-landing-ga",
+    "dodge-county-landing-ga",
+    "dodge-lake-landing-ga",
+    "dykes-landing-ga",
+    "east-juliette-dam-ga",
+    "flat-tub-landing-ga",
+    "horse-creek-wma-ga",
+    "half-moon-landing-ga",
+    "hawkinsville-mile-branch-park-ga",
+    "hinsons-landing-ga",
+    "jay-hall-north-river-access-ga",
+    "key-bridge-sr83-ga",
+    "knowles-sr96-ga",
+    "lloyd-shoals-dam-ga",
+    "lumber-city-landing-ga",
+    "marjorie-kahn-popper-hand-launch-ga",
+    "mcrae-s-landing-ga",
+    "ochise-landing-ga",
+    "popes-ferry-ga",
+    "riverview-park-spring-st-bridge-ga",
+    "rocky-hammock-landing-ga",
+    "sandy-hammock-sr230-ga",
+    "scuffle-bluff-ga",
+    "statham-shoals-landing-ga",
+    "uchee-shoals-downtown-hawkinsville-ga",
+    "westlake-landing-ga",
+    "wise-creek-canoe-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oconee-river-ga",
+   "name": "Oconee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Cherokee Sand Ridge",
+    "Dublin",
+    "East Dublin",
+    "Glenwood",
+    "Hazlehurst",
+    "Madison",
+    "Milledgeville",
+    "Ochwalkee",
+    "Oconee",
+    "Soperton"
+   ],
+   "bbox": [
+    -83.34944,
+    31.95939,
+    -82.5392,
+    33.87882
+   ],
+   "wikidata": "Q851368",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "balls-ferry-sp-ga",
+    "beaverdam-wma-ga",
+    "bell-s-ferry-ga",
+    "blackshear-ferry-landing-ga",
+    "buckeye-landing-ga",
+    "central-state-ga",
+    "clark-bluff-landing-ga",
+    "dead-river-landing-ga",
+    "deep-creek-ga",
+    "dyar-pasture-ga",
+    "milledgeville-sr22-ga",
+    "mt-vernon-bridge-us280-ga",
+    "redlands-sr15-ga",
+    "shady-field-landing-ga",
+    "sinclair-dam-ga",
+    "soperton-bridge-landing-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "odum-creek-ga",
+   "name": "Odum Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Blakely"
+   ],
+   "bbox": [
+    -85.08669,
+    31.37414,
+    -85.04499,
+    31.38676
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "odom-creek-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ogeechee-river-ga",
+   "name": "Ogeechee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Davisboro",
+    "Georgetown",
+    "Louisville",
+    "Oliver",
+    "Pooler",
+    "Richmond Hill",
+    "Wadley"
+   ],
+   "bbox": [
+    -82.90956,
+    31.82816,
+    -81.03202,
+    33.52006
+   ],
+   "wikidata": "Q130012",
+   "charted": true,
+   "area_km2": 0.135,
+   "launches": [
+    "fort-mcallister-ogeechee-river-ga",
+    "kings-ferry-ga",
+    "morgan-s-bridge-sr204-ga",
+    "oliver-bridge-wma-ga",
+    "state-highway-78-ga",
+    "state-highway-88-ga",
+    "us-highway-1-sr4-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ohoopee-river-ga",
+   "name": "Ohoopee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Reidsville"
+   ],
+   "bbox": [
+    -82.81766,
+    31.89001,
+    -82.11088,
+    32.87435
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "jones-landing-ga",
+    "joy-bluff-landing-ga",
+    "prison-landing-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oostanaula-river-ga",
+   "name": "Oostanaula River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Calhoun",
+    "Rome"
+   ],
+   "bbox": [
+    -85.17745,
+    34.25405,
+    -84.90303,
+    34.57768
+   ],
+   "wikidata": "Q2024844",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "highway-136c-boat-ramp-ga",
+    "highway-156-boat-ramp-ga",
+    "state-highway-140-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ozora-lake-ga",
+   "name": "Ozora Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Lawrenceville"
+   ],
+   "bbox": [
+    -83.91799,
+    33.90894,
+    -83.89945,
+    33.91567
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.355,
+   "launches": [
+    "tribble-mill-park-ozora-lake-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "p-34-ga",
+   "name": "P-34",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Hinesville"
+   ],
+   "bbox": [
+    -81.65059,
+    31.92666,
+    -81.64222,
+    31.93035
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.188,
+   "launches": [
+    "fort-stewart-taylor-s-creek-pond-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "panic-pond-ga",
+   "name": "Panic Pond",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Bainbridge"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "silver-lake-wma-panic-pond-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "paris-lake-ga",
+   "name": "Paris Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Rome"
+   ],
+   "bbox": [
+    -85.20618,
+    34.16555,
+    -85.20106,
+    34.17423
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.214,
+   "launches": [
+    "paris-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "parkers-lake-ga",
+   "name": "Parkers Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Loganville"
+   ],
+   "bbox": [
+    -83.95678,
+    33.72945,
+    -83.92744,
+    33.76153
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.795,
+   "launches": [
+    "randy-poynter-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "peeples-lake-ga",
+   "name": "Peeples Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Chatsworth"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "peeples-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pineview-lake-ga",
+   "name": "Pineview Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Glennville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fort-stewart-pineview-lake-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "plantation-creek-ga",
+   "name": "Plantation Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Brunswick"
+   ],
+   "bbox": [
+    -81.48995,
+    31.11813,
+    -81.44437,
+    31.14233
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "sidney-lanier-park-brunswick-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pond-2a-ga",
+   "name": "Pond 2A",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Forsyth"
+   ],
+   "bbox": [
+    -83.76043,
+    33.14506,
+    -83.75095,
+    33.15153
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.158,
+   "launches": [
+    "pond-2a-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pond-ga",
+   "name": "Pond",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Bainbridge"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "silver-lake-wma-star-pond-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "redbird-creek-ga",
+   "name": "Redbird Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Georgetown"
+   ],
+   "bbox": [
+    -81.21908,
+    31.84093,
+    -81.15356,
+    31.88861
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.37,
+   "launches": [
+    "redbird-creek-fort-mcallister-historic-park-ga",
+    "redbird-creek-boat-launch-near-georgetown-ga-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "reed-bingham-sp-lake-ga",
+   "name": "Reed Bingham SP Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Ellenton"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "reed-bingham-sp-west-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "reregulation-reservoir-ga",
+   "name": "Reregulation Reservoir",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Carters"
+   ],
+   "bbox": [
+    -84.69538,
+    34.58309,
+    -84.6614,
+    34.61738
+   ],
+   "wikidata": "Q64688727",
+   "charted": false,
+   "area_km2": 3.005,
+   "launches": [
+    "coosawattee-carters-lake-wma-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "reservoir-51-ga",
+   "name": "Reservoir 51",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Grove Level"
+   ],
+   "bbox": [
+    -83.51608,
+    34.26459,
+    -83.49115,
+    34.27523
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.154,
+   "launches": [
+    "commerce-reservoir-51-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "riceboro-creek-ga",
+   "name": "Riceboro Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Riceboro"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "riceboro-creek-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "richard-b-russell-lake-ga",
+   "name": "Richard B. Russell Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Beverly",
+    "Coldwater",
+    "Elberton",
+    "Ruckersville"
+   ],
+   "bbox": [
+    -82.82144,
+    34.02319,
+    -82.58151,
+    34.35851
+   ],
+   "wikidata": "Q7337958",
+   "charted": false,
+   "area_km2": 76.596,
+   "launches": [
+    "coldwater-creek-ga",
+    "dry-fork-creek-ga",
+    "elbert-county-park-ga",
+    "richard-b-russell-sp-ga",
+    "richard-b-russell-sp-elberton-ga",
+    "richard-b-russell-sp-coldwater-ramp-ga",
+    "richard-b-russell-sp-olympic-rowing-drive-ga",
+    "shuck-pen-eddy-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "richmond-hill-pond-west-ga",
+   "name": "Richmond Hill Pond, West",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Richmond Hill"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fort-stewart-richmond-hill-pond-west-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rock-eagle-lake-ga",
+   "name": "Rock Eagle Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Eatonton"
+   ],
+   "bbox": [
+    -83.39866,
+    33.41297,
+    -83.38599,
+    33.42454
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.318,
+   "launches": [
+    "rock-eagle-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saint-marys-river-ga",
+   "name": "Saint Marys River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Folkston",
+    "Kingsland",
+    "Saint George",
+    "Saint Marys"
+   ],
+   "bbox": [
+    -82.24032,
+    30.35566,
+    -81.2914,
+    30.83026
+   ],
+   "wikidata": "Q2886123",
+   "charted": true,
+   "area_km2": 2.653,
+   "launches": [
+    "camp-pinckney-landing-ga",
+    "st-marys-river-us-17-ga",
+    "st-marys-waterfront-ga",
+    "state-highway-94-ga",
+    "temple-landing-ga",
+    "traders-hill-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salt-creek-ga",
+   "name": "Salt Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Silk Hope"
+   ],
+   "bbox": [
+    -81.20595,
+    32.03816,
+    -81.19661,
+    32.04911
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "salt-creek-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sands-pond-ga",
+   "name": "Sands Pond",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Daisy"
+   ],
+   "bbox": [
+    -81.80175,
+    32.12622,
+    -81.79105,
+    32.13275
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.285,
+   "launches": [
+    "evans-county-pfa-daisy-ga",
+    "evans-county-pfa-ga-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sapelo-river-ga",
+   "name": "Sapelo River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Bellville Point",
+    "Pine Harbor"
+   ],
+   "bbox": [
+    -81.36164,
+    31.52793,
+    -81.19161,
+    31.54869
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bellville-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "satilla-river-ga",
+   "name": "Satilla River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Atkinson",
+    "Blackshear",
+    "Burnt Fort",
+    "Hoboken",
+    "Little Utah",
+    "Nahunta",
+    "Pearson",
+    "Telmore",
+    "Trudie",
+    "Waltertown",
+    "Woodbine"
+   ],
+   "bbox": [
+    -83.08844,
+    30.88697,
+    -81.40125,
+    31.50427
+   ],
+   "wikidata": "Q2386134",
+   "charted": true,
+   "area_km2": 1.888,
+   "launches": [
+    "atkinson-county-landing-ga",
+    "ava-strickland-lightsey-park-ga",
+    "axson-ga",
+    "burnt-fort-ga",
+    "ffa-landing-ga",
+    "herrin-lake-ga",
+    "hwy-158-ga",
+    "jaycees-landing-waycross-ga",
+    "state-highway-121-ga",
+    "trudie-boat-ramp-ga",
+    "warners-landing-ga",
+    "woodbine-community-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "savannah-river-front-river-ga",
+   "name": "Savannah River - Front River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Port Wentworth",
+    "Savannah"
+   ],
+   "bbox": [
+    -81.15692,
+    32.08751,
+    -81.09787,
+    32.17452
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.312,
+   "launches": [
+    "houlihan-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "savannah-river-ga",
+   "name": "Savannah River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Augusta",
+    "Blue Springs",
+    "Brier Creek Landing",
+    "Ebenezer",
+    "Evans",
+    "Fennell Hill Landing",
+    "Girard",
+    "Newington",
+    "Red Bluff Landing",
+    "Savannah",
+    "Stokes Bluff Landing",
+    "Wilmington Island"
+   ],
+   "bbox": [
+    -82.85552,
+    32.03466,
+    -80.84834,
+    34.4439
+   ],
+   "wikidata": "Q370750",
+   "charted": true,
+   "area_km2": 0.767,
+   "launches": [
+    "below-clarkes-hill-dam-ga",
+    "blue-springs-ga",
+    "burton-s-ferry-us301-ga",
+    "fort-pulaski-ga",
+    "lock-dam-ga",
+    "poor-robins-landing-ga",
+    "tuckahoe-wma-dicks-lookout-ga",
+    "tuckahoe-wma-possum-eddy-ga",
+    "tuckahoe-wma-miller-lake-ga",
+    "tuckasee-king-ga",
+    "yuchi-wma-brighams-landing-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "selman-lakes-ga",
+   "name": "Selman Lakes",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Fouche"
+   ],
+   "bbox": [
+    -85.30429,
+    34.36337,
+    -85.28673,
+    34.37067
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.599,
+   "launches": [
+    "rocky-mountain-pfa-antioch-east-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shamrock-lake-ga",
+   "name": "Shamrock Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Bonanza"
+   ],
+   "bbox": [
+    -84.30705,
+    33.47861,
+    -84.29572,
+    33.48436
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.223,
+   "launches": [
+    "shamrock-reservoir-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "sheppard-lake-ga",
+   "name": "Sheppard Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Prospect"
+   ],
+   "bbox": [
+    -83.7471,
+    33.42972,
+    -83.74257,
+    33.43486
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.047,
+   "launches": [
+    "charlie-elliott-wildlife-center-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "silver-lake-ga",
+   "name": "Silver Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Bainbridge"
+   ],
+   "bbox": [
+    -84.76292,
+    30.80778,
+    -84.74005,
+    30.82241
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.086,
+   "launches": [
+    "silver-lake-wma-north-ga",
+    "silver-lake-wma-seminole-ga",
+    "silver-lake-wma-south-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "skidaway-narrows-ga",
+   "name": "Skidaway Narrows",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Skidaway Island"
+   ],
+   "bbox": [
+    -81.07917,
+    31.93164,
+    -81.05655,
+    31.96539
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "skidaway-narrows-community-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-brunswick-river-ga",
+   "name": "South Brunswick River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Brunswick"
+   ],
+   "bbox": [
+    -81.5689,
+    31.12931,
+    -81.52883,
+    31.15456
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.988,
+   "launches": [
+    "blythe-island-regional-park-ga",
+    "south-brunswick-river-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-chickamauga-creek-ga",
+   "name": "South Chickamauga Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Ringgold"
+   ],
+   "bbox": [
+    -85.17651,
+    34.90434,
+    -85.08245,
+    34.99447
+   ],
+   "wikidata": "Q35312533",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ringgold-recreational-complex-south-chick-creek-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "south-newport-river-ga",
+   "name": "South Newport River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "South Newport"
+   ],
+   "bbox": [
+    -81.53692,
+    31.54724,
+    -81.19032,
+    31.70065
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "south-newport-river-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "spring-creek-ga",
+   "name": "Spring Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Brinson"
+   ],
+   "bbox": [
+    -84.81686,
+    30.89508,
+    -84.71088,
+    31.49042
+   ],
+   "wikidata": "Q7580440",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brinson-bridge-landing-sr38-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stone-creek-ga",
+   "name": "Stone Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Macon"
+   ],
+   "bbox": [
+    -83.58934,
+    32.65966,
+    -83.49114,
+    32.85343
+   ],
+   "wikidata": "Q35397812",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "stone-creek-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "stone-mountain-lake-ga",
+   "name": "Stone Mountain Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Mountain Park"
+   ],
+   "bbox": [
+    -84.15271,
+    33.79555,
+    -84.12461,
+    33.82333
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.227,
+   "launches": [
+    "stone-mountain-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "suwannee-canal-ga",
+   "name": "Suwannee Canal",
+   "kind": "canal",
+   "state": "GA",
+   "towns": [
+    "Folkston"
+   ],
+   "bbox": [
+    -82.2755,
+    30.73513,
+    -82.13985,
+    30.81907
+   ],
+   "wikidata": "Q7650554",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "okefenokee-nwr-ga",
+    "suwannee-canal-carry-in-access-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "suwannee-river-ga",
+   "name": "Suwannee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Fargo"
+   ],
+   "bbox": [
+    -83.2534,
+    29.30644,
+    -82.33925,
+    30.83476
+   ],
+   "wikidata": "Q2299655",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "suwannee-river-sill-ga",
+    "suwannee-river-visitor-center-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tacklebuster-ga",
+   "name": "Tacklebuster",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Enigma"
+   ],
+   "bbox": [
+    -83.35868,
+    31.39843,
+    -83.35529,
+    31.402
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.057,
+   "launches": [
+    "paradise-pfa-tacklebuster-lake-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tate-lake-ga",
+   "name": "Tate Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Heardmont",
+    "Middleton",
+    "Pearl"
+   ],
+   "bbox": [
+    -82.82715,
+    34.06589,
+    -82.65325,
+    34.12988
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.021,
+   "launches": [
+    "middleton-ga",
+    "pearl-mill-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tired-creek-lake-ga",
+   "name": "Tired Creek Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Cairo"
+   ],
+   "bbox": [
+    -84.28233,
+    30.92066,
+    -84.24263,
+    30.95388
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.319,
+   "launches": [
+    "tired-creek-lake-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "toccoa-river-ga",
+   "name": "Toccoa River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Curtis",
+    "McCaysville",
+    "Morganton",
+    "Wilscot"
+   ],
+   "bbox": [
+    -84.37126,
+    34.66657,
+    -84.06723,
+    34.98771
+   ],
+   "wikidata": "Q7811968",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blue-ridge-dam-reservation-ga",
+    "curtis-switch-boat-launch-ga",
+    "horseshoe-bend-park-ga",
+    "sandy-bottoms-toccoa-river-canoe-launc-ga",
+    "tammen-park-ga",
+    "toccoa-river-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "troup-lake-ga",
+   "name": "Troup Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Dublin"
+   ],
+   "bbox": [
+    -82.84119,
+    32.45883,
+    -82.83743,
+    32.46034
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.016,
+   "launches": [
+    "river-bend-wma-north-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tugalo-lake-ga",
+   "name": "Tugalo Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Tallulah Falls"
+   ],
+   "bbox": [
+    -83.36798,
+    34.71368,
+    -83.32572,
+    34.75629
+   ],
+   "wikidata": "Q6478168",
+   "charted": false,
+   "area_km2": 1.863,
+   "launches": [
+    "stoneplace-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tugaloo-river-ga",
+   "name": "Tugaloo River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Toccoa"
+   ],
+   "bbox": [
+    -83.354,
+    34.4439,
+    -82.85552,
+    34.71598
+   ],
+   "wikidata": "Q2459279",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "walker-creek-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "turners-creek-ga",
+   "name": "Turners Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Wilmington Island"
+   ],
+   "bbox": [
+    -81.00551,
+    32.00738,
+    -80.96776,
+    32.04395
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "turners-creek-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "turtle-river-ga",
+   "name": "Turtle River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Blythe Island",
+    "Dock Junction",
+    "Georgetown"
+   ],
+   "bbox": [
+    -81.64938,
+    31.12878,
+    -81.51973,
+    31.21984
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "blythe-island-beach-drive-park-ga",
+    "turtle-river-ga-hwy-303-ga",
+    "upper-turtle-river-ga-hwy-99-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tussahaw-creek-ga",
+   "name": "Tussahaw Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Peeksville"
+   ],
+   "bbox": [
+    -84.13491,
+    33.36747,
+    -83.92032,
+    33.42181
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tussahaw-reservoir-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tybee-creek-ga",
+   "name": "Tybee Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Tybee Island"
+   ],
+   "bbox": [
+    -80.90588,
+    31.97662,
+    -80.84252,
+    31.99917
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "tybee-creek-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "upper-lake-ga",
+   "name": "Upper Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Summerville"
+   ],
+   "bbox": [
+    -85.34065,
+    34.43508,
+    -85.33485,
+    34.44165
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.073,
+   "launches": [
+    "james-h-floyd-sp-upper-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "village-creek-ga",
+   "name": "Village Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Harrington"
+   ],
+   "bbox": [
+    -81.36003,
+    31.19437,
+    -81.32464,
+    31.23461
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.87,
+   "launches": [
+    "village-creek-harrington-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "walter-f-george-reservoir-coffinton-ga",
+   "name": "Walter F George Reservoir",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Coffinton",
+    "Florence"
+   ],
+   "bbox": [
+    -85.15028,
+    31.90005,
+    -85.0245,
+    32.09307
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 27.353,
+   "launches": [
+    "florence-marina-sp-ga",
+    "rood-creek-landing-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "walter-f-george-reservoir-ga",
+   "name": "Walter F. George Reservoir",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Days Crossroads",
+    "Fort Gaines",
+    "Ricks Place"
+   ],
+   "bbox": [
+    -85.17738,
+    31.61367,
+    -85.03518,
+    31.78003
+   ],
+   "wikidata": "Q7333077",
+   "charted": false,
+   "area_km2": 61.291,
+   "launches": [
+    "cotton-hill-campground-ga",
+    "cotton-hill-public-use-ga",
+    "george-t-bagby-sp-ga",
+    "pataula-creek-park-ga",
+    "sandy-branch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "walter-f-george-reservoir-georgetown-ga",
+   "name": "Walter F George Reservoir",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Georgetown"
+   ],
+   "bbox": [
+    -85.18149,
+    31.77657,
+    -85.1053,
+    31.90904
+   ],
+   "wikidata": "Q7333077",
+   "charted": false,
+   "area_km2": 29.993,
+   "launches": [
+    "lake-walter-f-george-wma-cool-branch-ga",
+    "river-bluff-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "watson-pond-ga",
+   "name": "Watson Pond",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Twin City"
+   ],
+   "bbox": [
+    -82.12681,
+    32.5449,
+    -82.11634,
+    32.55674
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.278,
+   "launches": [
+    "george-l-smith-sp-ga",
+    "george-l-smith-sp-twin-city-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-chickamauga-creek-ga",
+   "name": "West Chickamauga Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Chickamauga",
+    "Fort Oglethorpe"
+   ],
+   "bbox": [
+    -85.41777,
+    34.71455,
+    -85.19348,
+    34.99695
+   ],
+   "wikidata": "Q34867164",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cloud-springs-ga",
+    "fort-oglethorpe-ga",
+    "lee-gordon-s-mills-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "west-point-lake-willow-crest-lake-ga",
+   "name": "West Point Lake;Willow Crest Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Abbottsford",
+    "Foxcroft",
+    "Franklin",
+    "Heatherbrook",
+    "LaGrange",
+    "Long Cane",
+    "Owensbyville",
+    "Piedmont Heights",
+    "Rosamond",
+    "Stallings",
+    "Sunny Point",
+    "The Crossings"
+   ],
+   "bbox": [
+    -85.26492,
+    32.9158,
+    -84.98902,
+    33.24942
+   ],
+   "wikidata": "Q7335398",
+   "charted": false,
+   "area_km2": 81.408,
+   "launches": [
+    "autry-park-boat-ramp-vernon-ga",
+    "brush-creek-camping-area-ga",
+    "clark-access-ga",
+    "earl-cook-access-ga",
+    "evansville-access-ga",
+    "evansville-park-boat-ramp-ga",
+    "ga-219-access-ga",
+    "glass-bridge-access-ga",
+    "holiday-camground-ga",
+    "holiday-camground-west-point-ga",
+    "horace-king-park-ga",
+    "liberty-hill-access-ga",
+    "long-cane-access-ga",
+    "mcgee-bridge-access-ga",
+    "pyne-park-ga",
+    "west-point-lake-willow-crest-lake-boat-launch-near-west-point-ga-2",
+    "r-shaefer-heard-park-ga",
+    "ringer-camping-area-ga",
+    "rocky-point-access-ga",
+    "snake-creek-access-ga",
+    "sunny-point-access-ga",
+    "sunny-point-park-northern-boat-ramp-ga",
+    "whitetail-ridge-campground-ga",
+    "whitewater-creek-access-ga",
+    "yellow-jacket-ga",
+    "west-point-lake-willow-crest-lake-boat-launch-near-foxcroft-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "white-chimney-river-ga",
+   "name": "White Chimney River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Pine Harbor",
+    "Shellman Bluff"
+   ],
+   "bbox": [
+    -81.36428,
+    31.54744,
+    -81.33922,
+    31.58345
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "white-chimney-creek-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "white-oak-creek-ga",
+   "name": "White Oak Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Gay"
+   ],
+   "bbox": [
+    -84.73188,
+    33.12197,
+    -84.51827,
+    33.44208
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "joe-kurz-wma-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "white-oak-creek-white-oak-ga",
+   "name": "White Oak Creek",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "White Oak"
+   ],
+   "bbox": [
+    -81.74456,
+    30.99497,
+    -81.63654,
+    31.045
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "white-oak-creek-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "whitetail-lake-ga",
+   "name": "Whitetail Lake",
+   "kind": "lake",
+   "state": "GA",
+   "towns": [
+    "Prospect"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "prospect-boat-launch-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilmington-river-ga",
+   "name": "Wilmington River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Dutch Island",
+    "Savannah",
+    "Thunderbolt",
+    "Wilmington Island"
+   ],
+   "bbox": [
+    -81.04931,
+    31.92391,
+    -80.93543,
+    32.07382
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "f-w-spencer-ga",
+    "thunderbolt-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "withlacoochee-river-ga",
+   "name": "Withlacoochee River",
+   "kind": "river",
+   "state": "GA",
+   "towns": [
+    "Valdosta"
+   ],
+   "bbox": [
+    -83.48492,
+    30.56945,
+    -83.25648,
+    31.32473
+   ],
+   "wikidata": "Q3569502",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "knights-ferry-boat-ramp-ga",
+    "langdale-park-boat-ramp-ga",
+    "nankin-boat-ramp-ga",
+    "state-line-madison-highway-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yahoola-creek-ga",
+   "name": "Yahoola Creek",
+   "kind": "stream",
+   "state": "GA",
+   "towns": [
+    "Dahlonega"
+   ],
+   "bbox": [
+    -84.0127,
+    34.50802,
+    -83.95877,
+    34.66392
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wimpy-mill-park-ga"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "yonah-lake-ga",
+   "name": "Yonah Lake",
+   "kind": "reservoir",
+   "state": "GA",
+   "towns": [
+    "Toccoa",
+    "Tugaloo"
+   ],
+   "bbox": [
+    -83.35538,
+    34.68099,
+    -83.33591,
+    34.71322
+   ],
+   "wikidata": "Q6478588",
+   "charted": false,
+   "area_km2": 1.046,
+   "launches": [
+    "lake-yonah-boat-launch-ga",
+    "yonah-campground-ga"
+   ],
+   "advisories": []
+  }
+ ]
+}
