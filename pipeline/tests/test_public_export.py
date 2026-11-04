@@ -112,6 +112,8 @@ def test_rules_prose_states_the_configured_numbers():
     assert {int(n) for n in re.findall(r"(\d+) days", u["ongoing_red_rationale"])} == {u["ongoing_red_days"]}
     assert {int(n) for n in re.findall(r"day (\d+)", u["unresolved_yellow_rationale"])} == {u["ongoing_red_days"], u["unresolved_yellow_days"]}
     assert {int(n) for n in re.findall(r"(\d+) days", u["unknown_status_rationale"])} == {u["unknown_status_yellow_days"]}
+    ie = u["implausible_end"]
+    assert {int(n) for n in re.findall(r"(\d+) days", ie["rationale"])} == {ie["days_after_fetch"]}
     assert re.search(rf"\b{rules['reach']['cap_km']} kilometres", rules["reach"]["cap_rationale"])
     c = y["conditions"]
     assert isinstance(c["cold_water_c"], (int, float)) and isinstance(c["turbid_ntu"], (int, float))

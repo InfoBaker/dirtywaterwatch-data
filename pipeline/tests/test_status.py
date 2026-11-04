@@ -854,3 +854,78 @@ def test_a_dry_land_record_beside_an_epa_report_keeps_the_water_coloured():
     assert out["duplicates"] == {"ma-test:s": "echo-sewer-overflow:e1"}
     assert out["waters"]["test-river-ma"]["status"] == "red"
     assert {r["event_id"] for r in out["waters"]["test-river-ma"]["reasons"]} == {"echo-sewer-overflow:e1"}
+
+
+# ---------------------------------------------------------------- an end far after the fetch (re-check R6)
+
+BOUND_RULES = {**TEST_RULES, "unresolved": {**TEST_RULES["unresolved"], "implausible_end": {
+    "days_after_fetch": 7, "rationale": "an end more than 7 days after we read the report is not used"}}}
+
+
+def test_an_end_years_after_the_fetch_is_not_quoted_as_a_red_window(monkeypatch):
+    """A mistyped year (2036 for 2026) is not red for ten years: the end is not used, the record follows the rules
+    for one with no end (yellow 14 days from its report time, then unresolved to day 30), and the published value
+    stays in the record and on the interval with the reason."""
+    monkeypatch.setattr(S, "_RULES", BOUND_RULES)
+    start = NOW - 2 * H
+    e = ev(status="ended", event_type="sso", started_at=iso(start), ended_at="2036-08-10T11:00:00+00:00",
+           fetched_at=iso(NOW - H), published_at=iso(NOW - H))
+    assert colour(e, NOW)[0] == "yellow" and colour(e, NOW)[1] == ["no_end"]
+    assert colour(e, NOW + timedelta(days=20))[0] == "unresolved"
+    assert colour(e, NOW + timedelta(days=31))[0] is None or colour(e, NOW + timedelta(days=31))[0] == "grey"
+    assert colour(e, NOW + timedelta(days=400))[0] in (None, "grey")
+    ivs = S.event_intervals(e, "MA", NOW)
+    assert all(iv["end_not_used"]["published_end"] == "2036-08-10T11:00:00+00:00" for iv in ivs)
+    assert all(iv["end_not_used"]["rule"] == "unresolved.implausible_end" for iv in ivs)
+    assert "more than 7 days after the report was read" in ivs[0]["end_not_used"]["why"]
+    assert e["ended_at"] == "2036-08-10T11:00:00+00:00"
+    # ongoing with that end: red for its 7 days, then unresolved (the source's own status, no confirmed end)
+    o = {**e, "status": "ongoing"}
+    assert colour(o, NOW)[0] == "red" and colour(o, NOW + timedelta(days=8))[0] == "unresolved"
+
+
+def test_an_end_within_the_bound_and_an_advisorys_long_end_are_quoted(monkeypatch):
+    monkeypatch.setattr(S, "_RULES", BOUND_RULES)
+    soon = ev(status="ongoing", started_at=iso(NOW - 2 * H), ended_at=iso(NOW + timedelta(days=6)),
+              fetched_at=iso(NOW - H))
+    assert colour(soon, NOW + timedelta(days=5)) == ("red", ["discharge"])
+    assert not any("end_not_used" in iv for iv in S.event_intervals(soon, "MA", NOW))
+    closure = ev(event_type="shellfish_closure", status="advisory_active", started_at=iso(NOW - 2 * H),
+                 ended_at=iso(NOW + timedelta(days=200)), fetched_at=iso(NOW - H), water_slugs=["other-pond-ma"])
+    assert colour(closure, NOW + timedelta(days=100))[0] == "red"
+    # the fetch time, not the build time, is what the end is measured from
+    late = ev(status="ended", started_at=iso(NOW - 30 * H), ended_at=iso(NOW - 20 * H),
+              fetched_at=iso(NOW - timedelta(days=60)))
+    assert S.end_not_credible(late, NOW, BOUND_RULES) is not None
+    assert S.end_not_credible({**late, "fetched_at": iso(NOW - 25 * H)}, NOW, BOUND_RULES) is None
+
+
+def test_an_end_before_the_start_or_far_ahead_is_noted_and_the_build_shows_no_window(monkeypatch):
+    monkeypatch.setattr(S, "_RULES", BOUND_RULES)
+    ahead = ev("ahead", status="unknown", event_type="sso", started_at=iso(NOW - 3 * H),
+               ended_at="2036-08-10T11:00:00+00:00", fetched_at=iso(NOW - H))
+    before = ev("before", status="ended", event_type="sso", started_at=iso(NOW - 3 * H), ended_at=iso(NOW - 5 * H),
+                fetched_at=iso(NOW - H), water_slugs=["other-pond-ma"])
+    st, _ = S.build(now=NOW, write=False, rules=BOUND_RULES, **world(tmp_events([ahead, before])))
+    pa, pb = st["placements"]["ma-test:ahead"], st["placements"]["ma-test:before"]
+    assert "is more than 7 days after the report was read" in pa["validation_error"]
+    assert "is before started_at" in pb["validation_error"]
+    r = st["waters"]["test-river-ma"]["reasons"][0]
+    assert st["waters"]["test-river-ma"]["status"] == "yellow" and r["rule"] == "no_end"
+    assert r["end_not_used"]["published_end"] == "2036-08-10T11:00:00+00:00" and "published end not used" in r["short"]
+    # thirty days on, the site assumes the discharge ended, as for any record with no end
+    later = NOW + timedelta(days=31)
+    st2, _ = S.build(now=later, write=False, rules=BOUND_RULES, **world(tmp_events([ahead])))
+    assert st2["placements"]["ma-test:ahead"].get("end_assumed_at")
+    assert st2["waters"]["test-river-ma"]["status"] == "grey"
+
+
+def test_charts_do_not_count_red_days_from_an_end_not_used(monkeypatch):
+    """The charts cap a long event at 31 days; an end not used is not capped into a credible one."""
+    from collections import Counter
+    from build import charts as C
+    monkeypatch.setattr(S, "_RULES", BOUND_RULES)
+    start = NOW - timedelta(days=30)
+    e = ev(status="ended", started_at=iso(start), ended_at="2036-08-10T11:00:00+00:00", fetched_at=iso(NOW - H))
+    reds = C.red_intervals(e, "MA", NOW, Counter(), rules=BOUND_RULES)
+    assert sum((z - a for a, z in reds), timedelta()) == timedelta(0)
