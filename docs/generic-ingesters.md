@@ -43,7 +43,9 @@ The code is `pipeline/ingest/generic/`: `fieldmap.py` (the field map), one reade
   reads local times names its `time_zone`; a local time that happened twice or not at all at a clock change is
   noted in `raw._time_notes`. A time before 1990 or after the day after the fetch (epoch seconds read as
   milliseconds, a typed year) is not used and the record says so; an end after the fetch is kept but the record is
-  not counted as ended. Each record says in `raw._time_basis` how its times were read.
+  not counted as ended, and the status build draws no window from an end more than
+  `unresolved.implausible_end.days_after_fetch` days after the fetch (`data/rules.json`): the record has no
+  confirmed end. Each record says in `raw._time_basis` how its times were read.
 - **Nothing dropped.** A row that cannot be read becomes a record with `event_type: unknown` and a `parse_error`
   saying why. An end before the start is not used, and the record says so.
 - **Only the safe fields.** `safe_fields` lists every field the block may read or keep; everything else is dropped
@@ -57,7 +59,9 @@ The code is `pipeline/ingest/generic/`: `fieldmap.py` (the field map), one reade
   resident, complainant, reporter, submitter, contact, inspector, email or phone field) is refused unless
   `reviewed_fields` gives the reason it does not; emails, phone numbers and names after a title or an honorific
   are removed from the `free_text` fields and from a `discharger_name` or `authority` read from a field (a number
-  range with a unit, "500-1000 feet", is not taken for a phone number; a ten-digit number always is); `common.strip_personal` runs on every `raw`;
+  range with a unit, "500-1000 feet", is not taken for a phone number; a ten-digit number always is); a
+  `discharger_name` that is only a person's name becomes "[name removed]", the permit staying the operator's identity
+  (`common.scrub_discharger`, for every module); `common.strip_personal` runs on every `raw`;
   and the name redactor runs over every record before it is compared with the last run and again before it is
   written.
 - **History.** Records that leave the source stay in the events file with the missing mark

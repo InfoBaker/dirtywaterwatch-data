@@ -917,6 +917,8 @@ def test_an_end_before_the_start_or_far_ahead_is_noted_and_the_build_shows_no_wi
     later = NOW + timedelta(days=31)
     st2, _ = S.build(now=later, write=False, rules=BOUND_RULES, **world(tmp_events([ahead])))
     assert st2["placements"]["ma-test:ahead"].get("end_assumed_at")
+    note = st2["placements"]["ma-test:ahead"]["note"]
+    assert "the published end (2036-08-10T11:00:00+00:00) is not used" in note and "never reported" not in note
     assert st2["waters"]["test-river-ma"]["status"] == "grey"
 
 
