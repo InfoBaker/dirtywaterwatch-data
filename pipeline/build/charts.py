@@ -60,8 +60,8 @@ from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
 
 from build.status import (ADVISORY_TYPES, BEACH_CHAR, BLOOM_CHAR, COARSE_PRECISION, DISCHARGE_TYPES, LOCAL, POINT_ADVISORY_TYPES,
-                          colours_whole_water, event_intervals, event_state, find_duplicates, future_start, load_events,
-                          live_waters, load_rules, load_waters, make_resolver, parse_time, resolve_revisions)
+                          colours_whole_water, end_not_credible, event_intervals, event_state, find_duplicates,
+                          future_start, load_events, live_waters, load_rules, load_waters, make_resolver, parse_time, resolve_revisions)
 from common import BUILD_DIR, DATA_DIR, OUT_DIR, discharger_alias_map, now_iso, read_json, write_json
 
 CHARTS_DIR = OUT_DIR / "charts"
@@ -599,7 +599,7 @@ def series_meta(sources, first, last, caveats):
 def red_intervals(ev: dict, state: str | None, now: datetime, capped: Counter, water: dict | None = None,
                   rules: dict | None = None):
     s, e = parse_time(ev.get("started_at")), parse_time(ev.get("ended_at"))
-    if s and e and (e - s).days > MAX_EVENT_DAYS:
+    if s and e and (e - s).days > MAX_EVENT_DAYS and not end_not_credible(ev, now, rules):   # else: no end at all
         ev = {**ev, "ended_at": (s + timedelta(days=MAX_EVENT_DAYS)).isoformat()}
         capped["long"] += 1
     out = []
