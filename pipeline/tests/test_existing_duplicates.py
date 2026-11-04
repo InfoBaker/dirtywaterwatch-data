@@ -203,8 +203,86 @@ def test_the_guard_sets_aside_an_unmeasured_record_whose_box_is_too_far(tmp_path
     mt.fake = lambda o, t: {}
     ok, why = mt.guard_ok("lick-creek-nc", {"lat": 35.5, "lon": -80.2}, "Lick Creek")       # Denton, 88 km west
     assert not ok and "bounding box is" in why
-    ok, _ = mt.guard_ok("lick-creek-nc", {"lat": 35.45, "lon": -79.25}, "Lick Creek")        # inside its box: kept
-    assert ok
+    # inside its box (9 by 11 km): the water lies within 7.2 km of the point at most, which a 5 km limit does not cover:
+    # held for want of the outline (a box holding the point is no measurement); an 8 km limit covers it
+    mt._evidence = {}
+    ok, why = mt.guard_ok("lick-creek-nc", {"lat": 35.45, "lon": -79.25}, "Lick Creek")
+    assert not ok and OW.HELD in why
+    mt.resolver.name_limit_m = lambda s: (8_000.0, "test limit")
+    ok, _ = mt.guard_ok("lick-creek-nc", {"lat": 35.45, "lon": -79.25}, "Lick Creek")
+    assert ok and "within 7.2 km of the point" in mt.evidence_of()["lick-creek-nc"]
+
+
+def long_river_matcher(tmp_path, monkeypatch, towns_out):
+    """A 190 km river record with no outline here whose box holds a town 64 km from the river (Valdosta's 'Suwannee
+    River' plant, review 2026-11-04 water-followups P1-1)."""
+    waters = {"suwannee-river-ga": {**obl_rec("suwannee-river-ga", "Suwannee River", [-83.4, 29.6, -82.0, 31.0], ["Fargo"]),
+                                    "state": "GA"}}
+    mt = no_outline_matcher(tmp_path, monkeypatch, waters, towns_out)
+    mt.resolver = SimpleNamespace(guard_detail=lambda slugs, ev: (list(slugs), [], {}),
+                                  name_limit_m=lambda s: (12_000.0, "the river record's extent counted to 10 km plus 2 km"),
+                                  town_conflict=lambda ev, slug: None, canon=lambda s: s,
+                                  distance_m=lambda s, lat, lon: None,
+                                  by_name=lambda v, st, lat, lon, ev: (["suwannee-river-ga"], None, None))
+    mt.fake = lambda o, t: {}
+    mt._evidence, mt._held = {}, {}
+    mt._aside = mt._several = None
+    return mt
+
+
+def test_a_long_rivers_box_holding_the_point_is_no_measurement(tmp_path, monkeypatch):
+    mt = long_river_matcher(tmp_path, monkeypatch, [box(-83.35, 30.78, -83.2, 30.9)])
+    valdosta = {"state": "GA", "npdes_permit": "GA0000001", "city": "VALDOSTA", "lat": 30.80, "lon": -83.23,
+                "reach_gnis_name": "Mud Swamp"}
+    ok, why = mt.guard_ok("suwannee-river-ga", valdosta, "Suwannee River")
+    assert not ok and OW.HELD in why and "named 'Mud Swamp'" in why
+    assert mt.by_name(valdosta, "Suwannee River") == (None, None)
+    assert OW.HELD in mt._aside[0][1]
+    # the same box with evidence: EPA's reach at the point carries the record's name, or its town list names the town
+    ok, why = mt.guard_ok("suwannee-river-ga", {**valdosta, "reach_gnis_name": "Suwannee River"}, "Suwannee River")
+    assert ok and "EPA's NHDPlus reach at the point is named 'Suwannee River'" in mt.evidence_of()["suwannee-river-ga"]
+    ok, _ = mt.guard_ok("suwannee-river-ga", {**valdosta, "city": "FARGO"}, "Suwannee River")
+    assert ok and "town list names the permittee's town (fargo)" in mt.evidence_of()["suwannee-river-ga"]
+
+
+def test_an_unmeasured_record_beyond_the_guards_distance_keeps_its_town_check(tmp_path, monkeypatch):
+    """The guard asks a named record beyond 2 km of the point to name the report's town; one with no outline here whose
+    box alone is 3 km off is held to the same check (Mary Esther's 'East Bay River', Maury's 'Contentnea Creek')."""
+    mt = long_river_matcher(tmp_path, monkeypatch, [])
+    mt.waters["small-river-ga"] = {**obl_rec("small-river-ga", "Small River", [-83.0, 31.0, -82.99, 31.01], ["Fargo"]),
+                                   "state": "GA"}
+    mt.resolver.town_conflict = lambda ev, slug: "the report's town (maury) is not among the water's towns (Fargo)"
+    o = {"state": "GA", "npdes_permit": "GA0000002", "city": "MAURY", "lat": 31.035, "lon": -82.995}
+    ok, why = mt.unmeasured("small-river-ga", o, 12_000.0)
+    assert not ok and "bounding box is 2.8 km from the point and the report's town (maury)" in why
+
+
+def test_the_builders_record_with_no_outline_needs_evidence_at_a_known_point_and_town(tmp_path, monkeypatch):
+    """'Neither a point nor a known town' let the builder's record stand; an unmeasured record has no distance although
+    the row has a point, and was tied with neither check (Whittier's plant 163 km from the Tuckasegee record's box,
+    Havelock's 42 km from the Neuse's)."""
+    mt = long_river_matcher(tmp_path, monkeypatch, [box(-83.35, 30.78, -83.2, 30.9)])
+    mt.targets = {("GA", N.compact("Suwannee River")): {"state": "GA", "name": "Suwannee River", "define_by": "reach",
+                                                        "permits": ["GA0000001"], "slugs": ["suwannee-river-ga"], "how": []}}
+    mt.dist = lambda s, lat, lon: None
+    o = {"state": "GA", "npdes_permit": "GA0000001", "city": "VALDOSTA", "lat": 30.80, "lon": -83.23}
+    assert mt.by_builder_permit(o, "Suwannee River") == (None, None)
+    assert "suwannee-river-ga, is not measured here" in mt._builder_far and OW.HELD in mt._builder_far
+    s, _ = mt.by_builder_permit({**o, "city": "FARGO"}, "Suwannee River")       # its town list: kept
+    assert s == "suwannee-river-ga"
+    mt.towns = None                                                          # no point and no town to check: as built
+    assert mt.by_builder_permit({**o, "lat": None, "lon": None, "city": ""}, "Suwannee River")[0] == "suwannee-river-ga"
+
+
+def test_water_match_says_what_an_unmeasured_tie_rests_on(tmp_path, monkeypatch):
+    mt = long_river_matcher(tmp_path, monkeypatch, [])
+    mt.dist = lambda s, lat, lon: None
+    mt._evidence = {"suwannee-river-ga": "its town list names the permittee's town (fargo)"}
+    o = {"state": "GA", "npdes_permit": "GA0000003", "city": "FARGO", "lat": 30.7, "lon": -82.56,
+         "receiving_water_echo": "Suwannee River"}
+    OW.apply(o, {"slug": "suwannee-river-ga", "step": "name", "how": "its receiving water 'Suwannee River' by name"}, mt)
+    assert o["water_slug"] == "suwannee-river-ga" and o["match"] == "name_only"
+    assert o["water_match"].endswith(OW.NO_OUTLINE_NOTE + "; kept as its town list names the permittee's town (fargo)")
 
 
 
@@ -336,3 +414,68 @@ def test_the_build_names_a_new_unnamed_stream_for_its_town(monkeypatch, tmp_path
     run.existing, run.nhd = {}, None
     t = {"state": "FL", "name": None, "points": Counter(), "towns": Counter({"West Palm Beach": 2})}
     assert run.new_record(("line", "FL", "comid59942"), {}, t, {})["name"] == "Unnamed stream near West Palm Beach"
+
+
+def test_a_held_record_is_not_replaced_by_a_near_named_one_in_the_town(tmp_path, monkeypatch):
+    """Wilmington's 'Northeast Cape Fear River' plant: its record held for want of the outline, the town step must not
+    take the Cape Fear River (a near name on Wilmington's town list) in its place."""
+    waters = {"cape-fear-river-nc": obl_rec("cape-fear-river-nc", "Cape Fear River", [-79.0, 33.8, -77.9, 35.6],
+                                            ["Wilmington", "Fayetteville"]),
+              "northeast-cape-fear-river-nc": obl_rec("northeast-cape-fear-river-nc", "Northeast Cape Fear River",
+                                                      [-78.1, 34.2, -77.6, 35.2], ["Burgaw"])}
+    mt = no_outline_matcher(tmp_path, monkeypatch, waters, [box(-77.95, 34.15, -77.85, 34.3)])
+    mt.dis_waters = {}
+    o = {"state": "NC", "npdes_permit": "NC0000004", "city": "WILMINGTON", "lat": None, "lon": None}
+    mt._evidence, mt._held = {}, {}
+    mt._aside = [("northeast-cape-fear-river-nc", f"no point, and its town list does not name the permittee's town "
+                                                  f"(wilmington): {OW.HELD}")]
+    assert mt.by_name_and_town(o, "Northeast Cape Fear River") == (None, None)
+    mt._aside = None                    # the text's own record set aside for a sure reason: the town step as before
+    s, _ = mt.by_name_and_town(o, "Cape Fear River")
+    assert s == "cape-fear-river-nc" and "town list names" in mt.evidence_of()["cape-fear-river-nc"]
+
+
+def test_a_box_beyond_the_limit_sets_the_name_aside_but_the_permits_town_still_decides(tmp_path, monkeypatch):
+    """Whittier's plant: EPA's point 160 km from the Tuckasegee record's box. The name guard sets the record aside (the
+    box is a sure lower bound), as it does a measured record; the builder's record for the permit is then taken by the
+    town list, however far EPA's point (the rule of review 2026-11-04 P1-2)."""
+    mt = long_river_matcher(tmp_path, monkeypatch, [])
+    o = {"state": "GA", "npdes_permit": "GA0000001", "city": "FARGO", "lat": 33.0, "lon": -84.0}
+    ok, why = mt.guard_ok("suwannee-river-ga", o, "Suwannee River")
+    assert not ok and why.startswith("its bounding box is") and "km from the point" in why
+    mt.targets = {("GA", N.compact("Suwannee River")): {"state": "GA", "name": "Suwannee River", "define_by": "reach",
+                                                        "permits": ["GA0000001"], "slugs": ["suwannee-river-ga"], "how": []}}
+    mt.dist = lambda s, lat, lon: None
+    assert mt.by_builder_permit(o, "Suwannee River")[0] == "suwannee-river-ga"
+    assert "town list names the permittee's town (fargo)" in mt.evidence_of()["suwannee-river-ga"]
+
+
+def test_a_rebuild_of_the_state_keeps_the_tidys_log(tmp_path, monkeypatch):
+    """The tidy's log is the only record of the NHD records it dropped or renamed: a later state build (NC's rebuild of
+    2026-11-04 after its tidy) kept only its own statistics and the 41 drops and 9 renames left the file."""
+    out = tmp_path / "waters-nhd.json"
+    monkeypatch.setattr(N, "OUT", out)
+    log = {"date": "2026-11-04", "dropped": 1, "renamed": 0, "rows_mapped": 0, "unnamed_named": 0, "unnamed_left": [],
+           "actions": [{"slug": "neuse-river-nc", "action": "dropped", "to": "neuse-river-nc", "why": "same name"}]}
+    out.write_text(json.dumps({"partial": False, "stats": {"state_builds": {"NC": {"records": 5, "existing_duplicates": log}}},
+                               "targets": [], "waters": []}))
+    N.write_output([], [], [], [], partial=True, stats={"NC": {"records": 4}}, final=True, scope_states={"NC"})
+    nc = json.loads(out.read_text())["stats"]["state_builds"]["NC"]
+    assert nc["records"] == 4 and nc["existing_duplicates"] == log
+
+
+def test_a_tidy_that_repeats_an_action_does_not_count_it_twice(fixture_doc, monkeypatch, tmp_path):
+    doc, existing = fixture_doc
+    path, apath = tmp_path / "waters-nhd.json", tmp_path / "water-aliases.json"
+    path.write_text(json.dumps(doc))
+    apath.write_text("{}")
+    monkeypatch.setattr(N, "existing_waters", lambda: existing)
+    N.tidy_main(["NC"], path=path, aliases_path=apath)
+    first = json.loads(path.read_text())["stats"]["state_builds"]["NC"]["existing_duplicates"]
+    d = json.loads(path.read_text())
+    d["waters"] = doc["waters"]                  # the same records back (a rebuild), the log kept: the same actions again
+    d["targets"] = doc["targets"]
+    path.write_text(json.dumps(d))
+    N.tidy_main(["NC"], path=path, aliases_path=apath)
+    again = json.loads(path.read_text())["stats"]["state_builds"]["NC"]["existing_duplicates"]
+    assert again["actions"] == first["actions"] and again["dropped"] == first["dropped"]
