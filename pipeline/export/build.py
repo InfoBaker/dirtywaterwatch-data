@@ -86,9 +86,10 @@ from pathlib import Path
 
 from build import status as status_mod
 from build.redact import BlockScan, Redactor, blocklist, quote_swaps, redact_events, redactor_for
+from common import scrub_residence_numbers
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, OUT_DIR, OUTFALL_REGISTRY_GLOB, OUTFALL_REGISTRY_SKIPPED,
                     PROVISIONAL_FIELDS, REPORTED_OUTFALLS, ROOT, discharger_alias_map, is_provisional, now_iso, read_json,
-                    scrub_names, scrub_residence_numbers, split_path_notes, strip_personal, write_json)
+                    scrub_names, split_path_notes, strip_personal, write_json)
 from export import outfalls as outfalls_mod
 
 SIMPLIFY_DEG = 20 / 111_320          # ~20 m
