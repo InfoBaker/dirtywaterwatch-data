@@ -120,14 +120,17 @@ jobs:
           python3 -I scripts/state_paths.py pack raw-cache.tar.gz
           wrangler r2 object put dirtywaterwatch-data/state/raw-cache.tar.gz --file raw-cache.tar.gz --remote
       - name: Dataset release (daily "latest"; dated on Sundays)
+        # a release failure (GitHub's API answered 500 on an asset upload on 2026-11-04) never fails the run: the
+        # export, the live files and the state are already saved; the upload is retried three times
         if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && contains(github.run_started_at, 'T03:'))
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           [ -f data/build/export-blocked.json ] && { echo "export blocked; no release"; exit 0; }
           (cd out && zip -qr ../dataset.zip . -x 'csv/*')
           gh release view latest >/dev/null 2>&1 || gh release create latest --title "Latest dataset" --notes "Rolling dataset; replaced daily. See DATA-LICENSE.md."
-          gh release upload latest dataset.zip --clobber
+          n=0; until gh release upload latest dataset.zip --clobber; do n=$((n + 1)); [ "$n" -ge 3 ] && { echo "::warning::dataset release upload failed three times; the export and state are saved"; exit 1; }; sleep $((15 * n)); done
           if [ "$(date -u +%u)" = "7" ]; then
             tag="dataset-$(date -u +%F)"; gh release create "$tag" dataset.zip --title "Dataset $(date -u +%F)" --notes "Weekly dataset snapshot. See DATA-LICENSE.md." || true
           fi
