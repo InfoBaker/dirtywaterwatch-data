@@ -48,6 +48,9 @@
  "gloucester-harbor-ma": [
   "Gloucester Inner Harbor"
  ],
+ "huron-river-mi": [
+  "HURON"
+ ],
  "intrenchment-creek-ga": [
   "Intreachment Creek"
  ],
@@ -114,6 +117,9 @@
  "north-atlantic-ocean-me": [
   "Atlantic Ocean"
  ],
+ "north-branch-kalamazoo-river-mi": [
+  "North Branch of the Kalamazoo River"
+ ],
  "north-fork-middle-river-fl": [
   "North Fork of Middle River",
   "N Fork of Middle River"
@@ -162,6 +168,14 @@
  "river-raisin-mi": [
   "Raisin River"
  ],
+ "river-rouge-detroit-mi": [
+  "Rouge River",
+  "Main Rouge River"
+ ],
+ "river-rouge-mi": [
+  "Rouge River",
+  "Main Rouge River"
+ ],
  "saint-johns-river-fl": [
   "Lower St Johns River",
   "Lower Saint Johns River"
@@ -174,6 +188,9 @@
  ],
  "sherman-creek-fl": [
   "Sherman's Creek"
+ ],
+ "south-branch-kalamazoo-river-mi": [
+  "South Branch of the Kalamazoo River"
  ],
  "south-branch-river-raisin-mi": [
   "South Branch Raisin River"
@@ -202,6 +219,12 @@
  ],
  "tittabawassee-river-mi": [
   "Tittabawasee River"
+ ],
+ "unnamed-tributary-to-belle-river-mi": [
+  "Lemon Drain"
+ ],
+ "upper-river-rouge-mi": [
+  "Upper Rouge River"
  ],
  "west-point-lake-willow-crest-lake-ga": [
   "West Point Lake",
