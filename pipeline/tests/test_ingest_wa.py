@@ -258,6 +258,40 @@ def test_washington_permits_are_read_from_the_epa_tables_under_the_general_rules
     assert not ok and why == "no evidence the discharge reached a water"
 
 
+def test_adding_washington_to_the_epa_tables_changes_no_other_states_record(monkeypatch):
+    """Review 2026-11-04: the same tables built with and without WA give identical records for every other state
+    (also checked on the real 2026-11-04 extract: 1,033 non-Washington records identical, 1 Washington kept, 35
+    dropped)."""
+    from tests.test_ingest_dc import _row
+    from ingest import echo_sewer_overflow_events as S
+    tables = {
+        "events": [_row(sewer_overflow_bypass_event_key="1", latitude_measure="38.9300", longitude_measure="-77.0400"),
+                   _row(sewer_overflow_bypass_event_key="2", permit_identifier="NY0026131", program_report_form_set_id="2"),
+                   _row(sewer_overflow_bypass_event_key="3", permit_identifier="WA0021954", program_report_form_set_id="3",
+                        latitude_measure="47.0900", longitude_measure="-122.5800"),
+                   _row(sewer_overflow_bypass_event_key="4", permit_identifier="WA0037168", program_report_form_set_id="4")],
+        "types": [{"sewer_overflow_bypass_event_key": k, "sewer_overflow_bypass_type_code": t,
+                   "sewer_overflow_bypass_type_desc": "", "sewer_overflow_bypass_type_code_sequence": "1"}
+                  for k, t in (("1", "SSO"), ("2", "CSO"), ("3", "BYP"), ("4", "SSO"))],
+        "waters": [{"sewer_overflow_bypass_event_key": "1", "name_receiving_water": "Rock Creek"},
+                   {"sewer_overflow_bypass_event_key": "2", "name_receiving_water": "Hudson River"},
+                   {"sewer_overflow_bypass_event_key": "3", "name_receiving_water": "Puget Sound"}],
+    }
+    info = {"extract_date": "2026-11-02", "last_modified": None}
+
+    def others(states):
+        monkeypatch.setattr(S, "STATES", states)
+        kept, dropped, _ = S.build(tables, info)
+        out = [json.dumps({k: v for k, v in r.items() if k != "fetched_at"}, sort_keys=True)
+               for r in kept + dropped if not str(r.get("npdes_permit") or r.get("permit")).startswith("WA")]
+        return sorted(out), kept, dropped
+    with_wa, kept, dropped = others(set(S.STATES))
+    without_wa, _, _ = others(set(S.STATES) - {"WA"})
+    assert with_wa == without_wa and len(with_wa) == 2
+    assert [r["source_record_id"] for r in kept if r["npdes_permit"].startswith("WA")] == ["WA0021954:3:1"]
+    assert [d["permit"] for d in dropped] == ["WA0037168"]          # an SSO naming no water: dropped as everywhere
+
+
 # ---------------------------------------------------------------- operator rows (scripts/add_wa_operators.py)
 
 def test_every_washington_permit_of_the_registry_has_exactly_one_operator_row():
