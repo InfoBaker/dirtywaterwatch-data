@@ -4083,6 +4083,18 @@ REPORT_FIX = [(re.compile(r"\bun-?n?am+ed\b", re.I), "unnamed"),
               (re.compile(r"\btrib(?:ua|au|uat|u)tary\b|\btribuatary\b|\btributray\b", re.I), "tributary"),
               (re.compile(r"^\s*icw\s*$", re.I), "Intracoastal Waterway"),
               (re.compile(r"\bintercoastal\b", re.I), "Intracoastal")]
+OPEN_SEA = "the open sea (no NHD record)"
+
+
+def ocean_record_named(resolver: S.Resolver, text: str, state: str) -> bool:
+    """Whether the status resolver gives the text to an open-ocean record of the state (build/shoreline.py is_ocean:
+    data/rules.json reach.shoreline.oceans), whose reports colour a shoreline stretch."""
+    from build import shoreline as SH
+    shore = SH.rule(S.load_rules())
+    slugs = resolver.by_name(text, state, None, None, {})[0]
+    return bool(slugs) and all(SH.is_ocean(resolver.waters.get(x), shore) for x in slugs)
+
+
 # a report's text that names no public water (checked on the whole text, before any name is read from it)
 REPORT_NOT_WATER = [
     (re.compile(r"\bms4\b|\bmunicipal separate storm", re.I), "a storm-sewer system (MS4), not a named water"),
@@ -4094,7 +4106,7 @@ REPORT_NOT_WATER = [
     (re.compile(r"\b(subdivision|resident'?s?|yard|private|parking|driveway|basement|crawl\s*space)\b", re.I),
      "private property, not a public water"),
     (re.compile(r"\bgulf\s+of\s+(mexico|america)\b|\b(atlantic|pacific)\s+ocean\b|^\s*(the\s+)?ocean\s*$", re.I),
-     "the open sea (no NHD record)"),
+     OPEN_SEA),
 ]
 STREET_NAME = re.compile(r"^[\w' .-]+?\s+(ct|st|rd|ave|av|dr|ln|blvd|cir|trce|trl|pkwy|hwy|ter|pl|way|court|street|"
                          r"road|avenue|drive|lane|boulevard|circle|trace|trail|parkway|highway|terrace|place)\.?$", re.I)
@@ -4377,6 +4389,10 @@ def collect_name_targets(state: str, rows: list[dict], resolver: S.Resolver, wat
     targets, done, skipped = {}, [], {}
     for r in rows:
         parts, why, trib = report_name_parts(r["name"])
+        if not parts and why == OPEN_SEA and ocean_record_named(resolver, r["name"], state):
+            # the open ocean has a record in this state that the shoreline rule walks (data/rules.json
+            # reach.shoreline.oceans): the name is that water's, not "no water"
+            parts, why, trib = [r["name"].strip()], None, False
         r["_parts"] = parts
         if not parts:
             skipped[(state, r["name"])] = why

@@ -196,6 +196,8 @@ NO_FILL_KINDS = RIVER_KINDS | {"bay", "sound"}     # coloured by reaches / marke
 # status (placement "reach"), the map draws the stretch and the lake's outline only (fill false, stretch_model).
 # A report on one with no stretch is listed and counted (placement "shoreline_unmodeled") and colours no shore.
 SHORE_STATUS_BASIS = "modeled shoreline stretches at the outfalls; the lake is not coloured whole"
+# the open ocean (reach.shoreline.oceans, 2026-11-04): the same model on the state's ocean shore, its own words
+OCEAN_STATUS_BASIS = "modeled shoreline stretches at the outfalls and reported locations; the ocean is not coloured whole"
 SHORE_SUMMARY = "affected along a modeled shoreline stretch"
 _SHORE_REACHES: set[str] = set()       # the reach keys of this build's shoreline stretches (where())
 REACH_WATER_M = 500                                 # a reach segment lies on a river water within this
@@ -2615,7 +2617,8 @@ def since_of(intervals, now: datetime, color: str) -> datetime | None:
 PLACEMENT_TEXT = {"reach": " · on a modeled downstream reach", "named": " · named in the notice",
                   "tidal": " · tidal or estuary: movement not modeled",
                   "unmodeled": " · downstream path not modeled",
-                  "shoreline_unmodeled": " · lake shore: stretch not modeled"}
+                  "shoreline_unmodeled": " · lake shore: stretch not modeled",
+                  "ocean_shore_unmodeled": " · ocean shore: stretch not modeled"}
 SHORE_PLACEMENT_TEXT = " · on a modeled shoreline stretch"
 
 
@@ -2842,6 +2845,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         reaches = reaches_mod.load_reaches()
     shore = SH.rule(rules)
     shore_slugs = SH.shoreline_slugs(waters, shore)      # the Great Lakes records: a stretch, never a whole-lake fill
+    ocean_slugs = {x for x in shore_slugs if SH.is_ocean(waters[x], shore)}     # and the open ocean's (the same model)
     _SHORE_REACHES.clear()
     _SHORE_REACHES.update(k for k, r in (reaches or {}).items() if r.get("model") == SH.MODEL)
     if flows is None:
@@ -2977,7 +2981,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                 continue                       # a reach carries it (below)
             tag = None
             if is_discharge and slug in shore_slugs:
-                tag = "shoreline_unmodeled"
+                tag = "ocean_shore_unmodeled" if slug in ocean_slugs else "shoreline_unmodeled"
             elif is_discharge and slug in river_slugs:
                 cut = [r for r, c in carry if slug in c]
                 tag = "tidal" if any(r.get("cut_reason") in ("tidal_at_outfall", "lake_at_outfall") for r in cut) \
@@ -3231,6 +3235,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                          "label": None if head == "sewage" else CATEGORY_LABEL[head]},
             "fill": kind not in NO_FILL_KINDS and slug not in shore_slugs,
             "status_basis": ("modeled reaches" if kind in RIVER_KINDS else
+                             OCEAN_STATUS_BASIS if slug in ocean_slugs else
                              "markers only: tidal or estuary, movement not modeled" if kind in ("bay", "sound")
                              else SHORE_STATUS_BASIS if slug in shore_slugs else "whole water"),
             "summary": (SHORE_SUMMARY if slug in shore_slugs else "part of this water is on a modeled reach")

@@ -1,8 +1,8 @@
 {
  "about": "Receiving-water names in FL's reports that data/receiving-waters-national.json does not hold for FL, by name as typed, with the number of reports giving each.",
  "state": "FL",
- "waters": 215,
- "reports": 309,
+ "waters": 214,
+ "reports": 300,
  "by_reason": {
   "no NHD flowline or waterbody of that name in FL": 174,
   "a water record holds the name, but the reports' points lie too far from it to be placed there": 7,
@@ -13,7 +13,6 @@
   "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 3,
   "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 3,
   "3 NHD waters of that name in FL, none within reach of the reports' places": 3,
-  "the open sea (no NHD record)": 1,
   "the name of a town (Altamonte Springs), not of a water: no NHD water of that name in FL": 1,
   "the name of a town (Coral Springs), not of a water: no NHD water of that name in FL": 1,
   "the name of a town (Palm Bay), not of a water: no NHD water of that name in FL": 1,
@@ -25,14 +24,21 @@
   "the name of a town (Palm Harbor), not of a water: no NHD water of that name in FL": 1,
   "the name of a town (Silver Springs), not of a water: no NHD water of that name in FL": 1
  },
- "resolved_names": 235,
- "resolved_reports": 854,
+ "resolved_names": 236,
+ "resolved_reports": 863,
  "build": {
   "date": "2026-11-04",
-  "command": "python -m ingest.waters_from_nhd --names research/fl/receiving-waters-missing.json --state FL",
-  "records_built": 17,
-  "names_resolved": 32,
-  "network_requests": 0
+  "command": "python -m ingest.waters_from_nhd --names research/fl/receiving-waters-missing.json --state FL --recheck",
+  "records_built": 0,
+  "names_resolved": 1,
+  "network_requests": 0,
+  "last_build": {
+   "date": "2026-11-04",
+   "command": "python -m ingest.waters_from_nhd --names research/fl/receiving-waters-missing.json --state FL",
+   "records_built": 17,
+   "names_resolved": 32,
+   "network_requests": 0
+  }
  },
  "rows": [
   {
@@ -70,42 +76,6 @@
     "fl-dep-pnp"
    ],
    "reason": "no NHD flowline or waterbody of that name in FL; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-04"
-  },
-  {
-   "name": "Gulf of Mexico",
-   "reports": 9,
-   "points": [
-    [
-     28.22928,
-     -82.73802
-    ],
-    [
-     27.98235,
-     -82.82697
-    ],
-    [
-     29.95362,
-     -85.42998
-    ],
-    [
-     30.24654,
-     -85.94173
-    ],
-    [
-     28.385,
-     -82.68788
-    ]
-   ],
-   "towns": [
-    "New Port Richey",
-    "Panama City Beach",
-    "Clearwater",
-    "Mexico Beach"
-   ],
-   "places_from": [
-    "fl-dep-pnp"
-   ],
-   "reason": "the open sea (no NHD record)"
   },
   {
    "name": "Joe's Creek",
@@ -4684,6 +4654,45 @@
     "Indian Rocks Beach",
     "Belleair",
     "Belleair Beach"
+   ],
+   "places_from": [
+    "fl-dep-pnp"
+   ]
+  },
+  {
+   "name": "Gulf of Mexico",
+   "reports": 9,
+   "slugs": [
+    "gulf-of-america-fl"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     28.22928,
+     -82.73802
+    ],
+    [
+     27.98235,
+     -82.82697
+    ],
+    [
+     29.95362,
+     -85.42998
+    ],
+    [
+     30.24654,
+     -85.94173
+    ],
+    [
+     28.385,
+     -82.68788
+    ]
+   ],
+   "towns": [
+    "New Port Richey",
+    "Panama City Beach",
+    "Clearwater",
+    "Mexico Beach"
    ],
    "places_from": [
     "fl-dep-pnp"
