@@ -320,3 +320,147 @@ def test_epds_own_point_and_end_date_in_some_older_files_are_kept_as_given():
     assert seven["ended_at"] is None and seven["status"] == "unknown"
     assert "_revisions" not in seven["raw"]                  # a column one posting adds or leaves out is no revision
     assert stats["unread_columns"] == ["bypass_id"] and "12345" not in json.dumps(recs)
+
+
+# ---------------------------------------------------------------- review fixes (2026-11-04)
+
+def _backfill_session(files, asked, fail=None):
+    """A stand-in for EPD: the page links 2025-12-01; files answers 200, fail(ymd) may raise or answer an error."""
+    class Sess:
+        headers: dict = {}
+
+        def get(self, url, **kw):
+            asked.append(url)
+            if url == G.PAGE_URL:
+                return _Resp(200, text='<a href="/document/document/sewagespillsreport20251201/download">')
+            ymd = url.split("sewagespillsreport")[1][:8]
+            if fail:
+                got = fail(ymd)
+                if got is not None:
+                    return got
+            if ymd in files:
+                return _Resp(200, content=files[ymd])
+            return _Resp(404, headers={"content-type": "text/html"})
+    return Sess
+
+
+def test_a_timeout_on_an_older_day_is_named_and_asked_again_not_the_end_of_the_backfill(tmp_path, monkeypatch):
+    ev = sandbox(tmp_path, monkeypatch)
+    files = {p.name[18:26]: p.read_bytes() for p in OLD}
+    asked: list = []
+
+    def fail(ymd):
+        if ymd == "20251010":
+            raise G.requests.exceptions.ReadTimeout("read timed out")
+        if ymd == "20251013":
+            return _Resp(500, headers={"content-type": "text/html"})
+        return None
+    monkeypatch.setattr(G.requests, "Session", _backfill_session(files, asked, fail))
+    monkeypatch.setattr(G, "now_iso", lambda: "2026-11-05T00:00:00Z")
+    assert G.main(["--backfill", "2025-10-09", "--no-layer"]) == 0
+    doc = json.loads((ev / "ga-epd-spills.json").read_text())
+    errs = doc["meta"]["errors"]
+    assert any("20251010" in e and "ReadTimeout" in e for e in errs) and any("20251013" in e and "500" in e for e in errs)
+    bf = doc["meta"]["backfill"]
+    assert bf["days_failed"] == 2 and bf["days_not_posted"] == bf["requests"] - 2 - 2      # neither is "no posting"
+    assert sorted(p.name[18:26] for p in G.ARCHIVE.glob("*.xlsx")) == ["20251009", "20251201"]
+    asked.clear()
+    monkeypatch.setattr(G.requests, "Session", _backfill_session(files, asked))
+    assert G.main(["--backfill", "2025-10-09", "--no-layer"]) == 0                     # the next run asks again
+    days = [u.split("sewagespillsreport")[1][:8] for u in asked if "sewagespillsreport" in u]
+    assert "20251010" in days and "20251013" in days and "20251009" not in days
+    assert sorted(p.name[18:26] for p in G.ARCHIVE.glob("*.xlsx")) == ["20251009", "20251010", "20251201"]
+
+
+def test_a_backfill_out_of_time_stops_asking_names_the_rest_and_still_reads_the_linked_posting(tmp_path, monkeypatch):
+    ev = sandbox(tmp_path, monkeypatch)
+    files = {p.name[18:26]: p.read_bytes() for p in OLD}
+    asked: list = []
+    clock = iter(range(0, 10 ** 6, 400))                       # 400 s a request: the budget ends after a few days
+    monkeypatch.setattr(G.time, "monotonic", lambda: next(clock))
+    monkeypatch.setattr(G.requests, "Session", _backfill_session(files, asked))
+    assert G.main(["--backfill", "2025-10-09", "--no-layer"]) == 0
+    days = [u.split("sewagespillsreport")[1][:8] for u in asked if "sewagespillsreport" in u]
+    assert days[-1] == "20251201" and len(days) < 10
+    doc = json.loads((ev / "ga-epd-spills.json").read_text())
+    assert any("not requested" in e and "run --backfill again" in e for e in doc["meta"]["errors"])
+    assert doc["meta"]["backfill"]["days_not_requested"] > 0
+    assert {"20251009", "20251010", "20251201"} <= {p.name[18:26] for p in G.ARCHIVE.glob("*.xlsx")}
+
+
+def test_the_default_backfill_reaches_back_to_epds_first_posting_when_run_later(tmp_path, monkeypatch):
+    sandbox(tmp_path, monkeypatch)
+    asked: list = []
+
+    class Sess:
+        headers: dict = {}
+
+        def get(self, url, **kw):
+            asked.append(url)
+            if url == G.PAGE_URL:          # linked a year and a half on: 400 days back would miss October 2025
+                return _Resp(200, text='<a href="/document/document/sewagespillsreport20270401/download">')
+            if url.endswith("20270401/download"):
+                return _Resp(200, content=posting("2026-11-03", [row()])[2])
+            return _Resp(404)
+    monkeypatch.setattr(G.requests, "Session", Sess)
+    monkeypatch.setattr(G, "BACKFILL_BUDGET_S", 10 ** 6)
+    assert G.main(["--backfill", "--no-layer"]) == 0
+    days = sorted(u.split("sewagespillsreport")[1][:8] for u in asked if "sewagespillsreport" in u)
+    assert days[0] == G.EPD_FIRST_POSTING.replace("-", "")
+
+
+def test_a_cause_category_is_not_taken_for_a_persons_name():
+    """EPD's cause "Blockage Other Debris" next to "Operator Error" read as a name with a job title; once the whole
+    history is in one set of records, it was removed from every row that gives it."""
+    from build import redact
+    recs = [{"event_id": f"ga-epd-spills:{i}", "source_id": "ga-epd-spills", "event_type": "sso",
+             "raw": {"row": {"cause": c}}} for i, c in enumerate(["Blockage Other Debris, Operator Error,",
+                                                                   "Blockage Other Debris,"])]
+    assert [r["raw"]["row"]["cause"] for r in redact.redact_events(recs)] == [
+        "Blockage Other Debris, Operator Error,", "Blockage Other Debris,"]
+
+
+def test_the_redactors_mark_on_a_saved_row_is_no_revision():
+    first = posting("2026-11-02", [row(CAUSE="Blockage, call Jane Doe the homeowner")])
+    recs, _ = G.build([first], [], None, [], {}, "2026-11-02T12:00:00Z")
+    recs[0]["raw"]["row"]["cause"] = "Blockage, call [name removed] the homeowner"      # as a larger run wrote it
+    again, stats = G.build([posting("2026-11-03", [row(CAUSE="Blockage, call Jane Doe the homeowner")])], recs,
+                           None, [], {}, "2026-11-03T12:00:00Z")
+    assert not stats["history"].get("revised") and "_revisions" not in again[0]["raw"]
+    changed, stats = G.build([posting("2026-11-03", [row(CAUSE="Broken pipe, call Jane Doe the homeowner")])], recs,
+                             None, [], {}, "2026-11-03T12:00:00Z")
+    assert stats["history"]["revised"] == 1                                          # a real change still counts
+    assert G.only_redacted("a [name removed] b", "a Jane Doe b") and not G.only_redacted("a [name removed] b", "a b c")
+    assert not G.only_redacted("plain", "other") and not G.only_redacted(None, "x")
+
+
+def test_an_epd_point_outside_georgia_is_named_and_not_used():
+    rows = [row(OVERFLOW_LOCATION="1 A St"), row(OVERFLOW_LOCATION="2 A St")]
+    ymd, url, content, lm = posting("2026-11-02", rows)
+    recs, _ = G.build([(ymd, url, content, lm)], [], None, [], {}, "2026-11-02T12:00:00Z")
+    rec = recs[0]
+    for lat, lon in (("33.75", "84.39"), ("-84.39", "33.75"), ("nan", "nan")):
+        r = G.to_record("x", {**rec["raw"]["row"], "latitude": lat, "longitude": lon}, "2026-11-02",
+                        {"file_url": url, "fetched_at": "t", "points": {}, "permits": {}})
+        assert r["lat"] is None and r["coord_source"] is None
+        assert ("_coords_not_used" in r["raw"]) == (lat != "nan")
+    r = G.to_record("x", {**rec["raw"]["row"], "latitude": "33.75", "longitude": "-84.39"}, "2026-11-02",
+                    {"file_url": url, "fetched_at": "t", "points": {}, "permits": {}})
+    assert (r["lat"], r["lon"], r["coord_source"]) == (33.75, -84.39, "source") and "_coords_not_used" not in r["raw"]
+    bad = {G.HEADER_ALIASES.get(k.lower(), k.lower()): v for k, v in row(OVERFLOW_LOCATION="4 A St").items()}
+    ctx = {"file_url": url, "fetched_at": "t", "points": {}, "permits": {}}
+    later, _ = G.apply_posting({}, [{**bad, "latitude": "33.75", "longitude": "84.39"}], "2026-11-02", ctx)
+    later, _ = G.apply_posting(later, [bad], "2026-11-03", ctx)                    # the next file has no point
+    (kept,) = later.values()
+    assert "2026-11-02" in kept["raw"]["_coords_not_used"] and kept["lat"] is None     # named on the later posting too
+    assert kept["started_at"] == "2026-10-29" and not kept["parse_error"]
+
+
+def test_a_begin_date_later_than_the_first_posting_is_kept_and_named():
+    late = row(OVERFLOW_LOCATION="3 Late St", SPILL_BEGIN_DATE="2026-11-20")
+    recs, _ = run([posting("2026-11-02", [late]), posting("2026-11-03", [late])])
+    r = recs[0]
+    assert r["started_at"] == "2026-11-20" and r["published_at"] == "2026-11-02"       # never moved
+    assert "2026-11-02" in r["raw"]["_begin_after_first_posting"]
+    ok, _ = run([posting("2026-11-02", [row()])])
+    assert "_begin_after_first_posting" not in ok[0]["raw"]
