@@ -242,6 +242,19 @@ def test_scan_blocklist_and_body_text(tmp_path, capsys):
     assert B.scan("NC", [body], require_blocklist=True, root=root) == 1
 
 
+def test_body_says_where_it_ran(monkeypatch):
+    s = {"state": "GA", "steps": ["waters"], "budget_s": 60, "max_requests": 5, "started": "2026-11-04T05:00:00Z",
+         "finished": "2026-11-04T05:01:00Z", "ok": True, "results": [], "counts": {}, "files": ["data/waters-nhd.json"]}
+    monkeypatch.delenv("GITHUB_ACTIONS", raising=False)
+    assert "Run by hand" in B.pr_body(s) and "restored from R2" not in B.pr_body(s)
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monkeypatch.setenv("GITHUB_REPOSITORY", "example/data")
+    monkeypatch.setenv("GITHUB_RUN_ID", "42")
+    body = B.pr_body(s)
+    assert "restored from R2" in body and "(https://github.com/example/data/actions/runs/42)" in body
+    assert body.startswith("## Water batch: Georgia (GA), 2026-11-04")
+
+
 def test_body_template_passes_the_scan(tmp_path):
     root = repo(tmp_path)
     s = {"state": "NC", "steps": ["waters", "ties"], "budget_s": 1500, "max_requests": 1000,

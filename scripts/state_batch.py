@@ -409,8 +409,10 @@ def pr_body(s: dict) -> str:
     out = [f"## {title(st, s['started'][:10])}", "",
            f"The per-state water batch (`.github/workflows/state-build.yml`{f', [run]({run_url})' if run_url else ''}): "
            f"steps `{' '.join(s['steps'])}`, budget {s['budget_s']} s, at most {s['max_requests']} requests, "
-           f"{s['started']} to {s['finished']}. The pipeline state and the raw caches were restored from R2 and the "
-           "caches saved back, so the next dispatch resumes where this one stopped.", "",
+           f"{s['started']} to {s['finished']}. "
+           + ("The pipeline state and the raw caches were restored from R2 and the caches saved back, so the next "
+              "dispatch resumes where this one stopped." if os.environ.get("GITHUB_ACTIONS") == "true" else
+              "Run by hand with `scripts/state_batch.py`, from that machine's caches."), "",
            "| Step | Result | Time |", "|---|---|---|"]
     for r in s["results"]:
         result = "done" if r["exit"] == 0 else f"failed (exit {r['exit']})"
