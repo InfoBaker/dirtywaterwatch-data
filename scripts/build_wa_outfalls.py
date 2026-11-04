@@ -15,8 +15,11 @@ stays in data/outfalls-us.json untouched and each row here names it in `supersed
     outfall is listed in `not_placed` with no row.
   - outfall_name: King County's label ("Ballard"); Seattle's file gives none, so "Seattle CSO outfall <DSN>" (EPA's
     names for Seattle are street addresses and are not copied).
-  - receiving_water_echo, and the water EPA's row was matched to, are copied from EPA's row when it has them; the
-    water ties for the rest come from python -m ingest.outfall_waters --state WA.
+  - EPA's receiving-water text is not copied: for these two permits it is a permit-level label, wrong for many
+    outfalls (King County's Henderson outfall on Lake Washington reads "Duwamish Waterway", its 8th Ave outfall on
+    the Duwamish "Lake Washington-Sammamish River"; review 2026-11-04). It stays in supersedes.receiving_water_echo
+    for reference. The operator's point decides the water: python -m ingest.outfall_waters --state WA ties each row
+    by its point and the permit's listed receiving waters, or gives the reason.
   - outfall_status "active (status file)": the operator reports the outfall's status; it is not a statement that
     the outfall overflows.
 """
@@ -37,8 +40,7 @@ RAW = ROOT / "data" / "raw" / "wa-kc-cso-status"
 URL = "https://your.kingcounty.gov/dnrp/library/wastewater/cso/img/CSO_metadata.CSV"
 PAGE = "https://kingcounty.gov/en/dept/dnrp/waste-services/wastewater-treatment/sewer-system-services/cso-status"
 PLACEHOLDER = (-120.0, 47.26)
-COPY = ("receiving_water_echo", "reach_id", "water_slug", "water_name", "water_kind", "distance_m", "match",
-        "water_match", "water_matched_by", "echo_url", "permit_status", "in_icis")
+COPY = ("echo_url", "permit_status", "in_icis")
 
 
 def epa_rows() -> dict[tuple[str, str], dict]:
@@ -78,7 +80,10 @@ def build(text: str, fetched_at: str) -> dict:
                "country": "US", "source": "wa-kc-cso-status-csv", "source_url": URL, "page_url": PAGE,
                "status_tag": r.get("CSO_TagName"), "fetched_at": fetched_at,
                "supersedes": ({"file": "data/outfalls-us.json", "npdes_permit": permit, "outfall": e.get("outfall"),
-                               "outfall_status": e.get("outfall_status")} if e else None)}
+                               "outfall_status": e.get("outfall_status"),
+                               "receiving_water_echo": e.get("receiving_water_echo"),
+                               "receiving_water_note": "EPA's text for this outfall, a permit-level label not used for "
+                                                       "the tie (the operator's point is)"} if e else None)}
         row.update({k: e.get(k) for k in COPY if e.get(k) is not None})
         rows.append(row)
     rows.sort(key=lambda x: (x["npdes_permit"], x["outfall"]))
