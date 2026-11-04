@@ -264,3 +264,59 @@ def test_a_backfill_cut_short_keeps_what_it_downloaded(tmp_path, monkeypatch):
     except ValueError:
         pass
     assert sorted(p.name for p in G.ARCHIVE.glob("*.xlsx")) == [p.name for p in OLD[:2]]
+
+
+# ---------------------------------------------------------------- what the older files showed
+
+def test_a_posting_date_that_disagrees_with_the_files_url_gives_way_to_the_url():
+    """The 2026-05-18 file says 2025-05-18; others misspell the label or leave the row out."""
+    ymd, url, content, lm = posting("2026-11-02", [row()])
+    recs, stats = run([("20261103", G.FILE_URL.format(ymd="20261103"), content, lm)])
+    assert recs[0]["published_at"] == "2026-11-02"                    # one day apart: the file's own date stands
+    recs, stats = run([("20271102", G.FILE_URL.format(ymd="20271102"), content, lm)])
+    assert recs[0]["published_at"] == "2027-11-02" and stats["posting_date_from_url"] == [
+        "20271102: the file says 2026-11-02; 2027-11-02 used"]
+    assert G.posting_date(None, "20260109", {}) == "2026-01-09" and G.posting_date("2026-01-09", "00000000", {}) == \
+        "2026-01-09"
+
+
+def test_a_row_whose_address_or_permit_was_corrected_is_a_duplicate_of_the_corrected_row():
+    first = [row(OVERFLOW_LOCATION="12 Test Road West Testville"),
+             row(OVERFLOW_LOCATION="5 Pine St", PERMIT_NUMBER="GAJ000001", SPILL_BEGIN_DATE="2026-10-28")]
+    fixed = [row(OVERFLOW_LOCATION="14 Test Road West Testville"),
+             row(OVERFLOW_LOCATION="5 Pine St", SPILL_BEGIN_DATE="2026-10-28")]
+    recs, stats = run([posting("2026-10-30", first), posting("2026-11-02", fixed)])
+    r = {x["source_record_id"]: x for x in recs}
+    old_addr, old_permit = r["ga0000001-20261029-12-test-rd-w-testville"], r["gaj000001-20261028-5-pine-st"]
+    assert old_addr["duplicate_of"] == "ga-epd-spills:ga0000001-20261029-14-test-rd-w-testville"
+    assert "address corrected" in old_addr["raw"]["_duplicate_basis"]
+    assert old_permit["duplicate_of"] == "ga-epd-spills:ga0000001-20261028-5-pine-st"
+    assert "permit corrected" in old_permit["raw"]["_duplicate_basis"]
+    assert stats["history"]["superseded_by_corrected_row"] == 2 and not stats["history"].get("withdrawn_within_window")
+
+
+def test_a_vanished_row_with_two_possible_corrections_stays_withdrawn():
+    recs, stats = run([posting("2026-10-30", [row(OVERFLOW_LOCATION="12 Test Rd")]),
+                       posting("2026-11-02", [row(OVERFLOW_LOCATION="1 A St"), row(OVERFLOW_LOCATION="2 A St")])])
+    gone = [x for x in recs if x["raw"].get("_missing_from_source_since")]
+    assert len(gone) == 1 and gone[0]["duplicate_of"] is None and stats["history"]["withdrawn_within_window"] == 1
+
+
+EXTRA = sorted((FIX / "extra").glob("sewagespillsreport*.xlsx"))
+
+
+def test_epds_own_point_and_end_date_in_some_older_files_are_kept_as_given():
+    """Ten files (2025-11-14 to 2026-07-14) add LATITUDE / LONGITUDE; the 2026-10-13 file adds SPILL_END_DATE (and the
+    2026-10-26 file BYPASS_ID): the point is EPD's own, the end date is kept as given but never made the record's end."""
+    ps = [(p.name[18:26], G.FILE_URL.format(ymd=p.name[18:26]), p.read_bytes(), None) for p in EXTRA]
+    recs, stats = rebuild(ps)
+    r = {x["outfall_name"].split()[0]: x for x in recs}
+    seven, eight = r["7"], r["8"]
+    assert (seven["lat"], seven["lon"], seven["coord_source"]) == (33.5, -84.4, "source")
+    assert seven["raw"]["_coords_kept_from_earlier_read"] is True                 # the 2025-11-18 file has no point
+    assert eight["lat"] is None and eight["coord_source"] is None                 # 0, 0 is not in Georgia
+    assert seven["raw"]["epd_spill_end_date"]["value"] == "2025-11-13"
+    assert seven["raw"]["epd_spill_end_date"]["posting"] == "2025-11-17"
+    assert seven["ended_at"] is None and seven["status"] == "unknown"
+    assert "_revisions" not in seven["raw"]                  # a column one posting adds or leaves out is no revision
+    assert stats["unread_columns"] == ["bypass_id"] and "12345" not in json.dumps(recs)
