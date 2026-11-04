@@ -65,7 +65,7 @@
 # Until `make setup` has run, the openboatlaunch venv next door is used; `make test` uses it too
 # while pipeline/.venv has no pytest (`make setup` installs it).
 
-.PHONY: setup ingest conditions rainfall rain-thresholds provisional-outfalls reaches fixtures build charts export refresh tally test
+.PHONY: setup ingest waters-nhd conditions rainfall rain-thresholds provisional-outfalls reaches fixtures build charts export refresh tally test
 
 VENV_PY := $(abspath pipeline/.venv/bin/python)
 OBL_PY := $(abspath ../openboatlaunch/pipeline/.venv/bin/python)
@@ -74,10 +74,15 @@ PY = cd pipeline && $(PYTHON)
 
 FIXTURES ?= 0
 FIXTURE_FLAG = $(if $(filter 1 yes true,$(FIXTURES)),--fixtures,) $(if $(filter 1 yes true,$(NHDES)),--include-nhdes,)
-INGEST_SKIP ?= outfalls waters_extra
+INGEST_SKIP ?= outfalls waters_extra waters_from_nhd   # waters_from_nhd runs as waters-nhd (INGEST_EXTRA), with a budget
 INGEST_PRE = nj_outfalls             # registries the feeds join (not feeds), run before them
 INGEST_SNAPSHOTS = nj_cso_likely     # snapshots read by build/ (not feeds), run after them
-INGEST_EXTRA = conditions rainfall   # not feeds (no events file), run after them
+INGEST_EXTRA = waters-nhd conditions rainfall   # not feeds (no events file), run after them
+# the NHD receiving-water build in the hourly run: new targets from this hour's reports, within a time budget (it stops
+# before a request, writes what it built merged into data/waters-nhd.json, and the next run resumes from data/raw's
+# cache). Without the budget, a runner with no data/raw cache asked NHDPlus for every target (about 7,000 requests)
+# and passed the workflow's 55-minute limit. Its own OSM (180 s) and other-places (120 s) budgets come on top.
+WATERS_NHD_BUDGET_S ?= 300
 INGEST_MODULES = $(sort $(basename $(notdir $(shell grep -l '__name__ == .__main__.' pipeline/ingest/*.py 2>/dev/null | xargs grep -L 'not a feed' 2>/dev/null))))
 
 setup:
@@ -92,6 +97,9 @@ ingest:
 	  echo "== $$t"; \
 	  $(MAKE) --no-print-directory $$t || echo "!! $$t failed (exit $$?)"; \
 	done
+
+waters-nhd:         ## receiving-water records from NHDPlus for new targets (ingest/waters_from_nhd.py), budgeted
+	$(PY) -m ingest.waters_from_nhd --budget-s $(WATERS_NHD_BUDGET_S)
 
 conditions:
 	$(PY) -m ingest.gauges

@@ -142,8 +142,12 @@ NOTES = {
         "so the outfall stays on the Potomac (research/dc/report.md section 4, contradiction 4)"),
 }
 EXTRA_WATER_FILES = {"DC": os.path.join(ROOT, "data", "waters-dc.json")}   # records with inline geometry
-STATES_ZIP = os.environ.get("DWW_STATES_ZIP") or os.path.join(os.path.dirname(ROOT), "openboatlaunch", "data", "raw",
-                                                              "cb_2023_us_state_500k.zip")
+# the Census state outlines: DWW_STATES_ZIP, else data/raw/census/ (where ingest.waters_extra.states_zip() downloads the
+# Census Bureau's file), else the sibling openboatlaunch copy
+STATES_ZIP = os.environ.get("DWW_STATES_ZIP") or next(
+    (p for p in (os.path.join(ROOT, "data", "raw", "census", "cb_2023_us_state_500k.zip"),
+                 os.path.join(os.path.dirname(ROOT), "openboatlaunch", "data", "raw", "cb_2023_us_state_500k.zip"))
+     if os.path.isfile(p)), os.path.join(ROOT, "data", "raw", "census", "cb_2023_us_state_500k.zip"))
 
 
 def same_kind(a, b):
