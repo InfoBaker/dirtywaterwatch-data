@@ -52,9 +52,24 @@ every outfall of the state to its record or a stated reason (`ingest.outfall_wat
 so the next dispatch resumes where this one stopped, and opens a pull request (branch `batch/<st>-<date>`) with the
 changed registry files and the counts, for a person to review. It never runs beside the hourly refresh: it shares
 its queue, which holds one waiting run, so dispatch one batch at a time and not while a refresh is waiting.
-`scripts/state_batch.py` is the same batch by hand (`plan` prints the commands without running them). The registry
-match (`registry`, `scripts/match_outfalls.py`) needs EPA's CSO inventory and an openboatlaunch snapshot and runs
-where those are; the reach traces have no per-state run yet.
+`scripts/state_batch.py` is the same batch by hand (`plan` prints the commands without running them).
+
+openboatlaunch's water records and their outlines come from the private state object `state/obl-water.tar.gz`
+(its `out/water` and `out/meta.json`), restored read only into `../openboatlaunch/out` beside the checkout, where the
+pipeline reads them, by both workflows; neither ever saves it. With it in R2 no step needs the openboatlaunch checkout
+or OpenStreetMap from a particular machine: the `extract` step writes a state's `data/waters-<st>.json` from it
+(`ingest.obl_waters`, dated from the snapshot's `meta.json`), the `waters`, `osm` and `ties` steps measure against
+its outlines, and the `osm` step gives OpenStreetMap's Overpass pass up to 20 minutes (`osm_budget`, with `budget_s` at most 3,780 s
+together; GitHub's runners reach Overpass), resumed by the next dispatch. A new openboatlaunch snapshot is uploaded the same way it was
+first (on a machine with the openboatlaunch checkout, from the site repository's folder so `worker/` has wrangler;
+wrangler uploads up to 300 MiB, and the batch refuses an extract without `meta.json`'s date):
+
+    COPYFILE_DISABLE=1 tar -czf /tmp/obl-water.tar.gz -C ../openboatlaunch/out water meta.json && (cd worker && npx wrangler r2 object put dirtywaterwatch-data/state/obl-water.tar.gz --file /tmp/obl-water.tar.gz --remote)
+
+For example `-f state=MI -f steps="extract obl-check waters ties"` for a state with no extract yet, and
+`-f state=FL -f steps="osm ties"` for the names NHDPlus does not carry. The registry match (`registry`,
+`scripts/match_outfalls.py`) needs EPA's CSO inventory as well and runs where that is; the reach traces have no
+per-state run yet.
 
 ## Using the data
 

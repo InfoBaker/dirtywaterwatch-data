@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """What the workflows keep in R2 between runs (bucket dirtywaterwatch-data, prefix state/), and the tarballs of it.
 
-Two state objects:
+Three state objects:
   state/build.tar.gz       data/build whole: the ingesters' history and snapshot files, the reach traces
                            (data/build/reaches/, build/reaches.py: its NLDI and NHDPlus answers are kept there, 30
                            days), the provisional-outfall and geocoder caches, the private name blocklist. Made with
@@ -11,6 +11,16 @@ Two state objects:
                            no step reads back and that can carry personal fields; it stays on the runner and is
                            never saved. The git-ignored research/*/raw inputs some ingesters read are hand-gathered
                            files, not answers, and are not in it either.
+  state/obl-water.tar.gz   openboatlaunch's water records with their outlines (its out/water/<slug>.json, one per
+                           water per state, and out/meta.json with the snapshot date), packed once on a machine with
+                           the openboatlaunch checkout: tar -czf obl-water.tar.gz -C <openboatlaunch>/out water
+                           meta.json (top-level entries water/<slug>.json and meta.json). Restored read only by both
+                           workflows into ../openboatlaunch/out (OBL_OUT: the sibling folder the pipeline reads by
+                           default: build/status.py OBL_WATER_DIR for the outlines that ingest.outfall_waters and
+                           ingest.waters_from_nhd measure ties and duplicates against, ingest.obl_waters --from for a
+                           state's extract, whose snapshot date it takes from out/meta.json); never saved by them.
+                           Missing: a warning (the outlines are absent, as before). There but unreadable: the batch
+                           stops, the hourly refresh warns and goes on.
 
 Restore order: build.tar.gz, then raw-cache.tar.gz (the NY workbook entry is named by a data/build file). Save: both
 only after a run that ended well (a cancelled or failed refresh never overwrites the saved state). A state object
@@ -27,6 +37,14 @@ that cannot be read is replaced by the next good run's.
                                                             absolute or '..' paths, AppleDouble '._*' files and
                                                             anything else are skipped and counted (a tarball made
                                                             elsewhere, or by an older list, cannot widen the set)
+    python3 -I scripts/state_paths.py unpack-obl FILE [--to DIR]
+                                                            restore state/obl-water.tar.gz into DIR (default
+                                                            ../openboatlaunch/out): only water/<slug>.json and
+                                                            meta.json, regular files, are written; the gzip is read to
+                                                            its end and the member list checked first, so a damaged
+                                                            object, or one with no water record, writes nothing (exit
+                                                            1); a record over 256 MB is skipped, an object over 8 GB
+                                                            unpacked refused; never into a folder in a git checkout
     python3 -I scripts/state_paths.py check-size FILE [--max-mb N] [--hard-mb N]
                                                             exit 1 when a tarball is over the cap; with --hard-mb,
                                                             over the cap is a warning and only over N fails
@@ -56,6 +74,7 @@ import subprocess
 import sys
 import tarfile
 import time
+import zlib
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
@@ -68,6 +87,18 @@ STATE_KEY = re.compile(r"state/[a-z0-9][a-z0-9._-]*\.tar\.gz")
 # wrangler's answer for a key that is not there ("The specified key does not exist."): a first run, not a failure
 MISSING = re.compile(r"specified key does not exist|NoSuchKey", re.I)
 FETCHED, ABSENT, FAILED = 0, 3, 1
+# openboatlaunch's water records (state/obl-water.tar.gz) and where the pipeline reads them: <repo>/../openboatlaunch/out
+OBL_KEY = "state/obl-water.tar.gz"
+OBL_OUT = ROOT.parent / "openboatlaunch" / "out"
+OBL_RECORD = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]*(\.[A-Za-z0-9_-]+)*\.json")
+# a water record's outline is a few MB at most (a Great Lake's): a member over OBL_MEMBER_MAX is skipped and counted,
+# and an object that unpacks to more than OBL_TOTAL_MAX in all is refused (a damaged or wrong object, never a snapshot)
+OBL_MEMBER_MAX = 256 * 1024 * 1024
+OBL_TOTAL_MAX = 8 * 1024 * 1024 * 1024
+
+
+class Unreadable(Exception):
+    """A state object that is there but cannot be restored; the message says why (never its contents)."""
 
 
 @dataclass(frozen=True)
@@ -287,6 +318,81 @@ def unpack(src: Path, root: Path = ROOT) -> dict:
     return counts
 
 
+def obl_allowed(name: str) -> bool:
+    """A member of state/obl-water.tar.gz that may be restored: water/<slug>.json (one level, no AppleDouble '._'),
+    meta.json, or the water directory itself; relative, no '..'."""
+    if not name or name.startswith("/") or "\\" in name:
+        return False
+    parts = [x for x in PurePosixPath(name).parts if x != "."]
+    if any(x in ("..", "") for x in parts):
+        return False
+    if parts in (["water"], ["meta.json"]):
+        return True
+    return len(parts) == 2 and parts[0] == "water" and bool(OBL_RECORD.fullmatch(parts[1]))
+
+
+def in_git_checkout(dest: Path) -> Path | None:
+    """The folder holding .git that dest is in or under (dest itself or any folder above it), else None."""
+    d = Path(dest).resolve()
+    for p in (d, *d.parents):
+        if (p / ".git").exists():
+            return p
+    return None
+
+
+def unpack_obl(src: Path, dest: Path = OBL_OUT, member_max: int = OBL_MEMBER_MAX,
+               total_max: int = OBL_TOTAL_MAX) -> dict:
+    """Restore openboatlaunch's water records into dest (<openboatlaunch>/out). Raises Unreadable, having written
+    nothing, when the gzip or the tar cannot be read to its end, unpacks to more than total_max, or holds no water
+    record, and when dest is in a git checkout (a real openboatlaunch project, or this one, is never written over).
+    Only the folder water may be a directory: a directory named like a record or meta.json is skipped, and so is a
+    record over member_max."""
+    dest = Path(dest)
+    repo = in_git_checkout(dest)
+    if repo is not None:
+        raise Unreadable(f"{dest} is in a git checkout ({repo.name}): not written over")
+    counts = {"records": 0, "meta": 0, "skipped_not_listed": 0, "skipped_not_regular": 0, "skipped_too_large": 0}
+    try:
+        with open(src, "rb") as fh:
+            if fh.read(2) != b"\x1f\x8b":
+                raise Unreadable(f"{Path(src).name} is not a gzip file")
+        with gzip.open(src, "rb") as g:
+            total = 0
+            while chunk := g.read(1 << 20):
+                total += len(chunk)
+                if total > total_max:
+                    raise Unreadable(f"{Path(src).name} unpacks to more than {mb(total_max)}")
+        with tarfile.open(src, "r:gz") as tf:
+            members = []
+            for m in tf.getmembers():
+                if not obl_allowed(m.name):
+                    counts["skipped_not_listed"] += 1
+                    continue
+                is_top_dir = [x for x in PurePosixPath(m.name).parts if x != "."] == ["water"]
+                if not ((m.isfile() and not is_top_dir) or (m.isdir() and is_top_dir)):
+                    counts["skipped_not_regular"] += 1
+                    continue
+                if m.isfile() and m.size > member_max:
+                    counts["skipped_too_large"] += 1
+                    continue
+                members.append(m)
+                if m.isfile():
+                    top = [x for x in PurePosixPath(m.name).parts if x != "."][0]
+                    counts["meta" if top == "meta.json" else "records"] += 1
+            if not counts["records"]:
+                raise Unreadable(f"{Path(src).name} holds no water/<slug>.json record")
+            dest.mkdir(parents=True, exist_ok=True)
+            tf.extractall(dest, members=members, filter="data")
+    except Unreadable:
+        raise
+    except (OSError, EOFError, tarfile.TarError, zlib.error) as ex:
+        raise Unreadable(f"{Path(src).name}: {type(ex).__name__}") from None
+    say(f"restored {counts['records']} openboatlaunch water record(s) into {dest}"
+        + ("" if counts["meta"] else "; no meta.json, so the snapshot date is unknown (an extract then refuses to run)")
+        + "".join(f", {v} {k.replace('_', ' ')}" for k, v in counts.items() if k.startswith("skipped") and v))
+    return counts
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -299,6 +405,9 @@ def main(argv=None) -> int:
             s.add_argument("--hard-mb", type=float, help="over the cap is a warning; only over this fails")
     s = sub.add_parser("unpack")
     s.add_argument("file")
+    s = sub.add_parser("unpack-obl")
+    s.add_argument("file")
+    s.add_argument("--to", default=str(OBL_OUT), help="openboatlaunch's out folder (default ../openboatlaunch/out)")
     s = sub.add_parser("fetch")
     s.add_argument("key")
     s.add_argument("file")
@@ -316,6 +425,13 @@ def main(argv=None) -> int:
         except ValueError as ex:
             print(f"::error::{ex}", flush=True)
             return 2
+    if a.cmd == "unpack-obl":
+        try:
+            unpack_obl(Path(a.file), Path(a.to))
+        except Unreadable as ex:
+            say(f"the openboatlaunch object could not be read ({ex}); nothing was restored from it")
+            return 1
+        return 0
     unpack(Path(a.file))
     return 0
 
