@@ -231,3 +231,47 @@ def test_operator_names_with_a_facility_abbreviation_or_business_word_are_kept()
                  "Pat Example Campground", "Pat Example Nursing Home", "Pat Example & Sons"):
         r = common.event(source_id="x-test", source_record_id="4", discharger_name=name, discharger_id="op-1")
         assert r["discharger_name"] == name and r["discharger_id"] == "op-1", name
+
+
+# ---------------------------------------------------------------- name review 2026-11-04 (Florida)
+
+def test_a_phone_number_typed_without_separators_after_a_contact_word_is_removed():
+    from common import scrub_text
+    assert scrub_text("my contact is 8505550100 .. some treatment") == "my contact is [phone removed] .. some treatment"
+    assert scrub_text("CONTACT: 8635550101 AMOUNT: 15") == "CONTACT: [phone removed] AMOUNT: 15"
+    for keep in ("Job Order #: 1003691899 Location", "MANHOLES 0050030080 - 0050030081", "Incident 2025123456 closed",
+                 "30.412345, -86.512345 1234 Example Rd"):        # an id, a count, a coordinate and a house number
+        assert scrub_text(keep) == keep, keep
+
+
+def test_a_house_number_tied_to_a_residence_goes_and_the_street_stays():
+    from common import scrub_text
+    cases = {
+        "we received a call from a home owner at 1619 Placeholder Ave regarding": "a home owner at [house number removed] Placeholder Ave",
+        "Resident @ 813 Example reported a leak": "Resident @ [house number removed] Example reported",
+        "sewage forced its way into the houses at, 6501, 6513, and 6527 Example Dr. At 1830": "the houses at, [house number removed] Example Dr. At 1830",
+        "backed up into two homes at 105 and 107 Example Circle": "two homes at [house number removed] Example Circle",
+        "the yard of a residence (1201 Example Harbor Dr). An": "a residence ([house number removed] Example Harbor Dr)",
+        "a homeowner's sewer line at 501 Example Ave. They": "a homeowner's sewer line at [house number removed] Example Ave",
+        "At 255 Example Drive NE, a homeowner unscrewed the cap": "At [house number removed] Example Drive NE, a homeowner",
+        "cleanouts at 808 NW 39th Dr and 4002 NW 8th Ave. The customer at 808 NW 39th Dr reported":
+            "cleanouts at [house number removed] NW 39th Dr and 4002 NW 8th Ave. The customer at [house number removed] NW 39th Dr",
+    }
+    for text, want in cases.items():
+        got = scrub_text(text)
+        assert want in got, (text, got)
+    for keep in ("a neighbor reported an overflowing manhole at 700 Example Place at 8:12 AM",
+                 "Customer noticed it at 2100 on 05/08/2022, called customer service at 1100 on 05/09/2022",
+                 "a customer notified the utility that LS 2 located at 2213 Example Trail was in alarm",
+                 "the home at 3 pm"):
+        assert scrub_text(keep) == keep, keep
+
+
+def test_every_house_number_of_a_text_can_be_stripped_but_not_a_route_number():
+    from common import strip_house_numbers
+    assert strip_house_numbers("3 houses down from 5073 Example Ave.") == "3 houses down from [house number removed] Example Ave."
+    assert strip_house_numbers("the buildings at 226, 224 and 220 16th Ave N, Town") == \
+        "the buildings at [house number removed] 16th Ave N, Town"
+    assert strip_house_numbers("Location: 1234 N. 301 Hwy, Tampa") == "Location: [house number removed] N. 301 Hwy, Tampa"
+    for keep in ("4745 US 98 N", "spill of 3000 gallons at 12 pm", "2,500 gallons"):
+        assert strip_house_numbers(keep) == keep, keep
