@@ -298,6 +298,8 @@ RULES = {
     "caution": ("yellow", "Within the site's caution window after the discharge ended (data/rules.json)"),
     "no_end": ("yellow", "Discharge record with no status and no reported end"),
     "day_start_caution": ("yellow", "Report dated to the day only, with no end: caution from the start of that day"),
+    "text_caution": ("yellow", "Water named in the notice's text; the notice's form said no water was reached: "
+                               "the site's caution, not an advisory"),
     "end_never_reported": ("grey", "Unresolved: no end reported (off the map after 30 days)"),
     "not_reconfirmed": ("grey", "Advisory not re-confirmed by the source for 14 days (sets no colour)"),
     "rain_advisory": ("yellow", "Precautionary rainfall advisory"),
@@ -1888,6 +1890,15 @@ class Resolver:
         return [], None
 
     def resolve(self, ev: dict) -> dict:
+        out = self._resolve(ev)
+        if text_over_flag(ev):
+            # the water comes from the notice's text against its form's flag: the placement says so (TEXT_OVER_FLAG)
+            basis = str((ev.get("raw") or {}).get("_reached_water_basis") or TEXT_OVER_FLAG_NOTE)
+            out["text_over_flag"] = basis
+            out["note"] = "; ".join(x for x in (basis, out.get("note")) if x)
+        return out
+
+    def _resolve(self, ev: dict) -> dict:
         given = list(dict.fromkeys(self.canon(s) for s in ev.get("water_slugs") or []))
         known = [s for s in given if s in self.waters]
         unknown = [s for s in given if s not in self.waters]
@@ -2065,6 +2076,19 @@ def _iv(ev, start, end, rule, red=None, yellow=None):
             "started_at": ev.get("started_at"), "ended_at": ev.get("ended_at")}
 
 
+# A report placed on the water its text names although its form's flag said no water was reached (raw.reached_water
+# "text"; the Florida DEP PNP notices, owner 2026-11-04: the text wins, err on the side of safety). Its colour is the
+# site's caution only: what would be red (in progress, ongoing, an authority's window) is yellow, rule text_caution,
+# since no authority advice applies to a water the authority's form says was not reached.
+TEXT_OVER_FLAG = "text"
+TEXT_OVER_FLAG_NOTE = "the notice's text names the water; the form's flag said no water was reached"
+
+
+def text_over_flag(ev: dict) -> bool:
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    return raw.get("reached_water") == TEXT_OVER_FLAG
+
+
 def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None = None,
                     rules: dict | None = None) -> list[dict]:
     """The colour intervals one event sets on a water (its state, and the water record for the
@@ -2080,6 +2104,17 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
                 "days_after_fetch": end_limit_days(rules), "rationale": r.get("rationale"), "source": "data/rules.json"}
         for iv in out:
             iv["end_not_used"] = note
+    if out and text_over_flag(ev):
+        basis = str((ev.get("raw") or {}).get("_reached_water_basis") or TEXT_OVER_FLAG_NOTE)
+        for iv in out:
+            iv["text_over_flag"] = basis
+            if iv["color"] == "red":
+                was = iv["rule"]
+                iv["color"], iv["label"], iv["rule"] = RULES["text_caution"][0], RULES["text_caution"][1], "text_caution"
+                iv["window_hours"] = iv["window_basis"] = None      # no authority window applies
+                iv["rule_applied"] = {"rule": "placement.text_over_flag", "replaces": was, "hours": None,
+                                      "rationale": f"{basis}: placed on the water under the site's caution, never red "
+                                                   "(no authority window applies)", "source": ev.get("source_url")}
     return out
 
 
@@ -2571,6 +2606,8 @@ def short_reason(iv: dict, ev: dict | None) -> str:
     text = _short_reason(iv, ev)
     if iv.get("end_not_used"):
         text += " · published end not used"
+    if iv.get("text_over_flag"):
+        text += " · water named in the notice's text; its form said no water was reached"
     return text
 
 
@@ -2607,6 +2644,11 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
         return f"{et} ended {endtxt}; caution to {int(h)} h after the end{who}{at}" if h else f"{et} ended {endtxt}{who}{at}"
     if rule == "no_end":
         return f"{et} with no reported end{who}{at}"
+    if rule == "text_caution":
+        was = (iv.get("rule_applied") or {}).get("replaces")
+        what = {"ongoing": f"{et} ongoing", "discharge": f"{et} in progress",
+                "authority_window": f"{et} ended {endtxt}"}.get(was, et)
+        return f"{what}; site caution{who}{at}"
     if rule == "day_start_caution":
         h = (iv.get("rule_applied") or {}).get("hours")
         return (f"{et} reported to the day only, with no end; caution to {int(h)} h from the start of that day{who}{at}"
@@ -3030,6 +3072,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             "red_rule": iv.get("red_rule"), "yellow_rule": iv.get("yellow_rule"),
                             "rule_applied": iv.get("rule_applied"), "placement": iv.get("placement"),
                             **({"end_not_used": iv["end_not_used"]} if iv.get("end_not_used") else {}),
+                            # the water comes from the notice's text against its form's flag (TEXT_OVER_FLAG)
+                            **({"text_over_flag": iv["text_over_flag"]} if iv.get("text_over_flag") else {}),
                             "reach": iv.get("reach"), "category": iv.get("category") or "sewage",
                             "ended_at": iv["ended_at"],
                             # rain_likely: the radar total, the threshold and its basis (build/rain_likely.py)
