@@ -99,8 +99,9 @@ INGEST_EXTRA = waters-nhd conditions rainfall   # not feeds (no events file), ru
 # cache). Without the budget, a runner with no data/raw cache asked NHDPlus for every target (about 7,000 requests)
 # and passed the workflow's 55-minute limit. --wall-s bounds the whole target, loading and writing included (run
 # 41788856038 took 11 minutes with --budget-s 300: the OSM fallback, its mirror check and the placement check over every
-# event came on top): NHDPlus gets WATERS_NHD_BUDGET_S, the other places and the OSM fallback what is left of the wall
-# less 60 s kept for the hand records, the placement check and the write. The last line gives the seconds per phase.
+# event came on top): NHDPlus and the other places of a name share WATERS_NHD_BUDGET_S of requests, the OSM fallback
+# (its mirror check included) gets what is left of the wall less 60 s kept for the hand records, the placement check
+# and the write. The last line gives the seconds per phase.
 WATERS_NHD_BUDGET_S ?= 150
 WATERS_NHD_WALL_S ?= 300
 INGEST_MODULES = $(sort $(basename $(notdir $(shell grep -l '__name__ == .__main__.' pipeline/ingest/*.py 2>/dev/null | xargs grep -L 'not a feed' 2>/dev/null))))

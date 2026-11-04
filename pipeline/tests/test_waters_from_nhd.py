@@ -593,3 +593,15 @@ def test_the_last_line_gives_the_seconds_of_each_phase_and_why_the_run_stopped()
                          "--budget-s used")
     assert line.startswith("waters-nhd: 287 s of --wall-s 300 (60 s kept for the end): loading the targets 42 s, NHDPlus 150 s")
     assert line.endswith("stopped early: --budget-s used; the next run resumes from the cache")
+
+
+def test_no_mirror_check_when_every_queued_name_is_answered_from_the_cache(monkeypatch, tmp_path):
+    """The hourly run's OSM share is short: the mirror check (up to half of it) is made only when a query will be sent."""
+    fake, row, asked, mirrors = _osm_fake(monkeypatch, 180.0, net_end=1060.0, clock=[1000.0] + [1001.0] * 20)
+    monkeypatch.setattr(N.WX, "is_cached", lambda *a_, **k: True)
+    monkeypatch.setattr(N.WX, "CACHE_DIR", tmp_path)
+    (tmp_path / "k-Mill Brook.json").write_text('{"elements": []}')
+    monkeypatch.setattr(N, "osm_record", lambda *a_, **k: (None, "no OSM feature of that name near the points"))
+    N.Run.osm_state_pass(fake)
+    assert mirrors == [] and asked == []
+    assert "no OSM feature" in row["reason"]
