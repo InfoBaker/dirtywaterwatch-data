@@ -24,7 +24,8 @@ enabled: true
 role: "events"
 event_types: ["cso"]
 states: ["WA"]
-registry_ids: ["wa-kc-cso-status-csv", "pa-king-county-cso-status"]
+registry_ids: ["wa-kc-cso-status-csv"]
+# The same feed is described by the earlier community research row pa-king-county-cso-status (research/community).
 access: ["csv", "arcgis", "html"]
 access_detail: "https://your.kingcounty.gov/dnrp/library/wastewater/cso/img/CSO_metadata.CSV (no auth; the 'CSO Overflow Status' layer of web map 6de3cae45d914326a32ed120b5ace4f8 on the King County CSO status page). Fields CSO_TagName, X_COORD, Y_COORD, Name, DSN, DateTime, Status."
 machine_readable: true
