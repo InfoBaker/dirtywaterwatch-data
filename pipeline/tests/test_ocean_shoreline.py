@@ -240,3 +240,71 @@ def test_the_names_pass_reads_an_ocean_with_a_record_as_that_water():
     assert not skipped and [s for _, s in done] == [["gulf-of-america-fl"]]
     _, _, skipped = N.collect_name_targets("VA", [{"name": "Atlantic Ocean", "reports": 1, "points": []}], r, waters)
     assert list(skipped.values()) == [N.OPEN_SEA]
+
+
+# ---------------------------------------------------------------- a bay that opens wide to the sea (review 2026-11-04 P2-1)
+
+# a bay 6.6 km wide at its mouth and 1.8 km deep, cut into the barrier island north of the point: wider than the opening
+# closes, so the walk follows its shore; the lagoon behind the island (190 m of land from the bay's inner shore, more
+# than ALONG_TOL_M) is not run along
+WIDE_BAY = box(-80.1183, 26.20, -80.10, 26.26)
+
+
+def _wide(monkeypatch, with_outline=True):
+    land = {"FL": FL_LAND.difference(WIDE_BAY)}
+    waters = copy.deepcopy(WATERS)
+    waters["wide-bay-fl"] = {"slug": "wide-bay-fl", "name": "Wide Bay", "kind": "bay", "state": "FL", "towns": [],
+                             "bbox": list(WIDE_BAY.bounds), **({"geometry": mapping(WIDE_BAY)} if with_outline else {})}
+    waters["indian-river-lagoon-fl"]["geometry"] = mapping(LAGOON)
+    waters["indian-river-lagoon-fl"]["bbox"] = list(LAGOON.bounds)
+    c = {"key": "pt-w", "permit": None, "outfall": None, "water_slug": "atlantic-ocean-fl", "lat": 26.1, "lon": -80.08,
+         "sources": ["event-point"], "state": "FL", "model": "shoreline"}
+    return R.shoreline_record(c, waters, SHORE, land), waters
+
+
+def test_an_ocean_stretch_that_follows_a_wide_bay_is_on_that_bay_too_and_never_on_the_lagoon(monkeypatch):
+    r, _ = _wide(monkeypatch)
+    assert r["error"] is None
+    north = max(r["segments"], key=lambda s: max(y for _, y in s["coords"]))
+    assert min(x for x, _ in north["coords"]) < -80.115           # the walk turned into the bay (its mouth is 6.6 km)
+    assert r["waters"][0] == "atlantic-ocean-fl" and "wide-bay-fl" in r["waters"]
+    assert "indian-river-lagoon-fl" not in r["waters"]           # behind the barrier island: not run along
+    plain = _stretch()                                           # the plain coast: the ocean's records only
+    assert "indian-river-lagoon-fl" not in plain["waters"] and set(plain["waters"]) <= {"atlantic-ocean-fl",
+                                                                                         "north-atlantic-ocean-fl"}
+
+
+def test_a_bay_with_no_outline_here_is_not_guessed(monkeypatch):
+    r, _ = _wide(monkeypatch, with_outline=False)
+    assert "wide-bay-fl" not in r["waters"]
+
+
+def test_the_status_shows_the_ocean_report_on_the_bay_its_stretch_runs_along(monkeypatch):
+    import hashlib
+    r, waters = _wide(monkeypatch)
+    key = "pt-" + hashlib.sha1(b"fl-test:3").hexdigest()[:12]
+    r = {**r, "key": key, "event_ids": ["fl-test:3"]}
+    tmp = Path(tempfile.mkdtemp())
+    (tmp / "fl-test.json").write_text(json.dumps({"source_id": "fl-test", "ok": True, "last_ok_at": NOW.isoformat(),
+                                                  "meta": {}, "records": [_ev("3", waterbody_text="Atlantic Ocean",
+                                                                              lat=26.1, lon=-80.08)]}))
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    saved = S._STATES
+    S._STATES = {"FL"}
+    try:
+        st, _ = S.build(now=NOW, write=False, events_dir=tmp, waters=waters, outfalls=[], registry={},
+                        reaches={key: r}, flows=({}, {}), discharger_towns={}, discharger_waters={},
+                        rules={**RULES, "live_states": ["FL"]})
+    finally:
+        S._STATES = saved
+        S._SHORE_REACHES.clear()
+    bay = st["waters"]["wide-bay-fl"]
+    assert bay["events"] == ["fl-test:3"] and bay["status"] in ("red", "yellow") and bay["fill"] is False
+    assert "indian-river-lagoon-fl" not in st["waters"] or not st["waters"]["indian-river-lagoon-fl"]["events"]
+
+
+def test_the_rationale_says_a_wide_bay_is_followed_and_shown_on_that_water():
+    sh = RULES["reach"]["shoreline"]
+    assert "narrower than about 2 kilometres" in sh["ocean_rationale"]
+    assert "opens more widely" in sh["ocean_rationale"] and "shown on that water" in sh["ocean_rationale"]
