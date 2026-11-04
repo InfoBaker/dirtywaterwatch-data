@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1223 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1251 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -29,7 +29,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ga | 7 | 0 | 4 | 1 | 0 | 12 |
 | fl | 5 | 0 | 5 | 1 | 0 | 11 |
 | mi | 6 | 2 | 5 | 2 | 0 | 15 |
-| **all** | **429** | **219** | **338** | **176** | **61** | **1223** |
+| il | 10 | 1 | 12 | 3 | 2 | 28 |
+| **all** | **439** | **220** | **350** | **179** | **63** | **1251** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1348,3 +1349,36 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `mi-watershed-groups` | Michigan watershed groups and Swim Guide affiliates (Detroit Riverkeeper, Huron River Watershed Council, others) | watch | inferred | monitoring | Not searched in this round (time-boxed). |
 | `mi-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Michigan | rejected | inferred | events | 0 Michigan rows on 2026-11-03; Michigan collects through its own MiEnviro system. |
 | `mi-egle-peas` | EGLE Pollution Emergency Alerting System (PEAS) hotline | rejected | inferred | events | Inbound reporting line, no public output found. |
+
+## il: Illinois (28)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `il-epa-cso-inventory` | EPA National CSO Inventory, Illinois rows (federal seed) | used | fetched | outfalls | Baseline outfall list; MWRD CSO Points is better for Cook County. |
+| `il-epa-erule-phase2-plan` | Illinois EPA NPDES eRule Phase 2 Implementation Plan (December 2016) | used | search_only | law | Explains why Illinois permittees appear in EPA's SOBE tables: Illinois uses EPA's NeT-SewerOverflow. |
+| `il-epa-gl-cso-permit-list` | EPA "Combined Sewer Overflows in the Great Lakes Basin: Illinois" permit list | used | fetched | permits | Defines which Illinois CSO permits carry the 4-hour notice duty. |
+| `il-epa-sobe-events` | EPA NPDES sewer overflow and bypass event reports (eRule Phase 2, "SOBE"), Illinois permits | used | fetched | events | The only statewide, machine-readable, event-level overflow table for Illinois. Every row has coordinates; 95% have a volume. Types: SSO 1,256, CSO 341, BYP 90. It misses the big Cook County CSO systems: no CSO-typed rows from Chicago (IL0045012), MWRD Stickney/O'Brien/Calumet, or the 37 ILM580xxx suburban CSO general permits. Only 17 of the 120 CSO permits have a CSO-typed row. |
+| `il-idph-beachguard` | Illinois BeachGuard System (IDPH): advisories and closures, E. coli results | used | fetched | advisories | Read by pipeline/ingest/il_idph_beachguard.py: the RSS list of advisories in effect plus each listed beach's page for its start date, issuer and point; lifted when the list stops showing it. |
+| `il-law-40cfr122-38` | 40 CFR 122.38 Great Lakes Basin CSO public notification (applies to the Chicago-area CSO permits) | used | fetched | law | EPA's Great Lakes CSO page for Illinois lists 42 NPDES CSO permits, "All 42 of these NPDES CSO permits are in the Chicago metropolitan area" (Chicago, MWRD x4, and the TARP suburbs). Downstate CSOs (Peoria, Pekin, Galesburg ...) drain to the Mississippi and are not covered. |
+| `il-law-iepa-sso-form` | Illinois EPA sanitary sewer overflow notification form and regional-office 24-hour rule | used | search_only | law | Regulator-only report; no Illinois statute or rule requiring public notice of an SSO was found. |
+| `il-mwrd-cso-points` | MWRD CSO Points (outfall layer, Cook County) | used | fetched | outfalls | Better than the EPA inventory for Cook County: 441 outfalls from 51 owners (Chicago 214, MWRD 51, Evanston 16, Maywood 13), 273 monitored and 168 unmonitored, with the TARP drop-shaft key that joins the synopsis report. |
+| `il-mwrd-lake-michigan-reversals` | MWRD Lake Michigan reversals table (1985 to present) | used | search_only | events | Read by pipeline/ingest/il_mwrd_lake_reversals.py: 36 reversals since 1985 (57 records, one per structure, days only, million gallons); the last on 2023-07-02/03. |
+| `il-mwrd-possible-cso-events-layer` | MWRD "Possible CSO Events" live map layer | used | fetched | events | Read hourly by pipeline/ingest/il_mwrd_possible_cso.py: each outfall on the map becomes an unconfirmed CSO record for that day (start the layer's edit time, no end invented); empty when no activity is shown. |
+| `il-iepa-hab-program` | Illinois EPA Harmful Algal Bloom program and Algal Bloom Dashboard | candidate | search_only | advisories | Statewide bloom reports; 8 ug/L microcystin recreation threshold per press; dashboard endpoint still to find. |
+| `il-bloomington-normal-cso-notice` | Bloomington-Normal Water Reclamation District CSO public notification | watch | search_only | events | Downstate CSO permittee (IL0027731, 6 open outfalls) with a stated notice practice; channel not traced. |
+| `il-chicago-beach-lab-data` | Chicago Park District Beach Lab Data (qPCR enterococci and culture E. coli) | watch | fetched | monitoring | Bacteria results, not advisories: monitored for changes (register row il-chicago-beach-lab-data); the Park District's swim status was not traced. |
+| `il-chicago-cso-lights-pilot` | City of Chicago CSO warning-light pilot at four boat launches (River Park, Clark Park, Ping Tom, Park 571) | watch | fetched | advisories | Planned, not found live; a light is sign-only unless the city also publishes the state. |
+| `il-echo-dmr-cso` | ECHO DMR CSO monitoring parameters for Illinois CSO permits | watch | inferred | events | Monthly fallback for downstate CSO permits that do not file SOBE CSO rows; unknown whether their permits carry CSO count parameters. |
+| `il-friends-chicago-river-overflow-action` | Friends of the Chicago River: Overflow Action Days and CSO blog | watch | fetched | social | Context and advocacy; not a source of dated discharge records. |
+| `il-lake-county-beaches` | Lake County Health Department beach monitoring map | watch | search_only | advisories | Feeds BeachGuard; use BeachGuard. |
+| `il-mwrd-cso-alerts` | MWRD CSO notification alerts (email and SMS, via Smart911) | watch | fetched | events | The legally required public channel, but email/SMS behind a Smart911 account; owner sign-up only. WTTW (2025): alerts say only that an overflow occurred somewhere in the MWRD network. |
+| `il-mwrd-cso-event-synopsis` | MWRD CSO Event Synopsis Report (per-outfall tide-gate open and close times by event day) | watch | fetched | events | Per-outfall open and close times for Cook County since 2016, but reached only through a form, a session and a report viewer: by the standing rule on bot walls and polling forms it is not read by an automated session; the request to MWRD is a download or feed of the same table (register row il-mwrd-cso-synopsis-report). |
+| `il-mwrd-iepa-quarterly-reports` | MWRD IEPA quarterly CSO reports and CSO representative monitoring plans | watch | search_only | permits | Quarterly permit reports; useful to reconcile event counts. |
+| `il-mwrd-pump-station-activity` | MWRD pump station activity spreadsheet | watch | search_only | events | Pumping-station discharges to the waterways are a CSO pathway; content not checked. |
+| `il-suburban-cso-notification-pages` | Suburban CSO public notification plan pages (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City) | watch | search_only | law | No independent event feed found from the 37 ILM580 general-permit communities. |
+| `il-suntimes-2026-10-30` | Chicago Sun-Times Watchdogs, 2026-10-30: raw sewage in the Chicago River and the Deep Tunnel | watch | search_only | news | Recent coverage; not read. |
+| `il-field-museum-cso-events-2021` | "Chicago Combined Sewer Outfalls and Events (MWRD, 2021)" ArcGIS copy | rejected | fetched | prior_art | Static third-party copy; prior art showing demand for event maps. |
+| `il-mwrd-cso-synopsis-legacy` | MWRD legacy CSO Synopsis and Display CSO apps (2014 to 2016) | rejected | fetched | events | Superseded by apps.mwrd.org/csoreports; history only. The reach-colouring rule is prior art for our reaches. |
+| `il-norc-river-reversal-analysis` | NORC/UChicago "rain" project: parse MWRD river reversals and CSOs | rejected | search_only | prior_art | Prior art; one-off analysis. |
+| `il-evanston-cso-plan` | City of Evanston CSO Public Notification Plan | unreachable | fetched | law | Suburban CSO plans point to MWRD alerts; this one moved. |
+| `il-mwrd-tarp-levels` | MWRD TARP reservoir levels map service | unreachable | fetched | hydrography | Token-protected; reservoir fullness would be a leading indicator of CSOs. |

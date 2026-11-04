@@ -1,0 +1,42 @@
+id: "il-mwrd-possible-cso-events-layer"
+name: "MWRD \"Possible CSO Events\" live map layer"
+url: "https://utility.arcgis.com/usrsvcs/servers/addf95280b254c1e8fe64dc8e35dfedc/rest/services/CSO/CSO_PossibleEvents/MapServer/0"
+homepage: "https://mwrd.org/community-action/you-can-help-prevent-flooding-and-protect-water-quality/combined-sewer-overflow-notification"
+kind: "arcgis"
+level: "utility"
+# Feed row: written by pipeline/ingest/il_mwrd_possible_cso.py (data/build/events/il-mwrd-possible-cso-events-layer.json).
+# Built 2026-11-04: polled hourly; one unconfirmed cso record per outfall per Central-time day of activity; started_at the
+#   layer's edit time (began at or before it), no end (the nightly reset is not an end); the reversal structures as
+#   Lake Michigan diversions; permit and outfall from data/outfalls-il.json within 150 m. Safe fields only.
+# Notes (research/il, status used, verified fetched, checked 2026-11-04): Read hourly by
+#   pipeline/ingest/il_mwrd_possible_cso.py: each outfall on the map becomes an unconfirmed CSO
+#   record for that day (start the layer's edit time, no end invented); empty when no activity is
+#   shown.
+# Access detail (research, quoted): Public MapServer layer, no token.
+#   query?where=1=1&outFields=*&f=json returned count 0 on 2026-11-03 (no event in progress).
+#   Service description: "This is the master CSO layer. Updates to CSO_EVENT are copied to an
+#   Archive layer nightly and the layer's fields are reset." App:
+#   https://mwrdgc.maps.arcgis.com/apps/instant/sidebar/index.html?appid=1a2bc307bc404d9e927528fd215da022
+#   (raw/mwrd-possible-cso-app.json).
+# Can fill: event_type, location_text, coordinates, waterbody, source_updated_at
+# Cannot fill: started_at; ended_at; volume
+# Waters: Chicago Area Waterway System and Lake Michigan reversal points
+# History: None (current state only; the Archive layer is not public).
+# Research notes: App disclaimer quoted: "Not all CSO outfalls are equipped with monitoring
+#   equipment. Therefore, other CSOs may have occurred that are not reflected on the above map.
+#   Regardless of CSO activity, the Chicago Area Waterways may contain disease-causing bacteria at
+#   any time. Therefore, swimming, canoeing, or other activities where immersion in water is
+#   possible should be avoided and is not recommended, particularly during and immediately following
+#   rainfall."
+cadence: "1 hour (polled). The app says \"updated daily and reflects unconfirmed CSO and diversion activity\"; reset nightly."
+license: "None stated."
+attribution: "Metropolitan Water Reclamation District of Greater Chicago"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["IL"]
+access: ["arcgis"]
+access_detail: "Public MapServer layer, no token. query?where=1=1&outFields=*&f=json returned count 0 on 2026-11-03 (no event in progress). Service description: \"This is the master CSO layer. Updates to CSO_EVENT are copied to an Archive layer nightly and the layer's fields are reset.\" App: https://mwrdgc.maps.arcgis.com/apps/instant/sidebar/index.html?appid=1a2bc307bc404d9e927528fd215da022 (raw/mwrd-possible-cso-app.json)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-04"
