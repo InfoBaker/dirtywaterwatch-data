@@ -55,7 +55,8 @@ PUBLIC_NAME = re.compile(
     r"^(city|town|village|borough|township|county)\s+of\b|\b(city|town|village|borough|township)\s+of\b|"
     r",\s*(city|town|village|borough)\s+of\b|\bcounty\b|\bauthority\b|\bmunicipal|\b(utility|sanitary|sanitation|"
     r"sewer|sewerage|water|improvement|metropolitan|public service)\s+district\b|\bdistrict of columbia\b|"
-    r"\bdepartment of\b|\bcommission\b|\bfederal\b|\b(army|navy|naval|air force|marine corps)\b|\btrib(e|al)\b", re.I)
+    r"\bdepartment of\b|\bcommission\b|\bfederal\b|\b(army|navy|naval|air force|marine corps)\b|\btrib(e|al)\b|"
+    r"\bdistrict agricultural association\b", re.I)   # a California state agency (a fairground's), not a private body
 PRIVATE_NAME = re.compile(r"\b(inc|llc|l\.l\.c|ltd|lp|corp|corporation|company|association|assn|poa|hoa|club|mhp|"
                           r"mhc)\b\.?", re.I)
 

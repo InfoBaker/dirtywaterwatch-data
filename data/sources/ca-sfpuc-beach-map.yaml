@@ -1,0 +1,40 @@
+id: "ca-sfpuc-beach-map"
+name: "SFPUC San Francisco Beach Water Quality map (combined sewer discharge flags) and getBeaches service"
+url: "https://webapps.sfpuc.org/sapps/beachesandbay.html"
+homepage: "https://webapps.sfpuc.org/sapps/beachesandbay.html"
+kind: "map_only"
+level: "utility"
+# Feed row: the source id written by pipeline/ingest/ca_sfpuc_beaches.py
+#   (data/build/events/ca-sfpuc-beach-map.json); the research row has the same id.
+# Built 2026-11-04: an hourly snapshot state machine (data/build/ca-sfpuc-beaches-state.json is the
+#   archive). The combined sewer discharge sign opens a cso record (ongoing, red while SFPUC shows it),
+#   closed at the first poll without it; a posting is a beach_advisory. All times are poll times.
+# Notes (research/ca, status used, verified fetched, checked 2026-11-04): Read hourly by
+#   pipeline/ingest/ca_sfpuc_beaches.py as a snapshot: the combined sewer discharge sign per station
+#   (SFPUC's own 24-72 hour window, red while shown) and the postings (beach advisories). 20
+#   stations, no flag on 2026-11-04.
+# Access detail (research, quoted): The map calls
+#   https://infrastructure.sfwater.org/lims.asmx/getBeaches (no auth): a JSON array wrapped in an
+#   XML <string>. Each station has stationid, stationname, cso, s_color, posted, p_color,
+#   sample_date, lat, lon. When cso is not null the map shows 'Combined Sewer Discharge has occurred
+#   within the last 24-72 hours.' Also getStation and getCSV. Saved raw/sfpuc-getBeaches.txt (all
+#   cso null on 2026-11-03).
+# Can fill: event_type, waterbody, coordinates (station), authority, source_updated_at
+# Cannot fill: started_at (only 'within 24-72 hours'); ended_at; volume; outfall id
+# Waters: 17 San Francisco beach stations: Ocean Beach, Baker, China, Crissy Field, Aquatic Park,
+#   Mission Creek, Islais Creek, Candlestick, Crane Cove
+# History: None in the service; bacteria results on data.sf.gov v3fv-x3ux (Public Domain Dedication,
+#   rows updated 2026-11-03).
+# Research notes: Undocumented ASMX endpoint: may change without notice.
+cadence: "Current state; 'We also post signs whenever a Combined Sewer System discharge occurs that affects a recreational beach' and postings stay 'until the discharge ceases' with daily sampling. Email alerts offered (no sign-up link found); hotline 1-877-SFBEACH."
+license: "none stated for the service; data.sf.gov dataset ODC-PDDL"
+attribution: "San Francisco Public Utilities Commission"
+enabled: true
+role: "events"
+event_types: ["cso", "beach_advisory"]
+states: ["CA"]
+access: ["json", "map_only"]
+access_detail: "The map calls https://infrastructure.sfwater.org/lims.asmx/getBeaches (no auth): a JSON array wrapped in an XML <string>. Each station has stationid, stationname, cso, s_color, posted, p_color, sample_date, lat, lon. When cso is not null the map shows 'Combined Sewer Discharge has occurred within the last 24-72 hours.' Also getStation and getCSV. Saved raw/sfpuc-getBeaches.txt (all cso null on 2026-11-03)."
+machine_readable: true
+legal_basis: "NPDES CA0037664 / CA0037681 CSO public notification (Nine Minimum Controls)"
+checked: "2026-11-04"
