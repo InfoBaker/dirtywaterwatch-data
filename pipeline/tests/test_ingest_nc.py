@@ -292,3 +292,26 @@ def test_one_dwr_incident_in_two_layers_or_a_republished_layer_is_counted_once()
     # and when the copy goes again, the link goes with it
     back, _ = S.build(rows, "2026-11-06T03:00:00Z", [r for r in again if "cccccccc" not in r["event_id"]], PERMITS)
     assert all(r["duplicate_of"] is None for r in back)
+
+
+def test_coastal_advisory_dates_say_they_are_the_sites_observation():
+    first, _ = rwq("nc_rwq_run1.json", "nc_rwq_meta1.json")
+    a = next(r for r in first if r["raw"]["ASN"] == "N88")
+    assert "this site's observation" in a["raw"]["_date_basis"] and "not an issue" in a["raw"]["_date_basis"]
+    recs, _ = rwq("nc_rwq_run2.json", "nc_rwq_meta2.json", first)
+    lifted = next(r for r in recs if r["event_id"] == "nc-rwq-advisories:N88:advisory:20260903T1850Z")
+    assert "this site's observation" in lifted["raw"]["_end_note"] and "not a lift date" in lifted["raw"]["_end_note"]
+
+
+def test_a_blank_status_leaves_an_open_advisory_open_and_only_named_fields_are_requested():
+    first, _ = rwq("nc_rwq_run1.json", "nc_rwq_meta1.json")
+    feats = json.loads((FIX / "nc_rwq_run1.json").read_text())["features"]
+    for f in feats:
+        if f["attributes"]["ASN"] == "N88":
+            f["attributes"]["Status"] = None                    # a glitch in the layer, not a lift
+    m = json.loads((FIX / "nc_rwq_meta2.json").read_text())
+    recs, stats = R.build(feats, m, "2026-11-05T15:00:00Z", first)
+    a = next(r for r in recs if r["raw"]["ASN"] == "N88")
+    assert a["status"] == "advisory_active" and a["ended_at"] is None and a["raw"]["_status_blank_since"]
+    assert a["source_updated_at"] == a["started_at"]            # a blank status is no re-confirmation
+    assert "*" not in R.FIELDS and "Status" in R.FIELDS and "GlobalID_2" not in R.FIELDS
