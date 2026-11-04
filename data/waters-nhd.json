@@ -983,12 +983,312 @@
     },
     "existing_duplicates": {
      "date": "2026-11-04",
-     "dropped": 0,
-     "renamed": 0,
+     "dropped": 41,
+     "renamed": 9,
      "rows_mapped": 2,
      "unnamed_named": 0,
      "unnamed_left": [],
      "actions": [
+      {
+       "slug": "ararat-river-nc",
+       "action": "dropped",
+       "to": "ararat-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of ararat-river-nc's bounding box, which the feature's own box covers 98% of; both name mount airy"
+      },
+      {
+       "slug": "back-creek-nc",
+       "action": "renamed",
+       "to": "back-creek-asheboro-nc",
+       "why": "back-creek-nc is openboatlaunch's record of another Back Creek (back-creek-nc has no bounding box and no town in common)"
+      },
+      {
+       "slug": "big-alamance-creek-nc",
+       "action": "dropped",
+       "to": "big-alamance-creek-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of big-alamance-creek-nc's bounding box, which the feature's own box covers 100% of; both name graham, swepsonville"
+      },
+      {
+       "slug": "broad-river-nc",
+       "action": "dropped",
+       "to": "broad-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of broad-river-nc's bounding box, which the feature's own box covers 53% of"
+      },
+      {
+       "slug": "brunswick-river-nc",
+       "action": "dropped",
+       "to": "brunswick-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of brunswick-river-nc's bounding box, which the feature's own box covers 100% of; both name belville"
+      },
+      {
+       "slug": "buffalo-creek-nc",
+       "action": "renamed",
+       "to": "buffalo-creek-belwood-nc",
+       "why": "buffalo-creek-nc is openboatlaunch's record of another Buffalo Creek (the NHD feature lies 275.9 km outside buffalo-creek-nc's bounding box)"
+      },
+      {
+       "slug": "cape-fear-river-nc",
+       "action": "dropped",
+       "to": "cape-fear-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of cape-fear-river-nc's bounding box, which the feature's own box covers 98% of; both name elizabethtown, fayetteville, lillington"
+      },
+      {
+       "slug": "cashie-river-nc",
+       "action": "dropped",
+       "to": "cashie-river-nc",
+       "why": "same name; 99% of the NHD feature lies within 300 m of cashie-river-nc's bounding box, which the feature's own box covers 100% of; both name windsor"
+      },
+      {
+       "slug": "catawba-river-nc",
+       "action": "dropped",
+       "to": "catawba-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of catawba-river-nc's bounding box, which the feature's own box covers 93% of; both name glen alpine, morganton, mount holly"
+      },
+      {
+       "slug": "cheoah-river-nc",
+       "action": "dropped",
+       "to": "cheoah-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of cheoah-river-nc's bounding box, which the feature's own box covers 100% of; both name robbinsville"
+      },
+      {
+       "slug": "contentnea-creek-nc",
+       "action": "dropped",
+       "to": "contentnea-creek-nc",
+       "why": "same name; 97% of the NHD feature lies within 300 m of contentnea-creek-nc's bounding box, which the feature's own box covers 100% of; both name grifton, hookerton, snow hill"
+      },
+      {
+       "slug": "country-line-creek-nc",
+       "action": "dropped",
+       "to": "country-line-creek-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of country-line-creek-nc's bounding box, which the feature's own box covers 99% of; both name yanceyville"
+      },
+      {
+       "slug": "crooked-creek-nc",
+       "action": "renamed",
+       "to": "crooked-creek-bunn-nc",
+       "why": "crooked-creek-nc is openboatlaunch's record of another Crooked Creek (the NHD feature lies 199.9 km outside crooked-creek-nc's bounding box)"
+      },
+      {
+       "slug": "dan-river-nc",
+       "action": "dropped",
+       "to": "dan-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of dan-river-nc's bounding box, which the feature's own box covers 37% of; both name danbury, eden, madison"
+      },
+      {
+       "slug": "deep-river-nc",
+       "action": "dropped",
+       "to": "deep-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of deep-river-nc's bounding box, which the feature's own box covers 100% of; both name randleman, sanford"
+      },
+      {
+       "slug": "dutchman-creek-nc",
+       "action": "renamed",
+       "to": "dutchman-creek-mocksville-nc",
+       "why": "dutchman-creek-nc is openboatlaunch's record of another Dutchman Creek (the NHD feature lies 301.2 km outside dutchman-creek-nc's bounding box)"
+      },
+      {
+       "slug": "eno-river-nc",
+       "action": "dropped",
+       "to": "eno-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of eno-river-nc's bounding box, which the feature's own box covers 100% of; both name durham"
+      },
+      {
+       "slug": "first-broad-river-nc",
+       "action": "dropped",
+       "to": "first-broad-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of first-broad-river-nc's bounding box, which the feature's own box covers 100% of; both name lawndale, shelby"
+      },
+      {
+       "slug": "french-broad-river-nc",
+       "action": "dropped",
+       "to": "french-broad-river-nc",
+       "why": "same name; 96% of the NHD feature lies within 300 m of french-broad-river-nc's bounding box, which the feature's own box covers 96% of; both name asheville, brevard, fletcher"
+      },
+      {
+       "slug": "haw-river-nc",
+       "action": "dropped",
+       "to": "haw-river-nc",
+       "why": "same name; 98% of the NHD feature lies within 300 m of haw-river-nc's bounding box, which the feature's own box covers 100% of; both name burlington, graham, haw river"
+      },
+      {
+       "slug": "high-rock-lake-nc",
+       "action": "renamed",
+       "to": "high-rock-lake-lexington-nc",
+       "why": "high-rock-lake-nc is openboatlaunch's record of another High Rock Lake (the NHD feature lies 211.3 km outside high-rock-lake-nc's bounding box)"
+      },
+      {
+       "slug": "hiwassee-river-nc",
+       "action": "dropped",
+       "to": "hiwassee-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of hiwassee-river-nc's bounding box, which the feature's own box covers 70% of; both name murphy"
+      },
+      {
+       "slug": "lewis-creek-nc",
+       "action": "renamed",
+       "to": "lewis-creek-edneyville-nc",
+       "why": "lewis-creek-nc is openboatlaunch's record of another Lewis Creek (the NHD feature lies 552.0 km outside lewis-creek-nc's bounding box)"
+      },
+      {
+       "slug": "lick-creek-nc",
+       "action": "renamed",
+       "to": "lick-creek-denton-nc",
+       "why": "lick-creek-nc is openboatlaunch's record of another Lick Creek (the NHD feature lies 88.6 km outside lick-creek-nc's bounding box)"
+      },
+      {
+       "slug": "little-river-nc",
+       "action": "renamed",
+       "to": "little-river-goldsboro-nc",
+       "why": "little-river-nc is openboatlaunch's record of another Little River (the NHD feature lies 125.5 km outside little-river-nc's bounding box)"
+      },
+      {
+       "slug": "little-tennessee-river-nc",
+       "action": "dropped",
+       "to": "little-tennessee-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of little-tennessee-river-nc's bounding box, which the feature's own box covers 22% of; both name franklin"
+      },
+      {
+       "slug": "lumber-river-nc",
+       "action": "dropped",
+       "to": "lumber-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of lumber-river-nc's bounding box, which the feature's own box covers 100% of; both name boardman, fair bluff, lumberton"
+      },
+      {
+       "slug": "mayo-river-nc",
+       "action": "dropped",
+       "to": "mayo-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of mayo-river-nc's bounding box, which the feature's own box covers 100% of; both name madison, mayodan"
+      },
+      {
+       "slug": "muddy-creek-nc",
+       "action": "renamed",
+       "to": "muddy-creek-bethania-nc",
+       "why": "muddy-creek-nc is openboatlaunch's record of another Muddy Creek (the NHD feature lies 135.3 km outside muddy-creek-nc's bounding box)"
+      },
+      {
+       "slug": "neuse-river-nc",
+       "action": "dropped",
+       "to": "neuse-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of neuse-river-nc's bounding box, which the feature's own box covers 78% of; both name goldsboro, kinston, knightdale"
+      },
+      {
+       "slug": "newport-river-nc",
+       "action": "dropped",
+       "to": "newport-river-nc",
+       "why": "same name; 11% of the NHD feature lies within 300 m of newport-river-nc's bounding box, which the feature's own box covers 100% of; both name morehead, newport"
+      },
+      {
+       "slug": "north-toe-river-nc",
+       "action": "dropped",
+       "to": "north-toe-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of north-toe-river-nc's bounding box, which the feature's own box covers 100% of; both name spruce pine"
+      },
+      {
+       "slug": "northeast-cape-fear-river-nc",
+       "action": "dropped",
+       "to": "northeast-cape-fear-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of northeast-cape-fear-river-nc's bounding box, which the feature's own box covers 100% of; both name castle hayne, chinquapin"
+      },
+      {
+       "slug": "oconaluftee-river-nc",
+       "action": "dropped",
+       "to": "oconaluftee-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of oconaluftee-river-nc's bounding box, which the feature's own box covers 100% of"
+      },
+      {
+       "slug": "pantego-creek-nc",
+       "action": "dropped",
+       "to": "pantego-creek-nc",
+       "why": "same name; 84% of the NHD feature lies within 300 m of pantego-creek-nc's bounding box, which the feature's own box covers 100% of; both name belhaven"
+      },
+      {
+       "slug": "pasquotank-river-nc",
+       "action": "dropped",
+       "to": "pasquotank-river-nc",
+       "why": "same name; 99% of the NHD feature lies within 300 m of pasquotank-river-nc's bounding box, which the feature's own box covers 100% of"
+      },
+      {
+       "slug": "pee-dee-river-nc",
+       "action": "dropped",
+       "to": "pee-dee-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of pee-dee-river-nc's bounding box, which the feature's own box covers 99% of"
+      },
+      {
+       "slug": "perquimans-river-nc",
+       "action": "dropped",
+       "to": "perquimans-river-nc",
+       "why": "same name; 89% of the NHD feature lies within 300 m of perquimans-river-nc's bounding box, which the feature's own box covers 100% of; both name hertford"
+      },
+      {
+       "slug": "roanoke-river-nc",
+       "action": "dropped",
+       "to": "roanoke-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of roanoke-river-nc's bounding box, which the feature's own box covers 90% of; both name gaston, jamesville"
+      },
+      {
+       "slug": "scuppernong-river-nc",
+       "action": "dropped",
+       "to": "scuppernong-river-nc",
+       "why": "same name; 83% of the NHD feature lies within 300 m of scuppernong-river-nc's bounding box, which the feature's own box covers 100% of"
+      },
+      {
+       "slug": "south-creek-nc",
+       "action": "dropped",
+       "to": "south-creek-nc",
+       "why": "same name; 80% of the NHD feature lies within 300 m of south-creek-nc's bounding box, which the feature's own box covers 100% of; both name aurora"
+      },
+      {
+       "slug": "south-fork-new-river-nc",
+       "action": "dropped",
+       "to": "south-fork-new-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of south-fork-new-river-nc's bounding box, which the feature's own box covers 100% of; both name boone"
+      },
+      {
+       "slug": "south-toe-river-nc",
+       "action": "dropped",
+       "to": "south-toe-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of south-toe-river-nc's bounding box, which the feature's own box covers 100% of"
+      },
+      {
+       "slug": "south-yadkin-river-nc",
+       "action": "dropped",
+       "to": "south-yadkin-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of south-yadkin-river-nc's bounding box, which the feature's own box covers 100% of; both name cooleemee"
+      },
+      {
+       "slug": "swift-creek-nc",
+       "action": "dropped",
+       "to": "swift-creek-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of swift-creek-nc's bounding box, which the feature's own box covers 100% of"
+      },
+      {
+       "slug": "tar-river-nc",
+       "action": "dropped",
+       "to": "tar-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of tar-river-nc's bounding box, which the feature's own box covers 95% of; both name greenville, rocky mount, tarboro"
+      },
+      {
+       "slug": "trent-river-nc",
+       "action": "dropped",
+       "to": "trent-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of trent-river-nc's bounding box, which the feature's own box covers 100% of; both name new bern, pollocksville, river bend"
+      },
+      {
+       "slug": "tuckasegee-river-nc",
+       "action": "dropped",
+       "to": "tuckasegee-river-cullowhee-nc",
+       "why": "same name; 69% of the NHD feature lies within 300 m of tuckasegee-river-cullowhee-nc's bounding box, which the feature's own box covers 100% of; both name cullowhee, dillsboro, webster"
+      },
+      {
+       "slug": "white-oak-river-nc",
+       "action": "dropped",
+       "to": "white-oak-river-nc",
+       "why": "same name; 71% of the NHD feature lies within 300 m of white-oak-river-nc's bounding box, which the feature's own box covers 100% of"
+      },
+      {
+       "slug": "yadkin-river-nc",
+       "action": "dropped",
+       "to": "yadkin-river-nc",
+       "why": "same name; 100% of the NHD feature lies within 300 m of yadkin-river-nc's bounding box, which the feature's own box covers 100% of; both name bermuda run, clemmons, elkin"
+      },
       {
        "slug": null,
        "action": "mapped",
