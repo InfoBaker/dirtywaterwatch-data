@@ -279,3 +279,34 @@ def test_an_unnamed_outfall_takes_the_builders_water_for_it():
     s, how = mt.by_outfall_ref({"npdes_permit": "NC0000009", "outfall": "001"})
     assert s == "unnamed-tributary-to-neuse-river-nc" and "no receiving-water name" in how
     assert mt.by_outfall_ref({"npdes_permit": "NC0000009", "outfall": "002"}) == (None, None)
+
+
+# ---------------------------------------------------------------- Florida's inverted GNIS names, the high-resolution pass
+
+def test_inverted_gnis_names_read_as_written():
+    assert N.gnis_display("Apopka, Lake") == "Lake Apopka" and N.gnis_display("Marcus, Bayou") == "Bayou Marcus"
+    assert N.gnis_display("Neuse River") == "Neuse River"
+    assert N.name_score(N.words("Lake Apopka"), "Apopka, Lake") == 1.0
+    t = {"name": "Lake Apopka", "words": N.words("Lake Apopka"), "define_by": "reach"}
+    assert "APOPKA, LAKE" in N.sql_names(t)
+    assert "APOPKA, LAKE" not in N.sql_names({**t, "define_by": None})      # the live runs' queries are unchanged
+
+
+def test_the_high_resolution_pass_takes_the_nearest_flowline_of_the_name(monkeypatch):
+    from shapely.geometry import LineString
+    monkeypatch.setattr(N, "arcgis", lambda http, kind, layer, **p: [
+        {"gnis_id": "00294329", "gnis_name": "Brooker Creek", "_geom": LineString([(-82.70, 28.08), (-82.69, 28.09)])},
+        {"gnis_id": "00999999", "gnis_name": "Other Creek", "_geom": LineString([(-82.70, 28.08), (-82.70, 28.081)])}])
+    t = N.Target(target("Brooker Creek", points={(-82.70, 28.08): 1}), define_by="reach")
+    c, how = N.resolve_hr(SimpleNamespace(http=None), t)
+    assert c["type"] == "hr-line" and c["gnis_id"] == "294329" and "NHD high resolution" in how
+    assert N.feature_key("FL", c) == ("line", "FL", "294329")
+
+
+def test_a_state_build_reads_floridas_receiving_water_text(monkeypatch):
+    o = {"receiving_water_echo": "St Johns R Class III Marine WBID 2213H"}
+    assert OW.text_of(o) == "St Johns R Class III Marine WBID 2213H"
+    monkeypatch.setattr(OW, "STATE_TEXT", True)
+    assert OW.text_of(o) == "St Johns River"
+    assert OW.text_of({"receiving_water_echo": "BANKS COUNTY"}) == "BANKS COUNTY"
+    assert OW.text_of({**o, "receiving_water_override": {"water": "Trout River"}}) == "Trout River"
