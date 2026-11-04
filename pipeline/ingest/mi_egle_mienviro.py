@@ -922,11 +922,12 @@ def left_scope(state: dict) -> str:
 
 def build_stamp(permits: dict[str, str]) -> str:
     """What the saved records were built under: this module, common.py and build/redact.py as files, the permit
-    index and the name lists. A change to any of them makes the next run rebuild every record (once)."""
+    index and the name lists (the allowlist, the private blocklist in data/build and the public one in data/ that
+    build/redact.py also reads). A change to any of them makes the next run rebuild every record (once)."""
     from build import redact
     h = hashlib.sha256()
     for f in (Path(__file__), Path(sys.modules["common"].__file__), Path(redact.__file__),
-              DATA_DIR / "name-allowlist.json", BUILD_DIR / "name-blocklist.json"):
+              DATA_DIR / "name-allowlist.json", BUILD_DIR / "name-blocklist.json", DATA_DIR / "name-blocklist.json"):
         h.update(f.read_bytes() if f.exists() else b"-")
     h.update(json.dumps(sorted(permits.items())).encode())
     return h.hexdigest()
@@ -993,7 +994,6 @@ def main(argv=None) -> int:
         redactor = redact.redactor_for([records[i] for i in rebuilt])
         for i in rebuilt:
             records[i] = redactor.event(records[i])
-    state["build_stamp"] = stamp
     state["fetched_at"] = fetched_at
     if summary is not None:
         state["backfill"] = {**summary, "at": fetched_at,
@@ -1012,6 +1012,10 @@ def main(argv=None) -> int:
             "backfill": state.get("backfill"), "lookup_errors": errors or None}
     path_notes_to_meta(records, meta)
     path = write_events(SOURCE_ID, records, ok=True, error=None, meta=meta)
+    # the stamp only once the records it built are on file: a run stopped before (a timeout, a full disk) leaves the
+    # old one, so the next run rebuilds every record rather than keep old ones under rules they were not built with
+    state["build_stamp"] = stamp
+    write_json(STATE_FILE, state)
     print(f"{SOURCE_ID}: {stats['rows_read']} rows read, {stats['kept_from_earlier_runs']} kept; status "
           f"{stats['by_status']}; types {stats['by_type']}; operator row {stats['with_operator_row']}; "
           f"left out {dict(left)} -> {path}")
