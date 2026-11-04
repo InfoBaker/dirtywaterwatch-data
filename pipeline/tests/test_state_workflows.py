@@ -294,7 +294,7 @@ def test_batch_raw_cache_not_fetched_is_kept(tmp_path):
 # ---------------------------------------------------------------- openboatlaunch's object (state/obl-water.tar.gz)
 
 def seed_obl(tmp: Path, corrupt: bool = False) -> None:
-    """The object as the Mac packs it: tar -czf obl-water.tar.gz -C <openboatlaunch>/out water meta.json."""
+    """The object as the upload packs it: tar -czf obl-water.tar.gz -C <openboatlaunch>/out water meta.json."""
     src = tmp / "obl-src"
     (src / "water").mkdir(parents=True)
     for slug in ("haw-river-nc", "lake-wheeler-nc", "lake-lanier-ga"):
