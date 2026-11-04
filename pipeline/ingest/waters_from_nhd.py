@@ -3229,12 +3229,15 @@ class Run:
             budget = left_of(budget, wall, started)
             deadline, mirror_timeout = started + budget, max(3.0, min(30.0, budget / 6))
             no_time = budget < OSM_MIN_S
-        if by_state and not a.offline and not no_time:      # nothing queued: no Overpass ping
+        todos = {state: [x for x in items if not WX.is_cached(x[2], x[2]["key"], a.refresh)]
+                 for state, items in by_state.items()}
+        # nothing to ask (nothing queued, or every queued name answered from the cache): no Overpass ping
+        if any(todos.values()) and not a.offline and not no_time:
             mirrors = mirror_order(timeout=mirror_timeout)
         else:
             mirrors = []
         for state, items in sorted(by_state.items()):
-            todo = [x for x in items if not WX.is_cached(x[2], x[2]["key"], a.refresh)]
+            todo = todos[state]
             elements, failed, via = [], None, set()
             over = budget is not None and todo and (no_time or time.monotonic() - started > budget)
             if over:
