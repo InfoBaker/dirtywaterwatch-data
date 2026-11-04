@@ -245,3 +245,24 @@ def test_ecology_facilities_join_the_operator_rows():
                       {"Seattle CSO": {"npdes_permit": "WA0031682", "basis": "name"}}, None)
     r = next(r for r in recs if r["discharger_name"] == "Seattle CSO")
     assert r["discharger_id"] == "wa-seattle-spu"
+
+
+# ---------------------------------------------------------------- the register (scripts/add_wa_register_rows.py)
+
+def test_every_washington_operator_has_its_permit_duty_row_and_every_cso_operator_its_notification_row():
+    from ingest import notification_pages as NP
+    root = Path(__file__).resolve().parents[2]
+    dis = json.loads((root / "data" / "dischargers.json").read_text())
+    doc = NP.load_register(root / "data" / "notice-channels")
+    assert NP.validate_register(doc, dis, root) == []
+    rows = {r["id"]: r for r in doc["channels"] if r["state"] == "WA"}
+    for op in (r for r in dis if r.get("state") == "WA" and r["kind"] != "cso_closed_or_none"):
+        rid = "wa-jblm-epa-report" if op["id"] == "wa-jblm" else f"{op['id']}-ecology-spill-report"
+        assert rows[rid]["operator_id"] == op["id"] and rows[rid]["basis_kind"] == "permit"
+        if op["kind"] == "cso":
+            assert rows[f"{op['id']}-cso-public-notification"]["basis_kind"] == "permit"
+    assert rows["wa-ecology-sewage-spills"]["feed_source_id"] == "wa-ecology-sewage-spills"
+    assert rows["wa-seattle-spu-cso-public-notification"]["feed_source_id"] == "wa-kc-cso-status-csv"
+    assert rows["wa-spokane-cso-public-notification"]["barrier"] == "bot_wall"
+    assert rows["wa-ecology-spill-email-alerts"]["barrier"] == "no_web_page"
+    assert not any("@ecy.wa.gov" in json.dumps(r).lower() for r in rows.values())
