@@ -699,20 +699,26 @@ def shown_path(p: Path) -> str:
 PUBLIC_PAYLOADS = ("waters.json", "active.json", "monthly-outfalls.json", "overlays.geojson", "advisory-points.geojson",
                    "reaches.geojson", "reach-paths.geojson", "rain.json", "coverage.json", "dischargers.json",
                    "outfalls.json")
-BLOCKED_MARK = BUILD_DIR / "export-blocked.json"     # scripts/refresh.sh uploads and deploys nothing while it exists
+BLOCKED_MARK = BUILD_DIR / "export-blocked.json"     # the old hard stop; removed whenever the export runs
+HITS_MARK = BUILD_DIR / "blocklist-hits.json"        # the files (never the name) a hit is in, for the next run's fix
 
 
 def enforce_blocklist(out_dir: Path = OUT_DIR, names: list[str] | None = None) -> int:
-    """The export's last step: fails it (SystemExit) when a blocklisted name is in out/ (blocklist_hits), and
-    leaves BLOCKED_MARK listing the files; removes the mark when out/ is clean. Returns the files checked."""
+    """The export's last step. A blocklisted name in out/ (blocklist_hits) is a warning, not a stop (owner,
+    2026-11-05: operations are not disrupted for public-record text that can be corrected): the files are named in
+    HITS_MARK and on the console, never the name, the run goes on and uploads, and the record is fixed with a rule
+    on the next run. The old hard-stop mark is removed so the scripts never hold a publish. Returns the files checked."""
     names = blocklist(DATA_DIR) if names is None else names
     hits = blocklist_hits(out_dir, names)
-    if hits:
-        write_json(BLOCKED_MARK, {"at": now_iso(), "files": hits,
-                                  "why": "a name on the owner's blocklist is in these files of out/; nothing is uploaded"})
-        raise SystemExit(f"export: a blocklisted name is in {len(hits)} file(s) of out/ ({', '.join(hits[:5])}"
-                         f"{' ...' if len(hits) > 5 else ''}); see {shown_path(BLOCKED_MARK)}")
     BLOCKED_MARK.unlink(missing_ok=True)
+    if hits:
+        write_json(HITS_MARK, {"at": now_iso(), "files": hits,
+                               "why": "a name on the owner's blocklist is in these files of out/; the run uploaded; "
+                                      "fix the record with a scrub rule (never a blocker, owner 2026-11-05)"})
+        print(f"::warning::export: a blocklisted name is in {len(hits)} file(s) of out/ ({', '.join(hits[:5])}"
+              f"{' ...' if len(hits) > 5 else ''}); uploaded anyway; see {shown_path(HITS_MARK)}")
+    else:
+        HITS_MARK.unlink(missing_ok=True)
     return 1 + len(list((Path(out_dir) / "waters").glob("*.json"))) + len(list((Path(out_dir) / "events").glob("*.json")))
 
 
