@@ -118,7 +118,7 @@ def test_a_waters_summary_headline_and_unresolved_events_go_through_the_redactor
     assert NAME not in json.dumps(st) and st["waters"]["w"]["name"] == "Old Bay"
 
 
-def test_p1_1_the_blocklist_self_check_finds_a_name_in_out_and_fails_the_export(tmp_path, monkeypatch):
+def test_p1_1_the_blocklist_self_check_finds_a_name_in_out_and_fails_the_export(tmp_path, monkeypatch, capsys):
     out = tmp_path / "out"
     (out / "waters").mkdir(parents=True)
     (out / "events").mkdir()
@@ -126,20 +126,24 @@ def test_p1_1_the_blocklist_self_check_finds_a_name_in_out_and_fails_the_export(
     X.write_compact(out / "waters" / "test-river-ma.json", {"events": []})
     X.write_compact(out / "events" / "a.json", {"placement_note": "placed by name"})
     monkeypatch.setattr(X, "BLOCKED_MARK", tmp_path / "export-blocked.json")
+    monkeypatch.setattr(X, "HITS_MARK", tmp_path / "blocklist-hits.json")
     assert X.blocklist_hits(out, [NAME]) == []
-    assert X.enforce_blocklist(out, [NAME]) == 3 and not X.BLOCKED_MARK.exists()
+    assert X.enforce_blocklist(out, [NAME]) == 3 and not X.BLOCKED_MARK.exists() and not X.HITS_MARK.exists()
     X.write_compact(out / "events" / "b.json", {"no_receiving_water": f"only 'yard of {NAME.upper()}'"})
     X.write_compact(out / "waters" / "test-river-ma.json", {"reasons": [{"short": f"SSO · {NAME.split()[0]}  {NAME.split()[1]}"}]})
     assert X.blocklist_hits(out, [NAME]) == ["waters/test-river-ma.json", "events/b.json"]
     assert X.blocklist_hits(out, ["Someone Else"]) == []
-    with pytest.raises(SystemExit) as exc:
-        X.enforce_blocklist(out, [NAME])
-    assert NAME not in str(exc.value) and "events/b.json" in str(exc.value)          # where, never the name
-    assert json.loads(X.BLOCKED_MARK.read_text())["files"] == ["waters/test-river-ma.json", "events/b.json"]
+    # a hit warns and names the files, never the name; the run goes on (owner, 2026-11-05) and no hard-stop mark is left
+    X.BLOCKED_MARK.write_text("{}")
+    assert X.enforce_blocklist(out, [NAME]) == 4 and not X.BLOCKED_MARK.exists()
+    out_text = capsys.readouterr().out
+    assert NAME not in out_text and "events/b.json" in out_text and "::warning::" in out_text
+    hits = json.loads(X.HITS_MARK.read_text())
+    assert hits["files"] == ["waters/test-river-ma.json", "events/b.json"] and NAME not in json.dumps(hits)
     (out / "events" / "b.json").unlink()
     X.write_compact(out / "waters" / "test-river-ma.json", {"events": []})
     X.enforce_blocklist(out, [NAME])
-    assert not X.BLOCKED_MARK.exists()
+    assert not X.BLOCKED_MARK.exists() and not X.HITS_MARK.exists()
 
 
 def test_p1_1_the_export_checks_what_it_wrote_last_and_the_refresh_stops_on_the_mark():
