@@ -173,6 +173,19 @@ def test_heavy_rain_colours_the_permittees_reach_river_and_pond_yellow():
     assert st["sources"][RL.SOURCE_ID]["stale"] is False and RL.SOURCE_ID in pond["covered_by"]
 
 
+def test_a_water_carries_every_rain_caution_reach_of_the_operator():
+    w = rain_world(values=wet(range(0, 6)))
+    w["reaches"] = {f"MA0101613-{n}": {**_reach(key=f"MA0101613-{n}"), "outfall": n} for n in ("13", "14", "15")}
+    w["outfalls"] = [{"npdes_permit": PERMIT, "outfall": n, "state": "MA", "water_slug": "test-river-ma",
+                      "outfall_status": "CSO"} for n in ("013", "014", "015")]
+    st, _ = S.build(now=NOW, write=False, **w)
+    river = st["waters"]["test-river-ma"]
+    assert river["status"] == "yellow"
+    assert river["reaches"] == ["MA0101613-13", "MA0101613-14", "MA0101613-15"]
+    for k in river["reaches"]:
+        assert st["reaches"][k]["status"] == "yellow"
+
+
 def test_valid_until_48_hours_after_the_total_drops_below_the_threshold():
     vals = wet(range(20, 30))                                      # above 29 to 20 hours ago, below from 19 h ago
     st, _ = S.build(now=NOW, write=False, **rain_world(values=vals))
