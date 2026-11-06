@@ -7452,8 +7452,8 @@
   "status": "candidate",
   "status_reason": "Only federal machine-readable sewage event feed. Covers NH (EPA permits) and RI well, MA barely, CT/VT/ME not at all. Mostly SSOs and noncompliance; routine permitted wet-weather CSOs are not reported here in New England. Includes basement backups that never reach a water: filter on structure type and receiving water.",
   "verified": "fetched",
-  "checked": "2026-11-01",
-  "notes": "Impacts include 'No observable impacts' (3,475 of 6,185 rows nationally). Volume quantification is often best professional judgement. Event times carry no timezone.",
+  "checked": "2026-11-06",
+  "notes": "Impacts include 'No observable impacts' (3,475 of 6,185 rows nationally). Volume quantification is often best professional judgement. Event times carry no timezone. | 2026-11-03 (plant outfalls): Overflow locations: in the 2026-11-03 13:22 UTC copy, 5,616 of 5,669 events carry latitude_measure / longitude_measure at the overflow itself (3,000 distinct permit+point locations), with sewer_overflow_structure_type_desc Manhole 1,196, Pumping Station 1,109, Basement Backup 527, Broken Pipe 368, CSO Outfall 307, Other 488, blank 1,674; 24 jurisdictions (IL 1,687, GA 1,232, PR 924, MS 353, AZ 288, RI 244, SD 207, NH 184, NE 162, DC 140 ...). All 305 CSO events with a feature id match the CSO inventory. | 2026-11-06: the 2026-11-05 current-version ZIP held only sewer_overflow_bypass_columns_metadata.csv and sewer_overflow_public_erd.pdf (302 KB), no table; the summary page and the downloads index still describe and link the same ZIP. The ingester reads the current version of each report from the all-versions ZIP when this one fails or holds no events table.",
   "area": "federal"
  },
  {
@@ -7496,8 +7496,8 @@
   "status": "candidate",
   "status_reason": "Use alongside the current dataset to keep revision history of an event report.",
   "verified": "fetched",
-  "checked": "2026-11-01",
-  "notes": "",
+  "checked": "2026-11-06",
+  "notes": "2026-11-06: read for its current rows (current_report_form_flag Y) when the current-version ZIP fails or holds no events table (as on 2026-11-05); 5,688 current events in the 2026-11-04 extract.",
   "area": "federal"
  },
  {
