@@ -81,17 +81,21 @@ def test_the_deep_ocean_outfalls_with_epas_sign_dropped_point_take_their_permits
         assert "coords_problem" not in o
 
 
-# review of 2026-11-06, P3-4: Table 2 of Order R2-2013-0029 (NPDES CA0037664), as printed, and EPA's inventory point
-BAYSIDE_MOVES = {("us", "CA0037664", "011"): ((37.811667, -122.43189), (37.80611, -122.38))}
+# review of 2026-11-06, P3-4: the point taken and EPA's inventory point
+# Laguna Street takes the 2008 revised tentative order's point (37 48 22 N, 122 25 53 W): the cited point nearest the
+# shore (review of 2026-11-06, ca-bays P3-3)
+BAYSIDE_MOVES = {("us", "CA0037664", "011"): ((37.806111, -122.431389), (37.80611, -122.38))}
 
 
-def test_laguna_street_takes_table_2s_point_brannan_and_sunnydale_keep_epas():
+def test_laguna_street_takes_the_2008_orders_point_brannan_and_sunnydale_keep_epas():
     rows = _rows()
     for key, ((lat, lon), (elat, elon)) in BAYSIDE_MOVES.items():
         o = rows[key]
         assert (o["lat"], o["lon"]) == (lat, lon) and o["coords_from"] == "permit"
         assert (o["epa_lat"], o["epa_lon"]) == (elat, elon)
-        assert o["coords_note"].startswith(C.BAYSIDE) and "EPA's inventory gives" in o["coords_note"]
+        assert o["coords_note"].startswith("the " + C.ORDER_2008) and "EPA's inventory gives" in o["coords_note"]
+        assert C.BAYSIDE in o["coords_note"] and C.POINT_RULE in o["coords_note"]
+        assert abs((37 + 48 / 60 + 22 / 3600) - lat) < 1e-6 and abs((122 + 25 / 60 + 53 / 3600) + lon) < 1e-6
         assert C.TABLE[key][0] == C.SFB_SLUG            # the water is unchanged: San Francisco Bay
     # Brannan Street (019): EPA's point is the 2008 tentative order's (37 47 7 N, 122 23 24 W); Table 2's 122 22 24 W
     # lies out in the bay. Sunnydale Avenue (043): Table 2 prints Quint Street's point. Neither is moved.

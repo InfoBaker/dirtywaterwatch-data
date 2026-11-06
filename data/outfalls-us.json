@@ -204,8 +204,8 @@
    "in_icis": "YES",
    "permit_status": "EXP",
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110043091301",
-   "lat": 37.811667,
-   "lon": -122.43189,
+   "lat": 37.806111,
+   "lon": -122.431389,
    "water_slug": null,
    "water_name": null,
    "water_kind": null,
@@ -225,7 +225,7 @@
    },
    "epa_lat": 37.80611,
    "epa_lon": -122.38,
-   "coords_note": "Order R2-2013-0029 (NPDES CA0037664), Table 2: 37.811667 N, 122.43189 W (discharge point 011, Laguna Street Outfall, Yacht Harbor #2), the adopted order's point, about 290 m off the shore outside the Marina harbor (Census TIGER/Line water). EPA's inventory gives 37.80611, -122.38, about 4.6 km east, off the wrong shore. The rule for the Bayside points is the cited point nearest the shore at the named street; the San Francisco Bay Regional Water Board's revised tentative order of January 2008 for the same permit (R2-2008-00XX, agenda of January 2008, item 13) gave 37 48 22 N, 122 25 53 W, about 0.6 km south and about 70 m inland of the shoreline at Marina Boulevard, which by that rule is the nearer point; Table 2's is kept as the adopted order's"
+   "coords_note": "the San Francisco Bay Regional Water Board's revised tentative order of January 2008 for the same permit (R2-2008-00XX, agenda of January 2008, item 13): 37 48 22 N, 122 25 53 W (discharge point 011, Laguna Street Outfall, Yacht Harbor #2), about 70 m inland of the shoreline at Marina Boulevard (Census TIGER/Line water). Rule applied: the cited point nearest the shore at the named street. Order R2-2013-0029 (NPDES CA0037664), Table 2 gives 37.811667 N, 122.43189 W, about 290 m off the shore outside the Marina harbor and about 0.6 km north; EPA's inventory gives 37.80611, -122.38, about 4.6 km east, off the wrong shore"
   },
   {
    "npdes_permit": "CA0037664",
