@@ -294,3 +294,36 @@ def test_the_opening_keeps_the_sea_side_and_never_adds_water():
     assert R.open_from(wm, off, 0).equals(wm)
     wide = sea.union(bay_).union(b(4990, 8000, 5060, 12000))                # a 4 km mouth stays open
     assert R.open_from(wide, off, 1000).intersects(b(10000, 9000, 11000, 11000))
+
+
+def _bay_on_census(open_m, monkeypatch):
+    rules = copy.deepcopy(RULES)
+    for e in rules["reach"]["shoreline"]["lakes"]:
+        if e["name"] == "San Francisco Bay":
+            e.pop("open_m", None)
+            if open_m:
+                e["open_m"] = open_m
+    shore = SH.rule(rules)
+    monkeypatch.setattr(R, "shore_rule", lambda *a, **k: shore)
+    waters = copy.deepcopy(WATERS)
+    waters["san-francisco-bay-ca"].pop("geometry")          # the hourly run: no outline on file, the Census water
+    R._CENSUS_LAKES.clear()
+    c = {"key": "pt-c", "permit": None, "outfall": None, "water_slug": "san-francisco-bay-ca", "lat": 37.825,
+         "lon": -122.475, "sources": ["event-point"], "state": "CA", "model": "shoreline"}
+    try:
+        return R.shoreline_record(c, waters, shore, LAND)
+    finally:
+        R._CENSUS_LAKES.clear()
+
+
+def test_the_bays_census_water_is_cut_at_its_narrow_mouth_and_its_stretch_stays_off_the_ocean_coast(monkeypatch):
+    sfb = [e for e in RULES["reach"]["shoreline"]["lakes"] if e["name"] == "San Francisco Bay"][0]
+    assert sfb["open_m"] == 1000
+    r = _bay_on_census(1000, monkeypatch)
+    assert r["error"] is None and r["outline"] == "census" and r["bay"] is True
+    def on_coast(rec):           # points on the open coast (lon -122.50), north or south of the strait's mouth
+        return [(x, y) for s in rec["segments"] for x, y in s["coords"] if x <= -122.4995 and not 37.801 < y < 37.8166]
+    assert on_coast(r) == []                             # the bay's shore and its mouth, never the coast outside
+    assert [s["km_end"] for s in r["segments"]] == [pytest.approx(20, abs=0.05)] * 2
+    before = _bay_on_census(None, monkeypatch)           # without the cut the Census water runs out onto the coast
+    assert on_coast(before)                              # it ends up the coast, north of the mouth
