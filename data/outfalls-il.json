@@ -15152,6 +15152,15 @@
    "source_url": "https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0/query?where=OBJECTID%3D386&outFields=*&f=json",
    "source_record_id": 386,
    "epa_row": null,
+   "lake_entry": {
+    "lat": 41.889636,
+    "lon": -87.609382,
+    "water": "Chicago River",
+    "path": [],
+    "path_km": 0.0,
+    "source": "the point of the outer shore of the water record lake-michigan-il (NHDPlus V2.1, cut to the state; data/waters-nhd.json) nearest MWRD's point for the structure",
+    "basis": "the lake record leaves a hole in its polygon 63 m from the structure, at the lock beside it, which a stretch from the structure's own point would walk around; the stretch starts on the lake's shore 159 m away instead"
+   },
    "water_slug": "lake-michigan-il",
    "water_name": "Lake Michigan",
    "water_kind": "lake",
